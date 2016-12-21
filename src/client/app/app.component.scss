@@ -1,0 +1,14 @@
+@import '../css/base.scss';
+
+igo-header {
+  height: $b-height-header;
+}
+
+#router-body {
+  //margin-left: $b-width-navbar;
+  position: fixed;
+  width: 100%;
+  height: calc(100% - #{$b-height-header});
+  padding: 0;
+  transition: 0.5s;
+}

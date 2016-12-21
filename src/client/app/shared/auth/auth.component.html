@@ -1,0 +1,20 @@
+<div class="login center-block">
+  <h1>Connexion</h1>
+  <form *ngIf="!auth.logged" [formGroup]="form" role="form">
+    <div class="form-group">
+      <label for="username">Utilisateur</label>
+      <input required type="text" #username class="form-control" id="username" placeholder="Utilisateur" formControlName="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input type="password" #password class="form-control" id="password" placeholder="Mot de passe" formControlName="password">
+    </div>
+    <div *ngIf="error"><font size="3" color="red">{{error}}</font></div>
+    <button type="submit" class="btn btn-default" (click)="login(form.value)" [disabled]="!form.valid || loadingBool">Connecter</button>
+  </form>
+
+  <div *ngIf="auth.logged">
+      <p>Vous êtes déjà connecté {{user}}!</p>
+      <button (click)="logout()">Se déconnecter</button>
+  </div>
+</div>

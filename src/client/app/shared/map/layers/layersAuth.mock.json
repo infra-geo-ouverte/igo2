@@ -1,0 +1,15 @@
+{
+  "layers": [{
+    "protocole": "OSM"
+  }, {
+    "protocole": "WMS",
+    "url": "http://spssogl97d.sso.msp.gouv.qc.ca/cgi-wms/acrigeo.fcgi",
+    "name": "BDGA_ROUTE_L_ARC",
+    "title": ""
+  }, {
+    "protocole": "WMS",
+    "url": "http://demo.opengeo.org/geoserver/wms",
+    "name": "topp:states",
+    "title": ""
+  }]
+}
