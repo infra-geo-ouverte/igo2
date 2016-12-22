@@ -22,8 +22,8 @@ Since this project is open source, anyone can contribute as long as they share t
 
 - [Installation](#installation-et-démarrage)
 - [Documentation](http://igouverte.org/documentation/)
-- [Tests](#Tests)
-- [Docker](#Docker)
+- [Tests](#tests)
+- [Docker](#docker)
 - [Structures des répertoires](#structures-des-répertoires)
 - [Contribuer](#contribuer)
 
