@@ -82,8 +82,6 @@ $ npm run e2e
 
 ### Build de développement
 
-Run the following:
-
 ```bash
 $ docker-compose build
 $ docker-compose up -d
@@ -92,8 +90,6 @@ $ docker-compose up -d
 Ouvrir un navigateur http://localhost:5555
 
 ### Build de production
-
-Run the following:
 
 ```bash
 $ docker-compose -f docker-compose.production.yml build
