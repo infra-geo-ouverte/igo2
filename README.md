@@ -44,7 +44,8 @@ $ npm install
 $ npm start
 # Avec les tests continus
 $ npm run start.deving
-
+# Pour la prod
+$ npm run start.prod
 
 # Générer l'api de documentation
 $ npm run compodoc
@@ -55,7 +56,7 @@ $ npm run build.dev
 # Build prod
 $ npm run build.prod
 # Build prod avec AoT
-$ npm run build.prod.exp
+$ npm run build.prod.aot
 ```
 
 ## Tests
@@ -93,8 +94,8 @@ Ouvrir un navigateur http://localhost:5555
 
 ```bash
 $ docker-compose -f docker-compose.production.yml build
-$ docker-compose -f docker-compose.production.yml up angular-seed   
-$ docker-compose -f docker-compose.production.yml up -d angular-seed-nginx
+$ docker-compose -f docker-compose.production.yml up igo2
+$ docker-compose -f docker-compose.production.yml up -d igo2-nginx
 ```
 
 Ouvrir un navigateur  http://localhost:5555
