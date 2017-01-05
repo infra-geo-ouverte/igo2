@@ -1,8 +1,12 @@
+// TODO: Bonne méthode pour ajouter @types ?
+import {} from 'node';
+
 import { Component, ViewContainerRef } from '@angular/core';
 import { Config } from './core/index';
 import './operators';
 
 import {TranslateService} from 'ng2-translate';
+
 /**
  * This class represents the main application component.
  */
