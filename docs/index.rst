@@ -1,6 +1,6 @@
 
 .. meta::
-   :DC.creator: Gouvernement du Québec
+   :DC.creator: Gouvernement du QuÃ©bec
    :DC.language: fr
 
 -----------------------
