@@ -210,23 +210,23 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ## Installation-en
 
-Requis: node >=v6.5.0 et npm >=3.10.3
+Require: node >=v6.5.0 & npm >=3.10.3
 
 ```bash
 $ git clone --depth 1 https://github.com/infra-geo-ouverte/igo2.git
 $ cd igo2
 
-# Installer les dépendances
+# Install dépendencies
 $ npm install
 
-# Surveiller les fichiers et lancer une instance pour le développement
+# Check files and launch dev instance
 $ npm start
 # Avec les tests continus
 $ npm run start.deving
 # Pour la prod
 $ npm run start.prod
 
-# Générer l'api de documentation
+# Doc API generation
 $ npm run compodoc
 $ npm run serve.compodoc
 
@@ -234,7 +234,7 @@ $ npm run serve.compodoc
 $ npm run build.dev
 # Build prod
 $ npm run build.prod
-# Build prod avec AoT
+# Build prod with AoT
 $ npm run build.prod.aot
 ```
 
@@ -243,16 +243,16 @@ $ npm run build.prod.aot
 ```bash
 $ npm test
 
-# Surveiller par karma
-# Tests après chaque changement
+# Check by karma
+# Tests after each change
 $ npm run test.watch
 
 # code coverage (istanbul)
 $ npm run serve.coverage
 
-# e2e (end-to-end intégration) - Dans 3 fenêtes différentes
-# npm install webdriver-manager <- Seulement la première fois
-# npm run webdriver-update <- Seulement la première fois
+# e2e (end-to-end intégration) - in 3 different window
+# npm install webdriver-manager <- Only for the first time
+# npm run webdriver-update <- Only for the first time
 $ npm run webdriver-start
 $ npm run serve.e2e
 $ npm run e2e
@@ -267,7 +267,7 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
-Ouvrir un navigateur http://localhost:5555/igo2/
+Open in a browser http://localhost:5555/igo2/
 
 ### Production build
 
@@ -277,9 +277,7 @@ $ docker-compose -f docker-compose.production.yml up igo2
 $ docker-compose -f docker-compose.production.yml up -d igo2-nginx
 ```
 
-Ouvrir un navigateur  http://localhost:5555/igo2/
-
-
+Open in a browser  http://localhost:5555/igo2/
 
 
 ## Folder-structure
@@ -287,19 +285,19 @@ Ouvrir un navigateur  http://localhost:5555/igo2/
 ```
 .
 ├── .docker
-│   ├── dist-build.development.dockerfile  <- Dockerfile pour l'environnement de développement
-│   └── dist-build.production.dockerfile   <- Dockerfile pour l'environnement de production
-├── .dockerignore              <- Fichier ignore pour les builds docker
+│   ├── dist-build.development.dockerfile  <- Dockerfile for dev env
+│   └── dist-build.production.dockerfile   <- Dockerfile for prod env
+├── .dockerignore              <- ignore file for builds docker
 ├── LICENSE
 ├── README.md
 ├── appveyor.yml
-├── docker-compose.production.yml  <- docker-compose pour l'environnement de production
-├── docker-compose.yml         <- docker-compose pour l'environnement de développement
-├── gulpfile.ts                <- configuration pour les tâches gulp
-├── karma.conf.js              <- configuration pour les tests karma
-├── package.json               <- dépendances du projet
-├── protractor.conf.js         <- configuration pour les tests e2e
-├── src                        <- source code de l'application
+├── docker-compose.production.yml  <- docker-compose for prod env
+├── docker-compose.yml         <- docker-composefor dev env
+├── gulpfile.ts                <- configuration for gulp
+├── karma.conf.js              <- configuration for karma
+├── package.json               <- dependencies of the projet
+├── protractor.conf.js         <- configuration for tests e2e
+├── src                        <- source code of the app
 │   └── client
 │       ├── app
 │       │   ├── core
@@ -331,10 +329,10 @@ Ouvrir un navigateur  http://localhost:5555/igo2/
 │       │   └── main.scss
 │       ├── index.html
 │       └── tsconfig.json
-├── test-config.js             <- Configuration pour les tests
-├── test-main.js               <- Lanceur pour les tests karma
+├── test-config.js             <- Tests Configuration
+├── test-main.js               <- Launcher for tests karma
 ├── tools
-│   ├── README.md              <- Outils documentation (en anglais)
+│   ├── README.md              <- Doc tools
 │   ├── config
 │   │   ├── banner-256.txt
 │   │   ├── banner.txt
@@ -346,7 +344,7 @@ Ouvrir un navigateur  http://localhost:5555/igo2/
 │   │   └── seed.tslint.json   <- generic tslint configuration of the seed project
 │   ├── config.ts              <- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
 │   ├── debug.ts
-│   ├── env                    <- configuration de l'environnement
+│   ├── env                    <- Env configuration
 │   │   ├── base.ts
 │   │   ├── dev.ts
 │   │   ├── env-config.interface.ts
@@ -354,14 +352,14 @@ Ouvrir un navigateur  http://localhost:5555/igo2/
 │   ├── manual_typings         <- typings manuels
 │   │   ├── project
 │   │   └── seed
-│   ├── tasks                  <- Tâches gulp
+│   ├── tasks                  <- gulp task
 │   │   ├── project
 │   │   └── seed
 │   ├── utils                  <- build utils
 │   │   ├── project
 │   │   └── seed
 │   └── utils.ts
-├── tsconfig.json              <- configuration pour typescrypt
+├── tsconfig.json              <- typescript configuration
 ├── tslint.json                <- tslint configuration
 └── yarn.lock
 ```
