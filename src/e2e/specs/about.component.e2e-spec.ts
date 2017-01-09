@@ -1,7 +1,8 @@
 describe('About', () => {
 
   beforeEach(async () => {
-    return await browser.get('/about');
+    // TODO: utiliser env file
+    return await browser.get('/igo2/login');
   });
 
   it('should have correct feature heading', () => {
