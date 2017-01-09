@@ -1,15 +1,18 @@
-
+.. include:: globals.rst
+     
 .. meta::
    :DC.creator: Gouvernement du Québec
    :DC.language: fr
 
 -----------------------
-IGO2
+Infrastructure Géomatique Ouverte 2.0 (IGO-2) / Open GIS Infrastructure project version 2.0 
 -----------------------
-
-
-Ceci est un test dans le bon réperoire docs.
-
+        
+.. |igo-logo|_
+        
+Ceci est la documentation pour 
+This is the temporary location of the |plugin|_ documentation.  Click this link for the `original page`_.        
+        
 ----------
 
 :Date: Last generated on |date| at |time|
@@ -21,4 +24,6 @@ Ceci est un test dans le bon réperoire docs.
    :maxdepth: 2
 
    introduction
-   contributors
+   contributeurs
+   config_json
+   english
