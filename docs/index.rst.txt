@@ -8,7 +8,7 @@ IGO2
 -----------------------
 
 
-Ceci est un test.
+Ceci est un test fait dans le répertoire docs.
 
 ----------
 
