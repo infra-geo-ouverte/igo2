@@ -1,4 +1,4 @@
-. include:: globals.rst
+.. include:: global.rst
 
 ------------
 Configuration requise
@@ -11,14 +11,16 @@ Minimum requis
 =================
 
 Modification du JSON : 
-  view.mock.json
-  tools.mock.json
-  layers.mock.json
+1. view.mock.json
+2. tools.mock.json
+3. layers.mock.json
   
 JSON
 +++++
 
 En somme, voici les paramètres qui peuvent définir un contexte (view), ces outils (tools)) et ces couches (layers)) :
+1. view.mock.json
+.. code-block:: json
 {
   "view": {
     "center": [-8181982.573305608, 5969615.322970143],
@@ -27,10 +29,15 @@ En somme, voici les paramètres qui peuvent définir un contexte (view), ces outil
   }
 }
 
+2. tools.mock.json
+.. code-block:: json
  {
   "tools": []
 }
 
+3. layers.mock.json
+
+.. code-block:: json
 {
     "protocole": "WMS",
     "url": "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",

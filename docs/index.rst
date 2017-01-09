@@ -1,4 +1,4 @@
-.. include:: globals.rst
+.. include:: global.rst
      
 .. meta::
    :DC.creator: Gouvernement du Québec
@@ -10,12 +10,11 @@ Infrastructure Géomatique Ouverte 2.0 (IGO-2) / Open GIS Infrastructure project
         
 .. |igo-logo|_
         
-Ceci est la documentation pour 
-This is the temporary location of the |plugin|_ documentation.  Click this link for the `original page`_.        
+Ceci est la documentation pour la version 2.0 du navigateur géographique IGO.       
         
 ----------
 
-:Date: Last generated on |date| at |time|
+:Dernière mise à jour de la documentation : |date| à |time|
 .. |CC|_
 
 ----------

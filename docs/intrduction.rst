@@ -1,4 +1,4 @@
-.. include:: globals.rst
+.. include:: global.rst
 
 -------------
 Introduction
@@ -12,4 +12,4 @@ Sommaire
 Plus d'information est disponible à la page `original page`_.
 
 .. note::
-   Cette documentaiton est en construction.
+   Cette documentation est en construction.
