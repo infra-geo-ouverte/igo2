@@ -7,10 +7,10 @@
 -----------------------
 IGO-2
 -----------------------
-        
-|igo-logo|
-        
+             
 Ceci est la documentation pour la version 2.0 du navigateur géographique Infrastructure Géomatique Ouverte 2.0 (|igo2|) / Open GIS Infrastructure project version 2.0.       
+
+|igo-logo|
         
 ----------
 

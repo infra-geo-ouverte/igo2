@@ -6,7 +6,7 @@
 
 .. _original page: http://igouverte.org/documentation/
 
-.. |CC| image:: images/CC-BY-SA-4-0.png
+.. |CC| image:: images/CC-BY-SA.png
 
 .. |igo2| replace:: :mod:`IGO-2.0`
 .. _igo2: https://github.com/infra-geo-ouverte/igo2/
@@ -17,3 +17,4 @@
 .. |bootstr| replace:: :mod:`Bootstrap 3`
 .. _bootstr: http://getbootstrap.com/
 .. |igo-logo| image:: images/1b-logo_toutbleu_txtnoir.png
+  :scale: 20 %

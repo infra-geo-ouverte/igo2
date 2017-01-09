@@ -12,9 +12,9 @@ Minimum
 
 Modification du JSON : 
 
-- view.mock.json
-- tools.mock.json
-- layers.mock.json
+* view.mock.json
+* tools.mock.json
+* layers.mock.json
   
 JSON
 =================
