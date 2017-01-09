@@ -57,7 +57,6 @@
     "@types/jasmine": "^2.5.35",
     "@types/node": "^6.0.45",
     "@types/openlayers": "^3.18.40",
-    "@types/protractor": "^1.5.20",
     "@types/rimraf": "0.0.28",
     "@types/run-sequence": "^0.0.28",
     "@types/selenium-webdriver": "2.44.*",
