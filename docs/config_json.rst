@@ -4,21 +4,22 @@
 Configuration requise
 ------------
 
-Cette section détaille les configurations possibles pour le navigateur. 
-À l'aide d'un fichier JSON, il est possible de construire un contexte avec des touils et couches de données propre à chaque usage.
+Cette section dÃ©taille les configurations possibles pour le navigateur. 
+Ã€ l'aide d'un fichier JSON, il est possible de construire un contexte avec des touils et couches de donnÃ©es propre Ã  chaque usage.
 
 Minimum
 =================
 
 Modification du JSON : 
+
 - view.mock.json
 - tools.mock.json
 - layers.mock.json
   
-Paramètres JSON
+ParamÃ¨tres JSON
 =================
 
-En somme, voici les paramètres qui peuvent définir un contexte (view), ces outils (tools)) et ces couches (layers)) :
+En somme, voici les paramÃ¨tres qui peuvent dÃ©finir un contexte (view), ces outils (tools)) et ces couches (layers)) :
 1. view.mock.json
 .. code-block:: json
   "view": {
