@@ -1,7 +1,7 @@
 .. include:: global.rst
 
 --------------------
-Project contributors
+Documentation in English
 --------------------
 
 List of individual code `contributeurs`_.       

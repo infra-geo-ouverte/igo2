@@ -17,6 +17,5 @@
 .. _ang2: https://angular.io/
 .. |bootstr| replace:: :mod:`Bootstrap 3`
 .. _bootstr: http://getbootstrap.com/
-
 .. |igo-logo| image:: images/1b-logo_toutbleu_txtnoir.png
 .. _igo-logo: http://igouverte.org/
