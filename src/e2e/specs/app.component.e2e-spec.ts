@@ -1,3 +1,7 @@
+/// <reference path="../../../node_modules/@types/jasmine/index.d.ts" />
+
+import { browser, element, by } from 'protractor';
+
 describe('App', () => {
 
   beforeEach(async () => {
