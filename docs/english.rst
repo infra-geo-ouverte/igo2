@@ -1,8 +1,10 @@
 .. include:: global.rst
 
 --------------------
-Documentation in English
+English
 --------------------
+
+More information available here : http://igouverte.org/english/.
 
 List of individual code `contributeurs`_.       
 
