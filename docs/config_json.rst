@@ -16,7 +16,6 @@ Modification du JSON :
 * tools.mock.json
 * layers.mock.json
   
-
 En somme, voici les paramètres qui peuvent définir un contexte (view), ces outils (tools)) et ces couches (layers)) :
 
 * view.mock.json
