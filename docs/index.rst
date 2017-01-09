@@ -1,6 +1,6 @@
 
 .. meta::
-   :DC.creator: Gouvernement du Québec
+   :DC.creator: Gouvernement du QuÃ©bec
    :DC.language: fr
 
 -----------------------
@@ -8,7 +8,7 @@ IGO2
 -----------------------
 
 
-Ceci est un test fait dans le répertoire docs.
+Ceci est un test.
 
 ----------
 
