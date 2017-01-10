@@ -13,10 +13,10 @@ Voici le site de documentation pour la version 2.0 du navigateur géographique :
 |igo-logo|
 
 
-* Installation : `<https://github.com/infra-geo-ouverte/igo2#installation-et-démarrage-français>`_
-* Tests : `<https://github.com/infra-geo-ouverte/igo2#tests>`_
-* Docker : `<https://github.com/infra-geo-ouverte/igo2#docker>`_
-* Structures des répertoires : `<https://github.com/infra-geo-ouverte/igo2#structures-des-répertoires>`_
+* Installation : `<https://infra-geo-ouverte.github.io/igo2/#installation-et-démarrage>`_
+* Tests : `<https://infra-geo-ouverte.github.io/igo2/#tests>`_
+* Docker : `<https://infra-geo-ouverte.github.io/igo2/#docker>`_
+* Structures des répertoires : `<https://infra-geo-ouverte.github.io/igo2/#structures-des-répertoires>`_
 
         
 ----------

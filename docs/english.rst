@@ -10,10 +10,10 @@ English
 
 |igo-logo|
 
-* Installation: `<https://github.com/infra-geo-ouverte/igo2#installation-en>`_
-* Tests: https://github.com/infra-geo-ouverte/igo2#tests-en
-* Docker: https://github.com/infra-geo-ouverte/igo2#docker-en
-* Folder structure: https://github.com/infra-geo-ouverte/igo2#folder-structure
+* Installation: `<https://infra-geo-ouverte.github.io/igo2/#installation-en>`_
+* Tests: https://infra-geo-ouverte.github.io/igo2/#tests-en
+* Docker: https://infra-geo-ouverte.github.io/igo2/#docker-en
+* Folder structure: https://infra-geo-ouverte.github.io/igo2/#folder-structure
 
 
 Latest update: |date| (|time| UTC)
