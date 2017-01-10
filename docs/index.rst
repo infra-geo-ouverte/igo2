@@ -17,6 +17,7 @@ Voici le site de documentation pour la version 2.0 du navigateur géographique :
 * Tests : `<https://infra-geo-ouverte.github.io/igo2/#tests>`_
 * Docker : `<https://infra-geo-ouverte.github.io/igo2/#docker>`_
 * Structures des répertoires : `<https://infra-geo-ouverte.github.io/igo2/#structures-des-répertoires>`_
+* Suivi du projet : `<https://overv.io/infra-geo-ouverte/igo2/>`_
 
         
 ----------
