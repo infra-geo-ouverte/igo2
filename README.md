@@ -24,7 +24,7 @@ Since this project is open source, anyone can contribute as long as they share t
 ## Table des matières (Français)
 
 - [Installation](#installation-et-démarrage)
-- [Documentation](http://igouverte.org/documentation/)
+- [Documentation](http://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests)
 - [Docker](#docker)
 - [Structures des répertoires](#structures-des-répertoires)
@@ -37,7 +37,7 @@ Since this project is open source, anyone can contribute as long as they share t
 ## Table of content (English)
 
 - [Installation](#installation-en)
-- [Documentation](http://igouverte.org/documentation/)
+- [Documentation](http://igo2.readthedocs.io/fr/latest/english.html)
 - [Tests](#tests-en)
 - [Docker](#docker-en)
 - [Folder structure](#folder-structure)
