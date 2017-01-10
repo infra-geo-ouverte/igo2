@@ -369,5 +369,5 @@ Open in a browser  http://localhost:5555/igo2/
 
 ***
 
-## Contribution
+## Contribution 
 If you have any question and want to contribute, contact the main email of IGO: info(a)igouverte.org or subscribe to the mailing-list (http://listes.securitepublique.gouv.qc.ca/sympa/info/igo-publique) mainly in French, but do not hesitate to ask questions in English, most of the IGO Team is bilingual. The documentation and API-XML is mainly in French, but if there is a demand, the project can be translate if needed, just contact us for more information at: info(a)igouverte.org
