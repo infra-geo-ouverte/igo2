@@ -7,11 +7,10 @@ sudo: false
 install: true  # yarn bug
 
 addons:
-  firefox: "47.0"
+  firefox: "45.0"
 
 os:
   - linux
-  - osx
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi

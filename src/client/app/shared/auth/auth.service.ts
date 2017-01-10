@@ -21,7 +21,7 @@ export class AuthService extends BaseRestService {
     myHeader.append("Content-Type", "application/json");
 
     let body = JSON.stringify({
-      login: username,
+      username: username,
       password: this.encodePassword(password)
     });
 

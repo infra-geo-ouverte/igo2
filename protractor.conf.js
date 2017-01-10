@@ -1,4 +1,4 @@
-const config = {
+var config = {
   baseUrl: 'http://localhost:5555/',
 
   specs: [
@@ -27,7 +27,7 @@ const config = {
   },
 
   onPrepare: function() {
-    browser.ignoreSynchronization = false;
+    browser.ignoreSynchronization = true;
   },
 
 
@@ -42,7 +42,7 @@ const config = {
 
 if (process.env.TRAVIS) {
   config.capabilities = {
-    browserName: 'chrome'
+    browserName: 'firefox'
   };
 }
 

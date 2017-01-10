@@ -5,9 +5,9 @@ const DevConfig: IEnvConfig = {
   APP_BASE: "/igo2-dev/",
   API: {
     protocol: "http:",
-    host: "spssogl97d.sso.msp.gouv.qc.ca",
+    host: "127.0.0.1",
     port: 80,
-    path: "/gespa/api/"
+    path: "/igo2/api/"
   }
 };
 
