@@ -175,13 +175,13 @@ Ouvrir un navigateur  http://localhost:5555/igo2/
 │   ├── config
 │   │   ├── banner-256.txt
 │   │   ├── banner.txt
-│   │   ├── project.config.ts  <- configuration of the specific project
-│   │   ├── project.tasks.json <- override composite gulp tasks
-│   │   ├── seed.config.ts     <- generic configuration of the seed project
+│   │   ├── project.config.ts  <- configuration du project
+│   │   ├── project.tasks.json
+│   │   ├── seed.config.ts 
 │   │   ├── seed.config.interfaces.ts
-│   │   ├── seed.tasks.json    <- default composite gulp tasks
-│   │   └── seed.tslint.json   <- generic tslint configuration of the seed project
-│   ├── config.ts              <- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
+│   │   ├── seed.tasks.json 
+│   │   └── seed.tslint.json 
+│   ├── config.ts             
 │   ├── debug.ts
 │   ├── env                    <- configuration de l'environnement
 │   │   ├── base.ts
@@ -340,12 +340,12 @@ Open in a browser  http://localhost:5555/igo2/
 │   │   ├── banner-256.txt
 │   │   ├── banner.txt
 │   │   ├── project.config.ts  <- configuration of the specific project
-│   │   ├── project.tasks.json <- override composite gulp tasks
-│   │   ├── seed.config.ts     <- generic configuration of the seed project
+│   │   ├── project.tasks.json
+│   │   ├── seed.config.ts   
 │   │   ├── seed.config.interfaces.ts
-│   │   ├── seed.tasks.json    <- default composite gulp tasks
-│   │   └── seed.tslint.json   <- generic tslint configuration of the seed project
-│   ├── config.ts              <- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
+│   │   ├── seed.tasks.json  
+│   │   └── seed.tslint.json  
+│   ├── config.ts             
 │   ├── debug.ts
 │   ├── env                    <- Env configuration
 │   │   ├── base.ts
