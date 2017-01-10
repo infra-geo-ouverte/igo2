@@ -16,7 +16,7 @@ IGO est un produit du gouvernement du Québec (Canada) et issu d’un travail co
 ### What is [IGO](http://igouverte.org/english/)?
 IGO (for Open GIS Infrastructure) is a free Web Geospatial solution developed in Quebec, Canada. See this Web site for more information: [http://igouverte.org/english/](http://igouverte.org/english/).
 IGO has multiple features, such as Web GIS viewer, layer tree Manager and many more at [http://igouverte.org/english/](http://igouverte.org/english/).
-Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
+Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights. 
 
 ***
 
@@ -24,7 +24,7 @@ Since this project is open source, anyone can contribute as long as they share t
 ## Table des matières (Français)
 
 - [Installation](#installation-et-démarrage)
-- [Documentation](http://igouverte.org/documentation/)
+- [Documentation](http://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests)
 - [Docker](#docker)
 - [Structures des répertoires](#structures-des-répertoires)
@@ -37,7 +37,7 @@ Since this project is open source, anyone can contribute as long as they share t
 ## Table of content (English)
 
 - [Installation](#installation-en)
-- [Documentation](http://igouverte.org/documentation/)
+- [Documentation](http://igo2.readthedocs.io/fr/latest/english.html)
 - [Tests](#tests-en)
 - [Docker](#docker-en)
 - [Folder structure](#folder-structure)
@@ -175,13 +175,13 @@ Ouvrir un navigateur  http://localhost:5555/igo2/
 │   ├── config
 │   │   ├── banner-256.txt
 │   │   ├── banner.txt
-│   │   ├── project.config.ts  <- configuration of the specific project
-│   │   ├── project.tasks.json <- override composite gulp tasks
-│   │   ├── seed.config.ts     <- generic configuration of the seed project
+│   │   ├── project.config.ts  <- configuration du project
+│   │   ├── project.tasks.json
+│   │   ├── seed.config.ts 
 │   │   ├── seed.config.interfaces.ts
-│   │   ├── seed.tasks.json    <- default composite gulp tasks
-│   │   └── seed.tslint.json   <- generic tslint configuration of the seed project
-│   ├── config.ts              <- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
+│   │   ├── seed.tasks.json 
+│   │   └── seed.tslint.json 
+│   ├── config.ts             
 │   ├── debug.ts
 │   ├── env                    <- configuration de l'environnement
 │   │   ├── base.ts
@@ -340,12 +340,12 @@ Open in a browser  http://localhost:5555/igo2/
 │   │   ├── banner-256.txt
 │   │   ├── banner.txt
 │   │   ├── project.config.ts  <- configuration of the specific project
-│   │   ├── project.tasks.json <- override composite gulp tasks
-│   │   ├── seed.config.ts     <- generic configuration of the seed project
+│   │   ├── project.tasks.json
+│   │   ├── seed.config.ts   
 │   │   ├── seed.config.interfaces.ts
-│   │   ├── seed.tasks.json    <- default composite gulp tasks
-│   │   └── seed.tslint.json   <- generic tslint configuration of the seed project
-│   ├── config.ts              <- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
+│   │   ├── seed.tasks.json  
+│   │   └── seed.tslint.json  
+│   ├── config.ts             
 │   ├── debug.ts
 │   ├── env                    <- Env configuration
 │   │   ├── base.ts
@@ -369,5 +369,5 @@ Open in a browser  http://localhost:5555/igo2/
 
 ***
 
-## Contribution
+## Contribution 
 If you have any question and want to contribute, contact the main email of IGO: info(a)igouverte.org or subscribe to the mailing-list (http://listes.securitepublique.gouv.qc.ca/sympa/info/igo-publique) mainly in French, but do not hesitate to ask questions in English, most of the IGO Team is bilingual. The documentation and API-XML is mainly in French, but if there is a demand, the project can be translate if needed, just contact us for more information at: info(a)igouverte.org

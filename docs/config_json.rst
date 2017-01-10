@@ -1,5 +1,9 @@
 .. include:: global.rst
 
+.. meta::
+   :DC.creator: Gouvernement du Québec
+   :DC.language: fr
+
 ------------
 Configuration requise
 ------------
@@ -16,11 +20,9 @@ Modification du JSON :
 * tools.mock.json
 * layers.mock.json
   
-En somme, voici les paramètres qui peuvent définir un contexte (view), ces outils (tools)) et ces couches (layers)) :
+En somme, voici les paramètres qui peuvent définir un contexte (view), des outils (tools)) et des couches (layers) :
 
 * view.mock.json
-
-.. code-block:: javascript
   "view": {
     "center": [-8181982.573305608, 5969615.322970143],
     "zoom": 7,
@@ -29,15 +31,11 @@ En somme, voici les paramètres qui peuvent définir un contexte (view), ces out
 
 
 * tools.mock.json
-
-.. code-block:: javascript
 {
   "tools": []
 }
 
 * layers.mock.json
-
-.. code-block:: javascript
 {
     "protocole": "WMS",
     "url": "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
