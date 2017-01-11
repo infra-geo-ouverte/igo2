@@ -23,6 +23,9 @@ Modification du JSON :
 En somme, voici les paramètres qui peuvent définir un contexte (view), des outils (tools)) et des couches (layers) :
 
 * view.mock.json
+
+::
+
   "view": {
     "center": [-8181982.573305608, 5969615.322970143],
     "zoom": 7,
@@ -31,17 +34,23 @@ En somme, voici les paramètres qui peuvent définir un contexte (view), des out
 
 
 * tools.mock.json
-{
-  "tools": []
-}
+
+::
+
+   {
+     "tools": []
+   }
 
 * layers.mock.json
-{
-    "protocole": "WMS",
-    "url": "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
-    "name": "MSP_DIRECTION_REG_COG_S",
-    "title": "test1"
-}
+
+::
+
+   {
+      "protocole": "WMS",
+      "url": "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
+      "name": "MSP_DIRECTION_REG_COG_S",
+      "title": "test1"
+   }
 
 .. note::
    Cette documentation est en construction.
