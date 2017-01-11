@@ -104,7 +104,7 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
-Ouvrir un navigateur http://localhost:5555/igo2/
+Ouvrir un navigateur http://localhost:5554/igo2-dev/
 
 ### Build de production
 

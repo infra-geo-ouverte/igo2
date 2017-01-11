@@ -2,17 +2,17 @@ version: '2'
 
 services:
 
-  igo2:
+  igo2-dev:
     build:
       context: .
       dockerfile: ./.docker/igo2.development.dockerfile
     command: npm start
     container_name: igo2-start
-    image: igo2
+    image: igo2-dev
     networks:
       - dev-network
     ports:
-      - '5555:5555'
+      - '5554:5555'
 
 networks:
   dev-network:
