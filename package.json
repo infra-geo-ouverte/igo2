@@ -109,7 +109,7 @@
     "merge-stream": "^1.0.0",
     "minimatch": "^3.0.3",
     "open": "0.0.5",
-    "protractor": "^4.0.9",
+    "protractor": "^4.0.14",
     "proxy-middleware": "^0.15.0",
     "remap-istanbul": "^0.7.0",
     "rimraf": "^2.5.4",
@@ -144,7 +144,6 @@
     "jquery": "^3.1.1",
     "ng2-translate": "^4.2.0",
     "openlayers": "^3.19.1",
-    "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.2",
     "systemjs": "0.19.41",
     "zone.js": "^0.7.2"
