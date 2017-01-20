@@ -3,6 +3,8 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 For IGO2 Source Code (https://github.com/infra-geo-ouverte/igo2), this license is applied :
 
 
+This license is approved by the international Open Source Initiative (OSI) : https://opensource.org/licenses/LiLiQ-R-1.1
+
 Québec Free and Open-Source Licence – Reciprocity (LiLiQ-R) - https://www.forge.gouv.qc.ca/participez/licence-logicielle/licence-libre-du-quebec-liliq-in-english/quebec-free-and-open-source-licence-reciprocity-liliq-r-v1-1/
 
 Version 1.1
