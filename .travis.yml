@@ -8,12 +8,12 @@ install: true  # yarn bug
 addons:
   firefox: "45.0"
 
-apt:
-  sources:
-    - google-chrome
-  packages:
-    - google-chrome-stable
-    - google-chrome-beta
+#apt:
+#  sources:
+#    - google-chrome
+#  packages:
+#    - google-chrome-stable
+#    - google-chrome-beta
 
 os:
   - linux
@@ -25,7 +25,7 @@ before_install:
 
 before_script:
   - npm install -g angular-cli
-  - npm install -g karma
+#  - npm install -g karma
   - npm install
   - ng build
 
