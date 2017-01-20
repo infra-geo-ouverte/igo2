@@ -12,6 +12,7 @@ module.exports = function (config) {
       require('angular-cli/plugins/karma')
     ],
     files: [
+      './node_modules/openlayers/dist/ol.js',
       { pattern: './src/test.ts', watched: false }
     ],
     preprocessors: {
