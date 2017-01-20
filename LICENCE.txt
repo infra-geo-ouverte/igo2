@@ -2,7 +2,9 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 Pour IGO2 (https://github.com/infra-geo-ouverte/igo2), la license qui s'applique est :
 
-Licence Libre du Québec – Réciprocité (LiLiQ-R) - https://www.forge.gouv.qc.ca/participez/licence-logicielle/licence-libre-du-quebec-liliq-en-francais/licence-libre-du-quebec-reciprocite-liliq-r-v1-1/
+Cette licence est homologée par l'organisme international Open Source Initiative (OSI)
+
+Licence Libre du Québec – Réciprocité (LiLiQ-R) - https://opensource.org/licenses/LiLiQ-R-1.1
 
 Version 1.1
 
