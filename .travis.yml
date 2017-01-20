@@ -28,6 +28,7 @@ before_script:
 #  - npm install -g karma
   - npm install
   - ng build
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "ng serve 2>&1 &"; fi  # Protractor CI
 
 #branches:
 #  only: master
@@ -43,4 +44,4 @@ notifications:
 cache:
   directories: node_modules
 
-script: ng test --single-run && ng serve && ng e2e
+script: ng test --single-run && ng e2e
