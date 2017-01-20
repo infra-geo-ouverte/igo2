@@ -2,21 +2,21 @@ version: '2'
 
 services:
 
-  igo2:
+  igo:
     build:
       context: .
-      dockerfile: ./.docker/igo2.production.dockerfile
+      dockerfile: ./.docker/igo.production.dockerfile
     command: npm run build.prod
-    container_name: igo2-build-prod
-    image: igo2
+    container_name: igo-build-prod
+    image: igo
     networks:
       - prod-network
     volumes:
       - ./dist:/home/app/igo2/dist
 
-  igo2-nginx:
+  igo-nginx:
     command: /bin/bash -c "envsubst '$$NGINX_HOST $$NGINX_PORT' < /etc/nginx/conf.d/igo2.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-    container_name: igo2-nginx-prod
+    container_name: igo-nginx-prod
     environment:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
