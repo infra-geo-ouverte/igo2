@@ -4,13 +4,13 @@
 /*global jasmine */
 var SpecReporter = require('jasmine-spec-reporter');
 
-exports.config = {
+var config = {
   allScriptsTimeout: 11000,
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'firefox'
+    'browserName': 'chrome'
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
@@ -30,3 +30,11 @@ exports.config = {
     jasmine.getEnv().addReporter(new SpecReporter());
   }
 };
+
+if (process.env.TRAVIS) {
+  config.capabilities = {
+    browserName: 'firefox'
+  };
+}
+
+exports.config = config;
