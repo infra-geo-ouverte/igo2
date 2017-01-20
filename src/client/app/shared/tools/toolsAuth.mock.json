@@ -1,7 +1,0 @@
-{
-  "tools": [{
-      "type": "Geolocation"
-    }, {
-      "type": "AutreOutil"
-    }]
-}
