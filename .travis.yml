@@ -1,4 +1,3 @@
-
 language: node_js
 node_js: stable
 
@@ -9,26 +8,30 @@ install: true  # yarn bug
 addons:
   firefox: "45.0"
 
+#apt:
+#  sources:
+#    - google-chrome
+#  packages:
+#    - google-chrome-stable
+#    - google-chrome-beta
+
 os:
   - linux
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated xctool || brew upgrade xctool; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=chromium-browser; fi  # Karma CI
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew cask install google-chrome; fi  # Karma CI
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
 
 before_script:
+  - npm install -g angular-cli
+#  - npm install -g karma
   - npm install
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start 2>&1 &"; fi  # Protractor CI
+  - ng build
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "ng serve 2>&1 &"; fi  # Protractor CI
 
-after_failure:
-  - cat /home/travis/build/mgechev/angular-seed/npm-debug.log
-
-branches:
-  only: master
+#branches:
+#  only: master
 
 notifications:
   email: true
@@ -41,5 +44,4 @@ notifications:
 cache:
   directories: node_modules
 
-script:
-  - npm run tests.all && npm run build.prod.exp
+script: ng test --single-run && ng e2e

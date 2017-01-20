@@ -1,19 +1,60 @@
 version: '2'
 
 services:
-
-  igo2-dev:
+  serve:
     build:
       context: .
-      dockerfile: ./.docker/igo2.development.dockerfile
+      dockerfile: ./.docker/igo.development.dockerfile
     command: npm start
-    container_name: igo2-start
-    image: igo2-dev
-    networks:
-      - dev-network
+    container_name: igo-dev
+    image: igo/dev
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/home/app/igo
     ports:
-      - '5554:5555'
+      - '4200:4200'
 
-networks:
-  dev-network:
-    driver: bridge
+
+# docker-compose build
+# docker-compose up serve
+# docker-compose up -d
+
+
+  # igo-nginx:
+  #   command: /bin/bash -c "envsubst '$$NGINX_HOST $$NGINX_PORT' < /etc/nginx/conf.d/igo2.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+  #   container_name: igo-prod
+  #   environment:
+  #     - NGINX_HOST=localhost
+  #     - NGINX_PORT=80
+  #   image: nginx
+  #   ports:
+  #     - '4201:80'
+  #   volumes:
+  #     - ./.docker/nginx.conf:/etc/nginx/conf.d/igo2.template
+  #     - ./dist/prod:/var/www/dist/prod
+
+  # test:
+  #   build:
+  #     context: .
+  #     dockerfile: ./.docker/igo.development.dockerfile
+  #   command: npm test
+  #   container_name: igo-dev-test
+  #   image: igo/dev
+  #   environment:
+  #     NODE_ENV: development
+  #   volumes:
+  #     - .:/home/app/igo
+  #   privileged: true
+  #
+  # e2e:
+  #   build:
+  #     context: .
+  #     dockerfile: ./.docker/igo.development.dockerfile
+  #   command: npm run ng e2e
+  #   container_name: igo-dev-e2e
+  #   image: igo/dev
+  #   environment:
+  #     NODE_ENV: development
+  #   volumes:
+  #     - .:/usr/src/app
