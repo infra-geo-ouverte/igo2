@@ -17,9 +17,12 @@
       "prefix": "igo",
       "mobile": false,
       "styles": [
+        "../node_modules/openlayers/dist/ol.css",
         "css/styles.styl"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/openlayers/dist/ol.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

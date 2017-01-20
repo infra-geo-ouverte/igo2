@@ -8,8 +8,8 @@ describe('igo App', function() {
     page = new IgoPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display title', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('igo works!');
+    expect(page.getParagraphText()).toEqual('Igo-dev');
   });
 });
