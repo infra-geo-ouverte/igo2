@@ -31,8 +31,8 @@ export class MapComponent implements OnInit, AfterViewInit {
       view: this.view
     });
 
-    for (let layerOptions of this.layers || []) {
-      let layer = this.layerService.createLayer(layerOptions);
+    for (const layerOptions of this.layers || []) {
+      const layer = this.layerService.createLayer(layerOptions);
       this.map.addLayer(layer);
     }
   }

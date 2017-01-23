@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigator-page.component.styl']
 })
 export class NavigatorPageComponent implements OnInit {
-  private config: any;
+  public config: any;
 
   constructor() { }
 

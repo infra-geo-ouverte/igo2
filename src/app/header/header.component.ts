@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 
-// import { AuthService } from "../shared/auth/auth.service";
+// import { AuthService } from ''../shared/auth/auth.service';
 
 @Component({
   selector: 'igo-header',
@@ -9,13 +9,13 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./header.component.styl']
 })
 export class HeaderComponent {
-  protected title: string = environment.title; //
+  public title: string = environment.title; //
   // protected version: string = "<%= VERSION %>";
 
   constructor(/*public auth: AuthService*/) { }
 
-  private get userName() {
-    return "User";
+  public get userName() {
+    return 'User';
     /*if (!this.auth.isAuthenticated) {
       return "";
     }

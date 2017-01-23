@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NavigatorPageComponent } from "./navigator-page.component";
+import { NavigatorPageComponent } from './navigator-page.component';
 
 const routes: Routes = [
   { path: '', component: NavigatorPageComponent },
