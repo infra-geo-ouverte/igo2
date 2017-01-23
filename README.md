@@ -1,33 +1,199 @@
-ng init --routing --style=styl --prefix=igo
+[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
+[![Build Status](https://travis-ci.org/infra-geo-ouverte/igo2.svg?branch=master)](https://travis-ci.org/infra-geo-ouverte/igo2)
+[![Joignez le forum https://gitter.im/igo2/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/igo2/Lobby)
+[![Dependencies Status](https://david-dm.org/infra-geo-ouverte/igo2.svg)](https://david-dm.org/infra-geo-ouverte/igo2)
+[![devDependencies Status](https://david-dm.org/infra-geo-ouverte/igo2/dev-status.svg)](https://david-dm.org/infra-geo-ouverte/igo2?type=dev)
 
-# Igo
+# Infrastructure géomatique ouverte 2.0 (IGO2) / Open GIS Infrastructure 2.0
+***
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.25.5.
+### Qu'est-ce qu'[IGO](http://igouverte.org/)?
+IGO est une solution Web gratuite en géomatique. Consultez le site Web d'IGO pour en savoir davantage: [http://igouverte.org/](http://igouverte.org/).
+Elle permet de tirer profit d’une multitude de données géographiques grâce à une interface cartographique accessible par un navigateur Web.
+Les membres du public en géomatique et du Web qui soumettent des contributions conservent leurs droits d'auteur s'ils partagent leur code source selon la [LICENCE LiLiQ-R de type LGPL](LICENCE.txt).
+IGO est un produit du gouvernement du Québec (Canada) et issu d’un travail collaboratif basé sur la philosophie des logiciels libres et ouverts (« open source »).
+***
+### What is [IGO](http://igouverte.org/english/)?
+IGO (for Open GIS Infrastructure) is a free Web Geospatial solution developed in Quebec, Canada. See this Web site for more information: [http://igouverte.org/english/](http://igouverte.org/english/).
+IGO has multiple features, such as Web GIS viewer, layer tree Manager and many more at [http://igouverte.org/english/](http://igouverte.org/english/).
+Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+***
 
-## Code scaffolding
+---
+## Table des matières (Français)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+- [Installation](#installation-et-démarrage)
+- [Documentation](http://igo2.readthedocs.io/fr/latest/)
+- [Tests](#tests)
+- [Docker](#docker)
+- [Structures des répertoires](#structures-des-répertoires)
+- [Contribuer](#contribuer)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+***
 
-## Running unit tests
+---
+## Table of content (English)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- [Installation](#installation-en)
+- [Documentation](http://igo2.readthedocs.io/fr/latest/english.html)
+- [Tests](#tests-en)
+- [Docker](#docker-en)
+- [Folder structure](#folder-structure)
+- [Contribute](#contribution)
 
-## Running end-to-end tests
+***
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+## Installation et démarrage (Français)
 
-## Deploying to GitHub Pages
+Requis: node >=v6.5.0 et npm >=3.10.3
 
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
+```bash
+$ git clone --depth 1 https://github.com/infra-geo-ouverte/igo2.git
+$ cd igo2
 
-## Further help
+# Installer les dépendances
+$ npm install -g angular-cli@1.0.0-beta.26
+$ npm install
 
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# Surveiller les fichiers et lancer une instance pour le développement
+$ npm start
+# Ouvrir un navigateur http://localhost:4200/igo/
+
+# Générer l'api de documentation
+# $ npm run compodoc
+# $ npm run serve.compodoc
+
+# Build dev
+$ npm run build.dev
+# Build prod
+$ npm run build.prod
+```
+
+## Tests
+
+```bash
+$ npm test
+
+# Surveiller par karma
+# Tests après chaque changement
+# $ npm run test.watch
+
+# code coverage (istanbul)
+# $ npm run serve.coverage
+
+# e2e (end-to-end intégration) - Dans 3 fenêtes différentes
+# npm install webdriver-manager <- Seulement la première fois
+# npm run webdriver-update <- Seulement la première fois
+#$ npm run webdriver-start
+#$ npm run serve.e2e
+# $ npm run e2e
+```
+
+## Docker
+
+### Build de développement
+
+```bash
+$ docker-compose build
+$ docker-compose up -d
+```
+
+Ouvrir un navigateur http://localhost:4200/igo/
+
+### Build de production
+
+```bash
+#$ docker-compose -f docker-compose.production.yml build
+#$ docker-compose -f docker-compose.production.yml up igo2
+#$ docker-compose -f docker-compose.production.yml up -d igo2-nginx
+```
+
+Ouvrir un navigateur  http://localhost:5555/igo2/
+
+
+***
+## Contribuer
+Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, nous vous encourageons à lire le guide de [contribution](http://igouverte.org/contribuer/), la [LICENCE](LICENCE.txt) et la [FAQ](http://igouverte.org/faq/). Si vous avez d'autres questions, n'hésitez pas à communiquer avec nous à l'adresse suivante : info(a)igouverte.org ou à vous inscrire à la liste [courriel](http://listes.securitepublique.gouv.qc.ca/sympa/info/igo-publique).
+
+***
+
+***
+
+## Installation-en
+
+Require: node >=v6.5.0 & npm >=3.10.3
+
+```bash
+$ git clone --depth 1 https://github.com/infra-geo-ouverte/igo2.git
+$ cd igo2
+
+# Install dépendencies
+$ npm install
+
+# Check files and launch dev instance
+$ npm start
+# Avec les tests continus
+$ npm run start.deving
+# Pour la prod
+$ npm run start.prod
+
+# Doc API generation
+$ npm run compodoc
+$ npm run serve.compodoc
+
+# Build dev
+$ npm run build.dev
+# Build prod
+$ npm run build.prod
+# Build prod with AoT
+$ npm run build.prod.aot
+```
+
+## Tests-en
+
+```bash
+$ npm test
+
+# Check by karma
+# Tests after each change
+$ npm run test.watch
+
+# code coverage (istanbul)
+$ npm run serve.coverage
+
+# e2e (end-to-end intégration) - in 3 different window
+# npm install webdriver-manager <- Only for the first time
+# npm run webdriver-update <- Only for the first time
+$ npm run webdriver-start
+$ npm run serve.e2e
+$ npm run e2e
+```
+
+## Docker-en
+
+### Dev Build
+
+```bash
+$ docker-compose build
+$ docker-compose up -d
+```
+
+Open in a browser http://localhost:5555/igo2/
+
+### Production build
+
+```bash
+$ docker-compose -f docker-compose.production.yml build
+$ docker-compose -f docker-compose.production.yml up igo2
+$ docker-compose -f docker-compose.production.yml up -d igo2-nginx
+```
+
+Open in a browser  http://localhost:5555/igo2/
+
+
+***
+
+## Contribution
+If you have any question and want to contribute, contact the main email of IGO: info(a)igouverte.org or subscribe to the mailing-list (http://listes.securitepublique.gouv.qc.ca/sympa/info/igo-publique) mainly in French, but do not hesitate to ask questions in English, most of the IGO Team is bilingual. The documentation and API-XML is mainly in French, but if there is a demand, the project can be translate if needed, just contact us for more information at: info(a)igouverte.org
