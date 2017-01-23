@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { NavigatorPageComponent } from './navigator-page.component';
-import { MapModule } from "../map/map.module";
+import { MapModule } from '../map/map.module';
 
 describe('NavigatorPageComponent', () => {
   let component: NavigatorPageComponent;
