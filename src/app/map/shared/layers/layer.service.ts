@@ -15,7 +15,7 @@ export class LayerService {
   constructor() { }
 
   createLayer(options: LayerOptions): Layer {
-    let layerCls = this.layerClassesMapping[options.type];
+    const layerCls = this.layerClassesMapping[options.type];
 
     return new layerCls(options);
   }
