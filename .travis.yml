@@ -44,4 +44,4 @@ notifications:
 cache:
   directories: node_modules
 
-script: ng test --single-run && ng e2e
+script: npm run tests.all
