@@ -22,3 +22,7 @@ patch:
         patched: '2017-01-26T18:55:45.853Z'
     - openlayers > closure-util > socket.io > engine.io > ws:
         patched: '2017-01-26T18:55:45.853Z'
+    - openlayers > closure-util > socket.io > engine.io > ws:
+        patched: '2017-01-26T19:14:18.136Z'
+    - openlayers > closure-util > socket.io > socket.io-client > engine.io-client > ws:
+        patched: '2017-01-26T19:14:18.136Z'
