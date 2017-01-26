@@ -19,10 +19,11 @@ describe('MapComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    component.options = {view: {}};
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
 });
