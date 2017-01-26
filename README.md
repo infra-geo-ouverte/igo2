@@ -49,6 +49,8 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 Requis: node >=v6.5.0 et npm >=3.10.3
 
 ```bash
+#npm completion >> ~/.bashrc
+
 $ git clone --depth 1 https://github.com/infra-geo-ouverte/igo2.git
 $ cd igo2
 
