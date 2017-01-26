@@ -3,14 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { NavigatorPageRoutingModule } from './navigator-page-routing.module';
 import { NavigatorPageComponent } from './navigator-page.component';
+
+import { SharedModule } from '../shared/shared.module';
 import { MapModule } from '../map/map.module';
 
 @NgModule({
   imports: [
-    CommonModule,
     NavigatorPageRoutingModule,
-    MapModule
+    MapModule,
+
+    SharedModule
   ],
-  declarations: [NavigatorPageComponent]
+  declarations: [
+    NavigatorPageComponent,
+  ]
 })
 export class NavigatorPageModule { }
