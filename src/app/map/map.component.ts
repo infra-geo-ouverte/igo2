@@ -22,7 +22,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   @Input() options: MapOptions;
   @Input() layers: LayerOptions[];
 
-  id: string = `igo-map-${nextId++}`;
+  id = `igo-map-${nextId++}`;
   map: NgMap;
 
   constructor(private mapService: MapService, private layerService: LayerService) {}
