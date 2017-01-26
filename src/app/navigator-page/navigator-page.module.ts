@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { NavigatorPageRoutingModule } from './navigator-page-routing.module';
 import { NavigatorPageComponent } from './navigator-page.component';
 import { MapModule } from '../map/map.module';

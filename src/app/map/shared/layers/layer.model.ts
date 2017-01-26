@@ -1,7 +1,4 @@
-export interface LayerOptions {
-  name: string;
-  type: string;
-}
+import { LayerOptions } from './layer.interface';
 
 export abstract class Layer {
 

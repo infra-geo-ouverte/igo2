@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, HostBinding, AfterViewInit } from '@angular/core';
 
-import { NgMap, MapOptions } from './shared/map.model';
+import { MapOptions } from './shared/map.interface';
+import { NgMap } from './shared/map.model';
 import { MapService } from './shared/map.service';
-import { LayerOptions } from './shared/layers/layer.model';
+import { LayerOptions } from './shared/layers/layer.interface';
 import { LayerService } from './shared/layers/layer.service';
 
 let nextId = 0;
@@ -18,21 +19,20 @@ let nextId = 0;
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
-  @Input() view: olx.ViewOptions;
+  @Input() options: MapOptions;
   @Input() layers: LayerOptions[];
 
-  id: string = `ngmap-map-${nextId++}`;
+  id: string = `igo-map-${nextId++}`;
   map: NgMap;
 
   constructor(private mapService: MapService, private layerService: LayerService) {}
 
   ngOnInit(): any {
-    this.map = this.mapService.createMap({
-      view: this.view
-    });
+    this.map = this.mapService.createMap(this.options);
 
+    let layer;
     for (const layerOptions of this.layers || []) {
-      const layer = this.layerService.createLayer(layerOptions);
+      layer = this.layerService.createLayer(layerOptions);
       this.map.addLayer(layer);
     }
   }

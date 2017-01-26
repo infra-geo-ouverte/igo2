@@ -1,14 +1,18 @@
 @require '../css/base.styl';
 
+:host {
+  width: 100%;
+  height: 100%;
+}
+
 igo-header {
   height: $b-height-header;
 }
 
 #router-body {
-  // margin-left: $b-width-navbar;
   position: fixed;
   width: 100%;
-  height: "calc(%s + 7px)" % $b-height-header;
+  height: "calc(100% - %s)" % $b-height-header;
   padding: 0;
   transition: 0.5s;
 }

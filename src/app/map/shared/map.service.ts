@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { NgMap, MapOptions } from './map.model';
+import { MapOptions } from './map.interface';
+import { NgMap } from './map.model';
 
 
 @Injectable()
