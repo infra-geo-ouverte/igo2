@@ -1,3 +1,4 @@
+import {} from 'openlayers';
 import { MapOptions } from './map.interface';
 import { LayerOptions } from './layers/layer.interface';
 import { Layer } from './layers/layer.model';
