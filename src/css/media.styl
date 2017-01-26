@@ -7,7 +7,7 @@ media_queries = {
 media(breakpoints)
   $conditions = ()
   for breakpoint in breakpoints
-    push(conditions, media_queries[breakpoint])
+    push($conditions, media_queries[breakpoint])
   $conditions = join(", ", $conditions)
-  @media conditions
+  @media $conditions
     {block}
