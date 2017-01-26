@@ -7,9 +7,4 @@ describe('igo App', function() {
   beforeEach(() => {
     page = new IgoPage();
   });
-
-  it('should display title', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Igo-dev');
-  });
 });
