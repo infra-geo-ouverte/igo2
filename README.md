@@ -8,16 +8,13 @@
 ***
 
 ### Qu'est-ce qu'[IGO](http://igouverte.org/)?
-IGO est une solution Web gratuite en géomatique. Consultez le site Web d'IGO pour en savoir davantage: [http://igouverte.org/](http://igouverte.org/).
-Elle permet de tirer profit d’une multitude de données géographiques grâce à une interface cartographique accessible par un navigateur Web.
-Les membres du public en géomatique et du Web qui soumettent des contributions conservent leurs droits d'auteur s'ils partagent leur code source selon la [LICENCE LiLiQ-R de type LGPL](LICENCE.txt).
-IGO est un produit du gouvernement du Québec (Canada) et issu d’un travail collaboratif basé sur la philosophie des logiciels libres et ouverts (« open source »).
+IGO2 est une solution Web gratuite en géomatique basée sur [Angular 2](https://github.com/angular/angular), [OpenLayers 3](https://github.com/openlayers/ol3) et [Bootstrap](https://github.com/twbs/bootstrap). Consultez le site Web d'IGO pour en savoir davantage: [http://igouverte.org/](http://igouverte.org/).
+IGO2 permet de tirer profit d’une multitude de données géographiques grâce à une interface cartographique accessible par un navigateur Web sur un poste de travail et par un appareil mobile.
+IGO2 a été initié par l'administration publique du Québec (Canada) et issu d’un travail collaboratif basé sur la philosophie des logiciels libres et ouverts (« open source »). Les membres du public en géomatique et du Web qui soumettent des contributions conservent leurs droits d'auteur s'ils partagent leur code source selon la [LICENCE LiLiQ-R de type LGPL](LICENCE.txt).
 ***
 ### What is [IGO](http://igouverte.org/english/)?
-IGO (for Open GIS Infrastructure) is a free Web Geospatial solution developed in Quebec, Canada. See this Web site for more information: [http://igouverte.org/english/](http://igouverte.org/english/).
-IGO has multiple features, such as Web GIS viewer, layer tree Manager and many more at [http://igouverte.org/english/](http://igouverte.org/english/).
-Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
-
+IGO2 (for Open GIS Infrastructure - version 2.0) is a free open source Web Geospatial solution developed at first in Quebec, Canada based on [Angular 2](https://github.com/angular/angular), [OpenLayers 3](https://github.com/openlayers/ol3) and [Bootstrap](https://github.com/twbs/bootstrap). See this Web site for more information: [http://igouverte.org/english/](http://igouverte.org/english/).
+IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and Mobile and many more available at [http://igo2.readthedocs.io/fr/latest/english.html](http://igo2.readthedocs.io/fr/latest/english.html). Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
 ***
 
 ---
@@ -26,6 +23,7 @@ Since this project is open source, anyone can contribute as long as they share t
 - [Installation](#installation-et-démarrage)
 - [Documentation](http://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests)
+- [Suivi du projet](https://overv.io/infra-geo-ouverte/igo2/)
 - [Docker](#docker)
 - [Structures des répertoires](#structures-des-répertoires)
 - [Contribuer](#contribuer)
@@ -39,6 +37,7 @@ Since this project is open source, anyone can contribute as long as they share t
 - [Installation](#installation-en)
 - [Documentation](http://igo2.readthedocs.io/fr/latest/english.html)
 - [Tests](#tests-en)
+- [Follow in overvio](https://overv.io/infra-geo-ouverte/igo2/)
 - [Docker](#docker-en)
 - [Folder structure](#folder-structure)
 - [Contribute](#contribution)

@@ -9,7 +9,7 @@ export class TileLayer extends Layer {
   olLayer: ol.layer.Tile;
 
   createOlLayer(options: TileLayerOptions): ol.layer.Tile {
-    let olLayerOptions = Object.assign(options.view || {}, {
+    const olLayerOptions = Object.assign(options.view || {}, {
       source: new ol.source.Tile(options.source)
     });
 

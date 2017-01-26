@@ -10,7 +10,7 @@ export class OSMLayer extends Layer {
   olLayer: ol.layer.Tile;
 
   createOlLayer(options: OSMLayerOptions): ol.layer.Tile {
-    let olLayerOptions = Object.assign(options.view || {}, {
+    const olLayerOptions = Object.assign(options.view || {}, {
       source: new ol.source.OSM(options.source)
     });
 

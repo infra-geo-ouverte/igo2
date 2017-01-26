@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  title: "Igo-dev"
+  title: 'Igo-dev'
 };
