@@ -6,24 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigator-page.component.styl']
 })
 export class NavigatorPageComponent implements OnInit {
-  public config: any;
+  public context: any;
 
   constructor() { }
 
   ngOnInit() {
-    this.config = {
+    this.context = {
       map: {
         view: {
           projection: 'EPSG:3857',
           center: ol.proj.fromLonLat([-72, 46], 'EPSG:3857'),
           zoom: 6
-        },
-        layers: [
-          {
-            type: 'osm'
-          }
-        ]
-      }
+        }
+      },
+      layers: [
+        {
+          name: 'OSM',
+          type: 'osm'
+        }
+      ]
     };
   }
 

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { LayerOptions } from './layer.model';
+import { LayerOptions } from './layer.interface';
 import { Layer } from './layer.model';
 import { OSMLayer } from './layer-osm.model';
-
 
 @Injectable()
 export class LayerService {
