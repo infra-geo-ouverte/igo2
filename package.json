@@ -16,14 +16,14 @@
     "start.prod.jit": "ng serve --prod --host 0.0.0.0 --proxy-config proxy.conf.json",
     "start.prod.fr": "ng serve --prod --aot --host 0.0.0.0 --proxy-config proxy.conf.json --i18n-file=src/locale/messages.fr.xlf --locale=fr --i18n-format=xlf",
     "start.prod.en": "ng serve --prod --aot --host 0.0.0.0 --proxy-config proxy.conf.json --i18n-file=src/locale/messages.en.xlf --locale=en --i18n-format=xlf",
-    "build.dev.jit": "ng build --dev --output-path ./dist/dev",
+    "build.dev.jit": "npm run clean && ng build --dev --output-path ./dist/dev",
     "build.dev.fr": "ng build -o dist/dev/fr --aot -dev --bh /fr/ --i18n-file=src/locale/messages.fr.xlf --i18n-format=xlf --locale=fr",
     "build.dev.en": "ng build -o dist/dev/en --aot -dev --bh /en/ --i18n-file=src/locale/messages.en.xlf --i18n-format=xlf --locale=en",
-    "build.dev": "npm run build.dev.en && npm run build.dev.fr",
-    "build.prod.jit": "ng build --prod --output-path ./dist/prod",
+    "build.dev": "npm run clean && npm run build.dev.en && npm run build.dev.fr",
+    "build.prod.jit": "npm run clean && ng build --prod --output-path ./dist/prod",
     "build.prod.fr": "ng build -o dist/prod/fr --aot -prod --bh /fr/ --i18n-file=src/locale/messages.fr.xlf --i18n-format=xlf --locale=fr",
     "build.prod.en": "ng build -o dist/prod/en --aot -prod --bh /en/ --i18n-file=src/locale/messages.en.xlf --i18n-format=xlf --locale=en",
-    "build.prod": "npm run build.prod.en && npm run build.prod.fr",
+    "build.prod": "npm run clean && npm run build.prod.en && npm run build.prod.fr",
     "serve.dev": "node_modules/live-server/live-server.js ./dist/dev/ --port=4200 --no-browser",
     "serve.prod": "node_modules/live-server/live-server.js ./dist/prod/ --port=4200 --no-browser",
     "doc": "compodoc -p src/tsconfig.json -s --port 4220",
@@ -49,7 +49,7 @@
     "prepublish": "npm run snyk-protect",
     "cli-update": "npm cache clean && npm install --save-dev angular-cli@latest && npm run reinstall && ng init --routing --style=styl --prefix=igo",
     "reinstall": "npm run clean && npm cache clean && npm prune && npm install",
-    "clean": "rimraf ./dist && mkdir dist"
+    "clean": "rimraf ./dist"
   },
   "private": true,
   "dependencies": {
