@@ -18,7 +18,8 @@
       "mobile": false,
       "styles": [
         "../node_modules/openlayers/dist/ol.css",
-        "css/styles.styl"
+        "css/styles.styl",
+        "css/material-icons.styl"
       ],
       "scripts": [
         "../node_modules/openlayers/dist/ol.js"
@@ -30,7 +31,9 @@
       }
     }
   ],
-  "addons": [],
+  "addons": [
+    "assets/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
+  ],
   "packages": [],
   "e2e": {
     "protractor": {
