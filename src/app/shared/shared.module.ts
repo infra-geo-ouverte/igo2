@@ -6,6 +6,8 @@ import { MaterialModule } from '@angular/material';
 import { MdIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { BackdropComponent } from './backdrop/backdrop.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -14,14 +16,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MdIconModule.forRoot(),
     FlexLayoutModule.forRoot()
   ],
-  declarations: [],
+  declarations: [
+    BackdropComponent
+  ],
   exports: [
     CommonModule,
     FormsModule,
 
     MaterialModule,
     MdIconModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    BackdropComponent
   ]
 })
 export class SharedModule {
