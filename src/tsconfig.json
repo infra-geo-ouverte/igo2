@@ -14,5 +14,10 @@
     "typeRoots": [
       "../node_modules/@types"
     ]
+  },
+  "exclude": [ "test.ts" ],
+  "angularCompilerOptions": {
+    "genDir": "locale",
+    "skipMetadataEmit" : true
   }
 }
