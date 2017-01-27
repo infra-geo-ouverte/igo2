@@ -10,10 +10,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --proxy-config proxy.conf.json",
-    "start.dev.jit": "npm start",
+    "start.dev": "npm start",
     "start.dev.fr": "ng serve --aot --i18n-file=src/locale/messages.fr.xlf --locale=fr --i18n-format=xlf",
     "start.dev.en": "ng serve --aot --i18n-file=src/locale/messages.en.xlf --locale=en --i18n-format=xlf",
-    "start.prod.jit": "ng serve --prod --host 0.0.0.0 --proxy-config proxy.conf.json",
+    "start.prod": "ng serve --prod --host 0.0.0.0 --proxy-config proxy.conf.json",
     "start.prod.fr": "ng serve --prod --aot --host 0.0.0.0 --proxy-config proxy.conf.json --i18n-file=src/locale/messages.fr.xlf --locale=fr --i18n-format=xlf",
     "start.prod.en": "ng serve --prod --aot --host 0.0.0.0 --proxy-config proxy.conf.json --i18n-file=src/locale/messages.en.xlf --locale=en --i18n-format=xlf",
     "build.dev.jit": "npm run clean && ng build --dev --output-path ./dist/dev",
