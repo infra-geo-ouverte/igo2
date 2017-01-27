@@ -4,6 +4,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { NavigatorPageModule } from './navigator-page/navigator-page.module';
 
+import {} from 'jasmine';
+
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
