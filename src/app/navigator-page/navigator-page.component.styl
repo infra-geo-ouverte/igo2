@@ -1,0 +1,43 @@
+@require '../../css/base.styl';
+@require '../../css/media.styl';
+
+$igo-sidenav-width = 400px;
+$igo-mobile-min-space-left = $igo-icon-button-width;
+
+md-sidenav-container {
+  width: 100%;
+  height: 100%;
+}
+
+:host >>> md-sidenav {
+  width: $igo-sidenav-width;
+
+  +media(mobile) {
+    width: "calc(100% - %s - %s)" % ($igo-mobile-min-space-left $igo-margin);
+  }
+}
+
+:host >>> .igo-search-bar {
+  position: absolute;
+  left: 0;
+  top: $igo-margin;
+  z-index: 4;
+  width: "calc(%s - 2 * %s)" % ($igo-sidenav-width $igo-margin);
+  margin: 0 $igo-margin;
+
+  +media(mobile) {
+    width: "calc(100% - %s - (3 * %s))" % ($igo-mobile-min-space-left $igo-margin);
+  }
+}
+
+#igo-menu-button {
+  position: absolute;
+  left: $igo-sidenav-width;
+  top: $igo-margin;
+  z-index: 2;
+
+  +media(mobile) {
+    right: $igo-margin;
+    left: inherit;
+  }
+}

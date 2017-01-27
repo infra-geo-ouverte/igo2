@@ -1,0 +1,20 @@
+@require '../../../css/media.styl';
+
+.igo-backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(100, 100, 100, 0.5);
+  z-index: 2;
+  display: none;
+}
+
+.igo-backdrop-shown {
+  display: block;
+
+  +media(tablet desktop) {
+    display: none;
+  }
+}
