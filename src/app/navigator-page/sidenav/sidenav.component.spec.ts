@@ -6,6 +6,8 @@ import { DebugElement } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 
 import { SidenavComponent } from './sidenav.component';
+import { PrimaryPaneComponent } from '../primary-pane/primary-pane.component';
+import { SecondaryPaneComponent } from '../secondary-pane/secondary-pane.component';
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
@@ -16,7 +18,11 @@ describe('SidenavComponent', () => {
       imports: [
         SharedModule
       ],
-      declarations: [ SidenavComponent ]
+      declarations: [
+        SidenavComponent,
+        PrimaryPaneComponent,
+        SecondaryPaneComponent
+      ]
     })
     .compileComponents();
   }));

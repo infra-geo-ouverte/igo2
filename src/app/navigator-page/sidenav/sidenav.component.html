@@ -1,1 +1,24 @@
-<md-sidenav #mdSidenav opened={{opened}}></md-sidenav>
+<md-sidenav #mdSidenav opened={{opened}}>
+  <div class="igo-sidenav-content">
+    <igo-flex-pane
+      #flexPane
+      igoFlexDirection="column"
+      igoFlexInitial="60%"
+      igoFlexCollapsed="40px"
+      igoFlexExpanded="calc(100% - 40px)">
+
+      <igo-primary-pane
+        igoFlexMain
+        class='igo-content'
+        (click)="flexPane.state = 'collapsed'">
+      </igo-primary-pane>
+
+      <igo-secondary-pane
+        igoFlexFill
+        class='igo-content'
+        (click)="flexPane.state = 'initial'">  
+      </igo-secondary-pane>
+
+    </igo-flex-pane>
+  </div>
+</md-sidenav>

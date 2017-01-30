@@ -4,20 +4,24 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { MdIconModule } from '@angular/material/icon';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { BackdropComponent } from './backdrop/backdrop.component';
+import { FlexPaneComponent } from './flex-pane/flex-pane.component';
+import { FlexMainDirective } from './flex-pane/flex-main.directive';
+import { FlexFillDirective } from './flex-pane/flex-fill.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule.forRoot(),
-    MdIconModule.forRoot(),
-    FlexLayoutModule.forRoot()
+    MdIconModule.forRoot()
   ],
   declarations: [
-    BackdropComponent
+    BackdropComponent,
+    FlexPaneComponent,
+    FlexMainDirective,
+    FlexFillDirective
   ],
   exports: [
     CommonModule,
@@ -25,8 +29,10 @@ import { BackdropComponent } from './backdrop/backdrop.component';
 
     MaterialModule,
     MdIconModule,
-    FlexLayoutModule,
-    BackdropComponent
+    BackdropComponent,
+    FlexPaneComponent,
+    FlexMainDirective,
+    FlexFillDirective
   ]
 })
 export class SharedModule {
