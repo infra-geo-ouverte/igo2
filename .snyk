@@ -6,6 +6,13 @@ ignore:
     - openlayers > closure-util:
         reason: Need OL
         expires: '2017-02-25T18:56:00.903Z'
+  'npm:marked:20170112':
+    - openlayers > marked:
+        reason: None given
+        expires: '2017-03-01T19:49:55.700Z'
+    - openlayers > jsdoc > marked:
+        reason: None given
+        expires: '2017-03-01T19:49:55.701Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:negotiator:20160616':
