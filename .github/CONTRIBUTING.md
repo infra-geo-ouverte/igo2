@@ -34,7 +34,10 @@
 ## Guide pour les commits Git
 
 ### Format du message du commit
+
+```
 <type>(<scope>): <sujet>
+```
 
 ### Type
 
@@ -85,7 +88,10 @@ Une courte description des changement
 ## Git Commit Guidelines
 
 ### Commit Message Format
+
+```
 <type>(<scope>): <subject>
+```
 
 ### Type
 
