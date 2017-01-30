@@ -7,6 +7,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { SharedModule } from '../shared/shared.module';
 import { MapModule } from '../map/map.module';
 import { SearchModule } from '../search/search.module';
+import { PrimaryPaneComponent } from './primary-pane/primary-pane.component';
+import { SecondaryPaneComponent } from './secondary-pane/secondary-pane.component';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { SearchModule } from '../search/search.module';
   ],
   declarations: [
     NavigatorPageComponent,
-    SidenavComponent
+    SidenavComponent,
+    PrimaryPaneComponent,
+    SecondaryPaneComponent
   ]
 })
 export class NavigatorPageModule { }

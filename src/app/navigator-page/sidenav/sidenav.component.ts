@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'igo-sidenav',
@@ -6,7 +6,6 @@ import { Component, Input, ViewChild } from '@angular/core';
   styleUrls: ['./sidenav.component.styl']
 })
 export class SidenavComponent {
-  @ViewChild('mdSidenav') _sidenav;
 
   @Input() opened: boolean = false;
 

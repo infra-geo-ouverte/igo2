@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+:host >>> [igoFlexMain] {
+  flex: 0 0 auto;
+  overflow: auto;
+  transition: height 0.25s ease-in;
+}
+
+:host >>> [igoFlexFill] {
+  flex: 1 1 auto;
+  overflow: auto;
+}
