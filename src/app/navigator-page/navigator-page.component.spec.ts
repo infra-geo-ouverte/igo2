@@ -9,6 +9,8 @@ import { SearchModule } from '../search/search.module';
 
 import { NavigatorPageComponent } from './navigator-page.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { PrimaryPaneComponent } from './primary-pane/primary-pane.component';
+import { SecondaryPaneComponent } from './secondary-pane/secondary-pane.component';
 
 describe('NavigatorPageComponent', () => {
   let component: NavigatorPageComponent;
@@ -24,7 +26,9 @@ describe('NavigatorPageComponent', () => {
       ],
       declarations: [
         NavigatorPageComponent,
-        SidenavComponent
+        SidenavComponent,
+        PrimaryPaneComponent,
+        SecondaryPaneComponent
       ]
     })
     .compileComponents();

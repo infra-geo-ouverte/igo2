@@ -4,6 +4,37 @@ $igo-white = #fff;
 
 $igo-margin = 5px;
 
+$igo-padding = 5px;
+
+$igo-border-width = 1px ;
+$igo-border-style = solid;
+$igo-border-color = rgba(0, 0, 0, .2);
+
+border()
+  border-width $igo-border-width
+  border-style $igo-border-style
+  border-color $igo-border-color
+
+border-top()
+  border-top-width $igo-border-width
+  border-top-style $igo-border-style
+  border-top-color $igo-border-color
+
+border-bottom()
+  border-bottom-width $igo-border-width
+  border-bottom-style $igo-border-style
+  border-bottom-color $igo-border-color
+
+border-left()
+  border-left-width $igo-border-width
+  border-left-style $igo-border-style
+  border-left-color $igo-border-color
+
+border-right()
+  border-right-width $igo-border-width
+  border-right-style $igo-border-style
+  border-right-color $igo-border-color
+
 button[md-icon-button] {
   border-radius: 0;
   width: $igo-icon-button-width;
@@ -11,4 +42,8 @@ button[md-icon-button] {
   margin: 0;
   padding: 0;
   background-color: $igo-white;
+}
+
+.igo-content {
+  padding: $igo-padding;
 }
