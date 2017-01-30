@@ -57,7 +57,7 @@ $ npm install
 # Surveiller les fichiers et lancer une instance pour le développement
 $ npm start
 # Ouvrir un navigateur http://localhost:4200/
-
+ 
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
