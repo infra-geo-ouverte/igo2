@@ -6,14 +6,26 @@ $igo-margin = 5px;
 
 $igo-padding = 5px;
 
+$igo-primary-color = rgb(103, 58, 183);
+$igo-primary-color-hover = rgba(103, 58, 183, 0.1);
+
 $igo-border-width = 1px ;
 $igo-border-style = solid;
 $igo-border-color = rgba(0, 0, 0, .2);
+
+border-box()
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 
 border()
   border-width $igo-border-width
   border-style $igo-border-style
   border-color $igo-border-color
+
+  -webkit-box-shadow: inset 0px 0px 0px 10px #f00;
+  -moz-box-shadow: inset 0px 0px 0px 10px #f00;
+  box-shadow: inset 0px 0px 0px 10px #f00;
 
 border-top()
   border-top-width $igo-border-width
@@ -44,6 +56,13 @@ button[md-icon-button] {
   background-color: $igo-white;
 }
 
+button {
+  background-color: $igo-white;
+}
+
 .igo-content {
-  padding: $igo-padding;
+  height: "calc(100% - 2 * %s)" % $igo-padding;
+  width: "calc(100% - 2 * %s)" % $igo-padding;
+  margin: $igo-padding;
+  overflow: auto;
 }

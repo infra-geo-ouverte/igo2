@@ -1,0 +1,65 @@
+<md-sidenav-container>
+
+  <igo-backdrop [shown]="sidenav.opened" (click)="sidenav.close()"></igo-backdrop>
+
+  <button
+    md-icon-button
+    id="igo-menu-button"
+    color="primary"
+    (click)="sidenav.toggle()">
+    <md-icon *ngIf="!sidenav.opened">menu</md-icon>
+    <md-icon *ngIf="sidenav.opened">keyboard_arrow_left</md-icon>  
+  </button>
+
+  <igo-search-bar
+    (key)="sidenav.open()"
+    (key)="selectToolByName('search')"></igo-search-bar>
+
+  <igo-sidenav #sidenav [opened]="false">
+    <igo-flex-pane
+      #flexPane
+      igoFlexDirection="column"
+      igoFlexInitial="60%"
+      igoFlexCollapsed="40px"
+      igoFlexExpanded="calc(100% - 40px)">
+
+      <div
+        id="igo-main-pane"
+        igoFlexMain>
+        <div class="igo-content">
+          <igo-toolbar
+            [tools]="context.tools"
+            (toolSelected)="selectTool($event)"
+            *ngIf="!selectedTool">  
+          </igo-toolbar>
+
+          <igo-panel
+            [title]="selectedTool.title"
+            *ngIf="selectedTool">
+            <md-icon
+              panelLeftIcon
+              (click)="goBack()">arrow_back</md-icon> 
+            <md-icon
+              panelRightIcon
+              (click)="goHome()">menu</md-icon>
+
+            <igo-tool-pane
+              [tool]="selectedTool">
+            </igo-tool-pane>
+          </igo-panel>
+        </div>
+      </div>
+
+      <div
+        igoFlexFill>
+      </div>
+
+    </igo-flex-pane>
+  </igo-sidenav>
+
+  <igo-map
+    [options]="context.map"
+    [layers]="context.layers">
+  </igo-map>
+
+</md-sidenav-container>

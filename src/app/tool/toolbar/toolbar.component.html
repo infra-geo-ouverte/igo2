@@ -1,0 +1,11 @@
+<md-list> 
+ <!--igo-toolbar-item [item]="item"
+  (toolSelected)="toolSelected.emit($event)"
+ ></igo-toolbar-item-->
+  <template ngFor let-tool [ngForOf]="tools" [ngForTrackBy]="trackBy">
+    <igo-toolbar-item
+      [tool]=tool
+      (toolSelected)="toolSelected.emit(tool)"
+      ></igo-toolbar-item>
+  </template>
+</md-list>

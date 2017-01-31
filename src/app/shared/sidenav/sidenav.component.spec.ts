@@ -3,11 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SharedModule } from '../../shared/shared.module';
+import { MaterialModule } from '@angular/material';
+import { MdIconModule } from '@angular/material/icon';
 
 import { SidenavComponent } from './sidenav.component';
-import { PrimaryPaneComponent } from '../primary-pane/primary-pane.component';
-import { SecondaryPaneComponent } from '../secondary-pane/secondary-pane.component';
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
@@ -16,13 +15,10 @@ describe('SidenavComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        SharedModule
+        MaterialModule.forRoot(),
+        MdIconModule.forRoot()
       ],
-      declarations: [
-        SidenavComponent,
-        PrimaryPaneComponent,
-        SecondaryPaneComponent
-      ]
+      declarations: [ SidenavComponent ]
     })
     .compileComponents();
   }));

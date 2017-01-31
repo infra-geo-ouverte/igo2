@@ -9,6 +9,8 @@ import { BackdropComponent } from './backdrop/backdrop.component';
 import { FlexPaneComponent } from './flex-pane/flex-pane.component';
 import { FlexMainDirective } from './flex-pane/flex-main.directive';
 import { FlexFillDirective } from './flex-pane/flex-fill.directive';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { PanelComponent } from './panel/panel.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import { FlexFillDirective } from './flex-pane/flex-fill.directive';
     BackdropComponent,
     FlexPaneComponent,
     FlexMainDirective,
-    FlexFillDirective
+    FlexFillDirective,
+    SidenavComponent,
+    PanelComponent
   ],
   exports: [
     CommonModule,
@@ -32,7 +36,9 @@ import { FlexFillDirective } from './flex-pane/flex-fill.directive';
     BackdropComponent,
     FlexPaneComponent,
     FlexMainDirective,
-    FlexFillDirective
+    FlexFillDirective,
+    SidenavComponent,
+    PanelComponent
   ]
 })
 export class SharedModule {

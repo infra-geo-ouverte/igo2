@@ -1,5 +1,5 @@
-@require '../../css/base.styl';
-@require '../../css/media.styl';
+@require '../../../css/base.styl';
+@require '../../../css/media.styl';
 
 $igo-sidenav-width = 400px;
 $igo-mobile-min-space-left = $igo-icon-button-width;
@@ -30,14 +30,24 @@ md-sidenav-container {
   }
 }
 
+:host >>> [igoflexmain] {
+  border-bottom()
+  border-box()
+}
+
 #igo-menu-button {
   position: absolute;
   left: $igo-sidenav-width;
   top: $igo-margin;
   z-index: 2;
+  color: $igo-primary-color;
 
   +media(mobile) {
     right: $igo-margin;
     left: inherit;
   }
+}
+
+#igo-menu-button:hover .md-button-focus-overlay {
+  background-color: $igo-primary-color-hover;
 }
