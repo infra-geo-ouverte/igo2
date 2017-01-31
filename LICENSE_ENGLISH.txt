@@ -1,0 +1,138 @@
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+For IGO2 Source Code (https://github.com/infra-geo-ouverte/igo2), this license is applied :
+
+
+Québec Free and Open-Source Licence – Reciprocity (LiLiQ-R) - https://www.forge.gouv.qc.ca/participez/licence-logicielle/licence-libre-du-quebec-liliq-in-english/quebec-free-and-open-source-licence-reciprocity-liliq-r-v1-1/
+
+Version 1.1
+
+1. Preamble
+
+This licence applies to any distributed software stipulated by its copyright owner to be subject to the terms of the Québec Free and Open-Source Licence – Reciprocity (LiLiQ-R) (hereinafter referred to as the “licence”).
+
+2. Definitions
+
+Unless the context indicates otherwise, the following terms are used in this licence:
+“contribution”: any original software or part of original software submitted and intended to be integrated into the software;
+“contributor”: the copyright owner or any person authorized by the copyright owner to submit a contribution to the licensor. A contributor whose contribution is integrated into the software is considered a licensor with respect to that contribution;
+“derived software”: any original software developed by a licensee, other than the software or modified software, that produces or reproduces all or a substantial part of the software;
+“distribution”: the act of delivering a copy of the software;
+“licensee”: any person possessing a copy of the software who exercises the rights granted by the licence;
+“licensor”: the software copyright owner or any person duly authorized by the copyright owner to grant this licence;
+“modified software”: any modification made by a licensee to one of the software’s source code files, or any new source code file that integrates the software or a substantial part of it;
+“software”: a copyright-protected work such as a computer program and its documentation, stipulated by the copyright owner to be subject to the terms of this licence.
+
+3. Copyright licence
+
+Subject to the terms of this licence, the licensor grants the licensee a non-exclusive, royalty-free licence allowing the licensee to exercise the following rights regarding the software:
+(1) Produce or reproduce the software or a substantial part thereof;
+(2) Perform the software or any substantial part of it in public;
+(3) Publish the software or any substantial part of it.
+
+This licence is granted on a world-wide, perpetual basis.
+
+Full exercise of these rights is subject to distribution by the licensor of the software source code in a form allowing it to be modified. The licensor may also distribute the software, along with an offer to distribute the software source code, without additional charges other than reasonable charges for delivery of the source code. That offer must be valid for a reasonable period of time.
+
+4. Distribution
+
+The licensee may distribute copies of the software, modified software or derived software, subject to the following conditions:
+(1) The software must be accompanied by a copy of this licence.
+(2) If the software has been modified, the licensee must mention this, preferably in every modified file that allows for such a mention.
+(3) Software copyright, trademark, warranty or attribution labels or notices must not be modified or removed, unless the labels or notices do not apply to specific modified or derived software.
+
+4.1. Reciprocity
+
+Every time the licensee distributes the software, the licensor grants the recipient an interest in the software in accordance with the terms of this licence. The licensee must grant an interest in accordance with the terms of this licence for any modified software distributed.
+
+Every time the licensee distributes the software or modified software, the licensee is obliged to distribute its source code in the manner prescribed in the third paragraph of section (3).
+
+4.2. Compatibility
+
+To the extent that the licensee wishes to distribute modified software combined with software subject to a compatible licence whose terms cannot possibly be fulfilled, the licensor offers, in addition to this interest, an interest in compliance with the terms of the compatible licence.
+
+A licensee who is the exclusive copyright owner of the software subject to a compatible licence is not eligible for this offer. The same applies to any other person duly authorized to sub-license by the exclusive copyright owner of the software subject to a compatible licence.
+
+A compatible licence is considered to be any free or open-source licence approved or certified by the Free Software Foundation or the Open Source Initiative, whose level of reciprocity is comparable to or greater than that of this licence, without being less so, in particular:
+(1) Common Development and Distribution License (CDDL-1.0)
+(2) Common Public License Version 1.0 (CPL-1.0)
+(3) Contrat de licence de logiciel libre CeCILL, version 2.1 (CECILL-2.1)
+(4) Contrat de licence de logiciel libre CeCILL-C (CECILL-C)
+(5) Eclipse Public License – v 1.0 (EPL-1.0)
+(6) European Union Public License, version 1.1 (EUPL v. 1.1)
+(7) Licence Libre du Québec – Réciprocité forte (Québec Free and Open-Source Licence – Strong Reciprocity) version 1.1 (LiLiQ-R+ 1.1)
+(8) GNU General Public License Version 2 (GNU GPLv2)
+(9) GNU General Public License Version 3 (GNU GPLv3)
+(10) GNU Lesser General Public License Version 2.1 (GNU LGPLv2.1)
+(11) GNU Lesser General Public License Version 3 (GNU LGPLv3)
+(12) Mozilla Public License Version 2.0 (MPL-2.0)
+
+5. Contributions
+
+Subject to a separate agreement, every contribution submitted by a contributor to the licensor for inclusion in the software is subject to the terms of this licence.
+
+6. Trademarks
+
+This licence does not grant any special permission to use the licensor’s trademarks, except as needed to describe the origin of the software.
+
+7. Warranties
+
+Unless otherwise specified, the licensor distributes the software without any warranty, at the risk of the acquirer of a copy of the software, and without any warranty that the software is suited to any specific need or will yield any specific results.
+
+Without binding the licensor in any way, nothing prevents a licensee from offering or excluding warranties or support.
+
+8. Liability
+
+The licensee is liable for any prejudice resulting from the exercise of the rights granted under the licence.
+
+The licensor cannot be held liable for any prejudice sustained by the licensee or third parties for any reason whatsoever related to the licence and the rights it grants.
+
+9. Termination
+
+This licence is terminated as of right should the rights it grants fail to be exercised in accordance with the terms of the licence.
+
+However, if the failure is remedied within 30 days after its discovery by the person in default and it is the first failure, the licence will be granted once again.
+
+For any subsequent failure, the licensor’s express consent is required for the licence to be granted once again.
+
+10. Licence version
+
+The Centre de services partagés du Québec, its successors or any person it designates may release revised or modified versions of this licence. Each version will be given a unique number. If software is already subject to the terms of a specific version, the parties to the licence will be bound solely by that version.
+
+The licensor may also expressly choose to grant the licence in its current version or any subsequent version, in which case the licensee may choose the license version to be granted.
+
+11. Miscellaneous
+
+To the extent that the licensor is a government department, public body or legal person established in the public interest and created under a law of the National Assembly of Québec, the licence is governed by the laws applicable in Québec and, in the event of a dispute, the courts of Québec have sole jurisdiction.
+
+This licence may be distributed without any special conditions. However, a modified version must be distributed under a different name. Any reference to the Centre de services partagés du Québec or its successors, where applicable, must be withdrawn, except as needed to describe the origin of the licence.
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+For EXTERNAL LIBRAIRIES OF IGO2 :
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+
+For OpenLayers 3 (https://github.com/openlayers/ol3), licence MIT :
+
+https://github.com/openlayers/ol3/blob/master/LICENSE.md
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+
+For Angular (https://github.com/angular/angular), licence MIT :
+
+https://github.com/angular/angular/blob/master/LICENSE
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+
+For Bootstrap (https://github.com/twbs/bootstrap), licence MIT :
+
+https://github.com/twbs/bootstrap/blob/v4-dev/LICENSE
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
