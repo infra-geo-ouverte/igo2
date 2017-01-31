@@ -3,26 +3,31 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SecondaryPaneComponent } from './secondary-pane.component';
+import { ToolPaneComponent } from './tool-pane.component';
 
-describe('SecondaryPaneComponent', () => {
-  let component: SecondaryPaneComponent;
-  let fixture: ComponentFixture<SecondaryPaneComponent>;
+describe('ToolPaneComponent', () => {
+  let component: ToolPaneComponent;
+  let fixture: ComponentFixture<ToolPaneComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SecondaryPaneComponent ]
+      declarations: [ ToolPaneComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SecondaryPaneComponent);
+    fixture = TestBed.createComponent(ToolPaneComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    component.tool = {
+      title: 'foo',
+      name: 'bar',
+      icon: 'icon'
+    };
+
     expect(component).toBeTruthy();
   });
 });

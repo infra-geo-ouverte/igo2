@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
-import { NavigatorPageModule } from './navigator-page/navigator-page.module';
+import { NavigatorModule, NavigatorRoutingModule } from './pages';
 
 import {} from 'jasmine';
 
@@ -11,7 +11,8 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        NavigatorPageModule
+        NavigatorModule,
+        NavigatorRoutingModule
       ],
       declarations: [
         AppComponent

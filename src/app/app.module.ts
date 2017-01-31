@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { AppRoutingModule } from './app-routing.module';
-import { NavigatorPageModule } from './navigator-page/navigator-page.module';
+import { NavigatorModule, NavigatorRoutingModule } from './pages';
 
 import { AppComponent } from './app.component';
 
@@ -12,11 +12,13 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([]),
 
     CoreModule,
     SharedModule.forRoot(),
-    AppRoutingModule,
-    NavigatorPageModule
+
+    NavigatorModule,
+    NavigatorRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

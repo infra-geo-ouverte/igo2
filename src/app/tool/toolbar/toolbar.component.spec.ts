@@ -3,21 +3,27 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { PrimaryPaneComponent } from './primary-pane.component';
+import { SharedModule } from '../../shared/shared.module';
+import { ToolbarComponent } from './toolbar.component';
+import { ToolbarItemComponent } from '../toolbar-item/toolbar-item.component';
 
-describe('PrimaryPaneComponent', () => {
-  let component: PrimaryPaneComponent;
-  let fixture: ComponentFixture<PrimaryPaneComponent>;
+describe('ToolbarComponent', () => {
+  let component: ToolbarComponent;
+  let fixture: ComponentFixture<ToolbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrimaryPaneComponent ]
+      imports: [ SharedModule ],
+      declarations: [
+        ToolbarComponent,
+        ToolbarItemComponent
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PrimaryPaneComponent);
+    fixture = TestBed.createComponent(ToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

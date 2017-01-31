@@ -1,0 +1,35 @@
+@require '../../../css/base.styl';
+
+$igo-panel-header-height = 50px;
+
+.igo-panel-header {
+  background-color: $igo-primary-color;
+  color: $igo-white;
+  height: $igo-panel-header-height;
+  padding: 12px;
+  text-align: center;
+}
+
+.igo-panel-header h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.igo-panel-header >>> [panellefticon] {
+  float: left;
+}
+
+.igo-panel-header >>> [panelrighticon] {
+  float: right;
+}
+
+.igo-panel-header >>> [panellefticon]:hover,
+.igo-panel-header >>> [panelrighticon]:hover {
+  cursor: pointer;
+}
+
+.igo-panel-content {
+  height: "calc(100% - %s)" % $igo-panel-header-height;
+  overflow: auto;
+  padding: $igo-padding;
+}
