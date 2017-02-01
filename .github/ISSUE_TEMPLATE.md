@@ -1,7 +1,7 @@
-**Description de votre environnement:**
-<!-- Sytèmes d'exploitation (OS), Navigateur (Browser) -->
+**Please tell us about your environment:**
+<!-- Operating system, Browser -->
 
-* **Version Igo:**
+* **Igo Version:**
 
 * **Node:**
 <!-- node --version -->
