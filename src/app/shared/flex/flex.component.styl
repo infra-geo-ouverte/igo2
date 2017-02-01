@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.igo-flex-main {
+  flex: 0 0 auto;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto; 
+  transition: height 0.25s ease-in;
+  overflow: hidden;
+}
+
+.igo-flex-fill {
+  flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.igo-flex-fill > div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

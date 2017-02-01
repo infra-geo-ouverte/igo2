@@ -1,6 +1,9 @@
 <md-sidenav-container>
 
-  <igo-backdrop [shown]="sidenav.opened" (click)="sidenav.close()"></igo-backdrop>
+  <igo-backdrop
+    [shown]="sidenav.opened"
+    (click)="sidenav.close()">  
+  </igo-backdrop>
 
   <button
     md-icon-button
@@ -13,19 +16,21 @@
 
   <igo-search-bar
     (key)="sidenav.open()"
-    (key)="selectToolByName('search')"></igo-search-bar>
+    (key)="selectToolByName('search')">  
+  </igo-search-bar>
 
   <igo-sidenav #sidenav [opened]="false">
-    <igo-flex-pane
-      #flexPane
+    <igo-flex
+      #flex
       igoFlexDirection="column"
       igoFlexInitial="60%"
-      igoFlexCollapsed="40px"
-      igoFlexExpanded="calc(100% - 40px)">
+      igoFlexCollapsed="61px"
+      igoFlexExpanded="calc(100% - 60px)">
 
       <div
-        id="igo-main-pane"
-        igoFlexMain>
+        id="igo-upper-panel"
+        class="igo-container">
+
         <div class="igo-content">
           <igo-toolbar
             [tools]="context.tools"
@@ -44,17 +49,27 @@
               (click)="goHome()">menu</md-icon>
 
             <igo-tool-pane
-              [tool]="selectedTool">
+              [tool]="selectedTool"
+              *ngIf="flex.state !== 'collapsed'">
             </igo-tool-pane>
           </igo-panel>
         </div>
+
       </div>
 
       <div
-        igoFlexFill>
+        igoFlexFill
+        id="igo-lower-panel"
+        class="igo-container">
+
+        <div
+          class="igo-content"
+          (click)="flex.collapse()">
+        </div>
+
       </div>
 
-    </igo-flex-pane>
+    </igo-flex>
   </igo-sidenav>
 
   <igo-map
