@@ -1,9 +1,9 @@
 import { TRANSLATIONS, TRANSLATIONS_FORMAT, LOCALE_ID } from '@angular/core';
-import {Config} from './config'
+import {Config} from './config';
 
 export function getTranslationProviders(): Promise<Object[]> {
   // Get the locale id from the global
-  //const locale = document['locale'] as string;
+  // const locale = document['locale'] as string;
   // return no providers if fail to get translation file for locale
   const noProviders: Object[] = [];
 
@@ -18,7 +18,7 @@ export function getTranslationProviders(): Promise<Object[]> {
   // Ex: 'locale/messages.es.xlf`
   const translationFile = `./locale/messages.${locale}.xlf`;
   return new Promise(function (resolve, reject) {
-    let xhr = new XMLHttpRequest;
+    const xhr = new XMLHttpRequest;
     xhr.open('GET', translationFile);
     xhr.onload = (data: any) => resolve(
       [
