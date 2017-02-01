@@ -1,3 +1,3 @@
 export const Config =  {
-    locale: "fr"
-}
+    locale: 'fr'
+};
