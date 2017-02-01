@@ -13,7 +13,7 @@ describe('ToolbarItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ SharedModule ]
+      imports: [ SharedModule ],
       declarations: [ ToolbarItemComponent ]
     })
     .compileComponents();
