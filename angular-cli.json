@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.25.5",
+    "version": "1.0.0-beta.28.3",
     "name": "igo"
   },
   "apps": [
@@ -12,10 +12,11 @@
       ],
       "index": "index.html",
       "main": "main.ts",
+      "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "igo",
-      "mobile": false,
+      "mobile": true,
       "styles": [
         "../node_modules/openlayers/dist/ol.css",
         "css/styles.styl",
@@ -40,6 +41,16 @@
       "config": "./protractor.conf.js"
     }
   },
+  "lint": [
+    {
+      "files": "src/**/*.ts",
+      "project": "src/tsconfig.json"
+    },
+    {
+      "files": "e2e/**/*.ts",
+      "project": "e2e/tsconfig.json"
+    }
+  ],
   "test": {
     "karma": {
       "config": "./karma.conf.js"
