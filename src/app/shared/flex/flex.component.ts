@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, ContentChild, ElementRef } from '@angular/core';
-
-import { FlexMainDirective } from './flex-main.directive';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 type FlexState =
   'initial'
@@ -12,11 +10,11 @@ type FlexDirection =
   | 'row';
 
 @Component({
-  selector: 'igo-flex-pane',
-  templateUrl: './flex-pane.component.html',
-  styleUrls: ['./flex-pane.component.styl']
+  selector: 'igo-flex',
+  templateUrl: './flex.component.html',
+  styleUrls: ['./flex.component.styl']
 })
-export class FlexPaneComponent implements OnInit {
+export class FlexComponent implements OnInit {
 
   @Input('igoFlexInitial') igoFlexInitial: string;
   @Input('igoFlexCollapsed') igoFlexCollapsed: string = '0';
@@ -24,7 +22,7 @@ export class FlexPaneComponent implements OnInit {
   @Input('igoFlexState') igoFlexState: FlexState = 'initial';
   @Input('igoFlexDirection') igoFlexDirection: FlexDirection = 'column';
 
-  @ContentChild(FlexMainDirective) main;
+  @ViewChild('flexMain') main;
 
   private _state: FlexState = 'initial';
 
@@ -47,19 +45,27 @@ export class FlexPaneComponent implements OnInit {
   constructor(private el: ElementRef) { }
 
   ngOnInit() {
-    if (this.main === undefined) {
-      throw new Error('No main directive found.');
-    }
-
     this.el.nativeElement.style.flexDirection = this.igoFlexDirection;
     this.state = this.igoFlexState;
   }
 
+  collapse() {
+    this.state = 'collapsed';
+  }
+
+  expand() {
+    this.state = 'expanded';
+  }
+
+  reset() {
+    this.state = 'initial';
+  }
+
   private setSize(size: string) {
     if (this.igoFlexDirection === 'column') {
-      this.main.setHeight(size);
+      this.main.nativeElement.style.height = size;
     } else if (this.igoFlexDirection === 'row') {
-      this.main.setWidth(size);
+      this.main.nativeElement.style.width = size;
     }
   }
 

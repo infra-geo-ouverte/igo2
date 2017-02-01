@@ -60,9 +60,18 @@ button {
   background-color: $igo-white;
 }
 
-.igo-content {
-  height: "calc(100% - 2 * %s)" % $igo-padding;
+.igo-container {
+  /*height: "calc(100% - 2 * %s)" % $igo-padding;*/
   width: "calc(100% - 2 * %s)" % $igo-padding;
-  margin: $igo-padding;
+  height: 100%;
+  padding: $igo-padding 0;
+  margin: 0 $igo-padding;
+  overflow: hidden;
+  position: relative;
+}
+
+.igo-content {
+  height: 100%;
+  width: 100%;
   overflow: auto;
 }

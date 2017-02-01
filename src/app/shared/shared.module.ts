@@ -6,9 +6,7 @@ import { MaterialModule } from '@angular/material';
 import { MdIconModule } from '@angular/material/icon';
 
 import { BackdropComponent } from './backdrop/backdrop.component';
-import { FlexPaneComponent } from './flex-pane/flex-pane.component';
-import { FlexMainDirective } from './flex-pane/flex-main.directive';
-import { FlexFillDirective } from './flex-pane/flex-fill.directive';
+import { FlexComponent } from './flex/flex.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { PanelComponent } from './panel/panel.component';
 
@@ -21,9 +19,7 @@ import { PanelComponent } from './panel/panel.component';
   ],
   declarations: [
     BackdropComponent,
-    FlexPaneComponent,
-    FlexMainDirective,
-    FlexFillDirective,
+    FlexComponent,
     SidenavComponent,
     PanelComponent
   ],
@@ -34,9 +30,7 @@ import { PanelComponent } from './panel/panel.component';
     MaterialModule,
     MdIconModule,
     BackdropComponent,
-    FlexPaneComponent,
-    FlexMainDirective,
-    FlexFillDirective,
+    FlexComponent,
     SidenavComponent,
     PanelComponent
   ]
