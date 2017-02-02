@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { LayerOptions } from './layer.interface';
 import { Layer } from './layer.model';
 import { OSMLayer } from './layer-osm.model';
+import { XYZLayer } from './layer-xyz.model';
 
 @Injectable()
 export class LayerService {
 
   private layerClassesMapping = {
-    'osm': OSMLayer
+    'osm': OSMLayer,
+    'xyz': XYZLayer
   };
 
   constructor() { }
