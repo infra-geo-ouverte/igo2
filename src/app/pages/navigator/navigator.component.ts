@@ -35,7 +35,7 @@ export class NavigatorComponent implements OnInit {
           name: 'MSP',
           type: 'xyz',
           source :{
-              url:"http://spssogl97d.sso.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
+              url:"http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
               attribution: new ol.Attribution({
                 html: '© Gouvernement du Québec <a href="http://www.droitauteur.gouv.qc.ca/copyright.php">'
               }),
