@@ -1,5 +1,5 @@
 **Please check if the PR fulfills these requirements**
-- [ ] The commit message follows our guidelines:https://github.com/infra-geo-ouverte/igo2/blob/igouverte/.github/CONTRIBUTING.md#git-commit-guidelines
+- [ ] The commit message follows our guidelines:https://github.com/infra-geo-ouverte/igo2/blob/master/.github/CONTRIBUTING.md#git-commit-guidelines
 - [ ] Tests for the changes have been added (for bug fixes / features)
 - [ ] Docs have been added / updated (for bug fixes / features)
 
