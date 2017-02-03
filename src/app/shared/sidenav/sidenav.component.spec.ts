@@ -4,8 +4,6 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { MaterialModule } from '@angular/material';
-import { MdIconModule } from '@angular/material/icon';
-
 import { SidenavComponent } from './sidenav.component';
 
 describe('SidenavComponent', () => {
@@ -15,8 +13,7 @@ describe('SidenavComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModule.forRoot(),
-        MdIconModule.forRoot()
+        MaterialModule.forRoot()
       ],
       declarations: [ SidenavComponent ]
     })
