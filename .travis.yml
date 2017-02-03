@@ -27,7 +27,7 @@ before_script:
 #  - npm install -g @angular/cli
 #  - npm install -g karma
   - npm install
-  - npm build.prod
+  - npm run build.prod
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "ng serve 2>&1 &"; fi  # Protractor CI
 
 #branches:
