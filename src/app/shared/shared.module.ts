@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { MdIconModule } from '@angular/material/icon';
 
 import { BackdropComponent } from './backdrop/backdrop.component';
 import { FlexComponent } from './flex/flex.component';
@@ -13,7 +14,8 @@ import { PanelComponent } from './panel/panel.component';
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule
+    MaterialModule.forRoot(),
+    MdIconModule.forRoot()
   ],
   declarations: [
     BackdropComponent,
@@ -24,7 +26,9 @@ import { PanelComponent } from './panel/panel.component';
   exports: [
     CommonModule,
     FormsModule,
+
     MaterialModule,
+    MdIconModule,
     BackdropComponent,
     FlexComponent,
     SidenavComponent,
