@@ -3,7 +3,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SharedModule } from '../../shared/shared.module';
+import { MaterialModule } from '@angular/material';
+import { MdIconModule } from '@angular/material/icon';
+
+import { StoreModule } from '@ngrx/store';
+import { provideStore } from '@ngrx/store';
+
+import { selectedTool } from '../../reducers';
 import { ToolbarComponent } from './toolbar.component';
 import { ToolbarItemComponent } from '../toolbar-item/toolbar-item.component';
 
@@ -13,10 +19,16 @@ describe('ToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ SharedModule ],
+      imports: [
+        MaterialModule.forRoot(),
+        MdIconModule.forRoot()
+      ],
       declarations: [
         ToolbarComponent,
         ToolbarItemComponent
+      ],
+      providers: [
+        provideStore({ selectedTool })
       ]
     })
     .compileComponents();

@@ -1,27 +1,32 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Tool } from '../../tool/shared/tool.interface';
-import { NavigatorStore } from './navigator.store';
+import { ToolService } from '../../core/tool.service';
+
+import { AppStore } from '../../app.store';
 
 @Component({
   selector: 'igo-navigator',
   templateUrl: './navigator.component.html',
-  styleUrls: ['./navigator.component.styl'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./navigator.component.styl']
 })
-export class NavigatorComponent implements OnInit {
+export class NavigatorComponent {
+
   context: any;
-
   selectedTool: Tool;
+  searchTool: Tool;
+  tools: Tool[] = [];
 
-  constructor(private store: Store<NavigatorStore>) {
+  constructor(private store: Store<AppStore>,
+              private toolService: ToolService) {
+
     store
-      .select<Tool>(s => s.selectedTool)
-      .subscribe(state => this.selectedTool = state);
-  }
+      .select(s => s.selectedTool)
+      .subscribe(state => {
+          this.selectedTool = state;
+       });
 
-  ngOnInit() {
     this.context = {
       map: {
         view: {
@@ -54,9 +59,7 @@ export class NavigatorComponent implements OnInit {
           icon: 'local_offer'
         },
         {
-          name: 'search',
-          title: 'Search Results',
-          icon: 'search'
+          name: 'search'
         },
         {
           name: 'map',
@@ -90,19 +93,25 @@ export class NavigatorComponent implements OnInit {
         }
       ]
     };
+
+    let tool;
+    for (const contextTool of this.context.tools) {
+      // TODO: Remove the " || {}" when more tool will be defined
+      tool = this.toolService.getTool(contextTool.name) || {};
+      if (tool !== undefined) {
+        this.tools.push(Object.assign(tool, contextTool));
+      }
+    }
+
+    this.searchTool = this.tools.find(t => t.name === 'search');
   }
 
-  selectTool(tool?: Tool) {
-    this.store.dispatch({ type: 'SELECT_TOOL', payload: tool });
+  selectTool(tool: Tool) {
+    this.store.dispatch({type: 'SELECT_TOOL', payload: tool});
   }
 
   unselectTool() {
     this.store.dispatch({ type: 'UNSELECT_TOOL' });
-  }
-
-  selectToolByName(name: string) {
-    const tools = this.context.tools || [];
-    this.selectTool(tools.find(tool => tool.name === name));
   }
 
   goBack() {

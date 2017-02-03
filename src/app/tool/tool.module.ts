@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ToolbarItemComponent } from './toolbar-item/toolbar-item.component';
-import { ToolPaneComponent } from './tool-pane/tool-pane.component';
+import { ToolboxComponent } from './toolbox/toolbox.component';
 
 @NgModule({
   imports: [
@@ -11,12 +11,12 @@ import { ToolPaneComponent } from './tool-pane/tool-pane.component';
   ],
   exports: [
     ToolbarComponent,
-    ToolPaneComponent
+    ToolboxComponent
   ],
   declarations: [
     ToolbarComponent,
     ToolbarItemComponent,
-    ToolPaneComponent
+    ToolboxComponent
   ]
 })
 export class ToolModule { }

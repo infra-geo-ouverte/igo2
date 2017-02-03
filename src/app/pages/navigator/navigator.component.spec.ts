@@ -10,9 +10,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { MapModule } from '../../map/map.module';
 import { SearchModule } from '../../search/search.module';
 import { ToolModule } from '../../tool/tool.module';
-
+import { ToolService } from '../../core/tool.service';
 import { selectedTool } from '../../reducers';
-
 import { NavigatorComponent } from './navigator.component';
 
 describe('NavigatorComponent', () => {
@@ -31,7 +30,8 @@ describe('NavigatorComponent', () => {
         NavigatorComponent
       ],
       providers: [
-        provideStore({ selectedTool })
+        provideStore({ selectedTool }),
+        ToolService
       ]
     })
     .compileComponents();
