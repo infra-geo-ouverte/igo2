@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     RouterModule.forRoot([]),
 
-    CoreModule,
+    CoreModule.forRoot(),
     SharedModule.forRoot(),
 
     NavigatorModule,
