@@ -51,23 +51,19 @@ export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy {
       return;
     }
 
+    const toolCls = this.toolService.getToolClass(this.tool.name);
+    if (toolCls === undefined) {
+      return;
+    }
+
     this.destroy();
 
-    let component, factory, toolCls;
+    const factory = this.resolver.resolveComponentFactory(<any>toolCls);
+    const component = this.target.createComponent(factory);
 
-    for (const tool of this.tools) {
-      toolCls = this.toolService.getToolClass(tool.name);
-      if (this.tool.name !== tool.name || toolCls === undefined) {
-        continue;
-      }
-
-      factory = this.resolver.resolveComponentFactory(toolCls);
-      component = this.target.createComponent(factory);
-      component.instance.name = tool.name;
-      component.instance.options = tool.options;
-
-      this.component = component as ComponentRef<ToolComponent>;
-    }
+    this.component = component as ComponentRef<ToolComponent>;
+    this.component.instance.name = this.tool.name;
+    this.component.instance.options = this.tool.options;
 
     this.cdRef.detectChanges();
   }
