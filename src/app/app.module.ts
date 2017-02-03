@@ -7,6 +7,8 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
 
+import { ToolService } from './core/tool.service';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -22,7 +24,9 @@ import { AppComponent } from './app.component';
     NavigatorModule,
     NavigatorRoutingModule
   ],
-  providers: [],
+  providers: [
+    ToolService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

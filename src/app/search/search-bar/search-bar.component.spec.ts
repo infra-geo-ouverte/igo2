@@ -3,8 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SharedModule } from '../../shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { provideStore } from '@ngrx/store';
 
+import { SharedModule } from '../../shared/shared.module';
+import { selectedTool } from '../../reducers';
 import { SearchBarComponent } from './search-bar.component';
 
 describe('SearchBarComponent', () => {
@@ -16,7 +19,10 @@ describe('SearchBarComponent', () => {
       imports: [
         SharedModule
       ],
-      declarations: [ SearchBarComponent ]
+      declarations: [ SearchBarComponent ],
+      providers: [
+        provideStore({ selectedTool })
+      ]
     })
     .compileComponents();
   }));

@@ -15,8 +15,8 @@
   </button>
 
   <igo-search-bar
-    (key)="sidenav.open()"
-    (key)="selectToolByName('search')">  
+    [tool]="searchTool"
+    (key)="sidenav.open()">  
   </igo-search-bar>
 
   <igo-sidenav #sidenav [opened]="false">
@@ -33,8 +33,7 @@
 
         <div class="igo-content">
           <igo-toolbar
-            [tools]="context.tools"
-            (toolSelected)="selectTool($event)"
+            [tools]="tools"
             *ngIf="!selectedTool">  
           </igo-toolbar>
 
@@ -48,10 +47,11 @@
               panelRightIcon
               (click)="goHome()">menu</md-icon>
 
-            <igo-tool-pane
+            <igo-toolbox
+              [tools]="tools"
               [tool]="selectedTool"
               *ngIf="flex.state !== 'collapsed'">
-            </igo-tool-pane>
+            </igo-toolbox>
           </igo-panel>
         </div>
 
