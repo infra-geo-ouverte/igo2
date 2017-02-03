@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LanguageService } from './core/language/language.service';
 
 @Component({
   selector: 'igo-app',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.styl']
 })
 export class AppComponent {
-  title = 'igo works!';
+  constructor(private languageService: LanguageService) { }
 }

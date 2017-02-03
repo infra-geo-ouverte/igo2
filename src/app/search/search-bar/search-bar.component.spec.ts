@@ -1,10 +1,10 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { provideStore } from '@ngrx/store';
 
+import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
 import { selectedTool } from '../../reducers';
 import { SearchBarComponent } from './search-bar.component';
@@ -16,6 +16,7 @@ describe('SearchBarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        TestModule,
         SharedModule
       ],
       declarations: [ SearchBarComponent ],

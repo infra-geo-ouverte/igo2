@@ -1,6 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { LanguageService } from './core/language/language.service';
 
+import { TestModule } from './test.module';
 import { AppComponent } from './app.component';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
 
@@ -12,11 +14,13 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         NavigatorModule,
+        TestModule,
         NavigatorRoutingModule
       ],
       declarations: [
         AppComponent
       ],
+      providers: [LanguageService]
     });
     TestBed.compileComponents();
   });
@@ -27,9 +31,4 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'igo works!'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('igo works!');
-  }));
 });

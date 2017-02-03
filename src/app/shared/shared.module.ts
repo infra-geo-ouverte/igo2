@@ -1,8 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import {TranslateModule} from 'ng2-translate';
 
 import { BackdropComponent } from './backdrop/backdrop.component';
 import { FlexComponent } from './flex/flex.component';
@@ -12,6 +12,7 @@ import { PanelComponent } from './panel/panel.component';
 @NgModule({
   imports: [
     CommonModule,
+    TranslateModule,
     FormsModule,
     MaterialModule
   ],
@@ -23,6 +24,7 @@ import { PanelComponent } from './panel/panel.component';
   ],
   exports: [
     CommonModule,
+    TranslateModule,
     FormsModule,
     MaterialModule,
     BackdropComponent,

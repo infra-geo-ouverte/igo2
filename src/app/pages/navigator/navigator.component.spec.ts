@@ -2,10 +2,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { MaterialModule } from '@angular/material';
-
 import { provideStore } from '@ngrx/store';
 
+import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
 import { MapModule } from '../../map/map.module';
 import { SearchModule } from '../../search/search.module';
@@ -21,10 +20,10 @@ describe('NavigatorComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        TestModule,
         MapModule,
         SearchModule,
         ToolModule,
-        MaterialModule.forRoot(),
         SharedModule
       ],
       declarations: [

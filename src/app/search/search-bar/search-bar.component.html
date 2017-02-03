@@ -1,6 +1,6 @@
 <md-input-container class="igo-search-bar">
   <input
     md-input
-    placeholder="Search for an address or a place"
+    [placeholder]="'Search for an address or a place' | translate"
     (keyup)="onKey($event)">
 </md-input-container>

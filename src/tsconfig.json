@@ -17,7 +17,6 @@
   },
   "exclude": [ "test.ts" ],
   "angularCompilerOptions": {
-    "genDir": "locale",
     "skipMetadataEmit" : true
   }
 }
