@@ -2,6 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { MaterialModule } from '@angular/material';
 
 import { SharedModule } from '../../shared/shared.module';
 
@@ -13,7 +14,7 @@ describe('ToolbarItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ SharedModule ],
+      imports: [ MaterialModule.forRoot(), SharedModule ],
       declarations: [ ToolbarItemComponent ]
     })
     .compileComponents();

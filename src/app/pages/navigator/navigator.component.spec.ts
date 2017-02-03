@@ -2,8 +2,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { MaterialModule } from '@angular/material';
 
-import { StoreModule } from '@ngrx/store';
 import { provideStore } from '@ngrx/store';
 
 import { SharedModule } from '../../shared/shared.module';
@@ -25,6 +25,7 @@ describe('NavigatorComponent', () => {
         MapModule,
         SearchModule,
         ToolModule,
+        MaterialModule.forRoot(),
         SharedModule
       ],
       declarations: [
