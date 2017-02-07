@@ -3,7 +3,7 @@ export const selectedTool = (state: any = null, {type, payload}) => {
     case 'SELECT_TOOL':
       return Object.assign({}, payload);
     case 'UNSELECT_TOOL':
-      return null;
+      return undefined;
     default:
       return state;
   }

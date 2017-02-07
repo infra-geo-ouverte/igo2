@@ -2,40 +2,36 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
-import { provideAppStore } from '../../core/core.module';
+import { MaterialModule } from '@angular/material';
 
 import { SharedModule } from '../../shared/shared.module';
-import { SearchToolComponent } from './search-tool.component';
-import { SearchResultComponent } from '../search-result/search-result.component';
+import { SearchResultComponent } from './search-result.component';
 
-describe('SearchToolComponent', () => {
-  let component: SearchToolComponent;
-  let fixture: ComponentFixture<SearchToolComponent>;
+describe('SearchResultComponent', () => {
+  let component: SearchResultComponent;
+  let fixture: ComponentFixture<SearchResultComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        MaterialModule.forRoot(),
         SharedModule
       ],
-      declarations: [
-        SearchToolComponent,
-        SearchResultComponent
-      ],
-      providers: [
-        provideAppStore()
-      ]
+      declarations: [ SearchResultComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchToolComponent);
+    fixture = TestBed.createComponent(SearchResultComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    component.result = {
+      title: 'foo',
+      icon: 'bar'
+    };
     expect(component).toBeTruthy();
   });
 });

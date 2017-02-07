@@ -3,8 +3,8 @@ export abstract class ToolComponent {
   static name_: string;
   static title: string;
   static icon: string;
-  static defaultOptions: any = {};
+  static defaultOptions: any;
 
-  options?: any = {};
+  options?: any;
   name?: string;
 }

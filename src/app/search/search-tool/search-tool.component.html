@@ -1,1 +1,5 @@
-<igo-search-results></igo-search-results>
+<md-list> 
+  <template ngFor let-result [ngForOf]="results">
+    <igo-search-result [result]="result"></igo-search-result>
+  </template>
+</md-list>
