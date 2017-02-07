@@ -3,10 +3,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { provideStore } from '@ngrx/store';
+import {
+   provideAppStore,
+   provideSearchAdapter,
+   provideSearchAdapterService
+} from '../../core/core.module';
+
+import { SearchService } from '../../core/search.service';
 
 import { SharedModule } from '../../shared/shared.module';
-import { selectedTool } from '../../reducers';
 import { SearchBarComponent } from './search-bar.component';
 
 describe('SearchBarComponent', () => {
@@ -20,7 +25,10 @@ describe('SearchBarComponent', () => {
       ],
       declarations: [ SearchBarComponent ],
       providers: [
-        provideStore({ selectedTool })
+        provideAppStore(),
+        provideSearchAdapterService(),
+        provideSearchAdapter(),
+        SearchService
       ]
     })
     .compileComponents();

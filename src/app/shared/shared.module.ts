@@ -24,6 +24,7 @@ import { PanelComponent } from './panel/panel.component';
   exports: [
     CommonModule,
     FormsModule,
+    HttpModule,
     MaterialModule,
     BackdropComponent,
     FlexComponent,

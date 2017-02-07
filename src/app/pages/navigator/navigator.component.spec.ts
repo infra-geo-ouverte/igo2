@@ -4,7 +4,13 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 
-import { provideStore } from '@ngrx/store';
+import {
+   provideAppStore,
+   provideSearchAdapter,
+   provideSearchAdapterService
+} from '../../core/core.module';
+
+import { SearchService } from '../../core/search.service';
 
 import { SharedModule } from '../../shared/shared.module';
 import { MapModule } from '../../map/map.module';
@@ -31,7 +37,10 @@ describe('NavigatorComponent', () => {
         NavigatorComponent
       ],
       providers: [
-        provideStore({ selectedTool }),
+        provideAppStore(),
+        provideSearchAdapterService(),
+        provideSearchAdapter(),
+        SearchService,
         ToolService
       ]
     })

@@ -9,7 +9,7 @@ export class ToolService {
   static toolClasses: Array<typeof ToolComponent> = [];
   static tools: Array<Tool> = [];
 
-  static register(cls: typeof ToolComponent) {
+  static register(cls: any) {
     const tool = {
       name: cls.name_,
       title: cls.title,
