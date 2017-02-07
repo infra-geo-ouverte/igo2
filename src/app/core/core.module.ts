@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Http } from '@angular/http';
 import { provideStore } from '@ngrx/store';
 
-import { selectedTool } from '../reducers';
-import { searchResults } from '../reducers';
+import { selectedTool, searchResults } from '../reducers';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { ToolService } from './tool.service';
