@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
     SharedModule.forRoot(),
 
     NavigatorModule,
-    NavigatorRoutingModule
+    NavigatorRoutingModule,
   ],
   bootstrap: [AppComponent]
 })

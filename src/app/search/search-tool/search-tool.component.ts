@@ -33,6 +33,10 @@ export class SearchToolComponent implements ToolComponent, OnInit {
       });
   }
 
+  selectResult(result: SearchResult) {
+    this.store.dispatch({type: 'SELECT_RESULT', payload: result});
+  }
+
 }
 
 ToolService.register(SearchToolComponent);

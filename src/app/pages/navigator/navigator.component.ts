@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Tool } from '../../tool/shared/tool.interface';
 import { ToolService } from '../../core/tool.service';
+import { SearchResult } from '../../search/shared/search-result.interface';
 
 import { AppStore } from '../../app.store';
 
@@ -11,20 +12,31 @@ import { AppStore } from '../../app.store';
   templateUrl: './navigator.component.html',
   styleUrls: ['./navigator.component.styl']
 })
-export class NavigatorComponent {
+export class NavigatorComponent implements OnInit {
 
   context: any;
+  tools: Tool[] = [];
   selectedTool: Tool;
   searchTool: Tool;
-  tools: Tool[] = [];
+
+  // This will go there for now but will probably move later
+  selectedResult: SearchResult;
 
   constructor(private store: Store<AppStore>,
               private toolService: ToolService) {
+  }
 
-    store
+  ngOnInit() {
+    this.store
       .select(s => s.selectedTool)
       .subscribe(state => {
           this.selectedTool = state;
+       });
+
+    this.store
+      .select(s => s.selectedResult)
+      .subscribe(state => {
+          this.selectedResult = state;
        });
 
     this.context = {

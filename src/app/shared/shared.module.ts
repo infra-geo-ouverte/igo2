@@ -8,6 +8,9 @@ import { BackdropComponent } from './backdrop/backdrop.component';
 import { FlexComponent } from './flex/flex.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { PanelComponent } from './panel/panel.component';
+import { ListComponent } from './list/list.component';
+import { ListItemDirective } from './list/list-item.directive';
+import { ClickoutDirective } from './directives/clickout.directive';
 
 @NgModule({
   imports: [
@@ -19,7 +22,10 @@ import { PanelComponent } from './panel/panel.component';
     BackdropComponent,
     FlexComponent,
     SidenavComponent,
-    PanelComponent
+    PanelComponent,
+    ListComponent,
+    ListItemDirective,
+    ClickoutDirective
   ],
   exports: [
     CommonModule,
@@ -29,7 +35,10 @@ import { PanelComponent } from './panel/panel.component';
     BackdropComponent,
     FlexComponent,
     SidenavComponent,
-    PanelComponent
+    PanelComponent,
+    ListComponent,
+    ListItemDirective,
+    ClickoutDirective
   ]
 })
 export class SharedModule {
