@@ -1,5 +1,9 @@
-<md-list> 
-  <template ngFor let-result [ngForOf]="results">
-    <igo-search-result [result]="result"></igo-search-result>
+<igo-list [navigation]="true"> 
+  <template ngFor let-result [ngForOf]="results" let-i="index">
+    <igo-search-result
+    	igoListItem tabindex="{{i}}"
+    	[result]="result"
+    	(onSelect)="selectResult(result)">		
+    </igo-search-result>
   </template>
-</md-list>
+</igo-list>

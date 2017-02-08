@@ -1,0 +1,23 @@
+@require '../../../css/base.styl';
+
+md-list {
+  padding-top: 0;
+}
+
+:host >>> [igolistitem] md-list-item [md-list-avatar] {
+  height: auto;
+  width: auto;
+}
+
+:host >>> [igolistitem]:hover md-list-item, {
+  background-color: $igo-secondary-color-hover;
+  cursor: pointer;
+}
+
+:host >>> [igolistitem].igo-selected md-list-item {
+  background-color: $igo-secondary-color;
+}
+
+:host >>> [igolistitem]:focus {
+  outline: none;
+}

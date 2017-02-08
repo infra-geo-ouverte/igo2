@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Http } from '@angular/http';
 import { provideStore } from '@ngrx/store';
 
-import { selectedTool, searchResults } from '../reducers';
+import { selectedTool, searchResults, selectedResult } from '../reducers';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { ToolService } from './tool.service';
@@ -34,7 +34,8 @@ export function provideSearchAdapter() {
 export function provideAppStore() {
   return provideStore({
     selectedTool,
-    searchResults
+    searchResults,
+    selectedResult
   });
 }
 
