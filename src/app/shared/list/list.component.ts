@@ -14,6 +14,7 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
 
   navigationEnabled: boolean;
   selectedItem: ListItemDirective;
+  focusedItem: ListItemDirective;
   subscriptions: Subscription[] = [];
 
   @Input('navigation') navigation: boolean = true;
@@ -29,6 +30,8 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
       if (event.keyCode === 38 || event.keyCode === 40) {
         event.preventDefault();
         this.navigate(event.keyCode);
+      } else if (event.keyCode === 13) {
+        this.select(this.focusedItem);
       }
     }
   }
@@ -45,13 +48,13 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     this.listItems.changes.subscribe(items => {
       if (this.navigation) {
         this.enableNavigation();
-        this.select(items.first);
+        this.focus(items.first);
       }
 
       this.unsubscribe();
       items.forEach(item => {
         this.subscriptions.push(
-          item.onClick.subscribe(item_ => this.select(item_)));
+          item.clickItem.subscribe(item_ => this.select(item_)));
       }, this);
     });
   }
@@ -65,39 +68,59 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     this.subscriptions = [];
   }
 
-  select(item?: ListItemDirective) {
-    this.unselect();
+  focus(item?: ListItemDirective) {
+    this.unfocus();
 
     // We need to make this check because dynamic
     // lists such as in the search tool may fail
     if (item !== undefined) {
+      item.focus();
+      this.focusedItem = item;
+    }
+  }
+
+  unfocus() {
+    if (this.focusedItem !== undefined) {
+      this.focusedItem.unfocus();
+    }
+
+    this.focusedItem = undefined;
+  }
+
+  focusNext() {
+    const index = this.getFocusedIndex();
+    const items = this.listItems.toArray();
+    if (index !== items.length - 1) {
+      this.focus(items[index + 1]);
+    }
+  }
+
+  focusPrevious() {
+    const index = this.getFocusedIndex();
+    const items = this.listItems.toArray();
+    if (index !== 0) {
+      this.focus(items[index - 1]);
+    }
+  }
+
+  select(item?: ListItemDirective) {
+    this.unselect();
+
+    if (item !== undefined) {
       item.select();
       this.selectedItem = item;
+      this.focusedItem = item;
     }
   }
 
   unselect() {
+    this.unfocus();
+
     if (this.selectedItem !== undefined) {
       this.selectedItem.unselect();
     }
 
     this.selectedItem = undefined;
-  }
-
-  selectNext() {
-    const index = this.getSelectedIndex();
-    const items = this.listItems.toArray();
-    if (index !== items.length - 1) {
-      this.select(items[index + 1]);
-    }
-  }
-
-  selectPrevious() {
-    const index = this.getSelectedIndex();
-    const items = this.listItems.toArray();
-    if (index !== 0) {
-      this.select(items[index - 1]);
-    }
   }
 
   enableNavigation() {
@@ -108,22 +131,22 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     this.navigationEnabled = false;
   }
 
-  private getSelectedIndex () {
+  private getFocusedIndex () {
     return this.listItems.toArray().findIndex(
-      item => item === this.selectedItem);
+      item => item === this.focusedItem);
   }
 
   private navigate(key: number) {
-    if (this.selectedItem === undefined) {
+    if (this.focusedItem === undefined) {
       return;
     }
 
     switch (key) {
       case 38:
-        this.selectPrevious();
+        this.focusPrevious();
         break;
       case 40:
-        this.selectNext();
+        this.focusNext();
         break;
       default:
         break;

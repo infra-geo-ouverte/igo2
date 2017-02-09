@@ -8,17 +8,28 @@ export class ListItemDirective {
 
   static cls: string = 'igo-selected';
 
-  @Output() onClick: EventEmitter<ListItemDirective> = new EventEmitter();
-  @Output() onSelect: EventEmitter<ListItemDirective> = new EventEmitter();
-  @Output() onUnselect: EventEmitter<ListItemDirective> = new EventEmitter();
+  @Output()
+  clickItem: EventEmitter<ListItemDirective> = new EventEmitter();
+
+  @Output()
+  focusItem: EventEmitter<ListItemDirective> = new EventEmitter();
+
+  @Output()
+  unfocusItem: EventEmitter<ListItemDirective> = new EventEmitter();
+
+  @Output()
+  selectItem: EventEmitter<ListItemDirective> = new EventEmitter();
+
+  @Output()
+  unselectItem: EventEmitter<ListItemDirective> = new EventEmitter();
 
   @HostListener('click') click() {
-    this.onClick.emit(this);
+    this.clickItem.emit(this);
   }
 
   constructor(public renderer: Renderer, private el: ElementRef) { }
 
-  select() {
+  focus() {
     this.renderer.setElementClass(
       this.el.nativeElement, ListItemDirective.cls, true);
 
@@ -37,12 +48,22 @@ export class ListItemDirective {
       this.renderer.invokeElementMethod(activeElement, 'focus', []);
     }
 
-    this.onSelect.emit();
+    this.focusItem.emit();
+  }
+
+  unfocus() {
+    this.renderer.setElementClass(
+      this.el.nativeElement, ListItemDirective.cls, false);
+    this.unfocusItem.emit();
+  }
+
+  select() {
+    this.focus();
+    this.selectItem.emit();
   }
 
   unselect() {
-    this.renderer.setElementClass(
-      this.el.nativeElement, ListItemDirective.cls, false);
-    this.onUnselect.emit();
+    this.unfocus();
+    this.unselectItem.emit();
   }
 }

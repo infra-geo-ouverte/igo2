@@ -21,12 +21,14 @@ export class SearchBarComponent implements OnInit {
   @Input('tool') tool: Tool;
   @Output('key') key = new EventEmitter<string>();
 
+  value?: string;
+
   private searchTermsStream = new Subject<string>();
 
   constructor(private store: Store<AppStore>,
               private searchService: SearchService) {}
 
-  onKey(event: KeyboardEvent) {
+  keyup(event: KeyboardEvent) {
     const term = (<HTMLInputElement>event.target).value;
     this.key.emit(term);
 
@@ -48,5 +50,11 @@ export class SearchBarComponent implements OnInit {
       .distinctUntilChanged()
       .subscribe(term =>
         this.searchService.search(term));
+
+    this.store
+      .select(s => s.selectedResult)
+      .subscribe(state => {
+          this.value = state ? state.title : undefined;
+       });
   }
 }

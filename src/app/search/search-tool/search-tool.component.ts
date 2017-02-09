@@ -37,6 +37,10 @@ export class SearchToolComponent implements ToolComponent, OnInit {
     this.store.dispatch({type: 'SELECT_RESULT', payload: result});
   }
 
+  focusResult(result: SearchResult) {
+    this.store.dispatch({type: 'FOCUS_RESULT', payload: result});
+  }
+
 }
 
 ToolService.register(SearchToolComponent);
