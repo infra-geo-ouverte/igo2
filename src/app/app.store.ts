@@ -5,4 +5,5 @@ export interface AppStore {
   selectedTool: Tool;
   searchResults: any;
   selectedResult: SearchResult;
+  focusedResult: SearchResult;
 }

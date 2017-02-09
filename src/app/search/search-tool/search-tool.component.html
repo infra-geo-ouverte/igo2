@@ -1,9 +1,12 @@
 <igo-list [navigation]="true"> 
   <template ngFor let-result [ngForOf]="results" let-i="index">
     <igo-search-result
-    	igoListItem tabindex="{{i}}"
+    	igoListItem
+    	tabindex="{{i}}"
+    	[focused]="result.focused"
     	[result]="result"
-    	(onSelect)="selectResult(result)">		
+    	(focusItem)="focusResult(result)"
+    	(selectItem)="selectResult(result)">
     </igo-search-result>
   </template>
 </igo-list>

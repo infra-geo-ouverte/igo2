@@ -5,7 +5,6 @@ import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/operator/debounceTime.js';
 import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
 
 import { Tool } from '../../tool/shared/tool.interface';
 import { SearchService} from '../../core/search.service';
@@ -21,17 +20,25 @@ export class SearchBarComponent implements OnInit {
   @Input('tool') tool: Tool;
   @Output('key') key = new EventEmitter<string>();
 
+  term?: string;
+
   private searchTermsStream = new Subject<string>();
 
   constructor(private store: Store<AppStore>,
               private searchService: SearchService) {}
 
-  onKey(event: KeyboardEvent) {
+  keyup(event: KeyboardEvent) {
     const term = (<HTMLInputElement>event.target).value;
-    this.key.emit(term);
 
-    this.selectSearchTool();
-    this.search(term);
+    // Prevent searching the same thing twice
+    // and searching when clicking "enter" on a search result
+    if (term !== this.term) {
+      this.key.emit(term);
+      this.selectSearchTool();
+      this.search(term);
+    }
+
+    this.term = term;
   }
 
   selectSearchTool() {
@@ -46,7 +53,12 @@ export class SearchBarComponent implements OnInit {
     this.searchTermsStream
       .debounceTime(300)
       .distinctUntilChanged()
-      .subscribe(term =>
-        this.searchService.search(term));
+      .subscribe(term => this.searchService.search(term));
+
+    this.store
+      .select(s => s.selectedResult)
+      .subscribe(state => {
+        this.term = state ? state.title : undefined;
+      });
   }
 }

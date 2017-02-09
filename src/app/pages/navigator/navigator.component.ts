@@ -20,7 +20,7 @@ export class NavigatorComponent implements OnInit {
   searchTool: Tool;
 
   // This will go there for now but will probably move later
-  selectedResult: SearchResult;
+  focusedResult: SearchResult;
 
   constructor(private store: Store<AppStore>,
               private toolService: ToolService) {
@@ -34,9 +34,9 @@ export class NavigatorComponent implements OnInit {
        });
 
     this.store
-      .select(s => s.selectedResult)
+      .select(s => s.focusedResult)
       .subscribe(state => {
-          this.selectedResult = state;
+          this.focusedResult = state;
        });
 
     this.context = {
