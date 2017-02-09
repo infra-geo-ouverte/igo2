@@ -20,7 +20,7 @@ export class SearchBarComponent implements OnInit {
   @Input('tool') tool: Tool;
   @Output('key') key = new EventEmitter<string>();
 
-  value?: string;
+  term?: string;
 
   private searchTermsStream = new Subject<string>();
 
@@ -29,10 +29,16 @@ export class SearchBarComponent implements OnInit {
 
   keyup(event: KeyboardEvent) {
     const term = (<HTMLInputElement>event.target).value;
-    this.key.emit(term);
 
-    this.selectSearchTool();
-    this.search(term);
+    // Prevent searching the same thing twice
+    // and searching when clicking "enter" on a search result
+    if (term !== this.term) {
+      this.key.emit(term);
+      this.selectSearchTool();
+      this.search(term);
+    }
+
+    this.term = term;
   }
 
   selectSearchTool() {
@@ -52,10 +58,7 @@ export class SearchBarComponent implements OnInit {
     this.store
       .select(s => s.selectedResult)
       .subscribe(state => {
-        this.value = state ? state.title : undefined;
-        if (this.value) {
-          this.search(this.value);
-        }
+        this.term = state ? state.title : undefined;
       });
   }
 }
