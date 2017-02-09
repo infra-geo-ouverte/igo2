@@ -39,33 +39,25 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.navigation) {
-      this.enableNavigation();
-    }
+    this.enableNavigation();
   }
 
   ngAfterViewInit() {
-    this.listItems.changes.subscribe(items => {
-      if (this.navigation) {
-        this.enableNavigation();
-        this.focus(items.first);
-      }
+    if (this.listItems.length) {
+      this.subscribe();
+      this.focus(this.findFocusedItem());
+      this.enableNavigation();
+    }
 
-      this.unsubscribe();
-      items.forEach(item => {
-        this.subscriptions.push(
-          item.clickItem.subscribe(item_ => this.select(item_)));
-      }, this);
+    this.listItems.changes.subscribe(items => {
+      this.subscribe();
+      this.focus(this.findFocusedItem() || items.first);
+      this.enableNavigation();
     });
   }
 
   ngOnDestroy() {
     this.unsubscribe();
-  }
-
-  unsubscribe() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-    this.subscriptions = [];
   }
 
   focus(item?: ListItemDirective) {
@@ -124,11 +116,31 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   enableNavigation() {
-    this.navigationEnabled = true;
+    if (this.navigation) {
+      this.navigationEnabled = true;
+    }
   }
 
   disableNavigation() {
     this.navigationEnabled = false;
+  }
+
+  private subscribe() {
+    this.unsubscribe();
+
+    this.listItems.toArray().forEach(item => {
+      this.subscriptions.push(
+          item.clickItem.subscribe(item_ => this.select(item_)));
+    }, this);
+  }
+
+  private unsubscribe() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions = [];
+  }
+
+  private findFocusedItem() {
+    return this.listItems.toArray().find(item => item.focused);
   }
 
   private getFocusedIndex () {

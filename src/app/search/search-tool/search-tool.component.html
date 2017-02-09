@@ -3,6 +3,7 @@
     <igo-search-result
     	igoListItem
     	tabindex="{{i}}"
+    	[focused]="result.focused"
     	[result]="result"
     	(focusItem)="focusResult(result)"
     	(selectItem)="selectResult(result)">

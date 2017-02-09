@@ -30,6 +30,7 @@ export class SearchAdapterNominatim extends SearchAdapter {
 
   private formatResult (result: any): SearchResult {
     return {
+      id: result.place_id as string,
       title: result.display_name,
       icon: 'place'
     };

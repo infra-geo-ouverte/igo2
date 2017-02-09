@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/operator/distinctUntilChanged';
+
 import { ToolComponent } from '../../tool/shared/tool-component.model';
 import { ToolService } from '../../core/tool.service';
 import { SearchResult } from '../shared/search-result.interface';
@@ -22,14 +24,30 @@ export class SearchToolComponent implements ToolComponent, OnInit {
   static defaultOptions: any = {};
 
   private results: SearchResult[];
+  private focusedResult?: SearchResult;
 
   constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
+    this.store.select(s => s.focusedResult)
+      .subscribe(state => {
+        this.focusedResult = state ? state : undefined;
+      });
+
     this.store
       .select(s => s.searchResults)
       .subscribe(state => {
-        this.results = state ? state.results : [];
+        const results = state ? state.results : [];
+        const focusedId = this.focusedResult ?
+          this.focusedResult.id : undefined;
+
+        // We need to set "focused" directly on the result,
+        // instead of binding the result-component "focused"
+        // attribute to the focusedItem, because, this may trigger
+        // an "Expression has changed" error.
+        this.results = results.map(result => Object.assign(result, {
+          focused: result.id === focusedId
+        }));
       });
   }
 

@@ -5,7 +5,6 @@ import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/operator/debounceTime.js';
 import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
 
 import { Tool } from '../../tool/shared/tool.interface';
 import { SearchService} from '../../core/search.service';
@@ -48,13 +47,15 @@ export class SearchBarComponent implements OnInit {
     this.searchTermsStream
       .debounceTime(300)
       .distinctUntilChanged()
-      .subscribe(term =>
-        this.searchService.search(term));
+      .subscribe(term => this.searchService.search(term));
 
     this.store
       .select(s => s.selectedResult)
       .subscribe(state => {
-          this.value = state ? state.title : undefined;
-       });
+        this.value = state ? state.title : undefined;
+        if (this.value) {
+          this.search(this.value);
+        }
+      });
   }
 }

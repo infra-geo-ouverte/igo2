@@ -2,6 +2,7 @@
   <template ngFor let-tool [ngForOf]="tools" [ngForTrackBy]="trackBy">
     <igo-toolbar-item
       igoListItem
+      navigation="false"
       [tool]=tool
       (toolSelected)="selectTool(tool)">
     </igo-toolbar-item>
