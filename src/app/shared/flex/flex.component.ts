@@ -30,12 +30,17 @@ export class FlexComponent implements OnInit {
   }
 
   set state (state: FlexState){
-    if (state === 'collapsed') {
-      this.collapse();
-    } else if (state === 'expanded') {
-      this.expand();
-    } else if (state === 'initial') {
-      this.reset();
+    switch (state) {
+      case 'collapsed':
+        this.collapse();
+        break;
+      case 'expanded':
+        this.expand();
+        break;
+      case 'initial':
+        this.reset();
+        break;
+      default: break;
     }
 
     this._state = state;
