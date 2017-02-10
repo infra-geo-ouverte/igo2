@@ -30,7 +30,7 @@ describe('SearchResultDetailsComponent', () => {
     component.result = {
       id: '1',
       title: 'foo',
-      icon: 'bar',
+      icon: 'bar'
     };
     expect(component).toBeTruthy();
   });
