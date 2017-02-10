@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { SharedModule } from '../../shared/shared.module';
+
 import { SearchResultDetailsComponent } from './search-result-details.component';
 
 describe('SearchResultDetailsComponent', () => {
@@ -11,6 +13,9 @@ describe('SearchResultDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        SharedModule
+      ],
       declarations: [ SearchResultDetailsComponent ]
     })
     .compileComponents();
@@ -19,10 +24,14 @@ describe('SearchResultDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchResultDetailsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    component.result = {
+      id: '1',
+      title: 'foo',
+      icon: 'bar',
+    };
     expect(component).toBeTruthy();
   });
 });

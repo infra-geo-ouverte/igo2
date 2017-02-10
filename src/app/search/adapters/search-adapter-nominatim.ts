@@ -32,7 +32,22 @@ export class SearchAdapterNominatim extends SearchAdapter {
     return {
       id: result.place_id as string,
       title: result.display_name,
-      icon: 'place'
+      icon: 'place',
+      properties: {
+        name: result.display_name,
+        place_id: result.place_id,
+        osm_type: result.osm_type,
+        class: result.class,
+        type: result.type
+      },
+      geometry: {
+        type: 'Point',
+        coordinates: [
+          result.lon as number,
+          result.lat as number
+        ],
+        bbox: result.boundingbox.map(coord => coord as number)
+      }
     };
   }
 

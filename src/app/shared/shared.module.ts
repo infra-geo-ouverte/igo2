@@ -11,6 +11,7 @@ import { PanelComponent } from './panel/panel.component';
 import { ListComponent } from './list/list.component';
 import { ListItemDirective } from './list/list-item.directive';
 import { ClickoutDirective } from './directives/clickout.directive';
+import { KeyvaluePipe } from './pipes/keyvalue.pipe';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { ClickoutDirective } from './directives/clickout.directive';
     PanelComponent,
     ListComponent,
     ListItemDirective,
-    ClickoutDirective
+    ClickoutDirective,
+    KeyvaluePipe
   ],
   exports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { ClickoutDirective } from './directives/clickout.directive';
     PanelComponent,
     ListComponent,
     ListItemDirective,
-    ClickoutDirective
+    ClickoutDirective,
+    KeyvaluePipe
   ]
 })
 export class SharedModule {

@@ -29,8 +29,9 @@ describe('SearchResultComponent', () => {
 
   it('should create', () => {
     component.result = {
+      id: '1',
       title: 'foo',
-      icon: 'bar'
+      icon: 'bar',
     };
     expect(component).toBeTruthy();
   });

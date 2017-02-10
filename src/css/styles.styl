@@ -19,6 +19,8 @@ html, body {
 
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
 
+@require './theme.styl';
+
 input {
   height: 40px;
 }
@@ -26,4 +28,40 @@ input {
 .md-input-placeholder {
   font-style: italic;
   top: 10px !important;
+}
+
+button[md-icon-button] {
+  border-radius: 0;
+  width: $igo-icon-button-width;
+  min-width: $igo-icon-button-width;
+  margin: 0;
+  padding: 0;
+  background-color: $igo-white;
+}
+
+button {
+  background-color: $igo-white;
+}
+
+.igo-container {
+  width: "calc(100% - 2 * %s)" % $igo-padding;
+  height: 100%;
+  padding: $igo-padding 0;
+  margin: 0 $igo-padding;
+  overflow: hidden;
+  position: relative;
+}
+
+.igo-content {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+table td {
+  padding: $igo-padding;
+}
+
+table.igo-striped tbody tr:nth-child(odd) {
+  background-color: $igo-secondary-color-hover;
 }

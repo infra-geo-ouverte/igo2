@@ -22,7 +22,7 @@ export class SearchToolComponent implements ToolComponent, OnInit {
   static defaultOptions: any = {};
 
   private results: SearchResult[];
-  private focusedResult?: SearchResult;
+  focusedResult?: SearchResult;
 
   constructor(private store: Store<AppStore>) { }
 
@@ -35,17 +35,7 @@ export class SearchToolComponent implements ToolComponent, OnInit {
     this.store
       .select(s => s.searchResults)
       .subscribe(state => {
-        const results = state ? state.results : [];
-        const focusedId = this.focusedResult ?
-          this.focusedResult.id : undefined;
-
-        // We need to set "focused" directly on the result,
-        // instead of binding the result-component "focused"
-        // attribute to the focusedItem, because, this may trigger
-        // an "Expression has changed" error.
-        this.results = results.map(result => Object.assign(result, {
-          focused: result.id === focusedId
-        }));
+        this.results = state ? state.results : [];
       });
   }
 
