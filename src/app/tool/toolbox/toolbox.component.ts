@@ -4,7 +4,7 @@ import { AfterViewInit, ChangeDetectorRef, Component,
          ViewContainerRef, ViewChild } from '@angular/core';
 
 import { Tool } from '../shared/tool.interface';
-import { ToolComponent } from '../shared/tool-component.model';
+import { ToolComponent } from '../shared/tool-component';
 import { ToolService } from '../../core/tool.service';
 
 @Component({

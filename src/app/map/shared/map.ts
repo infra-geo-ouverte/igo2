@@ -1,6 +1,8 @@
-import { MapOptions } from './map.interface';
-import { LayerOptions } from './layers/layer.interface';
-import { Layer } from './layers/layer.model';
+import { Layer, LayerOptions } from './layers/layer';
+
+export interface MapOptions {
+  view: olx.ViewOptions;
+}
 
 // The name is NgMap because Map exists already
 export class NgMap {

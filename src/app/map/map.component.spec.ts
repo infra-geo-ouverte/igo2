@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { NgMap } from './shared/map';
 import { MapComponent } from './map.component';
 
 describe('MapComponent', () => {
@@ -22,8 +23,8 @@ describe('MapComponent', () => {
   });
 
   it('should create', () => {
-    component.options = {view: {}};
-    component.ngOnInit();
+    component.map = new NgMap({view: {}});
+    component.ngAfterViewInit();
     expect(component).toBeTruthy();
   });
 });
