@@ -23,22 +23,9 @@ export class NavigatorComponent implements OnInit {
   focusedResult: SearchResult;
 
   constructor(private store: Store<AppStore>,
-              private toolService: ToolService) {
-  }
+              private toolService: ToolService) { }
 
   ngOnInit() {
-    this.store
-      .select(s => s.selectedTool)
-      .subscribe(state => {
-          this.selectedTool = state;
-       });
-
-    this.store
-      .select(s => s.focusedResult)
-      .subscribe(state => {
-          this.focusedResult = state;
-       });
-
     this.context = {
       map: {
         view: {
@@ -116,6 +103,18 @@ export class NavigatorComponent implements OnInit {
     }
 
     this.searchTool = this.tools.find(t => t.name === 'search');
+
+    this.store
+      .select(s => s.selectedTool)
+      .subscribe(state => {
+          this.selectedTool = state;
+       });
+
+    this.store
+      .select(s => s.focusedResult)
+      .subscribe(state => {
+          this.focusedResult = state;
+       });
   }
 
   selectTool(tool: Tool) {

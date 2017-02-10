@@ -10,8 +10,14 @@
     id="igo-menu-button"
     color="primary"
     (click)="sidenav.toggle()">
-    <md-icon *ngIf="!sidenav.opened">menu</md-icon>
-    <md-icon *ngIf="sidenav.opened">keyboard_arrow_left</md-icon>  
+    <md-icon >
+      <ng-container *ngIf="!sidenav.opened">
+        menu
+      </ng-container>
+      <ng-container *ngIf="sidenav.opened">
+        keyboard_arrow_left
+      </ng-container>
+    </md-icon>
   </button>
 
   <igo-search-bar
@@ -40,17 +46,23 @@
           <igo-panel
             [title]="selectedTool.title"
             *ngIf="selectedTool">
+
             <md-icon
               panelLeftIcon
-              (click)="goBack()">arrow_back</md-icon> 
+              (click)="goBack()">
+              arrow_back
+            </md-icon> 
+
             <md-icon
               panelRightIcon
-              (click)="goHome()">menu</md-icon>
+              (click)="goHome()">
+              menu
+            </md-icon>
 
             <igo-toolbox
               [tools]="tools"
               [tool]="selectedTool"
-              *ngIf="flex.state !== 'collapsed'">
+              *ngIf="flex.state === 'initial' || flex.state === 'expanded'">
             </igo-toolbox>
           </igo-panel>
         </div>
@@ -62,10 +74,32 @@
         id="igo-lower-panel"
         class="igo-container">
 
-        <div
-          class="igo-content"
-          (click)="flex.collapse()">
-          {{focusedResult ? focusedResult.title : ''}}
+        <div class="igo-content">
+
+          <igo-panel
+            [title]="focusedResult.title"
+            *ngIf="focusedResult">
+
+            <md-icon
+              panelLeftIcon
+              (click)="flex.state === 'initial' ? flex.collapse() : flex.reset()">
+              <ng-container *ngIf="flex.state === 'initial'">
+                expand_less
+              </ng-container>
+              <ng-container *ngIf="flex.state === 'collapsed'">
+                expand_more
+              </ng-container>
+            </md-icon>
+
+            <md-icon
+              panelRightIcon>
+              open_in_new
+            </md-icon>
+
+            <igo-search-result-details
+              [result]="focusedResult">
+            </igo-search-result-details>
+          </igo-panel>
         </div>
 
       </div>

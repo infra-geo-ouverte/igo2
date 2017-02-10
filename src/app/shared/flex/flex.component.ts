@@ -1,13 +1,10 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 type FlexState =
-  'initial'
-  | 'collapsed'
-  | 'expanded';
+  'initial' | 'collapsed' | 'expanded' | 'transition';
 
 type FlexDirection =
-  'column'
-  | 'row';
+  'column' | 'row';
 
 @Component({
   selector: 'igo-flex',
@@ -15,6 +12,8 @@ type FlexDirection =
   styleUrls: ['./flex.component.styl']
 })
 export class FlexComponent implements OnInit {
+
+  static transitionTime = 250;
 
   @Input('igoFlexInitial') igoFlexInitial: string;
   @Input('igoFlexCollapsed') igoFlexCollapsed: string = '0';
@@ -32,11 +31,11 @@ export class FlexComponent implements OnInit {
 
   set state (state: FlexState){
     if (state === 'collapsed') {
-      this.setSize(this.igoFlexCollapsed);
+      this.collapse();
     } else if (state === 'expanded') {
-      this.setSize(this.igoFlexExpanded);
-    } else if (state === 'initial') {
-      this.setSize(this.igoFlexInitial);
+      this.expand();
+    } else {
+      this.reset();
     }
 
     this._state = state;
@@ -49,19 +48,32 @@ export class FlexComponent implements OnInit {
     this.state = this.igoFlexState;
   }
 
+  // We may want to do an angular transition to keep
+  // the transition time out of the .styl.
   collapse() {
-    this.state = 'collapsed';
+    this.setSize(this.igoFlexCollapsed);
+    setTimeout(() => {
+       this._state = 'collapsed';
+    }, FlexComponent.transitionTime);
   }
 
   expand() {
-    this.state = 'expanded';
+    this.setSize(this.igoFlexExpanded);
+     setTimeout(() => {
+       this._state = 'expanded';
+    }, FlexComponent.transitionTime);
   }
 
   reset() {
-    this.state = 'initial';
+    this.setSize(this.igoFlexInitial);
+    setTimeout(() => {
+       this._state = 'initial';
+    }, FlexComponent.transitionTime);
   }
 
   private setSize(size: string) {
+    this._state = 'transition';
+
     if (this.igoFlexDirection === 'column') {
       this.main.nativeElement.style.height = size;
     } else if (this.igoFlexDirection === 'row') {

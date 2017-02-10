@@ -44,15 +44,11 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngAfterViewInit() {
     if (this.listItems.length) {
-      this.subscribe();
-      this.focus(this.findFocusedItem());
-      this.enableNavigation();
+      this.init();
     }
 
     this.listItems.changes.subscribe(items => {
-      this.subscribe();
-      this.focus(this.findFocusedItem() || items.first);
-      this.enableNavigation();
+      this.init();
     });
   }
 
@@ -80,7 +76,11 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   focusNext() {
-    const index = this.getFocusedIndex();
+    let index = this.getFocusedIndex();
+    if (index === undefined) {
+      index = -1;
+    }
+
     const items = this.listItems.toArray();
     if (index !== items.length - 1) {
       this.focus(items[index + 1]);
@@ -125,6 +125,12 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     this.navigationEnabled = false;
   }
 
+  private init() {
+    this.subscribe();
+    this.focus(this.findFocusedItem());
+    this.enableNavigation();
+  }
+
   private subscribe() {
     this.unsubscribe();
 
@@ -149,10 +155,6 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private navigate(key: number) {
-    if (this.focusedItem === undefined) {
-      return;
-    }
-
     switch (key) {
       case 38:
         this.focusPrevious();
