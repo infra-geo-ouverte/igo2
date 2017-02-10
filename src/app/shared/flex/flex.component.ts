@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
-type FlexState =
+export type FlexState =
   'initial' | 'collapsed' | 'expanded' | 'transition';
 
-type FlexDirection =
+export type FlexDirection =
   'column' | 'row';
 
 @Component({
@@ -34,7 +34,7 @@ export class FlexComponent implements OnInit {
       this.collapse();
     } else if (state === 'expanded') {
       this.expand();
-    } else {
+    } else if (state === 'initial') {
       this.reset();
     }
 

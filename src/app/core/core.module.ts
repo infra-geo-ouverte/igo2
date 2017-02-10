@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Http } from '@angular/http';
 import { provideStore } from '@ngrx/store';
 
-import { selectedTool, searchResults, selectedResult,
-         focusedResult } from '../reducers';
+import { browserMedia, selectedTool, searchResults,
+         selectedResult, focusedResult } from '../reducers';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
+import { MediaService } from './media.service';
 import { ToolService } from './tool.service';
 import { SearchService } from './search.service';
 import { SearchAdapterService } from './search-adapter.service';
@@ -34,6 +35,7 @@ export function provideSearchAdapter() {
 
 export function provideAppStore() {
   return provideStore({
+    browserMedia,
     selectedTool,
     searchResults,
     selectedResult,
@@ -54,6 +56,7 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
+        MediaService,
         provideAppStore(),
         provideSearchAdapterService(),
         provideSearchAdapter(),

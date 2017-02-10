@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import 'rxjs/add/operator/distinctUntilChanged';
+
+import { Media } from '../../core/media.service';
 import { Tool } from '../../tool/shared/tool.interface';
 import { ToolService } from '../../core/tool.service';
 import { SearchResult } from '../../search/shared/search-result.interface';
+import { FlexComponent, FlexState } from '../../shared/flex/flex.component';
 
 import { AppStore } from '../../app.store';
 
@@ -14,18 +18,21 @@ import { AppStore } from '../../app.store';
 })
 export class NavigatorComponent implements OnInit {
 
-  context: any;
-  tools: Tool[] = [];
-  selectedTool: Tool;
-  searchTool: Tool;
+  @ViewChild('menu') menu: FlexComponent;
 
-  // This will go there for now but will probably move later
+  context: any;
   focusedResult: SearchResult;
+  initialMenuState: FlexState;
+  media: Media;
+  searchTool: Tool;
+  selectedTool: Tool;
+  tools: Tool[] = [];
 
   constructor(private store: Store<AppStore>,
               private toolService: ToolService) { }
 
   ngOnInit() {
+    // This will go somewhere else eventually
     this.context = {
       map: {
         view: {
@@ -104,16 +111,33 @@ export class NavigatorComponent implements OnInit {
 
     this.searchTool = this.tools.find(t => t.name === 'search');
 
+    /* Do this before setting menuInitialState */
+    this.store
+      .select(s => s.browserMedia)
+      .distinctUntilChanged()
+      .subscribe(state => this.media = state);
+
+    this.initialMenuState = this.media === 'mobile' ? 'expanded' : 'initial';
+
     this.store
       .select(s => s.selectedTool)
       .subscribe(state => {
           this.selectedTool = state;
+          if (this.menu.state === 'collapsed') {
+            this.media === 'mobile' ? this.menu.expand() : this.menu.reset();
+          }
        });
 
     this.store
       .select(s => s.focusedResult)
+      .subscribe(state => this.focusedResult = state);
+
+    this.store
+      .select(s => s.selectedResult)
       .subscribe(state => {
-          this.focusedResult = state;
+          if (state && this.media === 'mobile') {
+            this.menu.collapse();
+          }
        });
   }
 

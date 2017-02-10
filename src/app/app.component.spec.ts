@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
+import { MediaService } from './core/media.service';
+import { provideAppStore } from './core/core.module';
 
 import {} from 'jasmine';
 
@@ -17,6 +19,10 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        provideAppStore(),
+        MediaService
+      ]
     });
     TestBed.compileComponents();
   });

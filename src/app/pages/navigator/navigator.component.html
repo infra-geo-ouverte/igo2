@@ -27,11 +27,13 @@
 
   <igo-sidenav #sidenav [opened]="false">
     <igo-flex
-      #flex
+      id="menu"
+      #menu
       igoFlexDirection="column"
       igoFlexInitial="60%"
       igoFlexCollapsed="61px"
-      igoFlexExpanded="calc(100% - 60px)">
+      igoFlexExpanded="calc(100% - 61px)"
+      igoFlexState="{{initialMenuState}}">
 
       <div
         id="igo-upper-panel"
@@ -62,7 +64,8 @@
             <igo-toolbox
               [tools]="tools"
               [tool]="selectedTool"
-              *ngIf="flex.state === 'initial' || flex.state === 'expanded'">
+              *ngIf="menu.state === 'initial'
+                     || menu.state === 'expanded'">
             </igo-toolbox>
           </igo-panel>
         </div>
@@ -82,13 +85,23 @@
 
             <md-icon
               panelLeftIcon
-              (click)="flex.state === 'initial' ? flex.collapse() : flex.reset()">
-              <ng-container *ngIf="flex.state === 'initial'">
-                expand_less
-              </ng-container>
-              <ng-container *ngIf="flex.state === 'collapsed'">
-                expand_more
-              </ng-container>
+              (click)="menu.collapse()"
+              *ngIf="menu.state === 'initial'">
+              expand_less
+            </md-icon>
+
+            <md-icon
+              panelLeftIcon
+              (click)="media === 'mobile' ? menu.expand() : menu.reset()"
+              *ngIf="menu.state === 'collapsed'">
+              expand_more
+            </md-icon>
+
+            <md-icon
+              panelLeftIcon
+              (click)="media === 'mobile' ? menu.collapse() : menu.reset()"
+              *ngIf="menu.state === 'expanded'">
+              expand_less
             </md-icon>
 
             <md-icon
