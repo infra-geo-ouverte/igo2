@@ -1,5 +1,9 @@
-import { Layer } from './layer.model';
-import { XYZLayerOptions } from './layer-xyz.interface';
+import { Layer, LayerOptions } from './layer';
+
+export interface XYZLayerOptions extends LayerOptions {
+  source?: olx.source.XYZOptions;
+  view?: olx.layer.TileOptions;
+}
 
 export class XYZLayer extends Layer {
 

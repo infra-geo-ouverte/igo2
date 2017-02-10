@@ -4,9 +4,15 @@ import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { Media } from '../../core/media.service';
+import { NgMap, MapOptions } from '../../map/shared/map';
+import { LayerOptions } from '../../map/shared/layers/layer';
 import { Tool } from '../../tool/shared/tool.interface';
-import { ToolService } from '../../core/tool.service';
 import { SearchResult } from '../../search/shared/search-result.interface';
+
+import { ToolService } from '../../core/tool.service';
+import { MapService } from '../../core/map.service';
+import { LayerService } from '../../map/shared/layer.service';
+
 import { FlexComponent, FlexState } from '../../shared/flex/flex.component';
 
 import { AppStore } from '../../app.store';
@@ -14,26 +20,31 @@ import { AppStore } from '../../app.store';
 @Component({
   selector: 'igo-navigator',
   templateUrl: './navigator.component.html',
-  styleUrls: ['./navigator.component.styl']
+  styleUrls: ['./navigator.component.styl'],
+  providers: [
+    LayerService
+  ]
 })
 export class NavigatorComponent implements OnInit {
 
   @ViewChild('menu') menu: FlexComponent;
 
-  context: any;
   focusedResult: SearchResult;
   initialMenuState: FlexState;
+  map: NgMap;
   media: Media;
   searchTool: Tool;
   selectedTool: Tool;
   tools: Tool[] = [];
 
   constructor(private store: Store<AppStore>,
+              private mapService: MapService,
+              private layerService: LayerService,
               private toolService: ToolService) { }
 
   ngOnInit() {
     // This will go somewhere else eventually
-    this.context = {
+    const context = {
       map: {
         view: {
           projection: 'EPSG:3857',
@@ -100,31 +111,51 @@ export class NavigatorComponent implements OnInit {
       ]
     };
 
-    let tool;
-    for (const contextTool of this.context.tools) {
+    /* Map & Layers */
+
+    this.map = this.mapService.createMap(context.map as MapOptions);
+    (context.layers || []).forEach((layer: LayerOptions) => {
+      this.map.addLayer(this.layerService.createLayer(layer));
+    });
+
+    /* Tools */
+
+    (context.tools || []).forEach((tool_: Tool) => {
       // TODO: Remove the " || {}" when more tool will be defined
-      tool = this.toolService.getTool(contextTool.name) || {};
+      const tool = this.toolService.getTool(tool_.name) || {};
       if (tool !== undefined) {
-        this.tools.push(Object.assign(tool, contextTool));
+        this.tools.push(Object.assign(tool, tool_));
       }
-    }
+    });
 
     this.searchTool = this.tools.find(t => t.name === 'search');
 
-    /* Do this before setting menuInitialState */
+    /* Interactions */
     this.store
       .select(s => s.browserMedia)
       .distinctUntilChanged()
-      .subscribe(state => this.media = state);
+      .subscribe(state => {
+        if (this.media === undefined) {
+          if (state === 'mobile') {
+            this.initialMenuState = 'expanded';
+          } else {
+            this.initialMenuState = 'initial';
+          }
+        }
 
-    this.initialMenuState = this.media === 'mobile' ? 'expanded' : 'initial';
+        this.media = state;
+      });
 
     this.store
       .select(s => s.selectedTool)
       .subscribe(state => {
           this.selectedTool = state;
           if (this.menu.state === 'collapsed') {
-            this.media === 'mobile' ? this.menu.expand() : this.menu.reset();
+            if (this.media === 'mobile') {
+              this.menu.expand();
+            } else {
+              this.menu.reset();
+            }
           }
        });
 

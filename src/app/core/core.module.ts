@@ -8,6 +8,7 @@ import { browserMedia, selectedTool, searchResults,
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { MediaService } from './media.service';
+import { MapService } from './map.service';
 import { ToolService } from './tool.service';
 import { SearchService } from './search.service';
 import { SearchAdapterService } from './search-adapter.service';
@@ -60,6 +61,7 @@ export class CoreModule {
         provideAppStore(),
         provideSearchAdapterService(),
         provideSearchAdapter(),
+        MapService,
         SearchService,
         ToolService
       ]

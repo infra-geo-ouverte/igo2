@@ -9,7 +9,8 @@ import {
    provideSearchAdapter,
    provideSearchAdapterService
 } from '../../core/core.module';
-
+import { MapService } from '../../core/map.service';
+import { LayerService } from '../../map/shared/layer.service';
 import { SearchService } from '../../core/search.service';
 
 import { SharedModule } from '../../shared/shared.module';
@@ -40,6 +41,8 @@ describe('NavigatorComponent', () => {
         provideAppStore(),
         provideSearchAdapterService(),
         provideSearchAdapter(),
+        MapService,
+        LayerService,
         SearchService,
         ToolService
       ]

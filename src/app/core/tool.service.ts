@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Tool } from '../tool/shared/tool.interface';
-import { ToolComponent } from '../tool/shared/tool-component.model';
+import { ToolComponent } from '../tool/shared/tool-component';
 
 @Injectable()
 export class ToolService {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { ToolComponent } from '../../tool/shared/tool-component.model';
+import { ToolComponent } from '../../tool/shared/tool-component';
 import { ToolService } from '../../core/tool.service';
 import { SearchResult } from '../shared/search-result.interface';
 

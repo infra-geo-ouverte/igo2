@@ -1,5 +1,9 @@
-import { Layer } from './layer.model';
-import { OSMLayerOptions } from './layer-osm.interface';
+import { Layer, LayerOptions } from './layer';
+
+export interface OSMLayerOptions extends LayerOptions {
+  source?: olx.source.OSMOptions;
+  view?: olx.layer.TileOptions;
+}
 
 export class OSMLayer extends Layer {
 

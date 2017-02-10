@@ -1,5 +1,9 @@
-import { Layer } from './layer.model';
-import { TileLayerOptions } from './layer-tile.interface';
+import { Layer, LayerOptions } from './layer';
+
+export interface TileLayerOptions extends LayerOptions {
+  source?: olx.source.TileImageOptions;
+  view?: olx.layer.TileOptions;
+}
 
 export class TileLayer extends Layer {
   olLayer: ol.layer.Tile;
