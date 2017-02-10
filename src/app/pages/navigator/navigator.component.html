@@ -29,9 +29,9 @@
     <igo-flex
       #menu
       igoFlexDirection="column"
-      igoFlexInitial="60%"
-      igoFlexCollapsed="61px"
-      igoFlexExpanded="calc(100% - 61px)"
+      igoFlexInitial="50%"
+      igoFlexCollapsed="51px"
+      igoFlexExpanded="calc(100% - 51px)"
       igoFlexState="{{initialMenuState}}">
 
       <div
@@ -104,7 +104,8 @@
             </md-icon>
 
             <md-icon
-              panelRightIcon>
+              panelRightIcon
+              *ngIf="media !== 'mobile'">
               open_in_new
             </md-icon>
 
