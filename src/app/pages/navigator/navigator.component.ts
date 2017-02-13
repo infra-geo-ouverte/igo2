@@ -50,7 +50,9 @@ export class NavigatorComponent implements OnInit {
         view: {
           projection: 'EPSG:3857',
           center: ol.proj.fromLonLat([-72, 52], 'EPSG:3857'),
-          zoom: 6
+          zoom: 6,
+	        maxZoom: 17,
+	        minZoom: 4
         }
       },
       layers: [
@@ -65,8 +67,7 @@ export class NavigatorComponent implements OnInit {
             logo: {
               href: 'http://www.droitauteur.gouv.qc.ca/copyright.php',
               src: 'http://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png'
-            },
-            maxZoom: 17
+            }
           }
         }
       ],
