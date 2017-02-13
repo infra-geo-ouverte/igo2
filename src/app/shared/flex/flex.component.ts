@@ -15,13 +15,12 @@ export class FlexComponent implements OnInit {
 
   static transitionTime = 250;
 
-  @Input('igoFlexInitial') igoFlexInitial: string;
-  @Input('igoFlexCollapsed') igoFlexCollapsed: string = '0';
-  @Input('igoFlexExpanded') igoFlexExpanded: string = '100%';
-  @Input('igoFlexState') igoFlexState: FlexState = 'initial';
-  @Input('igoFlexDirection') igoFlexDirection: FlexDirection = 'column';
-
   @ViewChild('flexMain') main;
+
+  @Input('initial') initial: string;
+  @Input('collapsed') collapsed: string = '0';
+  @Input('expanded') expanded: string = '100%';
+  @Input('direction') direction: FlexDirection = 'column';
 
   private _state: FlexState = 'initial';
 
@@ -29,59 +28,41 @@ export class FlexComponent implements OnInit {
     return this._state;
   }
 
-  set state (state: FlexState){
+  @Input('state') set state (state: FlexState){
+    let size;
     switch (state) {
       case 'collapsed':
-        this.collapse();
+        size = this.collapsed;
         break;
       case 'expanded':
-        this.expand();
+        size = this.expanded;
         break;
       case 'initial':
-        this.reset();
+        size = this.initial;
         break;
       default: break;
     }
 
-    this._state = state;
+    if (size !== undefined) {
+      this.setSize(size);
+      setTimeout(() => {
+         this._state = state;
+      }, FlexComponent.transitionTime);
+    }
   }
 
   constructor(private el: ElementRef) { }
 
   ngOnInit() {
-    this.el.nativeElement.style.flexDirection = this.igoFlexDirection;
-    this.state = this.igoFlexState;
-  }
-
-  // We may want to do an angular transition to keep
-  // the transition time out of the .styl.
-  collapse() {
-    this.setSize(this.igoFlexCollapsed);
-    setTimeout(() => {
-       this._state = 'collapsed';
-    }, FlexComponent.transitionTime);
-  }
-
-  expand() {
-    this.setSize(this.igoFlexExpanded);
-     setTimeout(() => {
-       this._state = 'expanded';
-    }, FlexComponent.transitionTime);
-  }
-
-  reset() {
-    this.setSize(this.igoFlexInitial);
-    setTimeout(() => {
-       this._state = 'initial';
-    }, FlexComponent.transitionTime);
+    this.el.nativeElement.style.flexDirection = this.direction;
   }
 
   private setSize(size: string) {
     this._state = 'transition';
 
-    if (this.igoFlexDirection === 'column') {
+    if (this.direction === 'column') {
       this.main.nativeElement.style.height = size;
-    } else if (this.igoFlexDirection === 'row') {
+    } else if (this.direction === 'row') {
       this.main.nativeElement.style.width = size;
     }
   }

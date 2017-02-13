@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -27,12 +27,10 @@ import { AppStore } from '../../app.store';
 })
 export class NavigatorComponent implements OnInit {
 
-  @ViewChild('menu') menu: FlexComponent;
-
   focusedResult: SearchResult;
-  initialMenuState: FlexState;
   map: NgMap;
   media: Media;
+  menuState: FlexState = 'initial';
   searchTool: Tool;
   selectedTool: Tool;
   tools: Tool[] = [];
@@ -44,6 +42,9 @@ export class NavigatorComponent implements OnInit {
 
   ngOnInit() {
     // This will go somewhere else eventually
+    // Important: For For nwo we use some new ol.abc
+    // in the context but this will have to change because
+    // we want to be able to save the context as a JSON
     const context = {
       map: {
         view: {
@@ -135,12 +136,8 @@ export class NavigatorComponent implements OnInit {
       .select(s => s.browserMedia)
       .distinctUntilChanged()
       .subscribe(state => {
-        if (this.media === undefined) {
-          if (state === 'mobile') {
-            this.initialMenuState = 'expanded';
-          } else {
-            this.initialMenuState = 'initial';
-          }
+        if (this.media === undefined && state === 'mobile') {
+          this.menuState = 'expanded';
         }
 
         this.media = state;
@@ -150,12 +147,8 @@ export class NavigatorComponent implements OnInit {
       .select(s => s.selectedTool)
       .subscribe(state => {
           this.selectedTool = state;
-          if (this.menu.state === 'collapsed') {
-            if (this.media === 'mobile') {
-              this.menu.expand();
-            } else {
-              this.menu.reset();
-            }
+          if (this.menuState === 'collapsed') {
+            this.resizeMenu();
           }
        });
 
@@ -167,7 +160,7 @@ export class NavigatorComponent implements OnInit {
       .select(s => s.selectedResult)
       .subscribe(state => {
           if (state && this.media === 'mobile') {
-            this.menu.collapse();
+            this.menuState = 'collapsed';
           }
        });
   }
@@ -188,4 +181,13 @@ export class NavigatorComponent implements OnInit {
     this.unselectTool();
   }
 
+  resizeMenu() {
+    if (this.menuState === 'initial') {
+      this.menuState = 'collapsed';
+    } else if (this.menuState === 'collapsed') {
+      this.menuState = (this.media === 'mobile' ? 'expanded' : 'initial');
+    } else if (this.menuState === 'expanded') {
+      this.menuState = (this.media === 'mobile' ? 'collapsed' : 'initial');
+    }
+  }
 }
