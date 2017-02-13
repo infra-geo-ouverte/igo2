@@ -134,8 +134,7 @@ $ npm run serve.prod
 # Open your browser at http://localhost:4200/
 
 # Doc API generation
-$ npm run compodoc
-$ npm run serve.compodoc
+$ npm run doc
 # Open your browser at http://localhost:4220/
 
 ```
