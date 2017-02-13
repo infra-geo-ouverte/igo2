@@ -1,3 +1,4 @@
+/* tslint:disable:no-unused-variable */
 import { browser, element, by } from 'protractor';
 import { IgoPage } from './app.po';
 import {} from 'jasmine';
@@ -16,7 +17,8 @@ describe('igo App', function() {
 
   it('should display placeholder in search bar', () => {
     page.navigateTo();
-    expect(page.getSearchBarInput().getAttribute('placeholder')).toEqual('Search for an address or a place');
+    expect(page.getSearchBarInput().getAttribute('placeholder'))
+    .toEqual('Search for an address or a place');
   });
 
 });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 import { SearchAdapterService } from './search-adapter.service';
+import { SearchResult } from '../search/shared/search-result.interface';
 
 import { AppStore } from '../app.store';
 
@@ -26,14 +27,10 @@ export class SearchService {
       .get(this.searchAdapterService.getSearchUrl(), { search })
       .map(res => this.searchAdapterService.extractData(res))
       .catch(this.handleError)
-      .subscribe(
-        results => {
+      .subscribe((results: SearchResult[]) => {
         this.store.dispatch({
           type: 'SET_SEARCH_RESULTS',
-          payload: {
-            results: results,
-            count: results.length
-          }
+          payload: results
         });
       });
   }

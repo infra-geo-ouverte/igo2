@@ -1,11 +1,11 @@
-const initialState = {results: [], count: 0};
+import { SearchResult } from '../search/shared/search-result.interface';
 
-export const searchResults = (state = initialState, {type, payload}) => {
+export const searchResults = (state: SearchResult[] = [], {type, payload}) => {
   switch (type) {
     case 'SET_SEARCH_RESULTS':
-      return Object.assign({}, payload);
+      return payload;
     case 'CLEAR_SEARCH_RESULTS':
-      return Object.assign({}, initialState);
+      return [];
     default:
       return state;
   }

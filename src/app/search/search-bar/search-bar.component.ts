@@ -1,12 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/operator/debounceTime.js';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { Tool } from '../../tool/shared/tool.interface';
+import { SearchResult } from '../shared/search-result.interface';
 import { SearchService} from '../../core/search.service';
 
 import { AppStore } from '../../app.store';
@@ -17,7 +17,7 @@ import { AppStore } from '../../app.store';
   styleUrls: ['./search-bar.component.styl']
 })
 export class SearchBarComponent implements OnInit {
-  @Input('tool') tool: Tool;
+  searchTool: Tool;
   @Output('key') key = new EventEmitter<string>();
 
   term?: string;
@@ -26,6 +26,25 @@ export class SearchBarComponent implements OnInit {
 
   constructor(private store: Store<AppStore>,
               private searchService: SearchService) {}
+
+  ngOnInit(): void {
+    this.store
+      .select(s => s.availableTools)
+      .subscribe((tools: Tool[]) => {
+          this.searchTool = tools.find(t => t.name === 'search');
+       });
+
+    this.searchTermsStream
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .subscribe((term: string) => this.searchService.search(term));
+
+    this.store
+      .select(s => s.selectedResult)
+      .subscribe((result: SearchResult) => {
+        this.term = result ? result.title : undefined;
+      });
+  }
 
   keyup(event: KeyboardEvent) {
     const term = (<HTMLInputElement>event.target).value;
@@ -42,23 +61,10 @@ export class SearchBarComponent implements OnInit {
   }
 
   selectSearchTool() {
-    this.store.dispatch({type: 'SELECT_TOOL', payload: this.tool});
+    this.store.dispatch({type: 'SELECT_TOOL', payload: this.searchTool});
   }
 
   search(term: string): void {
     this.searchTermsStream.next(term);
-  }
-
-  ngOnInit(): void {
-    this.searchTermsStream
-      .debounceTime(300)
-      .distinctUntilChanged()
-      .subscribe(term => this.searchService.search(term));
-
-    this.store
-      .select(s => s.selectedResult)
-      .subscribe(state => {
-        this.term = state ? state.title : undefined;
-      });
   }
 }

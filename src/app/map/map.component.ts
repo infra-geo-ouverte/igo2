@@ -1,21 +1,46 @@
-import { Component, OnInit, Input, HostBinding, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
+import { AppStore } from '../app.store';
 import { NgMap } from './shared/map';
-
-let nextId = 0;
+import { MapService } from '../core/map.service';
+import { LayerService } from './shared/layer.service';
+import { LayerOptions } from './shared/layers/layer';
 
 @Component({
   selector: 'igo-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.styl']
+  styleUrls: ['./map.component.styl'],
+  providers: [ LayerService ]
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements OnInit, AfterViewInit {
 
-  @Input() map: NgMap;
+  map: NgMap;
+  id: string = 'igo-map-target';
 
-  id = `igo-map-${nextId++}`;
+  constructor(private store: Store<AppStore>,
+              private mapService: MapService,
+              private layerService: LayerService) {}
 
-  constructor() {}
+  ngOnInit() {
+    this.map = this.mapService.getMap();
+
+    this.store
+      .select(s => s.mapView)
+      .subscribe((view: olx.ViewOptions) => this.map.setView(view));
+
+    this.store
+      .select(s => s.mapLayers)
+      .subscribe((layers: LayerOptions[]) => {
+        // TODO: Handle dynamically added layers
+
+        let layer;
+        layers.forEach((layerOptions) => {
+          layer = this.layerService.createLayer(layerOptions);
+          this.map.addLayer(layer);
+        });
+      });
+  }
 
   ngAfterViewInit(): any {
     this.map.olMap.setTarget(this.id);

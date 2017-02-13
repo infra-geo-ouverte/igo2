@@ -1,10 +1,10 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Http } from '@angular/http';
 import { provideStore } from '@ngrx/store';
 
-import { browserMedia, selectedTool, searchResults,
-         selectedResult, focusedResult } from '../reducers';
+import { browserMedia, mapView, mapLayers, selectedTool,
+         availableTools, searchResults, selectedResult,
+         focusedResult } from '../reducers';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { MediaService } from './media.service';
@@ -37,10 +37,13 @@ export function provideSearchAdapter() {
 export function provideAppStore() {
   return provideStore({
     browserMedia,
+    mapView,
+    mapLayers,
     selectedTool,
     searchResults,
     selectedResult,
-    focusedResult
+    focusedResult,
+    availableTools
   });
 }
 

@@ -1,8 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component,
-         ComponentRef, ComponentFactoryResolver, Input,
-         OnChanges, OnDestroy, SimpleChanges,
+         ComponentRef, ComponentFactoryResolver,
+         OnChanges, OnDestroy, OnInit, SimpleChanges,
          ViewContainerRef, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
 
+import { AppStore } from '../../app.store';
 import { Tool } from '../shared/tool.interface';
 import { ToolComponent } from '../shared/tool-component';
 import { ToolService } from '../../core/tool.service';
@@ -13,18 +15,34 @@ import { ToolService } from '../../core/tool.service';
   styleUrls: ['toolbox.component.styl'],
   entryComponents: [ToolService.toolClasses]
 })
-export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
   @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
 
-  @Input('tools') tools: Tool[];
-  @Input('tool') tool: Tool;
+  tools: Tool[];
+  selectedTool: Tool;
 
   private component: ComponentRef<ToolComponent>;
   private isViewInitialized: boolean = false;
 
-  constructor(private resolver: ComponentFactoryResolver,
+  constructor(
+              private store: Store<AppStore>,
+              private resolver: ComponentFactoryResolver,
               private cdRef: ChangeDetectorRef,
               private toolService: ToolService) {
+  }
+
+  ngOnInit() {
+    this.store
+      .select(s => s.availableTools)
+      .subscribe((tools: Tool[]) => {
+          this.tools = tools;
+       });
+
+    this.store
+      .select(s => s.selectedTool)
+      .subscribe((tool: Tool) => {
+          this.selectedTool = tool;
+       });
   }
 
   ngOnDestroy() {
@@ -41,17 +59,17 @@ export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   createComponent() {
-    if (!this.isViewInitialized || !this.tool) {
+    if (!this.isViewInitialized || !this.selectedTool) {
       return;
     }
 
     /* If the component is created already, simply update its options */
-    if (this.component && this.component.instance.name === this.tool.name) {
-      this.component.instance.options = this.tool.options;
+    if (this.component && this.component.instance.name === this.selectedTool.name) {
+      this.component.instance.options = this.selectedTool.options;
       return;
     }
 
-    const toolCls = this.toolService.getToolClass(this.tool.name);
+    const toolCls = this.toolService.getToolClass(this.selectedTool.name);
     if (toolCls === undefined) {
       return;
     }
@@ -62,8 +80,8 @@ export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy {
     const component = this.target.createComponent(factory);
 
     this.component = component as ComponentRef<ToolComponent>;
-    this.component.instance.name = this.tool.name;
-    this.component.instance.options = this.tool.options;
+    this.component.instance.name = this.selectedTool.name;
+    this.component.instance.options = this.selectedTool.options;
 
     this.cdRef.detectChanges();
   }

@@ -1,20 +1,23 @@
 /* tslint:disable:no-unused-variable */
-import { TestBed, async, inject } from '@angular/core/testing';
-import { MapService } from './map.service';
 
+import { TestBed, async, inject } from '@angular/core/testing';
+import { ContextService } from './context.service';
+
+import { ToolService } from './tool.service';
 import { provideAppStore } from './core.module';
 
-describe('MapService', () => {
+describe('ContextService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        MapService,
+        ContextService,
+        ToolService,
         provideAppStore()
       ]
     });
   });
 
-  it('should ...', inject([MapService], (service: MapService) => {
+  it('should ...', inject([ContextService], (service: ContextService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { Response, URLSearchParams } from '@angular/http';
 
 import { SearchAdapter } from './search-adapter';
