@@ -47,7 +47,7 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
       this.init();
     }
 
-    this.listItems.changes.subscribe(items => {
+    this.listItems.changes.subscribe((items: ListItemDirective[]) => {
       this.init();
     });
   }
@@ -135,8 +135,8 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     this.unsubscribe();
 
     this.listItems.toArray().forEach(item => {
-      this.subscriptions.push(
-          item.clickItem.subscribe(item_ => this.select(item_)));
+      this.subscriptions.push(item.clickItem.subscribe(
+        (item_: ListItemDirective) => this.select(item_)));
     }, this);
   }
 

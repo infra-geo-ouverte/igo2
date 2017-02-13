@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Tool } from '../shared/tool.interface';
@@ -10,12 +10,19 @@ import { AppStore } from '../../app.store';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.styl']
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
 
-  @Input() tools: Tool[];
-  @Output() toolSelected: EventEmitter<Tool> = new EventEmitter();
+  tools: Tool[];
 
   constructor(private store: Store<AppStore>) {}
+
+  ngOnInit() {
+    this.store
+      .select(s => s.availableTools)
+      .subscribe((tools: Tool[]) => {
+          this.tools = tools;
+       });
+  }
 
   track(tool) {
     return tool.name;

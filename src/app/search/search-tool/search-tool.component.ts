@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 
 import { ToolComponent } from '../../tool/shared/tool-component';
 import { ToolService } from '../../core/tool.service';
@@ -28,15 +27,11 @@ export class SearchToolComponent implements ToolComponent, OnInit {
 
   ngOnInit() {
     this.store.select(s => s.focusedResult)
-      .subscribe(state => {
-        this.focusedResult = state ? state : undefined;
-      });
+      .subscribe((result: SearchResult) => this.focusedResult = result);
 
     this.store
       .select(s => s.searchResults)
-      .subscribe(state => {
-        this.results = state ? state.results : [];
-      });
+      .subscribe((results: SearchResult[]) => this.results = results);
   }
 
   selectResult(result: SearchResult) {

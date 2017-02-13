@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { NgMap, MapOptions } from '../map/shared/map';
+import { NgMap } from '../map/shared/map';
 
 
 @Injectable()
@@ -10,12 +10,11 @@ export class MapService {
 
   constructor() { }
 
-  createMap(options: MapOptions): NgMap {
-    this.map = new NgMap(options);
-    return this.map;
-  }
-
   getMap(): NgMap {
+    if (!this.map) {
+      this.map = new NgMap();
+    }
+
     return this.map;
   }
 }

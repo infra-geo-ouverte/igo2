@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { ToolboxComponent } from './toolbox.component';
 import { ToolService } from '../../core/tool.service';
+import { provideAppStore } from '../../core/core.module';
 
 // We don't want to import external tool. We'll have to think of
 // different tests for this component
@@ -27,7 +28,8 @@ describe('ToolboxComponent', () => {
         SearchResultComponent
       ],
       providers: [
-        ToolService
+        ToolService,
+        provideAppStore()
       ]
     })
     .compileComponents();
