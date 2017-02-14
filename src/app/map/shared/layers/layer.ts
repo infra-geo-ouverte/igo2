@@ -16,4 +16,8 @@ export abstract class Layer {
     this.type = options.type;
     this.olLayer = this.createOlLayer(options);
   }
+
+  getSource() {
+    return this.olLayer.getSource();
+  }
 }

@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
@@ -15,6 +17,8 @@ import { AppStore } from '../app.store';
 @Injectable()
 export class SearchService {
 
+  subscription: Subscription;
+
   constructor(private http: Http,
               private store: Store<AppStore>,
               private searchAdapterService: SearchAdapterService) {
@@ -23,7 +27,11 @@ export class SearchService {
   search (term?: string) {
     const search = this.searchAdapterService.getSearchParams(term);
 
-    this.http
+    if (this.subscription !== undefined) {
+      this.subscription.unsubscribe();
+    }
+
+    this.subscription = this.http
       .get(this.searchAdapterService.getSearchUrl(), { search })
       .map(res => this.searchAdapterService.extractData(res))
       .catch(this.handleError)

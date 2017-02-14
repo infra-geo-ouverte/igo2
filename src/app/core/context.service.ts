@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Tool } from '../tool/shared/tool.interface';
 import { ToolService } from './tool.service';
 import { LayerOptions } from '../map/shared/layers/layer';
+import { MapViewOptions } from '../map/shared/map';
 import { AppStore } from '../app.store';
 
 @Injectable()
@@ -23,7 +24,7 @@ export class ContextService {
       map: {
         view: {
           projection: 'EPSG:3857',
-          center: ol.proj.fromLonLat([-72, 52], 'EPSG:3857'),
+          center: [-72, 52] as [number, number],
           zoom: 6
         }
       },
@@ -86,11 +87,11 @@ export class ContextService {
       ]
     };
 
-    const view: olx.ViewOptions = context.map.view;
-    this.store.dispatch({type: 'SET_VIEW', payload: view});
+    const view: MapViewOptions = context.map.view;
+    this.store.dispatch({type: 'UPDATE_VIEW', payload: view});
 
     const layers: Array<LayerOptions> = context.layers;
-    this.store.dispatch({type: 'SET_LAYERS', payload: layers});
+    this.store.dispatch({type: 'UPDATE_LAYERS', payload: layers});
 
     const tools: Array<Tool> = [];
     (context.tools || []).forEach((tool_: Tool) => {
@@ -100,7 +101,7 @@ export class ContextService {
         tools.push(Object.assign(tool, tool_));
       }
     });
-    this.store.dispatch({type: 'SET_TOOLS', payload: tools});
+    this.store.dispatch({type: 'UPDATE_TOOLS', payload: tools});
   }
 
 }
