@@ -42,10 +42,15 @@ export class SearchAdapterNominatim extends SearchAdapter {
       geometry: {
         type: 'Point',
         coordinates: [
-          result.lon as number,
-          result.lat as number
+          parseFloat(result.lon),
+          parseFloat(result.lat)
         ],
-        bbox: result.boundingbox.map(coord => coord as number)
+        bbox: [
+          parseFloat(result.boundingbox[2]),
+          parseFloat(result.boundingbox[0]),
+          parseFloat(result.boundingbox[3]),
+          parseFloat(result.boundingbox[1])
+        ]
       }
     };
   }
