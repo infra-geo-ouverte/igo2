@@ -6,8 +6,8 @@ import { HttpModule } from '@angular/http';
 import { searchResults } from '../reducers';
 import {
    provideAppStore,
-   provideSearchAdapter,
-   provideSearchAdapterService
+   provideSearchSource,
+   provideSearchSourceService
 } from './core.module';
 
 describe('SearchService', () => {
@@ -18,8 +18,8 @@ describe('SearchService', () => {
       ],
       providers: [
         provideAppStore(),
-        provideSearchAdapterService(),
-        provideSearchAdapter(),
+        provideSearchSourceService(),
+        provideSearchSource(),
         SearchService
       ]
     });

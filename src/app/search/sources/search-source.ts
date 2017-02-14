@@ -2,7 +2,7 @@ import { Response, URLSearchParams } from '@angular/http';
 
 import { SearchResult } from '../shared/search-result.interface';
 
-export abstract class SearchAdapter {
+export abstract class SearchSource {
 
   abstract getSearchUrl (): string;
 
