@@ -1,13 +1,11 @@
-import { Response, URLSearchParams } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 import { SearchResult } from '../shared/search-result.interface';
 
 export abstract class SearchSource {
 
-  abstract getSearchUrl (): string;
+  abstract getName(): string;
 
-  abstract extractData (response: Response): SearchResult[];
-
-  abstract getSearchParams (term: string): URLSearchParams;
+  abstract search(term?: string): Observable<SearchResult[]>
 
 }

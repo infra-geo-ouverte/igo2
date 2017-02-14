@@ -58,6 +58,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     const feature = format.readFeature(Object.assign({
         type: 'Feature'
     }, result));
+
     feature.getGeometry().transform('EPSG:4326', destProj);
 
     return feature;

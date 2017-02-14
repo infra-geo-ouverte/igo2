@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
+
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
