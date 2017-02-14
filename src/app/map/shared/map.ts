@@ -80,7 +80,18 @@ export class NgMap {
   }
 
   addMarker(feature: ol.Feature) {
-    this.markerSource.addFeature(feature);
+    const geometry = feature.getGeometry();
+    const geometryType = geometry.getType();
+
+    let marker;
+    if (geometryType === 'Point') {
+      marker = feature;
+    } else {
+      const centroid = ol.extent.getCenter(geometry.getExtent());
+      marker = new ol.Feature(new ol.geom.Point(centroid));
+    }
+
+    this.markerSource.addFeature(marker);
   }
 
   clearMarkers() {
