@@ -1,9 +1,9 @@
 import { Response, URLSearchParams } from '@angular/http';
 
-import { SearchAdapter } from './search-adapter';
+import { SearchSource } from './search-source';
 import { SearchResult } from '../shared/search-result.interface';
 
-export class SearchAdapterNominatim extends SearchAdapter {
+export class SearchSourceNominatim extends SearchSource {
 
   static searchUrl: string = 'http://nominatim.openstreetmap.org/search';
 
@@ -12,7 +12,7 @@ export class SearchAdapterNominatim extends SearchAdapter {
   }
 
   getSearchUrl (): string {
-    return SearchAdapterNominatim.searchUrl;
+    return SearchSourceNominatim.searchUrl;
   }
 
   extractData (response: Response): SearchResult[] {

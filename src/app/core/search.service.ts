@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
-import { SearchAdapterService } from './search-adapter.service';
+import { SearchSourceService } from './search-source.service';
 import { SearchResult } from '../search/shared/search-result.interface';
 
 import { AppStore } from '../app.store';
@@ -21,19 +21,22 @@ export class SearchService {
 
   constructor(private http: Http,
               private store: Store<AppStore>,
-              private searchAdapterService: SearchAdapterService) {
+              private searchSourceService: SearchSourceService) {
   }
 
   search (term?: string) {
-    const search = this.searchAdapterService.getSearchParams(term);
+    const sources = this.searchSourceService.getSources();
+    const source = sources[0];
+
+    const search = source.getSearchParams(term);
 
     if (this.subscription !== undefined) {
       this.subscription.unsubscribe();
     }
 
     this.subscription = this.http
-      .get(this.searchAdapterService.getSearchUrl(), { search })
-      .map(res => this.searchAdapterService.extractData(res))
+      .get(source.getSearchUrl(), { search })
+      .map(res => source.extractData(res))
       .catch(this.handleError)
       .subscribe((results: SearchResult[]) => {
         this.store.dispatch({

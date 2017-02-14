@@ -5,8 +5,8 @@ import { DebugElement } from '@angular/core';
 
 import {
    provideAppStore,
-   provideSearchAdapter,
-   provideSearchAdapterService
+   provideSearchSource,
+   provideSearchSourceService
 } from '../../core/core.module';
 
 import { SearchService } from '../../core/search.service';
@@ -26,8 +26,8 @@ describe('SearchBarComponent', () => {
       declarations: [ SearchBarComponent ],
       providers: [
         provideAppStore(),
-        provideSearchAdapterService(),
-        provideSearchAdapter(),
+        provideSearchSourceService(),
+        provideSearchSource(),
         SearchService
       ]
     })

@@ -6,8 +6,8 @@ import { MaterialModule } from '@angular/material';
 
 import {
    provideAppStore,
-   provideSearchAdapter,
-   provideSearchAdapterService
+   provideSearchSource,
+   provideSearchSourceService
 } from '../../core/core.module';
 import { MapService } from '../../core/map.service';
 import { LayerService } from '../../map/shared/layer.service';
@@ -39,8 +39,8 @@ describe('NavigatorComponent', () => {
       ],
       providers: [
         provideAppStore(),
-        provideSearchAdapterService(),
-        provideSearchAdapter(),
+        provideSearchSourceService(),
+        provideSearchSource(),
         MapService,
         LayerService,
         SearchService,

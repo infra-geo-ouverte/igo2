@@ -11,27 +11,28 @@ import { MediaService } from './media.service';
 import { MapService } from './map.service';
 import { ToolService } from './tool.service';
 import { SearchService } from './search.service';
-import { SearchAdapterService } from './search-adapter.service';
-import { SearchAdapter } from '../search/adapters/search-adapter';
-import { SearchAdapterNominatim } from '../search/adapters/search-adapter-nominatim';
+import { SearchSourceService } from './search-source.service';
+import { SearchSource } from '../search/sources/search-source';
+import { SearchSourceNominatim } from '../search/sources/search-source-nominatim';
 
-export function searchAdapterServiceFactory(adapter: SearchAdapter) {
-  return new SearchAdapterService(adapter);
+export function searchSourceServiceFactory(sources: SearchSource[]) {
+  return new SearchSourceService(sources);
 }
 
-export function provideSearchAdapterService() {
+export function provideSearchSourceService() {
   return {
-    provide: SearchAdapterService,
-    useFactory: searchAdapterServiceFactory,
-    deps: [SearchAdapter]
+    provide: SearchSourceService,
+    useFactory: searchSourceServiceFactory,
+    deps: [SearchSource]
   };
 }
 
-export function provideSearchAdapter() {
-  return {
-    provide: SearchAdapter,
-    useClass: SearchAdapterNominatim
-  };
+export function provideSearchSource() {
+  return [{
+    provide: SearchSource,
+    useClass: SearchSourceNominatim,
+    multi: true
+  }];
 }
 
 export function provideAppStore() {
@@ -62,11 +63,11 @@ export class CoreModule {
       providers: [
         MediaService,
         provideAppStore(),
-        provideSearchAdapterService(),
-        provideSearchAdapter(),
+        provideSearchSourceService(),
         MapService,
         SearchService,
-        ToolService
+        ToolService,
+        ...provideSearchSource()
       ]
     };
   }
