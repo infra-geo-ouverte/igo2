@@ -4,8 +4,9 @@ export interface SearchResult {
   title: string;
   icon?: string;
 
+  projection?: string;
   geometry?: SearchResultGeometry;
-  bbox?: [number, number, number, number];
+  extent?: ol.Extent;
   properties?: {[key: string]: any};
 }
 

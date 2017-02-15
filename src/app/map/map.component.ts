@@ -53,13 +53,12 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   private resultToFeature(result: SearchResult) {
     const destProj = this.map.getProjection();
-
     const format = new ol.format.GeoJSON();
     const feature = format.readFeature(Object.assign({
         type: 'Feature'
     }, result));
 
-    feature.getGeometry().transform('EPSG:4326', destProj);
+    feature.getGeometry().transform(result.projection, destProj);
 
     return feature;
   }
@@ -74,19 +73,37 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private handleFocusedResult(result: SearchResult) {
-    this.map.clearMarkers();
-
-    const feature = this.resultToFeature(result);
-    this.map.addMarker(feature);
-    this.map.moveToFeature(feature);
+    this.handleResult(result, false);
   }
 
   private handleSelectedResult(result: SearchResult) {
-    this.map.clearMarkers();
+    this.handleResult(result, true);
+  }
+
+  private handleResult(result: SearchResult, zoom: boolean = false) {
+    this.map.clearOverlay();
 
     const feature = this.resultToFeature(result);
     this.map.addMarker(feature);
-    this.map.zoomToFeature(feature);
-  }
 
+    let extent;
+    if (result.extent) {
+      extent = ol.proj.transformExtent(
+        result.extent, result.projection, this.map.getProjection());
+    }
+
+    if (extent) {
+      if (zoom) {
+        this.map.zoomToExtent(extent);
+      } else {
+        this.map.moveToExtent(extent);
+      }
+    } else {
+      if (zoom) {
+        this.map.zoomToFeature(feature);
+      } else {
+        this.map.moveToFeature(feature);
+      }
+    }
+  }
 }

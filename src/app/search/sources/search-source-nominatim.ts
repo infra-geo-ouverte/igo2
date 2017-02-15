@@ -44,6 +44,7 @@ export class SearchSourceNominatim extends SearchSource {
       source: SearchSourceNominatim.name_,
       title: result.display_name,
       icon: 'place',
+      projection: 'EPSG:4326',
       properties: {
         name: result.display_name,
         place_id: result.place_id,
@@ -58,7 +59,7 @@ export class SearchSourceNominatim extends SearchSource {
           parseFloat(result.lat)
         ]
       },
-      bbox: [
+      extent: [
         parseFloat(result.boundingbox[2]),
         parseFloat(result.boundingbox[0]),
         parseFloat(result.boundingbox[3]),
