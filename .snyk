@@ -13,6 +13,13 @@ ignore:
     - openlayers > jsdoc > marked:
         reason: None given
         expires: '2017-03-01T19:49:55.701Z'
+  'npm:ws:20160920':
+    - openlayers > closure-util > socket.io > engine.io > ws:
+        reason: None given
+        expires: '2017-03-17T14:38:15.183Z'
+    - openlayers > closure-util > socket.io > socket.io-client > engine.io-client > ws:
+        reason: None given
+        expires: '2017-03-17T14:38:15.185Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:negotiator:20160616':
