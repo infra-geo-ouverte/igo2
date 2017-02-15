@@ -4,36 +4,33 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 
-import { SharedModule } from '../../shared/shared.module';
-import { SearchResultComponent } from './search-result.component';
+import { FlexComponent } from '../flex/flex.component';
+import { CollapsibleComponent } from './collapsible.component';
 
-describe('SearchResultComponent', () => {
-  let component: SearchResultComponent;
-  let fixture: ComponentFixture<SearchResultComponent>;
+describe('CollapsibleComponent', () => {
+  let component: CollapsibleComponent;
+  let fixture: ComponentFixture<CollapsibleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModule.forRoot(),
-        SharedModule
+        MaterialModule.forRoot()
       ],
-      declarations: [ SearchResultComponent ]
+      declarations: [
+        FlexComponent,
+        CollapsibleComponent
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchResultComponent);
+    fixture = TestBed.createComponent(CollapsibleComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
-    component.result = {
-      id: '1',
-      title: 'foo',
-      icon: 'bar',
-      source: 'test'
-    };
     expect(component).toBeTruthy();
   });
 });

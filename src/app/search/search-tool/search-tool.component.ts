@@ -20,7 +20,7 @@ export class SearchToolComponent implements ToolComponent, OnInit {
   static icon: string = 'search';
   static defaultOptions: any = {};
 
-  private results: SearchResult[];
+  private sourceResults: [string, SearchResult[]];
   focusedResult?: SearchResult;
 
   constructor(private store: Store<AppStore>) { }
@@ -44,23 +44,24 @@ export class SearchToolComponent implements ToolComponent, OnInit {
   }
 
   private handleSearchResults(results: SearchResult[]) {
-    const results_ = results.map((result, index) => {
-      return {index: index, data: result};
-    });
-
-    results_.sort((r1, r2) => {
-      if (r1.data.source < r2.data.source) {
-        return -1;
+    const groupedResults = {};
+    results.forEach((result: SearchResult) => {
+      const source = result.source;
+      if (groupedResults[source] === undefined) {
+        groupedResults[source] = [];
       }
 
-      if (r1.data.source > r2.data.source) {
-        return 1;
-      }
-
-      return r1.index - r2.index;
+      groupedResults[source].push(result);
     });
 
-    this.results = results_.map(result_ => result_.data);
+    const sourceResults = [];
+    Object.keys(groupedResults)
+      .sort()
+      .forEach((source: string) => {
+        sourceResults.push([source, groupedResults[source]]);
+      });
+
+    this.sourceResults = sourceResults as [string, SearchResult[]];
   }
 
 }
