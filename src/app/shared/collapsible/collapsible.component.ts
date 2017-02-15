@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 
-import { FlexState, FlexComponent } from '../flex/flex.component';
+import { FlexState, FlexComponent } from '../flex';
 
 @Component({
   selector: 'igo-collapsible',
