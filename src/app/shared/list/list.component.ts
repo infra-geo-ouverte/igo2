@@ -19,7 +19,8 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @Input('navigation') navigation: boolean = true;
 
-  @ContentChildren(ListItemDirective) listItems: QueryList<ListItemDirective>;
+  @ContentChildren(ListItemDirective, {descendants: true})
+  listItems: QueryList<ListItemDirective>;
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {

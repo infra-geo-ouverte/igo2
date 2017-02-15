@@ -7,7 +7,7 @@ import { SearchResult } from '../shared/search-result.interface';
 export class SearchSourceMSP extends SearchSource {
 
   static name_: string = 'MSP';
-  static searchUrl: string = 'icherche/v1/geocodingMaxScore';
+  static searchUrl: string = '/icherche/v1/geocodingMaxScore';
 
   constructor(private jsonp: Jsonp) {
     super();

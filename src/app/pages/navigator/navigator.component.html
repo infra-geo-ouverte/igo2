@@ -81,13 +81,13 @@
               panelLeftIcon
               (click)="resizeMenu()">
               <ng-container *ngIf="menu.state === 'initial'">
-                expand_less
+                arrow_upward
               </ng-container>
               <ng-container *ngIf="menu.state === 'collapsed'">
-                expand_more
+                arrow_downward
               </ng-container>
               <ng-container *ngIf="menu.state === 'expanded'">
-                expand_less
+                arrow_upward
               </ng-container>
             </md-icon>
 
