@@ -46,13 +46,17 @@ export class SearchSourceMSP extends SearchSource {
       source: SearchSourceMSP.name_,
       title: _source.recherche,
       icon: 'place',
+      projection: 'EPSG:4326',
       properties: {
         recherche: _source.recherche,
         munnom: _source.munnom,
         odogene: _source.odogene
       },
       geometry: _source.geom,
-      bbox: _source.extent.coordinates
+      extent: [
+        ..._source.extent.coordinates[0] ,
+        ..._source.extent.coordinates[1]
+      ] as ol.Extent
     };
   }
 

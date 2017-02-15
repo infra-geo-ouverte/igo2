@@ -11,34 +11,47 @@ export class NgMap {
   olMap: ol.Map;
 
   private layers: Layer[] = [];
-  private markerLayer: VectorLayer;
-  private markerSource: ol.source.Vector;
+  private overlayLayer: VectorLayer;
+  private overlaySource: ol.source.Vector;
+  private overlayStyle: ol.style.Style;
+  private overlayMarkerStyle: ol.style.Style;
 
   constructor() {
     this.olMap = new ol.Map({});
 
-    this.markerLayer = new VectorLayer({
-      name: 'Vector',
-      type: 'vector',
-      style: {
-        text: new ol.style.Text({
-          text: 'place',
-          font: 'normal 36px Material Icons',
-          textBaseline: 'Bottom',
-          fill: new ol.style.Fill({
-            color: [0, 161, 222, 1]
-          }),
-          stroke: new ol.style.Stroke({
-            color: [255, 255, 255, 1],
-            width: 2
-          })
-        })
-      }
+    this.overlayStyle = new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: [0, 161, 222, 1],
+        width: 3
+      }),
+      fill: new ol.style.Fill({
+        color: [0, 161, 222, 0.1]
+      })
     });
-    this.markerSource = (this.markerLayer.getSource() as ol.source.Vector);
 
-    this.olMap.addLayer(this.markerLayer.olLayer);
-    this.markerLayer.olLayer.setZIndex(999);
+    this.overlayMarkerStyle = new ol.style.Style({
+      text: new ol.style.Text({
+        text: 'place',
+        font: 'normal 36px Material Icons',
+        textBaseline: 'Bottom',
+        fill: new ol.style.Fill({
+          color: [0, 161, 222, 1]
+        }),
+        stroke: new ol.style.Stroke({
+          color: [255, 255, 255, 1],
+          width: 2
+        })
+      })
+    });
+
+    this.overlayLayer = new VectorLayer({
+      name: 'Overlay',
+      type: 'vector'
+    });
+    this.overlaySource = (this.overlayLayer.getSource() as ol.source.Vector);
+
+    this.olMap.addLayer(this.overlayLayer.olLayer);
+    this.overlayLayer.olLayer.setZIndex(999);
   }
 
   getProjection() {
@@ -65,18 +78,26 @@ export class NgMap {
     this.olMap.addLayer(layer.olLayer);
   }
 
-  moveToFeature(feature: ol.Feature) {
+  moveToExtent(extent: ol.Extent) {
     const view = this.olMap.getView();
-    view.fit(feature.getGeometry().getExtent(), this.olMap.getSize(), {
+    view.fit(extent, this.olMap.getSize(), {
       maxZoom: view.getZoom()
     });
   }
 
-  zoomToFeature(feature: ol.Feature) {
+  moveToFeature(feature: ol.Feature) {
+    this.moveToExtent(feature.getGeometry().getExtent());
+  }
+
+  zoomToExtent(extent: ol.Extent) {
     const view = this.olMap.getView();
-    view.fit(feature.getGeometry().getExtent(), this.olMap.getSize(), {
+    view.fit(extent, this.olMap.getSize(), {
       maxZoom: 17
     });
+  }
+
+  zoomToFeature(feature: ol.Feature) {
+    this.zoomToExtent(feature.getGeometry().getExtent());
   }
 
   addMarker(feature: ol.Feature) {
@@ -89,12 +110,16 @@ export class NgMap {
     } else {
       const centroid = ol.extent.getCenter(geometry.getExtent());
       marker = new ol.Feature(new ol.geom.Point(centroid));
+
+      feature.setStyle(this.overlayStyle);
+      this.overlaySource.addFeature(feature);
     }
 
-    this.markerSource.addFeature(marker);
+    marker.setStyle(this.overlayMarkerStyle);
+    this.overlaySource.addFeature(marker);
   }
 
-  clearMarkers() {
-    this.markerSource.clear();
+  clearOverlay() {
+    this.overlaySource.clear();
   }
 }
