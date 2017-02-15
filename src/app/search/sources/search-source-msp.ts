@@ -7,7 +7,7 @@ import { SearchResult } from '../shared/search-result.interface';
 export class SearchSourceMSP extends SearchSource {
 
   static name_: string = 'MSP';
-  static searchUrl: string = '/icherche/v1/geocodingMaxScore';
+  static searchUrl: string = '/icherche/v1/geocode';
 
   constructor(private jsonp: Jsonp) {
     super();
@@ -26,37 +26,32 @@ export class SearchSourceMSP extends SearchSource {
   }
 
   private extractData (response: Response): SearchResult[] {
-    return response.json().hits.hits.map(this.formatResult);
+    return response.json().features.map(this.formatResult);
   }
 
   private getSearchParams (term: string): URLSearchParams {
     const search = new URLSearchParams();
     search.set('q', term);
-    search.set('nb', '5');
+    search.set('limit', '5');
     search.set('callback', 'JSONP_CALLBACK');
+    search.set('geometries', 'geom');
 
     return search;
   }
 
   private formatResult (result: any): SearchResult {
-    const _source = result._source;
-
     return {
-      id: result._id,
+      id: result.id,
       source: SearchSourceMSP.name_,
-      title: _source.recherche,
+      title: result.properties.recherche,
+      title_html: result.highlight,
       icon: 'place',
       projection: 'EPSG:4326',
-      properties: {
-        recherche: _source.recherche,
-        munnom: _source.munnom,
-        odogene: _source.odogene
-      },
-      geometry: _source.geom,
-      extent: [
-        ..._source.extent.coordinates[0] ,
-        ..._source.extent.coordinates[1]
-      ] as ol.Extent
+      properties: Object.assign({
+        type: result.doc_type
+      }, result.properties),
+      geometry: result.geometry,
+      extent: result.bbox
     };
   }
 
