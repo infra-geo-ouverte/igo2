@@ -2,6 +2,7 @@ export interface SearchResult {
   id: string;
   source: string;
   title: string;
+  title_html?: string;
   icon?: string;
 
   projection?: string;
