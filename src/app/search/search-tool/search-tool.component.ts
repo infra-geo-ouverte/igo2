@@ -31,7 +31,8 @@ export class SearchToolComponent implements ToolComponent, OnInit {
 
     this.store
       .select(s => s.searchResults)
-      .subscribe((results: SearchResult[]) => this.results = results);
+      .subscribe((results: SearchResult[]) =>
+        this.handleSearchResults(results));
   }
 
   selectResult(result: SearchResult) {
@@ -40,6 +41,26 @@ export class SearchToolComponent implements ToolComponent, OnInit {
 
   focusResult(result: SearchResult) {
     this.store.dispatch({type: 'FOCUS_RESULT', payload: result});
+  }
+
+  private handleSearchResults(results: SearchResult[]) {
+    const results_ = results.map((result, index) => {
+      return {index: index, data: result};
+    });
+
+    results_.sort((r1, r2) => {
+      if (r1.data.source < r2.data.source) {
+        return -1;
+      }
+
+      if (r1.data.source > r2.data.source) {
+        return 1;
+      }
+
+      return r1.index - r2.index;
+    });
+
+    this.results = results_.map(result_ => result_.data);
   }
 
 }

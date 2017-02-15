@@ -1,4 +1,5 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
+import { Http, Jsonp } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { provideStore } from '@ngrx/store';
 
@@ -14,6 +15,7 @@ import { SearchService } from './search.service';
 import { SearchSourceService } from './search-source.service';
 import { SearchSource } from '../search/sources/search-source';
 import { SearchSourceNominatim } from '../search/sources/search-source-nominatim';
+import { SearchSourceMSP } from '../search/sources/search-source-msp';
 
 export function searchSourceServiceFactory(sources: SearchSource[]) {
   return new SearchSourceService(sources);
@@ -28,11 +30,20 @@ export function provideSearchSourceService() {
 }
 
 export function provideSearchSource() {
-  return [{
-    provide: SearchSource,
-    useClass: SearchSourceNominatim,
-    multi: true
-  }];
+  return [
+    {
+      provide: SearchSource,
+      useClass: SearchSourceNominatim,
+      multi: true,
+      deps: [Http]
+    },
+    {
+      provide: SearchSource,
+      useClass: SearchSourceMSP,
+      multi: true,
+      deps: [Jsonp]
+    }
+  ];
 }
 
 export function provideAppStore() {

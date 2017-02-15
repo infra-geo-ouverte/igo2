@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { TestBed, async, inject } from '@angular/core/testing';
 import { SearchService } from './search.service';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { searchResults } from '../reducers';
 import {
@@ -14,7 +14,8 @@ describe('SearchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpModule
+        HttpModule,
+        JsonpModule
       ],
       providers: [
         provideAppStore(),

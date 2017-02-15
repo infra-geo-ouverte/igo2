@@ -5,52 +5,52 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/throw';
-
 import { SearchSourceService } from './search-source.service';
 import { SearchResult } from '../search/shared/search-result.interface';
+import { SearchSource } from '../search/sources/search-source';
 
 import { AppStore } from '../app.store';
 
 @Injectable()
 export class SearchService {
 
-  subscription: Subscription;
+  subscriptions: Subscription[] = [];
 
   constructor(private http: Http,
               private store: Store<AppStore>,
               private searchSourceService: SearchSourceService) {
   }
 
-  search (term?: string) {
+  search(term?: string) {
     const sources = this.searchSourceService.getSources();
-    const source = sources[0];
 
-    const search = source.getSearchParams(term);
-
-    if (this.subscription !== undefined) {
-      this.subscription.unsubscribe();
-    }
-
-    this.subscription = this.http
-      .get(source.getSearchUrl(), { search })
-      .map(res => source.extractData(res))
-      .catch(this.handleError)
-      .subscribe((results: SearchResult[]) => {
-        this.store.dispatch({
-          type: 'SET_SEARCH_RESULTS',
-          payload: results
-        });
-      });
+    this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe);
+    this.subscriptions = sources.map((source: SearchSource) =>
+      this.searchSource(source, term));
   }
 
-  clear (term?: string) {
+  searchSource(source: SearchSource, term?: string) {
+    return source.search(term)
+      .catch(this.handleError)
+      .subscribe((results: SearchResult[]) =>
+        this.handleSearchResults(results, source));
+  }
+
+  clear(term?: string) {
     this.store.dispatch({type: 'CLEAR_SEARCH_RESULTS'});
   }
 
-  private handleError (error: Response | any) {
+  private handleSearchResults(results: SearchResult[], source: SearchSource) {
+    this.store.dispatch({
+      type: 'UPDATE_SEARCH_RESULTS',
+      payload: {
+        results: results,
+        source: source.getName()
+      }
+    });
+  }
+
+  private handleError(error: Response | any) {
     // TODO: use a remote logging infrastructure
     let errorMessage: string;
 
