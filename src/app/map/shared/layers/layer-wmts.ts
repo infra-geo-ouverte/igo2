@@ -26,31 +26,31 @@ export class WMTSLayer extends Layer {
       return new ol.layer.Tile(olLayerOptions);
 
     } else {
-
-      const projection = ol.proj.get('EPSG:3857');
-      const projectionExtent = projection.getExtent();
-      const size = ol.extent.getWidth(projectionExtent) / 256;
-      const resolutions = new Array(14);
-      const matrixIds = new Array(14);
-      for ( let z = 0; z < 14; ++z ) {
-        resolutions[z] = size / Math.pow(2, z);
-        matrixIds[z] = z;
-      }
-
-      options.source = Object.assign(options.source,
-                                      {
-                                        tileGrid: new ol.tilegrid.WMTS({
-                                          origin: ol.extent.getTopLeft(projectionExtent),
-                                          resolutions: resolutions,
-                                          matrixIds: matrixIds
-                                        })
-                                      });
-
- return new ol.layer.Tile( {source: new ol.source.WMTS(options.source)} );
+      options.source = Object.assign(options.source, { tileGrid : this.getDefaultTileGrid() });
+      return new ol.layer.Tile( {source: new ol.source.WMTS(options.source)} );
     }
   }
 
   constructor(options: WMTSLayerOptions, getCapabilities?: ol.format.XML) {
     super(options, getCapabilities);
+  }
+
+  // TODO Support others projections ?
+  getDefaultTileGrid(): ol.tilegrid.WMTS {
+
+    const projection = ol.proj.get('EPSG:3857');
+    const projectionExtent = projection.getExtent();
+    const size = ol.extent.getWidth(projectionExtent) / 256;
+    const resolutions = new Array(14);
+    const matrixIds = new Array(14);
+    for ( let z = 0; z < 14; ++z ) {
+      resolutions[z] = size / Math.pow(2, z);
+      matrixIds[z] = z;
+    }
+
+    return new ol.tilegrid.WMTS({ origin: ol.extent.getTopLeft(projectionExtent),
+                                  resolutions: resolutions,
+                                  matrixIds: matrixIds
+                                });
   }
 }

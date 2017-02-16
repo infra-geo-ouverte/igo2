@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { URLSearchParams, Request, RequestMethod } from '@angular/http';
 
 import { Layer, LayerOptions } from './layers/layer';
 import { OSMLayer } from './layers/layer-osm';
@@ -18,7 +19,7 @@ export class LayerService {
     wmts: WMTSLayer
   };
 
-  getCapabilitiesStore: any[] = [];
+  public getCapabilitiesStore: any[] = [];
 
   constructor(private http: Http) { }
 
@@ -27,7 +28,7 @@ export class LayerService {
     const layerCls = LayerService.layerClasses[options.type];
 
     if (options.optionsFromCapabilities) {
-       return this.getCapabilities(options).map(
+       return this.findGetCapabilities(options).map(
         getCapabilities => {
           return new layerCls(options, getCapabilities);
         });
@@ -36,16 +37,28 @@ export class LayerService {
     }
   }
 
-  getCapabilities(options): Observable<any> {
-    let url = options.source.url + '?REQUEST=GetCapabilities&';
-    url += 'SERVICE=' + options.type + '&';
-    url += 'VERSION=' + (options.version ? options.version : '1.0.0') + '&';
+  findGetCapabilities(options): Observable<any> {
 
-    const getCapabilities = this.findGetCapabilities(url);
+    const params = new URLSearchParams();
+    params.set('request', 'GetCapabilities');
+    params.set('service', options.type);
+    params.set('version', ( options.version ? options.version : '1.0.0' ) );
+
+    const request = new Request({
+      method: RequestMethod.Get,
+      url: options.source.url,
+      search: params
+    });
+
+    const url = options.source.url + '?' + params.toString();
+
+    let getCapabilities = this.getCapabilitiesStore.find(value => value.url === url);
+
     if (getCapabilities) {
      return getCapabilities.getCapabilities;
     } else {
-      return this.http.get(url)
+
+      return this.http.request(request)
               .map(response => {
 
                   let parser;
@@ -63,15 +76,5 @@ export class LayerService {
                   return getCapabilities;
               });
     }
-  }
-
-  findGetCapabilities(url: string): any {
-
-    return this.getCapabilitiesStore.find(function(value, idx, array){
-      if (value.url === url) {
-        return value;
-      }
-    }, this);
-
   }
 }
