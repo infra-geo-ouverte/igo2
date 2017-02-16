@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import {TranslateModule} from 'ng2-translate';
+import { TranslateModule } from 'ng2-translate';
 
 import { BackdropComponent } from './backdrop/backdrop.component';
 import { FlexComponent } from './flex/flex.component';
