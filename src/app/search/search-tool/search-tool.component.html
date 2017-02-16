@@ -8,7 +8,7 @@
           igoListItem
           tabindex="{{i}}"
           [focused]="focusedResult && focusedResult.id === result.id
-                     && focusedResult.source === sourceResults[0]"
+                     && focusedResult.source === sourceResult[0]"
           [result]="result"
           (focusItem)="focusResult(result)"
           (selectItem)="selectResult(result)">
