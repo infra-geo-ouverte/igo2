@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MediaService } from './core/media.service';
 
 @Component({
   selector: 'igo-app',
@@ -6,7 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.styl']
 })
 export class AppComponent {
-  title = 'igo works!';
-
-  constructor () { }
+  constructor (protected mediaService: MediaService) {
+  }
 }
