@@ -1,4 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
+
 import { LayerService } from './layer.service';
 
 import { MockBackend, MockConnection } from '@angular/http/testing';

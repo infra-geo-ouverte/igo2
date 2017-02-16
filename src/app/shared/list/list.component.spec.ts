@@ -1,10 +1,6 @@
-
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
-import { MaterialModule } from '@angular/material';
-
+import { TestModule } from '../../test.module';
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {
@@ -14,7 +10,7 @@ describe('ListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModule.forRoot()
+        TestModule
       ],
       declarations: [ ListComponent ]
     })
