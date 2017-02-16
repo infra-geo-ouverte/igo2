@@ -11,7 +11,7 @@ import { WMTSLayer } from './layers/layer-wmts';
 @Injectable()
 export class LayerService {
 
-  getCapabilitiesStore: any [] = [];
+  getCapabilitiesStore: any[] = [];
 
   static layerClasses = {
     osm: OSMLayer,
@@ -25,21 +25,15 @@ export class LayerService {
   createLayer(options: LayerOptions): Observable<Layer> {
     
     const layerCls = LayerService.layerClasses[options.type];
-   // let layerTemp = new layerCls(options);
 
     if(options.optionsFromCapabilities){
        return this.getCapabilities(options).map(
         getCapabilities => {
-          //new layerCls(options, getCapabilities);
-          //layerTemp.createOlLayer(options, getCapabilities);
           return new layerCls(options, getCapabilities);
         });
     }
-    else{
-
-    //  layerTemp.createOlLayer(options);    
+    else{    
       return new Observable(layer => layer.next(new layerCls(options)));
-
     }
   }
 
@@ -60,8 +54,8 @@ export class LayerService {
                     case "wmts":
                       parser = new ol.format.WMTSCapabilities();
                       break;
-                    case "wmt":
-                      parser = new ol.format.WMTSCapabilities();
+                    case "wms":
+                      parser = new ol.format.WMSCapabilities();
                       break;
                   }
                   
