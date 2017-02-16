@@ -7,7 +7,7 @@ import { Media } from '../../core/media.service';
 import { Tool } from '../../tool/shared/tool.interface';
 import { SearchResult } from '../../search/shared/search-result.interface';
 import { ContextService } from '../../core/context.service';
-import { FlexState } from '../../shared/flex/flex.component';
+import { FlexState } from '../../shared/flex';
 
 import { AppStore } from '../../app.store';
 
