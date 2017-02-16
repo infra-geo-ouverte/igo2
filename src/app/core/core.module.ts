@@ -2,7 +2,7 @@ import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core
 import { Http, Jsonp } from '@angular/http';
 import { CommonModule } from '@angular/common';
 
-import {MissingTranslationHandler} from 'ng2-translate';
+import { MissingTranslationHandler } from 'ng2-translate';
 
 import { IgoMissingTranslationHandler } from './language/missing-translation.guard';
 import { LanguageService } from './language/language.service';
