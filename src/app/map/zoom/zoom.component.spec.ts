@@ -1,8 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { MaterialModule } from '@angular/material';
+
+import { TestModule } from '../../test.module';
 
 import { ZoomComponent } from './zoom.component';
 
@@ -13,7 +12,7 @@ describe('ZoomComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModule.forRoot()
+        TestModule
       ],
       declarations: [ ZoomComponent ]
     })

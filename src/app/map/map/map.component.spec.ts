@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaterialModule } from '@angular/material';
+import { TestModule } from '../../test.module';
 
 import { provideAppStore } from '../../core/core.module';
 import { MapService } from '../../core/map.service';
@@ -9,14 +9,8 @@ import { NgMap } from '../shared/map';
 import { ZoomComponent } from '../zoom/zoom.component';
 import { MapComponent } from './map.component';
 
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import {
-    ResponseOptions,
-    Response,
-    Http,
-    BaseRequestOptions,
-    RequestMethod
-} from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
+import { Http, BaseRequestOptions } from '@angular/http';
 
 const mockHttpProvider = {
     deps: [ MockBackend, BaseRequestOptions ],
@@ -32,7 +26,7 @@ describe('MapComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModule.forRoot()
+        TestModule
       ],
       declarations: [
         ZoomComponent,
