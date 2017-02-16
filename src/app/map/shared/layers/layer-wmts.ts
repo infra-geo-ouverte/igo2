@@ -10,29 +10,31 @@ export interface WMTSLayerOptions extends LayerOptions {
 export class WMTSLayer extends Layer {
 
   olLayer: ol.layer.Tile;
-  getCapabilitiesResponse: any;
 
   createOlLayer(options: WMTSLayerOptions,
-                getCapabilities: ol.format.WMTSCapabilities): ol.layer.Tile {
+                capabilities: ol.format.WMTSCapabilities): ol.layer.Tile {
 
-    if ( getCapabilities ) {
+    if ( capabilities ) {
 
-      const olLayerOptionsGetCapabilities = ol.source.WMTS.optionsFromCapabilities(getCapabilities,
+      const olLayerOptionsGetCapabilities = ol.source.WMTS.optionsFromCapabilities(capabilities,
                                                                                     options.source);
 
-      const olLayerOptions = Object.assign(options.view || {}, {
+      const olLayerOptions = Object.assign({}, options.view, {
         source: new ol.source.WMTS(olLayerOptionsGetCapabilities)
       });
       return new ol.layer.Tile(olLayerOptions);
 
     } else {
-      options.source = Object.assign(options.source, { tileGrid : this.getDefaultTileGrid() });
-      return new ol.layer.Tile( {source: new ol.source.WMTS(options.source)} );
+      const optionsSource = Object.assign({},
+                                          options.source,
+                                          { tileGrid : this.getDefaultTileGrid() }
+                            );
+      return new ol.layer.Tile( {source: new ol.source.WMTS(optionsSource)} );
     }
   }
 
-  constructor(options: WMTSLayerOptions, getCapabilities?: ol.format.XML) {
-    super(options, getCapabilities);
+  constructor(options: WMTSLayerOptions, capabilities?: ol.format.XML) {
+    super(options, capabilities);
   }
 
   // TODO Support others projections ?

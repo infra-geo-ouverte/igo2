@@ -19,7 +19,7 @@ export class LayerService {
     wmts: WMTSLayer
   };
 
-  public getCapabilitiesStore: any[] = [];
+  public capabilitiesStore: any[] = [];
 
   constructor(private http: Http) { }
 
@@ -28,16 +28,16 @@ export class LayerService {
     const layerCls = LayerService.layerClasses[options.type];
 
     if (options.optionsFromCapabilities) {
-       return this.findGetCapabilities(options).map(
-        getCapabilities => {
-          return new layerCls(options, getCapabilities);
+       return this.getCapabilities(options).map(
+        capabilities => {
+          return new layerCls(options, capabilities);
         });
     } else {
       return new Observable(layer => layer.next(new layerCls(options)));
     }
   }
 
-  findGetCapabilities(options): Observable<any> {
+  getCapabilities(options): Observable<any> {
 
     const params = new URLSearchParams();
     params.set('request', 'GetCapabilities');
@@ -52,10 +52,10 @@ export class LayerService {
 
     const url = options.source.url + '?' + params.toString();
 
-    let getCapabilities = this.getCapabilitiesStore.find(value => value.url === url);
+    let capabilities = this.capabilitiesStore.find(value => value.url === url);
 
-    if (getCapabilities) {
-     return getCapabilities.getCapabilities;
+    if (capabilities) {
+     return capabilities.capabilities;
     } else {
 
       return this.http.request(request)
@@ -71,9 +71,9 @@ export class LayerService {
                       break;
                   }
 
-                  getCapabilities = parser.read(response.text());
-                  this.getCapabilitiesStore.push({url: url, getCapbilities: getCapabilities});
-                  return getCapabilities;
+                  capabilities = parser.read(response.text());
+                  this.capabilitiesStore.push({url: url, capabilities: capabilities});
+                  return capabilities;
               });
     }
   }
