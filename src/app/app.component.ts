@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { MediaService } from './core/media.service';
-
 @Component({
   selector: 'igo-app',
   templateUrl: './app.component.html',
@@ -10,5 +8,5 @@ import { MediaService } from './core/media.service';
 export class AppComponent {
   title = 'igo works!';
 
-  constructor (private mediaService: MediaService) { }
+  constructor () { }
 }

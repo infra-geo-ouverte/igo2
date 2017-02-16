@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
@@ -16,8 +16,7 @@ export class SearchService {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private http: Http,
-              private store: Store<AppStore>,
+  constructor(private store: Store<AppStore>,
               private searchSourceService: SearchSourceService) {
   }
 
