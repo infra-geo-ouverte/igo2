@@ -1,9 +1,7 @@
-/* tslint:disable:no-unused-variable */
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { SearchService } from './search.service';
 import { HttpModule, JsonpModule } from '@angular/http';
 
-import { searchResults } from '../reducers';
 import {
    provideAppStore,
    provideSearchSource,
