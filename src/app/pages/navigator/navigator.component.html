@@ -9,7 +9,7 @@
     md-icon-button
     id="igo-menu-button"
     class="igo-primary"
-    (click)="sidenav.opened = !sidenav.opened">
+    (click)="sidenav.toggle()">
     <md-icon>
       <ng-container *ngIf="!sidenav.opened">
         menu
