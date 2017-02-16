@@ -1,9 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { provideAppStore } from '../core/core.module';
-import { MapService } from '../core/map.service';
-import { LayerService } from './shared/layer.service';
-import { NgMap } from './shared/map';
+import { MaterialModule } from '@angular/material';
+
+import { provideAppStore } from '../../core/core.module';
+import { MapService } from '../../core/map.service';
+import { LayerService } from '../shared/layer.service';
+import { NgMap } from '../shared/map';
+import { ZoomComponent } from '../zoom/zoom.component';
 import { MapComponent } from './map.component';
 
 describe('MapComponent', () => {
@@ -12,7 +15,13 @@ describe('MapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapComponent ],
+      imports: [
+        MaterialModule.forRoot()
+      ],
+      declarations: [
+        ZoomComponent,
+        MapComponent
+      ],
       providers: [
         provideAppStore(),
         MapService,

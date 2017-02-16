@@ -1,0 +1,17 @@
+@require '../../../css/theme.styl';
+@require '../../../css/media.styl';
+
+.igo-zoom-container {
+  position: absolute;
+  top: $igo-margin;
+  right: $igo-margin;
+  width: $igo-icon-button-width;
+
+  +media(mobile) {
+    display: none;
+  }
+}
+
+.igo-zoom-container button:first-child {
+  margin-bottom: $igo-margin;
+}
