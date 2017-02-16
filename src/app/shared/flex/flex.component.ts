@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { FlexState, FlexDirection} from './flex';
 
-export type FlexState =
-  'initial' | 'collapsed' | 'expanded' | 'transition';
-
-export type FlexDirection =
-  'column' | 'row';
 
 @Component({
   selector: 'igo-flex',
