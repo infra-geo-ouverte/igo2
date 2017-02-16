@@ -51,7 +51,7 @@ export class SearchBarComponent implements OnInit {
 
     // Prevent searching the same thing twice
     // and searching when clicking "enter" on a search result
-    if (term !== this.term) {
+    if ((term !== this.term) && (term.length >= 3))  {
       this.key.emit(term);
       this.selectSearchTool();
       this.search(term);
