@@ -1,5 +1,3 @@
-/* tslint:disable:no-unused-variable */
-import { browser, element, by } from 'protractor';
 import { IgoPage } from './app.po';
 import {} from 'jasmine';
 
