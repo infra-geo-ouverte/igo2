@@ -17,7 +17,9 @@ html, body {
   box-sizing: border-box;
 }
 
+/*
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+*/
 
 @require './theme.styl';
 
@@ -30,8 +32,29 @@ input {
 }
 
 .md-input-placeholder {
+  font-style: italic;
+  top: 10px !important;
   left: $igo-padding !important;
   right: $igo-padding !important;
+  color: $igo-border-color;
+}
+
+.md-input-underline {
+  border-color: $igo-border-color;
+}
+
+.md-ripple-foreground {
+  display: none;
+}
+
+[md-button]:hover.igo-primary .md-button-focus-overlay,
+[md-icon-button]:hover.igo-primary .md-button-focus-overlay {
+  background-color: $igo-primary-color-hover;
+}
+
+[md-button]:hover.igo-secondary .md-button-focus-overlay,
+[md-icon-button]:hover.igo-secondary .md-button-focus-overlay {
+  background-color: $igo-secondary-color-hover;
 }
 
 button[md-icon-button] {
@@ -41,6 +64,14 @@ button[md-icon-button] {
   margin: 0;
   padding: 0;
   background-color: $igo-tertiary-color;
+}
+
+button[md-icon-button].igo-primary {
+  color: $igo-primary-color;
+}
+
+button[md-icon-button].igo-secondary {
+  color: $igo-secondary-color;
 }
 
 button {
