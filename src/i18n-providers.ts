@@ -1,4 +1,4 @@
-import { TRANSLATIONS, TRANSLATIONS_FORMAT, LOCALE_ID } from '@angular/core';
+/*import { TRANSLATIONS, TRANSLATIONS_FORMAT, LOCALE_ID } from '@angular/core';
 import {Config} from './config';
 
 export function getTranslationProviders(): Promise<Object[]> {
@@ -30,4 +30,4 @@ export function getTranslationProviders(): Promise<Object[]> {
     xhr.onerror = () => reject(noProviders);
     xhr.send();
   });
-}
+}*/

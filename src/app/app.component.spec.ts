@@ -1,6 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { LanguageService } from './core/language/language.service';
 
+import { TestModule } from './test.module';
 import { AppComponent } from './app.component';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
 import { MediaService } from './core/media.service';
@@ -14,12 +16,14 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         NavigatorModule,
+        TestModule,
         NavigatorRoutingModule
       ],
       declarations: [
         AppComponent
       ],
       providers: [
+        LanguageService,
         provideAppStore(),
         MediaService
       ]

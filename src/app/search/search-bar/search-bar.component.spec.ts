@@ -1,7 +1,4 @@
-
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import {
    provideAppStore,
@@ -11,6 +8,7 @@ import {
 
 import { SearchService } from '../../core/search.service';
 
+import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
 import { SearchBarComponent } from './search-bar.component';
 
@@ -21,6 +19,7 @@ describe('SearchBarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        TestModule,
         SharedModule
       ],
       declarations: [ SearchBarComponent ],

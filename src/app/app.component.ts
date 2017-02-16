@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+import { LanguageService } from './core/language/language.service';
 import { MediaService } from './core/media.service';
 
 @Component({
@@ -7,6 +9,7 @@ import { MediaService } from './core/media.service';
   styleUrls: ['./app.component.styl']
 })
 export class AppComponent {
-  constructor (protected mediaService: MediaService) {
+  constructor (protected languageService: LanguageService,
+               protected mediaService: MediaService) {
   }
 }

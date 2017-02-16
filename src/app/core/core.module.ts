@@ -1,15 +1,22 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { Http, Jsonp } from '@angular/http';
 import { CommonModule } from '@angular/common';
+
+import { MissingTranslationHandler } from 'ng2-translate';
+
+import { IgoMissingTranslationHandler } from './language/missing-translation.guard';
+import { LanguageService } from './language/language.service';
+import { throwIfAlreadyLoaded } from './module-import.guard';
+
 import { provideStore } from '@ngrx/store';
 
 import { browserMedia, mapView, mapLayers, selectedTool,
          availableTools, searchResults, selectedResult,
          focusedResult } from '../reducers';
 
-import { throwIfAlreadyLoaded } from './module-import-guard';
 import { MediaService } from './media.service';
 import { MapService } from './map.service';
+
 import { ToolService } from './tool.service';
 import { SearchService } from './search.service';
 import { SearchSourceService } from './search-source.service';
@@ -67,11 +74,14 @@ export function provideAppStore() {
   exports: [],
   declarations: []
 })
+
 export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
       providers: [
+        LanguageService,
+        { provide: MissingTranslationHandler, useClass: IgoMissingTranslationHandler },
         MediaService,
         provideAppStore(),
         provideSearchSourceService(),
