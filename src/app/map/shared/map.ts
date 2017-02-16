@@ -48,6 +48,10 @@ export class NgMap {
       name: 'Overlay',
       type: 'vector'
     });
+   // this.overlayLayer.createOlLayer({
+   //   name: 'Overlay',
+    //  type: 'vector'
+   // });
     this.overlaySource = (this.overlayLayer.getSource() as ol.source.Vector);
 
     this.olMap.addLayer(this.overlayLayer.olLayer);

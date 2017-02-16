@@ -29,7 +29,7 @@ export class ContextService {
         }
       },
       layers: [
-        {
+        /*{
           name: 'MSP',
           type: 'xyz',
           source: {
@@ -42,6 +42,17 @@ export class ContextService {
               src: 'http://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png'
             },
             maxZoom: 17
+          }
+        },*/
+        {
+          name: 'WMTS',
+          type: 'wmts',
+          optionsFromCapabilities: false,
+          source:{
+            url : 'prodWMTS/',
+            layer : 'carte_gouv_qc_public',
+            matrixSet: 'EPSG_3857',
+            style: 'default'
           }
         }
       ],
