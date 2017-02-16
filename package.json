@@ -15,7 +15,7 @@
     "build.dev.jit": "npm run clean && ng build --dev --output-path ./dist/dev",
     "build.dev": "ng build -o dist/dev --aot -dev --bh /",
     "build.prod.jit": "npm run clean && ng build --prod --output-path ./dist/prod",
-    "build.prod": "ng build -o dist/prod/fr --aot -prod --bh /",
+    "build.prod": "ng build -o dist/prod --aot -prod --bh /",
     "serve.dev": "node_modules/live-server/live-server.js ./dist/dev/ --port=4200 --no-browser",
     "serve.prod": "node_modules/live-server/live-server.js ./dist/prod/ --port=4200 --no-browser",
     "doc": "compodoc -p src/tsconfig.json -s --port 4220",

@@ -18,7 +18,9 @@ export function createTranslateLoader(http: Http) {
     MaterialModule.forRoot()
   ],
   exports: [
-    HttpModule
+    HttpModule,
+    MaterialModule,
+    TranslateModule
   ]
 })
 

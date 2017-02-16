@@ -1,6 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import {
    provideAppStore,
@@ -17,7 +15,6 @@ import { MapModule } from '../../map/map.module';
 import { SearchModule } from '../../search/search.module';
 import { ToolModule } from '../../tool/tool.module';
 import { ToolService } from '../../core/tool.service';
-import { selectedTool } from '../../reducers';
 import { NavigatorComponent } from './navigator.component';
 
 describe('NavigatorComponent', () => {
