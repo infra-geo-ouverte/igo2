@@ -23,6 +23,7 @@ export class SearchBarComponent implements OnInit {
   term?: string;
 
   private searchTermsStream = new Subject<string>();
+  readonly preValidationSearch = ['Control', 'Shift', 'Alt'];
 
   constructor(private store: Store<AppStore>,
               private searchService: SearchService) {}
@@ -51,7 +52,11 @@ export class SearchBarComponent implements OnInit {
 
     // Prevent searching the same thing twice
     // and searching when clicking "enter" on a search result
-    if ((term !== this.term) && (term.length >= 3))  {
+    if (
+        (term !== this.term) 
+        && (term.length >= 3) 
+        && (this.preValidationSearch.find(value => value === event.key) === undefined)
+    ) {
       this.key.emit(term);
       this.selectSearchTool();
       this.search(term);
