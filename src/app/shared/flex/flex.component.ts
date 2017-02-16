@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { FlexState, FlexDirection} from "./flex";
+import { FlexState, FlexDirection} from './flex';
 
 
 @Component({
