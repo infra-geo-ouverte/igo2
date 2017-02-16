@@ -30,6 +30,20 @@ export class ContextService {
       },
       layers: [
         {
+          name : 'WMTS_GetCapabilities',
+          type : 'wmts',
+          optionsFromCapabilities: true,
+          source: {
+            // http://openlayers.org/en/latest/examples/wmts-ign.html?q=wmts
+            url : 'https://wxs.ign.fr/2mqbg0z6cx7ube8gsou10nrt/wmts',
+            layer: 'GEOGRAPHICALGRIDSYSTEMS.MAPS',
+            matrixSet: 'PM',
+            format: 'image/jpeg',
+            projection: 'EPSG:3857',
+            style: 'normal'
+          }
+        },
+        {
           name: 'MSP',
           type: 'xyz',
           source: {
