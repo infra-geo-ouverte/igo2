@@ -5,6 +5,8 @@ import { LanguageService } from './core/language/language.service';
 import { TestModule } from './test.module';
 import { AppComponent } from './app.component';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
+import { MediaService } from './core/media.service';
+import { provideAppStore } from './core/core.module';
 
 import {} from 'jasmine';
 
@@ -20,7 +22,11 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      providers: [LanguageService]
+      providers: [
+        LanguageService,
+        provideAppStore(),
+        MediaService
+      ]
     });
     TestBed.compileComponents();
   });

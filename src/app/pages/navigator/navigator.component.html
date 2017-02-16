@@ -10,47 +10,56 @@
     id="igo-menu-button"
     color="primary"
     (click)="sidenav.toggle()">
-    <md-icon *ngIf="!sidenav.opened">menu</md-icon>
-    <md-icon *ngIf="sidenav.opened">keyboard_arrow_left</md-icon>  
+    <md-icon >
+      <ng-container *ngIf="!sidenav.opened">
+        menu
+      </ng-container>
+      <ng-container *ngIf="sidenav.opened">
+        keyboard_arrow_left
+      </ng-container>
+    </md-icon>
   </button>
 
   <igo-search-bar
-    [tool]="searchTool"
     (key)="sidenav.open()">  
   </igo-search-bar>
 
   <igo-sidenav #sidenav [opened]="false">
     <igo-flex
-      #flex
-      igoFlexDirection="column"
-      igoFlexInitial="60%"
-      igoFlexCollapsed="61px"
-      igoFlexExpanded="calc(100% - 60px)">
+      #menu
+      direction="column"
+      initial="50%"
+      collapsed="51px"
+      expanded="calc(100% - 51px)"
+      [state]="menuState">
 
       <div
         id="igo-upper-panel"
         class="igo-container">
 
         <div class="igo-content">
-          <igo-toolbar
-            [tools]="tools"
-            *ngIf="!selectedTool">  
+          <igo-toolbar *ngIf="!selectedTool">  
           </igo-toolbar>
 
           <igo-panel
             [title]="selectedTool.title"
             *ngIf="selectedTool">
+
             <md-icon
               panelLeftIcon
-              (click)="goBack()">arrow_back</md-icon> 
+              (click)="goBack()">
+              arrow_back
+            </md-icon> 
+
             <md-icon
               panelRightIcon
-              (click)="goHome()">menu</md-icon>
+              (click)="goHome()">
+              menu
+            </md-icon>
 
             <igo-toolbox
-              [tools]="tools"
-              [tool]="selectedTool"
-              *ngIf="flex.state !== 'collapsed'">
+              *ngIf="menu.state === 'initial' ||
+                     menu.state === 'expanded'">
             </igo-toolbox>
           </igo-panel>
         </div>
@@ -62,9 +71,36 @@
         id="igo-lower-panel"
         class="igo-container">
 
-        <div
-          class="igo-content"
-          (click)="flex.collapse()">
+        <div class="igo-content">
+
+          <igo-panel
+            [title]="focusedResult.title"
+            *ngIf="focusedResult">
+
+            <md-icon
+              panelLeftIcon
+              (click)="resizeMenu()">
+              <ng-container *ngIf="menu.state === 'initial'">
+                arrow_upward
+              </ng-container>
+              <ng-container *ngIf="menu.state === 'collapsed'">
+                arrow_downward
+              </ng-container>
+              <ng-container *ngIf="menu.state === 'expanded'">
+                arrow_upward
+              </ng-container>
+            </md-icon>
+
+            <md-icon
+              panelRightIcon
+              *ngIf="media !== 'mobile'">
+              open_in_new
+            </md-icon>
+
+            <igo-search-result-details
+              [result]="focusedResult">
+            </igo-search-result-details>
+          </igo-panel>
         </div>
 
       </div>
@@ -72,9 +108,6 @@
     </igo-flex>
   </igo-sidenav>
 
-  <igo-map
-    [options]="context.map"
-    [layers]="context.layers">
-  </igo-map>
+  <igo-map></igo-map>
 
 </md-sidenav-container>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Tool } from '../tool/shared/tool.interface';
-import { ToolComponent } from '../tool/shared/tool-component.model';
+import { ToolComponent } from '../tool/shared/tool-component';
 
 @Injectable()
 export class ToolService {
@@ -9,7 +9,7 @@ export class ToolService {
   static toolClasses: Array<typeof ToolComponent> = [];
   static tools: Array<Tool> = [];
 
-  static register(cls: typeof ToolComponent) {
+  static register(cls: any) {
     const tool = {
       name: cls.name_,
       title: cls.title,

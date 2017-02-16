@@ -1,10 +1,9 @@
-/* tslint:disable:no-unused-variable */
+
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { MaterialModule } from '@angular/material';
-import { MdIconModule } from '@angular/material/icon';
+import { SharedModule } from '../../shared/shared.module';
 
 import { StoreModule } from '@ngrx/store';
 import { provideStore } from '@ngrx/store';
@@ -20,8 +19,7 @@ describe('ToolbarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModule.forRoot(),
-        MdIconModule.forRoot()
+        SharedModule
       ],
       declarations: [
         ToolbarComponent,

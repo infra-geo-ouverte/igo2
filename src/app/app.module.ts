@@ -5,6 +5,10 @@ import { MaterialModule } from '@angular/material';
 import { HttpModule, Http } from '@angular/http';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
+
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
@@ -35,7 +39,6 @@ export function createTranslateLoader(http: Http) {
     NavigatorModule,
     NavigatorRoutingModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

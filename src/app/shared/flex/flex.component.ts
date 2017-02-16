@@ -1,13 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { FlexState, FlexDirection} from './flex';
 
-type FlexState =
-  'initial'
-  | 'collapsed'
-  | 'expanded';
-
-type FlexDirection =
-  'column'
-  | 'row';
 
 @Component({
   selector: 'igo-flex',
@@ -16,13 +9,14 @@ type FlexDirection =
 })
 export class FlexComponent implements OnInit {
 
-  @Input('igoFlexInitial') igoFlexInitial: string;
-  @Input('igoFlexCollapsed') igoFlexCollapsed: string = '0';
-  @Input('igoFlexExpanded') igoFlexExpanded: string = '100%';
-  @Input('igoFlexState') igoFlexState: FlexState = 'initial';
-  @Input('igoFlexDirection') igoFlexDirection: FlexDirection = 'column';
+  static transitionTime = 250;
 
   @ViewChild('flexMain') main;
+
+  @Input('initial') initial: string;
+  @Input('collapsed') collapsed: string = '0';
+  @Input('expanded') expanded: string = '100%';
+  @Input('direction') direction: FlexDirection = 'column';
 
   private _state: FlexState = 'initial';
 
@@ -30,41 +24,41 @@ export class FlexComponent implements OnInit {
     return this._state;
   }
 
-  set state (state: FlexState){
-    if (state === 'collapsed') {
-      this.setSize(this.igoFlexCollapsed);
-    } else if (state === 'expanded') {
-      this.setSize(this.igoFlexExpanded);
-    } else if (state === 'initial') {
-      this.setSize(this.igoFlexInitial);
+  @Input('state') set state (state: FlexState){
+    let size;
+    switch (state) {
+      case 'collapsed':
+        size = this.collapsed;
+        break;
+      case 'expanded':
+        size = this.expanded;
+        break;
+      case 'initial':
+        size = this.initial;
+        break;
+      default: break;
     }
 
-    this._state = state;
+    if (size !== undefined) {
+      this.setSize(size);
+      setTimeout(() => {
+         this._state = state;
+      }, FlexComponent.transitionTime);
+    }
   }
 
   constructor(private el: ElementRef) { }
 
   ngOnInit() {
-    this.el.nativeElement.style.flexDirection = this.igoFlexDirection;
-    this.state = this.igoFlexState;
-  }
-
-  collapse() {
-    this.state = 'collapsed';
-  }
-
-  expand() {
-    this.state = 'expanded';
-  }
-
-  reset() {
-    this.state = 'initial';
+    this.el.nativeElement.style.flexDirection = this.direction;
   }
 
   private setSize(size: string) {
-    if (this.igoFlexDirection === 'column') {
+    this._state = 'transition';
+
+    if (this.direction === 'column') {
       this.main.nativeElement.style.height = size;
-    } else if (this.igoFlexDirection === 'row') {
+    } else if (this.direction === 'row') {
       this.main.nativeElement.style.width = size;
     }
   }

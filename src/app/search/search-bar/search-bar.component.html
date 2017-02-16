@@ -1,6 +1,7 @@
 <md-input-container class="igo-search-bar">
   <input
-    md-input
+  	md-input
     [placeholder]="'Search for an address or a place' | translate"
-    (keyup)="onKey($event)">
+    (keyup)="keyup($event)"
+    [ngModel]="term">
 </md-input-container>

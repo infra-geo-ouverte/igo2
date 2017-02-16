@@ -1,8 +1,15 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { provideStore } from '@ngrx/store';
+
+import {
+   provideAppStore,
+   provideSearchSource,
+   provideSearchSourceService
+} from '../../core/core.module';
+import { MapService } from '../../core/map.service';
+import { LayerService } from '../../map/shared/layer.service';
+import { SearchService } from '../../core/search.service';
 
 import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -30,7 +37,12 @@ describe('NavigatorComponent', () => {
         NavigatorComponent
       ],
       providers: [
-        provideStore({ selectedTool }),
+        provideAppStore(),
+        provideSearchSourceService(),
+        provideSearchSource(),
+        MapService,
+        LayerService,
+        SearchService,
         ToolService
       ]
     })

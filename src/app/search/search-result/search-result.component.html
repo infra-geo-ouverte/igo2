@@ -1,0 +1,5 @@
+<md-list-item>
+  <md-icon md-list-avatar>{{result.icon}}</md-icon>
+  <h4 md-line *ngIf="result.title_html" [innerHtml]="result.title_html"></h4>
+  <h4 md-line *ngIf="!result.title_html">{{result.title}}</h4>
+</md-list-item>

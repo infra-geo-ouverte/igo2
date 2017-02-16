@@ -16,7 +16,8 @@ describe('igo App', function() {
 
   /*it('should display placeholder in search bar', () => {
     page.navigateTo();
-    expect(page.getSearchBarInput().getAttribute('placeholder')).toEqual('Search for an address or a place');
+    expect(page.getSearchBarInput().getAttribute('placeholder'))
+    .toEqual('Search for an address or a place');
   });*/
 
 });

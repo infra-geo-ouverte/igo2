@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LanguageService } from './core/language/language.service';
 
+import { MediaService } from './core/media.service';
+
 @Component({
   selector: 'igo-app',
   templateUrl: './app.component.html',
