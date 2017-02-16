@@ -9,6 +9,22 @@ import { LayerService } from './shared/layer.service';
 import { NgMap } from './shared/map';
 import { MapComponent } from './map.component';
 
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import {
+    ResponseOptions,
+    Response,
+    Http,
+    BaseRequestOptions,
+    RequestMethod
+} from '@angular/http';
+
+const mockHttpProvider = {
+    deps: [ MockBackend, BaseRequestOptions ],
+    useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
+        return new Http(backend, defaultOptions);
+    }
+};
+
 describe('MapComponent', () => {
   let component: MapComponent;
   let fixture: ComponentFixture<MapComponent>;
@@ -17,6 +33,7 @@ describe('MapComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ MapComponent ],
       providers: [
+        {provide: Http, useValue: mockHttpProvider},
         provideAppStore(),
         MapService,
         LayerService

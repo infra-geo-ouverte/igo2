@@ -48,7 +48,7 @@ export class ContextService {
           name: 'WMTS',
           type: 'wmts',
           optionsFromCapabilities: false,
-          source:{
+          source: {
             url : 'http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/wmts/1.0.0/',
             layer : 'carte_gouv_qc_public',
             matrixSet: 'EPSG_3857',

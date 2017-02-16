@@ -11,8 +11,6 @@ import { WMTSLayer } from './layers/layer-wmts';
 @Injectable()
 export class LayerService {
 
-  getCapabilitiesStore: any[] = [];
-
   static layerClasses = {
     osm: OSMLayer,
     vector: VectorLayer,
@@ -20,57 +18,57 @@ export class LayerService {
     wmts: WMTSLayer
   };
 
+  getCapabilitiesStore: any[] = [];
+
   constructor(private http: Http) { }
 
   createLayer(options: LayerOptions): Observable<Layer> {
-    
+
     const layerCls = LayerService.layerClasses[options.type];
 
-    if(options.optionsFromCapabilities){
+    if (options.optionsFromCapabilities) {
        return this.getCapabilities(options).map(
         getCapabilities => {
           return new layerCls(options, getCapabilities);
         });
-    }
-    else{    
+    } else {
       return new Observable(layer => layer.next(new layerCls(options)));
     }
   }
 
-  getCapabilities(options): Observable<any>{
+  getCapabilities(options): Observable<any> {
     let url = options.source.url + '?REQUEST=GetCapabilities&';
     url += 'SERVICE=' + options.type + '&';
     url += 'VERSION=' + (options.version ? options.version : '1.0.0') + '&';
 
     const getCapabilities = this.findGetCapabilities(url);
-    if (getCapabilities){
+    if (getCapabilities) {
      return getCapabilities.getCapabilities;
     } else {
       return this.http.get(url)
-              .map(response => {  
+              .map(response => {
 
                   let parser;
                   switch (options.type) {
-                    case "wmts":
+                    case 'wmts':
                       parser = new ol.format.WMTSCapabilities();
                       break;
-                    case "wms":
+                    case 'wms':
                       parser = new ol.format.WMSCapabilities();
                       break;
                   }
-                  
-                  const getCapabilities = parser.read(response.text());
+
+                  getCapabilities = parser.read(response.text());
                   this.getCapabilitiesStore.push({url: url, getCapbilities: getCapabilities});
                   return getCapabilities;
               });
     }
-     
   }
 
-  findGetCapabilities(url: string): any{
-   
+  findGetCapabilities(url: string): any {
+
     return this.getCapabilitiesStore.find(function(value, idx, array){
-      if (value.url === url){
+      if (value.url === url) {
         return value;
       }
     }, this);
