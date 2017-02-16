@@ -67,10 +67,10 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   private handleLayersAdded(layers: LayerOptions[]) {
     // TODO: Handle dynamically added layers
-    let layer;
     layers.forEach((layerOptions) => {
-      layer = this.layerService.createLayer(layerOptions);
-      this.map.addLayer(layer);
+      this.layerService.createLayer(layerOptions).subscribe(
+        layer => this.map.addLayer(layer)
+      );
     });
   }
 

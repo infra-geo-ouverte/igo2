@@ -1,6 +1,7 @@
 export interface LayerOptions {
   name: string;
   type: string;
+  optionsFromCapabilities?: boolean;
 }
 
 export abstract class Layer {
@@ -9,12 +10,12 @@ export abstract class Layer {
   name: string;
   type: string;
 
-  abstract createOlLayer(options: LayerOptions): ol.layer.Layer;
+  abstract createOlLayer(options: LayerOptions, capabilities?: ol.format.XML): ol.layer.Layer;
 
-  constructor(options: LayerOptions) {
+  constructor(options: LayerOptions, capabilities?: ol.format.XML) {
     this.name = options.name;
     this.type = options.type;
-    this.olLayer = this.createOlLayer(options);
+    this.olLayer = this.createOlLayer(options, capabilities);
   }
 
   getSource() {
