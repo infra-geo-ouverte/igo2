@@ -49,7 +49,6 @@ export class NgMap {
       type: 'vector'
     });
     this.overlaySource = (this.overlayLayer.getSource() as ol.source.Vector);
-
     this.olMap.addLayer(this.overlayLayer.olLayer);
     this.overlayLayer.olLayer.setZIndex(999);
   }
