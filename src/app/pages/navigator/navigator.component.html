@@ -2,14 +2,14 @@
 
   <igo-backdrop
     [shown]="sidenav.opened"
-    (click)="sidenav.opened = false">  
+    (click)="sidenav.close()">  
   </igo-backdrop>
 
   <button
     md-icon-button
     id="igo-menu-button"
     class="igo-primary"
-    (click)="sidenav.opened = !sidenav.opened">
+    (click)="sidenav.toggle()">
     <md-icon>
       <ng-container *ngIf="!sidenav.opened">
         menu
@@ -22,7 +22,7 @@
 
   <igo-search-bar
     #searchBar
-    (key)="sidenav.opened = true">
+    (key)="sidenav.open()">
   </igo-search-bar>
 
   <igo-sidenav
