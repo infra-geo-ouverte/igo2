@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
+import { RequestService } from './request.service';
 import { SearchSourceService } from './search-source.service';
 import { SearchResult } from '../search/shared/search-result.interface';
 import { SearchSource } from '../search/sources/search-source';
@@ -17,7 +18,8 @@ export class SearchService {
   subscriptions: Subscription[] = [];
 
   constructor(private store: Store<AppStore>,
-              private searchSourceService: SearchSourceService) {
+              private searchSourceService: SearchSourceService,
+              private requestService: RequestService) {
   }
 
   search(term?: string) {
@@ -29,7 +31,9 @@ export class SearchService {
   }
 
   searchSource(source: SearchSource, term?: string) {
-    return source.search(term)
+    const request = source.search(term);
+
+    return this.requestService.register(request)
       .catch(this.handleError)
       .subscribe((results: SearchResult[]) =>
         this.handleSearchResults(results, source));

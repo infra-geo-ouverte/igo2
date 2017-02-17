@@ -8,6 +8,7 @@ import {
 import { MapService } from '../../core/map.service';
 import { LayerService } from '../../map/shared/layer.service';
 import { SearchService } from '../../core/search.service';
+import { RequestService } from '../../core/request.service';
 
 import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -40,7 +41,8 @@ describe('NavigatorComponent', () => {
         MapService,
         LayerService,
         SearchService,
-        ToolService
+        ToolService,
+        RequestService
       ]
     })
     .compileComponents();

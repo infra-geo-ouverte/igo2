@@ -17,20 +17,11 @@ html, body {
   box-sizing: border-box;
 }
 
-/*
-@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
-*/
+
+//@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
 
 @require './theme.styl';
-
-// This is needed because whe using the
-// sidenav "side" mode, the z-index is 1
-// and the sidenav appears below our backdrop.
-// The "side" mode is required to prevent
-// the sidenav from focusing a random button on open.
-md-sidenav.md-sidenav-side {
-  z-index: 3 !important;
-}
 
 input {
   height: $igo-icon-button-height;

@@ -1,6 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { SearchService } from './search.service';
+import { RequestService } from './request.service';
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import {
@@ -20,7 +21,8 @@ describe('SearchService', () => {
         provideAppStore(),
         provideSearchSourceService(),
         provideSearchSource(),
-        SearchService
+        SearchService,
+        RequestService
       ]
     });
   });
