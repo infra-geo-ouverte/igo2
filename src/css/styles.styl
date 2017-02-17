@@ -22,12 +22,16 @@ html, body {
 @require './theme.styl';
 
 input {
-  height: 40px;
+  height: $igo-icon-button-height;
+}
+
+.md-input-element {
+  padding: 0 $igo-padding !important;
 }
 
 .md-input-placeholder {
-  font-style: italic;
-  top: 10px !important;
+  left: $igo-padding !important;
+  right: $igo-padding !important;
 }
 
 button[md-icon-button] {
@@ -43,6 +47,19 @@ button {
   background-color: $igo-tertiary-color;
 }
 
+table td {
+  padding: $igo-padding;
+}
+
+table.igo-striped tbody tr:nth-child(odd) {
+  background-color: $igo-secondary-color-hover;
+}
+
+.md-input-placeholder {
+  font-style: italic;
+  top: 10px !important;
+}
+
 .igo-container {
   width: "calc(100% - 2 * %s)" % $igo-padding;
   height: 100%;
@@ -56,12 +73,4 @@ button {
   height: 100%;
   width: 100%;
   overflow: auto;
-}
-
-table td {
-  padding: $igo-padding;
-}
-
-table.igo-striped tbody tr:nth-child(odd) {
-  background-color: $igo-secondary-color-hover;
 }
