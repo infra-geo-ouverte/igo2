@@ -7,7 +7,7 @@ import { SearchResult } from '../shared/search-result.interface';
 export class SearchSourceMSP extends SearchSource {
 
   static name_: string = 'ICherche Québec';
-  static searchUrl: string = '/icherche/geopasdecode';
+  static searchUrl: string = 'http://geoegl.msp.gouv.qc.ca/icherche/geopasdecode';
 
   constructor(private jsonp: Jsonp) {
     super();
