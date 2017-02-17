@@ -43,30 +43,11 @@ export class ContextService {
         //     style: 'normal'
         //   }
         // },
-        // {
-        //   name: 'MSP',
-        //   type: 'xyz',
-        //   source: {
-        //     url: 'http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png',
-        //     attribution: new ol.Attribution({
-        //       html: '© Gouvernement du Québec <a href="http://www.droitauteur.gouv.qc.ca/copyright.php">'
-        //     }),
-        //     logo: {
-        //       href: 'http://www.droitauteur.gouv.qc.ca/copyright.php',
-        //       src: 'http://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png'
-        //     },
-        //     maxZoom: 17
-        //   }
-        // },
         {
-          name: 'WMTS',
-          type: 'wmts',
-          optionsFromCapabilities: false,
+          name: 'MSP',
+          type: 'xyz',
           source: {
-            url : 'http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/wmts/1.0.0/',
-            layer : 'carte_gouv_qc_public',
-            matrixSet: 'EPSG_3857',
-            style: 'default',
+            url: 'http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png',
             attribution: new ol.Attribution({
               html: '© Gouvernement du Québec <a href="http://www.droitauteur.gouv.qc.ca/copyright.php">'
             }),
@@ -76,7 +57,26 @@ export class ContextService {
             },
             maxZoom: 17
           }
-        }
+        },
+        // {
+        //   name: 'WMTS',
+        //   type: 'wmts',
+        //   optionsFromCapabilities: false,
+        //   source: {
+        //     url : 'http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/wmts/1.0.0/',
+        //     layer : 'carte_gouv_qc_public',
+        //     matrixSet: 'EPSG_3857',
+        //     style: 'default',
+        //     attribution: new ol.Attribution({
+        //       html: '© Gouvernement du Québec <a href="http://www.droitauteur.gouv.qc.ca/copyright.php">'
+        //     }),
+        //     logo: {
+        //       href: 'http://www.droitauteur.gouv.qc.ca/copyright.php',
+        //       src: 'http://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png'
+        //     },
+        //     maxZoom: 17
+        //   }
+        // }
       ],
       tools: [
         {
