@@ -6,8 +6,8 @@ import { SearchResult } from '../shared/search-result.interface';
 
 export class SearchSourceMSP extends SearchSource {
 
-  static name_: string = 'MSP';
-  static searchUrl: string = '/icherche/geocode';
+  static name_: string = 'ICherche Québec';
+  static searchUrl: string = '/icherche/geopasdecode';
 
   constructor(private jsonp: Jsonp) {
     super();
