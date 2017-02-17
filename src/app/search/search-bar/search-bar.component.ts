@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter,
+         ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
 
@@ -19,6 +20,7 @@ import { AppStore } from '../../app.store';
 export class SearchBarComponent implements OnInit {
   searchTool: Tool;
   @Output('key') key = new EventEmitter<string>();
+  @ViewChild('input') input: ElementRef;
 
   term?: string;
 
@@ -66,5 +68,9 @@ export class SearchBarComponent implements OnInit {
 
   search(term: string): void {
     this.searchTermsStream.next(term);
+  }
+
+  focus() {
+    this.input.nativeElement.focus();
   }
 }

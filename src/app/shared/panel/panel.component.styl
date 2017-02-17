@@ -6,7 +6,6 @@ $igo-panel-header-height = 40px;
   background-color: $igo-primary-color;
   color: $igo-secondary-font-color;
   height: $igo-panel-header-height;
-  padding: 8px;
   text-align: center;
 }
 
@@ -15,17 +14,12 @@ $igo-panel-header-height = 40px;
   margin-bottom: 0px;
 }
 
-.igo-panel-header >>> [panellefticon] {
+.igo-panel-header >>> [panelleftbutton] {
   float: left;
 }
 
-.igo-panel-header >>> [panelrighticon] {
+.igo-panel-header >>> [panelrightbutton] {
   float: right;
-}
-
-.igo-panel-header >>> [panellefticon]:hover,
-.igo-panel-header >>> [panelrighticon]:hover {
-  cursor: pointer;
 }
 
 .igo-panel-content {
@@ -35,8 +29,9 @@ $igo-panel-header-height = 40px;
 
 .igo-panel-title {
   display: inline-block;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - 80px);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  padding: 8px 0;
 }
