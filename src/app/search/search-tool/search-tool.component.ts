@@ -55,11 +55,9 @@ export class SearchToolComponent implements ToolComponent, OnInit {
     });
 
     const sourceResults = [];
-    Object.keys(groupedResults)
-      .sort()
-      .forEach((source: string) => {
-        sourceResults.push([source, groupedResults[source]]);
-      });
+    Object.keys(groupedResults).sort().forEach((source: string) => {
+      sourceResults.push([source, groupedResults[source]]);
+    });
 
     this.sourceResults = sourceResults as [string, SearchResult[]];
   }
