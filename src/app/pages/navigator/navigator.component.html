@@ -2,7 +2,7 @@
 
   <igo-backdrop
     [shown]="sidenav.opened"
-    (click)="sidenav.close()">  
+    (click)="sidenav.close()">
   </igo-backdrop>
 
   <button
@@ -43,12 +43,12 @@
         class="igo-container">
 
         <div class="igo-content"  *ngIf="!selectedTool">
-          <igo-toolbar>  
+          <igo-toolbar>
           </igo-toolbar>
         </div>
 
         <igo-panel
-          [title]="selectedTool.title"
+          [title]="selectedTool.title | translate"
           *ngIf="selectedTool">
 
           <button
