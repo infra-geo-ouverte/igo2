@@ -1,5 +1,15 @@
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/infra-geo-ouverte/igo2/compare/0.3.0...v0.3.1) (2017-02-17)
+
+
+### Features
+
+* **translate:** translate tool panel title ([3a9d4e9](https://github.com/infra-geo-ouverte/igo2/commit/3a9d4e9))
+
+
+
 <a name="0.3.0"></a>
-# [0.3.0](https://github.com/infra-geo-ouverte/igo2/compare/184f888...v0.3.0) (2017-02-17)
+# [0.3.0](https://github.com/infra-geo-ouverte/igo2/compare/184f888...0.3.0) (2017-02-17)
 
 
 ### Bug Fixes
