@@ -70,7 +70,7 @@ export class NgMap {
     const view = new ol.View(Object.assign(viewOptions, options));
     this.olMap.setView(view);
 
-    if (options.center) {
+    if (options && options.center) {
       const center = ol.proj.fromLonLat(options.center, this.getProjection());
       view.setCenter(center);
     }
