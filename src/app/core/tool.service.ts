@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Tool } from '../tool/shared/tool.interface';
 import { ToolComponent } from '../tool/shared/tool-component';
 
+import { SearchToolComponent } from '../search/search-tool/search-tool.component';
+
 @Injectable()
 export class ToolService {
 
@@ -28,6 +30,8 @@ export class ToolService {
     return ToolService.toolClasses.find(t => t.name_ === name);
   }
 
-  constructor() { }
+  constructor() {
+    ToolService.register(SearchToolComponent);
+  }
 
 }
