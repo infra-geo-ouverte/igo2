@@ -56,16 +56,27 @@ export function provideSearchSource() {
   ];
 }
 
+
+/*export function aaa(state, {type, payload}) {
+  switch (type) {
+    case 'SET_MEDIA':
+      return payload;
+    default:
+      return state;
+  }
+};*/
+
+
 export function provideAppStore() {
   return provideStore({
-    browserMedia,
-    mapView,
-    mapLayers,
-    selectedTool,
-    searchResults,
-    selectedResult,
-    focusedResult,
-    availableTools
+    browserMedia: browserMedia,
+    mapView: mapView,
+    mapLayers: mapLayers,
+    selectedTool: selectedTool,
+    searchResults: searchResults,
+    selectedResult: selectedResult,
+    focusedResult: focusedResult,
+    availableTools: availableTools
   });
 }
 
