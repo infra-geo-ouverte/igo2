@@ -22,6 +22,10 @@ export class ToolService {
     ToolService.toolClasses.push(cls);
   }
 
+  constructor() {
+    ToolService.register(SearchToolComponent);
+  }
+
   getTool(name: string) {
     return ToolService.tools.find(t => t.name === name);
   }
@@ -29,9 +33,4 @@ export class ToolService {
   getToolClass(name: string) {
     return ToolService.toolClasses.find(t => t.name_ === name);
   }
-
-  constructor() {
-    ToolService.register(SearchToolComponent);
-  }
-
 }

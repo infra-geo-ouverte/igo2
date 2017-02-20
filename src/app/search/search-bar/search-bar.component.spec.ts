@@ -7,6 +7,7 @@ import {
 } from '../../core/core.module';
 
 import { SearchService } from '../../core/search.service';
+import { RequestService } from '../../core/request.service';
 
 import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -27,7 +28,8 @@ describe('SearchBarComponent', () => {
         provideAppStore(),
         provideSearchSourceService(),
         provideSearchSource(),
-        SearchService
+        SearchService,
+        RequestService
       ]
     })
     .compileComponents();
