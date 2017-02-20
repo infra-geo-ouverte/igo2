@@ -4,9 +4,9 @@ import { Tool } from '../tool/shared/tool.interface';
 import { ToolComponent } from '../tool/shared/tool-component';
 
 export function ToolClass() {
-  return function(target) {
-    ToolService.register(target);
-  }
+  return function(cls) {
+    ToolService.register(cls);
+  };
 }
 
 @Injectable()

@@ -30,8 +30,19 @@ export class ContextService {
       },
       layers: [
         {
-          name : 'OSM',
-          type : 'osm'
+          name: 'MSP',
+          type: 'xyz',
+          source: {
+            url: 'http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png',
+            attribution: new ol.Attribution({
+              html: '© Gouvernement du Québec <a href="http://www.droitauteur.gouv.qc.ca/copyright.php">'
+            }),
+            logo: {
+              href: 'http://www.droitauteur.gouv.qc.ca/copyright.php',
+              src: 'http://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png'
+            },
+            maxZoom: 17
+          }
         }
       ],
       tools: [

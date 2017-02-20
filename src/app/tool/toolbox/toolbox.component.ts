@@ -12,8 +12,7 @@ import { ToolService } from '../../core/tool.service';
 @Component({
   selector: 'igo-toolbox',
   templateUrl: 'toolbox.component.html',
-  styleUrls: ['toolbox.component.styl'],
-  entryComponents: [ToolService.toolClasses]
+  styleUrls: ['toolbox.component.styl']
 })
 export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
   @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
@@ -24,8 +23,7 @@ export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy, On
   private component: ComponentRef<ToolComponent>;
   private isViewInitialized: boolean = false;
 
-  constructor(
-              private store: Store<AppStore>,
+  constructor(private store: Store<AppStore>,
               private resolver: ComponentFactoryResolver,
               private cdRef: ChangeDetectorRef,
               private toolService: ToolService) {
