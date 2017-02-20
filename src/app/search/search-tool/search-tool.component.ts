@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { ToolComponent } from '../../tool/shared/tool-component';
-import { ToolService } from '../../core/tool.service';
 import { SearchResult } from '../shared/search-result.interface';
 
 import { AppStore } from '../../app.store';
@@ -61,7 +60,4 @@ export class SearchToolComponent implements ToolComponent, OnInit {
 
     this.sourceResults = sourceResults as [string, SearchResult[]];
   }
-
 }
-
-ToolService.register(SearchToolComponent);
