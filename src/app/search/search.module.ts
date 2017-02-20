@@ -21,6 +21,7 @@ import { SearchToolComponent } from './search-tool/search-tool.component';
     SearchResultComponent,
     SearchResultDetailsComponent,
     SearchToolComponent
-  ]
+  ],
+  entryComponents: [SearchToolComponent]
 })
 export class SearchModule { }

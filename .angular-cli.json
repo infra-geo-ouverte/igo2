@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
     "version": "1.0.0-beta.30",
     "name": "igo"
@@ -25,8 +26,8 @@
       "scripts": [
         "../node_modules/openlayers/dist/ol.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
@@ -58,6 +59,7 @@
   },
   "defaults": {
     "styleExt": "styl",
+    "component": {},
     "prefixInterfaces": false,
     "inline": {
       "style": false,

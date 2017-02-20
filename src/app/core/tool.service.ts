@@ -3,7 +3,11 @@ import { Injectable } from '@angular/core';
 import { Tool } from '../tool/shared/tool.interface';
 import { ToolComponent } from '../tool/shared/tool-component';
 
-import { SearchToolComponent } from '../search/search-tool/search-tool.component';
+export function ToolClass() {
+  return function(cls) {
+    ToolService.register(cls);
+  };
+}
 
 @Injectable()
 export class ToolService {
@@ -22,9 +26,7 @@ export class ToolService {
     ToolService.toolClasses.push(cls);
   }
 
-  constructor() {
-    ToolService.register(SearchToolComponent);
-  }
+  constructor() {}
 
   getTool(name: string) {
     return ToolService.tools.find(t => t.name === name);

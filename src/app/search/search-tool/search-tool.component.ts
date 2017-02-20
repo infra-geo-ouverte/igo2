@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { ToolClass } from '../../core/tool.service';
 import { ToolComponent } from '../../tool/shared/tool-component';
 import { SearchResult } from '../shared/search-result.interface';
 
 import { AppStore } from '../../app.store';
 
-
+@ToolClass()
 @Component({
   selector: 'igo-search-tool',
   templateUrl: './search-tool.component.html',
