@@ -1,124 +1,129 @@
 <md-sidenav-container>
 
   <igo-backdrop
-    [shown]="sidenav.opened"
-    (click)="sidenav.close()">
+    [shown]="sidenavOpened"
+    (click)="closeSidenav()">
   </igo-backdrop>
 
   <button
     md-icon-button
     id="igo-menu-button"
     class="igo-primary"
-    (click)="sidenav.toggle()">
+    (click)="toggleSidenav()">
     <md-icon>
-      <ng-container *ngIf="!sidenav.opened">
-        menu
-      </ng-container>
-      <ng-container *ngIf="sidenav.opened">
-        keyboard_arrow_left
-      </ng-container>
+      <ng-container *ngIf="!sidenavOpened">menu</ng-container>
+      <ng-container *ngIf="sidenavOpened">keyboard_arrow_left</ng-container>
     </md-icon>
   </button>
 
-  <igo-search-bar
-    #searchBar
-    (key)="sidenav.open()">
-  </igo-search-bar>
+  <igo-search-bar (key)="openSidenav()"></igo-search-bar>
 
-  <igo-sidenav
-    #sidenav
-    [opened]="false"
-    (open)="searchBar.focus()">
-
-    <igo-flex
-      #menu
+  <igo-sidenav #sidenav [opened]="sidenavOpened">
+    <igo-flexible #menu
       direction="column"
-      initial="50%"
-      collapsed="51px"
+      initial="50%" initialMobile="calc(100% - 51px)"
+      collapsed="51px" collapsedMobile="0"
       expanded="calc(100% - 51px)"
       [state]="menuState">
 
-      <div
-        id="igo-upper-panel"
-        class="igo-container">
-
-        <div class="igo-content"  *ngIf="!selectedTool">
-          <igo-toolbar>
-          </igo-toolbar>
-        </div>
-
-        <igo-panel
-          [title]="selectedTool.title | translate"
-          *ngIf="selectedTool">
-
-          <button
-            md-icon-button
-            panelLeftButton
-            class="igo-icon-button"
-            (click)="goBack()">
-            <md-icon>arrow_back</md-icon>
-          </button>
-
-          <button
-            md-icon-button
-            panelRightButton
-            class="igo-icon-button"
-            (click)="goHome()">
-            <md-icon>menu</md-icon>
-          </button>
-
-          <igo-toolbox
-            *ngIf="menu.state === 'initial' ||
-                   menu.state === 'expanded'">
-          </igo-toolbox>
-        </igo-panel>
-
+      <div class="igo-content" *ngIf="!selectedTool">
+        <igo-toolbar></igo-toolbar>
       </div>
 
-      <div
-        igoFlexFill
-        id="igo-lower-panel"
-        class="igo-container">
+      <igo-panel
+        [title]="selectedTool.title | translate"
+        *ngIf="selectedTool">
 
-        <igo-panel
-          [title]="focusedResult.title"
-          *ngIf="focusedResult">
-          <button
-            md-icon-button
-            panelLeftButton
-            class="igo-icon-button"
-            (click)="resizeMenu()">
-            <md-icon>
-              <ng-container *ngIf="menu.state === 'initial'">
-                arrow_upward
-              </ng-container>
-              <ng-container *ngIf="menu.state === 'collapsed'">
-                arrow_downward
-              </ng-container>
-              <ng-container *ngIf="menu.state === 'expanded'">
-                arrow_upward
-              </ng-container>
-            </md-icon>
-          </button>
+        <button
+          md-icon-button
+          panelLeftButton
+          class="igo-icon-button"
+          (click)="goBack()">
+          <md-icon>arrow_back</md-icon>
+        </button>
 
-          <button
-            md-icon-button
-            panelRightButton
-            class="igo-icon-button"
-            *ngIf="media !== 'mobile'">
-            <md-icon>open_in_new</md-icon>
-          </button>
-          <igo-search-result-details
-            [result]="focusedResult"
-            *ngIf="menu.state === 'initial' ||
-                   menu.state === 'collapsed'">
-          </igo-search-result-details>
-        </igo-panel>
-      </div>
+        <button
+          md-icon-button
+          panelRightButton
+          class="igo-icon-button"
+          (click)="goHome()">
+          <md-icon>menu</md-icon>
+        </button>
 
-    </igo-flex>
+        <igo-toolbox
+          *ngIf="menu.state === 'initial' || menu.state === 'expanded'">
+        </igo-toolbox>
+      </igo-panel>
+
+      <igo-panel
+        igoFlexibleFill
+        [title]="focusedResult.title"
+        *ngIf="focusedResult && media !== 'mobile'">
+        <button
+          md-icon-button
+          panelLeftButton
+          class="igo-icon-button"
+          (click)="toggleMenu()">
+          <md-icon>
+            <ng-container *ngIf="menu.state === 'initial' || menu.state === 'expanded'">
+              arrow_upward
+            </ng-container>
+            <ng-container *ngIf="menu.state === 'collapsed'">
+              arrow_downward
+            </ng-container>
+          </md-icon>
+        </button>
+
+        <button
+          md-icon-button
+          panelRightButton
+          class="igo-icon-button"
+          *ngIf="media !== 'mobile'">
+          <md-icon>open_in_new</md-icon>
+        </button>
+        <igo-search-result-details
+          [result]="focusedResult"
+          *ngIf="menu.state === 'initial' || menu.state === 'collapsed'">
+        </igo-search-result-details>
+      </igo-panel>
+
+    </igo-flexible>
   </igo-sidenav>
 
   <igo-map></igo-map>
+
+  <div id="igo-toast-container">
+    <igo-flexible #toast
+      direction="column"
+      initial="0" initialMobile="51px"
+      collapsed="0" collapsedMobile="0"
+      expanded="0" expandedMobile="150px"
+      [state]="toastState">
+
+      <igo-panel
+        [title]="focusedResult.title"
+        *ngIf="focusedResult && media === 'mobile'">
+        <button
+          md-icon-button
+          panelLeftButton
+          class="igo-icon-button"
+          (click)="toggleToast()">
+          <md-icon>
+            <ng-container *ngIf="toast.state === 'initial' || toast.state === 'collapsed'">
+              arrow_upward
+            </ng-container>
+            <ng-container *ngIf="toast.state === 'expanded'">
+              arrow_downward
+            </ng-container>
+          </md-icon>
+        </button>
+
+        <igo-search-result-details
+          [result]="focusedResult">
+        </igo-search-result-details>
+      </igo-panel>
+
+    </igo-flexible>
+  </div>
 
 </md-sidenav-container>

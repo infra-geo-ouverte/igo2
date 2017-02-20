@@ -1,16 +1,15 @@
 import { Injectable} from '@angular/core';
-import { Store } from '@ngrx/store';
-
-import { AppStore } from '../app.store';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 export type Media = 'mobile' | 'tablet' | 'desktop';
 
 @Injectable()
 export class MediaService {
 
-  private media: Media;
+  private _media: Media;
+  media = new BehaviorSubject<Media>(undefined);
 
-  constructor(private store: Store<AppStore>) {
+  constructor() {
     this.setMedia();
 
     window.addEventListener('resize', (event) => {
@@ -33,8 +32,9 @@ export class MediaService {
 
   setMedia() {
     const media = this.getMedia();
-    if (media !== this.media) {
-      this.store.dispatch({type: 'SET_MEDIA', payload: media});
+    if (media !== this._media) {
+      this._media = media;
+      this.media.next(media);
     }
   }
 

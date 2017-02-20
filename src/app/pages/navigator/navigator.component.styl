@@ -29,13 +29,18 @@ md-sidenav-container {
   }
 }
 
+:host >>> igo-sidenav .igo-sidenav {
+  background-color: $igo-tertiary-color;
+}
+
 :host >>> igo-sidenav .igo-sidenav-content {
   margin-top: $igo-sidenav-margin-top;
   height: "calc(100% - %s)" % ($igo-sidenav-margin-top);
 }
 
-:host >>> igo-sidenav .igo-sidenav {
-  background-color: $igo-tertiary-color;
+:host >>> igo-sidenav .igo-sidenav-content .igo-flexible-fill .igo-container {
+  bordered-top();
+  border-box();
 }
 
 /*--- Menu button ---*/
@@ -69,7 +74,10 @@ md-sidenav-container {
   }
 }
 
-#igo-lower-panel {
-  bordered-top();
-  border-box();
+#igo-toast-container {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  max-height: "calc(100% - %s)" % ($igo-sidenav-margin-top);
+  background-color: $igo-tertiary-color;
 }
