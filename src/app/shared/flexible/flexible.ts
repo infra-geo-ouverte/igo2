@@ -1,5 +1,5 @@
-export type FlexState =
+export type FlexibleState =
   'initial' | 'collapsed' | 'expanded' | 'transition';
 
-export type FlexDirection =
+export type FlexibleDirection =
   'column' | 'row';
