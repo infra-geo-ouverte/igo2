@@ -90,7 +90,7 @@
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "npm-check": "^5.4.0",
     "nsp": "^2.6.2",
-    "protractor": "~5.1.0",
+    "protractor": "~4.0.13",
     "rimraf": "^2.5.4",
     "ts-node": "~2.0.0",
     "tslint": "~4.4.2",
