@@ -22,7 +22,7 @@ export class ToolService {
     ToolService.toolClasses.push(cls);
   }
 
-  constructor() { 
+  constructor() {
     ToolService.register(SearchToolComponent);
   }
 
