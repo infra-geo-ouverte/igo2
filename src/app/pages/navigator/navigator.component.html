@@ -18,7 +18,7 @@
 
   <igo-search-bar (key)="openSidenav()"></igo-search-bar>
 
-  <igo-sidenav #sidenav [opened]="sidenavOpened">
+  <igo-sidenav [opened]="sidenavOpened">
     <igo-flexible #menu
       direction="column"
       initial="50%" initialMobile="calc(100% - 51px)"
