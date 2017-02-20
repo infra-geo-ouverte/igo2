@@ -24,9 +24,10 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
 
 before_script:
-  - npm cache clear
-  - npm install -g @angular/cli
+#  - npm cache clear
+#  - npm install -g @angular/cli
 #  - npm install -g karma
+  - rm -r node_modules/
   - npm install
   - npm run build.prod
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "ng serve 2>&1 &"; fi  # Protractor CI
