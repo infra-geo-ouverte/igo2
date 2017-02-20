@@ -10,21 +10,4 @@ export class SidenavComponent {
   @Input() opened: boolean = false;
 
   constructor() { }
-
-  close() {
-    this.opened = false;
-  }
-
-  open() {
-    this.opened = true;
-  }
-
-  toggle() {
-    if (this.opened) {
-      this.close();
-    } else {
-      this.open();
-    }
-  }
-
 }

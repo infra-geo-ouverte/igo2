@@ -11,7 +11,7 @@ import { throwIfAlreadyLoaded } from './module-import.guard';
 
 import { provideStore } from '@ngrx/store';
 
-import { browserMedia, mapView, mapLayers, selectedTool,
+import { mapView, mapLayers, selectedTool,
          availableTools, searchResults, selectedResult,
          focusedResult } from '../reducers';
 
@@ -56,20 +56,8 @@ export function provideSearchSource() {
   ];
 }
 
-
-/*export function aaa(state, {type, payload}) {
-  switch (type) {
-    case 'SET_MEDIA':
-      return payload;
-    default:
-      return state;
-  }
-};*/
-
-
 export function provideAppStore() {
   return provideStore({
-    browserMedia: browserMedia,
     mapView: mapView,
     mapLayers: mapLayers,
     selectedTool: selectedTool,

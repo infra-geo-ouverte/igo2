@@ -6,7 +6,7 @@ import { MaterialModule } from '@angular/material';
 import { TranslateModule } from 'ng2-translate';
 
 import { BackdropComponent } from './backdrop/backdrop.component';
-import { FlexComponent } from './flex/flex.component';
+import { FlexibleComponent } from './flexible/flexible.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { PanelComponent } from './panel/panel.component';
 import { CollapsibleComponent } from './collapsible/collapsible.component';
@@ -26,7 +26,7 @@ import { KeyvaluePipe } from './pipes/keyvalue.pipe';
   ],
   declarations: [
     BackdropComponent,
-    FlexComponent,
+    FlexibleComponent,
     SidenavComponent,
     PanelComponent,
     CollapsibleComponent,
@@ -42,7 +42,7 @@ import { KeyvaluePipe } from './pipes/keyvalue.pipe';
     HttpModule,
     MaterialModule,
     BackdropComponent,
-    FlexComponent,
+    FlexibleComponent,
     SidenavComponent,
     PanelComponent,
     CollapsibleComponent,
