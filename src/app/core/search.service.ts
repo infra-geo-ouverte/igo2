@@ -23,7 +23,7 @@ export class SearchService {
   search(term: string) {
     const sources = this.searchSourceService.getSources();
 
-    this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe);
+    this.unsubscribe();
     this.subscriptions = sources.map((source: SearchSource) =>
       this.searchSource(source, term));
   }
@@ -37,7 +37,12 @@ export class SearchService {
   }
 
   clear() {
+    this.unsubscribe();
     this.store.dispatch({type: 'CLEAR_SEARCH_RESULTS'});
+  }
+
+  private unsubscribe() {
+    this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe);
   }
 
   private handleSearchResults(results: SearchResult[], source: SearchSource) {
