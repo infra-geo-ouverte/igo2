@@ -36,7 +36,7 @@ export class SearchService {
         this.handleSearchResults(results, source));
   }
 
-  clear(term?: string) {
+  clear() {
     this.unsubscribe();
     this.store.dispatch({type: 'CLEAR_SEARCH_RESULTS'});
   }
