@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { RequestService } from './request.service';
@@ -34,7 +32,6 @@ export class SearchService {
     const request = source.search(term);
 
     return this.requestService.register(request)
-      .catch(this.handleError)
       .subscribe((results: SearchResult[]) =>
         this.handleSearchResults(results, source));
   }
@@ -52,24 +49,4 @@ export class SearchService {
       }
     });
   }
-
-  private handleError(error: Response | any) {
-    // TODO: use a remote logging infrastructure
-    let errorMessage: string;
-
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errorMessage = `
-        ${error.status} -
-        ${error.statusText || ''}
-        ${err || ''}`;
-    } else {
-      errorMessage = error.message ? error.message : error.toString();
-    }
-
-    console.log(errorMessage);
-    return Observable.throw(errorMessage);
-  }
-
 }

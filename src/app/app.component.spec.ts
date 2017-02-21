@@ -8,6 +8,7 @@ import { SpinnerComponent } from './core/spinner/spinner.component';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
 import { MediaService } from './core/media.service';
 import { RequestService } from './core/request.service';
+import { LoggingService } from './core/logging.service';
 import { provideAppStore } from './core/core.module';
 
 import {} from 'jasmine';
@@ -29,6 +30,7 @@ describe('AppComponent', () => {
         LanguageService,
         provideAppStore(),
         MediaService,
+        LoggingService,
         RequestService
       ]
     });

@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { APP_BASE_HREF } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import {
    provideAppStore,
@@ -8,6 +10,7 @@ import {
 import { MapService } from '../../core/map.service';
 import { LayerService } from '../../map/shared/layer.service';
 import { SearchService } from '../../core/search.service';
+import { LoggingService } from '../../core/logging.service';
 import { RequestService } from '../../core/request.service';
 import { MediaService } from '../../core/media.service';
 
@@ -30,12 +33,14 @@ describe('NavigatorComponent', () => {
         MapModule,
         SearchModule,
         ToolModule,
-        SharedModule
+        SharedModule,
+        RouterModule.forRoot([])
       ],
       declarations: [
         NavigatorComponent
       ],
       providers: [
+        {provide: APP_BASE_HREF, useValue : '/' },
         provideAppStore(),
         provideSearchSourceService(),
         provideSearchSource(),
@@ -43,6 +48,7 @@ describe('NavigatorComponent', () => {
         LayerService,
         SearchService,
         ToolService,
+        LoggingService,
         RequestService,
         MediaService
       ]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -30,10 +31,15 @@ export class NavigatorComponent implements OnInit {
 
   constructor(private store: Store<AppStore>,
               private mediaService: MediaService,
-              private contextService: ContextService) { }
+              private contextService: ContextService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.contextService.loadContext();
+    this.route
+      .queryParams
+      .subscribe(params => {
+        this.contextService.loadContext(params['context']);
+      });
 
     this.mediaService.media
       .subscribe((media: Media) => this.media = media);

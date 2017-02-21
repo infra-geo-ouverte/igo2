@@ -16,6 +16,7 @@ import { mapView, mapLayers, selectedTool,
          focusedResult } from '../reducers';
 
 import { MediaService } from './media.service';
+import { LoggingService } from './logging.service';
 import { RequestService } from './request.service';
 import { MapService } from './map.service';
 import { ToolService } from './tool.service';
@@ -87,6 +88,7 @@ export class CoreModule {
       providers: [
         LanguageService,
         { provide: MissingTranslationHandler, useClass: IgoMissingTranslationHandler },
+        LoggingService,
         MediaService,
         RequestService,
         provideAppStore(),
