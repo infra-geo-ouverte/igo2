@@ -20,9 +20,10 @@
 
   <igo-sidenav [opened]="sidenavOpened">
     <igo-flexible #menu
-      direction="column"
-      initial="50%" initialMobile="calc(100% - 51px)"
-      collapsed="51px" collapsedMobile="0"
+      initial="50%"
+      initialMobile="100%"
+      collapsed="51px"
+      collapsedMobile="0"
       expanded="calc(100% - 51px)"
       [state]="menuState">
 
@@ -92,17 +93,14 @@
 
   <igo-map></igo-map>
 
-  <div id="igo-toast-container">
+  <div id="igo-toast-container"
+    *ngIf="focusedResult && media === 'mobile'">
     <igo-flexible #toast
-      direction="column"
-      initial="0" initialMobile="51px"
-      collapsed="0" collapsedMobile="0"
-      expanded="0" expandedMobile="150px"
+      initialMobile="51px"
+      expandedMobile="150px"
       [state]="toastState">
 
-      <igo-panel
-        [title]="focusedResult.title"
-        *ngIf="focusedResult && media === 'mobile'">
+      <igo-panel [title]="focusedResult.title">
         <button
           md-icon-button
           panelLeftButton

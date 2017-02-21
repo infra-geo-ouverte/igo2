@@ -70,6 +70,11 @@ export class SearchBarComponent implements OnInit {
     this.searchTermsStream.next(term);
   }
 
+  clear() {
+    this.searchTermsStream.next(undefined);
+    this.term = undefined;
+  }
+
   focus() {
     this.input.nativeElement.focus();
   }
