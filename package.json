@@ -25,7 +25,7 @@
     "build.coverage": "ng test --code-coverage --single-run",
     "serve.coverage": "node_modules/live-server/live-server.js ./coverage/ --port=4210 --no-browser",
     "i18n": "ng2-translate-extract --dir ./src --output ./src/assets/locale/ --format=json --clean",
-    "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json && tslint \"e2e/**/*.ts\" --project e2e/tsconfig.json --type-check",
+    "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json && tslint \"e2e/**/*.ts\" --project e2e/tsconfig.json",
     "pretest": "ng lint",
     "test": "ng test --single-run",
     "test.watch": "ng test",
