@@ -20,13 +20,10 @@ export class SearchService {
               private requestService: RequestService) {
   }
 
-  search(term?: string) {
-    if (term === undefined) {
-      this.clear();
-      return;
-    }
-
+  search(term: string) {
+    console.log('ici');
     const sources = this.searchSourceService.getSources();
+
     this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe);
     this.subscriptions = sources.map((source: SearchSource) =>
       this.searchSource(source, term));
@@ -40,7 +37,7 @@ export class SearchService {
         this.handleSearchResults(results, source));
   }
 
-  private clear(term?: string) {
+  clear() {
     this.store.dispatch({type: 'CLEAR_SEARCH_RESULTS'});
   }
 

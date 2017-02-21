@@ -39,7 +39,13 @@ export class SearchBarComponent implements OnInit {
     this.searchTermsStream
       .debounceTime(300)
       .distinctUntilChanged()
-      .subscribe((term: string) => this.searchService.search(term));
+      .subscribe((term: string) => {
+        if (term) {
+          this.searchService.search(term);
+        } else {
+          this.searchService.clear();
+        }
+      });
 
     this.store
       .select(s => s.selectedResult)
@@ -71,8 +77,8 @@ export class SearchBarComponent implements OnInit {
   }
 
   clear() {
-    this.searchTermsStream.next(undefined);
     this.term = undefined;
+    this.searchTermsStream.next(this.term);
   }
 
   focus() {
