@@ -1,5 +1,15 @@
+<a name="0.3.3"></a>
+## [0.3.3](https://github.com/infra-geo-ouverte/igo2/compare/0.3.2...0.3.3) (2017-02-21)
+
+
+### Features
+
+* **icherche:** use https service ([65af5dc](https://github.com/infra-geo-ouverte/igo2/commit/65af5dc))
+
+
+
 <a name="0.3.2"></a>
-## [0.3.2](https://github.com/infra-geo-ouverte/igo2/compare/0.3.1...v0.3.2) (2017-02-21)
+## [0.3.2](https://github.com/infra-geo-ouverte/igo2/compare/0.3.1...0.3.2) (2017-02-21)
 
 
 ### Bug Fixes
