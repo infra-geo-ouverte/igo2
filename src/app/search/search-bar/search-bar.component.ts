@@ -77,7 +77,12 @@ export class SearchBarComponent implements OnInit {
   }
 
   clear() {
+    this.searchService.clear();
     this.term = undefined;
+
+    // This is required to allow doing the exact same search
+    // which wouldn't be possible if the term in the stream
+    // didn't change
     this.searchTermsStream.next(this.term);
   }
 
