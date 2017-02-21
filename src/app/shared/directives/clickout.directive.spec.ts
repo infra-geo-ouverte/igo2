@@ -1,6 +1,3 @@
-
-
-import { TestBed, async } from '@angular/core/testing';
 import { ElementRef } from '@angular/core';
 
 import { ClickoutDirective } from './clickout.directive';

@@ -2,13 +2,10 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { LayerService } from './layer.service';
 
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { MockBackend } from '@angular/http/testing';
 import {
-    ResponseOptions,
-    Response,
     Http,
-    BaseRequestOptions,
-    RequestMethod
+    BaseRequestOptions
 } from '@angular/http';
 
 const mockHttpProvider = {

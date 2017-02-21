@@ -1,4 +1,4 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { LanguageService } from './language.service';
 import { TestModule } from '../../test.module';
 
