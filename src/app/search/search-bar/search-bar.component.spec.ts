@@ -7,6 +7,7 @@ import {
 } from '../../core/core.module';
 
 import { SearchService } from '../../core/search.service';
+import { LoggingService } from '../../core/logging.service';
 import { RequestService } from '../../core/request.service';
 
 import { TestModule } from '../../test.module';
@@ -29,7 +30,8 @@ describe('SearchBarComponent', () => {
         provideSearchSourceService(),
         provideSearchSource(),
         SearchService,
-        RequestService
+        RequestService,
+        LoggingService
       ]
     })
     .compileComponents();
