@@ -22,6 +22,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ## Table des matières (Français)
 
 - [Installation](#installation-et-démarrage)
+- [Démo](https://infra-geo-ouverte.github.io/igo2/)
 - [Documentation](http://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests)
 - [Suivi du projet](https://overv.io/infra-geo-ouverte/igo2/)
@@ -35,6 +36,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ## Table of content (English)
 
 - [Installation](#installation-en)
+- [Demo](https://infra-geo-ouverte.github.io/igo2/)
 - [Documentation](http://igo2.readthedocs.io/fr/latest/english.html)
 - [Tests](#tests-en)
 - [Follow in overvio](https://overv.io/infra-geo-ouverte/igo2/)
