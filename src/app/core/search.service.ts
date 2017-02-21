@@ -20,7 +20,7 @@ export class SearchService {
               private requestService: RequestService) {
   }
 
-  search(term?: string) {
+  search(term: string) {
     const sources = this.searchSourceService.getSources();
 
     this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe);
@@ -36,7 +36,7 @@ export class SearchService {
         this.handleSearchResults(results, source));
   }
 
-  clear(term?: string) {
+  clear() {
     this.store.dispatch({type: 'CLEAR_SEARCH_RESULTS'});
   }
 

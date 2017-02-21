@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
-import { MediaService } from '../../core/media.service';
+import { Media, MediaService } from '../../core/media.service';
 
 import { FlexibleState, FlexibleDirection} from './flexible';
 
@@ -16,13 +16,13 @@ export class FlexibleComponent implements OnInit {
 
   @ViewChild('flexibleMain') main;
 
-  @Input('initial') initial: string;
+  @Input('initial') initial: string = '0';
   @Input('collapsed') collapsed: string = '0';
   @Input('expanded') expanded: string = '100%';
 
-  @Input('initialMobile') initialMobile: string;
-  @Input('collapsedMobile') collapsedMobile: string;
-  @Input('expandedMobile') expandedMobile: string;
+  @Input('initialMobile') initialMobile: string = this.initial;
+  @Input('collapsedMobile') collapsedMobile: string = this.collapsed;
+  @Input('expandedMobile') expandedMobile: string =  this.expanded;
 
   @Input('direction') direction: FlexibleDirection = 'column';
 
@@ -62,6 +62,11 @@ export class FlexibleComponent implements OnInit {
 
   ngOnInit() {
     this.el.nativeElement.style.flexDirection = this.direction;
+
+    // Since this component supports different sizes
+    // on mobile, force a redraw when the media changes
+    this.mediaService.media
+      .subscribe((media: Media) => this.state = this.state);
   }
 
   private setSize(size: string) {

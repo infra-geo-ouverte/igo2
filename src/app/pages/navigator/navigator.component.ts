@@ -49,7 +49,7 @@ export class NavigatorComponent implements OnInit {
       .subscribe((tool: Tool) => {
           this.selectedTool = tool;
           this.menuState = 'initial';
-       });
+      });
 
     this.store
       .select(s => s.focusedResult)
@@ -61,7 +61,7 @@ export class NavigatorComponent implements OnInit {
           if (result && this.media === 'mobile') {
             this.closeSidenav();
           }
-       });
+      });
   }
 
   unselectTool() {
