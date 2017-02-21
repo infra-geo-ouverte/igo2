@@ -11,6 +11,23 @@ main {
   transition: 0.5s;
 }
 
+:host >>> .md-input-element {
+  padding: 0 $igo-padding;
+}
+
+:host >>> .md-input-placeholder {
+  font-style: italic;
+  top: 10px;
+  left: $igo-padding;
+  right: $igo-padding;
+  color: $igo-border-color;
+}
+
+:host >>> .md-input-placeholder {
+  font-style: italic;
+  top: 10px;
+}
+
 /*--- Spinner ---*/
 igo-spinner {
   position: absolute;
