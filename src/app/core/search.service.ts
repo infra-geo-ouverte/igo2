@@ -21,7 +21,6 @@ export class SearchService {
   }
 
   search(term: string) {
-    console.log('ici');
     const sources = this.searchSourceService.getSources();
 
     this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe);
