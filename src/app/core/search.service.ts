@@ -42,7 +42,7 @@ export class SearchService {
   }
 
   private unsubscribe() {
-    this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe);  
+    this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe);
   }
 
   private handleSearchResults(results: SearchResult[], source: SearchSource) {
