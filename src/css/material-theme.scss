@@ -1,0 +1,13 @@
+@import '~@angular/material/core/theming/all-theme';
+
+// TODO: Change md-* for mat-* when we'll update material
+@include md-core();
+
+$igo-app-primary: md-palette($md-blue, 500);
+$igo-app-accent: md-palette($md-grey, 500);
+
+$igo-app-warn: md-palette($md-red);
+
+$igo-app-theme: md-light-theme($igo-app-primary, $igo-app-accent, $igo-app-warn);
+
+@include angular-material-theme($igo-app-theme);
