@@ -18,12 +18,11 @@ import { AppStore } from '../../app.store';
   styleUrls: ['./search-bar.component.styl']
 })
 export class SearchBarComponent implements OnInit {
-  searchTool: Tool;
   @Output('key') key = new EventEmitter<string>();
   @ViewChild('input') input: ElementRef;
 
   term?: string;
-
+  private searchTool: Tool;
   private searchTermsStream = new Subject<string>();
 
   constructor(private store: Store<AppStore>,
@@ -50,6 +49,7 @@ export class SearchBarComponent implements OnInit {
     this.store
       .select(s => s.selectedResult)
       .subscribe((result: SearchResult) => {
+        this.blur();
         this.term = result ? result.title : undefined;
       });
   }
@@ -84,6 +84,10 @@ export class SearchBarComponent implements OnInit {
     // which wouldn't be possible if the term in the stream
     // didn't change
     this.searchTermsStream.next(this.term);
+  }
+
+  blur() {
+    this.input.nativeElement.blur();
   }
 
   focus() {

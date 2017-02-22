@@ -21,8 +21,9 @@
       "mobile": true,
       "styles": [
         "../node_modules/openlayers/dist/ol.css",
-        "css/styles.styl",
-        "css/material-icons.styl"
+        "css/material-theme.scss",
+        "css/material-icons.styl",
+        "css/styles.styl"
       ],
       "scripts": [
         "../node_modules/openlayers/dist/ol.js"

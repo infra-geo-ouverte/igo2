@@ -17,7 +17,7 @@ md-sidenav-container {
 // and the sidenav appears below our backdrop.
 // The "side" mode is required to prevent
 // the sidenav from focusing a random button on open.
-:host >>> md-sidenav.md-sidenav-side {
+:host >>> md-sidenav.mat-sidenav-side {
   z-index: 3 !important;
 }
 
@@ -30,7 +30,7 @@ md-sidenav-container {
 }
 
 :host >>> igo-sidenav .igo-sidenav {
-  background-color: $igo-tertiary-color;
+  background-color: $igo-background-color;
 }
 
 :host >>> igo-sidenav .igo-sidenav-content {
@@ -56,7 +56,7 @@ md-sidenav-container {
   }
 }
 
-#igo-menu-button:hover .md-button-focus-overlay {
+#igo-menu-button:hover .mat-button-focus-overlay {
   background-color: $igo-primary-color-hover;
 }
 
@@ -79,5 +79,5 @@ md-sidenav-container {
   bottom: 0px;
   width: 100%;
   max-height: "calc(100% - %s)" % ($igo-sidenav-margin-top);
-  background-color: $igo-tertiary-color;
+  background-color: $igo-background-color;
 }

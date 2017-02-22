@@ -17,30 +17,19 @@ html, body {
   box-sizing: border-box;
 }
 
-
-@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
-
 @require './theme.styl';
 
 input {
   height: $igo-icon-button-height;
 }
 
-.md-input-underline {
-  border-color: $igo-border-color;
-}
-
-.md-ripple-foreground {
-  display: none;
-}
-
-[md-button]:hover.igo-primary .md-button-focus-overlay,
-[md-icon-button]:hover.igo-primary .md-button-focus-overlay {
+[mdbutton]:hover.igo-primary .mat-button-focus-overlay,
+[md-icon-button]:hover.igo-primary .mat-button-focus-overlay {
   background-color: $igo-primary-color-hover;
 }
 
-[md-button]:hover.igo-secondary .md-button-focus-overlay,
-[md-icon-button]:hover.igo-secondary .md-button-focus-overlay {
+[mdbutton]:hover.igo-secondary .mat-button-focus-overlay,
+[md-icon-button]:hover.igo-secondary .mat-button-focus-overlay {
   background-color: $igo-secondary-color-hover;
 }
 
@@ -58,12 +47,12 @@ button[md-icon-button].igo-icon-button {
 
 button[md-icon-button].igo-primary {
   color: $igo-primary-color;
-  background-color: $igo-tertiary-color;
+  background-color: $igo-background-color;
 }
 
 button[md-icon-button].igo-secondary {
   color: $igo-secondary-color;
-  background-color: $igo-tertiary-color;
+  background-color: $igo-background-color;
 }
 
 button[md-icon-button].igo-icon-button {
@@ -72,16 +61,16 @@ button[md-icon-button].igo-icon-button {
 
 button[md-icon-button].igo-primary {
   color: $igo-primary-color;
-  background-color: $igo-tertiary-color;
+  background-color: $igo-background-color;
 }
 
 button[md-icon-button].igo-secondary {
   color: $igo-secondary-color;
-  background-color: $igo-tertiary-color;
+  background-color: $igo-background-color;
 }
 
 button {
-  background-color: $igo-tertiary-color;
+  background-color: $igo-background-color;
 }
 
 table td {
