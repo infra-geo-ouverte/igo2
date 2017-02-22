@@ -11,21 +11,32 @@ main {
   transition: 0.5s;
 }
 
-:host >>> .md-input-element {
+:host >>> .mat-input-element {
   padding: 0 $igo-padding;
 }
 
-:host >>> .md-input-placeholder {
-  font-style: italic;
+:host >>> .mat-input-wrapper {
+  padding: 0;
+}
+
+:host >>> .mat-input-placeholder-wrapper {
   top: 10px;
   left: $igo-padding;
   right: $igo-padding;
+  padding: 0;
+}
+
+:host >>> .mat-input-placeholder {
+  font-style: italic;
   color: $igo-border-color;
 }
 
-:host >>> .md-input-placeholder {
-  font-style: italic;
-  top: 10px;
+:host >>> .mat-input-underline {
+  border-color: $igo-border-color;
+}
+
+:host >>> .mat-button-ripple-round {
+  border-radius: 0;
 }
 
 /*--- Spinner ---*/
