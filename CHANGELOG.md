@@ -1,10 +1,27 @@
-<a name="0.3.3"></a>
-## [0.3.3](https://github.com/infra-geo-ouverte/igo2/compare/0.3.2...0.3.3) (2017-02-21)
+<a name="0.3.4"></a>
+## [0.3.4](https://github.com/infra-geo-ouverte/igo2/compare/0.3.2...v0.3.4) (2017-02-23)
+
+
+### Bug Fixes
+
+* **favicon:** use favicon 32x32 pixels [#127](https://github.com/infra-geo-ouverte/igo2/issues/127) ([#132](https://github.com/infra-geo-ouverte/igo2/issues/132)) ([ca31f01](https://github.com/infra-geo-ouverte/igo2/commit/ca31f01))
+* **ie font:** Fix material font on IE ([#134](https://github.com/infra-geo-ouverte/igo2/issues/134)) ([c1808d9](https://github.com/infra-geo-ouverte/igo2/commit/c1808d9))
+* **ie font issue:** Fix material font issue on ie ([#130](https://github.com/infra-geo-ouverte/igo2/issues/130)) ([0f70a77](https://github.com/infra-geo-ouverte/igo2/commit/0f70a77))
+* **search:** fix unsubscribe search call ([92e609c](https://github.com/infra-geo-ouverte/igo2/commit/92e609c))
+* **searchbar:** ie10+ remove x button on inputs ([146f185](https://github.com/infra-geo-ouverte/igo2/commit/146f185))
+* **translation:** change placeholder text in searchbar ([4c3e36b](https://github.com/infra-geo-ouverte/igo2/commit/4c3e36b))
 
 
 ### Features
 
+* **baselayer:** use https for mapcache ([66725ee](https://github.com/infra-geo-ouverte/igo2/commit/66725ee))
+* **context file:** Load contexts from json files ([#126](https://github.com/infra-geo-ouverte/igo2/issues/126)) ([2bf8629](https://github.com/infra-geo-ouverte/igo2/commit/2bf8629))
+* **favicon:** add favicon for all browsers ([c223951](https://github.com/infra-geo-ouverte/igo2/commit/c223951))
 * **icherche:** use https service ([65af5dc](https://github.com/infra-geo-ouverte/igo2/commit/65af5dc))
+* **mobile search enhancements:** A few enhancements pour searching o… ([#128](https://github.com/infra-geo-ouverte/igo2/issues/128)) ([88fbf0a](https://github.com/infra-geo-ouverte/igo2/commit/88fbf0a))
+* **nominatim:** use https service ([2087649](https://github.com/infra-geo-ouverte/igo2/commit/2087649))
+* **theme:** Custom material theme ([#137](https://github.com/infra-geo-ouverte/igo2/issues/137)) ([9b0adce](https://github.com/infra-geo-ouverte/igo2/commit/9b0adce))
+* **tooltip:** Tooltip example ([2b7fc66](https://github.com/infra-geo-ouverte/igo2/commit/2b7fc66))
 
 
 
