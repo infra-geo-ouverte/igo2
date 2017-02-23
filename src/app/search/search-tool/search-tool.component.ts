@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { ToolClass } from '../../core/tool.service';
 import { ToolComponent } from '../../tool/shared/tool-component';
-import { ToolService } from '../../core/tool.service';
 import { SearchResult } from '../shared/search-result.interface';
 
 import { AppStore } from '../../app.store';
 
-
+@ToolClass()
 @Component({
   selector: 'igo-search-tool',
   templateUrl: './search-tool.component.html',
@@ -55,15 +55,10 @@ export class SearchToolComponent implements ToolComponent, OnInit {
     });
 
     const sourceResults = [];
-    Object.keys(groupedResults)
-      .sort()
-      .forEach((source: string) => {
-        sourceResults.push([source, groupedResults[source]]);
-      });
+    Object.keys(groupedResults).sort().forEach((source: string) => {
+      sourceResults.push([source, groupedResults[source]]);
+    });
 
     this.sourceResults = sourceResults as [string, SearchResult[]];
   }
-
 }
-
-ToolService.register(SearchToolComponent);

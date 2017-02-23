@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
     "version": "1.0.0-beta.30",
     "name": "igo"
@@ -8,7 +9,8 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets"
+        "assets",
+        "contexts"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -19,14 +21,15 @@
       "mobile": true,
       "styles": [
         "../node_modules/openlayers/dist/ol.css",
-        "css/styles.styl",
-        "css/material-icons.styl"
+        "css/material-theme.scss",
+        "css/material-icons.styl",
+        "css/styles.styl"
       ],
       "scripts": [
         "../node_modules/openlayers/dist/ol.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
@@ -58,6 +61,7 @@
   },
   "defaults": {
     "styleExt": "styl",
+    "component": {},
     "prefixInterfaces": false,
     "inline": {
       "style": false,

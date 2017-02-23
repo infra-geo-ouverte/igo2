@@ -17,7 +17,11 @@ export class NgMap {
   private overlayMarkerStyle: ol.style.Style;
 
   constructor() {
-    this.olMap = new ol.Map({});
+    this.olMap = new ol.Map({
+      controls: [
+        new ol.control.Attribution()
+      ]
+    });
 
     this.overlayStyle = new ol.style.Style({
       stroke: new ol.style.Stroke({
@@ -66,10 +70,26 @@ export class NgMap {
     const view = new ol.View(Object.assign(viewOptions, options));
     this.olMap.setView(view);
 
-    if (options.center) {
+    if (options && options.center) {
       const center = ol.proj.fromLonLat(options.center, this.getProjection());
       view.setCenter(center);
     }
+  }
+
+  zoomIn() {
+    this.zoomTo(this.olMap.getView().getZoom() + 1);
+  }
+
+  zoomOut() {
+    this.zoomTo(this.olMap.getView().getZoom() - 1);
+  }
+
+  zoomTo(zoom: number) {
+    this.olMap.getView().animate({
+      zoom: zoom,
+      duration: 250,
+      easing: ol.easing.easeOut
+    });
   }
 
   addLayer(layer: Layer) {

@@ -5,10 +5,20 @@ $igo-sidenav-width = 400px;
 $igo-sidenav-margin-top = 50px;
 $igo-mobile-min-space-left = $igo-icon-button-width;
 
+
 /*--- Sidenav ---*/
 md-sidenav-container {
   width: 100%;
   height: 100%;
+}
+
+// This is needed because whe using the
+// sidenav "side" mode, the z-index is 1
+// and the sidenav appears below our backdrop.
+// The "side" mode is required to prevent
+// the sidenav from focusing a random button on open.
+:host >>> md-sidenav.mat-sidenav-side {
+  z-index: 3 !important;
 }
 
 :host >>> igo-sidenav md-sidenav {
@@ -19,13 +29,18 @@ md-sidenav-container {
   }
 }
 
+:host >>> igo-sidenav .igo-sidenav {
+  background-color: $igo-background-color;
+}
+
 :host >>> igo-sidenav .igo-sidenav-content {
   margin-top: $igo-sidenav-margin-top;
   height: "calc(100% - %s)" % ($igo-sidenav-margin-top);
 }
 
-:host >>> igo-sidenav .igo-sidenav {
-  background-color: $igo-tertiary-color;
+:host >>> igo-sidenav .igo-sidenav-content .igo-flexible-fill .igo-container {
+  bordered-top();
+  border-box();
 }
 
 /*--- Menu button ---*/
@@ -34,7 +49,6 @@ md-sidenav-container {
   left: $igo-sidenav-width;
   top: $igo-margin;
   z-index: 2;
-  color: $igo-primary-color;
 
   +media(mobile) {
     right: $igo-margin;
@@ -42,7 +56,7 @@ md-sidenav-container {
   }
 }
 
-#igo-menu-button:hover .md-button-focus-overlay {
+#igo-menu-button:hover .mat-button-focus-overlay {
   background-color: $igo-primary-color-hover;
 }
 
@@ -60,7 +74,10 @@ md-sidenav-container {
   }
 }
 
-#igo-lower-panel {
-  border-top();
-  border-box();
+#igo-toast-container {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  max-height: "calc(100% - %s)" % ($igo-sidenav-margin-top);
+  background-color: $igo-background-color;
 }

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { Media } from '../../core/media.service';
+import { Media, MediaService } from '../../core/media.service';
 import { Tool } from '../../tool/shared/tool.interface';
 import { SearchResult } from '../../search/shared/search-result.interface';
 import { ContextService } from '../../core/context.service';
-import { FlexState } from '../../shared/flex';
+import { FlexibleState } from '../../shared/flexible';
 
 import { AppStore } from '../../app.store';
 
@@ -23,35 +24,32 @@ export class NavigatorComponent implements OnInit {
 
   focusedResult: SearchResult;
   media: Media;
-  menuState: FlexState = 'initial';
+  menuState: FlexibleState = 'initial';
+  toastState: FlexibleState = 'collapsed';
+  sidenavOpened: boolean = false;
   selectedTool: Tool;
 
   constructor(private store: Store<AppStore>,
-              private contextService: ContextService) { }
+              private mediaService: MediaService,
+              private contextService: ContextService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.contextService.loadContext();
-
-    /* Interactions */
-    this.store
-      .select(s => s.browserMedia)
-      .distinctUntilChanged()
-      .subscribe((media: Media) => {
-        if (this.media === undefined && media === 'mobile') {
-          this.menuState = 'expanded';
-        }
-
-        this.media = media;
+    this.route
+      .queryParams
+      .subscribe(params => {
+        this.contextService.loadContext(params['context']);
       });
+
+    this.mediaService.media
+      .subscribe((media: Media) => this.media = media);
 
     this.store
       .select(s => s.selectedTool)
       .subscribe((tool: Tool) => {
           this.selectedTool = tool;
-          if (this.menuState === 'collapsed') {
-            this.resizeMenu();
-          }
-       });
+          this.menuState = 'initial';
+      });
 
     this.store
       .select(s => s.focusedResult)
@@ -61,9 +59,9 @@ export class NavigatorComponent implements OnInit {
       .select(s => s.selectedResult)
       .subscribe((result: SearchResult) => {
           if (result && this.media === 'mobile') {
-            this.menuState = 'collapsed';
+            this.closeSidenav();
           }
-       });
+      });
   }
 
   unselectTool() {
@@ -78,13 +76,29 @@ export class NavigatorComponent implements OnInit {
     this.unselectTool();
   }
 
-  resizeMenu() {
-    if (this.menuState === 'initial') {
-      this.menuState = 'collapsed';
-    } else if (this.menuState === 'collapsed') {
-      this.menuState = (this.media === 'mobile' ? 'expanded' : 'initial');
-    } else if (this.menuState === 'expanded') {
-      this.menuState = (this.media === 'mobile' ? 'collapsed' : 'initial');
+  closeSidenav() {
+    this.sidenavOpened = false;
+    this.toastState = 'initial';
+  }
+
+  openSidenav() {
+    this.sidenavOpened = true;
+    this.toastState = 'collapsed';
+  }
+
+  toggleSidenav() {
+    if (this.sidenavOpened) {
+      this.closeSidenav();
+    } else {
+      this.openSidenav();
     }
+  }
+
+  toggleMenu() {
+    this.menuState = this.menuState === 'initial' ? 'collapsed' : 'initial';
+  }
+
+  toggleToast() {
+    this.toastState = this.toastState === 'initial' ? 'expanded' : 'initial';
   }
 }

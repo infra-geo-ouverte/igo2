@@ -6,8 +6,8 @@ import { SearchResult } from '../shared/search-result.interface';
 
 export class SearchSourceNominatim extends SearchSource {
 
-  static name_: string = 'Nominatim';
-  static searchUrl: string = 'http://nominatim.openstreetmap.org/search';
+  static name_: string = 'OSM (Nominatim)';
+  static searchUrl: string = 'https://nominatim.openstreetmap.org/search';
 
   constructor(private http: Http) {
     super();

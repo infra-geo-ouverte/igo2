@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter,
+         ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
 
@@ -17,11 +18,10 @@ import { AppStore } from '../../app.store';
   styleUrls: ['./search-bar.component.styl']
 })
 export class SearchBarComponent implements OnInit {
-  searchTool: Tool;
   @Output('key') key = new EventEmitter<string>();
-  @ViewChild('inputText') public inputText: any;
+  @ViewChild('input') input: ElementRef;
   term?: string;
-
+  private searchTool: Tool;
   private searchTermsStream = new Subject<string>();
   readonly preValidationSearch = ['Control', 'Shift', 'Alt'];
 
@@ -39,13 +39,18 @@ export class SearchBarComponent implements OnInit {
       .debounceTime(300)
       .distinctUntilChanged()
       .subscribe((term: string) => {
+        if (term) {
           this.searchService.search(term);
-          this.inputText.nativeElement.focus();
+          this.input.nativeElement.focus();
+        } else {
+          this.searchService.clear();
+        }
       });
 
     this.store
       .select(s => s.selectedResult)
       .subscribe((result: SearchResult) => {
+        this.blur();
         this.term = result ? result.title : undefined;
       });
   }
@@ -74,5 +79,23 @@ export class SearchBarComponent implements OnInit {
 
   search(term: string): void {
     this.searchTermsStream.next(term);
+  }
+
+  clear() {
+    this.searchService.clear();
+    this.term = undefined;
+
+    // This is required to allow doing the exact same search
+    // which wouldn't be possible if the term in the stream
+    // didn't change
+    this.searchTermsStream.next(this.term);
+  }
+
+  blur() {
+    this.input.nativeElement.blur();
+  }
+
+  focus() {
+    this.input.nativeElement.focus();
   }
 }

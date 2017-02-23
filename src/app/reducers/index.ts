@@ -1,4 +1,3 @@
-export * from './browser-media.reducer';
 export * from './available-tools.reducer';
 export * from './map-view.reducer';
 export * from './map-layers.reducer';

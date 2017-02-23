@@ -1,21 +1,24 @@
-$igo-icon-button-width = 40px;
-
 $igo-primary-font-color = rgb(0, 0, 0);
 $igo-secondary-font-color = rgb(255, 255, 255);
 
-$igo-margin = 5px;
+/* primary - ($md-blue, 500) */
+$igo-primary-color = rgb(25, 118, 210);
+$igo-primary-color-hover = rgba(25, 118, 210, 0.2);
 
+/* secondary - ($md-grey, 500) */
+$igo-secondary-color = rgb(158, 158, 158);
+$igo-secondary-color-hover = rgba(158, 158, 158, 0.1);
+
+/* background - white */
+$igo-background-color = rgb(255, 255, 255);
+
+$igo-icon-button-width = 40px;
+$igo-icon-button-height = 40px;
+
+$igo-margin = 5px;
 $igo-padding = 5px;
 
-$igo-primary-color = rgb(103, 58, 183);
-$igo-primary-color-hover = rgba(103, 58, 183, 0.1);
-
-$igo-secondary-color = rgb(0, 161, 222);
-$igo-secondary-color-hover = rgba(0, 161, 222, 0.1);
-
-$igo-tertiary-color = rgb(255, 255, 255);
-
-$igo-border-width = 1px ;
+$igo-border-width = 1px;
 $igo-border-style = solid;
 $igo-border-color = rgba(0, 0, 0, .2);
 
@@ -24,31 +27,27 @@ border-box()
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 
-border()
+bordered()
   border-width $igo-border-width
   border-style $igo-border-style
   border-color $igo-border-color
 
-  -webkit-box-shadow: inset 0px 0px 0px 10px #f00;
-  -moz-box-shadow: inset 0px 0px 0px 10px #f00;
-  box-shadow: inset 0px 0px 0px 10px #f00;
-
-border-top()
+bordered-top()
   border-top-width $igo-border-width
   border-top-style $igo-border-style
   border-top-color $igo-border-color
 
-border-bottom()
+bordered-bottom()
   border-bottom-width $igo-border-width
   border-bottom-style $igo-border-style
   border-bottom-color $igo-border-color
 
-border-left()
+bordered-left()
   border-left-width $igo-border-width
   border-left-style $igo-border-style
   border-left-color $igo-border-color
 
-border-right()
+bordered-right()
   border-right-width $igo-border-width
   border-right-style $igo-border-style
   border-right-color $igo-border-color

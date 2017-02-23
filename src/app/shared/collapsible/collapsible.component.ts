@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 
-import { FlexState, FlexComponent } from '../flex';
+import { FlexibleState, FlexibleComponent } from '../flexible';
 
 @Component({
   selector: 'igo-collapsible',
@@ -9,9 +9,9 @@ import { FlexState, FlexComponent } from '../flex';
 })
 export class CollapsibleComponent {
 
-  @ViewChild('content') content: FlexComponent;
+  @ViewChild('content') content: FlexibleComponent;
 
-  @Input() state: FlexState = 'expanded';
+  @Input() state: FlexibleState = 'expanded';
   @Input() title: string;
 
   constructor() { }

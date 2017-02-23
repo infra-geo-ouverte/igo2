@@ -4,8 +4,11 @@ import { LanguageService } from './core/language/language.service';
 
 import { TestModule } from './test.module';
 import { AppComponent } from './app.component';
+import { SpinnerComponent } from './core/spinner/spinner.component';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
 import { MediaService } from './core/media.service';
+import { RequestService } from './core/request.service';
+import { LoggingService } from './core/logging.service';
 import { provideAppStore } from './core/core.module';
 
 import {} from 'jasmine';
@@ -20,12 +23,15 @@ describe('AppComponent', () => {
         NavigatorRoutingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        SpinnerComponent
       ],
       providers: [
         LanguageService,
         provideAppStore(),
-        MediaService
+        MediaService,
+        LoggingService,
+        RequestService
       ]
     });
     TestBed.compileComponents();

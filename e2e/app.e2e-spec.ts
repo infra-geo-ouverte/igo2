@@ -1,7 +1,7 @@
 import { IgoPage } from './app.po';
 import {} from 'jasmine';
 
-describe('igo App', function() {
+describe('igo App', () => {
   let page: IgoPage;
 
   beforeEach(() => {

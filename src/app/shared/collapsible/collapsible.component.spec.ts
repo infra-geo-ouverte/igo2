@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestModule } from '../../test.module';
-import { FlexComponent } from '../flex/flex.component';
+import { MediaService } from '../../core/media.service';
+import { FlexibleComponent } from '../flexible/flexible.component';
 import { CollapsibleComponent } from './collapsible.component';
 
 describe('CollapsibleComponent', () => {
@@ -14,8 +15,11 @@ describe('CollapsibleComponent', () => {
         TestModule
       ],
       declarations: [
-        FlexComponent,
+        FlexibleComponent,
         CollapsibleComponent
+      ],
+      providers: [
+        MediaService
       ]
     })
     .compileComponents();

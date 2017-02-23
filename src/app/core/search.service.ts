@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
+import { RequestService } from './request.service';
 import { SearchSourceService } from './search-source.service';
 import { SearchResult } from '../search/shared/search-result.interface';
 import { SearchSource } from '../search/sources/search-source';
@@ -17,26 +16,33 @@ export class SearchService {
   subscriptions: Subscription[] = [];
 
   constructor(private store: Store<AppStore>,
-              private searchSourceService: SearchSourceService) {
+              private searchSourceService: SearchSourceService,
+              private requestService: RequestService) {
   }
 
-  search(term?: string) {
+  search(term: string) {
     const sources = this.searchSourceService.getSources();
 
-    this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe);
+    this.unsubscribe();
     this.subscriptions = sources.map((source: SearchSource) =>
       this.searchSource(source, term));
   }
 
   searchSource(source: SearchSource, term?: string) {
-    return source.search(term)
-      .catch(this.handleError)
+    const request = source.search(term);
+
+    return this.requestService.register(request)
       .subscribe((results: SearchResult[]) =>
         this.handleSearchResults(results, source));
   }
 
-  clear(term?: string) {
+  clear() {
+    this.unsubscribe();
     this.store.dispatch({type: 'CLEAR_SEARCH_RESULTS'});
+  }
+
+  private unsubscribe() {
+    this.subscriptions.forEach((sub: Subscription) => sub.unsubscribe());
   }
 
   private handleSearchResults(results: SearchResult[], source: SearchSource) {
@@ -48,24 +54,4 @@ export class SearchService {
       }
     });
   }
-
-  private handleError(error: Response | any) {
-    // TODO: use a remote logging infrastructure
-    let errorMessage: string;
-
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errorMessage = `
-        ${error.status} -
-        ${error.statusText || ''}
-        ${err || ''}`;
-    } else {
-      errorMessage = error.message ? error.message : error.toString();
-    }
-
-    console.log(errorMessage);
-    return Observable.throw(errorMessage);
-  }
-
 }

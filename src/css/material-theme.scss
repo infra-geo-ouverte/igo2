@@ -1,0 +1,12 @@
+@import '~@angular/material/core/theming/all-theme';
+
+@include mat-core();
+
+$igo-app-primary: mat-palette($mat-blue, 700);
+$igo-app-accent: mat-palette($mat-grey, 500);
+
+$igo-app-warn: mat-palette($mat-red);
+
+$igo-app-theme: mat-light-theme($igo-app-primary, $igo-app-accent, $igo-app-warn);
+
+@include angular-material-theme($igo-app-theme);
