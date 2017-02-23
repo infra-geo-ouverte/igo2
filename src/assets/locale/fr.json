@@ -1,6 +1,10 @@
 {
-  "Contexts": "Contextes",
+  "Contexts": "Vos contextes",
   "Map": "Carte",
+  "Go Back": "Reculer d'un clic",
+  "Menu": "Afficher le menu principal",
+  "Zoom": "Outil de zoom",
+  "Main menu": "Revenir au menu principal",
   "Add Layers": "Ajouter des couches",
   "Directions": "Itinéraire",
   "Historical Analysis": "Analyse temporelle",
