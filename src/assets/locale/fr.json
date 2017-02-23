@@ -1,15 +1,12 @@
 {
-  "Contexts": "Vos contextes",
+  "Contexts": "Contextes",
   "Map": "Carte",
-  "Go Back": "Reculer d'un clic",
-  "Menu": "Afficher le menu principal",
-  "Zoom": "Outil de zoom",
-  "Main menu": "Revenir au menu principal",
   "Add Layers": "Ajouter des couches",
   "Directions": "Itinéraire",
   "Historical Analysis": "Analyse temporelle",
   "Print": "Impression",
   "Measure": "Mesure",
   "Search Results": "Résultats de recherche",
-  "Search for an address or a place": "Recherche une adresse ou un lieu"
+  "Search for an address or a place": "Recherche une adresse ou un lieu",
+  "Loading...": "Chargement..."
 }
