@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
 
@@ -19,7 +19,7 @@ import { AppStore } from '../../app.store';
 export class SearchBarComponent implements OnInit {
   searchTool: Tool;
   @Output('key') key = new EventEmitter<string>();
-
+  @ViewChild('inputText') public inputText: any;
   term?: string;
 
   private searchTermsStream = new Subject<string>();
@@ -38,7 +38,10 @@ export class SearchBarComponent implements OnInit {
     this.searchTermsStream
       .debounceTime(300)
       .distinctUntilChanged()
-      .subscribe((term: string) => this.searchService.search(term));
+      .subscribe((term: string) => {
+          this.searchService.search(term);
+          this.inputText.nativeElement.focus();
+      });
 
     this.store
       .select(s => s.selectedResult)
