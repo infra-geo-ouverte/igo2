@@ -56,8 +56,8 @@ export class SearchBarComponent implements OnInit {
     // Prevent searching the same thing twice
     // and searching when clicking "enter" on a search result
     if (
-        (term !== this.term) 
-        && (term.length >= 3) 
+        (term !== this.term)
+        && (term.length >= 3)
         && (this.preValidationSearch.find(value => value === event.key) === undefined)
     ) {
       this.key.emit(term);
