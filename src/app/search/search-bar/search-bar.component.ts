@@ -41,7 +41,7 @@ export class SearchBarComponent implements OnInit {
       .subscribe((term: string) => {
         if (term) {
           this.searchService.search(term);
-          this.input.nativeElement.focus();
+          this.focus();
         } else {
           this.searchService.clear();
         }
