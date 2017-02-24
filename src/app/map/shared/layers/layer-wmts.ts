@@ -27,7 +27,7 @@ export class WMTSLayer extends Layer {
     } else {
       const optionsSource = Object.assign({},
                                           options.source,
-                                          { tileGrid : this.getDefaultTileGrid() }
+                                          { tileGrid : this.getDefaultTileGrid(options) }
                             );
       return new ol.layer.Tile( {source: new ol.source.WMTS(optionsSource)} );
     }
@@ -38,14 +38,16 @@ export class WMTSLayer extends Layer {
   }
 
   // TODO Support others projections ?
-  getDefaultTileGrid(): ol.tilegrid.WMTS {
+  getDefaultTileGrid(options: WMTSLayerOptions): ol.tilegrid.WMTS {
 
-    const projection = ol.proj.get('EPSG:3857');
+    const projection = options.source.projection ?
+                       ol.proj.get(options.source.projection) :
+                       ol.proj.get('EPSG:3857');
     const projectionExtent = projection.getExtent();
     const size = ol.extent.getWidth(projectionExtent) / 256;
-    const resolutions = new Array(14);
-    const matrixIds = new Array(14);
-    for ( let z = 0; z < 14; ++z ) {
+    const resolutions = new Array(20);
+    const matrixIds = new Array(20);
+    for ( let z = 0; z < 20; ++z ) {
       resolutions[z] = size / Math.pow(2, z);
       matrixIds[z] = z;
     }
