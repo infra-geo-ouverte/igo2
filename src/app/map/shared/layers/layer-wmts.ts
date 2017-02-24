@@ -40,8 +40,8 @@ export class WMTSLayer extends Layer {
   // TODO Support others projections ?
   getDefaultTileGrid(options: WMTSLayerOptions): ol.tilegrid.WMTS {
 
-    const projection = options.source.projection ? 
-                       ol.proj.get(options.source.projection) : 
+    const projection = options.source.projection ?
+                       ol.proj.get(options.source.projection) :
                        ol.proj.get('EPSG:3857');
     const projectionExtent = projection.getExtent();
     const size = ol.extent.getWidth(projectionExtent) / 256;
