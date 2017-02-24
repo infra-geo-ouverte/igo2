@@ -20,10 +20,10 @@ import { AppStore } from '../../app.store';
 export class SearchBarComponent implements OnInit {
   @Output('key') key = new EventEmitter<string>();
   @ViewChild('input') input: ElementRef;
-
   term?: string;
   private searchTool: Tool;
   private searchTermsStream = new Subject<string>();
+  readonly preValidationSearch = ['Control', 'Shift', 'Alt'];
 
   constructor(private store: Store<AppStore>,
               private searchService: SearchService) {}
@@ -41,6 +41,7 @@ export class SearchBarComponent implements OnInit {
       .subscribe((term: string) => {
         if (term) {
           this.searchService.search(term);
+          this.focus();
         } else {
           this.searchService.clear();
         }
@@ -59,7 +60,11 @@ export class SearchBarComponent implements OnInit {
 
     // Prevent searching the same thing twice
     // and searching when clicking "enter" on a search result
-    if (term !== this.term) {
+    if (
+        (term !== this.term)
+        && (term.length >= 3)
+        && (this.preValidationSearch.find(value => value === event.key) === undefined)
+    ) {
       this.key.emit(term);
       this.selectSearchTool();
       this.search(term);
