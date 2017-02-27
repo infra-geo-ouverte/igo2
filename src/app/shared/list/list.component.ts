@@ -128,7 +128,14 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
 
   private init() {
     this.subscribe();
-    this.focus(this.findFocusedItem());
+
+    const selectedItem = this.findSelectedItem();
+    if (selectedItem) {
+      this.select(selectedItem);
+    } else {
+      this.focus(this.findFocusedItem());
+    }
+
     this.enableNavigation();
   }
 
@@ -144,6 +151,10 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   private unsubscribe() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.subscriptions = [];
+  }
+
+  private findSelectedItem() {
+    return this.listItems.toArray().find(item => item.selected);
   }
 
   private findFocusedItem() {

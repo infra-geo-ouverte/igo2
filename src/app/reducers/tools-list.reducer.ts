@@ -1,8 +1,8 @@
 import { Tool } from '../tool/shared/tool.interface';
 
-export function availableTools(state: Tool[] = [], {type, payload}) {
+export function toolsList(state: Tool[] = [], {type, payload}) {
   switch (type) {
-    case 'UPDATE_TOOLS':
+    case 'SET_TOOLS':
       return payload;
     default:
       return state;

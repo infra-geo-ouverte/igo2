@@ -18,7 +18,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit() {
     this.store
-      .select(s => s.availableTools)
+      .select(s => s.tools)
       .subscribe((tools: Tool[]) => {
           this.tools = tools;
        });

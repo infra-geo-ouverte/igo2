@@ -1,8 +1,9 @@
-/* tslint:disable:max-line-length */
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
 
+import { Context } from '../context/shared/context.interface';
+import { DetailedContext } from '../context/shared/detailed-context.interface';
 import { Tool } from '../tool/shared/tool.interface';
 import { ToolService } from './tool.service';
 import { RequestService } from './request.service';
@@ -18,25 +19,39 @@ export class ContextService {
               private requestService: RequestService,
               private toolService: ToolService) { }
 
-  loadContext(id?: string) {
+  getContexts() {
+    this.requestService.register(
+      this.http.get(`contexts/_contexts.json`)
+    ).subscribe(res => this.handleGetContexts(res.json()));
+  }
+
+  loadContext(name?: string) {
     let fileName;
-    if (id !== undefined) {
-      fileName = `${id}.json`;
+    if (name !== undefined) {
+      fileName = `${name}.json`;
     } else {
-      fileName = 'default.json';
+      fileName = '_default.json';
     }
 
     this.requestService.register(
       this.http.get(`contexts/${fileName}`)
-    ).subscribe(res => this.handleGetContext(res.json()));
+    ).subscribe(res => this.handleLoadContext(res.json()));
   }
 
-  private handleGetContext(context: any) {
+  private handleGetContexts(contexts: Context[]) {
+    this.store.dispatch({type: 'SET_CONTEXTS', payload: contexts});
+  }
+
+  private handleLoadContext(context: DetailedContext) {
+    // TODO: Remove map, layers and tools keys
+    this.store.dispatch({type: 'SET_CONTEXT', payload: context});
+
+    // TODO: Handle "useCurrentView" option
     const view: MapViewOptions = context.map.view;
-    this.store.dispatch({type: 'UPDATE_VIEW', payload: view});
+    this.store.dispatch({type: 'SET_VIEW', payload: view});
 
     const layers: Array<LayerOptions> = context.layers;
-    this.store.dispatch({type: 'UPDATE_LAYERS', payload: layers});
+    this.store.dispatch({type: 'SET_LAYERS', payload: layers});
 
     const tools: Array<Tool> = [];
     (context.tools || []).forEach((tool_: Tool) => {
@@ -46,7 +61,7 @@ export class ContextService {
         tools.push(Object.assign(tool, tool_));
       }
     });
-    this.store.dispatch({type: 'UPDATE_TOOLS', payload: tools});
+    this.store.dispatch({type: 'SET_TOOLS', payload: tools});
   }
 
 }

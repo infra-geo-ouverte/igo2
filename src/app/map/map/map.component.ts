@@ -32,11 +32,11 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.store
       .select(s => s.mapView)
-      .subscribe((view: MapViewOptions) => this.map.updateView(view));
+      .subscribe((view: MapViewOptions) => this.map.setView(view));
 
     this.store
       .select(s => s.mapLayers)
-      .subscribe((layers: LayerOptions[]) => this.handleLayersAdded(layers));
+      .subscribe((layers: LayerOptions[]) => this.handleLayersChanged(layers));
 
     this.store
       .select(s => s.focusedResult)
@@ -65,8 +65,9 @@ export class MapComponent implements OnInit, AfterViewInit {
     return feature;
   }
 
-  private handleLayersAdded(layers: LayerOptions[]) {
-    // TODO: Handle dynamically added layers
+  private handleLayersChanged(layers: LayerOptions[]) {
+    this.map.removeLayers();
+
     layers.forEach((layerOptions) => {
       this.layerService.createLayer(layerOptions).subscribe(
         layer => this.map.addLayer(layer)
