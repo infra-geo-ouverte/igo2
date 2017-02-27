@@ -1,4 +1,6 @@
 {
+  "name": "_default",
+  "title": "Default Context",
   "map": {
     "view": {
       "projection": "EPSG:3857",
@@ -14,9 +16,7 @@
   ],
   "tools": [
     {
-      "name": "context",
-      "title": "Contexts",
-      "icon": "local_offer"
+      "name": "context"
     },
     {
       "name": "search"

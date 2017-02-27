@@ -30,7 +30,7 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.store
-      .select(s => s.availableTools)
+      .select(s => s.tools)
       .subscribe((tools: Tool[]) => {
           this.searchTool = tools.find(t => t.name === 'search');
        });

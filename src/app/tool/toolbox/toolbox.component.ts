@@ -31,12 +31,6 @@ export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy, On
 
   ngOnInit() {
     this.store
-      .select(s => s.availableTools)
-      .subscribe((tools: Tool[]) => {
-          this.tools = tools;
-       });
-
-    this.store
       .select(s => s.selectedTool)
       .subscribe((tool: Tool) => {
           this.selectedTool = tool;

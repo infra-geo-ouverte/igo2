@@ -2,11 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
-import { SearchResultComponent } from './search-result.component';
+import { ContextItemComponent } from './context-item.component';
 
-describe('SearchResultComponent', () => {
-  let component: SearchResultComponent;
-  let fixture: ComponentFixture<SearchResultComponent>;
+describe('ContextItemComponent', () => {
+  let component: ContextItemComponent;
+  let fixture: ComponentFixture<ContextItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -14,22 +14,20 @@ describe('SearchResultComponent', () => {
         TestModule,
         SharedModule
       ],
-      declarations: [ SearchResultComponent ]
+      declarations: [ ContextItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchResultComponent);
+    fixture = TestBed.createComponent(ContextItemComponent);
     component = fixture.componentInstance;
   });
 
   it('should create', () => {
-    component.result = {
-      id: '1',
-      title: 'foo',
-      icon: 'bar',
-      source: 'foo'
+    component.context = {
+      name: 'foo',
+      title: 'bar'
     };
     expect(component).toBeTruthy();
   });

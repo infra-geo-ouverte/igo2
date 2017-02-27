@@ -11,9 +11,9 @@ import { throwIfAlreadyLoaded } from './module-import.guard';
 
 import { provideStore } from '@ngrx/store';
 
-import { mapView, mapLayers, selectedTool,
-         availableTools, searchResults, selectedResult,
-         focusedResult } from '../reducers';
+import { activeContext, contextsList, mapView, mapLayers,
+         selectedTool, toolsList, searchResults,
+         selectedResult, focusedResult } from '../reducers';
 
 import { MediaService } from './media.service';
 import { LoggingService } from './logging.service';
@@ -59,13 +59,15 @@ export function provideSearchSource() {
 
 export function provideAppStore() {
   return provideStore({
+    activeContext: activeContext,
+    contexts: contextsList,
     mapView: mapView,
     mapLayers: mapLayers,
     selectedTool: selectedTool,
     searchResults: searchResults,
     selectedResult: selectedResult,
     focusedResult: focusedResult,
-    availableTools: availableTools
+    tools: toolsList
   });
 }
 

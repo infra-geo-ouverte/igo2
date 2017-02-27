@@ -6,6 +6,10 @@ export interface MapViewOptions extends olx.ViewOptions {
   center?: [number, number];
 }
 
+export interface MapOptions {
+  view: MapViewOptions;
+}
+
 export class NgMap {
 
   olMap: ol.Map;
@@ -67,7 +71,11 @@ export class NgMap {
       zoom: currentView.getZoom()
     }, currentView.getProperties());
 
-    const view = new ol.View(Object.assign(viewOptions, options));
+    this.setView(Object.assign(viewOptions, options));
+  }
+
+  setView(options: MapViewOptions) {
+    const view = new ol.View(options);
     this.olMap.setView(view);
 
     if (options && options.center) {
@@ -95,6 +103,11 @@ export class NgMap {
   addLayer(layer: Layer) {
     this.layers.push(layer);
     this.olMap.addLayer(layer.olLayer);
+  }
+
+  removeLayers() {
+    this.layers.forEach(layer =>
+      this.olMap.removeLayer(layer.olLayer), this);
   }
 
   moveToExtent(extent: ol.Extent) {
