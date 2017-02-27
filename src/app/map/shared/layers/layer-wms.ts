@@ -38,6 +38,7 @@ export class WMSLayer extends Layer {
     super(options, capabilities);
   }
 
+  /** Get layer's properties from capabilities */
   optionsFromCapabilities(capabilities: any,
                            options: WMSLayerOptions): WMSLayerOptions {
 
@@ -86,6 +87,7 @@ export class WMSLayer extends Layer {
     return options;
   }
 
+  /** Find a layer among capabilities's layers from it's name */
   findLayer(layerArray, name) {
 
       if (Array.isArray(layerArray)) {
