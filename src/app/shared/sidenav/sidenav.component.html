@@ -1,4 +1,9 @@
-<md-sidenav [opened]="opened" mode="side">
+<md-sidenav
+  mode="side"
+  [opened]="opened"
+  (open)="onOpen()"
+  (close-start)="onCloseStart()"
+  (close)="onClose()">
   <div class="igo-sidenav-content">
   	<ng-content></ng-content>
   </div>
