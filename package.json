@@ -43,7 +43,10 @@
     "cli-update": "npm cache clean && npm install --save-dev angular-cli@latest && npm run reinstall && ng update --routing --style=styl --prefix=igo",
     "reinstall": "npm run clean && npm cache clean && npm prune && npm install",
     "clean": "rimraf ./dist",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "preversion": "npm test && nom run clean && npm run build.prod",
+    "version": "npm run changelog && git add -A CHANGELOG.md",
+    "postversion": "rimraf igo2.zip && zip -r igo2.zip dist/*"
   },
   "private": true,
   "dependencies": {
