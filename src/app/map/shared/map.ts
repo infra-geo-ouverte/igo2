@@ -38,17 +38,10 @@ export class IgoMap {
     });
 
     this.overlayMarkerStyle = new ol.style.Style({
-      text: new ol.style.Text({
-        text: 'place',
-        font: 'normal 36px Material Icons',
-        textBaseline: 'Bottom',
-        fill: new ol.style.Fill({
-          color: [0, 161, 222, 1]
-        }),
-        stroke: new ol.style.Stroke({
-          color: [255, 255, 255, 1],
-          width: 2
-        })
+      image: new ol.style.Icon({
+        src: 'assets/icons/place_blue_36px.svg',
+        imgSize: [36, 36], // for ie
+        anchor: [0.5, 1]
       })
     });
 
