@@ -1,8 +1,9 @@
 {
   "Contexts": "Vos contextes",
   "Map": "Carte",
-  "Go Back": "Reculer d'un clic",
-  "Menu": "Afficher le menu principal",
+  "Go Back": "Reculer",
+  "Open Menu": "Afficher le menu",
+  "Close Menu": "Fermer le menu",
   "Zoom": "Outil de zoom",
   "Main menu": "Revenir au menu principal",
   "Add Layers": "Ajouter des couches",

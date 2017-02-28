@@ -9,7 +9,7 @@
     md-icon-button
     id="igo-menu-button"
     class="igo-primary"
-    [md-tooltip]="'Menu' | translate"
+    [md-tooltip]="(sidenavOpened ? 'Close Menu' : 'Open Menu') | translate"
     tooltip-position="below"
     (click)="toggleSidenav()">
     <md-icon>
