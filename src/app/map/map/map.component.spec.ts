@@ -1,18 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockBackend } from '@angular/http/testing';
+import { Http, BaseRequestOptions } from '@angular/http';
 
 import { TestModule } from '../../test.module';
-import { provideAppStore } from '../../core/core.module';
-import { MapService } from '../../core/map.service';
+
+import { MapService } from '../shared/map.service';
 import { LayerService } from '../shared/layer.service';
-import { NgMap } from '../shared/map';
+import { IgoMap } from '../shared/map';
 import { ZoomComponent } from '../zoom/zoom.component';
 import { MapComponent } from './map.component';
-
-import { MockBackend } from '@angular/http/testing';
-import {
-    Http,
-    BaseRequestOptions,
-} from '@angular/http';
 
 const mockHttpProvider = {
     deps: [ MockBackend, BaseRequestOptions ],
@@ -36,7 +32,6 @@ describe('MapComponent', () => {
       ],
       providers: [
         {provide: Http, useValue: mockHttpProvider},
-        provideAppStore(),
         MapService,
         LayerService
       ]
@@ -50,7 +45,7 @@ describe('MapComponent', () => {
   });
 
   it('should create', () => {
-    component.map = new NgMap();
+    component.map = new IgoMap();
     component.ngAfterViewInit();
     expect(component).toBeTruthy();
   });

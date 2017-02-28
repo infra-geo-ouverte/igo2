@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 
-import { NgMap } from '../map/shared/map';
+import { IgoMap } from './map';
 
 
 @Injectable()
 export class MapService {
 
-  private map: NgMap;
+  private map: IgoMap;
 
   constructor() { }
 
-  getMap(): NgMap {
+  getMap(): IgoMap {
     if (!this.map) {
-      this.map = new NgMap();
+      this.map = new IgoMap();
     }
 
     return this.map;

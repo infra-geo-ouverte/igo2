@@ -1,14 +1,16 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { MapService } from './map.service';
 
-import { provideAppStore } from './core.module';
+import { TestModule } from '../../test.module';
 
 describe('MapService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        TestModule
+      ],
       providers: [
-        MapService,
-        provideAppStore()
+        MapService
       ]
     });
   });

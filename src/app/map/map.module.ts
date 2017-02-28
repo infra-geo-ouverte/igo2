@@ -1,6 +1,8 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 
+import { MapService } from './shared/map.service';
+import { LayerService } from './shared/layer.service';
 import { MapComponent } from './map/map.component';
 import { ZoomComponent } from './zoom/zoom.component';
 
@@ -12,14 +14,10 @@ import { ZoomComponent } from './zoom/zoom.component';
   declarations: [
     MapComponent,
     ZoomComponent
+  ],
+  providers: [
+    LayerService,
+    MapService
   ]
 })
-
-export class MapModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: MapModule,
-      providers: []
-    };
-  }
-}
+export class MapModule { }

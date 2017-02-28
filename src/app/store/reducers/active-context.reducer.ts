@@ -1,4 +1,4 @@
-import { Context } from '../context/shared/context.interface';
+import { Context } from '../../context/shared/context.interface';
 
 export function activeContext (state: Context = null, {type, payload}) {
   switch (type) {

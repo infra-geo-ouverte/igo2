@@ -1,4 +1,4 @@
-import { SearchResult } from '../search/shared/search-result.interface';
+import { SearchResult } from '../../search/shared/search-result.interface';
 
 export function selectedResult (state: SearchResult = null, {type, payload}) {
   switch (type) {

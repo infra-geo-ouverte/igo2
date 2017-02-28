@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { NgMap } from '../shared/map';
+import { IgoMap } from '../shared/map';
 
 @Component({
   selector: 'igo-zoom',
@@ -9,7 +9,7 @@ import { NgMap } from '../shared/map';
 })
 export class ZoomComponent {
 
-  @Input('map') map: NgMap;
+  @Input('map') map: IgoMap;
 
   constructor() { }
 

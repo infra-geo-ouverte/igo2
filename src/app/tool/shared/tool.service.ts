@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Tool } from '../tool/shared/tool.interface';
-import { ToolComponent } from '../tool/shared/tool-component';
+import { Tool } from './tool.interface';
+import { ToolComponent } from './tool-component';
 
-export function ToolClass() {
+export function Register() {
   return function(cls) {
     ToolService.register(cls);
   };

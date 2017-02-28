@@ -1,29 +1,28 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 
-import { AppStore } from '../../app.store';
-import { NgMap } from '../shared/map';
-import { MapService } from '../../core/map.service';
+import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
+
+import { SearchResult } from '../../search/shared/search-result.interface';
+
+import { IgoMap } from '../shared/map';
+import { MapService } from '../shared/map.service';
 import { LayerService } from '../shared/layer.service';
 import { LayerOptions } from '../shared/layers/layer';
 import { MapViewOptions } from '../shared/map';
-import { ZoomComponent } from '../zoom/zoom.component';
-import { SearchResult } from '../../search/shared/search-result.interface';
 
 
 @Component({
   selector: 'igo-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.styl'],
-  providers: [ LayerService ],
-  entryComponents: [ZoomComponent]
+  styleUrls: ['./map.component.styl']
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
-  map: NgMap;
+  map: IgoMap;
   id: string = 'igo-map-target';
 
-  constructor(private store: Store<AppStore>,
+  constructor(private store: Store<IgoStore>,
               private mapService: MapService,
               private layerService: LayerService) {}
 

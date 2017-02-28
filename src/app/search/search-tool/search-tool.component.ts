@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 
-import { ToolClass } from '../../core/tool.service';
+import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
+
 import { ToolComponent } from '../../tool/shared/tool-component';
+import { Register } from '../../tool/shared/tool.service';
 import { SearchResult } from '../shared/search-result.interface';
 
-import { AppStore } from '../../app.store';
 
-@ToolClass()
+@Register()
 @Component({
   selector: 'igo-search-tool',
   templateUrl: './search-tool.component.html',
@@ -23,7 +24,7 @@ export class SearchToolComponent implements ToolComponent, OnInit {
   private sourceResults: [string, SearchResult[]];
   focusedResult?: SearchResult;
 
-  constructor(private store: Store<AppStore>) { }
+  constructor(private store: Store<IgoStore>) { }
 
   ngOnInit() {
     this.store.select(s => s.focusedResult)
