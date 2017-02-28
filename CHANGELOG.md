@@ -1,5 +1,23 @@
+<a name="0.3.5"></a>
+## [0.3.5](https://github.com/infra-geo-ouverte/igo2/compare/0.3.4...v0.3.5) (2017-02-28)
+
+
+### Bug Fixes
+
+* **ie:** Handle null active element in list item directive ([0746c25](https://github.com/infra-geo-ouverte/igo2/commit/0746c25))
+* **layer-wmts:** Fix resolutions max ([#139](https://github.com/infra-geo-ouverte/igo2/issues/139)) ([0207061](https://github.com/infra-geo-ouverte/igo2/commit/0207061))
+* **sidenav focus on close:** Prevent the sidenav from focusing the search bar on close ([76f2497](https://github.com/infra-geo-ouverte/igo2/commit/76f2497))
+
+
+### Features
+
+* **context tool:** Basic file based context tool ([#141](https://github.com/infra-geo-ouverte/igo2/issues/141)) ([bd2f038](https://github.com/infra-geo-ouverte/igo2/commit/bd2f038))
+* **search-bar:**  Improve the search bar ([#138](https://github.com/infra-geo-ouverte/igo2/issues/138)) ([3130c78](https://github.com/infra-geo-ouverte/igo2/commit/3130c78))
+
+
+
 <a name="0.3.4"></a>
-## [0.3.4](https://github.com/infra-geo-ouverte/igo2/compare/0.3.2...v0.3.4) (2017-02-23)
+## [0.3.4](https://github.com/infra-geo-ouverte/igo2/compare/0.3.2...0.3.4) (2017-02-23)
 
 
 ### Bug Fixes
