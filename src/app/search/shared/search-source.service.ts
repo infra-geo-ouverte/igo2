@@ -1,4 +1,4 @@
-import { SearchSource } from '../search/sources/search-source';
+import { SearchSource } from '../sources/search-source';
 
 export class SearchSourceService {
 

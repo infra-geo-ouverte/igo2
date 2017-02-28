@@ -1,16 +1,15 @@
 import { Component, OnInit, Output, EventEmitter,
          ViewChild, ElementRef } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
 
-import 'rxjs/add/operator/debounceTime.js';
-import 'rxjs/add/operator/distinctUntilChanged';
+import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
 
 import { Tool } from '../../tool/shared/tool.interface';
-import { SearchResult } from '../shared/search-result.interface';
-import { SearchService} from '../../core/search.service';
 
-import { AppStore } from '../../app.store';
+import { SearchResult } from '../shared/search-result.interface';
+import { SearchService} from '../shared/search.service';
+
 
 @Component({
   selector: 'igo-search-bar',
@@ -25,7 +24,7 @@ export class SearchBarComponent implements OnInit {
   private searchTermsStream = new Subject<string>();
   readonly preValidationSearch = ['Control', 'Shift', 'Alt'];
 
-  constructor(private store: Store<AppStore>,
+  constructor(private store: Store<IgoStore>,
               private searchService: SearchService) {}
 
   ngOnInit(): void {

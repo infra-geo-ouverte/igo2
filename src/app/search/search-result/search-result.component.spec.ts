@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
+
 import { SearchResultComponent } from './search-result.component';
 
 describe('SearchResultComponent', () => {

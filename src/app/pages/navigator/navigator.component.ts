@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
 
-import 'rxjs/add/operator/distinctUntilChanged';
-
-import { Media, MediaService } from '../../core/media.service';
-import { Tool } from '../../tool/shared/tool.interface';
-import { SearchResult } from '../../search/shared/search-result.interface';
-import { ContextService } from '../../core/context.service';
 import { FlexibleState } from '../../shared/flexible';
 
-import { AppStore } from '../../app.store';
+import { Media, MediaService } from '../../core/media.service';
+
+import { Tool } from '../../tool/shared/tool.interface';
+
+import { SearchResult } from '../../search/shared/search-result.interface';
+
+import { ContextService } from '../../context/shared/context.service';
+
 
 @Component({
   selector: 'igo-navigator',
   templateUrl: './navigator.component.html',
-  styleUrls: ['./navigator.component.styl'],
-  providers: [
-    ContextService
-  ]
+  styleUrls: ['./navigator.component.styl']
 })
 export class NavigatorComponent implements OnInit {
 
@@ -29,7 +29,7 @@ export class NavigatorComponent implements OnInit {
   sidenavOpened: boolean = false;
   selectedTool: Tool;
 
-  constructor(private store: Store<AppStore>,
+  constructor(private store: Store<IgoStore>,
               private mediaService: MediaService,
               private contextService: ContextService,
               private route: ActivatedRoute) { }

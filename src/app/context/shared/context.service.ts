@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Store } from '@ngrx/store';
 
-import { Context } from '../context/shared/context.interface';
-import { DetailedContext } from '../context/shared/detailed-context.interface';
-import { Tool } from '../tool/shared/tool.interface';
-import { ToolService } from './tool.service';
-import { RequestService } from './request.service';
-import { LayerOptions } from '../map/shared/layers/layer';
-import { MapViewOptions } from '../map/shared/map';
-import { AppStore } from '../app.store';
+import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
+
+import { Tool } from '../../tool/shared/tool.interface';
+import { ToolService } from '../../tool/shared/tool.service';
+
+import { RequestService } from '../../core/request.service';
+
+import { LayerOptions } from '../../map/shared/layers/layer';
+import { MapViewOptions } from '../../map/shared/map';
+
+import { Context } from './context.interface';
+import { DetailedContext } from './detailed-context.interface';
 
 @Injectable()
 export class ContextService {
 
-  constructor(private store: Store<AppStore>,
+  constructor(private store: Store<IgoStore>,
               private http: Http,
               private requestService: RequestService,
               private toolService: ToolService) { }

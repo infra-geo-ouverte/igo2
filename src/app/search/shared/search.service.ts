@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { RequestService } from './request.service';
-import { SearchSourceService } from './search-source.service';
-import { SearchResult } from '../search/shared/search-result.interface';
-import { SearchSource } from '../search/sources/search-source';
+import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
 
-import { AppStore } from '../app.store';
+import { RequestService } from '../../core/request.service';
+
+import { SearchSourceService } from './search-source.service';
+import { SearchResult } from './search-result.interface';
+import { SearchSource } from '../sources/search-source';
+
 
 @Injectable()
 export class SearchService {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private store: Store<AppStore>,
+  constructor(private store: Store<IgoStore>,
               private searchSourceService: SearchSourceService,
               private requestService: RequestService) {
   }

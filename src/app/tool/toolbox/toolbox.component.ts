@@ -2,12 +2,13 @@ import { AfterViewInit, ChangeDetectorRef, Component,
          ComponentRef, ComponentFactoryResolver,
          OnChanges, OnDestroy, OnInit, SimpleChanges,
          ViewContainerRef, ViewChild } from '@angular/core';
-import { Store } from '@ngrx/store';
 
-import { AppStore } from '../../app.store';
+import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
+
 import { Tool } from '../shared/tool.interface';
 import { ToolComponent } from '../shared/tool-component';
-import { ToolService } from '../../core/tool.service';
+import { ToolService } from '../shared/tool.service';
 
 @Component({
   selector: 'igo-toolbox',
@@ -23,7 +24,7 @@ export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy, On
   private component: ComponentRef<ToolComponent>;
   private isViewInitialized: boolean = false;
 
-  constructor(private store: Store<AppStore>,
+  constructor(private store: Store<IgoStore>,
               private resolver: ComponentFactoryResolver,
               private cdRef: ChangeDetectorRef,
               private toolService: ToolService) {

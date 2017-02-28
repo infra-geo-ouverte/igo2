@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
 
-import { AppStore } from '../../app.store';
-
-import { ToolClass } from '../../core/tool.service';
 import { ToolComponent } from '../../tool/shared/tool-component';
+import { Register } from '../../tool/shared/tool.service';
 import { Context } from '../shared/context.interface';
-import { ContextService } from '../../core/context.service';
+import { ContextService } from '../shared/context.service';
 
 
-@ToolClass()
+@Register()
 @Component({
   selector: 'igo-context-tool',
   templateUrl: './context-tool.component.html',
@@ -26,7 +26,7 @@ export class ContextToolComponent implements ToolComponent, OnInit {
   selectedContext?: Context;
 
   constructor(private contextService: ContextService,
-              private store: Store<AppStore>) { }
+              private store: Store<IgoStore>) { }
 
   ngOnInit() {
     this.store

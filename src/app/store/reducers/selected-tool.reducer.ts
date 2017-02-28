@@ -1,4 +1,4 @@
-import { Tool } from '../tool/shared/tool.interface';
+import { Tool } from '../../tool/shared/tool.interface';
 
 export function selectedTool (state: Tool = null, {type, payload}) {
   switch (type) {

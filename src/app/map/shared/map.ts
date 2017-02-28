@@ -10,7 +10,7 @@ export interface MapOptions {
   view: MapViewOptions;
 }
 
-export class NgMap {
+export class IgoMap {
 
   olMap: ol.Map;
 

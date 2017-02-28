@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
 
 import { Tool } from '../shared/tool.interface';
-
-import { AppStore } from '../../app.store';
 
 @Component({
   selector: 'igo-toolbar',
@@ -14,7 +14,7 @@ export class ToolbarComponent implements OnInit {
 
   tools: Tool[];
 
-  constructor(private store: Store<AppStore>) {}
+  constructor(private store: Store<IgoStore>) {}
 
   ngOnInit() {
     this.store
