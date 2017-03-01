@@ -5,7 +5,9 @@
     md-icon-button
     class="igo-icon-button"
     (click)="editContext.emit(context)"
-    *ngIf="edition">
+    *ngIf="edition"
+    [md-tooltip]="'Edit Context' | translate"
+    tooltip-position="left">
     <md-icon>settings</md-icon>
   </button>
 </md-list-item>
