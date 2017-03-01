@@ -14,9 +14,22 @@
       "type" : "osm"
     }
   ],
+  "toolbar": [
+    "context",
+    "search",
+    "map",
+    "layers",
+    "directions",
+    "historicalAnalysis",
+    "print",
+    "measure"
+  ],
   "tools": [
     {
       "name": "context"
+    },
+    {
+      "name": "contextEditor"
     },
     {
       "name": "search"
@@ -27,7 +40,7 @@
       "icon": "map"
     },
     {
-      "name": "add_layers",
+      "name": "layers",
       "title": "Add Layers",
       "icon": "add_location"
     },
@@ -37,7 +50,7 @@
       "icon": "directions"
     },
     {
-      "name": "historical_analysis",
+      "name": "historicalAnalysis",
       "title": "Historical Analysis",
       "icon": "history"
     },

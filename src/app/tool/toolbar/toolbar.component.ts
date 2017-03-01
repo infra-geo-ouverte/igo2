@@ -19,9 +19,8 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
     this.store
       .select(s => s.tools)
-      .subscribe((tools: Tool[]) => {
-          this.tools = tools;
-       });
+      .subscribe((tools: Tool[]) =>
+        this.tools = tools.filter(tool => tool.toolbar === true));
   }
 
   track(tool) {

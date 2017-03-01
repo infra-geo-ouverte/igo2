@@ -22,6 +22,10 @@ export class ToolService {
       icon: cls.icon
     };
 
+    if (cls.toolbar !== undefined) {
+      tool['toolbar'] = cls.toolbar;
+    }
+
     ToolService.tools.push(tool);
     ToolService.toolClasses.push(cls);
   }

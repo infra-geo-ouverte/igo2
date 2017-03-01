@@ -19,7 +19,9 @@ import { SearchService} from '../shared/search.service';
 export class SearchBarComponent implements OnInit {
   @Output('key') key = new EventEmitter<string>();
   @ViewChild('input') input: ElementRef;
+
   term?: string;
+
   private searchTool: Tool;
   private searchTermsStream = new Subject<string>();
   readonly preValidationSearch = ['Control', 'Shift', 'Alt'];
