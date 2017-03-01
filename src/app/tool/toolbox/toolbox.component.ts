@@ -1,7 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component,
          ComponentRef, ComponentFactoryResolver,
-         OnChanges, OnDestroy, OnInit, SimpleChanges,
-         ViewContainerRef, ViewChild } from '@angular/core';
+         OnDestroy, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { IgoStore } from '../../store/store';
@@ -15,14 +14,14 @@ import { ToolService } from '../shared/tool.service';
   templateUrl: 'toolbox.component.html',
   styleUrls: ['toolbox.component.styl']
 })
-export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
+export class ToolboxComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
 
   tools: Tool[];
   selectedTool: Tool;
 
   private component: ComponentRef<ToolComponent>;
-  private isViewInitialized: boolean = false;
+  private viewInitialized: boolean = false;
 
   constructor(private store: Store<IgoStore>,
               private resolver: ComponentFactoryResolver,
@@ -33,26 +32,29 @@ export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy, On
   ngOnInit() {
     this.store
       .select(s => s.selectedTool)
-      .subscribe((tool: Tool) => {
-          this.selectedTool = tool;
-       });
+      .distinctUntilChanged()
+      .subscribe((tool: Tool) => this.selectTool(tool));
   }
 
   ngOnDestroy() {
+    this.viewInitialized = false;
     this.destroy();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.createComponent();
-  }
-
   ngAfterViewInit() {
-    this.isViewInitialized = true;
+    this.viewInitialized = true;
     this.createComponent();
   }
 
-  createComponent() {
-    if (!this.isViewInitialized || !this.selectedTool) {
+  private selectTool(tool: Tool) {
+    this.selectedTool = tool;
+    if (this.viewInitialized) {
+      this.createComponent();
+    }
+  }
+
+  private createComponent() {
+    if (!this.viewInitialized || !this.selectedTool) {
       return;
     }
 
@@ -79,7 +81,7 @@ export class ToolboxComponent implements AfterViewInit, OnChanges, OnDestroy, On
     this.cdRef.detectChanges();
   }
 
-  destroy() {
+  private destroy() {
     if (this.component !== undefined) {
       this.component.destroy();
     }

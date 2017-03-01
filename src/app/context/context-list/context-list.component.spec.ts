@@ -5,14 +5,14 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { ToolService } from '../../tool/shared/tool.service';
 
-import { ContextToolComponent } from './context-tool.component';
-import { ContextItemComponent } from '../context-item/context-item.component';
+import { ContextListComponent } from './context-list.component';
+import { ContextListItemComponent } from '../context-list-item/context-list-item.component';
 import { ContextService } from '../shared/context.service';
 
 
-describe('ContextToolComponent', () => {
-  let component: ContextToolComponent;
-  let fixture: ComponentFixture<ContextToolComponent>;
+describe('ContextListComponent', () => {
+  let component: ContextListComponent;
+  let fixture: ComponentFixture<ContextListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -21,8 +21,8 @@ describe('ContextToolComponent', () => {
         SharedModule
       ],
       declarations: [
-        ContextToolComponent,
-        ContextItemComponent
+        ContextListComponent,
+        ContextListItemComponent
       ],
       providers: [
         ContextService,
@@ -33,7 +33,7 @@ describe('ContextToolComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContextToolComponent);
+    fixture = TestBed.createComponent(ContextListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

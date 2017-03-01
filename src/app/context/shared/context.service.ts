@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 import { Store } from '@ngrx/store';
 import { IgoStore } from '../../store/store';
@@ -23,13 +24,13 @@ export class ContextService {
               private requestService: RequestService,
               private toolService: ToolService) { }
 
-  getContexts() {
-    this.requestService.register(
+  getContexts(): Observable<Context[]> {
+    return this.requestService.register(
       this.http.get(`contexts/_contexts.json`)
-    ).subscribe(res => this.handleGetContexts(res.json()));
+    ).map(res => res.json());
   }
 
-  loadContext(name?: string) {
+  getDetailedContext(name?: string): Observable<DetailedContext> {
     let fileName;
     if (name !== undefined) {
       fileName = `${name}.json`;
@@ -37,13 +38,14 @@ export class ContextService {
       fileName = '_default.json';
     }
 
-    this.requestService.register(
+    return this.requestService.register(
       this.http.get(`contexts/${fileName}`)
-    ).subscribe(res => this.handleLoadContext(res.json()));
+    ).map(res => res.json());
   }
 
-  private handleGetContexts(contexts: Context[]) {
-    this.store.dispatch({type: 'SET_CONTEXTS', payload: contexts});
+  loadContext(name?: string) {
+    this.getDetailedContext(name)
+      .subscribe(context => this.handleLoadContext(context));
   }
 
   private handleLoadContext(context: DetailedContext) {
@@ -62,7 +64,9 @@ export class ContextService {
       // TODO: Remove the " || {}" when more tool will be defined
       const tool = this.toolService.getTool(tool_.name) || {};
       if (tool !== undefined) {
-        tools.push(Object.assign(tool, tool_));
+        tools.push(Object.assign({
+          toolbar: context.toolbar.indexOf(tool_.name) >= 0
+        }, tool, tool_));
       }
     });
     this.store.dispatch({type: 'SET_TOOLS', payload: tools});

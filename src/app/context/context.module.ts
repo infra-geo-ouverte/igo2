@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { ContextToolComponent } from './context-tool/context-tool.component';
-import { ContextItemComponent } from './context-item/context-item.component';
+import { ContextListComponent } from './context-list/context-list.component';
+import { ContextListItemComponent } from './context-list-item/context-list-item.component';
 import { ContextService } from './shared/context.service';
+import { ContextEditorComponent } from './context-editor/context-editor.component';
 
 
 @NgModule({
@@ -12,10 +13,14 @@ import { ContextService } from './shared/context.service';
     SharedModule
   ],
   declarations: [
-    ContextToolComponent,
-    ContextItemComponent
+    ContextListComponent,
+    ContextListItemComponent,
+    ContextEditorComponent
   ],
-  entryComponents: [ContextToolComponent],
+  entryComponents: [
+    ContextEditorComponent,
+    ContextListComponent
+  ],
   providers: [
     ContextService
   ]

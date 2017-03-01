@@ -7,4 +7,5 @@ export interface DetailedContext extends Context {
   map: MapOptions;
   layers: LayerOptions[];
   tools: Tool[];
+  toolbar: string[];
 }

@@ -1,5 +1,5 @@
 export * from './active-context.reducer';
-export * from './contexts-list.reducer';
+export * from './edited-context.reducer';
 export * from './tools-list.reducer';
 export * from './map-view.reducer';
 export * from './map-layers.reducer';

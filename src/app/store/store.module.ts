@@ -6,7 +6,7 @@ import {throwIfAlreadyLoaded } from '../core/module-import.guard';
 
 import {
   activeContext,
-  contextsList,
+  editedContext,
   mapView,
   mapLayers,
   selectedTool,
@@ -20,7 +20,7 @@ import {
 export function provideIgoStore() {
   return provideStore({
     activeContext: activeContext,
-    contexts: contextsList,
+    editedContext: editedContext,
     mapView: mapView,
     mapLayers: mapLayers,
     selectedTool: selectedTool,

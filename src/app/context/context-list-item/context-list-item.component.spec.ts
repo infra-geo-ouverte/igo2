@@ -3,11 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
 
-import { ContextItemComponent } from './context-item.component';
+import { ContextListItemComponent } from './context-list-item.component';
 
 describe('ContextItemComponent', () => {
-  let component: ContextItemComponent;
-  let fixture: ComponentFixture<ContextItemComponent>;
+  let component: ContextListItemComponent;
+  let fixture: ComponentFixture<ContextListItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,13 +15,13 @@ describe('ContextItemComponent', () => {
         TestModule,
         SharedModule
       ],
-      declarations: [ ContextItemComponent ]
+      declarations: [ ContextListItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContextItemComponent);
+    fixture = TestBed.createComponent(ContextListItemComponent);
     component = fixture.componentInstance;
   });
 
