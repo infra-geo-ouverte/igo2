@@ -11,11 +11,12 @@ English
 |igo-logo|
 
 * Installation: `<https://infra-geo-ouverte.github.io/igo2/#installation-en>`_
-* Démo: `<https://infra-geo-ouverte.github.io/igo2/>`_
+* Demo: `<https://infra-geo-ouverte.github.io/igo2/>`_
 * Tests: `<https://infra-geo-ouverte.github.io/igo2/#tests-en>`_
 * Docker: `<https://infra-geo-ouverte.github.io/igo2/#docker-en>`_
 * Folder structure: `<https://infra-geo-ouverte.github.io/igo2/#folder-structure>`_
 * Overview of the project: `<https://overv.io/infra-geo-ouverte/igo2/>`_
+* GitHub repository: `<https://github.com/infra-geo-ouverte/igo2/>`_
 
 
 Latest update: |date| (|time| UTC)
@@ -34,7 +35,6 @@ Parameters related to JSON :
 
 * /src/contexts/default.json
 
-::
 
 {
   "map": {
@@ -44,6 +44,8 @@ Parameters related to JSON :
       "zoom": 6
     }
   },
+
+
   "layers": [
 {
           "name": "name_title_alias_wmts",
@@ -72,6 +74,8 @@ Parameters related to JSON :
       }
     }
   ],
+
+
   "tools": [
     {
       "name": "context",
