@@ -47,7 +47,7 @@ describe('LayerService', () => {
 
     service.createLayer(layerOptions).subscribe(
         layer => {
-          let p: any = layer.olLayer.getProperties();
+          const p: any = layer.olLayer.getProperties();
           expect(layer).toBeTruthy();
           expect(p.opacity).toEqual(layerOptions.opacity);
           expect(p.type).toEqual(layerOptions.type);

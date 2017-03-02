@@ -51,7 +51,7 @@ export class WMSLayer extends Layer {
       attribution = {
         title: capabilities.Capability.Layer.Attribution.Title,
         url: capabilities.Capability.Layer.Attribution.OnlineResource
-      }
+      };
     }
 
     if (attribution) {
