@@ -1,6 +1,6 @@
 {
   "Contexts": "Contexts",
-  "Edit Context": "Edit Context",
+  "Edit Context": "Edit contexts",
   "Map": "Map",
   "Go Back": "Go Back",
   "Open Menu": "Show menu",
@@ -13,5 +13,5 @@
   "Print": "Print",
   "Measure": "Measure",
   "Search Results": "Search Results",
-  "Search for an address or a place": "Search for an address or a place"
+  "Search for an address or a place": "Search for an addres, a place or a layer"
 }
