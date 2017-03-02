@@ -18,8 +18,6 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
 
 * /src/contexts/default.json
 
-::
-
 {
   "map": {
     "view": {
@@ -28,6 +26,7 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       "zoom": 6
     }
   },
+
   "layers": [
 {
           "name": "nom_titre_alias_wmts",
@@ -56,6 +55,8 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       }
     }
   ],
+
+
   "tools": [
     {
       "name": "context",
