@@ -18,22 +18,22 @@ export class WMTSLayer extends Layer {
     capabilities: ol.format.WMTSCapabilities): ol.layer.Tile {
 
     if (capabilities) {
-
       const olLayerOptionsGetCapabilities = ol.source.WMTS.optionsFromCapabilities(capabilities,
         options.source);
 
       const olLayerOptions = Object.assign({}, options.view, {
         source: new ol.source.WMTS(olLayerOptionsGetCapabilities)
       });
-      return new ol.layer.Tile(olLayerOptions);
+      this.olLayer = new ol.layer.Tile(olLayerOptions);
 
     } else {
       const optionsSource = Object.assign({},
         options.source,
         { tileGrid: this.getDefaultTileGrid(options) }
       );
-      return new ol.layer.Tile({ source: new ol.source.WMTS(optionsSource) });
+      this.olLayer = new ol.layer.Tile({ source: new ol.source.WMTS(optionsSource) });
     }
+    return this.olLayer;
   }
 
   // TODO Support others projections ?

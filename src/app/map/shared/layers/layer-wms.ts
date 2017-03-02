@@ -18,44 +18,48 @@ export class WMSLayer extends Layer {
     capabilities: ol.format.WMSCapabilities): ol.layer.Image {
 
     if (capabilities) {
-
       const olLayerOptionsGetCapabilities = this.optionsFromCapabilities(capabilities,
         options);
 
       const olLayerOptions = Object.assign(options.view || {}, olLayerOptionsGetCapabilities, {
         source: new ol.source.ImageWMS(olLayerOptionsGetCapabilities.source)
       });
-      return new ol.layer.Image(olLayerOptions);
+      this.olLayer = new ol.layer.Image(olLayerOptions);
 
     } else {
       const olLayerOptions = Object.assign(options.view || {}, options, {
         source: new ol.source.ImageWMS(options.source)
       });
 
-      return new ol.layer.Image(olLayerOptions);
+      this.olLayer = new ol.layer.Image(olLayerOptions);
     }
-
+    return this.olLayer;
   }
 
   /** Get layer's properties from capabilities */
   optionsFromCapabilities(capabilities: any,
     options: WMSLayerOptions): WMSLayerOptions {
 
-    const layer = this.findLayer(capabilities.Capability.Layer, options.source.params['layers']);
+    const layer = this.findLayerInCapabilities(capabilities.Capability.Layer,
+      options.source.params['layers']);
 
     let attribution;
     if (layer.attributions) {
       attribution = layer.attributions;
     } else if (capabilities.Capability.Layer.Attribution) {
-      attribution = capabilities.Capability.Layer.Attribution;
+      // TODO: support LogoURL
+      attribution = {
+        title: capabilities.Capability.Layer.Attribution.Title,
+        url: capabilities.Capability.Layer.Attribution.OnlineResource
+      }
     }
 
     if (attribution) {
       Object.assign(options.source, {
         'attributions': new ol.Attribution({
-          html: '<a href="' + attribution.OnlineResource +
+          html: '<a href="' + attribution.onlineResource +
           '" target="_blank">' +
-          attribution.Title +
+          attribution.title +
           '</a>'
         })
       }
@@ -75,7 +79,10 @@ export class WMSLayer extends Layer {
     }
 
     if (layer.DataURL) {
-      options.dataURL = layer.DataURL;
+      options.dataURL = {
+        format: layer.DataURL.Format,
+        onlineResource: layer.DataURL.OnlineResource
+      };
     }
 
     if (layer.BoundingBox) {
@@ -87,12 +94,12 @@ export class WMSLayer extends Layer {
   }
 
   /** Find a layer among capabilities's layers from it's name */
-  findLayer(layerArray, name) {
+  findLayerInCapabilities(layerArray, name) {
 
     if (Array.isArray(layerArray)) {
       let layer;
       layerArray.find(value => {
-        layer = this.findLayer(value, name);
+        layer = this.findLayerInCapabilities(value, name);
         if (layer) {
           return true;
         }
@@ -100,7 +107,7 @@ export class WMSLayer extends Layer {
       }, this);
       return layer;
     } else if (layerArray.Layer) {
-      return this.findLayer(layerArray.Layer, name);
+      return this.findLayerInCapabilities(layerArray.Layer, name);
     } else {
       if (layerArray.Name) {
         if (layerArray.Name === name) {

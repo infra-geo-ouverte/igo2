@@ -27,7 +27,7 @@ describe('LayerService', () => {
   }));
 
   it('create WMS layer ...', inject([LayerService], (service: LayerService) => {
-    
+
     const layerOptions = {
       'name' : 'WMS2',
       'type' : 'wms',
@@ -44,21 +44,21 @@ describe('LayerService', () => {
       'minResolution' : 5000,
       'maxResolution' : 10000
     };
-    
-    const layer = service.createLayer(layerOptions).subscribe(
-        layer => {
 
+    service.createLayer(layerOptions).subscribe(
+        layer => {
+          let p: any = layer.olLayer.getProperties();
           expect(layer).toBeTruthy();
-          expect(layer.olLayer.getProperties().opacity).toEqual(layerOptions.opacity);
-          expect(layer.olLayer.getProperties().type).toEqual(layerOptions.type);
-          expect(layer.olLayer.getProperties().visible).toEqual(layerOptions.visible);
-          expect(layer.olLayer.getProperties().maxResolution).toEqual(layerOptions.maxResolution);
-          expect(layer.olLayer.getProperties().minResolution).toEqual(layerOptions.minResolution);
-          expect(layer.olLayer.getProperties().name).toEqual(layerOptions.name);
-          expect(layer.olLayer.getProperties().optionsFromCapabilities).toEqual(layerOptions.optionsFromCapabilities);
-          expect(layer.olLayer.getProperties().title).toEqual(layerOptions.title);
-          expect(layer.olLayer.getProperties().source.getUrl()).toEqual(layerOptions.source.url);
-          expect(layer.olLayer.getProperties().source.getParams()).toEqual(layerOptions.source.params);
+          expect(p.opacity).toEqual(layerOptions.opacity);
+          expect(p.type).toEqual(layerOptions.type);
+          expect(p.visible).toEqual(layerOptions.visible);
+          expect(p.maxResolution).toEqual(layerOptions.maxResolution);
+          expect(p.minResolution).toEqual(layerOptions.minResolution);
+          expect(p.name).toEqual(layerOptions.name);
+          expect(p.optionsFromCapabilities).toEqual(layerOptions.optionsFromCapabilities);
+          expect(p.title).toEqual(layerOptions.title);
+          expect(p.source.getUrl()).toEqual(layerOptions.source.url);
+          expect(p.source.getParams()).toEqual(layerOptions.source.params);
 
           return layer;
         }
