@@ -20,7 +20,6 @@ export class WMSLayer extends Layer {
     if (capabilities) {
       const olLayerOptionsGetCapabilities = this.optionsFromCapabilities(capabilities,
         options);
-
       const olLayerOptions = Object.assign(options.view || {}, olLayerOptionsGetCapabilities, {
         source: new ol.source.ImageWMS(olLayerOptionsGetCapabilities.source)
       });
@@ -30,7 +29,6 @@ export class WMSLayer extends Layer {
       const olLayerOptions = Object.assign(options.view || {}, options, {
         source: new ol.source.ImageWMS(options.source)
       });
-
       this.olLayer = new ol.layer.Image(olLayerOptions);
     }
     return this.olLayer;
@@ -43,54 +41,61 @@ export class WMSLayer extends Layer {
     const layer = this.findLayerInCapabilities(capabilities.Capability.Layer,
       options.source.params['layers']);
 
-    let attribution;
-    if (layer.attributions) {
-      attribution = layer.attributions;
-    } else if (capabilities.Capability.Layer.Attribution) {
-      // TODO: support LogoURL
-      attribution = {
-        title: capabilities.Capability.Layer.Attribution.Title,
-        url: capabilities.Capability.Layer.Attribution.OnlineResource
-      };
-    }
+    // TODO: getcapabilities attribution is not working
+    // let attribution;
+    // if (layer.Attribution) {
+    //   attribution = {
+    //     title: layer.Attribution.Title,
+    //     url: layer.Attribution.OnlineResource
+    //   };
+    // } else if (capabilities.Capability.Layer.Attribution) {
+    //   // TODO: support LogoURL
+    //   attribution = {
+    //     title: capabilities.Capability.Layer.Attribution.Title,
+    //     url: capabilities.Capability.Layer.Attribution.OnlineResource
+    //   };
+    // }
+    //
+    // if (attribution) {
+    //   Object.assign(options.source, {
+    //     'attributions': new ol.Attribution({
+    //       html: '<a href="' + attribution.onlineResource +
+    //       '" target="_blank">' +
+    //       attribution.title +
+    //       '</a>'
+    //     })
+    //   }
+    //   );
+    // }
 
-    if (attribution) {
-      Object.assign(options.source, {
-        'attributions': new ol.Attribution({
-          html: '<a href="' + attribution.onlineResource +
-          '" target="_blank">' +
-          attribution.title +
-          '</a>'
-        })
-      }
-      );
-    }
-
+    const optionsFromCapabilities: any = {};
     if (layer.Title) {
-      options.title = layer.Title;
+      optionsFromCapabilities.title = layer.Title;
     }
 
     if (layer.MaxScaleDenominator) {
-      options.maxResolution = layer.MaxScaleDenominator;
+      optionsFromCapabilities.maxResolution = layer.MaxScaleDenominator;
     }
 
     if (layer.MinScaleDenominator) {
-      options.minResolution = layer.MinScaleDenominator;
+      optionsFromCapabilities.minResolution = layer.MinScaleDenominator;
     }
 
-    if (layer.DataURL) {
-      options.dataURL = {
-        format: layer.DataURL.Format,
-        onlineResource: layer.DataURL.OnlineResource
+    if (layer.DataURL && layer.DataURL[0] && layer.DataURL.OnlineResource) {
+      optionsFromCapabilities.dataURL = {
+        format: layer.DataURL[0].Format,
+        onlineResource: layer.DataURL[0].OnlineResource
       };
     }
 
-    if (layer.BoundingBox) {
-      options.extent = [layer.BoundingBox[0].extent[0], layer.BoundingBox[0].extent[1],
-        layer.BoundingBox[0].extent[2], layer.BoundingBox[0].extent[3]];
-    }
+    // TODO: getcapabilities bounding box (which EPSG ? use EX_GeographicBoundingBox ?)
+    // if(layer.BoundingBox) {
+    //   options.extent = [layer.BoundingBox[0].extent[0], layer.BoundingBox[0].extent[1],
+    //     layer.BoundingBox[0].extent[2], layer.BoundingBox[0].extent[3]];
+    // }
 
-    return options;
+    Object.assign(optionsFromCapabilities, options);
+    return optionsFromCapabilities;
   }
 
   /** Find a layer among capabilities's layers from it's name */
