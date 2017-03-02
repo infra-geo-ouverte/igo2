@@ -14,7 +14,7 @@ Cette section détaille les configurations possibles pour le navigateur dans un 
 JSON
 =================
  
-En somme, voici les paramètres qui peuvent définir un contexte (view), des outils (tools)) et des couches (layers) :
+En somme, voici les paramètres qui peuvent définir un contexte de vue cartographique (view), des outils (tools) et des couches (layers) :
 
 * /src/contexts/default.json
 
@@ -50,7 +50,7 @@ En somme, voici les paramètres qui peuvent définir un contexte (view), des out
       "name" : "nom_titre_alias_couche_wms",
       "type" : "wms",
       "source":{
-        "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/bdtq.fcgi/",
+        "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi?",
         "params" : {"LAYERS": "nom_couche_wms_layername",
                     "VERSION": "1.1.1"}
       }

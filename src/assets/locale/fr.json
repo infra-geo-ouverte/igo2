@@ -1,8 +1,8 @@
 {
   "Contexts": "Vos contextes",
-  "Edit Context": "Modifier Contexte",
+  "Edit Context": "Modifier les contextes",
   "Map": "Carte",
-  "Go Back": "Reculer",
+  "Go Back": "Revenir",
   "Open Menu": "Afficher le menu",
   "Close Menu": "Fermer le menu",
   "Zoom": "Outil de zoom",
@@ -13,5 +13,5 @@
   "Print": "Impression",
   "Measure": "Mesure",
   "Search Results": "Résultats de recherche",
-  "Search for an address or a place": "Recherche une adresse ou un lieu"
+  "Search for an address or a place": "Rechercher une adresse, un lieu ou une couche"
 }
