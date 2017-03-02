@@ -1,12 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
+
+import { provideIgoStore } from '../store/store.module';
+
 import { MediaService } from './media.service';
-import { provideAppStore } from './core.module';
 
 describe('MediaService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideAppStore(),
+        provideIgoStore(),
         MediaService
       ]
     });

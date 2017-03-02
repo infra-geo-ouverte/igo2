@@ -1,15 +1,17 @@
 {
-  "Contexts": "Your contexts",
+  "Contexts": "Contexts",
+  "Edit Context": "Edit contexts",
   "Map": "Map",
   "Go Back": "Go Back",
-  "Menu": "Show main menu",
+  "Open Menu": "Show menu",
+  "Close Menu": "Close menu",
   "Zoom": "Zoom tool",
-  "Main menu": "Go Back to main menu",
+  "Main menu": "Go back to main menu",
   "Add Layers": "Add Layers",
   "Directions": "Directions",
   "Historical Analysis": "Historical Analysis",
   "Print": "Print",
   "Measure": "Measure",
   "Search Results": "Search Results",
-  "Search for an address or a place": "Search for an address or a place"
+  "Search for an address or a place": "Search for an address, a place or a layer"
 }

@@ -2,24 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import {
-   provideAppStore,
-   provideSearchSource,
-   provideSearchSourceService
-} from '../../core/core.module';
-import { MapService } from '../../core/map.service';
-import { LayerService } from '../../map/shared/layer.service';
-import { SearchService } from '../../core/search.service';
-import { LoggingService } from '../../core/logging.service';
-import { RequestService } from '../../core/request.service';
-import { MediaService } from '../../core/media.service';
-
 import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
+import { ContextModule } from '../../context/context.module';
 import { MapModule } from '../../map/map.module';
 import { SearchModule } from '../../search/search.module';
 import { ToolModule } from '../../tool/tool.module';
-import { ToolService } from '../../core/tool.service';
+
 import { NavigatorComponent } from './navigator.component';
 
 describe('NavigatorComponent', () => {
@@ -30,6 +19,7 @@ describe('NavigatorComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         TestModule,
+        ContextModule,
         MapModule,
         SearchModule,
         ToolModule,
@@ -40,17 +30,7 @@ describe('NavigatorComponent', () => {
         NavigatorComponent
       ],
       providers: [
-        {provide: APP_BASE_HREF, useValue : '/' },
-        provideAppStore(),
-        provideSearchSourceService(),
-        provideSearchSource(),
-        MapService,
-        LayerService,
-        SearchService,
-        ToolService,
-        LoggingService,
-        RequestService,
-        MediaService
+        {provide: APP_BASE_HREF, useValue : '/' }
       ]
     })
     .compileComponents();

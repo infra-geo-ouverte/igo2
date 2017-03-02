@@ -6,7 +6,11 @@ export interface MapViewOptions extends olx.ViewOptions {
   center?: [number, number];
 }
 
-export class NgMap {
+export interface MapOptions {
+  view: MapViewOptions;
+}
+
+export class IgoMap {
 
   olMap: ol.Map;
 
@@ -34,17 +38,10 @@ export class NgMap {
     });
 
     this.overlayMarkerStyle = new ol.style.Style({
-      text: new ol.style.Text({
-        text: 'place',
-        font: 'normal 36px Material Icons',
-        textBaseline: 'Bottom',
-        fill: new ol.style.Fill({
-          color: [0, 161, 222, 1]
-        }),
-        stroke: new ol.style.Stroke({
-          color: [255, 255, 255, 1],
-          width: 2
-        })
+      image: new ol.style.Icon({
+        src: 'assets/icons/place_blue_36px.svg',
+        imgSize: [36, 36], // for ie
+        anchor: [0.5, 1]
       })
     });
 
@@ -67,7 +64,11 @@ export class NgMap {
       zoom: currentView.getZoom()
     }, currentView.getProperties());
 
-    const view = new ol.View(Object.assign(viewOptions, options));
+    this.setView(Object.assign(viewOptions, options));
+  }
+
+  setView(options: MapViewOptions) {
+    const view = new ol.View(options);
     this.olMap.setView(view);
 
     if (options && options.center) {
@@ -95,6 +96,11 @@ export class NgMap {
   addLayer(layer: Layer) {
     this.layers.push(layer);
     this.olMap.addLayer(layer.olLayer);
+  }
+
+  removeLayers() {
+    this.layers.forEach(layer =>
+      this.olMap.removeLayer(layer.olLayer), this);
   }
 
   moveToExtent(extent: ol.Extent) {

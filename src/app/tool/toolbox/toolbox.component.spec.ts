@@ -1,9 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
+
 import { ToolboxComponent } from './toolbox.component';
-import { ToolService } from '../../core/tool.service';
-import { provideAppStore } from '../../core/core.module';
+import { ToolService } from '../shared/tool.service';
 
 // We don't want to import external tool. We'll have to think of
 // different tests for this component
@@ -17,6 +18,7 @@ describe('ToolboxComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        TestModule,
         SharedModule
       ],
       declarations: [
@@ -25,8 +27,7 @@ describe('ToolboxComponent', () => {
         SearchResultComponent
       ],
       providers: [
-        ToolService,
-        provideAppStore()
+        ToolService
       ]
     })
     .compileComponents();

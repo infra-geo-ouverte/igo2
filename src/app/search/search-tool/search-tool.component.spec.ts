@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestModule } from '../../test.module';
-import { provideAppStore } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 
 import { SearchToolComponent } from './search-tool.component';
@@ -20,9 +19,6 @@ describe('SearchToolComponent', () => {
       declarations: [
         SearchToolComponent,
         SearchResultComponent
-      ],
-      providers: [
-        provideAppStore()
       ]
     })
     .compileComponents();

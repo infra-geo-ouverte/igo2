@@ -12,7 +12,7 @@ Sommaire
 =======
 
 |igo2|_ est actuellement en développement afin de fournir un navigateur géographique qui supporte les standards OGC.
-|igo2|_ est basé sur |openlayers|_, |ang2|_ et |bootstr|_.
+|igo2|_ est basé sur |openlayers|_ et |ang2|.
 
 Plus d'information disponible à : http://igouverte.org/documentation/.
 

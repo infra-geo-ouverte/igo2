@@ -1,0 +1,13 @@
+<md-list-item>
+  <md-icon md-list-avatar>{{context.icon ? context.icon : 'star'}}</md-icon>
+  <h4 md-line>{{context.title}}</h4>
+  <button
+    md-icon-button
+    class="igo-icon-button"
+    (click)="editContext.emit(context)"
+    *ngIf="edition"
+    [md-tooltip]="'Edit Context' | translate"
+    tooltip-position="below">
+    <md-icon>settings</md-icon>
+  </button>
+</md-list-item>

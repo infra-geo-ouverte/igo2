@@ -14,6 +14,7 @@ Voici le site de documentation pour la version 2.0 du navigateur géographique :
 
 
 * Installation : `<https://infra-geo-ouverte.github.io/igo2/#installation-et-démarrage>`_
+* Démo : `<https://infra-geo-ouverte.github.io/igo2/>`_
 * Tests : `<https://infra-geo-ouverte.github.io/igo2/#tests>`_
 * Docker : `<https://infra-geo-ouverte.github.io/igo2/#docker>`_
 * Structures des répertoires : `<https://infra-geo-ouverte.github.io/igo2/#structures-des-répertoires>`_

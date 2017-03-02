@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
 
-import 'rxjs/add/operator/distinctUntilChanged';
-
-import { Media, MediaService } from '../../core/media.service';
-import { Tool } from '../../tool/shared/tool.interface';
-import { SearchResult } from '../../search/shared/search-result.interface';
-import { ContextService } from '../../core/context.service';
 import { FlexibleState } from '../../shared/flexible';
 
-import { AppStore } from '../../app.store';
+import { Media, MediaService } from '../../core/media.service';
+
+import { Tool } from '../../tool/shared/tool.interface';
+
+import { SearchResult } from '../../search/shared/search-result.interface';
+
+import { ContextService } from '../../context/shared/context.service';
+
 
 @Component({
   selector: 'igo-navigator',
   templateUrl: './navigator.component.html',
-  styleUrls: ['./navigator.component.styl'],
-  providers: [
-    ContextService
-  ]
+  styleUrls: ['./navigator.component.styl']
 })
 export class NavigatorComponent implements OnInit {
 
@@ -29,7 +29,9 @@ export class NavigatorComponent implements OnInit {
   sidenavOpened: boolean = false;
   selectedTool: Tool;
 
-  constructor(private store: Store<AppStore>,
+  private toolHistory: Tool[] = [];
+
+  constructor(private store: Store<IgoStore>,
               private mediaService: MediaService,
               private contextService: ContextService,
               private route: ActivatedRoute) { }
@@ -47,8 +49,7 @@ export class NavigatorComponent implements OnInit {
     this.store
       .select(s => s.selectedTool)
       .subscribe((tool: Tool) => {
-          this.selectedTool = tool;
-          this.menuState = 'initial';
+          this.handleToolSelected(tool);
       });
 
     this.store
@@ -64,12 +65,14 @@ export class NavigatorComponent implements OnInit {
       });
   }
 
-  unselectTool() {
-    this.store.dispatch({ type: 'UNSELECT_TOOL' });
-  }
-
   goBack() {
-    this.unselectTool();
+    const tool = this.toolHistory.pop();
+    if (tool !== undefined) {
+      this.selectedTool = tool;
+      this.selectTool(tool);
+    } else {
+      this.unselectTool();
+    }
   }
 
   goHome() {
@@ -100,5 +103,22 @@ export class NavigatorComponent implements OnInit {
 
   toggleToast() {
     this.toastState = this.toastState === 'initial' ? 'expanded' : 'initial';
+  }
+
+  private selectTool(tool: Tool) {
+    this.store.dispatch({type: 'SELECT_TOOL', payload: tool});
+  }
+
+  private unselectTool() {
+    this.store.dispatch({type: 'UNSELECT_TOOL'});
+  }
+
+  private handleToolSelected(tool?: Tool) {
+    if (tool && this.selectedTool && tool.name !== this.selectedTool.name) {
+      this.toolHistory.push(this.selectedTool);
+    }
+
+    this.selectedTool = tool;
+    this.menuState = 'initial';
   }
 }
