@@ -8,6 +8,7 @@ import { OSMLayer } from './layers/layer-osm';
 import { VectorLayer } from './layers/layer-vector';
 import { XYZLayer } from './layers/layer-xyz';
 import { WMTSLayer } from './layers/layer-wmts';
+import { WMSLayer } from './layers/layer-wms';
 
 @Injectable()
 export class LayerService {
@@ -16,7 +17,8 @@ export class LayerService {
     osm: OSMLayer,
     vector: VectorLayer,
     xyz: XYZLayer,
-    wmts: WMTSLayer
+    wmts: WMTSLayer,
+    wms: WMSLayer
   };
 
   public capabilitiesStore: any[] = [];
