@@ -1,5 +1,4 @@
 import { Layer, LayerOptions} from './layer';
-import 'rxjs/add/operator/toPromise';
 
 export interface WMSLayerOptions extends LayerOptions {
   source: olx.source.ImageWMSOptions;
@@ -11,20 +10,24 @@ export class WMSLayer extends Layer {
 
   olLayer: ol.layer.Image;
 
-  createOlLayer(options: WMSLayerOptions,
-                capabilities: ol.format.WMSCapabilities): ol.layer.Image {
+  constructor(options: WMSLayerOptions, capabilities?: ol.format.XML) {
+    super(options, capabilities);
+  }
 
-    if ( capabilities ) {
+  createOlLayer(options: WMSLayerOptions,
+    capabilities: ol.format.WMSCapabilities): ol.layer.Image {
+
+    if (capabilities) {
 
       const olLayerOptionsGetCapabilities = this.optionsFromCapabilities(capabilities,
-                                                                                options);
+        options);
 
       const olLayerOptions = Object.assign(options.view || {}, olLayerOptionsGetCapabilities, {
         source: new ol.source.ImageWMS(olLayerOptionsGetCapabilities.source)
       });
       return new ol.layer.Image(olLayerOptions);
 
-    }else {
+    } else {
       const olLayerOptions = Object.assign(options.view || {}, options, {
         source: new ol.source.ImageWMS(options.source)
       });
@@ -34,32 +37,28 @@ export class WMSLayer extends Layer {
 
   }
 
-  constructor(options: WMSLayerOptions, capabilities?: ol.format.XML) {
-    super(options, capabilities);
-  }
-
   /** Get layer's properties from capabilities */
   optionsFromCapabilities(capabilities: any,
-                           options: WMSLayerOptions): WMSLayerOptions {
+    options: WMSLayerOptions): WMSLayerOptions {
 
-    const layer = this.findLayer(capabilities.Capability.Layer, options.source.params.LAYERS);
+    const layer = this.findLayer(capabilities.Capability.Layer, options.source.params['layers']);
 
     let attribution;
     if (layer.attributions) {
       attribution = layer.attributions;
-    }else if (capabilities.Capability.Layer.Attribution) {
+    } else if (capabilities.Capability.Layer.Attribution) {
       attribution = capabilities.Capability.Layer.Attribution;
     }
 
     if (attribution) {
-      Object.assign(options.source,
-          {'attributions': new ol.Attribution({
-                            html: '<a href="' + attribution.OnlineResource +
-                                   '" target="_blank">' +
-                                   attribution.Title +
-                                   '</a>'
-                            })
-          }
+      Object.assign(options.source, {
+        'attributions': new ol.Attribution({
+          html: '<a href="' + attribution.OnlineResource +
+          '" target="_blank">' +
+          attribution.Title +
+          '</a>'
+        })
+      }
       );
     }
 
@@ -81,7 +80,7 @@ export class WMSLayer extends Layer {
 
     if (layer.BoundingBox) {
       options.extent = [layer.BoundingBox[0].extent[0], layer.BoundingBox[0].extent[1],
-                         layer.BoundingBox[0].extent[2], layer.BoundingBox[0].extent[3]];
+        layer.BoundingBox[0].extent[2], layer.BoundingBox[0].extent[3]];
     }
 
     return options;
@@ -90,26 +89,26 @@ export class WMSLayer extends Layer {
   /** Find a layer among capabilities's layers from it's name */
   findLayer(layerArray, name) {
 
-      if (Array.isArray(layerArray)) {
-        let layer;
-        layerArray.find(value => {
-          layer = this.findLayer(value, name);
-          if (layer) {
-            return true;
-          }
-          return false;
-        }, this);
-        return layer;
-      }else if (layerArray.Layer) {
-        return this.findLayer(layerArray.Layer, name);
-      }else {
-        if (layerArray.Name) {
-          if (layerArray.Name === name) {
-            return layerArray;
-          }
+    if (Array.isArray(layerArray)) {
+      let layer;
+      layerArray.find(value => {
+        layer = this.findLayer(value, name);
+        if (layer) {
+          return true;
         }
-        return undefined;
+        return false;
+      }, this);
+      return layer;
+    } else if (layerArray.Layer) {
+      return this.findLayer(layerArray.Layer, name);
+    } else {
+      if (layerArray.Name) {
+        if (layerArray.Name === name) {
+          return layerArray;
+        }
       }
+      return undefined;
+    }
   }
 
 }
