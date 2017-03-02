@@ -1,16 +1,15 @@
 import { Component, OnInit, Output, EventEmitter,
          ViewChild, ElementRef } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
 
-import 'rxjs/add/operator/debounceTime.js';
-import 'rxjs/add/operator/distinctUntilChanged';
+import { Store } from '@ngrx/store';
+import { IgoStore } from '../../store/store';
 
 import { Tool } from '../../tool/shared/tool.interface';
-import { SearchResult } from '../shared/search-result.interface';
-import { SearchService} from '../../core/search.service';
 
-import { AppStore } from '../../app.store';
+import { SearchResult } from '../shared/search-result.interface';
+import { SearchService} from '../shared/search.service';
+
 
 @Component({
   selector: 'igo-search-bar',
@@ -22,15 +21,17 @@ export class SearchBarComponent implements OnInit {
   @ViewChild('input') input: ElementRef;
 
   term?: string;
+
   private searchTool: Tool;
   private searchTermsStream = new Subject<string>();
+  readonly preValidationSearch = ['Control', 'Shift', 'Alt'];
 
-  constructor(private store: Store<AppStore>,
+  constructor(private store: Store<IgoStore>,
               private searchService: SearchService) {}
 
   ngOnInit(): void {
     this.store
-      .select(s => s.availableTools)
+      .select(s => s.tools)
       .subscribe((tools: Tool[]) => {
           this.searchTool = tools.find(t => t.name === 'search');
        });
@@ -41,6 +42,7 @@ export class SearchBarComponent implements OnInit {
       .subscribe((term: string) => {
         if (term) {
           this.searchService.search(term);
+          this.focus();
         } else {
           this.searchService.clear();
         }
@@ -59,7 +61,11 @@ export class SearchBarComponent implements OnInit {
 
     // Prevent searching the same thing twice
     // and searching when clicking "enter" on a search result
-    if (term !== this.term) {
+    if (
+        (term !== this.term)
+        && (term.length >= 3)
+        && (this.preValidationSearch.find(value => value === event.key) === undefined)
+    ) {
       this.key.emit(term);
       this.selectSearchTool();
       this.search(term);

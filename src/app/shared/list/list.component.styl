@@ -1,12 +1,18 @@
 @require '../../../css/theme.styl';
 
+$igo-list-item-height = 46px;
+
 md-list {
   padding-top: 0;
 }
 
-:host >>> .mat-list .mat-list-item.mat-list-item-avatar .mat-list-item-content,
-:host >>> .mat-nav-list .mat-list-item.mat-list-item-avatar .mat-list-item-content {
-  height: 46px;
+:host >>> .mat-list .mat-list-item.mat-list-item-avatar .mat-list-item-content {
+  height: $igo-list-item-height;
+  padding: 3px;
+}
+
+:host >>> .mat-list .mat-list-item.mat-list-item-avatar .mat-list-item-content>md-icon {
+  padding: 8px;
 }
 
 :host >>> [igolistitem] md-list-item [md-list-avatar] {

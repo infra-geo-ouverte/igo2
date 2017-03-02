@@ -21,6 +21,12 @@ import 'zone.js/dist/zone';
 import 'hammerjs/hammer';
 import 'openlayers';
 
+import 'rxjs/add/operator/debounceTime.js';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
+
 
 // If you need to support the browsers/features below, uncomment the import
 // and run `npm install import-name-here';

@@ -1,17 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {
-   provideAppStore,
-   provideSearchSource,
-   provideSearchSourceService
-} from '../../core/core.module';
-
-import { SearchService } from '../../core/search.service';
-import { LoggingService } from '../../core/logging.service';
-import { RequestService } from '../../core/request.service';
-
 import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
+
+import {
+  provideSearchSourceService,
+  provideSearchSources
+} from '../search.module';
+import { SearchService } from '../shared/search.service';
 import { SearchBarComponent } from './search-bar.component';
 
 describe('SearchBarComponent', () => {
@@ -26,12 +22,9 @@ describe('SearchBarComponent', () => {
       ],
       declarations: [ SearchBarComponent ],
       providers: [
-        provideAppStore(),
-        provideSearchSourceService(),
-        provideSearchSource(),
         SearchService,
-        RequestService,
-        LoggingService
+        provideSearchSourceService(),
+        ...provideSearchSources()
       ]
     })
     .compileComponents();

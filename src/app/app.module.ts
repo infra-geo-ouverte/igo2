@@ -3,13 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { HttpModule, Http } from '@angular/http';
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
-
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/throw';
+import { TranslateModule, TranslateLoader,
+         TranslateStaticLoader } from 'ng2-translate';
 
 import { CoreModule } from './core/core.module';
+import { StoreModule } from './store/store.module';
 import { SharedModule } from './shared/shared.module';
 import { NavigatorModule, NavigatorRoutingModule } from './pages';
 
@@ -34,6 +32,7 @@ export function createTranslateLoader(http: Http) {
     MaterialModule.forRoot(),
 
     CoreModule.forRoot(),
+    StoreModule.forRoot(),
     SharedModule.forRoot(),
 
     NavigatorModule,

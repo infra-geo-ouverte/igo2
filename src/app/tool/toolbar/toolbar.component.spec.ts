@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { provideStore } from '@ngrx/store';
+import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
-import { selectedTool } from '../../reducers';
+
 import { ToolbarComponent } from './toolbar.component';
 import { ToolbarItemComponent } from '../toolbar-item/toolbar-item.component';
 
@@ -13,14 +13,12 @@ describe('ToolbarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        TestModule,
         SharedModule
       ],
       declarations: [
         ToolbarComponent,
         ToolbarItemComponent
-      ],
-      providers: [
-        provideStore({ selectedTool })
       ]
     })
     .compileComponents();

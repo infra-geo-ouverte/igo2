@@ -47,9 +47,9 @@ export class ListItemDirective {
     this.renderer.invokeElementMethod(this.el.nativeElement, 'focus', []);
 
     // Refocus on the previously selected element, if it's
-    // not anothe list item, otherwise, the scrolling might
-    // not behave as expected.
-    if (!activeElement.hasAttribute('igolistitem')) {
+    // not another list item, otherwise, the scrolling might
+    // now behave as expected.
+    if (activeElement && !activeElement.hasAttribute('igolistitem')) {
       this.renderer.invokeElementMethod(activeElement, 'focus', []);
     }
 

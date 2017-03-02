@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Renderer } from '@angular/core';
 
 @Component({
   selector: 'igo-sidenav',
@@ -9,5 +9,32 @@ export class SidenavComponent {
 
   @Input() opened: boolean = false;
 
-  constructor() { }
+  private focusedElement: HTMLElement;
+  private blurElement: HTMLElement;
+
+  onOpen() {
+    this.focusedElement = document.activeElement as HTMLElement;
+  };
+
+  onCloseStart() {
+    const focusedElement = document.activeElement as HTMLElement;
+    if (focusedElement !== this.focusedElement) {
+      this.blurElement = this.focusedElement;
+    } else {
+      this.blurElement = undefined;
+    }
+  };
+
+  // This is to prevent the sidenav from focusing
+  // the element that was focused before it was opened
+  onClose() {
+    if (this.blurElement) {
+      this.renderer.invokeElementMethod(this.blurElement, 'blur');
+    }
+
+    this.blurElement = undefined;
+    this.focusedElement = undefined;
+  };
+
+  constructor(private renderer: Renderer) { }
 }
