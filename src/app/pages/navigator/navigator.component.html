@@ -10,7 +10,7 @@
     id="igo-menu-button"
     class="igo-primary"
     [md-tooltip]="(sidenavOpened ? 'Close Menu' : 'Open Menu') | translate"
-    tooltip-position="left"
+    tooltip-position="below"
     (click)="toggleSidenav()">
     <md-icon>
       <ng-container *ngIf="!sidenavOpened">menu</ng-container>
@@ -41,7 +41,7 @@
           md-icon-button
           panelLeftButton
           [md-tooltip]="'Go Back' | translate"
-          tooltip-position="right"
+          tooltip-position="below"
           class="igo-icon-button"
           (click)="goBack()">
           <md-icon>arrow_back</md-icon>
@@ -51,7 +51,7 @@
           md-icon-button
           panelRightButton
           [md-tooltip]="'Main menu' | translate"
-          tooltip-position="left"
+          tooltip-position="below"
           class="igo-icon-button"
           (click)="goHome()">
           <md-icon>menu</md-icon>
