@@ -3,38 +3,38 @@ import { Observable } from 'rxjs/Observable';
 
 import { SearchSource } from './search-source';
 import { SearchResult } from '../shared/search-result.interface';
+import { SearchResultType, SearchResultFormat } from '../shared/search-result.enum';
 
-export class SearchSourceMSP extends SearchSource {
+export class SearchSourceLayer extends SearchSource {
 
-  static name_: string = 'ICherche Québec';
-  static searchUrl: string = 'https://geoegl.msp.gouv.qc.ca/icherche/geopasdecode';
+  static name_: string = 'Layer';
+  static searchUrl: string = 'http://localhost/8080/layers/search';
 
   constructor(private jsonp: Jsonp) {
     super();
   }
 
   getName (): string {
-    return SearchSourceMSP.name_;
+    return SearchSourceLayer.name_;
   }
 
   search (term?: string): Observable<SearchResult[]>  {
     const search = this.getSearchParams(term);
 
     return this.jsonp
-      .get(SearchSourceMSP.searchUrl, { search })
+      .get(SearchSourceLayer.searchUrl, { search })
       .map(res => this.extractData(res));
   }
 
   private extractData (response: Response): SearchResult[] {
-    return response.json().features.map(this.formatResult);
+    return response.json().items.map(this.formatResult);
   }
 
   private getSearchParams (term: string): URLSearchParams {
     const search = new URLSearchParams();
     search.set('q', term);
-    search.set('limit', '5');
+    search.set('limit', '2');
     search.set('callback', 'JSONP_CALLBACK');
-    search.set('geometries', 'geom');
 
     return search;
   }
@@ -42,16 +42,14 @@ export class SearchSourceMSP extends SearchSource {
   private formatResult (result: any): SearchResult {
     return {
       id: result.id,
-      source: SearchSourceMSP.name_,
-      title: result.properties.recherche,
-      title_html: result.highlight,
-      icon: 'place',
+      source: SearchSourceLayer.name_,
+      type: SearchResultType.Layer,
+      format: SearchResultFormat.WMS,
+      title: result.source.title,
+      title_html: result.highlight.title,
+      icon: result.source.type === 'Layer' ? 'layers' : 'map',
       projection: 'EPSG:4326',
-      properties: Object.assign({
-        type: result.doc_type
-      }, result.properties),
-      geometry: result.geometry,
-      extent: result.bbox
+      properties: result.source
     };
   }
 

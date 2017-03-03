@@ -6,6 +6,7 @@ import { IgoStore } from '../../store/store';
 import { ToolComponent } from '../../tool/shared/tool-component';
 import { Register } from '../../tool/shared/tool.service';
 import { SearchResult } from '../shared/search-result.interface';
+import { SearchResultType } from '../shared/search-result.enum';
 
 
 @Register()
@@ -45,9 +46,14 @@ export class SearchToolComponent implements ToolComponent, OnInit {
   }
 
   private handleSearchResults(results: SearchResult[]) {
-    const groupedResults = {};
+    const featureResults = {};
+    const layerResults = {};
     results.forEach((result: SearchResult) => {
       const source = result.source;
+      let groupedResults = featureResults;
+      if (result.type === SearchResultType.Layer) {
+          groupedResults = layerResults;
+      }
       if (groupedResults[source] === undefined) {
         groupedResults[source] = [];
       }
@@ -56,8 +62,11 @@ export class SearchToolComponent implements ToolComponent, OnInit {
     });
 
     const sourceResults = [];
-    Object.keys(groupedResults).sort().forEach((source: string) => {
-      sourceResults.push([source, groupedResults[source]]);
+    Object.keys(featureResults).sort().forEach((source: string) => {
+      sourceResults.push([source, featureResults[source]]);
+    });
+    Object.keys(layerResults).sort().forEach((source: string) => {
+      sourceResults.push([source, layerResults[source]]);
     });
 
     this.sourceResults = sourceResults as [string, SearchResult[]];

@@ -4,11 +4,13 @@ import { Store } from '@ngrx/store';
 import { IgoStore } from '../../store/store';
 
 import { SearchResult } from '../../search/shared/search-result.interface';
+import { SearchResultType } from '../../search/shared/search-result.enum';
 
 import { IgoMap } from '../shared/map';
 import { MapService } from '../shared/map.service';
 import { LayerService } from '../shared/layer.service';
 import { LayerOptions } from '../shared/layers/layer';
+import { WMSLayerOptions } from '../shared/layers/layer-wms';
 import { MapViewOptions } from '../shared/map';
 
 
@@ -23,8 +25,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   id: string = 'igo-map-target';
 
   constructor(private store: Store<IgoStore>,
-              private mapService: MapService,
-              private layerService: LayerService) {}
+    private mapService: MapService,
+    private layerService: LayerService) { }
 
   ngOnInit() {
     this.map = this.mapService.getMap();
@@ -55,9 +57,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   private resultToFeature(result: SearchResult) {
     const destProj = this.map.getProjection();
     const format = new ol.format.GeoJSON();
-    const feature = format.readFeature(Object.assign({
-        type: 'Feature'
-    }, result));
+    const feature = format.readFeature(result);
 
     feature.getGeometry().transform(result.projection, destProj);
 
@@ -75,16 +75,39 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private handleFocusedResult(result: SearchResult) {
-    this.handleResult(result, false);
+    if (result.type === SearchResultType.Layer) {
+      return false;
+    }
+    this.handleFeatureResult(result, false);
   }
 
   private handleSelectedResult(result: SearchResult) {
-    this.handleResult(result, true);
+    if (result.type === SearchResultType.Layer) {
+      this.handleLayerResult(result);
+    } else {
+      this.handleFeatureResult(result, true);
+    }
   }
 
-  private handleResult(result: SearchResult, zoom: boolean = false) {
-    this.map.clearOverlay();
+  private handleLayerResult(result: SearchResult) {
+    const layerOptions: WMSLayerOptions = {
+      source: {
+        url: result.properties['url'],
+        projection: this.map.getProjection(),
+        params: {
+          layers: result.properties['name'],
+        }
+      },
+      type: 'wms',
+      name: result.properties['title']
+    };
+    this.layerService.createLayer(layerOptions).subscribe(
+      layer => this.map.addLayer(layer)
+    );
+  }
 
+  private handleFeatureResult(result: SearchResult, zoom: boolean = false) {
+    this.map.clearOverlay();
     const feature = this.resultToFeature(result);
     this.map.addMarker(feature);
 

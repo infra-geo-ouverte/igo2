@@ -7,7 +7,8 @@ import { SearchService } from './shared/search.service';
 import { SearchSourceService } from './shared/search-source.service';
 import { SearchSource } from './sources/search-source';
 import { SearchSourceNominatim } from './sources/search-source-nominatim';
-import { SearchSourceMSP } from './sources/search-source-msp';
+import { SearchSourceICherche } from './sources/search-source-icherche';
+import { SearchSourceLayer } from './sources/search-source-layer';
 
 import { SearchToolComponent } from './search-tool/search-tool.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
@@ -38,7 +39,13 @@ export function provideSearchSources() {
     },
     {
       provide: SearchSource,
-      useClass: SearchSourceMSP,
+      useClass: SearchSourceICherche,
+      multi: true,
+      deps: [Jsonp]
+    },
+    {
+      provide: SearchSource,
+      useClass: SearchSourceLayer,
       multi: true,
       deps: [Jsonp]
     }

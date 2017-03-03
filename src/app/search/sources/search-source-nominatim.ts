@@ -3,10 +3,11 @@ import { Observable } from 'rxjs/Observable';
 
 import { SearchSource } from './search-source';
 import { SearchResult } from '../shared/search-result.interface';
+import { SearchResultType, SearchResultFormat } from '../shared/search-result.enum';
 
 export class SearchSourceNominatim extends SearchSource {
 
-  static name_: string = 'OSM (Nominatim)';
+  static name_: string = 'Nominatim (OSM)';
   static searchUrl: string = 'https://nominatim.openstreetmap.org/search';
 
   constructor(private http: Http) {
@@ -33,7 +34,7 @@ export class SearchSourceNominatim extends SearchSource {
     const search = new URLSearchParams();
     search.set('q', term);
     search.set('format', 'json');
-    search.set('limit', '5');
+    search.set('limit', '2');
 
     return search;
   }
@@ -42,6 +43,8 @@ export class SearchSourceNominatim extends SearchSource {
     return {
       id: result.place_id,
       source: SearchSourceNominatim.name_,
+      type: SearchResultType.Feature,
+      format: SearchResultFormat.GeoJSON,
       title: result.display_name,
       icon: 'place',
       projection: 'EPSG:4326',
