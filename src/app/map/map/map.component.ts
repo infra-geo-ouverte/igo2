@@ -25,8 +25,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   id: string = 'igo-map-target';
 
   constructor(private store: Store<IgoStore>,
-    private mapService: MapService,
-    private layerService: LayerService) { }
+              private mapService: MapService,
+              private layerService: LayerService) { }
 
   ngOnInit() {
     this.map = this.mapService.getMap();

@@ -8,7 +8,7 @@ import { SearchResultType, SearchResultFormat } from '../shared/search-result.en
 export class SearchSourceLayer extends SearchSource {
 
   static name_: string = 'Layer';
-  static searchUrl: string = 'http://localhost/8080/layers/search';
+  static searchUrl: string = '/layers/search';
 
   constructor(private jsonp: Jsonp) {
     super();
