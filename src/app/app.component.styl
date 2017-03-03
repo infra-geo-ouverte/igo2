@@ -1,4 +1,5 @@
 @require '../css/theme.styl';
+@require '../css/media.styl';
 
 :host, main {
   width: 100%;
@@ -11,29 +12,39 @@ main {
   transition: 0.5s;
 }
 
+:host >>> .mat-icon {
+  color: $igo-primary-color;
+}
+
 :host >>> .mat-input-element {
   padding: 0 $igo-padding;
 }
 
-:host >>> .mat-input-wrapper {
-  padding: 0;
-}
-
-:host >>> .mat-input-placeholder-wrapper {
-  top: 10px;
-  left: $igo-padding;
-  right: $igo-padding;
-  padding: 0;
-}
-
 :host >>> .mat-input-placeholder {
   font-style: italic;
-  color: $igo-border-color;
 }
 
 :host >>> .mat-input-underline {
   border-color: $igo-border-color;
 }
+
+:host >>> md-input-container {  
+  width: 100%;
+}
+
+:host >>> md-radio-group.horizontal {
+  display: block;
+  text-align: center;
+
+  +media(mobile) {
+    text-align: inherit;
+  }
+}
+
+:host >>> md-radio-group.horizontal md-radio-button {
+  padding: 0 8px;
+}
+
 
 /*--- Spinner ---*/
 igo-spinner {

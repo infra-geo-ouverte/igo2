@@ -19,10 +19,6 @@ html, body {
 
 @require './theme.styl';
 
-input {
-  height: $igo-icon-button-height;
-}
-
 [mdbutton]:hover.igo-primary .mat-button-focus-overlay,
 [md-icon-button]:hover.igo-primary .mat-button-focus-overlay {
   background-color: $igo-primary-color-hover;
@@ -77,7 +73,7 @@ table td {
 }
 
 table.igo-striped tbody tr:nth-child(odd) {
-  background-color: $igo-secondary-color-hover;
+  background-color: $igo-secondary-color;
 }
 
 .igo-container {
@@ -93,6 +89,25 @@ table.igo-striped tbody tr:nth-child(odd) {
   height: 100%;
   width: 100%;
   overflow: auto;
+}
+
+fieldset {
+  border: none;
+}
+
+.igo-input-container {
+  padding-bottom: 6px;
+}
+
+.igo-form-inline-error {
+  color: $igo-warn-color;
+  position: relative;
+  top: -10px;
+}
+
+.igo-form-button-group {
+  text-align: center;
+  padding: 20px;
 }
 
 /* IE10+ */
