@@ -3,7 +3,7 @@
     <igo-context-list-item
       igoListItem
       tabindex="{{i}}"
-      [selected]="selectedContext && selectedContext.name === context.name"
+      [selected]="selectedContext && selectedContext.uri === context.uri"
       [context]="context"
       [edition]="edition"
       (selectItem)="selectContext(context)"

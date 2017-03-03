@@ -1,0 +1,63 @@
+<form [formGroup]="form" novalidate>
+
+  <fieldset>
+    <div>
+      <md-input-container>
+        <input
+          mdInput
+          formControlName="title"
+          placeholder="{{'Title' | translate}}">
+      </md-input-container>
+      <small 
+        class="igo-form-inline-error"
+        [hidden]="title.valid || (title.pristine && !submitted)">
+        {{'contextTitleValidation' | translate}}
+      </small>
+    </div>
+
+    <div>
+      <md-input-container>
+        <input
+          mdInput
+          formControlName="description"
+          placeholder="{{'Description' | translate}}">
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-input-container>
+        <input
+          readonly
+          mdInput
+          placeholder="{{'Alias' | translate}}"
+          value="{{context.uri}}">
+      </md-input-container>
+    </div>
+
+    <div class="igo-input-container">
+      <md-radio-group formControlName="scope" class="horizontal">
+        <md-radio-button value="public">{{'Public' | translate}}</md-radio-button>
+        <md-radio-button value="protected">{{'Protected' | translate}}</md-radio-button>
+        <md-radio-button value="private">{{'Private' | translate}}</md-radio-button>
+      </md-radio-group>
+    </div>
+  </fieldset>
+
+  <div class="igo-form-button-group">
+    <button md-raised-button [mdMenuTriggerFor]="saveMenu">
+      {{'Save' | translate}}
+    </button>
+
+    <md-menu #saveMenu="mdMenu">
+      <button md-menu-item (click)="saveProperties(form.value, form.valid)">
+        <md-icon>settings</md-icon>
+        <span>{{'Properties' | translate}}</span>
+      </button>
+      <button md-menu-item (click)="savePropertiesAndMap(form.value, form.valid)">
+        <md-icon>map</md-icon>
+        <span>{{'Properties & Map' | translate}}</span>
+      </button>
+    </md-menu>
+  </div>
+
+</form>

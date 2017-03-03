@@ -28,10 +28,8 @@ export class ContextEditorComponent implements ToolComponent, OnInit {
 
   ngOnInit() {
     this.store
-      .select(s => s.activeContext)
-      .subscribe((context: Context) => {
-        this.context = context;
-      });
+      .select(s => s.editedContext)
+      .subscribe((context: Context) => this.context = context);
   }
 
   updateContext() {

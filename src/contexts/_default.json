@@ -1,5 +1,5 @@
 {
-  "name": "_default",
+  "uri": "_default",
   "title": "Default Context",
   "map": {
     "view": {
@@ -15,8 +15,8 @@
     }
   ],
   "toolbar": [
-    "context",
     "search",
+    "context",
     "map",
     "layers",
     "directions",

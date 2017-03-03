@@ -1,8 +1,10 @@
 {
+  "Alias": "Alias",
   "Contexts": "Contexts",
-  "Edit Context": "Edit contexts",
+  "Description": "Description",
+  "Edit Context": "Edit Context",
   "Map": "Map",
-  "Go Back": "Go Back",
+  "Go Back": "Go back",
   "Open Menu": "Show menu",
   "Close Menu": "Close menu",
   "Zoom": "Zoom tool",
@@ -11,7 +13,16 @@
   "Directions": "Directions",
   "Historical Analysis": "Historical Analysis",
   "Print": "Print",
+  "Private": "Private",
+  "Properties": "Properties",
+  "Properties & Map": "Properties & Map",
+  "Protected": "Protected",
+  "Public": "Public",
   "Measure": "Measure",
+  "Save": "Save",
   "Search Results": "Search Results",
-  "Search for an address or a place": "Search for an address, a place or a layer"
+  "Search for an address or a place": "Search for an address, a place or a layer",
+  "Title": "Title",
+
+  "contextTitleValidation": "Title is required (minimum 3 characters)."
 }
