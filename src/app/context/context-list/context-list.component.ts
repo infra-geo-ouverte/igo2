@@ -39,22 +39,19 @@ export class ContextListComponent implements ToolComponent, OnInit {
   ngOnInit() {
     this.store
       .select(s => s.tools)
-      .subscribe((tools: Tool[]) => {
-          this.editTool = tools.find(t => t.name === 'contextEditor');
-       });
+      .subscribe((tools: Tool[]) =>
+          this.editTool = tools.find(t => t.name === 'contextEditor'));
 
     this.store
       .select(s => s.activeContext)
-      .subscribe((context: Context) => {
-        this.selectedContext = context;
-      });
+      .subscribe((context: Context) => this.selectedContext = context);
 
     this.contexts = this.contextService.getContexts();
   }
 
   selectContext(context: Context) {
-    if (context.name !== this.selectedContext.name) {
-      this.contextService.loadContext(context.name);
+    if (context.uri !== this.selectedContext.uri) {
+      this.contextService.loadContext(context.uri);
     }
   }
 

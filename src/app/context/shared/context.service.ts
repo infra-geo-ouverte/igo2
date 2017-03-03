@@ -30,10 +30,10 @@ export class ContextService {
     ).map(res => res.json());
   }
 
-  getDetailedContext(name?: string): Observable<DetailedContext> {
+  getDetailedContext(uri?: string): Observable<DetailedContext> {
     let fileName;
-    if (name !== undefined) {
-      fileName = `${name}.json`;
+    if (uri !== undefined) {
+      fileName = `${uri}.json`;
     } else {
       fileName = '_default.json';
     }
@@ -43,8 +43,8 @@ export class ContextService {
     ).map(res => res.json());
   }
 
-  loadContext(name?: string) {
-    this.getDetailedContext(name)
+  loadContext(uri?: string) {
+    this.getDetailedContext(uri)
       .subscribe(context => this.handleLoadContext(context));
   }
 

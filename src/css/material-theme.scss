@@ -3,9 +3,8 @@
 @include mat-core();
 
 $igo-app-primary: mat-palette($mat-blue, 700);
-$igo-app-accent: mat-palette($mat-grey, 400);
-
-$igo-app-warn: mat-palette($mat-red);
+$igo-app-accent: mat-palette($mat-grey, 300);
+$igo-app-warn: mat-palette($mat-red, 700);
 
 $igo-app-theme: mat-light-theme($igo-app-primary, $igo-app-accent, $igo-app-warn);
 
