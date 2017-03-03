@@ -1,7 +1,14 @@
-export interface LayerOptions {
+export interface DataURL {
+  format: string;
+  onlineResource: string;
+}
+
+export interface LayerOptions extends olx.layer.BaseOptions {
   name: string;
   type: string;
   optionsFromCapabilities?: boolean;
+  title?: string;
+  dataURL?: DataURL;
 }
 
 export abstract class Layer {
