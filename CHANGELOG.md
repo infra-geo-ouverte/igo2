@@ -1,5 +1,30 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/infra-geo-ouverte/igo2/compare/0.3.4...v0.4.0) (2017-03-03)
+
+
+### Bug Fixes
+
+* **i18n:** Change a few translations ([#144](https://github.com/infra-geo-ouverte/igo2/issues/144)) ([537f4ee](https://github.com/infra-geo-ouverte/igo2/commit/537f4ee))
+* **ie:** Handle null active element in list item directive ([0746c25](https://github.com/infra-geo-ouverte/igo2/commit/0746c25))
+* **ie:** use svg marker instead of font ([20f0651](https://github.com/infra-geo-ouverte/igo2/commit/20f0651))
+* **layer-wmts:** Fix resolutions max ([#139](https://github.com/infra-geo-ouverte/igo2/issues/139)) ([0207061](https://github.com/infra-geo-ouverte/igo2/commit/0207061))
+* **sidenav focus on close:** Prevent the sidenav from focusing the search bar on close ([76f2497](https://github.com/infra-geo-ouverte/igo2/commit/76f2497))
+
+
+### Features
+
+* **context:** Base layout for the context editor  ([#152](https://github.com/infra-geo-ouverte/igo2/issues/152)) ([5c36260](https://github.com/infra-geo-ouverte/igo2/commit/5c36260))
+* **context:** Basics for the context editor tool ([#146](https://github.com/infra-geo-ouverte/igo2/issues/146)) ([6027b98](https://github.com/infra-geo-ouverte/igo2/commit/6027b98))
+* **context tool:** Basic file based context tool ([#141](https://github.com/infra-geo-ouverte/igo2/issues/141)) ([bd2f038](https://github.com/infra-geo-ouverte/igo2/commit/bd2f038))
+* **layer-wms:**  add support for layers wms ([#151](https://github.com/infra-geo-ouverte/igo2/issues/151)) ([2872eb8](https://github.com/infra-geo-ouverte/igo2/commit/2872eb8))
+* **search:** add Layer search source ([4610134](https://github.com/infra-geo-ouverte/igo2/commit/4610134))
+* **search-bar:**  Improve the search bar ([#138](https://github.com/infra-geo-ouverte/igo2/issues/138)) ([3130c78](https://github.com/infra-geo-ouverte/igo2/commit/3130c78))
+* **tool:** Keep tool history and go back functionnality ([#147](https://github.com/infra-geo-ouverte/igo2/issues/147)) ([6a1a337](https://github.com/infra-geo-ouverte/igo2/commit/6a1a337))
+
+
+
 <a name="0.3.4"></a>
-## [0.3.4](https://github.com/infra-geo-ouverte/igo2/compare/0.3.2...v0.3.4) (2017-02-23)
+## [0.3.4](https://github.com/infra-geo-ouverte/igo2/compare/0.3.2...0.3.4) (2017-02-23)
 
 
 ### Bug Fixes
