@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, OnDestroy, OnInit,
-         QueryList, Input, ContentChildren, HostListener } from '@angular/core';
+         QueryList, Input, ContentChildren, HostListener,
+         ElementRef } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -37,7 +38,7 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
-  constructor() { }
+  constructor(private el: ElementRef) { }
 
   ngOnInit() {
     this.enableNavigation();
@@ -65,6 +66,7 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     if (item !== undefined) {
       item.focus();
       this.focusedItem = item;
+      this.scrollToItem(item);
     }
   }
 
@@ -103,6 +105,7 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
       item.select();
       this.selectedItem = item;
       this.focusedItem = item;
+      this.scrollToItem(item);
     }
   }
 
@@ -177,5 +180,9 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
       default:
         break;
     }
+  }
+
+  private scrollToItem(item: ListItemDirective) {
+    this.el.nativeElement.scrollTop = item.getOffsetTop();
   }
 }
