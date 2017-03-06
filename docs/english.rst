@@ -10,11 +10,10 @@ English
 
 |igo-logo|
 
-* Installation: `<https://infra-geo-ouverte.github.io/igo2/#installation-en>`_
+* Installation: `<https://github.com/infra-geo-ouverte/igo2#installation-en>`_
 * Demo: `<https://infra-geo-ouverte.github.io/igo2/>`_
-* Tests: `<https://infra-geo-ouverte.github.io/igo2/#tests-en>`_
-* Docker: `<https://infra-geo-ouverte.github.io/igo2/#docker-en>`_
-* Folder structure: `<https://infra-geo-ouverte.github.io/igo2/#folder-structure>`_
+* Tests: `<https://github.com/infra-geo-ouverte/igo2#tests-en>`_
+* Docker: `<https://github.com/infra-geo-ouverte/igo2#docker-en>`_
 * Overview of the project: `<https://overv.io/infra-geo-ouverte/igo2/>`_
 * GitHub repository: `<https://github.com/infra-geo-ouverte/igo2/>`_
 
@@ -33,7 +32,7 @@ With this JSON conguration file, it is possible to build your own context, tools
 
 Parameters related to JSON : 
 
-* /src/contexts/default.json
+* /src/contexts/
 
 
 {
@@ -68,7 +67,7 @@ Parameters related to JSON :
       "name" : "name_title_alias_wms",
       "type" : "wms",
       "source":{
-        "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/bdtq.fcgi/",
+        "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi?",
         "params" : {"LAYERS": "layername_wms",
                     "VERSION": "1.1.1"}
       }

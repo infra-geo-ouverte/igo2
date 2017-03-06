@@ -16,7 +16,7 @@ JSON
  
 En somme, voici les paramètres qui peuvent définir un contexte de vue cartographique (view), des outils (tools) et des couches (layers) :
 
-* /src/contexts/default.json
+* /src/contexts/
 
 {
   "map": {

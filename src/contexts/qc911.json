@@ -1,6 +1,6 @@
 {
-  "uri": "_default",
-  "title": "Default Context",
+  "uri": "qc911",
+  "title": "Qc-911",
   "map": {
     "view": {
       "projection": "EPSG:3857",
@@ -10,9 +10,23 @@
   },
   "layers": [
     {
-      "name" : "OSM",
-      "type" : "osm"
-    }
+          "name": "MSP",
+          "type": "xyz",
+          "source": {
+            "url": "https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png"
+          }
+},
+{
+
+            "name" : "nom_titre_alias_couche_wms", "type" : "wms", "source":{
+
+                "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi?", "params" : {"LAYERS": "MSP_DESSERTE_MUN_911,telephone_urg",
+
+                    "VERSION": "1.1.1"}
+
+            }
+
+        }
   ],
   "toolbar": [
     "search",
