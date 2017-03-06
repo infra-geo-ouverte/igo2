@@ -26,13 +26,13 @@
   ],
   "tools": [
     {
+      "name": "search"
+    },
+    {
       "name": "context"
     },
     {
       "name": "contextEditor"
-    },
-    {
-      "name": "search"
     },
     {
       "name": "map",
