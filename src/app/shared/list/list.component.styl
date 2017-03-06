@@ -2,8 +2,23 @@
 
 $igo-list-item-height = 46px;
 
+// This is to make the list scrollable
+:host {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
 md-list {
   padding-top: 0;
+}
+
+// We need to make sure the firs ancestor with a
+// position other than static is the host itself
+// to properly scroll to the focused list item 
+:host >>> .igo-container {
+  position: static;
 }
 
 :host >>> .mat-list .mat-list-item.mat-list-item-avatar .mat-list-item-content {

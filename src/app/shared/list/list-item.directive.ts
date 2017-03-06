@@ -38,21 +38,6 @@ export class ListItemDirective {
     this.renderer.setElementClass(
       this.el.nativeElement, ListItemDirective.cls, true);
 
-    // Get a reference to the active element
-    const activeElement = window.document.activeElement;
-
-    // Focus on the selected element. This will make
-    // any scrollbar scroll to that element when using the
-    // arrows for navigation
-    this.renderer.invokeElementMethod(this.el.nativeElement, 'focus', []);
-
-    // Refocus on the previously selected element, if it's
-    // not another list item, otherwise, the scrolling might
-    // now behave as expected.
-    if (activeElement && !activeElement.hasAttribute('igolistitem')) {
-      this.renderer.invokeElementMethod(activeElement, 'focus', []);
-    }
-
     this.focusItem.emit();
   }
 
@@ -76,5 +61,11 @@ export class ListItemDirective {
 
     this.unfocus();
     this.unselectItem.emit();
+  }
+
+  getOffsetTop(): number {
+    const padding = 5;
+
+    return this.el.nativeElement.offsetTop - padding;
   }
 }

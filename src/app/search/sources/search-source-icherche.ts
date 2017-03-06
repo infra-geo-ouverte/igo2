@@ -42,7 +42,7 @@ export class SearchSourceICherche extends SearchSource {
 
   private formatResult (result: any): SearchResult {
     return {
-      id: result.id,
+      id: result._id,
       source: SearchSourceICherche.name_,
       type: SearchResultType.Feature,
       format: SearchResultFormat.GeoJSON,
