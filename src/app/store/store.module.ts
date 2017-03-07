@@ -7,7 +7,6 @@ import {throwIfAlreadyLoaded } from '../core/module-import.guard';
 import {
   activeContext,
   editedContext,
-  editedLayer,
   map,
   layers,
   tools,
@@ -22,7 +21,6 @@ export function provideIgoStore() {
   return provideStore({
     activeContext: activeContext,
     editedContext: editedContext,
-    editedLayer: editedLayer,
     map: map,
     layers: layers,
     tools: tools,
