@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams, Request, RequestMethod } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { URLSearchParams, Request, RequestMethod } from '@angular/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Layer, LayerOptions } from './layers/layer';
 import { OSMLayer } from './layers/layer-osm';
@@ -21,6 +21,8 @@ export class LayerService {
     wms: WMSLayer
   };
 
+  editedLayer = new BehaviorSubject<Layer>(undefined);
+
   public capabilitiesStore: any[] = [];
 
   constructor(private http: Http) { }
@@ -37,6 +39,14 @@ export class LayerService {
     } else {
       return new Observable(layer => layer.next(new layerCls(options)));
     }
+  }
+
+  editLayer(layer: Layer) {
+    this.editedLayer.next(layer);
+  }
+
+  getEditedLayer() {
+    return this.editedLayer;
   }
 
   getCapabilities(options): Observable<any> {

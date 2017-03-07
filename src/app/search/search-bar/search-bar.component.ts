@@ -26,6 +26,10 @@ export class SearchBarComponent implements OnInit {
   private searchTermsStream = new Subject<string>();
   readonly preValidationSearch = ['Control', 'Shift', 'Alt'];
 
+  get disabled () {
+    return this.searchTool === undefined;
+  }
+
   constructor(private store: Store<IgoStore>,
               private searchService: SearchService) {}
 
@@ -79,6 +83,10 @@ export class SearchBarComponent implements OnInit {
   }
 
   search(term: string): void {
+    if (this.disabled) {
+      return;
+    }
+
     this.searchTermsStream.next(term);
   }
 

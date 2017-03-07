@@ -33,7 +33,7 @@
 	"toolbar": [
 		"search",
 		"context",
-		"map",
+		"mapEditor",
 		"layers",
 		"directions",
 		"historicalAnalysis",
@@ -47,9 +47,7 @@
 	}, {
 		"name": "contextEditor"
 	}, {
-		"name": "map",
-		"title": "Map",
-		"icon": "map"
+		"name": "mapEditor"
 	}, {
 		"name": "layers",
 		"title": "Add Layers",

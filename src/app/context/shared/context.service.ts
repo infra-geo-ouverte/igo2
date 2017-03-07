@@ -53,11 +53,11 @@ export class ContextService {
     this.store.dispatch({type: 'SET_CONTEXT', payload: context});
 
     // TODO: Handle "useCurrentView" option
-    const view: MapViewOptions = context.map.view;
-    this.store.dispatch({type: 'SET_VIEW', payload: view});
+    const mapOptions: MapViewOptions = context.map;
+    this.store.dispatch({type: 'SET_MAP', payload: mapOptions});
 
-    const layers: Array<LayerOptions> = context.layers;
-    this.store.dispatch({type: 'SET_LAYERS', payload: layers});
+    const layerOptions: Array<LayerOptions> = context.layers;
+    this.store.dispatch({type: 'SET_LAYERS', payload: layerOptions});
 
     const tools: Array<Tool> = [];
     (context.tools || []).forEach((tool_: Tool) => {

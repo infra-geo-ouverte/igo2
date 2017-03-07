@@ -1,0 +1,10 @@
+<igo-list [navigation]="true"> 
+  <template ngFor let-layer [ngForOf]="layers">
+    <igo-layer-list-item
+      igoListItem
+      [layer]="layer"
+      [edition]="edition"
+      (editLayer)="editLayer($event)">
+    </igo-layer-list-item>
+  </template>
+</igo-list>
