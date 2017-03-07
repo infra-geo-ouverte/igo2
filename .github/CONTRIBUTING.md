@@ -46,6 +46,8 @@ Doit être l'un des suivants:
 * feat: Nouvelle fonctionnalité (feature)
 * fix: Corrige un bogue
 * docs: Concernant seulement la documentation
+* ui: Modification simple d'éléments de l'interface
+* i18n: Ajout ou modification d'une traduction
 * style: Changement n'affectant pas le sens du code (espace, formatage, point-virgule manquant, etc)
 * refactor: Code qui ne corrige pas un bogue et qui n'ajoute pas de nouvelle fonctionnalité
 * perf: Amélioration de la performance
@@ -100,6 +102,8 @@ Must be one of the following:
 * feat: A new feature
 * fix: A bug fix
 * docs: Documentation only changes
+* ui: Simple changes to the UI
+* i18n: Translation
 * style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 * refactor: A code change that neither fixes a bug nor adds a feature
 * perf: A code change that improves performance
