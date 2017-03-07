@@ -1,8 +1,7 @@
 <igo-list [navigation]="true"> 
-  <template ngFor let-context [ngForOf]="contexts | async" let-i="index">
+  <template ngFor let-context [ngForOf]="contexts | async">
     <igo-context-list-item
       igoListItem
-      tabindex="{{i}}"
       [selected]="selectedContext && selectedContext.uri === context.uri"
       [context]="context"
       [edition]="edition"

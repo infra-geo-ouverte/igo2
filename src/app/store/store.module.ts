@@ -7,10 +7,10 @@ import {throwIfAlreadyLoaded } from '../core/module-import.guard';
 import {
   activeContext,
   editedContext,
-  mapView,
-  mapLayers,
+  map,
+  layers,
+  tools,
   selectedTool,
-  toolsList,
   searchResults,
   selectedResult,
   focusedResult
@@ -21,13 +21,13 @@ export function provideIgoStore() {
   return provideStore({
     activeContext: activeContext,
     editedContext: editedContext,
-    mapView: mapView,
-    mapLayers: mapLayers,
+    map: map,
+    layers: layers,
+    tools: tools,
     selectedTool: selectedTool,
     searchResults: searchResults,
     selectedResult: selectedResult,
-    focusedResult: focusedResult,
-    tools: toolsList
+    focusedResult: focusedResult
   });
 }
 

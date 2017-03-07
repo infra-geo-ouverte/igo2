@@ -7,17 +7,14 @@ export interface XYZLayerOptions extends LayerOptions {
 
 export class XYZLayer extends Layer {
 
-  olLayer: ol.layer.Tile;
+  options: XYZLayerOptions;
+  protected olLayer: ol.layer.Tile;
 
-  createOlLayer(options: XYZLayerOptions): ol.layer.Tile {
-    const olLayerOptions = Object.assign(options.view || {}, {
-      source: new ol.source.XYZ(options.source)
+  protected createOlLayer(): ol.layer.Tile {
+    const olLayerOptions = Object.assign(this.options.view || {}, {
+      source: new ol.source.XYZ(this.options.source)
     });
 
     return new ol.layer.Tile(olLayerOptions);
-  }
-
-  constructor(options: XYZLayerOptions) {
-    super(options);
   }
 }

@@ -8,35 +8,34 @@ export interface WMTSLayerOptions extends LayerOptions {
 
 export class WMTSLayer extends Layer {
 
-  olLayer: ol.layer.Tile;
+  options: WMTSLayerOptions;
+  capabilities?: ol.format.XML;
+  protected olLayer: ol.layer.Tile;
 
   constructor(options: WMTSLayerOptions, capabilities?: ol.format.XML) {
-    super(options, capabilities);
+    super(options);
+    this.capabilities = capabilities;
   }
 
-  createOlLayer(options: WMTSLayerOptions,
-    capabilities: ol.format.WMTSCapabilities): ol.layer.Tile {
-
-    if (capabilities) {
-      const olLayerOptionsGetCapabilities = ol.source.WMTS.optionsFromCapabilities(capabilities,
-        options.source);
-
-      const olLayerOptions = Object.assign({}, options.view, {
-        source: new ol.source.WMTS(olLayerOptionsGetCapabilities)
-      });
-      this.olLayer = new ol.layer.Tile(olLayerOptions);
-
+  protected createOlLayer(): ol.layer.Tile {
+    let sourceOptions;
+    if (this.capabilities) {
+      sourceOptions = ol.source.WMTS.optionsFromCapabilities(
+        this.capabilities, this.options.source);
     } else {
-      const optionsSource = Object.assign({},
-        options.source,
-        { tileGrid: this.getDefaultTileGrid(options) }
-      );
-      this.olLayer = new ol.layer.Tile({ source: new ol.source.WMTS(optionsSource) });
+      sourceOptions = Object.assign({
+        tileGrid: this.getDefaultTileGrid(this.options)
+      }, this.options.source);
     }
-    return this.olLayer;
+
+    const layerOptions = Object.assign({}, this.options.view || {}, {
+      source: new ol.source.WMTS(sourceOptions)
+    });
+
+    return new ol.layer.Tile(layerOptions);
   }
 
-  // TODO Support others projections ?
+  // TODO Support other projections ?
   getDefaultTileGrid(options: WMTSLayerOptions): ol.tilegrid.WMTS {
 
     const projection = options.source.projection ?

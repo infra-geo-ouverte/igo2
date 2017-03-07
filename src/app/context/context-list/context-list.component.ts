@@ -40,7 +40,7 @@ export class ContextListComponent implements ToolComponent, OnInit {
     this.store
       .select(s => s.tools)
       .subscribe((tools: Tool[]) =>
-          this.editTool = tools.find(t => t.name === 'contextEditor'));
+        this.editTool = tools.find(t => t.name === 'contextEditor'));
 
     this.store
       .select(s => s.activeContext)

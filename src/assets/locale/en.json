@@ -3,6 +3,7 @@
   "Contexts": "Contexts",
   "Description": "Description",
   "Edit Context": "Edit Context",
+  "Edit Layer": "Edit Layer",
   "Map": "Map",
   "Go Back": "Go back",
   "Open Menu": "Show menu",
@@ -22,6 +23,7 @@
   "Save": "Save",
   "Search Results": "Search Results",
   "Search for an address or a place": "Search for an address, a place or a layer",
+  "Search disabled": "The search tool is disabled in this context",
   "Title": "Title",
 
   "contextTitleValidation": "Title is required (minimum 3 characters)."

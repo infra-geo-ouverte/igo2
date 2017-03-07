@@ -1,0 +1,13 @@
+<md-list-item>
+  <md-icon md-list-avatar>layers</md-icon>
+  <h4 md-line>{{layer.options.name}}</h4>
+  <button
+    md-icon-button
+    class="igo-icon-button"
+    (click)="editLayer.emit(layer)"
+    *ngIf="edition"
+    [md-tooltip]="'Edit Layer' | translate"
+    tooltip-position="below">
+    <md-icon>settings</md-icon>
+  </button>
+</md-list-item>
