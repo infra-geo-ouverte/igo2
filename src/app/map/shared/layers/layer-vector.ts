@@ -8,18 +8,15 @@ export interface VectorLayerOptions extends LayerOptions {
 
 export class VectorLayer extends Layer {
 
-  olLayer: ol.layer.Vector;
+  options: VectorLayerOptions;
+  protected olLayer: ol.layer.Vector;
 
-  createOlLayer(options: VectorLayerOptions): ol.layer.Vector {
-    const olLayerOptions = Object.assign(options.view || {}, {
-      style: new ol.style.Style(options.style),
-      source: new ol.source.Vector(options.source)
+  protected createOlLayer(): ol.layer.Vector {
+    const olLayerOptions = Object.assign(this.options.view || {}, {
+      style: new ol.style.Style(this.options.style),
+      source: new ol.source.Vector(this.options.source)
     });
 
     return new ol.layer.Vector(olLayerOptions);
-  }
-
-  constructor(options: VectorLayerOptions) {
-    super(options);
   }
 }

@@ -8,38 +8,37 @@ export interface WMSLayerOptions extends LayerOptions {
 
 export class WMSLayer extends Layer {
 
-  olLayer: ol.layer.Image;
+  options: WMSLayerOptions;
+  capabilities?: ol.format.XML;
+  protected olLayer: ol.layer.Tile;
 
   constructor(options: WMSLayerOptions, capabilities?: ol.format.XML) {
-    super(options, capabilities);
+    super(options);
+    this.capabilities = capabilities;
   }
 
-  createOlLayer(options: WMSLayerOptions,
-    capabilities: ol.format.WMSCapabilities): ol.layer.Image {
-
-    if (capabilities) {
-      const olLayerOptionsGetCapabilities = this.optionsFromCapabilities(capabilities,
-        options);
-      const olLayerOptions = Object.assign(options.view || {}, olLayerOptionsGetCapabilities, {
-        source: new ol.source.ImageWMS(olLayerOptionsGetCapabilities.source)
+  protected createOlLayer(): ol.layer.Image {
+    let layerOptions;
+    if (this.capabilities) {
+      const capabilityOptions = this.getOptionsFromCapabilities();
+      layerOptions = Object.assign(this.options.view || {}, capabilityOptions, {
+        source: new ol.source.ImageWMS(capabilityOptions.source)
       });
-      this.olLayer = new ol.layer.Image(olLayerOptions);
-
     } else {
-      const olLayerOptions = Object.assign(options.view || {}, options, {
-        source: new ol.source.ImageWMS(options.source)
+      layerOptions = Object.assign(this.options.view || {}, this.options, {
+        source: new ol.source.ImageWMS(this.options.source)
       });
-      this.olLayer = new ol.layer.Image(olLayerOptions);
     }
-    return this.olLayer;
+
+    return new ol.layer.Image(layerOptions);
   }
 
   /** Get layer's properties from capabilities */
-  optionsFromCapabilities(capabilities: any,
-    options: WMSLayerOptions): WMSLayerOptions {
-
-    const layer = this.findLayerInCapabilities(capabilities.Capability.Layer,
-      options.source.params['layers']);
+  getOptionsFromCapabilities(): WMSLayerOptions {
+    const capabilities = this.capabilities as any;
+    const layer = this.findLayerInCapabilities(
+      capabilities.Capability.Layer,
+      this.options.source.params['layers']);
 
     // TODO: getcapabilities attribution is not working
     // let attribution;
@@ -94,13 +93,11 @@ export class WMSLayer extends Layer {
     //     layer.BoundingBox[0].extent[2], layer.BoundingBox[0].extent[3]];
     // }
 
-    Object.assign(optionsFromCapabilities, options);
-    return optionsFromCapabilities;
+    return Object.assign(optionsFromCapabilities, this.options);
   }
 
   /** Find a layer among capabilities's layers from it's name */
   findLayerInCapabilities(layerArray, name) {
-
     if (Array.isArray(layerArray)) {
       let layer;
       layerArray.find(value => {

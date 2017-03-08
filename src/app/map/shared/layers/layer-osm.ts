@@ -7,17 +7,14 @@ export interface OSMLayerOptions extends LayerOptions {
 
 export class OSMLayer extends Layer {
 
-  olLayer: ol.layer.Tile;
+  options: OSMLayerOptions;
+  protected olLayer: ol.layer.Tile;
 
-  createOlLayer(options: OSMLayerOptions): ol.layer.Tile {
-    const olLayerOptions = Object.assign(options.view || {}, {
-      source: new ol.source.OSM(options.source)
+  protected createOlLayer(): ol.layer.Tile {
+    const olLayerOptions = Object.assign(this.options.view || {}, {
+      source: new ol.source.OSM(this.options.source)
     });
 
     return new ol.layer.Tile(olLayerOptions);
-  }
-
-  constructor(options: OSMLayerOptions) {
-    super(options);
   }
 }

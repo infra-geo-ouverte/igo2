@@ -13,19 +13,24 @@ export interface LayerOptions extends olx.layer.BaseOptions {
 
 export abstract class Layer {
 
-  olLayer: ol.layer.Layer;
-  name: string;
-  type: string;
+  options: LayerOptions;
+  protected olLayer: ol.layer.Layer;
 
-  abstract createOlLayer(options: LayerOptions, capabilities?: ol.format.XML): ol.layer.Layer;
+  constructor(options: LayerOptions) {
+    this.options = options;
+  }
 
-  constructor(options: LayerOptions, capabilities?: ol.format.XML) {
-    this.name = options.name;
-    this.type = options.type;
-    this.olLayer = this.createOlLayer(options, capabilities);
+  protected abstract createOlLayer(): ol.layer.Layer;
+
+  getOlLayer() {
+    if (this.olLayer === undefined) {
+      this.olLayer = this.createOlLayer();
+    }
+
+    return this.olLayer;
   }
 
   getSource() {
-    return this.olLayer.getSource();
+    return this.getOlLayer().getSource();
   }
 }
