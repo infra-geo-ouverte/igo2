@@ -1,9 +1,16 @@
 import { Layer, LayerOptions} from './layer';
 
+export interface DataURL {
+  format: string;
+  onlineResource: string;
+}
+
 export interface WMSLayerOptions extends LayerOptions {
   source: olx.source.ImageWMSOptions;
   view?: olx.layer.TileOptions;
   optionsFromCapabilities?: boolean;
+  title?: string;
+  dataURL?: DataURL;
 }
 
 export class WMSLayer extends Layer {

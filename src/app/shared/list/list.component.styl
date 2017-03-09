@@ -35,12 +35,12 @@ md-list {
   width: auto;
 }
 
-:host >>> [igolistitem]:hover md-list-item, {
+:host md-list.selectable >>> [igolistitem] md-list-item:hover, {
   background-color: $igo-secondary-color-hover;
   cursor: pointer;
 }
 
-:host >>> [igolistitem].igo-selected md-list-item {
+:host md-list.selectable >>> [igolistitem].igo-selected md-list-item {
   background-color: $igo-secondary-color;
 }
 

@@ -18,7 +18,8 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   focusedItem: ListItemDirective;
   subscriptions: Subscription[] = [];
 
-  @Input('navigation') navigation: boolean = true;
+  @Input() navigation: boolean = true;
+  @Input() selection: boolean = true;
 
   @ContentChildren(ListItemDirective, {descendants: true})
   listItems: QueryList<ListItemDirective>;
@@ -59,6 +60,10 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   focus(item?: ListItemDirective) {
+    if (!this.selection) {
+      return;
+    }
+
     this.unfocus();
 
     // We need to make this check because dynamic
@@ -99,6 +104,10 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   select(item?: ListItemDirective) {
+    if (!this.selection) {
+      return;
+    }
+
     this.unselect();
 
     if (item !== undefined) {

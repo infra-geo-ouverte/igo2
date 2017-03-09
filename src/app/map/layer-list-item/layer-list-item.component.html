@@ -1,8 +1,28 @@
-<md-list-item>
-  <md-icon md-list-avatar>layers</md-icon>
-  <h4 md-line>{{layer.options.name}}</h4>
+<igo-collapsible
+  [title]="layer.options.name"
+  [state]="state"
+  (collapse)="collapse()"
+  (expand)="expand()">
   <button
     md-icon-button
+    collapsibleButton
+    class="igo-icon-button"
+    (click)="toggleVisibility()"
+    [md-tooltip]="(layer.visible ? 'Hide Layer' : 'Show Layer') | translate"
+    tooltip-position="below">
+    <md-icon>
+      <ng-container *ngIf="layer.visible">
+        layers
+      </ng-container>
+      <ng-container *ngIf="!layer.visible">
+        layers_clear
+      </ng-container>
+    </md-icon>
+  </button>
+
+  <button
+    md-icon-button
+    collapsibleButton
     class="igo-icon-button"
     (click)="editLayer.emit(layer)"
     *ngIf="edition"
@@ -10,4 +30,7 @@
     tooltip-position="below">
     <md-icon>settings</md-icon>
   </button>
-</md-list-item>
+
+  <p>Opacity slider</p>
+  <p>Legend</p>
+</igo-collapsible>

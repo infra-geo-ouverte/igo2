@@ -14,6 +14,28 @@ export class LayerListItemComponent {
 
   @Output() editLayer: EventEmitter<Layer> = new EventEmitter();
 
+  get state () {
+    let collapsed = this.layer.options.collapsed;
+    if (collapsed === undefined) {
+      collapsed = !this.layer.visible;
+    }
+
+    return collapsed ? 'collapsed' : 'expanded';
+  }
+
   constructor() { }
+
+  toggleVisibility() {
+    this.layer.toggleVisibility();
+    this.layer.visible ? this.expand() : this.collapse();
+  }
+
+  expand() {
+    this.layer.options.collapsed = false;
+  }
+
+  collapse() {
+    this.layer.options.collapsed = true;
+  }
 
 }

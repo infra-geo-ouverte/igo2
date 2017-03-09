@@ -1,17 +1,16 @@
-<div class="igo-collapsible-header">
-  <h4 (click)="handleClick()">
-  	<md-icon>
-      <ng-container *ngIf="state === 'collapsed'">
-        expand_more
-      </ng-container>
-      <ng-container *ngIf="state !== 'collapsed'">
-        expand_less
-      </ng-container>
-    </md-icon>
-    <div class="igo-collapsible-title">{{title}}</div>
-  </h4>
-</div>
-<ng-content></ng-content>
+<md-list-item class="igo-collapsible-header">
+  <md-icon md-list-avatar (click)="handleClick()">
+    <ng-container *ngIf="state === 'collapsed'">
+      expand_more
+    </ng-container>
+    <ng-container *ngIf="state !== 'collapsed'">
+      expand_less
+    </ng-container>
+  </md-icon>
+  <h4 md-line>{{title}}</h4>
+  <ng-content select="[collapsibleButton]"></ng-content>
+</md-list-item>
+
 <igo-flexible
   #content
   direction="column"
