@@ -1,23 +1,28 @@
-export interface DataURL {
-  format: string;
-  onlineResource: string;
-}
-
 export interface LayerOptions extends olx.layer.BaseOptions {
   name: string;
   type: string;
-  optionsFromCapabilities?: boolean;
-  title?: string;
-  dataURL?: DataURL;
+  collapsed?: boolean;
+  visible?: boolean;
 }
 
 export abstract class Layer {
 
   options: LayerOptions;
+  collapsed: boolean;
   protected olLayer: ol.layer.Layer;
+
+  get visible (): boolean {
+    return this.getOlLayer().get('visible');
+  }
+
+  set visible (visibility: boolean) {
+    this.getOlLayer().set('visible', visibility);
+  }
 
   constructor(options: LayerOptions) {
     this.options = options;
+    this.visible = options.visible === undefined ? true : options.visible;
+    this.collapsed = options.collapsed === undefined ? true : options.collapsed;
   }
 
   protected abstract createOlLayer(): ol.layer.Layer;
@@ -32,5 +37,9 @@ export abstract class Layer {
 
   getSource() {
     return this.getOlLayer().getSource();
+  }
+
+  toggleVisibility() {
+    this.visible = !this.visible;
   }
 }

@@ -1,8 +1,6 @@
 <igo-list [navigation]="true"> 
   <template ngFor let-sourceResult [ngForOf]="sourceResults">
-    <igo-collapsible
-        title="{{sourceResult[0]}} ({{sourceResult[1].length}})">
-
+    <igo-collapsible title="{{sourceResult[0]}} ({{sourceResult[1].length}})">
       <template ngFor let-result [ngForOf]="sourceResult[1]">
         <igo-search-result
           igoListItem
@@ -13,7 +11,6 @@
           (selectItem)="selectResult(result)">
         </igo-search-result>
       </template>
-
     </igo-collapsible>
   </template>
 </igo-list>
