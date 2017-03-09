@@ -12,6 +12,7 @@
   "Main menu": "Go back to main menu",
   "Add Layers": "Add Layers",
   "Directions": "Directions",
+  "Hide Layer": "Hide Layer",
   "Historical Analysis": "Historical Analysis",
   "Print": "Print",
   "Private": "Private",
@@ -24,6 +25,7 @@
   "Search Results": "Search Results",
   "Search for an address or a place": "Search for an address, a place or a layer",
   "Search disabled": "The search tool is disabled in this context",
+  "Show Layer": "Show Layer",
   "Title": "Title",
 
   "contextTitleValidation": "Title is required (minimum 3 characters)."

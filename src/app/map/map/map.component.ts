@@ -109,6 +109,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   private handleFeatureResult(result: SearchResult, zoom: boolean = false) {
     this.map.clearOverlay();
+
     const feature = this.resultToFeature(result);
     this.map.addMarker(feature);
 

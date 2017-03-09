@@ -31,11 +31,9 @@ export class LayerService {
 
     const layerCls = LayerService.layerClasses[options.type];
 
-    if (options.optionsFromCapabilities) {
+    if ((options as any).optionsFromCapabilities) {
        return this.getCapabilities(options).map(
-        capabilities => {
-          return new layerCls(options, capabilities);
-        });
+         capabilities => new layerCls(options, capabilities));
     } else {
       return new Observable(layer => layer.next(new layerCls(options)));
     }
@@ -54,7 +52,7 @@ export class LayerService {
     const params = new URLSearchParams();
     params.set('request', 'GetCapabilities');
     params.set('service', options.type);
-    params.set('version', ( options.version ? options.version : '1.0.0' ) );
+    params.set('version', options.version ? options.version : '1.0.0');
 
     const request = new Request({
       method: RequestMethod.Get,
@@ -69,24 +67,23 @@ export class LayerService {
     if (capabilities) {
      return capabilities.capabilities;
     } else {
+      return this.http
+        .request(request)
+        .map(response => {
+            let parser;
+            switch (options.type) {
+              case 'wmts':
+                parser = new ol.format.WMTSCapabilities();
+                break;
+              case 'wms':
+                parser = new ol.format.WMSCapabilities();
+                break;
+            }
 
-      return this.http.request(request)
-              .map(response => {
-
-                  let parser;
-                  switch (options.type) {
-                    case 'wmts':
-                      parser = new ol.format.WMTSCapabilities();
-                      break;
-                    case 'wms':
-                      parser = new ol.format.WMSCapabilities();
-                      break;
-                  }
-
-                  capabilities = parser.read(response.text());
-                  this.capabilitiesStore.push({url: url, capabilities: capabilities});
-                  return capabilities;
-              });
+            capabilities = parser.read(response.text());
+            this.capabilitiesStore.push({url: url, capabilities: capabilities});
+            return capabilities;
+        });
     }
   }
 }
