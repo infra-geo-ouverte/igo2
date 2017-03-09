@@ -2,8 +2,7 @@ import { Directive, Input, Output, ElementRef,
          Renderer, HostListener, EventEmitter } from '@angular/core';
 
 @Directive({
-  selector: '[igoListItem]',
-
+  selector: '[igoListItem]'
 })
 export class ListItemDirective {
 
