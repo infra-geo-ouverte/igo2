@@ -33,7 +33,8 @@ export class SearchService {
   searchSource(source: SearchSource, term?: string) {
     const request = source.search(term);
 
-    return this.requestService.register(request)
+    return this.requestService
+      .register(request, source.getName())
       .subscribe((results: SearchResult[]) =>
         this.handleSearchResults(results, source));
   }

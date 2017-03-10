@@ -1,20 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { TestModule } from '../../test.module';
-
 import { RequestService } from '../request.service';
-import { SpinnerComponent } from './spinner.component';
 
-describe('SpinnerComponent', () => {
-  let component: SpinnerComponent;
-  let fixture: ComponentFixture<SpinnerComponent>;
+import { MessageComponent } from './message.component';
+
+describe('NotificationComponent', () => {
+  let component: MessageComponent;
+  let fixture: ComponentFixture<MessageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        SimpleNotificationsModule,
         TestModule
       ],
-      declarations: [ SpinnerComponent ],
+      declarations: [ MessageComponent ],
       providers: [
         RequestService
       ]
@@ -23,7 +25,7 @@ describe('SpinnerComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpinnerComponent);
+    fixture = TestBed.createComponent(MessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

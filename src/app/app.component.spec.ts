@@ -1,5 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { TestModule } from './test.module';
 
@@ -9,6 +10,7 @@ import { NavigatorModule, NavigatorRoutingModule } from './pages';
 
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './core/spinner/spinner.component';
+import { MessageComponent } from './core/message/message.component';
 
 
 import {} from 'jasmine';
@@ -20,11 +22,13 @@ describe('AppComponent', () => {
         RouterTestingModule,
         NavigatorModule,
         TestModule,
-        NavigatorRoutingModule
+        NavigatorRoutingModule,
+        SimpleNotificationsModule.forRoot()
       ],
       declarations: [
         AppComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        MessageComponent
       ],
       providers: [
         LanguageService

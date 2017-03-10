@@ -1,6 +1,7 @@
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { Message } from '../../core/message';
 import { SearchSource } from './search-source';
 import { SearchResult } from '../shared/search-result.interface';
 import { SearchResultType, SearchResultFormat } from '../shared/search-result.enum';
@@ -18,7 +19,7 @@ export class SearchSourceNominatim extends SearchSource {
     return SearchSourceNominatim.name_;
   }
 
-  search (term?: string): Observable<SearchResult[]>  {
+  search (term?: string): Observable<SearchResult[] | Message[]>  {
     const search = this.getSearchParams(term);
 
     return this.http

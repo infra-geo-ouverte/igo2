@@ -22,7 +22,7 @@ export class SearchSourceICherche extends SearchSource {
     const search = this.getSearchParams(term);
 
     return this.jsonp
-      .get(SearchSourceICherche.searchUrl, { search })
+      .get(SearchSourceICherche.searchUrl, {search})
       .map(res => this.extractData(res));
   }
 
