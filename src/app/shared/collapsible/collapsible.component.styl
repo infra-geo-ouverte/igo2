@@ -1,42 +1,5 @@
 @require '../../../css/theme.styl';
 
-$igo-collapsible-header-height = 40px;
-
-.igo-collapsible-header {
-  color: $igo-primary-text-color;
-  height: $igo-collapsible-header-height;
-  padding: 8px;
-  text-align: center;
-}
-
-.igo-collapsible-header h4 {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.igo-collapsible-header h4:hover {
+.igo-collapsible-header .mat-list-avatar:hover {
   cursor: pointer;
-}
-
-.igo-collapsible-header md-icon {
-  float: left;
-}
-
-.igo-collapsible-header >>> md-icon {
-  cursor: pointer;
-}
-
-.igo-collapsible-content {
-  padding-left: $igo-padding;
-}
-
-.igo-collapsible-title {
-  display: inline-block;
-  max-width: "calc(100% - 30px - %s)" % $igo-margin;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-left: $igo-margin;
-  float: left;
-  padding: 4px 0;
 }

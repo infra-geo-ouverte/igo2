@@ -1,31 +1,45 @@
-export interface DataURL {
-  format: string;
-  onlineResource: string;
-}
-
 export interface LayerOptions extends olx.layer.BaseOptions {
   name: string;
   type: string;
-  optionsFromCapabilities?: boolean;
-  title?: string;
-  dataURL?: DataURL;
+  collapsed?: boolean;
+  visible?: boolean;
 }
 
 export abstract class Layer {
 
-  olLayer: ol.layer.Layer;
-  name: string;
-  type: string;
+  options: LayerOptions;
+  collapsed: boolean;
+  protected olLayer: ol.layer.Layer;
 
-  abstract createOlLayer(options: LayerOptions, capabilities?: ol.format.XML): ol.layer.Layer;
+  get visible (): boolean {
+    return this.getOlLayer().get('visible');
+  }
 
-  constructor(options: LayerOptions, capabilities?: ol.format.XML) {
-    this.name = options.name;
-    this.type = options.type;
-    this.olLayer = this.createOlLayer(options, capabilities);
+  set visible (visibility: boolean) {
+    this.getOlLayer().set('visible', visibility);
+  }
+
+  constructor(options: LayerOptions) {
+    this.options = options;
+    this.visible = options.visible === undefined ? true : options.visible;
+    this.collapsed = options.collapsed === undefined ? true : options.collapsed;
+  }
+
+  protected abstract createOlLayer(): ol.layer.Layer;
+
+  getOlLayer() {
+    if (this.olLayer === undefined) {
+      this.olLayer = this.createOlLayer();
+    }
+
+    return this.olLayer;
   }
 
   getSource() {
-    return this.olLayer.getSource();
+    return this.getOlLayer().getSource();
+  }
+
+  toggleVisibility() {
+    this.visible = !this.visible;
   }
 }

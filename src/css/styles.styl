@@ -99,6 +99,12 @@ fieldset {
   padding-bottom: 6px;
 }
 
+form {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
 .igo-form-inline-error {
   color: $igo-warn-color;
   position: relative;
@@ -106,8 +112,11 @@ fieldset {
 }
 
 .igo-form-button-group {
-  text-align: center;
+  position: absolute;
+  bottom: 0px;
   padding: 20px;
+  width: 100%;
+  text-align: center;
 }
 
 /* IE10+ */

@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, OnDestroy, OnInit,
-         QueryList, Input, ContentChildren, HostListener } from '@angular/core';
+         QueryList, Input, ContentChildren, HostListener,
+         ElementRef } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -17,7 +18,8 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   focusedItem: ListItemDirective;
   subscriptions: Subscription[] = [];
 
-  @Input('navigation') navigation: boolean = true;
+  @Input() navigation: boolean = true;
+  @Input() selection: boolean = true;
 
   @ContentChildren(ListItemDirective, {descendants: true})
   listItems: QueryList<ListItemDirective>;
@@ -37,7 +39,7 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
-  constructor() { }
+  constructor(private el: ElementRef) { }
 
   ngOnInit() {
     this.enableNavigation();
@@ -58,6 +60,10 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   focus(item?: ListItemDirective) {
+    if (!this.selection) {
+      return;
+    }
+
     this.unfocus();
 
     // We need to make this check because dynamic
@@ -65,6 +71,7 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     if (item !== undefined) {
       item.focus();
       this.focusedItem = item;
+      this.scrollToItem(item);
     }
   }
 
@@ -97,12 +104,17 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   select(item?: ListItemDirective) {
+    if (!this.selection) {
+      return;
+    }
+
     this.unselect();
 
     if (item !== undefined) {
       item.select();
       this.selectedItem = item;
       this.focusedItem = item;
+      this.scrollToItem(item);
     }
   }
 
@@ -177,5 +189,9 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
       default:
         break;
     }
+  }
+
+  private scrollToItem(item: ListItemDirective) {
+    this.el.nativeElement.scrollTop = item.getOffsetTop();
   }
 }

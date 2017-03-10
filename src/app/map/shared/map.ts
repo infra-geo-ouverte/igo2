@@ -1,3 +1,5 @@
+import { Subject } from 'rxjs/Subject';
+
 import { Layer } from './layers/layer';
 import { VectorLayer } from './layers/layer-vector';
 
@@ -13,8 +15,9 @@ export interface MapOptions {
 export class IgoMap {
 
   olMap: ol.Map;
+  layers = new Subject<Layer[]>();
 
-  private layers: Layer[] = [];
+  private _layers: Layer[] = [];
   private overlayLayer: VectorLayer;
   private overlaySource: ol.source.Vector;
   private overlayStyle: ol.style.Style;
@@ -50,8 +53,8 @@ export class IgoMap {
       type: 'vector'
     });
     this.overlaySource = (this.overlayLayer.getSource() as ol.source.Vector);
-    this.olMap.addLayer(this.overlayLayer.olLayer);
-    this.overlayLayer.olLayer.setZIndex(999);
+    this.olMap.addLayer(this.overlayLayer.getOlLayer());
+    this.overlayLayer.getOlLayer().setZIndex(999);
   }
 
   getProjection() {
@@ -94,13 +97,20 @@ export class IgoMap {
   }
 
   addLayer(layer: Layer) {
-    this.layers.push(layer);
-    this.olMap.addLayer(layer.olLayer);
+    this._layers.push(layer);
+    this.olMap.addLayer(layer.getOlLayer());
+    this.layers.next(this._layers);
   }
 
   removeLayers() {
-    this.layers.forEach(layer =>
-      this.olMap.removeLayer(layer.olLayer), this);
+    this._layers.forEach(layer =>
+      this.olMap.removeLayer(layer.getOlLayer()), this);
+    this._layers = [];
+    this.layers.next(this._layers);
+  }
+
+  getLayers() {
+    return this._layers;
   }
 
   moveToExtent(extent: ol.Extent) {

@@ -11,7 +11,7 @@ import { MapService } from '../shared/map.service';
 import { LayerService } from '../shared/layer.service';
 import { LayerOptions } from '../shared/layers/layer';
 import { WMSLayerOptions } from '../shared/layers/layer-wms';
-import { MapViewOptions } from '../shared/map';
+import { MapOptions } from '../shared/map';
 
 @Component({
   selector: 'igo-map',
@@ -31,12 +31,13 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.map = this.mapService.getMap();
 
     this.store
-      .select(s => s.mapView)
-      .subscribe((view: MapViewOptions) => this.map.setView(view));
+      .select(s => s.map)
+      .filter(s => s !== null)
+      .subscribe((mapOptions: MapOptions) => this.map.setView(mapOptions.view));
 
     this.store
-      .select(s => s.mapLayers)
-      .subscribe((layers: LayerOptions[]) => this.handleLayersChanged(layers));
+      .select(s => s.layers)
+      .subscribe((layerOptions: LayerOptions[]) => this.handleLayersChanged(layerOptions));
 
     this.store
       .select(s => s.focusedResult)
@@ -107,6 +108,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   private handleFeatureResult(result: SearchResult, zoom: boolean = false) {
     this.map.clearOverlay();
+
     const feature = this.resultToFeature(result);
     this.map.addMarker(feature);
 

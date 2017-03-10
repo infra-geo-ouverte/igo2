@@ -3,6 +3,7 @@
   "Contexts": "Vos contextes",
   "Description": "Description",
   "Edit Context": "Modifier contexte",
+  "Edit Layer": "Modifier couche",
   "Map": "Carte",
   "Go Back": "Revenir",
   "Open Menu": "Afficher le menu",
@@ -11,6 +12,7 @@
   "Main menu": "Revenir au menu principal",
   "Add Layers": "Ajouter des couches",
   "Directions": "Itinéraire",
+  "Hide Layer": "Masquer couche",
   "Historical Analysis": "Analyse temporelle",
   "Print": "Impression",
   "Private": "Privé",
@@ -22,6 +24,8 @@
   "Save": "Sauvegarder",
   "Search Results": "Résultats de recherche",
   "Search for an address or a place": "Rechercher une adresse, un lieu ou une couche",
+  "Search disabled": "L'outil de recherche est désactivé dans ce contexte",
+  "Show Layer": "Afficher couche",
   "Title": "Titre",
 
   "contextTitleValidation": "Un titre est requis (minimum 3 caractères)."

@@ -17,7 +17,7 @@
   "toolbar": [
     "search",
     "context",
-    "map",
+    "mapEditor",
     "layers",
     "directions",
     "historicalAnalysis",
@@ -26,18 +26,19 @@
   ],
   "tools": [
     {
+      "name": "search"
+    },
+    {
       "name": "context"
     },
     {
       "name": "contextEditor"
     },
     {
-      "name": "search"
+      "name": "mapEditor"
     },
     {
-      "name": "map",
-      "title": "Map",
-      "icon": "map"
+      "name": "layerEditor"
     },
     {
       "name": "layers",

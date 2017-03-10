@@ -1,12 +1,9 @@
 <igo-list [navigation]="true"> 
   <template ngFor let-sourceResult [ngForOf]="sourceResults">
-    <igo-collapsible
-        title="{{sourceResult[0]}} ({{sourceResult[1].length}})">
-
-      <template ngFor let-result [ngForOf]="sourceResult[1]" let-i="index">
+    <igo-collapsible title="{{sourceResult[0]}} ({{sourceResult[1].length}})">
+      <template ngFor let-result [ngForOf]="sourceResult[1]">
         <igo-search-result
           igoListItem
-          tabindex="{{i}}"
           [focused]="focusedResult && focusedResult.id === result.id
                      && focusedResult.source === sourceResult[0]"
           [result]="result"
@@ -14,7 +11,6 @@
           (selectItem)="selectResult(result)">
         </igo-search-result>
       </template>
-
     </igo-collapsible>
   </template>
 </igo-list>
