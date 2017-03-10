@@ -13,7 +13,6 @@ import { LayerOptions } from '../shared/layers/layer';
 import { WMSLayerOptions } from '../shared/layers/layer-wms';
 import { MapViewOptions } from '../shared/map';
 
-
 @Component({
   selector: 'igo-map',
   templateUrl: './map.component.html',
