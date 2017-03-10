@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class MessageComponent {
 
   public options = {
-    timeOut: 500000,
+    timeOut: 5000,
     showProgressBar: true,
     pauseOnHover: true,
     clickToClose: true,
