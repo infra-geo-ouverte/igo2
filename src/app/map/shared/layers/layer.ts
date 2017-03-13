@@ -1,8 +1,12 @@
 export interface LayerOptions extends olx.layer.BaseOptions {
   name: string;
   type: string;
-  collapsed?: boolean;
   visible?: boolean;
+  legend?: LayerLegendOptions;
+}
+
+export interface LayerLegendOptions {
+  collapsed?: boolean;
 }
 
 export abstract class Layer {
@@ -16,13 +20,23 @@ export abstract class Layer {
   }
 
   set visible (visibility: boolean) {
-    this.getOlLayer().set('visible', visibility);
+    this.getOlLayer().setVisible(visibility);
+  }
+
+  get opacity (): number {
+    return this.getOlLayer().get('opacity');
+  }
+
+  set opacity (opacity: number) {
+    this.getOlLayer().setOpacity(opacity);
   }
 
   constructor(options: LayerOptions) {
     this.options = options;
     this.visible = options.visible === undefined ? true : options.visible;
-    this.collapsed = options.collapsed === undefined ? true : options.collapsed;
+
+    const legend = options.legend || {};
+    this.collapsed = legend.collapsed === undefined ? true : !this.visible;
   }
 
   protected abstract createOlLayer(): ol.layer.Layer;
@@ -37,9 +51,5 @@ export abstract class Layer {
 
   getSource() {
     return this.getOlLayer().getSource();
-  }
-
-  toggleVisibility() {
-    this.visible = !this.visible;
   }
 }

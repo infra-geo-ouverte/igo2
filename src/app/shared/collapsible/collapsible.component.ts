@@ -1,6 +1,4 @@
-import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
-
-import { FlexibleState, FlexibleComponent } from '../flexible';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'igo-collapsible',
@@ -9,24 +7,9 @@ import { FlexibleState, FlexibleComponent } from '../flexible';
 })
 export class CollapsibleComponent {
 
-  @ViewChild('content') content: FlexibleComponent;
-
-  @Input() state: FlexibleState = 'expanded';
   @Input() title: string;
-
-  @Output() collapse: EventEmitter<any> = new EventEmitter();
-  @Output() expand: EventEmitter<any> = new EventEmitter();
+  @Input() collapsed: boolean = false;
 
   constructor() { }
-
-  handleClick() {
-    if (this.state !== 'collapsed') {
-      this.state = 'collapsed';
-      this.collapse.emit();
-    } else {
-      this.state = 'expanded';
-      this.expand.emit();
-    }
-  }
 
 }

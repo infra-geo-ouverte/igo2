@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Register } from '../../tool/shared/tool.service';
 
 import { IgoMap } from '../shared/map';
-import { Layer } from '../shared/layers/layer';
 import { MapService } from '../shared/map.service';
 
 @Register()
@@ -20,16 +19,11 @@ export class MapEditorComponent implements OnInit {
   static defaultOptions: any = {};
 
   map: IgoMap;
-  layers: Layer[];
 
   constructor(private mapService: MapService) { }
 
   ngOnInit() {
     this.map = this.mapService.getMap();
-
-    this.layers = this.map.getLayers();
-    this.map.layers
-      .subscribe((layers: Layer[]) => this.layers = layers);
   }
 
 }

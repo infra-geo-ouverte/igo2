@@ -14,6 +14,7 @@ import { ListComponent } from './list/list.component';
 import { ListItemDirective } from './list/list-item.directive';
 import { ClickoutDirective } from './directives/clickout.directive';
 import { KeyvaluePipe } from './pipes/keyvalue.pipe';
+import { CollapseDirective } from './directives/collapse.directive';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { KeyvaluePipe } from './pipes/keyvalue.pipe';
     ListComponent,
     ListItemDirective,
     ClickoutDirective,
-    KeyvaluePipe
+    KeyvaluePipe,
+    CollapseDirective
   ],
   exports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { KeyvaluePipe } from './pipes/keyvalue.pipe';
     ListComponent,
     ListItemDirective,
     ClickoutDirective,
-    KeyvaluePipe
+    KeyvaluePipe,
+    CollapseDirective
   ]
 })
 export class SharedModule {
