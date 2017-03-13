@@ -28,10 +28,11 @@ export class ContextListComponent implements ToolComponent, OnInit {
   selectedContext?: Context;
 
   get edition (): boolean {
-    return this.editTool !== undefined;
+    return this.contextEditor !== undefined;
   }
 
-  private editTool: Tool;
+  private contextEditor: Tool;
+  private mapEditor: Tool;
 
   constructor(private contextService: ContextService,
               private store: Store<IgoStore>) { }
@@ -39,8 +40,10 @@ export class ContextListComponent implements ToolComponent, OnInit {
   ngOnInit() {
     this.store
       .select(s => s.tools)
-      .subscribe((tools: Tool[]) =>
-        this.editTool = tools.find(t => t.name === 'contextEditor'));
+      .subscribe((tools: Tool[]) => {
+        this.contextEditor = tools.find(t => t.name === 'contextEditor');
+        this.mapEditor = tools.find(t => t.name === 'mapEditor');
+      });
 
     this.store
       .select(s => s.activeContext)
@@ -52,13 +55,16 @@ export class ContextListComponent implements ToolComponent, OnInit {
   selectContext(context: Context) {
     if (context.uri !== this.selectedContext.uri) {
       this.contextService.loadContext(context.uri);
+      if (this.mapEditor !== undefined) {
+        this.store.dispatch({type: 'SELECT_TOOL', payload: this.mapEditor});
+      }
     }
   }
 
   editContext(context: Context) {
-    if (this.editTool !== undefined) {
+    if (this.contextEditor !== undefined) {
       this.store.dispatch({type: 'EDIT_CONTEXT', payload: context});
-      this.store.dispatch({type: 'SELECT_TOOL', payload: this.editTool});
+      this.store.dispatch({type: 'SELECT_TOOL', payload: this.contextEditor});
     }
   }
 }

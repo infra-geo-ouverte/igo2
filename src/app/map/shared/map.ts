@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Layer } from './layers/layer';
 import { VectorLayer } from './layers/layer-vector';
@@ -15,7 +15,7 @@ export interface MapOptions {
 export class IgoMap {
 
   olMap: ol.Map;
-  layers = new Subject<Layer[]>();
+  layers = new BehaviorSubject<Layer[]>([]);
 
   private _layers: Layer[] = [];
   private overlayLayer: VectorLayer;
@@ -97,20 +97,51 @@ export class IgoMap {
   }
 
   addLayer(layer: Layer) {
-    this._layers.push(layer);
+    this._layers.splice(0, 0, layer);
     this.olMap.addLayer(layer.getOlLayer());
     this.layers.next(this._layers);
+  }
+
+  getLayerIndex(layer: Layer) {
+    return this._layers.findIndex(layer_ => layer_ === layer);
+  }
+
+  removeLayer(layer: Layer) {
+    const index = this.getLayerIndex(layer);
+    if (index >= 0) {
+      this.olMap.removeLayer(layer.getOlLayer());
+      this._layers.splice(index, 1);
+    }
   }
 
   removeLayers() {
     this._layers.forEach(layer =>
       this.olMap.removeLayer(layer.getOlLayer()), this);
     this._layers = [];
-    this.layers.next(this._layers);
   }
 
-  getLayers() {
-    return this._layers;
+  raiseLayer(layer: Layer) {
+    const index = this.getLayerIndex(layer);
+    if (index > 0) {
+       this.moveLayer(layer, index, index - 1);
+    }
+  }
+
+  lowerLayer(layer: Layer) {
+    const index = this.getLayerIndex(layer);
+    if (index < this._layers.length - 1) {
+      this.moveLayer(layer, index, index + 1);
+    }
+  }
+
+  moveLayer(layer: Layer, from: number, to: number) {
+    const layers = this._layers;
+    const toLayer = this._layers[to];
+    layers[to] = layer;
+    layers[from] = toLayer;
+    this._layers = layers;
+
+    this.orderLayers();
   }
 
   moveToExtent(extent: ol.Extent) {
@@ -156,5 +187,12 @@ export class IgoMap {
 
   clearOverlay() {
     this.overlaySource.clear();
+  }
+
+  private orderLayers() {
+    const maxIndex = this._layers.length;
+    this._layers.forEach((layer: Layer, index: number) => {
+      layer.getOlLayer().setZIndex(maxIndex - index);
+    });
   }
 }

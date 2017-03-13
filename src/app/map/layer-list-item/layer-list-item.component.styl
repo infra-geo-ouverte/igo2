@@ -1,0 +1,43 @@
+@require '../../../css/media.styl';
+@require '../../../css/theme.styl';
+@require '../../shared/list/list.component.styl';
+
+.igo-layer-actions,
+.igo-layer-legend {
+  width: 100%;
+  padding: $igo-list-item-padding;
+  display: inline-block;
+}
+
+.igo-layer-actions {
+  bordered-top();
+  bordered-bottom();
+}
+
+.igo-layer-actions > div {
+  text-align: center;
+}
+
+#opacity-slider {
+  width: 100%;
+
+  +media(mobile) {
+    width: 70%;
+  }
+}
+
+.igo-layer-button-group {
+  float: right;
+
+  +media(mobile) {
+    float: none;
+  }
+}
+
+#legend-toggle:after {
+  content: 'expand_more'
+}
+
+#legend-toggle.collapsed:after {
+  content: 'expand_less'
+}

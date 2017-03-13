@@ -18,6 +18,7 @@ html, body {
 }
 
 @require './theme.styl';
+@require './media.styl';
 
 [mdbutton]:hover.igo-primary .mat-button-focus-overlay,
 [md-icon-button]:hover.igo-primary .mat-button-focus-overlay {
@@ -91,6 +92,10 @@ table.igo-striped tbody tr:nth-child(odd) {
   overflow: auto;
 }
 
+.row {
+  width: 100%;
+}
+
 fieldset {
   border: none;
 }
@@ -119,7 +124,38 @@ form {
   text-align: center;
 }
 
+[igocollapse]:hover {
+  cursor: pointer;
+}
+
+.igo-col {
+  float: left;
+
+  +media(mobile) {
+    text-align: center;
+  }
+}
+
+.igo-col-40 {
+  width: 40%;
+}
+
+.igo-col-50 {
+  width: 50%;
+}
+
+.igo-col-60 {
+  width: 60%;
+}
+
+.igo-col-100-m {
+  +media(mobile) {
+    width: 100%;
+  }
+}
+
 /* IE10+ */
 ::-ms-clear {
   display: none;
 }
+

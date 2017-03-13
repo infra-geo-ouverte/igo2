@@ -1,8 +1,9 @@
 @require '../../../css/theme.styl';
 @require '../../../css/media.styl';
 
-$igo-sidenav-width = 400px;
 $igo-sidenav-margin-top = 50px;
+$igo-sidenav-width = 400px;
+$igo-sidenav-width-tablet = $igo-sidenav-width - $igo-sidenav-margin-top + $igo-margin;
 $igo-mobile-min-space-left = $igo-icon-button-width;
 
 
@@ -23,6 +24,10 @@ md-sidenav-container {
 
 :host >>> igo-sidenav md-sidenav {
   width: $igo-sidenav-width;
+
+  +media(tablet) {
+    width: $igo-sidenav-width-tablet;
+  }
 
   +media(mobile) {
     width: "calc(100% - %s - %s)" % ($igo-mobile-min-space-left $igo-margin);
@@ -50,6 +55,10 @@ md-sidenav-container {
   top: $igo-margin;
   z-index: 2;
 
+  +media(tablet) {
+    left: $igo-sidenav-width-tablet;
+  }
+
   +media(mobile) {
     right: $igo-margin;
     left: inherit;
@@ -73,6 +82,10 @@ md-sidenav-container {
   z-index: 4;
   width: "calc(%s - 2 * %s)" % ($igo-sidenav-width $igo-margin);
   margin: 0 $igo-margin;
+
+  +media(tablet) {
+    width: "calc(%s - 2 * %s)" % ($igo-sidenav-width-tablet $igo-margin);
+  }
 
   +media(mobile) {
     width: "calc(100% - %s - (3 * %s))" % ($igo-mobile-min-space-left $igo-margin);

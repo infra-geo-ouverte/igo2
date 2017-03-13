@@ -1,6 +1,8 @@
 @require '../../../css/theme.styl';
 
 $igo-list-item-height = 46px;
+$igo-list-item-padding = 3px;
+$igo-list-item-icon-padding = 8px;
 
 // This is to make the list scrollable
 :host {
@@ -23,11 +25,11 @@ md-list {
 
 :host >>> .mat-list .mat-list-item.mat-list-item-avatar .mat-list-item-content {
   height: $igo-list-item-height;
-  padding: 3px;
+  padding: $igo-list-item-padding;
 }
 
 :host >>> .mat-list .mat-list-item.mat-list-item-avatar .mat-list-item-content>md-icon {
-  padding: 8px;
+  padding: $igo-list-item-icon-padding;
 }
 
 :host >>> [igolistitem] md-list-item [md-list-avatar] {

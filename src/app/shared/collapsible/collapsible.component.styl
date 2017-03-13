@@ -1,5 +1,7 @@
-@require '../../../css/theme.styl';
+md-icon[igocollapse]:after {
+  content: 'expand_more'
+}
 
-.igo-collapsible-header .mat-list-avatar:hover {
-  cursor: pointer;
+md-icon[igocollapse].collapsed:after {
+  content: 'expand_less'
 }
