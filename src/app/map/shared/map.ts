@@ -146,7 +146,7 @@ export class IgoMap {
 
   moveToExtent(extent: ol.Extent) {
     const view = this.olMap.getView();
-    view.fit(extent, this.olMap.getSize(), {
+    view.fit(extent, {
       maxZoom: view.getZoom()
     });
   }
@@ -157,7 +157,7 @@ export class IgoMap {
 
   zoomToExtent(extent: ol.Extent) {
     const view = this.olMap.getView();
-    view.fit(extent, this.olMap.getSize(), {
+    view.fit(extent, {
       maxZoom: 17
     });
   }
