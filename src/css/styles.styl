@@ -126,6 +126,14 @@ form {
   display: none !important;
 }
 
+[igocollapse].chevron:after {
+  content: 'expand_less'
+}
+
+[igocollapse].chevron.collapsed:after {
+  content: 'expand_more'
+}
+
 [igocollapse]:hover {
   cursor: pointer;
 }

@@ -1,13 +1,14 @@
 <md-list-item class="igo-collapsible-header">
   <md-icon
     id="legend-toggle"
+    class="chevron"
     md-list-avatar
     igoCollapse
     [target]="legend"
     [collapsed]="layer.collapsed"
     (toggle)="toggleLegend($event)">
   </md-icon>
-  <h4 md-line>{{layer.options.name}}</h4>
+  <h4 md-line>{{layer.options.title}}</h4>
 
   <button
     md-icon-button
@@ -35,7 +36,7 @@
   </button>
 </md-list-item>
 
-<div #actions class="igo-layer-actions">
+<div #actions class="igo-layer-actions-container">
   <div class="igo-col igo-col-40 igo-col-100-m">
     <md-slider 
       id="opacity-slider"
@@ -91,6 +92,6 @@
   </div>
 </div>
 
-<div #legend class="igo-layer-legend">
-  The legend will go here
+<div #legend class="igo-layer-legend-container">
+  <igo-layer-legend [layer]="layer"></igo-layer-legend>
 </div>

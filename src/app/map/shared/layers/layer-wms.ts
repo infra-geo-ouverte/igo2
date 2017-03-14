@@ -1,4 +1,4 @@
-import { Layer, LayerOptions} from './layer';
+import { Layer, LayerOptions, LayerLegendOptions} from './layer';
 
 export interface DataURL {
   format: string;
@@ -9,7 +9,6 @@ export interface WMSLayerOptions extends LayerOptions {
   source: olx.source.ImageWMSOptions;
   view?: olx.layer.TileOptions;
   optionsFromCapabilities?: boolean;
-  title?: string;
   dataURL?: DataURL;
 }
 
@@ -22,6 +21,37 @@ export class WMSLayer extends Layer {
   constructor(options: WMSLayerOptions, capabilities?: ol.format.XML) {
     super(options);
     this.capabilities = capabilities;
+  }
+
+  getLegend(): LayerLegendOptions[] {
+    let legend = super.getLegend();
+    if (legend.length > 0) {
+      return legend;
+    }
+
+    const sourceParams = this.options.source.params || {} as any;
+
+    let layers = [];
+    if (sourceParams.LAYERS !== undefined) {
+      layers = sourceParams.LAYERS.split(',');
+    }
+
+    const baseUrl = this.options.source.url.replace(/\?$/, '');
+    const params = [
+      'REQUEST=GetLegendGraphic',
+      'SERVICE=wms',
+      'FORMAT=image/png',
+      `VERSION=${sourceParams.VERSION || '1.3.0'}`
+    ];
+
+    legend = layers.map((layer: string) => {
+      return {
+        url: `${baseUrl}?${params.join('&')}&LAYER=${layer}`,
+        title: layers.length > 1 ? layer : undefined
+      };
+    });
+
+    return legend;
   }
 
   protected createOlLayer(): ol.layer.Image {

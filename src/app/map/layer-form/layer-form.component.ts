@@ -15,15 +15,15 @@ export class LayerFormComponent implements OnInit {
   form: FormGroup;
   submitted: boolean;
 
-  get name () {
-    return (<FormControl>this.form.controls['name']);
+  get title () {
+    return (<FormControl>this.form.controls['title']);
   }
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      name: ['', [
+      title: ['', [
         Validators.required,
         Validators.minLength(3)
       ]]
@@ -38,7 +38,7 @@ export class LayerFormComponent implements OnInit {
   }
 
   private populate() {
-    this.name.setValue(this.layer.options.name, {onlySelf: true});
+    this.title.setValue(this.layer.options.title, {onlySelf: true});
   }
 
 }
