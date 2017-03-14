@@ -1,0 +1,27 @@
+<form [formGroup]="form" novalidate>
+
+  <fieldset>
+    <div>
+      <md-input-container>
+        <input
+          mdInput
+          formControlName="name"
+          placeholder="{{'Name' | translate}}">
+      </md-input-container>
+      <small 
+        class="igo-form-inline-error"
+        [hidden]="name.valid || (name.pristine && !submitted)">
+        {{'nameRequired' | translate}}
+      </small>
+    </div>
+  </fieldset>
+
+  <div class="igo-form-button-group">
+    <button
+      md-raised-button
+      (click)="save(form.value, form.valid)">
+      {{'Save' | translate}}
+    </button>
+  </div>
+
+</form>

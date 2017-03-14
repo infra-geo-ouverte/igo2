@@ -15,6 +15,7 @@
   "Hide Layer": "Hide Layer",
   "Historical Analysis": "Historical Analysis",
   "Lower Layer": "Bring layer backward",
+  "Name": "Name",
   "Opacity": "Opacity",
   "Print": "Print",
   "Private": "Private",
@@ -32,5 +33,6 @@
   "Show Layer": "Show Layer",
   "Title": "Title",
 
-  "contextTitleValidation": "Title is required (minimum 3 characters)."
+  "titleRequired": "Title is required (minimum 3 characters).",
+  "nameRequired": "Name is required (minimum 3 characters)"
 }
