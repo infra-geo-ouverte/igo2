@@ -15,6 +15,7 @@
   "Hide Layer": "Masquer couche",
   "Historical Analysis": "Analyse temporelle",
   "Lower Layer": "Descendre la couche",
+  "Name": "Nom",
   "Opacity": "Opacité",
   "Print": "Impression",
   "Private": "Privé",
@@ -32,6 +33,6 @@
   "Show Layer": "Afficher couche",
   "Title": "Titre",
 
-  "contextTitleValidation": "Un titre est requis (minimum 3 caractères)."
-
+  "titleRequired": "Un titre est requis (minimum 3 caractères).",
+  "nameRequired": "Un nom est requis (minimum 3 caractères)."
 }
