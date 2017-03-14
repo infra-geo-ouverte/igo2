@@ -19,7 +19,17 @@ export class WMSLayer extends Layer {
   protected olLayer: ol.layer.Tile;
 
   constructor(options: WMSLayerOptions, capabilities?: ol.format.XML) {
+    // Important: To use wms versions smaller than 1.3.0, SRS
+    // needs to be supplied in the source "params"
+
     super(options);
+
+    // We need to do this to override the default version
+    // of openlayers which is uppercase
+    const sourceParams: any = this.options.source.params;
+    if (sourceParams && sourceParams.version) {
+      sourceParams.VERSION = sourceParams.version;
+    }
     this.capabilities = capabilities;
   }
 
@@ -32,8 +42,8 @@ export class WMSLayer extends Layer {
     const sourceParams = this.options.source.params || {} as any;
 
     let layers = [];
-    if (sourceParams.LAYERS !== undefined) {
-      layers = sourceParams.LAYERS.split(',');
+    if (sourceParams.layers !== undefined) {
+      layers = sourceParams.layers.split(',');
     }
 
     const baseUrl = this.options.source.url.replace(/\?$/, '');
@@ -41,7 +51,8 @@ export class WMSLayer extends Layer {
       'REQUEST=GetLegendGraphic',
       'SERVICE=wms',
       'FORMAT=image/png',
-      `VERSION=${sourceParams.VERSION || '1.3.0'}`
+      'SLD_VERSION=1.1.0',
+      `VERSION=${sourceParams.version || '1.3.0'}`
     ];
 
     legend = layers.map((layer: string) => {
@@ -66,7 +77,6 @@ export class WMSLayer extends Layer {
         source: new ol.source.ImageWMS(this.options.source)
       });
     }
-
     return new ol.layer.Image(layerOptions);
   }
 

@@ -49,7 +49,7 @@ export class IgoMap {
     });
 
     this.overlayLayer = new VectorLayer({
-      name: 'Overlay',
+      title: 'Overlay',
       type: 'vector'
     });
     this.overlaySource = (this.overlayLayer.getSource() as ol.source.Vector);
