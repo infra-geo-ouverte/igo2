@@ -56,9 +56,11 @@ export class RequestService {
   }
 
   private extractMessages(res: Response): Message[] {
+    if (!res || !res.headers) { return; }
+
     let messages = [];
     const contentType = res.headers.get('content-type');
-    if (contentType.indexOf('application/json') === 0) {
+    if (contentType && contentType.indexOf('application/json') === 0) {
       const body = res.json() || {};
       if (body.messages) {
         messages = body.messages;
