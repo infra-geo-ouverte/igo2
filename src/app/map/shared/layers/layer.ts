@@ -1,5 +1,5 @@
 export interface LayerOptions extends olx.layer.BaseOptions {
-  name: string;
+  title: string;
   type: string;
   visible?: boolean;
   legend?: LayerLegendOptions;
@@ -7,6 +7,9 @@ export interface LayerOptions extends olx.layer.BaseOptions {
 
 export interface LayerLegendOptions {
   collapsed?: boolean;
+  url?: string;
+  html?: string;
+  title?: string;
 }
 
 export abstract class Layer {
@@ -51,5 +54,9 @@ export abstract class Layer {
 
   getSource() {
     return this.getOlLayer().getSource();
+  }
+
+  getLegend(): LayerLegendOptions[] {
+    return this.options.legend ? [this.options.legend] : [];
   }
 }

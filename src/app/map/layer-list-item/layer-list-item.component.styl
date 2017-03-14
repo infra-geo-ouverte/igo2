@@ -1,21 +1,30 @@
 @require '../../../css/media.styl';
 @require '../../../css/theme.styl';
 @require '../../shared/list/list.component.styl';
+@require '../layer-legend/layer-legend.component.styl';
 
-.igo-layer-actions,
-.igo-layer-legend {
+:host {
+  overflow: hidden;
+}
+
+.igo-layer-actions-container,
+.igo-layer-legend-container {
   width: 100%;
   padding: $igo-list-item-padding;
   display: inline-block;
 }
 
-.igo-layer-actions {
+.igo-layer-actions-container {
   bordered-top();
   bordered-bottom();
 }
 
-.igo-layer-actions > div {
+.igo-layer-actions-container > div {
   text-align: center;
+}
+
+.igo-layer-legend-container {
+  padding-left: $igo-layer-legend-padding-left;
 }
 
 #opacity-slider {
@@ -32,12 +41,4 @@
   +media(mobile) {
     float: none;
   }
-}
-
-#legend-toggle:after {
-  content: 'expand_more'
-}
-
-#legend-toggle.collapsed:after {
-  content: 'expand_less'
 }

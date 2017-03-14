@@ -95,11 +95,11 @@ export class MapComponent implements OnInit, AfterViewInit {
         url: result.properties['url'],
         projection: this.map.getProjection(),
         params: {
-          layers: result.properties['name'],
+          layers: result.properties['name']
         }
       },
       type: 'wms',
-      name: result.properties['title']
+      title: result.properties['title']
     };
     this.layerService.createLayer(layerOptions).subscribe(
       layer => this.map.addLayer(layer)

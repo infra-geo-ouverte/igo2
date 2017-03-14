@@ -11,6 +11,7 @@ import { LayerListComponent } from './layer-list/layer-list.component';
 import { LayerListItemComponent } from './layer-list-item/layer-list-item.component';
 import { LayerEditorComponent } from './layer-editor/layer-editor.component';
 import { LayerFormComponent } from './layer-form/layer-form.component';
+import { LayerLegendComponent } from './layer-legend/layer-legend.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { LayerFormComponent } from './layer-form/layer-form.component';
     LayerListComponent,
     LayerListItemComponent,
     LayerEditorComponent,
-    LayerFormComponent
+    LayerFormComponent,
+    LayerLegendComponent
   ],
   entryComponents: [
     MapEditorComponent,

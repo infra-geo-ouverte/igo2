@@ -1,0 +1,30 @@
+<small *ngIf="legend.length === 0">
+  {{'noLegendText' | translate}}
+</small>
+
+<template ngFor let-item [ngForOf]="legend">
+  <md-list-item
+    class="igo-collapsible-header"
+    *ngIf="item.title">
+    <md-icon
+      id="legend-toggle"
+      class="chevron"
+      md-list-avatar
+      igoCollapse
+      [target]="legend"
+      [collapsed]="false">
+    </md-icon>
+    <h4 md-line>{{item.title}}</h4>
+  </md-list-item>
+
+  <div #legend class="igo-layer-legend" [ngClass]="{'with-title': item.title}">
+    <img
+      *ngIf="item.url" 
+      src="{{item.url}}"
+      alt="{{'noLegendText' | translate}}">
+    <div
+      [innerHTML]="item.html"
+      *ngIf="item.html">
+    </div>
+  </div>
+</template>

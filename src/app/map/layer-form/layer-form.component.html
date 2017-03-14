@@ -5,13 +5,13 @@
       <md-input-container>
         <input
           mdInput
-          formControlName="name"
-          placeholder="{{'Name' | translate}}">
+          formControlName="title"
+          placeholder="{{'Title' | translate}}">
       </md-input-container>
       <small 
         class="igo-form-inline-error"
-        [hidden]="name.valid || (name.pristine && !submitted)">
-        {{'nameRequired' | translate}}
+        [hidden]="title.valid || (title.pristine && !submitted)">
+        {{'titleRequired' | translate}}
       </small>
     </div>
   </fieldset>

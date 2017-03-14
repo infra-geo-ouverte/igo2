@@ -37,7 +37,7 @@ describe('LayerEditorComponent', () => {
   });
 
   it('should create', () => {
-    component.layer = new OSMLayer({name: 'foo', type: 'osm'});
+    component.layer = new OSMLayer({title: 'foo', type: 'osm'});
     expect(component).toBeTruthy();
   });
   */
