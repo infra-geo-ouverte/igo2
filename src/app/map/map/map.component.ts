@@ -64,13 +64,12 @@ export class MapComponent implements OnInit, AfterViewInit {
     return feature;
   }
 
-  private handleLayersChanged(layers: LayerOptions[]) {
+  private handleLayersChanged(layerOptions: LayerOptions[]) {
     this.map.removeLayers();
 
-    layers.forEach((layerOptions) => {
-      this.layerService.createLayer(layerOptions).subscribe(
-        layer => this.map.addLayer(layer)
-      );
+    layerOptions.forEach((options: LayerOptions) => {
+      this.layerService.createLayer(options).subscribe(
+        layer => this.map.addLayer(layer));
     });
   }
 

@@ -14,8 +14,8 @@ export interface MapOptions {
 
 export class IgoMap {
 
-  olMap: ol.Map;
-  layers = new BehaviorSubject<Layer[]>([]);
+  public olMap: ol.Map;
+  public layers = new BehaviorSubject<Layer[]>([]);
 
   private _layers: Layer[] = [];
   private overlayLayer: VectorLayer;
@@ -97,13 +97,11 @@ export class IgoMap {
   }
 
   addLayer(layer: Layer) {
-    this._layers.splice(0, 0, layer);
     this.olMap.addLayer(layer.getOlLayer());
-    this.layers.next(this._layers);
-  }
 
-  getLayerIndex(layer: Layer) {
-    return this._layers.findIndex(layer_ => layer_ === layer);
+    this._layers.splice(0, 0, layer);
+    this.sortLayers();
+    this.layers.next(this._layers);
   }
 
   removeLayer(layer: Layer) {
@@ -123,7 +121,7 @@ export class IgoMap {
   raiseLayer(layer: Layer) {
     const index = this.getLayerIndex(layer);
     if (index > 0) {
-       this.moveLayer(layer, index, index - 1);
+      this.moveLayer(layer, index, index - 1);
     }
   }
 
@@ -135,13 +133,15 @@ export class IgoMap {
   }
 
   moveLayer(layer: Layer, from: number, to: number) {
-    const layers = this._layers;
-    const toLayer = this._layers[to];
-    layers[to] = layer;
-    layers[from] = toLayer;
-    this._layers = layers;
+    const layerTo = this._layers[to];
+    const zIndexTo = layerTo.zIndex;
+    const zIndexFrom = layer.zIndex;
 
-    this.orderLayers();
+    layer.zIndex = zIndexTo;
+    layerTo.zIndex = zIndexFrom;
+
+    this._layers[to] = layer;
+    this._layers[from] = layerTo;
   }
 
   moveToExtent(extent: ol.Extent) {
@@ -189,10 +189,12 @@ export class IgoMap {
     this.overlaySource.clear();
   }
 
-  private orderLayers() {
-    const maxIndex = this._layers.length;
-    this._layers.forEach((layer: Layer, index: number) => {
-      layer.getOlLayer().setZIndex(maxIndex - index);
-    });
+  private sortLayers() {
+    // Sort by descending zIndex
+    this._layers.sort((layer1, layer2) => layer2.zIndex - layer1.zIndex);
+  }
+
+  private getLayerIndex(layer: Layer) {
+    return this._layers.findIndex(layer_ => layer_ === layer);
   }
 }

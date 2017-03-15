@@ -17,7 +17,6 @@ import { LayerService } from '../shared/layer.service';
 export class LayerListComponent implements OnInit {
 
   @Input() map: IgoMap;
-  layers: Layer[];
 
   get edition (): boolean {
     return this.editTool !== undefined;

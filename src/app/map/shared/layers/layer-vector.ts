@@ -8,7 +8,8 @@ export interface VectorLayerOptions extends LayerOptions {
 
 export class VectorLayer extends Layer {
 
-  options: VectorLayerOptions;
+  public options: VectorLayerOptions;
+
   protected olLayer: ol.layer.Vector;
 
   protected createOlLayer(): ol.layer.Vector {

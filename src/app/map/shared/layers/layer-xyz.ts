@@ -7,7 +7,8 @@ export interface XYZLayerOptions extends LayerOptions {
 
 export class XYZLayer extends Layer {
 
-  options: XYZLayerOptions;
+  public options: XYZLayerOptions;
+
   protected olLayer: ol.layer.Tile;
 
   protected createOlLayer(): ol.layer.Tile {

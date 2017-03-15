@@ -8,39 +8,14 @@ export interface WMTSLayerOptions extends LayerOptions {
 
 export class WMTSLayer extends Layer {
 
-  options: WMTSLayerOptions;
-  capabilities?: ol.format.XML;
+  public options: WMTSLayerOptions;
+
   protected olLayer: ol.layer.Tile;
 
-  constructor(options: WMTSLayerOptions, capabilities?: ol.format.XML) {
-    super(options);
-    this.capabilities = capabilities;
-  }
-
-  protected createOlLayer(): ol.layer.Tile {
-    let sourceOptions;
-    if (this.capabilities) {
-      sourceOptions = ol.source.WMTS.optionsFromCapabilities(
-        this.capabilities, this.options.source);
-    } else {
-      sourceOptions = Object.assign({
-        tileGrid: this.getDefaultTileGrid(this.options)
-      }, this.options.source);
-    }
-
-    const layerOptions = Object.assign({}, this.options.view || {}, {
-      source: new ol.source.WMTS(sourceOptions)
-    });
-
-    return new ol.layer.Tile(layerOptions);
-  }
-
-  // TODO Support other projections ?
-  getDefaultTileGrid(options: WMTSLayerOptions): ol.tilegrid.WMTS {
-
-    const projection = options.source.projection ?
-      ol.proj.get(options.source.projection) :
-      ol.proj.get('EPSG:3857');
+  // TODO: Support other projections ?
+  // TODO: Make this an util function ?
+  static getDefaultTileGrid(epsg?: string): ol.tilegrid.WMTS {
+    const projection = epsg ? ol.proj.get(epsg) : ol.proj.get('EPSG:3857');
     const projectionExtent = projection.getExtent();
     const size = ol.extent.getWidth(projectionExtent) / 256;
     const resolutions = new Array(20);
@@ -55,5 +30,22 @@ export class WMTSLayer extends Layer {
       resolutions: resolutions,
       matrixIds: matrixIds
     });
+  }
+
+  constructor(options: WMTSLayerOptions) {
+    super(options);
+  }
+
+  protected createOlLayer(): ol.layer.Image {
+    const projection = this.options.source.projection as string;
+    const sourceOptions = Object.assign({
+      tileGrid: WMTSLayer.getDefaultTileGrid(projection)
+    }, this.options.source);
+
+    const layerOptions = Object.assign({}, this.options.view || {}, {
+      source: new ol.source.WMTS(sourceOptions)
+    });
+
+    return new ol.layer.Tile(layerOptions);
   }
 }
