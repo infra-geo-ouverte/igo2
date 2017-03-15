@@ -38,7 +38,7 @@ export class LayerFormComponent implements OnInit {
   }
 
   private populate() {
-    this.title.setValue(this.layer.options.title, {onlySelf: true});
+    this.title.setValue(this.layer.title, {onlySelf: true});
   }
 
 }

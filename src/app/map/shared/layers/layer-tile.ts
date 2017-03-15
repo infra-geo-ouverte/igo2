@@ -7,7 +7,8 @@ export interface TileLayerOptions extends LayerOptions {
 
 export class TileLayer extends Layer {
 
-  options: TileLayerOptions;
+  public options: TileLayerOptions;
+
   protected olLayer: ol.layer.Tile;
 
   protected createOlLayer(): ol.layer.Tile {

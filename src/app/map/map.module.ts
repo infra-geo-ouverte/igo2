@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MapService } from './shared/map.service';
 import { LayerService } from './shared/layer.service';
+import { CapabilitiesService } from './shared/capabilities.service';
 import { MapComponent } from './map/map.component';
 import { ZoomComponent } from './zoom/zoom.component';
 import { MapEditorComponent } from './map-editor/map-editor.component';
@@ -35,7 +36,8 @@ import { LayerLegendComponent } from './layer-legend/layer-legend.component';
   ],
   providers: [
     LayerService,
-    MapService
+    MapService,
+    CapabilitiesService
   ]
 })
 export class MapModule { }

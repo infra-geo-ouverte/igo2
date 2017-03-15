@@ -6,6 +6,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { IgoMap } from '../shared/map';
 import { MapService } from '../shared/map.service';
 import { LayerService } from '../shared/layer.service';
+import { CapabilitiesService } from '../shared/capabilities.service';
 import { MapEditorComponent } from './map-editor.component';
 import { LayerListComponent } from '../layer-list/layer-list.component';
 import { LayerListItemComponent } from '../layer-list-item/layer-list-item.component';
@@ -29,7 +30,8 @@ describe('MapEditorComponent', () => {
       ],
       providers: [
         MapService,
-        LayerService
+        LayerService,
+        CapabilitiesService
       ]
     })
     .compileComponents();

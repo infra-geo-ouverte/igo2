@@ -1,12 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
-
-import { LayerService } from './layer.service';
-
 import { MockBackend } from '@angular/http/testing';
 import {
     Http,
     BaseRequestOptions
 } from '@angular/http';
+
+import { TestModule } from '../../test.module';
+
+import { CapabilitiesService } from './capabilities.service';
+import { LayerService } from './layer.service';
 
 const mockHttpProvider = {
     deps: [ MockBackend, BaseRequestOptions ],
@@ -18,7 +20,14 @@ const mockHttpProvider = {
 describe('LayerService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ { provide: Http, useValue: mockHttpProvider }, LayerService]
+      imports: [
+        TestModule
+      ],
+      providers: [
+        { provide: Http, useValue: mockHttpProvider },
+        CapabilitiesService,
+        LayerService
+      ]
     });
   });
 

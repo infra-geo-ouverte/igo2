@@ -1,89 +1,81 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams, Request, RequestMethod } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import { CapabilitiesService } from './capabilities.service';
+
 import { Layer, LayerOptions } from './layers/layer';
-import { OSMLayer } from './layers/layer-osm';
-import { VectorLayer } from './layers/layer-vector';
-import { XYZLayer } from './layers/layer-xyz';
-import { WMTSLayer } from './layers/layer-wmts';
-import { WMSLayer } from './layers/layer-wms';
+import { OSMLayer, OSMLayerOptions } from './layers/layer-osm';
+import { VectorLayer, VectorLayerOptions } from './layers/layer-vector';
+import { XYZLayer, XYZLayerOptions } from './layers/layer-xyz';
+import { WMTSLayer, WMTSLayerOptions } from './layers/layer-wmts';
+import { WMSLayer, WMSLayerOptions } from './layers/layer-wms';
 
 @Injectable()
 export class LayerService {
 
-  static layerClasses = {
-    osm: OSMLayer,
-    vector: VectorLayer,
-    xyz: XYZLayer,
-    wmts: WMTSLayer,
-    wms: WMSLayer
-  };
+  public editedLayer = new BehaviorSubject<Layer>(undefined);
 
-  editedLayer = new BehaviorSubject<Layer>(undefined);
-
-  public capabilitiesStore: any[] = [];
-
-  constructor(private http: Http) { }
+  constructor(private capabilitiesService: CapabilitiesService) { }
 
   createLayer(options: LayerOptions): Observable<Layer> {
-
-    const layerCls = LayerService.layerClasses[options.type];
-
-    if ((options as any).optionsFromCapabilities) {
-       return this.getCapabilities(options).map(
-         capabilities => new layerCls(options, capabilities));
-    } else {
-      return new Observable(layer => layer.next(new layerCls(options)));
+    let layer;
+    switch (options.type) {
+      case 'osm':
+        layer = this.createOSMLayer(options);
+        break;
+      case 'vector':
+        layer = this.createVectorLayer(options);
+        break;
+      case 'wms':
+        layer = this.createWMSLayer(options as WMSLayerOptions);
+        break;
+      case 'wmts':
+        layer = this.createWMTSLayer(options as WMTSLayerOptions);
+        break;
+      case 'xyz':
+        layer = this.createXYZLayer(options);
+        break;
+      default:
+        break;
     }
+
+    return layer;
   }
 
   editLayer(layer: Layer) {
     this.editedLayer.next(layer);
   }
 
-  getEditedLayer() {
-    return this.editedLayer;
+  private createOSMLayer(options: OSMLayerOptions): Observable<OSMLayer> {
+    return new Observable(layer => layer.next(new OSMLayer(options)));
   }
 
-  getCapabilities(options): Observable<any> {
+  private createVectorLayer(options: VectorLayerOptions): Observable<VectorLayer> {
+    return new Observable(layer => layer.next(new VectorLayer(options)));
+  }
 
-    const params = new URLSearchParams();
-    params.set('request', 'GetCapabilities');
-    params.set('service', options.type);
-    params.set('version', options.version ? options.version : '1.0.0');
-
-    const request = new Request({
-      method: RequestMethod.Get,
-      url: options.source.url,
-      search: params
-    });
-
-    const url = options.source.url + '?' + params.toString();
-
-    let capabilities = this.capabilitiesStore.find(value => value.url === url);
-
-    if (capabilities) {
-     return capabilities.capabilities;
-    } else {
-      return this.http
-        .request(request)
-        .map(response => {
-            let parser;
-            switch (options.type) {
-              case 'wmts':
-                parser = new ol.format.WMTSCapabilities();
-                break;
-              case 'wms':
-                parser = new ol.format.WMSCapabilities();
-                break;
-            }
-
-            capabilities = parser.read(response.text());
-            this.capabilitiesStore.push({url: url, capabilities: capabilities});
-            return capabilities;
-        });
+  private createWMSLayer(options: WMSLayerOptions): Observable<WMSLayer> {
+    if (options.optionsFromCapabilities) {
+      return this.capabilitiesService
+        .getWMSOptions(options)
+        .map((options_: WMSLayerOptions) => new WMSLayer(options_));
     }
+
+    return new Observable(layer => layer.next(new WMSLayer(options)));
+  }
+
+  private createWMTSLayer(options: WMTSLayerOptions): Observable<WMTSLayer> {
+    if (options.optionsFromCapabilities) {
+      return this.capabilitiesService
+        .getWMTSOptions(options)
+        .map((options_: WMTSLayerOptions) => new WMTSLayer(options_));
+    }
+
+    return new Observable(layer => layer.next(new WMTSLayer(options)));
+  }
+
+  private createXYZLayer(options: XYZLayerOptions): Observable<XYZLayer> {
+    return new Observable(layer => layer.next(new XYZLayer(options)));
   }
 }

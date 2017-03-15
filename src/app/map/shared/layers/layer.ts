@@ -1,8 +1,10 @@
 export interface LayerOptions extends olx.layer.BaseOptions {
   title: string;
   type: string;
+  alias?: string;
   visible?: boolean;
   legend?: LayerLegendOptions;
+  zIndex?: number;
 }
 
 export interface LayerLegendOptions {
@@ -14,9 +16,23 @@ export interface LayerLegendOptions {
 
 export abstract class Layer {
 
-  options: LayerOptions;
-  collapsed: boolean;
+  public options: LayerOptions;
+
+  public collapsed: boolean;
+
   protected olLayer: ol.layer.Layer;
+
+  get title (): string {
+    return this.options.alias ? this.options.alias : this.options.title;
+  }
+
+  get zIndex (): number {
+    return this.olLayer.getZIndex();
+  }
+
+  set zIndex (zIndex: number) {
+    this.olLayer.setZIndex(zIndex);
+  }
 
   get visible (): boolean {
     return this.getOlLayer().get('visible');
@@ -36,6 +52,12 @@ export abstract class Layer {
 
   constructor(options: LayerOptions) {
     this.options = options;
+
+    this.olLayer = this.createOlLayer();
+    if (options.index !== undefined) {
+      this.zIndex = options.zIndex;
+    }
+
     this.visible = options.visible === undefined ? true : options.visible;
 
     const legend = options.legend || {};
@@ -45,10 +67,6 @@ export abstract class Layer {
   protected abstract createOlLayer(): ol.layer.Layer;
 
   getOlLayer() {
-    if (this.olLayer === undefined) {
-      this.olLayer = this.createOlLayer();
-    }
-
     return this.olLayer;
   }
 
