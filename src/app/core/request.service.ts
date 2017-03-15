@@ -31,7 +31,7 @@ export class RequestService {
     this.requests.next(this.count);
   }
 
-  public handleError200(res: Response | any) {
+  private handleError200(res: Response | any) {
     if (!res || !res.headers) { return; }
 
     const contentType = res.headers.get('content-type');
