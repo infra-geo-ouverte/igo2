@@ -31,12 +31,18 @@ export class RequestService {
     this.requests.next(this.count);
   }
 
-  private handleError200(res: Response | any) {
+  public handleError200(res: Response | any) {
     if (!res || !res.headers) { return; }
 
     const contentType = res.headers.get('content-type');
     if (res.status === 200 && contentType.indexOf('application/json') === 0) {
-      const body = res.json() || {};
+      let body;
+      try {
+        body = res.json();
+      } catch (e) {
+        throw [{text: 'Invalid JSON received'}];
+      }
+
       if (body.status < 200 || body.status >= 300) {
         throw res;
       }
@@ -51,14 +57,16 @@ export class RequestService {
       messages = this.extractMessages(res as Response);
     }
 
-    this.handleMessages(messages, title);
+    this.displayMessages(messages, title);
+
     return Observable.throw(res);
   }
 
   private extractMessages(res: Response): Message[] {
-    if (!res || !res.headers) { return; }
+    if (!res || !res.headers) { return []; }
 
     let messages = [];
+
     const contentType = res.headers.get('content-type');
     if (contentType && contentType.indexOf('application/json') === 0) {
       const body = res.json() || {};
@@ -70,10 +78,9 @@ export class RequestService {
     return messages;
   }
 
-  private handleMessages(messages: Message[], title?: string) {
-    messages.forEach((message) => {
-      this.messageService.message(Object.assign({title: title}, message));
-    });
+  private displayMessages(messages, title?: string) {
+    messages.forEach((message: Message) =>
+      this.messageService.message(Object.assign({title: title}, message)));
   }
 
 }
