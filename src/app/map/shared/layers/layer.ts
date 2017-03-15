@@ -54,7 +54,7 @@ export abstract class Layer {
     this.options = options;
 
     this.olLayer = this.createOlLayer();
-    if (options.index !== undefined) {
+    if (options.zIndex !== undefined) {
       this.zIndex = options.zIndex;
     }
 
