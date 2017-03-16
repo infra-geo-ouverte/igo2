@@ -33,21 +33,25 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.store
       .select(s => s.map)
       .filter(s => s !== null)
-      .subscribe((mapOptions: MapOptions) => this.map.setView(mapOptions.view));
+      .subscribe((mapOptions: MapOptions) =>
+        this.map.setView(mapOptions.view));
 
     this.store
       .select(s => s.layers)
-      .subscribe((layerOptions: LayerOptions[]) => this.handleLayersChanged(layerOptions));
+      .subscribe((layerOptions: LayerOptions[]) =>
+        this.handleLayersChanged(layerOptions));
 
     this.store
       .select(s => s.focusedResult)
       .filter(r => r !== null)
-      .subscribe((result: SearchResult) => this.handleFocusedResult(result));
+      .subscribe((result: SearchResult) =>
+        this.handleFocusedResult(result));
 
     this.store
       .select(s => s.selectedResult)
       .filter(r => r !== null)
-      .subscribe((result: SearchResult) => this.handleSelectedResult(result));
+      .subscribe((result: SearchResult) =>
+        this.handleSelectedResult(result));
   }
 
   ngAfterViewInit(): any {
