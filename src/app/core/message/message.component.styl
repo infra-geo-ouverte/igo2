@@ -1,0 +1,39 @@
+@require '../../../css/media.styl';
+
+:host >>> simple-notifications {
+  div.simple-notification-wrapper {
+    bottom: 0;
+    right: calc(50% - 150px);
+    +media(mobile) {
+      right: 0;
+      width: 100%;
+    }
+  }
+  div.simple-notification {
+    margin-bottom: 5px;
+    min-height: 50px;
+    +media(mobile) {
+      margin-bottom: 0;
+    }
+    svg {
+      width: 63px;
+      height: 63px;
+      padding: 15px;
+    }
+    .sn-title {
+        line-height: 23px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .sn-content {
+        line-height: 18px;
+        font-size: 15px;
+    }
+    &.error {
+      background-color: #d32f2f;
+      .sn-progress-loader span {
+        background-color: #c41515;
+      }
+    }
+  }
+}

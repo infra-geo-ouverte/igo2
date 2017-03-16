@@ -5,6 +5,7 @@ import { IgoStore } from '../../store/store';
 
 import { Tool } from '../../tool/shared/tool.interface';
 
+import { IgoMap } from '../shared/map';
 import { Layer } from '../shared/layers/layer';
 import { LayerService } from '../shared/layer.service';
 
@@ -15,7 +16,7 @@ import { LayerService } from '../shared/layer.service';
 })
 export class LayerListComponent implements OnInit {
 
-  @Input() layers: Layer[];
+  @Input() map: IgoMap;
 
   get edition (): boolean {
     return this.editTool !== undefined;
@@ -38,6 +39,18 @@ export class LayerListComponent implements OnInit {
       this.layerService.editLayer(layer);
       this.store.dispatch({type: 'SELECT_TOOL', payload: this.editTool});
     }
+  }
+
+  removeLayer(layer: Layer) {
+    this.map.removeLayer(layer);
+  }
+
+  raiseLayer(layer: Layer) {
+    this.map.raiseLayer(layer);
+  }
+
+  lowerLayer(layer: Layer) {
+    this.map.lowerLayer(layer);
   }
 
 }

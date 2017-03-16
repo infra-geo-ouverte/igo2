@@ -39,7 +39,7 @@ export class ContextService {
     }
 
     return this.requestService.register(
-      this.http.get(`contexts/${fileName}`)
+      this.http.get(`contexts/${fileName}`), 'Context'
     ).map(res => res.json());
   }
 

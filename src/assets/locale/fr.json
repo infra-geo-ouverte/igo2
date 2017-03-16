@@ -14,6 +14,8 @@
   "Directions": "Itinéraire",
   "Hide Layer": "Masquer couche",
   "Historical Analysis": "Analyse temporelle",
+  "Lower Layer": "Descendre la couche",
+  "Opacity": "Opacité",
   "Print": "Impression",
   "Private": "Privé",
   "Properties": "Propriétés",
@@ -21,6 +23,8 @@
   "Protected": "Protégé",
   "Public": "Public",
   "Measure": "Mesure",
+  "Raise Layer": "Monter la couche",
+  "Remove Layer": "Retirer la couche de la carte",
   "Save": "Sauvegarder",
   "Search Results": "Résultats de recherche",
   "Search for an address or a place": "Rechercher une adresse, un lieu ou une couche",
@@ -28,6 +32,6 @@
   "Show Layer": "Afficher couche",
   "Title": "Titre",
 
-  "contextTitleValidation": "Un titre est requis (minimum 3 caractères)."
-
+  "noLegendText": "Aucune légende disponible pour cette couche",
+  "titleRequired": "Un titre est requis (minimum 3 caractères)."
 }

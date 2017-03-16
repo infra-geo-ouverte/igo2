@@ -4,8 +4,10 @@ import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
 
 import { LayerService } from '../shared/layer.service';
+import { CapabilitiesService } from '../shared/capabilities.service';
 import { LayerListComponent } from './layer-list.component';
 import { LayerListItemComponent } from '../layer-list-item/layer-list-item.component';
+import { LayerLegendComponent } from '../layer-legend/layer-legend.component';
 
 describe('LayerListComponent', () => {
   let component: LayerListComponent;
@@ -19,10 +21,12 @@ describe('LayerListComponent', () => {
       ],
       declarations: [
         LayerListComponent,
-        LayerListItemComponent
+        LayerListItemComponent,
+        LayerLegendComponent
       ],
       providers: [
-        LayerService
+        LayerService,
+        CapabilitiesService
       ]
     })
     .compileComponents();

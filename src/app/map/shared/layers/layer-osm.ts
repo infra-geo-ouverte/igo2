@@ -7,7 +7,8 @@ export interface OSMLayerOptions extends LayerOptions {
 
 export class OSMLayer extends Layer {
 
-  options: OSMLayerOptions;
+  public options: OSMLayerOptions;
+
   protected olLayer: ol.layer.Tile;
 
   protected createOlLayer(): ol.layer.Tile {

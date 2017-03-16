@@ -13,7 +13,6 @@ import { LayerOptions } from '../shared/layers/layer';
 import { WMSLayerOptions } from '../shared/layers/layer-wms';
 import { MapOptions } from '../shared/map';
 
-
 @Component({
   selector: 'igo-map',
   templateUrl: './map.component.html',
@@ -34,21 +33,25 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.store
       .select(s => s.map)
       .filter(s => s !== null)
-      .subscribe((mapOptions: MapOptions) => this.map.setView(mapOptions.view));
+      .subscribe((mapOptions: MapOptions) =>
+        this.map.setView(mapOptions.view));
 
     this.store
       .select(s => s.layers)
-      .subscribe((layerOptions: LayerOptions[]) => this.handleLayersChanged(layerOptions));
+      .subscribe((layerOptions: LayerOptions[]) =>
+        this.handleLayersChanged(layerOptions));
 
     this.store
       .select(s => s.focusedResult)
       .filter(r => r !== null)
-      .subscribe((result: SearchResult) => this.handleFocusedResult(result));
+      .subscribe((result: SearchResult) =>
+        this.handleFocusedResult(result));
 
     this.store
       .select(s => s.selectedResult)
       .filter(r => r !== null)
-      .subscribe((result: SearchResult) => this.handleSelectedResult(result));
+      .subscribe((result: SearchResult) =>
+        this.handleSelectedResult(result));
   }
 
   ngAfterViewInit(): any {
@@ -65,13 +68,12 @@ export class MapComponent implements OnInit, AfterViewInit {
     return feature;
   }
 
-  private handleLayersChanged(layers: LayerOptions[]) {
+  private handleLayersChanged(layerOptions: LayerOptions[]) {
     this.map.removeLayers();
 
-    layers.forEach((layerOptions) => {
-      this.layerService.createLayer(layerOptions).subscribe(
-        layer => this.map.addLayer(layer)
-      );
+    layerOptions.forEach((options: LayerOptions) => {
+      this.layerService.createLayer(options).subscribe(
+        layer => this.map.addLayer(layer));
     });
   }
 
@@ -96,11 +98,11 @@ export class MapComponent implements OnInit, AfterViewInit {
         url: result.properties['url'],
         projection: this.map.getProjection(),
         params: {
-          layers: result.properties['name'],
+          layers: result.properties['name']
         }
       },
       type: 'wms',
-      name: result.properties['title']
+      title: result.properties['title']
     };
     this.layerService.createLayer(layerOptions).subscribe(
       layer => this.map.addLayer(layer)

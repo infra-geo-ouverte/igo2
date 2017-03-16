@@ -1,8 +1,15 @@
-<igo-collapsible
-  [title]="layer.options.name"
-  [state]="state"
-  (collapse)="collapse()"
-  (expand)="expand()">
+<md-list-item class="igo-collapsible-header">
+  <md-icon
+    id="legend-toggle"
+    class="chevron"
+    md-list-avatar
+    igoCollapse
+    [target]="legend"
+    [collapsed]="layer.collapsed"
+    (toggle)="toggleLegend($event)">
+  </md-icon>
+  <h4 md-line>{{layer.title}}</h4>
+
   <button
     md-icon-button
     collapsibleButton
@@ -22,15 +29,69 @@
 
   <button
     md-icon-button
-    collapsibleButton
+    igoCollapse
     class="igo-icon-button"
-    (click)="editLayer.emit(layer)"
-    *ngIf="edition"
-    [md-tooltip]="'Edit Layer' | translate"
-    tooltip-position="below">
-    <md-icon>settings</md-icon>
+    [target]="actions" [collapsed]="true">
+    <md-icon>more_horiz</md-icon>
   </button>
+</md-list-item>
 
-  <p>Opacity slider</p>
-  <p>Legend</p>
-</igo-collapsible>
+<div #actions class="igo-layer-actions-container">
+  <div class="igo-col igo-col-40 igo-col-100-m">
+    <md-slider 
+      id="opacity-slider"
+      thumbLabel
+      tickInterval="5" 
+      [min]="0" [max]="100"
+      [(ngModel)]="opacity"
+      [md-tooltip]="'Opacity' | translate"
+      tooltip-position="below">  
+    </md-slider>
+  </div>
+
+  <div class="igo-col igo-col-60 igo-col-100-m">
+    <div class="igo-layer-button-group">
+      <button
+        md-icon-button
+        class="igo-icon-button"
+        (click)="raiseLayer.emit(layer)"
+        [md-tooltip]="'Raise Layer' | translate"
+        tooltip-position="below">
+        <md-icon>arrow_upward</md-icon>
+      </button>
+
+      <button
+        md-icon-button
+        class="igo-icon-button"
+        (click)="lowerLayer.emit(layer)"
+        [md-tooltip]="'Lower Layer' | translate"
+        tooltip-position="below">
+        <md-icon>arrow_downward</md-icon>
+      </button>
+
+       <button
+        md-icon-button
+        class="igo-icon-button"
+        (click)="removeLayer.emit(layer)"
+        [md-tooltip]="'Remove Layer' | translate"
+        tooltip-position="below">
+        <md-icon>delete</md-icon>
+      </button>
+
+      <button
+        md-icon-button
+        collapsibleButton
+        class="igo-icon-button"
+        (click)="editLayer.emit(layer)"
+        *ngIf="edition"
+        [md-tooltip]="'Edit Layer' | translate"
+        tooltip-position="below">
+        <md-icon>settings</md-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div #legend class="igo-layer-legend-container">
+  <igo-layer-legend [layer]="layer"></igo-layer-legend>
+</div>

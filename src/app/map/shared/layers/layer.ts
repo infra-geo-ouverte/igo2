@@ -1,37 +1,72 @@
 export interface LayerOptions extends olx.layer.BaseOptions {
-  name: string;
+  title: string;
   type: string;
-  collapsed?: boolean;
+  alias?: string;
   visible?: boolean;
+  legend?: LayerLegendOptions;
+  zIndex?: number;
+}
+
+export interface LayerLegendOptions {
+  collapsed?: boolean;
+  url?: string;
+  html?: string;
+  title?: string;
 }
 
 export abstract class Layer {
 
-  options: LayerOptions;
-  collapsed: boolean;
+  public options: LayerOptions;
+
+  public collapsed: boolean;
+
   protected olLayer: ol.layer.Layer;
+
+  get title (): string {
+    return this.options.alias ? this.options.alias : this.options.title;
+  }
+
+  get zIndex (): number {
+    return this.olLayer.getZIndex();
+  }
+
+  set zIndex (zIndex: number) {
+    this.olLayer.setZIndex(zIndex);
+  }
 
   get visible (): boolean {
     return this.getOlLayer().get('visible');
   }
 
   set visible (visibility: boolean) {
-    this.getOlLayer().set('visible', visibility);
+    this.getOlLayer().setVisible(visibility);
+  }
+
+  get opacity (): number {
+    return this.getOlLayer().get('opacity');
+  }
+
+  set opacity (opacity: number) {
+    this.getOlLayer().setOpacity(opacity);
   }
 
   constructor(options: LayerOptions) {
     this.options = options;
+
+    this.olLayer = this.createOlLayer();
+    if (options.zIndex !== undefined) {
+      this.zIndex = options.zIndex;
+    }
+
     this.visible = options.visible === undefined ? true : options.visible;
-    this.collapsed = options.collapsed === undefined ? true : options.collapsed;
+
+    const legend = options.legend || {};
+    this.collapsed = legend.collapsed === undefined ? true : !this.visible;
   }
 
   protected abstract createOlLayer(): ol.layer.Layer;
 
   getOlLayer() {
-    if (this.olLayer === undefined) {
-      this.olLayer = this.createOlLayer();
-    }
-
     return this.olLayer;
   }
 
@@ -39,7 +74,7 @@ export abstract class Layer {
     return this.getOlLayer().getSource();
   }
 
-  toggleVisibility() {
-    this.visible = !this.visible;
+  getLegend(): LayerLegendOptions[] {
+    return this.options.legend ? [this.options.legend] : [];
   }
 }

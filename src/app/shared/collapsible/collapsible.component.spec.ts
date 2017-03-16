@@ -4,6 +4,7 @@ import { TestModule } from '../../test.module';
 import { MediaService } from '../../core/media.service';
 import { FlexibleComponent } from '../flexible/flexible.component';
 import { CollapsibleComponent } from './collapsible.component';
+import { CollapseDirective } from '../directives/collapse.directive';
 
 describe('CollapsibleComponent', () => {
   let component: CollapsibleComponent;
@@ -16,7 +17,8 @@ describe('CollapsibleComponent', () => {
       ],
       declarations: [
         FlexibleComponent,
-        CollapsibleComponent
+        CollapsibleComponent,
+        CollapseDirective
       ],
       providers: [
         MediaService

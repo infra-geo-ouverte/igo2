@@ -14,6 +14,8 @@
   "Directions": "Directions",
   "Hide Layer": "Hide Layer",
   "Historical Analysis": "Historical Analysis",
+  "Lower Layer": "Bring layer backward",
+  "Opacity": "Opacity",
   "Print": "Print",
   "Private": "Private",
   "Properties": "Properties",
@@ -21,6 +23,8 @@
   "Protected": "Protected",
   "Public": "Public",
   "Measure": "Measure",
+  "Raise Layer": "Bring layer forward",
+  "Remove Layer": "Remove this layer from the map",
   "Save": "Save",
   "Search Results": "Search Results",
   "Search for an address or a place": "Search for an address, a place or a layer",
@@ -28,5 +32,6 @@
   "Show Layer": "Show Layer",
   "Title": "Title",
 
-  "contextTitleValidation": "Title is required (minimum 3 characters)."
+  "noLegendText": "No legend available for this layer",
+  "titleRequired": "Title is required (minimum 3 characters)."
 }
