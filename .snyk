@@ -36,3 +36,8 @@ patch:
         patched: '2017-01-26T18:55:45.853Z'
     - openlayers > closure-util > socket.io > engine.io > ws:
         patched: '2017-01-26T18:55:45.853Z'
+  'npm:marked:20170112':
+    - openlayers > marked:
+        patched: '2017-03-16T20:30:30.444Z'
+    - openlayers > jsdoc > marked:
+        patched: '2017-03-16T20:30:30.444Z'
