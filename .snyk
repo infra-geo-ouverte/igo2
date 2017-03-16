@@ -6,6 +6,9 @@ ignore:
     - openlayers > closure-util:
         reason: Need OL
         expires: '2017-02-25T18:56:00.903Z'
+    - openlayers > closure-util:
+        reason: None given
+        expires: '2017-04-15T20:35:44.267Z'
   'npm:marked:20170112':
     - openlayers > marked:
         reason: None given
@@ -20,6 +23,10 @@ ignore:
     - openlayers > closure-util > socket.io > socket.io-client > engine.io-client > ws:
         reason: None given
         expires: '2017-03-17T14:38:15.185Z'
+  'npm:qs:20170213':
+    - openlayers > closure-util > get-down > request > qs:
+        reason: None given
+        expires: '2017-04-15T20:35:44.324Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:negotiator:20160616':
