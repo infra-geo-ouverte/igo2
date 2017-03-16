@@ -10,7 +10,7 @@ describe('igo App', () => {
 
   it('should have navigator div', () => {
     page.navigateTo();
-    expect(page.getNavigatorDiv().isPresent()).toBe(true);
+    expect(page.getNavigatorDiv().isPresent()).toBeTruthy();
   });
 
   // it('should display placeholder in search bar', () => {
