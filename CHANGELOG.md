@@ -1,5 +1,28 @@
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/infra-geo-ouverte/igo2/compare/0.4.0...v0.5.0) (2017-03-16)
+
+
+### Bug Fixes
+
+* **search:** change focus/scroll behavior to avoid keyboard glitches … ([#154](https://github.com/infra-geo-ouverte/igo2/issues/154)) ([83d5472](https://github.com/infra-geo-ouverte/igo2/commit/83d5472))
+* **search:** fix when request don't have header ([403ff7f](https://github.com/infra-geo-ouverte/igo2/commit/403ff7f))
+* **style:** Fix list style ([3e3cf02](https://github.com/infra-geo-ouverte/igo2/commit/3e3cf02))
+
+
+### Features
+
+* **context:** Handle invalid JSON ([#167](https://github.com/infra-geo-ouverte/igo2/issues/167)) ([63efc2c](https://github.com/infra-geo-ouverte/igo2/commit/63efc2c))
+* **layer:** Dummy layer form ([#161](https://github.com/infra-geo-ouverte/igo2/issues/161)) ([3262a3d](https://github.com/infra-geo-ouverte/igo2/commit/3262a3d))
+* **layer list:** Basic layer list ([#157](https://github.com/infra-geo-ouverte/igo2/issues/157)) ([3cff398](https://github.com/infra-geo-ouverte/igo2/commit/3cff398))
+* **layers:** Remove and change order tools ([#159](https://github.com/infra-geo-ouverte/igo2/issues/159)) ([c65ad92](https://github.com/infra-geo-ouverte/igo2/commit/c65ad92))
+* **map editor:** Basics for the map editor tool ([#156](https://github.com/infra-geo-ouverte/igo2/issues/156)) ([15ef266](https://github.com/infra-geo-ouverte/igo2/commit/15ef266))
+* **message:** add message and logging features ([#158](https://github.com/infra-geo-ouverte/igo2/issues/158)) ([a79c82f](https://github.com/infra-geo-ouverte/igo2/commit/a79c82f))
+* **openlayers:** update to openlayers 4 ([#165](https://github.com/infra-geo-ouverte/igo2/issues/165)) ([b497155](https://github.com/infra-geo-ouverte/igo2/commit/b497155))
+
+
+
 <a name="0.4.0"></a>
-# [0.4.0](https://github.com/infra-geo-ouverte/igo2/compare/0.3.4...v0.4.0) (2017-03-03)
+# [0.4.0](https://github.com/infra-geo-ouverte/igo2/compare/0.3.4...0.4.0) (2017-03-03)
 
 
 ### Bug Fixes

@@ -98,7 +98,7 @@ export class NavigatorComponent implements OnInit {
   }
 
   toggleMenu() {
-    this.menuState = this.menuState === 'initial' ? 'collapsed' : 'initial';
+    this.menuState = this.menuState === 'initial' ? 'expanded' : 'initial';
   }
 
   toggleToast() {
