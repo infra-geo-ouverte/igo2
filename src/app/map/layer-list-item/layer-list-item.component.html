@@ -31,7 +31,8 @@
     md-icon-button
     igoCollapse
     class="igo-icon-button"
-    [target]="actions" [collapsed]="true">
+    [target]="actions"
+    [collapsed]="true">
     <md-icon>more_horiz</md-icon>
   </button>
 </md-list-item>
@@ -41,8 +42,10 @@
     <md-slider 
       id="opacity-slider"
       thumbLabel
-      tickInterval="5" 
-      [min]="0" [max]="100"
+      tickInterval="5"
+      step="5"
+      [min]="0"
+      [max]="100"
       [(ngModel)]="opacity"
       [md-tooltip]="'Opacity' | translate"
       tooltip-position="below">  

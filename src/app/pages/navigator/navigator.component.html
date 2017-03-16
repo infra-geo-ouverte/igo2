@@ -57,9 +57,7 @@
           <md-icon>menu</md-icon>
         </button>
 
-        <igo-toolbox
-          *ngIf="menu.state === 'initial' || menu.state === 'expanded'">
-        </igo-toolbox>
+        <igo-toolbox></igo-toolbox>
       </igo-panel>
 
       <igo-panel
@@ -72,11 +70,11 @@
           class="igo-icon-button"
           (click)="toggleMenu()">
           <md-icon>
-            <ng-container *ngIf="menu.state === 'initial' || menu.state === 'expanded'">
-              arrow_upward
-            </ng-container>
-            <ng-container *ngIf="menu.state === 'collapsed'">
+            <ng-container *ngIf="menu.state === 'initial' || menu.state === 'collapsed'">
               arrow_downward
+            </ng-container>
+            <ng-container *ngIf="menu.state === 'expanded'">
+              arrow_upward
             </ng-container>
           </md-icon>
         </button>
