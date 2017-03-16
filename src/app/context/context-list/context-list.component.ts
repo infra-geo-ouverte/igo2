@@ -47,7 +47,7 @@ export class ContextListComponent implements ToolComponent, OnInit {
 
     this.store
       .select(s => s.activeContext)
-      .subscribe((context: Context) => this.selectedContext = context);
+      .subscribe((context: Context) => this.handleActiveContext(context));
 
     this.contexts = this.contextService.getContexts();
   }
@@ -55,9 +55,6 @@ export class ContextListComponent implements ToolComponent, OnInit {
   selectContext(context: Context) {
     if (context.uri !== this.selectedContext.uri) {
       this.contextService.loadContext(context.uri);
-      if (this.mapEditor !== undefined) {
-        this.store.dispatch({type: 'SELECT_TOOL', payload: this.mapEditor});
-      }
     }
   }
 
@@ -66,5 +63,15 @@ export class ContextListComponent implements ToolComponent, OnInit {
       this.store.dispatch({type: 'EDIT_CONTEXT', payload: context});
       this.store.dispatch({type: 'SELECT_TOOL', payload: this.contextEditor});
     }
+  }
+
+  private handleActiveContext(context: Context) {
+    if (this.mapEditor !== undefined) {
+      if (this.selectedContext && this.selectedContext !== context) {
+        this.store.dispatch({type: 'SELECT_TOOL', payload: this.mapEditor});
+      }
+    }
+
+    this.selectedContext = context;
   }
 }
