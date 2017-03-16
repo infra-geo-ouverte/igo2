@@ -17,7 +17,7 @@
       }
     },
     {
-      "title": "MSP WMS",
+      "title": "MSP 911",
       "type": "wms",
       "source": {
         "url": "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
