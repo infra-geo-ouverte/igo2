@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { Store } from '@ngrx/store';
 import { IgoStore } from '../../store/store';
 
+import { Observer } from '../../utils/observer';
 import { Tool } from '../../tool/shared/tool.interface';
 
 import { SearchResult } from '../shared/search-result.interface';
@@ -16,7 +17,8 @@ import { SearchService} from '../shared/search.service';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.styl']
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent
+  extends Observer implements OnInit {
   @Output('key') key = new EventEmitter<string>();
   @ViewChild('input') input: ElementRef;
 
@@ -31,33 +33,36 @@ export class SearchBarComponent implements OnInit {
   }
 
   constructor(private store: Store<IgoStore>,
-              private searchService: SearchService) {}
+              private searchService: SearchService) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.store
-      .select(s => s.tools)
-      .subscribe((tools: Tool[]) => {
-          this.searchTool = tools.find(t => t.name === 'search');
-       });
+    this.subscriptions.push(
+      this.store.select(s => s.tools)
+        .subscribe((tools: Tool[]) => {
+            this.searchTool = tools.find(t => t.name === 'search');
+         }));
 
-    this.searchTermsStream
-      .debounceTime(300)
-      .distinctUntilChanged()
-      .subscribe((term: string) => {
-        if (term) {
-          this.searchService.search(term);
-          this.focus();
-        } else {
-          this.searchService.clear();
-        }
-      });
+    this.subscriptions.push(
+      this.searchTermsStream
+        .debounceTime(300)
+        .distinctUntilChanged()
+        .subscribe((term: string) => {
+          if (term) {
+            this.searchService.search(term);
+            this.focus();
+          } else {
+            this.searchService.clear();
+          }
+        }));
 
-    this.store
-      .select(s => s.selectedResult)
-      .subscribe((result: SearchResult) => {
-        this.blur();
-        this.term = result ? result.title : undefined;
-      });
+    this.subscriptions.push(
+      this.store.select(s => s.selectedResult)
+        .subscribe((result: SearchResult) => {
+          this.blur();
+          this.term = result ? result.title : undefined;
+        }));
   }
 
   keyup(event: KeyboardEvent) {

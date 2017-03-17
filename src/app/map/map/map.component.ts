@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IgoStore } from '../../store/store';
 
+import { Observer } from '../../utils/observer';
 import { SearchResult } from '../../search/shared/search-result.interface';
 import { SearchResultType } from '../../search/shared/search-result.enum';
 
@@ -18,40 +19,43 @@ import { MapOptions } from '../shared/map';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.styl']
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent
+  extends Observer implements OnInit, AfterViewInit {
 
   map: IgoMap;
   id: string = 'igo-map-target';
 
   constructor(private store: Store<IgoStore>,
               private mapService: MapService,
-              private layerService: LayerService) { }
+              private layerService: LayerService) {
+    super();
+  }
 
   ngOnInit() {
     this.map = this.mapService.getMap();
 
-    this.store
-      .select(s => s.map)
-      .filter(s => s !== null)
-      .subscribe((mapOptions: MapOptions) =>
-        this.map.setView(mapOptions.view));
+    this.subscriptions.push(
+      this.store.select(s => s.map)
+        .filter(s => s !== null)
+        .subscribe((mapOptions: MapOptions) =>
+          this.map.setView(mapOptions.view)));
 
-    this.store
-      .select(s => s.layers)
-      .subscribe((layerOptions: LayerOptions[]) =>
-        this.handleLayersChanged(layerOptions));
+    this.subscriptions.push(
+      this.store.select(s => s.layers)
+        .subscribe((layerOptions: LayerOptions[]) =>
+          this.handleLayersChanged(layerOptions)));
 
-    this.store
-      .select(s => s.focusedResult)
-      .filter(r => r !== null)
-      .subscribe((result: SearchResult) =>
-        this.handleFocusedResult(result));
+    this.subscriptions.push(
+      this.store.select(s => s.focusedResult)
+        .filter(r => r !== null)
+        .subscribe((result: SearchResult) =>
+          this.handleFocusedResult(result)));
 
-    this.store
-      .select(s => s.selectedResult)
-      .filter(r => r !== null)
-      .subscribe((result: SearchResult) =>
-        this.handleSelectedResult(result));
+    this.subscriptions.push(
+      this.store.select(s => s.selectedResult)
+        .filter(r => r !== null)
+        .subscribe((result: SearchResult) =>
+          this.handleSelectedResult(result)));
   }
 
   ngAfterViewInit(): any {

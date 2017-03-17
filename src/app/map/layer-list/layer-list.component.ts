@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IgoStore } from '../../store/store';
 
+import { Observer } from '../../utils/observer';
 import { Tool } from '../../tool/shared/tool.interface';
 
 import { IgoMap } from '../shared/map';
@@ -14,7 +15,7 @@ import { LayerService } from '../shared/layer.service';
   templateUrl: './layer-list.component.html',
   styleUrls: ['./layer-list.component.styl']
 })
-export class LayerListComponent implements OnInit {
+export class LayerListComponent extends Observer implements OnInit {
 
   @Input() map: IgoMap;
 
@@ -25,13 +26,14 @@ export class LayerListComponent implements OnInit {
   private editTool: Tool;
 
   constructor(private store: Store<IgoStore>,
-              private layerService: LayerService) { }
+              private layerService: LayerService) {
+    super();
+  }
 
   ngOnInit() {
-    this.store
-      .select(s => s.tools)
-      .subscribe((tools: Tool[]) =>
-        this.editTool = tools.find(t => t.name === 'layerEditor'));
+    this.subscriptions.push(
+      this.store.select(s => s.tools)
+        .subscribe((tools: Tool[]) => this.handleToolsChanged(tools)));
   }
 
   editLayer(layer: Layer) {
@@ -51,6 +53,10 @@ export class LayerListComponent implements OnInit {
 
   lowerLayer(layer: Layer) {
     this.map.lowerLayer(layer);
+  }
+
+  private handleToolsChanged(tools: Tool[]) {
+    this.editTool = tools.find(t => t.name === 'layerEditor');
   }
 
 }

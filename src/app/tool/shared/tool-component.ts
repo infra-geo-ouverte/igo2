@@ -1,4 +1,6 @@
-export abstract class ToolComponent {
+import { Observer } from '../../utils/observer';
+
+export class ToolComponent extends Observer {
 
   static name_: string;
   static title: string;
@@ -8,4 +10,8 @@ export abstract class ToolComponent {
 
   options?: {[key: string]: any};
   name?: string;
+
+  constructor() {
+    super();
+  }
 }

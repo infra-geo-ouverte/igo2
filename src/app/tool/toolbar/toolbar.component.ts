@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IgoStore } from '../../store/store';
 
+import { Observer } from '../../utils/observer';
+
 import { Tool } from '../shared/tool.interface';
 
 @Component({
@@ -10,21 +12,20 @@ import { Tool } from '../shared/tool.interface';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.styl']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent
+  extends Observer implements OnInit {
 
   tools: Tool[];
 
-  constructor(private store: Store<IgoStore>) {}
-
-  ngOnInit() {
-    this.store
-      .select(s => s.tools)
-      .subscribe((tools: Tool[]) =>
-        this.tools = tools.filter(tool => tool.toolbar === true));
+  constructor(private store: Store<IgoStore>) {
+    super();
   }
 
-  track(tool) {
-    return tool.name;
+  ngOnInit() {
+    this.subscriptions.push(
+      this.store.select(s => s.tools)
+        .subscribe((tools: Tool[]) =>
+          this.tools = tools.filter(tool => tool.toolbar === true)));
   }
 
   selectTool(tool: Tool) {

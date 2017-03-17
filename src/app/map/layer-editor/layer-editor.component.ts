@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ToolComponent } from '../../tool/shared/tool-component';
 import { Register } from '../../tool/shared/tool.service';
 
 import { Layer } from '../shared/layers/layer';
@@ -11,7 +12,8 @@ import { LayerService } from '../shared/layer.service';
   templateUrl: './layer-editor.component.html',
   styleUrls: ['./layer-editor.component.styl']
 })
-export class LayerEditorComponent implements OnInit {
+export class LayerEditorComponent
+  extends ToolComponent implements OnInit {
 
   static name_: string = 'layerEditor';
   static title: string = 'Edit Layer';
@@ -20,11 +22,14 @@ export class LayerEditorComponent implements OnInit {
 
   layer: Layer;
 
-  constructor(private layerService: LayerService) { }
+  constructor(private layerService: LayerService) {
+    super();
+  }
 
   ngOnInit() {
-    this.layerService.editedLayer
-      .subscribe((layer: Layer) => this.layer = layer);
+    this.subscriptions.push(
+      this.layerService.editedLayer
+        .subscribe((layer: Layer) => this.layer = layer));
   }
 
   updateLayer() {

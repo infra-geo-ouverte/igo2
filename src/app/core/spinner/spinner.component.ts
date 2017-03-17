@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observer } from '../../utils/observer';
 import { RequestService } from '../request.service';
 
 @Component({
@@ -7,16 +8,19 @@ import { RequestService } from '../request.service';
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.styl'],
 })
-export class SpinnerComponent implements OnInit {
+export class SpinnerComponent extends Observer implements OnInit {
 
   shown: boolean = false;
 
-  constructor(private requestService: RequestService) { }
+  constructor(private requestService: RequestService) {
+    super();
+  }
 
   ngOnInit() {
-    this.requestService.requests.subscribe((count: number) => {
-      this.shown = count > 0;
-    });
+    this.subscriptions.push(
+      this.requestService.requests.subscribe((count: number) => {
+        this.shown = count > 0;
+      }));
   }
 
 }

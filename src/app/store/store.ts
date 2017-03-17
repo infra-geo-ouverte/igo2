@@ -7,7 +7,7 @@ import { MapOptions } from '../map/shared/map';
 export interface IgoStore {
   activeContext: Context;
   editedContext: Context;
-  selectedTool: Tool;
+  toolHistory: Tool[];
   map: MapOptions;
   layers: Array<LayerOptions>;
   tools: Tool[];

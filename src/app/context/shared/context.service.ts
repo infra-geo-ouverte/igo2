@@ -49,9 +49,6 @@ export class ContextService {
   }
 
   private handleLoadContext(context: DetailedContext) {
-    // TODO: Remove map, layers and tools keys
-    this.store.dispatch({type: 'SET_CONTEXT', payload: context});
-
     // TODO: Handle "useCurrentView" option
     const mapOptions: MapViewOptions = context.map;
     this.store.dispatch({type: 'SET_MAP', payload: mapOptions});
@@ -70,6 +67,9 @@ export class ContextService {
       }
     });
     this.store.dispatch({type: 'SET_TOOLS', payload: tools});
+
+    // TODO: Remove map, layers and tools keys
+    this.store.dispatch({type: 'SET_CONTEXT', payload: context});
   }
 
 }

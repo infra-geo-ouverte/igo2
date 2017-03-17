@@ -3,7 +3,7 @@ export * from './edited-context.reducer';
 export * from './tools.reducer';
 export * from './map.reducer';
 export * from './layers.reducer';
-export * from './selected-tool.reducer';
+export * from './tool-history.reducer';
 export * from './search-results.reducer';
 export * from './selected-result.reducer';
 export * from './focused-result.reducer';

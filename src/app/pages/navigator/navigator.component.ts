@@ -4,23 +4,27 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IgoStore } from '../../store/store';
 
+import { Observer } from '../../utils/observer';
 import { FlexibleState } from '../../shared/flexible';
-
 import { Media, MediaService } from '../../core/media.service';
-
 import { Tool } from '../../tool/shared/tool.interface';
-
 import { SearchResult } from '../../search/shared/search-result.interface';
-
 import { ContextService } from '../../context/shared/context.service';
+
+import { toolbarSlideInOut, toolSlideInOut} from './navigator.animation';
 
 
 @Component({
   selector: 'igo-navigator',
   templateUrl: './navigator.component.html',
-  styleUrls: ['./navigator.component.styl']
+  styleUrls: ['./navigator.component.styl'],
+  animations: [
+    toolbarSlideInOut,
+    toolSlideInOut
+  ]
 })
-export class NavigatorComponent implements OnInit {
+export class NavigatorComponent
+  extends Observer implements OnInit {
 
   focusedResult: SearchResult;
   media: Media;
@@ -29,54 +33,57 @@ export class NavigatorComponent implements OnInit {
   sidenavOpened: boolean = false;
   selectedTool: Tool;
 
-  private toolHistory: Tool[] = [];
+  get toolbarState () {
+    return this.selectedTool ? 'out' : 'in';
+  }
+
+  get toolState () {
+    return this.selectedTool ? 'in' : 'out';
+  }
 
   constructor(private store: Store<IgoStore>,
               private mediaService: MediaService,
               private contextService: ContextService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+    super();
+  }
 
   ngOnInit() {
-    this.route
-      .queryParams
-      .subscribe(params => {
-        this.contextService.loadContext(params['context']);
-      });
+    this.subscriptions.push(
+      this.route.queryParams
+        .subscribe(params => {
+          this.contextService.loadContext(params['context']);
+        }));
 
-    this.mediaService.media
-      .subscribe((media: Media) => this.media = media);
+    this.subscriptions.push(
+      this.mediaService.media
+        .subscribe((media: Media) => this.media = media));
 
-    this.store
-      .select(s => s.selectedTool)
-      .subscribe((tool: Tool) => {
-          this.handleToolSelected(tool);
-      });
+    this.subscriptions.push(
+      this.store.select(s => s.toolHistory)
+        .subscribe((toolHistory: Tool[]) => {
+          this.handleToolHistoryChanged(toolHistory);
+        }));
 
-    this.store
-      .select(s => s.focusedResult)
-      .subscribe((result: SearchResult) => this.focusedResult = result);
+    this.subscriptions.push(
+      this.store.select(s => s.focusedResult)
+        .subscribe((result: SearchResult) => this.focusedResult = result));
 
-    this.store
-      .select(s => s.selectedResult)
-      .subscribe((result: SearchResult) => {
-          if (result && this.media === 'mobile') {
-            this.closeSidenav();
-          }
-      });
+    this.subscriptions.push(
+      this.store.select(s => s.selectedResult)
+        .subscribe((result: SearchResult) => {
+            if (result && this.media === 'mobile') {
+              this.closeSidenav();
+            }
+        }));
   }
 
   goBack() {
-    const tool = this.toolHistory.pop();
-    if (tool !== undefined) {
-      this.selectedTool = tool;
-      this.selectTool(tool);
-    } else {
-      this.unselectTool();
-    }
+    this.store.dispatch({type: 'SELECT_PREVIOUS_TOOL'});
   }
 
   goHome() {
-    this.unselectTool();
+    this.store.dispatch({type: 'UNSELECT_TOOL'});
   }
 
   closeSidenav() {
@@ -105,20 +112,8 @@ export class NavigatorComponent implements OnInit {
     this.toastState = this.toastState === 'initial' ? 'expanded' : 'initial';
   }
 
-  private selectTool(tool: Tool) {
-    this.store.dispatch({type: 'SELECT_TOOL', payload: tool});
-  }
-
-  private unselectTool() {
-    this.store.dispatch({type: 'UNSELECT_TOOL'});
-  }
-
-  private handleToolSelected(tool?: Tool) {
-    if (tool && this.selectedTool && tool.name !== this.selectedTool.name) {
-      this.toolHistory.push(this.selectedTool);
-    }
-
-    this.selectedTool = tool;
+  private handleToolHistoryChanged(toolHistory?: Tool[]) {
+    this.selectedTool = toolHistory[toolHistory.length - 1];
     this.menuState = 'initial';
   }
 }

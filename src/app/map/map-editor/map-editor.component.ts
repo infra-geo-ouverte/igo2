@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ToolComponent } from '../../tool/shared/tool-component';
 import { Register } from '../../tool/shared/tool.service';
 
 import { IgoMap } from '../shared/map';
@@ -11,7 +12,8 @@ import { MapService } from '../shared/map.service';
   templateUrl: './map-editor.component.html',
   styleUrls: ['./map-editor.component.styl']
 })
-export class MapEditorComponent implements OnInit {
+export class MapEditorComponent
+  extends ToolComponent implements OnInit {
 
   static name_: string = 'mapEditor';
   static title: string = 'Map';
@@ -20,7 +22,9 @@ export class MapEditorComponent implements OnInit {
 
   map: IgoMap;
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService) {
+    super();
+  }
 
   ngOnInit() {
     this.map = this.mapService.getMap();

@@ -15,7 +15,8 @@ import { SearchResultType } from '../shared/search-result.enum';
   templateUrl: './search-tool.component.html',
   styleUrls: ['./search-tool.component.styl']
 })
-export class SearchToolComponent implements ToolComponent, OnInit {
+export class SearchToolComponent
+  extends ToolComponent implements OnInit {
 
   static name_: string = 'search';
   static title: string = 'Search Results';
@@ -25,16 +26,19 @@ export class SearchToolComponent implements ToolComponent, OnInit {
   private sourceResults: [string, SearchResult[]];
   focusedResult?: SearchResult;
 
-  constructor(private store: Store<IgoStore>) { }
+  constructor(private store: Store<IgoStore>) {
+    super();
+  }
 
   ngOnInit() {
-    this.store.select(s => s.focusedResult)
-      .subscribe((result: SearchResult) => this.focusedResult = result);
+    this.subscriptions.push(
+      this.store.select(s => s.focusedResult)
+        .subscribe((result: SearchResult) => this.focusedResult = result));
 
-    this.store
-      .select(s => s.searchResults)
-      .subscribe((results: SearchResult[]) =>
-        this.handleSearchResults(results));
+    this.subscriptions.push(
+      this.store.select(s => s.searchResults)
+        .subscribe((results: SearchResult[]) =>
+          this.handleSearchResults(results)));
   }
 
   selectResult(result: SearchResult) {
