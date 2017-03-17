@@ -12,7 +12,7 @@ export const toolbarSlideInOut = trigger('toolbarSlideInOut', [
     transform: 'translate3d(-100%, 0, 0)',
     display: 'none'
   })),
-  transition('in => out', animate('0ms ease-in-out')),
+  transition('in => out', animate(`0ms ${transitionType}`)),
   transition('out => in', animate(`${transitionSpeed} ${transitionType}`))
 ]);
 
