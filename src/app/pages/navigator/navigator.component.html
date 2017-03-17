@@ -29,36 +29,40 @@
       expanded="calc(100% - 51px)"
       [state]="menuState">
 
-      <div class="igo-content" *ngIf="!selectedTool">
-        <igo-toolbar></igo-toolbar>
+      <div class="igo-content" [@toolbarSlideInOut]="toolbarState">
+        <igo-toolbar *ngIf="!selectedTool"></igo-toolbar>
       </div>
 
-      <igo-panel
-        [title]="selectedTool.title | translate"
-        *ngIf="selectedTool">
+      <div [@toolSlideInOut]="toolState">
+        <igo-panel
+          *ngIf="selectedTool"
+          [title]="selectedTool.title | translate">
 
-        <button
-          md-icon-button
-          panelLeftButton
-          [md-tooltip]="'Go Back' | translate"
-          tooltip-position="below"
-          class="igo-icon-button"
-          (click)="goBack()">
-          <md-icon>arrow_back</md-icon>
-        </button>
+          <button
+            md-icon-button
+            panelLeftButton
+            [md-tooltip]="'Go Back' | translate"
+            tooltip-position="below"
+            class="igo-icon-button"
+            (click)="goBack()">
+            <md-icon>arrow_back</md-icon>
+          </button>
 
-        <button
-          md-icon-button
-          panelRightButton
-          [md-tooltip]="'Main menu' | translate"
-          tooltip-position="below"
-          class="igo-icon-button"
-          (click)="goHome()">
-          <md-icon>menu</md-icon>
-        </button>
+          <button
+            md-icon-button
+            panelRightButton
+            [md-tooltip]="'Main menu' | translate"
+            tooltip-position="below"
+            class="igo-icon-button"
+            (click)="goHome()">
+            <md-icon>menu</md-icon>
+          </button>
 
-        <igo-toolbox></igo-toolbox>
-      </igo-panel>
+          <igo-toolbox
+            *ngIf="menu.state === 'initial' || menu.state === 'expanded'">
+          </igo-toolbox>
+        </igo-panel>
+      </div>
 
       <igo-panel
         igoFlexibleFill

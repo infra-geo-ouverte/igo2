@@ -14,7 +14,8 @@ import { ContextService } from '../shared/context.service';
   templateUrl: './context-editor.component.html',
   styleUrls: ['./context-editor.component.styl']
 })
-export class ContextEditorComponent implements ToolComponent, OnInit {
+export class ContextEditorComponent
+  extends ToolComponent implements OnInit {
 
   static name_: string = 'contextEditor';
   static title: string = 'Edit Context';
@@ -24,12 +25,14 @@ export class ContextEditorComponent implements ToolComponent, OnInit {
   context?: Context;
 
   constructor(private store: Store<IgoStore>,
-              private contextService: ContextService) { }
+              private contextService: ContextService) {
+    super();
+  }
 
   ngOnInit() {
-    this.store
-      .select(s => s.editedContext)
-      .subscribe((context: Context) => this.context = context);
+    this.subscriptions.push(
+      this.store.select(s => s.editedContext)
+      .subscribe((context: Context) => this.context = context));
   }
 
   updateContext() {

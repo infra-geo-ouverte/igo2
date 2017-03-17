@@ -17,7 +17,8 @@ import { ContextService } from '../shared/context.service';
   templateUrl: './context-list.component.html',
   styleUrls: ['./context-list.component.styl']
 })
-export class ContextListComponent implements ToolComponent, OnInit {
+export class ContextListComponent
+  extends ToolComponent implements OnInit {
 
   static name_: string = 'context';
   static title: string = 'Contexts';
@@ -34,20 +35,20 @@ export class ContextListComponent implements ToolComponent, OnInit {
   private contextEditor: Tool;
   private mapEditor: Tool;
 
+
   constructor(private contextService: ContextService,
-              private store: Store<IgoStore>) { }
+              private store: Store<IgoStore>) {
+    super();
+  }
 
   ngOnInit() {
-    this.store
-      .select(s => s.tools)
-      .subscribe((tools: Tool[]) => {
-        this.contextEditor = tools.find(t => t.name === 'contextEditor');
-        this.mapEditor = tools.find(t => t.name === 'mapEditor');
-      });
+    this.subscriptions.push(
+      this.store.select(s => s.tools)
+      .subscribe((tools: Tool[]) => this.handleToolsChanged(tools)));
 
-    this.store
-      .select(s => s.activeContext)
-      .subscribe((context: Context) => this.handleActiveContext(context));
+    this.subscriptions.push(
+      this.store.select(s => s.activeContext)
+      .subscribe((context: Context) => this.handleActiveContextChanged(context)));
 
     this.contexts = this.contextService.getContexts();
   }
@@ -65,13 +66,18 @@ export class ContextListComponent implements ToolComponent, OnInit {
     }
   }
 
-  private handleActiveContext(context: Context) {
-    if (this.mapEditor !== undefined) {
-      if (this.selectedContext && this.selectedContext !== context) {
-        this.store.dispatch({type: 'SELECT_TOOL', payload: this.mapEditor});
-      }
-    }
+  private handleToolsChanged(tools: Tool[]) {
+    this.contextEditor = tools.find(t => t.name === 'contextEditor');
+    this.mapEditor = tools.find(t => t.name === 'mapEditor');
+  }
 
-    this.selectedContext = context;
+  private handleActiveContextChanged(context: Context) {
+    if (this.mapEditor !== undefined &&
+        this.selectedContext && this.selectedContext !== context) {
+      this.selectedContext = context;
+      this.store.dispatch({type: 'SELECT_TOOL', payload: this.mapEditor});
+    } else {
+      this.selectedContext = context;
+    }
   }
 }

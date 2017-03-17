@@ -1,1 +1,5 @@
-<template #target></template>
+<div
+  [@toolSlideInOut]="toolState"
+  (@toolSlideInOut.done)="selectTool()">
+  <template #target></template>
+</div>

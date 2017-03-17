@@ -4,7 +4,7 @@
   <button
     md-icon-button
     class="igo-icon-button"
-    (click)="editContext.emit(context)"
+    (click)="handleEditButtonClick($event)"
     *ngIf="edition"
     [md-tooltip]="'Edit Context' | translate"
     tooltip-position="below">

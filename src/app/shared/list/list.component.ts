@@ -1,8 +1,8 @@
-import { Component, AfterViewInit, OnDestroy, OnInit,
+import { Component, AfterViewInit, OnInit,
          QueryList, Input, ContentChildren, HostListener,
          ElementRef } from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
+import { Observer } from '../../utils/observer';
 
 import { ListItemDirective } from './list-item.directive';
 
@@ -11,12 +11,12 @@ import { ListItemDirective } from './list-item.directive';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.styl']
 })
-export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
+export class ListComponent
+  extends Observer implements AfterViewInit, OnInit {
 
   navigationEnabled: boolean;
   selectedItem: ListItemDirective;
   focusedItem: ListItemDirective;
-  subscriptions: Subscription[] = [];
 
   @Input() navigation: boolean = true;
   @Input() selection: boolean = true;
@@ -39,7 +39,9 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef) {
+    super();
+  }
 
   ngOnInit() {
     this.enableNavigation();
@@ -53,10 +55,6 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
     this.listItems.changes.subscribe((items: ListItemDirective[]) => {
       this.init();
     });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe();
   }
 
   focus(item?: ListItemDirective) {
@@ -158,11 +156,6 @@ export class ListComponent implements AfterViewInit, OnDestroy, OnInit {
       this.subscriptions.push(item.clickItem.subscribe(
         (item_: ListItemDirective) => this.select(item_)));
     }, this);
-  }
-
-  private unsubscribe() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-    this.subscriptions = [];
   }
 
   private findSelectedItem() {

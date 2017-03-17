@@ -14,6 +14,11 @@ export class ContextListItemComponent {
 
   @Output() editContext: EventEmitter<Context> = new EventEmitter();
 
+  handleEditButtonClick(event: MouseEvent) {
+    event.stopPropagation();
+    this.editContext.emit(this.context);
+  }
+
   constructor() { }
 
 }

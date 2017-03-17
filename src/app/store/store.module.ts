@@ -10,7 +10,7 @@ import {
   map,
   layers,
   tools,
-  selectedTool,
+  toolHistory,
   searchResults,
   selectedResult,
   focusedResult
@@ -24,7 +24,7 @@ export function provideIgoStore() {
     map: map,
     layers: layers,
     tools: tools,
-    selectedTool: selectedTool,
+    toolHistory: toolHistory,
     searchResults: searchResults,
     selectedResult: selectedResult,
     focusedResult: focusedResult
