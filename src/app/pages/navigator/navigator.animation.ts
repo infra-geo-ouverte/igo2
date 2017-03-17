@@ -12,8 +12,8 @@ export const toolbarSlideInOut = trigger('toolbarSlideInOut', [
     transform: 'translate3d(-100%, 0, 0)',
     display: 'none'
   })),
-  transition('in => out', animate(`0ms ${transitionType}`)),
-  transition('out => in', animate(`${transitionSpeed} ${transitionType}`))
+  transition('in => out', animate(['0ms', transitionType].join(' '))),
+  transition('out => in', animate([transitionSpeed, transitionType].join(' ')))
 ]);
 
 export const toolSlideInOut = trigger('toolSlideInOut', [
@@ -25,6 +25,6 @@ export const toolSlideInOut = trigger('toolSlideInOut', [
     transform: 'translate3d(0, 0, 0)',
     display: 'block'
   })),
-  transition('in => out', animate(`${transitionSpeed} ${transitionType}`)),
-  transition('out => in', animate(`${transitionSpeed} ${transitionType}`))
+  transition('in => out', animate([transitionSpeed, transitionType].join(' '))),
+  transition('out => in', animate([transitionSpeed, transitionType].join(' ')))
 ]);
