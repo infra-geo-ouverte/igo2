@@ -8,7 +8,9 @@ export function toolHistory(state: Tool[] = [], {type, payload}) {
         return state;
       }
 
-      return new Array(...state, Object.assign({}, payload));
+      return state
+        .filter(t => t.name !== payload.name)
+        .concat([Object.assign({}, payload)]);
     case 'SELECT_PREVIOUS_TOOL':
       return state.slice(0, -1);
     case 'UNSELECT_TOOL':
