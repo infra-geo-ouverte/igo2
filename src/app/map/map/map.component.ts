@@ -123,7 +123,7 @@ export class MapComponent
         if (layerAlreadyExists !== undefined) {
           layerAlreadyExists.visible = true;
         } else {
-          this.map.addLayer(layer)
+          this.map.addLayer(layer);
         }
       }
     );
