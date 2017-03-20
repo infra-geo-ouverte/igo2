@@ -33,7 +33,7 @@
         <igo-toolbar *ngIf="!selectedTool"></igo-toolbar>
       </div>
 
-      <div [@toolSlideInOut]="toolState">
+      <div class="igo-content" [@toolSlideInOut]="toolState">
         <igo-panel
           *ngIf="selectedTool"
           [title]="selectedTool.title | translate">
@@ -58,9 +58,7 @@
             <md-icon>menu</md-icon>
           </button>
 
-          <igo-toolbox
-            *ngIf="menu.state === 'initial' || menu.state === 'expanded'">
-          </igo-toolbox>
+          <igo-toolbox></igo-toolbox>
         </igo-panel>
       </div>
 
