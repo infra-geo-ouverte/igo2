@@ -1,3 +1,4 @@
+import { Md5 } from 'ts-md5/dist/md5';
 import { Layer, LayerOptions} from './layer';
 
 export interface WMTSLayerOptions extends LayerOptions {
@@ -48,4 +49,12 @@ export class WMTSLayer extends Layer {
 
     return new ol.layer.Tile(layerOptions);
   }
+
+  protected createId() {
+    const layer = this.options.source['layer'];
+    const matrixSet = this.options.source['matrixSet'];
+    const chaine = this.options.type + this.options.source.url + matrixSet + layer;
+    return Md5.hashStr(chaine) as string;
+  }
+
 }

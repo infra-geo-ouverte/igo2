@@ -1,3 +1,4 @@
+import { Md5 } from 'ts-md5/dist/md5';
 import { Layer, LayerOptions } from './layer';
 
 export interface XYZLayerOptions extends LayerOptions {
@@ -17,5 +18,10 @@ export class XYZLayer extends Layer {
     });
 
     return new ol.layer.Tile(olLayerOptions);
+  }
+
+  protected createId() {
+    const chaine = this.options.type + this.options.source.url;
+    return Md5.hashStr(chaine) as string;
   }
 }

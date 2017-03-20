@@ -1,3 +1,4 @@
+import { Md5 } from 'ts-md5/dist/md5';
 import { Layer, LayerOptions, LayerLegendOptions} from './layer';
 
 export interface DataUrl {
@@ -42,6 +43,12 @@ export class WMSLayer extends Layer {
     return new ol.layer.Image(layerOptions);
   }
 
+  protected createId() {
+    const layers = this.options.source.params['layers'];
+    const chaine = this.options.type + this.options.source.url + layers;
+    return Md5.hashStr(chaine) as string;
+  }
+
   getLegend(): LayerLegendOptions[] {
     let legend = super.getLegend();
     if (legend.length > 0) {
@@ -73,5 +80,4 @@ export class WMSLayer extends Layer {
 
     return legend;
   }
-
 }

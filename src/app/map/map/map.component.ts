@@ -6,6 +6,7 @@ import { IgoStore } from '../../store/store';
 import { Observer } from '../../utils/observer';
 import { SearchResult } from '../../search/shared/search-result.interface';
 import { SearchResultType } from '../../search/shared/search-result.enum';
+import { Tool } from '../../tool/shared/tool.interface';
 
 import { IgoMap } from '../shared/map';
 import { MapService } from '../shared/map.service';
@@ -24,12 +25,14 @@ export class MapComponent
 
   map: IgoMap;
   id: string = 'igo-map-target';
+  private mapEditor: Tool;
 
   constructor(private store: Store<IgoStore>,
               private mapService: MapService,
               private layerService: LayerService) {
     super();
   }
+
 
   ngOnInit() {
     this.map = this.mapService.getMap();
@@ -56,6 +59,11 @@ export class MapComponent
         .filter(r => r !== null)
         .subscribe((result: SearchResult) =>
           this.handleSelectedResult(result)));
+
+    this.subscriptions.push(
+      this.store.select(s => s.tools)
+        .subscribe((tools: Tool[]) =>
+          this.mapEditor = tools.find(t => t.name === 'mapEditor')));
   }
 
   ngAfterViewInit(): any {
@@ -108,9 +116,19 @@ export class MapComponent
       type: 'wms',
       title: result.properties['title']
     };
+
     this.layerService.createLayer(layerOptions).subscribe(
-      layer => this.map.addLayer(layer)
+      layer => {
+        const layerAlreadyExists = this.map.getLayerById(layer.id);
+        if (layerAlreadyExists !== undefined) {
+          layerAlreadyExists.visible = true;
+        } else {
+          this.map.addLayer(layer)
+        }
+      }
     );
+
+    this.store.dispatch({type: 'SELECT_TOOL', payload: this.mapEditor});
   }
 
   private handleFeatureResult(result: SearchResult, zoom: boolean = false) {

@@ -18,4 +18,8 @@ export class OSMLayer extends Layer {
 
     return new ol.layer.Tile(olLayerOptions);
   }
+
+  protected createId() {
+    return 'OSM';
+  }
 }
