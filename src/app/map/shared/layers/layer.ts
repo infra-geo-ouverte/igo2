@@ -1,10 +1,15 @@
+import {
+  TimeFilterOptions
+} from '../../../analysis/time-analyser-form/time-analyser-form.component';
+
 export interface LayerOptions extends olx.layer.BaseOptions {
   title: string;
   type: string;
   alias?: string;
+  zIndex?: number;
   visible?: boolean;
   legend?: LayerLegendOptions;
-  zIndex?: number;
+  timeFilter?: TimeFilterOptions;
 }
 
 export interface LayerLegendOptions {
@@ -26,6 +31,10 @@ export abstract class Layer {
 
   get title (): string {
     return this.options.alias ? this.options.alias : this.options.title;
+  }
+
+  set title (title: string) {
+    this.options.title = title;
   }
 
   get zIndex (): number {
@@ -81,6 +90,10 @@ export abstract class Layer {
 
   getLegend(): LayerLegendOptions[] {
     return this.options.legend ? [this.options.legend] : [];
+  }
+
+  applyDateFilter(date: Date | [Date, Date]) {
+    return;
   }
 
 }
