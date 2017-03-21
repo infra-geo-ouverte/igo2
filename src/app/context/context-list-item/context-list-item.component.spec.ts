@@ -27,7 +27,7 @@ describe('ContextItemComponent', () => {
 
   it('should create', () => {
     component.context = {
-      name: 'foo',
+      uri: 'foo',
       title: 'bar'
     };
     expect(component).toBeTruthy();
