@@ -44,7 +44,7 @@
     "reinstall": "npm run clean && npm cache clean && npm prune && npm install",
     "clean": "rimraf ./dist",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "preversion": "npm tests.all && npm run clean && npm run build.prod",
+    "preversion": "npm run tests.all && npm run clean && npm run build.prod",
     "version": "npm run changelog && git add -A CHANGELOG.md",
     "postversion": "git push && git push --tags && rimraf igo2.zip && cd ./dist/prod/ && zip -r ../igo2.zip ./*"
   },
