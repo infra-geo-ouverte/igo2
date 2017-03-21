@@ -34,7 +34,7 @@
     "mapEditor",
     "layers",
     "directions",
-    "historicalAnalysis",
+    "timeAnalyser",
     "print",
     "measure"
   ],
@@ -62,9 +62,7 @@
       "icon": "directions"
     },
     {
-      "name": "historicalAnalysis",
-      "title": "Historical Analysis",
-      "icon": "history"
+      "name": "timeAnalyser"
     },
     {
       "name": "print",

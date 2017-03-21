@@ -1,9 +1,11 @@
 {
   "Alias": "Alias",
   "Contexts": "Vos contextes",
+  "Date": "Date",
   "Description": "Description",
   "Edit Context": "Modifier contexte",
   "Edit Layer": "Modifier couche",
+  "Start Date": "Date de fin",
   "Map": "Carte",
   "Go Back": "Revenir",
   "Open Menu": "Afficher le menu",
@@ -29,7 +31,9 @@
   "Search Results": "Résultats de recherche",
   "Search for an address or a place": "Rechercher une adresse, un lieu ou une couche",
   "Search disabled": "L'outil de recherche est désactivé dans ce contexte",
+  "Start Date": "Date de début",
   "Show Layer": "Afficher couche",
+  "Time Analysis": "Analyse Temporelle",
   "Title": "Titre",
 
   "noLegendText": "Aucune légende disponible pour cette couche",
