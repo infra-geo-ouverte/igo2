@@ -52,9 +52,8 @@ export class WMTSLayer extends Layer {
 
   protected createId() {
     const layer = this.options.source['layer'];
-    const matrixSet = this.options.source['matrixSet'];
-    const chaine = this.options.type + this.options.source.url + matrixSet + layer;
-    return Md5.hashStr(chaine) as string;
+    const chain = this.options.type + this.options.source.url + layer;
+    return Md5.hashStr(chain) as string;
   }
 
 }
