@@ -11,11 +11,8 @@
   
 .. |igo2| replace:: :mod:`IGO-2.0`
 .. _igo2: https://github.com/infra-geo-ouverte/igo2/
-.. |openlayers| replace:: :mod:`OpenLayers 3`
+.. |openlayers| replace:: :mod:`OpenLayers 4`
 .. _openlayers: https://openlayers.org/
 .. |ang2| replace:: :mod:`Angular 2`
 .. _ang2: https://angular.io/
-.. |bootstr| replace:: :mod:`Bootstrap 3`
-.. _bootstr: http://getbootstrap.com/
 .. |igo-logo| image:: images/1b-logo_toutbleu_txtnoir.png
-
