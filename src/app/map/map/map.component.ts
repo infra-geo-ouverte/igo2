@@ -119,9 +119,9 @@ export class MapComponent
 
     this.layerService.createLayer(layerOptions).subscribe(
       layer => {
-        const layerAlreadyExists = this.map.getLayerById(layer.id);
-        if (layerAlreadyExists !== undefined) {
-          layerAlreadyExists.visible = true;
+        const existingLayer = this.map.getLayerById(layer.id);
+        if (existingLayer !== undefined) {
+          existingLayer.visible = true;
         } else {
           this.map.addLayer(layer);
         }
