@@ -53,10 +53,32 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
         "params" : {"LAYERS": "nom_couche_wms_layername",
                     "VERSION": "1.1.1"}
       }
-    }
+},
+{
+      "title": "LayerfromCapabilities",
+      "type": "wms",
+      "optionsFromCapabilities": true,
+      "alias": "États-Unis",
+      "source": {
+        "url": "http://demo.boundlessgeo.com/geoserver/wms",
+        "params": {
+          "layers": "topp:states",
+          "version": "1.3.0"
+        },
+       "serverType": "geoserver"
+      }
+}
   ],
-
-
+  "toolbar": [
+    "search",
+    "context",
+    "mapEditor",
+    "layers",
+    "directions",
+    "historicalAnalysis",
+    "print",
+    "measure"
+  ],
   "tools": [
     {
       "name": "context",
@@ -67,9 +89,7 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       "name": "search"
     },
     {
-      "name": "map",
-      "title": "Map",
-      "icon": "map"
+      "name": "mapEditor"
     },
     {
       "name": "add_layers",
