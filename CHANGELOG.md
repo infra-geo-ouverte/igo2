@@ -1,5 +1,22 @@
+<a name="0.5.1"></a>
+## [0.5.1](https://github.com/infra-geo-ouverte/igo2/compare/0.5.0...v0.5.1) (2017-03-21)
+
+
+### Bug Fixes
+
+* package.json & .snyk to reduce vulnerabilities ([#170](https://github.com/infra-geo-ouverte/igo2/issues/170)) ([f1cca8d](https://github.com/infra-geo-ouverte/igo2/commit/f1cca8d))
+* package.json & .snyk to reduce vulnerabilities ([#171](https://github.com/infra-geo-ouverte/igo2/issues/171)) ([c678440](https://github.com/infra-geo-ouverte/igo2/commit/c678440))
+* **tool history:** Prevent the same tool from appearing more than once in the tool history ([#174](https://github.com/infra-geo-ouverte/igo2/issues/174)) ([d6df0eb](https://github.com/infra-geo-ouverte/igo2/commit/d6df0eb))
+
+
+### Features
+
+* **search-layer:** verify if the layer is already added and redirect… ([#175](https://github.com/infra-geo-ouverte/igo2/issues/175)) ([5c43f8f](https://github.com/infra-geo-ouverte/igo2/commit/5c43f8f))
+
+
+
 <a name="0.5.0"></a>
-# [0.5.0](https://github.com/infra-geo-ouverte/igo2/compare/0.4.0...v0.5.0) (2017-03-16)
+# [0.5.0](https://github.com/infra-geo-ouverte/igo2/compare/0.4.0...0.5.0) (2017-03-16)
 
 
 ### Bug Fixes
