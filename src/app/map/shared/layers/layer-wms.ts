@@ -80,4 +80,22 @@ export class WMSLayer extends Layer {
 
     return legend;
   }
+
+  applyDateFilter(date: Date | [Date, Date]) {
+    const dates = [];
+    if (Array.isArray(date)) {
+      if (date[0] !== undefined) {
+        dates.push(date[0]);
+      }
+
+      if (date[1] !== undefined) {
+        dates.push(date[1]);
+      }
+    } else if (date !== undefined) {
+      dates.push(date);
+    }
+
+    const source = this.getSource() as ol.source.ImageWMS;
+    source.updateParams({'time': dates.map(d => d.toISOString()).join('/')});
+  }
 }
