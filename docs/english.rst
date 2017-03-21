@@ -71,10 +71,32 @@ Parameters related to JSON :
         "params" : {"LAYERS": "layername_wms",
                     "VERSION": "1.1.1"}
       }
-    }
+    },
+{
+      "title": "LayerfromCapabilities",
+      "type": "wms",
+      "optionsFromCapabilities": true,
+      "alias": "US-States",
+      "source": {
+        "url": "http://demo.boundlessgeo.com/geoserver/wms",
+        "params": {
+          "layers": "topp:states",
+          "version": "1.3.0"
+        },
+       "serverType": "geoserver"
+      }
+}
   ],
-
-
+  "toolbar": [
+    "search",
+    "context",
+    "mapEditor",
+    "layers",
+    "directions",
+    "historicalAnalysis",
+    "print",
+    "measure"
+  ],
   "tools": [
     {
       "name": "context",
@@ -85,9 +107,7 @@ Parameters related to JSON :
       "name": "search"
     },
     {
-      "name": "map",
-      "title": "Map",
-      "icon": "map"
+      "name": "mapEditor"
     },
     {
       "name": "add_layers",
