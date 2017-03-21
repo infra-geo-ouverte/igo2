@@ -45,8 +45,8 @@ export class WMSLayer extends Layer {
 
   protected createId() {
     const layers = this.options.source.params['layers'];
-    const chaine = this.options.type + this.options.source.url + layers;
-    return Md5.hashStr(chaine) as string;
+    const chain = this.options.type + this.options.source.url + layers;
+    return Md5.hashStr(chain) as string;
   }
 
   getLegend(): LayerLegendOptions[] {
