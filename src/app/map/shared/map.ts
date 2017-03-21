@@ -104,6 +104,16 @@ export class IgoMap {
     this.layers.next(this._layers);
   }
 
+  getLayers(): Layer[] {
+    return this._layers;
+  }
+
+  getLayerById(id: string): Layer {
+    return this.getLayers().find(layer => {
+      return layer.id && layer.id === id;
+    });
+  }
+
   removeLayer(layer: Layer) {
     const index = this.getLayerIndex(layer);
     if (index >= 0) {

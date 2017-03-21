@@ -20,6 +20,8 @@ export abstract class Layer {
 
   public collapsed: boolean;
 
+  public id: string;
+
   protected olLayer: ol.layer.Layer;
 
   get title (): string {
@@ -62,9 +64,12 @@ export abstract class Layer {
 
     const legend = options.legend || {};
     this.collapsed = legend.collapsed === undefined ? true : !this.visible;
+
+    this.id = this.createId();
   }
 
   protected abstract createOlLayer(): ol.layer.Layer;
+  protected abstract createId(): string;
 
   getOlLayer() {
     return this.olLayer;
@@ -77,4 +82,5 @@ export abstract class Layer {
   getLegend(): LayerLegendOptions[] {
     return this.options.legend ? [this.options.legend] : [];
   }
+
 }
