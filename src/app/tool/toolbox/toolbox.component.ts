@@ -59,8 +59,16 @@ export class ToolboxComponent
     this.createComponent();
   }
 
-  selectTool() {
-    this.selectedTool = this.toolHistory[this.toolHistory.length - 1];
+  private handleToolHistoryChanged(toolHistory?: Tool[]) {
+    const depth = toolHistory.length;
+    this.toolState = depth > this.toolHistory.length ? 'right' : 'left';
+
+    this.toolHistory = toolHistory;
+    this.selectTool(toolHistory[toolHistory.length - 1]);
+  }
+
+  private selectTool(tool: Tool) {
+    this.selectedTool = tool;
 
     if (this.viewInitialized) {
       if (this.selectedTool) {
@@ -69,12 +77,8 @@ export class ToolboxComponent
         this.destroyComponent();
       }
     }
-  }
 
-  private handleToolHistoryChanged(toolHistory?: Tool[]) {
-    const depth = toolHistory.length;
-    this.toolState = depth > this.toolHistory.length ? 'left' : 'right';
-    this.toolHistory = toolHistory;
+    this.toolState = 'center';
   }
 
   private createComponent() {
@@ -104,7 +108,6 @@ export class ToolboxComponent
     this.component.instance.name = tool.name;
     this.component.instance.options = tool.options;
 
-    this.toolState = 'center';
     this.cdRef.detectChanges();
   }
 
