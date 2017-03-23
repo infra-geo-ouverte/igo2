@@ -70,7 +70,7 @@ export class WMSLayer
     return new ol.layer.Image(layerOptions);
   }
 
-  protected createId() {
+  protected generateId() {
     const layers = this.params.layers;
     const chain = this.options.type + this.options.source.url + layers;
 

@@ -9,7 +9,11 @@ import { SearchResult } from '../shared/search-result.interface';
 import { SearchResultType } from '../shared/search-result.enum';
 
 
-@Register()
+@Register({
+  name: 'search',
+  title: 'Search Results',
+  icon: 'search'
+})
 @Component({
   selector: 'igo-search-tool',
   templateUrl: './search-tool.component.html',
@@ -18,13 +22,9 @@ import { SearchResultType } from '../shared/search-result.enum';
 export class SearchToolComponent
   extends ToolComponent implements OnInit {
 
-  static name_: string = 'search';
-  static title: string = 'Search Results';
-  static icon: string = 'search';
-  static defaultOptions: any = {};
+  public focusedResult?: SearchResult;
 
   private sourceResults: [string, SearchResult[]];
-  focusedResult?: SearchResult;
 
   constructor(private store: Store<IgoStore>) {
     super();

@@ -63,6 +63,7 @@ export abstract class Layer {
 
   constructor(options: LayerOptions) {
     this.options = options;
+    this.id = this.generateId();
 
     this.olLayer = this.createOlLayer();
     if (options.zIndex !== undefined) {
@@ -72,13 +73,11 @@ export abstract class Layer {
     const legend = options.legend || {};
     this.visible = options.visible === undefined ? true : options.visible;
     this.collapsed = legend.collapsed === undefined ? true : !this.visible;
-
-    this.id = this.createId();
   }
 
   protected abstract createOlLayer(): ol.layer.Layer;
 
-  protected abstract createId(): string;
+  protected abstract generateId(): string;
 
   addToMap(map: IgoMap) {
     this.map = map;

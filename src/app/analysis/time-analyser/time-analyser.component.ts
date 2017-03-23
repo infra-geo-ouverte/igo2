@@ -6,7 +6,11 @@ import { Register } from '../../tool/shared/tool.service';
 import { MapService } from '../../map/shared/map.service';
 import { IgoMap } from '../../map/shared/map';
 
-@Register()
+@Register({
+  name: 'timeAnalyser',
+  title: 'Time Analysis',
+  icon: 'history'
+})
 @Component({
   selector: 'igo-time-analyser',
   templateUrl: './time-analyser.component.html',
@@ -14,11 +18,6 @@ import { IgoMap } from '../../map/shared/map';
 })
 export class TimeAnalyserComponent
   extends ToolComponent implements OnInit {
-
-  static name_: string = 'timeAnalyser';
-  static title: string = 'Time Analysis';
-  static icon: string = 'history';
-  static defaultOptions: any = {};
 
   public map: IgoMap;
 

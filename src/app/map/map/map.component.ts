@@ -12,7 +12,7 @@ import { IgoMap } from '../shared/map';
 import { MapService } from '../shared/map.service';
 import { QueryService } from '../shared/query.service';
 import { LayerService } from '../shared/layer.service';
-import { Layer, LayerOptions, WMSLayerOptions } from '../shared/layers';
+import { Layer, LayerOptions } from '../shared/layers';
 import { MapOptions } from '../shared/map';
 
 @Component({
@@ -117,7 +117,7 @@ export class MapComponent
   }
 
   private handleLayerResult(result: SearchResult) {
-    const layerOptions: WMSLayerOptions = {
+    const layerOptions = {
       source: {
         url: result.properties['url'],
         projection: this.map.getProjection(),
@@ -129,17 +129,7 @@ export class MapComponent
       title: result.properties['title']
     };
 
-    this.layerService.createLayer(layerOptions).subscribe(
-      layer => {
-        const existingLayer = this.map.getLayerById(layer.id);
-        if (existingLayer !== undefined) {
-          existingLayer.visible = true;
-        } else {
-          this.map.addLayer(layer);
-        }
-      }
-    );
-
+    this.store.dispatch({type: 'ADD_LAYER', payload: layerOptions});
     this.store.dispatch({type: 'SELECT_TOOL', payload: this.mapEditor});
   }
 

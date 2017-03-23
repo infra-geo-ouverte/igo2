@@ -3,40 +3,38 @@ import { Injectable } from '@angular/core';
 import { Tool } from './tool.interface';
 import { ToolComponent } from './tool-component';
 
-export function Register() {
+export function Register(toolDef: Tool) {
   return function(cls) {
-    ToolService.register(cls);
+    ToolService.register(cls, toolDef);
   };
 }
 
 @Injectable()
 export class ToolService {
 
-  static toolClasses: Array<typeof ToolComponent> = [];
-  static tools: Array<Tool> = [];
+  static tools: {[key: string]: [Tool, (typeof ToolComponent)]} = {};
 
-  static register(cls: any) {
-    const tool = {
-      name: cls.name_,
-      title: cls.title,
-      icon: cls.icon
-    };
+  static register(cls: any, toolDef: Tool) {
+    const tool = Object.assign({}, toolDef);
 
     if (cls.toolbar !== undefined) {
       tool['toolbar'] = cls.toolbar;
     }
 
-    ToolService.tools.push(tool);
-    ToolService.toolClasses.push(cls);
+    ToolService.tools[tool.name] = [tool, cls];
   }
 
   constructor() {}
 
   getTool(name: string) {
-    return ToolService.tools.find(t => t.name === name);
+    const tool = ToolService.tools[name];
+
+    return tool === undefined ? undefined : tool[0];
   }
 
   getToolClass(name: string) {
-    return ToolService.toolClasses.find(t => t.name_ === name);
+    const tool = ToolService.tools[name];
+
+    return tool === undefined ? undefined : tool[1];
   }
 }

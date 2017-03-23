@@ -15,7 +15,7 @@ export class VectorLayer extends Layer {
     return new ol.layer.Vector(olLayerOptions);
   }
 
-  protected createId() {
+  protected generateId() {
     return undefined;
   }
 
