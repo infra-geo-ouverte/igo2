@@ -10,11 +10,10 @@ import { ToolService } from '../../tool/shared/tool.service';
 
 import { RequestService } from '../../core/request.service';
 
-import { LayerOptions } from '../../map/shared/layers/layer';
+import { LayerOptions } from '../../map/shared/layers';
 import { MapViewOptions } from '../../map/shared/map';
 
-import { Context } from './context.interface';
-import { DetailedContext } from './detailed-context.interface';
+import { Context, DetailedContext } from './context.interface';
 
 @Injectable()
 export class ContextService {

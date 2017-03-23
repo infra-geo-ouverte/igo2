@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Layer, LayerLegendOptions } from '../shared/layers/layer';
+import { Layer, LayerLegendOptions } from '../shared/layers';
 
 @Component({
   selector: 'igo-layer-legend',

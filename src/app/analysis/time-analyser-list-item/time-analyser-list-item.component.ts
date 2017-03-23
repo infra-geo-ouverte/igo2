@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Layer } from '../../map/shared/layers/layer';
+import { FilterableLayer } from '../../map/shared/layers';
 
 @Component({
   selector: 'igo-time-analyser-list-item',
@@ -9,7 +9,7 @@ import { Layer } from '../../map/shared/layers/layer';
 })
 export class TimeAnalyserListItemComponent implements OnInit {
 
-  @Input() layer: Layer;
+  @Input() layer: FilterableLayer;
 
   constructor() { }
 
@@ -17,7 +17,7 @@ export class TimeAnalyserListItemComponent implements OnInit {
   }
 
   handleDateChange(date: Date | [Date, Date]) {
-    this.layer.applyDateFilter(date);
+    this.layer.filterByDate(date);
   }
 
 }

@@ -24,7 +24,7 @@ export class TimeAnalyserListComponent
   ngOnInit() {
     this.map.layers.subscribe((layers: Layer[]) => {
       this.layers = layers.filter(layer =>
-        layer.options.timeFilter !== undefined);
+        layer.filterable && layer.options.timeFilter !== undefined);
     });
   }
 

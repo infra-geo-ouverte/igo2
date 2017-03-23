@@ -4,12 +4,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { CapabilitiesService } from './capabilities.service';
 
-import { Layer, LayerOptions } from './layers/layer';
-import { OSMLayer, OSMLayerOptions } from './layers/layer-osm';
-import { VectorLayer, VectorLayerOptions } from './layers/layer-vector';
-import { XYZLayer, XYZLayerOptions } from './layers/layer-xyz';
-import { WMTSLayer, WMTSLayerOptions } from './layers/layer-wmts';
-import { WMSLayer, WMSLayerOptions } from './layers/layer-wms';
+import { Layer, LayerOptions,
+         OSMLayer, OSMLayerOptions,
+         VectorLayer, VectorLayerOptions,
+         XYZLayer, XYZLayerOptions,
+         WMTSLayer, WMTSLayerOptions,
+         WMSLayer, WMSLayerOptions } from './layers';
 
 @Injectable()
 export class LayerService {

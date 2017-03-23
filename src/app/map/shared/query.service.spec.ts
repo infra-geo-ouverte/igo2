@@ -2,21 +2,21 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { TestModule } from '../../test.module';
 
-import { MapService } from './map.service';
+import { QueryService } from './query.service';
 
-describe('MapService', () => {
+describe('QueryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         TestModule
       ],
       providers: [
-        MapService
+        QueryService
       ]
     });
   });
 
-  it('should ...', inject([MapService], (service: MapService) => {
+  it('should ...', inject([QueryService], (service: QueryService) => {
     expect(service).toBeTruthy();
   }));
 });

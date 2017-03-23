@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { Layer, LayerOptions } from '../shared/layers/layer';
+import { Layer, LayerOptions } from '../shared/layers';
 
 @Component({
   selector: 'igo-layer-form',

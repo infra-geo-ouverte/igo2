@@ -1,16 +1,10 @@
-import { Layer, LayerOptions } from './layer';
-
-export interface VectorLayerOptions extends LayerOptions {
-  source?: olx.source.VectorOptions;
-  view?: olx.layer.VectorOptions;
-  style?: olx.style.StyleOptions;
-}
+import { Layer } from './layer';
+import { VectorLayerOptions } from './layer-vector.interface';
 
 export class VectorLayer extends Layer {
 
   public options: VectorLayerOptions;
-
-  protected olLayer: ol.layer.Vector;
+  public olLayer: ol.layer.Vector;
 
   protected createOlLayer(): ol.layer.Vector {
     const olLayerOptions = Object.assign(this.options.view || {}, {

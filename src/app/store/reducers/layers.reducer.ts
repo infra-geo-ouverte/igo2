@@ -1,4 +1,4 @@
-import { LayerOptions } from '../../map/shared/layers/layer';
+import { LayerOptions } from '../../map/shared/layers';
 
 export function layers(state: Array<LayerOptions> = [], {type, payload}) {
   switch (type) {
