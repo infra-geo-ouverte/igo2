@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MapService } from './shared/map.service';
-import { LayerService } from './shared/layer.service';
 import { CapabilitiesService } from './shared/capabilities.service';
+import { LayerService } from './shared/layer.service';
+import { MapService } from './shared/map.service';
+import { QueryService } from './shared/query.service';
+
 import { MapComponent } from './map/map.component';
 import { ZoomComponent } from './zoom/zoom.component';
 import { MapEditorComponent } from './map-editor/map-editor.component';
@@ -35,9 +37,10 @@ import { LayerLegendComponent } from './layer-legend/layer-legend.component';
     LayerEditorComponent
   ],
   providers: [
+    CapabilitiesService,
     LayerService,
     MapService,
-    CapabilitiesService
+    QueryService
   ]
 })
 export class MapModule { }

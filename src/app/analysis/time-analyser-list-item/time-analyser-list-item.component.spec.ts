@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { OSMLayer } from '../../map/shared/layers/layer-osm';
+import { WMSLayer } from '../../map/shared/layers/layer-wms';
 
 import { TimeAnalyserListItemComponent } from './time-analyser-list-item.component';
 import {
@@ -32,9 +32,16 @@ describe('TimeAnalyserItemComponent', () => {
   });
 
   it('should create', () => {
-    const layer = new OSMLayer({
-      title: 'OSM',
-      type: 'osm',
+    const layer = new WMSLayer({
+      title: 'WMS',
+      type: 'wms',
+      source: {
+        url: 'foo',
+        projection: 'EPSG:3857',
+        params: {
+          layers: 'bar'
+        }
+      },
       timeFilter: {
         min: '2017-01-01',
         max: '2017-01-31'

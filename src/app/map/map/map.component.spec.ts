@@ -6,7 +6,9 @@ import { TestModule } from '../../test.module';
 
 import { MapService } from '../shared/map.service';
 import { LayerService } from '../shared/layer.service';
+import { QueryService } from '../shared/query.service';
 import { CapabilitiesService } from '../shared/capabilities.service';
+
 import { IgoMap } from '../shared/map';
 import { ZoomComponent } from '../zoom/zoom.component';
 import { MapComponent } from './map.component';
@@ -35,6 +37,7 @@ describe('MapComponent', () => {
         {provide: Http, useValue: mockHttpProvider},
         MapService,
         LayerService,
+        QueryService,
         CapabilitiesService
       ]
     })

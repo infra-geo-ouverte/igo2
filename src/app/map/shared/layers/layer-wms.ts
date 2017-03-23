@@ -1,23 +1,30 @@
 import { Md5 } from 'ts-md5/dist/md5';
-import { Layer, LayerOptions, LayerLegendOptions} from './layer';
 
-export interface DataUrl {
-  format: string;
-  onlineResource: string;
-}
+import { Layer } from './layer';
+import { LayerLegendOptions, QueryableLayer,
+         FilterableLayer } from './layer.interface';
+import { WMSLayerOptions } from './layer-wms.interface';
+import { QueryFormat } from '../query.service';
 
-export interface WMSLayerOptions extends LayerOptions {
-  source: olx.source.ImageWMSOptions;
-  view?: olx.layer.TileOptions;
-  dataUrl?: DataUrl;
-  optionsFromCapabilities?: boolean;
-}
-
-export class WMSLayer extends Layer {
+export class WMSLayer
+  extends Layer implements QueryableLayer, FilterableLayer {
 
   public options: WMSLayerOptions;
+  public olLayer: ol.layer.Image;
 
-  protected olLayer: ol.layer.Tile;
+  private queryInfoFormat: string;
+
+  get params(): any {
+    return this.options.source.params as any;
+  }
+
+  get queryFormat(): QueryFormat {
+    return this.options.queryFormat ? this.options.queryFormat : QueryFormat.GML2;
+  }
+
+  get queryTitle(): string {
+    return this.options.queryTitle ? this.options.queryTitle : 'title';
+  }
 
   constructor(options: WMSLayerOptions) {
     // Important: To use wms versions smaller than 1.3.0, SRS
@@ -31,6 +38,26 @@ export class WMSLayer extends Layer {
     }
 
     super(options);
+
+    let queryInfoFormat;
+    switch (this.queryFormat) {
+      case QueryFormat.GML2:
+        queryInfoFormat = 'application/vnd.ogc.gml';
+        break;
+      case QueryFormat.GML3:
+        queryInfoFormat = 'application/vnd.ogc.gml/3.1.1';
+        break;
+      case QueryFormat.JSON:
+        queryInfoFormat = 'application/json';
+        break;
+      case QueryFormat.TEXT:
+        queryInfoFormat = 'text/plain';
+        break;
+      default:
+        break;
+    }
+
+    this.queryInfoFormat = queryInfoFormat;
   }
 
   protected createOlLayer(): ol.layer.Image {
@@ -44,8 +71,9 @@ export class WMSLayer extends Layer {
   }
 
   protected createId() {
-    const layers = this.options.source.params['layers'];
+    const layers = this.params.layers;
     const chain = this.options.type + this.options.source.url + layers;
+
     return Md5.hashStr(chain) as string;
   }
 
@@ -55,7 +83,7 @@ export class WMSLayer extends Layer {
       return legend;
     }
 
-    const sourceParams = this.options.source.params || {} as any;
+    const sourceParams = this.params;
 
     let layers = [];
     if (sourceParams.layers !== undefined) {
@@ -81,7 +109,22 @@ export class WMSLayer extends Layer {
     return legend;
   }
 
-  applyDateFilter(date: Date | [Date, Date]) {
+  getQueryUrl(coordinates: [number, number]): string {
+    const view = this.map.olMap.getView();
+    const source = this.source as ol.source.ImageWMS;
+
+    const url = source.getGetFeatureInfoUrl(
+      coordinates,
+      view.getResolution(),
+      this.map.getProjection(), {
+        'INFO_FORMAT': this.queryInfoFormat,
+        'QUERY_LAYERS': this.params.layers
+      });
+
+    return url;
+  }
+
+  filterByDate(date: Date | [Date, Date]) {
     const dates = [];
     if (Array.isArray(date)) {
       if (date[0] !== undefined) {
@@ -95,7 +138,7 @@ export class WMSLayer extends Layer {
       dates.push(date);
     }
 
-    const source = this.getSource() as ol.source.ImageWMS;
+    const source = this.source as ol.source.ImageWMS;
     source.updateParams({'time': dates.map(d => d.toISOString()).join('/')});
   }
 }

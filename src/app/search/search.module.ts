@@ -5,10 +5,10 @@ import { SharedModule } from '../shared/shared.module';
 
 import { SearchService } from './shared/search.service';
 import { SearchSourceService } from './shared/search-source.service';
-import { SearchSource } from './sources/search-source';
-import { SearchSourceNominatim } from './sources/search-source-nominatim';
-import { SearchSourceICherche } from './sources/search-source-icherche';
-import { SearchSourceLayer } from './sources/search-source-layer';
+import { SearchSource } from './search-sources/search-source';
+import { SearchSourceNominatim } from './search-sources/search-source-nominatim';
+import { SearchSourceICherche } from './search-sources/search-source-icherche';
+import { SearchSourceLayer } from './search-sources/search-source-layer';
 
 import { SearchToolComponent } from './search-tool/search-tool.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';

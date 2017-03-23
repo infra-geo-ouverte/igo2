@@ -16,6 +16,6 @@ export interface SearchResult {
 }
 
 export interface SearchResultGeometry {
-  type: 'Point' | 'LineString' | 'Polygon';
+  type: ol.geom.GeometryType;
   coordinates: [any];
 }
