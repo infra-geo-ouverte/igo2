@@ -18,7 +18,6 @@ export class XYZLayer extends Layer {
 
   protected generateId() {
     const chain = this.options.type + this.options.source.url;
-
     return Md5.hashStr(chain) as string;
   }
 }
