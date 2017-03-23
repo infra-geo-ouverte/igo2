@@ -97,6 +97,12 @@ export class IgoMap {
   }
 
   addLayer(layer: Layer) {
+    const existingLayer = this.getLayerById(layer.id);
+    if (existingLayer !== undefined) {
+      existingLayer.visible = true;
+      return;
+    }
+
     layer.addToMap(this);
 
     this._layers.splice(0, 0, layer);

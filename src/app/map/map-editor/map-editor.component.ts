@@ -6,7 +6,11 @@ import { Register } from '../../tool/shared/tool.service';
 import { IgoMap } from '../shared/map';
 import { MapService } from '../shared/map.service';
 
-@Register()
+@Register({
+  name: 'mapEditor',
+  title: 'Map',
+  icon: 'map'
+})
 @Component({
   selector: 'igo-map-editor',
   templateUrl: './map-editor.component.html',
@@ -15,12 +19,7 @@ import { MapService } from '../shared/map.service';
 export class MapEditorComponent
   extends ToolComponent implements OnInit {
 
-  static name_: string = 'mapEditor';
-  static title: string = 'Map';
-  static icon: string = 'map';
-  static defaultOptions: any = {};
-
-  map: IgoMap;
+  public map: IgoMap;
 
   constructor(private mapService: MapService) {
     super();

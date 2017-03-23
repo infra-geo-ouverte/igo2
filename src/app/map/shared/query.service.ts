@@ -114,14 +114,15 @@ export class QueryService {
   }
 
   private featureToResult(feature: ol.Feature): SearchResult {
-    const featureGeometry = feature.getGeometry();
-    const properties = feature.getProperties();
+    const featureGeometry = (feature.getGeometry() as any);
+    const properties = Object.assign({}, feature.getProperties());
+    delete properties['geometry'];
 
     let geometry;
     if (featureGeometry !== undefined) {
       geometry = {
         type: featureGeometry.getType(),
-        coordinates: (geometry as any).getCoordinates()
+        coordinates: featureGeometry.getCoordinates()
       };
     }
 

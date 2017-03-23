@@ -14,7 +14,7 @@ export class OSMLayer extends Layer {
     return new ol.layer.Tile(olLayerOptions);
   }
 
-  protected createId() {
+  protected generateId() {
     return 'OSM';
   }
 }

@@ -11,7 +11,11 @@ import { Context } from '../shared/context.interface';
 import { ContextService } from '../shared/context.service';
 
 
-@Register()
+@Register({
+  name: 'context',
+  title: 'Contexts',
+  icon: 'bookmark'
+})
 @Component({
   selector: 'igo-context-list',
   templateUrl: './context-list.component.html',
@@ -20,21 +24,15 @@ import { ContextService } from '../shared/context.service';
 export class ContextListComponent
   extends ToolComponent implements OnInit {
 
-  static name_: string = 'context';
-  static title: string = 'Contexts';
-  static icon: string = 'bookmark';
-  static defaultOptions: any = {};
-
-  contexts: Observable<Context[]>;
-  selectedContext?: Context;
-
-  get edition (): boolean {
-    return this.contextEditor !== undefined;
-  }
+  public contexts: Observable<Context[]>;
+  public selectedContext?: Context;
 
   private contextEditor: Tool;
   private mapEditor: Tool;
 
+  get edition (): boolean {
+    return this.contextEditor !== undefined;
+  }
 
   constructor(private contextService: ContextService,
               private store: Store<IgoStore>) {

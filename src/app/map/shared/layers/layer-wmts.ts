@@ -44,9 +44,10 @@ export class WMTSLayer extends Layer {
     return new ol.layer.Tile(layerOptions);
   }
 
-  protected createId() {
+  protected generateId() {
     const layer = this.options.source['layer'];
     const chain = this.options.type + this.options.source.url + layer;
+
     return Md5.hashStr(chain) as string;
   }
 

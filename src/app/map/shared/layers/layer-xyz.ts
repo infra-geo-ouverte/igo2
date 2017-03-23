@@ -16,8 +16,9 @@ export class XYZLayer extends Layer {
     return new ol.layer.Tile(olLayerOptions);
   }
 
-  protected createId() {
-    const chaine = this.options.type + this.options.source.url;
-    return Md5.hashStr(chaine) as string;
+  protected generateId() {
+    const chain = this.options.type + this.options.source.url;
+
+    return Md5.hashStr(chain) as string;
   }
 }
