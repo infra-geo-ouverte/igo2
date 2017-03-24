@@ -176,3 +176,6 @@ Open in a browser http://localhost:4200/
 
 Before contributing, please read the [guidelines](.github/CONTRIBUTING.md), the [LICENCE](LICENSE_ENGLISH.txt) and the [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). If you have any question and want to contribute, contact the main email of IGO: info(a)igouverte.org. 
 
+## BrowserStack
+
+![Image of Yaktocat](https://www.browserstack.com/automate/badge.svg?badge_key=<badge_key>)
