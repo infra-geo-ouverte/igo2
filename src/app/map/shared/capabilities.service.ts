@@ -4,8 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { RequestService } from '../../core/request.service';
 
-import { WMTSLayerOptions } from './layers/layer-wmts';
-import { WMSLayerOptions } from './layers/layer-wms';
+import { WMTSLayerOptions, WMSLayerOptions } from './layers';
 
 @Injectable()
 export class CapabilitiesService {

@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestModule } from '../../test.module';
 import { SharedModule } from '../../shared/shared.module';
 
+import { IgoMap } from '../shared/map';
 import { LayerService } from '../shared/layer.service';
 import { CapabilitiesService } from '../shared/capabilities.service';
 import { LayerListComponent } from './layer-list.component';
@@ -38,7 +39,7 @@ describe('LayerListComponent', () => {
   });
 
   it('should create', () => {
-    component.layers = [];
+    component.map = new IgoMap();
     expect(component).toBeTruthy();
   });
 });

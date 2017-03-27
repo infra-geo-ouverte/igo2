@@ -10,9 +10,9 @@ import { Tool } from '../../tool/shared/tool.interface';
 
 import { IgoMap } from '../shared/map';
 import { MapService } from '../shared/map.service';
+import { QueryService } from '../shared/query.service';
 import { LayerService } from '../shared/layer.service';
-import { LayerOptions } from '../shared/layers/layer';
-import { WMSLayerOptions } from '../shared/layers/layer-wms';
+import { Layer, LayerOptions } from '../shared/layers';
 import { MapOptions } from '../shared/map';
 
 @Component({
@@ -23,19 +23,27 @@ import { MapOptions } from '../shared/map';
 export class MapComponent
   extends Observer implements OnInit, AfterViewInit {
 
-  map: IgoMap;
-  id: string = 'igo-map-target';
+  public map: IgoMap;
+  public id: string = 'igo-map-target';
+
   private mapEditor: Tool;
+  private queryLayers: Layer[];
 
   constructor(private store: Store<IgoStore>,
               private mapService: MapService,
-              private layerService: LayerService) {
+              private layerService: LayerService,
+              private queryService: QueryService) {
     super();
   }
 
 
   ngOnInit() {
     this.map = this.mapService.getMap();
+
+    this.map.layers.subscribe((layers: Layer[]) =>
+      this.queryLayers = layers.filter(layer => layer.queryable));
+
+    this.map.olMap.on('singleclick', this.handleMapClick, this);
 
     this.subscriptions.push(
       this.store.select(s => s.map)
@@ -80,6 +88,10 @@ export class MapComponent
     return feature;
   }
 
+  private handleMapClick(event: ol.MapBrowserEvent) {
+    this.queryService.query(this.queryLayers, event.coordinate);
+  }
+
   private handleLayersChanged(layerOptions: LayerOptions[]) {
     this.map.removeLayers();
 
@@ -105,7 +117,7 @@ export class MapComponent
   }
 
   private handleLayerResult(result: SearchResult) {
-    const layerOptions: WMSLayerOptions = {
+    const layerOptions = {
       source: {
         url: result.properties['url'],
         projection: this.map.getProjection(),
@@ -117,21 +129,15 @@ export class MapComponent
       title: result.properties['title']
     };
 
-    this.layerService.createLayer(layerOptions).subscribe(
-      layer => {
-        const existingLayer = this.map.getLayerById(layer.id);
-        if (existingLayer !== undefined) {
-          existingLayer.visible = true;
-        } else {
-          this.map.addLayer(layer);
-        }
-      }
-    );
-
+    this.store.dispatch({type: 'ADD_LAYER', payload: layerOptions});
     this.store.dispatch({type: 'SELECT_TOOL', payload: this.mapEditor});
   }
 
   private handleFeatureResult(result: SearchResult, zoom: boolean = false) {
+    if (!result.geometry) {
+      return;
+    }
+
     this.map.clearOverlay();
 
     const feature = this.resultToFeature(result);

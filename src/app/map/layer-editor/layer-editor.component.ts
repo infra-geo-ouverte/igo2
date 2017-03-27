@@ -6,7 +6,11 @@ import { Register } from '../../tool/shared/tool.service';
 import { Layer } from '../shared/layers/layer';
 import { LayerService } from '../shared/layer.service';
 
-@Register()
+@Register({
+  name: 'layerEditor',
+  title: 'Edit Layer',
+  icon: 'layers'
+})
 @Component({
   selector: 'igo-layer-editor',
   templateUrl: './layer-editor.component.html',
@@ -15,12 +19,7 @@ import { LayerService } from '../shared/layer.service';
 export class LayerEditorComponent
   extends ToolComponent implements OnInit {
 
-  static name_: string = 'layerEditor';
-  static title: string = 'Edit Layer';
-  static icon: string = 'layers';
-  static defaultOptions: any = {};
-
-  layer: Layer;
+  public layer: Layer;
 
   constructor(private layerService: LayerService) {
     super();

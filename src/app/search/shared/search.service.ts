@@ -9,7 +9,7 @@ import { RequestService } from '../../core/request.service';
 
 import { SearchSourceService } from './search-source.service';
 import { SearchResult } from './search-result.interface';
-import { SearchSource } from '../sources/search-source';
+import { SearchSource } from '../search-sources/search-source';
 
 
 @Injectable()

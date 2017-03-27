@@ -13,8 +13,8 @@ export const toolSlideInOut = trigger('toolSlideInOut', [
   state('right', style({
     transform: 'translate3d(100%, 0, 0)'
   })),
-  transition('left => center', animate('0ms ' + transitionType)),
-  transition('right => center', animate('0ms ' + transitionType)),
-  transition('center => right', animate(transitionSpeed + ' ' + transitionType)),
-  transition('center => left', animate(transitionSpeed + ' ' + transitionType)),
+  transition('left => center', animate(transitionSpeed + ' ' + transitionType)),
+  transition('right => center', animate(transitionSpeed + ' ' + transitionType)),
+  transition('center => right', animate('0ms ' + transitionType)),
+  transition('center => left', animate('0ms ' + transitionType)),
 ]);

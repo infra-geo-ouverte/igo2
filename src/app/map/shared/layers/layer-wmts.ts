@@ -1,20 +1,14 @@
 import { Md5 } from 'ts-md5/dist/md5';
-import { Layer, LayerOptions} from './layer';
 
-export interface WMTSLayerOptions extends LayerOptions {
-  source: olx.source.WMTSOptions;
-  view?: olx.layer.TileOptions;
-  optionsFromCapabilities?: boolean;
-}
+import { Layer } from './layer';
+import { WMTSLayerOptions } from './layer-wmts.interface';
 
 export class WMTSLayer extends Layer {
 
   public options: WMTSLayerOptions;
-
-  protected olLayer: ol.layer.Tile;
+  public olLayer: ol.layer.Tile;
 
   // TODO: Support other projections ?
-  // TODO: Make this an util function ?
   static getDefaultTileGrid(epsg?: string): ol.tilegrid.WMTS {
     const projection = epsg ? ol.proj.get(epsg) : ol.proj.get('EPSG:3857');
     const projectionExtent = projection.getExtent();
@@ -50,9 +44,10 @@ export class WMTSLayer extends Layer {
     return new ol.layer.Tile(layerOptions);
   }
 
-  protected createId() {
+  protected generateId() {
     const layer = this.options.source['layer'];
     const chain = this.options.type + this.options.source.url + layer;
+
     return Md5.hashStr(chain) as string;
   }
 

@@ -52,9 +52,9 @@ export class IgoMap {
       title: 'Overlay',
       type: 'vector'
     });
-    this.overlaySource = (this.overlayLayer.getSource() as ol.source.Vector);
-    this.olMap.addLayer(this.overlayLayer.getOlLayer());
-    this.overlayLayer.getOlLayer().setZIndex(999);
+    this.overlaySource = (this.overlayLayer.source as ol.source.Vector);
+    this.olMap.addLayer(this.overlayLayer.olLayer);
+    this.overlayLayer.olLayer.setZIndex(999);
   }
 
   getProjection() {
@@ -97,7 +97,13 @@ export class IgoMap {
   }
 
   addLayer(layer: Layer) {
-    this.olMap.addLayer(layer.getOlLayer());
+    const existingLayer = this.getLayerById(layer.id);
+    if (existingLayer !== undefined) {
+      existingLayer.visible = true;
+      return;
+    }
+
+    layer.addToMap(this);
 
     this._layers.splice(0, 0, layer);
     this.sortLayers();
@@ -117,14 +123,14 @@ export class IgoMap {
   removeLayer(layer: Layer) {
     const index = this.getLayerIndex(layer);
     if (index >= 0) {
-      this.olMap.removeLayer(layer.getOlLayer());
+      this.olMap.removeLayer(layer.olLayer);
       this._layers.splice(index, 1);
     }
   }
 
   removeLayers() {
     this._layers.forEach(layer =>
-      this.olMap.removeLayer(layer.getOlLayer()), this);
+      this.olMap.removeLayer(layer.olLayer), this);
     this._layers = [];
   }
 

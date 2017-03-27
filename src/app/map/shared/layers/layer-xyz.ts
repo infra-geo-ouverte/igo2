@@ -1,16 +1,12 @@
 import { Md5 } from 'ts-md5/dist/md5';
-import { Layer, LayerOptions } from './layer';
 
-export interface XYZLayerOptions extends LayerOptions {
-  source?: olx.source.XYZOptions;
-  view?: olx.layer.TileOptions;
-}
+import { Layer } from './layer';
+import { XYZLayerOptions } from './layer-xyz.interface';
 
 export class XYZLayer extends Layer {
 
   public options: XYZLayerOptions;
-
-  protected olLayer: ol.layer.Tile;
+  public olLayer: ol.layer.Tile;
 
   protected createOlLayer(): ol.layer.Tile {
     const olLayerOptions = Object.assign(this.options.view || {}, {
@@ -20,8 +16,8 @@ export class XYZLayer extends Layer {
     return new ol.layer.Tile(olLayerOptions);
   }
 
-  protected createId() {
-    const chaine = this.options.type + this.options.source.url;
-    return Md5.hashStr(chaine) as string;
+  protected generateId() {
+    const chain = this.options.type + this.options.source.url;
+    return Md5.hashStr(chain) as string;
   }
 }

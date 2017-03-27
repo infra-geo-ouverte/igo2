@@ -1,15 +1,10 @@
-import { Layer, LayerOptions } from './layer';
-
-export interface OSMLayerOptions extends LayerOptions {
-  source?: olx.source.OSMOptions;
-  view?: olx.layer.TileOptions;
-}
+import { Layer } from './layer';
+import { OSMLayerOptions } from './layer-osm.interface';
 
 export class OSMLayer extends Layer {
 
   public options: OSMLayerOptions;
-
-  protected olLayer: ol.layer.Tile;
+  public olLayer: ol.layer.Tile;
 
   protected createOlLayer(): ol.layer.Tile {
     const olLayerOptions = Object.assign(this.options.view || {}, {
@@ -19,7 +14,7 @@ export class OSMLayer extends Layer {
     return new ol.layer.Tile(olLayerOptions);
   }
 
-  protected createId() {
+  protected generateId() {
     return 'OSM';
   }
 }
