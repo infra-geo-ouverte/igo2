@@ -1,14 +1,10 @@
-import { QueryFormat } from '../query.service';
+import { QueryableLayerOptions } from './layer.interface';
 
-import { LayerOptions } from './layer.interface';
-
-export interface WMSLayerOptions extends LayerOptions {
+export interface WMSLayerOptions extends QueryableLayerOptions {
   source: olx.source.ImageWMSOptions;
   view?: olx.layer.TileOptions;
   dataUrl?: DataUrl;
   optionsFromCapabilities?: boolean;
-  queryFormat?: QueryFormat;
-  queryTitle?: string;
 }
 
 export interface DataUrl {

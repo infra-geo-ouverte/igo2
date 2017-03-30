@@ -18,10 +18,6 @@ export abstract class Layer {
     return this.olLayer.getSource();
   }
 
-  get type(): any {
-    return this.options.type;
-  }
-
   get title(): string {
     return this.options.alias ? this.options.alias : this.options.title;
   }
