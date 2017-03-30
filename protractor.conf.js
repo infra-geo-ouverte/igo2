@@ -32,7 +32,7 @@ var config = {
 
 if (process.env.TRAVIS) {
   config.capabilities = {
-    browserName: 'chrome'
+    browserName: 'firefox'
   };
 }
 
