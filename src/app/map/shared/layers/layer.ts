@@ -84,7 +84,7 @@ export abstract class Layer {
   isFilterable(): this is FilterableLayer {
     const layer = this as any as FilterableLayer;
     if (typeof layer.filterByDate === 'function') {
-      return layer.options.filterable ? layer.options.filterable : true;
+      return layer.options.filterable !== undefined ? layer.options.filterable : true;
     }
 
     return false;
@@ -93,7 +93,7 @@ export abstract class Layer {
   isQueryable(): this is QueryableLayer {
     const layer = this as any as QueryableLayer;
     if (typeof layer.getQueryUrl === 'function') {
-      return layer.options.queryable ? layer.options.queryable : true;
+      return layer.options.queryable !== undefined ? layer.options.queryable : true;
     }
 
     return false;
