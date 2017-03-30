@@ -3,7 +3,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observer } from '../../utils/observer';
 
 import { IgoMap } from '../../map/shared/map';
-import { Layer } from '../../map/shared/layers/layer';
+import {
+  Layer,
+  FilterableLayer
+} from '../../map/shared/layers';
 
 @Component({
   selector: 'igo-time-analyser-list',
@@ -15,7 +18,7 @@ export class TimeAnalyserListComponent
 
   @Input() map: IgoMap;
 
-  public layers: Layer[];
+  public layers: FilterableLayer[];
 
   constructor() {
     super();
@@ -23,8 +26,9 @@ export class TimeAnalyserListComponent
 
   ngOnInit() {
     this.map.layers.subscribe((layers: Layer[]) => {
-      this.layers = layers.filter(layer =>
-        layer.filterable && layer.options.timeFilter !== undefined);
+      this.layers = layers.filter(layer => {
+        return layer.isFilterable() && layer.options.timeFilter !== undefined;
+      }) as any[] as FilterableLayer[];
     });
   }
 

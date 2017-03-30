@@ -11,9 +11,6 @@ export interface LayerOptions extends olx.layer.BaseOptions {
   zIndex?: number;
   visible?: boolean;
   legend?: LayerLegendOptions;
-  queryable?: boolean;
-  filterable?: boolean;
-  timeFilter?: TimeFilterOptions;
 }
 
 export interface LayerLegendOptions {
@@ -23,12 +20,23 @@ export interface LayerLegendOptions {
   title?: string;
 }
 
+export interface FilterableLayerOptions {
+  filterable?: boolean;
+  timeFilter?: TimeFilterOptions;
+}
+
+export interface QueryableLayerOptions {
+  queryable?: boolean;
+}
+
 export interface QueryableLayer {
   queryFormat: QueryFormat;
   queryTitle?: string;
+  options: QueryableLayerOptions;
   getQueryUrl(coordinates: [number, number]): string;
 }
 
 export interface FilterableLayer {
+  options: FilterableLayerOptions;
   filterByDate(date: Date | [Date, Date]);
 }

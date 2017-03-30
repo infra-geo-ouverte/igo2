@@ -24,7 +24,7 @@ export class SearchToolComponent
 
   public focusedResult?: SearchResult;
 
-  private sourceResults: [string, SearchResult[]];
+  public sourceResults: [string, SearchResult[]];
 
   constructor(private store: Store<IgoStore>) {
     super();
