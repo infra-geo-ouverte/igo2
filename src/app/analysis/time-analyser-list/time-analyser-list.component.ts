@@ -3,10 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observer } from '../../utils/observer';
 
 import { IgoMap } from '../../map/shared/map';
-import {
-  Layer,
-  FilterableLayer
-} from '../../map/shared/layers';
+import { Layer, FilterableLayer } from '../../map/shared/layers';
 
 @Component({
   selector: 'igo-time-analyser-list',
