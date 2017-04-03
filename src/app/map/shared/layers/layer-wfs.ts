@@ -20,7 +20,7 @@ export class WFSLayer extends Layer {
 
    protected createOlLayer(): ol.layer.Vector {
 
-    let sourceOptions = {};  
+    const sourceOptions = {};
 
     if (!this.options.source.format) {
       sourceOptions['format'] = new ol.format.WFS();
@@ -37,7 +37,7 @@ export class WFSLayer extends Layer {
     }
 
     sourceOptions['url'] = this.options.source.url ;
-    
+
     if (!this.options.style) {
       this.options.style = defaultStyle;
     } else {
