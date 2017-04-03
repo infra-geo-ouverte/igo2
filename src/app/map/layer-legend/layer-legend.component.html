@@ -2,7 +2,7 @@
   {{'noLegendText' | translate}}
 </small>
 
-<template ngFor let-item [ngForOf]="legend">
+<ng-template ngFor let-item [ngForOf]="legend">
   <md-list-item
     class="igo-collapsible-header"
     *ngIf="item.title">
@@ -27,4 +27,4 @@
       *ngIf="item.html">
     </div>
   </div>
-</template>
+</ng-template>
