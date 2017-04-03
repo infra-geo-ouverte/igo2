@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Md2Module } from 'md2';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -15,7 +16,8 @@ import {
 @NgModule({
   imports: [
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Md2Module
   ],
   declarations: [
     TimeAnalyserComponent,

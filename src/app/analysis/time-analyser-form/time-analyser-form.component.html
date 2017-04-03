@@ -1,15 +1,42 @@
 <div *ngIf="!isRange">
   <div class="igo-col igo-col-100 igo-col-100-m">
-  <!-- Date picker will go here -->
+    <md2-datepicker
+      placeholder="{{'Date' | translate}}"
+      container="dialog"
+      format="{{format}}"
+      type="{{type}}"
+      [min]="min"
+      [max]="max"
+      [(ngModel)]="date"
+      (change)="handleDateChange($event)">
+    </md2-datepicker>
   </div>
 </div>
 
 <div *ngIf="isRange">
-  <div class="igo-col igo-col-50 igo-col-100-m">
-    <!-- Min date picker will go here -->
+  <div class="igo-col igo-col-100">
+    <md2-datepicker
+      placeholder="{{'Start Date' | translate}}"
+      container="dialog"
+      format="{{format}}"
+      type="{{type}}"
+      [min]="min"
+      [max]="max"
+      [(ngModel)]="startDate"
+      (change)="handleDateChange($event)">
+    </md2-datepicker>
   </div>
 
-  <div class="igo-col igo-col-50 igo-col-100-m">
-    <!-- Max date picker will go here -->
+  <div class="igo-col igo-col-100">
+    <md2-datepicker
+      placeholder="{{'End Date' | translate}}"
+      container="dialog"
+      format="{{format}}"
+      type="{{type}}"
+      [min]="min"
+      [max]="max"
+      [(ngModel)]="endDate"
+      (change)="handleDateChange($event)">
+    </md2-datepicker>
   </div>
 </div>
