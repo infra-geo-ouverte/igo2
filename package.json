@@ -93,7 +93,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "npm-check": "^5.4.0",
     "nsp": "^2.6.3",
-    "protractor": "~4.0.13",
+    "protractor": "~5.1.0",
     "rimraf": "^2.6.1",
     "snyk": "^1.26.0",
     "ts-node": "~2.0.0",
