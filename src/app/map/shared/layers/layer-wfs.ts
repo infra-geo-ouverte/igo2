@@ -28,7 +28,8 @@ export class WFSLayer extends Layer {
       Object.keys(this.options.source.format).map(
           (key: string) => {
             if (ol.format[key]) {
-              sourceOptions[key.toLowerCase()] = new ol.format[key](this.options.source.format[key]);
+              const format = this.options.source.format[key];
+              sourceOptions[key.toLowerCase()] = new ol.format[key](format);
             } else {
               // TODO Format non-supporté par OL3
             }
@@ -48,8 +49,9 @@ export class WFSLayer extends Layer {
               delete this.options.style[key];
 
                switch (key) {
-                case 'Image':
-                  this.options.style.image = this.options.style.image[Object.keys(this.options.style.image)[0]];
+                 case 'Image':
+                  const img = Object.keys(this.options.style.image)[0];
+                  this.options.style.image = this.options.style.image[img];
                   break;
               }
             } else {
@@ -72,14 +74,14 @@ export class WFSLayer extends Layer {
 
   jsonOptionToOlObject(option, key) {
 
-    Object.keys(option).map(
-                (subKey: string) => {
-                  if (Object.keys(ol.style).findIndex(value => { return value === subKey; }) > -1) {
-                    option[subKey.toLowerCase()] =
-                      this.jsonOptionToOlObject(option[subKey], subKey);
-                    delete option[subKey];
-                  }
-                }, this);
+    Object.keys(option).map((subKey: string) => {
+      const obj = Object.keys(ol.style);
+      if (obj.findIndex(value => {return value === subKey; }) > -1) {
+        option[subKey.toLowerCase()] =
+          this.jsonOptionToOlObject(option[subKey], subKey);
+        delete option[subKey];
+      }
+    }, this);
 
     switch (key) {
       case 'Image':
