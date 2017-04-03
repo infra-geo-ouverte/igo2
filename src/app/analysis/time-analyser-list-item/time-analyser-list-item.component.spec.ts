@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Md2Module } from 'md2';
 
 import { SharedModule } from '../../shared/shared.module';
 
@@ -16,7 +17,8 @@ describe('TimeAnalyserItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        SharedModule
+        SharedModule,
+        Md2Module
       ],
       declarations: [
         TimeAnalyserListItemComponent,
