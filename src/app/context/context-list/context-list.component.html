@@ -1,5 +1,5 @@
 <igo-list [navigation]="true"> 
-  <template ngFor let-context [ngForOf]="contexts | async">
+  <ng-template ngFor let-context [ngForOf]="contexts | async">
     <igo-context-list-item
       igoListItem
       [selected]="selectedContext && selectedContext.uri === context.uri"
@@ -8,5 +8,5 @@
       (selectItem)="selectContext(context)"
       (editContext)="editContext($event)">
     </igo-context-list-item>
-  </template>
+  </ng-template>
 </igo-list>

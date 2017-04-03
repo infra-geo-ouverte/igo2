@@ -41,7 +41,7 @@ export class MapComponent
     this.map = this.mapService.getMap();
 
     this.map.layers.subscribe((layers: Layer[]) =>
-      this.queryLayers = layers.filter(layer => layer.queryable));
+      this.queryLayers = layers.filter(layer => layer.isQueryable()));
 
     this.map.olMap.on('singleclick', this.handleMapClick, this);
 

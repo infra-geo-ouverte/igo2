@@ -1,5 +1,5 @@
 <igo-list [navigation]="false" [selection]="false"> 
-  <template ngFor let-layer [ngForOf]="map.layers | async">
+  <ng-template ngFor let-layer [ngForOf]="map.layers | async">
     <igo-layer-list-item
       igoListItem
       [layer]="layer"
@@ -9,5 +9,5 @@
       (raiseLayer)="raiseLayer($event)"
       (lowerLayer)="lowerLayer($event)">
     </igo-layer-list-item>
-  </template>
+  </ng-template>
 </igo-list>
