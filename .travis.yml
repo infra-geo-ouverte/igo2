@@ -24,8 +24,8 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
 
 before_script:
-  - rm -rf node_modules && npm cache clean
-  - npm install
+  - rm -rf node_modules && npm cache clean && npm uninstall protractor -g
+  - npm install && npm install protractor -g
   - npm run build.prod
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "npm run serve.prod 2>&1 &"; fi  # Protractor CI
   - cat nohup.out
