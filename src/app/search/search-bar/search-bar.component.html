@@ -2,8 +2,7 @@
   <input
     #input
     mdInput
-    [disabled]="disabled"
-    [placeholder]="(disabled ? 'Search disabled' : 'Search for an address or a place') | translate"
+    [placeholder]="'Search for an address or a place' | translate"
     (keyup)="keyup($event)"
     [ngModel]="term">
   <button

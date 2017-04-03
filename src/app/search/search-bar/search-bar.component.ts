@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { IgoStore } from '../../store/store';
 
 import { Observer } from '../../utils/observer';
-import { Tool } from '../../tool/shared/tool.interface';
 
 import { SearchResult } from '../shared/search-result.interface';
 import { SearchService} from '../shared/search.service';
@@ -24,13 +23,8 @@ export class SearchBarComponent
 
   term?: string;
 
-  private searchTool: Tool;
   private searchTermsStream = new Subject<string>();
   readonly preValidationSearch = ['Control', 'Shift', 'Alt'];
-
-  get disabled () {
-    return this.searchTool === undefined;
-  }
 
   constructor(private store: Store<IgoStore>,
               private searchService: SearchService) {
@@ -38,12 +32,6 @@ export class SearchBarComponent
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.store.select(s => s.tools)
-        .subscribe((tools: Tool[]) => {
-            this.searchTool = tools.find(t => t.name === 'search');
-         }));
-
     this.subscriptions.push(
       this.searchTermsStream
         .debounceTime(300)
@@ -76,22 +64,13 @@ export class SearchBarComponent
         && (this.preValidationSearch.find(value => value === event.key) === undefined)
     ) {
       this.key.emit(term);
-      this.selectSearchTool();
       this.search(term);
     }
 
     this.term = term;
   }
 
-  selectSearchTool() {
-    this.store.dispatch({type: 'SELECT_TOOL', payload: this.searchTool});
-  }
-
   search(term: string): void {
-    if (this.disabled) {
-      return;
-    }
-
     this.searchTermsStream.next(term);
   }
 
