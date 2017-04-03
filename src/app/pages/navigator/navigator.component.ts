@@ -33,6 +33,8 @@ export class NavigatorComponent
   sidenavOpened: boolean = false;
   selectedTool: Tool;
 
+  private searchTool: Tool;
+
   get toolbarState () {
     return this.selectedTool ? 'out' : 'in';
   }
@@ -64,6 +66,17 @@ export class NavigatorComponent
         .subscribe((toolHistory: Tool[]) => {
           this.handleToolHistoryChanged(toolHistory);
         }));
+
+    this.subscriptions.push(
+      this.store.select(s => s.tools)
+        .subscribe((tools: Tool[]) => {
+            this.searchTool = tools.find(t => t.name === 'search');
+         }));
+
+    this.subscriptions.push(
+      this.store.select(s => s.searchResults)
+        .filter((results: SearchResult[]) => results.length > 0)
+        .subscribe((results: SearchResult[]) => this.selectSearchTool()));
 
     this.subscriptions.push(
       this.store.select(s => s.focusedResult)
@@ -114,6 +127,13 @@ export class NavigatorComponent
 
   private handleToolHistoryChanged(toolHistory?: Tool[]) {
     this.selectedTool = toolHistory[toolHistory.length - 1];
+    if (this.selectedTool) {
+      this.openSidenav();
+    }
     this.menuState = 'initial';
+  }
+
+  private selectSearchTool() {
+    this.store.dispatch({type: 'SELECT_TOOL', payload: this.searchTool});
   }
 }
