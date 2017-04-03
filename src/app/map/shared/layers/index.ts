@@ -10,3 +10,5 @@ export * from './layer-wmts';
 export * from './layer-wmts.interface';
 export * from './layer-xyz';
 export * from './layer-xyz.interface';
+export * from './layer-wfs';
+export * from './layer-wfs.interface';
