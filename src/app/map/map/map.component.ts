@@ -89,6 +89,7 @@ export class MapComponent
   }
 
   private handleMapClick(event: ol.MapBrowserEvent) {
+    this.store.dispatch({type: 'CLEAR_SEARCH_RESULTS'});
     this.queryService.query(this.queryLayers, event.coordinate);
   }
 
