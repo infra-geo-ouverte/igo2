@@ -1,5 +1,6 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
@@ -20,6 +21,7 @@ import { MessageComponent } from './message/message.component';
 @NgModule({
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     MaterialModule,
     SimpleNotificationsModule.forRoot()
   ],

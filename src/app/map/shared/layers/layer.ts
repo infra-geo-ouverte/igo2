@@ -1,5 +1,10 @@
 import { IgoMap } from '../map';
-import { LayerOptions, LayerLegendOptions } from './layer.interface';
+import {
+  LayerOptions,
+  LayerLegendOptions,
+  QueryableLayer,
+  FilterableLayer
+} from './layer.interface';
 
 export abstract class Layer {
 
@@ -45,22 +50,6 @@ export abstract class Layer {
     this.olLayer.setOpacity(opacity);
   }
 
-  get queryable(): boolean {
-    if (typeof (this as any).getQueryUrl === 'function') {
-      return this.options.queryable ? this.options.queryable : true;
-    }
-
-    return false;
-  }
-
-  get filterable(): boolean {
-    if (typeof (this as any).filterByDate === 'function') {
-      return this.options.filterable ? this.options.filterable : true;
-    }
-
-    return false;
-  }
-
   constructor(options: LayerOptions) {
     this.options = options;
     this.id = this.generateId();
@@ -87,4 +76,23 @@ export abstract class Layer {
   getLegend(): LayerLegendOptions[] {
     return this.options.legend ? [this.options.legend] : [];
   }
+
+  isFilterable(): this is FilterableLayer {
+    const layer = this as any as FilterableLayer;
+    if (typeof layer.filterByDate === 'function') {
+      return layer.options.filterable !== undefined ? layer.options.filterable : true;
+    }
+
+    return false;
+  }
+
+  isQueryable(): this is QueryableLayer {
+    const layer = this as any as QueryableLayer;
+    if (typeof layer.getQueryUrl === 'function') {
+      return layer.options.queryable !== undefined ? layer.options.queryable : true;
+    }
+
+    return false;
+  }
+
 }

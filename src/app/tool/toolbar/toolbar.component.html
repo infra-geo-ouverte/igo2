@@ -1,10 +1,10 @@
 <igo-list> 
-  <template ngFor let-tool [ngForOf]="tools">
+  <ng-template ngFor let-tool [ngForOf]="tools">
     <igo-toolbar-item
       igoListItem
       navigation="false"
       [tool]=tool
       (toolSelected)="selectTool($event)">
     </igo-toolbar-item>
-  </template>
+  </ng-template>
 </igo-list>
