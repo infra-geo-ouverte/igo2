@@ -9,7 +9,8 @@ import { Layer, LayerOptions,
          VectorLayer, VectorLayerOptions,
          XYZLayer, XYZLayerOptions,
          WMTSLayer, WMTSLayerOptions,
-         WMSLayer, WMSLayerOptions } from './layers';
+         WMSLayer, WMSLayerOptions,
+         WFSLayer, WFSLayerOptions } from './layers';
 
 @Injectable()
 export class LayerService {
@@ -29,6 +30,9 @@ export class LayerService {
         break;
       case 'wms':
         layer = this.createWMSLayer(options as WMSLayerOptions);
+        break;
+      case 'wfs':
+        layer = this.createWFSLayer(options as WFSLayerOptions);
         break;
       case 'wmts':
         layer = this.createWMTSLayer(options as WMTSLayerOptions);
@@ -53,6 +57,10 @@ export class LayerService {
 
   private createVectorLayer(options: VectorLayerOptions): Observable<VectorLayer> {
     return new Observable(layer => layer.next(new VectorLayer(options)));
+  }
+
+  private createWFSLayer(options: WFSLayerOptions): Observable<WFSLayer> {
+   return new Observable(layer => layer.next(new WFSLayer(options)));
   }
 
   private createWMSLayer(options: WMSLayerOptions): Observable<WMSLayer> {
