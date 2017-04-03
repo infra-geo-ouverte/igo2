@@ -24,7 +24,6 @@ export class WFSLayer extends Layer {
 
     if (!this.options.source.format) {
       sourceOptions['format'] = new ol.format.WFS();
-
     } else {
       Object.keys(this.options.source.format).map(
           (key: string) => {
@@ -36,10 +35,8 @@ export class WFSLayer extends Layer {
        });
     }
 
- 
     sourceOptions['url'] = this.options.source.url ;
     
-
     if (!this.options.style) {
       this.options.style = defaultStyle;
     } else {
@@ -72,7 +69,6 @@ export class WFSLayer extends Layer {
   protected generateId() {
     return undefined;
   }
-
 
   jsonOptionToOlObject(option, key) {
 
