@@ -2,11 +2,11 @@ import { Layer } from './layer';
 import { WFSLayerOptions } from './layer-wfs.interface';
 
 export const defaultStyle = {
-                        stroke: new ol.style.Stroke({
-                          color: 'rgba(0, 0, 255, 1.0)',
-                          width: 2
-                        })
-                      };
+  stroke: new ol.style.Stroke({
+    color: 'rgba(0, 0, 255, 1.0)',
+    width: 2
+  })
+};
 
 export class WFSLayer extends Layer {
 
