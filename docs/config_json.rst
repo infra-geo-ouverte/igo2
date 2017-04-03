@@ -76,8 +76,8 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       }
      },
     {
-      "name" : "WFS2",
-      "title": "Bassin (WFS)",
+      "name" : "nom_alias_wfs",
+      "title": "nom_titre_alias_wfs",
       "type" : "wfs",
       "source":{
         "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
