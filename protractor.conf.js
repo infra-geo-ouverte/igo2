@@ -20,6 +20,7 @@ var config = {
     defaultTimeoutInterval: 30000,
     print: function() {}
   },
+  useAllAngular2AppRoots: true,
   beforeLaunch: function() {
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
