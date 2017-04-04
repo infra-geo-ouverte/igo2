@@ -13,6 +13,6 @@
 .. _igo2: https://github.com/infra-geo-ouverte/igo2/
 .. |openlayers| replace:: :mod:`OpenLayers 4`
 .. _openlayers: https://openlayers.org/
-.. |ang2| replace:: :mod:`Angular 2`
+.. |ang2| replace:: :mod:`Angular 4`
 .. _ang2: https://angular.io/
 .. |igo-logo| image:: images/1b-logo_toutbleu_txtnoir.png

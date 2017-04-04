@@ -30,11 +30,11 @@
       }
     },
     {
-      "name" : "WFS2",
-      "title": "Couche WFS",
+      "name" : "Bassin (WFS)",
+      "title": "Bassin (WFS)",
       "type" : "wfs",
       "source":{
-        "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
+        "url" : "/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
       },
       "style" : {
         "Stroke" : {
@@ -60,7 +60,7 @@
         "range": true,
         "type": "datetime"
       }
-    }
+     }
   ],
   "toolbar": [
     "search",

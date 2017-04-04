@@ -75,6 +75,38 @@ Parameters related to JSON :
       }
     },
     {
+      "title": "name_title_alias_wms_time",
+      "type": "wms",
+      "source": {
+        "url": "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
+        "params": {
+          "layers": "layername_wms_time",
+          "version": "1.3.0"
+        }
+      },
+      "timeFilter": {
+        "min": "2017-01-01",
+        "max": "2018-01-01",
+        "range": true,
+        "type": "datetime"
+      }
+     },
+    {
+      "name" : "WFS",
+      "title": "Bassin (WFS)",
+      "type" : "wfs",
+      "source":{
+        "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
+      },
+      "style" : {
+        "Stroke" : {
+            "color" : "rgba(140, 140, 255, 1.0)",
+            "width" : 3
+        }
+      },
+      "version" : "1.3.0"
+    },
+    {
       "title":"LayerfromCapabilities",
       "type":"wms",
       "optionsFromCapabilities":true,

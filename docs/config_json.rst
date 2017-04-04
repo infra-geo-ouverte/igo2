@@ -59,6 +59,38 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       }
     },
     {
+      "title": "nom_titre_alias_wms_time",
+      "type": "wms",
+      "source": {
+        "url": "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
+        "params": {
+          "layers": "nom_couche_wms_layername",
+          "version": "1.3.0"
+        }
+      },
+      "timeFilter": {
+        "min": "2017-01-01",
+        "max": "2018-01-01",
+        "range": true,
+        "type": "datetime"
+      }
+     },
+    {
+      "name" : "nom_alias_wfs",
+      "title": "nom_titre_alias_wfs",
+      "type" : "wfs",
+      "source":{
+        "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
+      },
+      "style" : {
+        "Stroke" : {
+            "color" : "rgba(140, 140, 255, 1.0)",
+            "width" : 3
+        }
+      },
+      "version" : "1.3.0"
+    },
+    {
       "title":"LayerfromCapabilities",
       "type":"wms",
       "optionsFromCapabilities":true,
