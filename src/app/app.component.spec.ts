@@ -1,4 +1,4 @@
-/*import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
@@ -15,7 +15,10 @@ import { MessageComponent } from './core/message/message.component';
 import {} from 'jasmine';
 
 describe('AppComponent', () => {
-  beforeEach(() => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -34,12 +37,16 @@ describe('AppComponent', () => {
       ]
     });
     TestBed.compileComponents();
-  });
-
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
   }));
 
-});*/
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.debugElement.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create the app', () => {
+    expect(component).toBeTruthy();
+  });
+
+});
