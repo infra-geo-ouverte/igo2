@@ -1,5 +1,20 @@
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/infra-geo-ouverte/igo2/compare/0.5.1...v0.6.0) (2017-04-04)
+
+
+### Features
+
+* **angular:** upgrade angular to 4 ([#186](https://github.com/infra-geo-ouverte/igo2/issues/186)) ([d4367b9](https://github.com/infra-geo-ouverte/igo2/commit/d4367b9))
+* **layer:** add wfs support ([#188](https://github.com/infra-geo-ouverte/igo2/issues/188)) ([af10a08](https://github.com/infra-geo-ouverte/igo2/commit/af10a08))
+* **query:** Basic query tool ([#181](https://github.com/infra-geo-ouverte/igo2/issues/181)) ([e14ac9f](https://github.com/infra-geo-ouverte/igo2/commit/e14ac9f))
+* **query:** display results list on query ([#187](https://github.com/infra-geo-ouverte/igo2/issues/187)) ([6793c84](https://github.com/infra-geo-ouverte/igo2/commit/6793c84))
+* **time analyser:** add temporary datepickers to the time analyser ([#189](https://github.com/infra-geo-ouverte/igo2/issues/189)) ([d16c622](https://github.com/infra-geo-ouverte/igo2/commit/d16c622))
+* **time analyser:** Time analyser basics ([#179](https://github.com/infra-geo-ouverte/igo2/issues/179)) ([65702d5](https://github.com/infra-geo-ouverte/igo2/commit/65702d5))
+
+
+
 <a name="0.5.1"></a>
-## [0.5.1](https://github.com/infra-geo-ouverte/igo2/compare/0.5.0...v0.5.1) (2017-03-21)
+## [0.5.1](https://github.com/infra-geo-ouverte/igo2/compare/0.5.0...0.5.1) (2017-03-21)
 
 
 ### Bug Fixes
