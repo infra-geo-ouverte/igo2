@@ -34,7 +34,7 @@
       "title": "Bassin (WFS)",
       "type" : "wfs",
       "source":{
-        "url" : "prodADN/?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
+        "url" : "/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
       },
       "style" : {
         "Stroke" : {
