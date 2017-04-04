@@ -9,15 +9,25 @@ var config = {
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
+  seleniumAddress: 'http://hub-cloud.browserstack.com/wd/hub',
   capabilities: {
-    'browserName': 'chrome'
+    'browserstack.user': 'geomsp1',
+    'browserstack.key': 'RV23ni47kiJo5JLqj5Lx',
+    'browserstack.debug': true,
+    'build': 'protractor-browserstack',
+    'os': 'Windows',
+    'os_version': '10',
+    'browserName': 'IE',
+    'browser_version': '11.0',
+    'resolution': '1024x768'
   },
-  directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  //directConnect: true,
+  // baseUrl: 'http://localhost:4200/',
+  baseUrl: 'https://infra-geo-ouverte.github.io/igo2/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 60000,
     print: function() {}
   },
   useAllAngular2AppRoots: true,

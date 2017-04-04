@@ -52,7 +52,7 @@ module.exports = function (config) {
   if (process.env.TRAVIS) {
     config.browsers = ['Chrome_travis_ci'];
     config.singleRun = true;
-    config.browserNoActivityTimeout = 180000;
+    config.browserNoActivityTimeout = 90000;
   }
 
 };
