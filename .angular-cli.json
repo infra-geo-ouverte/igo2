@@ -9,7 +9,9 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
+        "assets/favicon",
+        "assets/icons",
+        "assets/locale",
         "contexts"
       ],
       "index": "index.html",
