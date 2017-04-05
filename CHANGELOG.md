@@ -1,5 +1,15 @@
+<a name="0.6.1"></a>
+## [0.6.1](https://github.com/infra-geo-ouverte/igo2/compare/0.6.0...v0.6.1) (2017-04-05)
+
+
+### Bug Fixes
+
+* **intl:** add polyfill for intl ([eb702c9](https://github.com/infra-geo-ouverte/igo2/commit/eb702c9))
+
+
+
 <a name="0.6.0"></a>
-# [0.6.0](https://github.com/infra-geo-ouverte/igo2/compare/0.5.1...v0.6.0) (2017-04-04)
+# [0.6.0](https://github.com/infra-geo-ouverte/igo2/compare/0.5.1...0.6.0) (2017-04-04)
 
 
 ### Features
