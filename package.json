@@ -48,7 +48,8 @@
     "version": "npm run changelog && git add -A CHANGELOG.md",
     "postversion": "git push && git push --tags && rimraf igo2.zip && cd ./dist/prod/ && zip -r ../igo2.zip ./* && npm run ghpages",
     "preghpages": "npm run build.prod -- --output-path ./dist/ghpages --bh /igo2/ && echo \"include: ['_default.json', '_contexts.json']\" > dist/ghpages/_config.yml",
-    "ghpages": "ngh --dir=dist/ghpages --no-silent=false"
+    "ghpages": "VERSION=$(node -p -e \"require('./package.json').version\") && ngh --dir=dist/ghpages --no-silent=false --message=$VERSION",
+    "postghpages": "rimraf ./dist/ghpages"
   },
   "private": true,
   "dependencies": {
