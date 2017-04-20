@@ -120,7 +120,7 @@ export class MapComponent
   private handleLayerResult(result: SearchResult) {
     const layerOptions = {
       source: {
-        url: result.properties['url'],
+        url: result.properties['url'].replace('http://geoegl.msp.gouv.qc.ca', ''),
         projection: this.map.getProjection(),
         params: {
           layers: result.properties['name']
