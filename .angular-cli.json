@@ -25,7 +25,8 @@
       "styles": [
         "../node_modules/openlayers/dist/ol.css",
         "../node_modules/igo2/src/style/igo.styl",
-        "../node_modules/igo2/src/themes/deeppurple-amber.styl",
+        "style/material-theme.scss",
+        "style/theme.styl",
         "style/main.styl"
       ],
       "scripts": [
