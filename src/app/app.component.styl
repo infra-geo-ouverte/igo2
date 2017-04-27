@@ -1,61 +1,7 @@
-@require '../css/theme.styl';
-@require '../css/media.styl';
+@require '../style/var.styl';
 
-:host, main {
-  width: 100%;
-  height: 100%;
-}
+/*** Spinner ***/
 
-main {
-  position: fixed;
-  padding: 0;
-  transition: 0.5s;
-}
-
-:host >>> .mat-icon {
-  color: $igo-primary-color;
-}
-
-:host >>> .mat-input-element {
-  padding: 0 $igo-padding;
-}
-
-:host >>> .mat-input-placeholder {
-  font-style: italic;
-}
-
-:host >>> .mat-input-underline {
-  border-color: $igo-border-color;
-}
-
-:host >>> md-input-container {  
-  width: 100%;
-}
-
-:host >>> md-radio-group.horizontal {
-  display: block;
-  text-align: center;
-
-  +media(mobile) {
-    text-align: inherit;
-  }
-}
-
-:host >>> md-radio-group.horizontal md-radio-button {
-  padding: 0 8px;
-}
-
-:host >>> .mat-slider-horizontal{
-  height: 40px;
-  padding: 4px;
-}
-
-:host >>> .mat-slider-horizontal .mat-slider-wrapper {
-  top: 20px;
-}
-
-
-/*--- Spinner ---*/
 igo-spinner {
   position: absolute;
   top: $igo-margin;

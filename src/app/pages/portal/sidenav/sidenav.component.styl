@@ -1,0 +1,85 @@
+@require '../../../../style/var.styl';
+@require '../../../../style/media.styl';
+
+:host {
+  background-color: $igo-background-color;
+}
+
+// This is needed because whe using the
+// sidenav "side" mode, the z-index is 1
+// and the sidenav appears below our backdrop.
+// The "side" mode is required to prevent
+// the sidenav from focusing a random button on open.
+:host >>> md-sidenav.mat-sidenav-side {
+  z-index: 3 !important;
+}
+
+md-sidenav {
+  width: $igo-sidenav-width;
+
+  +media(tablet) {
+    width: $igo-sidenav-width-tablet;
+  }
+
+  +media(mobile) {
+    width: "calc(100% - %s - %s)" % ($igo-mobile-min-space-left $igo-margin);
+  }
+
+  box-shadowed();
+}
+
+.igo-sidenav-content {
+  margin-top: $igo-sidenav-margin-top;
+  height: "calc(100% - %s)" % ($igo-sidenav-margin-top);
+}
+
+.igo-sidenav-content .igo-flexible-fill .igo-container {
+  bordered-top();
+  border-box();
+}
+
+/*** Toolbar and toolbox ***/
+
+igo-toolbar {
+  position: absolute;
+  top: 51px;
+  left: 0;
+  bottom: 0;
+}
+
+igo-toolbar.with-title {
+  right: 0;
+  overflow: auto;
+}
+
+igo-toolbar:not(.with-title) {
+  box-shadowed();
+  overflow: hidden;
+}
+
+igo-toolbar >>> igo-list {
+  overflow: inherit;
+}
+
+.igo-toolbox-container {
+  position: absolute;
+  top: 51px;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.igo-toolbox-container.shown {
+  left: 48px;
+}
+
+/*** Feature details ***/
+
+:host >>> .igo-flexible-fill .igo-container {
+  bordered-top();
+  border-box();
+}
+
+igo-feature-details >>> table {
+  width: 100%;
+}

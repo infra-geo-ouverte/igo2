@@ -1,0 +1,24 @@
+<app-flexible #flex
+  collapsedMobile="51px"
+  expandedMobile="150px"
+  [state]="state">
+
+  <igo-panel [title]="feature.title">
+    <button
+      md-icon-button
+      panelLeftButton
+      (click)="toggle()">
+      <md-icon>
+        <ng-container *ngIf="['collapsed', 'initial'].indexOf(flex.state) >= 0">
+          arrow_upward
+        </ng-container>
+        <ng-container *ngIf="flex.state === 'expanded'">
+          arrow_downward
+        </ng-container>
+      </md-icon>
+    </button>
+
+    <igo-feature-details [feature]="feature"></igo-feature-details>
+  </igo-panel>
+
+</app-flexible>

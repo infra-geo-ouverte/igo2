@@ -10,9 +10,9 @@
       "outDir": "dist",
       "assets": [
         "assets/favicon",
-        "assets/icons",
         "assets/locale",
-        "contexts"
+        "contexts",
+        { "glob": "**/*", "input": "../node_modules/igo2/src/assets/", "output": "./assets/igo2/" }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -20,13 +20,13 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "igo",
+      "prefix": "app",
       "mobile": true,
       "styles": [
         "../node_modules/openlayers/dist/ol.css",
-        "css/material-theme.scss",
-        "css/material-icons.styl",
-        "css/styles.styl"
+        "../node_modules/igo2/src/style/igo.styl",
+        "../node_modules/igo2/src/themes/deeppurple-amber.styl",
+        "style/main.styl"
       ],
       "scripts": [
         "../node_modules/openlayers/dist/ol.js"
@@ -37,9 +37,6 @@
         "prod": "environments/environment.prod.ts"
       }
     }
-  ],
-  "addons": [
-    "assets/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
   ],
   "packages": [],
   "e2e": {
