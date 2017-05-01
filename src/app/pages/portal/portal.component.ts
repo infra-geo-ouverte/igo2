@@ -46,6 +46,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.selectedFeature$$.unsubscribe();
     this.features$$.unsubscribe();
+    this.context$$.unsubscribe();
   }
 
   closeSidenav() {
