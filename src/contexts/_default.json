@@ -1,0 +1,40 @@
+{
+  "uri": "_default",
+  "title": "Default Context",
+  "map": {
+    "view": {
+      "projection": "EPSG:3857",
+      "center": [-72, 52],
+      "zoom": 6
+    }
+  },
+  "layers": [
+    {
+      "title" : "OSM",
+      "type" : "osm"
+    }
+  ],
+  "toolbar": [
+    "searchResults",
+    "contextManager",
+    "mapDetails",
+    "timeAnalysys"
+  ],
+  "tools": [
+    {
+      "name": "searchResults"
+    },
+    {
+      "name": "contextManager"
+    },
+    {
+      "name": "mapDetails",
+      "options": {
+        "toggleLegendOnVisibilityChange": false
+      }
+    },
+    {
+      "name": "timeAnalysis"
+    }
+  ]
+}

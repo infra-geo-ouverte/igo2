@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
 
 import { IgoModule, provideDefaultSearchSources,
-         LanguageLoader, provideLanguageService } from 'igo2';
+         LanguageLoader, provideLanguageService,
+         provideContextServiceOptions } from 'igo2';
 
 import { PortalModule, PortalRoutingModule } from './pages';
 import { AppComponent } from './app.component';
@@ -31,14 +32,10 @@ export function translateLoader(http: Http) {
     ...provideDefaultSearchSources({
         limit: 5
     }),
-    /*{
-      provide: SearchSource,
-      useFactory: (http: Http) => {
-        return new SearchSourceNominatim(http, {limit: 4})
-      },
-      multi: true,
-      deps: [Http]
-    },*/
+    provideContextServiceOptions({
+      basePath: './contexts',
+      contextListFile: '_contexts.json'
+    }),
     provideLanguageService({
       loader: translateLoader
     })
