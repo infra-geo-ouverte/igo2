@@ -1,6 +1,6 @@
-@require '../../../css/media.styl';
+@require '../../../style/media.styl';
 
-.igo-backdrop {
+:host > div {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -11,7 +11,7 @@
   display: none;
 }
 
-.igo-backdrop-shown {
+:host > div.igo-backdrop-shown {
   display: block;
 
   +media(tablet desktop) {

@@ -15,53 +15,26 @@
     }
   ],
   "toolbar": [
-    "search",
-    "context",
-    "mapEditor",
-    "layers",
-    "directions",
-    "timeAnalyser",
-    "print",
-    "measure"
+    "searchResults",
+    "contextManager",
+    "mapDetails",
+    "timeAnalysys"
   ],
   "tools": [
     {
-      "name": "search"
+      "name": "searchResults"
     },
     {
-      "name": "context"
+      "name": "contextManager"
     },
     {
-      "name": "contextEditor"
+      "name": "mapDetails",
+      "options": {
+        "toggleLegendOnVisibilityChange": false
+      }
     },
     {
-      "name": "mapEditor"
-    },
-    {
-      "name": "layerEditor"
-    },
-    {
-      "name": "layers",
-      "title": "Add Layers",
-      "icon": "add_location"
-    },
-    {
-      "name": "directions",
-      "title": "Directions",
-      "icon": "directions"
-    },
-    {
-      "name": "timeAnalyser"
-    },
-    {
-      "name": "print",
-      "title": "Print",
-      "icon": "local_printshop"
-    },
-    {
-      "name": "measure",
-      "title": "Measure",
-      "icon": "straighten"
+      "name": "timeAnalysis"
     }
   ]
 }

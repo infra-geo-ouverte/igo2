@@ -1,0 +1,51 @@
+<md-sidenav-container>
+
+  <app-backdrop
+    [shown]="sidenavOpened"
+    (click)="closeSidenav()">
+  </app-backdrop>
+
+  <button
+    md-icon-button
+    id="menu-button"
+    color="primary"
+    tooltip-position="below"
+    [md-tooltip]="(sidenavOpened ? 'Close Menu' : 'Open Menu') | translate"
+    (click)="toggleSidenav()">
+    <md-icon>
+      <ng-container *ngIf="!sidenavOpened">menu</ng-container>
+      <ng-container *ngIf="sidenavOpened">keyboard_arrow_left</ng-container>
+    </md-icon>
+  </button>
+
+  <igo-search-bar [placeholder]="'Search for an address or a place'"></igo-search-bar>
+
+  <app-sidenav
+    [opened]="sidenavOpened"
+    [feature]="featureService.focusedFeature$ | async"
+    [tool]="toolService.selectedTool$ | async"
+    [media]="mediaService.media$ | async">
+  </app-sidenav>
+
+  <igo-map-browser
+    igoQuery
+    igoOverlay
+    igoMapContext
+    igoLayerContext
+    [map]="map">
+
+    <igo-zoom
+      color="primary"
+      [map]="map" >      
+    </igo-zoom>
+  </igo-map-browser>
+
+  <app-toast
+    [opened]="toastOpened"
+    [feature]="featureService.focusedFeature$ | async"
+    *ngIf="toastShown &&
+           (featureService.focusedFeature$ | async) &&
+           (mediaService.media$ | async) === 'mobile'">    
+  </app-toast>
+
+</md-sidenav-container>

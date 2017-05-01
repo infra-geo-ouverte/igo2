@@ -1,0 +1,86 @@
+<md-sidenav
+  #sidenav
+  igoSidenavShim
+  mode="side"
+  [opened]="opened">
+
+  <div class="igo-sidenav-content">
+
+    <app-flexible
+      #topPanel
+      initial="50%" initialMobile="100%"
+      expanded="calc(100% - 58px)"
+      [state]="topPanelState">
+
+      <div class="igo-content">
+        <igo-panel [title]="tool ? (tool.title | translate) : 'IGO'">
+          <button
+            md-icon-button
+            panelLeftButton
+            tooltip-position="below"
+            [md-tooltip]="'Go Back' | translate"
+            (click)="toolService.selectPreviousTool()"
+            *ngIf="tool">
+            <md-icon>arrow_back</md-icon>
+          </button>
+
+          <button
+            md-icon-button
+            panelRightButton
+            tooltip-position="below"
+            [md-tooltip]="'Main menu' | translate"
+            (click)="toolService.unselectTool()"
+            *ngIf="tool">
+            <md-icon>menu</md-icon>
+          </button>
+
+          <igo-toolbar
+            igoToolContext igoToolbarBinding
+            [withTitle]="tool ? false : true">
+          </igo-toolbar>
+
+          <div class="igo-toolbox-container" [ngClass]="{'shown': tool ? true : false}">
+            <igo-toolbox [animate]="true"></igo-toolbox>
+          </div>
+        </igo-panel>
+      </div>
+
+      <div igoFlexibleFill class="igo-content">
+        <igo-panel
+          [title]="feature.title"
+          *ngIf="feature && media !== 'mobile'">
+
+          <button
+            md-icon-button
+            panelLeftButton
+            class="igo-icon-button"
+            (click)="toggleTopPanel()">
+            <md-icon>
+              <ng-container *ngIf="['collapsed', 'initial'].indexOf(topPanel.state) >= 0">
+                arrow_downward
+              </ng-container>
+              <ng-container *ngIf="topPanel.state === 'expanded'">
+                arrow_upward
+              </ng-container>
+            </md-icon>
+          </button>
+
+          <button
+            md-icon-button
+            panelRightButton
+            class="igo-icon-button"
+            *ngIf="media !== 'mobile'">
+            <md-icon>open_in_new</md-icon>
+          </button>
+
+          <igo-feature-details
+            [feature]="feature"
+            *ngIf="['collapsed', 'initial'].indexOf(topPanel.state) >= 0">
+          </igo-feature-details>
+        </igo-panel>
+      </div>
+
+    </app-flexible>
+
+  </div>
+</md-sidenav>

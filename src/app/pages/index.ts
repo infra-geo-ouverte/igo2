@@ -1,2 +1,1 @@
-export * from './navigator/navigator.module';
-export * from './navigator/navigator-routing.module';
+export * from './portal';

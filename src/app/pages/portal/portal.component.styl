@@ -1,0 +1,126 @@
+@require '../../../style/var.styl';
+@require '../../../style/media.styl';
+
+/*** Main ***/
+:host {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+md-sidenav-container {
+  height: 100%;
+  width: 100%;
+}
+
+/*** Menu button ***/
+
+#menu-button {
+  background-color: $igo-background-color;
+  position: absolute;
+  left: $igo-sidenav-width;
+  top: $igo-margin;
+  z-index: 2;
+
+  +media(tablet) {
+    left: $igo-sidenav-width-tablet;
+  }
+
+  +media(mobile) {
+    right: $igo-margin;
+    left: inherit;
+  }
+}
+
+#menu-button,
+#menu-button >>> .mat-button-ripple-round {
+  border-radius: 0;
+}
+
+/*** Map browser ***/
+igo-map-browser {
+  width: 100%;
+  height: 100%;
+}
+
+igo-zoom >>> button {
+  background-color: #fff;
+}
+
+igo-zoom {
+  +media(mobile) {
+    display: none;
+  }
+}
+
+/*** Search bar ***/
+igo-search-bar {
+  position: absolute;
+  left: 0;
+  top: $igo-margin;
+  z-index: 4;
+  width: "calc(%s - 2 * %s)" % ($igo-sidenav-width $igo-margin);
+  margin: 0 $igo-margin;
+
+  +media(tablet) {
+    width: "calc(%s - 2 * %s)" % ($igo-sidenav-width-tablet $igo-margin);
+  }
+
+  +media(mobile) {
+    width: "calc(100% - %s - (3 * %s))" % ($igo-mobile-min-space-left $igo-margin);
+  }
+}
+
+igo-search-bar {
+  background-color: $igo-background-color;
+}
+
+igo-search-bar >>> input {
+  height: $igo-icon-button-height;
+}
+
+igo-search-bar >>> .mat-input-wrapper {
+  margin: 0;
+}
+
+igo-search-bar >>> label.mat-input-placeholder.mat-float:not(.mat-empty),
+igo-search-bar >>> label.mat-input-placeholder.mat-float.mat-focused {
+  display: none;
+}
+
+igo-search-bar >>> label.mat-input-placeholder.md-float {
+  padding-left: 10px;
+}
+
+igo-search-bar >>> .mat-input-element {
+  padding-left: 10px;
+  padding-right: $igo-icon-button-width;
+}
+
+igo-search-bar >>> .mat-input-placeholder-wrapper {
+  top: 12px;
+  left: $igo-padding;
+  right: $igo-padding;
+  padding: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  width: auto;
+}
+
+igo-search-bar >>> .mat-input-placeholder {
+  padding: 0;
+}
+
+igo-search-bar >>> .mat-input-wrapper {
+  padding: 0;
+}
+
+/*** Toast ***/
+app-toast {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  max-height: "calc(100% - %s)" % ($igo-sidenav-margin-top);
+  background-color: $igo-background-color;
+}

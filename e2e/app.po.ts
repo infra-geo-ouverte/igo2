@@ -6,11 +6,11 @@ export class IgoPage {
   }
 
   getNavigatorDiv() {
-    return element(by.css('igo-app igo-navigator'));
+    return element(by.css('app-portal'));
   }
 
   getSearchBarInput() {
-    return element(by.css('igo-app igo-search-bar input'));
+    return element(by.css('app-portal igo-search-bar input'));
   }
 
 }

@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
-import { Media, MediaService } from '../../core/media.service';
+import { Media, MediaService } from 'igo2';
 
-import { FlexibleState, FlexibleDirection} from './flexible';
+import { FlexibleState, FlexibleDirection} from './flexible.type';
 
 
 @Component({
-  selector: 'igo-flexible',
+  selector: 'app-flexible',
   templateUrl: './flexible.component.html',
   styleUrls: ['./flexible.component.styl']
 })
@@ -16,30 +16,65 @@ export class FlexibleComponent implements OnInit {
 
   @ViewChild('flexibleMain') main;
 
-  @Input('initial') initial: string = '0';
-  @Input('collapsed') collapsed: string = '0';
-  @Input('expanded') expanded: string = '100%';
-
-  @Input('initialMobile') initialMobile: string = this.initial;
-  @Input('collapsedMobile') collapsedMobile: string = this.collapsed;
-  @Input('expandedMobile') expandedMobile: string =  this.expanded;
-
-  @Input('direction') direction: FlexibleDirection = 'column';
-
-  private _state: FlexibleState = 'initial';
-
-  get state (): FlexibleState {
-    return this._state;
+  @Input()
+  get initial(): string { return this._initial; }
+  set initial(value: string) {
+    this._initial = value;
   }
+  private _initial: string = '0';
 
-  @Input('state') set state (state: FlexibleState){
+  @Input()
+  get collapsed(): string { return this._collapsed; }
+  set collapsed(value: string) {
+    this._collapsed = value;
+  }
+  private _collapsed: string = '0';
+
+  @Input()
+  get expanded(): string { return this._expanded; }
+  set expanded(value: string) {
+    this._expanded = value;
+  }
+  private _expanded: string = '100%';
+
+  @Input()
+  get initialMobile(): string { return this._initialMobile; }
+  set initialMobile(value: string) {
+    this._initialMobile = value;
+  }
+  private _initialMobile: string = this.expanded;
+
+  @Input()
+  get collapsedMobile(): string { return this._collapsedMobile; }
+  set collapsedMobile(value: string) {
+    this._collapsedMobile = value;
+  }
+  private _collapsedMobile: string = this.collapsed;
+
+  @Input()
+  get expandedMobile(): string { return this._expandedMobile; }
+  set expandedMobile(value: string) {
+    this._expandedMobile = value;
+  }
+  private _expandedMobile: string = this.expanded;
+
+  @Input()
+  get direction(): FlexibleDirection { return this._direction; }
+  set direction(value: FlexibleDirection) {
+    this._direction = value;
+  }
+  private _direction: FlexibleDirection = 'column';
+
+  @Input()
+  get state(): FlexibleState { return this._state; }
+  set state(value: FlexibleState) {
     const sizes = {
       initial: this.initial,
       collapsed: this.collapsed,
       expanded: this.expanded
     };
 
-    const media = this.mediaService.media.value;
+    const media = this.mediaService.media$.value;
     if (media === 'mobile') {
       Object.assign(sizes, {
         initial: this.initialMobile,
@@ -48,14 +83,15 @@ export class FlexibleComponent implements OnInit {
       });
     }
 
-    const size = sizes[state];
+    const size = sizes[value];
     if (size !== undefined) {
       this.setSize(size);
       setTimeout(() => {
-         this._state = state;
+         this._state = value;
       }, FlexibleComponent.transitionTime);
     }
   }
+  private _state: FlexibleState= 'initial';
 
   constructor(private el: ElementRef,
               private mediaService: MediaService) {}
@@ -65,7 +101,7 @@ export class FlexibleComponent implements OnInit {
 
     // Since this component supports different sizes
     // on mobile, force a redraw when the media changes
-    this.mediaService.media
+    this.mediaService.media$
       .subscribe((media: Media) => this.state = this.state);
   }
 

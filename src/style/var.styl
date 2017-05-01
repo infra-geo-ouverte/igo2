@@ -1,0 +1,54 @@
+@import '~igo2/src/style/var.styl';
+
+/*** Main ***/
+$igo-border-width = 1px;
+$igo-border-style = solid;
+$igo-border-color = rgba(0, 0, 0, .2);
+
+$igo-background-color = rgb(255, 255, 255);
+
+$igo-icon-button-width = 40px;
+$igo-icon-button-height = 40px;
+
+border-box()
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+bordered()
+  border-width $igo-border-width
+  border-style $igo-border-style
+  border-color $igo-border-color
+
+bordered-top()
+  border-top-width $igo-border-width
+  border-top-style $igo-border-style
+  border-top-color $igo-border-color
+
+bordered-bottom()
+  border-bottom-width $igo-border-width
+  border-bottom-style $igo-border-style
+  border-bottom-color $igo-border-color
+
+bordered-left()
+  border-left-width $igo-border-width
+  border-left-style $igo-border-style
+  border-left-color $igo-border-color
+
+bordered-right()
+  border-right-width $igo-border-width
+  border-right-style $igo-border-style
+  border-right-color $igo-border-color
+
+box-shadowed()
+  -moz-box-shadow: 2px 0px 2px 0px #dddddd;
+  -webkit-box-shadow: 2px 0px 2px 0px #dddddd;
+  -o-box-shadow: 2px 0px 2px 0px #dddddd;
+  box-shadow: 2px 0px 2px 0px #dddddd;
+
+/*** Sidenav ***/
+
+$igo-sidenav-margin-top = 50px;
+$igo-sidenav-width = 400px;
+$igo-sidenav-width-tablet = $igo-sidenav-width - $igo-sidenav-margin-top + $igo-margin;
+$igo-mobile-min-space-left = $igo-icon-button-width;
