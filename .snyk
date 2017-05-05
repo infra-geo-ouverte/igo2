@@ -35,9 +35,13 @@ patch:
   'npm:request:20160119':
     - openlayers > closure-util > get-down > request:
         patched: '2017-01-26T18:55:45.853Z'
+    - igo2 > openlayers > closure-util > get-down > request:
+        patched: '2017-05-04T01:39:04.929Z'
   'npm:tar:20151103':
     - openlayers > closure-util > get-down > tar:
         patched: '2017-01-26T18:55:45.853Z'
+    - igo2 > openlayers > closure-util > get-down > tar:
+        patched: '2017-05-04T01:39:04.929Z'
   'npm:ws:20160624':
     - openlayers > closure-util > socket.io > socket.io-client > engine.io-client > ws:
         patched: '2017-01-26T18:55:45.853Z'
@@ -48,3 +52,7 @@ patch:
         patched: '2017-03-16T20:30:30.444Z'
     - openlayers > jsdoc > marked:
         patched: '2017-03-16T20:30:30.444Z'
+    - igo2 > openlayers > marked:
+        patched: '2017-05-04T01:39:04.929Z'
+    - igo2 > openlayers > jsdoc > marked:
+        patched: '2017-05-04T01:39:04.929Z'
