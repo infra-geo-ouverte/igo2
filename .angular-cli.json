@@ -30,7 +30,8 @@
         "style/main.styl"
       ],
       "scripts": [
-        "../node_modules/openlayers/dist/ol.js"
+        "../node_modules/openlayers/dist/ol.js",
+        "../node_modules/jspdf/dist/jspdf.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
