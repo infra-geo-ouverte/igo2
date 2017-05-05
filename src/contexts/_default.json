@@ -18,7 +18,8 @@
     "searchResults",
     "contextManager",
     "mapDetails",
-    "timeAnalysys"
+    "timeAnalysys",
+    "print"
   ],
   "tools": [
     {
@@ -35,6 +36,9 @@
     },
     {
       "name": "timeAnalysis"
+    },
+    {
+      "name": "print"
     }
   ]
 }
