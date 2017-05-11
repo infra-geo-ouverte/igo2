@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { IgoModule, provideDefaultSearchSources } from 'igo2';
+import { IgoModule } from 'igo2';
 
 import { SharedModule } from './shared';
 import { PortalModule, PortalRoutingModule } from './pages';
@@ -21,9 +21,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      providers: [
-        ...provideDefaultSearchSources()
-      ]
+      providers: []
     }).compileComponents();
   }));
 
