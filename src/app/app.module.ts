@@ -3,18 +3,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
 
-import { IgoModule, provideDefaultSearchSources,
-         LanguageLoader, provideLanguageService,
+import { IgoModule, provideSearchSourceOptions,
+         provideIChercheSearchSource,
+         provideNominatimSearchSource,
+         provideDataSourceSearchSource,
+         LanguageLoader, provideLanguageLoader,
          provideContextServiceOptions } from 'igo2';
 
 import { PortalModule, PortalRoutingModule } from './pages';
 import { AppComponent } from './app.component';
 
 
-export function translateLoader(http: Http) {
+export function languageLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
 }
-
 
 @NgModule({
   declarations: [
@@ -29,16 +31,17 @@ export function translateLoader(http: Http) {
     PortalRoutingModule
   ],
   providers: [
-    ...provideDefaultSearchSources({
-        limit: 5
+    provideSearchSourceOptions({
+      limit: 5
     }),
+    provideNominatimSearchSource(),
+    provideIChercheSearchSource(),
+    provideDataSourceSearchSource(),
     provideContextServiceOptions({
       basePath: './contexts',
       contextListFile: '_contexts.json'
     }),
-    provideLanguageService({
-      loader: translateLoader
-    })
+    provideLanguageLoader(languageLoader)
   ],
   bootstrap: [AppComponent]
 })
