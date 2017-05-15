@@ -21,7 +21,7 @@
       "title": "MSP DESSERTE MUN 911",
       "type": "wms",
       "source": {
-        "url": "/cgi-wms/igo_gouvouvert.fcgi",
+        "url": "/ws/igo_gouvouvert.fcgi",
         "params": {
           "layers": "MSP_DESSERTE_MUN_911",
           "version": "1.3.0"
@@ -34,7 +34,7 @@
       "title": "MSP Tel. Urgence",
       "type": "wms",
       "source": {
-        "url": "/cgi-wms/igo_gouvouvert.fcgi",
+        "url": "/ws/igo_gouvouvert.fcgi",
         "params": {
           "layers": "telephone_urg",
           "version": "1.3.0"
