@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Context, ContextService, Feature, FeatureService,
-         IgoMap, MediaService, ToolService } from 'igo2';
+import { Context, ContextService, DataSourceService, Feature, FeatureService,
+         IgoMap, LayerService, MapService, MediaService, OverlayService,
+         SearchService, ToolService } from 'igo2';
 
 
 @Component({
@@ -28,9 +29,17 @@ export class PortalComponent implements OnInit, OnDestroy {
   constructor(public featureService: FeatureService,
               public mediaService: MediaService,
               public toolService: ToolService,
-              private contextService: ContextService) {}
+              public searchService: SearchService,
+              public overlayService: OverlayService,
+              public mapService: MapService,
+              public layerService: LayerService,
+              public dataSourceService: DataSourceService,
+              public contextService: ContextService,
+              public cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
+    window['IGO'] = this;
+
     this.features$$ = this.featureService.features$
       .subscribe((features) => this.handleFeaturesChange(features));
 

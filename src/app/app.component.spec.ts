@@ -1,27 +1,30 @@
 import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 
-import { IgoModule } from 'igo2';
+import { IgoModule, provideSearchSourceOptions,
+         provideNominatimSearchSource } from 'igo2';
 
 import { SharedModule } from './shared';
-import { PortalModule, PortalRoutingModule } from './pages';
+import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
         IgoModule.forRoot(),
 
         SharedModule,
-        PortalModule,
-        PortalRoutingModule
+        PortalModule
       ],
       declarations: [
         AppComponent
       ],
-      providers: []
+      providers: [
+        provideSearchSourceOptions({
+          limit: 5
+        }),
+        provideNominatimSearchSource(),
+      ]
     }).compileComponents();
   }));
 

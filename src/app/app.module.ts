@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
 
 import { IgoModule, provideSearchSourceOptions,
@@ -10,12 +9,19 @@ import { IgoModule, provideSearchSourceOptions,
          LanguageLoader, provideLanguageLoader,
          provideContextServiceOptions } from 'igo2';
 
-import { PortalModule, PortalRoutingModule } from './pages';
+import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 
 
+const IGO_CONFIG = window['IGO_CONFIG'] || {};
+const LOCALE_PATH = IGO_CONFIG['locale'] || './assets/locale/';
+const CONTEXT_SERVICE = IGO_CONFIG['contextService'] || {
+  basePath: './contexts',
+  contextListFile: '_contexts.json'
+};
+
 export function languageLoader(http: Http) {
-  return new LanguageLoader(http, './assets/locale/', '.json');
+  return new LanguageLoader(http, LOCALE_PATH, '.json');
 }
 
 @NgModule({
@@ -24,11 +30,9 @@ export function languageLoader(http: Http) {
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([]),
     IgoModule.forRoot(),
 
-    PortalModule,
-    PortalRoutingModule
+    PortalModule
   ],
   providers: [
     provideSearchSourceOptions({
@@ -37,10 +41,7 @@ export function languageLoader(http: Http) {
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
     provideDataSourceSearchSource(),
-    provideContextServiceOptions({
-      basePath: './contexts',
-      contextListFile: '_contexts.json'
-    }),
+    provideContextServiceOptions(CONTEXT_SERVICE),
     provideLanguageLoader(languageLoader)
   ],
   bootstrap: [AppComponent]
