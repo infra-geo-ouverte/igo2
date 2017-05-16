@@ -1,5 +1,27 @@
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/infra-geo-ouverte/igo2/compare/0.6.1...v0.7.0) (2017-05-16)
+
+
+### Bug Fixes
+
+* package.json & .snyk to reduce vulnerabilities ([#209](https://github.com/infra-geo-ouverte/igo2/issues/209)) ([5819a03](https://github.com/infra-geo-ouverte/igo2/commit/5819a03))
+* **assets:** fix path favicons and remove unused assets ([6ba0d97](https://github.com/infra-geo-ouverte/igo2/commit/6ba0d97))
+* **favicon:** fix favicon url ([e87f1a5](https://github.com/infra-geo-ouverte/igo2/commit/e87f1a5))
+
+
+### Features
+
+* single page app for easier embedding ([#213](https://github.com/infra-geo-ouverte/igo2/issues/213)) ([cf72d57](https://github.com/infra-geo-ouverte/igo2/commit/cf72d57))
+* **favicon:**  add favicons for all platforms ([#211](https://github.com/infra-geo-ouverte/igo2/issues/211)) ([4c33214](https://github.com/infra-geo-ouverte/igo2/commit/4c33214))
+* **igo:** upgrade igo2 lib ([c170878](https://github.com/infra-geo-ouverte/igo2/commit/c170878))
+* **igo:** upgrade to igo 0.4.0 with new functionnalities such as printing ([#212](https://github.com/infra-geo-ouverte/igo2/issues/212)) ([6ad68f5](https://github.com/infra-geo-ouverte/igo2/commit/6ad68f5))
+* **map:** can define size of app-root ([aa09821](https://github.com/infra-geo-ouverte/igo2/commit/aa09821))
+* **print:** add print tool ([3ffaacc](https://github.com/infra-geo-ouverte/igo2/commit/3ffaacc))
+
+
+
 <a name="0.6.1"></a>
-## [0.6.1](https://github.com/infra-geo-ouverte/igo2/compare/0.6.0...v0.6.1) (2017-04-05)
+## [0.6.1](https://github.com/infra-geo-ouverte/igo2/compare/0.6.0...0.6.1) (2017-04-05)
 
 
 ### Bug Fixes
