@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.0
+version: v1.7.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:closure-util:20161219':
@@ -56,3 +56,44 @@ patch:
         patched: '2017-05-04T01:39:04.929Z'
     - igo2 > openlayers > jsdoc > marked:
         patched: '2017-05-04T01:39:04.929Z'
+  'npm:ms:20170412':
+    - openlayers > closure-util > socket.io > socket.io-client > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - openlayers > closure-util > send > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - openlayers > closure-util > send > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > send > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - openlayers > closure-util > socket.io > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > socket.io > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - openlayers > closure-util > socket.io > engine.io > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > socket.io > engine.io > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - openlayers > closure-util > socket.io > socket.io-adapter > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-adapter > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > send > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-client > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - openlayers > closure-util > socket.io > socket.io-client > engine.io-client > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-client > engine.io-client > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - openlayers > closure-util > socket.io > socket.io-parser > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-parser > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - openlayers > closure-util > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - openlayers > closure-util > socket.io > socket.io-client > socket.io-parser > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-client > socket.io-parser > debug > ms:
+        patched: '2017-05-25T01:39:16.386Z'
