@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Http } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { IgoModule, provideSearchSourceOptions,
          provideIChercheSearchSource,
@@ -30,6 +31,7 @@ export function languageLoader(http: Http) {
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([]),
     IgoModule.forRoot(),
 
     PortalModule
