@@ -1,6 +1,6 @@
 {
   "name": "igo",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Infrastructure géomatique ouverte",
   "repository": {
     "url": "https://github.com/infra-geo-ouverte/igo2"
@@ -69,15 +69,17 @@
     "angular2-notifications": "^0.4.53",
     "core-js": "^2.4.1",
     "hammerjs": "^2.0.8",
-    "igo2": "^0.3.2",
+    "igo2": "^0.4.1",
     "intl": "^1.2.5",
+    "jspdf": "^1.3.3",
     "md2": "0.0.18",
     "ng2-translate": "^5.0.0",
     "openlayers": "^4.0.1",
     "proj4": "^2.4.3",
     "rxjs": "^5.1.0",
     "ts-md5": "^1.2.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "snyk": "^1.29.0"
   },
   "devDependencies": {
     "@angular/cli": "^1.0.0",
@@ -90,7 +92,7 @@
     "codelyzer": "~2.0.0",
     "compodoc": "0.0.41",
     "conventional-changelog-cli": "^1.3.1",
-    "igo2": "^0.3.1",
+    "igo2": "^0.4.3",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",
@@ -104,10 +106,9 @@
     "protractor": "~4.0.13",
     "publish-release": "^1.3.3",
     "rimraf": "^2.6.1",
-    "snyk": "^1.26.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.1.0"
+    "typescript": "~2.2.0"
   },
   "snyk": true
 }

@@ -9,7 +9,7 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets/favicon",
+        "assets/favicons",
         "assets/locale",
         "contexts",
         { "glob": "**/*", "input": "../node_modules/igo2/src/assets/", "output": "./assets/igo2/" }

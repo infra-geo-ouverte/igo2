@@ -18,7 +18,10 @@
     </md-icon>
   </button>
 
-  <igo-search-bar [placeholder]="'Search for an address or a place'"></igo-search-bar>
+  <igo-search-bar
+    igoSearchUrlParam
+    [placeholder]="'Search for an address or a place' | translate">
+  </igo-search-bar>
 
   <app-sidenav
     [opened]="sidenavOpened"
@@ -32,11 +35,12 @@
     igoOverlay
     igoMapContext
     igoLayerContext
+    igoMapBrowserBinding
     [map]="map">
 
     <igo-zoom
       color="primary"
-      [map]="map" >      
+      [map]="map" >
     </igo-zoom>
   </igo-map-browser>
 
@@ -45,7 +49,7 @@
     [feature]="featureService.focusedFeature$ | async"
     *ngIf="toastShown &&
            (featureService.focusedFeature$ | async) &&
-           (mediaService.media$ | async) === 'mobile'">    
+           (mediaService.media$ | async) === 'mobile'">
   </app-toast>
 
 </md-sidenav-container>

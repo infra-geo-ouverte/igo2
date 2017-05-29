@@ -1,20 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
-import { IgoModule, provideDefaultSearchSources,
-         LanguageLoader, provideLanguageService,
+import { IgoModule, provideSearchSourceOptions,
+         provideIChercheSearchSource,
+         provideNominatimSearchSource,
+         provideDataSourceSearchSource,
+         LanguageLoader, provideLanguageLoader,
          provideContextServiceOptions } from 'igo2';
 
-import { PortalModule, PortalRoutingModule } from './pages';
+import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 
 
-export function translateLoader(http: Http) {
-  return new LanguageLoader(http, './assets/locale/', '.json');
-}
+const IGO_CONFIG = window['IGO_CONFIG'] || {};
+const LOCALE_PATH = IGO_CONFIG['locale'] || './assets/locale/';
+const CONTEXT_SERVICE = IGO_CONFIG['contextService'] || {
+  basePath: './contexts',
+  contextListFile: '_contexts.json'
+};
 
+export function languageLoader(http: Http) {
+  return new LanguageLoader(http, LOCALE_PATH, '.json');
+}
 
 @NgModule({
   declarations: [
@@ -25,20 +34,17 @@ export function translateLoader(http: Http) {
     RouterModule.forRoot([]),
     IgoModule.forRoot(),
 
-    PortalModule,
-    PortalRoutingModule
+    PortalModule
   ],
   providers: [
-    ...provideDefaultSearchSources({
-        limit: 5
+    provideSearchSourceOptions({
+      limit: 5
     }),
-    provideContextServiceOptions({
-      basePath: './contexts',
-      contextListFile: '_contexts.json'
-    }),
-    provideLanguageService({
-      loader: translateLoader
-    })
+    provideNominatimSearchSource(),
+    provideIChercheSearchSource(),
+    provideDataSourceSearchSource(),
+    provideContextServiceOptions(CONTEXT_SERVICE),
+    provideLanguageLoader(languageLoader)
   ],
   bootstrap: [AppComponent]
 })

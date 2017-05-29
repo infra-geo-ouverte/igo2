@@ -1,10 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Http } from '@angular/http';
 
-import { IgoModule, provideDefaultSearchSources,
-         LanguageLoader, provideLanguageService } from 'igo2';
+import { IgoModule, provideSearchSourceOptions,
+         provideIChercheSearchSource,
+         provideNominatimSearchSource,
+         provideDataSourceSearchSource,
+         LanguageLoader, provideLanguageLoader,
+         provideContextServiceOptions } from 'igo2';
 
 import { SharedModule } from '../../shared';
 import { SidenavComponent } from './sidenav';
@@ -12,7 +16,7 @@ import { ToastComponent } from './toast';
 
 import { PortalComponent } from './portal.component';
 
-export function translateLoader(http: Http) {
+export function languageLoader(http: Http) {
   return new LanguageLoader(http, './assets/locale/', '.json');
 }
 
@@ -23,7 +27,7 @@ describe('PortalComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterModule.forRoot([]),
+        RouterTestingModule,
         IgoModule.forRoot(),
         SharedModule
       ],
@@ -34,10 +38,17 @@ describe('PortalComponent', () => {
       ],
       providers: [
         {provide: APP_BASE_HREF, useValue : '/' },
-        provideLanguageService({
-          loader: translateLoader
+        provideSearchSourceOptions({
+          limit: 5
         }),
-        ...provideDefaultSearchSources(),
+        provideNominatimSearchSource(),
+        provideIChercheSearchSource(),
+        provideDataSourceSearchSource(),
+        provideContextServiceOptions({
+          basePath: './contexts',
+          contextListFile: '_contexts.json'
+        }),
+        provideLanguageLoader(languageLoader)
       ]
     })
     .compileComponents();
