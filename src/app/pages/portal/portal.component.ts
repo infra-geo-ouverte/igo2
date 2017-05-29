@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Context, ContextService, DataSourceService, Feature, FeatureService,
@@ -26,7 +27,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   // True after the initial context is loaded
   private contextLoaded = false;
 
-  constructor(public featureService: FeatureService,
+  constructor(private route: ActivatedRoute,
+              public featureService: FeatureService,
               public mediaService: MediaService,
               public toolService: ToolService,
               public searchService: SearchService,
@@ -100,5 +102,32 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (context !== undefined) {
       this.contextLoaded = true;
     }
+
+    this.route.queryParams.subscribe(params => {
+      if (params['layers'] && params['wmsUrl']) {
+        this.addLayerByName(params['wmsUrl'], params['layers']);
+      }
+    });
+  }
+
+
+  private addLayerByName(url: string, name: string) {
+    const properties = {
+      title: name,
+      type: 'wms',
+      format: "wms",
+      url: url,
+      params: {
+        layers: name
+      }
+    };
+
+    this.dataSourceService
+      .createAsyncDataSource(properties)
+      .debounceTime(100)
+      .subscribe(dataSource =>  {
+        this.map.addLayer(
+          this.layerService.createLayer(dataSource, properties));
+      });
   }
 }
