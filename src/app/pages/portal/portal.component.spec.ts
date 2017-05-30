@@ -1,7 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Http } from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
 
 import { IgoModule, provideSearchSourceOptions,
          provideIChercheSearchSource,
@@ -38,6 +41,12 @@ describe('PortalComponent', () => {
       ],
       providers: [
         {provide: APP_BASE_HREF, useValue : '/' },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: Observable.of({zoom: 8})
+          }
+        },
         provideSearchSourceOptions({
           limit: 5
         }),

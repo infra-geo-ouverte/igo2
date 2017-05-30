@@ -1,4 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import { IgoModule, provideSearchSourceOptions,
          provideNominatimSearchSource } from 'igo2';
@@ -20,6 +22,12 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: Observable.of({zoom: 8})
+          }
+        },
         provideSearchSourceOptions({
           limit: 5
         }),

@@ -115,7 +115,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const properties = {
       title: name,
       type: 'wms',
-      format: "wms",
+      format: 'wms',
       url: url,
       params: {
         layers: name
