@@ -48,7 +48,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.selectedFeature$$ = this.featureService.selectedFeature$
       .subscribe((feature) => this.handleFeatureSelect(feature));
 
-    this.contextService.loadContext('_default');
+    this.contextService.loadDefaultContext();
 
     this.context$$ = this.contextService.context$
       .subscribe((context) => this.handleContextChange(context));

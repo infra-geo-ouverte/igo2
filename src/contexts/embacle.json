@@ -54,6 +54,10 @@
           "version": "1.3.0"
         }
       },
+      "metadata": {
+        "url": "https://www.donneesquebec.ca/recherche/fr/dataset/historique-publique-d-embacles-repertories-au-msp",
+        "extern": true
+      },
       "timeFilter": {
         "min": "2017-01-01",
         "max": "2018-01-01",

@@ -8,7 +8,7 @@ import { IgoModule, provideSearchSourceOptions,
          provideNominatimSearchSource,
          provideDataSourceSearchSource,
          LanguageLoader, provideLanguageLoader,
-         provideContextServiceOptions } from 'igo2';
+         provideContextServiceOptions, RouteService } from 'igo2';
 
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
@@ -37,6 +37,7 @@ export function languageLoader(http: Http) {
     PortalModule
   ],
   providers: [
+    RouteService,
     provideSearchSourceOptions({
       limit: 5
     }),
