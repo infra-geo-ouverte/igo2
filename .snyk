@@ -37,11 +37,15 @@ patch:
         patched: '2017-01-26T18:55:45.853Z'
     - igo2 > openlayers > closure-util > get-down > request:
         patched: '2017-05-04T01:39:04.929Z'
+    - igo2 > openlayers > closure-util > get-down > request:
+        patched: '2017-06-01T01:39:07.916Z'
   'npm:tar:20151103':
     - openlayers > closure-util > get-down > tar:
         patched: '2017-01-26T18:55:45.853Z'
     - igo2 > openlayers > closure-util > get-down > tar:
         patched: '2017-05-04T01:39:04.929Z'
+    - igo2 > openlayers > closure-util > get-down > tar:
+        patched: '2017-06-01T01:39:07.916Z'
   'npm:ws:20160624':
     - openlayers > closure-util > socket.io > socket.io-client > engine.io-client > ws:
         patched: '2017-01-26T18:55:45.853Z'
@@ -56,6 +60,10 @@ patch:
         patched: '2017-05-04T01:39:04.929Z'
     - igo2 > openlayers > jsdoc > marked:
         patched: '2017-05-04T01:39:04.929Z'
+    - igo2 > openlayers > marked:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > jsdoc > marked:
+        patched: '2017-06-01T01:39:07.916Z'
   'npm:ms:20170412':
     - openlayers > closure-util > socket.io > socket.io-client > debug > ms:
         patched: '2017-05-25T01:39:16.386Z'
@@ -97,3 +105,23 @@ patch:
         patched: '2017-05-25T01:39:16.386Z'
     - igo2 > openlayers > closure-util > socket.io > socket.io-client > socket.io-parser > debug > ms:
         patched: '2017-05-25T01:39:16.386Z'
+    - igo2 > openlayers > closure-util > send > ms:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > closure-util > send > debug > ms:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > closure-util > socket.io > debug > ms:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > closure-util > socket.io > engine.io > debug > ms:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-adapter > debug > ms:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-client > debug > ms:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-client > engine.io-client > debug > ms:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-parser > debug > ms:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2017-06-01T01:39:07.916Z'
+    - igo2 > openlayers > closure-util > socket.io > socket.io-client > socket.io-parser > debug > ms:
+        patched: '2017-06-01T01:39:07.916Z'
