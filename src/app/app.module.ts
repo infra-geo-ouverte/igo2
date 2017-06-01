@@ -41,7 +41,6 @@ export function languageLoader(http: Http) {
     provideSearchSourceOptions({
       limit: 5
     }),
-    provideNominatimSearchSource(),
     provideIChercheSearchSource(),
     provideDataSourceSearchSource(),
     provideContextServiceOptions(CONTEXT_SERVICE),
