@@ -1,5 +1,5 @@
 <a name="0.8.0"></a>
-# [0.8.0](https://github.com/infra-geo-ouverte/igo2/compare/0.7.0...v0.8.0) (2017-06-02)
+# [0.8.0](https://github.com/infra-geo-ouverte/igo2/compare/0.7.0...0.8.0) (2017-06-02)
 
 
 ### Bug Fixes

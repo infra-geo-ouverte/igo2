@@ -50,7 +50,7 @@
     "preghpages": "npm run build.prod -- --output-path ./dist/ghpages --bh /igo2/ && echo \"include: ['_default.json', '_contexts.json']\" > dist/ghpages/_config.yml",
     "ghpages": "VERSION=$(node -p -e \"require('./package.json').version\") && ngh --dir=dist/ghpages --no-silent=false --message=$VERSION",
     "postghpages": "rimraf ./dist/ghpages",
-    "ghrelease": "VERSION=$(node -p -e \"require('./package.json').version\") && publish-release --owner infra-geo-ouverte --repo igo2 --tag $VERSION --name $VERSION --reuse-release --notes \"$(npm run changelog-current)\" --assets dist/igo2.zip"
+    "ghrelease": "VERSION=$(node -p -e \"require('./package.json').version\") && publish-release --owner infra-geo-ouverte --repo igo2 --tag $VERSION --name $VERSION --reuse-release --notes \"$(npm run changelog)\" --assets dist/igo2.zip"
   },
   "private": true,
   "dependencies": {
