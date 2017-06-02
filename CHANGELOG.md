@@ -1,3 +1,13 @@
+<a name="0.8.1"></a>
+## [0.8.1](https://github.com/infra-geo-ouverte/igo2/compare/0.8.0...v0.8.1) (2017-06-02)
+
+
+### Bug Fixes
+
+* **translate:** fix Main Menu translation ([e3d51fe](https://github.com/infra-geo-ouverte/igo2/commit/e3d51fe))
+
+
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/infra-geo-ouverte/igo2/compare/0.7.0...0.8.0) (2017-06-02)
 
