@@ -12,6 +12,7 @@
         "assets/favicons",
         "assets/locale",
         "contexts",
+        "config",
         { "glob": "**/*", "input": "../node_modules/igo2/src/assets/", "output": "./assets/igo2/" }
       ],
       "index": "index.html",
