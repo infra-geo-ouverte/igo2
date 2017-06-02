@@ -6,12 +6,11 @@ import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { IgoModule, provideSearchSourceOptions,
+import { IgoModule,
          provideIChercheSearchSource,
          provideNominatimSearchSource,
          provideDataSourceSearchSource,
-         LanguageLoader, provideLanguageLoader,
-         provideContextServiceOptions } from 'igo2';
+         LanguageLoader, provideLanguageLoader} from 'igo2';
 
 import { SharedModule } from '../../shared';
 import { SidenavComponent } from './sidenav';
@@ -47,16 +46,9 @@ describe('PortalComponent', () => {
             params: Observable.of({zoom: 8})
           }
         },
-        provideSearchSourceOptions({
-          limit: 5
-        }),
         provideNominatimSearchSource(),
         provideIChercheSearchSource(),
         provideDataSourceSearchSource(),
-        provideContextServiceOptions({
-          basePath: './contexts',
-          contextListFile: '_contexts.json'
-        }),
         provideLanguageLoader(languageLoader)
       ]
     })

@@ -2,8 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { IgoModule, provideSearchSourceOptions,
-         provideNominatimSearchSource } from 'igo2';
+import { IgoModule, provideNominatimSearchSource } from 'igo2';
 
 import { SharedModule } from './shared';
 import { PortalModule } from './pages';
@@ -28,9 +27,6 @@ describe('AppComponent', () => {
             params: Observable.of({zoom: 8})
           }
         },
-        provideSearchSourceOptions({
-          limit: 5
-        }),
         provideNominatimSearchSource(),
       ]
     }).compileComponents();
