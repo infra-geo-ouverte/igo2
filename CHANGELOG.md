@@ -1,5 +1,25 @@
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/infra-geo-ouverte/igo2/compare/0.7.0...v0.8.0) (2017-06-02)
+
+
+### Bug Fixes
+
+* package.json & .snyk to reduce vulnerabilities ([#215](https://github.com/infra-geo-ouverte/igo2/issues/215)) ([19a76f1](https://github.com/infra-geo-ouverte/igo2/commit/19a76f1))
+* **polyfill:** add intl polyfill, needed for safari < 10 ([56b49f7](https://github.com/infra-geo-ouverte/igo2/commit/56b49f7))
+* **travis:** fix npm cache with npm5 and node v8.0 ([#216](https://github.com/infra-geo-ouverte/igo2/issues/216)) ([0db0dc2](https://github.com/infra-geo-ouverte/igo2/commit/0db0dc2))
+
+
+### Features
+
+* **igo-lib:** update to 0.5.1 ([80d99c1](https://github.com/infra-geo-ouverte/igo2/commit/80d99c1))
+* **igo2:** upgrade igo2 to 0.6.0 ([583aaa9](https://github.com/infra-geo-ouverte/igo2/commit/583aaa9))
+* **loading:** add images for loading ([#214](https://github.com/infra-geo-ouverte/igo2/issues/214)) ([3ebba9c](https://github.com/infra-geo-ouverte/igo2/commit/3ebba9c))
+* **urlParams:** add url params to add layer ([7646733](https://github.com/infra-geo-ouverte/igo2/commit/7646733))
+
+
+
 <a name="0.7.0"></a>
-# [0.7.0](https://github.com/infra-geo-ouverte/igo2/compare/0.6.1...v0.7.0) (2017-05-16)
+# [0.7.0](https://github.com/infra-geo-ouverte/igo2/compare/0.6.1...0.7.0) (2017-05-16)
 
 
 ### Bug Fixes
