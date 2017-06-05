@@ -97,7 +97,7 @@ export class FlexibleComponent implements OnInit {
               private mediaService: MediaService) {}
 
   ngOnInit() {
-    this.el.nativeElement.style.flexDirection = this.direction;
+    this.el.nativeElement.className += this.direction;
 
     // Since this component supports different sizes
     // on mobile, force a redraw when the media changes

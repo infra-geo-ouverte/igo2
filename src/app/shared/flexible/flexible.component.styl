@@ -1,14 +1,19 @@
 :host {
-  display: -webkit-flex; /* Safari */
-  -webkit-flex-direction: column; /* Safari 6.1+ */
   display: flex;
   height: 100%;
   width: 100%;
 }
 
+:host.column {
+  flex-direction: column;
+}
+
+:host.row {
+  flex-direction: row;
+}
+
 .igo-flexible-main {
   flex: 0 0 auto;
-  -webkit-flex: 0 0 auto;  /* Safari 6.1+ */
   overflow: hidden;
 }
 
@@ -22,7 +27,6 @@
 
 .igo-flexible-fill {
   flex: 1 1 auto;
-  -webkit-flex: 1 1 auto;  /* Safari 6.1+ */
   overflow: hidden;
   position: relative;
 }
