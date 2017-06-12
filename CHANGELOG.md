@@ -1,3 +1,19 @@
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/infra-geo-ouverte/igo2/compare/0.8.1...v0.9.0) (2017-06-12)
+
+
+### Bug Fixes
+
+* **mobile:** fix flex for safari ([7aefef0](https://github.com/infra-geo-ouverte/igo2/commit/7aefef0))
+* **mobile:** fix flex for safari ([ed5a9a9](https://github.com/infra-geo-ouverte/igo2/commit/ed5a9a9))
+
+
+### Features
+
+* **igo:** upgrade igo lib to 0.7.0 ([1548298](https://github.com/infra-geo-ouverte/igo2/commit/1548298))
+
+
+
 <a name="0.8.1"></a>
 ## [0.8.1](https://github.com/infra-geo-ouverte/igo2/compare/0.8.0...0.8.1) (2017-06-02)
 
