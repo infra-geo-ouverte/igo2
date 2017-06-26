@@ -33,7 +33,7 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
   },
   "layers":[
     {
-      "name":"nom_titre_alias_wmts",
+      "title":"nom_titre_alias_wmts",
       "type":"wmts",
       "source":{
         "url":"https://geoegl.msp.gouv.qc.ca/carto/wmts",
@@ -43,7 +43,7 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       }
     },
     {
-      "name":"nom_titre_alias_xyz_tms",
+      "title":"nom_titre_alias_tms,
       "type":"xyz",
       "source":{
         "url":"https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
@@ -51,7 +51,7 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       }
     },
     {
-      "name":"nom_titre_alias_couche_wms",
+      "title":"nom_titre_alias_couche_wms",
       "type":"wms",
       "opacity" : 0.3,
       "optionsFromCapabilities": true,
