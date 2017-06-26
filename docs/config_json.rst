@@ -36,7 +36,7 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       "name":"nom_titre_alias_wmts",
       "type":"wmts",
       "source":{
-        "url":"http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/wmts",
+        "url":"https://geoegl.msp.gouv.qc.ca/carto/wmts",
         "matrixSet":"EPSG_3857",
         "format":"image/jpeg",
         "layer":"nom_dela_couche_wmts"
@@ -53,8 +53,14 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
     {
       "name":"nom_titre_alias_couche_wms",
       "type":"wms",
+      "opacity" : 0.3,
+      "optionsFromCapabilities": true,
+      "metadata": {
+          "extern": true
+      },
+      "visible": false,
       "source":{
-        "url":"http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi?",
+        "url":"https://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi?",
         "params":{
           "LAYERS":"nom_couche_wms_layername",
           "VERSION":"1.1.1"
@@ -71,7 +77,7 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       },
       "visible": false,
       "source": {
-        "url": "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
+        "url": "https://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
         "params": {
           "layers": "nom_couche_wms_layername",
           "version": "1.3.0"
@@ -89,7 +95,7 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       "title": "nom_titre_alias_wfs",
       "type" : "wfs",
       "source":{
-        "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
+        "url" : "https://geoegl.msp.gouv.qc.ca/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
       },
       "style" : {
         "Stroke" : {
