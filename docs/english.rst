@@ -49,7 +49,7 @@ Parameters related to JSON :
   },
   "layers":[
     {
-      "name":"name_title_alias_wmts",
+      "title":"name_title_alias_wmts",
       "type":"wmts",
       "source":{
         "url":"http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/wmts",
@@ -59,7 +59,7 @@ Parameters related to JSON :
       }
     },
     {
-      "name":"name_title_alias__xyz_tms",
+      "title":"name_title_alias__xyz_tms",
       "type":"xyz",
       "source":{
         "url":"https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
@@ -67,7 +67,7 @@ Parameters related to JSON :
       }
     },
     {
-      "name":"name_title_alias_wms",
+      "title":"name_title_alias_wms",
       "type":"wms",
       "opacity" : 0.3,
       "optionsFromCapabilities": true,
