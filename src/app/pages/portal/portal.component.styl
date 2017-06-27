@@ -73,6 +73,7 @@ igo-search-bar {
 
 igo-search-bar {
   background-color: $igo-background-color;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
 igo-search-bar >>> input {
@@ -80,25 +81,28 @@ igo-search-bar >>> input {
 }
 
 igo-search-bar >>> .mat-input-wrapper {
-  margin: 0;
+  padding: 0;
 }
 
 igo-search-bar >>> label.mat-input-placeholder.mat-float:not(.mat-empty),
-igo-search-bar >>> label.mat-input-placeholder.mat-float.mat-focused {
+igo-search-bar >>> md-input-container.mat-focused >>> label.mat-input-placeholder.mat-float {
   display: none;
 }
 
-igo-search-bar >>> label.mat-input-placeholder.md-float {
-  padding-left: 10px;
+igo-search-bar >>> label.mat-input-placeholder.mat-float {
+  top: 25px;
 }
 
-igo-search-bar >>> .mat-input-element {
-  padding-left: 10px;
-  padding-right: $igo-icon-button-width;
+igo-search-bar >>> .mat-input-infix {
+  border: none;
+  padding: 0;
+}
+
+igo-search-bar >>> .mat-input-underline {
+  top: 44px;
 }
 
 igo-search-bar >>> .mat-input-placeholder-wrapper {
-  top: 12px;
   left: $igo-padding;
   right: $igo-padding;
   padding: 0;
@@ -108,12 +112,9 @@ igo-search-bar >>> .mat-input-placeholder-wrapper {
   width: auto;
 }
 
-igo-search-bar >>> .mat-input-placeholder {
-  padding: 0;
-}
-
-igo-search-bar >>> .mat-input-wrapper {
-  padding: 0;
+igo-search-bar >>> .mat-input-element {
+  padding-left: 10px;
+  padding-right: $igo-icon-button-width;
 }
 
 /*** Toast ***/
