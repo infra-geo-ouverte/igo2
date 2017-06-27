@@ -1,5 +1,20 @@
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/infra-geo-ouverte/igo2/compare/0.9.0...v0.10.0) (2017-06-27)
+
+
+### Bug Fixes
+
+* **searchbar:** fix css after upgrade ([1ec7c7e](https://github.com/infra-geo-ouverte/igo2/commit/1ec7c7e))
+
+
+### Features
+
+* **package:** upgrade igo2-lib to 0.8.1 ([8ac341c](https://github.com/infra-geo-ouverte/igo2/commit/8ac341c))
+
+
+
 <a name="0.9.0"></a>
-# [0.9.0](https://github.com/infra-geo-ouverte/igo2/compare/0.8.1...v0.9.0) (2017-06-12)
+# [0.9.0](https://github.com/infra-geo-ouverte/igo2/compare/0.8.1...0.9.0) (2017-06-12)
 
 
 ### Bug Fixes
