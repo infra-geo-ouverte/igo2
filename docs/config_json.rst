@@ -11,6 +11,8 @@ Configuration requise
 Cette section détaille les configurations possibles pour le navigateur dans un contexe cartographique. 
 À l'aide d'un fichier JSON, il est possible de construire un contexte avec des outils et des couches de données propres à chaque usage.
 
+Voici un dépôt avec plusieurs exemples de contexte en JSON : https://github.com/geo-msp/apercu-qc/blob/master/contexts/
+
 JSON
 =================
  
@@ -31,27 +33,34 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
   },
   "layers":[
     {
-      "name":"nom_titre_alias_wmts",
+      "title":"nom_titre_alias_wmts",
       "type":"wmts",
       "source":{
-        "url":"http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/wmts",
+        "url":"https://geoegl.msp.gouv.qc.ca/carto/wmts",
         "matrixSet":"EPSG_3857",
         "format":"image/jpeg",
         "layer":"nom_dela_couche_wmts"
       }
     },
     {
-      "name":"nom_titre_alias_xyz_tms",
+      "title":"nom_titre_alias_tms,
       "type":"xyz",
       "source":{
-        "url":"https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png"
+        "url":"https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
+        "attributions": "  © <a href='https://www.droitauteur.gouv.qc.ca/copyright.php'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a>"
       }
     },
     {
-      "name":"nom_titre_alias_couche_wms",
+      "title":"nom_titre_alias_couche_wms",
       "type":"wms",
+      "opacity" : 0.3,
+      "optionsFromCapabilities": true,
+      "metadata": {
+          "extern": true
+      },
+      "visible": false,
       "source":{
-        "url":"http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi?",
+        "url":"https://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi?",
         "params":{
           "LAYERS":"nom_couche_wms_layername",
           "VERSION":"1.1.1"
@@ -60,9 +69,15 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
     },
     {
       "title": "nom_titre_alias_wms_time",
+      "opacity" : 0.3,
       "type": "wms",
+      "optionsFromCapabilities": true,
+      "metadata": {
+          "extern": true
+      },
+      "visible": false,
       "source": {
-        "url": "http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
+        "url": "https://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi",
         "params": {
           "layers": "nom_couche_wms_layername",
           "version": "1.3.0"
@@ -80,7 +95,7 @@ En somme, voici les paramètres qui peuvent définir un contexte de vue cartogra
       "title": "nom_titre_alias_wfs",
       "type" : "wfs",
       "source":{
-        "url" : "http://geoegl.msp.gouv.qc.ca/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
+        "url" : "https://geoegl.msp.gouv.qc.ca/cgi-wms/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
       },
       "style" : {
         "Stroke" : {

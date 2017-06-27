@@ -29,6 +29,8 @@ JSON-EN
 This section include all configuration possible in the Web |igo2|_ Mapping application. 
 With this JSON conguration file, it is possible to build your own context, tools and layers related to each uses.
 
+Here is a repo example for JSON |igo2|_ contexts: https://github.com/geo-msp/apercu-qc/blob/master/contexts/
+
 
 Parameters related to JSON : 
 
@@ -47,7 +49,7 @@ Parameters related to JSON :
   },
   "layers":[
     {
-      "name":"name_title_alias_wmts",
+      "title":"name_title_alias_wmts",
       "type":"wmts",
       "source":{
         "url":"http://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/wmts",
@@ -57,15 +59,22 @@ Parameters related to JSON :
       }
     },
     {
-      "name":"name_title_alias__xyz_tms",
+      "title":"name_title_alias__xyz_tms",
       "type":"xyz",
       "source":{
-        "url":"https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png"
+        "url":"https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
+        "attributions": "  © <a href='https://www.droitauteur.gouv.qc.ca/copyright.php'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a>"
       }
     },
     {
-      "name":"name_title_alias_wms",
+      "title":"name_title_alias_wms",
       "type":"wms",
+      "opacity" : 0.3,
+      "optionsFromCapabilities": true,
+      "metadata": {
+          "extern": true
+      },
+      "visible": false,
       "source":{
         "url":"http://geoegl.msp.gouv.qc.ca/cgi-wms/igo_gouvouvert.fcgi?",
         "params":{
@@ -121,52 +130,31 @@ Parameters related to JSON :
       }
     }
   ],
-  "toolbar":[
-    "search",
-    "context",
-    "mapEditor",
-    "layers",
-    "directions",
-    "historicalAnalysis",
-    "print",
-    "measure"
+ "toolbar": [
+    "searchResults",
+    "contextManager",
+    "mapDetails",
+    "timeAnalysis",
+    "print"
   ],
-  "tools":[
+  "tools": [
     {
-      "name":"context",
-      "title":"Contexts",
-      "icon":"local_offer"
+      "name": "searchResults"
     },
     {
-      "name":"search"
+      "name": "contextManager"
     },
     {
-      "name":"mapEditor"
+      "name": "mapDetails",
+      "options": {
+        "toggleLegendOnVisibilityChange": false
+      }
     },
     {
-      "name":"add_layers",
-      "title":"Add Layers",
-      "icon":"add_location"
+      "name": "timeAnalysis"
     },
     {
-      "name":"directions",
-      "title":"Directions",
-      "icon":"directions"
-    },
-    {
-      "name":"historical_analysis",
-      "title":"Historical Analysis",
-      "icon":"history"
-    },
-    {
-      "name":"print",
-      "title":"Print",
-      "icon":"local_printshop"
-    },
-    {
-      "name":"measure",
-      "title":"Measure",
-      "icon":"straighten"
+      "name": "print"
     }
   ]
 }
