@@ -38,10 +38,9 @@
     igoMapBrowserBinding
     [map]="map">
 
-    <igo-zoom
-      color="primary"
-      [map]="map" >
-    </igo-zoom>
+    <igo-zoom-button [map]="map" color="primary"></igo-zoom-button>
+    <igo-geolocate-button [map]="map" color="primary"></igo-geolocate-button>
+    <igo-user-button [map]="map" color="primary"></igo-user-button>
   </igo-map-browser>
 
   <app-toast
