@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { LanguageService } from 'igo2';
+import { LanguageService, ConfigService, AuthOptions } from 'igo2';
 
 
 @Component({
@@ -10,5 +10,11 @@ import { LanguageService } from 'igo2';
 })
 export class AppComponent {
 
-  constructor (protected languageService: LanguageService) {}
+  public authConfig: AuthOptions;
+
+  constructor(protected languageService: LanguageService,
+              private configService: ConfigService) {
+
+    this.authConfig = this.configService.getConfig('auth');
+  }
 }
