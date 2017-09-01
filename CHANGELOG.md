@@ -1,5 +1,17 @@
+<a name="0.11.0"></a>
+# [0.11.0](https://github.com/infra-geo-ouverte/igo2/compare/0.10.0...0.11.0) (2017-09-01)
+
+
+### Features
+
+* **igo-lib:** update igo-lib to 0.9.0 ([b9271b6](https://github.com/infra-geo-ouverte/igo2/commit/b9271b6))
+* **igo-lib:** upgrade igo-lib to 0.9.1 ([4bdd9ed](https://github.com/infra-geo-ouverte/igo2/commit/4bdd9ed))
+* **login:** show login form only if api service ([983d777](https://github.com/infra-geo-ouverte/igo2/commit/983d777))
+
+
+
 <a name="0.10.0"></a>
-# [0.10.0](https://github.com/infra-geo-ouverte/igo2/compare/0.9.0...v0.10.0) (2017-06-27)
+# [0.10.0](https://github.com/infra-geo-ouverte/igo2/compare/0.9.0...0.10.0) (2017-06-27)
 
 
 ### Bug Fixes
