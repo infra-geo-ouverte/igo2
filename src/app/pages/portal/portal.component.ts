@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Context, ContextService, DataSourceService, Feature, FeatureService,
-         IgoMap, LayerService, MapService, MediaService, OverlayService,
-         SearchService, ToolService } from 'igo2';
+import { AuthService, Context, ContextService, DataSourceService, Feature,
+         FeatureService, IgoMap, LayerService, MapService, MediaService,
+         OverlayService, SearchService, ToolService } from 'igo2';
 
 
 @Component({
@@ -28,6 +28,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private contextLoaded = false;
 
   constructor(private route: ActivatedRoute,
+              public authService: AuthService,
               public featureService: FeatureService,
               public mediaService: MediaService,
               public toolService: ToolService,
@@ -41,6 +42,9 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window['IGO'] = this;
+
+    this.authService.authenticate$
+          .subscribe(() => this.contextLoaded = false);
 
     this.features$$ = this.featureService.features$
       .subscribe((features) => this.handleFeaturesChange(features));
