@@ -12,7 +12,7 @@
       "title": "Fond de carte du Québec",
       "type": "xyz",
       "source": {
-        "url": "https://geoegl.msp.gouv.qc.ca/cgi-wms/mapcache.fcgi/tms/1.0.0/carte_gouv_qc_public@EPSG_3857/{z}/{x}/{-y}.png"
+        "url": "https://geoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_public@EPSG_3857/{z}/{x}/{-y}.png"
       }
     },
    {
@@ -30,25 +30,10 @@
       }
     },
     {
-      "name" : "Bassin (WFS)",
-      "title": "Bassin (WFS)",
-      "type" : "wfs",
-      "source":{
-        "url" : "/ws/adnInternetV2.fcgi?service=WFS&version=1.1.0&request=GetFeature&typename=adn_bassin_n1_simplify_500&srsname=EPSG:3857"
-      },
-      "style" : {
-        "Stroke" : {
-            "color" : "rgba(140, 140, 255, 1.0)",
-            "width" : 3
-        }
-      },
-      "version" : "1.3.0"
-    },
-    {
       "title": "Embâcle",
       "type": "wms",
       "source": {
-        "url": "/ws/igo_gouvouvert.fcgi",
+        "url": "https://geoegl.msp.gouv.qc.ca/ws/igo_gouvouvert.fcgi",
         "params": {
           "layers": "vg_observation_v_inondation_embacle_wmst",
           "version": "1.3.0"
