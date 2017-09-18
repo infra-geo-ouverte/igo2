@@ -1,3 +1,14 @@
+<a name="0.11.3"></a>
+## [0.11.3](https://github.com/infra-geo-ouverte/igo2/compare/0.11.2...0.11.3) (2017-09-18)
+
+
+### Bug Fixes
+
+* **animation:** add polyfill to support web-animation ([e4f076e](https://github.com/infra-geo-ouverte/igo2/commit/e4f076e))
+* **context:** fix url contexts ([aaf47d9](https://github.com/infra-geo-ouverte/igo2/commit/aaf47d9))
+
+
+
 <a name="0.11.2"></a>
 ## [0.11.2](https://github.com/infra-geo-ouverte/igo2/compare/0.11.1...0.11.2) (2017-09-15)
 
