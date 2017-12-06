@@ -1,3 +1,18 @@
+<a name="0.15.0"></a>
+# [0.15.0](https://github.com/infra-geo-ouverte/igo2/compare/0.14.0...0.15.0) (2017-12-06)
+
+
+### Bug Fixes
+
+* **media:** tablet media like desktop ([9f2c556](https://github.com/infra-geo-ouverte/igo2/commit/9f2c556))
+
+
+### Features
+
+* **igo2:** upgrade igo2-lib to 0.12.1 ([f4d0865](https://github.com/infra-geo-ouverte/igo2/commit/f4d0865))
+
+
+
 <a name="0.14.0"></a>
 # [0.14.0](https://github.com/infra-geo-ouverte/igo2/compare/0.13.0...0.14.0) (2017-12-06)
 
