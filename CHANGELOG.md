@@ -1,3 +1,13 @@
+<a name="0.14.0"></a>
+# [0.14.0](https://github.com/infra-geo-ouverte/igo2/compare/0.13.0...0.14.0) (2017-12-06)
+
+
+### Features
+
+* **toast:** add animations and swipe gestures ([f7ce74a](https://github.com/infra-geo-ouverte/igo2/commit/f7ce74a))
+
+
+
 <a name="0.13.0"></a>
 # [0.13.0](https://github.com/infra-geo-ouverte/igo2/compare/0.12.1...0.13.0) (2017-11-14)
 
