@@ -10,6 +10,7 @@
     id="menu-button"
     color="primary"
     tooltip-position="below"
+    mdTooltipShowDelay="500"
     [md-tooltip]="(sidenavOpened ? 'Close Menu' : 'Open Menu') | translate"
     (click)="toggleSidenav()">
     <md-icon>
@@ -36,19 +37,36 @@
     igoMapContext
     igoLayerContext
     igoMapBrowserBinding
-    [map]="map">
+    [map]="map"
+    [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
+    [@mapStateX]="sidenavOpened ? 'right' : 'left'"
+    (@mapStateX.start)="removeMapBrowserClass($event)"
+    (@mapStateX.done)="updateMapBrowserClass($event)"
+    [@mapStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'"
+    (@mapStateY.start)="removeMapBrowserClass($event)"
+    (@mapStateY.done)="updateMapBrowserClass($event)">
 
     <igo-zoom-button [map]="map" color="primary"></igo-zoom-button>
-    <igo-geolocate-button [map]="map" color="primary"></igo-geolocate-button>
-    <igo-user-button [map]="map" color="primary"></igo-user-button>
+    <igo-geolocate-button [map]="map" color="primary"
+      [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'">
+    </igo-geolocate-button>
+    <igo-user-button [map]="map" color="primary"
+      [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'">
+    </igo-user-button>
+    <igo-baselayers-switcher [map]="map"
+      [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'"
+      [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
+                              sidenavOpened ? 'right' : 'left'">
+    </igo-baselayers-switcher>
   </igo-map-browser>
 
   <app-toast
     [opened]="toastOpened"
     [feature]="featureService.focusedFeature$ | async"
-    *ngIf="toastShown &&
-           (featureService.focusedFeature$ | async) &&
-           (mediaService.media$ | async) === 'mobile'">
+    (onOpened)="toastOpened=$event"
+    (swipeleft)="swipe($event.type)"
+    (swiperight)="swipe($event.type)"
+    *ngIf="toastShown">
   </app-toast>
 
 </md-sidenav-container>

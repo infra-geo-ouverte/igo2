@@ -1,7 +1,9 @@
 <app-flexible #flex
   collapsedMobile="51px"
-  expandedMobile="150px"
-  [state]="state">
+  expandedMobile="300px"
+  [state]="state"
+  (swipeup)="swipe($event.type)"
+  (swipedown)="swipe($event.type)">
 
   <igo-panel [title]="feature.title">
     <button

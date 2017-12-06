@@ -6,13 +6,25 @@ import { AuthService, Context, ContextService, DataSourceService, Feature,
          FeatureService, IgoMap, LayerService, MapService, MediaService,
          OverlayService, SearchService, ToolService } from 'igo2';
 
+import { controlSlideX, controlSlideY, mapSlideX, mapSlideY } from './portal.animation';
 
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
-  styleUrls: ['./portal.component.styl']
+  styleUrls: ['./portal.component.styl'],
+  animations: [
+    controlSlideX(),
+    controlSlideY(),
+    mapSlideX(),
+    mapSlideY()
+  ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
+
+  static SWIPE_ACTION = {
+    RIGHT: 'swiperight',
+    LEFT: 'swipeleft'
+  };
 
   public selectedFeature$$: Subscription;
   public features$$: Subscription;
@@ -52,8 +64,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.selectedFeature$$ = this.featureService.selectedFeature$
       .subscribe((feature) => this.handleFeatureSelect(feature));
 
-    this.contextService.loadDefaultContext();
-
     this.context$$ = this.contextService.context$
       .subscribe((context) => this.handleContextChange(context));
   }
@@ -67,7 +77,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   closeSidenav() {
     this.sidenavOpened = false;
     this.toastOpened = false;
-    this.toastShown = true;
+    if (this.mediaService.media$.value === 'mobile' &&
+        this.featureService.focusedFeature$.value) {
+      this.toastShown = true;
+    }
   }
 
   openSidenav() {
@@ -83,17 +96,69 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
+  removeMapBrowserClass(e) {
+    e.element.classList.remove('toast-shown-offset');
+    e.element.classList.remove('toast-opened-offset');
+    e.element.classList.remove('sidenav-offset');
+  }
+
+  updateMapBrowserClass(e) {
+    if (this.mediaService.media$.value === 'mobile') {
+      if (this.toastOpened && this.toastShown) {
+        e.element.classList.add('toast-opened-offset');
+        return;
+      }
+      if (this.toastShown) {
+        e.element.classList.add('toast-shown-offset');
+      }
+      return;
+    }
+    if (this.sidenavOpened) {
+      e.element.classList.add('sidenav-offset');
+    }
+  }
+
+  swipe(action: string) {
+    const featuresList = this.featureService.features$.value;
+    const focusedFeature = this.featureService.focusedFeature$.value;
+
+    let index = featuresList.findIndex(f => f.id === focusedFeature.id);
+    if (index < 0) { return; }
+
+    if (action === PortalComponent.SWIPE_ACTION.LEFT) {
+      index += 1;
+    } else if (action === PortalComponent.SWIPE_ACTION.RIGHT) {
+      index -= 1;
+    }
+
+    if (featuresList[index]) {
+      this.featureService.selectFeature(featuresList[index]);
+    }
+  }
+
   private handleFeaturesChange(features: Feature[]) {
     if (features.length > 0) {
       this.openSidenav();
       const tool = this.toolService.getTool('searchResults');
       this.toolService.selectTool(tool);
+
+      if (this.mediaService.media$.value === 'mobile') {
+        if (features[0].type.toString() === 'Feature' &&
+           (features[0].source !== 'Nominatim (OSM)' &&
+           features[0].source !== 'ICherche Québec')) {
+          this.closeSidenav();
+        }
+      }
     }
   }
 
   private handleFeatureSelect(feature: Feature) {
     if (feature && this.mediaService.media$.value === 'mobile') {
-      this.closeSidenav();
+      if (this.sidenavOpened) {
+        this.closeSidenav();
+      }
+    } else {
+      this.toastShown = false;
     }
   }
 

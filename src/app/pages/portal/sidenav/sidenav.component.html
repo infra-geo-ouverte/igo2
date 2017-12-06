@@ -18,6 +18,7 @@
             md-icon-button
             panelLeftButton
             tooltip-position="below"
+            mdTooltipShowDelay="500"
             [md-tooltip]="'Go Back' | translate"
             (click)="toolService.selectPreviousTool()"
             *ngIf="tool">
@@ -28,6 +29,7 @@
             md-icon-button
             panelRightButton
             tooltip-position="below"
+            mdTooltipShowDelay="500"
             [md-tooltip]="'Main Menu' | translate"
             (click)="toolService.unselectTool()"
             *ngIf="tool">

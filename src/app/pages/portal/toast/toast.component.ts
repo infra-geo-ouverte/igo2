@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Feature } from 'igo2';
 
@@ -10,6 +10,11 @@ import { FlexibleState } from '../../../shared';
   styleUrls: ['./toast.component.styl']
 })
 export class ToastComponent {
+
+  static SWIPE_ACTION = {
+    UP: 'swipeup',
+    DOWN: 'swipedown'
+  };
 
   @Input()
   get opened(): boolean { return this._opened; }
@@ -26,12 +31,27 @@ export class ToastComponent {
   }
   private _feature: Feature;
 
+  @Output() onOpened = new EventEmitter<boolean>();
+
   public state: FlexibleState;
 
   constructor() { }
 
   toggle() {
     this.opened = !this.opened;
+    this.onOpened.emit(this.opened);
+  }
+
+  swipe(action: string) {
+    if (action === ToastComponent.SWIPE_ACTION.UP) {
+      if (!this.opened) {
+        this.toggle();
+      }
+    } else if (action === ToastComponent.SWIPE_ACTION.DOWN) {
+      if (this.opened) {
+        this.toggle();
+      }
+    }
   }
 
 }

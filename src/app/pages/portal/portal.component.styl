@@ -115,3 +115,29 @@ app-toast {
   max-height: "calc(100% - %s)" % ($igo-sidenav-margin-top);
   background-color: $igo-background-color;
 }
+
+igo-map-browser.toast-shown-offset >>> .ol-attribution {
+  +media(mobile) {
+    bottom: 55px;
+  }
+}
+
+igo-map-browser.toast-opened-offset >>> .ol-attribution {
+  +media(mobile) {
+    bottom: 305px;
+  }
+}
+
+igo-map-browser.sidenav-offset >>> .ol-attribution {
+  left: 410px;
+  +media(mobile) {
+    left: $igo-padding
+  }
+}
+
+igo-map-browser.igo-attribution-offset.sidenav-offset >>> .ol-attribution {
+  left: 495px;
+  +media(mobile) {
+    left: 90px;
+  }
+}
