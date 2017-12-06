@@ -22,10 +22,6 @@ md-sidenav-container {
   top: $igo-margin;
   z-index: 2;
 
-  +media(tablet) {
-    left: $igo-sidenav-width-tablet;
-  }
-
   +media(mobile) {
     right: $igo-margin;
     left: inherit;
@@ -51,10 +47,6 @@ igo-search-bar {
   z-index: 4;
   width: "calc(%s - 2 * %s)" % ($igo-sidenav-width $igo-margin);
   margin: 0 $igo-margin;
-
-  +media(tablet) {
-    width: "calc(%s - 2 * %s)" % ($igo-sidenav-width-tablet $igo-margin);
-  }
 
   +media(mobile) {
     width: "calc(100% - %s - (3 * %s))" % ($igo-mobile-min-space-left $igo-margin);

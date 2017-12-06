@@ -17,10 +17,6 @@
 md-sidenav {
   width: $igo-sidenav-width;
 
-  +media(tablet) {
-    width: $igo-sidenav-width-tablet;
-  }
-
   +media(mobile) {
     width: "calc(100% - %s - %s)" % ($igo-mobile-min-space-left $igo-margin);
   }
