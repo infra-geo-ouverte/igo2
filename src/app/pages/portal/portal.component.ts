@@ -138,17 +138,20 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private handleFeaturesChange(features: Feature[]) {
     if (features.length > 0) {
-      this.openSidenav();
-      const tool = this.toolService.getTool('searchResults');
-      this.toolService.selectTool(tool);
-
       if (this.mediaService.media$.value === 'mobile') {
         if (features[0].type.toString() === 'Feature' &&
            (features[0].source !== 'Nominatim (OSM)' &&
            features[0].source !== 'ICherche Québec')) {
-          this.closeSidenav();
+
+             this.featureService.selectFeature(features[0]);
+             this.toastShown = true;
+             return;
         }
       }
+
+      this.openSidenav();
+      const tool = this.toolService.getTool('searchResults');
+      this.toolService.selectTool(tool);
     }
   }
 
