@@ -1,3 +1,18 @@
+<a name="0.17.0"></a>
+# [0.17.0](https://github.com/infra-geo-ouverte/igo2/compare/0.16.0...0.17.0) (2018-01-12)
+
+
+### Bug Fixes
+
+* **toast:** toast is shown when features changes ([a7fe6db](https://github.com/infra-geo-ouverte/igo2/commit/a7fe6db))
+
+
+### Features
+
+* **import-export:** upgrade to igo 0.13.0 and add import-export support ([f887dd3](https://github.com/infra-geo-ouverte/igo2/commit/f887dd3))
+
+
+
 <a name="0.16.0"></a>
 # [0.16.0](https://github.com/infra-geo-ouverte/igo2/compare/0.15.0...0.16.0) (2017-12-07)
 
