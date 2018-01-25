@@ -1,3 +1,18 @@
+<a name="0.17.1"></a>
+## [0.17.1](https://github.com/infra-geo-ouverte/igo2/compare/0.17.0...0.17.1) (2018-01-25)
+
+
+### Bug Fixes
+
+* **mobile:** show geometry when feature is selected ([3067986](https://github.com/infra-geo-ouverte/igo2/commit/3067986))
+
+
+### Features
+
+* **igo2:** upgrade to 0.13.1 ([788ef8b](https://github.com/infra-geo-ouverte/igo2/commit/788ef8b))
+
+
+
 <a name="0.17.0"></a>
 # [0.17.0](https://github.com/infra-geo-ouverte/igo2/compare/0.16.0...0.17.0) (2018-01-12)
 
