@@ -1,3 +1,13 @@
+<a name="0.17.2"></a>
+## [0.17.2](https://github.com/infra-geo-ouverte/igo2/compare/0.17.1...0.17.2) (2018-01-25)
+
+
+### Features
+
+* **igo2:** upgrade to 0.13.2 ([ef37731](https://github.com/infra-geo-ouverte/igo2/commit/ef37731))
+
+
+
 <a name="0.17.1"></a>
 ## [0.17.1](https://github.com/infra-geo-ouverte/igo2/compare/0.17.0...0.17.1) (2018-01-25)
 
