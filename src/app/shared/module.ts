@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { IgoModule } from 'igo2';
+import { IgoModule } from '@igo2/igo2';
 
 import { BackdropComponent } from './backdrop';
 import { FlexibleComponent } from './flexible';

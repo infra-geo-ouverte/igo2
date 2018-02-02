@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { LanguageService, ConfigService, AuthOptions } from 'igo2';
+import { LanguageService, ConfigService, AuthOptions } from '@igo2/igo2';
 
 
 @Component({

@@ -1,4 +1,4 @@
-<md-sidenav
+<mat-sidenav
   #sidenav
   igoSidenavShim
   mode="side"
@@ -15,25 +15,25 @@
       <div class="igo-content">
         <igo-panel [title]="tool ? (tool.title | translate) : 'IGO'">
           <button
-            md-icon-button
+            mat-icon-button
             panelLeftButton
             tooltip-position="below"
-            mdTooltipShowDelay="500"
-            [md-tooltip]="'Go Back' | translate"
+            matTooltipShowDelay="500"
+            [matTooltip]="'Go Back' | translate"
             (click)="toolService.selectPreviousTool()"
             *ngIf="tool">
-            <md-icon>arrow_back</md-icon>
+            <mat-icon>arrow_back</mat-icon>
           </button>
 
           <button
-            md-icon-button
+            mat-icon-button
             panelRightButton
             tooltip-position="below"
-            mdTooltipShowDelay="500"
-            [md-tooltip]="'Main Menu' | translate"
+            matTooltipShowDelay="500"
+            [matTooltip]="'Main Menu' | translate"
             (click)="toolService.unselectTool()"
             *ngIf="tool">
-            <md-icon>menu</md-icon>
+            <mat-icon>menu</mat-icon>
           </button>
 
           <igo-toolbar
@@ -53,26 +53,26 @@
           *ngIf="feature && media !== 'mobile'">
 
           <button
-            md-icon-button
+            mat-icon-button
             panelLeftButton
             class="igo-icon-button"
             (click)="toggleTopPanel()">
-            <md-icon>
+            <mat-icon>
               <ng-container *ngIf="['collapsed', 'initial'].indexOf(topPanel.state) >= 0">
                 arrow_downward
               </ng-container>
               <ng-container *ngIf="topPanel.state === 'expanded'">
                 arrow_upward
               </ng-container>
-            </md-icon>
+            </mat-icon>
           </button>
 
           <button
-            md-icon-button
+            mat-icon-button
             panelRightButton
             class="igo-icon-button"
             *ngIf="media !== 'mobile'">
-            <md-icon>open_in_new</md-icon>
+            <mat-icon>open_in_new</mat-icon>
           </button>
 
           <igo-feature-details
@@ -85,4 +85,4 @@
     </app-flexible>
 
   </div>
-</md-sidenav>
+</mat-sidenav>

@@ -1,4 +1,4 @@
-import { SearchSourcesOptions, LanguageOptions } from 'igo2';
+import { SearchSourcesOptions, LanguageOptions } from '@igo2/igo2';
 
 interface Environment {
   production: boolean;

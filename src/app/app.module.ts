@@ -7,7 +7,7 @@ import { IgoModule,
          provideNominatimSearchSource,
          provideDataSourceSearchSource,
          provideConfigOptions,
-         RouteService } from 'igo2';
+         RouteService } from '@igo2/igo2';
 
 import { environment } from '../environments/environment';
 import { PortalModule } from './pages';

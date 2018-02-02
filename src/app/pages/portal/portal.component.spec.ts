@@ -10,7 +10,7 @@ import { IgoModule,
          provideIChercheSearchSource,
          provideNominatimSearchSource,
          provideDataSourceSearchSource,
-         LanguageLoader, provideLanguageLoader} from 'igo2';
+         LanguageLoader, provideLanguageLoader} from '@igo2/igo2';
 
 import { SharedModule } from '../../shared';
 import { SidenavComponent } from './sidenav';

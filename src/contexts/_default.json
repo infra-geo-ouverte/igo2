@@ -19,7 +19,8 @@
     "contextManager",
     "mapDetails",
     "timeAnalysis",
-    "print"
+    "print",
+    "shareMap"
   ],
   "tools": [
     {
@@ -27,6 +28,9 @@
     },
     {
       "name": "contextManager"
+    },
+    {
+      "name": "shareMap"
     },
     {
       "name": "mapDetails",

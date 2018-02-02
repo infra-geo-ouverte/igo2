@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService, Context, ContextService, DataSourceService, Feature,
          FeatureService, IgoMap, LayerService, MapService, MediaService,
-         OverlayService, SearchService, ToolService } from 'igo2';
+         OverlayService, SearchService, ToolService } from '@igo2/igo2';
 
 import { controlSlideX, controlSlideY, mapSlideX, mapSlideY } from './portal.animation';
 

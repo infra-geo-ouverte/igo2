@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
-import { Media, MediaService } from 'igo2';
+import { Media, MediaService } from '@igo2/igo2';
 
 import { FlexibleState, FlexibleDirection} from './flexible.type';
 

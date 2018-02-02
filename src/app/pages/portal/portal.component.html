@@ -1,4 +1,4 @@
-<md-sidenav-container>
+<mat-sidenav-container>
 
   <app-backdrop
     [shown]="sidenavOpened"
@@ -6,22 +6,23 @@
   </app-backdrop>
 
   <button
-    md-icon-button
+    mat-icon-button
     id="menu-button"
     color="primary"
     tooltip-position="below"
-    mdTooltipShowDelay="500"
-    [md-tooltip]="(sidenavOpened ? 'Close Menu' : 'Open Menu') | translate"
+    matTooltipShowDelay="500"
+    [matTooltip]="(sidenavOpened ? 'Close Menu' : 'Open Menu') | translate"
     (click)="toggleSidenav()">
-    <md-icon>
+    <mat-icon>
       <ng-container *ngIf="!sidenavOpened">menu</ng-container>
       <ng-container *ngIf="sidenavOpened">keyboard_arrow_left</ng-container>
-    </md-icon>
+    </mat-icon>
   </button>
 
   <igo-search-bar
     igoSearchUrlParam
-    [placeholder]="'Search for an address or a place' | translate">
+    [placeholder]="'Search for an address or a place' | translate"
+    floatLabel="never">
   </igo-search-bar>
 
   <app-sidenav
@@ -70,4 +71,4 @@
     *ngIf="toastShown">
   </app-toast>
 
-</md-sidenav-container>
+</mat-sidenav-container>

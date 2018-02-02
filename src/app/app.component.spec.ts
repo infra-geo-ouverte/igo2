@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { IgoModule, provideNominatimSearchSource } from 'igo2';
+import { IgoModule, provideNominatimSearchSource } from '@igo2/igo2';
 
 import { SharedModule } from './shared';
 import { PortalModule } from './pages';

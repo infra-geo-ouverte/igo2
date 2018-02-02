@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IgoModule } from 'igo2';
+import { IgoModule } from '@igo2/igo2';
 import { SharedModule } from '../../../shared';
 
 import { SidenavComponent } from './sidenav.component';

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Media, Feature, Tool, ToolService } from 'igo2';
+import { Media, Feature, Tool, ToolService } from '@igo2/igo2';
 
 import { FlexibleState } from '../../../shared';
 
