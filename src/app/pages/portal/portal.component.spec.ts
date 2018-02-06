@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -18,7 +18,7 @@ import { ToastComponent } from './toast';
 
 import { PortalComponent } from './portal.component';
 
-export function languageLoader(http: Http) {
+export function languageLoader(http: HttpClient) {
   return new LanguageLoader(http, './assets/locale/', '.json');
 }
 
@@ -64,8 +64,4 @@ describe('PortalComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should have a search bar`, async(() => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('igo-search-bar')).toBeTruthy();
-  }));
 });

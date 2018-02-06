@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { IgoModule } from '@igo2/igo2';
 
@@ -13,7 +13,7 @@ import { FlexibleComponent } from './flexible';
   imports: [
     CommonModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     IgoModule
   ],
   declarations: [
@@ -23,7 +23,7 @@ import { FlexibleComponent } from './flexible';
   exports: [
     CommonModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     IgoModule,
 
     BackdropComponent,

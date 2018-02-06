@@ -91,7 +91,7 @@ export class FlexibleComponent implements OnInit {
       }, FlexibleComponent.transitionTime);
     }
   }
-  private _state: FlexibleState= 'initial';
+  private _state: FlexibleState = 'initial';
 
   constructor(private el: ElementRef,
               private mediaService: MediaService) {}
