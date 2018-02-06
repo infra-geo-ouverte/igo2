@@ -1,3 +1,14 @@
+<a name="0.18.0"></a>
+# [0.18.0](https://github.com/infra-geo-ouverte/igo2/compare/0.17.3...0.18.0) (2018-02-06)
+
+
+### Features
+
+* upgrade dependencies ([b2665ba](https://github.com/infra-geo-ouverte/igo2/commit/b2665ba))
+* **angular:** upgrade to angular5 ([0c85d3d](https://github.com/infra-geo-ouverte/igo2/commit/0c85d3d))
+
+
+
 <a name="0.17.3"></a>
 ## [0.17.3](https://github.com/infra-geo-ouverte/igo2/compare/0.17.2...0.17.3) (2018-01-26)
 
@@ -335,7 +346,7 @@
 * **context tool:** Basic file based context tool ([#141](https://github.com/infra-geo-ouverte/igo2/issues/141)) ([bd2f038](https://github.com/infra-geo-ouverte/igo2/commit/bd2f038))
 * **layer-wms:**  add support for layers wms ([#151](https://github.com/infra-geo-ouverte/igo2/issues/151)) ([2872eb8](https://github.com/infra-geo-ouverte/igo2/commit/2872eb8))
 * **search:** add Layer search source ([4610134](https://github.com/infra-geo-ouverte/igo2/commit/4610134))
-* **search-bar:**  Improve the search bar ([#138](https://github.com/infra-geo-ouverte/igo2/issues/138)) ([3130c78](https://github.com/infra-geo-ouverte/igo2/commit/3130c78))
+* **search-bar:**  Improve the search bar ([#138](https://github.com/infra-geo-ouverte/igo2/issues/138)) ([3130c78](https://github.com/infra-geo-ouverte/igo2/commit/3130c78)), closes [#71](https://github.com/infra-geo-ouverte/igo2/issues/71) [#71](https://github.com/infra-geo-ouverte/igo2/issues/71)
 * **tool:** Keep tool history and go back functionnality ([#147](https://github.com/infra-geo-ouverte/igo2/issues/147)) ([6a1a337](https://github.com/infra-geo-ouverte/igo2/commit/6a1a337))
 
 
