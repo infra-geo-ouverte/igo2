@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { debounceTime} from 'rxjs/operators';
 
 import { AuthService, Context, ContextService, DataSourceService, Feature,
          FeatureService, IgoMap, LayerService, MapService, MediaService,
@@ -195,10 +196,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     };
 
-    this.dataSourceService
-      .createAsyncDataSource(properties)
-      .debounceTime(100)
-      .subscribe(dataSource =>  {
+    this.dataSourceService.createAsyncDataSource(properties).pipe(
+      debounceTime(100)
+    ).subscribe(dataSource =>  {
         this.map.addLayer(
           this.layerService.createLayer(dataSource, properties));
       });
