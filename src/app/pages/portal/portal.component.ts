@@ -31,7 +31,13 @@ export class PortalComponent implements OnInit, OnDestroy {
   public features$$: Subscription;
   public context$$: Subscription;
 
-  public map = new IgoMap();
+  public map = new IgoMap({
+    controls: {
+      attribution: {
+        collapsed: false
+      }
+    }
+  });
 
   public sidenavOpened: boolean = false;
   public toastOpened: boolean = false;
