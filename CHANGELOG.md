@@ -1,3 +1,14 @@
+<a name="0.19.1"></a>
+## [0.19.1](https://github.com/infra-geo-ouverte/igo2/compare/0.19.0...0.19.1) (2018-05-01)
+
+
+### Features
+
+* **attribution:** attribution is expanded at the opening ([165e325](https://github.com/infra-geo-ouverte/igo2/commit/165e325))
+* **igo2-lib:** upgrade igo2-lib to 0.19.7 ([68de1c5](https://github.com/infra-geo-ouverte/igo2/commit/68de1c5))
+
+
+
 <a name="0.19.0"></a>
 # [0.19.0](https://github.com/infra-geo-ouverte/igo2/compare/0.18.0...0.19.0) (2018-05-01)
 
