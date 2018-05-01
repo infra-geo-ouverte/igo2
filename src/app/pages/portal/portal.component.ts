@@ -137,6 +137,13 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
+  handleQueryResults(results) {
+    const features: Feature[] = results.features;
+    if (features[0]) {
+      this.featureService.updateFeatures(features, features[0].source);
+    }
+  }
+
   private handleFeaturesChange(features: Feature[]) {
     if (features.length > 0) {
       if (this.mediaService.media$.value === 'mobile') {

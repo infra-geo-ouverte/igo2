@@ -39,6 +39,7 @@
     igoLayerContext
     igoDropGeoFile
     igoMapBrowserBinding
+    (query)="handleQueryResults($event)"
     [map]="map"
     [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
     [@mapStateX]="sidenavOpened ? 'right' : 'left'"
