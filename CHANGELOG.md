@@ -1,3 +1,13 @@
+<a name="0.19.2"></a>
+## [0.19.2](https://github.com/infra-geo-ouverte/igo2/compare/0.19.1...0.19.2) (2018-05-04)
+
+
+### Features
+
+* **igo2-lib:** upgrade igo2-lib ([48c9855](https://github.com/infra-geo-ouverte/igo2/commit/48c9855))
+
+
+
 <a name="0.19.1"></a>
 ## [0.19.1](https://github.com/infra-geo-ouverte/igo2/compare/0.19.0...0.19.1) (2018-05-01)
 
