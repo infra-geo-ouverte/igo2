@@ -1,3 +1,19 @@
+<a name="0.19.3"></a>
+## [0.19.3](https://github.com/infra-geo-ouverte/igo2/compare/0.19.2...0.19.3) (2018-05-09)
+
+
+### Bug Fixes
+
+* fix hover button enabled foir ogc-filter ([a66b944](https://github.com/infra-geo-ouverte/igo2/commit/a66b944))
+* **ie:** add polyfill array.includes ([8eb9768](https://github.com/infra-geo-ouverte/igo2/commit/8eb9768))
+
+
+### Features
+
+* **igo2-lib:** upgrade to 0.19.9 ([1a6b16e](https://github.com/infra-geo-ouverte/igo2/commit/1a6b16e))
+
+
+
 <a name="0.19.2"></a>
 ## [0.19.2](https://github.com/infra-geo-ouverte/igo2/compare/0.19.1...0.19.2) (2018-05-04)
 
