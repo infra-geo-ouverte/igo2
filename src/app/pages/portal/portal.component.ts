@@ -147,6 +147,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     const features: Feature[] = results.features;
     if (features[0]) {
       this.featureService.updateFeatures(features, features[0].source);
+      const clickedFeatures = features.filter(feature =>
+        feature.source === 'Entités cliquées' ||
+        feature.source === 'Clicked Feature')
+        if (clickedFeatures[0]) {
+          this.overlayService.setFeatures([clickedFeatures[0]], 'none');
+        }
     }
   }
 
