@@ -147,7 +147,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     const features: Feature[] = results.features;
     if (features[0]) {
       this.featureService.updateFeatures(features, features[0].source);
-    }
+      const firstClickFeature = features.filter(feature =>
+        feature.source === 'Entités cliquées' ||
+        feature.source === 'Clicked Feature')[0]
+        this.featureService.features$.subscribe(f =>
+          this.featureService.selectFeature(firstClickFeature))
+      }
   }
 
   private handleFeaturesChange(features: Feature[]) {
