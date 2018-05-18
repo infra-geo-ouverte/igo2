@@ -5,7 +5,7 @@ import { debounceTime} from 'rxjs/operators';
 
 import { AuthService, Context, ContextService, DataSourceService, Feature,
          FeatureService, IgoMap, LayerService, MapService, MediaService,
-         OverlayService, SearchService, ToolService } from '@igo2/igo2';
+         OverlayService, SearchService, ToolService, SourceFeatureType } from '@igo2/igo2';
 
 import { controlSlideX, controlSlideY, mapSlideX, mapSlideY } from './portal.animation';
 
@@ -148,8 +148,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (features[0]) {
       this.featureService.updateFeatures(features, features[0].source);
       const firstClickFeature = features.filter(feature =>
-        feature.source === 'Entités cliquées' ||
-        feature.source === 'Clicked Feature')[0]
+        feature.sourceType === SourceFeatureType.Click)[0]
         this.featureService.features$.subscribe(f =>
           this.featureService.selectFeature(firstClickFeature))
       }
