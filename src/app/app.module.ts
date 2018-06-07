@@ -6,6 +6,7 @@ import { IgoModule,
          provideIChercheSearchSource,
          provideNominatimSearchSource,
          provideDataSourceSearchSource,
+         provideOsrmRoutingSource,
          provideConfigOptions,
          RouteService } from '@igo2/igo2';
 
@@ -32,7 +33,8 @@ import { AppComponent } from './app.component';
     RouteService,
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
-    provideDataSourceSearchSource()
+    provideDataSourceSearchSource(),
+    provideOsrmRoutingSource()
   ],
   bootstrap: [AppComponent]
 })
