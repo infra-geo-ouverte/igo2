@@ -14,7 +14,8 @@ import {
   IgoFlexibleModule
 } from '@igo2/common';
 import { IgoGeoModule } from '@igo2/geo';
-import { IgoContextModule, IgoContextMapButtonModule } from '@igo2/context';
+import { IgoContextModule } from '@igo2/context';
+import { IgoToolsModule } from '@igo2/tools';
 
 import { PortalComponent } from './portal.component';
 
@@ -31,7 +32,7 @@ import { PortalComponent } from './portal.component';
     IgoFlexibleModule,
     IgoGeoModule,
     IgoContextModule,
-    IgoContextMapButtonModule
+    IgoToolsModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]

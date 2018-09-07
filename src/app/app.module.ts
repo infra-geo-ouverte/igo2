@@ -15,7 +15,6 @@ import {
   provideNominatimSearchSource,
   provideDataSourceSearchSource
 } from '@igo2/geo';
-import { IgoToolsModule } from '@igo2/tools';
 
 import { environment } from '../environments/environment';
 import { PortalModule } from './pages';
@@ -31,7 +30,6 @@ import { AppComponent } from './app.component';
     IgoMessageModule,
     IgoSpinnerModule,
     IgoStopPropagationModule,
-    IgoToolsModule,
     PortalModule
   ],
   providers: [
