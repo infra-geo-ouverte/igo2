@@ -28,7 +28,7 @@
     "clean": "rimraf ./dist && npm cache clean --force && git checkout -- package.json && git checkout -- package-lock.json",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "changelog-current": "conventional-changelog -p angular -r 2",
-    "preversion": "npm run tests.all && rimraf ./dist && npm run build.prod",
+    "preversion": "npm run test.all && rimraf ./dist && npm run build.prod",
     "version": "npm run changelog && git add -A CHANGELOG.md",
     "postversion": "git push && git push --tags && rimraf igo2.zip && cd ./dist/igo2/ && zip -r ../igo2.zip ./* && npm run ghpages && npm run ghrelease",
     "preghpages": "npm run build.prod -- --output-path ./dist/ghpages --base-href /igo2/ && echo \"include: ['_default.json', '_contexts.json']\" > dist/ghpages/_config.yml",
