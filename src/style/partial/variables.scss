@@ -1,0 +1,10 @@
+@import '~@igo2/core/style/partial/core.variables';
+
+/*** Main ***/
+$igo-background-color: rgb(255, 255, 255);
+$igo-icon-button-width: 40px;
+
+/*** Sidenav ***/
+$igo-sidenav-margin-top: 50px;
+$igo-sidenav-width: 400px;
+$igo-mobile-min-space-left: $igo-icon-button-width;
