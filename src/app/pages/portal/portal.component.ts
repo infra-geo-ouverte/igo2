@@ -23,6 +23,10 @@ import {
   mapSlideY
 } from './portal.animation';
 
+import proj4 from 'proj4';
+import * as olproj from 'ol/proj';
+import * as olproj4 from 'ol/proj/proj4';
+
 
 @Component({
   selector: 'app-portal',
@@ -70,6 +74,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    proj4.defs('EPSG:32198', '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs');
+    olproj4.register(proj4)
+    olproj.get('EPSG:32198').setExtent([-886251.0296, 180252.9126, 897177.3418, 2106143.8139]);
+  
     window['IGO'] = this;
 
     this.features$$ = this.featureService.features$.subscribe(features =>
