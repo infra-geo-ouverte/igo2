@@ -9,7 +9,6 @@ import {
   RouteService
 } from '@igo2/core';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
-import { IgoAuthModule } from '@igo2/auth';
 import {
   provideIChercheSearchSource,
   provideNominatimSearchSource,
@@ -26,7 +25,6 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
-    IgoAuthModule,
     IgoMessageModule,
     IgoSpinnerModule,
     IgoStopPropagationModule,

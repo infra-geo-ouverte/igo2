@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { MediaService } from '@igo2/core';
-import { AuthService } from '@igo2/auth';
 import { Context, ContextService, ToolService } from '@igo2/context';
 import {
   DataSourceService,
@@ -23,6 +22,7 @@ import {
   mapSlideX,
   mapSlideY
 } from './portal.animation';
+
 
 @Component({
   selector: 'app-portal',
@@ -57,7 +57,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    public authService: AuthService,
     public featureService: FeatureService,
     public mediaService: MediaService,
     public toolService: ToolService,
@@ -72,10 +71,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window['IGO'] = this;
-
-    this.authService.authenticate$.subscribe(
-      () => (this.contextLoaded = false)
-    );
 
     this.features$$ = this.featureService.features$.subscribe(features =>
       this.handleFeaturesChange(features)

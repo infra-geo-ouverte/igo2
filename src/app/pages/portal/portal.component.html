@@ -54,9 +54,6 @@
     <igo-geolocate-button [map]="map" color="primary"
       [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'">
     </igo-geolocate-button>
-    <igo-user-button [map]="map" color="primary"
-      [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'">
-    </igo-user-button>
     <igo-baselayers-switcher [map]="map"
       [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'"
       [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
