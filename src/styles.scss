@@ -32,3 +32,11 @@ body {
 ::-ms-clear {
   display: none;
 }
+
+
+/* FIX menu header horizontal alignment */
+/* TODO: Move into igo2-lib */
+.igo-panel-title {
+  display: inline-block !important;
+  float: none !important;
+}
