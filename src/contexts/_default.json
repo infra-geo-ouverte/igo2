@@ -1,18 +1,54 @@
 {
   "uri": "_default",
-  "title": "Default Context",
+  "title": "FADQ",
   "map": {
     "view": {
-      "projection": "EPSG:3857",
-      "center": [-72, 52],
-      "zoom": 6
+      "projection": "EPSG:32198",
+      "center": [-72, 46],
+      "zoom": 3,
+      "resolutions": [7224.8888888889,3612.4444444445,1806.2222222222,903.1111111111,451.5555555556,225.7777777778,112.8888888889,56.4444444444,28.2222222222,14.1111111111,7.0555555556,3.5277777778,1.7638888889,0.8819444444,0.4409722222,0.2204861111, 0.1102430555]
     }
   },
   "layers": [
     {
-      "title": "OSM",
+      "title": "Gouvernmement du Québec",
+      "visible": false,
       "sourceOptions": {
-        "type": "osm"
+        "type": "wmts",
+        "url": "/geoservpro/mapcache/wmts",
+        "layer": "carte_gouv_qc",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "title": "Images les plus récentes",
+      "sourceOptions": {
+        "type": "wmts",
+        "url": "/erdas-iws/ogc/wmts/Imagerie_Continue",
+        "layer": "Imagerie_GQ",
+        "style": "default",
+        "matrixSet": "Lambert:epsg:32198",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "title": "Parcelles du client",
+      "sourceOptions": {
+        "type": "vector"
+      }
+    },
+    {
+      "title": "Numéros de parcelles",
+      "sourceOptions": {
+        "type": "vector"
       }
     }
   ],
@@ -20,9 +56,7 @@
     "searchResults",
     "contextManager",
     "mapDetails",
-    "timeAnalysis",
-    "print",
-    "shareMap"
+    "print"
   ],
   "tools": [
     {
@@ -32,16 +66,10 @@
       "name": "contextManager"
     },
     {
-      "name": "shareMap"
-    },
-    {
       "name": "mapDetails",
       "options": {
         "toggleLegendOnVisibilityChange": false
       }
-    },
-    {
-      "name": "timeAnalysis"
     },
     {
       "name": "print"

@@ -1,11 +1,3 @@
 {
-  "searchSources": {
-    "icherche": {
-      "enabled": false,
-      "url": "https://geoegl.msp.gouv.qc.ca/icherche/geocode"
-    },
-    "datasource": {
-      "enabled": false
-    }
-  }
+  
 }
