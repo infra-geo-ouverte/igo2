@@ -1,13 +1,14 @@
 <mat-sidenav-container>
 
-  <app-backdrop
+  <igo-backdrop
     [shown]="sidenavOpened"
     (click)="closeSidenav()">
-  </app-backdrop>
+  </igo-backdrop>
 
   <button
     mat-icon-button
     id="menu-button"
+    class="menu-button"
     color="primary"
     tooltip-position="below"
     matTooltipShowDelay="500"
@@ -25,12 +26,12 @@
     floatLabel="never">
   </igo-search-bar>
 
-  <app-sidenav
+  <igo-sidenav
     [opened]="sidenavOpened"
     [feature]="featureService.focusedFeature$ | async"
     [tool]="toolService.selectedTool$ | async"
     [media]="mediaService.media$ | async">
-  </app-sidenav>
+  </igo-sidenav>
 
   <igo-map-browser
     igoQuery
@@ -63,13 +64,13 @@
     </igo-baselayers-switcher>
   </igo-map-browser>
 
-  <app-toast
-    [opened]="toastOpened"
+  <igo-toast
+    [expanded]="toastOpened"
     [feature]="featureService.focusedFeature$ | async"
     (onOpened)="toastOpened=$event"
     (swipeleft)="swipe($event.type)"
     (swiperight)="swipe($event.type)"
     *ngIf="toastShown">
-  </app-toast>
+  </igo-toast>
 
 </mat-sidenav-container>

@@ -1,12 +1,17 @@
 {
-  "/ws/igo_gouvouvert.fcgi": {
+  "/icherche/": {
     "target": "https://geoegl.msp.gouv.qc.ca",
     "changeOrigin": true,
     "secure": false
   },
-  "/ws/adnInternetV2.fcgi": {
+  "/ws/": {
     "target": "https://geoegl.msp.gouv.qc.ca",
-    "changeOrigin": true,
-    "secure": false
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/igo2/api/": {
+    "target": "https://geoegl.msp.gouv.qc.ca",
+    "secure": false,
+    "changeOrigin": true
   }
 }

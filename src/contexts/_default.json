@@ -10,8 +10,10 @@
   },
   "layers": [
     {
-      "title" : "OSM",
-      "type" : "osm"
+      "title": "OSM",
+      "sourceOptions": {
+        "type": "osm"
+      }
     }
   ],
   "toolbar": [

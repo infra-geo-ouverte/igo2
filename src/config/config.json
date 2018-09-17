@@ -1,7 +1,7 @@
 {
   "searchSources": {
       "nominatim": {
-        "enabled": true
+        "enabled": false
       },
       "icherche": {
         "enabled": true,

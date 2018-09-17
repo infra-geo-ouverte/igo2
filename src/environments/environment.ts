@@ -3,8 +3,10 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-import { SearchSourcesOptions, LanguageOptions, AuthOptions,
-  ContextServiceOptions, CatalogServiceOptions } from '@igo2/igo2';
+import { AuthOptions } from '@igo2/auth';
+import { ContextServiceOptions } from '@igo2/context';
+import { LanguageOptions } from '@igo2/core';
+import { SearchSourcesOptions, CatalogServiceOptions } from '@igo2/geo';
 
 interface Environment {
   production: boolean;
@@ -13,9 +15,9 @@ interface Environment {
     language?: LanguageOptions;
     auth?: AuthOptions;
     context?: ContextServiceOptions;
-    catalog?: CatalogServiceOptions
+    catalog?: CatalogServiceOptions;
   };
-};
+}
 
 export const environment: Environment = {
   production: false,
@@ -25,14 +27,14 @@ export const environment: Environment = {
         enabled: false
       },
       icherche: {
-        url: 'https://geoegl.msp.gouv.qc.ca/icherche/geopasdecode'
+        url: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
       },
       datasource: {
         url: 'https://geoegl.msp.gouv.qc.ca/igo2/api/layers/search'
       }
     },
     language: {
-      prefix: './assets/locale/'
+      prefix: './locale/'
     }
   }
 };

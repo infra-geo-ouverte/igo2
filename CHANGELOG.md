@@ -1,3 +1,13 @@
+<a name="0.20.0"></a>
+# [0.20.0](https://github.com/infra-geo-ouverte/igo2/compare/0.19.4...0.20.0) (2018-09-07)
+
+
+### Features
+
+* **igo2-lib:** upgrade to angular 6 and igo2-lib 0.23 ([f1d9d93](https://github.com/infra-geo-ouverte/igo2/commit/f1d9d93))
+
+
+
 <a name="0.19.4"></a>
 ## [0.19.4](https://github.com/infra-geo-ouverte/igo2/compare/0.19.3...0.19.4) (2018-05-10)
 
