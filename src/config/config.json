@@ -1,11 +1,21 @@
 {
   "searchSources": {
-    "icherche": {
-      "enabled": false,
-      "url": "https://geoegl.msp.gouv.qc.ca/icherche/geocode"
+      "nominatim": {
+        "enabled": false
+      },
+      "icherche": {
+        "enabled": true,
+        "url": "https://geoegl.msp.gouv.qc.ca/icherche/geocode",
+        "locateUrl": "https://geoegl.msp.gouv.qc.ca/icherche/xy"
+      },
+      "datasource": {
+        "enabled": false
+      }
     },
-    "datasource": {
-      "enabled": false
+    "routingSources": {
+      "osrm": {
+        "enabled": true
+      }
     }
   }
-}
+  

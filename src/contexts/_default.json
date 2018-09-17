@@ -17,6 +17,7 @@
     }
   ],
   "toolbar": [
+    "directions",
     "searchResults",
     "contextManager",
     "mapDetails",
@@ -26,6 +27,8 @@
   ],
   "tools": [
     {
+      "name": "directions"
+    },{
       "name": "searchResults"
     },
     {
