@@ -1,7 +1,8 @@
 {
   "searchSources": {
     "icherche": {
-      "url": "https://geoegl.msp.gouv.qc.ca/icherche/geopasdecode"
+      "enabled": false,
+      "url": "https://geoegl.msp.gouv.qc.ca/icherche/geocode"
     },
     "datasource": {
       "enabled": false
