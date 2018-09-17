@@ -42,6 +42,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public map = new IgoMap({
     controls: {
+      scaleLine: true,
       attribution: {
         collapsed: false
       }
