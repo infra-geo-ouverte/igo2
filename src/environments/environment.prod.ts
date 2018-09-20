@@ -17,10 +17,10 @@ export const environment: Environment = {
         enabled: false
       },
       icherche: {
-        url: '/icherche/geocode'
+        searchUrl: '/icherche/geocode'
       },
       datasource: {
-        url: '/igo2/api/layers/search'
+        searchUrl: '/igo2/api/layers/search'
       }
     },
     language: {
