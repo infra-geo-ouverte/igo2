@@ -4,7 +4,12 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { MediaService } from '@igo2/core';
-import { Context, ContextService, ToolService } from '@igo2/context';
+import {
+  Context,
+  ContextService,
+  ToolService
+} from '@igo2/context';
+
 import {
   DataSourceService,
   Feature,
@@ -13,7 +18,7 @@ import {
   LayerService,
   MapService,
   OverlayService,
-  SearchService
+  SearchService,
 } from '@igo2/geo';
 
 import {
@@ -23,22 +28,25 @@ import {
   mapSlideY
 } from './portal.animation';
 
-import proj4 from 'proj4';
-import * as olproj from 'ol/proj';
-import * as olproj4 from 'ol/proj/proj4';
-
+import { ProjectionService } from '../../modules/map';
 
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
   styleUrls: ['./portal.component.scss'],
-  animations: [controlSlideX(), controlSlideY(), mapSlideX(), mapSlideY()]
+  animations: [controlSlideX(), controlSlideY(), mapSlideX(), mapSlideY()],
+  host: {
+    '[class.fadq-bottom-panel-opened]': 'bottomPanelOpened'
+  }
 })
 export class PortalComponent implements OnInit, OnDestroy {
   static SWIPE_ACTION = {
     RIGHT: 'swiperight',
     LEFT: 'swipeleft'
   };
+
+  public searchType: string = 'Client';
+  public searchTypes: string[] = ['Client', 'Localisation', 'Couche de données'];
 
   public selectedFeature$$: Subscription;
   public features$$: Subscription;
@@ -53,14 +61,14 @@ export class PortalComponent implements OnInit, OnDestroy {
   });
 
   public sidenavOpened = false;
-  public toastOpened = false;
-  public toastShown = false;
+  public bottomPanelOpened = false;
 
   // True after the initial context is loaded
   private contextLoaded = false;
 
   constructor(
     private route: ActivatedRoute,
+    private projectionService: ProjectionService,
     public featureService: FeatureService,
     public mediaService: MediaService,
     public toolService: ToolService,
@@ -74,10 +82,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    proj4.defs('EPSG:32198', '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs');
-    olproj4.register(proj4)
-    olproj.get('EPSG:32198').setExtent([-886251.0296, 180252.9126, 897177.3418, 2106143.8139]);
-  
     window['IGO'] = this;
 
     this.features$$ = this.featureService.features$.subscribe(features =>
@@ -101,18 +105,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   closeSidenav() {
     this.sidenavOpened = false;
-    this.toastOpened = false;
-    if (
-      this.mediaService.media$.value === 'mobile' &&
-      this.featureService.focusedFeature$.value
-    ) {
-      this.toastShown = true;
-    }
   }
 
   openSidenav() {
     this.sidenavOpened = true;
-    this.toastShown = false;
   }
 
   toggleSidenav() {
@@ -124,28 +120,16 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   removeMapBrowserClass(e) {
-    e.element.classList.remove('toast-shown-offset');
-    e.element.classList.remove('toast-opened-offset');
     e.element.classList.remove('sidenav-offset');
   }
 
   updateMapBrowserClass(e) {
-    if (this.mediaService.media$.value === 'mobile') {
-      if (this.toastOpened && this.toastShown) {
-        e.element.classList.add('toast-opened-offset');
-        return;
-      }
-      if (this.toastShown) {
-        e.element.classList.add('toast-shown-offset');
-      }
-      return;
-    }
     if (this.sidenavOpened) {
       e.element.classList.add('sidenav-offset');
     }
   }
 
-  swipe(action: string) {
+  swipeFeature(action: string) {
     const featuresList = this.featureService.features$.value;
     const focusedFeature = this.featureService.focusedFeature$.value;
 
@@ -182,7 +166,6 @@ export class PortalComponent implements OnInit, OnDestroy {
         ) {
           this.featureService.selectFeature(features[0]);
           this.overlayService.setFeatures([features[0]], 'zoom');
-          this.toastShown = true;
           return;
         }
       }
@@ -198,8 +181,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (this.sidenavOpened) {
         this.closeSidenav();
       }
-    } else {
-      this.toastShown = false;
     }
   }
 

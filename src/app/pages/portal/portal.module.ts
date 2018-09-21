@@ -4,6 +4,8 @@ import {
   MatTooltipModule,
   MatIconModule,
   MatButtonModule,
+  MatMenuModule,
+  MatRadioModule,
   MatSidenavModule
 } from '@angular/material';
 
@@ -17,6 +19,11 @@ import { IgoGeoModule } from '@igo2/geo';
 import { IgoContextModule } from '@igo2/context';
 import { IgoToolsModule } from '@igo2/tools';
 
+import { FadqMapModule } from '../../modules/map/map.module';
+import { FadqToolModule } from '../../modules/tool/tool.module';
+import { FadqBottomPanelModule } from './bottom-panel/bottom-panel.module';
+import { FadqSidenavModule } from './sidenav/sidenav.module';
+
 import { PortalComponent } from './portal.component';
 
 @NgModule({
@@ -25,6 +32,8 @@ import { PortalComponent } from './portal.component';
     MatTooltipModule,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
+    MatRadioModule,
     MatSidenavModule,
     IgoCoreModule,
     IgoPanelModule,
@@ -32,7 +41,12 @@ import { PortalComponent } from './portal.component';
     IgoFlexibleModule,
     IgoGeoModule,
     IgoContextModule,
-    IgoToolsModule
+    IgoToolsModule,
+
+    FadqBottomPanelModule,
+    FadqSidenavModule,
+    FadqMapModule,
+    FadqToolModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]
