@@ -1,0 +1,42 @@
+@import '~@igo2/core/style/partial/media';
+@import '~@igo2/core/style/partial/core.variables';
+@import '../../../../style/partial/variables';
+@import '../sidenav/sidenav.component';
+
+/* TODO: Compute properly and consider the header */
+$bottom-panel-max-height: 40%;
+$bottom-panel-collapsed-height: 48px;
+$bottom-panel-header-height: 64px;
+$bottom-panel-body-height: 400px;
+$bottom-panel-width-transition: width 140ms cubic-bezier(.4,0,.2,1);
+$bottom-panel-height-transition: height 280ms cubic-bezier(.4,0,.2,1);
+
+:host {
+  max-height: 40%;
+  width: $igo-sidenav-width;
+  transition: $bottom-panel-width-transition;
+}
+
+:host.fadq-bottom-panel-opened {
+  width: 100%;
+}
+
+mat-expansion-panel:not(.mat-expanded) {
+  height: $bottom-panel-collapsed-height;
+  transition: $bottom-panel-height-transition;
+}
+
+mat-expansion-panel.mat-expanded {
+  height: 100%;
+  transition: $bottom-panel-height-transition;
+}
+
+mat-expansion-panel ::ng-deep .mat-expansion-panel-header {
+  height: $bottom-panel-header-height;
+  padding: $igo-padding;
+}
+
+mat-expansion-panel ::ng-deep .mat-expansion-panel-content .mat-expansion-panel-body {
+  overflow: auto;
+  height: $bottom-panel-body-height;
+}
