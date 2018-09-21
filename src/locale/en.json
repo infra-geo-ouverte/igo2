@@ -1,6 +1,15 @@
 {
   "welcome": "Welcome to {{title}}",
-  "Close Menu": "Close Menu",
-  "Open Menu": "Open Menu",
-  "Search for an address or a place": "Search for an address or a place"
+  "menu.close": "Close Menu",
+  "menu.open": "Open Menu",
+
+  "search": {
+    "searchbar.placeholder": "Search for a client, a place or a layer",
+    "menu.tooltip": "Search Options"
+  },
+
+  "tools": {
+    "editAddresses": "Edit Addresses",
+    "searchResults": "Search Results"
+  }
 }

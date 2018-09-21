@@ -1,6 +1,6 @@
 {
   "uri": "_default",
-  "title": "FADQ",
+  "title": "Default",
   "map": {
     "view": {
       "projection": "EPSG:32198",
@@ -12,10 +12,11 @@
   "layers": [
     {
       "title": "Gouvernmement du Québec",
+      "baseLayer": true,
       "visible": false,
       "sourceOptions": {
         "type": "wmts",
-        "url": "/geoservpro/mapcache/wmts",
+        "url": "http://geoservpro.fadq.qc/mapcache/wmts",
         "layer": "carte_gouv_qc",
         "style": "default",
         "matrixSet": "LAMBERT",
@@ -27,9 +28,11 @@
     },
     {
       "title": "Images les plus récentes",
+      "baseLayer": true,
+      "visible": true,
       "sourceOptions": {
         "type": "wmts",
-        "url": "/erdas-iws/ogc/wmts/Imagerie_Continue",
+        "url": "https://servicesmatriciels.mern.qc/erdas-iws/ogc/wmts/Imagerie_Continue",
         "layer": "Imagerie_GQ",
         "style": "default",
         "matrixSet": "Lambert:epsg:32198",
@@ -56,7 +59,8 @@
     "searchResults",
     "contextManager",
     "mapDetails",
-    "print"
+    "print",
+    "editAddresses"
   ],
   "tools": [
     {
@@ -73,6 +77,9 @@
     },
     {
       "name": "print"
+    },
+    {
+      "name": "editAddresses"
     }
   ]
 }
