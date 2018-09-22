@@ -10,6 +10,9 @@
 
   "tools": {
     "editAddresses": "Edition d'adresses",
+    "featureDetails": "Informations",
+    "searchClient": "Recherche de client",
     "searchResults": "Résultats de recherche"
   }
+
 }
