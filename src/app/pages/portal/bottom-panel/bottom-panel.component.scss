@@ -36,6 +36,15 @@ mat-expansion-panel ::ng-deep .mat-expansion-panel-header {
   padding: $igo-padding;
 }
 
+mat-expansion-panel ::ng-deep .mat-expansion-panel-header .fadq-bottom-menu {
+  margin-left: 10px;
+}
+
+mat-expansion-panel ::ng-deep .mat-expansion-panel-header .fadq-expansion-button {
+  position: absolute;
+  right: $igo-padding;
+}
+
 mat-expansion-panel ::ng-deep .mat-expansion-panel-content .mat-expansion-panel-body {
   overflow: auto;
   height: $bottom-panel-body-height;

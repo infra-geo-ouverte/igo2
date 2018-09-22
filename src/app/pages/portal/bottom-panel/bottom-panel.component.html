@@ -5,41 +5,35 @@
 
     <mat-expansion-panel-header color="secondary" [expandedHeight]="'48px'">
 
+        <div class="fadq-bottom-menu">
+          <button
+            mat-icon-button
+            tooltip-position="below"
+            matTooltipShowDelay="500"
+            [matTooltip]="'search.menu.tooltip' | translate"
+            [matMenuTriggerFor]="bottomPanelMenu"
+            (click)="$event.stopPropagation()">
+            Todo
+            <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+        
+          <mat-menu
+            #bottomPanelMenu="matMenu"
+            overlapTrigger="false"
+            xPosition="before"
+            yPosition="above">
+            <button mat-menu-item *ngFor="let tool of bottomTools">
+              {{tool.title}}
+            </button>
+          </mat-menu>
+        </div>
+
         <button
           mat-icon-button
           color="primary"
           class="fadq-expansion-button">
           <mat-icon>expand_less</mat-icon>
         </button>
-
-        <button
-          mat-icon-button
-          tooltip-position="below"
-          matTooltipShowDelay="500"
-          [matTooltip]="'search.menu.tooltip' | translate"
-          [matMenuTriggerFor]="bottomPanelMenu"
-          (click)="$event.stopPropagation()">
-          Todo
-          <mat-icon>arrow_drop_down</mat-icon>
-        </button>
-        <mat-menu
-          #bottomPanelMenu="matMenu"
-          overlapTrigger="false"
-          xPosition="before"
-          yPosition="above"
-          >
-          <button mat-menu-item *ngFor="let tool of bottomTools">
-            {{tool.title}}
-          </button>
-        </mat-menu>
-        <!--mat-form-field (click)="$event.stopPropagation()">
-          <mat-select>
-            <mat-option *ngFor="let tool of bottomTools" [value]="tool.name">
-              {{tool.title}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field-->
-
 
     </mat-expansion-panel-header>
 
