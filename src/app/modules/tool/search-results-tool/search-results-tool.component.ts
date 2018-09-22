@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { Register } from '@igo2/context';
+import { Register, ToolService } from '@igo2/context';
 
 import {
   MapService,
@@ -26,7 +26,8 @@ export class SearchResultsToolComponent {
     private overlayService: OverlayService,
     private mapService: MapService,
     private layerService: LayerService,
-    private dataSourceService: DataSourceService
+    private dataSourceService: DataSourceService,
+    private toolService: ToolService
   ) {}
 
   handleFeatureFocus(feature: Feature) {
@@ -38,17 +39,22 @@ export class SearchResultsToolComponent {
   handleFeatureSelect(feature: Feature) {
     if (feature.type === FeatureType.Feature) {
       this.overlayService.setFeatures([feature], 'zoom');
+      const featureDetails = this.toolService.getTool('featureDetails');
+      this.toolService.selectTool(featureDetails);
     } else if (feature.type === FeatureType.DataSource) {
-      const map = this.mapService.getMap();
+      this.handleDataSourceFeatureSelect(feature);
+    }
+  }
 
-      if (map !== undefined) {
-        this.dataSourceService
-          .createAsyncDataSource(feature.layer as AnyDataSourceOptions)
-          .subscribe(dataSource => {
-            (feature.layer as any).source = dataSource;
-            map.addLayer(this.layerService.createLayer(feature.layer));
-          });
-      }
+  handleDataSourceFeatureSelect(feature: Feature) {
+    const map = this.mapService.getMap();
+    if (map !== undefined) {
+      this.dataSourceService
+        .createAsyncDataSource(feature.layer as AnyDataSourceOptions)
+        .subscribe(dataSource => {
+          (feature.layer as any).source = dataSource;
+          map.addLayer(this.layerService.createLayer(feature.layer));
+        });
     }
   }
 }
