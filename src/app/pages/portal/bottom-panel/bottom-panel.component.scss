@@ -4,17 +4,18 @@
 @import '../sidenav/sidenav.component';
 
 /* TODO: Compute properly and consider the header */
-$bottom-panel-max-height: 40%;
+$bottom-panel-max-height: 35%;
 $bottom-panel-collapsed-height: 48px;
-$bottom-panel-header-height: 64px;
 $bottom-panel-body-height: 400px;
 $bottom-panel-width-transition: width 140ms cubic-bezier(.4,0,.2,1);
 $bottom-panel-height-transition: height 280ms cubic-bezier(.4,0,.2,1);
 
 :host {
-  max-height: 40%;
+  max-height: $bottom-panel-max-height;
   width: $igo-sidenav-width;
   transition: $bottom-panel-width-transition;
+  @extend %bordered-top;
+  @extend %box-shadowed;
 }
 
 :host.fadq-bottom-panel-opened {
@@ -32,11 +33,23 @@ mat-expansion-panel.mat-expanded {
 }
 
 mat-expansion-panel ::ng-deep .mat-expansion-panel-header {
-  height: $bottom-panel-header-height;
   padding: $igo-padding;
 }
 
 mat-expansion-panel ::ng-deep .mat-expansion-panel-content .mat-expansion-panel-body {
   overflow: auto;
   height: $bottom-panel-body-height;
+  padding: $igo-padding 0;
+}
+
+table {
+  width: 100%;
+}
+
+table tr.mat-header-row {
+  height: 36px;
+}
+
+table tr.mat-row {
+  height: 34px;
 }

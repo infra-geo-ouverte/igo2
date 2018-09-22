@@ -51,6 +51,7 @@ igo-search-bar {
   top: $igo-margin;
   z-index: 4;
   width: $search-bar-width;
+  height: $igo-icon-size;
   margin: 0 $igo-margin;
 
   @include mobile {
@@ -214,7 +215,7 @@ $map-tools-bottom-transition:  bottom 280ms cubic-bezier(.4,0,.2,1);
   @include mobile {
     bottom: $bottom-panel-collapsed-height;
   }
-  
+
 }
 
 :host.fadq-bottom-panel-opened .fadq-map-tools-overlay,

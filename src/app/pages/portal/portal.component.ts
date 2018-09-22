@@ -88,10 +88,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.handleFeaturesChange(features)
     );
 
-    this.selectedFeature$$ = this.featureService.selectedFeature$.subscribe(
-      feature => this.handleFeatureSelect(feature)
-    );
-
     this.context$$ = this.contextService.context$.subscribe(context =>
       this.handleContextChange(context)
     );
@@ -158,36 +154,16 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private handleFeaturesChange(features: Feature[]) {
     if (features.length > 0) {
-      if (this.mediaService.media$.value === 'mobile') {
-        if (
-          features[0].type.toString() === 'Feature' &&
-          (features[0].source !== 'Nominatim (OSM)' &&
-            features[0].source !== 'ICherche Québec')
-        ) {
-          this.featureService.selectFeature(features[0]);
-          this.overlayService.setFeatures([features[0]], 'zoom');
-          return;
-        }
-      }
-
       this.openSidenav();
-      const tool = this.toolService.getTool('searchResults');
-      this.toolService.selectTool(tool);
-    }
-  }
-
-  private handleFeatureSelect(feature: Feature) {
-    if (feature && this.mediaService.media$.value === 'mobile') {
-      if (this.sidenavOpened) {
-        this.closeSidenav();
-      }
+      const searchResults = this.toolService.getTool('searchResults');
+      this.toolService.selectTool(searchResults);
     }
   }
 
   private handleContextChange(context: Context) {
     if (context !== undefined && this.contextLoaded) {
-      const tool = this.toolService.getTool('mapDetails');
-      this.toolService.selectTool(tool);
+      const mapDetails = this.toolService.getTool('mapDetails');
+      this.toolService.selectTool(mapDetails);
     }
 
     if (context !== undefined) {

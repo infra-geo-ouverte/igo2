@@ -5,7 +5,8 @@ import {
   MatButtonModule,
   MatTooltipModule,
   MatExpansionModule,
-  MatMenuModule
+  MatMenuModule,
+  MatTableModule
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
@@ -19,6 +20,7 @@ import { BottomPanelComponent } from './bottom-panel.component';
     MatButtonModule,
     MatExpansionModule,
     MatMenuModule,
+    MatTableModule,
     MatTooltipModule,
     IgoLanguageModule
   ],
