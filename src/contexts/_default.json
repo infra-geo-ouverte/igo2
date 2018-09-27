@@ -59,6 +59,7 @@
     "searchResults",
     "contextManager",
     "mapDetails",
+    "importExport",
     "print",
     "editAddresses"
   ],
@@ -68,6 +69,9 @@
     },
     {
       "name": "contextManager"
+    },
+    {
+      "name": "importExport"
     },
     {
       "name": "mapDetails",
