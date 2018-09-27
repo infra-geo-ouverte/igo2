@@ -33,10 +33,7 @@ body {
   display: none;
 }
 
-
-/* FIX menu header horizontal alignment */
-/* TODO: Move into igo2-lib */
-.igo-panel-title {
-  display: inline-block !important;
-  float: none !important;
+/* Add some padding to IGO forms */
+.igo-form {
+  padding: 10px;
 }
