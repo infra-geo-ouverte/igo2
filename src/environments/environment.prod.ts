@@ -18,11 +18,11 @@ export const environment: Environment = {
       },
       icherche: {
         enabled: false,
-        url: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
+        searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
       },
       datasource: {
         enabled: false,
-        url: 'https://geoegl.msp.gouv.qc.ca/igo2/api/layers/search'
+        searchUrl: 'https://geoegl.msp.gouv.qc.ca/igo2/api/layers/search'
       }
     },
     language: {
