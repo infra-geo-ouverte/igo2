@@ -1,63 +1,28 @@
-<div (click)="opened = !opened"></div>
-<!--mat-expansion-panel
-    (opened)="opened = true"
-    (closed)="opened = false"
-    [hideToggle]="true">
+<div (click)="opened = !opened">
 
-    <mat-expansion-panel-header color="secondary" [expandedHeight]="'48px'">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
 
-        <div class="fadq-bottom-menu">
-          <button
-            mat-icon-button
-            tooltip-position="below"
-            matTooltipShowDelay="500"
-            [matTooltip]="'search.menu.tooltip' | translate"
-            [matMenuTriggerFor]="bottomPanelMenu"
-            (click)="$event.stopPropagation()">
-            Todo
-            <mat-icon>arrow_drop_down</mat-icon>
-          </button>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
 
-          <mat-menu
-            #bottomPanelMenu="matMenu"
-            overlapTrigger="false"
-            xPosition="before"
-            yPosition="above">
-          </mat-menu>
-        </div>
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
 
-        <button
-          mat-icon-button
-          color="primary"
-          class="fadq-expansion-button">
-          <mat-icon>expand_less</mat-icon>
-        </button>
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
 
-    </mat-expansion-panel-header>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef> Weight </th>
-        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef> Symbol </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
-  </mat-expansion-panel-->
+</div>

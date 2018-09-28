@@ -1,0 +1,24 @@
+@import './info-panel.variables';
+
+
+:host {
+  @extend %box-shadowed;
+
+  display: block;
+  background-color: white;
+
+  height: $fadq-info-panel-collapsed-height;
+  max-height: $fadq-info-panel-max-height;
+
+  transition: height 280ms cubic-bezier(.4,0,.2,1);
+  
+}
+
+:host.fadq-info-panel-opened {
+  height: $fadq-info-panel-max-height;
+}
+
+:host > div {
+  height: 100%;
+  width: 100%;
+}

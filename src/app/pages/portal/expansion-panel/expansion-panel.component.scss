@@ -1,27 +1,23 @@
-@import '~@igo2/core/style/partial/media';
-@import '../../../../style/partial/variables';
-@import '../sidenav/sidenav.variables';
 @import './expansion-panel.variables';
 
 
 :host {
-  @extend %bordered-top;
   @extend %box-shadowed;
 
   display: block;
-  max-height: $expansion-panel-max-height;
-  width: $fadq-sidenav-width;
-  transition: $expansion-panel-width-transition;
+  background-color: white;
 
-  height: $expansion-panel-collapsed-height;
+  max-height: $fadq-expansion-panel-max-height;
+  height: $fadq-expansion-panel-collapsed-height;
+  width: $fadq-sidenav-width;
+
   transition:
     height 280ms cubic-bezier(.4,0,.2,1),
     width 280ms cubic-bezier(.4,0,.2,1);
-  background-color: white;
 }
 
 :host.fadq-expansion-panel-opened {
-  height: $expansion-panel-max-height;
+  height: $fadq-expansion-panel-max-height;
   width: 100%;
 }
 
@@ -32,35 +28,6 @@
 
 :host.fadq-expansion-panel-opened {
   width: 100%;
-}
-
-mat-expansion-panel:not(.mat-expanded) {
-  height: $expansion-panel-collapsed-height;
-  transition: $expansion-panel-height-transition;
-}
-
-mat-expansion-panel.mat-expanded {
-  height: 100%;
-  transition: $expansion-panel-height-transition;
-}
-
-mat-expansion-panel ::ng-deep .mat-expansion-panel-header {
-  padding: $igo-padding;
-}
-
-mat-expansion-panel ::ng-deep .mat-expansion-panel-header .fadq-bottom-menu {
-  margin-left: 10px;
-}
-
-mat-expansion-panel ::ng-deep .mat-expansion-panel-header .fadq-expansion-button {
-  position: absolute;
-  right: $igo-padding;
-}
-
-mat-expansion-panel ::ng-deep .mat-expansion-panel-content .mat-expansion-panel-body {
-  overflow: auto;
-  /*height: $expansion-panel-body-height;*/
-  padding: $igo-padding 0;
 }
 
 table {

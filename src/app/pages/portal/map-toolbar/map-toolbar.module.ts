@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IgoLanguageModule } from '@igo2/core';
 import { IgoToolModule } from '@igo2/context'
 
-import { BottomToolbarComponent } from './bottom-toolbar.component';
+import { MapToolbarComponent } from './map-toolbar.component';
 
 @NgModule({
   imports: [
@@ -13,13 +13,13 @@ import { BottomToolbarComponent } from './bottom-toolbar.component';
     IgoLanguageModule,
     IgoToolModule
   ],
-  exports: [BottomToolbarComponent],
-  declarations: [BottomToolbarComponent]
+  exports: [MapToolbarComponent],
+  declarations: [MapToolbarComponent]
 })
-export class FadqBottomToolbarModule {
+export class FadqMapToolbarModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: FadqBottomToolbarModule
+      ngModule: FadqMapToolbarModule
     };
   }
 }

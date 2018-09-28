@@ -1,0 +1,9 @@
+@import '~@igo2/core/style/partial/media';
+@import '../../../style/partial/variables';
+@import './sidenav/sidenav.variables';
+
+$search-bar-width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-margin} - (2 * #{$igo-icon-size}));
+$search-bar-width-mobile: calc(100% - #{$fadq-mobile-min-space-right} - (3 * #{$igo-margin}) - (2 * #{$igo-icon-size}));
+$search-bar-left: calc(#{$igo-icon-size} + #{$igo-margin});
+
+$fadq-footer-height: 48px;

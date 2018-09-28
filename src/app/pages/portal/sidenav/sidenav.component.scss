@@ -1,5 +1,3 @@
-@import '~@igo2/core/style/partial/media';
-@import '../../../../style/partial/variables';
 @import './sidenav.variables';
 
 
@@ -17,6 +15,8 @@
 }
 
 mat-sidenav {
+  @extend %box-shadowed-bottom-right;
+
   height: $fadq-sidenav-height;
   width: $fadq-sidenav-width;
 
@@ -24,8 +24,6 @@ mat-sidenav {
     width: $fadq-sidenav-width-mobile;
     height: 100%;
   }
-
-  @extend %box-shadowed;
 }
 
 .igo-sidenav-content {

@@ -5,19 +5,20 @@ import { Tool } from '@igo2/context';
 
 
 @Component({
-  selector: 'fadq-bottom-toolbar',
-  templateUrl: './bottom-toolbar.component.html',
-  styleUrls: ['./bottom-toolbar.component.scss']
+  selector: 'fadq-map-toolbar',
+  templateUrl: './map-toolbar.component.html',
+  styleUrls: ['./map-toolbar.component.scss']
 })
-export class BottomToolbarComponent {
+export class MapToolbarComponent {
 
   public tools: Tool[] = [
+    {'name': 'baselayerSwitcher', 'icon': 'photo_library'},
     {'name': 'zoomIn', 'icon': 'zoom_in'},
     {'name': 'zoomOut', 'icon': 'zoom_out'},
     {'name': 'previousView', 'icon': 'arrow_back'},
     {'name': 'nextView', 'icon': 'arrow_forward'},
-    {'name': 'selectMapPointer', 'icon': 'mouse'},
-    {'name': 'geolocate', 'icon': 'my_location'},
+    {'name': 'mapPointer', 'icon': 'mouse'},
+    {'name': 'geolocation', 'icon': 'my_location'},
     {'name': 'streetview', 'icon': 'streetview'}
   ];
 

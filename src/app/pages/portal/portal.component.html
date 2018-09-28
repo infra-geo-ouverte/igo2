@@ -65,15 +65,14 @@
     [map]="map"
     [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}">
 
-    <div class="fadq-map-tools-overlay">
-      <igo-zoom-button [map]="map" color="primary"></igo-zoom-button>
-      <igo-geolocate-button [map]="map" color="primary"></igo-geolocate-button>
-      <igo-baselayers-switcher [map]="map"></igo-baselayers-switcher>
-    </div>
+    <div class="fadq-map-tools-overlay"></div>
   </igo-map-browser>
+  
+  <div class="fadq-footer">
+      <fadq-map-toolbar></fadq-map-toolbar>
+  </div>
 
   <fadq-expansion-panel></fadq-expansion-panel>
-
-  <fadq-bottom-toolbar></fadq-bottom-toolbar>
-
+  <fadq-info-panel [feature]="featureService.focusedFeature$ | async"></fadq-info-panel>
+  
 </mat-sidenav-container>

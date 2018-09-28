@@ -1,13 +1,4 @@
-@import '~@igo2/core/style/partial/media';
-@import '../../../style/partial/variables';
-@import './bottom-toolbar/bottom-toolbar.variables';
-@import './expansion-panel/expansion-panel.variables';
-@import './sidenav/sidenav.variables';
-
-/*** Local variables ***/
-$search-bar-width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-margin} - (2 * #{$igo-icon-size}));
-$search-bar-width-mobile: calc(100% - #{$fadq-mobile-min-space-right} - (3 * #{$igo-margin}) - (2 * #{$igo-icon-size}));
-$search-bar-left: calc(#{$igo-icon-size} + #{$igo-margin});
+@import './portal.variables';
 
 
 /*** Main ***/
@@ -46,7 +37,7 @@ mat-sidenav-container {
 /*** Map browser ***/
 igo-map-browser {
   width: 100%;
-  height: calc(100% - #{$fadq-bottom-toolbar-height});
+  height: calc(100% - #{$fadq-footer-height});
 }
 
 
@@ -148,62 +139,44 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
   width: 75%;
 }
 
+/*** Footer ***/
+.fadq-footer {
+  position: relative;
+  background-color: #eee;
+  width: 100%;
+  height: $fadq-footer-height;
+}
+
+.fadq-footer fadq-map-toolbar {
+  position: absolute;
+  right: 0;
+}
 
 /*** Expansion panel ***/
 fadq-expansion-panel {
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   z-index: 4;
   overflow: hidden;
-  //transition: width 280ms cubic-bezier(.4,0,.2,1), bottom 280ms cubic-bezier(.4,0,.2,1) 280ms;
-  //width: $fadq-sidenav-width;
 }
 
 fadq-expansion-panel.fadq-expansion-panel-opened {
-  margin-bottom: $fadq-bottom-toolbar-height;
-  //width: 100%;
-  //transition: bottom 280ms cubic-bezier(.4,0,.2,1), width 280ms cubic-bezier(.4,0,.2,1) 280ms;
+  margin-bottom: $fadq-footer-height;
 }
 
-/*** Base layers switcher ***/
-igo-baselayers-switcher {
-  // Move the base layers switcher next to the zoom buttons
+/*** Info panel ***/
+fadq-info-panel {
   position: absolute;
-  right: calc(#{$igo-icon-size} + (2 * #{$igo-margin}) + 2px);
-  left: inherit !important;
-
-  @include mobile {
-    right: $igo-margin;
-  }
-}
-
-igo-baselayers-switcher ::ng-deep .igo-baselayers-switcher-container {
-  // Make it the same height as the zoom buttons
-  height: 87px !important;
-}
-
-
-/*** Map overlay tools overlay ***/
-/*
-$map-tools-bottom-transition:  bottom 280ms cubic-bezier(.4,0,.2,1);
-
-.fadq-map-tools-overlay {
-  position: fixed;
   bottom: 0;
-
-  transition: $map-tools-bottom-transition;
-  right: 0;
+  left: 50%;
+  margin-left: -15%;
+  width: 30%;
+  z-index: 4;
 
   @include mobile {
-    bottom: $expansion-panel-collapsed-height;
+    width: calc(100% - 2 * #{$igo-icon-size});
+    left: $igo-icon-size;
+    margin-left: 0;
   }
-
 }
-
-:host.fadq-expansion-panel-opened .fadq-map-tools-overlay,
- {
-  bottom: calc(#{$expansion-panel-max-height} + #{$igo-margin});
-  transition: $map-tools-bottom-transition;
-}
-*/

@@ -1,0 +1,20 @@
+<div (click)="opened = !opened">
+
+    <ng-container *ngIf="feature">
+      <igo-panel [title]="feature.title">
+        <!--button
+          mat-icon-button
+          panelLeftButton>
+          <mat-icon>
+            <ng-container *ngIf="!opened">
+              arrow_upward
+            </ng-container>
+            <ng-container *ngIf="opened">
+              arrow_downward
+            </ng-container>
+          </mat-icon>
+        </button-->
+        <igo-feature-details *ngIf="opened" [feature]="feature"></igo-feature-details>
+      </igo-panel>
+    </ng-container>
+</div>

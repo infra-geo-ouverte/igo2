@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
   MatIconModule,
   MatButtonModule,
@@ -8,7 +9,10 @@ import {
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
-import { IgoPanelModule, IgoFlexibleModule } from '@igo2/common';
+import {
+  IgoPanelModule,
+  IgoFlexibleModule
+} from '@igo2/common';
 import {
   IgoContextManagerModule,
   IgoToolModule,
