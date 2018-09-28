@@ -1,35 +1,47 @@
 @import '~@igo2/core/style/partial/media';
-@import '~@igo2/core/style/partial/core.variables';
 @import '../../../../style/partial/variables';
-@import '../sidenav/sidenav.component';
+@import '../sidenav/sidenav.variables';
+@import './expansion-panel.variables';
 
-/* TODO: Compute properly and consider the header */
-$bottom-panel-max-height: 35%;
-$bottom-panel-collapsed-height: 48px;
-$bottom-panel-body-height: 400px;
-$bottom-panel-width-transition: width 140ms cubic-bezier(.4,0,.2,1);
-$bottom-panel-height-transition: height 280ms cubic-bezier(.4,0,.2,1);
 
 :host {
-  max-height: $bottom-panel-max-height;
-  width: $igo-sidenav-width;
-  transition: $bottom-panel-width-transition;
   @extend %bordered-top;
   @extend %box-shadowed;
+
+  display: block;
+  max-height: $expansion-panel-max-height;
+  width: $fadq-sidenav-width;
+  transition: $expansion-panel-width-transition;
+
+  height: $expansion-panel-collapsed-height;
+  transition:
+    height 280ms cubic-bezier(.4,0,.2,1),
+    width 280ms cubic-bezier(.4,0,.2,1);
+  background-color: white;
 }
 
-:host.fadq-bottom-panel-opened {
+:host.fadq-expansion-panel-opened {
+  height: $expansion-panel-max-height;
+  width: 100%;
+}
+
+:host > div {
+  height: 100%;
+  width: 100%;
+}
+
+:host.fadq-expansion-panel-opened {
   width: 100%;
 }
 
 mat-expansion-panel:not(.mat-expanded) {
-  height: $bottom-panel-collapsed-height;
-  transition: $bottom-panel-height-transition;
+  height: $expansion-panel-collapsed-height;
+  transition: $expansion-panel-height-transition;
 }
 
 mat-expansion-panel.mat-expanded {
   height: 100%;
-  transition: $bottom-panel-height-transition;
+  transition: $expansion-panel-height-transition;
 }
 
 mat-expansion-panel ::ng-deep .mat-expansion-panel-header {
@@ -47,7 +59,7 @@ mat-expansion-panel ::ng-deep .mat-expansion-panel-header .fadq-expansion-button
 
 mat-expansion-panel ::ng-deep .mat-expansion-panel-content .mat-expansion-panel-body {
   overflow: auto;
-  height: $bottom-panel-body-height;
+  /*height: $expansion-panel-body-height;*/
   padding: $igo-padding 0;
 }
 

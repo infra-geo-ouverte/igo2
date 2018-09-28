@@ -1,14 +1,7 @@
 @import '~@igo2/core/style/partial/media';
-@import '~@igo2/core/style/partial/core.variables';
 @import '../../../../style/partial/variables';
+@import './sidenav.variables';
 
-/*** Sidenav ***/
-
-$fadq-sidenav-height: 65%;
-
-$igo-sidenav-margin-top: 50px;
-$igo-sidenav-width: 370px;
-$igo-sidenav-width-mobile: calc(100% - #{$igo-mobile-min-space-right} - #{$igo-margin});
 
 :host {
   background-color: rgb(255, 255, 255);
@@ -25,10 +18,10 @@ $igo-sidenav-width-mobile: calc(100% - #{$igo-mobile-min-space-right} - #{$igo-m
 
 mat-sidenav {
   height: $fadq-sidenav-height;
-  width: $igo-sidenav-width;
+  width: $fadq-sidenav-width;
 
   @include mobile {
-    width: $igo-sidenav-width-mobile;
+    width: $fadq-sidenav-width-mobile;
     height: 100%;
   }
 
@@ -36,8 +29,8 @@ mat-sidenav {
 }
 
 .igo-sidenav-content {
-  margin-top: $igo-sidenav-margin-top;
-  height: calc(100% - #{$igo-sidenav-margin-top});
+  margin-top: $fadq-sidenav-margin-top;
+  height: calc(100% - #{$fadq-sidenav-margin-top});
 }
 
 .igo-sidenav-content .igo-flexible-fill .igo-container {
@@ -46,7 +39,6 @@ mat-sidenav {
 }
 
 /*** Toolbar and toolbox ***/
-
 igo-toolbar {
   position: absolute;
   top: 51px;

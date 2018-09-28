@@ -11,7 +11,7 @@ import {
 
 import { IgoLanguageModule } from '@igo2/core';
 
-import { BottomPanelComponent } from './bottom-panel.component';
+import { ExpansionPanelComponent } from './expansion-panel.component';
 
 @NgModule({
   imports: [
@@ -24,13 +24,13 @@ import { BottomPanelComponent } from './bottom-panel.component';
     MatTooltipModule,
     IgoLanguageModule
   ],
-  exports: [BottomPanelComponent],
-  declarations: [BottomPanelComponent]
+  exports: [ExpansionPanelComponent],
+  declarations: [ExpansionPanelComponent]
 })
-export class FadqBottomPanelModule {
+export class FadqExpansionPanelModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: FadqBottomPanelModule
+      ngModule: FadqExpansionPanelModule
     };
   }
 }

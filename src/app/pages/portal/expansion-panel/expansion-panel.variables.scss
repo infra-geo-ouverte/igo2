@@ -1,0 +1,7 @@
+@import '../bottom-toolbar/bottom-toolbar.variables';
+
+$expansion-panel-max-height: calc(35% - #{$fadq-bottom-toolbar-height});
+$expansion-panel-collapsed-height: $fadq-bottom-toolbar-height;
+$expansion-panel-body-height: 400px;
+$expansion-panel-width-transition: width 140ms cubic-bezier(.4,0,.2,1);
+$expansion-panel-height-transition: height 280ms cubic-bezier(.4,0,.2,1);

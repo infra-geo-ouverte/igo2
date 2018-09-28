@@ -1,0 +1,22 @@
+@import '~@igo2/core/style/partial/media';
+@import '../../../../style/partial/variables';
+@import './bottom-toolbar.variables';
+
+
+:host {
+  @extend %box-shadowed;
+  @extend %bordered-top;
+  @extend %border-box;
+
+  display: block;
+  position: relative;
+  height: $fadq-bottom-toolbar-height;
+  background-color: #eee;
+}
+
+igo-toolbar {
+  display: inline-block;
+  background-color: white;
+  position: absolute;
+  right: 0px;
+}

@@ -34,10 +34,7 @@ import { ProjectionService } from '../../modules/map';
   selector: 'app-portal',
   templateUrl: './portal.component.html',
   styleUrls: ['./portal.component.scss'],
-  animations: [controlSlideX(), controlSlideY(), mapSlideX(), mapSlideY()],
-  host: {
-    '[class.fadq-bottom-panel-opened]': 'bottomPanelOpened'
-  }
+  animations: [controlSlideX(), controlSlideY(), mapSlideX(), mapSlideY()]
 })
 export class PortalComponent implements OnInit, OnDestroy {
   static SWIPE_ACTION = {
@@ -61,7 +58,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   });
 
   public sidenavOpened = false;
-  public bottomPanelOpened = false;
 
   // True after the initial context is loaded
   private contextLoaded = false;

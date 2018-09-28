@@ -12,18 +12,14 @@ export interface PeriodicElement {
 
 
 @Component({
-  selector: 'fadq-bottom-panel',
-  templateUrl: './bottom-panel.component.html',
-  styleUrls: ['./bottom-panel.component.scss'],
+  selector: 'fadq-expansion-panel',
+  templateUrl: './expansion-panel.component.html',
+  styleUrls: ['./expansion-panel.component.scss'],
   host: {
-    '[class.fadq-bottom-panel-opened]': 'opened'
+    '[class.fadq-expansion-panel-opened]': 'opened'
   }
 })
-export class BottomPanelComponent {
-
-  public bottomTools: Tool[] = [
-    {"name": "parcels", "title": "Parcelles"}
-  ];
+export class ExpansionPanelComponent {
 
   public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   public dataSource: PeriodicElement[] = [

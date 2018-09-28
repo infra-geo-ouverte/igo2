@@ -1,12 +1,12 @@
 @import '~@igo2/core/style/partial/core.variables';
 
-/*** Main ***/
-$igo-background-color: rgb(255, 255, 255);
-$igo-icon-button-width: 40px;
+/*** Generic ***/
+$fadq-background-color: rgb(255, 255, 255);
+$fadq-icon-button-width: 40px;
 
-$igo-border-width: 1px;
-$igo-border-style: solid;
-$igo-border-color: rgba(0, 0, 0, .2);
+$fadq-border-width: 1px;
+$fadq-border-style: solid;
+$fadq-border-color: rgba(0, 0, 0, .2);
 
 %border-box {
   box-sizing: border-box;
@@ -15,9 +15,9 @@ $igo-border-color: rgba(0, 0, 0, .2);
 }
 
 %bordered-top {
-  border-top-width: $igo-border-width;
-  border-top-style: $igo-border-style;
-  border-top-color: $igo-border-color;
+  border-top-width: $fadq-border-width;
+  border-top-style: $fadq-border-style;
+  border-top-color: $fadq-border-color;
 }
 
 %box-shadowed {
@@ -27,4 +27,4 @@ $igo-border-color: rgba(0, 0, 0, .2);
   box-shadow: 2px 2px 2px 0px #dddddd;
 }
 
-$igo-mobile-min-space-right: 40px;
+$fadq-mobile-min-space-right: 40px;

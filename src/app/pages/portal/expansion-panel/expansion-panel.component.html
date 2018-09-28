@@ -1,4 +1,5 @@
-<mat-expansion-panel
+<div (click)="opened = !opened"></div>
+<!--mat-expansion-panel
     (opened)="opened = true"
     (closed)="opened = false"
     [hideToggle]="true">
@@ -16,15 +17,12 @@
             Todo
             <mat-icon>arrow_drop_down</mat-icon>
           </button>
-        
+
           <mat-menu
             #bottomPanelMenu="matMenu"
             overlapTrigger="false"
             xPosition="before"
             yPosition="above">
-            <button mat-menu-item *ngFor="let tool of bottomTools">
-              {{tool.title}}
-            </button>
           </mat-menu>
         </div>
 
@@ -38,28 +36,21 @@
     </mat-expansion-panel-header>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef> No. </th>
         <td mat-cell *matCellDef="let element"> {{element.position}} </td>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
-      <!-- Weight Column -->
       <ng-container matColumnDef="weight">
         <th mat-header-cell *matHeaderCellDef> Weight </th>
         <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
       </ng-container>
 
-      <!-- Symbol Column -->
       <ng-container matColumnDef="symbol">
         <th mat-header-cell *matHeaderCellDef> Symbol </th>
         <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
@@ -69,4 +60,4 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-  </mat-expansion-panel>
+  </mat-expansion-panel-->

@@ -1,6 +1,13 @@
 @import '~@igo2/core/style/partial/media';
 @import '../../../style/partial/variables';
-@import './sidenav/sidenav.component';
+@import './bottom-toolbar/bottom-toolbar.variables';
+@import './expansion-panel/expansion-panel.variables';
+@import './sidenav/sidenav.variables';
+
+/*** Local variables ***/
+$search-bar-width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-margin} - (2 * #{$igo-icon-size}));
+$search-bar-width-mobile: calc(100% - #{$fadq-mobile-min-space-right} - (3 * #{$igo-margin}) - (2 * #{$igo-icon-size}));
+$search-bar-left: calc(#{$igo-icon-size} + #{$igo-margin});
 
 
 /*** Main ***/
@@ -23,7 +30,7 @@ mat-sidenav-container {
 
 /*** Menu button ***/
 .fadq-menu-button {
-  background-color: $igo-background-color;
+  background-color: $fadq-background-color;
   position: absolute;
   left: $igo-margin;
   top: $igo-margin;
@@ -39,17 +46,13 @@ mat-sidenav-container {
 /*** Map browser ***/
 igo-map-browser {
   width: 100%;
-  height: 100%;
+  height: calc(100% - #{$fadq-bottom-toolbar-height});
 }
 
 
 /*** Search bar ***/
-$search-bar-width: calc(#{$igo-sidenav-width} - 2 * #{$igo-margin} - (2 * #{$igo-icon-size}));
-$search-bar-width-mobile: calc(100% - #{$igo-mobile-min-space-right} - (3 * #{$igo-margin}) - (2 * #{$igo-icon-size}));
-$search-bar-left: calc(#{$igo-icon-size} + #{$igo-margin});
-
 igo-search-bar {
-  background-color: $igo-background-color;
+  background-color: $fadq-background-color;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   position: absolute;
   left: $search-bar-left;
@@ -89,7 +92,7 @@ igo-search-bar ::ng-deep div.mat-form-field-underline {
 
 /*** Search menu ***/
 .fadq-search-menu-button {
-  background-color: $igo-background-color;
+  background-color: $fadq-background-color;
   position: absolute;
   left: calc(#{$search-bar-left} + #{$search-bar-width} + #{$igo-margin});
   top: $igo-margin;
@@ -146,47 +149,22 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
 }
 
 
-/*** Bottom panel ***/
-$bottom-panel-collapsed-height: 54px;
-$bottom-panel-header-height: 64px;
-$bottom-panel-max-height: 40%;
-$bottom-panel-height-transition: height 280ms cubic-bezier(.4,0,.2,1);
-
-fadq-bottom-panel {
+/*** Expansion panel ***/
+fadq-expansion-panel {
   position: fixed;
   left: 0;
   bottom: 0;
   z-index: 4;
+  overflow: hidden;
+  //transition: width 280ms cubic-bezier(.4,0,.2,1), bottom 280ms cubic-bezier(.4,0,.2,1) 280ms;
+  //width: $fadq-sidenav-width;
 }
 
-/*
-.fadq-bottom-panel:not(.mat-expanded) {
-  width: $igo-sidenav-width;
-  height: $bottom-panel-collapsed-height;
-  transition: $bottom-panel-height-transition
+fadq-expansion-panel.fadq-expansion-panel-opened {
+  margin-bottom: $fadq-bottom-toolbar-height;
+  //width: 100%;
+  //transition: bottom 280ms cubic-bezier(.4,0,.2,1), width 280ms cubic-bezier(.4,0,.2,1) 280ms;
 }
-
-.fadq-bottom-panel.mat-expanded {
-  width: 100%;
-  height: $bottom-panel-max-height;
-  transition: $bottom-panel-height-transition;
-}
-
-.fadq-bottom-panel ::ng-deep .mat-expansion-panel-header {
-  height: $bottom-panel-header-height;
-  padding: $igo-padding;
-}
-
-.fadq-bottom-panel ::ng-deep .mat-expansion-panel-header .fadq-expansion-button {
-  margin-top: 9px;
-  margin-right: 5px;
-}
-
-.fadq-bottom-panel ::ng-deep .mat-expansion-panel-content {
-  height: calc(100% - #{$bottom-panel-header-height});
-  overflow: auto;
-}
-*/
 
 /*** Base layers switcher ***/
 igo-baselayers-switcher {
@@ -218,14 +196,14 @@ $map-tools-bottom-transition:  bottom 280ms cubic-bezier(.4,0,.2,1);
   right: 0;
 
   @include mobile {
-    bottom: $bottom-panel-collapsed-height;
+    bottom: $expansion-panel-collapsed-height;
   }
 
 }
 
-:host.fadq-bottom-panel-opened .fadq-map-tools-overlay,
+:host.fadq-expansion-panel-opened .fadq-map-tools-overlay,
  {
-  bottom: calc(#{$bottom-panel-max-height} + #{$igo-margin});
+  bottom: calc(#{$expansion-panel-max-height} + #{$igo-margin});
   transition: $map-tools-bottom-transition;
 }
 */
