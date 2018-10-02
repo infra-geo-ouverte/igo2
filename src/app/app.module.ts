@@ -27,7 +27,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
-    IgoAuthModule,
+    IgoAuthModule.forRoot(),
     IgoMessageModule,
     IgoSpinnerModule,
     IgoStopPropagationModule,
