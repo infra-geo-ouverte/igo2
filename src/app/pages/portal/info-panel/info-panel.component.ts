@@ -49,7 +49,7 @@ export class InfoPanelComponent {
   }
   private _feature: Feature;
 
-  @Output() openedChange= new EventEmitter<boolean>();
+  @Output() openedChange = new EventEmitter<boolean>();
 
   constructor() {}
 

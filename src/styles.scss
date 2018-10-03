@@ -37,3 +37,12 @@ body {
 .igo-form {
   padding: 10px;
 }
+
+.fadq-compact-menu .mat-menu-content:not(:empty) {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .mat-list {
+    padding-top: 0
+  }
+}

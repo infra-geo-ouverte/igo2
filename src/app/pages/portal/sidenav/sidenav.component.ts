@@ -42,7 +42,7 @@ export class SidenavComponent {
   }
   private _media: Media;
 
-  @Output() openedChange= new EventEmitter<boolean>();
+  @Output() openedChange = new EventEmitter<boolean>();
 
   public topPanelState: FlexibleState = 'initial';
 

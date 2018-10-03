@@ -46,7 +46,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   });
 
-  public infoPanelOpened;
+  public infoPanelOpened = false;
   public sidenavOpened = false;
 
   // True after the initial context is loaded

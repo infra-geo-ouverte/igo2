@@ -1,0 +1,32 @@
+@import './expansion-panel.variables';
+
+:host {
+  display: block;
+  height: $fadq-expansion-panel-collapsed-height;
+}
+
+mat-form-field.fadq-expansion-panel-header-selector {
+  margin: 0 10px;
+}
+
+mat-form-field.fadq-expansion-panel-header-selector ::ng-deep .mat-form-field-infix {
+  padding: 0;
+}
+
+mat-form-field.fadq-expansion-panel-header-selector ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 1.75em;
+}
+
+.fadq-expansion-panel-toolbar-container {
+  display: inline-block;
+}
+
+button {
+  margin: 4px 0;
+}
+
+#expand-toolbar-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

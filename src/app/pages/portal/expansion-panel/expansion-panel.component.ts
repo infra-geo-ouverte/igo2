@@ -7,13 +7,18 @@ export interface PeriodicElement {
   symbol: string;
 }
 
+export interface DataSource {
+  name: string;
+  label: string;
+}
+
 
 @Component({
   selector: 'fadq-expansion-panel',
   templateUrl: './expansion-panel.component.html',
   styleUrls: ['./expansion-panel.component.scss'],
   host: {
-    '[class.fadq-expansion-panel-opened]': 'opened'
+    '[class.fadq-expansion-panel-expanded]': 'expanded'
   }
 })
 export class ExpansionPanelComponent {
@@ -32,14 +37,19 @@ export class ExpansionPanelComponent {
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
   ];
 
+  public dataSources: DataSource[] = [
+    {name: 'parcels', label: 'Parcelles'},
+    {name: 'schemas', label: 'Schemas'}
+  ];
+
   @Input()
-  get opened(): boolean {
-    return this._opened;
+  get expanded(): boolean {
+    return this._expanded;
   }
-  set opened(value: boolean) {
-    this._opened = value;
+  set expanded(value: boolean) {
+    this._expanded = value;
   }
-  private _opened: boolean;
+  private _expanded: boolean;
 
   constructor() {}
 

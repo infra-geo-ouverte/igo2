@@ -16,7 +16,7 @@
     width 280ms cubic-bezier(.4,0,.2,1);
 }
 
-:host.fadq-expansion-panel-opened {
+:host.fadq-expansion-panel-expanded {
   height: $fadq-expansion-panel-max-height;
   width: 100%;
 }
@@ -26,7 +26,7 @@
   width: 100%;
 }
 
-:host.fadq-expansion-panel-opened {
+:host.fadq-expansion-panel-expanded {
   width: 100%;
 }
 
@@ -41,3 +41,4 @@ table tr.mat-header-row {
 table tr.mat-row {
   height: 34px;
 }
+
