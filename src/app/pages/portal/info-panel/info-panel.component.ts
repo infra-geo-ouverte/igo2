@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Feature } from '@igo2/geo';
 
@@ -8,7 +8,8 @@ import { Feature } from '@igo2/geo';
   templateUrl: './info-panel.component.html',
   styleUrls: ['./info-panel.component.scss'],
   host: {
-    '[class.fadq-info-panel-opened]': 'opened'
+    '[class.fadq-info-panel-opened]': 'opened',
+    '[class.fadq-info-panel-with-feature]': 'feature === undefined ? false : true'
   }
 })
 export class InfoPanelComponent {
@@ -18,7 +19,12 @@ export class InfoPanelComponent {
     return this._opened;
   }
   set opened(value: boolean) {
+    if (value === this._opened) {
+      return;
+    }
+
     this._opened = value;
+    this.openedChange.emit(this._opened);
   }
   private _opened: boolean;
 
@@ -37,9 +43,18 @@ export class InfoPanelComponent {
   }
   set feature(value: Feature) {
     this._feature = value;
+    if (this._feature !== undefined) {
+      this.toggleDisplay();
+    }
   }
   private _feature: Feature;
 
+  @Output() openedChange= new EventEmitter<boolean>();
+
   constructor() {}
+
+  private toggleDisplay() {
+    (document.querySelector('fadq-info-panel') as HTMLElement).style.display = 'block';
+  }
 
 }

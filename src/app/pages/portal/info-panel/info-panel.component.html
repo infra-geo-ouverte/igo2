@@ -1,9 +1,10 @@
 <igo-panel
-  [title]="feature.title"
+  [title]="feature ? feature.title : title"
   (click)="opened = !opened">
   <button
     mat-icon-button
-    panelRightButton>
+    panelRightButton
+    *ngIf="feature">
     <mat-icon>
       <ng-container *ngIf="!opened">
         arrow_drop_up

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Media } from '@igo2/core';
 import { FlexibleState } from '@igo2/common';
@@ -15,7 +15,12 @@ export class SidenavComponent {
     return this._opened;
   }
   set opened(value: boolean) {
+    if (value === this._opened) {
+      return;
+    }
+
     this._opened = value;
+    this.openedChange.emit(this._opened);
   }
   private _opened: boolean;
 
@@ -36,6 +41,8 @@ export class SidenavComponent {
     this._media = value;
   }
   private _media: Media;
+
+  @Output() openedChange= new EventEmitter<boolean>();
 
   public topPanelState: FlexibleState = 'initial';
 

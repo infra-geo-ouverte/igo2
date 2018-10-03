@@ -46,7 +46,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   });
 
-  public infoPanelOpened = false;
+  public infoPanelOpened;
   public sidenavOpened = false;
 
   // True after the initial context is loaded
@@ -63,6 +63,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.features$$ = this.featureService.features$.subscribe(features =>
       this.handleFeaturesChange(features)
+    );
+
+    this.selectedFeature$$ = this.featureService.selectedFeature$.subscribe(
+      feature => this.handleFeatureSelect(feature)
     );
 
     this.context$$ = this.contextService.context$.subscribe(context =>
@@ -113,6 +117,17 @@ export class PortalComponent implements OnInit, OnDestroy {
       const searchResults = this.toolService.getTool('searchResults');
       this.toolService.selectTool(searchResults);
     }
+  }
+
+  private handleFeatureSelect(feature: Feature) {
+    if (feature === undefined) {
+      return
+    }
+  
+    if (feature && this.mediaService.media$.value === 'mobile') {
+      this.closeSidenav();
+    }
+    this.openInfoPanel();
   }
 
   private handleContextChange(context: Context) {

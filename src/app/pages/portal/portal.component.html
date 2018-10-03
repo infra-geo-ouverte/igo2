@@ -49,7 +49,7 @@
   </mat-menu>
 
   <fadq-sidenav
-    [opened]="sidenavOpened"
+    [(opened)]="sidenavOpened"
     [tool]="toolService.selectedTool$ | async"
     [media]="mediaService.media$ | async">
   </fadq-sidenav>
@@ -69,15 +69,13 @@
   </igo-map-browser>
 
   <div class="fadq-footer">
-      <fadq-map-toolbar></fadq-map-toolbar>
+    <fadq-map-toolbar></fadq-map-toolbar>
   </div>
 
   <fadq-expansion-panel></fadq-expansion-panel>
   <fadq-info-panel
-    [opened]="infoPanelOpened"
-    [title]="'info.title' | translate"
-    [feature]="featureService.focusedFeature$ | async"
-    *ngIf="featureService.focusedFeature$ | async">
+    [(opened)]="infoPanelOpened"
+    [feature]="featureService.focusedFeature$ | async">
   </fadq-info-panel>
 
 </mat-sidenav-container>

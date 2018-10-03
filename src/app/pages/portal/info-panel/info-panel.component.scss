@@ -4,7 +4,7 @@
 :host {
   @extend %box-shadowed;
 
-  display: block;
+  display: none;
   background-color: white;
 
   height: $fadq-info-panel-collapsed-height;
