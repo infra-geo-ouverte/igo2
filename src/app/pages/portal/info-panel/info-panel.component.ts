@@ -23,6 +23,15 @@ export class InfoPanelComponent {
   private _opened: boolean;
 
   @Input()
+  get title(): string {
+    return this._title;
+  }
+  set title(value: string) {
+    this._title = value;
+  }
+  private _title: string;
+
+  @Input()
   get feature(): Feature {
     return this._feature;
   }

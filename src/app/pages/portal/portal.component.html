@@ -67,12 +67,16 @@
 
     <div class="fadq-map-tools-overlay"></div>
   </igo-map-browser>
-  
+
   <div class="fadq-footer">
       <fadq-map-toolbar></fadq-map-toolbar>
   </div>
 
   <fadq-expansion-panel></fadq-expansion-panel>
-  <fadq-info-panel [feature]="featureService.focusedFeature$ | async"></fadq-info-panel>
-  
+  <fadq-info-panel
+    [opened]="infoPanelOpened"
+    [title]="'info.title' | translate"
+    [feature]="featureService.focusedFeature$ | async">
+  </fadq-info-panel>
+
 </mat-sidenav-container>

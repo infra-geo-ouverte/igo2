@@ -3,6 +3,8 @@
   "menu.close": "Close Menu",
   "menu.open": "Open Menu",
 
+  "info.title": "Informations",
+
   "search": {
     "searchbar.placeholder": "Search for a client, a place or a layer",
     "menu.tooltip": "Search Options"

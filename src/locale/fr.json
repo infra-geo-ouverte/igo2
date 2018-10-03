@@ -3,6 +3,8 @@
   "menu.close": "Fermer le menu",
   "menu.open": "Menu",
 
+  "info.title": "Informations",
+
   "search": {
     "searchbar.placeholder": "Rechercher un client, un lieu ou une couche",
     "menu.tooltip": "Options de recherche"

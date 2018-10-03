@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 import { MediaService } from '@igo2/core';
 import {
@@ -11,15 +9,13 @@ import {
 } from '@igo2/context';
 
 import {
-  DataSourceService,
   Feature,
   FeatureService,
   IgoMap,
-  LayerService,
-  MapService,
-  OverlayService,
   SearchService,
 } from '@igo2/geo';
+
+import { ProjectionService } from '../../modules/map/shared';
 
 import {
   controlSlideX,
@@ -28,8 +24,6 @@ import {
   mapSlideY
 } from './portal.animation';
 
-import { ProjectionService } from '../../modules/map';
-
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
@@ -37,11 +31,6 @@ import { ProjectionService } from '../../modules/map';
   animations: [controlSlideX(), controlSlideY(), mapSlideX(), mapSlideY()]
 })
 export class PortalComponent implements OnInit, OnDestroy {
-  static SWIPE_ACTION = {
-    RIGHT: 'swiperight',
-    LEFT: 'swipeleft'
-  };
-
   public searchType: string = 'Client';
   public searchTypes: string[] = ['Client', 'Localisation', 'Couche de données'];
 
@@ -57,29 +46,21 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   });
 
+  public infoPanelOpened = false;
   public sidenavOpened = false;
 
   // True after the initial context is loaded
   private contextLoaded = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private projectionService: ProjectionService,
+    private projectionService: ProjectionService, // TODO: We don,t want to inject that
+    public contextService: ContextService,
     public featureService: FeatureService,
     public mediaService: MediaService,
     public toolService: ToolService,
-    public searchService: SearchService,
-    public overlayService: OverlayService,
-    public mapService: MapService,
-    public layerService: LayerService,
-    public dataSourceService: DataSourceService,
-    public contextService: ContextService,
-    public cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
-    window['IGO'] = this;
-
     this.features$$ = this.featureService.features$.subscribe(features =>
       this.handleFeaturesChange(features)
     );
@@ -95,6 +76,18 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.context$$.unsubscribe();
   }
 
+  closeInfoPanel() {
+    this.infoPanelOpened = false;
+  }
+
+  openInfoPanel() {
+    this.infoPanelOpened = true;
+  }
+
+  toggleInfoPanel() {
+    this.infoPanelOpened ? this.closeInfoPanel() : this.openInfoPanel();
+  }
+
   closeSidenav() {
     this.sidenavOpened = false;
   }
@@ -104,46 +97,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   toggleSidenav() {
-    if (this.sidenavOpened) {
-      this.closeSidenav();
-    } else {
-      this.openSidenav();
-    }
-  }
-
-  removeMapBrowserClass(e) {
-    e.element.classList.remove('sidenav-offset');
-  }
-
-  updateMapBrowserClass(e) {
-    if (this.sidenavOpened) {
-      e.element.classList.add('sidenav-offset');
-    }
-  }
-
-  swipeFeature(action: string) {
-    const featuresList = this.featureService.features$.value;
-    const focusedFeature = this.featureService.focusedFeature$.value;
-
-    let index = featuresList.findIndex(f => f.id === focusedFeature.id);
-    if (index < 0) {
-      return;
-    }
-
-    if (action === PortalComponent.SWIPE_ACTION.LEFT) {
-      index += 1;
-    } else if (action === PortalComponent.SWIPE_ACTION.RIGHT) {
-      index -= 1;
-    }
-
-    if (featuresList[index]) {
-      this.featureService.selectFeature(featuresList[index]);
-    }
+    this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
   }
 
   handleQueryResults(results) {
     const features: Feature[] = results.features;
-    if (features[0]) {
+    if (features.length > 0) {
       this.featureService.updateFeatures(features, features[0].source);
     }
   }
@@ -162,36 +121,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.toolService.selectTool(mapDetails);
     }
 
-    if (context !== undefined) {
-      this.contextLoaded = true;
-    }
-
-    this.route.queryParams.subscribe(params => {
-      if (params['layers'] && params['wmsUrl']) {
-        this.addLayerByName(params['wmsUrl'], params['layers']);
-      }
-    });
-  }
-
-  private addLayerByName(url: string, name: string) {
-    const properties = {
-      type: 'wms' as any,
-      // format: 'wms',
-      url: url,
-      params: {
-        layers: name
-      }
-    };
-
-    this.dataSourceService
-      .createAsyncDataSource(properties)
-      .pipe(debounceTime(100))
-      .subscribe(dataSource => {
-        const layerOptions = {
-          title: name,
-          source: dataSource
-        };
-        this.map.addLayer(this.layerService.createLayer(layerOptions));
-      });
+    this.contextLoaded = context !== undefined;
   }
 }

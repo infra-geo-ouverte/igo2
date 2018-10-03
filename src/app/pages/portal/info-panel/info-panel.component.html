@@ -1,20 +1,19 @@
-<div (click)="opened = !opened">
-
-    <ng-container *ngIf="feature">
-      <igo-panel [title]="feature.title">
-        <!--button
-          mat-icon-button
-          panelLeftButton>
-          <mat-icon>
-            <ng-container *ngIf="!opened">
-              arrow_upward
-            </ng-container>
-            <ng-container *ngIf="opened">
-              arrow_downward
-            </ng-container>
-          </mat-icon>
-        </button-->
-        <igo-feature-details *ngIf="opened" [feature]="feature"></igo-feature-details>
-      </igo-panel>
-    </ng-container>
-</div>
+<igo-panel
+  [title]="feature ? feature.title : title"
+  (click)="opened = !opened">
+  <button
+    mat-icon-button
+    panelRightButton>
+    <mat-icon>
+      <ng-container *ngIf="!opened">
+        arrow_drop_up
+      </ng-container>
+      <ng-container *ngIf="opened">
+        arrow_drop_down
+      </ng-container>
+    </mat-icon>
+  </button>
+  <ng-container *ngIf="feature">
+    <igo-feature-details [feature]="feature"></igo-feature-details>
+  </ng-container>
+</igo-panel>
