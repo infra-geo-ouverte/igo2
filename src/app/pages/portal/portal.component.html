@@ -76,7 +76,8 @@
   <fadq-info-panel
     [opened]="infoPanelOpened"
     [title]="'info.title' | translate"
-    [feature]="featureService.focusedFeature$ | async">
+    [feature]="featureService.focusedFeature$ | async"
+    *ngIf="featureService.focusedFeature$ | async">
   </fadq-info-panel>
 
 </mat-sidenav-container>

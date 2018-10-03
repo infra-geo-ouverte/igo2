@@ -1,5 +1,5 @@
 <igo-panel
-  [title]="feature ? feature.title : title"
+  [title]="feature.title"
   (click)="opened = !opened">
   <button
     mat-icon-button
@@ -13,7 +13,7 @@
       </ng-container>
     </mat-icon>
   </button>
-  <ng-container *ngIf="feature">
+  <ng-container>
     <igo-feature-details [feature]="feature"></igo-feature-details>
   </ng-container>
 </igo-panel>

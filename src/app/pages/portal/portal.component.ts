@@ -53,7 +53,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private contextLoaded = false;
 
   constructor(
-    private projectionService: ProjectionService, // TODO: We don,t want to inject that
+    private projectionService: ProjectionService, // TODO: We don't want to inject that
     public contextService: ContextService,
     public featureService: FeatureService,
     public mediaService: MediaService,
