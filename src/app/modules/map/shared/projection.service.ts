@@ -1,10 +1,10 @@
-import { Injectable, Optional } from '@angular/core';
-
-import { ConfigService } from '@igo2/core';
-
 import proj4 from 'proj4';
 import * as olproj from 'ol/proj';
 import * as olproj4 from 'ol/proj/proj4';
+
+import { Injectable, Optional } from '@angular/core';
+
+import { ConfigService } from '@igo2/core';
 
 import { Projection } from './projection.interface';
 

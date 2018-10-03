@@ -16,6 +16,7 @@ import {
 } from '@igo2/geo';
 
 import { environment } from '../environments/environment';
+import { FadqMapModule } from './modules';
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 
@@ -28,6 +29,7 @@ import { AppComponent } from './app.component';
     IgoMessageModule,
     IgoSpinnerModule,
     IgoStopPropagationModule,
+    FadqMapModule.forRoot(),
     PortalModule
   ],
   providers: [
