@@ -1,4 +1,8 @@
 {
+  "Client": "Client",
+  "Localisation": "Localisation",
+  "DataSource": "Data Source",
+
   "welcome": "Welcome to {{title}}",
   "menu.close": "Close Menu",
   "menu.open": "Open Menu",

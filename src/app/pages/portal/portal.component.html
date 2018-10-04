@@ -19,39 +19,11 @@
     </mat-icon>
   </button>
 
-  <igo-search-bar
-    igoSearchUrlParam
-    [placeholder]="'search.searchbar.placeholder' | translate"
-    floatLabel="never">
-  </igo-search-bar>
-
-  <button
-    mat-icon-button
-    id="search-menu-button"
-    class="fadq-search-menu-button"
-    color="primary"
-    tooltip-position="below"
-    matTooltipShowDelay="500"
-    [matTooltip]="'search.menu.tooltip' | translate"
-    [matMenuTriggerFor]="searchMenu">
-    <mat-icon>arrow_drop_down</mat-icon>
-  </button>
-  <mat-menu
-    #searchMenu="matMenu"
-    overlapTrigger="false"
-    xPosition="before"
-    yPosition="above">
-    <mat-radio-group class="fadq-search-types-radio-group">
-      <mat-radio-button *ngFor="let searchType of searchTypes" [value]="searchType">
-        {{searchType}}
-      </mat-radio-button>
-    </mat-radio-group>
-  </mat-menu>
+  <fadq-search-bar></fadq-search-bar>
 
   <fadq-sidenav
     [(opened)]="sidenavOpened"
-    [tool]="toolService.selectedTool$ | async"
-    [media]="mediaService.media$ | async">
+    [tool]="toolService.selectedTool$ | async">
   </fadq-sidenav>
 
   <igo-map-browser
@@ -61,18 +33,16 @@
     igoLayerContext
     igoDropGeoFile
     igoMapBrowserBinding
-    (query)="handleQueryResults($event)"
     [map]="map"
-    [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}">
-
-    <div class="fadq-map-tools-overlay"></div>
+    (query)="handleQueryResults($event)">
   </igo-map-browser>
 
   <div class="fadq-footer">
     <fadq-map-toolbar></fadq-map-toolbar>
   </div>
 
-  <fadq-expansion-panel></fadq-expansion-panel>
+  <fadq-expansion-panel [(expanded)]="expansionPanelExpanded"></fadq-expansion-panel>
+
   <fadq-info-panel
     [(opened)]="infoPanelOpened"
     [feature]="featureService.focusedFeature$ | async">

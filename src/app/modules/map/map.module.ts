@@ -3,11 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { provideProjectionService } from './shared/projection.provider'
 
+import { FadqMapToolbarModule } from './map-toolbar/map-toolbar.module';
+
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FadqMapToolbarModule
   ],
-  exports: [],
+  exports: [
+    FadqMapToolbarModule
+  ],
   declarations: []
 })
 export class FadqMapModule {

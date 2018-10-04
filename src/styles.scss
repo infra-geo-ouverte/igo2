@@ -33,6 +33,10 @@ body {
   display: none;
 }
 
+.no-border-radius {
+  border-radius: 0 !important;
+}
+
 /* Add some padding to IGO forms */
 .igo-form {
   padding: 10px;

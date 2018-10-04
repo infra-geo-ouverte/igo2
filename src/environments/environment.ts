@@ -24,15 +24,14 @@ export const environment: Environment = {
   igo: {
     searchSources: {
       nominatim: {
-        enabled: true,
-        searchUrl: '/osm'
+        enabled: false
       },
       icherche: {
         enabled: true,
         searchUrl: '/icherche/geocode'
       },
       datasource: {
-        enabled: true,
+        enabled: false,
         searchUrl: '/igo2/api/layers/search'
       }
     },

@@ -1,7 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Media } from '@igo2/core';
-import { FlexibleState } from '@igo2/common';
 import { Tool, ToolService } from '@igo2/context';
 
 @Component({
@@ -33,19 +31,16 @@ export class SidenavComponent {
   }
   private _tool: Tool;
 
-  @Input()
-  get media(): Media {
-    return this._media;
-  }
-  set media(value: Media) {
-    this._media = value;
-  }
-  private _media: Media;
-
   @Output() openedChange = new EventEmitter<boolean>();
 
-  public topPanelState: FlexibleState = 'initial';
+  constructor(private toolService: ToolService) {}
 
-  constructor(public toolService: ToolService) {}
+  selectPreviousTool() {
+    this.toolService.selectPreviousTool()
+  }
+
+  unselectTool() {
+    this.toolService.unselectTool()
+  }
 
 }

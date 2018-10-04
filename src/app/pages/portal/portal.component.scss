@@ -42,7 +42,7 @@ igo-map-browser {
 
 
 /*** Search bar ***/
-igo-search-bar {
+fadq-search-bar {
   background-color: $fadq-background-color;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   position: absolute;
@@ -58,31 +58,9 @@ igo-search-bar {
   }
 }
 
-igo-search-bar ::ng-deep .mat-form-field {
-  padding: 0 $igo-padding;
-}
-
-igo-search-bar ::ng-deep .mat-form-field-wrapper {
-    margin-bottom: -1.50em;
-}
-
-igo-search-bar ::ng-deep span.mat-form-field-label-wrapper {
-  top: -20px;
-}
-
-igo-search-bar ::ng-deep div.mat-form-field-infix {
-  left: $igo-padding;
-  right: $igo-padding;
-  padding: 0 0 12px 0;
-}
-
-igo-search-bar ::ng-deep div.mat-form-field-underline {
-  display: none;
-}
-
-
-/*** Search menu ***/
-.fadq-search-menu-button {
+/*** Search selector ***/
+/*
+.fadq-search-selector {
   background-color: $fadq-background-color;
   position: absolute;
   left: calc(#{$search-bar-left} + #{$search-bar-width} + #{$igo-margin});
@@ -94,20 +72,7 @@ igo-search-bar ::ng-deep div.mat-form-field-underline {
     left: calc(#{$search-bar-left} + #{$search-bar-width-mobile});
   }
 }
-
-.fadq-search-menu-button ::ng-deep div.mat-button-ripple-round  {
-  border-radius: 0;
-}
-
-.fadq-search-types-radio-group {
-  display: inline-flex;
-  flex-direction: column;
-}
-
-.fadq-search-types-radio-group mat-radio-button {
-  margin: $igo-margin;
-}
-
+*/
 
 /*** Attribution ***/
 igo-map-browser.sidenav-offset ::ng-deep .ol-attribution {

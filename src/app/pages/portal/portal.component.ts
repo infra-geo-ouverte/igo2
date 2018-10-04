@@ -46,6 +46,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   });
 
+  public expansionPanelExpanded= false;
   public infoPanelOpened = false;
   public sidenavOpened = false;
 
