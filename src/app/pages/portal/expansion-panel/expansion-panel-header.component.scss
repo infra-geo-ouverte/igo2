@@ -2,11 +2,16 @@
 
 :host {
   display: block;
-  height: $fadq-expansion-panel-collapsed-height;
+  height: $fadq-expansion-panel-header-height;
 }
 
-mat-form-field.fadq-expansion-panel-header-selector {
-  margin: 0 10px;
+:host:not(.fadq-expansion-panel-header-expanded) {
+  @include tablet {
+    .fadq-expansion-panel-header-selector,
+    .fadq-expansion-panel-toolbar-container {
+      display: none;
+    }
+  }
 }
 
 mat-form-field.fadq-expansion-panel-header-selector ::ng-deep .mat-form-field-infix {
@@ -22,7 +27,7 @@ mat-form-field.fadq-expansion-panel-header-selector ::ng-deep .mat-form-field-wr
 }
 
 button {
-  margin: 4px 0;
+  margin: 4px;
 }
 
 #expand-toolbar-button {
@@ -30,3 +35,4 @@ button {
   top: 0;
   right: 0;
 }
+

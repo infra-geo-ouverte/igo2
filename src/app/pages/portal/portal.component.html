@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="fadq-main-container">
 
   <igo-backdrop
     [shown]="backdropShown"
@@ -36,19 +36,18 @@
     [map]="map"
     (query)="handleQueryResults($event)">
   </igo-map-browser>
-
-  <div class="fadq-footer">
-    <fadq-map-toolbar></fadq-map-toolbar>
-  </div>
-
-  <fadq-expansion-panel
-    [(expanded)]="expansionPanelExpanded"
-    [backdropShown]="expansionPanelBackdropShown">
-  </fadq-expansion-panel>
-
-  <fadq-info-panel
-    [(opened)]="infoPanelOpened"
-    [feature]="featureService.focusedFeature$ | async">
-  </fadq-info-panel>
-
 </mat-sidenav-container>
+
+<div class="fadq-footer">
+  <fadq-map-toolbar></fadq-map-toolbar>
+</div>
+
+<fadq-expansion-panel
+  [(expanded)]="expansionPanelExpanded"
+  [backdropShown]="expansionPanelBackdropShown">
+</fadq-expansion-panel>
+
+<fadq-info-panel
+  [(opened)]="infoPanelOpened"
+  [feature]="featureService.focusedFeature$ | async">
+</fadq-info-panel>

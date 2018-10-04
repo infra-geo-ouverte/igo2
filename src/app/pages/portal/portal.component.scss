@@ -8,12 +8,10 @@
   display: block;
 }
 
-mat-sidenav-container {
-  height: 100%;
+.fadq-main-container {
+  position: relative;
   width: 100%;
-}
-
-mat-sidenav-container {
+  height: calc(100% - #{$fadq-footer-height});
   background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 50%, #ccc 50%, #ccc 75%, transparent 75%, #fff);
   background-size: 5px 5px;
 }
@@ -37,7 +35,7 @@ mat-sidenav-container {
 /*** Map browser ***/
 igo-map-browser {
   width: 100%;
-  height: calc(100% - #{$fadq-footer-height});
+  height: 100%;
 }
 
 
@@ -57,22 +55,6 @@ fadq-search-bar {
     width: $search-bar-width-mobile
   }
 }
-
-/*** Search selector ***/
-/*
-.fadq-search-selector {
-  background-color: $fadq-background-color;
-  position: absolute;
-  left: calc(#{$search-bar-left} + #{$search-bar-width} + #{$igo-margin});
-  top: $igo-margin;
-  z-index: 4;
-  border-radius: 0;
-
-  @include mobile {
-    left: calc(#{$search-bar-left} + #{$search-bar-width-mobile});
-  }
-}
-*/
 
 /*** Attribution ***/
 igo-map-browser.sidenav-offset ::ng-deep .ol-attribution {
@@ -115,6 +97,10 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
 .fadq-footer fadq-map-toolbar {
   position: absolute;
   right: 0;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 /*** Expansion panel ***/
@@ -140,8 +126,15 @@ fadq-info-panel {
   z-index: 4;
 
   @include mobile {
-    width: calc(100% - 2 * #{$igo-icon-size});
-    left: $igo-icon-size;
+    width: calc(100% - 2 * #{$fadq-footer-height});
+    left: $fadq-footer-height;
     margin-left: 0;
+  }
+}
+
+fadq-info-panel.fadq-info-panel-opened {
+  @include mobile {
+    width: 100%;
+    left: 0;
   }
 }
