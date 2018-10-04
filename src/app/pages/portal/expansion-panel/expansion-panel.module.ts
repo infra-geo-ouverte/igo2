@@ -11,6 +11,7 @@ import {
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
+import { IgoBackdropModule } from '@igo2/common';
 
 import { ExpansionPanelComponent } from './expansion-panel.component';
 import { ExpansionPanelHeaderComponent } from './expansion-panel-header.component';
@@ -24,7 +25,8 @@ import { ExpansionPanelHeaderComponent } from './expansion-panel-header.componen
     MatListModule,
     MatSelectModule,
     MatTableModule,
-    IgoLanguageModule
+    IgoLanguageModule,
+    IgoBackdropModule
   ],
   exports: [ExpansionPanelComponent],
   declarations: [

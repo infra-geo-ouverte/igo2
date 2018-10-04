@@ -26,8 +26,8 @@
   width: 100%;
 }
 
-:host.fadq-expansion-panel-expanded {
-  width: 100%;
+igo-backdrop ::ng-deep > div {
+  z-index: initial !important;
 }
 
 table {

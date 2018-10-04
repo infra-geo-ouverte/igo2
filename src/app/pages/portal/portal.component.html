@@ -1,7 +1,7 @@
 <mat-sidenav-container>
 
   <igo-backdrop
-    [shown]="sidenavOpened"
+    [shown]="backdropShown"
     (click)="closeSidenav()">
   </igo-backdrop>
 
@@ -41,7 +41,10 @@
     <fadq-map-toolbar></fadq-map-toolbar>
   </div>
 
-  <fadq-expansion-panel [(expanded)]="expansionPanelExpanded"></fadq-expansion-panel>
+  <fadq-expansion-panel
+    [(expanded)]="expansionPanelExpanded"
+    [backdropShown]="expansionPanelBackdropShown">
+  </fadq-expansion-panel>
 
   <fadq-info-panel
     [(opened)]="infoPanelOpened"

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { MediaService } from '@igo2/core';
+import { Media, MediaService } from '@igo2/core';
 import {
   Context,
   ContextService,
@@ -11,8 +11,7 @@ import {
 import {
   Feature,
   FeatureService,
-  IgoMap,
-  SearchService,
+  IgoMap
 } from '@igo2/geo';
 
 import { ProjectionService } from '../../modules/map/shared';
@@ -46,7 +45,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   });
 
-  public expansionPanelExpanded= false;
+  public expansionPanelExpanded = false;
   public infoPanelOpened = false;
   public sidenavOpened = false;
 
@@ -80,6 +79,14 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.features$$.unsubscribe();
     this.context$$.unsubscribe();
   }
+
+  get backdropShown(): boolean {
+    return this.mediaService.media$.value === Media.Mobile && this.sidenavOpened;
+  }
+
+  get expansionPanelBackdropShown(): boolean {
+    return this.expansionPanelExpanded && this.infoPanelOpened;
+  };
 
   closeInfoPanel() {
     this.infoPanelOpened = false;
@@ -125,7 +132,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       return
     }
   
-    if (feature && this.mediaService.media$.value === 'mobile') {
+    if (feature && this.mediaService.media$.value === Media.Mobile) {
       this.closeSidenav();
     }
     this.openInfoPanel();

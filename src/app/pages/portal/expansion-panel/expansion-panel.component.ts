@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export interface PeriodicElement {
   name: string;
@@ -47,10 +47,26 @@ export class ExpansionPanelComponent {
     return this._expanded;
   }
   set expanded(value: boolean) {
-    this._expanded = value;
+    if (value === this._expanded) {
+        return;
+      }
+  
+      this._expanded = value;
+      this.expandedChange.emit(this._expanded);
   }
   private _expanded: boolean;
 
+  @Input()
+  get backdropShown(): boolean {
+    return this._backdropShown;
+  }
+  set backdropShown(value: boolean) {
+    this._backdropShown = value;
+  }
+  private _backdropShown: boolean;
+
   constructor() {}
+
+  @Output() expandedChange = new EventEmitter<boolean>();
 
 }
