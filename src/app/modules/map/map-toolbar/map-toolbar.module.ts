@@ -10,7 +10,7 @@ import {
 
 import { IgoLanguageModule } from '@igo2/core';
 import { IgoToolModule } from '@igo2/context'
-import { IgoGeoModule } from '@igo2/geo'
+import { IgoGeoModule } from '@igo2/geo';
 
 import { MapToolbarComponent } from './map-toolbar.component';
 
