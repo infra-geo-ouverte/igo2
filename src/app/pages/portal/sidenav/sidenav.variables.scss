@@ -2,7 +2,7 @@
 @import '../../../../style/partial/variables';
 
 // 30% is about 65% of 48px (the footer height).
-// We need to adjust to make the expansion paneland the sidenav touch
+// We need to adjust to make the expansion panel and the sidenav touch
 $fadq-sidenav-height: calc(65% + 30px);
 $fadq-sidenav-width: 400px;
 $fadq-sidenav-margin-top: 50px;
