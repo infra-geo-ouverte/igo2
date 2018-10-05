@@ -23,15 +23,12 @@ export class MapToolbarComponent {
 
   @Input()
   get tools(): Tool[] {
-    if (this._tools.length == 0) {
-      return MapDefaultTools;
-    }
     return this._tools;
   }
   set tools(value: Tool[]) {
     this._tools = value;
   }
-  private _tools: Tool[] = [];
+  private _tools: Tool[] = MapDefaultTools;
 
   constructor() {}
 

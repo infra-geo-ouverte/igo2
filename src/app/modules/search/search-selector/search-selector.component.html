@@ -16,8 +16,11 @@
     overlapTrigger="false"
     xPosition="before"
     yPosition="above">
-    <mat-radio-group class="fadq-search-selector-radio-group">
-      <mat-radio-button *ngFor="let search of searches()" [value]="search">
+    <mat-radio-group
+      class="fadq-search-selector-radio-group"
+      [value]="selected"
+      (change)="select($event.value)">
+      <mat-radio-button *ngFor="let search of searches" [value]="search">
         {{search | translate}}
       </mat-radio-button>
     </mat-radio-group>
