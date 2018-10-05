@@ -1,0 +1,58 @@
+@import './expansion-panel.variables';
+
+
+:host {
+  @extend %box-shadowed;
+
+  display: block;
+  background-color: white;
+
+  max-height: $fadq-expansion-panel-max-height;
+  height: $fadq-expansion-panel-collapsed-height;
+  width: $fadq-sidenav-width;
+
+  transition:
+    height 280ms cubic-bezier(.4,0,.2,1),
+    width 280ms cubic-bezier(.4,0,.2,1);
+
+  @include tablet {
+    width: $fadq-expansion-panel-collapsed-height;
+  }
+}
+
+.fadq-expansion-panel-container {
+  height: 100%;
+  width: 100%;
+}
+
+:host.fadq-expansion-panel-expanded {
+  height: $fadq-expansion-panel-max-height;
+  width: 100%;
+}
+
+:host > div {
+  height: 100%;
+  width: 100%;
+}
+
+.fadq-expansion-panel-content {
+  height: calc(100% - #{$fadq-expansion-panel-header-height});
+  overflow: auto;
+}
+
+igo-backdrop ::ng-deep > div {
+  z-index: initial !important;
+}
+
+table {
+  width: 100%;
+}
+
+table tr.mat-header-row {
+  height: 36px;
+}
+
+table tr.mat-row {
+  height: 34px;
+}
+

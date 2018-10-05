@@ -9,7 +9,6 @@ import {
   RouteService
 } from '@igo2/core';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
-import { IgoAuthModule } from '@igo2/auth';
 import {
   provideIChercheSearchSource,
   provideNominatimSearchSource,
@@ -18,6 +17,7 @@ import {
 } from '@igo2/geo';
 
 import { environment } from '../environments/environment';
+import { FadqMapModule } from './modules';
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 
@@ -27,10 +27,10 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
-    IgoAuthModule.forRoot(),
     IgoMessageModule,
     IgoSpinnerModule,
     IgoStopPropagationModule,
+    FadqMapModule.forRoot(),
     PortalModule
   ],
   providers: [

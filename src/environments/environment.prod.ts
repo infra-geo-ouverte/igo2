@@ -14,13 +14,15 @@ export const environment: Environment = {
   igo: {
     searchSources: {
       nominatim: {
-        enabled: false
+        enabled: true
       },
       icherche: {
-        searchUrl: '/icherche/geocode'
+        enabled: false,
+        searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
       },
       datasource: {
-        searchUrl: '/igo2/api/layers/search'
+        enabled: false,
+        searchUrl: 'https://geoegl.msp.gouv.qc.ca/igo2/api/layers/search'
       }
     },
     language: {

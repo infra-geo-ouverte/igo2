@@ -1,4 +1,6 @@
 @import '~@igo2/core/style/partial/core.variables';
+@import './pages/portal/portal.variables';
+
 
 :host {
   width: 100%;
@@ -18,7 +20,7 @@
   }
 
   h4 {
-    font-weigth: 400;
+    font-weight: 400;
   }
 }
 
@@ -29,4 +31,18 @@ igo-spinner {
   top: $igo-margin;
   right: $igo-margin;
   z-index: 5;
+}
+
+
+/*** Message Center ***/
+igo-message-center {
+  position: absolute;
+  bottom: $fadq-footer-height;
+  right: $igo-margin;
+}
+
+igo-message-center ::ng-deep .simple-notification-wrapper {
+  position: relative;
+  bottom: inherit;
+  right: inherit;
 }

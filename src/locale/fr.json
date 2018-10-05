@@ -1,7 +1,23 @@
 {
+  "Client": "Client",
+  "Localisation": "Localisation",
+  "DataSource": "Source de données",
+
   "welcome": "Bienvenue à {{title}}",
-  "Close Menu": "Fermer le menu",
-  "Open Menu": "Menu",
-  "Search for an address or a place":
-    "Rechercher une adresse, un lieu ou une couche"
+  "menu.close": "Fermer le menu",
+  "menu.open": "Menu",
+
+  "info.title": "Informations",
+
+  "search": {
+    "searchbar.placeholder": "Rechercher un client, un lieu ou une couche",
+    "menu.tooltip": "Options de recherche"
+  },
+
+  "tools": {
+    "editAddresses": "Edition d'adresses",
+    "featureDetails": "Informations",
+    "searchClient": "Recherche de client",
+    "searchResults": "Résultats de recherche"
+  }
 }
