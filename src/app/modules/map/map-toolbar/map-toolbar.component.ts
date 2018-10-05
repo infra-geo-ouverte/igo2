@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { Media } from '@igo2/core';
+import { IgoMap } from '@igo2/geo';
 import { Tool } from '@igo2/context';
+import { MapTool, MapDefaultTools } from '../shared/map-tool.enum';
 
 
 @Component({
@@ -11,26 +12,48 @@ import { Tool } from '@igo2/context';
 })
 export class MapToolbarComponent {
 
-  public tools: Tool[] = [
-    {'name': 'baselayerSwitcher', 'icon': 'photo_library'},
-    {'name': 'zoomIn', 'icon': 'zoom_in'},
-    {'name': 'zoomOut', 'icon': 'zoom_out'},
-    {'name': 'previousView', 'icon': 'arrow_back'},
-    {'name': 'nextView', 'icon': 'arrow_forward'},
-    {'name': 'mapPointer', 'icon': 'mouse'},
-    {'name': 'geolocation', 'icon': 'my_location'},
-    {'name': 'streetview', 'icon': 'streetview'}
-  ];
+  @Input()
+  get map(): IgoMap {
+    return this._map;
+  }
+  set map(value: IgoMap) {
+    this._map = value;
+  }
+  private _map: IgoMap;
 
   @Input()
-  get media(): Media {
-    return this._media;
+  get tools(): Tool[] {
+    if (this._tools.length == 0) {
+      return MapDefaultTools;
+    }
+    return this._tools;
   }
-  set media(value: Media) {
-    this._media = value;
+  set tools(value: Tool[]) {
+    this._tools = value;
   }
-  private _media: Media;
+  private _tools: Tool[] = [];
 
   constructor() {}
+
+  ngOnInit() {
+    console.log(this.map);
+    console.log(this.map.ol.interactions);
+  }
+
+  activateTool(tool: Tool) {
+    switch(tool.name) {
+      case MapTool.ZoomIn: {
+        this.map.zoomIn();
+      }
+      case MapTool.ZoomOut: {
+        this.map.zoomOut();
+      }
+      default: {
+        break;
+      }
+    }
+  }
+
+
 
 }

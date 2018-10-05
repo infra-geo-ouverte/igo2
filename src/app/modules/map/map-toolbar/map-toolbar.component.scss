@@ -7,3 +7,7 @@
 
   background-color: white;
 }
+
+igo-toolbar ::ng-deep mat-list-item {
+  background-color: initial !important;
+}
