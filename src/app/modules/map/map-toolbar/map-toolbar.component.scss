@@ -1,0 +1,13 @@
+@import './map-toolbar.variables';
+
+
+:host {
+  @extend %bordered-top;
+  @extend %bordered-left;
+
+  background-color: white;
+}
+
+igo-toolbar ::ng-deep mat-list-item {
+  background-color: initial !important;
+}

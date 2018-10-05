@@ -1,5 +1,5 @@
 @import '~@igo2/core/style/all.theming';
-@import '~@igo2/core/style/themes/blue.theme';
+@import './fadq.theme';
 
 @include igo-all-theming($theme);
 
@@ -31,4 +31,22 @@ body {
 /* IE10+ */
 ::-ms-clear {
   display: none;
+}
+
+.no-border-radius {
+  border-radius: 0 !important;
+}
+
+/* Add some padding to IGO forms */
+.igo-form {
+  padding: 10px;
+}
+
+.fadq-compact-menu .mat-menu-content:not(:empty) {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .mat-list {
+    padding-top: 0
+  }
 }

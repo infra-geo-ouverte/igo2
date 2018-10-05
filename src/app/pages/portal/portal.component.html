@@ -1,37 +1,30 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="fadq-main-container">
 
   <igo-backdrop
-    [shown]="sidenavOpened"
+    [shown]="backdropShown"
     (click)="closeSidenav()">
   </igo-backdrop>
 
   <button
     mat-icon-button
     id="menu-button"
-    class="menu-button"
+    class="fadq-menu-button"
     color="primary"
     tooltip-position="below"
     matTooltipShowDelay="500"
-    [matTooltip]="(sidenavOpened ? 'Close Menu' : 'Open Menu') | translate"
+    [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
     (click)="toggleSidenav()">
     <mat-icon>
-      <ng-container *ngIf="!sidenavOpened">menu</ng-container>
-      <ng-container *ngIf="sidenavOpened">keyboard_arrow_left</ng-container>
+      <ng-container>menu</ng-container>
     </mat-icon>
   </button>
 
-  <igo-search-bar
-    igoSearchUrlParam
-    [placeholder]="'Search for an address or a place' | translate"
-    floatLabel="never">
-  </igo-search-bar>
+  <fadq-search-bar></fadq-search-bar>
 
-  <igo-sidenav
-    [opened]="sidenavOpened"
-    [feature]="featureService.focusedFeature$ | async"
-    [tool]="toolService.selectedTool$ | async"
-    [media]="mediaService.media$ | async">
-  </igo-sidenav>
+  <fadq-sidenav
+    [(opened)]="sidenavOpened"
+    [tool]="toolService.selectedTool$ | async">
+  </fadq-sidenav>
 
   <igo-map-browser
     igoQuery
@@ -40,37 +33,21 @@
     igoLayerContext
     igoDropGeoFile
     igoMapBrowserBinding
-    (query)="handleQueryResults($event)"
     [map]="map"
-    [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
-    [@mapStateX]="sidenavOpened ? 'right' : 'left'"
-    (@mapStateX.start)="removeMapBrowserClass($event)"
-    (@mapStateX.done)="updateMapBrowserClass($event)"
-    [@mapStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'"
-    (@mapStateY.start)="removeMapBrowserClass($event)"
-    (@mapStateY.done)="updateMapBrowserClass($event)">
-
-    <igo-zoom-button [map]="map" color="primary"></igo-zoom-button>
-    <igo-geolocate-button [map]="map" color="primary"
-      [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'">
-    </igo-geolocate-button>
-    <igo-user-button [map]="map" color="primary"
-      [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'">
-    </igo-user-button>
-    <igo-baselayers-switcher [map]="map"
-      [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'"
-      [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
-                              sidenavOpened ? 'right' : 'left'">
-    </igo-baselayers-switcher>
+    (query)="handleQueryResults($event)">
   </igo-map-browser>
-
-  <igo-toast
-    [expanded]="toastOpened"
-    [feature]="featureService.focusedFeature$ | async"
-    (onOpened)="toastOpened=$event"
-    (swipeleft)="swipe($event.type)"
-    (swiperight)="swipe($event.type)"
-    *ngIf="toastShown">
-  </igo-toast>
-
 </mat-sidenav-container>
+
+<div class="fadq-footer">
+  <fadq-map-toolbar [map]="map"></fadq-map-toolbar>
+</div>
+
+<fadq-expansion-panel
+  [(expanded)]="expansionPanelExpanded"
+  [backdropShown]="expansionPanelBackdropShown">
+</fadq-expansion-panel>
+
+<fadq-info-panel
+  [(opened)]="infoPanelOpened"
+  [feature]="featureService.focusedFeature$ | async">
+</fadq-info-panel>

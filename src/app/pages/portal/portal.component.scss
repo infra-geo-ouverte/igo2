@@ -1,5 +1,5 @@
-@import '~@igo2/core/style/partial/media';
-@import '../../../style/partial/variables';
+@import './portal.variables';
+
 
 /*** Main ***/
 :host {
@@ -8,30 +8,29 @@
   display: block;
 }
 
-mat-sidenav-container {
-  height: 100%;
+.fadq-main-container {
+  position: relative;
   width: 100%;
+  height: calc(100% - #{$fadq-footer-height});
+  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 50%, #ccc 50%, #ccc 75%, transparent 75%, #fff);
+  background-size: 5px 5px;
 }
+
 
 /*** Menu button ***/
-
-.menu-button {
-  background-color: $igo-background-color;
+.fadq-menu-button {
+  background-color: $fadq-background-color;
   position: absolute;
-  left: $igo-sidenav-width;
+  left: $igo-margin;
   top: $igo-margin;
-  z-index: 2;
-  border-radius: 0;
-
-  @include mobile {
-    right: $igo-margin;
-    left: inherit;
-  }
-}
-
-.menu-button ::ng-deep div.mat-button-ripple-round  {
+  z-index: 4;
   border-radius: 0;
 }
+
+.fadq-menu-button ::ng-deep div.mat-button-ripple-round  {
+  border-radius: 0;
+}
+
 
 /*** Map browser ***/
 igo-map-browser {
@@ -39,48 +38,25 @@ igo-map-browser {
   height: 100%;
 }
 
+
 /*** Search bar ***/
-igo-search-bar {
-  background-color: $igo-background-color;
+fadq-search-bar {
+  background-color: $fadq-background-color;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   position: absolute;
-  left: 0;
+  left: $search-bar-left;
   top: $igo-margin;
   z-index: 4;
-  width: calc(#{$igo-sidenav-width} - 2 * #{$igo-margin});
+  width: $search-bar-width;
+  height: $igo-icon-size;
   margin: 0 $igo-margin;
 
   @include mobile {
-    width: calc(100% - #{$igo-mobile-min-space-left} - (3 * #{$igo-margin}));
+    width: $search-bar-width-mobile
   }
 }
 
-igo-search-bar ::ng-deep .mat-form-field-wrapper {
-    margin-bottom: -1.50em;
-}
-
-igo-search-bar ::ng-deep span.mat-form-field-label-wrapper {
-  top: -20px;
-}
-
-igo-search-bar ::ng-deep div.mat-form-field-infix {
-  left: $igo-padding;
-  right: $igo-padding;
-  padding: 0 0 12px 0;
-}
-
-igo-map-browser.toast-shown-offset ::ng-deep .ol-attribution {
-  @include mobile {
-    bottom: 55px;
-  }
-}
-
-igo-map-browser.toast-opened-offset ::ng-deep .ol-attribution {
-  @include mobile {
-    bottom: 305px;
-  }
-}
-
+/*** Attribution ***/
 igo-map-browser.sidenav-offset ::ng-deep .ol-attribution {
   left: 410px;
   @include mobile {
@@ -92,5 +68,73 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
   left: 495px;
   @include mobile {
     left: 90px;
+  }
+}
+
+
+/***Layers list ***/
+::ng-deep .igo-layer-actions-container > .igo-col {
+  /* Make the slider smaller and align it with the action buttons */
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+
+::ng-deep .igo-layer-actions-container .igo-col:nth-child(2) {
+  /*Align the action buttons with the slider */
+  float: right;
+  width: 75%;
+}
+
+/*** Footer ***/
+.fadq-footer {
+  position: relative;
+  background-color: #eee;
+  width: 100%;
+  height: $fadq-footer-height;
+}
+
+.fadq-footer fadq-map-toolbar {
+  position: absolute;
+  right: 0;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+/*** Expansion panel ***/
+fadq-expansion-panel {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 4;
+  overflow: hidden;
+}
+
+fadq-expansion-panel.fadq-expansion-panel-expanded {
+  margin-bottom: $fadq-footer-height;
+}
+
+/*** Info panel ***/
+fadq-info-panel {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -15%;
+  width: 30%;
+  z-index: 4;
+
+  @include mobile {
+    width: calc(100% - 2 * #{$fadq-footer-height});
+    left: $fadq-footer-height;
+    margin-left: 0;
+  }
+}
+
+fadq-info-panel.fadq-info-panel-opened {
+  @include mobile {
+    width: 100%;
+    left: 0;
   }
 }

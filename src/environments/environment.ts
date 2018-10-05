@@ -27,10 +27,12 @@ export const environment: Environment = {
         enabled: false
       },
       icherche: {
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
+        enabled: true,
+        searchUrl: '/icherche/geocode'
       },
       datasource: {
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/igo2/api/layers/search'
+        enabled: false,
+        searchUrl: '/igo2/api/layers/search'
       }
     },
     language: {

@@ -1,0 +1,22 @@
+<igo-panel
+  [title]="feature ? feature.title : title"
+  (click)="opened = !opened">
+  <button
+    mat-icon-button
+    panelRightButton
+    *ngIf="feature">
+    <mat-icon>
+      <ng-container *ngIf="!opened">
+        arrow_drop_up
+      </ng-container>
+      <ng-container *ngIf="opened">
+        arrow_drop_down
+      </ng-container>
+    </mat-icon>
+  </button>
+
+  <div igoStopPropagation>
+    <igo-feature-details [feature]="feature"></igo-feature-details>
+  </div>
+
+</igo-panel>

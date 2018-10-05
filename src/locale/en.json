@@ -1,6 +1,23 @@
 {
+  "Client": "Client",
+  "Localisation": "Localisation",
+  "DataSource": "Data Source",
+
   "welcome": "Welcome to {{title}}",
-  "Close Menu": "Close Menu",
-  "Open Menu": "Open Menu",
-  "Search for an address or a place": "Search for an address or a place"
+  "menu.close": "Close Menu",
+  "menu.open": "Open Menu",
+
+  "info.title": "Informations",
+
+  "search": {
+    "searchbar.placeholder": "Search for a client, a place or a layer",
+    "menu.tooltip": "Search Options"
+  },
+
+  "tools": {
+    "editAddresses": "Edit Addresses",
+    "featureDetails": "Feature Info",
+    "searchClient": "Search Client",
+    "searchResults": "Search Results"
+  }
 }

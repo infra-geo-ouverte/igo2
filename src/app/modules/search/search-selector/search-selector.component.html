@@ -1,0 +1,25 @@
+<div class="fadq-search-selector">
+  <button
+    mat-icon-button
+    class="fadq-search-selector-button"
+    color="primary"
+    tooltip-position="below"
+    matTooltipShowDelay="500"
+    [matTooltip]="'search.menu.tooltip' | translate"
+    [matMenuTriggerFor]="searchSelectorMenu">
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+
+  <mat-menu
+    #searchSelectorMenu="matMenu"
+    class="no-border-radius"
+    overlapTrigger="false"
+    xPosition="before"
+    yPosition="above">
+    <mat-radio-group class="fadq-search-selector-radio-group">
+      <mat-radio-button *ngFor="let search of searches()" [value]="search">
+        {{search | translate}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-menu>
+</div>
