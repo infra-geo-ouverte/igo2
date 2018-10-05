@@ -12,7 +12,8 @@ import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 import {
   provideIChercheSearchSource,
   provideNominatimSearchSource,
-  provideDataSourceSearchSource
+  provideDataSourceSearchSource,
+  provideOsrmRoutingSource
 } from '@igo2/geo';
 
 import { environment } from '../environments/environment';
@@ -40,7 +41,8 @@ import { AppComponent } from './app.component';
     RouteService,
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
-    provideDataSourceSearchSource()
+    provideDataSourceSearchSource(),
+    provideOsrmRoutingSource()
   ],
   bootstrap: [AppComponent]
 })
