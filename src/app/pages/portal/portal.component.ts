@@ -13,6 +13,7 @@ import {
   IgoMap,
   LayerService,
   MapService,
+  OverlayAction,
   OverlayService,
   SearchService
 } from '@igo2/geo';
@@ -179,7 +180,7 @@ export class PortalComponent implements OnInit, OnDestroy {
             features[0].source !== 'ICherche Québec')
         ) {
           this.featureService.selectFeature(features[0]);
-          this.overlayService.setFeatures([features[0]], 'zoom');
+          this.overlayService.setFeatures([features[0]], OverlayAction.ZoomIfOutMapExtent);
           this.toastShown = true;
           return;
         }
