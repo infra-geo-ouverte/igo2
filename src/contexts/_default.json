@@ -56,18 +56,18 @@
     }
   ],
   "toolbar": [
-    "searchClient",
+    "clientInfo",
     "searchResults",
     "contextManager",
     "mapDetails",
     "catalog",
     "importExport",
     "print",
-    "editAddresses"
+    "addressEditor"
   ],
   "tools": [
     {
-      "name": "searchClient"
+      "name": "clientInfo"
     },
     {
       "name": "searchResults"
@@ -82,7 +82,6 @@
       "name": "mapDetails",
       "options": {
         "toggleLegendOnVisibilityChange": false
-        
       }
     },
     {
@@ -92,7 +91,7 @@
       "name": "print"
     },
     {
-      "name": "editAddresses"
+      "name": "addressEditor"
     }
   ]
 }
