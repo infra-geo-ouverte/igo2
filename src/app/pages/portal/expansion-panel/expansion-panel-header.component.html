@@ -6,7 +6,7 @@
     <mat-icon *ngIf="expanded" style="transform: rotate(180deg)">launch</mat-icon>
   </button>
 
-  <mat-form-field [appearance]="fill" class="fadq-expansion-panel-header-selector">
+  <mat-form-field class="fadq-expansion-panel-header-selector">
     <mat-select>
       <mat-option *ngFor="let dataSource of dataSources" [value]="dataSource.name">
         {{dataSource.label}}
