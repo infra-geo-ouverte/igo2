@@ -15,9 +15,8 @@
   },
 
   "tools": {
-    "editAddresses": "Edit Addresses",
-    "featureDetails": "Feature Info",
-    "searchClient": "Search Client",
-    "searchResults": "Search Results"
+    "addressEditor": "Edit Addresses",
+    "clientInfo": "Client",
+    "placeSelector": "Places"
   }
 }

@@ -15,9 +15,8 @@
   },
 
   "tools": {
-    "editAddresses": "Edition d'adresses",
-    "featureDetails": "Informations",
-    "searchClient": "Recherche de client",
-    "searchResults": "Résultats de recherche"
+    "addressEditor": "Edition d'adresses",
+    "clientInfo": "Client",
+    "placeSelector": "Endroits d'intérêt"
   }
 }
