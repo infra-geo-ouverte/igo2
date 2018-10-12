@@ -32,11 +32,6 @@ export class MapToolbarComponent {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.map);
-    console.log(this.map.ol.interactions);
-  }
-
   activateTool(tool: Tool) {
     switch(tool.name) {
       case MapTool.ZoomIn: {

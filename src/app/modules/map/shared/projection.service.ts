@@ -2,7 +2,7 @@ import proj4 from 'proj4';
 import * as olproj from 'ol/proj';
 import * as olproj4 from 'ol/proj/proj4';
 
-import { Injectable, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { ConfigService } from '@igo2/core';
 
@@ -13,15 +13,11 @@ import { Projection } from './projection.interface';
 })
 export class ProjectionService {
 
-  constructor(
-    @Optional() private config: ConfigService
-  ) {
-    if (this.config) {
-      let projections = this.config.getConfig('projections') || [];
-      projections.forEach((projection: Projection) => {
-        this.registerProjection(projection);
-      })
-    }
+  constructor(private config: ConfigService) {
+    let projections = this.config.getConfig('projections') || [];
+    projections.forEach((projection: Projection) => {
+      this.registerProjection(projection);
+    })
   }
 
   registerProjection(projection: Projection) {

@@ -13,11 +13,4 @@ import { FadqPlaceSelectorToolModule } from './place-selector-tool/place-selecto
     FadqPlaceSelectorToolModule
   ]
 })
-export class FadqToolModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqToolModule,
-      providers: []
-    };
-  }
-}
+export class FadqToolModule {}

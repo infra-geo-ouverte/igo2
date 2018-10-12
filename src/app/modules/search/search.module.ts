@@ -1,5 +1,11 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import {
+  provideIChercheSearchSource,
+  provideNominatimSearchSource,
+  provideDataSourceSearchSource
+} from '@igo2/geo';
 
 import { FadqSearchBarModule } from './search-bar/search-bar.module';
 import { FadqSearchSelectorModule } from './search-selector/search-selector.module';
@@ -14,13 +20,11 @@ import { FadqSearchSelectorModule } from './search-selector/search-selector.modu
     FadqSearchBarModule,
     FadqSearchSelectorModule
   ],
-  declarations: []
+  declarations: [],
+  providers: [
+    provideNominatimSearchSource(),
+    provideIChercheSearchSource(),
+    provideDataSourceSearchSource()
+  ]
 })
-export class FadqSearchModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqSearchModule,
-      providers: []
-    };
-  }
-}
+export class FadqSearchModule {}
