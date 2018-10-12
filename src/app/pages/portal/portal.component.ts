@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { Media, MediaService } from '@igo2/core';
 import {
-  Context,
+  DetailedContext,
   ContextService,
   ToolService
 } from '@igo2/context';
@@ -54,14 +54,15 @@ export class PortalComponent implements OnInit, OnDestroy {
   private contextLoaded = false;
 
   constructor(
-    private projectionService: ProjectionService, // TODO: We don't want to inject that
+    private projectionService: ProjectionService,
     public contextService: ContextService,
     public featureService: FeatureService,
     public mediaService: MediaService,
-    public toolService: ToolService,
+    public toolService: ToolService
   ) {}
 
   ngOnInit() {
+    window['IGO'] = this;
     this.features$$ = this.featureService.features$.subscribe(features =>
       this.handleFeaturesChange(features)
     );
@@ -139,12 +140,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openInfoPanel();
   }
 
-  private handleContextChange(context: Context) {
-    if (context !== undefined && this.contextLoaded) {
-      const mapDetails = this.toolService.getTool('mapDetails');
-      this.toolService.selectTool(mapDetails);
-    }
+  private handleContextChange(context: DetailedContext) {
+    if (context !== undefined) {
+      this.toolService.setTools(context.tools)
 
-    this.contextLoaded = context !== undefined;
+      if (this.contextLoaded) {
+        const mapDetails = this.toolService.getTool('mapDetails');
+        this.toolService.selectTool(mapDetails);  
+      }
+      this.contextLoaded = true;
+    }
   }
 }

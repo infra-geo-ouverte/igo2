@@ -1,0 +1,36 @@
+
+<form class="igo-form">
+
+  <div class="igo-input-container">
+    <mat-form-field>
+      <mat-select
+        placeholder="{{'navigation.placeSelector.category.placeholder' | translate}}"
+        [value]="selectedCategory"
+        (selectionChange)="selectCategory($event.value)">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category.label | translate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="igo-input-container" *ngIf="selectedCategory !== undefined">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          [placeholder]="selectedCategory.label | translate"
+          [matAutocomplete]="auto"
+          [formControl]="placeControl">
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          [displayWith]="displayPlace"
+          (optionSelected)="selectPlace($event.option.value)">
+          <mat-option *ngFor="let place of filteredPlaces$ | async" [value]="place">
+            {{ place.label }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+  </div>
+  
+</form>

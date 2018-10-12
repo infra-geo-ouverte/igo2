@@ -19,9 +19,12 @@ import { IgoGeoModule } from '@igo2/geo';
 import { IgoContextModule } from '@igo2/context';
 import { IgoToolsModule } from '@igo2/tools';
 
-import { FadqMapModule } from '../../modules/map/map.module';
-import { FadqSearchModule } from '../../modules/search/search.module';
-import { FadqToolModule } from '../../modules/tool/tool.module';
+import {
+  FadqCoreModule,
+  FadqMapModule,
+  FadqSearchModule,
+  FadqToolModule
+} from '../../modules';
 import { FadqExpansionPanelModule } from './expansion-panel/expansion-panel.module';
 import { FadqInfoPanelModule } from './info-panel/info-panel.module';
 import { FadqSidenavModule } from './sidenav/sidenav.module';
@@ -37,7 +40,7 @@ import { PortalComponent } from './portal.component';
     MatMenuModule,
     MatRadioModule,
     MatSidenavModule,
-    IgoCoreModule,
+
     IgoPanelModule,
     IgoBackdropModule,
     IgoFlexibleModule,
@@ -45,6 +48,7 @@ import { PortalComponent } from './portal.component';
     IgoContextModule,
     IgoToolsModule,
 
+    FadqCoreModule,
     FadqExpansionPanelModule,
     FadqInfoPanelModule,
     FadqSidenavModule,
@@ -55,4 +59,4 @@ import { PortalComponent } from './portal.component';
   exports: [PortalComponent],
   declarations: [PortalComponent]
 })
-export class PortalModule {}
+export class FadqPortalModule {}

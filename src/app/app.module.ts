@@ -3,22 +3,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {
-  provideConfigOptions,
-  IgoMessageModule,
-  RouteService
-} from '@igo2/core';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
-import {
-  provideIChercheSearchSource,
-  provideNominatimSearchSource,
-  provideDataSourceSearchSource,
-  provideOsrmRoutingSource
-} from '@igo2/geo';
 
-import { environment } from '../environments/environment';
-import { FadqMapModule } from './modules';
-import { PortalModule } from './pages';
+import {
+  FadqCoreModule,
+  FadqMapModule,
+  FadqNavigationModule,
+  FadqSearchModule,
+  FadqToolModule
+} from './modules';
+import { ProjectionService } from './modules/map/shared/projection.service';
+import { FadqPortalModule } from './pages';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -27,23 +22,18 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
-    IgoMessageModule,
+
+    FadqCoreModule.forRoot(),
+    FadqMapModule,
+    FadqNavigationModule,
+    FadqSearchModule,
+    FadqToolModule,
+    FadqPortalModule,
+  
     IgoSpinnerModule,
-    IgoStopPropagationModule,
-    FadqMapModule.forRoot(),
-    PortalModule
+    IgoStopPropagationModule
   ],
-  providers: [
-    provideConfigOptions({
-      default: environment.igo,
-      path: './config/config.json'
-    }),
-    RouteService,
-    provideNominatimSearchSource(),
-    provideIChercheSearchSource(),
-    provideDataSourceSearchSource(),
-    provideOsrmRoutingSource()
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
