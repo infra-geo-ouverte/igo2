@@ -6,12 +6,27 @@
   "welcome": "Welcome to {{title}}",
   "menu.close": "Close Menu",
   "menu.open": "Open Menu",
+  "choose...": "Choose...",
 
   "info.title": "Informations",
 
   "search": {
     "searchbar.placeholder": "Search for a client, a place or a layer",
     "menu.tooltip": "Search Options"
+  },
+
+  "navigation": {
+    "placeSelector.category.placeholder": "Category",
+    "categories": {
+      "mun": "Municipalities",
+      "mrc": "MRC",
+      "ra": "Regions",
+      "tcs": "Service Center Territories",
+      "sm": "Meteorological Station",
+      "zc1": "Zone 1",
+      "zc2": "Zone 2",
+      "rzc": "Collective Zones"
+    }
   },
 
   "tools": {

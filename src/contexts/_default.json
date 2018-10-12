@@ -15,7 +15,7 @@
       "baseLayer": true,
       "visible": false,
       "sourceOptions": {
-        "type": "wmts",
+        "type": "osm",
         "url": "http://geoservpro.fadq.qc/mapcache/wmts",
         "layer": "carte_gouv_qc",
         "style": "default",
@@ -41,18 +41,6 @@
           "version": "1.0.0"
         }
       }
-    },
-    {
-      "title": "Parcelles du client",
-      "sourceOptions": {
-        "type": "vector"
-      }
-    },
-    {
-      "title": "Numéros de parcelles",
-      "sourceOptions": {
-        "type": "vector"
-      }
     }
   ],
   "toolbar": [
@@ -61,6 +49,7 @@
     "contextManager",
     "mapDetails",
     "catalog",
+    "placeSelector",
     "importExport",
     "print",
     "addressEditor"
@@ -76,9 +65,6 @@
       "name": "contextManager"
     },
     {
-      "name": "importExport"
-    },
-    {
       "name": "mapDetails",
       "options": {
         "toggleLegendOnVisibilityChange": false
@@ -86,6 +72,120 @@
     },
     {
       "name": "catalog"
+    },
+    {
+      "name": "placeSelector",
+      "options": {
+        "categories": [
+          {
+            "id": "mun",
+            "label": "navigation.categories.mun",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirMunicipalites",
+              "resultsProperty": "lstMunicipalite",
+              "idProperty": "codeGeographique",
+              "labelProperty": "nomMunicipalite"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirMunicipalite/${id}"
+            }
+          },
+          {
+            "id": "mrc",
+            "label": "navigation.categories.mrc",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirMunicipalitesRegionalesComte",
+              "resultsProperty": "lstMunicipaliteRegionaleComte",
+              "idProperty": "code",
+              "labelProperty": "nom"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirMunicipaliteRegionaleComte/${id}"
+            }
+          },
+          {
+            "id": "ra",
+            "label": "navigation.categories.ra",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirRegionsAdministratives",
+              "resultsProperty": "lstRegionAdministrative",
+              "idProperty": "codeRegionAdministrative",
+              "labelProperty": "nomRegionAdministrative"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirRegionAdministrative/${id}"
+            }
+          },
+          {
+            "id": "tcs",
+            "label": "navigation.categories.tcs",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirTerritoiresCentresServices",
+              "resultsProperty": "lstTerritoireCentreServices",
+              "idProperty": "idTerritoireCentreServices",
+              "labelProperty": "nomCentreServices"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirTerritoireCentreServices/${id}"
+            }
+          },
+          {
+            "id": "sm",
+            "label": "navigation.categories.sm",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoDisponibles",
+              "resultsProperty": "lstStationMeteoDisponible",
+              "idProperty": "idStationMeteo",
+              "labelProperty": "nomStation"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirStationMeteo/${id}"
+            }
+          },
+          {
+            "id": "zc1",
+            "label": "navigation.categories.zc1",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/1",
+              "resultsProperty": "lstZonageCollectif",
+              "idProperty": "idZonageCollectif",
+              "labelProperty": "noZone"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/1/${id}"
+            }
+          },
+          {
+            "id": "zc2",
+            "label": "navigation.categories.zc2",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/2",
+              "resultsProperty": "lstZonageCollectif",
+              "idProperty": "idZonageCollectif",
+              "labelProperty": "noZone"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/2/${id}"
+            }
+          },
+          {
+            "id": "rzc",
+            "label": "navigation.categories.rzc",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirRegionsZonageCollectif",
+              "resultsProperty": "lstRegionZonageCollectif",
+              "idProperty": "idRegionZonageCollectif",
+              "labelProperty": "nomRegionZonageCollectif"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirUneRegionZonageCollectif/${id}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "importExport"
     },
     {
       "name": "print"

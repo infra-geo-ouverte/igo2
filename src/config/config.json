@@ -12,6 +12,9 @@
         "url": "/swwf"
       }
     ]
+  },
+  "api": {
+    "url": "http://chabou01-svn.fadq.qc/app/interne"
   }
 }
   

@@ -6,12 +6,27 @@
   "welcome": "Bienvenue à {{title}}",
   "menu.close": "Fermer le menu",
   "menu.open": "Menu",
+  "choose...": "Choisissez...",
 
   "info.title": "Informations",
 
   "search": {
     "searchbar.placeholder": "Rechercher un client, un lieu ou une couche",
     "menu.tooltip": "Options de recherche"
+  },
+
+  "navigation": {
+    "placeSelector.category.placeholder": "Catégorie",
+    "categories": {
+      "mun": "Municipalités",
+      "mrc": "MRC",
+      "ra": "Régions administratives",
+      "tcs": "Territoires des centres de service",
+      "sm": "Stations Météo",
+      "zc1": "Zone céréales maïs fourrager oléagineux",
+      "zc2": "Zone maïs-grain",
+      "rzc": "Régions zonage collectif"
+    }
   },
 
   "tools": {
