@@ -6,7 +6,28 @@
       "projection": "EPSG:32198",
       "center": [-72, 46],
       "zoom": 3,
-      "resolutions": [7224.8888888889,3612.4444444445,1806.2222222222,903.1111111111,451.5555555556,225.7777777778,112.8888888889,56.4444444444,28.2222222222,14.1111111111,7.0555555556,3.5277777778,1.7638888889,0.8819444444,0.4409722222,0.2204861111, 0.1102430555]
+      "resolutions": [
+        6966.51707578125,
+        3483.258537890625,
+        1741.6292689453126,
+        870.8146344726563,
+        435.40731723632814,
+        217.70365861816407,
+        108.85182930908204,
+        54.42591465454102,
+        27.21295732727051,
+        13.606478663635254,
+        6.803239331817627,
+        3.4016196659088136,
+        1.7008098329544068,
+        0.8504049164772034,
+        0.4252024582386017,
+        0.21260122911930085,
+        0.10630061455965042,
+        0.05315030727982521,
+        0.026575153639912606,
+        0.013287576819956303
+      ]
     }
   },
   "layers": [
@@ -28,8 +49,9 @@
     },
     {
       "title": "Images les plus récentes",
-      "baseLayer": true,
+      "baseLayer": false,
       "visible": true,
+      "optionsFromCapabilities": true,
       "sourceOptions": {
         "type": "wmts",
         "url": "https://servicesmatriciels.mern.qc/erdas-iws/ogc/wmts/Imagerie_Continue",
@@ -49,7 +71,7 @@
     "contextManager",
     "mapDetails",
     "catalog",
-    "placeSelector",
+    "navigation",
     "importExport",
     "print",
     "addressEditor"
@@ -74,108 +96,108 @@
       "name": "catalog"
     },
     {
-      "name": "placeSelector",
+      "name": "navigation",
       "options": {
+        "pois": [
+          {
+            "title": "Québec",
+            "x": -72,
+            "y": 46,
+            "zoom": 3
+          }
+        ],
         "categories": [
           {
-            "id": "mun",
-            "label": "navigation.categories.mun",
+            "title": "navigation.categories.mun",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirMunicipalites",
               "resultsProperty": "lstMunicipalite",
               "idProperty": "codeGeographique",
-              "labelProperty": "nomMunicipalite"
+              "titleProperty": "nomMunicipalite"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirMunicipalite/${id}"
             }
           },
           {
-            "id": "mrc",
-            "label": "navigation.categories.mrc",
+            "title": "navigation.categories.mrc",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirMunicipalitesRegionalesComte",
               "resultsProperty": "lstMunicipaliteRegionaleComte",
               "idProperty": "code",
-              "labelProperty": "nom"
+              "titleProperty": "nom"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirMunicipaliteRegionaleComte/${id}"
             }
           },
           {
-            "id": "ra",
-            "label": "navigation.categories.ra",
+            "title": "navigation.categories.ra",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionsAdministratives",
               "resultsProperty": "lstRegionAdministrative",
               "idProperty": "codeRegionAdministrative",
-              "labelProperty": "nomRegionAdministrative"
+              "titleProperty": "nomRegionAdministrative"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionAdministrative/${id}"
             }
           },
           {
-            "id": "tcs",
-            "label": "navigation.categories.tcs",
+            "title": "navigation.categories.tcs",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirTerritoiresCentresServices",
               "resultsProperty": "lstTerritoireCentreServices",
               "idProperty": "idTerritoireCentreServices",
-              "labelProperty": "nomCentreServices"
+              "titleProperty": "nomCentreServices"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirTerritoireCentreServices/${id}"
             }
           },
           {
-            "id": "sm",
-            "label": "navigation.categories.sm",
+            "title": "navigation.categories.sm",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoDisponibles",
               "resultsProperty": "lstStationMeteoDisponible",
               "idProperty": "idStationMeteo",
-              "labelProperty": "nomStation"
+              "titleProperty": "nomStation"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirStationMeteo/${id}"
             }
           },
           {
-            "id": "zc1",
-            "label": "navigation.categories.zc1",
+            "title": "navigation.categories.zc1",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/1",
               "resultsProperty": "lstZonageCollectif",
               "idProperty": "idZonageCollectif",
-              "labelProperty": "noZone"
+              "titleProperty": "noZone"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/1/${id}"
             }
           },
           {
-            "id": "zc2",
-            "label": "navigation.categories.zc2",
+            "title": "navigation.categories.zc2",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/2",
               "resultsProperty": "lstZonageCollectif",
               "idProperty": "idZonageCollectif",
-              "labelProperty": "noZone"
+              "titleProperty": "noZone"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/2/${id}"
             }
           },
           {
-            "id": "rzc",
-            "label": "navigation.categories.rzc",
+            "title": "navigation.categories.rzc",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionsZonageCollectif",
               "resultsProperty": "lstRegionZonageCollectif",
               "idProperty": "idRegionZonageCollectif",
-              "labelProperty": "nomRegionZonageCollectif"
+              "titleProperty": "nomRegionZonageCollectif"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirUneRegionZonageCollectif/${id}"
