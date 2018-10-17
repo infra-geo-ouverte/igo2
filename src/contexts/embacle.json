@@ -32,6 +32,67 @@
       }
     },
     {
+      "title": "WFS",
+      "sourceOptions": {
+        "type": "wfs",
+        "url": "https://geoegl.msp.gouv.qc.ca/igo2/api/ws/igo_gouvouvert.fcgi",
+        "params": {
+          "featureTypes": "vg_observation_v_autre_wmst",
+          "fieldNameGeometry": "geometry",
+          "maxFeatures": 10000,
+          "version": "2.0.0",
+          "outputFormat": "geojson_utf8",
+          "outputFormatDownload": "shp"
+        },
+        "sourceFields": [
+          { "name": "code_municipalite", "alias": "# de la municipalitée" },
+          { "name": "date_observation" },
+          { "name": "urgence", "values": ["immédiate", "inconnue"] }
+        ],
+        "ogcFilters": {
+          "enabled": true,
+          "editable": true,
+          "filters": {
+            "operator": "PropertyIsEqualTo",
+            "propertyName": "code_municipalite",
+            "expression": "10043"
+          }
+        },
+        "serverType": "geoserver"
+      }
+    },
+    {
+      "title": "WMS Geoserver filterable",
+      "optionsFromCapabilities": true,
+      "sourceOptions": {
+        "type": "wms",
+        "url": "https://ahocevar.com/geoserver/wms",
+        "urlWfs": "https://ahocevar.com/geoserver/wfs",
+        "params": {
+          "layers": "water_areas",
+          "version": "1.3.0"
+        },
+        "paramsWFS": {
+          "featureTypes": "water_areas",
+          "fieldNameGeometry": "the_geom",
+          "maxFeatures": 10000,
+          "version": "1.1.0",
+          "outputFormat": "application/json",
+          "outputFormatDownload": "application/vnd.google-earth.kml+xml"
+        },
+        "sourceFields": [
+          { "name": "waterway", "alias": "Chemin d eau" },
+          { "name": "osm_id" },
+          { "name": "landuse", "values": ["yes", "no"] }
+        ],
+        "ogcFilters": {
+          "enabled": true,
+          "editable": true
+        },
+        "serverType": "geoserver"
+      }
+    },
+    {
       "title": "Embâcle",
       "sourceOptions": {
         "type": "wms",

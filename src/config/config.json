@@ -6,7 +6,8 @@
       "icherche": {
         "enabled": true,
         "searchUrl": "https://geoegl.msp.gouv.qc.ca/icherche/geocode",
-        "locateUrl": "https://geoegl.msp.gouv.qc.ca/icherche/xy"
+        "locateUrl": "https://geoegl.msp.gouv.qc.ca/icherche/xy",
+        "zoomMaxOnSelect": 10
       },
       "datasource": {
         "enabled": false
