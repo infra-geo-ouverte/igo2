@@ -66,6 +66,7 @@
   </igo-map-browser>
 
   <igo-toast
+    [map]="map"
     [expanded]="toastOpened"
     [feature]="featureService.focusedFeature$ | async"
     (onOpened)="toastOpened=$event"
