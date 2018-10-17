@@ -34,7 +34,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public selectedFeature$$: Subscription;
   public features$$: Subscription;
-  
+
   public expansionPanelExpanded = false;
   public infoPanelOpened = false;
   public sidenavOpened = false;
