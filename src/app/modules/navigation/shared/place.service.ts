@@ -21,9 +21,8 @@ export class PlaceService {
 
   static defaultPlaceMapper: PlaceMapper = {
     id: 'id',
-    label: 'label'
+    title: 'title'
   }
-  private apiUri: string = '';
 
   constructor(
     private http: HttpClient,
@@ -61,7 +60,7 @@ export class PlaceService {
 
     const mapper = {
       id: api.idProperty || PlaceService.defaultPlaceMapper.id,
-      label: api.labelProperty || PlaceService.defaultPlaceMapper.id,
+      title: api.titleProperty || PlaceService.defaultPlaceMapper.id,
     }
 
     return results.map(result => {
@@ -72,13 +71,13 @@ export class PlaceService {
   private formatPlaceResult(result: Object, mapper: PlaceMapper): Place {
     return {
       id: result[mapper.id],
-      label: result[mapper.label]
+      title: result[mapper.title]
     }
   }
 
-  private extractPlaceFeatureFromResponse(response: Array<Object>, api: PlaceFeatureApi): Feature | null {
-    if (response.length > 0) {
-      return this.formatPlaceFeatureResult(response[0]);
+  private extractPlaceFeatureFromResponse(response: Object, api: PlaceFeatureApi): Feature | null {
+    if (Object.getOwnPropertyNames(response).length > 0) {
+      return this.formatPlaceFeatureResult(response);
     }
     return null;
   }

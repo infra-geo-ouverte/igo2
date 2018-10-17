@@ -3,3 +3,11 @@
 .igo-input-container mat-form-field {
   width: 100%;
 }
+
+.igo-input-container mat-form-field mat-icon {
+  margin: 0 3px;
+}
+
+.igo-input-container mat-form-field mat-icon:hover {
+  cursor: pointer;
+}

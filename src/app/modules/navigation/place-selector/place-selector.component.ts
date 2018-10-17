@@ -32,6 +32,7 @@ export class PlaceSelectorComponent {
   public places: Place[] = [];
   public filteredPlaces$: Observable<Place[]>;
   public placeControl = new FormControl();
+  public overlayFeature: Feature;
 
   constructor(
     private placeService: PlaceService,
@@ -41,9 +42,12 @@ export class PlaceSelectorComponent {
   ngOnInit() {
     this.filteredPlaces$ = this.placeControl.valueChanges
       .pipe(
-        startWith<string | Place>(''),
-        map(value => typeof value === 'string' ? value : value.label),
-        map(label => label ? this.filterPlacesByLabel(label) : this.places.slice())
+        startWith<string | Place | undefined>(undefined),
+        map(value => {
+          if (value === undefined) return ''
+          return typeof value === 'string' ? value : value.title
+        }),
+        map(title => title ? this.filterPlacesByTitle(title) : this.places.slice())
       );
   }
 
@@ -52,33 +56,43 @@ export class PlaceSelectorComponent {
     this.placeService.getPlacesByCategory(category)
       .subscribe(places => {
         this.places = places;
-        this.placeControl.setValue('');
+        this.clearPlace();
       });
   }
 
   selectPlace(place: Place) {
     this.placeService.getPlaceFeatureByCategoryAndId(this.selectedCategory, place.id)
-      .subscribe(feature => this.handlePlaceFeature(feature));
+      .subscribe(feature => this.setOverlayFeature(feature));
   }
 
-  displayPlace(place?: Place) {
-    return place ? place.label : undefined;
-  }
-
-  private filterPlacesByLabel(label: string): Place[] {
-    const filterValue = label.toLowerCase();
-
-    return this.places.filter(place => {
-      return place.label.toLowerCase().indexOf(filterValue) === 0
-    });
-  }
-
-  private handlePlaceFeature(feature: Feature | null) {
-    if (feature === null) {
-      this.overlayService.clear();
+  setOverlayFeature(feature: Feature | null) {
+    if (feature === undefined || feature === null) {
+      this.clearFeature();
     } else {
+      this.overlayFeature = feature;
       this.overlayService.setFeatures([feature], OverlayAction.Zoom);
     }
   }
 
+  clearPlace() {
+    this.clearFeature();
+    this.placeControl.setValue(undefined);
+  }
+
+  displayPlace(place?: Place) {
+    return place ? place.title : undefined;
+  }
+
+  private clearFeature() {
+    this.overlayService.clear();
+    this.overlayFeature = undefined;
+  }
+
+  private filterPlacesByTitle(title: string): Place[] {
+    const filterValue = title.toLowerCase();
+
+    return this.places.filter(place => {
+      return place.title.toLowerCase().indexOf(filterValue) === 0
+    });
+  }
 }

@@ -8,29 +8,40 @@
         [value]="selectedCategory"
         (selectionChange)="selectCategory($event.value)">
         <mat-option *ngFor="let category of categories" [value]="category">
-          {{category.label | translate}}
+          {{category.title | translate}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
 
-  <div class="igo-input-container" *ngIf="selectedCategory !== undefined">
-      <mat-form-field>
-        <input
-          matInput
-          type="text"
-          [placeholder]="selectedCategory.label | translate"
-          [matAutocomplete]="auto"
-          [formControl]="placeControl">
-        <mat-autocomplete
-          #auto="matAutocomplete"
-          [displayWith]="displayPlace"
-          (optionSelected)="selectPlace($event.option.value)">
-          <mat-option *ngFor="let place of filteredPlaces$ | async" [value]="place">
-            {{ place.label }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+    <mat-form-field *ngIf="selectedCategory !== undefined">
+      <input
+        matInput
+        type="text"
+        [placeholder]="selectedCategory.title | translate"
+        [matAutocomplete]="auto"
+        [formControl]="placeControl">
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayPlace"
+        (optionSelected)="selectPlace($event.option.value)">
+        <mat-option *ngFor="let place of filteredPlaces$ | async" [value]="place">
+          {{ place.title }}
+        </mat-option>
+      </mat-autocomplete>
+
+      <ng-container matSuffix *ngIf="placeControl.value">
+        <mat-icon
+          igoStopPropagation
+          (click)="clearPlace()">
+          clear
+        </mat-icon>
+        <mat-icon
+          igoStopPropagation
+          (click)="setOverlayFeature(overlayFeature)">
+          search
+        </mat-icon>
+      </ng-container>
+    </mat-form-field>
   </div>
   
 </form>

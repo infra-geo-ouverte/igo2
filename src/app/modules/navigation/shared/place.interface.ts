@@ -1,6 +1,6 @@
 export interface PlaceCategory {
-  id: string;
-  label: string;
+  id?: string;
+  title: string;
   collection: PlaceCollectionApi;
   feature: PlaceFeatureApi;
   featureUri: string;
@@ -10,7 +10,7 @@ export interface PlaceCollectionApi {
   uri: string;
   resultsProperty?: string;
   idProperty?: string;
-  labelProperty?: string;
+  titleProperty?: string;
 }
 
 export interface PlaceFeatureApi {
@@ -19,10 +19,10 @@ export interface PlaceFeatureApi {
 
 export interface Place {
   id: string;
-  label: string;
+  title: string;
 }
 
 export interface PlaceMapper {
   id: string;
-  label: string;  
+  title: string;  
 }

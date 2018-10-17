@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { FadqAddressEditorToolModule } from './address-editor-tool/address-editor-tool.module';
 import { FadqClientInfoToolModule } from './client-info-tool/client-info-tool.module';
-import { FadqPlaceSelectorToolModule } from './place-selector-tool/place-selector-tool.module';
+import { FadqNavigationToolModule } from './navigation-tool/navigation-tool.module';
 
 @NgModule({
   imports: [],
@@ -10,7 +10,7 @@ import { FadqPlaceSelectorToolModule } from './place-selector-tool/place-selecto
   exports: [
     FadqAddressEditorToolModule,
     FadqClientInfoToolModule,
-    FadqPlaceSelectorToolModule
+    FadqNavigationToolModule
   ]
 })
 export class FadqToolModule {}
