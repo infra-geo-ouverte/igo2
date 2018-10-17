@@ -37,22 +37,15 @@ export class PortalComponent implements OnInit, OnDestroy {
   public features$$: Subscription;
   public context$$: Subscription;
 
-  public map = new IgoMap({
-    controls: {
-      scaleLine: true,
-      attribution: {
-        collapsed: false
-      }
-    }
-  });
-
   public expansionPanelExpanded = false;
   public infoPanelOpened = false;
   public sidenavOpened = false;
 
+  public map: IgoMap;
+
   // True after the initial context is loaded
   private contextLoaded = false;
-
+  
   constructor(
     private projectionService: ProjectionService,
     public contextService: ContextService,
@@ -63,6 +56,16 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window['IGO'] = this;
+
+    this.map = new IgoMap({
+      controls: {
+        scaleLine: true,
+        attribution: {
+          collapsed: false
+        }
+      }
+    });
+
     this.features$$ = this.featureService.features$.subscribe(features =>
       this.handleFeaturesChange(features)
     );
