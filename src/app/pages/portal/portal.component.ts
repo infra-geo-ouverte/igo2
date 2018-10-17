@@ -175,7 +175,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (features.length > 0) {
       if (this.mediaService.media$.value === 'mobile') {
         if (
-          features[0].type.toString() === 'Feature' &&
+          features[0].type === 'Feature' &&
           (features[0].source !== 'Nominatim (OSM)' &&
             features[0].source !== 'ICherche Québec')
         ) {
@@ -196,6 +196,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (feature && this.mediaService.media$.value === 'mobile') {
       if (this.sidenavOpened) {
         this.closeSidenav();
+        this.cdRef.detectChanges();
       }
     } else {
       this.toastShown = false;
