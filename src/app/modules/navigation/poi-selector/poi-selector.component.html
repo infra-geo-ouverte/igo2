@@ -1,0 +1,36 @@
+
+<form class="igo-form">
+
+  <div class="igo-input-container">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          [placeholder]="'navigation.poiSelector.poi.placeholder' | translate"
+          [matAutocomplete]="auto"
+          [formControl]="poiControl">
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          [displayWith]="displayPoi"
+          (optionSelected)="selectPoi($event.option.value)">
+          <mat-option *ngFor="let poi of filteredPois$ | async" [value]="poi">
+            {{ poi.title }}
+          </mat-option>
+        </mat-autocomplete>
+
+        <ng-container matSuffix *ngIf="poiControl.value">
+          <mat-icon
+            igoStopPropagation
+            (click)="clearPoi()">
+            clear
+          </mat-icon>
+          <mat-icon
+            igoStopPropagation
+            (click)="selectPoi(poiControl.value)">
+            search
+          </mat-icon>
+        </ng-container>
+      </mat-form-field>
+  </div>
+  
+</form>

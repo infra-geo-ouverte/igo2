@@ -1,0 +1,13 @@
+@import './poi-selector.variables';
+
+.igo-input-container mat-form-field {
+  width: 100%;
+}
+
+.igo-input-container mat-form-field mat-icon {
+  margin-left: 5px;
+}
+
+.igo-input-container mat-form-field mat-icon:hover {
+  cursor: pointer;
+}
