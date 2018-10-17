@@ -97,6 +97,7 @@
       "sourceOptions": {
         "type": "wms",
         "url": "https://geoegl.msp.gouv.qc.ca/igo2/api/ws/igo_gouvouvert.fcgi",
+        "queryable": true,
         "params": {
           "layers": "vg_observation_v_inondation_embacle_wmst",
           "version": "1.3.0"
