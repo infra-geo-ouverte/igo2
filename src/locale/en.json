@@ -17,6 +17,7 @@
 
   "navigation": {
     "placeSelector.category.placeholder": "Category",
+    "poiSelector.poi.placeholder": "Point of Interest",
     "categories": {
       "mun": "Municipalities",
       "mrc": "MRC",
@@ -32,6 +33,6 @@
   "tools": {
     "addressEditor": "Edit Addresses",
     "clientInfo": "Client",
-    "placeSelector": "Places"
+    "navigation": "Navigation"
   }
 }
