@@ -22,7 +22,7 @@ export class PlaceService {
   static defaultPlaceMapper: PlaceMapper = {
     id: 'id',
     title: 'title'
-  }
+  };
 
   constructor(
     private http: HttpClient,
@@ -39,7 +39,7 @@ export class PlaceService {
 
   getPlaceFeatureByCategoryAndId(category: PlaceCategory, id: string): Observable<Feature> {
     const api = category.feature;
-    const url = this.apiService.buildUrl(api.uri, {id: id})
+    const url = this.apiService.buildUrl(api.uri, {id: id});
     return this.http
       .get(url)
       .pipe(map(res => this.extractPlaceFeatureFromResponse(res, api)));
@@ -61,7 +61,7 @@ export class PlaceService {
     const mapper = {
       id: api.idProperty || PlaceService.defaultPlaceMapper.id,
       title: api.titleProperty || PlaceService.defaultPlaceMapper.id,
-    }
+    };
 
     return results.map(result => {
       return this.formatPlaceResult(result, mapper);
@@ -72,7 +72,7 @@ export class PlaceService {
     return {
       id: result[mapper.id],
       title: result[mapper.title]
-    }
+    };
   }
 
   private extractPlaceFeatureFromResponse(response: Object, api: PlaceFeatureApi): Feature | null {

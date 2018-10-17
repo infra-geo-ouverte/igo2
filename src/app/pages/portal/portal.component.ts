@@ -30,13 +30,11 @@ import {
   animations: [controlSlideX(), controlSlideY(), mapSlideX(), mapSlideY()]
 })
 export class PortalComponent implements OnInit, OnDestroy {
-  public searchType: string = 'Client';
-  public searchTypes: string[] = ['Client', 'Localisation', 'Couche de données'];
+  public context$$: Subscription;
 
   public selectedFeature$$: Subscription;
   public features$$: Subscription;
-  public context$$: Subscription;
-
+  
   public expansionPanelExpanded = false;
   public infoPanelOpened = false;
   public sidenavOpened = false;
@@ -45,7 +43,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   // True after the initial context is loaded
   private contextLoaded = false;
-  
+
   constructor(
     private projectionService: ProjectionService,
     public contextService: ContextService,
@@ -66,6 +64,10 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.context$$ = this.contextService.context$.subscribe(context =>
+      this.handleContextChange(context)
+    );
+
     this.features$$ = this.featureService.features$.subscribe(features =>
       this.handleFeaturesChange(features)
     );
@@ -74,9 +76,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       feature => this.handleFeatureSelect(feature)
     );
 
-    this.context$$ = this.contextService.context$.subscribe(context =>
-      this.handleContextChange(context)
-    );
   }
 
   ngOnDestroy() {
@@ -91,7 +90,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get expansionPanelBackdropShown(): boolean {
     return this.expansionPanelExpanded && this.infoPanelOpened;
-  };
+  }
 
   closeInfoPanel() {
     this.infoPanelOpened = false;
@@ -134,9 +133,9 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private handleFeatureSelect(feature: Feature) {
     if (feature === undefined) {
-      return
+      return;
     }
-  
+
     if (feature && this.mediaService.media$.value === Media.Mobile) {
       this.closeSidenav();
     }
@@ -145,11 +144,11 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private handleContextChange(context: DetailedContext) {
     if (context !== undefined) {
-      this.toolService.setTools(context.tools)
+      this.toolService.setTools(context.tools);
 
       if (this.contextLoaded) {
         const mapDetails = this.toolService.getTool('mapDetails');
-        this.toolService.selectTool(mapDetails);  
+        this.toolService.selectTool(mapDetails);
       }
       this.contextLoaded = true;
     }

@@ -24,5 +24,5 @@ export interface Place {
 
 export interface PlaceMapper {
   id: string;
-  title: string;  
+  title: string;
 }

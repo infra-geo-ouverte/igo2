@@ -33,12 +33,14 @@ export class MapToolbarComponent {
   constructor() {}
 
   activateTool(tool: Tool) {
-    switch(tool.name) {
+    switch (tool.name) {
       case MapTool.ZoomIn: {
         this.map.zoomIn();
+        break;
       }
       case MapTool.ZoomOut: {
         this.map.zoomOut();
+        break;
       }
       default: {
         break;

@@ -28,7 +28,7 @@ export class FadqCoreModule {
       providers.push(provideConfigOptions({
         default: environment.igo,
         path: './config/config.json'
-      }))
+      }));
     }
     return {
       ngModule: FadqCoreModule,

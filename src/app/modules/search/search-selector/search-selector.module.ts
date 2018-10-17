@@ -21,7 +21,6 @@ import { SearchSelectorComponent } from './search-selector.component';
     MatButtonModule,
     MatMenuModule,
     MatRadioModule,
-
     IgoLanguageModule
   ],
   exports: [SearchSelectorComponent],

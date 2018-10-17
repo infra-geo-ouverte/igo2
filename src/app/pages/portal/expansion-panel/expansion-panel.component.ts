@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 export interface PeriodicElement {
   name: string;
@@ -16,10 +16,7 @@ export interface DataSource {
 @Component({
   selector: 'fadq-expansion-panel',
   templateUrl: './expansion-panel.component.html',
-  styleUrls: ['./expansion-panel.component.scss'],
-  host: {
-    '[class.fadq-expansion-panel-expanded]': 'expanded'
-  }
+  styleUrls: ['./expansion-panel.component.scss']
 })
 export class ExpansionPanelComponent {
 
@@ -50,7 +47,7 @@ export class ExpansionPanelComponent {
     if (value === this._expanded) {
         return;
       }
-  
+
       this._expanded = value;
       this.expandedChange.emit(this._expanded);
   }
@@ -65,8 +62,13 @@ export class ExpansionPanelComponent {
   }
   private _backdropShown: boolean;
 
-  constructor() {}
-
   @Output() expandedChange = new EventEmitter<boolean>();
+
+  @HostBinding('class.fadq-expansion-panel-expanded')
+  get hasExpandedClass() {
+    return this.expanded;
+  }
+
+  constructor() {}
 
 }

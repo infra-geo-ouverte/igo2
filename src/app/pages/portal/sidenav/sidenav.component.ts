@@ -36,11 +36,11 @@ export class SidenavComponent {
   constructor(private toolService: ToolService) {}
 
   selectPreviousTool() {
-    this.toolService.selectPreviousTool()
+    this.toolService.selectPreviousTool();
   }
 
   unselectTool() {
-    this.toolService.unselectTool()
+    this.toolService.unselectTool();
   }
 
 }

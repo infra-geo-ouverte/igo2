@@ -26,7 +26,6 @@ import { PlaceSelectorComponent } from './place-selector.component';
     MatInputModule,
     MatAutocompleteModule,
     MatSelectModule,
-
     IgoStopPropagationModule,
     IgoLanguageModule,
     IgoGeoModule

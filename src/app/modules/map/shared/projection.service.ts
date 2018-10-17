@@ -14,10 +14,10 @@ import { Projection } from './projection.interface';
 export class ProjectionService {
 
   constructor(private config: ConfigService) {
-    let projections = this.config.getConfig('projections') || [];
+    const projections = this.config.getConfig('projections') || [];
     projections.forEach((projection: Projection) => {
       this.registerProjection(projection);
-    })
+    });
   }
 
   registerProjection(projection: Projection) {

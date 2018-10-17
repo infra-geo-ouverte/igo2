@@ -20,7 +20,6 @@ import { InfoPanelComponent } from './info-panel.component';
     CommonModule,
     MatIconModule,
     MatButtonModule,
-
     IgoLanguageModule,
     IgoPanelModule,
     IgoStopPropagationModule,

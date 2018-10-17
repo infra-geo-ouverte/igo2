@@ -23,10 +23,8 @@ import { SearchBarComponent } from './search-bar.component';
     MatButtonModule,
     MatMenuModule,
     MatRadioModule,
-
     IgoGeoModule,
     IgoLanguageModule,
-
     FadqSearchSelectorModule
   ],
   exports: [SearchBarComponent],

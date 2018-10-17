@@ -6,8 +6,8 @@ export enum MapTool {
   NextView = 'nextView',
   ClickInteraction = 'clickInteraction',
   Geolocation = 'geolocation',
-  GoogleView = 'googleView'  
-};
+  GoogleView = 'googleView'
+}
 
 export const MapDefaultTools = [
   {'name': MapTool.BaseLayerSwitcher, 'icon': 'photo_library'},

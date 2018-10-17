@@ -36,7 +36,7 @@ export class ApiService {
   public buildUrl(uri: string, params: Object = {}): string {
     let url = uri;
     if (!uri.startsWith('http')) {
-      url = `${this.getBaseUrl()}${uri}`
+      url = `${this.getBaseUrl()}${uri}`;
     }
 
     url = this.setUrlParams(url, params);
@@ -51,7 +51,7 @@ export class ApiService {
   private setUrlParams(url: string, params: Object) {
     Object.entries(params).forEach(entry => {
       url = url.replace(`\$\{${entry[0]}\}`, entry[1]);
-    })
+    });
 
     return url;
   }

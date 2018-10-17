@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { PlaceService } from '../shared/place.service';
   styleUrls: ['./place-selector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlaceSelectorComponent {
+export class PlaceSelectorComponent implements OnInit {
 
   @Input()
   get categories(): PlaceCategory[] {
@@ -44,8 +44,10 @@ export class PlaceSelectorComponent {
       .pipe(
         startWith<string | Place | undefined>(undefined),
         map(value => {
-          if (value === undefined) return ''
-          return typeof value === 'string' ? value : value.title
+          if (value === undefined) {
+            return '';
+          }
+          return typeof value === 'string' ? value : value.title;
         }),
         map(title => title ? this.filterPlacesByTitle(title) : this.places.slice())
       );
@@ -92,7 +94,7 @@ export class PlaceSelectorComponent {
     const filterValue = title.toLowerCase();
 
     return this.places.filter(place => {
-      return place.title.toLowerCase().indexOf(filterValue) === 0
+      return place.title.toLowerCase().indexOf(filterValue) === 0;
     });
   }
 }

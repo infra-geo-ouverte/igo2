@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 import { Feature } from '@igo2/geo';
 
@@ -6,11 +6,7 @@ import { Feature } from '@igo2/geo';
 @Component({
   selector: 'fadq-info-panel',
   templateUrl: './info-panel.component.html',
-  styleUrls: ['./info-panel.component.scss'],
-  host: {
-    '[class.fadq-info-panel-opened]': 'opened',
-    '[class.fadq-info-panel-with-feature]': 'feature === undefined ? false : true'
-  }
+  styleUrls: ['./info-panel.component.scss']
 })
 export class InfoPanelComponent {
 
@@ -50,6 +46,16 @@ export class InfoPanelComponent {
   private _feature: Feature;
 
   @Output() openedChange = new EventEmitter<boolean>();
+
+  @HostBinding('class.fadq-info-panel-opened')
+  get hasOpenedClass() {
+    return this.opened;
+  }
+
+  @HostBinding('class.fadq-info-panel-with-feature')
+  get hasWithFeatureClass() {
+    return this.feature === undefined ? false : true;
+  }
 
   constructor() {}
 

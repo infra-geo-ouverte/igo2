@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Search } from '../shared/search.enum';
 import { SearchSourceService } from '@igo2/geo';
@@ -9,7 +9,7 @@ import { SearchSourceService } from '@igo2/geo';
   templateUrl: './search-selector.component.html',
   styleUrls: ['./search-selector.component.scss']
 })
-export class SearchSelectorComponent {
+export class SearchSelectorComponent implements OnInit {
 
   @Input()
   get searches(): Search[] {
@@ -28,7 +28,7 @@ export class SearchSelectorComponent {
     this._selected = value;
     this.toggleSearchSource(this._selected);
   }
-  private _selected: Search; 
+  private _selected: Search;
 
   constructor(private searchSourceService: SearchSourceService) {}
 

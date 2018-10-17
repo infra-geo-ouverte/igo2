@@ -20,13 +20,11 @@ import { PoiSelectorBindingDirective } from './poi-selector-binding.directive';
   imports: [
     CommonModule,
     FormsModule,
-
     MatIconModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-
     IgoStopPropagationModule,
     IgoLanguageModule,
     IgoGeoModule

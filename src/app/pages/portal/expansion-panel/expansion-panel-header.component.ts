@@ -1,14 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 import { DataSource } from './expansion-panel.component';
 
 @Component({
   selector: 'fadq-expansion-panel-header',
   templateUrl: './expansion-panel-header.component.html',
-  styleUrls: ['./expansion-panel-header.component.scss'],
-  host: {
-    '[class.fadq-expansion-panel-header-expanded]': 'expanded'
-  }
+  styleUrls: ['./expansion-panel-header.component.scss']
 })
 export class ExpansionPanelHeaderComponent {
 
@@ -20,7 +17,7 @@ export class ExpansionPanelHeaderComponent {
     if (value === this._expanded) {
         return;
       }
-  
+
       this._expanded = value;
       this.expandedChange.emit(this._expanded);
   }
@@ -36,6 +33,11 @@ export class ExpansionPanelHeaderComponent {
   private _dataSources: DataSource[];
 
   @Output() expandedChange = new EventEmitter<boolean>();
+
+  @HostBinding('class.fadq-expansion-panel-header-expanded')
+  get hasExpandedClass() {
+    return this.expanded;
+  }
 
   constructor() {}
 

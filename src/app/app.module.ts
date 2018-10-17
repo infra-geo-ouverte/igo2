@@ -22,14 +22,12 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
-
     FadqCoreModule.forRoot(),
     FadqMapModule,
     FadqNavigationModule,
     FadqSearchModule,
     FadqToolModule,
     FadqPortalModule,
-  
     IgoSpinnerModule,
     IgoStopPropagationModule
   ],

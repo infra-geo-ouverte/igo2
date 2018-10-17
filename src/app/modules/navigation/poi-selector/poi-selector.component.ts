@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { Poi } from '@igo2/context';
   styleUrls: ['./poi-selector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PoiSelectorComponent {
+export class PoiSelectorComponent implements OnInit {
 
   @Input()
   get map(): IgoMap {
@@ -46,8 +46,10 @@ export class PoiSelectorComponent {
       .pipe(
         startWith<string | Poi | undefined>(undefined),
         map(value => {
-          if (value === undefined) return ''
-          return typeof value === 'string' ? value : value.title
+          if (value === undefined) {
+            return '';
+          }
+          return typeof value === 'string' ? value : value.title;
         }),
         map(title => title ? this.filterPoisByTitle(title) : this.pois.slice())
       );
@@ -69,7 +71,7 @@ export class PoiSelectorComponent {
     const filterValue = title.toLowerCase();
 
     return this.pois.filter(poi => {
-      return poi.title.toLowerCase().indexOf(filterValue) === 0
+      return poi.title.toLowerCase().indexOf(filterValue) === 0;
     });
   }
 

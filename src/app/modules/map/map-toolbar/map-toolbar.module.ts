@@ -21,7 +21,6 @@ import { MapToolbarComponent } from './map-toolbar.component';
     MatButtonModule,
     MatTooltipModule,
     MatListModule,
-
     IgoLanguageModule,
     IgoToolModule,
     IgoGeoModule
