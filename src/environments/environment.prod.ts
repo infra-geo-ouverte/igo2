@@ -1,11 +1,17 @@
+import { ContextServiceOptions } from '@igo2/context';
 import { LanguageOptions } from '@igo2/core';
-import { SearchSourcesOptions } from '@igo2/geo';
+import { SearchSourcesOptions, CatalogServiceOptions } from '@igo2/geo';
+
+import { ApiConfig } from '../app/modules/core/api/api.interface';
 
 interface Environment {
   production: boolean;
   igo: {
     searchSources?: SearchSourcesOptions;
     language?: LanguageOptions;
+    context?: ContextServiceOptions;
+    catalog?: CatalogServiceOptions;
+    api?: ApiConfig;
   };
 }
 
@@ -27,6 +33,9 @@ export const environment: Environment = {
     },
     language: {
       prefix: './locale/'
+    },
+    api: {
+      url: 'http://chabou01-svn.fadq.qc/app/interne'
     }
   }
 };

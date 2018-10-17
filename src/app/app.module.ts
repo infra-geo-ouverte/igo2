@@ -5,15 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 
-import {
-  FadqCoreModule,
-  FadqMapModule,
-  FadqNavigationModule,
-  FadqSearchModule,
-  FadqToolModule
-} from './modules';
-import { ProjectionService } from './modules/map/shared/projection.service';
-import { FadqPortalModule } from './pages';
+import { FadqCoreModule } from './modules/core/core.module';
+import { FadqMapModule } from './modules/map/map.module';
+import { FadqNavigationModule } from './modules/navigation/navigation.module';
+import { FadqSearchModule } from './modules/search/search.module';
+import { FadqToolModule } from './modules/tool/tool.module';
+import { FadqPortalModule } from './pages/portal/portal.module';
+
 import { AppComponent } from './app.component';
 
 @NgModule({

@@ -9,9 +9,17 @@ import { environment } from '../../../environments/environment';
 
 import { FadqApiModule } from './api/api.module';
 
+const providers: Provider[] = [
+  RouteService,
+  provideConfigOptions({
+    default: environment.igo,
+    path: './config/config.json'
+  })
+];
+
 @NgModule({
   imports: [
-    IgoCoreModule,
+    IgoCoreModule.forRoot(),
     FadqApiModule
   ],
   declarations: [],
@@ -22,14 +30,6 @@ import { FadqApiModule } from './api/api.module';
 })
 export class FadqCoreModule {
   static forRoot(): ModuleWithProviders {
-    const providers: Provider[] = [RouteService];
-
-    if (!environment.production) {
-      providers.push(provideConfigOptions({
-        default: environment.igo,
-        path: './config/config.json'
-      }));
-    }
     return {
       ngModule: FadqCoreModule,
       providers: providers
