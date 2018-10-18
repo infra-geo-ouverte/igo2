@@ -15,7 +15,15 @@
     height 280ms cubic-bezier(.4,0,.2,1),
     width 280ms cubic-bezier(.4,0,.2,1);
 
+  @include small-screen {
+    width: $fadq-expansion-panel-collapsed-height;
+  }
+
   @include tablet {
+    width: $fadq-expansion-panel-collapsed-height;
+  }
+
+  @include mobile {
     width: $fadq-expansion-panel-collapsed-height;
   }
 }

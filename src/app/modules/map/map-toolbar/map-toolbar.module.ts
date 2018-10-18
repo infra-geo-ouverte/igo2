@@ -5,9 +5,10 @@ import {
   MatIconModule,
   MatButtonModule,
   MatTooltipModule,
-  MatListModule
+  MatMenuModule
 } from '@angular/material';
 
+import { IgoStopPropagationModule } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
 import { IgoToolModule } from '@igo2/context';
 import { IgoGeoModule } from '@igo2/geo';
@@ -20,7 +21,8 @@ import { MapToolbarComponent } from './map-toolbar.component';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
-    MatListModule,
+    MatMenuModule,
+    IgoStopPropagationModule,
     IgoLanguageModule,
     IgoToolModule,
     IgoGeoModule

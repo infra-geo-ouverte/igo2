@@ -6,7 +6,21 @@
 }
 
 :host:not(.fadq-expansion-panel-header-expanded) {
+  @include small-screen {
+    .fadq-expansion-panel-header-selector,
+    .fadq-expansion-panel-toolbar-container {
+      display: none;
+    }
+  }
+
   @include tablet {
+    .fadq-expansion-panel-header-selector,
+    .fadq-expansion-panel-toolbar-container {
+      display: none;
+    }
+  }
+
+  @include mobile {
     .fadq-expansion-panel-header-selector,
     .fadq-expansion-panel-toolbar-container {
       display: none;

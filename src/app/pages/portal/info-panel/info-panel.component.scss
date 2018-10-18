@@ -12,10 +12,18 @@
 
   transition: height 280ms cubic-bezier(.4,0,.2,1);
   padding: $igo-padding;
+
+  @include mobile {
+    max-height: 40%;
+  }
 }
 
 :host.fadq-info-panel-opened {
   height: $fadq-info-panel-max-height;
+
+  @include mobile {
+    height: 40%;
+  }
 }
 
 igo-panel ::ng-deep .igo-panel-header:hover {

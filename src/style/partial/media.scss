@@ -1,0 +1,24 @@
+@import '~@igo2/core/style/partial/media';
+
+$small-screen: 'only screen and (min-width: 801px) and (max-width: 1279px)';
+$medium-screen: 'only screen and (min-width: 1280px) and (max-width: 1919px)';
+$large-screen: 'only screen and (min-width: 1920px)';
+
+@mixin small-screen {
+    @media #{$small-screen} {
+      @content;
+    }
+}
+  
+@mixin medium-screen {
+  @media #{$medium-screen} {
+    @content;
+  }
+}
+
+@mixin large-screen {
+    @media #{$large-screen} {
+      @content;
+    }
+}
+  

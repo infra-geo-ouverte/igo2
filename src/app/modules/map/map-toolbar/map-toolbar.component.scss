@@ -3,11 +3,19 @@
 
 :host {
   @extend %bordered-top;
-  @extend %bordered-left;
+  @extend %box-shadowed;
 
   background-color: white;
 }
 
 igo-toolbar ::ng-deep mat-list-item {
   background-color: initial !important;
+}
+
+#expand-toolbar-button {
+  margin: 4px;
+}
+
+mat-menu ::ng-deep .mat-menu-panel {
+  min-width: inherit;
 }
