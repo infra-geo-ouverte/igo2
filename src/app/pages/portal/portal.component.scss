@@ -94,3 +94,10 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
     left: 90px;
   }
 }
+
+igo-backdrop {
+  display: none;
+   @include mobile {
+    display: block;
+  }
+}
