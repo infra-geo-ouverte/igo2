@@ -125,7 +125,10 @@
   ],
   "tools": [
     {
-      "name": "searchResults"
+      "name": "searchResults",
+      "options": {
+        "focusFirst": false
+      }
     },
     {
       "name": "contextManager"
