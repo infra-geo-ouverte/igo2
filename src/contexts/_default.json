@@ -5,29 +5,7 @@
     "view": {
       "projection": "EPSG:32198",
       "center": [-72, 46],
-      "zoom": 3,
-      "resolutions": [
-        6966.51707578125,
-        3483.258537890625,
-        1741.6292689453126,
-        870.8146344726563,
-        435.40731723632814,
-        217.70365861816407,
-        108.85182930908204,
-        54.42591465454102,
-        27.21295732727051,
-        13.606478663635254,
-        6.803239331817627,
-        3.4016196659088136,
-        1.7008098329544068,
-        0.8504049164772034,
-        0.4252024582386017,
-        0.21260122911930085,
-        0.10630061455965042,
-        0.05315030727982521,
-        0.026575153639912606,
-        0.013287576819956303
-      ]
+      "zoom": 3
     }
   },
   "layers": [
@@ -36,12 +14,11 @@
       "baseLayer": true,
       "visible": false,
       "sourceOptions": {
-        "type": "osm",
-        "url": "http://geoservpro.fadq.qc/mapcache/wmts",
+        "type": "wmts",
+        "optionsFromCapabilities": true,
+        "url": "/wmts",
         "layer": "carte_gouv_qc",
-        "style": "default",
         "matrixSet": "LAMBERT",
-        "projection": "EPSG:32198",
         "params": {
           "version": "1.0.0"
         }
@@ -51,14 +28,12 @@
       "title": "Images les plus récentes",
       "baseLayer": false,
       "visible": true,
-      "optionsFromCapabilities": true,
       "sourceOptions": {
         "type": "wmts",
+        "optionsFromCapabilities": true,
         "url": "https://servicesmatriciels.mern.qc/erdas-iws/ogc/wmts/Imagerie_Continue",
         "layer": "Imagerie_GQ",
-        "style": "default",
         "matrixSet": "Lambert:epsg:32198",
-        "projection": "EPSG:32198",
         "params": {
           "version": "1.0.0"
         }
