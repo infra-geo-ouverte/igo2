@@ -29,7 +29,10 @@
     {
       "name": "directions"
     },{
-      "name": "searchResults"
+      "name": "searchResults",
+      "options": {
+        "focusFirst": true
+      }
     },
     {
       "name": "contextManager"
