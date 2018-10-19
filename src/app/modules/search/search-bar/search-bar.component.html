@@ -1,10 +1,34 @@
 <div class="fadq-search-selector">
   <div class="fadq-search-bar-container">
-    <igo-search-bar
-      igoSearchUrlParam
-      [placeholder]="'search.searchbar.placeholder' | translate"
-      floatLabel="never">
-    </igo-search-bar>
+    <mat-form-field [floatLabel]="floatLabel">
+      <input
+        #input
+        matInput
+        autocomplete="off"
+        [ngClass]="{'hasSearchIcon': searchIcon}"
+        [disabled]="disabled"
+        [placeholder]="placeholder"
+        [ngModel]="term"
+        (keyup)="keyup($event)"
+        (touchend)="keyup($event)">
+    </mat-form-field>
+
+    <div class="searchButtonDiv">
+      <button
+        mat-icon-button
+        [color]="color"
+        *ngIf="searchIcon !== undefined">
+        <mat-icon>{{searchIcon}}</mat-icon>
+      </button>
+    
+      <button
+        mat-icon-button
+        [color]="color"
+        (click)="clear()"
+        *ngIf="term.length > 0">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
 
     <fadq-search-selector></fadq-search-selector>
   </div>

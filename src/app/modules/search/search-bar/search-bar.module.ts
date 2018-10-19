@@ -1,12 +1,15 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import {
   MatTooltipModule,
   MatIconModule,
   MatButtonModule,
   MatMenuModule,
-  MatRadioModule
+  MatRadioModule,
+  MatFormFieldModule,
+  MatInputModule
 } from '@angular/material';
 
 import { IgoGeoModule } from '@igo2/geo';
@@ -18,11 +21,14 @@ import { SearchBarComponent } from './search-bar.component';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     MatTooltipModule,
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
     MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule,
     IgoGeoModule,
     IgoLanguageModule,
     FadqSearchSelectorModule
