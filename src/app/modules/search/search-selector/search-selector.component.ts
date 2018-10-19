@@ -26,23 +26,19 @@ export class SearchSelectorComponent implements OnInit {
   }
   set selected(value: Search) {
     this._selected = value;
-    this.toggleSearchSource(this._selected);
   }
   private _selected: Search;
 
   constructor(private searchSourceService: SearchSourceService) {}
 
   ngOnInit() {
-    if (this.selected === undefined) {
-      this.select(this.searches[0]);
-    }
+    const initialSearch = this.selected || this.searches[0];
+    this.selectSearchSource(initialSearch);
   }
 
-  select(search: Search) {
+  selectSearchSource(search: Search) {
     this.selected = search;
-  }
 
-  toggleSearchSource(search: Search) {
     // TODO: This is not supposed to work properly and is for demo purposes only.
     // Search sources should have a type and the search source service
     // should have a method to toggle search sources by type
