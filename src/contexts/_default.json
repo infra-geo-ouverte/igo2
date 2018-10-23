@@ -17,6 +17,7 @@
     }
   ],
   "toolbar": [
+    "about",
     "directions",
     "searchResults",
     "contextManager",
@@ -26,6 +27,12 @@
     "shareMap"
   ],
   "tools": [
+    {
+      "name": "about",
+      "options": {
+        "html": "<h1>This is a IGO</h1>"
+      }
+    },
     {
       "name": "directions"
     },{
