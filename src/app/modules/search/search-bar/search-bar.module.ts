@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -36,10 +36,4 @@ import { SearchBarComponent } from './search-bar.component';
   exports: [SearchBarComponent],
   declarations: [SearchBarComponent]
 })
-export class FadqSearchBarModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqSearchBarModule
-    };
-  }
-}
+export class FadqSearchBarModule {}

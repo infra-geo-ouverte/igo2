@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
     FadqCoreModule.forRoot(),
     FadqMapModule,
     FadqNavigationModule,
-    FadqSearchModule,
+    FadqSearchModule.forRoot(),
     FadqToolModule,
     FadqPortalModule,
     IgoSpinnerModule,

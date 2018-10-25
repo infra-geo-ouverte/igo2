@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { SearchSource, SearchSourceService } from '@igo2/geo';
+import { SearchSource } from './sources';
+import { SearchSourceService } from './search-source.service';
 import { Research } from './search.interface';
 
 
@@ -22,7 +23,7 @@ export class SearchService {
   }
 
   private searchSource(source: SearchSource, term: string): Research {
-    return {request: source.search(term), source}
+    return {request: source.search(term), source};
   }
 
   private termIsValid(term: string) {

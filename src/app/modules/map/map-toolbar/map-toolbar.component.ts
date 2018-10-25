@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Media, MediaOrientation, MediaService } from '@igo2/core';
 import { IgoMap } from '@igo2/geo';
 import { Tool } from '@igo2/context';
-import { MapTool, MapDefaultTools } from '../shared/map-tool.enum';
+import { MapTool, MAP_DEFAULT_TOOLS} from '../shared/map.enum';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class MapToolbarComponent {
   set tools(value: Tool[]) {
     this._tools = value;
   }
-  private _tools: Tool[] = MapDefaultTools;
+  private _tools: Tool[] = MAP_DEFAULT_TOOLS;
 
   get collapsed(): boolean {
     // Make that work with OnPush strategy
@@ -59,7 +59,5 @@ export class MapToolbarComponent {
       }
     }
   }
-
-
 
 }

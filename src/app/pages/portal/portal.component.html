@@ -19,7 +19,7 @@
     </mat-icon>
   </button>
 
-  <fadq-search-bar></fadq-search-bar>
+  <fadq-search-bar [dataStore]="searchStoreService.getStore()"></fadq-search-bar>
 
   <fadq-sidenav
     [(opened)]="sidenavOpened"

@@ -1,8 +1,9 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { FadqAddressEditorToolModule } from './address-editor-tool/address-editor-tool.module';
 import { FadqClientInfoToolModule } from './client-info-tool/client-info-tool.module';
 import { FadqNavigationToolModule } from './navigation-tool/navigation-tool.module';
+import { FadqSearchResultsToolModule } from './search-results-tool/search-results-tool.module';
 
 @NgModule({
   imports: [],
@@ -10,7 +11,8 @@ import { FadqNavigationToolModule } from './navigation-tool/navigation-tool.modu
   exports: [
     FadqAddressEditorToolModule,
     FadqClientInfoToolModule,
-    FadqNavigationToolModule
+    FadqNavigationToolModule,
+    FadqSearchResultsToolModule
   ]
 })
 export class FadqToolModule {}

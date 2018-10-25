@@ -15,6 +15,7 @@ import {
 } from '@igo2/geo';
 
 import { ProjectionService } from '../../modules/map/shared';
+import { SearchStoreService } from '../../modules/search/shared';
 
 import {
   controlSlideX,
@@ -49,6 +50,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     public contextService: ContextService,
     public featureService: FeatureService,
     public mediaService: MediaService,
+    public searchStoreService: SearchStoreService,
     public toolService: ToolService
   ) {}
 
