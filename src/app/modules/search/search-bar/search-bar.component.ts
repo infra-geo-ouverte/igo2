@@ -15,8 +15,15 @@ import { FloatLabelType } from '@angular/material';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+import { DataStore } from '../../data/shared/datastore';
+import { Record } from '../../data/shared/data.interface';
+import { SearchSource } from '../shared/sources/source';
 import { SearchService } from '../shared/search.service';
-import { SearchResult } from '../shared/search.interface';
+
+export interface SearchEvent {
+  records: Record[];
+  source: SearchSource;
+}
 
 @Component({
   selector: 'fadq-search-bar',
@@ -27,7 +34,7 @@ import { SearchResult } from '../shared/search.interface';
 export class SearchBarComponent implements OnInit, OnDestroy {
 
   @Input()
-  get term() {
+  get term(): string {
     return this._term;
   }
   set term(value: string) {
@@ -36,7 +43,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _term = '';
 
   @Input()
-  get placeholder() {
+  get placeholder(): string {
     return this._placeholder;
   }
   set placeholder(value: string) {
@@ -45,7 +52,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _placeholder = '';
 
   @Input()
-  get floatLabel() {
+  get floatLabel(): FloatLabelType {
     return this._floatLabel;
   }
   set floatLabel(value: FloatLabelType) {
@@ -54,7 +61,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _floatLabel: FloatLabelType = 'auto';
 
   @Input()
-  get disabled() {
+  get disabled(): boolean {
     return this._disabled;
   }
   set disabled(value: boolean) {
@@ -63,7 +70,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _disabled = false;
 
   @Input()
-  get color() {
+  get color(): string {
     return this._color;
   }
   set color(value: string) {
@@ -72,7 +79,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _color = 'primary';
 
   @Input()
-  get debounce() {
+  get debounce(): number {
     return this._debounce;
   }
   set debounce(value: number) {
@@ -81,7 +88,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _debounce = 300;
 
   @Input()
-  get minLength() {
+  get minLength(): number {
     return this._minLength;
   }
   set minLength(value: number) {
@@ -90,7 +97,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _minLength = 2;
 
   @Input()
-  get searchIcon() {
+  get searchIcon(): string {
     return this._searchIcon;
   }
   set searchIcon(value: string) {
@@ -98,12 +105,21 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
   private _searchIcon;
 
+  @Input()
+  get dataStore(): DataStore {
+    return this._dataStore;
+  }
+  set dataStore(value: DataStore) {
+    this._dataStore = value;
+  }
+  private _dataStore;
+
   private readonly invalidKeys = ['Control', 'Shift', 'Alt'];
   private stream$ = new Subject<string>();
   private stream$$: Subscription;
 
   @Output() change = new EventEmitter<string>();
-  @Output() search = new EventEmitter<SearchResult>();
+  @Output() search = new EventEmitter<SearchEvent>();
 
   @ViewChild('input') input: ElementRef;
 
@@ -155,16 +171,30 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     if (term === undefined || term === '') {
       return;
     }
-  
+
     this.change.emit(term);
-  
+    if (this.dataStore !== undefined) {
+      this.dataStore.clear();
+    }
+
     const researches = this.searchService.search(term);
     researches.map(research => {
-      research.request.subscribe(data => this.search.emit({
-        data,
-        source: research.source
-      }))
+      research.request.subscribe(records => this.handleResearchComplete(
+        records,
+        research.source
+      ));
     });
+  }
+
+  private handleResearchComplete(records: Record[], source: SearchSource) {
+    this.search.emit({records, source});
+
+    if (this.dataStore !== undefined) {
+      const newRecords = this.dataStore.getRecords()
+        .filter(record =>  record.provider !== source)
+        .concat(records);
+      this.dataStore.setRecords(newRecords);
+    }
   }
 
 }

@@ -42,7 +42,7 @@
   ],
   "toolbar": [
     "clientInfo",
-    "searchResults",
+    "searchResultsFadq",
     "contextManager",
     "mapDetails",
     "catalogFadq",
@@ -56,7 +56,7 @@
       "name": "clientInfo"
     },
     {
-      "name": "searchResults"
+      "name": "searchResultsFadq"
     },
     {
       "name": "contextManager"

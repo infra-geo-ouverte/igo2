@@ -1,0 +1,36 @@
+<igo-list [navigation]="true">
+  <ng-container *ngIf="!dataStore.empty">
+    <ng-template
+      #groupTemplate
+      ngFor let-group let-i="index"
+      [ngForOf]="(dataStore.records$ | async).sort(sortByOrder) | recordGroup">
+
+      <igo-collapsible
+        title="{{group.source.title}} ({{group.records.length}})"
+        *ngIf="mode === displayMode.Grouped; else flatTemplate">
+        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {record: group.record}"></ng-container>
+      </igo-collapsible>
+
+      <ng-template #flatTemplate>
+        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {record: group.record}"></ng-container>
+      </ng-template>
+
+      <ng-template #storeItemTemplate>
+        <ng-template ngFor let-record let-j="index" [ngForOf]="group.records">
+          <fadq-search-store-item
+            igoListItem
+            color="accent"
+            [record]="record"
+            [focused]="dataStore.getRecordState(record).focused"
+            (focus)="doFocus(record)"
+            (select)="doSelect(record)"
+            (unfocus)="unfocus.emit(record)"
+            (unselect)="unselect.emit(record)">
+          </fadq-search-store-item>
+        </ng-template>
+      </ng-template>
+
+    </ng-template>
+
+  </ng-container>
+</igo-list>

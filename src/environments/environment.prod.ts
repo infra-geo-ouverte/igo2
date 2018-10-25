@@ -1,13 +1,14 @@
 import { ContextServiceOptions } from '@igo2/context';
 import { LanguageOptions } from '@igo2/core';
-import { SearchSourcesOptions, CatalogServiceOptions } from '@igo2/geo';
+import { CatalogServiceOptions } from '@igo2/geo';
 
 import { ApiConfig } from '../app/modules/core/api/api.interface';
+import { SearchSourceOptions } from '../app/modules/search/shared/sources/source.interface';
 
 interface Environment {
   production: boolean;
   igo: {
-    searchSources?: SearchSourcesOptions;
+    searchSources?: { [key: string]: SearchSourceOptions };
     language?: LanguageOptions;
     context?: ContextServiceOptions;
     catalog?: CatalogServiceOptions;

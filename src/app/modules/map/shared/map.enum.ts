@@ -1,3 +1,5 @@
+export const LAYER = 'layer';
+
 export enum MapTool {
   BaseLayerSwitcher = 'baseLayerSwitcher',
   ZoomIn = 'zoomIn',
@@ -9,7 +11,7 @@ export enum MapTool {
   GoogleView = 'googleView'
 }
 
-export const MapDefaultTools = [
+export const MAP_DEFAULT_TOOLS = [
   {'name': MapTool.BaseLayerSwitcher, 'icon': 'photo_library'},
   {'name': MapTool.ZoomIn, 'icon': 'zoom_in'},
   {'name': MapTool.ZoomOut, 'icon': 'zoom_out'},

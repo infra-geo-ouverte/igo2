@@ -14,7 +14,22 @@ import {
   IgoBackdropModule,
   IgoFlexibleModule
 } from '@igo2/common';
-import { IgoGeoModule } from '@igo2/geo';
+import {
+  IgoCatalogModule,
+  IgoDataSourceModule,
+  IgoDownloadModule,
+  // IgoFeatureModule,
+  IgoFilterModule,
+  IgoFormModule,
+  IgoImportExportModule,
+  IgoLayerModule,
+  IgoMapModule,
+  IgoMetadataModule,
+  IgoOverlayModule,
+  IgoPrintModule,
+  // IgoQueryModule,
+  IgoWktModule
+} from '@igo2/geo';
 import { IgoContextModule } from '@igo2/context';
 import { IgoToolsModule } from '@igo2/tools';
 
@@ -40,7 +55,22 @@ import { PortalComponent } from './portal.component';
     IgoPanelModule,
     IgoBackdropModule,
     IgoFlexibleModule,
-    IgoGeoModule,
+
+    IgoCatalogModule,
+    IgoDataSourceModule,
+    IgoDownloadModule,
+    // IgoFeatureModule,
+    IgoFilterModule,
+    IgoFormModule,
+    IgoImportExportModule,
+    IgoLayerModule,
+    IgoMapModule,
+    IgoMetadataModule,
+    IgoOverlayModule,
+    IgoPrintModule,
+    // IgoQueryModule,
+    IgoWktModule,
+
     IgoContextModule,
     IgoToolsModule,
     FadqCoreModule,

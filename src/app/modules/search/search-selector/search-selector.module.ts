@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -26,10 +26,4 @@ import { SearchSelectorComponent } from './search-selector.component';
   exports: [SearchSelectorComponent],
   declarations: [SearchSelectorComponent]
 })
-export class FadqSearchSelectorModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqSearchSelectorModule
-    };
-  }
-}
+export class FadqSearchSelectorModule {}

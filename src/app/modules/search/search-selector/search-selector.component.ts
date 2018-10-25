@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Search } from '../shared/search.enum';
-import { SearchSourceService } from '@igo2/geo';
+import { SearchSourceService } from '../shared/search-source.service';
 
 
 @Component({
@@ -42,7 +42,7 @@ export class SearchSelectorComponent implements OnInit {
     // TODO: This is not supposed to work properly and is for demo purposes only.
     // Search sources should have a type and the search source service
     // should have a method to toggle search sources by type
-    const sources = this.searchSourceService.sources;
+    const sources = this.searchSourceService.getSources();
     if (search === Search.Client) {
       sources.forEach(source => source.enabled = false);
     } else if (search === Search.DataSource) {

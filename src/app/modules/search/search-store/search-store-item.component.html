@@ -1,0 +1,5 @@
+<mat-list-item>
+  <mat-icon *ngIf="icon" mat-list-avatar>{{icon}}</mat-icon>
+  <h4 matLine *ngIf="titleHtml" [innerHtml]="titleHtml"></h4>
+  <h4 matLine *ngIf="!titleHtml">{{title}}</h4>
+</mat-list-item>

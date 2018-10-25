@@ -1,12 +1,55 @@
 import { Observable } from 'rxjs';
 
-export abstract class SearchSource {
+import {
+  DataProvider,
+  SearchableDataProvider
+} from '../../../data/shared/dataprovider';
+import { Record } from '../../../data/shared/data.interface';
+import { SearchSourceOptions } from './source.interface';
 
-  abstract enabled: boolean;
+export class SearchSource implements DataProvider, SearchableDataProvider {
 
-  abstract getName(): string;
+  static id: string;
 
-  abstract getType(): string;
+  protected options: SearchSourceOptions;
 
-  abstract search(term?: string): Observable<any>;
+  getId(): string {
+    throw new Error('You have to implement the method "getId".');
+  }
+
+  getDefaultOptions(): SearchSourceOptions {
+    throw new Error('You have to implement the method "getDefaultOptions".');
+  }
+
+  search(term?: string): Observable<Record[]> {
+    throw new Error('You have to implement the method "search".');
+  }
+
+  get title(): string {
+    return this.options.title;
+  }
+
+  get enabled(): boolean {
+    return this.options.enabled !== false;
+  }
+  set enabled(value: boolean) {
+    this.options.enabled = value;
+  }
+
+  get searchUrl(): string {
+    return this.options.searchUrl;
+  }
+
+  get params(): { [key: string]: string } {
+    return this.options.params === undefined ? {} : this.options.params;
+  }
+
+  get displayOrder(): number {
+    return this.options.order === undefined ? 99 : this.options.order;
+  }
+
+  protected initOptions(options: SearchSourceOptions) {
+    this.options = Object.assign(this.getDefaultOptions(), options);
+  }
+
 }
