@@ -38,8 +38,6 @@ export class DataStore {
         });
       this.selected$.next(selected);
     });
-
-    this.states$$.unsubscribe();
   }
 
   destroy() {
@@ -83,7 +81,7 @@ export class DataStore {
     if (exclusive === true) {
       this.unselectAll(focus);
     }
-
+    console.log(state);
     this.updateRecordState(record, state);
   }
 

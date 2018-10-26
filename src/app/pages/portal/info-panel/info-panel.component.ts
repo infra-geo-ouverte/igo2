@@ -1,12 +1,21 @@
-import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostBinding,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
-import { Feature } from '@igo2/geo';
+import { getRecordTitle, Record } from '../../../modules/data/shared';
+import { getFeatureFromRecord, Feature } from '../../../modules/feature/shared';
 
 
 @Component({
   selector: 'fadq-info-panel',
   templateUrl: './info-panel.component.html',
-  styleUrls: ['./info-panel.component.scss']
+  styleUrls: ['./info-panel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoPanelComponent {
 
@@ -18,7 +27,6 @@ export class InfoPanelComponent {
     if (value === this._opened) {
       return;
     }
-
     this._opened = value;
     this.openedChange.emit(this._opened);
   }
@@ -26,7 +34,10 @@ export class InfoPanelComponent {
 
   @Input()
   get title(): string {
-    return this._title;
+    if (this._title !== undefined) {
+      return this._title;
+    }
+    return this.record === undefined ? undefined : getRecordTitle(this.record);
   }
   set title(value: string) {
     this._title = value;
@@ -34,16 +45,16 @@ export class InfoPanelComponent {
   private _title: string;
 
   @Input()
-  get feature(): Feature {
-    return this._feature;
+  get records(): Record[] {
+    return this._records;
   }
-  set feature(value: Feature) {
-    this._feature = value;
-    if (this._feature !== undefined) {
+  set records(value: Record[]) {
+    this._records = value || [];
+    if (!this.empty) {
       this.toggleDisplay();
     }
   }
-  private _feature: Feature;
+  private _records: Record[] = [];
 
   @Output() openedChange = new EventEmitter<boolean>();
 
@@ -52,9 +63,27 @@ export class InfoPanelComponent {
     return this.opened;
   }
 
-  @HostBinding('class.fadq-info-panel-with-feature')
-  get hasWithFeatureClass() {
-    return this.feature === undefined ? false : true;
+  @HostBinding('class.fadq-info-panel-with-records')
+  get hasWithRecordsClass() {
+    return this.records === undefined ? false : true;
+  }
+
+  get empty(): boolean {
+    return this.records.length === 0;
+  }
+
+  get record(): Record | undefined {
+    if (this.empty) {
+      return undefined;
+    }
+    return this.records[0];
+  }
+
+  get feature(): Feature | undefined {
+    if (this.record) {
+      return getFeatureFromRecord(this.record);
+    }
+    return undefined;
   }
 
   constructor() {}
