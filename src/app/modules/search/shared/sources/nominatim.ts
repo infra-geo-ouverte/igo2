@@ -97,11 +97,11 @@ export class NominatimSearchSource extends SearchSource {
   }
 
   private computeExtent(result: NominatimResult): [number, number, number, number] {
-    return  [
+    return [
       parseFloat(result.boundingbox[2]),
       parseFloat(result.boundingbox[0]),
       parseFloat(result.boundingbox[3]),
       parseFloat(result.boundingbox[1])
-    ];  
+    ];
   }
 }

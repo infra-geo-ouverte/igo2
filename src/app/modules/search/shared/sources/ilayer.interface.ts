@@ -28,7 +28,7 @@ export interface ILayerResponse {
 export interface ILayerData {
   id: string;
   properties: { [key: string]: any };
-  layer: AnyLayerOptions;
+  options: AnyLayerOptions;
 }
 
 export interface ILayerRecord extends Record {

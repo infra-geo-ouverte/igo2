@@ -27,8 +27,22 @@
   width: 100%;
 }
 
-igo-search-bar {
-  width: calc(100% - #{$igo-icon-size});
+.fadq-search-bar-container>mat-form-field {
+  width: calc(100% - (2 * #{$igo-icon-size}));
+}
+
+.search-bar-buttons {
+  position: absolute;
+  right: 40px;
+  top: 0;
+  & > button:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    border-right: 1px solid #ddd;
+    height: 28px;
+  }
 }
 
 fadq-search-selector {

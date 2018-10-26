@@ -83,7 +83,7 @@ export class ILayerSearchSource extends SearchSource {
       data: {
         id: result.id,
         properties: properties,
-        layer: layerOptions
+        options: layerOptions
       }
     };
   }
