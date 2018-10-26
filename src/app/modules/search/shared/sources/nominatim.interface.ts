@@ -9,7 +9,7 @@ export interface NominatimResult {
   type: string;
   lon: string;
   lat: string;
-  boundingbox: [string, string, string, string]
+  boundingbox: [string, string, string, string];
 }
 
 export interface NominatimRecord extends Record {
