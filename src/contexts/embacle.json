@@ -10,7 +10,16 @@
   },
   "layers": [
     {
+      "title": "OSM",
+      "baseLayer": true,
+      "sourceOptions": {
+        "type": "osm"
+      }
+    },
+    {
       "title": "Fond de carte du Québec",
+      "visible": true,
+      "baseLayer": true,
       "sourceOptions": {
         "type": "xyz",
         "url":
