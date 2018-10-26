@@ -92,7 +92,6 @@ export class PlaceSelectorComponent implements OnInit {
 
   private filterPlacesByTitle(title: string): Place[] {
     const filterValue = title.toLowerCase();
-
     return this.places.filter(place => {
       return place.title.toLowerCase().indexOf(filterValue) === 0;
     });

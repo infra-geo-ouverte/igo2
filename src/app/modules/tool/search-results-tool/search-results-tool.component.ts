@@ -12,9 +12,8 @@ import {
 
 import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/datastore';
-import { FEATURE } from '../../feature/shared/feature.enum';
-import { Feature } from '../../feature/shared/feature.interface';
-import { LAYER } from '../../map/shared/map.enum';
+import { getFeatureFromRecord } from '../../feature/shared/feature.utils';
+import { getLayerOptionsFromRecord } from '../../map/shared/map.utils';
 import { SearchStoreService } from '../../search/shared/search-store.service';
 
 @Register({
@@ -40,31 +39,28 @@ export class SearchResultsToolComponent {
   ) {}
 
   handleRecordFocus(record: Record) {
-    if (record.meta.dataType === FEATURE) {
-      this.addFeatureRecordToMap(record);
-    }
+    this.maybeAddFeatureToMap(record);
   }
 
   handleRecordSelect(record: Record) {
-    if (record.meta.dataType === FEATURE) {
-      this.addFeatureRecordToMap(record);
-    } else if (record.meta.dataType === LAYER) {
-      this.addLayerRecordToMap(record);
+    this.maybeAddFeatureToMap(record);
+    this.maybeAddLayerToMap(record);
+  }
+
+  private maybeAddFeatureToMap(record: Record) {
+    const feature = getFeatureFromRecord(record);
+    if (feature !== undefined) {
+      // this.overlayService.setFeatures([feature], OverlayAction.ZoomIfOutMapExtent);
     }
   }
 
-  private addFeatureRecordToMap(record: Record) {
-    const feature = record.data as Feature;
-    // this.overlayService.setFeatures([feature], OverlayAction.ZoomIfOutMapExtent);
-  }
-
-  private addLayerRecordToMap(record: Record) {
+  private maybeAddLayerToMap(record: Record) {
     const map = this.mapService.getMap();
-    if (map === undefined) {
+    const layerOptions = getLayerOptionsFromRecord(record);
+    if (map === undefined || layerOptions === undefined) {
       return;
     }
 
-    const layerOptions = record.data.layer as LayerOptions;
     this.layerService
       .createAsyncLayer(layerOptions)
       .subscribe(layer => map.addLayer(layer));

@@ -8,12 +8,9 @@ import {
   ToolService
 } from '@igo2/context';
 
-import {
-  Feature,
-  FeatureService,
-  IgoMap
-} from '@igo2/geo';
+import { IgoMap } from '@igo2/geo';
 
+import { Record, DataStore } from './../../modules/data/shared';
 import { ProjectionService } from '../../modules/map/shared';
 import { SearchStoreService } from '../../modules/search/shared';
 
@@ -33,8 +30,8 @@ import {
 export class PortalComponent implements OnInit, OnDestroy {
   public context$$: Subscription;
 
-  public selectedFeature$$: Subscription;
-  public features$$: Subscription;
+  public searchRecords$$: Subscription;
+  public selectedSearchRecords$$: Subscription;
 
   public expansionPanelExpanded = false;
   public infoPanelOpened = false;
@@ -45,10 +42,13 @@ export class PortalComponent implements OnInit, OnDestroy {
   // True after the initial context is loaded
   private contextLoaded = false;
 
+  get searchStore(): DataStore {
+    return this.searchStoreService.getStore();
+  }
+
   constructor(
     private projectionService: ProjectionService,
     public contextService: ContextService,
-    public featureService: FeatureService,
     public mediaService: MediaService,
     public searchStoreService: SearchStoreService,
     public toolService: ToolService
@@ -70,20 +70,21 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.handleContextChange(context)
     );
 
-    this.features$$ = this.featureService.features$.subscribe(features =>
-      this.handleFeaturesChange(features)
-    );
+    this.searchRecords$$ = this.searchStore.records$
+      .subscribe((records: Record[]) =>
+        this.handleSearchRecordsChange(records)
+      );
 
-    this.selectedFeature$$ = this.featureService.selectedFeature$.subscribe(
-      feature => this.handleFeatureSelect(feature)
-    );
-
+    this.selectedSearchRecords$$ = this.searchStore.selected$
+      .subscribe((records: Record[]) =>
+        this.handleSearchRecordsSelect(records)
+      );
   }
 
   ngOnDestroy() {
-    this.selectedFeature$$.unsubscribe();
-    this.features$$.unsubscribe();
     this.context$$.unsubscribe();
+    this.searchRecords$$.unsubscribe();
+    this.selectedSearchRecords$$.unsubscribe();
   }
 
   get backdropShown(): boolean {
@@ -118,27 +119,30 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
   }
 
-  handleQueryResults(results) {
-    const features: Feature[] = results.features;
-    if (features.length > 0) {
-      this.featureService.updateFeatures(features, features[0].source);
-    }
+  handleQueryResults(records: Record[]) {
+    // const features: Feature[] = results.features;
+    // if (features.length > 0) {
+    //   this.featureService.updateFeatures(features, features[0].source);
+    // }
   }
 
-  private handleFeaturesChange(features: Feature[]) {
-    if (features.length > 0) {
-      this.openSidenav();
-      const searchResults = this.toolService.getTool('searchResults');
-      this.toolService.selectTool(searchResults);
-    }
-  }
-
-  private handleFeatureSelect(feature: Feature) {
-    if (feature === undefined) {
+  private handleSearchRecordsChange(records: Record[]) {
+    if (records.length === 0) {
       return;
     }
 
-    if (feature && this.mediaService.media$.value === Media.Mobile) {
+    this.openSidenav();
+    const searchResults = this.toolService.getTool('searchResultsFadq');
+    this.toolService.selectTool(searchResults);
+  }
+
+  private handleSearchRecordsSelect(records: Record[]) {
+    console.log(records);
+    if (records.length === 0) {
+      return;
+    }
+
+    if (this.mediaService.media$.value === Media.Mobile) {
       this.closeSidenav();
     }
     this.openInfoPanel();
