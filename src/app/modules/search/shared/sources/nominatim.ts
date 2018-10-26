@@ -33,7 +33,6 @@ export class NominatimSearchSource extends SearchSource {
 
   search(term?: string): Observable<NominatimRecord[]> {
     const params = this.computeSearchRequestParams(term);
-    console.log(this.searchUrl);
     return this.http
       .get(this.searchUrl, { params })
       .pipe(

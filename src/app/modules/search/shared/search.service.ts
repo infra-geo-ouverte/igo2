@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { stringToLonLat } from '../../map/shared/map.utils';
 import { SearchSource } from './sources';
 import { SearchSourceService } from './search-source.service';
 import { Research } from './search.interface';
@@ -17,13 +18,30 @@ export class SearchService {
       return [];
     }
 
-    return this.searchSourceService.getSources()
-      .filter((source: SearchSource) => source.enabled)
-      .map((source: SearchSource) => this.searchSource(source, term));
+    const lonLat = stringToLonLat(term);
+    const sources = this.searchSourceService.getSources()
+      .filter((source: SearchSource) => source.enabled);
+
+    let researches;
+    if (lonLat !== undefined) {
+      researches = this.searchSourcesByLonLat(sources, lonLat);
+    } else {
+      researches = this.searchSources(sources, term);
+    }
+
+    return researches;
   }
 
-  private searchSource(source: SearchSource, term: string): Research {
-    return {request: source.search(term), source};
+  private searchSources(sources: Source[], term: string): Research[] {
+    return sources.map((source: SearchSource) => {
+      return {request: source.search(term), source};
+    })
+  }
+
+  private searchSourcesByLonLat(sources: Source[], lonLat: [number, number]): Research[] {
+    return sources.map((source: SearchSource) => {
+      return {request: source.searchByLonLat(lonLat), source};
+    })
   }
 
   private termIsValid(term: string) {
