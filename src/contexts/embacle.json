@@ -121,7 +121,8 @@
     "contextManager",
     "mapDetails",
     "timeAnalysis",
-    "print"
+    "print",
+    "ogcFilter"
   ],
   "tools": [
     {
@@ -134,9 +135,14 @@
       "name": "contextManager"
     },
     {
+      "name": "ogcFilter"
+    },
+    {
       "name": "mapDetails",
       "options": {
-        "toggleLegendOnVisibilityChange": false
+        "toggleLegendOnVisibilityChange": false,
+        "excludeBaseLayers": false,
+        "ogcFiltersInLayers": true
       }
     },
     {
