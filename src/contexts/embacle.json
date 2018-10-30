@@ -10,7 +10,16 @@
   },
   "layers": [
     {
+      "title": "OSM",
+      "baseLayer": true,
+      "sourceOptions": {
+        "type": "osm"
+      }
+    },
+    {
       "title": "Fond de carte du Québec",
+      "visible": true,
+      "baseLayer": true,
       "sourceOptions": {
         "type": "xyz",
         "url":
@@ -121,7 +130,8 @@
     "contextManager",
     "mapDetails",
     "timeAnalysis",
-    "print"
+    "print",
+    "ogcFilter"
   ],
   "tools": [
     {
@@ -134,9 +144,14 @@
       "name": "contextManager"
     },
     {
+      "name": "ogcFilter"
+    },
+    {
       "name": "mapDetails",
       "options": {
-        "toggleLegendOnVisibilityChange": false
+        "toggleLegendOnVisibilityChange": false,
+        "excludeBaseLayers": false,
+        "ogcFiltersInLayers": true
       }
     },
     {
