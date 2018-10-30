@@ -1,3 +1,26 @@
+<a name="0.21.0"></a>
+# [0.21.0](https://github.com/infra-geo-ouverte/igo2/compare/0.20.0...0.21.0) (2018-10-30)
+
+
+### Bug Fixes
+
+* **auth:** add auth interceptor ([4d9cb7d](https://github.com/infra-geo-ouverte/igo2/commit/4d9cb7d))
+* **backdrop:** only show backdrop on mobile ([faeb280](https://github.com/infra-geo-ouverte/igo2/commit/faeb280))
+* **dropGeoFile:** directive not working without dragAndDrop (build prod - aot) ([2d0d096](https://github.com/infra-geo-ouverte/igo2/commit/2d0d096))
+* **environnement:** searchUrl ([8bdee5e](https://github.com/infra-geo-ouverte/igo2/commit/8bdee5e))
+* **map:** offset baselayer in prod build ([0b8d808](https://github.com/infra-geo-ouverte/igo2/commit/0b8d808))
+* **toast:** detect changes on mobile after selecting a feature ([b62f65d](https://github.com/infra-geo-ouverte/igo2/commit/b62f65d))
+
+
+### Features
+
+* **itineraire:** Routing on osrm ([#224](https://github.com/infra-geo-ouverte/igo2/issues/224)) ([0c5cdcf](https://github.com/infra-geo-ouverte/igo2/commit/0c5cdcf))
+* **scaleline:** add scaleline ([#226](https://github.com/infra-geo-ouverte/igo2/issues/226)) ([4e24fdb](https://github.com/infra-geo-ouverte/igo2/commit/4e24fdb))
+* **search-source:** provide reseautq to demo, but set to enabled:false ([#233](https://github.com/infra-geo-ouverte/igo2/issues/233)) ([703b3e8](https://github.com/infra-geo-ouverte/igo2/commit/703b3e8))
+* **tool:** adding a about tool fully customizable by html. ([#234](https://github.com/infra-geo-ouverte/igo2/issues/234)) ([848fd7c](https://github.com/infra-geo-ouverte/igo2/commit/848fd7c))
+
+
+
 <a name="0.20.0"></a>
 # [0.20.0](https://github.com/infra-geo-ouverte/igo2/compare/0.19.4...0.20.0) (2018-09-07)
 
