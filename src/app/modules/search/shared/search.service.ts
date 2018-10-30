@@ -19,26 +19,28 @@ export class SearchService {
     }
 
     const lonLat = stringToLonLat(term);
-    const sources = this.searchSourceService.getSources()
-      .filter((source: SearchSource) => source.enabled);
-
-    let researches;
     if (lonLat !== undefined) {
-      researches = this.searchSourcesByLonLat(sources, lonLat);
-    } else {
-      researches = this.searchSources(sources, term);
+      return this.searchByLonLat(lonLat);
     }
 
-    return researches;
+    const sources = this.searchSourceService.getSources()
+      .filter((source: SearchSource) => source.enabled);
+    return this.searchSources(sources, term);
   }
 
-  private searchSources(sources: Source[], term: string): Research[] {
+  searchByLonLat(lonLat: [number, number]) {
+    const sources = this.searchSourceService.getSources()
+      .filter((source: SearchSource) => source.enabled);
+    return this.searchSourcesByLonLat(sources, lonLat);
+  }
+
+  private searchSources(sources: SearchSource[], term: string): Research[] {
     return sources.map((source: SearchSource) => {
       return {request: source.search(term), source};
     })
   }
 
-  private searchSourcesByLonLat(sources: Source[], lonLat: [number, number]): Research[] {
+  private searchSourcesByLonLat(sources: SearchSource[], lonLat: [number, number]): Research[] {
     return sources.map((source: SearchSource) => {
       return {request: source.searchByLonLat(lonLat), source};
     })

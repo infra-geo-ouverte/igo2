@@ -1,13 +1,15 @@
-import { LayerOptions } from '@igo2/geo';
+import { AnyLayerOptions } from '@igo2/geo';
 
 import { Record } from '../../data/shared/data.interface';
+import { LayerRecord } from './map.interface';
 import { LAYER } from './map.enum';
 
-export function getLayerOptionsFromRecord(record: Record): LayerOptions | undefined {
+export function getLayerOptionsFromRecord(record: Record): AnyLayerOptions | undefined {
   if (record.meta.dataType !== LAYER) {
     return undefined;
   }
-  return record.data.options as LayerOptions;
+
+  return (record as LayerRecord).data.layer;
 }
 
 
@@ -26,11 +28,11 @@ export function stringToLonLat(str: string): [number, number] | undefined {
 
   const projectionRegex = new RegExp(projectionPattern, 'g');
   if (projectionRegex.test(str)) {
-    [lonLatStr, projectionStr] = term.split(';');
+    [lonLatStr, projectionStr] = str.split(';');
   }
 
   const [lonStr, latStr] = lonLatStr.split(',');
-  const lonLat = [parseFloat(lonStr), parseFloat(latStr)];
+  const lonLat = [parseFloat(lonStr), parseFloat(latStr)] as [number, number];
 
   if (projectionStr !== undefined) {
     // TODO Reproject coordinates

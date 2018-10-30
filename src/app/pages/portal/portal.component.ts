@@ -137,7 +137,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private handleSearchRecordsSelect(records: Record[]) {
-    console.log(records);
     if (records.length === 0) {
       return;
     }

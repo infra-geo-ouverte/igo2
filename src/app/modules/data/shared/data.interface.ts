@@ -1,7 +1,6 @@
 import { DataProvider } from './dataprovider';
 
 export interface Record {
-  id: string;
   rid: string;
   meta: RecordMeta;
   data: { [key: string]: any };
@@ -10,6 +9,8 @@ export interface Record {
 
 export interface RecordMeta {
   dataType?: string;
+  id?: string | number;
+  idProperty?: string;
   title?: string;
   titleProperty?: string;
   titleHtml?: string;

@@ -5,8 +5,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { FEATURE } from '../../../feature/shared/feature.enum';
-import { FeatureGeometry } from '../../../feature/shared/feature.interface';
-import { NominatimRecord, NominatimResult } from './nominatim.interface';
+import {
+  FeatureGeometry,
+  FeatureRecord
+} from '../../../feature/shared/feature.interface';
+import { NominatimResult } from './nominatim.interface';
 import { SearchSource } from './source';
 import { SearchSourceOptions } from './source.interface';
 
@@ -31,7 +34,7 @@ export class NominatimSearchSource extends SearchSource {
     };
   }
 
-  search(term?: string): Observable<NominatimRecord[]> {
+  search(term?: string): Observable<FeatureRecord[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
@@ -49,38 +52,37 @@ export class NominatimSearchSource extends SearchSource {
     });
   }
 
-  private extractRecords(response: Array<NominatimResult>): NominatimRecord[] {
+  private extractRecords(response: Array<NominatimResult>): FeatureRecord[] {
     return response.map(result => this.resultToRecord(result));
   }
 
-  private resultToRecord(result: NominatimResult): NominatimRecord {
+  private resultToRecord(result: NominatimResult): FeatureRecord {
     const properties = this.computeProperties(result);
     const geometry = this.computeGeometry(result);
     const extent = this.computeExtent(result);
 
     return {
-      id: result.place_id,
       rid: [this.getId(), 'place', result.place_id].join('.'),
       provider: this,
       meta: {
         dataType: FEATURE,
+        id: result.place_id,
         title: result.display_name,
         icon: 'place'
       },
       data: {
-        id: result.place_id,
         type: FEATURE,
         projection: 'EPSG:4326',
-        properties: properties,
         geometry: geometry,
-        extent: extent
+        extent: extent,
+        properties: properties
       }
     };
   }
 
   private computeProperties(result: NominatimResult): { [key: string]: any } {
     return {
-      name: result.display_name,
+      display_name: result.display_name,
       place_id: result.place_id,
       osm_type: result.osm_type,
       class: result.class,

@@ -6,8 +6,8 @@ import { map } from 'rxjs/operators';
 
 import { removeKeys } from '../../../utils/object';
 import { FEATURE } from '../../../feature/shared/feature.enum';
+import { FeatureRecord } from '../../../feature/shared/feature.interface';
 import {
-  IChercheRecord,
   IChercheResult,
   IChercheResponse
 } from './icherche.interface';
@@ -23,7 +23,9 @@ export class IChercheSearchSource extends SearchSource {
     '@version',
     'recherche',
     'id',
-    'cote'
+    'cote',
+    'geometry',
+    'bbox'
   ];
 
   constructor(protected options: SearchSourceOptions, private http: HttpClient) {
@@ -42,7 +44,7 @@ export class IChercheSearchSource extends SearchSource {
     };
   }
 
-  search(term?: string): Observable<IChercheRecord[]> {
+  search(term?: string): Observable<FeatureRecord[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
@@ -59,30 +61,29 @@ export class IChercheSearchSource extends SearchSource {
     });
   }
 
-  private extractRecords(response: IChercheResponse): IChercheRecord[] {
+  private extractRecords(response: IChercheResponse): FeatureRecord[] {
     return response.features.map(result => this.resultToRecord(result));
   }
 
-  private resultToRecord(result: IChercheResult): IChercheRecord {
+  private resultToRecord(result: IChercheResult): FeatureRecord {
     const properties = this.computeProperties(result);
 
     return {
-      id: result._id,
       rid: [this.getId(), properties.type, result._id].join('.'),
       provider: this,
       meta: {
         dataType: FEATURE,
+        id: result._id,
         title: result.properties.recherche,
         titleHtml: result.highlight,
         icon: 'place'
       },
       data: {
-        id: result._id,
         type: FEATURE,
         projection: 'EPSG:4326',
-        properties: properties,
         geometry: result.geometry,
-        extent: result.bbox
+        extent: result.bbox,
+        properties: properties
       }
     };
   }

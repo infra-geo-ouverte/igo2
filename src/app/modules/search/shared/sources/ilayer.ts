@@ -8,8 +8,8 @@ import { LanguageService } from '@igo2/core';
 import { AnyLayerOptions } from '@igo2/geo';
 
 import { LAYER } from '../../../map/shared/map.enum';
+import { LayerRecord } from '../../../map/shared/map.interface';
 import {
-  ILayerRecord,
   ILayerResult,
   ILayerResponse
 } from './ilayer.interface';
@@ -45,7 +45,7 @@ export class ILayerSearchSource extends SearchSource {
     };
   }
 
-  search(term?: string): Observable<ILayerRecord[]> {
+  search(term?: string): Observable<LayerRecord[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
@@ -62,34 +62,34 @@ export class ILayerSearchSource extends SearchSource {
     });
   }
 
-  private extractRecords(response: ILayerResponse): ILayerRecord[] {
+  private extractRecords(response: ILayerResponse): LayerRecord[] {
     return response.items.map(result => this.resultToRecord(result));
   }
 
-  private resultToRecord(result: ILayerResult): ILayerRecord {
+  private resultToRecord(result: ILayerResult): LayerRecord {
     const properties = this.computeProperties(result);
     const layerOptions = this.computeLayerOptions(result);
 
     return {
-      id: result.id,
       rid: [this.getId(), result.id].join('.'),
       provider: this,
       meta: {
         dataType: LAYER,
+        id: result.id,
         title: result.source.title,
         titleHtml: result.highlight.title,
         icon: result.source.type === 'Layer' ? 'layers' : 'map'
       },
       data: {
-        id: result.id,
         properties: properties,
-        options: layerOptions
+        layer: layerOptions
       }
     };
   }
 
   private computeProperties(result: ILayerResult): { [key: string]: any } {
     return {
+      id: result.id,
       title:  result.source.title,
       group: result.source.groupTitle,
       abstract: result.source.abstract,

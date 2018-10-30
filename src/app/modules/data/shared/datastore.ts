@@ -81,7 +81,6 @@ export class DataStore {
     if (exclusive === true) {
       this.unselectAll(focus);
     }
-    console.log(state);
     this.updateRecordState(record, state);
   }
 
