@@ -20,7 +20,7 @@ export const environment: Environment = {
         searchUrl: '/icherche/geocode'
       },
       datasource: {
-        searchUrl: '/igo2/api/layers/search'
+        searchUrl: '/apis/layers/search'
       }
     },
     language: {
