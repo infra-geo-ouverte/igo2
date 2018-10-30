@@ -1,5 +1,4 @@
-import { Feature, FeatureGeometry } from '../../../feature/shared/feature.interface';
-import { Record } from '../../../data/shared/data.interface';
+import { FeatureGeometry } from '../../../feature/shared/feature.interface';
 
 export interface IChercheResult {
   _id: string;
@@ -13,8 +12,4 @@ export interface IChercheResult {
 
 export interface IChercheResponse {
   features: IChercheResult[];
-}
-
-export interface IChercheRecord extends Record {
-  data: Feature;
 }

@@ -15,6 +15,13 @@
     </mat-icon>
   </button>
 
+  <!--TODO:  Fix CSS in lib and remove that -->
+  <button
+    mat-icon-button
+    panelLeftButton
+    *ngIf="!empty">
+  </button>
+
   <div igoStopPropagation>
     <igo-feature-details [feature]="feature"></igo-feature-details>
   </div>

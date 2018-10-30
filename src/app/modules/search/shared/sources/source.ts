@@ -25,6 +25,10 @@ export class SearchSource implements DataProvider, SearchableDataProvider {
     throw new Error('You have to implement the method "search".');
   }
 
+  searchByLonLat(lonLat: [number, number]): Observable<Record[]> {
+    throw new Error('You have to implement the method "searchByLonLat".');
+  }
+
   get title(): string {
     return this.options.title;
   }

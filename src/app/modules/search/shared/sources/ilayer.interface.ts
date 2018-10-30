@@ -1,6 +1,3 @@
-import { AnyLayerOptions } from '@igo2/geo';
-import { Record } from '../../../data/shared/data.interface';
-
 export interface ILayerResult {
   id: string;
   source: ILayerResultSource;
@@ -23,14 +20,4 @@ export interface ILayerResultHighlight {
 
 export interface ILayerResponse {
   items: ILayerResult[];
-}
-
-export interface ILayerData {
-  id: string;
-  properties: { [key: string]: any };
-  options: AnyLayerOptions;
-}
-
-export interface ILayerRecord extends Record {
-  data: ILayerData;
 }
