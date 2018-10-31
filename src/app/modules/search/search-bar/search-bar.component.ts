@@ -106,13 +106,13 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _searchIcon;
 
   @Input()
-  get dataStore(): DataStore {
-    return this._dataStore;
+  get store(): DataStore<Record> {
+    return this._store;
   }
-  set dataStore(value: DataStore) {
-    this._dataStore = value;
+  set store(value: DataStore<Record>) {
+    this._store = value;
   }
-  private _dataStore;
+  private _store;
 
   private readonly invalidKeys = ['Control', 'Shift', 'Alt'];
   private stream$ = new Subject<string>();
@@ -169,15 +169,15 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   private handleTermChanged(term: string | undefined) {
     if (term === undefined || term === '') {
-      if (this.dataStore !== undefined) {
-        this.dataStore.clear();
+      if (this.store !== undefined) {
+        this.store.clear();
       }
       return;
     }
 
     this.change.emit(term);
-    if (this.dataStore !== undefined) {
-      this.dataStore.clear(true);
+    if (this.store !== undefined) {
+      this.store.clear(true);
     }
 
     const researches = this.searchService.search(term);
@@ -192,11 +192,11 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private handleResearchComplete(records: Record[], source: SearchSource) {
     this.search.emit({records, source});
 
-    if (this.dataStore !== undefined) {
-      const newRecords = this.dataStore.getRecords()
+    if (this.store !== undefined) {
+      const newRecords = this.store.getRecords()
         .filter(record =>  record.provider !== source)
         .concat(records);
-      this.dataStore.setRecords(newRecords, true);
+      this.store.setRecords(newRecords, true);
     }
   }
 

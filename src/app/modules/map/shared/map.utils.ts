@@ -1,7 +1,7 @@
 import { AnyLayerOptions } from '@igo2/geo';
 
 import { Record } from '../../data/shared/data.interface';
-import { LayerRecord } from './map.interface';
+import { LayerInfo } from './map.interface';
 import { LAYER } from './map.enum';
 
 export function getLayerOptionsFromRecord(record: Record): AnyLayerOptions | undefined {
@@ -9,7 +9,7 @@ export function getLayerOptionsFromRecord(record: Record): AnyLayerOptions | und
     return undefined;
   }
 
-  return (record as LayerRecord).data.layer;
+  return (record as Record<LayerInfo>).data.options;
 }
 
 

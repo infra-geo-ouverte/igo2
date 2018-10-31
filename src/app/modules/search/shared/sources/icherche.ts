@@ -5,8 +5,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { removeKeys } from '../../../utils/object';
+import { Record } from '../../../data/shared/data.interface';
 import { FEATURE } from '../../../feature/shared/feature.enum';
-import { FeatureRecord } from '../../../feature/shared/feature.interface';
+import { Feature } from '../../../feature/shared/feature.interface';
 import {
   IChercheResult,
   IChercheResponse
@@ -44,7 +45,7 @@ export class IChercheSearchSource extends SearchSource {
     };
   }
 
-  search(term?: string): Observable<FeatureRecord[]> {
+  search(term?: string): Observable<Record<Feature>[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
@@ -61,11 +62,11 @@ export class IChercheSearchSource extends SearchSource {
     });
   }
 
-  private extractRecords(response: IChercheResponse): FeatureRecord[] {
+  private extractRecords(response: IChercheResponse): Record<Feature>[] {
     return response.features.map(result => this.resultToRecord(result));
   }
 
-  private resultToRecord(result: IChercheResult): FeatureRecord {
+  private resultToRecord(result: IChercheResult): Record<Feature> {
     const properties = this.computeProperties(result);
 
     return {

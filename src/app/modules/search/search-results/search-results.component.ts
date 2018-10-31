@@ -38,13 +38,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private selected: string[] = [];
 
   @Input()
-  get dataStore(): DataStore {
-    return this._dataStore;
+  get store(): DataStore<Record> {
+    return this._store;
   }
-  set dataStore(value: DataStore) {
-    this._dataStore = value;
+  set store(value: DataStore<Record>) {
+    this._store = value;
   }
-  private _dataStore;
+  private _store;
 
   @Input()
   get mode(): DisplayMode {
@@ -63,10 +63,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.records$$ = this.dataStore.records$
-      .subscribe((records: Record[]) => this.handleRecordsChange(records));
+    this.records$$ = this.store.records$
+      .subscribe((records: Record[]) => this.cdRef.detectChanges());
 
-    this.focused$$ = this.dataStore.focused$
+    this.focused$$ = this.store.focused$
       .pipe(
         filter((records: Record[]) => {
           const rids = records.map((record: Record) => record.rid);
@@ -78,7 +78,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.cdRef.detectChanges();
       });
 
-    this.selected$$ = this.dataStore.selected$
+    this.selected$$ = this.store.selected$
       .pipe(
         filter((records: Record[]) => {
           const rids = records.map((record: Record) => record.rid);
@@ -107,16 +107,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   doFocus(record: Record) {
     this.focused = [record.rid];
     this.focus.emit(record);
-    this.dataStore.focus(record, true);
+    this.store.focus(record, true);
   }
 
   doSelect(record: Record) {
     this.selected = [record.rid];
     this.select.emit(record);
-    this.dataStore.select(record, true, true);
-  }
-
-  private handleRecordsChange(records: Record[]) {
-    this.cdRef.detectChanges();
+    this.store.select(record, true, true);
   }
 }

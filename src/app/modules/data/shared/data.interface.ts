@@ -1,9 +1,9 @@
 import { DataProvider } from './dataprovider';
 
-export interface Record {
+export interface Record<T = { [key: string]: any }> {
   rid: string;
   meta: RecordMeta;
-  data: { [key: string]: any };
+  data: T;
   provider?: DataProvider;
 }
 

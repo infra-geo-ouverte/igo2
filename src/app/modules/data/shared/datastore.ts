@@ -3,12 +3,12 @@ import { debounceTime } from 'rxjs/operators';
 
 import { Record, RecordState } from './data.interface';
 
-export class DataStore {
+export class DataStore<T extends Record> {
 
-  public records$ = new BehaviorSubject<Record[]>([]);
+  public records$ = new BehaviorSubject<T[]>([]);
   public states$ = new Subject<Map<string, RecordState>>();
-  public focused$ = new Subject<Record[]>();
-  public selected$ = new Subject<Record[]>();
+  public focused$ = new Subject<T[]>();
+  public selected$ = new Subject<T[]>();
 
   private states$$: Subscription;
 
@@ -47,18 +47,18 @@ export class DataStore {
     this.states$$.unsubscribe();
   }
 
-  setRecords(records: Record[], soft: boolean = false) {
+  setRecords(records: T[], soft: boolean = false) {
     this.records$.next(records);
     if (soft === false) {
       this.resetStates();
     }
   }
 
-  getRecords(): Record[] {
+  getRecords(): T[] {
     return this.records$.value;
   }
 
-  getRecordState(record: Record): RecordState {
+  getRecordState(record: T): RecordState {
     return this.states.get(record.rid) || {
       focused: false,
       selected: false
@@ -72,14 +72,14 @@ export class DataStore {
     }
   }
 
-  focus(record: Record, exclusive: boolean = true) {
+  focus(record: T, exclusive: boolean = true) {
     if (exclusive === true) {
       this.unfocusAll();
     }
     this.updateRecordState(record, {focused: true});
   }
 
-  select(record: Record, focus: boolean = true, exclusive: boolean = true) {
+  select(record: T, focus: boolean = true, exclusive: boolean = true) {
     const state = {selected: true};
     if (focus === true) {
       state['focused'] = true;
@@ -103,16 +103,16 @@ export class DataStore {
     this.updateRecordsState(this.getRecords(), state);
   }
 
-  private updateRecordState(record: Record, stateChanges: { [key: string]: any }) {
+  private updateRecordState(record: T, stateChanges: { [key: string]: any }) {
     const states = new Map(this.states);
     const state = this.getRecordState(record);
     states.set(record.rid, Object.assign(state, stateChanges));
     this.states = states;
   }
 
-  private updateRecordsState(records: Record[], stateChanges: { [key: string]: any }) {
+  private updateRecordsState(records: T[], stateChanges: { [key: string]: any }) {
     const states = new Map(this.states);
-    records.forEach((record: Record) => {
+    records.forEach((record: T) => {
       const state = this.getRecordState(record);
       states.set(record.rid, Object.assign(state, stateChanges));
     });
@@ -121,7 +121,7 @@ export class DataStore {
 
   private resetStates() {
     const states = new Map(this.states);
-    const rids = this.getRecords().map((record: Record) => record.rid);
+    const rids = this.getRecords().map((record: T) => record.rid);
     this.states.forEach((state: RecordState, key: string) => {
       if (rids.indexOf(key) < 0) {
         this.states.delete(key);

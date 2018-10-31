@@ -42,7 +42,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   // True after the initial context is loaded
   private contextLoaded = false;
 
-  get searchStore(): DataStore {
+  get searchStore(): DataStore<Record> {
     return this.searchStoreService.getStore();
   }
 
