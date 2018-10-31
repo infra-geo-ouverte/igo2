@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
 
-import { Feature, OverlayService, OverlayAction } from '@igo2/geo';
+import { Feature, OverlayService } from '@igo2/geo';
 import {
   Place,
   PlaceCategory
@@ -72,7 +72,7 @@ export class PlaceSelectorComponent implements OnInit {
       this.clearFeature();
     } else {
       this.overlayFeature = feature;
-      this.overlayService.setFeatures([feature], OverlayAction.Zoom);
+      this.overlayService.setFeatures([feature], 'zoom');
     }
   }
 
