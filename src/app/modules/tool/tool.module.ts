@@ -4,6 +4,7 @@ import { FadqAddressEditorToolModule } from './address-editor-tool/address-edito
 import { FadqClientInfoToolModule } from './client-info-tool/client-info-tool.module';
 import { FadqNavigationToolModule } from './navigation-tool/navigation-tool.module';
 import { FadqSearchResultsToolModule } from './search-results-tool/search-results-tool.module';
+import { FadqCatalogToolModule } from './catalog-tool/catalog-tool.module';
 
 @NgModule({
   imports: [],
@@ -12,7 +13,8 @@ import { FadqSearchResultsToolModule } from './search-results-tool/search-result
     FadqAddressEditorToolModule,
     FadqClientInfoToolModule,
     FadqNavigationToolModule,
-    FadqSearchResultsToolModule
+    FadqSearchResultsToolModule,
+    FadqCatalogToolModule
   ]
 })
 export class FadqToolModule {}

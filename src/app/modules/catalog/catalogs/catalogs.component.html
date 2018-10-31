@@ -1,0 +1,13 @@
+<igo-list [navigation]="true">
+    <ng-template ngFor let-record [ngForOf]="store.records$ | async">
+      <fadq-catalog
+        igoListItem
+        color="accent"
+        [map]="map"
+        [catalog]="record"
+        [selected]="store.getRecordState(record).selected"
+        (select)="doSelect(record)"
+        (unselect)="unselect.emit(record)">
+      </fadq-catalog>
+    </ng-template>
+</igo-list>
