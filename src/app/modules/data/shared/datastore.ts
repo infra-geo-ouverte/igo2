@@ -1,4 +1,5 @@
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { Record, RecordState } from './data.interface';
 
@@ -25,28 +26,32 @@ export class DataStore {
   }
 
   constructor() {
-    this.states$$ = this.states$.subscribe(states => {
-      const focused = this.getRecords()
-        .filter(record => {
-          return this.getRecordState(record).focused === true;
-        });
-      this.focused$.next(focused);
+    this.states$$ = this.states$
+      .pipe(debounceTime(100))
+      .subscribe(states => {
+        const focused = this.getRecords()
+          .filter(record => {
+            return this.getRecordState(record).focused === true;
+          });
+        this.focused$.next(focused);
 
-      const selected = this.getRecords()
-        .filter(record => {
-          return this.getRecordState(record).selected === true;
-        });
-      this.selected$.next(selected);
-    });
+        const selected = this.getRecords()
+          .filter(record => {
+            return this.getRecordState(record).selected === true;
+          });
+        this.selected$.next(selected);
+      });
   }
 
   destroy() {
     this.states$$.unsubscribe();
   }
 
-  setRecords(records: Record[]) {
+  setRecords(records: Record[], soft: boolean = false) {
     this.records$.next(records);
-    this.resetStates();
+    if (soft === false) {
+      this.resetStates();
+    }
   }
 
   getRecords(): Record[] {
@@ -60,9 +65,11 @@ export class DataStore {
     } as RecordState;
   }
 
-  clear() {
+  clear(soft: boolean = false) {
     this.records$.next([]);
-    this.resetStates();
+    if (soft === false) {
+      this.resetStates();
+    }
   }
 
   focus(record: Record, exclusive: boolean = true) {
