@@ -1,7 +1,5 @@
 import { GeoJsonGeometryTypes } from 'geojson';
 
-import { Record } from '../../data/shared/data.interface';
-
 export interface Feature {
   type: string;
   projection: string;
@@ -13,8 +11,4 @@ export interface Feature {
 export interface FeatureGeometry {
   type: GeoJsonGeometryTypes;
   coordinates: any;
-}
-
-export interface FeatureRecord extends Record {
-  data: Feature;
 }

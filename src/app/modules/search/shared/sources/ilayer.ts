@@ -7,8 +7,9 @@ import { map } from 'rxjs/operators';
 import { LanguageService } from '@igo2/core';
 import { AnyLayerOptions } from '@igo2/geo';
 
+import { Record } from '../../../data/shared/data.interface';
 import { LAYER } from '../../../map/shared/map.enum';
-import { LayerRecord } from '../../../map/shared/map.interface';
+import { LayerInfo } from '../../../map/shared/map.interface';
 import {
   ILayerResult,
   ILayerResponse
@@ -45,7 +46,7 @@ export class ILayerSearchSource extends SearchSource {
     };
   }
 
-  search(term?: string): Observable<LayerRecord[]> {
+  search(term?: string): Observable<Record<LayerInfo>[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
@@ -62,11 +63,11 @@ export class ILayerSearchSource extends SearchSource {
     });
   }
 
-  private extractRecords(response: ILayerResponse): LayerRecord[] {
+  private extractRecords(response: ILayerResponse): Record<LayerInfo>[] {
     return response.items.map(result => this.resultToRecord(result));
   }
 
-  private resultToRecord(result: ILayerResult): LayerRecord {
+  private resultToRecord(result: ILayerResult): Record<LayerInfo> {
     const properties = this.computeProperties(result);
     const layerOptions = this.computeLayerOptions(result);
 
@@ -82,7 +83,7 @@ export class ILayerSearchSource extends SearchSource {
       },
       data: {
         properties: properties,
-        layer: layerOptions
+        options: layerOptions
       }
     };
   }

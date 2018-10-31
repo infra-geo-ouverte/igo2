@@ -1,9 +1,9 @@
 <igo-list [navigation]="true">
-  <ng-container *ngIf="!dataStore.empty">
+  <ng-container *ngIf="!store.empty">
     <ng-template
       #groupTemplate
       ngFor let-group let-i="index"
-      [ngForOf]="(dataStore.records$ | async).sort(sortByOrder) | recordGroup">
+      [ngForOf]="(store.records$ | async).sort(sortByOrder) | recordGroup">
 
       <igo-collapsible
         title="{{group.source.title}} ({{group.records.length}})"
@@ -21,7 +21,7 @@
             igoListItem
             color="accent"
             [record]="record"
-            [focused]="dataStore.getRecordState(record).focused"
+            [focused]="store.getRecordState(record).focused"
             (focus)="doFocus(record)"
             (select)="doSelect(record)"
             (unfocus)="unfocus.emit(record)"

@@ -27,7 +27,7 @@ import { SearchStoreService } from '../../search/shared/search-store.service';
 })
 export class SearchResultsToolComponent {
 
-  get dataStore(): DataStore {
+  get store(): DataStore<Record> {
     return this.searchStoreService.getStore();
   }
 
@@ -39,22 +39,22 @@ export class SearchResultsToolComponent {
   ) {}
 
   handleRecordFocus(record: Record) {
-    this.maybeAddFeatureToMap(record);
+    this.tryAddFeatureToMap(record);
   }
 
   handleRecordSelect(record: Record) {
-    this.maybeAddFeatureToMap(record);
-    this.maybeAddLayerToMap(record);
+    this.tryAddFeatureToMap(record);
+    this.tryAddLayerToMap(record);
   }
 
-  private maybeAddFeatureToMap(record: Record) {
+  private tryAddFeatureToMap(record: Record) {
     const feature = getFeatureFromRecord(record);
     if (feature !== undefined) {
       // this.overlayService.setFeatures([feature], OverlayAction.ZoomIfOutMapExtent);
     }
   }
 
-  private maybeAddLayerToMap(record: Record) {
+  private tryAddLayerToMap(record: Record) {
     const map = this.mapService.getMap();
     const layerOptions = getLayerOptionsFromRecord(record);
     if (map === undefined || layerOptions === undefined) {

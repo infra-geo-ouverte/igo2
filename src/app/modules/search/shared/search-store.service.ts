@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/datastore';
 
 @Injectable({
@@ -7,13 +8,13 @@ import { DataStore } from '../../data/shared/datastore';
 })
 export class SearchStoreService {
 
-  private store: DataStore;
+  private store: DataStore<Record>;
 
   constructor() {
     this.store = new DataStore();
   }
 
-  getStore(): DataStore {
+  getStore(): DataStore<Record> {
     return this.store;
   }
 }

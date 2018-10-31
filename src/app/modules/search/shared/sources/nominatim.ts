@@ -4,10 +4,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { Record } from '../../../data/shared/data.interface';
 import { FEATURE } from '../../../feature/shared/feature.enum';
 import {
   FeatureGeometry,
-  FeatureRecord
+  Feature
 } from '../../../feature/shared/feature.interface';
 import { NominatimResult } from './nominatim.interface';
 import { SearchSource } from './source';
@@ -34,7 +35,7 @@ export class NominatimSearchSource extends SearchSource {
     };
   }
 
-  search(term?: string): Observable<FeatureRecord[]> {
+  search(term?: string): Observable<Record<Feature>[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
@@ -52,11 +53,11 @@ export class NominatimSearchSource extends SearchSource {
     });
   }
 
-  private extractRecords(response: Array<NominatimResult>): FeatureRecord[] {
+  private extractRecords(response: Array<NominatimResult>): Record<Feature>[] {
     return response.map(result => this.resultToRecord(result));
   }
 
-  private resultToRecord(result: NominatimResult): FeatureRecord {
+  private resultToRecord(result: NominatimResult): Record<Feature> {
     const properties = this.computeProperties(result);
     const geometry = this.computeGeometry(result);
     const extent = this.computeExtent(result);
