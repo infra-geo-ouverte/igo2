@@ -16,7 +16,7 @@ import { IgoLanguageModule } from '@igo2/core';
 
 import { RecordGroupPipe } from './record-group.pipe';
 import { SearchResultsComponent } from './search-results.component';
-import { SearchResultsItemComponent } from './search-results-item.component';
+import { SearchResultComponent } from './search-result.component';
 
 @NgModule({
   imports: [
@@ -35,7 +35,7 @@ import { SearchResultsItemComponent } from './search-results-item.component';
   declarations: [
     RecordGroupPipe,
     SearchResultsComponent,
-    SearchResultsItemComponent
+    SearchResultComponent
   ]
 })
 export class FadqSearchResultsModule {}
