@@ -1,12 +1,5 @@
 import { DataProvider } from './dataprovider';
 
-export interface Record<T = { [key: string]: any }> {
-  rid: string;
-  meta: RecordMeta;
-  data: T;
-  provider?: DataProvider;
-}
-
 export interface RecordMeta {
   dataType?: string;
   id?: string | number;
@@ -17,6 +10,13 @@ export interface RecordMeta {
   titleHtmlProperty?: string;
   icon?: string;
   iconProperty?: string;
+}
+
+export interface Record<T = { [key: string]: any }, M = RecordMeta> {
+  rid: string;
+  meta: M;
+  data: T;
+  provider?: DataProvider;
 }
 
 export interface RecordState {

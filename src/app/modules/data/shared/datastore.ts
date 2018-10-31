@@ -3,23 +3,23 @@ import { debounceTime } from 'rxjs/operators';
 
 import { Record, RecordState } from './data.interface';
 
-export class DataStore<T extends Record> {
+export class DataStore<T extends Record, S extends RecordState = RecordState> {
 
   public records$ = new BehaviorSubject<T[]>([]);
-  public states$ = new Subject<Map<string, RecordState>>();
+  public states$ = new Subject<Map<string, S>>();
   public focused$ = new Subject<T[]>();
   public selected$ = new Subject<T[]>();
 
   private states$$: Subscription;
 
-  get states(): Map<string, RecordState> {
+  get states(): Map<string, S> {
     return this._states;
   }
-  set states(states: Map<string, RecordState>) {
+  set states(states: Map<string, S>) {
     this._states = states;
     this.states$.next(states);
   }
-  _states: Map<string, RecordState> = new Map();
+  _states: Map<string, S> = new Map();
 
   get empty() {
     return this.getRecords().length === 0;
@@ -58,11 +58,11 @@ export class DataStore<T extends Record> {
     return this.records$.value;
   }
 
-  getRecordState(record: T): RecordState {
+  getRecordState(record: T): S {
     return this.states.get(record.rid) || {
       focused: false,
       selected: false
-    } as RecordState;
+    } as S;
   }
 
   clear(soft: boolean = false) {
