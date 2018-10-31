@@ -169,12 +169,15 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   private handleTermChanged(term: string | undefined) {
     if (term === undefined || term === '') {
+      if (this.dataStore !== undefined) {
+        this.dataStore.clear();
+      }
       return;
     }
 
     this.change.emit(term);
     if (this.dataStore !== undefined) {
-      this.dataStore.clear();
+      this.dataStore.clear(true);
     }
 
     const researches = this.searchService.search(term);
@@ -193,7 +196,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       const newRecords = this.dataStore.getRecords()
         .filter(record =>  record.provider !== source)
         .concat(records);
-      this.dataStore.setRecords(newRecords);
+      this.dataStore.setRecords(newRecords, true);
     }
   }
 

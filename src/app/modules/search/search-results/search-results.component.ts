@@ -23,11 +23,11 @@ export enum DisplayMode {
 }
 
 @Component({
-  selector: 'fadq-search-store',
-  templateUrl: './search-store.component.html',
+  selector: 'fadq-search-results',
+  templateUrl: './search-results.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchStoreComponent implements OnInit, OnDestroy {
+export class SearchResultsComponent implements OnInit, OnDestroy {
 
   public displayMode = DisplayMode;
 
@@ -64,7 +64,7 @@ export class SearchStoreComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.records$$ = this.dataStore.records$
-      .subscribe((records: Record[]) => this.cdRef.detectChanges());
+      .subscribe((records: Record[]) => this.handleRecordsChange(records));
 
     this.focused$$ = this.dataStore.focused$
       .pipe(
@@ -114,5 +114,9 @@ export class SearchStoreComponent implements OnInit, OnDestroy {
     this.selected = [record.rid];
     this.select.emit(record);
     this.dataStore.select(record, true, true);
+  }
+
+  private handleRecordsChange(records: Record[]) {
+    this.cdRef.detectChanges();
   }
 }

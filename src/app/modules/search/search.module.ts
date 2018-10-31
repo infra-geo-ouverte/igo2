@@ -9,19 +9,19 @@ import { provideILayerSearchSource } from './shared/sources/ilayer.provider';
 
 import { FadqSearchBarModule } from './search-bar/search-bar.module';
 import { FadqSearchSelectorModule } from './search-selector/search-selector.module';
-import { FadqSearchStoreModule } from './search-store/search-store.module';
+import { FadqSearchResultsModule } from './search-results/search-results.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FadqSearchBarModule,
     FadqSearchSelectorModule,
-    FadqSearchStoreModule
+    FadqSearchResultsModule
   ],
   exports: [
     FadqSearchBarModule,
     FadqSearchSelectorModule,
-    FadqSearchStoreModule
+    FadqSearchResultsModule
   ],
   declarations: []
 })
