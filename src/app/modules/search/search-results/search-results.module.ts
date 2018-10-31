@@ -15,8 +15,8 @@ import {
 import { IgoLanguageModule } from '@igo2/core';
 
 import { RecordGroupPipe } from './record-group.pipe';
-import { SearchStoreComponent } from './search-store.component';
-import { SearchStoreItemComponent } from './search-store-item.component';
+import { SearchResultsComponent } from './search-results.component';
+import { SearchResultsItemComponent } from './search-results-item.component';
 
 @NgModule({
   imports: [
@@ -30,12 +30,12 @@ import { SearchStoreItemComponent } from './search-store-item.component';
     IgoLanguageModule
   ],
   exports: [
-    SearchStoreComponent
+    SearchResultsComponent
   ],
   declarations: [
     RecordGroupPipe,
-    SearchStoreComponent,
-    SearchStoreItemComponent
+    SearchResultsComponent,
+    SearchResultsItemComponent
   ]
 })
-export class FadqSearchStoreModule {}
+export class FadqSearchResultsModule {}

@@ -8,11 +8,11 @@ import {
 import { Record } from '../../data/shared/data.interface';
 
 @Component({
-  selector: 'fadq-search-store-item',
-  templateUrl: './search-store-item.component.html',
+  selector: 'fadq-search-results-item',
+  templateUrl: './search-results-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchStoreItemComponent {
+export class SearchResultsItemComponent {
 
   @Input()
   get record(): Record {
