@@ -223,7 +223,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           const tool = this.toolService.getTool(toolNameToOpen);
           setTimeout(() => {
             this.toolService.selectTool(tool);
-          }, 1); // add delay fro translationservice to be injected
+          }, 1); // add delay for translationservice to be injected
         }
       }
     });
