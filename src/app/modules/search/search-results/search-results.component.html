@@ -22,8 +22,9 @@
             color="accent"
             [record]="record"
             [focused]="store.getRecordState(record).focused"
-            (focus)="doFocus(record)"
-            (select)="doSelect(record)"
+            [selected]="store.getRecordState(record).selected"
+            (focus)="focusRecord(record)"
+            (select)="selectRecord(record)"
             (unfocus)="unfocus.emit(record)"
             (unselect)="unselect.emit(record)">
           </fadq-search-results-item>

@@ -5,16 +5,14 @@ import {
   EventEmitter,
   ChangeDetectorRef,
   ChangeDetectionStrategy,
-  OnInit,
-  OnDestroy
+  OnDestroy,
+  OnInit
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
-import { arrayEqual } from '../../utils/array';
 import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/datastore';
+import { DataStoreController } from '../../data/shared/datastore-controller';
 import { SearchSource } from '../shared/sources/source';
 
 export enum DisplayMode {
@@ -31,11 +29,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   public displayMode = DisplayMode;
 
-  private records$$: Subscription;
-  private focused$$: Subscription;
-  private focused: string[] = [];
-  private selected$$: Subscription;
-  private selected: string[] = [];
+  private controller: DataStoreController;
+  private ready: boolean = false;
 
   @Input()
   get store(): DataStore<Record> {
@@ -63,38 +58,18 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.records$$ = this.store.records$
-      .subscribe((records: Record[]) => this.cdRef.detectChanges());
+    this.controller = new DataStoreController()
+      .withChangeDetector(this.cdRef)
+      .bind(this.store);
 
-    this.focused$$ = this.store.focused$
-      .pipe(
-        filter((records: Record[]) => {
-          const rids = records.map((record: Record) => record.rid);
-          return !arrayEqual(rids, this.focused);
-        })
-      )
-      .subscribe((records: Record[]) => {
-        this.focused = records.map((record: Record) => record.rid);
-        this.cdRef.detectChanges();
-      });
-
-    this.selected$$ = this.store.selected$
-      .pipe(
-        filter((records: Record[]) => {
-          const rids = records.map((record: Record) => record.rid);
-          return !arrayEqual(rids, this.selected);
-        })
-      )
-      .subscribe((records: Record[]) => {
-        this.selected = records.map((record: Record) => record.rid);
-        this.cdRef.detectChanges();
-      });
+    // This is required because igoListItem immediately
+    // emit an event when a record is set to "focused" or "selected"
+    // but, at that time our controller is not even initialized.
+    this.ready = true;
   }
 
   ngOnDestroy() {
-    this.records$$.unsubscribe();
-    this.focused$$.unsubscribe();
-    this.selected$$.unsubscribe();
+    this.controller.unbind();
   }
 
   sortByOrder(record1: Record, record2: Record) {
@@ -104,15 +79,20 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     );
   }
 
-  doFocus(record: Record) {
-    this.focused = [record.rid];
+  focusRecord(record: Record) {
+    if (!this.ready) {
+      return;
+    }
+    this.controller.focus(record, true);
     this.focus.emit(record);
-    this.store.focus(record, true);
   }
 
-  doSelect(record: Record) {
-    this.selected = [record.rid];
+  selectRecord(record: Record) {
+    if (!this.ready) {
+      return;
+    }
+    this.controller.select(record, true, true);
     this.select.emit(record);
-    this.store.select(record, true, true);
   }
+
 }
