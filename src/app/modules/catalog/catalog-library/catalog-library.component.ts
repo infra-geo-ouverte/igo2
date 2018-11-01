@@ -4,17 +4,16 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  OnInit,
+  OnDestroy
 } from '@angular/core';
-
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 import { IgoMap } from '@igo2/geo';
 
-import { arrayEqual } from '../../utils/array';
 import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/datastore';
+import { DataStoreController } from '../../data/shared/datastore-controller';
 import { Catalog } from '../shared/catalog.interface';
 
 @Component({
@@ -22,11 +21,9 @@ import { Catalog } from '../shared/catalog.interface';
   templateUrl: './catalog-library.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CatalogLibaryComponent {
+export class CatalogLibaryComponent implements OnInit, OnDestroy {
 
-  private catalogs$$: Subscription;
-  private selected$$: Subscription;
-  private selected: string[] = [];
+  private controller: DataStoreController;
 
   @Input()
   get store(): DataStore<Record<Catalog>> {
@@ -52,33 +49,19 @@ export class CatalogLibaryComponent {
   constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.catalogs$$ = this.store.records$
-      .subscribe((catalogs: Record<Catalog>[]) => {
-        this.cdRef.detectChanges()
-      });
-
-    this.selected$$ = this.store.selected$
-      .pipe(
-        filter((catalogs: Record<Catalog>[]) => {
-          const rids = catalogs.map((catalog: Record<Catalog>) => catalog.rid);
-          return !arrayEqual(rids, this.selected);
-        })
-      )
-      .subscribe((catalogs: Record<Catalog>[]) => {
-        this.selected = catalogs.map((catalog: Record<Catalog>) => catalog.rid);
-        this.cdRef.detectChanges();
-      });
+    this.store.resetStates();
+    this.controller = new DataStoreController()
+      .withChangeDetector(this.cdRef)
+      .bind(this.store);
   }
 
   ngOnDestroy() {
-    this.catalogs$$.unsubscribe();
-    this.selected$$.unsubscribe();
+    this.controller.unbind();
   }
 
-  doSelect(catalog: Record<Catalog>) {
-    this.selected = [catalog.rid];
-    this.select.emit(catalog);
+  selectCatalog(catalog: Record<Catalog>) {
     this.store.select(catalog, true, true);
+    this.select.emit(catalog);
   }
 
 }

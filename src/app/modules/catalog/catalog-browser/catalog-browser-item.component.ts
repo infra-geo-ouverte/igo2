@@ -2,7 +2,8 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { getRecordTitle, getRecordIcon } from '../../data/shared/data.utils';
 import { Record } from '../../data/shared/data.interface';
-import { CatalogItem } from './catalog-browser.component';
+import { CatalogItem } from '../shared/catalog.interface';
+import { CatalogItemType } from '../shared/catalog.enum';
 
 @Component({
   selector: 'fadq-catalog-browser-item',
@@ -47,6 +48,14 @@ export class CatalogBrowserItemComponent {
     this._color = value;
   }
   private _color = 'primary';
+
+  get isGroup(): boolean {
+    return this.item.data.type === CatalogItemType.Group;
+  }
+
+  get isLayer(): boolean {
+    return this.item.data.type === CatalogItemType.Layer;
+  }
 
   get title(): string {
     return getRecordTitle(this.item);

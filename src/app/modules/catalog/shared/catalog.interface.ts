@@ -1,11 +1,15 @@
+import { TimeFilterOptions } from '@igo2/geo';
 import { RecordState } from '../../data/shared/data.interface';
+import { LayerInfo } from '../../map/shared/map.interface';
+import { CatalogItemType } from './catalog.enum';
 
 export interface Catalog {
-  id?: string;
-  title?: string;
-  url?: string;
+  title: string;
+  url: string;
+  items?: CatalogItem[];
   type?: string;
   regFilters?: Array<string>;
+  timeFilter?: TimeFilterOptions;
 }
 
 export interface CatalogServiceOptions {
@@ -16,4 +20,18 @@ export interface CatalogServiceOptions {
 export interface CatalogItemState extends RecordState {
   added?: boolean;
   collapsed?: boolean;
+}
+
+export interface CatalogItem {
+  id: string;
+  title: string;
+  type: CatalogItemType;
+}
+
+export interface CatalogItemLayer extends CatalogItem {
+  data: LayerInfo;
+}
+
+export interface CatalogItemGroup extends CatalogItem {
+  items?: CatalogItem[];
 }

@@ -12,7 +12,8 @@ import {
   IgoListModule
 } from '@igo2/common';
 
-import { CatalogBrowserComponent, } from './catalog-browser.component';
+import { CatalogItemRecordsPipe } from './catalog-item-records.pipe';
+import { CatalogBrowserComponent } from './catalog-browser.component';
 import { CatalogBrowserItemComponent } from './catalog-browser-item.component';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { CatalogBrowserItemComponent } from './catalog-browser-item.component';
     CatalogBrowserComponent
   ],
   declarations: [
+    CatalogItemRecordsPipe,
     CatalogBrowserComponent,
     CatalogBrowserItemComponent
   ]

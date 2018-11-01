@@ -4,32 +4,26 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  OnInit,
+  OnDestroy
 } from '@angular/core';
-
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 import { IgoMap } from '@igo2/geo';
 
-import { arrayEqual } from '../../utils/array';
 import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/datastore';
-import { LayerInfo, LayerGroup } from '../../map/shared/map.interface';
-import { CatalogItemState } from '../shared/catalog.interface';
-
-export type CatalogItem = LayerInfo | LayerGroup;
+import { DataStoreController } from '../../data/shared/datastore-controller';
+import { CatalogItem, CatalogItemState } from '../shared/catalog.interface';
 
 @Component({
   selector: 'fadq-catalog-browser',
   templateUrl: './catalog-browser.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CatalogBrowserComponent {
+export class CatalogBrowserComponent implements OnInit, OnDestroy {
 
-  private items$$: Subscription;
-  private selected$$: Subscription;
-  private selected: string[] = [];
+  private controller: DataStoreController;
 
   @Input()
   get store(): DataStore<Record<CatalogItem>, CatalogItemState> {
@@ -55,31 +49,19 @@ export class CatalogBrowserComponent {
   constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.items$$ = this.store.records$
-      .subscribe((items: Record<CatalogItem>[]) => this.cdRef.detectChanges());
-
-    this.selected$$ = this.store.selected$
-      .pipe(
-        filter((items: Record<CatalogItem>[]) => {
-          const rids = items.map((item: Record<CatalogItem>) => item.rid);
-          return !arrayEqual(rids, this.selected);
-        })
-      )
-      .subscribe((items: Record<CatalogItem>[]) => {
-        this.selected = items.map((item: Record<CatalogItem>) => item.rid);
-        this.cdRef.detectChanges();
-      });
+    this.store.resetStates();
+    this.controller = new DataStoreController()
+      .withChangeDetector(this.cdRef)
+      .bind(this.store);
   }
 
   ngOnDestroy() {
-    this.items$$.unsubscribe();
-    this.selected$$.unsubscribe();
+    this.controller.unbind();
   }
 
-  doSelect(item: Record<CatalogItem>) {
-    this.selected = [item.rid];
-    this.select.emit(item);
-    this.store.select(item, true, true);
+  selectCatalogItem(catalog: Record<CatalogItem>) {
+    this.store.select(catalog, true, true);
+    this.select.emit(catalog);
   }
 
 }

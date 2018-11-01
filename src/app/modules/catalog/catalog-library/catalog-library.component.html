@@ -5,8 +5,7 @@
         color="accent"
         [map]="map"
         [catalog]="record"
-        [selected]="store.getRecordState(record).selected"
-        (select)="doSelect(record)"
+        (select)="selectCatalog(record)"
         (unselect)="unselect.emit(record)">
       </fadq-catalog-library-item>
     </ng-template>
