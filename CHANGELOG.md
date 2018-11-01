@@ -1,3 +1,20 @@
+<a name="0.21.1"></a>
+## [0.21.1](https://github.com/infra-geo-ouverte/igo2/compare/0.21.0...0.21.1) (2018-11-01)
+
+
+### Bug Fixes
+
+* **apis:** change url api to apis ([46dbaa5](https://github.com/infra-geo-ouverte/igo2/commit/46dbaa5))
+
+
+### Features
+
+* **igo2:** upgrade igo2-lib to 0.24.0 ([45f5cf0](https://github.com/infra-geo-ouverte/igo2/commit/45f5cf0))
+* **igo2-lib:** upgrade to 0.24.1 ([a5afa42](https://github.com/infra-geo-ouverte/igo2/commit/a5afa42))
+* **portal:** Open a tool based on url ([#236](https://github.com/infra-geo-ouverte/igo2/issues/236)) ([a1c6633](https://github.com/infra-geo-ouverte/igo2/commit/a1c6633))
+
+
+
 <a name="0.21.0"></a>
 # [0.21.0](https://github.com/infra-geo-ouverte/igo2/compare/0.20.0...0.21.0) (2018-10-30)
 
