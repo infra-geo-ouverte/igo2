@@ -44,7 +44,7 @@
       "title": "WFS",
       "sourceOptions": {
         "type": "wfs",
-        "url": "https://geoegl.msp.gouv.qc.ca/igo2/api/ws/igo_gouvouvert.fcgi",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
         "params": {
           "featureTypes": "vg_observation_v_autre_wmst",
           "fieldNameGeometry": "geometry",
@@ -105,7 +105,7 @@
       "title": "Embâcle",
       "sourceOptions": {
         "type": "wms",
-        "url": "https://geoegl.msp.gouv.qc.ca/igo2/api/ws/igo_gouvouvert.fcgi",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
         "queryable": true,
         "params": {
           "layers": "vg_observation_v_inondation_embacle_wmst",

@@ -30,7 +30,7 @@ export const environment: Environment = {
         searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
       },
       datasource: {
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/igo2/api/layers/search'
+        searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/layers/search'
       }
     },
     language: {
