@@ -10,7 +10,8 @@ import { IgoListModule, IgoCollapsibleModule } from '@igo2/common';
 
 import { CatalogService } from './shared/catalog.service';
 import { CatalogStoreService } from './shared/catalog-store.service';
-import { FadqCatalogsModule } from './catalogs/catalogs.module';
+import { FadqCatalogBrowserModule } from './catalog-browser/catalog-browser.module';
+import { FadqCatalogLibraryModule } from './catalog-library/catalog-library.module';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { FadqCatalogsModule } from './catalogs/catalogs.module';
     IgoCollapsibleModule
   ],
   exports: [
-    FadqCatalogsModule
+    FadqCatalogBrowserModule,
+    FadqCatalogLibraryModule
   ],
   declarations: []
 })

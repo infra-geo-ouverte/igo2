@@ -21,11 +21,11 @@ import { CatalogItemState } from '../shared/catalog.interface';
 export type CatalogItem = LayerInfo | LayerGroup;
 
 @Component({
-  selector: 'fadq-catalog-items',
-  templateUrl: './catalog-items.component.html',
+  selector: 'fadq-catalog-browser',
+  templateUrl: './catalog-browser.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CatalogItemsComponent {
+export class CatalogBrowserComponent {
 
   private items$$: Subscription;
   private selected$$: Subscription;

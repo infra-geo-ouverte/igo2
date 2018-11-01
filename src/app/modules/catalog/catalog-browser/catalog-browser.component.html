@@ -1,6 +1,6 @@
 <igo-list [navigation]="true">
   <ng-template ngFor let-item [ngForOf]="store.records$ | async">
-    <fadq-catalog-item
+    <fadq-catalog-browser-item
       igoListItem
       color="accent"
       [item]="item"
@@ -9,6 +9,6 @@
       (focus)="doFocus(item)"
       (select)="doSelect(item)"
       (unselect)="unselect.emit(item)">
-    </fadq-catalog-item>
+    </fadq-catalog-browser-item>
   </ng-template>
 </igo-list>

@@ -2,15 +2,15 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { getRecordTitle, getRecordIcon } from '../../data/shared/data.utils';
 import { Record } from '../../data/shared/data.interface';
-import { CatalogItem } from './catalog-items.component';
+import { CatalogItem } from './catalog-browser.component';
 
 @Component({
-  selector: 'fadq-catalog-item',
-  templateUrl: './catalog-item.component.html',
-  styleUrls: ['./catalog-item.component.scss'],
+  selector: 'fadq-catalog-browser-item',
+  templateUrl: './catalog-browser-item.component.html',
+  styleUrls: ['./catalog-browser-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CatalogItemComponent {
+export class CatalogBrowserItemComponent {
 
   @Input()
   get item(): Record<CatalogItem> {

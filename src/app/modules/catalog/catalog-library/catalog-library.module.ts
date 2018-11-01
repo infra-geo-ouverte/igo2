@@ -9,10 +9,8 @@ import {
 
 import { IgoListModule } from '@igo2/common';
 
-import { FadqCatalogItemsModule } from '../catalog-items/catalog-items.module';
-
-import { CatalogsComponent, } from './catalogs.component';
-import { CatalogComponent } from './catalog.component';
+import { CatalogLibaryComponent, } from './catalog-library.component';
+import { CatalogLibaryItemComponent } from './catalog-library-item.component';
 
 @NgModule({
   imports: [
@@ -20,15 +18,14 @@ import { CatalogComponent } from './catalog.component';
     MatIconModule,
     MatListModule,
     MatTooltipModule,
-    IgoListModule,
-    FadqCatalogItemsModule
+    IgoListModule
   ],
   exports: [
-    CatalogsComponent
+    CatalogLibaryComponent
   ],
   declarations: [
-    CatalogsComponent,
-    CatalogComponent
+    CatalogLibaryComponent,
+    CatalogLibaryItemComponent
   ]
 })
-export class FadqCatalogsModule {}
+export class FadqCatalogLibraryModule {}

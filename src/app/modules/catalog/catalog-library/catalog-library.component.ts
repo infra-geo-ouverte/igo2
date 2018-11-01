@@ -18,11 +18,11 @@ import { DataStore } from '../../data/shared/datastore';
 import { Catalog } from '../shared/catalog.interface';
 
 @Component({
-  selector: 'fadq-catalogs',
-  templateUrl: './catalogs.component.html',
+  selector: 'fadq-catalog-library',
+  templateUrl: './catalog-library.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CatalogsComponent {
+export class CatalogLibaryComponent {
 
   private catalogs$$: Subscription;
   private selected$$: Subscription;

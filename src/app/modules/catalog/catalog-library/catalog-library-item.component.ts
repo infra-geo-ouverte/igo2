@@ -7,11 +7,11 @@ import { Record } from '../../data/shared/data.interface';
 import { Catalog } from '../shared/catalog.interface';
 
 @Component({
-  selector: 'fadq-catalog',
-  templateUrl: './catalog.component.html',
-  styleUrls: ['./catalog.component.scss']
+  selector: 'fadq-catalog-library-item',
+  templateUrl: './catalog-library-item.component.html',
+  styleUrls: ['./catalog-library-item.component.scss']
 })
-export class CatalogComponent {
+export class CatalogLibaryItemComponent {
 
   public color = 'primary';
 

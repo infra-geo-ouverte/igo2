@@ -12,8 +12,8 @@ import {
   IgoListModule
 } from '@igo2/common';
 
-import { CatalogItemsComponent, } from './catalog-items.component';
-import { CatalogItemComponent } from './catalog-item.component';
+import { CatalogBrowserComponent, } from './catalog-browser.component';
+import { CatalogBrowserItemComponent } from './catalog-browser-item.component';
 
 @NgModule({
   imports: [
@@ -25,11 +25,11 @@ import { CatalogItemComponent } from './catalog-item.component';
     IgoCollapsibleModule
   ],
   exports: [
-    CatalogItemsComponent
+    CatalogBrowserComponent
   ],
   declarations: [
-    CatalogItemsComponent,
-    CatalogItemComponent
+    CatalogBrowserComponent,
+    CatalogBrowserItemComponent
   ]
 })
-export class FadqCatalogItemsModule {}
+export class FadqCatalogBrowserModule {}
