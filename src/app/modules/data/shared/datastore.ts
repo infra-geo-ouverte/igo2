@@ -26,32 +26,22 @@ export class DataStore<T extends Record, S extends RecordState = RecordState> {
   }
 
   constructor() {
-    this.states$$ = this.states$
-      .pipe(debounceTime(100))
-      .subscribe(states => {
-        const focused = this.getRecords()
-          .filter(record => {
-            return this.getRecordState(record).focused === true;
-          });
-        this.focused$.next(focused);
-
-        const selected = this.getRecords()
-          .filter(record => {
-            return this.getRecordState(record).selected === true;
-          });
-        this.selected$.next(selected);
-      });
+    this.subscribeToStatesChanges();
   }
 
   destroy() {
     this.states$$.unsubscribe();
   }
 
-  setRecords(records: T[], soft: boolean = false) {
+  setRecords(records: T[], soft = false) {
     this.records$.next(records);
     if (soft === false) {
       this.resetStates();
     }
+  }
+
+  clear(soft = false) {
+    this.setRecords([], soft);
   }
 
   getRecords(): T[] {
@@ -65,21 +55,22 @@ export class DataStore<T extends Record, S extends RecordState = RecordState> {
     } as S;
   }
 
-  clear(soft: boolean = false) {
-    this.records$.next([]);
-    if (soft === false) {
-      this.resetStates();
-    }
-  }
-
-  focus(record: T, exclusive: boolean = true) {
+  focus(record: T, exclusive = true) {
     if (exclusive === true) {
       this.unfocusAll();
     }
     this.updateRecordState(record, {focused: true});
   }
 
-  select(record: T, focus: boolean = true, exclusive: boolean = true) {
+  unfocus(record: T) {
+    this.updateRecordState(record, {focused: false});
+  }
+
+  unfocusAll() {
+    this.updateRecordsState(this.getRecords(), {focused: false});
+  }
+
+  select(record: T, focus = true, exclusive = true) {
     const state = {selected: true};
     if (focus === true) {
       state['focused'] = true;
@@ -91,16 +82,20 @@ export class DataStore<T extends Record, S extends RecordState = RecordState> {
     this.updateRecordState(record, state);
   }
 
-  unfocusAll() {
-    this.updateRecordsState(this.getRecords(), {focused: false});
-  }
-
-  unselectAll(unfocus: boolean = true) {
+  unselect(record: T, unfocus = true) {
     const state = {selected: false};
     if (unfocus === true) {
       state['focused'] = false;
     }
-    this.updateRecordsState(this.getRecords(), state);
+    this.updateRecordState(record, state);
+  }
+
+  unselectAll(unfocus = true) {
+    const state = {selected: false};
+    if (unfocus === true) {
+      state['focused'] = false;
+    }
+    this.updateRecordsState(this.getRecords(), {selected: false});
   }
 
   private updateRecordState(record: T, stateChanges: { [key: string]: any }) {
@@ -122,10 +117,25 @@ export class DataStore<T extends Record, S extends RecordState = RecordState> {
   private resetStates() {
     const states = new Map(this.states);
     const rids = this.getRecords().map((record: T) => record.rid);
-    this.states.forEach((state: RecordState, key: string) => {
+    states.forEach((state: RecordState, key: string) => {
       if (rids.indexOf(key) < 0) {
-        this.states.delete(key);
+        states.delete(key);
       }
     });
+    this.states = states;
+  }
+
+  private subscribeToStatesChanges() {
+    this.states$$ = this.states$
+      .pipe(debounceTime(100))
+      .subscribe(states => {
+        const focused = this.getRecords()
+          .filter(record => this.getRecordState(record).focused === true);
+        this.focused$.next(focused);
+
+        const selected = this.getRecords()
+          .filter(record => this.getRecordState(record).selected === true);
+        this.selected$.next(selected);
+      });
   }
 }
