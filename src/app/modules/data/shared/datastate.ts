@@ -1,27 +1,18 @@
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { RecordState } from './data.interface';
 
 export class DataState<S extends { [key: string]: any } = RecordState> {
 
-  public states$ = new Subject<Map<string, S>>();
+  public states$ = new BehaviorSubject<Map<string, S>>(new Map());
 
-  get states(): Map<string, S> {
-    return this._states;
-  }
-  set states(states: Map<string, S>) {
-    this._states = states;
-    this.states$.next(states);
-  }
-  _states: Map<string, S> = new Map();
-
-  get observable(): Subject<Map<string, S>> {
+  get observable(): BehaviorSubject<Map<string, S>> {
     return this.states$;
   } 
 
   constructor() {}
 
   getByKey(key: string): S {
-    return (this.states.get(key) || {}) as S;
+    return (this.states$.value.get(key) || {}) as S;
   }
 
   setByKey(key: string, state: S) {
@@ -29,13 +20,13 @@ export class DataState<S extends { [key: string]: any } = RecordState> {
   }
 
   setByKeys(keys: string[], state: S) {
-    const states = new Map(this.states);
+    const states = new Map(this.states$.value);
     keys.forEach((key: string) => states.set(key, state));
-    this.states = states;
+    this.states$.next(states);
   }
 
   setAll(state: S) {
-    this.setByKeys(Array.from(this.states.keys()), state);
+    this.setByKeys(Array.from(this.states$.value.keys()), state);
   }
 
   updateByKey(key: string, changes: { [key: string]: any }) {
@@ -43,19 +34,19 @@ export class DataState<S extends { [key: string]: any } = RecordState> {
   }
 
   updateByKeys(keys: string[], changes: { [key: string]: any }) {
-    const states = new Map(this.states);
+    const states = new Map(this.states$.value);
     keys.forEach((key: string) => {
       const state = this.getByKey(key);
       states.set(key, Object.assign(state, changes));
     });
-    this.states = states;
+    this.states$.next(states);
   }
 
   updateAll(changes: { [key: string]: any }) {
-    this.updateByKeys(Array.from(this.states.keys()), changes);
+    this.updateByKeys(Array.from(this.states$.value.keys()), changes);
   }
 
   reset() {
-    this.states = new Map();
+    this.states$.next(new Map());
   }
 }

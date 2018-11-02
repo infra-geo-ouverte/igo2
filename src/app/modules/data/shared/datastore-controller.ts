@@ -48,6 +48,11 @@ export class DataStoreController {
     return this;
   }
 
+  withChangeDetector(cdRef: ChangeDetectorRef): DataStoreController {
+    this.cdRef = cdRef;
+    return this;
+  }
+
   focus(record: Record, exclusive: boolean = true) {
     if (exclusive === true) {
       this.focused.splice(0, this.focused.length);
@@ -67,12 +72,7 @@ export class DataStoreController {
     this.store.select(record, focus, exclusive);
   }
 
-  withChangeDetector(cdRef: ChangeDetectorRef): DataStoreController {
-    this.cdRef = cdRef;
-    return this;
-  }
-
-  private watch(store: DataStore<Record>): DataStoreController {
+  private watch(store: DataStore<Record>) {
     this.unwatch();
   
     this.records$$ = store.records$
@@ -95,19 +95,15 @@ export class DataStoreController {
         })
       )
       .subscribe((records: Record[]) => this.handleSelectedChange(records));
-
-    return this;
   }
 
-  private unwatch(): DataStoreController {
+  private unwatch() {
     if (this.store === undefined) {
       return;
     }
     this.records$$.unsubscribe();
     this.focused$$.unsubscribe();
     this.selected$$.unsubscribe();
-
-    return this;
   }
 
   private handleRecordsChange(records: Record[]) {
