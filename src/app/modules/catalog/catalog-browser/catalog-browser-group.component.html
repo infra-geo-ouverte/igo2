@@ -1,0 +1,18 @@
+
+<igo-collapsible [title]="title" [collapsed]="true">
+  <ng-template ngFor let-item [ngForOf]="store.records$ | async">
+    <ng-container *ngIf="isGroup(item)"></ng-container>
+  
+    <ng-container *ngIf="isLayer(item)">
+      <fadq-catalog-browser-layer
+        igoListItem
+        color="accent"
+        [layer]="item"
+        [focused]="store.getRecordState(item).focused"
+        [selected]="store.getRecordState(item).selected"
+        (select)="layerSelect.emit(item)"
+        (unselect)="layerUnselect.emit(item)">
+      </fadq-catalog-browser-layer>
+    </ng-container>
+  </ng-template>
+</igo-collapsible>

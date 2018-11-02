@@ -97,6 +97,10 @@ export class CatalogService {
       )
   }
 
+  private getCatalogBaseLayersOptions(catalog: Catalog): Observable<LayerOptions[]> {
+    return this.http.get<LayerOptions[]>(catalog.url);
+  }
+
   private loadCatalogWMSLayerItems(catalog: Catalog): Observable<CatalogItem[]> {
     return this.getCatalogWMSCapabilities(catalog)
       .pipe(
@@ -106,10 +110,6 @@ export class CatalogService {
           return items
         })
       )
-  }
-
-  private getCatalogBaseLayersOptions(catalog: Catalog): Observable<LayerOptions[]> {
-    return this.http.get<LayerOptions[]>(catalog.url);
   }
 
   private getCatalogWMSCapabilities(catalog: Catalog): Observable<any> {
@@ -161,6 +161,7 @@ export class CatalogService {
               title: layer.Title,
               properties: {},
               options: {
+                title: layer.Title,
                 sourceOptions: {
                   type: 'wms',
                   url: catalog.url,

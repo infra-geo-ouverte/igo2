@@ -1,11 +1,24 @@
 <igo-list [navigation]="false">
   <ng-template ngFor let-item [ngForOf]="store.records$ | async">
-    <fadq-catalog-browser-item
-      igoListItem
-      color="accent"
-      [item]="item"
-      (select)="selectCatalogItem(item)"
-      (unselect)="unselect.emit(item)">
-    </fadq-catalog-browser-item>
+    <ng-container *ngIf="isGroup(item)">
+      <fadq-catalog-browser-group
+        [group]="item"
+        [state]="store.getStateManager()"
+        (layerSelect)="selectLayer($event)"
+        (layerUnselect)="layerUnselect.emit($event)">
+      </fadq-catalog-browser-group>
+    </ng-container>
+
+    <ng-container *ngIf="isLayer(item)">
+      <fadq-catalog-browser-layer
+        igoListItem
+        [layer]="item"
+        [focused]="store.getRecordState(item).focused"
+        [selected]="store.getRecordState(item).selected"
+        (select)="selectLayer(item)"
+        (unselect)="layerUnselect.emit(item)">
+      </fadq-catalog-browser-layer>
+    </ng-container>
   </ng-template>
+  
 </igo-list>

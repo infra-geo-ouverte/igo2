@@ -12,9 +12,9 @@ import {
   IgoListModule
 } from '@igo2/common';
 
-import { CatalogItemRecordsPipe } from './catalog-item-records.pipe';
 import { CatalogBrowserComponent } from './catalog-browser.component';
-import { CatalogBrowserItemComponent } from './catalog-browser-item.component';
+import { CatalogBrowserLayerComponent } from './catalog-browser-layer.component';
+import { CatalogBrowserGroupComponent } from './catalog-browser-group.component';
 
 @NgModule({
   imports: [
@@ -29,9 +29,9 @@ import { CatalogBrowserItemComponent } from './catalog-browser-item.component';
     CatalogBrowserComponent
   ],
   declarations: [
-    CatalogItemRecordsPipe,
     CatalogBrowserComponent,
-    CatalogBrowserItemComponent
+    CatalogBrowserGroupComponent,
+    CatalogBrowserLayerComponent
   ]
 })
 export class FadqCatalogBrowserModule {}

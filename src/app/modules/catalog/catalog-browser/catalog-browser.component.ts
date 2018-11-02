@@ -9,12 +9,13 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { IgoMap } from '@igo2/geo';
+import { IgoMap, Layer, LayerService } from '@igo2/geo';
 
 import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/datastore';
 import { DataStoreController } from '../../data/shared/datastore-controller';
-import { CatalogItem, CatalogItemState } from '../shared/catalog.interface';
+import { CatalogItem, CatalogItemLayer, CatalogItemState } from '../shared/catalog.interface';
+import { CatalogItemType } from '../shared/catalog.enum';
 
 @Component({
   selector: 'fadq-catalog-browser',
@@ -43,13 +44,16 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   }
   private _map;
 
-  @Output() select = new EventEmitter<Record<CatalogItem>>();
-  @Output() unselect = new EventEmitter<Record<CatalogItem>>();
+  @Output() layerSelect = new EventEmitter<Record<CatalogItemLayer>>();
+  @Output() layerUnselect = new EventEmitter<Record<CatalogItemLayer>>();
 
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private layerService: LayerService,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    this.store.resetStates();
+    this.store.resetState();
     this.controller = new DataStoreController()
       .withChangeDetector(this.cdRef)
       .bind(this.store);
@@ -59,9 +63,26 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  selectCatalogItem(catalog: Record<CatalogItem>) {
-    this.store.select(catalog, true, true);
-    this.select.emit(catalog);
+  selectLayer(item: Record<CatalogItemLayer>) {
+    this.store.select(item, true, true);
+    this.layerSelect.emit(item);
+    if (this.map !== undefined) {
+      this.addLayerToMap(item);
+    }
   }
 
+  isGroup(item: Record<CatalogItem>): boolean {
+    return item.data.type === CatalogItemType.Group;
+  }
+
+  isLayer(item: Record<CatalogItem>): boolean {
+    return item.data.type === CatalogItemType.Layer;
+  }
+
+  private addLayerToMap(item: Record<CatalogItemLayer>) {
+    this.layerService.createAsyncLayer(item.data.options)
+      .subscribe((layer: Layer) => {
+        this.map.addLayer(layer);
+      });
+  }
 }
