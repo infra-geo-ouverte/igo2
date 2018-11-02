@@ -16,23 +16,23 @@
   },
 
   "navigation": {
-    "placeSelector.category.placeholder": "Catégorie",
+    "placeSelector.category.placeholder": "Type de zoom",
     "poiSelector.poi.placeholder": "Point d'intérêt",
     "categories": {
-      "mun": "Municipalités",
+      "mun": "Municipalité",
       "mrc": "MRC",
-      "ra": "Régions administratives",
-      "tcs": "Territoires des centres de service",
-      "sm": "Stations Météo",
+      "ra": "Région administrative",
+      "tcs": "Centre de services",
+      "sm": "Station Météo foin (an cour)",
       "zc1": "Zone céréales maïs fourrager oléagineux",
       "zc2": "Zone maïs-grain",
-      "rzc": "Régions zonage collectif"
+      "rzc": "Région zonage"
     }
   },
 
   "tools": {
-    "addressEditor": "Edition d'adresses",
+    "addressEditor": "Édition d'adresses",
     "clientInfo": "Client",
-    "navigation": "Navigation"
+    "navigation": "Zoom sur une région"
   }
 }
