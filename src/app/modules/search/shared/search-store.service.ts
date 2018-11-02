@@ -11,7 +11,7 @@ export class SearchStoreService {
   private store: DataStore<Record>;
 
   constructor() {
-    this.store = new DataStore();
+    this.store = new DataStore<Record>();
   }
 
   getStore(): DataStore<Record> {
