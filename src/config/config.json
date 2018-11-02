@@ -7,10 +7,14 @@
       }
   ],
   "catalog": {
+    "url": "http://chabou01-svn.fadq.qc/app/interne/igovisualisation/contexte_catalogue",
     "sources": [{
         "title": "Toutes les données",
         "url": "/swwf"
       }
     ]
+  },
+  "api": {
+    "url": "http://chabou01-svn.fadq.qc/app/interne"
   }
 }

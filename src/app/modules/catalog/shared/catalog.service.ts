@@ -1,73 +1,74 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, concat, of, merge, zip, empty } from 'rxjs';
 
 import { LanguageService, ConfigService } from '@igo2/core';
 import { LayerOptions, CapabilitiesService } from '@igo2/geo';
-import { Catalog, CatalogItem, CatalogItemLayer, CatalogItemGroup } from './catalog.interface';
+import {
+  Catalog,
+  CatalogItem,
+  CatalogItemLayer,
+  CatalogItemGroup,
+  CatalogServiceOptions
+} from './catalog.interface';
 import { CatalogItemType } from './catalog.enum';
-import { scan, startWith } from 'rxjs/operators';
+import { scan, startWith, flatMap, mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogService {
-  public catalog$ = new BehaviorSubject<Catalog>(undefined);
-  public catalogs$ = new BehaviorSubject<Catalog[]>(undefined);
-  private baseUrl: string;
 
   constructor(
     private http: HttpClient,
     private config: ConfigService,
     private languageService: LanguageService,
     private capabilitiesService: CapabilitiesService
-  ) {
-    const options = this.config.getConfig('context') || {};
+  ) {}
 
-    this.baseUrl = options.url;
-  }
-  /*
-  get(): Observable<Catalog[]> {
-    const url = this.baseUrl + '/catalogs';
-    return this.http.get<Catalog[]>(url);
-  }
+  loadCatalogs(): Observable<Catalog[]> {
+    const contextConfig = this.config.getConfig('context') || {};
+    const catalogConfig = this.config.getConfig('catalog') || {} as CatalogServiceOptions;
+    const apiUrl = catalogConfig.url || contextConfig.url;
 
-  getById(id: string): Observable<Catalog> {
-    const url = this.baseUrl + '/catalogs/' + id;
-    return this.http.get<Catalog>(url);
-  }
-
-  load() {
-    const catalogConfig = this.config.getConfig('catalog') || {};
-
-    if (!this.baseUrl) {
-      if (catalogConfig.sources) {
-        this.catalogs$.next(catalogConfig.sources);
-      }
-      return;
+    const catalogs = catalogConfig.sources || [];
+    if (apiUrl === undefined) {
+      return of(catalogs);
     }
 
-    this.get().subscribe(catalogs => {
-      if (catalogConfig.baseLayers) {
-        const translate = this.languageService.translate;
-        const title = translate.instant('igo.geo.CatalogTool.baseLayers');
-        catalogs.unshift({
-          title: title,
-          url: this.baseUrl + '/baselayers',
-          type: 'layers'
-        });
-      }
-      if (catalogConfig.sources) {
-        catalogs = catalogs.concat(catalogConfig.sources);
-      }
-      if (catalogs) {
-        this.catalogs$.next(catalogs);
-      }
-    });
+    const baseLayers = [];
+    if (catalogConfig.baseLayers) {
+      const translate = this.languageService.translate;
+      const title = translate.instant('igo.geo.CatalogTool.baseLayers');
+      baseLayers.push({
+        title: title,
+        url: apiUrl + '/baselayers',
+        type: 'baselayers'
+      });
+    }
+
+    const catalogsUrl = apiUrl + '/catalogs';
+    const request = this.http.get<Catalog[]>(catalogsUrl)
+      .pipe(
+        mergeMap(catalog => catalog)
+      )
+
+    const observables = [];
+    if (baseLayers.length > 0) {
+      observables.push(of(...baseLayers));
+    }
+
+    observables.push(request);
+
+    if (catalogs.length > 0) {
+      observables.push(of(...catalogs));
+    }
+
+    return zip(...observables);
   }
-  */
+
   loadCatalogItems(catalog: Catalog): Observable<CatalogItem[]> {
-    if (catalog.type === 'layers') {
+    if (catalog.type === 'baselayers') {
       return this.loadCatalogBaseLayerItems(catalog);
     }
     return this.loadCatalogWMSLayerItems(catalog);
@@ -81,6 +82,7 @@ export class CatalogService {
       items: []
     };
 
+    // TODO: I'm not sure this works
     return this.getCatalogBaseLayersOptions(catalog)
       .pipe(
         startWith(groupItem),

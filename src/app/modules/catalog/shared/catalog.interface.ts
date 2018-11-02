@@ -15,6 +15,7 @@ export interface Catalog {
 export interface CatalogServiceOptions {
   baseLayers?: boolean;
   sources?: Catalog[];
+  sourcesUrl?: string;
 }
 
 export interface CatalogItemState extends RecordState {

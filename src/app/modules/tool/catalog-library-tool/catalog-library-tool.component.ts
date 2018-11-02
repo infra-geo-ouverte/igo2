@@ -7,7 +7,9 @@ import { ToolService } from '@igo2/context';
 import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/datastore';
 import { Catalog } from '../../catalog/shared/catalog.interface';
+import { CatalogService } from '../../catalog/shared/catalog.service';
 import { CatalogStoreService } from '../../catalog/shared/catalog-store.service';
+import { catalogToRecord } from '../../catalog/shared/catalog.utils';
 
 @Register({
   name: 'catalogFadq',
@@ -25,6 +27,7 @@ export class CatalogLibraryToolComponent implements OnInit {
   }
 
   constructor(
+    private catalogService: CatalogService,
     private catalogStoreService: CatalogStoreService,
     private toolService: ToolService
   ) {}
@@ -43,19 +46,10 @@ export class CatalogLibraryToolComponent implements OnInit {
   }
 
   private loadCatalogs() {
-    this.store.setRecords([
-      {
-        rid: 'swwf',
-        meta: {
-          id: 'swwf',
-          titleProperty: 'title'
-        },
-        data: {
-          title: 'Toute les données',
-          url: '/swwf'
-        }
-      }
-    ]);
+    this.catalogService.loadCatalogs()
+      .subscribe((catalogs: Catalog[]) => {
+        this.store.setRecords(catalogs.map(catalogToRecord));
+      });
   }
 
 }
