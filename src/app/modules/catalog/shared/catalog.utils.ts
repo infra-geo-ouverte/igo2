@@ -1,9 +1,5 @@
 import { Record } from '../../data/shared/data.interface';
-import { Catalog, CatalogItem } from './catalog.interface';
-
-export function setCatalogItems(catalog: Catalog, items: CatalogItem[]) {
-  catalog.items = items;
-}
+import { CatalogItem } from './catalog.interface';
 
 export function catalogItemToRecord(item: CatalogItem): Record<CatalogItem> {
   return {

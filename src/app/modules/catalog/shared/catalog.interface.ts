@@ -19,7 +19,6 @@ export interface CatalogServiceOptions {
 
 export interface CatalogItemState extends RecordState {
   added?: boolean;
-  collapsed?: boolean;
 }
 
 export interface CatalogItem {
@@ -28,9 +27,7 @@ export interface CatalogItem {
   type: CatalogItemType;
 }
 
-export interface CatalogItemLayer extends CatalogItem {
-  data: LayerInfo;
-}
+export interface CatalogItemLayer extends CatalogItem, LayerInfo {}
 
 export interface CatalogItemGroup extends CatalogItem {
   items?: CatalogItem[];

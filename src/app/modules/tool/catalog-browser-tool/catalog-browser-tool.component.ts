@@ -12,7 +12,6 @@ import { Catalog, CatalogItem } from '../../catalog/shared/catalog.interface';
 import { CatalogService } from '../../catalog/shared/catalog.service';
 import { CatalogStoreService } from '../../catalog/shared/catalog-store.service';
 import { catalogItemToRecord } from '../../catalog/shared/catalog.utils';
-import { setCatalogItems } from '../../catalog/shared/catalog.utils';
 
 @Register({
   name: 'catalogBrowser',
@@ -40,7 +39,7 @@ export class CatalogBrowserToolComponent implements OnInit {
     this.catalog$$ = catalogStore.selected$
       .subscribe((catalogs: Record<Catalog>[]) => {
         if (catalogs.length > 0) {
-          this.loadCatalogItems(catalogs[0]);
+          this.loadCatalogItems(catalogs[0].data);
         }
       })
   }
@@ -53,16 +52,16 @@ export class CatalogBrowserToolComponent implements OnInit {
     console.log(catalogItem);
   }
 
-  private loadCatalogItems(catalog: Record<Catalog>) {
-    this.catalogService.loadCatalogItems(catalog.data)
-      .subscribe((items: CatalogItem[]) => {
-        setCatalogItems(catalog.data, items);
-        const records = catalog.data.items.map((item: CatalogItem) =>
-          catalogItemToRecord(item)
-        );
-        this.store.setRecords(records);
-      });
+  private loadCatalogItems(catalog: Catalog) {
+    if (catalog.items !== undefined) {
+      this.store.setRecords(catalog.items.map(catalogItemToRecord));
+    } else {
+      this.catalogService.loadCatalogItems(catalog)
+        .subscribe((items: CatalogItem[]) => {
+          catalog.items = items;
+          this.store.setRecords(catalog.items.map(catalogItemToRecord));
+        });
+    }
   }
 
 }
-
