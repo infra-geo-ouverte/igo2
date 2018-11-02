@@ -56,6 +56,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   // True after the initial context is loaded
   private contextLoaded = false;
+  // True after the initial tool is loaded
+  private toolLoaded = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -217,14 +219,15 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (params['layers'] && params['wmsUrl']) {
         this.addLayerByName(params['wmsUrl'], params['layers']);
       }
-      if (params['tool']) {
+      if (params['tool'] && !this.toolLoaded) {
         const toolNameToOpen = params['tool'];
         if (this.toolService.allowedToolName.indexOf(toolNameToOpen) !== -1) {
           const tool = this.toolService.getTool(toolNameToOpen);
           setTimeout(() => {
             this.toolService.selectTool(tool);
-          }, 1); // add delay for translationservice to be injected
+          }, 250); // add delay for translationservice to be injected
         }
+        this.toolLoaded = true;
       }
     });
   }
