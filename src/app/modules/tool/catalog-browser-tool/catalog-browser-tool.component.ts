@@ -52,10 +52,6 @@ export class CatalogBrowserToolComponent implements OnInit {
     this.catalog$$.unsubscribe();
   }
 
-  selectCatalogItem(catalogItem: Record<CatalogItem>) {
-    console.log(catalogItem);
-  }
-
   private loadCatalogItems(catalog: Catalog) {
     if (catalog.items !== undefined) {
       this.store.setRecords(catalog.items.map(catalogItemToRecord));
