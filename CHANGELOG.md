@@ -1,3 +1,18 @@
+<a name="0.21.2"></a>
+## [0.21.2](https://github.com/infra-geo-ouverte/igo2/compare/0.21.1...0.21.2) (2018-11-02)
+
+
+### Bug Fixes
+
+* **portal:** only tool once, not at every context change. ([#237](https://github.com/infra-geo-ouverte/igo2/issues/237)) ([25c909b](https://github.com/infra-geo-ouverte/igo2/commit/25c909b))
+
+
+### Features
+
+* **igo2-lib:** upgrade to 0.24.2 ([7d4cf25](https://github.com/infra-geo-ouverte/igo2/commit/7d4cf25))
+
+
+
 <a name="0.21.1"></a>
 ## [0.21.1](https://github.com/infra-geo-ouverte/igo2/compare/0.21.0...0.21.1) (2018-11-01)
 
