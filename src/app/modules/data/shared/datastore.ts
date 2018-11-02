@@ -2,41 +2,37 @@ import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { Record, RecordState } from './data.interface';
+import { DataState } from './datastate';
 
 export class DataStore<T extends Record, S extends RecordState = RecordState> {
 
   public records$ = new BehaviorSubject<T[]>([]);
-  public states$ = new Subject<Map<string, S>>();
   public focused$ = new Subject<T[]>();
   public selected$ = new Subject<T[]>();
 
-  private states$$: Subscription;
-
-  get states(): Map<string, S> {
-    return this._states;
-  }
-  set states(states: Map<string, S>) {
-    this._states = states;
-    this.states$.next(states);
-  }
-  _states: Map<string, S> = new Map();
+  private state: DataState<S>;
+  private state$$: Subscription;
 
   get empty() {
     return this.getRecords().length === 0;
   }
 
-  constructor() {
+  constructor(state: DataState<S> = undefined) {
+    if (state === undefined) {
+      state = new DataState<S>();
+    }
+    this.state = state;
     this.subscribeToStatesChanges();
   }
 
   destroy() {
-    this.states$$.unsubscribe();
+    this.state$$.unsubscribe();
   }
 
   setRecords(records: T[], soft = false) {
     this.records$.next(records);
     if (soft === false) {
-      this.resetStates();
+      this.resetState();
     }
   }
 
@@ -49,10 +45,11 @@ export class DataStore<T extends Record, S extends RecordState = RecordState> {
   }
 
   getRecordState(record: T): S {
-    return this.states.get(record.rid) || {
+    const defaultState = {
       focused: false,
       selected: false
-    } as S;
+    };
+    return this.state.getByKey(record.rid) || defaultState as S;
   }
 
   focus(record: T, exclusive = true) {
@@ -67,7 +64,7 @@ export class DataStore<T extends Record, S extends RecordState = RecordState> {
   }
 
   unfocusAll() {
-    this.updateRecordsState(this.getRecords(), {focused: false});
+    this.updateAllStates({focused: false});
   }
 
   select(record: T, focus = true, exclusive = true) {
@@ -83,52 +80,41 @@ export class DataStore<T extends Record, S extends RecordState = RecordState> {
   }
 
   unselect(record: T, unfocus = true) {
-    const state = {selected: false};
+    const changes = {selected: false};
     if (unfocus === true) {
-      state['focused'] = false;
+      changes['focused'] = false;
     }
-    this.updateRecordState(record, state);
+    this.updateRecordState(record, changes);
   }
 
   unselectAll(unfocus = true) {
-    const state = {selected: false};
+    const changes = {selected: false};
     if (unfocus === true) {
-      state['focused'] = false;
+      changes['focused'] = false;
     }
-    this.updateRecordsState(this.getRecords(), {selected: false});
+    this.updateAllStates(changes);
   }
 
-  private updateRecordState(record: T, stateChanges: { [key: string]: any }) {
-    const states = new Map(this.states);
-    const state = this.getRecordState(record);
-    states.set(record.rid, Object.assign(state, stateChanges));
-    this.states = states;
+  resetState() {
+    this.state.reset();
   }
 
-  private updateRecordsState(records: T[], stateChanges: { [key: string]: any }) {
-    const states = new Map(this.states);
-    records.forEach((record: T) => {
-      const state = this.getRecordState(record);
-      states.set(record.rid, Object.assign(state, stateChanges));
-    });
-    this.states = states;
+  getStateManager(): DataState<S> {
+    return this.state;
   }
 
-  private resetStates() {
-    const states = new Map(this.states);
-    const rids = this.getRecords().map((record: T) => record.rid);
-    states.forEach((state: RecordState, key: string) => {
-      if (rids.indexOf(key) < 0) {
-        states.delete(key);
-      }
-    });
-    this.states = states;
+  private updateRecordState(record: T, changes: { [key: string]: any }) {
+    this.state.updateByKey(record.rid, changes);
+  }
+
+  private updateAllStates(changes: { [key: string]: any }) {
+    this.state.updateAll(changes);
   }
 
   private subscribeToStatesChanges() {
-    this.states$$ = this.states$
+    this.state$$ = this.state.observable
       .pipe(debounceTime(100))
-      .subscribe(states => {
+      .subscribe(state => {
         const focused = this.getRecords()
           .filter(record => this.getRecordState(record).focused === true);
         this.focused$.next(focused);
