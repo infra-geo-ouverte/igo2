@@ -24,7 +24,7 @@ import { catalogItemToRecord } from '../shared/catalog.utils';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
- 
+
   private store: DataStore<Record<CatalogItem>>;
   private controller: DataStoreController;
 

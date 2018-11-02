@@ -94,7 +94,7 @@ export class CatalogService {
 
           return group;
         })
-      )
+      );
   }
 
   private getCatalogBaseLayersOptions(catalog: Catalog): Observable<LayerOptions[]> {
@@ -107,9 +107,9 @@ export class CatalogService {
         startWith([]),
         scan((items: CatalogItem[], capabilities: any) => {
           this.includeRecursiveItems(catalog, capabilities.Capability.Layer, items);
-          return items
+          return items;
         })
-      )
+      );
   }
 
   private getCatalogWMSCapabilities(catalog: Catalog): Observable<any> {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -22,7 +22,7 @@ import { catalogItemToRecord } from '../../catalog/shared/catalog.utils';
   selector: 'fadq-catalog-browser-tool',
   templateUrl: './catalog-browser-tool.component.html'
 })
-export class CatalogBrowserToolComponent implements OnInit {
+export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
 
   public store: DataStore<Record<CatalogItem>> = new DataStore();
 
@@ -45,7 +45,7 @@ export class CatalogBrowserToolComponent implements OnInit {
         if (catalogs.length > 0) {
           this.loadCatalogItems(catalogs[0].data);
         }
-      })
+      });
   }
 
   ngOnDestroy() {

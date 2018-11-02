@@ -18,7 +18,7 @@ import { CatalogStoreService } from '../../catalog/shared/catalog-store.service'
   selector: 'fadq-catalog-library-tool',
   templateUrl: './catalog-library-tool.component.html'
 })
-export class CatalogLibraryToolComponent implements OnInit{
+export class CatalogLibraryToolComponent implements OnInit {
 
   get store(): DataStore<Record<Catalog>> {
     return this.catalogStoreService.getStore();

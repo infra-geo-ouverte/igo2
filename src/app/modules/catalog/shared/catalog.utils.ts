@@ -9,5 +9,5 @@ export function catalogItemToRecord(item: CatalogItem): Record<CatalogItem> {
       id: item.id,
       titleProperty: 'title'
     }
-  }
+  };
 }
