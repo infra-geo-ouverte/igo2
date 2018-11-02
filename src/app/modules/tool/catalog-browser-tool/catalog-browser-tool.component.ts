@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Register } from '@igo2/context';
 
-import { MapService } from '@igo2/geo';
+import { IgoMap, MapService } from '@igo2/geo';
 
 import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/datastore';
@@ -27,6 +27,10 @@ export class CatalogBrowserToolComponent implements OnInit {
   public store: DataStore<Record<CatalogItem>> = new DataStore();
 
   private catalog$$: Subscription;
+
+  get map(): IgoMap {
+    return this.mapService.getMap();
+  }
 
   constructor(
     private mapService: MapService,

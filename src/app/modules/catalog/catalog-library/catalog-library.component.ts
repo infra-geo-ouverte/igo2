@@ -49,7 +49,7 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
   constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.store.resetStates();
+    this.store.resetState();
     this.controller = new DataStoreController()
       .withChangeDetector(this.cdRef)
       .bind(this.store);
