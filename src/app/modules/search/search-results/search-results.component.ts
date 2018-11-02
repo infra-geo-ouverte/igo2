@@ -30,7 +30,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public displayMode = DisplayMode;
 
   private controller: DataStoreController;
-  private ready: boolean = false;
+  private ready = false;
 
   @Input()
   get store(): DataStore<Record> {

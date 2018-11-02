@@ -7,7 +7,7 @@ export class DataState<S extends { [key: string]: any } = RecordState> {
 
   get observable(): BehaviorSubject<Map<string, S>> {
     return this.states$;
-  } 
+  }
 
   constructor() {}
 

@@ -9,7 +9,7 @@ export function recordsAreTheSame(record1: Record, record2: Record | undefined):
   return record1.rid === record2.rid;
 }
 
-export function getRecordId(record: Record): string | number{
+export function getRecordId(record: Record): string | number {
   let id;
 
   const meta = record.meta;

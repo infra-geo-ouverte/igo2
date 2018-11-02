@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
 import { arrayEqual } from '../../utils/array';
 
 import { Record } from './data.interface';
-import { DataStore } from './datastore'; 
+import { DataStore } from './datastore';
 
 export class DataStoreController {
 
@@ -20,7 +20,7 @@ export class DataStoreController {
 
   private cdRef: ChangeDetectorRef;
 
-  constructor(store: DataStore<Record> = undefined) {
+  constructor(store?: DataStore<Record>) {
     if (store !== undefined) {
       this.bind(store);
     }
@@ -74,7 +74,7 @@ export class DataStoreController {
 
   private watch(store: DataStore<Record>) {
     this.unwatch();
-  
+
     this.records$$ = store.records$
       .subscribe((records: Record[]) => this.handleRecordsChange(records));
 
@@ -108,21 +108,21 @@ export class DataStoreController {
 
   private handleRecordsChange(records: Record[]) {
     if (this.cdRef !== undefined) {
-      this.cdRef.detectChanges();  
+      this.cdRef.detectChanges();
     }
   }
 
   private handleFocusedChange(records: Record[]) {
     this.focused = records.map((record: Record) => record.rid);
     if (this.cdRef !== undefined) {
-      this.cdRef.detectChanges();  
+      this.cdRef.detectChanges();
     }
   }
 
   private handleSelectedChange(records: Record[]) {
     this.selected = records.map((record: Record) => record.rid);
     if (this.cdRef !== undefined) {
-      this.cdRef.detectChanges();  
+      this.cdRef.detectChanges();
     }
   }
 

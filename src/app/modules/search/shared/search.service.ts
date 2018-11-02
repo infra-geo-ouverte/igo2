@@ -37,13 +37,13 @@ export class SearchService {
   private searchSources(sources: SearchSource[], term: string): Research[] {
     return sources.map((source: SearchSource) => {
       return {request: source.search(term), source};
-    })
+    });
   }
 
   private searchSourcesByLonLat(sources: SearchSource[], lonLat: [number, number]): Research[] {
     return sources.map((source: SearchSource) => {
       return {request: source.searchByLonLat(lonLat), source};
-    })
+    });
   }
 
   private termIsValid(term: string) {

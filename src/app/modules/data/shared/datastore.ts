@@ -17,7 +17,7 @@ export class DataStore<T extends Record, S extends RecordState = RecordState> {
     return this.getRecords().length === 0;
   }
 
-  constructor(state: DataState<S> = undefined) {
+  constructor(state?: DataState<S>) {
     if (state === undefined) {
       state = new DataState<S>();
     }
@@ -67,7 +67,7 @@ export class DataStore<T extends Record, S extends RecordState = RecordState> {
     this.updateAllStates({focused: false});
   }
 
-  select(record: T, focus = true, exclusive = true) {
+  select(record: T, exclusive = true, focus = true) {
     const state = {selected: true};
     if (focus === true) {
       state['focused'] = true;
