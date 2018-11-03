@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, concat, of, merge, zip, empty } from 'rxjs';
+import { BehaviorSubject, Observable, of, zip} from 'rxjs';
 
 import { LanguageService, ConfigService } from '@igo2/core';
 import { LayerOptions, CapabilitiesService } from '@igo2/geo';
@@ -12,7 +12,7 @@ import {
   CatalogServiceOptions
 } from './catalog.interface';
 import { CatalogItemType } from './catalog.enum';
-import { scan, startWith, flatMap, mergeMap } from 'rxjs/operators';
+import { scan, startWith, mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,40 +28,37 @@ export class CatalogService {
 
   loadCatalogs(): Observable<Catalog[]> {
     const contextConfig = this.config.getConfig('context') || {};
-    const catalogConfig = this.config.getConfig('catalog') || {} as CatalogServiceOptions;
+    const catalogConfig = this.config.getConfig('catalog') || {};
     const apiUrl = catalogConfig.url || contextConfig.url;
+    const catalogsFromConfig = catalogConfig.sources || [];
 
-    const catalogs = catalogConfig.sources || [];
     if (apiUrl === undefined) {
-      return of(catalogs);
+      return of(catalogsFromConfig);
     }
 
-    const baseLayers = [];
+    const observables = [];
+
+    // Base layers catalog
     if (catalogConfig.baseLayers) {
       const translate = this.languageService.translate;
       const title = translate.instant('igo.geo.CatalogTool.baseLayers');
-      baseLayers.push({
+      const baseLayersCatalog = {
         title: title,
-        url: apiUrl + '/baselayers',
+        url: `${apiUrl}/baselayers`,
         type: 'baselayers'
-      });
+      };
+      observables.push(of(baseLayersCatalog));
     }
 
-    const catalogsUrl = apiUrl + '/catalogs';
-    const request = this.http.get<Catalog[]>(catalogsUrl)
-      .pipe(
-        mergeMap(catalog => catalog)
-      )
+    // Catalogs from API
+    const catalogsFromApi = this.http
+      .get<Catalog[]>(`${apiUrl}/catalogs`)
+      .pipe(mergeMap(catalog => catalog));
+    observables.push(catalogsFromApi)
 
-    const observables = [];
-    if (baseLayers.length > 0) {
-      observables.push(of(...baseLayers));
-    }
-
-    observables.push(request);
-
-    if (catalogs.length > 0) {
-      observables.push(of(...catalogs));
+    // Catalogs from config
+    if (catalogsFromConfig.length > 0) {
+      observables.push(of(...catalogsFromConfig));
     }
 
     return zip(...observables);
@@ -118,13 +115,7 @@ export class CatalogService {
     return this.capabilitiesService.getCapabilities('wms', catalog.url);
   }
 
-  /**
-   * Dig in the layerList for each layer definition
-   @param catalog: object of config.json parameter
-   @param layerList: object of current level of layers
-   @param groupsLayers: object of group of layers to show in the app
-  */
-  includeRecursiveItems(catalog: Catalog, layerList: any, items: CatalogItem[]) {
+  private includeRecursiveItems(catalog: Catalog, layerList: any, items: CatalogItem[]) {
     // Dig all levels until last level (layer object are not defined on last level)
     for (const group of layerList.Layer) {
       if (group.Layer !== undefined) {
