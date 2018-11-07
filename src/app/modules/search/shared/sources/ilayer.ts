@@ -10,15 +10,13 @@ import { AnyLayerOptions } from '@igo2/geo';
 import { Record } from '../../../data/shared/data.interface';
 import { LAYER } from '../../../map/shared/map.enum';
 import { LayerInfo } from '../../../map/shared/map.interface';
-import {
-  ILayerResult,
-  ILayerResponse
-} from './ilayer.interface';
-import { SearchSource } from './source';
+import { SearchSource, Searchable } from './source';
 import { SearchSourceOptions } from './source.interface';
+import { ILayerResult, ILayerResponse } from './ilayer.interface';
 
 @Injectable()
-export class ILayerSearchSource extends SearchSource {
+export class ILayerSearchSource
+    extends SearchSource implements Searchable {
 
   static id = 'ilayer';
 

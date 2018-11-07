@@ -10,12 +10,13 @@ import {
   FeatureGeometry,
   Feature
 } from '../../../feature/shared/feature.interface';
-import { NominatimResult } from './nominatim.interface';
-import { SearchSource } from './source';
+import { SearchSource, Searchable, ReverseSearchable } from './source';
 import { SearchSourceOptions } from './source.interface';
+import { NominatimResult } from './nominatim.interface';
 
 @Injectable()
-export class NominatimSearchSource extends SearchSource {
+export class NominatimSearchSource
+    extends SearchSource implements Searchable {
 
   static id = 'nominatim';
 

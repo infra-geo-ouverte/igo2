@@ -1,13 +1,10 @@
 import { Observable } from 'rxjs';
 
-import {
-  DataProvider,
-  SearchableDataProvider
-} from '../../../data/shared/dataprovider';
+import { DataProvider } from '../../../data/shared/dataprovider';
 import { Record } from '../../../data/shared/data.interface';
 import { SearchSourceOptions } from './source.interface';
 
-export class SearchSource implements DataProvider, SearchableDataProvider {
+export class SearchSource implements DataProvider {
 
   static id: string;
 
@@ -19,14 +16,6 @@ export class SearchSource implements DataProvider, SearchableDataProvider {
 
   getDefaultOptions(): SearchSourceOptions {
     throw new Error('You have to implement the method "getDefaultOptions".');
-  }
-
-  search(term?: string): Observable<Record[]> {
-    throw new Error('You have to implement the method "search".');
-  }
-
-  searchByLonLat(lonLat: [number, number]): Observable<Record[]> {
-    throw new Error('You have to implement the method "searchByLonLat".');
   }
 
   get title(): string {
@@ -55,5 +44,19 @@ export class SearchSource implements DataProvider, SearchableDataProvider {
   protected initOptions(options: SearchSourceOptions) {
     this.options = Object.assign(this.getDefaultOptions(), options);
   }
+
+}
+
+
+export interface Searchable {
+
+  search(term: string): Observable<Record[]>;
+
+}
+
+
+export interface ReverseSearchable {
+
+  reverseSearch(lonLat: [number, number], distance?: number): Observable<Record[]>;
 
 }
