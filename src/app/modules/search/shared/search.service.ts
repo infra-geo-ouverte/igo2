@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { stringToLonLat } from '../../map/shared/map.utils';
 import {
   SearchSource,
-  Searchable,
-  ReverseSearchable
+  TextSearch,
+  ReverseSearch
 } from './sources';
 import { SearchSourceService } from './search-source.service';
 import { Research } from './search.interface';
@@ -46,7 +46,7 @@ export class SearchService {
   private searchSources(sources: SearchSource[], term: string): Research[] {
     return sources.map((source: SearchSource) => {
       return {
-        request: (source as any as Searchable).search(term),
+        request: (source as any as TextSearch).search(term),
         reverse: false,
         source
       };
@@ -56,7 +56,7 @@ export class SearchService {
   private reverseSearchSources(sources: SearchSource[], lonLat: [number, number]): Research[] {
     return sources.map((source: SearchSource) => {
       return {
-        request: (source as any as ReverseSearchable).reverseSearch(lonLat),
+        request: (source as any as ReverseSearch).reverseSearch(lonLat),
         reverse: true,
         source
       };

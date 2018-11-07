@@ -8,7 +8,7 @@ import { removeKeys } from '../../../utils/object';
 import { Record } from '../../../data/shared/data.interface';
 import { FEATURE } from '../../../feature/shared/feature.enum';
 import { Feature } from '../../../feature/shared/feature.interface';
-import { SearchSource, Searchable, ReverseSearchable } from './source';
+import { SearchSource, TextSearch, ReverseSearch } from './source';
 import { SearchSourceOptions } from './source.interface';
 import {
   IChercheResult,
@@ -33,7 +33,7 @@ export class IChercheSearchSourceBase extends SearchSource  {
 
 @Injectable()
 export class IChercheSearchSource
-    extends IChercheSearchSourceBase implements Searchable {
+    extends IChercheSearchSourceBase implements TextSearch {
 
   static id = 'icherche';
   static propertiesBlacklist: Array<string> = [
@@ -113,7 +113,7 @@ export class IChercheSearchSource
 
 @Injectable()
 export class IChercheReverseSearchSource
-    extends IChercheSearchSourceBase implements ReverseSearchable {
+    extends IChercheSearchSourceBase implements ReverseSearch {
 
   static id = 'icherchereverse';
   static propertiesBlacklist: Array<string> = ['doc_type'];
