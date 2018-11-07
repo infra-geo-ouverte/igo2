@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { stringToLonLat } from '../../map/shared/map.utils';
-import { SearchSource } from './sources';
+import {
+  SearchSource,
+  Searchable,
+  ReverseSearchable
+} from './sources';
 import { SearchSourceService } from './search-source.service';
 import { Research } from './search.interface';
+import { sourceCanSearch, sourceCanReverseSearch } from './search.utils';
 
 
 @Injectable({
@@ -20,29 +25,41 @@ export class SearchService {
 
     const lonLat = stringToLonLat(term);
     if (lonLat !== undefined) {
-      return this.searchByLonLat(lonLat);
+      return this.reverseSearch(lonLat);
     }
 
     const sources = this.searchSourceService.getSources()
-      .filter((source: SearchSource) => source.enabled);
+      .filter((source: SearchSource) => {
+        return source.enabled && sourceCanSearch(source);
+      });
     return this.searchSources(sources, term);
   }
 
-  searchByLonLat(lonLat: [number, number]) {
+  reverseSearch(lonLat: [number, number]) {
     const sources = this.searchSourceService.getSources()
-      .filter((source: SearchSource) => source.enabled);
-    return this.searchSourcesByLonLat(sources, lonLat);
+      .filter((source: SearchSource) => {
+        return source.enabled && sourceCanReverseSearch(source);
+      });
+    return this.reverseSearchSources(sources, lonLat);
   }
 
   private searchSources(sources: SearchSource[], term: string): Research[] {
     return sources.map((source: SearchSource) => {
-      return {request: source.search(term), source};
+      return {
+        request: (source as any as Searchable).search(term),
+        reverse: false,
+        source
+      };
     });
   }
 
-  private searchSourcesByLonLat(sources: SearchSource[], lonLat: [number, number]): Research[] {
+  private reverseSearchSources(sources: SearchSource[], lonLat: [number, number]): Research[] {
     return sources.map((source: SearchSource) => {
-      return {request: source.searchByLonLat(lonLat), source};
+      return {
+        request: (source as any as ReverseSearchable).reverseSearch(lonLat),
+        reverse: true,
+        source
+      };
     });
   }
 

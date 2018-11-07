@@ -19,10 +19,11 @@ import { DataStore } from '../../data/shared/datastore';
 import { Record } from '../../data/shared/data.interface';
 import { SearchSource } from '../shared/sources/source';
 import { SearchService } from '../shared/search.service';
+import { Research } from '../shared/search.interface';
 
 export interface SearchEvent {
+  research: Research;
   records: Record[];
-  source: SearchSource;
 }
 
 @Component({
@@ -183,18 +184,18 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     const researches = this.searchService.search(term);
     researches.map(research => {
       research.request.subscribe(records => this.handleResearchComplete(
-        records,
-        research.source
+        research,
+        records
       ));
     });
   }
 
-  private handleResearchComplete(records: Record[], source: SearchSource) {
-    this.search.emit({records, source});
+  private handleResearchComplete(research: Research, records: Record[]) {
+    this.search.emit({research, records});
 
     if (this.store !== undefined) {
       const newRecords = this.store.getRecords()
-        .filter(record =>  record.provider !== source)
+        .filter(record => record.provider !== research.source)
         .concat(records);
       this.store.setRecords(newRecords, true);
     }

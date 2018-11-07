@@ -13,3 +13,17 @@ export interface IChercheResult {
 export interface IChercheResponse {
   features: IChercheResult[];
 }
+
+export interface IChercheReverseResult {
+  _id: string;
+  doc_type: string;
+  recherche: string;
+  highlight: string;
+  geometry: FeatureGeometry;
+  bbox: [number, number, number, number];
+  properties: { [key: string]: any };
+}
+
+export interface IChercheReverseResponse {
+  features: IChercheResult[];
+}
