@@ -155,7 +155,7 @@ export class IChercheReverseSearchSource
 
   private resultToRecord(result: IChercheReverseResult): Record<Feature> {
     const properties = this.computeProperties(result);
-    const extent = this.computeExtent(result)
+    const extent = this.computeExtent(result);
 
     return {
       rid: [this.getId(), properties.type, result._id].join('.'),

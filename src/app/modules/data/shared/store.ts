@@ -70,9 +70,9 @@ export class DataStore<T extends Record, S extends { [key: string]: boolean } = 
         map((value: [T[], S]) => {
           const records = value[0];
           return records.filter((record: T) => {
-            return filterBy(record, this.getRecordState(record))
-          })
-        })
+            return filterBy(record, this.getRecordState(record));
+          });
+        });
       )
   }
 }

@@ -19,4 +19,6 @@ export interface Record<T = { [key: string]: any }, M = RecordMeta> {
   provider?: DataProvider;
 }
 
-export interface RecordState { [key: string]: boolean };
+export interface RecordState {
+  [key: string]: boolean;
+}
