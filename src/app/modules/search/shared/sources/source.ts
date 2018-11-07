@@ -48,14 +48,14 @@ export class SearchSource implements DataProvider {
 }
 
 
-export interface Searchable {
+export interface TextSearch {
 
   search(term: string): Observable<Record[]>;
 
 }
 
 
-export interface ReverseSearchable {
+export interface ReverseSearch {
 
   reverseSearch(lonLat: [number, number], distance?: number): Observable<Record[]>;
 
