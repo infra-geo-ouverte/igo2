@@ -75,9 +75,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   focusRecord(record: Record) {
-    this.controller.updateRecordState(record, {
-      focused: true
-    }, true)
+    this.controller.updateRecordState(record, {focused: true}, true);
     this.focus.emit(record);
   }
 

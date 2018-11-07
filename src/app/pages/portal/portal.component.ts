@@ -75,7 +75,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       .subscribe((records: Record[]) =>
         this.handleSearchRecordsChange(records)
       );
- 
+
     this.selectedSearchRecords$$ = this.searchStore
       .observeBy((record: Record, state) => state.selected === true)
       .subscribe((records: Record[]) => this.handleSearchRecordsSelect(records));

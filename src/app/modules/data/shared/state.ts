@@ -33,8 +33,8 @@ export class DataState<S extends { [key: string]: boolean } = RecordState> {
   updateByKey(key: string, changes: { [key: string]: boolean }, exclusive = false) {
     if (exclusive === true) {
       const otherChanges = {};
-      Object.entries(changes).forEach(([key, value]) => {
-        otherChanges[key] = !value;
+      Object.entries(changes).forEach(([changeKey, value]) => {
+        otherChanges[changeKey] = !value;
       });
       this.updateAll(otherChanges);
     }

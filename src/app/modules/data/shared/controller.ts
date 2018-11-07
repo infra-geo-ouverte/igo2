@@ -93,7 +93,7 @@ export class DataStoreController {
       }
       this.innerState.set(record.rid, state);
     });
-  
+
     if (
       this.cdRef !== undefined &&
       detectChanges !== false &&
