@@ -23,7 +23,8 @@
       "mrc": "MRC",
       "ra": "Regions",
       "tcs": "Service Center Territories",
-      "sm": "Meteorological Station",
+      "smd": "Meteorological Station",
+      "smf": "Meteorological Station (availables)",
       "zc1": "Zone 1",
       "zc2": "Zone 2",
       "rzc": "Collective Zones"

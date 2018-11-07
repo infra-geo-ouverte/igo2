@@ -86,7 +86,6 @@
             "title": "navigation.categories.mun",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirMunicipalites",
-              "resultsProperty": "lstMunicipalite",
               "idProperty": "codeGeographique",
               "titleProperty": "nomMunicipalite"
             },
@@ -98,7 +97,6 @@
             "title": "navigation.categories.mrc",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirMunicipalitesRegionalesComte",
-              "resultsProperty": "lstMunicipaliteRegionaleComte",
               "idProperty": "code",
               "titleProperty": "nom"
             },
@@ -110,7 +108,6 @@
             "title": "navigation.categories.ra",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionsAdministratives",
-              "resultsProperty": "lstRegionAdministrative",
               "idProperty": "codeRegionAdministrative",
               "titleProperty": "nomRegionAdministrative"
             },
@@ -122,7 +119,6 @@
             "title": "navigation.categories.tcs",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirTerritoiresCentresServices",
-              "resultsProperty": "lstTerritoireCentreServices",
               "idProperty": "idTerritoireCentreServices",
               "titleProperty": "nomCentreServices"
             },
@@ -131,10 +127,20 @@
             }
           },
           {
-            "title": "navigation.categories.sm",
+            "title": "navigation.categories.smf",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoAnneeAssurance/2018",
+              "idProperty": "idStationMeteo",
+              "titleProperty": "nomStation"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirStationMeteo/${id}"
+            }
+          },
+          {
+            "title": "navigation.categories.smd",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoDisponibles",
-              "resultsProperty": "lstStationMeteoDisponible",
               "idProperty": "idStationMeteo",
               "titleProperty": "nomStation"
             },
