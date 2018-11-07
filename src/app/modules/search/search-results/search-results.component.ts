@@ -11,8 +11,8 @@ import {
 
 
 import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/datastore';
-import { DataStoreController } from '../../data/shared/datastore-controller';
+import { DataStore } from '../../data/shared/store';
+import { DataStoreController } from '../../data/shared/controller';
 import { SearchSource } from '../shared/sources/source';
 
 export enum DisplayMode {
@@ -30,7 +30,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public displayMode = DisplayMode;
 
   private controller: DataStoreController;
-  private ready = false;
 
   @Input()
   get store(): DataStore<Record> {
@@ -55,17 +54,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   @Output() unfocus = new EventEmitter<Record>();
   @Output() unselect = new EventEmitter<Record>();
 
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(private cdRef: ChangeDetectorRef) {
+    this.controller = new DataStoreController()
+      .withChangeDetector(this.cdRef);
+  }
 
   ngOnInit() {
-    this.controller = new DataStoreController()
-      .withChangeDetector(this.cdRef)
-      .bind(this.store);
-
-    // This is required because igoListItem immediately
-    // emit an event when a record is set to "focused" or "selected"
-    // but, at that time our controller is not even initialized.
-    this.ready = true;
+    this.controller.bind(this.store);
   }
 
   ngOnDestroy() {
@@ -80,18 +75,17 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   focusRecord(record: Record) {
-    if (!this.ready) {
-      return;
-    }
-    this.controller.focus(record, true);
+    this.controller.updateRecordState(record, {
+      focused: true
+    }, true)
     this.focus.emit(record);
   }
 
   selectRecord(record: Record) {
-    if (!this.ready) {
-      return;
-    }
-    this.controller.select(record, true, true);
+    this.controller.updateRecordState(record, {
+      focused: true,
+      selected: true
+    }, true);
     this.select.emit(record);
   }
 

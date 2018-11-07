@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Media, MediaService } from '@igo2/core';
 import {
@@ -32,6 +32,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public searchRecords$$: Subscription;
   public selectedSearchRecords$$: Subscription;
+  public focusedSearchRecords$: Observable<Record[]>;
 
   public expansionPanelExpanded = false;
   public infoPanelOpened = false;
@@ -70,15 +71,17 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.handleContextChange(context)
     );
 
-    this.searchRecords$$ = this.searchStore.records$
+    this.searchRecords$$ = this.searchStore.observable
       .subscribe((records: Record[]) =>
         this.handleSearchRecordsChange(records)
       );
+ 
+    this.selectedSearchRecords$$ = this.searchStore
+      .observeBy((record: Record, state) => state.selected === true)
+      .subscribe((records: Record[]) => this.handleSearchRecordsSelect(records));
 
-    this.selectedSearchRecords$$ = this.searchStore.selected$
-      .subscribe((records: Record[]) =>
-        this.handleSearchRecordsSelect(records)
-      );
+    this.focusedSearchRecords$ = this.searchStore
+      .observeBy((record: Record, state) => state.focused === true);
   }
 
   ngOnDestroy() {
@@ -138,6 +141,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private handleSearchRecordsSelect(records: Record[]) {
     if (records.length === 0) {
+      this.closeInfoPanel();
       return;
     }
 

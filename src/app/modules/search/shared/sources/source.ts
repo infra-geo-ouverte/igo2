@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { DataProvider } from '../../../data/shared/dataprovider';
+import { DataProvider } from '../../../data/shared/provider';
 import { Record } from '../../../data/shared/data.interface';
 import { SearchSourceOptions } from './source.interface';
 

@@ -1,4 +1,4 @@
-import { DataProvider } from './dataprovider';
+import { DataProvider } from './provider';
 
 export interface RecordMeta {
   dataType?: string;
@@ -19,7 +19,4 @@ export interface Record<T = { [key: string]: any }, M = RecordMeta> {
   provider?: DataProvider;
 }
 
-export interface RecordState {
-  focused: boolean;
-  selected: boolean;
-}
+export interface RecordState { [key: string]: boolean };

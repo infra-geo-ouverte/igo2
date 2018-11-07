@@ -8,3 +8,24 @@ export function removeKeys(obj: Object, remove: Array<string>): Object {
 
     return newObj;
 }
+
+export function isEquivalent(obj1: Object, obj2: Object): boolean {
+  if (obj1 === obj2) {
+    return true;
+  }
+
+  var obj1Props = Object.getOwnPropertyNames(obj1);
+  var obj2Props = Object.getOwnPropertyNames(obj2);
+  if (obj1Props.length != obj2Props.length) {
+      return false;
+  }
+
+  for (var i = 0; i < obj1Props.length; i++) {
+      var prop = obj1Props[i];
+      if (obj1[prop] !== obj2[prop]) {
+        return false;
+      }
+  }
+
+  return true;
+}
