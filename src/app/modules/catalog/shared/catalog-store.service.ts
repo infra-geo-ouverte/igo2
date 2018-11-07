@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/datastore';
+import { DataStore } from '../../data/shared/store';
 import { Catalog } from './catalog.interface';
 
 @Injectable({

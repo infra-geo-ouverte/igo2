@@ -6,8 +6,8 @@ import { Register } from '@igo2/context';
 
 import { IgoMap, MapService } from '@igo2/geo';
 
-import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/datastore';
+import { Record, RecordState } from '../../data/shared/data.interface';
+import { DataStore } from '../../data/shared/store';
 import { Catalog, CatalogItem } from '../../catalog/shared/catalog.interface';
 import { CatalogService } from '../../catalog/shared/catalog.service';
 import { CatalogStoreService } from '../../catalog/shared/catalog-store.service';
@@ -40,7 +40,11 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const catalogStore = this.catalogStoreService.getStore();
-    this.catalog$$ = catalogStore.selected$
+
+    this.catalog$$ = catalogStore
+      .observeBy((catalog: Record<Catalog>, state: RecordState) => {
+        return state.selected === true;
+      })
       .subscribe((catalogs: Record<Catalog>[]) => {
         if (catalogs.length > 0) {
           this.loadCatalogItems(catalogs[0].data);

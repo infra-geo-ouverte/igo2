@@ -3,7 +3,7 @@
     <ng-container *ngIf="isGroup(item)">
       <fadq-catalog-browser-group
         [group]="item"
-        [state]="store.getStateManager()"
+        [state]="store.state"
         (layerSelect)="selectLayer($event)"
         (layerUnselect)="layerUnselect.emit($event)">
       </fadq-catalog-browser-group>

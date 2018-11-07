@@ -11,9 +11,9 @@ import {
 
 import { getRecordTitle } from '../../data/shared/data.utils';
 import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/datastore';
-import { DataState} from '../../data/shared/datastate';
-import { DataStoreController } from '../../data/shared/datastore-controller';
+import { DataStore } from '../../data/shared/store';
+import { DataState} from '../../data/shared/state';
+import { DataStoreController } from '../../data/shared/controller';
 import { CatalogItem, CatalogItemGroup, CatalogItemLayer, CatalogItemState } from '../shared/catalog.interface';
 import { CatalogItemType } from '../shared/catalog.enum';
 import { catalogItemToRecord } from '../shared/catalog.utils';
@@ -53,14 +53,15 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     return getRecordTitle(this.group);
   }
 
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(private cdRef: ChangeDetectorRef) {
+    this.controller = new DataStoreController()
+      .withChangeDetector(this.cdRef);
+  }
 
   ngOnInit() {
     this.store = new DataStore(this.state);
     this.store.setRecords(this.group.data.items.map(catalogItemToRecord), true);
-    this.controller = new DataStoreController()
-      .withChangeDetector(this.cdRef)
-      .bind(this.store);
+    this.controller.bind(this.store);
   }
 
   ngOnDestroy() {

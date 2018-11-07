@@ -5,7 +5,7 @@ import { Register } from '@igo2/context';
 import { ToolService } from '@igo2/context';
 
 import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/datastore';
+import { DataStore } from '../../data/shared/store';
 import { Catalog } from '../../catalog/shared/catalog.interface';
 import { CatalogService } from '../../catalog/shared/catalog.service';
 import { CatalogStoreService } from '../../catalog/shared/catalog-store.service';
@@ -53,4 +53,3 @@ export class CatalogLibraryToolComponent implements OnInit {
   }
 
 }
-

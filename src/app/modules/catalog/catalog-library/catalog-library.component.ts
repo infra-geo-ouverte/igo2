@@ -12,8 +12,8 @@ import {
 import { IgoMap } from '@igo2/geo';
 
 import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/datastore';
-import { DataStoreController } from '../../data/shared/datastore-controller';
+import { DataStore } from '../../data/shared/store';
+import { DataStoreController } from '../../data/shared/controller';
 import { Catalog } from '../shared/catalog.interface';
 
 @Component({
@@ -46,13 +46,14 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
   @Output() select = new EventEmitter<Record<Catalog>>();
   @Output() unselect = new EventEmitter<Record<Catalog>>();
 
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(private cdRef: ChangeDetectorRef) {
+    this.controller = new DataStoreController()
+      .withChangeDetector(this.cdRef);
+  }
 
   ngOnInit() {
-    this.store.resetState();
-    this.controller = new DataStoreController()
-      .withChangeDetector(this.cdRef)
-      .bind(this.store);
+    this.store.state.reset();
+    this.controller.bind(this.store);
   }
 
   ngOnDestroy() {
@@ -60,7 +61,11 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
   }
 
   selectCatalog(catalog: Record<Catalog>) {
-    this.store.select(catalog, true, true);
+    this.controller.updateRecordState(catalog, {
+      selected: true,
+      focused: true
+    }, true);
+
     this.select.emit(catalog);
   }
 

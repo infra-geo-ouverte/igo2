@@ -51,10 +51,10 @@ export class CatalogService {
     }
 
     // Catalogs from API
-    const catalogsFromApi = this.http
+    const catalogsFromApi$ = this.http
       .get<Catalog[]>(`${apiUrl}/catalogs`)
       .pipe(mergeMap(catalog => catalog));
-    observables.push(catalogsFromApi)
+    observables.push(catalogsFromApi$);
 
     // Catalogs from config
     if (catalogsFromConfig.length > 0) {

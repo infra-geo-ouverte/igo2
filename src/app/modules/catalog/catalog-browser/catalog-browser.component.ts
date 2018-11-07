@@ -12,8 +12,8 @@ import {
 import { IgoMap, Layer, LayerService } from '@igo2/geo';
 
 import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/datastore';
-import { DataStoreController } from '../../data/shared/datastore-controller';
+import { DataStore } from '../../data/shared/store';
+import { DataStoreController } from '../../data/shared/controller';
 import { CatalogItem, CatalogItemLayer, CatalogItemState } from '../shared/catalog.interface';
 import { CatalogItemType } from '../shared/catalog.enum';
 
@@ -50,13 +50,14 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   constructor(
     private layerService: LayerService,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) {
+    this.controller = new DataStoreController()
+      .withChangeDetector(this.cdRef);
+  }
 
   ngOnInit() {
-    this.store.resetState();
-    this.controller = new DataStoreController()
-      .withChangeDetector(this.cdRef)
-      .bind(this.store);
+    this.store.state.reset();
+    this.controller.bind(this.store);
   }
 
   ngOnDestroy() {
@@ -64,7 +65,11 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   }
 
   selectLayer(item: Record<CatalogItemLayer>) {
-    this.store.select(item, true, true);
+    this.controller.updateRecordState(item, {
+      selected: true,
+      focused: true
+    }, true);
+
     this.layerSelect.emit(item);
     if (this.map !== undefined) {
       this.addLayerToMap(item);
