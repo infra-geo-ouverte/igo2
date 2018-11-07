@@ -3,7 +3,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { isEquivalent } from '../../utils/object';
-import { Record } from './data.interface';
+import { Record, RecordState } from './data.interface';
 import { DataStore } from './store';
 
 export class DataStoreController {
@@ -61,9 +61,8 @@ export class DataStoreController {
     this.recordWatcher$$ = store.observable
       .subscribe((records: Record[]) => this.handleRecordChanges(records));
 
-    this.stateWatcher$$ = store
-      .observeBy((record: Record, state: { [key: string]: boolean }) => true)
-      .subscribe((records: Record[]) => this.handleStateChanges(records));
+    this.stateWatcher$$ = store.state.observable
+      .subscribe((state: Map<string, RecordState>) => this.handleStateChanges(state));
   }
 
   private unwatch() {
@@ -81,17 +80,19 @@ export class DataStoreController {
     }
   }
 
-  private handleStateChanges(records: Record[]) {
+  private handleStateChanges(state: Map<string, RecordState>) {
     let detectChanges = false;
-    records.forEach((record: Record) => {
-      const state = this.store.getRecordState(record);
-      const innerState = this.innerState.get(record.rid);
+
+    const rids = Array.from(state.keys());
+    rids.forEach((rid: string) => {
+      const storeState = state.get(rid);
+      const innerState = this.innerState.get(rid);
       if (innerState === undefined) {
         detectChanges = true;
       } else if (this.cdRef !== undefined && detectChanges === false) {
-        detectChanges = !isEquivalent(state, innerState);
+        detectChanges = !isEquivalent(storeState, innerState);
       }
-      this.innerState.set(record.rid, state);
+      this.innerState.set(rid, storeState);
     });
 
     if (
