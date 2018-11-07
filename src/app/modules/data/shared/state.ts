@@ -1,7 +1,8 @@
 import { BehaviorSubject } from 'rxjs';
+
 import { RecordState } from './data.interface';
 
-export class DataState<S extends { [key: string]: any } = RecordState> {
+export class DataState<S extends { [key: string]: boolean } = RecordState> {
 
   public states$ = new BehaviorSubject<Map<string, S>>(new Map());
 
@@ -29,11 +30,19 @@ export class DataState<S extends { [key: string]: any } = RecordState> {
     this.setByKeys(Array.from(this.states$.value.keys()), state);
   }
 
-  updateByKey(key: string, changes: { [key: string]: any }) {
+  updateByKey(key: string, changes: { [key: string]: boolean }, exclusive = false) {
+    if (exclusive === true) {
+      const otherChanges = {};
+      Object.entries(changes).forEach(([key, value]) => {
+        otherChanges[key] = !value;
+      });
+      this.updateAll(otherChanges);
+    }
+
     this.updateByKeys([key], changes);
   }
 
-  updateByKeys(keys: string[], changes: { [key: string]: any }) {
+  updateByKeys(keys: string[], changes: { [key: string]: boolean }) {
     const states = new Map(this.states$.value);
     keys.forEach((key: string) => {
       const state = this.getByKey(key);
@@ -42,7 +51,7 @@ export class DataState<S extends { [key: string]: any } = RecordState> {
     this.states$.next(states);
   }
 
-  updateAll(changes: { [key: string]: any }) {
+  updateAll(changes: { [key: string]: boolean }) {
     this.updateByKeys(Array.from(this.states$.value.keys()), changes);
   }
 

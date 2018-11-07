@@ -11,7 +11,7 @@ import {
 } from '@igo2/geo';
 
 import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/datastore';
+import { DataStore } from '../../data/shared/store';
 import { getFeatureFromRecord } from '../../feature/shared/feature.utils';
 import { getLayerOptionsFromRecord } from '../../map/shared/map.utils';
 import { SearchStoreService } from '../../search/shared/search-store.service';

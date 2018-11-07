@@ -15,7 +15,7 @@ import { FloatLabelType } from '@angular/material';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { DataStore } from '../../data/shared/datastore';
+import { DataStore } from '../../data/shared/store';
 import { Record } from '../../data/shared/data.interface';
 import { SearchSource } from '../shared/sources/source';
 import { SearchService } from '../shared/search.service';
@@ -194,7 +194,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.search.emit({research, records});
 
     if (this.store !== undefined) {
-      const newRecords = this.store.getRecords()
+      const newRecords = this.store.records
         .filter(record => record.provider !== research.source)
         .concat(records);
       this.store.setRecords(newRecords, true);
