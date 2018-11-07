@@ -66,13 +66,13 @@ export class DataStore<T extends Record, S extends { [key: string]: boolean } = 
   observeBy(filterBy: (record: T, state: S) => boolean): Observable<T[]> {
     return combineLatest(this.observable, this.state.observable)
       .pipe(
-        debounceTime(10),
+        debounceTime(50),
         map((value: [T[], S]) => {
           const records = value[0];
           return records.filter((record: T) => {
             return filterBy(record, this.getRecordState(record));
           });
-        });
-      )
+        })
+      );
   }
 }
