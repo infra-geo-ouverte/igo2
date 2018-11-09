@@ -51,6 +51,14 @@ export class DataStore<T extends Record, S extends { [key: string]: boolean } = 
     }
   }
 
+  addRecords(records: T[], soft = false) {
+    this.setRecords(this.records.concat(records), soft);
+  }
+
+  getRecordByRid(rid: string): T {
+    return this.records.find((record: T) => record.rid === rid);
+  }
+
   getRecordState(record: T): S {
     return this.state.getByKey(record.rid) || {} as S;
   }
