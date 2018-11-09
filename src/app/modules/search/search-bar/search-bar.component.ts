@@ -15,15 +15,15 @@ import { FloatLabelType } from '@angular/material';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { DataStore } from '../../data/shared/store';
-import { Record } from '../../data/shared/data.interface';
+import { EntityStore } from '../../entity/shared/store';
+import { Entity } from '../../entity/shared/entity.interface';
 import { SearchSource } from '../shared/sources/source';
 import { SearchService } from '../shared/search.service';
 import { Research } from '../shared/search.interface';
 
 export interface SearchEvent {
   research: Research;
-  records: Record[];
+  entities: Entity[];
 }
 
 @Component({
@@ -107,10 +107,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _searchIcon;
 
   @Input()
-  get store(): DataStore<Record> {
+  get store(): EntityStore<Entity> {
     return this._store;
   }
-  set store(value: DataStore<Record>) {
+  set store(value: EntityStore<Entity>) {
     this._store = value;
   }
   private _store;
@@ -183,21 +183,21 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
     const researches = this.searchService.search(term);
     researches.map(research => {
-      research.request.subscribe(records => this.handleResearchComplete(
+      research.request.subscribe(entities => this.handleResearchComplete(
         research,
-        records
+        entities
       ));
     });
   }
 
-  private handleResearchComplete(research: Research, records: Record[]) {
-    this.search.emit({research, records});
+  private handleResearchComplete(research: Research, entities: Entity[]) {
+    this.search.emit({research, entities});
 
     if (this.store !== undefined) {
-      const newRecords = this.store.records
-        .filter(record => record.provider !== research.source)
-        .concat(records);
-      this.store.setRecords(newRecords, true);
+      const newEntities = this.store.entities
+        .filter(entity => entity.provider !== research.source)
+        .concat(entities);
+      this.store.setEntities(newEntities, true);
     }
   }
 

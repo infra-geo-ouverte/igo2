@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Record } from '../../../data/shared/data.interface';
+import { Entity } from '../../../entity/shared/entity.interface';
 import { FEATURE } from '../../../feature/shared/feature.enum';
 import {
   FeatureGeometry,
@@ -36,12 +36,12 @@ export class NominatimSearchSource
     };
   }
 
-  search(term?: string): Observable<Record<Feature>[]> {
+  search(term?: string): Observable<Entity<Feature>[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
       .pipe(
-        map((response: Array<NominatimResult>) => this.extractRecords(response))
+        map((response: Array<NominatimResult>) => this.extractEntities(response))
       );
   }
 
@@ -54,11 +54,11 @@ export class NominatimSearchSource
     });
   }
 
-  private extractRecords(response: Array<NominatimResult>): Record<Feature>[] {
-    return response.map(result => this.resultToRecord(result));
+  private extractEntities(response: Array<NominatimResult>): Entity<Feature>[] {
+    return response.map(result => this.resultToEntity(result));
   }
 
-  private resultToRecord(result: NominatimResult): Record<Feature> {
+  private resultToEntity(result: NominatimResult): Entity<Feature> {
     const properties = this.computeProperties(result);
     const geometry = this.computeGeometry(result);
     const extent = this.computeExtent(result);

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/store';
+import { Entity } from '../../entity/shared/entity.interface';
+import { EntityStore } from '../../entity/shared/store';
 import { Catalog, CatalogItem } from './catalog.interface';
 
 @Injectable({
@@ -9,22 +9,22 @@ import { Catalog, CatalogItem } from './catalog.interface';
 })
 export class CatalogStoreService {
 
-  private catalogStore: DataStore<Record<Catalog>>;
-  private catalogItemsStores = new Map<string, DataStore<Record<CatalogItem>>>();
+  private catalogStore: EntityStore<Entity<Catalog>>;
+  private catalogItemsStores = new Map<string, EntityStore<Entity<CatalogItem>>>();
 
   constructor() {
-    this.catalogStore = new DataStore();
+    this.catalogStore = new EntityStore();
   }
 
-  getCatalogStore(): DataStore<Record<Catalog>> {
+  getCatalogStore(): EntityStore<Entity<Catalog>> {
     return this.catalogStore;
   }
 
-  getCatalogItemsStore(catalog: Record<Catalog>): DataStore<Record<CatalogItem>> {
+  getCatalogItemsStore(catalog: Entity<Catalog>): EntityStore<Entity<CatalogItem>> {
     return this.catalogItemsStores.get(catalog.rid);
   }
 
-  setCatalogItemsStore(catalog: Record<Catalog>, store: DataStore<Record<CatalogItem>>) {
+  setCatalogItemsStore(catalog: Entity<Catalog>, store: EntityStore<Entity<CatalogItem>>) {
     this.catalogItemsStores.set(catalog.rid, store);
   }
 }

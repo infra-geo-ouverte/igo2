@@ -1,11 +1,11 @@
 <igo-list [navigation]="false">
-    <ng-template ngFor let-record [ngForOf]="store.records$ | async">
+    <ng-template ngFor let-entity [ngForOf]="store.entities$ | async">
       <fadq-catalog-library-item
         igoListItem
         [map]="map"
-        [catalog]="record"
-        (select)="selectCatalog(record)"
-        (unselect)="unselect.emit(record)">
+        [catalog]="entity"
+        (select)="selectCatalog(entity)"
+        (unselect)="unselect.emit(entity)">
       </fadq-catalog-library-item>
     </ng-template>
 </igo-list>

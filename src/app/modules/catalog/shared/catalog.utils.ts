@@ -1,7 +1,7 @@
-import { Record } from '../../data/shared/data.interface';
+import { Entity } from '../../entity/shared/entity.interface';
 import { Catalog, CatalogItem } from './catalog.interface';
 
-export function catalogToRecord(catalog: Catalog): Record<Catalog> {
+export function catalogToEntity(catalog: Catalog): Entity<Catalog> {
   return {
     rid: catalog.title,
     data: catalog,
@@ -11,7 +11,7 @@ export function catalogToRecord(catalog: Catalog): Record<Catalog> {
   };
 }
 
-export function catalogItemToRecord(item: CatalogItem): Record<CatalogItem> {
+export function catalogItemToEntity(item: CatalogItem): Entity<CatalogItem> {
   return {
     rid: item.id,
     data: item,

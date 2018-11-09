@@ -1,6 +1,6 @@
-import { DataProvider } from './provider';
+import { EntityProvider } from './provider';
 
-export interface RecordMeta {
+export interface EntityMeta {
   dataType?: string;
   id?: string | number;
   idProperty?: string;
@@ -12,13 +12,13 @@ export interface RecordMeta {
   iconProperty?: string;
 }
 
-export interface Record<T = { [key: string]: any }, M = RecordMeta> {
+export interface Entity<T = { [key: string]: any }, M = EntityMeta> {
   rid: string;
   meta: M;
   data: T;
-  provider?: DataProvider;
+  provider?: EntityProvider;
 }
 
-export interface RecordState {
+export interface State {
   [key: string]: boolean;
 }

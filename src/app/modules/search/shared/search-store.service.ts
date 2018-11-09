@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 
-import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/store';
+import { Entity } from '../../entity/shared/entity.interface';
+import { EntityStore } from '../../entity/shared/store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchStoreService {
 
-  private store: DataStore<Record>;
+  private store: EntityStore<Entity>;
 
   constructor() {
-    this.store = new DataStore<Record>();
+    this.store = new EntityStore<Entity>();
   }
 
-  getStore(): DataStore<Record> {
+  getStore(): EntityStore<Entity> {
     return this.store;
   }
 }

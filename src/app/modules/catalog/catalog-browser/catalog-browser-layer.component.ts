@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
-import { getRecordTitle, getRecordIcon } from '../../data/shared/data.utils';
-import { Record } from '../../data/shared/data.interface';
+import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
+import { Entity } from '../../entity/shared/entity.interface';
 import { CatalogItemLayer } from '../shared/catalog.interface';
 
 @Component({
@@ -12,13 +12,13 @@ import { CatalogItemLayer } from '../shared/catalog.interface';
 export class CatalogBrowserLayerComponent {
 
   @Input()
-  get layer(): Record<CatalogItemLayer> {
+  get layer(): Entity<CatalogItemLayer> {
     return this._layer;
   }
-  set layer(value: Record<CatalogItemLayer>) {
+  set layer(value: Entity<CatalogItemLayer>) {
     this._layer = value;
   }
-  private _layer: Record<CatalogItemLayer>;
+  private _layer: Entity<CatalogItemLayer>;
 
   @Input()
   get added(): boolean {
@@ -30,15 +30,15 @@ export class CatalogBrowserLayerComponent {
   private _added: boolean;
 
   get title(): string {
-    return getRecordTitle(this.layer);
+    return getEntityTitle(this.layer);
   }
 
   get icon(): string {
-    return getRecordIcon(this.layer) || 'layers';
+    return getEntityIcon(this.layer) || 'layers';
   }
 
-  @Output() add = new EventEmitter<Record<CatalogItemLayer>>();
-  @Output() remove = new EventEmitter<Record<CatalogItemLayer>>();
+  @Output() add = new EventEmitter<Entity<CatalogItemLayer>>();
+  @Output() remove = new EventEmitter<Entity<CatalogItemLayer>>();
 
   constructor() {}
 

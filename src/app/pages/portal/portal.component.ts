@@ -10,7 +10,7 @@ import {
 
 import { IgoMap } from '@igo2/geo';
 
-import { Record, DataStore } from './../../modules/data/shared';
+import { Entity, EntityStore } from './../../modules/entity/shared';
 import { ProjectionService } from '../../modules/map/shared';
 import { SearchStoreService } from '../../modules/search/shared';
 
@@ -30,9 +30,9 @@ import {
 export class PortalComponent implements OnInit, OnDestroy {
   public context$$: Subscription;
 
-  public searchRecords$$: Subscription;
-  public selectedSearchRecords$$: Subscription;
-  public focusedSearchRecords$: Observable<Record[]>;
+  public searchEntities$$: Subscription;
+  public selectedSearchEntities$$: Subscription;
+  public focusedSearchEntities$: Observable<Entity[]>;
 
   public expansionPanelExpanded = false;
   public infoPanelOpened = false;
@@ -43,7 +43,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   // True after the initial context is loaded
   private contextLoaded = false;
 
-  get searchStore(): DataStore<Record> {
+  get searchStore(): EntityStore<Entity> {
     return this.searchStoreService.getStore();
   }
 
@@ -71,23 +71,23 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.handleContextChange(context)
     );
 
-    this.searchRecords$$ = this.searchStore.observable
-      .subscribe((records: Record[]) =>
-        this.handleSearchRecordsChange(records)
+    this.searchEntities$$ = this.searchStore.observable
+      .subscribe((entities: Entity[]) =>
+        this.handleSearchEntitiesChange(entities)
       );
 
-    this.selectedSearchRecords$$ = this.searchStore
-      .observeBy((record: Record, state) => state.selected === true)
-      .subscribe((records: Record[]) => this.handleSearchRecordsSelect(records));
+    this.selectedSearchEntities$$ = this.searchStore
+      .observeBy((entity: Entity, state) => state.selected === true)
+      .subscribe((entities: Entity[]) => this.handleSearchEntitiesSelect(entities));
 
-    this.focusedSearchRecords$ = this.searchStore
-      .observeBy((record: Record, state) => state.focused === true);
+    this.focusedSearchEntities$ = this.searchStore
+      .observeBy((entity: Entity, state) => state.focused === true);
   }
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
-    this.searchRecords$$.unsubscribe();
-    this.selectedSearchRecords$$.unsubscribe();
+    this.searchEntities$$.unsubscribe();
+    this.selectedSearchEntities$$.unsubscribe();
   }
 
   get backdropShown(): boolean {
@@ -122,15 +122,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
   }
 
-  handleQueryResults(records: Record[]) {
+  handleQueryResults(entities: Entity[]) {
     // const features: Feature[] = results.features;
     // if (features.length > 0) {
     //   this.featureService.updateFeatures(features, features[0].source);
     // }
   }
 
-  private handleSearchRecordsChange(records: Record[]) {
-    if (records.length === 0) {
+  private handleSearchEntitiesChange(entities: Entity[]) {
+    if (entities.length === 0) {
       return;
     }
 
@@ -139,8 +139,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.toolService.selectTool(searchResults);
   }
 
-  private handleSearchRecordsSelect(records: Record[]) {
-    if (records.length === 0) {
+  private handleSearchEntitiesSelect(entities: Entity[]) {
+    if (entities.length === 0) {
       this.closeInfoPanel();
       return;
     }

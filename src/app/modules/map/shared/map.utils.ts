@@ -8,16 +8,16 @@ import {
 } from '@igo2/geo';
 import { uuid } from '@igo2/utils';
 
-import { Record } from '../../data/shared/data.interface';
+import { Entity } from '../../entity/shared/entity.interface';
 import { LayerInfo } from './map.interface';
 import { LAYER } from './map.enum';
 
-export function getLayerOptionsFromRecord(record: Record): AnyLayerOptions | undefined {
-  if (record.meta.dataType !== LAYER) {
+export function getLayerOptionsFromEntity(entity: Entity): AnyLayerOptions | undefined {
+  if (entity.meta.dataType !== LAYER) {
     return undefined;
   }
 
-  return (record as Record<LayerInfo>).data.options;
+  return (entity as Entity<LayerInfo>).data.options;
 }
 
 export function stringToLonLat(str: string): [number, number] | undefined {

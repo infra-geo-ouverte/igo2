@@ -1,11 +1,11 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import {
-  getRecordTitle,
-  getRecordTitleHtml,
-  getRecordIcon
-} from '../../data/shared/data.utils';
-import { Record } from '../../data/shared/data.interface';
+  getEntityTitle,
+  getEntityTitleHtml,
+  getEntityIcon
+} from '../../entity/shared/entity.utils';
+import { Entity } from '../../entity/shared/entity.interface';
 
 @Component({
   selector: 'fadq-search-results-item',
@@ -15,24 +15,24 @@ import { Record } from '../../data/shared/data.interface';
 export class SearchResultsItemComponent {
 
   @Input()
-  get record(): Record {
-    return this._record;
+  get entity(): Entity {
+    return this._entity;
   }
-  set record(value: Record) {
-    this._record = value;
+  set entity(value: Entity) {
+    this._entity = value;
   }
-  private _record: Record;
+  private _entity: Entity;
 
   get title(): string {
-    return getRecordTitle(this.record);
+    return getEntityTitle(this.entity);
   }
 
   get titleHtml(): string {
-    return getRecordTitleHtml(this.record);
+    return getEntityTitleHtml(this.entity);
   }
 
   get icon(): string {
-    return getRecordIcon(this.record);
+    return getEntityIcon(this.entity);
   }
 
   constructor() {}

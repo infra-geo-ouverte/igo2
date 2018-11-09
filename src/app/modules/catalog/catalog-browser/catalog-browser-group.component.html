@@ -33,16 +33,16 @@
 </mat-list-item>
 
 <div #items>
-  <ng-template ngFor let-item [ngForOf]="store.records$ | async">
+  <ng-template ngFor let-item [ngForOf]="store.entities$ | async">
     <ng-container *ngIf="isGroup(item)"></ng-container>
   
     <ng-container *ngIf="isLayer(item)">
       <fadq-catalog-browser-layer
         igoListItem
         [layer]="item"
-        [added]="store.getRecordState(item).added"
-        [disabled]="store.getRecordState(item).added"
-        [selected]="store.getRecordState(item).selected"
+        [added]="store.getEntityState(item).added"
+        [disabled]="store.getEntityState(item).added"
+        [selected]="store.getEntityState(item).selected"
         (select)="layerSelect.emit(item)"
         (unselect)="layerUnselect.emit(item)"
         (add)="handleAddLayer(item)"

@@ -1,5 +1,5 @@
 import { TimeFilterOptions } from '@igo2/geo';
-import { RecordState } from '../../data/shared/data.interface';
+import { State } from '../../entity/shared/entity.interface';
 import { LayerInfo } from '../../map/shared/map.interface';
 import { CatalogItemType } from './catalog.enum';
 
@@ -18,7 +18,7 @@ export interface CatalogServiceOptions {
   sourcesUrl?: string;
 }
 
-export interface CatalogItemState extends RecordState {
+export interface CatalogItemState extends State {
   added?: boolean;
 }
 

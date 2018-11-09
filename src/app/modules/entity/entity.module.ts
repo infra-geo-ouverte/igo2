@@ -9,4 +9,4 @@ import { CommonModule } from '@angular/common';
   declarations: [],
   providers: []
 })
-export class FadqDataModule {}
+export class FadqEntityModule {}

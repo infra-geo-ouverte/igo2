@@ -10,10 +10,10 @@ import {
   OverlayAction,
 } from '@igo2/geo';
 
-import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/store';
-import { getFeatureFromRecord } from '../../feature/shared/feature.utils';
-import { getLayerOptionsFromRecord } from '../../map/shared/map.utils';
+import { Entity } from '../../entity/shared/entity.interface';
+import { EntityStore } from '../../entity/shared/store';
+import { getFeatureFromEntity } from '../../feature/shared/feature.utils';
+import { getLayerOptionsFromEntity } from '../../map/shared/map.utils';
 import { SearchStoreService } from '../../search/shared/search-store.service';
 
 @Register({
@@ -27,7 +27,7 @@ import { SearchStoreService } from '../../search/shared/search-store.service';
 })
 export class SearchResultsToolComponent {
 
-  get store(): DataStore<Record> {
+  get store(): EntityStore<Entity> {
     return this.searchStoreService.getStore();
   }
 
@@ -38,25 +38,25 @@ export class SearchResultsToolComponent {
     private searchStoreService: SearchStoreService
   ) {}
 
-  handleRecordFocus(record: Record) {
-    this.tryAddFeatureToMap(record);
+  handleEntityFocus(entity: Entity) {
+    this.tryAddFeatureToMap(entity);
   }
 
-  handleRecordSelect(record: Record) {
-    this.tryAddFeatureToMap(record);
-    this.tryAddLayerToMap(record);
+  handleEntitySelect(entity: Entity) {
+    this.tryAddFeatureToMap(entity);
+    this.tryAddLayerToMap(entity);
   }
 
-  private tryAddFeatureToMap(record: Record) {
-    const feature = getFeatureFromRecord(record);
+  private tryAddFeatureToMap(entity: Entity) {
+    const feature = getFeatureFromEntity(entity);
     if (feature !== undefined) {
       // this.overlayService.setFeatures([feature], OverlayAction.ZoomIfOutMapExtent);
     }
   }
 
-  private tryAddLayerToMap(record: Record) {
+  private tryAddLayerToMap(entity: Entity) {
     const map = this.mapService.getMap();
-    const layerOptions = getLayerOptionsFromRecord(record);
+    const layerOptions = getLayerOptionsFromEntity(entity);
     if (map === undefined || layerOptions === undefined) {
       return;
     }

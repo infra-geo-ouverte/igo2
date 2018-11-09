@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { removeKeys } from '../../../utils/object';
-import { Record } from '../../../data/shared/data.interface';
+import { Entity } from '../../../entity/shared/entity.interface';
 import { FEATURE } from '../../../feature/shared/feature.enum';
 import { Feature } from '../../../feature/shared/feature.interface';
 import { SearchSource, TextSearch, ReverseSearch } from './source';
@@ -56,12 +56,12 @@ export class IChercheSearchSource
     });
   }
 
-  search(term: string): Observable<Record<Feature>[]> {
+  search(term: string): Observable<Entity<Feature>[]> {
     const params = this.computeRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
       .pipe(
-        map((response: IChercheResponse) => this.extractRecords(response))
+        map((response: IChercheResponse) => this.extractEntities(response))
       );
   }
 
@@ -75,11 +75,11 @@ export class IChercheSearchSource
     });
   }
 
-  private extractRecords(response: IChercheResponse): Record<Feature>[] {
-    return response.features.map(result => this.resultToRecord(result));
+  private extractEntities(response: IChercheResponse): Entity<Feature>[] {
+    return response.features.map(result => this.resultToEntity(result));
   }
 
-  private resultToRecord(result: IChercheResult): Record<Feature> {
+  private resultToEntity(result: IChercheResult): Entity<Feature> {
     const properties = this.computeProperties(result);
 
     return {
@@ -128,13 +128,13 @@ export class IChercheReverseSearchSource
     });
   }
 
-  reverseSearch(lonLat: [number, number], distance?: number): Observable<Record<Feature>[]> {
+  reverseSearch(lonLat: [number, number], distance?: number): Observable<Entity<Feature>[]> {
     const params = this.computeRequestParams(lonLat, distance);
     return this.http
       .get(this.searchUrl, { params })
       .pipe(
         map((response: IChercheReverseResponse) =>
-          this.extractRecords(response))
+          this.extractEntities(response))
       );
   }
 
@@ -149,11 +149,11 @@ export class IChercheReverseSearchSource
     });
   }
 
-  private extractRecords(response: IChercheReverseResponse): Record<Feature>[] {
-    return response.features.map(result => this.resultToRecord(result));
+  private extractEntities(response: IChercheReverseResponse): Entity<Feature>[] {
+    return response.features.map(result => this.resultToEntity(result));
   }
 
-  private resultToRecord(result: IChercheReverseResult): Record<Feature> {
+  private resultToEntity(result: IChercheReverseResult): Entity<Feature> {
     const properties = this.computeProperties(result);
     const extent = this.computeExtent(result);
 

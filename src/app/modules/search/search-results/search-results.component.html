@@ -3,30 +3,30 @@
     <ng-template
       #groupTemplate
       ngFor let-group let-i="index"
-      [ngForOf]="(store.records$ | async).sort(sortByOrder) | recordGroup">
+      [ngForOf]="(store.entities$ | async).sort(sortByOrder) | searchEntityGroup">
 
       <igo-collapsible
-        title="{{group.source.title}} ({{group.records.length}})"
+        title="{{group.source.title}} ({{group.entities.length}})"
         *ngIf="mode === displayMode.Grouped; else flatTemplate">
-        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {record: group.record}"></ng-container>
+        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {entity: group.entity}"></ng-container>
       </igo-collapsible>
 
       <ng-template #flatTemplate>
-        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {record: group.record}"></ng-container>
+        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {entity: group.entity}"></ng-container>
       </ng-template>
 
       <ng-template #storeItemTemplate>
-        <ng-template ngFor let-record let-j="index" [ngForOf]="group.records">
+        <ng-template ngFor let-entity let-j="index" [ngForOf]="group.entities">
           <fadq-search-results-item
             igoListItem
             color="accent"
-            [record]="record"
-            [focused]="store.getRecordState(record).focused"
-            [selected]="store.getRecordState(record).selected"
-            (focus)="focusRecord(record)"
-            (select)="selectRecord(record)"
-            (unfocus)="unfocus.emit(record)"
-            (unselect)="unselect.emit(record)">
+            [entity]="entity"
+            [focused]="store.getEntityState(entity).focused"
+            [selected]="store.getEntityState(entity).selected"
+            (focus)="focusEntity(entity)"
+            (select)="selectEntity(entity)"
+            (unfocus)="unfocus.emit(entity)"
+            (unselect)="unselect.emit(entity)">
           </fadq-search-results-item>
         </ng-template>
       </ng-template>

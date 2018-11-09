@@ -1,10 +1,10 @@
 <igo-list [navigation]="false">
-  <ng-template ngFor let-item [ngForOf]="store.records$ | async">
+  <ng-template ngFor let-item [ngForOf]="store.entities$ | async">
     <ng-container *ngIf="isGroup(item)">
       <fadq-catalog-browser-group
         [group]="item"
         [state]="store.state"
-        [added]="store.getRecordState(item).added"
+        [added]="store.getEntityState(item).added"
         (layerSelect)="selectLayer($event)"
         (layerUnselect)="layerUnselect.emit($event)"
         (layerAdd)="addLayer($event)"
@@ -18,9 +18,9 @@
       <fadq-catalog-browser-layer
         igoListItem
         [layer]="item"
-        [added]="store.getRecordState(item).added"
-        [disabled]="store.getRecordState(item).added"
-        [selected]="store.getRecordState(item).selected"
+        [added]="store.getEntityState(item).added"
+        [disabled]="store.getEntityState(item).added"
+        [selected]="store.getEntityState(item).selected"
         (select)="selectLayer(item)"
         (unselect)="layerUnselect.emit(item)"
         (add)="addLayer($event)"

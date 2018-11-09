@@ -11,9 +11,9 @@ import {
 
 import { IgoMap } from '@igo2/geo';
 
-import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/store';
-import { DataStoreController } from '../../data/shared/controller';
+import { Entity } from '../../entity/shared/entity.interface';
+import { EntityStore } from '../../entity/shared/store';
+import { EntityStoreController } from '../../entity/shared/controller';
 import { Catalog } from '../shared/catalog.interface';
 
 @Component({
@@ -23,13 +23,13 @@ import { Catalog } from '../shared/catalog.interface';
 })
 export class CatalogLibaryComponent implements OnInit, OnDestroy {
 
-  private controller: DataStoreController;
+  private controller: EntityStoreController;
 
   @Input()
-  get store(): DataStore<Record<Catalog>> {
+  get store(): EntityStore<Entity<Catalog>> {
     return this._store;
   }
-  set store(value: DataStore<Record<Catalog>>) {
+  set store(value: EntityStore<Entity<Catalog>>) {
     this._store = value;
   }
   private _store;
@@ -43,11 +43,11 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
   }
   private _map;
 
-  @Output() select = new EventEmitter<Record<Catalog>>();
-  @Output() unselect = new EventEmitter<Record<Catalog>>();
+  @Output() select = new EventEmitter<Entity<Catalog>>();
+  @Output() unselect = new EventEmitter<Entity<Catalog>>();
 
   constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new DataStoreController()
+    this.controller = new EntityStoreController()
       .withChangeDetector(this.cdRef);
   }
 
@@ -60,8 +60,8 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  selectCatalog(catalog: Record<Catalog>) {
-    this.controller.updateRecordState(catalog, {
+  selectCatalog(catalog: Entity<Catalog>) {
+    this.controller.updateEntityState(catalog, {
       selected: true,
       focused: true
     }, true);

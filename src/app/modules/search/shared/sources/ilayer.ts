@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { LanguageService } from '@igo2/core';
 import { AnyLayerOptions } from '@igo2/geo';
 
-import { Record } from '../../../data/shared/data.interface';
+import { Entity } from '../../../entity/shared/entity.interface';
 import { LAYER } from '../../../map/shared/map.enum';
 import { LayerInfo } from '../../../map/shared/map.interface';
 import { SearchSource, TextSearch } from './source';
@@ -44,12 +44,12 @@ export class ILayerSearchSource
     };
   }
 
-  search(term?: string): Observable<Record<LayerInfo>[]> {
+  search(term?: string): Observable<Entity<LayerInfo>[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
       .pipe(
-        map((response: ILayerResponse) => this.extractRecords(response))
+        map((response: ILayerResponse) => this.extractEntities(response))
       );
   }
 
@@ -61,11 +61,11 @@ export class ILayerSearchSource
     });
   }
 
-  private extractRecords(response: ILayerResponse): Record<LayerInfo>[] {
-    return response.items.map(result => this.resultToRecord(result));
+  private extractEntities(response: ILayerResponse): Entity<LayerInfo>[] {
+    return response.items.map(result => this.resultToEntity(result));
   }
 
-  private resultToRecord(result: ILayerResult): Record<LayerInfo> {
+  private resultToEntity(result: ILayerResult): Entity<LayerInfo> {
     const properties = this.computeProperties(result);
     const layerOptions = this.computeLayerOptions(result);
 

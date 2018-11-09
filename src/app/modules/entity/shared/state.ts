@@ -1,8 +1,8 @@
 import { BehaviorSubject } from 'rxjs';
 
-import { RecordState } from './data.interface';
+import { State } from './entity.interface';
 
-export class DataState<S extends { [key: string]: boolean } = RecordState> {
+export class EntityState<S extends { [key: string]: boolean } = State> {
 
   public states$ = new BehaviorSubject<Map<string, S>>(new Map());
 

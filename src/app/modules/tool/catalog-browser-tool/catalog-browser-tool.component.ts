@@ -6,12 +6,12 @@ import { Register } from '@igo2/context';
 
 import { IgoMap, MapService } from '@igo2/geo';
 
-import { Record, RecordState } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/store';
+import { Entity, State } from '../../entity/shared/entity.interface';
+import { EntityStore } from '../../entity/shared/store';
 import { Catalog, CatalogItem } from '../../catalog/shared/catalog.interface';
 import { CatalogService } from '../../catalog/shared/catalog.service';
 import { CatalogStoreService } from '../../catalog/shared/catalog-store.service';
-import { catalogItemToRecord } from '../../catalog/shared/catalog.utils';
+import { catalogItemToEntity } from '../../catalog/shared/catalog.utils';
 
 @Register({
   name: 'catalogBrowser',
@@ -24,7 +24,7 @@ import { catalogItemToRecord } from '../../catalog/shared/catalog.utils';
 })
 export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
 
-  public store: DataStore<Record<CatalogItem>>;
+  public store: EntityStore<Entity<CatalogItem>>;
   public storeIsReady = false;
 
   private catalog$$: Subscription;
@@ -43,10 +43,10 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
     const catalogStore = this.catalogStoreService.getCatalogStore();
 
     this.catalog$$ = catalogStore
-      .observeBy((catalog: Record<Catalog>, state: RecordState) => {
+      .observeBy((catalog: Entity<Catalog>, state: State) => {
         return state.selected === true;
       })
-      .subscribe((catalogs: Record<Catalog>[]) => {
+      .subscribe((catalogs: Entity<Catalog>[]) => {
         if (catalogs.length > 0) {
           this.loadCatalogItems(catalogs[0]);
         }
@@ -57,7 +57,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
     this.catalog$$.unsubscribe();
   }
 
-  private loadCatalogItems(catalog: Record<Catalog>) {
+  private loadCatalogItems(catalog: Entity<Catalog>) {
     const store = this.catalogStoreService.getCatalogItemsStore(catalog);
     if (store !== undefined) {
       this.store = store;
@@ -65,13 +65,13 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.store = new DataStore<Record<CatalogItem>>();
+    this.store = new EntityStore<Entity<CatalogItem>>();
     this.catalogStoreService.setCatalogItemsStore(catalog, this.store);
     this.storeIsReady = true;
 
     this.catalogService.loadCatalogItems(catalog.data)
       .subscribe((items: CatalogItem[]) => {
-        this.store.setRecords(items.map(catalogItemToRecord), true);
+        this.store.setEntities(items.map(catalogItemToEntity), true);
       });
 
   }

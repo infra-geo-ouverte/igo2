@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
 
-import { DataProvider } from '../../../data/shared/provider';
-import { Record } from '../../../data/shared/data.interface';
+import { EntityProvider } from '../../../entity/shared/provider';
+import { Entity } from '../../../entity/shared/entity.interface';
 import { SearchSourceOptions } from './source.interface';
 
-export class SearchSource implements DataProvider {
+export class SearchSource implements EntityProvider {
 
   static id: string;
 
@@ -50,13 +50,13 @@ export class SearchSource implements DataProvider {
 
 export interface TextSearch {
 
-  search(term: string): Observable<Record[]>;
+  search(term: string): Observable<Entity[]>;
 
 }
 
 
 export interface ReverseSearch {
 
-  reverseSearch(lonLat: [number, number], distance?: number): Observable<Record[]>;
+  reverseSearch(lonLat: [number, number], distance?: number): Observable<Entity[]>;
 
 }

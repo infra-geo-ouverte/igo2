@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
 
-import { Record } from '../../data/shared/data.interface';
+import { Entity } from '../../entity/shared/entity.interface';
 import { SearchSource } from './sources';
 
 export interface Research {
-  request: Observable<Record[]>;
+  request: Observable<Entity[]>;
   reverse: boolean;
   source: SearchSource;
 }

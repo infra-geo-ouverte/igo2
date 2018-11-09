@@ -3,30 +3,30 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { isEquivalent } from '../../utils/object';
-import { Record, RecordState } from './data.interface';
-import { DataStore } from './store';
+import { Entity, State } from './entity.interface';
+import { EntityStore } from './store';
 
-export class DataStoreController {
+export class EntityStoreController {
 
-  private store: DataStore<Record>;
+  private store: EntityStore<Entity>;
   private cdRef: ChangeDetectorRef;
 
-  private recordWatcher$$: Subscription;
+  private entityWatcher$$: Subscription;
   private stateWatcher$$: Subscription;
   private innerState = new Map();
   private firstDetection = false;
 
-  constructor(store?: DataStore<Record>) {
+  constructor(store?: EntityStore<Entity>) {
     if (store !== undefined) {
       this.bind(store);
     }
   }
 
-  getStore(): DataStore<Record> {
+  getStore(): EntityStore<Entity> {
     return this.store;
   }
 
-  bind(store: DataStore<Record>): DataStoreController {
+  bind(store: EntityStore<Entity>): EntityStoreController {
     this.unbind();
     this.watch(store);
     this.store = store;
@@ -34,7 +34,7 @@ export class DataStoreController {
     return this;
   }
 
-  unbind(): DataStoreController {
+  unbind(): EntityStoreController {
     this.unwatch();
 
     this.innerState = new Map();
@@ -43,44 +43,44 @@ export class DataStoreController {
     return this;
   }
 
-  withChangeDetector(cdRef: ChangeDetectorRef): DataStoreController {
+  withChangeDetector(cdRef: ChangeDetectorRef): EntityStoreController {
     this.cdRef = cdRef;
     return this;
   }
 
-  updateRecordState(record: Record, changes: { [key: string]: boolean }, exclusive = false) {
+  updateEntityState(entity: Entity, changes: { [key: string]: boolean }, exclusive = false) {
     if (this.store === undefined) {
       return;
     }
-    this.store.updateRecordState(record, changes, exclusive);
+    this.store.updateEntityState(entity, changes, exclusive);
   }
 
-  private watch(store: DataStore<Record>) {
+  private watch(store: EntityStore<Entity>) {
     this.unwatch();
 
-    this.recordWatcher$$ = store.observable
-      .subscribe((records: Record[]) => this.handleRecordChanges(records));
+    this.entityWatcher$$ = store.observable
+      .subscribe((entities: Entity[]) => this.handleEntityChanges(entities));
 
     this.stateWatcher$$ = store.state.observable
-      .subscribe((state: Map<string, RecordState>) => this.handleStateChanges(state));
+      .subscribe((state: Map<string, State>) => this.handleStateChanges(state));
   }
 
   private unwatch() {
     if (this.store === undefined) {
       return;
     }
-    this.recordWatcher$$.unsubscribe();
+    this.entityWatcher$$.unsubscribe();
     this.stateWatcher$$.unsubscribe();
   }
 
-  private handleRecordChanges(records: Record[]) {
+  private handleEntityChanges(entities: Entity[]) {
     this.firstDetection = true;
     if (this.cdRef !== undefined) {
       this.cdRef.detectChanges();
     }
   }
 
-  private handleStateChanges(state: Map<string, RecordState>) {
+  private handleStateChanges(state: Map<string, State>) {
     let detectChanges = false;
 
     const rids = Array.from(state.keys());

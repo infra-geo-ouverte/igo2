@@ -7,8 +7,8 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { getRecordTitle, Record } from '../../../modules/data/shared';
-import { getFeatureFromRecord, Feature } from '../../../modules/feature/shared';
+import { getEntityTitle, Entity } from '../../../modules/entity/shared';
+import { getFeatureFromEntity, Feature } from '../../../modules/feature/shared';
 
 
 @Component({
@@ -37,7 +37,7 @@ export class InfoPanelComponent {
     if (this._title !== undefined) {
       return this._title;
     }
-    return this.record === undefined ? undefined : getRecordTitle(this.record);
+    return this.entity === undefined ? undefined : getEntityTitle(this.entity);
   }
   set title(value: string) {
     this._title = value;
@@ -45,16 +45,16 @@ export class InfoPanelComponent {
   private _title: string;
 
   @Input()
-  get records(): Record[] {
-    return this._records;
+  get entities(): Entity[] {
+    return this._entities;
   }
-  set records(value: Record[]) {
-    this._records = value || [];
+  set entities(value: Entity[]) {
+    this._entities = value || [];
     if (!this.empty) {
       this.toggleDisplay();
     }
   }
-  private _records: Record[] = [];
+  private _entities: Entity[] = [];
 
   @Output() openedChange = new EventEmitter<boolean>();
 
@@ -63,25 +63,25 @@ export class InfoPanelComponent {
     return this.opened;
   }
 
-  @HostBinding('class.fadq-info-panel-with-records')
-  get hasWithRecordsClass() {
-    return this.records === undefined ? false : true;
+  @HostBinding('class.fadq-info-panel-with-entities')
+  get hasWithEntitiesClass() {
+    return this.entities === undefined ? false : true;
   }
 
   get empty(): boolean {
-    return this.records.length === 0;
+    return this.entities.length === 0;
   }
 
-  get record(): Record | undefined {
+  get entity(): Entity | undefined {
     if (this.empty) {
       return undefined;
     }
-    return this.records[0];
+    return this.entities[0];
   }
 
   get feature(): Feature | undefined {
-    if (this.record) {
-      return getFeatureFromRecord(this.record);
+    if (this.entity) {
+      return getFeatureFromEntity(this.entity);
     }
     return undefined;
   }

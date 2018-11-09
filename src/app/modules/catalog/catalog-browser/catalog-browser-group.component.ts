@@ -9,11 +9,11 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { getRecordTitle } from '../../data/shared/data.utils';
-import { Record } from '../../data/shared/data.interface';
-import { DataStore } from '../../data/shared/store';
-import { DataState} from '../../data/shared/state';
-import { DataStoreController } from '../../data/shared/controller';
+import { getEntityTitle } from '../../entity/shared/entity.utils';
+import { Entity } from '../../entity/shared/entity.interface';
+import { EntityStore } from '../../entity/shared/store';
+import { EntityState} from '../../entity/shared/state';
+import { EntityStoreController } from '../../entity/shared/controller';
 import {
   CatalogItem,
   CatalogItemGroup,
@@ -21,11 +21,11 @@ import {
   CatalogItemState
 } from '../shared/catalog.interface';
 import { CatalogItemType } from '../shared/catalog.enum';
-import { catalogItemToRecord } from '../shared/catalog.utils';
+import { catalogItemToEntity } from '../shared/catalog.utils';
 
 export interface CatalogBrowserGroupEvent {
-  group:  Record<CatalogItemGroup>;
-  items:  Record<CatalogItem>[];
+  group:  Entity<CatalogItemGroup>;
+  items:  Entity<CatalogItem>[];
 }
 
 @Component({
@@ -37,26 +37,26 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
 
   public collapsed = true;
 
-  private store: DataStore<Record<CatalogItem>, CatalogItemState>;
-  private controller: DataStoreController;
+  private store: EntityStore<Entity<CatalogItem>, CatalogItemState>;
+  private controller: EntityStoreController;
 
   @Input()
-  get group(): Record<CatalogItemGroup> {
+  get group(): Entity<CatalogItemGroup> {
     return this._group;
   }
-  set group(value: Record<CatalogItemGroup>) {
+  set group(value: Entity<CatalogItemGroup>) {
     this._group = value;
   }
-  private _group: Record<CatalogItemGroup>;
+  private _group: Entity<CatalogItemGroup>;
 
   @Input()
-  get state(): DataState<CatalogItemState> {
+  get state(): EntityState<CatalogItemState> {
     return this._state;
   }
-  set state(value: DataState<CatalogItemState>) {
+  set state(value: EntityState<CatalogItemState>) {
     this._state = value;
   }
-  private _state: DataState<CatalogItemState>;
+  private _state: EntityState<CatalogItemState>;
 
   @Input()
   get added(): boolean {
@@ -67,26 +67,26 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
   }
   private _added: boolean;
 
-  @Output() layerSelect = new EventEmitter<Record<CatalogItemLayer>>();
-  @Output() layerUnselect = new EventEmitter<Record<CatalogItemLayer>>();
-  @Output() layerAdd = new EventEmitter<Record<CatalogItemLayer>>();
-  @Output() layerRemove = new EventEmitter<Record<CatalogItemLayer>>();
+  @Output() layerSelect = new EventEmitter<Entity<CatalogItemLayer>>();
+  @Output() layerUnselect = new EventEmitter<Entity<CatalogItemLayer>>();
+  @Output() layerAdd = new EventEmitter<Entity<CatalogItemLayer>>();
+  @Output() layerRemove = new EventEmitter<Entity<CatalogItemLayer>>();
   @Output() add = new EventEmitter<CatalogBrowserGroupEvent>();
   @Output() remove = new EventEmitter<CatalogBrowserGroupEvent>();
 
   get title(): string {
-    return getRecordTitle(this.group);
+    return getEntityTitle(this.group);
   }
 
   constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new DataStoreController()
+    this.controller = new EntityStoreController()
       .withChangeDetector(this.cdRef);
   }
 
   ngOnInit() {
-    this.store = new DataStore(this.state);
-    this.store.setRecords(
-      this.group.data.items.map(catalogItemToRecord),
+    this.store = new EntityStore(this.state);
+    this.store.setEntities(
+      this.group.data.items.map(catalogItemToEntity),
       true
   );
     this.controller.bind(this.store);
@@ -96,11 +96,11 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  isGroup(item: Record<CatalogItem>): boolean {
+  isGroup(item: Entity<CatalogItem>): boolean {
     return item.data.type === CatalogItemType.Group;
   }
 
-  isLayer(item: Record<CatalogItem>): boolean {
+  isLayer(item: Entity<CatalogItem>): boolean {
     return item.data.type === CatalogItemType.Layer;
   }
 
@@ -115,12 +115,12 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     this.added ? this.doRemove() : this.doAdd();
   }
 
-  handleAddLayer(layer: Record<CatalogItemLayer>) {
+  handleAddLayer(layer: Entity<CatalogItemLayer>) {
     this.layerAdd.emit(layer);
     this.tryToggleGroup(layer, true);
   }
 
-  handleRemoveLayer(layer: Record<CatalogItemLayer>) {
+  handleRemoveLayer(layer: Entity<CatalogItemLayer>) {
     this.layerRemove.emit(layer);
     this.tryToggleGroup(layer, false);
   }
@@ -129,7 +129,7 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     this.added = true;
     this.add.emit({
       group: this.group,
-      items: this.store.records
+      items: this.store.entities
     });
   }
 
@@ -137,15 +137,15 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     this.added = false;
     this.remove.emit({
       group: this.group,
-      items: this.store.records
+      items: this.store.entities
     });
   }
 
-  private tryToggleGroup(layer: Record<CatalogItemLayer>, added) {
-    const layersAdded = this.store.records
-      .filter((record: Record<CatalogItem>) => record.rid !== layer.rid)
-      .map((record: Record<CatalogItem>) => {
-        return this.store.getRecordState(record).added || false;
+  private tryToggleGroup(layer: Entity<CatalogItemLayer>, added) {
+    const layersAdded = this.store.entities
+      .filter((entity: Entity<CatalogItem>) => entity.rid !== layer.rid)
+      .map((entity: Entity<CatalogItem>) => {
+        return this.store.getEntityState(entity).added || false;
       });
 
     if (layersAdded.every((value) => value === added)) {
