@@ -11,7 +11,7 @@ import {
 
 import { IgoMap, Layer, LayerService } from '@igo2/geo';
 
-import { forkJoin, zip } from 'rxjs';
+import { zip } from 'rxjs';
 
 import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/store';
@@ -23,7 +23,6 @@ import {
   CatalogItemState
 } from '../shared/catalog.interface';
 import { CatalogItemType } from '../shared/catalog.enum';
-
 
 @Component({
   selector: 'fadq-catalog-browser',
