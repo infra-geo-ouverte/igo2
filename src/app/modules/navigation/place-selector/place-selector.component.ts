@@ -32,7 +32,6 @@ export class PlaceSelectorComponent implements OnInit {
   public places: Place[] = [];
   public filteredPlaces$: Observable<Place[]>;
   public placeControl = new FormControl();
-  public overlayFeature: Feature;
 
   constructor(
     private placeService: PlaceService,
@@ -71,7 +70,6 @@ export class PlaceSelectorComponent implements OnInit {
     if (feature === undefined || feature === null) {
       this.clearFeature();
     } else {
-      this.overlayFeature = feature;
       this.overlayService.setFeatures([feature], OverlayAction.Zoom);
     }
   }
@@ -87,7 +85,6 @@ export class PlaceSelectorComponent implements OnInit {
 
   private clearFeature() {
     this.overlayService.clear();
-    this.overlayFeature = undefined;
   }
 
   private filterPlacesByTitle(title: string): Place[] {

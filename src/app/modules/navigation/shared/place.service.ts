@@ -3,9 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ApiService } from '../../core/api';
 import { Feature } from '@igo2/geo';
 
+import { ApiService } from '../../core/api';
+import { substituteProperties } from '../../utils/str';
 import {
   Place,
   PlaceCategory,
@@ -20,8 +21,8 @@ import {
 export class PlaceService {
 
   static defaultPlaceMapper: PlaceMapper = {
-    id: 'id',
-    title: 'title'
+    idProperty: 'id',
+    titleProperty: 'title'
   };
 
   constructor(
@@ -59,8 +60,9 @@ export class PlaceService {
     }
 
     const mapper = {
-      id: api.idProperty || PlaceService.defaultPlaceMapper.id,
-      title: api.titleProperty || PlaceService.defaultPlaceMapper.id,
+      idProperty: api.idProperty || PlaceService.defaultPlaceMapper.idProperty,
+      titleProperty: api.titleProperty || PlaceService.defaultPlaceMapper.titleProperty,
+      title: api.title
     };
 
     return results.map(result => {
@@ -69,9 +71,11 @@ export class PlaceService {
   }
 
   private formatPlaceResult(result: Object, mapper: PlaceMapper): Place {
+    const id = String(result[mapper.idProperty]);
+    const title = this.computeTitle(result, mapper) || id;
     return {
-      id: result[mapper.id],
-      title: result[mapper.title]
+      id: id,
+      title: title
     };
   }
 
@@ -84,5 +88,18 @@ export class PlaceService {
 
   private formatPlaceFeatureResult(result: Object): Feature {
     return Object.assign({projection: 'EPSG:4326'}, result) as Feature;
+  }
+
+  private computeTitle(result: Object, mapper: PlaceMapper): string | undefined {
+    let title;
+    if (mapper.titleProperty !== undefined) {
+      title = result[mapper.titleProperty];
+    }
+
+    if (title === undefined && mapper.title !== undefined) {
+      title = substituteProperties(mapper.title, result);
+    }
+
+    return title;
   }
 }

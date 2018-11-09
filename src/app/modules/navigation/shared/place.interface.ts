@@ -11,6 +11,7 @@ export interface PlaceCollectionApi {
   resultsProperty?: string;
   idProperty?: string;
   titleProperty?: string;
+  title?: string;
 }
 
 export interface PlaceFeatureApi {
@@ -23,6 +24,7 @@ export interface Place {
 }
 
 export interface PlaceMapper {
-  id: string;
-  title: string;
+  idProperty: string;
+  titleProperty?: string;
+  title?: string;
 }
