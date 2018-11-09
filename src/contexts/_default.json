@@ -112,7 +112,7 @@
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionsAdministratives",
               "idProperty": "codeRegionAdministrative",
-              "titleProperty": "nomRegionAdministrative"
+              "title": "${nomRegionAdministrative} (${codeRegionAdministrative})"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionAdministrative/${id}"
@@ -134,7 +134,7 @@
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoAnneeAssurance/2018",
               "idProperty": "idStationMeteo",
-              "titleProperty": "nomStation"
+              "title": "${noStationFADQ}-${nomStation}"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirStationMeteo/${id}"
@@ -145,22 +145,10 @@
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoDisponibles",
               "idProperty": "idStationMeteo",
-              "titleProperty": "nomStation"
+              "title": "${noStationFADQ}-${nomStation}"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirStationMeteo/${id}"
-            }
-          },
-          {
-            "title": "navigation.categories.zc1",
-            "collection": {
-              "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/1",
-              "resultsProperty": "lstZonageCollectif",
-              "idProperty": "idZonageCollectif",
-              "titleProperty": "noZone"
-            },
-            "feature": {
-              "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/1/${id}"
             }
           },
           {
@@ -169,10 +157,22 @@
               "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/2",
               "resultsProperty": "lstZonageCollectif",
               "idProperty": "idZonageCollectif",
-              "titleProperty": "noZone"
+              "title": "${noZone}-${noZonage}"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/2/${id}"
+            }
+          },
+          {
+            "title": "navigation.categories.zc1",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/1",
+              "resultsProperty": "lstZonageCollectif",
+              "idProperty": "idZonageCollectif",
+              "title": "${noZone}-${noZonage}"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/1/${id}"
             }
           },
           {
@@ -181,7 +181,7 @@
               "uri": "/igonavigation/zoom_selection/obtenirRegionsZonageCollectif",
               "resultsProperty": "lstRegionZonageCollectif",
               "idProperty": "idRegionZonageCollectif",
-              "titleProperty": "nomRegionZonageCollectif"
+              "title": "${noRegionZonageCollectif}-${nomRegionZonageCollectif}"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirUneRegionZonageCollectif/${id}"
