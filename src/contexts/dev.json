@@ -1,6 +1,6 @@
 {
-  "uri": "_default",
-  "title": "Default",
+  "uri": "dev",
+  "title": "Dev",
   "map": {
     "view": {
       "projection": "EPSG:32198",
@@ -38,14 +38,31 @@
           "version": "1.0.0"
         }
       }
+    },
+    {
+      "title": "Municipalités",
+      "visible": true,
+      "sourceOptions": {
+        "type": "wms",
+        "url": "http://geoservpro.fadq.qc/swwf",
+        "layer": "SDA_REGIO_S",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "SDA_REGIO_S",
+          "srs": "EPSG:32198"
+        }
+      }
     }
   ],
   "toolbar": [
     "clientInfo",
-    "searchResultsFadq",
+    "searchResults",
     "contextManager",
     "mapDetails",
-    "catalogFadq",
+    "catalog",
     "navigation",
     "importExport",
     "print",
@@ -56,7 +73,7 @@
       "name": "clientInfo"
     },
     {
-      "name": "searchResultsFadq"
+      "name": "searchResults"
     },
     {
       "name": "contextManager"
@@ -68,10 +85,7 @@
       }
     },
     {
-      "name": "catalogFadq"
-    },
-    {
-      "name": "catalogBrowser"
+      "name": "catalog"
     },
     {
       "name": "navigation",
@@ -86,9 +100,11 @@
         ],
         "categories": [
           {
+            "id": "mun",
             "title": "navigation.categories.mun",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirMunicipalites",
+              "resultsProperty": "lstMunicipalite",
               "idProperty": "codeGeographique",
               "titleProperty": "nomMunicipalite"
             },
@@ -97,9 +113,11 @@
             }
           },
           {
+            "id": "mrc",
             "title": "navigation.categories.mrc",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirMunicipalitesRegionalesComte",
+              "resultsProperty": "lstMunicipaliteRegionaleComte",
               "idProperty": "code",
               "titleProperty": "nom"
             },
@@ -108,9 +126,11 @@
             }
           },
           {
+            "id": "ra",
             "title": "navigation.categories.ra",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionsAdministratives",
+              "resultsProperty": "lstRegionAdministrative",
               "idProperty": "codeRegionAdministrative",
               "titleProperty": "nomRegionAdministrative"
             },
@@ -119,9 +139,11 @@
             }
           },
           {
+            "id": "tcs",
             "title": "navigation.categories.tcs",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirTerritoiresCentresServices",
+              "resultsProperty": "lstTerritoireCentreServices",
               "idProperty": "idTerritoireCentreServices",
               "titleProperty": "nomCentreServices"
             },
@@ -130,20 +152,11 @@
             }
           },
           {
-            "title": "navigation.categories.smf",
-            "collection": {
-              "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoAnneeAssurance/2018",
-              "idProperty": "idStationMeteo",
-              "titleProperty": "nomStation"
-            },
-            "feature": {
-              "uri": "/igonavigation/zoom_selection/obtenirStationMeteo/${id}"
-            }
-          },
-          {
-            "title": "navigation.categories.smd",
+            "id": "sm",
+            "title": "navigation.categories.sm",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoDisponibles",
+              "resultsProperty": "lstStationMeteoDisponible",
               "idProperty": "idStationMeteo",
               "titleProperty": "nomStation"
             },
@@ -152,6 +165,7 @@
             }
           },
           {
+            "id": "zc1",
             "title": "navigation.categories.zc1",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/1",
@@ -164,6 +178,7 @@
             }
           },
           {
+            "id": "zc2",
             "title": "navigation.categories.zc2",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/2",
@@ -176,6 +191,7 @@
             }
           },
           {
+            "id": "rzc",
             "title": "navigation.categories.rzc",
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionsZonageCollectif",
