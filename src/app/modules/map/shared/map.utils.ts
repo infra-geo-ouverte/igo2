@@ -1,4 +1,12 @@
-import { AnyLayerOptions } from '@igo2/geo';
+import { Md5 } from 'ts-md5';
+
+import {
+  AnyLayerOptions,
+  DataSourceOptions,
+  WMSDataSourceOptions,
+  WMTSDataSourceOptions
+} from '@igo2/geo';
+import { uuid } from '@igo2/utils';
 
 import { Record } from '../../data/shared/data.interface';
 import { LayerInfo } from './map.interface';
@@ -11,7 +19,6 @@ export function getLayerOptionsFromRecord(record: Record): AnyLayerOptions | und
 
   return (record as Record<LayerInfo>).data.options;
 }
-
 
 export function stringToLonLat(str: string): [number, number] | undefined {
   const coordPattern =  '[-+]?[\\d]{1,8}(\\.)?(\\d+)?';
@@ -39,4 +46,29 @@ export function stringToLonLat(str: string): [number, number] | undefined {
   }
 
   return lonLat;
+}
+
+export function generateLayerIdFromSourceOptions(options: DataSourceOptions) {
+  let id;
+  if (options.type === 'wms') {
+    id = generateWMSLayerIdFromSourceOptions(options as WMSDataSourceOptions);
+  } else if (options.type === 'wmts') {
+    id = generateWMTSLayerIdFromSourceOptions(options as WMTSDataSourceOptions);
+  } else {
+    id = uuid();
+  }
+
+  return id;
+}
+
+export function generateWMSLayerIdFromSourceOptions(options: WMSDataSourceOptions) {
+  const layers = options.params.layers;
+  const chain = 'wms' + options.url + layers;
+  return Md5.hashStr(chain) as string;
+}
+
+export function generateWMTSLayerIdFromSourceOptions(options: WMTSDataSourceOptions) {
+  const layer = options.layer;
+  const chain = 'wmts' + options.url + layer;
+  return Md5.hashStr(chain) as string;
 }

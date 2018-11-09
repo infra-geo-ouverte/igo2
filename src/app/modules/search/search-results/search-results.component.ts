@@ -5,8 +5,8 @@ import {
   EventEmitter,
   ChangeDetectorRef,
   ChangeDetectionStrategy,
-  OnDestroy,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 
 
