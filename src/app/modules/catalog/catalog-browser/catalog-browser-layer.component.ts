@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 import { getRecordTitle, getRecordIcon } from '../../data/shared/data.utils';
 import { Record } from '../../data/shared/data.interface';
@@ -7,7 +7,6 @@ import { CatalogItemLayer } from '../shared/catalog.interface';
 @Component({
   selector: 'fadq-catalog-browser-layer',
   templateUrl: './catalog-browser-layer.component.html',
-  styleUrls: ['./catalog-browser-layer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CatalogBrowserLayerComponent {
@@ -30,15 +29,6 @@ export class CatalogBrowserLayerComponent {
   }
   private _added: boolean;
 
-  @Input()
-  get color() {
-    return this._color;
-  }
-  set color(value: string) {
-    this._color = value;
-  }
-  private _color = 'primary';
-
   get title(): string {
     return getRecordTitle(this.layer);
   }
@@ -47,6 +37,23 @@ export class CatalogBrowserLayerComponent {
     return getRecordIcon(this.layer) || 'layers';
   }
 
+  @Output() add = new EventEmitter<Record<CatalogItemLayer>>();
+  @Output() remove = new EventEmitter<Record<CatalogItemLayer>>();
+
   constructor() {}
+
+  handleToggle() {
+    this.added ? this.doRemove() : this.doAdd();
+  }
+
+  private doAdd() {
+    this.added = true;
+    this.add.emit(this.layer);
+  }
+
+  private doRemove() {
+    this.added = false;
+    this.remove.emit(this.layer);
+  }
 
 }

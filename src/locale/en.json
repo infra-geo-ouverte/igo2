@@ -31,9 +31,16 @@
     }
   },
 
+  "catalog": {
+    "layer.addToMap": "Add to map",
+    "layer.removeFromMap": "Remove from map",
+    "group.addToMap": "Add all layers from this group to map",
+    "group.removeFromMap": "Remove all layers from this group to map"
+  },
+
   "tools": {
     "addressEditor": "Edit Addresses",
     "clientInfo": "Client",
     "navigation": "Navigation"
-  }
+  },
 }

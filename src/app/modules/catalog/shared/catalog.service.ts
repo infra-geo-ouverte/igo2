@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, zip} from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { EMPTY, Observable, of, concat } from 'rxjs';
+import { scan, startWith, catchError } from 'rxjs/operators';
 
 import { LanguageService, ConfigService } from '@igo2/core';
-import { LayerOptions, CapabilitiesService } from '@igo2/geo';
+import {
+  CapabilitiesService,
+  LayerOptions,
+  WMSDataSourceOptions
+} from '@igo2/geo';
 import {
   Catalog,
   CatalogItem,
@@ -12,7 +17,7 @@ import {
   CatalogServiceOptions
 } from './catalog.interface';
 import { CatalogItemType } from './catalog.enum';
-import { scan, startWith, mergeMap } from 'rxjs/operators';
+import { generateLayerIdFromSourceOptions } from '../../map/shared/map.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -53,15 +58,17 @@ export class CatalogService {
     // Catalogs from API
     const catalogsFromApi$ = this.http
       .get<Catalog[]>(`${apiUrl}/catalogs`)
-      .pipe(mergeMap(catalog => catalog));
+      .pipe(
+        catchError((response: HttpErrorResponse) => EMPTY)
+      );
     observables.push(catalogsFromApi$);
 
     // Catalogs from config
     if (catalogsFromConfig.length > 0) {
-      observables.push(of(...catalogsFromConfig));
+      observables.push(of(catalogsFromConfig));
     }
 
-    return zip(...observables);
+    return concat(...observables);
   }
 
   loadCatalogItems(catalog: Catalog): Observable<CatalogItem[]> {
@@ -85,7 +92,7 @@ export class CatalogService {
         startWith(groupItem),
         scan((group: CatalogItemGroup, layerOptions: LayerOptions) => {
           group.items.push({
-            id: `catalog.layer.${layerOptions.id || group.items.length}`,
+            id: generateLayerIdFromSourceOptions(layerOptions.sourceOptions),
             title: layerOptions.title,
             type: CatalogItemType.Layer,
             options: layerOptions
@@ -148,22 +155,23 @@ export class CatalogService {
           // If layer regex is okay (or not define), add the layer to the group
           if (boolRegFilter === true) {
             const timeFilter = this.capabilitiesService.getTimeFilter(layer);
+            const sourceOptions = {
+              type: 'wms',
+              url: catalog.url,
+              params: {
+                layers: layer.Name
+              },
+              timeFilter: { ...timeFilter, ...catalog.timeFilter }
+            } as WMSDataSourceOptions;
+
             arrLayer.push({
-              id: `catalog.layer.${layer.Name}`,
+              id: generateLayerIdFromSourceOptions(sourceOptions),
               type: CatalogItemType.Layer,
               title: layer.Title,
               properties: {},
               options: {
                 title: layer.Title,
-                sourceOptions: {
-                  type: 'wms',
-                  url: catalog.url,
-                  params: {
-                    layers: layer.Name
-                  },
-                  // Merge catalog time filter in layer timeFilter
-                  timeFilter: { ...timeFilter, ...catalog.timeFilter }
-                }
+                sourceOptions: sourceOptions
               }
             });
           }

@@ -4,8 +4,13 @@
       <fadq-catalog-browser-group
         [group]="item"
         [state]="store.state"
+        [added]="store.getRecordState(item).added"
         (layerSelect)="selectLayer($event)"
-        (layerUnselect)="layerUnselect.emit($event)">
+        (layerUnselect)="layerUnselect.emit($event)"
+        (layerAdd)="addLayer($event)"
+        (layerRemove)="removeLayer($event)"
+        (add)="addGroup($event.group, $event.items)"
+        (remove)="removeGroup($event.group, $event.items)">
       </fadq-catalog-browser-group>
     </ng-container>
 
@@ -13,10 +18,13 @@
       <fadq-catalog-browser-layer
         igoListItem
         [layer]="item"
-        [focused]="store.getRecordState(item).focused"
+        [added]="store.getRecordState(item).added"
+        [disabled]="store.getRecordState(item).added"
         [selected]="store.getRecordState(item).selected"
         (select)="selectLayer(item)"
-        (unselect)="layerUnselect.emit(item)">
+        (unselect)="layerUnselect.emit(item)"
+        (add)="addLayer($event)"
+        (remove)="removeLayer($event)">
       </fadq-catalog-browser-layer>
     </ng-container>
   </ng-template>

@@ -23,7 +23,7 @@ import { catalogToRecord } from '../../catalog/shared/catalog.utils';
 export class CatalogLibraryToolComponent implements OnInit {
 
   get store(): DataStore<Record<Catalog>> {
-    return this.catalogStoreService.getStore();
+    return this.catalogStoreService.getCatalogStore();
   }
 
   constructor(
@@ -48,7 +48,7 @@ export class CatalogLibraryToolComponent implements OnInit {
   private loadCatalogs() {
     this.catalogService.loadCatalogs()
       .subscribe((catalogs: Catalog[]) => {
-        this.store.setRecords(catalogs.map(catalogToRecord));
+        this.store.addRecords(catalogs.map(catalogToRecord));
       });
   }
 

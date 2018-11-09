@@ -3,4 +3,19 @@
   <h4 mat-line matTooltipShowDelay="500" [matTooltip]="title">
     {{title}}
   </h4>
+  
+  <button
+    mat-icon-button
+    [color]="added ? 'warn' : ''"
+    tooltip-position="below"
+    matTooltipShowDelay="500"
+    [matTooltip]="added ?
+                  ('catalog.layer.removeFromMap' | translate) :
+                  ('catalog.layer.addToMap' | translate)"
+    (click)="handleToggle()">
+    <mat-icon>
+      <ng-container *ngIf="added">delete</ng-container>
+      <ng-container *ngIf="!added">add</ng-container>
+    </mat-icon>
+  </button>
 </mat-list-item>

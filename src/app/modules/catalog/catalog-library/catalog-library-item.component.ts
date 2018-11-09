@@ -8,12 +8,9 @@ import { Catalog } from '../shared/catalog.interface';
 
 @Component({
   selector: 'fadq-catalog-library-item',
-  templateUrl: './catalog-library-item.component.html',
-  styleUrls: ['./catalog-library-item.component.scss']
+  templateUrl: './catalog-library-item.component.html'
 })
 export class CatalogLibaryItemComponent {
-
-  public color = 'primary';
 
   @Input()
   get catalog(): Record<Catalog> {

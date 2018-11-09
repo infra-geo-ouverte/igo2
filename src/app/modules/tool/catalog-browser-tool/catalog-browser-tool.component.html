@@ -1,4 +1,7 @@
-<fadq-catalog-browser
-  [store]="store"
-  [map]="map">
-</fadq-catalog-browser>
+<ng-container >
+  <fadq-catalog-browser
+    *ngIf="storeIsReady === true"
+    [store]="store"
+    [map]="map">
+  </fadq-catalog-browser>
+</ng-container>

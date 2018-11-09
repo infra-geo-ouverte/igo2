@@ -11,11 +11,19 @@ import {
 
 import { IgoMap, Layer, LayerService } from '@igo2/geo';
 
+import { forkJoin, zip } from 'rxjs';
+
 import { Record } from '../../data/shared/data.interface';
 import { DataStore } from '../../data/shared/store';
 import { DataStoreController } from '../../data/shared/controller';
-import { CatalogItem, CatalogItemLayer, CatalogItemState } from '../shared/catalog.interface';
+import {
+  CatalogItem,
+  CatalogItemLayer,
+  CatalogItemGroup,
+  CatalogItemState
+} from '../shared/catalog.interface';
 import { CatalogItemType } from '../shared/catalog.enum';
+
 
 @Component({
   selector: 'fadq-catalog-browser',
@@ -46,6 +54,8 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
 
   @Output() layerSelect = new EventEmitter<Record<CatalogItemLayer>>();
   @Output() layerUnselect = new EventEmitter<Record<CatalogItemLayer>>();
+  @Output() layerAdd = new EventEmitter<Record<CatalogItemLayer>>();
+  @Output() layerRemove = new EventEmitter<Record<CatalogItemLayer>>();
 
   constructor(
     private layerService: LayerService,
@@ -56,24 +66,13 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.state.reset();
+    const currentLayerIds = this.map.layers.map((layer: Layer) => layer.id);
+    this.store.state.setByKeys(currentLayerIds, {added: true});
     this.controller.bind(this.store);
   }
 
   ngOnDestroy() {
     this.controller.unbind();
-  }
-
-  selectLayer(item: Record<CatalogItemLayer>) {
-    this.controller.updateRecordState(item, {
-      selected: true,
-      focused: true
-    }, true);
-
-    this.layerSelect.emit(item);
-    if (this.map !== undefined) {
-      this.addLayerToMap(item);
-    }
   }
 
   isGroup(item: Record<CatalogItem>): boolean {
@@ -84,10 +83,73 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     return item.data.type === CatalogItemType.Layer;
   }
 
-  private addLayerToMap(item: Record<CatalogItemLayer>) {
-    this.layerService.createAsyncLayer(item.data.options)
-      .subscribe((layer: Layer) => {
-        this.map.addLayer(layer);
+  selectLayer(layer: Record<CatalogItemLayer>) {
+    this.controller.updateRecordState(layer, {
+      selected: true,
+      focused: true,
+    }, true);
+
+    this.layerSelect.emit(layer);
+  }
+
+  addLayer(layer: Record<CatalogItemLayer>) {
+    this.controller.updateRecordState(layer, {added: true}, false);
+    this.addLayerToMap(layer);
+  }
+
+  removeLayer(layer: Record<CatalogItemLayer>) {
+    this.controller.updateRecordState(layer, {added: false}, false);
+    this.removeLayerFromMap(layer);
+  }
+
+  addGroup(group: Record<CatalogItemGroup>, items: Record<CatalogItemLayer>[]) {
+    this.controller.updateRecordState(group, {added: true}, false);
+    const layers = items.filter((item: Record<CatalogItem>) => {
+      const added = this.store.getRecordState(item).added || false;
+      return this.isLayer(item) && added === false;
+    });
+    this.addLayersToMap(layers);
+  }
+
+  removeGroup(group: Record<CatalogItemGroup>, items: Record<CatalogItemLayer>[]) {
+    this.controller.updateRecordState(group, {added: false}, false);
+    const layers = items.filter((item: Record<CatalogItem>) => {
+      const added = this.store.getRecordState(item).added || false;
+      return this.isLayer(item) && added === true;
       });
+    this.removeLayersFromMap(layers);
+  }
+
+  private addLayerToMap(layer: Record<CatalogItemLayer>) {
+    this.layerService.createAsyncLayer(layer.data.options)
+      .subscribe((oLayer: Layer) => {
+        this.map.addLayer(oLayer);
+      });
+  }
+
+  private removeLayerFromMap(layer: Record<CatalogItemLayer>) {
+    const oLayer = this.map.getLayerById(layer.data.id);
+    if (oLayer !== undefined) {
+      this.map.removeLayer(oLayer);
+    }
+  }
+
+  private addLayersToMap(layers: Record<CatalogItemLayer>[]) {
+    const layers$ = [];
+    layers.forEach((layer: Record<CatalogItemLayer>) => {
+      this.controller.updateRecordState(layer, {added: true}, false);
+      layers$.push(this.layerService.createAsyncLayer(layer.data.options));
+    });
+
+    zip(...layers$).subscribe((oLayers: Layer[]) => {
+      this.map.addLayers(oLayers);
+    });
+  }
+
+  private removeLayersFromMap(layers: Record<CatalogItemLayer>[]) {
+    layers.forEach((layer: Record<CatalogItemLayer>) => {
+      this.controller.updateRecordState(layer, {added: false}, false);
+      this.removeLayerFromMap(layer);
+    });
   }
 }

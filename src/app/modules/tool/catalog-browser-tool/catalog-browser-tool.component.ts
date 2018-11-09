@@ -24,7 +24,8 @@ import { catalogItemToRecord } from '../../catalog/shared/catalog.utils';
 })
 export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
 
-  public store: DataStore<Record<CatalogItem>> = new DataStore();
+  public store: DataStore<Record<CatalogItem>>;
+  public storeIsReady = false;
 
   private catalog$$: Subscription;
 
@@ -39,7 +40,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    const catalogStore = this.catalogStoreService.getStore();
+    const catalogStore = this.catalogStoreService.getCatalogStore();
 
     this.catalog$$ = catalogStore
       .observeBy((catalog: Record<Catalog>, state: RecordState) => {
@@ -47,7 +48,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
       })
       .subscribe((catalogs: Record<Catalog>[]) => {
         if (catalogs.length > 0) {
-          this.loadCatalogItems(catalogs[0].data);
+          this.loadCatalogItems(catalogs[0]);
         }
       });
   }
@@ -56,16 +57,23 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
     this.catalog$$.unsubscribe();
   }
 
-  private loadCatalogItems(catalog: Catalog) {
-    if (catalog.items !== undefined) {
-      this.store.setRecords(catalog.items.map(catalogItemToRecord));
-    } else {
-      this.catalogService.loadCatalogItems(catalog)
-        .subscribe((items: CatalogItem[]) => {
-          catalog.items = items;
-          this.store.setRecords(catalog.items.map(catalogItemToRecord));
-        });
+  private loadCatalogItems(catalog: Record<Catalog>) {
+    const store = this.catalogStoreService.getCatalogItemsStore(catalog);
+    if (store !== undefined) {
+      this.store = store;
+      this.storeIsReady = true;
+      return;
     }
+
+    this.store = new DataStore<Record<CatalogItem>>();
+    this.catalogStoreService.setCatalogItemsStore(catalog, this.store);
+    this.storeIsReady = true;
+
+    this.catalogService.loadCatalogItems(catalog.data)
+      .subscribe((items: CatalogItem[]) => {
+        this.store.setRecords(items.map(catalogItemToRecord), true);
+      });
+
   }
 
 }

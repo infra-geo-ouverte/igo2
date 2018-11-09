@@ -31,6 +31,13 @@
     }
   },
 
+  "catalog": {
+    "layer.addToMap": "Ajouter à la carte",
+    "layer.removeFromMap": "Retirer de la carte",
+    "group.addToMap": "Ajouter toutes les couches de ce groupe à la carte",
+    "group.removeFromMap": "Retirer toutes les couches de ce groupe de la carte"
+  },
+
   "tools": {
     "addressEditor": "Édition d'adresses",
     "clientInfo": "Client",
