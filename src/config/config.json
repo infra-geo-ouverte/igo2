@@ -8,7 +8,7 @@
   ],
   "catalog": {
     "sources": [{
-        "title": "Toutes les données",
+        "title": "Toutes les données (config)",
         "url": "/swwf"
       }
     ]
