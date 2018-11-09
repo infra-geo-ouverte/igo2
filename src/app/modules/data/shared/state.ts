@@ -22,7 +22,7 @@ export class DataState<S extends { [key: string]: boolean } = RecordState> {
 
   setByKeys(keys: string[], state: S) {
     const states = new Map(this.states$.value);
-    keys.forEach((key: string) => states.set(key, state));
+    keys.forEach((key: string) => states.set(key, Object.assign({}, state)));
     this.states$.next(states);
   }
 
