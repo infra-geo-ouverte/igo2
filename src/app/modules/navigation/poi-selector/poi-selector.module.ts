@@ -14,7 +14,6 @@ import { IgoLanguageModule } from '@igo2/core';
 import { IgoGeoModule } from '@igo2/geo';
 
 import { PoiSelectorComponent } from './poi-selector.component';
-import { PoiSelectorBindingDirective } from './poi-selector-binding.directive';
 
 @NgModule({
   imports: [
@@ -30,12 +29,10 @@ import { PoiSelectorBindingDirective } from './poi-selector-binding.directive';
     IgoGeoModule
   ],
   exports: [
-    PoiSelectorComponent,
-    PoiSelectorBindingDirective
+    PoiSelectorComponent
   ],
   declarations: [
-    PoiSelectorComponent,
-    PoiSelectorBindingDirective
+    PoiSelectorComponent
   ]
 })
 export class FadqPoiSelectorModule {
