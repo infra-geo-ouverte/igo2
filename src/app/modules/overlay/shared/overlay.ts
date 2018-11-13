@@ -17,7 +17,7 @@ export class Overlay {
   private style: olstyle.Style;
   private markerStyle: olstyle.Style;
 
-  constructor() {
+  constructor(map?: IgoMap) {
     this.dataSource = new FeatureDataSource();
     this.style = this.createStyle();
     this.markerStyle = this.createMarkerStyle();
@@ -27,6 +27,10 @@ export class Overlay {
       style: this.style,
       source: this.dataSource
     });
+
+    if (map !== undefined) {
+      this.bind(map);
+    }
   }
 
   bind(map: IgoMap) {

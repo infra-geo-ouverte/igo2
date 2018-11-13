@@ -40,8 +40,7 @@ export class SearchResultsToolComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.overlay = new Overlay();
-    this.overlay.bind(this.mapService.getMap());
+    this.overlay = new Overlay(this.mapService.getMap());
   }
 
   handleEntityFocus(entity: Entity) {
