@@ -37,7 +37,7 @@ export class FadqSearchModule {
         provideSearchSourceService(),
         provideIChercheSearchSource(),
         provideIChercheReverseSearchSource(),
-        // provideNominatimSearchSource(),
+        provideNominatimSearchSource(),
         // provideILayerSearchSource()
       ]
     };

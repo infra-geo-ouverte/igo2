@@ -69,7 +69,7 @@ export class IChercheSearchSource
     return new HttpParams({
       fromObject: Object.assign({
         q: term,
-        geometrie: 'geom',
+        geometries: 'geom',
         type: 'adresse,code_postal,route,municipalite,mrc,region_administrative'
       }, this.params)
     });
