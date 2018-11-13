@@ -36,8 +36,8 @@ export interface CatalogBrowserGroupEvent {
 export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
 
   public collapsed = true;
+  public store: EntityStore<Entity<CatalogItem>, CatalogItemState>;
 
-  private store: EntityStore<Entity<CatalogItem>, CatalogItemState>;
   private controller: EntityStoreController;
 
   @Input()
