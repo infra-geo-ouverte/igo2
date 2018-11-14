@@ -19,6 +19,7 @@ export class ILayerSearchSource
     extends SearchSource implements TextSearch {
 
   static id = 'ilayer';
+  static type = LAYER;
 
   get title(): string {
     return this.languageService.translate.instant(this.options.title);

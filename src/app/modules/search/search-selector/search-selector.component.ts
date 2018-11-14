@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Search } from '../shared/search.enum';
+import { SEARCHES } from '../shared/search.enum';
 import { SearchSourceService } from '../shared/search-source.service';
 
 
@@ -12,44 +12,33 @@ import { SearchSourceService } from '../shared/search-source.service';
 export class SearchSelectorComponent implements OnInit {
 
   @Input()
-  get searches(): Search[] {
+  get searches(): string[][] {
     return this._searches;
   }
-  set searches(value: Search[]) {
+  set searches(value: string[][]) {
     this._searches = value;
   }
-  private _searches: Search[] = Object.values(Search);
+  private _searches: string[][] = SEARCHES;
 
   @Input()
-  get selected(): Search {
-    return this._selected;
+  get enabled(): string {
+    return this._enabled;
   }
-  set selected(value: Search) {
-    this._selected = value;
+  set enabled(value: string) {
+    this._enabled = value;
   }
-  private _selected: Search;
+  private _enabled: string;
 
   constructor(private searchSourceService: SearchSourceService) {}
 
   ngOnInit() {
-    const initialSearch = this.selected || this.searches[0];
-    this.selectSearchSource(initialSearch);
+    const initial = this.enabled || this.searches[0][1];
+    this.enableSearchType(initial);
   }
 
-  selectSearchSource(search: Search) {
-    this.selected = search;
-
-    // TODO: This is not supposed to work properly and is for demo purposes only.
-    // Search sources should have a type and the search source service
-    // should have a method to toggle search sources by type
-    const sources = this.searchSourceService.getSources();
-    if (search === Search.Client) {
-      sources.forEach(source => source.enabled = false);
-    } else if (search === Search.DataSource) {
-      sources.forEach(source => source.enabled = false);
-    } else if (search === Search.Localisation) {
-      sources.forEach(source => source.enabled = true);
-    }
+  enableSearchType(type: string) {
+    this.enabled = type;
+    this.searchSourceService.enableSourcesByType(type);
   }
 
 }

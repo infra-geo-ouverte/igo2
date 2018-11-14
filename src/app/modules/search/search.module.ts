@@ -9,6 +9,7 @@ import {
 } from './shared/sources/icherche.provider';
 import { provideNominatimSearchSource } from './shared/sources/nominatim.provider';
 import { provideILayerSearchSource } from './shared/sources/ilayer.provider';
+import { provideClientSearchSource } from './shared/sources/client.provider';
 
 import { FadqSearchBarModule } from './search-bar/search-bar.module';
 import { FadqSearchSelectorModule } from './search-selector/search-selector.module';
@@ -38,7 +39,8 @@ export class FadqSearchModule {
         provideIChercheSearchSource(),
         provideIChercheReverseSearchSource(),
         provideNominatimSearchSource(),
-        // provideILayerSearchSource()
+        // provideILayerSearchSource(),
+        provideClientSearchSource()
       ]
     };
   }

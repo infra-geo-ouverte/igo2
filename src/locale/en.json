@@ -1,7 +1,7 @@
 {
   "Client": "Client",
   "Localisation": "Localisation",
-  "DataSource": "Data Source",
+  "Layer": "Layer",
 
   "welcome": "Welcome to {{title}}",
   "menu.close": "Close Menu",
@@ -43,4 +43,14 @@
     "clientInfo": "Client",
     "navigation": "Navigation"
   },
+
+  "client": {
+    "info": {
+      "title": "Information",
+      "help": "Note that the position of the addresses may not be accurate",
+      "adresseCor": "Address",
+      "adresseExp": "Exploitation address",
+      "adressePro": "Production address"
+    }
+  }
 }

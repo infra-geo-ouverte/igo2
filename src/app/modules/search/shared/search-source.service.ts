@@ -8,27 +8,14 @@ export class SearchSourceService {
     return this.sources;
   }
 
-  getSourceById(id: String): SearchSource | undefined {
-    return this.sources.find(source => source.getId() === id);
-  }
-
-  enableSourceById(id: string, exclusive: Boolean = false) {
-    if (exclusive === true) {
-      this.disableAllSources();
-    }
-
-    const source = this.getSourceById(id);
-    if (source !== undefined) {
-      source.enabled = true;
-    }
-  }
-
-  enableAllSources() {
-    this.sources.forEach(source => source.enabled = true);
-  }
-
-  disableAllSources() {
-    this.sources.forEach(source => source.enabled = false);
+  enableSourcesByType(type: string) {
+    this.getSources().forEach((source: SearchSource) => {
+      if ((source.constructor as typeof SearchSource).type === type) {
+        source.enabled = true;
+      } else {
+        source.enabled = false;
+      }
+    })
   }
 
 }

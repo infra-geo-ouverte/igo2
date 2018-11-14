@@ -9,11 +9,14 @@ import {
   ToolService
 } from '@igo2/context';
 
-import { Entity, EntityStore } from './../../modules/entity/shared';
+import { Client, ClientSchema } from '../../modules/client/shared/client.interface';
+import { ClientStoreService } from '../../modules/client/shared/client-store.service';
+import { Entity, EntityStore } from '../../modules/entity/shared';
 import { IgoMap } from '../../modules/map/shared/map';
 import { MapService } from '../../modules/map/shared/map.service';
-import { ProjectionService } from '../../modules/map/shared';
+import { ProjectionService } from '../../modules/map/shared/projection.service';
 import { SearchStoreService } from '../../modules/search/shared';
+import { ClientSearchSource } from '../../modules/search/shared/sources/client';
 
 import {
   controlSlideX,
@@ -48,6 +51,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.searchStoreService.getStore();
   }
 
+  get clientSchemaStore(): EntityStore<Entity<ClientSchema>> {
+    return this.clientStoreService.getSchemaStore();
+  }
+
   get tool$(): Observable<Tool> {
     return this.toolService.selectedTool$;
   }
@@ -58,7 +65,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private contextService: ContextService,
     private mediaService: MediaService,
     private searchStoreService: SearchStoreService,
-    private toolService: ToolService
+    private toolService: ToolService,
+    private clientStoreService: ClientStoreService
   ) {}
 
   ngOnInit() {
@@ -142,8 +150,18 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
 
     this.openSidenav();
-    const searchResults = this.toolService.getTool('searchResultsFadq');
-    this.toolService.selectTool(searchResults);
+
+    const withClients = entities.some((entity: Entity) => {
+      return entity.provider instanceof ClientSearchSource;
+    });
+
+    if (withClients) {
+      const client = entities[0].data as Client;
+      this.handleSearchClient(client); 
+    } else {
+      const searchResults = this.toolService.getTool('searchResultsFadq');
+      this.toolService.selectTool(searchResults);
+    }
   }
 
   private handleSearchEntitiesSelect(entities: Entity[]) {
@@ -168,5 +186,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       this.contextLoaded = true;
     }
+  }
+
+  private handleSearchClient(client: Client) {
+    this.clientStoreService.setClient(client);
+    const clientInfo = this.toolService.getTool('clientInfo');
+    this.toolService.selectTool(clientInfo);
   }
 }

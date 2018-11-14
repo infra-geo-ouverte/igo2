@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 
 import { FadqCoreModule } from './modules/core/core.module';
+import { FadqClientModule } from './modules/client/client.module';
 import { FadqCatalogModule } from './modules/catalog/catalog.module';
 import { FadqMapModule } from './modules/map/map.module';
 import { FadqNavigationModule } from './modules/navigation/navigation.module';
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
     FadqCoreModule.forRoot(),
+    FadqClientModule.forRoot(),
     FadqCatalogModule.forRoot(),
     FadqMapModule.forRoot(),
     FadqNavigationModule,

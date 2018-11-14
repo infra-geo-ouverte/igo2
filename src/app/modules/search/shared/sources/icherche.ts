@@ -36,6 +36,7 @@ export class IChercheSearchSource
     extends IChercheSearchSourceBase implements TextSearch {
 
   static id = 'icherche';
+  static type = FEATURE;
   static propertiesBlacklist: Array<string> = [
     '@timestamp',
     '@version',
@@ -116,6 +117,7 @@ export class IChercheReverseSearchSource
     extends IChercheSearchSourceBase implements ReverseSearch {
 
   static id = 'icherchereverse';
+  static type = FEATURE;
   static propertiesBlacklist: Array<string> = ['doc_type'];
 
   getId(): string {

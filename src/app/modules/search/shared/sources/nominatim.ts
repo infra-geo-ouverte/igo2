@@ -19,6 +19,7 @@ export class NominatimSearchSource
     extends SearchSource implements TextSearch {
 
   static id = 'nominatim';
+  static type = FEATURE;
 
   constructor(protected options: SearchSourceOptions, private http: HttpClient) {
     super();

@@ -9,6 +9,7 @@ import { CatalogServiceOptions } from '@igo2/geo';
 
 import { ApiConfig } from '../app/modules/core/api/api.interface';
 import { SearchSourceOptions } from '../app/modules/search/shared/sources/source.interface';
+import { ClientApiConfig } from '../app/modules/client/shared/client.interface';
 
 interface Environment {
   production: boolean;
@@ -18,6 +19,9 @@ interface Environment {
     context?: ContextServiceOptions;
     catalog?: CatalogServiceOptions;
     api?: ApiConfig;
+    client: {
+      api: ClientApiConfig;
+    };
   };
 }
 
@@ -53,6 +57,11 @@ export const environment: Environment = {
     },
     api: {
       url: '/app/interne'
+    },
+    client: {
+      api: {
+        info: 'http://chabou01-svn.fadq.qc/services/FADQ/RelationAffaires/InformationClient/obtenirListeClients'
+      }
     }
-  }
+  },
 };

@@ -7,6 +7,7 @@ import { SearchSourceOptions } from './source.interface';
 export class SearchSource implements EntityProvider {
 
   static id: string;
+  static type: string;
 
   protected options: SearchSourceOptions;
 

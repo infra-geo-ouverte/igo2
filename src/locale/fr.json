@@ -1,7 +1,7 @@
 {
   "Client": "Client",
   "Localisation": "Localisation",
-  "DataSource": "Source de données",
+  "Layer": "Couche de données",
 
   "welcome": "Bienvenue à {{title}}",
   "menu.close": "Fermer le menu",
@@ -42,5 +42,15 @@
     "addressEditor": "Édition d'adresses",
     "clientInfo": "Client",
     "navigation": "Zoom sur une région"
+  },
+
+  "client": {
+    "info": {
+      "title": "Coordonnées du client",
+      "help": "Il est à noter que le positionnement par adresse peut ne pas être précis dû à la non standardisation des adresses avec Adresses Québec",
+      "adresseCor": "Adresse de correspondance",
+      "adresseExp": "Adresse d'exploitation",
+      "adressePro": "Adresse de production"
+    }
   }
 }

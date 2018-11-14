@@ -1,1 +1,5 @@
-<div>Todo</div>
+<div>
+  <ng-container *ngIf="client">
+    <fadq-client-info [client]="client"></fadq-client-info>
+  </ng-container>
+</div>
