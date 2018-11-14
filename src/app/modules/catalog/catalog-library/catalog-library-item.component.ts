@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { IgoMap } from '@igo2/geo';
-
+import { IgoMap } from '../../map/shared/map';
 import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
 import { Entity } from '../../entity/shared/entity.interface';
 import { Catalog } from '../shared/catalog.interface';

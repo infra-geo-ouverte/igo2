@@ -9,10 +9,11 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { IgoMap, Layer, LayerService } from '@igo2/geo';
+import { Layer, LayerService } from '@igo2/geo';
 
 import { zip } from 'rxjs';
 
+import { IgoMap } from '../../map/shared/map';
 import { Entity } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';

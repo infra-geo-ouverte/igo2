@@ -23,12 +23,11 @@
 
   <fadq-sidenav
     [(opened)]="sidenavOpened"
-    [tool]="toolService.selectedTool$ | async">
+    [tool]="tool$ | async">
   </fadq-sidenav>
 
   <igo-map-browser
     igoQuery
-    igoOverlay
     igoMapContext
     igoLayerContext
     igoDropGeoFile

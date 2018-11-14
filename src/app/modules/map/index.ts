@@ -1,1 +1,2 @@
-export * from './map.module';
+export * from './map-toolbar';
+export * from './shared';

@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
     RouterModule.forRoot([]),
     FadqCoreModule.forRoot(),
     FadqCatalogModule.forRoot(),
-    FadqMapModule,
+    FadqMapModule.forRoot(),
     FadqNavigationModule,
     FadqSearchModule.forRoot(),
     FadqToolModule,

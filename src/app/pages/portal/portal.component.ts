@@ -3,14 +3,15 @@ import { Observable, Subscription } from 'rxjs';
 
 import { Media, MediaService } from '@igo2/core';
 import {
-  DetailedContext,
   ContextService,
+  DetailedContext,
+  Tool,
   ToolService
 } from '@igo2/context';
 
-import { IgoMap } from '@igo2/geo';
-
 import { Entity, EntityStore } from './../../modules/entity/shared';
+import { IgoMap } from '../../modules/map/shared/map';
+import { MapService } from '../../modules/map/shared/map.service';
 import { ProjectionService } from '../../modules/map/shared';
 import { SearchStoreService } from '../../modules/search/shared';
 
@@ -47,12 +48,17 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.searchStoreService.getStore();
   }
 
+  get tool$(): Observable<Tool> {
+    return this.toolService.selectedTool$;
+  }
+
   constructor(
     private projectionService: ProjectionService,
-    public contextService: ContextService,
-    public mediaService: MediaService,
-    public searchStoreService: SearchStoreService,
-    public toolService: ToolService
+    private mapService: MapService,
+    private contextService: ContextService,
+    private mediaService: MediaService,
+    private searchStoreService: SearchStoreService,
+    private toolService: ToolService
   ) {}
 
   ngOnInit() {
@@ -66,6 +72,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.mapService.setMap(this.map);
 
     this.context$$ = this.contextService.context$.subscribe(context =>
       this.handleContextChange(context)

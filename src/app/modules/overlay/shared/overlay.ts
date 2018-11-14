@@ -3,11 +3,14 @@ import * as olextent from 'ol/extent';
 import * as olproj from 'ol/proj';
 import OlFeature from 'ol/Feature';
 
-import { IgoMap, FeatureDataSource, VectorLayer } from '@igo2/geo';
+import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
 import { featureToOl } from '../../feature/shared/feature.utils';
 import { Feature } from '../../feature/shared/feature.interface';
 import { OverlayAction } from './overlay.enum';
+
+// Import from the index to avoid recursion
+import { IgoMap } from '../../map';
 
 export class Overlay {
 
@@ -38,16 +41,16 @@ export class Overlay {
     this.map.addLayer(this.layer, false);
   }
 
-  setFeatures(features: Feature[], action: OverlayAction = OverlayAction.None) {
+  setFeatures(features: Feature[], action: OverlayAction = OverlayAction.Default) {
     this.clear();
     this.addFeatures(features, action);
   }
 
-  addFeature(feature: Feature, action: OverlayAction = OverlayAction.None) {
+  addFeature(feature: Feature, action: OverlayAction = OverlayAction.Default) {
     this.addFeatures([feature], action);
   }
 
-  addFeatures(features: Feature[], action: OverlayAction = OverlayAction.None) {
+  addFeatures(features: Feature[], action: OverlayAction = OverlayAction.Default) {
     const olFeatures = [];
     features.map((feature: Feature) => {
       const olFeature = featureToOl(feature, this.map.projection);

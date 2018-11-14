@@ -6,8 +6,9 @@ import { map, startWith} from 'rxjs/operators';
 import * as olproj from 'ol/proj';
 import * as oleasing from 'ol/easing';
 
-import { IgoMap } from '@igo2/geo';
 import { Poi } from '@igo2/context';
+
+import { IgoMap } from '../../map/shared/map';
 
 
 @Component({

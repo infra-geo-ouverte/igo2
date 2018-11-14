@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Register } from '@igo2/context';
 
 import {
-  MapService,
   LayerService,
   LayerOptions
 } from '@igo2/geo';
@@ -12,7 +11,8 @@ import { Entity } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { getFeatureFromEntity } from '../../feature/shared/feature.utils';
 import { getLayerOptionsFromEntity } from '../../map/shared/map.utils';
-import { Overlay } from '../../overlay/shared/overlay';
+import { IgoMap } from '../../map/shared/map';
+import { MapService } from '../../map/shared/map.service';
 import { OverlayAction } from '../../overlay/shared/overlay.enum';
 import { SearchStoreService } from '../../search/shared/search-store.service';
 
@@ -25,12 +25,14 @@ import { SearchStoreService } from '../../search/shared/search-store.service';
   selector: 'fadq-search-results-tool',
   templateUrl: './search-results-tool.component.html'
 })
-export class SearchResultsToolComponent implements OnInit {
-
-  private overlay: Overlay;
+export class SearchResultsToolComponent {
 
   get store(): EntityStore<Entity> {
     return this.searchStoreService.getStore();
+  }
+
+  get map(): IgoMap {
+    return this.mapService.getMap();
   }
 
   constructor(
@@ -38,10 +40,6 @@ export class SearchResultsToolComponent implements OnInit {
     private layerService: LayerService,
     private searchStoreService: SearchStoreService
   ) {}
-
-  ngOnInit() {
-    this.overlay = new Overlay(this.mapService.getMap());
-  }
 
   handleEntityFocus(entity: Entity) {
     this.tryAddFeatureToMap(entity);
@@ -55,7 +53,7 @@ export class SearchResultsToolComponent implements OnInit {
   private tryAddFeatureToMap(entity: Entity) {
     const feature = getFeatureFromEntity(entity);
     if (feature !== undefined) {
-      this.overlay.setFeatures([feature], OverlayAction.Default);
+      this.map.overlay.setFeatures([feature], OverlayAction.Default);
     }
   }
 

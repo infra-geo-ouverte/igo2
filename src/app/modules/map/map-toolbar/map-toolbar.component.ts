@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 import { Media, MediaOrientation, MediaService } from '@igo2/core';
-import { IgoMap } from '@igo2/geo';
 import { Tool } from '@igo2/context';
-import { MapTool, MAP_DEFAULT_TOOLS} from '../shared/map.enum';
 
+import { MapTool, MAP_DEFAULT_TOOLS} from '../shared/map.enum';
+import { IgoMap } from '../../map/shared/map';
 
 @Component({
   selector: 'fadq-map-toolbar',

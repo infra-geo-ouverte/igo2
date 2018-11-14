@@ -3,11 +3,10 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
 
-import { Feature, OverlayService, OverlayAction } from '@igo2/geo';
-import {
-  Place,
-  PlaceCategory
-} from '../shared/place.interface';
+import { Overlay } from '../../overlay/shared/overlay';
+import { OverlayAction } from '../../overlay/shared/overlay.enum';
+import { Feature } from '../../feature/shared/feature.interface';
+import { Place, PlaceCategory } from '../shared/place.interface';
 import { PlaceService } from '../shared/place.service';
 
 
@@ -19,6 +18,21 @@ import { PlaceService } from '../shared/place.service';
 })
 export class PlaceSelectorComponent implements OnInit {
 
+  public selectedCategory: PlaceCategory;
+  public places: Place[] = [];
+  public filteredPlaces$: Observable<Place[]>;
+  public placeControl = new FormControl();
+  public overlayFeature: Feature;
+
+  @Input()
+  get overlay(): Overlay {
+    return this._overlay;
+  }
+  set overlay(value: Overlay) {
+    this._overlay = value;
+  }
+  private _overlay: Overlay;
+
   @Input()
   get categories(): PlaceCategory[] {
     return this._categories;
@@ -28,14 +42,8 @@ export class PlaceSelectorComponent implements OnInit {
   }
   private _categories: PlaceCategory[];
 
-  public selectedCategory: PlaceCategory;
-  public places: Place[] = [];
-  public filteredPlaces$: Observable<Place[]>;
-  public placeControl = new FormControl();
-
   constructor(
-    private placeService: PlaceService,
-    private overlayService: OverlayService
+    private placeService: PlaceService
   ) {}
 
   ngOnInit() {
@@ -63,14 +71,15 @@ export class PlaceSelectorComponent implements OnInit {
 
   selectPlace(place: Place) {
     this.placeService.getPlaceFeatureByCategoryAndId(this.selectedCategory, place.id)
-      .subscribe(feature => this.setOverlayFeature(feature));
+      .subscribe((feature: Feature) => this.setOverlayFeature(feature));
   }
 
-  setOverlayFeature(feature: Feature | null) {
-    if (feature === undefined || feature === null) {
-      this.clearFeature();
+  setOverlayFeature(feature: Feature | undefined) {
+    this.overlayFeature = feature;
+    if (feature === undefined) {
+      this.overlay.clear();
     } else {
-      this.overlayService.setFeatures([feature], OverlayAction.Zoom);
+      this.overlay.setFeatures([feature], OverlayAction.Zoom);
     }
   }
 
@@ -84,7 +93,7 @@ export class PlaceSelectorComponent implements OnInit {
   }
 
   private clearFeature() {
-    this.overlayService.clear();
+    this.overlay.clear();
   }
 
   private filterPlacesByTitle(title: string): Place[] {

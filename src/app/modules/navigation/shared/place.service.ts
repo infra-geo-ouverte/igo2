@@ -3,9 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Feature } from '@igo2/geo';
-
 import { ApiService } from '../../core/api';
+import { Feature } from '../../feature/shared/feature.interface';
 import { substituteProperties } from '../../utils/str';
 import {
   Place,
@@ -79,11 +78,11 @@ export class PlaceService {
     };
   }
 
-  private extractPlaceFeatureFromResponse(response: Object, api: PlaceFeatureApi): Feature | null {
+  private extractPlaceFeatureFromResponse(response: Object, api: PlaceFeatureApi): Feature | undefined {
     if (Object.getOwnPropertyNames(response).length > 0) {
       return this.formatPlaceFeatureResult(response);
     }
-    return null;
+    return;
   }
 
   private formatPlaceFeatureResult(result: Object): Feature {

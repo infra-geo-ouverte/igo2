@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 import { Poi, Register } from '@igo2/context';
-import { IgoMap, MapService } from '@igo2/geo';
 
+import { IgoMap } from '../../map/shared/map';
+import { MapService } from '../../map/shared/map.service';
 import { PlaceCategory } from '../../navigation/shared/place.interface';
 import { NavigationToolOptions } from './navigation-tool.interface';
 

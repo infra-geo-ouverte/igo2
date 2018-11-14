@@ -1,1 +1,3 @@
-export * from './navigation.module';
+export * from './shared';
+export * from './place-selector';
+export * from './poi-selector';

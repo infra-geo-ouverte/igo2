@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 
 import { Register } from '@igo2/context';
 
-import { IgoMap, MapService } from '@igo2/geo';
-
+import { IgoMap} from '../../map/shared/map';
+import { MapService} from '../../map/shared/map.service';
 import { Entity, State } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { Catalog, CatalogItem } from '../../catalog/shared/catalog.interface';
