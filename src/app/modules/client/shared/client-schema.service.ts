@@ -31,23 +31,23 @@ export class ClientSchemaService {
     });
 
     return of({
-      "messages": [],
-      "donnees": [
+      'messages': [],
+      'donnees': [
         {
-          "id": "10428",
-          "numeroClient": "0007229",
-          "type": "CMP",
-          "description": "test",
-          "annee": "2018",
-          "etat": null
+          'id': '10428',
+          'numeroClient': '0007229',
+          'type': 'CMP',
+          'description': 'test',
+          'annee': '2018',
+          'etat': null
         },
         {
-          "id": "10425",
-          "numeroClient": "0007229",
-          "type": "EPA",
-          "description": "efgh",
-          "annee": "2016",
-          "etat": "TRAITE"
+          'id': '10425',
+          'numeroClient': '0007229',
+          'type': 'EPA',
+          'description': 'efgh',
+          'annee': '2016',
+          'etat': 'TRAITE'
         }
       ]
     }).pipe(
@@ -69,9 +69,9 @@ export class ClientSchemaService {
 
   private extractClientSchemasFromResponse(response: ClientSchemaListResponse): ClientSchema[] {
     const results = response.donnees || [];
-    return results.map(result => this.resultToSchema(result)); 
+    return results.map(result => this.resultToSchema(result));
   }
-  
+
   private resultToSchema(result: ClientSchemaListResult) {
     return result;
   }

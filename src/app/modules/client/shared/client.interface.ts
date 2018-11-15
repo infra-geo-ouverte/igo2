@@ -2,16 +2,16 @@ export interface ClientApiConfig {
   info: string;
 }
 
-export interface Client extends ClientInfo {
-  schemas: ClientSchema[];
-}
-
 export interface ClientInfo {
   numero: string;
   nom: string;
   adresseCor: string;
   adresseExp: string;
   adressePro: string;
+}
+
+export interface Client extends ClientInfo {
+  schemas: ClientSchema[];
 }
 
 export interface ClientInfoListResponse {
@@ -52,4 +52,4 @@ export interface ClientSchemaListResponse {
   donnees?: ClientSchemaListResult[];
 }
 
-export interface ClientSchemaListResult extends ClientSchema {};
+export interface ClientSchemaListResult extends ClientSchema {}

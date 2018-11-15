@@ -15,7 +15,7 @@ export class SearchSourceService {
       } else {
         source.enabled = false;
       }
-    })
+    });
   }
 
 }

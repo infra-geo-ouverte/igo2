@@ -5,18 +5,9 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
-
-import { Entity } from '../../entity/shared/entity.interface';
+import { Entity, EntityTableModel } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
-import { EntityStoreController } from '../../entity/shared/controller';
 import { ClientSchema } from '../shared/client.interface';
-
-export interface Column {
-  name: string;
-  label: string;
-}
-
 
 @Component({
   selector: 'fadq-client-schemas-table',
@@ -26,23 +17,39 @@ export interface Column {
 })
 export class ClientSchemasTableComponent {
 
-  public columns: Column[] = [
-    {name: 'id', label: 'Numéro de schéma'},
-    {name: 'type', label: 'Type de schéma'},
-    {name: 'description', label: 'Description'},
-    {name: 'annee', label: 'Année'},
-    {name: 'etat', label: 'État'}
-  ];
+  static model: EntityTableModel = {
+    selection: true,
+    columns: [
+      {
+        name: 'id',
+        title: 'Numéro de schéma',
+        sortable: true
+      },
+      {
+        name: 'type',
+        title: 'Type de schéma',
+        sortable: true
+      },
+      {
+        name: 'description',
+        title: 'Description'
+      },
+      {
+        name: 'annee',
+        title: 'Année',
+        sortable: true
+      },
+      {
+        name: 'etat',
+        title: 'État',
+        sortable: true
+      }
+    ]
+  };
 
-  get headers(): string[] {
-    return this.columns.map(column => column.label);
+  get model(): EntityTableModel {
+    return ClientSchemasTableComponent.model;
   }
-
-  get dataSource(): Observable<Entity<ClientSchema>[]> {
-    return this.store.observable;
-  }
-
-  private controller: EntityStoreController;
 
   @Input()
   get store(): EntityStore<Entity<ClientSchema>> {
@@ -52,14 +59,5 @@ export class ClientSchemasTableComponent {
     this._store = value;
   }
   private _store;
-
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
-
-  ngOnInit() {
-    this.controller.bind(this.store);
-  }
 
 }

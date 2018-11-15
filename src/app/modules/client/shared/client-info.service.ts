@@ -40,31 +40,31 @@ export class ClientInfoService {
       );
     */
    return of({
-      "messages": [],
-      "donnees": [
+      'messages': [],
+      'donnees': [
         {
-          "numeroClient": "0007229",
-          "nomClient": "0007229 CLIENT NUMÉRO",
-          "statutJuridique": {
-            "statutJuridique": "Particulier",
-            "codeStatutJuridique": "01"
+          'numeroClient': '0007229',
+          'nomClient': '0007229 CLIENT NUMÉRO',
+          'statutJuridique': {
+            'statutJuridique': 'Particulier',
+            'codeStatutJuridique': '01'
           },
-          "adresseCorrespondance": "448 rang 3 Est",
-          "suiteAdresseCorrespondance": null,
-          "municipaliteAdresseCorrespondance": "Saint-Octave-de-Métis",
-          "provinceAdresseCorrespondance": {
-            "province": "Québec",
-            "codeProvince": "QC"
+          'adresseCorrespondance': '448 rang 3 Est',
+          'suiteAdresseCorrespondance': null,
+          'municipaliteAdresseCorrespondance': 'Saint-Octave-de-Métis',
+          'provinceAdresseCorrespondance': {
+            'province': 'Québec',
+            'codeProvince': 'QC'
           },
-          "paysAdresseCorrespondance": {
-            "pays": "Canada",
-            "codePays": "CAN"
+          'paysAdresseCorrespondance': {
+            'pays': 'Canada',
+            'codePays': 'CAN'
           },
-          "codePostalAdresseCorrespondance": "G0J 3B0",
-          "langue": "F",
-          "centreServiceResponsable": {
-            "noCentreServiceResponsable": "0997627",
-            "nomCentreServiceResponsable": "Centre de services de Rimouski"
+          'codePostalAdresseCorrespondance': 'G0J 3B0',
+          'langue': 'F',
+          'centreServiceResponsable': {
+            'noCentreServiceResponsable': '0997627',
+            'nomCentreServiceResponsable': 'Centre de services de Rimouski'
           }
         }
       ]
@@ -88,7 +88,7 @@ export class ClientInfoService {
       adresseCor: this.extractAddressFromResult(result, 'Correspondance'),
       adresseExp: this.extractAddressFromResult(result, 'Exploitation'),
       adressePro: this.extractAddressFromResult(result, 'Production')
-    }  
+    };
   }
 
   private extractAddressFromResult(result: ClientInfoListResult, suffix: string) {
@@ -104,7 +104,7 @@ export class ClientInfoService {
       .join(' ');
 
     if (provinceName !== undefined) {
-      address = address.concat(` (${provinceName})`)
+      address = address.concat(` (${provinceName})`);
     }
 
     return address;
