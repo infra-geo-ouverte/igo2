@@ -3,6 +3,7 @@ import { debounceTime, map } from 'rxjs/operators';
 
 import { Entity, State } from './entity.interface';
 import { EntityState } from './state';
+import { sortEntities } from './entity.utils';
 
 export class EntityStore<T extends Entity, S extends { [key: string]: boolean } = State> {
 
@@ -82,5 +83,10 @@ export class EntityStore<T extends Entity, S extends { [key: string]: boolean } 
           });
         })
       );
+  }
+
+  sort(property: string, direction: string) {
+    const sorted = sortEntities(this.entities, property, direction) as T[];
+    this.setEntities(sorted, true);
   }
 }

@@ -1,5 +1,7 @@
 import t from 'typy';
 
+import { ObjectUtils } from '@igo2/utils';
+
 import { Entity } from './entity.interface';
 
 export function entitiesAreTheSame(entity1: Entity, entity2: Entity | undefined): boolean {
@@ -59,4 +61,16 @@ export function getEntityIcon(entity: Entity): string {
   }
 
   return icon;
+}
+
+export function sortEntities(
+  entities: Entity[],
+  property: string,
+  direction: string
+) {
+  return entities.sort((entity1: Entity, entity2: Entity) => {
+    const property1 = t(entity1.data, property).safeObject;
+    const property2 = t(entity2.data, property).safeObject;
+    return ObjectUtils.naturalCompare(property1, property2, direction);
+  });
 }
