@@ -1,6 +1,10 @@
-import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-
-import { DataSource } from './expansion-panel.component';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostBinding
+} from '@angular/core';
 
 @Component({
   selector: 'fadq-expansion-panel-header',
@@ -15,22 +19,13 @@ export class ExpansionPanelHeaderComponent {
   }
   set expanded(value: boolean) {
     if (value === this._expanded) {
-        return;
-      }
+      return;
+    }
 
-      this._expanded = value;
-      this.expandedChange.emit(this._expanded);
+    this._expanded = value;
+    this.expandedChange.emit(this._expanded);
   }
   private _expanded: boolean;
-
-  @Input()
-  get dataSources(): DataSource[] {
-    return this._dataSources;
-  }
-  set dataSources(value: DataSource[]) {
-    this._dataSources = value;
-  }
-  private _dataSources: DataSource[];
 
   @Output() expandedChange = new EventEmitter<boolean>();
 

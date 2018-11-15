@@ -52,15 +52,3 @@
 igo-backdrop ::ng-deep > div {
   z-index: initial !important;
 }
-
-table {
-  width: 100%;
-}
-
-table tr.mat-header-row {
-  height: 36px;
-}
-
-table tr.mat-row {
-  height: 34px;
-}

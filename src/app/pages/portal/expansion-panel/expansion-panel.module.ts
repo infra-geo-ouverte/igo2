@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -6,8 +6,7 @@ import {
   MatIconModule,
   MatMenuModule,
   MatListModule,
-  MatSelectModule,
-  MatTableModule
+  MatSelectModule
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
@@ -24,7 +23,6 @@ import { ExpansionPanelHeaderComponent } from './expansion-panel-header.componen
     MatMenuModule,
     MatListModule,
     MatSelectModule,
-    MatTableModule,
     IgoLanguageModule,
     IgoBackdropModule
   ],
@@ -34,10 +32,4 @@ import { ExpansionPanelHeaderComponent } from './expansion-panel-header.componen
     ExpansionPanelHeaderComponent
   ]
 })
-export class FadqExpansionPanelModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqExpansionPanelModule
-    };
-  }
-}
+export class FadqExpansionPanelModule {}
