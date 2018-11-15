@@ -46,6 +46,7 @@
 .fadq-expansion-panel-content {
   height: calc(100% - #{$fadq-expansion-panel-header-height});
   overflow: auto;
+  padding: $igo-padding;
 }
 
 igo-backdrop ::ng-deep > div {
@@ -63,4 +64,3 @@ table tr.mat-header-row {
 table tr.mat-row {
   height: 34px;
 }
-

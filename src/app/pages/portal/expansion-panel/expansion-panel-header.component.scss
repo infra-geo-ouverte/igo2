@@ -28,6 +28,10 @@
   }
 }
 
+mat-form-field {
+  width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-icon-size} - 20px)
+}
+
 mat-form-field.fadq-expansion-panel-header-selector ::ng-deep .mat-form-field-infix {
   padding: 0;
 }
@@ -49,4 +53,3 @@ button {
   top: 0;
   right: 0;
 }
-

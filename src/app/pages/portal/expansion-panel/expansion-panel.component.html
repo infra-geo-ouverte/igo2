@@ -6,7 +6,9 @@
       [(expanded)]="expanded">
     </fadq-expansion-panel-header>
 
-    <ng-content></ng-content>
+    <div class="fadq-expansion-panel-content mat-elevation-z4">
+      <ng-content></ng-content>
+    </div>
 
     <igo-backdrop [shown]="backdropShown"></igo-backdrop>
   </div>

@@ -157,7 +157,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     if (withClients) {
       const client = entities[0].data as Client;
-      this.handleSearchClient(client); 
+      this.handleSearchClient(client);
     } else {
       const searchResults = this.toolService.getTool('searchResultsFadq');
       this.toolService.selectTool(searchResults);

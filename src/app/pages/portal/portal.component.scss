@@ -89,9 +89,10 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
 /*** Footer ***/
 .fadq-footer {
   position: relative;
-  background-color: #eee;
+  background-color: #efefef;
   width: 100%;
   height: $fadq-footer-height;
+  border-top:1px solid #ddd;
 }
 
 .fadq-footer fadq-map-toolbar {
