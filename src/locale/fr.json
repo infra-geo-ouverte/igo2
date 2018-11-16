@@ -52,5 +52,34 @@
       "adresseExp": "Adresse d'exploitation",
       "adressePro": "Adresse de production"
     }
+  },
+
+  "map": {
+    "toolbar": {
+      "baselayerswitcher": {
+        "title": "Change Base Layer"
+      },
+      "zoomin": {
+        "title": "Zoom In"
+      },
+      "zoomout": {
+        "title": "Zoom Out"
+      },
+      "previousview": {
+        "title": "Previous View"
+      },
+      "nextview": {
+        "title": "Next View"
+      },
+      "clickinteraction": {
+        "title": "Change Click Interaction"
+      },
+      "geolocation": {
+        "title": "Geolocate"
+      },
+      "googleview": {
+        "title": "View in Google Maps"
+      }
+    }
   }
 }

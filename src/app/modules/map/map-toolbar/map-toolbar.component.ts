@@ -13,6 +13,8 @@ import { IgoMap } from '../../map/shared/map';
 })
 export class MapToolbarComponent {
 
+  public visible = true;
+
   @Input()
   get map(): IgoMap {
     return this._map;

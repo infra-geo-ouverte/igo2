@@ -1,39 +1,27 @@
 <div>
-  <button
-    mat-icon-button
-    (click)="expanded = !expanded">
-    <mat-icon *ngIf="!expanded">launch</mat-icon>
-    <mat-icon *ngIf="expanded" style="transform: rotate(180deg)">launch</mat-icon>
-  </button>
+  <div class="fadq-expansion-panel-selector-container">
+    <button
+      mat-icon-button
+      (click)="expanded = !expanded">
+      <mat-icon *ngIf="!expanded">launch</mat-icon>
+      <mat-icon *ngIf="expanded" style="transform: rotate(180deg)">launch</mat-icon>
+    </button>
 
-  <mat-form-field class="fadq-expansion-panel-header-selector">
-    <mat-select></mat-select>
-  </mat-form-field>
+    <mat-form-field class="fadq-expansion-panel-header-selector">
+      <mat-select></mat-select>
+    </mat-form-field>
+  </div>
 
   <div class="fadq-expansion-panel-toolbar-container">
-    <ng-container *ngIf="!expanded">
-      <button
-        id="expand-toolbar-button"
-        mat-icon-button
-        [matMenuTriggerFor]="toolbarMenu">
-        <mat-icon>more_horiz</mat-icon>
-      </button>
-      <mat-menu
-        #toolbarMenu="matMenu"
-        class="fadq-compact-menu"
-        overlapTrigger="false"
-        xPosition="before"
-        yPosition="above">
-
-        <mat-list>
-          <mat-list-item>
-            <button mat-icon-button>
-              <mat-icon>edit</mat-icon>
-              Edit
-            </button>
-          </mat-list-item>
-        </mat-list>
-      </mat-menu>
-    </ng-container>
+    <fadq-toolbar
+      [tools]="tools"
+      [horizontal]="true"
+      [xPosition]="'after'"
+      [yPosition]="'above'"
+      [overlayClass]="'fadq-expansion-panel-toolbar-overlay'"
+      [withTitle]="toolbarCollapsed"
+      [withToggleButton]="true"
+      [collapsed]="toolbarCollapsed">
+    </fadq-toolbar>
   </div>
 </div>

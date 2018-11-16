@@ -7,4 +7,12 @@
   fadq-toolbar-item {
     display: inline-block;
   }
+
+  fadq-toolbar-item.igo-list-item-selected ::ng-deep mat-list-item {
+    background-color: initial !important;
+  }
 };
+
+button {
+  margin: 4px;
+}

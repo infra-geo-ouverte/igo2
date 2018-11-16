@@ -1,32 +1,49 @@
 <igo-list 
   *ngIf="!collapsed"
   [navigation]="false">
-  <ng-template ngFor let-tool [ngForOf]="tools">
+
+  <fadq-toolbar-item
+    *ngIf="withToggleButton"
+    igoListItem
+    color="accent"
+    [ngClass]="getToolClass(toggleTool)"
+    [withTitle]="false"
+    [withIcon]="true"
+    [tool]="toggleTool"
+    (activate)="toggleToolbar()">
+  </fadq-toolbar-item>
+
+  <ng-template
+    *ngIf="visible"
+    ngFor let-tool [ngForOf]="tools">
     <fadq-toolbar-item
       igoListItem
       color="accent"
       [ngClass]="getToolClass(tool)"
       [withTitle]="withTitle"
       [withIcon]="withIcon"
-      [tool]=tool
-      (activate)="activate.emit(tool)">
+      [tool]="tool"
+      (activate)="activateTool(tool)">
     </fadq-toolbar-item>
   </ng-template>
 </igo-list>
 
 <div *ngIf="collapsed">
   <button
-    id="expand-toolbar-button"
     mat-icon-button
-    [matMenuTriggerFor]="toolbarMenu">
+    [matMenuTriggerFor]="toolbarMenu"
+    (menuOpened)="open.emit()"
+    (menuClosed)="close.emit()">
     <mat-icon>more_horiz</mat-icon>
   </button>
+
   <mat-menu
     #toolbarMenu="matMenu"
     class="fadq-compact-menu fadq-no-min-width-menu"
     overlapTrigger="true"
-    xPosition="before"
-    yPosition="above">
+    [xPosition]="xPosition"
+    [yPosition]="yPosition"
+    [class]="overlayClass">
 
     <igo-list [navigation]="false">
       <ng-template ngFor let-tool [ngForOf]="tools">
@@ -37,7 +54,7 @@
           [withTitle]="withTitle"
           [withIcon]="withIcon"
           [tool]=tool
-          (activate)="activate.emit(tool)">
+          (activate)="activateTool(tool)">
         </fadq-toolbar-item>
       </ng-template>
     </igo-list>
