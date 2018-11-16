@@ -67,7 +67,7 @@ export function sortEntities(
   entities: Entity[],
   property: string,
   direction: string
-) {
+): Entity[] {
   return entities.sort((entity1: Entity, entity2: Entity) => {
     const property1 = t(entity1.data, property).safeObject;
     const property2 = t(entity2.data, property).safeObject;

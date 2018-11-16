@@ -6,7 +6,6 @@
       matSort
       [ngClass]="getTableClass()"
       [dataSource]="dataSource"
-      [matSortDisableClear]="true"
       (matSortChange)="sort($event.active, $event.direction)">
 
       <ng-container [matColumnDef]="column.name" *ngFor="let column of model.columns">

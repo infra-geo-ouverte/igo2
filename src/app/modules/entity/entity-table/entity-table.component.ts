@@ -78,9 +78,11 @@ export class EntityTableComponent implements OnInit, OnDestroy {
     return t(entity.data, column.name).safeObject;
   }
 
-  sort(columnName: string, direction: string) {
+  sort(property: string, direction: string) {
     if (direction === 'asc' || direction === 'desc') {
-      this.store.sort(columnName, direction);
+      this.store.sorter.set({property, direction});
+    } else {
+      this.store.sorter.reset();
     }
   }
 

@@ -42,3 +42,8 @@ export interface EntityTableColumn {
   sortable?: boolean;
   filterable?: boolean;
 }
+
+export interface EntitySortClause {
+  property: string;
+  direction: string;
+}
