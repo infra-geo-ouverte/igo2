@@ -1,0 +1,13 @@
+<igo-list [navigation]="false">
+  <ng-template ngFor let-tool [ngForOf]="tools">
+    <fadq-toolbar-item
+      igoListItem
+      color="accent"
+      [ngClass]="getToolClass(tool)"
+      [withTitle]="withTitle"
+      [withIcon]="withIcon"
+      [tool]=tool
+      (activate)="activate.emit(tool)">
+    </fadq-toolbar-item>
+  </ng-template>
+</igo-list>

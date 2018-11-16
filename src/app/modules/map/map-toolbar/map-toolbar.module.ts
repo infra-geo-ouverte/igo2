@@ -10,9 +10,9 @@ import {
 
 import { IgoStopPropagationModule } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
-import { IgoToolModule } from '@igo2/context';
 import { IgoGeoModule } from '@igo2/geo';
 
+import { FadqToolbarModule } from '../../common/toolbar/toolbar.module';
 import { MapToolbarComponent } from './map-toolbar.component';
 
 @NgModule({
@@ -24,8 +24,8 @@ import { MapToolbarComponent } from './map-toolbar.component';
     MatMenuModule,
     IgoStopPropagationModule,
     IgoLanguageModule,
-    IgoToolModule,
-    IgoGeoModule
+    IgoGeoModule,
+    FadqToolbarModule
   ],
   exports: [MapToolbarComponent],
   declarations: [MapToolbarComponent]

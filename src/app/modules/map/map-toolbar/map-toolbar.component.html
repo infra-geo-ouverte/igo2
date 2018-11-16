@@ -1,11 +1,11 @@
 <ng-container>
-  <igo-toolbar
+  <fadq-toolbar
+    *ngIf="!collapsed, else collapsedToolbar"
     [tools]="tools"
     [horizontal]="true"
     [withTitle]="false"
-    (trigger)="activateTool($event)"
-    *ngIf="!collapsed, else collapsedToolbar">
-  </igo-toolbar>
+    (activate)="activateTool($event)">
+  </fadq-toolbar>
   <ng-template #collapsedToolbar>
     <div>
       <button
@@ -21,13 +21,13 @@
         xPosition="before"
         yPosition="above">
 
-        <igo-toolbar
+        <fadq-toolbar
           igoStopPropagation
           [tools]="tools"
           [horizontal]="false"
           [withTitle]="false"
-          (trigger)="activateTool($event)">
-        </igo-toolbar>
+          (activate)="activateTool($event)">
+        </fadq-toolbar>
       </mat-menu>
     </div>
   </ng-template>
