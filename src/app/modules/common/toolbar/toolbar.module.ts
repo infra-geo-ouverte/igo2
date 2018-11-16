@@ -4,8 +4,13 @@ import { CommonModule } from '@angular/common';
 import {
   MatButtonModule,
   MatIconModule,
+  MatTooltipModule,
+  MatListModule,
   MatMenuModule
 } from '@angular/material';
+
+import { IgoLanguageModule } from '@igo2/core';
+import { IgoListModule } from '@igo2/common';
 
 import { ToolbarComponent } from './toolbar.component';
 import { ToolbarItemComponent } from './toolbar-item.component';
@@ -15,7 +20,11 @@ import { ToolbarItemComponent } from './toolbar-item.component';
     CommonModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatTooltipModule,
+    MatMenuModule,
+    MatListModule,
+    IgoLanguageModule,
+    IgoListModule
   ],
   exports: [
     ToolbarComponent

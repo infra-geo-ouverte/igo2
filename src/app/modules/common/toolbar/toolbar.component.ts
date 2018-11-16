@@ -36,6 +36,15 @@ export class ToolbarComponent {
   private _active: Tool;
 
   @Input()
+  get collapsed() {
+    return this._collapsed;
+  }
+  set collapsed(value: boolean) {
+    this._collapsed = value;
+  }
+  private _collapsed = true;
+
+  @Input()
   get horizontal(): boolean {
     return this._horizontal;
   }

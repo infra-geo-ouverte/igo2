@@ -1,34 +1,7 @@
-<ng-container>
-  <fadq-toolbar
-    *ngIf="!collapsed, else collapsedToolbar"
-    [tools]="tools"
-    [horizontal]="true"
-    [withTitle]="false"
-    (activate)="activateTool($event)">
-  </fadq-toolbar>
-  <ng-template #collapsedToolbar>
-    <div>
-      <button
-        id="expand-toolbar-button"
-        mat-icon-button
-        [matMenuTriggerFor]="toolbarMenu">
-        <mat-icon>more_horiz</mat-icon>
-      </button>
-      <mat-menu
-        #toolbarMenu="matMenu"
-        class="fadq-compact-menu fadq-no-min-width-menu"
-        overlapTrigger="true"
-        xPosition="before"
-        yPosition="above">
-
-        <fadq-toolbar
-          igoStopPropagation
-          [tools]="tools"
-          [horizontal]="false"
-          [withTitle]="false"
-          (activate)="activateTool($event)">
-        </fadq-toolbar>
-      </mat-menu>
-    </div>
-  </ng-template>
-</ng-container>
+<fadq-toolbar
+  [tools]="tools"
+  [horizontal]="true"
+  [withTitle]="false"
+  [collapsed]="collapsed"
+  (activate)="activateTool($event)">
+</fadq-toolbar>

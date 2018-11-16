@@ -1,4 +1,6 @@
-<igo-list [navigation]="false">
+<igo-list 
+  *ngIf="!collapsed"
+  [navigation]="false">
   <ng-template ngFor let-tool [ngForOf]="tools">
     <fadq-toolbar-item
       igoListItem
@@ -11,3 +13,33 @@
     </fadq-toolbar-item>
   </ng-template>
 </igo-list>
+
+<div *ngIf="collapsed">
+  <button
+    id="expand-toolbar-button"
+    mat-icon-button
+    [matMenuTriggerFor]="toolbarMenu">
+    <mat-icon>more_horiz</mat-icon>
+  </button>
+  <mat-menu
+    #toolbarMenu="matMenu"
+    class="fadq-compact-menu fadq-no-min-width-menu"
+    overlapTrigger="true"
+    xPosition="before"
+    yPosition="above">
+
+    <igo-list [navigation]="false">
+      <ng-template ngFor let-tool [ngForOf]="tools">
+        <fadq-toolbar-item
+          igoListItem
+          color="accent"
+          [ngClass]="getToolClass(tool)"
+          [withTitle]="withTitle"
+          [withIcon]="withIcon"
+          [tool]=tool
+          (activate)="activate.emit(tool)">
+        </fadq-toolbar-item>
+      </ng-template>
+    </igo-list>
+  </mat-menu>
+</div>
