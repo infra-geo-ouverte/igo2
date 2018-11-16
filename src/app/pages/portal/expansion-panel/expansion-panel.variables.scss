@@ -3,5 +3,5 @@
 @import '../sidenav/sidenav.variables';
 
 $fadq-expansion-panel-collapsed-height: 47px;
-$fadq-expansion-panel-max-height: calc(35% - #{$fadq-expansion-panel-collapsed-height});
+$fadq-expansion-panel-max-height: calc(30% - #{$fadq-expansion-panel-collapsed-height});
 $fadq-expansion-panel-header-height: $fadq-expansion-panel-collapsed-height;
