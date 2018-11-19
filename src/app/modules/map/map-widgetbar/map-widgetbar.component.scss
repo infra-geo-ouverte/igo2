@@ -1,4 +1,4 @@
-@import './map-toolbar.variables';
+@import './map-widgetbar.variables';
 
 
 :host {
@@ -7,7 +7,7 @@
   background-color: white;
 }
 
-fadq-toolbar ::ng-deep mat-list-item {
+fadq-widgetbar ::ng-deep mat-list-item {
   background-color: initial !important;
 }
 

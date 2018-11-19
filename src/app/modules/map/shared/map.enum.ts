@@ -1,6 +1,6 @@
 export const LAYER = 'layer';
 
-export enum MapTool {
+export enum MapWidget {
   BaseLayerSwitcher = 'baseLayerSwitcher',
   ZoomIn = 'zoomIn',
   ZoomOut = 'zoomOut',
@@ -11,44 +11,44 @@ export enum MapTool {
   GoogleView = 'googleView'
 }
 
-export const MAP_DEFAULT_TOOLS = [
+export const MAP_DEFAULT_WIDGETS = [
   {
-    name: MapTool.BaseLayerSwitcher,
+    id: MapWidget.BaseLayerSwitcher,
     icon: 'photo_library',
     title: 'map.toolbar.baselayerswitcher.title'
   },
   {
-    name: MapTool.ZoomIn,
+    id: MapWidget.ZoomIn,
     icon: 'zoom_in',
     title: 'map.toolbar.zoomin.title'
   },
   {
-    name: MapTool.ZoomOut,
+    id: MapWidget.ZoomOut,
     icon: 'zoom_out',
     title: 'map.toolbar.zoomout.title'
   },
   {
-    name: MapTool.PreviousView,
+    id: MapWidget.PreviousView,
     icon: 'arrow_back',
     title: 'map.toolbar.previousview.title'
   },
   {
-    name: MapTool.NextView,
+    id: MapWidget.NextView,
     icon: 'arrow_forward',
     title: 'map.toolbar.nextview.title'
   },
   {
-    name: MapTool.ClickInteraction,
+    id: MapWidget.ClickInteraction,
     icon: 'mouse',
     title: 'map.toolbar.clickinteraction.title'
   },
   {
-    name: MapTool.Geolocation,
+    id: MapWidget.Geolocation,
     icon: 'my_location',
     title: 'map.toolbar.geolocation.title'
   },
   {
-    name: MapTool.GoogleView,
+    id: MapWidget.GoogleView,
     icon: 'streetview',
     title: 'map.toolbar.googleview.title'
   }

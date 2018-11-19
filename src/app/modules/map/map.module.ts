@@ -1,16 +1,16 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FadqMapToolbarModule } from './map-toolbar/map-toolbar.module';
+import { FadqMapWidgetbarModule } from './map-widgetbar/map-widgetbar.module';
 import { MapService } from './shared/map.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    FadqMapToolbarModule
+    FadqMapWidgetbarModule
   ],
   exports: [
-    FadqMapToolbarModule
+    FadqMapWidgetbarModule
   ],
   declarations: []
 })

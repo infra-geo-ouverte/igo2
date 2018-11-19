@@ -4,49 +4,49 @@ import {
   Output,
   EventEmitter,
   HostBinding,
-  ChangeDetectionStrategy
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 
-import { Tool } from '@igo2/context';
+import { Entity } from '../../entity/shared/entity.interface';
+import { EntityStore } from '../../entity/shared/store';
+import { EntityStoreController } from '../../entity/shared/controller';
+import { Widget } from '../shared/widget.interface';
+import { widgetToEntity } from '../shared/widget.utils';
 
 // TODO: I'm not sure using a igo-list is the right thing to do
 // It has built-in select and focu mechanism that we might not need
 // and that we actually need to override. For example, we need
 // to remove th background color with some css and we lose
-// the focus/ripple effect when hovering/clicking a selected tool
+// the focus/ripple effect when hovering/clicking a selected widget
 
-const TOGGLE_TOOL = {
-  name: '_toggle',
+const TOGGLE_WIDGET = {
+  id: 'widgetbar_toggle',
   icon: 'more_vert'
 };
 
 @Component({
-  selector: 'fadq-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss'],
+  selector: 'fadq-widgetbar',
+  templateUrl: './widgetbar.component.html',
+  styleUrls: ['./widgetbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToolbarComponent {
+export class WidgetbarComponent implements OnInit, OnDestroy {
 
   public visible = true;
 
-  @Input()
-  get tools(): Tool[] {
-    return this._tools;
-  }
-  set tools(value: Tool[]) {
-    this._tools = value;
-  }
-  private _tools: Tool[] = [];
+  private controller: EntityStoreController;
 
   @Input()
-  get active(): Tool {
-    return this._active;
+  get store(): EntityStore<Entity<Widget>> {
+    return this._store;
   }
-  set active(value: Tool) {
-    this._active = value;
+  set store(value: EntityStore<Entity<Widget>>) {
+    this._store = value;
   }
-  private _active: Tool;
+  private _store;
 
   @Input()
   get collapsed() {
@@ -113,14 +113,14 @@ export class ToolbarComponent {
 
   @Input()
   get overlayClass(): string {
-    return [this._overlayClass, 'fadq-toolbar-overlay'].join(' ');
+    return [this._overlayClass, 'fadq-widgetbar-overlay'].join(' ');
   }
   set overlayClass(value: string) {
     this._overlayClass = value;
   }
   private _overlayClass = '';
 
-  @Output() activate = new EventEmitter<Tool>();
+  @Output() activate = new EventEmitter<Entity<Widget>>();
   @Output() open = new EventEmitter();
   @Output() close = new EventEmitter();
 
@@ -139,24 +139,38 @@ export class ToolbarComponent {
     return this.horizontal;
   }
 
-  get toggleTool(): Tool {
-    return TOGGLE_TOOL;
+  get toggleWidget(): Entity<Widget> {
+    return widgetToEntity(TOGGLE_WIDGET);
   }
 
-  constructor() {}
+  constructor(private cdRef: ChangeDetectorRef) {
+    this.controller = new EntityStoreController()
+      .withChangeDetector(this.cdRef);
+  }
 
-  getToolClass(tool: Tool): { [key: string]: boolean; } {
-    const active = this.active !== undefined && this.active.name === tool.name;
+  ngOnInit() {
+    this.controller.bind(this.store);
+  }
+
+  ngOnDestroy() {
+    this.controller.unbind();
+  }
+
+  getWidgetClass(widget: Entity<Widget>): { [key: string]: boolean; } {
+    const state = this.store.getEntityState(widget);
     return {
-      'fadq-toolbar-item-active': active
+      'fadq-widgetbar-item-active': state.active
     };
   }
 
-  activateTool(tool: Tool) {
-    this.activate.emit(tool);
+  activateWidget(widget: Entity<Widget>) {
+    this.controller.updateEntityState(widget, {
+      active: true,
+    }, true);
+    this.activate.emit(widget);
   }
 
-  toggleToolbar() {
+  toggleWidgetbar() {
     this.visible = !this.visible;
   }
 }

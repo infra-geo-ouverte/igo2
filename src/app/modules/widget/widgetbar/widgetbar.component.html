@@ -2,43 +2,43 @@
   *ngIf="!collapsed"
   [navigation]="false">
 
-  <fadq-toolbar-item
+  <fadq-widgetbar-item
     *ngIf="withToggleButton"
     igoListItem
     color="accent"
-    [ngClass]="getToolClass(toggleTool)"
+    [ngClass]="getWidgetClass(toggleWidget)"
     [withTitle]="false"
     [withIcon]="true"
-    [tool]="toggleTool"
-    (activate)="toggleToolbar()">
-  </fadq-toolbar-item>
+    [widget]="toggleWidget"
+    (activate)="toggleWidgetbar()">
+  </fadq-widgetbar-item>
 
   <ng-template
     *ngIf="visible"
-    ngFor let-tool [ngForOf]="tools">
-    <fadq-toolbar-item
+    ngFor let-widget [ngForOf]="store.entities">
+    <fadq-widgetbar-item
       igoListItem
       color="accent"
-      [ngClass]="getToolClass(tool)"
+      [ngClass]="getWidgetClass(widget)"
       [withTitle]="withTitle"
       [withIcon]="withIcon"
-      [tool]="tool"
-      (activate)="activateTool(tool)">
-    </fadq-toolbar-item>
+      [widget]="widget"
+      (activate)="activateWidget(widget)">
+    </fadq-widgetbar-item>
   </ng-template>
 </igo-list>
 
 <div *ngIf="collapsed">
   <button
     mat-icon-button
-    [matMenuTriggerFor]="toolbarMenu"
+    [matMenuTriggerFor]="widgetbarMenu"
     (menuOpened)="open.emit()"
     (menuClosed)="close.emit()">
     <mat-icon>more_horiz</mat-icon>
   </button>
 
   <mat-menu
-    #toolbarMenu="matMenu"
+    #widgetbarMenu="matMenu"
     class="fadq-compact-menu fadq-no-min-width-menu"
     overlapTrigger="true"
     [xPosition]="xPosition"
@@ -46,16 +46,16 @@
     [class]="overlayClass">
 
     <igo-list [navigation]="false">
-      <ng-template ngFor let-tool [ngForOf]="tools">
-        <fadq-toolbar-item
+      <ng-template ngFor let-widget [ngForOf]="store.entities">
+        <fadq-widgetbar-item
           igoListItem
           color="accent"
-          [ngClass]="getToolClass(tool)"
+          [ngClass]="getWidgetClass(widget)"
           [withTitle]="withTitle"
           [withIcon]="withIcon"
-          [tool]=tool
-          (activate)="activateTool(tool)">
-        </fadq-toolbar-item>
+          [widget]="widget"
+          (activate)="activateWidget(widget)">
+        </fadq-widgetbar-item>
       </ng-template>
     </igo-list>
   </mat-menu>

@@ -1,2 +1,2 @@
-export * from './map-toolbar';
+export * from './map-widgetbar';
 export * from './shared';
