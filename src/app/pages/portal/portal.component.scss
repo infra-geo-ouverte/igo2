@@ -95,7 +95,7 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
   border-top:1px solid #ddd;
 }
 
-.fadq-footer fadq-map-toolbar {
+.fadq-footer fadq-map-widgetbar {
   position: absolute;
   right: 0;
 }
@@ -111,6 +111,29 @@ fadq-expansion-panel {
 
 fadq-expansion-panel.fadq-expansion-panel-expanded {
   margin-bottom: $fadq-footer-height;
+}
+
+fadq-expansion-panel:not(.fadq-expansion-panel-expanded) {
+  @include small-screen {
+    fadq-editor-selector,
+    fadq-widgetbar {
+      display: none;
+    }
+  }
+
+  @include tablet {
+    dq-editor-selector,
+    fadq-widgetbar {
+      display: none;
+    }
+  }
+
+  @include mobile {
+    dq-editor-selector,
+    fadq-widgetbar {
+      display: none;
+    }
+  }
 }
 
 /*** Info panel ***/

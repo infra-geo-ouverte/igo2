@@ -44,6 +44,7 @@ export class EntityTableComponent implements OnInit, OnDestroy {
     return this._model;
   }
   set model(value: EntityTableModel) {
+    console.log(value);
     this._model = value;
   }
   private _model: EntityTableModel;

@@ -12,7 +12,6 @@ import {
 import { IgoLanguageModule } from '@igo2/core';
 import { IgoBackdropModule } from '@igo2/common';
 
-import { FadqToolbarModule } from '../../../modules/common/toolbar/toolbar.module';
 import { ExpansionPanelComponent } from './expansion-panel.component';
 import { ExpansionPanelHeaderComponent } from './expansion-panel-header.component';
 
@@ -25,8 +24,7 @@ import { ExpansionPanelHeaderComponent } from './expansion-panel-header.componen
     MatListModule,
     MatSelectModule,
     IgoLanguageModule,
-    IgoBackdropModule,
-    FadqToolbarModule
+    IgoBackdropModule
   ],
   exports: [ExpansionPanelComponent],
   declarations: [

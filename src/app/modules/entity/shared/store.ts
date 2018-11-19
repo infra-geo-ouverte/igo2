@@ -86,6 +86,17 @@ export class EntityStore<T extends Entity, S extends { [key: string]: boolean } 
       );
   }
 
+  observeFirstBy(filterBy: (entity: T, state: S) => boolean): Observable<T> {
+    return this.observable
+      .pipe(
+        map((entities: T[]) => {
+          return entities.find((entity: T) => {
+            return filterBy(entity, this.getEntityState(entity));
+          });
+        })
+      );
+  }
+
   private watchChanges() {
     const combined$ = combineLatest(
       this.entities$,

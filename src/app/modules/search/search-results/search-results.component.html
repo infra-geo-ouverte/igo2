@@ -3,7 +3,7 @@
     <ng-template
       #groupTemplate
       ngFor let-group let-i="index"
-      [ngForOf]="(store.entities$ | async).sort(sortByOrder) | searchEntityGroup">
+      [ngForOf]="(store.observable | async).sort(sortByOrder) | searchEntityGroup">
 
       <igo-collapsible
         title="{{group.source.title}} ({{group.entities.length}})"

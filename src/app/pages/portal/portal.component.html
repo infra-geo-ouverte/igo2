@@ -38,13 +38,19 @@
 </mat-sidenav-container>
 
 <div class="fadq-footer">
-  <fadq-map-toolbar [map]="map"></fadq-map-toolbar>
+  <fadq-map-widgetbar [map]="map"></fadq-map-widgetbar>
 </div>
 
 <fadq-expansion-panel
   [(expanded)]="expansionPanelExpanded"
   [backdropShown]="expansionPanelBackdropShown">
-  <fadq-client-schemas-table [store]="clientSchemaStore"></fadq-client-schemas-table>
+  <ng-container *ngIf="editor$ | async as editor">
+    <fadq-entity-table
+      class="table-compact"
+      [store]="editor.data.dataStore"
+      [model]="editor.data.tableModel">
+    </fadq-entity-table>
+  </ng-container>
 </fadq-expansion-panel>
 
 <fadq-info-panel

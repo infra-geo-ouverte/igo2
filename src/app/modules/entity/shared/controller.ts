@@ -8,7 +8,6 @@ import { EntityStore } from './store';
 
 export class EntityStoreController {
 
-  private store: EntityStore<Entity>;
   private cdRef: ChangeDetectorRef;
 
   private entityWatcher$$: Subscription;
@@ -16,20 +15,21 @@ export class EntityStoreController {
   private innerState = new Map();
   private firstDetection = false;
 
+  get store():  EntityStore<Entity> {
+    return this._store;
+  }
+  private _store: EntityStore<Entity>;
+
   constructor(store?: EntityStore<Entity>) {
     if (store !== undefined) {
       this.bind(store);
     }
   }
 
-  getStore(): EntityStore<Entity> {
-    return this.store;
-  }
-
   bind(store: EntityStore<Entity>): EntityStoreController {
     this.unbind();
     this.watch(store);
-    this.store = store;
+    this._store = store;
 
     return this;
   }
@@ -38,7 +38,7 @@ export class EntityStoreController {
     this.unwatch();
 
     this.innerState = new Map();
-    this.store = undefined;
+    this._store = undefined;
 
     return this;
   }

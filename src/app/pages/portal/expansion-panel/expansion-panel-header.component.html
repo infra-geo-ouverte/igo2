@@ -1,27 +1,14 @@
 <div>
-  <div class="fadq-expansion-panel-selector-container">
+  <div class="fadq-expansion-panel-trigger-container">
     <button
       mat-icon-button
       (click)="expanded = !expanded">
       <mat-icon *ngIf="!expanded">launch</mat-icon>
       <mat-icon *ngIf="expanded" style="transform: rotate(180deg)">launch</mat-icon>
     </button>
-
-    <mat-form-field class="fadq-expansion-panel-header-selector">
-      <mat-select></mat-select>
-    </mat-form-field>
   </div>
 
-  <div class="fadq-expansion-panel-toolbar-container">
-    <fadq-toolbar
-      [tools]="tools"
-      [horizontal]="true"
-      [xPosition]="'after'"
-      [yPosition]="'above'"
-      [overlayClass]="'fadq-expansion-panel-toolbar-overlay'"
-      [withTitle]="toolbarCollapsed"
-      [withToggleButton]="true"
-      [collapsed]="toolbarCollapsed">
-    </fadq-toolbar>
+  <div class="fadq-expansion-panel-content">
+    <ng-content></ng-content>
   </div>
 </div>

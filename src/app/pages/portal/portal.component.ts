@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 import { Media, MediaService } from '@igo2/core';
 import {
@@ -11,6 +12,8 @@ import {
 
 import { Client, ClientSchema } from '../../modules/client/shared/client.interface';
 import { ClientStoreService } from '../../modules/client/shared/client-store.service';
+import { Editor } from '../../modules/edition/shared/editor';
+import { EditorService } from '../../modules/edition/shared/editor.service';
 import { Entity, EntityStore } from '../../modules/entity/shared';
 import { IgoMap } from '../../modules/map/shared/map';
 import { MapService } from '../../modules/map/shared/map.service';
@@ -34,6 +37,8 @@ import {
 export class PortalComponent implements OnInit, OnDestroy {
   public context$$: Subscription;
 
+  public editor: Editor;
+  public editor$$: Subscription;
   public searchEntities$$: Subscription;
   public selectedSearchEntities$$: Subscription;
   public focusedSearchEntities$: Observable<Entity[]>;
@@ -51,8 +56,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.searchStoreService.getStore();
   }
 
-  get clientSchemaStore(): EntityStore<Entity<ClientSchema>> {
-    return this.clientStoreService.getSchemaStore();
+  get editor$(): Observable<Entity<Editor>> {
+    return this.editorService.observable;
   }
 
   get tool$(): Observable<Tool> {
@@ -66,7 +71,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private mediaService: MediaService,
     private searchStoreService: SearchStoreService,
     private toolService: ToolService,
-    private clientStoreService: ClientStoreService
+    private clientStoreService: ClientStoreService,
+    private editorService: EditorService
   ) {}
 
   ngOnInit() {
@@ -192,5 +198,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.clientStoreService.setClient(client);
     const clientInfo = this.toolService.getTool('clientInfo');
     this.toolService.selectTool(clientInfo);
+
+    const schemaEditor = this.clientStoreService.schemaEditor;
+    this.editorService.selectEditor(schemaEditor);
   }
+
 }
