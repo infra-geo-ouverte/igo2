@@ -58,7 +58,7 @@ export class EntityStoreController {
   private watch(store: EntityStore<Entity>) {
     this.unwatch();
 
-    this.entityWatcher$$ = store.observable
+    this.entityWatcher$$ = store.rawObservable
       .subscribe((entities: Entity[]) => this.handleEntityChanges(entities));
 
     this.stateWatcher$$ = store.state.observable

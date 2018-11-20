@@ -9,10 +9,10 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Editor } from '../shared/editor';
+import { getEntityTitle } from '../../entity';
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
-
+import { Editor } from '../shared/editor';
 
 @Component({
   selector: 'fadq-editor-selector',
@@ -47,6 +47,10 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.controller.unbind();
+  }
+
+  getEditorTitle(editor: Editor): string {
+    return getEntityTitle(editor);
   }
 
   selectEditor(editor: Editor) {

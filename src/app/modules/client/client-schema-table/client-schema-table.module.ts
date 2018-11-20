@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IgoLanguageModule } from '@igo2/core';
 
 import { FadqEntityModule } from '../../entity/entity.module';
-import { ClientSchemasTableComponent } from './client-schemas-table.component';
+import { ClientSchemaTableComponent } from './client-schema-table.component';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { ClientSchemasTableComponent } from './client-schemas-table.component';
     IgoLanguageModule,
     FadqEntityModule
   ],
-  exports: [ClientSchemasTableComponent],
-  declarations: [ClientSchemasTableComponent]
+  exports: [ClientSchemaTableComponent],
+  declarations: [ClientSchemaTableComponent]
 })
-export class FadqClientSchemasTableModule {}
+export class FadqClientSchemaTableModule {}

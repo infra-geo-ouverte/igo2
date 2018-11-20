@@ -6,6 +6,10 @@ export class EntityState<S extends { [key: string]: boolean } = State> {
 
   public states$ = new BehaviorSubject<Map<string, S>>(new Map());
 
+  get value(): Map<string, S> {
+    return this.states$.value;
+  }
+
   get observable(): BehaviorSubject<Map<string, S>> {
     return this.states$;
   }

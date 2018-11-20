@@ -2,9 +2,9 @@
 
 <mat-form-field class="fadq-editor-selector">
   <mat-select (selectionChange)="selectEditor($event.value)">
-    <ng-template ngFor let-widget [ngForOf]="store.observable | async">
-      <mat-option [value]="widget">
-        {{widget.title}}
+    <ng-template ngFor let-editor [ngForOf]="store.observable | async">
+      <mat-option [value]="editor">
+        {{getEditorTitle(editor)}}
       </mat-option>
     </ng-template>
   </mat-select>

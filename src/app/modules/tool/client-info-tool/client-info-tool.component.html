@@ -1,5 +1,6 @@
 <div>
   <ng-container *ngIf="client">
+    <fadq-client-schema-selector [store]="schemaStore"></fadq-client-schema-selector>
     <fadq-client-info [client]="client"></fadq-client-info>
   </ng-container>
 </div>

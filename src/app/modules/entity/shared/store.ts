@@ -1,10 +1,10 @@
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, merge } from 'rxjs';
-import { debounceTime, map, distinctUntilChanged, first, skip, share } from 'rxjs/operators';
+import { debounceTime, map, skip } from 'rxjs/operators';
 
 import { Entity, EntityClass, State, EntitySortClause } from './entity.interface';
 import { EntityState } from './state';
 import { EntitySorter } from './sorter';
-import { getEntityId, sortEntities } from './entity.utils';
+import { getEntityId } from './entity.utils';
 
 export class EntityStore<T extends Entity | EntityClass, S extends { [key: string]: boolean } = State> {
 
@@ -26,8 +26,12 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
   }
   private _observable$ = new Subject<T[]>();
 
+  get rawObservable(): BehaviorSubject<T[]> {
+    return this.entities$;
+  }
+
   get entities(): T[] {
-    return this.entities$.value;
+    return this.rawObservable.value;
   }
 
   get empty(): boolean {

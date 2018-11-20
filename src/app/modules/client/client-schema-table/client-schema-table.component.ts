@@ -9,12 +9,12 @@ import { EntityStore } from '../../entity/shared/store';
 import { ClientSchema } from '../shared/client.interface';
 
 @Component({
-  selector: 'fadq-client-schemas-table',
-  templateUrl: './client-schemas-table.component.html',
-  styleUrls: ['./client-schemas-table.component.scss'],
+  selector: 'fadq-client-schema-table',
+  templateUrl: './client-schema-table.component.html',
+  styleUrls: ['./client-schema-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemasTableComponent {
+export class ClientSchemaTableComponent {
 
   static model: EntityTableModel = {
     selection: true,
@@ -56,7 +56,7 @@ export class ClientSchemasTableComponent {
   private _store;
 
   get model(): EntityTableModel {
-    return ClientSchemasTableComponent.model;
+    return ClientSchemaTableComponent.model;
   }
 
   constructor() {}

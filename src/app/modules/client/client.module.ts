@@ -9,17 +9,20 @@ import {
 import { ClientStoreService } from './shared/client-store.service';
 
 import { FadqClientInfoModule } from './client-info/client-info.module';
-import { FadqClientSchemasTableModule } from './client-schemas-table/client-schemas-table.module';
+import { FadqClientSchemaSelectorModule } from './client-schema-selector/client-schema-selector.module';
+import { FadqClientSchemaTableModule } from './client-schema-table/client-schema-table.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FadqClientInfoModule,
-    FadqClientSchemasTableModule
+    FadqClientSchemaSelectorModule,
+    FadqClientSchemaTableModule
   ],
   exports: [
     FadqClientInfoModule,
-    FadqClientSchemasTableModule
+    FadqClientSchemaSelectorModule,
+    FadqClientSchemaTableModule
   ],
   declarations: []
 })

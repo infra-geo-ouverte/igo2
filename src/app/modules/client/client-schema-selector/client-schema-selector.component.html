@@ -1,0 +1,13 @@
+
+
+<mat-form-field class="fadq-schema-selector">
+  <mat-select
+    [value]="schema$ | async"
+    (selectionChange)="selectSchema($event.value)">
+    <ng-template ngFor let-schema [ngForOf]="store.observable | async">
+      <mat-option [value]="schema">
+        {{getSchemaTitle(schema)}}
+      </mat-option>
+    </ng-template>
+  </mat-select>
+</mat-form-field>

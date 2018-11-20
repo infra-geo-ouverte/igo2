@@ -73,6 +73,10 @@ export class ClientSchemaService {
   }
 
   private resultToSchema(result: ClientSchemaListResult) {
-    return result;
+    return Object.assign({
+      meta: {
+        title: `${result.id} - ${result.type} - ${result.annee}`
+      }
+    }, result);
   }
 }
