@@ -3,10 +3,10 @@
     <ng-template
       #groupTemplate
       ngFor let-group let-i="index"
-      [ngForOf]="(store.observable | async).sort(sortByOrder) | searchResultsGroup">
+      [ngForOf]="(store.rawObservable | async).sort(sortByOrder) | searchResultsGroup">
 
       <igo-collapsible
-        title="{{group.source.title}} ({{group.entities.length}})"
+        title="{{group.source.title}} ({{group.results.length}})"
         *ngIf="mode === displayMode.Grouped; else flatTemplate">
         <ng-container *ngTemplateOutlet="storeItemTemplate; context: {result: group.result}"></ng-container>
       </igo-collapsible>
@@ -16,7 +16,7 @@
       </ng-template>
 
       <ng-template #storeItemTemplate>
-        <ng-template ngFor let-result let-j="index" [ngForOf]="group.entities">
+        <ng-template ngFor let-result let-j="index" [ngForOf]="group.results">
           <fadq-search-results-item
             igoListItem
             color="accent"

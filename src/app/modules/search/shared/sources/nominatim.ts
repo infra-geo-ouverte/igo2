@@ -74,7 +74,10 @@ export class NominatimSearchSource
         projection: 'EPSG:4326',
         geometry: geometry,
         extent: extent,
-        properties: properties
+        properties: properties,
+        meta: {
+          title: data.display_name
+        }
       }
     };
   }

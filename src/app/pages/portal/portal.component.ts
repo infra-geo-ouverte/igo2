@@ -15,6 +15,8 @@ import { ClientStoreService } from '../../modules/client/shared/client-store.ser
 import { Editor } from '../../modules/edition/shared/editor';
 import { EditorService } from '../../modules/edition/shared/editor.service';
 import { EntityStore } from '../../modules/entity/shared/store';
+import { FEATURE } from '../../modules/feature/shared/feature.enum';
+import { Feature } from '../../modules/feature/shared/feature.interface';
 import { State } from '../../modules/entity/shared/entity.interface';
 import { IgoMap } from '../../modules/map/shared/map';
 import { MapService } from '../../modules/map/shared/map.service';
@@ -39,11 +41,7 @@ import {
 export class PortalComponent implements OnInit, OnDestroy {
 
   public editor: Editor;
-  public editor$$: Subscription;
-  public searchResults$$: Subscription;
-  public selectedSearchResults$$: Subscription;
-  public focusedSearchResults$: Observable<SearchResult[]>;
-
+  public infoPanelFeatures: Feature[] = [];
   public expansionPanelExpanded = false;
   public infoPanelOpened = false;
   public sidenavOpened = false;
@@ -53,8 +51,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   private contextLoaded = false;
   private context$$: Subscription;
   private selectedEditor$$: Subscription;
-  private searchEntities$$: Subscription;
-  private selectedSearchEntities$$: Subscription;
+  private searchResults$$: Subscription;
+  private selectedSearchResults$$: Subscription;
+  private focusedSearchResults$$: Subscription;
 
   get searchStore(): EntityStore<SearchResult> {
     return this.searchStoreService.store;
@@ -104,8 +103,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       .observeBy((result: SearchResult, state: State) => state.selected === true)
       .subscribe((results: SearchResult[]) => this.handleSearchResultsSelect(results));
 
-    this.focusedSearchResults$ = this.searchStore
-      .observeBy((result: SearchResult, state: State) => state.focused === true);
+    this.focusedSearchResults$$ = this.searchStore
+      .observeBy((result: SearchResult, state: State) => state.focused === true)
+      .subscribe((results: SearchResult[]) => this.handleSearchResultsFocus(results));
 
     this.selectedEditor$$ = this.editorStore
       .observeFirstBy((editor: Editor, state: State) => state.selected === true)
@@ -200,6 +200,12 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.closeSidenav();
     }
     this.openInfoPanel();
+  }
+
+  private handleSearchResultsFocus(results: SearchResult[]) {
+    this.infoPanelFeatures = results
+      .filter((result: SearchResult) => result.meta.dataType === FEATURE)
+      .map((result: SearchResult) => result.data as Feature);
   }
 
   private handleSearchClient(client: Client) {

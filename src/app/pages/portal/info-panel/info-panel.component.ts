@@ -7,9 +7,8 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { getEntityTitle, Entity } from '../../../modules/entity/shared';
+import { getEntityTitle } from '../../../modules/entity/shared';
 import { Feature } from '../../../modules/feature/shared';
-
 
 @Component({
   selector: 'fadq-info-panel',
@@ -37,7 +36,7 @@ export class InfoPanelComponent {
     if (this._title !== undefined) {
       return this._title;
     }
-    return this.entity === undefined ? undefined : getEntityTitle(this.entity);
+    return this.feature === undefined ? undefined : getEntityTitle(this.feature);
   }
   set title(value: string) {
     this._title = value;
@@ -45,16 +44,16 @@ export class InfoPanelComponent {
   private _title: string;
 
   @Input()
-  get entities(): Entity[] {
-    return this._entities;
+  get features(): Feature[] {
+    return this._features;
   }
-  set entities(value: Entity[]) {
-    this._entities = value || [];
+  set features(value: Feature[]) {
+    this._features = value || [];
     if (!this.empty) {
       this.toggleDisplay();
     }
   }
-  private _entities: Entity[] = [];
+  private _features: Feature[] = [];
 
   @Output() openedChange = new EventEmitter<boolean>();
 
@@ -63,24 +62,20 @@ export class InfoPanelComponent {
     return this.opened;
   }
 
-  @HostBinding('class.fadq-info-panel-with-entities')
-  get hasWithEntitiesClass() {
-    return this.entities === undefined ? false : true;
+  @HostBinding('class.fadq-info-panel-with-features')
+  get hasWithFeaturesClass() {
+    return this.features === undefined ? false : true;
   }
 
   get empty(): boolean {
-    return this.entities.length === 0;
-  }
-
-  get entity(): Entity | undefined {
-    if (this.empty) {
-      return undefined;
-    }
-    return this.entities[0];
+    return this.features.length === 0;
   }
 
   get feature(): Feature | undefined {
-    return this.entity as Feature;
+    if (this.empty) {
+      return undefined;
+    }
+    return this.features[0];
   }
 
   constructor() {}

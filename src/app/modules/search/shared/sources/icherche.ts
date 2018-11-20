@@ -92,7 +92,10 @@ export class IChercheSearchSource
         projection: 'EPSG:4326',
         geometry: data.geometry,
         extent: data.bbox,
-        properties: properties
+        properties: properties,
+        meta: {
+          title: data.properties.recherche
+        }
       },
       meta: {
         dataType: FEATURE,
@@ -170,7 +173,10 @@ export class IChercheReverseSearchSource
         projection: 'EPSG:4326',
         geometry: data.geometry,
         extent: extent,
-        properties: properties
+        properties: properties,
+        meta: {
+          title: data.properties.nom
+        }
       },
       meta: {
         dataType: FEATURE,
