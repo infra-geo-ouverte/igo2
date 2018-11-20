@@ -35,29 +35,27 @@ import {
   animations: [controlSlideX(), controlSlideY(), mapSlideX(), mapSlideY()]
 })
 export class PortalComponent implements OnInit, OnDestroy {
-  public context$$: Subscription;
 
-  public editor: Editor;
-  public editor$$: Subscription;
-  public searchEntities$$: Subscription;
-  public selectedSearchEntities$$: Subscription;
+  public editor: Entity<Editor>;
   public focusedSearchEntities$: Observable<Entity[]>;
-
   public expansionPanelExpanded = false;
   public infoPanelOpened = false;
   public sidenavOpened = false;
-
   public map: IgoMap;
 
   // True after the initial context is loaded
   private contextLoaded = false;
+  private context$$: Subscription;
+  private selectedEditor$$: Subscription;
+  private searchEntities$$: Subscription;
+  private selectedSearchEntities$$: Subscription;
 
   get searchStore(): EntityStore<Entity> {
-    return this.searchStoreService.getStore();
+    return this.searchStoreService.store;
   }
 
-  get editor$(): Observable<Entity<Editor>> {
-    return this.editorService.observable;
+  get editorStore(): EntityStore<Entity<Editor>> {
+    return this.editorService.store;
   }
 
   get tool$(): Observable<Tool> {
@@ -88,27 +86,36 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
     this.mapService.setMap(this.map);
 
-    this.context$$ = this.contextService.context$.subscribe(context =>
-      this.handleContextChange(context)
-    );
+    this.context$$ = this.contextService.context$.subscribe((context: DetailedContext) => {
+      this.handleContextChange(context);
+    });
 
     this.searchEntities$$ = this.searchStore.observable
-      .subscribe((entities: Entity[]) =>
-        this.handleSearchEntitiesChange(entities)
-      );
+      .subscribe((entities: Entity[]) => {
+        this.handleSearchEntitiesChange(entities);
+      });
 
     this.selectedSearchEntities$$ = this.searchStore
       .observeBy((entity: Entity, state) => state.selected === true)
-      .subscribe((entities: Entity[]) => this.handleSearchEntitiesSelect(entities));
+      .subscribe((entities: Entity[]) => {
+        this.handleSearchEntitiesSelect(entities);
+      });
 
     this.focusedSearchEntities$ = this.searchStore
       .observeBy((entity: Entity, state) => state.focused === true);
+      
+    this.selectedEditor$$ = this.editorStore.observeFirstBy((editor: Entity<Editor>) => {
+        return this.editorStore.getEntityState(editor).selected === true;
+      }).subscribe((editor: Entity<Editor>) => {
+        this.handleEditorSelect(editor);
+      });
   }
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
     this.searchEntities$$.unsubscribe();
     this.selectedSearchEntities$$.unsubscribe();
+    this.selectedEditor$$.unsubscribe();
   }
 
   get backdropShown(): boolean {
@@ -150,6 +157,18 @@ export class PortalComponent implements OnInit, OnDestroy {
     // }
   }
 
+  private handleContextChange(context: DetailedContext) {
+    if (context !== undefined) {
+      this.toolService.setTools(context.tools);
+
+      if (this.contextLoaded) {
+        const mapDetails = this.toolService.getTool('mapDetails');
+        this.toolService.selectTool(mapDetails);
+      }
+      this.contextLoaded = true;
+    }
+  }
+
   private handleSearchEntitiesChange(entities: Entity[]) {
     if (entities.length === 0) {
       return;
@@ -162,7 +181,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     if (withClients) {
-      const client = entities[0].data as Client;
+      const client = entities[0] as Entity<Client>;
       this.handleSearchClient(client);
     } else {
       const searchResults = this.toolService.getTool('searchResultsFadq');
@@ -182,25 +201,17 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openInfoPanel();
   }
 
-  private handleContextChange(context: DetailedContext) {
-    if (context !== undefined) {
-      this.toolService.setTools(context.tools);
-
-      if (this.contextLoaded) {
-        const mapDetails = this.toolService.getTool('mapDetails');
-        this.toolService.selectTool(mapDetails);
-      }
-      this.contextLoaded = true;
-    }
-  }
-
-  private handleSearchClient(client: Client) {
-    this.clientStoreService.setClient(client);
+  private handleSearchClient(client: Entity<Client>) {
+    this.clientStoreService.setClient(client.data);
     const clientInfo = this.toolService.getTool('clientInfo');
     this.toolService.selectTool(clientInfo);
 
-    const schemaEditor = this.clientStoreService.schemaEditor;
-    this.editorService.selectEditor(schemaEditor);
+    //const schemaEditor = this.clientStoreService.schemaEditor;
+    //this.editorService.selectEditor(schemaEditor);
+  }
+
+  private handleEditorSelect(editor: Entity<Editor>) {
+    this.editor = editor;
   }
 
 }

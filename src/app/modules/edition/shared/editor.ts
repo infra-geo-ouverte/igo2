@@ -23,7 +23,7 @@ export class Editor {
   private _dataStore: EntityStore<Entity>;
 
   get widgetStore():  EntityStore<Entity<Widget>> {
-    return this.widgetStore;
+    return this._widgetStore;
   }
   private _widgetStore: EntityStore<Entity<Widget>>;
 

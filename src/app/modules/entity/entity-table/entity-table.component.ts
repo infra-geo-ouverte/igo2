@@ -44,7 +44,6 @@ export class EntityTableComponent implements OnInit, OnDestroy {
     return this._model;
   }
   set model(value: EntityTableModel) {
-    console.log(value);
     this._model = value;
   }
   private _model: EntityTableModel;
@@ -68,6 +67,8 @@ export class EntityTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.controller.bind(this.store);
+    // TODO: If we remove this, the table will start empty. Find why
+    this.store.sorter.reset();
     // TODO: Clear sort when records change
   }
 

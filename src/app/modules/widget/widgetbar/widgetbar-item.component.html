@@ -1,29 +1,13 @@
-<mat-list-item
-  tooltip-position="below"
-  matTooltipShowDelay="500"
-  [matTooltip]="tooltip | translate"
-  (click)="activate.emit(widget)">
-
-  <mat-icon
-    *ngIf="withIcon && !image"
-    mat-list-avatar
-    tooltip-position="below"
-    matTooltipClass="widgetbarItemTooltip"
-    matTooltipShowDelay="500"
-    [matTooltip]="tooltip | translate">
-    {{icon}}
-  </mat-icon>
-
+<mat-list-item>
   <button
-    *ngIf="withIcon && image"
     mat-list-avatar
     mat-icon-button
     matTooltipClass="widgetbarItemTooltip"
     matTooltipShowDelay="500"
-    [matTooltip]="tooltip | translate">
-    <img [src]="image">
+    [matTooltip]="tooltip | translate"
+    (click)="activate.emit(widget)">
+    <mat-icon *ngIf="withIcon && !image">{{icon}}</mat-icon>
+    <img *ngIf="withIcon && image" [src]="image">
   </button>
-
   <h4 *ngIf="withTitle" matLine>{{title | translate}}</h4>
-
 </mat-list-item>

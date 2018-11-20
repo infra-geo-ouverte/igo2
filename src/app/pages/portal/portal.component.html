@@ -44,13 +44,29 @@
 <fadq-expansion-panel
   [(expanded)]="expansionPanelExpanded"
   [backdropShown]="expansionPanelBackdropShown">
-  <ng-container *ngIf="editor$ | async as editor">
-    <fadq-entity-table
-      class="table-compact"
-      [store]="editor.data.dataStore"
-      [model]="editor.data.tableModel">
-    </fadq-entity-table>
+
+  <ng-container expansionPanelHeader>
+    <fadq-editor-selector [store]="editorStore"></fadq-editor-selector>
+    <fadq-widgetbar
+      *ngIf="editor" 
+      [store]="editor.data.widgetStore"
+      [horizontal]="true"
+      [xPosition]="'after'"
+      [yPosition]="'above'"
+      [overlayClass]="'fadq-expansion-panel-widgetbar-overlay'"
+      [withToggleButton]="true"
+      [withTitle]="!expansionPanelExpanded"
+      [collapsed]="!expansionPanelExpanded">
+    </fadq-widgetbar>
   </ng-container>
+
+  <fadq-entity-table
+    *ngIf="editor"
+    class="table-compact"
+    [store]="editor.data.dataStore"
+    [model]="editor.data.tableModel">
+  </fadq-entity-table>
+
 </fadq-expansion-panel>
 
 <fadq-info-panel

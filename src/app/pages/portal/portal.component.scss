@@ -136,6 +136,11 @@ fadq-expansion-panel:not(.fadq-expansion-panel-expanded) {
   }
 }
 
+
+fadq-editor-selector {
+  width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-icon-size} - 20px)
+}
+
 /*** Info panel ***/
 fadq-info-panel {
   position: absolute;

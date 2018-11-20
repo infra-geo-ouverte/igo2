@@ -12,7 +12,10 @@ import { editorToEntity } from './edition.utils';
 })
 export class EditorService {
 
-  private store: EntityStore<Entity<Editor>>;
+  get store(): EntityStore<Entity<Editor>> {
+    return this._store;
+  }
+  private _store: EntityStore<Entity<Editor>>;
 
   get observable(): Subject<Entity<Editor>> {
     return this._observable;
@@ -20,8 +23,8 @@ export class EditorService {
   private _observable = new Subject<Entity<Editor>>();
 
   constructor() {
-    this.store = new EntityStore<Entity<Editor>>();
-    this.store.observeFirstBy((editor: Entity<Editor>) => {
+    this._store = new EntityStore<Entity<Editor>>();
+    this._store.observeFirstBy((editor: Entity<Editor>) => {
       return this.store.getEntityState(editor).selected === true;
     }).subscribe((editor: Entity<Editor>) => this.observable.next(editor));
   }

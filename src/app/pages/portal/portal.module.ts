@@ -35,6 +35,7 @@ import { IgoToolsModule } from '@igo2/tools';
 
 import { FadqCoreModule } from '../../modules/core/core.module';
 import { FadqEntityModule } from '../../modules/entity/entity.module';
+import { FadqEditionModule } from '../../modules/edition/edition.module';
 import { FadqClientModule } from '../../modules/client/client.module';
 import { FadqMapModule } from '../../modules/map/map.module';
 import { FadqSearchModule } from '../../modules/search/search.module';
@@ -78,6 +79,7 @@ import { PortalComponent } from './portal.component';
     IgoToolsModule,
     FadqCoreModule,
     FadqEntityModule,
+    FadqEditionModule,
     FadqClientModule,
     FadqExpansionPanelModule,
     FadqInfoPanelModule,

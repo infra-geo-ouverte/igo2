@@ -1,8 +1,8 @@
 <div>
 
   <div class="fadq-expansion-panel-container">
-    <fadq-expansion-panel-header
-      [(expanded)]="expanded">
+    <fadq-expansion-panel-header [(expanded)]="expanded">
+      <ng-content select="[expansionPanelHeader]"></ng-content>
     </fadq-expansion-panel-header>
 
     <div class="fadq-expansion-panel-content mat-elevation-z4">

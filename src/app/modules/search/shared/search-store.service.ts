@@ -8,13 +8,13 @@ import { EntityStore } from '../../entity/shared/store';
 })
 export class SearchStoreService {
 
-  private store: EntityStore<Entity>;
+  get store(): EntityStore<Entity> {
+    return this._store;
+  }
+  private _store: EntityStore<Entity>;
 
   constructor() {
-    this.store = new EntityStore<Entity>();
+    this._store = new EntityStore<Entity>();
   }
 
-  getStore(): EntityStore<Entity> {
-    return this.store;
-  }
 }
