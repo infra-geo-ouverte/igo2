@@ -21,7 +21,7 @@ export class ClientService {
       .pipe(
         withLatestFrom(this.schemaService.getClientSchemasByNum(clientNum)),
         map(([info, schemas]) => {
-          return Object.assign({id: info.numero}, info, {schemas});
+          return Object.assign({meta: {idProperty: 'numero'}}, info, {schemas});
         })
       );
   }

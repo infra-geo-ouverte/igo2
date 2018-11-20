@@ -92,26 +92,23 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
     this.mapService.setMap(this.map);
 
-    this.context$$ = this.contextService.context$.subscribe((context: DetailedContext) => {
-      this.handleContextChange(context);
-    });
+    this.context$$ = this.contextService.context$
+      .subscribe((context: DetailedContext) =>  this.handleContextChange(context));
 
     this.searchResults$$ = this.searchStore.observable
-    .subscribe((results: SearchResult[]) =>
-      this.handleSearchResultsChange(results)
-    );
+      .subscribe((results: SearchResult[]) =>
+        this.handleSearchResultsChange(results)
+      );
 
     this.selectedSearchResults$$ = this.searchStore
-    .observeBy((result: SearchResult, state: State) => state.selected === true)
-    .subscribe((results: SearchResult[]) => {
-      this.handleSearchResultsSelect(results)
-    });
+      .observeBy((result: SearchResult, state: State) => state.selected === true)
+      .subscribe((results: SearchResult[]) => this.handleSearchResultsSelect(results));
 
     this.focusedSearchResults$ = this.searchStore
-    .observeBy((result: SearchResult, state: State) => state.focused === true);
-      
+      .observeBy((result: SearchResult, state: State) => state.focused === true);
+
     this.selectedEditor$$ = this.editorStore
-      .observeFirstBy((editor: Editor, stae: State) => state.selected === true)
+      .observeFirstBy((editor: Editor, state: State) => state.selected === true)
       .subscribe((editor: Editor) => this.handleEditorSelect(editor));
   }
 
@@ -185,7 +182,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     if (withClients) {
-      const client = results[0] as Client;
+      const client = results[0].data as Client;
       this.handleSearchClient(client);
     } else {
       const searchResults = this.toolService.getTool('searchResultsFadq');
@@ -210,8 +207,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     const clientInfo = this.toolService.getTool('clientInfo');
     this.toolService.selectTool(clientInfo);
 
-    //const schemaEditor = this.clientStoreService.schemaEditor;
-    //this.editorService.selectEditor(schemaEditor);
+    // const schemaEditor = this.clientStoreService.schemaEditor;
+    // this.editorService.selectEditor(schemaEditor);
   }
 
   private handleEditorSelect(editor: Editor) {

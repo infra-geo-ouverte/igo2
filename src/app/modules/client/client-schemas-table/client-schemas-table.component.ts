@@ -1,11 +1,10 @@
 import {
   Component,
   Input,
-  ChangeDetectorRef,
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { Entity, EntityTableModel } from '../../entity/shared/entity.interface';
+import { EntityTableModel } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { ClientSchema } from '../shared/client.interface';
 
@@ -47,17 +46,19 @@ export class ClientSchemasTableComponent {
     ]
   };
 
+  @Input()
+  get store(): EntityStore<ClientSchema> {
+    return this._store;
+  }
+  set store(value: EntityStore<ClientSchema>) {
+    this._store = value;
+  }
+  private _store;
+
   get model(): EntityTableModel {
     return ClientSchemasTableComponent.model;
   }
 
-  @Input()
-  get store(): EntityStore<Entity<ClientSchema>> {
-    return this._store;
-  }
-  set store(value: EntityStore<Entity<ClientSchema>>) {
-    this._store = value;
-  }
-  private _store;
+  constructor() {}
 
 }

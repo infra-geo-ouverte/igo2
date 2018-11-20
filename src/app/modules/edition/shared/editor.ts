@@ -1,9 +1,9 @@
-import { Entity, EntityTableModel } from '../../entity/shared/entity.interface';
+import { Entity, EntityClass, EntityTableModel } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { Widget } from '../../widget/shared/widget.interface';
 import { EditorConfig } from './edition.interface';
 
-export class Editor {
+export class Editor extends EntityClass {
 
   get id(): string {
     return this.config.id;
@@ -27,7 +27,9 @@ export class Editor {
   }
   private _widgetStore: EntityStore<Widget>;
 
-  constructor(private config: EditorConfig) {}
+  constructor(private config: EditorConfig) {
+    super();
+  }
 
   bindDataStore(dataStore: EntityStore<Entity>): Editor {
     this.unbindDataStore();

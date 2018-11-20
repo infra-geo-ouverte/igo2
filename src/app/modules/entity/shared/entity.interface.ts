@@ -1,6 +1,6 @@
 export interface EntityMeta {
   dataType?: string;
-  id?: string | number;
+  id?: string;
   idProperty?: string;
   title?: string;
   titleProperty?: string;
@@ -10,9 +10,15 @@ export interface EntityMeta {
   iconProperty?: string;
 }
 
-export interface Entity<M = EntityMeta> {
+export interface EntityObject<M = EntityMeta> {
   meta?: M;
 }
+
+export abstract class EntityClass<M = EntityMeta> implements EntityObject {
+  meta?: M;
+}
+
+export type Entity = EntityObject | EntityClass;
 
 export interface State {
   [key: string]: boolean;

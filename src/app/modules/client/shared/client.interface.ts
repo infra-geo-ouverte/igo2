@@ -1,4 +1,4 @@
-import { Entity } from '../../entity/shared/entity.interface';
+import { EntityObject } from '../../entity/shared/entity.interface';
 
 export interface ClientApiConfig {
   info: string;
@@ -12,8 +12,7 @@ export interface ClientInfo {
   adressePro: string;
 }
 
-export interface Client extends Entity, ClientInfo {
-  id: string;
+export interface Client extends EntityObject, ClientInfo {
   schemas: ClientSchema[];
 }
 
@@ -42,7 +41,7 @@ export interface ClientInfoListResultPays {
   codePays: string;
 }
 
-export interface ClientSchema extends Entity {
+export interface ClientSchema extends EntityObject {
   id: string;
   numeroClient: string;
   type: string;

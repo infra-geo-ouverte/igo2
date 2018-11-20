@@ -1,8 +1,8 @@
 import { LayerOptions, TimeFilterOptions } from '@igo2/geo';
-import { Entity, State } from '../../entity/shared/entity.interface';
+import { EntityObject, State } from '../../entity/shared/entity.interface';
 import { CatalogItemType } from './catalog.enum';
 
-export interface Catalog extends Entity {
+export interface Catalog extends EntityObject {
   id: string;
   title: string;
   url: string;
@@ -12,7 +12,7 @@ export interface Catalog extends Entity {
   timeFilter?: TimeFilterOptions;
 }
 
-export interface CatalogItem extends Entity {
+export interface CatalogItem extends EntityObject {
   id: string;
   title: string;
   type: CatalogItemType;

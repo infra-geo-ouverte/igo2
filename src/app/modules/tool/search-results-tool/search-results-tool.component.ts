@@ -25,7 +25,7 @@ import { SearchStoreService } from '../../search/shared/search-store.service';
 export class SearchResultsToolComponent {
 
   get store(): EntityStore<SearchResult> {
-    return this.searchStoreService.getStore();
+    return this.searchStoreService.store;
   }
 
   get map(): IgoMap {

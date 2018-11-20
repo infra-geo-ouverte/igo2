@@ -49,7 +49,7 @@
     <fadq-editor-selector [store]="editorStore"></fadq-editor-selector>
     <fadq-widgetbar
       *ngIf="editor" 
-      [store]="editor.data.widgetStore"
+      [store]="editor.widgetStore"
       [horizontal]="true"
       [xPosition]="'after'"
       [yPosition]="'above'"
@@ -63,8 +63,8 @@
   <fadq-entity-table
     *ngIf="editor"
     class="table-compact"
-    [store]="editor.data.dataStore"
-    [model]="editor.data.tableModel">
+    [store]="editor.dataStore"
+    [model]="editor.tableModel">
   </fadq-entity-table>
 
 </fadq-expansion-panel>

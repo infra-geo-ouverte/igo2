@@ -1,6 +1,6 @@
-import { Entity } from '../../entity/shared/entity.interface';
+import { EntityObject } from '../../entity/shared/entity.interface';
 
-export interface Widget extends Entity {
+export interface Widget extends EntityObject {
   id: string;
   title?: string;
   icon?: string;

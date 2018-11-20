@@ -8,7 +8,7 @@ export function entitiesAreTheSame(entity1: Entity, entity2: Entity | undefined)
   if (entity2 === undefined) {
     return false;
   }
-  return getEntityId(entity1)=== getEntityId(entity2);
+  return getEntityId(entity1) === getEntityId(entity2);
 }
 
 export function getEntityId(entity: Entity): string {
@@ -46,7 +46,7 @@ export function getEntityTitleHtml(entity: Entity): string {
   if (meta.titleHtml !== undefined) {
     titleHtml = meta.titleHtml;
   } else {
-    const titleHtmlProperty = meta.titleProperty || 'titleHtml'
+    const titleHtmlProperty = meta.titleProperty || 'titleHtml';
     titleHtml = t(entity, titleHtmlProperty).safeObject;
   }
 
@@ -60,7 +60,7 @@ export function getEntityIcon(entity: Entity): string {
   if (meta.icon !== undefined) {
     icon = meta.icon;
   } else {
-    const iconProperty = meta.iconProperty || 'icon'
+    const iconProperty = meta.iconProperty || 'icon';
     icon = t(entity, iconProperty).safeObject;
   }
 

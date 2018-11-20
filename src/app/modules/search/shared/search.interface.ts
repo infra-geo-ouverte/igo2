@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Entity } from '../../entity/shared/entity.interface';
+import { Entity, EntityObject } from '../../entity/shared/entity.interface';
 import { SearchSource } from './sources';
 
 export interface Research {
@@ -9,7 +9,7 @@ export interface Research {
   source: SearchSource;
 }
 
-export interface SearchResult<T = { [key: string]: any }> extends Entity {
+export interface SearchResult<T = { [key: string]: any }> extends EntityObject {
   data: T;
   source: SearchSource;
 }

@@ -1,12 +1,12 @@
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, merge } from 'rxjs';
 import { debounceTime, map, distinctUntilChanged, first, skip, share } from 'rxjs/operators';
 
-import { Entity, State, EntitySortClause } from './entity.interface';
+import { Entity, EntityClass, State, EntitySortClause } from './entity.interface';
 import { EntityState } from './state';
 import { EntitySorter } from './sorter';
 import { getEntityId, sortEntities } from './entity.utils';
 
-export class EntityStore<T extends Entity, S extends { [key: string]: boolean } = State> {
+export class EntityStore<T extends Entity | EntityClass, S extends { [key: string]: boolean } = State> {
 
   private entities$ = new BehaviorSubject<T[]>([]);
   private watcher$$: Subscription;

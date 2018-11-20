@@ -1,8 +1,7 @@
 import { Editor } from '../../edition/shared/editor';
-import { Entity, EntityTableModel } from '../../entity/shared/entity.interface';
+import { EntityTableModel } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { Widget } from '../../widget/shared/widget.interface';
-import { widgetToEntity } from '../../widget/shared/widget.utils';
 
 import { ClientSchema } from './client.interface';
 import { MAP_DEFAULT_WIDGETS } from '../../map';
@@ -48,11 +47,11 @@ export class ClientSchemaEditor extends Editor {
       tableModel: ClientSchemaEditor.tableModel
     });
 
-    const dataStore = new EntityStore<Entity<ClientSchema>>(); 
+    const dataStore = new EntityStore<ClientSchema>();
     this.bindDataStore(dataStore);
 
-    const widgetStore = new EntityStore<Entity<Widget>>();
-    widgetStore.setEntities(ClientSchemaEditor.widgets.map(widgetToEntity));
+    const widgetStore = new EntityStore<Widget>();
+    widgetStore.setEntities(ClientSchemaEditor.widgets);
     this.bindWidgetStore(widgetStore);
   }
 }
