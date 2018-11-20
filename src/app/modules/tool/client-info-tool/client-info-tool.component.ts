@@ -14,7 +14,8 @@ import { ClientStoreService } from '../../client/shared/client-store.service';
 })
 @Component({
   selector: 'fadq-client-info-tool',
-  templateUrl: './client-info-tool.component.html'
+  templateUrl: './client-info-tool.component.html',
+  styleUrls: ['./client-info-tool.component.scss'],
 })
 export class  ClientInfoToolComponent {
 

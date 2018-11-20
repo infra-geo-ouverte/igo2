@@ -1,0 +1,36 @@
+@import '../../../../style/partial/media';
+@import '../../../../style/partial/variables';
+
+$thumbnail-size: 20px;
+
+:host {
+  display: block;
+  width: 100%;
+  padding: $igo-padding;
+}
+
+:host > div {
+  display:block;
+}
+
+.fadq-client-legend-item-title {
+  display: inline-block;
+  margin-left: 5px;
+  line-height: $thumbnail-size;
+  font-size: 12px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: calc(100% - (#{$thumbnail-size} + #{$igo-padding}));
+}
+
+.fadq-client-legend-item-thumbnail {
+  @extend %box-shadowed;
+
+  display: inline-block;
+  width: $thumbnail-size;
+  height: $thumbnail-size;
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+}

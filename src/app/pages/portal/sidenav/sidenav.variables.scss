@@ -4,6 +4,6 @@
 // 30% is about 65% of 48px (the footer height).
 // We need to adjust to make the expansion panel and the sidenav touch
 $fadq-sidenav-height: calc(70% + 32px);
-$fadq-sidenav-width: 370px;
+$fadq-sidenav-width: 400px;
 $fadq-sidenav-margin-top: 50px;
 $fadq-sidenav-width-mobile: calc(100% - #{$fadq-mobile-min-space-right} - #{$igo-margin});

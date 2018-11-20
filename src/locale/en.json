@@ -51,6 +51,12 @@
       "adresseCor": "Address",
       "adresseExp": "Exploitation address",
       "adressePro": "Production address"
+    },
+    "legend": {
+      "detexp": "Détenues non exploitées",
+      "detnoexp": "Détenues exploitées",
+      "nodetexp": "Non détenues exploitées",
+      "sel": "Sélectionnées"
     }
   },
 
