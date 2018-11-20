@@ -1,7 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
-import { Entity } from '../../entity/shared/entity.interface';
 import { CatalogItemLayer } from '../shared/catalog.interface';
 
 @Component({
@@ -12,13 +11,13 @@ import { CatalogItemLayer } from '../shared/catalog.interface';
 export class CatalogBrowserLayerComponent {
 
   @Input()
-  get layer(): Entity<CatalogItemLayer> {
+  get layer(): CatalogItemLayer {
     return this._layer;
   }
-  set layer(value: Entity<CatalogItemLayer>) {
+  set layer(value: CatalogItemLayer) {
     this._layer = value;
   }
-  private _layer: Entity<CatalogItemLayer>;
+  private _layer: CatalogItemLayer;
 
   @Input()
   get added(): boolean {
@@ -37,8 +36,8 @@ export class CatalogBrowserLayerComponent {
     return getEntityIcon(this.layer) || 'layers';
   }
 
-  @Output() add = new EventEmitter<Entity<CatalogItemLayer>>();
-  @Output() remove = new EventEmitter<Entity<CatalogItemLayer>>();
+  @Output() add = new EventEmitter<CatalogItemLayer>();
+  @Output() remove = new EventEmitter<CatalogItemLayer>();
 
   constructor() {}
 

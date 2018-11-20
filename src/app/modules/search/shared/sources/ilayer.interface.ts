@@ -1,10 +1,10 @@
-export interface ILayerResult {
+export interface ILayerData {
   id: string;
-  source: ILayerResultSource;
-  highlight: ILayerResultHighlight;
+  source: ILayerDataSource;
+  highlight: ILayerDataHighlight;
 }
 
-export interface ILayerResultSource {
+export interface ILayerDataSource {
   title: string;
   groupTitle: string;
   abstract: string;
@@ -14,10 +14,10 @@ export interface ILayerResultSource {
   name: string;
 }
 
-export interface ILayerResultHighlight {
+export interface ILayerDataHighlight {
   title: string;
 }
 
 export interface ILayerResponse {
-  items: ILayerResult[];
+  items: ILayerData[];
 }

@@ -11,7 +11,6 @@ import {
 
 import { IgoMap } from '@igo2/geo';
 
-import { Entity } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
 import { Catalog } from '../shared/catalog.interface';
@@ -26,10 +25,10 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
   private controller: EntityStoreController;
 
   @Input()
-  get store(): EntityStore<Entity<Catalog>> {
+  get store(): EntityStore<Catalog> {
     return this._store;
   }
-  set store(value: EntityStore<Entity<Catalog>>) {
+  set store(value: EntityStore<Catalog>) {
     this._store = value;
   }
   private _store;
@@ -43,8 +42,8 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
   }
   private _map;
 
-  @Output() select = new EventEmitter<Entity<Catalog>>();
-  @Output() unselect = new EventEmitter<Entity<Catalog>>();
+  @Output() select = new EventEmitter<Catalog>();
+  @Output() unselect = new EventEmitter<Catalog>();
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
@@ -60,12 +59,11 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  selectCatalog(catalog: Entity<Catalog>) {
+  selectCatalog(catalog: Catalog) {
     this.controller.updateEntityState(catalog, {
       selected: true,
       focused: true
     }, true);
-
     this.select.emit(catalog);
   }
 

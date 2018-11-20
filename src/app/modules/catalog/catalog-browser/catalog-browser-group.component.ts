@@ -9,8 +9,7 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { getEntityTitle } from '../../entity/shared/entity.utils';
-import { Entity } from '../../entity/shared/entity.interface';
+import { getEntityId, getEntityTitle } from '../../entity/shared/entity.utils';
 import { EntityStore } from '../../entity/shared/store';
 import { EntityState} from '../../entity/shared/state';
 import { EntityStoreController } from '../../entity/shared/controller';
@@ -21,11 +20,10 @@ import {
   CatalogItemState
 } from '../shared/catalog.interface';
 import { CatalogItemType } from '../shared/catalog.enum';
-import { catalogItemToEntity } from '../shared/catalog.utils';
 
 export interface CatalogBrowserGroupEvent {
-  group:  Entity<CatalogItemGroup>;
-  items:  Entity<CatalogItem>[];
+  group:  CatalogItemGroup;
+  items:  CatalogItem[];
 }
 
 @Component({
@@ -36,18 +34,18 @@ export interface CatalogBrowserGroupEvent {
 export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
 
   public collapsed = true;
-  public store: EntityStore<Entity<CatalogItem>, CatalogItemState>;
+  public store: EntityStore<CatalogItem, CatalogItemState>;
 
   private controller: EntityStoreController;
 
   @Input()
-  get group(): Entity<CatalogItemGroup> {
+  get group(): CatalogItemGroup {
     return this._group;
   }
-  set group(value: Entity<CatalogItemGroup>) {
+  set group(value: CatalogItemGroup) {
     this._group = value;
   }
-  private _group: Entity<CatalogItemGroup>;
+  private _group: CatalogItemGroup;
 
   @Input()
   get state(): EntityState<CatalogItemState> {
@@ -67,10 +65,10 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
   }
   private _added: boolean;
 
-  @Output() layerSelect = new EventEmitter<Entity<CatalogItemLayer>>();
-  @Output() layerUnselect = new EventEmitter<Entity<CatalogItemLayer>>();
-  @Output() layerAdd = new EventEmitter<Entity<CatalogItemLayer>>();
-  @Output() layerRemove = new EventEmitter<Entity<CatalogItemLayer>>();
+  @Output() layerSelect = new EventEmitter<CatalogItemLayer>();
+  @Output() layerUnselect = new EventEmitter<CatalogItemLayer>();
+  @Output() layerAdd = new EventEmitter<CatalogItemLayer>();
+  @Output() layerRemove = new EventEmitter<CatalogItemLayer>();
   @Output() add = new EventEmitter<CatalogBrowserGroupEvent>();
   @Output() remove = new EventEmitter<CatalogBrowserGroupEvent>();
 
@@ -85,10 +83,7 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store = new EntityStore(this.state);
-    this.store.setEntities(
-      this.group.data.items.map(catalogItemToEntity),
-      true
-  );
+    this.store.setEntities(this.group.items, true);
     this.controller.bind(this.store);
   }
 
@@ -96,12 +91,12 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  isGroup(item: Entity<CatalogItem>): boolean {
-    return item.data.type === CatalogItemType.Group;
+  isGroup(item: CatalogItem): boolean {
+    return item.type === CatalogItemType.Group;
   }
 
-  isLayer(item: Entity<CatalogItem>): boolean {
-    return item.data.type === CatalogItemType.Layer;
+  isLayer(item: CatalogItem): boolean {
+    return item.type === CatalogItemType.Layer;
   }
 
   toggleCollapsed(collapsed: boolean) {
@@ -115,12 +110,12 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     this.added ? this.doRemove() : this.doAdd();
   }
 
-  handleAddLayer(layer: Entity<CatalogItemLayer>) {
+  handleAddLayer(layer: CatalogItemLayer) {
     this.layerAdd.emit(layer);
     this.tryToggleGroup(layer, true);
   }
 
-  handleRemoveLayer(layer: Entity<CatalogItemLayer>) {
+  handleRemoveLayer(layer: CatalogItemLayer) {
     this.layerRemove.emit(layer);
     this.tryToggleGroup(layer, false);
   }
@@ -141,11 +136,11 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     });
   }
 
-  private tryToggleGroup(layer: Entity<CatalogItemLayer>, added) {
+  private tryToggleGroup(layer: CatalogItemLayer, added) {
     const layersAdded = this.store.entities
-      .filter((entity: Entity<CatalogItem>) => entity.rid !== layer.rid)
-      .map((entity: Entity<CatalogItem>) => {
-        return this.store.getEntityState(entity).added || false;
+      .filter((item: CatalogItem) => getEntityId(item) !== getEntityId(layer))
+      .map((item: CatalogItem) => {
+        return this.store.getEntityState(item).added || false;
       });
 
     if (layersAdded.every((value) => value === added)) {

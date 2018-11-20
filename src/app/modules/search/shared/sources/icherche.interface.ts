@@ -1,6 +1,6 @@
 import { FeatureGeometry } from '../../../feature/shared/feature.interface';
 
-export interface IChercheResult {
+export interface IChercheData {
   _id: string;
   doc_type: string;
   recherche: string;
@@ -11,10 +11,10 @@ export interface IChercheResult {
 }
 
 export interface IChercheResponse {
-  features: IChercheResult[];
+  features: IChercheData[];
 }
 
-export interface IChercheReverseResult {
+export interface IChercheReverseData {
   _id: string;
   doc_type: string;
   recherche: string;
@@ -25,5 +25,5 @@ export interface IChercheReverseResult {
 }
 
 export interface IChercheReverseResponse {
-  features: IChercheResult[];
+  features: IChercheData[];
 }

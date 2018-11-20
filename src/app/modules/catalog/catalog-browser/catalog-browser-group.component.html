@@ -35,7 +35,7 @@
 <div #items>
   <ng-template ngFor let-item [ngForOf]="store.observable | async">
     <ng-container *ngIf="isGroup(item)"></ng-container>
-  
+
     <ng-container *ngIf="isLayer(item)">
       <fadq-catalog-browser-layer
         igoListItem
@@ -44,7 +44,6 @@
         [disabled]="store.getEntityState(item).added"
         [selected]="store.getEntityState(item).selected"
         (select)="layerSelect.emit(item)"
-        (unselect)="layerUnselect.emit(item)"
         (add)="handleAddLayer(item)"
         (remove)="handleRemoveLayer(item)">
       </fadq-catalog-browser-layer>

@@ -4,15 +4,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Entity } from '../../../entity/shared/entity.interface';
 import { FEATURE } from '../../../feature/shared/feature.enum';
-import {
-  FeatureGeometry,
-  Feature
-} from '../../../feature/shared/feature.interface';
+import { FeatureGeometry, Feature } from '../../../feature/shared/feature.interface';
+import { SearchResult } from '../search.interface';
 import { SearchSource, TextSearch } from './source';
 import { SearchSourceOptions } from './source.interface';
-import { NominatimResult } from './nominatim.interface';
+import { NominatimData } from './nominatim.interface';
 
 @Injectable()
 export class NominatimSearchSource
@@ -37,12 +34,12 @@ export class NominatimSearchSource
     };
   }
 
-  search(term?: string): Observable<Entity<Feature>[]> {
+  search(term?: string): Observable<SearchResult<Feature>[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
       .pipe(
-        map((response: Array<NominatimResult>) => this.extractEntities(response))
+        map((response: NominatimData[]) => this.extractResults(response))
       );
   }
 
@@ -55,22 +52,21 @@ export class NominatimSearchSource
     });
   }
 
-  private extractEntities(response: Array<NominatimResult>): Entity<Feature>[] {
-    return response.map(result => this.resultToEntity(result));
+  private extractResults(response: NominatimData[]): SearchResult<Feature>[] {
+    return response.map((data: NominatimData) => this.dataToResult(data));
   }
 
-  private resultToEntity(result: NominatimResult): Entity<Feature> {
-    const properties = this.computeProperties(result);
-    const geometry = this.computeGeometry(result);
-    const extent = this.computeExtent(result);
+  private dataToResult(data: NominatimData): SearchResult<Feature> {
+    const properties = this.computeProperties(data);
+    const geometry = this.computeGeometry(data);
+    const extent = this.computeExtent(data);
 
     return {
-      rid: [this.getId(), 'place', result.place_id].join('.'),
-      provider: this,
+      source: this,
       meta: {
         dataType: FEATURE,
-        id: result.place_id,
-        title: result.display_name,
+        id: [this.getId(), 'place', data.place_id].join('.'),
+        title: data.display_name,
         icon: 'place'
       },
       data: {
@@ -83,29 +79,29 @@ export class NominatimSearchSource
     };
   }
 
-  private computeProperties(result: NominatimResult): { [key: string]: any } {
+  private computeProperties(data: NominatimData): { [key: string]: any } {
     return {
-      display_name: result.display_name,
-      place_id: result.place_id,
-      osm_type: result.osm_type,
-      class: result.class,
-      type: result.type
+      display_name: data.display_name,
+      place_id: data.place_id,
+      osm_type: data.osm_type,
+      class: data.class,
+      type: data.type
     };
   }
 
-  private computeGeometry(result: NominatimResult): FeatureGeometry {
+  private computeGeometry(data: NominatimData): FeatureGeometry {
     return {
       type:  'Point',
-      coordinates: [parseFloat(result.lon), parseFloat(result.lat)]
+      coordinates: [parseFloat(data.lon), parseFloat(data.lat)]
     };
   }
 
-  private computeExtent(result: NominatimResult): [number, number, number, number] {
+  private computeExtent(data: NominatimData): [number, number, number, number] {
     return [
-      parseFloat(result.boundingbox[2]),
-      parseFloat(result.boundingbox[0]),
-      parseFloat(result.boundingbox[3]),
-      parseFloat(result.boundingbox[1])
+      parseFloat(data.boundingbox[2]),
+      parseFloat(data.boundingbox[0]),
+      parseFloat(data.boundingbox[3]),
+      parseFloat(data.boundingbox[1])
     ];
   }
 }

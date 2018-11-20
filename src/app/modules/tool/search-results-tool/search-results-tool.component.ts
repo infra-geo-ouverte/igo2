@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Register } from '@igo2/context';
+import { LayerService, LayerOptions } from '@igo2/geo';
 
-import {
-  LayerService,
-  LayerOptions
-} from '@igo2/geo';
-
-import { Entity } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
-import { getFeatureFromEntity } from '../../feature/shared/feature.utils';
-import { getLayerOptionsFromEntity } from '../../map/shared/map.utils';
+import { FEATURE } from '../../feature/shared/feature.enum';
+import { Feature } from '../../feature/shared/feature.interface';
+import { LAYER } from '../../map/shared/map.enum';
 import { IgoMap } from '../../map/shared/map';
 import { MapService } from '../../map/shared/map.service';
 import { OverlayAction } from '../../overlay/shared/overlay.enum';
+import { SearchResult } from '../../search/shared/search.interface';
 import { SearchStoreService } from '../../search/shared/search-store.service';
 
 @Register({
@@ -27,8 +24,8 @@ import { SearchStoreService } from '../../search/shared/search-store.service';
 })
 export class SearchResultsToolComponent {
 
-  get store(): EntityStore<Entity> {
-    return this.searchStoreService.store;
+  get store(): EntityStore<SearchResult> {
+    return this.searchStoreService.getStore();
   }
 
   get map(): IgoMap {
@@ -41,29 +38,33 @@ export class SearchResultsToolComponent {
     private searchStoreService: SearchStoreService
   ) {}
 
-  handleEntityFocus(entity: Entity) {
-    this.tryAddFeatureToMap(entity);
+  handleResultFocus(result: SearchResult) {
+    this.tryAddFeatureToMap(result);
   }
 
-  handleEntitySelect(entity: Entity) {
-    this.tryAddFeatureToMap(entity);
-    this.tryAddLayerToMap(entity);
+  handleResultSelect(result: SearchResult) {
+    this.tryAddFeatureToMap(result);
+    this.tryAddLayerToMap(result);
   }
 
-  private tryAddFeatureToMap(entity: Entity) {
-    const feature = getFeatureFromEntity(entity);
-    if (feature !== undefined) {
-      this.map.overlay.setFeatures([feature], OverlayAction.Default);
+  private tryAddFeatureToMap(result: SearchResult) {
+    if (result.meta.dataType !== FEATURE) {
+      return undefined;
     }
+    const feature = (result as SearchResult<Feature>).data;
+    this.map.overlay.setFeatures([feature], OverlayAction.Default);
   }
 
-  private tryAddLayerToMap(entity: Entity) {
+  private tryAddLayerToMap(result: SearchResult) {
     const map = this.mapService.getMap();
-    const layerOptions = getLayerOptionsFromEntity(entity);
-    if (map === undefined || layerOptions === undefined) {
+    if (map === undefined) {
       return;
     }
 
+    if (result.meta.dataType !== LAYER) {
+      return undefined;
+    }
+    const layerOptions = (result as SearchResult<LayerOptions>).data;
     this.layerService
       .createAsyncLayer(layerOptions)
       .subscribe(layer => map.addLayer(layer));

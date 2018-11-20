@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
-import { Entity } from '../../entity/shared/entity.interface';
 import { Widget } from '../shared/widget.interface';
 
 @Component({
@@ -11,13 +10,13 @@ import { Widget } from '../shared/widget.interface';
 export class WidgetbarItemComponent {
 
   @Input()
-  get widget(): Entity<Widget> {
+  get widget(): Widget {
     return this._widget;
   }
-  set widget(value: Entity<Widget>) {
+  set widget(value: Widget) {
     this._widget = value;
   }
-  private _widget: Entity<Widget>;
+  private _widget: Widget;
 
   @Input()
   get withTitle() {
@@ -44,7 +43,7 @@ export class WidgetbarItemComponent {
   }
 
   get tooltip(): string {
-    return this.widget.data.tooltip || this.title;
+    return this.widget.tooltip || this.title;
   }
 
   get icon(): string {
@@ -52,7 +51,7 @@ export class WidgetbarItemComponent {
   }
 
   get image(): string {
-    return this.widget.data.iconImage;
+    return this.widget.iconImage;
   }
 
   constructor() {}

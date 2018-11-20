@@ -7,10 +7,10 @@ import { map } from 'rxjs/operators';
 import { CLIENT } from '../../../client/shared/client.enum';
 import { Client } from '../../../client/shared/client.interface';
 import { ClientService } from '../../../client/shared/client.service';
-import { Entity } from '../../../entity/shared/entity.interface';
+import { SearchResult } from '../search.interface';
 import { SearchSource, TextSearch } from './source';
 import { SearchSourceOptions } from './source.interface';
-import { ClientResult } from './client.interface';
+import { ClientData } from './client.interface';
 
 @Injectable()
 export class ClientSearchSource
@@ -38,28 +38,27 @@ export class ClientSearchSource
     };
   }
 
-  search(term?: string): Observable<Entity<Client>[]> {
+  search(term?: string): Observable<SearchResult<Client>[]> {
     return this.clientService.getClientByNum(term)
       .pipe(
-        map((response: ClientResult) => this.extractEntities(response))
+        map((response: ClientData) => this.extractResults(response))
       );
   }
 
-  private extractEntities(response: ClientResult): Entity<Client>[] {
-    return [this.resultToEntity(response)];
+  private extractResults(response: ClientData): SearchResult<Client>[] {
+    return [this.dataToResult(response)];
   }
 
-  private resultToEntity(result: ClientResult): Entity<Client> {
+  private dataToResult(data: ClientData): SearchResult<Client> {
     return {
-      rid: [this.getId(), result.numero].join('.'),
-      provider: this,
+      source: this,
+      data: data,
       meta: {
         dataType: CLIENT,
-        id: result.numero,
-        title: result.nom,
+        id: [this.getId(), data.numero].join('.'),
+        title: data.nom,
         icon: 'person'
-      },
-      data: result
+      }
     };
   }
 

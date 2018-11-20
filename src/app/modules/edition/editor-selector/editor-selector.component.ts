@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 
 import { Editor } from '../shared/editor';
-import { Entity } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
 
@@ -26,16 +25,15 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
   private controller: EntityStoreController;
 
   @Input()
-  get store(): EntityStore<Entity<Editor>> {
+  get store(): EntityStore<Editor> {
     return this._store;
   }
-  set store(value: EntityStore<Entity<Editor>>) {
+  set store(value: EntityStore<Editor>) {
     this._store = value;
   }
   private _store;
 
-  @Output() select = new EventEmitter<Entity<Editor>>();
-  @Output() unselect = new EventEmitter<Entity<Editor>>();
+  @Output() select = new EventEmitter<Editor>();
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
@@ -51,11 +49,8 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  selectEditor(editor: Entity<Editor>) {
-    this.controller.updateEntityState(editor, {
-      selected: true
-    }, true);
-
+  selectEditor(editor: Editor) {
+    this.controller.updateEntityState(editor, {selected: true}, true);
     this.select.emit(editor);
   }
 }

@@ -8,3 +8,8 @@ export interface Research {
   reverse: boolean;
   source: SearchSource;
 }
+
+export interface SearchResult<T = { [key: string]: any }> extends Entity {
+  data: T;
+  source: SearchSource;
+}

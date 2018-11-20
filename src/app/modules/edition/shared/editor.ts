@@ -22,10 +22,10 @@ export class Editor {
   }
   private _dataStore: EntityStore<Entity>;
 
-  get widgetStore():  EntityStore<Entity<Widget>> {
+  get widgetStore():  EntityStore<Widget> {
     return this._widgetStore;
   }
-  private _widgetStore: EntityStore<Entity<Widget>>;
+  private _widgetStore: EntityStore<Widget>;
 
   constructor(private config: EditorConfig) {}
 
@@ -42,7 +42,7 @@ export class Editor {
     return this;
   }
 
-  bindWidgetStore(widgetStore: EntityStore<Entity<Widget>>): Editor {
+  bindWidgetStore(widgetStore: EntityStore<Widget>): Editor {
     this.unbindWidgetStore();
     this._widgetStore = widgetStore;
 

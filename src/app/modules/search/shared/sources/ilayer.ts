@@ -5,14 +5,13 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { LanguageService } from '@igo2/core';
-import { AnyLayerOptions } from '@igo2/geo';
+import { AnyLayerOptions, LayerOptions } from '@igo2/geo';
 
-import { Entity } from '../../../entity/shared/entity.interface';
 import { LAYER } from '../../../map/shared/map.enum';
-import { LayerInfo } from '../../../map/shared/map.interface';
+import { SearchResult } from '../search.interface';
 import { SearchSource, TextSearch } from './source';
 import { SearchSourceOptions } from './source.interface';
-import { ILayerResult, ILayerResponse } from './ilayer.interface';
+import { ILayerData, ILayerResponse } from './ilayer.interface';
 
 @Injectable()
 export class ILayerSearchSource
@@ -45,12 +44,12 @@ export class ILayerSearchSource
     };
   }
 
-  search(term?: string): Observable<Entity<LayerInfo>[]> {
+  search(term?: string): Observable<SearchResult<LayerOptions>[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
       .pipe(
-        map((response: ILayerResponse) => this.extractEntities(response))
+        map((response: ILayerResponse) => this.extractResults(response))
       );
   }
 
@@ -62,50 +61,34 @@ export class ILayerSearchSource
     });
   }
 
-  private extractEntities(response: ILayerResponse): Entity<LayerInfo>[] {
-    return response.items.map(result => this.resultToEntity(result));
+  private extractResults(response: ILayerResponse): SearchResult<LayerOptions>[] {
+    return response.items.map((data: ILayerData) => this.dataToResult(data));
   }
 
-  private resultToEntity(result: ILayerResult): Entity<LayerInfo> {
-    const properties = this.computeProperties(result);
-    const layerOptions = this.computeLayerOptions(result);
+  private dataToResult(data: ILayerData): SearchResult<LayerOptions> {
+    const layerOptions = this.computeLayerOptions(data);
 
     return {
-      rid: [this.getId(), result.id].join('.'),
-      provider: this,
+      source: this,
       meta: {
         dataType: LAYER,
-        id: result.id,
-        title: result.source.title,
-        titleHtml: result.highlight.title,
-        icon: result.source.type === 'Layer' ? 'layers' : 'map'
+        id: [this.getId(), data.id].join('.'),
+        title: data.source.title,
+        titleHtml: data.highlight.title,
+        icon: data.source.type === 'Layer' ? 'layers' : 'map'
       },
-      data: {
-        properties: properties,
-        options: layerOptions
-      }
+      data: layerOptions
     };
   }
 
-  private computeProperties(result: ILayerResult): { [key: string]: any } {
+  private computeLayerOptions(data: ILayerData): AnyLayerOptions {
     return {
-      id: result.id,
-      title:  result.source.title,
-      group: result.source.groupTitle,
-      abstract: result.source.abstract,
-      type: result.source.format,
-      url: result.source.url
-    };
-  }
-
-  private computeLayerOptions(result: ILayerResult): AnyLayerOptions {
-    return {
-      title: result.source.title,
+      title: data.source.title,
       sourceOptions: {
-        type: result.source.format,
-        url: result.source.url,
+        type: data.source.format,
+        url: data.source.url,
         params: {
-          layers: result.source.name
+          layers: data.source.name
         }
       }
     };

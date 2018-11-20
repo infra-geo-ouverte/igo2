@@ -3,30 +3,30 @@
     <ng-template
       #groupTemplate
       ngFor let-group let-i="index"
-      [ngForOf]="(store.observable | async).sort(sortByOrder) | searchEntityGroup">
+      [ngForOf]="(store.observable | async).sort(sortByOrder) | searchResultsGroup">
 
       <igo-collapsible
         title="{{group.source.title}} ({{group.entities.length}})"
         *ngIf="mode === displayMode.Grouped; else flatTemplate">
-        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {entity: group.entity}"></ng-container>
+        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {result: group.result}"></ng-container>
       </igo-collapsible>
 
       <ng-template #flatTemplate>
-        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {entity: group.entity}"></ng-container>
+        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {result: group.result}"></ng-container>
       </ng-template>
 
       <ng-template #storeItemTemplate>
-        <ng-template ngFor let-entity let-j="index" [ngForOf]="group.entities">
+        <ng-template ngFor let-result let-j="index" [ngForOf]="group.entities">
           <fadq-search-results-item
             igoListItem
             color="accent"
-            [entity]="entity"
-            [focused]="store.getEntityState(entity).focused"
-            [selected]="store.getEntityState(entity).selected"
-            (focus)="focusEntity(entity)"
-            (select)="selectEntity(entity)"
-            (unfocus)="unfocus.emit(entity)"
-            (unselect)="unselect.emit(entity)">
+            [result]="result"
+            [focused]="store.getEntityState(result).focused"
+            [selected]="store.getEntityState(result).selected"
+            (focus)="focusResult(result)"
+            (select)="selectResult(result)"
+            (unfocus)="unfocus.emit(result)"
+            (unselect)="unselect.emit(result)">
           </fadq-search-results-item>
         </ng-template>
       </ng-template>

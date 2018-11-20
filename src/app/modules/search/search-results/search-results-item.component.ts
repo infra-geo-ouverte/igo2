@@ -5,7 +5,7 @@ import {
   getEntityTitleHtml,
   getEntityIcon
 } from '../../entity/shared/entity.utils';
-import { Entity } from '../../entity/shared/entity.interface';
+import { SearchResult } from '../shared/search.interface';
 
 @Component({
   selector: 'fadq-search-results-item',
@@ -15,24 +15,24 @@ import { Entity } from '../../entity/shared/entity.interface';
 export class SearchResultsItemComponent {
 
   @Input()
-  get entity(): Entity {
-    return this._entity;
+  get result(): SearchResult {
+    return this._result;
   }
-  set entity(value: Entity) {
-    this._entity = value;
+  set result(value: SearchResult) {
+    this._result = value;
   }
-  private _entity: Entity;
+  private _result: SearchResult;
 
   get title(): string {
-    return getEntityTitle(this.entity);
+    return getEntityTitle(this.result);
   }
 
   get titleHtml(): string {
-    return getEntityTitleHtml(this.entity);
+    return getEntityTitleHtml(this.result);
   }
 
   get icon(): string {
-    return getEntityIcon(this.entity);
+    return getEntityIcon(this.result);
   }
 
   constructor() {}

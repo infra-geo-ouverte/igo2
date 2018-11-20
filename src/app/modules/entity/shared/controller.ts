@@ -83,16 +83,15 @@ export class EntityStoreController {
   private handleStateChanges(state: Map<string, State>) {
     let detectChanges = false;
 
-    const rids = Array.from(state.keys());
-    rids.forEach((rid: string) => {
-      const storeState = state.get(rid);
-      const innerState = this.innerState.get(rid);
+    Array.from(state.keys()).forEach((id: string) => {
+      const storeState = state.get(id);
+      const innerState = this.innerState.get(id);
       if (innerState === undefined) {
         detectChanges = true;
       } else if (this.cdRef !== undefined && detectChanges === false) {
         detectChanges = !isEquivalent(storeState, innerState);
       }
-      this.innerState.set(rid, storeState);
+      this.innerState.set(id, storeState);
     });
 
     if (

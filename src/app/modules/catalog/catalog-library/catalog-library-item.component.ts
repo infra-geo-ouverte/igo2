@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 
 import { IgoMap } from '../../map/shared/map';
 import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
-import { Entity } from '../../entity/shared/entity.interface';
 import { Catalog } from '../shared/catalog.interface';
 
 @Component({
@@ -12,13 +11,13 @@ import { Catalog } from '../shared/catalog.interface';
 export class CatalogLibaryItemComponent {
 
   @Input()
-  get catalog(): Entity<Catalog> {
+  get catalog(): Catalog {
     return this._catalog;
   }
-  set catalog(value: Entity<Catalog>) {
+  set catalog(value: Catalog) {
     this._catalog = value;
   }
-  private _catalog: Entity<Catalog>;
+  private _catalog: Catalog;
 
   @Input()
   get map(): IgoMap {

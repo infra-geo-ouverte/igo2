@@ -8,56 +8,60 @@ export function entitiesAreTheSame(entity1: Entity, entity2: Entity | undefined)
   if (entity2 === undefined) {
     return false;
   }
-  return entity1.rid === entity2.rid;
+  return getEntityId(entity1)=== getEntityId(entity2);
 }
 
-export function getEntityId(entity: Entity): string | number {
-  let id;
+export function getEntityId(entity: Entity): string {
+  const meta = entity.meta || {};
 
-  const meta = entity.meta;
+  let id;
   if (meta.id !== undefined) {
     id = meta.id;
-  } else if (meta.idProperty !== undefined) {
-    id = t(entity.data, meta.idProperty).safeObject;
+  } else {
+    const idProperty = meta.idProperty || 'id';
+    id = t(entity, idProperty).safeObject;
   }
 
-  return id;
+  return id === undefined ? undefined : String(id);
 }
 
 export function getEntityTitle(entity: Entity): string {
-  let title;
+  const meta = entity.meta || {};
 
-  const meta = entity.meta;
+  let title;
   if (meta.title !== undefined) {
     title = meta.title;
-  } else if (meta.titleProperty !== undefined) {
-    title = t(entity.data, meta.titleProperty).safeObject;
+  } else {
+    const titleProperty = meta.titleProperty || 'title';
+    title = t(entity, titleProperty).safeObject;
   }
 
   return title;
 }
 
 export function getEntityTitleHtml(entity: Entity): string {
-  let title;
+  const meta = entity.meta || {};
 
-  const meta = entity.meta;
+  let titleHtml;
   if (meta.titleHtml !== undefined) {
-    title = meta.titleHtml;
-  } else if (meta.titleHtmlProperty !== undefined) {
-    title = t(entity.data, meta.titleHtmlProperty).safeObject;
+    titleHtml = meta.titleHtml;
+  } else {
+    const titleHtmlProperty = meta.titleProperty || 'titleHtml'
+    titleHtml = t(entity, titleHtmlProperty).safeObject;
   }
 
-  return title;
+  return titleHtml;
 }
 
 export function getEntityIcon(entity: Entity): string {
-  let icon;
+  const meta = entity.meta || {};
 
-  const meta = entity.meta;
+  let icon;
   if (meta.icon !== undefined) {
     icon = meta.icon;
-  } else if (meta.iconProperty !== undefined) {
-    icon = t(entity.data, meta.iconProperty).safeObject;
+  } else {
+    const iconProperty = meta.iconProperty || 'icon'
+    icon = t(entity, iconProperty).safeObject;
   }
 
   return icon;
@@ -69,8 +73,8 @@ export function sortEntities(
   direction: string
 ): Entity[] {
   return entities.sort((entity1: Entity, entity2: Entity) => {
-    const property1 = t(entity1.data, property).safeObject;
-    const property2 = t(entity2.data, property).safeObject;
+    const property1 = t(entity1, property).safeObject;
+    const property2 = t(entity2, property).safeObject;
     return ObjectUtils.naturalCompare(property1, property2, direction);
   });
 }

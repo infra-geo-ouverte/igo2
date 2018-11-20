@@ -5,8 +5,8 @@ import { scan, startWith, catchError } from 'rxjs/operators';
 
 import { LanguageService, ConfigService } from '@igo2/core';
 import {
-  CapabilitiesService,
   LayerOptions,
+  CapabilitiesService,
   WMSDataSourceOptions
 } from '@igo2/geo';
 import {
@@ -48,6 +48,7 @@ export class CatalogService {
       const translate = this.languageService.translate;
       const title = translate.instant('igo.geo.CatalogTool.baseLayers');
       const baseLayersCatalog = {
+        id: 'catalog.baselayers',
         title: title,
         url: `${apiUrl}/baselayers`,
         type: 'baselayers'
@@ -168,7 +169,6 @@ export class CatalogService {
               id: generateLayerIdFromSourceOptions(sourceOptions),
               type: CatalogItemType.Layer,
               title: layer.Title,
-              properties: {},
               options: {
                 title: layer.Title,
                 sourceOptions: sourceOptions

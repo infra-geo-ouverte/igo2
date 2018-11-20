@@ -77,7 +77,7 @@ export class EntityTableComponent implements OnInit, OnDestroy {
   }
 
   valueAccessor(entity: Entity, column: EntityTableColumn) {
-    return t(entity.data, column.name).safeObject;
+    return t(entity, column.name).safeObject;
   }
 
   sort(property: string, direction: string) {

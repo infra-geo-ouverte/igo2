@@ -4,7 +4,7 @@ import { debounceTime, map, distinctUntilChanged, first, skip, share } from 'rxj
 import { Entity, State, EntitySortClause } from './entity.interface';
 import { EntityState } from './state';
 import { EntitySorter } from './sorter';
-import { sortEntities } from './entity.utils';
+import { getEntityId, sortEntities } from './entity.utils';
 
 export class EntityStore<T extends Entity, S extends { [key: string]: boolean } = State> {
 
@@ -59,16 +59,16 @@ export class EntityStore<T extends Entity, S extends { [key: string]: boolean } 
     this.setEntities(this.entities.concat(entities), soft);
   }
 
-  getEntityByRid(rid: string): T {
-    return this.entities.find((entity: T) => entity.rid === rid);
+  getEntityById(id: string): T {
+    return this.entities.find((entity: T) => getEntityId(entity) === id);
   }
 
   getEntityState(entity: T): S {
-    return this.state.getByKey(entity.rid) || {} as S;
+    return this.state.getByKey(getEntityId(entity)) || {} as S;
   }
 
   updateEntityState(entity: T, changes: { [key: string]: boolean }, exclusive = false) {
-    this.state.updateByKey(entity.rid, changes, exclusive);
+    this.state.updateByKey(getEntityId(entity), changes, exclusive);
   }
 
   updateAllEntitiesState(changes: { [key: string]: boolean }) {

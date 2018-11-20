@@ -4,4 +4,3 @@ export * from './store';
 export * from './state';
 export * from './sorter';
 export * from './controller';
-export * from './provider';

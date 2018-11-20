@@ -1,10 +1,9 @@
 import { Observable } from 'rxjs';
 
-import { EntityProvider } from '../../../entity/shared/provider';
-import { Entity } from '../../../entity/shared/entity.interface';
+import { SearchResult } from '../search.interface';
 import { SearchSourceOptions } from './source.interface';
 
-export class SearchSource implements EntityProvider {
+export class SearchSource {
 
   static id: string;
   static type: string;
@@ -51,13 +50,13 @@ export class SearchSource implements EntityProvider {
 
 export interface TextSearch {
 
-  search(term: string): Observable<Entity[]>;
+  search(term: string): Observable<SearchResult[]>;
 
 }
 
 
 export interface ReverseSearch {
 
-  reverseSearch(lonLat: [number, number], distance?: number): Observable<Entity[]>;
+  reverseSearch(lonLat: [number, number], distance?: number): Observable<SearchResult[]>;
 
 }

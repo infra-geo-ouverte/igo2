@@ -14,7 +14,7 @@ import {
 } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
 
-import { SearchEntityGroupPipe } from './search-entity-group.pipe';
+import { SearchResultsGroupPipe } from './search-results-group.pipe';
 import { SearchResultsComponent } from './search-results.component';
 import { SearchResultsItemComponent } from './search-results-item.component';
 
@@ -33,7 +33,7 @@ import { SearchResultsItemComponent } from './search-results-item.component';
     SearchResultsComponent
   ],
   declarations: [
-    SearchEntityGroupPipe,
+    SearchResultsGroupPipe,
     SearchResultsComponent,
     SearchResultsItemComponent
   ]

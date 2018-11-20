@@ -1,4 +1,6 @@
-export interface Widget {
+import { Entity } from '../../entity/shared/entity.interface';
+
+export interface Widget extends Entity {
   id: string;
   title?: string;
   icon?: string;

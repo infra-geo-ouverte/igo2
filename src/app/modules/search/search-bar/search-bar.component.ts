@@ -16,14 +16,13 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { EntityStore } from '../../entity/shared/store';
-import { Entity } from '../../entity/shared/entity.interface';
+import { SearchResult, Research } from '../shared/search.interface';
 import { SearchSource } from '../shared/sources/source';
 import { SearchService } from '../shared/search.service';
-import { Research } from '../shared/search.interface';
 
 export interface SearchEvent {
   research: Research;
-  entities: Entity[];
+  results: SearchResult[];
 }
 
 @Component({
@@ -107,10 +106,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _searchIcon;
 
   @Input()
-  get store(): EntityStore<Entity> {
+  get store(): EntityStore<SearchResult> {
     return this._store;
   }
-  set store(value: EntityStore<Entity>) {
+  set store(value: EntityStore<SearchResult>) {
     this._store = value;
   }
   private _store;
@@ -183,21 +182,20 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
     const researches = this.searchService.search(term);
     researches.map(research => {
-      research.request.subscribe(entities => this.handleResearchComplete(
-        research,
-        entities
-      ));
+      research.request.subscribe((results: SearchResult[]) => {
+          this.handleResearchComplete(research, results);
+      });
     });
   }
 
-  private handleResearchComplete(research: Research, entities: Entity[]) {
-    this.search.emit({research, entities});
+  private handleResearchComplete(research: Research, results: SearchResult[]) {
+    this.search.emit({research, results});
 
     if (this.store !== undefined) {
-      const newEntities = this.store.entities
-        .filter(entity => entity.provider !== research.source)
-        .concat(entities);
-      this.store.setEntities(newEntities, true);
+      const newResults = this.store.entities
+        .filter(result => result.source !== research.source)
+        .concat(results);
+      this.store.setEntities(newResults, true);
     }
   }
 

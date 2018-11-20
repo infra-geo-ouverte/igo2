@@ -8,18 +8,6 @@ import {
 } from '@igo2/geo';
 import { uuid } from '@igo2/utils';
 
-import { Entity } from '../../entity/shared/entity.interface';
-import { LayerInfo } from './map.interface';
-import { LAYER } from './map.enum';
-
-export function getLayerOptionsFromEntity(entity: Entity): AnyLayerOptions | undefined {
-  if (entity.meta.dataType !== LAYER) {
-    return undefined;
-  }
-
-  return (entity as Entity<LayerInfo>).data.options;
-}
-
 export function stringToLonLat(str: string): [number, number] | undefined {
   const coordPattern =  '[-+]?[\\d]{1,8}(\\.)?(\\d+)?';
   const projectionPattern = '(;[\\d]{4,5})';

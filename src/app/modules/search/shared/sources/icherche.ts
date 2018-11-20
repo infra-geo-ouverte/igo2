@@ -5,15 +5,15 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { removeKeys } from '../../../utils/object';
-import { Entity } from '../../../entity/shared/entity.interface';
 import { FEATURE } from '../../../feature/shared/feature.enum';
 import { Feature } from '../../../feature/shared/feature.interface';
+import { SearchResult } from '../search.interface';
 import { SearchSource, TextSearch, ReverseSearch } from './source';
 import { SearchSourceOptions } from './source.interface';
 import {
-  IChercheResult,
+  IChercheData,
   IChercheResponse,
-  IChercheReverseResult,
+  IChercheReverseData,
   IChercheReverseResponse
 } from './icherche.interface';
 
@@ -57,12 +57,12 @@ export class IChercheSearchSource
     });
   }
 
-  search(term: string): Observable<Entity<Feature>[]> {
+  search(term: string): Observable<SearchResult<Feature>[]> {
     const params = this.computeRequestParams(term);
     return this.http
       .get(this.searchUrl, { params })
       .pipe(
-        map((response: IChercheResponse) => this.extractEntities(response))
+        map((response: IChercheResponse) => this.extractResults(response))
       );
   }
 
@@ -76,39 +76,40 @@ export class IChercheSearchSource
     });
   }
 
-  private extractEntities(response: IChercheResponse): Entity<Feature>[] {
-    return response.features.map(result => this.resultToEntity(result));
+  private extractResults(response: IChercheResponse): SearchResult<Feature>[] {
+    return response.features.map((data: IChercheData) => {
+      return this.dataToResult(data);
+    });
   }
 
-  private resultToEntity(result: IChercheResult): Entity<Feature> {
-    const properties = this.computeProperties(result);
+  private dataToResult(data: IChercheData): SearchResult<Feature> {
+    const properties = this.computeProperties(data);
 
     return {
-      rid: [this.getId(), properties.type, result._id].join('.'),
-      provider: this,
-      meta: {
-        dataType: FEATURE,
-        id: result._id,
-        title: result.properties.recherche,
-        titleHtml: result.highlight,
-        icon: 'place'
-      },
+      source: this,
       data: {
         type: FEATURE,
         projection: 'EPSG:4326',
-        geometry: result.geometry,
-        extent: result.bbox,
+        geometry: data.geometry,
+        extent: data.bbox,
         properties: properties
+      },
+      meta: {
+        dataType: FEATURE,
+        id: [this.getId(), properties.type, data._id].join('.'),
+        title: data.properties.recherche,
+        titleHtml: data.highlight,
+        icon: 'place'
       }
     };
   }
 
-  private computeProperties(result: IChercheResult): { [key: string]: any } {
+  private computeProperties(data: IChercheData): { [key: string]: any } {
     const properties = removeKeys(
-      result.properties,
+      data.properties,
       IChercheSearchSource.propertiesBlacklist
     );
-    return Object.assign(properties, {type: result.doc_type});
+    return Object.assign(properties, {type: data.doc_type});
   }
 }
 
@@ -130,13 +131,14 @@ export class IChercheReverseSearchSource
     });
   }
 
-  reverseSearch(lonLat: [number, number], distance?: number): Observable<Entity<Feature>[]> {
+  reverseSearch(lonLat: [number, number], distance?: number): Observable<SearchResult<Feature>[]> {
     const params = this.computeRequestParams(lonLat, distance);
     return this.http
       .get(this.searchUrl, { params })
       .pipe(
-        map((response: IChercheReverseResponse) =>
-          this.extractEntities(response))
+        map((response: IChercheReverseResponse) => {
+          return this.extractResults(response);
+        })
       );
   }
 
@@ -151,47 +153,43 @@ export class IChercheReverseSearchSource
     });
   }
 
-  private extractEntities(response: IChercheReverseResponse): Entity<Feature>[] {
-    return response.features.map(result => this.resultToEntity(result));
+  private extractResults(response: IChercheReverseResponse): SearchResult<Feature>[] {
+    return response.features.map((data: IChercheReverseData) => {
+      return this.dataToResult(data);
+    });
   }
 
-  private resultToEntity(result: IChercheReverseResult): Entity<Feature> {
-    const properties = this.computeProperties(result);
-    const extent = this.computeExtent(result);
+  private dataToResult(data: IChercheReverseData): SearchResult<Feature> {
+    const properties = this.computeProperties(data);
+    const extent = this.computeExtent(data);
 
     return {
-      rid: [this.getId(), properties.type, result._id].join('.'),
-      provider: this,
-      meta: {
-        dataType: FEATURE,
-        id: result._id,
-        title: result.properties.nom,
-        icon: 'place'
-      },
+      source: this,
       data: {
         type: FEATURE,
         projection: 'EPSG:4326',
-        geometry: result.geometry,
+        geometry: data.geometry,
         extent: extent,
         properties: properties
+      },
+      meta: {
+        dataType: FEATURE,
+        id: [this.getId(), properties.type, data._id].join('.'),
+        title: data.properties.nom,
+        icon: 'place'
       }
     };
   }
 
-  private computeProperties(result: IChercheReverseResult): { [key: string]: any } {
+  private computeProperties(data: IChercheReverseData): { [key: string]: any } {
     const properties = removeKeys(
-      result.properties,
+      data.properties,
       IChercheReverseSearchSource.propertiesBlacklist
     );
-    return Object.assign(properties, {type: result.properties.doc_type});
+    return Object.assign(properties, {type: data.properties.doc_type});
   }
 
-  private computeExtent(result: IChercheReverseResult): [number, number, number, number] {
-    return [
-      result.bbox[0],
-      result.bbox[2],
-      result.bbox[1],
-      result.bbox[3]
-    ];
+  private computeExtent(data: IChercheReverseData): [number, number, number, number] {
+    return [data.bbox[0], data.bbox[2], data.bbox[1], data.bbox[3]];
   }
 }

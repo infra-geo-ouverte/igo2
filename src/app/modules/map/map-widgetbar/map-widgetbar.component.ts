@@ -2,10 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { Media, MediaOrientation, MediaService } from '@igo2/core';
 
-import { widgetToEntity } from '../../widget/shared/widget.utils';
 import { Widget } from '../../widget/shared/widget.interface';
 import { getEntityId } from '../../entity/shared/entity.utils';
-import { Entity } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { MapWidget, MAP_DEFAULT_WIDGETS } from '../shared/map.enum';
 import { IgoMap } from '../../map/shared/map';
@@ -28,10 +26,10 @@ export class MapWidgetbarComponent {
   }
   private _map: IgoMap;
 
-  get store(): EntityStore<Entity<Widget>> {
+  get store(): EntityStore<Widget> {
     return this._store;
   }
-  private _store = new EntityStore<Entity<Widget>>();
+  private _store = new EntityStore<Widget>();
 
   get collapsed(): boolean {
     // Make that work with OnPush strategy
@@ -45,10 +43,10 @@ export class MapWidgetbarComponent {
   }
 
   constructor(private mediaService: MediaService) {
-    this.store.setEntities(MAP_DEFAULT_WIDGETS.map(widgetToEntity));
+    this.store.setEntities(MAP_DEFAULT_WIDGETS);
   }
 
-  activateWidget(widget: Entity<Widget>) {
+  activateWidget(widget: Widget) {
     const widgetId = getEntityId(widget);
     switch (widgetId) {
       case MapWidget.ZoomIn: {

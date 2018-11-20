@@ -4,12 +4,10 @@ import { Register } from '@igo2/context';
 
 import { ToolService } from '@igo2/context';
 
-import { Entity } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { Catalog } from '../../catalog/shared/catalog.interface';
 import { CatalogService } from '../../catalog/shared/catalog.service';
 import { CatalogStoreService } from '../../catalog/shared/catalog-store.service';
-import { catalogToEntity } from '../../catalog/shared/catalog.utils';
 
 @Register({
   name: 'catalogFadq',
@@ -22,7 +20,7 @@ import { catalogToEntity } from '../../catalog/shared/catalog.utils';
 })
 export class CatalogLibraryToolComponent implements OnInit {
 
-  get store(): EntityStore<Entity<Catalog>> {
+  get store(): EntityStore<Catalog> {
     return this.catalogStoreService.getCatalogStore();
   }
 
@@ -38,7 +36,7 @@ export class CatalogLibraryToolComponent implements OnInit {
     }
   }
 
-  selectCatalog(catalog: Entity<Catalog>) {
+  selectCatalog(catalog: Catalog) {
     const tool = this.toolService.getTool('catalogBrowser');
     if (tool) {
       this.toolService.selectTool(tool);
@@ -47,9 +45,7 @@ export class CatalogLibraryToolComponent implements OnInit {
 
   private loadCatalogs() {
     this.catalogService.loadCatalogs()
-      .subscribe((catalogs: Catalog[]) => {
-        this.store.addEntities(catalogs.map(catalogToEntity));
-      });
+      .subscribe((catalogs: Catalog[]) => this.store.addEntities(catalogs));
   }
 
 }

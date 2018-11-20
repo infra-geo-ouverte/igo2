@@ -9,12 +9,12 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Layer, LayerService } from '@igo2/geo';
-
 import { zip } from 'rxjs';
 
+import { Layer, LayerService } from '@igo2/geo';
+
 import { IgoMap } from '../../map/shared/map';
-import { Entity } from '../../entity/shared/entity.interface';
+import { getEntityId } from '../../entity/shared/entity.utils';
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
 import {
@@ -35,10 +35,10 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   private controller: EntityStoreController;
 
   @Input()
-  get store(): EntityStore<Entity<CatalogItem>, CatalogItemState> {
+  get store(): EntityStore<CatalogItem, CatalogItemState> {
     return this._store;
   }
-  set store(value: EntityStore<Entity<CatalogItem>, CatalogItemState>) {
+  set store(value: EntityStore<CatalogItem, CatalogItemState>) {
     this._store = value;
   }
   private _store;
@@ -52,10 +52,9 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   }
   private _map;
 
-  @Output() layerSelect = new EventEmitter<Entity<CatalogItemLayer>>();
-  @Output() layerUnselect = new EventEmitter<Entity<CatalogItemLayer>>();
-  @Output() layerAdd = new EventEmitter<Entity<CatalogItemLayer>>();
-  @Output() layerRemove = new EventEmitter<Entity<CatalogItemLayer>>();
+  @Output() layerSelect = new EventEmitter<CatalogItemLayer>();
+  @Output() layerAdd = new EventEmitter<CatalogItemLayer>();
+  @Output() layerRemove = new EventEmitter<CatalogItemLayer>();
 
   constructor(
     private layerService: LayerService,
@@ -75,15 +74,15 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  isGroup(item: Entity<CatalogItem>): boolean {
-    return item.data.type === CatalogItemType.Group;
+  isGroup(item: CatalogItem): boolean {
+    return item.type === CatalogItemType.Group;
   }
 
-  isLayer(item: Entity<CatalogItem>): boolean {
-    return item.data.type === CatalogItemType.Layer;
+  isLayer(item: CatalogItem): boolean {
+    return item.type === CatalogItemType.Layer;
   }
 
-  selectLayer(layer: Entity<CatalogItemLayer>) {
+  selectLayer(layer: CatalogItemLayer) {
     this.controller.updateEntityState(layer, {
       selected: true,
       focused: true,
@@ -92,53 +91,51 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     this.layerSelect.emit(layer);
   }
 
-  addLayer(layer: Entity<CatalogItemLayer>) {
+  addLayer(layer: CatalogItemLayer) {
     this.controller.updateEntityState(layer, {added: true}, false);
     this.addLayerToMap(layer);
   }
 
-  removeLayer(layer: Entity<CatalogItemLayer>) {
+  removeLayer(layer: CatalogItemLayer) {
     this.controller.updateEntityState(layer, {added: false}, false);
     this.removeLayerFromMap(layer);
   }
 
-  addGroup(group: Entity<CatalogItemGroup>, items: Entity<CatalogItemLayer>[]) {
+  addGroup(group: CatalogItemGroup, items: CatalogItemLayer[]) {
     this.controller.updateEntityState(group, {added: true}, false);
-    const layers = items.filter((item: Entity<CatalogItem>) => {
+    const layers = items.filter((item: CatalogItem) => {
       const added = this.store.getEntityState(item).added || false;
       return this.isLayer(item) && added === false;
     });
     this.addLayersToMap(layers);
   }
 
-  removeGroup(group: Entity<CatalogItemGroup>, items: Entity<CatalogItemLayer>[]) {
+  removeGroup(group: CatalogItemGroup, items: CatalogItemLayer[]) {
     this.controller.updateEntityState(group, {added: false}, false);
-    const layers = items.filter((item: Entity<CatalogItem>) => {
+    const layers = items.filter((item: CatalogItem) => {
       const added = this.store.getEntityState(item).added || false;
       return this.isLayer(item) && added === true;
       });
     this.removeLayersFromMap(layers);
   }
 
-  private addLayerToMap(layer: Entity<CatalogItemLayer>) {
-    this.layerService.createAsyncLayer(layer.data.options)
-      .subscribe((oLayer: Layer) => {
-        this.map.addLayer(oLayer);
-      });
+  private addLayerToMap(layer: CatalogItemLayer) {
+    this.layerService.createAsyncLayer(layer.options)
+      .subscribe((oLayer: Layer) => this.map.addLayer(oLayer));
   }
 
-  private removeLayerFromMap(layer: Entity<CatalogItemLayer>) {
-    const oLayer = this.map.getLayerById(layer.data.id);
+  private removeLayerFromMap(layer: CatalogItemLayer) {
+    const oLayer = this.map.getLayerById(getEntityId(layer));
     if (oLayer !== undefined) {
       this.map.removeLayer(oLayer);
     }
   }
 
-  private addLayersToMap(layers: Entity<CatalogItemLayer>[]) {
+  private addLayersToMap(layers: CatalogItemLayer[]) {
     const layers$ = [];
-    layers.forEach((layer: Entity<CatalogItemLayer>) => {
+    layers.forEach((layer: CatalogItemLayer) => {
       this.controller.updateEntityState(layer, {added: true}, false);
-      layers$.push(this.layerService.createAsyncLayer(layer.data.options));
+      layers$.push(this.layerService.createAsyncLayer(layer.options));
     });
 
     zip(...layers$).subscribe((oLayers: Layer[]) => {
@@ -146,8 +143,8 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     });
   }
 
-  private removeLayersFromMap(layers: Entity<CatalogItemLayer>[]) {
-    layers.forEach((layer: Entity<CatalogItemLayer>) => {
+  private removeLayersFromMap(layers: CatalogItemLayer[]) {
+    layers.forEach((layer: CatalogItemLayer) => {
       this.controller.updateEntityState(layer, {added: false}, false);
       this.removeLayerFromMap(layer);
     });

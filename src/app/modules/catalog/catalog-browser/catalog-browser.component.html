@@ -6,7 +6,6 @@
         [state]="store.state"
         [added]="store.getEntityState(item).added"
         (layerSelect)="selectLayer($event)"
-        (layerUnselect)="layerUnselect.emit($event)"
         (layerAdd)="addLayer($event)"
         (layerRemove)="removeLayer($event)"
         (add)="addGroup($event.group, $event.items)"
@@ -22,7 +21,6 @@
         [disabled]="store.getEntityState(item).added"
         [selected]="store.getEntityState(item).selected"
         (select)="selectLayer(item)"
-        (unselect)="layerUnselect.emit(item)"
         (add)="addLayer($event)"
         (remove)="removeLayer($event)">
       </fadq-catalog-browser-layer>

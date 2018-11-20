@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { getEntityTitle, Entity } from '../../../modules/entity/shared';
-import { getFeatureFromEntity, Feature } from '../../../modules/feature/shared';
+import { Feature } from '../../../modules/feature/shared';
 
 
 @Component({
@@ -80,10 +80,7 @@ export class InfoPanelComponent {
   }
 
   get feature(): Feature | undefined {
-    if (this.entity) {
-      return getFeatureFromEntity(this.entity);
-    }
-    return undefined;
+    return this.entity as Feature;
   }
 
   constructor() {}

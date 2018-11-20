@@ -10,9 +10,9 @@ import {
 } from '@angular/core';
 
 
-import { Entity } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
+import { SearchResult } from '../shared/search.interface';
 import { SearchSource } from '../shared/sources/source';
 
 export enum DisplayMode {
@@ -32,10 +32,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private controller: EntityStoreController;
 
   @Input()
-  get store(): EntityStore<Entity> {
+  get store(): EntityStore<SearchResult> {
     return this._store;
   }
-  set store(value: EntityStore<Entity>) {
+  set store(value: EntityStore<SearchResult>) {
     this._store = value;
   }
   private _store;
@@ -49,10 +49,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
   private _mode: DisplayMode = DisplayMode.Grouped;
 
-  @Output() focus = new EventEmitter<Entity>();
-  @Output() select = new EventEmitter<Entity>();
-  @Output() unfocus = new EventEmitter<Entity>();
-  @Output() unselect = new EventEmitter<Entity>();
+  @Output() focus = new EventEmitter<SearchResult>();
+  @Output() select = new EventEmitter<SearchResult>();
+  @Output() unfocus = new EventEmitter<SearchResult>();
+  @Output() unselect = new EventEmitter<SearchResult>();
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
@@ -67,24 +67,21 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  sortByOrder(entity1: Entity, entity2: Entity) {
-    return (
-      (entity1.provider as any as SearchSource).displayOrder -
-      (entity2.provider as any as SearchSource).displayOrder
-    );
+  sortByOrder(result1: SearchResult, result2: SearchResult) {
+    return (result1.source.displayOrder - result2.source.displayOrder);
   }
 
-  focusEntity(entity: Entity) {
-    this.controller.updateEntityState(entity, {focused: true}, true);
-    this.focus.emit(entity);
+  focusResult(result: SearchResult) {
+    this.controller.updateEntityState(result, {focused: true}, true);
+    this.focus.emit(result);
   }
 
-  selectEntity(entity: Entity) {
-    this.controller.updateEntityState(entity, {
+  selectResult(result: SearchResult) {
+    this.controller.updateEntityState(result, {
       focused: true,
       selected: true
     }, true);
-    this.select.emit(entity);
+    this.select.emit(result);
   }
 
 }

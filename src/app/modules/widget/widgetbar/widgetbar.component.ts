@@ -10,11 +10,9 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Entity } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
 import { Widget } from '../shared/widget.interface';
-import { widgetToEntity } from '../shared/widget.utils';
 
 // TODO: I'm not sure using a igo-list is the right thing to do
 // It has built-in select and focu mechanism that we might not need
@@ -40,10 +38,10 @@ export class WidgetbarComponent implements OnInit, OnDestroy {
   private controller: EntityStoreController;
 
   @Input()
-  get store(): EntityStore<Entity<Widget>> {
+  get store(): EntityStore<Widget> {
     return this._store;
   }
-  set store(value: EntityStore<Entity<Widget>>) {
+  set store(value: EntityStore<Widget>) {
     this._store = value;
   }
   private _store;
@@ -120,7 +118,7 @@ export class WidgetbarComponent implements OnInit, OnDestroy {
   }
   private _overlayClass = '';
 
-  @Output() activate = new EventEmitter<Entity<Widget>>();
+  @Output() activate = new EventEmitter<Widget>();
   @Output() open = new EventEmitter();
   @Output() close = new EventEmitter();
 
@@ -139,8 +137,8 @@ export class WidgetbarComponent implements OnInit, OnDestroy {
     return this.horizontal;
   }
 
-  get toggleWidget(): Entity<Widget> {
-    return widgetToEntity(TOGGLE_WIDGET);
+  get toggleWidget(): Widget {
+    return TOGGLE_WIDGET;
   }
 
   constructor(private cdRef: ChangeDetectorRef) {
@@ -156,17 +154,15 @@ export class WidgetbarComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  getWidgetClass(widget: Entity<Widget>): { [key: string]: boolean; } {
+  getWidgetClass(widget: Widget): { [key: string]: boolean; } {
     const state = this.store.getEntityState(widget);
     return {
       'fadq-widgetbar-item-active': state.active
     };
   }
 
-  activateWidget(widget: Entity<Widget>) {
-    this.controller.updateEntityState(widget, {
-      active: true,
-    }, true);
+  activateWidget(widget: Widget) {
+    this.controller.updateEntityState(widget, {active: true}, true);
     this.activate.emit(widget);
   }
 

@@ -14,11 +14,13 @@ import { Client, ClientSchema } from '../../modules/client/shared/client.interfa
 import { ClientStoreService } from '../../modules/client/shared/client-store.service';
 import { Editor } from '../../modules/edition/shared/editor';
 import { EditorService } from '../../modules/edition/shared/editor.service';
-import { Entity, EntityStore } from '../../modules/entity/shared';
+import { EntityStore } from '../../modules/entity/shared/store';
+import { State } from '../../modules/entity/shared/entity.interface';
 import { IgoMap } from '../../modules/map/shared/map';
 import { MapService } from '../../modules/map/shared/map.service';
 import { ProjectionService } from '../../modules/map/shared/projection.service';
-import { SearchStoreService } from '../../modules/search/shared';
+import { SearchResult } from '../../modules/search/shared/search.interface';
+import { SearchStoreService } from '../../modules/search/shared/search-store.service';
 import { ClientSearchSource } from '../../modules/search/shared/sources/client';
 
 import {
@@ -36,8 +38,12 @@ import {
 })
 export class PortalComponent implements OnInit, OnDestroy {
 
-  public editor: Entity<Editor>;
-  public focusedSearchEntities$: Observable<Entity[]>;
+  public editor: Editor;
+  public editor$$: Subscription;
+  public searchResults$$: Subscription;
+  public selectedSearchResults$$: Subscription;
+  public focusedSearchResults$: Observable<SearchResult[]>;
+
   public expansionPanelExpanded = false;
   public infoPanelOpened = false;
   public sidenavOpened = false;
@@ -50,11 +56,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   private searchEntities$$: Subscription;
   private selectedSearchEntities$$: Subscription;
 
-  get searchStore(): EntityStore<Entity> {
+  get searchStore(): EntityStore<SearchResult> {
     return this.searchStoreService.store;
   }
 
-  get editorStore(): EntityStore<Entity<Editor>> {
+  get editorStore(): EntityStore<Editor> {
     return this.editorService.store;
   }
 
@@ -90,31 +96,29 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.handleContextChange(context);
     });
 
-    this.searchEntities$$ = this.searchStore.observable
-      .subscribe((entities: Entity[]) => {
-        this.handleSearchEntitiesChange(entities);
-      });
+    this.searchResults$$ = this.searchStore.observable
+    .subscribe((results: SearchResult[]) =>
+      this.handleSearchResultsChange(results)
+    );
 
-    this.selectedSearchEntities$$ = this.searchStore
-      .observeBy((entity: Entity, state) => state.selected === true)
-      .subscribe((entities: Entity[]) => {
-        this.handleSearchEntitiesSelect(entities);
-      });
+    this.selectedSearchResults$$ = this.searchStore
+    .observeBy((result: SearchResult, state: State) => state.selected === true)
+    .subscribe((results: SearchResult[]) => {
+      this.handleSearchResultsSelect(results)
+    });
 
-    this.focusedSearchEntities$ = this.searchStore
-      .observeBy((entity: Entity, state) => state.focused === true);
+    this.focusedSearchResults$ = this.searchStore
+    .observeBy((result: SearchResult, state: State) => state.focused === true);
       
-    this.selectedEditor$$ = this.editorStore.observeFirstBy((editor: Entity<Editor>) => {
-        return this.editorStore.getEntityState(editor).selected === true;
-      }).subscribe((editor: Entity<Editor>) => {
-        this.handleEditorSelect(editor);
-      });
+    this.selectedEditor$$ = this.editorStore
+      .observeFirstBy((editor: Editor, stae: State) => state.selected === true)
+      .subscribe((editor: Editor) => this.handleEditorSelect(editor));
   }
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
-    this.searchEntities$$.unsubscribe();
-    this.selectedSearchEntities$$.unsubscribe();
+    this.searchResults$$.unsubscribe();
+    this.selectedSearchResults$$.unsubscribe();
     this.selectedEditor$$.unsubscribe();
   }
 
@@ -150,7 +154,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
   }
 
-  handleQueryResults(entities: Entity[]) {
+  handleQueryResults(results: SearchResult[]) {
     // const features: Feature[] = results.features;
     // if (features.length > 0) {
     //   this.featureService.updateFeatures(features, features[0].source);
@@ -169,19 +173,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private handleSearchEntitiesChange(entities: Entity[]) {
-    if (entities.length === 0) {
+  private handleSearchResultsChange(results: SearchResult[]) {
+    if (results.length === 0) {
       return;
     }
 
     this.openSidenav();
 
-    const withClients = entities.some((entity: Entity) => {
-      return entity.provider instanceof ClientSearchSource;
+    const withClients = results.some((result: SearchResult) => {
+      return result.source instanceof ClientSearchSource;
     });
 
     if (withClients) {
-      const client = entities[0] as Entity<Client>;
+      const client = results[0] as Client;
       this.handleSearchClient(client);
     } else {
       const searchResults = this.toolService.getTool('searchResultsFadq');
@@ -189,8 +193,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private handleSearchEntitiesSelect(entities: Entity[]) {
-    if (entities.length === 0) {
+  private handleSearchResultsSelect(results: SearchResult[]) {
+    if (results.length === 0) {
       this.closeInfoPanel();
       return;
     }
@@ -201,8 +205,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openInfoPanel();
   }
 
-  private handleSearchClient(client: Entity<Client>) {
-    this.clientStoreService.setClient(client.data);
+  private handleSearchClient(client: Client) {
+    this.clientStoreService.setClient(client);
     const clientInfo = this.toolService.getTool('clientInfo');
     this.toolService.selectTool(clientInfo);
 
@@ -210,7 +214,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     //this.editorService.selectEditor(schemaEditor);
   }
 
-  private handleEditorSelect(editor: Entity<Editor>) {
+  private handleEditorSelect(editor: Editor) {
     this.editor = editor;
   }
 

@@ -1,9 +1,9 @@
-import { TimeFilterOptions } from '@igo2/geo';
-import { State } from '../../entity/shared/entity.interface';
-import { LayerInfo } from '../../map/shared/map.interface';
+import { LayerOptions, TimeFilterOptions } from '@igo2/geo';
+import { Entity, State } from '../../entity/shared/entity.interface';
 import { CatalogItemType } from './catalog.enum';
 
-export interface Catalog {
+export interface Catalog extends Entity {
+  id: string;
   title: string;
   url: string;
   items?: CatalogItem[];
@@ -12,24 +12,26 @@ export interface Catalog {
   timeFilter?: TimeFilterOptions;
 }
 
-export interface CatalogServiceOptions {
-  baseLayers?: boolean;
-  sources?: Catalog[];
-  sourcesUrl?: string;
+export interface CatalogItem extends Entity {
+  id: string;
+  title: string;
+  type: CatalogItemType;
+}
+
+export interface CatalogItemLayer extends CatalogItem {
+  options: LayerOptions;
+}
+
+export interface CatalogItemGroup extends CatalogItem {
+  items?: CatalogItem[];
 }
 
 export interface CatalogItemState extends State {
   added?: boolean;
 }
 
-export interface CatalogItem {
-  id: string;
-  title: string;
-  type: CatalogItemType;
-}
-
-export interface CatalogItemLayer extends CatalogItem, LayerInfo {}
-
-export interface CatalogItemGroup extends CatalogItem {
-  items?: CatalogItem[];
+export interface CatalogServiceOptions {
+  baseLayers?: boolean;
+  sources?: Catalog[];
+  sourcesUrl?: string;
 }
