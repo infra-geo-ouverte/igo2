@@ -30,6 +30,7 @@ export class EntityStoreController {
     this.unbind();
     this.watch(store);
     this._store = store;
+    this.detectChanges();
 
     return this;
   }
@@ -75,9 +76,7 @@ export class EntityStoreController {
 
   private handleEntityChanges(entities: Entity[]) {
     this.firstDetection = true;
-    if (this.cdRef !== undefined) {
-      this.cdRef.detectChanges();
-    }
+    this.detectChanges();
   }
 
   private handleStateChanges(state: Map<string, State>) {
@@ -94,14 +93,17 @@ export class EntityStoreController {
       this.innerState.set(id, storeState);
     });
 
-    if (
-      this.cdRef !== undefined &&
-      detectChanges !== false &&
-      this.firstDetection === false) {
-      this.cdRef.detectChanges();
+    if (detectChanges !== false && this.firstDetection === false) {
+      this.detectChanges();
     }
 
     this.firstDetection = false;
+  }
+
+  private detectChanges() {
+    if (this.cdRef !== undefined) {
+      this.cdRef.detectChanges();
+    }
   }
 
 }

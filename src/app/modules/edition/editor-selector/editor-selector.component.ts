@@ -9,7 +9,10 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { getEntityTitle } from '../../entity';
+import { Observable } from 'rxjs';
+
+import { getEntityTitle } from '../../entity/shared/entity.utils';
+import { State } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
 import { Editor } from '../shared/editor';
@@ -21,6 +24,8 @@ import { Editor } from '../shared/editor';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditorSelectorComponent implements OnInit, OnDestroy {
+
+  public editor$: Observable<Editor>;
 
   private controller: EntityStoreController;
 
@@ -41,8 +46,9 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.state.reset();
     this.controller.bind(this.store);
+    this.editor$ = this.store
+      .observeFirstBy((editor: Editor, state: State) => state.selected === true);
   }
 
   ngOnDestroy() {

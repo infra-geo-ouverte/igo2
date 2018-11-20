@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, merge } from 'rxjs';
-import { debounceTime, map, skip } from 'rxjs/operators';
+import { debounceTime, map, skip, startWith } from 'rxjs/operators';
 
 import { Entity, EntityClass, State, EntitySortClause } from './entity.interface';
 import { EntityState } from './state';
@@ -21,10 +21,10 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
   }
   private _sorter: EntitySorter<T>;
 
-  get observable(): Subject<T[]> {
+  get observable(): BehaviorSubject<T[]> {
     return this._observable$;
   }
-  private _observable$ = new Subject<T[]>();
+  private _observable$ = new BehaviorSubject<T[]>(this.entities);
 
   get rawObservable(): BehaviorSubject<T[]> {
     return this.entities$;
@@ -111,7 +111,7 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     this.watcher$$ = combined$
       .pipe(
         skip(1),
-        debounceTime(50)
+        debounceTime(50),
       ).subscribe((value: [T[], Map<string, S>, EntitySortClause]) => {
         this.observable.next(this.sorter.sort(value[0]));
       });

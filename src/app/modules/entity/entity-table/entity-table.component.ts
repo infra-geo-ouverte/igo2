@@ -24,7 +24,7 @@ import { EntityStoreController } from '../shared/controller';
   selector: 'fadq-entity-table',
   templateUrl: './entity-table.component.html',
   styleUrls: ['./entity-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntityTableComponent implements OnInit, OnDestroy {
 
