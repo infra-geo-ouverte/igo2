@@ -1,5 +1,22 @@
+@import './widgetbar.variables';
+
+:host {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+button {
+  margin: 4px;
+}
+
+mat-list {
+  padding-top: 0;
+}
+
 :host.horizontal {
-  igo-list {
+  mat-list {
     width: auto;
     white-space: nowrap;
   }
@@ -7,12 +24,49 @@
   fadq-widgetbar-item {
     display: inline-block;
   }
-
-  fadq-widgetbar-item.igo-list-item-selected ::ng-deep mat-list-item {
-    background-color: initial !important;
-  }
 };
 
-button {
-  margin: 4px;
+::ng-deep .mat-list .mat-list-item .mat-list-text > * {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  max-height: 36px;
+  line-height: 18px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
+
+::ng-deep .mat-list .mat-list-item.mat-list-item-avatar {
+  height: $fadq-widgetbar-item-height;
+
+  .mat-list-item-content {
+    display: -webkit-flex;
+    height: $fadq-widgetbar-item-height;
+    padding: $fadq-widgetbar-item-padding;
+  }
+
+  .mat-list-item-content > mat-icon {
+    padding: $fadq-widgetbar-item-icon-padding;
+  }
+}
+
+fadq-widgetbar-item ::ng-deep mat-list-item [mat-list-avatar] {
+  height: auto;
+  width: 40px;
+}
+
+fadq-widgetbar-item ::ng-deep mat-list-item:hover {
+  cursor: pointer;
+}
+
+:host.horizontal {
+  mat-list {
+    width: auto;
+    white-space: nowrap;
+  }
+
+  fadq-widgetbar-item {
+    display: inline-block;
+  }
+};

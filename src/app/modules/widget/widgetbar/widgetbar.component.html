@@ -1,10 +1,7 @@
-<igo-list 
-  *ngIf="!collapsed"
-  [navigation]="false">
+<mat-list *ngIf="!collapsed">
 
   <fadq-widgetbar-item
     *ngIf="withToggleButton"
-    igoListItem
     color="accent"
     [ngClass]="getWidgetClass(toggleWidget)"
     [withTitle]="false"
@@ -17,7 +14,6 @@
     *ngIf="visible"
     ngFor let-widget [ngForOf]="store.entities">
     <fadq-widgetbar-item
-      igoListItem
       color="accent"
       [ngClass]="getWidgetClass(widget)"
       [withTitle]="withTitle"
@@ -26,7 +22,7 @@
       (activate)="activateWidget(widget)">
     </fadq-widgetbar-item>
   </ng-template>
-</igo-list>
+</mat-list>
 
 <div *ngIf="collapsed">
   <button
@@ -45,10 +41,9 @@
     [yPosition]="yPosition"
     [class]="overlayClass">
 
-    <igo-list [navigation]="false">
+    <mat-list>
       <ng-template ngFor let-widget [ngForOf]="store.entities">
         <fadq-widgetbar-item
-          igoListItem
           color="accent"
           [ngClass]="getWidgetClass(widget)"
           [withTitle]="withTitle"
@@ -57,6 +52,6 @@
           (activate)="activateWidget(widget)">
         </fadq-widgetbar-item>
       </ng-template>
-    </igo-list>
+    </mat-list>
   </mat-menu>
 </div>

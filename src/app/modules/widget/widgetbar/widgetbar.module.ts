@@ -10,7 +10,6 @@ import {
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
-import { IgoListModule } from '@igo2/common';
 
 import { WidgetbarComponent } from './widgetbar.component';
 import { WidgetbarItemComponent } from './widgetbar-item.component';
@@ -23,8 +22,7 @@ import { WidgetbarItemComponent } from './widgetbar-item.component';
     MatTooltipModule,
     MatMenuModule,
     MatListModule,
-    IgoLanguageModule,
-    IgoListModule
+    IgoLanguageModule
   ],
   exports: [
     WidgetbarComponent
