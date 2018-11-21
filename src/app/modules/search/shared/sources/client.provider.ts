@@ -5,12 +5,12 @@ import { SearchSource } from './source';
 import { ClientSearchSource } from './client';
 
 export function clientSearchSourcesFactory(
-  config: ConfigService,
-  clientService: ClientService
+  clientService: ClientService,
+  config: ConfigService
 ) {
   return new ClientSearchSource(
-    config.getConfig(`searchSources.${ClientSearchSource.id}`),
-    clientService
+    clientService,
+    config.getConfig(`searchSources.${ClientSearchSource.id}`)
   );
 }
 
@@ -19,6 +19,6 @@ export function provideClientSearchSource() {
     provide: SearchSource,
     useFactory: clientSearchSourcesFactory,
     multi: true,
-    deps: [ConfigService, ClientService]
+    deps: [ClientService, ConfigService]
   };
 }

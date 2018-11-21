@@ -7,13 +7,13 @@ import { ILayerSearchSource } from './ilayer';
 
 export function ilayerSearchSourcesFactory(
   http: HttpClient,
-  config: ConfigService,
-  languageService: LanguageService
+  languageService: LanguageService,
+  config: ConfigService
 ) {
   return new ILayerSearchSource(
-    config.getConfig(`searchSources.${ILayerSearchSource.id}`),
     http,
-    languageService
+    languageService,
+    config.getConfig(`searchSources.${ILayerSearchSource.id}`)
   );
 }
 
@@ -22,6 +22,6 @@ export function provideILayerSearchSource() {
     provide: SearchSource,
     useFactory: ilayerSearchSourcesFactory,
     multi: true,
-    deps: [HttpClient, ConfigService, LanguageService]
+    deps: [HttpClient, LanguageService, ConfigService]
   };
 }

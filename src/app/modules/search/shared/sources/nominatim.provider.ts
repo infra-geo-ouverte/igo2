@@ -10,8 +10,8 @@ export function nominatimSearchSourcesFactory(
   config: ConfigService
 ) {
   return new NominatimSearchSource(
-    config.getConfig(`searchSources.${NominatimSearchSource.id}`),
-    http
+    http,
+    config.getConfig(`searchSources.${NominatimSearchSource.id}`)
   );
 }
 

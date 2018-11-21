@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -17,27 +17,12 @@ import {
   IChercheReverseResponse
 } from './icherche.interface';
 
-export class IChercheSearchSourceBase extends SearchSource  {
-
-  constructor(protected options: SearchSourceOptions, protected http: HttpClient) {
-    super();
-    this.initOptions(options);
-  }
-
-  getDefaultOptions(): SearchSourceOptions {
-    return {
-      title: 'ICherche Québec'
-    };
-  }
-}
-
 @Injectable()
-export class IChercheSearchSource
-    extends IChercheSearchSourceBase implements TextSearch {
+export class IChercheSearchSource extends SearchSource implements TextSearch {
 
   static id = 'icherche';
   static type = FEATURE;
-  static propertiesBlacklist: Array<string> = [
+  static propertiesBlacklist: string[] = [
     '@timestamp',
     '@version',
     'recherche',
@@ -47,14 +32,22 @@ export class IChercheSearchSource
     'bbox'
   ];
 
+  constructor(
+    private http: HttpClient,
+    @Inject('options') options: SearchSourceOptions
+  ) {
+    super(options);
+  }
+
   getId(): string {
     return IChercheSearchSource.id;
   }
 
   getDefaultOptions(): SearchSourceOptions {
-    return Object.assign(super.getDefaultOptions(), {
+    return {
+      title: 'ICherche Québec',
       searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
-    });
+    };
   }
 
   search(term: string): Observable<SearchResult<Feature>[]> {
@@ -117,21 +110,28 @@ export class IChercheSearchSource
 }
 
 @Injectable()
-export class IChercheReverseSearchSource
-    extends IChercheSearchSourceBase implements ReverseSearch {
+export class IChercheReverseSearchSource extends SearchSource implements ReverseSearch {
 
   static id = 'icherchereverse';
   static type = FEATURE;
-  static propertiesBlacklist: Array<string> = ['doc_type'];
+  static propertiesBlacklist: string[] = ['doc_type'];
+
+  constructor(
+    private http: HttpClient,
+    @Inject('options') options: SearchSourceOptions
+  ) {
+    super(options);
+  }
 
   getId(): string {
     return IChercheReverseSearchSource.id;
   }
 
   getDefaultOptions(): SearchSourceOptions {
-    return Object.assign(super.getDefaultOptions(), {
+    return {
+      title: 'ICherche Québec',
       searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/xy'
-    });
+    };
   }
 
   reverseSearch(lonLat: [number, number], distance?: number): Observable<SearchResult<Feature>[]> {

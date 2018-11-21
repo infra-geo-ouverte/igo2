@@ -51,9 +51,9 @@ export class PlaceService {
       data = response['data'];
     }
 
-    let results: Array<Object> = [];
+    let results: Object[] = [];
     if (data instanceof Array) {
-      results = data as Array<Object>;
+      results = data as Object[];
     } else if (api.resultsProperty !== undefined && data.hasOwnProperty(api.resultsProperty)) {
       results = data[api.resultsProperty];
     }

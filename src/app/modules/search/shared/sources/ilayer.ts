@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -25,12 +25,11 @@ export class ILayerSearchSource
   }
 
   constructor(
-    protected options: SearchSourceOptions,
     private http: HttpClient,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    @Inject('options') options: SearchSourceOptions
   ) {
-    super();
-    this.initOptions(options);
+    super(options);
   }
 
   getId(): string {

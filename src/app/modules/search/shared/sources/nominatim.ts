@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -12,15 +12,16 @@ import { SearchSourceOptions } from './source.interface';
 import { NominatimData } from './nominatim.interface';
 
 @Injectable()
-export class NominatimSearchSource
-    extends SearchSource implements TextSearch {
+export class NominatimSearchSource extends SearchSource implements TextSearch {
 
   static id = 'nominatim';
   static type = FEATURE;
 
-  constructor(protected options: SearchSourceOptions, private http: HttpClient) {
-    super();
-    this.initOptions(options);
+  constructor(
+    private http: HttpClient,
+    @Inject('options') options: SearchSourceOptions
+  ) {
+    super(options);
   }
 
   getId(): string {

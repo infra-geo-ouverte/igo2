@@ -10,8 +10,8 @@ export function ichercheSearchSourceFactory(
   config: ConfigService
 ) {
   return new IChercheSearchSource(
-    config.getConfig(`searchSources.${IChercheSearchSource.id}`),
-    http
+    http,
+    config.getConfig(`searchSources.${IChercheSearchSource.id}`)
   );
 }
 
@@ -29,8 +29,8 @@ export function ichercheReverseSearchSourceFactory(
   config: ConfigService
 ) {
   return new IChercheReverseSearchSource(
-    config.getConfig(`searchSources.${IChercheReverseSearchSource.id}`),
-    http
+    http,
+    config.getConfig(`searchSources.${IChercheReverseSearchSource.id}`)
   );
 }
 

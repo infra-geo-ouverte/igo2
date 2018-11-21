@@ -1,4 +1,4 @@
-export function removeKeys(obj: Object, remove: Array<string>): Object {
+export function removeKeys(obj: Object, remove: string[]): Object {
   const newObj = Object.keys(obj)
     .filter(key => !remove.includes(key))
     .reduce((_obj, key) => {

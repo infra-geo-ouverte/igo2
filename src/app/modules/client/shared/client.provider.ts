@@ -9,13 +9,13 @@ import { ClientService } from './client.service';
 
 export function clientInfoServiceFactory(
   http: HttpClient,
-  config: ConfigService,
-  apiService: ApiService
+  apiService: ApiService,
+  config: ConfigService
 ) {
   return new ClientInfoService(
     http,
-    config.getConfig('client.api'),
-    apiService
+    apiService,
+    config.getConfig('client.api')
   );
 }
 
@@ -23,19 +23,19 @@ export function provideClientInfoService() {
   return {
     provide: ClientInfoService,
     useFactory: clientInfoServiceFactory,
-    deps: [HttpClient, ConfigService, ApiService]
+    deps: [HttpClient, ApiService, ConfigService]
   };
 }
 
 export function clientSchemaServiceFactory(
   http: HttpClient,
-  config: ConfigService,
-  apiService: ApiService
+  apiService: ApiService,
+  config: ConfigService
 ) {
   return new ClientSchemaService(
     http,
-    config.getConfig('client.api'),
-    apiService
+    apiService,
+    config.getConfig('client.api')
   );
 }
 
@@ -43,7 +43,7 @@ export function provideClientSchemaService() {
   return {
     provide: ClientSchemaService,
     useFactory: clientSchemaServiceFactory,
-    deps: [HttpClient, ConfigService, ApiService]
+    deps: [HttpClient, ApiService, ConfigService]
   };
 }
 

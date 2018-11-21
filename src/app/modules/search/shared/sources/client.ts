@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,18 +12,16 @@ import { SearchSourceOptions } from './source.interface';
 import { ClientData } from './client.interface';
 
 @Injectable()
-export class ClientSearchSource
-    extends SearchSource implements TextSearch {
+export class ClientSearchSource extends SearchSource implements TextSearch {
 
   static id = 'client';
   static type = CLIENT;
 
   constructor(
-    protected options: SearchSourceOptions,
-    private clientService: ClientService
+    private clientService: ClientService,
+    @Inject('options') options: SearchSourceOptions
   ) {
-    super();
-    this.initOptions(options);
+    super(options);
   }
 
   getId(): string {

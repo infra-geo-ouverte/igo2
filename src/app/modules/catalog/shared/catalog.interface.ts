@@ -8,7 +8,7 @@ export interface Catalog extends EntityObject {
   url: string;
   items?: CatalogItem[];
   type?: string;
-  regFilters?: Array<string>;
+  regFilters?: string[];
   timeFilter?: TimeFilterOptions;
 }
 

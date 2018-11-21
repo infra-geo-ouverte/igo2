@@ -41,22 +41,16 @@ export class SearchSource {
     return this.options.order === undefined ? 99 : this.options.order;
   }
 
-  protected initOptions(options: SearchSourceOptions) {
+  constructor(options: SearchSourceOptions) {
     this.options = Object.assign(this.getDefaultOptions(), options);
   }
 
 }
 
-
 export interface TextSearch {
-
   search(term: string): Observable<SearchResult[]>;
-
 }
 
-
 export interface ReverseSearch {
-
   reverseSearch(lonLat: [number, number], distance?: number): Observable<SearchResult[]>;
-
 }
