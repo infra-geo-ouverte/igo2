@@ -1,9 +1,22 @@
-import { Entity, EntityClass, EntityTableModel } from '../../entity/shared/entity.interface';
+import { Subscription, BehaviorSubject } from 'rxjs';
+
+import {
+  Entity,
+  EntityClass,
+  EntityTableModel,
+  State
+} from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
 import { Widget } from '../../widget/shared/widget.interface';
 import { EditorConfig } from './edition.interface';
 
 export class Editor extends EntityClass {
+
+  public widget$ = new BehaviorSubject<Widget>(undefined);
+  public entity$ = new BehaviorSubject<Entity>(undefined);
+
+  private activeWidget$$: Subscription;
+  private selectedEntity$$: Subscription;
 
   get id(): string {
     return this.config.id;
@@ -17,29 +30,37 @@ export class Editor extends EntityClass {
     return this.config.tableModel;
   }
 
-  get dataStore():  EntityStore<Entity> {
-    return this._dataStore;
+  get entityStore():  EntityStore<Entity> {
+    return this._entityStore;
   }
-  private _dataStore: EntityStore<Entity>;
+  private _entityStore: EntityStore<Entity>;
 
   get widgetStore():  EntityStore<Widget> {
     return this._widgetStore;
   }
   private _widgetStore: EntityStore<Widget>;
 
+  get widget(): Widget {
+    return this.widget$.value;
+  }
+
+  get entity(): Entity {
+    return this.entity$.value;
+  }
+
   constructor(private config: EditorConfig) {
     super();
   }
 
-  bindDataStore(dataStore: EntityStore<Entity>): Editor {
-    this.unbindDataStore();
-    this._dataStore = dataStore;
+  bindEntityStore(entityStore: EntityStore<Entity>): Editor {
+    this.unbindEntityStore();
+    this._entityStore = entityStore;
 
     return this;
   }
 
-  unbindDataStore(): Editor {
-    this._dataStore = undefined;
+  unbindEntityStore(): Editor {
+    this._entityStore = undefined;
 
     return this;
   }
@@ -56,4 +77,32 @@ export class Editor extends EntityClass {
 
     return this;
   }
+
+  init() {
+    this.activeWidget$$ = this.widgetStore
+      .observeFirstBy((widget: Widget, state: State) => state.active === true)
+      .subscribe((widget: Widget) => this.activateWidget(widget));
+
+    this.selectedEntity$$ = this.entityStore
+      .observeFirstBy((entity: Entity, state: State) => state.selected === true)
+      .subscribe((entity: Entity) => this.selectEntity(entity));
+  }
+
+  destroy() {
+    this.activeWidget$$.unsubscribe();
+    this.selectedEntity$$.unsubscribe();
+  }
+
+  getComponentData(): Object {
+    return Object.assign({}, {entity: this.entity});
+  }
+
+  protected activateWidget(widget: Widget) {
+    this.widget$.next(widget);
+  }
+
+  protected selectEntity(entity: Entity) {
+    this.entity$.next(entity);
+  }
+
 }

@@ -9,7 +9,7 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { getEntityTitle } from '../../entity/shared/entity.utils';
 import { State } from '../../entity/shared/entity.interface';
@@ -25,8 +25,9 @@ import { Editor } from '../shared/editor';
 })
 export class EditorSelectorComponent implements OnInit, OnDestroy {
 
-  public editor$: Observable<Editor>;
+  public editor: Editor;
 
+  private editor$$: Subscription;
   private controller: EntityStoreController;
 
   @Input()
@@ -47,12 +48,14 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.controller.bind(this.store);
-    this.editor$ = this.store
-      .observeFirstBy((editor: Editor, state: State) => state.selected === true);
+    this.editor$$ = this.store
+      .observeFirstBy((editor: Editor, state: State) => state.selected === true)
+      .subscribe((editor: Editor) => this.handleEditorSelect(editor));
   }
 
   ngOnDestroy() {
     this.controller.unbind();
+    this.editor$$.unsubscribe();
   }
 
   getEditorTitle(editor: Editor): string {
@@ -62,5 +65,15 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
   selectEditor(editor: Editor) {
     this.controller.updateEntityState(editor, {selected: true}, true);
     this.select.emit(editor);
+  }
+
+  private handleEditorSelect(editor: Editor) {
+    if (this.editor !== undefined) {
+      this.editor.destroy();
+    }
+    if (editor !== undefined) {
+      editor.init();
+    }
+    this.editor = editor;
   }
 }
