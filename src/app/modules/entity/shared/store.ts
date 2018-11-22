@@ -75,6 +75,10 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     this.state.updateByKey(getEntityId(entity), changes, exclusive);
   }
 
+  updateEntitiesState(entities: T[], changes: { [key: string]: boolean }) {
+    this.state.updateByKeys(entities.map(getEntityId), changes);
+  }
+
   updateAllEntitiesState(changes: { [key: string]: boolean }) {
     this.state.updateAll(changes);
   }
