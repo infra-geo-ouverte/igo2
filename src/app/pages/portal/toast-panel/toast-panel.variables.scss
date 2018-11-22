@@ -1,0 +1,6 @@
+@import '../../../../style/partial/media';
+@import '../../../../style/partial/variables';
+
+$fadq-toast-panel-collapsed-height: 47px;
+$fadq-toast-panel-max-height: calc(35% - #{$fadq-toast-panel-collapsed-height});
+$fadq-toast-panel-width: 30%;

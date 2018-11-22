@@ -1,6 +1,8 @@
 import {
   Component,
   Input,
+  Output,
+  EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnDestroy
@@ -36,6 +38,8 @@ export class EditorOutletComponent implements OnDestroy {
   }
   private _editor;
 
+  @Output() display = new EventEmitter();
+
   constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnDestroy() {
@@ -43,6 +47,12 @@ export class EditorOutletComponent implements OnDestroy {
   }
 
   private bindEditor() {
+    this.unbindEditor();
+
+    if (this.editor === undefined) {
+      return;
+    }
+
     this.entity$$ = this.editor.entity$
       .subscribe((entity: Entity) => this.handleEntityChange(entity));
     this.widget$$ = this.editor.widget$
@@ -66,6 +76,11 @@ export class EditorOutletComponent implements OnDestroy {
   private handleWidgetChange(widget: Widget) {
     this.component = widget === undefined ? undefined : widget.component;
     this.componentData = this.editor.getComponentData();
+
+    if (this.component !== undefined) {
+      this.display.emit();
+    }
+
     this.cdRef.detectChanges();
   }
 

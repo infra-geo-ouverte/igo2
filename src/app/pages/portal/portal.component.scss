@@ -142,7 +142,7 @@ fadq-editor-selector {
 }
 
 /*** Info panel ***/
-fadq-info-panel {
+fadq-toast-panel {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -173,7 +173,7 @@ fadq-info-panel {
   }
 }
 
-fadq-info-panel.fadq-info-panel-opened {
+fadq-toast-panel.fadq-toast-panel-opened {
   @include mobile {
     width: 100%;
     left: 0;

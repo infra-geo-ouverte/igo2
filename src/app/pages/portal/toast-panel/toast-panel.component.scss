@@ -1,4 +1,4 @@
-@import './info-panel.variables';
+@import './toast-panel.variables';
 
 
 :host {
@@ -7,8 +7,8 @@
   display: none;
   background-color: white;
 
-  height: $fadq-info-panel-collapsed-height;
-  max-height: $fadq-info-panel-max-height;
+  height: $fadq-toast-panel-collapsed-height;
+  max-height: $fadq-toast-panel-max-height;
 
   transition: height 280ms cubic-bezier(.4,0,.2,1);
   padding: $igo-padding;
@@ -18,8 +18,8 @@
   }
 }
 
-:host.fadq-info-panel-opened {
-  height: $fadq-info-panel-max-height;
+:host.fadq-toast-panel-opened {
+  height: $fadq-toast-panel-max-height;
 
   @include mobile {
     height: 40%;

@@ -70,11 +70,11 @@
 
 </fadq-expansion-panel>
 
-<fadq-info-panel
+<fadq-toast-panel
   [(opened)]="infoPanelOpened"
   [features]="infoPanelFeatures">
-</fadq-info-panel>
+</fadq-toast-panel>
 
-<ng-container *ngIf="editor">
+<ng-container>
   <fadq-editor-outlet [editor]="editor"></fadq-editor-outlet>
 </ng-container>

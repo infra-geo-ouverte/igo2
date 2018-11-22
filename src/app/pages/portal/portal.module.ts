@@ -42,7 +42,7 @@ import { FadqSearchModule } from '../../modules/search/search.module';
 import { FadqToolModule } from '../../modules/tool/tool.module';
 import { FadqWidgetModule } from '../../modules/widget/widget.module';
 import { FadqExpansionPanelModule } from './expansion-panel/expansion-panel.module';
-import { FadqInfoPanelModule } from './info-panel/info-panel.module';
+import { FadqToastPanelModule } from './toast-panel/toast-panel.module';
 import { FadqSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
@@ -82,7 +82,7 @@ import { PortalComponent } from './portal.component';
     FadqEditionModule,
     FadqClientModule,
     FadqExpansionPanelModule,
-    FadqInfoPanelModule,
+    FadqToastPanelModule,
     FadqSidenavModule,
     FadqMapModule,
     FadqSearchModule,

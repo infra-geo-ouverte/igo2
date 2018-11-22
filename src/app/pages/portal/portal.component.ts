@@ -130,16 +130,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.expansionPanelExpanded && this.infoPanelOpened;
   }
 
-  closeInfoPanel() {
+  closeToastPanel() {
     this.infoPanelOpened = false;
   }
 
-  openInfoPanel() {
+  openToastPanel() {
     this.infoPanelOpened = true;
   }
 
-  toggleInfoPanel() {
-    this.infoPanelOpened ? this.closeInfoPanel() : this.openInfoPanel();
+  toggleToastPanel() {
+    this.infoPanelOpened ? this.closeToastPanel() : this.openToastPanel();
   }
 
   closeSidenav() {
@@ -195,14 +195,14 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private handleSearchResultsSelect(results: SearchResult[]) {
     if (results.length === 0) {
-      this.closeInfoPanel();
+      this.closeToastPanel();
       return;
     }
 
     if (this.mediaService.media$.value === Media.Mobile) {
       this.closeSidenav();
     }
-    this.openInfoPanel();
+    this.openToastPanel();
   }
 
   private handleSearchResultsFocus(results: SearchResult[]) {

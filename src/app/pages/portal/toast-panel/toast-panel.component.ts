@@ -11,12 +11,12 @@ import { getEntityTitle } from '../../../modules/entity/shared';
 import { Feature } from '../../../modules/feature/shared';
 
 @Component({
-  selector: 'fadq-info-panel',
-  templateUrl: './info-panel.component.html',
-  styleUrls: ['./info-panel.component.scss'],
+  selector: 'fadq-toast-panel',
+  templateUrl: './toast-panel.component.html',
+  styleUrls: ['./toast-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InfoPanelComponent {
+export class ToastPanelComponent {
 
   @Input()
   get opened(): boolean {
@@ -57,12 +57,12 @@ export class InfoPanelComponent {
 
   @Output() openedChange = new EventEmitter<boolean>();
 
-  @HostBinding('class.fadq-info-panel-opened')
+  @HostBinding('class.fadq-toast-panel-opened')
   get hasOpenedClass() {
     return this.opened;
   }
 
-  @HostBinding('class.fadq-info-panel-with-features')
+  @HostBinding('class.fadq-toast-panel-with-features')
   get hasWithFeaturesClass() {
     return this.features === undefined ? false : true;
   }
@@ -81,7 +81,7 @@ export class InfoPanelComponent {
   constructor() {}
 
   private toggleDisplay() {
-    (document.querySelector('fadq-info-panel') as HTMLElement).style.display = 'block';
+    (document.querySelector('fadq-toast-panel') as HTMLElement).style.display = 'block';
   }
 
 }

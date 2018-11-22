@@ -13,7 +13,7 @@ import {
 import { IgoLanguageModule } from '@igo2/core';
 import { IgoFeatureModule } from '@igo2/geo';
 
-import { InfoPanelComponent } from './info-panel.component';
+import { ToastPanelComponent } from './toast-panel.component';
 
 @NgModule({
   imports: [
@@ -25,13 +25,13 @@ import { InfoPanelComponent } from './info-panel.component';
     IgoStopPropagationModule,
     IgoFeatureModule
   ],
-  exports: [InfoPanelComponent],
-  declarations: [InfoPanelComponent]
+  exports: [ToastPanelComponent],
+  declarations: [ToastPanelComponent]
 })
-export class FadqInfoPanelModule {
+export class FadqToastPanelModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: FadqInfoPanelModule
+      ngModule: FadqToastPanelModule
     };
   }
 }
