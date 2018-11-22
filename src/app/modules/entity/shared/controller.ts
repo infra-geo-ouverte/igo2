@@ -1,6 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
 
 import { Subscription } from 'rxjs';
+import { skip } from 'rxjs/operators';
 
 import { isEquivalent } from '../../utils/object';
 import { Entity, State } from './entity.interface';
@@ -13,7 +14,6 @@ export class EntityStoreController {
   private entityWatcher$$: Subscription;
   private stateWatcher$$: Subscription;
   private innerState = new Map();
-  private firstDetection = false;
 
   get store():  EntityStore<Entity> {
     return this._store;
@@ -63,6 +63,7 @@ export class EntityStoreController {
       .subscribe((entities: Entity[]) => this.handleEntityChanges(entities));
 
     this.stateWatcher$$ = store.state.observable
+      .pipe(skip(1))
       .subscribe((state: Map<string, State>) => this.handleStateChanges(state));
   }
 
@@ -75,7 +76,6 @@ export class EntityStoreController {
   }
 
   private handleEntityChanges(entities: Entity[]) {
-    this.firstDetection = true;
     this.detectChanges();
   }
 
@@ -93,11 +93,9 @@ export class EntityStoreController {
       this.innerState.set(id, storeState);
     });
 
-    if (detectChanges !== false && this.firstDetection === false) {
+    if (detectChanges !== false) {
       this.detectChanges();
     }
-
-    this.firstDetection = false;
   }
 
   private detectChanges() {
