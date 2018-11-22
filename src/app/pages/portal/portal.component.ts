@@ -32,6 +32,8 @@ import {
   mapSlideY
 } from './portal.animation';
 
+import { MatDialog, MatDialogConfig } from '@angular/material';
+
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
@@ -75,7 +77,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private searchStoreService: SearchStoreService,
     private toolService: ToolService,
     private clientStoreService: ClientStoreService,
-    private editorService: EditorService
+    private editorService: EditorService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -220,5 +223,15 @@ export class PortalComponent implements OnInit, OnDestroy {
   private handleEditorSelect(editor: Editor) {
     this.editor = editor;
   }
+  /*
+  public test() {
+    console.log('icic')
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.editor.componentData;
+    const dialogRef = this.dialog.open(this.editor.widget.component, dialogConfig);
+  }
+  */
 
 }

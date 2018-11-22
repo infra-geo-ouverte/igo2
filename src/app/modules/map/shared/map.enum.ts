@@ -15,41 +15,41 @@ export const MAP_DEFAULT_WIDGETS = [
   {
     id: MapWidget.BaseLayerSwitcher,
     icon: 'photo_library',
-    title: 'map.toolbar.baselayerswitcher.title'
+    title: 'map.widgetbar.baselayerswitcher.title'
   },
   {
     id: MapWidget.ZoomIn,
     icon: 'zoom_in',
-    title: 'map.toolbar.zoomin.title'
+    title: 'map.widgetbar.zoomin.title'
   },
   {
     id: MapWidget.ZoomOut,
     icon: 'zoom_out',
-    title: 'map.toolbar.zoomout.title'
+    title: 'map.widgetbar.zoomout.title'
   },
   {
     id: MapWidget.PreviousView,
     icon: 'arrow_back',
-    title: 'map.toolbar.previousview.title'
+    title: 'map.widgetbar.previousview.title'
   },
   {
     id: MapWidget.NextView,
     icon: 'arrow_forward',
-    title: 'map.toolbar.nextview.title'
+    title: 'map.widgetbar.nextview.title'
   },
   {
     id: MapWidget.ClickInteraction,
     icon: 'mouse',
-    title: 'map.toolbar.clickinteraction.title'
+    title: 'map.widgetbar.clickinteraction.title'
   },
   {
     id: MapWidget.Geolocation,
     icon: 'my_location',
-    title: 'map.toolbar.geolocation.title'
+    title: 'map.widgetbar.geolocation.title'
   },
   {
     id: MapWidget.GoogleView,
     icon: 'streetview',
-    title: 'map.toolbar.googleview.title'
+    title: 'map.widgetbar.googleview.title'
   }
 ];

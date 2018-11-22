@@ -179,3 +179,16 @@ fadq-info-panel.fadq-info-panel-opened {
     left: 0;
   }
 }
+
+/*** Editor container ***/
+fadq-editor-outlet {
+  display: block;
+  position: absolute;
+  top: 200px;
+  left: 600px;
+  height: 200px;
+  width: 200px;
+  z-index: 10;
+  background-color: white;
+  
+}

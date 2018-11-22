@@ -57,11 +57,25 @@
       "detnoexp": "Détenues exploitées",
       "nodetexp": "Non détenues exploitées",
       "sel": "Sélectionnées"
+    },
+    "schema": {
+      "create": "Créer",
+      "create.tooltip": "Créer un schéma",
+      "delete": "Supprimer",
+      "delete.tooltip": "Supprimer le schéma sélectionné",
+      "duplicate": "Dupliquer",
+      "duplicate.tooltip": "Dupliquer le schéma sélectionné",
+      "manageFiles": "Fichiers joints",
+      "manageFiles.tooltip": "Gérer les fichiers joints",
+      "transfer": "Transférer",
+      "transfer.tooltip": "Transférer un schéma",
+      "createMap": "Créer carte(s)",
+      "createMap.tooltip": "Créer carte(s) de structure d'entreposage"
     }
   },
 
   "map": {
-    "toolbar": {
+    "widgetbar": {
       "baselayerswitcher": {
         "title": "Change Base Layer"
       },

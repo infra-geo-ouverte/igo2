@@ -22,6 +22,7 @@
   <fadq-search-bar [store]="searchStore"></fadq-search-bar>
 
   <fadq-sidenav
+    [ngClass]="{'fadq-sidenav-with-expansion-panel': expansionPanelExpanded}"
     [(opened)]="sidenavOpened"
     [tool]="tool$ | async">
   </fadq-sidenav>
@@ -63,7 +64,7 @@
   <fadq-entity-table
     *ngIf="editor"
     class="table-compact"
-    [store]="editor.dataStore"
+    [store]="editor.entityStore"
     [model]="editor.tableModel">
   </fadq-entity-table>
 
@@ -73,3 +74,7 @@
   [(opened)]="infoPanelOpened"
   [features]="infoPanelFeatures">
 </fadq-info-panel>
+
+<ng-container *ngIf="editor">
+  <fadq-editor-outlet [editor]="editor"></fadq-editor-outlet>
+</ng-container>
