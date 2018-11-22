@@ -26,6 +26,11 @@ mat-sidenav {
   }
 }
 
+:host.fadq-sidenav-with-expansion-panel mat-sidenav {
+  height: $fadq-sidenav-height-with-expansion-panel;
+  transition: height 280ms cubic-bezier(.4,0,.2,1);
+}
+
 .igo-sidenav-content {
   margin-top: $fadq-sidenav-margin-top;
   height: calc(100% - #{$fadq-sidenav-margin-top});
