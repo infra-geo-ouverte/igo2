@@ -10,6 +10,7 @@ import { ClientStoreService } from './shared/client-store.service';
 
 import { FadqClientInfoModule } from './client-info/client-info.module';
 import { FadqClientLegendModule } from './client-legend/client-legend.module';
+import { FadqClientSchemaFormModule } from './client-schema-form/client-schema-form.module';
 import { FadqClientSchemaSelectorModule } from './client-schema-selector/client-schema-selector.module';
 import { FadqClientSchemaTableModule } from './client-schema-table/client-schema-table.module';
 
@@ -18,12 +19,14 @@ import { FadqClientSchemaTableModule } from './client-schema-table/client-schema
     CommonModule,
     FadqClientInfoModule,
     FadqClientLegendModule,
+    FadqClientSchemaFormModule,
     FadqClientSchemaSelectorModule,
     FadqClientSchemaTableModule
   ],
   exports: [
     FadqClientInfoModule,
     FadqClientLegendModule,
+    FadqClientSchemaFormModule,
     FadqClientSchemaSelectorModule,
     FadqClientSchemaTableModule
   ],

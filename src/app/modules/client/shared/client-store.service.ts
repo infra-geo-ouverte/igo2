@@ -19,7 +19,7 @@ export class ClientStoreService {
   private _schemaEditor: ClientSchemaEditor;
 
   get schemaStore(): EntityStore<ClientSchema> {
-    return this.schemaEditor.dataStore as EntityStore<ClientSchema>;
+    return this.schemaEditor.entityStore as EntityStore<ClientSchema>;
   }
 
   get schemaWidgetStore(): EntityStore<Widget> {

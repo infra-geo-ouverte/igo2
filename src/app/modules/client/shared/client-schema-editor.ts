@@ -4,7 +4,7 @@ import { EntityStore } from '../../entity/shared/store';
 import { Widget } from '../../widget/shared/widget.interface';
 
 import { ClientSchema } from './client.interface';
-import { MAP_DEFAULT_WIDGETS } from '../../map';
+import { ClientSchemaFormComponent } from '../client-schema-form/client-schema-form.component';
 
 export class ClientSchemaEditor extends Editor {
 
@@ -38,7 +38,45 @@ export class ClientSchemaEditor extends Editor {
     ]
   };
 
-  static widgets: Widget[] = MAP_DEFAULT_WIDGETS;
+  static widgets: Widget[] = [
+    {
+      id: 'create',
+      icon: 'add',
+      title: 'client.schema.create',
+      tooltip: 'client.schema.create.tooltip',
+      component: ClientSchemaFormComponent
+    },
+    {
+      id: 'delete',
+      icon: 'delete',
+      title: 'client.schema.delete',
+      tooltip: 'client.schema.delete.tooltip'
+    },
+    {
+      id: 'duplicate',
+      icon: 'queue',
+      title: 'client.schema.duplicate',
+      tooltip: 'client.schema.duplicate.tooltip'
+    },
+    {
+      id: 'manageFiles',
+      icon: 'attach_file',
+      title: 'client.schema.manageFiles',
+      tooltip: 'client.schema.manageFiles.tooltip'
+    },
+    {
+      id: 'transfer',
+      icon: 'swap_horiz',
+      title: 'client.schema.transfer',
+      tooltip: 'client.schema.transfer.tooltip'
+    },
+    {
+      id: 'createMap',
+      icon: 'image',
+      title: 'client.schema.createMap',
+      tooltip: 'client.schema.createMap.tooltip'
+    }
+  ];
 
   constructor() {
     super({
@@ -47,11 +85,22 @@ export class ClientSchemaEditor extends Editor {
       tableModel: ClientSchemaEditor.tableModel
     });
 
-    const dataStore = new EntityStore<ClientSchema>();
-    this.bindDataStore(dataStore);
+    this.bindEntityStore(new EntityStore<ClientSchema>());
+    this.bindWidgetStore(new EntityStore<Widget>());
+  }
 
-    const widgetStore = new EntityStore<Widget>();
-    widgetStore.setEntities(ClientSchemaEditor.widgets);
-    this.bindWidgetStore(widgetStore);
+  init() {
+    super.init();
+    this.initWidgets();
+  }
+
+  getComponentData(): Object {
+    return Object.assign({}, {schema: this.entity});
+  }
+
+  private initWidgets() {
+    // TODO: handle initial state.
+    // Some widgets should be disabled if no schema is selected
+    this.widgetStore.setEntities(ClientSchemaEditor.widgets);
   }
 }
