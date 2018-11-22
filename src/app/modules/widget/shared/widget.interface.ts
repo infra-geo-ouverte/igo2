@@ -1,4 +1,7 @@
+import { Component } from '@angular/core';
+
 import { EntityObject } from '../../entity/shared/entity.interface';
+import { WidgetClass } from './widget';
 
 export interface Widget extends EntityObject {
   id: string;
@@ -7,4 +10,7 @@ export interface Widget extends EntityObject {
   iconImage?: string;
   tooltip?: string;
   options?: { [key: string]: any };
+
+  cls?: WidgetClass;
+  component?: any;
 }
