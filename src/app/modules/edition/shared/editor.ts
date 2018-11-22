@@ -26,6 +26,10 @@ export class Editor extends EntityClass {
     return this.config.title;
   }
 
+  get hasComponent(): boolean {
+    return this.widget && this.widget.component !== undefined;
+  }
+
   get tableModel(): EntityTableModel {
     return this.config.tableModel;
   }

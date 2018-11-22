@@ -122,14 +122,14 @@ fadq-expansion-panel:not(.fadq-expansion-panel-expanded) {
   }
 
   @include tablet {
-    dq-editor-selector,
+    fadq-editor-selector,
     fadq-widgetbar {
       display: none;
     }
   }
 
   @include mobile {
-    dq-editor-selector,
+    fadq-editor-selector,
     fadq-widgetbar {
       display: none;
     }
@@ -178,17 +178,4 @@ fadq-toast-panel.fadq-toast-panel-opened {
     width: 100%;
     left: 0;
   }
-}
-
-/*** Editor container ***/
-fadq-editor-outlet {
-  display: block;
-  position: absolute;
-  top: 200px;
-  left: 600px;
-  height: 200px;
-  width: 200px;
-  z-index: 10;
-  background-color: white;
-  
 }

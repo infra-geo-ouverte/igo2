@@ -11,7 +11,6 @@ import {
   IgoStopPropagationModule
 } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
-import { IgoFeatureModule } from '@igo2/geo';
 
 import { ToastPanelComponent } from './toast-panel.component';
 
@@ -22,8 +21,7 @@ import { ToastPanelComponent } from './toast-panel.component';
     MatButtonModule,
     IgoLanguageModule,
     IgoPanelModule,
-    IgoStopPropagationModule,
-    IgoFeatureModule
+    IgoStopPropagationModule
   ],
   exports: [ToastPanelComponent],
   declarations: [ToastPanelComponent]

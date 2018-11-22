@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
 
 import { Media, MediaService } from '@igo2/core';
 import {
@@ -14,6 +13,7 @@ import { Client, ClientSchema } from '../../modules/client/shared/client.interfa
 import { ClientStoreService } from '../../modules/client/shared/client-store.service';
 import { Editor } from '../../modules/edition/shared/editor';
 import { EditorService } from '../../modules/edition/shared/editor.service';
+import { getEntityTitle } from '../../modules/entity/shared/entity.utils';
 import { EntityStore } from '../../modules/entity/shared/store';
 import { FEATURE } from '../../modules/feature/shared/feature.enum';
 import { Feature } from '../../modules/feature/shared/feature.interface';
@@ -32,8 +32,6 @@ import {
   mapSlideY
 } from './portal.animation';
 
-import { MatDialog, MatDialogConfig } from '@angular/material';
-
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
@@ -43,9 +41,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 export class PortalComponent implements OnInit, OnDestroy {
 
   public editor: Editor;
-  public infoPanelFeatures: Feature[] = [];
+  public toastPanelFeature: Feature;
+  public toastPanelOpened = false;
   public expansionPanelExpanded = false;
-  public infoPanelOpened = false;
   public sidenavOpened = false;
   public map: IgoMap;
 
@@ -69,6 +67,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.toolService.selectedTool$;
   }
 
+  get toastPanelTitle(): string {
+    let title = '';
+    if (this.toastPanelFeature !== undefined) {
+      title = getEntityTitle(this.toastPanelFeature);
+    }
+
+    return title;
+  }
+
   constructor(
     private projectionService: ProjectionService,
     private mapService: MapService,
@@ -77,8 +84,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private searchStoreService: SearchStoreService,
     private toolService: ToolService,
     private clientStoreService: ClientStoreService,
-    private editorService: EditorService,
-    public dialog: MatDialog
+    private editorService: EditorService
   ) {}
 
   ngOnInit() {
@@ -127,19 +133,19 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get expansionPanelBackdropShown(): boolean {
-    return this.expansionPanelExpanded && this.infoPanelOpened;
+    return this.expansionPanelExpanded && this.toastPanelOpened;
   }
 
   closeToastPanel() {
-    this.infoPanelOpened = false;
+    this.toastPanelOpened = false;
   }
 
   openToastPanel() {
-    this.infoPanelOpened = true;
+    this.toastPanelOpened = true;
   }
 
   toggleToastPanel() {
-    this.infoPanelOpened ? this.closeToastPanel() : this.openToastPanel();
+    this.toastPanelOpened ? this.closeToastPanel() : this.openToastPanel();
   }
 
   closeSidenav() {
@@ -206,9 +212,16 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private handleSearchResultsFocus(results: SearchResult[]) {
-    this.infoPanelFeatures = results
-      .filter((result: SearchResult) => result.meta.dataType === FEATURE)
-      .map((result: SearchResult) => result.data as Feature);
+    const featureResult = results
+      .find((result: SearchResult) => result.meta.dataType === FEATURE);
+
+    if (featureResult === undefined) {
+      this.toastPanelFeature = undefined;
+      this.closeToastPanel();
+    } else {
+      this.toastPanelFeature = featureResult.data as Feature;
+      this.openToastPanel();
+    }
   }
 
   private handleSearchClient(client: Client) {
@@ -223,15 +236,5 @@ export class PortalComponent implements OnInit, OnDestroy {
   private handleEditorSelect(editor: Editor) {
     this.editor = editor;
   }
-  /*
-  public test() {
-    console.log('icic')
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = this.editor.componentData;
-    const dialogRef = this.dialog.open(this.editor.widget.component, dialogConfig);
-  }
-  */
 
 }

@@ -31,6 +31,7 @@ import {
   IgoWktModule
 } from '@igo2/geo';
 import { IgoContextModule } from '@igo2/context';
+import { IgoFeatureModule } from '@igo2/geo';
 import { IgoToolsModule } from '@igo2/tools';
 
 import { FadqCoreModule } from '../../modules/core/core.module';
@@ -63,7 +64,7 @@ import { PortalComponent } from './portal.component';
     IgoCatalogModule,
     IgoDataSourceModule,
     IgoDownloadModule,
-    // IgoFeatureModule,
+    IgoFeatureModule,
     IgoFilterModule,
     IgoFormModule,
     IgoImportExportModule,

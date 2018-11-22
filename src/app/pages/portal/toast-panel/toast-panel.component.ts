@@ -4,11 +4,10 @@ import {
   Output,
   EventEmitter,
   HostBinding,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ElementRef,
+  ViewChild
 } from '@angular/core';
-
-import { getEntityTitle } from '../../../modules/entity/shared';
-import { Feature } from '../../../modules/feature/shared';
 
 @Component({
   selector: 'fadq-toast-panel',
@@ -33,10 +32,7 @@ export class ToastPanelComponent {
 
   @Input()
   get title(): string {
-    if (this._title !== undefined) {
-      return this._title;
-    }
-    return this.feature === undefined ? undefined : getEntityTitle(this.feature);
+    return this._title;
   }
   set title(value: string) {
     this._title = value;
@@ -44,16 +40,13 @@ export class ToastPanelComponent {
   private _title: string;
 
   @Input()
-  get features(): Feature[] {
-    return this._features;
+  get withHeader(): boolean {
+    return this._withHeader;
   }
-  set features(value: Feature[]) {
-    this._features = value || [];
-    if (!this.empty) {
-      this.toggleDisplay();
-    }
+  set withHeader(value: boolean) {
+    this._withHeader = value;
   }
-  private _features: Feature[] = [];
+  private _withHeader: boolean;
 
   @Output() openedChange = new EventEmitter<boolean>();
 
@@ -62,26 +55,16 @@ export class ToastPanelComponent {
     return this.opened;
   }
 
-  @HostBinding('class.fadq-toast-panel-with-features')
-  get hasWithFeaturesClass() {
-    return this.features === undefined ? false : true;
+  @HostBinding('style.display')
+  get displayStyle() {
+    return this.empty ? 'none' : 'block';
   }
+
+  @ViewChild('content') content: ElementRef;
 
   get empty(): boolean {
-    return this.features.length === 0;
-  }
-
-  get feature(): Feature | undefined {
-    if (this.empty) {
-      return undefined;
-    }
-    return this.features[0];
+    return this.content.nativeElement.children.length === 0;
   }
 
   constructor() {}
-
-  private toggleDisplay() {
-    (document.querySelector('fadq-toast-panel') as HTMLElement).style.display = 'block';
-  }
-
 }

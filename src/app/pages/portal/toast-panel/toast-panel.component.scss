@@ -1,10 +1,8 @@
 @import './toast-panel.variables';
 
-
 :host {
   @extend %box-shadowed;
 
-  display: none;
   background-color: white;
 
   height: $fadq-toast-panel-collapsed-height;

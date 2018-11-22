@@ -1,29 +1,23 @@
 <igo-panel
   [title]="title"
+  [withHeader]="withHeader"
   (click)="opened = !opened">
-  <button
-    mat-icon-button
-    panelRightButton
-    *ngIf="!empty">
-    <mat-icon>
-      <ng-container *ngIf="!opened">
-        arrow_drop_up
-      </ng-container>
-      <ng-container *ngIf="opened">
-        arrow_drop_down
-      </ng-container>
-    </mat-icon>
-  </button>
 
   <!--TODO:  Fix CSS in lib and remove that -->
   <button
+    *ngIf="withHeader && !empty"
     mat-icon-button
-    panelLeftButton
-    *ngIf="!empty">
+    panelRightButton>
+    <mat-icon *ngIf="!opened"> arrow_drop_up</mat-icon>
+    <mat-icon *ngIf="opened"> arrow_drop_down</mat-icon>
+  </button>
+  <button
+    *ngIf="withHeader && !empty"
+    mat-icon-button
+    panelLeftButton>
   </button>
 
-  <div igoStopPropagation>
-    <igo-feature-details [feature]="feature"></igo-feature-details>
+  <div #content igoStopPropagation>
+    <ng-content></ng-content>
   </div>
-
 </igo-panel>
