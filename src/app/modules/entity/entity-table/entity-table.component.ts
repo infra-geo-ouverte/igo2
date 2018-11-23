@@ -24,7 +24,7 @@ import { EntityStoreController } from '../shared/controller';
   selector: 'fadq-entity-table',
   templateUrl: './entity-table.component.html',
   styleUrls: ['./entity-table.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntityTableComponent implements OnInit, OnDestroy {
 
@@ -67,8 +67,6 @@ export class EntityTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.controller.bind(this.store);
-    // TODO: If we remove this, the table will start empty. Find why
-    this.store.sorter.reset();
     // TODO: Clear sort when records change
   }
 
