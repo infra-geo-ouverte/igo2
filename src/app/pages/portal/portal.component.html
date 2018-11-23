@@ -71,23 +71,18 @@
 </fadq-expansion-panel>
 
 <fadq-toast-panel
-  [ngClass]="{'fadq-toast-panel-with-feature': toastPanelFeature !== undefined}"
   [title]="toastPanelTitle"
-  [withHeader]="true"
+  [withHeader]="toastPanelContent === 'feature'"
   [(opened)]="toastPanelOpened">
 
   <igo-feature-details
-    *ngIf="toastPanelFeature"
-    [feature]="toastPanelFeature">
+    *ngIf="toastPanelContent === 'feature'"
+    [feature]="feature">
   </igo-feature-details>
 
   <fadq-editor-outlet
-    *ngIf="editor && editor.hasComponent"
+    *ngIf="toastPanelContent === 'editor'"
     [editor]="editor">
   </fadq-editor-outlet>
 
 </fadq-toast-panel>
-
-<!--ng-container>
-  <fadq-editor-outlet [editor]="editor"></fadq-editor-outlet>
-</ng-container-->

@@ -9,7 +9,7 @@ import {
   ToolService
 } from '@igo2/context';
 
-import { Client, ClientSchema } from '../../modules/client/shared/client.interface';
+import { Client } from '../../modules/client/shared/client.interface';
 import { ClientStoreService } from '../../modules/client/shared/client-store.service';
 import { Editor } from '../../modules/edition/shared/editor';
 import { EditorService } from '../../modules/edition/shared/editor.service';
@@ -40,20 +40,28 @@ import {
 })
 export class PortalComponent implements OnInit, OnDestroy {
 
+  public map: IgoMap;
   public editor: Editor;
-  public toastPanelFeature: Feature;
-  public toastPanelOpened = false;
+  public feature: Feature;
+
   public expansionPanelExpanded = false;
   public sidenavOpened = false;
-  public map: IgoMap;
 
   // True after the initial context is loaded
   private contextLoaded = false;
   private context$$: Subscription;
   private selectedEditor$$: Subscription;
   private searchResults$$: Subscription;
-  private selectedSearchResults$$: Subscription;
-  private focusedSearchResults$$: Subscription;
+  private selectedSearchResult$$: Subscription;
+  private focusedSearchResult$$: Subscription;
+
+  get backdropShown(): boolean {
+    return this.mediaService.media$.value === Media.Mobile && this.sidenavOpened;
+  }
+
+  get expansionPanelBackdropShown(): boolean {
+    return this.expansionPanelExpanded && this.toastPanelOpened;
+  }
 
   get searchStore(): EntityStore<SearchResult> {
     return this.searchStoreService.store;
@@ -67,14 +75,34 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.toolService.selectedTool$;
   }
 
-  get toastPanelTitle(): string {
-    let title = '';
-    if (this.toastPanelFeature !== undefined) {
-      title = getEntityTitle(this.toastPanelFeature);
+  get toastPanelContent(): string {
+    let content;
+    if (this.editor !== undefined && this.editor.hasComponent) {
+      content = 'editor';
+    } else if (this.feature !== undefined) {
+      content = 'feature';
     }
+    return content;
+  }
 
+  get toastPanelTitle(): string {
+    let title;
+    if (this.toastPanelContent === 'feature') {
+      title = getEntityTitle(this.feature);
+    }
     return title;
   }
+
+  get toastPanelOpened(): boolean {
+    if (this.toastPanelContent === 'editor') {
+      return true;
+    }
+    return this._toastPanelOpened;
+  }
+  set toastPanelOpened(value: boolean) {
+    this._toastPanelOpened = value;
+  }
+  private _toastPanelOpened = false;
 
   constructor(
     private projectionService: ProjectionService,
@@ -108,13 +136,13 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.handleSearchResultsChange(results)
       );
 
-    this.selectedSearchResults$$ = this.searchStore
-      .observeBy((result: SearchResult, state: State) => state.selected === true)
-      .subscribe((results: SearchResult[]) => this.handleSearchResultsSelect(results));
+    this.selectedSearchResult$$ = this.searchStore
+      .observeFirstBy((result: SearchResult, state: State) => state.selected === true)
+      .subscribe((result: SearchResult) => this.handleSearchResultSelect(result));
 
-    this.focusedSearchResults$$ = this.searchStore
-      .observeBy((result: SearchResult, state: State) => state.focused === true)
-      .subscribe((results: SearchResult[]) => this.handleSearchResultsFocus(results));
+    this.focusedSearchResult$$ = this.searchStore
+      .observeFirstBy((result: SearchResult, state: State) => state.focused === true)
+      .subscribe((result: SearchResult) => this.handleSearchResultFocus(result));
 
     this.selectedEditor$$ = this.editorStore
       .observeFirstBy((editor: Editor, state: State) => state.selected === true)
@@ -124,16 +152,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.context$$.unsubscribe();
     this.searchResults$$.unsubscribe();
-    this.selectedSearchResults$$.unsubscribe();
+    this.selectedSearchResult$$.unsubscribe();
+    this.focusedSearchResult$$.unsubscribe();
     this.selectedEditor$$.unsubscribe();
-  }
-
-  get backdropShown(): boolean {
-    return this.mediaService.media$.value === Media.Mobile && this.sidenavOpened;
-  }
-
-  get expansionPanelBackdropShown(): boolean {
-    return this.expansionPanelExpanded && this.toastPanelOpened;
   }
 
   closeToastPanel() {
@@ -184,8 +205,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.openSidenav();
-
     const withClients = results.some((result: SearchResult) => {
       return result.source instanceof ClientSearchSource;
     });
@@ -197,11 +216,12 @@ export class PortalComponent implements OnInit, OnDestroy {
       const searchResults = this.toolService.getTool('searchResultsFadq');
       this.toolService.selectTool(searchResults);
     }
+
+    this.openSidenav();
   }
 
-  private handleSearchResultsSelect(results: SearchResult[]) {
-    if (results.length === 0) {
-      this.closeToastPanel();
+  private handleSearchResultSelect(result: SearchResult) {
+    if (result === undefined) {
       return;
     }
 
@@ -211,16 +231,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openToastPanel();
   }
 
-  private handleSearchResultsFocus(results: SearchResult[]) {
-    const featureResult = results
-      .find((result: SearchResult) => result.meta.dataType === FEATURE);
+  private handleSearchResultFocus(result: SearchResult) {
+    if (result === undefined) {
+      return;
+    }
 
-    if (featureResult === undefined) {
-      this.toastPanelFeature = undefined;
-      this.closeToastPanel();
-    } else {
-      this.toastPanelFeature = featureResult.data as Feature;
+    if (result.meta.dataType === FEATURE) {
+      this.feature = result.data as Feature;
       this.openToastPanel();
+    } else {
+      this.feature = undefined;
     }
   }
 
