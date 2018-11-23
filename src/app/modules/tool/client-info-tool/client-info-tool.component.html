@@ -1,7 +1,22 @@
 <div>
   <ng-container *ngIf="client">
-    <fadq-client-schema-selector [store]="schemaStore"></fadq-client-schema-selector>
-    <fadq-client-legend></fadq-client-legend>
-    <fadq-client-info [client]="client"></fadq-client-info>
+    <div class="fadq-info-client-tool-top-section">
+      <fadq-client-schema-selector [store]="schemaStore"></fadq-client-schema-selector>
+
+      <a href="#">{{client.nom}}</a>
+    </div>
+
+    <igo-list>
+      <igo-collapsible
+        [title]="'client.legend.title' | translate"
+        [collapsed]="true">
+        <fadq-client-legend></fadq-client-legend>
+      </igo-collapsible>
+
+      <igo-collapsible [title]="'client.info.title' | translate">
+        <fadq-client-info [client]="client"></fadq-client-info>
+      </igo-collapsible>
+    </igo-list>
+    
   </ng-container>
 </div>

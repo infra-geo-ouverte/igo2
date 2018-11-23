@@ -3,7 +3,16 @@ $accent: mat-palette($mat-blue, 200);
 $warn: mat-palette($mat-red);
 
 $theme: mat-light-theme(
-    $primary,
-    $accent,
-    $warn
+  $primary,
+  $accent,
+  $warn
 );
+
+$is-dark: map-get($theme, is-dark);
+$foreground: map-get($theme, foreground);
+$background: map-get($theme, background);
+
+table.igo-striped tbody tr:nth-child(odd) {
+  background-color: mat-color($background, if($is-dark, app-bar, status-bar));
+  color: mat-color($foreground, text);
+}

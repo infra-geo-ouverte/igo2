@@ -52,7 +52,15 @@
       "adresseExp": "Exploitation address",
       "adressePro": "Production address"
     },
+    "legend": {
+      "title": "Parcels legend",
+      "detexp": "Détenues non exploitées",
+      "detnoexp": "Détenues exploitées",
+      "nodetexp": "Non détenues exploitées",
+      "sel": "Sélectionnées"
+    },
     "schema": {
+      "placeholder": "Schema",
       "create": "Créer",
       "create.tooltip": "Créer un schéma",
       "delete": "Supprimer",

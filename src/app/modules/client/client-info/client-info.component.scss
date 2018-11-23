@@ -13,8 +13,22 @@
   color: #1565c0;
 }
 
-.fadq-client-info-help {
-  @extend %border-box;
-  @extend %box-shadowed;
+.fadq-client-info-addresses table {
+  border-spacing: 0;
+}
+
+.fadq-client-info-addresses table tr:nth-child(even) td {
+ text-align: center;
+}
+
+.fadq-client-info-addresses table tr td {
   padding: $igo-padding;
+}
+
+.fadq-client-info-help {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 11px;
+  font-style: italic;
 }

@@ -53,12 +53,14 @@
       "adressePro": "Adresse de production"
     },
     "legend": {
+      "title": "Légende des parcelles",
       "detexp": "Détenues non exploitées",
       "detnoexp": "Détenues exploitées",
       "nodetexp": "Non détenues exploitées",
       "sel": "Sélectionnées"
     },
     "schema": {
+      "placeholder": "Schéma",
       "create": "Créer",
       "create.tooltip": "Créer un schéma",
       "delete": "Supprimer",

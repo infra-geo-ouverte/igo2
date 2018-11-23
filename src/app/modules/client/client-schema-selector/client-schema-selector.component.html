@@ -3,6 +3,7 @@
 <mat-form-field class="fadq-schema-selector">
   <mat-select
     [value]="schema$ | async"
+    [placeholder]="'client.schema.placeholder' | translate"
     (selectionChange)="onSelectionChange($event)">
     <ng-template ngFor let-schema [ngForOf]="store.observable | async">
       <mat-option [value]="schema">

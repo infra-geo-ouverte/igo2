@@ -1,31 +1,41 @@
 <div>
-  <h3>{{'client.info.title' | translate}}</h3>
-
-  <div class="fadq-client-info-section fadq-client-info-title">
-    <a href="#">{{client.nom}}</a>
-  </div>
-
-  <div class="fadq-client-info-section fadq-client-info-help">
-    {{'client.info.help' | translate}}
-  </div>
-
   <div class="fadq-client-info-section fadq-client-info-addresses">
     <table class="igo-striped">
       <tbody>
         <tr>
           <td>{{'client.info.adresseCor' | translate}}</td>
+        </tr>
+        <tr>
           <td><a href="#">{{client.adresseCor}}</a></td>
         </tr>
         <tr>
           <td>{{'client.info.adresseExp' | translate}}</td>
-          <td><a href="#">{{client.adresseExp}}</a></td>
+        </tr>
+        <tr>
+          <td>
+            <a *ngIf="client.adresseExp" href="#">{{client.adresseExp}}</a>
+            <ng-container *ngIf="!client.adresseExp">-</ng-container>
+          </td>
         </tr>
         <tr>
           <td>{{'client.info.adressePro' | translate}}</td>
-          <td><a href="#">{{client.adressePro}}</a></td>
+        </tr>
+        <tr>
+          <td>
+            <a *ngIf="client.adressePro" href="#">{{client.adressePro}}</a>
+            <ng-container *ngIf="!client.adressePro">-</ng-container>
+          </td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div
+    class="fadq-client-info-section fadq-client-info-help"
+    matBadge="!"
+    matBadgeOverlap="true"
+    matBadgePosition="before">
+    {{'client.info.help' | translate}}
   </div>
 
 </div>

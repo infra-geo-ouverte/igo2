@@ -136,9 +136,14 @@ fadq-expansion-panel:not(.fadq-expansion-panel-expanded) {
   }
 }
 
+fadq-expansion-panel {
+  fadq-editor-selector {
+    width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-icon-size} - 20px)
+  }
 
-fadq-editor-selector {
-  width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-icon-size} - 20px)
+  fadq-widgetbar {
+    margin-left: 5px;
+  }
 }
 
 /*** Info panel ***/

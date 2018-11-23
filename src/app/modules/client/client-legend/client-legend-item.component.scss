@@ -15,13 +15,9 @@ $thumbnail-size: 20px;
 
 .fadq-client-legend-item-title {
   display: inline-block;
-  margin-left: 5px;
-  line-height: $thumbnail-size;
-  font-size: 12px;
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: calc(100% - (#{$thumbnail-size} + #{$igo-padding}));
+  margin-left: 10px;
+  line-height: 18px;
+  font-size: 14px;
 }
 
 .fadq-client-legend-item-thumbnail {
