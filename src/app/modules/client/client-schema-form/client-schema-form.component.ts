@@ -5,6 +5,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
+import { EntityFormModel } from '../../entity/shared/entity.interface';
 import { ClientSchema } from '../shared/client.interface';
 
 @Component({
@@ -15,6 +16,36 @@ import { ClientSchema } from '../shared/client.interface';
 })
 export class ClientSchemaFormComponent {
 
+  static model: EntityFormModel = {
+    fields: [
+      {
+        name: 'id',
+        title: 'Numéro de schéma',
+        cols: 1
+      },
+      {
+        name: 'type',
+        title: 'Type de schéma',
+        cols: 1
+      },
+      {
+        name: 'description',
+        title: 'Description',
+        cols: 2
+      },
+      {
+        name: 'annee',
+        title: 'Année',
+        cols: 1
+      },
+      {
+        name: 'etat',
+        title: 'État',
+        cols: 1
+      }
+    ]
+  };
+
   @Input()
   get schema(): ClientSchema {
     return this._schema;
@@ -24,6 +55,10 @@ export class ClientSchemaFormComponent {
     this.cdRef.detectChanges();
   }
   private _schema: ClientSchema;
+
+  get model(): EntityFormModel {
+    return ClientSchemaFormComponent.model;
+  }
 
   constructor(private cdRef: ChangeDetectorRef) {}
 

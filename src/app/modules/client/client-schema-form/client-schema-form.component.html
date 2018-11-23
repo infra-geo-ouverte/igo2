@@ -1,4 +1,6 @@
 <div *ngIf="schema">
-  Hello i'm a form
-  <p>{{schema.id}}</p>
+  <fadq-entity-form
+    [entity]="schema"
+    [model]="model">
+  </fadq-entity-form>
 </div>

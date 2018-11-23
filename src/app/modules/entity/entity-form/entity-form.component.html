@@ -1,0 +1,35 @@
+
+<form
+  *ngIf="form !== undefined"
+  class="igo-form"
+  [formGroup]="form"
+  (ngSubmit)="handleSubmit(form.value)">
+
+  <mat-grid-list cols="2" rowHeight="60px">
+    <ng-container *ngFor="let field of model.fields">
+      <ng-container *ngIf="getFieldControl(field) as control">
+        <mat-grid-tile [colspan]="getFieldColSpan(field)">
+          <mat-form-field>
+            <input
+              matInput
+              [placeholder]="field.title"
+              [formControl]="control">
+          </mat-form-field>
+        </mat-grid-tile>
+      </ng-container>
+    </ng-container>
+  </mat-grid-list>
+
+  <div class="fadq-entity-form-button-group">
+    <button mat-button (click)="handleCancel()">
+    {{ cancelLabel }}
+    </button>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!form.valid || disabled">
+      {{ submitLabel }}
+    </button>
+  </div>
+</form>

@@ -48,3 +48,16 @@ export interface EntitySortClause {
   property: string;
   direction: string;
 }
+
+export interface EntityFormModel {
+  fields: EntityFormField[];
+  submitLabel?: string;
+  cancelLabel?: string;
+}
+
+export interface EntityFormField {
+  name: string;
+  title: string;
+  visible?: boolean;
+  cols?: number;
+}
