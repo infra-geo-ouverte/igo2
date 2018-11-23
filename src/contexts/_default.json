@@ -157,7 +157,7 @@
               "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/2",
               "resultsProperty": "lstZonageCollectif",
               "idProperty": "idZonageCollectif",
-              "title": "${noZone}-${noZonage}"
+              "title": "${regionZonage}-${noZone}"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/2/${id}"
@@ -169,7 +169,7 @@
               "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/1",
               "resultsProperty": "lstZonageCollectif",
               "idProperty": "idZonageCollectif",
-              "title": "${noZone}-${noZonage}"
+              "title": "${regionZonage}-${noZone}"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/1/${id}"
