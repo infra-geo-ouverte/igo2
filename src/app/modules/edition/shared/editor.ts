@@ -85,11 +85,11 @@ export class Editor extends EntityClass {
   init() {
     this.activeWidget$$ = this.widgetStore
       .observeFirstBy((widget: Widget, state: State) => state.active === true)
-      .subscribe((widget: Widget) => this.activateWidget(widget));
+      .subscribe((widget: Widget) => this.onActivateWidget(widget));
 
     this.selectedEntity$$ = this.entityStore
       .observeFirstBy((entity: Entity, state: State) => state.selected === true)
-      .subscribe((entity: Entity) => this.selectEntity(entity));
+      .subscribe((entity: Entity) => this.onSelectEntity(entity));
   }
 
   destroy() {
@@ -101,11 +101,11 @@ export class Editor extends EntityClass {
     return Object.assign({}, {entity: this.entity});
   }
 
-  protected activateWidget(widget: Widget) {
+  protected onActivateWidget(widget: Widget) {
     this.widget$.next(widget);
   }
 
-  protected selectEntity(entity: Entity) {
+  protected onSelectEntity(entity: Entity) {
     this.entity$.next(entity);
   }
 

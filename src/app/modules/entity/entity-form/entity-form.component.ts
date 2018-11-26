@@ -40,12 +40,12 @@ export class EntityFormComponent implements OnChanges {
   }
   private _model: EntityFormModel;
 
-  @Output() submited = new EventEmitter<{
+  @Output() submitForm = new EventEmitter<{
     entity: Entity;
     data: { [key: string]: any };
   }>();
 
-  @Output() canceled = new EventEmitter();
+  @Output() cancel = new EventEmitter();
 
   get submitLabel(): string {
     return this.model.submitLabel ? this.model.submitLabel : 'OK';
@@ -73,17 +73,12 @@ export class EntityFormComponent implements OnChanges {
     this.cdRef.detectChanges();
   }
 
-<<<<<<< HEAD
   onSubmit(data: { [key: string]: any}) {
-    this.submited.emit({entity: this.entity, data});
-=======
-  handleSubmit(data: { [key: string]: any }) {
-    this.post.emit({entity: this.entity, data});
->>>>>>> (wip) editor can subscribe to and emit events
+    this.submitForm.emit({entity: this.entity, data});
   }
 
   onCancelButtonClick() {
-    this.canceled.emit();
+    this.cancel.emit();
   }
 
   getFieldControl(field: EntityFormField): FormControl {

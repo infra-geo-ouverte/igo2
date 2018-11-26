@@ -7,7 +7,7 @@
     [withTitle]="false"
     [withIcon]="true"
     [widget]="toggleWidget"
-    (activated)="onToggle()">
+    (activate)="onToggle()">
   </fadq-widgetbar-item>
 
   <ng-template
@@ -19,7 +19,7 @@
       [withTitle]="withTitle"
       [withIcon]="withIcon"
       [widget]="widget"
-      (activated)="onWidgetActivated(widget)">
+      (activate)="onActivateWidget(widget)">
     </fadq-widgetbar-item>
   </ng-template>
 </mat-list>
@@ -47,7 +47,7 @@
           [withTitle]="withTitle"
           [withIcon]="withIcon"
           [widget]="widget"
-          (activated)="onWidgetActivated(widget)">
+          (activate)="onActivateWidget(widget)">
         </fadq-widgetbar-item>
       </ng-template>
     </mat-list>

@@ -67,8 +67,12 @@ export class ClientSchemaFormComponent {
 
   constructor(private cdRef: ChangeDetectorRef) {}
 
-  handlePost(schema: ClientSchema, data: { [key: string]: any }) {
+  onSubmit(event: {entity: ClientSchema, data: { [key: string]: any }}) {
     this.complete.emit();
+  }
+
+  onCancel() {
+    console.log('cancel');
   }
 
 }

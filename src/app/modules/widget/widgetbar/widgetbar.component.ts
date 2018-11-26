@@ -118,7 +118,7 @@ export class WidgetbarComponent implements OnInit, OnDestroy {
   }
   private _overlayClass = '';
 
-  @Output() widgetActivated = new EventEmitter<Widget>();
+  @Output() activateWidget = new EventEmitter<Widget>();
 
   @HostBinding('class.with-title')
   get withTitleClass() {
@@ -159,9 +159,9 @@ export class WidgetbarComponent implements OnInit, OnDestroy {
     };
   }
 
-  onWidgetActivated(widget: Widget) {
+  onActivateWidget(widget: Widget) {
     this.controller.updateEntityState(widget, {active: true}, true);
-    this.widgetActivated.emit(widget);
+    this.activateWidget.emit(widget);
   }
 
   onToggle() {

@@ -47,7 +47,7 @@ export class MapWidgetbarComponent {
     this.store.setEntities(MAP_DEFAULT_WIDGETS);
   }
 
-  onWidgetActivated(widget: Widget) {
+  onActivateWidget(widget: Widget) {
     const widgetId = getEntityId(widget);
     switch (widgetId) {
       case MapWidget.ZoomIn: {
