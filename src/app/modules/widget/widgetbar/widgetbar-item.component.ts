@@ -36,7 +36,7 @@ export class WidgetbarItemComponent {
   }
   private _withIcon = true;
 
-  @Output() activate: EventEmitter<Widget> = new EventEmitter();
+  @Output() activated: EventEmitter<Widget> = new EventEmitter();
 
   get title(): string {
     return getEntityTitle(this.widget);
@@ -55,4 +55,8 @@ export class WidgetbarItemComponent {
   }
 
   constructor() {}
+
+  onClick() {
+    this.activated.emit(this.widget);
+  }
 }

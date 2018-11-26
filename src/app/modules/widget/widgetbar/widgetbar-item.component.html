@@ -1,8 +1,7 @@
 <mat-list-item
   matTooltipClass="widgetbarItemTooltip"
-  matTooltipShowDelay="500"
   [matTooltip]="tooltip | translate"
-  (click)="activate.emit(widget)">
+  (click)="onClick()">
   <button mat-list-avatar mat-icon-button>
     <mat-icon *ngIf="withIcon && !image">{{icon}}</mat-icon>
     <img *ngIf="withIcon && image" [src]="image">

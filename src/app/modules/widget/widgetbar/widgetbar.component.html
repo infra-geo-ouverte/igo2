@@ -7,7 +7,7 @@
     [withTitle]="false"
     [withIcon]="true"
     [widget]="toggleWidget"
-    (activate)="toggleWidgetbar()">
+    (activated)="onToggle()">
   </fadq-widgetbar-item>
 
   <ng-template
@@ -19,7 +19,7 @@
       [withTitle]="withTitle"
       [withIcon]="withIcon"
       [widget]="widget"
-      (activate)="activateWidget(widget)">
+      (activated)="onWidgetActivated(widget)">
     </fadq-widgetbar-item>
   </ng-template>
 </mat-list>
@@ -27,9 +27,7 @@
 <div *ngIf="collapsed">
   <button
     mat-icon-button
-    [matMenuTriggerFor]="widgetbarMenu"
-    (menuOpened)="open.emit()"
-    (menuClosed)="close.emit()">
+    [matMenuTriggerFor]="widgetbarMenu">
     <mat-icon>more_horiz</mat-icon>
   </button>
 
@@ -49,7 +47,7 @@
           [withTitle]="withTitle"
           [withIcon]="withIcon"
           [widget]="widget"
-          (activate)="activateWidget(widget)">
+          (activated)="onWidgetActivated(widget)">
         </fadq-widgetbar-item>
       </ng-template>
     </mat-list>
