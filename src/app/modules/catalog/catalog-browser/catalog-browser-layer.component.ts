@@ -36,23 +36,25 @@ export class CatalogBrowserLayerComponent {
     return getEntityIcon(this.layer) || 'layers';
   }
 
-  @Output() add = new EventEmitter<CatalogItemLayer>();
-  @Output() remove = new EventEmitter<CatalogItemLayer>();
+  @Output() addedChange = new EventEmitter<{
+    added: boolean;
+    layer: CatalogItemLayer;
+  }>();
 
   constructor() {}
 
-  handleToggle() {
-    this.added ? this.doRemove() : this.doAdd();
+  onToggleButtonClicked() {
+    this.added ? this.remove() : this.add();
   }
 
-  private doAdd() {
+  private add() {
     this.added = true;
-    this.add.emit(this.layer);
+    this.addedChange.emit({added: true, layer: this.layer});
   }
 
-  private doRemove() {
+  private remove() {
     this.added = false;
-    this.remove.emit(this.layer);
+    this.addedChange.emit({added: false, layer: this.layer});
   }
 
 }

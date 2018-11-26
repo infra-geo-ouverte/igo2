@@ -5,26 +5,17 @@
     igoCollapse
     class="igo-chevron"
     [target]="items"
-    [collapsed]="collapsed"
-    (toggle)="toggleCollapsed($event)">
+    [collapsed]="true">
   </mat-icon>
 
-  <h4
-    matLine
-    [matTooltip]="title"
-    matTooltipShowDelay="500">
-    {{title}}
-  </h4>
+  <h4 matLine [matTooltip]="title">{{title}}</h4>
 
   <button
     mat-icon-button
     tooltip-position="below"
-    matTooltipShowDelay="500"
-    [matTooltip]="added ?
-                  ('catalog.group.removeFromMap' | translate) :
-                  ('catalog.group.addToMap' | translate)"
+    [matTooltip]="(added ? 'catalog.group.removeFromMap'  : 'catalog.group.addToMap') | translate"
     [color]="added ? 'warn' : ''"
-    (click)="handleToggle()">
+    (click)="onToggleButtonClicked()">
     <mat-icon>
       <ng-container *ngIf="added">delete</ng-container>
       <ng-container *ngIf="!added">add</ng-container>
@@ -35,17 +26,13 @@
 <div #items>
   <ng-template ngFor let-item [ngForOf]="store.observable | async">
     <ng-container *ngIf="isGroup(item)"></ng-container>
-
     <ng-container *ngIf="isLayer(item)">
       <fadq-catalog-browser-layer
         igoListItem
         [layer]="item"
         [added]="store.getEntityState(item).added"
         [disabled]="store.getEntityState(item).added"
-        [selected]="store.getEntityState(item).selected"
-        (select)="layerSelect.emit(item)"
-        (add)="handleAddLayer(item)"
-        (remove)="handleRemoveLayer(item)">
+        (addedChange)="onLayerAddedChange($event)">
       </fadq-catalog-browser-layer>
     </ng-container>
   </ng-template>

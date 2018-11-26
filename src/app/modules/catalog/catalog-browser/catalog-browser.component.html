@@ -5,11 +5,8 @@
         [group]="item"
         [state]="store.state"
         [added]="store.getEntityState(item).added"
-        (layerSelect)="selectLayer($event)"
-        (layerAdd)="addLayer($event)"
-        (layerRemove)="removeLayer($event)"
-        (add)="addGroup($event.group, $event.items)"
-        (remove)="removeGroup($event.group, $event.items)">
+        (addedChange)="onGroupAddedChange($event)"
+        (layerAddedChange)="onLayerAddedChange($event)">
       </fadq-catalog-browser-group>
     </ng-container>
 
@@ -19,12 +16,8 @@
         [layer]="item"
         [added]="store.getEntityState(item).added"
         [disabled]="store.getEntityState(item).added"
-        [selected]="store.getEntityState(item).selected"
-        (select)="selectLayer(item)"
-        (add)="addLayer($event)"
-        (remove)="removeLayer($event)">
+        (addedChange)="onLayerAddedChange($event)">
       </fadq-catalog-browser-layer>
     </ng-container>
   </ng-template>
-
 </igo-list>

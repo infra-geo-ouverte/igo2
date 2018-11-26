@@ -1,8 +1,6 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnInit,
@@ -52,10 +50,6 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   }
   private _map;
 
-  @Output() layerSelect = new EventEmitter<CatalogItemLayer>();
-  @Output() layerAdd = new EventEmitter<CatalogItemLayer>();
-  @Output() layerRemove = new EventEmitter<CatalogItemLayer>();
-
   constructor(
     private layerService: LayerService,
     private cdRef: ChangeDetectorRef
@@ -82,71 +76,60 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     return item.type === CatalogItemType.Layer;
   }
 
-  selectLayer(layer: CatalogItemLayer) {
-    this.controller.updateEntityState(layer, {
-      selected: true,
-      focused: true,
-    }, true);
-
-    this.layerSelect.emit(layer);
+  onLayerAddedChange(event: {added: boolean, layer: CatalogItemLayer}) {
+    const layer = event.layer;
+    this.controller.updateEntityState(layer, {added: event.added}, false);
+    event.added ? this.addLayerToMap(layer) : this.removeLayerFromMap(layer);
   }
 
-  addLayer(layer: CatalogItemLayer) {
-    this.controller.updateEntityState(layer, {added: true}, false);
-    this.addLayerToMap(layer);
-  }
-
-  removeLayer(layer: CatalogItemLayer) {
-    this.controller.updateEntityState(layer, {added: false}, false);
-    this.removeLayerFromMap(layer);
-  }
-
-  addGroup(group: CatalogItemGroup, items: CatalogItemLayer[]) {
-    this.controller.updateEntityState(group, {added: true}, false);
-    const layers = items.filter((item: CatalogItem) => {
-      const added = this.store.getEntityState(item).added || false;
-      return this.isLayer(item) && added === false;
-    });
-    this.addLayersToMap(layers);
-  }
-
-  removeGroup(group: CatalogItemGroup, items: CatalogItemLayer[]) {
-    this.controller.updateEntityState(group, {added: false}, false);
-    const layers = items.filter((item: CatalogItem) => {
-      const added = this.store.getEntityState(item).added || false;
-      return this.isLayer(item) && added === true;
-      });
-    this.removeLayersFromMap(layers);
+  onGroupAddedChange(event: {added: boolean, group: CatalogItemGroup}) {
+    const group = event.group;
+    this.controller.updateEntityState(group, {added: event.added}, false);
+    event.added ? this.addGroupToMap(group) : this.removeGroupFromMap(group);
   }
 
   private addLayerToMap(layer: CatalogItemLayer) {
-    this.layerService.createAsyncLayer(layer.options)
-      .subscribe((oLayer: Layer) => this.map.addLayer(oLayer));
+    this.addLayersToMap([layer]);
   }
 
   private removeLayerFromMap(layer: CatalogItemLayer) {
-    const oLayer = this.map.getLayerById(getEntityId(layer));
-    if (oLayer !== undefined) {
-      this.map.removeLayer(oLayer);
-    }
+    this.removeLayersFromMap([layer]);
   }
 
   private addLayersToMap(layers: CatalogItemLayer[]) {
-    const layers$ = [];
-    layers.forEach((layer: CatalogItemLayer) => {
-      this.controller.updateEntityState(layer, {added: true}, false);
-      layers$.push(this.layerService.createAsyncLayer(layer.options));
+    const layers$ = layers.map((layer: CatalogItemLayer) => {
+      return this.layerService.createAsyncLayer(layer.options);
     });
 
     zip(...layers$).subscribe((oLayers: Layer[]) => {
+      this.controller.updateEntitiesState(layers, {added: true});
       this.map.addLayers(oLayers);
     });
   }
 
   private removeLayersFromMap(layers: CatalogItemLayer[]) {
     layers.forEach((layer: CatalogItemLayer) => {
-      this.controller.updateEntityState(layer, {added: false}, false);
-      this.removeLayerFromMap(layer);
+      this.controller.updateEntityState(layer, {added: false});
+      const oLayer = this.map.getLayerById(getEntityId(layer));
+      if (oLayer !== undefined) {
+        this.map.removeLayer(oLayer);
+      }
     });
+  }
+
+  private addGroupToMap(group: CatalogItemGroup) {
+    const layers = group.items.filter((item: CatalogItem) => {
+      const added = this.store.getEntityState(item).added || false;
+      return this.isLayer(item) && added === false;
+    });
+    this.addLayersToMap(layers as CatalogItemLayer[]);
+  }
+
+  private removeGroupFromMap(group: CatalogItemGroup) {
+    const layers = group.items.filter((item: CatalogItem) => {
+      const added = this.store.getEntityState(item).added || false;
+      return this.isLayer(item) && added === true;
+    });
+    this.removeLayersFromMap(layers as CatalogItemLayer[]);
   }
 }

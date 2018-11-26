@@ -42,8 +42,10 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
   }
   private _map;
 
-  @Output() select = new EventEmitter<Catalog>();
-  @Output() unselect = new EventEmitter<Catalog>();
+  @Output() catalogSelectedChange = new EventEmitter<{
+    selected: boolean;
+    catalog: Catalog;
+  }>();
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
@@ -59,12 +61,20 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  selectCatalog(catalog: Catalog) {
+  onCatalogSelected(catalog: Catalog) {
     this.controller.updateEntityState(catalog, {
       selected: true,
       focused: true
     }, true);
-    this.select.emit(catalog);
+    this.catalogSelectedChange.emit({selected: true, catalog});
+  }
+
+  onCatalogUnselected(catalog: Catalog) {
+    this.controller.updateEntityState(catalog, {
+      selected: false,
+      focused: false
+    }, true);
+    this.catalogSelectedChange.emit({selected: false, catalog});
   }
 
 }

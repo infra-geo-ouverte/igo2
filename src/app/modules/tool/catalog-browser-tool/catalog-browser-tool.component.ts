@@ -24,7 +24,6 @@ import { CatalogStoreService } from '../../catalog/shared/catalog-store.service'
 export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
 
   public store: EntityStore<CatalogItem>;
-  public storeIsReady = false;
 
   private catalog$$: Subscription;
 
@@ -42,9 +41,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
     const catalogStore = this.catalogStoreService.getCatalogStore();
 
     this.catalog$$ = catalogStore
-      .observeFirstBy((catalog: Catalog, state: State) => {
-        return state.selected === true;
-      })
+      .observeFirstBy((catalog: Catalog, state: State) => state.selected === true)
       .subscribe((catalog: Catalog) => this.loadCatalogItems(catalog));
   }
 
@@ -56,14 +53,11 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
     const store = this.catalogStoreService.getCatalogItemsStore(catalog);
     if (store !== undefined) {
       this.store = store;
-      this.storeIsReady = true;
       return;
     }
 
     this.store = new EntityStore<CatalogItem>();
     this.catalogStoreService.setCatalogItemsStore(catalog, this.store);
-    this.storeIsReady = true;
-
     this.catalogService.loadCatalogItems(catalog)
       .subscribe((items: CatalogItem[]) => this.store.setEntities(items, true));
   }

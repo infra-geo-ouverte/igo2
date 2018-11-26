@@ -4,8 +4,8 @@
         igoListItem
         [map]="map"
         [catalog]="catalog"
-        (select)="selectCatalog(catalog)"
-        (unselect)="unselect.emit(catalog)">
+        (select)="onCatalogSelected(catalog)"
+        (unselect)="onCatalogUnselected(catalog)">
       </fadq-catalog-library-item>
     </ng-template>
 </igo-list>

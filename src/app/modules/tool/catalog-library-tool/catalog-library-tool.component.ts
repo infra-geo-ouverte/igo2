@@ -36,7 +36,10 @@ export class CatalogLibraryToolComponent implements OnInit {
     }
   }
 
-  selectCatalog(catalog: Catalog) {
+  onCatalogSelectedChange(event: {selected: boolean; catalog: Catalog}) {
+    if (event.selected === false) {
+      return;
+    }
     const tool = this.toolService.getTool('catalogBrowser');
     if (tool) {
       this.toolService.selectTool(tool);

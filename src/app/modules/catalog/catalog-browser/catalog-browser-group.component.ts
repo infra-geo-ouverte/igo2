@@ -33,7 +33,6 @@ export interface CatalogBrowserGroupEvent {
 })
 export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
 
-  public collapsed = true;
   public store: EntityStore<CatalogItem, CatalogItemState>;
 
   private controller: EntityStoreController;
@@ -65,12 +64,15 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
   }
   private _added: boolean;
 
-  @Output() layerSelect = new EventEmitter<CatalogItemLayer>();
-  @Output() layerUnselect = new EventEmitter<CatalogItemLayer>();
-  @Output() layerAdd = new EventEmitter<CatalogItemLayer>();
-  @Output() layerRemove = new EventEmitter<CatalogItemLayer>();
-  @Output() add = new EventEmitter<CatalogBrowserGroupEvent>();
-  @Output() remove = new EventEmitter<CatalogBrowserGroupEvent>();
+  @Output() addedChange = new EventEmitter<{
+    added: boolean;
+    group: CatalogItemGroup;
+  }>();
+
+  @Output() layerAddedChange = new EventEmitter<{
+    added: boolean;
+    layer: CatalogItemLayer;
+  }>();
 
   get title(): string {
     return getEntityTitle(this.group);
@@ -82,7 +84,7 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store = new EntityStore(this.state);
+    this.store = new EntityStore<CatalogItem, CatalogItemState>(this.state);
     this.store.setEntities(this.group.items, true);
     this.controller.bind(this.store);
   }
@@ -99,52 +101,40 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     return item.type === CatalogItemType.Layer;
   }
 
-  toggleCollapsed(collapsed: boolean) {
-    if (collapsed === undefined) {
-      return;
-    }
-    this.collapsed = collapsed;
+  onToggleButtonClicked() {
+    this.added ? this.remove() : this.add();
   }
 
-  handleToggle() {
-    this.added ? this.doRemove() : this.doAdd();
+  onLayerAddedChange(event: {added: boolean, layer: CatalogItemLayer}) {
+    this.layerAddedChange.emit(event);
+    this.tryToggleGroup(event.layer, event.added);
   }
 
-  handleAddLayer(layer: CatalogItemLayer) {
-    this.layerAdd.emit(layer);
-    this.tryToggleGroup(layer, true);
-  }
-
-  handleRemoveLayer(layer: CatalogItemLayer) {
-    this.layerRemove.emit(layer);
-    this.tryToggleGroup(layer, false);
-  }
-
-  private doAdd() {
+  private add() {
     this.added = true;
-    this.add.emit({
-      group: this.group,
-      items: this.store.entities
+    this.addedChange.emit({
+      added: true,
+      group: this.group
     });
   }
 
-  private doRemove() {
+  private remove() {
     this.added = false;
-    this.remove.emit({
-      group: this.group,
-      items: this.store.entities
+    this.addedChange.emit({
+      added: false,
+      group: this.group
     });
   }
 
-  private tryToggleGroup(layer: CatalogItemLayer, added) {
+  private tryToggleGroup(layer: CatalogItemLayer, add: boolean) {
     const layersAdded = this.store.entities
       .filter((item: CatalogItem) => getEntityId(item) !== getEntityId(layer))
       .map((item: CatalogItem) => {
         return this.store.getEntityState(item).added || false;
       });
 
-    if (layersAdded.every((value) => value === added)) {
-      added ? this.doAdd() : this.doRemove();
+    if (layersAdded.every((value) => value === add)) {
+      add ? this.add() : this.remove();
     }
   }
 
