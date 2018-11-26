@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { IgoMap } from '../../map/shared/map';
 import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
@@ -6,7 +6,8 @@ import { Catalog } from '../shared/catalog.interface';
 
 @Component({
   selector: 'fadq-catalog-library-item',
-  templateUrl: './catalog-library-item.component.html'
+  templateUrl: './catalog-library-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CatalogLibaryItemComponent {
 

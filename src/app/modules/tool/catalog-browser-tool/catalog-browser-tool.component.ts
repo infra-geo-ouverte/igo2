@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -19,7 +24,8 @@ import { CatalogStoreService } from '../../catalog/shared/catalog-store.service'
 })
 @Component({
   selector: 'fadq-catalog-browser-tool',
-  templateUrl: './catalog-browser-tool.component.html'
+  templateUrl: './catalog-browser-tool.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
 

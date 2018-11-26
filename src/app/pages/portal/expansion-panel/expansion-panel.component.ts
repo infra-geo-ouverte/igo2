@@ -3,13 +3,15 @@ import {
   Input,
   Output,
   EventEmitter,
-  HostBinding
+  HostBinding,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
   selector: 'fadq-expansion-panel',
   templateUrl: './expansion-panel.component.html',
-  styleUrls: ['./expansion-panel.component.scss']
+  styleUrls: ['./expansion-panel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpansionPanelComponent {
 

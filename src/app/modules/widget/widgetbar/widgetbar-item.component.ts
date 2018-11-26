@@ -1,11 +1,18 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
 import { Widget } from '../shared/widget.interface';
 
 @Component({
   selector: 'fadq-widgetbar-item',
-  templateUrl: './widgetbar-item.component.html'
+  templateUrl: './widgetbar-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetbarItemComponent {
 

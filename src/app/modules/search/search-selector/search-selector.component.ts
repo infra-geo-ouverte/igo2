@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { SEARCHES } from '../shared/search.enum';
 import { SearchSourceService } from '../shared/search-source.service';
@@ -7,7 +7,8 @@ import { SearchSourceService } from '../shared/search-source.service';
 @Component({
   selector: 'fadq-search-selector',
   templateUrl: './search-selector.component.html',
-  styleUrls: ['./search-selector.component.scss']
+  styleUrls: ['./search-selector.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchSelectorComponent implements OnInit {
 

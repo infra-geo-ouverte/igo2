@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { Register } from '@igo2/context';
 
@@ -9,7 +9,8 @@ import { Register } from '@igo2/context';
 })
 @Component({
   selector: 'fadq-address-editor-tool',
-  templateUrl: './address-editor-tool.component.html'
+  templateUrl: './address-editor-tool.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddressEditorToolComponent {
   constructor() {}

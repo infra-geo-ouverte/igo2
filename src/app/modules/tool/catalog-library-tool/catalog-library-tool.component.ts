@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Register } from '@igo2/context';
 
@@ -16,7 +16,8 @@ import { CatalogStoreService } from '../../catalog/shared/catalog-store.service'
 })
 @Component({
   selector: 'fadq-catalog-library-tool',
-  templateUrl: './catalog-library-tool.component.html'
+  templateUrl: './catalog-library-tool.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CatalogLibraryToolComponent implements OnInit {
 

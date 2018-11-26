@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { Register } from '@igo2/context';
 import { LayerService, LayerOptions } from '@igo2/geo';
@@ -20,7 +20,8 @@ import { SearchStoreService } from '../../search/shared/search-store.service';
 })
 @Component({
   selector: 'fadq-search-results-tool',
-  templateUrl: './search-results-tool.component.html'
+  templateUrl: './search-results-tool.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchResultsToolComponent {
 

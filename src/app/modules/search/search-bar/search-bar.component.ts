@@ -17,7 +17,6 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { EntityStore } from '../../entity/shared/store';
 import { SearchResult, Research } from '../shared/search.interface';
-import { SearchSource } from '../shared/sources/source';
 import { SearchService } from '../shared/search.service';
 
 export interface SearchEvent {

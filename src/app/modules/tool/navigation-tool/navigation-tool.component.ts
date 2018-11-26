@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { Poi, Register } from '@igo2/context';
 
@@ -15,7 +15,8 @@ import { NavigationToolOptions } from './navigation-tool.interface';
 @Component({
   selector: 'fadq-navigation-tool',
   templateUrl: './navigation-tool.component.html',
-  styleUrls: ['./navigation-tool.component.scss']
+  styleUrls: ['./navigation-tool.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationToolComponent {
 

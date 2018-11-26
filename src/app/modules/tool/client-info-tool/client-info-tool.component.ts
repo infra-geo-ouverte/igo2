@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { Register } from '@igo2/context';
 
@@ -16,6 +16,7 @@ import { ClientStoreService } from '../../client/shared/client-store.service';
   selector: 'fadq-client-info-tool',
   templateUrl: './client-info-tool.component.html',
   styleUrls: ['./client-info-tool.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class  ClientInfoToolComponent {
 

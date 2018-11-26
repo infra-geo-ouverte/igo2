@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Media, MediaOrientation, MediaService } from '@igo2/core';
 
@@ -11,7 +11,8 @@ import { IgoMap } from '../../map/shared/map';
 @Component({
   selector: 'fadq-map-widgetbar',
   templateUrl: './map-widgetbar.component.html',
-  styleUrls: ['./map-widgetbar.component.scss']
+  styleUrls: ['./map-widgetbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapWidgetbarComponent {
 
