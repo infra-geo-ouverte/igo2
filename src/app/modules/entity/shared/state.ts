@@ -35,18 +35,15 @@ export class EntityState<S extends { [key: string]: boolean } = State> {
   }
 
   updateByKey(key: string, changes: { [key: string]: boolean }, exclusive = false) {
-    if (exclusive === true) {
-      const otherChanges = {};
-      Object.entries(changes).forEach(([changeKey, value]) => {
-        otherChanges[changeKey] = !value;
-      });
-      this.updateAll(otherChanges);
-    }
-
-    this.updateByKeys([key], changes);
+    this.updateByKeys([key], changes, exclusive);
   }
 
-  updateByKeys(keys: string[], changes: { [key: string]: boolean }) {
+  updateByKeys(keys: string[], changes: { [key: string]: boolean }, exclusive = false) {
+    if (exclusive === true) {
+      this.updateByKeysExclusive(keys, changes);
+      return;
+    }
+
     const states = new Map(this.states$.value);
     keys.forEach((key: string) => {
       const state = this.getByKey(key);
@@ -61,5 +58,25 @@ export class EntityState<S extends { [key: string]: boolean } = State> {
 
   reset() {
     this.states$.next(new Map());
+  }
+
+  private updateByKeysExclusive(keys: string[], changes: { [key: string]: boolean }) {
+    const otherChanges = {};
+    Object.entries(changes).forEach(([changeKey, value]) => {
+      otherChanges[changeKey] = !value;
+    });
+
+    const states = new Map();
+    const allKeys = new Set(keys.concat(Array.from(this.value.keys())));
+    allKeys.forEach((key: string) => {
+      const state = this.getByKey(key);
+      if (states && keys.indexOf(key) >= 0) {
+        states.set(key, Object.assign(state, changes));
+      } else {
+        states.set(key, Object.assign(state, otherChanges));
+      }
+    });
+
+    this.states$.next(states);
   }
 }

@@ -88,7 +88,6 @@ export class EntityStoreController {
 
   private handleStateChanges(state: Map<string, State>) {
     let detectChanges = false;
-
     Array.from(state.keys()).forEach((id: string) => {
       const storeState = state.get(id);
       const innerState = this.innerState.get(id);
@@ -97,7 +96,7 @@ export class EntityStoreController {
       } else if (this.cdRef !== undefined && detectChanges === false) {
         detectChanges = !isEquivalent(storeState, innerState);
       }
-      this.innerState.set(id, storeState);
+      this.innerState.set(id, Object.assign({}, storeState));
     });
 
     if (detectChanges !== false) {
