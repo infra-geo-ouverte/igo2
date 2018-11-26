@@ -38,11 +38,11 @@ export class SearchResultsToolComponent {
     private searchStoreService: SearchStoreService
   ) {}
 
-  handleResultFocus(result: SearchResult) {
+  onResultFocused(result: SearchResult) {
     this.tryAddFeatureToMap(result);
   }
 
-  handleResultSelect(result: SearchResult) {
+  onResultSelected(result: SearchResult) {
     this.tryAddFeatureToMap(result);
     this.tryAddLayerToMap(result);
   }

@@ -9,11 +9,9 @@ import {
   OnDestroy
 } from '@angular/core';
 
-
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
 import { SearchResult } from '../shared/search.interface';
-import { SearchSource } from '../shared/sources/source';
 
 export enum DisplayMode {
   Grouped = 'grouped',
@@ -49,10 +47,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
   private _mode: DisplayMode = DisplayMode.Grouped;
 
-  @Output() focus = new EventEmitter<SearchResult>();
-  @Output() select = new EventEmitter<SearchResult>();
-  @Output() unfocus = new EventEmitter<SearchResult>();
-  @Output() unselect = new EventEmitter<SearchResult>();
+  @Output() resultFocused = new EventEmitter<SearchResult>();
+  @Output() resultSelected = new EventEmitter<SearchResult>();
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
@@ -71,17 +67,17 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return (result1.source.displayOrder - result2.source.displayOrder);
   }
 
-  focusResult(result: SearchResult) {
+  onResultFocused(result: SearchResult) {
     this.controller.updateEntityState(result, {focused: true}, true);
-    this.focus.emit(result);
+    this.resultFocused.emit(result);
   }
 
-  selectResult(result: SearchResult) {
+  onResultSelected(result: SearchResult) {
     this.controller.updateEntityState(result, {
       focused: true,
       selected: true
     }, true);
-    this.select.emit(result);
+    this.resultSelected.emit(result);
   }
 
 }

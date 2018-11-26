@@ -1,5 +1,5 @@
 <fadq-search-results
   [store]="store"
-  (focus)="handleResultFocus($event)"
-  (select)="handleResultSelect($event)">
+  (resultFocused)="onResultFocused($event)"
+  (resultSelected)="onResultSelected($event)">
 </fadq-search-results>

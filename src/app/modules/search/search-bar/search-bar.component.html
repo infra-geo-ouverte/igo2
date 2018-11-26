@@ -9,8 +9,8 @@
         [disabled]="disabled"
         [placeholder]="placeholder"
         [ngModel]="term"
-        (keyup)="keyup($event)"
-        (touchend)="keyup($event)">
+        (keyup)="onKeyup($event)"
+        (touchend)="onKeyup($event)">
     </mat-form-field>
 
     <div class="search-bar-buttons">
@@ -24,7 +24,7 @@
       <button
         mat-icon-button
         [color]="color"
-        (click)="clear()"
+        (click)="onClearButtonClicked()"
         *ngIf="term.length > 0">
         <mat-icon>clear</mat-icon>
       </button>

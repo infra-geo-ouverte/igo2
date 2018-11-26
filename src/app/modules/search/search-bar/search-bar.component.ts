@@ -138,7 +138,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.stream$$.unsubscribe();
   }
 
-  keyup(event: KeyboardEvent) {
+  onKeyup(event: KeyboardEvent) {
     const key = (event.target as HTMLInputElement).value;
     if (!this.keyIsValid(key)) {
       return;
@@ -146,7 +146,11 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.setTerm(key);
   }
 
-  setTerm(term: string) {
+  onClearButtonClicked() {
+    this.clear();
+  }
+
+  private setTerm(term: string) {
     if (this.disabled) {
       return;
     }
@@ -157,7 +161,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     }
   }
 
-  clear() {
+  private clear() {
     this.term = '';
     this.stream$.next(this.term);
     this.input.nativeElement.focus();
