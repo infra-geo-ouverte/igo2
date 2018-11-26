@@ -39,7 +39,10 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
   }
   private _store;
 
-  @Output() select = new EventEmitter<Editor>();
+  @Output() selectedChange = new EventEmitter<{
+    selected: boolean;
+    editor: Editor;
+  }>();
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
@@ -50,7 +53,7 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
     this.controller.bind(this.store);
     this.editor$$ = this.store
       .observeFirstBy((editor: Editor, state: State) => state.selected === true)
-      .subscribe((editor: Editor) => this.handleEditorSelect(editor));
+      .subscribe((editor: Editor) => this.initEditor(editor));
   }
 
   ngOnDestroy() {
@@ -62,12 +65,13 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
     return getEntityTitle(editor);
   }
 
-  selectEditor(editor: Editor) {
+  onSelectionChanged(event: {value: Editor}) {
+    const editor = event.value;
     this.controller.updateEntityState(editor, {selected: true}, true);
-    this.select.emit(editor);
+    this.selectedChange.emit({selected: true, editor});
   }
 
-  private handleEditorSelect(editor: Editor) {
+  private initEditor(editor: Editor) {
     if (this.editor !== undefined) {
       this.editor.destroy();
     }
