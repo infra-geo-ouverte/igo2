@@ -2,7 +2,7 @@
 
   <igo-backdrop
     [shown]="backdropShown"
-    (click)="onBackdropClicked()">
+    (click)="onBackdropClick()">
   </igo-backdrop>
 
   <button
@@ -12,7 +12,7 @@
     color="primary"
     tooltip-position="below"
     [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
-    (click)="onToggleSidenavClicked()">
+    (click)="onToggleSidenavClick()">
     <mat-icon>
       <ng-container>menu</ng-container>
     </mat-icon>

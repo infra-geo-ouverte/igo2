@@ -129,22 +129,22 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.mapService.setMap(this.map);
 
     this.context$$ = this.contextService.context$
-      .subscribe((context: DetailedContext) => this.onContextChanged(context));
+      .subscribe((context: DetailedContext) => this.onContextChange(context));
 
     this.searchResults$$ = this.searchStore.observable
-      .subscribe((results: SearchResult[]) => this.onSearchResultsChanged(results));
+      .subscribe((results: SearchResult[]) => this.onSearchResultsChange(results));
 
     this.selectedSearchResult$$ = this.searchStore
       .observeFirstBy((result: SearchResult, state: State) => state.selected === true)
-      .subscribe((result: SearchResult) => this.onSearchResultSelected(result));
+      .subscribe((result: SearchResult) => this.onSearchResultSelect(result));
 
     this.focusedSearchResult$$ = this.searchStore
       .observeFirstBy((result: SearchResult, state: State) => state.focused === true)
-      .subscribe((result: SearchResult) => this.onSearchResultFocused(result));
+      .subscribe((result: SearchResult) => this.onSearchResultFocus(result));
 
     this.selectedEditor$$ = this.editorStore
       .observeFirstBy((editor: Editor, state: State) => state.selected === true)
-      .subscribe((editor: Editor) => this.onEditorSelected(editor));
+      .subscribe((editor: Editor) => this.onEditorSelect(editor));
   }
 
   ngOnDestroy() {
@@ -155,11 +155,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.selectedEditor$$.unsubscribe();
   }
 
-  onBackdropClicked() {
+  onBackdropClick() {
     this.closeSidenav();
   }
 
-  onToggleSidenavClicked() {
+  onToggleSidenavClick() {
     this.toggleSidenav();
   }
 
@@ -186,7 +186,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
   }
 
-  private onContextChanged(context: DetailedContext) {
+  private onContextChange(context: DetailedContext) {
     if (context !== undefined) {
       this.toolService.setTools(context.tools);
 
@@ -198,7 +198,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private onSearchResultsChanged(results: SearchResult[]) {
+  private onSearchResultsChange(results: SearchResult[]) {
     if (results.length === 0) {
       return;
     }
@@ -218,7 +218,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openSidenav();
   }
 
-  private onSearchResultSelected(result: SearchResult) {
+  private onSearchResultSelect(result: SearchResult) {
     if (result === undefined) {
       return;
     }
@@ -229,7 +229,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openToastPanel();
   }
 
-  private onSearchResultFocused(result: SearchResult) {
+  private onSearchResultFocus(result: SearchResult) {
     if (result === undefined) {
       return;
     }
@@ -251,7 +251,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     // this.editorService.selectEditor(schemaEditor);
   }
 
-  private onEditorSelected(editor: Editor) {
+  private onEditorSelect(editor: Editor) {
     this.editor = editor;
   }
 

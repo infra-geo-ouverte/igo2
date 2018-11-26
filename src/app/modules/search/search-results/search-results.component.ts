@@ -47,8 +47,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
   private _mode: DisplayMode = DisplayMode.Grouped;
 
-  @Output() resultFocused = new EventEmitter<SearchResult>();
-  @Output() resultSelected = new EventEmitter<SearchResult>();
+  @Output() resultFocus = new EventEmitter<SearchResult>();
+  @Output() resultSelect = new EventEmitter<SearchResult>();
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
@@ -67,17 +67,17 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     return (result1.source.displayOrder - result2.source.displayOrder);
   }
 
-  onResultFocused(result: SearchResult) {
+  onResultFocus(result: SearchResult) {
     this.controller.updateEntityState(result, {focused: true}, true);
-    this.resultFocused.emit(result);
+    this.resultFocus.emit(result);
   }
 
-  onResultSelected(result: SearchResult) {
+  onResultSelect(result: SearchResult) {
     this.controller.updateEntityState(result, {
       focused: true,
       selected: true
     }, true);
-    this.resultSelected.emit(result);
+    this.resultSelect.emit(result);
   }
 
 }

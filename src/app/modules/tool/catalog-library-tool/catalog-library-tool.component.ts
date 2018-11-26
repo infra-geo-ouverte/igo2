@@ -36,7 +36,7 @@ export class CatalogLibraryToolComponent implements OnInit {
     }
   }
 
-  onCatalogSelectedChange(event: {selected: boolean; catalog: Catalog}) {
+  onCatalogSelectChange(event: {selected: boolean; catalog: Catalog}) {
     if (event.selected === false) {
       return;
     }

@@ -65,7 +65,7 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
     return getEntityTitle(editor);
   }
 
-  onSelectionChanged(event: {value: Editor}) {
+  onSelectionChange(event: {value: Editor}) {
     const editor = event.value;
     this.controller.updateEntityState(editor, {selected: true}, true);
     this.selectedChange.emit({selected: true, editor});

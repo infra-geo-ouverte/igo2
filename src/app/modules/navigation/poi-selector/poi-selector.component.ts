@@ -56,15 +56,15 @@ export class PoiSelectorComponent implements OnInit {
       );
   }
 
-  onPoiSelected(poi: Poi) {
+  onPoiSelect(poi: Poi) {
     this.zoomToPoi(poi);
   }
 
-  onZoomButtonClicked() {
+  onZoomButtonClick() {
     this.zoomToPoi(this.poiControl.value);
   }
 
-  onClearButtonClicked() {
+  onClearButtonClick() {
     this.poiControl.setValue(undefined);
   }
 

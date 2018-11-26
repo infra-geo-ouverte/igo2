@@ -36,7 +36,7 @@ export class SearchSelectorComponent implements OnInit {
     this.enableSearchType(initial);
   }
 
-  onSearchTypeChanged(type: string) {
+  onSearchTypeChange(type: string) {
     this.enableSearchType(type);
   }
 

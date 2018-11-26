@@ -48,7 +48,7 @@ export class EntityTableComponent implements OnInit, OnDestroy {
   }
   private _model: EntityTableModel;
 
-  @Output() entitySelectedChange = new EventEmitter<{
+  @Output() entitySelectChange = new EventEmitter<{
     selected: boolean;
     entity: Entity;
   }>();
@@ -96,7 +96,7 @@ export class EntityTableComponent implements OnInit, OnDestroy {
       focused: true,
       selected: true
     }, true);
-    this.entitySelectedChange.emit({selected: true, entity});
+    this.entitySelectChange.emit({selected: true, entity});
   }
 
   valueAccessor(entity: Entity, column: EntityTableColumn) {

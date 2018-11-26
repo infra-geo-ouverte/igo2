@@ -101,7 +101,7 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     return item.type === CatalogItemType.Layer;
   }
 
-  onToggleClicked() {
+  onToggleClick() {
     this.added ? this.remove() : this.add();
   }
 

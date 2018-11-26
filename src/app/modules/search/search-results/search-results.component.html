@@ -23,8 +23,8 @@
             [result]="result"
             [focused]="store.getEntityState(result).focused"
             [selected]="store.getEntityState(result).selected"
-            (focus)="onResultFocused(result)"
-            (select)="onResultSelected(result)">
+            (focus)="onResultFocus(result)"
+            (select)="onResultSelect(result)">
           </fadq-search-results-item>
         </ng-template>
       </ng-template>

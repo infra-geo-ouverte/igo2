@@ -3,7 +3,7 @@
 <mat-form-field class="fadq-editor-selector">
   <mat-select
     [value]="editor$ | async"
-    (selectionChange)="onSelectionChanged($event)">
+    (selectionChange)="onSelectionChange($event)">
     <ng-template ngFor let-editor [ngForOf]="store.observable | async">
       <mat-option [value]="editor">
         {{getEditorTitle(editor)}}

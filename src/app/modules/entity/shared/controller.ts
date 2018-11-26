@@ -67,11 +67,11 @@ export class EntityStoreController {
     this.unwatch();
 
     this.entityWatcher$$ = store.rawObservable
-      .subscribe((entities: Entity[]) => this.onEntitiesChanged(entities));
+      .subscribe((entities: Entity[]) => this.onEntitiesChange(entities));
 
     this.stateWatcher$$ = store.state.observable
       .pipe(skip(1))
-      .subscribe((state: Map<string, State>) => this.onStateChanged(state));
+      .subscribe((state: Map<string, State>) => this.onStateChange(state));
   }
 
   private unwatch() {
@@ -82,11 +82,11 @@ export class EntityStoreController {
     this.stateWatcher$$.unsubscribe();
   }
 
-  private onEntitiesChanged(entities: Entity[]) {
+  private onEntitiesChange(entities: Entity[]) {
     this.detectChanges();
   }
 
-  private onStateChanged(state: Map<string, State>) {
+  private onStateChange(state: Map<string, State>) {
     let detectChanges = false;
     Array.from(state.keys()).forEach((id: string) => {
       const storeState = state.get(id);

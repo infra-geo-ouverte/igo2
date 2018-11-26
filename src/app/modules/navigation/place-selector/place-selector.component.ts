@@ -59,7 +59,7 @@ export class PlaceSelectorComponent implements OnInit {
       );
   }
 
-  onCategorySelected(category: PlaceCategory) {
+  onCategorySelect(category: PlaceCategory) {
     this.selectedCategory = category;
     this.placeService.getPlacesByCategory(category)
       .subscribe(places => {
@@ -68,16 +68,16 @@ export class PlaceSelectorComponent implements OnInit {
       });
   }
 
-  onPlaceSelected(place: Place) {
+  onPlaceSelect(place: Place) {
     this.placeService.getPlaceFeatureByCategoryAndId(this.selectedCategory, place.id)
       .subscribe((feature: Feature) => this.setOverlayFeature(feature));
   }
 
-  onOverlayButtonClicked() {
+  onOverlayButtonClick() {
     this.setOverlayFeature(this.overlayFeature);
   }
 
-  onClearButtonClicked() {
+  onClearButtonClick() {
     this.clearPlace();
   }
 

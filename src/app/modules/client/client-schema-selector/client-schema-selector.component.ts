@@ -62,7 +62,7 @@ export class ClientSchemaSelectorComponent implements OnInit, OnDestroy {
     return getEntityTitle(schema);
   }
 
-  onSelectionChanged(event: {value: ClientSchema}) {
+  onSelectionChange(event: {value: ClientSchema}) {
     const schema = event.value;
     this.controller.updateEntityState(schema, {selected: true}, true);
     this.selectedChange.emit({selected: true, schema});

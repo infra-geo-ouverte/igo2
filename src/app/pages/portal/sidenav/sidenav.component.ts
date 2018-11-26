@@ -35,11 +35,11 @@ export class SidenavComponent {
 
   constructor(private toolService: ToolService) {}
 
-  onPreviousButtonClicked() {
+  onPreviousButtonClick() {
     this.toolService.selectPreviousTool();
   }
 
-  onUnselectButtonClicked() {
+  onUnselectButtonClick() {
     this.toolService.unselectTool();
   }
 

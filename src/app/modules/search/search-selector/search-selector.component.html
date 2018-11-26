@@ -19,7 +19,7 @@
     <mat-radio-group
       class="fadq-search-selector-radio-group"
       [value]="enabled"
-      (change)="onSearchTypeChanged($event.value)">
+      (change)="onSearchTypeChange($event.value)">
       <mat-radio-button *ngFor="let search of searches" [value]="search[1]">
         {{search[0] | translate}}
       </mat-radio-button>

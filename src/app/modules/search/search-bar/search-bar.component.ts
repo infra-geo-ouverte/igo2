@@ -131,7 +131,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         debounceTime(this._debounce),
         distinctUntilChanged()
       )
-      .subscribe((term: string) => this.onTermChanged(term));
+      .subscribe((term: string) => this.onTermChange(term));
   }
 
   ngOnDestroy() {
@@ -146,7 +146,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.setTerm(key);
   }
 
-  onClearButtonClicked() {
+  onClearButtonClick() {
     this.clear();
   }
 
@@ -171,7 +171,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     return this.invalidKeys.indexOf(key) === -1;
   }
 
-  private onTermChanged(term: string | undefined) {
+  private onTermChange(term: string | undefined) {
     if (term === undefined || term === '') {
       if (this.store !== undefined) {
         this.store.clear();
