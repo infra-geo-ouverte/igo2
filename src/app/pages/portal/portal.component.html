@@ -2,7 +2,7 @@
 
   <igo-backdrop
     [shown]="backdropShown"
-    (click)="closeSidenav()">
+    (click)="onBackdropClicked()">
   </igo-backdrop>
 
   <button
@@ -11,9 +11,8 @@
     class="fadq-menu-button"
     color="primary"
     tooltip-position="below"
-    matTooltipShowDelay="500"
     [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
-    (click)="toggleSidenav()">
+    (click)="onToggleSidenavClicked()">
     <mat-icon>
       <ng-container>menu</ng-container>
     </mat-icon>
@@ -34,7 +33,7 @@
     igoDropGeoFile
     igoMapBrowserBinding
     [map]="map"
-    (query)="handleQueryResults($event)">
+    (query)="onMapQuery($event)">
   </igo-map-browser>
 </mat-sidenav-container>
 

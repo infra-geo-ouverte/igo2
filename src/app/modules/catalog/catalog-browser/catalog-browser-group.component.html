@@ -15,7 +15,7 @@
     tooltip-position="below"
     [matTooltip]="(added ? 'catalog.group.removeFromMap'  : 'catalog.group.addToMap') | translate"
     [color]="added ? 'warn' : ''"
-    (click)="onToggleButtonClicked()">
+    (click)="onToggleClicked()">
     <mat-icon>
       <ng-container *ngIf="added">delete</ng-container>
       <ng-container *ngIf="!added">add</ng-container>

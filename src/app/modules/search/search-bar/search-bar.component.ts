@@ -131,7 +131,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         debounceTime(this._debounce),
         distinctUntilChanged()
       )
-      .subscribe((term: string) => this.handleTermChanged(term));
+      .subscribe((term: string) => this.onTermChanged(term));
   }
 
   ngOnDestroy() {
@@ -171,7 +171,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     return this.invalidKeys.indexOf(key) === -1;
   }
 
-  private handleTermChanged(term: string | undefined) {
+  private onTermChanged(term: string | undefined) {
     if (term === undefined || term === '') {
       if (this.store !== undefined) {
         this.store.clear();
@@ -187,12 +187,12 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     const researches = this.searchService.search(term);
     researches.map(research => {
       research.request.subscribe((results: SearchResult[]) => {
-          this.handleResearchComplete(research, results);
+          this.onResearchCompleted(research, results);
       });
     });
   }
 
-  private handleResearchComplete(research: Research, results: SearchResult[]) {
+  private onResearchCompleted(research: Research, results: SearchResult[]) {
     this.search.emit({research, results});
 
     if (this.store !== undefined) {

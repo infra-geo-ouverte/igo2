@@ -67,4 +67,8 @@ export class ToastPanelComponent {
   }
 
   constructor() {}
+
+  onToggleClicked() {
+    this.opened = !this.opened;
+  }
 }

@@ -43,7 +43,7 @@ export class CatalogBrowserLayerComponent {
 
   constructor() {}
 
-  onToggleButtonClicked() {
+  onToggleClicked() {
     this.added ? this.remove() : this.add();
   }
 

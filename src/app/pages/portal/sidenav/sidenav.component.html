@@ -10,24 +10,22 @@
       <div class="igo-content">
         <igo-panel [title]="tool ? (tool.title | translate) : 'IGO'">
           <button
+            *ngIf="tool"
             mat-icon-button
             panelLeftButton
             tooltip-position="below"
-            matTooltipShowDelay="500"
             [matTooltip]="'igo.context.sidenav.goBack' | translate"
-            (click)="selectPreviousTool()"
-            *ngIf="tool">
+            (click)="onPreviousButtonClicked()">
             <mat-icon>arrow_back</mat-icon>
           </button>
 
           <button
+            *ngIf="tool"
             mat-icon-button
             panelRightButton
             tooltip-position="below"
-            matTooltipShowDelay="500"
             [matTooltip]="'igo.context.sidenav.mainMenu' | translate"
-            (click)="unselectTool()"
-            *ngIf="tool">
+            (click)="onUnselectButtonClicked()">
             <mat-icon>close</mat-icon>
           </button>
 

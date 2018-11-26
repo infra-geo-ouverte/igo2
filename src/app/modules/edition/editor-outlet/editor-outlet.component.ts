@@ -54,9 +54,9 @@ export class EditorOutletComponent implements OnDestroy {
     }
 
     this.entity$$ = this.editor.entity$
-      .subscribe((entity: Entity) => this.handleEntityChange(entity));
+      .subscribe((entity: Entity) => this.onEntityChanged(entity));
     this.widget$$ = this.editor.widget$
-      .subscribe((widget: Widget) => this.handleWidgetChange(widget));
+      .subscribe((widget: Widget) => this.onWidgetChanged(widget));
   }
 
   private unbindEditor() {
@@ -68,12 +68,12 @@ export class EditorOutletComponent implements OnDestroy {
     }
   }
 
-  private handleEntityChange(entity: Entity) {
+  private onEntityChanged(entity: Entity) {
     this.componentData = this.editor.getComponentData();
     this.cdRef.detectChanges();
   }
 
-  private handleWidgetChange(widget: Widget) {
+  private onWidgetChanged(widget: Widget) {
     this.component = widget === undefined ? undefined : widget.component;
     this.componentData = this.editor.getComponentData();
 

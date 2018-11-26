@@ -36,4 +36,8 @@ export class ExpansionPanelHeaderComponent {
 
   constructor() {}
 
+  onToggleClicked() {
+    this.expanded = !this.expanded;
+  }
+
 }
