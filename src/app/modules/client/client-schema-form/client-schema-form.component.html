@@ -1,5 +1,7 @@
 <fadq-entity-form
   *ngIf="schema"
   [entity]="schema"
-  [model]="model">
+  [model]="model"
+  (post)="handlePost($event.entity, $event.data)"
+  (cancel)="cancel.emit()">
 </fadq-entity-form>

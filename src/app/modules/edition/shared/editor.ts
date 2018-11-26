@@ -97,7 +97,7 @@ export class Editor extends EntityClass {
     this.selectedEntity$$.unsubscribe();
   }
 
-  getComponentData(): Object {
+  getComponentData(): { [key: string]: any } {
     return Object.assign({}, {entity: this.entity});
   }
 

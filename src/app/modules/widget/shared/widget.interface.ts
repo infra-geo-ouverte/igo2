@@ -13,4 +13,5 @@ export interface Widget extends EntityObject {
 
   cls?: WidgetClass;
   component?: any;
+  subscribers?: { [key: string]: (event: any) => void };
 }

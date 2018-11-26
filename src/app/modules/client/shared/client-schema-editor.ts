@@ -38,13 +38,18 @@ export class ClientSchemaEditor extends Editor {
     ]
   };
 
-  static widgets: Widget[] = [
+  private widgets: Widget[] = [
     {
       id: 'create',
       icon: 'add',
       title: 'client.schema.create',
       tooltip: 'client.schema.create.tooltip',
-      component: ClientSchemaFormComponent
+      component: ClientSchemaFormComponent,
+      subscribers: {
+        complete: () => {
+          this.handleWidgetComplete();
+        }
+      }
     },
     {
       id: 'delete',
@@ -101,6 +106,10 @@ export class ClientSchemaEditor extends Editor {
   private initWidgets() {
     // TODO: handle initial state.
     // Some widgets should be disabled if no schema is selected
-    this.widgetStore.setEntities(ClientSchemaEditor.widgets);
+    this.widgetStore.setEntities(this.widgets);
+  }
+
+  private handleWidgetComplete() {
+    this.widget$.next(undefined);
   }
 }

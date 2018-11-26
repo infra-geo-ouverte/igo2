@@ -23,7 +23,8 @@ import { Editor } from '../shared/editor';
 export class EditorOutletComponent implements OnDestroy {
 
   public component: any;
-  public componentData: Object;
+  public componentData: { [key: string]: any };
+  public subscribers: { [key: string]: (event: any) => void };
 
   private entity$$: Subscription;
   private widget$$: Subscription;
@@ -74,8 +75,15 @@ export class EditorOutletComponent implements OnDestroy {
   }
 
   private onWidgetChange(widget: Widget) {
-    this.component = widget === undefined ? undefined : widget.component;
     this.componentData = this.editor.getComponentData();
+
+    if (widget !== undefined) {
+      this.component = widget.component;
+      this.subscribers = widget.subscribers;
+    } else {
+      this.component = undefined;
+      this.subscribers = undefined;
+    }
 
     if (this.component !== undefined) {
       this.display.emit();

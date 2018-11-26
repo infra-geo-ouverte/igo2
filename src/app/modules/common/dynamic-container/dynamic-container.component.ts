@@ -5,12 +5,15 @@ import {
   Component,
   ComponentRef,
   ComponentFactoryResolver,
+  EventEmitter,
   OnChanges,
   OnDestroy,
   SimpleChanges,
   ViewContainerRef,
   ViewChild
 } from '@angular/core';
+
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fadq-dynamic-container',
@@ -21,6 +24,7 @@ import {
 export class DynamicContainerComponent implements OnChanges, OnDestroy {
 
   private componentRef: ComponentRef<Component>;
+  private subscriptions: Subscription[] = [];
 
   @Input()
   get component(): any {
@@ -40,6 +44,15 @@ export class DynamicContainerComponent implements OnChanges, OnDestroy {
   }
   private _data: Object;
 
+  @Input()
+  get subscribers(): Object {
+    return this._subscribers;
+  }
+  set subscribers(value: Object) {
+    this._subscribers = value;
+  }
+  private _subscribers: Object;
+
   @ViewChild('target', { read: ViewContainerRef })
   private target: ViewContainerRef;
 
@@ -51,13 +64,19 @@ export class DynamicContainerComponent implements OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     const component = changes.component;
     const data = changes.data;
+    const subscribers = changes.subscribers;
 
     if (component && component.currentValue !== component.previousValue) {
       this.createComponent();
-    } else if (data && data.currentValue !== data.previousValue) {
-      this.updateData();
-    }
+    } else {
+      if (data && data.currentValue !== data.previousValue) {
+        this.updateData();
+      }
 
+      if (subscribers && subscribers.currentValue !== subscribers.previousValue) {
+        this.updateSubscribers();
+      }
+    }
     this.cdRef.detectChanges();
   }
 
@@ -72,6 +91,7 @@ export class DynamicContainerComponent implements OnChanges, OnDestroy {
     const factory = this.resolver.resolveComponentFactory(<any>component);
     this.componentRef = this.target.createComponent(factory);
     this.updateData();
+    this.updateSubscribers();
   }
 
   private destroyComponent() {
@@ -79,6 +99,7 @@ export class DynamicContainerComponent implements OnChanges, OnDestroy {
       this.componentRef.destroy();
     }
     this.target.clear();
+    this.unsubscribeAll();
   }
 
   private updateData() {
@@ -92,5 +113,26 @@ export class DynamicContainerComponent implements OnChanges, OnDestroy {
         instance[key] = value;
       }
     });
+  }
+
+  private updateSubscribers() {
+    if (this.componentRef === undefined) {
+      return;
+    }
+
+    const instance = this.componentRef.instance;
+    Object.entries(this.subscribers || {}).forEach(([key, subscriber]) => {
+      if (key in instance) {
+        const emitter = instance[key];
+        if (emitter instanceof EventEmitter) {
+          this.subscriptions.push(emitter.subscribe(subscriber));
+        }
+      }
+    });
+  }
+
+  private unsubscribeAll() {
+    this.subscriptions.forEach((s: Subscription) => s.unsubscribe());
+    this.subscriptions = [];
   }
 }

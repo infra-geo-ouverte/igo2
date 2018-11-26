@@ -1,8 +1,10 @@
 import {
   Component,
   Input,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import { EntityFormModel } from '../../entity/shared/entity.interface';
@@ -56,10 +58,17 @@ export class ClientSchemaFormComponent {
   }
   private _schema: ClientSchema;
 
+  @Output() complete = new EventEmitter<ClientSchema>();
+  @Output() cancel = new EventEmitter();
+
   get model(): EntityFormModel {
     return ClientSchemaFormComponent.model;
   }
 
   constructor(private cdRef: ChangeDetectorRef) {}
+
+  handlePost(schema: ClientSchema, data: { [key: string]: any }) {
+    this.complete.emit();
+  }
 
 }

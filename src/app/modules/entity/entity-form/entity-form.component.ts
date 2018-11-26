@@ -73,8 +73,13 @@ export class EntityFormComponent implements OnChanges {
     this.cdRef.detectChanges();
   }
 
+<<<<<<< HEAD
   onSubmit(data: { [key: string]: any}) {
     this.submited.emit({entity: this.entity, data});
+=======
+  handleSubmit(data: { [key: string]: any }) {
+    this.post.emit({entity: this.entity, data});
+>>>>>>> (wip) editor can subscribe to and emit events
   }
 
   onCancelButtonClick() {
