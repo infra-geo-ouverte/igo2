@@ -11,8 +11,8 @@
           [formControl]="poiControl">
         <mat-autocomplete
           #auto="matAutocomplete"
-          [displayWith]="displayPoi"
-          (optionSelected)="selectPoi($event.option.value)">
+          [displayWith]="getPoiTitle"
+          (optionSelected)="onPoiSelected($event.option.value)">
           <mat-option *ngFor="let poi of filteredPois$ | async" [value]="poi">
             {{ poi.title }}
           </mat-option>
@@ -21,12 +21,12 @@
         <ng-container matSuffix *ngIf="poiControl.value">
           <mat-icon
             igoStopPropagation
-            (click)="clearPoi()">
+            (click)="onClearButtonClicked()">
             clear
           </mat-icon>
           <mat-icon
             igoStopPropagation
-            (click)="selectPoi(poiControl.value)">
+            (click)="onZoomButtonClicked()">
             search
           </mat-icon>
         </ng-container>

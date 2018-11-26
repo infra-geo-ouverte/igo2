@@ -6,7 +6,7 @@
       <mat-select
         placeholder="{{'navigation.placeSelector.category.placeholder' | translate}}"
         [value]="selectedCategory"
-        (selectionChange)="selectCategory($event.value)">
+        (selectionChange)="onCategorySelected($event.value)">
         <mat-option *ngFor="let category of categories" [value]="category">
           {{category.title | translate}}
         </mat-option>
@@ -22,8 +22,8 @@
         [formControl]="placeControl">
       <mat-autocomplete
         #auto="matAutocomplete"
-        [displayWith]="displayPlace"
-        (optionSelected)="selectPlace($event.option.value)">
+        [displayWith]="getPlaceTitle"
+        (optionSelected)="onPlaceSelected($event.option.value)">
         <mat-option *ngFor="let place of filteredPlaces$ | async" [value]="place">
           {{ place.title }}
         </mat-option>
@@ -32,12 +32,12 @@
       <ng-container matSuffix *ngIf="placeControl.value">
         <mat-icon
           igoStopPropagation
-          (click)="clearPlace()">
+          (click)="onClearButtonClicked()">
           clear
         </mat-icon>
         <mat-icon
           igoStopPropagation
-          (click)="setOverlayFeature(overlayFeature)">
+          (click)="onOverlayButtonClicked()">
           search
         </mat-icon>
       </ng-container>

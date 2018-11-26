@@ -56,21 +56,24 @@ export class PoiSelectorComponent implements OnInit {
       );
   }
 
-  selectPoi(poi: Poi) {
+  onPoiSelected(poi: Poi) {
     this.zoomToPoi(poi);
   }
 
-  displayPoi(poi?: Poi) {
-    return poi ? poi.title : undefined;
+  onZoomButtonClicked() {
+    this.zoomToPoi(this.poiControl.value);
   }
 
-  clearPoi() {
+  onClearButtonClicked() {
     this.poiControl.setValue(undefined);
+  }
+
+  getPoiTitle(poi?: Poi) {
+    return poi ? poi.title : undefined;
   }
 
   private filterPoisByTitle(title: string): Poi[] {
     const filterValue = title.toLowerCase();
-
     return this.pois.filter(poi => {
       return poi.title.toLowerCase().indexOf(filterValue) === 0;
     });
