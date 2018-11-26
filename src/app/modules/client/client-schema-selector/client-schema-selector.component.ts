@@ -38,7 +38,10 @@ export class ClientSchemaSelectorComponent implements OnInit, OnDestroy {
   }
   private _store;
 
-  @Output() select = new EventEmitter<ClientSchema>();
+  @Output() selectedChange = new EventEmitter<{
+    selected: boolean;
+    schema: ClientSchema;
+  }>();
 
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
@@ -59,9 +62,10 @@ export class ClientSchemaSelectorComponent implements OnInit, OnDestroy {
     return getEntityTitle(schema);
   }
 
-  selectSchema(schema: ClientSchema) {
+  onSelectionChanged(event: {value: ClientSchema}) {
+    const schema = event.value;
     this.controller.updateEntityState(schema, {selected: true}, true);
-    this.select.emit(schema);
+    this.selectedChange.emit({selected: true, schema});
   }
 
 }
