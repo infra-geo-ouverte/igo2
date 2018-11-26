@@ -5,7 +5,7 @@
       matSort
       [ngClass]="getTableClass()"
       [dataSource]="dataSource"
-      (matSortChange)="sort($event.active, $event.direction)">
+      (matSortChange)="onSort($event)">
 
       <ng-container [matColumnDef]="column.name" *ngFor="let column of model.columns">
         <ng-container *ngIf="column.sortable">
@@ -39,7 +39,7 @@
       <tr mat-row
         *matRowDef="let entity; columns: headers;"
         [ngClass]="getRowClass(entity)"
-        (click)="selectEntity(entity)">
+        (click)="onEntityClick(entity)">
       </tr>
 
     </table>

@@ -3,7 +3,7 @@
   *ngIf="form !== undefined"
   class="igo-form"
   [formGroup]="form"
-  (ngSubmit)="handleSubmit(form.value)">
+  (ngSubmit)="onSubmit(form.value)">
 
   <div class="fadq-entity-form-fields-container">
     <mat-grid-list cols="2" rowHeight="60px">
@@ -23,7 +23,7 @@
   </div>
 
   <div class="fadq-entity-form-button-group">
-    <button mat-button (click)="handleCancel()">
+    <button mat-button (click)="OnCancelButtonClick()">
     {{ cancelLabel }}
     </button>
     <button

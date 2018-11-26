@@ -48,7 +48,10 @@ export class EntityTableComponent implements OnInit, OnDestroy {
   }
   private _model: EntityTableModel;
 
-  @Output() select = new EventEmitter<Entity>();
+  @Output() entitySelectedChange = new EventEmitter<{
+    selected: boolean;
+    entity: Entity;
+  }>();
 
   get headers(): string[] {
     return this.model.columns
@@ -74,11 +77,9 @@ export class EntityTableComponent implements OnInit, OnDestroy {
     this.controller.unbind();
   }
 
-  valueAccessor(entity: Entity, column: EntityTableColumn) {
-    return t(entity, column.name).safeObject;
-  }
-
-  sort(property: string, direction: string) {
+  onSort(event: {active: string, direction: string}) {
+    const property = event.active;
+    const direction = event.direction;
     if (direction === 'asc' || direction === 'desc') {
       this.store.sorter.set({property, direction});
     } else {
@@ -86,7 +87,7 @@ export class EntityTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectEntity(entity: Entity) {
+  onEntityClick(entity: Entity) {
     if (!this.model.selection) {
       return;
     }
@@ -95,7 +96,11 @@ export class EntityTableComponent implements OnInit, OnDestroy {
       focused: true,
       selected: true
     }, true);
-    this.select.emit(entity);
+    this.entitySelectedChange.emit({selected: true, entity});
+  }
+
+  valueAccessor(entity: Entity, column: EntityTableColumn) {
+    return t(entity, column.name).safeObject;
   }
 
   getTableClass(): { [key: string]: boolean; } {

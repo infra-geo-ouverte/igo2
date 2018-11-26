@@ -40,8 +40,12 @@ export class EntityFormComponent implements OnChanges {
   }
   private _model: EntityFormModel;
 
-  @Output() submit = new EventEmitter<{entity: Entity, data: Object}>();
-  @Output() cancel = new EventEmitter();
+  @Output() submited = new EventEmitter<{
+    entity: Entity;
+    data: { [key: string]: any };
+  }>();
+
+  @Output() canceled = new EventEmitter();
 
   get submitLabel(): string {
     return this.model.submitLabel ? this.model.submitLabel : 'OK';
@@ -69,12 +73,12 @@ export class EntityFormComponent implements OnChanges {
     this.cdRef.detectChanges();
   }
 
-  handleSubmit(data: { [key: string]: any}) {
-    this.submit.emit({entity: this.entity, data});
+  onSubmit(data: { [key: string]: any}) {
+    this.submited.emit({entity: this.entity, data});
   }
 
-  handleCancel() {
-    this.cancel.emit();
+  onCancelButtonClick() {
+    this.canceled.emit();
   }
 
   getFieldControl(field: EntityFormField): FormControl {
@@ -93,14 +97,14 @@ export class EntityFormComponent implements OnChanges {
   private createForm() {
     const controls = {};
     this.model.fields.forEach((field: EntityFormField) => {
-      controls[field.name] = this.createControl(field);
+      controls[field.name] = this.createFormControl(field);
     });
 
     this.form = this.formBuilder.group(controls);
     this.populateForm();
   }
 
-  private createControl(field: EntityFormField): FormControl {
+  private createFormControl(field: EntityFormField): FormControl {
     const state = Object.assign({}, field);
     const control = this.formBuilder.control(state);
     control.setValue('');
