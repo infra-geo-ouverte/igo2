@@ -14,6 +14,7 @@
             mat-icon-button
             panelLeftButton
             tooltip-position="below"
+            matTooltipShowDelay="500"
             [matTooltip]="'igo.context.sidenav.goBack' | translate"
             (click)="onPreviousButtonClick()">
             <mat-icon>arrow_back</mat-icon>
@@ -24,6 +25,7 @@
             mat-icon-button
             panelRightButton
             tooltip-position="below"
+            matTooltipShowDelay="500"
             [matTooltip]="'igo.context.sidenav.mainMenu' | translate"
             (click)="onUnselectButtonClick()">
             <mat-icon>close</mat-icon>

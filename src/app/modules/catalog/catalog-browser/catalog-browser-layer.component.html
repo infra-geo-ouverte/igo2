@@ -1,12 +1,13 @@
 <mat-list-item>
   <mat-icon mat-list-avatar>{{icon}}</mat-icon>
-  <h4 mat-line [matTooltip]="title">{{title}}</h4>
+  <h4 mat-line>{{title}}</h4>
   
   <button
     mat-icon-button
     tooltip-position="below"
-    [color]="added ? 'warn' : ''"
+    matTooltipShowDelay="500"
     [matTooltip]="(added ? 'catalog.layer.removeFromMap' : 'catalog.layer.addToMap') | translate"
+    [color]="added ? 'warn' : ''"
     (click)="onToggleClick()">
     <mat-icon>
       <ng-container *ngIf="added">delete</ng-container>

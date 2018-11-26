@@ -11,6 +11,7 @@
     class="fadq-menu-button"
     color="primary"
     tooltip-position="below"
+    matTooltipShowDelay="500"
     [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
     (click)="onToggleSidenavClick()">
     <mat-icon>
