@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import {
   provideClientService,
   provideClientInfoService,
+  provideClientParcelService,
   provideClientSchemaService
 } from './shared/client.provider';
 import { ClientStoreService } from './shared/client-store.service';
@@ -12,7 +13,6 @@ import { FadqClientInfoModule } from './client-info/client-info.module';
 import { FadqClientLegendModule } from './client-legend/client-legend.module';
 import { FadqClientSchemaFormModule } from './client-schema-form/client-schema-form.module';
 import { FadqClientSchemaSelectorModule } from './client-schema-selector/client-schema-selector.module';
-import { FadqClientSchemaTableModule } from './client-schema-table/client-schema-table.module';
 
 @NgModule({
   imports: [
@@ -20,15 +20,13 @@ import { FadqClientSchemaTableModule } from './client-schema-table/client-schema
     FadqClientInfoModule,
     FadqClientLegendModule,
     FadqClientSchemaFormModule,
-    FadqClientSchemaSelectorModule,
-    FadqClientSchemaTableModule
+    FadqClientSchemaSelectorModule
   ],
   exports: [
     FadqClientInfoModule,
     FadqClientLegendModule,
     FadqClientSchemaFormModule,
-    FadqClientSchemaSelectorModule,
-    FadqClientSchemaTableModule
+    FadqClientSchemaSelectorModule
   ],
   declarations: []
 })
@@ -38,6 +36,7 @@ export class FadqClientModule {
       ngModule: FadqClientModule,
       providers: [
         provideClientInfoService(),
+        provideClientParcelService(),
         provideClientSchemaService(),
         provideClientService(),
         ClientStoreService

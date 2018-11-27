@@ -1,8 +1,8 @@
+import { Injectable } from '@angular/core';
+
 import proj4 from 'proj4';
 import * as olproj from 'ol/proj';
 import * as olproj4 from 'ol/proj/proj4';
-
-import { Injectable } from '@angular/core';
 
 import { ConfigService } from '@igo2/core';
 

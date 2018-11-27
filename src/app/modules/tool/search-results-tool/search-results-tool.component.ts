@@ -6,7 +6,7 @@ import { LayerService, LayerOptions } from '@igo2/geo';
 import { EntityStore } from '../../entity/shared/store';
 import { FEATURE } from '../../feature/shared/feature.enum';
 import { Feature } from '../../feature/shared/feature.interface';
-import { LAYER } from '../../map/shared/map.enum';
+import { LAYER } from '../../layer/shared/layer.enum';
 import { IgoMap } from '../../map/shared/map';
 import { MapService } from '../../map/shared/map.service';
 import { OverlayAction } from '../../overlay/shared/overlay.enum';

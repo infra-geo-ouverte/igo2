@@ -6,8 +6,9 @@ import {
   HostBinding,
   ChangeDetectorRef,
   ChangeDetectionStrategy,
-  OnInit,
-  OnDestroy
+  OnChanges,
+  OnDestroy,
+  SimpleChanges
 } from '@angular/core';
 
 import { EntityStore } from '../../entity/shared/store';
@@ -31,7 +32,7 @@ const TOGGLE_WIDGET = {
   styleUrls: ['./widgetbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WidgetbarComponent implements OnInit, OnDestroy {
+export class WidgetbarComponent implements OnChanges, OnDestroy {
 
   public visible = true;
 
@@ -144,8 +145,11 @@ export class WidgetbarComponent implements OnInit, OnDestroy {
       .withChangeDetector(this.cdRef);
   }
 
-  ngOnInit() {
-    this.controller.bind(this.store);
+  ngOnChanges(changes: SimpleChanges) {
+    const store = changes.store;
+    if (store && store.currentValue !== store.previousValue) {
+      this.controller.bind(this.store);
+    }
   }
 
   ngOnDestroy() {

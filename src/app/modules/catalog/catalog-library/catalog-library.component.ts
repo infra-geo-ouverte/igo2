@@ -69,12 +69,4 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
     this.catalogSelectChange.emit({selected: true, catalog});
   }
 
-  onCatalogUnselected(catalog: Catalog) {
-    this.controller.updateEntityState(catalog, {
-      selected: false,
-      focused: false
-    }, true);
-    this.catalogSelectChange.emit({selected: false, catalog});
-  }
-
 }

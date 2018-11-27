@@ -1,5 +1,3 @@
-export const LAYER = 'layer';
-
 export enum MapWidget {
   BaseLayerSwitcher = 'baseLayerSwitcher',
   ZoomIn = 'zoomIn',

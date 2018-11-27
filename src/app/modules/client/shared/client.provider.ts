@@ -4,6 +4,7 @@ import { ConfigService } from '@igo2/core';
 
 import { ApiService } from '../../core/api';
 import { ClientInfoService } from './client-info.service';
+import { ClientParcelService } from './client-parcel.service';
 import { ClientSchemaService } from './client-schema.service';
 import { ClientService } from './client.service';
 
@@ -23,6 +24,26 @@ export function provideClientInfoService() {
   return {
     provide: ClientInfoService,
     useFactory: clientInfoServiceFactory,
+    deps: [HttpClient, ApiService, ConfigService]
+  };
+}
+
+export function clientParcelServiceFactory(
+  http: HttpClient,
+  apiService: ApiService,
+  config: ConfigService
+) {
+  return new ClientParcelService(
+    http,
+    apiService,
+    config.getConfig('client.api')
+  );
+}
+
+export function provideClientParcelService() {
+  return {
+    provide: ClientParcelService,
+    useFactory: clientParcelServiceFactory,
     deps: [HttpClient, ApiService, ConfigService]
   };
 }
@@ -49,10 +70,12 @@ export function provideClientSchemaService() {
 
 export function clientServiceFactory(
   clientInfoService: ClientInfoService,
+  clientParcelService: ClientParcelService,
   clientSchemaService: ClientSchemaService
 ) {
   return new ClientService(
     clientInfoService,
+    clientParcelService,
     clientSchemaService
   );
 }
@@ -63,6 +86,7 @@ export function provideClientService() {
     useFactory: clientServiceFactory,
     deps: [
       ClientInfoService,
+      ClientParcelService,
       ClientSchemaService
     ]
   };

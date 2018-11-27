@@ -1,4 +1,5 @@
 import { EntityObject } from '../../entity/shared/entity.interface';
+import { Feature } from '../../feature/shared/feature.interface';
 
 export interface ClientApiConfig {
   info: string;
@@ -13,6 +14,7 @@ export interface ClientInfo {
 }
 
 export interface Client extends EntityObject, ClientInfo {
+  parcels: ClientParcel[];
   schemas: ClientSchema[];
 }
 
@@ -41,6 +43,7 @@ export interface ClientInfoListResultPays {
   codePays: string;
 }
 
+/*** Schema ***/
 export interface ClientSchema extends EntityObject {
   id: string;
   numeroClient: string;
@@ -55,3 +58,17 @@ export interface ClientSchemaListResponse {
 }
 
 export interface ClientSchemaListResult extends ClientSchema {}
+
+/*** Parcel ***/
+export interface ClientParcel extends Feature {
+  properties: {
+    id: string;
+    diagramme: string;
+  };
+}
+
+export interface ClientParcelListResponse {
+  donnees?: ClientParcelListResult[];
+}
+
+export interface ClientParcelListResult extends ClientParcel {}

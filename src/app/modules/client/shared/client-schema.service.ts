@@ -52,7 +52,7 @@ export class ClientSchemaService {
       ]
     }).pipe(
       map((response: ClientSchemaListResponse) => {
-        return this.extractClientSchemasFromResponse(response);
+        return this.extractSchemasFromResponse(response);
       })
     );
 
@@ -60,14 +60,14 @@ export class ClientSchemaService {
     return this.http
       .post(url, { params })
       .pipe(
-        map((response: ClientResponse) => {
-          return this.extractClientFromResponse(response);
+        map((response: ClientSchemaListResponse) => {
+          return this.extractSchemasFromResponse(response);
         })
       );
     */
   }
 
-  private extractClientSchemasFromResponse(response: ClientSchemaListResponse): ClientSchema[] {
+  private extractSchemasFromResponse(response: ClientSchemaListResponse): ClientSchema[] {
     const results = response.donnees || [];
     return results.map(result => this.resultToSchema(result));
   }

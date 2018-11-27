@@ -12,8 +12,9 @@ import {
   Tool,
   ToolService
 } from '@igo2/context';
+import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
-import { Client } from '../../modules/client/shared/client.interface';
+import { Client, ClientParcel } from '../../modules/client/shared/client.interface';
 import { ClientStoreService } from '../../modules/client/shared/client-store.service';
 import { Editor } from '../../modules/edition/shared/editor';
 import { EditorService } from '../../modules/edition/shared/editor.service';
@@ -22,6 +23,7 @@ import { EntityStore } from '../../modules/entity/shared/store';
 import { FEATURE } from '../../modules/feature/shared/feature.enum';
 import { Feature } from '../../modules/feature/shared/feature.interface';
 import { State } from '../../modules/entity/shared/entity.interface';
+import { EntityLoader } from '../../modules/layer/shared/entity-loader';
 import { IgoMap } from '../../modules/map/shared/map';
 import { MapService } from '../../modules/map/shared/map.service';
 import { ProjectionService } from '../../modules/map/shared/projection.service';
@@ -59,12 +61,19 @@ export class PortalComponent implements OnInit, OnDestroy {
   private selectedSearchResult$$: Subscription;
   private focusedSearchResult$$: Subscription;
 
+  private parcelLayer: VectorLayer;
+  private parcelLoader: EntityLoader;
+
   get backdropShown(): boolean {
     return this.mediaService.media$.value === Media.Mobile && this.sidenavOpened;
   }
 
   get expansionPanelBackdropShown(): boolean {
     return this.expansionPanelExpanded && this.toastPanelOpened;
+  }
+
+  get parcelStore(): EntityStore<ClientParcel> {
+    return this.clientStoreService.parcelStore;
   }
 
   get searchStore(): EntityStore<SearchResult> {
@@ -149,6 +158,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.selectedEditor$$ = this.editorStore
       .observeFirstBy((editor: Editor, state: State) => state.selected === true)
       .subscribe((editor: Editor) => this.onSelectEditor(editor));
+
+    const parcelDataSource = new FeatureDataSource();
+    this.parcelLayer = new VectorLayer({source: parcelDataSource});
+    this.parcelLoader = new EntityLoader(this.parcelLayer, this.parcelStore);
   }
 
   ngOnDestroy() {
@@ -191,15 +204,17 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onChangeContext(context: DetailedContext) {
-    if (context !== undefined) {
-      this.toolService.setTools(context.tools);
-
-      if (this.contextLoaded) {
-        const mapDetails = this.toolService.getTool('mapDetails');
-        this.toolService.selectTool(mapDetails);
-      }
-      this.contextLoaded = true;
+    if (context === undefined) {
+      return;
     }
+
+    this.toolService.setTools(context.tools);
+
+    if (this.contextLoaded) {
+      const mapDetails = this.toolService.getTool('mapDetails');
+      this.toolService.selectTool(mapDetails);
+    }
+    this.contextLoaded = true;
   }
 
   private onSearch(results: SearchResult[]) {
@@ -248,6 +263,9 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onSearchClient(client: Client) {
     this.clientStoreService.setClient(client);
+    this.map.addLayer(this.parcelLayer);
+    this.parcelLoader.activate();
+
     const clientInfo = this.toolService.getTool('clientInfo');
     this.toolService.selectTool(clientInfo);
 

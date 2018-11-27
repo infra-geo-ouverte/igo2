@@ -6,7 +6,9 @@ import {
   ChangeDetectorRef,
   ChangeDetectionStrategy,
   OnInit,
-  OnDestroy
+  OnChanges,
+  OnDestroy,
+  SimpleChanges
 } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -26,7 +28,7 @@ import { EntityStoreController } from '../shared/controller';
   styleUrls: ['./entity-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EntityTableComponent implements OnInit, OnDestroy {
+export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
 
   private controller: EntityStoreController;
 
@@ -69,8 +71,14 @@ export class EntityTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.controller.bind(this.store);
-    // TODO: Clear sort when records change
+    // TODO: clear sort order display
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const store = changes.store;
+    if (store && store.currentValue !== store.previousValue) {
+      this.controller.bind(this.store);
+    }
   }
 
   ngOnDestroy() {

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, zip } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 
-import { Client } from './client.interface';
+import { Client, ClientInfo, ClientParcel, ClientSchema } from './client.interface';
 import { ClientInfoService } from './client-info.service';
+import { ClientParcelService } from './client-parcel.service';
 import { ClientSchemaService } from './client-schema.service';
 
 @Injectable({
@@ -13,15 +14,24 @@ export class ClientService {
 
   constructor(
     private infoService: ClientInfoService,
+    private parcelService: ClientParcelService,
     private schemaService: ClientSchemaService
   ) {}
 
   getClientByNum(clientNum: string): Observable<Client> {
-    return this.infoService.getClientInfoByNum(clientNum)
+    const client$ = zip(
+      this.infoService.getClientInfoByNum(clientNum),
+      this.parcelService.getClientParcelsByNum(clientNum),
+      this.schemaService.getClientSchemasByNum(clientNum)
+    );
+
+    return client$
       .pipe(
-        withLatestFrom(this.schemaService.getClientSchemasByNum(clientNum)),
-        map(([info, schemas]) => {
-          return Object.assign({meta: {idProperty: 'numero'}}, info, {schemas});
+        map((data: [ClientInfo, ClientParcel[], ClientSchema[]]) => {
+          return Object.assign({meta: {idProperty: 'numero'}}, data[0], {
+            parcels: data[1],
+            schemas: data[2]
+          });
         })
       );
   }
