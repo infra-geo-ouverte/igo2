@@ -11,17 +11,20 @@ import { zip } from 'rxjs';
 
 import { Layer, LayerService } from '@igo2/geo';
 
-import { IgoMap } from '../../map/shared/map';
-import { getEntityId } from '../../entity/shared/entity.utils';
-import { EntityStore } from '../../entity/shared/store';
-import { EntityStoreController } from '../../entity/shared/controller';
+import { IgoMap } from 'src/app/modules/map';
+import {
+  EntityStore,
+  EntityStoreController,
+  getEntityId
+} from 'src/app/modules/entity';
+
 import {
   CatalogItem,
   CatalogItemLayer,
   CatalogItemGroup,
-  CatalogItemState
-} from '../shared/catalog.interface';
-import { CatalogItemType } from '../shared/catalog.enum';
+  CatalogItemState,
+  CatalogItemType
+} from '../shared';
 
 @Component({
   selector: 'fadq-catalog-browser',

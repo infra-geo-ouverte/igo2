@@ -1,7 +1,8 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { IgoMap } from '../../map/shared/map';
-import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
+import { IgoMap } from 'src/app/modules/map';
+import { getEntityTitle, getEntityIcon } from 'src/app/modules/entity';
+
 import { Catalog } from '../shared/catalog.interface';
 
 @Component({

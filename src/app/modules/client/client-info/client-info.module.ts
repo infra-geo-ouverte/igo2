@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MatBadgeModule } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';

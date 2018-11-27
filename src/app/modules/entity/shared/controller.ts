@@ -3,7 +3,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
-import { isEquivalent } from '../../utils/object';
+import { isEquivalent } from 'src/app/modules/utils';
+
 import { Entity, State } from './entity.interface';
 import { EntityStore } from './store';
 

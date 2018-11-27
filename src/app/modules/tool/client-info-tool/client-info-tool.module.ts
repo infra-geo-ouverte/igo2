@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { IgoLanguageModule } from '@igo2/core';
 import { IgoListModule, IgoCollapsibleModule } from '@igo2/common';
 
-import { FadqClientModule } from '../../client/client.module';
+import { FadqClientModule } from 'src/app/modules/client/client.module';
+
 import { ClientInfoToolComponent } from './client-info-tool.component';
 
 @NgModule({

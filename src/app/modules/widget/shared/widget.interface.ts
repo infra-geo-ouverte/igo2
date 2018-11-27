@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { EntityObject } from 'src/app/modules/entity';
 
-import { EntityObject } from '../../entity/shared/entity.interface';
 import { WidgetClass } from './widget';
 
 export interface Widget extends EntityObject {

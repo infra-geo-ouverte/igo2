@@ -11,11 +11,14 @@ import {
 
 import { Subscription } from 'rxjs';
 
-import { getEntityTitle } from '../../entity/shared/entity.utils';
-import { State } from '../../entity/shared/entity.interface';
-import { EntityStore } from '../../entity/shared/store';
-import { EntityStoreController } from '../../entity/shared/controller';
-import { Editor } from '../shared/editor';
+import {
+  EntityStore,
+  EntityStoreController,
+  State,
+  getEntityTitle
+} from 'src/app/modules/entity';
+
+import { Editor } from '../shared';
 
 @Component({
   selector: 'fadq-editor-selector',

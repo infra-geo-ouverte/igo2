@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { stringToLonLat } from '../../map/shared/map.utils';
+import { stringToLonLat } from 'src/app/modules/map';
+
 import {
   SearchSource,
   TextSearch,
@@ -9,7 +10,6 @@ import {
 import { SearchSourceService } from './search-source.service';
 import { Research } from './search.interface';
 import { sourceCanSearch, sourceCanReverseSearch } from './search.utils';
-
 
 @Injectable({
   providedIn: 'root'

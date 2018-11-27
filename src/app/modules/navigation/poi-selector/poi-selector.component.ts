@@ -8,7 +8,7 @@ import * as oleasing from 'ol/easing';
 
 import { Poi } from '@igo2/context';
 
-import { IgoMap } from '../../map/shared/map';
+import { IgoMap } from 'src/app/modules/map';
 
 
 @Component({

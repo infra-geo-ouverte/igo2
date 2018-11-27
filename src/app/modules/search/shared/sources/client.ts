@@ -3,9 +3,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CLIENT } from '../../../client/shared/client.enum';
-import { Client } from '../../../client/shared/client.interface';
-import { ClientService } from '../../../client/shared/client.service';
+import { CLIENT, Client, ClientService } from 'src/app/modules/client';
+
 import { SearchResult } from '../search.interface';
 import { SearchSource, TextSearch } from './source';
 import { SearchSourceOptions } from './source.interface';

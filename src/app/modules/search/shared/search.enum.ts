@@ -1,6 +1,6 @@
-import { CLIENT } from '../../client/shared/client.enum';
-import { FEATURE } from '../../feature/shared/feature.enum';
-import { LAYER } from '../../layer/shared/layer.enum';
+import { CLIENT } from 'src/app/modules/client';
+import { FEATURE } from 'src/app/modules/feature';
+import { LAYER } from 'src/app/modules/layer';
 
 export const SEARCHES = [
   ['Client', CLIENT],

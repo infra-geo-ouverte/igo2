@@ -1,7 +1,8 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
-import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
-import { CatalogItemLayer } from '../shared/catalog.interface';
+import { getEntityTitle, getEntityIcon } from 'src/app/modules/entity';
+
+import { CatalogItemLayer } from '../shared';
 
 @Component({
   selector: 'fadq-catalog-browser-layer',

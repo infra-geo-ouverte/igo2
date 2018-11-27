@@ -14,22 +14,19 @@ import {
 } from '@igo2/context';
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
-import { Client, ClientParcel } from '../../modules/client/shared/client.interface';
-import { ClientStoreService } from '../../modules/client/shared/client-store.service';
+import { Client, ClientParcel } from 'src/app/modules/client';
 import { Editor } from '../../modules/edition/shared/editor';
-import { EditorService } from '../../modules/edition/shared/editor.service';
-import { getEntityTitle } from '../../modules/entity/shared/entity.utils';
-import { EntityStore } from '../../modules/entity/shared/store';
-import { FEATURE } from '../../modules/feature/shared/feature.enum';
-import { Feature } from '../../modules/feature/shared/feature.interface';
-import { State } from '../../modules/entity/shared/entity.interface';
-import { EntityLoader } from '../../modules/layer/shared/entity-loader';
-import { IgoMap } from '../../modules/map/shared/map';
-import { MapService } from '../../modules/map/shared/map.service';
-import { ProjectionService } from '../../modules/map/shared/projection.service';
-import { SearchResult } from '../../modules/search/shared/search.interface';
-import { SearchStoreService } from '../../modules/search/shared/search-store.service';
-import { ClientSearchSource } from '../../modules/search/shared/sources/client';
+import { EntityStore, State, getEntityTitle } from 'src/app/modules/entity';
+import { FEATURE, Feature } from 'src/app/modules/feature';
+import { EntityLoader } from 'src/app/modules/layer';
+import { IgoMap, ProjectionService } from '../../modules/map';
+import { SearchResult, ClientSearchSource } from 'src/app/modules/search';
+import {
+  ClientState,
+  EditionState,
+  MapState,
+  SearchState
+} from 'src/app/state';
 
 import {
   controlSlideX,
@@ -73,15 +70,15 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get parcelStore(): EntityStore<ClientParcel> {
-    return this.clientStoreService.parcelStore;
+    return this.clientState.parcelStore;
   }
 
   get searchStore(): EntityStore<SearchResult> {
-    return this.searchStoreService.store;
+    return this.searchState.store;
   }
 
   get editorStore(): EntityStore<Editor> {
-    return this.editorService.store;
+    return this.editionState.store;
   }
 
   get tool$(): Observable<Tool> {
@@ -119,13 +116,13 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   constructor(
     private projectionService: ProjectionService,
-    private mapService: MapService,
+    private mapState: MapState,
     private contextService: ContextService,
     private mediaService: MediaService,
-    private searchStoreService: SearchStoreService,
+    private searchState: SearchState,
     private toolService: ToolService,
-    private clientStoreService: ClientStoreService,
-    private editorService: EditorService
+    private clientState: ClientState,
+    private editionState: EditionState
   ) {}
 
   ngOnInit() {
@@ -139,7 +136,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.mapService.setMap(this.map);
+    this.mapState.setMap(this.map);
 
     this.context$$ = this.contextService.context$
       .subscribe((context: DetailedContext) => this.onChangeContext(context));
@@ -262,15 +259,15 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onSearchClient(client: Client) {
-    this.clientStoreService.setClient(client);
+    this.clientState.setClient(client);
     this.map.addLayer(this.parcelLayer);
     this.parcelLoader.activate();
 
     const clientInfo = this.toolService.getTool('clientInfo');
     this.toolService.selectTool(clientInfo);
 
-    // const schemaEditor = this.clientStoreService.schemaEditor;
-    // this.editorService.selectEditor(schemaEditor);
+    // const schemaEditor = this.clientState.schemaEditor;
+    // this.editionState.selectEditor(schemaEditor);
   }
 
   private onSelectEditor(editor: Editor) {

@@ -4,8 +4,9 @@ import {
   getEntityTitle,
   getEntityTitleHtml,
   getEntityIcon
-} from '../../entity/shared/entity.utils';
-import { SearchResult } from '../shared/search.interface';
+} from 'src/app/modules/entity';
+
+import { SearchResult } from '../shared';
 
 @Component({
   selector: 'fadq-search-results-item',

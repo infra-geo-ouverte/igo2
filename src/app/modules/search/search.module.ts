@@ -1,7 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SearchStoreService } from './shared/search-store.service';
 import { provideSearchSourceService } from './shared/search-source.service';
 import {
   provideIChercheSearchSource,
@@ -34,7 +33,6 @@ export class FadqSearchModule {
     return {
       ngModule: FadqSearchModule,
       providers:  [
-        SearchStoreService,
         provideSearchSourceService(),
         provideIChercheSearchSource(),
         provideIChercheReverseSearchSource(),

@@ -1,4 +1,4 @@
-import { SearchSource } from './sources/source';
+import { SearchSource } from './sources';
 
 export function sourceCanSearch(source: SearchSource) {
   return (source as any).search !== undefined;

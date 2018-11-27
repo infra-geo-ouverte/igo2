@@ -1,5 +1,5 @@
 import { GeoJsonGeometryTypes } from 'geojson';
-import { EntityMeta, EntityObject } from '../../entity/shared/entity.interface';
+import { EntityObject } from 'src/app/modules/entity';
 
 export interface Feature extends EntityObject {
   type: string;

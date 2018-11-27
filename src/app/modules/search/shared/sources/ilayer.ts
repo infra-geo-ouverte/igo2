@@ -7,7 +7,8 @@ import { map } from 'rxjs/operators';
 import { LanguageService } from '@igo2/core';
 import { AnyLayerOptions, LayerOptions } from '@igo2/geo';
 
-import { LAYER } from '../../../layer/shared/layer.enum';
+import { LAYER } from 'src/app/modules/layer';
+
 import { SearchResult } from '../search.interface';
 import { SearchSource, TextSearch } from './source';
 import { SearchSourceOptions } from './source.interface';

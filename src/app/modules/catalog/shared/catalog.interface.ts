@@ -1,5 +1,7 @@
 import { LayerOptions, TimeFilterOptions } from '@igo2/geo';
-import { EntityObject, State } from '../../entity/shared/entity.interface';
+
+import { EntityObject, State } from 'src/app/modules/entity';
+
 import { CatalogItemType } from './catalog.enum';
 
 export interface Catalog extends EntityObject {

@@ -1,4 +1,4 @@
-import { EntityTableModel } from '../../entity/shared/entity.interface';
+import { EntityTableModel } from 'src/app/modules/entity';
 
 export interface EditorConfig {
   id: string;

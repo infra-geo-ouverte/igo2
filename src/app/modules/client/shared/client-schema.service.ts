@@ -1,9 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ApiService } from '../../core/api';
+import { ApiService } from 'src/app/modules/core/api';
 import {
   ClientSchema,
   ClientApiConfig,

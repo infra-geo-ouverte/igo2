@@ -1,6 +1,6 @@
 import { ConfigService } from '@igo2/core';
 
-import { ClientService } from '../../../client/shared/client.service';
+import { ClientService } from 'src/app/modules/client';
 import { SearchSource } from './source';
 import { ClientSearchSource } from './client';
 

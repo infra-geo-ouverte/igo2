@@ -1,5 +1,5 @@
-import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, merge } from 'rxjs';
-import { debounceTime, map, skip, startWith } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
+import { debounceTime, map, skip } from 'rxjs/operators';
 
 import { Entity, EntityClass, State, EntitySortClause } from './entity.interface';
 import { EntityState } from './state';

@@ -17,10 +17,10 @@ import t from 'typy';
 import {
   Entity,
   EntityTableModel,
-  EntityTableColumn
-} from '../shared/entity.interface';
-import { EntityStore } from '../shared/store';
-import { EntityStoreController } from '../shared/controller';
+  EntityTableColumn,
+  EntityStore,
+  EntityStoreController
+} from '../shared';
 
 @Component({
   selector: 'fadq-entity-table',

@@ -1,7 +1,6 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { EditorService } from './shared/editor.service';
 import { FadqEditorOutletModule } from './editor-outlet/editor-outlet.module';
 import { FadqEditorSelectorModule } from './editor-selector/editor-selector.module';
 
@@ -17,13 +16,4 @@ import { FadqEditorSelectorModule } from './editor-selector/editor-selector.modu
   ],
   declarations: []
 })
-export class FadqEditionModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqEditionModule,
-      providers: [
-        EditorService
-      ]
-    };
-  }
-}
+export class FadqEditionModule {}

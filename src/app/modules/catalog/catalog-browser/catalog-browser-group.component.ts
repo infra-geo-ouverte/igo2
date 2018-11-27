@@ -9,22 +9,21 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { getEntityId, getEntityTitle } from '../../entity/shared/entity.utils';
-import { EntityStore } from '../../entity/shared/store';
-import { EntityState} from '../../entity/shared/state';
-import { EntityStoreController } from '../../entity/shared/controller';
+import {
+  EntityState,
+  EntityStore,
+  EntityStoreController,
+  getEntityId,
+  getEntityTitle
+} from 'src/app/modules/entity';
+
 import {
   CatalogItem,
   CatalogItemGroup,
   CatalogItemLayer,
-  CatalogItemState
-} from '../shared/catalog.interface';
-import { CatalogItemType } from '../shared/catalog.enum';
-
-export interface CatalogBrowserGroupEvent {
-  group:  CatalogItemGroup;
-  items:  CatalogItem[];
-}
+  CatalogItemState,
+  CatalogItemType
+} from '../shared';
 
 @Component({
   selector: 'fadq-catalog-browser-group',

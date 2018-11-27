@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { ConfigService } from '@igo2/core';
 
-import { ApiService } from '../../core/api';
+import { ApiService } from 'src/app/modules/core/api';
 import { ClientInfoService } from './client-info.service';
 import { ClientParcelService } from './client-parcel.service';
 import { ClientSchemaService } from './client-schema.service';

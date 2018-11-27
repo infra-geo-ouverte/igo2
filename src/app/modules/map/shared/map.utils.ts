@@ -1,7 +1,6 @@
 import { Md5 } from 'ts-md5';
 
 import {
-  AnyLayerOptions,
   DataSourceOptions,
   WMSDataSourceOptions,
   WMTSDataSourceOptions

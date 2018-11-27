@@ -3,7 +3,8 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from '@angular/core';
 
-import { FadqSearchModule } from '../../search/search.module';
+import { FadqSearchModule } from 'src/app/modules/search/search.module';
+
 import { SearchResultsToolComponent } from './search-results-tool.component';
 
 @NgModule({

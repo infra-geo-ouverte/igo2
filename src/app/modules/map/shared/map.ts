@@ -3,7 +3,7 @@ import {
   MapOptions
 } from '@igo2/geo';
 
-import { Overlay } from '../../overlay';
+import { Overlay } from 'src/app/modules/overlay';
 
 export class IgoMap extends IgoLibMap {
 

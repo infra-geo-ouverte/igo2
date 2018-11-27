@@ -4,9 +4,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { removeKeys } from '../../../utils/object';
-import { FEATURE } from '../../../feature/shared/feature.enum';
-import { Feature } from '../../../feature/shared/feature.interface';
+import { removeKeys } from 'src/app/modules/utils';
+import { FEATURE, Feature } from 'src/app/modules/feature';
+
 import { SearchResult } from '../search.interface';
 import { SearchSource, TextSearch, ReverseSearch } from './source';
 import { SearchSourceOptions } from './source.interface';

@@ -9,9 +9,9 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { EntityStore } from '../../entity/shared/store';
-import { EntityStoreController } from '../../entity/shared/controller';
-import { SearchResult } from '../shared/search.interface';
+import { EntityStore, EntityStoreController } from 'src/app/modules/entity';
+
+import { SearchResult } from '../shared';
 
 export enum DisplayMode {
   Grouped = 'grouped',

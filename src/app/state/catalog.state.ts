@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { getEntityId } from '../../entity/shared/entity.utils';
-import { EntityStore } from '../../entity/shared/store';
-import { Catalog, CatalogItem } from './catalog.interface';
+import { EntityStore, getEntityId } from 'src/app/modules/entity';
+import { Catalog, CatalogItem } from 'src/app/modules/catalog';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CatalogStoreService {
+export class CatalogState {
 
   private catalogStore: EntityStore<Catalog>;
   private catalogItemsStores = new Map<string, EntityStore<CatalogItem>>();

@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Subject } from 'rxjs';
 
-import { getEntityId } from '../../entity/shared/entity.utils';
-import { State } from '../../entity/shared/entity.interface';
-import { EntityStore } from '../../entity/shared/store';
-import { Editor } from './editor';
+import { EntityStore, State, getEntityId } from 'src/app/modules/entity';
+import { Editor } from 'src/app/modules/edition';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EditorService {
+export class EditionState {
 
   get store(): EntityStore<Editor> {
     return this._store;

@@ -4,8 +4,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { Client } from '../shared/client.interface';
-
+import { Client } from '../shared';
 
 @Component({
   selector: 'fadq-client-info',

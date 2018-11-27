@@ -1,1 +1,1 @@
-export * from './widgetbar';
+export * from './shared';

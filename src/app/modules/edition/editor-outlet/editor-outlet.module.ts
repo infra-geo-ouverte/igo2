@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {
   FadqDynamicContainerModule
-} from '../../common/dynamic-container/dynamic-container.module';
+} from 'src/app/modules/common/dynamic-container/dynamic-container.module';
 
 import { EditorOutletComponent } from './editor-outlet.component';
 

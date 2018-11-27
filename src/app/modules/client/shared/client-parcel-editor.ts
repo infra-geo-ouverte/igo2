@@ -1,7 +1,6 @@
-import { Editor } from '../../edition/shared/editor';
-import { EntityTableModel } from '../../entity/shared/entity.interface';
-import { EntityStore } from '../../entity/shared/store';
-import { Widget } from '../../widget/shared/widget.interface';
+import { Editor } from 'src/app/modules/edition';
+import { EntityStore, EntityTableModel } from 'src/app/modules/entity';
+import { Widget } from 'src/app/modules/widget';
 
 import { ClientParcel } from './client.interface';
 

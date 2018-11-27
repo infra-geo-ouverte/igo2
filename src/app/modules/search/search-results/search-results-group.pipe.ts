@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { SearchResult } from '../shared/search.interface';
+import { SearchResult } from '../shared';
 
 @Pipe({
   name: 'searchResultsGroup'

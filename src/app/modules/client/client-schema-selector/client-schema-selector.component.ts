@@ -11,11 +11,14 @@ import {
 
 import { Observable } from 'rxjs';
 
-import { getEntityTitle } from '../../entity/shared/entity.utils';
-import { State } from '../../entity/shared/entity.interface';
-import { EntityStore } from '../../entity/shared/store';
-import { EntityStoreController } from '../../entity/shared/controller';
-import { ClientSchema } from '../shared/client.interface';
+import {
+  EntityStore,
+  EntityStoreController,
+  State,
+  getEntityTitle
+} from 'src/app/modules/entity';
+
+import { ClientSchema } from '../shared';
 
 @Component({
   selector: 'fadq-client-schema-selector',

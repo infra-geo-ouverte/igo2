@@ -6,8 +6,9 @@ import {
 
 import { MatDividerModule } from '@angular/material';
 
-import { FadqPlaceSelectorModule } from '../../navigation/place-selector/place-selector.module';
-import { FadqPoiSelectorModule } from '../../navigation/poi-selector/poi-selector.module';
+import { FadqPlaceSelectorModule } from 'src/app/modules/navigation/place-selector/place-selector.module';
+import { FadqPoiSelectorModule } from 'src/app/modules/navigation/poi-selector/poi-selector.module';
+
 import { NavigationToolComponent } from './navigation-tool.component';
 
 @NgModule({

@@ -1,13 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { Register } from '@igo2/context';
+import { Register, ToolService } from '@igo2/context';
 
-import { ToolService } from '@igo2/context';
-
-import { EntityStore } from '../../entity/shared/store';
-import { Catalog } from '../../catalog/shared/catalog.interface';
-import { CatalogService } from '../../catalog/shared/catalog.service';
-import { CatalogStoreService } from '../../catalog/shared/catalog-store.service';
+import { CatalogState } from 'src/app/state';
+import { EntityStore } from 'src/app/modules/entity';
+import { Catalog, CatalogService } from 'src/app/modules/catalog';
 
 @Register({
   name: 'catalogFadq',
@@ -22,12 +19,12 @@ import { CatalogStoreService } from '../../catalog/shared/catalog-store.service'
 export class CatalogLibraryToolComponent implements OnInit {
 
   get store(): EntityStore<Catalog> {
-    return this.catalogStoreService.getCatalogStore();
+    return this.catalogState.getCatalogStore();
   }
 
   constructor(
     private catalogService: CatalogService,
-    private catalogStoreService: CatalogStoreService,
+    private catalogState: CatalogState,
     private toolService: ToolService
   ) {}
 

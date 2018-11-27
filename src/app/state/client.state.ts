@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 
-import { EditorService } from '../../edition/shared/editor.service';
-import { EntityStore } from '../../entity/shared/store';
-import { Widget } from '../../widget/shared/widget.interface';
-import { Client, ClientParcel, ClientSchema } from './client.interface';
-import { ClientParcelEditor } from './client-parcel-editor';
-import { ClientSchemaEditor } from './client-schema-editor';
+import {
+  Client,
+  ClientParcel,
+  ClientSchema,
+  ClientParcelEditor,
+  ClientSchemaEditor
+} from 'src/app/modules/client';
+import { EntityStore } from 'src/app/modules/entity';
+import { Widget } from 'src/app/modules/widget';
+
+import { EditionState } from './edition.state';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientStoreService {
+export class ClientState {
 
   private client: Client;
 
@@ -40,12 +45,12 @@ export class ClientStoreService {
     return this.schemaEditor.widgetStore as EntityStore<Widget>;
   }
 
-  constructor(private editorService: EditorService) {
+  constructor(private editionState: EditionState) {
     this._parcelEditor = new ClientParcelEditor();
-    this.editorService.register(this._parcelEditor);
+    this.editionState.register(this._parcelEditor);
 
     this._schemaEditor = new ClientSchemaEditor();
-    this.editorService.register(this._schemaEditor);
+    this.editionState.register(this._schemaEditor);
   }
 
   setClient(client: Client) {

@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { SEARCHES } from '../shared/search.enum';
-import { SearchSourceService } from '../shared/search-source.service';
-
+import { SEARCHES, SearchSourceService } from '../shared';
 
 @Component({
   selector: 'fadq-search-selector',

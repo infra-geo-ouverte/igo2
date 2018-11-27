@@ -11,15 +11,8 @@ import {
   SimpleChanges
 } from '@angular/core';
 
-import { EntityStore } from '../../entity/shared/store';
-import { EntityStoreController } from '../../entity/shared/controller';
-import { Widget } from '../shared/widget.interface';
-
-// TODO: I'm not sure using a igo-list is the right thing to do
-// It has built-in select and focu mechanism that we might not need
-// and that we actually need to override. For example, we need
-// to remove th background color with some css and we lose
-// the focus/ripple effect when hovering/clicking a selected widget
+import { EntityStore, EntityStoreController } from 'src/app/modules/entity';
+import { Widget } from 'src/app/modules/widget';
 
 const TOGGLE_WIDGET = {
   id: 'widgetbar_toggle',

@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { Entity, EntityFormModel, EntityFormField } from '../shared/entity.interface';
+import { Entity, EntityFormModel, EntityFormField } from '../shared';
 
 @Component({
   selector: 'fadq-entity-form',

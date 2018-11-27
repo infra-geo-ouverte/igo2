@@ -2,10 +2,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { Register } from '@igo2/context';
 
-import { EntityStore } from '../../entity/shared/store';
-import { Client, ClientSchema } from '../../client/shared/client.interface';
-import { ClientStoreService } from '../../client/shared/client-store.service';
-
+import { EntityStore } from 'src/app/modules/entity';
+import { Client, ClientSchema } from 'src/app/modules/client';
+import { ClientState } from 'src/app/state';
 
 @Register({
   name: 'clientInfo',
@@ -21,12 +20,12 @@ import { ClientStoreService } from '../../client/shared/client-store.service';
 export class  ClientInfoToolComponent {
 
   get client(): Client {
-    return this.clientStoreService.getClient();
+    return this.clientState.getClient();
   }
 
   get schemaStore(): EntityStore<ClientSchema> {
-    return this.clientStoreService.schemaStore;
+    return this.clientState.schemaStore;
   }
 
-  constructor(private clientStoreService: ClientStoreService) {}
+  constructor(private clientState: ClientState) {}
 }

@@ -1,6 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import {
   MatIconModule,
   MatButtonModule,
@@ -9,14 +8,8 @@ import {
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
-import {
-  IgoPanelModule,
-  IgoFlexibleModule
-} from '@igo2/common';
-import {
-  IgoContextManagerModule,
-  IgoToolModule,
-} from '@igo2/context';
+import { IgoPanelModule, IgoFlexibleModule } from '@igo2/common';
+import { IgoContextManagerModule, IgoToolModule } from '@igo2/context';
 
 import { SidenavComponent } from './sidenav.component';
 

@@ -2,9 +2,10 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { Poi, Register } from '@igo2/context';
 
-import { IgoMap } from '../../map/shared/map';
-import { MapService } from '../../map/shared/map.service';
-import { PlaceCategory } from '../../navigation/shared/place.interface';
+import { MapState } from 'src/app/state';
+import { IgoMap } from 'src/app/modules/map';
+import { PlaceCategory } from 'src/app/modules/navigation';
+
 import { NavigationToolOptions } from './navigation-tool.interface';
 
 @Register({
@@ -23,7 +24,7 @@ export class NavigationToolComponent {
   public options: NavigationToolOptions = {} as NavigationToolOptions;
 
   get map(): IgoMap {
-    return this.mapService.getMap();
+    return this.mapState.getMap();
   }
 
   get categories(): PlaceCategory[] {
@@ -34,5 +35,5 @@ export class NavigationToolComponent {
     return this.options.pois === undefined ? [] : this.options.pois;
   }
 
-  constructor(private mapService: MapService) {}
+  constructor(private mapState: MapState) {}
 }

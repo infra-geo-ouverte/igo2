@@ -9,6 +9,9 @@ import {
   CapabilitiesService,
   WMSDataSourceOptions
 } from '@igo2/geo';
+
+import { generateLayerIdFromSourceOptions } from 'src/app/modules/map';
+
 import {
   Catalog,
   CatalogItem,
@@ -17,7 +20,6 @@ import {
   CatalogServiceOptions
 } from './catalog.interface';
 import { CatalogItemType } from './catalog.enum';
-import { generateLayerIdFromSourceOptions } from '../../map/shared/map.utils';
 
 @Injectable({
   providedIn: 'root'

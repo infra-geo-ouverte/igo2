@@ -14,6 +14,7 @@ import { FadqNavigationModule } from './modules/navigation/navigation.module';
 import { FadqSearchModule } from './modules/search/search.module';
 import { FadqToolModule } from './modules/tool/tool.module';
 import { FadqPortalModule } from './pages/portal/portal.module';
+import { FadqStateModule } from './state/state.module';
 
 import { AppComponent } from './app.component';
 
@@ -24,12 +25,13 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
     FadqCoreModule.forRoot(),
-    FadqEditionModule.forRoot(),
+    FadqEditionModule,
     FadqClientModule.forRoot(),
     FadqCatalogModule.forRoot(),
-    FadqMapModule.forRoot(),
+    FadqMapModule,
     FadqNavigationModule,
     FadqSearchModule.forRoot(),
+    FadqStateModule.forRoot(),
     FadqToolModule,
     FadqPortalModule,
     IgoSpinnerModule,

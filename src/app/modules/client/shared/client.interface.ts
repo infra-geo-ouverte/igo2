@@ -1,5 +1,5 @@
-import { EntityObject } from '../../entity/shared/entity.interface';
-import { Feature } from '../../feature/shared/feature.interface';
+import { EntityObject } from 'src/app/modules/entity';
+import { Feature } from 'src/app/modules/feature';
 
 export interface ClientApiConfig {
   info: string;

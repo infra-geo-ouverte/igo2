@@ -9,20 +9,13 @@ import {
   OnDestroy,
   ChangeDetectionStrategy
 } from '@angular/core';
-
 import { FloatLabelType } from '@angular/material';
 
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { EntityStore } from '../../entity/shared/store';
-import { SearchResult, Research } from '../shared/search.interface';
-import { SearchService } from '../shared/search.service';
-
-export interface SearchEvent {
-  research: Research;
-  results: SearchResult[];
-}
+import { EntityStore } from 'src/app/modules/entity';
+import { SearchResult, SearchService, Research } from '../shared';
 
 @Component({
   selector: 'fadq-search-bar',
@@ -118,7 +111,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private stream$$: Subscription;
 
   @Output() change = new EventEmitter<string>();
-  @Output() search = new EventEmitter<SearchEvent>();
+  @Output() search = new EventEmitter<{
+    research: Research;
+    results: SearchResult[];
+  }>();
 
   @ViewChild('input') input: ElementRef;
 

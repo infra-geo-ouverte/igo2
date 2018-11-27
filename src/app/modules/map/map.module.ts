@@ -1,8 +1,7 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FadqMapWidgetbarModule } from './map-widgetbar/map-widgetbar.module';
-import { MapService } from './shared/map.service';
 
 @NgModule({
   imports: [
@@ -14,11 +13,4 @@ import { MapService } from './shared/map.service';
   ],
   declarations: []
 })
-export class FadqMapModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqMapModule,
-      providers: [ MapService ]
-    };
-  }
-}
+export class FadqMapModule {}

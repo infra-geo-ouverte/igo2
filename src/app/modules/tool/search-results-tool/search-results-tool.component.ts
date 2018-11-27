@@ -3,15 +3,13 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Register } from '@igo2/context';
 import { LayerService, LayerOptions } from '@igo2/geo';
 
-import { EntityStore } from '../../entity/shared/store';
-import { FEATURE } from '../../feature/shared/feature.enum';
-import { Feature } from '../../feature/shared/feature.interface';
-import { LAYER } from '../../layer/shared/layer.enum';
-import { IgoMap } from '../../map/shared/map';
-import { MapService } from '../../map/shared/map.service';
-import { OverlayAction } from '../../overlay/shared/overlay.enum';
-import { SearchResult } from '../../search/shared/search.interface';
-import { SearchStoreService } from '../../search/shared/search-store.service';
+import { MapState, SearchState } from 'src/app/state';
+import { EntityStore } from 'src/app/modules/entity';
+import { FEATURE, Feature } from 'src/app/modules/feature';
+import { LAYER } from 'src/app/modules/layer';
+import { IgoMap } from 'src/app/modules/map';
+import { OverlayAction } from 'src/app/modules/overlay';
+import { SearchResult } from 'src/app/modules/search';
 
 @Register({
   name: 'searchResultsFadq',
@@ -26,17 +24,17 @@ import { SearchStoreService } from '../../search/shared/search-store.service';
 export class SearchResultsToolComponent {
 
   get store(): EntityStore<SearchResult> {
-    return this.searchStoreService.store;
+    return this.searchState.store;
   }
 
   get map(): IgoMap {
-    return this.mapService.getMap();
+    return this.mapState.getMap();
   }
 
   constructor(
-    private mapService: MapService,
+    private mapState: MapState,
     private layerService: LayerService,
-    private searchStoreService: SearchStoreService
+    private searchState: SearchState
   ) {}
 
   onResultFocus(result: SearchResult) {
@@ -57,7 +55,7 @@ export class SearchResultsToolComponent {
   }
 
   private tryAddLayerToMap(result: SearchResult) {
-    const map = this.mapService.getMap();
+    const map = this.mapState.getMap();
     if (map === undefined) {
       return;
     }

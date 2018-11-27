@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Entity, EntityObject } from '../../entity/shared/entity.interface';
+import { Entity, EntityObject } from 'src/app/modules/entity';
 import { SearchSource } from './sources';
 
 export interface Research {

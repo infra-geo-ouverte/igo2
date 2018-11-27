@@ -3,11 +3,9 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
 
-import { Overlay } from '../../overlay/shared/overlay';
-import { OverlayAction } from '../../overlay/shared/overlay.enum';
-import { Feature } from '../../feature/shared/feature.interface';
-import { Place, PlaceCategory } from '../shared/place.interface';
-import { PlaceService } from '../shared/place.service';
+import { Overlay, OverlayAction } from 'src/app/modules/overlay';
+import { Feature } from 'src/app/modules/feature';
+import { Place, PlaceCategory, PlaceService } from '../shared';
 
 @Component({
   selector: 'fadq-place-selector',

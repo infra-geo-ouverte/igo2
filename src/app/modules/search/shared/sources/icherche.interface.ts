@@ -1,4 +1,4 @@
-import { FeatureGeometry } from '../../../feature/shared/feature.interface';
+import { FeatureGeometry } from 'src/app/modules/feature';
 
 export interface IChercheData {
   _id: string;

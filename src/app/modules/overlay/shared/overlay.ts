@@ -5,12 +5,10 @@ import OlFeature from 'ol/Feature';
 
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
-import { featureToOl } from '../../feature/shared/feature.utils';
-import { Feature } from '../../feature/shared/feature.interface';
-import { OverlayAction } from './overlay.enum';
+import { Feature, featureToOl } from 'src/app/modules/feature';
+import { IgoMap } from 'src/app/modules/map';
 
-// Import from the index to avoid recursion
-import { IgoMap } from '../../map';
+import { OverlayAction } from './overlay.enum';
 
 export class Overlay {
 

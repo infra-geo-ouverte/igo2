@@ -2,11 +2,10 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Media, MediaOrientation, MediaService } from '@igo2/core';
 
-import { Widget } from '../../widget/shared/widget.interface';
-import { getEntityId } from '../../entity/shared/entity.utils';
-import { EntityStore } from '../../entity/shared/store';
-import { MapWidget, MAP_DEFAULT_WIDGETS } from '../shared/map.enum';
-import { IgoMap } from '../../map/shared/map';
+import { EntityStore, getEntityId } from 'src/app/modules/entity';
+import { Widget } from 'src/app/modules/widget';
+
+import { IgoMap, MapWidget, MAP_DEFAULT_WIDGETS } from '../shared';
 
 @Component({
   selector: 'fadq-map-widgetbar',

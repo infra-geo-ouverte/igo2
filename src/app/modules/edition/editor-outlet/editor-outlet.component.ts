@@ -10,9 +10,9 @@ import {
 
 import { Subscription } from 'rxjs';
 
-import { Entity } from '../../entity/shared/entity.interface';
-import { Widget } from '../../widget/shared/widget.interface';
-import { Editor } from '../shared/editor';
+import { Entity } from 'src/app/modules/entity';
+import { Widget } from 'src/app/modules/widget';
+import { Editor } from 'src/app/modules/edition';
 
 @Component({
   selector: 'fadq-editor-outlet',

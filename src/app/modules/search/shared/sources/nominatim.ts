@@ -4,8 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { FEATURE } from '../../../feature/shared/feature.enum';
-import { FeatureGeometry, Feature } from '../../../feature/shared/feature.interface';
+import { FEATURE, Feature, FeatureGeometry } from 'src/app/modules/feature';
+
 import { SearchResult } from '../search.interface';
 import { SearchSource, TextSearch } from './source';
 import { SearchSourceOptions } from './source.interface';

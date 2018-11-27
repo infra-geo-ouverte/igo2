@@ -6,8 +6,9 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { getEntityTitle, getEntityIcon } from '../../entity/shared/entity.utils';
-import { Widget } from '../shared/widget.interface';
+import { getEntityTitle, getEntityIcon } from 'src/app/modules/entity';
+
+import { Widget } from '../shared';
 
 @Component({
   selector: 'fadq-widgetbar-item',

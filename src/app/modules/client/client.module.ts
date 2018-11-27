@@ -7,7 +7,6 @@ import {
   provideClientParcelService,
   provideClientSchemaService
 } from './shared/client.provider';
-import { ClientStoreService } from './shared/client-store.service';
 
 import { FadqClientInfoModule } from './client-info/client-info.module';
 import { FadqClientLegendModule } from './client-legend/client-legend.module';
@@ -38,8 +37,7 @@ export class FadqClientModule {
         provideClientInfoService(),
         provideClientParcelService(),
         provideClientSchemaService(),
-        provideClientService(),
-        ClientStoreService
+        provideClientService()
       ]
     };
   }
