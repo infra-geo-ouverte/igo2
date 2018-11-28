@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Register } from '@igo2/context';
 
 import { EntityStore } from 'src/app/modules/entity';
-import { Client, ClientSchema } from 'src/app/modules/client';
+import { Client, ClientDiagram, ClientSchema } from 'src/app/modules/client';
 import { ClientState } from 'src/app/state';
 
 @Register({
@@ -19,8 +20,12 @@ import { ClientState } from 'src/app/state';
 })
 export class  ClientInfoToolComponent {
 
-  get client(): Client {
-    return this.clientState.getClient();
+  get client$(): Observable<Client> {
+    return this.clientState.client$;
+  }
+
+  get diagramStore(): EntityStore<ClientDiagram> {
+    return this.clientState.diagramStore;
   }
 
   get schemaStore(): EntityStore<ClientSchema> {

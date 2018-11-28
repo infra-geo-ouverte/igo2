@@ -10,13 +10,18 @@ export class ClientParcelEditor extends Editor {
     selection: true,
     columns: [
       {
-        name: 'properties.diagramme',
-        title: 'Diagramme',
+        name: 'properties.noParcelleAgricole',
+        title: 'Numéro de parcelle',
         sortable: true
       },
       {
-        name: 'properties.id',
-        title: 'Numéro de parcelle',
+        name: 'properties.noDiagramme',
+        title: 'Numéro de diagramme',
+        sortable: true
+      },
+      {
+        name: 'properties.codeProduction',
+        title: 'Code de production',
         sortable: true
       }
     ]

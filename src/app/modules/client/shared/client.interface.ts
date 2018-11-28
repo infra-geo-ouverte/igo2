@@ -3,6 +3,8 @@ import { Feature } from 'src/app/modules/feature';
 
 export interface ClientApiConfig {
   info: string;
+  parcels: string;
+  schemas: string;
 }
 
 export interface ClientInfo {
@@ -16,6 +18,8 @@ export interface ClientInfo {
 export interface Client extends EntityObject, ClientInfo {
   parcels: ClientParcel[];
   schemas: ClientSchema[];
+  diagrams: ClientDiagram[];
+  annees: string[];
 }
 
 export interface ClientInfoListResponse {
@@ -62,13 +66,29 @@ export interface ClientSchemaListResult extends ClientSchema {}
 /*** Parcel ***/
 export interface ClientParcel extends Feature {
   properties: {
-    id: string;
-    diagramme: string;
+    idParcelle: string;
+    noParcelleAgricole: string;
+    noDiagramme: string;
+    codeProduction: string;
+    descriptionCodeProductionCouleur: string;
+    superficie: number;
+    superficieHectare: number;
+    prcMAO: number;
+    superficieMAO: number;
+    superficieDeclaree: number;
+    codeDefaultCultural: string;
+    prcDefaultCulture: number;
+    noConfirmation: number;
+    client: string;
+    clientExploitant: string;
   };
 }
 
-export interface ClientParcelListResponse {
-  donnees?: ClientParcelListResult[];
-}
-
 export interface ClientParcelListResult extends ClientParcel {}
+
+export type ClientParcelListResponse = ClientParcelListResult[];
+
+/*** Diagram ***/
+export interface ClientDiagram extends EntityObject {
+  id: string;
+}

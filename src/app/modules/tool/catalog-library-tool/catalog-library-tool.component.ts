@@ -19,7 +19,7 @@ import { Catalog, CatalogService } from 'src/app/modules/catalog';
 export class CatalogLibraryToolComponent implements OnInit {
 
   get store(): EntityStore<Catalog> {
-    return this.catalogState.getCatalogStore();
+    return this.catalogState.catalogStore;
   }
 
   constructor(

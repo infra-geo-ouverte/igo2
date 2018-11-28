@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -24,12 +24,7 @@ export class ClientSchemaService {
   ) {}
 
   getClientSchemasByNum(clientNum: string): Observable<ClientSchema[]> {
-    const url = this.apiService.buildUrl(this.apiConfig.info);
-    const params = new HttpParams({
-      fromObject: {
-        body: [clientNum]
-      }
-    });
+    const url = this.apiService.buildUrl(this.apiConfig.schemas, {clientNum});
 
     return of({
       'messages': [],
@@ -59,7 +54,7 @@ export class ClientSchemaService {
 
     /*
     return this.http
-      .post(url, { params })
+      .get(url)
       .pipe(
         map((response: ClientSchemaListResponse) => {
           return this.extractSchemasFromResponse(response);

@@ -28,7 +28,7 @@ export class SearchResultsToolComponent {
   }
 
   get map(): IgoMap {
-    return this.mapState.getMap();
+    return this.mapState.map;
   }
 
   constructor(
@@ -55,7 +55,7 @@ export class SearchResultsToolComponent {
   }
 
   private tryAddLayerToMap(result: SearchResult) {
-    const map = this.mapState.getMap();
+    const map = this.mapState.map;
     if (map === undefined) {
       return;
     }

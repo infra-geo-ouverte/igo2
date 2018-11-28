@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -24,14 +24,12 @@ export class ClientParcelService {
   ) {}
 
   getClientParcelsByNum(clientNum: string): Observable<ClientParcel[]> {
-    const url = this.apiService.buildUrl(this.apiConfig.info);
-    const params = new HttpParams({
-      fromObject: {
-        body: [clientNum]
-      }
+    const url = this.apiService.buildUrl(this.apiConfig.parcels, {
+      clientNum,
+      annee: '2018'
     });
 
-    return of({
+    /*return of({
       'messages': [],
       'donnees': [
         {
@@ -76,6 +74,32 @@ export class ClientParcelService {
           'properties': {
             'id': '100',
             'diagramme': '1'
+          },
+          'meta': {
+            'idProperty': 'properties.id'
+          }
+        },
+        {
+          'type': 'Feature',
+          'geometry': {
+            'coordinates': [[
+              [-71.5015650292556, 46.6871529332646],
+              [-71.5201094323364, 46.6993587124808],
+              [-71.3596792615633, 46.7258684739835],
+              [-71.3288723623501, 46.7398961305031],
+              [-71.403231566118, 46.62829481389],
+              [-71.4198727346531, 46.6392780184105],
+              [-71.4275874307534, 46.6366195989373],
+              [-71.5015650292556, 46.6871529332646]
+            ]],
+            'type': 'Polygon',
+          },
+          'properties': {
+            'id': '101',
+            'diagramme': '2'
+          },
+          'meta': {
+            'idProperty': 'properties.id'
           }
         }
       ]
@@ -83,29 +107,35 @@ export class ClientParcelService {
       map((response: ClientParcelListResponse) => {
         return this.extractParcelsFromResponse(response);
       })
-    );
+    );*/
 
-    /*
     return this.http
-      .post(url, { params })
+      .get(url)
       .pipe(
         map((response: ClientParcelListResponse) => {
-          return this.extractParcelsFromResponse(response);
+          return this.extractParcelsFromResponse(response, clientNum);
         })
       );
-    */
   }
 
-  private extractParcelsFromResponse(response: ClientParcelListResponse): ClientParcel[] {
-    const results = response.donnees || [];
-    return results.map(result => this.resultToParcel(result));
+  private extractParcelsFromResponse(response: ClientParcelListResponse, clientNum: string): ClientParcel[] {
+    return response.map(result => this.resultToParcel(result, clientNum));
   }
 
-  private resultToParcel(result: ClientParcelListResult) {
-    return Object.assign({
+  private resultToParcel(result: ClientParcelListResult, clientNum: string): ClientParcel {
+    const properties = Object.assign({}, result.properties, {
+      clientNum: clientNum
+    });
+    return {
       meta: {
-        title: `${result.properties.id}`
-      }
-    }, result);
+        idProperty: 'properties.idParcelle',
+        titleProperty: 'properties.idParcelle'
+      },
+      type: result.type,
+      projection: 'EPSG:4326',
+      geometry: result.geometry,
+      extent: undefined,
+      properties
+    };
   }
 }

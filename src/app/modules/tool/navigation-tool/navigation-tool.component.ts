@@ -24,7 +24,7 @@ export class NavigationToolComponent {
   public options: NavigationToolOptions = {} as NavigationToolOptions;
 
   get map(): IgoMap {
-    return this.mapState.getMap();
+    return this.mapState.map;
   }
 
   get categories(): PlaceCategory[] {

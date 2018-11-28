@@ -9,12 +9,13 @@
   "catalog": {
     "url": "http://chabou01-svn.fadq.qc/app/interne/igovisualisation/contexte_catalogue",
     "sources": [{
+        "id": "fadq.all",
         "title": "Toutes les données (config)",
         "url": "/swwf"
       }
     ]
   },
   "api": {
-    "url": "http://chabou01-svn.fadq.qc"
+    "url": "http://chabou01-svn.fadq.qc/app/interne"
   }
 }

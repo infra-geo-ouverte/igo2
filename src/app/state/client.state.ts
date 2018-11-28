@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import {
   Client,
+  ClientDiagram,
   ClientParcel,
   ClientSchema,
   ClientParcelEditor,
   ClientSchemaEditor
 } from 'src/app/modules/client';
-import { EntityStore } from 'src/app/modules/entity';
+import { EntityStore, EntityFilterClause, State } from 'src/app/modules/entity';
 import { Widget } from 'src/app/modules/widget';
 
 import { EditionState } from './edition.state';
@@ -17,7 +19,12 @@ import { EditionState } from './edition.state';
 })
 export class ClientState {
 
-  private client: Client;
+  public client$ = new BehaviorSubject<Client>(undefined);
+
+  get diagramStore(): EntityStore<ClientDiagram> {
+    return this._diagramStore;
+  }
+  private _diagramStore: EntityStore<ClientDiagram>;
 
   get parcelEditor(): ClientParcelEditor {
     return this._parcelEditor;
@@ -46,28 +53,42 @@ export class ClientState {
   }
 
   constructor(private editionState: EditionState) {
+    this._diagramStore = new EntityStore<ClientDiagram>();
+
     this._parcelEditor = new ClientParcelEditor();
     this.editionState.register(this._parcelEditor);
 
     this._schemaEditor = new ClientSchemaEditor();
     this.editionState.register(this._schemaEditor);
+
+    this._diagramStore
+      .observeFirstBy((diagram: ClientDiagram, state: State) => state.selected === true)
+      .subscribe((diagram: ClientDiagram) => this.onSelectDiagram(diagram));
   }
 
   setClient(client: Client) {
-    this.client = client;
+    this.diagramStore.setEntities(client.diagrams);
     this.parcelStore.setEntities(client.parcels);
     this.schemaStore.setEntities(client.schemas);
+    this.client$.next(client);
   }
 
-  getClient(): Client {
-    return this.client;
+  clearClient() {
+    this.diagramStore.clear();
+    this.parcelStore.clear();
+    this.schemaStore.clear();
+    this.client$.next(undefined);
   }
 
-  getParcelStore(): EntityStore<ClientParcel> {
-    return this.parcelStore;
+  private onSelectDiagram(diagram: ClientDiagram) {
+    if (diagram === undefined) {
+      this.parcelStore.filter.reset();
+    } else {
+      const filterClause = function(parcel: ClientParcel, state: State): boolean {
+        return parcel.properties.noDiagramme === diagram.id;
+      };
+      this.parcelStore.filter.set([filterClause]);
+    }
   }
 
-  getSchemaStore(): EntityStore<ClientSchema> {
-    return this.schemaStore;
-  }
 }

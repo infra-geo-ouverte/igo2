@@ -31,7 +31,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
   private catalog$$: Subscription;
 
   get map(): IgoMap {
-    return this.mapState.getMap();
+    return this.mapState.map;
   }
 
   constructor(
@@ -41,7 +41,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    const catalogStore = this.catalogState.getCatalogStore();
+    const catalogStore = this.catalogState.catalogStore;
 
     this.catalog$$ = catalogStore
       .observeFirstBy((catalog: Catalog, state: State) => state.selected === true)

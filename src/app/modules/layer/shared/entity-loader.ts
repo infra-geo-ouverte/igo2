@@ -42,6 +42,8 @@ export class EntityLoader {
   }
 
   private onFeaturesChange(features: Feature[]) {
+    // TODO: don't set features everytime and make sure no action
+    // are taken when the features are only sorted.
     this.setFeatures(features);
   }
 

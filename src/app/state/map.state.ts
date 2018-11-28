@@ -7,15 +7,14 @@ import { IgoMap } from 'src/app/modules/map';
 })
 export class MapState {
 
-  private map: IgoMap;
+  get map(): IgoMap {
+    return this._map;
+  }
+  private _map: IgoMap;
 
   constructor() {}
 
-  getMap(): IgoMap {
-    return this.map;
-  }
-
   setMap(map: IgoMap) {
-    this.map = map;
+    this._map = map;
   }
 }

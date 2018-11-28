@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, zip } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 
+import { getDiagramsFromParcels } from './client.utils';
 import { Client, ClientInfo, ClientParcel, ClientSchema } from './client.interface';
 import { ClientInfoService } from './client-info.service';
 import { ClientParcelService } from './client-parcel.service';
@@ -30,7 +31,9 @@ export class ClientService {
         map((data: [ClientInfo, ClientParcel[], ClientSchema[]]) => {
           return Object.assign({meta: {idProperty: 'numero'}}, data[0], {
             parcels: data[1],
-            schemas: data[2]
+            schemas: data[2],
+            diagrams: getDiagramsFromParcels(data[1]),
+            annees: []
           });
         })
       );

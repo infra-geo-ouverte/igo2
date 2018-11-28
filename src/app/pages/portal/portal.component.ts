@@ -12,14 +12,15 @@ import {
   Tool,
   ToolService
 } from '@igo2/context';
-import { FeatureDataSource, VectorLayer } from '@igo2/geo';
+import { VectorLayer } from '@igo2/geo';
 
 import { Client, ClientParcel } from 'src/app/modules/client';
-import { Editor } from '../../modules/edition/shared/editor';
+import { createParcelLayer } from 'src/app/modules/client/shared/client.utils';
+import { Editor } from 'src/app/modules/edition';
 import { EntityStore, State, getEntityTitle } from 'src/app/modules/entity';
 import { FEATURE, Feature } from 'src/app/modules/feature';
 import { EntityLoader } from 'src/app/modules/layer';
-import { IgoMap, ProjectionService } from '../../modules/map';
+import { IgoMap, ProjectionService } from 'src/app/modules/map';
 import { SearchResult, ClientSearchSource } from 'src/app/modules/search';
 import {
   ClientState,
@@ -137,6 +138,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     });
     this.mapState.setMap(this.map);
+    this.addParcelLayer();
 
     this.context$$ = this.contextService.context$
       .subscribe((context: DetailedContext) => this.onChangeContext(context));
@@ -155,10 +157,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.selectedEditor$$ = this.editorStore
       .observeFirstBy((editor: Editor, state: State) => state.selected === true)
       .subscribe((editor: Editor) => this.onSelectEditor(editor));
-
-    const parcelDataSource = new FeatureDataSource();
-    this.parcelLayer = new VectorLayer({source: parcelDataSource});
-    this.parcelLoader = new EntityLoader(this.parcelLayer, this.parcelStore);
   }
 
   ngOnDestroy() {
@@ -211,11 +209,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       const mapDetails = this.toolService.getTool('mapDetails');
       this.toolService.selectTool(mapDetails);
     }
+
     this.contextLoaded = true;
   }
 
   private onSearch(results: SearchResult[]) {
     if (results.length === 0) {
+      this.onClearSearch();
       return;
     }
 
@@ -258,10 +258,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
+  private onClearSearch() {
+    this.clientState.clearClient();
+  }
+
   private onSearchClient(client: Client) {
     this.clientState.setClient(client);
-    this.map.addLayer(this.parcelLayer);
-    this.parcelLoader.activate();
 
     const clientInfo = this.toolService.getTool('clientInfo');
     this.toolService.selectTool(clientInfo);
@@ -272,6 +274,13 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onSelectEditor(editor: Editor) {
     this.editor = editor;
+  }
+
+  private addParcelLayer() {
+    this.parcelLayer = createParcelLayer();
+    this.map.addLayer(this.parcelLayer, false);
+    this.parcelLoader = new EntityLoader(this.parcelLayer, this.parcelStore);
+    this.parcelLoader.activate();
   }
 
 }

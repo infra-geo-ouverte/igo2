@@ -1,6 +1,7 @@
 <div>
-  <ng-container *ngIf="client">
+  <ng-container *ngIf="(client$ | async) as client">
     <div class="fadq-info-client-tool-top-section">
+      <fadq-client-diagram-selector [store]="diagramStore"></fadq-client-diagram-selector>
       <fadq-client-schema-selector [store]="schemaStore"></fadq-client-schema-selector>
 
       <a href="#">{{client.nom}}</a>

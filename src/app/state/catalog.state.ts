@@ -8,15 +8,15 @@ import { Catalog, CatalogItem } from 'src/app/modules/catalog';
 })
 export class CatalogState {
 
-  private catalogStore: EntityStore<Catalog>;
+  get catalogStore(): EntityStore<Catalog> {
+    return this._catalogStore;
+  }
+  private _catalogStore: EntityStore<Catalog>;
+
   private catalogItemsStores = new Map<string, EntityStore<CatalogItem>>();
 
   constructor() {
-    this.catalogStore = new EntityStore();
-  }
-
-  getCatalogStore(): EntityStore<Catalog> {
-    return this.catalogStore;
+    this._catalogStore = new EntityStore();
   }
 
   getCatalogItemsStore(catalog: Catalog): EntityStore<CatalogItem> {
