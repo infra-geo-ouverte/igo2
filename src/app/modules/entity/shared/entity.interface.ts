@@ -61,3 +61,5 @@ export interface EntityFormField {
   visible?: boolean;
   cols?: number;
 }
+
+export type EntityFilterClause = (entity: Entity, state: State) => boolean;

@@ -64,6 +64,13 @@ export class EntityStoreController {
     this.store.updateEntitiesState(entities, changes);
   }
 
+  updateAllEntitiesState(changes: { [key: string]: boolean }) {
+    if (this.store === undefined) {
+      return;
+    }
+    this.store.updateAllEntitiesState(changes);
+  }
+
   private watch(store: EntityStore<Entity>) {
     this.unwatch();
 

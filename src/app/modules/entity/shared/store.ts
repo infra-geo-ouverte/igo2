@@ -1,8 +1,15 @@
 import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
 import { debounceTime, map, skip } from 'rxjs/operators';
 
-import { Entity, EntityClass, State, EntitySortClause } from './entity.interface';
+import {
+  Entity,
+  EntityClass,
+  EntityFilterClause,
+  EntitySortClause,
+  State
+} from './entity.interface';
 import { EntityState } from './state';
+import { EntityFilter } from './filter';
 import { EntitySorter } from './sorter';
 import { getEntityId } from './entity.utils';
 
@@ -15,6 +22,11 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     return this._state;
   }
   private _state: EntityState<S>;
+
+  get filter(): EntityFilter<T> {
+    return this._filter;
+  }
+  private _filter: EntityFilter<T>;
 
   get sorter(): EntitySorter<T> {
     return this._sorter;
@@ -43,6 +55,7 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
       state = new EntityState<S>();
     }
     this._state = state;
+    this._filter = new EntityFilter();
     this._sorter = new EntitySorter();
     this.watchChanges();
   }
@@ -55,6 +68,7 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     this.entities$.next(entities);
     if (soft === false) {
       this.state.reset();
+      this.filter.reset();
       this.sorter.reset();
     }
   }
@@ -94,12 +108,12 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
       );
   }
 
-  observeFirstBy(filterBy: (entity: T, state: S) => boolean): Observable<T> {
+  observeFirstBy(clause: EntityFilterClause): Observable<T> {
     return this.observable
       .pipe(
         map((entities: T[]) => {
           return entities.find((entity: T) => {
-            return filterBy(entity, this.getEntityState(entity));
+            return clause(entity, this.getEntityState(entity));
           });
         })
       );
@@ -109,6 +123,7 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     const combined$ = combineLatest(
       this.entities$,
       this.state.observable,
+      this.filter.observable,
       this.sorter.observable
     );
 
@@ -116,8 +131,13 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
       .pipe(
         skip(1),
         debounceTime(50),
-      ).subscribe((value: [T[], Map<string, S>, EntitySortClause]) => {
-        this.observable.next(this.sorter.sort(value[0]));
+      ).subscribe((value: [T[], Map<string, S>, EntityFilterClause[],  EntitySortClause]) => {
+        let entities = value[0].slice();
+        entities = this.filter.filter(entities, (entity: T) => {
+          return this.getEntityState(entity);
+        });
+        entities = this.sorter.sort(entities);
+        this.observable.next(entities);
       });
   }
 }

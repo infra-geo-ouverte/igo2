@@ -26,7 +26,6 @@ export class EntitySorter<T extends Entity> {
   }
 
   sort(entities: T[]): T[] {
-    entities = entities.slice();
     if (this.clause === undefined) {
       return entities;
     }
