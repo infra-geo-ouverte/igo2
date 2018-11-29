@@ -5,6 +5,7 @@ import {
   Client,
   ClientDiagram,
   ClientParcel,
+  ClientParcelYear,
   ClientSchema,
   ClientParcelEditor,
   ClientSchemaEditor
@@ -25,6 +26,11 @@ export class ClientState {
     return this._diagramStore;
   }
   private _diagramStore: EntityStore<ClientDiagram>;
+
+  get parcelYearStore(): EntityStore<ClientParcelYear> {
+    return this._parcelYearStore;
+  }
+  private _parcelYearStore: EntityStore<ClientParcelYear>;
 
   get parcelEditor(): ClientParcelEditor {
     return this._parcelEditor;
@@ -54,6 +60,7 @@ export class ClientState {
 
   constructor(private editionState: EditionState) {
     this._diagramStore = new EntityStore<ClientDiagram>();
+    this._parcelYearStore = new EntityStore<ClientParcelYear>();
 
     this._parcelEditor = new ClientParcelEditor();
     this.editionState.register(this._parcelEditor);

@@ -6,5 +6,6 @@ export * from './client.utils';
 export * from './client-info.service';
 export * from './client-parcel-editor';
 export * from './client-parcel.service';
+export * from './client-parcel-year.service';
 export * from './client-schema-editor';
 export * from './client-schema.service';

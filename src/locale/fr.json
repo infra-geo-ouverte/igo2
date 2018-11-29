@@ -58,6 +58,9 @@
       "nodetexp": "Non détenues exploitées",
       "sel": "Sélectionnées"
     },
+    "parcelYear": {
+      "placeholder": "Année"
+    },
     "diagram": {
       "placeholder": "Diagramme",
       "all": "Tous"

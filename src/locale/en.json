@@ -62,6 +62,9 @@
       "placeholder": "Diagramme",
       "all": "All"
     },
+    "parcelYear": {
+      "placeholder": "Year"
+    },
     "schema": {
       "placeholder": "Schema",
       "create": "Créer",

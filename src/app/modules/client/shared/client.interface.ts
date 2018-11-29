@@ -4,6 +4,7 @@ import { Feature } from 'src/app/modules/feature';
 export interface ClientApiConfig {
   info: string;
   parcels: string;
+  parcelYears: string;
   schemas: string;
 }
 
@@ -81,6 +82,7 @@ export interface ClientParcel extends Feature {
     noConfirmation: number;
     noClient: string;
     noClientExploitant: string;
+    noClientRecherche: string;
     annee: string;
     indicateurParcelleDrainee: string;
   };
@@ -89,6 +91,23 @@ export interface ClientParcel extends Feature {
 export interface ClientParcelListResult extends ClientParcel {}
 
 export type ClientParcelListResponse = ClientParcelListResult[];
+
+/*** Parcel Year ***/
+export interface ClientParcelYear extends EntityObject {
+  id: string;
+  annee: number;
+  current: boolean;
+}
+
+export interface ClientParcelYearListResult {
+  idParametre: number;
+  annee: number;
+  indAnneeActive: boolean;
+}
+
+export interface ClientParcelYearListResponse {
+  data: ClientParcelYearListResult[];
+}
 
 /*** Diagram ***/
 export interface ClientDiagram extends EntityObject {

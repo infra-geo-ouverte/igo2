@@ -1,10 +1,16 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Register } from '@igo2/context';
 
 import { EntityStore } from 'src/app/modules/entity';
-import { Client, ClientDiagram, ClientSchema } from 'src/app/modules/client';
+import {
+  Client,
+  ClientDiagram,
+  ClientSchema,
+  ClientParcelYear,
+  ClientParcelYearService
+} from 'src/app/modules/client';
 import { ClientState } from 'src/app/state';
 
 @Register({
@@ -18,10 +24,14 @@ import { ClientState } from 'src/app/state';
   styleUrls: ['./client-info-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class  ClientInfoToolComponent {
+export class  ClientInfoToolComponent implements OnInit {
 
   get client$(): Observable<Client> {
     return this.clientState.client$;
+  }
+
+  get parcelYearStore(): EntityStore<ClientParcelYear> {
+    return this.clientState.parcelYearStore;
   }
 
   get diagramStore(): EntityStore<ClientDiagram> {
@@ -32,5 +42,31 @@ export class  ClientInfoToolComponent {
     return this.clientState.schemaStore;
   }
 
-  constructor(private clientState: ClientState) {}
+  constructor(
+    private clientParcelYearService: ClientParcelYearService,
+    private clientState: ClientState
+  ) {}
+
+  ngOnInit() {
+    if (this.parcelYearStore.empty) {
+      this.loadParcelYears();
+    }
+  }
+
+  private loadParcelYears() {
+    // TODO: Move that to an initializer to make sure we
+    // can use the current year when doing a research for the first time
+    this.clientParcelYearService.loadParcelYears()
+      .subscribe((parcelYears: ClientParcelYear[]) => {
+        const current = parcelYears.find((parcelYear: ClientParcelYear) => {
+          return parcelYear.current === true;
+        });
+        this.parcelYearStore.setEntities(parcelYears);
+        this.parcelYearStore.sorter.set({property: 'annee', direction: 'desc'});
+        if (current !== undefined) {
+          this.parcelYearStore.updateEntityState(current, {selected: true});
+        }
+      });
+  }
+
 }
