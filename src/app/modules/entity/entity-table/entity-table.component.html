@@ -8,13 +8,13 @@
       (matSortChange)="onSort($event)">
 
       <ng-container [matColumnDef]="column.name" *ngFor="let column of model.columns">
-        <ng-container *ngIf="column.sortable">
+        <ng-container *ngIf="columnIsSortable(column)">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             {{column.title}}
           </th>
         </ng-container>
 
-        <ng-container *ngIf="!column.sortable">
+        <ng-container *ngIf="!columnIsSortable(column)">
           <th mat-header-cell *matHeaderCellDef>
             {{column.title}}
           </th>

@@ -9,7 +9,7 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import {
   EntityStore,
@@ -28,8 +28,9 @@ import { ClientSchema } from '../shared';
 })
 export class ClientSchemaSelectorComponent implements OnInit, OnDestroy {
 
-  public schema$: Observable<ClientSchema>;
+  public currentSchema: ClientSchema;
 
+  private schema$$: Subscription;
   private controller: EntityStoreController;
 
   @Input()
@@ -53,12 +54,14 @@ export class ClientSchemaSelectorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.controller.bind(this.store);
-    this.schema$ = this.store
-      .observeFirstBy((schema: ClientSchema, state: State) => state.selected === true);
+    this.schema$$ = this.store
+      .observeFirstBy((schema: ClientSchema, state: State) => state.selected === true)
+      .subscribe((schema: ClientSchema) => this.currentSchema = schema);
   }
 
   ngOnDestroy() {
     this.controller.unbind();
+    this.schema$$.unsubscribe();
   }
 
   getSchemaTitle(schema: ClientSchema): string {

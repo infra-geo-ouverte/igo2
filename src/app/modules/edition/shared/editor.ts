@@ -93,8 +93,12 @@ export class Editor extends EntityClass {
   }
 
   destroy() {
-    this.activeWidget$$.unsubscribe();
-    this.selectedEntity$$.unsubscribe();
+    if (this.activeWidget$$ !== undefined) {
+      this.activeWidget$$.unsubscribe();
+    }
+    if (this.selectedEntity$$ !== undefined) {
+      this.selectedEntity$$.unsubscribe();
+    }
   }
 
   getComponentData(): { [key: string]: any } {

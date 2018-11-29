@@ -9,7 +9,7 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import {
   EntityStore,
@@ -28,8 +28,9 @@ import { ClientDiagram } from '../shared';
 })
 export class ClientDiagramSelectorComponent implements OnInit, OnDestroy {
 
-  public diagram$: Observable<ClientDiagram>;
+  public currentDiagram: ClientDiagram;
 
+  private diagram$$: Subscription;
   private controller: EntityStoreController;
 
   @Input()
@@ -53,12 +54,14 @@ export class ClientDiagramSelectorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.controller.bind(this.store);
-    this.diagram$ = this.store
-      .observeFirstBy((diagram: ClientDiagram, state: State) => state.selected === true);
+    this.diagram$$ = this.store
+      .observeFirstBy((diagram: ClientDiagram, state: State) => state.selected === true)
+      .subscribe((diagram: ClientDiagram) => this.currentDiagram = diagram);
   }
 
   ngOnDestroy() {
     this.controller.unbind();
+    this.diagram$$.unsubscribe();
   }
 
   getDiagramTitle(diagram: ClientDiagram): string {

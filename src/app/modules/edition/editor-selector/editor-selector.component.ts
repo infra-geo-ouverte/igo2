@@ -28,7 +28,7 @@ import { Editor } from '../shared';
 })
 export class EditorSelectorComponent implements OnInit, OnDestroy {
 
-  public editor: Editor;
+  public currentEditor: Editor;
 
   private editor$$: Subscription;
   private controller: EntityStoreController;
@@ -75,12 +75,12 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
   }
 
   private initEditor(editor: Editor) {
-    if (this.editor !== undefined) {
-      this.editor.destroy();
+    if (this.currentEditor !== undefined) {
+      this.currentEditor.destroy();
     }
     if (editor !== undefined) {
       editor.init();
     }
-    this.editor = editor;
+    this.currentEditor = editor;
   }
 }

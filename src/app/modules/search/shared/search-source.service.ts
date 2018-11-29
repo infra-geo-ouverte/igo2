@@ -4,8 +4,12 @@ export class SearchSourceService {
 
   constructor(private sources: SearchSource[]) {}
 
-  getSources() {
+  getSources(): SearchSource[] {
     return this.sources;
+  }
+
+  getEnabledSources(): SearchSource[] {
+    return this.getSources().filter((source: SearchSource) => source.enabled === true);
   }
 
   enableSourcesByType(type: string) {

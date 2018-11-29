@@ -19,7 +19,10 @@
     </mat-icon>
   </button>
 
-  <fadq-search-bar [store]="searchStore"></fadq-search-bar>
+  <fadq-search-bar
+    [store]="searchStore"
+    (change)="onSearchTermChange($event)">
+  </fadq-search-bar>
 
   <fadq-sidenav
     [ngClass]="{'fadq-sidenav-with-expansion-panel': expansionPanelExpanded}"

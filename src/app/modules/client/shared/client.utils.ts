@@ -49,13 +49,13 @@ function createParcelLayerStyle(): (feature: OlFeature) => olstyle.Style {
 }
 
 function getParcelFeatureColor(feature: OlFeature) {
-  const clientNum = feature.get('clientNum');
-  const clientDet = feature.get('client');
-  const clientExp = feature.get('clientExploitant');
+  const clientRech = feature.get('noClientRecherche');
+  const clientDet = feature.get('noClient');
+  const clientExp = feature.get('noClientExploitant');
 
   let color;
-  if (clientNum === clientDet) {
-    color = clientNum === clientExp ? [35, 140, 0] : [255, 139, 0];
+  if (clientRech === clientDet) {
+    color = clientRech === clientExp ? [35, 140, 0] : [255, 139, 0];
   } else {
     color = [0, 218, 250];
   }

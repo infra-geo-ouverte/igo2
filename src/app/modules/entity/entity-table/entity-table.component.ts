@@ -111,6 +111,14 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
     return t(entity, column.name).safeObject;
   }
 
+  columnIsSortable(column: EntityTableColumn): boolean {
+    let sortable = column.sort;
+    if (sortable === undefined) {
+      sortable = this.model.sort === undefined ? false : this.model.sort;
+    }
+    return sortable;
+  }
+
   getTableClass(): { [key: string]: boolean; } {
     const selection = this.model.selection || false;
     return {

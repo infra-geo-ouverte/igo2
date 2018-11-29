@@ -2,7 +2,7 @@
 
 <mat-form-field class="fadq-diagram-selector">
   <mat-select
-    [value]="diagram$ | async"
+    [(ngModel)]="currentDiagram"
     [placeholder]="'client.diagram.placeholder' | translate"
     (selectionChange)="onSelectionChange($event)">
     <mat-option>{{'client.diagram.all' | translate}}</mat-option>

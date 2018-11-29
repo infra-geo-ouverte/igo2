@@ -26,7 +26,8 @@ export interface State {
 
 export interface EntityTableModel {
   columns: EntityTableColumn[];
-  selection: boolean;
+  selection?: boolean;
+  sort?: boolean;
   rowClassFunc?: (entity: Entity) => {
     [key: string]: boolean;
   };
@@ -40,7 +41,7 @@ export interface EntityTableColumn {
   title: string;
   visible?: boolean;
   html?: boolean;
-  sortable?: boolean;
+  sort?: boolean;
   filterable?: boolean;
 }
 

@@ -70,17 +70,19 @@ export interface ClientParcel extends Feature {
     noParcelleAgricole: string;
     noDiagramme: string;
     codeProduction: string;
-    descriptionCodeProductionCouleur: string;
+    descriptionCodeProduction: string;
     superficie: number;
     superficieHectare: number;
-    prcMAO: number;
+    pourcentageSuperficieMAO: number;
     superficieMAO: number;
     superficieDeclaree: number;
     codeDefaultCultural: string;
-    prcDefaultCulture: number;
+    pourcentageDefaultCulture: number;
     noConfirmation: number;
-    client: string;
-    clientExploitant: string;
+    noClient: string;
+    noClientExploitant: string;
+    annee: string;
+    indicateurParcelleDrainee: string;
   };
 }
 

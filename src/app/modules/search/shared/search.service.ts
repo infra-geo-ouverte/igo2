@@ -28,18 +28,14 @@ export class SearchService {
       return this.reverseSearch(lonLat);
     }
 
-    const sources = this.searchSourceService.getSources()
-      .filter((source: SearchSource) => {
-        return source.enabled && sourceCanSearch(source);
-      });
+    const sources = this.searchSourceService.getEnabledSources()
+      .filter(sourceCanSearch);
     return this.searchSources(sources, term);
   }
 
   reverseSearch(lonLat: [number, number]) {
-    const sources = this.searchSourceService.getSources()
-      .filter((source: SearchSource) => {
-        return source.enabled && sourceCanReverseSearch(source);
-      });
+    const sources = this.searchSourceService.getEnabledSources()
+      .filter(sourceCanReverseSearch);
     return this.reverseSearchSources(sources, lonLat);
   }
 

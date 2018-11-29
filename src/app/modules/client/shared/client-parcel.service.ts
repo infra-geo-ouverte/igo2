@@ -124,7 +124,7 @@ export class ClientParcelService {
 
   private resultToParcel(result: ClientParcelListResult, clientNum: string): ClientParcel {
     const properties = Object.assign({}, result.properties, {
-      clientNum: clientNum
+      noClientRecherche: clientNum
     });
     return {
       meta: {

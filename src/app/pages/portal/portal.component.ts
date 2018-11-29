@@ -14,7 +14,7 @@ import {
 } from '@igo2/context';
 import { VectorLayer } from '@igo2/geo';
 
-import { Client, ClientParcel } from 'src/app/modules/client';
+import { Client, ClientParcel, CLIENT } from 'src/app/modules/client';
 import { createParcelLayer } from 'src/app/modules/client/shared/client.utils';
 import { Editor } from 'src/app/modules/edition';
 import { EntityStore, State, getEntityTitle } from 'src/app/modules/entity';
@@ -56,7 +56,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   private context$$: Subscription;
   private selectedEditor$$: Subscription;
   private searchResults$$: Subscription;
-  private selectedSearchResult$$: Subscription;
   private focusedSearchResult$$: Subscription;
 
   private parcelLayer: VectorLayer;
@@ -146,10 +145,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchResults$$ = this.searchStore.observable
       .subscribe((results: SearchResult[]) => this.onSearch(results));
 
-    this.selectedSearchResult$$ = this.searchStore
-      .observeFirstBy((result: SearchResult, state: State) => state.selected === true)
-      .subscribe((result: SearchResult) => this.onSelectSearchResult(result));
-
     this.focusedSearchResult$$ = this.searchStore
       .observeFirstBy((result: SearchResult, state: State) => state.focused === true)
       .subscribe((result: SearchResult) => this.onFocusSearchResult(result));
@@ -162,7 +157,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.context$$.unsubscribe();
     this.searchResults$$.unsubscribe();
-    this.selectedSearchResult$$.unsubscribe();
     this.focusedSearchResult$$.unsubscribe();
     this.selectedEditor$$.unsubscribe();
   }
@@ -182,8 +176,28 @@ export class PortalComponent implements OnInit, OnDestroy {
     // }
   }
 
+  onSearchTermChange(term: string) {
+    if (this.searchState.searchTypes.indexOf(CLIENT) >= 0) {
+      this.onBeforeSearchClient();
+    } else {
+      this.onBeforeSearch();
+    }
+  }
+
+  private closeToastPanel() {
+    this.toastPanelOpened = false;
+  }
+
   private openToastPanel() {
     this.toastPanelOpened = true;
+  }
+
+  private closeExpansionPanel() {
+    this.expansionPanelExpanded = false;
+  }
+
+  private openExpansionPanel() {
+    this.expansionPanelExpanded = true;
   }
 
   private closeSidenav() {
@@ -213,36 +227,50 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.contextLoaded = true;
   }
 
+  private onBeforeSearch() {
+    if (this.mediaService.media$.value === Media.Mobile) {
+      this.closeToastPanel();
+    }
+
+    const tool = this.toolService.getTool('searchResultsFadq');
+    this.toolService.selectTool(tool);
+    this.openSidenav();
+  }
+
   private onSearch(results: SearchResult[]) {
     if (results.length === 0) {
       this.onClearSearch();
       return;
     }
 
-    const withClients = results.some((result: SearchResult) => {
-      return result.source instanceof ClientSearchSource;
+    const searchClient = results.some((result: SearchResult) => {
+      return result.meta.dataType === CLIENT;
     });
 
-    if (withClients) {
-      const client = results[0].data as Client;
-      this.onSearchClient(client);
-    } else {
-      const searchResults = this.toolService.getTool('searchResultsFadq');
-      this.toolService.selectTool(searchResults);
+    if (searchClient) {
+      this.onSearchClient(results[0].data as Client);
     }
+  }
+
+  private onBeforeSearchClient() {
+    this.closeToastPanel();
+
+    if (this.mediaService.media$.value === Media.Mobile) {
+      this.closeExpansionPanel();
+    } else {
+      this.openExpansionPanel();
+    }
+
+    this.editionState.selectEditor(this.clientState.parcelEditor);
+
+    const tool = this.toolService.getTool('clientInfo');
+    this.toolService.selectTool(tool);
 
     this.openSidenav();
   }
 
-  private onSelectSearchResult(result: SearchResult) {
-    if (result === undefined) {
-      return;
-    }
-
-    if (this.mediaService.media$.value === Media.Mobile) {
-      this.closeSidenav();
-    }
-    this.openToastPanel();
+  private onSearchClient(client: Client) {
+    this.clientState.setClient(client);
   }
 
   private onFocusSearchResult(result: SearchResult) {
@@ -251,6 +279,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
 
     if (result.meta.dataType === FEATURE) {
+      if (this.mediaService.media$.value === Media.Mobile) {
+        this.closeSidenav();
+      }
+
       this.feature = result.data as Feature;
       this.openToastPanel();
     } else {
@@ -260,16 +292,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onClearSearch() {
     this.clientState.clearClient();
-  }
-
-  private onSearchClient(client: Client) {
-    this.clientState.setClient(client);
-
-    const clientInfo = this.toolService.getTool('clientInfo');
-    this.toolService.selectTool(clientInfo);
-
-    // const schemaEditor = this.clientState.schemaEditor;
-    // this.editionState.selectEditor(schemaEditor);
   }
 
   private onSelectEditor(editor: Editor) {

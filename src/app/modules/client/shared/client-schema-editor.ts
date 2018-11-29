@@ -9,30 +9,28 @@ export class ClientSchemaEditor extends Editor {
 
   static tableModel: EntityTableModel = {
     selection: true,
+    sort: true,
     columns: [
       {
         name: 'id',
-        title: 'Numéro de schéma',
-        sortable: true
+        title: 'Numéro de schéma'
       },
       {
         name: 'type',
-        title: 'Type de schéma',
-        sortable: true
+        title: 'Type de schéma'
       },
       {
         name: 'description',
-        title: 'Description'
+        title: 'Description',
+        sort: false
       },
       {
         name: 'annee',
-        title: 'Année',
-        sortable: true
+        title: 'Année'
       },
       {
         name: 'etat',
-        title: 'État',
-        sortable: true
+        title: 'État'
       }
     ]
   };
@@ -84,7 +82,7 @@ export class ClientSchemaEditor extends Editor {
 
   constructor() {
     super({
-      id: 'fadq.client-schemas-store',
+      id: 'fadq.client-schema-editor',
       title: 'Schemas du client',
       tableModel: ClientSchemaEditor.tableModel
     });
