@@ -9,6 +9,9 @@ export class ClientParcelEditor extends Editor {
   static tableModel: EntityTableModel = {
     selection: true,
     sort: true,
+    rowClassFunc: ((parcel: ClientParcel) => {
+      return {'text-centered': true};
+    }),
     columns: [
       {
         name: 'properties.noParcelleAgricole',

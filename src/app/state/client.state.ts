@@ -68,6 +68,7 @@ export class ClientState {
 
   setClient(client: Client) {
     this.diagramStore.setEntities(client.diagrams);
+    this.diagramStore.sorter.set({property: 'id', direction: 'asc'});
     this.parcelStore.setEntities(client.parcels);
     this.schemaStore.setEntities(client.schemas);
     this.client$.next(client);

@@ -127,15 +127,19 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   getRowClass(entity: Entity): { [key: string]: boolean; } {
+    let classes = {};
+
     const func = this.model.rowClassFunc;
     if (func instanceof Function) {
-      return func(entity);
+      classes = Object.assign(classes, func(entity));
     }
 
     const state = this.store.getEntityState(entity);
-    return {
-      'fadq-entity-table-row-selected': state.selected
-    };
+    classes = Object.assign(classes, {
+      'fadq-entity-table-row-selected': state.selected ? true : false
+    });
+
+    return classes;
   }
 
   getCellClass(entity: Entity, column: EntityTableColumn): { [key: string]: boolean; } {

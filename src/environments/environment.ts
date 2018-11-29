@@ -56,7 +56,7 @@ export const environment: Environment = {
       prefix: './locale/'
     },
     api: {
-      url: '/app/interne'
+      url: 'http://chabou01-svn.fadq.qc/app/interne'
     },
     client: {
       api: {

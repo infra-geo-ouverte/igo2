@@ -45,7 +45,7 @@ export const environment: Environment = {
     client: {
       api: {
         info: 'http://chabou01-svn.fadq.qc/services/FADQ/RelationAffaires/InformationClient/obtenirListeClients',
-        parcels: '/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/0007229/2018',
+        parcels: '/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/${clientNum}/${annee}',
         schemas: ''
       }
     }

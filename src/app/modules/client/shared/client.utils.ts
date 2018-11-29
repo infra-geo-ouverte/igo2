@@ -12,7 +12,7 @@ export function getDiagramsFromParcels(parcels: ClientParcel[]): ClientDiagram[]
 
   return Array.from(diagramIds).map((id: string) => {
     return {id};
-  }).sort();
+  });
 }
 
 export function createParcelLayer(): VectorLayer {

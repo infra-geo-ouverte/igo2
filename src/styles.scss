@@ -60,3 +60,8 @@ body {
     padding-bottom: 0;
   }
 }
+
+th.text-centered td,
+tr.text-centered td {
+  text-align: center;
+}

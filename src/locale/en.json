@@ -19,15 +19,15 @@
     "placeSelector.category.placeholder": "Category",
     "poiSelector.poi.placeholder": "Point of Interest",
     "categories": {
-      "mun": "Municipalities",
+      "mun": "Municipalité",
       "mrc": "MRC",
-      "ra": "Regions",
-      "tcs": "Service Center Territories",
-      "smd": "Meteorological Station",
-      "smf": "Meteorological Station (availables)",
-      "zc1": "Zone 1",
-      "zc2": "Zone 2",
-      "rzc": "Collective Zones"
+      "ra": "Région administrative",
+      "tcs": "Centre de services",
+      "smd": "Station météo disponible",
+      "smf": "Station météo foin (année courante)",
+      "zc1": "Zone céréales maïs fourrager oléagineux",
+      "zc2": "Zone maïs-grain",
+      "rzc": "Région zonage"
     }
   },
 
