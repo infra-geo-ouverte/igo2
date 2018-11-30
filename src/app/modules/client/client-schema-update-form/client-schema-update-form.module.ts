@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FadqEntityFormModule } from '../../entity/entity-form/entity-form.module';
 
-import { ClientSchemaFormComponent } from './client-schema-form.component';
+import { ClientSchemaUpdateFormComponent } from './client-schema-update-form.component';
 
 @NgModule({
   imports: [
@@ -11,13 +11,13 @@ import { ClientSchemaFormComponent } from './client-schema-form.component';
     FadqEntityFormModule
   ],
   exports: [
-    ClientSchemaFormComponent
+    ClientSchemaUpdateFormComponent
   ],
   declarations: [
-    ClientSchemaFormComponent
+    ClientSchemaUpdateFormComponent
   ],
   entryComponents: [
-    ClientSchemaFormComponent
+    ClientSchemaUpdateFormComponent
   ]
 })
-export class FadqClientSchemaFormModule {}
+export class FadqClientSchemaUpdateFormModule {}

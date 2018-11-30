@@ -125,7 +125,10 @@ export class DynamicContainerComponent implements OnChanges, OnDestroy {
       if (key in instance) {
         const emitter = instance[key];
         if (emitter instanceof EventEmitter) {
-          this.subscriptions.push(emitter.subscribe(subscriber));
+          const subscribers = Array.isArray(subscriber) ? subscriber : [subscriber];
+          subscribers.forEach((_subscriber) => {
+            this.subscriptions.push(emitter.subscribe(_subscriber));
+          });
         }
       }
     });

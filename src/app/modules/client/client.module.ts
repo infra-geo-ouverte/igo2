@@ -13,7 +13,7 @@ import { FadqClientInfoModule } from './client-info/client-info.module';
 import { FadqClientLegendModule } from './client-legend/client-legend.module';
 import { FadqClientDiagramSelectorModule } from './client-diagram-selector/client-diagram-selector.module';
 import { FadqClientParcelYearSelectorModule } from './client-parcel-year-selector/client-parcel-year-selector.module';
-import { FadqClientSchemaFormModule } from './client-schema-form/client-schema-form.module';
+import { FadqClientSchemaUpdateFormModule } from './client-schema-update-form/client-schema-update-form.module';
 import { FadqClientSchemaSelectorModule } from './client-schema-selector/client-schema-selector.module';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { FadqClientSchemaSelectorModule } from './client-schema-selector/client-
     FadqClientLegendModule,
     FadqClientDiagramSelectorModule,
     FadqClientParcelYearSelectorModule,
-    FadqClientSchemaFormModule,
+    FadqClientSchemaUpdateFormModule,
     FadqClientSchemaSelectorModule
   ],
   exports: [
@@ -31,7 +31,7 @@ import { FadqClientSchemaSelectorModule } from './client-schema-selector/client-
     FadqClientLegendModule,
     FadqClientDiagramSelectorModule,
     FadqClientParcelYearSelectorModule,
-    FadqClientSchemaFormModule,
+    FadqClientSchemaUpdateFormModule,
     FadqClientSchemaSelectorModule
   ],
   declarations: []

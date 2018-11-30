@@ -184,6 +184,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
+  onDestroyEditorComponent() {
+    this.closeToastPanel();
+  }
+
   private closeToastPanel() {
     this.toastPanelOpened = false;
   }

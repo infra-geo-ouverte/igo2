@@ -8,7 +8,7 @@ import {
   ClientInfo,
   ClientApiConfig,
   ClientInfoListResponse,
-  ClientInfoListResult
+  ClientInfoListResponseItem
 } from './client.interface';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class ClientInfoService {
       .post(url, { params })
       .pipe(
         map((response: ClientResponse) => {
-          return this.extractClientFromResponse(response);
+          return this.extractClientFromListResponse(response);
         })
       );
     */
@@ -70,33 +70,33 @@ export class ClientInfoService {
       ]
     }).pipe(
       map((response: ClientInfoListResponse) => {
-        return this.extractClientInfoFromResponse(response);
+        return this.extractClientInfoFromListResponse(response);
       })
     );
   }
 
-  private extractClientInfoFromResponse(response: ClientInfoListResponse): ClientInfo | undefined {
-    const results = response.donnees || [];
-    if (results.length === 0 ) {
+  private extractClientInfoFromListResponse(response: ClientInfoListResponse): ClientInfo | undefined {
+    const listItems = response.donnees || [];
+    if (listItems.length === 0 ) {
       return;
     }
 
-    const result = results[0];
+    const listItem = listItems[0];
     return {
-      numero: result.numeroClient,
-      nom: result.nomClient,
-      adresseCor: this.extractAddressFromResult(result, 'Correspondance'),
-      adresseExp: this.extractAddressFromResult(result, 'Exploitation'),
-      adressePro: this.extractAddressFromResult(result, 'Production')
+      numero: listItem.numeroClient,
+      nom: listItem.nomClient,
+      adresseCor: this.extractAddressFromListItem(listItem, 'Correspondance'),
+      adresseExp: this.extractAddressFromListItem(listItem, 'Exploitation'),
+      adressePro: this.extractAddressFromListItem(listItem, 'Production')
     };
   }
 
-  private extractAddressFromResult(result: ClientInfoListResult, suffix: string) {
-    const no = result[`adresse${suffix}`];
-    const suite = result[`suiteAdresse${suffix}`];
-    const mun = result[`municipaliteAdresse${suffix}`];
-    const code = result[`codePostalAdresse${suffix}`];
-    const province = result[`provinceAdresse${suffix}`] || {};
+  private extractAddressFromListItem(listItem: ClientInfoListResponseItem, suffix: string) {
+    const no = listItem[`adresse${suffix}`];
+    const suite = listItem[`suiteAdresse${suffix}`];
+    const mun = listItem[`municipaliteAdresse${suffix}`];
+    const code = listItem[`codePostalAdresse${suffix}`];
+    const province = listItem[`provinceAdresse${suffix}`] || {};
     const provinceName = province['province'];
 
     let address = [no, suite, mun, code]

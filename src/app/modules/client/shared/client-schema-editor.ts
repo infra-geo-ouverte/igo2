@@ -3,7 +3,7 @@ import { EntityStore, EntityTableModel } from 'src/app/modules/entity';
 import { Widget } from 'src/app/modules/widget';
 
 import { ClientSchema } from './client.interface';
-import { ClientSchemaFormComponent } from '../client-schema-form/client-schema-form.component';
+import { ClientSchemaUpdateFormComponent } from '../client-schema-update-form/client-schema-update-form.component';
 
 export class ClientSchemaEditor extends Editor {
 
@@ -35,50 +35,62 @@ export class ClientSchemaEditor extends Editor {
     ]
   };
 
+  // TODO: widgets should class instances
   private widgets: Widget[] = [
     {
       id: 'create',
       icon: 'add',
       title: 'client.schema.create',
-      tooltip: 'client.schema.create.tooltip',
-      component: ClientSchemaFormComponent,
-      subscribers: {
-        complete: () => {
-          this.handleWidgetComplete();
-        }
-      }
+      tooltip: 'client.schema.create.tooltip'
+    },
+    {
+      id: 'update',
+      icon: 'edit',
+      title: 'client.schema.update',
+      tooltip: 'client.schema.update.tooltip',
+      component: ClientSchemaUpdateFormComponent,
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'delete',
       icon: 'delete',
       title: 'client.schema.delete',
-      tooltip: 'client.schema.delete.tooltip'
+      tooltip: 'client.schema.delete.tooltip',
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'duplicate',
       icon: 'queue',
       title: 'client.schema.duplicate',
-      tooltip: 'client.schema.duplicate.tooltip'
+      tooltip: 'client.schema.duplicate.tooltip',
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'manageFiles',
       icon: 'attach_file',
       title: 'client.schema.manageFiles',
-      tooltip: 'client.schema.manageFiles.tooltip'
+      tooltip: 'client.schema.manageFiles.tooltip',
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'transfer',
       icon: 'swap_horiz',
       title: 'client.schema.transfer',
-      tooltip: 'client.schema.transfer.tooltip'
+      tooltip: 'client.schema.transfer.tooltip',
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'createMap',
       icon: 'image',
       title: 'client.schema.createMap',
-      tooltip: 'client.schema.createMap.tooltip'
+      tooltip: 'client.schema.createMap.tooltip',
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     }
   ];
+
+  static schemaBoundWidgetIsReady = function(data: { [key: string]: any}) {
+    return data.schema !== undefined;
+  };
 
   constructor() {
     super({
@@ -88,25 +100,14 @@ export class ClientSchemaEditor extends Editor {
     });
 
     this.bindEntityStore(new EntityStore<ClientSchema>());
-    this.bindWidgetStore(new EntityStore<Widget>());
+
+    const widgetStore = new EntityStore<Widget>();
+    widgetStore.setEntities(this.widgets);
+    this.bindWidgetStore(widgetStore);
   }
 
-  init() {
-    super.init();
-    this.initWidgets();
+  protected computeWidgetData(): Object {
+    return Object.assign(super.computeWidgetData(), {schema: this.entity});
   }
 
-  getComponentData(): Object {
-    return Object.assign({}, {schema: this.entity});
-  }
-
-  private initWidgets() {
-    // TODO: handle initial state.
-    // Some widgets should be disabled if no schema is selected
-    this.widgetStore.setEntities(this.widgets);
-  }
-
-  private handleWidgetComplete() {
-    this.widget$.next(undefined);
-  }
 }

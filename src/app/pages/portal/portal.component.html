@@ -85,7 +85,8 @@
 
   <fadq-editor-outlet
     *ngIf="toastPanelContent === 'editor'"
-    [editor]="editor">
+    [editor]="editor"
+    (destroyComponent)="onDestroyEditorComponent()">
   </fadq-editor-outlet>
 
 </fadq-toast-panel>

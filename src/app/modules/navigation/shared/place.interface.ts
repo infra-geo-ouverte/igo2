@@ -3,7 +3,6 @@ export interface PlaceCategory {
   title: string;
   collection: PlaceCollectionApi;
   feature: PlaceFeatureApi;
-  featureUri: string;
 }
 
 export interface PlaceCollectionApi {

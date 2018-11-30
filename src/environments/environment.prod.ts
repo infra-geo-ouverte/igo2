@@ -20,6 +20,7 @@ interface Environment {
   };
 }
 
+/* tslint:disable */
 export const environment: Environment = {
   production: true,
   igo: {
@@ -40,14 +41,22 @@ export const environment: Environment = {
       prefix: './locale/'
     },
     api: {
-      url: '/app/interne'
+      url: 'http://chabou01-svn.fadq.qc'
     },
     client: {
       api: {
         info: 'http://chabou01-svn.fadq.qc/services/FADQ/RelationAffaires/InformationClient/obtenirListeClients',
-        parcels: '/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/${clientNum}/${annee}',
-        parcelYears: '/igolocalisation/recherche_client/obtenirAnneesTraitementParcelleAgricole',
-        schemas: ''
+        parcel: {
+          list: '/app/interne/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/${clientNum}/${annee}'
+        },
+        parcelYear: {
+          list: '/app/interne/igolocalisation/recherche_client/obtenirAnneesTraitementParcelleAgricole'
+        },
+        schema: {
+          list: '/services/FADQ/Geomatique/Schema/obtenirSchemasClient/{clientNum}',
+          create: '/services/FADQ/Geomatique/Schema/ajouterSchema',
+          update: '/services/FADQ/Geomatique/Schema/modifierSchema'
+        }
       }
     }
   }

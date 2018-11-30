@@ -69,6 +69,8 @@
       "placeholder": "Schema",
       "create": "Créer",
       "create.tooltip": "Créer un schéma",
+      "update": "Modifier",
+      "update.tooltip": "Modifier un schéma",
       "delete": "Supprimer",
       "delete.tooltip": "Supprimer le schéma sélectionné",
       "duplicate": "Dupliquer",

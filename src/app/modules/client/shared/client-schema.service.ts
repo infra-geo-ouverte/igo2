@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,7 +9,11 @@ import {
   ClientSchema,
   ClientApiConfig,
   ClientSchemaListResponse,
-  ClientSchemaListResult
+  ClientSchemaListResponseItem,
+  ClientSchemaCreateData,
+  ClientSchemaCreateResponse,
+  ClientSchemaUpdateData,
+  ClientSchemaUpdateResponse
 } from './client.interface';
 
 @Injectable({
@@ -24,8 +28,6 @@ export class ClientSchemaService {
   ) {}
 
   getClientSchemasByNum(clientNum: string): Observable<ClientSchema[]> {
-    const url = this.apiService.buildUrl(this.apiConfig.schemas, {clientNum});
-
     return of({
       'messages': [],
       'donnees': [
@@ -48,31 +50,84 @@ export class ClientSchemaService {
       ]
     }).pipe(
       map((response: ClientSchemaListResponse) => {
-        return this.extractSchemasFromResponse(response);
+        return this.extractSchemasFromListResponse(response);
       })
     );
 
     /*
+    const url = this.apiService.buildUrl(this.apiConfig.schema.list, {clientNum});
     return this.http
       .get(url)
       .pipe(
         map((response: ClientSchemaListResponse) => {
-          return this.extractSchemasFromResponse(response);
+          return this.extractSchemasFromListResponse(response);
         })
       );
     */
   }
 
-  private extractSchemasFromResponse(response: ClientSchemaListResponse): ClientSchema[] {
-    const results = response.donnees || [];
-    return results.map(result => this.resultToSchema(result));
+  createSchema(data: ClientSchemaCreateData): Observable<ClientSchema> {
+    const url = this.apiService.buildUrl(this.apiConfig.schema.create);
+    const params = new HttpParams({
+      fromObject: data as { [key: string]: any}
+    });
+
+    return this.http
+      .post(url, {params})
+      .pipe(
+        map((response: ClientSchemaCreateResponse) => {
+          return this.extractSchemaFromCreateResponse(response);
+        })
+      );
   }
 
-  private resultToSchema(result: ClientSchemaListResult) {
+  updateSchema(schema: ClientSchema, data: ClientSchemaUpdateData): Observable<ClientSchema> {
+    const url = this.apiService.buildUrl(this.apiConfig.schema.update);
+    const params = new HttpParams({
+      fromObject: data as { [key: string]: any}
+    });
+
+    return this.http
+      .post(url, {params})
+      .pipe(
+        map((response: ClientSchemaUpdateResponse) => {
+          return this.extractSchemaFromUpdateResponse(response);
+        })
+      );
+  }
+
+  private extractSchemasFromListResponse(
+    response: ClientSchemaListResponse
+  ): ClientSchema[] {
+    const listItems = response.donnees || [];
+    return listItems.map(listItem => this.listItemToSchema(listItem));
+  }
+
+  private listItemToSchema(listItem: ClientSchemaListResponseItem) {
     return Object.assign({
       meta: {
-        title: `${result.id} - ${result.type} - ${result.annee}`
+        title: `${listItem.id} - ${listItem.type} - ${listItem.annee}`
       }
-    }, result);
+    }, listItem);
+  }
+
+  private extractSchemaFromCreateResponse(
+    response: ClientSchemaCreateResponse
+  ): ClientSchema {
+    return Object.assign({
+      meta: {
+        title: `${response.id} - ${response.type} - ${response.annee}`
+      }
+    }, response);
+  }
+
+  private extractSchemaFromUpdateResponse(
+    response: ClientSchemaUpdateResponse
+  ): ClientSchema {
+    return Object.assign({
+      meta: {
+        title: `${response.id} - ${response.type} - ${response.annee}`
+      }
+    }, response);
   }
 }

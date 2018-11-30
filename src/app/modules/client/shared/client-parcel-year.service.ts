@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/modules/core/api';
 import {
   ClientApiConfig,
   ClientParcelYearListResponse,
-  ClientParcelYearListResult,
+  ClientParcelYearListResponseItem,
   ClientParcelYear
 } from './client.interface';
 
@@ -24,26 +24,30 @@ export class ClientParcelYearService {
   ) {}
 
   loadParcelYears(): Observable<ClientParcelYear[]> {
-    const url = this.apiService.buildUrl(this.apiConfig.parcelYears);
+    const url = this.apiService.buildUrl(this.apiConfig.parcelYear.list);
 
     return this.http
       .get(url)
       .pipe(
         map((response: ClientParcelYearListResponse) => {
-          return this.extractParcelYearsFromResponse(response);
+          return this.extractParcelYearsFromListResponse(response);
         })
       );
   }
 
-  private extractParcelYearsFromResponse(response: ClientParcelYearListResponse): ClientParcelYear[] {
-    return response.data.map(result => this.resultToParcelYear(result));
+  private extractParcelYearsFromListResponse(
+    response: ClientParcelYearListResponse
+  ): ClientParcelYear[] {
+    return response.data.map(listItem => this.listItemToParcelYear(listItem));
   }
 
-  private resultToParcelYear(result: ClientParcelYearListResult): ClientParcelYear {
+  private listItemToParcelYear(
+    listItem: ClientParcelYearListResponseItem
+  ): ClientParcelYear {
     return {
-      id: '' + result.idParametre,
-      annee: result.annee,
-      current: result.indAnneeActive
+      id: '' + listItem.idParametre,
+      annee: listItem.annee,
+      current: listItem.indAnneeActive
     };
   }
 }

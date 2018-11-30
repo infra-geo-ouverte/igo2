@@ -3,10 +3,20 @@ import { Feature } from 'src/app/modules/feature';
 
 export interface ClientApiConfig {
   info: string;
-  parcels: string;
-  parcelYears: string;
-  schemas: string;
+  parcel: {
+    list: string;
+  };
+  parcelYear: {
+    list: string;
+  };
+  schema: {
+    list: string;
+    create: string;
+    update: string;
+  };
 }
+
+/*** Info  ***/
 
 export interface ClientInfo {
   numero: string;
@@ -24,26 +34,26 @@ export interface Client extends EntityObject, ClientInfo {
 }
 
 export interface ClientInfoListResponse {
-  donnees?: ClientInfoListResult[];
+  donnees?: ClientInfoListResponseItem[];
 }
 
-export interface ClientInfoListResult {
+export interface ClientInfoListResponseItem {
   numeroClient: string;
   nomClient: string;
   adresseCorrespondance: string;
   suiteAdresseCorrespondance?: string;
   municipaliteAdresseCorrespondance: string;
-  provinceAdresseCorrespondance: ClientInfoListResultProvince;
-  paysAdresseCorrespondance: ClientInfoListResultPays;
+  provinceAdresseCorrespondance: ClientInfoListResponseItemProvince;
+  paysAdresseCorrespondance: ClientInfoListResponseItemPays;
   codePostalAdresseCorrespondance: string;
 }
 
-export interface ClientInfoListResultProvince {
+export interface ClientInfoListResponseItemProvince {
   province: string;
   codeProvince: string;
 }
 
-export interface ClientInfoListResultPays {
+export interface ClientInfoListResponseItemPays {
   pays: string;
   codePays: string;
 }
@@ -59,10 +69,30 @@ export interface ClientSchema extends EntityObject {
 }
 
 export interface ClientSchemaListResponse {
-  donnees?: ClientSchemaListResult[];
+  donnees?: ClientSchemaListResponseItem[];
 }
 
-export interface ClientSchemaListResult extends ClientSchema {}
+export interface ClientSchemaListResponseItem extends ClientSchema {}
+
+export interface ClientSchemaCreateData {
+  numeroClient: string;
+  type: string;
+  description: string;
+  annee: string;
+  etat: string;
+}
+
+export type ClientSchemaUpdateResponse = ClientSchema;
+
+export interface ClientSchemaUpdateData {
+  id: number;
+  type: string;
+  description: string;
+  annee: string;
+  etat: string;
+}
+
+export type ClientSchemaCreateResponse = ClientSchema;
 
 /*** Parcel ***/
 export interface ClientParcel extends Feature {
@@ -88,9 +118,9 @@ export interface ClientParcel extends Feature {
   };
 }
 
-export interface ClientParcelListResult extends ClientParcel {}
+export interface ClientParcelListResponseItem extends ClientParcel {}
 
-export type ClientParcelListResponse = ClientParcelListResult[];
+export type ClientParcelListResponse = ClientParcelListResponseItem[];
 
 /*** Parcel Year ***/
 export interface ClientParcelYear extends EntityObject {
@@ -99,14 +129,14 @@ export interface ClientParcelYear extends EntityObject {
   current: boolean;
 }
 
-export interface ClientParcelYearListResult {
+export interface ClientParcelYearListResponseItem {
   idParametre: number;
   annee: number;
   indAnneeActive: boolean;
 }
 
 export interface ClientParcelYearListResponse {
-  data: ClientParcelYearListResult[];
+  data: ClientParcelYearListResponseItem[];
 }
 
 /*** Diagram ***/

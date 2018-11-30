@@ -55,9 +55,9 @@ export class ToastPanelComponent {
     return this.opened;
   }
 
-  @HostBinding('style.display')
+  @HostBinding('style.visibility')
   get displayStyle() {
-    return this.empty ? 'none' : 'block';
+    return this.opened ? (this.empty ? 'hidden' : 'visible') : 'hidden';
   }
 
   @ViewChild('content') content: ElementRef;

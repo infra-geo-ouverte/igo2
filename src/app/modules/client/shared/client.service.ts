@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, zip } from 'rxjs';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { getDiagramsFromParcels } from './client.utils';
 import { Client, ClientInfo, ClientParcel, ClientSchema } from './client.interface';

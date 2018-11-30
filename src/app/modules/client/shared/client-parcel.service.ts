@@ -9,7 +9,7 @@ import {
   ClientParcel,
   ClientApiConfig,
   ClientParcelListResponse,
-  ClientParcelListResult
+  ClientParcelListResponseItem
 } from './client.interface';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class ClientParcelService {
   ) {}
 
   getClientParcelsByNum(clientNum: string): Observable<ClientParcel[]> {
-    const url = this.apiService.buildUrl(this.apiConfig.parcels, {
+    const url = this.apiService.buildUrl(this.apiConfig.parcel.list, {
       clientNum,
       annee: '2018'
     });
@@ -33,17 +33,23 @@ export class ClientParcelService {
       .get(url)
       .pipe(
         map((response: ClientParcelListResponse) => {
-          return this.extractParcelsFromResponse(response, clientNum);
+          return this.extractParcelsFromListResponse(response, clientNum);
         })
       );
   }
 
-  private extractParcelsFromResponse(response: ClientParcelListResponse, clientNum: string): ClientParcel[] {
-    return response.map(result => this.resultToParcel(result, clientNum));
+  private extractParcelsFromListResponse(
+    response: ClientParcelListResponse,
+    clientNum: string
+  ): ClientParcel[] {
+    return response.map(listItem => this.listItemToParcel(listItem, clientNum));
   }
 
-  private resultToParcel(result: ClientParcelListResult, clientNum: string): ClientParcel {
-    const properties = Object.assign({}, result.properties, {
+  private listItemToParcel(
+    listItem: ClientParcelListResponseItem,
+    clientNum: string
+  ): ClientParcel {
+    const properties = Object.assign({}, listItem.properties, {
       noClientRecherche: clientNum
     });
     return {
@@ -51,9 +57,9 @@ export class ClientParcelService {
         idProperty: 'properties.idParcelle',
         titleProperty: 'properties.idParcelle'
       },
-      type: result.type,
+      type: listItem.type,
       projection: 'EPSG:4326',
-      geometry: result.geometry,
+      geometry: listItem.geometry,
       extent: undefined,
       properties
     };
