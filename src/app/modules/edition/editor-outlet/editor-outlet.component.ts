@@ -27,7 +27,7 @@ export class EditorOutletComponent implements OnDestroy {
   public subscribers: { [key: string]: (event: any) => void };
 
   private entity$$: Subscription;
-  private widget$$: Subscription;
+  private activeWidget$$: Subscription;
 
   @Input()
   get editor(): Editor {
@@ -39,7 +39,12 @@ export class EditorOutletComponent implements OnDestroy {
   }
   private _editor;
 
-  @Output() display = new EventEmitter();
+  @Output() initComponent = new EventEmitter();
+  @Output() destroyComponent = new EventEmitter();
+
+  get componentData$(): { [key: string]: any } {
+    return this.editor.widgetData$;
+  }
 
   constructor(private cdRef: ChangeDetectorRef) {}
 
@@ -54,9 +59,7 @@ export class EditorOutletComponent implements OnDestroy {
       return;
     }
 
-    this.entity$$ = this.editor.entity$
-      .subscribe((entity: Entity) => this.onEntityChange(entity));
-    this.widget$$ = this.editor.widget$
+    this.activeWidget$$ = this.editor.activeWidget$
       .subscribe((widget: Widget) => this.onWidgetChange(widget));
   }
 
@@ -64,32 +67,42 @@ export class EditorOutletComponent implements OnDestroy {
     if (this.entity$$ !== undefined) {
       this.entity$$.unsubscribe();
     }
-    if (this.widget$$ !== undefined) {
-      this.widget$$.unsubscribe();
+    if (this.activeWidget$$ !== undefined) {
+      this.activeWidget$$.unsubscribe();
     }
-  }
-
-  private onEntityChange(entity: Entity) {
-    this.componentData = this.editor.getComponentData();
-    this.cdRef.detectChanges();
   }
 
   private onWidgetChange(widget: Widget) {
-    this.componentData = this.editor.getComponentData();
-
     if (widget !== undefined) {
-      this.component = widget.component;
-      this.subscribers = widget.subscribers;
+      this.initWidgetComponent(widget);
     } else {
-      this.component = undefined;
-      this.subscribers = undefined;
+      this.destroyWidgetComponent();
     }
+  }
+
+  private initWidgetComponent(widget: Widget) {
+    this.component = widget.component;
+    this.subscribers = this.computeWidgetSubscribers(widget);
 
     if (this.component !== undefined) {
-      this.display.emit();
+      this.initComponent.emit();
     }
 
     this.cdRef.detectChanges();
+  }
+
+  private destroyWidgetComponent() {
+    this.component = undefined;
+    this.subscribers = undefined;
+    this.cdRef.detectChanges();
+    this.destroyComponent.emit();
+  }
+
+  private computeWidgetSubscribers(widget: Widget) {
+    return {
+      complete: () => { this.editor.deactivateWidget(); },
+      cancel: () => { this.editor.deactivateWidget(); }
+    };
   }
 
 }

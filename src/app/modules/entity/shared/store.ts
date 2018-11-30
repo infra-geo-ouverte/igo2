@@ -77,6 +77,14 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     this.setEntities(this.entities.concat(entities), soft);
   }
 
+  putEntities(entities: T[], soft = false) {
+    const entitiesIds = entities.map(getEntityId);
+    const newEntities = this.entities.slice()
+      .filter((entity: Entity) => entitiesIds.indexOf(getEntityId(entity)) < 0)
+      .concat(entities);
+    this.setEntities(newEntities, soft);
+  }
+
   getEntityById(id: string): T {
     return this.entities.find((entity: T) => getEntityId(entity) === id);
   }

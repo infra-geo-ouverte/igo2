@@ -105,9 +105,12 @@ export class EntityFormComponent implements OnChanges {
   }
 
   private createFormControl(field: EntityFormField): FormControl {
-    const state = Object.assign({}, field);
+    const state = Object.assign({value: ''}, {
+      disabled: field.disabled
+    });
     const control = this.formBuilder.control(state);
-    control.setValue('');
+    control.setValidators(field.validator);
+
     return control;
   }
 

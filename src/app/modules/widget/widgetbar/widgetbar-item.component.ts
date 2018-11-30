@@ -13,6 +13,7 @@ import { Widget } from '../shared';
 @Component({
   selector: 'fadq-widgetbar-item',
   templateUrl: './widgetbar-item.component.html',
+  styleUrls: ['./widgetbar-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetbarItemComponent {
@@ -44,6 +45,15 @@ export class WidgetbarItemComponent {
   }
   private _withIcon = true;
 
+  @Input()
+  get disabled() {
+    return this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = value;
+  }
+  private _disabled = false;
+
   @Output() activate: EventEmitter<Widget> = new EventEmitter();
 
   get title(): string {
@@ -65,6 +75,9 @@ export class WidgetbarItemComponent {
   constructor() {}
 
   onClick() {
+    if (this.disabled === true) {
+      return;
+    }
     this.activate.emit(this.widget);
   }
 }

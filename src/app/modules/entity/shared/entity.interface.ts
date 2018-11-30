@@ -1,3 +1,5 @@
+import { ValidatorFn } from '@angular/forms';
+
 export interface EntityMeta {
   dataType?: string;
   id?: string;
@@ -59,6 +61,8 @@ export interface EntityFormModel {
 export interface EntityFormField {
   name: string;
   title: string;
+  validator?: ValidatorFn;
+  disabled?: boolean;
   visible?: boolean;
   cols?: number;
 }

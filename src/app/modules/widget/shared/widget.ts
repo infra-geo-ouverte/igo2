@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 
 export class WidgetClass {
 
@@ -14,5 +14,12 @@ export class WidgetClass {
 export abstract class WidgetWithUI {
 
   abstract getComponent(): Component;
+
+}
+
+export abstract class WidgetComponent {
+
+  public complete: EventEmitter<any>;
+  public cancel: EventEmitter<any>;
 
 }

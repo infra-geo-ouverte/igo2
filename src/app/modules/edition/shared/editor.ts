@@ -12,11 +12,13 @@ import { EditorConfig } from './edition.interface';
 
 export class Editor extends EntityClass {
 
-  public widget$ = new BehaviorSubject<Widget>(undefined);
+  public activeWidget$ = new BehaviorSubject<Widget>(undefined);
   public entity$ = new BehaviorSubject<Entity>(undefined);
+  public widgetData$ = new BehaviorSubject<{ [key: string]: any }>({});
 
   private activeWidget$$: Subscription;
   private selectedEntity$$: Subscription;
+  private widgetData$$: Subscription;
 
   get id(): string {
     return this.config.id;
@@ -27,7 +29,7 @@ export class Editor extends EntityClass {
   }
 
   get hasComponent(): boolean {
-    return this.widget && this.widget.component !== undefined;
+    return this.activeWidget && this.activeWidget.component !== undefined;
   }
 
   get tableModel(): EntityTableModel {
@@ -44,12 +46,16 @@ export class Editor extends EntityClass {
   }
   private _widgetStore: EntityStore<Widget>;
 
-  get widget(): Widget {
-    return this.widget$.value;
+  get activeWidget(): Widget {
+    return this.activeWidget$.value;
   }
 
   get entity(): Entity {
     return this.entity$.value;
+  }
+
+  get widgetData(): { [key: string]: any } {
+    return this.widgetData$.value;
   }
 
   constructor(private config: EditorConfig) {
@@ -59,26 +65,22 @@ export class Editor extends EntityClass {
   bindEntityStore(entityStore: EntityStore<Entity>): Editor {
     this.unbindEntityStore();
     this._entityStore = entityStore;
-
     return this;
   }
 
   unbindEntityStore(): Editor {
     this._entityStore = undefined;
-
     return this;
   }
 
   bindWidgetStore(widgetStore: EntityStore<Widget>): Editor {
     this.unbindWidgetStore();
     this._widgetStore = widgetStore;
-
     return this;
   }
 
   unbindWidgetStore(): Editor {
     this._widgetStore = undefined;
-
     return this;
   }
 
@@ -90,27 +92,72 @@ export class Editor extends EntityClass {
     this.selectedEntity$$ = this.entityStore
       .observeFirstBy((entity: Entity, state: State) => state.selected === true)
       .subscribe((entity: Entity) => this.onSelectEntity(entity));
+
+    this.widgetData$$ = this.widgetData$
+      .subscribe((data: { [key: string]: any }) => this.onWidgetDataChange(data));
   }
 
   destroy() {
+    this.deactivateWidget();
+
     if (this.activeWidget$$ !== undefined) {
       this.activeWidget$$.unsubscribe();
     }
     if (this.selectedEntity$$ !== undefined) {
       this.selectedEntity$$.unsubscribe();
     }
+    if (this.widgetData$$ !== undefined) {
+      this.widgetData$$.unsubscribe();
+    }
   }
 
-  getComponentData(): { [key: string]: any } {
-    return Object.assign({}, {entity: this.entity});
+  activateWidget(widget: Widget) {
+    this.widgetStore.updateEntityState(widget, {active: true}, true);
+  }
+
+  deactivateWidget() {
+    if (this.activeWidget !== undefined) {
+      this.widgetStore.updateEntityState(this.activeWidget, {active: false});
+    }
   }
 
   protected onActivateWidget(widget: Widget) {
-    this.widget$.next(widget);
+    this.activeWidget$.next(widget);
   }
 
   protected onSelectEntity(entity: Entity) {
     this.entity$.next(entity);
+    this.widgetData$.next(this.computeWidgetData());
+  }
+
+  protected computeWidgetData(): { [key: string]: any } {
+    return Object.assign({}, {
+      entity: this.entity,
+      store: this.entityStore
+    });
+  }
+
+  private onWidgetDataChange(data: { [key: string]: any }) {
+    this.initWidgets();
+  }
+
+  private initWidgets() {
+    const widgetData = this.widgetData;
+    this.widgetStore.entities.forEach((widget: Widget) => {
+      let widgetIsReady = true;
+      if (widget.hasOwnProperty('isReady')) {
+        widgetIsReady = widget.isReady(widgetData);
+      }
+
+      const state = {
+        disabled: !widgetIsReady,
+        selected: !widgetIsReady
+      };
+      if (!widgetIsReady) {
+        state['active'] = false;
+      }
+      this.widgetStore.updateEntityState(widget, state);
+    });
   }
 
 }

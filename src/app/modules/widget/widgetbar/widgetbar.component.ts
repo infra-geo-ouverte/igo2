@@ -156,6 +156,10 @@ export class WidgetbarComponent implements OnChanges, OnDestroy {
     };
   }
 
+  widgetIsDisabled(widget: Widget): boolean {
+    return this.store.getEntityState(widget).disabled === true;
+  }
+
   onActivateWidget(widget: Widget) {
     this.controller.updateEntityState(widget, {active: true}, true);
     this.activateWidget.emit(widget);

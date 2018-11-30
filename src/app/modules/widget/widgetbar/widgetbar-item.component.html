@@ -2,8 +2,12 @@
   matTooltipClass="widgetbarItemTooltip"
   matTooltipShowDelay="500"
   [matTooltip]="tooltip | translate"
+  [ngClass]="{'fadq-widgetbar-item-disabled': disabled}"
   (click)="onClick()">
-  <button mat-list-avatar mat-icon-button>
+  <button
+    mat-list-avatar
+    mat-icon-button
+    [disabled]="disabled">
     <mat-icon *ngIf="withIcon && !image">{{icon}}</mat-icon>
     <img *ngIf="withIcon && image" [src]="image">
   </button>
