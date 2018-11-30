@@ -16,17 +16,16 @@ $thumbnail-size: 20px;
 .fadq-client-legend-item-title {
   display: inline-block;
   margin-left: 10px;
-  line-height: 18px;
   font-size: 14px;
+  vertical-align: middle;
 }
 
 .fadq-client-legend-item-thumbnail {
-  @extend %box-shadowed;
-
   display: inline-block;
   width: $thumbnail-size;
   height: $thumbnail-size;
   border-radius: 5px;
   border-width: 2px;
   border-style: solid;
+  vertical-align: middle;
 }

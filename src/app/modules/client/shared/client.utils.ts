@@ -55,7 +55,7 @@ function getParcelFeatureColor(feature: OlFeature) {
 
   let color;
   if (clientRech === clientDet) {
-    color = clientRech === clientExp ? [35, 140, 0] : [255, 139, 0];
+    color = clientRech === clientExp ? [255, 139, 0] : [35, 140, 0];
   } else {
     color = [0, 218, 250];
   }

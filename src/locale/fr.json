@@ -53,8 +53,8 @@
     },
     "legend": {
       "title": "Légende des parcelles",
-      "detexp": "Détenues non exploitées",
-      "detnoexp": "Détenues exploitées",
+      "detexp": "Détenues exploitées",
+      "detnoexp": "Détenues non exploitées",
       "nodetexp": "Non détenues exploitées",
       "sel": "Sélectionnées"
     },
