@@ -3,7 +3,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CLIENT, Client, ClientService } from 'src/app/modules/client';
+import { CLIENT, Client } from 'src/app/modules/client';
+import { ClientState } from 'src/app/state/client.state';
 
 import { SearchResult } from '../search.interface';
 import { SearchSource, TextSearch } from './source';
@@ -17,7 +18,7 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
   static type = CLIENT;
 
   constructor(
-    private clientService: ClientService,
+    private clientState: ClientState,
     @Inject('options') options: SearchSourceOptions
   ) {
     super(options);
@@ -34,7 +35,7 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
   }
 
   search(term?: string): Observable<SearchResult<Client>[]> {
-    return this.clientService.getClientByNum(term)
+    return this.clientState.getSetClientByNum(term)
       .pipe(
         map((response: ClientData) => this.extractResults(response))
       );
@@ -50,8 +51,8 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
       data: data,
       meta: {
         dataType: CLIENT,
-        id: [this.getId(), data.numero].join('.'),
-        title: data.nom,
+        id: [this.getId(), data.info.numero].join('.'),
+        title: data.info.nom,
         icon: 'person'
       }
     };

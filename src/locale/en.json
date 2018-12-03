@@ -40,7 +40,7 @@
 
   "tools": {
     "addressEditor": "Edit Addresses",
-    "clientInfo": "Client",
+    "client": "Client",
     "navigation": "Navigation"
   },
 

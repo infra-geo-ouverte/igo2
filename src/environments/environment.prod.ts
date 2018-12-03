@@ -4,7 +4,7 @@ import { CatalogServiceOptions } from '@igo2/geo';
 
 import { ApiConfig } from '../app/modules/core/api/api.interface';
 import { SearchSourceOptions } from '../app/modules/search/shared/sources/source.interface';
-import { ClientApiConfig } from '../app/modules/client/shared/client.interface';
+import { ClientApiConfig } from '../app/modules/client/shared/client.interfaces';
 
 interface Environment {
   production: boolean;
@@ -41,16 +41,16 @@ export const environment: Environment = {
       prefix: './locale/'
     },
     api: {
-      url: 'http://chabou01-svn.fadq.qc'
+      url: 'http://netphp.fadq.qc'
     },
     client: {
       api: {
-        info: 'http://chabou01-svn.fadq.qc/services/FADQ/RelationAffaires/InformationClient/obtenirListeClients',
-        parcel: {
-          list: '/app/interne/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/${clientNum}/${annee}'
+        info: {
+          get: '/services/FADQ/RelationAffaires/InformationClient/obtenirListeClients'
         },
-        parcelYear: {
-          list: '/app/interne/igolocalisation/recherche_client/obtenirAnneesTraitementParcelleAgricole'
+        parcel: {
+          list: '/app/interne/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/${clientNum}/${annee}',
+          years: '/app/interne/igolocalisation/recherche_client/obtenirAnneesTraitementParcelleAgricole'
         },
         schema: {
           list: '/services/FADQ/Geomatique/Schema/obtenirSchemasClient/{clientNum}',

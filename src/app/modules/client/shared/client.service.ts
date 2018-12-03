@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { getDiagramsFromParcels } from './client.utils';
-import { Client, ClientInfo, ClientParcel, ClientSchema } from './client.interface';
-import { ClientInfoService } from './client-info.service';
-import { ClientParcelService } from './client-parcel.service';
-import { ClientSchemaService } from './client-schema.service';
+import { ClientInfo, ClientInfoService } from '../info';
+import { ClientParcel, ClientParcelService, getDiagramsFromParcels } from '../parcel';
+import { ClientSchema, ClientSchemaService } from '../schema';
+
+import { Client } from './client.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -19,23 +19,25 @@ export class ClientService {
     private schemaService: ClientSchemaService
   ) {}
 
-  getClientByNum(clientNum: string): Observable<Client> {
+  getClientByNum(clientNum: string, annee: number = 2018): Observable<Client> {
     const client$ = zip(
       this.infoService.getClientInfoByNum(clientNum),
-      this.parcelService.getClientParcelsByNum(clientNum),
-      this.schemaService.getClientSchemasByNum(clientNum)
+      this.schemaService.getClientSchemasByNum(clientNum),
+      this.parcelService.getClientParcelsByNum(clientNum, annee)
     );
 
     return client$
       .pipe(
-        map((data: [ClientInfo, ClientParcel[], ClientSchema[]]) => {
-          return Object.assign({meta: {idProperty: 'numero'}}, data[0], {
-            parcels: data[1],
-            schemas: data[2],
-            diagrams: getDiagramsFromParcels(data[1]),
-            annees: []
+        map((data: [ClientInfo, ClientSchema[], ClientParcel[]]) => {
+          return Object.assign({meta: {idProperty: 'numero'}}, {
+            info: data[0],
+            schemas: data[1],
+            parcels: data[2],
+            diagrams: getDiagramsFromParcels(data[2])
           });
         })
       );
   }
+
+
 }

@@ -1,38 +1,23 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {
-  provideClientService,
-  provideClientInfoService,
-  provideClientParcelService,
-  provideClientParcelYearService,
-  provideClientSchemaService
-} from './shared/client.provider';
+import { provideClientService } from './shared/client.providers';
 
-import { FadqClientInfoModule } from './client-info/client-info.module';
-import { FadqClientLegendModule } from './client-legend/client-legend.module';
-import { FadqClientDiagramSelectorModule } from './client-diagram-selector/client-diagram-selector.module';
-import { FadqClientParcelYearSelectorModule } from './client-parcel-year-selector/client-parcel-year-selector.module';
-import { FadqClientSchemaUpdateFormModule } from './client-schema-update-form/client-schema-update-form.module';
-import { FadqClientSchemaSelectorModule } from './client-schema-selector/client-schema-selector.module';
+import { FadqClientInfoModule } from './info/client-info.module';
+import { FadqClientParcelModule } from './parcel/client-parcel.module';
+import { FadqClientSchemaModule } from './schema/client-schema.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FadqClientInfoModule,
-    FadqClientLegendModule,
-    FadqClientDiagramSelectorModule,
-    FadqClientParcelYearSelectorModule,
-    FadqClientSchemaUpdateFormModule,
-    FadqClientSchemaSelectorModule
+    FadqClientInfoModule.forRoot(),
+    FadqClientParcelModule.forRoot(),
+    FadqClientSchemaModule.forRoot(),
   ],
   exports: [
     FadqClientInfoModule,
-    FadqClientLegendModule,
-    FadqClientDiagramSelectorModule,
-    FadqClientParcelYearSelectorModule,
-    FadqClientSchemaUpdateFormModule,
-    FadqClientSchemaSelectorModule
+    FadqClientParcelModule,
+    FadqClientSchemaModule,
   ],
   declarations: []
 })
@@ -41,10 +26,6 @@ export class FadqClientModule {
     return {
       ngModule: FadqClientModule,
       providers: [
-        provideClientInfoService(),
-        provideClientParcelService(),
-        provideClientParcelYearService(),
-        provideClientSchemaService(),
         provideClientService()
       ]
     };

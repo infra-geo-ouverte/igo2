@@ -1,0 +1,14 @@
+
+
+<mat-form-field class="fadq-client-schema-selector">
+  <mat-select
+    [(ngModel)]="currentSchema"
+    [placeholder]="'client.schema.placeholder' | translate"
+    (selectionChange)="onSelectionChange($event)">
+    <ng-template ngFor let-schema [ngForOf]="store.observable | async">
+      <mat-option [value]="schema">
+        {{getSchemaTitle(schema)}}
+      </mat-option>
+    </ng-template>
+  </mat-select>
+</mat-form-field>

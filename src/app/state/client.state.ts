@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import {
   Client,
-  ClientDiagram,
+  ClientService,
+  ClientParcelDiagram,
   ClientParcel,
   ClientParcelYear,
+  ClientParcelYearService,
   ClientSchema,
   ClientParcelEditor,
   ClientSchemaEditor
 } from 'src/app/modules/client';
-import { EntityStore, EntityFilterClause, State } from 'src/app/modules/entity';
+import { EntityStore, State } from 'src/app/modules/entity';
 import { Widget } from 'src/app/modules/widget';
 
 import { EditionState } from './edition.state';
@@ -22,10 +25,14 @@ export class ClientState {
 
   public client$ = new BehaviorSubject<Client>(undefined);
 
-  get diagramStore(): EntityStore<ClientDiagram> {
+  get client(): Client {
+    return this.client$.value;
+  }
+
+  get diagramStore(): EntityStore<ClientParcelDiagram> {
     return this._diagramStore;
   }
-  private _diagramStore: EntityStore<ClientDiagram>;
+  private _diagramStore: EntityStore<ClientParcelDiagram>;
 
   get parcelYearStore(): EntityStore<ClientParcelYear> {
     return this._parcelYearStore;
@@ -58,8 +65,14 @@ export class ClientState {
     return this.schemaEditor.widgetStore as EntityStore<Widget>;
   }
 
-  constructor(private editionState: EditionState) {
-    this._diagramStore = new EntityStore<ClientDiagram>();
+  private parcelYear: ClientParcelYear = undefined;
+
+  constructor(
+    private clientService: ClientService,
+    private clientParcelYearService: ClientParcelYearService,
+    private editionState: EditionState
+  ) {
+    this._diagramStore = new EntityStore<ClientParcelDiagram>();
     this._parcelYearStore = new EntityStore<ClientParcelYear>();
 
     this._parcelEditor = new ClientParcelEditor();
@@ -69,8 +82,30 @@ export class ClientState {
     this.editionState.register(this._schemaEditor);
 
     this._diagramStore
-      .observeFirstBy((diagram: ClientDiagram, state: State) => state.selected === true)
-      .subscribe((diagram: ClientDiagram) => this.onSelectDiagram(diagram));
+      .observeFirstBy((diagram: ClientParcelDiagram, state: State) => state.selected === true)
+      .subscribe((diagram: ClientParcelDiagram) => this.onSelectDiagram(diagram));
+
+    this._parcelYearStore
+      .observeFirstBy((parcelYear: ClientParcelYear, state: State) => state.selected === true)
+      .subscribe((parcelYear: ClientParcelYear) => this.onSelectParcelYear(parcelYear));
+
+    this.clientParcelYearService.getParcelYears()
+      .subscribe((parcelYears: ClientParcelYear[]) => {
+        const current = parcelYears.find((parcelYear: ClientParcelYear) => {
+          return parcelYear.current === true;
+        });
+        this.parcelYearStore.setEntities(parcelYears);
+        this.parcelYearStore.sorter.set({property: 'annee', direction: 'desc'});
+        if (current !== undefined) {
+          this.parcelYearStore.updateEntityState(current, {selected: true});
+        }
+      });
+  }
+
+  getSetClientByNum(clientNum: string): Observable<Client> {
+    return this.clientService.getClientByNum(clientNum, this.parcelYear.annee).pipe(
+      tap((client: Client) => this.setClient(client))
+    );
   }
 
   setClient(client: Client) {
@@ -88,7 +123,7 @@ export class ClientState {
     this.client$.next(undefined);
   }
 
-  private onSelectDiagram(diagram: ClientDiagram) {
+  private onSelectDiagram(diagram: ClientParcelDiagram) {
     if (diagram === undefined) {
       this.parcelStore.filter.reset();
     } else {
@@ -96,6 +131,13 @@ export class ClientState {
         return parcel.properties.noDiagramme === diagram.id;
       };
       this.parcelStore.filter.set([filterClause]);
+    }
+  }
+
+  private onSelectParcelYear(parcelYear: ClientParcelYear) {
+    this.parcelYear = parcelYear;
+    if (this.client !== undefined) {
+      this.getSetClientByNum(this.client.info.numero).subscribe();
     }
   }
 

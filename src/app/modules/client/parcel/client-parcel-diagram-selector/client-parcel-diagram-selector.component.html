@@ -1,0 +1,15 @@
+
+
+<mat-form-field class="fadq-client-parcel-diagram-selector">
+  <mat-select
+    [(ngModel)]="currentDiagram"
+    [placeholder]="'client.diagram.placeholder' | translate"
+    (selectionChange)="onSelectionChange($event)">
+    <mat-option>{{'client.diagram.all' | translate}}</mat-option>
+    <ng-template ngFor let-diagram [ngForOf]="store.observable | async">
+      <mat-option [value]="diagram">
+        {{getDiagramTitle(diagram)}}
+      </mat-option>
+    </ng-template>
+  </mat-select>
+</mat-form-field>

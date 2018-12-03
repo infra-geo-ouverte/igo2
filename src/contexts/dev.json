@@ -58,7 +58,7 @@
     }
   ],
   "toolbar": [
-    "clientInfo",
+    "client",
     "searchResults",
     "contextManager",
     "mapDetails",
@@ -70,7 +70,7 @@
   ],
   "tools": [
     {
-      "name": "clientInfo"
+      "name": "client"
     },
     {
       "name": "searchResults"

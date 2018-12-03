@@ -15,7 +15,7 @@ import {
 import { VectorLayer } from '@igo2/geo';
 
 import { Client, ClientParcel, CLIENT } from 'src/app/modules/client';
-import { createParcelLayer } from 'src/app/modules/client/shared/client.utils';
+import { createParcelLayer } from 'src/app/modules/client/parcel/shared/client-parcel.utils';
 import { Editor } from 'src/app/modules/edition';
 import { EntityStore, State, getEntityTitle } from 'src/app/modules/entity';
 import { FEATURE, Feature } from 'src/app/modules/feature';
@@ -267,14 +267,14 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     this.editionState.selectEditor(this.clientState.parcelEditor);
 
-    const tool = this.toolService.getTool('clientInfo');
+    const tool = this.toolService.getTool('client');
     this.toolService.selectTool(tool);
 
     this.openSidenav();
   }
 
   private onSearchClient(client: Client) {
-    this.clientState.setClient(client);
+    // this.clientState.setClient(client);
   }
 
   private onFocusSearchResult(result: SearchResult) {
