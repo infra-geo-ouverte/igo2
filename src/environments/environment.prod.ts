@@ -58,6 +58,11 @@ export const environment: Environment = {
           update: '/services/FADQ/Geomatique/Schema/modifierSchema',
           delete: '/services/FADQ/Geomatique/Schema/supprimerSchema/${id}',
           copy: '/services/FADQ/Geomatique/Schema/copierSchema/${id}'
+        },
+        schemaFile: {
+          list: '/services/FADQ/Geomatique/DocumentSchema/obtenirDocumentsSchema/{schemaId}',
+          create: '/services/FADQ/Geomatique/DocumentSchema/ajouterDocumentSchema',
+          delete: '/services/FADQ/Geomatique/DocumentSchema/supprimerDocumentSchema/{id}'
         }
       }
     }

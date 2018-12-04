@@ -6,6 +6,7 @@ import { ClientSchema } from './client-schema.interfaces';
 import { ClientSchemaCreateFormComponent } from '../client-schema-create-form/client-schema-create-form.component';
 import { ClientSchemaUpdateFormComponent } from '../client-schema-update-form/client-schema-update-form.component';
 import { ClientSchemaDeleteFormComponent } from '../client-schema-delete-form/client-schema-delete-form.component';
+import { ClientSchemaFileManagerComponent } from '../client-schema-file-manager/client-schema-file-manager.component';
 
 export class ClientSchemaEditor extends Editor {
 
@@ -52,7 +53,7 @@ export class ClientSchemaEditor extends Editor {
       title: 'client.schema.update',
       tooltip: 'client.schema.update.tooltip',
       component: ClientSchemaUpdateFormComponent,
-      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
+      isReady: ClientSchemaEditor.boundWidgetIsReady
     },
     {
       id: 'delete',
@@ -60,39 +61,40 @@ export class ClientSchemaEditor extends Editor {
       title: 'client.schema.delete',
       tooltip: 'client.schema.delete.tooltip',
       component: ClientSchemaDeleteFormComponent,
-      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
+      isReady: ClientSchemaEditor.boundWidgetIsReady
     },
     {
       id: 'duplicate',
       icon: 'queue',
       title: 'client.schema.duplicate',
       tooltip: 'client.schema.duplicate.tooltip',
-      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
+      isReady: ClientSchemaEditor.boundWidgetIsReady
     },
     {
       id: 'manageFiles',
       icon: 'attach_file',
       title: 'client.schema.manageFiles',
       tooltip: 'client.schema.manageFiles.tooltip',
-      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
+      component: ClientSchemaFileManagerComponent,
+      isReady: ClientSchemaEditor.boundWidgetIsReady
     },
     {
       id: 'transfer',
       icon: 'swap_horiz',
       title: 'client.schema.transfer',
       tooltip: 'client.schema.transfer.tooltip',
-      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
+      isReady: ClientSchemaEditor.boundWidgetIsReady
     },
     {
       id: 'createMap',
       icon: 'image',
       title: 'client.schema.createMap',
       tooltip: 'client.schema.createMap.tooltip',
-      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
+      isReady: ClientSchemaEditor.boundWidgetIsReady
     }
   ];
 
-  static schemaBoundWidgetIsReady = function(data: { [key: string]: any}) {
+  static boundWidgetIsReady = function(data: { [key: string]: any}) {
     return data.schema !== undefined;
   };
 

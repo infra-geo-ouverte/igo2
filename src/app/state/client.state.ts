@@ -103,7 +103,8 @@ export class ClientState {
   }
 
   getSetClientByNum(clientNum: string): Observable<Client> {
-    return this.clientService.getClientByNum(clientNum, this.parcelYear.annee).pipe(
+    const annee = this.parcelYear ? this.parcelYear.annee : undefined;
+    return this.clientService.getClientByNum(clientNum, annee).pipe(
       tap((client: Client) => this.setClient(client))
     );
   }

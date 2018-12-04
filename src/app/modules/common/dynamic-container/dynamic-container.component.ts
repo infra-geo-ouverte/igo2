@@ -110,7 +110,17 @@ export class DynamicContainerComponent implements OnChanges, OnDestroy {
     const instance = this.componentRef.instance;
     Object.entries(this.data || {}).forEach(([key, value]) => {
       if (key in instance) {
-        instance[key] = value;
+        try {
+          instance[key] = value;
+        } catch (e) {
+          if (e instanceof TypeError) {
+            // This happens when trying to set a property that
+            // only has a getter and no setter. We don't want that
+            // to fail so we simply skip this property.
+          } else {
+            throw(e);
+          }
+        }
       }
     });
   }
