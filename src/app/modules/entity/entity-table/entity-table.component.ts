@@ -16,7 +16,7 @@ import t from 'typy';
 
 import {
   Entity,
-  EntityTableModel,
+  EntityTableTemplate,
   EntityTableColumn,
   EntityStore,
   EntityStoreController
@@ -42,13 +42,13 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   private _store: EntityStore<Entity>;
 
   @Input()
-  get model(): EntityTableModel {
-    return this._model;
+  get template(): EntityTableTemplate {
+    return this._template;
   }
-  set model(value: EntityTableModel) {
-    this._model = value;
+  set template(value: EntityTableTemplate) {
+    this._template = value;
   }
-  private _model: EntityTableModel;
+  private _template: EntityTableTemplate;
 
   @Output() entitySelectChange = new EventEmitter<{
     selected: boolean;
@@ -56,7 +56,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }>();
 
   get headers(): string[] {
-    return this.model.columns
+    return this.template.columns
       .filter((column: EntityTableColumn) => column.visible !== false)
       .map((column: EntityTableColumn) => column.name);
   }
@@ -96,7 +96,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   onEntityClick(entity: Entity) {
-    if (!this.model.selection) {
+    if (!this.template.selection) {
       return;
     }
 
@@ -114,13 +114,13 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   columnIsSortable(column: EntityTableColumn): boolean {
     let sortable = column.sort;
     if (sortable === undefined) {
-      sortable = this.model.sort === undefined ? false : this.model.sort;
+      sortable = this.template.sort === undefined ? false : this.template.sort;
     }
     return sortable;
   }
 
   getTableClass(): { [key: string]: boolean; } {
-    const selection = this.model.selection || false;
+    const selection = this.template.selection || false;
     return {
       'fadq-entity-table-with-selection': selection
     };
@@ -129,7 +129,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   getRowClass(entity: Entity): { [key: string]: boolean; } {
     let classes = {};
 
-    const func = this.model.rowClassFunc;
+    const func = this.template.rowClassFunc;
     if (func instanceof Function) {
       classes = Object.assign(classes, func(entity));
     }
@@ -143,7 +143,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   getCellClass(entity: Entity, column: EntityTableColumn): { [key: string]: boolean; } {
-    const func = this.model.cellClassFunc;
+    const func = this.template.cellClassFunc;
     if (func instanceof Function) {
       return func(entity, column);
     }

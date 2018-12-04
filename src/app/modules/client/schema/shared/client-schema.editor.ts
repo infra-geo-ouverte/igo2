@@ -1,13 +1,15 @@
 import { Editor } from 'src/app/modules/edition';
-import { EntityStore, EntityTableModel } from 'src/app/modules/entity';
+import { EntityStore, EntityTableTemplate } from 'src/app/modules/entity';
 import { Widget } from 'src/app/modules/widget';
 
 import { ClientSchema } from './client-schema.interfaces';
+import { ClientSchemaCreateFormComponent } from '../client-schema-create-form/client-schema-create-form.component';
 import { ClientSchemaUpdateFormComponent } from '../client-schema-update-form/client-schema-update-form.component';
+import { ClientSchemaDeleteFormComponent } from '../client-schema-delete-form/client-schema-delete-form.component';
 
 export class ClientSchemaEditor extends Editor {
 
-  static tableModel: EntityTableModel = {
+  static tableTemplate: EntityTableTemplate = {
     selection: true,
     sort: true,
     columns: [
@@ -41,7 +43,8 @@ export class ClientSchemaEditor extends Editor {
       id: 'create',
       icon: 'add',
       title: 'client.schema.create',
-      tooltip: 'client.schema.create.tooltip'
+      tooltip: 'client.schema.create.tooltip',
+      component: ClientSchemaCreateFormComponent
     },
     {
       id: 'update',
@@ -56,6 +59,7 @@ export class ClientSchemaEditor extends Editor {
       icon: 'delete',
       title: 'client.schema.delete',
       tooltip: 'client.schema.delete.tooltip',
+      component: ClientSchemaDeleteFormComponent,
       isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
@@ -96,7 +100,7 @@ export class ClientSchemaEditor extends Editor {
     super({
       id: 'fadq.client-schema-editor',
       title: 'Schemas du client',
-      tableModel: ClientSchemaEditor.tableModel
+      tableTemplate: ClientSchemaEditor.tableTemplate
     });
 
     this.bindEntityStore(new EntityStore<ClientSchema>());

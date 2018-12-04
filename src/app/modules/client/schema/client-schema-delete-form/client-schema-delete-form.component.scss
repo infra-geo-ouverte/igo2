@@ -1,0 +1,11 @@
+$icon-size: 36px;
+
+mat-card {
+  height: 100%;
+}
+
+.mat-card-avatar > mat-icon {
+  font-size: $icon-size;
+  height: $icon-size;
+  width: $icon-size;
+}

@@ -3,7 +3,7 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 import {
   Entity,
   EntityClass,
-  EntityTableModel,
+  EntityTableTemplate,
   State
 } from '../../entity/shared/entity.interface';
 import { EntityStore } from '../../entity/shared/store';
@@ -32,8 +32,8 @@ export class Editor extends EntityClass {
     return this.activeWidget && this.activeWidget.component !== undefined;
   }
 
-  get tableModel(): EntityTableModel {
-    return this.config.tableModel;
+  get tableTemplate(): EntityTableTemplate {
+    return this.config.tableTemplate;
   }
 
   get entityStore():  EntityStore<Entity> {

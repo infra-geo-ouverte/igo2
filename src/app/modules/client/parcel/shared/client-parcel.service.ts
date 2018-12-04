@@ -27,7 +27,7 @@ export class ClientParcelService {
   getClientParcelsByNum(clientNum: string, annee: number = 2018): Observable<ClientParcel[]> {
     const url = this.apiService.buildUrl(this.apiConfig.list, {
       clientNum,
-      annee: annee
+      annee
     });
 
     return this.http

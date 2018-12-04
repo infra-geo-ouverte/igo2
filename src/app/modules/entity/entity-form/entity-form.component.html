@@ -5,9 +5,11 @@
   [formGroup]="form"
   (ngSubmit)="onSubmit(form.value)">
 
-  <div class="fadq-entity-form-fields-container">
+  <div
+    *ngIf="template.fields && template.fields.length > 0"
+    class="fadq-entity-form-fields-container">
     <mat-grid-list cols="2" rowHeight="60px">
-      <ng-container *ngFor="let field of model.fields">
+      <ng-container *ngFor="let field of template.fields">
         <ng-container *ngIf="getFieldControl(field) as control">
           <mat-grid-tile [colspan]="getFieldColSpan(field)">
             <mat-form-field>

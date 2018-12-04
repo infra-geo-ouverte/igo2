@@ -1,7 +1,7 @@
-import { EntityTableModel } from 'src/app/modules/entity';
+import { EntityTableTemplate } from 'src/app/modules/entity';
 
 export interface EditorConfig {
   id: string;
   title: string;
-  tableModel?: EntityTableModel;
+  tableTemplate?: EntityTableTemplate;
 }

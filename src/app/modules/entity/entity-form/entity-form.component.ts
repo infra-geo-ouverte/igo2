@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { Entity, EntityFormModel, EntityFormField } from '../shared';
+import { Entity, EntityFormTemplate, EntityFormField } from '../shared';
 
 @Component({
   selector: 'fadq-entity-form',
@@ -23,36 +23,36 @@ export class EntityFormComponent implements OnChanges {
   public form: FormGroup;
 
   @Input()
-  get entity(): Entity {
+  get entity(): Entity | undefined {
     return this._entity;
   }
-  set entity(value: Entity) {
+  set entity(value: Entity | undefined) {
     this._entity = value;
   }
-  private _entity: Entity;
+  private _entity: Entity | undefined;
 
   @Input()
-  get model(): EntityFormModel {
-    return this._model;
+  get template(): EntityFormTemplate {
+    return this._template;
   }
-  set model(value: EntityFormModel) {
-    this._model = value;
+  set template(value: EntityFormTemplate) {
+    this._template = value;
   }
-  private _model: EntityFormModel;
+  private _template: EntityFormTemplate;
 
   @Output() submitForm = new EventEmitter<{
-    entity: Entity;
+    entity: Entity | undefined;
     data: { [key: string]: any };
   }>();
 
   @Output() cancel = new EventEmitter();
 
   get submitLabel(): string {
-    return this.model.submitLabel ? this.model.submitLabel : 'OK';
+    return this.template.submitLabel ? this.template.submitLabel : 'OK';
   }
 
   get cancelLabel(): string {
-    return this.model.cancelLabel ? this.model.cancelLabel : 'CANCEL';
+    return this.template.cancelLabel ? this.template.cancelLabel : 'CANCEL';
   }
 
   constructor(
@@ -61,10 +61,10 @@ export class EntityFormComponent implements OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    const model = changes.model;
+    const template = changes.template;
     const entity = changes.entity;
 
-    if (model && model.currentValue !== model.previousValue) {
+    if (template && template.currentValue !== template.previousValue) {
       this.createForm();
     } else if (entity && entity.currentValue !== entity.previousValue) {
       this.populateForm();
@@ -96,7 +96,7 @@ export class EntityFormComponent implements OnChanges {
 
   private createForm() {
     const controls = {};
-    this.model.fields.forEach((field: EntityFormField) => {
+    this.template.fields.forEach((field: EntityFormField) => {
       controls[field.name] = this.createFormControl(field);
     });
 
@@ -119,7 +119,7 @@ export class EntityFormComponent implements OnChanges {
       this.form.reset();
       return;
     }
-    this.model.fields.forEach((field: EntityFormField) => {
+    this.template.fields.forEach((field: EntityFormField) => {
       const control = this.getFieldControl(field);
       control.setValue(this.entity[field.name]);
     });

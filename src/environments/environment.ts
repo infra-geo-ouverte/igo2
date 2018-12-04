@@ -71,7 +71,9 @@ export const environment: Environment = {
         schema: {
           list: '/services/FADQ/Geomatique/Schema/obtenirSchemasClient/{clientNum}',
           create: '/services/FADQ/Geomatique/Schema/ajouterSchema',
-          update: '/services/FADQ/Geomatique/Schema/modifierSchema'
+          update: '/services/FADQ/Geomatique/Schema/modifierSchema',
+          delete: '/services/FADQ/Geomatique/Schema/supprimerSchema/${id}',
+          copy: '/services/FADQ/Geomatique/Schema/copierSchema/${id}'
         }
       }
     }

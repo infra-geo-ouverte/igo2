@@ -73,6 +73,7 @@
       "update.tooltip": "Modifier un schéma",
       "delete": "Supprimer",
       "delete.tooltip": "Supprimer le schéma sélectionné",
+      "delete.confirm": "Êtes vous sur de vouloir supprimer ce schéma et toutes les entités qui lui sont associées?",
       "duplicate": "Dupliquer",
       "duplicate.tooltip": "Dupliquer le schéma sélectionné",
       "manageFiles": "Fichiers joints",

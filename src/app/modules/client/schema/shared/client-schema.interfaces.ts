@@ -4,6 +4,8 @@ export interface ClientSchemaApiConfig  {
   list: string;
   create: string;
   update: string;
+  delete: string;
+  copy: string;
 }
 
 export interface ClientSchema extends EntityObject {

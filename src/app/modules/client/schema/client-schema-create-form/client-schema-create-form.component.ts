@@ -10,19 +10,19 @@ import {
 import { EntityStore, EntityFormTemplate, getEntityId } from 'src/app/modules/entity';
 import { WidgetComponent } from 'src/app/modules/widget';
 
-import { ClientSchema, ClientSchemaUpdateData } from '../shared/client-schema.interfaces';
+import { ClientSchema, ClientSchemaCreateData } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
 import { ClientSchemaFormBuilder } from '../shared/client-schema-form-builder';
 
 @Component({
-  selector: 'fadq-client-schema-update-form',
-  templateUrl: './client-schema-update-form.component.html',
-  styleUrls: ['./client-schema-update-form.component.scss'],
+  selector: 'fadq-client-schema-create-form',
+  templateUrl: './client-schema-create-form.component.html',
+  styleUrls: ['./client-schema-create-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaUpdateFormComponent implements WidgetComponent {
+export class ClientSchemaCreateFormComponent implements WidgetComponent {
 
-  public template: EntityFormTemplate = ClientSchemaFormBuilder.getUpdateTemplate();
+  public template: EntityFormTemplate = ClientSchemaFormBuilder.getCreateTemplate();
 
   @Input()
   get schema(): ClientSchema {
@@ -51,12 +51,10 @@ export class ClientSchemaUpdateFormComponent implements WidgetComponent {
     private cdRef: ChangeDetectorRef
   ) {}
 
-  onSubmit(event: {entity: ClientSchema, data: { [key: string]: any }}) {
-    const data = Object.assign({}, event.data, {
-      id: parseInt(getEntityId(event.entity), 10)
-    }) as ClientSchemaUpdateData;
+  onSubmit(event: {entity: undefined, data: { [key: string]: any }}) {
+    const data = Object.assign({}, event.data) as ClientSchemaCreateData;
 
-    this.clientSchemaService.updateSchema(event.entity, data)
+    this.clientSchemaService.createSchema(data)
       .subscribe((schema: ClientSchema) => this.onSubmitSuccess(schema));
   }
 
@@ -66,7 +64,7 @@ export class ClientSchemaUpdateFormComponent implements WidgetComponent {
 
   private onSubmitSuccess(schema: ClientSchema) {
     if (this.store !== undefined) {
-      this.store.putEntities([schema], true);
+      this.store.addEntities([schema], true);
     }
     this.complete.emit();
   }

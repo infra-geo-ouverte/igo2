@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/modules/core/api';
+import { getEntityId } from 'src/app/modules/entity';
 import {
   ClientSchema,
   ClientSchemaApiConfig,
@@ -53,7 +54,6 @@ export class ClientSchemaService {
         return this.extractSchemasFromListResponse(response);
       })
     );
-
     /*
     const url = this.apiService.buildUrl(this.apiConfig.list, {clientNum});
     return this.http
@@ -67,6 +67,8 @@ export class ClientSchemaService {
   }
 
   createSchema(data: ClientSchemaCreateData): Observable<ClientSchema> {
+    return of(Object.assign({id: '1234'}, data));
+    /*
     const url = this.apiService.buildUrl(this.apiConfig.create);
     const params = new HttpParams({
       fromObject: data as { [key: string]: any}
@@ -79,9 +81,12 @@ export class ClientSchemaService {
           return this.extractSchemaFromCreateResponse(response);
         })
       );
+    */
   }
 
   updateSchema(schema: ClientSchema, data: ClientSchemaUpdateData): Observable<ClientSchema> {
+    return of(Object.assign({}, schema, data));
+    /*
     const url = this.apiService.buildUrl(this.apiConfig.update);
     const params = new HttpParams({
       fromObject: data as { [key: string]: any}
@@ -94,6 +99,18 @@ export class ClientSchemaService {
           return this.extractSchemaFromUpdateResponse(response);
         })
       );
+    */
+  }
+
+  deleteSchema(schema: ClientSchema): Observable<any> {
+    return of({});
+    /*
+    const url = this.apiService.buildUrl(this.apiConfig.delete, {
+      id: getEntityId(schema)
+    });
+
+    return this.http.post(url, {});
+    */
   }
 
   private extractSchemasFromListResponse(

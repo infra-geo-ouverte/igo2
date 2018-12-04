@@ -1,12 +1,12 @@
 import { Editor } from 'src/app/modules/edition';
-import { EntityStore, EntityTableModel } from 'src/app/modules/entity';
+import { EntityStore, EntityTableTemplate } from 'src/app/modules/entity';
 import { Widget } from 'src/app/modules/widget';
 
 import { ClientParcel } from './client-parcel.interfaces';
 
 export class ClientParcelEditor extends Editor {
 
-  static tableModel: EntityTableModel = {
+  static tableTemplate: EntityTableTemplate = {
     selection: true,
     sort: true,
     rowClassFunc: ((parcel: ClientParcel) => {
@@ -89,7 +89,7 @@ export class ClientParcelEditor extends Editor {
     super({
       id: 'fadq.client-parcel-editor',
       title: 'Parcelles du client',
-      tableModel: ClientParcelEditor.tableModel
+      tableTemplate: ClientParcelEditor.tableTemplate
     });
 
     this.bindEntityStore(new EntityStore<ClientParcel>());

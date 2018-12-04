@@ -26,7 +26,7 @@ export interface State {
   [key: string]: boolean;
 }
 
-export interface EntityTableModel {
+export interface EntityTableTemplate {
   columns: EntityTableColumn[];
   selection?: boolean;
   sort?: boolean;
@@ -52,19 +52,22 @@ export interface EntitySortClause {
   direction: string;
 }
 
-export interface EntityFormModel {
+export type EntityFilterClause = (entity: Entity, state: State) => boolean;
+
+export interface EntityFormTemplate {
   fields: EntityFormField[];
   submitLabel?: string;
   cancelLabel?: string;
 }
 
-export interface EntityFormField {
-  name: string;
-  title: string;
+export interface EntityFormFieldOptions {
   validator?: ValidatorFn;
   disabled?: boolean;
   visible?: boolean;
   cols?: number;
 }
 
-export type EntityFilterClause = (entity: Entity, state: State) => boolean;
+export interface EntityFormField extends EntityFormFieldOptions {
+  name: string;
+  title: string;
+}

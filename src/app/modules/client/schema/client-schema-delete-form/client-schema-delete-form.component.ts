@@ -7,22 +7,22 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
-import { EntityStore, EntityFormTemplate, getEntityId } from 'src/app/modules/entity';
+import { EntityStore, EntityFormTemplate } from 'src/app/modules/entity';
 import { WidgetComponent } from 'src/app/modules/widget';
 
-import { ClientSchema, ClientSchemaUpdateData } from '../shared/client-schema.interfaces';
+import { ClientSchema } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
 import { ClientSchemaFormBuilder } from '../shared/client-schema-form-builder';
 
 @Component({
-  selector: 'fadq-client-schema-update-form',
-  templateUrl: './client-schema-update-form.component.html',
-  styleUrls: ['./client-schema-update-form.component.scss'],
+  selector: 'fadq-client-schema-delete-form',
+  templateUrl: './client-schema-delete-form.component.html',
+  styleUrls: ['./client-schema-delete-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaUpdateFormComponent implements WidgetComponent {
+export class ClientSchemaDeleteFormComponent implements WidgetComponent {
 
-  public template: EntityFormTemplate = ClientSchemaFormBuilder.getUpdateTemplate();
+  public template: EntityFormTemplate = ClientSchemaFormBuilder.getDeleteTemplate();
 
   @Input()
   get schema(): ClientSchema {
@@ -52,12 +52,9 @@ export class ClientSchemaUpdateFormComponent implements WidgetComponent {
   ) {}
 
   onSubmit(event: {entity: ClientSchema, data: { [key: string]: any }}) {
-    const data = Object.assign({}, event.data, {
-      id: parseInt(getEntityId(event.entity), 10)
-    }) as ClientSchemaUpdateData;
-
-    this.clientSchemaService.updateSchema(event.entity, data)
-      .subscribe((schema: ClientSchema) => this.onSubmitSuccess(schema));
+    const schema = event.entity;
+    this.clientSchemaService.deleteSchema(schema)
+      .subscribe(() => this.onSubmitSuccess(schema));
   }
 
   onCancel() {
@@ -66,7 +63,7 @@ export class ClientSchemaUpdateFormComponent implements WidgetComponent {
 
   private onSubmitSuccess(schema: ClientSchema) {
     if (this.store !== undefined) {
-      this.store.putEntities([schema], true);
+      this.store.removeEntities([schema], true);
     }
     this.complete.emit();
   }
