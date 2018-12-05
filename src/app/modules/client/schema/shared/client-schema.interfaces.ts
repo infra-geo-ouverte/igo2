@@ -6,6 +6,9 @@ export interface ClientSchemaApiConfig  {
   update: string;
   delete: string;
   duplicate: string;
+  domains: {
+    type: string;
+  };
 }
 
 export interface ClientSchema extends EntityObject {
@@ -15,10 +18,13 @@ export interface ClientSchema extends EntityObject {
   description: string;
   annee: string;
   etat: string;
+  nbDocuments: number;
+  usagerMaj: string;
+  timbreMaj: string;
 }
 
 export interface ClientSchemaListResponse {
-  donnees?: ClientSchemaListResponseItem[];
+  data?: ClientSchemaListResponseItem[];
 }
 
 export interface ClientSchemaListResponseItem extends ClientSchema {}
@@ -52,6 +58,7 @@ export interface ClientSchemaFileApiConfig  {
   delete: string;
 }
 
+// Property have been renamed because this might become a common interface/module
 export interface ClientSchemaFile extends EntityObject {
   id: string;
   name: string;
@@ -61,7 +68,7 @@ export interface ClientSchemaFile extends EntityObject {
 }
 
 export interface ClientSchemaFileListResponse {
-  donnees?: ClientSchemaFileListResponseItem[];
+  data?: ClientSchemaFileListResponseItem[];
 }
 
 export interface ClientSchemaFileListResponseItem {
@@ -81,3 +88,16 @@ export interface ClientSchemaFileCreateData {
 }
 
 export interface ClientSchemaFileCreateResponse extends ClientSchemaFileListResponseItem {}
+
+export interface ClientSchemaTypeChoicesResponse {
+  data: ClientSchemaTypeChoicesResponseItem[];
+}
+
+export interface ClientSchemaTypeChoicesResponseItem {
+  code: string;
+  descriptionAbregeeFrancais: string;
+  descriptionFrancais: string;
+  descriptionAbregeeAnglais: string;
+  descriptionAnglaiss: string;
+  ordreAffichage: number;
+}

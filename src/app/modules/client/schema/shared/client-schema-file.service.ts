@@ -28,6 +28,7 @@ export class ClientSchemaFileService {
   ) {}
 
   getClientSchemaFiles(schema: ClientSchema): Observable<ClientSchemaFile[]> {
+    /*
     return of({
       'messages': [],
       'donnees': [
@@ -51,16 +52,15 @@ export class ClientSchemaFileService {
         return this.extractSchemaFilesFromListResponse(response);
       })
     );
-    /*
+    */
     const url = this.apiService.buildUrl(this.apiConfig.list, {schemaId: getEntityId(schema)});
     return this.http
       .get(url)
       .pipe(
         map((response: ClientSchemaFileListResponse) => {
-          return this.extractSchemasFromListResponse(response);
+          return this.extractSchemaFilesFromListResponse(response);
         })
       );
-    */
   }
 
   getSchemaFileData(schemaFile: ClientSchemaFile): Observable<string> {
@@ -115,7 +115,7 @@ export class ClientSchemaFileService {
   private extractSchemaFilesFromListResponse(
     response: ClientSchemaFileListResponse
   ): ClientSchemaFile[] {
-    const listItems = response.donnees || [];
+    const listItems = response.data || [];
     return listItems.map(listItem => this.listItemToSchemaFile(listItem));
   }
 

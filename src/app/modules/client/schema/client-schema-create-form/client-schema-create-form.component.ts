@@ -4,15 +4,18 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  OnInit
 } from '@angular/core';
 
-import { EntityStore, EntityFormTemplate, getEntityId } from 'src/app/modules/entity';
+import { Subject } from 'rxjs';
+
+import { EntityStore, EntityFormTemplate } from 'src/app/modules/entity';
 import { WidgetComponent } from 'src/app/modules/widget';
 
 import { ClientSchema, ClientSchemaCreateData } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
-import { ClientSchemaFormBuilder } from '../shared/client-schema-form-builder';
+import { ClientSchemaFormService } from '../shared/client-schema-form.service';
 
 @Component({
   selector: 'fadq-client-schema-create-form',
@@ -20,9 +23,9 @@ import { ClientSchemaFormBuilder } from '../shared/client-schema-form-builder';
   styleUrls: ['./client-schema-create-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaCreateFormComponent implements WidgetComponent {
+export class ClientSchemaCreateFormComponent implements WidgetComponent, OnInit {
 
-  public template: EntityFormTemplate = ClientSchemaFormBuilder.getCreateTemplate();
+  public template$ = new Subject<EntityFormTemplate>();
 
   @Input()
   get schema(): ClientSchema {
@@ -48,12 +51,17 @@ export class ClientSchemaCreateFormComponent implements WidgetComponent {
 
   constructor(
     private clientSchemaService: ClientSchemaService,
+    private clientSchemaFormService: ClientSchemaFormService,
     private cdRef: ChangeDetectorRef
   ) {}
 
+  ngOnInit() {
+    this.clientSchemaFormService.buildCreateForm()
+      .subscribe((template: EntityFormTemplate) => this.template$.next(template));
+  }
+
   onSubmit(event: {entity: undefined, data: { [key: string]: any }}) {
     const data = Object.assign({}, event.data) as ClientSchemaCreateData;
-
     this.clientSchemaService.createSchema(data)
       .subscribe((schema: ClientSchema) => this.onSubmitSuccess(schema));
   }

@@ -74,10 +74,6 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
 
   constructor(private clientSchemaFileService: ClientSchemaFileService) {}
 
-  onCancel() {
-    this.cancel.emit();
-  }
-
   ngOnInit() {
     this._store = new EntityStore<ClientSchemaFile>();
     this.loadClientSchemaFiles();
@@ -97,7 +93,7 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
     this.deleteSchemaFile();
   }
 
-  onCancelButtonClick() {
+  onCloseButtonClick() {
     this.cancel.emit();
   }
 

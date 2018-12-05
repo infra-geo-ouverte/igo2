@@ -4,15 +4,18 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  OnInit
 } from '@angular/core';
+
+import { Subject } from 'rxjs';
 
 import { EntityStore, EntityFormTemplate } from 'src/app/modules/entity';
 import { WidgetComponent } from 'src/app/modules/widget';
 
 import { ClientSchema } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
-import { ClientSchemaFormBuilder } from '../shared/client-schema-form-builder';
+import { ClientSchemaFormService } from '../shared/client-schema-form.service';
 
 @Component({
   selector: 'fadq-client-schema-duplicate-form',
@@ -20,9 +23,9 @@ import { ClientSchemaFormBuilder } from '../shared/client-schema-form-builder';
   styleUrls: ['./client-schema-duplicate-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaDuplicateFormComponent implements WidgetComponent {
+export class ClientSchemaDuplicateFormComponent implements WidgetComponent, OnInit {
 
-  public template: EntityFormTemplate = ClientSchemaFormBuilder.getDuplicateTemplate();
+  public template$ = new Subject<EntityFormTemplate>();
 
   @Input()
   get schema(): ClientSchema {
@@ -48,8 +51,14 @@ export class ClientSchemaDuplicateFormComponent implements WidgetComponent {
 
   constructor(
     private clientSchemaService: ClientSchemaService,
+    private clientSchemaFormService: ClientSchemaFormService,
     private cdRef: ChangeDetectorRef
   ) {}
+
+  ngOnInit() {
+    this.clientSchemaFormService.buildDuplicateForm()
+      .subscribe((template: EntityFormTemplate) => this.template$.next(template));
+  }
 
   onSubmit(event: {entity: ClientSchema, data: { [key: string]: any }}) {
     this.clientSchemaService.duplicateSchema(event.entity)

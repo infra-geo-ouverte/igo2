@@ -35,6 +35,18 @@ export class ClientSchemaEditor extends Editor {
       {
         name: 'etat',
         title: 'État'
+      },
+      {
+        name: 'timbreMaj',
+        title: 'Date de mise à jour'
+      },
+      {
+        name: 'usagerMaj',
+        title: 'Usager mise à jour'
+      },
+      {
+        name: 'nbDocuments',
+        title: 'Fichiers joints'
       }
     ]
   };

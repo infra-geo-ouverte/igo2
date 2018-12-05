@@ -30,6 +30,7 @@ export class ClientSchemaService {
   ) {}
 
   getClientSchemasByNum(clientNum: string): Observable<ClientSchema[]> {
+    /*
     return of({
       'messages': [],
       'donnees': [
@@ -39,7 +40,10 @@ export class ClientSchemaService {
           'type': 'CMP',
           'description': 'test',
           'annee': '2018',
-          'etat': null
+          'etat': null,
+          nbDocuments: 0,
+          usagerMaj: undefined,
+          timbreMaj: undefined
         },
         {
           'id': '10425',
@@ -47,7 +51,10 @@ export class ClientSchemaService {
           'type': 'EPA',
           'description': 'efgh',
           'annee': '2016',
-          'etat': 'TRAITE'
+          'etat': 'TRAITE',
+          nbDocuments: 0,
+          usagerMaj: undefined,
+          timbreMaj: undefined
         }
       ]
     }).pipe(
@@ -55,7 +62,7 @@ export class ClientSchemaService {
         return this.extractSchemasFromListResponse(response);
       })
     );
-    /*
+    */
     const url = this.apiService.buildUrl(this.apiConfig.list, {clientNum});
     return this.http
       .get(url)
@@ -64,11 +71,15 @@ export class ClientSchemaService {
           return this.extractSchemasFromListResponse(response);
         })
       );
-    */
   }
 
   createSchema(data: ClientSchemaCreateData): Observable<ClientSchema> {
-    return of(Object.assign({id: '1234'}, data));
+    return of(Object.assign({
+      id: '1234',
+      nbDocuments: 0,
+      usagerMaj: undefined,
+      timbreMaj: undefined
+    }, data));
     /*
     const url = this.apiService.buildUrl(this.apiConfig.create);
     const params = new HttpParams({
@@ -135,7 +146,7 @@ export class ClientSchemaService {
   private extractSchemasFromListResponse(
     response: ClientSchemaListResponse
   ): ClientSchema[] {
-    const listItems = response.donnees || [];
+    const listItems = response.data || [];
     return listItems.map(listItem => this.listItemToSchema(listItem));
   }
 

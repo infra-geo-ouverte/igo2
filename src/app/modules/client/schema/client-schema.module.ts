@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import {
   provideClientSchemaService,
-  provideClientSchemaFileService
+  provideClientSchemaFileService,
+  provideClientSchemaFormService
 } from './shared/client-schema.providers';
 
 import { FadqClientSchemaCreateFormModule } from './client-schema-create-form/client-schema-create-form.module';
@@ -33,7 +34,8 @@ export class FadqClientSchemaModule {
       ngModule: FadqClientSchemaModule,
       providers: [
         provideClientSchemaService(),
-        provideClientSchemaFileService()
+        provideClientSchemaFileService(),
+        provideClientSchemaFormService()
       ]
     };
   }

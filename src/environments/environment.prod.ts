@@ -53,16 +53,19 @@ export const environment: Environment = {
           years: '/app/interne/igolocalisation/recherche_client/obtenirAnneesTraitementParcelleAgricole'
         },
         schema: {
-          list: '/services/FADQ/Geomatique/Schema/obtenirSchemasClient/{clientNum}',
-          create: '/services/FADQ/Geomatique/Schema/ajouterSchema',
-          update: '/services/FADQ/Geomatique/Schema/modifierSchema',
-          delete: '/services/FADQ/Geomatique/Schema/supprimerSchema/${id}',
-          duplicate: '/services/FADQ/Geomatique/Schema/copierSchema/${id}'
+          list: '/app/interne/igolocalisation/recherche_client/obtenirSchemasClient/${clientNum}',
+          create: '/app/interne/igolocalisation/recherche_client/ajouterSchema',
+          update: '/app/interne/igolocalisation/recherche_client/modifierSchema',
+          delete: '/app/interne/igolocalisation/recherche_client/supprimerSchema/${id}',
+          duplicate: '/app/interne/igolocalisation/recherche_client/copierSchema/${id}',
+          domains: {
+            type: '/app/interne/igolocalisation/recherche_client/obtenirTypesSchemas'
+          }
         },
         schemaFile: {
-          list: '/services/FADQ/Geomatique/DocumentSchema/obtenirDocumentsSchema/{schemaId}',
-          create: '/services/FADQ/Geomatique/DocumentSchema/ajouterDocumentSchema',
-          delete: '/services/FADQ/Geomatique/DocumentSchema/supprimerDocumentSchema/{id}'
+          list: '/app/interne/igolocalisation/recherche_client/obtenirDocumentsSchema/${schemaId}',
+          create: '/app/interne/igolocalisation/recherche_client/ajouterDocumentSchema',
+          delete: '/app/interne/igolocalisation/recherche_client/supprimerDocumentSchema/${id}'
         }
       }
     }

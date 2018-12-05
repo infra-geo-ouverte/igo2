@@ -4,15 +4,18 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  OnInit
 } from '@angular/core';
+
+import { Subject } from 'rxjs';
 
 import { EntityStore, EntityFormTemplate, getEntityId } from 'src/app/modules/entity';
 import { WidgetComponent } from 'src/app/modules/widget';
 
 import { ClientSchema, ClientSchemaUpdateData } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
-import { ClientSchemaFormBuilder } from '../shared/client-schema-form-builder';
+import { ClientSchemaFormService } from '../shared/client-schema-form.service';
 
 @Component({
   selector: 'fadq-client-schema-update-form',
@@ -20,9 +23,9 @@ import { ClientSchemaFormBuilder } from '../shared/client-schema-form-builder';
   styleUrls: ['./client-schema-update-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaUpdateFormComponent implements WidgetComponent {
+export class ClientSchemaUpdateFormComponent implements WidgetComponent, OnInit {
 
-  public template: EntityFormTemplate = ClientSchemaFormBuilder.getUpdateTemplate();
+  public template$ = new Subject<EntityFormTemplate>();
 
   @Input()
   get schema(): ClientSchema {
@@ -48,8 +51,14 @@ export class ClientSchemaUpdateFormComponent implements WidgetComponent {
 
   constructor(
     private clientSchemaService: ClientSchemaService,
+    private clientSchemaFormService: ClientSchemaFormService,
     private cdRef: ChangeDetectorRef
   ) {}
+
+  ngOnInit() {
+    this.clientSchemaFormService.buildUpdateForm()
+      .subscribe((template: EntityFormTemplate) => this.template$.next(template));
+  }
 
   onSubmit(event: {entity: ClientSchema, data: { [key: string]: any }}) {
     const data = Object.assign({}, event.data, {

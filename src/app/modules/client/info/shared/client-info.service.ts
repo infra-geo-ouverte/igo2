@@ -23,28 +23,12 @@ export class ClientInfoService {
   ) {}
 
   getClientInfoByNum(clientNum: string): Observable<ClientInfo> {
-    const url = this.apiService.buildUrl(this.apiConfig.get);
-    const params = new HttpParams({
-      fromObject: {
-        body: [clientNum]
-      }
-    });
-
-    /*
-    return this.http
-      .post(url, { params })
-      .pipe(
-        map((response: ClientResponse) => {
-          return this.extractClientFromListResponse(response);
-        })
-      );
-    */
-   return of({
+    return of({
       'messages': [],
       'donnees': [
         {
-          'numeroClient': '0007229',
-          'nomClient': '0007229 CLIENT NUMÉRO',
+          'numeroClient': clientNum,
+          'nomClient': 'NOM DU CLIENT',
           'statutJuridique': {
             'statutJuridique': 'Particulier',
             'codeStatutJuridique': '01'
@@ -73,6 +57,23 @@ export class ClientInfoService {
         return this.extractClientInfoFromListResponse(response);
       })
     );
+
+    /*
+    const url = this.apiService.buildUrl(this.apiConfig.get);
+    const params = new HttpParams({
+      fromObject: {
+        body: [clientNum]
+      }
+    });
+
+    return this.http
+      .post(url, { params })
+      .pipe(
+        map((response: ClientInfoListResponse) => {
+          return this.extractClientInfoFromListResponse(response);
+        })
+      );
+    */
   }
 
   private extractClientInfoFromListResponse(response: ClientInfoListResponse): ClientInfo | undefined {
