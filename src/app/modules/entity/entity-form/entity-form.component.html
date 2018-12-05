@@ -12,12 +12,10 @@
       <ng-container *ngFor="let field of template.fields">
         <ng-container *ngIf="getFieldControl(field) as control">
           <mat-grid-tile [colspan]="getFieldColSpan(field)">
-            <mat-form-field>
-              <input
-                matInput
-                [placeholder]="field.title"
-                [formControl]="control">
-            </mat-form-field>
+            <fadq-entity-form-field
+              [field]="field"
+              [control]="control">
+            </fadq-entity-form-field>
           </mat-grid-tile>
         </ng-container>
       </ng-container>

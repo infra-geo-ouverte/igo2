@@ -87,8 +87,10 @@ export class EntityFormComponent implements OnChanges {
 
   getFieldColSpan(field: EntityFormField): number {
     let colSpan = 2;
-    if (field.cols && field.cols > 0) {
-      colSpan = Math.min(field.cols, 2);
+
+    const options = field.options || {};
+    if (options.cols && options.cols > 0) {
+      colSpan = Math.min(options.cols, 2);
     }
 
     return colSpan;
@@ -105,11 +107,12 @@ export class EntityFormComponent implements OnChanges {
   }
 
   private createFormControl(field: EntityFormField): FormControl {
+    const options = field.options || {};
     const state = Object.assign({value: ''}, {
-      disabled: field.disabled
+      disabled: options.disabled
     });
     const control = this.formBuilder.control(state);
-    control.setValidators(field.validator);
+    control.setValidators(options.validator);
 
     return control;
   }

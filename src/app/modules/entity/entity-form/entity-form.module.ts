@@ -5,10 +5,12 @@ import {
   MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
+  MatSelectModule,
   MatGridListModule
 } from '@angular/material';
 
 import { EntityFormComponent } from './entity-form.component';
+import { EntityFormFieldComponent } from './entity-form-field.component';
 
 @NgModule({
   imports: [
@@ -18,9 +20,13 @@ import { EntityFormComponent } from './entity-form.component';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     MatGridListModule
   ],
   exports: [EntityFormComponent],
-  declarations: [EntityFormComponent]
+  declarations: [
+    EntityFormComponent,
+    EntityFormFieldComponent
+  ]
 })
 export class FadqEntityFormModule {}

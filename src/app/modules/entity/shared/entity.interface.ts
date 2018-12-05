@@ -67,7 +67,26 @@ export interface EntityFormFieldOptions {
   cols?: number;
 }
 
-export interface EntityFormField extends EntityFormFieldOptions {
+export interface EntityFormFieldInput {
+  type?: string;
+}
+
+export interface EntityFormFieldSelectInputChoice {
+  value: any;
+  title: string;
+}
+
+export interface EntityFormFieldSelectInput extends EntityFormFieldInput {
+  choices: EntityFormFieldSelectInputChoice[];
+}
+
+export type EntityFormFieldAnyInput =
+  EntityFormFieldInput |
+  EntityFormFieldSelectInput;
+
+export interface EntityFormField<T extends EntityFormFieldInput = EntityFormFieldAnyInput> {
   name: string;
   title: string;
+  input?: T;
+  options?: EntityFormFieldOptions;
 }

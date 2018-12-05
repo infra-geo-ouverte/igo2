@@ -1,0 +1,19 @@
+
+
+<mat-form-field>
+  <input
+    *ngIf="inputType === 'text'"
+    matInput
+    [placeholder]="field.title"
+    [formControl]="control">
+  <mat-select
+    *ngIf="inputType === 'select'"
+    placeholder="Favorite food"
+    [placeholder]="field.title"
+    [formControl]="control">
+    <mat-option *ngFor="let choice of inputChoices" [value]="choice.value">
+      {{choice.title}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+

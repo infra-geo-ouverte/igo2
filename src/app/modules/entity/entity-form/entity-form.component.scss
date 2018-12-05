@@ -6,12 +6,6 @@ form {
   display: block;
 }
 
-mat-form-field {
-  width: 100%;
-  padding-top: 10px;
-  margin: 0 $igo-margin;
-}
-
 .fadq-entity-form-fields-container {
   max-height: calc(100% - 56px);
   overflow: auto;
@@ -21,4 +15,14 @@ mat-form-field {
   height: 36px;
   text-align: center;
   margin: 10px 0;
+}
+
+fadq-entity-form-field {
+  width: 100%;
+  padding-top: 10px;
+  margin: 0 $igo-margin;
+}
+
+fadq-entity-form-field ::ng-deep mat-form-field {
+  width: 100%;
 }
