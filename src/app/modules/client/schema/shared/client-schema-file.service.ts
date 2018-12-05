@@ -65,6 +65,16 @@ export class ClientSchemaFileService {
 
   getSchemaFileData(schemaFile: ClientSchemaFile): Observable<string> {
     return of('');
+     /*
+    const url = this.apiService.buildUrl(this.apiConfig.item, {id: getEntityId(schemaFile)});
+    return this.http
+      .get(url)
+      .pipe(
+        map((response: ClientSchemaFileItemResponse) => {
+          return response.document;
+        })
+      );
+    */
   }
 
   createSchemaFile(data: ClientSchemaFileCreateData): Observable<ClientSchemaFile> {

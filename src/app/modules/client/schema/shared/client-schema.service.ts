@@ -14,7 +14,8 @@ import {
   ClientSchemaCreateData,
   ClientSchemaCreateResponse,
   ClientSchemaUpdateData,
-  ClientSchemaUpdateResponse
+  ClientSchemaUpdateResponse,
+  ClientSchemaDuplicateResponse
 } from './client-schema.interfaces';
 
 @Injectable({
@@ -113,6 +114,24 @@ export class ClientSchemaService {
     */
   }
 
+  duplicateSchema(schema: ClientSchema): Observable<ClientSchema> {
+    console.log(Object.assign({}, schema, {id: '1234'}));
+    return of(Object.assign({}, schema, {id: '1234'}));
+    /*
+    const url = this.apiService.buildUrl(this.apiConfig.duplicate, {
+      id: getEntityId(schema)
+    });
+
+    return this.http
+      .post(url, {});
+      .pipe(
+        map((response: ClientSchemaDuplicateResponse) => {
+          return this.extractSchemaFromDuplicateResponse(response);
+        })
+      );
+    */
+  }
+
   private extractSchemasFromListResponse(
     response: ClientSchemaListResponse
   ): ClientSchema[] {
@@ -140,6 +159,16 @@ export class ClientSchemaService {
 
   private extractSchemaFromUpdateResponse(
     response: ClientSchemaUpdateResponse
+  ): ClientSchema {
+    return Object.assign({
+      meta: {
+        title: `${response.id} - ${response.type} - ${response.annee}`
+      }
+    }, response);
+  }
+
+  private extractSchemaFromDuplicateResponse(
+    response: ClientSchemaDuplicateResponse
   ): ClientSchema {
     return Object.assign({
       meta: {

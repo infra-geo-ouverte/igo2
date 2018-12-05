@@ -6,6 +6,7 @@ import { ClientSchema } from './client-schema.interfaces';
 import { ClientSchemaCreateFormComponent } from '../client-schema-create-form/client-schema-create-form.component';
 import { ClientSchemaUpdateFormComponent } from '../client-schema-update-form/client-schema-update-form.component';
 import { ClientSchemaDeleteFormComponent } from '../client-schema-delete-form/client-schema-delete-form.component';
+import { ClientSchemaDuplicateFormComponent } from '../client-schema-duplicate-form/client-schema-duplicate-form.component';
 import { ClientSchemaFileManagerComponent } from '../client-schema-file-manager/client-schema-file-manager.component';
 
 export class ClientSchemaEditor extends Editor {
@@ -68,6 +69,7 @@ export class ClientSchemaEditor extends Editor {
       icon: 'queue',
       title: 'client.schema.duplicate',
       tooltip: 'client.schema.duplicate.tooltip',
+      component: ClientSchemaDuplicateFormComponent,
       isReady: ClientSchemaEditor.boundWidgetIsReady
     },
     {

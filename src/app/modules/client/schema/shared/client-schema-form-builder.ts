@@ -63,6 +63,12 @@ export class ClientSchemaFormBuilder {
     };
   }
 
+  static getDuplicateTemplate() {
+    return {
+      fields: []
+    };
+  }
+
   private static createField(name: string, options?: EntityFormFieldOptions): EntityFormField {
     const baseField = this.baseFields[name] || {};
     return Object.assign({}, {name}, baseField, options || {});

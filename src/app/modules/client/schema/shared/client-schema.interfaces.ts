@@ -5,7 +5,7 @@ export interface ClientSchemaApiConfig  {
   create: string;
   update: string;
   delete: string;
-  copy: string;
+  duplicate: string;
 }
 
 export interface ClientSchema extends EntityObject {
@@ -31,7 +31,7 @@ export interface ClientSchemaCreateData {
   etat: string;
 }
 
-export type ClientSchemaCreateResponse = ClientSchema;
+export interface ClientSchemaCreateResponse extends ClientSchema {}
 
 export interface ClientSchemaUpdateData {
   id: number;
@@ -41,7 +41,9 @@ export interface ClientSchemaUpdateData {
   etat: string;
 }
 
-export type ClientSchemaUpdateResponse = ClientSchema;
+export interface ClientSchemaUpdateResponse extends ClientSchema {}
+
+export interface ClientSchemaDuplicateResponse extends ClientSchema {}
 
 /*** Files ***/
 export interface ClientSchemaFileApiConfig  {
@@ -71,7 +73,11 @@ export interface ClientSchemaFileListResponseItem {
 }
 
 export interface ClientSchemaFileCreateData {
-  dataUrl: string | ArrayBuffer;
+  nomPhysiqueDocument: string;
+  tailleDocument: number;
+  typeDocument: string;
+  document: string | ArrayBuffer;
+  idSchema: number;
 }
 
-export type ClientSchemaFileCreateResponse = ClientSchemaFileListResponseItem;
+export interface ClientSchemaFileCreateResponse extends ClientSchemaFileListResponseItem {}
