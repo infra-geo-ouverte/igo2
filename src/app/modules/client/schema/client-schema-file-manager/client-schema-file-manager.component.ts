@@ -11,7 +11,8 @@ import {
 
 import {
   EntityStore,
-  EntityTableTemplate
+  EntityTableTemplate,
+  getEntityId
 } from 'src/app/modules/entity';
 import { WidgetComponent } from 'src/app/modules/widget';
 
@@ -126,10 +127,17 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
   }
 
   private createSchemaFile(file: File) {
+    const schema = this.schema;
     const reader = new FileReader();
     reader.onloadend = (e) => {
       this.clientSchemaFileService
-        .createSchemaFile({dataUrl: reader.result})
+        .createSchemaFile({
+          nomPhysiqueDocument: file.name,
+          tailleDocument: file.size,
+          typeDocument: file.type,
+          document: reader.result,
+          idSchema: parseInt(getEntityId(schema), 10)
+        })
         .subscribe((schemaFile: ClientSchemaFile) => this.onCreateSuccess(schemaFile));
     };
     reader.readAsDataURL(file);
