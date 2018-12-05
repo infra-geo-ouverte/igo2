@@ -1,2 +1,2 @@
-export * from './place.interface';
+export * from './place.interfaces';
 export * from './place.service';

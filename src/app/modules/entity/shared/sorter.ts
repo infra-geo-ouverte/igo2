@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 
-import { Entity, EntitySortClause } from './entity.interface';
+import { Entity, EntitySortClause } from './entity.interfaces';
 import { sortEntities } from './entity.utils';
 
 export class EntitySorter<T extends Entity> {

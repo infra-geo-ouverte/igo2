@@ -1,4 +1,4 @@
-export * from './entity.interface';
+export * from './entity.interfaces';
 export * from './entity.utils';
 export * from './store';
 export * from './state';

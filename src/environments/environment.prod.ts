@@ -2,8 +2,8 @@ import { ContextServiceOptions } from '@igo2/context';
 import { LanguageOptions } from '@igo2/core';
 import { CatalogServiceOptions } from '@igo2/geo';
 
-import { ApiConfig } from '../app/modules/core/api/api.interface';
-import { SearchSourceOptions } from '../app/modules/search/shared/sources/source.interface';
+import { ApiConfig } from '../app/modules/core/api/api.interfaces';
+import { SearchSourceOptions } from '../app/modules/search/shared/sources/source.interfaces';
 import { ClientApiConfig } from '../app/modules/client/shared/client.interfaces';
 
 interface Environment {

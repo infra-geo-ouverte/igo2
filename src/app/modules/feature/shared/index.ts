@@ -1,3 +1,3 @@
 export * from './feature.enum';
-export * from './feature.interface';
+export * from './feature.interfaces';
 export * from './feature.utils';

@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 
-import { SearchResult } from '../search.interface';
-import { SearchSourceOptions } from './source.interface';
+import { SearchResult } from '../search.interfaces';
+import { SearchSourceOptions } from './source.interfaces';
 
 export class SearchSource {
 

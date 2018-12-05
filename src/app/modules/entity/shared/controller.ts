@@ -5,7 +5,7 @@ import { skip } from 'rxjs/operators';
 
 import { isEquivalent } from 'src/app/modules/utils';
 
-import { Entity, State } from './entity.interface';
+import { Entity, State } from './entity.interfaces';
 import { EntityStore } from './store';
 
 export class EntityStoreController {

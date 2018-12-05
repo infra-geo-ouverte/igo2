@@ -6,10 +6,10 @@ import { map } from 'rxjs/operators';
 import { CLIENT, Client } from 'src/app/modules/client';
 import { ClientState } from 'src/app/state/client.state';
 
-import { SearchResult } from '../search.interface';
+import { SearchResult } from '../search.interfaces';
 import { SearchSource, TextSearch } from './source';
-import { SearchSourceOptions } from './source.interface';
-import { ClientData } from './client.interface';
+import { SearchSourceOptions } from './source.interfaces';
+import { ClientData } from './client.interfaces';
 
 @Injectable()
 export class ClientSearchSource extends SearchSource implements TextSearch {

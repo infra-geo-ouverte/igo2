@@ -3,7 +3,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { IgoMap } from 'src/app/modules/map';
 import { getEntityTitle, getEntityIcon } from 'src/app/modules/entity';
 
-import { Catalog } from '../shared/catalog.interface';
+import { Catalog } from '../shared/catalog.interfaces';
 
 @Component({
   selector: 'fadq-catalog-library-item',

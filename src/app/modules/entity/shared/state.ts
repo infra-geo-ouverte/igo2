@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 
-import { State } from './entity.interface';
+import { State } from './entity.interfaces';
 
 export class EntityState<S extends { [key: string]: boolean } = State> {
 

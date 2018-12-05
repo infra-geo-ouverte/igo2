@@ -13,7 +13,7 @@ import { IgoMap } from '@igo2/geo';
 
 import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
-import { Catalog } from '../shared/catalog.interface';
+import { Catalog } from '../shared/catalog.interfaces';
 
 @Component({
   selector: 'fadq-catalog-library',

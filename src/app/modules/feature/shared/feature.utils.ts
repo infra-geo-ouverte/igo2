@@ -1,7 +1,7 @@
 import OlFeature from 'ol/Feature';
 import OlFormatGeoJSON from 'ol/format/GeoJSON';
 
-import { Feature } from './feature.interface';
+import { Feature } from './feature.interfaces';
 
 export function featureToOl(feature: Feature, projectionOut: string): OlFeature {
   const olFormat = new OlFormatGeoJSON();

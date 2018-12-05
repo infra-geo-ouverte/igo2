@@ -1,2 +1,2 @@
-export * from './widget.interface';
+export * from './widget.interfaces';
 export * from './widget';

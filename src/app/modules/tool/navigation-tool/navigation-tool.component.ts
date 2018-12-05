@@ -6,7 +6,7 @@ import { MapState } from 'src/app/state';
 import { IgoMap } from 'src/app/modules/map';
 import { PlaceCategory } from 'src/app/modules/navigation';
 
-import { NavigationToolOptions } from './navigation-tool.interface';
+import { NavigationToolOptions } from './navigation-tool.interfaces';
 
 @Register({
   name: 'navigation',

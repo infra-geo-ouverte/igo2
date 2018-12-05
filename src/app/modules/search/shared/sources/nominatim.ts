@@ -6,10 +6,10 @@ import { map } from 'rxjs/operators';
 
 import { FEATURE, Feature, FeatureGeometry } from 'src/app/modules/feature';
 
-import { SearchResult } from '../search.interface';
+import { SearchResult } from '../search.interfaces';
 import { SearchSource, TextSearch } from './source';
-import { SearchSourceOptions } from './source.interface';
-import { NominatimData } from './nominatim.interface';
+import { SearchSourceOptions } from './source.interfaces';
+import { NominatimData } from './nominatim.interfaces';
 
 @Injectable()
 export class NominatimSearchSource extends SearchSource implements TextSearch {

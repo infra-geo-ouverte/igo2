@@ -5,10 +5,10 @@ import {
   EntityClass,
   EntityTableTemplate,
   State
-} from '../../entity/shared/entity.interface';
+} from '../../entity/shared/entity.interfaces';
 import { EntityStore } from '../../entity/shared/store';
-import { Widget } from '../../widget/shared/widget.interface';
-import { EditorConfig } from './edition.interface';
+import { Widget } from '../../widget/shared/widget.interfaces';
+import { EditorConfig } from './edition.interfaces';
 
 export class Editor extends EntityClass {
 

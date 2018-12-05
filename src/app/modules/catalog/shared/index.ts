@@ -1,3 +1,3 @@
 export * from './catalog.service';
-export * from './catalog.interface';
+export * from './catalog.interfaces';
 export * from './catalog.enum';

@@ -9,10 +9,10 @@ import { AnyLayerOptions, LayerOptions } from '@igo2/geo';
 
 import { LAYER } from 'src/app/modules/layer';
 
-import { SearchResult } from '../search.interface';
+import { SearchResult } from '../search.interfaces';
 import { SearchSource, TextSearch } from './source';
-import { SearchSourceOptions } from './source.interface';
-import { ILayerData, ILayerResponse } from './ilayer.interface';
+import { SearchSourceOptions } from './source.interfaces';
+import { ILayerData, ILayerResponse } from './ilayer.interfaces';
 
 @Injectable()
 export class ILayerSearchSource

@@ -2,7 +2,7 @@ import t from 'typy';
 
 import { ObjectUtils } from '@igo2/utils';
 
-import { Entity } from './entity.interface';
+import { Entity } from './entity.interfaces';
 
 export function entitiesAreTheSame(entity1: Entity, entity2: Entity | undefined): boolean {
   if (entity2 === undefined) {

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { ApiInterceptor } from './api.interceptor';
-import { provideApiService } from './api.provider';
+import { provideApiService } from './api.providers';
 
 @NgModule({
   imports: [],

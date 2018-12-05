@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from '../../core/api';
-import { Feature } from '../../feature/shared/feature.interface';
+import { Feature } from '../../feature/shared/feature.interfaces';
 import { substituteProperties } from '../../utils/str';
 import {
   Place,
@@ -12,7 +12,7 @@ import {
   PlaceCollectionApi,
   PlaceFeatureApi,
   PlaceMapper,
-} from './place.interface';
+} from './place.interfaces';
 
 @Injectable({
   providedIn: 'root'

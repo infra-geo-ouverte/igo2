@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 
-import { Entity, EntityFilterClause, State } from './entity.interface';
+import { Entity, EntityFilterClause, State } from './entity.interfaces';
 
 export class EntityFilter<T extends Entity> {
 

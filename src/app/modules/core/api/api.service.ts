@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ConfigService } from '@igo2/core';
-import { ApiConfig } from './api.interface';
+import { ApiConfig } from './api.interfaces';
 import { substituteProperties } from '../../utils/str';
 
 const API_CONFIG_KEY = 'api';

@@ -7,7 +7,7 @@ import {
   EntityFilterClause,
   EntitySortClause,
   State
-} from './entity.interface';
+} from './entity.interfaces';
 import { EntityState } from './state';
 import { EntityFilter } from './filter';
 import { EntitySorter } from './sorter';

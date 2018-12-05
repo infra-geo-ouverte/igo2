@@ -6,7 +6,7 @@ import * as olproj4 from 'ol/proj/proj4';
 
 import { ConfigService } from '@igo2/core';
 
-import { Projection } from './projection.interface';
+import { Projection } from './projection.interfaces';
 
 @Injectable({
   providedIn: 'root'

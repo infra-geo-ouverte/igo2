@@ -18,7 +18,7 @@ import {
   CatalogItemLayer,
   CatalogItemGroup,
   CatalogServiceOptions
-} from './catalog.interface';
+} from './catalog.interfaces';
 import { CatalogItemType } from './catalog.enum';
 
 @Injectable({

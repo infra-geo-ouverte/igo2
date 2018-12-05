@@ -5,10 +5,10 @@ import { provideSearchSourceService } from './shared/search-source.service';
 import {
   provideIChercheSearchSource,
   provideIChercheReverseSearchSource
-} from './shared/sources/icherche.provider';
-import { provideNominatimSearchSource } from './shared/sources/nominatim.provider';
-import { provideILayerSearchSource } from './shared/sources/ilayer.provider';
-import { provideClientSearchSource } from './shared/sources/client.provider';
+} from './shared/sources/icherche.providers';
+import { provideNominatimSearchSource } from './shared/sources/nominatim.providers';
+import { provideILayerSearchSource } from './shared/sources/ilayer.providers';
+import { provideClientSearchSource } from './shared/sources/client.providers';
 
 import { FadqSearchBarModule } from './search-bar/search-bar.module';
 import { FadqSearchSelectorModule } from './search-selector/search-selector.module';

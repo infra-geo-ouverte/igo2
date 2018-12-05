@@ -1,2 +1,2 @@
 export * from './editor';
-export * from './edition.interface';
+export * from './edition.interfaces';

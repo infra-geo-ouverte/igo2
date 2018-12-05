@@ -7,15 +7,15 @@ import { map } from 'rxjs/operators';
 import { removeKeys } from 'src/app/modules/utils';
 import { FEATURE, Feature } from 'src/app/modules/feature';
 
-import { SearchResult } from '../search.interface';
+import { SearchResult } from '../search.interfaces';
 import { SearchSource, TextSearch, ReverseSearch } from './source';
-import { SearchSourceOptions } from './source.interface';
+import { SearchSourceOptions } from './source.interfaces';
 import {
   IChercheData,
   IChercheResponse,
   IChercheReverseData,
   IChercheReverseResponse
-} from './icherche.interface';
+} from './icherche.interfaces';
 
 @Injectable()
 export class IChercheSearchSource extends SearchSource implements TextSearch {

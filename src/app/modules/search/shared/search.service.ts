@@ -8,7 +8,7 @@ import {
   ReverseSearch
 } from './sources';
 import { SearchSourceService } from './search-source.service';
-import { Research } from './search.interface';
+import { Research } from './search.interfaces';
 import { sourceCanSearch, sourceCanReverseSearch } from './search.utils';
 
 @Injectable({
