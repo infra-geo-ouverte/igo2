@@ -7,8 +7,8 @@ import { ApiService } from 'src/app/modules/core/api';
 import {
   ClientInfo,
   ClientInfoApiConfig,
-  ClientInfoListResponse,
-  ClientInfoListResponseItem
+  ClientInfoGetResponse,
+  ClientInfoGetResponseData
 } from './client-info.interfaces';
 
 @Injectable({
@@ -23,76 +23,34 @@ export class ClientInfoService {
   ) {}
 
   getClientInfoByNum(clientNum: string): Observable<ClientInfo> {
-    return of({
-      'messages': [],
-      'donnees': [
-        {
-          'numeroClient': clientNum,
-          'nomClient': 'NOM DU CLIENT',
-          'statutJuridique': {
-            'statutJuridique': 'Particulier',
-            'codeStatutJuridique': '01'
-          },
-          'adresseCorrespondance': '448 rang 3 Est',
-          'suiteAdresseCorrespondance': null,
-          'municipaliteAdresseCorrespondance': 'Saint-Octave-de-Métis',
-          'provinceAdresseCorrespondance': {
-            'province': 'Québec',
-            'codeProvince': 'QC'
-          },
-          'paysAdresseCorrespondance': {
-            'pays': 'Canada',
-            'codePays': 'CAN'
-          },
-          'codePostalAdresseCorrespondance': 'G0J 3B0',
-          'langue': 'F',
-          'centreServiceResponsable': {
-            'noCentreServiceResponsable': '0997627',
-            'nomCentreServiceResponsable': 'Centre de services de Rimouski'
-          }
-        }
-      ]
-    }).pipe(
-      map((response: ClientInfoListResponse) => {
-        return this.extractClientInfoFromListResponse(response);
-      })
-    );
-
-    /*
-    const url = this.apiService.buildUrl(this.apiConfig.get);
+    const url = this.apiService.buildUrl(this.apiConfig.get, {clientNum});
 
     return this.http
-      .post(url, {body: [clientNum]})
+      .get(url)
       .pipe(
-        map((response: ClientInfoListResponse) => {
-          return this.extractClientInfoFromListResponse(response);
+        map((response: ClientInfoGetResponse) => {
+          return this.extractClientInfoFromGetResponse(response);
         })
       );
-    */
   }
 
-  private extractClientInfoFromListResponse(response: ClientInfoListResponse): ClientInfo | undefined {
-    const listItems = response.donnees || [];
-    if (listItems.length === 0 ) {
-      return;
-    }
-
-    const listItem = listItems[0];
+  private extractClientInfoFromGetResponse(response: ClientInfoGetResponse): ClientInfo | undefined {
+    const data = response.data;
     return {
-      numero: listItem.numeroClient,
-      nom: listItem.nomClient,
-      adresseCor: this.extractAddressFromListItem(listItem, 'Correspondance'),
-      adresseExp: this.extractAddressFromListItem(listItem, 'Exploitation'),
-      adressePro: this.extractAddressFromListItem(listItem, 'Production')
+      numero: data.numeroClient,
+      nom: data.nomClient,
+      adresseCor: this.extractAddressFromGetResponseData(data, 'Correspondance'),
+      adresseExp: this.extractAddressFromGetResponseData(data, 'Exploitation'),
+      adressePro: this.extractAddressFromGetResponseData(data, 'Production')
     };
   }
 
-  private extractAddressFromListItem(listItem: ClientInfoListResponseItem, suffix: string) {
-    const no = listItem[`adresse${suffix}`];
-    const suite = listItem[`suiteAdresse${suffix}`];
-    const mun = listItem[`municipaliteAdresse${suffix}`];
-    const code = listItem[`codePostalAdresse${suffix}`];
-    const province = listItem[`provinceAdresse${suffix}`] || {};
+  private extractAddressFromGetResponseData(data: ClientInfoGetResponseData, suffix: string) {
+    const no = data[`adresse${suffix}`];
+    const suite = data[`suiteAdresse${suffix}`];
+    const mun = data[`municipaliteAdresse${suffix}`];
+    const code = data[`codePostalAdresse${suffix}`];
+    const province = data[`provinceAdresse${suffix}`] || {};
     const provinceName = province['province'];
 
     let address = [no, suite, mun, code]

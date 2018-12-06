@@ -10,27 +10,27 @@ export interface ClientInfo {
   adressePro: string;
 }
 
-export interface ClientInfoListResponse {
-  donnees?: ClientInfoListResponseItem[];
+export interface ClientInfoGetResponse {
+  data: ClientInfoGetResponseData;
 }
 
-export interface ClientInfoListResponseItem {
+export interface ClientInfoGetResponseData {
   numeroClient: string;
   nomClient: string;
   adresseCorrespondance: string;
   suiteAdresseCorrespondance?: string;
   municipaliteAdresseCorrespondance: string;
-  provinceAdresseCorrespondance: ClientInfoListResponseItemProvince;
-  paysAdresseCorrespondance: ClientInfoListResponseItemPays;
+  provinceAdresseCorrespondance: ClientInfoGetResponseProvince;
+  paysAdresseCorrespondance: ClientInfoGetResponsePays;
   codePostalAdresseCorrespondance: string;
 }
 
-export interface ClientInfoListResponseItemProvince {
+export interface ClientInfoGetResponseProvince {
   province: string;
   codeProvince: string;
 }
 
-export interface ClientInfoListResponseItemPays {
+export interface ClientInfoGetResponsePays {
   pays: string;
   codePays: string;
 }

@@ -62,7 +62,7 @@ export const environment: Environment = {
     client: {
       api: {
         info: {
-          get: '/services/FADQ/RelationAffaires/InformationClient/obtenirListeClients'
+          get: '/app/interne/igolocalisation/recherche_client/obtenirInformationClient/${clientNum}'
         },
         parcel: {
           list: '/app/interne/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/${clientNum}/${annee}',
