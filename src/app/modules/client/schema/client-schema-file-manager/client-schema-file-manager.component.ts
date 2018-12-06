@@ -104,6 +104,7 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
   }
 
   private loadClientSchemaFiles() {
+    console.log(this.schema);
     this.clientSchemaFileService.getClientSchemaFiles(this.schema)
       .subscribe((schemaFiles: ClientSchemaFile[]) => {
         this.store.setEntities(schemaFiles);
@@ -131,7 +132,7 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
           nomPhysiqueDocument: file.name,
           tailleDocument: file.size,
           typeDocument: file.type,
-          document: reader.result,
+          document: reader.result as string,
           idSchema: parseInt(getEntityId(schema), 10)
         })
         .subscribe((schemaFile: ClientSchemaFile) => this.onCreateSuccess(schemaFile));

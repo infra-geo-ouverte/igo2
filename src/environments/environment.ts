@@ -80,6 +80,7 @@ export const environment: Environment = {
         },
         schemaFile: {
           list: '/app/interne/igolocalisation/recherche_client/obtenirDocumentsSchema/${schemaId}',
+          get: '/app/interne/igolocalisation/recherche_client/obtenirDocumentSchema/${id}',
           create: '/app/interne/igolocalisation/recherche_client/ajouterDocumentSchema',
           delete: '/app/interne/igolocalisation/recherche_client/supprimerDocumentSchema/${id}'
         }

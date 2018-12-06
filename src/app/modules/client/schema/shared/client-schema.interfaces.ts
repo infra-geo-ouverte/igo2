@@ -54,6 +54,7 @@ export interface ClientSchemaDuplicateResponse extends ClientSchema {}
 /*** Files ***/
 export interface ClientSchemaFileApiConfig  {
   list: string;
+  get: string;
   create: string;
   delete: string;
 }
@@ -79,11 +80,15 @@ export interface ClientSchemaFileListResponseItem {
   typeDocument: string;
 }
 
+export interface ClientSchemaFileGetResponse extends ClientSchemaFileListResponseItem {
+  document: string;
+}
+
 export interface ClientSchemaFileCreateData {
   nomPhysiqueDocument: string;
   tailleDocument: number;
   typeDocument: string;
-  document: string | ArrayBuffer;
+  document: string;
   idSchema: number;
 }
 

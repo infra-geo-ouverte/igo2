@@ -30,39 +30,6 @@ export class ClientSchemaService {
   ) {}
 
   getClientSchemasByNum(clientNum: string): Observable<ClientSchema[]> {
-    /*
-    return of({
-      'messages': [],
-      'donnees': [
-        {
-          'id': '10428',
-          'numeroClient': '0007229',
-          'type': 'CMP',
-          'description': 'test',
-          'annee': '2018',
-          'etat': null,
-          nbDocuments: 0,
-          usagerMaj: undefined,
-          timbreMaj: undefined
-        },
-        {
-          'id': '10425',
-          'numeroClient': '0007229',
-          'type': 'EPA',
-          'description': 'efgh',
-          'annee': '2016',
-          'etat': 'TRAITE',
-          nbDocuments: 0,
-          usagerMaj: undefined,
-          timbreMaj: undefined
-        }
-      ]
-    }).pipe(
-      map((response: ClientSchemaListResponse) => {
-        return this.extractSchemasFromListResponse(response);
-      })
-    );
-    */
     const url = this.apiService.buildUrl(this.apiConfig.list, {clientNum});
     return this.http
       .get(url)
@@ -74,73 +41,49 @@ export class ClientSchemaService {
   }
 
   createSchema(data: ClientSchemaCreateData): Observable<ClientSchema> {
-    return of(Object.assign({
-      id: '1234',
-      nbDocuments: 0,
-      usagerMaj: undefined,
-      timbreMaj: undefined
-    }, data));
-    /*
     const url = this.apiService.buildUrl(this.apiConfig.create);
-    const params = new HttpParams({
-      fromObject: data as { [key: string]: any}
-    });
 
     return this.http
-      .post(url, {params})
+      .post(url, data)
       .pipe(
         map((response: ClientSchemaCreateResponse) => {
           return this.extractSchemaFromCreateResponse(response);
         })
       );
-    */
   }
 
   updateSchema(schema: ClientSchema, data: ClientSchemaUpdateData): Observable<ClientSchema> {
-    return of(Object.assign({}, schema, data));
-    /*
     const url = this.apiService.buildUrl(this.apiConfig.update);
-    const params = new HttpParams({
-      fromObject: data as { [key: string]: any}
-    });
 
     return this.http
-      .post(url, {params})
+      .post(url, data)
       .pipe(
         map((response: ClientSchemaUpdateResponse) => {
           return this.extractSchemaFromUpdateResponse(response);
         })
       );
-    */
   }
 
   deleteSchema(schema: ClientSchema): Observable<any> {
-    return of({});
-    /*
     const url = this.apiService.buildUrl(this.apiConfig.delete, {
       id: getEntityId(schema)
     });
 
     return this.http.post(url, {});
-    */
   }
 
   duplicateSchema(schema: ClientSchema): Observable<ClientSchema> {
-    console.log(Object.assign({}, schema, {id: '1234'}));
-    return of(Object.assign({}, schema, {id: '1234'}));
-    /*
     const url = this.apiService.buildUrl(this.apiConfig.duplicate, {
       id: getEntityId(schema)
     });
 
     return this.http
-      .post(url, {});
+      .post(url, {})
       .pipe(
         map((response: ClientSchemaDuplicateResponse) => {
           return this.extractSchemaFromDuplicateResponse(response);
         })
       );
-    */
   }
 
   private extractSchemasFromListResponse(

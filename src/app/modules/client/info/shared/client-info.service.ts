@@ -60,14 +60,9 @@ export class ClientInfoService {
 
     /*
     const url = this.apiService.buildUrl(this.apiConfig.get);
-    const params = new HttpParams({
-      fromObject: {
-        body: [clientNum]
-      }
-    });
 
     return this.http
-      .post(url, { params })
+      .post(url, {body: [clientNum]})
       .pipe(
         map((response: ClientInfoListResponse) => {
           return this.extractClientInfoFromListResponse(response);

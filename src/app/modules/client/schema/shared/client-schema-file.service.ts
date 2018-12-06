@@ -12,6 +12,7 @@ import {
   ClientSchemaFileApiConfig,
   ClientSchemaFileListResponse,
   ClientSchemaFileListResponseItem,
+  ClientSchemaFileGetResponse,
   ClientSchemaFileCreateData,
   ClientSchemaFileCreateResponse
 } from './client-schema.interfaces';
@@ -28,32 +29,8 @@ export class ClientSchemaFileService {
   ) {}
 
   getClientSchemaFiles(schema: ClientSchema): Observable<ClientSchemaFile[]> {
-    /*
-    return of({
-      'messages': [],
-      'donnees': [
-        {
-          'idDocumentSchema': '1',
-          'nomPhysiqueDocument': 'Sample pdf',
-          'addresseDocument': '/foo',
-          'tailleDocument': 25,
-          'typeDocument': 'pdf'
-        },
-        {
-          'idDocumentSchema': '2',
-          'nomPhysiqueDocument': 'Sample image',
-          'addresseDocument': '/foo',
-          'tailleDocument': 50,
-          'typeDocument': 'image'
-        }
-      ]
-    }).pipe(
-      map((response: ClientSchemaFileListResponse) => {
-        return this.extractSchemaFilesFromListResponse(response);
-      })
-    );
-    */
     const url = this.apiService.buildUrl(this.apiConfig.list, {schemaId: getEntityId(schema)});
+
     return this.http
       .get(url)
       .pipe(
@@ -64,52 +41,37 @@ export class ClientSchemaFileService {
   }
 
   getSchemaFileData(schemaFile: ClientSchemaFile): Observable<string> {
-    return of('');
-     /*
-    const url = this.apiService.buildUrl(this.apiConfig.item, {id: getEntityId(schemaFile)});
+    const url = this.apiService.buildUrl(this.apiConfig.get, {
+      id: getEntityId(schemaFile)
+    });
+
     return this.http
       .get(url)
       .pipe(
-        map((response: ClientSchemaFileItemResponse) => {
+        map((response: ClientSchemaFileGetResponse) => {
           return response.document;
         })
       );
-    */
   }
 
   createSchemaFile(data: ClientSchemaFileCreateData): Observable<ClientSchemaFile> {
-    return of({
-      'id': '1234',
-      'name': 'Sample upload',
-      'address': '/foo',
-      'size': 75,
-      'type': 'pdf'
-    });
-    /*
     const url = this.apiService.buildUrl(this.apiConfig.create);
-    const params = new HttpParams({
-      fromObject: data as { [key: string]: any}
-    });
 
     return this.http
-      .post(url, {params})
+      .post(url, data)
       .pipe(
         map((response: ClientSchemaFileCreateResponse) => {
           return this.extractSchemaFromCreateResponse(response);
         })
       );
-    */
   }
 
   deleteSchemaFile(schemaFile: ClientSchemaFile): Observable<any> {
-    return of({});
-    /*
     const url = this.apiService.buildUrl(this.apiConfig.delete, {
-      id: getEntityId(schema)
+      id: getEntityId(schemaFile)
     });
 
     return this.http.post(url, {});
-    */
   }
 
   private extractSchemaFilesFromListResponse(
