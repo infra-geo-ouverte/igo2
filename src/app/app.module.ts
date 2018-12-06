@@ -16,6 +16,8 @@ import { FadqToolModule } from './modules/tool/tool.module';
 import { FadqPortalModule } from './pages/portal/portal.module';
 import { FadqStateModule } from './state/state.module';
 
+import { FadqSpinnerModule } from './modules/common/spinner/spinner.module';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -34,6 +36,7 @@ import { AppComponent } from './app.component';
     FadqStateModule.forRoot(),
     FadqToolModule,
     FadqPortalModule,
+    FadqSpinnerModule,
     IgoSpinnerModule,
     IgoStopPropagationModule
   ],
