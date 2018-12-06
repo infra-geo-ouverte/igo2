@@ -104,7 +104,6 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
   }
 
   private loadClientSchemaFiles() {
-    console.log(this.schema);
     this.clientSchemaFileService.getClientSchemaFiles(this.schema)
       .subscribe((schemaFiles: ClientSchemaFile[]) => {
         this.store.setEntities(schemaFiles);
