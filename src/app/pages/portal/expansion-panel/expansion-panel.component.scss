@@ -12,8 +12,8 @@
   width: $fadq-sidenav-width;
 
   transition:
-    height 280ms cubic-bezier(.4, 0, .2, 1),
-    width 280ms cubic-bezier(.4, 0, .2, 1);
+    height 200ms cubic-bezier(.4, 0, .2, 1),
+    width 200ms cubic-bezier(.4, 0, .2, 1);
 
   @include small-screen {
     width: $fadq-expansion-panel-collapsed-height;
@@ -47,15 +47,6 @@
   height: calc(100% - #{$fadq-expansion-panel-header-height});
   overflow: auto;
   padding: $igo-padding;
-}
-
-:host:not(.fadq-expansion-panel-expanded) .fadq-expansion-panel-content {
-  visibility: hidden;
-}
-
-:host.fadq-expansion-panel-expanded .fadq-expansion-panel-content {
-  visibility: visible;
-  transition: visibility 0ms cubic-bezier(.4, 0, .2, 1) 330ms;
 }
 
 igo-backdrop ::ng-deep > div {

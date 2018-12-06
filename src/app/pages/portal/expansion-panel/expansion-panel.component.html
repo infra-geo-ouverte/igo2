@@ -5,7 +5,9 @@
       <ng-content select="[expansionPanelHeader]"></ng-content>
     </fadq-expansion-panel-header>
 
-    <div class="fadq-expansion-panel-content mat-elevation-z4">
+    <div
+      class="fadq-expansion-panel-content mat-elevation-z4"
+      [@showContent]="expanded">
       <ng-content></ng-content>
     </div>
 

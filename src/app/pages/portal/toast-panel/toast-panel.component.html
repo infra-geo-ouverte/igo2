@@ -17,7 +17,10 @@
     panelLeftButton>
   </button>
 
-  <div #content igoStopPropagation>
+  <div
+    #content
+    igoStopPropagation
+    [@showContent]="opened">
     <ng-content></ng-content>
   </div>
 </igo-panel>

@@ -9,10 +9,13 @@ import {
   ViewChild
 } from '@angular/core';
 
+import { showContent } from './toast-panel.animations';
+
 @Component({
   selector: 'fadq-toast-panel',
   templateUrl: './toast-panel.component.html',
   styleUrls: ['./toast-panel.component.scss'],
+  animations: [showContent()],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastPanelComponent {
@@ -57,7 +60,7 @@ export class ToastPanelComponent {
 
   @HostBinding('style.visibility')
   get displayStyle() {
-    return this.opened ? (this.empty ? 'hidden' : 'visible') : 'hidden';
+    return (this.withHeader || this.opened) ? 'visible' : 'hidden';
   }
 
   @ViewChild('content') content: ElementRef;

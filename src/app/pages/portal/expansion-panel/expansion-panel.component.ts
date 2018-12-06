@@ -7,10 +7,13 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
+import { showContent } from './expansion-panel.animations';
+
 @Component({
   selector: 'fadq-expansion-panel',
   templateUrl: './expansion-panel.component.html',
   styleUrls: ['./expansion-panel.component.scss'],
+  animations: [showContent()],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpansionPanelComponent {

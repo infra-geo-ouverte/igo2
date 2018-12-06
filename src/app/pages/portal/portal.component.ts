@@ -273,12 +273,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openSidenav();
   }
 
-  private onSearchClient(client: Client) {
-    // this.clientState.setClient(client);
-  }
+  private onSearchClient(client: Client) {}
 
   private onFocusSearchResult(result: SearchResult) {
     if (result === undefined) {
+      // this.feature = undefined;
       return;
     }
 
@@ -295,6 +294,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onClearSearch() {
+    this.feature = undefined;
+    this.closeToastPanel();
     this.clientState.clearClient();
   }
 
