@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
+import { IgoStopPropagationModule } from '@igo2/common';
 
 import { FadqCoreModule } from './modules/core/core.module';
+import { FadqCommonModule } from './modules/common/common.module';
 import { FadqClientModule } from './modules/client/client.module';
 import { FadqCatalogModule } from './modules/catalog/catalog.module';
 import { FadqEditionModule } from './modules/edition/edition.module';
@@ -27,6 +28,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
     FadqCoreModule.forRoot(),
+    FadqCommonModule,
     FadqEditionModule,
     FadqClientModule.forRoot(),
     FadqCatalogModule.forRoot(),
@@ -36,8 +38,6 @@ import { AppComponent } from './app.component';
     FadqStateModule.forRoot(),
     FadqToolModule,
     FadqPortalModule,
-    FadqSpinnerModule,
-    IgoSpinnerModule,
     IgoStopPropagationModule
   ],
   providers: [],

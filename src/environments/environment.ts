@@ -85,6 +85,18 @@ export const environment: Environment = {
           get: '/app/interne/igolocalisation/recherche_client/obtenirDocumentSchema/${id}',
           create: '/app/interne/igolocalisation/recherche_client/ajouterDocumentSchema',
           delete: '/app/interne/igolocalisation/recherche_client/supprimerDocumentSchema/${id}'
+        },
+        schemaElement: {
+          save: '',
+          point: {
+            list: '/app/interne/igolocalisation/recherche_client/obtenirElementGeometriquePoint/${schemaId}'
+          },
+          line: {
+            list: '/app/interne/igolocalisation/recherche_client/obtenirElementGeometriqueLine/${schemaId}'
+          },
+          surface: {
+            list: '/app/interne/igolocalisation/recherche_client/obtenirElementGeometriqueSurface/${schemaId}'
+          }
         }
       }
     }

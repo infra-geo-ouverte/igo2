@@ -16,7 +16,8 @@ import {
 } from 'src/app/modules/entity';
 import { WidgetComponent } from 'src/app/modules/widget';
 
-import { ClientSchema, ClientSchemaFile } from '../shared/client-schema.interfaces';
+import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
+import { ClientSchemaFile } from '../shared/client-schema-file.interfaces';
 import { ClientSchemaFileService } from '../shared/client-schema-file.service';
 
 @Component({

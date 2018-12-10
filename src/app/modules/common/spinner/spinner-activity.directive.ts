@@ -6,14 +6,15 @@ import { ActivityService } from '@igo2/core';
 import { SpinnerComponent } from '@igo2/common';
 
 @Directive({
-  selector: '[fadqSpinnerActivity]'
+  selector: '[fadqSpinnerActivity]',
+  providers: [SpinnerComponent]
 })
 export class SpinnerActivityDirective implements OnInit, OnDestroy {
-  private component: SpinnerComponent;
+
   private counter$$: Subscription;
 
   constructor(
-    @Self() component: SpinnerComponent,
+    @Self() private component: SpinnerComponent,
     private activityService: ActivityService
   ) {
     this.component = component;

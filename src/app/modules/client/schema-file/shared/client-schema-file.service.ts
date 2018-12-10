@@ -1,13 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/modules/core/api';
 import { getEntityId } from 'src/app/modules/entity';
+import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
-  ClientSchema,
   ClientSchemaFile,
   ClientSchemaFileApiConfig,
   ClientSchemaFileListResponse,
@@ -15,7 +15,7 @@ import {
   ClientSchemaFileGetResponse,
   ClientSchemaFileCreateData,
   ClientSchemaFileCreateResponse
-} from './client-schema.interfaces';
+} from './client-schema-file.interfaces';
 
 @Injectable({
   providedIn: 'root'
