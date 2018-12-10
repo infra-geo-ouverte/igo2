@@ -2,6 +2,7 @@ import { Editor } from 'src/app/modules/edition';
 import { EntityStore, EntityTableTemplate } from 'src/app/modules/entity';
 import { Widget } from 'src/app/modules/widget';
 
+import { Client } from '../../shared/client.interfaces';
 import { ClientSchema } from './client-schema.interfaces';
 import { ClientSchemaCreateFormComponent } from '../client-schema-create-form/client-schema-create-form.component';
 import { ClientSchemaUpdateFormComponent } from '../client-schema-update-form/client-schema-update-form.component';
@@ -58,7 +59,8 @@ export class ClientSchemaEditor extends Editor {
       icon: 'add',
       title: 'client.schema.create',
       tooltip: 'client.schema.create.tooltip',
-      component: ClientSchemaCreateFormComponent
+      component: ClientSchemaCreateFormComponent,
+      isReady: ClientSchemaEditor.clientBoundWidgetIsReady
     },
     {
       id: 'update',
@@ -66,7 +68,7 @@ export class ClientSchemaEditor extends Editor {
       title: 'client.schema.update',
       tooltip: 'client.schema.update.tooltip',
       component: ClientSchemaUpdateFormComponent,
-      isReady: ClientSchemaEditor.boundWidgetIsReady
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'delete',
@@ -74,7 +76,7 @@ export class ClientSchemaEditor extends Editor {
       title: 'client.schema.delete',
       tooltip: 'client.schema.delete.tooltip',
       component: ClientSchemaDeleteFormComponent,
-      isReady: ClientSchemaEditor.boundWidgetIsReady
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'duplicate',
@@ -82,7 +84,7 @@ export class ClientSchemaEditor extends Editor {
       title: 'client.schema.duplicate',
       tooltip: 'client.schema.duplicate.tooltip',
       component: ClientSchemaDuplicateFormComponent,
-      isReady: ClientSchemaEditor.boundWidgetIsReady
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'manageFiles',
@@ -90,26 +92,32 @@ export class ClientSchemaEditor extends Editor {
       title: 'client.schema.manageFiles',
       tooltip: 'client.schema.manageFiles.tooltip',
       component: ClientSchemaFileManagerComponent,
-      isReady: ClientSchemaEditor.boundWidgetIsReady
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'transfer',
       icon: 'swap_horiz',
       title: 'client.schema.transfer',
       tooltip: 'client.schema.transfer.tooltip',
-      isReady: ClientSchemaEditor.boundWidgetIsReady
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     },
     {
       id: 'createMap',
       icon: 'image',
       title: 'client.schema.createMap',
       tooltip: 'client.schema.createMap.tooltip',
-      isReady: ClientSchemaEditor.boundWidgetIsReady
+      isReady: ClientSchemaEditor.schemaBoundWidgetIsReady
     }
   ];
 
-  static boundWidgetIsReady = function(data: { [key: string]: any}) {
+  private client: Client;
+
+  static schemaBoundWidgetIsReady = function(data: { [key: string]: any}) {
     return data.schema !== undefined;
+  };
+
+  static clientBoundWidgetIsReady = function(data: { [key: string]: any}) {
+    return data.client !== undefined;
   };
 
   constructor() {
@@ -126,8 +134,15 @@ export class ClientSchemaEditor extends Editor {
     this.bindWidgetStore(widgetStore);
   }
 
+  setClient(client: Client) {
+    this.client = client;
+  }
+
   protected computeWidgetData(): Object {
-    return Object.assign(super.computeWidgetData(), {schema: this.entity});
+    return Object.assign(super.computeWidgetData(), {
+      schema: this.entity,
+      client: this.client
+    });
   }
 
 }

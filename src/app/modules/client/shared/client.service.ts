@@ -28,15 +28,25 @@ export class ClientService {
 
     return client$
       .pipe(
-        map((data: [ClientInfo, ClientSchema[], ClientParcel[]]) => {
-          return Object.assign({meta: {idProperty: 'numero'}}, {
-            info: data[0],
-            schemas: data[1],
-            parcels: data[2],
-            diagrams: getDiagramsFromParcels(data[2])
-          });
+        map((results: [ClientInfo, ClientSchema[], ClientParcel[]]) => {
+         return  this.resultsToClient(results);
         })
       );
   }
 
+  private resultsToClient(
+    results: [ClientInfo, ClientSchema[], ClientParcel[]]
+  ): Client | undefined {
+    const [info, schemas, parcels] = results;
+    if (info === undefined) {
+      return undefined;
+    }
+
+    return Object.assign({meta: {idProperty: 'numero'}}, {
+      info: info,
+      schemas: schemas,
+      parcels: parcels,
+      diagrams: getDiagramsFromParcels(parcels)
+    });
+  }
 }

@@ -6,7 +6,12 @@
   </div>
 
   <div *ngIf="(client$ | async) as client" class="fadq-client-tool-bottom-section">
-    <a href="#">{{client.info.nom}}</a>
+    <a
+      href="computeInfoLink(client)"
+      target="popup"
+      (click)="openClientInfoLink(client)">
+      {{client.info.nom}}
+    </a>
 
     <igo-list [navigation]="false">
       <igo-collapsible

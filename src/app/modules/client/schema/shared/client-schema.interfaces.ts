@@ -37,7 +37,9 @@ export interface ClientSchemaCreateData {
   etat: string;
 }
 
-export interface ClientSchemaCreateResponse extends ClientSchema {}
+export interface ClientSchemaCreateResponse {
+  data: ClientSchema;
+}
 
 export interface ClientSchemaUpdateData {
   id: number;
@@ -47,9 +49,13 @@ export interface ClientSchemaUpdateData {
   etat: string;
 }
 
-export interface ClientSchemaUpdateResponse extends ClientSchema {}
+export interface ClientSchemaUpdateResponse {
+  data: ClientSchema;
+}
 
-export interface ClientSchemaDuplicateResponse extends ClientSchema {}
+export interface ClientSchemaDuplicateResponse {
+  data: ClientSchema;
+}
 
 /*** Files ***/
 export interface ClientSchemaFileApiConfig  {

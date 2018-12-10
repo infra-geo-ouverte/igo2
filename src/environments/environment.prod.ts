@@ -15,6 +15,7 @@ interface Environment {
     catalog?: CatalogServiceOptions;
     api?: ApiConfig;
     client: {
+      infoLink: string;
       api: ClientApiConfig;
     };
   };
@@ -44,6 +45,7 @@ export const environment: Environment = {
       url: 'http://netphp.fadq.qc'
     },
     client: {
+      infoLink: 'http://igo.fadq.qc/61_GestionDesRelationsAffaires/1_GestionIdentite/61_131_CoorClient.php?p_60131CliNum=${clientNum}',
       api: {
         info: {
           get: '/app/interne/igolocalisation/recherche_client/obtenirInformationClient/${clientNum}'

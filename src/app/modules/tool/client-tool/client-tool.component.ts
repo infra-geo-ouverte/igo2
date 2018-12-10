@@ -2,7 +2,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Register } from '@igo2/context';
+import { ConfigService } from '@igo2/core';
 
+import { substituteProperties } from 'src/app/modules/utils';
 import { EntityStore } from 'src/app/modules/entity';
 import {
   Client,
@@ -42,7 +44,20 @@ export class ClientToolComponent {
   }
 
   constructor(
-    private clientState: ClientState
+    private clientState: ClientState,
+    private configService: ConfigService
   ) {}
+
+  computeClientInfoLink(client: Client): string {
+    const baseUrl = this.configService.getConfig('client.infoLink');
+    return  substituteProperties(baseUrl, {
+      clientNum: client.info.numero
+    });
+  }
+
+  openClientInfoLink(client: Client) {
+    window.open(this.computeClientInfoLink(client), 'Client', 'width=800, height=600');
+    return false;
+  }
 
 }

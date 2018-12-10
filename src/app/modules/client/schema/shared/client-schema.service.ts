@@ -104,30 +104,33 @@ export class ClientSchemaService {
   private extractSchemaFromCreateResponse(
     response: ClientSchemaCreateResponse
   ): ClientSchema {
+    const data = response.data;
     return Object.assign({
       meta: {
-        title: `${response.id} - ${response.type} - ${response.annee}`
+        title: `${data.id} - ${data.type} - ${data.annee}`
       }
-    }, response);
+    }, data);
   }
 
   private extractSchemaFromUpdateResponse(
     response: ClientSchemaUpdateResponse
   ): ClientSchema {
+    const data = response.data;
     return Object.assign({
       meta: {
-        title: `${response.id} - ${response.type} - ${response.annee}`
+        title: `${data.id} - ${data.type} - ${data.annee}`
       }
-    }, response);
+    }, data);
   }
 
   private extractSchemaFromDuplicateResponse(
     response: ClientSchemaDuplicateResponse
   ): ClientSchema {
+    const data = response.data;
     return Object.assign({
       meta: {
-        title: `${response.id} - ${response.type} - ${response.annee}`
+        title: `${data.id} - ${data.type} - ${data.annee}`
       }
-    }, response);
+    }, data);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { distinctUntilChanged, skip, tap } from 'rxjs/operators';
 
 import {
   Client,
@@ -24,6 +24,9 @@ import { EditionState } from './edition.state';
 export class ClientState {
 
   public client$ = new BehaviorSubject<Client>(undefined);
+
+  private selectedDiagram$$: Subscription;
+  private selectedParcelYear$$: Subscription;
 
   get client(): Client {
     return this.client$.value;
@@ -81,31 +84,28 @@ export class ClientState {
     this._schemaEditor = new ClientSchemaEditor();
     this.editionState.register(this._schemaEditor);
 
-    this._diagramStore
+    this.selectedDiagram$$ = this._diagramStore
       .observeFirstBy((diagram: ClientParcelDiagram, state: State) => state.selected === true)
       .subscribe((diagram: ClientParcelDiagram) => this.onSelectDiagram(diagram));
 
-    this._parcelYearStore
+    this.selectedParcelYear$$ = this._parcelYearStore
       .observeFirstBy((parcelYear: ClientParcelYear, state: State) => state.selected === true)
+      .pipe(skip(1))
       .subscribe((parcelYear: ClientParcelYear) => this.onSelectParcelYear(parcelYear));
 
-    this.clientParcelYearService.getParcelYears()
-      .subscribe((parcelYears: ClientParcelYear[]) => {
-        const current = parcelYears.find((parcelYear: ClientParcelYear) => {
-          return parcelYear.current === true;
-        });
-        this.parcelYearStore.setEntities(parcelYears);
-        this.parcelYearStore.sorter.set({property: 'annee', direction: 'desc'});
-        if (current !== undefined) {
-          this.parcelYearStore.updateEntityState(current, {selected: true});
-        }
-      });
+    this.loadParcelYears();
   }
 
   getSetClientByNum(clientNum: string): Observable<Client> {
     const annee = this.parcelYear ? this.parcelYear.annee : undefined;
     return this.clientService.getClientByNum(clientNum, annee).pipe(
-      tap((client: Client) => this.setClient(client))
+      tap((client?: Client) => {
+        if (client === undefined) {
+          this.clearClient();
+        } else {
+          this.setClient(client);
+        }
+      })
     );
   }
 
@@ -114,10 +114,15 @@ export class ClientState {
     this.diagramStore.sorter.set({property: 'id', direction: 'asc'});
     this.parcelStore.setEntities(client.parcels);
     this.schemaStore.setEntities(client.schemas);
+    this.schemaEditor.setClient(client);
     this.client$.next(client);
   }
 
   clearClient() {
+    if (this.client === undefined) {
+      return;
+    }
+
     this.diagramStore.clear();
     this.parcelStore.clear();
     this.schemaStore.clear();
@@ -125,6 +130,7 @@ export class ClientState {
   }
 
   private onSelectDiagram(diagram: ClientParcelDiagram) {
+    this.parcelStore.state.reset();
     if (diagram === undefined) {
       this.parcelStore.filter.reset();
     } else {
@@ -140,6 +146,20 @@ export class ClientState {
     if (this.client !== undefined) {
       this.getSetClientByNum(this.client.info.numero).subscribe();
     }
+  }
+
+  private loadParcelYears() {
+    this.clientParcelYearService.getParcelYears()
+      .subscribe((parcelYears: ClientParcelYear[]) => {
+        const current = parcelYears.find((parcelYear: ClientParcelYear) => {
+          return parcelYear.current === true;
+        });
+        this.parcelYearStore.setEntities(parcelYears);
+        this.parcelYearStore.sorter.set({property: 'annee', direction: 'desc'});
+        if (current !== undefined) {
+          this.parcelYearStore.updateEntityState(current, {selected: true});
+        }
+      });
   }
 
 }

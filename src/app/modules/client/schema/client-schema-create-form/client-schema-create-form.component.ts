@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 import { EntityStore, EntityFormTemplate } from 'src/app/modules/entity';
 import { WidgetComponent } from 'src/app/modules/widget';
 
+import { Client } from '../../shared/client.interfaces';
 import { ClientSchema, ClientSchemaCreateData } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
 import { ClientSchemaFormService } from '../shared/client-schema-form.service';
@@ -26,6 +27,15 @@ import { ClientSchemaFormService } from '../shared/client-schema-form.service';
 export class ClientSchemaCreateFormComponent implements WidgetComponent, OnInit {
 
   public template$ = new Subject<EntityFormTemplate>();
+
+  @Input()
+  get client(): Client {
+    return this._client;
+  }
+  set client(value: Client) {
+    this._client = value;
+  }
+  private _client;
 
   @Input()
   get schema(): ClientSchema {
@@ -61,7 +71,10 @@ export class ClientSchemaCreateFormComponent implements WidgetComponent, OnInit 
   }
 
   onSubmit(event: {entity: undefined, data: { [key: string]: any }}) {
-    const data = Object.assign({}, event.data) as ClientSchemaCreateData;
+    const data = Object.assign({
+      numeroClient: this.client.info.numero
+    }, event.data) as ClientSchemaCreateData;
+
     this.clientSchemaService.createSchema(data)
       .subscribe((schema: ClientSchema) => this.onSubmitSuccess(schema));
   }

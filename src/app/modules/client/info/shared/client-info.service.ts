@@ -36,6 +36,9 @@ export class ClientInfoService {
 
   private extractClientInfoFromGetResponse(response: ClientInfoGetResponse): ClientInfo | undefined {
     const data = response.data;
+    if (data === null) {
+      return undefined;
+    }
     return {
       numero: data.numeroClient,
       nom: data.nomClient,
