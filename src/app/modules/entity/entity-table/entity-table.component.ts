@@ -95,7 +95,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
     }
   }
 
-  onEntityClick(entity: Entity) {
+  onEntitySelect(entity: Entity) {
     if (!this.template.selection) {
       return;
     }
@@ -126,20 +126,17 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
     };
   }
 
-  getRowClass(entity: Entity): { [key: string]: boolean; } {
-    let classes = {};
+  getRowSelected(entity: Entity): boolean {
+    const state = this.store.getEntityState(entity);
+    return state.selected ? state.selected : false;
+  }
 
+  getRowClass(entity: Entity): { [key: string]: boolean; } {
     const func = this.template.rowClassFunc;
     if (func instanceof Function) {
-      classes = Object.assign(classes, func(entity));
+      return func(entity);
     }
-
-    const state = this.store.getEntityState(entity);
-    classes = Object.assign(classes, {
-      'fadq-entity-table-row-selected': state.selected ? true : false
-    });
-
-    return classes;
+    return {};
   }
 
   getCellClass(entity: Entity, column: EntityTableColumn): { [key: string]: boolean; } {

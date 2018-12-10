@@ -37,7 +37,12 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
   search(term?: string): Observable<SearchResult<Client>[]> {
     return this.clientState.getSetClientByNum(term)
       .pipe(
-        map((response: ClientData) => this.extractResults(response))
+        map((response: ClientData) => {
+          if (response === undefined) {
+            return [];
+          }
+          return this.extractResults(response);
+        })
       );
   }
 

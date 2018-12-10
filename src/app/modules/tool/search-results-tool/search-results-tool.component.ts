@@ -5,10 +5,9 @@ import { LayerService, LayerOptions } from '@igo2/geo';
 
 import { MapState, SearchState } from 'src/app/state';
 import { EntityStore } from 'src/app/modules/entity';
-import { FEATURE, Feature } from 'src/app/modules/feature';
+import { FEATURE, Feature, FeatureMotion } from 'src/app/modules/feature';
 import { LAYER } from 'src/app/modules/layer';
 import { IgoMap } from 'src/app/modules/map';
-import { OverlayAction } from 'src/app/modules/overlay';
 import { SearchResult } from 'src/app/modules/search';
 
 @Register({
@@ -51,7 +50,7 @@ export class SearchResultsToolComponent {
       return undefined;
     }
     const feature = (result as SearchResult<Feature>).data;
-    this.map.overlay.setFeatures([feature], OverlayAction.Default);
+    this.map.overlay.setFeatures([feature], FeatureMotion.Default);
   }
 
   private tryAddLayerToMap(result: SearchResult) {

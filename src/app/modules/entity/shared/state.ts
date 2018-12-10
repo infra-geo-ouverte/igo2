@@ -57,7 +57,9 @@ export class EntityState<S extends { [key: string]: boolean } = State> {
   }
 
   reset() {
-    this.states$.next(new Map());
+    if (this.value.size > 0) {
+      this.states$.next(new Map());
+    }
   }
 
   private updateByKeysExclusive(keys: string[], changes: { [key: string]: boolean }) {

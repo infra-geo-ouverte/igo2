@@ -22,7 +22,9 @@ export class EntitySorter<T extends Entity> {
   }
 
   reset() {
-    this.clause$.next(undefined);
+    if (this.clause !== undefined) {
+      this.set(undefined);
+    }
   }
 
   sort(entities: T[]): T[] {

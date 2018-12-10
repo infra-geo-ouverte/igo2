@@ -16,7 +16,10 @@ import { getEntityId } from './entity.utils';
 export class EntityStore<T extends Entity | EntityClass, S extends { [key: string]: boolean } = State> {
 
   private entities$ = new BehaviorSubject<T[]>([]);
-  private watcher$$: Subscription;
+  private filtered$ = new BehaviorSubject<T[]>(this.entities);
+  private observable$ = new BehaviorSubject<T[]>(this.filtered);
+  private filtered$$: Subscription;
+  private observable$$: Subscription;
 
   get state(): EntityState<S> {
     return this._state;
@@ -33,17 +36,24 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
   }
   private _sorter: EntitySorter<T>;
 
-  get observable(): BehaviorSubject<T[]> {
-    return this._observable$;
-  }
-  private _observable$ = new BehaviorSubject<T[]>(this.entities);
-
   get rawObservable(): BehaviorSubject<T[]> {
     return this.entities$;
   }
 
+  get filteredObservable(): BehaviorSubject<T[]> {
+    return this.filtered$;
+  }
+
+  get observable(): BehaviorSubject<T[]> {
+    return this.observable$;
+  }
+
   get entities(): T[] {
-    return this.rawObservable.value;
+    return this.entities$.value;
+  }
+
+  get filtered(): T[] {
+    return this.filtered$.value;
   }
 
   get empty(): boolean {
@@ -104,8 +114,8 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     this.state.updateByKey(getEntityId(entity), changes, exclusive);
   }
 
-  updateEntitiesState(entities: T[], changes: { [key: string]: boolean }) {
-    this.state.updateByKeys(entities.map(getEntityId), changes);
+  updateEntitiesState(entities: T[], changes: { [key: string]: boolean }, exclusive = false) {
+    this.state.updateByKeys(entities.map(getEntityId), changes, exclusive);
   }
 
   updateAllEntitiesState(changes: { [key: string]: boolean }) {
@@ -135,24 +145,36 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
   }
 
   private watchChanges() {
-    const combined$ = combineLatest(
+    const filtered$ = combineLatest(
       this.entities$,
-      this.state.observable,
-      this.filter.observable,
-      this.sorter.observable
+      this.filter.observable
     );
 
-    this.watcher$$ = combined$
+    this.filtered$$ = filtered$
       .pipe(
         skip(1),
         debounceTime(50),
-      ).subscribe((value: [T[], Map<string, S>, EntityFilterClause[],  EntitySortClause]) => {
-        let entities = value[0].slice();
-        entities = this.filter.filter(entities, (entity: T) => {
-          return this.getEntityState(entity);
-        });
-        entities = this.sorter.sort(entities);
-        this.observable.next(entities);
-      });
+        map((results: [T[], EntityFilterClause[]]) => {
+          return this.filter.filter(results[0].slice(), (entity: T) => {
+            return this.getEntityState(entity);
+          });
+        })
+      ).subscribe((filteredEntities: T[]) => this.filtered$.next(filteredEntities));
+
+    const observable$ = combineLatest(
+      this.filtered$,
+      this.state.observable,
+      this.sorter.observable
+    );
+
+    this.observable$$ = observable$
+      .pipe(
+        skip(1),
+        debounceTime(50),
+        map((results: [T[], State, EntityFilterClause[]]) => {
+          return this.sorter.sort(results[0].slice());
+        })
+      ).subscribe((entities: T[]) => this.observable$.next(entities));
   }
+
 }

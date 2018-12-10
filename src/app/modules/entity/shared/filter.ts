@@ -1,6 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 
 import { Entity, EntityFilterClause, State } from './entity.interfaces';
+import { filterEntities } from './entity.utils';
 
 export class EntityFilter<T extends Entity> {
 
@@ -25,16 +26,15 @@ export class EntityFilter<T extends Entity> {
   }
 
   reset() {
-    this.clauses$.next([]);
+    if (this.clauses.length > 0) {
+      this.set([]);
+    }
   }
 
   filter(entities: T[], stateGetter: (entity: T) => State): T[] {
     if (this.clauses.length === 0) {
       return entities;
     }
-    return entities.filter((entity: T) => {
-      const state = stateGetter(entity);
-      return this.clauses.every((clause: EntityFilterClause) => clause(entity, state));
-    });
+    return filterEntities(entities, this.clauses, stateGetter) as T[];
   }
 }

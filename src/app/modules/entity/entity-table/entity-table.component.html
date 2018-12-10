@@ -37,9 +37,11 @@
 
       <tr mat-header-row *matHeaderRowDef="headers;"></tr>
       <tr mat-row
+        entityTableRow
         *matRowDef="let entity; columns: headers;"
         [ngClass]="getRowClass(entity)"
-        (click)="onEntityClick(entity)">
+        [selected]="getRowSelected(entity)"
+        (select)="onEntitySelect(entity)">
       </tr>
 
     </table>

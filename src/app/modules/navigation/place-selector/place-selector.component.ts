@@ -3,8 +3,8 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
 
-import { Overlay, OverlayAction } from 'src/app/modules/overlay';
-import { Feature } from 'src/app/modules/feature';
+import { Overlay } from 'src/app/modules/overlay';
+import { Feature, FeatureMotion } from 'src/app/modules/feature';
 import { Place, PlaceCategory, PlaceService } from '../shared';
 
 @Component({
@@ -96,7 +96,7 @@ export class PlaceSelectorComponent implements OnInit {
     if (feature === undefined) {
       this.overlay.clear();
     } else {
-      this.overlay.setFeatures([feature], OverlayAction.Zoom);
+      this.overlay.setFeatures([feature], FeatureMotion.Zoom);
     }
     this.overlayFeature = feature;
   }

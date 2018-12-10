@@ -5,6 +5,7 @@ import {
   MatSortModule,
 } from '@angular/material';
 
+import { EntityTableRowDirective } from './entity-table-row.directive';
 import { EntityTableComponent } from './entity-table.component';
 
 @NgModule({
@@ -13,7 +14,12 @@ import { EntityTableComponent } from './entity-table.component';
     MatTableModule,
     MatSortModule
   ],
-  exports: [EntityTableComponent],
-  declarations: [EntityTableComponent]
+  exports: [
+    EntityTableComponent
+  ],
+  declarations: [
+    EntityTableComponent,
+    EntityTableRowDirective
+  ]
 })
 export class FadqEntityTableModule {}

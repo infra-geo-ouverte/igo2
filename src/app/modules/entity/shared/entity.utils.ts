@@ -2,7 +2,7 @@ import t from 'typy';
 
 import { ObjectUtils } from '@igo2/utils';
 
-import { Entity } from './entity.interfaces';
+import { Entity, EntityFilterClause, State } from './entity.interfaces';
 
 export function entitiesAreTheSame(entity1: Entity, entity2: Entity | undefined): boolean {
   if (entity2 === undefined) {
@@ -76,5 +76,19 @@ export function sortEntities(
     const property1 = t(entity1, property).safeObject;
     const property2 = t(entity2, property).safeObject;
     return ObjectUtils.naturalCompare(property1, property2, direction);
+  });
+}
+
+export function filterEntities(
+  entities: Entity[],
+  clauses: EntityFilterClause[],
+  stateGetter: (entity: Entity) => State
+): Entity[] {
+  if (clauses.length === 0) {
+    return entities;
+  }
+  return entities.filter((entity: Entity) => {
+    const state = stateGetter(entity);
+    return clauses.every((clause: EntityFilterClause) => clause(entity, state));
   });
 }

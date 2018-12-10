@@ -15,13 +15,20 @@ import {
 import { VectorLayer } from '@igo2/geo';
 
 import { Client, ClientParcel, CLIENT } from 'src/app/modules/client';
-import { createParcelLayer } from 'src/app/modules/client/parcel/shared/client-parcel.utils';
+import {
+  createParcelLayer,
+  createParcelLayerSelectionStyle
+} from 'src/app/modules/client/parcel/shared/client-parcel.utils';
 import { Editor } from 'src/app/modules/edition';
 import { EntityStore, State, getEntityTitle } from 'src/app/modules/entity';
-import { FEATURE, Feature } from 'src/app/modules/feature';
-import { EntityLoader } from 'src/app/modules/layer';
+import {
+  FEATURE,
+  Feature,
+  FeatureLoadStrategy,
+  FeatureSelectStrategy
+} from 'src/app/modules/feature';
 import { IgoMap, ProjectionService } from 'src/app/modules/map';
-import { SearchResult, ClientSearchSource } from 'src/app/modules/search';
+import { SearchResult } from 'src/app/modules/search';
 import {
   ClientState,
   EditionState,
@@ -59,7 +66,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   private focusedSearchResult$$: Subscription;
 
   private parcelLayer: VectorLayer;
-  private parcelLoader: EntityLoader;
+  private parcelStrategies: {
+    load: FeatureLoadStrategy;
+    select: FeatureSelectStrategy;
+  };
 
   get backdropShown(): boolean {
     return this.mediaService.media$.value === Media.Mobile && this.sidenavOpened;
@@ -306,8 +316,19 @@ export class PortalComponent implements OnInit, OnDestroy {
   private addParcelLayer() {
     this.parcelLayer = createParcelLayer();
     this.map.addLayer(this.parcelLayer, false);
-    this.parcelLoader = new EntityLoader(this.parcelLayer, this.parcelStore);
-    this.parcelLoader.activate();
+
+    const loadStrategy = new FeatureLoadStrategy(this.parcelLayer, this.parcelStore);
+    loadStrategy.activate();
+
+    const selectStrategy = new FeatureSelectStrategy(this.parcelLayer, this.parcelStore, {
+      style: createParcelLayerSelectionStyle()
+    });
+    selectStrategy.activate();
+
+    this.parcelStrategies = {
+      load: loadStrategy,
+      select: selectStrategy
+    };
   }
 
 }
