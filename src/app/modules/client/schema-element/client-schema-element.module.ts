@@ -1,7 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { provideClientSchemaElementSurfaceService } from './shared/client-schema-element.providers';
+import {
+  provideClientSchemaElementSurfaceService,
+  provideClientSchemaElementService
+} from './shared/client-schema-element.providers';
 
 @NgModule({
   imports: [
@@ -16,7 +19,8 @@ export class FadqClientSchemaElementModule {
     return {
       ngModule: FadqClientSchemaElementModule,
       providers: [
-        provideClientSchemaElementSurfaceService()
+        provideClientSchemaElementSurfaceService(),
+        provideClientSchemaElementService()
       ]
     };
   }

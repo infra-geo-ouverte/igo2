@@ -56,3 +56,16 @@ export interface ClientSchemaUpdateResponse {
 export interface ClientSchemaDuplicateResponse {
   data: ClientSchema;
 }
+
+export interface ClientSchemaTypeChoicesResponse {
+  data: ClientSchemaTypeChoicesResponseItem[];
+}
+
+export interface ClientSchemaTypeChoicesResponseItem {
+  code: string;
+  descriptionAbregeeFrancais: string;
+  descriptionFrancais: string;
+  descriptionAbregeeAnglais: string;
+  descriptionAnglaiss: string;
+  ordreAffichage: number;
+}

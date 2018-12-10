@@ -27,8 +27,7 @@ export class ClientSchemaEditor extends Editor {
       },
       {
         name: 'description',
-        title: 'Description',
-        sort: false
+        title: 'Description'
       },
       {
         name: 'annee',

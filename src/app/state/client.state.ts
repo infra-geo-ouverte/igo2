@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { distinctUntilChanged, skip, tap } from 'rxjs/operators';
+import { skip, tap, zip } from 'rxjs/operators';
 
 import {
   Client,
@@ -11,7 +11,11 @@ import {
   ClientParcelYearService,
   ClientSchema,
   ClientParcelEditor,
-  ClientSchemaEditor
+  ClientSchemaEditor,
+  ClientSchemaElements,
+  ClientSchemaElementService,
+  ClientSchemaElementSurface,
+  ClientSchemaElementSurfaceEditor
 } from 'src/app/modules/client';
 import { EntityStore, State } from 'src/app/modules/entity';
 import { Widget } from 'src/app/modules/widget';
@@ -24,12 +28,18 @@ import { EditionState } from './edition.state';
 export class ClientState {
 
   public client$ = new BehaviorSubject<Client>(undefined);
+  public schema$ = new BehaviorSubject<ClientSchema>(undefined);
 
   private selectedDiagram$$: Subscription;
   private selectedParcelYear$$: Subscription;
+  private selectedSchema$$: Subscription;
 
   get client(): Client {
     return this.client$.value;
+  }
+
+  get schema(): ClientSchema {
+    return this.schema$.value;
   }
 
   get diagramStore(): EntityStore<ClientParcelDiagram> {
@@ -68,11 +78,25 @@ export class ClientState {
     return this.schemaEditor.widgetStore as EntityStore<Widget>;
   }
 
+  get schemaElementSurfaceEditor(): ClientSchemaElementSurfaceEditor {
+    return this._schemaElementSurfaceEditor;
+  }
+  private _schemaElementSurfaceEditor: ClientSchemaElementSurfaceEditor;
+
+  get schemaElementSurfaceStore(): EntityStore<ClientSchemaElementSurface> {
+    return this.schemaElementSurfaceEditor.entityStore as EntityStore<ClientSchemaElementSurface>;
+  }
+
+  get schemaElementSurfaceWidgetStore(): EntityStore<Widget> {
+    return this.schemaElementSurfaceEditor.widgetStore as EntityStore<Widget>;
+  }
+
   private parcelYear: ClientParcelYear = undefined;
 
   constructor(
     private clientService: ClientService,
     private clientParcelYearService: ClientParcelYearService,
+    private clientSchemaElementService: ClientSchemaElementService,
     private editionState: EditionState
   ) {
     this._diagramStore = new EntityStore<ClientParcelDiagram>();
@@ -84,6 +108,9 @@ export class ClientState {
     this._schemaEditor = new ClientSchemaEditor();
     this.editionState.register(this._schemaEditor);
 
+    this._schemaElementSurfaceEditor = new ClientSchemaElementSurfaceEditor();
+    this.editionState.register(this._schemaElementSurfaceEditor);
+
     this.selectedDiagram$$ = this._diagramStore
       .observeFirstBy((diagram: ClientParcelDiagram, state: State) => state.selected === true)
       .subscribe((diagram: ClientParcelDiagram) => this.onSelectDiagram(diagram));
@@ -92,6 +119,10 @@ export class ClientState {
       .observeFirstBy((parcelYear: ClientParcelYear, state: State) => state.selected === true)
       .pipe(skip(1))
       .subscribe((parcelYear: ClientParcelYear) => this.onSelectParcelYear(parcelYear));
+
+    this.selectedSchema$$ = this.schemaStore
+      .observeFirstBy((schema: ClientSchema, state: State) => state.selected === true)
+      .subscribe((schema: ClientSchema) => this.onSelectSchema(schema));
 
     this.loadParcelYears();
   }
@@ -146,6 +177,41 @@ export class ClientState {
     if (this.client !== undefined) {
       this.getSetClientByNum(this.client.info.numero).subscribe();
     }
+  }
+
+  private onSelectSchema(schema: ClientSchema) {
+    if (schema !== undefined) {
+      this.setSchema(schema);
+    } else {
+      this.clearSchema();
+    }
+  }
+
+  private setSchema(schema: ClientSchema) {
+    this.loadSchemaElements(schema);
+    this.schemaElementSurfaceEditor.setSchema(schema);
+    this.schema$.next(schema);
+  }
+
+  private clearSchema() {
+    if (this.schema === undefined) {
+      return;
+    }
+
+    this.clearSchemaElements();
+    this.schema$.next(undefined);
+  }
+
+  private loadSchemaElements(schema: ClientSchema) {
+    this.clientSchemaElementService.getElements(schema)
+      .subscribe((elements: ClientSchemaElements) => {
+        const [points, lines, surfaces] = elements;
+        this.schemaElementSurfaceStore.setEntities(surfaces);
+      });
+  }
+
+  private clearSchemaElements() {
+    this.schemaElementSurfaceStore.clear();
   }
 
   private loadParcelYears() {

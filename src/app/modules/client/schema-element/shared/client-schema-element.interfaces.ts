@@ -25,7 +25,7 @@ export interface ClientSchemaElementProperties {
   description: string;
   typeElement: string;
   descriptionTypeElement: string;
-  anneeImage: 0;
+  anneeImage: number;
   timbreMaj: string;
   usagerMaj: string;
 }

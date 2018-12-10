@@ -93,6 +93,18 @@
       "delete.tooltip": "Supprimer un document",
       "download": "Télécharger",
       "download.tooltip": "Télécharger un document"
+    },
+    "schemaElement": {
+      "create": "Créer",
+      "create.tooltip": "Créer un élément",
+      "update": "Modifier",
+      "update.tooltip": "Modifier un élément",
+      "delete": "Supprimer",
+      "delete.tooltip": "Supprimer un élément",
+      "move": "Déplacer",
+      "move.tooltip": "Déplacer un élément",
+      "save": "Supprimer",
+      "save.tooltip": "Sauvegarder les éléments"
     }
   },
 

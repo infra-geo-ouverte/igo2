@@ -14,11 +14,20 @@ import {
 } from '@igo2/context';
 import { VectorLayer } from '@igo2/geo';
 
-import { Client, ClientParcel, CLIENT } from 'src/app/modules/client';
+import {
+  Client,
+  ClientParcel,
+  ClientSchemaElementSurface,
+  CLIENT
+} from 'src/app/modules/client';
 import {
   createParcelLayer,
   createParcelLayerSelectionStyle
 } from 'src/app/modules/client/parcel/shared/client-parcel.utils';
+import {
+  createSchemaElementSurfaceLayer,
+  createSchemaElementSurfaceLayerSelectionStyle,
+} from 'src/app/modules/client/schema-element/shared/client-schema-element-surface.utils';
 import { Editor } from 'src/app/modules/edition';
 import { EntityStore, State, getEntityTitle } from 'src/app/modules/entity';
 import {
@@ -71,6 +80,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     select: FeatureSelectStrategy;
   };
 
+  private schemaElementSurfaceLayer: VectorLayer;
+  private schemaElementSurfaceStrategies: {
+    load: FeatureLoadStrategy;
+    select: FeatureSelectStrategy;
+  };
+
   get backdropShown(): boolean {
     return this.mediaService.media$.value === Media.Mobile && this.sidenavOpened;
   }
@@ -81,6 +96,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get parcelStore(): EntityStore<ClientParcel> {
     return this.clientState.parcelStore;
+  }
+
+  get schemaElementSurfaceStore(): EntityStore<ClientSchemaElementSurface> {
+    return this.clientState.schemaElementSurfaceStore;
   }
 
   get searchStore(): EntityStore<SearchResult> {
@@ -148,6 +167,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
     this.mapState.setMap(this.map);
     this.addParcelLayer();
+    this.addSchemaElementSurfaceLayer();
 
     this.context$$ = this.contextService.context$
       .subscribe((context: DetailedContext) => this.onChangeContext(context));
@@ -326,6 +346,29 @@ export class PortalComponent implements OnInit, OnDestroy {
     selectStrategy.activate();
 
     this.parcelStrategies = {
+      load: loadStrategy,
+      select: selectStrategy
+    };
+  }
+
+  private addSchemaElementSurfaceLayer() {
+    this.schemaElementSurfaceLayer = createSchemaElementSurfaceLayer();
+    this.map.addLayer(this.schemaElementSurfaceLayer, false);
+
+    const loadStrategy = new FeatureLoadStrategy(
+      this.schemaElementSurfaceLayer,
+      this.schemaElementSurfaceStore
+    );
+    loadStrategy.activate();
+
+    const selectStrategy = new FeatureSelectStrategy(
+      this.schemaElementSurfaceLayer,
+      this.schemaElementSurfaceStore, {
+      style: createParcelLayerSelectionStyle()
+    });
+    selectStrategy.activate();
+
+    this.schemaElementSurfaceStrategies = {
       load: loadStrategy,
       select: selectStrategy
     };

@@ -72,19 +72,19 @@ export const environment: Environment = {
         },
         schema: {
           list: '/app/interne/igolocalisation/recherche_client/obtenirSchemasClient/${clientNum}',
-          create: '/app/interne/igolocalisation/recherche_client/ajouterSchema',
-          update: '/app/interne/igolocalisation/recherche_client/modifierSchema',
-          delete: '/app/interne/igolocalisation/recherche_client/supprimerSchema/${id}',
-          duplicate: '/app/interne/igolocalisation/recherche_client/copierSchema/${id}',
+          create: '/app/interne/igoschema/edition_schema/ajouterSchema',
+          update: '/app/interne/igoschema/edition_schema/modifierSchema',
+          delete: '/app/interne/igoschema/edition_schema/supprimerSchema/${id}',
+          duplicate: '/app/interne/igoschema/edition_schema/copierSchema/${id}',
           domains: {
-            type: '/app/interne/igolocalisation/recherche_client/obtenirTypesSchemas'
+            type: '/app/interne/igoschema/edition_schema/obtenirTypesSchemas'
           }
         },
         schemaFile: {
           list: '/app/interne/igolocalisation/recherche_client/obtenirDocumentsSchema/${schemaId}',
           get: '/app/interne/igolocalisation/recherche_client/obtenirDocumentSchema/${id}',
-          create: '/app/interne/igolocalisation/recherche_client/ajouterDocumentSchema',
-          delete: '/app/interne/igolocalisation/recherche_client/supprimerDocumentSchema/${id}'
+          create: '/app/interne/igoschema/edition_schema/ajouterDocumentSchema',
+          delete: '/app/interne/igoschema/edition_schema/supprimerDocumentSchema/${id}'
         },
         schemaElement: {
           save: '',
