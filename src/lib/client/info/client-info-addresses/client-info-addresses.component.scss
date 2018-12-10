@@ -1,0 +1,26 @@
+@import 'variables';
+
+:host {
+  display: block;
+  padding: $igo-padding;
+}
+
+.fadq-client-info-section {
+  margin-bottom: 10px;
+}
+
+.fadq-client-info-section a {
+  color: #1565c0;
+}
+
+.fadq-client-info-addresses table {
+  border-spacing: 0;
+}
+
+.fadq-client-info-addresses table tr:nth-child(even) td {
+ text-align: center;
+}
+
+.fadq-client-info-addresses table tr td {
+  padding: $igo-padding;
+}

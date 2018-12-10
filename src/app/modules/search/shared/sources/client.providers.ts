@@ -1,7 +1,8 @@
 import { ConfigService } from '@igo2/core';
 
-import { ClientState } from 'src/app/state';
-import { SearchSource } from './source';
+import { SearchSource } from 'src/lib/search';
+
+import { ClientState } from 'src/app/modules/client/client.state';
 import { ClientSearchSource } from './client';
 
 export function clientSearchSourcesFactory(

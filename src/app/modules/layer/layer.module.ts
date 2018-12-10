@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { FadqLibLayerModule } from 'src/lib/layer/layer.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    FadqLibLayerModule
   ],
-  exports: [],
+  exports: [
+    FadqLibLayerModule
+  ],
   declarations: []
 })
 export class FadqLayerModule {}

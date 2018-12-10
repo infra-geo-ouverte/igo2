@@ -19,31 +19,30 @@ import {
   ClientParcel,
   ClientSchemaElementSurface,
   CLIENT
-} from 'src/app/modules/client';
+} from 'src/lib/client';
 import {
   createParcelLayer,
   createParcelLayerSelectionStyle
-} from 'src/app/modules/client/parcel/shared/client-parcel.utils';
+} from 'src/lib/client/parcel/shared/client-parcel.utils';
 import {
   createSchemaElementSurfaceLayer,
   createSchemaElementSurfaceLayerSelectionStyle,
-} from 'src/app/modules/client/schema-element/shared/client-schema-element-surface.utils';
-import { Editor } from 'src/app/modules/edition';
-import { EntityStore, State, getEntityTitle } from 'src/app/modules/entity';
+} from 'src/lib/client/schema-element/shared/client-schema-element-surface.utils';
+import { Editor } from 'src/lib/edition';
+import { EntityStore, State, getEntityTitle } from 'src/lib/entity';
 import {
   FEATURE,
   Feature,
   FeatureLoadStrategy,
   FeatureSelectStrategy
-} from 'src/app/modules/feature';
-import { IgoMap, ProjectionService } from 'src/app/modules/map';
-import { SearchResult } from 'src/app/modules/search';
-import {
-  ClientState,
-  EditionState,
-  MapState,
-  SearchState
-} from 'src/app/state';
+} from 'src/lib/feature';
+import { IgoMap, ProjectionService } from 'src/lib/map';
+import { SearchResult } from 'src/lib/search';
+
+import { ClientState } from 'src/app/modules/client/client.state';
+import { EditionState } from 'src/app/modules/edition/edition.state';
+import { MapState } from 'src/app/modules/map/map.state';
+import { SearchState } from 'src/app/modules/search/search.state';
 
 import {
   controlSlideX,
@@ -364,7 +363,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const selectStrategy = new FeatureSelectStrategy(
       this.schemaElementSurfaceLayer,
       this.schemaElementSurfaceStore, {
-      style: createParcelLayerSelectionStyle()
+      style: createSchemaElementSurfaceLayerSelectionStyle()
     });
     selectStrategy.activate();
 

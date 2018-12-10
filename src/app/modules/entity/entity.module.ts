@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { FadqEntityFormModule } from './entity-form/entity-form.module';
-import { FadqEntityTableModule } from './entity-table/entity-table.module';
+import { FadqLibEntityModule } from 'src/lib/entity/entity.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    FadqLibEntityModule
   ],
   exports: [
-    FadqEntityFormModule,
-    FadqEntityTableModule
+    FadqLibEntityModule
   ],
   declarations: []
 })

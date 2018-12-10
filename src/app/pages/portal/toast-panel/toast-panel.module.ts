@@ -22,10 +22,4 @@ import { ToastPanelComponent } from './toast-panel.component';
   exports: [ToastPanelComponent],
   declarations: [ToastPanelComponent]
 })
-export class FadqToastPanelModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqToastPanelModule
-    };
-  }
-}
+export class FadqToastPanelModule {}

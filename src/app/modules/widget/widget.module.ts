@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { FadqWidgetbarModule } from './widgetbar/widgetbar.module';
+import { FadqLibWidgetModule } from 'src/lib/widget/widget.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FadqWidgetbarModule
+    FadqLibWidgetModule
   ],
   exports: [
-    FadqWidgetbarModule
+    FadqLibWidgetModule
   ],
-  declarations: [],
-  providers: []
+  declarations: []
 })
 export class FadqWidgetModule {}

@@ -40,7 +40,6 @@ import { FadqEditionModule } from '../../modules/edition/edition.module';
 import { FadqClientModule } from '../../modules/client/client.module';
 import { FadqMapModule } from '../../modules/map/map.module';
 import { FadqSearchModule } from '../../modules/search/search.module';
-import { FadqToolModule } from '../../modules/tool/tool.module';
 import { FadqWidgetModule } from '../../modules/widget/widget.module';
 import { FadqExpansionPanelModule } from './expansion-panel/expansion-panel.module';
 import { FadqToastPanelModule } from './toast-panel/toast-panel.module';
@@ -48,6 +47,7 @@ import { FadqSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
 
+// TODO: Clean this up
 @NgModule({
   imports: [
     CommonModule,
@@ -87,7 +87,6 @@ import { PortalComponent } from './portal.component';
     FadqSidenavModule,
     FadqMapModule,
     FadqSearchModule,
-    FadqToolModule,
     FadqWidgetModule
   ],
   exports: [PortalComponent],

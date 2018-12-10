@@ -1,29 +1,17 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { provideClientService } from './shared/client.providers';
+import { FadqLibClientModule } from 'src/lib/client/client.module';
+import { FadqClientToolModule } from './client-tool/client-tool.module';
 
-import { FadqClientInfoModule } from './info/client-info.module';
-import { FadqClientParcelModule } from './parcel/client-parcel.module';
-import { FadqClientSchemaModule } from './schema/client-schema.module';
-import { FadqClientSchemaFileModule } from './schema-file/client-schema-file.module';
-import { FadqClientSchemaElementModule } from './schema-element/client-schema-element.module';
+import { ClientState } from './client.state';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FadqClientInfoModule.forRoot(),
-    FadqClientParcelModule.forRoot(),
-    FadqClientSchemaModule.forRoot(),
-    FadqClientSchemaFileModule.forRoot(),
-    FadqClientSchemaElementModule.forRoot()
+    FadqLibClientModule.forRoot(),
+    FadqClientToolModule
   ],
   exports: [
-    FadqClientInfoModule,
-    FadqClientParcelModule,
-    FadqClientSchemaModule,
-    FadqClientSchemaFileModule,
-    FadqClientSchemaElementModule
+    FadqLibClientModule
   ],
   declarations: []
 })
@@ -32,7 +20,7 @@ export class FadqClientModule {
     return {
       ngModule: FadqClientModule,
       providers: [
-        provideClientService()
+        ClientState
       ]
     };
   }

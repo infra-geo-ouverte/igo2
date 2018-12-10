@@ -1,19 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { FadqEditorOutletModule } from './editor-outlet/editor-outlet.module';
-import { FadqEditorSelectorModule } from './editor-selector/editor-selector.module';
+import { FadqLibEditionModule } from 'src/lib/edition/edition.module';
+
+import { EditionState } from './edition.state';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FadqEditorOutletModule,
-    FadqEditorSelectorModule
+    FadqLibEditionModule
   ],
   exports: [
-    FadqEditorOutletModule,
-    FadqEditorSelectorModule
+    FadqLibEditionModule
   ],
   declarations: []
 })
-export class FadqEditionModule {}
+export class FadqEditionModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: FadqEditionModule,
+      providers: [
+        EditionState
+      ]
+    };
+  }
+}

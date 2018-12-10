@@ -29,10 +29,4 @@ import { SidenavComponent } from './sidenav.component';
   exports: [SidenavComponent],
   declarations: [SidenavComponent]
 })
-export class FadqSidenavModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqSidenavModule
-    };
-  }
-}
+export class FadqSidenavModule {}

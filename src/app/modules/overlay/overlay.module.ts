@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { FadqLibOverlayModule } from 'src/lib/overlay/overlay.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    FadqLibOverlayModule
   ],
-  exports: [],
-  declarations: [],
-  providers: []
+  exports: [
+    FadqLibOverlayModule
+  ],
+  declarations: []
 })
 export class FadqOverlayModule {}

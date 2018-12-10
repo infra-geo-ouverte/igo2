@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { FadqDynamicContainerModule } from './dynamic-container/dynamic-container.module';
-import { FadqSpinnerModule } from './spinner/spinner.module';
+import { FadqLibCommonModule } from 'src/lib/common/common.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    FadqLibCommonModule
   ],
   exports: [
-    FadqDynamicContainerModule,
-    FadqSpinnerModule
+    FadqLibCommonModule
   ],
-  declarations: [],
-  providers: []
+  declarations: []
 })
 export class FadqCommonModule {}

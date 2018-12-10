@@ -1,29 +1,19 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {
-  MatIconModule,
-  MatListModule,
-  MatTooltipModule
-} from '@angular/material';
 
-import { IgoListModule, IgoCollapsibleModule } from '@igo2/common';
+import { FadqLibCatalogModule } from 'src/lib/catalog/catalog.module';
+import { FadqCatalogLibraryToolModule } from './catalog-library-tool/catalog-library-tool.module';
+import { FadqCatalogBrowserToolModule } from './catalog-browser-tool/catalog-browser-tool.module';
 
-import { CatalogService } from './shared';
-import { FadqCatalogBrowserModule } from './catalog-browser/catalog-browser.module';
-import { FadqCatalogLibraryModule } from './catalog-library/catalog-library.module';
+import { CatalogState } from './catalog.state';
 
 @NgModule({
   imports: [
-    CommonModule,
-    MatIconModule,
-    MatListModule,
-    MatTooltipModule,
-    IgoListModule,
-    IgoCollapsibleModule
+    FadqLibCatalogModule.forRoot(),
+    FadqCatalogLibraryToolModule,
+    FadqCatalogBrowserToolModule
   ],
   exports: [
-    FadqCatalogBrowserModule,
-    FadqCatalogLibraryModule
+    FadqLibCatalogModule
   ],
   declarations: []
 })
@@ -32,7 +22,7 @@ export class FadqCatalogModule {
     return {
       ngModule: FadqCatalogModule,
       providers: [
-        CatalogService
+        CatalogState
       ]
     };
   }

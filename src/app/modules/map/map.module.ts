@@ -1,16 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { FadqMapWidgetbarModule } from './map-widgetbar/map-widgetbar.module';
+import { FadqLibMapModule } from 'src/lib/map/map.module';
+
+import { MapState } from './map.state';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FadqMapWidgetbarModule
+    FadqLibMapModule
   ],
   exports: [
-    FadqMapWidgetbarModule
+    FadqLibMapModule
   ],
   declarations: []
 })
-export class FadqMapModule {}
+export class FadqMapModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: FadqMapModule,
+      providers: [
+        MapState
+      ]
+    };
+  }
+}

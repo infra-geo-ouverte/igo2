@@ -3,13 +3,16 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CLIENT, Client } from 'src/app/modules/client';
-import { ClientState } from 'src/app/state/client.state';
-
-import { SearchResult } from '../search.interfaces';
-import { SearchSource, TextSearch } from './source';
-import { SearchSourceOptions } from './source.interfaces';
+import { CLIENT, Client } from 'src/lib/client';
+import {
+  SearchResult,
+  SearchSource,
+  SearchSourceOptions,
+  TextSearch
+} from 'src/lib/search';
 import { ClientData } from './client.interfaces';
+
+import { ClientState } from 'src/app/modules/client/client.state';
 
 @Injectable()
 export class ClientSearchSource extends SearchSource implements TextSearch {

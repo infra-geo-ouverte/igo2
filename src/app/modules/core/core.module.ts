@@ -1,38 +1,14 @@
-import { NgModule, ModuleWithProviders, Provider } from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {
-  IgoCoreModule,
-  RouteService,
-  provideConfigOptions
-} from '@igo2/core';
-import { environment } from '../../../environments/environment';
-
-import { FadqApiModule } from './api/api.module';
-
-const providers: Provider[] = [
-  RouteService,
-  provideConfigOptions({
-    default: environment.igo,
-    path: './config/config.json'
-  })
-];
+import { FadqLibCoreModule } from 'src/lib/core/core.module';
 
 @NgModule({
   imports: [
-    IgoCoreModule.forRoot(),
-    FadqApiModule
+    FadqLibCoreModule.forRoot()
   ],
-  declarations: [],
   exports: [
-    IgoCoreModule,
-    FadqApiModule
-  ]
+    FadqLibCoreModule
+  ],
+  declarations: []
 })
-export class FadqCoreModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqCoreModule,
-      providers: providers
-    };
-  }
-}
+export class FadqCoreModule {}

@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { FadqLibFeatureModule } from 'src/lib/feature/feature.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    FadqLibFeatureModule
   ],
-  exports: [],
-  declarations: [],
-  providers: []
+  exports: [
+    FadqLibFeatureModule
+  ],
+  declarations: []
 })
 export class FadqFeatureModule {}
