@@ -28,7 +28,11 @@ export interface ClientSchemaFileListResponseItem {
   typeDocument: string;
 }
 
-export interface ClientSchemaFileGetResponse extends ClientSchemaFileListResponseItem {
+export interface ClientSchemaFileGetResponse {
+  data: ClientSchemaFileGetResponseData;
+}
+
+export interface ClientSchemaFileGetResponseData extends ClientSchemaFileListResponseItem {
   document: string;
 }
 

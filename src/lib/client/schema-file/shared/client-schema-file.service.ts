@@ -49,7 +49,7 @@ export class ClientSchemaFileService {
       .get(url)
       .pipe(
         map((response: ClientSchemaFileGetResponse) => {
-          return response.document;
+          return response.data.document;
         })
       );
   }
