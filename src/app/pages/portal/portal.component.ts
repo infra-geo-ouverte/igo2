@@ -12,7 +12,6 @@ import {
   Tool,
   ToolService
 } from '@igo2/context';
-import { VectorLayer } from '@igo2/geo';
 
 import {
   Client,
@@ -20,23 +19,13 @@ import {
   ClientSchemaElementSurface,
   CLIENT
 } from 'src/lib/client';
-import {
-  createParcelLayer,
-  createParcelLayerSelectionStyle
-} from 'src/lib/client/parcel/shared/client-parcel.utils';
-import {
-  createSchemaElementSurfaceLayer,
-  createSchemaElementSurfaceLayerSelectionStyle,
-} from 'src/lib/client/schema-element/shared/client-schema-element-surface.utils';
 import { Editor } from 'src/lib/edition';
 import { EntityStore, State, getEntityTitle } from 'src/lib/entity';
 import {
   FEATURE,
-  Feature,
-  FeatureLoadStrategy,
-  FeatureSelectStrategy
+  Feature
 } from 'src/lib/feature';
-import { IgoMap, ProjectionService } from 'src/lib/map';
+import { IgoMap } from 'src/lib/map';
 import { SearchResult } from 'src/lib/search';
 
 import { ClientState } from 'src/app/modules/client/client.state';
@@ -59,7 +48,6 @@ import {
 })
 export class PortalComponent implements OnInit, OnDestroy {
 
-  public map: IgoMap;
   public editor: Editor;
   public feature: Feature;
 
@@ -73,17 +61,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   private searchResults$$: Subscription;
   private focusedSearchResult$$: Subscription;
 
-  private parcelLayer: VectorLayer;
-  private parcelStrategies: {
-    load: FeatureLoadStrategy;
-    select: FeatureSelectStrategy;
-  };
-
-  private schemaElementSurfaceLayer: VectorLayer;
-  private schemaElementSurfaceStrategies: {
-    load: FeatureLoadStrategy;
-    select: FeatureSelectStrategy;
-  };
+  get map(): IgoMap {
+    return this.mapState.map;
+  }
 
   get backdropShown(): boolean {
     return this.mediaService.media$.value === Media.Mobile && this.sidenavOpened;
@@ -143,30 +123,17 @@ export class PortalComponent implements OnInit, OnDestroy {
   private _toastPanelOpened = false;
 
   constructor(
-    private projectionService: ProjectionService,
     private mapState: MapState,
+    private clientState: ClientState,
+    private editionState: EditionState,
     private contextService: ContextService,
     private mediaService: MediaService,
     private searchState: SearchState,
-    private toolService: ToolService,
-    private clientState: ClientState,
-    private editionState: EditionState
+    private toolService: ToolService
   ) {}
 
   ngOnInit() {
     window['IGO'] = this;
-
-    this.map = new IgoMap({
-      controls: {
-        scaleLine: true,
-        attribution: {
-          collapsed: false
-        }
-      }
-    });
-    this.mapState.setMap(this.map);
-    this.addParcelLayer();
-    this.addSchemaElementSurfaceLayer();
 
     this.context$$ = this.contextService.context$
       .subscribe((context: DetailedContext) => this.onChangeContext(context));
@@ -306,7 +273,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onFocusSearchResult(result: SearchResult) {
     if (result === undefined) {
-      // this.feature = undefined;
       return;
     }
 
@@ -330,47 +296,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onSelectEditor(editor: Editor) {
     this.editor = editor;
-  }
-
-  private addParcelLayer() {
-    this.parcelLayer = createParcelLayer();
-    this.map.addLayer(this.parcelLayer, false);
-
-    const loadStrategy = new FeatureLoadStrategy(this.parcelLayer, this.parcelStore);
-    loadStrategy.activate();
-
-    const selectStrategy = new FeatureSelectStrategy(this.parcelLayer, this.parcelStore, {
-      style: createParcelLayerSelectionStyle()
-    });
-    selectStrategy.activate();
-
-    this.parcelStrategies = {
-      load: loadStrategy,
-      select: selectStrategy
-    };
-  }
-
-  private addSchemaElementSurfaceLayer() {
-    this.schemaElementSurfaceLayer = createSchemaElementSurfaceLayer();
-    this.map.addLayer(this.schemaElementSurfaceLayer, false);
-
-    const loadStrategy = new FeatureLoadStrategy(
-      this.schemaElementSurfaceLayer,
-      this.schemaElementSurfaceStore
-    );
-    loadStrategy.activate();
-
-    const selectStrategy = new FeatureSelectStrategy(
-      this.schemaElementSurfaceLayer,
-      this.schemaElementSurfaceStore, {
-      style: createSchemaElementSurfaceLayerSelectionStyle()
-    });
-    selectStrategy.activate();
-
-    this.schemaElementSurfaceStrategies = {
-      load: loadStrategy,
-      select: selectStrategy
-    };
   }
 
 }

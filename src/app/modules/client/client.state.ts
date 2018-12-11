@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { skip, tap, zip } from 'rxjs/operators';
+import { skip, tap } from 'rxjs/operators';
 
 import {
   Client,
@@ -18,14 +18,13 @@ import {
   ClientSchemaElementSurfaceEditor
 } from 'src/lib/client';
 import { EntityStore, State } from 'src/lib/entity';
-import { Widget } from 'src/lib/widget';
 
 import { EditionState } from '../edition/edition.state';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientState {
+export class ClientState implements OnDestroy {
 
   public client$ = new BehaviorSubject<Client>(undefined);
   public schema$ = new BehaviorSubject<ClientSchema>(undefined);
@@ -61,10 +60,6 @@ export class ClientState {
     return this.parcelEditor.entityStore as EntityStore<ClientParcel>;
   }
 
-  get parcelWidgetStore(): EntityStore<Widget> {
-    return this.parcelEditor.widgetStore as EntityStore<Widget>;
-  }
-
   get schemaEditor(): ClientSchemaEditor {
     return this._schemaEditor;
   }
@@ -74,10 +69,6 @@ export class ClientState {
     return this.schemaEditor.entityStore as EntityStore<ClientSchema>;
   }
 
-  get schemaWidgetStore(): EntityStore<Widget> {
-    return this.schemaEditor.widgetStore as EntityStore<Widget>;
-  }
-
   get schemaElementSurfaceEditor(): ClientSchemaElementSurfaceEditor {
     return this._schemaElementSurfaceEditor;
   }
@@ -85,10 +76,6 @@ export class ClientState {
 
   get schemaElementSurfaceStore(): EntityStore<ClientSchemaElementSurface> {
     return this.schemaElementSurfaceEditor.entityStore as EntityStore<ClientSchemaElementSurface>;
-  }
-
-  get schemaElementSurfaceWidgetStore(): EntityStore<Widget> {
-    return this.schemaElementSurfaceEditor.widgetStore as EntityStore<Widget>;
   }
 
   private parcelYear: ClientParcelYear = undefined;
@@ -127,6 +114,12 @@ export class ClientState {
     this.loadParcelYears();
   }
 
+  ngOnDestroy() {
+    this.selectedDiagram$$.unsubscribe();
+    this.selectedParcelYear$$.unsubscribe();
+    this.selectedSchema$$.unsubscribe();
+  }
+
   getSetClientByNum(clientNum: string): Observable<Client> {
     const annee = this.parcelYear ? this.parcelYear.annee : undefined;
     return this.clientService.getClientByNum(clientNum, annee).pipe(
@@ -140,15 +133,6 @@ export class ClientState {
     );
   }
 
-  setClient(client: Client) {
-    this.diagramStore.setEntities(client.diagrams);
-    this.diagramStore.sorter.set({property: 'id', direction: 'asc'});
-    this.parcelStore.setEntities(client.parcels);
-    this.schemaStore.setEntities(client.schemas);
-    this.schemaEditor.setClient(client);
-    this.client$.next(client);
-  }
-
   clearClient() {
     if (this.client === undefined) {
       return;
@@ -158,6 +142,15 @@ export class ClientState {
     this.parcelStore.clear();
     this.schemaStore.clear();
     this.client$.next(undefined);
+  }
+
+  private setClient(client: Client) {
+    this.diagramStore.setEntities(client.diagrams);
+    this.diagramStore.sorter.set({property: 'id', direction: 'asc'});
+    this.parcelStore.setEntities(client.parcels);
+    this.schemaStore.setEntities(client.schemas);
+    this.schemaEditor.setClient(client);
+    this.client$.next(client);
   }
 
   private onSelectDiagram(diagram: ClientParcelDiagram) {
