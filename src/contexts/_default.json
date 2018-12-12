@@ -4,26 +4,11 @@
   "map": {
     "view": {
       "projection": "EPSG:32198",
-      "center": [-72, 46],
+      "center": [-68, 48],
       "zoom": 3
     }
   },
   "layers": [
-    {
-      "title": "Gouvernmement du Québec",
-      "baseLayer": true,
-      "visible": false,
-      "sourceOptions": {
-        "type": "wmts",
-        "optionsFromCapabilities": true,
-        "url": "/wmts",
-        "layer": "carte_gouv_qc",
-        "matrixSet": "LAMBERT",
-        "params": {
-          "version": "1.0.0"
-        }
-      }
-    },
     {
       "title": "Images les plus récentes",
       "baseLayer": false,
