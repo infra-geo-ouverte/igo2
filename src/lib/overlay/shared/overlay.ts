@@ -25,8 +25,7 @@ export class Overlay {
     this.style = this.createStyle();
     this.markerStyle = this.createMarkerStyle();
     this.layer = new VectorLayer({
-      title: 'Overlay',
-      zIndex: 999,
+      zIndex: 300,
       style: this.style,
       source: this.dataSource
     });

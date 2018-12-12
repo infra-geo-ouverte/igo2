@@ -44,24 +44,6 @@ export function createParcelLayerStyle(): (feature: OlFeature) => olstyle.Style 
   });
 }
 
-export function createParcelLayerSelectionStyle(): (feature: OlFeature) => olstyle.Style {
-  const style = new olstyle.Style({
-    stroke: new olstyle.Stroke({
-      color: [0, 153, 255, 1],
-      width: 2
-    }),
-    fill:  new olstyle.Fill({
-      color: [0, 153, 255, 0.15]
-    }),
-    text: createParcelLayerTextStyle()
-  });
-
-  return (function(feature: OlFeature) {
-    style.getText().setText(feature.get('noParcelleAgricole'));
-    return style;
-  });
-}
-
 function createParcelLayerTextStyle(): olstyle.Text {
   return new olstyle.Text({
     font: '16px Calibri,sans-serif',

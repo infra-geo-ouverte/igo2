@@ -7,7 +7,7 @@ export function createSchemaElementSurfaceLayer(): VectorLayer {
   const schemaElementSurfaceDataSource = new FeatureDataSource();
   return new VectorLayer({
     title: 'Surfaces du schéma',
-    zIndex: 100,
+    zIndex: 101,
     source: schemaElementSurfaceDataSource,
     style: createSchemaElementSurfaceLayerStyle()
   });
@@ -26,24 +26,6 @@ export function createSchemaElementSurfaceLayerStyle(): (feature: OlFeature) => 
     const color = getSchemaElementSurfaceFeatureColor(feature);
     style.getFill().setColor(color.concat([0.15]));
     style.getStroke().setColor(color);
-    style.getText().setText(feature.get('etiquette'));
-    return style;
-  });
-}
-
-export function createSchemaElementSurfaceLayerSelectionStyle(): (feature: OlFeature) => olstyle.Style {
-  const style = new olstyle.Style({
-    stroke: new olstyle.Stroke({
-      color: [0, 153, 255, 1],
-      width: 2
-    }),
-    fill:  new olstyle.Fill({
-      color: [0, 153, 255, 0.15]
-    }),
-    text: createSchemaElementSurfaceLayerTextStyle()
-  });
-
-  return (function(feature: OlFeature) {
     style.getText().setText(feature.get('etiquette'));
     return style;
   });

@@ -2,20 +2,14 @@ import { Injectable, OnDestroy } from '@angular/core';
 
 import { IgoMap, ProjectionService } from 'src/lib/map';
 
-import {
-  createParcelLayer,
-  createParcelLayerSelectionStyle
-} from 'src/lib/client/parcel/shared/client-parcel.utils';
-import {
-  createSchemaElementSurfaceLayer,
-  createSchemaElementSurfaceLayerSelectionStyle,
-} from 'src/lib/client/schema-element/shared/client-schema-element-surface.utils';
+import { createParcelLayer } from 'src/lib/client';
+import { createSchemaElementSurfaceLayer } from 'src/lib/client';
 
 import {
-  FeatureStrategy,
-  FeatureLoadStrategy,
-  FeatureSelectStrategy
-} from 'src/lib/feature';
+  LayerStore,
+  LayerStoreLoadStrategy,
+  LayerStoreSelectStrategy
+} from 'src/lib/layer';
 
 import { ClientState } from 'src/app/modules/client/client.state';
 
@@ -24,15 +18,11 @@ import { ClientState } from 'src/app/modules/client/client.state';
 })
 export class MapState implements OnDestroy {
 
-  private clientParcelStrategies: {
-    load: FeatureLoadStrategy;
-    select: FeatureSelectStrategy;
-  };
+  private clientParcelLayerStore: LayerStore;
+  private clientSchemaElementSurfaceLayerStore: LayerStore;
 
-  private clientSchemaElementSurfaceStrategies: {
-    load: FeatureLoadStrategy;
-    select: FeatureSelectStrategy;
-  };
+  private clientLayerStoresLoadStrategy: LayerStoreLoadStrategy;
+  private clientLayerStoresSelectStrategy: LayerStoreSelectStrategy;
 
   get map(): IgoMap {
     return this._map;
@@ -52,69 +42,50 @@ export class MapState implements OnDestroy {
       }
     });
 
-    this.addClientSchemaElementSurfaceLayer();
-    this.addClientParcelLayer();
+    this.clientParcelLayerStore = this.createClientParcelLayerStore();
+    this.clientSchemaElementSurfaceLayerStore = this.createClientSchemaElementSurfaceLayerStore();
+    this.initClientLayerStoresStrategies();
   }
 
   ngOnDestroy() {
-    Object.values(this.clientParcelStrategies).forEach((strategy: FeatureStrategy) => {
-      strategy.deactivate();
-    });
-
-    Object.values(this.clientSchemaElementSurfaceStrategies).forEach((strategy: FeatureStrategy) => {
-      strategy.deactivate();
-    });
+    if (this.clientLayerStoresLoadStrategy !== undefined) {
+      this.clientLayerStoresLoadStrategy.deactivate();
+    }
+    if (this.clientLayerStoresSelectStrategy !== undefined) {
+      this.clientLayerStoresSelectStrategy.deactivate();
+    }
   }
 
-  private addClientParcelLayer() {
+  private createClientParcelLayerStore() {
+    const clientParcelStore = this.clientState.parcelStore;
     const clientParcelLayer = createParcelLayer();
     this.map.addLayer(clientParcelLayer, false);
 
-    const clientParcelStore = this.clientState.parcelStore;
-    const loadStrategy = new FeatureLoadStrategy(
-      clientParcelLayer,
-      clientParcelStore
-    );
-    loadStrategy.activate();
-
-    const selectStrategyOptions = {
-      style: createParcelLayerSelectionStyle()
-    };
-    const selectStrategy = new FeatureSelectStrategy(
-      clientParcelLayer,
-      clientParcelStore, selectStrategyOptions
-    );
-    selectStrategy.activate();
-
-    this.clientParcelStrategies = {
-      load: loadStrategy,
-      select: selectStrategy
-    };
+    return new LayerStore(clientParcelLayer, clientParcelStore);
   }
 
-  private addClientSchemaElementSurfaceLayer() {
+  private createClientSchemaElementSurfaceLayerStore() {
+    const clientSchemaElementSurfaceStore = this.clientState.parcelStore;
     const clientSchemaElementSurfaceLayer = createSchemaElementSurfaceLayer();
     this.map.addLayer(clientSchemaElementSurfaceLayer, false);
 
-    const clientSchemaElementSurfaceStore = this.clientState.schemaElementSurfaceStore;
-    const loadStrategy = new FeatureLoadStrategy(
+    return new LayerStore(
       clientSchemaElementSurfaceLayer,
       clientSchemaElementSurfaceStore
     );
-    loadStrategy.activate();
+  }
 
-    const selectStrategyOptions = {
-      style: createSchemaElementSurfaceLayerSelectionStyle()
-    };
-    const selectStrategy = new FeatureSelectStrategy(
-      clientSchemaElementSurfaceLayer,
-      clientSchemaElementSurfaceStore, selectStrategyOptions
-    );
-    selectStrategy.activate();
+  private initClientLayerStoresStrategies() {
+    this.clientLayerStoresLoadStrategy = new LayerStoreLoadStrategy([
+      this.clientParcelLayerStore,
+      this.clientSchemaElementSurfaceLayerStore
+    ]);
+    this.clientLayerStoresLoadStrategy.activate();
 
-    this.clientSchemaElementSurfaceStrategies = {
-      load: loadStrategy,
-      select: selectStrategy
-    };
+    this.clientLayerStoresSelectStrategy  = new LayerStoreSelectStrategy([
+      this.clientParcelLayerStore,
+      this.clientSchemaElementSurfaceLayerStore
+    ]);
+    this.clientLayerStoresSelectStrategy.activate();
   }
 }
