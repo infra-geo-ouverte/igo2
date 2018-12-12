@@ -2,8 +2,11 @@ import { Injectable, OnDestroy } from '@angular/core';
 
 import { IgoMap, ProjectionService } from 'src/lib/map';
 
-import { createParcelLayer } from 'src/lib/client';
-import { createSchemaElementSurfaceLayer } from 'src/lib/client';
+import {
+  createParcelLayer,
+  createSchemaElementSurfaceLayer,
+  createClientDefaultSelectionStyle
+} from 'src/lib/client';
 
 import {
   LayerStore,
@@ -85,7 +88,7 @@ export class MapState implements OnDestroy {
     this.clientLayerStoresSelectStrategy = new LayerStoreSelectStrategy([
       this.clientParcelLayerStore,
       this.clientSchemaElementSurfaceLayerStore
-    ]);
+    ], {style: createClientDefaultSelectionStyle()});
     this.clientLayerStoresSelectStrategy.activate();
   }
 }
