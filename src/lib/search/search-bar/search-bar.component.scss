@@ -27,8 +27,12 @@
   width: 100%;
 }
 
-.fadq-search-bar-container>mat-form-field {
+.fadq-search-bar-container > mat-form-field {
   width: calc(100% - (2 * #{$igo-icon-size}));
+}
+
+:host.empty .fadq-search-bar-container > mat-form-field {
+  width: calc(100% - #{$igo-icon-size});
 }
 
 .search-bar-buttons {

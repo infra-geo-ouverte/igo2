@@ -13,8 +13,10 @@
   "info.title": "Informations",
 
   "search": {
-    "searchbar.placeholder": "Rechercher un client, un lieu ou une couche",
-    "menu.tooltip": "Options de recherche"
+    "menu.tooltip": "Options de recherche",
+    "client.placeholder": "Rechercher un client",
+    "feature.placeholder": "Rechercher une localisation",
+    "layer.placeholder": "Rechercher une couche de données."
   },
 
   "navigation": {

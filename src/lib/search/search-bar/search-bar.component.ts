@@ -1,12 +1,13 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   Input,
   Output,
   EventEmitter,
   ViewChild,
   ElementRef,
-  OnDestroy,
+  HostBinding,
   ChangeDetectionStrategy
 } from '@angular/core';
 import { FloatLabelType } from '@angular/material';
@@ -35,22 +36,13 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _term = '';
 
   @Input()
-  get placeholder(): string {
-    return this._placeholder;
-  }
-  set placeholder(value: string) {
-    this._placeholder = value;
-  }
-  private _placeholder = '';
-
-  @Input()
   get floatLabel(): FloatLabelType {
     return this._floatLabel;
   }
   set floatLabel(value: FloatLabelType) {
     this._floatLabel = value;
   }
-  private _floatLabel: FloatLabelType = 'auto';
+  private _floatLabel: FloatLabelType = 'never';
 
   @Input()
   get disabled(): boolean {
@@ -106,6 +98,18 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
   private _store;
 
+  get empty(): boolean {
+    return this.term.length === 0;
+  }
+
+  get placeholder(): string {
+    return this.empty ? this._placeholder : '';
+  }
+  set placeholder(value: string) {
+    this._placeholder = value;
+  }
+  private _placeholder = '';
+
   private readonly invalidKeys = ['Control', 'Shift', 'Alt'];
   private stream$ = new Subject<string>();
   private stream$$: Subscription;
@@ -117,6 +121,11 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }>();
 
   @ViewChild('input') input: ElementRef;
+
+  @HostBinding('class.empty')
+  get emptyClass() {
+    return this.empty;
+  }
 
   constructor(private searchService: SearchService) {}
 
@@ -143,6 +152,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   onClearButtonClick() {
     this.clear();
+  }
+
+  onSearchTypeChange(searchType: string) {
+    this.placeholder = `search.${searchType.toLowerCase()}.placeholder`;
   }
 
   private setTerm(term: string) {

@@ -13,8 +13,10 @@
   "info.title": "Informations",
 
   "search": {
-    "searchbar.placeholder": "Search for a client, a place or a layer",
-    "menu.tooltip": "Search Options"
+    "menu.tooltip": "Search Options",
+    "client.placeholder": "Search for a  client",
+    "feature.placeholder": "Search for a place localisation",
+    "layer.placeholder": "Search for a layer"
   },
 
   "navigation": {

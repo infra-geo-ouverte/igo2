@@ -7,7 +7,7 @@
         autocomplete="off"
         [ngClass]="{'hasSearchIcon': searchIcon}"
         [disabled]="disabled"
-        [placeholder]="placeholder"
+        [placeholder]="placeholder | translate"
         [ngModel]="term"
         (keyup)="onKeyup($event)"
         (touchend)="onKeyup($event)">
@@ -25,11 +25,11 @@
         mat-icon-button
         [color]="color"
         (click)="onClearButtonClick()"
-        *ngIf="term.length > 0">
+        *ngIf="!empty">
         <mat-icon>clear</mat-icon>
       </button>
     </div>
 
-    <fadq-search-selector></fadq-search-selector>
+    <fadq-search-selector (change)="onSearchTypeChange($event)"></fadq-search-selector>
   </div>
 </div>

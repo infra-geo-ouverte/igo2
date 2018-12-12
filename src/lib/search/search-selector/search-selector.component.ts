@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import { SEARCHES, SearchSourceService } from '../shared';
 
@@ -28,6 +35,8 @@ export class SearchSelectorComponent implements OnInit {
   }
   private _enabled: string;
 
+  @Output() change = new EventEmitter<string>();
+
   constructor(private searchSourceService: SearchSourceService) {}
 
   ngOnInit() {
@@ -42,6 +51,7 @@ export class SearchSelectorComponent implements OnInit {
   private enableSearchType(type: string) {
     this.enabled = type;
     this.searchSourceService.enableSourcesByType(type);
+    this.change.emit(type);
   }
 
 }
