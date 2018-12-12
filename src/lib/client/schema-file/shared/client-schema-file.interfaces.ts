@@ -37,11 +37,9 @@ export interface ClientSchemaFileGetResponseData extends ClientSchemaFileListRes
 }
 
 export interface ClientSchemaFileCreateData {
-  nomPhysiqueDocument: string;
-  tailleDocument: number;
-  typeDocument: string;
-  document: string;
-  idSchema: number;
+  p_fichier: File;
 }
 
-export interface ClientSchemaFileCreateResponse extends ClientSchemaFileListResponseItem {}
+export interface ClientSchemaFileCreateResponse {
+  data: ClientSchemaFileListResponseItem;
+}

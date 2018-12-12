@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -54,11 +54,21 @@ export class ClientSchemaFileService {
       );
   }
 
-  createSchemaFile(data: ClientSchemaFileCreateData): Observable<ClientSchemaFile> {
-    const url = this.apiService.buildUrl(this.apiConfig.create);
+  createSchemaFile(schema: ClientSchema, data: ClientSchemaFileCreateData): Observable<ClientSchemaFile> {
+    const url = this.apiService.buildUrl(this.apiConfig.create, {
+      schemaId: getEntityId(schema)
+    });
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    const formData = new FormData();
+    Object.entries(data).forEach((entries: [string, any]) => {
+      formData.append(entries[0], entries[1]);
+    });
 
     return this.http
-      .post(url, data)
+      .post(url, formData, {headers})
       .pipe(
         map((response: ClientSchemaFileCreateResponse) => {
           return this.extractSchemaFromCreateResponse(response);
@@ -97,14 +107,15 @@ export class ClientSchemaFileService {
   private extractSchemaFromCreateResponse(
     response: ClientSchemaFileCreateResponse
   ): ClientSchemaFile {
+    const data = response.data;
     return {
-      id: response.idDocumentSchema,
-      name: response.nomPhysiqueDocument,
-      address: response.addresseDocument,
-      size: response.tailleDocument,
-      type: response.typeDocument,
+      id: data.idDocumentSchema,
+      name: data.nomPhysiqueDocument,
+      address: data.addresseDocument,
+      size: data.tailleDocument,
+      type: data.typeDocument,
       meta: {
-        title: `${response.nomPhysiqueDocument}`
+        title: `${data.nomPhysiqueDocument}`
       }
     };
   }

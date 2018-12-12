@@ -125,19 +125,9 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
 
   private createSchemaFile(file: File) {
     const schema = this.schema;
-    const reader = new FileReader();
-    reader.onloadend = (e) => {
-      this.clientSchemaFileService
-        .createSchemaFile({
-          nomPhysiqueDocument: file.name,
-          tailleDocument: file.size,
-          typeDocument: file.type,
-          document: reader.result as string,
-          idSchema: parseInt(getEntityId(schema), 10)
-        })
-        .subscribe((schemaFile: ClientSchemaFile) => this.onCreateSuccess(schemaFile));
-    };
-    reader.readAsDataURL(file);
+    this.clientSchemaFileService
+      .createSchemaFile(schema, {p_fichier: file})
+      .subscribe((schemaFile: ClientSchemaFile) => this.onCreateSuccess(schemaFile));
   }
 
   private onCreateSuccess(schemaFile: ClientSchemaFile) {
