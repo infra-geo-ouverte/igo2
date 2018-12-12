@@ -5,6 +5,9 @@ import {
   provideClientSchemaService,
   provideClientSchemaFormService
 } from './shared/client-schema.providers';
+import { ClientSchemaTableService } from './shared/client-schema-table.service';
+import { ClientSchemaWidgetService } from './shared/client-schema-widget.service';
+import { ClientSchemaEditorService } from './shared/client-schema-editor.service';
 
 import { FadqLibClientSchemaCreateFormModule } from './client-schema-create-form/client-schema-create-form.module';
 import { FadqLibClientSchemaUpdateFormModule } from './client-schema-update-form/client-schema-update-form.module';
@@ -31,7 +34,10 @@ export class FadqLibClientSchemaModule {
       ngModule: FadqLibClientSchemaModule,
       providers: [
         provideClientSchemaService(),
-        provideClientSchemaFormService()
+        provideClientSchemaFormService(),
+        ClientSchemaTableService,
+        ClientSchemaWidgetService,
+        ClientSchemaEditorService
       ]
     };
   }

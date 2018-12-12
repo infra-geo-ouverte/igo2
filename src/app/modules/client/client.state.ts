@@ -10,12 +10,12 @@ import {
   ClientParcelYear,
   ClientParcelYearService,
   ClientSchema,
-  ClientParcelEditor,
-  ClientSchemaEditor,
+  ClientParcelEditorService,
+  ClientSchemaEditorService,
   ClientSchemaElements,
-  ClientSchemaElementService,
   ClientSchemaElementSurface,
-  ClientSchemaElementSurfaceEditor
+  ClientSchemaElementService,
+  ClientSchemaElementSurfaceEditorService
 } from 'src/lib/client';
 import { EntityStore, State } from 'src/lib/entity';
 
@@ -51,28 +51,25 @@ export class ClientState implements OnDestroy {
   }
   private _parcelYearStore: EntityStore<ClientParcelYear>;
 
-  get parcelEditor(): ClientParcelEditor {
-    return this._parcelEditor;
+  get parcelEditor(): ClientParcelEditorService {
+    return this.clientParcelEditorService;
   }
-  private _parcelEditor: ClientParcelEditor;
 
   get parcelStore(): EntityStore<ClientParcel> {
     return this.parcelEditor.entityStore as EntityStore<ClientParcel>;
   }
 
-  get schemaEditor(): ClientSchemaEditor {
-    return this._schemaEditor;
+  get schemaEditor(): ClientSchemaEditorService {
+    return this.clientSchemaEditorService;
   }
-  private _schemaEditor: ClientSchemaEditor;
 
   get schemaStore(): EntityStore<ClientSchema> {
     return this.schemaEditor.entityStore as EntityStore<ClientSchema>;
   }
 
-  get schemaElementSurfaceEditor(): ClientSchemaElementSurfaceEditor {
-    return this._schemaElementSurfaceEditor;
+  get schemaElementSurfaceEditor(): ClientSchemaElementSurfaceEditorService {
+    return this.clientSchemaElementSurfaceEditorService;
   }
-  private _schemaElementSurfaceEditor: ClientSchemaElementSurfaceEditor;
 
   get schemaElementSurfaceStore(): EntityStore<ClientSchemaElementSurface> {
     return this.schemaElementSurfaceEditor.entityStore as EntityStore<ClientSchemaElementSurface>;
@@ -83,20 +80,18 @@ export class ClientState implements OnDestroy {
   constructor(
     private clientService: ClientService,
     private clientParcelYearService: ClientParcelYearService,
+    private clientParcelEditorService: ClientParcelEditorService,
+    private clientSchemaEditorService: ClientSchemaEditorService,
     private clientSchemaElementService: ClientSchemaElementService,
+    private clientSchemaElementSurfaceEditorService: ClientSchemaElementSurfaceEditorService,
     private editionState: EditionState
   ) {
     this._diagramStore = new EntityStore<ClientParcelDiagram>();
     this._parcelYearStore = new EntityStore<ClientParcelYear>();
 
-    this._parcelEditor = new ClientParcelEditor();
-    this.editionState.register(this._parcelEditor);
-
-    this._schemaEditor = new ClientSchemaEditor();
-    this.editionState.register(this._schemaEditor);
-
-    this._schemaElementSurfaceEditor = new ClientSchemaElementSurfaceEditor();
-    this.editionState.register(this._schemaElementSurfaceEditor);
+    this.editionState.register(this.parcelEditor);
+    this.editionState.register(this.schemaEditor);
+    this.editionState.register(this.schemaElementSurfaceEditor);
 
     this.selectedDiagram$$ = this._diagramStore
       .observeFirstBy((diagram: ClientParcelDiagram, state: State) => state.selected === true)

@@ -5,13 +5,15 @@ import {
   provideClientSchemaElementSurfaceService,
   provideClientSchemaElementService
 } from './shared/client-schema-element.providers';
+import { ClientSchemaElementTableService } from './shared/client-schema-element-table.service';
+import { ClientSchemaElementWidgetService } from './shared/client-schema-element-widget.service';
+import { ClientSchemaElementSurfaceEditorService } from './shared/client-schema-element-surface-editor.service';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  exports: [
-  ],
+  exports: [],
   declarations: []
 })
 export class FadqLibClientSchemaElementModule {
@@ -19,8 +21,11 @@ export class FadqLibClientSchemaElementModule {
     return {
       ngModule: FadqLibClientSchemaElementModule,
       providers: [
+        ClientSchemaElementTableService,
+        ClientSchemaElementWidgetService,
         provideClientSchemaElementSurfaceService(),
-        provideClientSchemaElementService()
+        provideClientSchemaElementService(),
+        ClientSchemaElementSurfaceEditorService
       ]
     };
   }
