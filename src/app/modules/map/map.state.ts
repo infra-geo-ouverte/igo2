@@ -65,7 +65,7 @@ export class MapState implements OnDestroy {
   }
 
   private createClientSchemaElementSurfaceLayerStore() {
-    const clientSchemaElementSurfaceStore = this.clientState.parcelStore;
+    const clientSchemaElementSurfaceStore = this.clientState.schemaElementSurfaceStore;
     const clientSchemaElementSurfaceLayer = createSchemaElementSurfaceLayer();
     this.map.addLayer(clientSchemaElementSurfaceLayer, false);
 
@@ -82,7 +82,7 @@ export class MapState implements OnDestroy {
     ]);
     this.clientLayerStoresLoadStrategy.activate();
 
-    this.clientLayerStoresSelectStrategy  = new LayerStoreSelectStrategy([
+    this.clientLayerStoresSelectStrategy = new LayerStoreSelectStrategy([
       this.clientParcelLayerStore,
       this.clientSchemaElementSurfaceLayerStore
     ]);

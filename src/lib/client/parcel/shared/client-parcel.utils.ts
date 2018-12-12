@@ -26,7 +26,7 @@ export function createParcelLayer(): VectorLayer {
   });
 }
 
-export function createParcelLayerStyle(): (feature: OlFeature) => olstyle.Style {
+export function createParcelLayerStyle(): (olFeature: OlFeature) => olstyle.Style {
   const style = new olstyle.Style({
     stroke: new olstyle.Stroke({
       width: 2
@@ -53,10 +53,10 @@ function createParcelLayerTextStyle(): olstyle.Text {
   });
 }
 
-function getParcelFeatureColor(feature: OlFeature) {
-  const clientRech = padClientNum(feature.get('noClientRecherche'));
-  const clientDet = padClientNum(feature.get('noClient'));
-  const clientExp = padClientNum(feature.get('noClientExploitant'));
+function getParcelFeatureColor(olFeature: OlFeature) {
+  const clientRech = padClientNum(olFeature.get('noClientRecherche'));
+  const clientDet = padClientNum(olFeature.get('noClient'));
+  const clientExp = padClientNum(olFeature.get('noClientExploitant'));
 
   let color;
   if (clientRech === clientDet) {
@@ -64,6 +64,7 @@ function getParcelFeatureColor(feature: OlFeature) {
   } else {
     color = [0, 218, 250];
   }
+
   return color;
 }
 

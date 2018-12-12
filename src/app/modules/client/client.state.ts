@@ -173,10 +173,10 @@ export class ClientState implements OnDestroy {
   }
 
   private onSelectSchema(schema: ClientSchema) {
-    if (schema !== undefined) {
-      this.setSchema(schema);
-    } else {
+    if (schema === undefined) {
       this.clearSchema();
+    } else if (schema !== this.schema) {
+      this.setSchema(schema);
     }
   }
 
