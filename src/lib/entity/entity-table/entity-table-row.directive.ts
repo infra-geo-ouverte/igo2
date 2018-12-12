@@ -34,6 +34,7 @@ export class EntityTableRowDirective {
   @HostListener('click')
   onClick() {
     this.toggleSelected(true);
+    this.select.emit(this);
   }
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
@@ -42,7 +43,6 @@ export class EntityTableRowDirective {
     this._selected = selected;
     if (selected) {
       this.addCls(EntityTableRowDirective.selectedCls);
-      this.select.emit(this);
     } else {
       this.removeCls(EntityTableRowDirective.selectedCls);
     }
