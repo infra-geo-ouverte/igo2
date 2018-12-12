@@ -27,9 +27,8 @@ export class ClientSchemaElementSurfaceService {
   ) {}
 
   getElements(schema: ClientSchema): Observable<ClientSchemaElementSurface[]> {
-    /*
     const url = this.apiService.buildUrl(this.apiConfig.list, {
-      schemaId: getEntityId(schema)
+      schemaId: 10430 // getEntityId(schema)
     });
 
     return this.http
@@ -39,7 +38,7 @@ export class ClientSchemaElementSurfaceService {
           return this.extractElementsFromListResponse(response);
         })
       );
-    */
+   /*
    return of([
       {
         'type': 'Feature',
@@ -94,6 +93,7 @@ export class ClientSchemaElementSurfaceService {
         return this.extractElementsFromListResponse(response);
       })
     );
+    */
   }
 
   private extractElementsFromListResponse(

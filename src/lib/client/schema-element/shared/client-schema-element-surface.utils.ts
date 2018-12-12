@@ -13,7 +13,7 @@ export function createSchemaElementSurfaceLayer(): VectorLayer {
   });
 }
 
-export function createSchemaElementSurfaceLayerStyle(): (feature: OlFeature) => olstyle.Style {
+export function createSchemaElementSurfaceLayerStyle(): (olFeature: OlFeature) => olstyle.Style {
   const style = new olstyle.Style({
     stroke: new olstyle.Stroke({
       width: 2
@@ -22,11 +22,11 @@ export function createSchemaElementSurfaceLayerStyle(): (feature: OlFeature) => 
     text: createSchemaElementSurfaceLayerTextStyle()
   });
 
-  return (function(feature: OlFeature) {
-    const color = getSchemaElementSurfaceFeatureColor(feature);
+  return (function(olFeature: OlFeature) {
+    const color = getSchemaElementSurfaceFeatureColor(olFeature);
     style.getFill().setColor(color.concat([0.15]));
     style.getStroke().setColor(color);
-    style.getText().setText(feature.get('etiquette'));
+    style.getText().setText(olFeature.get('etiquette'));
     return style;
   });
 }
@@ -40,7 +40,6 @@ function createSchemaElementSurfaceLayerTextStyle(): olstyle.Text {
   });
 }
 
-function getSchemaElementSurfaceFeatureColor(feature: OlFeature) {
+function getSchemaElementSurfaceFeatureColor(olFeature: OlFeature) {
   return [0, 218, 250];
 }
-
