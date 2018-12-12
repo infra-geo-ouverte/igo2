@@ -114,10 +114,10 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
   private downloadSchemaFile() {
     const schemaFile = this.schemaFile;
     this.clientSchemaFileService
-      .getSchemaFileData(schemaFile)
-      .subscribe((data: string | ArrayBuffer) => {
+      .getSchemaFileDownloadLink(schemaFile)
+      .subscribe((link: string) => {
         const element = this.downloadLink.nativeElement;
-        element.setAttribute('href', data);
+        element.setAttribute('href', link);
         element.setAttribute('download', schemaFile.name);
         element.click();
       });

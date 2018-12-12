@@ -2,7 +2,7 @@ import { EntityObject } from 'src/lib/entity';
 
 export interface ClientSchemaFileApiConfig  {
   list: string;
-  get: string;
+  download: string;
   create: string;
   delete: string;
 }
@@ -26,14 +26,6 @@ export interface ClientSchemaFileListResponseItem {
   addresseDocument: string;
   tailleDocument: number;
   typeDocument: string;
-}
-
-export interface ClientSchemaFileGetResponse {
-  data: ClientSchemaFileGetResponseData;
-}
-
-export interface ClientSchemaFileGetResponseData extends ClientSchemaFileListResponseItem {
-  document: string;
 }
 
 export interface ClientSchemaFileCreateData {

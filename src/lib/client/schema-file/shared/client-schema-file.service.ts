@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from 'src/lib/core/api';
@@ -12,7 +12,6 @@ import {
   ClientSchemaFileApiConfig,
   ClientSchemaFileListResponse,
   ClientSchemaFileListResponseItem,
-  ClientSchemaFileGetResponse,
   ClientSchemaFileCreateData,
   ClientSchemaFileCreateResponse
 } from './client-schema-file.interfaces';
@@ -40,18 +39,12 @@ export class ClientSchemaFileService {
       );
   }
 
-  getSchemaFileData(schemaFile: ClientSchemaFile): Observable<string> {
-    const url = this.apiService.buildUrl(this.apiConfig.get, {
+  getSchemaFileDownloadLink(schemaFile: ClientSchemaFile): Observable<string> {
+    const link = this.apiService.buildUrl(this.apiConfig.download, {
       id: getEntityId(schemaFile)
     });
 
-    return this.http
-      .get(url)
-      .pipe(
-        map((response: ClientSchemaFileGetResponse) => {
-          return response.data.document;
-        })
-      );
+    return of(link);
   }
 
   createSchemaFile(schema: ClientSchema, data: ClientSchemaFileCreateData): Observable<ClientSchemaFile> {
