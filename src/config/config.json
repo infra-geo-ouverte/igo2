@@ -7,7 +7,7 @@
       }
   ],
   "catalog": {
-    "url": "/app/interne/igovisualisation/contexte_catalogue",
+    "url": "/igovisualisation/contexte_catalogue",
     "sources": [{
         "id": "fadq.all",
         "title": "Toutes les données (config)",

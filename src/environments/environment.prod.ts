@@ -42,44 +42,44 @@ export const environment: Environment = {
       prefix: './locale/'
     },
     api: {
-      url: 'http://netphp.fadq.qc'
+      url: 'http://netphp.fadq.qc/app/interne'
     },
     client: {
       infoLink: 'http://igo.fadq.qc/61_GestionDesRelationsAffaires/1_GestionIdentite/61_131_CoorClient.php?p_60131CliNum=${clientNum}',
       api: {
         info: {
-          get: '/app/interne/igolocalisation/recherche_client/obtenirInformationClient/${clientNum}'
+          get: '/igolocalisation/recherche_client/obtenirInformationClient/${clientNum}'
         },
         parcel: {
-          list: '/app/interne/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/${clientNum}/${annee}',
-          years: '/app/interne/igolocalisation/recherche_client/obtenirAnneesTraitementParcelleAgricole'
+          list: '/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/${clientNum}/${annee}',
+          years: '/igolocalisation/recherche_client/obtenirAnneesTraitementParcelleAgricole'
         },
         schema: {
-          list: '/app/interne/igolocalisation/recherche_client/obtenirSchemasClient/${clientNum}',
-          create: '/app/interne/igoschema/edition_schema/ajouterSchema',
-          update: '/app/interne/igoschema/edition_schema/modifierSchema',
-          delete: '/app/interne/igoschema/edition_schema/supprimerSchema/${id}',
-          duplicate: '/app/interne/igoschema/edition_schema/copierSchema/${id}',
+          list: '/igolocalisation/recherche_client/obtenirSchemasClient/${clientNum}',
+          create: '/igoschema/edition_schema/ajouterSchema',
+          update: '/igoschema/edition_schema/modifierSchema',
+          delete: '/igoschema/edition_schema/supprimerSchema/${id}',
+          duplicate: '/igoschema/edition_schema/copierSchema/${id}',
           domains: {
-            type: '/app/interne/igoschema/edition_schema/obtenirTypesSchemas'
+            type: '/igoschema/edition_schema/obtenirTypesSchemas'
           }
         },
         schemaFile: {
-          list: '/app/interne/igolocalisation/recherche_client/obtenirDocumentsSchema/${schemaId}',
-          download: '/app/interne/igolocalisation/recherche_client/obtenirDocumentSchema/${id}',
-          create: '/app/interne/igoschema/edition_schema/ajouterDocumentSchema/${schemaId}',
-          delete: '/app/interne/igoschema/edition_schema/supprimerDocumentSchema/${id}'
+          list: '/igolocalisation/recherche_client/obtenirDocumentsSchema/${schemaId}',
+          download: '/igolocalisation/recherche_client/obtenirDocumentSchema/${id}',
+          create: '/igoschema/edition_schema/ajouterDocumentSchema/${schemaId}',
+          delete: '/igoschema/edition_schema/supprimerDocumentSchema/${id}'
         },
         schemaElement: {
           save: '',
           point: {
-            list: '/app/interne/igolocalisation/recherche_client/obtenirElementGeometriquePoint/${schemaId}'
+            list: '/igolocalisation/recherche_client/obtenirElementGeometriquePoint/${schemaId}'
           },
           line: {
-            list: '/app/interne/igolocalisation/recherche_client/obtenirElementGeometriqueLine/${schemaId}'
+            list: '/igolocalisation/recherche_client/obtenirElementGeometriqueLine/${schemaId}'
           },
           surface: {
-            list: '/app/interne/igolocalisation/recherche_client/obtenirElementGeometriqueSurface/${schemaId}'
+            list: '/igolocalisation/recherche_client/obtenirElementGeometriqueSurface/${schemaId}'
           }
         }
       }
