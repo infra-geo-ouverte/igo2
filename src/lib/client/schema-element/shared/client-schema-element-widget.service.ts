@@ -24,35 +24,47 @@ export class ClientSchemaElementWidgetService {
         icon: 'add',
         title: 'client.schemaElement.create',
         tooltip: 'client.schemaElement.create.tooltip',
-        isReady: ClientSchemaElementWidgetService.schemaBoundWidgetIsReady
+        conditions: [ClientSchemaElementWidgetService.schemaBoundWidgetIsReady]
       },
       {
         id: 'update',
         icon: 'edit',
         title: 'client.schemaElement.update',
         tooltip: 'client.schemaElement.update.tooltip',
-        isReady: ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+        conditions: [
+          ClientSchemaElementWidgetService.schemaBoundWidgetIsReady,
+          ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+        ]
       },
       {
         id: 'delete',
         icon: 'delete',
         title: 'client.schemaElement.delete',
         tooltip: 'client.schemaElement.delete.tooltip',
-        isReady: ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+        conditions: [
+          ClientSchemaElementWidgetService.schemaBoundWidgetIsReady,
+          ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+        ]
       },
       {
         id: 'move',
         icon: 'pan_tool',
         title: 'client.schemaElement.move',
         tooltip: 'client.schemaElement.move.tooltip',
-        isReady: ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+        conditions: [
+          ClientSchemaElementWidgetService.schemaBoundWidgetIsReady,
+          ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+        ]
       },
       {
         id: 'save',
         icon: 'save',
         title: 'client.schemaElement.save',
         tooltip: 'client.schemaElement.save.tooltip',
-        isReady: ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+        conditions: [
+          ClientSchemaElementWidgetService.schemaBoundWidgetIsReady,
+          ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+        ]
       }
     ];
   }

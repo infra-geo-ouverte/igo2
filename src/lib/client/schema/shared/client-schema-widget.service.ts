@@ -31,7 +31,9 @@ export class ClientSchemaWidgetService {
         title: 'client.schema.create',
         tooltip: 'client.schema.create.tooltip',
         component: ClientSchemaCreateFormComponent,
-        isReady: ClientSchemaWidgetService.clientBoundWidgetIsReady
+        conditions: [
+          ClientSchemaWidgetService.clientBoundWidgetIsReady
+        ]
       },
       {
         id: 'update',
@@ -39,7 +41,10 @@ export class ClientSchemaWidgetService {
         title: 'client.schema.update',
         tooltip: 'client.schema.update.tooltip',
         component: ClientSchemaUpdateFormComponent,
-        isReady: ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        conditions: [
+          ClientSchemaWidgetService.clientBoundWidgetIsReady,
+          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        ]
       },
       {
         id: 'delete',
@@ -47,7 +52,10 @@ export class ClientSchemaWidgetService {
         title: 'client.schema.delete',
         tooltip: 'client.schema.delete.tooltip',
         component: ClientSchemaDeleteFormComponent,
-        isReady: ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        conditions: [
+          ClientSchemaWidgetService.clientBoundWidgetIsReady,
+          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        ]
       },
       {
         id: 'duplicate',
@@ -55,7 +63,10 @@ export class ClientSchemaWidgetService {
         title: 'client.schema.duplicate',
         tooltip: 'client.schema.duplicate.tooltip',
         component: ClientSchemaDuplicateFormComponent,
-        isReady: ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        conditions: [
+          ClientSchemaWidgetService.clientBoundWidgetIsReady,
+          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        ]
       },
       {
         id: 'manageFiles',
@@ -63,21 +74,30 @@ export class ClientSchemaWidgetService {
         title: 'client.schema.manageFiles',
         tooltip: 'client.schema.manageFiles.tooltip',
         component: ClientSchemaFileManagerComponent,
-        isReady: ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        conditions: [
+          ClientSchemaWidgetService.clientBoundWidgetIsReady,
+          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        ]
       },
       {
         id: 'transfer',
         icon: 'swap_horiz',
         title: 'client.schema.transfer',
         tooltip: 'client.schema.transfer.tooltip',
-        isReady: ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        conditions: [
+          ClientSchemaWidgetService.clientBoundWidgetIsReady,
+          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        ]
       },
       {
         id: 'createMap',
         icon: 'image',
         title: 'client.schema.createMap',
         tooltip: 'client.schema.createMap.tooltip',
-        isReady: ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        conditions: [
+          ClientSchemaWidgetService.clientBoundWidgetIsReady,
+          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+        ]
       }
     ];
   }

@@ -144,10 +144,11 @@ export class Editor extends EntityClass {
   private initWidgets() {
     const widgetData = this.widgetData;
     this.widgetStore.entities.forEach((widget: Widget) => {
-      let widgetIsReady = true;
-      if (widget.hasOwnProperty('isReady')) {
-        widgetIsReady = widget.isReady(widgetData);
-      }
+      const conditions = widget.conditions || [];
+      const widgetIsReady = conditions
+        .every((condition: (data: {[key: string]: any}) => boolean) => {
+          return condition(widgetData);
+        })
 
       const state = {
         disabled: !widgetIsReady,

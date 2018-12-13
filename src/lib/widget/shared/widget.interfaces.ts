@@ -12,6 +12,6 @@ export interface Widget extends EntityObject {
 
   cls?: WidgetClass;
   component?: any;
-  isReady?: (data: {[key: string]: any}) => boolean;
+  conditions?: Array<(data: {[key: string]: any}) => boolean>;
   subscribers?: { [key: string]: (event: any) => void };
 }
