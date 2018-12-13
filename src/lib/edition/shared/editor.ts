@@ -148,7 +148,7 @@ export class Editor extends EntityClass {
       const widgetIsReady = conditions
         .every((condition: (data: {[key: string]: any}) => boolean) => {
           return condition(widgetData);
-        })
+        });
 
       const state = {
         disabled: !widgetIsReady,
