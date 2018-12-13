@@ -16,12 +16,12 @@ import {
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'fadq-dynamic-container',
-  templateUrl: 'dynamic-container.component.html',
-  styleUrls: ['dynamic-container.component.scss'],
+  selector: 'fadq-dynamic-outlet',
+  templateUrl: 'dynamic-outlet.component.html',
+  styleUrls: ['dynamic-outlet.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicContainerComponent implements OnChanges, OnDestroy {
+export class DynamicOutletComponent implements OnChanges, OnDestroy {
 
   private componentRef: ComponentRef<Component>;
   private subscriptions: Subscription[] = [];

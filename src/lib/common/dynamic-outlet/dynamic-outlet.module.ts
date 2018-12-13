@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DynamicContainerComponent } from './dynamic-container.component';
+import { DynamicOutletComponent } from './dynamic-outlet.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
-    DynamicContainerComponent
+    DynamicOutletComponent
   ],
   declarations: [
-    DynamicContainerComponent
+    DynamicOutletComponent
   ]
 })
-export class FadqLibDynamicContainerModule {}
+export class FadqLibDynamicOutletModule {}

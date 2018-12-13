@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FadqLibDynamicContainerModule } from './dynamic-container/dynamic-container.module';
+import { FadqLibDynamicOutletModule } from './dynamic-outlet/dynamic-outlet.module';
 import { FadqLibSpinnerModule } from './spinner/spinner.module';
 
 @NgModule({
@@ -9,7 +9,7 @@ import { FadqLibSpinnerModule } from './spinner/spinner.module';
     CommonModule
   ],
   exports: [
-    FadqLibDynamicContainerModule,
+    FadqLibDynamicOutletModule,
     FadqLibSpinnerModule
   ],
   declarations: [],
