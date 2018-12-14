@@ -8,12 +8,19 @@
     [formControl]="control">
   <mat-select
     *ngIf="inputType === 'select'"
-    placeholder="Favorite food"
     [placeholder]="field.title"
     [formControl]="control">
     <mat-option *ngFor="let choice of inputChoices" [value]="choice.value">
       {{choice.title}}
     </mat-option>
   </mat-select>
-</mat-form-field>
 
+  <fadq-entity-form-field-geometry-input
+    *ngIf="inputType === 'geometry'"
+    [placeholder]="field.title"
+    [formControl]="control"
+    [map]="input.map"
+    [geometryType]="input.geometryType">
+  </fadq-entity-form-field-geometry-input>
+
+</mat-form-field>

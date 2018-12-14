@@ -7,7 +7,7 @@ export function createSchemaElementSurfaceLayer(): VectorLayer {
   const schemaElementSurfaceDataSource = new FeatureDataSource();
   return new VectorLayer({
     title: 'Surfaces du schéma',
-    zIndex: 101,
+    zIndex: 103,
     source: schemaElementSurfaceDataSource,
     style: createSchemaElementSurfaceLayerStyle()
   });

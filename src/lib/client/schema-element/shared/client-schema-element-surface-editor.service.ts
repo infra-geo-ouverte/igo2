@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Editor } from 'src/lib/edition';
 import { EntityStore } from 'src/lib/entity';
+import { IgoMap } from 'src/lib/map';
 import { Widget } from 'src/lib/widget';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
@@ -14,6 +15,7 @@ import { ClientSchemaElementWidgetService } from './client-schema-element-widget
 })
 export class ClientSchemaElementSurfaceEditorService extends Editor {
 
+  private map: IgoMap;
   private schema: ClientSchema;
 
   static schemaBoundWidgetIsReady = function(data: { [key: string]: any}) {
@@ -41,12 +43,17 @@ export class ClientSchemaElementSurfaceEditorService extends Editor {
     this.bindWidgetStore(widgetStore);
   }
 
+  setMap(map: IgoMap) {
+    this.map = map;
+  }
+
   setSchema(schema: ClientSchema) {
     this.schema = schema;
   }
 
   protected computeWidgetData(): Object {
     return Object.assign(super.computeWidgetData(), {
+      map: this.map,
       element: this.entity,
       schema: this.schema
     });

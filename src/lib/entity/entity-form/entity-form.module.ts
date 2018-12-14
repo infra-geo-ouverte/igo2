@@ -11,6 +11,7 @@ import {
 
 import { EntityFormComponent } from './entity-form.component';
 import { EntityFormFieldComponent } from './entity-form-field.component';
+import { EntityFormFieldGeometryInputComponent } from './entity-form-field-geometry-input.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { EntityFormFieldComponent } from './entity-form-field.component';
   exports: [EntityFormComponent],
   declarations: [
     EntityFormComponent,
-    EntityFormFieldComponent
+    EntityFormFieldComponent,
+    EntityFormFieldGeometryInputComponent
   ]
 })
 export class FadqLibEntityFormModule {}

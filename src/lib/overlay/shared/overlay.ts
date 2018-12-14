@@ -11,7 +11,6 @@ import {
 } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 
-
 export class Overlay {
 
   private map: IgoMap;

@@ -48,6 +48,8 @@ export class MapState implements OnDestroy {
     this.clientParcelLayerStore = this.createClientParcelLayerStore();
     this.clientSchemaElementSurfaceLayerStore = this.createClientSchemaElementSurfaceLayerStore();
     this.initClientLayerStoresStrategies();
+
+    this.clientState.schemaElementSurfaceEditor.setMap(this._map);
   }
 
   ngOnDestroy() {

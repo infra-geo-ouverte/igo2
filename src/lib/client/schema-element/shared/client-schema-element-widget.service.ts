@@ -2,6 +2,10 @@ import { Injectable} from '@angular/core';
 
 import { Widget } from 'src/lib/widget';
 
+import {
+  ClientSchemaElementSurfaceCreateFormComponent
+} from '../schema-element-surface-create-form/client-schema-element-surface-create-form.component';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +28,7 @@ export class ClientSchemaElementWidgetService {
         icon: 'add',
         title: 'client.schemaElement.create',
         tooltip: 'client.schemaElement.create.tooltip',
+        component: ClientSchemaElementSurfaceCreateFormComponent,
         conditions: [ClientSchemaElementWidgetService.schemaBoundWidgetIsReady]
       },
       {

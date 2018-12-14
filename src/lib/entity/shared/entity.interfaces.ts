@@ -1,4 +1,8 @@
+import OlGeometryType from 'ol/geom/GeometryType';
+
 import { ValidatorFn } from '@angular/forms';
+
+import { IgoMap } from 'src/lib/map/shared/map';
 
 export interface EntityMeta {
   dataType?: string;
@@ -80,9 +84,15 @@ export interface EntityFormFieldSelectInput extends EntityFormFieldInput {
   choices: EntityFormFieldSelectInputChoice[];
 }
 
+export interface EntityFormFieldGeometryInput extends EntityFormFieldInput {
+  map: IgoMap;
+  geometryType: OlGeometryType;
+}
+
 export type EntityFormFieldAnyInput =
   EntityFormFieldInput |
-  EntityFormFieldSelectInput;
+  EntityFormFieldSelectInput |
+  EntityFormFieldGeometryInput;
 
 export interface EntityFormField<T extends EntityFormFieldInput = EntityFormFieldAnyInput> {
   name: string;

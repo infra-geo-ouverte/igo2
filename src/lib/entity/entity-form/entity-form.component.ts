@@ -82,7 +82,7 @@ export class EntityFormComponent implements OnChanges {
   }
 
   getFieldControl(field: EntityFormField): FormControl {
-    return this.form.get(field.name) as FormControl;
+    return this.form.controls[field.name] as FormControl;
   }
 
   getFieldColSpan(field: EntityFormField): number {
