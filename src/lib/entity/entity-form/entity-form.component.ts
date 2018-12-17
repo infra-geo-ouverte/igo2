@@ -10,7 +10,12 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { Entity, EntityFormTemplate, EntityFormField } from '../shared';
+import {
+  Entity,
+  EntityFormTemplate,
+  EntityFormField,
+  getEntityProperty
+} from '../shared';
 
 @Component({
   selector: 'fadq-entity-form',
@@ -27,6 +32,9 @@ export class EntityFormComponent implements OnChanges {
     return this._entity;
   }
   set entity(value: Entity | undefined) {
+    if (this.entity !== undefined) {
+      return;
+    }
     this._entity = value;
   }
   private _entity: Entity | undefined;
@@ -36,6 +44,9 @@ export class EntityFormComponent implements OnChanges {
     return this._template;
   }
   set template(value: EntityFormTemplate) {
+    if (this.template !== undefined) {
+      return;
+    }
     this._template = value;
   }
   private _template: EntityFormTemplate;
@@ -55,12 +66,20 @@ export class EntityFormComponent implements OnChanges {
     return this.template.cancelLabel ? this.template.cancelLabel : 'CANCEL';
   }
 
+  get dirty(): boolean {
+    return this.form ? this.form.dirty : false;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
+    if (this.dirty) {
+      return;
+    }
+
     const template = changes.template;
     const entity = changes.entity;
 
@@ -124,7 +143,7 @@ export class EntityFormComponent implements OnChanges {
     }
     this.template.fields.forEach((field: EntityFormField) => {
       const control = this.getFieldControl(field);
-      control.setValue(this.entity[field.name]);
+      control.setValue(getEntityProperty(this.entity, field.name));
     });
   }
 }

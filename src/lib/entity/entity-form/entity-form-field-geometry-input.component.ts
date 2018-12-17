@@ -2,22 +2,24 @@ import {
   Component,
   Input,
   OnInit,
-  AfterViewInit,
   OnDestroy,
   HostBinding,
   Optional,
   Self,
-  ElementRef
+  ChangeDetectorRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { NgControl, ControlValueAccessor } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 
-import OlWKT from 'ol/format/WKT';
-import OlGeometry from 'ol/geom/Geometry';
+import { FeatureGeometry as GeoJSONGeometry } from '@igo2/geo';
+
+import OlGeoJSON from 'ol/format/GeoJSON';
 import OlGeometryType from 'ol/geom/GeometryType';
 import OlFeature from 'ol/Feature';
 import OlDraw from 'ol/interaction/Draw';
+import OlModify from 'ol/interaction/Modify';
 import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
 import { unByKey } from 'ol/Observable';
@@ -31,41 +33,49 @@ import { MatFormFieldControl } from '@angular/material';
   providers: [{
     provide: MatFormFieldControl,
     useExisting: EntityFormFieldGeometryInputComponent
-  }]
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntityFormFieldGeometryInputComponent
-  implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
+  implements OnInit, OnDestroy, ControlValueAccessor {
 
   static nextId = 0;
 
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
   public focused = false;
   public errorState = false;
-  public controlType = 'geometry-input';
-  public stateChanges = new Subject<void>();
-  public onChange: any = () => {};
-  public onTouched: any = () => {};
+  readonly controlType = 'geometry-input';
+  readonly stateChanges = new Subject<void>();
 
-  private olWKT = new OlWKT();
-  private olDrawLayer: OlVectorLayer;
+  private olOverlayLayer: OlVectorLayer;
   private olDrawInteraction: OlDraw;
-  private onDrawStartKey: string;
   private onDrawEndKey: string;
+  private olModifyInteraction: OlDraw;
+  private onModifyEndKey: string;
+  private olGeoJSON = new OlGeoJSON();
+  private ready = false;
 
+  /**
+   * Implemented as part of ControlValueAccessor.
+   */
   @Input()
-  get value(): OlGeometry {
+  get value(): GeoJSONGeometry {
     return this._value;
   }
-  set value(value: OlGeometry) {
-    if (value !== this._value) {
-      const feature = new OlFeature({geometry: value});
-      this.olDrawSource.clear();
-      this.olDrawSource.addFeature(feature);
-
+  set value(value: GeoJSONGeometry) {
+    if (this.ready === false) {
       this._value = value;
-      this.onChange(this._value);
+      return;
     }
+
+    this.onChange(value);
+    this._value = value;
+    this.toggleInteraction();
+    this.cdRef.detectChanges();
   }
-  private _value: OlGeometry;
+  private _value: GeoJSONGeometry;
 
   @Input()
   get map(): IgoMap {
@@ -86,63 +96,103 @@ export class EntityFormFieldGeometryInputComponent
   private _geometryType: OlGeometryType;
 
   @Input()
-  get placeholder() {
+  get projection(): string {
+    return this._projection;
+  }
+  set projection(value: string) {
+    this._projection = value;
+  }
+  private _projection = 'EPSG:4326';
+
+  @Input()
+  get tooltip(): string {
+    return this._tooltip;
+  }
+  set tooltip(value: string) {
+    this._tooltip = value;
+    this.stateChanges.next();
+  }
+  private _tooltip: string;
+
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
+  @Input()
+  get placeholder(): string {
     return this._placeholder;
   }
-  set placeholder(value) {
+  set placeholder(value: string) {
     this._placeholder = value;
     this.stateChanges.next();
   }
   private _placeholder: string;
 
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
   @Input()
-  get required() {
+  get required(): boolean {
     return this._required;
   }
-  set required(value) {
-    this._required = value
+  set required(value: boolean) {
+    this._required = value;
     this.stateChanges.next();
   }
   private _required = false;
 
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
   @Input()
-  get disabled() {
+  get disabled(): boolean {
     return this._disabled;
   }
-  set disabled(value) {
+  set disabled(value: boolean) {
     this._disabled = value;
     this.stateChanges.next();
   }
   private _disabled = false;
 
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
   @HostBinding()
   id = `geometry-input-${EntityFormFieldGeometryInputComponent.nextId++}`;
 
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
   @HostBinding('attr.aria-describedby')
   describedBy = '';
 
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
   @HostBinding('class.floating')
   get shouldLabelFloat() {
-    return !this.empty;
+    return this.representation.length > 0;
   }
 
-  get olDrawSource(): OlVectorSource {
-    return this.olDrawLayer.getSource();
-  }
-
-  get representation(): string {
-    if (this.value !== undefined) {
-      return this.olWKT.writeGeometry(this.value).substr(0, 30) + '...';
-    }
-    return '';
-  }
-
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
   get empty() {
     return this.value === undefined;
   }
 
+  get olOverlaySource(): OlVectorSource {
+    return this.olOverlayLayer.getSource();
+  }
+
+  get representation(): string {
+    if (this.value !== undefined) {
+      return this.geometryType + '...';
+    }
+    return this.tooltip || '...';
+  }
+
   constructor(
-    private elementRef: ElementRef<HTMLElement>,
+    private cdRef: ChangeDetectorRef,
     @Optional() @Self() public ngControl: NgControl
   ) {
     if (this.ngControl !== undefined) {
@@ -153,73 +203,143 @@ export class EntityFormFieldGeometryInputComponent
   }
 
   ngOnInit() {
-    this.addOlDrawLayer();
-    this.olDrawInteraction = this.createOlDrawInteraction();
-  }
+    this.addOlOverlayLayer();
+    if (this.value !== undefined) {
+      const geometry = this.olGeoJSON.readGeometry(this.value, {
+        dataProjection: this.projection,
+        featureProjection: this.map.projection
+      });
+      const feature = new OlFeature({geometry});
+      this.olOverlaySource.clear();
+      this.olOverlaySource.addFeature(feature);
+    }
+    this.toggleInteraction();
 
-  ngAfterViewInit() {
-    this.activateOlDrawInteraction();
+    this.ready = true;
   }
 
   ngOnDestroy() {
-    this.map.ol.removeLayer(this.olDrawLayer);
-    unByKey(this.onDrawStartKey);
-    unByKey(this.onDrawEndKey);
-    this.map.ol.removeInteraction(this.olDrawInteraction);
+    this.removeOlDrawInteraction();
+    this.removeOlModifyInteraction();
+    this.map.ol.removeLayer(this.olOverlayLayer);
     this.stateChanges.complete();
   }
 
+  /**
+   * Implemented as part of ControlValueAccessor.
+   */
   registerOnChange(fn: Function) {
     this.onChange = fn;
   }
+  private onChange: any = () => {};
 
+  /**
+   * Implemented as part of ControlValueAccessor.
+   */
   registerOnTouched(fn: Function) {
     this.onTouched = fn;
   }
+  private onTouched: any = () => {};
 
-  writeValue(value: OlGeometry) {
+  /**
+   * Implemented as part of ControlValueAccessor.
+   */
+  writeValue(value: GeoJSONGeometry) {
     if (value) {
       this.value = value;
     }
   }
 
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
   setDescribedByIds(ids: string[]) {
     this.describedBy = ids.join(' ');
   }
 
+  /**
+   * Implemented as part of MatFormFieldControl.
+   */
   onContainerClick(event: MouseEvent) {}
 
-  private addOlDrawLayer(): OlVectorLayer {
-    const olDrawLayer = new OlVectorLayer({
+  private addOlOverlayLayer(): OlVectorLayer {
+    this.olOverlayLayer = new OlVectorLayer({
       source: new OlVectorSource(),
       zIndex: 500
     });
-    this.map.ol.addLayer(olDrawLayer);
-    this.olDrawLayer = olDrawLayer;
+    this.map.ol.addLayer(this.olOverlayLayer);
   }
 
-  private createOlDrawInteraction(): OlDraw {
-    return new OlDraw({
+  private addOlDrawInteraction() {
+    const olDrawInteraction = new OlDraw({
       type: this.geometryType,
-      source: this.olDrawSource
+      source: this.olOverlaySource
     });
-  }
 
-  private activateOlDrawInteraction() {
-    this.onDrawStartKey = this.olDrawInteraction.on('drawstart', (event) => {
-      this.onDrawStart(event);
-    });
-    this.onDrawEndKey = this.olDrawInteraction.on('drawend', (event) => {
+    this.onDrawEndKey = olDrawInteraction.on('drawend', (event) => {
       this.onDrawEnd(event);
     });
-    this.map.ol.addInteraction(this.olDrawInteraction);
+    this.map.ol.addInteraction(olDrawInteraction);
+    this.olDrawInteraction = olDrawInteraction;
   }
 
-  private onDrawStart(event) {
-    this.olDrawSource.clear();
+  private removeOlDrawInteraction() {
+    if (this.olDrawInteraction === undefined) {
+      return;
+    }
+
+    unByKey(this.onDrawEndKey);
+    this.map.ol.removeInteraction(this.olDrawInteraction);
+    this.olDrawInteraction = undefined;
   }
 
   private onDrawEnd(event) {
-    this.value = event.feature.getGeometry();
+    const geometry = event.feature.getGeometry();
+    const value = this.olGeoJSON.writeGeometryObject(geometry, {
+      featureProjection: this.map.projection,
+      dataProjection: this.projection
+    });
+    this.writeValue(value);
+  }
+
+  private addOlModifyInteraction() {
+    const olModifyInteraction = new OlModify({
+      source: this.olOverlaySource
+    });
+
+    this.onModifyEndKey = olModifyInteraction.on('modifyend', (event) => {
+      this.onModifyEnd(event);
+    });
+    this.map.ol.addInteraction(olModifyInteraction);
+    this.olModifyInteraction = olModifyInteraction;
+  }
+
+  private removeOlModifyInteraction() {
+    if (this.olModifyInteraction === undefined) {
+      return;
+    }
+
+    unByKey(this.onModifyEndKey);
+    this.map.ol.removeInteraction(this.olModifyInteraction);
+    this.olModifyInteraction = undefined;
+  }
+
+  private onModifyEnd(event) {
+    const geometry = event.features.item(0).getGeometry();
+    const value = this.olGeoJSON.writeGeometryObject(geometry, {
+      featureProjection: this.map.projection,
+      dataProjection: this.projection
+    });
+    this.writeValue(value);
+  }
+
+  private toggleInteraction() {
+    if (this.value === undefined && this.olDrawInteraction === undefined) {
+      this.removeOlModifyInteraction();
+      this.addOlDrawInteraction();
+    } else if (this.value !== undefined && this.olModifyInteraction === undefined) {
+      this.removeOlDrawInteraction();
+      this.addOlModifyInteraction();
+    }
   }
 }

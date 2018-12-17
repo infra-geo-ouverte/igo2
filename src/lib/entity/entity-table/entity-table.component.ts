@@ -12,14 +12,14 @@ import {
 } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import t from 'typy';
 
 import {
   Entity,
   EntityTableTemplate,
   EntityTableColumn,
   EntityStore,
-  EntityStoreController
+  EntityStoreController,
+  getEntityProperty
 } from '../shared';
 
 @Component({
@@ -108,7 +108,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   valueAccessor(entity: Entity, column: EntityTableColumn) {
-    return t(entity, column.name).safeObject;
+    return getEntityProperty(entity, column.name);
   }
 
   columnIsSortable(column: EntityTableColumn): boolean {

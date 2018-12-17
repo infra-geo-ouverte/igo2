@@ -5,8 +5,8 @@ export interface Feature extends EntityObject {
   type: string;
   projection: string;
   geometry: FeatureGeometry;
-  extent: [number, number, number, number];
   properties: { [key: string]: any };
+  extent?: [number, number, number, number];
 }
 
 export interface FeatureGeometry {

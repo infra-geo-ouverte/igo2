@@ -11,6 +11,10 @@ export function entitiesAreTheSame(entity1: Entity, entity2: Entity | undefined)
   return getEntityId(entity1) === getEntityId(entity2);
 }
 
+export function getEntityProperty(entity: Entity, property): any {
+  return t(entity, property).safeObject;
+}
+
 export function getEntityId(entity: Entity): string {
   const meta = entity.meta || {};
 
@@ -19,7 +23,7 @@ export function getEntityId(entity: Entity): string {
     id = meta.id;
   } else {
     const idProperty = meta.idProperty || 'id';
-    id = t(entity, idProperty).safeObject;
+    id = getEntityProperty(entity, idProperty);
   }
 
   return id === undefined ? undefined : String(id);
@@ -33,7 +37,7 @@ export function getEntityTitle(entity: Entity): string {
     title = meta.title;
   } else {
     const titleProperty = meta.titleProperty || 'title';
-    title = t(entity, titleProperty).safeObject;
+    title = getEntityProperty(entity, titleProperty);
   }
 
   return title;
@@ -47,7 +51,7 @@ export function getEntityTitleHtml(entity: Entity): string {
     titleHtml = meta.titleHtml;
   } else {
     const titleHtmlProperty = meta.titleProperty || 'titleHtml';
-    titleHtml = t(entity, titleHtmlProperty).safeObject;
+    titleHtml = getEntityProperty(entity, titleHtmlProperty);
   }
 
   return titleHtml;
@@ -61,7 +65,7 @@ export function getEntityIcon(entity: Entity): string {
     icon = meta.icon;
   } else {
     const iconProperty = meta.iconProperty || 'icon';
-    icon = t(entity, iconProperty).safeObject;
+    icon = getEntityProperty(entity, iconProperty);
   }
 
   return icon;
@@ -73,8 +77,8 @@ export function sortEntities(
   direction: string
 ): Entity[] {
   return entities.sort((entity1: Entity, entity2: Entity) => {
-    const property1 = t(entity1, property).safeObject;
-    const property2 = t(entity2, property).safeObject;
+    const property1 = getEntityProperty(entity1, property);
+    const property2 = getEntityProperty(entity2, property);
     return ObjectUtils.naturalCompare(property1, property2, direction);
   });
 }

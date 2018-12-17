@@ -1,25 +1,26 @@
 
 
-<mat-form-field>
+<mat-form-field *ngIf="inputType === 'text'">
   <input
-    *ngIf="inputType === 'text'"
     matInput
     [placeholder]="field.title"
     [formControl]="control">
+</mat-form-field>
+<mat-form-field *ngIf="inputType === 'select'">
   <mat-select
-    *ngIf="inputType === 'select'"
     [placeholder]="field.title"
     [formControl]="control">
     <mat-option *ngFor="let choice of inputChoices" [value]="choice.value">
       {{choice.title}}
     </mat-option>
   </mat-select>
-
+</mat-form-field>
+<mat-form-field *ngIf="inputType === 'geometry'">
   <fadq-entity-form-field-geometry-input
-    *ngIf="inputType === 'geometry'"
     [formControl]="control"
+    [placeholder]="field.title"
+    [tooltip]="input.tooltip"
     [map]="input.map"
     [geometryType]="input.geometryType">
   </fadq-entity-form-field-geometry-input>
-
 </mat-form-field>

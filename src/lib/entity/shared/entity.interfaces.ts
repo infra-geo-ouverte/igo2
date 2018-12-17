@@ -87,6 +87,7 @@ export interface EntityFormFieldSelectInput extends EntityFormFieldInput {
 export interface EntityFormFieldGeometryInput extends EntityFormFieldInput {
   map: IgoMap;
   geometryType: OlGeometryType;
+  tooltip?: string;
 }
 
 export type EntityFormFieldAnyInput =
