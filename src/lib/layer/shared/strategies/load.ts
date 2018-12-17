@@ -34,6 +34,7 @@ export class LayerStoreLoadStrategy implements LayerStoreStrategy {
     if (features.length === 0) {
       layerStore.clearLayer();
     } else {
+      console.log(features)
       layerStore.setLayerFeatures(features, FeatureMotion.Default);
     }
   }

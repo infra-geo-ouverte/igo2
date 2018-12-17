@@ -1,11 +1,3 @@
-import OlWKT from 'ol/format/WKT';
-import OlGeometry from 'ol/geom/Geometry';
-import OlGeometryType from 'ol/geom/GeometryType';
-import OlFeature from 'ol/Feature';
-import OlDraw from 'ol/interaction/Draw';
-import OlVectorSource from 'ol/source/Vector';
-import OlVectorLayer from 'ol/layer/Vector';
-
 import {
   Component,
   Input,
@@ -17,12 +9,18 @@ import {
   Self,
   ElementRef
 } from '@angular/core';
-import {
-  NgControl,
-  ControlValueAccessor
-} from '@angular/forms';
+import { NgControl, ControlValueAccessor } from '@angular/forms';
 
 import { Subject } from 'rxjs';
+
+import OlWKT from 'ol/format/WKT';
+import OlGeometry from 'ol/geom/Geometry';
+import OlGeometryType from 'ol/geom/GeometryType';
+import OlFeature from 'ol/Feature';
+import OlDraw from 'ol/interaction/Draw';
+import OlVectorSource from 'ol/source/Vector';
+import OlVectorLayer from 'ol/layer/Vector';
+import { unByKey } from 'ol/Observable';
 
 import { IgoMap } from 'src/lib/map';
 import { MatFormFieldControl } from '@angular/material';
@@ -30,9 +28,10 @@ import { MatFormFieldControl } from '@angular/material';
 @Component({
   selector: 'fadq-entity-form-field-geometry-input',
   templateUrl: './entity-form-field-geometry-input.component.html',
-  providers: [
-    {provide: MatFormFieldControl, useExisting: EntityFormFieldGeometryInputComponent}
-  ]
+  providers: [{
+    provide: MatFormFieldControl,
+    useExisting: EntityFormFieldGeometryInputComponent
+  }]
 })
 export class EntityFormFieldGeometryInputComponent
   implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
@@ -116,6 +115,17 @@ export class EntityFormFieldGeometryInputComponent
   }
   private _disabled = false;
 
+  @HostBinding()
+  id = `geometry-input-${EntityFormFieldGeometryInputComponent.nextId++}`;
+
+  @HostBinding('attr.aria-describedby')
+  describedBy = '';
+
+  @HostBinding('class.floating')
+  get shouldLabelFloat() {
+    return !this.empty;
+  }
+
   get olDrawSource(): OlVectorSource {
     return this.olDrawLayer.getSource();
   }
@@ -129,15 +139,6 @@ export class EntityFormFieldGeometryInputComponent
 
   get empty() {
     return this.value === undefined;
-  }
-
-  @HostBinding() id = `entity-form-field-geometry-input-${EntityFormFieldGeometryInputComponent.nextId++}`;
-
-  @HostBinding('attr.aria-describedby') describedBy = '';
-
-  @HostBinding('class.floating')
-  get shouldLabelFloat() {
-    return !this.empty;
   }
 
   constructor(
@@ -162,8 +163,8 @@ export class EntityFormFieldGeometryInputComponent
 
   ngOnDestroy() {
     this.map.ol.removeLayer(this.olDrawLayer);
-    this.olDrawInteraction.unByKey(this.onDrawStartKey);
-    this.olDrawInteraction.unByKey(this.onDrawEndKey);
+    unByKey(this.onDrawStartKey);
+    unByKey(this.onDrawEndKey);
     this.map.ol.removeInteraction(this.olDrawInteraction);
     this.stateChanges.complete();
   }
@@ -177,7 +178,6 @@ export class EntityFormFieldGeometryInputComponent
   }
 
   writeValue(value: OlGeometry) {
-    console.log('write');
     if (value) {
       this.value = value;
     }
@@ -187,12 +187,7 @@ export class EntityFormFieldGeometryInputComponent
     this.describedBy = ids.join(' ');
   }
 
-  onContainerClick(event: MouseEvent) {
-    console.log(event);
-    // if ((event.target as Element).tagName.toLowerCase() != 'input') {
-    //   this.elementRef.nativeElement.querySelector('input').focus();
-    // }
-  }
+  onContainerClick(event: MouseEvent) {}
 
   private addOlDrawLayer(): OlVectorLayer {
     const olDrawLayer = new OlVectorLayer({

@@ -10,15 +10,17 @@ import {
 
 import { Subject } from 'rxjs';
 
+import OLGeoJSON from 'ol/format/GeoJSON';
+
+import { uuid } from '@igo2/utils';
+
 import { EntityStore, EntityFormTemplate, getEntityId } from 'src/lib/entity';
+import { FEATURE } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
-import {
-  ClientSchemaElementSurface,
-  ClientSchemaElementSurfaceCreateData
-} from '../shared/client-schema-element.interfaces';
+import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementSurfaceService } from '../shared/client-schema-element-surface.service';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
@@ -84,13 +86,8 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
   }
 
   onSubmit(event: {entity: undefined, data: { [key: string]: any }}) {
-    console.log(event.data);
-    const properties = Object.assign({
-      idSchema: getEntityId(this.schema)
-    }, event.data);
-    // const feature = Object.create({properties}) as ClientSchemaElementSurfaceCreateData;
-    // this.clientSchemaElementSurfaceService.create(data)
-    //   .subscribe((element: ClientSchemElementSurface) => this.onSubmitSuccess(element));
+    const element = this.parseData(event.data);
+    this.onSubmitSuccess(element);
   }
 
   onCancel() {
@@ -101,7 +98,41 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
     if (this.store !== undefined) {
       this.store.addEntities([element], true);
     }
+    // if (this.transaction !== undefined) {
+    //   this.store.insert(element);
+    // }
     this.complete.emit();
+  }
+
+  private parseData(data: { [key: string]: any }): ClientSchemaElementSurface {
+    const olGeoJSON = new OLGeoJSON();
+    const properties = {
+      idSchema: 1 //getEntityId(this.schema)
+    };
+
+    const propertySuffix = 'properties.';
+    Object.entries(data).forEach((entry: [string, any]) => {
+      const [key, value] = entry;
+      if (key.startsWith(propertySuffix)) {
+        const property = key.substr(propertySuffix.length);
+        properties[property] = value;
+      }
+    });
+
+    const elementProjection =   'EPSG:4326';
+
+    return {
+      meta: {
+        id: uuid()
+      },
+      type: FEATURE,
+      geometry: olGeoJSON.writeGeometryObject(data.geometry, {
+        featureProjection: this.map.projection,
+        dataProjection: elementProjection
+      }),
+      projection: elementProjection,
+      properties: properties
+    };
   }
 
 }

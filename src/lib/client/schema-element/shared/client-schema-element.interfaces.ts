@@ -65,5 +65,3 @@ export interface  ClientSchemaElementPointListResponseItem extends ClientSchemaE
 export interface  ClientSchemaElementLineListResponseItem extends ClientSchemaElementLine {}
 
 export interface  ClientSchemaElementSurfaceListResponseItem extends ClientSchemaElementSurface {}
-
-export interface ClientSchemaElementSurfaceCreateData extends ClientSchemaElementSurface {}

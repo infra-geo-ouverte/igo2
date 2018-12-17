@@ -23,12 +23,13 @@ export class ClientSchemaElementFormService {
 
   buildCreateSurfaceForm(igoMap: IgoMap): Observable<EntityFormTemplate> {
     const fields$ = zip(
+        this.createGeometryField({input: {map: igoMap, geometryType: 'Polygon'}}),
       this.createIdField({options: {disabled: true}}),
       this.createTypeElementField(),
       this.createDescriptionField(),
       this.createEtiquetteField(),
       this.createAnneeImageField(),
-      this.createGeometryField({input: {map: igoMap, geometryType: 'Polygon'}})
+
     );
     return fields$.pipe(
       map((fields: EntityFormField[]) => {
@@ -104,7 +105,11 @@ export class ClientSchemaElementFormService {
   private createGeometryField(partial?: PartialFormField): Observable<EntityFormField> {
     return of(this.createField({
       name: 'geometry',
-      title: 'Geometry',
+      title: 'Géometrie',
+      options:  {
+        cols: 2,
+        validator: Validators.required
+      },
       input: {
         type: 'geometry'
       }
