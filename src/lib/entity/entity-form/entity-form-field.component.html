@@ -24,3 +24,9 @@
     [geometryType]="input.geometryType">
   </fadq-entity-form-field-geometry-input>
 </mat-form-field>
+<mat-checkbox
+  *ngIf="inputType === 'checkbox'"
+  [formControl]="control"
+  [labelPosition]="input.labelPosition">
+  {{field.title}}
+</mat-checkbox>
