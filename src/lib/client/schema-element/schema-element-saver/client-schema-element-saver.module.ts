@@ -8,8 +8,8 @@ import { FadqLibEntityFormModule } from 'src/lib/entity/entity-form/entity-form.
 import { FadqLibEntityTableModule } from 'src/lib/entity/entity-table/entity-table.module';
 
 import {
-  ClientSchemaElementSurfaceSaverComponent
-} from './client-schema-element-surface-saver.component';
+  ClientSchemaElementSaverComponent
+} from './client-schema-element-saver.component';
 
 @NgModule({
   imports: [
@@ -21,13 +21,13 @@ import {
     FadqLibEntityTableModule
   ],
   exports: [
-    ClientSchemaElementSurfaceSaverComponent
+    ClientSchemaElementSaverComponent
   ],
   declarations: [
-    ClientSchemaElementSurfaceSaverComponent
+    ClientSchemaElementSaverComponent
   ],
   entryComponents: [
-    ClientSchemaElementSurfaceSaverComponent
+    ClientSchemaElementSaverComponent
   ]
 })
-export class FadqLibClientSchemaElementSurfaceSaverModule {}
+export class FadqLibClientSchemaElementSaverModule {}

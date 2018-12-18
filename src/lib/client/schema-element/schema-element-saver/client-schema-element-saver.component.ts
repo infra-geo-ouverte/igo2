@@ -20,17 +20,17 @@ import {
 import { WidgetComponent } from 'src/lib/widget';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
-import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
+import { AnyClientSchemaElement } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { ClientSchemaElementTransactionSerializer } from '../shared/client-schema-element.utils';
 
 @Component({
-  selector: 'fadq-client-schema-element-surface-saver',
-  templateUrl: './client-schema-element-surface-saver.component.html',
-  styleUrls: ['./client-schema-element-surface-saver.component.scss'],
+  selector: 'fadq-client-schema-element-saver',
+  templateUrl: './client-schema-element-saver.component.html',
+  styleUrls: ['./client-schema-element-saver.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSurfaceSaverComponent implements WidgetComponent {
+export class ClientSchemaElementSaverComponent implements WidgetComponent {
 
   static operationIcons = {
     [EntityOperationType.Insert]: 'add',
@@ -47,7 +47,7 @@ export class ClientSchemaElementSurfaceSaverComponent implements WidgetComponent
         title: 'Opération',
         renderer: EntityTableColumnRenderer.Icon,
         valueAccessor: (operation: EntityOperation) => {
-          return ClientSchemaElementSurfaceSaverComponent.operationIcons[operation.type];
+          return ClientSchemaElementSaverComponent.operationIcons[operation.type];
         }
       },
       {
@@ -89,15 +89,15 @@ export class ClientSchemaElementSurfaceSaverComponent implements WidgetComponent
   }
   private _transaction;
 
-  @Output() complete = new EventEmitter<ClientSchemaElementSurface>();
+  @Output() complete = new EventEmitter<AnyClientSchemaElement>();
   @Output() cancel = new EventEmitter();
 
   get tableTemplate(): EntityTableTemplate {
-    return ClientSchemaElementSurfaceSaverComponent.tableTemplate;
+    return ClientSchemaElementSaverComponent.tableTemplate;
   }
 
   get formTemplate(): EntityFormTemplate {
-    return ClientSchemaElementSurfaceSaverComponent.formTemplate;
+    return ClientSchemaElementSaverComponent.formTemplate;
   }
 
   constructor(

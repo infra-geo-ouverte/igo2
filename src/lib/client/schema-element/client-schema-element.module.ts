@@ -11,11 +11,12 @@ import { ClientSchemaElementWidgetService } from './shared/client-schema-element
 import { ClientSchemaElementSurfaceEditorService } from './shared/client-schema-element-surface-editor.service';
 
 import {
+  FadqLibClientSchemaElementSaverModule
+} from './schema-element-saver/client-schema-element-saver.module';
+import {
   FadqLibClientSchemaElementSurfaceCreateFormModule
 } from './schema-element-surface-create-form/client-schema-element-surface-create-form.module';
-import {
-  FadqLibClientSchemaElementSurfaceSaverModule
-} from './schema-element-surface-saver/client-schema-element-surface-saver.module';
+
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import {
   ],
   exports: [
     FadqLibClientSchemaElementSurfaceCreateFormModule,
-    FadqLibClientSchemaElementSurfaceSaverModule
+    FadqLibClientSchemaElementSaverModule
   ],
   declarations: []
 })

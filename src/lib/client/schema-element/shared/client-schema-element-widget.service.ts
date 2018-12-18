@@ -3,11 +3,12 @@ import { Injectable} from '@angular/core';
 import { Widget } from 'src/lib/widget';
 
 import {
+  ClientSchemaElementSaverComponent
+} from '../schema-element-saver/client-schema-element-saver.component';
+import {
   ClientSchemaElementSurfaceCreateFormComponent
 } from '../schema-element-surface-create-form/client-schema-element-surface-create-form.component';
-import {
-  ClientSchemaElementSurfaceSaverComponent
-} from '../schema-element-surface-saver/client-schema-element-surface-saver.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +74,7 @@ export class ClientSchemaElementWidgetService {
         icon: 'save',
         title: 'client.schemaElement.save',
         tooltip: 'client.schemaElement.save.tooltip',
-        component: ClientSchemaElementSurfaceSaverComponent,
+        component: ClientSchemaElementSaverComponent,
         conditions: [
           ClientSchemaElementWidgetService.schemaIsDefined,
           ClientSchemaElementWidgetService.transactionIsNotEmpty
