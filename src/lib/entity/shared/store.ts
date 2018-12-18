@@ -83,23 +83,23 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     }
   }
 
-  addEntities(entities: T[], soft = false) {
-    this.setEntities(this.entities.concat(entities), soft);
+  addEntities(entities: T[]) {
+    this.setEntities(this.entities.concat(entities), true);
   }
 
-  putEntities(entities: T[], soft = false) {
+  putEntities(entities: T[]) {
     const entitiesIds = entities.map(getEntityId);
     const newEntities = this.entities.slice()
       .filter((entity: Entity) => entitiesIds.indexOf(getEntityId(entity)) < 0)
       .concat(entities);
-    this.setEntities(newEntities, soft);
+    this.setEntities(newEntities, true);
   }
 
-  removeEntities(entities: T[], soft = false) {
+  removeEntities(entities: T[]) {
     const entitiesIds = entities.map(getEntityId);
     const newEntities = this.entities.slice()
       .filter((entity: Entity) => entitiesIds.indexOf(getEntityId(entity)) < 0);
-    this.setEntities(newEntities, soft);
+    this.setEntities(newEntities, true);
   }
 
   getEntityById(id: string): T {

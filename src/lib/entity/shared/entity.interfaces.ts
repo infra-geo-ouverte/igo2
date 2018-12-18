@@ -4,6 +4,12 @@ import { ValidatorFn } from '@angular/forms';
 
 import { IgoMap } from 'src/lib/map/shared/map';
 
+import {
+  EntityTableColumnRenderer,
+  EntityOperationType
+} from './entity.enums';
+import { EntityStore } from './store';
+
 export interface EntityMeta {
   dataType?: string;
   id?: string;
@@ -45,10 +51,14 @@ export interface EntityTableTemplate {
 export interface EntityTableColumn {
   name: string;
   title: string;
+  renderer?: EntityTableColumnRenderer;
+  valueAccessor?: (entity: Entity) => any;
   visible?: boolean;
-  html?: boolean;
   sort?: boolean;
   filterable?: boolean;
+  cellClassFunc?: (entity: Entity) => {
+    [key: string]: boolean;
+  };
 }
 
 export interface EntitySortClause {
@@ -90,9 +100,14 @@ export interface EntityFormFieldGeometryInput extends EntityFormFieldInput {
   tooltip?: string;
 }
 
+export interface EntityFormFieldCheckboxInput extends EntityFormFieldInput {
+  labelPosition?: 'before' | 'after';
+}
+
 export type EntityFormFieldAnyInput =
   EntityFormFieldInput |
   EntityFormFieldSelectInput |
+  EntityFormFieldCheckboxInput |
   EntityFormFieldGeometryInput;
 
 export interface EntityFormField<T extends EntityFormFieldInput = EntityFormFieldAnyInput> {
@@ -100,4 +115,18 @@ export interface EntityFormField<T extends EntityFormFieldInput = EntityFormFiel
   title: string;
   input?: T;
   options?: EntityFormFieldOptions;
+}
+
+export interface EntityOperation extends EntityObject {
+  id: string;
+  entityId: string;
+  type: EntityOperationType;
+  previous: Entity | undefined;
+  current: Entity | undefined;
+  store?: EntityStore<Entity>;
+}
+
+export interface EntityOperationState extends State {
+  added: boolean;
+  canceled: boolean;
 }
