@@ -60,16 +60,6 @@ export class ClientSchemaElementWidgetService {
         ]
       },
       {
-        id: 'move',
-        icon: 'pan_tool',
-        title: 'client.schemaElement.move',
-        tooltip: 'client.schemaElement.move.tooltip',
-        conditions: [
-          ClientSchemaElementWidgetService.schemaIsDefined,
-          ClientSchemaElementWidgetService.elementIsDefined
-        ]
-      },
-      {
         id: 'save',
         icon: 'save',
         title: 'client.schemaElement.save',

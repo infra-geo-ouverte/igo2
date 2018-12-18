@@ -94,11 +94,7 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
   }
 
   private onSubmitSuccess(element: ClientSchemaElementSurface) {
-    if (this.transaction !== undefined) {
-      this.transaction.insert(element, this.store);
-    } else if (this.store !== undefined) {
-      this.store.addEntities([element]);
-    }
+    this.transaction.insert(element, this.store);
     this.complete.emit();
   }
 
