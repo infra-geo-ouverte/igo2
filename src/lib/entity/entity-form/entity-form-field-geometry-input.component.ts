@@ -18,8 +18,11 @@ import { FeatureGeometry as GeoJSONGeometry } from '@igo2/geo';
 import OlGeoJSON from 'ol/format/GeoJSON';
 import OlGeometryType from 'ol/geom/GeometryType';
 import OlFeature from 'ol/Feature';
+import OlInteraction from 'ol/interaction/Interaction';
+import OlDoubleClickZoom from 'ol/interaction/DoubleClickZoom';
 import OlDraw from 'ol/interaction/Draw';
 import OlModify from 'ol/interaction/Modify';
+import OlTranslate from 'ol/interaction/Translate';
 import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
 import { unByKey } from 'ol/Observable';
@@ -51,9 +54,13 @@ export class EntityFormFieldGeometryInputComponent
 
   private olOverlayLayer: OlVectorLayer;
   private olDrawInteraction: OlDraw;
+  private onDrawStartKey: string;
   private onDrawEndKey: string;
   private olModifyInteraction: OlDraw;
   private onModifyEndKey: string;
+  private olTranslateInteraction: OlDraw;
+  private onTranslateEndKey: string;
+  private olDoubleClickZoomInteraction: OlDoubleClickZoom;
   private olGeoJSON = new OlGeoJSON();
   private ready = false;
 
@@ -219,8 +226,10 @@ export class EntityFormFieldGeometryInputComponent
   }
 
   ngOnDestroy() {
+    this.restoreDoubleClickZoomInteraction();
     this.removeOlDrawInteraction();
     this.removeOlModifyInteraction();
+    this.removeOlTranslateInteraction();
     this.map.ol.removeLayer(this.olOverlayLayer);
     this.stateChanges.complete();
   }
@@ -276,6 +285,9 @@ export class EntityFormFieldGeometryInputComponent
       source: this.olOverlaySource
     });
 
+    this.onDrawStartKey = olDrawInteraction.on('drawstart', (event) => {
+      this.onDrawStart(event);
+    });
     this.onDrawEndKey = olDrawInteraction.on('drawend', (event) => {
       this.onDrawEnd(event);
     });
@@ -288,9 +300,14 @@ export class EntityFormFieldGeometryInputComponent
       return;
     }
 
+    unByKey(this.onDrawStartKey);
     unByKey(this.onDrawEndKey);
     this.map.ol.removeInteraction(this.olDrawInteraction);
     this.olDrawInteraction = undefined;
+  }
+
+  private onDrawStart(event) {
+    this.removeOlDoubleClickZoomInteraction();
   }
 
   private onDrawEnd(event) {
@@ -300,6 +317,12 @@ export class EntityFormFieldGeometryInputComponent
       dataProjection: this.projection
     });
     this.writeValue(value);
+
+    // We need to wrap this in a setTimeout otherwise, the
+    // double click to finish drawing will still trigger a zoom
+    window.setTimeout(() => {
+      this.restoreDoubleClickZoomInteraction();
+    }, 50);
   }
 
   private addOlModifyInteraction() {
@@ -333,12 +356,65 @@ export class EntityFormFieldGeometryInputComponent
     this.writeValue(value);
   }
 
+  private addOlTranslateInteraction() {
+    const olTranslateInteraction = new OlTranslate({
+      source: this.olOverlaySource
+    });
+
+    this.onTranslateEndKey = olTranslateInteraction.on('translateend', (event) => {
+      this.onTranslateEnd(event);
+    });
+    this.map.ol.addInteraction(olTranslateInteraction);
+    this.olTranslateInteraction = olTranslateInteraction;
+  }
+
+  private removeOlTranslateInteraction() {
+    if (this.olTranslateInteraction === undefined) {
+      return;
+    }
+
+    unByKey(this.onTranslateEndKey);
+    this.map.ol.removeInteraction(this.olTranslateInteraction);
+    this.olTranslateInteraction = undefined;
+  }
+
+  private onTranslateEnd(event) {
+    const geometry = event.features.item(0).getGeometry();
+    const value = this.olGeoJSON.writeGeometryObject(geometry, {
+      featureProjection: this.map.projection,
+      dataProjection: this.projection
+    });
+    this.writeValue(value);
+  }
+
+  private removeOlDoubleClickZoomInteraction() {
+    const olInteractions = this.map.ol.getInteractions().getArray();
+    const olDoubleClickZoomInteraction = olInteractions
+      .find((olInteraction: OlInteraction) => {
+        return olInteraction instanceof OlDoubleClickZoom;
+      });
+
+    if (olDoubleClickZoomInteraction !== undefined) {
+      this.map.ol.removeInteraction(olDoubleClickZoomInteraction);
+    }
+    this.olDoubleClickZoomInteraction = olDoubleClickZoomInteraction;
+  }
+
+  private restoreDoubleClickZoomInteraction() {
+    if (this.olDoubleClickZoomInteraction !== undefined) {
+      this.map.ol.addInteraction(this.olDoubleClickZoomInteraction);
+    }
+    this.olDoubleClickZoomInteraction = undefined;
+  }
+
   private toggleInteraction() {
     if (this.value === undefined && this.olDrawInteraction === undefined) {
       this.removeOlModifyInteraction();
+      this.removeOlTranslateInteraction();
       this.addOlDrawInteraction();
     } else if (this.value !== undefined && this.olModifyInteraction === undefined) {
       this.removeOlDrawInteraction();
+      this.addOlTranslateInteraction();
       this.addOlModifyInteraction();
     }
   }
