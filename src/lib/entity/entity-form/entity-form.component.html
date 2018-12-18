@@ -5,21 +5,27 @@
   [formGroup]="form"
   (ngSubmit)="onSubmit(form.value)">
 
-  <div
-    *ngIf="template.fields && template.fields.length > 0"
-    class="fadq-entity-form-fields-container">
-    <mat-grid-list cols="2" rowHeight="60px">
-      <ng-container *ngFor="let field of template.fields">
-        <ng-container *ngIf="getFieldControl(field) as control">
-          <mat-grid-tile [colspan]="getFieldColSpan(field)">
-            <fadq-entity-form-field
-              [field]="field"
-              [control]="control">
-            </fadq-entity-form-field>
-          </mat-grid-tile>
+  <div class="fadq-entity-form-content">
+    <div
+      *ngIf="template.fields && template.fields.length > 0"
+      class="fadq-entity-form-fields">
+      <mat-grid-list cols="2" rowHeight="60px">
+        <ng-container *ngFor="let field of template.fields">
+          <ng-container *ngIf="getFieldControl(field) as control">
+            <mat-grid-tile [colspan]="getFieldColSpan(field)">
+              <fadq-entity-form-field
+                [field]="field"
+                [control]="control">
+              </fadq-entity-form-field>
+            </mat-grid-tile>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </mat-grid-list>
+      </mat-grid-list>
+    </div>
+
+    <div class="fadq-entity-form-extra-content">
+      <ng-content></ng-content>
+    </div>
   </div>
 
   <div class="fadq-entity-form-button-group">
@@ -34,4 +40,5 @@
       {{ submitLabel }}
     </button>
   </div>
+
 </form>

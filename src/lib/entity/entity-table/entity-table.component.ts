@@ -19,7 +19,8 @@ import {
   EntityTableColumn,
   EntityStore,
   EntityStoreController,
-  getEntityProperty
+  getEntityProperty,
+  EntityTableColumnRenderer
 } from '../shared';
 
 @Component({
@@ -50,6 +51,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
   private _template: EntityTableTemplate;
 
+  @Output() entityClick = new EventEmitter<Entity>();
   @Output() entitySelectChange = new EventEmitter<{
     selected: boolean;
     entity: Entity;
@@ -95,6 +97,10 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
     }
   }
 
+  onEntityClick(entity: Entity) {
+    this.entityClick.emit(entity);
+  }
+
   onEntitySelect(entity: Entity) {
     if (!this.template.selection) {
       return;
@@ -108,7 +114,17 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   valueAccessor(entity: Entity, column: EntityTableColumn) {
+    if (column.valueAccessor !==  undefined) {
+      return column.valueAccessor(entity);
+    }
     return getEntityProperty(entity, column.name);
+  }
+
+  getColumnRenderer(column: EntityTableColumn): EntityTableColumnRenderer {
+    if (column.renderer !== undefined) {
+      return column.renderer;
+    }
+    return EntityTableColumnRenderer.Default;
   }
 
   columnIsSortable(column: EntityTableColumn): boolean {
@@ -140,11 +156,18 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   getCellClass(entity: Entity, column: EntityTableColumn): { [key: string]: boolean; } {
-    const func = this.template.cellClassFunc;
-    if (func instanceof Function) {
-      return func(entity, column);
+    const cls = {};
+    const tableFunc = this.template.cellClassFunc;
+    if (tableFunc instanceof Function) {
+      Object.assign(cls, tableFunc(entity, column));
     }
-    return {};
+
+    const columnFunc = column.cellClassFunc;
+    if (columnFunc instanceof Function) {
+      Object.assign(cls, columnFunc(entity));
+    }
+
+    return cls;
   }
 
 }

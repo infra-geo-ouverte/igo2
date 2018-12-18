@@ -16,10 +16,23 @@ export class EntityTableRowDirective {
   static selectedCls = 'fadq-entity-table-row-selected';
 
   @Input()
-  get selected() {
+  get selection(): boolean {
+    return this._selection;
+  }
+  set selection(value: boolean) {
+    this._selection = value;
+  }
+  private _selection = false;
+
+  @Input()
+  get selected(): boolean {
     return this._selected;
   }
   set selected(value: boolean) {
+    if (this.selection === false) {
+      return;
+    }
+
     if (value === this._selected) {
       return;
     }
@@ -33,6 +46,10 @@ export class EntityTableRowDirective {
 
   @HostListener('click')
   onClick() {
+    if (this.selection === false) {
+      return;
+    }
+
     this.toggleSelected(true);
     this.select.emit(this);
   }
