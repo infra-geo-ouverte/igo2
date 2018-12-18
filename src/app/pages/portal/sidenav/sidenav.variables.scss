@@ -1,10 +1,9 @@
 @import 'media';
 @import 'variables';
+@import '../expansion-panel/expansion-panel.variables';
 
-// 32px is about 70% of 48px (the footer height).
-// We need to adjust to make the expansion panel and the sidenav touch
 $fadq-sidenav-height: 100%;
-$fadq-sidenav-height-with-expansion-panel: calc(70% + 32px);
+$fadq-sidenav-height-with-expansion-panel: calc(100% - #{$fadq-expansion-panel-height});
 $fadq-sidenav-width: 400px;
 $fadq-sidenav-margin-top: 50px;
 $fadq-sidenav-width-mobile: calc(100% - #{$fadq-mobile-min-space-right} - #{$igo-margin});

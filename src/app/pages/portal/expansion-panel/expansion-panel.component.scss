@@ -1,3 +1,4 @@
+@import '../sidenav/sidenav.variables';
 @import './expansion-panel.variables';
 
 
@@ -7,7 +8,6 @@
   display: block;
   background-color: white;
 
-  max-height: $fadq-expansion-panel-max-height;
   height: $fadq-expansion-panel-collapsed-height;
   width: $fadq-sidenav-width;
 
@@ -34,7 +34,7 @@
 }
 
 :host.fadq-expansion-panel-expanded {
-  height: $fadq-expansion-panel-max-height;
+  height: $fadq-expansion-panel-height;
   width: 100%;
 }
 
