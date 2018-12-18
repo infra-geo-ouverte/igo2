@@ -116,6 +116,7 @@ export class Editor extends EntityClass {
   }
 
   deactivateWidget() {
+    this.updateWidgetData();
     if (this.activeWidget !== undefined) {
       this.widgetStore.updateEntityState(this.activeWidget, {active: false});
     }
@@ -127,7 +128,7 @@ export class Editor extends EntityClass {
 
   protected onSelectEntity(entity: Entity) {
     this.entity$.next(entity);
-    this.widgetData$.next(this.computeWidgetData());
+    this.updateWidgetData();
   }
 
   protected computeWidgetData(): { [key: string]: any } {
@@ -135,6 +136,10 @@ export class Editor extends EntityClass {
       entity: this.entity,
       store: this.entityStore
     });
+  }
+
+  private updateWidgetData() {
+    this.widgetData$.next(this.computeWidgetData());
   }
 
   private onWidgetDataChange(data: { [key: string]: any }) {

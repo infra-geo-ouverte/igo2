@@ -75,7 +75,7 @@ export class ClientSchemaUpdateFormComponent implements WidgetComponent, OnInit 
 
   private onSubmitSuccess(schema: ClientSchema) {
     if (this.store !== undefined) {
-      this.store.putEntities([schema], true);
+      this.store.putEntities([schema]);
     }
     this.complete.emit();
   }

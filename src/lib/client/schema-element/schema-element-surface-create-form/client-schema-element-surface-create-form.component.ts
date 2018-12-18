@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
 
 import { uuid } from '@igo2/utils';
 
-import { EntityStore, EntityFormTemplate, getEntityId } from 'src/lib/entity';
+import { EntityStore, EntityFormTemplate, EntityTransaction, getEntityId } from 'src/lib/entity';
 import { FEATURE } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
@@ -45,6 +45,9 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
     return this._schema;
   }
   set schema(value: ClientSchema) {
+    if (this.schema !== undefined) {
+      return;
+    }
     this._schema = value;
     this.cdRef.detectChanges();
   }
@@ -58,6 +61,15 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
     this._store = value;
   }
   private _store;
+
+  @Input()
+  get transaction(): EntityTransaction {
+    return this._transaction;
+  }
+  set transaction(value: EntityTransaction) {
+    this._transaction = value;
+  }
+  private _transaction;
 
   @Output() complete = new EventEmitter<ClientSchemaElementSurface>();
   @Output() cancel = new EventEmitter();
@@ -82,12 +94,11 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
   }
 
   private onSubmitSuccess(element: ClientSchemaElementSurface) {
-    if (this.store !== undefined) {
-      this.store.addEntities([element], true);
+    if (this.transaction !== undefined) {
+      this.transaction.insert(element, this.store);
+    } else if (this.store !== undefined) {
+      this.store.addEntities([element]);
     }
-    // if (this.transaction !== undefined) {
-    //   this.store.insert(element);
-    // }
     this.complete.emit();
   }
 
@@ -115,7 +126,8 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
 
     return {
       meta: {
-        id: uuid()
+        id: uuid(),
+        title: `Surface - ${properties.typeElement} - ${properties.description}`
       },
       type: FEATURE,
       geometry: data.geometry,

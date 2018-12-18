@@ -131,7 +131,7 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
   }
 
   private onCreateSuccess(schemaFile: ClientSchemaFile) {
-    this.store.addEntities([schemaFile], true);
+    this.store.addEntities([schemaFile]);
   }
 
   private deleteSchemaFile() {
@@ -141,7 +141,7 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
   }
 
   private onDeleteSuccess(schemaFile: ClientSchemaFile) {
-    this.store.removeEntities([schemaFile], true);
+    this.store.removeEntities([schemaFile]);
     this.schemaFile = undefined;
   }
 }

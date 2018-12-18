@@ -17,7 +17,7 @@ import {
   ClientSchemaElementService,
   ClientSchemaElementSurfaceEditorService
 } from 'src/lib/client';
-import { EntityStore, State } from 'src/lib/entity';
+import { EntityStore, State, EntityTransaction } from 'src/lib/entity';
 
 import { EditionState } from '../edition/edition.state';
 
@@ -32,6 +32,8 @@ export class ClientState implements OnDestroy {
   private selectedDiagram$$: Subscription;
   private selectedParcelYear$$: Subscription;
   private selectedSchema$$: Subscription;
+
+  private schemaElementTransaction: EntityTransaction;
 
   get client(): Client {
     return this.client$.value;
@@ -92,6 +94,8 @@ export class ClientState implements OnDestroy {
     this.editionState.register(this.parcelEditor);
     this.editionState.register(this.schemaEditor);
     this.editionState.register(this.schemaElementSurfaceEditor);
+
+    this.schemaElementTransaction = new EntityTransaction();
 
     this.selectedDiagram$$ = this._diagramStore
       .observeFirstBy((diagram: ClientParcelDiagram, state: State) => state.selected === true)
@@ -176,8 +180,11 @@ export class ClientState implements OnDestroy {
   }
 
   private setSchema(schema: ClientSchema) {
+    this.schemaElementTransaction.clear();
+
     this.loadSchemaElements(schema);
     this.schemaElementSurfaceEditor.setSchema(schema);
+    this.schemaElementSurfaceEditor.setTransaction(this.schemaElementTransaction);
     this.schema$.next(schema);
   }
 
@@ -186,6 +193,7 @@ export class ClientState implements OnDestroy {
       return;
     }
 
+    this.schemaElementTransaction.clear();
     this.clearSchemaElements();
     this.schema$.next(undefined);
   }

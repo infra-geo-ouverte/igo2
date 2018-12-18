@@ -60,7 +60,10 @@ export class LayerStore {
       this.removeOlFeaturesFromLayer(olFeaturesToRemove);
     }
     if (olFeaturesToAdd.length > 0) {
-      this.addOlFeaturesToLayer(olFeaturesToAdd, motion);
+      this.addOlFeaturesToLayer(olFeaturesToAdd);
+    }
+    if (olFeatures.length > 0) {
+      moveToFeatures(this.map, olFeatures, motion);
     }
   }
 
@@ -68,12 +71,11 @@ export class LayerStore {
     this.source.ol.clear();
   }
 
-  private addOlFeaturesToLayer(olFeatures: OlFeature[], motion: FeatureMotion = FeatureMotion.Default) {
+  private addOlFeaturesToLayer(olFeatures: OlFeature[]) {
     olFeatures.forEach((olFeature: OlFeature) => {
       olFeature.set('layerStore', this);
     });
     this.source.ol.addFeatures(olFeatures);
-    moveToFeatures(this.map, olFeatures, motion);
   }
 
   private removeOlFeaturesFromLayer(olFeatures: OlFeature[]) {

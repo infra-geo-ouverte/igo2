@@ -5,7 +5,8 @@ import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
   ClientSchemaElementPoint,
   ClientSchemaElementLine,
-  ClientSchemaElementSurface
+  ClientSchemaElementSurface,
+  ClientSchemaElementTransactionData
 } from './client-schema-element.interfaces';
 import { ClientSchemaElementSurfaceService } from './client-schema-element-surface.service';
 
@@ -32,5 +33,10 @@ export class ClientSchemaElementService {
     );
 
     return elements$;
+  }
+
+  saveElements(schema: ClientSchema, data: ClientSchemaElementTransactionData): Observable<any> {
+    // TODO
+    return of({});
   }
 }

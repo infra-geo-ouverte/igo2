@@ -13,11 +13,11 @@ import { ClientSchemaDuplicateFormComponent } from '../client-schema-duplicate-f
 })
 export class ClientSchemaWidgetService {
 
-  static schemaBoundWidgetIsReady = function(data: { [key: string]: any}) {
+  static schemaIsDefined = function(data: { [key: string]: any}) {
     return data.schema !== undefined;
   };
 
-  static clientBoundWidgetIsReady = function(data: { [key: string]: any}) {
+  static clientIsDefined = function(data: { [key: string]: any}) {
     return data.client !== undefined;
   };
 
@@ -32,7 +32,7 @@ export class ClientSchemaWidgetService {
         tooltip: 'client.schema.create.tooltip',
         component: ClientSchemaCreateFormComponent,
         conditions: [
-          ClientSchemaWidgetService.clientBoundWidgetIsReady
+          ClientSchemaWidgetService.clientIsDefined
         ]
       },
       {
@@ -42,8 +42,8 @@ export class ClientSchemaWidgetService {
         tooltip: 'client.schema.update.tooltip',
         component: ClientSchemaUpdateFormComponent,
         conditions: [
-          ClientSchemaWidgetService.clientBoundWidgetIsReady,
-          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+          ClientSchemaWidgetService.clientIsDefined,
+          ClientSchemaWidgetService.schemaIsDefined
         ]
       },
       {
@@ -53,8 +53,8 @@ export class ClientSchemaWidgetService {
         tooltip: 'client.schema.delete.tooltip',
         component: ClientSchemaDeleteFormComponent,
         conditions: [
-          ClientSchemaWidgetService.clientBoundWidgetIsReady,
-          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+          ClientSchemaWidgetService.clientIsDefined,
+          ClientSchemaWidgetService.schemaIsDefined
         ]
       },
       {
@@ -64,8 +64,8 @@ export class ClientSchemaWidgetService {
         tooltip: 'client.schema.duplicate.tooltip',
         component: ClientSchemaDuplicateFormComponent,
         conditions: [
-          ClientSchemaWidgetService.clientBoundWidgetIsReady,
-          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+          ClientSchemaWidgetService.clientIsDefined,
+          ClientSchemaWidgetService.schemaIsDefined
         ]
       },
       {
@@ -75,8 +75,8 @@ export class ClientSchemaWidgetService {
         tooltip: 'client.schema.manageFiles.tooltip',
         component: ClientSchemaFileManagerComponent,
         conditions: [
-          ClientSchemaWidgetService.clientBoundWidgetIsReady,
-          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+          ClientSchemaWidgetService.clientIsDefined,
+          ClientSchemaWidgetService.schemaIsDefined
         ]
       },
       {
@@ -85,8 +85,8 @@ export class ClientSchemaWidgetService {
         title: 'client.schema.transfer',
         tooltip: 'client.schema.transfer.tooltip',
         conditions: [
-          ClientSchemaWidgetService.clientBoundWidgetIsReady,
-          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+          ClientSchemaWidgetService.clientIsDefined,
+          ClientSchemaWidgetService.schemaIsDefined
         ]
       },
       {
@@ -95,8 +95,8 @@ export class ClientSchemaWidgetService {
         title: 'client.schema.createMap',
         tooltip: 'client.schema.createMap.tooltip',
         conditions: [
-          ClientSchemaWidgetService.clientBoundWidgetIsReady,
-          ClientSchemaWidgetService.schemaBoundWidgetIsReady
+          ClientSchemaWidgetService.clientIsDefined,
+          ClientSchemaWidgetService.schemaIsDefined
         ]
       }
     ];

@@ -13,13 +13,17 @@ import { ClientSchemaElementSurfaceEditorService } from './shared/client-schema-
 import {
   FadqLibClientSchemaElementSurfaceCreateFormModule
 } from './schema-element-surface-create-form/client-schema-element-surface-create-form.module';
+import {
+  FadqLibClientSchemaElementSurfaceSaverModule
+} from './schema-element-surface-saver/client-schema-element-surface-saver.module';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
-    FadqLibClientSchemaElementSurfaceCreateFormModule
+    FadqLibClientSchemaElementSurfaceCreateFormModule,
+    FadqLibClientSchemaElementSurfaceSaverModule
   ],
   declarations: []
 })

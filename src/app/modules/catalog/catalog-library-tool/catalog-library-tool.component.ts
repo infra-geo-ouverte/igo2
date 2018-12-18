@@ -47,7 +47,10 @@ export class CatalogLibraryToolComponent implements OnInit {
 
   private loadCatalogs() {
     this.catalogService.loadCatalogs()
-      .subscribe((catalogs: Catalog[]) => this.store.addEntities(catalogs));
+      .subscribe((catalogs: Catalog[]) => {
+        this.store.state.reset();
+        this.store.addEntities(catalogs);
+      });
   }
 
 }

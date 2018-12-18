@@ -71,7 +71,7 @@ export class ClientSchemaDuplicateFormComponent implements WidgetComponent, OnIn
 
   private onSubmitSuccess(schema: ClientSchema) {
     if (this.store !== undefined) {
-      this.store.addEntities([schema], true);
+      this.store.addEntities([schema]);
     }
     this.complete.emit();
   }

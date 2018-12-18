@@ -106,7 +106,8 @@
       "move": "Déplacer",
       "move.tooltip": "Déplacer un élément",
       "save": "Sauvegarder",
-      "save.tooltip": "Sauvegarder les éléments"
+      "save.tooltip": "Sauvegarder les éléments",
+      "save.confirm": "Voulez-vous sauvegarder ces changements?"
     }
   },
 

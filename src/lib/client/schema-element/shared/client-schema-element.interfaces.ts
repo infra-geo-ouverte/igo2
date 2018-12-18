@@ -48,6 +48,11 @@ export interface ClientSchemaElementSurface extends Feature {
   properties: ClientSchemaElementSurfaceProperties;
 }
 
+export type AnyClientSchemaElement =
+  ClientSchemaElementPoint |
+  ClientSchemaElementLine |
+  ClientSchemaElementSurface;
+
 export interface ClientSchemaElementPointListResponseItem extends ClientSchemaElementPoint {}
 
 export type ClientSchemaElementPointListResponse = ClientSchemaElementPointListResponseItem[];
@@ -65,3 +70,9 @@ export interface  ClientSchemaElementPointListResponseItem extends ClientSchemaE
 export interface  ClientSchemaElementLineListResponseItem extends ClientSchemaElementLine {}
 
 export interface  ClientSchemaElementSurfaceListResponseItem extends ClientSchemaElementSurface {}
+
+export interface ClientSchemaElementTransactionData {
+  inserts:  AnyClientSchemaElement[];
+  updates:  AnyClientSchemaElement[];
+  deletes: string[];
+}

@@ -5,18 +5,25 @@ import { Widget } from 'src/lib/widget';
 import {
   ClientSchemaElementSurfaceCreateFormComponent
 } from '../schema-element-surface-create-form/client-schema-element-surface-create-form.component';
+import {
+  ClientSchemaElementSurfaceSaverComponent
+} from '../schema-element-surface-saver/client-schema-element-surface-saver.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientSchemaElementWidgetService {
 
-  static schemaBoundWidgetIsReady = function(data: { [key: string]: any}) {
+  static schemaIsDefined = function(data: { [key: string]: any}) {
     return data.schema !== undefined;
   };
 
-  static elementBoundWidgetIsReady = function(data: { [key: string]: any}) {
+  static elementIsDefined = function(data: { [key: string]: any}) {
     return data.element !== undefined;
+  };
+
+  static transactionIsNotEmpty = function(data: { [key: string]: any}) {
+    return data.transaction !== undefined && data.transaction.empty === false;
   };
 
   constructor() {}
@@ -29,7 +36,7 @@ export class ClientSchemaElementWidgetService {
         title: 'client.schemaElement.create',
         tooltip: 'client.schemaElement.create.tooltip',
         component: ClientSchemaElementSurfaceCreateFormComponent,
-        conditions: [ClientSchemaElementWidgetService.schemaBoundWidgetIsReady]
+        conditions: [ClientSchemaElementWidgetService.schemaIsDefined]
       },
       {
         id: 'update',
@@ -37,8 +44,8 @@ export class ClientSchemaElementWidgetService {
         title: 'client.schemaElement.update',
         tooltip: 'client.schemaElement.update.tooltip',
         conditions: [
-          ClientSchemaElementWidgetService.schemaBoundWidgetIsReady,
-          ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+          ClientSchemaElementWidgetService.schemaIsDefined,
+          ClientSchemaElementWidgetService.elementIsDefined
         ]
       },
       {
@@ -47,8 +54,8 @@ export class ClientSchemaElementWidgetService {
         title: 'client.schemaElement.delete',
         tooltip: 'client.schemaElement.delete.tooltip',
         conditions: [
-          ClientSchemaElementWidgetService.schemaBoundWidgetIsReady,
-          ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+          ClientSchemaElementWidgetService.schemaIsDefined,
+          ClientSchemaElementWidgetService.elementIsDefined
         ]
       },
       {
@@ -57,8 +64,8 @@ export class ClientSchemaElementWidgetService {
         title: 'client.schemaElement.move',
         tooltip: 'client.schemaElement.move.tooltip',
         conditions: [
-          ClientSchemaElementWidgetService.schemaBoundWidgetIsReady,
-          ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+          ClientSchemaElementWidgetService.schemaIsDefined,
+          ClientSchemaElementWidgetService.elementIsDefined
         ]
       },
       {
@@ -66,9 +73,10 @@ export class ClientSchemaElementWidgetService {
         icon: 'save',
         title: 'client.schemaElement.save',
         tooltip: 'client.schemaElement.save.tooltip',
+        component: ClientSchemaElementSurfaceSaverComponent,
         conditions: [
-          ClientSchemaElementWidgetService.schemaBoundWidgetIsReady,
-          ClientSchemaElementWidgetService.elementBoundWidgetIsReady
+          ClientSchemaElementWidgetService.schemaIsDefined,
+          ClientSchemaElementWidgetService.transactionIsNotEmpty
         ]
       }
     ];

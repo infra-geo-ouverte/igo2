@@ -1,4 +1,5 @@
 export * from './client-schema-element.interfaces';
+export * from './client-schema-element.utils';
 export * from './client-schema-element.providers';
 export * from './client-schema-element.service';
 export * from './client-schema-element-table.service';
