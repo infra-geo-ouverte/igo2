@@ -50,4 +50,9 @@ export class ExpansionPanelComponent {
 
   constructor() {}
 
+  onBackdropClick() {
+    this.expanded = false;
+    this.backdropShown = false;
+  }
+
 }
