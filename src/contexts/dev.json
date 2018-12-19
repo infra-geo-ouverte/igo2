@@ -200,7 +200,7 @@
               "titleProperty": "nomRegionZonageCollectif"
             },
             "feature": {
-              "uri": "/igonavigation/zoom_selection/obtenirUneRegionZonageCollectif/${id}"
+              "uri": "/igonavigation/zoom_selection/obtenirRegionZonageCollectif/${id}"
             }
           }
         ]
