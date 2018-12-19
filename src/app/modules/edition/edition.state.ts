@@ -25,7 +25,7 @@ export class EditionState {
   }
 
   register(editor: Editor) {
-    this.store.addEntities([editor]);
+    this.store.appendEntities([editor]);
   }
 
   selectEditor(editor: Editor) {

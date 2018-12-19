@@ -21,6 +21,8 @@ import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaElementSurface, ClientSchemaElementProperties } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
+import { generateOperationTitle } from '../shared/client-schema-element.utils';
+
 @Component({
   selector: 'fadq-client-schema-element-surface-create-form',
   templateUrl: './client-schema-element-surface-create-form.component.html',
@@ -96,7 +98,9 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
   }
 
   private onSubmitSuccess(element: ClientSchemaElementSurface) {
-    this.transaction.insert(element, this.store);
+    this.transaction.insert(element, this.store, {
+      title: generateOperationTitle(element)
+    });
     this.complete.emit();
   }
 
@@ -124,8 +128,7 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
 
     return {
       meta: {
-        id: uuid(),
-        title: `Surface - ${properties.typeElement} - ${properties.description}`
+        id: uuid()
       },
       type: FEATURE,
       geometry: data.geometry,

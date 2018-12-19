@@ -87,7 +87,13 @@ export class Editor extends EntityClass {
   init() {
     this.activeWidget$$ = this.widgetStore
       .observeFirstBy((widget: Widget, state: State) => state.active === true)
-      .subscribe((widget: Widget) => this.onActivateWidget(widget));
+      .subscribe((widget: Widget) => {
+        if (widget === undefined) {
+          this.onDeactivateWidget();
+        } else {
+          this.onActivateWidget(widget);
+        }
+      });
 
     this.selectedEntity$$ = this.entityStore
       .observeFirstBy((entity: Entity, state: State) => state.selected === true)
@@ -111,10 +117,6 @@ export class Editor extends EntityClass {
     }
   }
 
-  activateWidget(widget: Widget) {
-    this.widgetStore.updateEntityState(widget, {active: true}, true);
-  }
-
   deactivateWidget() {
     this.updateWidgetData();
     if (this.activeWidget !== undefined) {
@@ -124,6 +126,15 @@ export class Editor extends EntityClass {
 
   protected onActivateWidget(widget: Widget) {
     this.activeWidget$.next(widget);
+    const handler = widget.handler;
+    if (handler !== undefined) {
+      handler(this.widgetData);
+      this.deactivateWidget();
+    }
+  }
+
+  protected onDeactivateWidget() {
+    this.activeWidget$.next(undefined);
   }
 
   protected onSelectEntity(entity: Entity) {
@@ -147,23 +158,32 @@ export class Editor extends EntityClass {
   }
 
   private initWidgets() {
+    const coldWidgets = [];
+    const hotWidgets = [];
+
     const widgetData = this.widgetData;
     this.widgetStore.entities.forEach((widget: Widget) => {
       const conditions = widget.conditions || [];
-      const widgetIsReady = conditions
+      const widgetIsHot = conditions
         .every((condition: (data: {[key: string]: any}) => boolean) => {
           return condition(widgetData);
         });
-
-      const state = {
-        disabled: !widgetIsReady,
-        selected: !widgetIsReady
-      };
-      if (!widgetIsReady) {
-        state['active'] = false;
-      }
-      this.widgetStore.updateEntityState(widget, state);
+      widgetIsHot ? hotWidgets.push(widget) : coldWidgets.push(widget);
     });
+
+    if (coldWidgets.length > 0) {
+      this.widgetStore.updateEntitiesState(coldWidgets, {
+        disabled: true,
+        selected: false,
+        active: false
+      });
+    }
+
+    if (hotWidgets.length > 0) {
+      this.widgetStore.updateEntitiesState(hotWidgets, {
+        disabled: false
+      });
+    }
   }
 
 }

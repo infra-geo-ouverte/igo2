@@ -35,7 +35,7 @@ export class EditorOutletComponent implements OnDestroy {
   }
   set editor(value: Editor) {
     this._editor = value;
-    this.bindEditor();
+    this.watchEditor();
   }
   private _editor;
 
@@ -49,11 +49,11 @@ export class EditorOutletComponent implements OnDestroy {
   constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnDestroy() {
-    this.unbindEditor();
+    this.unwatchEditor();
   }
 
-  private bindEditor() {
-    this.unbindEditor();
+  private watchEditor() {
+    this.unwatchEditor();
 
     if (this.editor === undefined) {
       return;
@@ -63,7 +63,7 @@ export class EditorOutletComponent implements OnDestroy {
       .subscribe((widget: Widget) => this.onWidgetChange(widget));
   }
 
-  private unbindEditor() {
+  private unwatchEditor() {
     if (this.entity$$ !== undefined) {
       this.entity$$.unsubscribe();
     }
@@ -73,9 +73,9 @@ export class EditorOutletComponent implements OnDestroy {
   }
 
   private onWidgetChange(widget: Widget) {
-    if (widget !== undefined) {
+    if (widget !== undefined && widget.component !== undefined) {
       this.initWidgetComponent(widget);
-    } else {
+    } else if (this.component !== undefined) {
       this.destroyWidgetComponent();
     }
   }

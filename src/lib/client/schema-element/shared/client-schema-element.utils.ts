@@ -1,6 +1,8 @@
 import {
   EntityOperation,
-  EntityOperationType
+  EntityOperationType,
+  EntityTransaction,
+  EntityStore
 } from 'src/lib/entity';
 
 import {
@@ -40,4 +42,22 @@ export class ClientSchemaElementTransactionSerializer {
     return operation.entityId;
   }
 
+}
+
+export function generateOperationTitle(element: AnyClientSchemaElement): string {
+  const terms = [
+    element.properties.typeElement,
+    element.properties.description || undefined
+  ];
+  return terms.filter((term: string) => term !== undefined).join(' - ');
+}
+
+export function deleteClientSchemaElementHandler(data: {
+  element: AnyClientSchemaElement;
+  transaction: EntityTransaction;
+  store: EntityStore<AnyClientSchemaElement>;
+}) {
+  data.transaction.delete(data.element, data.store, {
+    title: generateOperationTitle(data.element)
+  });
 }

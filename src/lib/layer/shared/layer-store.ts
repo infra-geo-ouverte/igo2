@@ -68,7 +68,13 @@ export class LayerStore {
     if (olFeaturesToAdd.length > 0) {
       this.addOlFeaturesToLayer(olFeaturesToAdd);
     }
-    if (olFeatures.length > 0) {
+
+    // Determine the move action to take
+    if (olFeaturesToAdd.length > 0) {
+      moveToFeatures(this.map, olFeaturesToAdd, motion);
+    } else if (olFeaturesToRemove.length > 0) {
+      // Do nothing
+    } else if (olFeatures.length > 0) {
       moveToFeatures(this.map, olFeatures, motion);
     }
   }

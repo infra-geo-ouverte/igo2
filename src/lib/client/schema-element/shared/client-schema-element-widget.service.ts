@@ -12,6 +12,8 @@ import {
   ClientSchemaElementSurfaceUpdateFormComponent
 } from '../schema-element-surface-update-form/client-schema-element-surface-update-form.component';
 
+import { deleteClientSchemaElementHandler } from './client-schema-element.utils';
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,10 @@ export class ClientSchemaElementWidgetService {
     return data.transaction !== undefined && data.transaction.empty === false;
   };
 
+  static transactionIsNotInCommitPhase = function(data: { [key: string]: any}) {
+    return data.transaction !== undefined && data.transaction.inCommitPhase === false;
+  };
+
   constructor() {}
 
   buildSurfaceWidgets(): Widget[] {
@@ -40,7 +46,10 @@ export class ClientSchemaElementWidgetService {
         title: 'client.schemaElement.create',
         tooltip: 'client.schemaElement.create.tooltip',
         component: ClientSchemaElementSurfaceCreateFormComponent,
-        conditions: [ClientSchemaElementWidgetService.schemaIsDefined]
+        conditions: [
+          ClientSchemaElementWidgetService.schemaIsDefined,
+          ClientSchemaElementWidgetService.transactionIsNotInCommitPhase
+        ]
       },
       {
         id: 'update',
@@ -50,7 +59,8 @@ export class ClientSchemaElementWidgetService {
         component: ClientSchemaElementSurfaceUpdateFormComponent,
         conditions: [
           ClientSchemaElementWidgetService.schemaIsDefined,
-          ClientSchemaElementWidgetService.elementIsDefined
+          ClientSchemaElementWidgetService.elementIsDefined,
+          ClientSchemaElementWidgetService.transactionIsNotInCommitPhase
         ]
       },
       {
@@ -58,9 +68,11 @@ export class ClientSchemaElementWidgetService {
         icon: 'delete',
         title: 'client.schemaElement.delete',
         tooltip: 'client.schemaElement.delete.tooltip',
+        handler: deleteClientSchemaElementHandler,
         conditions: [
           ClientSchemaElementWidgetService.schemaIsDefined,
-          ClientSchemaElementWidgetService.elementIsDefined
+          ClientSchemaElementWidgetService.elementIsDefined,
+          ClientSchemaElementWidgetService.transactionIsNotInCommitPhase
         ]
       },
       {
@@ -71,7 +83,8 @@ export class ClientSchemaElementWidgetService {
         component: ClientSchemaElementSaverComponent,
         conditions: [
           ClientSchemaElementWidgetService.schemaIsDefined,
-          ClientSchemaElementWidgetService.transactionIsNotEmpty
+          ClientSchemaElementWidgetService.transactionIsNotEmpty,
+          ClientSchemaElementWidgetService.transactionIsNotInCommitPhase
         ]
       }
     ];

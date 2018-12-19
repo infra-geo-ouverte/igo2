@@ -10,6 +10,7 @@ export interface Widget extends EntityObject {
   tooltip?: string;
   options?: { [key: string]: any };
 
+  handler?: (data: { [key: string]: any }) => void;
   cls?: WidgetClass;
   component?: any;
   conditions?: Array<(data: {[key: string]: any}) => boolean>;

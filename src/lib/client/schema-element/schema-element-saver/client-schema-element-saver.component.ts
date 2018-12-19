@@ -51,11 +51,10 @@ export class ClientSchemaElementSaverComponent implements WidgetComponent {
         }
       },
       {
-        name: 'id',
+        name: 'title',
         title: 'Élément',
         valueAccessor: (operation: EntityOperation) => {
-          const entity = operation.current ? operation.current : operation.previous;
-          return getEntityTitle(entity) || getEntityId(operation);
+          return getEntityTitle(operation) || getEntityId(operation);
         }
       }
     ]

@@ -23,6 +23,8 @@ import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
+import { generateOperationTitle } from '../shared/client-schema-element.utils';
+
 @Component({
   selector: 'fadq-client-schema-element-surface-update-form',
   templateUrl: './client-schema-element-surface-update-form.component.html',
@@ -109,7 +111,9 @@ export class ClientSchemaElementSurfaceUpdateFormComponent implements WidgetComp
   }
 
   private onSubmitSuccess(element: ClientSchemaElementSurface) {
-    this.transaction.update(this.element, element, this.store);
+    this.transaction.update(this.element, element, this.store, {
+      title: generateOperationTitle(element)
+    });
     this.complete.emit();
   }
 

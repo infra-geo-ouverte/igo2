@@ -84,14 +84,32 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
   }
 
   addEntities(entities: T[]) {
+    this.setEntities(entities.concat(this.entities), true);
+  }
+
+  appendEntities(entities: T[]) {
     this.setEntities(this.entities.concat(entities), true);
   }
 
   putEntities(entities: T[]) {
-    const entitiesIds = entities.map(getEntityId);
-    const newEntities = this.entities.slice()
-      .filter((entity: Entity) => entitiesIds.indexOf(getEntityId(entity)) < 0)
-      .concat(entities);
+    const entitiesMap = new Map();
+    entities.forEach((entity: T) => {
+      entitiesMap.set(getEntityId(entity), entity);
+    });
+
+    const existingEntities = [];
+    this.entities.forEach((entity: T) => {
+      const entityId = getEntityId(entity);
+      const newEntity = entitiesMap.get(entityId);
+      if (newEntity === undefined) {
+        existingEntities.push(entity);
+      } else {
+        existingEntities.push(newEntity);
+        entitiesMap.delete(entityId);
+      }
+    });
+
+    const newEntities = Array.from(entitiesMap.values()).concat(existingEntities);
     this.setEntities(newEntities, true);
   }
 
@@ -99,6 +117,7 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     const entitiesIds = entities.map(getEntityId);
     const newEntities = this.entities.slice()
       .filter((entity: Entity) => entitiesIds.indexOf(getEntityId(entity)) < 0);
+    this.setEntitiesState(entities, {} as S);
     this.setEntities(newEntities, true);
   }
 
@@ -108,6 +127,14 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
 
   getEntityState(entity: T): S {
     return this.state.getByKey(getEntityId(entity)) || {} as S;
+  }
+
+  setEntityState(entity: T, state: S) {
+    this.setEntitiesState([entity], state);
+  }
+
+  setEntitiesState(entities: T[], state: S) {
+    this.state.setByKeys(entities.map(getEntityId), state);
   }
 
   updateEntityState(entity: T, changes: { [key: string]: boolean }, exclusive = false) {
