@@ -9,10 +9,10 @@ import {
 } from 'src/lib/client';
 
 import {
-  LayerStore,
-  LayerStoreLoadStrategy,
-  LayerStoreSelectStrategy
-} from 'src/lib/layer';
+  FeatureStoreStrategy,
+  FeatureStoreLoadStrategy,
+  FeatureStoreSelectStrategy
+} from 'src/lib/feature';
 
 import { ClientState } from 'src/app/modules/client/client.state';
 
@@ -20,12 +20,6 @@ import { ClientState } from 'src/app/modules/client/client.state';
   providedIn: 'root'
 })
 export class MapState implements OnDestroy {
-
-  private clientParcelLayerStore: LayerStore;
-  private clientSchemaElementSurfaceLayerStore: LayerStore;
-
-  private clientLayerStoresLoadStrategy: LayerStoreLoadStrategy;
-  private clientLayerStoresSelectStrategy: LayerStoreSelectStrategy;
 
   get map(): IgoMap {
     return this._map;
@@ -45,52 +39,42 @@ export class MapState implements OnDestroy {
       }
     });
 
-    this.clientParcelLayerStore = this.createClientParcelLayerStore();
-    this.clientSchemaElementSurfaceLayerStore = this.createClientSchemaElementSurfaceLayerStore();
-    this.initClientLayerStoresStrategies();
-
+    this.addClientLayers();
     this.clientState.schemaElementSurfaceEditor.setMap(this._map);
   }
 
   ngOnDestroy() {
-    if (this.clientLayerStoresLoadStrategy !== undefined) {
-      this.clientLayerStoresLoadStrategy.deactivate();
-    }
-    if (this.clientLayerStoresSelectStrategy !== undefined) {
-      this.clientLayerStoresSelectStrategy.deactivate();
-    }
+    this.clientState.parcelStore.strategies
+      .forEach((strategy: FeatureStoreStrategy) => strategy.deactivate());
+    this.clientState.schemaElementSurfaceStore.strategies
+      .forEach((strategy: FeatureStoreStrategy) => strategy.deactivate());
   }
 
-  private createClientParcelLayerStore() {
-    const clientParcelStore = this.clientState.parcelStore;
+  private addClientLayers() {
     const clientParcelLayer = createParcelLayer();
     this.map.addLayer(clientParcelLayer, false);
 
-    return new LayerStore(clientParcelLayer, clientParcelStore);
-  }
-
-  private createClientSchemaElementSurfaceLayerStore() {
-    const clientSchemaElementSurfaceStore = this.clientState.schemaElementSurfaceStore;
     const clientSchemaElementSurfaceLayer = createSchemaElementSurfaceLayer();
     this.map.addLayer(clientSchemaElementSurfaceLayer, false);
 
-    return new LayerStore(
-      clientSchemaElementSurfaceLayer,
-      clientSchemaElementSurfaceStore
-    );
-  }
+    const selectStrategy = new FeatureStoreSelectStrategy({
+      style: createClientDefaultSelectionStyle()
+    });
 
-  private initClientLayerStoresStrategies() {
-    this.clientLayerStoresLoadStrategy = new LayerStoreLoadStrategy([
-      this.clientParcelLayerStore,
-      this.clientSchemaElementSurfaceLayerStore
-    ]);
-    this.clientLayerStoresLoadStrategy.activate();
+    const parcelLoadStrategy = new FeatureStoreLoadStrategy();
+    this.clientState.parcelStore
+      .bindLayer(clientParcelLayer)
+      .addStrategy(parcelLoadStrategy)
+      .addStrategy(selectStrategy);
 
-    this.clientLayerStoresSelectStrategy = new LayerStoreSelectStrategy([
-      this.clientParcelLayerStore,
-      this.clientSchemaElementSurfaceLayerStore
-    ], {style: createClientDefaultSelectionStyle()});
-    this.clientLayerStoresSelectStrategy.activate();
+    const schemaElementLoadStrategy = new FeatureStoreLoadStrategy();
+    this.clientState.schemaElementSurfaceStore
+      .bindLayer(clientSchemaElementSurfaceLayer)
+      .addStrategy(schemaElementLoadStrategy)
+      .addStrategy(selectStrategy);
+
+    parcelLoadStrategy.activate();
+    schemaElementLoadStrategy.activate();
+    selectStrategy.activate();
   }
 }

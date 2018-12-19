@@ -2,6 +2,7 @@ import { Injectable} from '@angular/core';
 
 import { Editor } from 'src/lib/edition';
 import { EntityStore } from 'src/lib/entity';
+import { FeatureStore } from 'src/lib/feature';
 import { Widget } from 'src/lib/widget';
 
 import { ClientParcel } from './client-parcel.interfaces';
@@ -19,7 +20,7 @@ export class ClientParcelEditorService extends Editor {
       tableTemplate: clientParcelTableService.buildTable()
     });
 
-    this.bindEntityStore(new EntityStore<ClientParcel>());
+    this.bindEntityStore(new FeatureStore<ClientParcel>());
     this.bindWidgetStore(new EntityStore<Widget>());
   }
 }

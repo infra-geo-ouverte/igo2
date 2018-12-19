@@ -18,6 +18,7 @@ import {
   ClientSchemaElementSurfaceEditorService
 } from 'src/lib/client';
 import { EntityStore, State, EntityTransaction } from 'src/lib/entity';
+import { FeatureStore } from 'src/lib/feature';
 
 import { EditionState } from '../edition/edition.state';
 
@@ -57,8 +58,8 @@ export class ClientState implements OnDestroy {
     return this.clientParcelEditorService;
   }
 
-  get parcelStore(): EntityStore<ClientParcel> {
-    return this.parcelEditor.entityStore as EntityStore<ClientParcel>;
+  get parcelStore(): FeatureStore<ClientParcel> {
+    return this.parcelEditor.entityStore as FeatureStore<ClientParcel>;
   }
 
   get schemaEditor(): ClientSchemaEditorService {
@@ -73,8 +74,8 @@ export class ClientState implements OnDestroy {
     return this.clientSchemaElementSurfaceEditorService;
   }
 
-  get schemaElementSurfaceStore(): EntityStore<ClientSchemaElementSurface> {
-    return this.schemaElementSurfaceEditor.entityStore as EntityStore<ClientSchemaElementSurface>;
+  get schemaElementSurfaceStore(): FeatureStore<ClientSchemaElementSurface> {
+    return this.schemaElementSurfaceEditor.entityStore as FeatureStore<ClientSchemaElementSurface>;
   }
 
   private parcelYear: ClientParcelYear = undefined;

@@ -1,5 +1,9 @@
+import * as olstyle from 'ol/style';
+
 import { GeoJsonGeometryTypes } from 'geojson';
+
 import { EntityObject } from 'src/lib/entity';
+import { FeatureMotion } from './feature.enum';
 
 export interface Feature extends EntityObject {
   type: string;
@@ -12,4 +16,9 @@ export interface Feature extends EntityObject {
 export interface FeatureGeometry {
   type: GeoJsonGeometryTypes;
   coordinates: any;
+}
+
+export interface FeatureStoreSelectStrategyOptions {
+  motion?: FeatureMotion;
+  style?: olstyle.Style;
 }

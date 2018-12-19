@@ -1,45 +1,76 @@
 import OlFeature from 'ol/Feature';
 
+import { Subject } from 'rxjs';
+
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
-import {
-  FeatureMotion,
-  Feature,
-  featureToOl,
-  moveToFeatures
-} from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { EntityStore } from 'src/lib/entity';
 
-export class LayerStore {
+import { FeatureMotion } from './feature.enum';
+import { Feature } from './feature.interfaces';
+import { featureToOl, moveToFeatures } from './feature.utils';
+import { FeatureStoreStrategy } from './strategies/strategy';
+
+export class FeatureStore<T extends Feature = Feature> extends EntityStore<T> {
+
+  get strategies(): FeatureStoreStrategy[] {
+    return this._strategies;
+  }
+  private _strategies: FeatureStoreStrategy[] = [];
 
   get layer(): VectorLayer {
     return this._layer;
   }
-
-  get store(): EntityStore<Feature> {
-    return this._store;
-  }
+  private _layer: VectorLayer;
 
   get map(): IgoMap {
-    return this.layer.map as IgoMap;
+    return this.layer ? this.layer.map as IgoMap : undefined;
   }
 
   get source(): FeatureDataSource {
-    return this.layer.dataSource as FeatureDataSource;
+    return this.layer ? this.layer.dataSource as FeatureDataSource : undefined;
   }
 
-  constructor(
-    private _layer: VectorLayer,
-    private _store: EntityStore<Feature>
-  ) {}
+  bindLayer(layer: VectorLayer): FeatureStore {
+    this._layer = layer;
+    return this;
+  }
+
+  addStrategy(strategy: FeatureStoreStrategy): FeatureStore {
+    this.strategies.push(strategy);
+    strategy.bindStore(this);
+    return this;
+  }
+
+  removeStrategy(strategy: FeatureStoreStrategy): FeatureStore {
+    const index = this.strategies.indexOf(strategy);
+    if (index >= 0) {
+      this.strategies.splice(index, 1);
+      strategy.unbindStore(this);
+    }
+    return this;
+  }
 
   setLayerFeatures(features: Feature[], motion: FeatureMotion = FeatureMotion.Default) {
-    const olFeatures = features.map((feature: Feature) => featureToOl(feature, this.map.projection));
+    if (this.layer === undefined) {
+      throw new Error('This FeatureStore is not bound to a layer.');
+    }
+
+    const olFeatures = features
+      .map((feature: Feature) => featureToOl(feature, this.map.projection));
     this.setLayerOlFeatures(olFeatures);
   }
 
-  setLayerOlFeatures(olFeatures: OlFeature[], motion: FeatureMotion = FeatureMotion.Default) {
+  clearLayer() {
+    if (this.layer === undefined) {
+      throw new Error('This FeatureStore is not bound to a layer.');
+    }
+
+    this.source.ol.clear();
+  }
+
+  private setLayerOlFeatures(olFeatures: OlFeature[], motion: FeatureMotion = FeatureMotion.Default) {
     const olFeaturesMap = new Map();
     olFeatures.forEach((olFeature: OlFeature) => {
       olFeaturesMap.set(olFeature.getId(), olFeature);
@@ -79,19 +110,17 @@ export class LayerStore {
     }
   }
 
-  clearLayer() {
-    this.source.ol.clear();
-  }
-
   private addOlFeaturesToLayer(olFeatures: OlFeature[]) {
     olFeatures.forEach((olFeature: OlFeature) => {
-      olFeature.set('layerStore', this);
+      olFeature.set('featureStore', this);
     });
     this.source.ol.addFeatures(olFeatures);
   }
 
   private removeOlFeaturesFromLayer(olFeatures: OlFeature[]) {
-    olFeatures.forEach((olFeature: OlFeature) => this.source.ol.removeFeature(olFeature));
+    olFeatures.forEach((olFeature: OlFeature) => {
+      this.source.ol.removeFeature(olFeature);
+    });
   }
 
 }

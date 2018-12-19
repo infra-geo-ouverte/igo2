@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Editor } from 'src/lib/edition';
 import { EntityStore, EntityTransaction } from 'src/lib/entity';
+import { FeatureStore } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { Widget } from 'src/lib/widget';
 
@@ -37,7 +38,7 @@ export class ClientSchemaElementSurfaceEditorService extends Editor {
       tableTemplate: clientSchemaElementTableService.buildSurfaceTable()
     });
 
-    this.bindEntityStore(new EntityStore<ClientSchemaElementSurface>());
+    this.bindEntityStore(new FeatureStore<ClientSchemaElementSurface>());
 
     const widgetStore = new EntityStore<Widget>();
     widgetStore.setEntities(clientSchemaElementWidgetService.buildSurfaceWidgets());

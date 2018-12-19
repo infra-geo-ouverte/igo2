@@ -129,12 +129,12 @@ export function moveToFeatures(
   const viewExtent = scaleExtent(featuresExtent, scale);
 
   if (motion === FeatureMotion.Zoom) {
-    map.zoomToExtent(viewExtent);
+    map.delayedZoomToExtent(viewExtent);
   } else if (motion === FeatureMotion.Move) {
-    map.moveToExtent(viewExtent);
+    map.delayedMoveToExtent(viewExtent);
   } else if (motion === FeatureMotion.Default) {
     if (featuresAreOutOfView(map, featuresExtent) || featuresAreTooDeepInView(map, featuresExtent)) {
-      map.zoomToExtent(viewExtent);
+      map.delayedZoomToExtent(viewExtent);
     }
   }
 }
