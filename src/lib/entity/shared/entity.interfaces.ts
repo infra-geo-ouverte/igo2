@@ -20,6 +20,7 @@ export interface EntityMeta {
   titleHtmlProperty?: string;
   icon?: string;
   iconProperty?: string;
+  revision?: number;
 }
 
 export interface EntityObject<M = EntityMeta> {

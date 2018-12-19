@@ -10,24 +10,26 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { uuid } from '@igo2/utils';
-
-import { EntityStore, EntityFormTemplate, EntityTransaction, getEntityId } from 'src/lib/entity';
-import { FEATURE } from 'src/lib/feature';
+import {
+  EntityStore,
+  EntityFormTemplate,
+  EntityTransaction,
+  getEntityRevision
+} from 'src/lib/entity';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
-import { ClientSchemaElementSurface, ClientSchemaElementProperties } from '../shared/client-schema-element.interfaces';
+import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
 @Component({
-  selector: 'fadq-client-schema-element-surface-create-form',
-  templateUrl: './client-schema-element-surface-create-form.component.html',
-  styleUrls: ['./client-schema-element-surface-create-form.component.scss'],
+  selector: 'fadq-client-schema-element-surface-update-form',
+  templateUrl: './client-schema-element-surface-update-form.component.html',
+  styleUrls: ['./client-schema-element-surface-update-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComponent, OnInit {
+export class ClientSchemaElementSurfaceUpdateFormComponent implements WidgetComponent, OnInit {
 
   public template$ = new Subject<EntityFormTemplate>();
 
@@ -49,11 +51,19 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
       return;
     }
     this._schema = value;
-    // TODO: maybe widgets should have a bindData method that
-    // would handle that
     this.cdRef.detectChanges();
   }
   private _schema: ClientSchema;
+
+  @Input()
+  get element(): ClientSchemaElementSurface {
+    return this._element;
+  }
+  set element(value: ClientSchemaElementSurface) {
+    this._element = value;
+    this.cdRef.detectChanges();
+  }
+  private _element: ClientSchemaElementSurface;
 
   @Input()
   get store(): EntityStore<ClientSchemaElementSurface> {
@@ -82,7 +92,10 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
   ) {}
 
   ngOnInit() {
-    this.clientSchemaElementFormService.buildCreateSurfaceForm(this.map)
+    // TODO: Should we make the original feature invisible?
+    // TODO: Should we unselect it? On the map only?
+    // TODO: Should we disable the select interaction(s)?
+    this.clientSchemaElementFormService.buildUpdateSurfaceForm(this.map)
       .subscribe((template: EntityFormTemplate) => this.template$.next(template));
   }
 
@@ -96,23 +109,12 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
   }
 
   private onSubmitSuccess(element: ClientSchemaElementSurface) {
-    this.transaction.insert(element, this.store);
+    this.transaction.update(this.element, element, this.store);
     this.complete.emit();
   }
 
   private parseData(data: { [key: string]: any }): ClientSchemaElementSurface {
-    const properties = {
-      idSchema: getEntityId(this.schema),
-      idElementGeometrique: undefined,
-      typeElement: undefined,
-      descriptionTypeElement: undefined,
-      etiquette: undefined,
-      description: undefined,
-      anneeImage: undefined,
-      timbreMaj: undefined,
-      usagerMaj: undefined
-    };
-
+    const properties = Object.assign({}, this.element.properties);
     const propertyPrefix = 'properties.';
     Object.entries(data).forEach((entry: [string, any]) => {
       const [key, value] = entry;
@@ -122,16 +124,17 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
       }
     });
 
-    return {
-      meta: {
-        id: uuid(),
-        title: `Surface - ${properties.typeElement} - ${properties.description}`
-      },
-      type: FEATURE,
-      geometry: data.geometry,
-      projection: 'EPSG:4326',
-      properties: properties as ClientSchemaElementProperties
-    };
+    const revision = getEntityRevision(this.element) + 1;
+    const meta = Object.assign({}, this.element.meta, {
+      title: `Surface - ${properties.typeElement} - ${properties.description}`,
+      revision
+    });
+
+   return Object.assign({}, this.element, {
+      meta,
+      properties,
+      geometry: data.geometry
+    });
   }
 
 }

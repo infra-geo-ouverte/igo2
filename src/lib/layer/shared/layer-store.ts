@@ -39,21 +39,27 @@ export class LayerStore {
     this.setLayerOlFeatures(olFeatures);
   }
 
-  setLayerOlFeatures(olFeatures: Feature[], motion: FeatureMotion = FeatureMotion.Default) {
-    const entitiesIds = olFeatures.map((olFeature: OlFeature) => olFeature.getId());
-    const olFeaturesToRemove = [];
+  setLayerOlFeatures(olFeatures: OlFeature[], motion: FeatureMotion = FeatureMotion.Default) {
+    const olFeaturesMap = new Map();
+    olFeatures.forEach((olFeature: OlFeature) => {
+      olFeaturesMap.set(olFeature.getId(), olFeature);
+    });
 
+    const olFeaturesToRemove = [];
     this.source.ol.forEachFeature((olFeature: OlFeature) => {
-      const indexOfEntity = entitiesIds.indexOf(olFeature.getId());
-      if (indexOfEntity < 0) {
+      const newOlFeature = olFeaturesMap.get(olFeature.getId());
+      if (newOlFeature === undefined) {
+        olFeaturesToRemove.push(olFeature);
+      } else if (newOlFeature.get('entityRevision') !== olFeature.get('entityRevision')) {
         olFeaturesToRemove.push(olFeature);
       } else {
-        entitiesIds.splice(indexOfEntity, 1);
+        olFeaturesMap.delete(newOlFeature.getId());
       }
     });
 
+    const olFeaturesToAddIds = Array.from(olFeaturesMap.keys());
     const olFeaturesToAdd = olFeatures.filter((olFeature: OlFeature) => {
-      return entitiesIds.indexOf(olFeature.getId()) >= 0;
+      return olFeaturesToAddIds.indexOf(olFeature.getId()) >= 0;
     });
 
     if (olFeaturesToRemove.length > 0) {

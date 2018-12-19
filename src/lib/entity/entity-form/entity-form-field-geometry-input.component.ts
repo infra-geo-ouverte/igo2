@@ -358,7 +358,7 @@ export class EntityFormFieldGeometryInputComponent
 
   private addOlTranslateInteraction() {
     const olTranslateInteraction = new OlTranslate({
-      source: this.olOverlaySource
+      layers: [this.olOverlayLayer]
     });
 
     this.onTranslateEndKey = olTranslateInteraction.on('translateend', (event) => {

@@ -71,6 +71,11 @@ export function getEntityIcon(entity: Entity): string {
   return icon;
 }
 
+export function getEntityRevision(entity: Entity): number {
+  const meta = entity.meta || {};
+  return meta.revision || 0;
+}
+
 export function sortEntities(
   entities: Entity[],
   property: string,

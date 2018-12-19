@@ -4,7 +4,7 @@ import * as olproj from 'ol/proj';
 import OlFeature from 'ol/Feature';
 import OlFormatGeoJSON from 'ol/format/GeoJSON';
 
-import { getEntityId } from 'src/lib/entity';
+import { getEntityId, getEntityRevision } from 'src/lib/entity';
 import { IgoMap } from 'src/lib/map';
 
 import { FeatureMotion } from './feature.enum';
@@ -26,6 +26,8 @@ export function featureToOl(feature: Feature, projectionOut: string): OlFeature 
   if (feature.extent !== undefined) {
     olFeature.set('extent', feature.extent);
   }
+
+  olFeature.set('entityRevision', getEntityRevision(feature));
 
   return olFeature;
 }

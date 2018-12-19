@@ -16,6 +16,9 @@ import {
 import {
   FadqLibClientSchemaElementSurfaceCreateFormModule
 } from './schema-element-surface-create-form/client-schema-element-surface-create-form.module';
+import {
+  FadqLibClientSchemaElementSurfaceUpdateFormModule
+} from './schema-element-surface-update-form/client-schema-element-surface-update-form.module';
 
 
 @NgModule({
@@ -23,8 +26,9 @@ import {
     CommonModule
   ],
   exports: [
+    FadqLibClientSchemaElementSaverModule,
     FadqLibClientSchemaElementSurfaceCreateFormModule,
-    FadqLibClientSchemaElementSaverModule
+    FadqLibClientSchemaElementSurfaceUpdateFormModule
   ],
   declarations: []
 })

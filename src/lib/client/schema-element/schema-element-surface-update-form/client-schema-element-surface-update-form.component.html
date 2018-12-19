@@ -1,0 +1,9 @@
+
+<ng-container *ngIf="template$ | async as template">
+  <fadq-entity-form
+    [template]="template"
+    [entity]="element"
+    (submitForm)="onSubmit($event)"
+    (cancel)="onCancel()">
+  </fadq-entity-form>
+</ng-container>

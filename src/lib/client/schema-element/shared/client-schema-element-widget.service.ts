@@ -8,6 +8,9 @@ import {
 import {
   ClientSchemaElementSurfaceCreateFormComponent
 } from '../schema-element-surface-create-form/client-schema-element-surface-create-form.component';
+import {
+  ClientSchemaElementSurfaceUpdateFormComponent
+} from '../schema-element-surface-update-form/client-schema-element-surface-update-form.component';
 
 
 @Injectable({
@@ -44,6 +47,7 @@ export class ClientSchemaElementWidgetService {
         icon: 'edit',
         title: 'client.schemaElement.update',
         tooltip: 'client.schemaElement.update.tooltip',
+        component: ClientSchemaElementSurfaceUpdateFormComponent,
         conditions: [
           ClientSchemaElementWidgetService.schemaIsDefined,
           ClientSchemaElementWidgetService.elementIsDefined
