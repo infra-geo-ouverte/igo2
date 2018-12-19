@@ -6,13 +6,12 @@
     [ngClass]="getWidgetClass(toggleWidget)"
     [withTitle]="false"
     [withIcon]="true"
+    [disabled]="store.empty"
     [widget]="toggleWidget"
     (activate)="onToggle()">
   </fadq-widgetbar-item>
 
-  <ng-template
-    *ngIf="visible"
-    ngFor let-widget [ngForOf]="store.entities">
+  <ng-template *ngIf="visible" ngFor let-widget [ngForOf]="store.entities">
     <fadq-widgetbar-item
       color="accent"
       [ngClass]="getWidgetClass(widget)"
