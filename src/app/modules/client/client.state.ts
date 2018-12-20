@@ -21,7 +21,12 @@ import {
   ClientSchemaElementLineEditorService,
   ClientSchemaElementSurfaceEditorService
 } from 'src/lib/client';
-import { EntityStore, State, EntityTransaction } from 'src/lib/entity';
+import {
+  EntityStore,
+  EntityTransaction,
+  State,
+  getEntityId
+} from 'src/lib/entity';
 import { FeatureStore } from 'src/lib/feature';
 
 import { EditionState } from '../edition/edition.state';
@@ -205,7 +210,9 @@ export class ClientState implements OnDestroy {
   private onSelectSchema(schema: ClientSchema) {
     if (schema === undefined) {
       this.clearSchema();
-    } else if (schema !== this.schema) {
+    } else if  (this.schema === undefined) {
+      this.setSchema(schema);
+    } else if (getEntityId(schema) !== getEntityId(this.schema)) {
       this.setSchema(schema);
     }
   }
