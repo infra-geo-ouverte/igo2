@@ -16,15 +16,15 @@
     width 200ms cubic-bezier(.4, 0, .2, 1);
 
   @include small-screen {
-    width: $fadq-expansion-panel-collapsed-height;
+    width: $fadq-expansion-panel-collapsed-width;
   }
 
   @include tablet {
-    width: $fadq-expansion-panel-collapsed-height;
+    width: $fadq-expansion-panel-collapsed-width;
   }
 
   @include mobile {
-    width: $fadq-expansion-panel-collapsed-height;
+    width: $fadq-expansion-panel-collapsed-width;
   }
 }
 
