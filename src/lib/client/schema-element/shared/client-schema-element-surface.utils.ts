@@ -41,5 +41,5 @@ function createSchemaElementSurfaceLayerTextStyle(): olstyle.Text {
 }
 
 function getSchemaElementSurfaceFeatureColor(olFeature: OlFeature) {
-  return [0, 218, 250];
+  return [128, 21, 21];
 }
