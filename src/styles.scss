@@ -61,8 +61,9 @@ body {
   }
 }
 
-th.text-centered td,
+tr.text-centered th,
 tr.text-centered td,
-td.text-centered {
+td.text-centered,
+th.text-centered {
   text-align: center;
 }
