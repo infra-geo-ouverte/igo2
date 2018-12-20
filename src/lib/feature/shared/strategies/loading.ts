@@ -5,7 +5,7 @@ import { Feature } from '../feature.interfaces';
 import { FeatureStore } from '../store';
 import { FeatureStoreStrategy } from './strategy';
 
-export class FeatureStoreLoadStrategy extends FeatureStoreStrategy {
+export class FeatureStoreLoadingStrategy extends FeatureStoreStrategy {
 
   private stores$$ = new Map<FeatureStore, Subscription>();
 

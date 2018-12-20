@@ -1,14 +1,9 @@
-import { IgoMap } from 'src/lib/map';
 import { FeatureStore } from '../store';
 
 export class FeatureStoreStrategy {
 
   protected stores: FeatureStore[] = [];
   protected active = false;
-
-  get map(): IgoMap {
-    return this.stores.length > 0 ? this.stores[0].map : undefined;
-  }
 
   isActive(): boolean {
     return this.active;

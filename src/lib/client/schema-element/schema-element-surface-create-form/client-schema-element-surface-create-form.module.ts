@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FadqLibEntityFormModule } from 'src/lib/entity/entity-form/entity-form.module';
+import { FadqLibFeatureFormModule } from 'src/lib/feature/feature-form/feature-form.module';
 
 import {
   ClientSchemaElementSurfaceCreateFormComponent
@@ -10,7 +10,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    FadqLibEntityFormModule
+    FadqLibFeatureFormModule
   ],
   exports: [
     ClientSchemaElementSurfaceCreateFormComponent

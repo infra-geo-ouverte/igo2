@@ -10,8 +10,8 @@ import {
 
 import {
   FeatureStoreStrategy,
-  FeatureStoreLoadStrategy,
-  FeatureStoreSelectStrategy
+  FeatureStoreLoadingStrategy,
+  FeatureStoreSelectionStrategy
 } from 'src/lib/feature';
 
 import { ClientState } from 'src/app/modules/client/client.state';
@@ -57,24 +57,25 @@ export class MapState implements OnDestroy {
     const clientSchemaElementSurfaceLayer = createSchemaElementSurfaceLayer();
     this.map.addLayer(clientSchemaElementSurfaceLayer, false);
 
-    const selectStrategy = new FeatureStoreSelectStrategy({
+    const selectionStrategy = new FeatureStoreSelectionStrategy({
+      map: this.map,
       style: createClientDefaultSelectionStyle()
     });
 
-    const parcelLoadStrategy = new FeatureStoreLoadStrategy();
+    const parcelLoadingStrategy = new FeatureStoreLoadingStrategy();
     this.clientState.parcelStore
       .bindLayer(clientParcelLayer)
-      .addStrategy(parcelLoadStrategy)
-      .addStrategy(selectStrategy);
+      .addStrategy(parcelLoadingStrategy)
+      .addStrategy(selectionStrategy);
 
-    const schemaElementLoadStrategy = new FeatureStoreLoadStrategy();
+    const schemaElementLoadingStrategy = new FeatureStoreLoadingStrategy();
     this.clientState.schemaElementSurfaceStore
       .bindLayer(clientSchemaElementSurfaceLayer)
-      .addStrategy(schemaElementLoadStrategy)
-      .addStrategy(selectStrategy);
+      .addStrategy(schemaElementLoadingStrategy)
+      .addStrategy(selectionStrategy);
 
-    parcelLoadStrategy.activate();
-    schemaElementLoadStrategy.activate();
-    selectStrategy.activate();
+    parcelLoadingStrategy.activate();
+    schemaElementLoadingStrategy.activate();
+    selectionStrategy.activate();
   }
 }

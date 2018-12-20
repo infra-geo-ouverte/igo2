@@ -3,25 +3,28 @@ import OlFeature from 'ol/Feature';
 import { ListenerFunction } from 'ol/events';
 
 import { Subscription, combineLatest } from 'rxjs';
-import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { map, debounceTime } from 'rxjs/operators';
 
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
 import { State } from 'src/lib/entity';
+import { IgoMap } from 'src/lib/map';
 
-import { Feature, FeatureStoreSelectStrategyOptions } from '../feature.interfaces';
+import { Feature, FeatureStoreSelectionStrategyOptions } from '../feature.interfaces';
 import { FeatureStore } from '../store';
 import { FeatureStoreStrategy } from './strategy';
 
-export class FeatureStoreSelectStrategy extends FeatureStoreStrategy {
+export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
 
+  private map: IgoMap;
   private mapClickListener: ListenerFunction;
   private overlayStore: FeatureStore;
   private stores$$: Subscription;
 
-  constructor(private options?: FeatureStoreSelectStrategyOptions) {
+  constructor(private options?: FeatureStoreSelectionStrategyOptions) {
     super();
     this.overlayStore = this.createOverlayStore();
+    this.map = options.map;
   }
 
   bindStore(store: FeatureStore) {
@@ -41,15 +44,15 @@ export class FeatureStoreSelectStrategy extends FeatureStoreStrategy {
   }
 
   protected doActivate() {
-    this.map.addLayer(this.overlayStore.layer, false);
+    this.addOverlayLayer();
     this.listenToMapClick();
     this.watchAll();
   }
 
   protected doDeactivate() {
-    this.map.removeLayer(this.overlayStore.layer);
     this.unlistenToMapClick();
     this.unwatchAll();
+    this.removeOverlayLayer();
   }
 
   private watchAll() {
@@ -77,8 +80,9 @@ export class FeatureStoreSelectStrategy extends FeatureStoreStrategy {
     this.mapClickListener = this.map.ol.on('singleclick', (event) => {
       const olFeatures = event.map.getFeaturesAtPixel(event.pixel, {
         layerFilter: (olLayer) => {
-          const storeOlLayer = this.stores
-            .find((store: FeatureStore) => store.layer.ol === olLayer);
+          const storeOlLayer = this.stores.find((store: FeatureStore) => {
+            return store.layer.ol === olLayer;
+          });
           return storeOlLayer !== undefined;
         }
       });
@@ -88,8 +92,10 @@ export class FeatureStoreSelectStrategy extends FeatureStoreStrategy {
 
   private unlistenToMapClick() {
     if (this.mapClickListener !== undefined) {
-      this.map.ol.un('singleclick', this.mapClickListener);
-      this.mapClickListener = undefined;
+      this.map.ol.un(
+        this.mapClickListener.type,
+        this.mapClickListener.listener
+      );
     }
   }
 
@@ -104,11 +110,19 @@ export class FeatureStoreSelectStrategy extends FeatureStoreStrategy {
     this.stores.forEach((store: FeatureStore) => {
       const features = groupedFeatures.get(store);
       if (features === undefined) {
-        store.updateAllEntitiesState({selected: false});
+        this.unselectAllFeaturesFromStore(store);
       } else {
-        store.updateEntitiesState(features, {selected: true}, true);
+        this.selectFeaturesFromStore(store, features);
       }
     });
+  }
+
+  private selectFeaturesFromStore(store: FeatureStore, features: Feature[]) {
+    store.updateEntitiesState(features, {selected: true}, true);
+  }
+
+  private unselectAllFeaturesFromStore(store: FeatureStore) {
+    store.updateAllEntitiesState({selected: false});
   }
 
   private groupFeaturesByStore(olFeatures: OlFeature[]): Map<FeatureStore, Feature[]> {
@@ -143,5 +157,16 @@ export class FeatureStoreSelectStrategy extends FeatureStoreStrategy {
     });
 
     return new FeatureStore().bindLayer(overlayLayer);
+  }
+
+  private addOverlayLayer() {
+    this.map.addLayer(this.overlayStore.layer, false);
+  }
+
+  private removeOverlayLayer() {
+    this.overlayStore.source.ol.clear();
+    // Remove directly from the olMap because, for some reason,
+    // removing from the IgoMap doesn't remove the layer
+    this.map.ol.removeLayer(this.overlayStore.layer.ol);
   }
 }

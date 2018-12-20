@@ -1,8 +1,9 @@
 
 <ng-container *ngIf="template$ | async as template">
-  <fadq-entity-form
+  <fadq-feature-form
     [template]="template"
+    [store]="store"
     (submitForm)="onSubmit($event)"
     (cancel)="onCancel()">
-  </fadq-entity-form>
+  </fadq-feature-form>
 </ng-container>

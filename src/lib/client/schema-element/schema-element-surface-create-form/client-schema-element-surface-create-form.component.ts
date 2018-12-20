@@ -10,15 +10,13 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { uuid } from '@igo2/utils';
-
-import { EntityStore, EntityFormTemplate, EntityTransaction, getEntityId } from 'src/lib/entity';
-import { FEATURE } from 'src/lib/feature';
+import { EntityFormTemplate, EntityTransaction, getEntityId } from 'src/lib/entity';
+import { Feature, FeatureStore } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
-import { ClientSchemaElementSurface, ClientSchemaElementProperties } from '../shared/client-schema-element.interfaces';
+import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
 import { generateOperationTitle } from '../shared/client-schema-element.utils';
@@ -58,10 +56,10 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
   private _schema: ClientSchema;
 
   @Input()
-  get store(): EntityStore<ClientSchemaElementSurface> {
+  get store(): FeatureStore<ClientSchemaElementSurface> {
     return this._store;
   }
-  set store(value: EntityStore<ClientSchemaElementSurface>) {
+  set store(value: FeatureStore<ClientSchemaElementSurface>) {
     this._store = value;
   }
   private _store;
@@ -88,8 +86,8 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
       .subscribe((template: EntityFormTemplate) => this.template$.next(template));
   }
 
-  onSubmit(event: {entity: undefined, data: { [key: string]: any }}) {
-    const element = this.parseData(event.data);
+  onSubmit(event: {feature: undefined, data: Feature}) {
+    const element = this.formDataToElement(event.data);
     this.onSubmitSuccess(element);
   }
 
@@ -104,8 +102,8 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
     this.complete.emit();
   }
 
-  private parseData(data: { [key: string]: any }): ClientSchemaElementSurface {
-    const properties = {
+  private formDataToElement(data: Feature): ClientSchemaElementSurface {
+    const properties = Object.assign({
       idSchema: getEntityId(this.schema),
       idElementGeometrique: undefined,
       typeElement: undefined,
@@ -115,26 +113,9 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements WidgetComp
       anneeImage: undefined,
       timbreMaj: undefined,
       usagerMaj: undefined
-    };
+    }, data.properties);
 
-    const propertyPrefix = 'properties.';
-    Object.entries(data).forEach((entry: [string, any]) => {
-      const [key, value] = entry;
-      if (key.startsWith(propertyPrefix)) {
-        const property = key.substr(propertyPrefix.length);
-        properties[property] = value;
-      }
-    });
-
-    return {
-      meta: {
-        id: uuid()
-      },
-      type: FEATURE,
-      geometry: data.geometry,
-      projection: 'EPSG:4326',
-      properties: properties as ClientSchemaElementProperties
-    };
+    return Object.assign({}, data, {properties});
   }
 
 }

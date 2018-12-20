@@ -42,3 +42,9 @@ table.fadq-entity-table-with-selection tr:hover {
 table.fadq-entity-table-with-selection tr.fadq-entity-table-row-selected {
   background-color: #90caf9;
 }
+
+// Allow headers with sort to be centered
+th ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}

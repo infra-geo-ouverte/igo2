@@ -10,12 +10,8 @@ import {
 
 import { Subject } from 'rxjs';
 
-import {
-  EntityStore,
-  EntityFormTemplate,
-  EntityTransaction,
-  getEntityRevision
-} from 'src/lib/entity';
+import { EntityFormTemplate, EntityTransaction, getEntityId } from 'src/lib/entity';
+import { Feature, FeatureStore } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
 
@@ -53,6 +49,8 @@ export class ClientSchemaElementSurfaceUpdateFormComponent implements WidgetComp
       return;
     }
     this._schema = value;
+    // TODO: maybe widgets should have a bindData method that
+    // would handle that
     this.cdRef.detectChanges();
   }
   private _schema: ClientSchema;
@@ -68,10 +66,10 @@ export class ClientSchemaElementSurfaceUpdateFormComponent implements WidgetComp
   private _element: ClientSchemaElementSurface;
 
   @Input()
-  get store(): EntityStore<ClientSchemaElementSurface> {
+  get store(): FeatureStore<ClientSchemaElementSurface> {
     return this._store;
   }
-  set store(value: EntityStore<ClientSchemaElementSurface>) {
+  set store(value: FeatureStore<ClientSchemaElementSurface>) {
     this._store = value;
   }
   private _store;
@@ -94,15 +92,12 @@ export class ClientSchemaElementSurfaceUpdateFormComponent implements WidgetComp
   ) {}
 
   ngOnInit() {
-    // TODO: Should we make the original feature invisible?
-    // TODO: Should we unselect it? On the map only?
-    // TODO: Should we disable the select interaction(s)?
     this.clientSchemaElementFormService.buildUpdateSurfaceForm(this.map)
       .subscribe((template: EntityFormTemplate) => this.template$.next(template));
   }
 
-  onSubmit(event: {entity: undefined, data: { [key: string]: any }}) {
-    const element = this.parseData(event.data);
+  onSubmit(event: {feature: undefined, data: Feature}) {
+    const element = this.formDataToElement(event.data);
     this.onSubmitSuccess(element);
   }
 
@@ -117,28 +112,8 @@ export class ClientSchemaElementSurfaceUpdateFormComponent implements WidgetComp
     this.complete.emit();
   }
 
-  private parseData(data: { [key: string]: any }): ClientSchemaElementSurface {
-    const properties = Object.assign({}, this.element.properties);
-    const propertyPrefix = 'properties.';
-    Object.entries(data).forEach((entry: [string, any]) => {
-      const [key, value] = entry;
-      if (key.startsWith(propertyPrefix)) {
-        const property = key.substr(propertyPrefix.length);
-        properties[property] = value;
-      }
-    });
-
-    const revision = getEntityRevision(this.element) + 1;
-    const meta = Object.assign({}, this.element.meta, {
-      title: `Surface - ${properties.typeElement} - ${properties.description}`,
-      revision
-    });
-
-   return Object.assign({}, this.element, {
-      meta,
-      properties,
-      geometry: data.geometry
-    });
+  private formDataToElement(data: Feature): ClientSchemaElementSurface {
+    return Object.assign({}, data as ClientSchemaElementSurface);
   }
 
 }

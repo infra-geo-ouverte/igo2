@@ -3,6 +3,7 @@ import * as olstyle from 'ol/style';
 import { GeoJsonGeometryTypes } from 'geojson';
 
 import { EntityObject } from 'src/lib/entity';
+import { IgoMap } from 'src/lib/map';
 import { FeatureMotion } from './feature.enum';
 
 export interface Feature extends EntityObject {
@@ -18,7 +19,8 @@ export interface FeatureGeometry {
   coordinates: any;
 }
 
-export interface FeatureStoreSelectStrategyOptions {
+export interface FeatureStoreSelectionStrategyOptions {
+  map: IgoMap;
   motion?: FeatureMotion;
   style?: olstyle.Style;
 }

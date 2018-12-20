@@ -1,6 +1,7 @@
 
 import * as olextent from 'ol/extent';
 import * as olproj from 'ol/proj';
+import * as olstyle from 'ol/style';
 import OlFeature from 'ol/Feature';
 import OlFormatGeoJSON from 'ol/format/GeoJSON';
 
@@ -137,4 +138,8 @@ export function moveToFeatures(
       map.delayedZoomToExtent(viewExtent);
     }
   }
+}
+
+export function hideOlFeature(olFeature: OlFeature) {
+  olFeature.setStyle(new olstyle.Style({}));
 }

@@ -52,6 +52,24 @@ export class FeatureStore<T extends Feature = Feature> extends EntityStore<T> {
     return this;
   }
 
+  getStrategiesOfType(type: typeof FeatureStoreStrategy): FeatureStoreStrategy[] {
+    return this.strategies.filter((strategy: FeatureStoreStrategy) => {
+      return strategy instanceof type;
+    });
+  }
+
+  activateStrategiesOfType(type: typeof FeatureStoreStrategy) {
+    this.getStrategiesOfType(type).forEach((strategy: FeatureStoreStrategy) => {
+      strategy.activate();
+    });
+  }
+
+  deactivateStrategiesOfType(type: typeof FeatureStoreStrategy) {
+    this.getStrategiesOfType(type).forEach((strategy: FeatureStoreStrategy) => {
+      strategy.deactivate();
+    });
+  }
+
   setLayerFeatures(features: Feature[], motion: FeatureMotion = FeatureMotion.Default) {
     if (this.layer === undefined) {
       throw new Error('This FeatureStore is not bound to a layer.');

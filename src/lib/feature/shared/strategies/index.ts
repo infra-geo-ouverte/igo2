@@ -1,3 +1,3 @@
-export * from './load';
-export * from './select';
+export * from './loading';
+export * from './selection';
 export * from './strategy';
