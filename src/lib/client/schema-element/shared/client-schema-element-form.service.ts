@@ -71,8 +71,7 @@ export class ClientSchemaElementFormService {
       name: 'properties.description',
       title: 'Description',
       options:  {
-        cols: 2,
-        validator: Validators.required
+        cols: 2
       }
     }, partial));
   }
