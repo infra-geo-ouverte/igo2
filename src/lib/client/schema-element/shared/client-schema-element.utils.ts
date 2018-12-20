@@ -1,3 +1,5 @@
+import { GeoJsonGeometryTypes } from 'geojson';
+
 import {
   EntityOperation,
   EntityOperationType,
@@ -45,7 +47,18 @@ export class ClientSchemaElementTransactionSerializer {
 }
 
 export function generateOperationTitle(element: AnyClientSchemaElement): string {
+  // TODO: this is for demo purpose. Make it clean.
+  let geometryType;
+  if (element.geometry.type === 'Point') {
+    geometryType = 'Point';
+  } else if (element.geometry.type === 'LineString') {
+    geometryType = 'Ligne';
+  } else if (element.geometry.type === 'Polygon') {
+    geometryType = 'Surface';
+  }
+
   const terms = [
+    geometryType,
     element.properties.typeElement,
     element.properties.description || undefined
   ];

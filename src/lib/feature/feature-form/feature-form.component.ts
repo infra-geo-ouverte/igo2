@@ -136,8 +136,10 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
 
     const featureId = getEntityId(this.feature);
     const olFeature = this.store.source.ol.getFeatureById(featureId);
-    this.olFeatureStyle = olFeature.getStyle();
-    hideOlFeature(olFeature);
+    if (olFeature !== undefined) {
+      this.olFeatureStyle = olFeature.getStyle();
+      hideOlFeature(olFeature);
+    }
   }
 
   private showFeature() {
@@ -147,7 +149,9 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
 
     const featureId = getEntityId(this.feature);
     const olFeature = this.store.source.ol.getFeatureById(featureId);
-    olFeature.setStyle(this.olFeatureStyle);
+    if (olFeature !== undefined) {
+      olFeature.setStyle(this.olFeatureStyle);
+    }
   }
 
   private deactivateSelection() {

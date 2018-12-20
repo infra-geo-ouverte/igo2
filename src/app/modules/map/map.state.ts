@@ -40,6 +40,8 @@ export class MapState implements OnDestroy {
     });
 
     this.addClientLayers();
+    this.clientState.schemaElementPointEditor.setMap(this._map);
+    this.clientState.schemaElementLineEditor.setMap(this._map);
     this.clientState.schemaElementSurfaceEditor.setMap(this._map);
   }
 
@@ -51,31 +53,43 @@ export class MapState implements OnDestroy {
   }
 
   private addClientLayers() {
+    // TODO: Clean this up
     const clientParcelLayer = createParcelLayer();
     this.map.addLayer(clientParcelLayer, false);
+    this.clientState.parcelStore.bindLayer(clientParcelLayer);
+
+    const clientSchemaElementPointLayer = createSchemaElementSurfaceLayer();
+    this.map.addLayer(clientSchemaElementPointLayer, false);
+    this.clientState.schemaElementPointStore.bindLayer(clientSchemaElementPointLayer);
+
+    const clientSchemaElementLineLayer = createSchemaElementSurfaceLayer();
+    this.map.addLayer(clientSchemaElementLineLayer, false);
+    this.clientState.schemaElementLineStore.bindLayer(clientSchemaElementLineLayer);
 
     const clientSchemaElementSurfaceLayer = createSchemaElementSurfaceLayer();
     this.map.addLayer(clientSchemaElementSurfaceLayer, false);
+    this.clientState.schemaElementSurfaceStore.bindLayer(clientSchemaElementSurfaceLayer);
 
-    const selectionStrategy = new FeatureStoreSelectionStrategy({
+    const parcelLoadingStrategy = new FeatureStoreLoadingStrategy();
+    this.clientState.parcelStore.addStrategy(parcelLoadingStrategy);
+
+    const schemaElementLoadingStrategy = new FeatureStoreLoadingStrategy();
+    this.clientState.schemaElementPointStore.addStrategy(schemaElementLoadingStrategy);
+    this.clientState.schemaElementLineStore.addStrategy(schemaElementLoadingStrategy);
+    this.clientState.schemaElementSurfaceStore.addStrategy(schemaElementLoadingStrategy);
+    schemaElementLoadingStrategy.activate();
+
+    const sharedSelectionStrategy = new FeatureStoreSelectionStrategy({
       map: this.map,
       style: createClientDefaultSelectionStyle()
     });
-
-    const parcelLoadingStrategy = new FeatureStoreLoadingStrategy();
-    this.clientState.parcelStore
-      .bindLayer(clientParcelLayer)
-      .addStrategy(parcelLoadingStrategy)
-      .addStrategy(selectionStrategy);
-
-    const schemaElementLoadingStrategy = new FeatureStoreLoadingStrategy();
-    this.clientState.schemaElementSurfaceStore
-      .bindLayer(clientSchemaElementSurfaceLayer)
-      .addStrategy(schemaElementLoadingStrategy)
-      .addStrategy(selectionStrategy);
+    this.clientState.parcelStore.addStrategy(sharedSelectionStrategy);
+    this.clientState.schemaElementPointStore.addStrategy(sharedSelectionStrategy);
+    this.clientState.schemaElementLineStore.addStrategy(sharedSelectionStrategy);
+    this.clientState.schemaElementSurfaceStore.addStrategy(sharedSelectionStrategy);
 
     parcelLoadingStrategy.activate();
     schemaElementLoadingStrategy.activate();
-    selectionStrategy.activate();
+    sharedSelectionStrategy.activate();
   }
 }

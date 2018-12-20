@@ -11,7 +11,7 @@ import { IgoMap, MapWidget, MAP_DEFAULT_WIDGETS } from '../shared';
   selector: 'fadq-map-widgetbar',
   templateUrl: './map-widgetbar.component.html',
   styleUrls: ['./map-widgetbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapWidgetbarComponent {
 

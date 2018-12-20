@@ -8,6 +8,8 @@ import {
 import { ClientSchemaElementFormService } from './shared/client-schema-element-form.service';
 import { ClientSchemaElementTableService } from './shared/client-schema-element-table.service';
 import { ClientSchemaElementWidgetService } from './shared/client-schema-element-widget.service';
+import { ClientSchemaElementPointEditorService } from './shared/client-schema-element-point-editor.service';
+import { ClientSchemaElementLineEditorService } from './shared/client-schema-element-line-editor.service';
 import { ClientSchemaElementSurfaceEditorService } from './shared/client-schema-element-surface-editor.service';
 
 import {
@@ -42,6 +44,8 @@ export class FadqLibClientSchemaElementModule {
         ClientSchemaElementFormService,
         ClientSchemaElementTableService,
         ClientSchemaElementWidgetService,
+        ClientSchemaElementPointEditorService,
+        ClientSchemaElementLineEditorService,
         ClientSchemaElementSurfaceEditorService
       ]
     };

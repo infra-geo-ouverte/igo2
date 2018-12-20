@@ -117,7 +117,7 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     const entitiesIds = entities.map(getEntityId);
     const newEntities = this.entities.slice()
       .filter((entity: Entity) => entitiesIds.indexOf(getEntityId(entity)) < 0);
-    this.setEntitiesState(entities, {} as S);
+    // this.setEntitiesState(entities, {} as S);
     this.setEntities(newEntities, true);
   }
 

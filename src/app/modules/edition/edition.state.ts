@@ -28,6 +28,10 @@ export class EditionState {
     this.store.appendEntities([editor]);
   }
 
+  unregister(editor: Editor) {
+    this.store.removeEntities([editor]);
+  }
+
   selectEditor(editor: Editor) {
     const entity = this.store.getEntityById(getEntityId(editor));
     this.store.updateEntityState(entity, {selected: true}, true);
