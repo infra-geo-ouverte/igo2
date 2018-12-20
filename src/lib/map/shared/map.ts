@@ -44,7 +44,7 @@ export class IgoMap extends IgoLibMap {
 
   private subscribeToMovement() {
     this.movement$$ = this.movement$.pipe(
-      debounceTime(200),
+      debounceTime(100),
       distinctUntilChanged()
     ).subscribe((movement: MapMovement) => this.doMovement(movement));
   }
