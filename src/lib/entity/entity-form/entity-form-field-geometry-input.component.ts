@@ -72,6 +72,9 @@ export class EntityFormFieldGeometryInputComponent
     return this._value;
   }
   set value(value: GeoJSONGeometry) {
+    if (value === null) {
+      value = undefined;
+    }
     if (this.ready === false) {
       this._value = value;
       return;
@@ -192,9 +195,6 @@ export class EntityFormFieldGeometryInputComponent
   }
 
   get representation(): string {
-    if (this.value !== undefined) {
-      return this.geometryType + '...';
-    }
     return this.tooltip || '...';
   }
 
@@ -276,6 +276,7 @@ export class EntityFormFieldGeometryInputComponent
       source: new OlVectorSource(),
       zIndex: 500
     });
+
     this.map.ol.addLayer(this.olOverlayLayer);
   }
 

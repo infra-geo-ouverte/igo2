@@ -110,7 +110,7 @@ export class ClientSchemaElementFormService {
       },
       input: {
         type: 'geometry',
-        tooltip: 'Dessinez la géométrie sur la carte...'
+        tooltip: 'Utilisez la carte pour tracer la géométrie...'
       }
     }, partial));
   }

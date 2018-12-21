@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
+  MatIconModule,
   MatCheckboxModule,
   MatFormFieldModule,
   MatInputModule,
@@ -20,6 +21,7 @@ import { EntityFormFieldGeometryInputComponent } from './entity-form-field-geome
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatIconModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,

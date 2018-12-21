@@ -23,6 +23,11 @@
     [map]="input.map"
     [geometryType]="input.geometryType">
   </fadq-entity-form-field-geometry-input>
+  <mat-icon
+    matSuffix
+    [ngStyle]="{'color': control.valid === true ? 'green' : 'red'}">
+    place
+  </mat-icon>
 </mat-form-field>
 <mat-checkbox
   *ngIf="inputType === 'checkbox'"

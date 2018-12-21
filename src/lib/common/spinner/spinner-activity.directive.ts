@@ -14,17 +14,19 @@ export class SpinnerActivityDirective implements OnInit, OnDestroy {
   private counter$$: Subscription;
 
   constructor(
-    @Self() private component: SpinnerComponent,
+    @Self() private spinner: SpinnerComponent,
     private activityService: ActivityService
   ) {
-    this.component = component;
+    this.spinner = spinner;
   }
 
   ngOnInit() {
     this.counter$$ = this.activityService.counter$
       .pipe(
         debounceTime(50)
-      ).subscribe(count => (this.component.shown = count > 0));
+      ).subscribe((count: number) => {
+        count > 0 ? this.spinner.show() : this.spinner.hide();
+      });
   }
 
   ngOnDestroy() {
