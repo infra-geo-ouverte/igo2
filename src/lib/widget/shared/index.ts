@@ -1,2 +1,3 @@
 export * from './widget.interfaces';
-export * from './widget';
+export * from './widget.service';
+export * from './component';

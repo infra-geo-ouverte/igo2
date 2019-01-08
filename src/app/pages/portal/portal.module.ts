@@ -41,6 +41,7 @@ import { FadqClientModule } from '../../modules/client/client.module';
 import { FadqMapModule } from '../../modules/map/map.module';
 import { FadqSearchModule } from '../../modules/search/search.module';
 import { FadqWidgetModule } from '../../modules/widget/widget.module';
+import { FadqActionModule } from '../../modules/action/action.module';
 import { FadqExpansionPanelModule } from './expansion-panel/expansion-panel.module';
 import { FadqToastPanelModule } from './toast-panel/toast-panel.module';
 import { FadqSidenavModule } from './sidenav/sidenav.module';
@@ -87,7 +88,8 @@ import { PortalComponent } from './portal.component';
     FadqSidenavModule,
     FadqMapModule,
     FadqSearchModule,
-    FadqWidgetModule
+    FadqWidgetModule,
+    FadqActionModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]

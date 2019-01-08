@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  FadqLibDynamicOutletModule
-} from 'src/lib/common/dynamic-outlet/dynamic-outlet.module';
+  FadqLibWidgetOutletModule
+} from 'src/lib/widget/widget-outlet/widget-outlet.module';
 
 import { EditorOutletComponent } from './editor-outlet.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    FadqLibDynamicOutletModule
+    FadqLibWidgetOutletModule
   ],
   exports: [
     EditorOutletComponent

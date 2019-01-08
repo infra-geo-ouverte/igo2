@@ -1,10 +1,6 @@
-import { GeoJsonGeometryTypes } from 'geojson';
-
 import {
   EntityOperation,
   EntityOperationType,
-  EntityTransaction,
-  EntityStore
 } from 'src/lib/entity';
 
 import {
@@ -63,14 +59,4 @@ export function generateOperationTitle(element: AnyClientSchemaElement): string 
     element.properties.description || undefined
   ];
   return terms.filter((term: string) => term !== undefined).join(' - ');
-}
-
-export function deleteClientSchemaElementHandler(data: {
-  element: AnyClientSchemaElement;
-  transaction: EntityTransaction;
-  store: EntityStore<AnyClientSchemaElement>;
-}) {
-  data.transaction.delete(data.element, data.store, {
-    title: generateOperationTitle(data.element)
-  });
 }

@@ -11,8 +11,8 @@ import {
 
 import { IgoLanguageModule } from '@igo2/core';
 
-import { WidgetbarComponent } from './widgetbar.component';
-import { WidgetbarItemComponent } from './widgetbar-item.component';
+import { ActionbarComponent } from './actionbar.component';
+import { ActionbarItemComponent } from './actionbar-item.component';
 
 @NgModule({
   imports: [
@@ -25,11 +25,11 @@ import { WidgetbarItemComponent } from './widgetbar-item.component';
     IgoLanguageModule
   ],
   exports: [
-    WidgetbarComponent
+    ActionbarComponent
   ],
   declarations: [
-    WidgetbarComponent,
-    WidgetbarItemComponent
+    ActionbarComponent,
+    ActionbarItemComponent
   ]
 })
-export class FadqLibWidgetbarModule {}
+export class FadqLibActionbarModule {}

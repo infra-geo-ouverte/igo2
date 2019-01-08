@@ -24,7 +24,7 @@ import { ClientSchemaFormService } from '../shared/client-schema-form.service';
   styleUrls: ['./client-schema-create-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaCreateFormComponent implements WidgetComponent, OnInit {
+export class ClientSchemaCreateFormComponent extends WidgetComponent implements OnInit {
 
   public template$ = new Subject<EntityFormTemplate>();
 
@@ -56,14 +56,13 @@ export class ClientSchemaCreateFormComponent implements WidgetComponent, OnInit 
   }
   private _store;
 
-  @Output() complete = new EventEmitter<ClientSchema>();
-  @Output() cancel = new EventEmitter();
-
   constructor(
     private clientSchemaService: ClientSchemaService,
     private clientSchemaFormService: ClientSchemaFormService,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.clientSchemaFormService.buildCreateForm()

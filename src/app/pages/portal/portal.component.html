@@ -42,7 +42,7 @@
 </mat-sidenav-container>
 
 <div class="fadq-footer">
-  <fadq-map-widgetbar [map]="map"></fadq-map-widgetbar>
+  <fadq-map-actionbar [map]="map"></fadq-map-actionbar>
 </div>
 
 <fadq-expansion-panel
@@ -51,9 +51,9 @@
 
   <ng-container expansionPanelHeader>
     <fadq-editor-selector [store]="editorStore"></fadq-editor-selector>
-    <fadq-widgetbar
+    <fadq-actionbar
       *ngIf="editor" 
-      [store]="editor.widgetStore"
+      [store]="editor.actionStore"
       [horizontal]="true"
       [xPosition]="'after'"
       [yPosition]="'above'"
@@ -61,7 +61,7 @@
       [withToggleButton]="true"
       [withTitle]="!expansionPanelExpanded"
       [collapsed]="!expansionPanelExpanded">
-    </fadq-widgetbar>
+    </fadq-actionbar>
   </ng-container>
 
   <fadq-entity-table
@@ -86,7 +86,7 @@
   <fadq-editor-outlet
     *ngIf="toastPanelContent === 'editor'"
     [editor]="editor"
-    (destroyComponent)="onDestroyEditorComponent()">
+    (deactivateWidget)="onDeactivateEditorWidget()">
   </fadq-editor-outlet>
 
 </fadq-toast-panel>

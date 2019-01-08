@@ -1,8 +1,6 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnInit
@@ -23,7 +21,7 @@ import { ClientSchemaFormService } from '../shared/client-schema-form.service';
   styleUrls: ['./client-schema-duplicate-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaDuplicateFormComponent implements WidgetComponent, OnInit {
+export class ClientSchemaDuplicateFormComponent extends WidgetComponent implements OnInit {
 
   public template$ = new Subject<EntityFormTemplate>();
 
@@ -46,14 +44,13 @@ export class ClientSchemaDuplicateFormComponent implements WidgetComponent, OnIn
   }
   private _store;
 
-  @Output() complete = new EventEmitter<ClientSchema>();
-  @Output() cancel = new EventEmitter();
-
   constructor(
     private clientSchemaService: ClientSchemaService,
     private clientSchemaFormService: ClientSchemaFormService,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.clientSchemaFormService.buildDuplicateForm()

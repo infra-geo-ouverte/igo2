@@ -3,9 +3,6 @@ import {
   ChangeDetectorRef,
   ChangeDetectionStrategy,
   Component,
-  ComponentRef,
-  ComponentFactoryResolver,
-  EventEmitter,
   OnChanges,
   OnDestroy,
   SimpleChanges,
@@ -13,7 +10,8 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { DynamicComponent } from '../shared/dynamic-component';
+import { DynamicComponentService } from '../shared/dynamic-component.service';
 
 @Component({
   selector: 'fadq-dynamic-outlet',
@@ -23,54 +21,47 @@ import { Subscription } from 'rxjs';
 })
 export class DynamicOutletComponent implements OnChanges, OnDestroy {
 
-  private componentRef: ComponentRef<Component>;
-  private subscriptions: Subscription[] = [];
+  @Input()
+  get component(): DynamicComponent<any> { return this._component; }
+  set component(value: DynamicComponent<any>) {
+    // The setter accepts any class but TypeScript won't allow it.
+    // See https://github.com/Microsoft/TypeScript/issues/2521
+    if (value instanceof DynamicComponent) {
+      this._component = value;
+    } else {
+      this._component = this.dynamicComponentService.create(value);
+    }
+  }
+  private _component: DynamicComponent<any>;
 
   @Input()
-  get component(): any {
-    return this._component;
-  }
-  set component(value: any) {
-    this._component = value;
-  }
-  private _component: any;
+  get inputs(): {[key: string]: any} { return this._inputs; }
+  set inputs(value: {[key: string]: any}) { this._inputs = value; }
+  private _inputs: {[key: string]: any};
 
   @Input()
-  get data(): Object {
-    return this._data;
-  }
-  set data(value: Object) {
-    this._data = value;
-  }
-  private _data: Object;
-
-  @Input()
-  get subscribers(): Object {
-    return this._subscribers;
-  }
-  set subscribers(value: Object) {
-    this._subscribers = value;
-  }
-  private _subscribers: Object;
+  get subscribers(): {[key: string]: (event: any) => void} { return this._subscribers; }
+  set subscribers(value: {[key: string]: (event: any) => void}) { this._subscribers = value; }
+  private _subscribers: {[key: string]: (event: any) => void};
 
   @ViewChild('target', { read: ViewContainerRef })
   private target: ViewContainerRef;
 
   constructor(
-    private resolver: ComponentFactoryResolver,
+    private dynamicComponentService: DynamicComponentService,
     private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     const component = changes.component;
-    const data = changes.data;
+    const inputs = changes.inputs;
     const subscribers = changes.subscribers;
 
     if (component && component.currentValue !== component.previousValue) {
       this.createComponent();
     } else {
-      if (data && data.currentValue !== data.previousValue) {
-        this.updateData();
+      if (inputs && inputs.currentValue !== inputs.previousValue) {
+        this.updateInputs();
       }
 
       if (subscribers && subscribers.currentValue !== subscribers.previousValue) {
@@ -81,71 +72,20 @@ export class DynamicOutletComponent implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroyComponent();
+    this.component.destroy();
   }
 
   private createComponent() {
-    this.destroyComponent();
-
-    const component = this.component;
-    const factory = this.resolver.resolveComponentFactory(<any>component);
-    this.componentRef = this.target.createComponent(factory);
-    this.updateData();
+    this.component.setTarget(this.target);
+    this.updateInputs();
     this.updateSubscribers();
   }
 
-  private destroyComponent() {
-    if (this.componentRef !== undefined) {
-      this.componentRef.destroy();
-    }
-    this.target.clear();
-    this.unsubscribeAll();
-  }
-
-  private updateData() {
-    if (this.componentRef === undefined) {
-      return;
-    }
-
-    const instance = this.componentRef.instance;
-    Object.entries(this.data || {}).forEach(([key, value]) => {
-      if (key in instance) {
-        try {
-          instance[key] = value;
-        } catch (e) {
-          if (e instanceof TypeError) {
-            // This happens when trying to set a property that
-            // only has a getter and no setter. We don't want that
-            // to fail so we simply skip this property.
-          } else {
-            throw(e);
-          }
-        }
-      }
-    });
+  private updateInputs() {
+    this.component.updateInputs(this.inputs);
   }
 
   private updateSubscribers() {
-    if (this.componentRef === undefined) {
-      return;
-    }
-
-    const instance = this.componentRef.instance;
-    Object.entries(this.subscribers || {}).forEach(([key, subscriber]) => {
-      if (key in instance) {
-        const emitter = instance[key];
-        if (emitter instanceof EventEmitter) {
-          const subscribers = Array.isArray(subscriber) ? subscriber : [subscriber];
-          subscribers.forEach((_subscriber) => {
-            this.subscriptions.push(emitter.subscribe(_subscriber));
-          });
-        }
-      }
-    });
-  }
-
-  private unsubscribeAll() {
-    this.subscriptions.forEach((s: Subscription) => s.unsubscribe());
-    this.subscriptions = [];
+    this.component.updateSubscribers(this.subscribers);
   }
 }

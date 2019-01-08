@@ -11,8 +11,7 @@ import {
 
 import {
   EntityStore,
-  EntityTableTemplate,
-  getEntityId
+  EntityTableTemplate
 } from 'src/lib/entity';
 import { WidgetComponent } from 'src/lib/widget';
 
@@ -26,7 +25,7 @@ import { ClientSchemaFileService } from '../shared/client-schema-file.service';
   styleUrls: ['./client-schema-file-manager.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit {
+export class ClientSchemaFileManagerComponent extends WidgetComponent implements OnInit {
 
   static tableTemplate: EntityTableTemplate = {
     selection: true,
@@ -68,12 +67,11 @@ export class ClientSchemaFileManagerComponent implements WidgetComponent, OnInit
     return ClientSchemaFileManagerComponent.tableTemplate;
   }
 
-  @Output() complete = new EventEmitter<ClientSchema>();
-  @Output() cancel = new EventEmitter();
-
   @ViewChild('downloadLink') downloadLink: ElementRef;
 
-  constructor(private clientSchemaFileService: ClientSchemaFileService) {}
+  constructor(private clientSchemaFileService: ClientSchemaFileService) {
+    super();
+  }
 
   ngOnInit() {
     this._store = new EntityStore<ClientSchemaFile>();

@@ -27,7 +27,7 @@ import { generateOperationTitle } from '../shared/client-schema-element.utils';
   styleUrls: ['./client-schema-element-surface-update-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSurfaceUpdateFormComponent implements WidgetComponent, OnInit {
+export class ClientSchemaElementSurfaceUpdateFormComponent extends WidgetComponent implements OnInit {
 
   public template$ = new Subject<EntityFormTemplate>();
 
@@ -83,13 +83,12 @@ export class ClientSchemaElementSurfaceUpdateFormComponent implements WidgetComp
   }
   private _transaction;
 
-  @Output() complete = new EventEmitter<ClientSchemaElementSurface>();
-  @Output() cancel = new EventEmitter();
-
   constructor(
     private clientSchemaElementFormService: ClientSchemaElementFormService,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.clientSchemaElementFormService.buildUpdateSurfaceForm(this.map)

@@ -1,4 +1,4 @@
-export enum MapWidget {
+export enum MapAction {
   BaseLayerSwitcher = 'baseLayerSwitcher',
   ZoomIn = 'zoomIn',
   ZoomOut = 'zoomOut',
@@ -9,45 +9,45 @@ export enum MapWidget {
   GoogleView = 'googleView'
 }
 
-export const MAP_DEFAULT_WIDGETS = [
+export const MAP_DEFAULT_ACTIONS = [
   {
-    id: MapWidget.BaseLayerSwitcher,
+    id: MapAction.BaseLayerSwitcher,
     icon: 'photo_library',
-    title: 'map.widgetbar.baselayerswitcher.title'
+    title: 'map.actionbar.baselayerswitcher.title'
   },
   {
-    id: MapWidget.ZoomIn,
+    id: MapAction.ZoomIn,
     icon: 'zoom_in',
-    title: 'map.widgetbar.zoomin.title'
+    title: 'map.actionbar.zoomin.title'
   },
   {
-    id: MapWidget.ZoomOut,
+    id: MapAction.ZoomOut,
     icon: 'zoom_out',
-    title: 'map.widgetbar.zoomout.title'
+    title: 'map.actionbar.zoomout.title'
   },
   {
-    id: MapWidget.PreviousView,
+    id: MapAction.PreviousView,
     icon: 'arrow_back',
-    title: 'map.widgetbar.previousview.title'
+    title: 'map.actionbar.previousview.title'
   },
   {
-    id: MapWidget.NextView,
+    id: MapAction.NextView,
     icon: 'arrow_forward',
-    title: 'map.widgetbar.nextview.title'
+    title: 'map.actionbar.nextview.title'
   },
   {
-    id: MapWidget.ClickInteraction,
+    id: MapAction.ClickInteraction,
     icon: 'mouse',
-    title: 'map.widgetbar.clickinteraction.title'
+    title: 'map.actionbar.clickinteraction.title'
   },
   {
-    id: MapWidget.Geolocation,
+    id: MapAction.Geolocation,
     icon: 'my_location',
-    title: 'map.widgetbar.geolocation.title'
+    title: 'map.actionbar.geolocation.title'
   },
   {
-    id: MapWidget.GoogleView,
+    id: MapAction.GoogleView,
     icon: 'streetview',
-    title: 'map.widgetbar.googleview.title'
+    title: 'map.actionbar.googleview.title'
   }
 ];

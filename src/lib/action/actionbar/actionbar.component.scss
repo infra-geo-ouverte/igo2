@@ -1,4 +1,4 @@
-@import './widgetbar.variables';
+@import './actionbar.variables';
 
 :host {
   display: block;
@@ -21,7 +21,7 @@ mat-list {
     white-space: nowrap;
   }
 
-  fadq-widgetbar-item {
+  fadq-actionbar-item {
     display: inline-block;
   }
 };
@@ -38,25 +38,25 @@ mat-list {
 }
 
 ::ng-deep .mat-list .mat-list-item.mat-list-item-avatar {
-  height: $fadq-widgetbar-item-height;
+  height: $fadq-actionbar-item-height;
 
   .mat-list-item-content {
     display: -webkit-flex;
-    height: $fadq-widgetbar-item-height;
-    padding: $fadq-widgetbar-item-padding;
+    height: $fadq-actionbar-item-height;
+    padding: $fadq-actionbar-item-padding;
   }
 
   .mat-list-item-content > mat-icon {
-    padding: $fadq-widgetbar-item-icon-padding;
+    padding: $fadq-actionbar-item-icon-padding;
   }
 }
 
-fadq-widgetbar-item ::ng-deep mat-list-item [mat-list-avatar] {
+fadq-actionbar-item ::ng-deep mat-list-item [mat-list-avatar] {
   height: auto;
   width: 40px;
 }
 
-fadq-widgetbar-item ::ng-deep mat-list-item:hover {
+fadq-actionbar-item ::ng-deep mat-list-item:hover {
   cursor: pointer;
 }
 
@@ -66,7 +66,7 @@ fadq-widgetbar-item ::ng-deep mat-list-item:hover {
     white-space: nowrap;
   }
 
-  fadq-widgetbar-item {
+  fadq-actionbar-item {
     display: inline-block;
   }
 };

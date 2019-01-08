@@ -1,8 +1,6 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
@@ -20,7 +18,6 @@ import {
 import { WidgetComponent } from 'src/lib/widget';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
-import { AnyClientSchemaElement } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { ClientSchemaElementTransactionSerializer } from '../shared/client-schema-element.utils';
 
@@ -30,7 +27,7 @@ import { ClientSchemaElementTransactionSerializer } from '../shared/client-schem
   styleUrls: ['./client-schema-element-saver.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSaverComponent implements WidgetComponent {
+export class ClientSchemaElementSaverComponent extends WidgetComponent {
 
   static operationIcons = {
     [EntityOperationType.Insert]: 'add',
@@ -88,9 +85,6 @@ export class ClientSchemaElementSaverComponent implements WidgetComponent {
   }
   private _transaction;
 
-  @Output() complete = new EventEmitter<AnyClientSchemaElement>();
-  @Output() cancel = new EventEmitter();
-
   get tableTemplate(): EntityTableTemplate {
     return ClientSchemaElementSaverComponent.tableTemplate;
   }
@@ -102,7 +96,9 @@ export class ClientSchemaElementSaverComponent implements WidgetComponent {
   constructor(
     private clientSchemaElementService: ClientSchemaElementService,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) {
+    super();
+  }
 
   onOperationClick(operation: EntityOperation) {
     const store = operation.store;

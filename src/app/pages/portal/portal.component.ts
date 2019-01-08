@@ -112,7 +112,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get toastPanelOpened(): boolean {
-    if (this.toastPanelContent === 'editor') {
+    const content = this.toastPanelContent;
+    if (content === 'editor') {
       return true;
     }
     return this._toastPanelOpened;
@@ -180,7 +181,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  onDestroyEditorComponent() {
+  onDeactivateEditorWidget() {
     this.closeToastPanel();
   }
 

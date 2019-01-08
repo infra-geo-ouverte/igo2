@@ -1,9 +1,9 @@
 import { Injectable} from '@angular/core';
 
+import { Action } from 'src/lib/action';
 import { Editor } from 'src/lib/edition';
 import { EntityStore } from 'src/lib/entity';
 import { FeatureStore } from 'src/lib/feature';
-import { Widget } from 'src/lib/widget';
 
 import { ClientParcel } from './client-parcel.interfaces';
 import { ClientParcelTableService } from './client-parcel-table.service';
@@ -17,10 +17,9 @@ export class ClientParcelEditorService extends Editor {
     super({
       id: 'fadq.client-parcel-editor',
       title: 'Parcelles du client',
-      tableTemplate: clientParcelTableService.buildTable()
+      tableTemplate: clientParcelTableService.buildTable(),
+      entityStore: new FeatureStore<ClientParcel>(),
+      actionStore: new EntityStore<Action>()
     });
-
-    this.bindEntityStore(new FeatureStore<ClientParcel>());
-    this.bindWidgetStore(new EntityStore<Widget>());
   }
 }

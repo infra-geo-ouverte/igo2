@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FadqLibWidgetbarModule } from './widgetbar/widgetbar.module';
+import { FadqLibWidgetOutletModule } from './widget-outlet/widget-outlet.module';
+import { WidgetService } from './shared/widget.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    FadqLibWidgetbarModule
+    FadqLibWidgetOutletModule
   ],
   exports: [
-    FadqLibWidgetbarModule
+    FadqLibWidgetOutletModule
   ],
   declarations: [],
-  providers: []
+  providers: [
+    WidgetService
+  ]
 })
 export class FadqLibWidgetModule {}

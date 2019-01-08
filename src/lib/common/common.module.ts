@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FadqLibDynamicOutletModule } from './dynamic-outlet/dynamic-outlet.module';
 import { FadqLibSpinnerModule } from './spinner/spinner.module';
+import { DynamicComponentService } from './shared/dynamic-component.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,8 @@ import { FadqLibSpinnerModule } from './spinner/spinner.module';
     FadqLibSpinnerModule
   ],
   declarations: [],
-  providers: []
+  providers: [
+    DynamicComponentService
+  ]
 })
 export class FadqLibCommonModule {}

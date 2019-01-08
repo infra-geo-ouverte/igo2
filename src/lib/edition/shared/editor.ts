@@ -1,24 +1,24 @@
 import { Subscription, BehaviorSubject } from 'rxjs';
 
+import { Action } from 'src/lib/action';
 import {
   Entity,
   EntityClass,
+  EntityStore,
   EntityTableTemplate,
   State
-} from '../../entity/shared/entity.interfaces';
-import { EntityStore } from '../../entity/shared/store';
-import { Widget } from '../../widget/shared/widget.interfaces';
+} from 'src/lib/entity';
+import { Widget } from 'src/lib/widget';
+
 import { EditorConfig } from './edition.interfaces';
 
 export class Editor extends EntityClass {
 
-  public activeWidget$ = new BehaviorSubject<Widget>(undefined);
   public entity$ = new BehaviorSubject<Entity>(undefined);
-  public widgetData$ = new BehaviorSubject<{ [key: string]: any }>({});
+  public widget$ = new BehaviorSubject<Widget>(undefined);
+  public widgetInputs$ = new BehaviorSubject<{ [key: string]: any }>({});
 
-  private activeWidget$$: Subscription;
-  private selectedEntity$$: Subscription;
-  private widgetData$$: Subscription;
+  private entity$$: Subscription;
 
   get id(): string {
     return this.config.id;
@@ -28,159 +28,82 @@ export class Editor extends EntityClass {
     return this.config.title;
   }
 
-  get hasComponent(): boolean {
-    return this.activeWidget && this.activeWidget.component !== undefined;
-  }
-
   get tableTemplate(): EntityTableTemplate {
     return this.config.tableTemplate;
   }
 
-  get entityStore():  EntityStore<Entity> {
-    return this._entityStore;
+  get entityStore(): EntityStore<Entity> {
+    return this.config.entityStore;
   }
-  private _entityStore: EntityStore<Entity>;
 
-  get widgetStore():  EntityStore<Widget> {
-    return this._widgetStore;
-  }
-  private _widgetStore: EntityStore<Widget>;
-
-  get activeWidget(): Widget {
-    return this.activeWidget$.value;
+  get actionStore(): EntityStore<Action> {
+    return this.config.actionStore;
   }
 
   get entity(): Entity {
     return this.entity$.value;
   }
 
-  get widgetData(): { [key: string]: any } {
-    return this.widgetData$.value;
+  get widget(): Widget {
+    return this.widget$.value;
+  }
+
+  get hasComponent(): boolean {
+    return this.widget$.value !== undefined;
   }
 
   constructor(private config: EditorConfig) {
     super();
   }
 
-  bindEntityStore(entityStore: EntityStore<Entity>): Editor {
-    this.unbindEntityStore();
-    this._entityStore = entityStore;
-    return this;
-  }
-
-  unbindEntityStore(): Editor {
-    this._entityStore = undefined;
-    return this;
-  }
-
-  bindWidgetStore(widgetStore: EntityStore<Widget>): Editor {
-    this.unbindWidgetStore();
-    this._widgetStore = widgetStore;
-    return this;
-  }
-
-  unbindWidgetStore(): Editor {
-    this._widgetStore = undefined;
-    return this;
-  }
-
   init() {
-    this.activeWidget$$ = this.widgetStore
-      .observeFirstBy((widget: Widget, state: State) => state.active === true)
-      .subscribe((widget: Widget) => {
-        if (widget === undefined) {
-          this.onDeactivateWidget();
-        } else {
-          this.onActivateWidget(widget);
-        }
-      });
-
-    this.selectedEntity$$ = this.entityStore
+    this.entity$$ = this.entityStore
       .observeFirstBy((entity: Entity, state: State) => state.selected === true)
       .subscribe((entity: Entity) => this.onSelectEntity(entity));
-
-    this.widgetData$$ = this.widgetData$
-      .subscribe((data: { [key: string]: any }) => this.onWidgetDataChange(data));
   }
 
   destroy() {
     this.deactivateWidget();
 
-    if (this.activeWidget$$ !== undefined) {
-      this.activeWidget$$.unsubscribe();
+    if (this.entity$$ !== undefined) {
+      this.entity$$.unsubscribe();
     }
-    if (this.selectedEntity$$ !== undefined) {
-      this.selectedEntity$$.unsubscribe();
-    }
-    if (this.widgetData$$ !== undefined) {
-      this.widgetData$$.unsubscribe();
-    }
+  }
+
+  activateWidget(widget: Widget, inputs: {[key: string]: any} = {}) {
+    this.widget$.next(widget);
+    this.widgetInputs$.next(inputs);
   }
 
   deactivateWidget() {
-    this.updateWidgetData();
-    if (this.activeWidget !== undefined) {
-      this.widgetStore.updateEntityState(this.activeWidget, {active: false});
-    }
-  }
-
-  protected onActivateWidget(widget: Widget) {
-    this.activeWidget$.next(widget);
-    const handler = widget.handler;
-    if (handler !== undefined) {
-      handler(this.widgetData);
-      this.deactivateWidget();
-    }
-  }
-
-  protected onDeactivateWidget() {
-    this.activeWidget$.next(undefined);
+    this.updateActionsAvailability();
+    this.widget$.next(undefined);
   }
 
   protected onSelectEntity(entity: Entity) {
     this.entity$.next(entity);
-    this.updateWidgetData();
+    this.updateActionsAvailability();
   }
 
-  protected computeWidgetData(): { [key: string]: any } {
-    return Object.assign({}, {
-      entity: this.entity,
-      store: this.entityStore
-    });
-  }
+  private updateActionsAvailability() {
+    const availables = [];
+    const unavailables = [];
 
-  private updateWidgetData() {
-    this.widgetData$.next(this.computeWidgetData());
-  }
-
-  private onWidgetDataChange(data: { [key: string]: any }) {
-    this.initWidgets();
-  }
-
-  private initWidgets() {
-    const coldWidgets = [];
-    const hotWidgets = [];
-
-    const widgetData = this.widgetData;
-    this.widgetStore.entities.forEach((widget: Widget) => {
-      const conditions = widget.conditions || [];
-      const widgetIsHot = conditions
-        .every((condition: (data: {[key: string]: any}) => boolean) => {
-          return condition(widgetData);
-        });
-      widgetIsHot ? hotWidgets.push(widget) : coldWidgets.push(widget);
+    this.actionStore.entities.forEach((action: Action) => {
+      const conditions = action.conditions || [];
+      const available = conditions.every((condition: () => boolean) => condition());
+      available ? availables.push(action) : unavailables.push(action);
     });
 
-    if (coldWidgets.length > 0) {
-      this.widgetStore.updateEntitiesState(coldWidgets, {
+    if (unavailables.length > 0) {
+      this.actionStore.updateEntitiesState(unavailables, {
         disabled: true,
-        selected: false,
         active: false
       });
     }
 
-    if (hotWidgets.length > 0) {
-      this.widgetStore.updateEntitiesState(hotWidgets, {
+    if (availables.length > 0) {
+      this.actionStore.updateEntitiesState(availables, {
         disabled: false
       });
     }

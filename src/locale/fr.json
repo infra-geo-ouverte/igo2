@@ -112,30 +112,38 @@
   },
 
   "map": {
-    "widgetbar": {
+    "actionbar": {
       "baselayerswitcher": {
-        "title": "Change Base Layer"
+        "title": "Change Base Layer",
+        "tooltip": "Change Base Layer"
       },
       "zoomin": {
-        "title": "Zoom In"
+        "title": "Zoom In",
+        "tooltip": "Zoom In"
       },
       "zoomout": {
-        "title": "Zoom Out"
+        "title": "Zoom Out",
+        "tooltip": "Zoom Out"
       },
       "previousview": {
-        "title": "Previous View"
+        "title": "Previous View",
+        "tooltip": "Previous View"
       },
       "nextview": {
-        "title": "Next View"
+        "title": "Next View",
+        "tooltip": "Next View"
       },
       "clickinteraction": {
-        "title": "Change Click Interaction"
+        "title": "Change Click Interaction",
+        "tooltip": "Change Click Interaction"
       },
       "geolocation": {
-        "title": "Geolocate"
+        "title": "Geolocate",
+        "tooltip": "Geolocate"
       },
       "googleview": {
-        "title": "View in Google Maps"
+        "title": "View in Google Maps",
+        "tooltip": "View in Google Maps"
       }
     }
   }

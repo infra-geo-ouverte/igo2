@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FadqLibMapWidgetbarModule } from './map-widgetbar/map-widgetbar.module';
+import { FadqLibMapActionbarModule } from './map-actionbar/map-actionbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FadqLibMapWidgetbarModule
+    FadqLibMapActionbarModule
   ],
   exports: [
-    FadqLibMapWidgetbarModule
+    FadqLibMapActionbarModule
   ],
   declarations: []
 })

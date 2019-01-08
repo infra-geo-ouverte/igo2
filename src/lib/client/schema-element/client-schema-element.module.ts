@@ -2,17 +2,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  provideClientSchemaElementSurfaceService,
-  provideClientSchemaElementService
-} from './shared/client-schema-element.providers';
-import { ClientSchemaElementFormService } from './shared/client-schema-element-form.service';
-import { ClientSchemaElementTableService } from './shared/client-schema-element-table.service';
-import { ClientSchemaElementWidgetService } from './shared/client-schema-element-widget.service';
-import { ClientSchemaElementPointEditorService } from './shared/client-schema-element-point-editor.service';
-import { ClientSchemaElementLineEditorService } from './shared/client-schema-element-line-editor.service';
-import { ClientSchemaElementSurfaceEditorService } from './shared/client-schema-element-surface-editor.service';
-
-import {
   FadqLibClientSchemaElementSaverModule
 } from './schema-element-saver/client-schema-element-saver.module';
 import {
@@ -22,6 +11,20 @@ import {
   FadqLibClientSchemaElementSurfaceUpdateFormModule
 } from './schema-element-surface-update-form/client-schema-element-surface-update-form.module';
 
+import {
+  provideClientSchemaElementSurfaceService,
+  provideClientSchemaElementService
+} from './shared/client-schema-element.providers';
+import {
+  provideClientSchemaElementSaverWidget,
+  provideClientSchemaElementSurfaceCreateWidget,
+  provideClientSchemaElementSurfaceUpdateWidget
+} from './shared/client-schema-element.widgets';
+import { ClientSchemaElementFormService } from './shared/client-schema-element-form.service';
+import { ClientSchemaElementTableService } from './shared/client-schema-element-table.service';
+import { ClientSchemaElementPointEditorService } from './shared/client-schema-element-point-editor.service';
+import { ClientSchemaElementLineEditorService } from './shared/client-schema-element-line-editor.service';
+import { ClientSchemaElementSurfaceEditorService } from './shared/client-schema-element-surface-editor.service';
 
 @NgModule({
   imports: [
@@ -41,9 +44,11 @@ export class FadqLibClientSchemaElementModule {
       providers: [
         provideClientSchemaElementSurfaceService(),
         provideClientSchemaElementService(),
+        provideClientSchemaElementSaverWidget(),
+        provideClientSchemaElementSurfaceCreateWidget(),
+        provideClientSchemaElementSurfaceUpdateWidget(),
         ClientSchemaElementFormService,
         ClientSchemaElementTableService,
-        ClientSchemaElementWidgetService,
         ClientSchemaElementPointEditorService,
         ClientSchemaElementLineEditorService,
         ClientSchemaElementSurfaceEditorService
