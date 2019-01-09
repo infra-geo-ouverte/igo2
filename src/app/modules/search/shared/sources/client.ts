@@ -14,6 +14,9 @@ import { ClientData } from './client.interfaces';
 
 import { ClientState } from 'src/app/modules/client/client.state';
 
+/**
+ * Client search source
+ */
 @Injectable()
 export class ClientSearchSource extends SearchSource implements TextSearch {
 
@@ -27,16 +30,25 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
     super(options);
   }
 
-  getId(): string {
-    return ClientSearchSource.id;
-  }
+  /**
+   * @ignore
+   */
+  getId(): string { return ClientSearchSource.id; }
 
+  /**
+   * @ignore
+   */
   getDefaultOptions(): SearchSourceOptions {
     return {
       title: 'Client (FADQ)'
     };
   }
 
+  /**
+   * Search a client by num
+   * @param term Client num
+   * @returns
+   */
   search(term?: string): Observable<SearchResult<Client>[]> {
     return this.clientState.getSetClientByNum(term)
       .pipe(

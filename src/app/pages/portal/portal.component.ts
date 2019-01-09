@@ -262,8 +262,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.openExpansionPanel();
     }
 
-    // this.editionState.selectEditor(this.clientState.parcelEditor);
-
     const tool = this.toolService.getTool('client');
     this.toolService.selectTool(tool);
 
@@ -271,7 +269,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onSearchClient(client: Client) {
-    this.editionState.selectEditor(this.clientState.parcelEditor);
+    this.editionState.setEditor(this.clientState.parcelEditor);
   }
 
   private onFocusSearchResult(result: SearchResult) {

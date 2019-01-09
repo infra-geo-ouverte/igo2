@@ -6,6 +6,9 @@ import {
 import { FadqLibCatalogModule } from 'src/lib/catalog/catalog.module';
 import { CatalogLibraryToolComponent } from './catalog-library-tool.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [FadqLibCatalogModule],
   declarations: [CatalogLibraryToolComponent],

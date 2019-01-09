@@ -7,6 +7,9 @@ import { FadqLibSearchResultsModule } from 'src/lib/search/search-results/search
 
 import { SearchResultsToolComponent } from './search-results-tool.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [FadqLibSearchResultsModule],
   declarations: [SearchResultsToolComponent],

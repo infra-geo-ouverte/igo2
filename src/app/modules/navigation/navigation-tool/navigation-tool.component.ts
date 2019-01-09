@@ -22,16 +22,30 @@ import { NavigationToolOptions } from './navigation-tool.interfaces';
 })
 export class NavigationToolComponent {
 
+  /**
+   * Navigation tool options. At the moment, this needs to be defined
+   * in order to be set by the toolbox component that contains it.
+   */
   public options: NavigationToolOptions = {} as NavigationToolOptions;
 
-  get map(): IgoMap {
-    return this.mapState.map;
-  }
+  /**
+   * Map to navigate on
+   * @ignore
+   */
+  get map(): IgoMap { return this.mapState.map; }
 
+  /**
+   * Available place catagories
+   * @ignore
+   */
   get categories(): PlaceCategory[] {
     return this.options.categories === undefined ? [] : this.options.categories;
   }
 
+  /**
+   * Available points of interest
+   * @ignore
+   */
   get pois(): Poi[] {
     return this.options.pois === undefined ? [] : this.options.pois;
   }

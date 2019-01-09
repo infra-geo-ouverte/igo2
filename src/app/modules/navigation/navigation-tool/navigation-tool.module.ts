@@ -10,6 +10,9 @@ import { FadqLibPoiSelectorModule } from 'src/lib/navigation/poi-selector/poi-se
 
 import { NavigationToolComponent } from './navigation-tool.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     MatDividerModule,

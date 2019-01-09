@@ -12,6 +12,9 @@ import { SearchResult } from 'src/lib/search';
 import { MapState } from 'src/app/modules/map/map.state';
 import { SearchState } from '../search.state';
 
+/**
+ * Tool to browse the search results
+ */
 @Register({
   name: 'searchResultsFadq',
   title: 'igo.tools.searchResults',
@@ -24,13 +27,17 @@ import { SearchState } from '../search.state';
 })
 export class SearchResultsToolComponent {
 
-  get store(): EntityStore<SearchResult> {
-    return this.searchState.store;
-  }
+  /**
+   * Store holding the search results
+   * @ignore
+   */
+  get store(): EntityStore<SearchResult> { return this.searchState.store; }
 
-  get map(): IgoMap {
-    return this.mapState.map;
-  }
+  /**
+   * Map to display the results on
+   * @ignore
+   */
+  get map(): IgoMap { return this.mapState.map; }
 
   constructor(
     private mapState: MapState,
@@ -38,15 +45,29 @@ export class SearchResultsToolComponent {
     private searchState: SearchState
   ) {}
 
+  /**
+   * Try to add a feature to the map when it's being focused
+   * @ignore
+   * @param result A search result that could be a feature
+   */
   onResultFocus(result: SearchResult) {
     this.tryAddFeatureToMap(result);
   }
 
+  /**
+   * Try to add a feature or a layer to the map when it's being selected
+   * @ignore
+   * @param result A search result that could be a feature or some layer options
+   */
   onResultSelect(result: SearchResult) {
     this.tryAddFeatureToMap(result);
     this.tryAddLayerToMap(result);
   }
 
+  /**
+   * Try to add a feature to the map overlay
+   * @param result A search result that could be a feature
+   */
   private tryAddFeatureToMap(result: SearchResult) {
     if (result.meta.dataType !== FEATURE) {
       return undefined;
@@ -55,6 +76,10 @@ export class SearchResultsToolComponent {
     this.map.overlay.setFeatures([feature], FeatureMotion.Default);
   }
 
+  /**
+   * Try to add a layer to the map
+   * @param result A search result that could be some layer options
+   */
   private tryAddLayerToMap(result: SearchResult) {
     const map = this.mapState.map;
     if (map === undefined) {

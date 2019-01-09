@@ -15,12 +15,18 @@ import { getEntityId } from './entity.utils';
 
 export class EntityStore<T extends Entity | EntityClass, S extends { [key: string]: boolean } = State> {
 
+  /**
+   * Property documentation
+   */
   private entities$ = new BehaviorSubject<T[]>([]);
   private filtered$ = new BehaviorSubject<T[]>(this.entities);
   private observable$ = new BehaviorSubject<T[]>(this.filtered);
   private filtered$$: Subscription;
   private observable$$: Subscription;
 
+  /**
+   * Returns the entity store state
+   */
   get state(): EntityState<S> {
     return this._state;
   }
@@ -74,6 +80,11 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     this.setEntities([], soft);
   }
 
+  /**
+   * Method documentation
+   * @param entities Test untyped
+   * @param {boolean} soft Test typed
+   */
   setEntities(entities: T[], soft = false) {
     this.entities$.next(entities);
     if (soft === false) {

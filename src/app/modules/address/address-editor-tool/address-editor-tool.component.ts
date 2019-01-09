@@ -2,6 +2,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { Register } from '@igo2/context';
 
+/**
+ * Tool to edit addresses from Adresse Quebec.
+ */
 @Register({
   name: 'addressEditor',
   title: 'tools.addressEditor',
@@ -13,5 +16,6 @@ import { Register } from '@igo2/context';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddressEditorToolComponent {
+
   constructor() {}
 }

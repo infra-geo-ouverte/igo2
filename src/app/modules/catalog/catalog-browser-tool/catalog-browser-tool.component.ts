@@ -16,6 +16,9 @@ import { Catalog, CatalogItem, CatalogService } from 'src/lib/catalog';
 import { MapState } from 'src/app/modules/map/map.state';
 import { CatalogState } from '../catalog.state';
 
+/**
+ * Tool to browse a catalog's groups and layers.
+ */
 @Register({
   name: 'catalogBrowser',
   title: 'igo.tools.catalog',
@@ -28,13 +31,22 @@ import { CatalogState } from '../catalog.state';
 })
 export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
 
+  /**
+   * Store that contains the catalog items
+   * @ignore
+   */
   public store: EntityStore<CatalogItem>;
 
+  /**
+   * Subscription to the selected catalog
+   */
   private catalog$$: Subscription;
 
-  get map(): IgoMap {
-    return this.mapState.map;
-  }
+  /**
+   * Map to add layers to
+   * @ignore
+   */
+  get map(): IgoMap { return this.mapState.map; }
 
   constructor(
     private catalogService: CatalogService,
@@ -42,6 +54,9 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
     private mapState: MapState
   ) {}
 
+  /**
+   * @ignore
+   */
   ngOnInit() {
     const catalogStore = this.catalogState.catalogStore;
 
@@ -50,10 +65,18 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
       .subscribe((catalog: Catalog) => this.loadCatalogItems(catalog));
   }
 
+  /**
+   * @ignore
+   */
   ngOnDestroy() {
     this.catalog$$.unsubscribe();
   }
 
+  /**
+   * Get the selected catalog's items from the CatalogService and
+   * load them into the store.
+   * @param catalog Selected catalog
+   */
   private loadCatalogItems(catalog: Catalog) {
     const store = this.catalogState.getCatalogItemsStore(catalog);
     if (store !== undefined) {

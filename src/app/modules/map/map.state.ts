@@ -16,14 +16,18 @@ import {
 
 import { ClientState } from 'src/app/modules/client/client.state';
 
+/**
+ * Service that holds the state of the map module
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class MapState implements OnDestroy {
 
-  get map(): IgoMap {
-    return this._map;
-  }
+  /**
+   * Active map
+   */
+  get map(): IgoMap { return this._map; }
   private _map: IgoMap;
 
   constructor(
@@ -45,6 +49,9 @@ export class MapState implements OnDestroy {
     this.clientState.schemaElementSurfaceEditor.setMap(this._map);
   }
 
+  /**
+   * @ignore
+   */
   ngOnDestroy() {
     this.clientState.parcelStore.strategies
       .forEach((strategy: FeatureStoreStrategy) => strategy.deactivate());
@@ -52,6 +59,11 @@ export class MapState implements OnDestroy {
       .forEach((strategy: FeatureStoreStrategy) => strategy.deactivate());
   }
 
+  /**
+   * Add all kinds of layers related to a client;
+   * parcels, schema points, schema lines, schema surfaces.
+   * Also bind them to a feature store and initialize the loading and selection strategies.
+   */
   private addClientLayers() {
     // TODO: Clean this up
     const clientParcelLayer = createParcelLayer();

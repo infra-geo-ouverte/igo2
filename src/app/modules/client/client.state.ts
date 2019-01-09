@@ -31,79 +31,93 @@ import { FeatureStore } from 'src/lib/feature';
 
 import { EditionState } from '../edition/edition.state';
 
+/**
+ * Service that holds the state of the client module
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class ClientState implements OnDestroy {
 
+  /** Observable of the active client */
   public client$ = new BehaviorSubject<Client>(undefined);
+
+  /** Observable of the active schema */
   public schema$ = new BehaviorSubject<ClientSchema>(undefined);
 
+  /** Subscription to the selected diagram  */
   private selectedDiagram$$: Subscription;
+
+  /** Subscription to the selected parcel year  */
   private selectedParcelYear$$: Subscription;
+
+  /** Subscription to the selected schema  */
   private selectedSchema$$: Subscription;
 
   private schemaElementTransaction: EntityTransaction;
+  private parcelYear: ClientParcelYear = undefined;
 
-  get client(): Client {
-    return this.client$.value;
-  }
+  /** Active client */
+  get client(): Client { return this.client$.value; }
 
-  get schema(): ClientSchema {
-    return this.schema$.value;
-  }
+  /** Active client schema */
+  get schema(): ClientSchema { return this.schema$.value; }
 
-  get diagramStore(): EntityStore<ClientParcelDiagram> {
-    return this._diagramStore;
-  }
+  /** Store that holds the diagrams of the active client */
+  get diagramStore(): EntityStore<ClientParcelDiagram> { return this._diagramStore; }
   private _diagramStore: EntityStore<ClientParcelDiagram>;
 
-  get parcelYearStore(): EntityStore<ClientParcelYear> {
-    return this._parcelYearStore;
-  }
+  /** Store that holds all the "parcel years". This is not on a per client basis. */
+  get parcelYearStore(): EntityStore<ClientParcelYear> { return this._parcelYearStore; }
   private _parcelYearStore: EntityStore<ClientParcelYear>;
 
-  get parcelEditor(): ClientParcelEditorService {
-    return this.clientParcelEditorService;
-  }
+  /** Parcel editor */
+  get parcelEditor(): ClientParcelEditorService { return this.clientParcelEditorService; }
 
+  /** Store that holds the parcels of the active client */
   get parcelStore(): FeatureStore<ClientParcel> {
     return this.parcelEditor.entityStore as FeatureStore<ClientParcel>;
   }
 
+  /** Schema editor */
   get schemaEditor(): ClientSchemaEditorService {
     return this.clientSchemaEditorService;
   }
 
+  /** Store that holds the schemas of the active client */
   get schemaStore(): EntityStore<ClientSchema> {
     return this.schemaEditor.entityStore as EntityStore<ClientSchema>;
   }
 
+  /** Schema points editor */
   get schemaElementPointEditor(): ClientSchemaElementPointEditorService {
     return this.clientSchemaElementPointEditorService;
   }
 
+  /** Store that holds the points of the active schema */
   get schemaElementPointStore(): FeatureStore<ClientSchemaElementPoint> {
     return this.schemaElementPointEditor.entityStore as FeatureStore<ClientSchemaElementPoint>;
   }
 
+  /** Schema points editor */
   get schemaElementLineEditor(): ClientSchemaElementLineEditorService {
     return this.clientSchemaElementLineEditorService;
   }
 
+  /** Store that holds the lines of the active schema */
   get schemaElementLineStore(): FeatureStore<ClientSchemaElementLine> {
     return this.schemaElementLineEditor.entityStore as FeatureStore<ClientSchemaElementLine>;
   }
 
+  /** Schema surfaces editor */
   get schemaElementSurfaceEditor(): ClientSchemaElementSurfaceEditorService {
     return this.clientSchemaElementSurfaceEditorService;
   }
 
+  /** Store that holds the surfaces of the active schema */
   get schemaElementSurfaceStore(): FeatureStore<ClientSchemaElementSurface> {
     return this.schemaElementSurfaceEditor.entityStore as FeatureStore<ClientSchemaElementSurface>;
   }
-
-  private parcelYear: ClientParcelYear = undefined;
 
   constructor(
     private clientService: ClientService,

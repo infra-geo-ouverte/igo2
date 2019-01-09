@@ -8,6 +8,9 @@ import { FadqLibClientModule } from 'src/lib/client/client.module';
 
 import { ClientToolComponent } from './client-tool.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

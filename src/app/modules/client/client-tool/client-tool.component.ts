@@ -15,6 +15,9 @@ import {
 
 import { ClientState } from '../client.state';
 
+/**
+ * Tool to display a client's info
+ */
 @Register({
   name: 'client',
   title: 'tools.client',
@@ -28,18 +31,32 @@ import { ClientState } from '../client.state';
 })
 export class ClientToolComponent {
 
-  get client$(): Observable<Client> {
-    return this.clientState.client$;
-  }
+  /**
+   * Observable of the active client
+   * @ignore
+   */
+  get client$(): Observable<Client> { return this.clientState.client$; }
 
+  /**
+   * Store holding all the avaiables "parcel years"
+   * @ignore
+   */
   get parcelYearStore(): EntityStore<ClientParcelYear> {
     return this.clientState.parcelYearStore;
   }
 
+  /**
+   * Store holding the active client's diagrams
+   * @ignore
+   */
   get diagramStore(): EntityStore<ClientParcelDiagram> {
     return this.clientState.diagramStore;
   }
 
+  /**
+   * Store holding the active client's schemas
+   * @ignore
+   */
   get schemaStore(): EntityStore<ClientSchema> {
     return this.clientState.schemaStore;
   }
@@ -49,6 +66,12 @@ export class ClientToolComponent {
     private configService: ConfigService
   ) {}
 
+  /**
+   * Compute the link to the client's info
+   * @ignore
+   * @param client
+   * @returns External link to the client's info
+   */
   computeClientInfoLink(client: Client): string {
     const baseUrl = this.configService.getConfig('client.infoLink');
     return  substituteProperties(baseUrl, {
@@ -56,6 +79,11 @@ export class ClientToolComponent {
     });
   }
 
+  /**
+   * Open the client's info link into a new window
+   * @ignore
+   * @param client
+   */
   openClientInfoLink(client: Client) {
     window.open(this.computeClientInfoLink(client), 'Client', 'width=800, height=600');
     return false;
