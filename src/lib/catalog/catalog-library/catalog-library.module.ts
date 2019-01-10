@@ -12,6 +12,9 @@ import { IgoListModule } from '@igo2/common';
 import { CatalogLibaryComponent, } from './catalog-library.component';
 import { CatalogLibaryItemComponent } from './catalog-library-item.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

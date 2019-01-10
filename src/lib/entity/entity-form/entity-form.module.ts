@@ -15,6 +15,9 @@ import { EntityFormComponent } from './entity-form.component';
 import { EntityFormFieldComponent } from './entity-form-field.component';
 import { EntityFormFieldGeometryInputComponent } from './entity-form-field-geometry-input.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

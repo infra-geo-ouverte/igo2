@@ -24,7 +24,7 @@ export class CatalogLibraryToolComponent implements OnInit {
 
   /**
    * Store that contains the catalogs
-   * @ignore
+   * @internal
    */
   get store(): EntityStore<Catalog> { return this.catalogState.catalogStore; }
 
@@ -35,7 +35,7 @@ export class CatalogLibraryToolComponent implements OnInit {
   ) {}
 
   /**
-   * @ignore
+   * @internal
    */
   ngOnInit() {
     if (this.store.empty) {
@@ -45,7 +45,7 @@ export class CatalogLibraryToolComponent implements OnInit {
 
   /**
    * When the selected catalog changes, toggle the the CatalogBrowser tool.
-   * @ignore
+   * @internal
    * @param event Select event
    */
   onCatalogSelectChange(event: {selected: boolean; catalog: Catalog}) {

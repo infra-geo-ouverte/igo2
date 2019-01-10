@@ -5,6 +5,9 @@ import { getEntityTitle, getEntityIcon } from 'src/lib/entity';
 
 import { Catalog } from '../shared/catalog.interfaces';
 
+/**
+ * Catalog library item
+ */
 @Component({
   selector: 'fadq-catalog-library-item',
   templateUrl: './catalog-library-item.component.html',
@@ -12,29 +15,23 @@ import { Catalog } from '../shared/catalog.interfaces';
 })
 export class CatalogLibaryItemComponent {
 
-  @Input()
-  get catalog(): Catalog {
-    return this._catalog;
-  }
-  set catalog(value: Catalog) {
-    this._catalog = value;
-  }
-  private _catalog: Catalog;
+  /**
+   * Catalog
+   */
+  @Input() catalog: Catalog;
 
-  @Input()
-  get map(): IgoMap {
-    return this._map;
-  }
-  set map(value: IgoMap) {
-    this._map = value;
-  }
-  private _map;
+  /**
+   * Map to add the catalog items to
+   */
+  @Input() map: IgoMap;
 
-  get title(): string {
-    return getEntityTitle(this.catalog);
-  }
+  /**
+   * @internal
+   */
+  get title(): string { return getEntityTitle(this.catalog); }
 
-  get icon(): string {
-    return getEntityIcon(this.catalog) || 'photo_library';
-  }
+  /**
+   * @internal
+   */
+  get icon(): string { return getEntityIcon(this.catalog) || 'photo_library'; }
 }

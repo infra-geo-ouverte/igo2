@@ -8,6 +8,9 @@ import { FadqLibEntityFormModule } from 'src/lib/entity/entity-form/entity-form.
 
 import { ClientSchemaDuplicateFormComponent } from './client-schema-duplicate-form.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

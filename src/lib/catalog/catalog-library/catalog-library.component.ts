@@ -15,6 +15,9 @@ import { EntityStore } from '../../entity/shared/store';
 import { EntityStoreController } from '../../entity/shared/controller';
 import { Catalog } from '../shared/catalog.interfaces';
 
+/**
+ * Component to browse a list of available catalogs
+ */
 @Component({
   selector: 'fadq-catalog-library',
   templateUrl: './catalog-library.component.html',
@@ -22,26 +25,24 @@ import { Catalog } from '../shared/catalog.interfaces';
 })
 export class CatalogLibaryComponent implements OnInit, OnDestroy {
 
+  /**
+   * Catalogs store controller
+   */
   private controller: EntityStoreController;
 
-  @Input()
-  get store(): EntityStore<Catalog> {
-    return this._store;
-  }
-  set store(value: EntityStore<Catalog>) {
-    this._store = value;
-  }
-  private _store;
+  /**
+   * Store holding the catalogs
+   */
+  @Input() store: EntityStore<Catalog>;
 
-  @Input()
-  get map(): IgoMap {
-    return this._map;
-  }
-  set map(value: IgoMap) {
-    this._map = value;
-  }
-  private _map;
+  /**
+   * Map to add the catalog items to
+   */
+  @Input() map: IgoMap;
 
+  /**
+   * Event emitted a catalog is selected or unselected
+   */
   @Output() catalogSelectChange = new EventEmitter<{
     selected: boolean;
     catalog: Catalog;
@@ -52,15 +53,26 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
       .withChangeDetector(this.cdRef);
   }
 
+  /**
+   * @internal
+   */
   ngOnInit() {
     this.store.state.reset();
     this.controller.bind(this.store);
   }
 
+  /**
+   * @internal
+   */
   ngOnDestroy() {
     this.controller.unbind();
   }
 
+  /**
+   * When a catalog is selected, update it's state in the store
+   * and emit the catalog select change event
+   * @internal
+   */
   onCatalogSelect(catalog: Catalog) {
     this.controller.updateEntityState(catalog, {
       selected: true,

@@ -29,13 +29,13 @@ export class SearchResultsToolComponent {
 
   /**
    * Store holding the search results
-   * @ignore
+   * @internal
    */
   get store(): EntityStore<SearchResult> { return this.searchState.store; }
 
   /**
    * Map to display the results on
-   * @ignore
+   * @internal
    */
   get map(): IgoMap { return this.mapState.map; }
 
@@ -47,7 +47,7 @@ export class SearchResultsToolComponent {
 
   /**
    * Try to add a feature to the map when it's being focused
-   * @ignore
+   * @internal
    * @param result A search result that could be a feature
    */
   onResultFocus(result: SearchResult) {
@@ -56,7 +56,7 @@ export class SearchResultsToolComponent {
 
   /**
    * Try to add a feature or a layer to the map when it's being selected
-   * @ignore
+   * @internal
    * @param result A search result that could be a feature or some layer options
    */
   onResultSelect(result: SearchResult) {

@@ -30,6 +30,14 @@ import { unByKey } from 'ol/Observable';
 import { IgoMap } from 'src/lib/map';
 import { MatFormFieldControl } from '@angular/material';
 
+/**
+ * This input allows a user to draw a new geometry or to edit
+ * an existing one on a map. A text input is also displayed in the
+ * form with some instructions.
+ * This is still WIP.
+ * TODO: Split into smaller class/functions
+ * TODO: Support different geometry type
+ */
 @Component({
   selector: 'fadq-entity-form-field-geometry-input',
   templateUrl: './entity-form-field-geometry-input.component.html',
@@ -42,14 +50,34 @@ import { MatFormFieldControl } from '@angular/material';
 export class EntityFormFieldGeometryInputComponent
   implements OnInit, OnDestroy, ControlValueAccessor {
 
+  /**
+   * Id genrator needed to implement the MatFormFieldControl interface
+   * @internal
+   */
   static nextId = 0;
 
   /**
    * Implemented as part of MatFormFieldControl.
+   * @internal
    */
   public focused = false;
+
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @internal
+   */
   public errorState = false;
+
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @internal
+   */
   readonly controlType = 'geometry-input';
+
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @internal
+   */
   readonly stateChanges = new Subject<void>();
 
   private olOverlayLayer: OlVectorLayer;
@@ -65,12 +93,10 @@ export class EntityFormFieldGeometryInputComponent
   private ready = false;
 
   /**
+   * The geometry value (GeoJSON)
    * Implemented as part of ControlValueAccessor.
    */
   @Input()
-  get value(): GeoJSONGeometry {
-    return this._value;
-  }
   set value(value: GeoJSONGeometry) {
     if (value === null) {
       value = undefined;
@@ -85,115 +111,111 @@ export class EntityFormFieldGeometryInputComponent
     this.toggleInteraction();
     this.cdRef.detectChanges();
   }
+  get value(): GeoJSONGeometry { return this._value; }
   private _value: GeoJSONGeometry;
 
-  @Input()
-  get map(): IgoMap {
-    return this._map;
-  }
-  set map(value: IgoMap) {
-    this._map = value;
-  }
-  private _map: IgoMap;
+  /**
+   * The map to draw the geometry on
+   */
+  @Input() map: IgoMap;
 
-  @Input()
-  get geometryType(): OlGeometryType {
-    return this._geometryType;
-  }
-  set geometryType(value: OlGeometryType) {
-    this._geometryType = value;
-  }
-  private _geometryType: OlGeometryType;
+  /**
+   * The geometry type
+   */
+  @Input() geometryType: OlGeometryType;
 
-  @Input()
-  get projection(): string {
-    return this._projection;
-  }
-  set projection(value: string) {
-    this._projection = value;
-  }
-  private _projection = 'EPSG:4326';
+  /**
+   * The geometry projection
+   */
+  @Input() projection: string = 'EPSG:4326';
 
+  /**
+   * Field tooltip
+   * Implemented as part of MatFormFieldControl.
+   */
   @Input()
-  get tooltip(): string {
-    return this._tooltip;
-  }
   set tooltip(value: string) {
     this._tooltip = value;
     this.stateChanges.next();
   }
+  get tooltip(): string { return this._tooltip; }
   private _tooltip: string;
 
   /**
+   * Field placeholder
    * Implemented as part of MatFormFieldControl.
    */
   @Input()
-  get placeholder(): string {
-    return this._placeholder;
-  }
   set placeholder(value: string) {
     this._placeholder = value;
     this.stateChanges.next();
   }
+  get placeholder(): string { return this._placeholder; }
   private _placeholder: string;
 
   /**
+   * Whether this is required
    * Implemented as part of MatFormFieldControl.
    */
   @Input()
-  get required(): boolean {
-    return this._required;
-  }
   set required(value: boolean) {
     this._required = value;
     this.stateChanges.next();
   }
+  get required(): boolean { return this._required; }
   private _required = false;
 
   /**
+   * Whether this is disabled
    * Implemented as part of MatFormFieldControl.
    */
   @Input()
-  get disabled(): boolean {
-    return this._disabled;
-  }
   set disabled(value: boolean) {
     this._disabled = value;
     this.stateChanges.next();
   }
+  get disabled(): boolean { return this._disabled; }
   private _disabled = false;
 
   /**
    * Implemented as part of MatFormFieldControl.
+   * @ignore
    */
   @HostBinding()
   id = `geometry-input-${EntityFormFieldGeometryInputComponent.nextId++}`;
 
   /**
    * Implemented as part of MatFormFieldControl.
+   * @ignore
    */
   @HostBinding('attr.aria-describedby')
   describedBy = '';
 
   /**
    * Implemented as part of MatFormFieldControl.
+   * @ignore
    */
   @HostBinding('class.floating')
-  get shouldLabelFloat() {
-    return this.representation.length > 0;
-  }
+  get shouldLabelFloat() { return this.representation.length > 0; }
 
   /**
    * Implemented as part of MatFormFieldControl.
+   * @internal
    */
-  get empty() {
-    return this.value === undefined;
-  }
+  get empty() { return this.value === undefined; }
 
+  /**
+   * The vector source to add the geometry to
+   * @internal
+   */
   get olOverlaySource(): OlVectorSource {
     return this.olOverlayLayer.getSource();
   }
 
+  /**
+   * The geometry representation displayed in the field
+   * @internal
+   */
   get representation(): string {
     return this.tooltip || '...';
   }
@@ -209,22 +231,24 @@ export class EntityFormFieldGeometryInputComponent
     }
   }
 
+  /**
+   * Create an overlay layer, add the initial geometry to it (if any)
+   * and toggle the right interaction.
+   * @internal
+   */
   ngOnInit() {
     this.addOlOverlayLayer();
     if (this.value !== undefined) {
-      const geometry = this.olGeoJSON.readGeometry(this.value, {
-        dataProjection: this.projection,
-        featureProjection: this.map.projection
-      });
-      const feature = new OlFeature({geometry});
-      this.olOverlaySource.clear();
-      this.olOverlaySource.addFeature(feature);
+      this.addGeometryToOverlay(this.value);
     }
     this.toggleInteraction();
-
     this.ready = true;
   }
 
+  /**
+   * Clear the overlay layer and any interaction added by this component.
+   * @internal
+   */
   ngOnDestroy() {
     this.restoreDoubleClickZoomInteraction();
     this.removeOlDrawInteraction();
@@ -271,6 +295,9 @@ export class EntityFormFieldGeometryInputComponent
    */
   onContainerClick(event: MouseEvent) {}
 
+  /**
+   * Add an overlay layer to the map
+   */
   private addOlOverlayLayer(): OlVectorLayer {
     this.olOverlayLayer = new OlVectorLayer({
       source: new OlVectorSource(),
@@ -280,6 +307,23 @@ export class EntityFormFieldGeometryInputComponent
     this.map.ol.addLayer(this.olOverlayLayer);
   }
 
+  /**
+   * Add a GeoJSON geometry to the overlay
+   * @param geometry GeoJSON geometry
+   */
+  private addGeometryToOverlay(geometry: GeoJSONGeometry) {
+    const olGeometry = this.olGeoJSON.readGeometry(geometry, {
+      dataProjection: this.projection,
+      featureProjection: this.map.projection
+    });
+    const olFeature = new OlFeature({geometry: olGeometry});
+    this.olOverlaySource.clear();
+    this.olOverlaySource.addFeature(olFeature);
+  }
+
+  /**
+   * Add a draw interaction to the map an set up some listeners
+   */
   private addOlDrawInteraction() {
     const olDrawInteraction = new OlDraw({
       type: this.geometryType,
@@ -296,6 +340,9 @@ export class EntityFormFieldGeometryInputComponent
     this.olDrawInteraction = olDrawInteraction;
   }
 
+  /**
+   * Remove the draw interaction
+   */
   private removeOlDrawInteraction() {
     if (this.olDrawInteraction === undefined) {
       return;
@@ -307,10 +354,20 @@ export class EntityFormFieldGeometryInputComponent
     this.olDrawInteraction = undefined;
   }
 
+  /**
+   * When drawing starts, remove 'double click to zoom' interaction
+   * from the map because double is used to complete the drawing.
+   * @param event Draw start event
+   */
   private onDrawStart(event) {
     this.removeOlDoubleClickZoomInteraction();
   }
 
+  /**
+   * When drawing ends, convert the output value to GeoJSON and keep it.
+   * Restore the double click interaction.
+   * @param event Draw end event
+   */
   private onDrawEnd(event) {
     const geometry = event.feature.getGeometry();
     const value = this.olGeoJSON.writeGeometryObject(geometry, {
@@ -326,6 +383,9 @@ export class EntityFormFieldGeometryInputComponent
     }, 50);
   }
 
+  /**
+   * Add a modify interaction to the map an set up some listeners
+   */
   private addOlModifyInteraction() {
     const olModifyInteraction = new OlModify({
       source: this.olOverlaySource
@@ -338,6 +398,9 @@ export class EntityFormFieldGeometryInputComponent
     this.olModifyInteraction = olModifyInteraction;
   }
 
+  /**
+   * Remove the modify interaction
+   */
   private removeOlModifyInteraction() {
     if (this.olModifyInteraction === undefined) {
       return;
@@ -348,6 +411,10 @@ export class EntityFormFieldGeometryInputComponent
     this.olModifyInteraction = undefined;
   }
 
+  /**
+   * When modification ends, convert the output value to GeoJSON and keep it.
+   * @param event Modify end event
+   */
   private onModifyEnd(event) {
     const geometry = event.features.item(0).getGeometry();
     const value = this.olGeoJSON.writeGeometryObject(geometry, {
@@ -357,6 +424,9 @@ export class EntityFormFieldGeometryInputComponent
     this.writeValue(value);
   }
 
+  /**
+   * Add a translate interaction to the map an set up some listeners
+   */
   private addOlTranslateInteraction() {
     const olTranslateInteraction = new OlTranslate({
       layers: [this.olOverlayLayer]
@@ -369,6 +439,9 @@ export class EntityFormFieldGeometryInputComponent
     this.olTranslateInteraction = olTranslateInteraction;
   }
 
+  /**
+   * Remove the translate interaction
+   */
   private removeOlTranslateInteraction() {
     if (this.olTranslateInteraction === undefined) {
       return;
@@ -379,6 +452,10 @@ export class EntityFormFieldGeometryInputComponent
     this.olTranslateInteraction = undefined;
   }
 
+  /**
+   * When translation ends, convert the output value to GeoJSON and keep it.
+   * @param event Translate end event
+   */
   private onTranslateEnd(event) {
     const geometry = event.features.item(0).getGeometry();
     const value = this.olGeoJSON.writeGeometryObject(geometry, {
@@ -388,6 +465,10 @@ export class EntityFormFieldGeometryInputComponent
     this.writeValue(value);
   }
 
+  /**
+   * Remove 'double click to zoom' interaction and keep a reference
+   * to it for futur restoration.
+   */
   private removeOlDoubleClickZoomInteraction() {
     const olInteractions = this.map.ol.getInteractions().getArray();
     const olDoubleClickZoomInteraction = olInteractions
@@ -401,6 +482,9 @@ export class EntityFormFieldGeometryInputComponent
     this.olDoubleClickZoomInteraction = olDoubleClickZoomInteraction;
   }
 
+  /**
+   * Restore 'double click to zoom' interaction if there was one in the first place
+   */
   private restoreDoubleClickZoomInteraction() {
     if (this.olDoubleClickZoomInteraction !== undefined) {
       this.map.ol.addInteraction(this.olDoubleClickZoomInteraction);
@@ -408,6 +492,9 @@ export class EntityFormFieldGeometryInputComponent
     this.olDoubleClickZoomInteraction = undefined;
   }
 
+  /**
+   * Toggle the proper interaction (draw or modify + translate)
+   */
   private toggleInteraction() {
     if (this.value === undefined && this.olDrawInteraction === undefined) {
       this.removeOlModifyInteraction();

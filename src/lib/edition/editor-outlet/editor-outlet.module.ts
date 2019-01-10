@@ -7,6 +7,9 @@ import {
 
 import { EditorOutletComponent } from './editor-outlet.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

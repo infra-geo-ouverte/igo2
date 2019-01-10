@@ -11,42 +11,54 @@ const API_CONFIG_KEY = 'api';
 })
 export class ApiService {
 
+  /**
+   * API config
+   */
   private config: ApiConfig = {
     url: ''
   };
 
   constructor(private configService: ConfigService) {}
 
-   /**
+  /**
    * Return the API config
+   * @returns API config
    */
-  public getConfig(): ApiConfig {
+  getConfig(): ApiConfig {
     return this.configService.getConfig(API_CONFIG_KEY) || this.config;
   }
 
   /**
    * Return the API base url
+   * @returns API base url
    */
-  public getBaseUrl(): string {
+  getBaseUrl(): string {
     return this.getConfig().url;
   }
 
   /**
-   * Build a fully qualified URL from a URI
+   * Build a fully qualified URL from a URI.
+   * The URI may contain query param placeholders such as ${foo}. They
+   * will be replaced if provided in the params argument. If they're
+   * not provided, they are not removed.
+   * TODO: remove unprovided params)
+   * @param uri Base uri without the API base url
+   * @param params Optional query params
+   * @returns Fully qualified URL with query params
    */
-  public buildUrl(uri: string, params?: Object): string {
+  buildUrl(uri: string, params?: Object): string {
     let url = uri;
     if (!uri.startsWith('http')) {
       url = `${this.getBaseUrl()}${uri}`;
     }
-
-    url = this.setUrlParams(url, params || {});
-
-    return url;
+    return this.setUrlParams(url, params || {});
   }
 
   /**
    * Inject params in the url placeholders
+   * @param url Base url
+   * @param params Query params
+   * @returns URL with query params substitued into it.
    */
   private setUrlParams(url: string, params: Object) {
     return substituteProperties(url, params);

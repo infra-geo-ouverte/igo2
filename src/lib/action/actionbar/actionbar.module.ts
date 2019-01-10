@@ -14,6 +14,9 @@ import { IgoLanguageModule } from '@igo2/core';
 import { ActionbarComponent } from './actionbar.component';
 import { ActionbarItemComponent } from './actionbar-item.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

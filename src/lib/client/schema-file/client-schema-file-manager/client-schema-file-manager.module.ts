@@ -12,6 +12,9 @@ import { FadqLibEntityTableModule } from 'src/lib/entity/entity-table/entity-tab
 
 import { ClientSchemaFileManagerComponent } from './client-schema-file-manager.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

@@ -31,12 +31,12 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
   }
 
   /**
-   * @ignore
+   * @internal
    */
   getId(): string { return ClientSearchSource.id; }
 
   /**
-   * @ignore
+   * @internal
    */
   getDefaultOptions(): SearchSourceOptions {
     return {

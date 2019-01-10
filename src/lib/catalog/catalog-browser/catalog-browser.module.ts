@@ -18,6 +18,9 @@ import { CatalogBrowserComponent } from './catalog-browser.component';
 import { CatalogBrowserLayerComponent } from './catalog-browser-layer.component';
 import { CatalogBrowserGroupComponent } from './catalog-browser-group.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

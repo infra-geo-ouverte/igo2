@@ -5,6 +5,9 @@ import { IgoLanguageModule } from '@igo2/core';
 
 import { ClientInfoAddressesComponent } from './client-info-addresses.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

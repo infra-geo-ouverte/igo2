@@ -7,6 +7,9 @@ import {
   ClientSchemaElementSurfaceCreateFormComponent
 } from './client-schema-element-surface-create-form.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

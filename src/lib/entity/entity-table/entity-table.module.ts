@@ -9,6 +9,9 @@ import {
 import { EntityTableRowDirective } from './entity-table-row.directive';
 import { EntityTableComponent } from './entity-table.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

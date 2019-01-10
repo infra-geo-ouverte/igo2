@@ -8,6 +8,9 @@ import { FadqLibEntityFormModule } from 'src/lib/entity/entity-form/entity-form.
 
 import { ClientSchemaDeleteFormComponent } from './client-schema-delete-form.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

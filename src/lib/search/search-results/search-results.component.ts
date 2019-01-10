@@ -13,7 +13,7 @@ import { EntityStore, EntityStoreController } from 'src/lib/entity';
 
 import { SearchResult } from '../shared';
 
-export enum DisplayMode {
+export enum SearchResultMode {
   Grouped = 'grouped',
   Flat = 'flat'
 }
@@ -25,7 +25,7 @@ export enum DisplayMode {
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
-  public displayMode = DisplayMode;
+  public searchResultMode = SearchResultMode;
 
   private controller: EntityStoreController;
 
@@ -39,13 +39,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   private _store;
 
   @Input()
-  get mode(): DisplayMode {
+  get mode(): SearchResultMode {
     return this._mode;
   }
-  set mode(value: DisplayMode) {
+  set mode(value: SearchResultMode) {
     this._mode = value;
   }
-  private _mode: DisplayMode = DisplayMode.Grouped;
+  private _mode: SearchResultMode = SearchResultMode.Grouped;
 
   @Output() resultFocus = new EventEmitter<SearchResult>();
   @Output() resultSelect = new EventEmitter<SearchResult>();

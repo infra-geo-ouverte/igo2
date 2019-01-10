@@ -17,6 +17,11 @@ import {
   getEntityProperty
 } from '../shared';
 
+/**
+ * A configurable form, optionnally bound to an entity
+ * (for example in case of un update). Submitting that form
+ * emits an event with the form data but no other operation is performed.
+ */
 @Component({
   selector: 'fadq-entity-form',
   templateUrl: './entity-form.component.html',
@@ -25,56 +30,76 @@ import {
 })
 export class EntityFormComponent implements OnChanges {
 
+  /**
+   * Angular form group
+   * @internal
+   */
   public form: FormGroup;
 
-  @Input()
-  get entity(): Entity | undefined {
-    return this._entity;
-  }
-  set entity(value: Entity | undefined) {
-    if (this.entity !== undefined) {
-      return;
-    }
-    this._entity = value;
-  }
-  private _entity: Entity | undefined;
+  /**
+   * Entity or undefined
+   */
+  @Input() entity: Entity | undefined;
 
+  /**
+   * Form template
+   */
   @Input()
-  get template(): EntityFormTemplate {
-    return this._template;
-  }
   set template(value: EntityFormTemplate) {
+    // Disallow changing the template
     if (this.template !== undefined) {
       return;
     }
     this._template = value;
   }
+  get template(): EntityFormTemplate { return this._template; }
   private _template: EntityFormTemplate;
 
+  /**
+   * Event emitted when the form is submitted
+   */
   @Output() submitForm = new EventEmitter<{
     entity: Entity | undefined;
     data: { [key: string]: any };
   }>();
 
+  /**
+   * Event emitted when the cancel button is clicked
+   */
   @Output() cancel = new EventEmitter();
 
+  /**
+   * Submit button label
+   * @internal
+   */
   get submitLabel(): string {
     return this.template.submitLabel ? this.template.submitLabel : 'OK';
   }
 
+  /**
+   * Cancel button label
+   * @internal
+   */
   get cancelLabel(): string {
     return this.template.cancelLabel ? this.template.cancelLabel : 'CANCEL';
   }
 
-  get dirty(): boolean {
-    return this.form ? this.form.dirty : false;
-  }
+  /**
+   * Whether the form is dirty
+   * @internal
+   */
+  get dirty(): boolean { return this.form ? this.form.dirty : false; }
 
   constructor(
     private formBuilder: FormBuilder,
     private cdRef: ChangeDetectorRef
   ) {}
 
+  /**
+   * Is the entity or the template change, recreate the form or repopulate it.
+   * @param changes
+   * @internal
+   */
   ngOnChanges(changes: SimpleChanges) {
     if (this.dirty) {
       return;
@@ -92,21 +117,41 @@ export class EntityFormComponent implements OnChanges {
     this.cdRef.detectChanges();
   }
 
+  /**
+   * When the form is submitted, emit an event
+   * @param data Form data
+   * @internal
+   */
   onSubmit(data: { [key: string]: any}) {
     this.submitForm.emit({entity: this.entity, data});
   }
 
+  /**
+   * When the cancel button is clicked, emit an event
+   * @internal
+   */
   onCancelButtonClick() {
     this.cancel.emit();
   }
 
+  /**
+   * Return the form control bound to a field
+   * @param field Field
+   * @returns Angular form control
+   */
   getFieldControl(field: EntityFormField): FormControl {
     return this.form.controls[field.name] as FormControl;
   }
 
+  /**
+   * Return the number of columns a field should occupy.
+   * The maximum allowed is 2, even if the form template says more.
+   * @param field Field
+   * @returns Number of columns
+   * @internal
+   */
   getFieldColSpan(field: EntityFormField): number {
     let colSpan = 2;
-
     const options = field.options || {};
     if (options.cols && options.cols > 0) {
       colSpan = Math.min(options.cols, 2);
@@ -115,6 +160,9 @@ export class EntityFormComponent implements OnChanges {
     return colSpan;
   }
 
+  /**
+   * Create the angular form and populate it
+   */
   private createForm() {
     const controls = {};
     this.template.fields.forEach((field: EntityFormField) => {
@@ -125,6 +173,11 @@ export class EntityFormComponent implements OnChanges {
     this.populateForm();
   }
 
+  /**
+   * Create the form control of a field
+   * @param field: Field
+   * @returns Angular form control
+   */
   private createFormControl(field: EntityFormField): FormControl {
     const options = field.options || {};
     const state = Object.assign({value: ''}, {
@@ -136,6 +189,9 @@ export class EntityFormComponent implements OnChanges {
     return control;
   }
 
+  /**
+   * Populate the form from the entity
+   */
   private populateForm() {
     if (this.entity === undefined) {
       this.form.reset();

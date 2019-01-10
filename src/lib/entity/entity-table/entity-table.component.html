@@ -5,6 +5,7 @@
       matSort
       [ngClass]="getTableClass()"
       [dataSource]="dataSource"
+      [trackBy]="trackBy"
       (matSortChange)="onSort($event)">
 
       <ng-container [matColumnDef]="column.name" *ngFor="let column of template.columns">
@@ -21,19 +22,19 @@
         </ng-container>
 
         <ng-container *ngIf="getColumnRenderer(column) as columnRenderer">
-          <ng-container *ngIf="columnRenderer === 'Default'">
+          <ng-container *ngIf="columnRenderer === entityTableColumnRenderer.Default">
             <td mat-cell *matCellDef="let entity" class="mat-cell-text"
               [ngClass]="getCellClass(entity, column)">
               {{valueAccessor(entity, column)}}
             </td>
           </ng-container>
-          <ng-container *ngIf="columnRenderer === 'HTML'">
+          <ng-container *ngIf="columnRenderer === entityTableColumnRenderer.HTML">
             <td mat-cell *matCellDef="let entity" class="mat-cell-text"
               [ngClass]="getCellClass(entity, column)"
               [innerHTML]="getValue(entity, column)">
             </td>
           </ng-container>
-          <ng-container *ngIf="columnRenderer === 'Icon'">
+          <ng-container *ngIf="columnRenderer === entityTableColumnRenderer.Icon">
             <td mat-cell *matCellDef="let entity" class="mat-cell-text"
               [ngClass]="getCellClass(entity, column)">
               <mat-icon>{{valueAccessor(entity, column)}}</mat-icon>

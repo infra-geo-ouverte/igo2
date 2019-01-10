@@ -10,6 +10,9 @@ import { getEntityTitle, getEntityIcon } from 'src/lib/entity';
 
 import { Action } from '../shared/action.interfaces';
 
+ /**
+  * An action button
+  */
 @Component({
   selector: 'fadq-actionbar-item',
   templateUrl: './actionbar-item.component.html',
@@ -18,42 +21,53 @@ import { Action } from '../shared/action.interfaces';
 })
 export class ActionbarItemComponent {
 
-  @Input()
-  get action(): Action { return this._action; }
-  set action(value: Action) { this._action = value; }
-  private _action: Action;
+  /**
+   * Action
+   */
+  @Input() action: Action;
 
-  @Input()
-  get withTitle() { return this._withTitle; }
-  set withTitle(value: boolean) { this._withTitle = value; }
-  private _withTitle = true;
+  /**
+   * Whether the action title is displayed
+   */
+  @Input() withTitle: boolean = true;
 
-  @Input()
-  get withIcon() { return this._withIcon; }
-  set withIcon(value: boolean) { this._withIcon = value; }
-  private _withIcon = true;
+  /**
+   * Whether the action icon is displayed
+   */
+  @Input() withIcon: boolean = true;
 
-  @Input()
-  get disabled() { return this._disabled; }
-  set disabled(value: boolean) { this._disabled = value; }
-  private _disabled = false;
+  /**
+   * Whether the action is disabled
+   */
+  @Input() disabled: boolean = false;
 
+  /**
+   * Event emitted when the action button is clicked
+   */
   @Output() trigger: EventEmitter<Action> = new EventEmitter();
 
-  get title(): string {
-    return getEntityTitle(this.action);
-  }
+  /**
+   * @internal
+   */
+  get title(): string { return getEntityTitle(this.action); }
 
-  get tooltip(): string {
-    return this.action.tooltip || this.title;
-  }
+  /**
+   * @internal
+   */
+  get tooltip(): string { return this.action.tooltip || this.title; }
 
-  get icon(): string {
-    return getEntityIcon(this.action);
-  }
+  /**
+   * @internal
+   */
+  get icon(): string { return getEntityIcon(this.action); }
 
   constructor() {}
 
+  /**
+   * When the action button is clicked, emit the 'trigger' event but don't
+   * invoke the action handler. This is handled by the parent component.
+   * @internal
+   */
   onClick() {
     if (this.disabled === true) {
       return;

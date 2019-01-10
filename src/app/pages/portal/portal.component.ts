@@ -13,6 +13,7 @@ import {
   ToolService
 } from '@igo2/context';
 
+import { ActionbarMode } from 'src/lib/action';
 import {
   Client,
   ClientParcel,
@@ -73,6 +74,14 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.expansionPanelExpanded && this.toastPanelOpened;
   }
 
+  get actionbarMode(): ActionbarMode {
+    return this.expansionPanelExpanded ? ActionbarMode.Dock : ActionbarMode.Overlay;
+  }
+
+  get actionbarWithTitle(): boolean {
+    return this.actionbarMode === ActionbarMode.Overlay;
+  }
+
   get parcelStore(): EntityStore<ClientParcel> {
     return this.clientState.parcelStore;
   }
@@ -95,7 +104,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get toastPanelContent(): string {
     let content;
-    if (this.editor !== undefined && this.editor.hasComponent) {
+    if (this.editor !== undefined && this.editor.hasWidget) {
       content = 'editor';
     } else if (this.feature !== undefined) {
       content = 'feature';

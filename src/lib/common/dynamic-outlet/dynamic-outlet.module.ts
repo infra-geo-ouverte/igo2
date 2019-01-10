@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { DynamicOutletComponent } from './dynamic-outlet.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule

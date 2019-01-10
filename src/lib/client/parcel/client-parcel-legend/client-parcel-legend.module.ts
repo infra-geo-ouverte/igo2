@@ -8,6 +8,9 @@ import { IgoLanguageModule } from '@igo2/core';
 import { ClientParcelLegendComponent } from './client-parcel-legend.component';
 import { ClientParcelLegendItemComponent } from './client-parcel-legend-item.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

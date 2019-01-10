@@ -6,6 +6,9 @@ import { MatSelectModule } from '@angular/material';
 
 import { EditorSelectorComponent } from './editor-selector.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

@@ -17,7 +17,7 @@ import { MapState } from 'src/app/modules/map/map.state';
 import { CatalogState } from '../catalog.state';
 
 /**
- * Tool to browse a catalog's groups and layers.
+ * Tool to browse a catalog's groups and layers and display them to a map.
  */
 @Register({
   name: 'catalogBrowser',
@@ -33,7 +33,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
 
   /**
    * Store that contains the catalog items
-   * @ignore
+   * @internal
    */
   public store: EntityStore<CatalogItem>;
 
@@ -44,7 +44,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
 
   /**
    * Map to add layers to
-   * @ignore
+   * @internal
    */
   get map(): IgoMap { return this.mapState.map; }
 
@@ -55,7 +55,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
   ) {}
 
   /**
-   * @ignore
+   * @internal
    */
   ngOnInit() {
     const catalogStore = this.catalogState.catalogStore;
@@ -66,7 +66,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * @ignore
+   * @internal
    */
   ngOnDestroy() {
     this.catalog$$.unsubscribe();

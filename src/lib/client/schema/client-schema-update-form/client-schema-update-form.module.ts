@@ -5,6 +5,9 @@ import { FadqLibEntityFormModule } from 'src/lib/entity/entity-form/entity-form.
 
 import { ClientSchemaUpdateFormComponent } from './client-schema-update-form.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

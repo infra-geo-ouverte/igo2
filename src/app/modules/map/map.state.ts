@@ -50,7 +50,7 @@ export class MapState implements OnDestroy {
   }
 
   /**
-   * @ignore
+   * @internal
    */
   ngOnDestroy() {
     this.clientState.parcelStore.strategies

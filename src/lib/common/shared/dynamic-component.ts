@@ -6,16 +6,47 @@ import {
 
 import { Subscription } from 'rxjs';
 
+/**
+ * This class is used in the DynamicComponentOutlet component. It holds
+ * a reference to a component factory and can render that component
+ * in a target element on demand. It's also possible to set inputs
+ * and to subscribe to outputs.
+ */
 export class DynamicComponent<C> {
 
+  /**
+   * Component reference
+   */
   private componentRef: ComponentRef<C>;
+
+  /**
+   * Subscriptions to the component's outputs. Those need
+   * to be unsubscribed when the component is destroyed.
+   */
   private subscriptions: Subscription[] = [];
+
+  /**
+   * Component target element
+   */
   private target: ViewContainerRef;
+
+  /**
+   * Component inputs
+   */
   private inputs: {[key: string]: any} = {};
+
+  /**
+   * Subscribers to the component's outputs
+   */
   private subscribers: {[key: string]: (event: any) => void} = {};
 
   constructor(private componentFactory: ComponentFactory<C>) {}
 
+  /**
+   * Render the component to a target element.
+   * Set it's inputs and subscribe to it's outputs.
+   * @param target Target element
+   */
   setTarget(target: ViewContainerRef) {
     this.target = target;
     this.componentRef = target.createComponent(this.componentFactory);
@@ -23,6 +54,10 @@ export class DynamicComponent<C> {
     this.updateSubscribers(this.subscribers);
   }
 
+  /**
+   * Destroy this component. That means, removing from it's target
+   * element and unsubscribing to it's outputs.
+   */
   destroy() {
     if (this.componentRef !== undefined) {
       this.componentRef.destroy();
@@ -34,6 +69,10 @@ export class DynamicComponent<C> {
     this.unsubscribeAll();
   }
 
+  /**
+   * Update the component inputs. This is an update so any
+   * key not defined won't be overwritten.
+   */
   updateInputs(inputs: {[key: string]: any}) {
     this.inputs = inputs;
     if (this.componentRef === undefined) {
@@ -49,6 +88,10 @@ export class DynamicComponent<C> {
     });
   }
 
+  /**
+   * Update the component subscribers. This is an update so any
+   * key not defined won't be overwritten.
+   */
   updateSubscribers(subscribers: {[key: string]: (event: any) => void}) {
     this.subscribers = subscribers;
     if (this.componentRef === undefined) {
@@ -72,6 +115,9 @@ export class DynamicComponent<C> {
     });
   }
 
+  /**
+   * Unsubscribe to all outputs.
+   */
   private unsubscribeAll() {
     this.subscriptions.forEach((s: Subscription) => s.unsubscribe());
     this.subscriptions = [];

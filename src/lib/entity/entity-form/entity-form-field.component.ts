@@ -12,6 +12,10 @@ import {
   EntityFormFieldSelectInputChoice
 } from '../shared';
 
+/**
+ * This component renders the proper form input based on
+ * the field configuration it receives.
+ */
 @Component({
   selector: 'fadq-entity-form-field',
   templateUrl: './entity-form-field.component.html',
@@ -20,32 +24,32 @@ import {
 })
 export class EntityFormFieldComponent {
 
-  @Input()
-  get field(): EntityFormField {
-    return this._field;
-  }
-  set field(value: EntityFormField) {
-    this._field = value;
-  }
-  private _field: EntityFormField;
+  /**
+   * Field configuration
+   */
+  @Input() field: EntityFormField;
 
-  @Input()
-  get control(): FormControl {
-    return this._control;
-  }
-  set control(value: FormControl) {
-    this._control = value;
-  }
-  private _control: FormControl;
+  /**
+   * The field's form control
+   */
+  @Input() control: FormControl;
 
-  get input(): EntityFormFieldInput {
-    return this.field.input || {};
-  }
+  /**
+   * Input configuration found in the field onfiguration
+   * @internal
+   */
+  get input(): EntityFormFieldInput { return this.field.input || {}; }
 
-  get inputType(): string {
-    return this.input.type || 'text';
-  }
+  /**
+   * Input type
+   * @internal
+   */
+  get inputType(): string { return this.input.type || 'text'; }
 
+  /**
+   * Select input choices
+   * @internal
+   */
   get inputChoices(): EntityFormFieldSelectInputChoice[] {
     if (this.inputType === 'select') {
       return (this.input as EntityFormFieldSelectInput).choices || [];

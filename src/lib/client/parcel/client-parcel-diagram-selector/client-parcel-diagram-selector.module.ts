@@ -7,6 +7,9 @@ import { IgoLanguageModule } from '@igo2/core';
 
 import { ClientParcelDiagramSelectorComponent } from './client-parcel-diagram-selector.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

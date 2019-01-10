@@ -7,6 +7,9 @@ import { IgoLanguageModule } from '@igo2/core';
 
 import { ClientParcelYearSelectorComponent } from './client-parcel-year-selector.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

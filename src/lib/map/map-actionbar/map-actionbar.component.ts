@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core
 
 import { Media, MediaOrientation, MediaService } from '@igo2/core';
 
-import { Action } from 'src/lib/action';
+import { Action, ActionbarMode } from 'src/lib/action';
 import { EntityStore } from 'src/lib/entity';
 
 import { IgoMap, MapAction } from '../shared';
@@ -25,15 +25,18 @@ export class MapActionbarComponent implements OnInit {
   get store(): EntityStore<Action> { return this._store; }
   private _store = new EntityStore<Action>();
 
-  get collapsed(): boolean {
+  get mode(): ActionbarMode {
+    const media = this.mediaService.media$.value;
+    const orientation = this.mediaService.orientation$.value;
     // Make that work with OnPush strategy
-    return (
-      this.mediaService.media$.value !== Media.Desktop ||
-      (
-        this.mediaService.media$.value === Media.Desktop &&
-        this.mediaService.orientation$.value === MediaOrientation.Portrait
-      )
-    );
+    if (media === Media.Desktop && orientation === MediaOrientation.Portrait) {
+      return ActionbarMode.Dock;
+    }
+    return ActionbarMode.Overlay;
+  }
+
+  get withTitle(): boolean {
+    return this.mode === ActionbarMode.Overlay;
   }
 
   constructor(private mediaService: MediaService) {}

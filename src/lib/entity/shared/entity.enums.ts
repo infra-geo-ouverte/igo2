@@ -9,3 +9,9 @@ export enum EntityTableColumnRenderer {
   HTML = 'HTML',
   Icon = 'Icon'
 }
+
+export enum EntityTableScrollBehavior {
+  Auto = 'auto',
+  Instant = 'instant',
+  Smooth = 'smooth'
+}

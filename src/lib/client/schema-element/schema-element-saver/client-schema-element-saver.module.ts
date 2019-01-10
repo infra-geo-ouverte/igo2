@@ -11,6 +11,9 @@ import {
   ClientSchemaElementSaverComponent
 } from './client-schema-element-saver.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

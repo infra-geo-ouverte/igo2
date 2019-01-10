@@ -7,6 +7,9 @@ import { IgoLanguageModule } from '@igo2/core';
 
 import { ClientSchemaSelectorComponent } from './client-schema-selector.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

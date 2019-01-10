@@ -21,8 +21,10 @@ import { DynamicComponentService } from '../shared/dynamic-component.service';
 })
 export class DynamicOutletComponent implements OnChanges, OnDestroy {
 
+  /**
+   * The dynamic component base class or the dynamic component itself
+   */
   @Input()
-  get component(): DynamicComponent<any> { return this._component; }
   set component(value: DynamicComponent<any>) {
     // The setter accepts any class but TypeScript won't allow it.
     // See https://github.com/Microsoft/TypeScript/issues/2521
@@ -32,18 +34,23 @@ export class DynamicOutletComponent implements OnChanges, OnDestroy {
       this._component = this.dynamicComponentService.create(value);
     }
   }
+  get component(): DynamicComponent<any> { return this._component; }
   private _component: DynamicComponent<any>;
 
-  @Input()
-  get inputs(): {[key: string]: any} { return this._inputs; }
-  set inputs(value: {[key: string]: any}) { this._inputs = value; }
-  private _inputs: {[key: string]: any};
+  /**
+   * The dynamic component inputs
+   */
+  @Input() inputs: {[key: string]: any};
 
-  @Input()
-  get subscribers(): {[key: string]: (event: any) => void} { return this._subscribers; }
-  set subscribers(value: {[key: string]: (event: any) => void}) { this._subscribers = value; }
-  private _subscribers: {[key: string]: (event: any) => void};
+  /**
+   * The subscribers to the dynamic component outputs
+   */
+  @Input() subscribers: {[key: string]: (event: any) => void};
 
+  /**
+   * The view element to render the component to
+   * @ignore
+   */
   @ViewChild('target', { read: ViewContainerRef })
   private target: ViewContainerRef;
 
@@ -52,6 +59,12 @@ export class DynamicOutletComponent implements OnChanges, OnDestroy {
     private cdRef: ChangeDetectorRef
   ) {}
 
+  /**
+   * If the dynamic component changes, create it.
+   * If the inputs or subscribers change, update the current component's
+   * inputs or subscribers.
+   * @internal
+   */
   ngOnChanges(changes: SimpleChanges) {
     const component = changes.component;
     const inputs = changes.inputs;
@@ -71,20 +84,38 @@ export class DynamicOutletComponent implements OnChanges, OnDestroy {
     this.cdRef.detectChanges();
   }
 
+  /**
+   * Destroy the dynamic component and all it's subscribers
+   * @internal
+   */
   ngOnDestroy() {
     this.component.destroy();
   }
 
+  /**
+   * Create and render the dynamic component. Set it's inputs and subscribers
+   * @internal
+   */
   private createComponent() {
     this.component.setTarget(this.target);
     this.updateInputs();
     this.updateSubscribers();
   }
 
+  /**
+   * Update the dynamic component inputs. This is an update so any
+   * key not defined won't be overwritten.
+   * @internal
+   */
   private updateInputs() {
     this.component.updateInputs(this.inputs);
   }
 
+  /**
+   * Update the dynamic component subscribers. This is an update so any
+   * key not defined won't be overwritten.
+   * @internal
+   */
   private updateSubscribers() {
     this.component.updateSubscribers(this.subscribers);
   }

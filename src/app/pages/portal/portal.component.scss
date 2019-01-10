@@ -115,21 +115,21 @@ fadq-expansion-panel.fadq-expansion-panel-expanded {
 fadq-expansion-panel:not(.fadq-expansion-panel-expanded) {
   @include small-screen {
     fadq-editor-selector,
-    fadq-widgetbar {
+    fadq-actionbar {
       display: none;
     }
   }
 
   @include tablet {
     fadq-editor-selector,
-    fadq-widgetbar {
+    fadq-actionbar {
       display: none;
     }
   }
 
   @include mobile {
     fadq-editor-selector,
-    fadq-widgetbar {
+    fadq-actionbar {
       display: none;
     }
   }
@@ -140,7 +140,7 @@ fadq-expansion-panel {
     width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-icon-size} - 20px)
   }
 
-  fadq-widgetbar {
+  fadq-actionbar {
     margin-left: 5px;
   }
 }

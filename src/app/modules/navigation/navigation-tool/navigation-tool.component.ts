@@ -30,13 +30,13 @@ export class NavigationToolComponent {
 
   /**
    * Map to navigate on
-   * @ignore
+   * @internal
    */
   get map(): IgoMap { return this.mapState.map; }
 
   /**
    * Available place catagories
-   * @ignore
+   * @internal
    */
   get categories(): PlaceCategory[] {
     return this.options.categories === undefined ? [] : this.options.categories;
@@ -44,7 +44,7 @@ export class NavigationToolComponent {
 
   /**
    * Available points of interest
-   * @ignore
+   * @internal
    */
   get pois(): Poi[] {
     return this.options.pois === undefined ? [] : this.options.pois;

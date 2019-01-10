@@ -33,13 +33,13 @@ export class ClientToolComponent {
 
   /**
    * Observable of the active client
-   * @ignore
+   * @internal
    */
   get client$(): Observable<Client> { return this.clientState.client$; }
 
   /**
    * Store holding all the avaiables "parcel years"
-   * @ignore
+   * @internal
    */
   get parcelYearStore(): EntityStore<ClientParcelYear> {
     return this.clientState.parcelYearStore;
@@ -47,7 +47,7 @@ export class ClientToolComponent {
 
   /**
    * Store holding the active client's diagrams
-   * @ignore
+   * @internal
    */
   get diagramStore(): EntityStore<ClientParcelDiagram> {
     return this.clientState.diagramStore;
@@ -55,7 +55,7 @@ export class ClientToolComponent {
 
   /**
    * Store holding the active client's schemas
-   * @ignore
+   * @internal
    */
   get schemaStore(): EntityStore<ClientSchema> {
     return this.clientState.schemaStore;
@@ -68,7 +68,7 @@ export class ClientToolComponent {
 
   /**
    * Compute the link to the client's info
-   * @ignore
+   * @internal
    * @param client
    * @returns External link to the client's info
    */
@@ -81,7 +81,7 @@ export class ClientToolComponent {
 
   /**
    * Open the client's info link into a new window
-   * @ignore
+   * @internal
    * @param client
    */
   openClientInfoLink(client: Client) {

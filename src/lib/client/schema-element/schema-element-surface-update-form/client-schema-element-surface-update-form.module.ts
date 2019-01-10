@@ -7,6 +7,9 @@ import {
   ClientSchemaElementSurfaceUpdateFormComponent
 } from './client-schema-element-surface-update-form.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-<mat-list *ngIf="!collapsed">
+<mat-list *ngIf="mode === actionbarMode.Dock">
 
   <fadq-actionbar-item
     *ngIf="withToggleButton"
@@ -6,11 +6,11 @@
     [withTitle]="false"
     [withIcon]="true"
     [disabled]="store.empty"
-    [action]="toggleAction"
-    (trigger)="onTriggerAction(toggleAction)">
+    [action]="toggleCollapseAction"
+    (trigger)="onTriggerAction(toggleCollapseAction)">
   </fadq-actionbar-item>
 
-  <ng-template *ngIf="visible" ngFor let-action [ngForOf]="store.entities">
+  <ng-template *ngIf="!collapsed" ngFor let-action [ngForOf]="store.entities">
     <fadq-actionbar-item
       color="accent"
       [withTitle]="withTitle"
@@ -22,7 +22,7 @@
   </ng-template>
 </mat-list>
 
-<div *ngIf="collapsed">
+<div *ngIf="mode === actionbarMode.Overlay">
   <button
     mat-icon-button
     [matMenuTriggerFor]="actionbarMenu">

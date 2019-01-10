@@ -26,6 +26,9 @@ import {
   CatalogItemType
 } from '../shared';
 
+/**
+ * Component to browse a catalog's groups and layers and display them to a map.
+ */
 @Component({
   selector: 'fadq-catalog-browser',
   templateUrl: './catalog-browser.component.html',
@@ -33,25 +36,20 @@ import {
 })
 export class CatalogBrowserComponent implements OnInit, OnDestroy {
 
+  /**
+   * Catalog items store controller
+   */
   private controller: EntityStoreController;
 
-  @Input()
-  get store(): EntityStore<CatalogItem, CatalogItemState> {
-    return this._store;
-  }
-  set store(value: EntityStore<CatalogItem, CatalogItemState>) {
-    this._store = value;
-  }
-  private _store;
+  /**
+   * Store holding the catalog's items
+   */
+  @Input() store: EntityStore<CatalogItem, CatalogItemState>;
 
-  @Input()
-  get map(): IgoMap {
-    return this._map;
-  }
-  set map(value: IgoMap) {
-    this._map = value;
-  }
-  private _map;
+  /**
+   * Map to add the catalog items to
+   */
+  @Input() map: IgoMap;
 
   constructor(
     private layerService: LayerService,
@@ -61,44 +59,78 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
       .withChangeDetector(this.cdRef);
   }
 
+  /**
+   * @internal
+   */
   ngOnInit() {
     const currentLayerIds = this.map.layers.map((layer: Layer) => layer.id);
     this.store.state.setByKeys(currentLayerIds, {added: true});
     this.controller.bind(this.store);
   }
 
+  /**
+   * @internal
+   */
   ngOnDestroy() {
     this.controller.unbind();
   }
 
+  /**
+   * @internal
+   */
   isGroup(item: CatalogItem): boolean {
     return item.type === CatalogItemType.Group;
   }
 
+  /**
+   * @internal
+   */
   isLayer(item: CatalogItem): boolean {
     return item.type === CatalogItemType.Layer;
   }
 
+  /**
+   * When a layer is added or removed, add or remove it from the map
+   * @internal
+   * @param event Layer added event
+   */
   onLayerAddedChange(event: {added: boolean, layer: CatalogItemLayer}) {
     const layer = event.layer;
     this.controller.updateEntityState(layer, {added: event.added}, false);
     event.added ? this.addLayerToMap(layer) : this.removeLayerFromMap(layer);
   }
 
+  /**
+   * When a froup is added or removed, add or remove it from the map
+   * @internal
+   * @param event Group added event
+   */
   onGroupAddedChange(event: {added: boolean, group: CatalogItemGroup}) {
     const group = event.group;
     this.controller.updateEntityState(group, {added: event.added}, false);
     event.added ? this.addGroupToMap(group) : this.removeGroupFromMap(group);
   }
 
+  /**
+   * Add layer to map
+   * @param layer Catalog layer
+   */
   private addLayerToMap(layer: CatalogItemLayer) {
     this.addLayersToMap([layer]);
   }
 
+  /**
+   * Remove layer from map
+   * @param layer Catalog layer
+   */
   private removeLayerFromMap(layer: CatalogItemLayer) {
     this.removeLayersFromMap([layer]);
   }
 
+  /**
+   * Add multiple layers to map
+   * @param layers Catalog layers
+   */
   private addLayersToMap(layers: CatalogItemLayer[]) {
     const layers$ = layers.map((layer: CatalogItemLayer) => {
       return this.layerService.createAsyncLayer(layer.options);
@@ -110,6 +142,10 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Remove multiple layers from map
+   * @param layers Catalog layers
+   */
   private removeLayersFromMap(layers: CatalogItemLayer[]) {
     layers.forEach((layer: CatalogItemLayer) => {
       this.controller.updateEntityState(layer, {added: false});
@@ -120,6 +156,10 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Add all the layers of a group to map
+   * @param group Catalog group
+   */
   private addGroupToMap(group: CatalogItemGroup) {
     const layers = group.items.filter((item: CatalogItem) => {
       const added = this.store.getEntityState(item).added || false;
@@ -128,6 +168,10 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     this.addLayersToMap(layers as CatalogItemLayer[]);
   }
 
+  /**
+   * Remove all the layers of a groufrom map
+   * @param group Catalog group
+   */
   private removeGroupFromMap(group: CatalogItemGroup) {
     const layers = group.items.filter((item: CatalogItem) => {
       const added = this.store.getEntityState(item).added || false;
