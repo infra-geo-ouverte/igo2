@@ -84,7 +84,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    * Data source consumable by the underlying material table
    * @internal
    */
-  get dataSource(): BehaviorSubject<Entity[]> { return this.store.observable; }
+  get dataSource(): BehaviorSubject<Entity[]> { return this.store.entities$; }
 
   /**
    * Data source consumable by the underlying material table
@@ -122,7 +122,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   ngOnChanges(changes: SimpleChanges) {
     const store = changes.store;
     if (store && store.currentValue !== store.previousValue) {
-      this.controller.bind(this.store);
+      this.controller.bindStore(this.store);
     }
   }
 
@@ -131,7 +131,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
   }
 
   /**
@@ -139,7 +139,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    * @internal
    */
   connect(): BehaviorSubject<Entity[]> {
-    return this.store.observable;
+    return this.store.entities$;
   }
 
   /**

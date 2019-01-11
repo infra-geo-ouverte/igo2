@@ -5,7 +5,7 @@
     [(ngModel)]="currentSchema"
     [placeholder]="'client.schema.placeholder' | translate"
     (selectionChange)="onSelectionChange($event)">
-    <ng-template ngFor let-schema [ngForOf]="store.observable | async">
+    <ng-template ngFor let-schema [ngForOf]="store.entities$ | async">
       <mat-option [value]="schema">
         {{getSchemaTitle(schema)}}
       </mat-option>

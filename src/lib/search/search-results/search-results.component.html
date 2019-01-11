@@ -1,9 +1,9 @@
 <igo-list [navigation]="true">
-  <ng-container *ngIf="!store.empty">
+  <ng-container *ngIf="!store.filteredEmpty">
     <ng-template
       #groupTemplate
       ngFor let-group let-i="index"
-      [ngForOf]="(store.rawObservable | async).sort(sortByOrder) | searchResultsGroup">
+      [ngForOf]="(store.rawEntities$ | async).sort(sortByOrder) | searchResultsGroup">
 
       <igo-collapsible
         title="{{group.source.title}} ({{group.results.length}})"

@@ -97,14 +97,14 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store = new EntityStore<CatalogItem, CatalogItemState>(this.state);
     this.store.setEntities(this.group.items, true);
-    this.controller.bind(this.store);
+    this.controller.bindStore(this.store);
   }
 
   /**
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
   }
 
   /**

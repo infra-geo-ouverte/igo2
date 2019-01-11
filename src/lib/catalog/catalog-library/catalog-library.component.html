@@ -1,5 +1,5 @@
 <igo-list [navigation]="false">
-    <ng-template ngFor let-catalog [ngForOf]="store.observable | async">
+    <ng-template ngFor let-catalog [ngForOf]="store.entities$ | async">
       <fadq-catalog-library-item
         igoListItem
         [map]="map"

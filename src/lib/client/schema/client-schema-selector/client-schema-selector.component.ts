@@ -53,14 +53,14 @@ export class ClientSchemaSelectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.controller.bind(this.store);
+    this.controller.bindStore(this.store);
     this.schema$$ = this.store
       .observeFirstBy((schema: ClientSchema, state: State) => state.selected === true)
       .subscribe((schema: ClientSchema) => this.currentSchema = schema);
   }
 
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
     this.schema$$.unsubscribe();
   }
 

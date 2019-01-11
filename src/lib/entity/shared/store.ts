@@ -13,80 +13,111 @@ import { EntityFilter } from './filter';
 import { EntitySorter } from './sorter';
 import { getEntityId } from './entity.utils';
 
+/**
+ * An entity store class holds the references to any number of entities
+ * as well as their state. It can be observed, filtered and sorted and
+ * provides methods to add, update or remove entities.
+ */
 export class EntityStore<T extends Entity | EntityClass, S extends { [key: string]: boolean } = State> {
 
   /**
-   * Property documentation
+   * Observable of the raw entities
    */
-  private entities$ = new BehaviorSubject<T[]>([]);
-  private filtered$ = new BehaviorSubject<T[]>(this.entities);
-  private observable$ = new BehaviorSubject<T[]>(this.filtered);
-  private filtered$$: Subscription;
-  private observable$$: Subscription;
+  rawEntities$ = new BehaviorSubject<T[]>([]);
 
   /**
-   * Returns the entity store state
+   * Observable of the filtered entities
    */
-  get state(): EntityState<S> {
-    return this._state;
-  }
-  private _state: EntityState<S>;
+  filteredEntities$ = new BehaviorSubject<T[]>(this.rawEntities);
 
-  get filter(): EntityFilter<T> {
-    return this._filter;
-  }
-  private _filter: EntityFilter<T>;
+  /**
+   * Observable of the filtered and sorted entities as well as any
+   * state change
+   */
+  entities$ = new BehaviorSubject<T[]>(this.filteredEntities);
 
-  get sorter(): EntitySorter<T> {
-    return this._sorter;
-  }
-  private _sorter: EntitySorter<T>;
+  /**
+   * Entity store state
+   */
+  state: EntityState<S> = new EntityState();
 
-  get rawObservable(): BehaviorSubject<T[]> {
-    return this.entities$;
+  /**
+   * Entity store filter
+   */
+  filter: EntityFilter<T> = new EntityFilter();
+
+  /**
+   * Entity store sorter
+   */
+  sorter: EntitySorter<T> = new EntitySorter();
+
+  /**
+   * Subscription to the filtered entities
+   */
+  private filteredEntities$$: Subscription;
+
+  /**
+   * Subscription to any change
+   */
+  private entities$$: Subscription;
+
+  /**
+   * Raw entities
+   */
+  get rawEntities(): T[] {
+    return this.rawEntities$.value;
   }
 
-  get filteredObservable(): BehaviorSubject<T[]> {
-    return this.filtered$;
+  /**
+   * Filtered entities
+   */
+  get filteredEntities(): T[] {
+    return this.filteredEntities$.value;
   }
 
-  get observable(): BehaviorSubject<T[]> {
-    return this.observable$;
-  }
-
+  /**
+   * Filtered and sorted entities
+   */
   get entities(): T[] {
     return this.entities$.value;
   }
 
-  get filtered(): T[] {
-    return this.filtered$.value;
-  }
-
-  get empty(): boolean {
-    return this.entities.length === 0;
+  /**
+   * Whether this store contais  entities (after filters)
+   */
+  get filteredEmpty(): boolean {
+    return this.filteredEntities.length === 0;
   }
 
   constructor(state?: EntityState<S>) {
-    if (state === undefined) {
-      state = new EntityState<S>();
+    if (state !== undefined) {
+      this.state = state;
     }
-    this._state = state;
-    this._filter = new EntityFilter();
-    this._sorter = new EntitySorter();
     this.watchChanges();
   }
 
+  /**
+   * Unsubscribe to any change and clear this store
+   */
+  destroy() {
+    this.unwatchChanges();
+    this.clear();
+  }
+
+  /**
+   * Clear data
+   */
   clear(soft = false) {
     this.setEntities([], soft);
   }
 
   /**
-   * Method documentation
-   * @param entities Test untyped
-   * @param {boolean} soft Test typed
+   * Set this store's entities.
+   * @param entities Entities
+   * @param soft If true, the current state won't be cleared
    */
-  setEntities(entities: T[], soft = false) {
-    this.entities$.next(entities);
+  setEntities(entities: T[], soft: boolean = false) {
+    this.rawEntities$.next(entities);
     if (soft === false) {
       this.state.reset();
       this.filter.reset();
@@ -94,14 +125,26 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     }
   }
 
+  /**
+   * Add entities to to store (prepend)
+   * @param entities Entities
+   */
   addEntities(entities: T[]) {
-    this.setEntities(entities.concat(this.entities), true);
+    this.setEntities(entities.concat(this.rawEntities), true);
   }
 
+  /**
+   * Append entities to to store
+   * @param entities Entities
+   */
   appendEntities(entities: T[]) {
-    this.setEntities(this.entities.concat(entities), true);
+    this.setEntities(this.rawEntities.concat(entities), true);
   }
 
+  /**
+   * Add entities to store and update existing ones
+   * @param entities Entities
+   */
   putEntities(entities: T[]) {
     const entitiesMap = new Map();
     entities.forEach((entity: T) => {
@@ -109,7 +152,7 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     });
 
     const existingEntities = [];
-    this.entities.forEach((entity: T) => {
+    this.rawEntities.forEach((entity: T) => {
       const entityId = getEntityId(entity);
       const newEntity = entitiesMap.get(entityId);
       if (newEntity === undefined) {
@@ -124,44 +167,89 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
     this.setEntities(newEntities, true);
   }
 
+  /**
+   * Remove entities from store
+   * @param entities Entities
+   */
   removeEntities(entities: T[]) {
     const entitiesIds = entities.map(getEntityId);
-    const newEntities = this.entities.slice()
+    const newEntities = this.rawEntities.slice()
       .filter((entity: Entity) => entitiesIds.indexOf(getEntityId(entity)) < 0);
     // this.setEntitiesState(entities, {} as S);
     this.setEntities(newEntities, true);
   }
 
+  /**
+   * Get an entity from the store by id
+   * @param id Entity id
+   * @returns Entity
+   */
   getEntityById(id: string): T {
-    return this.entities.find((entity: T) => getEntityId(entity) === id);
+    return this.rawEntities.find((entity: T) => getEntityId(entity) === id);
   }
 
+  /**
+   * Get the state of an entity
+   * @param entity Entity
+   * @returns State
+   */
   getEntityState(entity: T): S {
     return this.state.getByKey(getEntityId(entity)) || {} as S;
   }
 
+  /**
+   * Set the state of an entity
+   * @param entity Entity
+   * @param State
+   */
   setEntityState(entity: T, state: S) {
     this.setEntitiesState([entity], state);
   }
 
+  /**
+   * Set the state of multiple entities
+   * @param entities Entities
+   * @param State
+   */
   setEntitiesState(entities: T[], state: S) {
     this.state.setByKeys(entities.map(getEntityId), state);
   }
 
+  /**
+   * Update the state of an entity
+   * @param entity Entity
+   * @param changes State changes
+   * @param exclusive Whether this key should be the only one in that state
+   */
   updateEntityState(entity: T, changes: { [key: string]: boolean }, exclusive = false) {
     this.state.updateByKey(getEntityId(entity), changes, exclusive);
   }
 
+  /**
+   * Update the state of multiple entities
+   * @param entities Entities
+   * @param changes State changes
+   * @param exclusive Whether these keys should be the only one in that state
+   */
   updateEntitiesState(entities: T[], changes: { [key: string]: boolean }, exclusive = false) {
     this.state.updateByKeys(entities.map(getEntityId), changes, exclusive);
   }
 
+  /**
+   * Update the state of all entities
+   * @param changes State changes
+   */
   updateAllEntitiesState(changes: { [key: string]: boolean }) {
     this.state.updateAll(changes);
   }
 
+  /**
+   * Create a custom observable of filtered entities
+   * @param filterBy Filter function that receives an entity and it's state
+   * @param Observable of the filtered entities
+   */
   observeBy(filterBy: (entity: T, state: S) => boolean): Observable<T[]> {
-    return this.observable
+    return this.entities$
       .pipe(
         map((entities: T[]) => {
           return entities.filter((entity: T) => {
@@ -171,24 +259,34 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
       );
   }
 
-  observeFirstBy(clause: EntityFilterClause): Observable<T> {
-    return this.observable
+  /**
+   * Create a custom observable of the first entity returned by the filter
+   * function
+   * @param filterBy Filter function that receives an entity and it's state
+   * @param Observable of the first filtered entity
+   */
+  observeFirstBy(filterBy: (entity: T, state: S) => boolean): Observable<T> {
+    return this.entities$
       .pipe(
         map((entities: T[]) => {
           return entities.find((entity: T) => {
-            return clause(entity, this.getEntityState(entity));
+            return filterBy(entity, this.getEntityState(entity));
           });
         })
       );
   }
 
+  /**
+   * Start watching changes in the entities, filter, sorter and state and update
+   * this store's observables accordingly.
+   */
   private watchChanges() {
-    const filtered$ = combineLatest(
-      this.entities$,
-      this.filter.observable
+    const filteredEntities$ = combineLatest(
+      this.rawEntities$,
+      this.filter.clauses$
     );
 
-    this.filtered$$ = filtered$
+    this.filteredEntities$$ = filteredEntities$
       .pipe(
         skip(1),
         debounceTime(50),
@@ -197,22 +295,36 @@ export class EntityStore<T extends Entity | EntityClass, S extends { [key: strin
             return this.getEntityState(entity);
           });
         })
-      ).subscribe((filteredEntities: T[]) => this.filtered$.next(filteredEntities));
+      ).subscribe((filteredEntities: T[]) => {
+        this.filteredEntities$.next(filteredEntities);
+      });
 
-    const observable$ = combineLatest(
-      this.filtered$,
-      this.state.observable,
-      this.sorter.observable
+    const entities$ = combineLatest(
+      this.filteredEntities$,
+      this.state.states$,
+      this.sorter.clause$
     );
 
-    this.observable$$ = observable$
+    this.entities$$ = entities$
       .pipe(
         skip(1),
         debounceTime(50),
         map((results: [T[], State, EntityFilterClause[]]) => {
           return this.sorter.sort(results[0].slice());
         })
-      ).subscribe((entities: T[]) => this.observable$.next(entities));
+      ).subscribe((entities: T[]) => this.entities$.next(entities));
+  }
+
+  /**
+   * Stop watching for changes
+   */
+  private unwatchChanges() {
+    if (this.filteredEntities$$ !== undefined) {
+      this.filteredEntities$$.unsubscribe();
+    }
+    if (this.entities$$ !== undefined) {
+      this.entities$$.unsubscribe();
+    }
   }
 
 }

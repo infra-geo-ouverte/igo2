@@ -52,14 +52,14 @@ export class ClientParcelYearSelectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.controller.bind(this.store);
+    this.controller.bindStore(this.store);
     this.parcelYear$$ = this.store
       .observeFirstBy((parcelYear: ClientParcelYear, state: State) => state.selected === true)
       .subscribe((parcelYear: ClientParcelYear) => this.currentParcelYear = parcelYear);
   }
 
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
     this.parcelYear$$.unsubscribe();
   }
 

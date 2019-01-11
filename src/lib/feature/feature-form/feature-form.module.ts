@@ -5,6 +5,9 @@ import { FadqLibEntityFormModule } from 'src/lib/entity/entity-form/entity-form.
 
 import { FeatureFormComponent } from './feature-form.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

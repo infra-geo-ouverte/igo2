@@ -139,7 +139,7 @@ export class ActionbarComponent implements OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     const store = changes.store;
     if (store && store.currentValue !== store.previousValue) {
-      this.controller.bind(this.store);
+      this.controller.bindStore(this.store);
     }
   }
 
@@ -147,7 +147,7 @@ export class ActionbarComponent implements OnChanges, OnDestroy {
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
   }
 
   /**

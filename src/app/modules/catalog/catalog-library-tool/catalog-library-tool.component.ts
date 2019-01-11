@@ -38,7 +38,7 @@ export class CatalogLibraryToolComponent implements OnInit {
    * @internal
    */
   ngOnInit() {
-    if (this.store.empty) {
+    if (this.store.filteredEmpty) {
       this.loadCatalogs();
     }
   }

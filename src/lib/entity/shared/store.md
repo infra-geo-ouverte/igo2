@@ -1,5 +1,5 @@
 The `EntityStore` class holds the references to any number of `Entity` as well as their state.
-It can be observed, filtered and sorted and provdes methods to add, update or remove entities.
+It can be observed, filtered and sorted and provdies methods to add, update or remove entities.
 
 ### Defining an `Entity` type
 
@@ -28,24 +28,24 @@ store.setEntities([
 
 ### Observe raw entities (unfiltered ad unsorted)
 
-The `rawObsersable` accessor returns an observable of all the entities, unfiltered and unsorted.
+The `rawEntities$` property returns an observable of all the entities, unfiltered and unsorted.
 It emits a value only when the entities change and ignores any filtering, sorting or state change.
 
 ```typescript
 const subscribtion = store
-  .rawObservable
+  .rawEntities$
   .subscribe((books: Book[]) => {console.log(books.length);})
 ```
 
 ### Observe entities (filtered ad sorted) and any state change
 
-The `obsersable` accessor returns an observable of all the filtered and sorted entities.
+The `entities$` property returns an observable of all the filtered and sorted entities.
 It emits a new value anytime the store is filtered or sorted as well as any time there is
 a change in the state.  
 
 ```typescript
 const subscribtion = store
-  .observable
+  .entities$
   .subscribe((books: Book[]) => {console.log(books.length);})
 ```
 

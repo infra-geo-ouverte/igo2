@@ -25,7 +25,7 @@
 </mat-list-item>
 
 <div #items>
-  <ng-template ngFor let-item [ngForOf]="store.observable | async">
+  <ng-template ngFor let-item [ngForOf]="store.entities$ | async">
     <ng-container *ngIf="isGroup(item)"></ng-container>
     <ng-container *ngIf="isLayer(item)">
       <fadq-catalog-browser-layer

@@ -148,7 +148,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.context$$ = this.contextService.context$
       .subscribe((context: DetailedContext) => this.onChangeContext(context));
 
-    this.searchResults$$ = this.searchStore.observable
+    this.searchResults$$ = this.searchStore.entities$
       .subscribe((results: SearchResult[]) => this.onSearch(results));
 
     this.focusedSearchResult$$ = this.searchStore

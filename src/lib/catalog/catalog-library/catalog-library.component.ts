@@ -58,14 +58,14 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.store.state.reset();
-    this.controller.bind(this.store);
+    this.controller.bindStore(this.store);
   }
 
   /**
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
   }
 
   /**

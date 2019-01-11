@@ -11,6 +11,13 @@ import { IgoMap } from 'src/lib/map';
 import { FeatureMotion } from './feature.enum';
 import { Feature } from './feature.interfaces';
 
+/**
+ * Create an Openlayers feature object out of a feature definition.
+ * The output object has a reference to the feature id.
+ * @param feature Feature definition
+ * @param projectionOut Feature object projection
+ * @returns OpenLayers feature object
+ */
 export function featureToOl(feature: Feature, projectionOut: string): OlFeature {
   const olFormat = new OlFormatGeoJSON();
   const olFeature = olFormat.readFeature(feature, {
@@ -33,6 +40,12 @@ export function featureToOl(feature: Feature, projectionOut: string): OlFeature 
   return olFeature;
 }
 
+/**
+ * Compute an OL feature extent in it's map projection
+ * @param map Map
+ * @param olFeature OL feature
+ * @returns Extent in the map projection
+ */
 export function computeOlFeatureExtent(
   map: IgoMap, olFeature: OlFeature
 ): [number, number, number, number] {
@@ -51,6 +64,12 @@ export function computeOlFeatureExtent(
   return extent;
 }
 
+/**
+ * Compute a multiple OL features extent in their map projection
+ * @param map Map
+ * @param olFeatures OL features
+ * @returns Extent in the map projection
+ */
 export function computeOlFeaturesExtent(
   map: IgoMap,
   olFeatures: OlFeature[]
@@ -71,6 +90,9 @@ export function computeOlFeaturesExtent(
 
 /**
  * Scale an extent.
+ * @param extent Extent
+ * @param Scaling factor
+ * @returns Scaled extent
  */
 export function scaleExtent(
   extent: [number, number, number, number],
@@ -87,9 +109,11 @@ export function scaleExtent(
 
 /**
  * Return true if features are out of view.
- *
  * If features are too close to the edge, they are considered out of view.
  * We define the edge as 5% of the extent size.
+ * @param map Map
+ * @param featuresExtent The features's extent
+ * @returns Return true if features are out of view
  */
 export function featuresAreOutOfView(map: IgoMap, featuresExtent: [number, number, number, number]) {
   const mapExtent = map.getExtent();
@@ -102,9 +126,11 @@ export function featuresAreOutOfView(map: IgoMap, featuresExtent: [number, numbe
 /**
  * Return true if features are too deep into the view. This results
  * in features being too small.
- *
  * Features are considered too small if their extent occupies less than
  * 1% of the map extent.
+ * @param map Map
+ * @param featuresExtent The features's extent
+ * @returns Return true if features are too deep in the view
  */
 export function featuresAreTooDeepInView(map: IgoMap, featuresExtent: [number, number, number, number]) {
   const mapExtent = map.getExtent();
@@ -117,8 +143,12 @@ export function featuresAreTooDeepInView(map: IgoMap, featuresExtent: [number, n
 
 /**
  * Fit view to include the features extent.
- *
  * By default, this method will let the features occupy about 50% of the viewport.
+ * @param map Map
+ * @param olFeatures OL features
+ * @param motion To motion to the new map view
+ * @param scale If this is defined, the original view will be scaled
+ *  by that factor before any logic is applied.
  */
 export function moveToFeatures(
   map: IgoMap,
@@ -140,6 +170,10 @@ export function moveToFeatures(
   }
 }
 
+/**
+ * Hide an OL feature
+ * @param olFeature OL feature
+ */
 export function hideOlFeature(olFeature: OlFeature) {
   olFeature.setStyle(new olstyle.Style({}));
 }

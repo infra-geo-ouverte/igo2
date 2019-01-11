@@ -53,14 +53,14 @@ export class ClientParcelDiagramSelectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.controller.bind(this.store);
+    this.controller.bindStore(this.store);
     this.diagram$$ = this.store
       .observeFirstBy((diagram: ClientParcelDiagram, state: State) => state.selected === true)
       .subscribe((diagram: ClientParcelDiagram) => this.currentDiagram = diagram);
   }
 
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
     this.diagram$$.unsubscribe();
   }
 

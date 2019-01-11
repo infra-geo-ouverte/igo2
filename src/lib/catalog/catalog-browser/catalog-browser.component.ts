@@ -27,7 +27,7 @@ import {
 } from '../shared';
 
 /**
- * Component to browse a catalog's groups and layers and display them to a map.
+ * Component to browse a catalog's groups and layers and display them on a map.
  */
 @Component({
   selector: 'fadq-catalog-browser',
@@ -65,14 +65,14 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const currentLayerIds = this.map.layers.map((layer: Layer) => layer.id);
     this.store.state.setByKeys(currentLayerIds, {added: true});
-    this.controller.bind(this.store);
+    this.controller.bindStore(this.store);
   }
 
   /**
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
   }
 
   /**

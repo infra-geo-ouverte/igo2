@@ -70,7 +70,7 @@ export class ClientSchemaElementPointEditorService extends Editor {
       return this.transaction !== undefined && this.transaction.empty === false;
     };
     const transactionIsNotInCommitPhase = () => {
-      return this.transaction !== undefined && this.transaction.inCommitPhase === false;
+      return this.transaction !== undefined && this.transaction.isInCommitPhase === false;
     };
 
     return [

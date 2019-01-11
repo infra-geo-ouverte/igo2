@@ -4,7 +4,7 @@
   <mat-select
     [(ngModel)]="editor"
     (selectionChange)="onSelectionChange($event)">
-    <ng-template ngFor let-editor [ngForOf]="store.observable | async">
+    <ng-template ngFor let-editor [ngForOf]="store.entities$ | async">
       <mat-option [value]="editor">
         {{getEditorTitle(editor)}}
       </mat-option>

@@ -43,7 +43,7 @@ export class CatalogService {
       return of(catalogsFromConfig);
     }
 
-    const observables = [];
+    const observables$ = [];
 
     // Base layers catalog
     if (catalogConfig.baseLayers) {
@@ -55,7 +55,7 @@ export class CatalogService {
         url: `${apiUrl}/baselayers`,
         type: 'baselayers'
       };
-      observables.push(of(baseLayersCatalog));
+      observables$.push(of(baseLayersCatalog));
     }
 
     // Catalogs from API
@@ -64,14 +64,14 @@ export class CatalogService {
       .pipe(
         catchError((response: HttpErrorResponse) => EMPTY)
       );
-    observables.push(catalogsFromApi$);
+    observables$.push(catalogsFromApi$);
 
     // Catalogs from config
     if (catalogsFromConfig.length > 0) {
-      observables.push(of(catalogsFromConfig));
+      observables$.push(of(catalogsFromConfig));
     }
 
-    return concat(...observables);
+    return concat(...observables$);
   }
 
   loadCatalogItems(catalog: Catalog): Observable<CatalogItem[]> {

@@ -6,6 +6,9 @@ import { IgoGeoModule } from '@igo2/geo';
 import { FadqLibActionModule } from '../../action/action.module';
 import { MapActionbarComponent } from './map-actionbar.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

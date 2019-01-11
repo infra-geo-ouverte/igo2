@@ -70,7 +70,7 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnInit() {
-    this.controller.bind(this.store);
+    this.controller.bindStore(this.store);
     this.editor$$ = this.store
       .observeFirstBy((editor: Editor, state: State) => state.selected === true)
       .subscribe((editor: Editor) => this.activateEditor(editor));
@@ -81,7 +81,7 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
     this.editor$$.unsubscribe();
   }
 

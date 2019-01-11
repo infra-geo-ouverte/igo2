@@ -56,11 +56,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.controller.bind(this.store);
+    this.controller.bindStore(this.store);
   }
 
   ngOnDestroy() {
-    this.controller.unbind();
+    this.controller.unbindStore();
   }
 
   sortByOrder(result1: SearchResult, result2: SearchResult) {

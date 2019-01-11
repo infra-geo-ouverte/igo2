@@ -5,12 +5,12 @@
     color="accent"
     [withTitle]="false"
     [withIcon]="true"
-    [disabled]="store.empty"
+    [disabled]="store.filteredEmpty"
     [action]="toggleCollapseAction"
     (trigger)="onTriggerAction(toggleCollapseAction)">
   </fadq-actionbar-item>
 
-  <ng-template *ngIf="!collapsed" ngFor let-action [ngForOf]="store.entities">
+  <ng-template *ngIf="!collapsed" ngFor let-action [ngForOf]="store.entities$ | async">
     <fadq-actionbar-item
       color="accent"
       [withTitle]="withTitle"
@@ -38,7 +38,7 @@
     [class]="overlayClass">
 
     <mat-list>
-      <ng-template ngFor let-action [ngForOf]="store.entities">
+      <ng-template ngFor let-action [ngForOf]="store.entities$ | async">
         <fadq-actionbar-item
           color="accent"
           [withTitle]="withTitle"

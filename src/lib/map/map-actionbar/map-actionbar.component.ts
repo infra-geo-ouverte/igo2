@@ -25,11 +25,11 @@ export class MapActionbarComponent implements OnInit {
   get store(): EntityStore<Action> { return this._store; }
   private _store = new EntityStore<Action>();
 
+  // Make that work with OnPush strategy
   get mode(): ActionbarMode {
     const media = this.mediaService.media$.value;
     const orientation = this.mediaService.orientation$.value;
-    // Make that work with OnPush strategy
-    if (media === Media.Desktop && orientation === MediaOrientation.Portrait) {
+    if (media === Media.Desktop && orientation === MediaOrientation.Landscape) {
       return ActionbarMode.Dock;
     }
     return ActionbarMode.Overlay;

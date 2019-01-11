@@ -5,7 +5,7 @@
     [(ngModel)]="currentParcelYear"
     [placeholder]="'client.parcelYear.placeholder' | translate"
     (selectionChange)="onSelectionChange($event)">
-    <ng-template ngFor let-parcelYear [ngForOf]="store.observable | async">
+    <ng-template ngFor let-parcelYear [ngForOf]="store.entities$ | async">
       <mat-option [value]="parcelYear">
         {{getParcelYearTitle(parcelYear)}}
       </mat-option>

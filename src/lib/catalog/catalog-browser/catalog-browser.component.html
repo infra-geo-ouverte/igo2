@@ -1,5 +1,5 @@
 <igo-list [navigation]="false">
-  <ng-template ngFor let-item [ngForOf]="store.observable | async">
+  <ng-template ngFor let-item [ngForOf]="store.entities$ | async">
     <ng-container *ngIf="isGroup(item)">
       <fadq-catalog-browser-group
         [group]="item"
