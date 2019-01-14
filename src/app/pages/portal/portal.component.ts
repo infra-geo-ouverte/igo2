@@ -223,6 +223,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
 
     this.route.queryParams.subscribe(params => {
+      if (params['side']) {
+        this.sidenavOpened = params['side'] === '1' ? true : false;
+      }
       if (params['layers'] && params['wmsUrl']) {
         this.addLayerByName(params['wmsUrl'], params['layers']);
       }
