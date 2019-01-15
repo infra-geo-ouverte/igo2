@@ -1,4 +1,3 @@
-import * as olstyle from 'ol/style';
 import OlFeature from 'ol/Feature';
 
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
@@ -11,43 +10,73 @@ import {
 } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 
+import { createOverlayLayer } from './overlay.utils';
+
+/**
+ * This class is simply a shortcut for adding features to a map.
+ * It does nothing more than a standard layer but it's shipped with
+ * a defautl style based on the geometry type of the features it contains.
+ * @todo Enhance that by using a FeatureStore and strategies.
+ */
 export class Overlay {
 
+  /**
+   * The map to add the layer to
+   */
   private map: IgoMap;
-  private dataSource: FeatureDataSource;
+
+  /**
+   * Overlay layer
+   */
   private layer: VectorLayer;
-  private style: olstyle.Style;
-  private markerStyle: olstyle.Style;
+
+  /**
+   * Overlay layer's data source
+   */
+  get dataSource(): FeatureDataSource {
+    return this.layer.dataSource as FeatureDataSource;
+  }
 
   constructor(map?: IgoMap) {
-    this.dataSource = new FeatureDataSource();
-    this.style = this.createStyle();
-    this.markerStyle = this.createMarkerStyle();
-    this.layer = new VectorLayer({
-      zIndex: 300,
-      style: this.style,
-      source: this.dataSource
-    });
-
+    this.layer = createOverlayLayer();
     if (map !== undefined) {
       this.bind(map);
     }
   }
 
+  /**
+   * Bind this to a map and add the overlay layer to that map
+   * @param map Map
+   */
   bind(map: IgoMap) {
     this.map = map;
     this.map.addLayer(this.layer, false);
   }
 
+  /**
+   * Set the overlay features and, optionally, move to them
+   * @param features Features
+   * @param motion Optional: Apply this motion to the map view
+   */
   setFeatures(features: Feature[], motion: FeatureMotion = FeatureMotion.Default) {
     this.clear();
     this.addFeatures(features, motion);
   }
 
+  /**
+   * Add a feature to the  overlay and, optionally, move to it
+   * @param features Features
+   * @param motion Optional: Apply this motion to the map view
+   */
   addFeature(feature: Feature, motion: FeatureMotion = FeatureMotion.Default) {
     this.addFeatures([feature], motion);
   }
 
+  /**
+   * Add features to the  overlay and, optionally, move to them
+   * @param features Features
+   * @param motion Optional: Apply this motion to the map view
+   */
   addFeatures(features: Feature[], motion: FeatureMotion = FeatureMotion.Default) {
     const olFeatures = [];
     features.map((feature: Feature) => {
@@ -56,85 +85,18 @@ export class Overlay {
       if (olGeometry === null) {
         return;
       }
-
-      if (olGeometry.getType() === 'Point') {
-        olFeature.setStyle([this.markerStyle]);
-      }
-
       olFeatures.push(olFeature);
     });
 
-    this.addOlFeatures(olFeatures, motion);
-  }
-
-  clear() {
-    this.dataSource.ol.clear();
-  }
-
-  private addOlFeatures(olFeatures: OlFeature[], motion: FeatureMotion) {
     this.dataSource.ol.addFeatures(olFeatures);
     moveToFeatures(this.map, olFeatures, motion);
   }
 
-  private createStyle(
-    strokeRGBA: [number, number, number, number] = [0, 161, 222, 1],
-    strokeWidth: number = 2,
-    fillRGBA: [number, number, number, number] = [0, 161, 222, 0.15],
-    text?
-  ): olstyle.Style {
-
-    const stroke = new olstyle.Stroke({
-      color: strokeRGBA,
-      width: strokeWidth
-    });
-
-    const fill = new olstyle.Fill({
-      color: fillRGBA
-    });
-
-    return new olstyle.Style({
-      stroke: stroke,
-      fill: fill,
-      image: new olstyle.Circle({
-        radius: 5,
-        stroke: stroke,
-        fill: fill
-      }),
-      text: new olstyle.Text({
-        font: '12px Calibri,sans-serif',
-        text: text,
-        fill: new olstyle.Fill({ color: '#000' }),
-        stroke: new olstyle.Stroke({ color: '#fff', width: 3 })
-      })
-    });
-  }
-
-  private createMarkerStyle(color = 'blue', text?): olstyle.Style {
-    let iconColor;
-    switch (color) {
-      case 'blue':
-      case 'red':
-      case 'yellow':
-      case 'green':
-        iconColor = color;
-        break;
-      default:
-        iconColor = 'blue';
-        break;
-    }
-    return new olstyle.Style({
-      image: new olstyle.Icon({
-        src: './assets/igo2/geo/icons/place_' + iconColor + '_36px.svg',
-        imgSize: [36, 36], // for ie
-        anchor: [0.5, 1]
-      }),
-      text: new olstyle.Text({
-        font: '12px Calibri,sans-serif',
-        text: text,
-        fill: new olstyle.Fill({ color: '#000' }),
-        stroke: new olstyle.Stroke({ color: '#fff', width: 3 })
-      })
-    });
+  /**
+   * Clear the overlay
+   */
+  clear() {
+    this.dataSource.ol.clear();
   }
 
 }

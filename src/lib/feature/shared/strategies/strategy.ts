@@ -49,7 +49,7 @@ export class FeatureStoreStrategy {
   }
 
   /**
-   * Bind this strategy from a store
+   * Bind this strategy to a store
    * @param store Feature store
    */
   bindStore(store: FeatureStore) {

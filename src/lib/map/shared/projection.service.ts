@@ -8,6 +8,11 @@ import { ConfigService } from '@igo2/core';
 
 import { Projection } from './projection.interfaces';
 
+/**
+ * When injected, this service automatically registers and
+ * projection defined in the application config. A custom projection
+ * needs to be registered to be usable by OL.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +25,10 @@ export class ProjectionService {
     });
   }
 
+  /**
+   * Define a proj4 projection and register it in OL
+   * @param projection Projection
+   */
   registerProjection(projection: Projection) {
     proj4.defs(projection.code, projection.def);
     olproj4.register(proj4);

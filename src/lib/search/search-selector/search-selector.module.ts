@@ -13,6 +13,9 @@ import { IgoLanguageModule } from '@igo2/core';
 
 import { SearchSelectorComponent } from './search-selector.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

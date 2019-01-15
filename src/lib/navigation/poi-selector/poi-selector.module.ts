@@ -15,6 +15,9 @@ import { IgoGeoModule } from '@igo2/geo';
 
 import { PoiSelectorComponent } from './poi-selector.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

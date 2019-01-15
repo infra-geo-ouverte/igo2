@@ -18,6 +18,10 @@ export enum SearchResultMode {
   Flat = 'flat'
 }
 
+/**
+ * List of search results with focus and selection capabilities.
+ * This component is dumb and only emits events.
+ */
 @Component({
   selector: 'fadq-search-results',
   templateUrl: './search-results.component.html',
@@ -25,29 +29,35 @@ export enum SearchResultMode {
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
+  /**
+   * Reference to the SearchResultMode enum
+   * @internal
+   */
   public searchResultMode = SearchResultMode;
 
+  /**
+   * Search results store controller
+   */
   private controller: EntityStoreController;
 
-  @Input()
-  get store(): EntityStore<SearchResult> {
-    return this._store;
-  }
-  set store(value: EntityStore<SearchResult>) {
-    this._store = value;
-  }
-  private _store;
+  /**
+   * Search results store
+   */
+  @Input() store: EntityStore<SearchResult>;
 
-  @Input()
-  get mode(): SearchResultMode {
-    return this._mode;
-  }
-  set mode(value: SearchResultMode) {
-    this._mode = value;
-  }
-  private _mode: SearchResultMode = SearchResultMode.Grouped;
+  /**
+   * Search results display mode
+   */
+  @Input() mode: SearchResultMode = SearchResultMode.Grouped;
 
+  /**
+   * Event emitted when a result is focused
+   */
   @Output() resultFocus = new EventEmitter<SearchResult>();
+
+  /**
+   * Event emitted when a result is selected
+   */
   @Output() resultSelect = new EventEmitter<SearchResult>();
 
   constructor(private cdRef: ChangeDetectorRef) {
@@ -55,23 +65,50 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       .withChangeDetector(this.cdRef);
   }
 
+  /**
+   * Bind the search results store to the controller
+   * @internal
+   */
   ngOnInit() {
     this.controller.bindStore(this.store);
   }
 
+  /**
+   * Unbind the search results store from the controller
+   * @internal
+   */
   ngOnDestroy() {
     this.controller.unbindStore();
   }
 
+  /**
+   * Sort the results by display order. Results are not sorted at the store
+   * level.
+   * @param result1 First result
+   * @param result2 Second result
+   * @internal
+   */
   sortByOrder(result1: SearchResult, result2: SearchResult) {
     return (result1.source.displayOrder - result2.source.displayOrder);
   }
 
+  /**
+   * When a result is focused, update it's state in the store and emit
+   * an event.
+   * @param result Search result
+   * @internal
+   */
   onResultFocus(result: SearchResult) {
     this.controller.updateEntityState(result, {focused: true}, true);
     this.resultFocus.emit(result);
   }
 
+  /**
+   * When a result is selected, update it's state in the store and emit
+   * an event. A selected result is also considered focused
+   * @param result Search result
+   * @internal
+   */
   onResultSelect(result: SearchResult) {
     this.controller.updateEntityState(result, {
       focused: true,

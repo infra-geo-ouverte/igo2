@@ -34,23 +34,24 @@ export class PlaceService {
     const url = this.apiService.buildUrl(api.uri);
     return this.http
       .get(url)
-      .pipe(map(res => this.extractPlacesFromResponse(res, api)));
+      .pipe(map(res => this.extractPlacesFromResponse(res, category)));
   }
 
-  getPlaceFeatureByCategoryAndId(category: PlaceCategory, id: string): Observable<Feature> {
+  getPlaceFeatureByCategory(category: PlaceCategory, place: Place): Observable<Feature> {
     const api = category.feature;
-    const url = this.apiService.buildUrl(api.uri, {id: id});
+    const url = this.apiService.buildUrl(api.uri, {id: place.id});
     return this.http
       .get(url)
-      .pipe(map(res => this.extractPlaceFeatureFromResponse(res, api)));
+      .pipe(map(res => this.extractPlaceFeatureFromResponse(res, place)));
   }
 
-  private extractPlacesFromResponse(response: Object, api: PlaceCollectionApi): Place[] {
+  private extractPlacesFromResponse(response: Object, category: PlaceCategory): Place[] {
     let data = response;
     if (response.hasOwnProperty('data')) {
       data = response['data'];
     }
 
+    const api = category.collection;
     let results: Object[] = [];
     if (data instanceof Array) {
       results = data as Object[];
@@ -78,15 +79,20 @@ export class PlaceService {
     };
   }
 
-  private extractPlaceFeatureFromResponse(response: Object, api: PlaceFeatureApi): Feature | undefined {
+  private extractPlaceFeatureFromResponse(response: Object, place: Place): Feature | undefined {
     if (Object.getOwnPropertyNames(response).length > 0) {
-      return this.formatPlaceFeatureResult(response);
+      return this.formatPlaceFeatureResult(response, place);
     }
     return;
   }
 
-  private formatPlaceFeatureResult(result: Object): Feature {
-    return Object.assign({projection: 'EPSG:4326'}, result) as Feature;
+  private formatPlaceFeatureResult(result: Object, place: Place): Feature {
+    return Object.assign({
+      projection: 'EPSG:4326',
+      meta: {
+        mapTitle: place.title
+      }
+    }, result) as Feature;
   }
 
   private computeTitle(result: Object, mapper: PlaceMapper): string | undefined {
@@ -96,7 +102,10 @@ export class PlaceService {
     }
 
     if (title === undefined && mapper.title !== undefined) {
-      title = substituteProperties(mapper.title, result);
+      title = substituteProperties(
+        mapper.title,
+        result as {[key: string]: string | number}
+      );
     }
 
     return title;

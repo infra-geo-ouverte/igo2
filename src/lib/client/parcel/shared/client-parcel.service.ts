@@ -56,7 +56,8 @@ export class ClientParcelService {
     return {
       meta: {
         idProperty: 'properties.idParcelle',
-        titleProperty: 'properties.idParcelle'
+        titleProperty: 'properties.idParcelle',
+        mapTitle: listItem.properties.noParcelleAgricole
       },
       type: listItem.type,
       projection: 'EPSG:4326',

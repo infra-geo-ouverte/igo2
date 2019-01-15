@@ -39,7 +39,7 @@ export function createParcelLayerStyle(): (olFeature: OlFeature) => olstyle.Styl
     const color = getParcelFeatureColor(feature);
     style.getFill().setColor(color.concat([0.15]));
     style.getStroke().setColor(color);
-    style.getText().setText(feature.get('noParcelleAgricole'));
+    style.getText().setText(feature.get('mapTitle'));
     return style;
   });
 }

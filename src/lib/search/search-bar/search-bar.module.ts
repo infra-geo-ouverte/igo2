@@ -18,6 +18,9 @@ import { IgoLanguageModule } from '@igo2/core';
 import { FadqLibSearchSelectorModule } from '../search-selector/search-selector.module';
 import { SearchBarComponent } from './search-bar.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

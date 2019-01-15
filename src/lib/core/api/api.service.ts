@@ -46,7 +46,7 @@ export class ApiService {
    * @param params Optional query params
    * @returns Fully qualified URL with query params
    */
-  buildUrl(uri: string, params?: Object): string {
+  buildUrl(uri: string, params?: {[key: string]: string | number}): string {
     let url = uri;
     if (!uri.startsWith('http')) {
       url = `${this.getBaseUrl()}${uri}`;
@@ -60,7 +60,7 @@ export class ApiService {
    * @param params Query params
    * @returns URL with query params substitued into it.
    */
-  private setUrlParams(url: string, params: Object) {
+  private setUrlParams(url: string, params: {[key: string]: string | number}) {
     return substituteProperties(url, params);
   }
 

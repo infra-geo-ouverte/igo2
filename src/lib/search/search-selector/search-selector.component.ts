@@ -7,8 +7,17 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { SEARCHES, SearchSourceService } from '../shared';
+import { SEARCH_TYPES } from '../shared/search.enum';
+import { SearchSourceService } from '../shared/search-source.service';
 
+/**
+ * This component allows a user to select a search type yo enable. In it's
+ * current version, only one search type can be selected at once (radio). If
+ * this component were to support more than one search source enabled (checkbox),
+ * the searchbar component would require a small change to it's
+ * placeholder getter. The search source service already supports having
+ * more than one search source enabled.
+ */
 @Component({
   selector: 'fadq-search-selector',
   templateUrl: './search-selector.component.html',
@@ -17,41 +26,60 @@ import { SEARCHES, SearchSourceService } from '../shared';
 })
 export class SearchSelectorComponent implements OnInit {
 
-  @Input()
-  get searches(): string[][] {
-    return this._searches;
-  }
-  set searches(value: string[][]) {
-    this._searches = value;
-  }
-  private _searches: string[][] = SEARCHES;
+  /**
+   * List of available search types
+   */
+  @Input() searchTypes: string[] = SEARCH_TYPES;
 
-  @Input()
-  get enabled(): string {
-    return this._enabled;
-  }
-  set enabled(value: string) {
-    this._enabled = value;
-  }
-  private _enabled: string;
+  /**
+   * The search type enabled
+   */
+  @Input() enabled: string;
 
+  /**
+   * Event emitted when the enabled search type changes
+   */
   @Output() change = new EventEmitter<string>();
 
   constructor(private searchSourceService: SearchSourceService) {}
 
+  /**
+   * Enable the first search type if the enabled input is not defined
+   * @internal
+   */
   ngOnInit() {
-    const initial = this.enabled || this.searches[0][1];
+    const initial = this.enabled || this.searchTypes[0];
     this.enableSearchType(initial);
   }
 
-  onSearchTypeChange(type: string) {
-    this.enableSearchType(type);
+  /**
+   * Enable the selected search type
+   * @param searchType Search type
+   * @internal
+   */
+  onSearchTypeChange(searchType: string) {
+    this.enableSearchType(searchType);
   }
 
-  private enableSearchType(type: string) {
-    this.enabled = type;
-    this.searchSourceService.enableSourcesByType(type);
-    this.change.emit(type);
+  /**
+   * Get a search type's title. The title
+   * for all availables search typers needs to be defined in the locale
+   * files or an error will be thrown.
+   * @param searchType Search type
+   * @internal
+   */
+  getSearchTypeTitle(searchType: string) {
+    return `search.${searchType.toLowerCase()}.title`;
+  }
+
+  /**
+   * Emit an event and enable the search sources of the given type.
+   * @param searchType Search type
+   */
+  private enableSearchType(searchType: string) {
+    this.enabled = searchType;
+    this.searchSourceService.enableSourcesByType(searchType);
+    this.change.emit(searchType);
   }
 
 }

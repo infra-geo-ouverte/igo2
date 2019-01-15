@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
-import { Media, MediaService } from '@igo2/core';
+import { Media, MediaService, MediaOrientation } from '@igo2/core';
 import {
   ContextService,
   DetailedContext,
@@ -72,6 +72,19 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get expansionPanelBackdropShown(): boolean {
     return this.expansionPanelExpanded && this.toastPanelOpened;
+  }
+
+  get mapActionbarMode(): ActionbarMode {
+    const media = this.mediaService.media$.value;
+    const orientation = this.mediaService.orientation$.value;
+    if (media === Media.Desktop && orientation === MediaOrientation.Landscape) {
+      return ActionbarMode.Dock;
+    }
+    return ActionbarMode.Overlay;
+  }
+
+  get mapActionbarWithTitle(): boolean {
+    return this.mapActionbarMode === ActionbarMode.Overlay;
   }
 
   get actionbarMode(): ActionbarMode {

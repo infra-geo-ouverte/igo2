@@ -7,37 +7,37 @@ import { EntityStore } from 'src/lib/entity';
 
 import { IgoMap, MapAction } from '../shared';
 
+/**
+ * Map actions bar
+ */
 @Component({
   selector: 'fadq-map-actionbar',
   templateUrl: './map-actionbar.component.html',
   styleUrls: ['./map-actionbar.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapActionbarComponent implements OnInit {
 
-  public visible = true;
+  /**
+   * The map
+   */
+  @Input() map: IgoMap;
 
-  @Input()
-  get map(): IgoMap { return this._map; }
-  set map(value: IgoMap) { this._map = value; }
-  private _map: IgoMap;
+  /**
+   * Actionbar mode
+   */
+  @Input() mode: ActionbarMode;
 
-  get store(): EntityStore<Action> { return this._store; }
-  private _store = new EntityStore<Action>();
+  /**
+   * Whether action titles are displayed
+   */
+  @Input() withTitle: boolean = true;
 
-  // Make that work with OnPush strategy
-  get mode(): ActionbarMode {
-    const media = this.mediaService.media$.value;
-    const orientation = this.mediaService.orientation$.value;
-    if (media === Media.Desktop && orientation === MediaOrientation.Landscape) {
-      return ActionbarMode.Dock;
-    }
-    return ActionbarMode.Overlay;
-  }
-
-  get withTitle(): boolean {
-    return this.mode === ActionbarMode.Overlay;
-  }
+  /**
+   * The store that'll contain the map actions
+   * @internal
+   */
+  public store: EntityStore<Action> = new EntityStore<Action>();
 
   constructor(private mediaService: MediaService) {}
 
@@ -45,6 +45,9 @@ export class MapActionbarComponent implements OnInit {
     this.store.setEntities(this.buildActions());
   }
 
+  /**
+   * Build the list of actions that'll go into the store
+   */
   private buildActions(): Action[] {
     return [
       {

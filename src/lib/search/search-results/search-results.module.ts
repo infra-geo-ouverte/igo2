@@ -18,6 +18,9 @@ import { SearchResultsGroupPipe } from './search-results-group.pipe';
 import { SearchResultsComponent } from './search-results.component';
 import { SearchResultsItemComponent } from './search-results-item.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

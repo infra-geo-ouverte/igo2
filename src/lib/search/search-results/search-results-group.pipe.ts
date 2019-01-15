@@ -1,25 +1,27 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { SearchResult } from '../shared';
+import { SearchResult } from '../shared/search.interfaces';
+import { SearchSource } from '../shared/sources/source';
 
+/**
+ * This pipe returns a source -> results mapper.
+ */
 @Pipe({
   name: 'searchResultsGroup'
 })
 export class SearchResultsGroupPipe implements PipeTransform {
-  transform(value: SearchResult[], args?: any): any {
-    const sourceAndResults = {};
+  transform(value: SearchResult[], args?: any): Map<SearchSource, SearchResult[]> {
+   const grouped = new Map<SearchSource, SearchResult[]>();
 
-    value.forEach((result: SearchResult) => {
-      const sourceId = result.source.getId();
-      if (sourceAndResults[sourceId] === undefined) {
-        sourceAndResults[sourceId] = new Object({
-          source: result.source,
-          results: []
-        });
-      }
-      sourceAndResults[sourceId].results.push(result);
-    });
-
-    return Object.values(sourceAndResults);
+   value.forEach((result: SearchResult) => {
+     const source = result.source;
+     let sourceResults = grouped.get(source);
+     if (sourceResults === undefined) {
+       sourceResults = [];
+       grouped.set(source, sourceResults);
+     }
+     sourceResults.push(result);
+   });
+   return grouped;
   }
 }

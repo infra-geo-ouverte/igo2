@@ -16,6 +16,9 @@ import { IgoGeoModule } from '@igo2/geo';
 
 import { PlaceSelectorComponent } from './place-selector.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,

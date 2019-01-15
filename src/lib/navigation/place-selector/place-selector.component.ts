@@ -6,6 +6,7 @@ import { map, startWith} from 'rxjs/operators';
 import { Overlay } from 'src/lib/overlay';
 import { Feature, FeatureMotion } from 'src/lib/feature';
 import { Place, PlaceCategory, PlaceService } from '../shared';
+import { getEntityTitle } from '../../entity';
 
 @Component({
   selector: 'fadq-place-selector',
@@ -67,7 +68,7 @@ export class PlaceSelectorComponent implements OnInit {
   }
 
   onPlaceSelect(place: Place) {
-    this.placeService.getPlaceFeatureByCategoryAndId(this.selectedCategory, place.id)
+    this.placeService.getPlaceFeatureByCategory(this.selectedCategory, place)
       .subscribe((feature: Feature) => this.setOverlayFeature(feature));
   }
 

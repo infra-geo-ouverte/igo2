@@ -42,7 +42,11 @@
 </mat-sidenav-container>
 
 <div class="fadq-footer">
-  <fadq-map-actionbar [map]="map"></fadq-map-actionbar>
+  <fadq-map-actionbar
+    [map]="map"
+    [mode]="mapActionbarMode"
+    [withTitle]="mapActionbarWithTitle">
+  </fadq-map-actionbar>
 </div>
 
 <fadq-expansion-panel

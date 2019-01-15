@@ -1,8 +1,4 @@
 {
-  "Client": "Client",
-  "Localisation": "Localisation",
-  "Layer": "Layer",
-
   "welcome": "Welcome to {{title}}",
   "menu.close": "Close Menu",
   "menu.open": "Open Menu",
@@ -14,8 +10,11 @@
 
   "search": {
     "menu.tooltip": "Search Options",
+    "client.title": "Client",
     "client.placeholder": "Search for a  client",
+    "feature.title": "Localisation",
     "feature.placeholder": "Search for a place localisation",
+    "layer.title": "Layer",
     "layer.placeholder": "Search for a layer"
   },
 

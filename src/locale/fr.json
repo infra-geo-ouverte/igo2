@@ -1,8 +1,4 @@
 {
-  "Client": "Client",
-  "Localisation": "Localisation",
-  "Layer": "Couche de données",
-
   "welcome": "Bienvenue à {{title}}",
   "menu.close": "Fermer le menu",
   "menu.open": "Menu",
@@ -14,8 +10,11 @@
 
   "search": {
     "menu.tooltip": "Options de recherche",
+    "client.title": "Client",
     "client.placeholder": "Rechercher un client",
+    "feature.title": "Localisation",
     "feature.placeholder": "Rechercher une localisation",
+    "layer.title": "Couche de données",
     "layer.placeholder": "Rechercher une couche de données."
   },
 

@@ -7,6 +7,9 @@ import {
 
 import { WidgetOutletComponent } from './widget-outlet.component';
 
+/**
+ * @ignore
+ */
 @NgModule({
   imports: [
     CommonModule,
