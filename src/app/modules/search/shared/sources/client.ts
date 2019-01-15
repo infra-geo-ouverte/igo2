@@ -30,15 +30,9 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
     super(options);
   }
 
-  /**
-   * @internal
-   */
-  getId(): string { return ClientSearchSource.id; }
+  protected getId(): string { return ClientSearchSource.id; }
 
-  /**
-   * @internal
-   */
-  getDefaultOptions(): SearchSourceOptions {
+  protected getDefaultOptions(): SearchSourceOptions {
     return {
       title: 'Client (FADQ)'
     };
@@ -47,7 +41,7 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
   /**
    * Search a client by num
    * @param term Client num
-   * @returns
+   * @returns Observable of <SearchResult<Client>[]
    */
   search(term?: string): Observable<SearchResult<Client>[]> {
     return this.clientState.getSetClientByNum(term)

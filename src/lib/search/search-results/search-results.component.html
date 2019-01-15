@@ -4,7 +4,6 @@
       #groupTemplate
       ngFor let-group let-i="index"
       [ngForOf]="(store.rawEntities$ | async).sort(sortByOrder) | searchResultsGroup | keyvalue">
-
       <igo-collapsible
         title="{{group.key.title}} ({{group.value.length}})"
         *ngIf="mode === searchResultMode.Grouped; else flatTemplate">

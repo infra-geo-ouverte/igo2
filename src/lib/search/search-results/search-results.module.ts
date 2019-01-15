@@ -8,7 +8,6 @@ import {
 } from '@angular/material';
 
 import {
-  IgoKeyValueModule,
   IgoCollapsibleModule,
   IgoListModule
 } from '@igo2/common';
@@ -27,7 +26,6 @@ import { SearchResultsItemComponent } from './search-results-item.component';
     MatTooltipModule,
     MatIconModule,
     MatListModule,
-    IgoKeyValueModule,
     IgoCollapsibleModule,
     IgoListModule,
     IgoLanguageModule

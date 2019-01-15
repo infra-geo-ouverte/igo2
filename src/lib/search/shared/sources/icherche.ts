@@ -17,6 +17,9 @@ import {
   IChercheReverseResponse
 } from './icherche.interfaces';
 
+/**
+ * ICherche search source
+ */
 @Injectable()
 export class IChercheSearchSource extends SearchSource implements TextSearch {
 
@@ -39,17 +42,22 @@ export class IChercheSearchSource extends SearchSource implements TextSearch {
     super(options);
   }
 
-  getId(): string {
+  protected getId(): string {
     return IChercheSearchSource.id;
   }
 
-  getDefaultOptions(): SearchSourceOptions {
+  protected getDefaultOptions(): SearchSourceOptions {
     return {
       title: 'ICherche Québec',
       searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
     };
   }
 
+  /**
+   * Search a location by name or keyword
+   * @param term Location name or keyword
+   * @returns Observable of <SearchResult<Feature>[]
+   */
   search(term: string): Observable<SearchResult<Feature>[]> {
     const params = this.computeRequestParams(term);
     return this.http
@@ -109,6 +117,9 @@ export class IChercheSearchSource extends SearchSource implements TextSearch {
   }
 }
 
+/**
+ * IChercheReverse search source
+ */
 @Injectable()
 export class IChercheReverseSearchSource extends SearchSource implements ReverseSearch {
 
@@ -123,17 +134,23 @@ export class IChercheReverseSearchSource extends SearchSource implements Reverse
     super(options);
   }
 
-  getId(): string {
+  protected getId(): string {
     return IChercheReverseSearchSource.id;
   }
 
-  getDefaultOptions(): SearchSourceOptions {
+  protected getDefaultOptions(): SearchSourceOptions {
     return {
       title: 'ICherche Québec',
       searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/xy'
     };
   }
 
+  /**
+   * Search a location by coordinates
+   * @param lonLat Location coordinates
+   * @param distance Search raidus around lonLat
+   * @returns Observable of <SearchResult<Feature>[]
+   */
   reverseSearch(lonLat: [number, number], distance?: number): Observable<SearchResult<Feature>[]> {
     const params = this.computeRequestParams(lonLat, distance);
     return this.http

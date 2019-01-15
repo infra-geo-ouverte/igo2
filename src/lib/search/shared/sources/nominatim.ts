@@ -11,6 +11,9 @@ import { SearchSource, TextSearch } from './source';
 import { SearchSourceOptions } from './source.interfaces';
 import { NominatimData } from './nominatim.interfaces';
 
+/**
+ * Nominatim search source
+ */
 @Injectable()
 export class NominatimSearchSource extends SearchSource implements TextSearch {
 
@@ -24,17 +27,22 @@ export class NominatimSearchSource extends SearchSource implements TextSearch {
     super(options);
   }
 
-  getId(): string {
+  protected getId(): string {
     return NominatimSearchSource.id;
   }
 
-  getDefaultOptions(): SearchSourceOptions {
+  protected getDefaultOptions(): SearchSourceOptions {
     return {
       title: 'Nominatim (OSM)',
       searchUrl: 'https://nominatim.openstreetmap.org/search'
     };
   }
 
+  /**
+   * Search a place by name
+   * @param term Place name
+   * @returns Observable of <SearchResult<Feature>[]
+   */
   search(term?: string): Observable<SearchResult<Feature>[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http

@@ -14,6 +14,9 @@ import { SearchSource, TextSearch } from './source';
 import { SearchSourceOptions } from './source.interfaces';
 import { ILayerData, ILayerResponse } from './ilayer.interfaces';
 
+/**
+ * ILayer search source
+ */
 @Injectable()
 export class ILayerSearchSource
     extends SearchSource implements TextSearch {
@@ -33,17 +36,22 @@ export class ILayerSearchSource
     super(options);
   }
 
-  getId(): string {
+  protected getId(): string {
     return ILayerSearchSource.id;
   }
 
-  getDefaultOptions(): SearchSourceOptions {
+  protected getDefaultOptions(): SearchSourceOptions {
     return {
       title: 'igo.geo.search.dataSources.name',
       searchUrl: 'https://geoegl.msp.gouv.qc.ca/igo2/api/layers/search'
     };
   }
 
+  /**
+   * Search a layer by name or keyword
+   * @param term Layer name or keyword
+   * @returns Observable of <SearchResult<LayerOptions>[]
+   */
   search(term?: string): Observable<SearchResult<LayerOptions>[]> {
     const params = this.computeSearchRequestParams(term);
     return this.http

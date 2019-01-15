@@ -5,20 +5,18 @@ import { ConfigService } from '@igo2/core';
 import { SearchSource } from './source';
 import { NominatimSearchSource } from './nominatim';
 
-export function nominatimSearchSourcesFactory(
-  http: HttpClient,
-  config: ConfigService
-) {
-  return new NominatimSearchSource(
-    http,
-    config.getConfig(`searchSources.${NominatimSearchSource.id}`)
-  );
-}
-
+/**
+ * Function that returns a provider for the Nominatim search source
+ */
 export function provideNominatimSearchSource() {
   return {
     provide: SearchSource,
-    useFactory: nominatimSearchSourcesFactory,
+    useFactory: (http: HttpClient, config: ConfigService) => {
+      return new NominatimSearchSource(
+        http,
+        config.getConfig(`searchSources.${NominatimSearchSource.id}`)
+      );
+    },
     multi: true,
     deps: [HttpClient, ConfigService]
   };
