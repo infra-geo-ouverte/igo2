@@ -16,7 +16,7 @@
     "build.prod": "ng build --prod",
     "serve.prod": "node_modules/live-server/live-server.js ./dist/igo2/ --port=4200 --no-browser",
     "doc": "compodoc -p src/tsconfig.app.json -s --port 4220",
-    "build.doc": "compodoc -p src/tsconfig.app.json --disablePrivate --disableInternal --disableLifeCycleHooks --theme material",
+    "build.doc": "compodoc -p src/tsconfig.app.json --disablePrivate --disableProtected --disableInternal --disableLifeCycleHooks --theme material",
     "serve.doc": "compodoc -s --port 4220",
     "coverage": "npm run build.coverage && npm run serve.coverage",
     "build.coverage": "ng test --code-coverage --watch=false",
@@ -97,6 +97,7 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-packagr": "^3.0.0-rc.2",
+    "opencollective": "^1.0.3",
     "protractor": "~5.3.0",
     "publish-release": "^1.6.0",
     "scss-bundle": "^2.3.2",
@@ -104,7 +105,6 @@
     "tsickle": ">=0.25.5",
     "tslib": "^1.7.1",
     "tslint": "~5.9.1",
-    "typescript": "~2.7.2",
-    "typy": "^2.0.1"
+    "typescript": "~2.7.2"
   }
 }
