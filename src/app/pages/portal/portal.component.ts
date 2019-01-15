@@ -223,16 +223,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
 
     this.route.queryParams.subscribe(params => {
-      if (params['side']) {
-        this.sidenavOpened = params['side'] === '1' ? true : false;
+      if (params['sidenav']) {
+      if (params['sidenav'] === '1') {
+        this.openSidenav();
       }
-      if (params['layers'] && params['wmsUrl']) {
-        const layers = params['layers'].split(',');
-        layers.forEach(layer => {
-          this.addLayerByName(params['wmsUrl'], layer);
-        });
-      }
-      if (params['tool'] && !this.toolLoaded) {
+    }
+    if (params['layers'] && params['wmsUrl']) {
+      const layers = params['layers'].split(',');
+      layers.forEach(layer => {
+        this.addLayerByName(params['wmsUrl'], layer);
+      });
+    }
+    if (params['tool'] && !this.toolLoaded) {
+        this.openSidenav();
         const toolNameToOpen = params['tool'];
         if (this.toolService.allowedToolName.indexOf(toolNameToOpen) !== -1) {
           const tool = this.toolService.getTool(toolNameToOpen);
