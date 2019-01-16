@@ -15,7 +15,8 @@ import {
   MapService,
   OverlayAction,
   OverlayService,
-  SearchService
+  SearchService,
+  CapabilitiesService
 } from '@igo2/geo';
 
 import {
@@ -73,7 +74,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     public layerService: LayerService,
     public dataSourceService: DataSourceService,
     public contextService: ContextService,
-    public cdRef: ChangeDetectorRef
+    public cdRef: ChangeDetectorRef,
+    public capabilitiesService: CapabilitiesService
+
   ) {}
 
   ngOnInit() {
@@ -258,15 +261,20 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     };
 
+    this.capabilitiesService
+    .getWMSOptions(properties).subscribe(capabilities => {
     this.dataSourceService
-      .createAsyncDataSource(properties)
+      .createAsyncDataSource(capabilities)
       .pipe(debounceTime(100))
       .subscribe(dataSource => {
         const layerOptions = {
-          title: name,
-          source: dataSource
+          source: Object.assign(dataSource,
+          {options: {
+            optionsFromCapabilities: true,
+            _layerOptionsFromCapabilities: (capabilities as any)._layerOptionsFromCapabilities} })
         };
         this.map.addLayer(this.layerService.createLayer(layerOptions));
       });
+    });
   }
 }
