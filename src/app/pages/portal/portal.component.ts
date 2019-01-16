@@ -238,7 +238,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
     }
     if (params['tool'] && !this.toolLoaded) {
-        this.openSidenav();
         const toolNameToOpen = params['tool'];
         if (this.toolService.allowedToolName.indexOf(toolNameToOpen) !== -1) {
           const tool = this.toolService.getTool(toolNameToOpen);
