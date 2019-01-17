@@ -1,3 +1,4 @@
+import * as olstyle from 'ol/style';
 import OlGeometry from 'ol/geom/Geometry';
 import OlPoint from 'ol/geom/Point';
 import OlLineString from 'ol/geom/LineString';
@@ -175,4 +176,46 @@ export function squareMetersToUnit(value: number, unit: MeasureAreaUnit): number
   const conversion = conversionMapper.get(unit);
 
   return conversion ? conversion(value) : undefined;
+}
+
+/**
+ * Create a default style for a measure interaction
+ * @returns OL style
+ */
+export function createMeasureInteractionStyle(): olstyle.Style {
+  return new olstyle.Style({
+    stroke: new olstyle.Stroke({
+      color: '#ffcc33',
+      lineDash: [10, 10],
+      width: 2
+    }),
+    fill:  new olstyle.Fill({
+      color: 'rgba(255, 255, 255, 0.2)'
+    }),
+    image: new olstyle.Circle({
+      radius: 5,
+      stroke: new olstyle.Stroke({
+        color: '#ffcc33',
+      }),
+      fill: new olstyle.Fill({
+        color: 'rgba(255, 255, 255, 0.2)'
+      })
+    })
+  });
+}
+
+/**
+ * Create a default style for a measure layer
+ * @returns OL style
+ */
+export function createMeasureLayerStyle(): olstyle.Style {
+  return new olstyle.Style({
+    stroke: new olstyle.Stroke({
+      color: '#ffcc33',
+      width: 2
+    }),
+    fill:  new olstyle.Fill({
+      color: 'rgba(255, 255, 255, 0.2)'
+    })
+  });
 }

@@ -18,6 +18,10 @@ import {
   MeasureLengthUnit,
   GeometryMeasures
 } from '../shared/measure.interfaces';
+import {
+  createMeasureInteractionStyle,
+  createMeasureLayerStyle
+} from '../shared/measure.utils';
 
 /**
  * Tool to measure lengths and areas
@@ -67,17 +71,6 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   public lastLength$: BehaviorSubject<number> = new BehaviorSubject(undefined);
 
   /**
-   * Wheter one of the draw control is active
-   * @internal
-   */
-  public drawControlIsActive: boolean = false;
-
-  /**
-   * Draw control source
-   */
-  private olDrawSource: OlVectorSource;
-
-  /**
    * Draw line control
    */
   private drawLineControl: DrawControl;
@@ -88,14 +81,20 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   private drawPolygonControl: DrawControl;
 
   /**
-   * Subscription to draw line control measures
+   * Active draw control
+   * @internal
    */
-  private lineMeasures$: Subscription;
+  public activeDrawControl: DrawControl;
 
   /**
-   * Subscription to draw polygon control measures
+   * Subscription to controls measures
    */
-  private polygonMeasures$: Subscription;
+  private measures$: Subscription;
+
+  /**
+   * Subscription to draw start
+   */
+  private drawStart$: Subscription;
 
   /**
    * The map to measure on
@@ -110,10 +109,18 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   set activeMeasureType(value: MeasureType) {
     this._activeMeasureType = value;
     this.clearMeasures();
-    this.activateDrawControl();
+    this.toggleDrawControl();
   }
   get activeMeasureType(): MeasureType { return this._activeMeasureType; }
   private _activeMeasureType: MeasureType = MeasureType.Length;
+
+   /**
+   * Wheter one of the draw control is active
+   * @internal
+   */
+  get drawControlIsActive(): boolean {
+    return this.activeDrawControl !== undefined;
+  }
 
   constructor() {}
 
@@ -122,10 +129,9 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnInit() {
-    this.olDrawSource = new OlVectorSource();
     this.createDrawLineControl();
     this.createDrawPolygonControl();
-    this.activateDrawControl();
+    this.toggleDrawControl();
   }
 
   /**
@@ -133,8 +139,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnDestroy() {
-    this.removeDrawLineControl();
-    this.removeDrawPolygonControl();
+    this.removeDrawControls();
   }
 
   /**
@@ -146,122 +151,98 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Clear measures and vector source
+   * Activate or deactivate the current draw control
    * @internal
    */
   onToggleChange(toggle: boolean) {
-    console.log(toggle);
     if (toggle === true) {
-      this.activateDrawControl();
+      this.toggleDrawControl();
     } else {
       this.deactivateDrawControl();
     }
   }
 
   /**
-   * Activate the right draw control based on the measure type
-   */
-  private activateDrawControl() {
-    if (this.activeMeasureType === MeasureType.Length) {
-      this.deactivateDrawPolygonControl();
-      this.activateDrawLineControl();
-    } else if (this.activeMeasureType === MeasureType.Area) {
-      this.deactivateDrawLineControl();
-      this.activateDrawPolygonControl();
-    }
-    this.drawControlIsActive = true;
-  }
-
-  /**
-   * Deactivate the draw control
-   */
-  private deactivateDrawControl() {
-    this.deactivateDrawLineControl();
-    this.deactivateDrawPolygonControl();
-    this.drawControlIsActive = false;
-  }
-
-  /**
-   * Create a draw line control and subscribe to it's measures
+   * Create a draw line control
    */
   private createDrawLineControl() {
     this.drawLineControl = new DrawControl({
       geometryType: 'LineString',
-      source: this.olDrawSource,
-      measure: true
+      measure: true,
+      source: new OlVectorSource(),
+      drawStyle: createMeasureInteractionStyle(),
+      layerStyle: createMeasureLayerStyle()
     });
-    this.lineMeasures$ = this.drawLineControl.measures$
-      .subscribe((measures: GeometryMeasures) => {
-        this.updateMeasures(measures);
-      });
   }
 
   /**
-   * Remove the draw line control from the map and unsubscribe to it's emasures
-   */
-  private removeDrawLineControl() {
-    this.drawLineControl.setMap(undefined);
-    this.lineMeasures$.unsubscribe();
-    this.drawLineControl = undefined;
-  }
-
-  /**
-   * Activate the draw line control
-   */
-  private activateDrawLineControl() {
-    this.drawLineControl.setMap(this.map.ol);
-  }
-
-  /**
-   * Deactivate the draw line control
-   */
-  private deactivateDrawLineControl() {
-    this.drawLineControl.setMap(undefined);
-  }
-
-  /**
-   * Create a draw poylgon control and subscribe to it's measures
+   * Create a draw polygon control and subscribe to it's measures
    */
   private createDrawPolygonControl() {
     this.drawPolygonControl = new DrawControl({
       geometryType: 'Polygon',
-      source: this.olDrawSource,
-      measure: true
+      measure: true,
+      source: new OlVectorSource(),
+      drawStyle: createMeasureInteractionStyle(),
+      layerStyle: createMeasureLayerStyle()
     });
-    this.polygonMeasures$ = this.drawPolygonControl.measures$
-      .subscribe((measures: GeometryMeasures) => {
-        this.updateMeasures(measures);
-      });
   }
 
   /**
-   * Remove the draw polygon control from the map and unsubscribe to it's measures
+   * Activate the right control
    */
-  private removeDrawPolygonControl() {
-    this.drawPolygonControl.setMap(undefined);
-    this.polygonMeasures$.unsubscribe();
-    this.drawPolygonControl = undefined;
+  private toggleDrawControl() {
+    this.deactivateDrawControl();
+    if (this.activeMeasureType === MeasureType.Length) {
+      this.activateDrawControl(this.drawLineControl);
+    } else if (this.activeMeasureType === MeasureType.Area) {
+      this.activateDrawControl(this.drawPolygonControl);
+    }
   }
 
   /**
-   * Activate the draw polygon control
+   * Activate a given control
+   * @param drawControl Draw control
    */
-  private activateDrawPolygonControl() {
-    this.drawPolygonControl.setMap(this.map.ol);
+  private activateDrawControl(drawControl: DrawControl) {
+    this.activeDrawControl = drawControl;
+    this.drawStart$ = drawControl.start$
+      .subscribe(() => drawControl.getSource().clear());
+    this.measures$ = drawControl.measures$
+      .subscribe((measures: GeometryMeasures) => this.setMeasures(measures));
+    drawControl.setMap(this.map.ol);
   }
 
   /**
-   * Deactivate the draw polygon control
+   * Deactivate the active draw control
    */
-  private deactivateDrawPolygonControl() {
-    this.drawPolygonControl.setMap(undefined);
+  private deactivateDrawControl() {
+    if (this.activeDrawControl !== undefined) {
+      this.activeDrawControl.setMap(undefined);
+    }
+    if (this.drawStart$ !== undefined) {
+      this.drawStart$.unsubscribe();
+    }
+    if (this.measures$ !== undefined) {
+      this.measures$.unsubscribe();
+    }
+    this.activeDrawControl = undefined;
+  }
+
+  /**
+   * Remove draw controls
+   */
+  private removeDrawControls() {
+    this.deactivateDrawControl();
+    this.drawLineControl.getSource().clear();
+    this.drawPolygonControl.getSource().clear();
   }
 
   /**
    * Update measures observables
    * @param measures Measures
    */
-  private updateMeasures(measures: GeometryMeasures) {
+  private setMeasures(measures: GeometryMeasures) {
     this.area$.next(measures.area);
     this.length$.next(measures.length);
     if (measures.lastLength !== 0) {
