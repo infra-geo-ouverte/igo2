@@ -10,7 +10,7 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityStore, EntityFormTemplate } from 'src/lib/entity';
+import { EntityStore, EntityFormTemplate, EntityFormSubmitEvent } from 'src/lib/entity';
 import { WidgetComponent } from 'src/lib/widget';
 
 import { Client } from '../../shared/client.interfaces';
@@ -69,7 +69,7 @@ export class ClientSchemaCreateFormComponent extends WidgetComponent implements 
       .subscribe((template: EntityFormTemplate) => this.template$.next(template));
   }
 
-  onSubmit(event: {entity: undefined, data: { [key: string]: any }}) {
+  onSubmit(event: EntityFormSubmitEvent) {
     const data = Object.assign({
       numeroClient: this.client.info.numero
     }, event.data) as ClientSchemaCreateData;

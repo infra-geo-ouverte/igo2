@@ -1,4 +1,5 @@
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { Subscription, BehaviorSubject, Subject } from 'rxjs';
+import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
 import { Action } from 'src/lib/action';
 import {
@@ -43,6 +44,16 @@ export class Editor extends EntityClass {
    * Whether this editor is active
    */
   private active: boolean = false;
+
+  /**
+   * State change that trigger an update of the actions availability
+   */
+  private changes$: Subject<void> = new Subject();
+
+  /**
+   * Subscription to state changes
+   */
+  private changes$$: Subscription;
 
   /**
    * Editor id
@@ -106,7 +117,13 @@ export class Editor extends EntityClass {
 
     this.entity$$ = this.entityStore
       .observeFirstBy((entity: Entity, state: State) => state.selected === true)
+      .pipe(distinctUntilChanged())
       .subscribe((entity: Entity) => this.onSelectEntity(entity));
+
+    this.changes$$ = this.changes$
+      .pipe(debounceTime(50))
+      .subscribe(() => this.updateActionsAvailability());
+    this.changes$.next();
   }
 
   /**
@@ -118,6 +135,9 @@ export class Editor extends EntityClass {
 
     if (this.entity$$ !== undefined) {
       this.entity$$.unsubscribe();
+    }
+    if (this.changes$$ !== undefined) {
+      this.changes$$.unsubscribe();
     }
   }
 
@@ -137,8 +157,8 @@ export class Editor extends EntityClass {
    * Deactivate a widget.
    */
   deactivateWidget() {
-    this.updateActionsAvailability();
     this.widget$.next(undefined);
+    this.changes$.next();
   }
 
   /**
@@ -148,7 +168,7 @@ export class Editor extends EntityClass {
    */
   private onSelectEntity(entity: Entity) {
     this.entity$.next(entity);
-    this.updateActionsAvailability();
+    this.changes$.next();
   }
 
   /**

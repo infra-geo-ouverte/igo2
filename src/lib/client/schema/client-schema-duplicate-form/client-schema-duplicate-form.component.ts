@@ -8,7 +8,7 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityStore, EntityFormTemplate } from 'src/lib/entity';
+import { EntityStore, EntityFormTemplate, EntityFormSubmitEvent } from 'src/lib/entity';
 import { WidgetComponent } from 'src/lib/widget';
 
 import { ClientSchema } from '../shared/client-schema.interfaces';
@@ -57,8 +57,8 @@ export class ClientSchemaDuplicateFormComponent extends WidgetComponent implemen
       .subscribe((template: EntityFormTemplate) => this.template$.next(template));
   }
 
-  onSubmit(event: {entity: ClientSchema, data: { [key: string]: any }}) {
-    this.clientSchemaService.duplicateSchema(event.entity)
+  onSubmit(event: EntityFormSubmitEvent) {
+    this.clientSchemaService.duplicateSchema(event.entity as ClientSchema)
       .subscribe((schema: ClientSchema) => this.onSubmitSuccess(schema));
   }
 

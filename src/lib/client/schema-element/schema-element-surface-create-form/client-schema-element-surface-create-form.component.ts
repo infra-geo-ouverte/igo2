@@ -7,6 +7,7 @@ import {
   ChangeDetectorRef,
   OnInit
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 
@@ -85,7 +86,7 @@ export class ClientSchemaElementSurfaceCreateFormComponent extends WidgetCompone
       .subscribe((template: EntityFormTemplate) => this.template$.next(template));
   }
 
-  onSubmit(event: {feature: undefined, data: Feature}) {
+  onSubmit(event: {form: FormGroup, feature: undefined, data: Feature}) {
     const element = this.formDataToElement(event.data);
     this.onSubmitSuccess(element);
   }

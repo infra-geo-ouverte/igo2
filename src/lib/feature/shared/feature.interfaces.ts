@@ -1,3 +1,5 @@
+import { FormGroup } from '@angular/forms';
+
 import * as olstyle from 'ol/style';
 
 import { GeoJsonGeometryTypes } from 'geojson';
@@ -28,4 +30,10 @@ export interface FeatureStoreSelectionStrategyOptions {
   map: IgoMap;
   motion?: FeatureMotion;
   style?: olstyle.Style;
+}
+
+export interface FeatureFormSubmitEvent {
+  form: FormGroup;
+  feature: Feature | undefined;
+  data: Feature;
 }

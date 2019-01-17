@@ -8,7 +8,7 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityStore, EntityFormTemplate } from 'src/lib/entity';
+import { EntityStore, EntityFormTemplate, EntityFormSubmitEvent } from 'src/lib/entity';
 import { WidgetComponent } from 'src/lib/widget';
 
 import { ClientSchema } from '../shared/client-schema.interfaces';
@@ -57,8 +57,8 @@ export class ClientSchemaDeleteFormComponent extends WidgetComponent implements 
       .subscribe((template: EntityFormTemplate) => this.template$.next(template));
   }
 
-  onSubmit(event: {entity: ClientSchema, data: { [key: string]: any }}) {
-    const schema = event.entity;
+  onSubmit(event: EntityFormSubmitEvent) {
+    const schema = event.entity as ClientSchema;
     this.clientSchemaService.deleteSchema(schema)
       .subscribe(() => this.onSubmitSuccess(schema));
   }

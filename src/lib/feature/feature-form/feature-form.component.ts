@@ -12,10 +12,15 @@ import {
 
 import { uuid } from '@igo2/utils';
 
-import { EntityFormTemplate, getEntityId, getEntityRevision } from 'src/lib/entity';
+import {
+  EntityFormTemplate,
+  EntityFormSubmitEvent,
+  getEntityId,
+  getEntityRevision
+} from 'src/lib/entity';
 
 import { FEATURE } from '../shared/feature.enum';
-import { Feature } from '../shared/feature.interfaces';
+import { Feature, FeatureFormSubmitEvent } from '../shared/feature.interfaces';
 import { hideOlFeature } from '../shared/feature.utils';
 import { FeatureStore } from '../shared/store';
 import { FeatureStoreSelectionStrategy } from '../shared/strategies/selection';
@@ -84,10 +89,7 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
   /**
    * Event emitted when the form is submitted
    */
-  @Output() submitForm = new EventEmitter<{
-    feature: Feature | undefined;
-    data: Feature;
-  }>();
+  @Output() submitForm = new EventEmitter<FeatureFormSubmitEvent>();
 
   /**
    * Event emitted when the cancel button is clicked
@@ -101,7 +103,7 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnInit() {
-    this.hideFeature();
+    // this.hideFeature();
     this.deactivateSelection();
   }
 
@@ -110,7 +112,7 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnDestroy() {
-    this.showFeature();
+    // this.showFeature();
     this.activateSelection();
   }
 
@@ -119,9 +121,14 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
    * @param event Form submit event
    * @internal
    */
-  onSubmit(event: {entity: undefined, data: { [key: string]: any }}) {
+  onSubmit(event: EntityFormSubmitEvent) {
+    const feature = event.entity as Feature;
+    // Unselect the feature to avoid some kind of display glitch
+    if (feature !== undefined) {
+      this.store.updateEntityState(feature, {selected: false});
+    }
     const data = this.formDataToFeature(event.data);
-    this.submitForm.emit({feature: this.feature, data});
+    this.submitForm.emit({form: event.form, feature, data});
   }
 
   /**
