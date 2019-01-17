@@ -1,0 +1,16 @@
+<mat-form-field class="measure-field">
+  <input
+    matInput
+    [readonly]="true"
+    [placeholder]="placeholder"
+    [value]="(measure ? measure : 0) | measureFormat: measureUnit: 3">
+</mat-form-field>
+<mat-form-field class="unit-field">
+  <mat-select
+    [value]="measureUnit"
+    (selectionChange)="onUnitChange($event.value)">
+    <mat-option *ngFor="let measureUnit of measureUnits" [value]="measureUnit">
+      {{('measure.' + measureUnit) | translate}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

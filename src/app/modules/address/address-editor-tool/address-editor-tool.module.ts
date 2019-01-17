@@ -7,9 +7,9 @@ import { AddressEditorToolComponent } from './address-editor-tool.component';
  */
 @NgModule({
   imports: [],
-  declarations: [ AddressEditorToolComponent],
-  exports: [ AddressEditorToolComponent],
-  entryComponents: [ AddressEditorToolComponent],
+  declarations: [AddressEditorToolComponent],
+  exports: [AddressEditorToolComponent],
+  entryComponents: [AddressEditorToolComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FadqAddressEditorToolModule {}

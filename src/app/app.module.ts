@@ -15,6 +15,7 @@ import { FadqEntityModule } from './modules/entity/entity.module';
 import { FadqFeatureModule } from './modules/feature/feature.module';
 import { FadqLayerModule } from './modules/layer/layer.module';
 import { FadqMapModule } from './modules/map/map.module';
+import { FadqMeasureModule } from './modules/measure/measure.module';
 import { FadqNavigationModule } from './modules/navigation/navigation.module';
 import { FadqOverlayModule } from './modules/overlay/overlay.module';
 import { FadqSearchModule } from './modules/search/search.module';
@@ -40,6 +41,7 @@ import { AppComponent } from './app.component';
     FadqFeatureModule,
     FadqLayerModule,
     FadqMapModule.forRoot(),
+    FadqMeasureModule,
     FadqNavigationModule,
     FadqOverlayModule,
     FadqSearchModule.forRoot(),

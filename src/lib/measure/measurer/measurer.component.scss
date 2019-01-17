@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+}
+
+.measure-type-toggle {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.draw-toggle {
+  width: 100%;
+  margin: 10px 0 10px 10px;
+  text-align: right;
+}

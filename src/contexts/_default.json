@@ -33,6 +33,7 @@
     "catalogFadq",
     "navigation",
     "importExport",
+    "measurer",
     "print",
     "addressEditor"
   ],
@@ -177,6 +178,9 @@
     },
     {
       "name": "importExport"
+    },
+    {
+      "name": "measurer"
     },
     {
       "name": "print"

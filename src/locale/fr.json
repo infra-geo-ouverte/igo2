@@ -8,6 +8,23 @@
 
   "info.title": "Informations",
 
+  "measure": {
+    "area": "Superficie",
+    "length": "Longueur",
+    "lastLength": "Distance entre les 2 derniers points",
+    "perimeter": "Périmètre",
+    "meters": "Mètres",
+    "kilometers": "Kilomètres",
+    "miles": "Miles",
+    "feet": "Pieds",
+    "squareMeters": "Mètres²",
+    "squareKilometers": "Kilomètres²",
+    "squareMiles": "Miles²",
+    "squareFeet": "Pieds²",
+    "hectares": "Hectares",
+    "acres": "Acres"
+  },
+
   "search": {
     "menu.tooltip": "Options de recherche",
     "client.title": "Client",
@@ -44,6 +61,7 @@
   "tools": {
     "addressEditor": "Édition d'adresses",
     "client": "Client",
+    "measurer": "Mesurage",
     "navigation": "Zoom sur une région"
   },
 

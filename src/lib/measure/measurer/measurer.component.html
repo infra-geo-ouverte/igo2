@@ -1,0 +1,43 @@
+<div>
+  <div class="header">
+    <div class="measure-type-toggle">
+      <mat-button-toggle-group
+        [value]="activeMeasureType"
+        (change)="onMeasureTypeChange($event.value)">
+        <mat-button-toggle [value]="measureType.Length">
+          {{('measure.' + measureType.Length) | translate}}
+        </mat-button-toggle>
+        <mat-button-toggle [value]="measureType.Area">
+          {{('measure.' + measureType.Area) | translate}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="draw-toggle">
+      <mat-slide-toggle
+        [checked]="drawControlIsActive"
+        (change)="onToggleChange($event.checked)">
+      </mat-slide-toggle>
+    </div>
+  </div>
+
+  <fadq-measurer-item
+    [measureType]="measureType.Length"
+    [measureUnit]="measureLengthUnit.Meters"
+    [measure]="lastLength$ | async"
+    [placeholder]="'measure.lastLength' | translate">
+  </fadq-measurer-item>
+
+  <fadq-measurer-item
+    [measureType]="measureType.Length"
+    [measureUnit]="measureLengthUnit.Meters"
+    [measure]="length$ | async"
+    [placeholder]="(activeMeasureType === measureType.Area ? 'measure.perimeter' : 'measure.length') | translate">
+  </fadq-measurer-item>
+
+  <fadq-measurer-item
+    [measureType]="measureType.Area"
+    [measureUnit]="measureAreaUnit.SquareMeters"
+    [measure]="area$ | async"
+    [placeholder]="'measure.area' | translate">
+  </fadq-measurer-item>
+</div>
