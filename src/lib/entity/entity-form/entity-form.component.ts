@@ -14,6 +14,7 @@ import {
   Entity,
   EntityFormTemplate,
   EntityFormField,
+  EntityFormSubmitEvent,
   getEntityProperty
 } from '../shared';
 
@@ -58,10 +59,7 @@ export class EntityFormComponent implements OnChanges {
   /**
    * Event emitted when the form is submitted
    */
-  @Output() submitForm = new EventEmitter<{
-    entity: Entity | undefined;
-    data: { [key: string]: any };
-  }>();
+  @Output() submitForm = new EventEmitter<EntityFormSubmitEvent>();
 
   /**
    * Event emitted when the cancel button is clicked
@@ -123,7 +121,7 @@ export class EntityFormComponent implements OnChanges {
    * @internal
    */
   onSubmit(data: { [key: string]: any}) {
-    this.submitForm.emit({entity: this.entity, data});
+    this.submitForm.emit({form: this.form, entity: this.entity, data});
   }
 
   /**
@@ -132,6 +130,13 @@ export class EntityFormComponent implements OnChanges {
    */
   onCancelButtonClick() {
     this.cancel.emit();
+  }
+
+  /**
+   * Clear form
+   */
+  clear() {
+    this.form.reset();
   }
 
   /**

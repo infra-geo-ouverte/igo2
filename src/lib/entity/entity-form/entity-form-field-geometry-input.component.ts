@@ -10,33 +10,27 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { NgControl, ControlValueAccessor } from '@angular/forms';
+import { MatFormFieldControl } from '@angular/material';
 
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 import { FeatureGeometry as GeoJSONGeometry } from '@igo2/geo';
 
 import OlGeoJSON from 'ol/format/GeoJSON';
+import OlGeometry from 'ol/geom/Geometry';
 import OlGeometryType from 'ol/geom/GeometryType';
 import OlFeature from 'ol/Feature';
-import OlInteraction from 'ol/interaction/Interaction';
-import OlDoubleClickZoom from 'ol/interaction/DoubleClickZoom';
-import OlDraw from 'ol/interaction/Draw';
-import OlModify from 'ol/interaction/Modify';
-import OlTranslate from 'ol/interaction/Translate';
 import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
-import { unByKey } from 'ol/Observable';
 
-import { IgoMap } from 'src/lib/map';
-import { MatFormFieldControl } from '@angular/material';
+import { IgoMap, DrawControl, ModifyControl } from 'src/lib/map';
+
 
 /**
  * This input allows a user to draw a new geometry or to edit
  * an existing one on a map. A text input is also displayed in the
  * form with some instructions.
  * This is still WIP.
- * TODO: Split into smaller class/functions
- * TODO: Support different geometry type
  */
 @Component({
   selector: 'fadq-entity-form-field-geometry-input',
@@ -81,16 +75,18 @@ export class EntityFormFieldGeometryInputComponent
   readonly stateChanges = new Subject<void>();
 
   private olOverlayLayer: OlVectorLayer;
-  private olDrawInteraction: OlDraw;
-  private onDrawStartKey: string;
-  private onDrawEndKey: string;
-  private olModifyInteraction: OlDraw;
-  private onModifyEndKey: string;
-  private olTranslateInteraction: OlDraw;
-  private onTranslateEndKey: string;
-  private olDoubleClickZoomInteraction: OlDoubleClickZoom;
   private olGeoJSON = new OlGeoJSON();
   private ready = false;
+
+  private drawControl: DrawControl;
+  private modifyControl: ModifyControl;
+  private olGeometry$: Subscription;
+
+  /**
+   * Active control
+   * @internal
+   */
+  public activeControl: DrawControl | ModifyControl;
 
   /**
    * The geometry value (GeoJSON)
@@ -106,9 +102,9 @@ export class EntityFormFieldGeometryInputComponent
       return;
     }
 
-    this.onChange(value);
     this._value = value;
-    this.toggleInteraction();
+    this.onChange(value);
+    this.toggleControl();
     this.cdRef.detectChanges();
   }
   get value(): GeoJSONGeometry { return this._value; }
@@ -238,10 +234,12 @@ export class EntityFormFieldGeometryInputComponent
    */
   ngOnInit() {
     this.addOlOverlayLayer();
+    this.createDrawControl();
+    this.createModifyControl();
     if (this.value !== undefined) {
-      this.addGeometryToOverlay(this.value);
+      this.addGeoJSONToOverlay(this.value);
     }
-    this.toggleInteraction();
+    this.toggleControl();
     this.ready = true;
   }
 
@@ -250,10 +248,8 @@ export class EntityFormFieldGeometryInputComponent
    * @internal
    */
   ngOnDestroy() {
-    this.restoreDoubleClickZoomInteraction();
-    this.removeOlDrawInteraction();
-    this.removeOlModifyInteraction();
-    this.removeOlTranslateInteraction();
+    this.deactivateControl();
+    this.olOverlaySource.clear();
     this.map.ol.removeLayer(this.olOverlayLayer);
     this.stateChanges.complete();
   }
@@ -303,15 +299,85 @@ export class EntityFormFieldGeometryInputComponent
       source: new OlVectorSource(),
       zIndex: 500
     });
-
     this.map.ol.addLayer(this.olOverlayLayer);
+  }
+
+  /**
+   * Create a draw control and subscribe to it's geometry
+   */
+  private createDrawControl() {
+    this.drawControl = new DrawControl({
+      geometryType: this.geometryType,
+      layer: this.olOverlayLayer
+    });
+  }
+
+  /**
+   * Create a modify control and subscribe to it's geometry
+   */
+  private createModifyControl() {
+    this.modifyControl = new ModifyControl({
+      layer: this.olOverlayLayer
+    });
+  }
+
+  /**
+   * Toggle the proper control (draw or modify)
+   */
+  private toggleControl() {
+    this.deactivateControl();
+    if (this.value === undefined) {
+      this.activateControl(this.drawControl);
+    } else if (this.value !== undefined) {
+      this.activateControl(this.modifyControl);
+    }
+  }
+
+  /**
+   * Activate a given control
+   * @param control Control
+   */
+  private activateControl(control: DrawControl | ModifyControl) {
+    this.activeControl = control;
+    this.olGeometry$ = control.end$
+      .subscribe((olGeometry: OlGeometry) => this.setOlGeometry(olGeometry));
+    control.setMap(this.map.ol);
+  }
+
+  /**
+   * Deactivate the active control
+   */
+  private deactivateControl() {
+    if (this.activeControl !== undefined) {
+      this.activeControl.setMap(undefined);
+    }
+    if (this.olGeometry$ !== undefined) {
+      this.olGeometry$.unsubscribe();
+    }
+    this.activeControl = undefined;
+  }
+
+  /**
+   * When drawing ends, convert the output value to GeoJSON and keep it.
+   * Restore the double click interaction.
+   * @param olGeometry OL geometry
+   */
+  private setOlGeometry(olGeometry: OlGeometry | undefined) {
+    if (olGeometry === undefined) {
+      return;
+    }
+    const value = this.olGeoJSON.writeGeometryObject(olGeometry, {
+      featureProjection: this.map.projection,
+      dataProjection: this.projection
+    });
+    this.writeValue(value);
   }
 
   /**
    * Add a GeoJSON geometry to the overlay
    * @param geometry GeoJSON geometry
    */
-  private addGeometryToOverlay(geometry: GeoJSONGeometry) {
+  private addGeoJSONToOverlay(geometry: GeoJSONGeometry) {
     const olGeometry = this.olGeoJSON.readGeometry(geometry, {
       dataProjection: this.projection,
       featureProjection: this.map.projection
@@ -319,191 +385,5 @@ export class EntityFormFieldGeometryInputComponent
     const olFeature = new OlFeature({geometry: olGeometry});
     this.olOverlaySource.clear();
     this.olOverlaySource.addFeature(olFeature);
-  }
-
-  /**
-   * Add a draw interaction to the map an set up some listeners
-   */
-  private addOlDrawInteraction() {
-    const olDrawInteraction = new OlDraw({
-      type: this.geometryType,
-      source: this.olOverlaySource
-    });
-
-    this.onDrawStartKey = olDrawInteraction.on('drawstart', (event) => {
-      this.onDrawStart(event);
-    });
-    this.onDrawEndKey = olDrawInteraction.on('drawend', (event) => {
-      this.onDrawEnd(event);
-    });
-    this.map.ol.addInteraction(olDrawInteraction);
-    this.olDrawInteraction = olDrawInteraction;
-  }
-
-  /**
-   * Remove the draw interaction
-   */
-  private removeOlDrawInteraction() {
-    if (this.olDrawInteraction === undefined) {
-      return;
-    }
-
-    unByKey(this.onDrawStartKey);
-    unByKey(this.onDrawEndKey);
-    this.map.ol.removeInteraction(this.olDrawInteraction);
-    this.olDrawInteraction = undefined;
-  }
-
-  /**
-   * When drawing starts, remove 'double click to zoom' interaction
-   * from the map because double is used to complete the drawing.
-   * @param event Draw start event
-   */
-  private onDrawStart(event) {
-    this.removeOlDoubleClickZoomInteraction();
-  }
-
-  /**
-   * When drawing ends, convert the output value to GeoJSON and keep it.
-   * Restore the double click interaction.
-   * @param event Draw end event
-   */
-  private onDrawEnd(event) {
-    const geometry = event.feature.getGeometry();
-    const value = this.olGeoJSON.writeGeometryObject(geometry, {
-      featureProjection: this.map.projection,
-      dataProjection: this.projection
-    });
-    this.writeValue(value);
-
-    // We need to wrap this in a setTimeout otherwise, the
-    // double click to finish drawing will still trigger a zoom
-    window.setTimeout(() => {
-      this.restoreDoubleClickZoomInteraction();
-    }, 50);
-  }
-
-  /**
-   * Add a modify interaction to the map an set up some listeners
-   */
-  private addOlModifyInteraction() {
-    const olModifyInteraction = new OlModify({
-      source: this.olOverlaySource
-    });
-
-    this.onModifyEndKey = olModifyInteraction.on('modifyend', (event) => {
-      this.onModifyEnd(event);
-    });
-    this.map.ol.addInteraction(olModifyInteraction);
-    this.olModifyInteraction = olModifyInteraction;
-  }
-
-  /**
-   * Remove the modify interaction
-   */
-  private removeOlModifyInteraction() {
-    if (this.olModifyInteraction === undefined) {
-      return;
-    }
-
-    unByKey(this.onModifyEndKey);
-    this.map.ol.removeInteraction(this.olModifyInteraction);
-    this.olModifyInteraction = undefined;
-  }
-
-  /**
-   * When modification ends, convert the output value to GeoJSON and keep it.
-   * @param event Modify end event
-   */
-  private onModifyEnd(event) {
-    const geometry = event.features.item(0).getGeometry();
-    const value = this.olGeoJSON.writeGeometryObject(geometry, {
-      featureProjection: this.map.projection,
-      dataProjection: this.projection
-    });
-    this.writeValue(value);
-  }
-
-  /**
-   * Add a translate interaction to the map an set up some listeners
-   */
-  private addOlTranslateInteraction() {
-    const olTranslateInteraction = new OlTranslate({
-      layers: [this.olOverlayLayer]
-    });
-
-    this.onTranslateEndKey = olTranslateInteraction.on('translateend', (event) => {
-      this.onTranslateEnd(event);
-    });
-    this.map.ol.addInteraction(olTranslateInteraction);
-    this.olTranslateInteraction = olTranslateInteraction;
-  }
-
-  /**
-   * Remove the translate interaction
-   */
-  private removeOlTranslateInteraction() {
-    if (this.olTranslateInteraction === undefined) {
-      return;
-    }
-
-    unByKey(this.onTranslateEndKey);
-    this.map.ol.removeInteraction(this.olTranslateInteraction);
-    this.olTranslateInteraction = undefined;
-  }
-
-  /**
-   * When translation ends, convert the output value to GeoJSON and keep it.
-   * @param event Translate end event
-   */
-  private onTranslateEnd(event) {
-    const geometry = event.features.item(0).getGeometry();
-    const value = this.olGeoJSON.writeGeometryObject(geometry, {
-      featureProjection: this.map.projection,
-      dataProjection: this.projection
-    });
-    this.writeValue(value);
-  }
-
-  /**
-   * Remove 'double click to zoom' interaction and keep a reference
-   * to it for futur restoration.
-   */
-  private removeOlDoubleClickZoomInteraction() {
-    const olInteractions = this.map.ol.getInteractions().getArray();
-    const olDoubleClickZoomInteraction = olInteractions
-      .find((olInteraction: OlInteraction) => {
-        return olInteraction instanceof OlDoubleClickZoom;
-      });
-
-    if (olDoubleClickZoomInteraction !== undefined) {
-      this.map.ol.removeInteraction(olDoubleClickZoomInteraction);
-    }
-    this.olDoubleClickZoomInteraction = olDoubleClickZoomInteraction;
-  }
-
-  /**
-   * Restore 'double click to zoom' interaction if there was one in the first place
-   */
-  private restoreDoubleClickZoomInteraction() {
-    if (this.olDoubleClickZoomInteraction !== undefined) {
-      this.map.ol.addInteraction(this.olDoubleClickZoomInteraction);
-    }
-    this.olDoubleClickZoomInteraction = undefined;
-  }
-
-  /**
-   * Toggle the proper interaction (draw or modify + translate)
-   */
-  private toggleInteraction() {
-    if (this.value === undefined && this.olDrawInteraction === undefined) {
-      this.removeOlModifyInteraction();
-      this.removeOlTranslateInteraction();
-      this.addOlDrawInteraction();
-    } else if (this.value !== undefined && this.olModifyInteraction === undefined) {
-      this.removeOlDrawInteraction();
-      this.addOlTranslateInteraction();
-      this.addOlModifyInteraction();
-    }
   }
 }

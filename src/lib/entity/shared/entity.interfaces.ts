@@ -1,3 +1,5 @@
+import { FormGroup } from '@angular/forms';
+
 import OlGeometryType from 'ol/geom/GeometryType';
 
 import { ValidatorFn } from '@angular/forms';
@@ -116,6 +118,12 @@ export interface EntityFormField<T extends EntityFormFieldInput = EntityFormFiel
   title: string;
   input?: T;
   options?: EntityFormFieldOptions;
+}
+
+export interface EntityFormSubmitEvent {
+  form: FormGroup;
+  entity: Entity | undefined;
+  data: { [key: string]: any };
 }
 
 export interface EntityOperation extends EntityObject {
