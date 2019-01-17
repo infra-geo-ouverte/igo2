@@ -186,6 +186,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
    */
   onSearchTypeChange(searchType: string) {
     this.placeholder = `search.${searchType.toLowerCase()}.placeholder`;
+    this.onTermChange(this.term);
   }
 
   /**

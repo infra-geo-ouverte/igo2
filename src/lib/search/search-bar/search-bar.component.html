@@ -1,35 +1,33 @@
-<div class="fadq-search-selector">
-  <div class="fadq-search-bar-container">
-    <mat-form-field [floatLabel]="floatLabel">
-      <input
-        #input
-        matInput
-        autocomplete="off"
-        [ngClass]="{'hasSearchIcon': searchIcon}"
-        [disabled]="disabled"
-        [placeholder]="placeholder | translate"
-        [ngModel]="term"
-        (keyup)="onKeyup($event)"
-        (touchend)="onKeyup($event)">
-    </mat-form-field>
+<div class="fadq-search-bar-container">
+  <mat-form-field [floatLabel]="floatLabel">
+    <input
+      #input
+      matInput
+      autocomplete="off"
+      [ngClass]="{'hasSearchIcon': searchIcon}"
+      [disabled]="disabled"
+      [placeholder]="placeholder | translate"
+      [ngModel]="term"
+      (keyup)="onKeyup($event)"
+      (touchend)="onKeyup($event)">
+  </mat-form-field>
 
-    <div class="search-bar-buttons">
-      <button
-        mat-icon-button
-        [color]="color"
-        *ngIf="searchIcon !== undefined">
-        <mat-icon>{{searchIcon}}</mat-icon>
-      </button>
+  <div class="search-bar-buttons">
+    <button
+      mat-icon-button
+      [color]="color"
+      *ngIf="searchIcon !== undefined">
+      <mat-icon>{{searchIcon}}</mat-icon>
+    </button>
 
-      <button
-        mat-icon-button
-        [color]="color"
-        (click)="onClearButtonClick()"
-        *ngIf="!empty">
-        <mat-icon>clear</mat-icon>
-      </button>
-    </div>
-
-    <fadq-search-selector (change)="onSearchTypeChange($event)"></fadq-search-selector>
+    <button
+      mat-icon-button
+      [color]="color"
+      (click)="onClearButtonClick()"
+      *ngIf="!empty">
+      <mat-icon>clear</mat-icon>
+    </button>
   </div>
+
+  <fadq-search-selector (change)="onSearchTypeChange($event)"></fadq-search-selector>
 </div>
