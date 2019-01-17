@@ -1,20 +1,28 @@
 import OlMap from 'ol/Map';
-import OlGeometry from 'ol/geom/Geometry';
-import OlLineString from 'ol/geom/LineString';
+import OlFeature from 'ol/Feature';
+import OlStyle from 'ol/style';
 import OlGeometryType from 'ol/geom/GeometryType';
-import OlDraw from 'ol/interaction/Draw';
 import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
+import OlDraw from 'ol/interaction/Draw';
+import {
+  Geometry as OlGeometry,
+  GeometryEvent as OlGeometryEvent
+} from 'ol/geom/Geometry';
+import { DrawEvent as OlDrawEvent } from 'ol/interaction/Draw';
 import { unByKey } from 'ol/Observable';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { GeometryMeasures, measureGeometry } from 'src/lib/measure';
 
 export interface DrawControlOptions {
   geometryType: OlGeometryType;
-  source?: OlVectorSource;
   measure?: boolean;
+  source?: OlVectorSource;
+  layer?: OlVectorLayer;
+  layerStyle?: OlStyle | ((olfeature: OlFeature) => OlStyle);
+  drawStyle?: OlStyle | ((olfeature: OlFeature) => OlStyle);
 }
 
 /**
@@ -23,17 +31,21 @@ export interface DrawControlOptions {
 export class DrawControl {
 
   /**
-   * Observable out the geometry
+   * Draw start observable
    */
-  public geometry$: BehaviorSubject<OlGeometry> = new BehaviorSubject(undefined);
+  public start$: Subject<OlGeometry> = new Subject();
 
   /**
-   * Observable out the live measures
+   * Draw end observable
+   */
+  public end$: Subject<OlGeometry> = new Subject();
+
+  /**
+   * Observable of the live measures
    */
   public measures$: BehaviorSubject<GeometryMeasures> = new BehaviorSubject({});
 
   private olMap: OlMap;
-  private olOverlaySource: OlVectorSource;
   private olOverlayLayer: OlVectorLayer;
   private olDrawInteraction: OlDraw;
   private onDrawStartKey: string;
@@ -41,7 +53,15 @@ export class DrawControl {
   private onMeasureKey: string;
 
   /**
+   * Measures
+   */
+  get measures(): GeometryMeasures {
+    return this.measures$.value;
+  }
+
+  /**
    * Geometry type
+   * @internal
    */
   get geometryType(): OlGeometryType {
     return this.options.geometryType;
@@ -49,6 +69,7 @@ export class DrawControl {
 
   /**
    * Whether measuring is enabled
+   * @internal
    */
   get measure(): boolean {
     return this.options.measure === undefined ? false : this.options.measure;
@@ -56,16 +77,25 @@ export class DrawControl {
 
   /**
    * Map projection
+   * @internal
    */
   get projection(): string {
     return this.olMap.getView().projection;
   }
 
+  /**
+   * OL overlay source
+   * @internal
+   */
+  get olOverlaySource(): OlVectorSource {
+    return this.olOverlayLayer.getSource();
+  }
+
   constructor(private options: DrawControlOptions) {
-    if (options.source === undefined) {
-      this.olOverlaySource = new OlVectorSource();
+    if (options.layer !== undefined) {
+      this.olOverlayLayer = options.layer;
     } else {
-      this.olOverlaySource = options.source;
+      this.olOverlayLayer = this.createOlInnerOverlayLayer();
     }
   }
 
@@ -75,35 +105,60 @@ export class DrawControl {
    */
   setMap(olMap: OlMap | undefined) {
     if (olMap === undefined) {
-      this.removeOlOverlayLayer();
+      this.clearOlInnerOverlaySource();
+      this.removeOlInnerOverlayLayer();
       this.removeOlDrawInteraction();
       this.olMap = olMap;
       return;
     }
 
     this.olMap = olMap;
-    this.addOlOverlayLayer();
+    this.addOlInnerOverlayLayer();
     this.addOlDrawInteraction();
   }
 
   /**
-   * Add an overlay layer to the map
+   * Return the overlay source
    */
-  private addOlOverlayLayer(): OlVectorLayer {
-    this.olOverlayLayer = new OlVectorLayer({
-      source: this.olOverlaySource,
-      zIndex: 500
-    });
-
-    this.olMap.addLayer(this.olOverlayLayer);
+  getSource(): OlVectorSource {
+    return this.olOverlaySource;
   }
 
   /**
-   * Remove the overlay layer from the map
+   * Create an overlay source if none is defined in the options
    */
-  private removeOlOverlayLayer() {
-    if (this.olMap !== undefined) {
+  private createOlInnerOverlayLayer(): OlVectorLayer {
+    return new OlVectorLayer({
+      source: this.options.source ? this.options.source : new OlVectorSource(),
+      style: this.options.layerStyle,
+      zIndex: 500
+    });
+  }
+
+  /**
+   * Clear the overlay layer if it wasn't defined in the options
+   */
+  private removeOlInnerOverlayLayer() {
+    if (this.options.layer === undefined && this.olMap !== undefined) {
       this.olMap.removeLayer(this.olOverlayLayer);
+    }
+  }
+
+  /**
+   * Add the overlay layer if it wasn't defined in the options
+   */
+  private addOlInnerOverlayLayer(): OlVectorLayer {
+    if (this.options.layer === undefined) {
+      this.olMap.addLayer(this.olOverlayLayer);
+    }
+  }
+
+  /**
+   * Clear the overlay source if it wasn't defined in the options
+   */
+  private clearOlInnerOverlaySource() {
+    if (this.options.layer === undefined && this.options.source === undefined) {
+      this.olOverlaySource.clear();
     }
   }
 
@@ -114,15 +169,14 @@ export class DrawControl {
     const olDrawInteraction = new OlDraw({
       type: this.geometryType,
       source: this.olOverlaySource,
-      stopClick: true
+      stopClick: true,
+      style: this.options.drawStyle
     });
 
-    this.onDrawStartKey = olDrawInteraction.on('drawstart', (event) => {
-      this.onDrawStart(event);
-    });
-    this.onDrawEndKey = olDrawInteraction.on('drawend', (event) => {
-      this.onDrawEnd(event);
-    });
+    this.onDrawStartKey = olDrawInteraction
+      .on('drawstart', (event: OlDrawEvent) => this.onDrawStart(event));
+    this.onDrawEndKey = olDrawInteraction
+      .on('drawend', (event: OlDrawEvent) => this.onDrawEnd(event));
     this.olMap.addInteraction(olDrawInteraction);
     this.olDrawInteraction = olDrawInteraction;
   }
@@ -147,10 +201,12 @@ export class DrawControl {
    * When drawing starts, clear the overlay and start measuring
    * @param event Draw start event
    */
-  private onDrawStart(event) {
-    this.olOverlaySource.clear();
+  private onDrawStart(event: OlDrawEvent) {
+    const olGeometry = event.feature.getGeometry();
+    this.start$.next(olGeometry);
+    this.clearOlInnerOverlaySource();
     if (this.measure === true) {
-      this.startMeasuring(event.feature.getGeometry());
+      this.startMeasuring(olGeometry);
     }
   }
 
@@ -158,9 +214,9 @@ export class DrawControl {
    * When drawing ends, update the geometry observable and stop measuring
    * @param event Draw end event
    */
-  private onDrawEnd(event) {
-    const geometry = event.feature.getGeometry();
-    this.geometry$.next(geometry);
+  private onDrawEnd(event: OlDrawEvent) {
+    const olGeometry = event.feature.getGeometry();
+    this.end$.next(olGeometry);
     if (this.measure === true) {
       this.stopMeasuring();
     }
@@ -171,7 +227,7 @@ export class DrawControl {
    * @param olGeometry OL geometry being drawn
    */
   private startMeasuring(olGeometry: OlGeometry) {
-    this.onMeasureKey = olGeometry.on('change', (event) => {
+    this.onMeasureKey = olGeometry.on('change', (event: OlGeometryEvent) => {
       const measures = measureGeometry(event.target, this.projection);
       this.measures$.next(measures);
     });
