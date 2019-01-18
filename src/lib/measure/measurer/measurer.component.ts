@@ -9,6 +9,10 @@ import {
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import OlVectorSource from 'ol/source/Vector';
+import OlLineString from 'ol/geom/LineString';
+import OlPolygon from 'ol/geom/Polygon';
+import OlFeature from 'ol/Feature';
+import OlOverlay from 'ol/Overlay';
 
 import { IgoMap } from 'src/lib/map';
 import { DrawControl } from 'src/lib/map';
@@ -20,7 +24,9 @@ import {
 } from '../shared/measure.interfaces';
 import {
   createMeasureInteractionStyle,
-  createMeasureLayerStyle
+  createMeasureLayerStyle,
+  updateOlTooltipsAtMidpoints,
+  getOlTooltipsAtMidpoints
 } from '../shared/measure.utils';
 
 /**
@@ -81,20 +87,30 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   private drawPolygonControl: DrawControl;
 
   /**
+   * Active OL geometry
+   */
+  private activeOlGeometry: OlLineString | OlPolygon;
+
+  /**
    * Active draw control
    * @internal
    */
-  public activeDrawControl: DrawControl;
-
-  /**
-   * Subscription to controls measures
-   */
-  private measures$: Subscription;
+  private activeDrawControl: DrawControl;
 
   /**
    * Subscription to draw start
    */
   private drawStart$: Subscription;
+
+  /**
+   * Subscription to draw end
+   */
+  private drawEnd$: Subscription;
+
+  /**
+   * Subscription to controls measures
+   */
+  private measures$: Subscription;
 
   /**
    * The map to measure on
@@ -114,7 +130,12 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   get activeMeasureType(): MeasureType { return this._activeMeasureType; }
   private _activeMeasureType: MeasureType = MeasureType.Length;
 
-   /**
+  /**
+   * The minimum length a segment must have to display a tooltip
+   */
+  @Input() minSegmentLength: number = 10;
+
+  /**
    * Wheter one of the draw control is active
    * @internal
    */
@@ -207,26 +228,33 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   private activateDrawControl(drawControl: DrawControl) {
     this.activeDrawControl = drawControl;
     this.drawStart$ = drawControl.start$
-      .subscribe(() => drawControl.getSource().clear());
+      .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawStart(olGeometry));
+    this.drawEnd$ = drawControl.end$
+      .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawEnd(olGeometry));
     this.measures$ = drawControl.measures$
-      .subscribe((measures: GeometryMeasures) => this.setMeasures(measures));
+      .subscribe((measures: GeometryMeasures) => this.onMeasuresChange(measures));
     drawControl.setMap(this.map.ol);
+    this.showTooltipsOfOlSource(drawControl.getSource());
   }
 
   /**
    * Deactivate the active draw control
    */
   private deactivateDrawControl() {
-    if (this.activeDrawControl !== undefined) {
-      this.activeDrawControl.setMap(undefined);
+    if (this.activeDrawControl === undefined) {
+      return;
     }
-    if (this.drawStart$ !== undefined) {
-      this.drawStart$.unsubscribe();
+
+    this.drawStart$.unsubscribe();
+    this.drawEnd$.unsubscribe();
+    this.measures$.unsubscribe();
+    this.clearTooltipsOfOlSource(this.activeDrawControl.getSource());
+    if (this.activeOlGeometry !== undefined) {
+      this.clearTooltipsOfOlGeometry(this.activeOlGeometry);
     }
-    if (this.measures$ !== undefined) {
-      this.measures$.unsubscribe();
-    }
+    this.activeDrawControl.setMap(undefined);
     this.activeDrawControl = undefined;
+    this.activeOlGeometry = undefined;
   }
 
   /**
@@ -239,14 +267,52 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Clear the draw source and track the geometry being drawn
+   * @param olGeometry Ol linestring or polygon
+   */
+  private onDrawStart(olGeometry: OlLineString | OlPolygon) {
+    const olDrawSource = this.activeDrawControl.getSource();
+    this.clearTooltipsOfOlSource(olDrawSource);
+    olDrawSource.clear();
+    this.activeOlGeometry = olGeometry;
+  }
+
+  /**
+   * Clear the draw source and track the geometry being draw
+   * @param olGeometry Ol linestring or polygon
+   */
+  private onDrawEnd(olGeometry:  OlLineString | OlPolygon) {
+    this.activeOlGeometry = undefined;
+  }
+
+  /**
+   * Update measures observables and map tooltips
+   * @param measures Measures
+   */
+  private onMeasuresChange(measures: GeometryMeasures) {
+    this.updateMeasures(measures);
+    if (this.activeOlGeometry !== undefined) {
+      this.updateTooltipsOfOlGeometry(this.activeOlGeometry, measures);
+    }
+  }
+
+  /**
    * Update measures observables
    * @param measures Measures
    */
-  private setMeasures(measures: GeometryMeasures) {
+  private updateMeasures(measures: GeometryMeasures) {
     this.area$.next(measures.area);
     this.length$.next(measures.length);
-    if (measures.lastLength !== 0) {
-      this.lastLength$.next(measures.lastLength);
+
+    const lengths = measures.lengths;
+    let lastLengthIndex = lengths.length - 1;
+    if (this.activeMeasureType === MeasureType.Area) {
+      lastLengthIndex = lastLengthIndex - 1;
+    }
+
+    const lastLength = lengths.length >= lastLengthIndex ? lengths[lastLengthIndex] : 0;
+    if (lastLength !== 0) {
+      this.lastLength$.next(lastLength);
     }
   }
 
@@ -257,6 +323,83 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     this.area$.next(undefined);
     this.length$.next(undefined);
     this.lastLength$.next(undefined);
+  }
+
+  private updateTooltipsOfOlGeometry(olGeometry: OlLineString | OlPolygon, measures: GeometryMeasures) {
+    const lengths = measures.lengths;
+    const olTooltips = updateOlTooltipsAtMidpoints(olGeometry);
+    if (lengths.length !== olTooltips.length) {
+      return;
+    }
+
+    for (var i = 0; i < olTooltips.length; i++) {
+      const length = lengths[i];
+      const olTooltip = olTooltips[i];
+      olTooltip.setProperties({length}, true);
+      olTooltip.getElement().innerHTML = this.computeTooltipInnerHTML(olTooltip);
+      if (this.shouldShowTooltip(olTooltip)) {
+        this.map.ol.addOverlay(olTooltip);
+      }
+    }
+  }
+
+  /**
+   * Clear the map tooltips
+   */
+  private clearTooltipsOfOlSource(olDrawSource: OlVectorSource) {
+    olDrawSource.forEachFeature((olFeature: OlFeature) => {
+      const olGeometry = olFeature.getGeometry();
+      if (olGeometry !== undefined) {
+        this.clearTooltipsOfOlGeometry(olFeature.getGeometry());
+      }
+    });
+  }
+
+  private clearTooltipsOfOlGeometry(olGeometry: OlLineString | OlPolygon) {
+    const olTooltips = getOlTooltipsAtMidpoints(olGeometry);
+    olTooltips.forEach((olTooltip: OlOverlay | undefined) => {
+      if (olTooltip !== undefined && olTooltip.getMap() !== undefined) {
+        this.map.ol.removeOverlay(olTooltip);
+      }
+    });
+  }
+
+  /**
+   * Show the map tooltips
+   */
+  private showTooltipsOfOlSource(olDrawSource: OlVectorSource) {
+    olDrawSource.forEachFeature((olFeature: OlFeature) => {
+      const olTooltips = getOlTooltipsAtMidpoints(olFeature.getGeometry());
+      olTooltips.forEach((olTooltip: OlOverlay | undefined) => {
+        if (this.shouldShowTooltip(olTooltip)) {
+          this.map.ol.addOverlay(olTooltip);
+        }
+      });
+    });
+  }
+
+  /**
+   * Compute a tooltip's content
+   * @param length Segment length
+   * @returns Inner HTML
+   */
+  private computeTooltipInnerHTML(olTooltip: OlOverlay): string {
+    const properties = olTooltip.getProperties();
+    const length = properties['length'];
+    return `${length.toFixed(3)}`;
+  }
+
+  /**
+   * Whether a tooltip should be showned based on the length
+   * of the segment it is bound to.
+   * @param olTooltip OL overlay
+   * @returns True if the tooltip should be shown
+   */
+  private shouldShowTooltip(olTooltip: OlOverlay): boolean {
+    const properties = olTooltip.getProperties();
+    const length = properties['length'];
+    const minSegmentLength = Math.max(this.minSegmentLength, 0);
+    return olTooltip !== undefined && length > minSegmentLength;
   }
 
 }

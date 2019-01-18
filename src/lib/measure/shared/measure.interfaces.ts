@@ -1,7 +1,7 @@
 export interface GeometryMeasures {
   area?: number;
   length?: number;
-  lastLength?: number;
+  lengths?: number[];
 }
 
 export enum MeasureType {

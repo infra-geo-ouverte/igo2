@@ -16,7 +16,7 @@ import { unByKey } from 'ol/Observable';
 
 import { BehaviorSubject, Subject } from 'rxjs';
 
-import { GeometryMeasures, measureGeometry } from 'src/lib/measure';
+import { GeometryMeasures, measureOlGeometry } from 'src/lib/measure';
 
 export interface ModifyControlOptions {
   measure?: boolean;
@@ -292,7 +292,7 @@ export class ModifyControl {
    */
   private startMeasuring(olGeometry: OlGeometry) {
     this.onMeasureKey = olGeometry.on('change', (event: OlGeometryEvent) => {
-      const measures = measureGeometry(event.target, this.projection);
+      const measures = measureOlGeometry(event.target, this.projection);
       this.measures$.next(measures);
     });
   }

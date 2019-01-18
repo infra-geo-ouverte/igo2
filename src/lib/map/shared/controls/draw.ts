@@ -1,6 +1,7 @@
 import OlMap from 'ol/Map';
 import OlFeature from 'ol/Feature';
 import OlStyle from 'ol/style';
+import OlOverlay from 'ol/Overlay';
 import OlGeometryType from 'ol/geom/GeometryType';
 import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
@@ -14,7 +15,10 @@ import { unByKey } from 'ol/Observable';
 
 import { BehaviorSubject, Subject } from 'rxjs';
 
-import { GeometryMeasures, measureGeometry } from 'src/lib/measure';
+import {
+  GeometryMeasures,
+  measureOlGeometry
+} from 'src/lib/measure';
 
 export interface DrawControlOptions {
   geometryType: OlGeometryType;
@@ -43,7 +47,11 @@ export class DrawControl {
   /**
    * Observable of the live measures
    */
-  public measures$: BehaviorSubject<GeometryMeasures> = new BehaviorSubject({});
+  public measures$: BehaviorSubject<GeometryMeasures> = new BehaviorSubject({
+    area: undefined,
+    length: undefined,
+    lengths: []
+  });
 
   private olMap: OlMap;
   private olOverlayLayer: OlVectorLayer;
@@ -216,10 +224,10 @@ export class DrawControl {
    */
   private onDrawEnd(event: OlDrawEvent) {
     const olGeometry = event.feature.getGeometry();
-    this.end$.next(olGeometry);
     if (this.measure === true) {
       this.stopMeasuring();
     }
+    this.end$.next(olGeometry);
   }
 
   /**
@@ -228,7 +236,7 @@ export class DrawControl {
    */
   private startMeasuring(olGeometry: OlGeometry) {
     this.onMeasureKey = olGeometry.on('change', (event: OlGeometryEvent) => {
-      const measures = measureGeometry(event.target, this.projection);
+      const measures = measureOlGeometry(event.target, this.projection);
       this.measures$.next(measures);
     });
   }

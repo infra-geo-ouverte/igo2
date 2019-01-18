@@ -1,18 +1,15 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnInit
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 
 import { EntityFormTemplate, EntityTransaction, getEntityId } from 'src/lib/entity';
-import { Feature, FeatureStore } from 'src/lib/feature';
+import { Feature, FeatureStore, FeatureFormSubmitEvent } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
 
@@ -86,7 +83,7 @@ export class ClientSchemaElementSurfaceCreateFormComponent extends WidgetCompone
       .subscribe((template: EntityFormTemplate) => this.template$.next(template));
   }
 
-  onSubmit(event: {form: FormGroup, feature: undefined, data: Feature}) {
+  onSubmit(event: FeatureFormSubmitEvent) {
     const element = this.formDataToElement(event.data);
     this.onSubmitSuccess(element);
   }
