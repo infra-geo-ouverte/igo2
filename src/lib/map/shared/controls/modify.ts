@@ -14,12 +14,9 @@ import { TranslateEvent as OlTranslateEvent } from 'ol/interaction/Translate';
 import { MapBrowserPointerEvent } from 'ol/MapBrowserPointerEvent';
 import { unByKey } from 'ol/Observable';
 
-import { BehaviorSubject, Subject } from 'rxjs';
-
-import { GeometryMeasures, measureOlGeometry } from 'src/lib/measure';
+import { Subject } from 'rxjs';
 
 export interface ModifyControlOptions {
-  measure?: boolean;
   source?: OlVectorSource;
   layer?: OlVectorLayer;
   layerStyle?: OlStyle | ((olfeature: OlFeature) => OlStyle);
@@ -42,42 +39,20 @@ export class ModifyControl {
   public end$: Subject<OlGeometry> = new Subject();
 
   /**
-   * Observable of the live measures
+   * Geometry changes observable
    */
-  public measures$: BehaviorSubject<GeometryMeasures> = new BehaviorSubject({});
+  public changes$: Subject<OlGeometry> = new Subject();
 
   private olMap: OlMap;
   private olOverlayLayer: OlVectorLayer;
   private olModifyInteraction: OlModify;
   private onModifyStartKey: string;
   private onModifyEndKey: string;
+  private onModifyKey: string;
   private olTranslateInteraction: OlTranslate;
   private onTranslateStartKey: string;
   private onTranslateEndKey: string;
-  private onMeasureKey: string;
-
-  /**
-   * Measures
-   */
-  get measures(): GeometryMeasures {
-    return this.measures$.value;
-  }
-
-  /**
-   * Whether measuring is enabled
-   * @internal
-   */
-  get measure(): boolean {
-    return this.options.measure === undefined ? false : this.options.measure;
-  }
-
-  /**
-   * Map projection
-   * @internal
-   */
-  get projection(): string {
-    return this.olMap.getView().projection;
-  }
+  private onTranslateKey: string;
 
   /**
    * OL overlay source
@@ -204,27 +179,26 @@ export class ModifyControl {
   }
 
   /**
-   * When modifying starts, clear the overlay and start measuring
+   * When modifying starts, clear the overlay and start watching for changes
    * @param event Modify start event
    */
   private onModifyStart(event: OlModifyEvent) {
     const olGeometry = event.features.item(0).getGeometry();
     this.start$.next(olGeometry);
-    if (this.measure === true) {
-      this.startMeasuring(olGeometry);
-    }
+    this.onModifyKey = olGeometry.on('change', (olGeometryEvent: OlGeometryEvent) => {
+      this.changes$.next(olGeometryEvent.target);
+    });
   }
 
   /**
-   * When modifying ends, update the geometry observable and stop measuring
+   * When modifying ends, update the geometry observable and stop watching for changes
    * @param event Modify end event
    */
   private onModifyEnd(event: OlModifyEvent) {
-    const olGeometry = event.features.item(0).getGeometry();
-    this.end$.next(olGeometry);
-    if (this.measure === true) {
-      this.stopMeasuring();
+    if (this.onModifyKey !== undefined) {
+      unByKey(this.onModifyKey);
     }
+    this.end$.next(event.features.item(0).getGeometry());
   }
 
   /**
@@ -269,41 +243,26 @@ export class ModifyControl {
   }
 
   /**
-   * When translation starts, clear the overlay and start measuring
+   * When translation starts, clear the overlay and start watching for changes
    * @param event Translate start event
    */
   private onTranslateStart(event: OlTranslateEvent) {
     const olGeometry = event.features.item(0).getGeometry();
     this.start$.next(olGeometry);
-  }
-
-  /**
-   * When translation ends, update the geometry observable and stop measuring
-   * @param event Translate end event
-   */
-  private onTranslateEnd(event: OlTranslateEvent) {
-    const olGeometry = event.features.item(0).getGeometry();
-    this.end$.next(olGeometry);
-  }
-
-  /**
-   * Start measuring the geometry being modified and update the measures observable
-   * @param olGeometry OL geometry being modified
-   */
-  private startMeasuring(olGeometry: OlGeometry) {
-    this.onMeasureKey = olGeometry.on('change', (event: OlGeometryEvent) => {
-      const measures = measureOlGeometry(event.target, this.projection);
-      this.measures$.next(measures);
+    this.onTranslateKey = olGeometry.on('change', (olGeometryEvent: OlGeometryEvent) => {
+      this.changes$.next(olGeometryEvent.target);
     });
   }
 
   /**
-   * Stop measuring
+   * When translation ends, update the geometry observable and stop watchign for changes
+   * @param event Translate end event
    */
-  private stopMeasuring() {
-    if (this.onMeasureKey !== undefined) {
-      unByKey(this.onMeasureKey);
+  private onTranslateEnd(event: OlTranslateEvent) {
+    if (this.onTranslateKey !== undefined) {
+      unByKey(this.onTranslateKey);
     }
+    this.end$.next(event.features.item(0).getGeometry());
   }
 
 }

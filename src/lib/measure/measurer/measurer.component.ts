@@ -23,6 +23,7 @@ import {
   GeometryMeasures
 } from '../shared/measure.interfaces';
 import {
+  measureOlGeometry,
   createMeasureInteractionStyle,
   createMeasureLayerStyle,
   updateOlTooltipsAtMidpoints,
@@ -108,9 +109,9 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   private drawEnd$: Subscription;
 
   /**
-   * Subscription to controls measures
+   * Subscription to controls changes
    */
-  private measures$: Subscription;
+  private drawChanges$: Subscription;
 
   /**
    * The map to measure on
@@ -189,7 +190,6 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   private createDrawLineControl() {
     this.drawLineControl = new DrawControl({
       geometryType: 'LineString',
-      measure: true,
       source: new OlVectorSource(),
       drawStyle: createMeasureInteractionStyle(),
       layerStyle: createMeasureLayerStyle()
@@ -197,12 +197,11 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Create a draw polygon control and subscribe to it's measures
+   * Create a draw polygon control
    */
   private createDrawPolygonControl() {
     this.drawPolygonControl = new DrawControl({
       geometryType: 'Polygon',
-      measure: true,
       source: new OlVectorSource(),
       drawStyle: createMeasureInteractionStyle(),
       layerStyle: createMeasureLayerStyle()
@@ -231,8 +230,8 @@ export class MeasurerComponent implements OnInit, OnDestroy {
       .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawStart(olGeometry));
     this.drawEnd$ = drawControl.end$
       .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawEnd(olGeometry));
-    this.measures$ = drawControl.measures$
-      .subscribe((measures: GeometryMeasures) => this.onMeasuresChange(measures));
+    this.drawChanges$ = drawControl.changes$
+      .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawChanges(olGeometry));
     drawControl.setMap(this.map.ol);
     this.showTooltipsOfOlSource(drawControl.getSource());
   }
@@ -247,7 +246,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
 
     this.drawStart$.unsubscribe();
     this.drawEnd$.unsubscribe();
-    this.measures$.unsubscribe();
+    this.drawChanges$.unsubscribe();
     this.clearTooltipsOfOlSource(this.activeDrawControl.getSource());
     if (this.activeOlGeometry !== undefined) {
       this.clearTooltipsOfOlGeometry(this.activeOlGeometry);
@@ -289,18 +288,18 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * Update measures observables and map tooltips
    * @param measures Measures
    */
-  private onMeasuresChange(measures: GeometryMeasures) {
-    this.updateMeasures(measures);
-    if (this.activeOlGeometry !== undefined) {
-      this.updateTooltipsOfOlGeometry(this.activeOlGeometry, measures);
-    }
+  private onDrawChanges(olGeometry:  OlLineString | OlPolygon) {
+    const projection = this.map.ol.getView().projection;
+    const measures = measureOlGeometry(olGeometry, projection);
+    this.updateMeasuresOfOlGeometry(olGeometry, measures);
+    this.updateTooltipsOfOlGeometry(olGeometry, measures);
   }
 
   /**
    * Update measures observables
    * @param measures Measures
    */
-  private updateMeasures(measures: GeometryMeasures) {
+  private updateMeasuresOfOlGeometry(olGeometry:  OlLineString | OlPolygon, measures: GeometryMeasures) {
     this.area$.next(measures.area);
     this.length$.next(measures.length);
 
@@ -332,7 +331,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
       return;
     }
 
-    for (var i = 0; i < olTooltips.length; i++) {
+    for (let i = 0; i < olTooltips.length; i++) {
       const length = lengths[i];
       const olTooltip = olTooltips[i];
       olTooltip.setProperties({length}, true);

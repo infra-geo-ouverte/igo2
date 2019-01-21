@@ -209,7 +209,7 @@ export function measureOlGeometry(olGeometry: OlGeometry, projection: string): G
       [coordinates[i], coordinates[i + 1]],
       [coordinates[i + 2], coordinates[i + 3]]
     ]);
-    
+
     lengths.push(measureOlGeometryLength(olSegment, projection));
   }
 
@@ -226,7 +226,7 @@ export function measureOlGeometry(olGeometry: OlGeometry, projection: string): G
  * @returns OL points
  */
 export function updateOlGeometryMidpoints(olGeometry: OlLineString | OlPolygon): OlPoint[] {
-  let olMidpoints = getOlGeometryMidpoints(olGeometry);
+  const olMidpoints = getOlGeometryMidpoints(olGeometry);
 
   // TODO: handle multi geometries
   const coordinates = olGeometry.flatCoordinates;
@@ -239,7 +239,7 @@ export function updateOlGeometryMidpoints(olGeometry: OlLineString | OlPolygon):
     ]);
 
     const midpointCoordinate = olSegment.getCoordinateAt(0.5);
-    let olMidpoint = olMidpoints[i];
+    const olMidpoint = olMidpoints[i];
     if (olMidpoint !== undefined) {
       olMidpoint.setCoordinates(midpointCoordinate);
     } else {
@@ -255,7 +255,7 @@ export function updateOlGeometryMidpoints(olGeometry: OlLineString | OlPolygon):
  * @returns OL points
  */
 export function getOlGeometryMidpoints(olGeometry: OlLineString | OlPolygon): OlPoint[] {
-  let expectedNumber = (olGeometry.flatCoordinates.length / 2) - 1;
+  const expectedNumber = (olGeometry.flatCoordinates.length / 2) - 1;
 
   // TODO: To myself: Clean this mess!!! And make a Tooltip class  to handle
   // those things
@@ -270,7 +270,7 @@ export function getOlGeometryMidpoints(olGeometry: OlLineString | OlPolygon): Ol
       for (let i = expectedNumber; i < olMidpoints.length; i++) {
         const olMidpoint = olMidpoints[expectedNumber];
         if (olMidpoint !== undefined) {
-          const olTooltip = olMidpoint.get('tooltip')
+          const olTooltip = olMidpoint.get('tooltip');
           if (olTooltip !== undefined) {
             const olMap = olTooltip.getMap();
             if (olMap !== undefined) {
@@ -300,6 +300,11 @@ export function updateOlTooltipsAtMidpoints(olGeometry: OlLineString | OlPolygon
         element: document.createElement('div'),
         offset: [0, 15],
         positioning: 'bottom-center',
+        className: [
+          'fadq-map-tooltip',
+          'fadq-map-tooltip-measure',
+          'fadq-map-tooltip-measure-bottom'
+        ].join(' '),
         stopEvent: false
       });
       olMidpoint.set('tooltip', olTooltip, true);

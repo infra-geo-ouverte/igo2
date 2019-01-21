@@ -15,14 +15,8 @@ import { unByKey } from 'ol/Observable';
 
 import { BehaviorSubject, Subject } from 'rxjs';
 
-import {
-  GeometryMeasures,
-  measureOlGeometry
-} from 'src/lib/measure';
-
 export interface DrawControlOptions {
   geometryType: OlGeometryType;
-  measure?: boolean;
   source?: OlVectorSource;
   layer?: OlVectorLayer;
   layerStyle?: OlStyle | ((olfeature: OlFeature) => OlStyle);
@@ -45,27 +39,16 @@ export class DrawControl {
   public end$: Subject<OlGeometry> = new Subject();
 
   /**
-   * Observable of the live measures
+   * Geometry changes observable
    */
-  public measures$: BehaviorSubject<GeometryMeasures> = new BehaviorSubject({
-    area: undefined,
-    length: undefined,
-    lengths: []
-  });
+  public changes$: Subject<OlGeometry> = new Subject();
 
   private olMap: OlMap;
   private olOverlayLayer: OlVectorLayer;
   private olDrawInteraction: OlDraw;
   private onDrawStartKey: string;
   private onDrawEndKey: string;
-  private onMeasureKey: string;
-
-  /**
-   * Measures
-   */
-  get measures(): GeometryMeasures {
-    return this.measures$.value;
-  }
+  private onChangesKey: string;
 
   /**
    * Geometry type
@@ -73,22 +56,6 @@ export class DrawControl {
    */
   get geometryType(): OlGeometryType {
     return this.options.geometryType;
-  }
-
-  /**
-   * Whether measuring is enabled
-   * @internal
-   */
-  get measure(): boolean {
-    return this.options.measure === undefined ? false : this.options.measure;
-  }
-
-  /**
-   * Map projection
-   * @internal
-   */
-  get projection(): string {
-    return this.olMap.getView().projection;
   }
 
   /**
@@ -206,48 +173,27 @@ export class DrawControl {
   }
 
   /**
-   * When drawing starts, clear the overlay and start measuring
+   * When drawing starts, clear the overlay and start watching from changes
    * @param event Draw start event
    */
   private onDrawStart(event: OlDrawEvent) {
     const olGeometry = event.feature.getGeometry();
     this.start$.next(olGeometry);
     this.clearOlInnerOverlaySource();
-    if (this.measure === true) {
-      this.startMeasuring(olGeometry);
-    }
-  }
-
-  /**
-   * When drawing ends, update the geometry observable and stop measuring
-   * @param event Draw end event
-   */
-  private onDrawEnd(event: OlDrawEvent) {
-    const olGeometry = event.feature.getGeometry();
-    if (this.measure === true) {
-      this.stopMeasuring();
-    }
-    this.end$.next(olGeometry);
-  }
-
-  /**
-   * Start measuring the geometry being drawn and update the measures observable
-   * @param olGeometry OL geometry being drawn
-   */
-  private startMeasuring(olGeometry: OlGeometry) {
-    this.onMeasureKey = olGeometry.on('change', (event: OlGeometryEvent) => {
-      const measures = measureOlGeometry(event.target, this.projection);
-      this.measures$.next(measures);
+    this.onChangesKey = olGeometry.on('change', (olGeometryEvent: OlGeometryEvent) => {
+      this.changes$.next(olGeometryEvent.target);
     });
   }
 
   /**
-   * Stop measuring
+   * When drawing ends, update the geometry observable and start watching from changes
+   * @param event Draw end event
    */
-  private stopMeasuring() {
-    if (this.onMeasureKey !== undefined) {
-      unByKey(this.onMeasureKey);
+  private onDrawEnd(event: OlDrawEvent) {
+    if (this.onChangesKey !== undefined) {
+      unByKey(this.onChangesKey);
     }
+    this.end$.next(event.feature.getGeometry());
   }
 
 }
