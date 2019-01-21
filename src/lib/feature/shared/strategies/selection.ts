@@ -3,7 +3,7 @@ import OlFeature from 'ol/Feature';
 import { ListenerFunction } from 'ol/events';
 
 import { Subscription, combineLatest } from 'rxjs';
-import { map, debounceTime } from 'rxjs/operators';
+import { map, debounceTime, skip } from 'rxjs/operators';
 
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
@@ -81,6 +81,15 @@ export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
   }
 
   /**
+   * Unselect all entities, from all stores
+   */
+  unselectAll() {
+    this.stores.forEach((store: FeatureStore) => {
+      store.updateAllEntitiesState({selected: false});
+    });
+  }
+
+  /**
    * Add the overlay layer, setup the map click lsitener and
    * start watching for stores selection
    * @internal
@@ -119,6 +128,7 @@ export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
     this.stores$$ = combineLatest(...stores$)
       .pipe(
         debounceTime(50),
+        skip(1), // Skip intial selection. TODO: make sure this is what we want and/or make it configurable
         map((features: Array<Feature[]>) => features.reduce((a, b) => a.concat(b)))
       ).subscribe((features: Feature[]) => this.onSelectFromStore(features));
   }

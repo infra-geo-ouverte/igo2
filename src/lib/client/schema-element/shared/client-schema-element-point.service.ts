@@ -9,25 +9,25 @@ import { getEntityId } from 'src/lib/entity';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
-  ClientSchemaElementSurface,
-  ClientSchemaElementSurfaceApiConfig,
-  ClientSchemaElementSurfaceListResponse,
-  ClientSchemaElementSurfaceListResponseItem
+  ClientSchemaElementPoint,
+  ClientSchemaElementPointApiConfig,
+  ClientSchemaElementPointListResponse,
+  ClientSchemaElementPointListResponseItem
 } from './client-schema-element.interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientSchemaElementSurfaceService {
+export class ClientSchemaElementPointService {
 
   constructor(
     private http: HttpClient,
     private apiService: ApiService,
-    @Inject('clientSchemaElementSurfaceApiConfig')
-    private apiConfig: ClientSchemaElementSurfaceApiConfig
+    @Inject('clientSchemaElementPointApiConfig')
+    private apiConfig: ClientSchemaElementPointApiConfig
   ) {}
 
-  getElements(schema: ClientSchema): Observable<ClientSchemaElementSurface[]> {
+  getElements(schema: ClientSchema): Observable<ClientSchemaElementPoint[]> {
     const url = this.apiService.buildUrl(this.apiConfig.list, {
       schemaId: getEntityId(schema)
     });
@@ -35,21 +35,21 @@ export class ClientSchemaElementSurfaceService {
     return this.http
       .get(url)
       .pipe(
-        map((response: ClientSchemaElementSurfaceListResponse) => {
+        map((response: ClientSchemaElementPointListResponse) => {
           return this.extractElementsFromListResponse(response);
         })
       );
   }
 
   private extractElementsFromListResponse(
-    response: ClientSchemaElementSurfaceListResponse
-  ): ClientSchemaElementSurface[] {
+    response: ClientSchemaElementPointListResponse
+  ): ClientSchemaElementPoint[] {
     return response.map(listItem => this.listItemToElement(listItem));
   }
 
   private listItemToElement(
-    listItem: ClientSchemaElementSurfaceListResponseItem
-  ): ClientSchemaElementSurface {
+    listItem: ClientSchemaElementPointListResponseItem
+  ): ClientSchemaElementPoint {
     const properties = Object.assign({}, listItem.properties);
     return {
       meta: {

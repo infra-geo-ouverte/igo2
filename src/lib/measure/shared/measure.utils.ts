@@ -257,8 +257,8 @@ export function updateOlGeometryMidpoints(olGeometry: OlLineString | OlPolygon):
 export function getOlGeometryMidpoints(olGeometry: OlLineString | OlPolygon): OlPoint[] {
   const expectedNumber = (olGeometry.flatCoordinates.length / 2) - 1;
 
-  // TODO: To myself: Clean this mess!!! And make a Tooltip class  to handle
-  // those things
+  // TODO: To myself: This is for demo puposes. Clean this mess!!!
+  // And make a Tooltip class  to handle those things.
   let olMidpoints = olGeometry.get('midpoints');
   if (olMidpoints === undefined) {
     olMidpoints = new Array(expectedNumber);

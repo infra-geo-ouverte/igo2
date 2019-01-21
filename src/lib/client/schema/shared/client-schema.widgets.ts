@@ -16,42 +16,62 @@ export const ClientSchemaDeleteWidget = new InjectionToken<Widget>('ClientSchema
 export const ClientSchemaDuplicateWidget = new InjectionToken<Widget>('ClientSchemaDuplicateWidget');
 export const ClientSchemaFileManagerWidget = new InjectionToken<Widget>('ClientSchemaFileManagerWidget');
 
+export function clientSchemaCreateWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaCreateFormComponent);
+}
+
 export function provideClientSchemaCreateWidget() {
   return {
     provide:  ClientSchemaCreateWidget,
-    useFactory: (widgetService: WidgetService) => widgetService.create(ClientSchemaCreateFormComponent),
+    useFactory: clientSchemaCreateWidgetFactory,
     deps: [WidgetService]
   };
+}
+
+export function clientSchemaUpdateWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaUpdateFormComponent);
 }
 
 export function provideClientSchemaUpdateWidget() {
   return {
     provide:  ClientSchemaUpdateWidget,
-    useFactory: (widgetService: WidgetService) => widgetService.create(ClientSchemaUpdateFormComponent),
+    useFactory: clientSchemaUpdateWidgetFactory,
     deps: [WidgetService]
   };
+}
+
+export function clientSchemaDeleteWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaDeleteFormComponent);
 }
 
 export function provideClientSchemaDeleteWidget() {
   return {
     provide:  ClientSchemaDeleteWidget,
-    useFactory: (widgetService: WidgetService) => widgetService.create(ClientSchemaDeleteFormComponent),
+    useFactory: clientSchemaDeleteWidgetFactory,
     deps: [WidgetService]
   };
+}
+
+export function clientSchemaDuplicateWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaDuplicateFormComponent);
 }
 
 export function provideClientSchemaDuplicateWidget() {
   return {
     provide:  ClientSchemaDuplicateWidget,
-    useFactory: (widgetService: WidgetService) => widgetService.create(ClientSchemaDuplicateFormComponent),
+    useFactory: clientSchemaDuplicateWidgetFactory,
     deps: [WidgetService]
   };
+}
+
+export function clientSchemaFileManagerFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaFileManagerComponent);
 }
 
 export function provideClientSchemaFileManagerWidget() {
   return {
     provide:  ClientSchemaFileManagerWidget,
-    useFactory: (widgetService: WidgetService) => widgetService.create(ClientSchemaFileManagerComponent),
+    useFactory: clientSchemaFileManagerFactory,
     deps: [WidgetService]
   };
 }

@@ -5,7 +5,6 @@
       matSort
       [ngClass]="getTableClass()"
       [dataSource]="dataSource"
-      [trackBy]="trackBy"
       (matSortChange)="onSort($event)">
 
       <ng-container [matColumnDef]="column.name" *ngFor="let column of template.columns">

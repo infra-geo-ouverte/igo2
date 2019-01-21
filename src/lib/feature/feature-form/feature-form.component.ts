@@ -124,9 +124,9 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
   onSubmit(event: EntityFormSubmitEvent) {
     const feature = event.entity as Feature;
     // Unselect the feature to avoid some kind of display glitch
-    if (feature !== undefined) {
-      this.store.updateEntityState(feature, {selected: false});
-    }
+    // if (feature !== undefined) {
+    //   this.store.updateEntityState(feature, {selected: false});
+    // }
     const data = this.formDataToFeature(event.data);
     this.submitForm.emit({form: event.form, feature, data});
   }
@@ -219,7 +219,11 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.store.deactivateStrategiesOfType(FeatureStoreSelectionStrategy);
+    const selectionStrategies = this.store.getStrategiesOfType(FeatureStoreSelectionStrategy);
+    selectionStrategies.forEach((strategy: FeatureStoreSelectionStrategy) => {
+      strategy.deactivate();
+      strategy.unselectAll();
+    });
   }
 
   /**

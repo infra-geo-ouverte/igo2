@@ -40,7 +40,7 @@ export class ClientSchemaTableService {
           title: 'État'
         },
         {
-          name: 'timbreMaj',
+          name: 'timbreMaj.date',
           title: 'Date de mise à jour'
         },
         {

@@ -12,6 +12,8 @@ import {
 } from './schema-element-surface-update-form/client-schema-element-surface-update-form.module';
 
 import {
+  provideClientSchemaElementPointService,
+  provideClientSchemaElementLineService,
   provideClientSchemaElementSurfaceService,
   provideClientSchemaElementService
 } from './shared/client-schema-element.providers';
@@ -42,6 +44,8 @@ export class FadqLibClientSchemaElementModule {
     return {
       ngModule: FadqLibClientSchemaElementModule,
       providers: [
+        provideClientSchemaElementPointService(),
+        provideClientSchemaElementLineService(),
         provideClientSchemaElementSurfaceService(),
         provideClientSchemaElementService(),
         provideClientSchemaElementSaverWidget(),

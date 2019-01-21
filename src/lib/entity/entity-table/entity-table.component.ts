@@ -93,14 +93,6 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    */
   // get dataSource(): EntityTableComponent { return this; }
 
-  /**
-   * Angular material trackBy function. Improves performance.
-   * @internal
-   */
-  get trackBy(): (Entity) => string {
-    return getEntityId;
-  }
-
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
       .withChangeDetector(this.cdRef);

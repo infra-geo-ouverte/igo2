@@ -76,7 +76,7 @@ export const environment: Environment = {
             list: '/igolocalisation/recherche_client/obtenirElementGeometriquePoint/${schemaId}'
           },
           line: {
-            list: '/igolocalisation/recherche_client/obtenirElementGeometriqueLine/${schemaId}'
+            list: '/igolocalisation/recherche_client/obtenirElementGeometriqueLigne/${schemaId}'
           },
           surface: {
             list: '/igolocalisation/recherche_client/obtenirElementGeometriqueSurface/${schemaId}'

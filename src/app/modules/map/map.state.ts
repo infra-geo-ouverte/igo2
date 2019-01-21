@@ -4,6 +4,8 @@ import { IgoMap, ProjectionService } from 'src/lib/map';
 
 import {
   createParcelLayer,
+  createSchemaElementPointLayer,
+  createSchemaElementLineLayer,
   createSchemaElementSurfaceLayer,
   createClientDefaultSelectionStyle
 } from 'src/lib/client';
@@ -70,11 +72,11 @@ export class MapState implements OnDestroy {
     this.map.addLayer(clientParcelLayer, false);
     this.clientState.parcelStore.bindLayer(clientParcelLayer);
 
-    const clientSchemaElementPointLayer = createSchemaElementSurfaceLayer();
+    const clientSchemaElementPointLayer = createSchemaElementPointLayer();
     this.map.addLayer(clientSchemaElementPointLayer, false);
     this.clientState.schemaElementPointStore.bindLayer(clientSchemaElementPointLayer);
 
-    const clientSchemaElementLineLayer = createSchemaElementSurfaceLayer();
+    const clientSchemaElementLineLayer = createSchemaElementLineLayer();
     this.map.addLayer(clientSchemaElementLineLayer, false);
     this.clientState.schemaElementLineStore.bindLayer(clientSchemaElementLineLayer);
 

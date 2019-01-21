@@ -6,17 +6,26 @@ import { SearchSource } from './source';
 import { NominatimSearchSource } from './nominatim';
 
 /**
+ * Nominatim search source factory
+ * @ignore
+ */
+export function nominatimSearchSourceFactory(
+  http: HttpClient,
+  config: ConfigService
+) {
+  return new NominatimSearchSource(
+    http,
+    config.getConfig(`searchSources.${NominatimSearchSource.id}`)
+  );
+}
+
+/**
  * Function that returns a provider for the Nominatim search source
  */
 export function provideNominatimSearchSource() {
   return {
     provide: SearchSource,
-    useFactory: (http: HttpClient, config: ConfigService) => {
-      return new NominatimSearchSource(
-        http,
-        config.getConfig(`searchSources.${NominatimSearchSource.id}`)
-      );
-    },
+    useFactory: nominatimSearchSourceFactory,
     multi: true,
     deps: [HttpClient, ConfigService]
   };

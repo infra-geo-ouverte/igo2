@@ -21,32 +21,38 @@ export const ClientSchemaElementSurfaceCreateWidget =
 export const ClientSchemaElementSurfaceUpdateWidget =
   new InjectionToken<Widget>('ClientSchemaElementSurfaceUpdateWidget');
 
+export function clientSchemaElementSaverWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementSaverComponent);
+}
+
 export function provideClientSchemaElementSaverWidget() {
   return {
     provide:  ClientSchemaElementSaverWidget,
-    useFactory: (widgetService: WidgetService) => {
-      return widgetService.create(ClientSchemaElementSaverComponent);
-    },
+    useFactory: clientSchemaElementSaverWidgetFactory,
     deps: [WidgetService]
   };
+}
+
+export function clientSchemaElementSurfaceCreateWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementSurfaceCreateFormComponent);
 }
 
 export function provideClientSchemaElementSurfaceCreateWidget() {
   return {
     provide:  ClientSchemaElementSurfaceCreateWidget,
-    useFactory: (widgetService: WidgetService) => {
-      return widgetService.create(ClientSchemaElementSurfaceCreateFormComponent);
-    },
+    useFactory: clientSchemaElementSurfaceCreateWidgetFactory,
     deps: [WidgetService]
   };
+}
+
+export function clientSchemaElementSurfaceUpdateWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementSurfaceUpdateFormComponent);
 }
 
 export function provideClientSchemaElementSurfaceUpdateWidget() {
   return {
     provide:  ClientSchemaElementSurfaceUpdateWidget,
-    useFactory: (widgetService: WidgetService) => {
-      return widgetService.create(ClientSchemaElementSurfaceUpdateFormComponent);
-    },
+    useFactory: clientSchemaElementSurfaceUpdateWidgetFactory,
     deps: [WidgetService]
   };
 }

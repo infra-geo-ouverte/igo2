@@ -234,8 +234,7 @@ export class ClientState implements OnDestroy {
   private setSchema(schema: ClientSchema) {
     this.clearSchema();
 
-    // TODO: disable the parcels select strategy to avoid zooming
-    // on the selected parcel, if any.
+    this.parcelStore.updateAllEntitiesState({selected: false});
     this.loadSchemaElements(schema);
     this.schemaElementPointEditor.setSchema(schema);
     this.schemaElementPointEditor.setTransaction(this.schemaElementTransaction);

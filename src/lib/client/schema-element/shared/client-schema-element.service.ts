@@ -8,6 +8,8 @@ import {
   ClientSchemaElementSurface,
   ClientSchemaElementTransactionData
 } from './client-schema-element.interfaces';
+import { ClientSchemaElementPointService } from './client-schema-element-point.service';
+import { ClientSchemaElementLineService } from './client-schema-element-line.service';
 import { ClientSchemaElementSurfaceService } from './client-schema-element-surface.service';
 
 export type ClientSchemaElements = [
@@ -22,13 +24,15 @@ export type ClientSchemaElements = [
 export class ClientSchemaElementService {
 
   constructor(
+    private schemaElementPointService: ClientSchemaElementPointService,
+    private schemaElementLineService: ClientSchemaElementLineService,
     private schemaElementSurfaceService: ClientSchemaElementSurfaceService
   ) {}
 
   getElements(schema: ClientSchema): Observable<ClientSchemaElements> {
     const elements$ = zip(
-      of([]),
-      of([]),
+      this.schemaElementPointService.getElements(schema),
+      this.schemaElementLineService.getElements(schema),
       this.schemaElementSurfaceService.getElements(schema)
     );
 

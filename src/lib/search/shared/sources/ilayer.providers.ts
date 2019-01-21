@@ -6,18 +6,28 @@ import { SearchSource } from './source';
 import { ILayerSearchSource } from './ilayer';
 
 /**
+ * ILayer search source factory
+ * @ignore
+ */
+export function ilayerSearchSourceFactory(
+  http: HttpClient,
+  languageService: LanguageService,
+  config: ConfigService
+) {
+  return new ILayerSearchSource(
+    http,
+    languageService,
+    config.getConfig(`searchSources.${ILayerSearchSource.id}`)
+  );
+}
+
+/**
  * Function that returns a provider for the ILayer search source
  */
 export function provideILayerSearchSource() {
   return {
     provide: SearchSource,
-    useFactory: (http: HttpClient, languageService: LanguageService, config: ConfigService) => {
-      return new ILayerSearchSource(
-        http,
-        languageService,
-        config.getConfig(`searchSources.${ILayerSearchSource.id}`)
-      );
-    },
+    useFactory: ilayerSearchSourceFactory,
     multi: true,
     deps: [HttpClient, LanguageService, ConfigService]
   };

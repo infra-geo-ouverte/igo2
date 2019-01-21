@@ -9,25 +9,25 @@ import { getEntityId } from 'src/lib/entity';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
-  ClientSchemaElementSurface,
-  ClientSchemaElementSurfaceApiConfig,
-  ClientSchemaElementSurfaceListResponse,
-  ClientSchemaElementSurfaceListResponseItem
+  ClientSchemaElementLine,
+  ClientSchemaElementLineApiConfig,
+  ClientSchemaElementLineListResponse,
+  ClientSchemaElementLineListResponseItem
 } from './client-schema-element.interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientSchemaElementSurfaceService {
+export class ClientSchemaElementLineService {
 
   constructor(
     private http: HttpClient,
     private apiService: ApiService,
-    @Inject('clientSchemaElementSurfaceApiConfig')
-    private apiConfig: ClientSchemaElementSurfaceApiConfig
+    @Inject('clientSchemaElementLineApiConfig')
+    private apiConfig: ClientSchemaElementLineApiConfig
   ) {}
 
-  getElements(schema: ClientSchema): Observable<ClientSchemaElementSurface[]> {
+  getElements(schema: ClientSchema): Observable<ClientSchemaElementLine[]> {
     const url = this.apiService.buildUrl(this.apiConfig.list, {
       schemaId: getEntityId(schema)
     });
@@ -35,21 +35,21 @@ export class ClientSchemaElementSurfaceService {
     return this.http
       .get(url)
       .pipe(
-        map((response: ClientSchemaElementSurfaceListResponse) => {
+        map((response: ClientSchemaElementLineListResponse) => {
           return this.extractElementsFromListResponse(response);
         })
       );
   }
 
   private extractElementsFromListResponse(
-    response: ClientSchemaElementSurfaceListResponse
-  ): ClientSchemaElementSurface[] {
+    response: ClientSchemaElementLineListResponse
+  ): ClientSchemaElementLine[] {
     return response.map(listItem => this.listItemToElement(listItem));
   }
 
   private listItemToElement(
-    listItem: ClientSchemaElementSurfaceListResponseItem
-  ): ClientSchemaElementSurface {
+    listItem: ClientSchemaElementLineListResponseItem
+  ): ClientSchemaElementLine {
     const properties = Object.assign({}, listItem.properties);
     return {
       meta: {

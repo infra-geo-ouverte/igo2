@@ -8,8 +8,7 @@
     mat-list-avatar
     mat-icon-button
     [disabled]="disabled">
-    <mat-icon *ngIf="withIcon && !image">{{icon}}</mat-icon>
-    <img *ngIf="withIcon && image" [src]="image">
+    <mat-icon *ngIf="withIcon">{{icon}}</mat-icon>
   </button>
   <h4 *ngIf="withTitle" matLine>{{title | translate}}</h4>
 </mat-list-item>
