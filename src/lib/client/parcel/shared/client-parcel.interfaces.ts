@@ -8,24 +8,32 @@ export interface ClientParcelApiConfig {
 
 export interface ClientParcel extends Feature {
   properties: {
-    idParcelle: string;
-    noParcelleAgricole: string;
-    noDiagramme: string;
-    codeProduction: string;
-    descriptionCodeProduction: string;
-    superficie: number;
-    superficieHectare: number;
-    pourcentageSuperficieMAO: number;
-    superficieMAO: number;
-    superficieDeclaree: number;
-    codeDefaultCultural: string;
-    pourcentageDefaultCulture: number;
-    noConfirmation: number;
-    noClient: string;
-    noClientExploitant: string;
-    noClientRecherche: string;
     annee: string;
-    indicateurParcelleDrainee: string;
+    anneeImage: number;
+    codeDefautCultural: string;
+    descriptionProduction: string;
+    id: string;
+    infoLocateur: string;
+    noClientDetenteur: number;
+    noClientExploitant: number;
+    noClientRecherche: number;
+    noConfirmation: number;
+    noDiagramme: number;
+    noParcelleAgricole: string;
+    noParcelleAgricoleTri: string;
+    parcelleDrainee: string;
+    pourcentageDefautCultural: number;
+    pourcentageSupMao: number;
+    production: string;
+    sourceParcelleAgricole: string;
+    statutAugmentationSupCultivable: string;
+    superficie: number;
+    superficieDeclaree: number;
+    superficieHectare: number;
+    superficieMao: number;
+    timbreMajGeometrie: string;
+    typeParcelleAgricole: string;
+    usagerMajGeometrie: string;
   };
 }
 
@@ -52,5 +60,5 @@ export interface ClientParcelYearListResponse {
 
 /*** Parcel Diagram ***/
 export interface ClientParcelDiagram extends EntityObject {
-  id: string;
+  id: number;
 }

@@ -8,6 +8,7 @@ export interface ClientSchemaApiConfig  {
   duplicate: string;
   domains: {
     type: string;
+    etat: string;
   };
 }
 
@@ -62,6 +63,19 @@ export interface ClientSchemaTypeChoicesResponse {
 }
 
 export interface ClientSchemaTypeChoicesResponseItem {
+  code: string;
+  descriptionAbregeeFrancais: string;
+  descriptionFrancais: string;
+  descriptionAbregeeAnglais: string;
+  descriptionAnglais: string;
+  ordreAffichage: number;
+}
+
+export interface ClientSchemaEtatChoicesResponse {
+  data: ClientSchemaEtatChoicesResponseItem[];
+}
+
+export interface ClientSchemaEtatChoicesResponseItem {
   code: string;
   descriptionAbregeeFrancais: string;
   descriptionFrancais: string;

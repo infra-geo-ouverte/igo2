@@ -1,15 +1,17 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Validators } from '@angular/forms';
 
 import { Observable, of, zip } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { Validators } from '@angular/forms';
+import { LanguageService } from '@igo2/core';
 
 import { ApiService } from 'src/lib/core/api';
 import {
   ClientSchemaApiConfig,
-  ClientSchemaTypeChoicesResponse
+  ClientSchemaTypeChoicesResponse,
+  ClientSchemaEtatChoicesResponse
 } from './client-schema.interfaces';
 
 import {
@@ -28,10 +30,12 @@ type PartialFormField = Partial<EntityFormField<EntityFormFieldAnyInput>>;
 export class ClientSchemaFormService {
 
   private clientSchemaTypeChoices: EntityFormFieldSelectInputChoice[];
+  private clientSchemaEtatChoices: EntityFormFieldSelectInputChoice[];
 
   constructor(
     private http: HttpClient,
     private apiService: ApiService,
+    private languageService: LanguageService,
     @Inject('clientSchemaApiConfig') private apiConfig: ClientSchemaApiConfig
   ) {}
 
@@ -44,7 +48,11 @@ export class ClientSchemaFormService {
       this.createEtatField()
     );
     return fields$.pipe(
-      map((fields: EntityFormField[]) => Object.create({fields}))
+      map((fields: EntityFormField[]) => Object.create({
+        fields,
+        submitLabel: this.languageService.translate.instant('save'),
+        cancelLabel: this.languageService.translate.instant('cancel')
+      }))
     );
   }
 
@@ -53,11 +61,19 @@ export class ClientSchemaFormService {
   }
 
   buildDeleteForm(): Observable<EntityFormTemplate> {
-    return of({fields: []});
+    return of({
+      fields: [],
+      submitLabel: this.languageService.translate.instant('yes'),
+      cancelLabel: this.languageService.translate.instant('no')
+    });
   }
 
   buildDuplicateForm(): Observable<EntityFormTemplate> {
-    return of({fields: []});
+    return of({
+      fields: [],
+      submitLabel: this.languageService.translate.instant('yes'),
+      cancelLabel: this.languageService.translate.instant('no')
+    });
   }
 
   private createIdField(partial?: PartialFormField): Observable<EntityFormField> {
@@ -118,14 +134,26 @@ export class ClientSchemaFormService {
     }, partial));
   }
 
-  private createEtatField(partial?: PartialFormField): Observable<EntityFormField> {
-    return of(this.createField({
-      name: 'etat',
-      title: 'État',
-      options: {
-        cols: 1
-      }
-    }, partial));
+  private createEtatField(
+    partial?: PartialFormField
+  ): Observable<EntityFormField<EntityFormFieldSelectInput>> {
+
+    return this.getClientSchemaEtatChoices()
+      .pipe(
+        map((choices: EntityFormFieldSelectInputChoice[]) => {
+          return this.createField({
+            name: 'etat',
+            title: 'État',
+            options:  {
+              cols: 1
+            },
+            input: {
+              type: 'select',
+              choices
+            }
+          }, partial) as EntityFormField<EntityFormFieldSelectInput>;
+        })
+      );
   }
 
   private createField(base: EntityFormField, partial?: PartialFormField): EntityFormField {
@@ -165,5 +193,39 @@ export class ClientSchemaFormService {
 
   private cacheClientSchemaTypeChoices(choices: EntityFormFieldSelectInputChoice[]) {
     this.clientSchemaTypeChoices = choices;
+  }
+
+  private getClientSchemaEtatChoices(): Observable<EntityFormFieldSelectInputChoice[]> {
+    if (this.clientSchemaEtatChoices !== undefined) {
+      return of(this.clientSchemaEtatChoices);
+    }
+
+    const url = this.apiService.buildUrl(this.apiConfig.domains.etat);
+    return this.http
+      .get(url)
+      .pipe(
+        map((response: ClientSchemaEtatChoicesResponse) => {
+          return [{value: undefined, title: ''}].concat(
+            this.extractSchemaEtatChoicesFromResponse(response)
+          );
+        }),
+        tap((choices: EntityFormFieldSelectInputChoice[]) => {
+          this.cacheClientSchemaEtatChoices(choices);
+        })
+      );
+  }
+
+  private extractSchemaEtatChoicesFromResponse(
+    response: ClientSchemaEtatChoicesResponse
+  ): EntityFormFieldSelectInputChoice[] {
+    const items = response.data || [];
+    return items.map(item => Object.create({
+      value: item.code,
+      title: item.descriptionAbregeeFrancais
+    }));
+  }
+
+  private cacheClientSchemaEtatChoices(choices: EntityFormFieldSelectInputChoice[]) {
+    this.clientSchemaEtatChoices = choices;
   }
 }

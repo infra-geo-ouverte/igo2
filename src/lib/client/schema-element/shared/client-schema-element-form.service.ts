@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
 
 import { Observable, of, zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Validators } from '@angular/forms';
+import { LanguageService } from '@igo2/core';
 
 import {
   EntityFormTemplate,
@@ -19,7 +20,7 @@ type PartialFormField = Partial<EntityFormField<EntityFormFieldAnyInput>>;
 })
 export class ClientSchemaElementFormService {
 
-  constructor() {}
+  constructor(private languageService: LanguageService) {}
 
   buildCreateSurfaceForm(igoMap: IgoMap): Observable<EntityFormTemplate> {
     const fields$ = zip(
@@ -32,7 +33,11 @@ export class ClientSchemaElementFormService {
     );
     return fields$.pipe(
       map((fields: EntityFormField[]) => {
-        return Object.create({fields});
+        return Object.create({
+          fields,
+          submitLabel: this.languageService.translate.instant('save'),
+          cancelLabel: this.languageService.translate.instant('cancel')
+        });
       })
     );
   }

@@ -11,7 +11,7 @@ export function getDiagramsFromParcels(parcels: ClientParcel[]): ClientParcelDia
     return parcel.properties.noDiagramme;
   }));
 
-  return Array.from(diagramIds).map((id: string) => {
+  return Array.from(diagramIds).map((id: number) => {
     return {id};
   });
 }
@@ -54,9 +54,9 @@ function createParcelLayerTextStyle(): olstyle.Text {
 }
 
 function getParcelFeatureColor(olFeature: OlFeature) {
-  const clientRech = padClientNum(olFeature.get('noClientRecherche'));
-  const clientDet = padClientNum(olFeature.get('noClient'));
-  const clientExp = padClientNum(olFeature.get('noClientExploitant'));
+  const clientRech = olFeature.get('noClientRecherche');
+  const clientDet = olFeature.get('noClientDetenteur') || clientRech;
+  const clientExp = olFeature.get('noClientExploitant') || clientDet;
 
   let color;
   if (clientRech === clientDet) {

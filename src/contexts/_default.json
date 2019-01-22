@@ -11,7 +11,7 @@
   "layers": [
     {
       "title": "Images les plus récentes",
-      "baseLayer": false,
+      "baseLayer": true,
       "visible": true,
       "sourceOptions": {
         "type": "wmts",
@@ -21,6 +21,164 @@
         "matrixSet": "Lambert:epsg:32198",
         "params": {
           "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "title": "Gouvernmement du Québec",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "type": "wmts",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_wmts",
+        "layer": "carte_gouv_qc",
+        "matrixSet": "LAMBERT",
+        "params": {
+          "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "title": "Zones maïs-grain 2016 à aujourd'hui",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "LOCVDS_ZONA_COLL_MGR",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "LOCVDS_ZONA_COLL_MGR",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Zones céréales maïs fourrager oléagineux 2016 à aujourd'hui",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "LOCVDS_ZONA_COLL",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "LOCVDS_ZONA_COLL",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Stations météo foin (année courante)",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "SMDVSP_STAT_METE_ASSU_AN_COUR",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "SMDVSP_STAT_METE_ASSU_AN_COUR",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Stations météo foin (année précédente)",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "SMDVSP_STAT_METE_ASSU_AN_PREC",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "SMDVSP_STAT_METE_ASSU_AN_PREC",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Territoires de centre de services",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "LOCVDS_CENT_SERV",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "LOCVDS_CENT_SERV",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Municipalités",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "SDA_MUNIC_S",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "SDA_MUNIC_S",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Cadastre rénové",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "CADASTRE_RENO_MERN",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "CADASTRE_RENO_MERN",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Compilation cadastrale",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_compil_cadas",
+        "layer": "compil_cadas",
+        "style": "default",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "compil_cadas",
+          "srs": "EPSG:32198"
         }
       }
     }

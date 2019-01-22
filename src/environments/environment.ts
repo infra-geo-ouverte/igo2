@@ -80,7 +80,8 @@ export const environment: Environment = {
           delete: '/igoschema/edition_schema/supprimerSchema/${id}',
           duplicate: '/igoschema/edition_schema/copierSchema/${id}',
           domains: {
-            type: '/igoschema/edition_schema/obtenirTypesSchemas'
+            type: '/igoschema/edition_schema/obtenirTypesSchemas',
+            etat: '/igoschema/edition_schema/obtenirEtatsSchema'
           }
         },
         schemaFile: {

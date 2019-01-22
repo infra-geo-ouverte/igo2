@@ -4,7 +4,10 @@
   "menu.open": "Open Menu",
   "choose...": "Choose...",
   "cancel": "Cancel",
-  "close": "Fermer",
+  "close": "Close",
+  "save": "Save",
+  "yes": "Yes",
+  "no": "No",
 
   "info.title": "Informations",
 

@@ -51,12 +51,12 @@ export class ClientParcelService {
     clientNum: string
   ): ClientParcel {
     const properties = Object.assign({}, listItem.properties, {
-      noClientRecherche: padClientNum(clientNum)
+      noClientRecherche: parseInt(clientNum, 10)
     });
     return {
       meta: {
-        idProperty: 'properties.idParcelle',
-        titleProperty: 'properties.idParcelle',
+        idProperty: 'properties.id',
+        titleProperty: 'properties.id',
         mapTitle: listItem.properties.noParcelleAgricole
       },
       type: listItem.type,

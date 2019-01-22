@@ -28,11 +28,11 @@ export class ClientParcelTableService {
           title: 'Numéro de diagramme'
         },
         {
-          name: 'properties.codeProduction',
-          title: 'Code de production'
+          name: 'production',
+          title: 'Production'
         },
         {
-          name: 'properties.descriptionCodeProduction',
+          name: 'properties.descriptionProduction',
           title: 'Description de production'
         },
         {
@@ -44,7 +44,7 @@ export class ClientParcelTableService {
           title: 'Superficie mesurée (ha)'
         },
         {
-          name: 'properties.pourcentageSuperficieMAO',
+          name: 'properties.pourcentageSupMAO',
           title: 'Superficie (%)'
         },
         {
@@ -68,7 +68,7 @@ export class ClientParcelTableService {
           title: 'Numéro de confirmation IVEG'
         },
         {
-          name: 'properties.noClient', // TODO: compute properly
+          name: 'properties.noClientDetenteur', // TODO: compute properly
           title: 'Détenteur'
         },
         {
@@ -76,11 +76,11 @@ export class ClientParcelTableService {
           title: 'Exploitant'
         },
         {
-          name: 'properties.statutAugmSuperficieCulture',
+          name: 'properties.statutAugmentationSupCultivable',
           title: 'Statut de déboisement'
         },
         {
-          name: 'properties.indicateurParcelleDrainee',
+          name: 'properties.parcelleDrainee',
           title: 'Drainage'
         },
         {
