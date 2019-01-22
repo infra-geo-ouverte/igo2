@@ -50,7 +50,7 @@ export interface ClientSchemaCreateData {
 }
 
 export interface ClientSchemaCreateResponse {
-  data: ClientSchema;
+  data: ClientSchemaListResponseItem;
 }
 
 export interface ClientSchemaUpdateData {
@@ -62,11 +62,11 @@ export interface ClientSchemaUpdateData {
 }
 
 export interface ClientSchemaUpdateResponse {
-  data: ClientSchema;
+  data: ClientSchemaListResponseItem;
 }
 
 export interface ClientSchemaDuplicateResponse {
-  data: ClientSchema;
+  data: ClientSchemaListResponseItem;
 }
 
 export interface ClientSchemaTypeChoicesResponse {

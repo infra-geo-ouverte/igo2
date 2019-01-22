@@ -108,10 +108,13 @@ export class ClientSchemaService {
     response: ClientSchemaCreateResponse
   ): ClientSchema {
     const data = response.data;
+    const type = data.typeSchema.code;
     return Object.assign({
       meta: {
-        title: `${data.id} - ${data.type} - ${data.annee}`
-      }
+        title: `${data.id} - ${type} - ${data.annee}`
+      },
+      type: type,
+      descriptionType: data.typeSchema.descriptionAbregeeFrancais,
     }, data);
   }
 
@@ -119,10 +122,13 @@ export class ClientSchemaService {
     response: ClientSchemaUpdateResponse
   ): ClientSchema {
     const data = response.data;
+    const type = data.typeSchema.code;
     return Object.assign({
       meta: {
-        title: `${data.id} - ${data.type} - ${data.annee}`
-      }
+        title: `${data.id} - ${type} - ${data.annee}`
+      },
+      type: type,
+      descriptionType: data.typeSchema.descriptionAbregeeFrancais,
     }, data);
   }
 
@@ -130,10 +136,13 @@ export class ClientSchemaService {
     response: ClientSchemaDuplicateResponse
   ): ClientSchema {
     const data = response.data;
+    const type = data.typeSchema.code;
     return Object.assign({
       meta: {
-        title: `${data.id} - ${data.type} - ${data.annee}`
-      }
+        title: `${data.id} - ${type} - ${data.annee}`
+      },
+      type: type,
+      descriptionType: data.typeSchema.descriptionAbregeeFrancais,
     }, data);
   }
 }
