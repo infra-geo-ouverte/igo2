@@ -24,7 +24,7 @@ export class ClientSchemaTableService {
           title: 'Numéro de schéma'
         },
         {
-          name: 'type',
+          name: 'descriptionType',
           title: 'Type de schéma'
         },
         {

@@ -16,6 +16,7 @@ export interface ClientSchema extends EntityObject {
   id: string;
   numeroClient: string;
   type: string;
+  descriptionType: string;
   description: string;
   annee: string;
   etat: string;
@@ -28,7 +29,17 @@ export interface ClientSchemaListResponse {
   data?: ClientSchemaListResponseItem[];
 }
 
-export interface ClientSchemaListResponseItem extends ClientSchema {}
+export interface ClientSchemaListResponseItem {
+  id: string;
+  numeroClient: string;
+  typeSchema: ClientSchemaTypeChoicesResponseItem;
+  description: string;
+  annee: string;
+  etat: string;
+  nbDocuments: number;
+  usagerMaj: string;
+  timbreMaj: string;
+}
 
 export interface ClientSchemaCreateData {
   numeroClient: string;

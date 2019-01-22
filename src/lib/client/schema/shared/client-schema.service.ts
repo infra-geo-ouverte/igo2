@@ -94,10 +94,13 @@ export class ClientSchemaService {
   }
 
   private listItemToSchema(listItem: ClientSchemaListResponseItem) {
+    const type = listItem.typeSchema.code;
     return Object.assign({
       meta: {
-        title: `${listItem.id} - ${listItem.type} - ${listItem.annee}`
-      }
+        title: `${listItem.id} - ${type} - ${listItem.annee}`
+      },
+      type: type,
+      descriptionType: listItem.typeSchema.descriptionAbregeeFrancais,
     }, listItem);
   }
 
