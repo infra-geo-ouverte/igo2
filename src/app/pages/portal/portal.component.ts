@@ -4,8 +4,9 @@ import {
   OnDestroy
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
-import { Media, MediaService, MediaOrientation } from '@igo2/core';
+import { Media, MediaService, MediaOrientation, ActivityService } from '@igo2/core';
 import {
   ContextService,
   DetailedContext,
@@ -54,9 +55,11 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public expansionPanelExpanded = false;
   public sidenavOpened = false;
+  public spinnerShown = false;
 
   // True after the initial context is loaded
   private contextLoaded = false;
+  private activity$: Subscription;
   private context$$: Subscription;
   private selectedEditor$$: Subscription;
   private searchResults$$: Subscription;
@@ -152,11 +155,17 @@ export class PortalComponent implements OnInit, OnDestroy {
     private contextService: ContextService,
     private mediaService: MediaService,
     private searchState: SearchState,
-    private toolService: ToolService
+    private toolService: ToolService,
+    private activityService: ActivityService
   ) {}
 
   ngOnInit() {
     window['IGO'] = this;
+
+    this.activity$ = this.activityService.counter$
+      .pipe(
+        debounceTime(50)
+      ).subscribe((count: number) => this.spinnerShown = count > 0);
 
     this.context$$ = this.contextService.context$
       .subscribe((context: DetailedContext) => this.onChangeContext(context));
@@ -174,6 +183,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.activity$.unsubscribe();
     this.context$$.unsubscribe();
     this.searchResults$$.unsubscribe();
     this.focusedSearchResult$$.unsubscribe();

@@ -15,6 +15,14 @@
   background-color: #efefef;
 }
 
+/*** Spinner ***/
+igo-spinner {
+  position: absolute;
+  top: $igo-margin;
+  right: $igo-margin;
+  z-index: 5;
+}
+
 
 /*** Menu button ***/
 .fadq-menu-button {

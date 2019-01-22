@@ -15,8 +15,8 @@ import {
   IgoFlexibleModule
 } from '@igo2/common';
 import {
-  IgoCatalogModule,
-  IgoDataSourceModule,
+  // IgoCatalogModule,
+  // IgoDataSourceModule,
   IgoDownloadModule,
   // IgoFeatureModule,
   IgoFilterModule,
@@ -25,7 +25,7 @@ import {
   IgoLayerModule,
   IgoMapModule,
   IgoMetadataModule,
-  IgoOverlayModule,
+  // IgoOverlayModule,
   IgoPrintModule,
   // IgoQueryModule,
   IgoWktModule
@@ -35,6 +35,7 @@ import { IgoFeatureModule } from '@igo2/geo';
 import { IgoToolsModule } from '@igo2/tools';
 
 import { FadqCoreModule } from '../../modules/core/core.module';
+import { FadqCommonModule } from '../../modules/common/common.module';
 import { FadqEntityModule } from '../../modules/entity/entity.module';
 import { FadqEditionModule } from '../../modules/edition/edition.module';
 import { FadqClientModule } from '../../modules/client/client.module';
@@ -62,8 +63,8 @@ import { PortalComponent } from './portal.component';
     IgoBackdropModule,
     IgoFlexibleModule,
 
-    IgoCatalogModule,
-    IgoDataSourceModule,
+    // IgoCatalogModule,
+    // IgoDataSourceModule,
     IgoDownloadModule,
     IgoFeatureModule,
     IgoFilterModule,
@@ -72,7 +73,7 @@ import { PortalComponent } from './portal.component';
     IgoLayerModule,
     IgoMapModule,
     IgoMetadataModule,
-    IgoOverlayModule,
+    // IgoOverlayModule,
     IgoPrintModule,
     // IgoQueryModule,
     IgoWktModule,
@@ -80,6 +81,7 @@ import { PortalComponent } from './portal.component';
     IgoContextModule,
     IgoToolsModule,
     FadqCoreModule,
+    FadqCommonModule,
     FadqEntityModule,
     FadqEditionModule,
     FadqClientModule,

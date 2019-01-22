@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IgoStopPropagationModule } from '@igo2/common';
 
 import { FadqCoreModule } from './modules/core/core.module';
-import { FadqCommonModule } from './modules/common/common.module';
 import { FadqAddressModule } from './modules/address/address.module';
 import { FadqClientModule } from './modules/client/client.module';
 import { FadqCatalogModule } from './modules/catalog/catalog.module';
@@ -32,7 +31,6 @@ import { AppComponent } from './app.component';
     RouterModule.forRoot([]),
     IgoStopPropagationModule,
     FadqCoreModule,
-    FadqCommonModule,
     FadqAddressModule,
     FadqClientModule.forRoot(),
     FadqCatalogModule.forRoot(),

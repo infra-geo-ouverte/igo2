@@ -7,13 +7,14 @@ import { DynamicComponentService } from './shared/dynamic-component.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FadqLibDynamicOutletModule,
+    FadqLibSpinnerModule
   ],
   exports: [
     FadqLibDynamicOutletModule,
     FadqLibSpinnerModule
   ],
-  declarations: [],
   providers: [
     DynamicComponentService
   ]
