@@ -1,34 +1,32 @@
 <igo-list [navigation]="true">
-  <ng-container *ngIf="!store.filteredEmpty">
-    <ng-template
-      #groupTemplate
-      ngFor let-group let-i="index"
-      [ngForOf]="(store.rawEntities$ | async).sort(sortByOrder) | searchResultsGroup | keyvalue">
-      <igo-collapsible
-        title="{{group.key.title}} ({{group.value.length}})"
-        *ngIf="mode === searchResultMode.Grouped; else flatTemplate">
-        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {result: group.result}"></ng-container>
-      </igo-collapsible>
+  <ng-template
+    #groupTemplate
+    ngFor let-group
+    [ngForOf]="results$ | async">
 
-      <ng-template #flatTemplate>
-        <ng-container *ngTemplateOutlet="storeItemTemplate; context: {result: group.result}"></ng-container>
-      </ng-template>
+    <igo-collapsible
+      title="{{group.source.title}} ({{group.results.length}})"
+      *ngIf="mode === searchResultMode.Grouped; else flatTemplate">
+      <ng-container *ngTemplateOutlet="storeItemTemplate; context: {results: group.results}"></ng-container>
+    </igo-collapsible>
 
-      <ng-template #storeItemTemplate>
-        <ng-template ngFor let-result let-j="index" [ngForOf]="group.value">
-          <fadq-search-results-item
-            igoListItem
-            color="accent"
-            [result]="result"
-            [focused]="store.getEntityState(result).focused"
-            [selected]="store.getEntityState(result).selected"
-            (focus)="onResultFocus(result)"
-            (select)="onResultSelect(result)">
-          </fadq-search-results-item>
-        </ng-template>
-      </ng-template>
-
+    <ng-template #flatTemplate>
+      <ng-container *ngTemplateOutlet="storeItemTemplate; context: {results: group.results}"></ng-container>
     </ng-template>
 
-  </ng-container>
+    <ng-template #storeItemTemplate let-results="results">
+      <ng-template ngFor let-result [ngForOf]="results">
+        <fadq-search-results-item
+          igoListItem
+          color="accent"
+          [result]="result"
+          [focused]="store.getEntityState(result).focused"
+          [selected]="store.getEntityState(result).selected"
+          (focus)="onResultFocus(result)"
+          (select)="onResultSelect(result)">
+        </fadq-search-results-item>
+      </ng-template>
+    </ng-template>
+
+  </ng-template>
 </igo-list>

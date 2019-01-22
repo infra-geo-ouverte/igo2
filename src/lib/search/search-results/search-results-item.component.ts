@@ -8,6 +8,9 @@ import {
 
 import { SearchResult } from '../shared';
 
+/**
+ * Search results list item
+ */
 @Component({
   selector: 'fadq-search-results-item',
   templateUrl: './search-results-item.component.html',
@@ -15,26 +18,28 @@ import { SearchResult } from '../shared';
 })
 export class SearchResultsItemComponent {
 
-  @Input()
-  get result(): SearchResult {
-    return this._result;
-  }
-  set result(value: SearchResult) {
-    this._result = value;
-  }
-  private _result: SearchResult;
+  /**
+   * Search result
+   */
+  @Input() result: SearchResult;
 
-  get title(): string {
-    return getEntityTitle(this.result);
-  }
+  /**
+   * Search result title
+   * @internal
+   */
+  get title(): string { return getEntityTitle(this.result); }
 
-  get titleHtml(): string {
-    return getEntityTitleHtml(this.result);
-  }
+  /**
+   * Search result HTML title
+   * @internal
+   */
+  get titleHtml(): string { return getEntityTitleHtml(this.result); }
 
-  get icon(): string {
-    return getEntityIcon(this.result);
-  }
+  /**
+   * Search result icon
+   * @internal
+   */
+  get icon(): string { return getEntityIcon(this.result); }
 
   constructor() {}
 }

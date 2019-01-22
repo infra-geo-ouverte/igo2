@@ -9,9 +9,12 @@ import {
   OnDestroy
 } from '@angular/core';
 
+import { Observable, EMPTY, timer } from 'rxjs';
+import { debounce, map } from 'rxjs/operators';
+
 import { EntityStore, EntityStoreController } from 'src/lib/entity';
 
-import { SearchResult } from '../shared';
+import { SearchResult, SearchSource } from '../shared';
 
 export enum SearchResultMode {
   Grouped = 'grouped',
@@ -60,6 +63,29 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
    */
   @Output() resultSelect = new EventEmitter<SearchResult>();
 
+  get results$(): Observable<{source: SearchSource, results: SearchResult[]}[]> {
+    if (this._results$ === undefined) {
+      this._results$ = this.observeResults();
+    }
+    return this._results$;
+  }
+  private _results$: Observable<{source: SearchSource, results: SearchResult[]}[]>;
+
+  /**
+   * Return an observable of the search results, grouped by search source
+   * @returns Observable of grouped search results
+   * @internal
+   */
+  observeResults(): Observable<{source: SearchSource, results: SearchResult[]}[]> {
+    return this.store.filteredEntities$.pipe(
+      debounce((results: SearchResult[]) => {
+        return results.length === 0 ? EMPTY : timer(200);
+      }),
+      map((results: SearchResult[]) => {
+        return this.groupResults(results.sort(this.sortByOrder));
+      }));
+  }
+
   constructor(private cdRef: ChangeDetectorRef) {
     this.controller = new EntityStoreController()
       .withChangeDetector(this.cdRef);
@@ -79,17 +105,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
     this.controller.unbindStore();
-  }
-
-  /**
-   * Sort the results by display order. Results are not sorted at the store
-   * level.
-   * @param result1 First result
-   * @param result2 Second result
-   * @internal
-   */
-  sortByOrder(result1: SearchResult, result2: SearchResult) {
-    return (result1.source.displayOrder - result2.source.displayOrder);
   }
 
   /**
@@ -117,4 +132,36 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.resultSelect.emit(result);
   }
 
+  /**
+   * Sort the results by display order. Results are not sorted at the store
+   * level.
+   * @param result1 First result
+   * @param result2 Second result
+   */
+  private sortByOrder(result1: SearchResult, result2: SearchResult) {
+    return (result1.source.displayOrder - result2.source.displayOrder);
+  }
+
+  /**
+   * Group results by search source
+   * @param results Search results from all sources
+   * @returns Search results grouped by source
+   */
+  private groupResults(results: SearchResult[]): {source: SearchSource, results: SearchResult[]}[] {
+    const grouped = new Map<SearchSource, SearchResult[]>();
+
+    results.forEach((result: SearchResult) => {
+      const source = result.source;
+      let sourceResults = grouped.get(source);
+      if (sourceResults === undefined) {
+        sourceResults = [];
+        grouped.set(source, sourceResults);
+      }
+      sourceResults.push(result);
+    });
+
+    return Array.from(grouped.keys()).map((source: SearchSource) => {
+      return {source, results: grouped.get(source)};
+    });
+  }
 }

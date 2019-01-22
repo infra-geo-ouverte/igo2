@@ -33,12 +33,14 @@ export const environment: Environment = {
     searchSources: {
       nominatim: {
         enabled: true,
+        available: true,
         params: {
           limit: '5'
         }
       },
       icherche: {
         enabled: true,
+        available: true,
         searchUrl: '/icherche/geocode',
         params: {
           type: 'adresse,code_postal,route,municipalite,mrc,region_administrative',
@@ -47,7 +49,8 @@ export const environment: Environment = {
         }
       },
       datasource: {
-        enabled: true,
+        enabled: false,
+        available: false,
         searchUrl: '/ilayer/search',
         params: {
           limit: '5'

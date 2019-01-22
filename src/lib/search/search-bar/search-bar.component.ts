@@ -12,8 +12,8 @@ import {
 } from '@angular/core';
 import { FloatLabelType } from '@angular/material';
 
-import { Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, Subscription, EMPTY, timer } from 'rxjs';
+import { debounce, distinctUntilChanged } from 'rxjs/operators';
 
 import { EntityStore } from 'src/lib/entity';
 import { SearchResult, SearchService, Research } from '../shared';
@@ -141,7 +141,9 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.stream$$ = this.stream$
       .pipe(
-        debounceTime(this.debounce),
+        debounce((term: string) => {
+          return term === '' ? EMPTY : timer(300);
+        }),
         distinctUntilChanged()
       )
       .subscribe((term: string) => this.onTermChange(term));

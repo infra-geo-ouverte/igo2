@@ -48,10 +48,16 @@ export class SearchSource {
   get title(): string { return this.options.title; }
 
   /**
+   * Whether the search source is available
+   */
+  set available(value: boolean) { this.options.available = value; }
+  get available(): boolean { return this.options.available !== false; }
+
+  /**
    * Whether the search source is enabled
    */
   set enabled(value: boolean) { this.options.enabled = value; }
-  get enabled(): boolean { return this.options.enabled !== false; }
+  get enabled(): boolean { return this.available && this.options.enabled !== false; }
 
   /**
    * Search url
