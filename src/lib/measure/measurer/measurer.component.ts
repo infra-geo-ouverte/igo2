@@ -146,6 +146,8 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     this._activeMeasureType = value;
     this.clearMeasures();
     this.toggleDrawControl();
+    this.drawLineControl.getSource().clear();
+    this.drawPolygonControl.getSource().clear();
   }
   get activeMeasureType(): MeasureType { return this._activeMeasureType; }
   private _activeMeasureType: MeasureType = MeasureType.Length;
@@ -180,7 +182,8 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnDestroy() {
-    // this.removeDrawControls();
+    this.drawLineControl.getSource().clear();
+    this.drawPolygonControl.getSource().clear();
     this.deactivateDrawControl();
   }
 
@@ -286,9 +289,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     this.drawStart$.unsubscribe();
     this.drawEnd$.unsubscribe();
     this.drawChanges$.unsubscribe();
-    const olDrawSource = this.activeDrawControl.getSource();
-    this.clearTooltipsOfOlSource(olDrawSource);
-    olDrawSource.clear();
+    this.clearTooltipsOfOlSource(this.activeDrawControl.getSource());
     if (this.activeOlGeometry !== undefined) {
       this.clearTooltipsOfOlGeometry(this.activeOlGeometry);
     }
