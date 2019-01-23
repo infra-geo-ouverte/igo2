@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { MeasureAreaUnit, MeasureLengthUnit } from '../shared/measure.interfaces';
+import { MeasureAreaUnit, MeasureLengthUnit } from '../shared/measure.enum';
 import { metersToUnit, squareMetersToUnit } from '../shared/measure.utils';
 
 /**

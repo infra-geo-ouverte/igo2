@@ -6,11 +6,8 @@ import OlPolygon from 'ol/geom/Polygon';
 import OlOverlay from 'ol/Overlay';
 import { getLength, getArea } from 'ol/sphere';
 
-import {
-  MeasureAreaUnit,
-  MeasureLengthUnit,
-  GeometryMeasures
-} from './measure.interfaces';
+import { GeometryMeasures } from './measure.interfaces';
+import { MeasureAreaUnit, MeasureLengthUnit } from './measure.enum';
 
 /**
  * Convert value from meters to kilometers
@@ -120,6 +117,38 @@ export function squareMetersToUnit(value: number, unit: MeasureAreaUnit): number
   const conversion = conversionMapper.get(unit);
 
   return conversion ? conversion(value) : undefined;
+}
+
+/**
+ * Compute best length measure unit for a given measure in meters
+ * @param value Value in meters
+ * @returns Measure unit
+ */
+export function computeBestLengthUnit(value: number): MeasureLengthUnit {
+  let unit = MeasureLengthUnit.Meters;
+  let converted = value;
+  const possibleUnits = [MeasureLengthUnit.Kilometers];
+  while (converted > 1000 && possibleUnits.length > 0) {
+    unit = possibleUnits.pop();
+    converted = metersToUnit(value, unit);
+  }
+  return unit;
+}
+
+/**
+ * Compute best length measure unit for a given measure in square meters
+ * @param value Value in meters
+ * @returns Measure unit
+ */
+export function computeBestAreaUnit(value: number): MeasureAreaUnit {
+  let unit = MeasureAreaUnit.SquareMeters;
+  let converted = value;
+  const possibleUnits = [MeasureAreaUnit.SquareKilometers];
+  while (converted > 1000000 && possibleUnits.length > 0) {
+    unit = possibleUnits.pop();
+    converted = squareMetersToUnit(value, unit);
+  }
+  return unit;
 }
 
 /**

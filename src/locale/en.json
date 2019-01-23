@@ -25,7 +25,9 @@
     "squareMiles": "Miles²",
     "squareFeet": "Feet²",
     "hectares": "Hectares",
-    "acres": "Acres"
+    "acres": "Acres",
+    "toggleMeasure": "Measure",
+    "toggleAutoUnits": "Auto Units"
   },
 
   "search": {

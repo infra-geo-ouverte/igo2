@@ -72,20 +72,17 @@ th.text-centered {
 /* Map tooltips */
 .fadq-map-tooltip {
   position: relative;
-  background: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
-  color: white;
   padding: 4px 8px;
-  opacity: 0.7;
   white-space: nowrap;
 }
 
 .fadq-map-tooltip-measure {
-  background-color: #ffcc33;
+  background-color: rgba(255, 204, 51, 0.7);
+  border: 1px solid rgb(255, 205, 51);
   color: black;
-  border: 1px solid white;
-  opacity: 1;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .fadq-map-tooltip-measure:before {

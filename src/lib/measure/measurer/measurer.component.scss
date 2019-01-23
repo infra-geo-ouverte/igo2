@@ -1,16 +1,16 @@
-.header {
-  display: flex;
-  width: 100%;
-  padding: 10px;
-}
+$slide-toggle-width: 60px;
 
 .measure-type-toggle {
-  display: flex;
-  flex-flow: column nowrap;
+  padding: 10px;
+  text-align: center;
 }
 
-.draw-toggle {
+.measure-options mat-slide-toggle {
   width: 100%;
-  margin: 10px 0 10px 10px;
-  text-align: right;
+  margin: 10px;
+
+  ::ng-deep .mat-slide-toggle-content {
+    width: calc(100% - #{$slide-toggle-width});
+    font-size: 16px;
+  }
 }
