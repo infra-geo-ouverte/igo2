@@ -50,6 +50,10 @@ export class ClientSchemaElementFormService {
     return of({fields: []});
   }
 
+  buildSplitSurfaceForm(): Observable<EntityFormTemplate> {
+    return of({fields: []});
+  }
+
   private createIdField(partial?: PartialFormField): Observable<EntityFormField> {
     return of(this.createField({
       name: 'properties.idElementGeometrique',

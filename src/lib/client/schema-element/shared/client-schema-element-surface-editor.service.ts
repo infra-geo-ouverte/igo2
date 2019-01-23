@@ -13,7 +13,8 @@ import { ClientSchemaElementTableService } from './client-schema-element-table.s
 import {
   ClientSchemaElementSaverWidget,
   ClientSchemaElementSurfaceCreateWidget,
-  ClientSchemaElementSurfaceUpdateWidget
+  ClientSchemaElementSurfaceUpdateWidget,
+  ClientSchemaElementSurfaceSplitWidget
 } from './client-schema-element.widgets';
 import { generateOperationTitle } from './client-schema-element.utils';
 
@@ -30,7 +31,8 @@ export class ClientSchemaElementSurfaceEditorService extends Editor {
     private clientSchemaElementTableService: ClientSchemaElementTableService,
     @Inject(ClientSchemaElementSaverWidget) private clientSchemaElementSaverWidget: Widget,
     @Inject(ClientSchemaElementSurfaceCreateWidget) private clientSchemaElementSurfaceCreateWidget: Widget,
-    @Inject(ClientSchemaElementSurfaceUpdateWidget) private clientSchemaElementSurfaceUpdateWidget: Widget
+    @Inject(ClientSchemaElementSurfaceUpdateWidget) private clientSchemaElementSurfaceUpdateWidget: Widget,
+    @Inject(ClientSchemaElementSurfaceSplitWidget) private clientSchemaElementSurfaceSplitWidget: Widget
   ) {
     super({
       id: 'fadq.client-schema-element-surface-editor',
@@ -116,7 +118,21 @@ export class ClientSchemaElementSurfaceEditorService extends Editor {
           transaction: this.transaction
         }),
         conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
-      }
+      },
+      {
+        id: 'split',
+        icon: 'flip',
+        title: 'client.schemaElement.split',
+        tooltip: 'client.schemaElement.split.tooltip',
+        handler: () => this.activateWidget(this.clientSchemaElementSurfaceSplitWidget, {
+          schema: this.schema,
+          map: this.map,
+          element: this.entity,
+          transaction: this.transaction,
+          store: this.entityStore
+        }),
+        conditions: [schemaIsDefined, elementIsDefined, transactionIsNotInCommitPhase]
+      },
     ];
   }
 

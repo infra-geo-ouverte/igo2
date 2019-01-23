@@ -123,6 +123,8 @@
       "update.tooltip": "Modifier un élément",
       "delete": "Supprimer",
       "delete.tooltip": "Supprimer un élément",
+      "split": "Séparer un élément",
+      "split.tooltip": "Séparer un élément",
       "move": "Déplacer",
       "move.tooltip": "Déplacer un élément",
       "save": "Sauvegarder",
