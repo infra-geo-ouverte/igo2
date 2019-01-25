@@ -50,7 +50,7 @@ export class ClientSchemaElementFormService {
     return of({fields: []});
   }
 
-  buildSplitSurfaceForm(): Observable<EntityFormTemplate> {
+  buildSliceSurfaceForm(): Observable<EntityFormTemplate> {
     return of({fields: []});
   }
 

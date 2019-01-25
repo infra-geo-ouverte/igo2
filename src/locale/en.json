@@ -17,6 +17,7 @@
     "lastLength": "Distance between the last 2 points",
     "perimeter": "Perimeter",
     "meters": "Meters",
+
     "kilometers": "Kilometers",
     "miles": "Miles",
     "feet": "Feet",
@@ -27,6 +28,7 @@
     "hectares": "Hectares",
     "acres": "Acres",
     "toggleMeasure": "Measure",
+    "toggleMapTooltips": "Show map tooltips",
     "toggleAutoUnits": "Auto Units"
   },
 
@@ -125,8 +127,8 @@
       "update.tooltip": "Modifier un élément",
       "delete": "Supprimer",
       "delete.tooltip": "Supprimer un élément",
-      "split": "Séparer un élément",
-      "split.tooltip": "Séparer un élément",
+      "slice": "Séparer un élément",
+      "slice.tooltip": "Séparer un élément",
       "move": "Déplacer",
       "move.tooltip": "Déplacer un élément",
       "save": "Sauvegarder",

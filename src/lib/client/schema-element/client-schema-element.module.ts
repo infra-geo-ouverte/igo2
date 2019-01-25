@@ -11,8 +11,8 @@ import {
   FadqLibClientSchemaElementSurfaceUpdateFormModule
 } from './schema-element-surface-update-form/client-schema-element-surface-update-form.module';
 import {
-  FadqLibClientSchemaElementSurfaceSplitFormModule
-} from './schema-element-surface-split-form/client-schema-element-surface-split-form.module';
+  FadqLibClientSchemaElementSurfaceSliceFormModule
+} from './schema-element-surface-slice-form/client-schema-element-surface-slice-form.module';
 
 import {
   provideClientSchemaElementPointService,
@@ -24,7 +24,7 @@ import {
   provideClientSchemaElementSaverWidget,
   provideClientSchemaElementSurfaceCreateWidget,
   provideClientSchemaElementSurfaceUpdateWidget,
-  provideClientSchemaElementSurfaceSplitWidget
+  provideClientSchemaElementSurfaceSliceWidget
 } from './shared/client-schema-element.widgets';
 import { ClientSchemaElementFormService } from './shared/client-schema-element-form.service';
 import { ClientSchemaElementTableService } from './shared/client-schema-element-table.service';
@@ -40,7 +40,7 @@ import { ClientSchemaElementSurfaceEditorService } from './shared/client-schema-
     FadqLibClientSchemaElementSaverModule,
     FadqLibClientSchemaElementSurfaceCreateFormModule,
     FadqLibClientSchemaElementSurfaceUpdateFormModule,
-    FadqLibClientSchemaElementSurfaceSplitFormModule
+    FadqLibClientSchemaElementSurfaceSliceFormModule
   ],
   declarations: []
 })
@@ -56,7 +56,7 @@ export class FadqLibClientSchemaElementModule {
         provideClientSchemaElementSaverWidget(),
         provideClientSchemaElementSurfaceCreateWidget(),
         provideClientSchemaElementSurfaceUpdateWidget(),
-        provideClientSchemaElementSurfaceSplitWidget(),
+        provideClientSchemaElementSurfaceSliceWidget(),
         ClientSchemaElementFormService,
         ClientSchemaElementTableService,
         ClientSchemaElementPointEditorService,

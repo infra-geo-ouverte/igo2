@@ -134,7 +134,7 @@ export class CatalogService {
         continue;
       }
 
-      // TODO: Split that into multiple methods
+      // TODO: Slice that into multiple methods
       // Define object of group layer
       const groupItem = {
         id: `catalog.group.${layerList.Name}`,

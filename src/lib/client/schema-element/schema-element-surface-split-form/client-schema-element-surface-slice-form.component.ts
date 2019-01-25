@@ -9,15 +9,14 @@ import {
 
 import { Subject, Subscription } from 'rxjs';
 
-import { uuid } from '@igo2/utils';
-
-import OlVectorSource from 'ol/source/Vector';
-import OlLineString from 'ol/geom/LineString';
+import OlPolygon from 'ol/geom/Polygon';
 import OlGeoJSON from 'ol/format/GeoJSON';
 
+import { uuid } from '@igo2/utils';
+
 import { EntityFormTemplate, EntityTransaction } from 'src/lib/entity';
-import { Feature, FeatureStore, FeatureFormSubmitEvent, splitOlGeometry } from 'src/lib/feature';
-import { IgoMap, DrawControl } from 'src/lib/map';
+import { Feature, FeatureStore, FeatureFormSubmitEvent } from 'src/lib/feature';
+import { IgoMap, SliceControl } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
@@ -28,25 +27,22 @@ import { generateOperationTitle } from '../shared/client-schema-element.utils';
 
 
 @Component({
-  selector: 'fadq-client-schema-element-surface-split-form',
-  templateUrl: './client-schema-element-surface-split-form.component.html',
-  styleUrls: ['./client-schema-element-surface-split-form.component.scss'],
+  selector: 'fadq-client-schema-element-surface-slice-form',
+  templateUrl: './client-schema-element-surface-slice-form.component.html',
+  styleUrls: ['./client-schema-element-surface-slice-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSurfaceSplitFormComponent
+export class ClientSchemaElementSurfaceSliceFormComponent
     extends WidgetComponent implements OnInit, OnDestroy {
 
   public template$ = new Subject<EntityFormTemplate>();
 
-  /**
-   * Subscription to draw end
-   */
-  private drawLineEnd$: Subscription;
+  private sliceEnd$$: Subscription;
 
   /**
-   * Draw line control
+   * Slice control
    */
-  private drawLineControl: DrawControl;
+  private sliceControl: SliceControl;
 
   @Input() map: IgoMap;
 
@@ -85,10 +81,10 @@ export class ClientSchemaElementSurfaceSplitFormComponent
    * @internal
    */
   ngOnInit() {
-    this.clientSchemaElementFormService.buildSplitSurfaceForm()
+    this.clientSchemaElementFormService.buildSliceSurfaceForm()
       .subscribe((template: EntityFormTemplate) => this.template$.next(template));
-    this.createDrawLineControl();
-    this.activateDrawLineControl();
+    this.createSliceControl();
+    this.activateSliceControl();
   }
 
   /**
@@ -96,7 +92,7 @@ export class ClientSchemaElementSurfaceSplitFormComponent
    * @internal
    */
   ngOnDestroy() {
-    this.removeDrawLineControl();
+    this.removeSliceControl();
   }
 
   onSubmit(event: FeatureFormSubmitEvent) {
@@ -109,7 +105,7 @@ export class ClientSchemaElementSurfaceSplitFormComponent
   }
 
   private onSubmitSuccess(element: ClientSchemaElementSurface) {
-    // this.transaction.split(this.element, element, this.store, {
+    // this.transaction.slice(this.element, element, this.store, {
     //   title: generateOperationTitle(element)
     // });
     this.complete.emit();
@@ -122,61 +118,56 @@ export class ClientSchemaElementSurfaceSplitFormComponent
   /**
    * Create a draw line control
    */
-  private createDrawLineControl() {
-    this.drawLineControl = new DrawControl({
-      geometryType: 'LineString',
-      source: new OlVectorSource(),
-      // drawStyle: createMeasureInteractionStyle(),
-      // layerStyle: createMeasureLayerStyle()
-    });
+  private createSliceControl() {
+    this.sliceControl = new SliceControl({});
   }
 
   /**
    * Activate a given control
    * @param drawControl Draw control
    */
-  private activateDrawLineControl() {
-    this.drawLineEnd$ = this.drawLineControl.end$
-      .subscribe((olGeometry: OlLineString) => this.onDrawLineEnd(olGeometry));
-    this.drawLineControl.setMap(this.map.ol);
+  private activateSliceControl() {
+    this.sliceEnd$$ = this.sliceControl.end$
+      .subscribe((olPolygons: OlPolygon[]) => this.onSliceEnd(olPolygons));
+
+    const olGeometry = new OlGeoJSON().readGeometry(this.element.geometry, {
+      dataProjection: this.element.projection,
+      featureProjection: this.map.projection
+    });
+    this.sliceControl.setOlGeometry(olGeometry);
+    this.sliceControl.setOlMap(this.map.ol);
   }
 
   /**
    * Deactivate the active draw control
    */
-  private deactivateDrawLineControl() {
-    this.drawLineEnd$.unsubscribe();
-    this.drawLineControl.setMap(undefined);
+  private deactivateSliceControl() {
+    this.sliceEnd$$.unsubscribe();
+    this.sliceControl.setOlMap(undefined);
   }
 
   /**
    * Remove draw line control
    */
-  private removeDrawLineControl() {
-    this.deactivateDrawLineControl();
-    this.drawLineControl.getSource().clear();
+  private removeSliceControl() {
+    this.deactivateSliceControl();
+    this.sliceControl.getSource().clear();
   }
 
   /**
    * Clear the draw source and track the geometry being draw
    * @param olGeometry Ol linestring or polygon
    */
-  private onDrawLineEnd(olGeometry:  OlLineString) {
+  private onSliceEnd(olPolygons: OlPolygon[]) {
     const element = this.element;
     const olGeoJSON = new OlGeoJSON();
-    const olSourceGeometry = olGeoJSON.readGeometry(element.geometry, {
-      dataProjection: element.projection,
-      featureProjection: this.map.projection
-    });
-
-    const olGeometries = splitOlGeometry(olSourceGeometry, olGeometry);
 
     const meta1 = Object.assign({}, element.meta, {
       id: uuid()
     });
     const element1 = Object.assign({}, element, {
       meta: meta1,
-      geometry: olGeoJSON.writeGeometryObject(olGeometries[0], {
+      geometry: olGeoJSON.writeGeometryObject(olPolygons[0], {
         featureProjection: this.map.projection,
         dataProjection: element.projection
       })
@@ -187,7 +178,7 @@ export class ClientSchemaElementSurfaceSplitFormComponent
     });
     const element2 = Object.assign({}, element, {
       meta: meta2,
-      geometry: olGeoJSON.writeGeometryObject(olGeometries[1], {
+      geometry: olGeoJSON.writeGeometryObject(olPolygons[1], {
         featureProjection: this.map.projection,
         dataProjection: element.projection
       })
@@ -202,7 +193,7 @@ export class ClientSchemaElementSurfaceSplitFormComponent
     this.transaction.insert(element2, this.store, {
       title: generateOperationTitle(element2)
     });
-    this.deactivateDrawLineControl();
+    this.deactivateSliceControl();
   }
 
 }

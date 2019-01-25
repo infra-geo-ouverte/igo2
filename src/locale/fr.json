@@ -27,6 +27,7 @@
     "hectares": "Hectares",
     "acres": "Acres",
     "toggleMeasure": "Mesurage",
+    "toggleMapTooltips": "Mesures sur la carte",
     "toggleAutoUnits": "Unités automatiques"
   },
 
@@ -125,8 +126,8 @@
       "update.tooltip": "Modifier un élément",
       "delete": "Supprimer",
       "delete.tooltip": "Supprimer un élément",
-      "split": "Séparer un élément",
-      "split.tooltip": "Séparer un élément",
+      "slice": "Séparer un élément",
+      "slice.tooltip": "Séparer un élément",
       "move": "Déplacer",
       "move.tooltip": "Déplacer un élément",
       "save": "Sauvegarder",

@@ -14,7 +14,7 @@ import {
   ClientSchemaElementSaverWidget,
   ClientSchemaElementSurfaceCreateWidget,
   ClientSchemaElementSurfaceUpdateWidget,
-  ClientSchemaElementSurfaceSplitWidget
+  ClientSchemaElementSurfaceSliceWidget
 } from './client-schema-element.widgets';
 import { generateOperationTitle } from './client-schema-element.utils';
 
@@ -32,7 +32,7 @@ export class ClientSchemaElementSurfaceEditorService extends Editor {
     @Inject(ClientSchemaElementSaverWidget) private clientSchemaElementSaverWidget: Widget,
     @Inject(ClientSchemaElementSurfaceCreateWidget) private clientSchemaElementSurfaceCreateWidget: Widget,
     @Inject(ClientSchemaElementSurfaceUpdateWidget) private clientSchemaElementSurfaceUpdateWidget: Widget,
-    @Inject(ClientSchemaElementSurfaceSplitWidget) private clientSchemaElementSurfaceSplitWidget: Widget
+    @Inject(ClientSchemaElementSurfaceSliceWidget) private clientSchemaElementSurfaceSliceWidget: Widget
   ) {
     super({
       id: 'fadq.client-schema-element-surface-editor',
@@ -120,11 +120,11 @@ export class ClientSchemaElementSurfaceEditorService extends Editor {
         conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
       },
       {
-        id: 'split',
+        id: 'slice',
         icon: 'flip',
-        title: 'client.schemaElement.split',
-        tooltip: 'client.schemaElement.split.tooltip',
-        handler: () => this.activateWidget(this.clientSchemaElementSurfaceSplitWidget, {
+        title: 'client.schemaElement.slice',
+        tooltip: 'client.schemaElement.slice.tooltip',
+        handler: () => this.activateWidget(this.clientSchemaElementSurfaceSliceWidget, {
           schema: this.schema,
           map: this.map,
           element: this.entity,

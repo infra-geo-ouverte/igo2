@@ -14,8 +14,8 @@ import {
   ClientSchemaElementSurfaceUpdateFormComponent
 } from '../schema-element-surface-update-form/client-schema-element-surface-update-form.component';
 import {
-  ClientSchemaElementSurfaceSplitFormComponent
-} from '../schema-element-surface-split-form/client-schema-element-surface-split-form.component';
+  ClientSchemaElementSurfaceSliceFormComponent
+} from '../schema-element-surface-slice-form/client-schema-element-surface-slice-form.component';
 
 export const ClientSchemaElementSaverWidget =
   new InjectionToken<Widget>('ClientSchemaElementSaverWidget');
@@ -23,8 +23,8 @@ export const ClientSchemaElementSurfaceCreateWidget =
   new InjectionToken<Widget>('ClientSchemaElementSurfaceCreateWidget');
 export const ClientSchemaElementSurfaceUpdateWidget =
   new InjectionToken<Widget>('ClientSchemaElementSurfaceUpdateWidget');
-export const ClientSchemaElementSurfaceSplitWidget =
-  new InjectionToken<Widget>('ClientSchemaElementSurfaceSplitWidget');
+export const ClientSchemaElementSurfaceSliceWidget =
+  new InjectionToken<Widget>('ClientSchemaElementSurfaceSliceWidget');
 
 export function clientSchemaElementSaverWidgetFactory(widgetService: WidgetService) {
   return widgetService.create(ClientSchemaElementSaverComponent);
@@ -62,14 +62,14 @@ export function provideClientSchemaElementSurfaceUpdateWidget() {
   };
 }
 
-export function clientSchemaElementSurfaceSplitWidgetFactory(widgetService: WidgetService) {
-  return widgetService.create(ClientSchemaElementSurfaceSplitFormComponent);
+export function clientSchemaElementSurfaceSliceWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementSurfaceSliceFormComponent);
 }
 
-export function provideClientSchemaElementSurfaceSplitWidget() {
+export function provideClientSchemaElementSurfaceSliceWidget() {
   return {
-    provide:  ClientSchemaElementSurfaceSplitWidget,
-    useFactory: clientSchemaElementSurfaceSplitWidgetFactory,
+    provide:  ClientSchemaElementSurfaceSliceWidget,
+    useFactory: clientSchemaElementSurfaceSliceWidgetFactory,
     deps: [WidgetService]
   };
 }

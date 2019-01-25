@@ -187,12 +187,12 @@ import OlLineString from 'ol/geom/LineString';
 import OlPolygon from 'ol/geom/Polygon';
 
 /**
- * Split geometry into two
+ * Slice geometry into two
  * @param olFeature OL feature
  */
-export function splitOlGeometry(
+export function sliceOlGeometry(
   olGeometry: OlLineString | OlPolygon,
-  olSplitter: OlLineString
+  olSlicer: OlLineString
 ): [OlLineString | OlPolygon,  OlLineString | OlPolygon] {
   return [olGeometry, olGeometry.clone()];
 }

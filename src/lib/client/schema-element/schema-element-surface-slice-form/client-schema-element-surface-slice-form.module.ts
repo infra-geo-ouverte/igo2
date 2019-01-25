@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FadqLibFeatureFormModule } from 'src/lib/feature/feature-form/feature-form.module';
 
 import {
-  ClientSchemaElementSurfaceSplitFormComponent
-} from './client-schema-element-surface-split-form.component';
+  ClientSchemaElementSurfaceSliceFormComponent
+} from './client-schema-element-surface-slice-form.component';
 
 /**
  * @ignore
@@ -16,13 +16,13 @@ import {
     FadqLibFeatureFormModule
   ],
   exports: [
-    ClientSchemaElementSurfaceSplitFormComponent
+    ClientSchemaElementSurfaceSliceFormComponent
   ],
   declarations: [
-    ClientSchemaElementSurfaceSplitFormComponent
+    ClientSchemaElementSurfaceSliceFormComponent
   ],
   entryComponents: [
-    ClientSchemaElementSurfaceSplitFormComponent
+    ClientSchemaElementSurfaceSliceFormComponent
   ]
 })
-export class FadqLibClientSchemaElementSurfaceSplitFormModule {}
+export class FadqLibClientSchemaElementSurfaceSliceFormModule {}

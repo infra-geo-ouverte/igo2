@@ -3,11 +3,32 @@ import OlPolygon from 'ol/geom/Polygon';
 
 /**
  * Split geometry into two
- * @param olFeature OL feature
+ * @param olGeometry OL feature
  */
-export function splitOlGeometry(
+export function sliceOlGeometry(
   olGeometry: OlLineString | OlPolygon,
-  olSplitter: OlLineString
-): [OlLineString | OlPolygon,  OlLineString | OlPolygon] {
-  return [olGeometry, olGeometry.clone()];
+  olSlicer: OlLineString
+): Array<OlLineString | OlPolygon> {
+  if (olGeometry instanceof OlPolygon) {
+    return sliceOlPolygon(olGeometry, olSlicer);
+  } else if (olGeometry instanceof OlLineString) {
+    return sliceOlLineString(olGeometry, olSlicer);
+  }
+  return [];
+}
+
+/**
+ * Slice OL LineString into one or more polygons
+ * @param olLineString OL polygon
+ */
+export function sliceOlLineString(olLineString: OlLineString, olSlicer: OlLineString): OlLineString[] {
+  return [];
+}
+
+/**
+ * Slice OL Polygon into one or more polygons
+ * @param olPolygon OL polygon
+ */
+export function sliceOlPolygon(olPolygon: OlPolygon, olSlicer: OlLineString): OlPolygon[] {
+  return [];
 }
