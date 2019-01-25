@@ -78,7 +78,7 @@ export class DrawControl {
    * Add or remove this control to/from a map.
    * @param map OL Map
    */
-  setMap(olMap: OlMap | undefined) {
+  setOlMap(olMap: OlMap | undefined) {
     if (olMap === undefined) {
       this.clearOlInnerOverlaySource();
       this.removeOlInnerOverlayLayer();

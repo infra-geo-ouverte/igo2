@@ -20,6 +20,13 @@
       {{'measure.toggleMeasure' | translate}}
     </mat-slide-toggle>
 
+    <!--mat-slide-toggle
+      [checked]="mapTooltips"
+      [labelPosition]="'before'"
+      (change)="onToggleMapTooltips($event.checked)">
+      {{'measure.toggleMapTooltips' | translate}}
+    </mat-slide-toggle-->
+
     <mat-slide-toggle
       [checked]="measureUnitsAuto"
       [labelPosition]="'before'"

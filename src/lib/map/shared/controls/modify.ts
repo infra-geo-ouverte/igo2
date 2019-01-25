@@ -74,7 +74,7 @@ export class ModifyControl {
    * Add or remove this control to/from a map.
    * @param map OL Map
    */
-  setMap(olMap: OlMap | undefined) {
+  setOlMap(olMap: OlMap | undefined) {
     if (olMap === undefined) {
       this.clearOlInnerOverlaySource();
       this.removeOlInnerOverlayLayer();
@@ -101,7 +101,7 @@ export class ModifyControl {
    * Add an OL geometry to the overlay and start modifying it
    * @param olGeometry Ol Geometry
    */
-  setGeometry(olGeometry: OlGeometry) {
+  setOlGeometry(olGeometry: OlGeometry) {
     const olFeature = new OlFeature({geometry: olGeometry});
     this.olOverlaySource.clear();
     this.olOverlaySource.addFeature(olFeature);

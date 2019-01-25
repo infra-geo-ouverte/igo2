@@ -341,7 +341,7 @@ export class EntityFormFieldGeometryInputComponent
     this.activeControl = control;
     this.olGeometry$ = control.end$
       .subscribe((olGeometry: OlGeometry) => this.setOlGeometry(olGeometry));
-    control.setMap(this.map.ol);
+    control.setOlMap(this.map.ol);
   }
 
   /**
@@ -349,7 +349,7 @@ export class EntityFormFieldGeometryInputComponent
    */
   private deactivateControl() {
     if (this.activeControl !== undefined) {
-      this.activeControl.setMap(undefined);
+      this.activeControl.setOlMap(undefined);
     }
     if (this.olGeometry$ !== undefined) {
       this.olGeometry$.unsubscribe();

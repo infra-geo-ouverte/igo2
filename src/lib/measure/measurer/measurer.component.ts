@@ -211,6 +211,20 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * Activate or deactivate the current draw control
    * @internal
    */
+  onToggleMapTooltips(toggle: boolean) {
+    if (toggle === true) {
+      this.showTooltipsOfOlSource(this.drawLineControl.getSource());
+      this.showTooltipsOfOlSource(this.drawPolygonControl.getSource());
+    } else {
+      this.clearTooltipsOfOlSource(this.drawLineControl.getSource());
+      this.clearTooltipsOfOlSource(this.drawPolygonControl.getSource());
+    }
+  }
+
+  /**
+   * Activate or deactivate the current draw control
+   * @internal
+   */
   onToggleMeasureUnitsAuto(toggle: boolean) {
     this.measureUnitsAuto = toggle;
   }
@@ -274,7 +288,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
       .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawEnd(olGeometry));
     this.drawChanges$ = drawControl.changes$
       .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawChanges(olGeometry));
-    drawControl.setMap(this.map.ol);
+    drawControl.setOlMap(this.map.ol);
     this.showTooltipsOfOlSource(drawControl.getSource());
   }
 
@@ -293,7 +307,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     if (this.activeOlGeometry !== undefined) {
       this.clearTooltipsOfOlGeometry(this.activeOlGeometry);
     }
-    this.activeDrawControl.setMap(undefined);
+    this.activeDrawControl.setOlMap(undefined);
     this.activeDrawControl = undefined;
     this.activeOlGeometry = undefined;
   }
@@ -401,6 +415,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
 
   /**
    * Clear the map tooltips
+   * @param olDrawSource OL vector source
    */
   private clearTooltipsOfOlSource(olDrawSource: OlVectorSource) {
     olDrawSource.forEachFeature((olFeature: OlFeature) => {
@@ -411,6 +426,10 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Clear the tooltips of an OL geometrys
+   * @param olGeometry OL geometry with tooltips
+   */
   private clearTooltipsOfOlGeometry(olGeometry: OlLineString | OlPolygon) {
     const olTooltips = getOlTooltipsAtMidpoints(olGeometry);
     olTooltips.forEach((olTooltip: OlOverlay | undefined) => {
