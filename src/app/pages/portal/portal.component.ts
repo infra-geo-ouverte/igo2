@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { MediaService } from '@igo2/core';
+import { MediaService, ConfigService } from '@igo2/core';
 import { AuthService } from '@igo2/auth';
 import { Context, ContextService, ToolService } from '@igo2/context';
 import {
@@ -53,6 +53,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public sidenavOpened = false;
   public toastOpened = false;
   public toastShown = false;
+  public sidenavTitle;
 
   // True after the initial context is loaded
   private contextLoaded = false;
@@ -61,6 +62,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private configService: ConfigService,
     public authService: AuthService,
     public featureService: FeatureService,
     public mediaService: MediaService,
@@ -76,6 +78,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window['IGO'] = this;
+
+    this.sidenavTitle = this.configService.getConfig('sidenavTitle');
 
     this.authService.authenticate$.subscribe(
       () => (this.contextLoaded = false)
@@ -182,7 +186,10 @@ export class PortalComponent implements OnInit, OnDestroy {
             features[0].source !== 'ICherche Québec')
         ) {
           this.featureService.selectFeature(features[0]);
-          this.overlayService.setFeatures([features[0]], OverlayAction.ZoomIfOutMapExtent);
+          this.overlayService.setFeatures(
+            [features[0]],
+            OverlayAction.ZoomIfOutMapExtent
+          );
           this.toastShown = true;
           return;
         }

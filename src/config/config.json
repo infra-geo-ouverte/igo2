@@ -1,28 +1,29 @@
 {
   "searchSources": {
-      "nominatim": {
-        "enabled": false
-      },
-      "icherche": {
-        "enabled": true,
-        "searchUrl": "https://geoegl.msp.gouv.qc.ca/icherche/geocode",
-        "locateUrl": "https://geoegl.msp.gouv.qc.ca/icherche/xy",
-        "zoomMaxOnSelect": 24
-      },
-      "reseautq": {
-        "enabled": false,
-        "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-        "locateUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-        "zoomMaxOnSelect": 7
-      },
-      "datasource": {
-        "enabled": false
-      }
+    "nominatim": {
+      "enabled": false
     },
-    "routingSources": {
-      "osrm": {
-        "enabled": true
-      }
+    "icherche": {
+      "enabled": true,
+      "searchUrl": "https://geoegl.msp.gouv.qc.ca/icherche/geocode",
+      "locateUrl": "https://geoegl.msp.gouv.qc.ca/icherche/xy",
+      "zoomMaxOnSelect": 24
+    },
+    "reseautq": {
+      "enabled": false,
+      "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+      "locateUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+      "zoomMaxOnSelect": 7
+    },
+    "datasource": {
+      "enabled": false
     }
-  }
-  
+  },
+  "routingSources": {
+    "osrm": {
+      "enabled": true
+    }
+  },
+  "sidenavTitle": "IGO",
+  "theme": "blue-theme"
+}
