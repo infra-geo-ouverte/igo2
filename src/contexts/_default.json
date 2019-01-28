@@ -11,6 +11,8 @@
   "layers": [
     {
       "title": "OSM",
+      "baseLayer": true,
+      "visible": true,
       "sourceOptions": {
         "type": "osm"
       }
@@ -50,7 +52,15 @@
     {
       "name": "mapDetails",
       "options": {
-        "toggleLegendOnVisibilityChange": false
+        "toggleLegendOnVisibilityChange": false,
+        "layerListControls": {
+          "showToolbar": "always",
+          "excludeBaseLayers": false,
+          "keyword": "",
+          "sortedAlpha": false,
+          "onlyVisible": false,
+          "onlyInRange": false
+        }
       }
     },
     {

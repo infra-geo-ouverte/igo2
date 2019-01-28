@@ -12,6 +12,8 @@
   "layers": [
     {
       "title": "MSP Base Map",
+      "baseLayer": true,
+      "visible": true,
       "sourceOptions": {
         "type": "xyz",
         "url":
@@ -57,7 +59,10 @@
     {
       "name": "mapDetails",
       "options": {
-        "toggleLegendOnVisibilityChange": false
+        "toggleLegendOnVisibilityChange": false,
+        "layerListControls": {
+          "excludeBaseLayers": false
+        }
       }
     },
     {

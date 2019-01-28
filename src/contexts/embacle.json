@@ -150,8 +150,11 @@
       "name": "mapDetails",
       "options": {
         "toggleLegendOnVisibilityChange": false,
-        "excludeBaseLayers": false,
-        "ogcFiltersInLayers": true
+        "ogcFiltersInLayers": true,
+        "layerListControls": {
+          "showToolbar": "never",
+          "excludeBaseLayers": false
+        }
       }
     },
     {
