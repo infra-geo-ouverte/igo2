@@ -1,0 +1,31 @@
+@import '~@igo2/core/style/all.theming';
+
+.blue-theme {
+  @import '~@igo2/core/style/themes/blue.theme';
+  @include igo-all-theming($theme);
+}
+
+.indigo-theme {
+  @import '~@igo2/core/style/themes/indigo.theme';
+  @include igo-all-theming($theme);
+}
+
+.deeppurple-theme {
+  @import '~@igo2/core/style/themes/deeppurple.theme';
+  @include igo-all-theming($theme);
+}
+
+.orange-theme {
+  @import '~@igo2/core/style/themes/orange.theme';
+  @include igo-all-theming($theme);
+}
+
+.bluegrey-theme {
+  @import '~@igo2/core/style/themes/bluegrey.theme';
+  @include igo-all-theming($theme);
+}
+
+.dark-theme {
+  @import '~@igo2/core/style/themes/dark.theme';
+  @include igo-all-theming($theme);
+}
