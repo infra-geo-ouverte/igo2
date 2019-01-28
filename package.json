@@ -69,6 +69,7 @@
     "jspdf": "^1.4.1",
     "jszip": "^3.1.5",
     "moment": "^2.22.2",
+    "ngx-cacheable": "^1.0.7",
     "stream": "^0.0.2",
     "zone.js": "^0.8.26"
   },
