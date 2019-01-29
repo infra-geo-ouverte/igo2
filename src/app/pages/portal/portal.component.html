@@ -22,8 +22,8 @@
   </button>
 
   <fadq-search-bar
-    [store]="searchStore"
-    (change)="onSearchTermChange($event)">
+    (change)="onSearchTermChange($event)"
+    (search)="onSearch($event)">
   </fadq-search-bar>
 
   <fadq-sidenav
@@ -33,7 +33,8 @@
   </fadq-sidenav>
 
   <igo-map-browser
-    igoQuery
+    fadqQueryable
+    [waitForAllQueries]="true"
     igoMapContext
     igoLayerContext
     igoDropGeoFile

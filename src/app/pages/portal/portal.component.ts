@@ -3,8 +3,10 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+
+import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 
 import { Media, MediaService, MediaOrientation, ActivityService } from '@igo2/core';
 import {
@@ -13,6 +15,7 @@ import {
   Tool,
   ToolService
 } from '@igo2/context';
+import { Feature as IgoFeature } from '@igo2/geo';
 
 import { ActionbarMode } from 'src/lib/action';
 import {
@@ -28,12 +31,14 @@ import {
   Feature
 } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
-import { SearchResult } from 'src/lib/search';
+import { Research, SearchResult, SearchSource, SearchSourceService } from 'src/lib/search';
 
 import { ClientState } from 'src/app/modules/client/client.state';
 import { EditionState } from 'src/app/modules/edition/edition.state';
 import { MapState } from 'src/app/modules/map/map.state';
 import { SearchState } from 'src/app/modules/search/search.state';
+
+import { MapSearchSource } from 'src/app/modules/search/shared/sources';
 
 import {
   controlSlideX,
@@ -41,6 +46,7 @@ import {
   mapSlideX,
   mapSlideY
 } from './portal.animation';
+import { igoFeatureToSearchResult } from '../../../lib/search/shared/search.utils';
 
 @Component({
   selector: 'app-portal',
@@ -148,6 +154,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
   private _toastPanelOpened = false;
 
+  get mapSearchSource(): SearchSource {
+    return this.searchSourceService
+      .getSources()
+      .find((searchSource: SearchSource) => searchSource instanceof MapSearchSource);
+  }
+
   constructor(
     private mapState: MapState,
     private clientState: ClientState,
@@ -156,7 +168,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private mediaService: MediaService,
     private searchState: SearchState,
     private toolService: ToolService,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private searchSourceService: SearchSourceService
   ) {}
 
   ngOnInit() {
@@ -169,9 +182,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     this.context$$ = this.contextService.context$
       .subscribe((context: DetailedContext) => this.onChangeContext(context));
-
-    this.searchResults$$ = this.searchStore.entities$
-      .subscribe((results: SearchResult[]) => this.onSearch(results));
 
     this.focusedSearchResult$$ = this.searchStore
       .observeFirstBy((result: SearchResult, state: State) => state.focused === true)
@@ -198,14 +208,28 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.toggleSidenav();
   }
 
-  onMapQuery(results: SearchResult[]) {
-    // const features: Feature[] = results.features;
-    // if (features.length > 0) {
-    //   this.featureService.updateFeatures(features, features[0].source);
-    // }
+  onMapQuery(event: {features: IgoFeature[], event: OlMapBrowserPointerEvent}) {
+    const results = event.features.map((igoFeature: IgoFeature) => {
+      igoFeature.geometry = undefined;
+      igoFeature.extent = undefined;
+      return igoFeatureToSearchResult(igoFeature, this.mapSearchSource);
+    });
+    const research = {
+      request: of(results),
+      reverse: false,
+      source: this.mapSearchSource
+    };
+    research.request.subscribe((_results: SearchResult<Feature>[]) => {
+      this.onSearch({research, results: _results});
+    });
   }
 
-  onSearchTermChange(term: string) {
+  onSearchTermChange(term?: string) {
+    if (term === undefined || term === '') {
+      this.onClearSearch();
+      return;
+    }
+
     if (this.searchState.searchTypes.indexOf(CLIENT) >= 0) {
       this.onBeforeSearchClient();
     } else {
@@ -270,18 +294,26 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openSidenav();
   }
 
-  private onSearch(results: SearchResult[]) {
+  private onSearch(event: {research: Research, results: SearchResult[]}) {
+    const results = event.results;
     if (results.length === 0) {
-      this.onClearSearch();
+      this.onSearchWithNoResults();
       return;
     }
 
-    const searchClient = results.some((result: SearchResult) => {
-      return result.meta.dataType === CLIENT;
-    });
+    const newResults = this.searchStore.entities
+      .filter((result: SearchResult) => result.source !== event.research.source)
+      .concat(results.filter((result: SearchResult) => result.meta.dataType !== CLIENT));
+    this.searchStore.setEntities(newResults, true);
 
-    if (searchClient) {
-      this.onSearchClient(results[0].data as Client);
+    const clientResult = results.find((result: SearchResult) => result.meta.dataType === CLIENT);
+    if (clientResult !== undefined) {
+      this.onSearchClient(clientResult as SearchResult<Client>);
+    }
+
+    const mapResults = results.filter((result: SearchResult) => result.source === this.mapSearchSource);
+    if (mapResults.length > 0) {
+      this.onSearchMap(mapResults as SearchResult<Feature>[]);
     }
   }
 
@@ -300,8 +332,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openSidenav();
   }
 
-  private onSearchClient(client: Client) {
+  private onSearchClient(result: SearchResult<Client>) {
     this.editionState.setEditor(this.clientState.parcelEditor);
+  }
+
+  private onSearchMap(results: SearchResult<Feature>[]) {
+    if (results.length > 0) {
+      this.onBeforeSearch();
+      this.searchStore.updateEntityState(results[0], {selected: true}, true);
+    }
   }
 
   private onFocusSearchResult(result: SearchResult) {
@@ -321,9 +360,14 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private onClearSearch() {
+  private onSearchWithNoResults() {
+    this.searchStore.clear();
     this.feature = undefined;
     this.closeToastPanel();
+  }
+
+  private onClearSearch() {
+    this.onSearchWithNoResults();
     this.clientState.clearClient();
   }
 

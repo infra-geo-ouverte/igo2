@@ -228,6 +228,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
    * @param term Search term
    */
   private onTermChange(term: string | undefined) {
+    this.change.emit(term);
+
     if (term === undefined || term === '') {
       if (this.store !== undefined) {
         this.store.clear();
@@ -235,7 +237,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.change.emit(term);
     if (this.store !== undefined) {
       this.store.clear(true);
     }

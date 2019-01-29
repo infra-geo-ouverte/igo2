@@ -90,7 +90,9 @@
           "version": "1.1.1",
           "layers": "SMDVSP_STAT_METE_ASSU_AN_COUR",
           "srs": "EPSG:32198"
-        }
+        },
+        "queryFormat": "html",
+        "queryHtmlTarget": "innerhtml"
       }
     },
     {
@@ -108,7 +110,9 @@
           "version": "1.1.1",
           "layers": "SMDVSP_STAT_METE_ASSU_AN_PREC",
           "srs": "EPSG:32198"
-        }
+        },
+        "queryFormat": "html",
+        "queryHtmlTarget": "innerhtml"
       }
     },
     {
@@ -144,7 +148,8 @@
           "version": "1.1.1",
           "layers": "SDA_MUNIC_S",
           "srs": "EPSG:32198"
-        }
+        },
+        "queryable": false
       }
     },
     {

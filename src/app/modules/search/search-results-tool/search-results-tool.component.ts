@@ -73,6 +73,11 @@ export class SearchResultsToolComponent {
       return undefined;
     }
     const feature = (result as SearchResult<Feature>).data;
+
+    // Somethimes features have no geometry. It happens with some GetFeatureInfo
+    if (feature.geometry === undefined) {
+      return;
+    }
     this.map.overlay.setFeatures([feature], FeatureMotion.Default);
   }
 

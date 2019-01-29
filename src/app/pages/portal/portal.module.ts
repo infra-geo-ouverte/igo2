@@ -47,6 +47,8 @@ import { FadqExpansionPanelModule } from './expansion-panel/expansion-panel.modu
 import { FadqToastPanelModule } from './toast-panel/toast-panel.module';
 import { FadqSidenavModule } from './sidenav/sidenav.module';
 
+import { FadqLibQueryModule } from 'src/lib/query/query.module';
+
 import { PortalComponent } from './portal.component';
 
 // TODO: Clean this up
@@ -91,7 +93,9 @@ import { PortalComponent } from './portal.component';
     FadqMapModule,
     FadqSearchModule,
     FadqWidgetModule,
-    FadqActionModule
+    FadqActionModule,
+
+    FadqLibQueryModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]
