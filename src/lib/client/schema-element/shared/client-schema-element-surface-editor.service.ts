@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 
 import { Action } from 'src/lib/action';
 import { Editor } from 'src/lib/edition';
-import { EntityStore, EntityTransaction } from 'src/lib/entity';
+import { EntityStore, EntityTransaction, getEntityRevision } from 'src/lib/entity';
 import { FeatureStore } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { Widget } from 'src/lib/widget';
@@ -66,6 +66,11 @@ export class ClientSchemaElementSurfaceEditorService extends Editor {
     const transactionIsNotInCommitPhase = () => {
       return this.transaction !== undefined && this.transaction.isInCommitPhase === false;
     };
+    const elementCanBeFilled = () => {
+      const element = this.entity as ClientSchemaElementSurface;
+      return element.geometry.type === 'Polygon' &&
+        element.geometry.coordinates.length > 1;
+    };
 
     return [
       {
@@ -118,6 +123,35 @@ export class ClientSchemaElementSurfaceEditorService extends Editor {
           transaction: this.transaction
         }),
         conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
+      },
+      {
+        id: 'fill',
+        icon: 'select_all',
+        title: 'client.schemaElement.fill',
+        tooltip: 'client.schemaElement.fill.tooltip',
+        handler: () => {
+          const element = this.entity as AnyClientSchemaElement;
+          const newElementMeta = Object.assign({}, element.meta, {
+            revision: getEntityRevision(element) + 1
+          });
+          const newElement = Object.assign({}, element, {
+            meta: newElementMeta,
+            geometry: {
+              type: 'Polygon',
+              coordinates: [element.geometry.coordinates[0]]
+            }
+          });
+
+          this.transaction.update(element, newElement, this.entityStore, {
+            title: generateOperationTitle(element)
+          });
+        },
+        conditions: [
+          schemaIsDefined,
+          elementIsDefined,
+          transactionIsNotInCommitPhase,
+          elementCanBeFilled
+        ]
       },
       {
         id: 'slice',
