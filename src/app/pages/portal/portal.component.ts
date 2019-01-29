@@ -154,12 +154,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
   private _toastPanelOpened = false;
 
-  get mapSearchSource(): SearchSource {
-    return this.searchSourceService
-      .getSources()
-      .find((searchSource: SearchSource) => searchSource instanceof MapSearchSource);
-  }
-
   constructor(
     private mapState: MapState,
     private clientState: ClientState,
@@ -209,15 +203,16 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onMapQuery(event: {features: IgoFeature[], event: OlMapBrowserPointerEvent}) {
+    const mapSearchSource = this.getMapSearchSource();
     const results = event.features.map((igoFeature: IgoFeature) => {
       igoFeature.geometry = undefined;
       igoFeature.extent = undefined;
-      return igoFeatureToSearchResult(igoFeature, this.mapSearchSource);
+      return igoFeatureToSearchResult(igoFeature, mapSearchSource);
     });
     const research = {
       request: of(results),
       reverse: false,
-      source: this.mapSearchSource
+      source: mapSearchSource
     };
     research.request.subscribe((_results: SearchResult<Feature>[]) => {
       this.onSearch({research, results: _results});
@@ -311,7 +306,8 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.onSearchClient(clientResult as SearchResult<Client>);
     }
 
-    const mapResults = results.filter((result: SearchResult) => result.source === this.mapSearchSource);
+    const mapSearchSource = this.getMapSearchSource();
+    const mapResults = results.filter((result: SearchResult) => result.source === mapSearchSource);
     if (mapResults.length > 0) {
       this.onSearchMap(mapResults as SearchResult<Feature>[]);
     }
@@ -373,6 +369,12 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onSelectEditor(editor: Editor) {
     this.editor = editor;
+  }
+
+  private getMapSearchSource(): SearchSource {
+    return this.searchSourceService
+      .getSources()
+      .find((searchSource: SearchSource) => searchSource instanceof MapSearchSource);
   }
 
 }
