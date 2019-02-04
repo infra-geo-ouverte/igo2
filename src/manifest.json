@@ -1,0 +1,21 @@
+{
+  "short_name": "IGO2 - Données Québec",
+  "name": "IGO2",
+  "icons": [
+    {
+      "src": "/assets/igo2/core/logo.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/assets/igo2/core/logo.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#3367D6"
+}
