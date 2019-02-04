@@ -7,8 +7,8 @@ import { IgoLanguageModule } from '@igo2/core';
 import { FadqLibFeatureFormModule } from 'src/lib/feature/feature-form/feature-form.module';
 
 import {
-  ClientSchemaElementSurfaceCreateFormComponent
-} from './client-schema-element-surface-create-form.component';
+  ClientSchemaElementCreateFormComponent
+} from './client-schema-element-create-form.component';
 
 /**
  * @ignore
@@ -22,13 +22,13 @@ import {
     FadqLibFeatureFormModule
   ],
   exports: [
-    ClientSchemaElementSurfaceCreateFormComponent
+    ClientSchemaElementCreateFormComponent
   ],
   declarations: [
-    ClientSchemaElementSurfaceCreateFormComponent
+    ClientSchemaElementCreateFormComponent
   ],
   entryComponents: [
-    ClientSchemaElementSurfaceCreateFormComponent
+    ClientSchemaElementCreateFormComponent
   ]
 })
-export class FadqLibClientSchemaElementSurfaceCreateFormModule {}
+export class FadqLibClientSchemaElementCreateFormModule {}

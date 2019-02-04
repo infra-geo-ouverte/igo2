@@ -8,23 +8,23 @@ import {
   ClientSchemaElementSaverComponent
 } from '../schema-element-saver/client-schema-element-saver.component';
 import {
-  ClientSchemaElementSurfaceCreateFormComponent
-} from '../schema-element-surface-create-form/client-schema-element-surface-create-form.component';
+  ClientSchemaElementCreateFormComponent
+} from '../schema-element-create-form/client-schema-element-create-form.component';
 import {
-  ClientSchemaElementSurfaceUpdateFormComponent
-} from '../schema-element-surface-update-form/client-schema-element-surface-update-form.component';
+  ClientSchemaElementUpdateFormComponent
+} from '../schema-element-update-form/client-schema-element-update-form.component';
 import {
-  ClientSchemaElementSurfaceSliceFormComponent
-} from '../schema-element-surface-slice-form/client-schema-element-surface-slice-form.component';
+  ClientSchemaElementSliceFormComponent
+} from '../schema-element-slice-form/client-schema-element-slice-form.component';
 
 export const ClientSchemaElementSaverWidget =
   new InjectionToken<Widget>('ClientSchemaElementSaverWidget');
-export const ClientSchemaElementSurfaceCreateWidget =
-  new InjectionToken<Widget>('ClientSchemaElementSurfaceCreateWidget');
-export const ClientSchemaElementSurfaceUpdateWidget =
-  new InjectionToken<Widget>('ClientSchemaElementSurfaceUpdateWidget');
-export const ClientSchemaElementSurfaceSliceWidget =
-  new InjectionToken<Widget>('ClientSchemaElementSurfaceSliceWidget');
+export const ClientSchemaElementCreateWidget =
+  new InjectionToken<Widget>('ClientSchemaElementCreateWidget');
+export const ClientSchemaElementUpdateWidget =
+  new InjectionToken<Widget>('ClientSchemaElementUpdateWidget');
+export const ClientSchemaElementSliceWidget =
+  new InjectionToken<Widget>('ClientSchemaElementSliceWidget');
 
 export function clientSchemaElementSaverWidgetFactory(widgetService: WidgetService) {
   return widgetService.create(ClientSchemaElementSaverComponent);
@@ -38,38 +38,38 @@ export function provideClientSchemaElementSaverWidget() {
   };
 }
 
-export function clientSchemaElementSurfaceCreateWidgetFactory(widgetService: WidgetService) {
-  return widgetService.create(ClientSchemaElementSurfaceCreateFormComponent);
+export function clientSchemaElementCreateWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementCreateFormComponent);
 }
 
-export function provideClientSchemaElementSurfaceCreateWidget() {
+export function provideClientSchemaElementCreateWidget() {
   return {
-    provide:  ClientSchemaElementSurfaceCreateWidget,
-    useFactory: clientSchemaElementSurfaceCreateWidgetFactory,
+    provide:  ClientSchemaElementCreateWidget,
+    useFactory: clientSchemaElementCreateWidgetFactory,
     deps: [WidgetService]
   };
 }
 
-export function clientSchemaElementSurfaceUpdateWidgetFactory(widgetService: WidgetService) {
-  return widgetService.create(ClientSchemaElementSurfaceUpdateFormComponent);
+export function clientSchemaElementUpdateWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementUpdateFormComponent);
 }
 
-export function provideClientSchemaElementSurfaceUpdateWidget() {
+export function provideClientSchemaElementUpdateWidget() {
   return {
-    provide:  ClientSchemaElementSurfaceUpdateWidget,
-    useFactory: clientSchemaElementSurfaceUpdateWidgetFactory,
+    provide:  ClientSchemaElementUpdateWidget,
+    useFactory: clientSchemaElementUpdateWidgetFactory,
     deps: [WidgetService]
   };
 }
 
-export function clientSchemaElementSurfaceSliceWidgetFactory(widgetService: WidgetService) {
-  return widgetService.create(ClientSchemaElementSurfaceSliceFormComponent);
+export function clientSchemaElementSliceWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementSliceFormComponent);
 }
 
-export function provideClientSchemaElementSurfaceSliceWidget() {
+export function provideClientSchemaElementSliceWidget() {
   return {
-    provide:  ClientSchemaElementSurfaceSliceWidget,
-    useFactory: clientSchemaElementSurfaceSliceWidgetFactory,
+    provide:  ClientSchemaElementSliceWidget,
+    useFactory: clientSchemaElementSliceWidgetFactory,
     deps: [WidgetService]
   };
 }

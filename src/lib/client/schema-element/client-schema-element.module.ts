@@ -5,14 +5,14 @@ import {
   FadqLibClientSchemaElementSaverModule
 } from './schema-element-saver/client-schema-element-saver.module';
 import {
-  FadqLibClientSchemaElementSurfaceCreateFormModule
-} from './schema-element-surface-create-form/client-schema-element-surface-create-form.module';
+  FadqLibClientSchemaElementCreateFormModule
+} from './schema-element-create-form/client-schema-element-create-form.module';
 import {
-  FadqLibClientSchemaElementSurfaceUpdateFormModule
-} from './schema-element-surface-update-form/client-schema-element-surface-update-form.module';
+  FadqLibClientSchemaElementUpdateFormModule
+} from './schema-element-update-form/client-schema-element-update-form.module';
 import {
-  FadqLibClientSchemaElementSurfaceSliceFormModule
-} from './schema-element-surface-slice-form/client-schema-element-surface-slice-form.module';
+  FadqLibClientSchemaElementSliceFormModule
+} from './schema-element-slice-form/client-schema-element-slice-form.module';
 
 import {
   provideClientSchemaElementPointService,
@@ -22,15 +22,13 @@ import {
 } from './shared/client-schema-element.providers';
 import {
   provideClientSchemaElementSaverWidget,
-  provideClientSchemaElementSurfaceCreateWidget,
-  provideClientSchemaElementSurfaceUpdateWidget,
-  provideClientSchemaElementSurfaceSliceWidget
+  provideClientSchemaElementCreateWidget,
+  provideClientSchemaElementUpdateWidget,
+  provideClientSchemaElementSliceWidget
 } from './shared/client-schema-element.widgets';
 import { ClientSchemaElementFormService } from './shared/client-schema-element-form.service';
 import { ClientSchemaElementTableService } from './shared/client-schema-element-table.service';
-import { ClientSchemaElementPointEditorService } from './shared/client-schema-element-point-editor.service';
-import { ClientSchemaElementLineEditorService } from './shared/client-schema-element-line-editor.service';
-import { ClientSchemaElementSurfaceEditorService } from './shared/client-schema-element-surface-editor.service';
+import { ClientSchemaElementEditorService } from './shared/client-schema-element-editor.service';
 
 @NgModule({
   imports: [
@@ -38,9 +36,9 @@ import { ClientSchemaElementSurfaceEditorService } from './shared/client-schema-
   ],
   exports: [
     FadqLibClientSchemaElementSaverModule,
-    FadqLibClientSchemaElementSurfaceCreateFormModule,
-    FadqLibClientSchemaElementSurfaceUpdateFormModule,
-    FadqLibClientSchemaElementSurfaceSliceFormModule
+    FadqLibClientSchemaElementCreateFormModule,
+    FadqLibClientSchemaElementUpdateFormModule,
+    FadqLibClientSchemaElementSliceFormModule
   ],
   declarations: []
 })
@@ -54,14 +52,13 @@ export class FadqLibClientSchemaElementModule {
         provideClientSchemaElementSurfaceService(),
         provideClientSchemaElementService(),
         provideClientSchemaElementSaverWidget(),
-        provideClientSchemaElementSurfaceCreateWidget(),
-        provideClientSchemaElementSurfaceUpdateWidget(),
-        provideClientSchemaElementSurfaceSliceWidget(),
+        provideClientSchemaElementCreateWidget(),
+        provideClientSchemaElementUpdateWidget(),
+        provideClientSchemaElementSliceWidget(),
         ClientSchemaElementFormService,
         ClientSchemaElementTableService,
-        ClientSchemaElementPointEditorService,
-        ClientSchemaElementLineEditorService,
-        ClientSchemaElementSurfaceEditorService
+
+        ClientSchemaElementEditorService
       ]
     };
   }

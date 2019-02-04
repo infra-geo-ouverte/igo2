@@ -9,10 +9,10 @@ import { getEntityId } from 'src/lib/entity';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
-  ClientSchemaElementLine,
-  ClientSchemaElementLineApiConfig,
-  ClientSchemaElementLineListResponse,
-  ClientSchemaElementLineListResponseItem
+  ClientSchemaElement,
+  ClientSchemaElementApiConfig,
+  ClientSchemaElementListResponse,
+  ClientSchemaElementListResponseItem
 } from './client-schema-element.interfaces';
 
 @Injectable({
@@ -23,33 +23,29 @@ export class ClientSchemaElementLineService {
   constructor(
     private http: HttpClient,
     private apiService: ApiService,
-    @Inject('clientSchemaElementLineApiConfig')
-    private apiConfig: ClientSchemaElementLineApiConfig
+    @Inject('clientSchemaElementApiConfig')
+    private apiConfig: ClientSchemaElementApiConfig
   ) {}
 
-  getElements(schema: ClientSchema): Observable<ClientSchemaElementLine[]> {
-    const url = this.apiService.buildUrl(this.apiConfig.list, {
+  getElements(schema: ClientSchema): Observable<ClientSchemaElement[]> {
+    const url = this.apiService.buildUrl(this.apiConfig.lines, {
       schemaId: getEntityId(schema)
     });
 
     return this.http
       .get(url)
       .pipe(
-        map((response: ClientSchemaElementLineListResponse) => {
+        map((response: ClientSchemaElementListResponse) => {
           return this.extractElementsFromListResponse(response);
         })
       );
   }
 
-  private extractElementsFromListResponse(
-    response: ClientSchemaElementLineListResponse
-  ): ClientSchemaElementLine[] {
+  private extractElementsFromListResponse(response: ClientSchemaElementListResponse): ClientSchemaElement[] {
     return response.map(listItem => this.listItemToElement(listItem));
   }
 
-  private listItemToElement(
-    listItem: ClientSchemaElementLineListResponseItem
-  ): ClientSchemaElementLine {
+  private listItemToElement(listItem: ClientSchemaElementListResponseItem): ClientSchemaElement {
     const properties = Object.assign({}, listItem.properties);
     return {
       meta: {

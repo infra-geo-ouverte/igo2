@@ -4,9 +4,7 @@ import { IgoMap, ProjectionService } from 'src/lib/map';
 
 import {
   createParcelLayer,
-  createSchemaElementPointLayer,
-  createSchemaElementLineLayer,
-  createSchemaElementSurfaceLayer,
+  createSchemaElementLayer,
   createClientDefaultSelectionStyle
 } from 'src/lib/client';
 
@@ -46,9 +44,7 @@ export class MapState implements OnDestroy {
     });
 
     this.addClientLayers();
-    this.clientState.schemaElementPointEditor.setMap(this._map);
-    this.clientState.schemaElementLineEditor.setMap(this._map);
-    this.clientState.schemaElementSurfaceEditor.setMap(this._map);
+    this.clientState.schemaElementEditor.setMap(this._map);
   }
 
   /**
@@ -57,7 +53,7 @@ export class MapState implements OnDestroy {
   ngOnDestroy() {
     this.clientState.parcelStore.strategies
       .forEach((strategy: FeatureStoreStrategy) => strategy.deactivate());
-    this.clientState.schemaElementSurfaceStore.strategies
+    this.clientState.schemaElementStore.strategies
       .forEach((strategy: FeatureStoreStrategy) => strategy.deactivate());
   }
 
@@ -72,25 +68,15 @@ export class MapState implements OnDestroy {
     this.map.addLayer(clientParcelLayer, false);
     this.clientState.parcelStore.bindLayer(clientParcelLayer);
 
-    const clientSchemaElementPointLayer = createSchemaElementPointLayer();
-    this.map.addLayer(clientSchemaElementPointLayer, false);
-    this.clientState.schemaElementPointStore.bindLayer(clientSchemaElementPointLayer);
-
-    const clientSchemaElementLineLayer = createSchemaElementLineLayer();
-    this.map.addLayer(clientSchemaElementLineLayer, false);
-    this.clientState.schemaElementLineStore.bindLayer(clientSchemaElementLineLayer);
-
-    const clientSchemaElementSurfaceLayer = createSchemaElementSurfaceLayer();
-    this.map.addLayer(clientSchemaElementSurfaceLayer, false);
-    this.clientState.schemaElementSurfaceStore.bindLayer(clientSchemaElementSurfaceLayer);
+    const clientSchemaElementLayer = createSchemaElementLayer();
+    this.map.addLayer(clientSchemaElementLayer, false);
+    this.clientState.schemaElementStore.bindLayer(clientSchemaElementLayer);
 
     const parcelLoadingStrategy = new FeatureStoreLoadingStrategy();
     this.clientState.parcelStore.addStrategy(parcelLoadingStrategy);
 
     const schemaElementLoadingStrategy = new FeatureStoreLoadingStrategy();
-    this.clientState.schemaElementPointStore.addStrategy(schemaElementLoadingStrategy);
-    this.clientState.schemaElementLineStore.addStrategy(schemaElementLoadingStrategy);
-    this.clientState.schemaElementSurfaceStore.addStrategy(schemaElementLoadingStrategy);
+    this.clientState.schemaElementStore.addStrategy(schemaElementLoadingStrategy);
     schemaElementLoadingStrategy.activate();
 
     const sharedSelectionStrategy = new FeatureStoreSelectionStrategy({
@@ -98,9 +84,7 @@ export class MapState implements OnDestroy {
       style: createClientDefaultSelectionStyle()
     });
     this.clientState.parcelStore.addStrategy(sharedSelectionStrategy);
-    this.clientState.schemaElementPointStore.addStrategy(sharedSelectionStrategy);
-    this.clientState.schemaElementLineStore.addStrategy(sharedSelectionStrategy);
-    this.clientState.schemaElementSurfaceStore.addStrategy(sharedSelectionStrategy);
+    this.clientState.schemaElementStore.addStrategy(sharedSelectionStrategy);
 
     parcelLoadingStrategy.activate();
     schemaElementLoadingStrategy.activate();

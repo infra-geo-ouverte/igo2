@@ -21,7 +21,7 @@ import { ActionbarMode } from 'src/lib/action';
 import {
   Client,
   ClientParcel,
-  ClientSchemaElementSurface,
+  ClientSchemaElement,
   CLIENT
 } from 'src/lib/client';
 import { Editor } from 'src/lib/edition';
@@ -108,8 +108,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.clientState.parcelStore;
   }
 
-  get schemaElementSurfaceStore(): EntityStore<ClientSchemaElementSurface> {
-    return this.clientState.schemaElementSurfaceStore;
+  get schemaElementStore(): EntityStore<ClientSchemaElement> {
+    return this.clientState.schemaElementStore;
   }
 
   get searchStore(): EntityStore<SearchResult> {

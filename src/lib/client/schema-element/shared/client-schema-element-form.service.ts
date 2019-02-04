@@ -24,7 +24,7 @@ export class ClientSchemaElementFormService {
     private languageService: LanguageService
   ) {}
 
-  buildCreateSurfaceForm(igoMap: IgoMap): Observable<Form> {
+  buildCreateForm(igoMap: IgoMap): Observable<Form> {
     const infoFields$ = zip(
       this.createIdField({options: {disabled: true}}),
       this.createTypeElementField(),
@@ -48,8 +48,8 @@ export class ClientSchemaElementFormService {
       );
   }
 
-  buildUpdateSurfaceForm(igoMap: IgoMap): Observable<Form> {
-    return this.buildCreateSurfaceForm(igoMap);
+  buildUpdateForm(igoMap: IgoMap): Observable<Form> {
+    return this.buildCreateForm(igoMap);
   }
 
   private createIdField(partial?: Partial<FormFieldConfig>): Observable<FormField> {

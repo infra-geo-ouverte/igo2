@@ -10,28 +10,27 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityTransaction, getEntityId } from 'src/lib/entity';
+import { EntityTransaction } from 'src/lib/entity';
 import { Feature, FeatureStore } from 'src/lib/feature';
 import { Form } from 'src/lib/form';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
 
-import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
-import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
+import { ClientSchemaElement } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
 import { generateOperationTitle } from '../shared/client-schema-element.utils';
 
 @Component({
-  selector: 'fadq-client-schema-element-surface-create-form',
-  templateUrl: './client-schema-element-surface-create-form.component.html',
-  styleUrls: ['./client-schema-element-surface-create-form.component.scss'],
+  selector: 'fadq-client-schema-element-update-form',
+  templateUrl: './client-schema-element-update-form.component.html',
+  styleUrls: ['./client-schema-element-update-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSurfaceCreateFormComponent implements OnInit, WidgetComponent {
+export class ClientSchemaElementUpdateFormComponent implements OnInit, WidgetComponent {
 
-  /**
-   * Create form
+   /**
+   * Update form
    */
   public form$ = new Subject<Form>();
 
@@ -43,7 +42,7 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements OnInit, Wi
   /**
    * Schema element store
    */
-  @Input() store: FeatureStore<ClientSchemaElementSurface>;
+  @Input() store: FeatureStore<ClientSchemaElement>;
 
   /**
    * Schema element transaction
@@ -51,9 +50,9 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements OnInit, Wi
   @Input() transaction: EntityTransaction;
 
   /**
-   * Schema
+   * Schema element
    */
-  @Input() schema: ClientSchema;
+  @Input() element: ClientSchemaElement;
 
   /**
    * Event emitted on complete
@@ -71,7 +70,7 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements OnInit, Wi
   ) {}
 
   ngOnInit() {
-    this.clientSchemaElementFormService.buildUpdateSurfaceForm(this.map)
+    this.clientSchemaElementFormService.buildUpdateForm(this.map)
       .subscribe((form: Form) => this.form$.next(form));
   }
 
@@ -90,27 +89,15 @@ export class ClientSchemaElementSurfaceCreateFormComponent implements OnInit, Wi
     this.cancel.emit();
   }
 
-  private onSubmitSuccess(element: ClientSchemaElementSurface) {
-    this.transaction.insert(element, this.store, {
+  private onSubmitSuccess(element: ClientSchemaElement) {
+    this.transaction.update(this.element, element, this.store, {
       title: generateOperationTitle(element)
     });
     this.complete.emit();
   }
 
-  private formDataToElement(data: Feature): ClientSchemaElementSurface {
-    const properties = Object.assign({
-      idSchema: getEntityId(this.schema),
-      idElementGeometrique: undefined,
-      typeElement: undefined,
-      descriptionTypeElement: undefined,
-      etiquette: undefined,
-      description: undefined,
-      anneeImage: undefined,
-      timbreMaj: undefined,
-      usagerMaj: undefined
-    }, data.properties);
-
-    return Object.assign({}, data, {properties});
+  private formDataToElement(data: Feature): ClientSchemaElement {
+    return Object.assign({}, data as ClientSchemaElement);
   }
 
 }

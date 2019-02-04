@@ -17,7 +17,7 @@ export function clientSchemaElementPointServiceFactory(
   return new ClientSchemaElementPointService(
     http,
     apiService,
-    config.getConfig('client.api.schemaElement.point')
+    config.getConfig('client.api.schemaElement')
   );
 }
 
@@ -38,7 +38,7 @@ export function clientSchemaElementLineServiceFactory(
   return new ClientSchemaElementLineService(
     http,
     apiService,
-    config.getConfig('client.api.schemaElement.line')
+    config.getConfig('client.api.schemaElement')
   );
 }
 
@@ -59,7 +59,7 @@ export function clientSchemaElementSurfaceServiceFactory(
   return new ClientSchemaElementSurfaceService(
     http,
     apiService,
-    config.getConfig('client.api.schemaElement.surface')
+    config.getConfig('client.api.schemaElement')
   );
 }
 

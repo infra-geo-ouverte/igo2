@@ -1,24 +1,38 @@
 import { Injectable} from '@angular/core';
 
-import { EntityTableTemplate } from 'src/lib/entity';
+import { EntityTableTemplate, EntityTableColumnRenderer } from 'src/lib/entity';
 
-import { ClientSchemaElementSurface } from './client-schema-element.interfaces';
+import { ClientSchemaElement } from './client-schema-element.interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientSchemaElementTableService {
 
+  static elementIcons = {
+    'Point': 'place',
+    'LineString': 'show_chart',
+    'Polygon': 'crop_square'
+  };
+
   constructor() {}
 
-  buildSurfaceTable(): EntityTableTemplate {
+  buildTable(): EntityTableTemplate {
     return {
       selection: true,
       sort: true,
-      rowClassFunc: ((schemaElementSurface: ClientSchemaElementSurface) => {
+      rowClassFunc: ((schemaElement: ClientSchemaElement) => {
         return {'text-centered': true};
       }),
       columns: [
+        {
+          name: 'type',
+          title: '',
+          renderer: EntityTableColumnRenderer.Icon,
+          valueAccessor: (element: ClientSchemaElement) => {
+            return ClientSchemaElementTableService.elementIcons[element.geometry.type];
+          }
+        },
         {
           name: 'properties.idElementGeometrique',
           title: 'ID élément'

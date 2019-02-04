@@ -9,10 +9,10 @@ import { getEntityId } from 'src/lib/entity';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
-  ClientSchemaElementSurface,
-  ClientSchemaElementSurfaceApiConfig,
-  ClientSchemaElementSurfaceListResponse,
-  ClientSchemaElementSurfaceListResponseItem
+  ClientSchemaElement,
+  ClientSchemaElementApiConfig,
+  ClientSchemaElementListResponse,
+  ClientSchemaElementListResponseItem
 } from './client-schema-element.interfaces';
 
 @Injectable({
@@ -23,33 +23,29 @@ export class ClientSchemaElementSurfaceService {
   constructor(
     private http: HttpClient,
     private apiService: ApiService,
-    @Inject('clientSchemaElementSurfaceApiConfig')
-    private apiConfig: ClientSchemaElementSurfaceApiConfig
+    @Inject('clientSchemaElementApiConfig')
+    private apiConfig: ClientSchemaElementApiConfig
   ) {}
 
-  getElements(schema: ClientSchema): Observable<ClientSchemaElementSurface[]> {
-    const url = this.apiService.buildUrl(this.apiConfig.list, {
+  getElements(schema: ClientSchema): Observable<ClientSchemaElement[]> {
+    const url = this.apiService.buildUrl(this.apiConfig.surfaces, {
       schemaId: getEntityId(schema)
     });
 
     return this.http
       .get(url)
       .pipe(
-        map((response: ClientSchemaElementSurfaceListResponse) => {
+        map((response: ClientSchemaElementListResponse) => {
           return this.extractElementsFromListResponse(response);
         })
       );
   }
 
-  private extractElementsFromListResponse(
-    response: ClientSchemaElementSurfaceListResponse
-  ): ClientSchemaElementSurface[] {
+  private extractElementsFromListResponse(response: ClientSchemaElementListResponse): ClientSchemaElement[] {
     return response.map(listItem => this.listItemToElement(listItem));
   }
 
-  private listItemToElement(
-    listItem: ClientSchemaElementSurfaceListResponseItem
-  ): ClientSchemaElementSurface {
+  private listItemToElement(listItem: ClientSchemaElementListResponseItem): ClientSchemaElement {
     const properties = Object.assign({}, listItem.properties);
     return {
       meta: {

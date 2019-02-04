@@ -12,14 +12,9 @@ import {
   ClientSchema,
   ClientParcelEditorService,
   ClientSchemaEditorService,
-  ClientSchemaElements,
-  ClientSchemaElementPoint,
-  ClientSchemaElementLine,
-  ClientSchemaElementSurface,
+  ClientSchemaElement,
   ClientSchemaElementService,
-  ClientSchemaElementPointEditorService,
-  ClientSchemaElementLineEditorService,
-  ClientSchemaElementSurfaceEditorService
+  ClientSchemaElementEditorService
 } from 'src/lib/client';
 import {
   EntityStore,
@@ -89,34 +84,14 @@ export class ClientState implements OnDestroy {
     return this.schemaEditor.entityStore as EntityStore<ClientSchema>;
   }
 
-  /** Schema points editor */
-  get schemaElementPointEditor(): ClientSchemaElementPointEditorService {
-    return this.clientSchemaElementPointEditorService;
+  /** Schema elements editor */
+  get schemaElementEditor(): ClientSchemaElementEditorService {
+    return this.clientSchemaElementEditorService;
   }
 
-  /** Store that holds the points of the active schema */
-  get schemaElementPointStore(): FeatureStore<ClientSchemaElementPoint> {
-    return this.schemaElementPointEditor.entityStore as FeatureStore<ClientSchemaElementPoint>;
-  }
-
-  /** Schema points editor */
-  get schemaElementLineEditor(): ClientSchemaElementLineEditorService {
-    return this.clientSchemaElementLineEditorService;
-  }
-
-  /** Store that holds the lines of the active schema */
-  get schemaElementLineStore(): FeatureStore<ClientSchemaElementLine> {
-    return this.schemaElementLineEditor.entityStore as FeatureStore<ClientSchemaElementLine>;
-  }
-
-  /** Schema surfaces editor */
-  get schemaElementSurfaceEditor(): ClientSchemaElementSurfaceEditorService {
-    return this.clientSchemaElementSurfaceEditorService;
-  }
-
-  /** Store that holds the surfaces of the active schema */
-  get schemaElementSurfaceStore(): FeatureStore<ClientSchemaElementSurface> {
-    return this.schemaElementSurfaceEditor.entityStore as FeatureStore<ClientSchemaElementSurface>;
+  /** Store that holds the elements of the active schema */
+  get schemaElementStore(): FeatureStore<ClientSchemaElement> {
+    return this.schemaElementEditor.entityStore as FeatureStore<ClientSchemaElement>;
   }
 
   constructor(
@@ -125,9 +100,7 @@ export class ClientState implements OnDestroy {
     private clientParcelEditorService: ClientParcelEditorService,
     private clientSchemaEditorService: ClientSchemaEditorService,
     private clientSchemaElementService: ClientSchemaElementService,
-    private clientSchemaElementPointEditorService: ClientSchemaElementPointEditorService,
-    private clientSchemaElementLineEditorService: ClientSchemaElementLineEditorService,
-    private clientSchemaElementSurfaceEditorService: ClientSchemaElementSurfaceEditorService,
+    private clientSchemaElementEditorService: ClientSchemaElementEditorService,
     private editionState: EditionState
   ) {
     this._diagramStore = new EntityStore<ClientParcelDiagram>();
@@ -236,16 +209,10 @@ export class ClientState implements OnDestroy {
 
     this.parcelStore.updateAllEntitiesState({selected: false});
     this.loadSchemaElements(schema);
-    this.schemaElementPointEditor.setSchema(schema);
-    this.schemaElementPointEditor.setTransaction(this.schemaElementTransaction);
-    this.schemaElementLineEditor.setSchema(schema);
-    this.schemaElementLineEditor.setTransaction(this.schemaElementTransaction);
-    this.schemaElementSurfaceEditor.setSchema(schema);
-    this.schemaElementSurfaceEditor.setTransaction(this.schemaElementTransaction);
+    this.schemaElementEditor.setSchema(schema);
+    this.schemaElementEditor.setTransaction(this.schemaElementTransaction);
 
-    this.editionState.register(this.schemaElementPointEditor);
-    this.editionState.register(this.schemaElementLineEditor);
-    this.editionState.register(this.schemaElementSurfaceEditor);
+    this.editionState.register(this.schemaElementEditor);
 
     this.schema$.next(schema);
   }
@@ -258,27 +225,20 @@ export class ClientState implements OnDestroy {
     this.schemaElementTransaction.clear();
     this.clearSchemaElements();
 
-    this.editionState.unregister(this.schemaElementPointEditor);
-    this.editionState.unregister(this.schemaElementLineEditor);
-    this.editionState.unregister(this.schemaElementSurfaceEditor);
+    this.editionState.unregister(this.schemaElementEditor);
 
     this.schema$.next(undefined);
   }
 
   private loadSchemaElements(schema: ClientSchema) {
     this.clientSchemaElementService.getElements(schema)
-      .subscribe((elements: ClientSchemaElements) => {
-        const [points, lines, surfaces] = elements;
-        this.schemaElementPointStore.setEntities(points);
-        this.schemaElementLineStore.setEntities(lines);
-        this.schemaElementSurfaceStore.setEntities(surfaces);
+      .subscribe((elements: ClientSchemaElement[]) => {
+        this.schemaElementStore.setEntities(elements);
       });
   }
 
   private clearSchemaElements() {
-    this.schemaElementPointStore.clear();
-    this.schemaElementLineStore.clear();
-    this.schemaElementSurfaceStore.clear();
+    this.schemaElementStore.clear();
   }
 
   private loadParcelYears() {

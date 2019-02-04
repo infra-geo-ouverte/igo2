@@ -21,19 +21,19 @@ import { Feature, FeatureStore, FeatureFormSubmitEvent } from 'src/lib/feature';
 import { IgoMap, SliceControl } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
 
-import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
+import { ClientSchemaElement } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
 import { generateOperationTitle } from '../shared/client-schema-element.utils';
 
 
 @Component({
-  selector: 'fadq-client-schema-element-surface-slice-form',
-  templateUrl: './client-schema-element-surface-slice-form.component.html',
-  styleUrls: ['./client-schema-element-surface-slice-form.component.scss'],
+  selector: 'fadq-client-schema-element-slice-form',
+  templateUrl: './client-schema-element-slice-form.component.html',
+  styleUrls: ['./client-schema-element-slice-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSurfaceSliceFormComponent implements OnInit, OnDestroy, WidgetComponent {
+export class ClientSchemaElementSliceFormComponent implements OnInit, OnDestroy, WidgetComponent {
 
   private sliceEnd$$: Subscription;
 
@@ -50,7 +50,7 @@ export class ClientSchemaElementSurfaceSliceFormComponent implements OnInit, OnD
   /**
    * Schema element store
    */
-  @Input() store: FeatureStore<ClientSchemaElementSurface>;
+  @Input() store: FeatureStore<ClientSchemaElement>;
 
   /**
    * Schema element transaction
@@ -60,7 +60,7 @@ export class ClientSchemaElementSurfaceSliceFormComponent implements OnInit, OnD
   /**
    * Schema element
    */
-  @Input() element: ClientSchemaElementSurface;
+  @Input() element: ClientSchemaElement;
 
   /**
    * Event emitted on complete
@@ -110,15 +110,15 @@ export class ClientSchemaElementSurfaceSliceFormComponent implements OnInit, OnD
     this.cancel.emit();
   }
 
-  private onSubmitSuccess(element: ClientSchemaElementSurface) {
+  private onSubmitSuccess(element: ClientSchemaElement) {
     // this.transaction.slice(this.element, element, this.store, {
     //   title: generateOperationTitle(element)
     // });
     this.complete.emit();
   }
 
-  private formDataToElement(data: Feature): ClientSchemaElementSurface {
-    return Object.assign({}, data as ClientSchemaElementSurface);
+  private formDataToElement(data: Feature): ClientSchemaElement {
+    return Object.assign({}, data as ClientSchemaElement);
   }
 
   /**

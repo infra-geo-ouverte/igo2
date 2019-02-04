@@ -1,10 +1,15 @@
+import * as olstyle from 'ol/style';
+import OlFeature from 'ol/Feature';
+
+import { FeatureDataSource, VectorLayer } from '@igo2/geo';
+
 import {
   EntityOperation,
   EntityOperationType,
 } from 'src/lib/entity';
 
 import {
-  AnyClientSchemaElement,
+  ClientSchemaElement,
   ClientSchemaElementTransactionData
 } from './client-schema-element.interfaces';
 
@@ -28,12 +33,12 @@ export class ClientSchemaElementTransactionSerializer {
     return {inserts, updates, deletes};
   }
 
-  private serializeInsert(operation: EntityOperation): AnyClientSchemaElement {
-    return operation.current as AnyClientSchemaElement;
+  private serializeInsert(operation: EntityOperation): ClientSchemaElement {
+    return operation.current as ClientSchemaElement;
   }
 
-  private serializeUpdate(operation: EntityOperation): AnyClientSchemaElement {
-    return operation.current as AnyClientSchemaElement;
+  private serializeUpdate(operation: EntityOperation): ClientSchemaElement {
+    return operation.current as ClientSchemaElement;
   }
 
   private serializeDelete(operation: EntityOperation): string {
@@ -42,7 +47,7 @@ export class ClientSchemaElementTransactionSerializer {
 
 }
 
-export function generateOperationTitle(element: AnyClientSchemaElement): string {
+export function generateOperationTitle(element: ClientSchemaElement): string {
   // TODO: this is for demo purpose. Make it clean.
   let geometryType;
   if (element.geometry.type === 'Point') {
@@ -59,4 +64,45 @@ export function generateOperationTitle(element: AnyClientSchemaElement): string 
     element.properties.description || undefined
   ];
   return terms.filter((term: string) => term !== undefined).join(' - ');
+}
+
+export function createSchemaElementLayer(): VectorLayer {
+  const schemaElementDataSource = new FeatureDataSource();
+  return new VectorLayer({
+    title: 'Éléments du schéma',
+    zIndex: 103,
+    source: schemaElementDataSource,
+    style: createSchemaElementLayerStyle()
+  });
+}
+
+export function createSchemaElementLayerStyle(): (olFeature: OlFeature) => olstyle.Style {
+  const style = new olstyle.Style({
+    stroke: new olstyle.Stroke({
+      width: 2
+    }),
+    fill:  new olstyle.Fill(),
+    text: createSchemaElementLayerTextStyle()
+  });
+
+  return (function(olFeature: OlFeature) {
+    const color = getSchemaElementFeatureColor(olFeature);
+    style.getFill().setColor(color.concat([0.15]));
+    style.getStroke().setColor(color);
+    style.getText().setText(olFeature.get('etiquette'));
+    return style;
+  });
+}
+
+function createSchemaElementLayerTextStyle(): olstyle.Text {
+  return new olstyle.Text({
+    font: '16px Calibri,sans-serif',
+    fill: new olstyle.Fill({ color: '#000' }),
+    stroke: new olstyle.Stroke({ color: '#fff', width: 3 }),
+    overflow: true
+  });
+}
+
+function getSchemaElementFeatureColor(olFeature: OlFeature) {
+  return [128, 21, 21];
 }
