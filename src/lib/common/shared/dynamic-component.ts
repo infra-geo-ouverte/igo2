@@ -1,7 +1,8 @@
 import {
   ComponentFactory,
   ComponentRef,
-  ViewContainerRef
+  ViewContainerRef,
+  SimpleChange
 } from '@angular/core';
 
 import { Subscription } from 'rxjs';
@@ -80,12 +81,17 @@ export class DynamicComponent<C> {
     }
 
     const instance = this.componentRef.instance;
-    const allowedInputs = this.componentFactory.inputs.map(input => input.propName);
-    allowedInputs.forEach((key: string) => {
+    const allowedInputs = this.componentFactory.inputs;
+    allowedInputs.forEach((value: {propName: string; templateName: string; }) => {
+      const key = value.propName;
       if (inputs.hasOwnProperty(key)) {
         instance[key] = inputs[key];
       }
     });
+
+    if (typeof (instance as any).onUpdateInputs === 'function') {
+      (instance as any).onUpdateInputs();
+    }
   }
 
   /**
@@ -99,8 +105,9 @@ export class DynamicComponent<C> {
     }
 
     const instance = this.componentRef.instance;
-    const allowedSubscribers = this.componentFactory.outputs.map(output => output.propName);
-    allowedSubscribers.forEach((key: string) => {
+    const allowedSubscribers = this.componentFactory.outputs;
+    allowedSubscribers.forEach((value: {propName: string; templateName: string; }) => {
+      const key = value.propName;
       if (subscribers.hasOwnProperty(key)) {
         const emitter = instance[key];
         const subscriber = subscribers[key];
@@ -122,4 +129,5 @@ export class DynamicComponent<C> {
     this.subscriptions.forEach((s: Subscription) => s.unsubscribe());
     this.subscriptions = [];
   }
+
 }

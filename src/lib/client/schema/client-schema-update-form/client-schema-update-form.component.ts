@@ -1,6 +1,8 @@
 import {
   Component,
   Input,
+  Output,
+  EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnInit
@@ -22,31 +24,49 @@ import { ClientSchemaFormService } from '../shared/client-schema-form.service';
   styleUrls: ['./client-schema-update-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaUpdateFormComponent extends WidgetComponent implements OnInit {
+export class ClientSchemaUpdateFormComponent implements OnInit, WidgetComponent {
 
+  /**
+   * Create form
+   */
   public form$ = new Subject<Form>();
 
+  /**
+   * Schema store
+   */
   @Input() store: EntityStore<ClientSchema>;
 
-  @Input()
-  set schema(value: ClientSchema) {
-    this._schema = value;
-    this.cdRef.detectChanges();
-  }
-  get schema(): ClientSchema { return this._schema; }
-  private _schema: ClientSchema;
+  /**
+   * Schema to update
+   */
+  @Input() schema: ClientSchema;
+
+  /**
+   * Event emitted on complete
+   */
+  @Output() complete = new EventEmitter<void>();
+
+  /**
+   * Event emitted on cancel
+   */
+  @Output() cancel = new EventEmitter<void>();
 
   constructor(
     private clientSchemaService: ClientSchemaService,
     private clientSchemaFormService: ClientSchemaFormService,
     private cdRef: ChangeDetectorRef
-  ) {
-    super();
-  }
+  ) {}
 
   ngOnInit() {
     this.clientSchemaFormService.buildUpdateForm()
       .subscribe((form: Form) => this.form$.next(form));
+  }
+
+  /**
+   * Implemented as part of WidgetComponent
+   */
+  onUpdateInputs() {
+    this.cdRef.detectChanges();
   }
 
   onSubmit(data: {[key: string]: any}) {

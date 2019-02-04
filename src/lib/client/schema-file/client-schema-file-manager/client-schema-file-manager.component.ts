@@ -25,7 +25,7 @@ import { ClientSchemaFileService } from '../shared/client-schema-file.service';
   styleUrls: ['./client-schema-file-manager.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaFileManagerComponent extends WidgetComponent implements OnInit {
+export class ClientSchemaFileManagerComponent implements OnInit, WidgetComponent {
 
   static tableTemplate: EntityTableTemplate = {
     selection: true,
@@ -49,19 +49,22 @@ export class ClientSchemaFileManagerComponent extends WidgetComponent implements
   public schemaFile: ClientSchemaFile;
   public schemaFileData: string | ArrayBuffer;
 
-  @Input()
-  get schema(): ClientSchema {
-    return this._schema;
-  }
-  set schema(value: ClientSchema) {
-    this._schema = value;
-  }
-  private _schema: ClientSchema;
+  public store: EntityStore<ClientSchemaFile> = new EntityStore<ClientSchemaFile>();
 
-  get store(): EntityStore<ClientSchemaFile> {
-    return this._store;
-  }
-  private _store;
+  /**
+   * Schema to delete
+   */
+  @Input() schema: ClientSchema;
+
+  /**
+   * Event emitted on complete
+   */
+  @Output() complete = new EventEmitter<void>();
+
+  /**
+   * Event emitted on cancel
+   */
+  @Output() cancel = new EventEmitter<void>();
 
   get tableTemplate(): EntityTableTemplate {
     return ClientSchemaFileManagerComponent.tableTemplate;
@@ -69,14 +72,16 @@ export class ClientSchemaFileManagerComponent extends WidgetComponent implements
 
   @ViewChild('downloadLink') downloadLink: ElementRef;
 
-  constructor(private clientSchemaFileService: ClientSchemaFileService) {
-    super();
-  }
+  constructor(private clientSchemaFileService: ClientSchemaFileService) {}
 
   ngOnInit() {
-    this._store = new EntityStore<ClientSchemaFile>();
     this.loadClientSchemaFiles();
   }
+
+  /**
+   * Implemented as part of WidgetComponent
+   */
+  onUpdateInputs() {}
 
   onFileInputChange(event: any) {
     if (event.target.files && event.target.files[0]) {

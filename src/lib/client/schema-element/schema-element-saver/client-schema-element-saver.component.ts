@@ -1,8 +1,9 @@
 import {
   Component,
   Input,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import {
@@ -26,7 +27,7 @@ import { ClientSchemaElementTransactionSerializer } from '../shared/client-schem
   styleUrls: ['./client-schema-element-saver.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSaverComponent extends WidgetComponent {
+export class ClientSchemaElementSaverComponent implements WidgetComponent {
 
   static operationIcons = {
     [EntityOperationType.Insert]: 'add',
@@ -57,37 +58,43 @@ export class ClientSchemaElementSaverComponent extends WidgetComponent {
   };
 
   @Input()
-  get schema(): ClientSchema {
-    return this._schema;
-  }
   set schema(value: ClientSchema) {
-    if (this.schema !== undefined) {
-      return;
-    }
+    if (this.schema !== undefined) { return; }
     this._schema = value;
   }
+  get schema(): ClientSchema { return this._schema; }
   private _schema: ClientSchema;
 
   @Input()
   set transaction(value: EntityTransaction) {
-    if (this.transaction !== undefined) {
-      return;
-    }
+    if (this.transaction !== undefined) { return; }
     this._transaction = value;
   }
   get transaction(): EntityTransaction { return this._transaction; }
   private _transaction;
+
+  /**
+   * Event emitted on complete
+   */
+  @Output() complete = new EventEmitter<void>();
+
+  /**
+   * Event emitted on cancel
+   */
+  @Output() cancel = new EventEmitter<void>();
 
   get tableTemplate(): EntityTableTemplate {
     return ClientSchemaElementSaverComponent.tableTemplate;
   }
 
   constructor(
-    private clientSchemaElementService: ClientSchemaElementService,
-    private cdRef: ChangeDetectorRef
-  ) {
-    super();
-  }
+    private clientSchemaElementService: ClientSchemaElementService
+  ) {}
+
+  /**
+   * Implemented as part of WidgetComponent
+   */
+  onUpdateInputs() {}
 
   onOperationClick(operation: EntityOperation) {
     const store = operation.store;

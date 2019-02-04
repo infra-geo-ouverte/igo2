@@ -1,6 +1,8 @@
 import {
   Component,
   Input,
+  Output,
+  EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnInit
@@ -9,10 +11,10 @@ import {
 import { Subject } from 'rxjs';
 
 import { EntityTransaction, getEntityId } from 'src/lib/entity';
-import { Feature, FeatureStore, FeatureFormSubmitEvent } from 'src/lib/feature';
+import { Feature, FeatureStore } from 'src/lib/feature';
+import { Form } from 'src/lib/form';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
-import { Form } from 'src/lib/form';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
@@ -26,39 +28,58 @@ import { generateOperationTitle } from '../shared/client-schema-element.utils';
   styleUrls: ['./client-schema-element-surface-create-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSurfaceCreateFormComponent extends WidgetComponent implements OnInit {
+export class ClientSchemaElementSurfaceCreateFormComponent implements OnInit, WidgetComponent {
 
+  /**
+   * Create form
+   */
   public form$ = new Subject<Form>();
 
+  /**
+   * Map to draw elements on
+   */
   @Input() map: IgoMap;
 
+  /**
+   * Schema element store
+   */
   @Input() store: FeatureStore<ClientSchemaElementSurface>;
 
+  /**
+   * Schema element transaction
+   */
   @Input() transaction: EntityTransaction;
 
-  @Input()
-  set schema(value: ClientSchema) {
-    if (this.schema !== undefined) {
-      return;
-    }
-    this._schema = value;
-    // TODO: maybe widgets should have a bindData method that
-    // would handle that
-    this.cdRef.detectChanges();
-  }
-  get schema(): ClientSchema { return this._schema; }
-  private _schema: ClientSchema;
+  /**
+   * Schema
+   */
+  @Input() schema: ClientSchema;
+
+  /**
+   * Event emitted on complete
+   */
+  @Output() complete = new EventEmitter<void>();
+
+  /**
+   * Event emitted on cancel
+   */
+  @Output() cancel = new EventEmitter<void>();
 
   constructor(
     private clientSchemaElementFormService: ClientSchemaElementFormService,
     private cdRef: ChangeDetectorRef
-  ) {
-    super();
-  }
+  ) {}
 
   ngOnInit() {
-    this.clientSchemaElementFormService.buildCreateSurfaceForm(this.map)
+    this.clientSchemaElementFormService.buildUpdateSurfaceForm(this.map)
       .subscribe((form: Form) => this.form$.next(form));
+  }
+
+  /**
+   * Implemented as part of WidgetComponent
+   */
+  onUpdateInputs() {
+    this.cdRef.detectChanges();
   }
 
   onSubmit(data: Feature) {

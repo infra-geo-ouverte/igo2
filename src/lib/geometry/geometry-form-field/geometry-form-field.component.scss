@@ -1,11 +1,3 @@
-/*:host > div {
-  width: 100%;
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis;
-}*/
-
-
 :host {
   display: flex;
   flex-direction: row;
@@ -14,10 +6,6 @@
 
 .geometry-field {
   width: 100%;
-}
-
-.buffer-field {
-  width: 150px;
 }
 
 .geometry-field mat-icon,

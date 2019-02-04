@@ -1,13 +1,15 @@
 import {
   Component,
   Input,
+  Output,
+  EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnInit,
   OnDestroy
 } from '@angular/core';
 
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import OlPolygon from 'ol/geom/Polygon';
 import OlGeoJSON from 'ol/format/GeoJSON';
@@ -19,7 +21,6 @@ import { Feature, FeatureStore, FeatureFormSubmitEvent } from 'src/lib/feature';
 import { IgoMap, SliceControl } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
 
-import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
@@ -32,8 +33,7 @@ import { generateOperationTitle } from '../shared/client-schema-element.utils';
   styleUrls: ['./client-schema-element-surface-slice-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSurfaceSliceFormComponent
-    extends WidgetComponent implements OnInit, OnDestroy {
+export class ClientSchemaElementSurfaceSliceFormComponent implements OnInit, OnDestroy, WidgetComponent {
 
   private sliceEnd$$: Subscription;
 
@@ -42,37 +42,40 @@ export class ClientSchemaElementSurfaceSliceFormComponent
    */
   private sliceControl: SliceControl;
 
+  /**
+   * Map to draw elements on
+   */
   @Input() map: IgoMap;
 
+  /**
+   * Schema element store
+   */
   @Input() store: FeatureStore<ClientSchemaElementSurface>;
 
+  /**
+   * Schema element transaction
+   */
   @Input() transaction: EntityTransaction;
 
-  @Input()
-  set schema(value: ClientSchema) {
-    if (this.schema !== undefined) {
-      return;
-    }
-    this._schema = value;
-    this.cdRef.detectChanges();
-  }
-  get schema(): ClientSchema { return this._schema; }
-  private _schema: ClientSchema;
+  /**
+   * Schema element
+   */
+  @Input() element: ClientSchemaElementSurface;
 
-  @Input()
-  set element(value: ClientSchemaElementSurface) {
-    this._element = value;
-    this.cdRef.detectChanges();
-  }
-  get element(): ClientSchemaElementSurface { return this._element; }
-  private _element: ClientSchemaElementSurface;
+  /**
+   * Event emitted on complete
+   */
+  @Output() complete = new EventEmitter<void>();
+
+  /**
+   * Event emitted on cancel
+   */
+  @Output() cancel = new EventEmitter<void>();
 
   constructor(
     private clientSchemaElementFormService: ClientSchemaElementFormService,
     private cdRef: ChangeDetectorRef
-  ) {
-    super();
-  }
+  ) {}
 
   /**
    * Add the draw line control
@@ -89,6 +92,13 @@ export class ClientSchemaElementSurfaceSliceFormComponent
    */
   ngOnDestroy() {
     this.removeSliceControl();
+  }
+
+  /**
+   * Implemented as part of WidgetComponent
+   */
+  onUpdateInputs() {
+    this.cdRef.detectChanges();
   }
 
   onSubmit(event: FeatureFormSubmitEvent) {

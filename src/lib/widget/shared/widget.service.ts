@@ -4,8 +4,7 @@ import {
 
 import { DynamicComponentService } from 'src/lib/common';
 
-import { WidgetComponent } from './component';
-import { Widget } from './widget.interfaces';
+import { Widget, WidgetComponent } from './widget.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +14,6 @@ export class WidgetService {
   constructor(private dynamicComponentService: DynamicComponentService) {}
 
   create(widgetCls: any): Widget {
-    return this.dynamicComponentService.create(widgetCls as typeof WidgetComponent);
+    return this.dynamicComponentService.create(widgetCls as WidgetComponent);
   }
 }
