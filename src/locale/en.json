@@ -8,8 +8,8 @@
   "save": "Save",
   "yes": "Yes",
   "no": "No",
-
-  "info.title": "Informations",
+  "geometry": "Geometry",
+  "informations": "Informations",
 
   "measure": {
     "area": "Area",

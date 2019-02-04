@@ -3,16 +3,19 @@ import {
   Input,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  OnInit
+  OnInit,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 
-import { EntityFormTemplate, EntityTransaction } from 'src/lib/entity';
-import { Feature, FeatureStore, FeatureFormSubmitEvent } from 'src/lib/feature';
+import { EntityTransaction } from 'src/lib/entity';
+import { Feature, FeatureStore } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
+import { Form } from 'src/lib/form';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
@@ -26,77 +29,42 @@ import { generateOperationTitle } from '../shared/client-schema-element.utils';
   styleUrls: ['./client-schema-element-surface-update-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementSurfaceUpdateFormComponent extends WidgetComponent implements OnInit {
+export class ClientSchemaElementSurfaceUpdateFormComponent
+    extends WidgetComponent implements OnInit {
 
-  public template$ = new Subject<EntityFormTemplate>();
+  public form$ = new Subject<Form>();
 
-  @Input()
-  get map(): IgoMap {
-    return this._map;
-  }
-  set map(value: IgoMap) {
-    this._map = value;
-  }
-  private _map: IgoMap;
+  @Input() map: IgoMap;
 
-  @Input()
-  get schema(): ClientSchema {
-    return this._schema;
-  }
-  set schema(value: ClientSchema) {
-    if (this.schema !== undefined) {
-      return;
-    }
-    this._schema = value;
-    // TODO: maybe widgets should have a bindData method that
-    // would handle that
-    this.cdRef.detectChanges();
-  }
-  private _schema: ClientSchema;
+  @Input() schema: ClientSchema;
+
+  @Input() store: FeatureStore<ClientSchemaElementSurface>;
+
+  @Input() transaction: EntityTransaction;
 
   @Input()
-  get element(): ClientSchemaElementSurface {
-    return this._element;
-  }
   set element(value: ClientSchemaElementSurface) {
     this._element = value;
     this.cdRef.detectChanges();
   }
+  get element(): ClientSchemaElementSurface { return this._element; }
   private _element: ClientSchemaElementSurface;
-
-  @Input()
-  get store(): FeatureStore<ClientSchemaElementSurface> {
-    return this._store;
-  }
-  set store(value: FeatureStore<ClientSchemaElementSurface>) {
-    this._store = value;
-  }
-  private _store;
-
-  @Input()
-  get transaction(): EntityTransaction {
-    return this._transaction;
-  }
-  set transaction(value: EntityTransaction) {
-    this._transaction = value;
-  }
-  private _transaction;
 
   constructor(
     private clientSchemaElementFormService: ClientSchemaElementFormService,
+    private formBuilder: FormBuilder,
     private cdRef: ChangeDetectorRef
   ) {
     super();
   }
 
   ngOnInit() {
-    this.clientSchemaElementFormService.buildUpdateSurfaceForm(this.map)
-      .subscribe((template: EntityFormTemplate) => this.template$.next(template));
+    this.clientSchemaElementFormService.buildCreateSurfaceForm(this.map)
+      .subscribe((form: Form) => this.form$.next(form));
   }
 
-  onSubmit(event: FeatureFormSubmitEvent) {
-    const element = this.formDataToElement(event.data);
-    this.onSubmitSuccess(element);
+  onSubmit(data: Feature) {
+    this.onSubmitSuccess(this.formDataToElement(data));
   }
 
   onCancel() {

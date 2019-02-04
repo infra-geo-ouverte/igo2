@@ -182,17 +182,3 @@ export function moveToFeatures(
 export function hideOlFeature(olFeature: OlFeature) {
   olFeature.setStyle(new olstyle.Style({}));
 }
-
-import OlLineString from 'ol/geom/LineString';
-import OlPolygon from 'ol/geom/Polygon';
-
-/**
- * Slice geometry into two
- * @param olFeature OL feature
- */
-export function sliceOlGeometry(
-  olGeometry: OlLineString | OlPolygon,
-  olSlicer: OlLineString
-): [OlLineString | OlPolygon,  OlLineString | OlPolygon] {
-  return [olGeometry, olGeometry.clone()];
-}

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FadqLibEntityFormModule } from 'src/lib/entity/entity-form/entity-form.module';
+import { FadqLibFormModule } from 'src/lib/form/form.module';
 
 import { FeatureFormComponent } from './feature-form.component';
 
@@ -11,9 +11,10 @@ import { FeatureFormComponent } from './feature-form.component';
 @NgModule({
   imports: [
     CommonModule,
-    FadqLibEntityFormModule
+    FadqLibFormModule
   ],
   exports: [
+    FadqLibFormModule,
     FeatureFormComponent
   ],
   declarations: [

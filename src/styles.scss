@@ -42,6 +42,12 @@ body {
   padding: 10px;
 }
 
+.fadq-form-buttons:not(:empty) {
+  height: 36px;
+  text-align: center;
+  margin: 10px 0;
+}
+
 .fadq-actionbar-overlay {
   min-width: inherit !important;
   padding-top: 0;

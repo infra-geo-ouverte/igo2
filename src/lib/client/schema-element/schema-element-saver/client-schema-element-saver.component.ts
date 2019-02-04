@@ -11,7 +11,6 @@ import {
   EntityTransaction,
   EntityTableTemplate,
   EntityTableColumnRenderer,
-  EntityFormTemplate,
   getEntityId,
   getEntityTitle
 } from 'src/lib/entity';
@@ -57,10 +56,6 @@ export class ClientSchemaElementSaverComponent extends WidgetComponent {
     ]
   };
 
-  static formTemplate: EntityFormTemplate = {
-    fields: []
-  };
-
   @Input()
   get schema(): ClientSchema {
     return this._schema;
@@ -74,23 +69,17 @@ export class ClientSchemaElementSaverComponent extends WidgetComponent {
   private _schema: ClientSchema;
 
   @Input()
-  get transaction(): EntityTransaction {
-    return this._transaction;
-  }
   set transaction(value: EntityTransaction) {
     if (this.transaction !== undefined) {
       return;
     }
     this._transaction = value;
   }
+  get transaction(): EntityTransaction { return this._transaction; }
   private _transaction;
 
   get tableTemplate(): EntityTableTemplate {
     return ClientSchemaElementSaverComponent.tableTemplate;
-  }
-
-  get formTemplate(): EntityFormTemplate {
-    return ClientSchemaElementSaverComponent.formTemplate;
   }
 
   constructor(

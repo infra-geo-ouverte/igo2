@@ -10,9 +10,10 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { NgControl, ControlValueAccessor } from '@angular/forms';
-import { MatFormFieldControl } from '@angular/material';
 
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+
+import { OlStyle } from 'ol/Style';
 
 import { FeatureGeometry as GeoJSONGeometry } from '@igo2/geo';
 
@@ -23,8 +24,7 @@ import OlFeature from 'ol/Feature';
 import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
 
-import { IgoMap, DrawControl, ModifyControl } from 'src/lib/map';
-
+import { IgoMap, DrawControl, ModifyControl, createDrawInteractionStyle } from 'src/lib/map';
 
 /**
  * This input allows a user to draw a new geometry or to edit
@@ -33,46 +33,11 @@ import { IgoMap, DrawControl, ModifyControl } from 'src/lib/map';
  * This is still WIP.
  */
 @Component({
-  selector: 'fadq-entity-form-field-geometry-input',
-  templateUrl: './entity-form-field-geometry-input.component.html',
-  providers: [{
-    provide: MatFormFieldControl,
-    useExisting: EntityFormFieldGeometryInputComponent
-  }],
+  selector: 'fadq-geometry-form-field-input',
+  templateUrl: './geometry-form-field-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EntityFormFieldGeometryInputComponent
-  implements OnInit, OnDestroy, ControlValueAccessor {
-
-  /**
-   * Id genrator needed to implement the MatFormFieldControl interface
-   * @internal
-   */
-  static nextId = 0;
-
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @internal
-   */
-  public focused = false;
-
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @internal
-   */
-  public errorState = false;
-
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @internal
-   */
-  readonly controlType = 'geometry-input';
-
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @internal
-   */
-  readonly stateChanges = new Subject<void>();
+export class GeometryFormFieldInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   private olOverlayLayer: OlVectorLayer;
   private olGeoJSON = new OlGeoJSON();
@@ -80,6 +45,7 @@ export class EntityFormFieldGeometryInputComponent
 
   private drawControl: DrawControl;
   private modifyControl: ModifyControl;
+  private drawInteractionStyle: OlStyle;
   private olGeometry$: Subscription;
 
   /**
@@ -87,6 +53,21 @@ export class EntityFormFieldGeometryInputComponent
    * @internal
    */
   public activeControl: DrawControl | ModifyControl;
+
+  /**
+   * The map to draw the geometry on
+   */
+  @Input() map: IgoMap;
+
+  /**
+   * The geometry type
+   */
+  @Input() geometryType: OlGeometryType;
+
+  /**
+   * The buffer around the mouse pointer to help drawing
+   */
+  @Input() buffer: number = 0;
 
   /**
    * The geometry value (GeoJSON)
@@ -111,109 +92,11 @@ export class EntityFormFieldGeometryInputComponent
   private _value: GeoJSONGeometry;
 
   /**
-   * The map to draw the geometry on
-   */
-  @Input() map: IgoMap;
-
-  /**
-   * The geometry type
-   */
-  @Input() geometryType: OlGeometryType;
-
-  /**
-   * The geometry projection
-   */
-  @Input() projection: string = 'EPSG:4326';
-
-  /**
-   * Field tooltip
-   * Implemented as part of MatFormFieldControl.
-   */
-  @Input()
-  set tooltip(value: string) {
-    this._tooltip = value;
-    this.stateChanges.next();
-  }
-  get tooltip(): string { return this._tooltip; }
-  private _tooltip: string;
-
-  /**
-   * Field placeholder
-   * Implemented as part of MatFormFieldControl.
-   */
-  @Input()
-  set placeholder(value: string) {
-    this._placeholder = value;
-    this.stateChanges.next();
-  }
-  get placeholder(): string { return this._placeholder; }
-  private _placeholder: string;
-
-  /**
-   * Whether this is required
-   * Implemented as part of MatFormFieldControl.
-   */
-  @Input()
-  set required(value: boolean) {
-    this._required = value;
-    this.stateChanges.next();
-  }
-  get required(): boolean { return this._required; }
-  private _required = false;
-
-  /**
-   * Whether this is disabled
-   * Implemented as part of MatFormFieldControl.
-   */
-  @Input()
-  set disabled(value: boolean) {
-    this._disabled = value;
-    this.stateChanges.next();
-  }
-  get disabled(): boolean { return this._disabled; }
-  private _disabled = false;
-
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @ignore
-   */
-  @HostBinding()
-  id = `geometry-input-${EntityFormFieldGeometryInputComponent.nextId++}`;
-
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @ignore
-   */
-  @HostBinding('attr.aria-describedby')
-  describedBy = '';
-
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @ignore
-   */
-  @HostBinding('class.floating')
-  get shouldLabelFloat() { return this.representation.length > 0; }
-
-  /**
-   * Implemented as part of MatFormFieldControl.
-   * @internal
-   */
-  get empty() { return this.value === undefined; }
-
-  /**
    * The vector source to add the geometry to
    * @internal
    */
   get olOverlaySource(): OlVectorSource {
     return this.olOverlayLayer.getSource();
-  }
-
-  /**
-   * The geometry representation displayed in the field
-   * @internal
-   */
-  get representation(): string {
-    return this.tooltip || '...';
   }
 
   constructor(
@@ -234,6 +117,7 @@ export class EntityFormFieldGeometryInputComponent
    */
   ngOnInit() {
     this.addOlOverlayLayer();
+    this.drawInteractionStyle = createDrawInteractionStyle();
     this.createDrawControl();
     this.createModifyControl();
     if (this.value !== undefined) {
@@ -251,7 +135,6 @@ export class EntityFormFieldGeometryInputComponent
     this.deactivateControl();
     this.olOverlaySource.clear();
     this.map.ol.removeLayer(this.olOverlayLayer);
-    this.stateChanges.complete();
   }
 
   /**
@@ -280,18 +163,6 @@ export class EntityFormFieldGeometryInputComponent
   }
 
   /**
-   * Implemented as part of MatFormFieldControl.
-   */
-  setDescribedByIds(ids: string[]) {
-    this.describedBy = ids.join(' ');
-  }
-
-  /**
-   * Implemented as part of MatFormFieldControl.
-   */
-  onContainerClick(event: MouseEvent) {}
-
-  /**
    * Add an overlay layer to the map
    */
   private addOlOverlayLayer(): OlVectorLayer {
@@ -308,7 +179,15 @@ export class EntityFormFieldGeometryInputComponent
   private createDrawControl() {
     this.drawControl = new DrawControl({
       geometryType: this.geometryType,
-      layer: this.olOverlayLayer
+      layer: this.olOverlayLayer,
+      drawStyle: (olFeature: OlFeature, resolution: number) => {
+        const style = this.drawInteractionStyle;
+        const buffer = this.buffer;
+        if (buffer > 0) {
+          style.getImage().setRadius(buffer / resolution);
+        }
+        return style;
+      }
     });
   }
 
@@ -317,7 +196,15 @@ export class EntityFormFieldGeometryInputComponent
    */
   private createModifyControl() {
     this.modifyControl = new ModifyControl({
-      layer: this.olOverlayLayer
+      layer: this.olOverlayLayer,
+      drawStyle: (olFeature: OlFeature, resolution: number) => {
+        const style = this.drawInteractionStyle;
+        const buffer = this.buffer;
+        if (buffer > 0) {
+          style.getImage().setRadius(buffer / resolution);
+        }
+        return style;
+      }
     });
   }
 
@@ -368,7 +255,7 @@ export class EntityFormFieldGeometryInputComponent
     }
     const value = this.olGeoJSON.writeGeometryObject(olGeometry, {
       featureProjection: this.map.projection,
-      dataProjection: this.projection
+      dataProjection: 'EPSG:4326'
     });
     this.writeValue(value);
   }
@@ -379,7 +266,7 @@ export class EntityFormFieldGeometryInputComponent
    */
   private addGeoJSONToOverlay(geometry: GeoJSONGeometry) {
     const olGeometry = this.olGeoJSON.readGeometry(geometry, {
-      dataProjection: this.projection,
+      dataProjection: 'EPSG:4326',
       featureProjection: this.map.projection
     });
     const olFeature = new OlFeature({geometry: olGeometry});

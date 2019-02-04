@@ -8,8 +8,8 @@
   "save": "Enregistrer",
   "yes": "Oui",
   "no": "Non",
-
-  "info.title": "Informations",
+  "geometry": "Géométrie",
+  "informations": "Informations",
 
   "measure": {
     "area": "Superficie",

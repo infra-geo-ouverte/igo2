@@ -7,54 +7,52 @@ import { map } from 'rxjs/operators';
 import { LanguageService } from '@igo2/core';
 
 import {
-  EntityFormTemplate,
-  EntityFormField,
-  EntityFormFieldAnyInput
-} from 'src/lib/entity';
+  Form,
+  FormField,
+  FormFieldConfig,
+  FormService
+} from 'src/lib/form';
 import { IgoMap } from 'src/lib/map';
-
-type PartialFormField = Partial<EntityFormField<EntityFormFieldAnyInput>>;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientSchemaElementFormService {
 
-  constructor(private languageService: LanguageService) {}
+  constructor(
+    private formService: FormService,
+    private languageService: LanguageService
+  ) {}
 
-  buildCreateSurfaceForm(igoMap: IgoMap): Observable<EntityFormTemplate> {
-    const fields$ = zip(
+  buildCreateSurfaceForm(igoMap: IgoMap): Observable<Form> {
+    const infoFields$ = zip(
       this.createIdField({options: {disabled: true}}),
       this.createTypeElementField(),
       this.createDescriptionField(),
       this.createEtiquetteField(),
-      this.createAnneeImageField(),
-      this.createGeometryField({input: {map: igoMap, geometryType: 'Polygon'}})
+      this.createAnneeImageField()
     );
-    return fields$.pipe(
-      map((fields: EntityFormField[]) => {
-        return Object.create({
-          fields,
-          submitLabel: this.languageService.translate.instant('save'),
-          cancelLabel: this.languageService.translate.instant('cancel')
-        });
-      })
+
+    const geometryFields$ = zip(
+      this.createGeometryField({inputs: {map: igoMap, geometryType: 'Polygon'}})
     );
+
+    return zip(infoFields$, geometryFields$)
+      .pipe(
+        map((fields: [FormField[], FormField[]]) => {
+          return this.formService.form([], [
+            this.formService.group({name: 'geometry'}, fields[1]),
+            this.formService.group({name: 'info'}, fields[0])
+          ]);
+        })
+      );
   }
 
-  buildUpdateSurfaceForm(igoMap: IgoMap): Observable<EntityFormTemplate> {
+  buildUpdateSurfaceForm(igoMap: IgoMap): Observable<Form> {
     return this.buildCreateSurfaceForm(igoMap);
   }
 
-  buildDeleteSurfaceForm(): Observable<EntityFormTemplate> {
-    return of({fields: []});
-  }
-
-  buildSliceSurfaceForm(): Observable<EntityFormTemplate> {
-    return of({fields: []});
-  }
-
-  private createIdField(partial?: PartialFormField): Observable<EntityFormField> {
+  private createIdField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
     return of(this.createField({
       name: 'properties.idElementGeometrique',
       title: 'ID',
@@ -64,7 +62,7 @@ export class ClientSchemaElementFormService {
     }, partial));
   }
 
-  private createTypeElementField(partial?: PartialFormField): Observable<EntityFormField> {
+  private createTypeElementField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
     return of(this.createField({
       name: 'properties.typeElement',
       title: 'Type d\'élément',
@@ -75,7 +73,7 @@ export class ClientSchemaElementFormService {
     }, partial));
   }
 
-  private createDescriptionField(partial?: PartialFormField): Observable<EntityFormField> {
+  private createDescriptionField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
     return of(this.createField({
       name: 'properties.description',
       title: 'Description',
@@ -85,7 +83,7 @@ export class ClientSchemaElementFormService {
     }, partial));
   }
 
-  private createEtiquetteField(partial?: PartialFormField): Observable<EntityFormField> {
+  private createEtiquetteField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
     return of(this.createField({
       name: 'properties.etiquette',
       title: 'Etiquette',
@@ -95,7 +93,7 @@ export class ClientSchemaElementFormService {
     }, partial));
   }
 
-  private createAnneeImageField(partial?: PartialFormField): Observable<EntityFormField> {
+  private createAnneeImageField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
     return of(this.createField({
       name: 'properties.anneeImage',
       title: 'Année d\image',
@@ -109,7 +107,7 @@ export class ClientSchemaElementFormService {
     }, partial));
   }
 
-  private createGeometryField(partial?: PartialFormField): Observable<EntityFormField> {
+  private createGeometryField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
     return of(this.createField({
       name: 'geometry',
       title: 'Géometrie',
@@ -117,18 +115,14 @@ export class ClientSchemaElementFormService {
         cols: 2,
         validator: Validators.required
       },
-      input: {
-        type: 'geometry',
-        tooltip: 'Utilisez la carte pour tracer la géométrie...'
-      }
+      type: 'geometry',
+      inputs: {}
     }, partial));
   }
 
-  private createField(base: EntityFormField, partial?: PartialFormField): EntityFormField {
-    partial = partial || {};
-    const options = Object.assign({}, base.options || {}, partial.options || {});
-    const input = Object.assign({}, base.input || {}, partial.input || {});
-    return Object.assign(base, {options, input});
+  private createField(config: FormFieldConfig, partial?: Partial<FormFieldConfig>): FormField {
+    config = this.formService.extendFieldConfig(config, partial || {});
+    return this.formService.field(config);
   }
 
 }

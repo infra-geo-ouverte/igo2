@@ -1,4 +1,8 @@
+import * as olstyle from 'ol/style';
+
 import { Md5 } from 'ts-md5';
+
+import OlFeature from 'ol/Feature';
 
 import {
   DataSourceOptions,
@@ -79,4 +83,29 @@ export function generateWMTSLayerIdFromSourceOptions(options: WMTSDataSourceOpti
   const layer = options.layer;
   const chain = 'wmts' + options.url + layer;
   return Md5.hashStr(chain) as string;
+}
+
+/**
+ * Create a default style for draw and modify interactions
+ * @returns OL style
+ */
+export function createDrawInteractionStyle(): olstyle.Style {
+  return new olstyle.Style({
+    stroke: new olstyle.Stroke({
+      color:  [0, 153, 255, 1],
+      width: 2
+    }),
+    fill:  new olstyle.Fill({
+      color:  [0, 153, 255, 0.2]
+    }),
+    image: new olstyle.Circle({
+      radius: 5,
+      stroke: new olstyle.Stroke({
+        color: [0, 153, 255, 1],
+      }),
+      fill: new olstyle.Fill({
+        color:  [0, 153, 255, 0.2]
+      })
+    })
+  });
 }

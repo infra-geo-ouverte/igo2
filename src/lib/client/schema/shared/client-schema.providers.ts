@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService, LanguageService } from '@igo2/core';
 
 import { ApiService } from 'src/lib/core/api';
+import { FormService } from 'src/lib/form';
 
 import { ClientSchemaService } from './client-schema.service';
 import { ClientSchemaFormService } from './client-schema-form.service';
@@ -28,12 +29,14 @@ export function provideClientSchemaService() {
 }
 
 export function clientSchemaFormServiceFactory(
+  formService: FormService,
   http: HttpClient,
   apiService: ApiService,
   languageService: LanguageService,
   config: ConfigService
 ) {
   return new ClientSchemaFormService(
+    formService,
     http,
     apiService,
     languageService,
@@ -45,6 +48,6 @@ export function provideClientSchemaFormService() {
   return {
     provide: ClientSchemaFormService,
     useFactory: clientSchemaFormServiceFactory,
-    deps: [HttpClient, ApiService, LanguageService, ConfigService]
+    deps: [FormService, HttpClient, ApiService, LanguageService, ConfigService]
   };
 }

@@ -1,0 +1,13 @@
+
+<form
+  [formGroup]="form.control"
+  (ngSubmit)="onSubmit()">
+  <div class="fadq-form-body">
+    <div class="fadq-form-content">
+      <ng-content></ng-content>
+    </div>
+    <div class="fadq-form-buttons">
+      <ng-content select="[formButtons]"></ng-content>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,19 @@
+<fadq-geometry-form-field-input
+    [formControl]="formControl"
+    [map]="map"
+    [geometryType]="geometryType"
+    [buffer]="buffer$ | async">
+</fadq-geometry-form-field-input>
+<mat-form-field class="buffer-field">
+  <input
+    matInput
+    type="number"
+    [ngModel]="buffer"
+    (ngModelChange)="onBufferChange($event)">
+  <mat-icon
+    matPrefix
+    [color]="'primary'">
+    adjust
+  </mat-icon>
+  <span matSuffix>mètres</span>
+</mat-form-field>

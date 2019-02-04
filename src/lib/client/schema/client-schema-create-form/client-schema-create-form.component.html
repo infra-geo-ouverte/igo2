@@ -1,8 +1,24 @@
+<fadq-form
+  *ngIf="form$ | async as form"
+  [form]="form"
+  (submitForm)="onSubmit($event)">
 
-<ng-container *ngIf="template$ | async as template">
-  <fadq-entity-form
-    [template]="template"
-    (submitForm)="onSubmit($event)"
-    (cancel)="onCancel()">
-  </fadq-entity-form>
-</ng-container>
+  <fadq-form-group [group]="form.groups[0]"></fadq-form-group>
+
+  <div formButtons>
+    <button
+      mat-button
+      type="button"
+      (click)="onCancel()">
+      {{ 'cancel' | translate }}
+    </button>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!form.control.valid">
+      {{ 'save' | translate }}
+    </button>
+  </div>
+  
+</fadq-form>

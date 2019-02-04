@@ -8,10 +8,11 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityFormTemplate, EntityTransaction, getEntityId } from 'src/lib/entity';
+import { EntityTransaction, getEntityId } from 'src/lib/entity';
 import { Feature, FeatureStore, FeatureFormSubmitEvent } from 'src/lib/feature';
 import { IgoMap } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
+import { Form } from 'src/lib/form';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaElementSurface } from '../shared/client-schema-element.interfaces';
@@ -27,21 +28,15 @@ import { generateOperationTitle } from '../shared/client-schema-element.utils';
 })
 export class ClientSchemaElementSurfaceCreateFormComponent extends WidgetComponent implements OnInit {
 
-  public template$ = new Subject<EntityFormTemplate>();
+  public form$ = new Subject<Form>();
+
+  @Input() map: IgoMap;
+
+  @Input() store: FeatureStore<ClientSchemaElementSurface>;
+
+  @Input() transaction: EntityTransaction;
 
   @Input()
-  get map(): IgoMap {
-    return this._map;
-  }
-  set map(value: IgoMap) {
-    this._map = value;
-  }
-  private _map: IgoMap;
-
-  @Input()
-  get schema(): ClientSchema {
-    return this._schema;
-  }
   set schema(value: ClientSchema) {
     if (this.schema !== undefined) {
       return;
@@ -51,25 +46,8 @@ export class ClientSchemaElementSurfaceCreateFormComponent extends WidgetCompone
     // would handle that
     this.cdRef.detectChanges();
   }
+  get schema(): ClientSchema { return this._schema; }
   private _schema: ClientSchema;
-
-  @Input()
-  get store(): FeatureStore<ClientSchemaElementSurface> {
-    return this._store;
-  }
-  set store(value: FeatureStore<ClientSchemaElementSurface>) {
-    this._store = value;
-  }
-  private _store;
-
-  @Input()
-  get transaction(): EntityTransaction {
-    return this._transaction;
-  }
-  set transaction(value: EntityTransaction) {
-    this._transaction = value;
-  }
-  private _transaction;
 
   constructor(
     private clientSchemaElementFormService: ClientSchemaElementFormService,
@@ -80,12 +58,11 @@ export class ClientSchemaElementSurfaceCreateFormComponent extends WidgetCompone
 
   ngOnInit() {
     this.clientSchemaElementFormService.buildCreateSurfaceForm(this.map)
-      .subscribe((template: EntityFormTemplate) => this.template$.next(template));
+      .subscribe((form: Form) => this.form$.next(form));
   }
 
-  onSubmit(event: FeatureFormSubmitEvent) {
-    const element = this.formDataToElement(event.data);
-    this.onSubmitSuccess(element);
+  onSubmit(data: Feature) {
+    this.onSubmitSuccess(this.formDataToElement(data));
   }
 
   onCancel() {

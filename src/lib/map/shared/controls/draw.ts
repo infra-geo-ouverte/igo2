@@ -1,7 +1,6 @@
 import OlMap from 'ol/Map';
 import OlFeature from 'ol/Feature';
 import OlStyle from 'ol/style';
-import OlOverlay from 'ol/Overlay';
 import OlGeometryType from 'ol/geom/GeometryType';
 import OlVectorSource from 'ol/source/Vector';
 import OlVectorLayer from 'ol/layer/Vector';
@@ -13,7 +12,7 @@ import {
 import { DrawEvent as OlDrawEvent } from 'ol/interaction/Draw';
 import { unByKey } from 'ol/Observable';
 
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export interface DrawControlOptions {
   geometryType: OlGeometryType;

@@ -1,9 +1,32 @@
+<fadq-feature-form
+  *ngIf="form$ | async as form"
+  [form]="form"
+  [store]="store"
+  (submitForm)="onSubmit($event)">
 
-<ng-container *ngIf="template$ | async as template">
-  <fadq-feature-form
-    [template]="template"
-    [store]="store"
-    (submitForm)="onSubmit($event)"
-    (cancel)="onCancel()">
-  </fadq-feature-form>
-</ng-container>
+  <mat-tab-group>
+    <mat-tab [label]="'geometry' | translate">
+      <fadq-form-group [group]="form.groups[0]"></fadq-form-group>
+    </mat-tab>
+    <mat-tab [label]="'informations' | translate">
+      <fadq-form-group [group]="form.groups[1]"></fadq-form-group>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div formButtons>
+    <button
+      mat-button
+      type="button"
+      (click)="onCancel()">
+      {{ 'cancel' | translate }}
+    </button>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!form.control.valid">
+      {{ 'save' | translate }}
+    </button>
+  </div>
+  
+</fadq-feature-form>

@@ -1,4 +1,5 @@
 
+
 <mat-card>
   <mat-card-header>
     <div mat-card-avatar>
@@ -6,17 +7,28 @@
     </div>
     <mat-card-title>{{'client.schemaElement.save.confirm' | translate}}</mat-card-title>
   </mat-card-header>
+
   <mat-card-content>
-    <fadq-entity-form
-      [template]="formTemplate"
-      (submitForm)="onSubmit()"
-      (cancel)="onCancel()">
-      <fadq-entity-table
-        class="table-compact"
-        [store]="transaction.operations"
-        [template]="tableTemplate"
-        (entityClick)="onOperationClick($event)">
-      </fadq-entity-table>
-    </fadq-entity-form>
+    <fadq-entity-table
+      class="table-compact"
+      [store]="transaction.operations"
+      [template]="tableTemplate"
+      (entityClick)="onOperationClick($event)">
+    </fadq-entity-table>
+
+    <div class="fadq-form-buttons">
+      <button
+        mat-button
+        type="button"
+        (click)="onCancel()">
+        {{ 'cancel' | translate }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSubmit()">
+        {{ 'save' | translate }}
+      </button>
+    </div>
   </mat-card-content>
 </mat-card>

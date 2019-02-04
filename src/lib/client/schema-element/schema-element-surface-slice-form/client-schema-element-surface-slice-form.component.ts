@@ -14,7 +14,7 @@ import OlGeoJSON from 'ol/format/GeoJSON';
 
 import { uuid } from '@igo2/utils';
 
-import { EntityFormTemplate, EntityTransaction } from 'src/lib/entity';
+import { EntityTransaction } from 'src/lib/entity';
 import { Feature, FeatureStore, FeatureFormSubmitEvent } from 'src/lib/feature';
 import { IgoMap, SliceControl } from 'src/lib/map';
 import { WidgetComponent } from 'src/lib/widget';
@@ -34,8 +34,6 @@ import { generateOperationTitle } from '../shared/client-schema-element.utils';
 })
 export class ClientSchemaElementSurfaceSliceFormComponent
     extends WidgetComponent implements OnInit, OnDestroy {
-
-  public template$ = new Subject<EntityFormTemplate>();
 
   private sliceEnd$$: Subscription;
 
@@ -81,8 +79,6 @@ export class ClientSchemaElementSurfaceSliceFormComponent
    * @internal
    */
   ngOnInit() {
-    this.clientSchemaElementFormService.buildSliceSurfaceForm()
-      .subscribe((template: EntityFormTemplate) => this.template$.next(template));
     this.createSliceControl();
     this.activateSliceControl();
   }

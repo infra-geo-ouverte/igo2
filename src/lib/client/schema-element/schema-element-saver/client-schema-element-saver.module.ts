@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatIconModule } from '@angular/material';
+import {
+  MatCardModule,
+  MatIconModule,
+  MatButtonModule
+} from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
 
-import { FadqLibEntityFormModule } from 'src/lib/entity/entity-form/entity-form.module';
+import { FadqLibFormModule } from 'src/lib/form/form.module';
 import { FadqLibEntityTableModule } from 'src/lib/entity/entity-table/entity-table.module';
 
 import {
@@ -19,8 +23,9 @@ import {
     CommonModule,
     MatCardModule,
     MatIconModule,
+    MatButtonModule,
     IgoLanguageModule,
-    FadqLibEntityFormModule,
+    FadqLibFormModule,
     FadqLibEntityTableModule
   ],
   exports: [

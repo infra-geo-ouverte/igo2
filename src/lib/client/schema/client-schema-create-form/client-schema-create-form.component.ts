@@ -1,8 +1,6 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   OnInit
@@ -10,7 +8,8 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityStore, EntityFormTemplate, EntityFormSubmitEvent } from 'src/lib/entity';
+import { EntityStore } from 'src/lib/entity';
+import { Form } from 'src/lib/form';
 import { WidgetComponent } from 'src/lib/widget';
 
 import { Client } from '../../shared/client.interfaces';
@@ -26,16 +25,9 @@ import { ClientSchemaFormService } from '../shared/client-schema-form.service';
 })
 export class ClientSchemaCreateFormComponent extends WidgetComponent implements OnInit {
 
-  public template$ = new Subject<EntityFormTemplate>();
+  public form$ = new Subject<Form>();
 
-  @Input()
-  get client(): Client {
-    return this._client;
-  }
-  set client(value: Client) {
-    this._client = value;
-  }
-  private _client;
+  @Input() client: Client;
 
   @Input()
   get schema(): ClientSchema {
@@ -47,14 +39,7 @@ export class ClientSchemaCreateFormComponent extends WidgetComponent implements 
   }
   private _schema: ClientSchema;
 
-  @Input()
-  get store(): EntityStore<ClientSchema> {
-    return this._store;
-  }
-  set store(value: EntityStore<ClientSchema>) {
-    this._store = value;
-  }
-  private _store;
+  @Input() store: EntityStore<ClientSchema>;
 
   constructor(
     private clientSchemaService: ClientSchemaService,
@@ -66,15 +51,15 @@ export class ClientSchemaCreateFormComponent extends WidgetComponent implements 
 
   ngOnInit() {
     this.clientSchemaFormService.buildCreateForm()
-      .subscribe((template: EntityFormTemplate) => this.template$.next(template));
+      .subscribe((form: Form) => this.form$.next(form));
   }
 
-  onSubmit(event: EntityFormSubmitEvent) {
-    const data = Object.assign({
+  onSubmit(data: {[key: string]: any}) {
+    const schemaData = Object.assign({
       numeroClient: this.client.info.numero
-    }, event.data) as ClientSchemaCreateData;
+    }, data) as ClientSchemaCreateData;
 
-    this.clientSchemaService.createSchema(data)
+    this.clientSchemaService.createSchema(schemaData)
       .subscribe((schema: ClientSchema) => this.onSubmitSuccess(schema));
   }
 

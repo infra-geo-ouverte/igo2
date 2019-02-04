@@ -1,0 +1,18 @@
+
+<div class="fadq-form-group">
+  <div
+    *ngIf="group && group.fields.length > 0"
+    class="fadq-form-group-fields">
+    <mat-grid-list cols="2" rowHeight="60px">
+      <ng-container *ngFor="let field of group.fields">
+        <mat-grid-tile [colspan]="getFieldColSpan(field)">
+          <fadq-form-field [field]="field"></fadq-form-field>
+        </mat-grid-tile>
+      </ng-container>
+    </mat-grid-list>
+  </div>
+
+  <div class="fadq-form-group-extra-content">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -5,23 +5,21 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnInit,
+  OnChanges,
   OnDestroy,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  SimpleChanges
 } from '@angular/core';
+
+import { BehaviorSubject } from 'rxjs';
 
 import { uuid } from '@igo2/utils';
 
-import {
-  EntityFormTemplate,
-  EntityFormSubmitEvent,
-  getEntityId,
-  getEntityRevision
-} from 'src/lib/entity';
+import { getEntityRevision } from 'src/lib/entity';
+import { Form } from 'src/lib/form';
 
 import { FEATURE } from '../shared/feature.enum';
-import { Feature, FeatureFormSubmitEvent } from '../shared/feature.interfaces';
-import { hideOlFeature } from '../shared/feature.utils';
+import { Feature } from '../shared/feature.interfaces';
 import { FeatureStore } from '../shared/store';
 import { FeatureStoreSelectionStrategy } from '../shared/strategies/selection';
 
@@ -38,73 +36,43 @@ import { FeatureStoreSelectionStrategy } from '../shared/strategies/selection';
   styleUrls: ['./feature-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FeatureFormComponent implements OnInit, OnDestroy {
+export class FeatureFormComponent implements OnChanges, OnDestroy {
+
+  public feature$: BehaviorSubject<Feature> = new BehaviorSubject(undefined);
 
   /**
-   * Reference to the original feature style. This si required
-   * when toggling the feature's visibility.
+   * Form
    */
-  private olFeatureStyle: olstyle.Style;
-
-  /**
-   * Form template
-   */
-  @Input()
-  set template(value: EntityFormTemplate) {
-    if (this.template !== undefined) {
-      return;
-    }
-    this._template = value;
-  }
-  get template(): EntityFormTemplate { return this._template; }
-  private _template: EntityFormTemplate;
+  @Input() form: Form;
 
   /**
    * Feature to update
    */
-  @Input()
-  set feature(value: Feature | undefined) {
-    if (this.feature !== undefined) {
-      return;
-    }
-    this._feature = value;
-  }
-  get feature(): Feature | undefined { return this._feature; }
-  private _feature: Feature | undefined;
+  @Input() feature: Feature | undefined;
 
   /**
    * The store the feature belongs to. Required to manage the
    * visiblity and selection.
    */
-  @Input()
-  set store(value: FeatureStore | undefined) {
-    if (this.store !== undefined) {
-      return;
-    }
-    this._store = value;
-  }
-  get store(): FeatureStore | undefined { return this._store; }
-  private _store: FeatureStore | undefined;
+  @Input() store: FeatureStore | undefined;
 
   /**
    * Event emitted when the form is submitted
    */
-  @Output() submitForm = new EventEmitter<FeatureFormSubmitEvent>();
-
-  /**
-   * Event emitted when the cancel button is clicked
-   */
-  @Output() cancel = new EventEmitter();
+  @Output() submitForm = new EventEmitter<Feature>();
 
   constructor() {}
 
-  /**
-   * Hide the original feature and deactivate the selection
-   * @internal
-   */
-  ngOnInit() {
-    // this.hideFeature();
-    this.deactivateSelection();
+  ngOnChanges(changes: SimpleChanges) {
+    const store = changes.store;
+    if (store && store.currentValue !== store.previousValue) {
+     this.setStore(store.currentValue);
+    }
+
+    const feature = changes.feature;
+    if (feature && feature.currentValue !== feature.previousValue) {
+      this.feature$.next(feature.currentValue);
+    }
   }
 
   /**
@@ -112,8 +80,7 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnDestroy() {
-    // this.showFeature();
-    this.activateSelection();
+    this.setStore(undefined);
   }
 
   /**
@@ -121,22 +88,9 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
    * @param event Form submit event
    * @internal
    */
-  onSubmit(event: EntityFormSubmitEvent) {
-    const feature = event.entity as Feature;
-    // Unselect the feature to avoid some kind of display glitch
-    // if (feature !== undefined) {
-    //   this.store.updateEntityState(feature, {selected: false});
-    // }
-    const data = this.formDataToFeature(event.data);
-    this.submitForm.emit({form: event.form, feature, data});
-  }
-
-  /**
-   * Emit cancel event
-   * @internal
-   */
-  onCancel() {
-    this.cancel.emit();
+  onSubmit(data: {[key: string]: any}) {
+    const feature = this.formDataToFeature(data);
+    this.submitForm.emit(feature);
   }
 
   /**
@@ -179,47 +133,21 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
     };
   }
 
-  /**
-   * Hide the original feature because the geometry input
-   * already adds one to it's overlay
-   */
-  private hideFeature() {
-    if (this.feature === undefined || this.store === undefined) {
-      return;
+  private setStore(store: FeatureStore) {
+    if (this.store !== undefined) {
+      this.activateStoreSelection(this.store);
     }
-
-    const featureId = getEntityId(this.feature);
-    const olFeature = this.store.source.ol.getFeatureById(featureId);
-    if (olFeature !== undefined) {
-      this.olFeatureStyle = olFeature.getStyle();
-      hideOlFeature(olFeature);
+    if (store !== undefined) {
+      this.deactivateStoreSelection(store);
     }
-  }
-
-  /**
-   * Show the original feature when eveything is done
-   */
-  private showFeature() {
-    if (this.feature === undefined || this.store === undefined) {
-      return;
-    }
-
-    const featureId = getEntityId(this.feature);
-    const olFeature = this.store.source.ol.getFeatureById(featureId);
-    if (olFeature !== undefined) {
-      olFeature.setStyle(this.olFeatureStyle);
-    }
+    this.store = store;
   }
 
   /**
    * Deactivate feature selection from the store and from the map
    */
-  private deactivateSelection() {
-    if (this.store === undefined) {
-      return;
-    }
-
-    const selectionStrategies = this.store.getStrategiesOfType(FeatureStoreSelectionStrategy);
+  private deactivateStoreSelection(store: FeatureStore) {
+    const selectionStrategies = store.getStrategiesOfType(FeatureStoreSelectionStrategy);
     selectionStrategies.forEach((strategy: FeatureStoreSelectionStrategy) => {
       strategy.deactivate();
       strategy.unselectAll();
@@ -229,13 +157,10 @@ export class FeatureFormComponent implements OnInit, OnDestroy {
   /**
    * Reactivate feature selection from the store and from the map
    */
-  private activateSelection() {
-    if (this.store === undefined) {
-      return;
-    }
+  private activateStoreSelection(store: FeatureStore) {
     // TODO: maybe we should recativate the strategies only if they
     // were active in the first place
-    this.store.activateStrategiesOfType(FeatureStoreSelectionStrategy);
+    store.activateStrategiesOfType(FeatureStoreSelectionStrategy);
   }
 
 }

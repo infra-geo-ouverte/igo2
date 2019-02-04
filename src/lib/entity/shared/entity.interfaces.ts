@@ -1,11 +1,3 @@
-import { FormGroup } from '@angular/forms';
-
-import OlGeometryType from 'ol/geom/GeometryType';
-
-import { ValidatorFn } from '@angular/forms';
-
-import { IgoMap } from 'src/lib/map/shared/map';
-
 import {
   EntityTableColumnRenderer,
   EntityOperationType
@@ -70,61 +62,6 @@ export interface EntitySortClause {
 }
 
 export type EntityFilterClause = (entity: Entity, state: State) => boolean;
-
-export interface EntityFormTemplate {
-  fields: EntityFormField[];
-  submitLabel?: string;
-  cancelLabel?: string;
-}
-
-export interface EntityFormFieldOptions {
-  validator?: ValidatorFn;
-  disabled?: boolean;
-  visible?: boolean;
-  cols?: number;
-}
-
-export interface EntityFormFieldInput {
-  type?: string;
-}
-
-export interface EntityFormFieldSelectInputChoice {
-  value: any;
-  title: string;
-}
-
-export interface EntityFormFieldSelectInput extends EntityFormFieldInput {
-  choices: EntityFormFieldSelectInputChoice[];
-}
-
-export interface EntityFormFieldGeometryInput extends EntityFormFieldInput {
-  map: IgoMap;
-  geometryType: OlGeometryType;
-  tooltip?: string;
-}
-
-export interface EntityFormFieldCheckboxInput extends EntityFormFieldInput {
-  labelPosition?: 'before' | 'after';
-}
-
-export type EntityFormFieldAnyInput =
-  EntityFormFieldInput |
-  EntityFormFieldSelectInput |
-  EntityFormFieldCheckboxInput |
-  EntityFormFieldGeometryInput;
-
-export interface EntityFormField<T extends EntityFormFieldInput = EntityFormFieldAnyInput> {
-  name: string;
-  title: string;
-  input?: T;
-  options?: EntityFormFieldOptions;
-}
-
-export interface EntityFormSubmitEvent {
-  form: FormGroup;
-  entity: Entity | undefined;
-  data: { [key: string]: any };
-}
 
 export interface EntityOperation extends EntityObject {
   id: string;

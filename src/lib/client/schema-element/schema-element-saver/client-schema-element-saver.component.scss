@@ -1,3 +1,5 @@
+@import 'variables';
+
 $icon-size: 48px;
 
 mat-card {
@@ -36,6 +38,7 @@ mat-card-content {
 
 fadq-entity-table {
   margin: 10px 0;
+  max-height: calc(100% - 56px);
 
   ::ng-deep {
     td.mat-cell:first-child,

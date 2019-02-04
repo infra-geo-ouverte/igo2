@@ -1,7 +1,11 @@
 
-<fadq-entity-form
-  [template]="template"
-  [entity]="feature"
-  (submitForm)="onSubmit($event)"
-  (cancel)="onCancel()">
-</fadq-entity-form>
+<fadq-form
+  [form]="form"
+  [formData]="feature$ | async"
+  (submitForm)="onSubmit($event)">
+
+  <ng-content></ng-content>
+  
+  <ng-content select="[formButtons]" formButtons></ng-content>
+  
+</fadq-form>
