@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 
 import { Observable, of } from 'rxjs';
 
+import { formControlIsRequired } from '../shared/form.utils';
 import { FormFieldSelectChoice } from '../shared/form.interfaces';
 import { FormFieldComponent } from '../shared/form-field-component';
 
@@ -43,6 +44,13 @@ export class FormFieldSelectComponent {
     } else {
       this.choices$ = of(value);
     }
+  }
+
+  /**
+   * Whether the field is required
+   */
+  get required(): boolean {
+    return formControlIsRequired(this.formControl);
   }
 
 }

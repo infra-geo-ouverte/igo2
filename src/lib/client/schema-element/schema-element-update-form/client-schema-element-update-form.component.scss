@@ -2,6 +2,10 @@ fadq-feature-form {
   height: 100%;
 }
 
-mat-tab-group ::ng-deep mat-tab-body {
-  padding: 10px;
+fadq-feature-form ::ng-deep fadq-form {
+  padding-bottom: 10px;
+}
+
+mat-tab-group {
+  width: 100%;
 }

@@ -8,7 +8,6 @@
   "save": "Save",
   "yes": "Yes",
   "no": "No",
-  "geometry": "Geometry",
   "informations": "Informations",
 
   "measure": {
@@ -174,5 +173,12 @@
         "tooltip": "View in Google Maps"
       }
     }
+  },
+
+  "geometry": {
+    "geometry": "Geometry",
+    "point": "Point",
+    "line": "Line",
+    "polygon": "Polygon"
   }
 }

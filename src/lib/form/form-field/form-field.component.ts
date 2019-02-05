@@ -33,12 +33,12 @@ export class FormFieldComponent {
   getFieldInputs(): FormFieldInputs {
     return Object.assign(
       {placeholder: this.field.title},
-      this.field.inputs || {},
+      Object.assign({}, this.field.inputs || {}),
       {formControl: this.field.control}
     );
   }
 
   getFieldSubscribers(): {[key: string]: ({field: FormField, control: FormControl}) => void } {
-    return this.field.subscribers || {};
+    return Object.assign({}, this.field.subscribers || {});
   }
 }

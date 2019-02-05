@@ -21,8 +21,6 @@ import { FormField, FormFieldGroup } from '../shared/form.interfaces';
 })
 export class FormGroupComponent {
 
-
-
   /**
    * Form field group
    */
@@ -50,6 +48,18 @@ export class FormGroupComponent {
     }
 
     return colSpan;
+  }
+
+  /**
+   * Return the number of columns a field should occupy.
+   * The maximum allowed is 2, even if the field config says more.
+   * @param field Field
+   * @returns Number of columns
+   * @internal
+   */
+  getFieldNgClass(field: FormField): {[key: string]: boolean} {
+    const colspan = this.getFieldColSpan(field);
+    return {[`fadq-form-field-colspan-${colspan}`]: true};
   }
 
 }

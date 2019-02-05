@@ -5,7 +5,11 @@ import {
   MatIconModule,
   MatFormFieldModule,
   MatInputModule,
+  MatButtonModule,
+  MatButtonToggleModule
 } from '@angular/material';
+
+import { IgoLanguageModule } from '@igo2/core';
 
 import { GeometryFormFieldComponent } from './geometry-form-field.component';
 import { GeometryFormFieldInputComponent } from './geometry-form-field-input.component';
@@ -20,7 +24,10 @@ import { GeometryFormFieldInputComponent } from './geometry-form-field-input.com
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    IgoLanguageModule
   ],
   exports: [
     GeometryFormFieldComponent,

@@ -77,19 +77,48 @@ export function createSchemaElementLayer(): VectorLayer {
 }
 
 export function createSchemaElementLayerStyle(): (olFeature: OlFeature) => olstyle.Style {
-  const style = new olstyle.Style({
-    stroke: new olstyle.Stroke({
-      width: 2
+  const styles = {
+    'Point': new olstyle.Style({
+      text: createSchemaElementLayerTextStyle()
     }),
-    fill:  new olstyle.Fill(),
-    text: createSchemaElementLayerTextStyle()
-  });
+    'LineString': new olstyle.Style({
+      fill: new olstyle.Fill(),
+      stroke: new olstyle.Stroke({
+        width: 2
+      }),
+      text: createSchemaElementLayerTextStyle()
+    }),
+    'Polygon': new olstyle.Style({
+      fill: new olstyle.Fill(),
+      stroke: new olstyle.Stroke({
+        width: 2
+      }),
+      text: createSchemaElementLayerTextStyle()
+    }),
+  };
 
   return (function(olFeature: OlFeature) {
+    const geometryType = olFeature.getGeometry().getType();
+    const style = styles[geometryType];
     const color = getSchemaElementFeatureColor(olFeature);
-    style.getFill().setColor(color.concat([0.15]));
-    style.getStroke().setColor(color);
+
+    if (geometryType === 'Point') {
+      style.setImage(new olstyle.Circle({
+        fill: new olstyle.Fill({
+          color: color.concat([0.15])
+        }),
+        radius: 6,
+        stroke: new olstyle.Stroke({
+          width: 1,
+          color: color
+        })
+      }));
+    } else {
+      style.getFill().setColor(color.concat([0.15]));
+      style.getStroke().setColor(color);
+    }
     style.getText().setText(olFeature.get('etiquette'));
+
     return style;
   });
 }

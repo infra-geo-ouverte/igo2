@@ -62,7 +62,19 @@ export class GeometryFormFieldInputComponent implements OnInit, OnDestroy, Contr
   /**
    * The geometry type
    */
-  @Input() geometryType: OlGeometryType;
+  @Input()
+  set geometryType(value: OlGeometryType) {
+    this._geometryType = value;
+    if (this.ready === false) {
+      return;
+    }
+
+    this.deactivateControl();
+    this.createDrawControl();
+    this.toggleControl();
+  }
+  get geometryType(): OlGeometryType { return this._geometryType; }
+  private _geometryType: OlGeometryType;
 
   /**
    * The buffer around the mouse pointer to help drawing
@@ -75,9 +87,7 @@ export class GeometryFormFieldInputComponent implements OnInit, OnDestroy, Contr
    */
   @Input()
   set value(value: GeoJSONGeometry) {
-    if (value === null) {
-      value = undefined;
-    }
+    value = value === null ? undefined : value;
     if (this.ready === false) {
       this._value = value;
       return;

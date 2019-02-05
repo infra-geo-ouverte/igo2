@@ -5,14 +5,22 @@
   height: 100%;
   display: block;
   overflow: auto;
+  padding: 10px;
 }
 
-fadq-form-field {
+.fadq-form-field-wrapper {
+  display: inline-block;
+}
+
+.fadq-form-field-colspan-2 {
   width: 100%;
-  padding-top: 10px;
-  margin: 0 $igo-margin;
 }
 
+.fadq-form-field-colspan-1 {
+  width: 50%;
+}
+
+fadq-form-field,
 fadq-form-field ::ng-deep mat-form-field {
   width: 100%;
 }

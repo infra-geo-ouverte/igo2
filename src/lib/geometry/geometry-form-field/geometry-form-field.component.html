@@ -1,9 +1,27 @@
 <fadq-geometry-form-field-input
-    [formControl]="formControl"
-    [map]="map"
-    [geometryType]="geometryType"
-    [buffer]="buffer$ | async">
+  [formControl]="formControl"
+  [map]="map"
+  [geometryType]="geometryType$ | async"
+  [buffer]="buffer$ | async">
 </fadq-geometry-form-field-input>
+
+<div class="geometry-type-toggle">
+  <mat-button-toggle-group
+    [value]="geometryType$ | async"
+    [disabled]="(value$ | async) !== undefined"
+    (change)="onGeometryTypeChange($event.value)">
+    <mat-button-toggle [value]="'Point'">
+      {{'geometry.point' | translate}}
+    </mat-button-toggle>
+    <mat-button-toggle [value]="'LineString'">
+      {{'geometry.line' | translate}}
+    </mat-button-toggle>
+    <mat-button-toggle [value]="'Polygon'">
+      {{'geometry.polygon' | translate}}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
 <mat-form-field class="buffer-field">
   <input
     matInput
@@ -15,5 +33,5 @@
     [color]="'primary'">
     adjust
   </mat-icon>
-  <span matSuffix>mètres</span>
+  <span matSuffix class="buffer-units">mètres</span>
 </mat-form-field>

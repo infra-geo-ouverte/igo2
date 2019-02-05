@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { formControlIsRequired } from '../shared/form.utils';
 import { FormFieldComponent } from '../shared/form-field-component';
 
 /**
@@ -27,5 +28,12 @@ export class FormFieldTextComponent {
    * Field placeholder
    */
   @Input() placeholder: string;
+
+  /**
+   * Whether the field is required
+   */
+  get required(): boolean {
+    return formControlIsRequired(this.formControl);
+  }
 
 }

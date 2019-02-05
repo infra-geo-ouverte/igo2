@@ -5,7 +5,9 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 
 import t from 'typy';
@@ -37,6 +39,12 @@ export class FormComponent implements OnChanges {
    * Event emitted when the form is submitted
    */
   @Output() submitForm = new EventEmitter<{[key: string]: any}>();
+
+  @ViewChild('buttons') buttons: ElementRef;
+
+  get hasButtons(): boolean {
+    return this.buttons.nativeElement.children.length !== 0;
+  }
 
   constructor() {}
 

@@ -1,14 +1,22 @@
 :host {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-
-.geometry-field {
+  display: block;
   width: 100%;
 }
 
-.geometry-field mat-icon,
+.geometry-type-toggle,
+.buffer-field {
+  width: 100%;
+}
+
+.geometry-type-toggle {
+  padding: 10px;
+  text-align: center;
+}
+
 .buffer-field mat-icon {
   margin: 0 10px;
+}
+
+.buffer-units {
+  padding: 10px;
 }

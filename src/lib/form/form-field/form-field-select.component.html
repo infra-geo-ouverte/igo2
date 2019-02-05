@@ -3,6 +3,7 @@
 
 <mat-form-field>
   <mat-select
+    [required]="required"
     [placeholder]="placeholder"
     [formControl]="formControl">
     <mat-option *ngFor="let choice of choices$ | async" [value]="choice.value">
