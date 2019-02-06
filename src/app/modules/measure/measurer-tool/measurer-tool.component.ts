@@ -5,8 +5,12 @@ import {
 
 import { Register } from '@igo2/context';
 
+import { FeatureStore } from 'src/lib/feature';
+import { FeatureWithMeasure } from 'src/lib/measure';
 import { IgoMap } from 'src/lib/map';
 import { MapState } from 'src/app/modules/map/map.state';
+
+import { MeasureState } from '../measure.state';
 import { MeasurerToolOptions } from './measurer-tool.interfaces';
 
 /**
@@ -34,8 +38,17 @@ export class MeasurerToolComponent {
    * Map to measure on
    * @internal
    */
+  get store(): FeatureStore<FeatureWithMeasure> { return this.measureState.store; }
+
+  /**
+   * Map to measure on
+   * @internal
+   */
   get map(): IgoMap { return this.mapState.map; }
 
-  constructor(private mapState: MapState) {}
+  constructor(
+    private measureState: MeasureState,
+    private mapState: MapState
+  ) {}
 
 }

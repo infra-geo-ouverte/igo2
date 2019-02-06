@@ -52,14 +52,21 @@ export class GeometryFormFieldComponent implements OnInit, OnDestroy {
   set geometryType(value: OlGeometryType) { this.geometryType$.next(value); }
   get geometryType(): OlGeometryType { return this.geometryType$.value; }
 
+  /**
+   * Set up a value stream
+   * @internal
+   */
   ngOnInit() {
     this.value$.next(this.formControl.value ? this.formControl.value : undefined);
-    console.log(this.formControl.value);
     this.value$$ = this.formControl.valueChanges.subscribe((value: GeoJSONGeometry) => {
       this.value$.next(value ? value : undefined);
     });
   }
 
+  /**
+   * Unsubscribe to the value stream
+   * @internal
+   */
   ngOnDestroy() {
     this.value$$.unsubscribe();
   }

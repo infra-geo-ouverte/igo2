@@ -35,7 +35,7 @@ export class ClientSchemaElementSaverComponent implements WidgetComponent {
     [EntityOperationType.Delete]: 'delete'
   };
 
-  static tableTemplate: EntityTableTemplate = {
+  public tableTemplate: EntityTableTemplate = {
     selection: false,
     sort: false,
     columns: [
@@ -82,10 +82,6 @@ export class ClientSchemaElementSaverComponent implements WidgetComponent {
    * Event emitted on cancel
    */
   @Output() cancel = new EventEmitter<void>();
-
-  get tableTemplate(): EntityTableTemplate {
-    return ClientSchemaElementSaverComponent.tableTemplate;
-  }
 
   constructor(
     private clientSchemaElementService: ClientSchemaElementService

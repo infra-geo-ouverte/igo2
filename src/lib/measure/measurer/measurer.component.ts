@@ -3,20 +3,30 @@ import {
   Input,
   OnInit,
   OnDestroy,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ViewChild
 } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
+import { uuid } from '@igo2/utils';
+import { VectorLayer, FeatureDataSource } from '@igo2/geo';
+
+import OlStyle from 'ol/style/Style';
+import OlGeoJSON from 'ol/format/GeoJSON';
+import OlVectorLayer from 'ol/layer/Vector';
 import OlVectorSource from 'ol/source/Vector';
 import OlLineString from 'ol/geom/LineString';
 import OlPolygon from 'ol/geom/Polygon';
 import OlFeature from 'ol/Feature';
 import OlOverlay from 'ol/Overlay';
 
-import { IgoMap } from 'src/lib/map';
-import { DrawControl } from 'src/lib/map';
-import { GeometryMeasures } from '../shared/measure.interfaces';
+import { EntityTableTemplate } from 'src/lib/entity';
+import { EntityTableComponent } from 'src/lib/entity/entity-table/entity-table.component';
+import { FEATURE, FeatureStore, FeatureStoreLoadingStrategy } from 'src/lib/feature';
+import { IgoMap, DrawControl } from 'src/lib/map';
+
+import { Measure, FeatureWithMeasure } from '../shared/measure.interfaces';
 import {
   MeasureType,
   MeasureAreaUnit,
@@ -29,7 +39,9 @@ import {
   createMeasureLayerStyle,
   updateOlTooltipsAtMidpoints,
   getOlTooltipsAtMidpoints,
-  metersToUnit
+  squareMetersToUnit,
+  metersToUnit,
+  formatMeasure
 } from '../shared/measure.utils';
 
 /**
@@ -42,6 +54,45 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MeasurerComponent implements OnInit, OnDestroy {
+
+  /**
+   * Table template
+   * @internal
+   */
+  public tableTemplate: EntityTableTemplate = {
+    selection: true,
+    sort: true,
+    columns: [
+      {
+        name: 'length',
+        title: 'Length',
+        valueAccessor: (feature: FeatureWithMeasure) => {
+          const unit = this.activeLengthUnit;
+          const measure = metersToUnit(feature.properties.measure.length, unit);
+          return formatMeasure(measure, {
+            decimal: 1,
+            unit: unit,
+            unitAbbr: false,
+            locale: 'fr'
+          });
+        }
+      },
+      {
+        name: 'area',
+        title: 'Area',
+        valueAccessor: (feature: FeatureWithMeasure) => {
+          const unit = this.activeAreaUnit;
+          const measure = squareMetersToUnit(feature.properties.measure.area, unit);
+          return measure ? formatMeasure(measure, {
+            decimal: 1,
+            unit: unit,
+            unitAbbr: false,
+            locale: 'fr'
+          }) : '';
+        }
+      }
+    ]
+  };
 
   /**
    * Reference to the MeasureType enum
@@ -86,12 +137,6 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   public lengths$: BehaviorSubject<number[]> = new BehaviorSubject([]);
 
   /**
-   * Observable of last length
-   * @internal
-   */
-  public lastLength$: BehaviorSubject<number> = new BehaviorSubject(undefined);
-
-  /**
    * Draw line control
    */
   private drawLineControl: DrawControl;
@@ -107,9 +152,14 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   private activeOlGeometry: OlLineString | OlPolygon;
 
   /**
-   * Active measure unit for map tooltips
+   * Active mlength unit
    */
-  private activeMeasureUnit: MeasureLengthUnit = MeasureLengthUnit.Meters;
+  private activeLengthUnit: MeasureLengthUnit = MeasureLengthUnit.Meters;
+
+  /**
+   * Active area unit
+   */
+  private activeAreaUnit: MeasureAreaUnit = MeasureAreaUnit.SquareMeters;
 
   /**
    * Active draw control
@@ -137,6 +187,11 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    */
   @Input() map: IgoMap;
 
+   /**
+   * The measures store
+   */
+  @Input() store: FeatureStore<FeatureWithMeasure>;
+
   /**
    * Measure type
    * @internal
@@ -157,6 +212,8 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    */
   @Input() minSegmentLength: number = 10;
 
+  @ViewChild('table') table: EntityTableComponent;
+
   /**
    * Wheter one of the draw control is active
    * @internal
@@ -172,6 +229,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnInit() {
+    this.initStore();
     this.createDrawLineControl();
     this.createDrawPolygonControl();
     this.toggleDrawControl();
@@ -233,10 +291,38 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * Set the measure type
    * @internal
    */
-  onLengthMeasureUnitChange(measureUnit: MeasureLengthUnit) {
-    this.activeMeasureUnit = measureUnit;
+  onLengthUnitChange(unit: MeasureLengthUnit) {
+    this.activeLengthUnit = unit;
+    this.table.refresh();
     if (this.activeOlGeometry !== undefined) {
       this.updateTooltipsOfOlGeometry(this.activeOlGeometry, this.lengths$.value);
+    }
+  }
+
+  /**
+   * Set the measure type
+   * @internal
+   */
+  onAreaUnitChange(unit: MeasureAreaUnit) {
+    this.activeAreaUnit = unit;
+    this.table.refresh();
+  }
+
+  private initStore() {
+    if (this.store.layer === undefined) {
+      const layer = new VectorLayer({
+        zIndex: 200,
+        source: new FeatureDataSource(),
+        style: createMeasureLayerStyle()
+      });
+      this.map.addLayer(layer);
+      this.store.bindLayer(layer);
+    }
+
+    if (this.store.getStrategyOfType(FeatureStoreLoadingStrategy) === undefined) {
+      const strategy = new FeatureStoreLoadingStrategy();
+      this.store.addStrategy(strategy);
+      strategy.activate();
     }
   }
 
@@ -248,7 +334,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
       geometryType: 'LineString',
       source: new OlVectorSource(),
       drawStyle: createMeasureInteractionStyle(),
-      layerStyle: createMeasureLayerStyle()
+      layerStyle: new OlStyle({})
     });
   }
 
@@ -260,7 +346,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
       geometryType: 'Polygon',
       source: new OlVectorSource(),
       drawStyle: createMeasureInteractionStyle(),
-      layerStyle: createMeasureLayerStyle()
+      layerStyle: new OlStyle({})
     });
   }
 
@@ -317,9 +403,9 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * @param olGeometry Ol linestring or polygon
    */
   private onDrawStart(olGeometry: OlLineString | OlPolygon) {
-    const olDrawSource = this.activeDrawControl.getSource();
-    this.clearTooltipsOfOlSource(olDrawSource);
-    olDrawSource.clear();
+    // const olDrawSource = this.activeDrawControl.getSource();
+    // this.clearTooltipsOfOlSource(olDrawSource);
+    // olDrawSource.clear();
     this.activeOlGeometry = olGeometry;
   }
 
@@ -328,39 +414,33 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * @param olGeometry Ol linestring or polygon
    */
   private onDrawEnd(olGeometry:  OlLineString | OlPolygon) {
-    // this.activeOlGeometry = undefined;
+    const olDrawSource = this.activeDrawControl.getSource();
+    this.clearTooltipsOfOlSource(olDrawSource);
+    olDrawSource.clear();
+    this.activeOlGeometry = undefined;
+    this.addFeatureToStore(olGeometry);
   }
 
   /**
    * Update measures observables and map tooltips
-   * @param measures Measures
+   * @param olGeometry Ol linestring or polygon
    */
   private onDrawChanges(olGeometry:  OlLineString | OlPolygon) {
-    const projection = this.map.ol.getView().projection;
-    const measures = measureOlGeometry(olGeometry, projection);
-    this.updateMeasuresOfOlGeometry(olGeometry, measures);
-    this.updateTooltipsOfOlGeometry(olGeometry, measures.lengths);
+    const projection = this.map.ol.getView().getProjection();
+    const measure = measureOlGeometry(olGeometry, projection);
+    this.updateMeasureOfOlGeometry(olGeometry, measure);
+    this.updateTooltipsOfOlGeometry(olGeometry, measure.lengths);
   }
 
   /**
    * Update measures observables
-   * @param measures Measures
+   * @param olGeometry Ol linestring or polygon
+   * @param measure Measure
    */
-  private updateMeasuresOfOlGeometry(olGeometry:  OlLineString | OlPolygon, measures: GeometryMeasures) {
-    this.area$.next(measures.area);
-    this.length$.next(measures.length);
-    this.lengths$.next(measures.lengths);
-
-    const lengths = measures.lengths;
-    let lastLengthIndex = lengths.length - 1;
-    if (this.activeMeasureType === MeasureType.Area) {
-      lastLengthIndex = lastLengthIndex - 1;
-    }
-
-    const lastLength = lengths.length >= lastLengthIndex ? lengths[lastLengthIndex] : 0;
-    if (lastLength !== 0) {
-      this.lastLength$.next(lastLength);
-    }
+  private updateMeasureOfOlGeometry(olGeometry:  OlLineString | OlPolygon, measure: Measure) {
+    this.area$.next(measure.area);
+    this.length$.next(measure.length);
+    this.lengths$.next(measure.lengths);
   }
 
   /**
@@ -369,7 +449,26 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   private clearMeasures() {
     this.area$.next(undefined);
     this.length$.next(undefined);
-    this.lastLength$.next(undefined);
+  }
+
+  private addFeatureToStore(olGeometry:  OlLineString | OlPolygon) {
+    const projection = this.map.ol.getView().getProjection();
+    const geometry = new OlGeoJSON().writeGeometryObject(olGeometry, {
+      featureProjection: projection,
+      dataProjection: projection
+    });
+    const feature = {
+      type: FEATURE,
+      geometry: geometry,
+      projection: projection.getCode(),
+      properties: {
+        measure: measureOlGeometry(olGeometry, projection)
+      },
+      meta: {
+        id: uuid()
+      }
+    };
+    this.store.addEntities([feature]);
   }
 
   /**
@@ -390,7 +489,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     for (let i = 0; i < olTooltips.length; i++) {
       const length = lengths[i];
       const olTooltip = olTooltips[i];
-      this.updateOlTooltip(olTooltip, length, this.activeMeasureUnit);
+      this.updateOlTooltip(olTooltip, length, this.activeLengthUnit);
     }
   }
 
@@ -463,7 +562,12 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     const length = properties['length'];
     const measureUnit = properties['measureUnit'] || MeasureLengthUnit.Meters;
     const converted = metersToUnit(length, measureUnit);
-    return `${converted.toFixed(3)} ${MeasureLengthUnitAbbreviation[measureUnit]}`;
+    return formatMeasure(converted, {
+      decimal: 1,
+      unit: measureUnit,
+      unitAbbr: true,
+      locale: 'fr'
+    });
   }
 
   /**

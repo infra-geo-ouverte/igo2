@@ -106,7 +106,7 @@ export class FeatureStoreLoadingStrategy extends FeatureStoreStrategy {
     if (features.length === 0) {
       store.clearLayer();
     } else {
-      store.setLayerFeatures(features, FeatureMotion.Default);
+      store.setLayerFeatures(features, FeatureMotion.None);
     }
   }
 }

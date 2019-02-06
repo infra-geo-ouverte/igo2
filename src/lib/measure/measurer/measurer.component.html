@@ -20,12 +20,12 @@
       {{'measure.toggleMeasure' | translate}}
     </mat-slide-toggle>
 
-    <!--mat-slide-toggle
+    <mat-slide-toggle
       [checked]="mapTooltips"
       [labelPosition]="'before'"
       (change)="onToggleMapTooltips($event.checked)">
       {{'measure.toggleMapTooltips' | translate}}
-    </mat-slide-toggle-->
+    </mat-slide-toggle>
 
     <mat-slide-toggle
       [checked]="measureUnitsAuto"
@@ -38,18 +38,10 @@
   <fadq-measurer-item
     [measureType]="measureType.Length"
     [measureUnit]="measureLengthUnit.Meters"
-    [measure]="lastLength$ | async"
-    [auto]="measureUnitsAuto"
-    [placeholder]="'measure.lastLength' | translate">
-  </fadq-measurer-item>
-
-  <fadq-measurer-item
-    [measureType]="measureType.Length"
-    [measureUnit]="measureLengthUnit.Meters"
     [measure]="length$ | async"
     [auto]="measureUnitsAuto"
     [placeholder]="(activeMeasureType === measureType.Area ? 'measure.perimeter' : 'measure.length') | translate"
-    (measureUnitChange)="onLengthMeasureUnitChange($event)">
+    (measureUnitChange)="onLengthUnitChange($event)">
   </fadq-measurer-item>
 
   <fadq-measurer-item
@@ -57,6 +49,14 @@
     [measureUnit]="measureAreaUnit.SquareMeters"
     [measure]="area$ | async"
     [auto]="measureUnitsAuto"
-    [placeholder]="'measure.area' | translate">
+    [placeholder]="'measure.area' | translate"
+    (measureUnitChange)="onAreaUnitChange($event)">
   </fadq-measurer-item>
+
+  <fadq-entity-table
+    #table
+    class="table-compact"
+    [store]="store"
+    [template]="tableTemplate">
+  </fadq-entity-table>
 </div>

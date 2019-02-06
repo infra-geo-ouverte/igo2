@@ -147,11 +147,11 @@ export class FeatureFormComponent implements OnChanges, OnDestroy {
    * Deactivate feature selection from the store and from the map
    */
   private deactivateStoreSelection(store: FeatureStore) {
-    const selectionStrategies = store.getStrategiesOfType(FeatureStoreSelectionStrategy);
-    selectionStrategies.forEach((strategy: FeatureStoreSelectionStrategy) => {
-      strategy.deactivate();
-      strategy.unselectAll();
-    });
+    const selectionStrategy = store.getStrategyOfType(FeatureStoreSelectionStrategy);
+    if (selectionStrategy !== undefined) {
+      selectionStrategy.deactivate();
+      (selectionStrategy as FeatureStoreSelectionStrategy).unselectAll();
+    }
   }
 
   /**
@@ -160,7 +160,7 @@ export class FeatureFormComponent implements OnChanges, OnDestroy {
   private activateStoreSelection(store: FeatureStore) {
     // TODO: maybe we should recativate the strategies only if they
     // were active in the first place
-    store.activateStrategiesOfType(FeatureStoreSelectionStrategy);
+    store.activateStrategyOfType(FeatureStoreSelectionStrategy);
   }
 
 }

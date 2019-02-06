@@ -13,6 +13,8 @@ import {
 
 import { IgoLanguageModule } from '@igo2/core';
 
+import { FadqLibEntityTableModule } from 'src/lib/entity/entity-table/entity-table.module';
+
 import { MeasureFormatPipe } from './measure-format.pipe';
 import { MeasurerItemComponent } from './measurer-item.component';
 import { MeasurerComponent } from './measurer.component';
@@ -30,7 +32,8 @@ import { MeasurerComponent } from './measurer.component';
     MatInputModule,
     MatSelectModule,
     MatSlideToggleModule,
-    IgoLanguageModule
+    IgoLanguageModule,
+    FadqLibEntityTableModule
   ],
   declarations: [
     MeasureFormatPipe,

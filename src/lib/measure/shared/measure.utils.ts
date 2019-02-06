@@ -6,8 +6,13 @@ import OlPolygon from 'ol/geom/Polygon';
 import OlOverlay from 'ol/Overlay';
 import { getLength, getArea } from 'ol/sphere';
 
-import { GeometryMeasures } from './measure.interfaces';
-import { MeasureAreaUnit, MeasureLengthUnit } from './measure.enum';
+import { Measure } from './measure.interfaces';
+import {
+  MeasureAreaUnit,
+  MeasureAreaUnitAbbreviation,
+  MeasureLengthUnit,
+  MeasureLengthUnitAbbreviation
+} from './measure.enum';
 
 /**
  * Convert value from meters to kilometers
@@ -120,6 +125,43 @@ export function squareMetersToUnit(value: number, unit: MeasureAreaUnit): number
 }
 
 /**
+ * This method format a measure to a readable format
+ * @param measure Measure
+ * @param options Formatting options
+ * @returns Formatted measure
+ */
+export function formatMeasure(measure: number, options?: {
+  decimal?: number;
+  unit?: MeasureAreaUnit | MeasureLengthUnit;
+  unitAbbr?: boolean;
+  locale?: string;
+}) {
+  let decimal = options.decimal;
+  if (decimal === undefined || decimal < 0) {
+    decimal = 1;
+  }
+
+  const parts = [];
+  if (options.locale !== undefined) {
+    parts.push(measure.toLocaleString(options.locale, {
+      minimumFractionDigits: decimal,
+      maximumFractionDigits: decimal
+    }));
+  } else {
+    parts.push(measure.toFixed(decimal).toString());
+  }
+
+  if (options.unit !== undefined && options.unitAbbr === true) {
+    parts.push(
+      MeasureLengthUnitAbbreviation[options.unit] ||
+      MeasureAreaUnitAbbreviation[options.unit]
+    );
+  }
+
+  return parts.filter(p => p !== undefined).join(' ');
+}
+
+/**
  * Compute best length measure unit for a given measure in meters
  * @param value Value in meters
  * @returns Measure unit
@@ -224,9 +266,9 @@ export function measureOlGeometryArea(olGeometry: OlGeometry, projection: string
  * of an OL geometry with a given projection.
  * @param olGeometry Ol geometry
  * @param projection olGeometry's projection
- * @returns Computed measures
+ * @returns Computed measure
  */
-export function measureOlGeometry(olGeometry: OlGeometry, projection: string): GeometryMeasures {
+export function measureOlGeometry(olGeometry: OlGeometry, projection: string): Measure {
   const length = measureOlGeometryLength(olGeometry, projection);
   const area = measureOlGeometryArea(olGeometry, projection);
 

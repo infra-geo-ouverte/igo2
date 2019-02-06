@@ -8,11 +8,11 @@ import { EntityObject, EntityMeta } from 'src/lib/entity';
 import { IgoMap } from 'src/lib/map';
 import { FeatureMotion } from './feature.enum';
 
-export interface Feature extends EntityObject {
+export interface Feature<P = { [key: string]: any }> extends EntityObject {
   type: string;
   projection: string;
   geometry: FeatureGeometry;
-  properties: { [key: string]: any };
+  properties: P;
   extent?: [number, number, number, number];
   meta?: FeatureMeta;
 }

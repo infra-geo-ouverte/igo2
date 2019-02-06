@@ -127,6 +127,16 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   /**
+   * Trigger a refresh of thre table. This can be useful when
+   * the data source doesn't emit a new value but for some reason
+   * the records need an update.
+   * @internal
+   */
+  refresh() {
+    this.cdRef.detectChanges();
+  }
+
+  /**
    * Implemented as part of the DataSource interface
    * @internal
    */

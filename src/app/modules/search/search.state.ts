@@ -12,6 +12,11 @@ import { SearchResult, SearchSourceService, SearchSource } from 'src/lib/search'
 export class SearchState {
 
   /**
+   * Store that holds the search results
+   */
+  public store: EntityStore<SearchResult> = new EntityStore<SearchResult>();
+
+  /**
    * Search types currently enabled in the search source service
    */
   get searchTypes(): string[] {
@@ -19,14 +24,6 @@ export class SearchState {
       .map((source: SearchSource) => (source.constructor as any).type);
   }
 
-  /**
-   * Store that holds the search results
-   */
-  get store(): EntityStore<SearchResult> { return this._store; }
-  private _store: EntityStore<SearchResult>;
-
-  constructor(private searchSourceService: SearchSourceService) {
-    this._store = new EntityStore<SearchResult>();
-  }
+  constructor(private searchSourceService: SearchSourceService) {}
 
 }

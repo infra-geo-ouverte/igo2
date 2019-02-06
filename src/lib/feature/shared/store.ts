@@ -60,6 +60,13 @@ export class FeatureStore<T extends Feature = Feature> extends EntityStore<T> {
    * @returns Feature store
    */
   addStrategy(strategy: FeatureStoreStrategy): FeatureStore {
+    const existingStrategy = this.strategies.find((_strategy: FeatureStoreStrategy) => {
+      return strategy.constructor === _strategy.constructor;
+    });
+    if (existingStrategy !== undefined) {
+      throw new Error('A strategy of this typem already exists on that FeatureStore.');
+    }
+
     this.strategies.push(strategy);
     strategy.bindStore(this);
     return this;
@@ -84,8 +91,8 @@ export class FeatureStore<T extends Feature = Feature> extends EntityStore<T> {
    * @param type Feature store strategy class
    * @returns Strategies
    */
-  getStrategiesOfType(type: typeof FeatureStoreStrategy): FeatureStoreStrategy[] {
-    return this.strategies.filter((strategy: FeatureStoreStrategy) => {
+  getStrategyOfType(type: typeof FeatureStoreStrategy): FeatureStoreStrategy {
+    return this.strategies.find((strategy: FeatureStoreStrategy) => {
       return strategy instanceof type;
     });
   }
@@ -94,20 +101,22 @@ export class FeatureStore<T extends Feature = Feature> extends EntityStore<T> {
    * Activate strategies of a given type
    * @param type Feature store strategy class
    */
-  activateStrategiesOfType(type: typeof FeatureStoreStrategy) {
-    this.getStrategiesOfType(type).forEach((strategy: FeatureStoreStrategy) => {
+  activateStrategyOfType(type: typeof FeatureStoreStrategy) {
+    const strategy = this.getStrategyOfType(type);
+    if (strategy !== undefined) {
       strategy.activate();
-    });
+    }
   }
 
   /**
    * Deactivate strategies of a given type
    * @param type Feature store strategy class
    */
-  deactivateStrategiesOfType(type: typeof FeatureStoreStrategy) {
-    this.getStrategiesOfType(type).forEach((strategy: FeatureStoreStrategy) => {
+  deactivateStrategyOfType(type: typeof FeatureStoreStrategy) {
+    const strategy = this.getStrategyOfType(type);
+    if (strategy !== undefined) {
       strategy.deactivate();
-    });
+    }
   }
 
   /**
@@ -133,7 +142,6 @@ export class FeatureStore<T extends Feature = Feature> extends EntityStore<T> {
     if (this.layer === undefined) {
       throw new Error('This FeatureStore is not bound to a layer.');
     }
-
     this.source.ol.clear();
   }
 

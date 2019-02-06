@@ -27,7 +27,7 @@ import { ClientSchemaFileService } from '../shared/client-schema-file.service';
 })
 export class ClientSchemaFileManagerComponent implements OnInit, WidgetComponent {
 
-  static tableTemplate: EntityTableTemplate = {
+  public tableTemplate: EntityTableTemplate = {
     selection: true,
     sort: true,
     columns: [
@@ -65,10 +65,6 @@ export class ClientSchemaFileManagerComponent implements OnInit, WidgetComponent
    * Event emitted on cancel
    */
   @Output() cancel = new EventEmitter<void>();
-
-  get tableTemplate(): EntityTableTemplate {
-    return ClientSchemaFileManagerComponent.tableTemplate;
-  }
 
   @ViewChild('downloadLink') downloadLink: ElementRef;
 
