@@ -1,0 +1,21 @@
+{
+  "short_name": "IGO2",
+  "name": "IGO2 - Données Québec",
+  "icons": [
+    {
+      "src": "./assets/favicons/android-chrome-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "./assets/favicons/android-chrome-256x256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "orientation": "portrait"
+}
