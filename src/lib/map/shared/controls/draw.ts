@@ -142,7 +142,7 @@ export class DrawControl {
   private addOlDrawInteraction() {
     const olDrawInteraction = new OlDraw({
       type: this.geometryType,
-      source: this.olOverlaySource,
+      source: this.getSource(),
       stopClick: true,
       style: this.options.drawStyle
     });

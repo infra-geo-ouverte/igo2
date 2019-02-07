@@ -4,7 +4,11 @@ import OlPoint from 'ol/geom/Point';
 import OlLineString from 'ol/geom/LineString';
 import OlPolygon from 'ol/geom/Polygon';
 import OlOverlay from 'ol/Overlay';
-import { getLength, getArea } from 'ol/sphere';
+import { getCenter as olGetCenter } from 'ol/extent';
+import {
+  getLength as olGetLength,
+  getArea as olGetArea
+} from 'ol/sphere';
 
 import { Measure } from './measure.interfaces';
 import {
@@ -245,7 +249,7 @@ export function measureOlGeometryLength(olGeometry: OlGeometry, projection: stri
   if (olGeometry instanceof OlPoint) {
     return undefined;
   }
-  return getLength(olGeometry, {projection});
+  return olGetLength(olGeometry, {projection});
 }
 
 /**
@@ -258,7 +262,7 @@ export function measureOlGeometryArea(olGeometry: OlGeometry, projection: string
   if (olGeometry instanceof OlPoint || olGeometry instanceof OlLineString) {
     return undefined;
   }
-  return getArea(olGeometry, {projection});
+  return olGetArea(olGeometry, {projection});
 }
 
 /**
@@ -330,29 +334,35 @@ export function getOlGeometryMidpoints(olGeometry: OlLineString | OlPolygon): Ol
 
   // TODO: To myself: This is for demo puposes. Clean this mess!!!
   // And make a Tooltip class  to handle those things.
-  let olMidpoints = olGeometry.get('midpoints');
+  let olMidpoints = olGeometry.get('_midpoints');
   if (olMidpoints === undefined) {
     olMidpoints = new Array(expectedNumber);
-    olGeometry.set('midpoints', olMidpoints, true);
-  } else {
-    if (expectedNumber > olMidpoints.length) {
-      olMidpoints.push(...new Array(expectedNumber - olMidpoints.length));
-    } else if (expectedNumber < olMidpoints.length) {
-      for (let i = expectedNumber; i < olMidpoints.length; i++) {
-        const olMidpoint = olMidpoints[expectedNumber];
-        if (olMidpoint !== undefined) {
-          const olTooltip = olMidpoint.get('tooltip');
-          if (olTooltip !== undefined) {
-            const olMap = olTooltip.getMap();
-            if (olMap !== undefined) {
-              olMap.removeOverlay(olTooltip);
-            }
-          }
+    olGeometry.set('_midpoints', olMidpoints, true);
+    return olMidpoints;
+  }
+
+  if (expectedNumber === olMidpoints.length) {
+    return olMidpoints;
+  }
+
+  if (expectedNumber > olMidpoints.length) {
+    olMidpoints.push(...new Array(expectedNumber - olMidpoints.length));
+    return olMidpoints;
+  }
+
+  for (let i = expectedNumber; i < olMidpoints.length; i++) {
+    const olMidpoint = olMidpoints[expectedNumber];
+    if (olMidpoint !== undefined) {
+      const olTooltip = olMidpoint.get('_tooltip');
+      if (olTooltip !== undefined) {
+        const olMap = olTooltip.getMap();
+        if (olMap !== undefined) {
+          olMap.removeOverlay(olTooltip);
         }
       }
-      olMidpoints.splice(expectedNumber);
     }
   }
+  olMidpoints.splice(expectedNumber);
 
   return olMidpoints;
 }
@@ -365,23 +375,12 @@ export function getOlGeometryMidpoints(olGeometry: OlLineString | OlPolygon): Ol
 export function updateOlTooltipsAtMidpoints(olGeometry: OlLineString | OlPolygon): OlOverlay[] {
   const olMidpoints = updateOlGeometryMidpoints(olGeometry);
   const olTooltips = olMidpoints.map((olMidpoint: OlPoint) => {
-    let olTooltip = olMidpoint.get('tooltip');
+    let olTooltip = olMidpoint.get('_tooltip');
     if (olTooltip === undefined) {
-      olTooltip = new OlOverlay({
-        element: document.createElement('div'),
-        offset: [0, 15],
-        positioning: 'bottom-center',
-        className: [
-          'fadq-map-tooltip',
-          'fadq-map-tooltip-measure',
-          'fadq-map-tooltip-measure-bottom'
-        ].join(' '),
-        stopEvent: false
-      });
-      olMidpoint.set('tooltip', olTooltip, true);
+      olTooltip = createOlTooltipAtPoint(olMidpoint);
+    } else {
+      olTooltip.setPosition(olMidpoint.flatCoordinates);
     }
-    olTooltip.setPosition(olMidpoint.flatCoordinates);
-
     return olTooltip;
   });
   return olTooltips;
@@ -395,6 +394,85 @@ export function updateOlTooltipsAtMidpoints(olGeometry: OlLineString | OlPolygon
 export function getOlTooltipsAtMidpoints(olGeometry: OlLineString | OlPolygon): OlOverlay[] {
   const olMidpoints = getOlGeometryMidpoints(olGeometry);
   return olMidpoints.map((olMidpoint: OlPoint) => {
-    return olMidpoint ? olMidpoint.get('tooltip') : undefined;
+    return olMidpoint ? olMidpoint.get('_tooltip') : undefined;
   });
+}
+
+/**
+ * Update an OL geometry center and return it
+ * @param olGeometry OL Geometry
+ * @returns OL point
+ */
+export function updateOlGeometryCenter(olGeometry: OlLineString | OlPolygon): OlPoint {
+  let olCenter = olGeometry.get('_center');
+  const centerCoordinate = olGetCenter(olGeometry.getExtent());
+  if (olCenter !== undefined) {
+    olCenter.setCoordinates(centerCoordinate);
+  } else {
+    olCenter = new OlPoint(centerCoordinate);
+    olGeometry.set('_center', olCenter);
+  }
+
+  return olCenter;
+}
+
+/**
+ * Add an OL overlay at the center of a geometry and return that overlay
+ * @param olGeometry OL Geometry
+ * @returns OL overlay
+ */
+export function updateOlTooltipAtCenter(olGeometry: OlLineString | OlPolygon): OlOverlay {
+  const olCenter = updateOlGeometryCenter(olGeometry);
+  let olTooltip = olCenter.get('_tooltip');
+  if (olTooltip === undefined) {
+    olTooltip = createOlTooltipAtPoint(olCenter);
+  } else {
+    olTooltip.setPosition(olCenter.flatCoordinates);
+  }
+  return olTooltip;
+}
+
+/**
+ * Return an array of OL overlay at midspoints, if any
+ * @param olGeometry OL Geometry
+ * @returns OL overlays
+ */
+export function getOlTooltipAtCenter(olGeometry: OlLineString | OlPolygon): OlOverlay {
+  const olCenter = olGeometry.get('_center');
+  return olCenter ? olCenter.get('_tooltip') : undefined;
+}
+
+/**
+ * Get all the tooltips of an OL geometry
+ * @param olGeometry OL Geometry
+ * @returns OL overlays
+ */
+export function getTooltipsOfOlGeometry(olGeometry: OlLineString | OlPolygon): OlOverlay[] {
+  const olTooltips = [].concat(getOlTooltipsAtMidpoints(olGeometry) || []);
+  const olCenterTooltip = getOlTooltipAtCenter(olGeometry);
+  if (olCenterTooltip !== undefined) {
+    olTooltips.push(olCenterTooltip);
+  }
+  return olTooltips;
+}
+
+/**
+ * Create an OL overlay at a point and bind the overlay to the point
+ * @param olPoint OL Point
+ * @returns OL overlay
+ */
+export function createOlTooltipAtPoint(olPoint: OlPoint): OlOverlay {
+  const olTooltip = new OlOverlay({
+    element: document.createElement('div'),
+    offset: [-30, -10],
+    className: [
+      'fadq-map-tooltip',
+      'fadq-map-tooltip-measure'
+    ].join(' '),
+    stopEvent: false
+  });
+  olTooltip.setPosition(olPoint.flatCoordinates);
+  olPoint.set('_tooltip', olTooltip);
+
+  return olTooltip;
 }

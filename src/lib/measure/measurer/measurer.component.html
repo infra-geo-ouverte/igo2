@@ -21,9 +21,9 @@
     </mat-slide-toggle>
 
     <mat-slide-toggle
-      [checked]="mapTooltips"
+      [checked]="showTooltips"
       [labelPosition]="'before'"
-      (change)="onToggleMapTooltips($event.checked)">
+      (change)="onToggleTooltips($event.checked)">
       {{'measure.toggleMapTooltips' | translate}}
     </mat-slide-toggle>
 
@@ -35,23 +35,25 @@
     </mat-slide-toggle>
   </div>
 
-  <fadq-measurer-item
-    [measureType]="measureType.Length"
-    [measureUnit]="measureLengthUnit.Meters"
-    [measure]="length$ | async"
-    [auto]="measureUnitsAuto"
-    [placeholder]="(activeMeasureType === measureType.Area ? 'measure.perimeter' : 'measure.length') | translate"
-    (measureUnitChange)="onLengthUnitChange($event)">
-  </fadq-measurer-item>
+  <ng-container *ngIf="measure$ | async as measure">
+    <fadq-measurer-item
+      [measureType]="measureType.Length"
+      [measureUnit]="measureLengthUnit.Meters"
+      [measure]="measure.length"
+      [auto]="measureUnitsAuto"
+      [placeholder]="(activeMeasureType === measureType.Area ? 'measure.perimeter' : 'measure.length') | translate"
+      (measureUnitChange)="onLengthUnitChange($event)">
+    </fadq-measurer-item>
 
-  <fadq-measurer-item
-    [measureType]="measureType.Area"
-    [measureUnit]="measureAreaUnit.SquareMeters"
-    [measure]="area$ | async"
-    [auto]="measureUnitsAuto"
-    [placeholder]="'measure.area' | translate"
-    (measureUnitChange)="onAreaUnitChange($event)">
-  </fadq-measurer-item>
+    <fadq-measurer-item
+      [measureType]="measureType.Area"
+      [measureUnit]="measureAreaUnit.SquareMeters"
+      [measure]="measure.area"
+      [auto]="measureUnitsAuto"
+      [placeholder]="'measure.area' | translate"
+      (measureUnitChange)="onAreaUnitChange($event)">
+    </fadq-measurer-item>
+  </ng-container>
 
   <fadq-entity-table
     #table

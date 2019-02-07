@@ -3,6 +3,14 @@ $slide-toggle-width: 60px;
 .measure-type-toggle {
   padding: 10px;
   text-align: center;
+
+  mat-button-toggle-group {
+    width: 100%;
+
+    mat-button-toggle {
+      width: 50%;
+    }
+  }
 }
 
 .measure-options mat-slide-toggle {
