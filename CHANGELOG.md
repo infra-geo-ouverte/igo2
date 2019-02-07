@@ -1,3 +1,13 @@
+<a name="0.22.1"></a>
+## [0.22.1](https://github.com/infra-geo-ouverte/igo2/compare/0.22.0...0.22.1) (2019-02-07)
+
+
+### Bug Fixes
+
+* **package:** add live-server ([504a21b](https://github.com/infra-geo-ouverte/igo2/commit/504a21b))
+
+
+
 <a name="0.22.0"></a>
 # [0.22.0](https://github.com/infra-geo-ouverte/igo2/compare/0.21.3...0.22.0) (2019-02-07)
 
