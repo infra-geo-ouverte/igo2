@@ -11,7 +11,7 @@ import { AuthOptions } from '@igo2/auth';
 })
 export class AppComponent {
   public authConfig: AuthOptions;
-  private themeClass: string = 'blue-theme';
+  private themeClass = 'blue-theme';
 
   constructor(
     protected languageService: LanguageService,
