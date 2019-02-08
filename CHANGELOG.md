@@ -1,3 +1,18 @@
+<a name="0.22.3"></a>
+## [0.22.3](https://github.com/infra-geo-ouverte/igo2/compare/0.22.2...0.22.3) (2019-02-08)
+
+
+### Bug Fixes
+
+* **package:** maj package-lock ([33a1132](https://github.com/infra-geo-ouverte/igo2/commit/33a1132))
+
+
+### Features
+
+* **theme:** add teal-theme ([9fbf887](https://github.com/infra-geo-ouverte/igo2/commit/9fbf887))
+
+
+
 <a name="0.22.2"></a>
 ## [0.22.2](https://github.com/infra-geo-ouverte/igo2/compare/0.22.1...0.22.2) (2019-02-08)
 
