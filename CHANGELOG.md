@@ -1,3 +1,18 @@
+<a name="0.22.2"></a>
+## [0.22.2](https://github.com/infra-geo-ouverte/igo2/compare/0.22.1...0.22.2) (2019-02-08)
+
+
+### Bug Fixes
+
+* **lint:** remove type annotation ([a136077](https://github.com/infra-geo-ouverte/igo2/commit/a136077))
+
+
+### Features
+
+* **igo2-lib:** upgrade ([979d1e9](https://github.com/infra-geo-ouverte/igo2/commit/979d1e9))
+
+
+
 <a name="0.22.1"></a>
 ## [0.22.1](https://github.com/infra-geo-ouverte/igo2/compare/0.22.0...0.22.1) (2019-02-07)
 
