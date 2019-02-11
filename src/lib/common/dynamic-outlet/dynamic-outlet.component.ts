@@ -10,7 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { isEquivalent } from 'src/lib/utils';
+import { objectsAreEquivalent } from 'src/lib/utils';
 
 import { DynamicComponent } from '../shared/dynamic-component';
 import { DynamicComponentService } from '../shared/dynamic-component.service';
@@ -74,11 +74,11 @@ export class DynamicOutletComponent implements OnChanges, OnDestroy {
     if (component && component.currentValue !== component.previousValue) {
       this.createComponent();
     } else {
-      if (inputs && isEquivalent(inputs.currentValue, inputs.previousValue) === false) {
+      if (inputs && objectsAreEquivalent(inputs.currentValue, inputs.previousValue) === false) {
         this.updateInputs();
       }
 
-      if (subscribers && isEquivalent(subscribers.currentValue, subscribers.previousValue) === false) {
+      if (subscribers && objectsAreEquivalent(subscribers.currentValue, subscribers.previousValue) === false) {
         this.updateSubscribers();
       }
     }

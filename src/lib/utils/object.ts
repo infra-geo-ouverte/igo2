@@ -23,7 +23,7 @@ export function removeKeys(obj: Object, keys: string[]): Object {
  * @param obj2 Second object
  * @returns Whether two objects arer equivalent
  */
-export function isEquivalent(obj1: Object, obj2: Object): boolean {
+export function objectsAreEquivalent(obj1: object, obj2: object): boolean {
   if (obj1 === obj2) {
     return true;
   }

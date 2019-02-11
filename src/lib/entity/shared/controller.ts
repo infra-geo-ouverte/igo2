@@ -3,7 +3,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
-import { isEquivalent } from 'src/lib/utils';
+import { objectsAreEquivalent } from 'src/lib/utils';
 
 import { Entity } from './entity.interfaces';
 import { EntityStore } from './store';
@@ -169,7 +169,7 @@ export class EntityStoreController {
       if (innerState === undefined) {
         detectChanges = true;
       } else if (this.cdRef !== undefined && detectChanges === false) {
-        detectChanges = !isEquivalent(storeState, innerState);
+        detectChanges = !objectsAreEquivalent(storeState, innerState);
       }
       this.innerState.setByKey(key, Object.assign({}, storeState));
     });
