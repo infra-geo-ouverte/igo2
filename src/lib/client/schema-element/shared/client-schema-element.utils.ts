@@ -4,6 +4,7 @@ import OlFeature from 'ol/Feature';
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
 import {
+  EntityKey,
   EntityOperation,
   EntityOperationType,
 } from 'src/lib/entity';
@@ -41,8 +42,8 @@ export class ClientSchemaElementTransactionSerializer {
     return operation.current as ClientSchemaElement;
   }
 
-  private serializeDelete(operation: EntityOperation): string {
-    return operation.entityId;
+  private serializeDelete(operation: EntityOperation): EntityKey {
+    return operation.key;
   }
 
 }

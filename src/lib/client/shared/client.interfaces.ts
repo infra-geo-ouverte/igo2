@@ -1,5 +1,3 @@
-import { EntityObject } from 'src/lib/entity';
-
 import { ClientInfo, ClientInfoApiConfig } from '../info';
 import { ClientParcel, ClientParcelDiagram, ClientParcelApiConfig } from '../parcel';
 import { ClientSchema, ClientSchemaApiConfig } from '../schema';
@@ -14,7 +12,7 @@ export interface ClientApiConfig {
   schemaElement: ClientSchemaElementApiConfig;
 }
 
-export interface Client extends EntityObject {
+export interface Client {
   info: ClientInfo;
   parcels: ClientParcel[];
   schemas: ClientSchema[];

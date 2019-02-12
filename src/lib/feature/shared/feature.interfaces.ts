@@ -4,11 +4,11 @@ import * as olstyle from 'ol/style';
 
 import { GeoJsonGeometryTypes } from 'geojson';
 
-import { EntityObject, EntityMeta } from 'src/lib/entity';
+import { EntityKey } from 'src/lib/entity';
 import { IgoMap } from 'src/lib/map';
 import { FeatureMotion } from './feature.enum';
 
-export interface Feature<P = { [key: string]: any }> extends EntityObject {
+export interface Feature<P = {[key: string]: any}> {
   type: string;
   projection: string;
   geometry: FeatureGeometry;
@@ -17,7 +17,9 @@ export interface Feature<P = { [key: string]: any }> extends EntityObject {
   meta?: FeatureMeta;
 }
 
-export interface FeatureMeta extends EntityMeta {
+export interface FeatureMeta {
+  id: EntityKey;
+  title?: string;
   mapTitle?: string;
 }
 

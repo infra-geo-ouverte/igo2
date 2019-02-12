@@ -1,5 +1,6 @@
-<fadq-catalog-browser
-  *ngIf="store !== undefined"
-  [store]="store"
-  [map]="map">
-</fadq-catalog-browser>
+<ng-container *ngIf="store$ | async as store">
+  <fadq-catalog-browser
+    [store]="store"
+    [map]="map">
+  </fadq-catalog-browser>
+</ng-container>

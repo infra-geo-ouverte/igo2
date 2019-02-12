@@ -9,12 +9,12 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import {
+  EntityRecord,
   EntityStore,
-  EntityStoreController,
-  State
+  EntityStoreController
 } from 'src/lib/entity';
 
 import { ClientParcelYear } from '../shared/client-parcel.interfaces';
@@ -27,40 +27,37 @@ import { ClientParcelYear } from '../shared/client-parcel.interfaces';
 })
 export class ClientParcelYearSelectorComponent implements OnInit, OnDestroy {
 
-  public currentParcelYear: ClientParcelYear;
+  /**
+   * The current parcel year
+   * @internal
+   */
+  public current$ = new BehaviorSubject<ClientParcelYear>(undefined);
 
-  private parcelYear$$: Subscription;
-  private controller: EntityStoreController;
+  private selected$$: Subscription;
 
-  @Input()
-  get store(): EntityStore<ClientParcelYear> {
-    return this._store;
-  }
-  set store(value: EntityStore<ClientParcelYear>) {
-    this._store = value;
-  }
-  private _store;
+  private controller: EntityStoreController<ClientParcelYear>;
+
+  @Input() store: EntityStore<ClientParcelYear>;
 
   @Output() selectedChange = new EventEmitter<{
     selected: boolean;
     parcelYear: ClientParcelYear;
   }>();
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
+  constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.controller.bindStore(this.store);
-    this.parcelYear$$ = this.store
-      .observeFirstBy((parcelYear: ClientParcelYear, state: State) => state.selected === true)
-      .subscribe((parcelYear: ClientParcelYear) => this.currentParcelYear = parcelYear);
+    this.controller = new EntityStoreController(this.store, this.cdRef);
+    this.selected$$ = this.store.stateView
+      .firstBy$((record: EntityRecord<ClientParcelYear>) => record.state.selected === true)
+      .subscribe((record: EntityRecord<ClientParcelYear>) => {
+        this.current$.next(record ? record.entity : undefined);
+      });
   }
 
   ngOnDestroy() {
-    this.controller.unbindStore();
-    this.parcelYear$$.unsubscribe();
+    this.controller.destroy();
+    this.selected$$.unsubscribe();
   }
 
   getParcelYearTitle(parcelYear: ClientParcelYear): string {
@@ -70,9 +67,9 @@ export class ClientParcelYearSelectorComponent implements OnInit, OnDestroy {
   onSelectionChange(event: {value: ClientParcelYear | undefined}) {
     const parcelYear = event.value;
     if (parcelYear === undefined) {
-      this.controller.updateAllEntitiesState({selected: false});
+      this.store.state.updateAll({selected: false});
     } else {
-      this.controller.updateEntityState(parcelYear, {selected: true}, true);
+      this.store.state.update(parcelYear, {selected: true}, true);
     }
 
     this.selectedChange.emit({selected: true, parcelYear});

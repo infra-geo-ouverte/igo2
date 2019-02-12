@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from 'src/lib/core/api';
-import { padClientNum } from '../../shared/client.utils';
 import {
   ClientParcel,
   ClientParcelApiConfig,
@@ -55,8 +54,7 @@ export class ClientParcelService {
     });
     return {
       meta: {
-        idProperty: 'properties.id',
-        titleProperty: 'properties.id',
+        id: listItem.properties.id,
         mapTitle: listItem.properties.noParcelleAgricole
       },
       type: listItem.type,

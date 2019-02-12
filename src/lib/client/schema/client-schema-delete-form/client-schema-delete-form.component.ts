@@ -63,7 +63,7 @@ export class ClientSchemaDeleteFormComponent implements WidgetComponent {
   }
 
   private onSubmitSuccess() {
-    this.store.removeEntities([this.schema]);
+    this.store.delete(this.schema);
     this.complete.emit();
   }
 

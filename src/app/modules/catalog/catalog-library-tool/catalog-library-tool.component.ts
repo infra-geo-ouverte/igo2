@@ -38,7 +38,7 @@ export class CatalogLibraryToolComponent implements OnInit {
    * @internal
    */
   ngOnInit() {
-    if (this.store.filteredEmpty) {
+    if (this.store.entities$.value.length === 0) {
       this.loadCatalogs();
     }
   }
@@ -65,8 +65,8 @@ export class CatalogLibraryToolComponent implements OnInit {
   private loadCatalogs() {
     this.catalogService.loadCatalogs()
       .subscribe((catalogs: Catalog[]) => {
-        this.store.state.reset();
-        this.store.addEntities(catalogs);
+        this.store.clear();
+        this.store.load(catalogs);
       });
   }
 

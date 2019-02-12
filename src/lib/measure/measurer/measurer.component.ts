@@ -12,6 +12,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { uuid } from '@igo2/utils';
 import { VectorLayer, FeatureDataSource } from '@igo2/geo';
 
+import OlProjection from 'ol/proj/Projection';
 import OlStyle from 'ol/style/Style';
 import OlGeoJSON from 'ol/format/GeoJSON';
 import OlVectorSource from 'ol/source/Vector';
@@ -229,6 +230,10 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    */
   get drawControlIsActive(): boolean {
     return this.activeDrawControl !== undefined;
+  }
+
+  get projection(): OlProjection {
+    return this.map.ol.getView().getProjection();
   }
 
   constructor() {}
@@ -472,6 +477,8 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    */
   private onDrawEnd(olGeometry:  OlLineString | OlPolygon) {
     this.activeOlGeometry = undefined;
+    const measure = measureOlGeometry(olGeometry, this.projection);
+    this.updateMeasureOfOlGeometry(olGeometry, measure);
     this.addFeatureToStore(olGeometry);
     this.clearTooltipsOfOlGeometry(olGeometry);
     this.olDrawSource.clear(true);
@@ -482,8 +489,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * @param olGeometry Ol linestring or polygon
    */
   private onDrawChanges(olGeometry:  OlLineString | OlPolygon) {
-    const projection = this.map.ol.getView().getProjection();
-    const measure = measureOlGeometry(olGeometry, projection);
+    const measure = measureOlGeometry(olGeometry, this.projection);
     this.updateMeasureOfOlGeometry(olGeometry, Object.assign({}, measure, {
       area: undefined  // We don't want to display an area tooltip while drawing.
     }));
@@ -529,7 +535,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
         id: uuid()
       }
     };
-    this.store.addEntities([feature]);
+    this.store.insert(feature);
   }
 
   /**

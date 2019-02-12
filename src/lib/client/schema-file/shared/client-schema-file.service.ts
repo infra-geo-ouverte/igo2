@@ -5,7 +5,6 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from 'src/lib/core/api';
-import { getEntityId } from 'src/lib/entity';
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
   ClientSchemaFile,
@@ -28,7 +27,7 @@ export class ClientSchemaFileService {
   ) {}
 
   getClientSchemaFiles(schema: ClientSchema): Observable<ClientSchemaFile[]> {
-    const url = this.apiService.buildUrl(this.apiConfig.list, {schemaId: getEntityId(schema)});
+    const url = this.apiService.buildUrl(this.apiConfig.list, {schemaId: schema.id});
 
     return this.http
       .get(url)
@@ -41,7 +40,7 @@ export class ClientSchemaFileService {
 
   getSchemaFileDownloadLink(schemaFile: ClientSchemaFile): Observable<string> {
     const link = this.apiService.buildUrl(this.apiConfig.download, {
-      id: getEntityId(schemaFile)
+      id: schemaFile.id
     });
 
     return of(link);
@@ -49,7 +48,7 @@ export class ClientSchemaFileService {
 
   createSchemaFile(schema: ClientSchema, data: ClientSchemaFileCreateData): Observable<ClientSchemaFile> {
     const url = this.apiService.buildUrl(this.apiConfig.create, {
-      schemaId: getEntityId(schema)
+      schemaId: schema.id
     });
 
     const headers = new HttpHeaders();
@@ -71,7 +70,7 @@ export class ClientSchemaFileService {
 
   deleteSchemaFile(schemaFile: ClientSchemaFile): Observable<any> {
     const url = this.apiService.buildUrl(this.apiConfig.delete, {
-      id: getEntityId(schemaFile)
+      id: schemaFile.id
     });
 
     return this.http.post(url, {});
@@ -106,10 +105,7 @@ export class ClientSchemaFileService {
       name: data.nomPhysiqueDocument,
       address: data.addresseDocument,
       size: data.tailleDocument,
-      type: data.typeDocument,
-      meta: {
-        title: `${data.nomPhysiqueDocument}`
-      }
+      type: data.typeDocument
     };
   }
 }

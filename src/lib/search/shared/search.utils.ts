@@ -40,6 +40,7 @@ export function igoFeatureToSearchResult(igoFeature: IgoFeature, source: SearchS
       extent: igoFeature.extent,
       properties: igoFeature.properties,
       meta: {
+        id: igoFeature.id,
         title: igoFeature.title
       }
     },

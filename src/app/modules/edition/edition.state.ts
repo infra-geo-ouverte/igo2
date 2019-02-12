@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { EntityStore, State, getEntityId } from 'src/lib/entity';
+import { EntityRecord, EntityStore } from 'src/lib/entity';
 import { Editor } from 'src/lib/edition';
 
 /**
@@ -25,10 +25,13 @@ export class EditionState {
   private _store: EntityStore<Editor>;
 
   constructor() {
-    this._store = new EntityStore<Editor>();
-    this._store
-      .observeFirstBy((editor: Editor, state: State) => state.selected === true)
-      .subscribe((editor: Editor) => this.editor$.next(editor));
+    this._store = new EntityStore<Editor>([]);
+    this._store.stateView
+      .firstBy$((record: EntityRecord<Editor>) => record.state.selected === true)
+      .subscribe((record: EntityRecord<Editor>) => {
+        const editor = record ? record.entity : undefined;
+        this.editor$.next(editor);
+      });
   }
 
   /**
@@ -36,7 +39,7 @@ export class EditionState {
    * @param editor
    */
   register(editor: Editor) {
-    this.store.appendEntities([editor]);
+    this.store.insert(editor);
   }
 
   /**
@@ -44,7 +47,7 @@ export class EditionState {
    * @param editor
    */
   unregister(editor: Editor) {
-    this.store.removeEntities([editor]);
+    this.store.delete(editor);
   }
 
   /**
@@ -52,7 +55,7 @@ export class EditionState {
    * @param editor
    */
   setEditor(editor: Editor) {
-    const entity = this.store.getEntityById(getEntityId(editor));
-    this.store.updateEntityState(entity, {selected: true}, true);
+    const entity = this.store.get(editor.id);
+    this.store.state.update(entity, {selected: true}, true);
   }
 }

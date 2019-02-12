@@ -18,8 +18,10 @@ export class ClientParcelEditorService extends Editor {
       id: 'fadq.client-parcel-editor',
       title: 'Parcelles du client',
       tableTemplate: clientParcelTableService.buildTable(),
-      entityStore: new FeatureStore<ClientParcel>(),
-      actionStore: new EntityStore<Action>()
+      entityStore: new FeatureStore<ClientParcel>([], {
+        getKey: (entity: ClientParcel) => entity.properties.id
+      }),
+      actionStore: new EntityStore<Action>([])
     });
   }
 }

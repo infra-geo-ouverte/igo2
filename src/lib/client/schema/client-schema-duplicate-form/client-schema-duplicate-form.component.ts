@@ -63,7 +63,7 @@ export class ClientSchemaDuplicateFormComponent implements WidgetComponent {
   }
 
   private onSubmitSuccess(schema: ClientSchema) {
-    this.store.addEntities([schema]);
+    this.store.insert(schema);
     this.complete.emit();
   }
 

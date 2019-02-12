@@ -1,5 +1,3 @@
-import { EntityObject } from 'src/lib/entity';
-
 export interface ClientSchemaApiConfig  {
   list: string;
   create: string;
@@ -12,7 +10,7 @@ export interface ClientSchemaApiConfig  {
   };
 }
 
-export interface ClientSchema extends EntityObject {
+export interface ClientSchema {
   id: string;
   numeroClient: string;
   type: string;

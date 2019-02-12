@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from 'src/lib/core/api';
-import { getEntityId } from 'src/lib/entity';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
@@ -29,7 +28,7 @@ export class ClientSchemaElementSurfaceService {
 
   getElements(schema: ClientSchema): Observable<ClientSchemaElement[]> {
     const url = this.apiService.buildUrl(this.apiConfig.surfaces, {
-      schemaId: getEntityId(schema)
+      schemaId: schema.id
     });
 
     return this.http
@@ -48,14 +47,14 @@ export class ClientSchemaElementSurfaceService {
   private listItemToElement(listItem: ClientSchemaElementListResponseItem): ClientSchemaElement {
     const properties = Object.assign({}, listItem.properties);
     return {
-      meta: {
-        idProperty: 'properties.idElementGeometrique'
-      },
       type: listItem.type,
       projection: 'EPSG:4326',
       geometry: listItem.geometry,
       extent: undefined,
-      properties
+      properties,
+      meta: {
+        id: properties.idElementGeometrique
+      }
     };
   }
 }

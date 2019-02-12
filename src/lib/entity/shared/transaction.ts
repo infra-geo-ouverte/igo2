@@ -1,11 +1,9 @@
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { uuid } from '@igo2/utils';
-
 import {
-  Entity,
-  EntityMeta,
+  EntityKey,
+  EntityTransactionOptions,
   EntityOperation,
   EntityOperationState
 } from './entity.interfaces';
@@ -28,27 +26,34 @@ export class EntityTransaction {
   /**
    * Store holding the operations on another store
    */
-  operations: EntityStore<
-    EntityOperation,
-    EntityOperationState
-  > = new EntityStore<EntityOperation, EntityOperationState>();
+  readonly operations: EntityStore<EntityOperation, EntityOperationState>;
 
   /**
-   * Whether thise store is in commit phase
+   * Method to get an entity's id
    */
-  private inCommitPhase: boolean = false;
-
-  /**
-   * Whether thise store is in commit phase
-   */
-  get isInCommitPhase(): boolean { return this.inCommitPhase; }
+  readonly getKey: (E) => EntityKey;
 
   /**
    * Whether there are pending operations
    */
-  get empty(): boolean { return this.operations.filteredEmpty; }
+  get empty(): boolean { return this.operations.entities$.value.length === 0; }
 
-  constructor() {}
+  /**
+   * Whether thise store is in commit phase
+   */
+  get inCommitPhase(): boolean { return this._inCommitPhase; }
+  private _inCommitPhase: boolean = false;
+
+  constructor(options: EntityTransactionOptions = {}) {
+    this.getKey = options.getKey ? options.getKey : getEntityId;
+    this.operations = new EntityStore<EntityOperation, EntityOperationState>([], {
+      getKey: this.getKey
+    });
+  }
+
+  destroy() {
+    this.operations.destroy();
+  }
 
   /**
    * Insert an entity into a store. If no store is specified, an insert
@@ -58,7 +63,7 @@ export class EntityTransaction {
    * @param store Optional: The store to insert the entity into
    * @param meta Optional: Any metadata on the operation
    */
-  insert(current: Entity, store?: EntityStore<Entity>, meta?: EntityMeta) {
+  insert(current: object, store?: EntityStore<object>, meta?: {[key: string]: any}) {
     const existingOperation = this.getOperationByEntity(current);
     if (existingOperation !== undefined) {
       this.removeOperation(existingOperation);
@@ -76,7 +81,7 @@ export class EntityTransaction {
    * @param store Optional: The store to update the entity into
    * @param meta Optional: Any metadata on the operation
    */
-  update(previous: Entity, current: Entity, store?: EntityStore<Entity>, meta?: EntityMeta) {
+  update(previous: object, current: object, store?: EntityStore<object>, meta?: {[key: string]: any}) {
     const existingOperation = this.getOperationByEntity(current);
     if (existingOperation !== undefined) {
       this.removeOperation(existingOperation);
@@ -97,13 +102,13 @@ export class EntityTransaction {
    * @param store Optional: The store to delete the entity from
    * @param meta Optional: Any metadata on the operation
    */
-  delete(previous: Entity, store?: EntityStore<Entity>, meta?: EntityMeta) {
+  delete(previous: object, store?: EntityStore<object>, meta?: {[key: string]: any}) {
     const existingOperation = this.getOperationByEntity(previous);
     if (existingOperation !== undefined) {
       this.removeOperation(existingOperation);
       if (existingOperation.type === EntityOperationType.Insert) {
         if (store !== undefined) {
-          store.removeEntities([previous]);
+          store.delete(previous);
         }
         return;
       }
@@ -123,7 +128,7 @@ export class EntityTransaction {
    * @returns The handler output (observable)
    */
   commit(handler: EntityTransactionCommitHandler): Observable<any> {
-    this.inCommitPhase = true;
+    this._inCommitPhase = true;
 
     const operations = this.getOperationsInCommit();
     return handler(this, operations)
@@ -144,7 +149,7 @@ export class EntityTransaction {
    * @todo Raise event and synchronize stores?
    */
   abort() {
-    this.inCommitPhase = false;
+    this._inCommitPhase = false;
   }
 
   /**
@@ -152,8 +157,8 @@ export class EntityTransaction {
    * @todo Raise event and synchronize stores?
    */
   clear() {
-    this.operations.setEntities([]);
-    this.inCommitPhase = false;
+    this.operations.clear();
+    this._inCommitPhase = false;
   }
 
   /**
@@ -162,10 +167,9 @@ export class EntityTransaction {
    * @param store Optional: The store to insert the entity into
    * @param meta Optional: Any metadata on the operation
    */
-  private doInsert(current: Entity, store?: EntityStore<Entity>, meta?: EntityMeta) {
+  private doInsert(current: object, store?: EntityStore<object>, meta?: {[key: string]: any}) {
     this.addOperation({
-      id: this.generateOperationId(),
-      entityId: getEntityId(current),
+      key: this.getKey(current),
       type: EntityOperationType.Insert,
       previous: undefined,
       current,
@@ -174,7 +178,7 @@ export class EntityTransaction {
     });
 
     if (store !== undefined) {
-      store.putEntities([current]);
+      store.update(current);
     }
   }
 
@@ -185,10 +189,9 @@ export class EntityTransaction {
    * @param store Optional: The store to update the entity into
    * @param meta Optional: Any metadata on the operation
    */
-  private doUpdate(previous: Entity, current: Entity, store?: EntityStore<Entity>, meta?: EntityMeta) {
+  private doUpdate(previous: object, current: object, store?: EntityStore<object>, meta?: {[key: string]: any}) {
     this.addOperation({
-      id: this.generateOperationId(),
-      entityId: getEntityId(current),
+      key: this.getKey(current),
       type: EntityOperationType.Update,
       previous,
       current,
@@ -197,7 +200,7 @@ export class EntityTransaction {
     });
 
     if (store !== undefined) {
-      store.putEntities([current]);
+      store.update(current);
     }
   }
 
@@ -207,10 +210,9 @@ export class EntityTransaction {
    * @param store Optional: The store to delete the entity from
    * @param meta Optional: Any metadata on the operation
    */
-  private doDelete(previous: Entity, store?: EntityStore<Entity>, meta?: EntityMeta) {
+  private doDelete(previous: object, store?: EntityStore<object>, meta?: {[key: string]: any}) {
     this.addOperation({
-      id: this.generateOperationId(),
-      entityId: getEntityId(previous),
+      key: this.getKey(previous),
       type: EntityOperationType.Delete,
       previous,
       current: undefined,
@@ -219,7 +221,7 @@ export class EntityTransaction {
     });
 
     if (store !== undefined) {
-      store.removeEntities([previous]);
+      store.delete(previous);
     }
   }
 
@@ -229,7 +231,7 @@ export class EntityTransaction {
    * @todo Raise event and synchronize stores?
    */
   private resolveOperations(operations: EntityOperation[]) {
-    this.operations.removeEntities(operations);
+    this.operations.deleteMany(operations);
   }
 
   /**
@@ -238,7 +240,7 @@ export class EntityTransaction {
    */
   private onCommitSuccess(operations: EntityOperation[]) {
     this.resolveOperations(operations);
-    this.inCommitPhase = false;
+    this._inCommitPhase = false;
   }
 
   /**
@@ -250,14 +252,6 @@ export class EntityTransaction {
   }
 
   /**
-   * Generator of unique operation id
-   * @returns Operation id
-   */
-  private generateOperationId(): string {
-    return uuid();
-  }
-
-  /**
    * Add an operation to the operations store
    * @param operation Operation to add
    */
@@ -266,8 +260,8 @@ export class EntityTransaction {
       throw new Error('This transaction is in the commit phase. Abort or clear the transaction to proceed.');
     }
 
-    this.operations.appendEntities([operation]);
-    this.operations.updateEntityState(operation, {added: true});
+    this.operations.insert(operation);
+    this.operations.state.update(operation, {added: true});
   }
 
   /**
@@ -279,20 +273,17 @@ export class EntityTransaction {
       throw new Error('This transaction is in the commit phase. Abort or clear the transaction to proceed.');
     }
 
-    this.operations.removeEntities([operation]);
-    this.operations.updateEntityState(operation, {added: false});
+    this.operations.delete(operation);
+    this.operations.state.update(operation, {added: false});
   }
 
   /**
-   * Get the operation affecting an entity, if any.
+   * Get the any existing operation an entity
    * @param entity Entity
    * @returns Either an insert, update or delete operation
    */
-  private getOperationByEntity(entity: Entity): EntityOperation {
-    const entityId = getEntityId(entity);
-    return this.operations.entities.find((operation: EntityOperation) => {
-      return operation.entityId === entityId;
-    });
+  private getOperationByEntity(entity: object): EntityOperation {
+    return this.operations.get(this.getKey(entity));
   }
 
   /**
@@ -300,10 +291,10 @@ export class EntityTransaction {
    * @returns Operations to commit
    */
   private getOperationsInCommit(): EntityOperation[] {
-    return this.operations.entities
-      .filter((operation: EntityOperation) => {
-        const state = this.operations.getEntityState(operation);
-        return state.added === true;
-      });
+    return this.operations.stateView
+      .manyBy((value: {entity: EntityOperation, state: EntityOperationState}) => {
+        return value.state.added === true;
+      })
+      .map((value: {entity: EntityOperation, state: EntityOperationState}) => value.entity);
   }
 }

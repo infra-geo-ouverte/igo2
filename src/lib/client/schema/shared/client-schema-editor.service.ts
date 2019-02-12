@@ -37,11 +37,11 @@ export class ClientSchemaEditorService extends Editor {
       id: 'fadq.client-schema-editor',
       title: 'Schemas du client',
       tableTemplate: clientSchemaTableService.buildTable(),
-      entityStore: new EntityStore<ClientSchema>(),
-      actionStore: new EntityStore<Action>()
+      entityStore: new EntityStore<ClientSchema>([]),
+      actionStore: new EntityStore<Action>([])
     });
 
-    this.actionStore.setEntities(this.buildActions());
+    this.actionStore.load(this.buildActions());
   }
 
   setClient(client: Client) {

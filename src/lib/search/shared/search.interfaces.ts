@@ -1,15 +1,21 @@
 import { Observable } from 'rxjs';
 
-import { Entity, EntityObject } from 'src/lib/entity';
 import { SearchSource } from './sources';
 
 export interface Research {
-  request: Observable<Entity[]>;
+  request: Observable<SearchResult[]>;
   reverse: boolean;
   source: SearchSource;
 }
 
-export interface SearchResult<T = { [key: string]: any }> extends EntityObject {
+export interface SearchResult<T = { [key: string]: any }> {
   data: T;
   source: SearchSource;
+  meta: {
+    dataType: string;
+    id: string;
+    title: string;
+    titleHtml?: string;
+    icon: string;
+  };
 }

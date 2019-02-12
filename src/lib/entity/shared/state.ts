@@ -1,132 +1,168 @@
-import { BehaviorSubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
-import { State } from './entity.interfaces';
+import { EntityKey, EntityState, EntityStateManagerOptions } from './entity.interfaces';
+import { getEntityId } from './entity.utils';
 
 /**
- * This class is used to track entities' state
+ * This class is used to track a store's entities state
  */
-export class EntityState<S extends { [key: string]: boolean } = State> {
+export class EntityStateManager<E extends object, S extends EntityState = EntityState> {
 
   /**
-   * Observable of a Key -> State mapping
+   * State index
    */
-  public states$ = new BehaviorSubject<Map<string, S>>(new Map());
+  readonly index = new Map<EntityKey, S>();
 
   /**
-   * Current state mapping
+   * Change emitter
    */
-  get value(): Map<string, S> {
-    return this.states$.value;
-  }
-
-  constructor() {}
+  readonly change$ = new ReplaySubject<void>(1);
 
   /**
-   * Get state by key
-   * @param key Key
-   * @returns returns State associated to this key or {}
+   * Method to get an entity's id
    */
-  getByKey(key: string): S {
-    return (this.states$.value.get(key) || {}) as S;
+  readonly getKey: (E) => EntityKey;
+
+  constructor(options: EntityStateManagerOptions = {}) {
+    this.getKey = options.getKey ? options.getKey : getEntityId;
+    this.next();
   }
 
   /**
-   * Set state by key
-   * @param key Key
+   * Clear state
+   */
+  clear() {
+    if (this.index.size > 0) {
+      this.index.clear();
+      this.next();
+    }
+  }
+
+  /**
+   * Get an entity's state
+   * @param entity Entity
+   * @returns State
+   */
+  get(entity: E): S {
+    return (this.index.get(this.getKey(entity)) || {}) as S;
+  }
+
+  /**
+   * Set an entity's state
+   * @param entity Entity
    * @param state State
    */
-  setByKey(key: string, state: S) {
-    this.setByKeys([key], state);
+  set(entity: E, state: S) {
+    this.setMany([entity], state);
   }
 
   /**
-   * Set multiple state by keys
-   * @param keys Keys
+   * Set many entitie's state
+   * @param entitie Entities
    * @param state State
    */
-  setByKeys(keys: string[], state: S) {
-    const states = new Map(this.states$.value);
-    keys.forEach((key: string) => states.set(key, Object.assign({}, state)));
-    this.states$.next(states);
+  setMany(entities: E[], state: S) {
+    entities.forEach((entity: E) => {
+      this.index.set(this.getKey(entity), Object.assign({}, state));
+    });
+    this.next();
   }
 
   /**
-   * Set state for all existing keys
+   * Set state of all entities that already have a state. This is not
+   * the same as setting the state of all the store's entities.
    * @param state State
    */
   setAll(state: S) {
-    this.setByKeys(Array.from(this.states$.value.keys()), state);
+    Array.from(this.index.keys()).forEach((key: EntityKey) => {
+      this.index.set(key, Object.assign({}, state));
+    });
+    this.next();
   }
 
   /**
-   * Update a state by key
-   * @param key Key
+   * Update an entity's state
+   * @param entity Entity
    * @param changes State changes
-   * @param exclusive Whether this key should be the only one in that state
    */
-  updateByKey(key: string, changes: { [key: string]: boolean }, exclusive = false) {
-    this.updateByKeys([key], changes, exclusive);
+  update(entity: E, changes: Partial<S>, exclusive = false) {
+    this.updateMany([entity], changes, exclusive);
   }
 
   /**
-   * Update multiple states by keys
-   * @param keys Keys
+   * Update many entitie's state
+   * @param entitie Entities
    * @param changes State changes
-   * @param exclusive Whether these keys should be the only one in that state
    */
-  updateByKeys(keys: string[], changes: { [key: string]: boolean }, exclusive = false) {
+  updateMany(entities: E[], changes: Partial<S>, exclusive = false) {
     if (exclusive === true) {
-      this.updateByKeysExclusive(keys, changes);
-      return;
+      return this.updateManyExclusive(entities, changes);
     }
 
-    const states = new Map(this.states$.value);
-    keys.forEach((key: string) => {
-      const state = this.getByKey(key);
-      states.set(key, Object.assign(state, changes));
+    entities.forEach((entity: E) => {
+      const state = Object.assign(this.get(entity), changes);
+      this.index.set(this.getKey(entity), state);
     });
-    this.states$.next(states);
+    this.next();
   }
 
   /**
-   * Update the state for all existing keys
+   * Update state of all entities that already have a state. This is not
+   * the same as updating the state of all the store's entities.
+   * @param changes State
+   */
+  updateAll(changes: Partial<S>) {
+    Array.from(this.index.keys()).forEach((key: EntityKey) => {
+      const state = Object.assign(this.index.get(key), changes);
+      this.index.set(key, state);
+    });
+    this.next();
+  }
+
+  /**
+   * When some state changes are flagged as 'exclusive', reverse
+   * the state of all other entities. Changes are reversable when
+   * they are boolean.
+   * @param entitie Entities
    * @param changes State changes
    */
-  updateAll(changes: { [key: string]: boolean }) {
-    this.updateByKeys(Array.from(this.states$.value.keys()), changes);
-  }
+  private updateManyExclusive(entities: E[], changes: Partial<S>) {
+    const reverseChanges = this.reverseChanges(changes);
 
-  /**
-   * Clear state and flush all keys
-   */
-  reset() {
-    if (this.value.size > 0) {
-      this.states$.next(new Map());
-    }
-  }
-
-  /**
-   * Update multiple states by keys (exclusive)
-   * @param keys Keys
-   * @param changes State changes
-   */
-  private updateByKeysExclusive(keys: string[], changes: { [key: string]: boolean }) {
-    const otherChanges = {};
-    Object.entries(changes).forEach(([changeKey, value]) => {
-      otherChanges[changeKey] = !value;
-    });
-
-    const states = new Map();
-    const allKeys = new Set(keys.concat(Array.from(this.value.keys())));
-    allKeys.forEach((key: string) => {
-      const state = this.getByKey(key);
-      if (states && keys.indexOf(key) >= 0) {
-        states.set(key, Object.assign(state, changes));
+    const keys = entities.map((entity: E) => this.getKey(entity));
+    const allKeys = new Set(keys.concat(Array.from(this.index.keys())));
+    allKeys.forEach((key: EntityKey) => {
+      const state = this.index.get(key) || {} as S;
+      if (keys.indexOf(key) >= 0) {
+        this.index.set(key, Object.assign(state, changes));
       } else {
-        states.set(key, Object.assign(state, otherChanges));
+        this.index.set(key, Object.assign(state, reverseChanges));
       }
     });
 
-    this.states$.next(states);
+    this.next();
+  }
+
+  /**
+   * Compute a 'reversed' version of some state changes.
+   * Changes are reversable when they are boolean.
+   * @param changes State changes
+   * @returns Reversed state changes
+   */
+  private reverseChanges(changes: Partial<S>): Partial<S> {
+    return Object.entries(changes).reduce((reverseChanges: Partial<S>, bunch: [string, any]) => {
+      const [changeKey, value] = bunch;
+      if (typeof value === typeof true) {
+        reverseChanges[changeKey] = !value;
+      }
+      return reverseChanges;
+    }, {});
+  }
+
+  /**
+   * Emit 'change' event
+   */
+  private next() {
+    this.change$.next();
   }
 }

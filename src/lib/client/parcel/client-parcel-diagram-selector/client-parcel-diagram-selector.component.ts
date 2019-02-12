@@ -9,13 +9,12 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import {
+  EntityRecord,
   EntityStore,
-  EntityStoreController,
-  State,
-  getEntityId
+  EntityStoreController
 } from 'src/lib/entity';
 
 import { ClientParcelDiagram } from '../shared/client-parcel.interfaces';
@@ -28,52 +27,49 @@ import { ClientParcelDiagram } from '../shared/client-parcel.interfaces';
 })
 export class ClientParcelDiagramSelectorComponent implements OnInit, OnDestroy {
 
-  public currentDiagram: ClientParcelDiagram;
+  /**
+   * The current diagram
+   * @internal
+   */
+  public current$ = new BehaviorSubject<ClientParcelDiagram>(undefined);
 
-  private diagram$$: Subscription;
-  private controller: EntityStoreController;
+  private selected$$: Subscription;
 
-  @Input()
-  get store(): EntityStore<ClientParcelDiagram> {
-    return this._store;
-  }
-  set store(value: EntityStore<ClientParcelDiagram>) {
-    this._store = value;
-  }
-  private _store;
+  private controller: EntityStoreController<ClientParcelDiagram>;
+
+  @Input() store: EntityStore<ClientParcelDiagram>;
 
   @Output() selectedChange = new EventEmitter<{
     selected: boolean;
     diagram: ClientParcelDiagram;
   }>();
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
+  constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.controller.bindStore(this.store);
-    this.diagram$$ = this.store
-      .observeFirstBy((diagram: ClientParcelDiagram, state: State) => state.selected === true)
-      .subscribe((diagram: ClientParcelDiagram) => this.currentDiagram = diagram);
+    this.controller = new EntityStoreController(this.store, this.cdRef);
+    this.selected$$ = this.store.stateView
+      .firstBy$((record: EntityRecord<ClientParcelDiagram>) => record.state.selected === true)
+      .subscribe((record: EntityRecord<ClientParcelDiagram>) => {
+        this.current$.next(record ? record.entity : undefined);
+      });
   }
 
   ngOnDestroy() {
-    this.controller.unbindStore();
-    this.diagram$$.unsubscribe();
+    this.controller.destroy();
+    this.selected$$.unsubscribe();
   }
 
-  getDiagramTitle(diagram: ClientParcelDiagram): string {
-    return getEntityId(diagram);
+  getDiagramId(diagram: ClientParcelDiagram): number {
+    return diagram.id;
   }
 
   onSelectionChange(event: {value: ClientParcelDiagram | undefined}) {
     const diagram = event.value;
     if (diagram === undefined) {
-      this.controller.updateAllEntitiesState({selected: false});
+      this.store.state.updateAll({selected: false});
     } else {
-      this.controller.updateEntityState(diagram, {selected: true}, true);
+      this.store.state.update(diagram, {selected: true}, true);
     }
 
     this.selectedChange.emit({selected: true, diagram});

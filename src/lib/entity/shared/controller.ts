@@ -3,23 +3,25 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
-import { objectsAreEquivalent } from 'src/lib/utils';
+import { objectsAreEquivalent } from '../../utils/object';
+import { EntityKey } from './entity.interfaces';
 
-import { Entity } from './entity.interfaces';
 import { EntityStore } from './store';
-import { EntityState } from './state';
-import { getEntityId } from './entity.utils';
 
 /**
- * This class is used to synschronize a component's changes
+ * This class is used to synchronize a component's changes
  * detection with an EntityStore changes. For example, it is frequent
  * to have a component subscribe to a store's selected entity and, at the same time,
  * this component provides a way to select an entity with, let's say, a click.
  *
- * This class automatically handles that can of case a triggers the compoent's
+ * This class automatically handles those case and triggers the compoent's
  * change detection when needed.
+ *
+ * Note: If the component observes the store's stateView, a controller is
+ * probably not required because the stateView catches any changes to the
+ * entities and their state.
  */
-export class EntityStoreController {
+export class EntityStoreController<E extends object> {
 
   /**
    * Component change detector
@@ -29,15 +31,15 @@ export class EntityStoreController {
   /**
    * Entity store
    */
-  private store: EntityStore<Entity>;
+  private store: EntityStore<E>;
 
   /**
    * Component inner state
    */
-  private innerState = new EntityState();
+  private innerStateIndex = new Map<EntityKey, {[key: string]: any}>();
 
   /**
-   * Subscription to the store's raw entities
+   * Subscription to the store's entities
    */
   private entities$$: Subscription;
 
@@ -46,111 +48,75 @@ export class EntityStoreController {
    */
   private state$$: Subscription;
 
-  constructor() {}
+  constructor(store?: EntityStore<E>, cdRef?: ChangeDetectorRef) {
+    this.setChangeDetector(cdRef);
+    this.setStore(store);
+  }
+
+  destroy() {
+    this.setChangeDetector(undefined);
+    this.setStore(undefined);
+  }
 
   /**
    * Bind this controller to a store and start watching for changes
    * @param store Entity store
-   * @returns
    */
-  bindStore(store: EntityStore<Entity>): EntityStoreController {
-    this.unbindStore();
-    this.store = store;
-    this.watchStore();
-    this.detectChanges();
-    return this;
-  }
+  setStore(store?: EntityStore<E>) {
+    if (store === undefined) {
+      this.teardownObservers();
+      this.innerStateIndex.clear();
+      this.store = undefined;
+      return;
+    }
 
-  /**
-   * Unbind this controller from a store and stop watching for changes
-   * @param store Entity store
-   * @returns
-   */
-  unbindStore(): EntityStoreController {
-    this.unwatchStore();
-    this.innerState.reset();
-    this.store = undefined;
-    return this;
+    this.setStore(undefined);
+    this.store = store;
+    this.setupObservers();
+    this.detectChanges();
   }
 
   /**
    * Bind this controller to a component's change detector
    * @param cdRef Change detector
-   * @returns
    */
-  withChangeDetector(cdRef: ChangeDetectorRef): EntityStoreController {
+  setChangeDetector(cdRef?: ChangeDetectorRef) {
     this.cdRef = cdRef;
-    return this;
   }
 
   /**
-   * Update an entity state
-   * @param entity Entity
-   * @param changes State changes
-   * @param exclusive Whether this entity should be the only one in that state
-   */
-  updateEntityState(entity: Entity, changes: { [key: string]: boolean }, exclusive = false) {
-    if (this.store === undefined) {
-      return;
-    }
-    this.store.updateEntityState(entity, changes, exclusive);
-  }
-
-  /**
-   * Update many entities state
-   * @param entities Entities
-   * @param changes State changes
-   * @param exclusive Whether these entities should be the only one in that state
-   */
-  updateEntitiesState(entities: Entity[], changes: { [key: string]: boolean }, exclusive = false) {
-    if (this.store === undefined) {
-      return;
-    }
-    this.store.updateEntitiesState(entities, changes, exclusive);
-  }
-
-  /**
-   * Update all entities state
-   * @param changes State changes
-   */
-  updateAllEntitiesState(changes: { [key: string]: boolean }) {
-    if (this.store === undefined) {
-      return;
-    }
-    this.store.updateAllEntitiesState(changes);
-  }
-
-  /**
-   * Start watching a store for changes in it's entities and their state
+   * Set up observers on a store's entities and their state
    * @param store Entity store
    */
-  private watchStore() {
-    this.unwatchStore();
+  private setupObservers() {
+    this.teardownObservers();
 
-    this.entities$$ = this.store.rawEntities$
-      .subscribe((entities: Entity[]) => this.onEntitiesChange(entities));
+    this.entities$$ = this.store.entities$
+      .subscribe((entities: E[]) => this.onEntitiesChange(entities));
 
-    this.state$$ = this.store.state.states$
+    this.state$$ = this.store.state.change$
       .pipe(skip(1))
       .subscribe(() => this.onStateChange());
   }
 
   /**
-   * Stop watching a store for changes in it's entities and their state
+   * Teardown store observers
    */
-  private unwatchStore() {
+  private teardownObservers() {
     if (this.entities$$ !== undefined) {
       this.entities$$.unsubscribe();
     }
     if (this.state$$ !== undefined) {
       this.state$$.unsubscribe();
     }
+    this.entities$$ = undefined;
+    this.state$$ = undefined;
   }
 
   /**
    * When the entities change, always trigger the changes detection
    */
-  private onEntitiesChange(entities: Entity[]) {
+  private onEntitiesChange(entities: E[]) {
     this.detectChanges();
   }
 
@@ -160,22 +126,28 @@ export class EntityStoreController {
    * the component might have initiated thoses changes itself.
    */
   private onStateChange() {
-    let detectChanges = false;
+    let changesDetected = false;
+    const storeIndex = this.store.state.index;
+    const innerIndex = this.innerStateIndex;
 
-    this.store.entities.forEach((entity: Entity) => {
-      const key = getEntityId(entity);
-      const storeState = this.store.getEntityState(entity);
-      const innerState = this.innerState.getByKey(key);
-      if (innerState === undefined) {
-        detectChanges = true;
-      } else if (this.cdRef !== undefined && detectChanges === false) {
-        detectChanges = !objectsAreEquivalent(storeState, innerState);
+    if (storeIndex.size !== innerIndex.size) {
+      changesDetected = this.detectChanges();
+    }
+
+    const storeKeys = Array.from(storeIndex.keys());
+    for (let i = 0; i < storeKeys.length; i++) {
+      const key = storeKeys[i];
+      const storeValue = storeIndex.get(key);
+      const innerValue = innerIndex.get(key);
+      if (changesDetected === false) {
+        if (innerValue === undefined) {
+          changesDetected = this.detectChanges();
+        } else if (!objectsAreEquivalent(storeValue, innerValue)) {
+          changesDetected = this.detectChanges();
+        }
       }
-      this.innerState.setByKey(key, Object.assign({}, storeState));
-    });
 
-    if (detectChanges !== false) {
-      this.detectChanges();
+      this.innerStateIndex.set(key, Object.assign({}, storeValue));
     }
   }
 
@@ -186,6 +158,7 @@ export class EntityStoreController {
     if (this.cdRef !== undefined) {
       this.cdRef.detectChanges();
     }
+    return true;
   }
 
 }

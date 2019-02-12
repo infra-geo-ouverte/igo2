@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { EntityStore, getEntityId } from 'src/lib/entity';
+import { EntityStore } from 'src/lib/entity';
 import { Catalog, CatalogItem } from 'src/lib/catalog';
 
 /**
@@ -23,7 +23,7 @@ export class CatalogState {
   private catalogItemsStores = new Map<string, EntityStore<CatalogItem>>();
 
   constructor() {
-    this._catalogStore = new EntityStore();
+    this._catalogStore = new EntityStore([]);
   }
 
   /**
@@ -32,7 +32,7 @@ export class CatalogState {
    * @returns Store that contains the catalog items
    */
   getCatalogItemsStore(catalog: Catalog): EntityStore<CatalogItem> {
-    return this.catalogItemsStores.get(getEntityId(catalog));
+    return this.catalogItemsStores.get(catalog.id as string);
   }
 
   /**
@@ -41,6 +41,6 @@ export class CatalogState {
    * @param store
    */
   setCatalogItemsStore(catalog: Catalog, store: EntityStore<CatalogItem>) {
-    this.catalogItemsStores.set(getEntityId(catalog), store);
+    this.catalogItemsStores.set(catalog.id as string, store);
   }
 }

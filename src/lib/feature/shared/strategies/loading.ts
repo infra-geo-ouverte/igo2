@@ -70,7 +70,7 @@ export class FeatureStoreLoadingStrategy extends FeatureStoreStrategy {
       return;
     }
 
-    const subscription = store.filteredEntities$
+    const subscription = store.view.all$()
       .subscribe((features: Feature[]) => this.onFeaturesChange(features, store));
     this.stores$$.set(store, subscription);
   }

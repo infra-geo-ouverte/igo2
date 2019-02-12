@@ -1,6 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
-import { Media, MediaOrientation, MediaService } from '@igo2/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 
 import { Action, ActionbarMode } from 'src/lib/action';
 import { EntityStore } from 'src/lib/entity';
@@ -16,7 +14,7 @@ import { IgoMap, MapAction } from '../shared';
   styleUrls: ['./map-actionbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapActionbarComponent implements OnInit {
+export class MapActionbarComponent implements OnInit, OnDestroy {
 
   /**
    * The map
@@ -37,12 +35,14 @@ export class MapActionbarComponent implements OnInit {
    * The store that'll contain the map actions
    * @internal
    */
-  public store: EntityStore<Action> = new EntityStore<Action>();
-
-  constructor(private mediaService: MediaService) {}
+  public store: EntityStore<Action> = new EntityStore<Action>([]);
 
   ngOnInit() {
-    this.store.setEntities(this.buildActions());
+    this.store.load(this.buildActions());
+  }
+
+  ngOnDestroy() {
+    this.store.destroy();
   }
 
   /**

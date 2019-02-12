@@ -4,17 +4,13 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   OnInit,
   OnDestroy
 } from '@angular/core';
 
 import {
-  EntityState,
-  EntityStore,
-  EntityStoreController,
-  getEntityId,
-  getEntityTitle
+  EntityStateManager,
+  EntityStore
 } from 'src/lib/entity';
 
 import {
@@ -39,12 +35,7 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
    * Group's items store
    * @internal
    */
-  store: EntityStore<CatalogItem, CatalogItemState>;
-
-  /**
-   * Group's items store controller
-   */
-  private controller: EntityStoreController;
+  store = new EntityStore<CatalogItem, CatalogItemState>([]);
 
   /**
    * Catalog group
@@ -58,7 +49,7 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
    * the selection of a layer while unselecting any layer already selected in another group.
    * This could be useful to display some layer info before adding it, for example.
    */
-  @Input() state: EntityState<CatalogItemState>;
+  @Input() state: EntityStateManager<CatalogItem, CatalogItemState>;
 
   /**
    * Whether the group is already added to the map
@@ -84,27 +75,17 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
   /**
    * @internal
    */
-  get title(): string { return getEntityTitle(this.group); }
-
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
+  get title(): string { return this.group.title; }
 
   /**
    * @internal
    */
   ngOnInit() {
-    this.store = new EntityStore<CatalogItem, CatalogItemState>(this.state);
-    this.store.setEntities(this.group.items, true);
-    this.controller.bindStore(this.store);
+    this.store.load(this.group.items);
   }
 
-  /**
-   * @internal
-   */
   ngOnDestroy() {
-    this.controller.unbindStore();
+    this.store.destroy();
   }
 
   /**
@@ -171,11 +152,9 @@ export class CatalogBrowserGroupComponent implements OnInit, OnDestroy {
     const added = event.added;
     const layer = event.layer;
 
-    const layersAdded = this.store.entities
-      .filter((item: CatalogItem) => getEntityId(item) !== getEntityId(layer))
-      .map((item: CatalogItem) => {
-        return this.store.getEntityState(item).added || false;
-      });
+    const layersAdded = this.store.view.all()
+      .filter((item: CatalogItem) => item.id !== layer.id)
+      .map((item: CatalogItem) => this.state.get(item).added || false);
 
     if (layersAdded.every((value) => value === added)) {
       added ? this.add() : this.remove();

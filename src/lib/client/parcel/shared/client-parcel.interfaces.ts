@@ -1,4 +1,3 @@
-import { EntityObject } from 'src/lib/entity';
 import { Feature } from 'src/lib/feature';
 
 export interface ClientParcelApiConfig {
@@ -42,7 +41,7 @@ export interface ClientParcelListResponseItem extends ClientParcel {}
 export type ClientParcelListResponse = ClientParcelListResponseItem[];
 
 /*** Parcel Year ***/
-export interface ClientParcelYear extends EntityObject {
+export interface ClientParcelYear {
   id: string;
   annee: number;
   current: boolean;
@@ -59,6 +58,6 @@ export interface ClientParcelYearListResponse {
 }
 
 /*** Parcel Diagram ***/
-export interface ClientParcelDiagram extends EntityObject {
+export interface ClientParcelDiagram {
   id: number;
 }

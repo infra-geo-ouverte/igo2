@@ -96,7 +96,7 @@ export class ClientSchemaElementSaverComponent implements WidgetComponent {
     const store = operation.store;
     const entity = operation.current;
     if (store !== undefined && entity !== undefined) {
-      store.updateEntityState(entity, {selected: true}, true);
+      store.state.update(entity, {selected: true}, true);
     }
   }
 

@@ -1,10 +1,10 @@
 <igo-list [navigation]="false">
-    <ng-template ngFor let-catalog [ngForOf]="store.entities$ | async">
-      <fadq-catalog-library-item
-        igoListItem
-        [map]="map"
-        [catalog]="catalog"
-        (select)="onCatalogSelect(catalog)">
-      </fadq-catalog-library-item>
-    </ng-template>
+  <ng-template ngFor let-catalog [ngForOf]="store.view.all$() | async">
+    <fadq-catalog-library-item
+      igoListItem
+      [map]="map"
+      [catalog]="catalog"
+      (select)="onCatalogSelect(catalog)">
+    </fadq-catalog-library-item>
+  </ng-template>
 </igo-list>

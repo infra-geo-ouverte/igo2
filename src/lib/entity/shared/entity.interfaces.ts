@@ -1,44 +1,70 @@
+import { Observable } from 'rxjs';
+
 import {
-  EntityTableColumnRenderer,
-  EntityOperationType
+  EntityOperationType,
+  EntityTableColumnRenderer
 } from './entity.enums';
 import { EntityStore } from './store';
 
-export interface EntityMeta {
-  dataType?: string;
-  id?: string;
-  idProperty?: string;
-  title?: string;
-  titleProperty?: string;
-  titleHtml?: string;
-  titleHtmlProperty?: string;
-  icon?: string;
-  iconProperty?: string;
-  revision?: number;
+export type EntityKey = string | number;
+
+export interface EntityState {
+  [key: string]: any;
 }
 
-export interface EntityObject<M = EntityMeta> {
-  meta?: M;
+export interface EntityRecord<E extends object, S extends EntityState = EntityState> {
+  entity: E;
+  state: S;
 }
 
-export abstract class EntityClass<M = EntityMeta> implements EntityObject {
-  meta?: M;
+export interface EntityStoreOptions {
+  getKey?: (entity: object) => EntityKey;
+  getProperty?: (entity: object, property: string) => any;
 }
 
-export type Entity = EntityObject | EntityClass;
+export interface EntityStateManagerOptions {
+  getKey?: (entity: object) => EntityKey;
+}
 
-export interface State {
-  [key: string]: boolean;
+export interface EntityTransactionOptions {
+  getKey?: (entity: object) => EntityKey;
+}
+
+export type EntityFilterClause<E = object> = (entity: E) => boolean;
+
+export interface EntitySortClause<E = object> {
+  valueAccessor: (entity: E) => string | number;
+  direction: string;
+}
+
+export interface EntityJoinClause {
+  source: Observable<any | void>;
+  reduce: (object, any) => object;
+}
+
+export interface EntityOperation {
+  key: EntityKey;
+  type: EntityOperationType;
+  previous: object | undefined;
+  current: object | undefined;
+  store?: EntityStore<object>;
+  meta?: {[key: string]: any};
+}
+
+export interface EntityOperationState {
+  added: boolean;
+  canceled: boolean;
 }
 
 export interface EntityTableTemplate {
   columns: EntityTableColumn[];
   selection?: boolean;
   sort?: boolean;
-  rowClassFunc?: (entity: Entity) => {
+  valueAccessor?: (entity: object, property: string) => any;
+  rowClassFunc?: (entity: object) => {
     [key: string]: boolean;
   };
-  cellClassFunc?: (entity: Entity, column: EntityTableColumn) => {
+  cellClassFunc?: (entity: object, column: EntityTableColumn) => {
     [key: string]: boolean;
   };
 }
@@ -47,32 +73,11 @@ export interface EntityTableColumn {
   name: string;
   title: string;
   renderer?: EntityTableColumnRenderer;
-  valueAccessor?: (entity: Entity) => any;
+  valueAccessor?: (entity: object) => any;
   visible?: boolean;
   sort?: boolean;
   filterable?: boolean;
-  cellClassFunc?: (entity: Entity) => {
+  cellClassFunc?: (entity: object) => {
     [key: string]: boolean;
   };
-}
-
-export interface EntitySortClause {
-  property: string;
-  direction: string;
-}
-
-export type EntityFilterClause = (entity: Entity, state: State) => boolean;
-
-export interface EntityOperation extends EntityObject {
-  id: string;
-  entityId: string;
-  type: EntityOperationType;
-  previous: Entity | undefined;
-  current: Entity | undefined;
-  store?: EntityStore<Entity>;
-}
-
-export interface EntityOperationState extends State {
-  added: boolean;
-  canceled: boolean;
 }

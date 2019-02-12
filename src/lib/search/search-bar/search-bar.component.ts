@@ -238,7 +238,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     }
 
     if (this.store !== undefined) {
-      this.store.clear(true);
+      this.store.softClear();
     }
 
     const researches = this.searchService.search(term);
@@ -259,10 +259,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.search.emit({research, results});
 
     if (this.store !== undefined) {
-      const newResults = this.store.entities
+      const newResults = this.store.entities$.value
         .filter(result => result.source !== research.source)
         .concat(results);
-      this.store.setEntities(newResults, true);
+      this.store.load(newResults);
     }
   }
 

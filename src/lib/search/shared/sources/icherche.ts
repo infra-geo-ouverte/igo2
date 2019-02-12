@@ -85,7 +85,7 @@ export class IChercheSearchSource extends SearchSource implements TextSearch {
 
   private dataToResult(data: IChercheData): SearchResult<Feature> {
     const properties = this.computeProperties(data);
-
+    const id = [this.getId(), properties.type, data._id].join('.');
     return {
       source: this,
       data: {
@@ -95,12 +95,13 @@ export class IChercheSearchSource extends SearchSource implements TextSearch {
         extent: data.bbox,
         properties: properties,
         meta: {
+          id: id,
           title: data.properties.recherche
         }
       },
       meta: {
         dataType: FEATURE,
-        id: [this.getId(), properties.type, data._id].join('.'),
+        id: id,
         title: data.properties.recherche,
         titleHtml: data.highlight,
         icon: 'place'
@@ -182,6 +183,7 @@ export class IChercheReverseSearchSource extends SearchSource implements Reverse
   private dataToResult(data: IChercheReverseData): SearchResult<Feature> {
     const properties = this.computeProperties(data);
     const extent = this.computeExtent(data);
+    const id = [this.getId(), properties.type, data._id].join('.');
 
     return {
       source: this,
@@ -192,12 +194,13 @@ export class IChercheReverseSearchSource extends SearchSource implements Reverse
         extent: extent,
         properties: properties,
         meta: {
+          id: id,
           title: data.properties.nom
         }
       },
       meta: {
         dataType: FEATURE,
-        id: [this.getId(), properties.type, data._id].join('.'),
+        id: id,
         title: data.properties.nom,
         icon: 'place'
       }

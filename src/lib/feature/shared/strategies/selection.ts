@@ -7,7 +7,7 @@ import { map, debounceTime, skip } from 'rxjs/operators';
 
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
-import { State } from 'src/lib/entity';
+import { EntityRecord } from 'src/lib/entity';
 import { IgoMap } from 'src/lib/map';
 
 import { Feature, FeatureStoreSelectionStrategyOptions } from '../feature.interfaces';
@@ -85,7 +85,7 @@ export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
    */
   unselectAll() {
     this.stores.forEach((store: FeatureStore) => {
-      store.updateAllEntitiesState({selected: false});
+      store.state.updateAll({selected: false});
     });
   }
 
@@ -121,9 +121,11 @@ export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
     this.unwatchAll();
 
     const stores$ = this.stores.map((store: FeatureStore) => {
-      return store.observeBy((feature: Feature, state: State) => {
-        return state.selected === true;
-      });
+      return store.stateView.manyBy$((record: EntityRecord<Feature>) => {
+        return record.state.selected === true;
+      }).pipe(
+        map((records: EntityRecord<Feature>[]) => records.map(record => record.entity))
+      );
     });
     this.stores$$ = combineLatest(...stores$)
       .pipe(
@@ -207,7 +209,7 @@ export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
    * @param features Features
    */
   private selectFeaturesFromStore(store: FeatureStore, features: Feature[]) {
-    store.updateEntitiesState(features, {selected: true}, true);
+    store.state.updateMany(features, {selected: true}, true);
   }
 
   /**
@@ -215,7 +217,7 @@ export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
    * @param store: Feature store
    */
   private unselectAllFeaturesFromStore(store: FeatureStore) {
-    store.updateAllEntitiesState({selected: false});
+    store.state.updateAll({selected: false});
   }
 
   /**
@@ -240,7 +242,7 @@ export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
         groupedFeatures.set(store, features);
       }
 
-      const feature = store.getEntityById(olFeature.getId());
+      const feature = store.get(olFeature.getId());
       if (feature !== undefined) {
         features.push(feature);
       }
@@ -260,7 +262,7 @@ export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
       style: this.options ? this.options.style : undefined
     });
 
-    return new FeatureStore().bindLayer(overlayLayer);
+    return new FeatureStore([]).bindLayer(overlayLayer);
   }
 
   /**

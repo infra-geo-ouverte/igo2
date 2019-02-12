@@ -9,12 +9,12 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import {
+  EntityRecord,
   EntityStore,
   EntityStoreController,
-  State,
   getEntityTitle
 } from 'src/lib/entity';
 
@@ -32,20 +32,21 @@ import { Editor } from '../shared';
 export class EditorSelectorComponent implements OnInit, OnDestroy {
 
   /**
-   * The selected editor
+   * The current editor
    * @internal
    */
-  public editor: Editor;
+  public current$ = new BehaviorSubject<Editor>(undefined);
 
   /**
    * Subscription to the store's selected editor
    */
-  private editor$$: Subscription;
+  private selected$$: Subscription;
 
   /**
    * Store controller
    */
-  private controller: EntityStoreController;
+  private controller: EntityStoreController<Editor>;
+
 
   /**
    * Store that holds the available editors.
@@ -60,20 +61,20 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
     editor: Editor;
   }>();
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
+  constructor(private cdRef: ChangeDetectorRef) {}
 
   /**
    * Observe the store's selected editor and activate it
    * @internal
    */
   ngOnInit() {
-    this.controller.bindStore(this.store);
-    this.editor$$ = this.store
-      .observeFirstBy((editor: Editor, state: State) => state.selected === true)
-      .subscribe((editor: Editor) => this.activateEditor(editor));
+    this.controller = new EntityStoreController(this.store, this.cdRef);
+    this.selected$$ = this.store.stateView
+      .firstBy$((record: EntityRecord<Editor>) => record.state.selected === true)
+      .subscribe((record: EntityRecord<Editor>) => {
+        const editor = record ? record.entity : undefined;
+        this.activateEditor(editor);
+      });
   }
 
   /**
@@ -81,8 +82,8 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbindStore();
-    this.editor$$.unsubscribe();
+    this.controller.destroy();
+    this.selected$$.unsubscribe();
   }
 
   /**
@@ -100,7 +101,7 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
    */
   onSelectionChange(event: {value: Editor}) {
     const editor = event.value;
-    this.controller.updateEntityState(editor, {selected: true}, true);
+    this.store.state.update(editor, {selected: true}, true);
     this.selectedChange.emit({selected: true, editor});
   }
 
@@ -110,12 +111,13 @@ export class EditorSelectorComponent implements OnInit, OnDestroy {
    * @param editor Editor
    */
   private activateEditor(editor: Editor) {
-    if (this.editor !== undefined) {
-      this.editor.deactivate();
+    const current = this.current$.value;
+    if (current !== undefined) {
+      current.deactivate();
     }
     if (editor !== undefined) {
       editor.activate();
     }
-    this.editor = editor;
+    this.current$.next(editor);
   }
 }

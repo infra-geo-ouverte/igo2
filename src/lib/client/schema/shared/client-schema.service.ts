@@ -1,11 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from 'src/lib/core/api';
-import { getEntityId } from 'src/lib/entity';
 import {
   ClientSchema,
   ClientSchemaApiConfig,
@@ -66,7 +65,7 @@ export class ClientSchemaService {
 
   deleteSchema(schema: ClientSchema): Observable<any> {
     const url = this.apiService.buildUrl(this.apiConfig.delete, {
-      id: getEntityId(schema)
+      id: schema.id
     });
 
     return this.http.post(url, {});
@@ -74,7 +73,7 @@ export class ClientSchemaService {
 
   duplicateSchema(schema: ClientSchema): Observable<ClientSchema> {
     const url = this.apiService.buildUrl(this.apiConfig.duplicate, {
-      id: getEntityId(schema)
+      id: schema.id
     });
 
     return this.http

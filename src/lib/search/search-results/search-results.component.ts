@@ -3,8 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectorRef,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   OnInit,
   OnDestroy
 } from '@angular/core';
@@ -41,7 +41,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   /**
    * Search results store controller
    */
-  private controller: EntityStoreController;
+  private controller: EntityStoreController<SearchResult>;
 
   /**
    * Search results store
@@ -64,39 +64,19 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   @Output() resultSelect = new EventEmitter<SearchResult>();
 
   get results$(): Observable<{source: SearchSource, results: SearchResult[]}[]> {
-    if (this._results$ === undefined) {
-      this._results$ = this.observeResults();
-    }
+    if (this._results$ === undefined) { this._results$ = this.liftResults(); }
     return this._results$;
   }
   private _results$: Observable<{source: SearchSource, results: SearchResult[]}[]>;
 
-  /**
-   * Return an observable of the search results, grouped by search source
-   * @returns Observable of grouped search results
-   * @internal
-   */
-  observeResults(): Observable<{source: SearchSource, results: SearchResult[]}[]> {
-    return this.store.filteredEntities$.pipe(
-      debounce((results: SearchResult[]) => {
-        return results.length === 0 ? EMPTY : timer(200);
-      }),
-      map((results: SearchResult[]) => {
-        return this.groupResults(results.sort(this.sortByOrder));
-      }));
-  }
-
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
+  constructor(private cdRef: ChangeDetectorRef) {}
 
   /**
    * Bind the search results store to the controller
    * @internal
    */
   ngOnInit() {
-    this.controller.bindStore(this.store);
+    this.controller = new EntityStoreController(this.store, this.cdRef);
   }
 
   /**
@@ -104,8 +84,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbindStore();
+    this.controller.destroy();
   }
+
 
   /**
    * When a result is focused, update it's state in the store and emit
@@ -114,7 +95,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
    * @internal
    */
   onResultFocus(result: SearchResult) {
-    this.controller.updateEntityState(result, {focused: true}, true);
+    this.store.state.update(result, {focused: true}, true);
     this.resultFocus.emit(result);
   }
 
@@ -125,7 +106,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
    * @internal
    */
   onResultSelect(result: SearchResult) {
-    this.controller.updateEntityState(result, {
+    this.store.state.update(result, {
       focused: true,
       selected: true
     }, true);
@@ -133,13 +114,29 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Sort the results by display order. Results are not sorted at the store
-   * level.
-   * @param result1 First result
-   * @param result2 Second result
+   * Return an observable of the search results, grouped by search source
+   * @returns Observable of grouped search results
+   * @internal
    */
-  private sortByOrder(result1: SearchResult, result2: SearchResult) {
-    return (result1.source.displayOrder - result2.source.displayOrder);
+  private liftResults(): Observable<{source: SearchSource, results: SearchResult[]}[]> {
+    return this.store.view.all$()
+      .pipe(
+        debounce((results: SearchResult[]) => {
+          return results.length === 0 ? EMPTY : timer(200);
+        }),
+        map((results: SearchResult[]) => {
+          return this.groupResults(results.sort(this.sortByOrder));
+        })
+      );
+  }
+
+  /**
+   * Sort the results by display order.
+   * @param r1 First result
+   * @param r2 Second result
+   */
+  private sortByOrder(r1: SearchResult, r2: SearchResult) {
+    return (r1.source.displayOrder - r2.source.displayOrder);
   }
 
   /**
@@ -147,9 +144,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
    * @param results Search results from all sources
    * @returns Search results grouped by source
    */
-  private groupResults(results: SearchResult[]): {source: SearchSource, results: SearchResult[]}[] {
+  private groupResults(results:  SearchResult[]): {source: SearchSource, results: SearchResult[]}[] {
     const grouped = new Map<SearchSource, SearchResult[]>();
-
     results.forEach((result: SearchResult) => {
       const source = result.source;
       let sourceResults = grouped.get(source);

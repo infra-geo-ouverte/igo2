@@ -14,6 +14,6 @@ export class MeasureState {
   /**
    * Store that holds the measures
    */
-  public store: FeatureStore<FeatureWithMeasure> = new  FeatureStore<FeatureWithMeasure>();
+  public store: FeatureStore<FeatureWithMeasure> = new  FeatureStore<FeatureWithMeasure>([]);
 
 }

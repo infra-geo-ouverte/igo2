@@ -69,12 +69,13 @@ export class NominatimSearchSource extends SearchSource implements TextSearch {
     const properties = this.computeProperties(data);
     const geometry = this.computeGeometry(data);
     const extent = this.computeExtent(data);
+    const id = [this.getId(), 'place', data.place_id].join('.');
 
     return {
       source: this,
       meta: {
         dataType: FEATURE,
-        id: [this.getId(), 'place', data.place_id].join('.'),
+        id: id,
         title: data.display_name,
         icon: 'place'
       },
@@ -85,6 +86,7 @@ export class NominatimSearchSource extends SearchSource implements TextSearch {
         extent: extent,
         properties: properties,
         meta: {
+          id: id,
           title: data.display_name
         }
       }

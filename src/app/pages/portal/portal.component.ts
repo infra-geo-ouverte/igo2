@@ -25,7 +25,7 @@ import {
   CLIENT
 } from 'src/lib/client';
 import { Editor } from 'src/lib/edition';
-import { EntityStore, State, getEntityTitle } from 'src/lib/entity';
+import { EntityRecord, EntityStore, getEntityTitle } from 'src/lib/entity';
 import {
   FEATURE,
   Feature
@@ -177,13 +177,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.context$$ = this.contextService.context$
       .subscribe((context: DetailedContext) => this.onChangeContext(context));
 
-    this.focusedSearchResult$$ = this.searchStore
-      .observeFirstBy((result: SearchResult, state: State) => state.focused === true)
-      .subscribe((result: SearchResult) => this.onFocusSearchResult(result));
+    this.focusedSearchResult$$ = this.searchStore.stateView
+      .firstBy$((record: EntityRecord<SearchResult>) => record.state.focused === true)
+      .subscribe((record: EntityRecord<SearchResult>) => {
+        const result = record ? record.entity : undefined;
+        this.onFocusSearchResult(result);
+      });
 
-    this.selectedEditor$$ = this.editorStore
-      .observeFirstBy((editor: Editor, state: State) => state.selected === true)
-      .subscribe((editor: Editor) => this.onSelectEditor(editor));
+    this.selectedEditor$$ = this.editorStore.stateView
+      .firstBy$((record: EntityRecord<Editor>) => record.state.selected === true)
+      .subscribe((record: EntityRecord<Editor>) => {
+        const editor = record ? record.entity : undefined;
+        this.onSelectEditor(editor);
+      });
   }
 
   ngOnDestroy() {
@@ -296,10 +302,10 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const newResults = this.searchStore.entities
+    const newResults = this.searchStore.entities$.value
       .filter((result: SearchResult) => result.source !== event.research.source)
       .concat(results.filter((result: SearchResult) => result.meta.dataType !== CLIENT));
-    this.searchStore.setEntities(newResults, true);
+    this.searchStore.load(newResults);
 
     const clientResult = results.find((result: SearchResult) => result.meta.dataType === CLIENT);
     if (clientResult !== undefined) {
@@ -335,7 +341,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private onSearchMap(results: SearchResult<Feature>[]) {
     if (results.length > 0) {
       this.onBeforeSearch();
-      this.searchStore.updateEntityState(results[0], {selected: true}, true);
+      this.searchStore.state.update(results[0], {selected: true}, true);
     }
   }
 

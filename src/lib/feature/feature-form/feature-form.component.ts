@@ -19,7 +19,7 @@ import { getEntityRevision } from 'src/lib/entity';
 import { Form } from 'src/lib/form';
 
 import { FEATURE } from '../shared/feature.enum';
-import { Feature } from '../shared/feature.interfaces';
+import { Feature, FeatureMeta } from '../shared/feature.interfaces';
 import { FeatureStore } from '../shared/store';
 import { FeatureStoreSelectionStrategy } from '../shared/strategies/selection';
 
@@ -125,7 +125,7 @@ export class FeatureFormComponent implements OnChanges, OnDestroy {
     }
 
     return {
-      meta,
+      meta: meta as FeatureMeta,
       type: FEATURE,
       geometry: geometry,
       projection: 'EPSG:4326',

@@ -1,4 +1,3 @@
-
 <mat-list-item>
   <mat-icon
     mat-list-avatar
@@ -25,14 +24,14 @@
 </mat-list-item>
 
 <div #items>
-  <ng-template ngFor let-item [ngForOf]="store.entities$ | async">
+  <ng-template ngFor let-item [ngForOf]="store.view.all$() | async">
     <ng-container *ngIf="isGroup(item)"></ng-container>
     <ng-container *ngIf="isLayer(item)">
       <fadq-catalog-browser-layer
         igoListItem
         [layer]="item"
-        [added]="store.getEntityState(item).added"
-        [disabled]="store.getEntityState(item).added"
+        [added]="state.get(item).added"
+        [disabled]="state.get(item).added"
         (addedChange)="onLayerAddedChange($event)">
       </fadq-catalog-browser-layer>
     </ng-container>

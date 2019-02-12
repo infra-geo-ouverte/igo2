@@ -4,15 +4,12 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  OnInit,
-  OnDestroy
+  OnInit
 } from '@angular/core';
 
 import { IgoMap } from '@igo2/geo';
 
 import { EntityStore } from '../../entity/shared/store';
-import { EntityStoreController } from '../../entity/shared/controller';
 import { Catalog } from '../shared/catalog.interfaces';
 
 /**
@@ -23,12 +20,7 @@ import { Catalog } from '../shared/catalog.interfaces';
   templateUrl: './catalog-library.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CatalogLibaryComponent implements OnInit, OnDestroy {
-
-  /**
-   * Catalogs store controller
-   */
-  private controller: EntityStoreController;
+export class CatalogLibaryComponent implements OnInit {
 
   /**
    * Store holding the catalogs
@@ -48,24 +40,11 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
     catalog: Catalog;
   }>();
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
-
   /**
    * @internal
    */
   ngOnInit() {
-    this.store.state.reset();
-    this.controller.bindStore(this.store);
-  }
-
-  /**
-   * @internal
-   */
-  ngOnDestroy() {
-    this.controller.unbindStore();
+    this.store.state.clear();
   }
 
   /**
@@ -74,7 +53,7 @@ export class CatalogLibaryComponent implements OnInit, OnDestroy {
    * @internal
    */
   onCatalogSelect(catalog: Catalog) {
-    this.controller.updateEntityState(catalog, {
+    this.store.state.update(catalog, {
       selected: true,
       focused: true
     }, true);

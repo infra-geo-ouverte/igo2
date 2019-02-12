@@ -3,12 +3,13 @@ It can be observed, filtered and sorted and provdies methods to add, update or r
 
 ### Defining an `Entity` type
 
-The `entity` module provides two interfaces `EntityObject` and `EntityClass`. An `Entity` should extend
-one or the other. For example, let's say we want to define a Book interface with an `id` and `title`.
+An entity doesn't not need to implement any interface, but, the store needs to know
+how to retrieve an entity's unique key.
+For example, let's say we want to define a Book interface with an `id` and `title`.
 We could do it like this:
 
 ```typescript
-export interface Book extends EntityObject {
+export interface Book {
   id: string;
   title: string;
 }
@@ -16,32 +17,19 @@ export interface Book extends EntityObject {
 
 ### Create and populate an entity EntityStore
 
-An entity store is always created empty. The method `setEntities` method can be used to do just that.
+An entity store can be created with data or the `load` method may be used.
 
 ```typescript
-const store = new EntityStore<Book>();
-store.setEntities([
+const store = new EntityStore<Book>([
   {id: 1, title: 'Book 1'},
   {id: 2, title: 'Book 2'},
-]);
+], {getKey: (book: Book) => book.id});
 ```
 
 ### Observe raw entities (unfiltered ad unsorted)
 
-The `rawEntities$` property returns an observable of all the entities, unfiltered and unsorted.
+The `entities$` property returns an observable of all the entities, unfiltered and unsorted.
 It emits a value only when the entities change and ignores any filtering, sorting or state change.
-
-```typescript
-const subscribtion = store
-  .rawEntities$
-  .subscribe((books: Book[]) => {console.log(books.length);})
-```
-
-### Observe entities (filtered ad sorted) and any state change
-
-The `entities$` property returns an observable of all the filtered and sorted entities.
-It emits a new value anytime the store is filtered or sorted as well as any time there is
-a change in the state.  
 
 ```typescript
 const subscribtion = store
@@ -49,16 +37,38 @@ const subscribtion = store
   .subscribe((books: Book[]) => {console.log(books.length);})
 ```
 
+### Observe entities (filtered ad sorted)
+
+The `view.all$()` method returns an observable of all the filtered and sorted entities.
+It emits a new value anytime the store is filtered or sorted.
+
+```typescript
+const subscribtion = store
+  .entities$
+  .subscribe((books: Book[]) => {console.log(books.length);})
+```
+
+### Observe entities (filtered ad sorted) and any state change
+
+The `stateView.all$()` method returns an observable of all the filtered and sorted entities.
+It emits a new value anytime the store is filtered or sorted as well as any time there is
+a change in the state.  
+
+```typescript
+const subscribtion = store
+  .entities$
+  .subscribe((records: {entity: Book, state: EntityState}[]) => {console.log(rcords.length);})
+```
+
 ### Create a custom observable
 
-A custom observable can be created using the methods `observeBy` and `observeFirstBy`. These method
-accept a filtering function. This function will receive an `Entity` and it's state and should return
-a boolean.
+A custom observable can be created using the store views' `firstBy$()` and `manyBy$()` methods. These method
+accept a filtering function.
 
 ```typescript
 const subscribtionToSelectedBook = store
-  .observeFirstBy((book: Book, state: {[key: string]: boolean}) => {
-    return state.selected === true;
+  .stateView.firstBy$(({entity: Book, state: EntityState}) => {
+    return record.state.selected === true;
   })
-  .subscribe((selectedBook: Book) => {console.log(selectedBook);})
+  .subscribe((record: Book) => {console.log(record));})
 ```

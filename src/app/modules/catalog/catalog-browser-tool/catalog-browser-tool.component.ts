@@ -5,12 +5,12 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 import { Register } from '@igo2/context';
 
 import { IgoMap} from 'src/lib/map';
-import { EntityStore, State } from 'src/lib/entity';
+import { EntityRecord, EntityStore } from 'src/lib/entity';
 import { Catalog, CatalogItem, CatalogService } from 'src/lib/catalog';
 
 import { MapState } from 'src/app/modules/map/map.state';
@@ -35,7 +35,7 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
    * Store that contains the catalog items
    * @internal
    */
-  public store: EntityStore<CatalogItem>;
+  public store$ = new Subject<EntityStore<CatalogItem>>();
 
   /**
    * Subscription to the selected catalog
@@ -59,10 +59,13 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     const catalogStore = this.catalogState.catalogStore;
-
-    this.catalog$$ = catalogStore
-      .observeFirstBy((catalog: Catalog, state: State) => state.selected === true)
-      .subscribe((catalog: Catalog) => this.loadCatalogItems(catalog));
+    this.catalog$$ = catalogStore.stateView
+      .firstBy$((record: EntityRecord<Catalog>) => record.state.selected === true)
+      .subscribe((record: EntityRecord<Catalog>) => {
+        if (record && record.entity) {
+          this.loadCatalogItems(record.entity);
+        }
+      });
   }
 
   /**
@@ -78,16 +81,19 @@ export class CatalogBrowserToolComponent implements OnInit, OnDestroy {
    * @param catalog Selected catalog
    */
   private loadCatalogItems(catalog: Catalog) {
-    const store = this.catalogState.getCatalogItemsStore(catalog);
+    let store = this.catalogState.getCatalogItemsStore(catalog);
     if (store !== undefined) {
-      this.store = store;
+      this.store$.next(store);
       return;
     }
 
-    this.store = new EntityStore<CatalogItem>();
-    this.catalogState.setCatalogItemsStore(catalog, this.store);
+    store = new EntityStore<CatalogItem>([]);
+    this.catalogState.setCatalogItemsStore(catalog, store);
     this.catalogService.loadCatalogItems(catalog)
-      .subscribe((items: CatalogItem[]) => this.store.setEntities(items, true));
+      .subscribe((items: CatalogItem[]) => {
+        store.load(items);
+        this.store$.next(store);
+      });
   }
 
 }

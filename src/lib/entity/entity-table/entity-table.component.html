@@ -1,30 +1,29 @@
-<div class="table-box">
-  <div class="table-container">
-    <table
-      mat-table
-      matSort
-      [ngClass]="getTableClass()"
-      [dataSource]="dataSource"
-      (matSortChange)="onSort($event)">
+<div class="table-container">
+  <table
+    mat-table
+    matSort
+    [ngClass]="getTableClass()"
+    [dataSource]="dataSource"
+    (matSortChange)="onSort($event)">
 
-      <ng-container [matColumnDef]="column.name" *ngFor="let column of template.columns">
-        <ng-container *ngIf="columnIsSortable(column)">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{column.title}}
-          </th>
-        </ng-container>
+    <ng-container [matColumnDef]="column.name" *ngFor="let column of template.columns">
+      <ng-container *ngIf="columnIsSortable(column)">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{column.title}}
+        </th>
+      </ng-container>
 
-        <ng-container *ngIf="!columnIsSortable(column)">
-          <th mat-header-cell *matHeaderCellDef>
-            {{column.title}}
-          </th>
-        </ng-container>
+      <ng-container *ngIf="!columnIsSortable(column)">
+        <th mat-header-cell *matHeaderCellDef>
+          {{column.title}}
+        </th>
+      </ng-container>
 
-        <ng-container *ngIf="getColumnRenderer(column) as columnRenderer">
-          <ng-container *ngIf="columnRenderer === entityTableColumnRenderer.Default">
+      <ng-container *ngIf="getColumnRenderer(column) as columnRenderer">
+        <ng-container *ngIf="columnRenderer === entityTableColumnRenderer.Default">
             <td mat-cell *matCellDef="let entity" class="mat-cell-text"
               [ngClass]="getCellClass(entity, column)">
-              {{valueAccessor(entity, column)}}
+              {{getValue(entity, column)}}
             </td>
           </ng-container>
           <ng-container *ngIf="columnRenderer === entityTableColumnRenderer.HTML">
@@ -36,25 +35,23 @@
           <ng-container *ngIf="columnRenderer === entityTableColumnRenderer.Icon">
             <td mat-cell *matCellDef="let entity" class="mat-cell-text"
               [ngClass]="getCellClass(entity, column)">
-              <mat-icon>{{valueAccessor(entity, column)}}</mat-icon>
+              <mat-icon>{{getValue(entity, column)}}</mat-icon>
             </td>
           </ng-container>
-        </ng-container>
       </ng-container>
+    </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="headers;"></tr>
-      <tr
-        mat-row
-        entityTableRow
-        *matRowDef="let entity; columns: headers;"
-        [ngClass]="getRowClass(entity)"
-        [selection]="template.selection || false"
-        [selected]="getRowSelected(entity)"
-        (select)="onEntitySelect(entity)"
-        (click)="onEntityClick(entity)">
-      </tr>
+    <tr mat-header-row *matHeaderRowDef="headers;"></tr>
+    <tr
+      mat-row
+      entityTableRow
+      *matRowDef="let entity; columns: headers;"
+      [ngClass]="getRowClass(entity)"
+      [selection]="selection"
+      [selected]="rowIsSelected(entity)"
+      (select)="onRowSelect(entity)"
+      (click)="onRowClick(entity)">
+    </tr>
 
-    </table>
-  </div>
-
+  </table>
 </div>

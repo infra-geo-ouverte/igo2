@@ -84,7 +84,7 @@ export class ClientSchemaCreateFormComponent implements OnInit, WidgetComponent 
   }
 
   private onSubmitSuccess(schema: ClientSchema) {
-    this.store.addEntities([schema]);
+    this.store.insert(schema);
     this.complete.emit();
   }
 

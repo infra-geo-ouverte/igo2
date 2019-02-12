@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EMPTY, Observable, of, concat } from 'rxjs';
-import { scan, startWith, catchError } from 'rxjs/operators';
+import { map, scan, startWith, catchError } from 'rxjs/operators';
 
 import { LanguageService, ConfigService } from '@igo2/core';
 import {
@@ -82,26 +82,24 @@ export class CatalogService {
   }
 
   private loadCatalogBaseLayerItems(catalog: Catalog): Observable<CatalogItemGroup[]> {
-    const groupItem = {
-      id: 'catalog.group.baselayers',
-      type: CatalogItemType.Group,
-      title: catalog.title,
-      items: []
-    };
-
     // TODO: I'm not sure this works
     return this.getCatalogBaseLayersOptions(catalog)
       .pipe(
-        startWith(groupItem),
-        scan((group: CatalogItemGroup, layerOptions: LayerOptions) => {
-          group.items.push({
-            id: generateLayerIdFromSourceOptions(layerOptions.sourceOptions),
-            title: layerOptions.title,
-            type: CatalogItemType.Layer,
-            options: layerOptions
-          } as CatalogItemLayer);
-
-          return group;
+        map((layersOptions: LayerOptions[]) => {
+          const items = layersOptions.map((layerOptions: LayerOptions) => {
+            return {
+              id: generateLayerIdFromSourceOptions(layerOptions.sourceOptions),
+              title: layerOptions.title,
+              type: CatalogItemType.Layer,
+              options: layerOptions
+            } as CatalogItemLayer;
+          });
+          return [{
+            id: 'catalog.group.baselayers',
+            type: CatalogItemType.Group,
+            title: catalog.title,
+            items
+          }];
         })
       );
   }
@@ -113,8 +111,8 @@ export class CatalogService {
   private loadCatalogWMSLayerItems(catalog: Catalog): Observable<CatalogItem[]> {
     return this.getCatalogWMSCapabilities(catalog)
       .pipe(
-        startWith([]),
-        scan((items: CatalogItem[], capabilities: any) => {
+        map((capabilities: any) => {
+          const items = [];
           this.includeRecursiveItems(catalog, capabilities.Capability.Layer, items);
           return items;
         })

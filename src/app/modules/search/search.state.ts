@@ -14,7 +14,7 @@ export class SearchState {
   /**
    * Store that holds the search results
    */
-  public store: EntityStore<SearchResult> = new EntityStore<SearchResult>();
+  public store: EntityStore<SearchResult> = new EntityStore<SearchResult>([]);
 
   /**
    * Search types currently enabled in the search source service

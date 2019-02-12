@@ -30,7 +30,7 @@ export enum ActionbarMode {
   styleUrls: ['./actionbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActionbarComponent implements OnChanges, OnDestroy {
+export class ActionbarComponent implements OnDestroy, OnChanges {
 
   /**
    * Reference to the ActionbarMode enum for use in the template
@@ -58,7 +58,7 @@ export class ActionbarComponent implements OnChanges, OnDestroy {
    * Action store controller
    * @internal
    */
-  private controller: EntityStoreController;
+  private controller: EntityStoreController<Action>;
 
   /**
    * Action store
@@ -128,10 +128,7 @@ export class ActionbarComponent implements OnChanges, OnDestroy {
   @HostBinding('class.horizontal')
   get horizontalClass() { return this.horizontal; }
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
+  constructor(private cdRef: ChangeDetectorRef) {}
 
   /**
    * @internal
@@ -139,7 +136,10 @@ export class ActionbarComponent implements OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     const store = changes.store;
     if (store && store.currentValue !== store.previousValue) {
-      this.controller.bindStore(this.store);
+      if (this.controller !== undefined) {
+        this.controller.destroy();
+      }
+      this.controller = new EntityStoreController(this.store, this.cdRef);
     }
   }
 
@@ -147,14 +147,7 @@ export class ActionbarComponent implements OnChanges, OnDestroy {
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbindStore();
-  }
-
-  /**
-   * @internal
-   */
-  actionIsDisabled(action: Action): boolean {
-    return this.store.getEntityState(action).disabled === true;
+    this.controller.destroy();
   }
 
   /**

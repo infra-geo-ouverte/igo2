@@ -10,7 +10,7 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityStore, getEntityId } from 'src/lib/entity';
+import { EntityStore } from 'src/lib/entity';
 import { Form } from 'src/lib/form';
 import { WidgetComponent } from 'src/lib/widget';
 
@@ -70,8 +70,8 @@ export class ClientSchemaUpdateFormComponent implements OnInit, WidgetComponent 
   }
 
   onSubmit(data: {[key: string]: any}) {
-    const schemaData = Object.assign({}, data, {
-      id: parseInt(getEntityId(this.schema), 10)
+    const schemaData = Object.assign({}, data as Partial<ClientSchemaUpdateData>, {
+      id: this.schema.id,
     }) as ClientSchemaUpdateData;
 
     this.clientSchemaService.updateSchema(this.schema, schemaData)
@@ -83,7 +83,7 @@ export class ClientSchemaUpdateFormComponent implements OnInit, WidgetComponent 
   }
 
   private onSubmitSuccess(schema: ClientSchema) {
-    this.store.putEntities([schema]);
+    this.store.update(schema);
     this.complete.emit();
   }
 

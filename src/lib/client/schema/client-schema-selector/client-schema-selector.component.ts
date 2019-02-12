@@ -9,12 +9,12 @@ import {
   OnDestroy
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import {
+  EntityRecord,
   EntityStore,
   EntityStoreController,
-  State,
   getEntityTitle
 } from 'src/lib/entity';
 
@@ -28,40 +28,37 @@ import { ClientSchema } from '../shared/client-schema.interfaces';
 })
 export class ClientSchemaSelectorComponent implements OnInit, OnDestroy {
 
-  public currentSchema: ClientSchema;
+  /**
+   * The current schema
+   * @internal
+   */
+  public current$ = new BehaviorSubject<ClientSchema>(undefined);
 
-  private schema$$: Subscription;
-  private controller: EntityStoreController;
+  private selected$$: Subscription;
 
-  @Input()
-  get store(): EntityStore<ClientSchema> {
-    return this._store;
-  }
-  set store(value: EntityStore<ClientSchema>) {
-    this._store = value;
-  }
-  private _store;
+  private controller: EntityStoreController<ClientSchema>;
+
+  @Input() store: EntityStore<ClientSchema>;
 
   @Output() selectedChange = new EventEmitter<{
     selected: boolean;
     schema: ClientSchema;
   }>();
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
+  constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.controller.bindStore(this.store);
-    this.schema$$ = this.store
-      .observeFirstBy((schema: ClientSchema, state: State) => state.selected === true)
-      .subscribe((schema: ClientSchema) => this.currentSchema = schema);
+    this.controller = new EntityStoreController(this.store, this.cdRef);
+    this.selected$$ = this.store.stateView
+      .firstBy$((record: EntityRecord<ClientSchema>) => record.state.selected === true)
+      .subscribe((record: EntityRecord<ClientSchema>) => {
+        this.current$.next(record ? record.entity : undefined);
+      });
   }
 
   ngOnDestroy() {
-    this.controller.unbindStore();
-    this.schema$$.unsubscribe();
+    this.controller.destroy();
+    this.selected$$.unsubscribe();
   }
 
   getSchemaTitle(schema: ClientSchema): string {
@@ -70,7 +67,7 @@ export class ClientSchemaSelectorComponent implements OnInit, OnDestroy {
 
   onSelectionChange(event: {value: ClientSchema}) {
     const schema = event.value;
-    this.controller.updateEntityState(schema, {selected: true}, true);
+    this.store.state.update(schema, {selected: true}, true);
     this.selectedChange.emit({selected: true, schema});
   }
 

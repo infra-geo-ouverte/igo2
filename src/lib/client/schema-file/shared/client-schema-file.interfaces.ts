@@ -1,5 +1,3 @@
-import { EntityObject } from 'src/lib/entity';
-
 export interface ClientSchemaFileApiConfig  {
   list: string;
   download: string;
@@ -8,7 +6,7 @@ export interface ClientSchemaFileApiConfig  {
 }
 
 // Property have been renamed because this might become a common interface/module
-export interface ClientSchemaFile extends EntityObject {
+export interface ClientSchemaFile {
   id: string;
   name: string;
   address: string;

@@ -3,38 +3,31 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectorRef,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  SimpleChanges,
   OnInit,
-  OnChanges,
   OnDestroy,
-  SimpleChanges
+  OnChanges
 } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
 import {
-  Entity,
-  EntityTableTemplate,
-  EntityTableColumn,
   EntityStore,
   EntityStoreController,
-  getEntityId,
-  getEntityProperty,
+  EntityTableTemplate,
+  EntityTableColumn,
   EntityTableColumnRenderer
 } from '../shared';
 
-/**
- * Connect to en entity store and display value in a table.
- * Supports sorting and selection.
- */
 @Component({
   selector: 'fadq-entity-table',
   templateUrl: './entity-table.component.html',
   styleUrls: ['./entity-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
+export class EntityTableComponent implements OnInit, OnDestroy, OnChanges  {
 
   /**
    * Reference to the column renderer types
@@ -45,12 +38,12 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   /**
    * Entity store controller
    */
-  private controller: EntityStoreController;
+  private controller: EntityStoreController<object>;
 
   /**
    * Entity store
    */
-  @Input() store: EntityStore<Entity>;
+  @Input() store: EntityStore<object>;
 
   /**
    * Table template
@@ -60,14 +53,14 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   /**
    * Event emitted when an entity (row) is clicked
    */
-  @Output() entityClick = new EventEmitter<Entity>();
+  @Output() entityClick = new EventEmitter<object>();
 
   /**
    * Event emitted when an entity (row) is selected
    */
   @Output() entitySelectChange = new EventEmitter<{
     selected: boolean;
-    entity: Entity;
+    entity: object;
   }>();
 
   /**
@@ -84,37 +77,32 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    * Data source consumable by the underlying material table
    * @internal
    */
-  get dataSource(): BehaviorSubject<Entity[]> { return this.store.entities$; }
+  get dataSource(): BehaviorSubject<object[]> { return this.store.view.all$(); }
 
   /**
-   * Data source consumable by the underlying material table
-   * ready for the next material upgrade.
+   * Whether selection is supported
    * @internal
    */
-  // get dataSource(): EntityTableComponent { return this; }
+  get selection(): boolean { return this.template.selection || false; }
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
+  constructor(private cdRef: ChangeDetectorRef) {}
 
-  /**
-   * Clear the sort order display
-   * @internal
-   */
   ngOnInit() {
-    // TODO: clear sort order display (arrow)
+    // TODO: clear sort order display
   }
 
   /**
-   * When the store change, bind the controller to the new store
+   * When the store change, create a new controller
    * @param changes
    * @internal
    */
   ngOnChanges(changes: SimpleChanges) {
     const store = changes.store;
     if (store && store.currentValue !== store.previousValue) {
-      this.controller.bindStore(this.store);
+      if (this.controller !== undefined) {
+        this.controller.destroy();
+      }
+      this.controller = new EntityStoreController(this.store, this.cdRef);
     }
   }
 
@@ -123,7 +111,9 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    * @internal
    */
   ngOnDestroy() {
-    this.controller.unbindStore();
+    if (this.controller !== undefined) {
+      this.controller.destroy();
+    }
   }
 
   /**
@@ -137,25 +127,22 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   /**
-   * Implemented as part of the DataSource interface
-   * @internal
-   */
-  connect(): BehaviorSubject<Entity[]> {
-    return this.store.entities$;
-  }
-
-  /**
    * On sort, sort the store
    * @param event Sort event
    * @internal
    */
   onSort(event: {active: string, direction: string}) {
-    const property = event.active;
     const direction = event.direction;
+    const column = this.template.columns
+      .find((c: EntityTableColumn) => c.name === event.active);
+
     if (direction === 'asc' || direction === 'desc') {
-      this.store.sorter.set({property, direction});
+      this.store.view.sort({
+        valueAccessor: (entity: object) => this.getValue(entity, column),
+        direction
+      });
     } else {
-      this.store.sorter.reset();
+      this.store.view.sort(undefined);
     }
   }
 
@@ -164,7 +151,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    * @param entity Entity
    * @internal
    */
-  onEntityClick(entity: Entity) {
+  onRowClick(entity: object) {
     this.entityClick.emit(entity);
   }
 
@@ -173,43 +160,10 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    * @param entity Entity
    * @internal
    */
-  onEntitySelect(entity: Entity) {
-    if (!this.template.selection) {
-      return;
-    }
-
-    this.controller.updateEntityState(entity, {
-      focused: true,
-      selected: true
-    }, true);
+  onRowSelect(entity: object) {
+    if (this.selection === false) { return; }
+    this.store.state.update(entity, {selected: true}, true);
     this.entitySelectChange.emit({selected: true, entity});
-  }
-
-  /**
-   * Method to access an entity's values
-   * @param entity Entity
-   * @param column Column
-   * @returns Any value
-   * @internal
-   */
-  valueAccessor(entity: Entity, column: EntityTableColumn): any {
-    if (column.valueAccessor !==  undefined) {
-      return column.valueAccessor(entity);
-    }
-    return getEntityProperty(entity, column.name);
-  }
-
-  /**
-   * Return the type of renderer of a column
-   * @param column Column
-   * @returns Renderer type
-   * @internal
-   */
-  getColumnRenderer(column: EntityTableColumn): EntityTableColumnRenderer {
-    if (column.renderer !== undefined) {
-      return column.renderer;
-    }
-    return EntityTableColumnRenderer.Default;
   }
 
   /**
@@ -227,26 +181,55 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   /**
-   * Return the table ngClass
-   * @returns ngClass
-   * @internal
-   */
-  getTableClass(): { [key: string]: boolean; } {
-    const selection = this.template.selection || false;
-    return {
-      'fadq-entity-table-with-selection': selection
-    };
-  }
-
-  /**
    * Whether a row is should be selected based on the underlying entity state
    * @param entity Entity
    * @returns True if a row should be selected
    * @internal
    */
-  getRowSelected(entity: Entity): boolean {
-    const state = this.store.getEntityState(entity);
+  rowIsSelected(entity: object): boolean {
+    const state = this.store.state.get(entity);
     return state.selected ? state.selected : false;
+  }
+
+  /**
+   * Method to access an entity's values
+   * @param entity Entity
+   * @param column Column
+   * @returns Any value
+   * @internal
+   */
+  getValue(entity: object, column: EntityTableColumn): any {
+    if (column.valueAccessor !== undefined) {
+      return column.valueAccessor(entity);
+    }
+    if (this.template.valueAccessor !== undefined) {
+      return this.template.valueAccessor(entity, column.name);
+    }
+    return this.store.getProperty(entity, column.name);
+  }
+
+  /**
+   * Return the type of renderer of a column
+   * @param column Column
+   * @returns Renderer type
+   * @internal
+   */
+  getColumnRenderer(column: EntityTableColumn): EntityTableColumnRenderer {
+    if (column.renderer !== undefined) {
+      return column.renderer;
+    }
+    return EntityTableColumnRenderer.Default;
+  }
+
+  /**
+   * Return the table ngClass
+   * @returns ngClass
+   * @internal
+   */
+  getTableClass(): {[key: string]: boolean} {
+    return {
+      'fadq-entity-table-with-selection': this.selection
+    };
   }
 
   /**
@@ -255,7 +238,7 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    * @returns ngClass
    * @internal
    */
-  getRowClass(entity: Entity): { [key: string]: boolean; } {
+  getRowClass(entity: object): {[key: string]: boolean} {
     const func = this.template.rowClassFunc;
     if (func instanceof Function) {
       return func(entity);
@@ -270,8 +253,9 @@ export class EntityTableComponent implements OnInit, OnChanges, OnDestroy  {
    * @returns ngClass
    * @internal
    */
-  getCellClass(entity: Entity, column: EntityTableColumn): { [key: string]: boolean; } {
+  getCellClass(entity: object, column: EntityTableColumn): {[key: string]: boolean} {
     const cls = {};
+
     const tableFunc = this.template.cellClassFunc;
     if (tableFunc instanceof Function) {
       Object.assign(cls, tableFunc(entity, column));

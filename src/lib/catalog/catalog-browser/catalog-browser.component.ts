@@ -12,11 +12,7 @@ import { zip } from 'rxjs';
 import { Layer, LayerService } from '@igo2/geo';
 
 import { IgoMap } from 'src/lib/map';
-import {
-  EntityStore,
-  EntityStoreController,
-  getEntityId
-} from 'src/lib/entity';
+import { EntityStore, EntityStoreController } from 'src/lib/entity';
 
 import {
   CatalogItem,
@@ -39,7 +35,7 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   /**
    * Catalog items store controller
    */
-  private controller: EntityStoreController;
+  private controller: EntityStoreController<CatalogItem>;
 
   /**
    * Store holding the catalog's items
@@ -54,25 +50,25 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
   constructor(
     private layerService: LayerService,
     private cdRef: ChangeDetectorRef
-  ) {
-    this.controller = new EntityStoreController()
-      .withChangeDetector(this.cdRef);
-  }
+  ) {}
 
   /**
    * @internal
    */
   ngOnInit() {
-    const currentLayerIds = this.map.layers.map((layer: Layer) => layer.id);
-    this.store.state.setByKeys(currentLayerIds, {added: true});
-    this.controller.bindStore(this.store);
+    const currentItems = this.map.layers.map((layer: Layer) => {
+      return {
+        id: layer.id,
+        title: layer.title,
+        type: CatalogItemType.Layer
+      };
+    });
+    this.store.state.setMany(currentItems, {added: true});
+    this.controller = new EntityStoreController(this.store, this.cdRef);
   }
 
-  /**
-   * @internal
-   */
   ngOnDestroy() {
-    this.controller.unbindStore();
+    this.controller.destroy();
   }
 
   /**
@@ -96,7 +92,7 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
    */
   onLayerAddedChange(event: {added: boolean, layer: CatalogItemLayer}) {
     const layer = event.layer;
-    this.controller.updateEntityState(layer, {added: event.added}, false);
+    this.store.state.update(layer, {added: event.added}, false);
     event.added ? this.addLayerToMap(layer) : this.removeLayerFromMap(layer);
   }
 
@@ -107,7 +103,7 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
    */
   onGroupAddedChange(event: {added: boolean, group: CatalogItemGroup}) {
     const group = event.group;
-    this.controller.updateEntityState(group, {added: event.added}, false);
+    this.store.state.update(group, {added: event.added}, false);
     event.added ? this.addGroupToMap(group) : this.removeGroupFromMap(group);
   }
 
@@ -137,7 +133,7 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
     });
 
     zip(...layers$).subscribe((oLayers: Layer[]) => {
-      this.controller.updateEntitiesState(layers, {added: true});
+      this.store.state.updateMany(layers, {added: true});
       this.map.addLayers(oLayers);
     });
   }
@@ -148,8 +144,8 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
    */
   private removeLayersFromMap(layers: CatalogItemLayer[]) {
     layers.forEach((layer: CatalogItemLayer) => {
-      this.controller.updateEntityState(layer, {added: false});
-      const oLayer = this.map.getLayerById(getEntityId(layer));
+      this.store.state.update(layer, {added: false});
+      const oLayer = this.map.getLayerById(layer.id);
       if (oLayer !== undefined) {
         this.map.removeLayer(oLayer);
       }
@@ -162,7 +158,7 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
    */
   private addGroupToMap(group: CatalogItemGroup) {
     const layers = group.items.filter((item: CatalogItem) => {
-      const added = this.store.getEntityState(item).added || false;
+      const added = this.store.state.get(item).added || false;
       return this.isLayer(item) && added === false;
     });
     this.addLayersToMap(layers as CatalogItemLayer[]);
@@ -174,7 +170,7 @@ export class CatalogBrowserComponent implements OnInit, OnDestroy {
    */
   private removeGroupFromMap(group: CatalogItemGroup) {
     const layers = group.items.filter((item: CatalogItem) => {
-      const added = this.store.getEntityState(item).added || false;
+      const added = this.store.state.get(item).added || false;
       return this.isLayer(item) && added === true;
     });
     this.removeLayersFromMap(layers as CatalogItemLayer[]);

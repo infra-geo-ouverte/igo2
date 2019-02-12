@@ -10,7 +10,7 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityTransaction, getEntityId } from 'src/lib/entity';
+import { EntityTransaction } from 'src/lib/entity';
 import { Feature, FeatureStore } from 'src/lib/feature';
 import { Form } from 'src/lib/form';
 import { IgoMap } from 'src/lib/map';
@@ -99,7 +99,7 @@ export class ClientSchemaElementCreateFormComponent implements OnInit, WidgetCom
 
   private formDataToElement(data: Feature): ClientSchemaElement {
     const properties = Object.assign({
-      idSchema: getEntityId(this.schema),
+      idSchema: this.schema.id,
       idElementGeometrique: undefined,
       typeElement: undefined,
       descriptionTypeElement: undefined,

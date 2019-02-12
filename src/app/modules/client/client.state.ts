@@ -17,10 +17,9 @@ import {
   ClientSchemaElementEditorService
 } from 'src/lib/client';
 import {
+  EntityRecord,
   EntityStore,
-  EntityTransaction,
-  State,
-  getEntityId
+  EntityTransaction
 } from 'src/lib/entity';
 import { FeatureStore } from 'src/lib/feature';
 
@@ -103,23 +102,32 @@ export class ClientState implements OnDestroy {
     private clientSchemaElementEditorService: ClientSchemaElementEditorService,
     private editionState: EditionState
   ) {
-    this._diagramStore = new EntityStore<ClientParcelDiagram>();
-    this._parcelYearStore = new EntityStore<ClientParcelYear>();
+    this._diagramStore = new EntityStore<ClientParcelDiagram>([]);
+    this._parcelYearStore = new EntityStore<ClientParcelYear>([]);
 
     this.schemaElementTransaction = new EntityTransaction();
 
-    this.selectedDiagram$$ = this._diagramStore
-      .observeFirstBy((diagram: ClientParcelDiagram, state: State) => state.selected === true)
-      .subscribe((diagram: ClientParcelDiagram) => this.onSelectDiagram(diagram));
+    this.selectedDiagram$$ = this._diagramStore.stateView
+      .firstBy$((record: EntityRecord<ClientParcelDiagram>) => record.state.selected === true)
+      .subscribe((record: EntityRecord<ClientParcelDiagram>) => {
+        const diagram = record ? record.entity : undefined;
+        this.onSelectDiagram(diagram);
+      });
 
-    this.selectedParcelYear$$ = this._parcelYearStore
-      .observeFirstBy((parcelYear: ClientParcelYear, state: State) => state.selected === true)
+    this.selectedParcelYear$$ = this._parcelYearStore.stateView
+      .firstBy$((record: EntityRecord<ClientParcelYear>) => record.state.selected === true)
       .pipe(skip(1))
-      .subscribe((parcelYear: ClientParcelYear) => this.onSelectParcelYear(parcelYear));
+      .subscribe((record: EntityRecord<ClientParcelYear>) => {
+        const parcelYear = record ? record.entity : undefined;
+        this.onSelectParcelYear(parcelYear);
+      });
 
-    this.selectedSchema$$ = this.schemaStore
-      .observeFirstBy((schema: ClientSchema, state: State) => state.selected === true)
-      .subscribe((schema: ClientSchema) => this.onSelectSchema(schema));
+    this.selectedSchema$$ = this.schemaStore.stateView
+      .firstBy$((record: EntityRecord<ClientSchema>) => record.state.selected === true)
+      .subscribe((record: EntityRecord<ClientSchema>) => {
+        const schema = record ? record.entity : undefined;
+        this.onSelectSchema(schema);
+      });
 
     this.loadParcelYears();
   }
@@ -162,11 +170,14 @@ export class ClientState implements OnDestroy {
 
   private setClient(client: Client) {
     this.clearClient();
+    this.diagramStore.clear();
+    this.parcelStore.clear();
+    this.schemaStore.clear();
 
-    this.diagramStore.setEntities(client.diagrams);
-    this.diagramStore.sorter.set({property: 'id', direction: 'asc'});
-    this.parcelStore.setEntities(client.parcels);
-    this.schemaStore.setEntities(client.schemas);
+    this.diagramStore.load(client.diagrams);
+    this.diagramStore.view.sort({valueAccessor: (diagram) => diagram.id, direction: 'asc'});
+    this.parcelStore.load(client.parcels);
+    this.schemaStore.load(client.schemas);
     this.schemaEditor.setClient(client);
 
     this.editionState.register(this.parcelEditor);
@@ -176,14 +187,14 @@ export class ClientState implements OnDestroy {
   }
 
   private onSelectDiagram(diagram: ClientParcelDiagram) {
-    this.parcelStore.state.reset();
+    this.parcelStore.state.clear();
     if (diagram === undefined) {
-      this.parcelStore.filter.reset();
+      this.parcelStore.view.filter(undefined);
     } else {
-      const filterClause = function(parcel: ClientParcel, state: State): boolean {
+      const filterClause = function(parcel: ClientParcel): boolean {
         return parcel.properties.noDiagramme === diagram.id;
       };
-      this.parcelStore.filter.set([filterClause]);
+      this.parcelStore.view.filter(filterClause);
     }
   }
 
@@ -199,7 +210,7 @@ export class ClientState implements OnDestroy {
       this.clearSchema();
     } else if  (this.schema === undefined) {
       this.setSchema(schema);
-    } else if (getEntityId(schema) !== getEntityId(this.schema)) {
+    } else if (schema.id !== this.schema.id) {
       this.setSchema(schema);
     }
   }
@@ -207,7 +218,7 @@ export class ClientState implements OnDestroy {
   private setSchema(schema: ClientSchema) {
     this.clearSchema();
 
-    this.parcelStore.updateAllEntitiesState({selected: false});
+    this.parcelStore.state.updateAll({selected: false});
     this.loadSchemaElements(schema);
     this.schemaElementEditor.setSchema(schema);
     this.schemaElementEditor.setTransaction(this.schemaElementTransaction);
@@ -233,7 +244,7 @@ export class ClientState implements OnDestroy {
   private loadSchemaElements(schema: ClientSchema) {
     this.clientSchemaElementService.getElements(schema)
       .subscribe((elements: ClientSchemaElement[]) => {
-        this.schemaElementStore.setEntities(elements);
+        this.schemaElementStore.load(elements);
       });
   }
 
@@ -247,10 +258,13 @@ export class ClientState implements OnDestroy {
         const current = parcelYears.find((parcelYear: ClientParcelYear) => {
           return parcelYear.current === true;
         });
-        this.parcelYearStore.setEntities(parcelYears);
-        this.parcelYearStore.sorter.set({property: 'annee', direction: 'desc'});
+        this.parcelYearStore.load(parcelYears);
+        this.parcelYearStore.view.sort({
+          valueAccessor: (year: ClientParcelYear) => year.annee,
+          direction: 'desc'
+        });
         if (current !== undefined) {
-          this.parcelYearStore.updateEntityState(current, {selected: true});
+          this.parcelYearStore.state.update(current, {selected: true});
         }
       });
   }

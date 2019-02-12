@@ -1,4 +1,4 @@
-@import './entity-table.variables';
+@import 'variables';
 
 :host {
   width: 100%;
@@ -6,10 +6,13 @@
   display: block;
 }
 
-.table-box {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+:host.table-compact {
+  tr.mat-header-row {
+    height: 36px;
+  }
+  tr.mat-row {
+    height: 28px;
+  }
 }
 
 .table-container {
@@ -20,18 +23,10 @@
   flex: 1 1 auto;
 }
 
+
 .mat-cell-text {
   overflow: hidden;
   word-wrap: break-word;
-}
-
-:host.table-compact {
-  tr.mat-header-row {
-    height: 36px;
-  }
-  tr.mat-row {
-    height: 28px;
-  }
 }
 
 table.fadq-entity-table-with-selection tr:hover {

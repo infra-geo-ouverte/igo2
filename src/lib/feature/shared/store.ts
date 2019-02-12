@@ -1,7 +1,5 @@
 import OlFeature from 'ol/Feature';
 
-import { Subject } from 'rxjs';
-
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
 
 import { IgoMap } from 'src/lib/map';

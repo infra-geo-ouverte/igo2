@@ -1,6 +1,4 @@
-import { EntityObject } from 'src/lib/entity';
-
-export interface Action extends EntityObject {
+export interface Action {
   id: string;
   title: string;
   icon: string;

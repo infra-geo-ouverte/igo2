@@ -5,6 +5,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   OnInit,
+  OnDestroy,
   ViewChild,
   ElementRef
 } from '@angular/core';
@@ -25,7 +26,7 @@ import { ClientSchemaFileService } from '../shared/client-schema-file.service';
   styleUrls: ['./client-schema-file-manager.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaFileManagerComponent implements OnInit, WidgetComponent {
+export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, WidgetComponent {
 
   public tableTemplate: EntityTableTemplate = {
     selection: true,
@@ -49,7 +50,7 @@ export class ClientSchemaFileManagerComponent implements OnInit, WidgetComponent
   public schemaFile: ClientSchemaFile;
   public schemaFileData: string | ArrayBuffer;
 
-  public store: EntityStore<ClientSchemaFile> = new EntityStore<ClientSchemaFile>();
+  public store: EntityStore<ClientSchemaFile> = new EntityStore<ClientSchemaFile>([]);
 
   /**
    * Schema to delete
@@ -72,6 +73,10 @@ export class ClientSchemaFileManagerComponent implements OnInit, WidgetComponent
 
   ngOnInit() {
     this.loadClientSchemaFiles();
+  }
+
+  ngOnDestroy() {
+    this.store.destroy();
   }
 
   /**
@@ -106,7 +111,7 @@ export class ClientSchemaFileManagerComponent implements OnInit, WidgetComponent
   private loadClientSchemaFiles() {
     this.clientSchemaFileService.getClientSchemaFiles(this.schema)
       .subscribe((schemaFiles: ClientSchemaFile[]) => {
-        this.store.setEntities(schemaFiles);
+        this.store.load(schemaFiles);
       });
   }
 
@@ -130,7 +135,7 @@ export class ClientSchemaFileManagerComponent implements OnInit, WidgetComponent
   }
 
   private onCreateSuccess(schemaFile: ClientSchemaFile) {
-    this.store.addEntities([schemaFile]);
+    this.store.insert(schemaFile);
   }
 
   private deleteSchemaFile() {
@@ -140,7 +145,7 @@ export class ClientSchemaFileManagerComponent implements OnInit, WidgetComponent
   }
 
   private onDeleteSuccess(schemaFile: ClientSchemaFile) {
-    this.store.removeEntities([schemaFile]);
+    this.store.delete(schemaFile);
     this.schemaFile = undefined;
   }
 }

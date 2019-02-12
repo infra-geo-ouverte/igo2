@@ -38,11 +38,13 @@ export class ClientSchemaElementEditorService extends Editor {
       id: 'fadq.client-schema-element-editor',
       title: 'Éléments du schéma',
       tableTemplate: clientSchemaElementTableService.buildTable(),
-      entityStore: new FeatureStore<ClientSchemaElement>(),
-      actionStore: new EntityStore<Action>()
+      entityStore: new FeatureStore<ClientSchemaElement>([], {
+        getKey: (entity: ClientSchemaElement) => entity.properties.idElementGeometrique
+      }),
+      actionStore: new EntityStore<Action>([])
     });
 
-    this.actionStore.setEntities(this.buildActions());
+    this.actionStore.load(this.buildActions());
   }
 
   setMap(map: IgoMap) {
@@ -64,7 +66,7 @@ export class ClientSchemaElementEditorService extends Editor {
       return this.transaction !== undefined && this.transaction.empty === false;
     };
     const transactionIsNotInCommitPhase = () => {
-      return this.transaction !== undefined && this.transaction.isInCommitPhase === false;
+      return this.transaction !== undefined && this.transaction.inCommitPhase === false;
     };
     const elementCanBeFilled = () => {
       const element = this.entity as ClientSchemaElement;
