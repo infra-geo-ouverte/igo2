@@ -180,5 +180,14 @@
     "point": "Point",
     "line": "Line",
     "polygon": "Polygon"
+  },
+
+  "icherche": {
+    "code_postal": "Zip Code",
+    "municipalite": "Municipality",
+    "numero_civique": "Address",
+    "numero_civique_suffixe": "Address Suffix",
+    "rue": "Street",
+    "type": "Type"
   }
 }

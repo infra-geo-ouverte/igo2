@@ -179,5 +179,14 @@
     "point": "Point",
     "line": "Ligne",
     "polygon": "Polygone"
+  },
+
+  "icherche": {
+    "code_postal": "Code Postal",
+    "municipalite": "Municipalité",
+    "numero_civique": "Numéro civique",
+    "numero_civique_suffixe": "Numéro civique (suffix)",
+    "rue": "Rue",
+    "type": "Type"
   }
 }

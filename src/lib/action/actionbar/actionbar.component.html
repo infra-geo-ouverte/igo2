@@ -25,7 +25,8 @@
 <div *ngIf="mode === actionbarMode.Overlay">
   <button
     mat-icon-button
-    [matMenuTriggerFor]="actionbarMenu">
+    [matMenuTriggerFor]="actionbarMenu"
+    [disabled]="store.view.empty">
     <mat-icon>more_horiz</mat-icon>
   </button>
 

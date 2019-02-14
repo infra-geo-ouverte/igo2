@@ -1,9 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 
-import { ConfigService } from '@igo2/core';
+import { ConfigService, LanguageService } from '@igo2/core';
 
 import { SearchSource } from './source';
-import { IChercheSearchSource, IChercheReverseSearchSource } from './icherche';
+import {
+  IChercheSearchSource,
+  IChercheSearchResultFormatter,
+  IChercheReverseSearchSource
+} from './icherche';
+
+/**
+ * ICherche search result formatter factory
+ * @ignore
+ */
+export function defaultIChercheSearchResultFormatterFactory(
+  languageService: LanguageService
+) {
+  return new IChercheSearchResultFormatter(languageService);
+}
+
+/**
+ * Function that returns a provider for the ICherche search result formatter
+ */
+export function provideDefaultIChercheSearchResultFormatter() {
+  return {
+    provide: IChercheSearchResultFormatter,
+    useFactory: defaultIChercheSearchResultFormatterFactory,
+    deps: [LanguageService]
+  };
+}
 
 /**
  * ICherche search source factory
@@ -11,11 +36,13 @@ import { IChercheSearchSource, IChercheReverseSearchSource } from './icherche';
  */
 export function ichercheSearchSourceFactory(
   http: HttpClient,
-  config: ConfigService
+  config: ConfigService,
+  formatter: IChercheSearchResultFormatter
 ) {
   return new IChercheSearchSource(
     http,
-    config.getConfig(`searchSources.${IChercheSearchSource.id}`)
+    config.getConfig(`searchSources.${IChercheSearchSource.id}`),
+    formatter
   );
 }
 
@@ -27,7 +54,7 @@ export function provideIChercheSearchSource() {
     provide: SearchSource,
     useFactory: ichercheSearchSourceFactory,
     multi: true,
-    deps: [HttpClient, ConfigService]
+    deps: [HttpClient, ConfigService, IChercheSearchResultFormatter]
   };
 }
 

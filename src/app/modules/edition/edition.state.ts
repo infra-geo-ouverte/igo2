@@ -54,8 +54,12 @@ export class EditionState {
    * Set the active editor
    * @param editor
    */
-  setEditor(editor: Editor) {
-    const entity = this.store.get(editor.id);
-    this.store.state.update(entity, {selected: true}, true);
+  setEditor(editor: Editor | undefined) {
+    if (editor === undefined) {
+      this.store.state.updateAll({selected: false});
+    } else {
+      const entity = this.store.get(editor.id);
+      this.store.state.update(entity, {selected: true}, true);
+    }
   }
 }

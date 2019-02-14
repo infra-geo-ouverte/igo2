@@ -1,8 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, InjectionToken, Optional } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { LanguageService } from '@igo2/core';
 
 import { removeKeys } from 'src/lib/utils';
 import { FEATURE, Feature } from 'src/lib/feature';
@@ -17,6 +19,16 @@ import {
   IChercheReverseResponse
 } from './icherche.interfaces';
 
+@Injectable()
+export class IChercheSearchResultFormatter {
+
+  constructor(private languageService: LanguageService) {}
+
+  formatResult(result: SearchResult<Feature>): SearchResult<Feature> {
+    return result;
+  }
+}
+
 /**
  * ICherche search source
  */
@@ -30,6 +42,7 @@ export class IChercheSearchSource extends SearchSource implements TextSearch {
     '@version',
     'recherche',
     'id',
+    'idrte',
     'cote',
     'geometry',
     'bbox'
@@ -37,7 +50,8 @@ export class IChercheSearchSource extends SearchSource implements TextSearch {
 
   constructor(
     private http: HttpClient,
-    @Inject('options') options: SearchSourceOptions
+    @Inject('options') options: SearchSourceOptions,
+    @Inject(IChercheSearchResultFormatter) private formatter: IChercheSearchResultFormatter,
   ) {
     super(options);
   }
@@ -79,7 +93,7 @@ export class IChercheSearchSource extends SearchSource implements TextSearch {
 
   private extractResults(response: IChercheResponse): SearchResult<Feature>[] {
     return response.features.map((data: IChercheData) => {
-      return this.dataToResult(data);
+      return this.formatter.formatResult(this.dataToResult(data));
     });
   }
 

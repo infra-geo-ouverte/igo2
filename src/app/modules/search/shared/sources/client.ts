@@ -44,7 +44,7 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
    * @returns Observable of <SearchResult<Client>[]
    */
   search(term?: string): Observable<SearchResult<Client>[]> {
-    return this.clientState.getSetClientByNum(term)
+    return this.clientState.getClientByNum(term)
       .pipe(
         map((response: ClientData) => {
           if (response === undefined) {

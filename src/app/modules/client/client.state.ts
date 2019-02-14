@@ -21,7 +21,7 @@ import {
   EntityStore,
   EntityTransaction
 } from 'src/lib/entity';
-import { FeatureStore } from 'src/lib/feature';
+import { FeatureStore, moveToFeatures } from 'src/lib/feature';
 
 import { EditionState } from '../edition/edition.state';
 
@@ -138,17 +138,9 @@ export class ClientState implements OnDestroy {
     this.selectedSchema$$.unsubscribe();
   }
 
-  getSetClientByNum(clientNum: string): Observable<Client> {
+  getClientByNum(clientNum: string): Observable<Client> {
     const annee = this.parcelYear ? this.parcelYear.annee : undefined;
-    return this.clientService.getClientByNum(clientNum, annee).pipe(
-      tap((client?: Client) => {
-        if (client === undefined) {
-          this.clearClient();
-        } else {
-          this.setClient(client);
-        }
-      })
-    );
+    return this.clientService.getClientByNum(clientNum, annee);
   }
 
   clearClient() {
@@ -162,21 +154,29 @@ export class ClientState implements OnDestroy {
     this.parcelStore.clear();
     this.schemaStore.clear();
 
+    this.parcelEditor.deactivate();
+    this.schemaEditor.deactivate();
+    this.schemaElementEditor.deactivate();
+
     this.editionState.unregister(this.parcelEditor);
     this.editionState.unregister(this.schemaEditor);
 
     this.client$.next(undefined);
   }
 
-  private setClient(client: Client) {
+  setClient(client: Client | undefined) {
     this.clearClient();
-    this.diagramStore.clear();
-    this.parcelStore.clear();
-    this.schemaStore.clear();
+    if (client === undefined) {
+      return;
+    }
 
     this.diagramStore.load(client.diagrams);
     this.diagramStore.view.sort({valueAccessor: (diagram) => diagram.id, direction: 'asc'});
     this.parcelStore.load(client.parcels);
+    // moveToFeatures(
+    //   this.parcelStore.map,
+    //   this.parcelStore.source.ol.getFeatures()
+    // );
     this.schemaStore.load(client.schemas);
     this.schemaEditor.setClient(client);
 
@@ -201,7 +201,8 @@ export class ClientState implements OnDestroy {
   private onSelectParcelYear(parcelYear: ClientParcelYear) {
     this.parcelYear = parcelYear;
     if (this.client !== undefined) {
-      this.getSetClientByNum(this.client.info.numero).subscribe();
+      this.getClientByNum(this.client.info.numero)
+        .subscribe((client?: Client) => this.setClient(client));
     }
   }
 

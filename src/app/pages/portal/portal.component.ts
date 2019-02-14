@@ -57,7 +57,7 @@ import { igoFeatureToSearchResult } from '../../../lib/search/shared/search.util
 export class PortalComponent implements OnInit, OnDestroy {
 
   public editor: Editor;
-  public feature: Feature;
+  public searchResult: SearchResult;
 
   public expansionPanelExpanded = false;
   public sidenavOpened = false;
@@ -128,16 +128,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     let content;
     if (this.editor !== undefined && this.editor.hasWidget) {
       content = 'editor';
-    } else if (this.feature !== undefined) {
-      content = 'feature';
+    } else if (this.searchResult !== undefined) {
+      content = this.searchResult.meta.dataType.toLowerCase();
     }
     return content;
   }
 
   get toastPanelTitle(): string {
     let title;
-    if (this.toastPanelContent === 'feature') {
-      title = getEntityTitle(this.feature);
+    if (this.toastPanelContent !== 'editor' && this.searchResult !== undefined) {
+      title = getEntityTitle(this.searchResult);
     }
     return title;
   }
@@ -286,6 +286,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onBeforeSearch() {
+    this.searchResult = undefined;
     if (this.mediaService.media$.value === Media.Mobile) {
       this.closeToastPanel();
     }
@@ -297,8 +298,12 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onSearch(event: {research: Research, results: SearchResult[]}) {
     const results = event.results;
-    if (results.length === 0) {
-      this.onSearchWithNoResults();
+    const mapSearchSource = this.getMapSearchSource();
+    if (results.length === 0 && event.research.source === mapSearchSource) {
+      if (this.searchResult !== undefined && this.searchResult.source === mapSearchSource) {
+        this.searchResult = undefined;
+        this.closeToastPanel();
+      }
       return;
     }
 
@@ -312,7 +317,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.onSearchClient(clientResult as SearchResult<Client>);
     }
 
-    const mapSearchSource = this.getMapSearchSource();
     const mapResults = results.filter((result: SearchResult) => result.source === mapSearchSource);
     if (mapResults.length > 0) {
       this.onSearchMap(mapResults as SearchResult<Feature>[]);
@@ -320,8 +324,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onBeforeSearchClient() {
-    this.closeToastPanel();
-
     if (this.mediaService.media$.value === Media.Mobile) {
       this.closeExpansionPanel();
     } else {
@@ -335,6 +337,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onSearchClient(result: SearchResult<Client>) {
+    this.searchResult = undefined;
+    this.searchStore.state.updateAll({focused: false, selected: false});
+    this.closeToastPanel();
+    this.clientState.setClient(result.data);
     this.editionState.setEditor(this.clientState.parcelEditor);
   }
 
@@ -355,21 +361,17 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.closeSidenav();
       }
 
-      this.feature = result.data as Feature;
+      this.searchResult = result;
       this.openToastPanel();
     } else {
-      this.feature = undefined;
+      this.searchResult = undefined;
     }
   }
 
-  private onSearchWithNoResults() {
-    this.searchStore.clear();
-    this.feature = undefined;
-    this.closeToastPanel();
-  }
-
   private onClearSearch() {
-    this.onSearchWithNoResults();
+    this.searchResult = undefined;
+    this.searchStore.clear();
+    this.closeToastPanel();
     this.clientState.clearClient();
   }
 

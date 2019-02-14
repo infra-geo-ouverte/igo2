@@ -5,6 +5,9 @@ import { FadqLibSearchModule } from 'src/lib/search/search.module';
 import { FadqSearchResultsToolModule } from './search-results-tool/search-results-tool.module';
 import { provideClientSearchSource } from './shared/sources/client.providers';
 import { provideMapSearchSource } from './shared/sources/map.providers';
+import {
+  provideFadqIChercheSearchResultFormatter
+} from './shared/sources/icherche';
 
 import { SearchState } from './search.state';
 
@@ -24,6 +27,7 @@ export class FadqSearchModule {
       ngModule: FadqSearchModule,
       providers: [
         SearchState,
+        provideFadqIChercheSearchResultFormatter(),
         provideClientSearchSource(),
         provideMapSearchSource()
       ]

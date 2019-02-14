@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { provideSearchSourceService } from './shared/search-source.service';
 import {
   provideIChercheSearchSource,
-  provideIChercheReverseSearchSource
+  provideIChercheReverseSearchSource,
+  provideDefaultIChercheSearchResultFormatter
 } from './shared/sources/icherche.providers';
 import { provideNominatimSearchSource } from './shared/sources/nominatim.providers';
 import { provideILayerSearchSource } from './shared/sources/ilayer.providers';
@@ -33,6 +34,7 @@ export class FadqLibSearchModule {
       ngModule: FadqLibSearchModule,
       providers:  [
         provideSearchSourceService(),
+        provideDefaultIChercheSearchResultFormatter(),
         provideIChercheSearchSource(),
         provideIChercheReverseSearchSource(),
         provideNominatimSearchSource(),
