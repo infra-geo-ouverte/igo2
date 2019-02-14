@@ -286,7 +286,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onBeforeSearch() {
-    this.searchResult = undefined;
     if (this.mediaService.media$.value === Media.Mobile) {
       this.closeToastPanel();
     }
@@ -301,11 +300,13 @@ export class PortalComponent implements OnInit, OnDestroy {
     const mapSearchSource = this.getMapSearchSource();
     if (results.length === 0 && event.research.source === mapSearchSource) {
       if (this.searchResult !== undefined && this.searchResult.source === mapSearchSource) {
-        this.searchResult = undefined;
+        this.searchStore.state.update(this.searchResult, {focused: false, selected: false});
         this.closeToastPanel();
       }
       return;
     }
+
+    this.searchStore.state.updateAll({focused: false, selected: false});
 
     const newResults = this.searchStore.entities$.value
       .filter((result: SearchResult) => result.source !== event.research.source)
@@ -337,8 +338,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onSearchClient(result: SearchResult<Client>) {
-    this.searchResult = undefined;
-    this.searchStore.state.updateAll({focused: false, selected: false});
     this.closeToastPanel();
     this.clientState.setClient(result.data);
     this.editionState.setEditor(this.clientState.parcelEditor);
@@ -353,6 +352,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onFocusSearchResult(result: SearchResult) {
     if (result === undefined) {
+      this.closeToastPanel();
+      this.searchResult = undefined;
       return;
     }
 
@@ -369,7 +370,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onClearSearch() {
-    this.searchResult = undefined;
     this.searchStore.clear();
     this.closeToastPanel();
     this.clientState.clearClient();
