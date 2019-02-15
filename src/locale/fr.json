@@ -12,8 +12,7 @@
 
   "measure": {
     "area": "Superficie",
-    "length": "Longueur",
-    "lastLength": "Distance entre les 2 derniers points",
+    "length": "Distance",
     "perimeter": "Périmètre",
     "meters": "Mètres",
     "kilometers": "Kilomètres",
@@ -27,7 +26,13 @@
     "acres": "Acres",
     "toggleMeasure": "Mesurage",
     "toggleMapTooltips": "Mesures sur la carte",
-    "toggleAutoUnits": "Unités automatiques"
+    "toggleAutoUnits": "Unités automatiques",
+    "actionbar": {
+      "calculate.title": "Calculer",
+      "calculate.tooltip": "Calculer",
+      "delete.title": "Supprimer",
+      "delete.tooltip": "Supprimer"
+    }
   },
 
   "search": {

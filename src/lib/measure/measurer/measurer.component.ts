@@ -6,11 +6,13 @@ import {
   ChangeDetectionStrategy,
   ViewChild
 } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-import { uuid } from '@igo2/utils';
+import { LanguageService } from '@igo2/core';
 import { VectorLayer, FeatureDataSource } from '@igo2/geo';
+import { uuid } from '@igo2/utils';
 
 import OlProjection from 'ol/proj/Projection';
 import OlStyle from 'ol/style/Style';
@@ -23,7 +25,7 @@ import OlFeature from 'ol/Feature';
 import OlOverlay from 'ol/Overlay';
 import { unByKey } from 'ol/Observable';
 
-import { EntityTableTemplate } from 'src/lib/entity';
+import { EntityRecord, EntityTableTemplate } from 'src/lib/entity';
 import { EntityTableComponent } from 'src/lib/entity/entity-table/entity-table.component';
 import {
   FEATURE,
@@ -33,7 +35,7 @@ import {
 } from 'src/lib/feature';
 import { IgoMap, DrawControl } from 'src/lib/map';
 
-import { Measure, FeatureWithMeasure } from '../shared/measure.interfaces';
+import { Measure, MeasurerDialogData, FeatureWithMeasure } from '../shared/measure.interfaces';
 import {
   MeasureType,
   MeasureAreaUnit,
@@ -50,6 +52,7 @@ import {
   metersToUnit,
   formatMeasure
 } from '../shared/measure.utils';
+import { MeasurerDialogComponent } from './measurer-dialog.component';
 
 /**
  * Tool to measure lengths and areas
@@ -68,11 +71,12 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    */
   public tableTemplate: EntityTableTemplate = {
     selection: true,
+    selectMany: true,
     sort: true,
     columns: [
       {
         name: 'length',
-        title: 'Length',
+        title: this.languageService.translate.instant('measure.length'),
         valueAccessor: (feature: FeatureWithMeasure) => {
           const unit = this.activeLengthUnit;
           const measure = metersToUnit(feature.properties.measure.length, unit);
@@ -86,7 +90,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
       },
       {
         name: 'area',
-        title: 'Area',
+        title: this.languageService.translate.instant('measure.area'),
         valueAccessor: (feature: FeatureWithMeasure) => {
           const unit = this.activeAreaUnit;
           const measure = squareMetersToUnit(feature.properties.measure.area, unit);
@@ -132,6 +136,12 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   public measure$: BehaviorSubject<Measure> = new BehaviorSubject({});
 
   /**
+   * Observable of selected features
+   * @internal
+   */
+  public selectedFeatures$: BehaviorSubject<FeatureWithMeasure[]> = new BehaviorSubject([]);
+
+  /**
    * Draw line control
    */
   private drawLineControl: DrawControl;
@@ -175,17 +185,22 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   /**
    * Subscription to draw start
    */
-  private drawStart$: Subscription;
+  private drawStart$$: Subscription;
 
   /**
    * Subscription to draw end
    */
-  private drawEnd$: Subscription;
+  private drawEnd$$: Subscription;
 
   /**
    * Subscription to controls changes
    */
-  private drawChanges$: Subscription;
+  private drawChanges$$: Subscription;
+
+  /**
+   * Subscription to measures selection
+   */
+  private selectedFeatures$$: Subscription;
 
   /**
    * OL draw source
@@ -236,7 +251,10 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     return this.map.ol.getView().getProjection();
   }
 
-  constructor() {}
+  constructor(
+    private languageService: LanguageService,
+    private dialog: MatDialog
+  ) {}
 
   /**
    * Add draw controls and activate one
@@ -327,6 +345,34 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     }
   }
 
+  onCalculateClick() {
+    const features = this.selectedFeatures$.value;
+    const area = features.reduce((sum: number, feature: FeatureWithMeasure) => {
+      return sum + feature.properties.measure.area || 0;
+    }, 0);
+    const length = features.reduce((sum: number, feature: FeatureWithMeasure) => {
+      return sum + feature.properties.measure.length || 0;
+    }, 0);
+
+    this.openDialog({
+      area,
+      areaUnit: this.activeAreaUnit,
+      length,
+      lengthUnit: this.activeLengthUnit
+    });
+  }
+
+  onDeleteClick() {
+    this.store.deleteMany(this.selectedFeatures$.value);
+  }
+
+  private openDialog(data: MeasurerDialogData): void {
+    this.dialog.open(MeasurerDialogComponent, {
+      width: '250px',
+      data: data
+    });
+  }
+
   /**
    * Initialize the measure store and set up some listeners
    * @internal
@@ -353,7 +399,10 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     store.activateStrategyOfType(FeatureStoreLoadingStrategy);
 
     if (store.getStrategyOfType(FeatureStoreSelectionStrategy) === undefined) {
-      store.addStrategy(new FeatureStoreSelectionStrategy({map: this.map}));
+      store.addStrategy(new FeatureStoreSelectionStrategy({
+        map: this.map,
+        many: true
+      }));
     }
     store.activateStrategyOfType(FeatureStoreSelectionStrategy);
 
@@ -367,6 +416,12 @@ export class MeasurerComponent implements OnInit, OnDestroy {
       const olGeometry = event.feature.getGeometry();
       this.clearTooltipsOfOlGeometry(olGeometry);
     });
+
+    this.selectedFeatures$$ = store.stateView.manyBy$((record: EntityRecord<FeatureWithMeasure>) => {
+      return record.state.selected === true;
+    }).subscribe((records: EntityRecord<FeatureWithMeasure>[]) => {
+      this.selectedFeatures$.next(records.map(record => record.entity));
+    });
   }
 
   /**
@@ -376,6 +431,7 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    */
   private freezeStore() {
     const store = this.store;
+    this.selectedFeatures$$.unsubscribe();
     unByKey(this.onFeatureAddedKey);
     unByKey(this.onFeatureRemovedKey);
     this.clearTooltipsOfOlSource(store.source.ol);
@@ -426,11 +482,11 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    */
   private activateDrawControl(drawControl: DrawControl) {
     this.activeDrawControl = drawControl;
-    this.drawStart$ = drawControl.start$
+    this.drawStart$$ = drawControl.start$
       .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawStart(olGeometry));
-    this.drawEnd$ = drawControl.end$
+    this.drawEnd$$ = drawControl.end$
       .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawEnd(olGeometry));
-    this.drawChanges$ = drawControl.changes$
+    this.drawChanges$$ = drawControl.changes$
       .subscribe((olGeometry: OlLineString | OlPolygon) => this.onDrawChanges(olGeometry));
 
     drawControl.setOlMap(this.map.ol);
@@ -445,9 +501,9 @@ export class MeasurerComponent implements OnInit, OnDestroy {
     }
 
     this.olDrawSource.clear();
-    this.drawStart$.unsubscribe();
-    this.drawEnd$.unsubscribe();
-    this.drawChanges$.unsubscribe();
+    this.drawStart$$.unsubscribe();
+    this.drawEnd$$.unsubscribe();
+    this.drawChanges$$.unsubscribe();
     this.clearTooltipsOfOlSource(this.olDrawSource);
     if (this.activeOlGeometry !== undefined) {
       this.clearTooltipsOfOlGeometry(this.activeOlGeometry);

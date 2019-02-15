@@ -13,10 +13,8 @@
   "measure": {
     "area": "Area",
     "length": "Length",
-    "lastLength": "Distance between the last 2 points",
     "perimeter": "Perimeter",
     "meters": "Meters",
-
     "kilometers": "Kilometers",
     "miles": "Miles",
     "feet": "Feet",
@@ -28,7 +26,13 @@
     "acres": "Acres",
     "toggleMeasure": "Measure",
     "toggleMapTooltips": "Show map tooltips",
-    "toggleAutoUnits": "Auto Units"
+    "toggleAutoUnits": "Auto Units",
+    "actionbar": {
+      "calculate.title": "Calculate",
+      "calculate.tooltip": "Calculate",
+      "delete.title": "Delete",
+      "delete.tooltip": "Delete"
+    }
   },
 
   "search": {

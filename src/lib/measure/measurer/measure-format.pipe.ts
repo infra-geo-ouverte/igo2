@@ -15,7 +15,11 @@ export class MeasureFormatPipe implements PipeTransform {
   /**
    * @ignore
    */
-  transform(value: number, unit: MeasureAreaUnit | MeasureLengthUnit, decimal: number = 1): number {
+  transform(
+    value: number, unit: MeasureAreaUnit | MeasureLengthUnit,
+    unitAbbr: boolean = false,
+    decimal: number = 1
+  ): number {
     let out;
     if (Object.values(MeasureAreaUnit).indexOf(unit) >= 0) {
       out = squareMetersToUnit(value, unit as MeasureAreaUnit);
@@ -26,7 +30,7 @@ export class MeasureFormatPipe implements PipeTransform {
     return out ? formatMeasure(out, {
       decimal: 1,
       unit: unit,
-      unitAbbr: false,
+      unitAbbr: unitAbbr,
       locale: 'fr'
     }) : out;
   }

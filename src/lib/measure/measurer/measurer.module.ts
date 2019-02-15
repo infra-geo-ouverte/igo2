@@ -5,6 +5,8 @@ import {
   MatButtonModule,
   MatButtonToggleModule,
   MatIconModule,
+  MatTooltipModule,
+  MatDividerModule,
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
@@ -18,6 +20,7 @@ import { FadqLibEntityTableModule } from 'src/lib/entity/entity-table/entity-tab
 import { MeasureFormatPipe } from './measure-format.pipe';
 import { MeasurerItemComponent } from './measurer-item.component';
 import { MeasurerComponent } from './measurer.component';
+import { MeasurerDialogComponent } from './measurer-dialog.component';
 
 /**
  * @ignore
@@ -28,6 +31,8 @@ import { MeasurerComponent } from './measurer.component';
     MatButtonModule,
     MatButtonToggleModule,
     MatIconModule,
+    MatTooltipModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -38,11 +43,15 @@ import { MeasurerComponent } from './measurer.component';
   declarations: [
     MeasureFormatPipe,
     MeasurerItemComponent,
-    MeasurerComponent
+    MeasurerComponent,
+    MeasurerDialogComponent
   ],
   exports: [
     MeasureFormatPipe,
     MeasurerComponent
+  ],
+  entryComponents: [
+    MeasurerDialogComponent
   ]
 })
 export class FadqLibMeasurerModule {}

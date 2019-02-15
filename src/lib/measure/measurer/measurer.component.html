@@ -55,6 +55,24 @@
     </fadq-measurer-item>
   </ng-container>
 
+  <mat-divider></mat-divider>
+
+  <button
+    mat-icon-button
+    [matTooltip]="'measure.actionbar.calculate.tooltip' | translate"
+    [disabled]="(selectedFeatures$ | async).length === 0"
+    (click)="onCalculateClick()">
+    <mat-icon>playlist_add</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    [matTooltip]="'measure.actionbar.delete.tooltip' | translate"
+    [disabled]="(selectedFeatures$ | async).length === 0"
+    (click)="onDeleteClick()">
+    <mat-icon>delete</mat-icon>
+  </button>
+
   <fadq-entity-table
     #table
     class="table-compact"
