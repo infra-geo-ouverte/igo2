@@ -162,7 +162,8 @@ export class EntityTableComponent implements OnInit, OnDestroy, OnChanges  {
    */
   onRowSelect(entity: object) {
     if (this.selection === false) { return; }
-    this.store.state.update(entity, {selected: true}, true);
+    const many = this.template.selectMany ? this.template.selectMany : false;
+    this.store.state.update(entity, {selected: true}, !many);
     this.entitySelectChange.emit({selected: true, entity});
   }
 

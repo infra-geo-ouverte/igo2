@@ -32,6 +32,7 @@ export interface FeatureStoreSelectionStrategyOptions {
   map: IgoMap;
   motion?: FeatureMotion;
   style?: olstyle.Style;
+  many?: boolean;
 }
 
 export interface FeatureFormSubmitEvent {

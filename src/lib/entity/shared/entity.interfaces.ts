@@ -59,6 +59,7 @@ export interface EntityOperationState {
 export interface EntityTableTemplate {
   columns: EntityTableColumn[];
   selection?: boolean;
+  selectMany?: boolean;
   sort?: boolean;
   valueAccessor?: (entity: object, property: string) => any;
   rowClassFunc?: (entity: object) => {

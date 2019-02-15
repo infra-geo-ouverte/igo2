@@ -209,7 +209,8 @@ export class FeatureStoreSelectionStrategy extends FeatureStoreStrategy {
    * @param features Features
    */
   private selectFeaturesFromStore(store: FeatureStore, features: Feature[]) {
-    store.state.updateMany(features, {selected: true}, true);
+    const many = this.options ? this.options.many : false;
+    store.state.updateMany(features, {selected: true}, !many);
   }
 
   /**
