@@ -1,3 +1,61 @@
+<a name="0.22.3"></a>
+## [0.22.3](https://github.com/infra-geo-ouverte/igo2/compare/0.22.2...0.22.3) (2019-02-08)
+
+
+### Bug Fixes
+
+* **package:** maj package-lock ([33a1132](https://github.com/infra-geo-ouverte/igo2/commit/33a1132))
+
+
+### Features
+
+* **theme:** add teal-theme ([9fbf887](https://github.com/infra-geo-ouverte/igo2/commit/9fbf887))
+
+
+
+<a name="0.22.2"></a>
+## [0.22.2](https://github.com/infra-geo-ouverte/igo2/compare/0.22.1...0.22.2) (2019-02-08)
+
+
+### Bug Fixes
+
+* **lint:** remove type annotation ([a136077](https://github.com/infra-geo-ouverte/igo2/commit/a136077))
+
+
+### Features
+
+* **igo2-lib:** upgrade ([979d1e9](https://github.com/infra-geo-ouverte/igo2/commit/979d1e9))
+
+
+
+<a name="0.22.1"></a>
+## [0.22.1](https://github.com/infra-geo-ouverte/igo2/compare/0.22.0...0.22.1) (2019-02-07)
+
+
+### Bug Fixes
+
+* **package:** add live-server ([504a21b](https://github.com/infra-geo-ouverte/igo2/commit/504a21b))
+
+
+
+<a name="0.22.0"></a>
+# [0.22.0](https://github.com/infra-geo-ouverte/igo2/compare/0.21.3...0.22.0) (2019-02-07)
+
+
+### Bug Fixes
+
+* Unmet dependencies. ([#240](https://github.com/infra-geo-ouverte/igo2/issues/240)) ([5d835ba](https://github.com/infra-geo-ouverte/igo2/commit/5d835ba))
+* **protrator:** add config ([ebbbf99](https://github.com/infra-geo-ouverte/igo2/commit/ebbbf99))
+
+
+### Features
+
+* adding a config to change the title ([3a7efce](https://github.com/infra-geo-ouverte/igo2/commit/3a7efce))
+* **package:** updrade igo2-lib ([6854e3f](https://github.com/infra-geo-ouverte/igo2/commit/6854e3f))
+* **theme:** add some themes ([01218e5](https://github.com/infra-geo-ouverte/igo2/commit/01218e5))
+
+
+
 <a name="0.21.3"></a>
 ## [0.21.3](https://github.com/infra-geo-ouverte/igo2/compare/0.21.2...0.21.3) (2018-12-06)
 

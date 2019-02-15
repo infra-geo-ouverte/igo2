@@ -29,3 +29,8 @@
   @import '~@igo2/core/style/themes/dark.theme';
   @include igo-all-theming($theme);
 }
+
+.teal-theme {
+  @import '~@igo2/core/style/themes/teal.theme';
+  @include igo-all-theming($theme);
+}

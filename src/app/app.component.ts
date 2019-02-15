@@ -11,6 +11,7 @@ import { AuthOptions } from '@igo2/auth';
 })
 export class AppComponent {
   public authConfig: AuthOptions;
+  private themeClass = 'blue-theme';
 
   constructor(
     protected languageService: LanguageService,
@@ -25,9 +26,9 @@ export class AppComponent {
       this.titleService.setTitle(title);
     }
 
-    const themeClass = this.configService.getConfig('theme');
-    if (themeClass) {
-      this.renderer.addClass(document.body, themeClass);
+    const theme = this.configService.getConfig('theme') || this.themeClass;
+    if (theme) {
+      this.renderer.addClass(document.body, theme);
     }
   }
 }
