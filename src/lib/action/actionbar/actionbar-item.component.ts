@@ -27,6 +27,11 @@ export class ActionbarItemComponent {
   @Input() action: Action;
 
   /**
+   * Color
+   */
+  @Input() color: string = 'default';
+
+  /**
    * Whether the action title is displayed
    */
   @Input() withTitle: boolean = true;

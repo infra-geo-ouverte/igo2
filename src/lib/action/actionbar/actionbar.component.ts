@@ -81,6 +81,11 @@ export class ActionbarComponent implements OnDestroy, OnChanges {
   @Input() horizontal: boolean = false;
 
   /**
+   * Color
+   */
+  @Input() color: string = 'default';
+
+  /**
    * Whether action titles are displayed
    */
   @Input() withTitle: boolean = true;

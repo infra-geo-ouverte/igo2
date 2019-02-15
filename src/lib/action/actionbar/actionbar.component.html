@@ -5,6 +5,7 @@
     color="accent"
     [withTitle]="false"
     [withIcon]="true"
+    [color]="color"
     [disabled]="store.view.empty"
     [action]="toggleCollapseAction"
     (trigger)="onTriggerAction(toggleCollapseAction)">
@@ -15,6 +16,7 @@
       color="accent"
       [withTitle]="withTitle"
       [withIcon]="withIcon"
+      [color]="color"
       [disabled]="store.state.get(action).disabled"
       [action]="action"
       (trigger)="onTriggerAction(action)">
@@ -44,6 +46,7 @@
           color="accent"
           [withTitle]="withTitle"
           [withIcon]="withIcon"
+          [color]="color"
           [disabled]="store.state.get(action).disabled"
           [action]="action"
           (trigger)="onTriggerAction(action)">
