@@ -142,6 +142,12 @@ export class MeasurerComponent implements OnInit, OnDestroy {
   public selectedFeatures$: BehaviorSubject<FeatureWithMeasure[]> = new BehaviorSubject([]);
 
   /**
+   * OL draw source
+   * @internal
+   */
+  public showTooltips: boolean = true;
+
+  /**
    * Draw line control
    */
   private drawLineControl: DrawControl;
@@ -206,11 +212,6 @@ export class MeasurerComponent implements OnInit, OnDestroy {
    * OL draw source
    */
   private olDrawSource = new OlVectorSource();
-
-  /**
-   * OL draw source
-   */
-  private showTooltips: boolean = true;
 
   /**
    * The map to measure on

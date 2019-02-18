@@ -87,7 +87,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.controller.destroy();
   }
 
-
   /**
    * When a result is focused, update it's state in the store and emit
    * an event.

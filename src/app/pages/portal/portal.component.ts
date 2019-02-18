@@ -238,6 +238,35 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
+  onSearch(event: {research: Research, results: SearchResult[]}) {
+    const results = event.results;
+    const mapSearchSource = this.getMapSearchSource();
+    if (results.length === 0 && event.research.source === mapSearchSource) {
+      if (this.searchResult !== undefined && this.searchResult.source === mapSearchSource) {
+        this.searchStore.state.update(this.searchResult, {focused: false, selected: false});
+        this.closeToastPanel();
+      }
+      return;
+    }
+
+    this.searchStore.state.updateAll({focused: false, selected: false});
+
+    const newResults = this.searchStore.entities$.value
+      .filter((result: SearchResult) => result.source !== event.research.source)
+      .concat(results.filter((result: SearchResult) => result.meta.dataType !== CLIENT));
+    this.searchStore.load(newResults);
+
+    const clientResult = results.find((result: SearchResult) => result.meta.dataType === CLIENT);
+    if (clientResult !== undefined) {
+      this.onSearchClient(clientResult as SearchResult<Client>);
+    }
+
+    const mapResults = results.filter((result: SearchResult) => result.source === mapSearchSource);
+    if (mapResults.length > 0) {
+      this.onSearchMap(mapResults as SearchResult<Feature>[]);
+    }
+  }
+
   onDeactivateEditorWidget() {
     this.closeToastPanel();
   }
@@ -293,35 +322,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     const tool = this.toolService.getTool('searchResultsFadq');
     this.toolService.selectTool(tool);
     this.openSidenav();
-  }
-
-  private onSearch(event: {research: Research, results: SearchResult[]}) {
-    const results = event.results;
-    const mapSearchSource = this.getMapSearchSource();
-    if (results.length === 0 && event.research.source === mapSearchSource) {
-      if (this.searchResult !== undefined && this.searchResult.source === mapSearchSource) {
-        this.searchStore.state.update(this.searchResult, {focused: false, selected: false});
-        this.closeToastPanel();
-      }
-      return;
-    }
-
-    this.searchStore.state.updateAll({focused: false, selected: false});
-
-    const newResults = this.searchStore.entities$.value
-      .filter((result: SearchResult) => result.source !== event.research.source)
-      .concat(results.filter((result: SearchResult) => result.meta.dataType !== CLIENT));
-    this.searchStore.load(newResults);
-
-    const clientResult = results.find((result: SearchResult) => result.meta.dataType === CLIENT);
-    if (clientResult !== undefined) {
-      this.onSearchClient(clientResult as SearchResult<Client>);
-    }
-
-    const mapResults = results.filter((result: SearchResult) => result.source === mapSearchSource);
-    if (mapResults.length > 0) {
-      this.onSearchMap(mapResults as SearchResult<Feature>[]);
-    }
   }
 
   private onBeforeSearchClient() {

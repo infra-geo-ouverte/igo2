@@ -37,6 +37,11 @@ import { IgoMap } from 'src/lib/map';
 export class QueryableDirective implements AfterViewInit, OnDestroy {
 
   /**
+   * Map browser component
+   */
+  private component: MapBrowserComponent;
+
+  /**
    * Subscriptions to ongoing queries
    */
   private queries$$: Subscription[] = [];
@@ -76,9 +81,11 @@ export class QueryableDirective implements AfterViewInit, OnDestroy {
   get map(): IgoMap { return this.component.map as IgoMap; }
 
   constructor(
-    @Self() private component: MapBrowserComponent,
+    component: MapBrowserComponent,
     private queryService: QueryService
-  ) {}
+  ) {
+    this.component = component;
+  }
 
   /**
    * Start listening to click and drag box events
