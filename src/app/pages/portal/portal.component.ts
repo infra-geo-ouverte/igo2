@@ -76,7 +76,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     public contextService: ContextService,
     public cdRef: ChangeDetectorRef,
     public capabilitiesService: CapabilitiesService
-
   ) {}
 
   ngOnInit() {
@@ -99,6 +98,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.context$$ = this.contextService.context$.subscribe(context =>
       this.handleContextChange(context)
     );
+
+    this.route.queryParams.pipe(debounceTime(500)).subscribe(params => {
+      if (params['sidenav'] === '1') {
+        this.openSidenav();
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -226,18 +231,13 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
 
     this.route.queryParams.subscribe(params => {
-      if (params['sidenav']) {
-      if (params['sidenav'] === '1') {
-        this.openSidenav();
+      if (params['layers'] && params['wmsUrl']) {
+        const layers = params['layers'].split(',');
+        layers.forEach(layer => {
+          this.addLayerByName(params['wmsUrl'], layer);
+        });
       }
-    }
-    if (params['layers'] && params['wmsUrl']) {
-      const layers = params['layers'].split(',');
-      layers.forEach(layer => {
-        this.addLayerByName(params['wmsUrl'], layer);
-      });
-    }
-    if (params['tool'] && !this.toolLoaded) {
+      if (params['tool'] && !this.toolLoaded) {
         const toolNameToOpen = params['tool'];
         if (this.toolService.allowedToolName.indexOf(toolNameToOpen) !== -1) {
           const tool = this.toolService.getTool(toolNameToOpen);
@@ -261,19 +261,23 @@ export class PortalComponent implements OnInit, OnDestroy {
     };
 
     this.capabilitiesService
-    .getWMSOptions(properties).subscribe(capabilities => {
-    this.dataSourceService
-      .createAsyncDataSource(capabilities)
-      .pipe(debounceTime(100))
-      .subscribe(dataSource => {
-        const layerOptions = {
-          source: Object.assign(dataSource,
-          {options: {
-            optionsFromCapabilities: true,
-            _layerOptionsFromCapabilities: (capabilities as any)._layerOptionsFromCapabilities} })
-        };
-        this.map.addLayer(this.layerService.createLayer(layerOptions));
+      .getWMSOptions(properties)
+      .subscribe(capabilities => {
+        this.dataSourceService
+          .createAsyncDataSource(capabilities)
+          .pipe(debounceTime(100))
+          .subscribe(dataSource => {
+            const layerOptions = {
+              source: Object.assign(dataSource, {
+                options: {
+                  optionsFromCapabilities: true,
+                  _layerOptionsFromCapabilities: (capabilities as any)
+                    ._layerOptionsFromCapabilities
+                }
+              })
+            };
+            this.map.addLayer(this.layerService.createLayer(layerOptions));
+          });
       });
-    });
   }
 }
