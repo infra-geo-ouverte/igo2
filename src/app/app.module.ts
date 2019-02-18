@@ -6,8 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   provideConfigOptions,
   IgoMessageModule,
-  RouteService,
-  AnalyticsService
+  RouteService
 } from '@igo2/core';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 import { IgoAuthModule } from '@igo2/auth';
@@ -41,7 +40,6 @@ import { AppComponent } from './app.component';
       path: './config/config.json'
     }),
     RouteService,
-    AnalyticsService,
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
     provideReseauTransportsQuebecSearchSource(),

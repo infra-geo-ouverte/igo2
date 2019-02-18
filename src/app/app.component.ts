@@ -1,7 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { LanguageService, ConfigService } from '@igo2/core';
+import { LanguageService, ConfigService, AnalyticsService } from '@igo2/core';
 import { AuthOptions } from '@igo2/auth';
 
 @Component({
@@ -16,6 +16,7 @@ export class AppComponent {
   constructor(
     protected languageService: LanguageService,
     private configService: ConfigService,
+    private analyticsService: AnalyticsService,
     private renderer: Renderer2,
     private titleService: Title
   ) {
