@@ -1,3 +1,13 @@
+<a name="0.23.1"></a>
+## [0.23.1](https://github.com/infra-geo-ouverte/igo2/compare/0.23.0...0.23.1) (2019-02-18)
+
+
+### Bug Fixes
+
+* **analytics:** move service provider ([37a9d64](https://github.com/infra-geo-ouverte/igo2/commit/37a9d64))
+
+
+
 <a name="0.23.0"></a>
 # [0.23.0](https://github.com/infra-geo-ouverte/igo2/compare/0.22.3...0.23.0) (2019-02-18)
 

@@ -1,6 +1,6 @@
 {
   "name": "igo",
-  "version": "0.23.0",
+  "version": "0.23.1",
   "description": "Infrastructure géomatique ouverte",
   "repository": {
     "url": "https://github.com/infra-geo-ouverte/igo2"
