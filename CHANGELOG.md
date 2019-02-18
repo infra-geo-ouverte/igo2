@@ -1,3 +1,21 @@
+<a name="0.23.0"></a>
+# [0.23.0](https://github.com/infra-geo-ouverte/igo2/compare/0.22.3...0.23.0) (2019-02-18)
+
+
+### Bug Fixes
+
+* **polyfills:** Allow string normalization on IE ([#245](https://github.com/infra-geo-ouverte/igo2/issues/245)) ([6169ac4](https://github.com/infra-geo-ouverte/igo2/commit/6169ac4))
+
+
+### Features
+
+* **analyticsService:** add matomo service ([4fae18b](https://github.com/infra-geo-ouverte/igo2/commit/4fae18b))
+* **igo2-lib:** maj to 0.26.2 ([dc2d2a9](https://github.com/infra-geo-ouverte/igo2/commit/dc2d2a9))
+* **rotation:** Adding a button to reset view rotation. ([#244](https://github.com/infra-geo-ouverte/igo2/issues/244)) ([0f0d05f](https://github.com/infra-geo-ouverte/igo2/commit/0f0d05f))
+* **url-params:** Refining behavior for layers added by URL (wmsUrl & layers)  & SIDENAV control by url ([#241](https://github.com/infra-geo-ouverte/igo2/issues/241)) ([e3bb7e9](https://github.com/infra-geo-ouverte/igo2/commit/e3bb7e9))
+
+
+
 <a name="0.22.3"></a>
 ## [0.22.3](https://github.com/infra-geo-ouverte/igo2/compare/0.22.2...0.22.3) (2019-02-08)
 
