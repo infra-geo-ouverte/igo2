@@ -1,5 +1,5 @@
 <ng-container *ngFor="let element of mapOverlay; let i = index">
-  <div [class]="element.cssClass" class="mapOverlayDefault"
+  <div class="mapOverlayDefault" [ngClass]="element.cssClass"
        [style.position]="element.fixed ? 'fixed' : 'absolute'"
        [style.paddingLeft]="element.paddingLeft"
        [style.paddingRight]="element.paddingRight"
@@ -7,9 +7,14 @@
        [style.paddingBottom]="element.paddingBottom">
     <a *ngIf="element.link; else templateNoLink"
         target="_blank" [href]='element.link'>
-        {{ element.text }}<img [src]="element.imgSrc"
-                              [alt]="element.alt"
-                              [ngStyle]="{ 'width': element.imgSize }"></a>
+        {{ element.text }}
+        <ng-container *ngIf="element.imgSrc">
+          <img [src]="element.imgSrc"
+               [alt]="element.alt"
+               [ngStyle]="{ 'width': element.imgSize }">
+        </ng-container>
+    </a>
+
 
   <ng-template #templateNoLink>
     {{ element.text }}
