@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Context, ContextService } from '@igo2/context';
+import { MapOverlay } from './map-overlay.interface';
 
 @Component({
   selector: 'app-map-overlay',
@@ -26,8 +27,8 @@ export class MapOverlayComponent implements AfterViewInit {
     if (context !== undefined) {
       this.mapOverlay = null;
 
-      if (context.mapOverlay) {
-        this.mapOverlay = context.mapOverlay;
+      if (context["mapOverlay"]) {
+        this.mapOverlay = context["mapOverlay"];
       }
     }
   }

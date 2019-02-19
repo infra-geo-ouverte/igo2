@@ -12,7 +12,11 @@
                               [ngStyle]="{ 'width': element.imgSize }"></a>
 
   <ng-template #templateNoLink>
-    {{ element.text }}<img [src]="element.imgSrc" [alt]="element.alt" [ngStyle]="{ 'width': element.imgSize }">
+    {{ element.text }}
+    <ng-container *ngIf="element.imgSrc">
+      <img [src]="element.imgSrc" [alt]="element.alt" [ngStyle]="{ 'width': element.imgSize }">
+    </ng-container>
+
   </ng-template>
   </div>
 </ng-container>
