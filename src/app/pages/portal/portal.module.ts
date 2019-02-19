@@ -19,7 +19,7 @@ import { IgoToolsModule } from '@igo2/tools';
 
 import { PortalComponent } from './portal.component';
 
-import { MapOverlayModule } from './mapOverlay/mapOverlay.module';
+import { MapOverlayModule } from './map-overlay/map-overlay.module';
 
 @NgModule({
   imports: [
