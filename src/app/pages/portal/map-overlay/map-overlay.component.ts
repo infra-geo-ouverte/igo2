@@ -24,7 +24,7 @@ export class MapOverlayComponent implements AfterViewInit {
   }
 
   ngOnDestroy(){
-    this.context$.unsubscribe();
+    this.context$$.unsubscribe();
   }
 
   private handleContextChange(context: Context) {
