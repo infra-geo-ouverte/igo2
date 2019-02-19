@@ -1,0 +1,13 @@
+<ng-container *ngFor="let element of mapOverlay; let i = index">
+  <div [class]="element.cssClass" [style.position]="element.fixed ? 'fixed' : 'absolute'">
+    <a *ngIf="element.link; else templateNoLink"
+        target="_blank" [href]='element.link'>
+        {{ element.text }}<img [src]="element.imgSrc"
+                              [alt]="element.alt"
+                              [ngStyle]="{ 'width': element.imgSize }"></a>
+
+  <ng-template #templateNoLink>
+    {{ element.text }}<img [src]="element.imgSrc" [alt]="element.alt" [ngStyle]="{ 'width': element.imgSize }">
+  </ng-template>
+  </div>
+</ng-container>

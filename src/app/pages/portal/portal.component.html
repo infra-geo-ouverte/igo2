@@ -76,4 +76,9 @@
     *ngIf="toastShown">
   </igo-toast>
 
+  <app-map-overlay [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'"
+    [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
+                            sidenavOpened ? 'right' : 'left'">
+  </app-map-overlay>
+
 </mat-sidenav-container>
