@@ -20,7 +20,7 @@ export interface MapOverlay {
   imgSrc?: string;         // source of the image to show
   imgSize?: string;        // Size of the image
   text?: string;           // text to show before image
-  fontSize? string;        //Font size to display text
+  fontSize?: string;       // Font size to display text
   alt?: string;            // alternate text for an image if the image cannot be displayed
   paddingLeft?: string;    // Padding to add to the left of the element
   paddingRight?: string;   // Padding to add to the right of the element
