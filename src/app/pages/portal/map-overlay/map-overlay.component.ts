@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Context, ContextService } from '@igo2/context';
+import { MediaService } from '@igo2/core';
 import { MapOverlay } from './map-overlay.interface';
 
 @Component({
@@ -11,10 +12,11 @@ import { MapOverlay } from './map-overlay.interface';
 
 export class MapOverlayComponent implements AfterViewInit {
   public mapOverlay: MapOverlay;
-  public context$$: Subscription;
+  private context$$: Subscription;
 
   constructor(
-    private contextService: ContextService
+    private contextService: ContextService,
+    private mediaService: MediaService
   ) { }
 
   ngAfterViewInit() {
@@ -29,10 +31,17 @@ export class MapOverlayComponent implements AfterViewInit {
 
   private handleContextChange(context: Context) {
     if (context !== undefined) {
-      this.mapOverlay = null;
+      this.mapOverlay = [];
 
       if (context["mapOverlay"]) {
-        this.mapOverlay = context["mapOverlay"];
+        for(let overlay of context["mapOverlay"]) {
+
+          //If no media define use default to desktop, display only if current media is on context definition
+          if((!overlay.media && this.mediaService.getMedia() == "desktop") ||
+          (overlay.media && overlay.media.includes(this.mediaService.getMedia()))) {
+            this.mapOverlay.push(overlay);
+          }
+        }
       }
     }
   }

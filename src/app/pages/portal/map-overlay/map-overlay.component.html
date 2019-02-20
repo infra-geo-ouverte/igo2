@@ -4,7 +4,8 @@
        [style.paddingLeft]="element.paddingLeft"
        [style.paddingRight]="element.paddingRight"
        [style.paddingTop]="element.paddingTop"
-       [style.paddingBottom]="element.paddingBottom">
+       [style.paddingBottom]="element.paddingBottom"
+       [style.fontSize]="element.fontSize">
     <a *ngIf="element.link; else templateNoLink"
         target="_blank" [href]='element.link'>
         {{ element.text }}
