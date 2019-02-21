@@ -37,8 +37,7 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
 
       if (context['mapOverlay']) {
         mapOverlay = context['mapOverlay'];
-      }
-      else if (this.configService.getConfig('mapOverlay')) {
+      } else if (this.configService.getConfig('mapOverlay')) {
         mapOverlay = this.configService.getConfig('mapOverlay');
       }
       for (const overlay of mapOverlay) {
