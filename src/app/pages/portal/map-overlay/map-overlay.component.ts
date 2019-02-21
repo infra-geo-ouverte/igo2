@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Context, ContextService } from '@igo2/context';
-import { MediaService } from '@igo2/core';
+import { MediaService, ConfigService } from '@igo2/core';
 import { MapOverlay } from './map-overlay.interface';
 
 @Component({
@@ -16,7 +16,8 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private contextService: ContextService,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private configService: ConfigService
   ) { }
 
   ngAfterViewInit() {
@@ -30,19 +31,25 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
   }
 
   private handleContextChange(context: Context) {
+    let mapOverlay = [];
     if (context !== undefined) {
       this.mapOverlay = [];
 
       if (context['mapOverlay']) {
-        for (const overlay of context['mapOverlay']) {
+        mapOverlay = context['mapOverlay'];
+      }
+      else if (this.configService.getConfig('mapOverlay')) {
+        mapOverlay = this.configService.getConfig('mapOverlay');
+      }
+      for (const overlay of mapOverlay) {
 
-          // If no media define use default to desktop, display only if current media is on context definition
-          if ((!overlay.media && this.mediaService.getMedia() === 'desktop') ||
-          (overlay.media && overlay.media.includes(this.mediaService.getMedia()))) {
-            this.mapOverlay.push(overlay);
-          }
+        // If no media define use default to desktop, display only if current media is on context definition
+        if ((!overlay.media && this.mediaService.getMedia() === 'desktop') ||
+        (overlay.media && overlay.media.includes(this.mediaService.getMedia()))) {
+          this.mapOverlay.push(overlay);
         }
       }
     }
+
   }
 }
