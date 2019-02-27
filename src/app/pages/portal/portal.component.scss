@@ -1,5 +1,4 @@
-@import '~@igo2/core/style/partial/media';
-@import '../../../style/partial/variables';
+@import './portal.variables';
 
 /*** Main ***/
 :host {
@@ -11,6 +10,7 @@
 mat-sidenav-container {
   height: 100%;
   width: 100%;
+  background-color: #efefef;
 }
 
 /*** Menu button ***/
@@ -18,15 +18,10 @@ mat-sidenav-container {
 .menu-button {
   background-color: $igo-background-color;
   position: absolute;
-  left: $igo-sidenav-width;
+  left: $igo-margin;
   top: $igo-margin;
-  z-index: 2;
+  z-index: 4;
   border-radius: 0;
-
-  @include mobile {
-    right: $igo-margin;
-    left: inherit;
-  }
 }
 
 .menu-button ::ng-deep div.mat-button-ripple-round  {
@@ -44,47 +39,15 @@ igo-search-bar {
   background-color: $igo-background-color;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   position: absolute;
-  left: 0;
+  left: $search-bar-left;
   top: $igo-margin;
   z-index: 4;
-  width: calc(#{$igo-sidenav-width} - 2 * #{$igo-margin});
+  width: $search-bar-width;
+  height: $igo-icon-size;
   margin: 0 $igo-margin;
 
   @include mobile {
-    width: calc(100% - #{$igo-mobile-min-space-left} - (3 * #{$igo-margin}));
-  }
-}
-
-igo-search-bar ::ng-deep .mat-form-field-wrapper {
-    margin-bottom: -1.50em;
-}
-
-igo-search-bar ::ng-deep span.mat-form-field-label-wrapper {
-  top: -20px;
-}
-
-igo-search-bar ::ng-deep div.mat-form-field-infix {
-  left: $igo-padding;
-  right: $igo-padding;
-  padding: 0 0 12px 0;
-}
-
-igo-map-browser.toast-shown-offset ::ng-deep .ol-attribution {
-  @include mobile {
-    bottom: 55px;
-  }
-}
-
-igo-map-browser.toast-opened-offset ::ng-deep .ol-attribution {
-  @include mobile {
-    bottom: 305px;
-  }
-}
-
-igo-map-browser.sidenav-offset ::ng-deep .ol-attribution {
-  left: 410px;
-  @include mobile {
-    left: $igo-padding
+    width: $search-bar-width-mobile
   }
 }
 
@@ -95,9 +58,49 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
   }
 }
 
-igo-backdrop {
-  display: none;
-   @include mobile {
-    display: block;
+igo-expansion-panel {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 4;
+  overflow: hidden;
+}
+
+
+igo-toast-panel {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -300px;
+  width: 600px;
+  z-index: 4;
+
+  @include medium-screen {
+    width: 480px;
+    margin-left: -240px;
+  }
+
+  @include small-screen {
+    width: 480px;
+    margin-left: -240px;
+  }
+
+  @include tablet {
+    width: calc(100% - 2 * #{$igo-footer-height});
+    left: $igo-footer-height;
+    margin-left: 0;
+  }
+
+  @include mobile {
+    width: calc(100% - 2 * #{$igo-footer-height});
+    left: $igo-footer-height;
+    margin-left: 0;
+  }
+}
+
+igo-toast-panel.igo-toast-panel-opened {
+  @include mobile {
+    width: 100%;
+    left: 0;
   }
 }

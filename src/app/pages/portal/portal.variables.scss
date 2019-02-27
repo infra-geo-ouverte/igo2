@@ -1,0 +1,24 @@
+@import '~@igo2/core/style/partial/media';
+@import 'variables';
+
+$igo-footer-height: 48px;
+$igo-mobile-min-space-right: 40px;
+
+$igo-expansion-panel-collapsed-height: 48px;
+$igo-expansion-panel-collapsed-width: 52px;
+$igo-expansion-panel-height: 281px;
+$igo-expansion-panel-header-height: $igo-expansion-panel-collapsed-height;
+
+$igo-toast-panel-collapsed-height: 48px;
+$igo-toast-panel-max-height: 281px;
+$igo-toast-panel-width: 30%;
+
+$igo-sidenav-height: calc(100% - #{$igo-expansion-panel-collapsed-height} - 2px); // -2x for box shadow
+$igo-sidenav-height-with-expansion-panel: calc(100% - #{$igo-expansion-panel-height} - 2px);
+$igo-sidenav-width: 400px;
+$igo-sidenav-margin-top: 50px;
+$igo-sidenav-width-mobile: calc(100% - #{$igo-mobile-min-space-right} - #{$igo-margin});
+
+$search-bar-left: calc(#{$igo-icon-size} + #{$igo-margin});
+$search-bar-width: calc(#{$igo-sidenav-width} - #{$search-bar-left} - (2 * #{$igo-margin}));
+$search-bar-width-mobile: calc(100% - #{$igo-mobile-min-space-right} - #{$search-bar-left} - (3 * #{$igo-margin}));

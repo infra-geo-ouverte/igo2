@@ -1,0 +1,42 @@
+<mat-sidenav
+  mode="side"
+  [autoFocus]="false"
+  [(opened)]="opened">
+
+  <div class="igo-sidenav-content">
+
+    <igo-flexible initial="100%">
+
+      <div class="igo-content">
+        <igo-panel [title]="title$ | async | translate">
+          <button *ngIf="toolbox.activeTool$ | async"
+            mat-icon-button
+            panelLeftButton
+            tooltip-position="below"
+            matTooltipShowDelay="500"
+            [matTooltip]="'igo.context.sidenav.goBack' | translate"
+            (click)="onPreviousButtonClick()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+
+          <button *ngIf="toolbox.activeTool$ | async"
+            mat-icon-button
+            panelRightButton
+            tooltip-position="below"
+            matTooltipShowDelay="500"
+            [matTooltip]="'igo.context.sidenav.mainMenu' | translate"
+            (click)="onUnselectButtonClick()">
+            <mat-icon>close</mat-icon>
+          </button>
+
+          <igo-toolbox
+            [animate]="true"
+            [toolbox]="toolbox">
+          </igo-toolbox>
+        </igo-panel>
+      </div>
+
+    </igo-flexible>
+
+  </div>
+</mat-sidenav>

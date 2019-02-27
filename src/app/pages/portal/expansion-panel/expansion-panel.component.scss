@@ -1,0 +1,53 @@
+@import '../portal.variables';
+
+
+:host {
+  @extend %box-shadowed;
+
+  display: block;
+  background-color: white;
+
+  height: $igo-expansion-panel-collapsed-height;
+  width: $igo-sidenav-width;
+
+  transition:
+    height 200ms cubic-bezier(.4, 0, .2, 1),
+    width 200ms cubic-bezier(.4, 0, .2, 1);
+
+  @include small-screen {
+    width: $igo-expansion-panel-collapsed-width;
+  }
+
+  @include tablet {
+    width: $igo-expansion-panel-collapsed-width;
+  }
+
+  @include mobile {
+    width: $igo-expansion-panel-collapsed-width;
+  }
+}
+
+.igo-expansion-panel-container {
+  height: 100%;
+  width: 100%;
+}
+
+:host.igo-expansion-panel-expanded {
+  height: $igo-expansion-panel-height;
+  width: 100%;
+}
+
+:host > div {
+  height: 100%;
+  width: 100%;
+}
+
+.igo-expansion-panel-content {
+  height: calc(100% - #{$igo-expansion-panel-header-height});
+  overflow: auto;
+  padding: $igo-padding;
+}
+
+igo-backdrop ::ng-deep > div {
+  z-index: initial !important;
+}

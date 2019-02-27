@@ -1,0 +1,12 @@
+<div>
+  <div class="igo-expansion-panel-trigger-container">
+    <button mat-icon-button (click)="onToggleClick()">
+      <mat-icon *ngIf="!expanded">launch</mat-icon>
+      <mat-icon *ngIf="expanded" style="transform: rotate(180deg)">launch</mat-icon>
+    </button>
+  </div>
+
+  <div class="igo-expansion-panel-content">
+    <ng-content></ng-content>
+  </div>
+</div>

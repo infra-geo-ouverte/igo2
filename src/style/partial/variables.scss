@@ -1,10 +1,45 @@
 @import '~@igo2/core/style/partial/core.variables';
 
-/*** Main ***/
+/*** Generic ***/
 $igo-background-color: rgb(255, 255, 255);
 $igo-icon-button-width: 40px;
 
-/*** Sidenav ***/
-$igo-sidenav-margin-top: 50px;
-$igo-sidenav-width: 400px;
-$igo-mobile-min-space-left: $igo-icon-button-width;
+$igo-border-width: 1px;
+$igo-border-style: solid;
+$igo-border-color: rgba(0, 0, 0, .2);
+
+%border-box {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+%bordered-top {
+  border-top: $igo-border-width $igo-border-style $igo-border-color;
+}
+
+%bordered-bottom {
+  border-bottom: $igo-border-width $igo-border-style $igo-border-color;
+}
+
+%bordered-left {
+  border-left: $igo-border-width $igo-border-style $igo-border-color;
+}
+
+%bordered-right {
+  border-right: $igo-border-width $igo-border-style $igo-border-color;
+}
+
+%box-shadowed {
+  -moz-box-shadow: 0px 0px 2px 0px #dddddd;
+  -webkit-box-shadow: 0px 0px 2px 0px #dddddd;
+  -o-box-shadow: 0px 0px 2px 0px #dddddd;
+  box-shadow: 0px 0px 2px 0px #dddddd;
+}
+
+%box-shadowed-bottom-right {
+  -moz-box-shadow: 2px 2px 2px 0px #dddddd;
+  -webkit-box-shadow: 2px 2px 2px 0px #dddddd;
+  -o-box-shadow: 2px 2px 2px 0px #dddddd;
+  box-shadow: 2px 2px 2px 0px #dddddd;
+}

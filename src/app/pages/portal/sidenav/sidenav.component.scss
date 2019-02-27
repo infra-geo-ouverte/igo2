@@ -1,0 +1,45 @@
+@import '../portal.variables';
+
+:host {
+  background-color: rgb(255, 255, 255);
+}
+
+// This is needed because whe using the
+// sidenav "side" mode, the z-index is 1
+// and the sidenav appears below our backdrop.
+// The "side" mode is required to prevent
+// the sidenav from focusing a random button on open.
+:host ::ng-deep mat-sidenav {
+  z-index: 3 !important;
+}
+
+mat-sidenav {
+  @extend %box-shadowed-bottom-right;
+
+  height: $igo-sidenav-height;
+  width: $igo-sidenav-width;
+
+  @include mobile {
+    width: $igo-sidenav-width-mobile;
+    height: 100%;
+  }
+}
+
+:host.igo-sidenav-with-expansion-panel mat-sidenav {
+  height: $igo-sidenav-height-with-expansion-panel;
+  transition: height 280ms cubic-bezier(.4,0,.2,1);
+}
+
+.igo-sidenav-content {
+  margin-top: $igo-sidenav-margin-top;
+  height: calc(100% - #{$igo-sidenav-margin-top});
+}
+
+.igo-sidenav-content .igo-flexible-fill .igo-container {
+  @extend %bordered-top;
+  @extend %border-box;
+}
+
+igo-panel ::ng-deep .igo-panel-content {
+  position: relative;
+}

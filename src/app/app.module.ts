@@ -1,26 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import {
   provideConfigOptions,
   IgoMessageModule,
   RouteService
-} from '@igo2/core';
-import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
-import { IgoAuthModule } from '@igo2/auth';
+} from "@igo2/core";
+import { IgoSpinnerModule, IgoStopPropagationModule } from "@igo2/common";
+import { IgoAuthModule } from "@igo2/auth";
 import {
   provideIChercheSearchSource,
-  provideReseauTransportsQuebecSearchSource,
+  // provideReseauTransportsQuebecSearchSource,
   provideNominatimSearchSource,
-  provideDataSourceSearchSource,
+  provideILayerSearchSource,
   provideOsrmRoutingSource
-} from '@igo2/geo';
+} from "@igo2/geo";
 
-import { environment } from '../environments/environment';
-import { PortalModule } from './pages';
-import { AppComponent } from './app.component';
+import { environment } from "../environments/environment";
+import { PortalModule } from "./pages";
+import { AppComponent } from "./app.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,13 +37,13 @@ import { AppComponent } from './app.component';
   providers: [
     provideConfigOptions({
       default: environment.igo,
-      path: './config/config.json'
+      path: "./config/config.json"
     }),
     RouteService,
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
-    provideReseauTransportsQuebecSearchSource(),
-    provideDataSourceSearchSource(),
+    // provideReseauTransportsQuebecSearchSource(),
+    provideILayerSearchSource(),
     provideOsrmRoutingSource()
   ],
   bootstrap: [AppComponent]

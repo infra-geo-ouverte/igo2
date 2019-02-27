@@ -1,0 +1,26 @@
+<igo-panel
+  [title]="title"
+  [withHeader]="withHeader"
+  (click)="onToggleClick()">
+
+  <!--TODO:  Fix CSS in lib and remove that -->
+  <button
+    *ngIf="withHeader && !empty"
+    mat-icon-button
+    panelRightButton>
+    <mat-icon *ngIf="!opened"> arrow_drop_up</mat-icon>
+    <mat-icon *ngIf="opened"> arrow_drop_down</mat-icon>
+  </button>
+  <button
+    *ngIf="withHeader && !empty"
+    mat-icon-button
+    panelLeftButton>
+  </button>
+
+  <div
+    #content
+    igoStopPropagation
+    [@showContent]="opened">
+    <ng-content></ng-content>
+  </div>
+</igo-panel>
