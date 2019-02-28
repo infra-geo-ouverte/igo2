@@ -13,7 +13,18 @@
       "enabled": false,
       "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
       "locateUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-      "zoomMaxOnSelect": 7
+      "zoomMaxOnSelect": 7,
+      "distance": 0.5,
+      "propertiesAlias": [
+            { "name": "title","alias": "Titre"},
+            { "name": "etiquette", "alias": "Informations" },
+            { "name": "nommun", "alias": "Municipalité" },
+            { "name": "messagpan", "alias": "Message" },
+            { "name": "noroute", "alias": "# de route" },
+            { "name": "nosortie", "alias": "# de sortie" },
+            { "name": "direction", "alias": "Direction" },
+            { "name": "typesort", "alias": "Type de sortie" }
+          ]
     },
     "datasource": {
       "enabled": false
@@ -23,6 +34,24 @@
     "osrm": {
       "enabled": true
     }
+  },  
+  "catalog": {
+    "sources": [
+      {
+        "title": "Données Ouvertes Québec",
+        "url": "https://geoegl.msp.gouv.qc.ca/ws/igo_gouvouvert.fcgi"
+      },
+      {
+        "title": "MTQ (internet)",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "queryFormat": {
+          "html": "*",
+          "json": "stations_meteoroutieres"
+        },
+        "queryHtmlTarget": "innerhtml",
+        "count": 365
+      }
+    ]
   },
   "sidenavTitle": "IGO",
   "theme": "blue-theme"

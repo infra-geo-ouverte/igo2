@@ -9,12 +9,12 @@
 ***
 
 ### Qu'est-ce qu'IGO?
-IGO2 est une solution Web gratuite en géomatique basée sur [Angular 4 -  Material](https://github.com/angular/angular), [OpenLayers 4](https://github.com/openlayers/openlayers) et [IGO2lib](https://github.com/infra-geo-ouverte/igo2-lib).
+IGO2 est une solution Web gratuite en géomatique basée sur [Angular 6 -  Material](https://github.com/angular/angular), [OpenLayers 5](https://github.com/openlayers/openlayers) et [IGO2lib](https://github.com/infra-geo-ouverte/igo2-lib).
 IGO2 permet de tirer profit d’une multitude de données géographiques grâce à une interface cartographique accessible par un navigateur Web sur un poste de travail et par un appareil mobile.
 IGO2 a été initié par l'administration publique du Québec (Canada) et issu d’un travail collaboratif basé sur la philosophie des logiciels libres et ouverts (« open source »). Les membres du public en géomatique et du Web qui soumettent des contributions conservent leurs droits d'auteur s'ils partagent leur code source selon la [LICENCE LiLiQ-R de type LGPL](LICENCE.txt).
 ***
 ### What is IGO?
-IGO2 (for Open GIS Infrastructure - version 2.0) is a free open source Web Geospatial solution developed at first in Quebec, Canada based on [Angular 4 - Material](https://github.com/angular/angular), [OpenLayers 4](https://github.com/openlayers/openlayers) and [IGO2lib](https://github.com/infra-geo-ouverte/igo2-lib). 
+IGO2 (for Open GIS Infrastructure - version 2.0) is a free open source Web Geospatial solution developed at first in Quebec, Canada based on [Angular 6 - Material](https://github.com/angular/angular), [OpenLayers 5](https://github.com/openlayers/openlayers) and [IGO2lib](https://github.com/infra-geo-ouverte/igo2-lib). 
 IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and Mobile and many more available at [http://igo2.readthedocs.io/fr/latest/english.html](http://igo2.readthedocs.io/fr/latest/english.html). Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
 ***
 
@@ -60,17 +60,17 @@ $ npm install
 
 # Surveiller les fichiers et lancer une instance pour le développement
 $ npm start
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
  
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
 
 # Build prod
 $ npm run build.prod
 $ npm run serve.prod
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
 
 # Générer l'api de documentation
 $ npm run doc
@@ -101,7 +101,7 @@ $ npm run e2e
 $ docker-compose build
 $ docker-compose up -d
 ```
-Ouvrir un navigateur http://localhost:4200/
+Ouvrir un navigateur http://localhost:4201/
 
 
 ***
@@ -125,17 +125,17 @@ $ npm install
 
 # Check files and launch dev instance
 $ npm start
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Build prod
 $ npm run build.prod
 $ npm run serve.prod
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Doc API generation
 $ npm run doc
@@ -169,7 +169,7 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
-Open in a browser http://localhost:4200/
+Open in a browser http://localhost:4201/
 
 ***
 
