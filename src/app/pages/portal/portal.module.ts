@@ -19,6 +19,8 @@ import { IgoToolsModule } from '@igo2/tools';
 
 import { PortalComponent } from './portal.component';
 
+import { MapOverlayModule } from './map-overlay/map-overlay.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { PortalComponent } from './portal.component';
     IgoFlexibleModule,
     IgoGeoModule,
     IgoContextModule,
-    IgoToolsModule
+    IgoToolsModule,
+    MapOverlayModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]

@@ -1,0 +1,175 @@
+{
+  "uri": "_default",
+  "title": "Default Context",
+  "map": {
+    "view": {
+      "projection": "EPSG:3857",
+      "center": [-72, 52],
+      "zoom": 6
+    }
+  },
+  "mapOverlay": [
+    {
+      "cssClass": "bottom-left",
+      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSize": "50px",
+      "text": "bottom-left fixed",
+      "link": "https://www.google.com",
+      "alt": "Loading",
+      "fixed": true,
+      "paddingLeft": "90px",
+      "fontSize": "14pt"
+    },
+    {
+      "cssClass": "bottom-right",
+      "text": "bottom-right",
+      "link": "http://www.google.ca",
+      "paddingRight": "55px"
+    },
+    {
+      "cssClass": "top-left",
+      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSize": "70px",
+      "link": "http://www.google.ca/search?q=top-left",
+      "alt": "Loading",
+      "paddingTop": "50px"
+    },
+    {
+      "cssClass": "top-right",
+      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSize": "70px",
+      "text": "top-right",
+      "alt": "Loading"
+    },
+    {
+	    "media": ["mobile", "tablet", "desktop"],
+      "cssClass": "top-center",
+      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSize": "20px",
+      "text": "top-center everyone",
+      "alt": "Loading",
+	  "paddingTop": "50px"
+    },
+    {
+      "cssClass": "center-center",
+      "text": "center-center fixed",
+      "fontSize": "8pt",
+      "fixed": true
+    },
+    {
+      "cssClass": "bottom-center",
+      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSize": "70px",
+      "text": "bottom-center",
+      "alt": "Loading"
+    },
+    {
+      "cssClass": "center-right",
+      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSize": "10px",
+      "text": "center-right",
+      "alt": "Loading"
+    },
+    {
+      "cssClass": "center-left",
+      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSize": "70px",
+      "text": "center-left",
+      "alt": "Loading"
+    },
+    {
+      "media": ["mobile", "tablet"],
+      "cssClass": "bottom-left",
+      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSize": "20px",
+      "text": "b-l mob/tab fixed",
+      "link": "https://www.google.com",
+      "alt": "Loading",
+      "fixed": true,
+      "paddingLeft": "50px",
+      "fontSize": "10pt"
+    },
+    {
+      "media": ["mobile", "tablet"],
+      "cssClass": "bottom-right",
+      "text": "b-r mob/tab",
+      "link": "http://www.google.ca",
+      "paddingRight": "50px",
+      "fontSize": "10pt"
+    },
+	{
+	  "media": ["mobile"],
+      "cssClass": "center-center",
+      "text": "c-c mobile only",
+      "fontSize": "10pt",
+      "fixed": true
+    },
+	{
+	  "media": ["tablet"],
+      "cssClass": "center-center",
+      "text": "c-c tablet only fixed",
+      "fontSize": "10pt",
+      "fixed": true
+    }
+  ],
+  "layers": [
+    {
+      "title": "OSM",
+      "baseLayer": true,
+      "visible": true,
+      "sourceOptions": {
+        "type": "osm"
+      }
+    },
+	{
+            "title": "Fond carte",
+            "visible": true,
+            "baseLayer": true,
+            "sourceOptions": {
+              "url": "https://testgeoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
+              "type": "xyz"
+            }
+          }
+  ],
+  "toolbar": [
+    "about",
+    "searchResults",
+    "contextManager",
+    "mapDetails",
+    "print"
+  ],
+  "tools": [
+  {
+      "name": "searchResults",
+      "options": {
+        "focusFirst": true
+      }
+    },
+    {
+      "name": "contextManager"
+    },
+    {
+      "name": "about",
+      "options": {
+        "html": "<h1>Demo of mapOverlay</h1></br>You can switch to a mobile or tablet for a diffent display. For more information about the mapOverlay context parameters, take a look to the interface: <i>src/app/pages/portal/map-overlay/map-overlay.interface.ts</i>"
+      }
+    },
+    {
+      "name": "mapDetails",
+      "options": {
+        "toggleLegendOnVisibilityChange": false,
+        "layerListControls": {
+          "showToolbar": "always",
+          "excludeBaseLayers": false,
+          "keyword": "",
+          "sortedAlpha": false,
+          "onlyVisible": false,
+          "onlyInRange": false
+        }
+      }
+    },
+    {
+      "name": "print"
+    }
+  ]
+}

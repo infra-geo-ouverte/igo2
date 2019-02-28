@@ -10,5 +10,9 @@
   {
     "uri": "embacle",
     "title": "Embâcle (analyse temporelle)"
+  },
+  {
+    "uri": "mapOverlay",
+    "title": "Demo for mapOverlay"
   }
 ]
