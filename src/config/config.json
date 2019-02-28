@@ -23,6 +23,24 @@
     "osrm": {
       "enabled": true
     }
+  },  
+  "catalog": {
+    "sources": [
+      {
+        "title": "Données Ouvertes Québec",
+        "url": "https://geoegl.msp.gouv.qc.ca/ws/igo_gouvouvert.fcgi"
+      },
+      {
+        "title": "MTQ (internet)",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "queryFormat": {
+          "html": "*",
+          "json": "stations_meteoroutieres"
+        },
+        "queryHtmlTarget": "innerhtml",
+        "count": 365
+      }
+    ]
   },
   "sidenavTitle": "IGO",
   "theme": "blue-theme"

@@ -24,6 +24,7 @@
     "searchResults",
     "contextManager",
     "mapDetails",
+    "catalog",
     "timeAnalysis",
     "print",
     "shareMap"
@@ -45,6 +46,12 @@
     },
     {
       "name": "contextManager"
+    },
+    {
+      "name": "catalog"
+    },
+    {
+      "name": "catalogLayers"
     },
     {
       "name": "shareMap"
