@@ -1,3 +1,13 @@
+<a name="0.23.2"></a>
+## [0.23.2](https://github.com/infra-geo-ouverte/igo2/compare/0.23.1...0.23.2) (2019-02-28)
+
+
+### Features
+
+* **mapOverlay:** Add mapOverlay ([#246](https://github.com/infra-geo-ouverte/igo2/issues/246)) ([e09b88a](https://github.com/infra-geo-ouverte/igo2/commit/e09b88a))
+
+
+
 <a name="0.23.1"></a>
 ## [0.23.1](https://github.com/infra-geo-ouverte/igo2/compare/0.23.0...0.23.1) (2019-02-18)
 
