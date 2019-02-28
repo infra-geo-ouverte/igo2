@@ -19,15 +19,15 @@
     }
   ],
   "toolbar": [
-    "about",
-    "directions",
     "searchResults",
     "contextManager",
     "mapDetails",
+    "directions",
     "catalog",
     "timeAnalysis",
     "print",
-    "shareMap"
+    "shareMap",
+    "about"
   ],
   "tools": [
     {
@@ -38,7 +38,8 @@
     },
     {
       "name": "directions"
-    },{
+    },
+    {
       "name": "searchResults",
       "options": {
         "focusFirst": true

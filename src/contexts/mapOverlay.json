@@ -132,11 +132,11 @@
     }
   ],
   "toolbar": [
-    "about",
     "searchResults",
     "contextManager",
     "mapDetails",
-    "print"
+    "print",
+    "about"
   ],
   "tools": [
     {
