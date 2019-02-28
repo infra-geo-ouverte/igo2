@@ -11,7 +11,7 @@
   "mapOverlay": [
     {
       "cssClass": "bottom-left",
-      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSrc": "./assets/images/igo-loading.gif",
       "imgSize": "50px",
       "text": "bottom-left fixed",
       "link": "https://www.google.com",
@@ -28,7 +28,7 @@
     },
     {
       "cssClass": "top-left",
-      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSrc": "./assets/images/igo-loading.gif",
       "imgSize": "70px",
       "link": "http://www.google.ca/search?q=top-left",
       "alt": "Loading",
@@ -36,19 +36,19 @@
     },
     {
       "cssClass": "top-right",
-      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSrc": "./assets/images/igo-loading.gif",
       "imgSize": "70px",
       "text": "top-right",
       "alt": "Loading"
     },
     {
-	    "media": ["mobile", "tablet", "desktop"],
+      "media": ["mobile", "tablet", "desktop"],
       "cssClass": "top-center",
-      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSrc": "./assets/images/igo-loading.gif",
       "imgSize": "20px",
       "text": "top-center everyone",
       "alt": "Loading",
-	  "paddingTop": "50px"
+      "paddingTop": "50px"
     },
     {
       "cssClass": "center-center",
@@ -58,21 +58,21 @@
     },
     {
       "cssClass": "bottom-center",
-      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSrc": "./assets/images/igo-loading.gif",
       "imgSize": "70px",
       "text": "bottom-center",
       "alt": "Loading"
     },
     {
       "cssClass": "center-right",
-      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSrc": "./assets/images/igo-loading.gif",
       "imgSize": "10px",
       "text": "center-right",
       "alt": "Loading"
     },
     {
       "cssClass": "center-left",
-      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSrc": "./assets/images/igo-loading.gif",
       "imgSize": "70px",
       "text": "center-left",
       "alt": "Loading"
@@ -80,7 +80,7 @@
     {
       "media": ["mobile", "tablet"],
       "cssClass": "bottom-left",
-      "imgSrc": "/assets/images/igo-loading.gif",
+      "imgSrc": "./assets/images/igo-loading.gif",
       "imgSize": "20px",
       "text": "b-l mob/tab fixed",
       "link": "https://www.google.com",
@@ -97,15 +97,15 @@
       "paddingRight": "50px",
       "fontSize": "10pt"
     },
-	{
-	  "media": ["mobile"],
+    {
+      "media": ["mobile"],
       "cssClass": "center-center",
       "text": "c-c mobile only",
       "fontSize": "10pt",
       "fixed": true
     },
-	{
-	  "media": ["tablet"],
+    {
+      "media": ["tablet"],
       "cssClass": "center-center",
       "text": "c-c tablet only fixed",
       "fontSize": "10pt",
@@ -121,15 +121,15 @@
         "type": "osm"
       }
     },
-	{
-            "title": "Fond carte",
-            "visible": true,
-            "baseLayer": true,
-            "sourceOptions": {
-              "url": "https://testgeoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
-              "type": "xyz"
-            }
-          }
+    {
+      "title": "Fond carte",
+      "visible": true,
+      "baseLayer": true,
+      "sourceOptions": {
+        "url": "https://testgeoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
+        "type": "xyz"
+      }
+    }
   ],
   "toolbar": [
     "about",
@@ -139,7 +139,7 @@
     "print"
   ],
   "tools": [
-  {
+    {
       "name": "searchResults",
       "options": {
         "focusFirst": true
