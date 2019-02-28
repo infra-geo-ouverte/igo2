@@ -1,3 +1,8 @@
+<a name="0.25.0"></a>
+# [0.25.0](https://github.com/infra-geo-ouverte/igo2/compare/0.24.0...0.25.0) (2019-02-28)
+
+
+
 <a name="0.24.0"></a>
 # [0.24.0](https://github.com/infra-geo-ouverte/igo2/compare/0.23.2...0.24.0) (2019-02-28)
 
