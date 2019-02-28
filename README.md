@@ -60,17 +60,17 @@ $ npm install
 
 # Surveiller les fichiers et lancer une instance pour le développement
 $ npm start
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
  
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
 
 # Build prod
 $ npm run build.prod
 $ npm run serve.prod
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
 
 # Générer l'api de documentation
 $ npm run doc
@@ -101,7 +101,7 @@ $ npm run e2e
 $ docker-compose build
 $ docker-compose up -d
 ```
-Ouvrir un navigateur http://localhost:4200/
+Ouvrir un navigateur http://localhost:4201/
 
 
 ***
@@ -125,17 +125,17 @@ $ npm install
 
 # Check files and launch dev instance
 $ npm start
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Build prod
 $ npm run build.prod
 $ npm run serve.prod
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Doc API generation
 $ npm run doc
@@ -169,7 +169,7 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
-Open in a browser http://localhost:4200/
+Open in a browser http://localhost:4201/
 
 ***
 
