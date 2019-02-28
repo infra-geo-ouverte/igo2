@@ -1,3 +1,14 @@
+<a name="0.24.0"></a>
+# [0.24.0](https://github.com/infra-geo-ouverte/igo2/compare/0.23.2...0.24.0) (2019-02-28)
+
+
+### Features
+
+* **igo2:** upgrade igo2-lib ([7f6affa](https://github.com/infra-geo-ouverte/igo2/commit/7f6affa))
+* **loading:** improve loading spinner ([e62c3b6](https://github.com/infra-geo-ouverte/igo2/commit/e62c3b6))
+
+
+
 <a name="0.23.2"></a>
 ## [0.23.2](https://github.com/infra-geo-ouverte/igo2/compare/0.23.1...0.23.2) (2019-02-28)
 
