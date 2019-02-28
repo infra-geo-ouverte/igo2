@@ -1,6 +1,6 @@
 {
-  "uri": "_default",
-  "title": "Default Context",
+  "uri": "mapOverlay",
+  "title": "mapOverlay Demo",
   "map": {
     "view": {
       "projection": "EPSG:3857",
