@@ -53,6 +53,7 @@ import { PortalComponent } from './portal.component';
     IgoFeatureModule,
     IgoImportExportModule,
     IgoQueryModule,
+    IgoContextManagerModule,
 
     FadqEditionModule,
     FadqMapModule,

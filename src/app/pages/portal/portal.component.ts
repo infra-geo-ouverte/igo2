@@ -36,6 +36,8 @@ import {
 import { ClientState } from 'src/app/modules/client/client.state';
 import { EditionState } from 'src/app/modules/edition/edition.state';
 
+import { SEARCH_TYPES } from 'src/app/modules/search/shared/search.enums';
+
 import {
   Client,
   ClientParcel,
@@ -53,6 +55,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public editor: Editor;
   public searchResult: SearchResult;
+  public searchTypes = SEARCH_TYPES;
 
   public expansionPanelExpanded = false;
   public sidenavOpened = false;
@@ -193,6 +196,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   onMapQuery(event: { features: Feature[]; event: OlMapBrowserPointerEvent }) {
     const querySearchSource = this.getQuerySearchSource();
     const results = event.features.map((feature: Feature) => {
+      // This patch removes the "square overlay. added after a query. IMO,
+      // there should be an alternative to that square or no square at all.
+      // Check the extractHtmlData of the QueryService for more info.
+      feature.geometry = undefined;
+      feature.extent = undefined;
       return featureToSearchResult(feature, querySearchSource);
     });
     const research = {
@@ -280,10 +288,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onChangeContext(context: DetailedContext) {
-    if (context === undefined) {
-      return;
-    }
-
+    if (context === undefined) { return; }
     if (this.contextLoaded) {
       this.toolState.toolbox.activateTool('mapDetails');
     }

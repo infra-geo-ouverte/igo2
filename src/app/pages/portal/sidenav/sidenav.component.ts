@@ -13,7 +13,6 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { Tool, Toolbox } from '@igo2/common';
 import { ToolState } from '@igo2/integration';
 
-
 @Component({
   selector: 'fadq-sidenav',
   templateUrl: './sidenav.component.html',

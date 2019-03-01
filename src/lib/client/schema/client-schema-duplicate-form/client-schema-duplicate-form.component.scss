@@ -4,7 +4,7 @@ mat-card {
   height: 100%;
 }
 
-mat-card-header {
+.mat-card-header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,10 +12,11 @@ mat-card-header {
   ::ng-deep .mat-card-header-text {
     margin: 0;
   }
-}
 
-mat-card-title {
-  margin-bottom: 0px;
+  .mat-card-title {
+    font-size: 16px;
+    margin-bottom: 0px;
+  }
 }
 
 .mat-card-avatar {

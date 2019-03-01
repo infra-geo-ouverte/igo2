@@ -1,11 +1,16 @@
-.igo-input-container mat-form-field {
+:host {
+  display: block;
+  padding: 10px;
+}
+
+mat-form-field {
   width: 100%;
-}
 
-.igo-input-container mat-form-field mat-icon {
-  margin: 0 3px;
-}
+  mat-icon {
+    margin: 0 3px;
+  }
 
-.igo-input-container mat-form-field mat-icon:hover {
-  cursor: pointer;
+  mat-icon:hover {
+    cursor: pointer;
+  }
 }

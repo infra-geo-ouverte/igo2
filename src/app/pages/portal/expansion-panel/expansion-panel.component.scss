@@ -1,13 +1,11 @@
 @import '../portal.variables';
 
 :host {
-  @extend %box-shadowed;
-
   display: block;
   background-color: white;
 
   height: $fadq-expansion-panel-collapsed-height;
-  width: $fadq-sidenav-width;
+  width: $fadq-sidenav-width + $igo-icon-size;
 
   transition:
     height 200ms cubic-bezier(.4, 0, .2, 1),
@@ -32,6 +30,7 @@
 }
 
 :host.fadq-expansion-panel-expanded {
+  @extend %box-shadowed;
   height: $fadq-expansion-panel-height;
   width: 100%;
 }

@@ -43,3 +43,14 @@ td.text-centered,
 th.text-centered {
   text-align: center;
 }
+
+.igo-form-buttons:not(:empty) {
+  height: 36px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 36px !important;
+  padding: 0 16px !important;
+}

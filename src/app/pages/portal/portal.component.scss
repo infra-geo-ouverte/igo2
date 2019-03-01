@@ -95,8 +95,11 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
 
 /*** Footer ***/
 .fadq-footer {
+  @extend %box-shadowed;
   position: relative;
-  background-color: #efefef;
+  bottom: 0;
+  z-index: 2;
+  background-color: #fff;
   width: 100%;
   height: $fadq-footer-height;
   border-top:1px solid #ddd;
@@ -145,7 +148,7 @@ fadq-expansion-panel:not(.fadq-expansion-panel-expanded) {
 
 fadq-expansion-panel {
   fadq-editor-selector {
-    width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-icon-size} - 20px)
+    width: calc(#{$fadq-sidenav-width} - #{$igo-icon-size} - 20px)
   }
 
   igo-actionbar {
