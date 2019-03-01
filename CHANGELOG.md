@@ -1,3 +1,13 @@
+<a name="0.25.2"></a>
+## [0.25.2](https://github.com/infra-geo-ouverte/igo2/compare/0.25.1...0.25.2) (2019-03-01)
+
+
+### Bug Fixes
+
+* **demo:** Change default baseLayer for demo ([#248](https://github.com/infra-geo-ouverte/igo2/issues/248)) ([cfd4c2d](https://github.com/infra-geo-ouverte/igo2/commit/cfd4c2d))
+
+
+
 <a name="0.25.1"></a>
 ## [0.25.1](https://github.com/infra-geo-ouverte/igo2/compare/0.25.0...0.25.1) (2019-03-01)
 
