@@ -1,3 +1,14 @@
+<a name="0.25.1"></a>
+## [0.25.1](https://github.com/infra-geo-ouverte/igo2/compare/0.25.0...0.25.1) (2019-03-01)
+
+
+### Bug Fixes
+
+* **demo:** change tools order ([6ffa2d3](https://github.com/infra-geo-ouverte/igo2/commit/6ffa2d3))
+* **demo:** change tools order ([dd07645](https://github.com/infra-geo-ouverte/igo2/commit/dd07645))
+
+
+
 <a name="0.25.0"></a>
 # [0.25.0](https://github.com/infra-geo-ouverte/igo2/compare/0.24.0...0.25.0) (2019-02-28)
 
