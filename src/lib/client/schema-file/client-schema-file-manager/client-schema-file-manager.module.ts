@@ -7,8 +7,7 @@ import {
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
-
-import { FadqLibEntityTableModule } from 'src/lib/entity/entity-table/entity-table.module';
+import { IgoEntityTableModule } from '@igo2/common';
 
 import { ClientSchemaFileManagerComponent } from './client-schema-file-manager.component';
 
@@ -22,7 +21,7 @@ import { ClientSchemaFileManagerComponent } from './client-schema-file-manager.c
     MatIconModule,
     MatTooltipModule,
     IgoLanguageModule,
-    FadqLibEntityTableModule
+    IgoEntityTableModule
   ],
   exports: [
     ClientSchemaFileManagerComponent

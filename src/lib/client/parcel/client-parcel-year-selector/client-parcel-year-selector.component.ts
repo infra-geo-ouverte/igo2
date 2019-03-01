@@ -11,11 +11,7 @@ import {
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-import {
-  EntityRecord,
-  EntityStore,
-  EntityStoreController
-} from 'src/lib/entity';
+import { EntityRecord, EntityStore, EntityStoreController } from '@igo2/common';
 
 import { ClientParcelYear } from '../shared/client-parcel.interfaces';
 

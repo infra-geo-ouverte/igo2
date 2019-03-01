@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 
-import { Action, ActionbarMode } from 'src/lib/action';
-import { EntityStore } from 'src/lib/entity';
+import { Action, ActionbarMode, EntityStore } from '@igo2/common';
+import { IgoMap } from '@igo2/geo';
 
-import { IgoMap, MapAction } from '../shared';
+import { MapAction } from '../shared';
 
 /**
  * Map actions bar

@@ -8,8 +8,7 @@ import {
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
-import { IgoPanelModule, IgoFlexibleModule } from '@igo2/common';
-import { IgoContextManagerModule, IgoToolModule } from '@igo2/context';
+import { IgoPanelModule, IgoFlexibleModule, IgoToolModule } from '@igo2/common';
 
 import { SidenavComponent } from './sidenav.component';
 
@@ -23,7 +22,6 @@ import { SidenavComponent } from './sidenav.component';
     IgoLanguageModule,
     IgoPanelModule,
     IgoFlexibleModule,
-    IgoContextManagerModule,
     IgoToolModule
   ],
   exports: [SidenavComponent],

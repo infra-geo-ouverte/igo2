@@ -14,14 +14,7 @@ import { Client } from '../../shared/client.interfaces';
 })
 export class ClientInfoAddressesComponent {
 
-  @Input()
-  get client(): Client {
-    return this._client;
-  }
-  set client(value: Client) {
-    this._client = value;
-  }
-  private _client;
+  @Input() client: Client;
 
   constructor() {}
 

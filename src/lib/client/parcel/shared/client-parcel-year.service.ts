@@ -12,9 +12,7 @@ import {
   ClientParcelYearListResponseItem
 } from './client-parcel.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientParcelYearService {
 
   constructor(
@@ -25,7 +23,6 @@ export class ClientParcelYearService {
 
   getParcelYears(): Observable<ClientParcelYear[]> {
     const url = this.apiService.buildUrl(this.apiConfig.years);
-
     return this.http
       .get(url)
       .pipe(

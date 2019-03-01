@@ -9,14 +9,14 @@
   </mat-card-header>
 
   <mat-card-content>
-    <fadq-entity-table
+    <igo-entity-table
       class="table-compact"
       [store]="transaction.operations"
       [template]="tableTemplate"
       (entityClick)="onOperationClick($event)">
-    </fadq-entity-table>
+    </igo-entity-table>
 
-    <div class="fadq-form-buttons">
+    <div class="igo-form-buttons">
       <button
         mat-button
         type="button"

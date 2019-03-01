@@ -1,5 +1,5 @@
 
-<fadq-feature-form
+<igo-feature-form
   *ngIf="form$ | async as form"
   [form]="form"
   [feature]="element"
@@ -8,10 +8,10 @@
 
   <mat-tab-group [selectedIndex]="1">
     <mat-tab [label]="'geometry.geometry' | translate">
-      <fadq-form-group [group]="form.groups[0]"></fadq-form-group>
+      <igo-form-group [group]="form.groups[0]"></igo-form-group>
     </mat-tab>
     <mat-tab [label]="'informations' | translate">
-      <fadq-form-group [group]="form.groups[1]"></fadq-form-group>
+      <igo-form-group [group]="form.groups[1]"></igo-form-group>
     </mat-tab>
   </mat-tab-group>
 
@@ -31,4 +31,4 @@
     </button>
   </div>
 
-</fadq-feature-form>
+</igo-feature-form>

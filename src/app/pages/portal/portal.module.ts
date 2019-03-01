@@ -1,53 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
   MatTooltipModule,
   MatIconModule,
   MatButtonModule,
   MatMenuModule,
-  MatRadioModule,
   MatSidenavModule
 } from '@angular/material';
 
+import { IgoLanguageModule } from '@igo2/core';
 import {
+  IgoActionModule,
+  IgoEntityModule,
   IgoPanelModule,
   IgoBackdropModule,
-  IgoFlexibleModule
+  IgoToolModule
 } from '@igo2/common';
 import {
-  // IgoCatalogModule,
-  // IgoDataSourceModule,
-  IgoDownloadModule,
-  // IgoFeatureModule,
-  IgoFilterModule,
-  IgoFormModule,
+  IgoFeatureModule,
   IgoImportExportModule,
-  IgoLayerModule,
-  IgoMapModule,
-  IgoMetadataModule,
-  // IgoOverlayModule,
-  IgoPrintModule,
-  // IgoQueryModule,
-  IgoWktModule
+  IgoQueryModule
 } from '@igo2/geo';
-import { IgoContextModule } from '@igo2/context';
-import { IgoFeatureModule } from '@igo2/geo';
-import { IgoToolsModule } from '@igo2/tools';
+import { IgoContextManagerModule } from '@igo2/context';
 
-import { FadqCoreModule } from '../../modules/core/core.module';
-import { FadqCommonModule } from '../../modules/common/common.module';
-import { FadqEntityModule } from '../../modules/entity/entity.module';
 import { FadqEditionModule } from '../../modules/edition/edition.module';
-import { FadqClientModule } from '../../modules/client/client.module';
 import { FadqMapModule } from '../../modules/map/map.module';
 import { FadqSearchModule } from '../../modules/search/search.module';
-import { FadqWidgetModule } from '../../modules/widget/widget.module';
-import { FadqActionModule } from '../../modules/action/action.module';
+
 import { FadqExpansionPanelModule } from './expansion-panel/expansion-panel.module';
 import { FadqToastPanelModule } from './toast-panel/toast-panel.module';
 import { FadqSidenavModule } from './sidenav/sidenav.module';
-
-import { FadqLibQueryModule } from 'src/lib/query/query.module';
 
 import { PortalComponent } from './portal.component';
 
@@ -59,43 +42,24 @@ import { PortalComponent } from './portal.component';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    MatRadioModule,
     MatSidenavModule,
+
+    IgoLanguageModule,
+    IgoActionModule,
+    IgoEntityModule,
     IgoPanelModule,
+    IgoToolModule,
     IgoBackdropModule,
-    IgoFlexibleModule,
-
-    // IgoCatalogModule,
-    // IgoDataSourceModule,
-    IgoDownloadModule,
     IgoFeatureModule,
-    IgoFilterModule,
-    IgoFormModule,
     IgoImportExportModule,
-    IgoLayerModule,
-    IgoMapModule,
-    IgoMetadataModule,
-    // IgoOverlayModule,
-    IgoPrintModule,
-    // IgoQueryModule,
-    IgoWktModule,
+    IgoQueryModule,
 
-    IgoContextModule,
-    IgoToolsModule,
-    FadqCoreModule,
-    FadqCommonModule,
-    FadqEntityModule,
     FadqEditionModule,
-    FadqClientModule,
-    FadqExpansionPanelModule,
-    FadqToastPanelModule,
-    FadqSidenavModule,
     FadqMapModule,
     FadqSearchModule,
-    FadqWidgetModule,
-    FadqActionModule,
-
-    FadqLibQueryModule
+    FadqExpansionPanelModule,
+    FadqToastPanelModule,
+    FadqSidenavModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]

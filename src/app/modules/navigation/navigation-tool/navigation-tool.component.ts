@@ -1,15 +1,15 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { Poi, Register } from '@igo2/context';
+import { Poi } from '@igo2/context';
+import { ToolComponent } from '@igo2/common';
+import { IgoMap } from '@igo2/geo';
+import { MapState } from '@igo2/integration';
 
-import { IgoMap } from 'src/lib/map';
 import { PlaceCategory } from 'src/lib/navigation';
-
-import { MapState } from 'src/app/modules/map/map.state';
 
 import { NavigationToolOptions } from './navigation-tool.interfaces';
 
-@Register({
+@ToolComponent({
   name: 'navigation',
   title: 'tools.navigation',
   icon: 'pin_drop'

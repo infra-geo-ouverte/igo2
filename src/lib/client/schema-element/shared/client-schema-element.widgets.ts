@@ -2,7 +2,7 @@
 
 import { InjectionToken } from '@angular/core';
 
-import { Widget, WidgetService } from 'src/lib/widget';
+import { Widget, WidgetService } from '@igo2/common';
 
 import {
   ClientSchemaElementSaverComponent

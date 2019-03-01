@@ -13,9 +13,9 @@ import {
   EntityTableTemplate,
   EntityTableColumnRenderer,
   getEntityId,
-  getEntityTitle
-} from 'src/lib/entity';
-import { WidgetComponent } from 'src/lib/widget';
+  getEntityTitle,
+  WidgetComponent
+} from '@igo2/common';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';

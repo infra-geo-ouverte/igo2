@@ -7,8 +7,8 @@ import {
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
+import { IgoFormModule } from '@igo2/common';
 
-import { FadqLibFormModule } from 'src/lib/form/form.module';
 import { ClientSchemaDuplicateFormComponent } from './client-schema-duplicate-form.component';
 
 /**
@@ -21,7 +21,7 @@ import { ClientSchemaDuplicateFormComponent } from './client-schema-duplicate-fo
     MatIconModule,
     MatButtonModule,
     IgoLanguageModule,
-    FadqLibFormModule,
+    IgoFormModule,
   ],
   exports: [
     ClientSchemaDuplicateFormComponent

@@ -19,27 +19,19 @@ import { showContent } from './expansion-panel.animations';
 export class ExpansionPanelComponent {
 
   @Input()
-  get expanded(): boolean {
-    return this._expanded;
-  }
   set expanded(value: boolean) {
     if (value === this._expanded) {
       return;
     }
-
     this._expanded = value;
     this.expandedChange.emit(this._expanded);
   }
+  get expanded(): boolean {
+    return this._expanded;
+  }
   private _expanded: boolean;
 
-  @Input()
-  get backdropShown(): boolean {
-    return this._backdropShown;
-  }
-  set backdropShown(value: boolean) {
-    this._backdropShown = value;
-  }
-  private _backdropShown: boolean;
+  @Input() backdropShown: boolean;
 
   @Output() expandedChange = new EventEmitter<boolean>();
 

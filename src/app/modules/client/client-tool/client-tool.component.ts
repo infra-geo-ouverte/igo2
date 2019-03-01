@@ -1,11 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Register } from '@igo2/context';
+import { ToolComponent, EntityStore } from '@igo2/common';
 import { ConfigService } from '@igo2/core';
 
 import { substituteProperties } from 'src/lib/utils';
-import { EntityStore } from 'src/lib/entity';
 import {
   Client,
   ClientParcelDiagram,
@@ -18,7 +17,7 @@ import { ClientState } from '../client.state';
 /**
  * Tool to display a client's info
  */
-@Register({
+@ToolComponent({
   name: 'client',
   title: 'tools.client',
   icon: 'person'

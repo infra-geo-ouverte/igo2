@@ -8,9 +8,7 @@ import { ClientSchema, ClientSchemaService } from '../schema';
 
 import { Client } from './client.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientService {
 
   constructor(

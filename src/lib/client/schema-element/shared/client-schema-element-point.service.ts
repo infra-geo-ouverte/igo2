@@ -14,9 +14,7 @@ import {
   ClientSchemaElementListResponseItem
 } from './client-schema-element.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientSchemaElementPointService {
 
   constructor(

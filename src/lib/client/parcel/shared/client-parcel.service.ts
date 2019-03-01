@@ -12,9 +12,7 @@ import {
   ClientParcelListResponseItem
 } from './client-parcel.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientParcelService {
 
   constructor(

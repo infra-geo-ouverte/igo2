@@ -12,7 +12,6 @@ import {
 
 import { IgoStopPropagationModule } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
-import { IgoGeoModule } from '@igo2/geo';
 
 import { PlaceSelectorComponent } from './place-selector.component';
 
@@ -30,8 +29,7 @@ import { PlaceSelectorComponent } from './place-selector.component';
     MatAutocompleteModule,
     MatSelectModule,
     IgoStopPropagationModule,
-    IgoLanguageModule,
-    IgoGeoModule
+    IgoLanguageModule
   ],
   exports: [
     PlaceSelectorComponent

@@ -3,21 +3,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { IgoStopPropagationModule } from '@igo2/common';
+import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
+import { IgoQueryModule } from '@igo2/geo';
+import { IgoIntegrationModule } from '@igo2/integration';
 
 import { FadqCoreModule } from './modules/core/core.module';
-import { FadqAddressModule } from './modules/address/address.module';
 import { FadqClientModule } from './modules/client/client.module';
-import { FadqCatalogModule } from './modules/catalog/catalog.module';
-import { FadqEditionModule } from './modules/edition/edition.module';
-import { FadqEntityModule } from './modules/entity/entity.module';
-import { FadqFeatureModule } from './modules/feature/feature.module';
-import { FadqGeometryModule } from './modules/geometry/geometry.module';
-import { FadqLayerModule } from './modules/layer/layer.module';
-import { FadqMapModule } from './modules/map/map.module';
-import { FadqMeasureModule } from './modules/measure/measure.module';
-import { FadqNavigationModule } from './modules/navigation/navigation.module';
-import { FadqOverlayModule } from './modules/overlay/overlay.module';
 import { FadqSearchModule } from './modules/search/search.module';
 
 import { FadqPortalModule } from './pages/portal/portal.module';
@@ -30,20 +21,12 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
+    IgoSpinnerModule,
     IgoStopPropagationModule,
+    IgoQueryModule.forRoot(),
+    IgoIntegrationModule,
     FadqCoreModule,
-    FadqAddressModule,
     FadqClientModule.forRoot(),
-    FadqCatalogModule.forRoot(),
-    FadqEditionModule.forRoot(),
-    FadqEntityModule,
-    FadqFeatureModule,
-    FadqGeometryModule,
-    FadqLayerModule,
-    FadqMapModule.forRoot(),
-    FadqMeasureModule,
-    FadqNavigationModule,
-    FadqOverlayModule,
     FadqSearchModule.forRoot(),
     FadqPortalModule
   ],

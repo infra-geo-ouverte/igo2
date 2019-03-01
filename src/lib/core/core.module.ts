@@ -1,12 +1,8 @@
 import { NgModule, ModuleWithProviders, Provider } from '@angular/core';
 
-import {
-  IgoCoreModule,
-  RouteService,
-  provideConfigOptions
-} from '@igo2/core';
-import { environment } from 'src/environments/environment';
+import { IgoCoreModule, RouteService, provideConfigOptions } from '@igo2/core';
 
+import { environment } from 'src/environments/environment';
 import { FadqLibApiModule } from './api/api.module';
 
 const providers: Provider[] = [

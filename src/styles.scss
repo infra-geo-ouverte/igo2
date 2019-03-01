@@ -37,56 +37,9 @@ body {
   border-radius: 0 !important;
 }
 
-/* Add some padding to IGO forms */
-.igo-form {
-  padding: 10px;
-}
-
-.fadq-form-buttons:not(:empty) {
-  height: 36px;
-  text-align: center;
-  margin: 10px 0;
-}
-
-.fadq-actionbar-overlay {
-  min-width: inherit !important;
-  padding-top: 0;
-  padding-bottom: 0;
-
-  .mat-list {
-    padding-top: 0
-  }
-
-  .mat-list .mat-list-item.mat-list-item-with-avatar .mat-list-item-content .mat-list-text {
-    padding-right: 16px;
-  }
-
-  .mat-menu-content:not(:empty) {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-}
-
 tr.text-centered th,
 tr.text-centered td,
 td.text-centered,
 th.text-centered {
   text-align: center;
-}
-
-
-/* Map tooltips */
-.fadq-map-tooltip {
-  position: relative;
-  border-radius: 4px;
-  padding: 4px 8px;
-  white-space: nowrap;
-}
-
-.fadq-map-tooltip-measure {
-  background-color: rgba(255, 204, 51, 0.7);
-  border: 1px solid rgb(255, 205, 51);
-  color: black;
-  font-weight: bold;
-  font-size: 14px;
 }

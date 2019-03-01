@@ -1,13 +1,8 @@
 import * as olstyle from 'ol/style';
 import OlFeature from 'ol/Feature';
 
+import { EntityKey, EntityOperation, EntityOperationType } from '@igo2/common';
 import { FeatureDataSource, VectorLayer } from '@igo2/geo';
-
-import {
-  EntityKey,
-  EntityOperation,
-  EntityOperationType,
-} from 'src/lib/entity';
 
 import {
   ClientSchemaElement,

@@ -10,11 +10,7 @@ import {
   ElementRef
 } from '@angular/core';
 
-import {
-  EntityStore,
-  EntityTableTemplate
-} from 'src/lib/entity';
-import { WidgetComponent } from 'src/lib/widget';
+import { EntityStore, EntityTableTemplate, Widget, WidgetComponent } from '@igo2/common';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaFile } from '../shared/client-schema-file.interfaces';

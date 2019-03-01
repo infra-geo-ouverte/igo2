@@ -8,7 +8,7 @@ import {
 
 import { Observable } from 'rxjs';
 
-import { Widget } from 'src/lib/widget';
+import { Widget } from '@igo2/common';
 import { Editor } from 'src/lib/edition';
 
 /**

@@ -5,18 +5,15 @@ import { Observable, of, zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { LanguageService } from '@igo2/core';
-
 import {
   Form,
   FormField,
   FormFieldConfig,
   FormService
-} from 'src/lib/form';
-import { IgoMap } from 'src/lib/map';
+} from '@igo2/common';
+import { IgoMap } from '@igo2/geo';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientSchemaElementFormService {
 
   constructor(

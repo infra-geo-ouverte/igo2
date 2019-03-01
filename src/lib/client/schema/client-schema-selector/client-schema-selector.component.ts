@@ -11,14 +11,10 @@ import {
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-import {
-  EntityRecord,
-  EntityStore,
-  EntityStoreController,
-  getEntityTitle
-} from 'src/lib/entity';
+import { EntityRecord, EntityStore, EntityStoreController } from '@igo2/common';
 
 import { ClientSchema } from '../shared/client-schema.interfaces';
+import { getClientSchemaTitle } from '../shared/client-schema.utils';
 
 @Component({
   selector: 'fadq-client-schema-selector',
@@ -62,7 +58,7 @@ export class ClientSchemaSelectorComponent implements OnInit, OnDestroy {
   }
 
   getSchemaTitle(schema: ClientSchema): string {
-    return getEntityTitle(schema);
+    return getClientSchemaTitle(schema);
   }
 
   onSelectionChange(event: {value: ClientSchema}) {

@@ -1,12 +1,10 @@
 import { Injectable} from '@angular/core';
 
-import { EntityTableTemplate } from 'src/lib/entity';
+import { EntityTableTemplate } from '@igo2/common';
 
 import { ClientSchema } from './client-schema.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientSchemaTableService {
 
   constructor() {}

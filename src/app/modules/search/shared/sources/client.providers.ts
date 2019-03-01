@@ -1,6 +1,6 @@
 import { ConfigService } from '@igo2/core';
 
-import { SearchSource } from 'src/lib/search';
+import { SearchSource } from '@igo2/geo';
 
 import { ClientState } from 'src/app/modules/client/client.state';
 import { ClientSearchSource } from './client';

@@ -11,7 +11,6 @@ import {
 
 import { IgoStopPropagationModule } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
-import { IgoGeoModule } from '@igo2/geo';
 
 import { PoiSelectorComponent } from './poi-selector.component';
 
@@ -28,8 +27,7 @@ import { PoiSelectorComponent } from './poi-selector.component';
     MatInputModule,
     MatAutocompleteModule,
     IgoStopPropagationModule,
-    IgoLanguageModule,
-    IgoGeoModule
+    IgoLanguageModule
   ],
   exports: [
     PoiSelectorComponent

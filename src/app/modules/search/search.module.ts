@@ -1,23 +1,16 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { FadqLibSearchModule } from 'src/lib/search/search.module';
+import { IgoSearchModule, provideIChercheSearchSource } from '@igo2/geo';
 
-import { FadqSearchResultsToolModule } from './search-results-tool/search-results-tool.module';
 import { provideClientSearchSource } from './shared/sources/client.providers';
-import { provideMapSearchSource } from './shared/sources/map.providers';
-import {
-  provideFadqIChercheSearchResultFormatter
-} from './shared/sources/icherche';
-
-import { SearchState } from './search.state';
+import { provideFadqIChercheSearchResultFormatter } from './shared/sources/icherche';
 
 @NgModule({
   imports: [
-    FadqLibSearchModule.forRoot(),
-    FadqSearchResultsToolModule
+    IgoSearchModule.forRoot()
   ],
   exports: [
-    FadqLibSearchModule
+    IgoSearchModule
   ],
   declarations: []
 })
@@ -26,10 +19,9 @@ export class FadqSearchModule {
     return {
       ngModule: FadqSearchModule,
       providers: [
-        SearchState,
         provideFadqIChercheSearchResultFormatter(),
         provideClientSearchSource(),
-        provideMapSearchSource()
+        provideIChercheSearchSource()
       ]
     };
   }

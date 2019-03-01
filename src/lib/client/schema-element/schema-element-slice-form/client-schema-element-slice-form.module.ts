@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FadqLibFeatureFormModule } from 'src/lib/feature/feature-form/feature-form.module';
+import { IgoFeatureFormModule } from '@igo2/geo';
 
 import {
   ClientSchemaElementSliceFormComponent
@@ -13,7 +13,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    FadqLibFeatureFormModule
+    IgoFeatureFormModule
   ],
   exports: [
     ClientSchemaElementSliceFormComponent

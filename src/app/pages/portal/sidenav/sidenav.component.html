@@ -8,9 +8,8 @@
     <igo-flexible initial="100%">
 
       <div class="igo-content">
-        <igo-panel [title]="tool ? (tool.title | translate) : 'IGO'">
-          <button
-            *ngIf="tool"
+        <igo-panel [title]="title$ | async | translate">
+          <button *ngIf="toolbox.activeTool$ | async"
             mat-icon-button
             panelLeftButton
             tooltip-position="below"
@@ -20,8 +19,7 @@
             <mat-icon>arrow_back</mat-icon>
           </button>
 
-          <button
-            *ngIf="tool"
+          <button *ngIf="toolbox.activeTool$ | async"
             mat-icon-button
             panelRightButton
             tooltip-position="below"
@@ -31,15 +29,10 @@
             <mat-icon>close</mat-icon>
           </button>
 
-          <igo-toolbar
-            igoToolContext
-            igoToolbarBinding
-            [withTitle]="tool ? false : true">
-          </igo-toolbar>
-
-          <div class="igo-toolbox-container" [ngClass]="{'shown': tool ? true : false}">
-            <igo-toolbox [animate]="true"></igo-toolbox>
-          </div>
+          <igo-toolbox
+            [animate]="true"
+            [toolbox]="toolbox">
+          </igo-toolbox>
         </igo-panel>
       </div>
 

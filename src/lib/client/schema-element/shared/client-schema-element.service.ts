@@ -11,9 +11,7 @@ import { ClientSchemaElementPointService } from './client-schema-element-point.s
 import { ClientSchemaElementLineService } from './client-schema-element-line.service';
 import { ClientSchemaElementSurfaceService } from './client-schema-element-surface.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientSchemaElementService {
 
   constructor(

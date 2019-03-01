@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatTabsModule } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
-
-import { FadqLibFeatureFormModule } from 'src/lib/feature/feature-form/feature-form.module';
+import {IgoFeatureFormModule } from '@igo2/geo';
 
 import {
   ClientSchemaElementCreateFormComponent
@@ -19,7 +18,7 @@ import {
     MatButtonModule,
     MatTabsModule,
     IgoLanguageModule,
-    FadqLibFeatureFormModule
+    IgoFeatureFormModule
   ],
   exports: [
     ClientSchemaElementCreateFormComponent

@@ -1,9 +1,0 @@
-@import 'media';
-@import 'variables';
-@import '../expansion-panel/expansion-panel.variables';
-
-$fadq-sidenav-height: 100%;
-$fadq-sidenav-height-with-expansion-panel: calc(100% - #{$fadq-expansion-panel-height});
-$fadq-sidenav-width: 400px;
-$fadq-sidenav-margin-top: 50px;
-$fadq-sidenav-width-mobile: calc(100% - #{$fadq-mobile-min-space-right} - #{$igo-margin});

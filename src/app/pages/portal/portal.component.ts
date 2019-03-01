@@ -1,23 +1,41 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 
-import { Media, MediaService, MediaOrientation, ActivityService } from '@igo2/core';
+import { Media, MediaService, MediaOrientation } from '@igo2/core';
 import {
-  ContextService,
-  DetailedContext,
+  ActionbarMode,
+  EntityRecord,
+  EntityStore,
+  getEntityTitle,
   Tool,
-  ToolService
-} from '@igo2/context';
-import { Feature as IgoFeature } from '@igo2/geo';
+  Toolbox
+} from '@igo2/common';
+import { ContextService, DetailedContext } from '@igo2/context';
+import {
+  FEATURE,
+  Feature,
+  featureToSearchResult,
+  IgoMap,
+  LayerService,
+  QuerySearchSource,
+  Research,
+  SearchResult,
+  SearchSource,
+  SearchSourceService
+} from '@igo2/geo';
+import {
+  ContextState,
+  ToolState,
+  MapState,
+  SearchState
+} from '@igo2/integration';
 
-import { ActionbarMode } from 'src/lib/action';
+import { ClientState } from 'src/app/modules/client/client.state';
+import { EditionState } from 'src/app/modules/edition/edition.state';
+
 import {
   Client,
   ClientParcel,
@@ -25,34 +43,11 @@ import {
   CLIENT
 } from 'src/lib/client';
 import { Editor } from 'src/lib/edition';
-import { EntityRecord, EntityStore, getEntityTitle } from 'src/lib/entity';
-import {
-  FEATURE,
-  Feature
-} from 'src/lib/feature';
-import { IgoMap } from 'src/lib/map';
-import { Research, SearchResult, SearchSource, SearchSourceService } from 'src/lib/search';
-
-import { ClientState } from 'src/app/modules/client/client.state';
-import { EditionState } from 'src/app/modules/edition/edition.state';
-import { MapState } from 'src/app/modules/map/map.state';
-import { SearchState } from 'src/app/modules/search/search.state';
-
-import { MapSearchSource } from 'src/app/modules/search/shared/sources';
-
-import {
-  controlSlideX,
-  controlSlideY,
-  mapSlideX,
-  mapSlideY
-} from './portal.animation';
-import { igoFeatureToSearchResult } from '../../../lib/search/shared/search.utils';
 
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
-  styleUrls: ['./portal.component.scss'],
-  animations: [controlSlideX(), controlSlideY(), mapSlideX(), mapSlideY()]
+  styleUrls: ['./portal.component.scss']
 })
 export class PortalComponent implements OnInit, OnDestroy {
 
@@ -120,10 +115,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.editionState.store;
   }
 
-  get tool$(): Observable<Tool> {
-    return this.toolService.selectedTool$;
-  }
-
   get toastPanelContent(): string {
     let content;
     if (this.editor !== undefined && this.editor.hasWidget) {
@@ -158,23 +149,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     private mapState: MapState,
     private clientState: ClientState,
     private editionState: EditionState,
-    private contextService: ContextService,
-    private mediaService: MediaService,
+    private contextState: ContextState,
     private searchState: SearchState,
-    private toolService: ToolService,
-    private activityService: ActivityService,
+    private toolState: ToolState,
+    private mediaService: MediaService,
     private searchSourceService: SearchSourceService
   ) {}
 
   ngOnInit() {
-    window['IGO'] = this;
-
-    this.activity$ = this.activityService.counter$
-      .pipe(
-        debounceTime(50)
-      ).subscribe((count: number) => this.spinnerShown = count > 0);
-
-    this.context$$ = this.contextService.context$
+    this.context$$ = this.contextState.context$
       .subscribe((context: DetailedContext) => this.onChangeContext(context));
 
     this.focusedSearchResult$$ = this.searchStore.stateView
@@ -193,7 +176,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.activity$.unsubscribe();
     this.context$$.unsubscribe();
     this.searchResults$$.unsubscribe();
     this.focusedSearchResult$$.unsubscribe();
@@ -208,20 +190,18 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.toggleSidenav();
   }
 
-  onMapQuery(event: {features: IgoFeature[], event: OlMapBrowserPointerEvent}) {
-    const mapSearchSource = this.getMapSearchSource();
-    const results = event.features.map((igoFeature: IgoFeature) => {
-      igoFeature.geometry = undefined;
-      igoFeature.extent = undefined;
-      return igoFeatureToSearchResult(igoFeature, mapSearchSource);
+  onMapQuery(event: { features: Feature[]; event: OlMapBrowserPointerEvent }) {
+    const querySearchSource = this.getQuerySearchSource();
+    const results = event.features.map((feature: Feature) => {
+      return featureToSearchResult(feature, querySearchSource);
     });
     const research = {
       request: of(results),
       reverse: false,
-      source: mapSearchSource
+      source: querySearchSource
     };
     research.request.subscribe((_results: SearchResult<Feature>[]) => {
-      this.onSearch({research, results: _results});
+      this.onSearch({ research, results: _results });
     });
   }
 
@@ -240,9 +220,9 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   onSearch(event: {research: Research, results: SearchResult[]}) {
     const results = event.results;
-    const mapSearchSource = this.getMapSearchSource();
-    if (results.length === 0 && event.research.source === mapSearchSource) {
-      if (this.searchResult !== undefined && this.searchResult.source === mapSearchSource) {
+    const querySearchSource = this.getQuerySearchSource();
+    if (results.length === 0 && event.research.source === querySearchSource) {
+      if (this.searchResult !== undefined && this.searchResult.source === querySearchSource) {
         this.searchStore.state.update(this.searchResult, {focused: false, selected: false});
         this.closeToastPanel();
       }
@@ -261,7 +241,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.onSearchClient(clientResult as SearchResult<Client>);
     }
 
-    const mapResults = results.filter((result: SearchResult) => result.source === mapSearchSource);
+    const mapResults = results.filter((result: SearchResult) => result.source === querySearchSource);
     if (mapResults.length > 0) {
       this.onSearchMap(mapResults as SearchResult<Feature>[]);
     }
@@ -304,13 +284,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.toolService.setTools(context.tools);
-
     if (this.contextLoaded) {
-      const mapDetails = this.toolService.getTool('mapDetails');
-      this.toolService.selectTool(mapDetails);
+      this.toolState.toolbox.activateTool('mapDetails');
     }
-
     this.contextLoaded = true;
   }
 
@@ -319,8 +295,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.closeToastPanel();
     }
 
-    const tool = this.toolService.getTool('searchResultsFadq');
-    this.toolService.selectTool(tool);
+    this.toolState.toolbox.activateTool('searchResults');
     this.openSidenav();
   }
 
@@ -331,9 +306,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.openExpansionPanel();
     }
 
-    const tool = this.toolService.getTool('client');
-    this.toolService.selectTool(tool);
-
+    this.toolState.toolbox.activateTool('client');
     this.openSidenav();
   }
 
@@ -379,10 +352,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.editor = editor;
   }
 
-  private getMapSearchSource(): SearchSource {
+  private getQuerySearchSource(): SearchSource {
     return this.searchSourceService
       .getSources()
-      .find((searchSource: SearchSource) => searchSource instanceof MapSearchSource);
+      .find((searchSource: SearchSource) => searchSource instanceof QuerySearchSource);
   }
 
 }

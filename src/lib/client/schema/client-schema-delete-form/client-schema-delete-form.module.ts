@@ -7,8 +7,7 @@ import {
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
-
-import { FadqLibFormModule } from 'src/lib/form/form.module';
+import { IgoFormModule } from '@igo2/common';
 
 import { ClientSchemaDeleteFormComponent } from './client-schema-delete-form.component';
 
@@ -22,7 +21,7 @@ import { ClientSchemaDeleteFormComponent } from './client-schema-delete-form.com
     MatIconModule,
     MatButtonModule,
     IgoLanguageModule,
-    FadqLibFormModule,
+    IgoFormModule,
   ],
   exports: [
     ClientSchemaDeleteFormComponent

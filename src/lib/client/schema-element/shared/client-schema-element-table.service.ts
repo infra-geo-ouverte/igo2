@@ -1,12 +1,10 @@
 import { Injectable} from '@angular/core';
 
-import { EntityTableTemplate, EntityTableColumnRenderer } from 'src/lib/entity';
+import { EntityTableTemplate, EntityTableColumnRenderer } from '@igo2/common';
 
 import { ClientSchemaElement } from './client-schema-element.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientSchemaElementTableService {
 
   static elementIcons = {

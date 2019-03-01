@@ -3,9 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ApiService } from '../../core/api';
-import { Feature } from '../../feature/shared/feature.interfaces';
-import { substituteProperties } from '../../utils/str';
+import { Feature } from '@igo2/geo';
+
+import { ApiService } from 'src/lib/core';
+import { substituteProperties } from 'src/lib/utils';
 import {
   Place,
   PlaceCategory,

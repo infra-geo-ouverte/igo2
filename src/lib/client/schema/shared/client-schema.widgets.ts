@@ -2,7 +2,7 @@
 
 import { InjectionToken } from '@angular/core';
 
-import { Widget, WidgetService } from 'src/lib/widget';
+import { Widget, WidgetService } from '@igo2/common';
 
 import { ClientSchemaFileManagerComponent } from '../../schema-file/client-schema-file-manager/client-schema-file-manager.component';
 import { ClientSchemaCreateFormComponent } from '../client-schema-create-form/client-schema-create-form.component';

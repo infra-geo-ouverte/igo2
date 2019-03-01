@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { EntityRecord, EntityStore } from 'src/lib/entity';
+import { EntityRecord, EntityStore } from '@igo2/common';
 import { Editor } from 'src/lib/edition';
 
 /**
@@ -35,7 +35,7 @@ export class EditionState {
   }
 
   /**
-   * Register an editor and make it available
+   * ToolComponent an editor and make it available
    * @param editor
    */
   register(editor: Editor) {

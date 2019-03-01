@@ -1,5 +1,3 @@
-<igo-spinner [shown]="spinnerShown"></igo-spinner>
-
 <mat-sidenav-container class="fadq-main-container">
 
   <igo-backdrop
@@ -21,24 +19,22 @@
     </mat-icon>
   </button>
 
-  <fadq-search-bar
+  <igo-search-bar
     (change)="onSearchTermChange($event)"
     (search)="onSearch($event)">
-  </fadq-search-bar>
+  </igo-search-bar>
 
   <fadq-sidenav
     [ngClass]="{'fadq-sidenav-with-expansion-panel': expansionPanelExpanded}"
-    [(opened)]="sidenavOpened"
-    [tool]="tool$ | async">
+    [(opened)]="sidenavOpened">
   </fadq-sidenav>
 
   <igo-map-browser
-    fadqQueryable
+    igoQuery
     [waitForAllQueries]="true"
     igoMapContext
     igoLayerContext
     igoDropGeoFile
-    igoMapBrowserBinding
     [map]="map"
     (query)="onMapQuery($event)">
   </igo-map-browser>
@@ -58,7 +54,7 @@
 
   <ng-container expansionPanelHeader>
     <fadq-editor-selector [store]="editorStore"></fadq-editor-selector>
-    <fadq-actionbar
+    <igo-actionbar
       *ngIf="editor" 
       [store]="editor.actionStore"
       [horizontal]="true"
@@ -68,15 +64,15 @@
       [withToggleButton]="true"
       [withTitle]="actionbarWithTitle"
       [mode]="actionbarMode">
-    </fadq-actionbar>
+    </igo-actionbar>
   </ng-container>
 
-  <fadq-entity-table
+  <igo-entity-table
     *ngIf="editor"
     class="table-compact table-centered"
     [store]="editor.entityStore"
     [template]="editor.tableTemplate">
-  </fadq-entity-table>
+  </igo-entity-table>
 
 </fadq-expansion-panel>
 

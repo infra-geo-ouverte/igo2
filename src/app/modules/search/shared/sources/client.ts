@@ -3,15 +3,15 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CLIENT, Client } from 'src/lib/client';
 import {
   SearchResult,
   SearchSource,
   SearchSourceOptions,
   TextSearch
-} from 'src/lib/search';
-import { ClientData } from './client.interfaces';
+} from '@igo2/geo';
 
+import { CLIENT, Client } from 'src/lib/client';
+import { ClientData } from './client.interfaces';
 import { ClientState } from 'src/app/modules/client/client.state';
 
 /**
@@ -30,7 +30,7 @@ export class ClientSearchSource extends SearchSource implements TextSearch {
     super(options);
   }
 
-  protected getId(): string { return ClientSearchSource.id; }
+  getId(): string { return ClientSearchSource.id; }
 
   protected getDefaultOptions(): SearchSourceOptions {
     return {

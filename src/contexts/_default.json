@@ -190,10 +190,10 @@
   ],
   "toolbar": [
     "client",
-    "searchResultsFadq",
+    "searchResults",
     "contextManager",
     "mapDetails",
-    "catalogFadq",
+    "catalog",
     "navigation",
     "importExport",
     "measurer",
@@ -205,7 +205,7 @@
       "name": "client"
     },
     {
-      "name": "searchResultsFadq"
+      "name": "searchResults"
     },
     {
       "name": "contextManager"
@@ -217,7 +217,7 @@
       }
     },
     {
-      "name": "catalogFadq"
+      "name": "catalog"
     },
     {
       "name": "catalogBrowser"

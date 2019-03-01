@@ -10,15 +10,11 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityTransaction } from 'src/lib/entity';
-import { Feature, FeatureStore } from 'src/lib/feature';
-import { Form } from 'src/lib/form';
-import { IgoMap } from 'src/lib/map';
-import { WidgetComponent } from 'src/lib/widget';
+import { EntityTransaction, Form, WidgetComponent } from '@igo2/common';
+import { Feature, FeatureStore, IgoMap } from '@igo2/geo';
 
 import { ClientSchemaElement } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
-
 import { generateOperationTitle } from '../shared/client-schema-element.utils';
 
 @Component({

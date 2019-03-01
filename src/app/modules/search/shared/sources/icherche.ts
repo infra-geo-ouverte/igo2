@@ -2,12 +2,9 @@ import { Injector, Injectable, } from '@angular/core';
 
 import { LanguageService } from '@igo2/core';
 
-import { Feature } from 'src/lib/feature';
-import { SearchResult, IChercheSearchResultFormatter } from 'src/lib/search';
+import { Feature, SearchResult, IChercheSearchResultFormatter } from '@igo2/geo';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FadqIChercheSearchResultFormatter {
 
   constructor(private languageService: LanguageService) {}

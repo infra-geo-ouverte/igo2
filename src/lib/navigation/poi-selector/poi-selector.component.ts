@@ -7,8 +7,7 @@ import * as olproj from 'ol/proj';
 import * as oleasing from 'ol/easing';
 
 import { Poi } from '@igo2/context';
-
-import { IgoMap } from 'src/lib/map';
+import { IgoMap } from '@igo2/geo';
 
 
 @Component({
@@ -19,26 +18,13 @@ import { IgoMap } from 'src/lib/map';
 })
 export class PoiSelectorComponent implements OnInit {
 
-  @Input()
-  get map(): IgoMap {
-    return this._map;
-  }
-  set map(value: IgoMap) {
-    this._map = value;
-  }
-  private _map: IgoMap;
+  filteredPois$: Observable<Poi[]>;
 
-  @Input()
-  get pois(): Poi[] {
-    return this._pois;
-  }
-  set pois(value: Poi[]) {
-    this._pois = value;
-  }
-  private _pois: Poi[];
+  poiControl = new FormControl();
 
-  public filteredPois$: Observable<Poi[]>;
-  public poiControl = new FormControl();
+  @Input() map: IgoMap;
+
+  @Input() pois: Poi[];
 
   constructor() {}
 

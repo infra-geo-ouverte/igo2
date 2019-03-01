@@ -1,7 +1,10 @@
 {
+  "IGO": "IGO",
   "welcome": "Bienvenue à {{title}}",
-  "menu.close": "Fermer le menu",
-  "menu.open": "Menu",
+  "menu": {
+    "close": "Fermer le menu",
+    "open": "Menu"
+  },
   "choose...": "Choisissez...",
   "cancel": "Annuler",
   "close": "Fermer",
@@ -10,39 +13,13 @@
   "no": "Non",
   "informations": "Informations",
 
-  "measure": {
-    "area": "Superficie",
-    "length": "Distance",
-    "perimeter": "Périmètre",
-    "meters": "Mètres",
-    "kilometers": "Kilomètres",
-    "miles": "Miles",
-    "feet": "Pieds",
-    "squareMeters": "Mètres²",
-    "squareKilometers": "Kilomètres²",
-    "squareMiles": "Miles²",
-    "squareFeet": "Pieds²",
-    "hectares": "Hectares",
-    "acres": "Acres",
-    "toggleMeasure": "Mesurage",
-    "toggleMapTooltips": "Mesures sur la carte",
-    "toggleAutoUnits": "Unités automatiques",
-    "actionbar": {
-      "calculate.title": "Calculer",
-      "calculate.tooltip": "Calculer",
-      "delete.title": "Supprimer",
-      "delete.tooltip": "Supprimer"
-    }
-  },
-
   "search": {
-    "menu.tooltip": "Options de recherche",
-    "client.title": "Client",
-    "client.placeholder": "Rechercher un client",
     "feature.title": "Localisation",
     "feature.placeholder": "Rechercher une localisation",
     "layer.title": "Couche de données",
-    "layer.placeholder": "Rechercher une couche de données."
+    "layer.placeholder": "Rechercher une couche de données.",
+    "client.title": "Client",
+    "client.placeholder": "Rechercher un client"
   },
 
   "navigation": {
@@ -61,17 +38,9 @@
     }
   },
 
-  "catalog": {
-    "layer.addToMap": "Ajouter à la carte",
-    "layer.removeFromMap": "Retirer de la carte",
-    "group.addToMap": "Ajouter toutes les couches de ce groupe à la carte",
-    "group.removeFromMap": "Retirer toutes les couches de ce groupe de la carte"
-  },
-
   "tools": {
     "addressEditor": "Édition d'adresses",
     "client": "Client",
-    "measurer": "Mesurage",
     "navigation": "Zoom sur une région"
   },
 
@@ -177,13 +146,6 @@
         "tooltip": "View in Google Maps"
       }
     }
-  },
-
-  "geometry": {
-    "geometry": "Géométrie",
-    "point": "Point",
-    "line": "Ligne",
-    "polygon": "Polygone"
   },
 
   "icherche": {

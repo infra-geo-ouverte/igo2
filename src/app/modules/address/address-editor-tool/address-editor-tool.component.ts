@@ -1,11 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { Register } from '@igo2/context';
+import { ToolComponent } from '@igo2/common';
 
 /**
  * Tool to edit addresses from Adresse Quebec.
  */
-@Register({
+@ToolComponent({
   name: 'addressEditor',
   title: 'tools.addressEditor',
   icon: 'edit_location'

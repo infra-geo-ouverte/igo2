@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
+import { IgoFormModule } from '@igo2/common';
 
-import { FadqLibFormModule } from 'src/lib/form/form.module';
 import { ClientSchemaUpdateFormComponent } from './client-schema-update-form.component';
 
 /**
@@ -15,7 +15,7 @@ import { ClientSchemaUpdateFormComponent } from './client-schema-update-form.com
     CommonModule,
     MatButtonModule,
     IgoLanguageModule,
-    FadqLibFormModule
+    IgoFormModule
   ],
   exports: [
     ClientSchemaUpdateFormComponent

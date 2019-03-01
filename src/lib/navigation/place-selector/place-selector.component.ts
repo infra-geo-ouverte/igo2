@@ -1,12 +1,11 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
+
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
 
-import { Overlay } from 'src/lib/overlay';
-import { Feature, FeatureMotion } from 'src/lib/feature';
+import { Feature, FeatureMotion, Overlay } from '@igo2/geo';
 import { Place, PlaceCategory, PlaceService } from '../shared';
-import { getEntityTitle } from '../../entity';
 
 @Component({
   selector: 'fadq-place-selector',
@@ -16,42 +15,28 @@ import { getEntityTitle } from '../../entity';
 })
 export class PlaceSelectorComponent implements OnInit {
 
-  public selectedCategory: PlaceCategory;
-  public places: Place[] = [];
-  public filteredPlaces$: Observable<Place[]>;
-  public placeControl = new FormControl();
-  public overlayFeature: Feature;
+  selectedCategory: PlaceCategory;
 
-  @Input()
-  get overlay(): Overlay {
-    return this._overlay;
-  }
-  set overlay(value: Overlay) {
-    this._overlay = value;
-  }
-  private _overlay: Overlay;
+  places: Place[] = [];
 
-  @Input()
-  get categories(): PlaceCategory[] {
-    return this._categories;
-  }
-  set categories(value: PlaceCategory[]) {
-    this._categories = value;
-  }
-  private _categories: PlaceCategory[];
+  filteredPlaces$: Observable<Place[]>;
 
-  constructor(
-    private placeService: PlaceService
-  ) {}
+  placeControl = new FormControl();
+
+  overlayFeature: Feature;
+
+  @Input() overlay: Overlay;
+
+  @Input() categories: PlaceCategory[];
+
+  constructor(private placeService: PlaceService) {}
 
   ngOnInit() {
     this.filteredPlaces$ = this.placeControl.valueChanges
       .pipe(
         startWith<string | Place | undefined>(undefined),
         map(value => {
-          if (value === undefined) {
-            return '';
-          }
+          if (value === undefined) { return ''; }
           return typeof value === 'string' ? value : value.title;
         }),
         map(title => title ? this.filterPlacesByTitle(title) : this.places.slice())

@@ -3,6 +3,9 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FadqLibClientModule } from 'src/lib/client/client.module';
 import { FadqClientToolModule } from './client-tool/client-tool.module';
 
+import { ClientParcelEditor } from './shared/client-parcel.editor';
+import { ClientSchemaEditor } from './shared/client-schema.editor';
+import { ClientSchemaElementEditor } from './shared/client-schema-element.editor';
 import { ClientState } from './client.state';
 
 @NgModule({
@@ -20,7 +23,9 @@ export class FadqClientModule {
     return {
       ngModule: FadqClientModule,
       providers: [
-        ClientState
+        ClientParcelEditor,
+        ClientSchemaEditor,
+        ClientSchemaElementEditor
       ]
     };
   }

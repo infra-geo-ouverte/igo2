@@ -7,8 +7,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
-import { EntityStore } from 'src/lib/entity';
-import { WidgetComponent } from 'src/lib/widget';
+import { EntityStore, WidgetComponent } from '@igo2/common';
 
 import { ClientSchema } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';

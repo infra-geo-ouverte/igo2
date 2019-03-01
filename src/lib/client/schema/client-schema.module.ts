@@ -19,7 +19,6 @@ import {
   provideClientSchemaFileManagerWidget
 } from './shared/client-schema.widgets';
 import { ClientSchemaTableService } from './shared/client-schema-table.service';
-import { ClientSchemaEditorService } from './shared/client-schema-editor.service';
 
 @NgModule({
   imports: [
@@ -46,8 +45,7 @@ export class FadqLibClientSchemaModule {
         provideClientSchemaDeleteWidget(),
         provideClientSchemaDuplicateWidget(),
         provideClientSchemaFileManagerWidget(),
-        ClientSchemaTableService,
-        ClientSchemaEditorService
+        ClientSchemaTableService
       ]
     };
   }

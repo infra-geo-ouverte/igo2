@@ -1,4 +1,4 @@
-import { Feature } from 'src/lib/feature';
+import { Feature } from '@igo2/geo';
 
 export interface ClientParcelApiConfig {
   list: string;

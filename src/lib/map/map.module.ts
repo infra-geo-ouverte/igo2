@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { IgoMapModule } from '@igo2/geo';
 import { FadqLibMapActionbarModule } from './map-actionbar/map-actionbar.module';
 
 @NgModule({
@@ -9,6 +10,7 @@ import { FadqLibMapActionbarModule } from './map-actionbar/map-actionbar.module'
     FadqLibMapActionbarModule
   ],
   exports: [
+    IgoMapModule,
     FadqLibMapActionbarModule
   ],
   declarations: []

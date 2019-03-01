@@ -1,5 +1,4 @@
-import { Action } from 'src/lib/action';
-import { EntityStore, EntityTableTemplate } from 'src/lib/entity';
+import { Action, EntityStore, EntityTableTemplate } from '@igo2/common';
 
 export interface EditorConfig {
   id: string;

@@ -15,9 +15,7 @@ import {
   ClientSchemaFileCreateResponse
 } from './client-schema-file.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientSchemaFileService {
 
   constructor(

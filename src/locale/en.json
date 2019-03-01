@@ -1,7 +1,10 @@
 {
+  "IGO": "IGO",
   "welcome": "Welcome to {{title}}",
-  "menu.close": "Close Menu",
-  "menu.open": "Open Menu",
+  "menu": {
+    "close": "Close Menu",
+    "open": "Open Menu"
+  },
   "choose...": "Choose...",
   "cancel": "Cancel",
   "close": "Close",
@@ -10,39 +13,13 @@
   "no": "No",
   "informations": "Informations",
 
-  "measure": {
-    "area": "Area",
-    "length": "Length",
-    "perimeter": "Perimeter",
-    "meters": "Meters",
-    "kilometers": "Kilometers",
-    "miles": "Miles",
-    "feet": "Feet",
-    "squareMeters": "Meters²",
-    "squareKilometers": "Kilometers²",
-    "squareMiles": "Miles²",
-    "squareFeet": "Feet²",
-    "hectares": "Hectares",
-    "acres": "Acres",
-    "toggleMeasure": "Measure",
-    "toggleMapTooltips": "Show map tooltips",
-    "toggleAutoUnits": "Auto Units",
-    "actionbar": {
-      "calculate.title": "Calculate",
-      "calculate.tooltip": "Calculate",
-      "delete.title": "Delete",
-      "delete.tooltip": "Delete"
-    }
-  },
-
   "search": {
-    "menu.tooltip": "Search Options",
-    "client.title": "Client",
-    "client.placeholder": "Search for a  client",
     "feature.title": "Localisation",
     "feature.placeholder": "Search for a place localisation",
     "layer.title": "Layer",
-    "layer.placeholder": "Search for a layer"
+    "layer.placeholder": "Search for a layer",
+    "client.title": "Client",
+    "client.placeholder": "Search for a  client"
   },
 
   "navigation": {
@@ -61,17 +38,9 @@
     }
   },
 
-  "catalog": {
-    "layer.addToMap": "Add to map",
-    "layer.removeFromMap": "Remove from map",
-    "group.addToMap": "Add all layers from this group to map",
-    "group.removeFromMap": "Remove all layers from this group to map"
-  },
-
   "tools": {
     "addressEditor": "Edit Addresses",
     "client": "Client",
-    "measurer": "Measure",
     "navigation": "Navigation"
   },
 
@@ -177,13 +146,6 @@
         "tooltip": "View in Google Maps"
       }
     }
-  },
-
-  "geometry": {
-    "geometry": "Geometry",
-    "point": "Point",
-    "line": "Line",
-    "polygon": "Polygon"
   },
 
   "icherche": {

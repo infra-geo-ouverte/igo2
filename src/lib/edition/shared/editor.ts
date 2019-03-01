@@ -1,13 +1,13 @@
 import { Subscription, BehaviorSubject, Subject } from 'rxjs';
 import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
-import { Action } from 'src/lib/action';
 import {
+  Action,
   EntityRecord,
   EntityStore,
-  EntityTableTemplate
-} from 'src/lib/entity';
-import { Widget } from 'src/lib/widget';
+  EntityTableTemplate,
+  Widget
+} from '@igo2/common';
 
 import { EditorConfig } from './edition.interfaces';
 

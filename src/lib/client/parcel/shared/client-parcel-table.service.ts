@@ -1,12 +1,10 @@
 import { Injectable} from '@angular/core';
 
-import { EntityTableTemplate } from 'src/lib/entity';
+import { EntityTableTemplate } from '@igo2/common';
 
 import { ClientParcel } from './client-parcel.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientParcelTableService {
 
   constructor() {}

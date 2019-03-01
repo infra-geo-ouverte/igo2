@@ -16,7 +16,7 @@ import {
   EntityStore,
   EntityStoreController,
   getEntityTitle
-} from 'src/lib/entity';
+} from '@igo2/common';
 
 import { Editor } from '../shared';
 

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 
 import { ConfigService, LanguageService } from '@igo2/core';
+import { FormService } from '@igo2/common';
 
 import { ApiService } from 'src/lib/core/api';
-import { FormService } from 'src/lib/form';
 
 import { ClientSchemaService } from './client-schema.service';
 import { ClientSchemaFormService } from './client-schema-form.service';

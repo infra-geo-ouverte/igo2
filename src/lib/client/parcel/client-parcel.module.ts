@@ -6,7 +6,6 @@ import {
   provideClientParcelYearService
 } from './shared/client-parcel.providers';
 import { ClientParcelTableService } from './shared/client-parcel-table.service';
-import { ClientParcelEditorService } from './shared/client-parcel-editor.service';
 
 import { FadqLibClientParcelLegendModule } from './client-parcel-legend/client-parcel-legend.module';
 import { FadqLibClientParcelDiagramSelectorModule } from './client-parcel-diagram-selector/client-parcel-diagram-selector.module';
@@ -33,8 +32,7 @@ export class FadqLibClientParcelModule {
       providers: [
         provideClientParcelService(),
         provideClientParcelYearService(),
-        ClientParcelTableService,
-        ClientParcelEditorService
+        ClientParcelTableService
       ]
     };
   }

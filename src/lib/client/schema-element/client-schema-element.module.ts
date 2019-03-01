@@ -28,7 +28,6 @@ import {
 } from './shared/client-schema-element.widgets';
 import { ClientSchemaElementFormService } from './shared/client-schema-element-form.service';
 import { ClientSchemaElementTableService } from './shared/client-schema-element-table.service';
-import { ClientSchemaElementEditorService } from './shared/client-schema-element-editor.service';
 
 @NgModule({
   imports: [
@@ -56,9 +55,7 @@ export class FadqLibClientSchemaElementModule {
         provideClientSchemaElementUpdateWidget(),
         provideClientSchemaElementSliceWidget(),
         ClientSchemaElementFormService,
-        ClientSchemaElementTableService,
-
-        ClientSchemaElementEditorService
+        ClientSchemaElementTableService
       ]
     };
   }

@@ -2,6 +2,16 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { skip, tap } from 'rxjs/operators';
 
+import { EntityRecord, EntityStore, EntityTransaction } from '@igo2/common';
+import {
+  FeatureStore,
+  FeatureStoreStrategy,
+  FeatureStoreLoadingStrategy,
+  FeatureStoreSelectionStrategy,
+  moveToFeatures
+} from '@igo2/geo';
+import { MapState } from '@igo2/integration';
+
 import {
   Client,
   ClientService,
@@ -10,20 +20,17 @@ import {
   ClientParcelYear,
   ClientParcelYearService,
   ClientSchema,
-  ClientParcelEditorService,
-  ClientSchemaEditorService,
   ClientSchemaElement,
   ClientSchemaElementService,
-  ClientSchemaElementEditorService
+  createParcelLayer,
+  createSchemaElementLayer,
+  createClientDefaultSelectionStyle
 } from 'src/lib/client';
-import {
-  EntityRecord,
-  EntityStore,
-  EntityTransaction
-} from 'src/lib/entity';
-import { FeatureStore, moveToFeatures } from 'src/lib/feature';
 
 import { EditionState } from '../edition/edition.state';
+import { ClientParcelEditor } from './shared/client-parcel.editor';
+import { ClientSchemaEditor } from './shared/client-schema.editor';
+import { ClientSchemaElementEditor } from './shared/client-schema-element.editor';
 
 /**
  * Service that holds the state of the client module
@@ -66,7 +73,7 @@ export class ClientState implements OnDestroy {
   private _parcelYearStore: EntityStore<ClientParcelYear>;
 
   /** Parcel editor */
-  get parcelEditor(): ClientParcelEditorService { return this.clientParcelEditorService; }
+  get parcelEditor(): ClientParcelEditor { return this.clientParcelEditor; }
 
   /** Store that holds the parcels of the active client */
   get parcelStore(): FeatureStore<ClientParcel> {
@@ -74,8 +81,8 @@ export class ClientState implements OnDestroy {
   }
 
   /** Schema editor */
-  get schemaEditor(): ClientSchemaEditorService {
-    return this.clientSchemaEditorService;
+  get schemaEditor(): ClientSchemaEditor {
+    return this.clientSchemaEditor;
   }
 
   /** Store that holds the schemas of the active client */
@@ -84,8 +91,8 @@ export class ClientState implements OnDestroy {
   }
 
   /** Schema elements editor */
-  get schemaElementEditor(): ClientSchemaElementEditorService {
-    return this.clientSchemaElementEditorService;
+  get schemaElementEditor(): ClientSchemaElementEditor {
+    return this.clientSchemaElementEditor;
   }
 
   /** Store that holds the elements of the active schema */
@@ -96,11 +103,12 @@ export class ClientState implements OnDestroy {
   constructor(
     private clientService: ClientService,
     private clientParcelYearService: ClientParcelYearService,
-    private clientParcelEditorService: ClientParcelEditorService,
-    private clientSchemaEditorService: ClientSchemaEditorService,
     private clientSchemaElementService: ClientSchemaElementService,
-    private clientSchemaElementEditorService: ClientSchemaElementEditorService,
-    private editionState: EditionState
+    private clientParcelEditor: ClientParcelEditor,
+    private clientSchemaEditor: ClientSchemaEditor,
+    private clientSchemaElementEditor: ClientSchemaElementEditor,
+    private editionState: EditionState,
+    private mapState: MapState
   ) {
     this._diagramStore = new EntityStore<ClientParcelDiagram>([]);
     this._parcelYearStore = new EntityStore<ClientParcelYear>([]);
@@ -129,6 +137,7 @@ export class ClientState implements OnDestroy {
         this.onSelectSchema(schema);
       });
 
+    this.addClientLayers();
     this.loadParcelYears();
   }
 
@@ -268,6 +277,41 @@ export class ClientState implements OnDestroy {
           this.parcelYearStore.state.update(current, {selected: true});
         }
       });
+  }
+
+  /**
+   * Add all kinds of layers related to a client;
+   * parcels, schema points, schema lines, schema surfaces.
+   * Also bind them to a feature store and initialize the loading and selection strategies.
+   */
+  private addClientLayers() {
+    const map = this.mapState.map;
+
+    const clientParcelLayer = createParcelLayer();
+    map.addLayer(clientParcelLayer, false);
+    this.parcelStore.bindLayer(clientParcelLayer);
+
+    const clientSchemaElementLayer = createSchemaElementLayer();
+    map.addLayer(clientSchemaElementLayer, false);
+    this.schemaElementStore.bindLayer(clientSchemaElementLayer);
+
+    const parcelLoadingStrategy = new FeatureStoreLoadingStrategy();
+    this.parcelStore.addStrategy(parcelLoadingStrategy);
+
+    const schemaElementLoadingStrategy = new FeatureStoreLoadingStrategy();
+    this.schemaElementStore.addStrategy(schemaElementLoadingStrategy);
+    schemaElementLoadingStrategy.activate();
+
+    const sharedSelectionStrategy = new FeatureStoreSelectionStrategy({
+      map: map,
+      style: createClientDefaultSelectionStyle()
+    });
+    this.parcelStore.addStrategy(sharedSelectionStrategy);
+    this.schemaElementStore.addStrategy(sharedSelectionStrategy);
+
+    parcelLoadingStrategy.activate();
+    schemaElementLoadingStrategy.activate();
+    sharedSelectionStrategy.activate();
   }
 
 }

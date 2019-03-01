@@ -2,35 +2,35 @@
 <form class="igo-form">
 
   <div class="igo-input-container">
-      <mat-form-field>
-        <input
-          matInput
-          type="text"
-          [placeholder]="'navigation.poiSelector.poi.placeholder' | translate"
-          [matAutocomplete]="auto"
-          [formControl]="poiControl">
-        <mat-autocomplete
-          #auto="matAutocomplete"
-          [displayWith]="getPoiTitle"
-          (optionSelected)="onPoiSelect($event.option.value)">
-          <mat-option *ngFor="let poi of filteredPois$ | async" [value]="poi">
-            {{ poi.title }}
-          </mat-option>
-        </mat-autocomplete>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        [placeholder]="'navigation.poiSelector.poi.placeholder' | translate"
+        [matAutocomplete]="auto"
+        [formControl]="poiControl">
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="getPoiTitle"
+        (optionSelected)="onPoiSelect($event.option.value)">
+        <mat-option *ngFor="let poi of filteredPois$ | async" [value]="poi">
+          {{ poi.title }}
+        </mat-option>
+      </mat-autocomplete>
 
-        <ng-container matSuffix *ngIf="poiControl.value">
-          <mat-icon
-            igoStopPropagation
-            (click)="onClearButtonClick()">
-            clear
-          </mat-icon>
-          <mat-icon
-            igoStopPropagation
-            (click)="onZoomButtonClick()">
-            search
-          </mat-icon>
-        </ng-container>
-      </mat-form-field>
+      <ng-container matSuffix *ngIf="poiControl.value">
+        <mat-icon
+          igoStopPropagation
+          (click)="onClearButtonClick()">
+          clear
+        </mat-icon>
+        <mat-icon
+          igoStopPropagation
+          (click)="onZoomButtonClick()">
+          search
+        </mat-icon>
+      </ng-container>
+    </mat-form-field>
   </div>
   
 </form>

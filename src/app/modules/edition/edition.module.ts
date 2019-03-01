@@ -13,13 +13,4 @@ import { EditionState } from './edition.state';
   ],
   declarations: []
 })
-export class FadqEditionModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: FadqEditionModule,
-      providers: [
-        EditionState
-      ]
-    };
-  }
-}
+export class FadqEditionModule {}

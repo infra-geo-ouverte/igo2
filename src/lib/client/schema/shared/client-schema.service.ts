@@ -17,9 +17,7 @@ import {
   ClientSchemaDuplicateResponse
 } from './client-schema.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientSchemaService {
 
   constructor(
@@ -92,15 +90,12 @@ export class ClientSchemaService {
     return listItems.map(listItem => this.listItemToSchema(listItem));
   }
 
-  private listItemToSchema(listItem: ClientSchemaListResponseItem) {
+  private listItemToSchema(listItem: ClientSchemaListResponseItem): ClientSchema {
     const type = listItem.typeSchema.code;
-    return Object.assign({
-      meta: {
-        title: `${listItem.id} - ${type} - ${listItem.annee}`
-      },
+    return Object.assign({}, listItem, {
       type: type,
       descriptionType: listItem.typeSchema.descriptionAbregeeFrancais,
-    }, listItem);
+    });
   }
 
   private extractSchemaFromCreateResponse(
@@ -108,13 +103,10 @@ export class ClientSchemaService {
   ): ClientSchema {
     const data = response.data;
     const type = data.typeSchema.code;
-    return Object.assign({
-      meta: {
-        title: `${data.id} - ${type} - ${data.annee}`
-      },
-      type: type,
+    return Object.assign({}, data, {
+      type,
       descriptionType: data.typeSchema.descriptionAbregeeFrancais,
-    }, data);
+    });
   }
 
   private extractSchemaFromUpdateResponse(
@@ -122,13 +114,10 @@ export class ClientSchemaService {
   ): ClientSchema {
     const data = response.data;
     const type = data.typeSchema.code;
-    return Object.assign({
-      meta: {
-        title: `${data.id} - ${type} - ${data.annee}`
-      },
-      type: type,
+    return Object.assign({}, data, {
+      type,
       descriptionType: data.typeSchema.descriptionAbregeeFrancais,
-    }, data);
+    });
   }
 
   private extractSchemaFromDuplicateResponse(
@@ -136,12 +125,9 @@ export class ClientSchemaService {
   ): ClientSchema {
     const data = response.data;
     const type = data.typeSchema.code;
-    return Object.assign({
-      meta: {
-        title: `${data.id} - ${type} - ${data.annee}`
-      },
-      type: type,
+    return Object.assign({}, data, {
+      type,
       descriptionType: data.typeSchema.descriptionAbregeeFrancais,
-    }, data);
+    });
   }
 }

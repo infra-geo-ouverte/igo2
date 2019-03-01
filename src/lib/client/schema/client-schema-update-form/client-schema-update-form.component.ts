@@ -10,9 +10,7 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityStore } from 'src/lib/entity';
-import { Form } from 'src/lib/form';
-import { WidgetComponent } from 'src/lib/widget';
+import { EntityStore, Form, WidgetComponent } from '@igo2/common';
 
 import { ClientSchema, ClientSchemaUpdateData } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';

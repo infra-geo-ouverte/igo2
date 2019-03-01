@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-MatIconModule,
+  MatIconModule,
   MatButtonModule
 } from '@angular/material';
 

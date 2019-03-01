@@ -16,17 +16,14 @@ import {
 export class ExpansionPanelHeaderComponent {
 
   @Input()
-  get expanded(): boolean {
-    return this._expanded;
-  }
   set expanded(value: boolean) {
     if (value === this._expanded) {
       return;
     }
-
     this._expanded = value;
     this.expandedChange.emit(this._expanded);
   }
+  get expanded(): boolean { return this._expanded; }
   private _expanded: boolean;
 
   @Output() expandedChange = new EventEmitter<boolean>();

@@ -21,9 +21,6 @@ import { showContent } from './toast-panel.animations';
 export class ToastPanelComponent {
 
   @Input()
-  get opened(): boolean {
-    return this._opened;
-  }
   set opened(value: boolean) {
     if (value === this._opened) {
       return;
@@ -31,25 +28,12 @@ export class ToastPanelComponent {
     this._opened = value;
     this.openedChange.emit(this._opened);
   }
+  get opened(): boolean { return this._opened; }
   private _opened: boolean;
 
-  @Input()
-  get title(): string {
-    return this._title;
-  }
-  set title(value: string) {
-    this._title = value;
-  }
-  private _title: string;
+  @Input() title: string;
 
-  @Input()
-  get withHeader(): boolean {
-    return this._withHeader;
-  }
-  set withHeader(value: boolean) {
-    this._withHeader = value;
-  }
-  private _withHeader: boolean;
+  @Input() withHeader: boolean;
 
   @Output() openedChange = new EventEmitter<boolean>();
 

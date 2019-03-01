@@ -7,9 +7,7 @@ import {
 } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
-
-import { FadqLibFormModule } from 'src/lib/form/form.module';
-import { FadqLibEntityTableModule } from 'src/lib/entity/entity-table/entity-table.module';
+import { IgoEntityTableModule, IgoFormModule } from '@igo2/common';
 
 import {
   ClientSchemaElementSaverComponent
@@ -25,8 +23,8 @@ import {
     MatIconModule,
     MatButtonModule,
     IgoLanguageModule,
-    FadqLibFormModule,
-    FadqLibEntityTableModule
+    IgoFormModule,
+    IgoEntityTableModule
   ],
   exports: [
     ClientSchemaElementSaverComponent

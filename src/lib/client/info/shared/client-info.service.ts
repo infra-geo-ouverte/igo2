@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,9 +12,7 @@ import {
   ClientInfoGetResponseData
 } from './client-info.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientInfoService {
 
   constructor(

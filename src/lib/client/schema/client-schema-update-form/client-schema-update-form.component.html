@@ -1,10 +1,10 @@
-<fadq-form
+<igo-form
   *ngIf="form$ | async as form"
   [form]="form"
   [formData]="schema"
   (submitForm)="onSubmit($event)">
 
-  <fadq-form-group [group]="form.groups[0]"></fadq-form-group>
+  <igo-form-group [group]="form.groups[0]"></igo-form-group>
 
   <div formButtons>
     <button
@@ -22,4 +22,4 @@
     </button>
   </div>
   
-</fadq-form>
+</igo-form>

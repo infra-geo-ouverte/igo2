@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
-
-import { FadqLibFormModule } from 'src/lib/form/form.module';
+import { IgoFormModule } from '@igo2/common';
 
 import { ClientSchemaCreateFormComponent } from './client-schema-create-form.component';
 
@@ -16,7 +15,7 @@ import { ClientSchemaCreateFormComponent } from './client-schema-create-form.com
     CommonModule,
     MatButtonModule,
     IgoLanguageModule,
-    FadqLibFormModule
+    IgoFormModule
   ],
   exports: [
     ClientSchemaCreateFormComponent

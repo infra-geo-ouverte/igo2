@@ -1,9 +1,24 @@
 @import 'media';
 @import 'variables';
-@import './sidenav/sidenav.variables';
+
+$fadq-mobile-min-space-right: 40px;
+$fadq-footer-height: 49px;
+
+$fadq-expansion-panel-collapsed-height: 48px;
+$fadq-expansion-panel-collapsed-width: 52px;
+$fadq-expansion-panel-height: 281px;
+$fadq-expansion-panel-header-height: $fadq-expansion-panel-collapsed-height;
+
+$fadq-sidenav-height: 100%;
+$fadq-sidenav-height-with-expansion-panel: calc(100% - #{$fadq-expansion-panel-height});
+$fadq-sidenav-width: 400px;
+$fadq-sidenav-margin-top: 50px;
+$fadq-sidenav-width-mobile: calc(100% - #{$fadq-mobile-min-space-right} - #{$igo-margin});
+
+$fadq-toast-panel-collapsed-height: 48px;
+$fadq-toast-panel-max-height: 329px;
+$fadq-toast-panel-width: 30%;
 
 $search-bar-left: calc(#{$igo-icon-size} + #{$igo-margin});
 $search-bar-width: calc(#{$fadq-sidenav-width} - #{$search-bar-left} - (2 * #{$igo-margin}));
 $search-bar-width-mobile: calc(100% - #{$fadq-mobile-min-space-right} - #{$search-bar-left} - (3 * #{$igo-margin}));
-
-$fadq-footer-height: 48px;

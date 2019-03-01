@@ -47,7 +47,7 @@ igo-map-browser {
 
 
 /*** Search bar ***/
-fadq-search-bar {
+igo-search-bar {
   background-color: $fadq-background-color;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   position: absolute;
@@ -148,7 +148,7 @@ fadq-expansion-panel {
     width: calc(#{$fadq-sidenav-width} - 2 * #{$igo-icon-size} - 20px)
   }
 
-  fadq-actionbar {
+  igo-actionbar {
     margin-left: 5px;
   }
 }

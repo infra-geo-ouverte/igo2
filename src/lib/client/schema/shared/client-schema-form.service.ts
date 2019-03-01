@@ -6,8 +6,6 @@ import { Observable, of, zip } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { LanguageService } from '@igo2/core';
-
-import { ApiService } from 'src/lib/core/api';
 import {
   Form,
   FormField,
@@ -15,7 +13,9 @@ import {
   FormFieldSelectChoice,
   FormFieldSelectInputs,
   FormService
-} from 'src/lib/form';
+} from '@igo2/common';
+
+import { ApiService } from 'src/lib/core/api';
 
 import {
   ClientSchemaApiConfig,
@@ -23,9 +23,7 @@ import {
   ClientSchemaEtatChoicesResponse
 } from './client-schema.interfaces';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ClientSchemaFormService {
 
   private clientSchemaTypeChoices: FormFieldSelectChoice[];
