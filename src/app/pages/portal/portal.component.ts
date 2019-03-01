@@ -46,7 +46,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     controls: {
       scaleLine: true,
       attribution: {
-        collapsed: false
+        collapsed: true
       }
     }
   });
