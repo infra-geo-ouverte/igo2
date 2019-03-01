@@ -4,29 +4,14 @@
   "map": {
     "view": {
       "projection": "EPSG:32198",
-      "center": [-72, 46],
+      "center": [-68, 48],
       "zoom": 3
     }
   },
   "layers": [
     {
-      "title": "Gouvernmement du Québec",
-      "baseLayer": true,
-      "visible": false,
-      "sourceOptions": {
-        "type": "wmts",
-        "optionsFromCapabilities": true,
-        "url": "/wmts",
-        "layer": "carte_gouv_qc",
-        "matrixSet": "LAMBERT",
-        "params": {
-          "version": "1.0.0"
-        }
-      }
-    },
-    {
       "title": "Images les plus récentes",
-      "baseLayer": false,
+      "baseLayer": true,
       "visible": true,
       "sourceOptions": {
         "type": "wmts",
@@ -38,22 +23,186 @@
           "version": "1.0.0"
         }
       }
+    },
+    {
+      "title": "Gouvernmement du Québec",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "type": "wmts",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_wmts",
+        "layer": "carte_gouv_qc",
+        "matrixSet": "LAMBERT",
+        "params": {
+          "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "title": "Zones maïs-grain 2016 à aujourd'hui",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "LOCVDS_ZONA_COLL_MGR",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "LOCVDS_ZONA_COLL_MGR",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Zones céréales maïs fourrager oléagineux 2016 à aujourd'hui",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "LOCVDS_ZONA_COLL",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "LOCVDS_ZONA_COLL",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Stations météo foin (année courante)",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "SMDVSP_STAT_METE_ASSU_AN_COUR",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "SMDVSP_STAT_METE_ASSU_AN_COUR",
+          "srs": "EPSG:32198"
+        },
+        "queryFormat": "html",
+        "queryHtmlTarget": "innerhtml"
+      }
+    },
+    {
+      "title": "Stations météo foin (année précédente)",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "SMDVSP_STAT_METE_ASSU_AN_PREC",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "SMDVSP_STAT_METE_ASSU_AN_PREC",
+          "srs": "EPSG:32198"
+        },
+        "queryFormat": "html",
+        "queryHtmlTarget": "innerhtml"
+      }
+    },
+    {
+      "title": "Territoires de centre de services",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "LOCVDS_CENT_SERV",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "LOCVDS_CENT_SERV",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Municipalités",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "SDA_MUNIC_S",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "SDA_MUNIC_S",
+          "srs": "EPSG:32198"
+        },
+        "queryable": false
+      }
+    },
+    {
+      "title": "Cadastre rénové",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "layer": "CADASTRE_RENO_MERN",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "CADASTRE_RENO_MERN",
+          "srs": "EPSG:32198"
+        }
+      }
+    },
+    {
+      "title": "Compilation cadastrale",
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_compil_cadas",
+        "layer": "compil_cadas",
+        "style": "default",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "compil_cadas",
+          "srs": "EPSG:32198"
+        }
+      }
     }
   ],
   "toolbar": [
-    "clientInfo",
+    "client",
     "searchResults",
     "contextManager",
     "mapDetails",
     "catalog",
     "navigation",
     "importExport",
+    "measurer",
     "print",
     "addressEditor"
   ],
   "tools": [
     {
-      "name": "clientInfo"
+      "name": "client"
     },
     {
       "name": "searchResults"
@@ -71,6 +220,9 @@
       "name": "catalog"
     },
     {
+      "name": "catalogBrowser"
+    },
+    {
       "name": "navigation",
       "options": {
         "pois": [
@@ -79,6 +231,12 @@
             "x": -72,
             "y": 46,
             "zoom": 3
+          },
+          {
+            "title": "Test",
+            "x": -66.9792,
+            "y": 48.9092,
+            "zoom": 15
           }
         ],
         "categories": [
@@ -109,7 +267,7 @@
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionsAdministratives",
               "idProperty": "codeRegionAdministrative",
-              "titleProperty": "nomRegionAdministrative"
+              "title": "${nomRegionAdministrative} (${codeRegionAdministrative})"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirRegionAdministrative/${id}"
@@ -131,7 +289,7 @@
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoAnneeAssurance/2018",
               "idProperty": "idStationMeteo",
-              "titleProperty": "nomStation"
+              "title": "${noStationFADQ}-${nomStation}"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirStationMeteo/${id}"
@@ -142,22 +300,10 @@
             "collection": {
               "uri": "/igonavigation/zoom_selection/obtenirStationsMeteoDisponibles",
               "idProperty": "idStationMeteo",
-              "titleProperty": "nomStation"
+              "title": "${noStationFADQ}-${nomStation}"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirStationMeteo/${id}"
-            }
-          },
-          {
-            "title": "navigation.categories.zc1",
-            "collection": {
-              "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/1",
-              "resultsProperty": "lstZonageCollectif",
-              "idProperty": "idZonageCollectif",
-              "titleProperty": "noZone"
-            },
-            "feature": {
-              "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/1/${id}"
             }
           },
           {
@@ -166,10 +312,22 @@
               "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/2",
               "resultsProperty": "lstZonageCollectif",
               "idProperty": "idZonageCollectif",
-              "titleProperty": "noZone"
+              "title": "${regionZonage}-${noZone}"
             },
             "feature": {
               "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/2/${id}"
+            }
+          },
+          {
+            "title": "navigation.categories.zc1",
+            "collection": {
+              "uri": "/igonavigation/zoom_selection/obtenirZonagesCollectifsAnneeActive/1",
+              "resultsProperty": "lstZonageCollectif",
+              "idProperty": "idZonageCollectif",
+              "title": "${regionZonage}-${noZone}"
+            },
+            "feature": {
+              "uri": "/igonavigation/zoom_selection/obtenirZonageCollectifAnneeActive/1/${id}"
             }
           },
           {
@@ -178,10 +336,10 @@
               "uri": "/igonavigation/zoom_selection/obtenirRegionsZonageCollectif",
               "resultsProperty": "lstRegionZonageCollectif",
               "idProperty": "idRegionZonageCollectif",
-              "titleProperty": "nomRegionZonageCollectif"
+              "title": "${noRegionZonageCollectif}-${nomRegionZonageCollectif}"
             },
             "feature": {
-              "uri": "/igonavigation/zoom_selection/obtenirUneRegionZonageCollectif/${id}"
+              "uri": "/igonavigation/zoom_selection/obtenirRegionZonageCollectif/${id}"
             }
           }
         ]
@@ -189,6 +347,9 @@
     },
     {
       "name": "importExport"
+    },
+    {
+      "name": "measurer"
     },
     {
       "name": "print"

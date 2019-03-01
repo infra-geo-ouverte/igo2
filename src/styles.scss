@@ -37,20 +37,20 @@ body {
   border-radius: 0 !important;
 }
 
-/* Add some padding to IGO forms */
-.igo-form {
-  padding: 10px;
+tr.text-centered th,
+tr.text-centered td,
+td.text-centered,
+th.text-centered {
+  text-align: center;
 }
 
-.fadq-compact-menu .mat-menu-content:not(:empty) {
-  padding-top: 0;
-  padding-bottom: 0;
-
-  .mat-list {
-    padding-top: 0
-  }
+.igo-form-buttons:not(:empty) {
+  height: 36px;
+  text-align: center;
+  margin: 10px 0;
 }
 
-.fadq-no-min-width-menu {
-  min-width: inherit !important;
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 36px !important;
+  padding: 0 16px !important;
 }

@@ -1,0 +1,40 @@
+<mat-form-field>
+  <mat-select
+    placeholder="{{'navigation.placeSelector.category.placeholder' | translate}}"
+    [value]="selectedCategory"
+    (selectionChange)="onCategorySelect($event.value)">
+    <mat-option *ngFor="let category of categories" [value]="category">
+      {{category.title | translate}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="selectedCategory !== undefined">
+  <input
+    matInput
+    type="text"
+    [placeholder]="selectedCategory.title | translate"
+    [matAutocomplete]="auto"
+    [formControl]="placeControl">
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="getPlaceTitle"
+    (optionSelected)="onPlaceSelect($event.option.value)">
+    <mat-option *ngFor="let place of filteredPlaces$ | async" [value]="place">
+      {{ place.title }}
+    </mat-option>
+  </mat-autocomplete>
+
+  <ng-container matSuffix *ngIf="placeControl.value">
+    <mat-icon
+      igoStopPropagation
+      (click)="onClearButtonClick()">
+      clear
+    </mat-icon>
+    <mat-icon
+      igoStopPropagation
+      (click)="onOverlayButtonClick()">
+      search
+    </mat-icon>
+  </ng-container>
+</mat-form-field>

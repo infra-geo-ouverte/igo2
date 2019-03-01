@@ -24,16 +24,6 @@
   }
 }
 
-/*** Spinner ***/
-
-igo-spinner {
-  position: absolute;
-  top: $igo-margin;
-  right: $igo-margin;
-  z-index: 5;
-}
-
-
 /*** Message Center ***/
 igo-message-center {
   position: absolute;
@@ -45,4 +35,12 @@ igo-message-center ::ng-deep .simple-notification-wrapper {
   position: relative;
   bottom: inherit;
   right: inherit;
+}
+
+/*** Spinner ***/
+igo-spinner {
+  position: absolute;
+  top: $igo-margin;
+  right: $igo-margin;
+  z-index: 5;
 }

@@ -1,0 +1,11 @@
+<mat-form-field class="fadq-editor-selector">
+  <mat-select
+    [value]="current$ | async"
+    (selectionChange)="onSelectionChange($event)">
+    <ng-template ngFor let-editor [ngForOf]="store.view.all$() | async">
+      <mat-option [value]="editor">
+        {{getEditorTitle(editor)}}
+      </mat-option>
+    </ng-template>
+  </mat-select>
+</mat-form-field>

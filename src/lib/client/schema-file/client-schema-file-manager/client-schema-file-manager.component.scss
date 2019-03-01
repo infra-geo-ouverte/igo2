@@ -1,0 +1,28 @@
+$fadq-client-schema-file-actions-container-width: 160px;
+
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100%;
+}
+
+.fadq-client-schema-file-table-container {
+  width: 100%;
+  padding: 10px;
+}
+
+.fadq-client-schema-file-actions-container {
+  width: $fadq-client-schema-file-actions-container-width;
+  padding: 10px;
+
+  button, a {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+}
+
+#close-button {
+  text-align: center;
+}

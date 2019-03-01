@@ -1,39 +1,160 @@
 {
-  "Client": "Client",
-  "Localisation": "Localisation",
-  "DataSource": "Data Source",
-
+  "IGO": "IGO",
   "welcome": "Welcome to {{title}}",
-  "menu.close": "Close Menu",
-  "menu.open": "Open Menu",
+  "menu": {
+    "close": "Close Menu",
+    "open": "Open Menu"
+  },
   "choose...": "Choose...",
-
-  "info.title": "Informations",
+  "cancel": "Cancel",
+  "close": "Close",
+  "save": "Save",
+  "yes": "Yes",
+  "no": "No",
+  "informations": "Informations",
+  "geometry": "Geometry",
 
   "search": {
-    "searchbar.placeholder": "Search for a client, a place or a layer",
-    "menu.tooltip": "Search Options"
+    "feature.title": "Localisation",
+    "feature.placeholder": "Search for a place localisation",
+    "layer.title": "Layer",
+    "layer.placeholder": "Search for a layer",
+    "client.title": "Client",
+    "client.placeholder": "Search for a  client"
   },
 
   "navigation": {
     "placeSelector.category.placeholder": "Category",
     "poiSelector.poi.placeholder": "Point of Interest",
     "categories": {
-      "mun": "Municipalities",
+      "mun": "Municipalité",
       "mrc": "MRC",
-      "ra": "Regions",
-      "tcs": "Service Center Territories",
-      "smd": "Meteorological Station",
-      "smf": "Meteorological Station (availables)",
-      "zc1": "Zone 1",
-      "zc2": "Zone 2",
-      "rzc": "Collective Zones"
+      "ra": "Région administrative",
+      "tcs": "Centre de services",
+      "smd": "Station météo disponible",
+      "smf": "Station météo foin (année courante)",
+      "zc1": "Zone céréales maïs fourrager oléagineux",
+      "zc2": "Zone maïs-grain",
+      "rzc": "Région zonage"
     }
   },
 
   "tools": {
     "addressEditor": "Edit Addresses",
-    "clientInfo": "Client",
+    "client": "Client",
     "navigation": "Navigation"
+  },
+
+  "client": {
+    "info": {
+      "title": "Information",
+      "adresseCor": "Address",
+      "adresseExp": "Exploitation address",
+      "adressePro": "Production address"
+    },
+    "legend": {
+      "title": "Parcels legend",
+      "detexp": "Détenues exploitées",
+      "detnoexp": "Détenues non exploitées",
+      "nodetexp": "Non détenues exploitées",
+      "sel": "Sélectionnées"
+    },
+    "diagram": {
+      "placeholder": "Diagramme",
+      "all": "All"
+    },
+    "parcelYear": {
+      "placeholder": "Year"
+    },
+    "schema": {
+      "placeholder": "Schema",
+      "create": "Créer",
+      "create.tooltip": "Créer un schéma",
+      "update": "Modifier",
+      "update.tooltip": "Modifier un schéma",
+      "delete": "Supprimer",
+      "delete.tooltip": "Supprimer le schéma sélectionné",
+      "delete.confirm": "Êtes-vous certain de vouloir supprimer ce schéma?",
+      "duplicate": "Dupliquer",
+      "duplicate.tooltip": "Dupliquer le schéma sélectionné",
+      "duplicate.confirm": "Désirez-vous dupliquer ce schéma?",
+      "manageFiles": "Fichiers joints",
+      "manageFiles.tooltip": "Gérer les fichiers joints",
+      "transfer": "Transférer",
+      "transfer.tooltip": "Transférer un schéma",
+      "createMap": "Créer carte(s)",
+      "createMap.tooltip": "Créer carte(s) de structure d'entreposage"
+    },
+    "schemaFile": {
+      "add": "Ajouter",
+      "add.tooltip": "Ajouter un document",
+      "delete": "Supprimer",
+      "delete.tooltip": "Supprimer un document",
+      "download": "Télécharger",
+      "download.tooltip": "Télécharger un document"
+    },
+    "schemaElement": {
+      "create": "Créer",
+      "create.tooltip": "Créer un élément",
+      "update": "Modifier",
+      "update.tooltip": "Modifier un élément",
+      "delete": "Supprimer",
+      "delete.tooltip": "Supprimer un élément",
+      "fill": "Réinclure une surface exclue",
+      "fill.tooltip": "Réinclure une surface exclue",
+      "slice": "Couper un élément",
+      "slice.tooltip": "Couper un élément",
+      "move": "Déplacer",
+      "move.tooltip": "Déplacer un élément",
+      "save": "Sauvegarder",
+      "save.tooltip": "Sauvegarder les éléments",
+      "save.confirm": "Voulez-vous sauvegarder ces changements?"
+    }
+  },
+
+  "map": {
+    "actionbar": {
+      "baselayerswitcher": {
+        "title": "Change Base Layer",
+        "tooltip": "Change Base Layer"
+      },
+      "zoomin": {
+        "title": "Zoom In",
+        "tooltip": "Zoom In"
+      },
+      "zoomout": {
+        "title": "Zoom Out",
+        "tooltip": "Zoom Out"
+      },
+      "previousview": {
+        "title": "Previous View",
+        "tooltip": "Previous View"
+      },
+      "nextview": {
+        "title": "Next View",
+        "tooltip": "Next View"
+      },
+      "clickinteraction": {
+        "title": "Change Click Interaction",
+        "tooltip": "Change Click Interaction"
+      },
+      "geolocation": {
+        "title": "Geolocate",
+        "tooltip": "Geolocate"
+      },
+      "googleview": {
+        "title": "View in Google Maps",
+        "tooltip": "View in Google Maps"
+      }
+    }
+  },
+
+  "icherche": {
+    "code_postal": "Zip Code",
+    "municipalite": "Municipality",
+    "numero_civique": "Address",
+    "numero_civique_suffixe": "Address Suffix",
+    "rue": "Street",
+    "type": "Type"
   }
 }

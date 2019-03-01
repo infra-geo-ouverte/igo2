@@ -1,0 +1,28 @@
+<div>
+  <div class="fadq-client-tool-top-section">
+    <fadq-client-parcel-year-selector [store]="parcelYearStore"></fadq-client-parcel-year-selector>
+    <fadq-client-parcel-diagram-selector [store]="diagramStore"></fadq-client-parcel-diagram-selector>
+    <fadq-client-schema-selector [store]="schemaStore"></fadq-client-schema-selector>
+  </div>
+
+  <div *ngIf="(client$ | async) as client" class="fadq-client-tool-bottom-section">
+    <a
+      href="computeInfoLink(client)"
+      target="popup"
+      (click)="openClientInfoLink(client)">
+      {{client.info.nom}}
+    </a>
+
+    <igo-list [navigation]="false">
+      <igo-collapsible
+        [title]="'client.legend.title' | translate"
+        [collapsed]="true">
+        <fadq-client-parcel-legend></fadq-client-parcel-legend>
+      </igo-collapsible>
+
+      <igo-collapsible [title]="'client.info.title' | translate">
+        <fadq-client-info-addresses [client]="client"></fadq-client-info-addresses>
+      </igo-collapsible>
+    </igo-list>
+  </div>
+</div>

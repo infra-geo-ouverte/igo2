@@ -1,5 +1,4 @@
-@import './sidenav.variables';
-
+@import '../portal.variables';
 
 :host {
   background-color: rgb(255, 255, 255);
@@ -26,46 +25,25 @@ mat-sidenav {
   }
 }
 
-.igo-sidenav-content {
+:host.fadq-sidenav-with-expansion-panel mat-sidenav {
+  height: $fadq-sidenav-height-with-expansion-panel;
+  transition: height 280ms cubic-bezier(.4,0,.2,1);
+}
+
+.fadq-sidenav-container {
   margin-top: $fadq-sidenav-margin-top;
   height: calc(100% - #{$fadq-sidenav-margin-top});
 }
 
-.igo-sidenav-content .igo-flexible-fill .igo-container {
-  @extend %bordered-top;
-  @extend %border-box;
+.fadq-sidenav-content {
+  padding: 0 5px;
+  height: 100%;
 }
 
-/*** Toolbar and toolbox ***/
-igo-toolbar {
-  position: absolute;
-  top: 51px;
-  left: 0;
-  bottom: 0;
-}
+igo-panel {
+  height: 100%;
 
-igo-toolbar.with-title {
-  right: 0;
-  overflow: auto;
-}
-
-igo-toolbar:not(.with-title) {
-  @extend %box-shadowed;
-  overflow: hidden;
-}
-
-igo-toolbar ::ng-deep igo-list {
-  overflow: inherit;
-}
-
-.igo-toolbox-container {
-  position: absolute;
-  top: 51px;
-  bottom: 0;
-  right: 0;
-  overflow: auto;
-}
-
-.igo-toolbox-container.shown {
-  left: 48px;
+  ::ng-deep .igo-panel-content {
+    position: relative;
+  }
 }

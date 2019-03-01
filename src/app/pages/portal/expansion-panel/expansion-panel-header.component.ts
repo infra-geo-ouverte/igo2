@@ -1,36 +1,30 @@
-import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-
-import { DataSource } from './expansion-panel.component';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostBinding,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 @Component({
   selector: 'fadq-expansion-panel-header',
   templateUrl: './expansion-panel-header.component.html',
-  styleUrls: ['./expansion-panel-header.component.scss']
+  styleUrls: ['./expansion-panel-header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpansionPanelHeaderComponent {
 
   @Input()
-  get expanded(): boolean {
-    return this._expanded;
-  }
   set expanded(value: boolean) {
     if (value === this._expanded) {
-        return;
-      }
-
-      this._expanded = value;
-      this.expandedChange.emit(this._expanded);
+      return;
+    }
+    this._expanded = value;
+    this.expandedChange.emit(this._expanded);
   }
+  get expanded(): boolean { return this._expanded; }
   private _expanded: boolean;
-
-  @Input()
-  get dataSources(): DataSource[] {
-    return this._dataSources;
-  }
-  set dataSources(value: DataSource[]) {
-    this._dataSources = value;
-  }
-  private _dataSources: DataSource[];
 
   @Output() expandedChange = new EventEmitter<boolean>();
 
@@ -40,5 +34,9 @@ export class ExpansionPanelHeaderComponent {
   }
 
   constructor() {}
+
+  onToggleClick() {
+    this.expanded = !this.expanded;
+  }
 
 }

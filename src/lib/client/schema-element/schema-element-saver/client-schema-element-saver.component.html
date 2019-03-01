@@ -1,0 +1,34 @@
+
+
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon [color]="'accent'">help</mat-icon>
+    </div>
+    <mat-card-title>{{'client.schemaElement.save.confirm' | translate}}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <igo-entity-table
+      class="table-compact"
+      [store]="transaction.operations"
+      [template]="tableTemplate"
+      (entityClick)="onOperationClick($event)">
+    </igo-entity-table>
+
+    <div class="igo-form-buttons">
+      <button
+        mat-button
+        type="button"
+        (click)="onCancel()">
+        {{ 'cancel' | translate }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSubmit()">
+        {{ 'save' | translate }}
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

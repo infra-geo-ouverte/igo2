@@ -1,0 +1,34 @@
+
+<igo-feature-form
+  *ngIf="form$ | async as form"
+  [form]="form"
+  [feature]="element"
+  [store]="store"
+  (submitForm)="onSubmit($event)">
+
+  <mat-tab-group [selectedIndex]="1">
+    <mat-tab [label]="'geometry' | translate">
+      <igo-form-group [group]="form.groups[0]"></igo-form-group>
+    </mat-tab>
+    <mat-tab [label]="'informations' | translate">
+      <igo-form-group [group]="form.groups[1]"></igo-form-group>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div formButtons>
+    <button
+      mat-button
+      type="button"
+      (click)="onCancel()">
+      {{ 'cancel' | translate }}
+    </button>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!form.control.valid">
+      {{ 'save' | translate }}
+    </button>
+  </div>
+
+</igo-feature-form>

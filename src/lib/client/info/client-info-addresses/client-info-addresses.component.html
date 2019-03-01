@@ -1,0 +1,30 @@
+<div class="fadq-client-info-section fadq-client-info-addresses">
+  <table class="igo-striped">
+    <tbody>
+      <tr>
+        <td>{{'client.info.adresseCor' | translate}}</td>
+      </tr>
+      <tr>
+        <td><a href="#">{{client.info.adresseCor}}</a></td>
+      </tr>
+      <tr>
+        <td>{{'client.info.adresseExp' | translate}}</td>
+      </tr>
+      <tr>
+        <td>
+          <a *ngIf="client.info.adresseExp" href="#">{{client.info.adresseExp}}</a>
+          <ng-container *ngIf="!client.info.adresseExp">-</ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td>{{'client.info.adressePro' | translate}}</td>
+      </tr>
+      <tr>
+        <td>
+          <a *ngIf="client.info.adressePro" href="#">{{client.info.adressePro}}</a>
+          <ng-container *ngIf="!client.info.adressePro">-</ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

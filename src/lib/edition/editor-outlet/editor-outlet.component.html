@@ -1,0 +1,8 @@
+<ng-container *ngIf="widget$ | async as widget">
+  <igo-widget-outlet
+    [widget]="widget"
+    [inputs]="widgetInputs$ | async"
+    (cancel)="onWidgetCancel(widget)"
+    (complete)="onWidgetComplete(widget)">
+  </igo-widget-outlet>
+</ng-container>

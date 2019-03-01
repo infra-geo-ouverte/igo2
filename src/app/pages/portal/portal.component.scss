@@ -12,10 +12,8 @@
   position: relative;
   width: 100%;
   height: calc(100% - #{$fadq-footer-height});
-  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 50%, #ccc 50%, #ccc 75%, transparent 75%, #fff);
-  background-size: 5px 5px;
+  background-color: #efefef;
 }
-
 
 /*** Menu button ***/
 .fadq-menu-button {
@@ -40,7 +38,7 @@ igo-map-browser {
 
 
 /*** Search bar ***/
-fadq-search-bar {
+igo-search-bar {
   background-color: $fadq-background-color;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   position: absolute;
@@ -88,13 +86,17 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
 
 /*** Footer ***/
 .fadq-footer {
+  @extend %box-shadowed;
   position: relative;
-  background-color: #eee;
+  bottom: 0;
+  z-index: 2;
+  background-color: #fff;
   width: 100%;
   height: $fadq-footer-height;
+  border-top:1px solid #ddd;
 }
 
-.fadq-footer fadq-map-toolbar {
+.fadq-footer fadq-map-actionbar {
   position: absolute;
   right: 0;
 }
@@ -112,8 +114,41 @@ fadq-expansion-panel.fadq-expansion-panel-expanded {
   margin-bottom: $fadq-footer-height;
 }
 
+fadq-expansion-panel:not(.fadq-expansion-panel-expanded) {
+  @include small-screen {
+    fadq-editor-selector,
+    fadq-actionbar {
+      display: none;
+    }
+  }
+
+  @include tablet {
+    fadq-editor-selector,
+    fadq-actionbar {
+      display: none;
+    }
+  }
+
+  @include mobile {
+    fadq-editor-selector,
+    fadq-actionbar {
+      display: none;
+    }
+  }
+}
+
+fadq-expansion-panel {
+  fadq-editor-selector {
+    width: calc(#{$fadq-sidenav-width} - #{$igo-icon-size} - 20px)
+  }
+
+  igo-actionbar {
+    margin-left: 5px;
+  }
+}
+
 /*** Info panel ***/
-fadq-info-panel {
+fadq-toast-panel {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -144,7 +179,7 @@ fadq-info-panel {
   }
 }
 
-fadq-info-panel.fadq-info-panel-opened {
+fadq-toast-panel.fadq-toast-panel-opened {
   @include mobile {
     width: 100%;
     left: 0;

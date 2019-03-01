@@ -1,52 +1,19 @@
-@import './expansion-panel.variables';
+@import '../portal.variables';
 
 :host {
   display: block;
   height: $fadq-expansion-panel-header-height;
 }
 
-:host:not(.fadq-expansion-panel-header-expanded) {
-  @include small-screen {
-    .fadq-expansion-panel-header-selector,
-    .fadq-expansion-panel-toolbar-container {
-      display: none;
-    }
-  }
-
-  @include tablet {
-    .fadq-expansion-panel-header-selector,
-    .fadq-expansion-panel-toolbar-container {
-      display: none;
-    }
-  }
-
-  @include mobile {
-    .fadq-expansion-panel-header-selector,
-    .fadq-expansion-panel-toolbar-container {
-      display: none;
-    }
-  }
+:host > div {
+  display: flex;
 }
 
-mat-form-field.fadq-expansion-panel-header-selector ::ng-deep .mat-form-field-infix {
-  padding: 0;
-}
-
-mat-form-field.fadq-expansion-panel-header-selector ::ng-deep .mat-form-field-wrapper {
-  padding-bottom: 1.75em;
-}
-
-.fadq-expansion-panel-toolbar-container {
-  display: inline-block;
+.fadq-expansion-panel-trigger-container,
+.fadq-expansion-panel-content {
+  display: inline-flex;
 }
 
 button {
-  margin: 4px;
+  margin: 4px 6px;
 }
-
-#expand-toolbar-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-

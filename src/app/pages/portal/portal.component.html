@@ -2,7 +2,7 @@
 
   <igo-backdrop
     [shown]="backdropShown"
-    (click)="closeSidenav()">
+    (click)="onBackdropClick()">
   </igo-backdrop>
 
   <button
@@ -13,41 +13,84 @@
     tooltip-position="below"
     matTooltipShowDelay="500"
     [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
-    (click)="toggleSidenav()">
+    (click)="onToggleSidenavClick()">
     <mat-icon>
       <ng-container>menu</ng-container>
     </mat-icon>
   </button>
 
-  <fadq-search-bar></fadq-search-bar>
+  <igo-search-bar
+    [searchTypes]="searchTypes"
+    (change)="onSearchTermChange($event)"
+    (search)="onSearch($event)">
+  </igo-search-bar>
 
   <fadq-sidenav
-    [(opened)]="sidenavOpened"
-    [tool]="toolService.selectedTool$ | async">
+    [ngClass]="{'fadq-sidenav-with-expansion-panel': expansionPanelExpanded}"
+    [(opened)]="sidenavOpened">
   </fadq-sidenav>
 
   <igo-map-browser
     igoQuery
-    igoOverlay
+    [waitForAllQueries]="true"
     igoMapContext
     igoLayerContext
     igoDropGeoFile
-    igoMapBrowserBinding
     [map]="map"
-    (query)="handleQueryResults($event)">
+    (query)="onMapQuery($event)">
   </igo-map-browser>
 </mat-sidenav-container>
 
 <div class="fadq-footer">
-  <fadq-map-toolbar [map]="map"></fadq-map-toolbar>
+  <fadq-map-actionbar
+    [map]="map"
+    [mode]="mapActionbarMode"
+    [withTitle]="mapActionbarWithTitle">
+  </fadq-map-actionbar>
 </div>
 
 <fadq-expansion-panel
   [(expanded)]="expansionPanelExpanded"
   [backdropShown]="expansionPanelBackdropShown">
+
+  <ng-container expansionPanelHeader>
+    <fadq-editor-selector [store]="editorStore"></fadq-editor-selector>
+    <igo-actionbar
+      *ngIf="editor" 
+      [store]="editor.actionStore"
+      [horizontal]="true"
+      [xPosition]="'after'"
+      [yPosition]="'above'"
+      [overlayClass]="'fadq-expansion-panel-actionbar-overlay'"
+      [withToggleButton]="true"
+      [withTitle]="actionbarWithTitle"
+      [mode]="actionbarMode">
+    </igo-actionbar>
+  </ng-container>
+
+  <igo-entity-table
+    *ngIf="editor"
+    class="table-compact table-centered"
+    [store]="editor.entityStore"
+    [template]="editor.tableTemplate">
+  </igo-entity-table>
+
 </fadq-expansion-panel>
 
-<fadq-info-panel
-  [(opened)]="infoPanelOpened"
-  [feature]="featureService.focusedFeature$ | async">
-</fadq-info-panel>
+<fadq-toast-panel
+  [title]="toastPanelTitle"
+  [withHeader]="toastPanelContent === 'feature'"
+  [(opened)]="toastPanelOpened">
+
+  <igo-feature-details
+    *ngIf="toastPanelContent === 'feature'"
+    [feature]="searchResult.data">
+  </igo-feature-details>
+
+  <fadq-editor-outlet
+    *ngIf="toastPanelContent === 'editor'"
+    [editor]="editor"
+    (deactivateWidget)="onDeactivateEditorWidget()">
+  </fadq-editor-outlet>
+
+</fadq-toast-panel>

@@ -9,13 +9,18 @@
     "secure": false,
     "changeOrigin": true
   },
-  "/igo2/api/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+  "/ilayer/": {
+    "target": "https://geoegl.msp.gouv.qc.ca/igo2/api/layers",
     "secure": false,
     "changeOrigin": true
   },
   "/swwf": {
     "target": "http://geoservpro.fadq.qc/swwf",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/wmts": {
+    "target": "http://geoservpro.fadq.qc/mapcache/wmts",
     "secure": false,
     "changeOrigin": true
   }

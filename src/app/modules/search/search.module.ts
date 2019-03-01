@@ -1,30 +1,28 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import {
-  provideIChercheSearchSource,
-  provideNominatimSearchSource,
-  provideDataSourceSearchSource
-} from '@igo2/geo';
+import { IgoSearchModule, provideIChercheSearchSource } from '@igo2/geo';
 
-import { FadqSearchBarModule } from './search-bar/search-bar.module';
-import { FadqSearchSelectorModule } from './search-selector/search-selector.module';
+import { provideClientSearchSource } from './shared/sources/client.providers';
+import { provideFadqIChercheSearchResultFormatter } from './shared/sources/icherche';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FadqSearchBarModule,
-    FadqSearchSelectorModule
+    IgoSearchModule.forRoot()
   ],
   exports: [
-    FadqSearchBarModule,
-    FadqSearchSelectorModule
+    IgoSearchModule
   ],
-  declarations: [],
-  providers: [
-    provideNominatimSearchSource(),
-    provideIChercheSearchSource(),
-    provideDataSourceSearchSource()
-  ]
+  declarations: []
 })
-export class FadqSearchModule {}
+export class FadqSearchModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: FadqSearchModule,
+      providers: [
+        provideFadqIChercheSearchResultFormatter(),
+        provideClientSearchSource(),
+        provideIChercheSearchSource()
+      ]
+    };
+  }
+}

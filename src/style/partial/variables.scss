@@ -44,5 +44,9 @@ $fadq-border-color: rgba(0, 0, 0, .2);
   box-shadow: 2px 2px 2px 0px #dddddd;
 }
 
-/*** Portal ***/
-$fadq-mobile-min-space-right: 40px;
+%box-shadowed-top {
+  -moz-box-shadow: 0px -2px 2px 0px #dddddd;
+  -webkit-box-shadow: 0px -2px 2px 0px #dddddd;
+  -o-box-shadow: 0px -2px 2px 0px #dddddd;
+  box-shadow: 0px -2px 2px 0px #dddddd;
+}

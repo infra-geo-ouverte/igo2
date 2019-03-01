@@ -1,0 +1,55 @@
+<div class="fadq-client-schema-file-table-container">
+  <igo-entity-table
+    class="table-compact"
+    [store]="store"
+    [template]="tableTemplate"
+    (entitySelectChange)="onSchemaFileSelectChange($event)">
+  </igo-entity-table>
+</div>
+<div class="fadq-client-schema-file-actions-container">
+  <button
+    mat-raised-button
+    matTooltipShowDelay="500"
+    [matTooltip]="'client.schemaFile.add.tooltip' | translate"
+    (click)="fileInput.click()">
+    <mat-icon>add</mat-icon>
+    {{'client.schemaFile.add' | translate}}
+  </button>
+
+  <input
+    #fileInput
+    hidden
+    type="file"
+    (click)="fileInput.value = null"
+    (change)="onFileInputChange($event)"/>
+
+  <button
+    mat-raised-button
+    matTooltipShowDelay="500"
+    [matTooltip]="'client.schemaFile.download.tooltip' | translate"
+    [disabled]="this.schemaFile === undefined ? true : false"
+    (click)="onDownloadButtonClick()">
+    <mat-icon>save_alt</mat-icon>
+    {{'client.schemaFile.download' | translate}}
+  </button>
+  <a #downloadLink download  target="_blank" style="display:none;"></a>
+
+  <button
+    mat-raised-button
+    matTooltipShowDelay="500"
+    [matTooltip]="'client.schemaFile.delete.tooltip' | translate"
+    [disabled]="this.schemaFile === undefined ? true : false"
+    (click)="onDeleteButtonClick()">
+    <mat-icon>delete</mat-icon>
+    {{'client.schemaFile.delete' | translate}}
+  </button>
+
+  <button
+    id="close-button"
+    mat-raised-button
+    matTooltipShowDelay="500"
+    [matTooltip]="'close' | translate"
+    (click)="onCloseButtonClick()">
+    {{'close' | translate}}
+  </button>
+</div>

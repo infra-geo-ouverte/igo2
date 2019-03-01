@@ -1,30 +1,26 @@
-@import './expansion-panel.variables';
-
+@import '../portal.variables';
 
 :host {
-  @extend %box-shadowed;
-
   display: block;
   background-color: white;
 
-  max-height: $fadq-expansion-panel-max-height;
   height: $fadq-expansion-panel-collapsed-height;
-  width: $fadq-sidenav-width;
+  width: $fadq-sidenav-width + $igo-icon-size;
 
   transition:
-    height 280ms cubic-bezier(.4,0,.2,1),
-    width 280ms cubic-bezier(.4,0,.2,1);
+    height 200ms cubic-bezier(.4, 0, .2, 1),
+    width 200ms cubic-bezier(.4, 0, .2, 1);
 
   @include small-screen {
-    width: $fadq-expansion-panel-collapsed-height;
+    width: $fadq-expansion-panel-collapsed-width;
   }
 
   @include tablet {
-    width: $fadq-expansion-panel-collapsed-height;
+    width: $fadq-expansion-panel-collapsed-width;
   }
 
   @include mobile {
-    width: $fadq-expansion-panel-collapsed-height;
+    width: $fadq-expansion-panel-collapsed-width;
   }
 }
 
@@ -34,7 +30,8 @@
 }
 
 :host.fadq-expansion-panel-expanded {
-  height: $fadq-expansion-panel-max-height;
+  @extend %box-shadowed;
+  height: $fadq-expansion-panel-height;
   width: 100%;
 }
 
@@ -46,21 +43,9 @@
 .fadq-expansion-panel-content {
   height: calc(100% - #{$fadq-expansion-panel-header-height});
   overflow: auto;
+  padding: $igo-padding;
 }
 
 igo-backdrop ::ng-deep > div {
   z-index: initial !important;
 }
-
-table {
-  width: 100%;
-}
-
-table tr.mat-header-row {
-  height: 36px;
-}
-
-table tr.mat-row {
-  height: 34px;
-}
-

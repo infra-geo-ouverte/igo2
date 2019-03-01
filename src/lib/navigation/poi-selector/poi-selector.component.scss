@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  padding: 10px;
+}
+
+mat-form-field {
+  width: 100%;
+
+  mat-icon {
+    margin: 0 3px;
+  }
+
+  mat-icon:hover {
+    cursor: pointer;
+  }
+}

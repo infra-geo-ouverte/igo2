@@ -1,33 +1,40 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
   MatTooltipModule,
   MatIconModule,
   MatButtonModule,
   MatMenuModule,
-  MatRadioModule,
   MatSidenavModule
 } from '@angular/material';
 
+import { IgoLanguageModule } from '@igo2/core';
 import {
+  IgoActionModule,
+  IgoEntityModule,
   IgoPanelModule,
   IgoBackdropModule,
-  IgoFlexibleModule
+  IgoToolModule
 } from '@igo2/common';
-import { IgoGeoModule } from '@igo2/geo';
-import { IgoContextModule } from '@igo2/context';
-import { IgoToolsModule } from '@igo2/tools';
+import {
+  IgoFeatureModule,
+  IgoImportExportModule,
+  IgoQueryModule
+} from '@igo2/geo';
+import { IgoContextManagerModule } from '@igo2/context';
 
-import { FadqCoreModule } from '../../modules/core/core.module';
+import { FadqEditionModule } from '../../modules/edition/edition.module';
 import { FadqMapModule } from '../../modules/map/map.module';
 import { FadqSearchModule } from '../../modules/search/search.module';
-import { FadqToolModule } from '../../modules/tool/tool.module';
+
 import { FadqExpansionPanelModule } from './expansion-panel/expansion-panel.module';
-import { FadqInfoPanelModule } from './info-panel/info-panel.module';
+import { FadqToastPanelModule } from './toast-panel/toast-panel.module';
 import { FadqSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
 
+// TODO: Clean this up
 @NgModule({
   imports: [
     CommonModule,
@@ -35,21 +42,25 @@ import { PortalComponent } from './portal.component';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    MatRadioModule,
     MatSidenavModule,
+
+    IgoLanguageModule,
+    IgoActionModule,
+    IgoEntityModule,
     IgoPanelModule,
+    IgoToolModule,
     IgoBackdropModule,
-    IgoFlexibleModule,
-    IgoGeoModule,
-    IgoContextModule,
-    IgoToolsModule,
-    FadqCoreModule,
-    FadqExpansionPanelModule,
-    FadqInfoPanelModule,
-    FadqSidenavModule,
+    IgoFeatureModule,
+    IgoImportExportModule,
+    IgoQueryModule,
+    IgoContextManagerModule,
+
+    FadqEditionModule,
     FadqMapModule,
     FadqSearchModule,
-    FadqToolModule
+    FadqExpansionPanelModule,
+    FadqToastPanelModule,
+    FadqSidenavModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]

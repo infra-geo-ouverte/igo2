@@ -1,0 +1,13 @@
+@import 'variables';
+
+:host {
+  background-color: white;
+}
+
+fadq-actionbar ::ng-deep mat-list-item {
+  background-color: initial !important;
+}
+
+mat-menu ::ng-deep .mat-menu-panel {
+  min-width: inherit;
+}

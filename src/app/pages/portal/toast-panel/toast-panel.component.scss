@@ -1,0 +1,34 @@
+@import '../portal.variables';
+
+:host {
+  @extend %box-shadowed;
+
+  background-color: white;
+
+  height: $fadq-toast-panel-collapsed-height;
+  max-height: $fadq-toast-panel-max-height;
+
+  transition: height 280ms cubic-bezier(.4,0,.2,1);
+  padding: $igo-padding;
+
+  @include mobile {
+    max-height: 40%;
+  }
+}
+
+:host.fadq-toast-panel-opened {
+  height: $fadq-toast-panel-max-height;
+
+  @include mobile {
+    height: 40%;
+  }
+}
+
+igo-panel ::ng-deep .igo-panel-header:hover {
+  cursor: pointer;
+}
+
+div[igostoppropagation] {
+  height: 100%;
+  width: 100%;
+}
