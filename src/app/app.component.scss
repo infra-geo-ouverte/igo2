@@ -36,3 +36,11 @@ igo-message-center ::ng-deep .simple-notification-wrapper {
   bottom: inherit;
   right: inherit;
 }
+
+/*** Spinner ***/
+igo-spinner {
+  position: absolute;
+  top: $igo-margin;
+  right: $igo-margin;
+  z-index: 5;
+}
