@@ -120,15 +120,6 @@
       "sourceOptions": {
         "type": "osm"
       }
-    },
-    {
-      "title": "Fond carte",
-      "visible": true,
-      "baseLayer": true,
-      "sourceOptions": {
-        "url": "https://testgeoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
-        "type": "xyz"
-      }
     }
   ],
   "toolbar": [
