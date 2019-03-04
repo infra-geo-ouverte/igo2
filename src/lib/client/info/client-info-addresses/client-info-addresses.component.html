@@ -5,26 +5,32 @@
         <td>{{'client.info.adresseCor' | translate}}</td>
       </tr>
       <tr>
-        <td><a href="#">{{client.info.adresseCor}}</a></td>
+        <ng-container *ngTemplateOutlet="address; context: {$implicit: client.info.adresseCor}"></ng-container>
       </tr>
       <tr>
         <td>{{'client.info.adresseExp' | translate}}</td>
       </tr>
       <tr>
-        <td>
-          <a *ngIf="client.info.adresseExp" href="#">{{client.info.adresseExp}}</a>
-          <ng-container *ngIf="!client.info.adresseExp">-</ng-container>
-        </td>
+        <ng-container *ngTemplateOutlet="address; context: {$implicit: client.info.adresseExp} "></ng-container>
       </tr>
       <tr>
         <td>{{'client.info.adressePro' | translate}}</td>
       </tr>
       <tr>
-        <td>
-          <a *ngIf="client.info.adressePro" href="#">{{client.info.adressePro}}</a>
-          <ng-container *ngIf="!client.info.adressePro">-</ng-container>
-        </td>
+        <ng-container *ngTemplateOutlet="address; context: {$implicit: client.info.adressePro}"></ng-container>
       </tr>
     </tbody>
   </table>
 </div>
+
+<ng-template #address let-address>
+  <td>
+    <a
+      *ngIf="address"
+      href="#"
+      (click)="searchAddress(address)">
+      {{address}}
+    </a>
+    <ng-container *ngIf="!address">-</ng-container>
+  </td>
+</ng-template>

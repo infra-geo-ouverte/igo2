@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 
 import { ToolComponent, EntityStore } from '@igo2/common';
 import { ConfigService } from '@igo2/core';
+import { IgoMap } from '@igo2/geo';
+import { MapState } from '@igo2/integration';
 
 import { substituteProperties } from 'src/lib/utils';
 import {
@@ -60,8 +62,11 @@ export class ClientToolComponent {
     return this.clientState.schemaStore;
   }
 
+  get map(): IgoMap { return this.mapState.map; }
+
   constructor(
     private clientState: ClientState,
+    private mapState: MapState,
     private configService: ConfigService
   ) {}
 

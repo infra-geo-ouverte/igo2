@@ -21,7 +21,10 @@
       </igo-collapsible>
 
       <igo-collapsible [title]="'client.info.title' | translate">
-        <fadq-client-info-addresses [client]="client"></fadq-client-info-addresses>
+        <fadq-client-info-addresses
+          [client]="client"
+          [map]="map">
+        </fadq-client-info-addresses>
       </igo-collapsible>
     </igo-list>
   </div>
