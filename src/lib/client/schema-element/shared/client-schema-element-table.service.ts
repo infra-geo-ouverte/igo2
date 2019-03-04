@@ -7,10 +7,10 @@ import { ClientSchemaElement } from './client-schema-element.interfaces';
 @Injectable()
 export class ClientSchemaElementTableService {
 
-  static elementIcons = {
-    'Point': 'place',
-    'LineString': 'show_chart',
-    'Polygon': 'crop_square'
+  static elementTypes = {
+    'Point': 'P',
+    'LineString': 'L',
+    'Polygon': 'S'
   };
 
   constructor() {}
@@ -26,9 +26,9 @@ export class ClientSchemaElementTableService {
         {
           name: 'type',
           title: '',
-          renderer: EntityTableColumnRenderer.Icon,
+          renderer: EntityTableColumnRenderer.HTML,
           valueAccessor: (element: ClientSchemaElement) => {
-            return ClientSchemaElementTableService.elementIcons[element.geometry.type];
+            return `<b>${ClientSchemaElementTableService.elementTypes[element.geometry.type]}`;
           }
         },
         {

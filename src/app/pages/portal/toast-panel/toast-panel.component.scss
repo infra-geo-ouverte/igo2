@@ -24,8 +24,12 @@
   }
 }
 
-igo-panel ::ng-deep .igo-panel-header:hover {
-  cursor: pointer;
+igo-panel {
+  height: 100%;
+
+  ::ng-deep .igo-panel-header:hover {
+    cursor: pointer;
+  }
 }
 
 div[igostoppropagation] {

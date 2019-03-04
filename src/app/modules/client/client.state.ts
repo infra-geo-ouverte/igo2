@@ -182,10 +182,6 @@ export class ClientState implements OnDestroy {
     this.diagramStore.load(client.diagrams);
     this.diagramStore.view.sort({valueAccessor: (diagram) => diagram.id, direction: 'asc'});
     this.parcelStore.load(client.parcels);
-    // moveToFeatures(
-    //   this.parcelStore.map,
-    //   this.parcelStore.source.ol.getFeatures()
-    // );
     this.schemaStore.load(client.schemas);
     this.schemaEditor.setClient(client);
 

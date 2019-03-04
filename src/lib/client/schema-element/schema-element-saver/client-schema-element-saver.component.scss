@@ -1,12 +1,10 @@
-@import 'variables';
-
 $icon-size: 48px;
 
 mat-card {
   height: 100%;
 }
 
-mat-card-header {
+.mat-card-header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,10 +12,11 @@ mat-card-header {
   ::ng-deep .mat-card-header-text {
     margin: 0;
   }
-}
 
-mat-card-title {
-  margin-bottom: 0px;
+  .mat-card-title {
+    font-size: 16px;
+    margin-bottom: 0px;
+  }
 }
 
 .mat-card-avatar {
@@ -37,8 +36,7 @@ mat-card-content {
 }
 
 igo-entity-table {
-  margin: 10px 0;
-  max-height: calc(100% - 56px);
+  max-height: calc(100% - 66px);
 
   ::ng-deep {
     td.mat-cell:first-child,

@@ -43,7 +43,9 @@ export class ClientSchemaElementEditor extends Editor {
       title: 'Éléments du schéma',
       tableTemplate: clientSchemaElementTableService.buildTable(),
       entityStore: new FeatureStore<ClientSchemaElement>([], {
-        getKey: (entity: ClientSchemaElement) => entity.properties.idElementGeometrique,
+        getKey: (entity: ClientSchemaElement) => {
+          return entity.properties.idElementGeometrique || entity.meta.id;
+        },
         map: mapState.map
       }),
       actionStore: new EntityStore<Action>([])

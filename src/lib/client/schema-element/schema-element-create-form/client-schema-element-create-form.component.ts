@@ -88,13 +88,17 @@ export class ClientSchemaElementCreateFormComponent implements OnInit, WidgetCom
   }
 
   private onSubmitSuccess(element: ClientSchemaElement) {
+    console.log(this.transaction);
+    console.log(this.transaction.getKey(element));
     this.transaction.insert(element, this.store, {
       title: generateOperationTitle(element)
     });
+    console.log(this.store);
     this.complete.emit();
   }
 
   private formDataToElement(data: Feature): ClientSchemaElement {
+    console.log(data);
     const properties = Object.assign({
       idSchema: this.schema.id,
       idElementGeometrique: undefined,
@@ -106,7 +110,7 @@ export class ClientSchemaElementCreateFormComponent implements OnInit, WidgetCom
       timbreMaj: undefined,
       usagerMaj: undefined
     }, data.properties);
-
+    console.log( Object.assign({}, data, {properties}));
     return Object.assign({}, data, {properties});
   }
 
