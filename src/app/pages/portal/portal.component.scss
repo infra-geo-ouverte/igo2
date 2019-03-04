@@ -95,6 +95,10 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
   }
 }
 
+igo-toast {
+  z-index: 1;
+}
+
 igo-backdrop {
   display: none;
    @include mobile {
