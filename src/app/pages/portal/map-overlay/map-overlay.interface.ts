@@ -22,8 +22,8 @@ export interface MapOverlay {
   text?: string;           // text to show before image
   fontSize?: string;       // Font size to display text
   alt?: string;            // alternate text for an image if the image cannot be displayed
-  paddingLeft?: string;    // Padding to add to the left of the element
-  paddingRight?: string;   // Padding to add to the right of the element
-  paddingTop?: string;     // Padding to add to the top of the element
-  paddingBottom?: string;  // Padding to add to the bottom of the element
+  marginLeft?: string;    // Margin to add to the left of the element
+  marginRight?: string;   // Margin to add to the right of the element
+  marginTop?: string;     // Margin to add to the top of the element
+  marginBottom?: string;  // Margin to add to the bottom of the element
 }
