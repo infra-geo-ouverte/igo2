@@ -11,12 +11,14 @@ mat-sidenav-container {
   height: 100%;
   width: 100%;
   background-color: #efefef;
+  z-index: 5;
+  display: unset;
 }
 
 /*** Menu button ***/
 
 .menu-button {
-  background-color: $igo-background-color;
+  background-color: $app-background-color;
   position: absolute;
   left: $igo-margin;
   top: $igo-margin;
@@ -36,7 +38,7 @@ igo-map-browser {
 
 /*** Search bar ***/
 igo-search-bar {
-  background-color: $igo-background-color;
+  background-color: $app-background-color;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   position: absolute;
   left: $search-bar-left;
@@ -58,7 +60,7 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
   }
 }
 
-igo-expansion-panel {
+app-expansion-panel {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -66,8 +68,7 @@ igo-expansion-panel {
   overflow: hidden;
 }
 
-
-igo-toast-panel {
+app-toast-panel {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -75,30 +76,16 @@ igo-toast-panel {
   width: 600px;
   z-index: 4;
 
-  @include medium-screen {
-    width: 480px;
-    margin-left: -240px;
-  }
-
-  @include small-screen {
-    width: 480px;
-    margin-left: -240px;
-  }
-
-  @include tablet {
-    width: calc(100% - 2 * #{$igo-footer-height});
-    left: $igo-footer-height;
-    margin-left: 0;
-  }
-
   @include mobile {
-    width: calc(100% - 2 * #{$igo-footer-height});
-    left: $igo-footer-height;
+    width: calc(100% - #{$app-footer-height});
+    left: $app-footer-height;
     margin-left: 0;
   }
 }
 
-igo-toast-panel.igo-toast-panel-opened {
+app-toast-panel.expansion-panel-expanded,
+app-toast-panel:not(.has-expansion-panel),
+app-toast-panel.app-toast-panel-opened {
   @include mobile {
     width: 100%;
     left: 0;

@@ -3,11 +3,19 @@
   [autoFocus]="false"
   [(opened)]="opened">
 
-  <div class="igo-sidenav-content">
+  <div class="app-sidenav-content"
+    [ngClass]="{'app-sidenav-without-feature': topPanelState === 'initial'}">
 
-    <igo-flexible initial="100%">
+    <igo-flexible #topPanel
+      initial="100%"
+      initialMobile="100%"
+      collapsedMobile="100%"
+      expandedMobile="100%"
+      collapsed="70%"
+      expanded="calc(100% - 48px)"
+      [state]="topPanelState">
 
-      <div class="igo-content">
+      <div class="app-content">
         <igo-panel [title]="title$ | async | translate">
           <button *ngIf="toolbox.activeTool$ | async"
             mat-icon-button
@@ -36,7 +44,42 @@
         </igo-panel>
       </div>
 
-    </igo-flexible>
+      <div igoFlexibleFill class="app-content"
+        *ngIf="searchResult && searchResult.data && media !== 'mobile'">
+         <igo-panel
+           [title]="panelTitle">
 
+           <button
+             mat-icon-button
+             panelLeftButton
+             class="igo-icon-button"
+             (click)="toggleTopPanel()">
+             <mat-icon>
+               <ng-container *ngIf="['collapsed', 'initial'].indexOf(topPanelState) >= 0">
+                 arrow_downward
+               </ng-container>
+               <ng-container *ngIf="topPanelState === 'expanded'">
+                 arrow_upward
+               </ng-container>
+             </mat-icon>
+           </button>
+
+           <button
+             mat-icon-button
+             panelRightButton
+             class="igo-icon-button"
+             (click)="zoomToFeatureExtent()"
+             *ngIf="searchResult.data.geometry">
+             <mat-icon>zoom_in</mat-icon>
+           </button>
+
+           <igo-feature-details
+             [feature]="searchResult.data"
+             *ngIf="['collapsed', 'initial'].indexOf(topPanelState) >= 0">
+           </igo-feature-details>
+         </igo-panel>
+        </div>
+
+    </igo-flexible>
   </div>
 </mat-sidenav>

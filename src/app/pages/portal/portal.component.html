@@ -1,4 +1,4 @@
-<mat-sidenav-container class="igo-main-container">
+<mat-sidenav-container class="app-main-container">
 
   <igo-backdrop
     [shown]="backdropShown"
@@ -24,10 +24,12 @@
     (search)="onSearch($event)">
   </igo-search-bar>
 
-  <igo-sidenav
-    [ngClass]="{'igo-sidenav-with-expansion-panel': expansionPanelExpanded}"
+  <app-sidenav
+    [ngClass]="{'app-sidenav-has-expansion-panel': hasExpansionPanel, 'app-sidenav-with-expansion-panel': expansionPanelExpanded}"
+    [searchResult]="searchResult"
+    [map]="map"
     [(opened)]="sidenavOpened">
-  </igo-sidenav>
+  </app-sidenav>
 
   <igo-map-browser
     igoQuery
@@ -60,18 +62,23 @@
     </igo-baselayers-switcher> -->
   </igo-map-browser>
 
-  <igo-expansion-panel
+  <app-expansion-panel
+    *ngIf="hasExpansionPanel"
+    [ngClass]="{'footer': toastPanelShown && toastPanelContent === 'feature'}"
     [(expanded)]="expansionPanelExpanded"
     [backdropShown]="expansionPanelBackdropShown">
 
     <ng-container expansionPanelHeader>
     </ng-container>
 
-  </igo-expansion-panel>
+  </app-expansion-panel>
 
 </mat-sidenav-container>
 
-<igo-toast-panel
+<app-toast-panel
+  [ngClass]="{'has-expansion-panel': hasExpansionPanel,
+              'expansion-panel-expanded': expansionPanelExpanded}"
+  *ngIf="toastPanelShown"
   [title]="toastPanelTitle"
   [withHeader]="toastPanelContent === 'feature'"
   [(opened)]="toastPanelOpened">
@@ -81,7 +88,7 @@
     [feature]="searchResult.data">
   </igo-feature-details>
 
-</igo-toast-panel>
+</app-toast-panel>
 
   <!-- <igo-toast
     [map]="map"

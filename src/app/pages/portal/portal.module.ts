@@ -26,9 +26,9 @@ import { IgoContextManagerModule } from '@igo2/context';
 
 import { IgoIntegrationModule } from '@igo2/integration';
 
-import { IgoExpansionPanelModule } from './expansion-panel/expansion-panel.module';
-import { IgoToastPanelModule } from './toast-panel/toast-panel.module';
-import { IgoSidenavModule } from './sidenav/sidenav.module';
+import { AppExpansionPanelModule } from './expansion-panel/expansion-panel.module';
+import { AppToastPanelModule } from './toast-panel/toast-panel.module';
+import { AppSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
 
@@ -49,10 +49,10 @@ import { PortalComponent } from './portal.component';
     IgoToolModule,
     IgoBackdropModule,
     IgoFlexibleModule,
-    IgoExpansionPanelModule,
-    IgoToastPanelModule,
     IgoIntegrationModule,
-    IgoSidenavModule,
+    AppExpansionPanelModule,
+    AppToastPanelModule,
+    AppSidenavModule,
     IgoContextManagerModule
   ],
   exports: [PortalComponent],

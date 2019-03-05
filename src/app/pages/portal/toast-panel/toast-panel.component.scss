@@ -5,8 +5,8 @@
 
   background-color: white;
 
-  height: $igo-toast-panel-collapsed-height;
-  max-height: $igo-toast-panel-max-height;
+  height: $app-toast-panel-collapsed-height;
+  max-height: $app-toast-panel-max-height;
 
   transition: height 280ms cubic-bezier(.4,0,.2,1);
   padding: $igo-padding;
@@ -16,8 +16,8 @@
   }
 }
 
-:host.igo-toast-panel-opened {
-  height: $igo-toast-panel-max-height;
+:host.app-toast-panel-opened {
+  height: $app-toast-panel-max-height;
 
   @include mobile {
     height: 40%;

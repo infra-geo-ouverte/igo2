@@ -10,14 +10,13 @@ import {
 import { showContent } from './expansion-panel.animations';
 
 @Component({
-  selector: 'igo-expansion-panel',
+  selector: 'app-expansion-panel',
   templateUrl: './expansion-panel.component.html',
   styleUrls: ['./expansion-panel.component.scss'],
   animations: [showContent()],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpansionPanelComponent {
-
   @Input()
   get expanded(): boolean {
     return this._expanded;
@@ -43,7 +42,7 @@ export class ExpansionPanelComponent {
 
   @Output() expandedChange = new EventEmitter<boolean>();
 
-  @HostBinding('class.igo-expansion-panel-expanded')
+  @HostBinding('class.app-expansion-panel-expanded')
   get hasExpandedClass() {
     return this.expanded;
   }
@@ -54,5 +53,4 @@ export class ExpansionPanelComponent {
     this.expanded = false;
     this.backdropShown = false;
   }
-
 }

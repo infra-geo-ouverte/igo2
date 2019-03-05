@@ -2,15 +2,15 @@
 
 :host {
   display: block;
-  height: $igo-expansion-panel-header-height;
+  height: $app-expansion-panel-header-height;
 }
 
 :host > div {
   display: flex;
 }
 
-.igo-expansion-panel-trigger-container,
-.igo-expansion-panel-content {
+.app-expansion-panel-trigger-container,
+.app-expansion-panel-content {
   display: inline-flex;
 }
 

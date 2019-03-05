@@ -7,34 +7,28 @@
   display: block;
   background-color: white;
 
-  height: $igo-expansion-panel-collapsed-height;
-  width: $igo-sidenav-width;
+  height: $app-expansion-panel-collapsed-height;
+  width: $app-expansion-panel-collapsed-width;
 
   transition:
     height 200ms cubic-bezier(.4, 0, .2, 1),
     width 200ms cubic-bezier(.4, 0, .2, 1);
-
-  @include small-screen {
-    width: $igo-expansion-panel-collapsed-width;
-  }
-
-  @include tablet {
-    width: $igo-expansion-panel-collapsed-width;
-  }
-
-  @include mobile {
-    width: $igo-expansion-panel-collapsed-width;
-  }
 }
 
-.igo-expansion-panel-container {
+.app-expansion-panel-container {
   height: 100%;
   width: 100%;
 }
 
-:host.igo-expansion-panel-expanded {
-  height: $igo-expansion-panel-height;
+:host.app-expansion-panel-expanded {
+  height: $app-expansion-panel-height;
   width: 100%;
+
+  @include mobile {
+    &.footer {
+      margin-bottom: 48px;
+    }
+  }
 }
 
 :host > div {
@@ -42,8 +36,8 @@
   width: 100%;
 }
 
-.igo-expansion-panel-content {
-  height: calc(100% - #{$igo-expansion-panel-header-height});
+.app-expansion-panel-content {
+  height: calc(100% - #{$app-expansion-panel-header-height});
   overflow: auto;
   padding: $igo-padding;
 }

@@ -1,12 +1,12 @@
 @import '~@igo2/core/style/partial/core.variables';
 
 /*** Generic ***/
-$igo-background-color: rgb(255, 255, 255);
-$igo-icon-button-width: 40px;
+$app-background-color: rgb(255, 255, 255);
+$app-icon-button-width: 40px;
 
-$igo-border-width: 1px;
-$igo-border-style: solid;
-$igo-border-color: rgba(0, 0, 0, .2);
+$app-border-width: 1px;
+$app-border-style: solid;
+$app-border-color: rgba(0, 0, 0, .2);
 
 %border-box {
   box-sizing: border-box;
@@ -15,19 +15,19 @@ $igo-border-color: rgba(0, 0, 0, .2);
 }
 
 %bordered-top {
-  border-top: $igo-border-width $igo-border-style $igo-border-color;
+  border-top: $app-border-width $app-border-style $app-border-color;
 }
 
 %bordered-bottom {
-  border-bottom: $igo-border-width $igo-border-style $igo-border-color;
+  border-bottom: $app-border-width $app-border-style $app-border-color;
 }
 
 %bordered-left {
-  border-left: $igo-border-width $igo-border-style $igo-border-color;
+  border-left: $app-border-width $app-border-style $app-border-color;
 }
 
 %bordered-right {
-  border-right: $igo-border-width $igo-border-style $igo-border-color;
+  border-right: $app-border-width $app-border-style $app-border-color;
 }
 
 %box-shadowed {

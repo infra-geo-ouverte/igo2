@@ -12,14 +12,13 @@ import {
 import { showContent } from './toast-panel.animations';
 
 @Component({
-  selector: 'igo-toast-panel',
+  selector: 'app-toast-panel',
   templateUrl: './toast-panel.component.html',
   styleUrls: ['./toast-panel.component.scss'],
   animations: [showContent()],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastPanelComponent {
-
   @Input()
   get opened(): boolean {
     return this._opened;
@@ -53,14 +52,14 @@ export class ToastPanelComponent {
 
   @Output() openedChange = new EventEmitter<boolean>();
 
-  @HostBinding('class.igo-toast-panel-opened')
+  @HostBinding('class.app-toast-panel-opened')
   get hasOpenedClass() {
     return this.opened;
   }
 
   @HostBinding('style.visibility')
   get displayStyle() {
-    return (this.withHeader || this.opened) ? 'visible' : 'hidden';
+    return this.withHeader || this.opened ? 'visible' : 'hidden';
   }
 
   @ViewChild('content') content: ElementRef;

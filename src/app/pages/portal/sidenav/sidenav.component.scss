@@ -16,30 +16,54 @@
 mat-sidenav {
   @extend %box-shadowed-bottom-right;
 
-  height: $igo-sidenav-height;
-  width: $igo-sidenav-width;
+  height: 100%;
+  width: $app-sidenav-width;
 
   @include mobile {
-    width: $igo-sidenav-width-mobile;
-    height: 100%;
+    width: $app-sidenav-width-mobile;
   }
 }
 
-:host.igo-sidenav-with-expansion-panel mat-sidenav {
-  height: $igo-sidenav-height-with-expansion-panel;
+.app-content {
+    height: 100%;
+}
+
+:host.app-sidenav-with-expansion-panel mat-sidenav {
+  height: $app-sidenav-height-with-expansion-panel;
   transition: height 280ms cubic-bezier(.4,0,.2,1);
+  @include mobile {
+    height: calc(#{$app-sidenav-height-with-expansion-panel} - 48px);
+  }
 }
 
-.igo-sidenav-content {
-  margin-top: $igo-sidenav-margin-top;
-  height: calc(100% - #{$igo-sidenav-margin-top});
+.app-sidenav-content {
+  margin-top: $app-sidenav-margin-top;
+  height: $app-sidenav-height;
+  @include mobile {
+    height: calc(100% - #{$app-sidenav-margin-top});
+  }
 }
 
-.igo-sidenav-content .igo-flexible-fill .igo-container {
-  @extend %bordered-top;
-  @extend %border-box;
+div.app-sidenav-content.app-sidenav-without-feature {
+  @include desktop {
+    height: $app-sidenav-height;
+  }
+  @include tablet {
+    height: $app-sidenav-height;
+  }
+}
+
+:host:not(.app-sidenav-has-expansion-panel) .app-sidenav-content {
+  height: calc(#{$app-sidenav-height} + #{$app-expansion-panel-collapsed-height});
+  @include mobile {
+    height: $app-sidenav-height;
+  }
 }
 
 igo-panel ::ng-deep .igo-panel-content {
   position: relative;
+}
+
+:host ::ng-deep igo-flexible .igo-container {
+  padding: 0;
 }

@@ -1,12 +1,12 @@
 <div>
 
-  <div class="igo-expansion-panel-container">
-    <igo-expansion-panel-header [(expanded)]="expanded">
+  <div class="app-expansion-panel-container">
+    <app-expansion-panel-header [(expanded)]="expanded">
       <ng-content select="[expansionPanelHeader]"></ng-content>
-    </igo-expansion-panel-header>
+    </app-expansion-panel-header>
 
     <div
-      class="igo-expansion-panel-content mat-elevation-z4"
+      class="app-expansion-panel-content mat-elevation-z4"
       [@showContent]="expanded">
       <ng-content></ng-content>
     </div>

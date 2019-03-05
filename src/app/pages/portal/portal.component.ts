@@ -11,11 +11,10 @@ import {
   EntityRecord,
   EntityStore,
   getEntityTitle,
-  Tool,
   Toolbox
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
-import { Context, DetailedContext } from '@igo2/context';
+import { DetailedContext } from '@igo2/context';
 import {
   DataSourceService,
   Feature,
@@ -60,6 +59,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public searchResult: SearchResult;
 
   public expansionPanelExpanded = false;
+  public hasExpansionPanel = true;
   public sidenavOpened = false;
 
   // True after the initial context is loaded
@@ -84,8 +84,18 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
   }
 
+  get toastPanelShown(): boolean {
+    return (
+      this.mediaService.media$.value === Media.Mobile && !this.sidenavOpened
+    );
+  }
+
   get expansionPanelBackdropShown(): boolean {
-    return this.expansionPanelExpanded && this.toastPanelOpened;
+    return (
+      this.expansionPanelExpanded &&
+      this.toastPanelOpened &&
+      this.mediaService.media$.value !== Media.Mobile
+    );
   }
 
   get actionbarMode(): ActionbarMode {
