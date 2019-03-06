@@ -47,7 +47,7 @@
     (@mapStateY.start)="removeMapBrowserClass($event)"
     (@mapStateY.done)="updateMapBrowserClass($event)" -->
 
-    <!-- <igo-zoom-button [map]="map" color="primary"></igo-zoom-button>
+    <igo-zoom-button [map]="map" color="primary"></igo-zoom-button>
     <igo-geolocate-button [map]="map" color="primary"
       [@controlStateY]="toastShown ? (toastPanelOpened ? 'up' : 'down') : 'close'">
     </igo-geolocate-button>
@@ -59,7 +59,7 @@
       [@controlStateY]="toastShown ? (toastPanelOpened ? 'up' : 'down') : 'close'"
       [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
                               sidenavOpened ? 'right' : 'left'">
-    </igo-baselayers-switcher> -->
+    </igo-baselayers-switcher>
   </igo-map-browser>
 
   <app-expansion-panel
@@ -71,6 +71,10 @@
     <ng-container expansionPanelHeader>
     </ng-container>
 
+    <igo-entity-table
+      [store]="tableStore"
+      [template]="tableTemplate"
+    ></igo-entity-table>
   </app-expansion-panel>
 
 </mat-sidenav-container>

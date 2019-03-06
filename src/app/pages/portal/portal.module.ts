@@ -12,7 +12,8 @@ import {
   IgoPanelModule,
   IgoBackdropModule,
   IgoFlexibleModule,
-  IgoToolModule
+  IgoToolModule,
+  IgoEntityTableModule
 } from '@igo2/common';
 
 import {
@@ -22,7 +23,7 @@ import {
   IgoQueryModule,
   IgoSearchModule
 } from '@igo2/geo';
-import { IgoContextManagerModule } from '@igo2/context';
+import { IgoContextManagerModule, IgoContextMapButtonModule } from '@igo2/context';
 
 import { IgoIntegrationModule } from '@igo2/integration';
 
@@ -53,7 +54,9 @@ import { PortalComponent } from './portal.component';
     AppExpansionPanelModule,
     AppToastPanelModule,
     AppSidenavModule,
-    IgoContextManagerModule
+    IgoContextManagerModule,
+    IgoContextMapButtonModule,
+    IgoEntityTableModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]

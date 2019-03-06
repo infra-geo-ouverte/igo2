@@ -74,6 +74,28 @@ export class PortalComponent implements OnInit, OnDestroy {
   // True after the initial tool is loaded
   private toolLoaded = false;
 
+
+  public tableStore = new EntityStore([]);
+
+  public tableTemplate = {
+    selection: true,
+    sort: true,
+    columns: [
+      {
+        name: 'id',
+        title: 'ID'
+      },
+      {
+        name: 'name',
+        title: 'Name'
+      },
+      {
+        name: 'description',
+        title: 'Description'
+      }
+    ]
+  };
+
   get map(): IgoMap {
     return this.mapState.map;
   }
@@ -183,6 +205,14 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.openSidenav();
       }
     });
+
+    this.tableStore.load([
+      {id: '2', name: 'Name 2', description: 'Description 2'},
+      {id: '1', name: 'Name 1', description: 'Description 1'},
+      {id: '3', name: 'Name 3', description: 'Description 3'},
+      {id: '4', name: 'Name 4', description: 'Description 4'},
+      {id: '5', name: 'Name 5', description: 'Description 5'}
+    ]);
   }
 
   ngOnDestroy() {
