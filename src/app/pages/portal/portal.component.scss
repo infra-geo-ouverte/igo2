@@ -36,6 +36,10 @@ igo-map-browser {
   height: 100%;
 }
 
+igo-baselayers-switcher {
+  left: initial !important;
+  right: 5px;
+}
 
 /*** Search bar ***/
 igo-search-bar {
@@ -140,6 +144,12 @@ fadq-expansion-panel:not(.fadq-expansion-panel-expanded) {
 fadq-expansion-panel {
   fadq-editor-selector {
     width: calc(#{$fadq-sidenav-width} - #{$igo-icon-size} - 20px)
+  }
+
+  @include mobile {
+    fadq-editor-selector {
+      width: calc(#{$fadq-sidenav-width} - (2 * #{$igo-icon-size}) - 20px);
+    }
   }
 
   igo-actionbar {

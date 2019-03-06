@@ -1,10 +1,10 @@
 export enum MapAction {
-  BaseLayerSwitcher = 'baseLayerSwitcher',
+  // BaseLayerSwitcher = 'baseLayerSwitcher',
   ZoomIn = 'zoomIn',
   ZoomOut = 'zoomOut',
   PreviousView = 'previousView',
   NextView = 'nextView',
-  ClickInteraction = 'clickInteraction',
+  // ClickInteraction = 'clickInteraction',
   Geolocation = 'geolocation',
   GoogleView = 'googleView'
 }

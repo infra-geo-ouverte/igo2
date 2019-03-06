@@ -5,10 +5,8 @@ import { skip, tap } from 'rxjs/operators';
 import { EntityRecord, EntityStore, EntityTransaction } from '@igo2/common';
 import {
   FeatureStore,
-  FeatureStoreStrategy,
   FeatureStoreLoadingStrategy,
-  FeatureStoreSelectionStrategy,
-  moveToFeatures
+  FeatureStoreSelectionStrategy
 } from '@igo2/geo';
 import { MapState } from '@igo2/integration';
 
