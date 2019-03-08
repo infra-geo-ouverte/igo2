@@ -7,7 +7,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
-import { EntityStore, WidgetComponent } from '@igo2/common';
+import { EntityStore, WidgetComponent, OnUpdateInputs } from '@igo2/common';
 
 import { ClientSchema } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
@@ -18,7 +18,7 @@ import { ClientSchemaService } from '../shared/client-schema.service';
   styleUrls: ['./client-schema-duplicate-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaDuplicateFormComponent implements WidgetComponent {
+export class ClientSchemaDuplicateFormComponent implements OnUpdateInputs, WidgetComponent {
 
   /**
    * Schema store
@@ -46,7 +46,7 @@ export class ClientSchemaDuplicateFormComponent implements WidgetComponent {
   ) {}
 
   /**
-   * Implemented as part of WidgetComponent
+   * Implemented as part of OnUpdateInputs
    */
   onUpdateInputs() {
     this.cdRef.detectChanges();

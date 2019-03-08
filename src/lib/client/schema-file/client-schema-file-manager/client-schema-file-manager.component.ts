@@ -10,7 +10,7 @@ import {
   ElementRef
 } from '@angular/core';
 
-import { EntityStore, EntityTableTemplate, Widget, WidgetComponent } from '@igo2/common';
+import { EntityStore, EntityTableTemplate, WidgetComponent } from '@igo2/common';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaFile } from '../shared/client-schema-file.interfaces';
@@ -74,11 +74,6 @@ export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, Widg
   ngOnDestroy() {
     this.store.destroy();
   }
-
-  /**
-   * Implemented as part of WidgetComponent
-   */
-  onUpdateInputs() {}
 
   onFileInputChange(event: any) {
     if (event.target.files && event.target.files[0]) {

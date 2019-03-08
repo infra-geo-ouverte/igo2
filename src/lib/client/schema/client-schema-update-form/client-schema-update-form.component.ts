@@ -10,7 +10,7 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityStore, Form, WidgetComponent } from '@igo2/common';
+import { EntityStore, Form, WidgetComponent, OnUpdateInputs } from '@igo2/common';
 
 import { ClientSchema, ClientSchemaUpdateData } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
@@ -22,7 +22,7 @@ import { ClientSchemaFormService } from '../shared/client-schema-form.service';
   styleUrls: ['./client-schema-update-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaUpdateFormComponent implements OnInit, WidgetComponent {
+export class ClientSchemaUpdateFormComponent implements OnInit, OnUpdateInputs, WidgetComponent {
 
   /**
    * Create form
@@ -61,7 +61,7 @@ export class ClientSchemaUpdateFormComponent implements OnInit, WidgetComponent 
   }
 
   /**
-   * Implemented as part of WidgetComponent
+   * Implemented as part of OnUpdateInputs
    */
   onUpdateInputs() {
     this.cdRef.detectChanges();

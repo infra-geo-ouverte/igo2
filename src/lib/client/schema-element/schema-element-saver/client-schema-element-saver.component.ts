@@ -87,11 +87,6 @@ export class ClientSchemaElementSaverComponent implements WidgetComponent {
     private clientSchemaElementService: ClientSchemaElementService
   ) {}
 
-  /**
-   * Implemented as part of WidgetComponent
-   */
-  onUpdateInputs() {}
-
   onOperationClick(operation: EntityOperation) {
     const store = operation.store;
     const entity = operation.current;

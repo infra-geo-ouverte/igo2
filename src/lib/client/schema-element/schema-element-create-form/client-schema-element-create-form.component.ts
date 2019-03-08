@@ -10,7 +10,7 @@ import {
 
 import { Subject } from 'rxjs';
 
-import { EntityTransaction, Form, WidgetComponent } from '@igo2/common';
+import { EntityTransaction, Form, WidgetComponent, OnUpdateInputs } from '@igo2/common';
 import { Feature, FeatureStore, IgoMap } from '@igo2/geo';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
@@ -25,7 +25,7 @@ import { generateOperationTitle } from '../shared/client-schema-element.utils';
   styleUrls: ['./client-schema-element-create-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientSchemaElementCreateFormComponent implements OnInit, WidgetComponent {
+export class ClientSchemaElementCreateFormComponent implements OnInit, OnUpdateInputs, WidgetComponent {
 
   /**
    * Create form
@@ -73,7 +73,7 @@ export class ClientSchemaElementCreateFormComponent implements OnInit, WidgetCom
   }
 
   /**
-   * Implemented as part of WidgetComponent
+   * Implemented as part of OnUpdateInputs
    */
   onUpdateInputs() {
     this.cdRef.detectChanges();
@@ -88,17 +88,13 @@ export class ClientSchemaElementCreateFormComponent implements OnInit, WidgetCom
   }
 
   private onSubmitSuccess(element: ClientSchemaElement) {
-    console.log(this.transaction);
-    console.log(this.transaction.getKey(element));
     this.transaction.insert(element, this.store, {
       title: generateOperationTitle(element)
     });
-    console.log(this.store);
     this.complete.emit();
   }
 
   private formDataToElement(data: Feature): ClientSchemaElement {
-    console.log(data);
     const properties = Object.assign({
       idSchema: this.schema.id,
       idElementGeometrique: undefined,
@@ -110,7 +106,6 @@ export class ClientSchemaElementCreateFormComponent implements OnInit, WidgetCom
       timbreMaj: undefined,
       usagerMaj: undefined
     }, data.properties);
-    console.log( Object.assign({}, data, {properties}));
     return Object.assign({}, data, {properties});
   }
 

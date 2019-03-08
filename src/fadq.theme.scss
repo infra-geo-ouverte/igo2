@@ -16,3 +16,7 @@ table.igo-striped tbody tr:nth-child(odd) {
   background-color: mat-color($background, if($is-dark, app-bar, status-bar));
   color: mat-color($foreground, text);
 }
+
+.fadq-error-text {
+  color: mat-color($warn);
+}

@@ -12,7 +12,6 @@
   "yes": "Oui",
   "no": "Non",
   "informations": "Informations",
-  "geometry": "Géométrie",
 
   "search": {
     "feature.title": "Localisation",
@@ -104,6 +103,7 @@
       "fill.tooltip": "Réinclure une surface exclue",
       "slice": "Couper un élément",
       "slice.tooltip": "Couper un élément",
+      "slice.message": "Tracez une ligne pour couper l'élément sélectionné",
       "move": "Déplacer",
       "move.tooltip": "Déplacer un élément",
       "save": "Sauvegarder",
@@ -147,6 +147,13 @@
         "tooltip": "View in Google Maps"
       }
     }
+  },
+
+  "geometry": {
+    "geometry": "Géométrie",
+    "slice.error.tooManyIntersection": "L'élément ne peut qu'être coupé en 2.",
+    "slice.error.multiPolygon": "Impossible de couper un élément contenant des exclusions",
+    "slice.error.lineString": "La ligne de coupe doit contenir seulement 2 points"
   },
 
   "icherche": {
