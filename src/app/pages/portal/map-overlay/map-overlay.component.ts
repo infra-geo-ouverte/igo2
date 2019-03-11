@@ -13,6 +13,8 @@ import { MapOverlay } from './map-overlay.interface';
 export class MapOverlayComponent implements AfterViewInit, OnDestroy {
   public mapOverlay: MapOverlay[] = [];
   private context$$: Subscription;
+  private media$$: Subscription;
+  private context: Context;
 
   constructor(
     private contextService: ContextService,
@@ -21,8 +23,13 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
   ) { }
 
   ngAfterViewInit() {
-    this.context$$ = this.contextService.context$.subscribe(context =>
-      this.handleContextChange(context)
+    this.context$$ = this.contextService.context$.subscribe(context => {
+        this.handleContextChange(context);
+        this.context = context;
+        }
+    );
+    this.media$$ = this.mediaService.media$.subscribe(media =>
+      this.handleContextChange(this.context)
     );
   }
 
