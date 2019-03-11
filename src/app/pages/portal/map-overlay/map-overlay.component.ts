@@ -35,6 +35,7 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
+    this.media$$.unsubscribe();
   }
 
   private handleContextChange(context: Context) {
