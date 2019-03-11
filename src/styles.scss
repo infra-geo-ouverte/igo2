@@ -50,6 +50,12 @@ th.text-centered {
   margin: 10px 0;
 }
 
+// Add this class to a from to reduce the spacing between mat-fields
+// See this link for more info: https://github.com/angular/material2/issues/7975
+.igo-form-compact .mat-form-field-wrapper {
+  margin-bottom: -0.75em;
+}
+
 .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
   line-height: 36px !important;
   padding: 0 16px !important;
