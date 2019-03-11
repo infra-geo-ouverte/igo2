@@ -23,7 +23,7 @@ export class ClientSchemaElementFormService {
 
   buildCreateForm(igoMap: IgoMap): Observable<Form> {
     const geometryFields$ = zip(
-      this.createGeometryField({inputs: {map: igoMap, geometryType: 'Polygon'}})
+      this.createGeometryField({inputs: {map: igoMap}})
     );
 
     const infoFields$ = zip(
@@ -112,7 +112,13 @@ export class ClientSchemaElementFormService {
         validator: Validators.required
       },
       type: 'geometry',
-      inputs: {}
+      inputs: {
+        geometryTypeField: true,
+        geometryType: 'Polygon',
+        drawGuideField: true,
+        drawGuide: 0,
+        drawGuidePlaceholder: 'Guide d\'aide au traçage'
+      }
     }, partial));
   }
 

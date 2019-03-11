@@ -132,7 +132,15 @@ export class ClientSchemaElementCreateFormComponent
 
   private setForm(form: Form) {
     this.geometry$$ = form.control.controls.geometry.valueChanges
-      .subscribe((geometry: GeoJSONGeometry) => this.tabIndex$.next(1));
+      .subscribe((geometry: GeoJSONGeometry) => {
+        // When the drawGuide field is focused, changing tab
+        // trigegrs an an "afterViewInit" error. Unfocusing the active
+        // element (whatever it is) fixes it.
+        if ('activeElement' in document) {
+          (document.activeElement as HTMLElement).blur();
+        }
+        this.tabIndex$.next(1);
+      });
     this.form$.next(form);
   }
 
