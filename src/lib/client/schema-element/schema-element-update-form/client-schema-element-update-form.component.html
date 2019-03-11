@@ -1,6 +1,7 @@
 
 <igo-feature-form
   *ngIf="form$ | async as form"
+  class="igo-form-compact"
   [form]="form"
   [feature]="element"
   [store]="store"
@@ -8,10 +9,10 @@
 
   <mat-tab-group [selectedIndex]="1">
     <mat-tab [label]="'geometry.geometry' | translate">
-      <igo-form-group [group]="form.groups[0]"></igo-form-group>
+      <igo-form-field [field]="form.fields[0]"></igo-form-field>
     </mat-tab>
     <mat-tab [label]="'informations' | translate">
-      <igo-form-group [group]="form.groups[1]"></igo-form-group>
+      <igo-form-group [group]="form.groups[0]"></igo-form-group>
     </mat-tab>
   </mat-tab-group>
 

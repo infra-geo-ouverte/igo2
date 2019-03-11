@@ -22,6 +22,10 @@ export class ClientSchemaElementFormService {
   ) {}
 
   buildCreateForm(igoMap: IgoMap): Observable<Form> {
+    const geometryFields$ = zip(
+      this.createGeometryField({inputs: {map: igoMap, geometryType: 'Polygon'}})
+    );
+
     const infoFields$ = zip(
       this.createIdField({options: {disabled: true}}),
       this.createTypeElementField(),
@@ -30,16 +34,11 @@ export class ClientSchemaElementFormService {
       this.createAnneeImageField()
     );
 
-    const geometryFields$ = zip(
-      this.createGeometryField({inputs: {map: igoMap, geometryType: 'Polygon'}})
-    );
-
-    return zip(infoFields$, geometryFields$)
+    return zip(geometryFields$, infoFields$)
       .pipe(
         map((fields: [FormField[], FormField[]]) => {
-          return this.formService.form([], [
-            this.formService.group({name: 'geometry'}, fields[1]),
-            this.formService.group({name: 'info'}, fields[0])
+          return this.formService.form(fields[0], [
+            this.formService.group({name: 'info'}, fields[1])
           ]);
         })
       );
