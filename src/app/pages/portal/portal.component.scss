@@ -81,6 +81,15 @@ igo-map-browser.toast-opened-offset ::ng-deep .ol-attribution {
   }
 }
 
+igo-map-browser.sidenav-offset igo-baselayers-switcher {
+  @include tablet {
+    left: 410px;
+  }
+  @include desktop {
+    left: 410px;
+  }
+}
+
 igo-map-browser.sidenav-offset ::ng-deep .ol-attribution {
   left: 410px;
   @include mobile {
