@@ -1,3 +1,14 @@
+<a name="0.25.4"></a>
+## [0.25.4](https://github.com/infra-geo-ouverte/igo2/compare/0.25.3...0.25.4) (2019-03-12)
+
+
+### Bug Fixes
+
+* **feature-details:** fix select first resultat when focusFirst=false ([7a80cd6](https://github.com/infra-geo-ouverte/igo2/commit/7a80cd6))
+* **ie:** animation baselayers-switcher not working ([6f07dea](https://github.com/infra-geo-ouverte/igo2/commit/6f07dea))
+
+
+
 <a name="0.25.3"></a>
 ## [0.25.3](https://github.com/infra-geo-ouverte/igo2/compare/0.25.2...0.25.3) (2019-03-12)
 
