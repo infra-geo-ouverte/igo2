@@ -136,13 +136,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeMapBrowserClass(e) {
+  updateMapBrowserClass(e) {
     e.element.classList.remove('toast-shown-offset');
     e.element.classList.remove('toast-opened-offset');
-    e.element.classList.remove('sidenav-offset');
-  }
-
-  updateMapBrowserClass(e) {
     if (this.mediaService.media$.value === 'mobile') {
       if (this.toastOpened && this.toastShown) {
         e.element.classList.add('toast-opened-offset');
@@ -155,6 +151,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
     if (this.sidenavOpened) {
       e.element.classList.add('sidenav-offset');
+    } else {
+      e.element.classList.remove('sidenav-offset');
     }
   }
 

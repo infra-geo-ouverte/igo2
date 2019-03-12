@@ -46,10 +46,8 @@
     [map]="map"
     [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
     [@mapStateX]="sidenavOpened ? 'right' : 'left'"
-    (@mapStateX.start)="removeMapBrowserClass($event)"
     (@mapStateX.done)="updateMapBrowserClass($event)"
     [@mapStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'"
-    (@mapStateY.start)="removeMapBrowserClass($event)"
     (@mapStateY.done)="updateMapBrowserClass($event)">
 
     <igo-zoom-button [map]="map" color="primary"></igo-zoom-button>
