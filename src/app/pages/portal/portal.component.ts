@@ -212,6 +212,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private handleFeatureSelect(feature: Feature) {
     if (feature && this.mediaService.media$.value === 'mobile') {
       if (this.sidenavOpened) {
+        this.featureService.focusFeature(feature);
         this.closeSidenav();
         this.cdRef.detectChanges();
       }
