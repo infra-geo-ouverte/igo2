@@ -1,3 +1,13 @@
+<a name="0.25.5"></a>
+## [0.25.5](https://github.com/infra-geo-ouverte/igo2/compare/0.25.4...0.25.5) (2019-03-12)
+
+
+### Bug Fixes
+
+* **ie:** animation baselayers-switcher not working ([2b311e1](https://github.com/infra-geo-ouverte/igo2/commit/2b311e1))
+
+
+
 <a name="0.25.4"></a>
 ## [0.25.4](https://github.com/infra-geo-ouverte/igo2/compare/0.25.3...0.25.4) (2019-03-12)
 
