@@ -1,3 +1,20 @@
+<a name="0.25.3"></a>
+## [0.25.3](https://github.com/infra-geo-ouverte/igo2/compare/0.25.2...0.25.3) (2019-03-12)
+
+
+### Bug Fixes
+
+* **mapOverlay:** Fix map overlay padding click ([#250](https://github.com/infra-geo-ouverte/igo2/issues/250)) ([e24c2fe](https://github.com/infra-geo-ouverte/igo2/commit/e24c2fe))
+* **toast:** map overlay must be below igo toast ([#249](https://github.com/infra-geo-ouverte/igo2/issues/249)) ([d27c5bf](https://github.com/infra-geo-ouverte/igo2/commit/d27c5bf))
+
+
+### Features
+
+* **igo-lib:** update igo lib ([2d0ded9](https://github.com/infra-geo-ouverte/igo2/commit/2d0ded9))
+* **mapOverlay:** adapt to media change ([#251](https://github.com/infra-geo-ouverte/igo2/issues/251)) ([a6a87e8](https://github.com/infra-geo-ouverte/igo2/commit/a6a87e8))
+
+
+
 <a name="0.25.2"></a>
 ## [0.25.2](https://github.com/infra-geo-ouverte/igo2/compare/0.25.1...0.25.2) (2019-03-01)
 
