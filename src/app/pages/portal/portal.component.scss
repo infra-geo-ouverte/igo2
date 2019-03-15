@@ -34,11 +34,11 @@
 igo-map-browser {
   width: 100%;
   height: 100%;
-}
 
-igo-baselayers-switcher {
-  left: initial !important;
-  right: 5px;
+  igo-baselayers-switcher {
+    left: initial !important;
+    right: 5px;
+  }
 }
 
 /*** Search bar ***/
@@ -103,6 +103,35 @@ igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution 
 .fadq-footer fadq-map-actionbar {
   position: absolute;
   right: 0;
+  // right: calc(#{$fadq-baselayers-switcher-width} + 5px);
+}
+
+.fadq-footer igo-baselayers-switcher {
+  position: absolute;
+  right: 5px;
+  padding: 8px 3px;
+
+  ::ng-deep {
+    .igo-baselayers-switcher-container {
+      height: $fadq-baselayers-switcher-height !important;
+      width: $fadq-baselayers-switcher-width;    
+    }
+
+    .igo-mini-basemap-container {
+      height: 100%;
+      width: 100%;
+      box-shadow: initial;
+      margin-top: 0;
+    }
+
+    .igo-mini-basemap-title {
+      display: none;
+    }
+
+    .ol-viewport {
+      border: 1px solid #ddd;
+    }
+  }
 }
 
 /*** Expansion panel ***/

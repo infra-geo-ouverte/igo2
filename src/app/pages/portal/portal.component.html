@@ -21,6 +21,7 @@
 
   <igo-search-bar
     [searchTypes]="searchTypes"
+    [minLength]="minSearchTermLength"
     (change)="onSearchTermChange($event)"
     (search)="onSearch($event)">
   </igo-search-bar>
@@ -38,6 +39,7 @@
     igoDropGeoFile
     [map]="map"
     (query)="onMapQuery($event)">
+    <igo-baselayers-switcher [map]="map"></igo-baselayers-switcher>
   </igo-map-browser>
 </mat-sidenav-container>
 
@@ -47,6 +49,7 @@
     [mode]="mapActionbarMode"
     [withTitle]="mapActionbarWithTitle">
   </fadq-map-actionbar>
+  <!--igo-baselayers-switcher [map]="map"></igo-baselayers-switcher-->
 </div>
 
 <fadq-expansion-panel

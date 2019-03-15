@@ -56,6 +56,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public editor: Editor;
   public searchResult: SearchResult;
   public searchTypes = SEARCH_TYPES;
+  public minSearchTermLength = 2;
 
   public expansionPanelExpanded = false;
   public sidenavOpened = false;
@@ -218,9 +219,12 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.onClearSearch();
       return;
     }
+    if (term.length < this.minSearchTermLength) { return; }
 
     if (this.searchState.searchTypes.indexOf(CLIENT) >= 0) {
-      this.onBeforeSearchClient();
+      if (term.length >= 3) {
+        this.onBeforeSearchClient();
+      }
     } else {
       this.onBeforeSearch();
     }
