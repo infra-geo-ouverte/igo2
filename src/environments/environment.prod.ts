@@ -26,13 +26,18 @@ export const environment: Environment = {
   igo: {
     searchSources: {
       nominatim: {
-        available: true,
-        enabled: true
+        available: false,
+        enabled: false
       },
       icherche: {
-        available: false,
-        enabled: false,
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
+        available: true,
+        enabled: true,
+        searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode',
+        params: {
+          type: 'adresse,code_postal,route,municipalite,mrc,region_administrative',
+          limit: '5',
+          geometrie: 'geom'
+        }
       },
       datasource: {
         available: false,
