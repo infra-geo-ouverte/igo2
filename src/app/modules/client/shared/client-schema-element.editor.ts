@@ -50,7 +50,6 @@ export class ClientSchemaElementEditor extends Editor {
       }),
       actionStore: new EntityStore<Action>([])
     });
-
     this.actionStore.load(this.buildActions());
   }
 
@@ -75,6 +74,10 @@ export class ClientSchemaElementEditor extends Editor {
       const element = this.entity as ClientSchemaElement;
       return element.geometry.type === 'Polygon' &&
         element.geometry.coordinates.length > 1;
+    };
+    const elementIsAPolygon = () => {
+      const element = this.entity as ClientSchemaElement;
+      return element.geometry.type === 'Polygon';
     };
 
     return [
@@ -119,17 +122,6 @@ export class ClientSchemaElementEditor extends Editor {
         conditions: [schemaIsDefined, elementIsDefined, transactionIsNotInCommitPhase]
       },
       {
-        id: 'save',
-        icon: 'save',
-        title: 'client.schemaElement.save',
-        tooltip: 'client.schemaElement.save.tooltip',
-        handler: () => this.activateWidget(this.clientSchemaElementSaverWidget, {
-          schema: this.schema,
-          transaction: this.transaction
-        }),
-        conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
-      },
-      {
         id: 'fill',
         icon: 'select_all',
         title: 'client.schemaElement.fill',
@@ -170,8 +162,35 @@ export class ClientSchemaElementEditor extends Editor {
           transaction: this.transaction,
           store: this.entityStore
         }),
-        conditions: [schemaIsDefined, elementIsDefined, transactionIsNotInCommitPhase]
+        conditions: [
+          schemaIsDefined,
+          elementIsDefined,
+          transactionIsNotInCommitPhase,
+          elementIsAPolygon
+        ]
       },
+      {
+        id: 'save',
+        icon: 'save',
+        title: 'client.schemaElement.save',
+        tooltip: 'client.schemaElement.save.tooltip',
+        handler: () => this.activateWidget(this.clientSchemaElementSaverWidget, {
+          schema: this.schema,
+          transaction: this.transaction
+        }),
+        conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
+      },
+      // {
+      //   id: 'undo',
+      //   icon: 'undo',
+      //   title: 'client.schemaElement.undo',
+      //   tooltip: 'client.schemaElement.undo.tooltip',
+      //   handler: () => this.activateWidget(this.clientSchemaElementSaverWidget, {
+      //     schema: this.schema,
+      //     transaction: this.transaction
+      //   }),
+      //   conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
+      // }
     ];
   }
 

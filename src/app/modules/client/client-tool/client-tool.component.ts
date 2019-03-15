@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ToolComponent, EntityStore } from '@igo2/common';
@@ -11,6 +11,7 @@ import {
   Client,
   ClientParcelDiagram,
   ClientParcelYear,
+  ClientParcelYearService,
   ClientSchema,
 } from 'src/lib/client';
 
@@ -30,7 +31,7 @@ import { ClientState } from '../client.state';
   styleUrls: ['./client-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientToolComponent {
+export class ClientToolComponent implements OnInit {
 
   /**
    * Observable of the active client
@@ -67,8 +68,15 @@ export class ClientToolComponent {
   constructor(
     private clientState: ClientState,
     private mapState: MapState,
+    private clientParcelYearService: ClientParcelYearService,
     private configService: ConfigService
   ) {}
+
+  ngOnInit() {
+    if (this.parcelYearStore.empty) {
+      this.loadParcelYears();
+    }
+  }
 
   /**
    * Compute the link to the client's info
@@ -91,6 +99,26 @@ export class ClientToolComponent {
   openClientInfoLink(client: Client) {
     window.open(this.computeClientInfoLink(client), 'Client', 'width=800, height=600');
     return false;
+  }
+
+  /**
+   * Load the parcel years
+   */
+  private loadParcelYears() {
+    this.clientParcelYearService.getParcelYears()
+      .subscribe((parcelYears: ClientParcelYear[]) => {
+        const current = parcelYears.find((parcelYear: ClientParcelYear) => {
+          return parcelYear.current === true;
+        });
+        this.parcelYearStore.load(parcelYears);
+        this.parcelYearStore.view.sort({
+          valueAccessor: (year: ClientParcelYear) => year.annee,
+          direction: 'desc'
+        });
+        if (current !== undefined) {
+          this.parcelYearStore.state.update(current, {selected: true});
+        }
+      });
   }
 
 }

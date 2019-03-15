@@ -68,7 +68,9 @@ export function createSchemaElementLayer(): VectorLayer {
     title: 'Éléments du schéma',
     zIndex: 103,
     source: schemaElementDataSource,
-    style: createSchemaElementLayerStyle()
+    style: createSchemaElementLayerStyle(),
+    removable: false,
+    browsable: false
   });
 }
 

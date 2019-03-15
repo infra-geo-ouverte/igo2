@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { skip, tap } from 'rxjs/operators';
+import { skip } from 'rxjs/operators';
 
 import { EntityRecord, EntityStore, EntityTransaction } from '@igo2/common';
 import {
@@ -16,7 +16,6 @@ import {
   ClientParcelDiagram,
   ClientParcel,
   ClientParcelYear,
-  ClientParcelYearService,
   ClientSchema,
   ClientSchemaElement,
   ClientSchemaElementService,
@@ -100,7 +99,6 @@ export class ClientState implements OnDestroy {
 
   constructor(
     private clientService: ClientService,
-    private clientParcelYearService: ClientParcelYearService,
     private clientSchemaElementService: ClientSchemaElementService,
     private clientParcelEditor: ClientParcelEditor,
     private clientSchemaEditor: ClientSchemaEditor,
@@ -136,7 +134,6 @@ export class ClientState implements OnDestroy {
       });
 
     this.addClientLayers();
-    this.loadParcelYears();
   }
 
   ngOnDestroy() {
@@ -173,9 +170,7 @@ export class ClientState implements OnDestroy {
 
   setClient(client: Client | undefined) {
     this.clearClient();
-    if (client === undefined) {
-      return;
-    }
+    if (client === undefined) { return; }
 
     this.diagramStore.load(client.diagrams);
     this.diagramStore.view.sort({valueAccessor: (diagram) => diagram.id, direction: 'asc'});
@@ -254,23 +249,6 @@ export class ClientState implements OnDestroy {
 
   private clearSchemaElements() {
     this.schemaElementStore.clear();
-  }
-
-  private loadParcelYears() {
-    this.clientParcelYearService.getParcelYears()
-      .subscribe((parcelYears: ClientParcelYear[]) => {
-        const current = parcelYears.find((parcelYear: ClientParcelYear) => {
-          return parcelYear.current === true;
-        });
-        this.parcelYearStore.load(parcelYears);
-        this.parcelYearStore.view.sort({
-          valueAccessor: (year: ClientParcelYear) => year.annee,
-          direction: 'desc'
-        });
-        if (current !== undefined) {
-          this.parcelYearStore.state.update(current, {selected: true});
-        }
-      });
   }
 
   /**

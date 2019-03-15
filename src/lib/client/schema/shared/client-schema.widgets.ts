@@ -9,11 +9,13 @@ import { ClientSchemaCreateFormComponent } from '../client-schema-create-form/cl
 import { ClientSchemaUpdateFormComponent } from '../client-schema-update-form/client-schema-update-form.component';
 import { ClientSchemaDeleteFormComponent } from '../client-schema-delete-form/client-schema-delete-form.component';
 import { ClientSchemaDuplicateFormComponent } from '../client-schema-duplicate-form/client-schema-duplicate-form.component';
+import { ClientSchemaTransferFormComponent } from '../client-schema-transfer-form/client-schema-transfer-form.component';
 
 export const ClientSchemaCreateWidget = new InjectionToken<Widget>('ClientSchemaCreateWidget');
 export const ClientSchemaUpdateWidget = new InjectionToken<Widget>('ClientSchemaUpdateWidget');
 export const ClientSchemaDeleteWidget = new InjectionToken<Widget>('ClientSchemaDeleteeWidget');
 export const ClientSchemaDuplicateWidget = new InjectionToken<Widget>('ClientSchemaDuplicateWidget');
+export const ClientSchemaTransferWidget = new InjectionToken<Widget>('ClientSchemaTransferWidget');
 export const ClientSchemaFileManagerWidget = new InjectionToken<Widget>('ClientSchemaFileManagerWidget');
 
 export function clientSchemaCreateWidgetFactory(widgetService: WidgetService) {
@@ -60,6 +62,18 @@ export function provideClientSchemaDuplicateWidget() {
   return {
     provide:  ClientSchemaDuplicateWidget,
     useFactory: clientSchemaDuplicateWidgetFactory,
+    deps: [WidgetService]
+  };
+}
+
+export function clientSchemaTransferWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaTransferFormComponent);
+}
+
+export function provideClientSchemaTransferWidget() {
+  return {
+    provide:  ClientSchemaTransferWidget,
+    useFactory: clientSchemaTransferWidgetFactory,
     deps: [WidgetService]
   };
 }

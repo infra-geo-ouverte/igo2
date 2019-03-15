@@ -22,7 +22,9 @@ export function createParcelLayer(): VectorLayer {
     title: 'Parcelles du client',
     zIndex: 100,
     source: parcelDataSource,
-    style: createParcelLayerStyle()
+    style: createParcelLayerStyle(),
+    removable: false,
+    browsable: false
   });
 }
 

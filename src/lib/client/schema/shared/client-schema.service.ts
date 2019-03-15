@@ -83,6 +83,18 @@ export class ClientSchemaService {
       );
   }
 
+  transferSchema(schema: ClientSchema, numClient: string): Observable<ClientSchema> {
+    const url = this.apiService.buildUrl(this.apiConfig.update);
+    const data = Object.assign({}, schema, {numeroClient: numClient});
+    return this.http
+      .post(url, data)
+      .pipe(
+        map((response: ClientSchemaUpdateResponse) => {
+          return this.extractSchemaFromUpdateResponse(response);
+        })
+      );
+  }
+
   private extractSchemasFromListResponse(
     response: ClientSchemaListResponse
   ): ClientSchema[] {

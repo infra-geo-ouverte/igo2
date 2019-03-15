@@ -93,9 +93,9 @@ export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, Widg
     this.cancel.emit();
   }
 
-  onSchemaFileSelectChange(event: {entity: ClientSchemaFile, selected: boolean}) {
-    if (event.selected === true) {
-      this.schemaFile = event.entity;
+  onSchemaFileSelectChange(event: {added: ClientSchemaFile[]}) {
+    if (event.added.length > 0) {
+      this.schemaFile = event.added[0];
     }
   }
 

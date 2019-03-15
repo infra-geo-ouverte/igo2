@@ -1,0 +1,24 @@
+<igo-form
+  *ngIf="form$ | async as form"
+  [form]="form"
+  (submitForm)="onSubmit($event)">
+
+  <igo-form-group [group]="form.groups[0]"></igo-form-group>
+
+  <div formButtons>
+    <button
+      mat-button
+      type="button"
+      (click)="onCancel()">
+      {{ 'cancel' | translate }}
+    </button>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="form.control.pristine || !form.control.valid">
+      {{ 'client.schema.transfer' | translate }}
+    </button>
+  </div>
+  
+</igo-form>

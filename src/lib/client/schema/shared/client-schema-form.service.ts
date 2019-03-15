@@ -58,12 +58,36 @@ export class ClientSchemaFormService {
     return this.buildCreateForm();
   }
 
+  buildTransferForm(): Observable<Form> {
+    const fields$ = zip(
+      this.createNumeroClientField()
+    );
+    return fields$.pipe(
+      map((fields: FormField[]) => {
+        return this.formService.form([], [
+          this.formService.group({name: 'info'}, fields)
+        ]);
+      })
+    );
+  }
+
   private createIdField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
     return of(this.createField({
       name: 'id',
       title: 'Numéro de schéma',
       options:  {
         cols: 1
+      }
+    }, partial));
+  }
+
+  private createNumeroClientField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
+    return of(this.createField({
+      name: 'numeroClient',
+      title: 'Numéro de client',
+      options:  {
+        cols: 2,
+        validator: Validators.required
       }
     }, partial));
   }

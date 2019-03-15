@@ -11,6 +11,7 @@ import {
   ClientSchemaUpdateWidget,
   ClientSchemaDeleteWidget,
   ClientSchemaDuplicateWidget,
+  ClientSchemaTransferWidget,
   ClientSchemaFileManagerWidget,
 } from 'src/lib/client';
 
@@ -25,6 +26,7 @@ export class ClientSchemaEditor extends Editor {
     @Inject(ClientSchemaUpdateWidget) private clientSchemaUpdateWidget: Widget,
     @Inject(ClientSchemaDeleteWidget) private clientSchemaDeleteWidget: Widget,
     @Inject(ClientSchemaDuplicateWidget) private clientSchemaDuplicateWidget: Widget,
+    @Inject(ClientSchemaTransferWidget) private clientSchemaTransferWidget: Widget,
     @Inject(ClientSchemaFileManagerWidget) private clientSchemaFileManagerWidget: Widget,
   ) {
     super({
@@ -107,7 +109,10 @@ export class ClientSchemaEditor extends Editor {
         icon: 'swap_horiz',
         title: 'client.schema.transfer',
         tooltip: 'client.schema.transfer.tooltip',
-        handler: () => {},
+        handler: () => this.activateWidget(this.clientSchemaTransferWidget, {
+          schema: this.entity,
+          store: this.entityStore
+        }),
         conditions: [schemaIsDefined]
       },
       {
