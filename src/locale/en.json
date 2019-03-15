@@ -135,13 +135,17 @@
         "title": "Next View",
         "tooltip": "Next View"
       },
+      "initialview": {
+        "title": "Initial View",
+        "tooltip": "Initial View"
+      },
       "clickinteraction": {
         "title": "Change Click Interaction",
         "tooltip": "Change Click Interaction"
       },
       "geolocation": {
-        "title": "Geolocate",
-        "tooltip": "Geolocate"
+        "title": "Show My Position",
+        "tooltip": "Show My Position"
       },
       "googleview": {
         "title": "View in Google Maps",

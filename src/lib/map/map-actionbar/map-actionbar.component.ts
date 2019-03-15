@@ -5,7 +5,8 @@ import { Subscription } from 'rxjs';
 import { Action, ActionbarMode, ActionStore } from '@igo2/common';
 import { IgoMap, MapViewState } from '@igo2/geo';
 
-import { MapAction } from '../shared';
+import { MapAction } from '../shared/map.enum';
+import { getGoogleMapsUrl } from '../shared/map.utils';
 
 /**
  * Map actions bar
@@ -121,6 +122,15 @@ export class MapActionbarComponent implements OnInit, OnDestroy {
           this.map.viewController.nextState();
         }
       },
+      {
+        id: MapAction.InitialView,
+        icon: 'all_out',
+        title: 'map.actionbar.initialview.title',
+        tooltip: 'map.actionbar.initialview.tooltip',
+        handler: () => {
+          this.map.viewController.setInitialState();
+        }
+      },
       // {
       //   id: MapAction.ClickInteraction,
       //   icon: 'mouse',
@@ -128,19 +138,26 @@ export class MapActionbarComponent implements OnInit, OnDestroy {
       //   tooltip: 'map.actionbar.clickinteraction.tooltip',
       //   handler: () => {}
       // },
-      {
-        id: MapAction.Geolocation,
-        icon: 'my_location',
-        title: 'map.actionbar.geolocation.title',
-        tooltip: 'map.actionbar.geolocation.tooltip',
-        handler: () => {}
-      },
+      // {
+      //   id: MapAction.Geolocation,
+      //   icon: 'my_location',
+      //   title: 'map.actionbar.geolocation.title',
+      //   tooltip: 'map.actionbar.geolocation.tooltip',
+      //   handler: () => {
+      //     this.map.geolocate();
+      //   }
+      // },
       {
         id: MapAction.GoogleView,
         icon: 'streetview',
         title: 'map.actionbar.googleview.title',
         tooltip: 'map.actionbar.googleview.tooltip',
-        handler: () => {}
+        handler: () => {
+          const center = this.map.viewController.getCenter('EPSG:4326');
+          const zoom =  this.map.viewController.getZoom();
+          const url = getGoogleMapsUrl(center, zoom, 'satellite');
+          window.open(url, '_blank');
+        }
       }
     ];
   }

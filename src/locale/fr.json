@@ -120,32 +120,36 @@
         "tooltip": "Change Base Layer"
       },
       "zoomin": {
-        "title": "Zoom In",
-        "tooltip": "Zoom In"
+        "title": "Zoom avant",
+        "tooltip": "Zoom avant"
       },
       "zoomout": {
-        "title": "Zoom Out",
-        "tooltip": "Zoom Out"
+        "title": "Zoom arrière",
+        "tooltip": "Zoom arrière"
       },
       "previousview": {
-        "title": "Previous View",
-        "tooltip": "Previous View"
+        "title": "Navigation rapide: reculer",
+        "tooltip": "Navigation rapide: reculer"
       },
       "nextview": {
-        "title": "Next View",
-        "tooltip": "Next View"
+        "title": "Navigation rapide: avancer",
+        "tooltip": "Navigation rapide: avancer"
+      },
+      "initialview": {
+        "title": "Vue initiale",
+        "tooltip": "Vue initiale"
       },
       "clickinteraction": {
         "title": "Change Click Interaction",
         "tooltip": "Change Click Interaction"
       },
       "geolocation": {
-        "title": "Geolocate",
-        "tooltip": "Geolocate"
+        "title": "Afficher votre position",
+        "tooltip": "Afficher votre position"
       },
       "googleview": {
-        "title": "View in Google Maps",
-        "tooltip": "View in Google Maps"
+        "title": "Voir dans Google Maps",
+        "tooltip": "Voir dans Google Maps"
       }
     }
   },
