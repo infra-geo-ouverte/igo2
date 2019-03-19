@@ -12,7 +12,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import { Tool, Toolbox, getEntityTitle, FlexibleState } from '@igo2/common';
-import { SearchResult, IgoMap } from '@igo2/geo';
+import { SearchResult, IgoMap, moveToFeatures } from '@igo2/geo';
 import { ToolState } from '@igo2/integration';
 
 @Component({
@@ -105,7 +105,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
         dataProjection: this.searchResult.data.geometry.projection,
         featureProjection: this.map.projection
       });
-      this.map.zoomToFeature(olFeature);
+      moveToFeatures(this.map, olFeature);
     }
   }
 
