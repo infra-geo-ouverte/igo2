@@ -15,10 +15,11 @@ import {
   ClientSchema,
   ClientSchemaElement,
   ClientSchemaElementTableService,
-  ClientSchemaElementSaverWidget,
   ClientSchemaElementCreateWidget,
   ClientSchemaElementUpdateWidget,
   ClientSchemaElementSliceWidget,
+  ClientSchemaElementSaverWidget,
+  ClientSchemaElementUndoWidget,
   generateOperationTitle
 } from 'src/lib/client';
 
@@ -33,10 +34,11 @@ export class ClientSchemaElementEditor extends Editor {
   constructor(
     private mapState: MapState,
     private clientSchemaElementTableService: ClientSchemaElementTableService,
-    @Inject(ClientSchemaElementSaverWidget) private clientSchemaElementSaverWidget: Widget,
     @Inject(ClientSchemaElementCreateWidget) private clientSchemaElementCreateWidget: Widget,
     @Inject(ClientSchemaElementUpdateWidget) private clientSchemaElementUpdateWidget: Widget,
-    @Inject(ClientSchemaElementSliceWidget) private clientSchemaElementSliceWidget: Widget
+    @Inject(ClientSchemaElementSliceWidget) private clientSchemaElementSliceWidget: Widget,
+    @Inject(ClientSchemaElementSaverWidget) private clientSchemaElementSaverWidget: Widget,
+    @Inject(ClientSchemaElementUndoWidget) private clientSchemaElementUndoWidget: Widget
   ) {
     super({
       id: 'fadq.client-schema-element-editor',
@@ -180,17 +182,16 @@ export class ClientSchemaElementEditor extends Editor {
         }),
         conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
       },
-      // {
-      //   id: 'undo',
-      //   icon: 'undo',
-      //   title: 'client.schemaElement.undo',
-      //   tooltip: 'client.schemaElement.undo.tooltip',
-      //   handler: () => this.activateWidget(this.clientSchemaElementSaverWidget, {
-      //     schema: this.schema,
-      //     transaction: this.transaction
-      //   }),
-      //   conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
-      // }
+      {
+        id: 'undo',
+        icon: 'undo',
+        title: 'client.schemaElement.undo',
+        tooltip: 'client.schemaElement.undo.tooltip',
+        handler: () => this.activateWidget(this.clientSchemaElementUndoWidget, {
+          transaction: this.transaction
+        }),
+        conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
+      }
     ];
   }
 

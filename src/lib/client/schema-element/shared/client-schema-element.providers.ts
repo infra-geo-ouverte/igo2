@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 
-import { ConfigService } from '@igo2/core';
+import { ConfigService, LanguageService } from '@igo2/core';
 
 import { ApiService } from 'src/lib/core/api';
 import { ClientSchemaElementPointService } from './client-schema-element-point.service';
@@ -74,12 +74,18 @@ export function provideClientSchemaElementSurfaceService() {
 export function clientSchemaElementServiceFactory(
   clientSchemaElementPointService: ClientSchemaElementPointService,
   clientSchemaElementLineService: ClientSchemaElementLineService,
-  clientSchemaElementSurfaceService: ClientSchemaElementSurfaceService
+  clientSchemaElementSurfaceService: ClientSchemaElementSurfaceService,
+  http: HttpClient,
+  apiService: ApiService,
+  config: ConfigService
 ) {
   return new ClientSchemaElementService(
     clientSchemaElementPointService,
     clientSchemaElementLineService,
-    clientSchemaElementSurfaceService
+    clientSchemaElementSurfaceService,
+    http,
+    apiService,
+    config.getConfig('client.api.schemaElement')
   );
 }
 
@@ -90,7 +96,10 @@ export function provideClientSchemaElementService() {
     deps: [
       ClientSchemaElementPointService,
       ClientSchemaElementLineService,
-      ClientSchemaElementSurfaceService
+      ClientSchemaElementSurfaceService,
+      HttpClient,
+      ApiService,
+      ConfigService
     ]
   };
 }

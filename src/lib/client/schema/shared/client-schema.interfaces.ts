@@ -60,7 +60,10 @@ export interface ClientSchemaUpdateData {
 }
 
 export interface ClientSchemaUpdateResponse {
-  data: ClientSchemaListResponseItem;
+  data: {
+    schema: ClientSchemaListResponseItem;
+    codeRetour: string;
+  };
 }
 
 export interface ClientSchemaDuplicateResponse {

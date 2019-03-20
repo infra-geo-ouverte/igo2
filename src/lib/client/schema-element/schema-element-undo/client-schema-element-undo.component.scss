@@ -30,19 +30,3 @@ mat-card {
     width: $icon-size;
   }
 }
-
-mat-card-content {
-  height: calc(100% - 32px);
-}
-
-igo-entity-table {
-  max-height: calc(100% - 66px);
-
-  ::ng-deep {
-    td.mat-cell:first-child,
-    th.mat-header-cell:first-child {
-      text-align: center;
-      padding-left:0;
-    }
-  }
-}

@@ -82,6 +82,7 @@
       "manageFiles.tooltip": "Gérer les fichiers joints",
       "transfer": "Transférer",
       "transfer.tooltip": "Transférer un schéma",
+      "transfer.error.duplicatedNumber": "Certains numéros des éléments du schéma sélectionné sont déjà utilisés dans celui du client vers lequel est tenté le transfert. Si nécessaire, aller modifier ces numéros par la suite.",
       "createMap": "Créer carte(s)",
       "createMap.tooltip": "Créer carte(s) de structure d'entreposage"
     },
@@ -109,7 +110,10 @@
       "move.tooltip": "Déplacer un élément",
       "save": "Sauvegarder",
       "save.tooltip": "Sauvegarder les éléments",
-      "save.confirm": "Voulez-vous sauvegarder ces changements?"
+      "save.confirm": "Voulez-vous sauvegarder ces changements?",
+      "undo": "Annuler tous les changements",
+      "undo.tooltip": "Annuler tous les changements",
+      "undo.confirm": "Désirez-vous sannuler tous les changements?"
     }
   },
 

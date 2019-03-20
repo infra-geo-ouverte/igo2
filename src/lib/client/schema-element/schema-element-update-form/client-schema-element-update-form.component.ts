@@ -8,12 +8,22 @@ import {
   OnInit
 } from '@angular/core';
 
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
-import { EntityTransaction, Form, WidgetComponent, OnUpdateInputs } from '@igo2/common';
+import {
+  EntityTransaction,
+  Form,
+  FormField,
+  FormFieldSelectInputs,
+  WidgetComponent,
+  OnUpdateInputs,
+  FormFieldSelectChoice
+} from '@igo2/common';
 import { Feature, FeatureStore, IgoMap } from '@igo2/geo';
 
+import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaElement } from '../shared/client-schema-element.interfaces';
+import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 import { generateOperationTitle } from '../shared/client-schema-element.utils';
 
@@ -25,10 +35,11 @@ import { generateOperationTitle } from '../shared/client-schema-element.utils';
 })
 export class ClientSchemaElementUpdateFormComponent implements OnInit, OnUpdateInputs, WidgetComponent {
 
-   /**
+  /**
    * Update form
+   * @internal
    */
-  public form$ = new Subject<Form>();
+  public form$ = new BehaviorSubject<Form>(undefined);
 
   /**
    * Map to draw elements on
@@ -46,6 +57,11 @@ export class ClientSchemaElementUpdateFormComponent implements OnInit, OnUpdateI
   @Input() transaction: EntityTransaction;
 
   /**
+   * Schema
+   */
+  @Input() schema: ClientSchema;
+
+  /**
    * Schema element
    */
   @Input() element: ClientSchemaElement;
@@ -61,13 +77,15 @@ export class ClientSchemaElementUpdateFormComponent implements OnInit, OnUpdateI
   @Output() cancel = new EventEmitter<void>();
 
   constructor(
+    private clientSchemaElementService: ClientSchemaElementService,
     private clientSchemaElementFormService: ClientSchemaElementFormService,
     private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
-    this.clientSchemaElementFormService.buildUpdateForm(this.map)
-      .subscribe((form: Form) => this.form$.next(form));
+    this.clientSchemaElementFormService
+      .buildUpdateForm(this.map, [this.element.geometry.type])
+      .subscribe((form: Form) => this.setForm(form));
   }
 
   /**
@@ -94,6 +112,19 @@ export class ClientSchemaElementUpdateFormComponent implements OnInit, OnUpdateI
 
   private formDataToElement(data: Feature): ClientSchemaElement {
     return Object.assign({}, data as ClientSchemaElement);
+  }
+
+  private setForm(form: Form) {
+    this.clientSchemaElementService
+      .getClientSchemaElementTypeChoices(this.schema.type)
+      .subscribe((choices: {[key: string]: FormFieldSelectChoice[]}) => {
+        const elementTypeField = form.groups[0].fields.find((field: FormField) => {
+          return field.name === 'properties.typeElement';
+        }) as FormField<FormFieldSelectInputs>;
+        const choices$ = elementTypeField.inputs.choices as BehaviorSubject<FormFieldSelectChoice[]>;
+        choices$.next(choices[this.element.geometry.type]);
+        this.form$.next(form);
+      });
   }
 
 }

@@ -5,9 +5,6 @@ import { InjectionToken } from '@angular/core';
 import { Widget, WidgetService } from '@igo2/common';
 
 import {
-  ClientSchemaElementSaverComponent
-} from '../schema-element-saver/client-schema-element-saver.component';
-import {
   ClientSchemaElementCreateFormComponent
 } from '../schema-element-create-form/client-schema-element-create-form.component';
 import {
@@ -16,27 +13,23 @@ import {
 import {
   ClientSchemaElementSliceFormComponent
 } from '../schema-element-slice-form/client-schema-element-slice-form.component';
+import {
+  ClientSchemaElementSaverComponent
+} from '../schema-element-saver/client-schema-element-saver.component';
+import {
+  ClientSchemaElementUndoComponent
+} from '../schema-element-undo/client-schema-element-undo.component';
 
-export const ClientSchemaElementSaverWidget =
-  new InjectionToken<Widget>('ClientSchemaElementSaverWidget');
 export const ClientSchemaElementCreateWidget =
   new InjectionToken<Widget>('ClientSchemaElementCreateWidget');
 export const ClientSchemaElementUpdateWidget =
   new InjectionToken<Widget>('ClientSchemaElementUpdateWidget');
 export const ClientSchemaElementSliceWidget =
   new InjectionToken<Widget>('ClientSchemaElementSliceWidget');
-
-export function clientSchemaElementSaverWidgetFactory(widgetService: WidgetService) {
-  return widgetService.create(ClientSchemaElementSaverComponent);
-}
-
-export function provideClientSchemaElementSaverWidget() {
-  return {
-    provide:  ClientSchemaElementSaverWidget,
-    useFactory: clientSchemaElementSaverWidgetFactory,
-    deps: [WidgetService]
-  };
-}
+export const ClientSchemaElementSaverWidget =
+  new InjectionToken<Widget>('ClientSchemaElementSaverWidget');
+export const ClientSchemaElementUndoWidget =
+  new InjectionToken<Widget>('ClientSchemaElementUndoWidget');
 
 export function clientSchemaElementCreateWidgetFactory(widgetService: WidgetService) {
   return widgetService.create(ClientSchemaElementCreateFormComponent);
@@ -70,6 +63,30 @@ export function provideClientSchemaElementSliceWidget() {
   return {
     provide:  ClientSchemaElementSliceWidget,
     useFactory: clientSchemaElementSliceWidgetFactory,
+    deps: [WidgetService]
+  };
+}
+
+export function clientSchemaElementSaverWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementSaverComponent);
+}
+
+export function provideClientSchemaElementSaverWidget() {
+  return {
+    provide:  ClientSchemaElementSaverWidget,
+    useFactory: clientSchemaElementSaverWidgetFactory,
+    deps: [WidgetService]
+  };
+}
+
+export function clientSchemaElementUndoWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementUndoComponent);
+}
+
+export function provideClientSchemaElementUndoWidget() {
+  return {
+    provide:  ClientSchemaElementUndoWidget,
+    useFactory: clientSchemaElementUndoWidgetFactory,
     deps: [WidgetService]
   };
 }

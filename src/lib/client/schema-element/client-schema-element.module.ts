@@ -2,9 +2,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  FadqLibClientSchemaElementSaverModule
-} from './schema-element-saver/client-schema-element-saver.module';
-import {
   FadqLibClientSchemaElementCreateFormModule
 } from './schema-element-create-form/client-schema-element-create-form.module';
 import {
@@ -13,18 +10,25 @@ import {
 import {
   FadqLibClientSchemaElementSliceFormModule
 } from './schema-element-slice-form/client-schema-element-slice-form.module';
+import {
+  FadqLibClientSchemaElementSaverModule
+} from './schema-element-saver/client-schema-element-saver.module';
+import {
+  FadqLibClientSchemaElementUndoModule
+} from './schema-element-undo/client-schema-element-undo.module';
 
 import {
   provideClientSchemaElementPointService,
   provideClientSchemaElementLineService,
   provideClientSchemaElementSurfaceService,
-  provideClientSchemaElementService
+  provideClientSchemaElementService,
 } from './shared/client-schema-element.providers';
 import {
-  provideClientSchemaElementSaverWidget,
   provideClientSchemaElementCreateWidget,
   provideClientSchemaElementUpdateWidget,
-  provideClientSchemaElementSliceWidget
+  provideClientSchemaElementSliceWidget,
+  provideClientSchemaElementSaverWidget,
+  provideClientSchemaElementUndoWidget
 } from './shared/client-schema-element.widgets';
 import { ClientSchemaElementFormService } from './shared/client-schema-element-form.service';
 import { ClientSchemaElementTableService } from './shared/client-schema-element-table.service';
@@ -34,10 +38,11 @@ import { ClientSchemaElementTableService } from './shared/client-schema-element-
     CommonModule
   ],
   exports: [
-    FadqLibClientSchemaElementSaverModule,
     FadqLibClientSchemaElementCreateFormModule,
     FadqLibClientSchemaElementUpdateFormModule,
-    FadqLibClientSchemaElementSliceFormModule
+    FadqLibClientSchemaElementSliceFormModule,
+    FadqLibClientSchemaElementSaverModule,
+    FadqLibClientSchemaElementUndoModule
   ],
   declarations: []
 })
@@ -50,10 +55,11 @@ export class FadqLibClientSchemaElementModule {
         provideClientSchemaElementLineService(),
         provideClientSchemaElementSurfaceService(),
         provideClientSchemaElementService(),
-        provideClientSchemaElementSaverWidget(),
         provideClientSchemaElementCreateWidget(),
         provideClientSchemaElementUpdateWidget(),
         provideClientSchemaElementSliceWidget(),
+        provideClientSchemaElementSaverWidget(),
+        provideClientSchemaElementUndoWidget(),
         ClientSchemaElementFormService,
         ClientSchemaElementTableService
       ]

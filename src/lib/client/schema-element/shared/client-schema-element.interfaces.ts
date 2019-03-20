@@ -5,6 +5,9 @@ export interface ClientSchemaElementApiConfig {
   points: string;
   lines: string;
   surfaces: string;
+  domains: {
+    type: string;
+  };
 }
 
 export interface ClientSchemaElementProperties {
@@ -25,6 +28,25 @@ export interface ClientSchemaElement extends Feature {
 export interface ClientSchemaElementListResponseItem extends ClientSchemaElement {}
 
 export type ClientSchemaElementListResponse = ClientSchemaElementListResponseItem[];
+
+export interface ClientSchemaElementTypeChoicesResponse {
+  data: {
+    lstTypeElementPoint: ClientSchemaElementTypeChoicesResponseItem[];
+    lstTypeElementLigne: ClientSchemaElementTypeChoicesResponseItem[];
+    lstTypeElementSurface: ClientSchemaElementTypeChoicesResponseItem[];
+  };
+}
+
+export interface ClientSchemaElementTypeChoicesResponseItem {
+  idTypeElement: string;
+  libelleFrancaisAbr: string;
+  libelleFrancais?: string;
+  libelleAnglaisAbr?: string;
+  libelleAnglais?: string;
+  ordreAffichage?: number;
+  couleurElement?: string;
+  iconeElement?: string;
+}
 
 export interface ClientSchemaElementTransactionData {
   inserts:  ClientSchemaElement[];

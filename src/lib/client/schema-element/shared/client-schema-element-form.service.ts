@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { Observable, of, zip } from 'rxjs';
+import { BehaviorSubject, Observable, of, zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { LanguageService } from '@igo2/core';
@@ -9,6 +9,7 @@ import {
   Form,
   FormField,
   FormFieldConfig,
+  FormFieldSelectInputs,
   FormService
 } from '@igo2/common';
 import { IgoMap } from '@igo2/geo';
@@ -21,9 +22,13 @@ export class ClientSchemaElementFormService {
     private languageService: LanguageService
   ) {}
 
-  buildCreateForm(igoMap: IgoMap): Observable<Form> {
+  buildCreateForm(igoMap: IgoMap, geometryTypes: string[]): Observable<Form> {
     const geometryFields$ = zip(
-      this.createGeometryField({inputs: {map: igoMap}})
+      this.createGeometryField({inputs: {
+        map: igoMap,
+        geometryTypes,
+        geometryType: geometryTypes.length > 0 ? geometryTypes[0] : undefined
+      }})
     );
 
     const infoFields$ = zip(
@@ -44,8 +49,8 @@ export class ClientSchemaElementFormService {
       );
   }
 
-  buildUpdateForm(igoMap: IgoMap): Observable<Form> {
-    return this.buildCreateForm(igoMap);
+  buildUpdateForm(igoMap: IgoMap, geometryTypes: string[]): Observable<Form> {
+    return this.buildCreateForm(igoMap, geometryTypes);
   }
 
   private createIdField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
@@ -54,17 +59,6 @@ export class ClientSchemaElementFormService {
       title: 'ID',
       options:  {
         cols: 1
-      }
-    }, partial));
-  }
-
-  private createTypeElementField(partial?: Partial<FormFieldConfig>): Observable<FormField> {
-    return of(this.createField({
-      name: 'properties.typeElement',
-      title: 'Type d\'élément',
-      options:  {
-        cols: 1,
-        validator: Validators.required
       }
     }, partial));
   }
@@ -114,7 +108,6 @@ export class ClientSchemaElementFormService {
       type: 'geometry',
       inputs: {
         geometryTypeField: true,
-        geometryType: 'Polygon',
         drawGuideField: true,
         drawGuide: 0,
         drawGuidePlaceholder: 'Guide d\'aide au traçage'
@@ -122,9 +115,26 @@ export class ClientSchemaElementFormService {
     }, partial));
   }
 
+  private createTypeElementField(
+    partial?: Partial<FormFieldConfig>
+  ): Observable<FormField<FormFieldSelectInputs>> {
+
+    return of(this.createField({
+      name: 'properties.typeElement',
+      title: 'Type d\'élément',
+      type: 'select',
+      options:  {
+        cols: 1,
+        validator: Validators.required
+      },
+      inputs: {
+        choices: new BehaviorSubject([])
+      }
+    }, partial) as FormField<FormFieldSelectInputs>);
+  }
+
   private createField(config: FormFieldConfig, partial?: Partial<FormFieldConfig>): FormField {
     config = this.formService.extendFieldConfig(config, partial || {});
     return this.formService.field(config);
   }
-
 }

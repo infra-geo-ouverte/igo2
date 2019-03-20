@@ -82,7 +82,10 @@ export const environment: Environment = {
           save: '',
           points: '/igolocalisation/recherche_client/obtenirElementGeometriquePoint/${schemaId}',
           lines: '/igolocalisation/recherche_client/obtenirElementGeometriqueLigne/${schemaId}',
-          surfaces: '/igolocalisation/recherche_client/obtenirElementGeometriqueSurface/${schemaId}'
+          surfaces: '/igolocalisation/recherche_client/obtenirElementGeometriqueSurface/${schemaId}',
+          domains: {
+            type: '/igoschema/edition_schema/obtenirTypesElementGeometriqueTypeSchema/${schemaType}'
+          }
         }
       }
     }

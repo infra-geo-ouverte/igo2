@@ -5,6 +5,12 @@
 
   <igo-form-group [group]="form.groups[0]"></igo-form-group>
 
+  <p
+    *ngIf="errorMessage$ | async as errorMessage"
+    class="fadq-error-text">
+    {{errorMessage}}
+  </p>
+
   <div formButtons>
     <button
       mat-button

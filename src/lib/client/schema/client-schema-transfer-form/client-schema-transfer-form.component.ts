@@ -11,6 +11,7 @@ import {
 import { Subject } from 'rxjs';
 
 import { EntityStore, Form, WidgetComponent, OnUpdateInputs } from '@igo2/common';
+import { LanguageService } from '@igo2/core';
 
 import { ClientSchema } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
@@ -26,8 +27,15 @@ export class ClientSchemaTransferFormComponent implements OnInit, OnUpdateInputs
 
   /**
    * Transfer form
+   * @internal
    */
-  public form$ = new Subject<Form>();
+  public form$: Subject<Form> = new Subject<Form>();
+
+  /**
+   * Slice error, if any
+   * @internal
+   */
+  errorMessage$: Subject<string> = new Subject();
 
   /**
    * Schema store
@@ -52,6 +60,7 @@ export class ClientSchemaTransferFormComponent implements OnInit, OnUpdateInputs
   constructor(
     private clientSchemaService: ClientSchemaService,
     private clientSchemaFormService: ClientSchemaFormService,
+    private languageService: LanguageService,
     private cdRef: ChangeDetectorRef
   ) {}
 
@@ -67,22 +76,44 @@ export class ClientSchemaTransferFormComponent implements OnInit, OnUpdateInputs
     this.cdRef.detectChanges();
   }
 
+  /**
+   * On submit, transfer the schema to a new client.
+   * @param data Schema data
+   */
   onSubmit(data: {[key: string]: any}) {
     this.clientSchemaService.transferSchema(this.schema, data.numeroClient)
-      .subscribe((schema: ClientSchema) => this.onSubmitSuccess(schema));
+      .subscribe((code: string) => {
+        if (code === '0') {
+          this.onSubmitSuccess();
+        } else {
+          this.onSubmitError();
+        }
+      });
   }
 
+  /**
+   * Emit cancel event
+   */
   onCancel() {
     this.cancel.emit();
   }
 
-  private onSubmitSuccess(schema: ClientSchema) {
-    console.log(schema);
-    console.log(this.schema);
-    if (schema.numeroClient !== this.schema.numeroClient) {
-      this.store.delete(schema);
-    }
+  /**
+   * On submit success, delete the schema from the store (since it doesn't belong)
+   * to the current client anymore.
+   */
+  private onSubmitSuccess() {
+    this.errorMessage$.next(undefined);
+    this.store.delete(this.schema);
     this.complete.emit();
+  }
+
+  /**
+   * On submit error, display an error message
+   */
+  private onSubmitError() {
+    const errorMessageKey = 'client.schema.tooltip.error.duplicatedNumbers';
+    this.errorMessage$.next(this.languageService.translate.instant(errorMessageKey));
   }
 
 }
