@@ -1,0 +1,39 @@
+<form class="igo-form">
+  <mat-form-field [floatLabel]="'never'">
+    <input
+      matInput
+      autocomplete="off"
+      [required]="required"
+      [placeholder]="placeholder$ | async"
+      (click)="fileInput.click()">
+  </mat-form-field>
+
+  <input
+    #fileInput
+    type="file"
+    [style.display]="'none'"
+    (change)="onSelectFiles($event.target.files)">
+
+  <p
+    *ngIf="errorMessage$ | async as errorMessage"
+    class="fadq-error-text">
+    {{errorMessage}}
+  </p>
+
+  <div class="igo-form-buttons">
+    <button
+      mat-button
+      type="button"
+      (click)="onCancel()">
+      {{ 'cancel' | translate }}
+    </button>
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      [disabled]="(file$ | async) === undefined"
+      (click)="onImport()">
+      {{'igo.geo.importExportForm.importButton' | translate}}
+    </button>
+  </div>
+</form>

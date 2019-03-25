@@ -19,17 +19,16 @@ import {
 import {
   ClientSchemaElementUndoComponent
 } from '../schema-element-undo/client-schema-element-undo.component';
+import {
+  ClientSchemaElementImportDataComponent
+} from '../schema-element-import-data/client-schema-element-import-data.component';
 
-export const ClientSchemaElementCreateWidget =
-  new InjectionToken<Widget>('ClientSchemaElementCreateWidget');
-export const ClientSchemaElementUpdateWidget =
-  new InjectionToken<Widget>('ClientSchemaElementUpdateWidget');
-export const ClientSchemaElementSliceWidget =
-  new InjectionToken<Widget>('ClientSchemaElementSliceWidget');
-export const ClientSchemaElementSaverWidget =
-  new InjectionToken<Widget>('ClientSchemaElementSaverWidget');
-export const ClientSchemaElementUndoWidget =
-  new InjectionToken<Widget>('ClientSchemaElementUndoWidget');
+export const ClientSchemaElementCreateWidget = new InjectionToken<Widget>('ClientSchemaElementCreateWidget');
+export const ClientSchemaElementUpdateWidget = new InjectionToken<Widget>('ClientSchemaElementUpdateWidget');
+export const ClientSchemaElementSliceWidget = new InjectionToken<Widget>('ClientSchemaElementSliceWidget');
+export const ClientSchemaElementSaverWidget = new InjectionToken<Widget>('ClientSchemaElementSaverWidget');
+export const ClientSchemaElementUndoWidget = new InjectionToken<Widget>('ClientSchemaElementUndoWidget');
+export const ClientSchemaElementImportDataWidget = new InjectionToken<Widget>('ClientSchemaElementImportDataWidget');
 
 export function clientSchemaElementCreateWidgetFactory(widgetService: WidgetService) {
   return widgetService.create(ClientSchemaElementCreateFormComponent);
@@ -87,6 +86,18 @@ export function provideClientSchemaElementUndoWidget() {
   return {
     provide:  ClientSchemaElementUndoWidget,
     useFactory: clientSchemaElementUndoWidgetFactory,
+    deps: [WidgetService]
+  };
+}
+
+export function clientSchemaElementImportDataWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementImportDataComponent);
+}
+
+export function provideClientSchemaElementImportDataWidget() {
+  return {
+    provide:  ClientSchemaElementImportDataWidget,
+    useFactory: clientSchemaElementImportDataWidgetFactory,
     deps: [WidgetService]
   };
 }

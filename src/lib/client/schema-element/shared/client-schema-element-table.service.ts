@@ -48,7 +48,7 @@ export class ClientSchemaElementTableService {
           title: 'Description'
         },
         {
-          name: 'properties.anneImage',
+          name: 'properties.anneeImage',
           title: 'Année d\'image'
         },
         {

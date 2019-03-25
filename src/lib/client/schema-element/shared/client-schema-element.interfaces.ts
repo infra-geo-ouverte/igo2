@@ -1,3 +1,4 @@
+import { FormFieldSelectChoice } from '@igo2/common';
 import { Feature } from '@igo2/geo';
 
 export interface ClientSchemaElementApiConfig {
@@ -29,15 +30,23 @@ export interface ClientSchemaElementListResponseItem extends ClientSchemaElement
 
 export type ClientSchemaElementListResponse = ClientSchemaElementListResponseItem[];
 
-export interface ClientSchemaElementTypeChoicesResponse {
+export interface ClientSchemaElementType extends FormFieldSelectChoice {}
+
+export interface ClientSchemaElementTypes {
+  Point: ClientSchemaElementType[];
+  LineString: ClientSchemaElementType[];
+  Polygon: ClientSchemaElementType[];
+}
+
+export interface ClientSchemaElementTypesResponse {
   data: {
-    lstTypeElementPoint: ClientSchemaElementTypeChoicesResponseItem[];
-    lstTypeElementLigne: ClientSchemaElementTypeChoicesResponseItem[];
-    lstTypeElementSurface: ClientSchemaElementTypeChoicesResponseItem[];
+    lstTypeElementPoint: ClientSchemaElementTypesResponseItem[];
+    lstTypeElementLigne: ClientSchemaElementTypesResponseItem[];
+    lstTypeElementSurface: ClientSchemaElementTypesResponseItem[];
   };
 }
 
-export interface ClientSchemaElementTypeChoicesResponseItem {
+export interface ClientSchemaElementTypesResponseItem {
   idTypeElement: string;
   libelleFrancaisAbr: string;
   libelleFrancais?: string;

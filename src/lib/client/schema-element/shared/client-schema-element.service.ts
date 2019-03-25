@@ -4,8 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, zip } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { FormFieldSelectChoice } from '@igo2/common';
-
 import { ApiService } from 'src/lib/core/api';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
@@ -13,8 +11,9 @@ import {
   ClientSchemaElement,
   ClientSchemaElementTransactionData,
   ClientSchemaElementApiConfig,
-  ClientSchemaElementTypeChoicesResponse,
-  ClientSchemaElementTypeChoicesResponseItem
+  ClientSchemaElementTypes,
+  ClientSchemaElementTypesResponse,
+  ClientSchemaElementTypesResponseItem
 } from './client-schema-element.interfaces';
 
 import { ClientSchemaElementPointService } from './client-schema-element-point.service';
@@ -24,7 +23,7 @@ import { ClientSchemaElementSurfaceService } from './client-schema-element-surfa
 @Injectable()
 export class ClientSchemaElementService {
 
-  private clientSchemaElementTypeChoices: {[key: string]: {[key: string]: FormFieldSelectChoice[]}} = {};
+  private schemaElementTypes: {[key: string]: ClientSchemaElementTypes} = {};
 
   constructor(
     private schemaElementPointService: ClientSchemaElementPointService,
@@ -55,18 +54,13 @@ export class ClientSchemaElementService {
   }
 
   /**
-   * This method returns the element type choices, grouped by geometry type, for
-   * a given type of schema.
-   * Normally, this kind of method would be in the form service, but, since it's a bit different
-   * from regular "choices" methods, it's here.
+   * This method returns the element types supported for by a given type of schema.
    * @param schemaType Schema type (code)
-   * @returns Observable of the element types, grouped by geoemtry type
+   * @returns Observable of the element types, grouped by geometry type
    */
-  getClientSchemaElementTypeChoices(
-    schemaType: string
-  ): Observable<{[key: string]: FormFieldSelectChoice[]}> {
-    if (this.clientSchemaElementTypeChoices[schemaType] !== undefined) {
-      return of(this.clientSchemaElementTypeChoices[schemaType]);
+  getSchemaElementTypes(schemaType: string): Observable<ClientSchemaElementTypes> {
+    if (this.schemaElementTypes[schemaType] !== undefined) {
+      return of(this.schemaElementTypes[schemaType]);
     }
 
     const url = this.apiService.buildUrl(this.apiConfig.domains.type, {
@@ -75,19 +69,32 @@ export class ClientSchemaElementService {
     return this.http
       .get(url)
       .pipe(
-        map((response: ClientSchemaElementTypeChoicesResponse) => {
-          return this.extractSchemaTypeChoicesFromResponse(response);
+        map((response: ClientSchemaElementTypesResponse) => {
+          return this.extractSchemaElementTypesFromResponse(response);
         }),
-        tap((choices: {[key: string]: FormFieldSelectChoice[]}) => {
-          this.cacheClientSchemaElementTypeChoices(schemaType, choices);
+        tap((elementTypes: ClientSchemaElementTypes) => {
+          this.cacheSchemaElementTypes(schemaType, elementTypes);
         })
       );
   }
 
-  private extractSchemaTypeChoicesFromResponse(
-    response: ClientSchemaElementTypeChoicesResponse
-  ): {[key: string]: FormFieldSelectChoice[]} {
-    const createChoice = (item: ClientSchemaElementTypeChoicesResponseItem) => {
+  /**
+   * This method returns the geometry types supported by a given type of schema.
+   * @param schemaType Schema type (code)
+   * @returns Observable of the geometry types
+   */
+  getSchemaElementGeometryTypes(schemaType: string): Observable<string[]> {
+    return this.getSchemaElementTypes(schemaType).pipe(
+      map((elementTypes: ClientSchemaElementTypes) => {
+        return Object.keys(elementTypes).filter((key: string) => elementTypes[key].length > 0);
+      })
+    );
+  }
+
+  private extractSchemaElementTypesFromResponse(
+    response: ClientSchemaElementTypesResponse
+  ): ClientSchemaElementTypes {
+    const createChoice = (item: ClientSchemaElementTypesResponseItem) => {
       return Object.create({
         value: item.idTypeElement,
         title: item.libelleFrancaisAbr
@@ -95,14 +102,14 @@ export class ClientSchemaElementService {
     };
 
     return {
-      'Point': response.data.lstTypeElementPoint.map(createChoice),
-      'LineString': response.data.lstTypeElementLigne.map(createChoice),
-      'Polygon': response.data.lstTypeElementSurface.map(createChoice)
+      Point: response.data.lstTypeElementPoint.map(createChoice),
+      LineString: response.data.lstTypeElementLigne.map(createChoice),
+      Polygon: response.data.lstTypeElementSurface.map(createChoice)
     };
   }
 
-  private cacheClientSchemaElementTypeChoices(schemaType: string, choices: {[key: string]: FormFieldSelectChoice[]}) {
-    this.clientSchemaElementTypeChoices[schemaType] = choices;
+  private cacheSchemaElementTypes(schemaType: string, elementTypes:  ClientSchemaElementTypes) {
+    this.schemaElementTypes[schemaType] = elementTypes;
   }
 
 }

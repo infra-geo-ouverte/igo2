@@ -20,6 +20,7 @@ import {
   ClientSchemaElementSliceWidget,
   ClientSchemaElementSaverWidget,
   ClientSchemaElementUndoWidget,
+  ClientSchemaElementImportDataWidget,
   generateOperationTitle
 } from 'src/lib/client';
 
@@ -38,7 +39,8 @@ export class ClientSchemaElementEditor extends Editor {
     @Inject(ClientSchemaElementUpdateWidget) private clientSchemaElementUpdateWidget: Widget,
     @Inject(ClientSchemaElementSliceWidget) private clientSchemaElementSliceWidget: Widget,
     @Inject(ClientSchemaElementSaverWidget) private clientSchemaElementSaverWidget: Widget,
-    @Inject(ClientSchemaElementUndoWidget) private clientSchemaElementUndoWidget: Widget
+    @Inject(ClientSchemaElementUndoWidget) private clientSchemaElementUndoWidget: Widget,
+    @Inject(ClientSchemaElementImportDataWidget) private clientSchemaElementImportDataWidget: Widget
   ) {
     super({
       id: 'fadq.client-schema-element-editor',
@@ -170,6 +172,19 @@ export class ClientSchemaElementEditor extends Editor {
           transactionIsNotInCommitPhase,
           elementIsAPolygon
         ]
+      },
+      {
+        id: 'importData',
+        icon: 'input',
+        title: 'client.schemaElement.importData',
+        tooltip: 'client.schemaElement.importData.tooltip',
+        handler: () => this.activateWidget(this.clientSchemaElementImportDataWidget, {
+          schema: this.schema,
+          element: this.entity,
+          transaction: this.transaction,
+          store: this.entityStore
+        }),
+        conditions: [schemaIsDefined, transactionIsNotInCommitPhase]
       },
       {
         id: 'save',

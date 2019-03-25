@@ -90,7 +90,6 @@ export class ClientSchemaElementFormService {
       options:  {
         cols: 1,
         validator: Validators.compose([
-          Validators.required,
           Validators.pattern(/^(20[\d]{2})$/)
         ])
       }

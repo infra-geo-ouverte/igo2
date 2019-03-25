@@ -46,6 +46,8 @@
   },
 
   "client": {
+    "error.notfound": "Client non trouvé",
+    "error.noparcel": "Aucune parcelle agricole n’est liée au client", 
     "info": {
       "title": "Coordonnées du client",
       "adresseCor": "Adresse de correspondance",
@@ -113,7 +115,12 @@
       "save.confirm": "Voulez-vous sauvegarder ces changements?",
       "undo": "Annuler tous les changements",
       "undo.tooltip": "Annuler tous les changements",
-      "undo.confirm": "Désirez-vous sannuler tous les changements?"
+      "undo.confirm": "Désirez-vous annuler tous les changements?",
+      "importData": "Importer des données dans le schéma",
+      "importData.tooltip": "Importer des données dans un schéma",
+      "importData.placeholder": "Cliquez ici pour sélectionner un fichier à importer",
+      "importData.error.invalidFile": "Impossible d'importer ce fichier",
+      "importData.error.nothingToImport": "Aucun élément géométrique valide trouvé dans ce fichier"
     }
   },
 
