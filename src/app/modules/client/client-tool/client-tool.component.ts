@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { ToolComponent, EntityStore } from '@igo2/common';
 import { ConfigService } from '@igo2/core';
@@ -11,7 +11,6 @@ import {
   Client,
   ClientParcelDiagram,
   ClientParcelYear,
-  ClientParcelYearService,
   ClientSchema,
 } from 'src/lib/client';
 
@@ -31,13 +30,19 @@ import { ClientState } from '../client.state';
   styleUrls: ['./client-tool.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientToolComponent implements OnInit {
+export class ClientToolComponent {
 
   /**
    * Observable of the active client
    * @internal
    */
-  get client$(): Observable<Client> { return this.clientState.client$; }
+  get client$(): BehaviorSubject<Client> { return this.clientState.client$; }
+
+  /**
+   * Observable of the client error, if any
+   * @internal
+   */
+  get clientError$(): BehaviorSubject<string> { return this.clientState.clientError$; }
 
   /**
    * Store holding all the avaiables "parcel years"
@@ -68,20 +73,13 @@ export class ClientToolComponent implements OnInit {
   constructor(
     private clientState: ClientState,
     private mapState: MapState,
-    private clientParcelYearService: ClientParcelYearService,
     private configService: ConfigService
   ) {}
-
-  ngOnInit() {
-    if (this.parcelYearStore.empty) {
-      this.loadParcelYears();
-    }
-  }
 
   /**
    * Compute the link to the client's info
    * @internal
-   * @param client
+   * @param client Client
    * @returns External link to the client's info
    */
   computeClientInfoLink(client: Client): string {
@@ -94,31 +92,11 @@ export class ClientToolComponent implements OnInit {
   /**
    * Open the client's info link into a new window
    * @internal
-   * @param client
+   * @param client Client
    */
   openClientInfoLink(client: Client) {
     window.open(this.computeClientInfoLink(client), 'Client', 'width=800, height=600');
     return false;
-  }
-
-  /**
-   * Load the parcel years
-   */
-  private loadParcelYears() {
-    this.clientParcelYearService.getParcelYears()
-      .subscribe((parcelYears: ClientParcelYear[]) => {
-        const current = parcelYears.find((parcelYear: ClientParcelYear) => {
-          return parcelYear.current === true;
-        });
-        this.parcelYearStore.load(parcelYears);
-        this.parcelYearStore.view.sort({
-          valueAccessor: (year: ClientParcelYear) => year.annee,
-          direction: 'desc'
-        });
-        if (current !== undefined) {
-          this.parcelYearStore.state.update(current, {selected: true});
-        }
-      });
   }
 
 }

@@ -1,11 +1,17 @@
 <div>
-  <div class="fadq-client-tool-top-section">
+  <div class="fadq-client-tool-section">
     <fadq-client-parcel-year-selector [store]="parcelYearStore"></fadq-client-parcel-year-selector>
     <fadq-client-parcel-diagram-selector [store]="diagramStore"></fadq-client-parcel-diagram-selector>
     <fadq-client-schema-selector [store]="schemaStore"></fadq-client-schema-selector>
   </div>
 
-  <div *ngIf="(client$ | async) as client" class="fadq-client-tool-bottom-section">
+  <div *ngIf="clientError$ | async as error" class="fadq-client-tool-section">
+    <span class="fadq-error-text">
+      {{error | translate}}
+    </span>
+  </div>
+
+  <div *ngIf="(client$ | async) as client" class="fadq-client-tool-section fadq-client-tool-bottom-section">
     <a
       href="computeInfoLink(client)"
       target="popup"

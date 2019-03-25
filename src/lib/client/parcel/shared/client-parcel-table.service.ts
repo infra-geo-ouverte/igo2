@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 
-import { EntityTableTemplate } from '@igo2/common';
+import { EntityTableTemplate, EntityTableColumnRenderer } from '@igo2/common';
 
 import { ClientParcel } from './client-parcel.interfaces';
 
@@ -67,11 +67,23 @@ export class ClientParcelTableService {
         },
         {
           name: 'properties.noClientDetenteur', // TODO: compute properly
-          title: 'Détenteur'
+          title: 'Détenteur',
+          renderer: EntityTableColumnRenderer.HTML,
+          valueAccessor: (parcel: ClientParcel) => {
+            const value = parcel.properties.noClientDetenteur;
+            if (!value) { return ''; }
+            return `<a target="popup" href="">${value}</a>`;
+          }
         },
         {
           name: 'properties.noClientExploitant', // TODO: compute properly
-          title: 'Exploitant'
+          title: 'Exploitant',
+          renderer: EntityTableColumnRenderer.HTML,
+          valueAccessor: (parcel: ClientParcel) => {
+            const value = parcel.properties.noClientExploitant;
+            if (!value) { return ''; }
+            return `<a target="popup" href="">${value}</a>`;
+          }
         },
         {
           name: 'properties.statutAugmentationSupCultivable',

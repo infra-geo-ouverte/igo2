@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
 
 import {
   EntityTransaction,
@@ -23,7 +24,7 @@ import {
 import { Feature, FeatureStore, IgoMap, GeoJSONGeometry } from '@igo2/geo';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
-import { ClientSchemaElement } from '../shared/client-schema-element.interfaces';
+import { ClientSchemaElement, ClientSchemaElementTypes } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
@@ -93,10 +94,13 @@ export class ClientSchemaElementCreateFormComponent
 
   ngOnInit() {
     this.clientSchemaElementService
-      .getClientSchemaElementTypeChoices(this.schema.type)
-      .subscribe((choices: {[key: string]: FormFieldSelectChoice[]}) => {
-        this.onGetElementTypeChoices(choices);
-      });
+      .getSchemaElementGeometryTypes(this.schema.type)
+      .pipe(
+        concatMap((geometryTypes: string[]) => this.clientSchemaElementFormService
+          .buildCreateForm(this.map, geometryTypes)
+        )
+      )
+      .subscribe((form: Form) => this.setForm(form));
   }
 
   ngOnDestroy() {
@@ -143,15 +147,6 @@ export class ClientSchemaElementCreateFormComponent
     return Object.assign({}, data, {properties});
   }
 
-  private onGetElementTypeChoices(choices: {[key: string]: FormFieldSelectChoice[]}) {
-    const geometryTypes = ['Point', 'LineString', 'Polygon']
-      .filter((geometryType: string) => choices[geometryType].length > 0);
-
-    this.clientSchemaElementFormService
-      .buildCreateForm(this.map, geometryTypes)
-      .subscribe((form: Form) => this.setForm(form));
-  }
-
   private setForm(form: Form) {
     this.geometry$$ = form.control.controls.geometry.valueChanges
       .subscribe((geometry: GeoJSONGeometry) => {
@@ -170,13 +165,14 @@ export class ClientSchemaElementCreateFormComponent
 
   private updateElementTypeChoices(geometryType: string) {
     this.clientSchemaElementService
-      .getClientSchemaElementTypeChoices(this.schema.type)
-      .subscribe((choices: {[key: string]: FormFieldSelectChoice[]}) => {
-        const elementTypeField = this.form$.value.groups[0].fields.find((field: FormField) => {
+      .getSchemaElementTypes(this.schema.type)
+      .subscribe((elementTypes: ClientSchemaElementTypes) => {
+        const form = this.form$.value;
+        const elementTypeField = form.groups[0].fields.find((field: FormField) => {
           return field.name === 'properties.typeElement';
         }) as FormField<FormFieldSelectInputs>;
         const choices$ = elementTypeField.inputs.choices as BehaviorSubject<FormFieldSelectChoice[]>;
-        choices$.next(choices[geometryType]);
+        choices$.next(elementTypes[geometryType]);
       });
   }
 

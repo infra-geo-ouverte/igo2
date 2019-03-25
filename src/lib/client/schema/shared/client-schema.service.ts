@@ -142,4 +142,5 @@ export class ClientSchemaService {
       descriptionType: data.typeSchema.descriptionAbregeeFrancais,
     });
   }
+
 }

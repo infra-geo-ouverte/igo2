@@ -16,6 +16,9 @@ import {
 import {
   FadqLibClientSchemaElementUndoModule
 } from './schema-element-undo/client-schema-element-undo.module';
+import {
+  FadqLibClientSchemaElementImportDataModule
+} from './schema-element-import-data/client-schema-element-import-data.module';
 
 import {
   provideClientSchemaElementPointService,
@@ -28,7 +31,8 @@ import {
   provideClientSchemaElementUpdateWidget,
   provideClientSchemaElementSliceWidget,
   provideClientSchemaElementSaverWidget,
-  provideClientSchemaElementUndoWidget
+  provideClientSchemaElementUndoWidget,
+  provideClientSchemaElementImportDataWidget
 } from './shared/client-schema-element.widgets';
 import { ClientSchemaElementFormService } from './shared/client-schema-element-form.service';
 import { ClientSchemaElementTableService } from './shared/client-schema-element-table.service';
@@ -42,7 +46,8 @@ import { ClientSchemaElementTableService } from './shared/client-schema-element-
     FadqLibClientSchemaElementUpdateFormModule,
     FadqLibClientSchemaElementSliceFormModule,
     FadqLibClientSchemaElementSaverModule,
-    FadqLibClientSchemaElementUndoModule
+    FadqLibClientSchemaElementUndoModule,
+    FadqLibClientSchemaElementImportDataModule
   ],
   declarations: []
 })
@@ -60,6 +65,7 @@ export class FadqLibClientSchemaElementModule {
         provideClientSchemaElementSliceWidget(),
         provideClientSchemaElementSaverWidget(),
         provideClientSchemaElementUndoWidget(),
+        provideClientSchemaElementImportDataWidget(),
         ClientSchemaElementFormService,
         ClientSchemaElementTableService
       ]

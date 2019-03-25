@@ -16,6 +16,7 @@ import {
   ClientParcelDiagram,
   ClientParcel,
   ClientParcelYear,
+  ClientParcelYearService,
   ClientSchema,
   ClientSchemaElement,
   ClientSchemaElementService,
@@ -39,6 +40,9 @@ export class ClientState implements OnDestroy {
 
   /** Observable of the active client */
   public client$ = new BehaviorSubject<Client>(undefined);
+
+  /** Observable of the client error, if any */
+  public clientError$ = new BehaviorSubject<string>(undefined);
 
   /** Observable of the active schema */
   public schema$ = new BehaviorSubject<ClientSchema>(undefined);
@@ -99,6 +103,7 @@ export class ClientState implements OnDestroy {
 
   constructor(
     private clientService: ClientService,
+    private clientParcelYearService: ClientParcelYearService,
     private clientSchemaElementService: ClientSchemaElementService,
     private clientParcelEditor: ClientParcelEditor,
     private clientSchemaEditor: ClientSchemaEditor,
@@ -134,6 +139,7 @@ export class ClientState implements OnDestroy {
       });
 
     this.addClientLayers();
+    this.loadParcelYears();
   }
 
   ngOnDestroy() {
@@ -182,6 +188,10 @@ export class ClientState implements OnDestroy {
     this.editionState.register(this.schemaEditor);
 
     this.client$.next(client);
+  }
+
+  setClientError(error: string | undefined) {
+    this.clientError$.next(error);
   }
 
   private onSelectDiagram(diagram: ClientParcelDiagram) {
@@ -284,6 +294,26 @@ export class ClientState implements OnDestroy {
     parcelLoadingStrategy.activate();
     schemaElementLoadingStrategy.activate();
     sharedSelectionStrategy.activate();
+  }
+
+  /**
+   * Load the parcel years
+   */
+  private loadParcelYears() {
+    this.clientParcelYearService.getParcelYears()
+      .subscribe((parcelYears: ClientParcelYear[]) => {
+        const current = parcelYears.find((parcelYear: ClientParcelYear) => {
+          return parcelYear.current === true;
+        });
+        this.parcelYearStore.load(parcelYears);
+        this.parcelYearStore.view.sort({
+          valueAccessor: (year: ClientParcelYear) => year.annee,
+          direction: 'desc'
+        });
+        if (current !== undefined) {
+          this.parcelYearStore.state.update(current, {selected: true});
+        }
+      });
   }
 
 }

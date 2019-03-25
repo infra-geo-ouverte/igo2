@@ -22,7 +22,10 @@ import {
 import { Feature, FeatureStore, IgoMap } from '@igo2/geo';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
-import { ClientSchemaElement } from '../shared/client-schema-element.interfaces';
+import {
+  ClientSchemaElement,
+  ClientSchemaElementTypes
+} from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 import { generateOperationTitle } from '../shared/client-schema-element.utils';
@@ -116,13 +119,13 @@ export class ClientSchemaElementUpdateFormComponent implements OnInit, OnUpdateI
 
   private setForm(form: Form) {
     this.clientSchemaElementService
-      .getClientSchemaElementTypeChoices(this.schema.type)
-      .subscribe((choices: {[key: string]: FormFieldSelectChoice[]}) => {
+      .getSchemaElementTypes(this.schema.type)
+      .subscribe((elementTypes: ClientSchemaElementTypes) => {
         const elementTypeField = form.groups[0].fields.find((field: FormField) => {
           return field.name === 'properties.typeElement';
         }) as FormField<FormFieldSelectInputs>;
         const choices$ = elementTypeField.inputs.choices as BehaviorSubject<FormFieldSelectChoice[]>;
-        choices$.next(choices[this.element.geometry.type]);
+        choices$.next(elementTypes[this.element.geometry.type]);
         this.form$.next(form);
       });
   }

@@ -12,7 +12,7 @@ import {
   ClientSchemaDeleteWidget,
   ClientSchemaDuplicateWidget,
   ClientSchemaTransferWidget,
-  ClientSchemaFileManagerWidget,
+  ClientSchemaFileManagerWidget
 } from 'src/lib/client';
 
 @Injectable()

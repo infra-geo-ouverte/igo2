@@ -251,6 +251,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     const clientResult = results.find((result: SearchResult) => result.meta.dataType === CLIENT);
     if (clientResult !== undefined) {
       this.onSearchClient(clientResult as SearchResult<Client>);
+    } else if (this.searchState.searchTypes.indexOf(CLIENT) >= 0) {
+      this.onClientNotFound();
     }
 
     const mapResults = results.filter((result: SearchResult) => result.source === querySearchSource);
@@ -322,7 +324,17 @@ export class PortalComponent implements OnInit, OnDestroy {
   private onSearchClient(result: SearchResult<Client>) {
     this.closeToastPanel();
     this.clientState.setClient(result.data);
+    if (result.data.parcels.length === 0) {
+      this.clientState.setClientError('client.error.noparcel');
+    } else {
+      this.clientState.setClientError(undefined);
+    }
     this.editionState.setEditor(this.clientState.parcelEditor);
+  }
+
+  private onClientNotFound() {
+    this.clientState.clearClient();
+    this.clientState.setClientError('client.error.notfound');
   }
 
   private onSearchMap(results: SearchResult<Feature>[]) {
@@ -355,6 +367,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchStore.clear();
     this.closeToastPanel();
     this.clientState.clearClient();
+    this.clientState.setClientError(undefined);
   }
 
   private onSelectEditor(editor: Editor) {

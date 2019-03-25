@@ -140,6 +140,7 @@ export class ClientSchemaElementSliceFormComponent
 
   onSubmit() {
     const newElements = this.getNewElements();
+    console.log(newElements);
     this.onSubmitSuccess(newElements);
   }
 
@@ -220,12 +221,13 @@ export class ClientSchemaElementSliceFormComponent
       const properties = Object.assign({}, baseElement.properties, {
         idElementGeometrique: undefined
       });
+
       return Object.assign({}, baseElement, {
         meta,
         properties,
         geometry: olGeoJSON.writeGeometryObject(olGeometry, {
-          featureProjection: this.map.projection,
-          dataProjection: baseElement.projection
+          dataProjection: baseElement.projection,
+          featureProjection: this.map.projection
         })
       });
     });
