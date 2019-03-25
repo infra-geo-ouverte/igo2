@@ -27,7 +27,7 @@ export class ClientParcelTableService {
         },
         {
           name: 'production',
-          title: 'Production'
+          title: 'Code de production'
         },
         {
           name: 'properties.descriptionProduction',
@@ -42,11 +42,11 @@ export class ClientParcelTableService {
           title: 'Superficie mesurée (ha)'
         },
         {
-          name: 'properties.pourcentageSupMAO',
+          name: 'properties.pourcentageSupMao',
           title: 'Superficie (%)'
         },
         {
-          name: 'properties.superficieMAO',
+          name: 'properties.superficieMao',
           title: 'Superficie (ha)'
         },
         {
@@ -58,7 +58,7 @@ export class ClientParcelTableService {
           title: 'Code de défaut cultural'
         },
         {
-          name: 'properties.pourcentageDefaultCultural',
+          name: 'properties.pourcentageDefautCultural',
           title: 'Pourcentage de défaut cultural'
         },
         {
@@ -66,22 +66,28 @@ export class ClientParcelTableService {
           title: 'Numéro de confirmation IVEG'
         },
         {
-          name: 'properties.noClientDetenteur', // TODO: compute properly
+          name: 'properties.noClientDetenteur',
           title: 'Détenteur',
           renderer: EntityTableColumnRenderer.HTML,
           valueAccessor: (parcel: ClientParcel) => {
             const value = parcel.properties.noClientDetenteur;
             if (!value) { return ''; }
+            if (value === parcel.properties.noClientRecherche) {
+              return value;
+            }
             return `<a target="popup" href="">${value}</a>`;
           }
         },
         {
-          name: 'properties.noClientExploitant', // TODO: compute properly
+          name: 'properties.noClientExploitant',
           title: 'Exploitant',
           renderer: EntityTableColumnRenderer.HTML,
           valueAccessor: (parcel: ClientParcel) => {
             const value = parcel.properties.noClientExploitant;
             if (!value) { return ''; }
+            if (value === parcel.properties.noClientRecherche) {
+              return value;
+            }
             return `<a target="popup" href="">${value}</a>`;
           }
         },
@@ -97,7 +103,18 @@ export class ClientParcelTableService {
           name: 'properties.sourceParcelleAgricole',
           title: 'Source parcelle agricole'
         },
-        // TODO: complete
+        {
+          name: 'properties.typeParcelleAgricole',
+          title: 'Type de parcelle'
+        },
+        {
+          name: 'properties.timbreMajGeometrie',
+          title: 'Date de mise à jour'
+        },
+        {
+          name: 'properties.usagerMajGeometrie',
+          title: 'Utilisateur'
+        }
       ]
     };
   }

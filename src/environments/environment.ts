@@ -63,7 +63,7 @@ export const environment: Environment = {
       url: 'http://chabou01-svn.fadq.qc/app/interne'
     },
     client: {
-      infoLink: 'http://igo.fadq.qc/61_GestionDesRelationsAffaires/1_GestionIdentite/61_131_CoorClient.php?p_60131CliNum=${clientNum}',
+      infoLink: 'http://igodev.fadq.qc/app/interne/personnes/coordonnees/presenter/${clientNum}',
       api: {
         info: {
           get: '/igolocalisation/recherche_client/obtenirInformationClient/${clientNum}'

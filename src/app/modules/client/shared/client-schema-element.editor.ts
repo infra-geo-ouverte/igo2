@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 
 import {
   Action,
-  EntityStore,
+  ActionStore,
   EntityTransaction,
   getEntityRevision,
   Widget
@@ -52,7 +52,7 @@ export class ClientSchemaElementEditor extends Editor {
         },
         map: mapState.map
       }),
-      actionStore: new EntityStore<Action>([])
+      actionStore: new ActionStore([])
     });
     this.actionStore.load(this.buildActions());
   }
@@ -65,7 +65,7 @@ export class ClientSchemaElementEditor extends Editor {
     this.transaction = transaction;
   }
 
-  private buildActions(): Array<Action> {
+  private buildActions(): Action[] {
     const schemaIsDefined = () => this.schema !== undefined;
     const elementIsDefined = () => this.entity !== undefined;
     const transactionIsNotEmpty = () => {

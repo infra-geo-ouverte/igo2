@@ -14,6 +14,7 @@ import {
   ClientSchema,
 } from 'src/lib/client';
 
+import { EditionState } from '../../edition/edition.state';
 import { ClientState } from '../client.state';
 
 /**
@@ -72,6 +73,7 @@ export class ClientToolComponent {
 
   constructor(
     private clientState: ClientState,
+    private editionState: EditionState,
     private mapState: MapState,
     private configService: ConfigService
   ) {}
@@ -99,4 +101,10 @@ export class ClientToolComponent {
     return false;
   }
 
+  onSelectSchema(event: {selected: boolean, schema: ClientSchema}) {
+    console.log(event);
+    if (event.selected === true) {
+      this.editionState.setEditor(this.clientState.schemaEditor);
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
 import {
   Action,
+  ActionStore,
   EntityRecord,
   EntityStore,
   EntityTableTemplate,
@@ -76,7 +77,7 @@ export class Editor {
   /**
    * Actions store (some actions activate a widget)
    */
-  get actionStore(): EntityStore<Action> { return this.config.actionStore; }
+  get actionStore(): ActionStore { return this.config.actionStore; }
 
   /**
    * Selected entity
@@ -121,7 +122,7 @@ export class Editor {
 
     this.changes$$ = this.changes$
       .pipe(debounceTime(50))
-      .subscribe(() => this.updateActionsAvailability());
+      .subscribe(() => this.actionStore.updateActionsAvailability());
     this.changes$.next();
   }
 
@@ -168,34 +169,6 @@ export class Editor {
   private onSelectEntity(entity: object) {
     this.entity$.next(entity);
     this.changes$.next();
-  }
-
-  /**
-   * Update actions availability. That means disabling or enabling some
-   * actions based on the conditions they define.
-   */
-  private updateActionsAvailability() {
-    const availables = [];
-    const unavailables = [];
-
-    this.actionStore.entities$.value.forEach((action: Action) => {
-      const conditions = action.conditions || [];
-      const available = conditions.every((condition: () => boolean) => condition());
-      available ? availables.push(action) : unavailables.push(action);
-    });
-
-    if (unavailables.length > 0) {
-      this.actionStore.state.updateMany(unavailables, {
-        disabled: true,
-        active: false
-      });
-    }
-
-    if (availables.length > 0) {
-      this.actionStore.state.updateMany(availables, {
-        disabled: false
-      });
-    }
   }
 
 }

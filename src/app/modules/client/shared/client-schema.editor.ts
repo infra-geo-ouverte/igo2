@@ -1,6 +1,6 @@
 import { Inject, Injectable} from '@angular/core';
 
-import { Action, EntityStore, Widget } from '@igo2/common';
+import { Action, ActionStore, EntityStore, Widget } from '@igo2/common';
 
 import { Editor } from 'src/lib/edition';
 import {
@@ -31,10 +31,10 @@ export class ClientSchemaEditor extends Editor {
   ) {
     super({
       id: 'fadq.client-schema-editor',
-      title: 'Schemas du client',
+      title: 'Schémas du client',
       tableTemplate: clientSchemaTableService.buildTable(),
       entityStore: new EntityStore<ClientSchema>([]),
-      actionStore: new EntityStore<Action>([])
+      actionStore: new ActionStore([])
     });
 
     this.actionStore.load(this.buildActions());
@@ -44,7 +44,7 @@ export class ClientSchemaEditor extends Editor {
     this.client = client;
   }
 
-  private buildActions(): Array<Action> {
+  private buildActions(): Action[] {
     const clientIsDefined = () => this.client !== undefined;
     const schemaIsDefined = () => this.entity !== undefined;
 
