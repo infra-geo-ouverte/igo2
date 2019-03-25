@@ -179,8 +179,17 @@ export class ClientState implements OnDestroy {
     if (client === undefined) { return; }
 
     this.diagramStore.load(client.diagrams);
-    this.diagramStore.view.sort({valueAccessor: (diagram) => diagram.id, direction: 'asc'});
+    this.diagramStore.view.sort({
+      valueAccessor: (diagram) => diagram.id,
+      direction: 'asc'
+    });
+
+    this.parcelEditor.setClient(client);
     this.parcelStore.load(client.parcels);
+    this.parcelStore.view.sort({
+      valueAccessor: (parcel) => parcel.properties.noParcelleAgricole,
+      direction: 'asc'
+    });
     this.schemaStore.load(client.schemas);
     this.schemaEditor.setClient(client);
 

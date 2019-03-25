@@ -46,7 +46,7 @@
   },
 
   "client": {
-    "error.notfound": "Client not found",
+    "error.notfound": "Client number is invalid",
     "error.noparcel": "No parcel found for this client", 
     "info": {
       "title": "Information",
@@ -65,8 +65,10 @@
       "placeholder": "Diagramme",
       "all": "All"
     },
-    "parcelYear": {
-      "placeholder": "Year"
+    "parcel": {
+      "year.placeholder": "Year",
+      "exportToCSV": "Export to CSV",
+      "exportToCSV.tooltip": "Export to CSV" 
     },
     "schema": {
       "placeholder": "Schema",

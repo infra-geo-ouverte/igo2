@@ -46,13 +46,13 @@
   },
 
   "client": {
-    "error.notfound": "Client non trouvé",
+    "error.notfound": "No de client non valide",
     "error.noparcel": "Aucune parcelle agricole n’est liée au client", 
     "info": {
       "title": "Coordonnées du client",
       "adresseCor": "Adresse de correspondance",
-      "adresseExp": "Adresse d'exploitation",
-      "adressePro": "Adresse de production"
+      "adresseExp": "Adresse du site d'exploitation",
+      "adressePro": "Adresse(s) de production"
     },
     "legend": {
       "title": "Légende des parcelles",
@@ -61,8 +61,10 @@
       "nodetexp": "Non détenues exploitées",
       "sel": "Sélectionnées"
     },
-    "parcelYear": {
-      "placeholder": "Année"
+    "parcel": {
+      "year.placeholder": "Année",
+      "exportToCSV": "Exporter les données en CSV",
+      "exportToCSV.tooltip": "Exporter les données en CSV" 
     },
     "diagram": {
       "placeholder": "Diagramme",
