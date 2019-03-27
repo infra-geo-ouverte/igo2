@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 
 import { FadqLibMapModule } from 'src/lib/map/map.module';
+import { FadqMapToolModule } from './map-tool/map-tool.module';
 
 @NgModule({
   imports: [
-    FadqLibMapModule
+    FadqLibMapModule,
+    FadqMapToolModule
   ],
   exports: [
     FadqLibMapModule

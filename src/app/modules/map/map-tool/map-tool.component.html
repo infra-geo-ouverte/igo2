@@ -1,0 +1,28 @@
+<mat-tab-group>
+
+  <mat-tab [label]="'map.layers' | translate">
+    <igo-layer-list
+      igoLayerListBinding
+      [excludeBaseLayers]="false"
+      [toggleLegendOnVisibilityChange]="false">
+
+      <ng-template #igoLayerItemToolbar let-layer="layer">
+        <button
+          *ngIf="showInfoButton(layer)"
+          mat-icon-button
+          tooltip-position="below"
+          matTooltipShowDelay="500"
+          [matTooltip]="'igo.geo.metadata.show' | translate"
+          (click)="onInfoButtonClick(layer)">
+          <mat-icon>info_outline</mat-icon>
+        </button>
+      </ng-template>
+
+    </igo-layer-list>
+  </mat-tab>
+
+  <mat-tab [label]="'context.contexts' | translate">
+    <igo-context-list igoContextListBinding></igo-context-list>
+  </mat-tab>
+  
+</mat-tab-group>
