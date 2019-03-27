@@ -14,5 +14,9 @@
   {
     "uri": "mapOverlay",
     "title": "Demo for mapOverlay"
+  },
+  {
+    "uri": "message",
+    "title": "Demo for startup message"
   }
 ]

@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Notification } from 'angular2-notifications';
 
-import { MediaService, ConfigService } from '@igo2/core';
+import { MediaService, ConfigService, MessageService, Message } from '@igo2/core';
 import { AuthService } from '@igo2/auth';
 import { Context, ContextService, ToolService } from '@igo2/context';
 import {
@@ -60,6 +61,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   private contextLoaded = false;
   // True after the initial tool is loaded
   private toolLoaded = false;
+  // Reference to last startup message from context
+  // To remove message on context change
+  private contextMessage: Notification;
 
   constructor(
     private route: ActivatedRoute,
@@ -75,7 +79,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     public dataSourceService: DataSourceService,
     public contextService: ContextService,
     public cdRef: ChangeDetectorRef,
-    public capabilitiesService: CapabilitiesService
+    public capabilitiesService: CapabilitiesService,
+    public messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -223,6 +228,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (context !== undefined && this.contextLoaded) {
       const tool = this.toolService.getTool('mapDetails');
       this.toolService.selectTool(tool);
+
+      const message = context['message'];
+      if (message) {
+        this.contextMessage = this.messageService.message(<Message>message);
+      } else {
+        if (this.contextMessage) {
+          this.messageService.remove(this.contextMessage.id);
+        }
+      }
     }
 
     if (context !== undefined) {
