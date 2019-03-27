@@ -17,10 +17,18 @@ interface Environment {
     language?: LanguageOptions;
     context?: ContextServiceOptions;
     catalog?: CatalogServiceOptions;
-    api?: ApiConfig;
+    api: ApiConfig;
+    help: {
+      logoLink: string;
+      guideLink: string;
+      newsLink: string;
+    };
     client: {
       infoLink: string;
       api: ClientApiConfig;
+    };
+    layer: {
+      infoLink: string;
     };
   };
 }
@@ -61,6 +69,14 @@ export const environment: Environment = {
     },
     api: {
       url: 'http://chabou01-svn.fadq.qc/app/interne'
+    },
+    help: {
+      logoLink: 'assets/images/logo_igo_text_md.png',
+      guideLink: 'http://igo.fadq.qc/aide/IGO.pdf',
+      newsLink: 'http://igo.fadq.qc/aide/Nouveautes_IGO.pdf'
+    },
+    layer: {
+      infoLink: 'http://igodev.fadq.qc/interfaces/ModuleExterne/metadonnee.php?nomCouche=${layerName}&titre=${layerTitle}'
     },
     client: {
       infoLink: 'http://igodev.fadq.qc/app/interne/personnes/coordonnees/presenter/${clientNum}',

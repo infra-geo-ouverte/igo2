@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  padding: 10px;
+}
+
+.help-logo {
+  height: 75px;
+  width: auto;
+}
+
+.help-link {
+  display: inline-flex;
+  vertical-align: middle;
+  line-height: 24px;
+  color: #1565c0;
+  text-decoration: none;
+
+  mat-icon {
+    margin: 0 10px;
+  }
+}
