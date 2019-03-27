@@ -1,0 +1,89 @@
+{
+  "uri": "_default",
+  "title": "Default Context",
+  "message": {
+    "title": "Avertissement",
+    "text": "Toutes les données sont présentées à titre indicatif seulement.",
+    "type": "info",
+    "options": {
+      "timeOut": 20000
+    }
+  },
+  "map": {
+    "view": {
+      "projection": "EPSG:3857",
+      "center": [-72, 52],
+      "zoom": 6
+    }
+  },
+  "layers": [
+    {
+      "title": "OSM",
+      "baseLayer": true,
+      "visible": true,
+      "sourceOptions": {
+        "type": "osm"
+      }
+    }
+  ],
+  "toolbar": [
+    "searchResults",
+    "contextManager",
+    "mapDetails",
+    "directions",
+    "catalog",
+    "timeAnalysis",
+    "print",
+    "shareMap",
+    "about"
+  ],
+  "tools": [
+    {
+      "name": "searchResults",
+      "options": {
+        "focusFirst": true
+      }
+    },
+    {
+      "name": "contextManager"
+    },
+    {
+      "name": "mapDetails",
+      "options": {
+        "toggleLegendOnVisibilityChange": false,
+        "layerListControls": {
+          "showToolbar": "always",
+          "excludeBaseLayers": false,
+          "keyword": "",
+          "sortedAlpha": false,
+          "onlyVisible": false,
+          "onlyInRange": false
+        }
+      }
+    },
+    {
+      "name": "directions"
+    },
+    {
+      "name": "catalog"
+    },
+    {
+      "name": "catalogLayers"
+    },
+    {
+      "name": "timeAnalysis"
+    },
+    {
+      "name": "shareMap"
+    },
+    {
+      "name": "print"
+    },
+    {
+      "name": "about",
+      "options": {
+        "html": "<h1>This is a IGO</h1>"
+      }
+    }
+  ]
+}
