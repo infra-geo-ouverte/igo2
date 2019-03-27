@@ -6,9 +6,13 @@
   padding: 10px;
 }
 
-.fadq-client-tool-bottom-section a {
-  color: #1565c0;
-}
+.fadq-client-tool-bottom-section{
+  padding-top: 0px;
+
+  a {
+    color: #1565c0;
+  }
+} 
 
 fadq-client-addresses,
 fadq-client-parcel-legend {

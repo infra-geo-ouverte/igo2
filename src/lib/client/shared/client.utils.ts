@@ -1,7 +1,7 @@
 import * as olstyle from 'ol/style';
 
-export function padClientNum(clientNum: string) {
-  return clientNum.padStart(7, '0');
+export function padClientNum(clientNum: string | number) {
+  return ('' + clientNum).padStart(7, '0');
 }
 
 export function createClientDefaultSelectionStyle(): olstyle.Style {

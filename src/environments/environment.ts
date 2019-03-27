@@ -24,7 +24,6 @@ interface Environment {
       newsLink: string;
     };
     client: {
-      infoLink: string;
       api: ClientApiConfig;
     };
     layer: {
@@ -79,10 +78,10 @@ export const environment: Environment = {
       infoLink: 'http://igodev.fadq.qc/interfaces/ModuleExterne/metadonnee.php?nomCouche=${layerName}&titre=${layerTitle}'
     },
     client: {
-      infoLink: 'http://igodev.fadq.qc/app/interne/personnes/coordonnees/presenter/${clientNum}',
       api: {
         info: {
-          get: '/igolocalisation/recherche_client/obtenirInformationClient/${clientNum}'
+          get: '/igolocalisation/recherche_client/obtenirInformationClient/${clientNum}',
+          link: 'http://igodev.fadq.qc/app/interne/personnes/coordonnees/presenter/${clientNum}'
         },
         parcel: {
           list: '/igolocalisation/recherche_client/obtenirParcellesProductionsClientAnnee/${clientNum}/${annee}',

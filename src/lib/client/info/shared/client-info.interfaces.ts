@@ -1,5 +1,6 @@
 export interface ClientInfoApiConfig {
   get: string;
+  link: string;
 }
 
 export interface ClientInfo {

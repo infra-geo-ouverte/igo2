@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from 'src/lib/core/api';
+import { substituteProperties } from 'src/lib/utils';
 import {
   ClientInfo,
   ClientInfoApiConfig,
@@ -31,6 +32,16 @@ export class ClientInfoService {
           return this.extractClientInfoFromGetResponse(response);
         })
       );
+  }
+
+  /**
+   * Compute the link to the client's info
+   * @internal
+   * @param client Client
+   * @returns External link to the client's info
+   */
+  getClientInfoLink(clientNum: string): string {
+    return substituteProperties(this.apiConfig.link, {clientNum: clientNum});
   }
 
   private extractClientInfoFromGetResponse(response: ClientInfoGetResponse): ClientInfo | undefined {

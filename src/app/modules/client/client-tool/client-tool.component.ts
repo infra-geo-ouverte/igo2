@@ -6,12 +6,12 @@ import { ConfigService } from '@igo2/core';
 import { IgoMap } from '@igo2/geo';
 import { MapState } from '@igo2/integration';
 
-import { substituteProperties } from 'src/lib/utils';
 import {
   Client,
   ClientParcelDiagram,
   ClientParcelYear,
   ClientSchema,
+  ClientInfoService
 } from 'src/lib/client';
 
 import { ClientState } from '../client.state';
@@ -71,23 +71,10 @@ export class ClientToolComponent {
   get map(): IgoMap { return this.mapState.map; }
 
   constructor(
+    private clientInfoService: ClientInfoService,
     private clientState: ClientState,
-    private mapState: MapState,
-    private configService: ConfigService
+    private mapState: MapState
   ) {}
-
-  /**
-   * Compute the link to the client's info
-   * @internal
-   * @param client Client
-   * @returns External link to the client's info
-   */
-  computeClientInfoLink(client: Client): string {
-    const baseUrl = this.configService.getConfig('client.infoLink');
-    return  substituteProperties(baseUrl, {
-      clientNum: client.info.numero
-    });
-  }
 
   /**
    * Open the client's info link into a new window
@@ -95,7 +82,8 @@ export class ClientToolComponent {
    * @param client Client
    */
   openClientInfoLink(client: Client) {
-    window.open(this.computeClientInfoLink(client), 'Client', 'width=800, height=600');
+    const link = this.clientInfoService.getClientInfoLink(client.info.numero);
+    window.open(link, 'Client', 'width=800, height=600');
     return false;
   }
 }

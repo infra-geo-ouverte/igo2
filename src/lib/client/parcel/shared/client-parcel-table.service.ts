@@ -2,12 +2,14 @@ import { Injectable} from '@angular/core';
 
 import { EntityTableTemplate, EntityTableColumnRenderer } from '@igo2/common';
 
+import { padClientNum } from '../../shared/client.utils';
+import { ClientInfoService } from '../../info/shared/client-info.service';
 import { ClientParcel } from './client-parcel.interfaces';
 
 @Injectable()
 export class ClientParcelTableService {
 
-  constructor() {}
+  constructor(private clientInfoService: ClientInfoService) {}
 
   buildTable(): EntityTableTemplate {
     return {
@@ -72,10 +74,8 @@ export class ClientParcelTableService {
           valueAccessor: (parcel: ClientParcel) => {
             const value = parcel.properties.noClientDetenteur;
             if (!value) { return ''; }
-            if (value === parcel.properties.noClientRecherche) {
-              return value;
-            }
-            return `<a target="popup" href="">${value}</a>`;
+            if (value === parcel.properties.noClientRecherche) { return value; }
+            return this.computeClientNumAnchor(value);
           }
         },
         {
@@ -85,10 +85,8 @@ export class ClientParcelTableService {
           valueAccessor: (parcel: ClientParcel) => {
             const value = parcel.properties.noClientExploitant;
             if (!value) { return ''; }
-            if (value === parcel.properties.noClientRecherche) {
-              return value;
-            }
-            return `<a target="popup" href="">${value}</a>`;
+            if (value === parcel.properties.noClientRecherche) { return value; }
+            return this.computeClientNumAnchor(value);
           }
         },
         {
@@ -117,5 +115,12 @@ export class ClientParcelTableService {
         }
       ]
     };
+  }
+
+  private computeClientNumAnchor(clientNum: number): string {
+    const link = this.clientInfoService.getClientInfoLink(padClientNum(clientNum));
+    // TODO: this gets sanitized to either bypass sanitization or remove it
+    const onClick = `window.open(${link}, 'Client', 'width=800, height=600'); return false;`;
+    return `<a target="popup" href="${link}" onClick="${onClick}">${clientNum}</a>`;
   }
 }
