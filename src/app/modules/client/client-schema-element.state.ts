@@ -21,20 +21,34 @@ import {
   ClientSchemaElementSaverWidget,
   ClientSchemaElementUndoWidget,
   ClientSchemaElementImportDataWidget,
+  ClientSchemaElementService,
   generateOperationTitle
 } from 'src/lib/client';
 
-@Injectable()
-export class ClientSchemaElementEditor extends Editor {
+@Injectable({
+  providedIn: 'root'
+})
+export class ClientSchemaElementState {
+
+  editor: Editor;
 
   private schema: ClientSchema;
-  private transaction: EntityTransaction;
+  private transaction: EntityTransaction = new EntityTransaction();
 
   get map(): IgoMap { return this.mapState.map; }
+
+  get element(): ClientSchemaElement {
+    return this.editor.entity as ClientSchemaElement;
+  }
+
+  get elementStore():  FeatureStore<ClientSchemaElement> {
+    return this.editor.entityStore as  FeatureStore<ClientSchemaElement>;
+  }
 
   constructor(
     private mapState: MapState,
     private clientSchemaElementTableService: ClientSchemaElementTableService,
+    private clientSchemaElementService: ClientSchemaElementService,
     @Inject(ClientSchemaElementCreateWidget) private clientSchemaElementCreateWidget: Widget,
     @Inject(ClientSchemaElementUpdateWidget) private clientSchemaElementUpdateWidget: Widget,
     @Inject(ClientSchemaElementSliceWidget) private clientSchemaElementSliceWidget: Widget,
@@ -42,7 +56,7 @@ export class ClientSchemaElementEditor extends Editor {
     @Inject(ClientSchemaElementUndoWidget) private clientSchemaElementUndoWidget: Widget,
     @Inject(ClientSchemaElementImportDataWidget) private clientSchemaElementImportDataWidget: Widget
   ) {
-    super({
+    this.editor = new Editor({
       id: 'fadq.client-schema-element-editor',
       title: 'Éléments du schéma',
       tableTemplate: clientSchemaElementTableService.buildTable(),
@@ -52,22 +66,25 @@ export class ClientSchemaElementEditor extends Editor {
         },
         map: mapState.map
       }),
-      actionStore: new ActionStore([])
+      actionStore: new ActionStore(this.buildActions())
     });
-    this.actionStore.load(this.buildActions());
   }
 
-  setSchema(schema: ClientSchema) {
+  setSchema(schema: ClientSchema | undefined) {
     this.schema = schema;
-  }
 
-  setTransaction(transaction: EntityTransaction) {
-    this.transaction = transaction;
+    if (schema !== undefined) {
+      this.loadSchemaElements(schema);
+    } else {
+      this.transaction.clear();
+      this.elementStore.clear();
+      this.editor.deactivate();
+    }
   }
 
   private buildActions(): Action[] {
     const schemaIsDefined = () => this.schema !== undefined;
-    const elementIsDefined = () => this.entity !== undefined;
+    const elementIsDefined = () => this.element !== undefined;
     const transactionIsNotEmpty = () => {
       return this.transaction !== undefined && this.transaction.empty === false;
     };
@@ -75,13 +92,10 @@ export class ClientSchemaElementEditor extends Editor {
       return this.transaction !== undefined && this.transaction.inCommitPhase === false;
     };
     const elementCanBeFilled = () => {
-      const element = this.entity as ClientSchemaElement;
-      return element.geometry.type === 'Polygon' &&
-        element.geometry.coordinates.length > 1;
+      return this.element.geometry.type === 'Polygon' && this.element.geometry.coordinates.length > 1;
     };
     const elementIsAPolygon = () => {
-      const element = this.entity as ClientSchemaElement;
-      return element.geometry.type === 'Polygon';
+      return this.element.geometry.type === 'Polygon';
     };
 
     return [
@@ -90,11 +104,11 @@ export class ClientSchemaElementEditor extends Editor {
         icon: 'add',
         title: 'client.schemaElement.create',
         tooltip: 'client.schemaElement.create.tooltip',
-        handler: () => this.activateWidget(this.clientSchemaElementCreateWidget, {
+        handler: () => this.editor.activateWidget(this.clientSchemaElementCreateWidget, {
           schema: this.schema,
           map: this.map,
           transaction: this.transaction,
-          store: this.entityStore
+          store: this.elementStore
         }),
         conditions: [schemaIsDefined, transactionIsNotInCommitPhase]
       },
@@ -103,12 +117,12 @@ export class ClientSchemaElementEditor extends Editor {
         icon: 'edit',
         title: 'client.schemaElement.update',
         tooltip: 'client.schemaElement.update.tooltip',
-        handler: () => this.activateWidget(this.clientSchemaElementUpdateWidget, {
+        handler: () => this.editor.activateWidget(this.clientSchemaElementUpdateWidget, {
           schema: this.schema,
           map: this.map,
-          element: this.entity,
+          element: this.element,
           transaction: this.transaction,
-          store: this.entityStore
+          store: this.elementStore
         }),
         conditions: [schemaIsDefined, elementIsDefined, transactionIsNotInCommitPhase]
       },
@@ -118,8 +132,8 @@ export class ClientSchemaElementEditor extends Editor {
         title: 'client.schemaElement.delete',
         tooltip: 'client.schemaElement.delete.tooltip',
         handler: () => {
-          const element = this.entity as ClientSchemaElement;
-          this.transaction.delete(element, this.entityStore, {
+          const element = this.element;
+          this.transaction.delete(element, this.elementStore, {
             title: generateOperationTitle(element)
           });
         },
@@ -131,7 +145,7 @@ export class ClientSchemaElementEditor extends Editor {
         title: 'client.schemaElement.fill',
         tooltip: 'client.schemaElement.fill.tooltip',
         handler: () => {
-          const element = this.entity as ClientSchemaElement;
+          const element = this.element;
           const newElementMeta = Object.assign({}, element.meta, {
             revision: getEntityRevision(element) + 1
           });
@@ -143,7 +157,7 @@ export class ClientSchemaElementEditor extends Editor {
             }
           });
 
-          this.transaction.update(element, newElement, this.entityStore, {
+          this.transaction.update(element, newElement, this.elementStore, {
             title: generateOperationTitle(element)
           });
         },
@@ -159,12 +173,12 @@ export class ClientSchemaElementEditor extends Editor {
         icon: 'flip',
         title: 'client.schemaElement.slice',
         tooltip: 'client.schemaElement.slice.tooltip',
-        handler: () => this.activateWidget(this.clientSchemaElementSliceWidget, {
+        handler: () => this.editor.activateWidget(this.clientSchemaElementSliceWidget, {
           schema: this.schema,
           map: this.map,
-          element: this.entity,
+          element: this.element,
           transaction: this.transaction,
-          store: this.entityStore
+          store: this.elementStore
         }),
         conditions: [
           schemaIsDefined,
@@ -178,11 +192,11 @@ export class ClientSchemaElementEditor extends Editor {
         icon: 'input',
         title: 'client.schemaElement.importData',
         tooltip: 'client.schemaElement.importData.tooltip',
-        handler: () => this.activateWidget(this.clientSchemaElementImportDataWidget, {
+        handler: () => this.editor.activateWidget(this.clientSchemaElementImportDataWidget, {
           schema: this.schema,
-          element: this.entity,
+          element: this.element,
           transaction: this.transaction,
-          store: this.entityStore
+          store: this.elementStore
         }),
         conditions: [schemaIsDefined, transactionIsNotInCommitPhase]
       },
@@ -191,7 +205,7 @@ export class ClientSchemaElementEditor extends Editor {
         icon: 'save',
         title: 'client.schemaElement.save',
         tooltip: 'client.schemaElement.save.tooltip',
-        handler: () => this.activateWidget(this.clientSchemaElementSaverWidget, {
+        handler: () => this.editor.activateWidget(this.clientSchemaElementSaverWidget, {
           schema: this.schema,
           transaction: this.transaction
         }),
@@ -202,12 +216,17 @@ export class ClientSchemaElementEditor extends Editor {
         icon: 'undo',
         title: 'client.schemaElement.undo',
         tooltip: 'client.schemaElement.undo.tooltip',
-        handler: () => this.activateWidget(this.clientSchemaElementUndoWidget, {
+        handler: () => this.editor.activateWidget(this.clientSchemaElementUndoWidget, {
           transaction: this.transaction
         }),
         conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
       }
     ];
+  }
+
+  private loadSchemaElements(schema: ClientSchema) {
+    this.clientSchemaElementService.getElements(schema)
+      .subscribe((elements: ClientSchemaElement[]) => this.elementStore.load(elements));
   }
 
 }

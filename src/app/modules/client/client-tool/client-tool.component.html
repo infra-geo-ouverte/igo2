@@ -2,9 +2,7 @@
   <div class="fadq-client-tool-section">
     <fadq-client-parcel-year-selector [store]="parcelYearStore"></fadq-client-parcel-year-selector>
     <fadq-client-parcel-diagram-selector [store]="diagramStore"></fadq-client-parcel-diagram-selector>
-    <fadq-client-schema-selector
-      [store]="schemaStore"
-      (selectedChange)="onSelectSchema($event)">
+    <fadq-client-schema-selector [store]="schemaStore">
     </fadq-client-schema-selector>
   </div>
 

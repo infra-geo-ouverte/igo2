@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
-import { EntityRecord, EntityStore, EntityTransaction } from '@igo2/common';
+import { EntityRecord, EntityStore } from '@igo2/common';
 import {
   FeatureStore,
   FeatureStoreLoadingStrategy,
@@ -19,16 +19,15 @@ import {
   ClientParcelYearService,
   ClientSchema,
   ClientSchemaElement,
-  ClientSchemaElementService,
   createParcelLayer,
   createSchemaElementLayer,
   createClientDefaultSelectionStyle
 } from 'src/lib/client';
 
 import { EditionState } from '../edition/edition.state';
-import { ClientParcelEditor } from './shared/client-parcel.editor';
-import { ClientSchemaEditor } from './shared/client-schema.editor';
-import { ClientSchemaElementEditor } from './shared/client-schema-element.editor';
+import { ClientParcelState} from './client-parcel.state';
+import { ClientSchemaState} from './client-schema.state';
+import { ClientSchemaElementState } from './client-schema-element.state';
 
 /**
  * Service that holds the state of the client module
@@ -56,74 +55,57 @@ export class ClientState implements OnDestroy {
   /** Subscription to the selected schema  */
   private selectedSchema$$: Subscription;
 
-  private schemaElementTransaction: EntityTransaction;
+  /** Current parcel year  */
   private parcelYear: ClientParcelYear = undefined;
 
   /** Active client */
   get client(): Client { return this.client$.value; }
 
-  /** Active client schema */
+  /** Active schema */
   get schema(): ClientSchema { return this.schema$.value; }
 
   /** Store that holds the diagrams of the active client */
-  get diagramStore(): EntityStore<ClientParcelDiagram> { return this._diagramStore; }
-  private _diagramStore: EntityStore<ClientParcelDiagram>;
+  get diagramStore(): EntityStore<ClientParcelDiagram> {
+    return this.parcelState.diagramStore;
+  }
 
   /** Store that holds all the "parcel years". This is not on a per client basis. */
-  get parcelYearStore(): EntityStore<ClientParcelYear> { return this._parcelYearStore; }
-  private _parcelYearStore: EntityStore<ClientParcelYear>;
-
-  /** Parcel editor */
-  get parcelEditor(): ClientParcelEditor { return this.clientParcelEditor; }
+  get parcelYearStore(): EntityStore<ClientParcelYear> {
+    return this.parcelState.parcelYearStore;
+  }
 
   /** Store that holds the parcels of the active client */
   get parcelStore(): FeatureStore<ClientParcel> {
-    return this.parcelEditor.entityStore as FeatureStore<ClientParcel>;
-  }
-
-  /** Schema editor */
-  get schemaEditor(): ClientSchemaEditor {
-    return this.clientSchemaEditor;
+    return this.parcelState.parcelStore;
   }
 
   /** Store that holds the schemas of the active client */
   get schemaStore(): EntityStore<ClientSchema> {
-    return this.schemaEditor.entityStore as EntityStore<ClientSchema>;
-  }
-
-  /** Schema elements editor */
-  get schemaElementEditor(): ClientSchemaElementEditor {
-    return this.clientSchemaElementEditor;
+    return this.schemaState.schemaStore;
   }
 
   /** Store that holds the elements of the active schema */
   get schemaElementStore(): FeatureStore<ClientSchemaElement> {
-    return this.schemaElementEditor.entityStore as FeatureStore<ClientSchemaElement>;
+    return this.elementState.elementStore;
   }
 
   constructor(
-    private clientService: ClientService,
-    private clientParcelYearService: ClientParcelYearService,
-    private clientSchemaElementService: ClientSchemaElementService,
-    private clientParcelEditor: ClientParcelEditor,
-    private clientSchemaEditor: ClientSchemaEditor,
-    private clientSchemaElementEditor: ClientSchemaElementEditor,
+    private parcelState: ClientParcelState,
+    private schemaState: ClientSchemaState,
+    private elementState: ClientSchemaElementState,
     private editionState: EditionState,
-    private mapState: MapState
+    private mapState: MapState,
+    private clientService: ClientService,
+
   ) {
-    this._diagramStore = new EntityStore<ClientParcelDiagram>([]);
-    this._parcelYearStore = new EntityStore<ClientParcelYear>([]);
-
-    this.schemaElementTransaction = new EntityTransaction();
-
-    this.selectedDiagram$$ = this._diagramStore.stateView
+    this.selectedDiagram$$ = this.diagramStore.stateView
       .firstBy$((record: EntityRecord<ClientParcelDiagram>) => record.state.selected === true)
       .subscribe((record: EntityRecord<ClientParcelDiagram>) => {
         const diagram = record ? record.entity : undefined;
         this.onSelectDiagram(diagram);
       });
 
-    this.selectedParcelYear$$ = this._parcelYearStore.stateView
+    this.selectedParcelYear$$ = this.parcelYearStore.stateView
       .firstBy$((record: EntityRecord<ClientParcelYear>) => record.state.selected === true)
       .pipe(skip(1))
       .subscribe((record: EntityRecord<ClientParcelYear>) => {
@@ -139,7 +121,6 @@ export class ClientState implements OnDestroy {
       });
 
     this.addClientLayers();
-    this.loadParcelYears();
   }
 
   ngOnDestroy() {
@@ -153,48 +134,17 @@ export class ClientState implements OnDestroy {
     return this.clientService.getClientByNum(clientNum, annee);
   }
 
-  clearClient() {
-    if (this.client === undefined) {
-      return;
-    }
-
-    this.clearSchema();
-
-    this.diagramStore.clear();
-    this.parcelStore.clear();
-    this.schemaStore.clear();
-
-    this.parcelEditor.deactivate();
-    this.schemaEditor.deactivate();
-    this.schemaElementEditor.deactivate();
-
-    this.editionState.unregister(this.parcelEditor);
-    this.editionState.unregister(this.schemaEditor);
-
-    this.client$.next(undefined);
-  }
-
   setClient(client: Client | undefined) {
     this.clearClient();
+
     if (client === undefined) { return; }
 
-    this.diagramStore.load(client.diagrams);
-    this.diagramStore.view.sort({
-      valueAccessor: (diagram) => diagram.id,
-      direction: 'asc'
-    });
+    this.parcelState.setClient(client);
+    this.schemaState.setClient(client);
 
-    this.parcelEditor.setClient(client);
-    this.parcelStore.load(client.parcels);
-    this.parcelStore.view.sort({
-      valueAccessor: (parcel) => parcel.properties.noParcelleAgricole,
-      direction: 'asc'
-    });
-    this.schemaStore.load(client.schemas);
-    this.schemaEditor.setClient(client);
-
-    this.editionState.register(this.parcelEditor);
-    this.editionState.register(this.schemaEditor);
+    this.editionState.register(this.parcelState.editor);
+    this.editionState.register(this.schemaState.editor);
+    this.editionState.setEditor(this.parcelState.editor);
 
     this.client$.next(client);
   }
@@ -203,16 +153,22 @@ export class ClientState implements OnDestroy {
     this.clientError$.next(error);
   }
 
+  clearClient() {
+    if (this.client === undefined) { return; }
+
+    this.clearSchema();
+
+    this.parcelState.setClient(undefined);
+    this.schemaState.setClient(undefined);
+
+    this.editionState.register(this.parcelState.editor);
+    this.editionState.register(this.schemaState.editor);
+
+    this.client$.next(undefined);
+  }
+
   private onSelectDiagram(diagram: ClientParcelDiagram) {
-    this.parcelStore.state.clear();
-    if (diagram === undefined) {
-      this.parcelStore.view.filter(undefined);
-    } else {
-      const filterClause = function(parcel: ClientParcel): boolean {
-        return parcel.properties.noDiagramme === diagram.id;
-      };
-      this.parcelStore.view.filter(filterClause);
-    }
+    this.parcelState.setDiagram(diagram);
   }
 
   private onSelectParcelYear(parcelYear: ClientParcelYear) {
@@ -237,37 +193,20 @@ export class ClientState implements OnDestroy {
     this.clearSchema();
 
     this.parcelStore.state.updateAll({selected: false});
-    this.loadSchemaElements(schema);
-    this.schemaElementEditor.setSchema(schema);
-    this.schemaElementEditor.setTransaction(this.schemaElementTransaction);
+    this.elementState.setSchema(schema);
 
-    this.editionState.register(this.schemaElementEditor);
+    this.editionState.register(this.elementState.editor);
+    this.editionState.setEditor(this.schemaState.editor);
 
     this.schema$.next(schema);
   }
 
   private clearSchema() {
-    if (this.schema === undefined) {
-      return;
-    }
+    if (this.schema === undefined) { return; }
 
-    this.schemaElementTransaction.clear();
-    this.clearSchemaElements();
-
-    this.editionState.unregister(this.schemaElementEditor);
-
+    this.elementState.setSchema(undefined);
+    this.editionState.unregister(this.elementState.editor);
     this.schema$.next(undefined);
-  }
-
-  private loadSchemaElements(schema: ClientSchema) {
-    this.clientSchemaElementService.getElements(schema)
-      .subscribe((elements: ClientSchemaElement[]) => {
-        this.schemaElementStore.load(elements);
-      });
-  }
-
-  private clearSchemaElements() {
-    this.schemaElementStore.clear();
   }
 
   /**
@@ -303,26 +242,6 @@ export class ClientState implements OnDestroy {
     parcelLoadingStrategy.activate();
     schemaElementLoadingStrategy.activate();
     sharedSelectionStrategy.activate();
-  }
-
-  /**
-   * Load the parcel years
-   */
-  private loadParcelYears() {
-    this.clientParcelYearService.getParcelYears()
-      .subscribe((parcelYears: ClientParcelYear[]) => {
-        const current = parcelYears.find((parcelYear: ClientParcelYear) => {
-          return parcelYear.current === true;
-        });
-        this.parcelYearStore.load(parcelYears);
-        this.parcelYearStore.view.sort({
-          valueAccessor: (year: ClientParcelYear) => year.annee,
-          direction: 'desc'
-        });
-        if (current !== undefined) {
-          this.parcelYearStore.state.update(current, {selected: true});
-        }
-      });
   }
 
 }
