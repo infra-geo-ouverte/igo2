@@ -2,8 +2,11 @@
   [overlay]="map.overlay"
   [categories]="categories">
 </fadq-place-selector>
-<mat-divider></mat-divider>
-<fadq-poi-selector
-  [map]="map"
-  [pois]="pois">
-</fadq-poi-selector>
+
+<ng-container *ngIf="pois.length > 0">
+  <mat-divider></mat-divider>
+  <fadq-poi-selector
+    [map]="map"
+    [pois]="pois">
+  </fadq-poi-selector>
+</ng-container>

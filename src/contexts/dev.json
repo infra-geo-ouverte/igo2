@@ -26,7 +26,7 @@
     },
     {
       "title": "Images les plus récentes",
-      "baseLayer": false,
+      "baseLayer": true,
       "visible": true,
       "sourceOptions": {
         "type": "wmts",
@@ -60,8 +60,7 @@
   "toolbar": [
     "client",
     "searchResults",
-    "contextManager",
-    "mapDetails",
+    "map",
     "catalog",
     "navigation",
     "importExport",
@@ -76,13 +75,7 @@
       "name": "searchResults"
     },
     {
-      "name": "contextManager"
-    },
-    {
-      "name": "mapDetails",
-      "options": {
-        "toggleLegendOnVisibilityChange": false
-      }
+      "name": "map"
     },
     {
       "name": "catalog"

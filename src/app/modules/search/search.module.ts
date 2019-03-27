@@ -1,9 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { IgoSearchModule, provideIChercheSearchSource } from '@igo2/geo';
+import { IgoSearchModule } from '@igo2/geo';
 
 import { provideClientSearchSource } from './shared/sources/client.providers';
-import { provideFadqIChercheSearchResultFormatter } from './shared/sources/icherche';
+import {
+  provideFadqIChercheSearchResultFormatter,
+  provideIChercheSearchSource
+} from './shared/sources/icherche.providers';
 
 @NgModule({
   imports: [

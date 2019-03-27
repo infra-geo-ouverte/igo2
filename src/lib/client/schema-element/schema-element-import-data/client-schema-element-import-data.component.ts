@@ -34,6 +34,12 @@ import { FeatureImportError} from '../../../feature';
 export class ClientSchemaElementImportDataComponent implements OnInit, WidgetComponent {
 
   /**
+   * File object
+   * @internal
+   */
+  file$: BehaviorSubject<File> = new BehaviorSubject(undefined);
+
+  /**
    * Import error, if any
    * @internal
    */
@@ -44,8 +50,6 @@ export class ClientSchemaElementImportDataComponent implements OnInit, WidgetCom
    * @internal
    */
   placeholder$: BehaviorSubject<string> = new BehaviorSubject(undefined);
-
-  private file$: BehaviorSubject<File> = new BehaviorSubject(undefined);
 
   /**
    * Schema element store

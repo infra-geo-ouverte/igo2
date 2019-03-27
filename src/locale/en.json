@@ -15,12 +15,17 @@
   "informations": "Informations",
 
   "search": {
-    "feature.title": "Localisation",
-    "feature.placeholder": "Search for a place localisation",
+    "feature.title": "Address, place or coordinate",
+    "feature.placeholder": "Search for an address, a place or a coordinate",
     "layer.title": "Layer",
     "layer.placeholder": "Search for a layer",
     "client.title": "Client",
     "client.placeholder": "Search for a  client"
+  },
+
+  "help": {
+    "guide": "Help guide",
+    "news": "What's new?"
   },
 
   "navigation": {
@@ -40,8 +45,10 @@
   },
 
   "tools": {
+    "help": "Help",
     "addressEditor": "Edit Addresses",
     "client": "Client",
+    "map": "Map",
     "navigation": "Navigation"
   },
 
@@ -126,7 +133,12 @@
     }
   },
 
+  "context": {
+    "contexts": "Contexts"
+  },
+
   "map": {
+    "layers": "Layers",
     "actionbar": {
       "baselayerswitcher": {
         "title": "Change Base Layer",

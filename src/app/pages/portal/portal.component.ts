@@ -37,6 +37,7 @@ import { ClientState } from 'src/app/modules/client/client.state';
 import { EditionState } from 'src/app/modules/edition/edition.state';
 
 import { SEARCH_TYPES } from 'src/app/modules/search/shared/search.enums';
+import { ClientSearchSource } from 'src/app/modules/search/shared/sources/client';
 
 import {
   Client,
@@ -251,7 +252,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const clientResult = results.find((result: SearchResult) => result.meta.dataType === CLIENT);
     if (clientResult !== undefined) {
       this.onSearchClient(clientResult as SearchResult<Client>);
-    } else if (this.searchState.searchTypes.indexOf(CLIENT) >= 0) {
+    } else if (event.research.source instanceof ClientSearchSource) {
       this.onClientNotFound();
     }
 
@@ -296,7 +297,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private onChangeContext(context: DetailedContext) {
     if (context === undefined) { return; }
     if (this.contextLoaded) {
-      this.toolState.toolbox.activateTool('mapDetails');
+      this.toolState.toolbox.activateTool('map');
     }
     this.contextLoaded = true;
   }
@@ -329,7 +330,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     } else {
       this.clientState.setClientError(undefined);
     }
-    this.editionState.setEditor(this.clientState.parcelEditor);
   }
 
   private onClientNotFound() {

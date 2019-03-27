@@ -1,7 +1,5 @@
-import {
-  NgModule,
-  CUSTOM_ELEMENTS_SCHEMA
-} from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { MatDividerModule } from '@angular/material';
 
@@ -15,6 +13,7 @@ import { NavigationToolComponent } from './navigation-tool.component';
  */
 @NgModule({
   imports: [
+    CommonModule,
     MatDividerModule,
     FadqLibPlaceSelectorModule,
     FadqLibPoiSelectorModule

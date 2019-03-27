@@ -15,12 +15,17 @@
   "informations": "Informations",
 
   "search": {
-    "feature.title": "Localisation",
-    "feature.placeholder": "Rechercher une localisation",
+    "feature.title": "Adresse, lieu ou coordonnée",
+    "feature.placeholder": "Rechercher une adresse, un lieu, une coordonnée",
     "layer.title": "Couche de données",
     "layer.placeholder": "Rechercher une couche de données.",
     "client.title": "Client",
     "client.placeholder": "Rechercher un client"
+  },
+
+  "help": {
+    "guide": "Consulter le guide d'autoformation",
+    "news": "Afficher les nouveautés"
   },
 
   "navigation": {
@@ -40,8 +45,10 @@
   },
 
   "tools": {
+    "help": "Aide",
     "addressEditor": "Édition d'adresses",
     "client": "Client",
+    "map": "Carte",
     "navigation": "Zoom sur une région"
   },
 
@@ -126,7 +133,12 @@
     }
   },
 
+  "context": {
+    "contexts": "Contextes"
+  },
+
   "map": {
+    "layers": "Couches",
     "actionbar": {
       "baselayerswitcher": {
         "title": "Change Base Layer",

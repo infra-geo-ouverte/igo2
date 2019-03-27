@@ -1,8 +1,7 @@
-import { Injector, Injectable, } from '@angular/core';
+import { Injectable, } from '@angular/core';
 
 import { LanguageService } from '@igo2/core';
-
-import { Feature, SearchResult, IChercheSearchResultFormatter } from '@igo2/geo';
+import { Feature, SearchResult } from '@igo2/geo';
 
 @Injectable()
 export class FadqIChercheSearchResultFormatter {
@@ -27,25 +26,4 @@ export class FadqIChercheSearchResultFormatter {
 
     return result;
   }
-}
-
-/**
- * ICherche search source factory
- * @ignore
- */
-export function fadqIChercheSearchResultFormatterFactory(
-  languageService: LanguageService
-) {
-  return new FadqIChercheSearchResultFormatter(languageService);
-}
-
-/**
- * Function that returns a provider for the ICherche search source
- */
-export function provideFadqIChercheSearchResultFormatter() {
-  return {
-    provide: IChercheSearchResultFormatter,
-    useFactory: fadqIChercheSearchResultFormatterFactory,
-    deps: [LanguageService]
-  };
 }

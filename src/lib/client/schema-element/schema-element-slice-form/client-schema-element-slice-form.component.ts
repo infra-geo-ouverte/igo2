@@ -140,7 +140,6 @@ export class ClientSchemaElementSliceFormComponent
 
   onSubmit() {
     const newElements = this.getNewElements();
-    console.log(newElements);
     this.onSubmitSuccess(newElements);
   }
 
