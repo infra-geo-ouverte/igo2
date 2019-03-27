@@ -225,9 +225,14 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private handleContextChange(context: Context) {
+
     if (context !== undefined && this.contextLoaded) {
       const tool = this.toolService.getTool('mapDetails');
       this.toolService.selectTool(tool);
+    }
+
+    if (context !== undefined) {
+      this.contextLoaded = true;
 
       const message = context['message'];
       if (message) {
@@ -237,10 +242,6 @@ export class PortalComponent implements OnInit, OnDestroy {
           this.messageService.remove(this.contextMessage.id);
         }
       }
-    }
-
-    if (context !== undefined) {
-      this.contextLoaded = true;
     }
 
     this.route.queryParams.subscribe(params => {
