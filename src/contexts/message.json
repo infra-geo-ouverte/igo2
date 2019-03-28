@@ -1,9 +1,9 @@
 {
-  "uri": "_default",
-  "title": "Default Context",
+  "uri": "message",
+  "title": "Startup message Context",
   "message": {
     "title": "Avertissement",
-    "text": "Toutes les données sont présentées à titre indicatif seulement.",
+    "text": "Les données de cette carte sont présentées à titre indicatif seulement.",
     "type": "info",
     "options": {
       "timeOut": 20000
