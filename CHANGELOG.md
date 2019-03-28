@@ -1,3 +1,23 @@
+<a name="0.25.12"></a>
+## [0.25.12](https://github.com/infra-geo-ouverte/igo2/compare/0.25.11...0.25.12) (2019-03-27)
+
+
+### Bug Fixes
+
+* **startup-message:** Fix message doesn't show when context loaded by url ([#253](https://github.com/infra-geo-ouverte/igo2/issues/253)) ([893a892](https://github.com/infra-geo-ouverte/igo2/commit/893a892))
+
+
+
+<a name="0.25.11"></a>
+## [0.25.11](https://github.com/infra-geo-ouverte/igo2/compare/0.25.10...0.25.11) (2019-03-27)
+
+
+### Features
+
+* **startup-message:** Startup message from context ([#252](https://github.com/infra-geo-ouverte/igo2/issues/252)) ([d60ebb2](https://github.com/infra-geo-ouverte/igo2/commit/d60ebb2))
+
+
+
 <a name="0.25.10"></a>
 ## [0.25.10](https://github.com/infra-geo-ouverte/igo2/compare/0.25.9...0.25.10) (2019-03-19)
 
