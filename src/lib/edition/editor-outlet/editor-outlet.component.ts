@@ -9,7 +9,7 @@ import {
 import { Observable } from 'rxjs';
 
 import { Widget } from '@igo2/common';
-import { Editor } from 'src/lib/edition';
+import { Editor } from '../shared/editor';
 
 /**
  * This component dynamically render an Editor's active widget.

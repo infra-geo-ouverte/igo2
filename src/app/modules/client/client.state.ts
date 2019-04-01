@@ -95,8 +95,7 @@ export class ClientState implements OnDestroy {
     private elementState: ClientSchemaElementState,
     private editionState: EditionState,
     private mapState: MapState,
-    private clientService: ClientService,
-
+    private clientService: ClientService
   ) {
     this.selectedDiagram$$ = this.diagramStore.stateView
       .firstBy$((record: EntityRecord<ClientParcelDiagram>) => record.state.selected === true)

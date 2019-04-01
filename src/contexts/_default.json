@@ -19,8 +19,27 @@
         "url": "https://servicesmatriciels.mern.qc/erdas-iws/ogc/wmts/Imagerie_Continue",
         "layer": "Imagerie_GQ",
         "matrixSet": "Lambert:epsg:32198",
+        "requestEncoding": "KVP",
         "params": {
           "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "title": "Carte de base du Canada - Transport",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/cbct",
+        "style": "default",
+        "matrixSet": "LAMBERT",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.1.1",
+          "layers": "cbct",
+          "srs": "EPSG:32198"
         }
       }
     },
@@ -34,6 +53,7 @@
         "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_wmts",
         "layer": "carte_gouv_qc",
         "matrixSet": "LAMBERT",
+        "requestEncoding": "KVP",
         "params": {
           "version": "1.0.0"
         }

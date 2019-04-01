@@ -20,7 +20,9 @@ export interface ClientSchema {
   etat: string;
   nbDocuments: number;
   usagerMaj: string;
-  timbreMaj: string;
+  timbreMaj: {
+    date: string;
+  };
 }
 
 export interface ClientSchemaListResponse {

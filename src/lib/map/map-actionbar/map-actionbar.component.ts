@@ -124,7 +124,7 @@ export class MapActionbarComponent implements OnInit, OnDestroy {
       },
       {
         id: MapAction.InitialView,
-        icon: 'all_out',
+        icon: 'public',
         title: 'map.actionbar.initialview.title',
         tooltip: 'map.actionbar.initialview.tooltip',
         handler: () => {
