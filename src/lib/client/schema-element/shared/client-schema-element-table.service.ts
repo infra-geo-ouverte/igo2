@@ -2,6 +2,7 @@ import { Injectable} from '@angular/core';
 
 import { EntityTableTemplate, EntityTableColumnRenderer } from '@igo2/common';
 
+import { formatDate } from 'src/lib/utils/date';
 import { ClientSchemaElement } from './client-schema-element.interfaces';
 
 @Injectable()
@@ -53,7 +54,12 @@ export class ClientSchemaElementTableService {
         },
         {
           name: 'properties.timbreMaj',
-          title: 'Date de mise à jour'
+          title: 'Date de mise à jour',
+          valueAccessor: (element: ClientSchemaElement) => {
+            const value = element.properties.timbreMaj;
+            if (!value) { return ''; }
+            return formatDate(value);
+          }
         },
         {
           name: 'properties.usagerMaj',

@@ -6,22 +6,22 @@ import { Widget, WidgetService } from '@igo2/common';
 
 import {
   ClientSchemaElementCreateFormComponent
-} from '../schema-element-create-form/client-schema-element-create-form.component';
+} from '../client-schema-element-create-form/client-schema-element-create-form.component';
 import {
   ClientSchemaElementUpdateFormComponent
-} from '../schema-element-update-form/client-schema-element-update-form.component';
+} from '../client-schema-element-update-form/client-schema-element-update-form.component';
 import {
   ClientSchemaElementSliceFormComponent
-} from '../schema-element-slice-form/client-schema-element-slice-form.component';
+} from '../client-schema-element-slice-form/client-schema-element-slice-form.component';
 import {
   ClientSchemaElementSaverComponent
-} from '../schema-element-saver/client-schema-element-saver.component';
+} from '../client-schema-element-saver/client-schema-element-saver.component';
 import {
   ClientSchemaElementUndoComponent
-} from '../schema-element-undo/client-schema-element-undo.component';
+} from '../client-schema-element-undo/client-schema-element-undo.component';
 import {
   ClientSchemaElementImportDataComponent
-} from '../schema-element-import-data/client-schema-element-import-data.component';
+} from '../client-schema-element-import-data/client-schema-element-import-data.component';
 
 export const ClientSchemaElementCreateWidget = new InjectionToken<Widget>('ClientSchemaElementCreateWidget');
 export const ClientSchemaElementUpdateWidget = new InjectionToken<Widget>('ClientSchemaElementUpdateWidget');

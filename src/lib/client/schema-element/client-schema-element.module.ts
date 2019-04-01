@@ -3,22 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import {
   FadqLibClientSchemaElementCreateFormModule
-} from './schema-element-create-form/client-schema-element-create-form.module';
+} from './client-schema-element-create-form/client-schema-element-create-form.module';
 import {
   FadqLibClientSchemaElementUpdateFormModule
-} from './schema-element-update-form/client-schema-element-update-form.module';
+} from './client-schema-element-update-form/client-schema-element-update-form.module';
 import {
   FadqLibClientSchemaElementSliceFormModule
-} from './schema-element-slice-form/client-schema-element-slice-form.module';
+} from './client-schema-element-slice-form/client-schema-element-slice-form.module';
 import {
   FadqLibClientSchemaElementSaverModule
-} from './schema-element-saver/client-schema-element-saver.module';
+} from './client-schema-element-saver/client-schema-element-saver.module';
 import {
   FadqLibClientSchemaElementUndoModule
-} from './schema-element-undo/client-schema-element-undo.module';
+} from './client-schema-element-undo/client-schema-element-undo.module';
 import {
   FadqLibClientSchemaElementImportDataModule
-} from './schema-element-import-data/client-schema-element-import-data.module';
+} from './client-schema-element-import-data/client-schema-element-import-data.module';
 
 import {
   provideClientSchemaElementPointService,
