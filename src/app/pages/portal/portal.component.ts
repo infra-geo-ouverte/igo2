@@ -116,7 +116,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.searchState.store;
   }
 
-  get editorStore(): EntityStore<Editor> {
+  get editorStore(): EditorStore {
     return this.editionState.store;
   }
 

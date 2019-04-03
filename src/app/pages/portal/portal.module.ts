@@ -12,6 +12,7 @@ import {
 import { IgoLanguageModule } from '@igo2/core';
 import {
   IgoActionModule,
+  IgoEditionModule,
   IgoEntityModule,
   IgoPanelModule,
   IgoBackdropModule,
@@ -24,7 +25,7 @@ import {
 } from '@igo2/geo';
 import { IgoContextManagerModule } from '@igo2/context';
 
-import { FadqEditionModule } from '../../modules/edition/edition.module';
+// import { FadqEditionModule } from '../../modules/edition/edition.module';
 import { FadqMapModule } from '../../modules/map/map.module';
 import { FadqSearchModule } from '../../modules/search/search.module';
 
@@ -46,6 +47,7 @@ import { PortalComponent } from './portal.component';
 
     IgoLanguageModule,
     IgoActionModule,
+    IgoEditionModule,
     IgoEntityModule,
     IgoPanelModule,
     IgoToolModule,
@@ -55,7 +57,7 @@ import { PortalComponent } from './portal.component';
     IgoQueryModule,
     IgoContextManagerModule,
 
-    FadqEditionModule,
+    // FadqEditionModule,
     FadqMapModule,
     FadqSearchModule,
     FadqExpansionPanelModule,

@@ -1,14 +1,7 @@
-
-
-<mat-form-field class="fadq-client-schema-selector">
-  <mat-select
-    [value]="current$ | async"
-    [placeholder]="'client.schema.placeholder' | translate"
-    (selectionChange)="onSelectionChange($event)">
-    <ng-template ngFor let-schema [ngForOf]="store.view.all$() | async">
-      <mat-option [value]="schema">
-        {{getSchemaTitle(schema)}}
-      </mat-option>
-    </ng-template>
-  </mat-select>
-</mat-form-field>
+<igo-entity-selector
+  [store]="store"
+  [placeholder]="'client.schema.placeholder' | translate"
+  [emptyText]="'client.diagram.all' | translate"
+  [titleAccessor]="getSchemaTitle"
+  (selectedChange)="selectedChange.emit($event)">
+</igo-entity-selector>

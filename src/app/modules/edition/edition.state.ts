@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { EntityRecord, EntityStore } from '@igo2/common';
+import { EntityRecord, EditorStore } from '@igo2/common';
 import { Editor } from 'src/lib/edition';
 
 /**
@@ -21,11 +21,11 @@ export class EditionState {
   /**
    * Store that holds all the available editors
    */
-  get store(): EntityStore<Editor> { return this._store; }
-  private _store: EntityStore<Editor>;
+  get store(): EditorStore { return this._store; }
+  private _store: EditorStore;
 
   constructor() {
-    this._store = new EntityStore<Editor>([]);
+    this._store = new EditorStore([]);
     this._store.stateView
       .firstBy$((record: EntityRecord<Editor>) => record.state.selected === true)
       .subscribe((record: EntityRecord<Editor>) => {

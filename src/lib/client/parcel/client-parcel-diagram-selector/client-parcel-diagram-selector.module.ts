@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-import { MatSelectModule } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
+import { IgoEntitySelectorModule } from '@igo2/common';
 
 import { ClientParcelDiagramSelectorComponent } from './client-parcel-diagram-selector.component';
 
@@ -14,9 +12,8 @@ import { ClientParcelDiagramSelectorComponent } from './client-parcel-diagram-se
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    MatSelectModule,
-    IgoLanguageModule
+    IgoLanguageModule,
+    IgoEntitySelectorModule
   ],
   exports: [ClientParcelDiagramSelectorComponent],
   declarations: [ClientParcelDiagramSelectorComponent]

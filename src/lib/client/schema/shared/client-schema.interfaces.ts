@@ -38,7 +38,9 @@ export interface ClientSchemaListResponseItem {
   etat: string;
   nbDocuments: number;
   usagerMaj: string;
-  timbreMaj: string;
+  timbreMaj: {
+    date: string;
+  };
 }
 
 export interface ClientSchemaCreateData {

@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
+import { IgoEntitySelectorModule } from '@igo2/common';
 
 import { ClientParcelYearSelectorComponent } from './client-parcel-year-selector.component';
 
@@ -13,8 +12,7 @@ import { ClientParcelYearSelectorComponent } from './client-parcel-year-selector
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    MatSelectModule,
+    IgoEntitySelectorModule,
     IgoLanguageModule
   ],
   exports: [ClientParcelYearSelectorComponent],

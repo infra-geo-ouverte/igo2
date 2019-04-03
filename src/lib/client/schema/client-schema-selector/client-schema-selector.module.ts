@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material';
 
 import { IgoLanguageModule } from '@igo2/core';
+import { IgoEntitySelectorModule } from '@igo2/common';
 
 import { ClientSchemaSelectorComponent } from './client-schema-selector.component';
 
@@ -13,9 +12,8 @@ import { ClientSchemaSelectorComponent } from './client-schema-selector.componen
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    MatSelectModule,
-    IgoLanguageModule
+    IgoLanguageModule,
+    IgoEntitySelectorModule
   ],
   exports: [ClientSchemaSelectorComponent],
   declarations: [ClientSchemaSelectorComponent]

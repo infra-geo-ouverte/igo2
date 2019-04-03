@@ -1,14 +1,6 @@
-
-
-<mat-form-field class="fadq-client-parcel-year-selector">
-  <mat-select
-    [value]="current$ | async"
-    [placeholder]="'client.parcel.year.placeholder' | translate"
-    (selectionChange)="onSelectionChange($event)">
-    <ng-template ngFor let-year [ngForOf]="store.view.all$() | async">
-      <mat-option [value]="year">
-        {{getParcelYearTitle(year)}}
-      </mat-option>
-    </ng-template>
-  </mat-select>
-</mat-form-field>
+<igo-entity-selector
+  [store]="store"
+  [placeholder]="'client.parcel.year.placeholder' | translate"
+  [titleAccessor]="getParcelYearTitle"
+  (selectedChange)="selectedChange.emit($event)">
+</igo-entity-selector>
