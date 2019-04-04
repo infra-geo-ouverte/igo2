@@ -4,5 +4,6 @@
     "close": "Fermer le menu",
     "open": "Menu"
   },
-  "IGO": "IGO"
+  "IGO": "IGO",
+  "noEntityStore": "Aucune table disponible pour ce jeu de données"
 }

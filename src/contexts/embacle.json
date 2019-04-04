@@ -91,7 +91,7 @@
         "sourceFields": [
           { "name": "waterway", "alias": "Chemin d eau" },
           { "name": "osm_id" },
-          { "name": "landuse", "values": ["yes", "no"] }
+          { "name": "landuse" }
         ],
         "ogcFilters": {
           "enabled": true,

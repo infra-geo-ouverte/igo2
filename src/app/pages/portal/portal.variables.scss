@@ -6,7 +6,7 @@ $igo-footer-height: 49px;
 
 $igo-expansion-panel-collapsed-height: 48px;
 $igo-expansion-panel-collapsed-width: 52px;
-$igo-expansion-panel-height: 281px;
+$igo-expansion-panel-height: 300px;
 $igo-expansion-panel-header-height: $igo-expansion-panel-collapsed-height;
 
 $igo-sidenav-height: 100%;
@@ -16,7 +16,7 @@ $igo-sidenav-margin-top: 50px;
 $igo-sidenav-width-mobile: calc(100% - #{$igo-mobile-min-space-right} - #{$igo-margin});
 
 $igo-toast-panel-collapsed-height: 48px;
-$igo-toast-panel-max-height: 329px;
+$igo-toast-panel-max-height: 300px;
 $igo-toast-panel-width: 30%;
 
 $search-bar-left: calc(#{$igo-icon-size} + #{$igo-margin});

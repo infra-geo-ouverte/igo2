@@ -10,18 +10,10 @@
 
   transition: height 280ms cubic-bezier(.4,0,.2,1);
   padding: $igo-padding;
-
-  @include mobile {
-    max-height: 40%;
-  }
 }
 
 :host.igo-toast-panel-opened {
   height: $igo-toast-panel-max-height;
-
-  @include mobile {
-    height: 40%;
-  }
 }
 
 igo-panel ::ng-deep .igo-panel-header:hover {

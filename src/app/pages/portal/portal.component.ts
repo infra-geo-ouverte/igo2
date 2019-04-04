@@ -91,6 +91,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get actionbarMode(): ActionbarMode {
+    if (this.mediaService.media$.value === Media.Mobile) {
+      return ActionbarMode.Overlay;
+    }
     return this.expansionPanelExpanded
       ? ActionbarMode.Dock
       : ActionbarMode.Overlay;

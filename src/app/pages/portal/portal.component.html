@@ -67,7 +67,7 @@
     [backdropShown]="expansionPanelBackdropShown">
 
     <ng-container expansionPanelHeader>
-      <igo-editor-selector igoWfsEditorSelector [store]="editorStore" [map]="map"></igo-editor-selector>
+      <igo-editor-selector igoEditorSelector [store]="editorStore" [map]="map"></igo-editor-selector>
       <igo-actionbar
         *ngIf="editor"
         [store]="editor.actionStore"
@@ -81,11 +81,13 @@
     </ng-container>
 
     <igo-entity-table
-      *ngIf="editor"
+      *ngIf="editor && editor.entityStore"
       class="table-compact table-centered"
       [store]="editor.entityStore"
       [template]="editor.tableTemplate">
     </igo-entity-table>
+
+    <span *ngIf="editor && !editor.entityStore">{{'noEntityStore' | translate}}</span>
 
   </igo-expansion-panel>
 

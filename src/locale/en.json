@@ -4,5 +4,6 @@
     "close": "Close Menu",
     "open": "Open Menu"
   },
-  "IGO": "IGO"
+  "IGO": "IGO",
+  "noEntityStore": "No tables available for this dataset"
 }
