@@ -104,3 +104,43 @@ igo-toast-panel.igo-toast-panel-opened {
     left: 0;
   }
 }
+
+
+igo-expansion-panel:not(.igo-expansion-panel-expanded) {
+  @include small-screen {
+    igo-editor-selector,
+    igo-actionbar {
+      display: none;
+    }
+  }
+
+  @include tablet {
+    igo-editor-selector,
+    igo-actionbar {
+      display: none;
+    }
+  }
+
+  @include mobile {
+    igo-editor-selector,
+    igo-actionbar {
+      display: none;
+    }
+  }
+}
+
+igo-expansion-panel {
+  igo-editor-selector {
+    width: calc(#{$igo-sidenav-width} - #{$igo-icon-size} - 65px)
+  }
+
+  @include mobile {
+    igo-editor-selector {
+      width: calc(#{$igo-sidenav-width} - (2 * #{$igo-icon-size}) - 65px);
+    }
+  }
+
+  igo-actionbar {
+    margin-left: 5px;
+  }
+}

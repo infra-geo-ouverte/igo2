@@ -20,6 +20,7 @@
   </button>
 
   <igo-search-bar
+    [minLength]="minSearchTermLength"
     (change)="onSearchTermChange($event)"
     (search)="onSearch($event)">
   </igo-search-bar>
@@ -58,6 +59,7 @@
       [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
                               sidenavOpened ? 'right' : 'left'">
     </igo-baselayers-switcher> -->
+    <igo-baselayers-switcher [map]="map"></igo-baselayers-switcher>
   </igo-map-browser>
 
   <igo-expansion-panel
@@ -65,7 +67,25 @@
     [backdropShown]="expansionPanelBackdropShown">
 
     <ng-container expansionPanelHeader>
+      <igo-editor-selector igoWfsEditorSelector [store]="editorStore" [map]="map"></igo-editor-selector>
+      <igo-actionbar
+        *ngIf="editor"
+        [store]="editor.actionStore"
+        [horizontal]="true"
+        [xPosition]="'after'"
+        [yPosition]="'above'"
+        [withToggleButton]="true"
+        [withTitle]="actionbarWithTitle"
+        [mode]="actionbarMode">
+      </igo-actionbar>
     </ng-container>
+
+    <igo-entity-table
+      *ngIf="editor"
+      class="table-compact table-centered"
+      [store]="editor.entityStore"
+      [template]="editor.tableTemplate">
+    </igo-entity-table>
 
   </igo-expansion-panel>
 
@@ -80,6 +100,12 @@
     *ngIf="toastPanelContent === 'feature'"
     [feature]="searchResult.data">
   </igo-feature-details>
+
+  <igo-editor-outlet
+    *ngIf="toastPanelContent === 'editor'"
+    [editor]="editor"
+    (deactivateWidget)="onDeactivateEditorWidget()">
+  </igo-editor-outlet>
 
 </igo-toast-panel>
 

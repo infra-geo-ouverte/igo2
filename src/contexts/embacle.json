@@ -22,8 +22,7 @@
       "baseLayer": true,
       "sourceOptions": {
         "type": "xyz",
-        "url":
-          "https://geoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_public@EPSG_3857/{z}/{x}/{-y}.png"
+        "url": "https://geoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_public@EPSG_3857/{z}/{x}/{-y}.png"
       }
     },
     {
@@ -44,7 +43,7 @@
       "title": "WFS",
       "sourceOptions": {
         "type": "wfs",
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+        "url": "/apis/ws/igo_gouvouvert.fcgi",
         "params": {
           "featureTypes": "vg_observation_v_autre_wmst",
           "fieldNameGeometry": "geometry",
@@ -113,8 +112,7 @@
         }
       },
       "metadata": {
-        "url":
-          "https://www.donneesquebec.ca/recherche/fr/dataset/historique-publique-d-embacles-repertories-au-msp",
+        "url": "https://www.donneesquebec.ca/recherche/fr/dataset/historique-publique-d-embacles-repertories-au-msp",
         "extern": true
       },
       "timeFilter": {
