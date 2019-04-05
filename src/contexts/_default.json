@@ -203,7 +203,7 @@
   "toolbar": [
     "client",
     "searchResults",
-    "map",
+    "fadqMap",
     "catalog",
     "navigation",
     "importExport",
