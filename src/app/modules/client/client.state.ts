@@ -145,13 +145,22 @@ export class ClientState implements OnDestroy {
     this.editionState.setEditor(this.parcelState.editor);
 
     this.client$.next(client);
+
+    if (client.parcels.length === 0) {
+      this.clientError$.next('client.error.noparcel');
+    } else {
+      this.clientError$.next(undefined);
+    }
   }
 
-  setClientError(error: string | undefined) {
-    this.clientError$.next(error);
+  setClientNotFound() {
+    this.clearClient();
+    this.clientError$.next('client.error.notfound');
   }
 
   clearClient() {
+    this.clientError$.next(undefined);
+
     if (this.client === undefined) { return; }
 
     this.clearSchema();

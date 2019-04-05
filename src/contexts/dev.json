@@ -60,7 +60,7 @@
   "toolbar": [
     "client",
     "searchResults",
-    "map",
+    "fadqMap",
     "catalog",
     "navigation",
     "importExport",
@@ -75,7 +75,7 @@
       "name": "searchResults"
     },
     {
-      "name": "map"
+      "name": "fadqMap"
     },
     {
       "name": "catalog"

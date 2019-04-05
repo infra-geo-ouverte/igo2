@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Observable, Subscription, of } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription, of } from 'rxjs';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 
@@ -11,17 +10,13 @@ import {
   EditorStore,
   EntityRecord,
   EntityStore,
-  getEntityTitle,
-  Tool,
-  Toolbox
+  getEntityTitle
 } from '@igo2/common';
-import { ContextService, DetailedContext } from '@igo2/context';
 import {
   FEATURE,
   Feature,
   featureToSearchResult,
   IgoMap,
-  LayerService,
   QuerySearchSource,
   Research,
   SearchResult,
@@ -60,14 +55,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public expansionPanelExpanded = false;
   public sidenavOpened = false;
-  public spinnerShown = false;
 
-  // True after the initial context is loaded
-  private contextLoaded = false;
-  private activity$: Subscription;
-  private context$$: Subscription;
-  private selectedEditor$$: Subscription;
-  private searchResults$$: Subscription;
   private focusedSearchResult$$: Subscription;
 
   get map(): IgoMap {
@@ -174,8 +162,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.context$$.unsubscribe();
-    this.searchResults$$.unsubscribe();
     this.focusedSearchResult$$.unsubscribe();
   }
 
@@ -309,16 +295,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   private onSearchClient(result: SearchResult<Client>) {
     this.closeToastPanel();
     this.clientState.setClient(result.data);
-    if (result.data.parcels.length === 0) {
-      this.clientState.setClientError('client.error.noparcel');
-    } else {
-      this.clientState.setClientError(undefined);
-    }
   }
 
   private onClientNotFound() {
-    this.clientState.clearClient();
-    this.clientState.setClientError('client.error.notfound');
+    this.clientState.setClientNotFound();
   }
 
   private onSearchMap(results: SearchResult<Feature>[]) {
@@ -351,7 +331,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchStore.clear();
     this.closeToastPanel();
     this.clientState.clearClient();
-    this.clientState.setClientError(undefined);
   }
 
   private getQuerySearchSource(): SearchSource {
