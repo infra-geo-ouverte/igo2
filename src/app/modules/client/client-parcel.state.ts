@@ -1,10 +1,16 @@
 import { Injectable} from '@angular/core';
 
-import { Action, ActionStore, EntityStore, EntityTableColumn, getEntityProperty } from '@igo2/common';
+import {
+  Action,
+  ActionStore,
+  Editor,
+  EntityStore,
+  EntityTableColumn,
+  getEntityProperty
+} from '@igo2/common';
 import { FeatureStore } from '@igo2/geo';
 import { MapState } from '@igo2/integration';
 
-import { Editor } from 'src/lib/edition';
 import {
   Client,
   ClientParcel,
@@ -49,8 +55,9 @@ export class ClientParcelState {
         getKey: (entity: ClientParcel) => entity.properties.id,
         map: mapState.map
       }),
-      actionStore: new ActionStore(this.buildActions())
+      actionStore: new ActionStore([])
     });
+    this.editor.actionStore.load(this.buildActions());
 
     this._diagramStore = new EntityStore<ClientParcelDiagram>([]);
     this._parcelYearStore = new EntityStore<ClientParcelYear>([]);

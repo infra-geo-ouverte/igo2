@@ -10,7 +10,7 @@ import { substituteProperties } from 'src/lib/utils';
  * Tool to browse a map's layers or to choose a different map
  */
 @ToolComponent({
-  name: 'map',
+  name: 'fadqMap',
   title: 'tools.map',
   icon: 'map'
 })

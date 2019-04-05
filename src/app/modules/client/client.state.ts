@@ -8,7 +8,7 @@ import {
   FeatureStoreLoadingStrategy,
   FeatureStoreSelectionStrategy
 } from '@igo2/geo';
-import { MapState } from '@igo2/integration';
+import { EditionState, MapState } from '@igo2/integration';
 
 import {
   Client,
@@ -24,7 +24,6 @@ import {
   createClientDefaultSelectionStyle
 } from 'src/lib/client';
 
-import { EditionState } from '../edition/edition.state';
 import { ClientParcelState} from './client-parcel.state';
 import { ClientSchemaState} from './client-schema.state';
 import { ClientSchemaElementState } from './client-schema-element.state';
@@ -224,10 +223,10 @@ export class ClientState implements OnDestroy {
     map.addLayer(clientSchemaElementLayer, false);
     this.schemaElementStore.bindLayer(clientSchemaElementLayer);
 
-    const parcelLoadingStrategy = new FeatureStoreLoadingStrategy();
+    const parcelLoadingStrategy = new FeatureStoreLoadingStrategy({});
     this.parcelStore.addStrategy(parcelLoadingStrategy);
 
-    const schemaElementLoadingStrategy = new FeatureStoreLoadingStrategy();
+    const schemaElementLoadingStrategy = new FeatureStoreLoadingStrategy({});
     this.schemaElementStore.addStrategy(schemaElementLoadingStrategy);
     schemaElementLoadingStrategy.activate();
 

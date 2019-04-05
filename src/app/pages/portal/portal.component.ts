@@ -7,6 +7,8 @@ import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowse
 import { Media, MediaService, MediaOrientation } from '@igo2/core';
 import {
   ActionbarMode,
+  Editor,
+  EditorStore,
   EntityRecord,
   EntityStore,
   getEntityTitle,
@@ -28,15 +30,14 @@ import {
 } from '@igo2/geo';
 import {
   ContextState,
+  EditionState,
   ToolState,
   MapState,
   SearchState
 } from '@igo2/integration';
 
-import { ClientState } from 'src/app/modules/client/client.state';
-import { EditionState } from 'src/app/modules/edition/edition.state';
-
 import { SEARCH_TYPES } from 'src/app/modules/search/shared/search.enums';
+import { ClientState } from 'src/app/modules/client/client.state';
 import { ClientSearchSource } from 'src/app/modules/search/shared/sources/client';
 
 import {
@@ -45,7 +46,6 @@ import {
   ClientSchemaElement,
   CLIENT
 } from 'src/lib/client';
-import { Editor } from 'src/lib/edition';
 
 @Component({
   selector: 'app-portal',
@@ -54,7 +54,6 @@ import { Editor } from 'src/lib/edition';
 })
 export class PortalComponent implements OnInit, OnDestroy {
 
-  public editor: Editor;
   public searchResult: SearchResult;
   public searchTypes = SEARCH_TYPES;
   public minSearchTermLength = 2;
@@ -120,6 +119,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.editionState.store;
   }
 
+  get editor(): Editor {
+    return this.editionState.editor$.value;
+  }
+
   get toastPanelContent(): string {
     let content;
     if (this.editor !== undefined && this.editor.hasWidget) {
@@ -162,21 +165,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.context$$ = this.contextState.context$
-      .subscribe((context: DetailedContext) => this.onChangeContext(context));
-
     this.focusedSearchResult$$ = this.searchStore.stateView
       .firstBy$((record: EntityRecord<SearchResult>) => record.state.focused === true)
       .subscribe((record: EntityRecord<SearchResult>) => {
         const result = record ? record.entity : undefined;
         this.onFocusSearchResult(result);
-      });
-
-    this.selectedEditor$$ = this.editorStore.stateView
-      .firstBy$((record: EntityRecord<Editor>) => record.state.selected === true)
-      .subscribe((record: EntityRecord<Editor>) => {
-        const editor = record ? record.entity : undefined;
-        this.onSelectEditor(editor);
       });
   }
 
@@ -184,7 +177,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.context$$.unsubscribe();
     this.searchResults$$.unsubscribe();
     this.focusedSearchResult$$.unsubscribe();
-    this.selectedEditor$$.unsubscribe();
   }
 
   onBackdropClick() {
@@ -294,14 +286,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
   }
 
-  private onChangeContext(context: DetailedContext) {
-    if (context === undefined) { return; }
-    if (this.contextLoaded) {
-      this.toolState.toolbox.activateTool('map');
-    }
-    this.contextLoaded = true;
-  }
-
   private onBeforeSearch() {
     if (this.mediaService.media$.value === Media.Mobile) {
       this.closeToastPanel();
@@ -368,10 +352,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.closeToastPanel();
     this.clientState.clearClient();
     this.clientState.setClientError(undefined);
-  }
-
-  private onSelectEditor(editor: Editor) {
-    this.editor = editor;
   }
 
   private getQuerySearchSource(): SearchSource {

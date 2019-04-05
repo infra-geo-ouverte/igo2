@@ -1,8 +1,7 @@
 import { Inject, Injectable} from '@angular/core';
 
-import { Action, ActionStore, EntityStore, Widget } from '@igo2/common';
+import { Action, ActionStore, EntityStore, Editor, Widget } from '@igo2/common';
 
-import { Editor } from 'src/lib/edition';
 import {
   Client,
   ClientSchema,
@@ -46,8 +45,9 @@ export class ClientSchemaState {
       title: 'Schémas du client',
       tableTemplate: clientSchemaTableService.buildTable(),
       entityStore: new EntityStore<ClientSchema>([]),
-      actionStore: new ActionStore(this.buildActions())
+      actionStore: new ActionStore([])
     });
+    this.editor.actionStore.load(this.buildActions());
   }
 
   setClient(client: Client) {

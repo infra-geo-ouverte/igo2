@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import {
   Action,
   ActionStore,
+  Editor,
   EntityTransaction,
   getEntityRevision,
   Widget
@@ -10,7 +11,6 @@ import {
 import { FeatureStore, IgoMap } from '@igo2/geo';
 import { MapState } from '@igo2/integration';
 
-import { Editor } from 'src/lib/edition';
 import {
   ClientSchema,
   ClientSchemaElement,
@@ -66,8 +66,9 @@ export class ClientSchemaElementState {
         },
         map: mapState.map
       }),
-      actionStore: new ActionStore(this.buildActions())
+      actionStore: new ActionStore([])
     });
+    this.editor.actionStore.load(this.buildActions());
   }
 
   setSchema(schema: ClientSchema | undefined) {

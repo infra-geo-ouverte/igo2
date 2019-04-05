@@ -135,7 +135,10 @@ export class ClientSchemaFormService {
         validator: Validators.compose([
           Validators.required,
           Validators.pattern(/^(20[\d]{2})$/)
-        ])
+        ]),
+        // errors: {
+        //   pattern: ''
+        // }
       }
     }, partial));
   }
