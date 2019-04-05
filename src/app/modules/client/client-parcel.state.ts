@@ -103,7 +103,7 @@ export class ClientParcelState {
     return [
       {
         id: 'export',
-        icon: 'move_to_inbox',
+        icon: 'file_download',
         title: 'client.parcel.exportToCSV',
         tooltip: 'client.parcel.exportToCSV.tooltip',
         handler: () => {
