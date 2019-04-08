@@ -3,6 +3,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { IgoSearchModule } from '@igo2/geo';
 
 import { provideClientSearchSource } from './shared/sources/client.providers';
+import { provideCadastreRenoSearchSource } from 'src/lib/cadastre-reno/shared/cadastre-reno.providers';
 import {
   provideFadqIChercheSearchResultFormatter,
   provideIChercheSearchSource
@@ -24,7 +25,8 @@ export class FadqSearchModule {
       providers: [
         provideFadqIChercheSearchResultFormatter(),
         provideClientSearchSource(),
-        provideIChercheSearchSource()
+        provideIChercheSearchSource(),
+        provideCadastreRenoSearchSource(),
       ]
     };
   }
