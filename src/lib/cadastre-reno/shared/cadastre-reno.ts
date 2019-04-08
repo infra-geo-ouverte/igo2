@@ -1,11 +1,14 @@
 import { Injectable, Inject } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import olFormat from 'ol/format';
+import OlFormatWKT from 'ol/format/WKT';
+import OlFormatGeoJSON from 'ol/format/GeoJSON';
+import OlFeature from 'ol/Feature';
 
 import {
+  FEATURE,
   SearchResult,
   SearchSource,
   SearchSourceOptions,
@@ -48,7 +51,7 @@ export class CadastreRenoSearchSource extends SearchSource implements TextSearch
     return new HttpParams({
       fromObject: Object.assign(
         {
-          numero: term,
+          numero: term.replace(/;/g, ','),
           epsg: '4326'
         },
         this.params
@@ -62,10 +65,10 @@ export class CadastreRenoSearchSource extends SearchSource implements TextSearch
    * @returns Observable of <SearchResult<Cadastre>[]
    */
   search(term?: string): Observable<SearchResult<CadastreRenoFeature>[]> {
+    if (term.length < 7 ) { return of([]); }
+
     const params = this.computeRequestParams(term);
 
-    if (term.length < 7) { return; }
-    console.log('SEARCH < 7');
     return this.http
     .get(this.searchUrl, {
       params,
@@ -75,57 +78,67 @@ export class CadastreRenoSearchSource extends SearchSource implements TextSearch
   }
 
   private extractResults(response: string): SearchResult<CadastreRenoFeature>[] {
-    console.log('RESPONSE: ' + response);
 
     const temp: string[] = response.split('<br />');
     const resultSearch: SearchResult<CadastreRenoFeature>[] = [];
 
     for (const cadastreRenoFeature of temp) {
-      resultSearch.push(this.dataToResult(cadastreRenoFeature));
+      const searchResultCadastreRenov: SearchResult<CadastreRenoFeature> = this.dataToResult(cadastreRenoFeature);
+      if (searchResultCadastreRenov !== undefined) {
+        resultSearch.push(searchResultCadastreRenov);
+      }
     }
-
-    /*  .map((cadastre: string) => { this.dataToResult(cadastre); });*/
-    // return [this.dataToResult(response)];
 
     return resultSearch;
   }
 
+  /**
+   *Convert a string representation of a cadastre geometry in a SearchResult cadastre
+   * @param string cadastre
+   * @returns SearchResult<CadastreRenoFeature>
+   */
   private dataToResult(cadastre: string): SearchResult<CadastreRenoFeature> {
     const propertiesCadastre = cadastre.split(';');
-
+    if (propertiesCadastre[0] === undefined || propertiesCadastre[0] === '') { return; }
+    const id = [this.getId(), propertiesCadastre[0]].join('.');
     return {
       source: this,
       data: {
-        type: CADASTRE_RENO,
+        type: FEATURE,
         projection: 'EPSG:4326',
         geometry: this.convertWKTtoGeojson(propertiesCadastre[7]),
-        extent: null,
-        properties: null,
+        extent: undefined,
+        properties: {
+          noCadastre: propertiesCadastre[0]
+        },
         meta: {
-          id: this.getId(),
-          title: 'data.properties.recherche'
+          id
         }
       },
       meta: {
-        dataType: CADASTRE_RENO,
-        id: propertiesCadastre[0],
+        dataType: FEATURE,
+        id,
         title: propertiesCadastre[0],
         icon: 'grid_on'
       }
     };
   }
 
-  private convertWKTtoGeojson(featureWKT: string) {
-    console.log('TEST:' + featureWKT);
-    const  olFormatWKT = new olFormat.WKT();
-    const  olFormatGeoJson = new olFormat.GeoJSON();
+  /**
+   * Convert a WKT string to a GeoJSON Feature
+   * @param string stringWkt
+   * @returns FeatureGeometry
+   */
+  private convertWKTtoGeojson(stringWkt: string): FeatureGeometry {
+    if (stringWkt === undefined) { return; }
 
-    // const wkt_format = new olFormat().Format.WKT();
-    const feature = olFormatWKT.readFeature(featureWKT);
-    // const wkt_options = {};
-    // const geojson_format = new olFormat().Format.GeoJSON(wkt_options);
+    const  olFormatWKT = new OlFormatWKT;
+    const  olFormatGeoJSON = new OlFormatGeoJSON;
 
-    return olFormatGeoJson().writeFeature(feature);
+    const featureWkt = olFormatWKT.readGeometry(stringWkt);
 
+    const featureGeoJSON = olFormatGeoJSON.writeGeometryObject(featureWkt);
+
+    return featureGeoJSON;
   }
 }
