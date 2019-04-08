@@ -20,7 +20,9 @@
     "layer.title": "Couche de données",
     "layer.placeholder": "Rechercher une couche de données.",
     "client.title": "Client",
-    "client.placeholder": "Rechercher un client"
+    "client.placeholder": "Rechercher un client",
+    "cadastre-reno.title": "Cadastre rénové",
+    "cadastre-reno.placeholder": "Rechercher un cadastre"
   },
 
   "help": {

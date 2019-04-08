@@ -20,7 +20,10 @@
     "layer.title": "Layer",
     "layer.placeholder": "Search for a layer",
     "client.title": "Client",
-    "client.placeholder": "Search for a  client"
+    "client.placeholder": "Search for a  client",
+    "client.placeholder": "Search for a  client",
+    "cadastre-reno.title": "Renovated cadastre",
+    "cadastre-reno.placeholder": "Search for a cadastre"
   },
 
   "help": {

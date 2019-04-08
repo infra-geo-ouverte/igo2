@@ -50,6 +50,10 @@ export const environment: Environment = {
         available: false,
         enabled: false,
         searchUrl: 'https://geoegl.msp.gouv.qc.ca/igo2/api/layers/search'
+      },
+      cadastre: {
+        enabled: false,
+        available: false
       }
     },
     language: {

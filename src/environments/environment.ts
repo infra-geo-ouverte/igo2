@@ -61,13 +61,17 @@ export const environment: Environment = {
         params: {
           limit: '5'
         }
+      },
+      cadastreReno: {
+        enabled: true,
+        available: true
       }
     },
     language: {
       prefix: './locale/'
     },
     api: {
-      url: 'http://chabou01-svn.fadq.qc/app/interne'
+      url: 'http://danlav01-svn.fadq.qc/app/interne'
     },
     help: {
       logoLink: 'assets/images/logo_igo_text_md.png',
