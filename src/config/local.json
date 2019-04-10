@@ -15,7 +15,7 @@
     ]
   },
   "api": {
-    "url": "/app/interne"
+    "url": "http://chabou01-svn.fadq.qc/app/interne"
   },
   "help": {
     "guideLink": "http://igo.fadq.qc/aide/IGO.pdf",

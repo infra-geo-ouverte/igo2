@@ -1,6 +1,6 @@
 {
-  "uri": "_default",
-  "title": "Default",
+  "uri": "local",
+  "title": "Local",
   "map": {
     "view": {
       "projection": "EPSG:32198",
@@ -32,7 +32,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/cbct",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/cbct",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -50,7 +50,7 @@
       "sourceOptions": {
         "type": "wmts",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_wmts",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_wmts",
         "layer": "carte_gouv_qc",
         "matrixSet": "LAMBERT",
         "requestEncoding": "KVP",
@@ -65,7 +65,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -82,7 +82,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -99,7 +99,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -116,7 +116,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -134,7 +134,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -151,7 +151,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_compil_cadas",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_compil_cadas",
         "style": "default",
         "projection": "EPSG:32198",
         "params": {
@@ -167,7 +167,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -186,7 +186,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "http://chabou01-svn.fadq.qc/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",

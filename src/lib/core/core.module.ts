@@ -9,7 +9,7 @@ const providers: Provider[] = [
   RouteService,
   provideConfigOptions({
     default: environment.igo,
-    path: './config/config.json'
+    path: environment.configPath
   })
 ];
 
