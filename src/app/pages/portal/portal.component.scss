@@ -41,6 +41,17 @@ igo-map-browser {
       font-size: 11px;
     }
   }
+
+  ::ng-deep .ol-scale-line {
+    margin-left: 45%;
+    left: 0;
+
+    .ol-scale-line-inner {
+      background-color: rgba(255, 255, 255, 0.8);
+      margin-left: 0;
+    }
+  }
+  
 }
 
 /*** Search bar ***/
