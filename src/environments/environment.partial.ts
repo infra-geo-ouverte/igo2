@@ -27,6 +27,23 @@ export interface IgoEnvironment {
   layer: {
     infoLink: string;
   };
+  cadastre: {
+    mun: {
+      list: string;
+    };
+    cadastre: {
+      list: string;
+      surfaces: string;
+    };
+    concession: {
+      list: string;
+      points: string;
+    };
+    lot: {
+      list: string;
+      points: string;
+    }
+  };
 }
 
 /* tslint:disable */
@@ -108,6 +125,23 @@ export const igoEnvironment: IgoEnvironment = {
           type: '/igoschema/edition_schema/obtenirTypesElementGeometriqueTypeSchema/${schemaType}'
         }
       }
+    }
+  },
+  cadastre : {
+    mun : {
+      list: '/igolocalisation/recherche_cadastre_originaire/obtenirMunicipalites'
+    },
+    cadastre: {
+      list: '/igolocalisation/recherche_cadastre_originaire/obtenirCadastresOriginaires/${codeGeo}',
+      surfaces: '/igolocalisation/recherche_cadastre_originaire/obtenirCadastreOriginaire/${idCadastre}'
+    },
+    concession: {
+      list: '/igolocalisation/recherche_cadastre_originaire/obtenirDesignationSecondaire',
+      points: '/igolocalisation/recherche_cadastre_originaire/obtenirDesDesignationsSecondairesOriginaires'
+    },
+    lot: {
+      list: '/igolocalisation/recherche_cadastre_originaire/obtenirLotsOriginaires',
+      points: '/igolocalisation/recherche_cadastre_originaire/obtenirDesLotsOriginaires'
     }
   }
 };

@@ -1,0 +1,13 @@
+<mat-form-field>
+  <mat-select
+    [value]="selected$ | async"
+    [placeholder]="'cadastre.lot' | translate"
+    (selectionChange)="onSelectionChange($event)">
+    <ng-template ngFor let-lot [ngForOf]="store.view.all$() | async">
+      <mat-option [value]="lot">
+        {{getNomLot(lot)}}
+      </mat-option>
+    </ng-template>
+  </mat-select>
+  <mat-icon class="place" matPrefix>place</mat-icon>
+</mat-form-field>

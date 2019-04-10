@@ -1,0 +1,13 @@
+<mat-form-field>
+  <mat-select
+    [value]="selected$ | async"
+    [placeholder]="'cadastre.concession' | translate"
+    (selectionChange)="onSelectionChange($event)">
+    <ng-template ngFor let-concession [ngForOf]="store.view.all$() | async">
+      <mat-option [value]="concession">
+        {{getNomConcession(concession)}}
+      </mat-option>
+    </ng-template>
+  </mat-select>
+  <mat-icon class="place" matPrefix>place</mat-icon>
+</mat-form-field>

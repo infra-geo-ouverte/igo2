@@ -1,0 +1,34 @@
+
+<div class="fadq-cadastre-selectors">
+  <fadq-cadastre-mun-selector
+    [store]="munStore" (selectedMunChange)="onSelectionMunChange($event)">
+  </fadq-cadastre-mun-selector>
+  <fadq-cadastre-cadastre-selector
+    [store]="cadastreStore"
+    (selectedCadastreChange)="onSelectionCadastreChange($event)">
+  </fadq-cadastre-cadastre-selector>
+  <fadq-cadastre-concession-selector
+    [store]="concessionStore"
+    (selectedConcessionChange)="onSelectionConcessionChange($event)">
+  </fadq-cadastre-concession-selector>
+
+  <fadq-cadastre-lot-selector
+    [store]="lotStore"
+    (selectedLotChange)="onSelectionLotChange($event)">
+  </fadq-cadastre-lot-selector>
+</div>
+<div class="igo-form-buttons">
+  <button
+    mat-raised-button
+    (click)="onSearchCancelClick()">
+    {{ 'cadastre.cancel_search' | translate }}
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="searchDisabled"
+    type="button"
+    (click)="onSearchClick()">
+    {{ 'cadastre.search' | translate }}
+  </button>
+</div>

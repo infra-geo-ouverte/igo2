@@ -20,7 +20,9 @@
     "layer.title": "Layer",
     "layer.placeholder": "Search for a layer",
     "client.title": "Client",
-    "client.placeholder": "Search for a  client"
+    "client.placeholder": "Search for a client",
+    "cadastre.title": "Original cadastre",
+    "cadastre.placeholder": "Search for a original cadastre"
   },
 
   "help": {
@@ -45,16 +47,18 @@
   },
 
   "tools": {
+    "map": "Map",
     "help": "Help",
     "addressEditor": "Edit Addresses",
     "client": "Client",
-    "map": "Map",
-    "navigation": "Navigation"
+    "measurer": "Measurer",
+    "navigation": "Zoom on a region",
+    "cadastre": "Cadastre originaire"
   },
 
   "client": {
     "error.notfound": "Client number is invalid",
-    "error.noparcel": "No parcel found for this client", 
+    "error.noparcel": "No parcel found for this client",
     "info": {
       "title": "Information",
       "adresseCor": "Address",
@@ -75,7 +79,7 @@
     "parcel": {
       "year.placeholder": "Year",
       "exportToCSV": "Export to CSV",
-      "exportToCSV.tooltip": "Export to CSV" 
+      "exportToCSV.tooltip": "Export to CSV"
     },
     "schema": {
       "placeholder": "Schema",
@@ -193,5 +197,13 @@
     "numero_civique_suffixe": "Address Suffix",
     "rue": "Street",
     "type": "Type"
+  },
+  "cadastre": {
+    "mun": "Municipality",
+    "cadastre": "Cadastre",
+    "concession": "Secondary designation",
+    "lot": "Lot",
+    "search": "Search",
+    "cancel_search": "Cancel"
   }
 }

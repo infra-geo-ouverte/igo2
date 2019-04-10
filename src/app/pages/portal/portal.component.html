@@ -20,8 +20,10 @@
   </button>
 
   <igo-search-bar
+    [disabled]="disabledSearch"
     [searchTypes]="searchTypes"
     [minLength]="minSearchTermLength"
+    (searchTypeChange)="onSearchTypeChange($event)"
     (change)="onSearchTermChange($event)"
     (search)="onSearch($event)">
   </igo-search-bar>
@@ -58,7 +60,7 @@
   <ng-container expansionPanelHeader>
     <igo-editor-selector [store]="editorStore"></igo-editor-selector>
     <igo-actionbar
-      *ngIf="editor" 
+      *ngIf="editor"
       [store]="editor.actionStore"
       [horizontal]="true"
       [xPosition]="'after'"

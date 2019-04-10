@@ -1,0 +1,16 @@
+<mat-form-field>
+  <input
+    matInput
+    type="text"
+    [placeholder]="'cadastre.mun' | translate"
+    [matAutocomplete]="auto"
+    [formControl]="munControl">
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="getNomMun"
+    (optionSelected)="onSelectionChange($event)">
+    <mat-option *ngFor="let mun of filteredMun$ | async" [value]="mun">
+      {{ getNomMun(mun) }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

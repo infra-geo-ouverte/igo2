@@ -146,6 +146,7 @@
       }
     },
     {
+      "id": "cadastre",
       "title": "Compilation cadastrale",
       "visible": false,
       "sourceOptions": {
@@ -210,6 +211,7 @@
     "measurer",
     "print",
     "addressEditor",
+    "cadastre",
     "help"
   ],
   "tools": [
@@ -349,6 +351,12 @@
     },
     {
       "name": "addressEditor"
+    },
+    {
+      "name": "cadastre",
+      "options": {
+        "layerId": "cadastre"
+      }
     },
     {
       "name": "help"

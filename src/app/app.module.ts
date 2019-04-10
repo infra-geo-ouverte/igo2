@@ -10,13 +10,12 @@ import { IgoIntegrationModule } from '@igo2/integration';
 import { FadqCoreModule } from './modules/core/core.module';
 import { FadqHelpModule } from './modules/help/help.module';
 import { FadqAddressModule } from './modules/address/address.module';
+import { FadqCadastreModule } from './modules/cadastre/cadastre.module';
 import { FadqClientModule } from './modules/client/client.module';
 import { FadqMapModule } from './modules/map/map.module';
 import { FadqNavigationModule } from './modules/navigation/navigation.module';
 import { FadqSearchModule } from './modules/search/search.module';
-
 import { FadqPortalModule } from './pages/portal/portal.module';
-
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -33,8 +32,8 @@ import { AppComponent } from './app.component';
     FadqCoreModule,
     FadqHelpModule,
     FadqAddressModule,
+    FadqCadastreModule,
     FadqClientModule,
-    FadqMapModule,
     FadqNavigationModule,
     FadqSearchModule.forRoot(),
     FadqPortalModule

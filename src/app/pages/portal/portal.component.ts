@@ -42,6 +42,8 @@ import {
   CLIENT
 } from 'src/lib/client';
 
+import { CADASTRE } from 'src/lib/cadastre/shared/cadastre.enums';
+
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
@@ -56,7 +58,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   public expansionPanelExpanded = false;
   public sidenavOpened = false;
 
+  public searchbarDisabled: boolean = false;
+
   private focusedSearchResult$$: Subscription;
+  private currentSearchTerm: string;
+  private currentSearchType: string = CLIENT;
 
   get map(): IgoMap {
     return this.mapState.map;
@@ -194,19 +200,14 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearchTermChange(term?: string) {
-    if (term === undefined || term === '') {
-      this.onClearSearch();
-      return;
-    }
+    this.currentSearchTerm = term;
     if (term.length < this.minSearchTermLength) { return; }
+    this.onBeforeSearch();
+  }
 
-    if (this.searchState.searchTypes.indexOf(CLIENT) >= 0) {
-      if (term.length >= 3) {
-        this.onBeforeSearchClient();
-      }
-    } else {
-      this.onBeforeSearch();
-    }
+  onSearchTypeChange(type?: string) {
+    this.currentSearchType = type;
+    this.onBeforeSearch();
   }
 
   onSearch(event: {research: Research, results: SearchResult[]}) {
@@ -272,23 +273,74 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
   }
 
+  private verifyNullTerm(): boolean {
+    if (this.currentSearchTerm === undefined || this.currentSearchTerm === '') {
+      return true;
+    }
+    return false;
+  }
+
   private onBeforeSearch() {
+    switch (this.currentSearchType) {
+      case CLIENT: {
+        this.onBeforeSearchClient();
+        break;
+      }
+      case CADASTRE: {
+        this.onBeforeSearchCadastre();
+        break;
+      }
+      default: {
+        this.onBeforeSearchOthers();
+        break;
+      }
+    }
+  }
+
+  private onBeforeSearchOthers() {
+    this.searchbarDisabled = false;
+
+    if (this.verifyNullTerm()) {
+      this.onClearSearch();
+      return;
+    }
+
     if (this.mediaService.media$.value === Media.Mobile) {
       this.closeToastPanel();
     }
-
     this.toolState.toolbox.activateTool('searchResults');
     this.openSidenav();
   }
 
   private onBeforeSearchClient() {
+
+    this.searchbarDisabled = false;
+
+    if (this.verifyNullTerm()) {
+      this.onClearSearch();
+      return;
+    }
+
     if (this.mediaService.media$.value === Media.Mobile) {
       this.closeExpansionPanel();
     } else {
       this.openExpansionPanel();
     }
 
-    this.toolState.toolbox.activateTool('client');
+    if (this.currentSearchTerm.length >= 3) {
+      this.toolState.toolbox.activateTool('client');
+      this.openSidenav();
+    }
+  }
+
+  private onBeforeSearchCadastre() {
+    if (this.mediaService.media$.value === Media.Mobile) {
+      this.closeExpansionPanel();
+    } else {
+      this.openExpansionPanel();
+    }
+    this.searchbarDisabled = true;
+    this.toolState.toolbox.activateTool('cadastre');
     this.openSidenav();
   }
 
@@ -302,10 +354,13 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onSearchMap(results: SearchResult<Feature>[]) {
-    if (results.length > 0) {
-      this.onBeforeSearch();
-      this.searchStore.state.update(results[0], {selected: true}, true);
+    if (results.length === 0) { return; }
+    if (this.mediaService.media$.value === Media.Mobile) {
+      this.closeToastPanel();
     }
+    this.toolState.toolbox.activateTool('searchResults');
+    this.openSidenav();
+    this.searchStore.state.update(results[0], {selected: true}, true);
   }
 
   private onFocusSearchResult(result: SearchResult) {

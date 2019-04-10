@@ -1,0 +1,12 @@
+<mat-form-field>
+  <mat-select
+    [value]="selected$ | async"
+    [placeholder]="'cadastre.cadastre' | translate"
+    (selectionChange)="onSelectionChange($event)">
+    <ng-template ngFor let-cadastre [ngForOf]="store.view.all$() | async">
+      <mat-option [value]="cadastre">
+        {{getNomCadastre(cadastre)}}
+      </mat-option>
+    </ng-template>
+  </mat-select>
+</mat-form-field>

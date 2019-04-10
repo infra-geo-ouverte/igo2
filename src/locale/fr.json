@@ -20,7 +20,10 @@
     "layer.title": "Couche de données",
     "layer.placeholder": "Rechercher une couche de données.",
     "client.title": "Client",
-    "client.placeholder": "Rechercher un client"
+    "client.placeholder": "Rechercher un client",
+    "layer.placeholder": "Rechercher une couche de données",
+    "cadastre.title": "Cadastre originaire",
+    "cadastre.placeholder": "Rechercher un cadastre originaire"
   },
 
   "help": {
@@ -45,16 +48,18 @@
   },
 
   "tools": {
+    "map": "Carte",
     "help": "Aide",
     "addressEditor": "Édition d'adresses",
     "client": "Client",
-    "map": "Carte",
-    "navigation": "Zoom sur une région"
+    "measurer": "Mesurage",
+    "navigation": "Zoom sur une région",
+    "cadastre": "Cadastre originaire"
   },
 
   "client": {
     "error.notfound": "No de client non valide",
-    "error.noparcel": "Aucune parcelle agricole n’est liée au client", 
+    "error.noparcel": "Aucune parcelle agricole n’est liée au client",
     "info": {
       "title": "Coordonnées du client",
       "adresseCor": "Adresse de correspondance",
@@ -71,7 +76,7 @@
     "parcel": {
       "year.placeholder": "Année",
       "exportToCSV": "Exporter les données en CSV",
-      "exportToCSV.tooltip": "Exporter les données en CSV" 
+      "exportToCSV.tooltip": "Exporter les données en CSV"
     },
     "diagram": {
       "placeholder": "Diagramme",
@@ -193,5 +198,14 @@
     "numero_civique_suffixe": "Numéro civique (suffix)",
     "rue": "Rue",
     "type": "Type"
+  },
+
+  "cadastre": {
+    "mun": "Municipalité",
+    "cadastre": "Cadastre",
+    "concession": "Désignation secondaire",
+    "lot": "Lot",
+    "search": "Rechercher",
+    "cancel_search": "Réinitialiser"
   }
 }
