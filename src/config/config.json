@@ -10,7 +10,7 @@
     "sources": [{
         "id": "fadq.all",
         "title": "Toutes les données (config)",
-        "url": "/swwf"
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf"
       }
     ]
   },
