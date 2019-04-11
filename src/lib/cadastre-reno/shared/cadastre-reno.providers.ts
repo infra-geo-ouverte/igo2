@@ -1,8 +1,6 @@
-import { ConfigService } from '@igo2/core';
-
-import { SearchSource } from '@igo2/geo';
-
 import { HttpClient } from '@angular/common/http';
+import { ConfigService } from '@igo2/core';
+import { SearchSource } from '@igo2/geo';
 import { CadastreRenoSearchSource } from './cadastre-reno';
 
 /**

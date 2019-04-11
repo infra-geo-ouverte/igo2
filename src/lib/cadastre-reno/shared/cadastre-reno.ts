@@ -1,26 +1,19 @@
 import { Injectable, Inject } from '@angular/core';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import OlFormatWKT from 'ol/format/WKT';
 import OlFormatGeoJSON from 'ol/format/GeoJSON';
-import OlFeature from 'ol/Feature';
-
 import {
   FEATURE,
   SearchResult,
   SearchSource,
   SearchSourceOptions,
   TextSearch,
-  Feature,
   FeatureGeometry
 } from '@igo2/geo';
-
-import { CadastreRenoFeature } from 'src/lib/cadastre-reno/shared/cadastre-reno.interfaces';
-import { CADASTRE_RENO } from '../cadastre-reno.enum';
-import { HttpClient, HttpParams } from '@angular/common/http';
-
+import { CadastreRenoFeature } from 'src/lib/cadastre-reno';
+import { CADASTRE_RENO } from './cadastre-reno.enum';
 
 /**
  * Cadastre search source

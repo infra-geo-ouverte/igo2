@@ -42,7 +42,7 @@ import {
   CLIENT
 } from 'src/lib/client';
 
-import { CADASTRE } from 'src/lib/cadastre/shared/cadastre.enums';
+import { CADASTRE } from 'src/lib/cadastre';
 
 @Component({
   selector: 'app-portal',
@@ -376,7 +376,12 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
 
       this.searchResult = result;
-      this.openToastPanel();
+      // open the toast panel only if the focus comes from the map
+      const querySearchSource = this.getQuerySearchSource();
+      if (querySearchSource !== undefined && result.source === querySearchSource) {
+        this.openToastPanel();
+      }
+
     } else {
       this.searchResult = undefined;
     }
