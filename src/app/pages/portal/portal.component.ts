@@ -58,8 +58,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   public expansionPanelExpanded = false;
   public sidenavOpened = false;
 
-  public searchbarDisabled: boolean = false;
-
   private focusedSearchResult$$: Subscription;
   private currentSearchTerm: string;
   private currentSearchType: string = CLIENT;
@@ -97,14 +95,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.actionbarMode === ActionbarMode.Overlay;
   }
 
-  get parcelStore(): EntityStore<ClientParcel> {
-    return this.clientState.parcelStore;
-  }
-
-  get schemaElementStore(): EntityStore<ClientSchemaElement> {
-    return this.clientState.schemaElementStore;
-  }
-
   get searchStore(): EntityStore<SearchResult> {
     return this.searchState.store;
   }
@@ -116,6 +106,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   get editor(): Editor {
     return this.editionState.editor$.value;
   }
+
+  get searchbarDisabled(): boolean { return this.currentSearchType === CADASTRE; }
 
   get toastPanelContent(): string {
     let content;
@@ -181,6 +173,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   onMapQuery(event: { features: Feature[]; event: OlMapBrowserPointerEvent }) {
     const querySearchSource = this.getQuerySearchSource();
+    if (querySearchSource === undefined) { return; }
+
     const results = event.features.map((feature: Feature) => {
       // This patch removes the "square overlay. added after a query. IMO,
       // there should be an alternative to that square or no square at all.
@@ -201,7 +195,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   onSearchTermChange(term?: string) {
     this.currentSearchTerm = term;
-    if (term.length < this.minSearchTermLength) { return; }
+    if (this.verifyNullTerm()) {
+      this.onClearSearch();
+      return;
+    }
     this.onBeforeSearch();
   }
 
@@ -213,7 +210,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   onSearch(event: {research: Research, results: SearchResult[]}) {
     const results = event.results;
     const querySearchSource = this.getQuerySearchSource();
-    if (results.length === 0 && event.research.source === querySearchSource) {
+    if (results.length === 0 && querySearchSource !== undefined && event.research.source === querySearchSource) {
       if (this.searchResult !== undefined && this.searchResult.source === querySearchSource) {
         this.searchStore.state.update(this.searchResult, {focused: false, selected: false});
         this.closeToastPanel();
@@ -298,12 +295,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onBeforeSearchOthers() {
-    this.searchbarDisabled = false;
-
-    if (this.verifyNullTerm()) {
-      this.onClearSearch();
-      return;
-    }
+    if (this.verifyNullTerm()) { return; }
 
     if (this.mediaService.media$.value === Media.Mobile) {
       this.closeToastPanel();
@@ -313,13 +305,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onBeforeSearchClient() {
-
-    this.searchbarDisabled = false;
-
-    if (this.verifyNullTerm()) {
-      this.onClearSearch();
-      return;
-    }
+    if (this.verifyNullTerm()) { return; }
 
     if (this.mediaService.media$.value === Media.Mobile) {
       this.closeExpansionPanel();
@@ -339,7 +325,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     } else {
       this.openExpansionPanel();
     }
-    this.searchbarDisabled = true;
+
     this.toolState.toolbox.activateTool('cadastre');
     this.openSidenav();
   }

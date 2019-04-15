@@ -50,16 +50,13 @@ export interface IgoEnvironment {
 export const igoEnvironment: IgoEnvironment = {
   searchSources: {
     nominatim: {
-      enabled: true,
-      available: true,
-      params: {
-        limit: '5'
-      }
+      enabled: false,
+      available: false
     },
     icherche: {
       enabled: true,
       available: true,
-      searchUrl: '/icherche/geocode',
+      searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode',
       params: {
         type: 'adresse,code_postal,route,municipalite,mrc,region_administrative',
         limit: '5',
@@ -68,11 +65,7 @@ export const igoEnvironment: IgoEnvironment = {
     },
     datasource: {
       enabled: false,
-      available: false,
-      searchUrl: '/ilayer/search',
-      params: {
-        limit: '5'
-      }
+      available: false
     }
   },
   language: {

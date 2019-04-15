@@ -19,6 +19,11 @@ export const environment: Environment = {
     context: {
       contextListFile: 'locals.json',
       defaultContextUri: 'local'
+    },
+    searchSources: {
+      icherche: {
+        searchUrl: '/icherche/geocode'
+      }
     }
   })
 };

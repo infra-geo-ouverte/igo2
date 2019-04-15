@@ -11,7 +11,8 @@ import {
   ClientSchemaDeleteWidget,
   ClientSchemaDuplicateWidget,
   ClientSchemaTransferWidget,
-  ClientSchemaFileManagerWidget
+  ClientSchemaFileManagerWidget,
+  ClientSchemaType
 } from 'src/lib/client';
 
 @Injectable({
@@ -47,6 +48,10 @@ export class ClientSchemaState {
       entityStore: new EntityStore<ClientSchema>([]),
       actionStore: new ActionStore([])
     });
+    this.schemaStore.view.sort({
+      valueAccessor: (schema: ClientSchema) => schema.id,
+      direction: 'desc'
+    });
     this.editor.actionStore.load(this.buildActions());
   }
 
@@ -64,6 +69,8 @@ export class ClientSchemaState {
   private buildActions(): Action[] {
     const clientIsDefined = () => this.client !== undefined;
     const schemaIsDefined = () => this.schema !== undefined;
+    const schemaIsOfTypeLSE = () => this.schema !== undefined && this.schema.type === ClientSchemaType.LSE;
+    const schemaIsNotOfTypeLSE = () => this.schema !== undefined && this.schema.type !== ClientSchemaType.LSE;
 
     return [
       {
@@ -85,6 +92,7 @@ export class ClientSchemaState {
         tooltip: 'client.schema.update.tooltip',
         handler: () => this.editor.activateWidget(this.clientSchemaUpdateWidget, {
           schema: this.schema,
+          client: this.client,
           store: this.schemaStore
         }),
         conditions: [schemaIsDefined]
@@ -109,7 +117,7 @@ export class ClientSchemaState {
           schema: this.schema,
           store: this.schemaStore
         }),
-        conditions: [schemaIsDefined]
+        conditions: [schemaIsDefined, schemaIsNotOfTypeLSE]
       },
       {
         id: 'manageFiles',
@@ -130,7 +138,7 @@ export class ClientSchemaState {
           schema: this.schema,
           store: this.schemaStore
         }),
-        conditions: [schemaIsDefined]
+        conditions: [schemaIsDefined, schemaIsOfTypeLSE]
       },
       {
         id: 'createMap',
@@ -138,7 +146,7 @@ export class ClientSchemaState {
         title: 'client.schema.createMap',
         tooltip: 'client.schema.createMap.tooltip',
         handler: () => {},
-        conditions: [schemaIsDefined]
+        conditions: [schemaIsDefined, schemaIsOfTypeLSE]
       }
     ];
   }

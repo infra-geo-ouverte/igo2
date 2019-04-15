@@ -1,5 +1,5 @@
-import { FEATURE, LAYER } from '@igo2/geo';
+import { FEATURE } from '@igo2/geo';
 import { CLIENT } from 'src/lib/client';
-import { CADASTRE } from 'src/lib/cadastre/shared/cadastre.enums';
+import { CADASTRE } from 'src/lib/cadastre';
 
-export const SEARCH_TYPES = [CLIENT, FEATURE, LAYER, CADASTRE];
+export const SEARCH_TYPES = [CLIENT, FEATURE, CADASTRE];

@@ -34,7 +34,6 @@ import { FadqSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
 
-// TODO: Clean this up
 @NgModule({
   imports: [
     CommonModule,

@@ -45,6 +45,8 @@ export class CadastreSearchToolComponent implements OnInit {
   @Input() layerId: string;
   @Input() layerOptions: ImageLayerOptions;
 
+  private imageLayer = undefined;
+
   /**
    *
    *Cadastre layer
@@ -152,11 +154,11 @@ export class CadastreSearchToolComponent implements OnInit {
     const concession = event.concession;
 
     this.concessionService.getConcessionFeatureByNum(concession.listeIdConcession)
-    .subscribe((concessionList: ConcessionFeature[]) => {
-      this.cadastreState.initConcessionLayer();
-      this.concessionLayer = this.cadastreState.layerConcession;
-      this.cadastreState.currentConcessionFeatures$.next(concessionList);
-    });
+      .subscribe((concessionList: ConcessionFeature[]) => {
+        this.cadastreState.initConcessionLayer();
+        this.concessionLayer = this.cadastreState.layerConcession;
+        this.cadastreState.currentConcessionFeatures$.next(concessionList);
+      });
   }
 
   /**
@@ -167,11 +169,11 @@ export class CadastreSearchToolComponent implements OnInit {
     const lot = event.lot;
 
     this.lotService.getLotFeatureByNum(lot.listeIdLot)
-    .subscribe((lotList: LotFeature[]) => {
-      this.cadastreState.initLotLayer();
-      this.lotLayer = this.cadastreState.layerLot;
-      this.cadastreState.currentLotFeatures$.next(lotList);
-    });
+      .subscribe((lotList: LotFeature[]) => {
+        this.cadastreState.initLotLayer();
+        this.lotLayer = this.cadastreState.layerLot;
+        this.cadastreState.currentLotFeatures$.next(lotList);
+      });
   }
 
   /**

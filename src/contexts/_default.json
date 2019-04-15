@@ -16,7 +16,7 @@
       "sourceOptions": {
         "type": "wmts",
         "optionsFromCapabilities": true,
-        "url": "https://servicesmatriciels.mern.qc/erdas-iws/ogc/wmts/Imagerie_Continue",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/mern_imagerie_continue_int",
         "layer": "Imagerie_GQ",
         "matrixSet": "Lambert:epsg:32198",
         "requestEncoding": "KVP",
@@ -65,7 +65,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -82,7 +82,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -99,7 +99,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -116,7 +116,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -134,7 +134,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -152,7 +152,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_compil_cadas",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_compil_cadas",
         "style": "default",
         "projection": "EPSG:32198",
         "params": {
@@ -168,7 +168,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -187,7 +187,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservpro_swwf",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_swwf",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",

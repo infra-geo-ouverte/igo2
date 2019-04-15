@@ -58,7 +58,7 @@ export class ClientSchemaElementState {
   ) {
     this.editor = new Editor({
       id: 'fadq.client-schema-element-editor',
-      title: 'Éléments du schéma',
+      title: 'Éléments géométriques du schéma',
       tableTemplate: clientSchemaElementTableService.buildTable(),
       entityStore: new FeatureStore<ClientSchemaElement>([], {
         getKey: (entity: ClientSchemaElement) => {

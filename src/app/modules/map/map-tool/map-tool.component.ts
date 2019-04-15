@@ -31,7 +31,8 @@ export class MapToolComponent {
   }
 
   onInfoButtonClick(layer: Layer) {
-    window.open(this.computeWMSLayerInfoLink(layer as ImageLayer));
+    window.open(this.computeWMSLayerInfoLink(layer as ImageLayer), layer.title, 'width=800, height=600');
+    return false;
   }
 
   /**

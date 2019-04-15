@@ -7,6 +7,7 @@ import {
   provideFadqIChercheSearchResultFormatter,
   provideIChercheSearchSource
 } from './shared/sources/icherche.providers';
+import { provideQuerySearchSource } from './shared/sources/query.providers';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ export class FadqSearchModule {
       providers: [
         provideFadqIChercheSearchResultFormatter(),
         provideClientSearchSource(),
-        provideIChercheSearchSource()
+        provideIChercheSearchSource(),
+        provideQuerySearchSource()
       ]
     };
   }
