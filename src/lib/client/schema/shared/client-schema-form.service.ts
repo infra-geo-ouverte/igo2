@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Observable, of, zip } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -17,6 +17,12 @@ import {
 
 import { ApiService } from 'src/lib/core/api';
 
+import { Client } from '../../shared/client.interfaces';
+import {
+  validateOnlyOneLSE,
+  validateEtatEPA,
+  validateAnnee
+} from './client-schema-validators';
 import {
   ClientSchemaApiConfig,
   ClientSchemaTypeChoicesResponse,
@@ -37,10 +43,10 @@ export class ClientSchemaFormService {
     @Inject('clientSchemaApiConfig') private apiConfig: ClientSchemaApiConfig
   ) {}
 
-  buildCreateForm(): Observable<Form> {
+  buildCreateForm(client: Client): Observable<Form> {
     const fields$ = zip(
       this.createIdField({options: {disabled: true}}),
-      this.createTypeField(),
+      this.createTypeField(client),
       this.createDescriptionField(),
       this.createAnneeField(),
       this.createEtatField()
@@ -48,14 +54,22 @@ export class ClientSchemaFormService {
     return fields$.pipe(
       map((fields: FormField[]) => {
         return this.formService.form([], [
-          this.formService.group({name: 'info'}, fields)
+          this.formService.group({
+            name: 'info',
+            options: {
+              validator: Validators.compose([
+                (control: FormGroup) => validateEtatEPA(control, client),
+                (control: FormGroup) => validateAnnee(control),
+              ])
+            }
+          }, fields)
         ]);
       })
     );
   }
 
-  buildUpdateForm(): Observable<Form> {
-    return this.buildCreateForm();
+  buildUpdateForm(client: Client): Observable<Form> {
+    return this.buildCreateForm(client);
   }
 
   buildTransferForm(): Observable<Form> {
@@ -93,6 +107,7 @@ export class ClientSchemaFormService {
   }
 
   private createTypeField(
+    client: Client,
     partial?: Partial<FormFieldConfig>
   ): Observable<FormField<FormFieldSelectInputs>> {
 
@@ -105,7 +120,13 @@ export class ClientSchemaFormService {
             type: 'select',
             options:  {
               cols: 1,
-              validator: Validators.required
+              validator: Validators.compose([
+                Validators.required,
+                (control: FormControl) => validateOnlyOneLSE(control, client)
+              ]),
+              errors: {
+                onlyOneLSE: 'client.schema.error.onlyOneLSE'
+              }
             },
             inputs: {
               choices
@@ -132,13 +153,11 @@ export class ClientSchemaFormService {
       title: 'Année',
       options:  {
         cols: 1,
-        validator: Validators.compose([
-          Validators.required,
-          Validators.pattern(/^(20[\d]{2})$/)
-        ]),
-        // errors: {
-        //   pattern: ''
-        // }
+        validator: Validators.pattern(/^((1|2)[\d]{3})$/),
+        errors: {
+          required: 'client.schema.error.anneeRequired',
+          pattern: 'client.schema.error.invalidAnnee'
+        }
       }
     }, partial));
   }
@@ -155,7 +174,11 @@ export class ClientSchemaFormService {
             title: 'État',
             type: 'select',
             options:  {
-              cols: 1
+              cols: 1,
+              errors: {
+                etatRequiredByEPA: 'client.schema.error.etatRequiredByEPA',
+                onlyOneEPA: 'client.schema.error.onlyOneEPA'
+              }
             },
             inputs: {
               choices

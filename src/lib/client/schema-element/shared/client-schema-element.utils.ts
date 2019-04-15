@@ -65,7 +65,7 @@ export function generateOperationTitle(element: ClientSchemaElement): string {
 export function createSchemaElementLayer(): VectorLayer {
   const schemaElementDataSource = new FeatureDataSource();
   return new VectorLayer({
-    title: 'Éléments du schéma',
+    title: 'Éléments géométriques du schéma',
     zIndex: 103,
     source: schemaElementDataSource,
     style: createSchemaElementLayerStyle(),

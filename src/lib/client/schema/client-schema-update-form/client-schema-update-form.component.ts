@@ -12,6 +12,8 @@ import { Subject } from 'rxjs';
 
 import { EntityStore, Form, WidgetComponent, OnUpdateInputs } from '@igo2/common';
 
+import { Client } from '../../shared/client.interfaces';
+
 import { ClientSchema, ClientSchemaUpdateData } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
 import { ClientSchemaFormService } from '../shared/client-schema-form.service';
@@ -27,7 +29,12 @@ export class ClientSchemaUpdateFormComponent implements OnInit, OnUpdateInputs, 
   /**
    * Create form
    */
-  public form$ = new Subject<Form>();
+  form$ = new Subject<Form>();
+
+  /**
+   * Client
+   */
+  @Input() client: Client;
 
   /**
    * Schema store
@@ -56,7 +63,7 @@ export class ClientSchemaUpdateFormComponent implements OnInit, OnUpdateInputs, 
   ) {}
 
   ngOnInit() {
-    this.clientSchemaFormService.buildUpdateForm()
+    this.clientSchemaFormService.buildUpdateForm(this.client)
       .subscribe((form: Form) => this.form$.next(form));
   }
 

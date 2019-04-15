@@ -8,4 +8,9 @@ igo-feature-form ::ng-deep igo-form {
 
 mat-tab-group {
   width: 100%;
+
+  ::ng-deep .mat-tab-body-wrapper,
+  ::ng-deep .mat-tab-body-content {
+    height: 100%;
+  }
 }

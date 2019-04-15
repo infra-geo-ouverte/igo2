@@ -113,7 +113,7 @@ export class ClientSchemaTransferFormComponent implements OnInit, OnUpdateInputs
    */
   private onSubmitError() {
     // TODO: Add an OK button after that? Or should that be in a dialog?
-    const errorMessageKey = 'client.schema.tooltip.error.duplicatedNumbers';
+    const errorMessageKey = 'client.schema.transfer.error.duplicatedNumbers';
     this.errorMessage$.next(this.languageService.translate.instant(errorMessageKey));
   }
 

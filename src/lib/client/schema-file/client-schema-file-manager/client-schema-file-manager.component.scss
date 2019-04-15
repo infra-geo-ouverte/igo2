@@ -1,6 +1,6 @@
 $fadq-client-schema-file-actions-container-width: 160px;
 
-:host {
+:host > div {
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -8,8 +8,10 @@ $fadq-client-schema-file-actions-container-width: 160px;
 }
 
 .fadq-client-schema-file-table-container {
+  height: 100%;
   width: 100%;
   padding: 10px;
+  overflow: auto;
 }
 
 .fadq-client-schema-file-actions-container {

@@ -86,6 +86,7 @@ export class ClientSchemaFileService {
       id: listItem.idDocumentSchema,
       name: listItem.nomPhysiqueDocument,
       address: listItem.addresseDocument,
+      timbreMaj: listItem.timbreMaj,
       size: listItem.tailleDocument,
       type: listItem.typeDocument,
       meta: {
@@ -102,6 +103,7 @@ export class ClientSchemaFileService {
       id: data.idDocumentSchema,
       name: data.nomPhysiqueDocument,
       address: data.addresseDocument,
+      timbreMaj: data.timbreMaj,
       size: data.tailleDocument,
       type: data.typeDocument
     };

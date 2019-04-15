@@ -28,7 +28,7 @@ export class ClientSchemaCreateFormComponent implements OnInit, OnUpdateInputs, 
   /**
    * Create form
    */
-  public form$ = new Subject<Form>();
+  form$ = new Subject<Form>();
 
   /**
    * Client
@@ -57,7 +57,7 @@ export class ClientSchemaCreateFormComponent implements OnInit, OnUpdateInputs, 
   ) {}
 
   ngOnInit() {
-    this.clientSchemaFormService.buildCreateForm()
+    this.clientSchemaFormService.buildCreateForm(this.client)
       .subscribe((form: Form) => this.form$.next(form));
   }
 

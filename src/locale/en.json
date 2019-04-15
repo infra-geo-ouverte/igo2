@@ -82,6 +82,11 @@
       "exportToCSV.tooltip": "Export to CSV"
     },
     "schema": {
+      "error.anneeRequired": "Un plan de production ou un avis de dommage doit obligatoirement être associé à une année",
+      "error.invalidAnnee": "Format d'année invalide",
+      "error.onlyOneLSE": "Un seul schéma de type « Structure d’entreposage » par client",
+      "error.onlyOneEPA": "Un seul schéma de type « Édition de parcelles agricoles» par client, dont l’état est « en traitement » ou « valide »",
+      "error.etatRequiredByEPA": "Seul le schéma de type « Édition de parcelles agricoles » doit contenir un état de schéma.",
       "placeholder": "Schema",
       "create": "Créer",
       "create.tooltip": "Créer un schéma",
@@ -102,6 +107,7 @@
       "createMap.tooltip": "Créer carte(s) de structure d'entreposage"
     },
     "schemaFile": {
+      "error.size": "Le document numérisé doit avoir une taille plus grande que 0 octet et au plus 10 mégaoctets.",
       "add": "Ajouter",
       "add.tooltip": "Ajouter un document",
       "delete": "Supprimer",
@@ -110,6 +116,8 @@
       "download.tooltip": "Télécharger un document"
     },
     "schemaElement": {
+      "error.etiquetteMaxLength": "Une étiquette ne doit pas être plus grande que 25 caractères",
+      "error.descriptionMaxLength": "Une description ne doit pas être plus grande que 250 caractères",
       "create": "Créer",
       "create.tooltip": "Créer un élément",
       "update": "Modifier",
@@ -120,15 +128,16 @@
       "fill.tooltip": "Réinclure une surface exclue",
       "slice": "Couper un élément",
       "slice.tooltip": "Couper un élément",
-      "slice.message": "Tracez une ligne pour couper l'élément sélectionné",
+      "slice.message": "Tracer une ligne pour couper l'élément sélectionné",
+      "slice.apply": "Couper",
       "move": "Déplacer",
       "move.tooltip": "Déplacer un élément",
       "save": "Sauvegarder",
       "save.tooltip": "Sauvegarder les éléments",
-      "save.confirm": "Voulez-vous sauvegarder ces changements?",
-      "undo": "Annuler tous les changements",
-      "undo.tooltip": "Annuler tous les changements",
-      "undo.confirm": "Désirez-vous annuler tous les changements?",
+      "save.confirm": "Désirez-vous sauvegarder les modifications?",
+      "undo": "Annuler tous les modifications",
+      "undo.tooltip": "Annuler tous les modifications",
+      "undo.confirm": "Désirez-vous annuler les modifications?",
       "importData": "Importer des données dans le schéma",
       "importData.tooltip": "Importer des données dans un schéma",
       "importData.placeholder": "Cliquez ici pour sélectionner un fichier à importer",

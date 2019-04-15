@@ -218,7 +218,9 @@ export class ClientSchemaElementSliceFormComponent
         id: uuid()
       });
       const properties = Object.assign({}, baseElement.properties, {
-        idElementGeometrique: undefined
+        idElementGeometrique: undefined,
+        description: undefined,
+        etiquette: undefined
       });
 
       return Object.assign({}, baseElement, {

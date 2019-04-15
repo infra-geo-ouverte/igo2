@@ -10,6 +10,9 @@ export interface ClientSchemaFile {
   id: string;
   name: string;
   address: string;
+  timbreMaj: {
+    date: string;
+  };
   size?: number;
   type?: string;
 }
@@ -24,6 +27,9 @@ export interface ClientSchemaFileListResponseItem {
   addresseDocument: string;
   tailleDocument: number;
   typeDocument: string;
+  timbreMaj: {
+    date: string;
+  };
 }
 
 export interface ClientSchemaFileCreateData {

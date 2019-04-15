@@ -10,8 +10,11 @@ import {
   ElementRef
 } from '@angular/core';
 
+import { Subject } from 'rxjs';
+
 import { EntityStore, EntityTableTemplate, WidgetComponent } from '@igo2/common';
 
+import { formatDate } from 'src/lib/utils/date';
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import { ClientSchemaFile } from '../shared/client-schema-file.interfaces';
 import { ClientSchemaFileService } from '../shared/client-schema-file.service';
@@ -24,7 +27,15 @@ import { ClientSchemaFileService } from '../shared/client-schema-file.service';
 })
 export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, WidgetComponent {
 
-  public tableTemplate: EntityTableTemplate = {
+  static maxSize = 1024 * 1024 * 1024 * 10;  // 10mo
+
+  /**
+   * Import error, if any
+   * @internal
+   */
+  errorMessage$: Subject<string> = new Subject();
+
+  tableTemplate: EntityTableTemplate = {
     selection: true,
     sort: true,
     columns: [
@@ -33,20 +44,21 @@ export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, Widg
         title: 'Nom'
       },
       {
-        name: 'type',
-        title: 'Type'
-      },
-      {
-        name: 'size',
-        title: 'Size'
+        name: 'timbreMaj.date',
+        title: 'Date de mise à jour',
+        valueAccessor: (file: ClientSchemaFile) => {
+          const value = file.timbreMaj.date;
+          if (!value) { return ''; }
+          return formatDate(value);
+        }
       }
     ]
   };
 
-  public schemaFile: ClientSchemaFile;
-  public schemaFileData: string | ArrayBuffer;
+  schemaFile: ClientSchemaFile;
+  schemaFileData: string | ArrayBuffer;
 
-  public store: EntityStore<ClientSchemaFile> = new EntityStore<ClientSchemaFile>([]);
+  store: EntityStore<ClientSchemaFile> = new EntityStore<ClientSchemaFile>([]);
 
   /**
    * Schema to delete
@@ -77,7 +89,13 @@ export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, Widg
 
   onFileInputChange(event: any) {
     if (event.target.files && event.target.files[0]) {
-      this.createSchemaFile(event.target.files[0]);
+      const file = event.target.files[0];
+      if (file.size > 0 && file.size < ClientSchemaFileManagerComponent.maxSize) {
+        this.createSchemaFile(file);
+        this.errorMessage$.next(undefined);
+      } else {
+        this.errorMessage$.next('client.schemaFile.error.size');
+      }
     }
   }
 

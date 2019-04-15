@@ -68,7 +68,11 @@ export class ClientSchemaElementFormService {
       name: 'properties.description',
       title: 'Description',
       options:  {
-        cols: 2
+        cols: 2,
+        validator: Validators.maxLength(250),
+        errors: {
+          maxlength: 'client.schemaElement.error.descriptionMaxLength'
+        }
       }
     }, partial));
   }
@@ -78,7 +82,11 @@ export class ClientSchemaElementFormService {
       name: 'properties.etiquette',
       title: 'Etiquette',
       options:  {
-        cols: 1
+        cols: 1,
+        validator: Validators.maxLength(25),
+        errors: {
+          maxlength: 'client.schemaElement.error.etiquetteMaxLength'
+        }
       }
     }, partial));
   }
@@ -90,8 +98,11 @@ export class ClientSchemaElementFormService {
       options:  {
         cols: 1,
         validator: Validators.compose([
-          Validators.pattern(/^(20[\d]{2})$/)
-        ])
+          Validators.pattern(/^((1|2)[\d]{3})$/)
+        ]),
+        errors: {
+          pattern: 'client.schema.error.invalidAnnee'
+        }
       }
     }, partial));
   }
