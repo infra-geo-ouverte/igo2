@@ -33,6 +33,8 @@ import { FeatureImportError} from '../../../feature';
 })
 export class ClientSchemaElementImportDataComponent implements OnInit, WidgetComponent {
 
+  projection: string;
+
   /**
    * File object
    * @internal
@@ -97,8 +99,9 @@ export class ClientSchemaElementImportDataComponent implements OnInit, WidgetCom
   }
 
   onImport() {
+    const projection = this.projection || 'EPSG:4326';
     zip(
-      this.featureImportService.import(this.file$.value, 'EPSG:4326'),
+      this.featureImportService.import(this.file$.value, projection),
       this.clientSchemaElementService.getSchemaElementTypes(this.schema.type),
       this.clientSchemaElementService.getSchemaElementGeometryTypes(this.schema.type),
     ) .subscribe(

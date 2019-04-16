@@ -7,6 +7,14 @@
       (click)="fileInput.click()">
   </mat-form-field>
 
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="{{'igo.geo.importExportForm.importProjPlaceholder' | translate}}"
+      name="projection"
+      [(ngModel)]="projection">
+  </mat-form-field>
+
   <input
     #fileInput
     type="file"
