@@ -28,7 +28,7 @@ import { ClientSchemaElement, ClientSchemaElementTypes } from '../shared/client-
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
-import { generateOperationTitle } from '../shared/client-schema-element.utils';
+import { generateOperationTitle, computeSchemaElementArea } from '../shared/client-schema-element.utils';
 
 @Component({
   selector: 'fadq-client-schema-element-create-form',
@@ -144,7 +144,11 @@ export class ClientSchemaElementCreateFormComponent
       timbreMaj: undefined,
       usagerMaj: undefined
     }, data.properties);
-    return Object.assign({}, data, {properties});
+
+    const element = Object.assign({}, data, {properties});
+    element.properties.superficie = computeSchemaElementArea(element);
+
+    return element;
   }
 
   private setForm(form: Form) {

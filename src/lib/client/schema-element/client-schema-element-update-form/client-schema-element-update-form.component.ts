@@ -28,7 +28,7 @@ import {
 } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
-import { generateOperationTitle } from '../shared/client-schema-element.utils';
+import { generateOperationTitle, computeSchemaElementArea } from '../shared/client-schema-element.utils';
 
 @Component({
   selector: 'fadq-client-schema-element-update-form',
@@ -114,7 +114,9 @@ export class ClientSchemaElementUpdateFormComponent implements OnInit, OnUpdateI
   }
 
   private formDataToElement(data: Feature): ClientSchemaElement {
-    return Object.assign({}, data as ClientSchemaElement);
+    const element = Object.assign({}, data as ClientSchemaElement);
+    element.properties.superficie = computeSchemaElementArea(element);
+    return element;
   }
 
   private setForm(form: Form) {

@@ -30,9 +30,8 @@ import {
 } from '@igo2/geo';
 
 import { ClientSchemaElement } from '../shared/client-schema-element.interfaces';
-import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
-import { generateOperationTitle } from '../shared/client-schema-element.utils';
+import { computeSchemaElementArea, generateOperationTitle } from '../shared/client-schema-element.utils';
 
 @Component({
   selector: 'fadq-client-schema-element-slice-form',
@@ -212,7 +211,7 @@ export class ClientSchemaElementSliceFormComponent
 
     const olGeoJSON = new OlGeoJSON();
     const baseElement = this.element;
-    return olFeatures.map((olFeature: OlFeature) => {
+    const newElements = olFeatures.map((olFeature: OlFeature) => {
       const olGeometry = olFeature.getGeometry();
       const meta = Object.assign({}, baseElement.meta, {
         id: uuid()
@@ -232,6 +231,12 @@ export class ClientSchemaElementSliceFormComponent
         })
       });
     });
+
+    newElements.forEach((element: ClientSchemaElement) => {
+      element.properties.superficie = computeSchemaElementArea(element);
+    });
+
+    return newElements;
   }
 
   /**

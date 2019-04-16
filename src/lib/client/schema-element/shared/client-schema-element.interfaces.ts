@@ -20,6 +20,7 @@ export interface ClientSchemaElementProperties {
   anneeImage: number;
   timbreMaj: string;
   usagerMaj: string;
+  superficie?: number;
 }
 
 export interface ClientSchemaElement extends Feature {

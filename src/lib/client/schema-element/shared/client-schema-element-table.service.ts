@@ -1,6 +1,7 @@
 import { Injectable} from '@angular/core';
 
 import { EntityTableTemplate, EntityTableColumnRenderer } from '@igo2/common';
+import { formatMeasure, squareMetersToAcres, squareMetersToHectares } from '@igo2/geo';
 
 import { formatDate } from 'src/lib/utils/date';
 import { ClientSchemaElement } from './client-schema-element.interfaces';
@@ -25,8 +26,8 @@ export class ClientSchemaElementTableService {
       }),
       columns: [
         {
-          name: 'type',
-          title: '',
+          name: 'geometry.type',
+          title: 'Type',
           renderer: EntityTableColumnRenderer.HTML,
           valueAccessor: (element: ClientSchemaElement) => {
             return `<b>${ClientSchemaElementTableService.elementTypes[element.geometry.type]}`;
@@ -47,6 +48,30 @@ export class ClientSchemaElementTableService {
         {
           name: 'properties.description',
           title: 'Description'
+        },
+        {
+          name: 'properties.superficie',
+          title: 'Superficie(m²)',
+          valueAccessor: (element: ClientSchemaElement) => {
+            const area = element.properties.superficie;
+            return area ? formatMeasure(area, {decimal: 1, locale: 'fr'}) : '';
+          }
+        },
+        {
+          name: 'superficieHectares',
+          title: 'Superficie (ha)',
+          valueAccessor: (element: ClientSchemaElement) => {
+            const area = element.properties.superficie;
+            return area ? formatMeasure(squareMetersToHectares(area), {decimal: 1, locale: 'fr'}) : '';
+          }
+        },
+        {
+          name: 'superficieAcres',
+          title: 'Superficie (acres)',
+          valueAccessor: (element: ClientSchemaElement) => {
+            const area = element.properties.superficie;
+            return area ? formatMeasure(squareMetersToAcres(area), {decimal: 1, locale: 'fr'}) : '';
+          }
         },
         {
           name: 'properties.anneeImage',

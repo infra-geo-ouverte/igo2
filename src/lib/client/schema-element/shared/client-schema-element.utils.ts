@@ -1,13 +1,29 @@
 import * as olstyle from 'ol/style';
 import OlFeature from 'ol/Feature';
+import OlGeoJSON from 'ol/format/GeoJSON';
 
 import { EntityKey, EntityOperation, EntityOperationType } from '@igo2/common';
-import { FeatureDataSource, VectorLayer } from '@igo2/geo';
+import {
+  measureOlGeometryArea,
+  FeatureDataSource,
+  VectorLayer
+} from '@igo2/geo';
 
 import {
   ClientSchemaElement,
   ClientSchemaElementTransactionData
 } from './client-schema-element.interfaces';
+
+export function computeSchemaElementArea(element: ClientSchemaElement): number {
+  if (element.geometry.type !== 'Polygon') { return; }
+
+  const measureProjection = 'EPSG:32198';
+  const olGeometry = new OlGeoJSON().readGeometry(element.geometry, {
+    dataProjection: element.projection,
+    featureProjection: measureProjection
+  });
+  return measureOlGeometryArea(olGeometry, measureProjection);
+}
 
 export class ClientSchemaElementTransactionSerializer {
 
