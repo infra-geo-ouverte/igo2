@@ -5,8 +5,7 @@ import {
   ActionStore,
   Editor,
   EntityStore,
-  EntityTableColumn,
-  getEntityProperty
+  EntityTableColumn
 } from '@igo2/common';
 import { FeatureStore } from '@igo2/geo';
 import { MapState } from '@igo2/integration';
@@ -19,7 +18,7 @@ import {
   ClientParcelYearService,
   ClientParcelTableService
 } from 'src/lib/client';
-import { exportToCSV } from 'src/lib/utils/export';
+import { entitiesToRowData, exportToCSV } from 'src/lib/utils/export';
 
 @Injectable({
   providedIn: 'root'
@@ -109,11 +108,7 @@ export class ClientParcelState {
         handler: () => {
           const columns = this.editor.tableTemplate.columns;
           const headers = columns.map((column: EntityTableColumn) => column.title);
-          const rows = this.parcelStore.view.all().map((parcel: ClientParcel) => {
-            return columns.map((column: EntityTableColumn) => {
-              return getEntityProperty(parcel, column.name);
-            });
-          });
+          const rows = entitiesToRowData(this.parcelStore.view.all(), columns);
 
           const fileName = `Parcelles du client ${this.client.info.numero}.csv`;
           exportToCSV([headers].concat(rows), fileName, ';');

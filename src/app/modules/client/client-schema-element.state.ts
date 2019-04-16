@@ -5,6 +5,7 @@ import {
   ActionStore,
   Editor,
   EntityTransaction,
+  EntityTableColumn,
   getEntityRevision,
   Widget
 } from '@igo2/common';
@@ -24,6 +25,8 @@ import {
   ClientSchemaElementService,
   generateOperationTitle
 } from 'src/lib/client';
+import { entitiesToRowData, exportToCSV } from 'src/lib/utils/export';
+
 
 @Injectable({
   providedIn: 'root'
@@ -189,19 +192,6 @@ export class ClientSchemaElementState {
         ]
       },
       {
-        id: 'importData',
-        icon: 'input',
-        title: 'client.schemaElement.importData',
-        tooltip: 'client.schemaElement.importData.tooltip',
-        handler: () => this.editor.activateWidget(this.clientSchemaElementImportDataWidget, {
-          schema: this.schema,
-          element: this.element,
-          transaction: this.transaction,
-          store: this.elementStore
-        }),
-        conditions: [schemaIsDefined, transactionIsNotInCommitPhase]
-      },
-      {
         id: 'save',
         icon: 'save',
         title: 'client.schemaElement.save',
@@ -221,6 +211,33 @@ export class ClientSchemaElementState {
           transaction: this.transaction
         }),
         conditions: [schemaIsDefined, transactionIsNotEmpty, transactionIsNotInCommitPhase]
+      },
+      {
+        id: 'importData',
+        icon: 'input',
+        title: 'client.schemaElement.importData',
+        tooltip: 'client.schemaElement.importData.tooltip',
+        handler: () => this.editor.activateWidget(this.clientSchemaElementImportDataWidget, {
+          schema: this.schema,
+          element: this.element,
+          transaction: this.transaction,
+          store: this.elementStore
+        }),
+        conditions: [schemaIsDefined, transactionIsNotInCommitPhase]
+      },
+      {
+        id: 'export',
+        icon: 'file_download',
+        title: 'client.schemaElement.exportToCSV',
+        tooltip: 'client.schemaElement.exportToCSV.tooltip',
+        handler: () => {
+          const columns = this.editor.tableTemplate.columns;
+          const headers = columns.map((column: EntityTableColumn) => column.title);
+          const rows = entitiesToRowData(this.elementStore.view.all(), columns);
+
+          const fileName = `Éléments du schéma ${this.schema.id}.csv`;
+          exportToCSV([headers].concat(rows), fileName, ';');
+        }
       }
     ];
   }

@@ -142,7 +142,9 @@
       "importData.tooltip": "Importer des données dans un schéma",
       "importData.placeholder": "Cliquez ici pour sélectionner un fichier à importer",
       "importData.error.invalidFile": "Impossible d'importer ce fichier",
-      "importData.error.nothingToImport": "Aucun élément géométrique valide trouvé dans ce fichier"
+      "importData.error.nothingToImport": "Aucun élément géométrique valide trouvé dans ce fichier",
+      "exportToCSV": "Exporter les données en CSV",
+      "exportToCSV.tooltip": "Exporter les données en CSV"
     }
   },
 
