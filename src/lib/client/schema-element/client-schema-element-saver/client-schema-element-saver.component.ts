@@ -96,12 +96,9 @@ export class ClientSchemaElementSaverComponent implements WidgetComponent {
   }
 
   onSubmit() {
-    this.transaction
-      .commit((transaction: EntityTransaction, operations: EntityOperation[]) => {
-        const serializer = new ClientSchemaElementTransactionSerializer();
-        const data = serializer.serializeOperations(operations);
-        return this.clientSchemaElementService.saveElements(this.schema, data);
-      }).subscribe(() => this.onSubmitSuccess());
+    this.clientSchemaElementService
+      .commitTransaction(this.schema, this.transaction)
+      .subscribe(() => this.onSubmitSuccess());
   }
 
   onCancel() {

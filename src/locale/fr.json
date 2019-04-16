@@ -82,6 +82,7 @@
       "all": "Tous"
     },
     "schema": {
+      "confirmDialog.title": "Informations non sauvegardées", 
       "error.anneeRequired": "Un plan de production ou un avis de dommage doit obligatoirement être associé à une année",
       "error.invalidAnnee": "Format d'année invalide",
       "error.onlyOneLSE": "Un seul schéma de type « Structure d’entreposage » par client",

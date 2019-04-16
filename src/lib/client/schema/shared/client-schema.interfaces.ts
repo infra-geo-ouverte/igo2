@@ -64,10 +64,12 @@ export interface ClientSchemaUpdateData {
 }
 
 export interface ClientSchemaUpdateResponse {
-  data: {
-    schema: ClientSchemaListResponseItem;
-    codeRetour: string;
-  };
+  data: ClientSchemaListResponseItem;
+}
+
+export interface ClientSchemaTransferResponse {
+  data: null;
+  messages: string[];
 }
 
 export interface ClientSchemaDuplicateResponse {

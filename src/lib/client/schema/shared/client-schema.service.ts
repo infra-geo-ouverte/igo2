@@ -14,6 +14,7 @@ import {
   ClientSchemaCreateResponse,
   ClientSchemaUpdateData,
   ClientSchemaUpdateResponse,
+  ClientSchemaTransferResponse,
   ClientSchemaDuplicateResponse
 } from './client-schema.interfaces';
 
@@ -83,14 +84,14 @@ export class ClientSchemaService {
       );
   }
 
-  transferSchema(schema: ClientSchema, numClient: string): Observable<string> {
+  transferSchema(schema: ClientSchema, numClient: string): Observable<string[]> {
     const url = this.apiService.buildUrl(this.apiConfig.update);
     const data = Object.assign({}, schema, {numeroClient: numClient});
     return this.http
       .post(url, data)
       .pipe(
-        map((response: ClientSchemaUpdateResponse) => {
-          return response.data.codeRetour;
+        map((response: ClientSchemaTransferResponse) => {
+          return response.messages;
         })
       );
   }
@@ -124,7 +125,7 @@ export class ClientSchemaService {
   private extractSchemaFromUpdateResponse(
     response: ClientSchemaUpdateResponse
   ): ClientSchema {
-    const data = response.data.schema;
+    const data = response.data;
     const type = data.typeSchema.code;
     return Object.assign({}, data, {
       type,

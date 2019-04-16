@@ -11,7 +11,6 @@ import {
 import { Subject } from 'rxjs';
 
 import { EntityStore, Form, WidgetComponent, OnUpdateInputs } from '@igo2/common';
-import { LanguageService } from '@igo2/core';
 
 import { ClientSchema } from '../shared/client-schema.interfaces';
 import { ClientSchemaService } from '../shared/client-schema.service';
@@ -60,7 +59,6 @@ export class ClientSchemaTransferFormComponent implements OnInit, OnUpdateInputs
   constructor(
     private clientSchemaService: ClientSchemaService,
     private clientSchemaFormService: ClientSchemaFormService,
-    private languageService: LanguageService,
     private cdRef: ChangeDetectorRef
   ) {}
 
@@ -82,11 +80,11 @@ export class ClientSchemaTransferFormComponent implements OnInit, OnUpdateInputs
    */
   onSubmit(data: {[key: string]: any}) {
     this.clientSchemaService.transferSchema(this.schema, data.numeroClient)
-      .subscribe((code: string) => {
-        if (code === '0') {
+      .subscribe((messages: string[]) => {
+        if (messages.length === 0) {
           this.onSubmitSuccess();
         } else {
-          this.onSubmitError();
+          this.onSubmitError(messages);
         }
       });
   }
@@ -111,10 +109,8 @@ export class ClientSchemaTransferFormComponent implements OnInit, OnUpdateInputs
   /**
    * On submit error, display an error message
    */
-  private onSubmitError() {
-    // TODO: Add an OK button after that? Or should that be in a dialog?
-    const errorMessageKey = 'client.schema.transfer.error.duplicatedNumbers';
-    this.errorMessage$.next(this.languageService.translate.instant(errorMessageKey));
+  private onSubmitError(messages: string[]) {
+    this.errorMessage$.next(messages[0]);
   }
 
 }

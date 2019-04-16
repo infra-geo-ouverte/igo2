@@ -35,8 +35,9 @@ export class ClientSchemaElementState {
 
   editor: Editor;
 
+  readonly transaction: EntityTransaction = new EntityTransaction();
+
   private schema: ClientSchema;
-  private transaction: EntityTransaction = new EntityTransaction();
 
   get map(): IgoMap { return this.mapState.map; }
 

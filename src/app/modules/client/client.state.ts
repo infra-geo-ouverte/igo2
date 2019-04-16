@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
-import { EntityRecord, EntityStore } from '@igo2/common';
+import { EntityRecord, EntityStore, EntityTransaction } from '@igo2/common';
 import {
   FeatureStore,
   FeatureStoreLoadingStrategy,
@@ -16,7 +16,6 @@ import {
   ClientParcelDiagram,
   ClientParcel,
   ClientParcelYear,
-  ClientParcelYearService,
   ClientSchema,
   ClientSchemaElement,
   createParcelLayer,
@@ -35,6 +34,8 @@ import { ClientSchemaElementState } from './client-schema-element.state';
   providedIn: 'root'
 })
 export class ClientState implements OnDestroy {
+
+  public resolve$ = new BehaviorSubject<() => void>(undefined);
 
   /** Observable of the active client */
   public client$ = new BehaviorSubject<Client>(undefined);
@@ -88,6 +89,10 @@ export class ClientState implements OnDestroy {
     return this.elementState.elementStore;
   }
 
+  get transaction(): EntityTransaction {
+    return this.elementState.transaction;
+  }
+
   constructor(
     private parcelState: ClientParcelState,
     private schemaState: ClientSchemaState,
@@ -133,6 +138,11 @@ export class ClientState implements OnDestroy {
   }
 
   setClient(client: Client | undefined) {
+    if (!this.transaction.empty) {
+      this.resolve$.next(() => this.setClient(client));
+      return;
+    }
+
     this.clearClient();
 
     if (client === undefined) { return; }
@@ -154,11 +164,15 @@ export class ClientState implements OnDestroy {
   }
 
   setClientNotFound() {
+    if (!this.transaction.empty) {
+      this.resolve$.next(() => this.setClientNotFound());
+      return;
+    }
     this.clearClient();
     this.clientError$.next('client.error.notfound');
   }
 
-  clearClient() {
+  private clearClient() {
     this.clientError$.next(undefined);
 
     if (this.client === undefined) { return; }
@@ -187,17 +201,21 @@ export class ClientState implements OnDestroy {
   }
 
   private onSelectSchema(schema: ClientSchema) {
-    if (schema === undefined) {
-      this.clearSchema();
-    } else if  (this.schema === undefined) {
-      this.setSchema(schema);
-    } else if (schema.id !== this.schema.id) {
-      this.setSchema(schema);
+    if (schema !== undefined && this.schema !== undefined && schema.id === this.schema.id) {
+      return;
     }
+    this.setSchema(schema);
   }
 
   private setSchema(schema: ClientSchema) {
+    if (!this.transaction.empty) {
+      this.resolve$.next(() => this.setSchema(schema));
+      return;
+    }
+
     this.clearSchema();
+
+    if (schema === undefined) { return; }
 
     this.parcelStore.state.updateAll({selected: false});
     this.elementState.setSchema(schema);

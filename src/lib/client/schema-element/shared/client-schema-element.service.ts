@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, zip } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
+import { EntityOperation, EntityTransaction } from '@igo2/common';
+
 import { ApiService } from 'src/lib/core/api';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
@@ -19,6 +21,7 @@ import {
 import { ClientSchemaElementPointService } from './client-schema-element-point.service';
 import { ClientSchemaElementLineService } from './client-schema-element-line.service';
 import { ClientSchemaElementSurfaceService } from './client-schema-element-surface.service';
+import { ClientSchemaElementTransactionSerializer } from './client-schema-element.utils';
 
 @Injectable()
 export class ClientSchemaElementService {
@@ -48,7 +51,15 @@ export class ClientSchemaElementService {
     );
   }
 
-  saveElements(schema: ClientSchema, data: ClientSchemaElementTransactionData): Observable<any> {
+  commitTransaction(schema: ClientSchema, transaction: EntityTransaction): Observable<any> {
+    return transaction.commit((_transaction: EntityTransaction, operations: EntityOperation[]) => {
+        const serializer = new ClientSchemaElementTransactionSerializer();
+        const data = serializer.serializeOperations(operations);
+        return this.saveElements(schema, data);
+      });
+  }
+
+  private saveElements(schema: ClientSchema, data: ClientSchemaElementTransactionData): Observable<any> {
     // TODO
     return of({});
   }

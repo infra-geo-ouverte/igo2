@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Subscription, of } from 'rxjs';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
@@ -34,13 +35,11 @@ import {
 import { SEARCH_TYPES } from 'src/app/modules/search/shared/search.enums';
 import { ClientState } from 'src/app/modules/client/client.state';
 import { ClientSearchSource } from 'src/app/modules/search/shared/sources/client';
-
 import {
-  Client,
-  ClientParcel,
-  ClientSchemaElement,
-  CLIENT
-} from 'src/lib/client';
+  ClientSchemaConfirmDialogComponent
+} from 'src/app/modules/client/client-schema-confirm-dialog/client-schema-confirm-dialog.component';
+
+import { CLIENT, Client } from 'src/lib/client';
 
 import { CADASTRE } from 'src/lib/cadastre/shared/cadastre.enums';
 
@@ -57,6 +56,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public expansionPanelExpanded = false;
   public sidenavOpened = false;
+
+  private clientResolve$$: Subscription;
 
   private focusedSearchResult$$: Subscription;
   private currentSearchTerm: string;
@@ -147,10 +148,18 @@ export class PortalComponent implements OnInit, OnDestroy {
     private searchState: SearchState,
     private toolState: ToolState,
     private mediaService: MediaService,
-    private searchSourceService: SearchSourceService
+    private searchSourceService: SearchSourceService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
+    this.clientResolve$$ = this.clientState.resolve$
+      .subscribe((action: () => void) => {
+        if (action !== undefined) {
+          this.openSchemaConfirmDialog(action);
+        }
+      });
+
     this.focusedSearchResult$$ = this.searchStore.stateView
       .firstBy$((record: EntityRecord<SearchResult>) => record.state.focused === true)
       .subscribe((record: EntityRecord<SearchResult>) => {
@@ -160,6 +169,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.clientResolve$$.unsubscribe();
     this.focusedSearchResult$$.unsubscribe();
   }
 
@@ -371,13 +381,19 @@ export class PortalComponent implements OnInit, OnDestroy {
   private onClearSearch() {
     this.searchStore.clear();
     this.closeToastPanel();
-    this.clientState.clearClient();
+    this.clientState.setClient(undefined);
   }
 
   private getQuerySearchSource(): SearchSource {
     return this.searchSourceService
       .getSources()
       .find((searchSource: SearchSource) => searchSource instanceof QuerySearchSource);
+  }
+
+  private openSchemaConfirmDialog(action: () => void): void {
+    this.dialog.open(ClientSchemaConfirmDialogComponent, {
+      data: {action}
+    });
   }
 
 }
