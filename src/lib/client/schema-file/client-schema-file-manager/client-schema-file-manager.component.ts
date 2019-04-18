@@ -68,7 +68,7 @@ export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, Widg
   /**
    * Event emitted on complete
    */
-  @Output() complete = new EventEmitter<void>();
+  @Output() complete = new EventEmitter<number>();
 
   /**
    * Event emitted on cancel
@@ -108,7 +108,7 @@ export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, Widg
   }
 
   onCloseButtonClick() {
-    this.cancel.emit();
+    this.complete.emit(this.store.count);
   }
 
   onSchemaFileSelectChange(event: {added: ClientSchemaFile[]}) {

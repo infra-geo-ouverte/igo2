@@ -126,6 +126,10 @@ export class ClientSchemaState {
         tooltip: 'client.schema.manageFiles.tooltip',
         handler: () => this.editor.activateWidget(this.clientSchemaFileManagerWidget, {
           schema: this.schema
+        }, {
+          complete: (count: number) => {
+            this.schemaStore.update(Object.assign({}, this.schema, {nbDocuments: count}));
+          }
         }),
         conditions: [schemaIsDefined]
       },
