@@ -104,43 +104,33 @@ export class ClientSchemaService {
   }
 
   private listItemToSchema(listItem: ClientSchemaListResponseItem): ClientSchema {
-    const type = listItem.typeSchema.code;
-    return Object.assign({}, listItem, {
-      type: type,
-      descriptionType: listItem.typeSchema.descriptionAbregeeFrancais,
-    });
+    return this.extractSchemaFromListResponseItem(listItem);
   }
 
   private extractSchemaFromCreateResponse(
     response: ClientSchemaCreateResponse
   ): ClientSchema {
-    const data = response.data;
-    const type = data.typeSchema.code;
-    return Object.assign({}, data, {
-      type,
-      descriptionType: data.typeSchema.descriptionAbregeeFrancais,
-    });
+    return this.extractSchemaFromListResponseItem(response.data);
   }
 
   private extractSchemaFromUpdateResponse(
     response: ClientSchemaUpdateResponse
   ): ClientSchema {
-    const data = response.data;
-    const type = data.typeSchema.code;
-    return Object.assign({}, data, {
-      type,
-      descriptionType: data.typeSchema.descriptionAbregeeFrancais,
-    });
+    return this.extractSchemaFromListResponseItem(response.data);
   }
 
   private extractSchemaFromDuplicateResponse(
     response: ClientSchemaDuplicateResponse
   ): ClientSchema {
-    const data = response.data;
-    const type = data.typeSchema.code;
-    return Object.assign({}, data, {
-      type,
-      descriptionType: data.typeSchema.descriptionAbregeeFrancais,
+    return this.extractSchemaFromListResponseItem(response.data);
+  }
+
+  private extractSchemaFromListResponseItem(item: ClientSchemaListResponseItem): ClientSchema {
+    return Object.assign({}, item, {
+      type: item.typeSchema.code,
+      descriptionType: item.typeSchema.descriptionAbregeeFrancais,
+      etat: item.etatSchema.code,
+      descriptionEtat: item.etatSchema.descriptionAbregeeFrancais
     });
   }
 

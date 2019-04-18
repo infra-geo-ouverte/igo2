@@ -35,7 +35,7 @@ export class ClientSchemaTableService {
           title: 'Année'
         },
         {
-          name: 'etat',
+          name: 'descriptionEtat',
           title: 'État'
         },
         {

@@ -18,6 +18,7 @@ export interface ClientSchema {
   description: string;
   annee: string;
   etat: string;
+  descriptionEtat: string;
   nbDocuments: number;
   usagerMaj: string;
   timbreMaj: {
@@ -35,7 +36,14 @@ export interface ClientSchemaListResponseItem {
   typeSchema: ClientSchemaTypeChoicesResponseItem;
   description: string;
   annee: string;
-  etat: string;
+  etatSchema: {
+    code: string;
+    descriptionAbregeeFrancais: string;
+    descriptionFrancais: string;
+    descriptionAbregeeAnglais: string;
+    descriptionAnglais: string;
+    ordreAffichage: number;
+  };
   nbDocuments: number;
   usagerMaj: string;
   timbreMaj: {
