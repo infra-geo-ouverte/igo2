@@ -28,7 +28,7 @@
       {
         "id": "mtq",
         "title": "MTQ",
-        "url": "/swtq",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
         "queryFormat": {
           "html": "*",
           "json": "stations_meteoroutieres"
@@ -39,7 +39,7 @@
       {
         "id": "regex",
         "title": "MTQ (filtered by regex)",
-        "url": "/swtq",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
         "regFilters": ["zpegt"]
       }
     ]
