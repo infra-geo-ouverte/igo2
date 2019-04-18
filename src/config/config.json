@@ -19,6 +19,31 @@
       "enabled": false
     }
   },
+  "catalog": {
+    "sources": [{
+        "id": "opendataqc",
+        "title": "Données Ouvertes Québec",
+        "url": "/ws/igo_gouvouvert.fcgi"
+      },
+      {
+        "id": "mtq",
+        "title": "MTQ",
+        "url": "/swtq",
+        "queryFormat": {
+          "html": "*",
+          "json": "stations_meteoroutieres"
+        },
+        "queryHtmlTarget": "iframe",
+        "count": 365
+      },
+      {
+        "id": "regex",
+        "title": "MTQ (filtered by regex)",
+        "url": "/swtq",
+        "regFilters": ["zpegt"]
+      }
+    ]
+  },
   "routingSources": {
     "osrm": {
       "enabled": true
