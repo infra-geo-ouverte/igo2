@@ -1,8 +1,14 @@
+import { Observable } from 'rxjs';
+
 import { FormFieldSelectChoice } from '@igo2/common';
 import { Feature } from '@igo2/geo';
 
+import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
+
 export interface ClientSchemaElementApiConfig {
-  save: string;
+  savePoints: string;
+  saveLines: string;
+  saveSurfaces: string;
   points: string;
   lines: string;
   surfaces: string;
@@ -59,7 +65,15 @@ export interface ClientSchemaElementTypesResponseItem {
 }
 
 export interface ClientSchemaElementTransactionData {
-  inserts:  ClientSchemaElement[];
-  updates:  ClientSchemaElement[];
-  deletes: string[];
+  lstElementsAjoutes: ClientSchemaElement[];
+  lstElementsModifies: ClientSchemaElement[];
+  lstIdElementsSupprimes: string[];
+}
+
+export interface GetElements {
+  getElements(schema: ClientSchema): Observable<ClientSchemaElement[]>;
+}
+
+export interface SaveElements {
+  saveElements(schema: ClientSchema, data: ClientSchemaElementTransactionData): Observable<any>;
 }

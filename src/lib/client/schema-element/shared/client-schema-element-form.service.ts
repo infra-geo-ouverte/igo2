@@ -120,7 +120,8 @@ export class ClientSchemaElementFormService {
         geometryTypeField: true,
         drawGuideField: true,
         drawGuide: 0,
-        drawGuidePlaceholder: 'Guide d\'aide au traçage'
+        drawGuidePlaceholder: 'Guide d\'aide au traçage',
+        measure: true
       }
     }, partial));
   }

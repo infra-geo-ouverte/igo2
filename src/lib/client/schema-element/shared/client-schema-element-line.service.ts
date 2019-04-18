@@ -11,11 +11,14 @@ import {
   ClientSchemaElement,
   ClientSchemaElementApiConfig,
   ClientSchemaElementListResponse,
-  ClientSchemaElementListResponseItem
+  ClientSchemaElementListResponseItem,
+  ClientSchemaElementTransactionData,
+  GetElements,
+  SaveElements
 } from './client-schema-element.interfaces';
 
 @Injectable()
-export class ClientSchemaElementLineService {
+export class ClientSchemaElementLineService implements GetElements, SaveElements {
 
   constructor(
     private http: HttpClient,
@@ -36,6 +39,13 @@ export class ClientSchemaElementLineService {
           return this.extractElementsFromListResponse(response);
         })
       );
+  }
+
+  saveElements(schema: ClientSchema, data: ClientSchemaElementTransactionData): Observable<any> {
+    const url = this.apiService.buildUrl(this.apiConfig.saveLines, {
+      schemaId: schema.id
+    });
+    return this.http.post(url, data);
   }
 
   private extractElementsFromListResponse(response: ClientSchemaElementListResponse): ClientSchemaElement[] {

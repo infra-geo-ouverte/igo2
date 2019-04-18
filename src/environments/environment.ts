@@ -24,6 +24,9 @@ export const environment: Environment = {
       icherche: {
         searchUrl: '/icherche/geocode'
       }
+    },
+    importExport: {
+      url: '/ogre'
     }
   })
 };

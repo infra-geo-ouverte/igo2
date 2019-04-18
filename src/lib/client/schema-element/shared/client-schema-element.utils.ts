@@ -42,19 +42,31 @@ export class ClientSchemaElementTransactionSerializer {
       }
     });
 
-    return {inserts, updates, deletes};
+    return {
+      lstElementsAjoutes: inserts,
+      lstElementsModifies: updates,
+      lstIdElementsSupprimes: deletes
+    };
   }
 
-  private serializeInsert(operation: EntityOperation): ClientSchemaElement {
-    return operation.current as ClientSchemaElement;
+  private serializeInsert(operation: EntityOperation): Partial<ClientSchemaElement> {
+    return this.serializeElement(operation.current as ClientSchemaElement);
   }
 
-  private serializeUpdate(operation: EntityOperation): ClientSchemaElement {
-    return operation.current as ClientSchemaElement;
+  private serializeUpdate(operation: EntityOperation): Partial<ClientSchemaElement> {
+    return this.serializeElement(operation.current as ClientSchemaElement);
   }
 
   private serializeDelete(operation: EntityOperation): EntityKey {
     return operation.key;
+  }
+
+  private serializeElement(element: ClientSchemaElement): Partial<ClientSchemaElement> {
+    return {
+      type: element.type,
+      geometry: element.geometry,
+      properties: element.properties
+    };
   }
 
 }

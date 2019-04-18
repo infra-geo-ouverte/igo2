@@ -9,8 +9,15 @@
   </mat-card-header>
 
   <mat-card-content>
+    <p
+      *ngIf="errorMessage$ | async as errorMessage"
+      class="fadq-error-text">
+      {{errorMessage | translate}}
+    </p>
+
     <igo-entity-table
       class="table-compact"
+      [ngClass]="{'with-error-message': (errorMessage$ | async) !== undefined}"
       [store]="transaction.operations"
       [template]="tableTemplate"
       (entityClick)="onOperationClick($event)">

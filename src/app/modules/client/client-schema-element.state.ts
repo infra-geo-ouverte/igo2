@@ -198,6 +198,7 @@ export class ClientSchemaElementState {
         title: 'client.schemaElement.save',
         tooltip: 'client.schemaElement.save.tooltip',
         handler: () => this.editor.activateWidget(this.clientSchemaElementSaverWidget, {
+          store: this.elementStore,
           schema: this.schema,
           transaction: this.transaction
         }),

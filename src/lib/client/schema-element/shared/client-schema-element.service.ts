@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, of, zip } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { concatMap, map, reduce, tap, catchError } from 'rxjs/operators';
 
 import { EntityOperation, EntityTransaction } from '@igo2/common';
 
@@ -15,7 +15,9 @@ import {
   ClientSchemaElementApiConfig,
   ClientSchemaElementTypes,
   ClientSchemaElementTypesResponse,
-  ClientSchemaElementTypesResponseItem
+  ClientSchemaElementTypesResponseItem,
+  GetElements,
+  SaveElements
 } from './client-schema-element.interfaces';
 
 import { ClientSchemaElementPointService } from './client-schema-element-point.service';
@@ -28,6 +30,14 @@ export class ClientSchemaElementService {
 
   private schemaElementTypes: {[key: string]: ClientSchemaElementTypes} = {};
 
+  get services(): {[key: string]: object} {
+    return {
+      'Point': this.schemaElementPointService,
+      'LineString': this.schemaElementLineService,
+      'Polygon': this.schemaElementSurfaceService
+    };
+  }
+
   constructor(
     private schemaElementPointService: ClientSchemaElementPointService,
     private schemaElementLineService: ClientSchemaElementLineService,
@@ -37,6 +47,11 @@ export class ClientSchemaElementService {
     @Inject('clientSchemaElementApiConfig') private apiConfig: ClientSchemaElementApiConfig
   ) {}
 
+  /**
+   * Get all the elements of a schema.
+   * @param schema Schema
+   * @returns Observable of the all the elements of the schema
+   */
   getElements(schema: ClientSchema): Observable<ClientSchemaElement[]> {
     const elements$ = zip(
       this.schemaElementPointService.getElements(schema),
@@ -49,19 +64,6 @@ export class ClientSchemaElementService {
         return [].concat(...elements);
       })
     );
-  }
-
-  commitTransaction(schema: ClientSchema, transaction: EntityTransaction): Observable<any> {
-    return transaction.commit((_transaction: EntityTransaction, operations: EntityOperation[]) => {
-        const serializer = new ClientSchemaElementTransactionSerializer();
-        const data = serializer.serializeOperations(operations);
-        return this.saveElements(schema, data);
-      });
-  }
-
-  private saveElements(schema: ClientSchema, data: ClientSchemaElementTransactionData): Observable<any> {
-    // TODO
-    return of({});
   }
 
   /**
@@ -102,6 +104,81 @@ export class ClientSchemaElementService {
     );
   }
 
+  /**
+   * Commit (save) a whole transaction  containig points, lines and polygons. Each of those geometry type
+   * has it's own endpoint so we're making 3 requests. On a success, elements of the same geometry
+   * type are fetched and returned
+   * @param schema Schema
+   * @param transaction Transaction shared by all geometry types
+   * @returns Observable of the all the elements by geometry type or of an error object
+   */
+  commitTransaction(
+    schema: ClientSchema,
+    transaction: EntityTransaction
+  ): Observable<Array<ClientSchemaElement[] | Error>> {
+    const commits$ = ['Point', 'LineString', 'Polygon'].map((type: string) => {
+      const operations = transaction.operations.all().filter((operation: EntityOperation) => {
+        const element = (operation.current || operation.previous) as ClientSchemaElement;
+        return element.geometry.type === type;
+      });
+
+      return transaction.commit(operations, (tx: EntityTransaction, ops: EntityOperation[]) => {
+        return this.commitOperationsOfType(schema, ops, type);
+      });
+    });
+
+    return zip(...commits$);
+  }
+
+  /**
+   * Commit (save) some operations of a transaction
+   * @param schema Schema
+   * @param operations Transaction operations
+   * @param geometryType The geometry type of the data we're saving
+   * @returns Observable of the all the elements of that by geometry type or of an error object
+   */
+  private commitOperationsOfType(
+    schema: ClientSchema,
+    operations: EntityOperation[],
+    geometryType: string
+  ): Observable<ClientSchemaElement[] | Error> {
+    const serializer = new ClientSchemaElementTransactionSerializer();
+    const data = serializer.serializeOperations(operations);
+    return this.saveElements(schema, data, geometryType);
+  }
+
+  /**
+   * Save the elements of a geometry type then fetch all the elements of the type.
+   * @param schema Schema
+   * @param data Data to save
+   * @param geometryType The geometry type of the data we're saving
+   * @returns Observable of the all the elements of that by geometry type or of an error object
+   */
+  private saveElements(
+    schema: ClientSchema,
+    data: ClientSchemaElementTransactionData,
+    geometryType: string
+  ): Observable<ClientSchemaElement[] | Error> {
+    const service = this.services[geometryType];
+
+    return (service as SaveElements).saveElements(schema, data)
+      .pipe(
+        catchError(() => of(new Error(geometryType))),
+        concatMap((response: any) => {
+          if (response instanceof Error) {
+            return of(response);
+          } else {
+            return (service as GetElements).getElements(schema);
+          }
+        })
+      );
+  }
+
+  /**
+   * Extract schema elements from response
+   * @param response Backend response
+   * @returns Observable of schema elements
+   */
   private extractSchemaElementTypesFromResponse(
     response: ClientSchemaElementTypesResponse
   ): ClientSchemaElementTypes {
@@ -119,6 +196,11 @@ export class ClientSchemaElementService {
     };
   }
 
+  /**
+   * Cache the schema element types by schema type
+   * @param schemaType Schema type
+   * @param elementTypes Element types
+   */
   private cacheSchemaElementTypes(schemaType: string, elementTypes:  ClientSchemaElementTypes) {
     this.schemaElementTypes[schemaType] = elementTypes;
   }

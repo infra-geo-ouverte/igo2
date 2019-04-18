@@ -110,7 +110,9 @@ export const igoEnvironment: IgoEnvironment = {
         delete: '/igoschema/edition_schema/supprimerDocumentSchema/${id}'
       },
       schemaElement: {
-        save: '',
+        savePoints: '/igoschema/edition_schema/mettreAJourElementsGeometriquesPoint/${schemaId}',
+        saveLines: '/igoschema/edition_schema/mettreAJourElementsGeometriquesLigne/${schemaId}',
+        saveSurfaces: '/igoschema/edition_schema/mettreAJourElementsGeometriquesSurface/${schemaId}',
         points: '/igolocalisation/recherche_client/obtenirElementGeometriquePoint/${schemaId}',
         lines: '/igolocalisation/recherche_client/obtenirElementGeometriqueLigne/${schemaId}',
         surfaces: '/igolocalisation/recherche_client/obtenirElementGeometriqueSurface/${schemaId}',
