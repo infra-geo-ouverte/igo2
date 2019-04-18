@@ -30,7 +30,7 @@ import {
 } from '@igo2/geo';
 
 import { ClientSchemaElement } from '../shared/client-schema-element.interfaces';
-
+import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { computeSchemaElementArea, generateOperationTitle } from '../shared/client-schema-element.utils';
 
 @Component({
@@ -109,6 +109,7 @@ export class ClientSchemaElementSliceFormComponent
   @Output() cancel = new EventEmitter<void>();
 
   constructor(
+    private clientSchemaElementService: ClientSchemaElementService,
     private languageService: LanguageService,
     private cdRef: ChangeDetectorRef
   ) {}
@@ -232,7 +233,11 @@ export class ClientSchemaElementSliceFormComponent
       });
     });
 
+    const typeDescription = this.clientSchemaElementService
+      .getSchemaElementTypeDescription(baseElement.properties.typeElement);
+
     newElements.forEach((element: ClientSchemaElement) => {
+      element.properties.descriptionTypeElement = typeDescription;
       element.properties.superficie = computeSchemaElementArea(element);
     });
 

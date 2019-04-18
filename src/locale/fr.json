@@ -119,10 +119,11 @@
     "schemaElement": {
       "error.etiquetteMaxLength": "Une étiquette ne doit pas être plus grande que 25 caractères",
       "error.descriptionMaxLength": "Une description ne doit pas être plus grande que 250 caractères",
-      "create": "Créer",
       "create.tooltip": "Créer un élément",
+      "create.apply": "Créer",
       "update": "Modifier",
       "update.tooltip": "Modifier un élément",
+      "update.apply": "Modifier",
       "delete": "Supprimer",
       "delete.tooltip": "Supprimer un élément",
       "fill": "Réinclure une surface exclue",

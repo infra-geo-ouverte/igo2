@@ -7,12 +7,14 @@ import { concatMap, map, reduce, tap, catchError } from 'rxjs/operators';
 import { EntityOperation, EntityTransaction } from '@igo2/common';
 
 import { ApiService } from 'src/lib/core/api';
+import { hexToRGB } from 'src/lib/utils/color';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
   ClientSchemaElement,
   ClientSchemaElementTransactionData,
   ClientSchemaElementApiConfig,
+  ClientSchemaElementType,
   ClientSchemaElementTypes,
   ClientSchemaElementTypesResponse,
   ClientSchemaElementTypesResponseItem,
@@ -89,6 +91,16 @@ export class ClientSchemaElementService {
           this.cacheSchemaElementTypes(schemaType, elementTypes);
         })
       );
+  }
+
+  getSchemaElementTypeDescription(elementType: string) {
+    const allTypes = Object.values(this.schemaElementTypes)
+      .reduce((acc: ClientSchemaElementType[], types: ClientSchemaElementTypes) => {
+        return acc.concat(...Object.values(types));
+      }, []);
+    const type = allTypes.find((_type: ClientSchemaElementType) => _type.value === elementType);
+
+    return type ? type.title : undefined;
   }
 
   /**
@@ -183,10 +195,12 @@ export class ClientSchemaElementService {
     response: ClientSchemaElementTypesResponse
   ): ClientSchemaElementTypes {
     const createChoice = (item: ClientSchemaElementTypesResponseItem) => {
-      return Object.create({
+      return {
         value: item.idTypeElement,
-        title: item.libelleFrancaisAbr
-      });
+        title: item.libelleFrancaisAbr,
+        color: hexToRGB(item.couleurElement),
+        icon: item.iconeElement
+      };
     };
 
     return {

@@ -16,7 +16,8 @@ import {
   ClientParcelDiagram,
   ClientParcelYear,
   ClientParcelYearService,
-  ClientParcelTableService
+  ClientParcelTableService,
+  createParcelLayer
 } from 'src/lib/client';
 import { entitiesToRowData, exportToCSV } from 'src/lib/utils/export';
 
@@ -50,10 +51,7 @@ export class ClientParcelState {
       id: 'fadq.client-parcel-editor',
       title: 'Parcelles du client',
       tableTemplate: clientParcelTableService.buildTable(),
-      entityStore: new FeatureStore<ClientParcel>([], {
-        getKey: (entity: ClientParcel) => entity.properties.id,
-        map: mapState.map
-      }),
+      entityStore: this.createStore(),
       actionStore: new ActionStore([])
     });
     this.editor.actionStore.load(this.buildActions());
@@ -96,6 +94,18 @@ export class ClientParcelState {
       };
       this.parcelStore.view.filter(filterClause);
     }
+  }
+
+  private createStore(): FeatureStore<ClientParcel> {
+    const store = new FeatureStore<ClientParcel>([], {
+      getKey: (entity: ClientParcel) => entity.properties.id,
+      map: this.mapState.map
+    });
+
+    const layer = createParcelLayer();
+    store.bindLayer(layer);
+
+    return store;
   }
 
   private buildActions(): Action[] {

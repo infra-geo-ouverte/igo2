@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 
+import { concatMap, map } from 'rxjs/operators';
+
 import {
   Action,
   ActionStore,
@@ -15,6 +17,7 @@ import { MapState } from '@igo2/integration';
 import {
   ClientSchema,
   ClientSchemaElement,
+  ClientSchemaElementTypes,
   ClientSchemaElementTableService,
   ClientSchemaElementCreateWidget,
   ClientSchemaElementUpdateWidget,
@@ -23,6 +26,8 @@ import {
   ClientSchemaElementUndoWidget,
   ClientSchemaElementImportDataWidget,
   ClientSchemaElementService,
+  createSchemaElementLayer,
+  createSchemaElementLayerStyle,
   generateOperationTitle
 } from 'src/lib/client';
 import { entitiesToRowData, exportToCSV } from 'src/lib/utils/export';
@@ -46,7 +51,7 @@ export class ClientSchemaElementState {
   }
 
   get elementStore():  FeatureStore<ClientSchemaElement> {
-    return this.editor.entityStore as  FeatureStore<ClientSchemaElement>;
+    return this.editor.entityStore as FeatureStore<ClientSchemaElement>;
   }
 
   constructor(
@@ -64,12 +69,7 @@ export class ClientSchemaElementState {
       id: 'fadq.client-schema-element-editor',
       title: 'Éléments géométriques du schéma',
       tableTemplate: clientSchemaElementTableService.buildTable(),
-      entityStore: new FeatureStore<ClientSchemaElement>([], {
-        getKey: (entity: ClientSchemaElement) => {
-          return entity.properties.idElementGeometrique || entity.meta.id;
-        },
-        map: mapState.map
-      }),
+      entityStore: this.createStore(),
       actionStore: new ActionStore([])
     });
     this.editor.actionStore.load(this.buildActions());
@@ -85,6 +85,20 @@ export class ClientSchemaElementState {
       this.elementStore.clear();
       this.editor.deactivate();
     }
+  }
+
+  private createStore(): FeatureStore<ClientSchemaElement> {
+    const store = new FeatureStore<ClientSchemaElement>([], {
+      getKey: (entity: ClientSchemaElement) => {
+        return entity.properties.idElementGeometrique || entity.meta.id;
+      },
+      map: this.mapState.map
+    });
+
+    const layer = createSchemaElementLayer();
+    store.bindLayer(layer);
+
+    return store;
   }
 
   private buildActions(): Action[] {
@@ -245,8 +259,20 @@ export class ClientSchemaElementState {
   }
 
   private loadSchemaElements(schema: ClientSchema) {
-    this.clientSchemaElementService.getElements(schema)
-      .subscribe((elements: ClientSchemaElement[]) => this.elementStore.load(elements));
+    this.clientSchemaElementService.getSchemaElementTypes(schema.type)
+      .pipe(
+        concatMap((types: ClientSchemaElementTypes) => {
+          return this.clientSchemaElementService.getElements(schema).pipe(
+            map((elements: ClientSchemaElement[]) => [types, elements])
+          );
+        })
+      )
+      .subscribe((bunch: [ClientSchemaElementTypes, ClientSchemaElement[]]) => {
+        const [types, elements] = bunch;
+        const olStyle = createSchemaElementLayerStyle(types);
+        this.elementStore.layer.ol.setStyle(olStyle);
+        this.elementStore.load(elements);
+      });
   }
 
 }

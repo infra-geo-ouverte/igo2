@@ -146,7 +146,10 @@ export class ClientSchemaElementCreateFormComponent
     }, data.properties);
 
     const element = Object.assign({}, data, {properties});
+    const typeDescription = this.clientSchemaElementService
+      .getSchemaElementTypeDescription(properties.typeElement);
     element.properties.superficie = computeSchemaElementArea(element);
+    element.properties.descriptionTypeElement = typeDescription;
 
     return element;
   }

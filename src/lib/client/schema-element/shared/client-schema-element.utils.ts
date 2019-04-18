@@ -11,6 +11,8 @@ import {
 
 import {
   ClientSchemaElement,
+  ClientSchemaElementType,
+  ClientSchemaElementTypes,
   ClientSchemaElementTransactionData
 } from './client-schema-element.interfaces';
 
@@ -96,13 +98,14 @@ export function createSchemaElementLayer(): VectorLayer {
     title: 'Éléments géométriques du schéma',
     zIndex: 103,
     source: schemaElementDataSource,
-    style: createSchemaElementLayerStyle(),
     removable: false,
     browsable: false
   });
 }
 
-export function createSchemaElementLayerStyle(): (olFeature: OlFeature) => olstyle.Style {
+export function createSchemaElementLayerStyle(
+  types: ClientSchemaElementTypes
+): (olFeature: OlFeature) => olstyle.Style {
   const styles = {
     'Point': new olstyle.Style({
       text: createSchemaElementLayerTextStyle()
@@ -125,22 +128,17 @@ export function createSchemaElementLayerStyle(): (olFeature: OlFeature) => olsty
 
   return (function(olFeature: OlFeature) {
     const geometryType = olFeature.getGeometry().getType();
-    const style = styles[geometryType];
-    const color = getSchemaElementFeatureColor(olFeature);
+    const elementType = olFeature.get('typeElement');
+    const type = (types[geometryType] || []).find((_type: ClientSchemaElementType) => {
+      return _type.value === elementType;
+    });
 
+    const style = styles[geometryType];
     if (geometryType === 'Point') {
-      style.setImage(new olstyle.Circle({
-        fill: new olstyle.Fill({
-          color: color.concat([0.15])
-        }),
-        radius: 6,
-        stroke: new olstyle.Stroke({
-          width: 1,
-          color: color
-        })
-      }));
+      style.setImage(createSchemaPointShape(type));
     } else {
-      style.getFill().setColor(color.concat([0.15]));
+      const color = type ? type.color : getSchemaElementDefaultColor();
+      style.getFill().setColor(color.concat([0.30]));
       style.getStroke().setColor(color);
     }
     style.getText().setText(olFeature.get('etiquette'));
@@ -158,6 +156,65 @@ function createSchemaElementLayerTextStyle(): olstyle.Text {
   });
 }
 
-function getSchemaElementFeatureColor(olFeature: OlFeature) {
+function createSchemaPointShape(type: ClientSchemaElementType): olstyle.Circle | olstyle.RegularShape  {
+  const typeCode = type ? type.value : undefined;
+  const color = type ? type.color : getSchemaElementDefaultColor();
+  const factories = {
+    'CAG': createCAGShape,
+    'CRI': createCRIShape,
+    'SIL': createSILShape
+  };
+  const factory = factories[typeCode] || createDefaultPointShape;
+  return factory(color);
+}
+
+function createDefaultPointShape(color: [number, number, number]): olstyle.Circle  {
+  return new olstyle.Circle({
+    fill: new olstyle.Fill({
+      color: color.concat([1])
+    }),
+    radius: 6,
+    stroke: new olstyle.Stroke({
+      width: 1,
+      color: color
+    })
+  });
+}
+
+function createCAGShape(color: [number, number, number]): olstyle.RegularShape {
+  return new olstyle.RegularShape({
+    stroke: new olstyle.Stroke({
+      width: 3,
+      color: color
+    }),
+    points: 4,
+    radius: 10,
+    angle: Math.PI / 4
+  });
+}
+
+function createCRIShape(color: [number, number, number]): olstyle.RegularShape {
+  return new olstyle.RegularShape({
+    stroke: new olstyle.Stroke({
+      width: 3,
+      color: color
+    }),
+    points: 3,
+    radius: 10,
+    angle: 0
+  });
+}
+
+function createSILShape(color: [number, number, number]): olstyle.RegularShape {
+  return new olstyle.Circle({
+    radius: 10,
+    stroke: new olstyle.Stroke({
+      width: 3,
+      color: color
+    })
+  });
+}
+
+function getSchemaElementDefaultColor() {
   return [128, 21, 21];
 }

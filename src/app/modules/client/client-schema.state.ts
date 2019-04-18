@@ -45,13 +45,10 @@ export class ClientSchemaState {
       id: 'fadq.client-schema-editor',
       title: 'Schémas du client',
       tableTemplate: clientSchemaTableService.buildTable(),
-      entityStore: new EntityStore<ClientSchema>([]),
+      entityStore: this.createStore(),
       actionStore: new ActionStore([])
     });
-    this.schemaStore.view.sort({
-      valueAccessor: (schema: ClientSchema) => schema.id,
-      direction: 'desc'
-    });
+
     this.editor.actionStore.load(this.buildActions());
   }
 
@@ -64,6 +61,16 @@ export class ClientSchemaState {
       this.schemaStore.clear();
       this.editor.deactivate();
     }
+  }
+
+  private createStore(): EntityStore<ClientSchema> {
+    const store = new EntityStore<ClientSchema>([]);
+    store.view.sort({
+      valueAccessor: (schema: ClientSchema) => schema.id,
+      direction: 'desc'
+    });
+
+    return store;
   }
 
   private buildActions(): Action[] {

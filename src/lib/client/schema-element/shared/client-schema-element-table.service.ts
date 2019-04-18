@@ -38,7 +38,7 @@ export class ClientSchemaElementTableService {
           title: 'ID élément'
         },
         {
-          name: 'properties.typeElement',
+          name: 'properties.descriptionTypeElement',
           title: 'Type d\'élément'
         },
         {

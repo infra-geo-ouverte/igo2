@@ -2,12 +2,16 @@
   display: block;
 }
 
-.fadq-client-tool-section {
-  padding: 10px;
+.fadq-error-text {
+  margin: 10px;
 }
 
-.fadq-client-tool-bottom-section{
-  padding-top: 0px;
+.fadq-client-tool-top-section {
+  padding: 10px 10px 0 10px;
+}
+
+.fadq-client-tool-bottom-section {
+  padding: 10px;
 
   a {
     color: #1565c0;

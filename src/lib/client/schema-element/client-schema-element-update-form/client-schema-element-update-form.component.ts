@@ -115,7 +115,10 @@ export class ClientSchemaElementUpdateFormComponent implements OnInit, OnUpdateI
 
   private formDataToElement(data: Feature): ClientSchemaElement {
     const element = Object.assign({}, data as ClientSchemaElement);
+    const typeDescription = this.clientSchemaElementService
+      .getSchemaElementTypeDescription(element.properties.typeElement);
     element.properties.superficie = computeSchemaElementArea(element);
+    element.properties.descriptionTypeElement = typeDescription;
     return element;
   }
 
@@ -123,11 +126,13 @@ export class ClientSchemaElementUpdateFormComponent implements OnInit, OnUpdateI
     this.clientSchemaElementService
       .getSchemaElementTypes(this.schema.type)
       .subscribe((elementTypes: ClientSchemaElementTypes) => {
+        const geometryType = this.element.geometry.type;
         const elementTypeField = form.groups[0].fields.find((field: FormField) => {
           return field.name === 'properties.typeElement';
         }) as FormField<FormFieldSelectInputs>;
+
         const choices$ = elementTypeField.inputs.choices as BehaviorSubject<FormFieldSelectChoice[]>;
-        choices$.next(elementTypes[this.element.geometry.type]);
+        choices$.next(elementTypes[geometryType]);
         this.form$.next(form);
       });
   }

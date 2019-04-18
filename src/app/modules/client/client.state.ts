@@ -18,8 +18,6 @@ import {
   ClientParcelYear,
   ClientSchema,
   ClientSchemaElement,
-  createParcelLayer,
-  createSchemaElementLayer,
   createClientDefaultSelectionStyle
 } from 'src/lib/client';
 
@@ -242,13 +240,8 @@ export class ClientState implements OnDestroy {
   private addClientLayers() {
     const map = this.mapState.map;
 
-    const clientParcelLayer = createParcelLayer();
-    map.addLayer(clientParcelLayer, false);
-    this.parcelStore.bindLayer(clientParcelLayer);
-
-    const clientSchemaElementLayer = createSchemaElementLayer();
-    map.addLayer(clientSchemaElementLayer, false);
-    this.schemaElementStore.bindLayer(clientSchemaElementLayer);
+    map.addLayer(this.parcelStore.layer , false);
+    map.addLayer(this.schemaElementStore.layer , false);
 
     const parcelLoadingStrategy = new FeatureStoreLoadingStrategy({});
     this.parcelStore.addStrategy(parcelLoadingStrategy);
