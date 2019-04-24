@@ -44,6 +44,11 @@ th.text-centered {
   text-align: center;
 }
 
+tr.text-centered th div.mat-sort-header-container {
+  display: flex;
+  justify-content: center !important;
+}
+
 .igo-form-buttons:not(:empty) {
   height: 36px;
   text-align: center;

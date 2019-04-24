@@ -16,6 +16,9 @@ export class ClientParcelTableService {
     return {
       selection: true,
       sort: true,
+      headerClassFunc: (() => {
+        return {'text-centered': true};
+      }),
       rowClassFunc: ((parcel: ClientParcel) => {
         return {'text-centered': true};
       }),

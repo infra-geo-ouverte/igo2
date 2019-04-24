@@ -121,7 +121,7 @@ export class ClientState implements OnDestroy {
         this.onSelectSchema(schema);
       });
 
-    this.addClientLayers();
+    this.prepareClientLayers();
   }
 
   ngOnDestroy() {
@@ -143,8 +143,12 @@ export class ClientState implements OnDestroy {
 
     this.clearClient();
 
-    if (client === undefined) { return; }
+    if (client === undefined) {
+      this.removeClientLayers();
+      return;
+    }
 
+    this.addClientLayers();
     this.parcelState.setClient(client);
     this.schemaState.setClient(client);
 
@@ -236,15 +240,11 @@ export class ClientState implements OnDestroy {
   }
 
   /**
-   * Add all kinds of layers related to a client;
-   * parcels, schema points, schema lines, schema surfaces.
-   * Also bind them to a feature store and initialize the loading and selection strategies.
+   * Prepare the parcel and schema elements layers. That means,
+   * initializing and activating the loading and selection strategies.
    */
-  private addClientLayers() {
+  private prepareClientLayers() {
     const map = this.mapState.map;
-
-    map.addLayer(this.parcelStore.layer , false);
-    map.addLayer(this.schemaElementStore.layer , false);
 
     const parcelLoadingStrategy = new FeatureStoreLoadingStrategy({});
     this.parcelStore.addStrategy(parcelLoadingStrategy);
@@ -263,6 +263,32 @@ export class ClientState implements OnDestroy {
     parcelLoadingStrategy.activate();
     schemaElementLoadingStrategy.activate();
     sharedSelectionStrategy.activate();
+  }
+
+  /**
+   * Add the parcel and schema elements layers to the map.
+   */
+  private addClientLayers() {
+    const map = this.mapState.map;
+    if (this.parcelStore.layer.map === undefined) {
+      map.addLayer(this.parcelStore.layer, false);
+    }
+    if (this.schemaElementStore.layer.map === undefined) {
+      map.addLayer(this.schemaElementStore.layer, false);
+    }
+  }
+
+  /**
+   * Remove the parcel and schema elements layers from the map.
+   */
+  private removeClientLayers() {
+    const map = this.mapState.map;
+    if (this.parcelStore.layer.map === map) {
+      map.removeLayer(this.parcelStore.layer);
+    }
+    if (this.schemaElementStore.layer.map === map) {
+      map.removeLayer(this.schemaElementStore.layer);
+    }
   }
 
 }

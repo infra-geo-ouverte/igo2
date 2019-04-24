@@ -253,6 +253,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   clearSearchResult() {
+    this.closeToastPanel();
+    this.map.overlay.clear();
+    this.searchResult = undefined;
     this.searchStore.state.updateAll({focused: false, selected: false});
   }
 
@@ -376,7 +379,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
 
       this.searchResult = result;
-      this.openToastPanel();
+      // open the toast panel only if the focus comes from the map
+      const querySearchSource = this.getQuerySearchSource();
+      if (querySearchSource !== undefined && result.source === querySearchSource) {
+        this.openToastPanel();
+      }
     } else {
       this.searchResult = undefined;
     }
@@ -384,6 +391,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onClearSearch() {
     this.searchStore.clear();
+    this.map.overlay.clear();
     this.closeToastPanel();
     this.clientState.setClient(undefined);
   }

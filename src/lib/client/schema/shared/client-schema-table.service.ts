@@ -14,6 +14,9 @@ export class ClientSchemaTableService {
     return {
       selection: true,
       sort: true,
+      headerClassFunc: (() => {
+        return {'text-centered': true};
+      }),
       rowClassFunc: ((schema: ClientSchema) => {
         return {'text-centered': true};
       }),
