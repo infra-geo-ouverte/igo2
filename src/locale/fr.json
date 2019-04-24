@@ -22,12 +22,19 @@
     "client.title": "Client",
     "client.placeholder": "Rechercher un client",
     "cadastre.title": "Cadastre originaire",
-    "cadastre.placeholder": "Rechercher un cadastre originaire"
+    "cadastre.placeholder": "Rechercher un cadastre originaire",
+    "cadastre-reno.title": "Cadastre rénové",
+    "cadastre-reno.placeholder": "Rechercher un cadastre"
   },
 
   "help": {
     "guide": "Consulter le guide d'autoformation",
-    "news": "Afficher les nouveautés"
+    "news": "Afficher les nouveautés",
+    "layer.placeholder": "Rechercher une couche de données",
+    "cadastre.title": "Cadastre",
+    "cadastre.placeholder": "Rechercher un cadastre",
+    "cadastre.renov.title": "Cadastre rénové",
+    "cadastre.renov.placeholder": "Rechercher un cadastre rénové"
   },
 
   "navigation": {

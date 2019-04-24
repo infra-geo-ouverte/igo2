@@ -22,7 +22,6 @@ export class CadastreCadastreService {
     @Inject('cadastreApiConfig') private apiConfig: CadastreApiConfig
   ) {}
 
-  //#region Cadastre
   /**
    * Get municipalities from service
    * @returns Observable of municipalities
@@ -56,20 +55,9 @@ export class CadastreCadastreService {
    * Convert a service response item in a MunNom interface
    * @param listItem An item of response municipality service
    */
-   private listItemToCadastre(
-    listItem: CadastreResponseItem
-  ): CadastreResponseItem {
-    return {
-      idCadastreOriginaire: listItem.idCadastreOriginaire,
-      nomCadastre: listItem.nomCadastre,
-      noCadastre: listItem.noCadastre,
-      codeCadastre: listItem.codeCadastre,
-      recherche: listItem.recherche
-    };
+   private listItemToCadastre(listItem: CadastreResponseItem): CadastreResponseItem {
+    return Object.assign({}, listItem);
   }
-  //#endregion
-
-//#region CadastreFeature
 
   getCadastreFeatureByNum(idCadastreOriginaire: number): Observable<CadastreFeature> {
     const url = this.apiService.buildUrl(this.apiConfig.surfaces, {idCadastre: idCadastreOriginaire});
@@ -99,5 +87,4 @@ export class CadastreCadastreService {
       properties
     };
   }
-//#endregion
 }

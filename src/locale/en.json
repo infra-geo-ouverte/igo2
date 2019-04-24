@@ -22,7 +22,9 @@
     "client.title": "Client",
     "client.placeholder": "Search for a client",
     "cadastre.title": "Original cadastre",
-    "cadastre.placeholder": "Search for a original cadastre"
+    "cadastre.placeholder": "Search for a original cadastre",
+    "cadastre-reno.title": "Renovated cadastre",
+    "cadastre-reno.placeholder": "Search for a cadastre"
   },
 
   "help": {

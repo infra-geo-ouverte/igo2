@@ -66,6 +66,10 @@ export const igoEnvironment: IgoEnvironment = {
     datasource: {
       enabled: false,
       available: false
+    },
+    cadastre: {
+      enabled: false,
+      available: false
     }
   },
   language: {
