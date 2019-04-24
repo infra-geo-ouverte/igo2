@@ -37,6 +37,8 @@ export class ToastPanelComponent {
 
   @Output() openedChange = new EventEmitter<boolean>();
 
+  @Output() clear = new EventEmitter<void>();
+
   @HostBinding('class.fadq-toast-panel-opened')
   get hasOpenedClass() {
     return this.opened;
@@ -57,5 +59,9 @@ export class ToastPanelComponent {
 
   onToggleClick() {
     this.opened = !this.opened;
+  }
+
+  onClearButtonClick() {
+    this.clear.emit();
   }
 }

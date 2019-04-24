@@ -119,6 +119,7 @@
     "schemaElement": {
       "error.etiquetteMaxLength": "Une étiquette ne doit pas être plus grande que 25 caractères",
       "error.descriptionMaxLength": "Une description ne doit pas être plus grande que 250 caractères",
+      "create": "Créer",
       "create.tooltip": "Créer un élément",
       "create.apply": "Créer",
       "update": "Modifier",

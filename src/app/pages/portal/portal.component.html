@@ -84,7 +84,8 @@
 <fadq-toast-panel
   [title]="toastPanelTitle"
   [withHeader]="toastPanelContent === 'feature'"
-  [(opened)]="toastPanelOpened">
+  [(opened)]="toastPanelOpened"
+  (clear)="clearSearchResult()">
 
   <igo-feature-details
     *ngIf="toastPanelContent === 'feature'"

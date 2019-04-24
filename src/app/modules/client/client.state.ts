@@ -33,7 +33,7 @@ import { ClientSchemaElementState } from './client-schema-element.state';
 })
 export class ClientState implements OnDestroy {
 
-  public resolve$ = new BehaviorSubject<() => void>(undefined);
+  public resolve$ = new BehaviorSubject<{confirm: () => void; abort?: () => void; }>(undefined);
 
   /** Observable of the active client */
   public client$ = new BehaviorSubject<Client>(undefined);
@@ -137,7 +137,7 @@ export class ClientState implements OnDestroy {
 
   setClient(client: Client | undefined) {
     if (!this.transaction.empty) {
-      this.resolve$.next(() => this.setClient(client));
+      this.resolve$.next({confirm: () => this.setClient(client)});
       return;
     }
 
@@ -163,7 +163,7 @@ export class ClientState implements OnDestroy {
 
   setClientNotFound() {
     if (!this.transaction.empty) {
-      this.resolve$.next(() => this.setClientNotFound());
+      this.resolve$.next({confirm: () => this.setClientNotFound()});
       return;
     }
     this.clearClient();
@@ -207,7 +207,10 @@ export class ClientState implements OnDestroy {
 
   private setSchema(schema: ClientSchema) {
     if (!this.transaction.empty) {
-      this.resolve$.next(() => this.setSchema(schema));
+      this.resolve$.next({
+        confirm: () => this.setSchema(schema),
+        abort: () => this.schemaStore.state.update(this.schema, {selected: true}, true)
+      });
       return;
     }
 

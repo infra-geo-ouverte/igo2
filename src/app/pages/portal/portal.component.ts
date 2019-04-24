@@ -154,9 +154,9 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.clientResolve$$ = this.clientState.resolve$
-      .subscribe((action: () => void) => {
-        if (action !== undefined) {
-          this.openSchemaConfirmDialog(action);
+      .subscribe((actions: {confirm: () => void; abort: () => void}) => {
+        if (actions !== undefined) {
+          this.openSchemaConfirmDialog(actions.confirm, actions.abort);
         }
       });
 
@@ -250,6 +250,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   onDeactivateEditorWidget() {
     this.closeToastPanel();
+  }
+
+  clearSearchResult() {
+    this.searchStore.state.updateAll({focused: false, selected: false});
   }
 
   private closeToastPanel() {
@@ -390,9 +394,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       .find((searchSource: SearchSource) => searchSource instanceof QuerySearchSource);
   }
 
-  private openSchemaConfirmDialog(action: () => void): void {
+  private openSchemaConfirmDialog(confirm: () => void, abort?: () => void): void {
     this.dialog.open(ClientSchemaConfirmDialogComponent, {
-      data: {action}
+      data: {confirm, abort}
     });
   }
 

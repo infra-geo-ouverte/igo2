@@ -12,13 +12,15 @@ import { ClientState} from '../client.state';
 })
 export class ClientSchemaConfirmDialogComponent {
 
-  get action(): () => void { return this.data.action; }
+  get confirm(): () => void { return this.data.confirm; }
+
+  get abort(): () => void { return this.data.abort; }
 
   constructor(
     private clientState: ClientState,
     private clientSchemaElementService: ClientSchemaElementService,
     public dialogRef: MatDialogRef<ClientSchemaConfirmDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {action: () => void}
+    @Inject(MAT_DIALOG_DATA) public data: {confirm: () => void, abort: () => void}
   ) {}
 
   onYesClick() {
@@ -27,19 +29,22 @@ export class ClientSchemaConfirmDialogComponent {
     this.clientSchemaElementService
       .commitTransaction(schema, transaction)
       .subscribe(() => {
-        this.action();
+        this.confirm();
         this.dialogRef.close();
       });
   }
 
   onNoClick() {
     this.clientState.transaction.clear();
-    this.action();
+    this.confirm();
     this.dialogRef.close();
   }
 
   onCancelClick() {
     this.dialogRef.close();
+    if (this.abort !== undefined) {
+      this.abort();
+    }
   }
 
 }
