@@ -9,9 +9,63 @@
   "catalog": {
     "sources": [
       {
-        "id": "fadq.all",
-        "title": "Toutes les données (config)",
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_swwf",
+        "id": "fadq.agro",
+        "title": "Analyse agroclimatique",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_analyse_agro",
+        "queryFormat": "html"
+      },
+      {
+        "id": "fadq.adressesFadq",
+        "title": "Adresses FADQ",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_adresses_fadq",
+        "queryFormat": "html"
+      },
+      {
+        "id": "fadq.imagesHisto",
+        "title": "Images historiques *",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/mern_imagerie_aeroportee_continue_annee",
+        "queryFormat": "html"
+      },
+      {
+        "id": "fadq.indexImages",
+        "title": "Index liés aux images *",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_index_lies",
+        "queryFormat": "html"
+      },
+      {
+        "id": "fadq.parcelles",
+        "title": "Parcelles agricoles",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_parcelles_agri",
+        "queryFormat": "html"
+      },
+      {
+        "id": "fadq.struct",
+        "title": "Structures d'entreposage",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_struct_entr",
+        "queryFormat": "html"
+      },
+      {
+        "id": "fadq.sysCol",
+        "title": "Informations du système collectif",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_syst_coll",
+        "queryFormat": "html"
+      },
+      {
+        "id": "fadq.adressesQC",
+        "title": "Adresses Québec *",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_adresses_quebec",
+        "queryFormat": "html"
+      },
+      {
+        "id": "fadq.ecocondition",
+        "title": "Éconconditionnalité *",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_ecocondition",
+        "queryFormat": "html"
+      },
+      {
+        "id": "fadq.infoFoncière",
+        "title": "Information foncière *",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_fonciere",
         "queryFormat": "html"
       }
     ]
@@ -32,5 +86,8 @@
         "link": "http://igodev.fadq.qc/app/interne/personnes/coordonnees/presenter/${clientNum}"
       }
     }
+  },
+  "importExport": {
+    "url": "http://plssisigdev1.fadq.qc:3000"
   }
 }
