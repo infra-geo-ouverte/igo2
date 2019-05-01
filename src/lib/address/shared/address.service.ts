@@ -79,10 +79,12 @@ export class AddressService {
    */
   modifyAddressGeometry(idAdresseLocalisee: string, addressModified: AddressFeature): Observable<object> {
     const url = this.apiService.buildUrl(this.apiConfig.save, {idAdresseAQ: idAdresseLocalisee});
-    console.log(addressModified.properties.idAdresseLocalisee);
-    return this.http.put(url, {geometriePoint: {
-      type: addressModified.type,
-      properties: addressModified.properties,
-      geometry: addressModified.geometry}});
+    return this.http.put(url, {
+      geometriePoint: {
+        type: addressModified.type,
+        properties: addressModified.properties,
+        geometry: addressModified.geometry
+      }
+    });
   }
 }
