@@ -1,0 +1,33 @@
+
+
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon [color]="'accent'">help</mat-icon>
+    </div>
+    <mat-card-title>{{'client.schemaElement.reinclude.message' | translate}}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <igo-entity-table
+      class="table-compact"
+      [store]="exclusionStore"
+      [template]="tableTemplate">
+    </igo-entity-table>
+
+    <div class="igo-form-buttons">
+      <button
+        mat-button
+        type="button"
+        (click)="onClose()">
+        {{ 'close' | translate }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSubmit()">
+        {{ 'apply' | translate }}
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -86,6 +86,7 @@ export class ClientSchemaElementUpdateFormComponent implements OnInit, OnUpdateI
   ) {}
 
   ngOnInit() {
+    console.log(this.element);
     this.clientSchemaElementFormService
       .buildUpdateForm(this.map, [this.element.geometry.type])
       .subscribe((form: Form) => this.setForm(form));

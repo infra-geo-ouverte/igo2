@@ -96,7 +96,7 @@ export function createSchemaElementLayer(): VectorLayer {
   const schemaElementDataSource = new FeatureDataSource();
   return new VectorLayer({
     title: 'Éléments géométriques du schéma',
-    zIndex: 103,
+    zIndex: 102,
     source: schemaElementDataSource,
     removable: false,
     browsable: false

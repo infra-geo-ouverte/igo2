@@ -8,6 +8,9 @@ import {
   FadqLibClientSchemaElementUpdateFormModule
 } from './client-schema-element-update-form/client-schema-element-update-form.module';
 import {
+  FadqLibClientSchemaElementReincludeFormModule
+} from './client-schema-element-reinclude-form/client-schema-element-reinclude-form.module';
+import {
   FadqLibClientSchemaElementSliceFormModule
 } from './client-schema-element-slice-form/client-schema-element-slice-form.module';
 import {
@@ -29,6 +32,7 @@ import {
 import {
   provideClientSchemaElementCreateWidget,
   provideClientSchemaElementUpdateWidget,
+  provideClientSchemaElementReincludeWidget,
   provideClientSchemaElementSliceWidget,
   provideClientSchemaElementSaverWidget,
   provideClientSchemaElementUndoWidget,
@@ -44,6 +48,7 @@ import { ClientSchemaElementTableService } from './shared/client-schema-element-
   exports: [
     FadqLibClientSchemaElementCreateFormModule,
     FadqLibClientSchemaElementUpdateFormModule,
+    FadqLibClientSchemaElementReincludeFormModule,
     FadqLibClientSchemaElementSliceFormModule,
     FadqLibClientSchemaElementSaverModule,
     FadqLibClientSchemaElementUndoModule,
@@ -62,6 +67,7 @@ export class FadqLibClientSchemaElementModule {
         provideClientSchemaElementService(),
         provideClientSchemaElementCreateWidget(),
         provideClientSchemaElementUpdateWidget(),
+        provideClientSchemaElementReincludeWidget(),
         provideClientSchemaElementSliceWidget(),
         provideClientSchemaElementSaverWidget(),
         provideClientSchemaElementUndoWidget(),

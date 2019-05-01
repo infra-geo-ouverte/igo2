@@ -3,11 +3,7 @@ import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
 import { EntityRecord, EntityStore, EntityTransaction } from '@igo2/common';
-import {
-  FeatureStore,
-  FeatureStoreLoadingStrategy,
-  FeatureStoreSelectionStrategy
-} from '@igo2/geo';
+import { FeatureStore } from '@igo2/geo';
 import { EditionState, MapState } from '@igo2/integration';
 
 import {
@@ -17,8 +13,7 @@ import {
   ClientParcel,
   ClientParcelYear,
   ClientSchema,
-  ClientSchemaElement,
-  createClientDefaultSelectionStyle
+  ClientSchemaElement
 } from 'src/lib/client';
 
 import { ClientParcelState} from './client-parcel.state';
@@ -120,8 +115,6 @@ export class ClientState implements OnDestroy {
         const schema = record ? record.entity : undefined;
         this.onSelectSchema(schema);
       });
-
-    this.prepareClientLayers();
   }
 
   ngOnDestroy() {
@@ -144,11 +137,9 @@ export class ClientState implements OnDestroy {
     this.clearClient();
 
     if (client === undefined) {
-      this.removeClientLayers();
       return;
     }
 
-    this.addClientLayers();
     this.parcelState.setClient(client);
     this.schemaState.setClient(client);
 
@@ -237,58 +228,6 @@ export class ClientState implements OnDestroy {
     this.elementState.setSchema(undefined);
     this.editionState.unregister(this.elementState.editor);
     this.schema$.next(undefined);
-  }
-
-  /**
-   * Prepare the parcel and schema elements layers. That means,
-   * initializing and activating the loading and selection strategies.
-   */
-  private prepareClientLayers() {
-    const map = this.mapState.map;
-
-    const parcelLoadingStrategy = new FeatureStoreLoadingStrategy({});
-    this.parcelStore.addStrategy(parcelLoadingStrategy);
-
-    const schemaElementLoadingStrategy = new FeatureStoreLoadingStrategy({});
-    this.schemaElementStore.addStrategy(schemaElementLoadingStrategy);
-    schemaElementLoadingStrategy.activate();
-
-    const sharedSelectionStrategy = new FeatureStoreSelectionStrategy({
-      map: map,
-      style: createClientDefaultSelectionStyle()
-    });
-    this.parcelStore.addStrategy(sharedSelectionStrategy);
-    this.schemaElementStore.addStrategy(sharedSelectionStrategy);
-
-    parcelLoadingStrategy.activate();
-    schemaElementLoadingStrategy.activate();
-    sharedSelectionStrategy.activate();
-  }
-
-  /**
-   * Add the parcel and schema elements layers to the map.
-   */
-  private addClientLayers() {
-    const map = this.mapState.map;
-    if (this.parcelStore.layer.map === undefined) {
-      map.addLayer(this.parcelStore.layer, false);
-    }
-    if (this.schemaElementStore.layer.map === undefined) {
-      map.addLayer(this.schemaElementStore.layer, false);
-    }
-  }
-
-  /**
-   * Remove the parcel and schema elements layers from the map.
-   */
-  private removeClientLayers() {
-    const map = this.mapState.map;
-    if (this.parcelStore.layer.map === map) {
-      map.removeLayer(this.parcelStore.layer);
-    }
-    if (this.schemaElementStore.layer.map === map) {
-      map.removeLayer(this.schemaElementStore.layer);
-    }
   }
 
 }

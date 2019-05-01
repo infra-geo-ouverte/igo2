@@ -11,6 +11,9 @@ import {
   ClientSchemaElementUpdateFormComponent
 } from '../client-schema-element-update-form/client-schema-element-update-form.component';
 import {
+  ClientSchemaElementReincludeFormComponent
+} from '../client-schema-element-reinclude-form/client-schema-element-reinclude-form.component';
+import {
   ClientSchemaElementSliceFormComponent
 } from '../client-schema-element-slice-form/client-schema-element-slice-form.component';
 import {
@@ -25,6 +28,7 @@ import {
 
 export const ClientSchemaElementCreateWidget = new InjectionToken<Widget>('ClientSchemaElementCreateWidget');
 export const ClientSchemaElementUpdateWidget = new InjectionToken<Widget>('ClientSchemaElementUpdateWidget');
+export const ClientSchemaElementReincludeWidget = new InjectionToken<Widget>('ClientSchemaElementReincludeWidget');
 export const ClientSchemaElementSliceWidget = new InjectionToken<Widget>('ClientSchemaElementSliceWidget');
 export const ClientSchemaElementSaverWidget = new InjectionToken<Widget>('ClientSchemaElementSaverWidget');
 export const ClientSchemaElementUndoWidget = new InjectionToken<Widget>('ClientSchemaElementUndoWidget');
@@ -36,7 +40,7 @@ export function clientSchemaElementCreateWidgetFactory(widgetService: WidgetServ
 
 export function provideClientSchemaElementCreateWidget() {
   return {
-    provide:  ClientSchemaElementCreateWidget,
+    provide: ClientSchemaElementCreateWidget,
     useFactory: clientSchemaElementCreateWidgetFactory,
     deps: [WidgetService]
   };
@@ -48,8 +52,20 @@ export function clientSchemaElementUpdateWidgetFactory(widgetService: WidgetServ
 
 export function provideClientSchemaElementUpdateWidget() {
   return {
-    provide:  ClientSchemaElementUpdateWidget,
+    provide: ClientSchemaElementUpdateWidget,
     useFactory: clientSchemaElementUpdateWidgetFactory,
+    deps: [WidgetService]
+  };
+}
+
+export function clientSchemaElementReincludeWidgetFactory(widgetService: WidgetService) {
+  return widgetService.create(ClientSchemaElementReincludeFormComponent);
+}
+
+export function provideClientSchemaElementReincludeWidget() {
+  return {
+    provide: ClientSchemaElementReincludeWidget,
+    useFactory: clientSchemaElementReincludeWidgetFactory,
     deps: [WidgetService]
   };
 }
@@ -60,7 +76,7 @@ export function clientSchemaElementSliceWidgetFactory(widgetService: WidgetServi
 
 export function provideClientSchemaElementSliceWidget() {
   return {
-    provide:  ClientSchemaElementSliceWidget,
+    provide: ClientSchemaElementSliceWidget,
     useFactory: clientSchemaElementSliceWidgetFactory,
     deps: [WidgetService]
   };
@@ -72,7 +88,7 @@ export function clientSchemaElementSaverWidgetFactory(widgetService: WidgetServi
 
 export function provideClientSchemaElementSaverWidget() {
   return {
-    provide:  ClientSchemaElementSaverWidget,
+    provide: ClientSchemaElementSaverWidget,
     useFactory: clientSchemaElementSaverWidgetFactory,
     deps: [WidgetService]
   };
@@ -84,7 +100,7 @@ export function clientSchemaElementUndoWidgetFactory(widgetService: WidgetServic
 
 export function provideClientSchemaElementUndoWidget() {
   return {
-    provide:  ClientSchemaElementUndoWidget,
+    provide: ClientSchemaElementUndoWidget,
     useFactory: clientSchemaElementUndoWidgetFactory,
     deps: [WidgetService]
   };
@@ -96,7 +112,7 @@ export function clientSchemaElementImportDataWidgetFactory(widgetService: Widget
 
 export function provideClientSchemaElementImportDataWidget() {
   return {
-    provide:  ClientSchemaElementImportDataWidget,
+    provide: ClientSchemaElementImportDataWidget,
     useFactory: clientSchemaElementImportDataWidgetFactory,
     deps: [WidgetService]
   };

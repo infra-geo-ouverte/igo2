@@ -15,6 +15,8 @@ export class ClientParcelTableService {
   buildTable(): EntityTableTemplate {
     return {
       selection: true,
+      selectionCheckbox: true,
+      selectMany: true,
       sort: true,
       headerClassFunc: (() => {
         return {'text-centered': true};

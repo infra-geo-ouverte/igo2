@@ -11,10 +11,8 @@ import { BehaviorSubject, Subject, zip } from 'rxjs';
 
 import { EntityTransaction, WidgetComponent } from '@igo2/common';
 import { LanguageService } from '@igo2/core';
-import { Feature, FeatureStore } from '@igo2/geo';
+import { Feature, FeatureStore, ImportService, ImportError } from '@igo2/geo';
 import { uuid } from '@igo2/utils';
-
-import { FeatureImportService } from 'src/lib/feature/shared/feature-import.service';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
 import {
@@ -23,7 +21,6 @@ import {
 } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { generateOperationTitle } from '../shared/client-schema-element.utils';
-import { FeatureImportError} from '../../../feature';
 
 @Component({
   selector: 'fadq-client-schema-element-import-data',
@@ -80,7 +77,7 @@ export class ClientSchemaElementImportDataComponent implements OnInit, WidgetCom
 
   constructor(
     private clientSchemaElementService: ClientSchemaElementService,
-    private featureImportService: FeatureImportService,
+    private importService: ImportService,
     private languageService: LanguageService
   ) {}
 
@@ -101,12 +98,12 @@ export class ClientSchemaElementImportDataComponent implements OnInit, WidgetCom
   onImport() {
     const projection = this.projection || 'EPSG:4326';
     zip(
-      this.featureImportService.import(this.file$.value, projection),
+      this.importService.import(this.file$.value, projection),
       this.clientSchemaElementService.getSchemaElementTypes(this.schema.type),
       this.clientSchemaElementService.getSchemaElementGeometryTypes(this.schema.type),
     ) .subscribe(
       (bunch: [Feature[], ClientSchemaElementTypes, string[]]) => this.onImportSuccess(...bunch),
-      (error: FeatureImportError) => this.onImportError(error)
+      (error: ImportError) => this.onImportError(error)
     );
   }
 
@@ -161,7 +158,7 @@ export class ClientSchemaElementImportDataComponent implements OnInit, WidgetCom
     this.complete.emit();
   }
 
-  private onImportError(error: FeatureImportError) {
+  private onImportError(error: ImportError) {
     console.warn(error.message);
     const messageKey = 'client.schemaElement.importData.error.invalidFile';
     const message = this.languageService.translate.instant(messageKey);

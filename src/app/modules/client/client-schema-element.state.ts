@@ -11,7 +11,16 @@ import {
   getEntityRevision,
   Widget
 } from '@igo2/common';
-import { FeatureStore, IgoMap } from '@igo2/geo';
+import {
+  FeatureStore,
+  FeatureStoreLoadingStrategy,
+  FeatureStoreSelectionStrategy,
+  FeatureDataSource,
+  IgoMap,
+  VectorLayer,
+  entitiesToRowData,
+  exportToCSV
+} from '@igo2/geo';
 import { MapState } from '@igo2/integration';
 
 import {
@@ -21,6 +30,7 @@ import {
   ClientSchemaElementTableService,
   ClientSchemaElementCreateWidget,
   ClientSchemaElementUpdateWidget,
+  ClientSchemaElementReincludeWidget,
   ClientSchemaElementSliceWidget,
   ClientSchemaElementSaverWidget,
   ClientSchemaElementUndoWidget,
@@ -28,10 +38,9 @@ import {
   ClientSchemaElementService,
   createSchemaElementLayer,
   createSchemaElementLayerStyle,
+  createClientDefaultSelectionStyle,
   generateOperationTitle
 } from 'src/lib/client';
-import { entitiesToRowData, exportToCSV } from 'src/lib/utils/export';
-
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +69,7 @@ export class ClientSchemaElementState {
     private clientSchemaElementService: ClientSchemaElementService,
     @Inject(ClientSchemaElementCreateWidget) private clientSchemaElementCreateWidget: Widget,
     @Inject(ClientSchemaElementUpdateWidget) private clientSchemaElementUpdateWidget: Widget,
+    @Inject(ClientSchemaElementReincludeWidget) private clientSchemaElementReincludeWidget: Widget,
     @Inject(ClientSchemaElementSliceWidget) private clientSchemaElementSliceWidget: Widget,
     @Inject(ClientSchemaElementSaverWidget) private clientSchemaElementSaverWidget: Widget,
     @Inject(ClientSchemaElementUndoWidget) private clientSchemaElementUndoWidget: Widget,
@@ -79,11 +89,29 @@ export class ClientSchemaElementState {
     this.schema = schema;
 
     if (schema !== undefined) {
+      this.addLayer();
       this.loadSchemaElements(schema);
     } else {
+      this.removeLayer();
       this.transaction.clear();
       this.elementStore.clear();
       this.editor.deactivate();
+    }
+  }
+
+  private addLayer() {
+    if (this.elementStore.layer.map === undefined) {
+      this.elementStore.activateStrategyOfType(FeatureStoreLoadingStrategy);
+      this.elementStore.activateStrategyOfType(FeatureStoreSelectionStrategy);
+      this.map.addLayer(this.elementStore.layer);
+    }
+  }
+
+  private removeLayer() {
+    if (this.elementStore.layer.map !== undefined) {
+      this.elementStore.deactivateStrategyOfType(FeatureStoreLoadingStrategy);
+      this.elementStore.deactivateStrategyOfType(FeatureStoreSelectionStrategy);
+      this.map.removeLayer(this.elementStore.layer);
     }
   }
 
@@ -98,6 +126,29 @@ export class ClientSchemaElementState {
     const layer = createSchemaElementLayer();
     store.bindLayer(layer);
 
+    const viewScale: [number, number, number, number] = [0, 0, 0.8, 0.6];
+    const loadingStrategy = new FeatureStoreLoadingStrategy({
+      viewScale
+    });
+    store.addStrategy(loadingStrategy);
+
+    const selectionStrategy = new FeatureStoreSelectionStrategy({
+      map: this.mapState.map,
+      layer: new VectorLayer({
+        title: 'Éléments géométriques sélectionnés',
+        zIndex: 104,
+        source: new FeatureDataSource(),
+        style: createClientDefaultSelectionStyle(),
+        showInLayerList: true,
+        removable: false,
+        browsable: false
+      }),
+      many: true,
+      viewScale,
+      areaRatio: 0.004
+    });
+    store.addStrategy(selectionStrategy);
+
     return store;
   }
 
@@ -111,10 +162,12 @@ export class ClientSchemaElementState {
       return this.transaction !== undefined && this.transaction.inCommitPhase === false;
     };
     const elementCanBeFilled = () => {
-      return this.element.geometry.type === 'Polygon' && this.element.geometry.coordinates.length > 1;
+      const geometry = this.element === undefined ? undefined : this.element.geometry;
+      return geometry !== undefined && geometry.type === 'Polygon' && geometry.coordinates.length > 1;
     };
     const elementIsAPolygon = () => {
-      return this.element.geometry.type === 'Polygon';
+      const geometry = this.element === undefined ? undefined : this.element.geometry;
+      return geometry !== undefined && geometry.type === 'Polygon';
     };
 
     return [
@@ -159,27 +212,16 @@ export class ClientSchemaElementState {
         conditions: [schemaIsDefined, elementIsDefined, transactionIsNotInCommitPhase]
       },
       {
-        id: 'fill',
+        id: 'reinclude',
         icon: 'select_all',
-        title: 'client.schemaElement.fill',
-        tooltip: 'client.schemaElement.fill.tooltip',
-        handler: () => {
-          const element = this.element;
-          const newElementMeta = Object.assign({}, element.meta, {
-            revision: getEntityRevision(element) + 1
-          });
-          const newElement = Object.assign({}, element, {
-            meta: newElementMeta,
-            geometry: {
-              type: 'Polygon',
-              coordinates: [element.geometry.coordinates[0]]
-            }
-          });
-
-          this.transaction.update(element, newElement, this.elementStore, {
-            title: generateOperationTitle(element)
-          });
-        },
+        title: 'client.schemaElement.reinclude',
+        tooltip: 'client.schemaElement.reinclude.tooltip',
+        handler: () => this.editor.activateWidget(this.clientSchemaElementReincludeWidget, {
+          map: this.map,
+          element: this.element,
+          transaction: this.transaction,
+          store: this.elementStore
+        }),
         conditions: [
           schemaIsDefined,
           elementIsDefined,
