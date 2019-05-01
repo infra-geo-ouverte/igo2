@@ -56,13 +56,24 @@
   "tools": {
     "map": "Carte",
     "help": "Aide",
-    "addressEditor": "Édition d'adresses",
+    "addressEditor": "Outil d'édition d'adresse",
     "client": "Client",
     "measurer": "Mesurage",
     "navigation": "Zoom sur une région",
     "cadastre": "Cadastre originaire"
   },
 
+  "addressEditor":{
+    "buildingNumber.placeholder": "Numéro d'immeuble",
+    "suffix.placeholder": "Suffixe",
+    "edit": "Éditer",
+    "save": "Enregistrer",
+    "save.title": "Confirmation",
+    "save.confirm": "Cet objet sera enregistré à votre nom. Êtes-vous certain de vouloir sauvegarder cette modification?",
+    "zoom.title": "Message d'interrogation",
+    "zoom.confirm": "L'échelle de la carte doit se trouver entre 1 et 2500. Désirez-vous zoomer à cette échelle?",
+    "cancel": "Annuler"
+  },
   "client": {
     "error.notfound": "No de client non valide",
     "error.noparcel": "Aucune parcelle agricole n’est liée au client",

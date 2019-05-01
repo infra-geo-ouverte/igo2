@@ -1,15 +1,14 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { NgModule } from '@angular/core';
+import { FadqLibAddressModule } from 'src/lib/address/address.module';
 import { AddressEditorToolComponent } from './address-editor-tool.component';
 
 /**
  * @ignore
  */
 @NgModule({
-  imports: [],
-  declarations: [AddressEditorToolComponent],
-  exports: [AddressEditorToolComponent],
-  entryComponents: [AddressEditorToolComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [ FadqLibAddressModule ],
+  declarations: [ AddressEditorToolComponent ],
+  exports: [ AddressEditorToolComponent ],
+  entryComponents: [ AddressEditorToolComponent ]
 })
 export class FadqAddressEditorToolModule {}

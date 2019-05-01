@@ -65,7 +65,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_syst_coll",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -82,7 +82,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_syst_coll",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -99,7 +99,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_syst_coll",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -111,12 +111,13 @@
       }
     },
     {
+      "id": "mun",
       "title": "Municipalités",
       "visible": false,
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_syst_coll",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -128,12 +129,13 @@
       }
     },
     {
+      "id": "cadastre_reno",
       "title": "Cadastre rénové",
       "visible": false,
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_fonciere",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_fonciere",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -151,7 +153,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_fonciere",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_fonciere",
         "style": "default",
         "projection": "EPSG:32198",
         "params": {
@@ -167,7 +169,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_syst_coll",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -186,7 +188,7 @@
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_geoservdev_info_syst_coll",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
         "style": "default",
         "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
@@ -349,7 +351,47 @@
       "name": "print"
     },
     {
-      "name": "addressEditor"
+      "name": "addressEditor",
+	  "layerIdCadastre": "cadastre_reno",
+	  "layerIdMun": "mun",
+      "options": {
+        "layerOptions": [{
+          "id": "buildings",
+          "title": "Numéro d'immeubles",
+          "visible": true,
+          "sourceOptions": {
+            "type": "wms",
+            "optionsFromCapabilities": true,
+            "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_adresses_quebec",
+            "style": "default",
+            "matrixSet": "LAMBERT",
+            "projection": "EPSG:32198",
+            "params": {
+              "version": "1.1.1",
+              "layers": "AQ_MSP_ADRESSE_GEO",
+              "srs": "EPSG:32198"
+            }
+          }
+        },
+        {
+          "id": "buildingsCorrected",
+          "title": "Numéro d'immeubles corrigés",
+          "visible": true,
+          "sourceOptions": {
+            "type": "wms",
+            "optionsFromCapabilities": true,
+            "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_adresses_fadq",
+            "style": "default",
+            "matrixSet": "LAMBERT",
+            "projection": "EPSG:32198",
+            "params": {
+              "version": "1.1.1",
+              "layers": "LOCTP_MODI_ADR_AQ",
+              "srs": "EPSG:32198"
+            }
+          }
+        }]
+      }
     },
     {
       "name": "cadastre",

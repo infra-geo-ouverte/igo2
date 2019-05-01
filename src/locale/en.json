@@ -51,13 +51,23 @@
   "tools": {
     "map": "Map",
     "help": "Help",
-    "addressEditor": "Edit Addresses",
+    "addressEditor": "Address Edit Tool",
     "client": "Client",
     "measurer": "Measurer",
     "navigation": "Zoom on a region",
     "cadastre": "Cadastre originaire"
   },
-
+  "addressEditor":{
+    "buildingNumber.placeholder": "Building number",
+    "suffix.placeholder": "Suffix",
+    "edit": "Edit",
+    "save": "Save",
+    "save.title": "Confirmation",
+    "save.confirm": "This object will be saved in your name. Are you sure you want to save this change?",
+    "zoom.title": "Interrogative message",
+    "zoom.confirm": "The scale of the map should be between 1 and 2500. Do you want to zoom in on this scale?",
+    "cancel": "Cancel"
+  },
   "client": {
     "error.notfound": "Client number is invalid",
     "error.noparcel": "No parcel found for this client",
