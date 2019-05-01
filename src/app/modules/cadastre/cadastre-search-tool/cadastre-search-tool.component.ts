@@ -5,7 +5,7 @@ import {
   VectorLayer,
   featureToOl,
   Feature,
-  moveToFeatures,
+  moveToOlFeatures,
   Layer,
   ImageLayer,
   ImageLayerOptions,
@@ -448,7 +448,7 @@ export class CadastreSearchToolComponent implements OnInit {
     }
 
     if (features !== undefined) {
-      moveToFeatures(this.mapState.map, features);
+      moveToOlFeatures(this.mapState.map, features);
     }
   }
 
