@@ -23,7 +23,8 @@ import {
   FeatureStore,
   FeatureDataSource,
   FeatureStoreSelectionStrategy,
-  FeatureStoreLoadingStrategy
+  FeatureStoreLoadingStrategy,
+  FeatureMotion
 } from '@igo2/geo';
 
 import { generateOperationTitle, computeSchemaElementArea } from '../shared/client-schema-element.utils';
@@ -109,12 +110,15 @@ export class ClientSchemaElementReincludeFormComponent implements OnInit, OnDest
     });
     exclusionStore.bindLayer(layer);
 
-    const loadingStrategy = new FeatureStoreLoadingStrategy({});
+    const loadingStrategy = new FeatureStoreLoadingStrategy({
+      motion: FeatureMotion.None
+    });
     exclusionStore.addStrategy(loadingStrategy, true);
 
     const selectionStrategy = new FeatureStoreSelectionStrategy({
       map: this.map,
-      many: true
+      many: true,
+      motion: FeatureMotion.None
     });
     exclusionStore.addStrategy(selectionStrategy, true);
 
