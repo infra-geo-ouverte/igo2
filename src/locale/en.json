@@ -24,7 +24,7 @@
     "cadastre.title": "Original cadastre",
     "cadastre.placeholder": "Search for a original cadastre",
     "cadastre-reno.title": "Renovated cadastre",
-    "cadastre-reno.placeholder": "Search for a cadastre"
+    "cadastre-reno.placeholder": "Search for a renovated cadastre"
   },
 
   "help": {
@@ -139,8 +139,9 @@
       "update.apply": "Modifier",
       "delete": "Supprimer",
       "delete.tooltip": "Supprimer un élément",
-      "fill": "Réinclure une surface exclue",
-      "fill.tooltip": "Réinclure une surface exclue",
+      "reinclude": "Réinclure une surface exclue",
+      "reinclude.tooltip": "Réinclure une surface exclue",
+      "reinclude.message": "Sélectionnez les surfaces à réinclure",
       "slice": "Couper un élément",
       "slice.tooltip": "Couper un élément",
       "slice.message": "Tracer une ligne pour couper l'élément sélectionné",
