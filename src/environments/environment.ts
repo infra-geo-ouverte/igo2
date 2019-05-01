@@ -26,7 +26,7 @@ export const environment: Environment = {
       }
     },
     importExport: {
-      url: '/ogre'
+      url: 'http://plssisigdev1.fadq.qc:3000'
     }
   })
 };
