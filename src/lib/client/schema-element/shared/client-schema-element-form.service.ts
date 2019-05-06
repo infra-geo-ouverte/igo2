@@ -98,7 +98,7 @@ export class ClientSchemaElementFormService {
       options:  {
         cols: 1,
         validator: Validators.compose([
-          Validators.pattern(/^((1|2)[\d]{3})$/)
+          Validators.pattern(/^([1-9][\d]{3})$/)
         ]),
         errors: {
           pattern: 'client.schema.error.invalidAnnee'

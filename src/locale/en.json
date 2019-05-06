@@ -131,6 +131,7 @@
     "schemaElement": {
       "error.etiquetteMaxLength": "Une étiquette ne doit pas être plus grande que 25 caractères",
       "error.descriptionMaxLength": "Une description ne doit pas être plus grande que 250 caractères",
+      "error.area": "La superficie doit être plus grande que 50m² et plus petite que 999999999m².",
       "create": "Créer",
       "create.tooltip": "Créer un élément",
       "create.apply": "Créer",

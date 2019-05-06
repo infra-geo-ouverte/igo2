@@ -13,6 +13,7 @@ import { IgoLayerModule } from '@igo2/geo';
 import { IgoContextManagerModule } from '@igo2/context';
 
 import { MapToolComponent } from './map-tool.component';
+import { LayerInfoDialogComponent } from './layer-info-dialog.component';
 
 /**
  * @ignore
@@ -28,9 +29,15 @@ import { MapToolComponent } from './map-tool.component';
     IgoLayerModule,
     IgoContextManagerModule
   ],
-  declarations: [MapToolComponent],
+  declarations: [
+    MapToolComponent,
+    LayerInfoDialogComponent
+  ],
   exports: [MapToolComponent],
-  entryComponents: [MapToolComponent],
+  entryComponents: [
+    MapToolComponent,
+    LayerInfoDialogComponent
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FadqMapToolModule {}

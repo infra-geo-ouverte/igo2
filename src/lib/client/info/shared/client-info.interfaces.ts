@@ -1,14 +1,18 @@
 export interface ClientInfoApiConfig {
   get: string;
   link: string;
+  addresses: string;
 }
 
-export interface ClientInfo {
-  numero: string;
-  nom: string;
+export interface ClientInfoAddresses {
   adresseCor: string;
   adresseExp: string;
   adressePro: string;
+}
+
+export interface ClientInfo extends ClientInfoAddresses {
+  numero: string;
+  nom: string;
 }
 
 export interface ClientInfoGetResponse {
@@ -18,20 +22,18 @@ export interface ClientInfoGetResponse {
 export interface ClientInfoGetResponseData {
   numeroClient: string;
   nomClient: string;
-  adresseCorrespondance: string;
-  suiteAdresseCorrespondance?: string;
-  municipaliteAdresseCorrespondance: string;
-  provinceAdresseCorrespondance: ClientInfoGetResponseProvince;
-  paysAdresseCorrespondance: ClientInfoGetResponsePays;
-  codePostalAdresseCorrespondance: string;
 }
 
-export interface ClientInfoGetResponseProvince {
-  province: string;
-  codeProvince: string;
+export interface ClientInfoAddressesResponse {
+  data: ClientInfoAddressData[];
 }
 
-export interface ClientInfoGetResponsePays {
-  pays: string;
-  codePays: string;
+export interface ClientInfoAddressData {
+  typeAdresse: 'COR' | 'EXP' | 'PRO';
+  adresse: string;
+  suiteAdresse?: string;
+  municipaliteAdresse: string;
+  provincePaysAdresse: string;
+  provinceAdresse?: string;
+  codePostalAdresse: string;
 }

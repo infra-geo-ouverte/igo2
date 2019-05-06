@@ -139,7 +139,7 @@ export class ClientSchemaElementState {
         zIndex: 104,
         source: new FeatureDataSource(),
         style: createClientDefaultSelectionStyle(),
-        showInLayerList: true,
+        showInLayerList: false,
         removable: false,
         browsable: false
       }),
@@ -276,6 +276,7 @@ export class ClientSchemaElementState {
         title: 'client.schemaElement.importData',
         tooltip: 'client.schemaElement.importData.tooltip',
         handler: () => this.editor.activateWidget(this.clientSchemaElementImportDataWidget, {
+          map: this.map,
           schema: this.schema,
           element: this.element,
           transaction: this.transaction,

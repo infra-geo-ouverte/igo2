@@ -6,7 +6,8 @@ import { provideClientSearchSource } from './shared/sources/client.providers';
 import { provideCadastreRenoSearchSource } from 'src/lib/cadastre-reno/shared/cadastre-reno.providers';
 import {
   provideFadqIChercheSearchResultFormatter,
-  provideIChercheSearchSource
+  provideIChercheSearchSource,
+  provideIChercheReverseSearchSource
 } from './shared/sources/icherche.providers';
 import { provideQuerySearchSource } from './shared/sources/query.providers';
 
@@ -28,6 +29,7 @@ export class FadqSearchModule {
         provideFadqIChercheSearchResultFormatter(),
         provideClientSearchSource(),
         provideIChercheSearchSource(),
+        provideIChercheReverseSearchSource(),
         provideQuerySearchSource(),
         provideCadastreRenoSearchSource()
       ]

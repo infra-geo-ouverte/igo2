@@ -3,6 +3,7 @@ import OlFeature from 'ol/Feature';
 import OlGeoJSON from 'ol/format/GeoJSON';
 
 import { EntityKey, EntityOperation, EntityOperationType } from '@igo2/common';
+import { LanguageService } from '@igo2/core';
 import {
   measureOlGeometryArea,
   FeatureDataSource,
@@ -25,6 +26,27 @@ export function computeSchemaElementArea(element: ClientSchemaElement): number {
     featureProjection: measureProjection
   });
   return measureOlGeometryArea(olGeometry, measureProjection);
+}
+
+export function validateSchemaElementArea(element: ClientSchemaElement): boolean {
+  const area = element.properties.superficie;
+  if (area === undefined) { return true; }
+  const minArea = 50;
+  const maxArea = 999999999;
+  return area > minArea && area < maxArea;
+}
+
+export function getSchemaElementValidationMessage(
+  element: ClientSchemaElement,
+  languageService: LanguageService
+): string {
+  const areaIsValid = validateSchemaElementArea(element);
+  if (areaIsValid === true) {
+    return undefined;
+  } else {
+    const messageKey = 'client.schemaElement.error.area';
+    return languageService.translate.instant(messageKey);
+  }
 }
 
 export class ClientSchemaElementTransactionSerializer {

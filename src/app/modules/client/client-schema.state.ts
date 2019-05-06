@@ -157,7 +157,7 @@ export class ClientSchemaState {
         title: 'client.schema.createMap',
         tooltip: 'client.schema.createMap.tooltip',
         handler: () => {},
-        conditions: [schemaIsDefined, schemaIsOfTypeLSE]
+        conditions: [schemaIsDefined, schemaIsOfTypeLSE, () => false]
       }
     ];
   }

@@ -147,7 +147,7 @@ export class ClientParcelState {
         zIndex: 102,
         source: new FeatureDataSource(),
         style: createClientDefaultSelectionStyle(),
-        showInLayerList: true,
+        showInLayerList: false,
         removable: false,
         browsable: false
       }),

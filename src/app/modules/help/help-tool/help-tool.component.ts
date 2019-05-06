@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component,Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { ToolComponent } from '@igo2/common';
 import { ConfigService } from '@igo2/core';
@@ -19,16 +19,20 @@ import { ConfigService } from '@igo2/core';
 })
 export class HelpToolComponent {
 
+  @Input() guide: string;
+
+  @Input() news: string;
+
   get logoLink(): string {
     return this.configService.getConfig('help.logoLink');
   }
 
   get guideLink(): string {
-    return this.configService.getConfig('help.guideLink');
+    return this.guide || this.configService.getConfig('help.guideLink');
   }
 
   get newsLink(): string {
-    return this.configService.getConfig('help.newsLink');
+    return this.news || this.configService.getConfig('help.newsLink');
   }
 
   constructor(private configService: ConfigService) {}

@@ -27,7 +27,7 @@ import { ClientSchemaFileService } from '../shared/client-schema-file.service';
 })
 export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, WidgetComponent {
 
-  static maxSize = 1024 * 1024 * 1024 * 10;  // 10mo
+  static maxSize = 1024 * 1024 * 10;  // 10mo
 
   /**
    * Import error, if any
@@ -90,6 +90,8 @@ export class ClientSchemaFileManagerComponent implements OnInit, OnDestroy, Widg
   onFileInputChange(event: any) {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
+      console.log(file.size);
+      console.log(ClientSchemaFileManagerComponent.maxSize);
       if (file.size > 0 && file.size < ClientSchemaFileManagerComponent.maxSize) {
         this.createSchemaFile(file);
         this.errorMessage$.next(undefined);

@@ -76,7 +76,7 @@ export class ClientParcelTableService {
         {
           name: 'properties.noClientDetenteur',
           title: 'Détenteur',
-          renderer: EntityTableColumnRenderer.HTML,
+          renderer: EntityTableColumnRenderer.UnsanitizedHTML,
           valueAccessor: (parcel: ClientParcel) => {
             const value = parcel.properties.noClientDetenteur;
             if (!value) { return ''; }
@@ -87,7 +87,7 @@ export class ClientParcelTableService {
         {
           name: 'properties.noClientExploitant',
           title: 'Exploitant',
-          renderer: EntityTableColumnRenderer.HTML,
+          renderer: EntityTableColumnRenderer.UnsanitizedHTML,
           valueAccessor: (parcel: ClientParcel) => {
             const value = parcel.properties.noClientExploitant;
             if (!value) { return ''; }
@@ -126,9 +126,7 @@ export class ClientParcelTableService {
 
   private computeClientNumAnchor(clientNum: number): string {
     const link = this.clientInfoService.getClientInfoLink(padClientNum(clientNum));
-    return `<a target="popup" href="${link}">${clientNum}</a>`;
-    // TODO: this gets sanitized so either bypass sanitization or remove it
-    // const onClick = `window.open(${link}, 'Client', 'width=800, height=600'); return false;`;
-    // return `<a target="popup" href="${link}" onClick="${onClick}">${clientNum}</a>`;
+    const onClick = `window.open('${link}', 'Client', 'width=800, height=600'); return false;`;
+    return `<a target="popup" href="${link}" onClick="${onClick}">${clientNum}</a>`;
   }
 }

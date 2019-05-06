@@ -1,6 +1,6 @@
 {
   "uri": "_default",
-  "title": "Default",
+  "title": "Général",
   "map": {
     "view": {
       "projection": "EPSG:32198",
@@ -60,145 +60,112 @@
       }
     },
     {
-      "title": "Zones maïs-grain 2016 à aujourd'hui",
       "visible": false,
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
         "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
-        "style": "default",
-        "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
         "params": {
           "version": "1.3.0",
-          "layers": "LOCVDS_ZONA_COLL_MGR",
-          "srs": "EPSG:32198"
+          "layers": "LOCVDS_ZONA_COLL_MGR"
         }
       }
     },
     {
-      "title": "Zones céréales maïs fourrager oléagineux 2016 à aujourd'hui",
       "visible": false,
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
         "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
-        "style": "default",
-        "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
         "params": {
           "version": "1.3.0",
-          "layers": "LOCVDS_ZONA_COLL",
-          "srs": "EPSG:32198"
+          "layers": "LOCVDS_ZONA_COLL"
         }
       }
     },
     {
-      "title": "Territoires de centre de services",
       "visible": false,
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
         "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
-        "style": "default",
-        "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
         "params": {
           "version": "1.3.0",
-          "layers": "LOCVDS_CENT_SERV",
-          "srs": "EPSG:32198"
-        }
+          "layers": "SMDVSP_STAT_METE_ASSU_AN_PREC"
+        },
+        "queryFormat": "html",
+        "queryHtmlTarget": "innerhtml"
       }
     },
     {
-      "id": "mun",
-      "title": "Municipalités",
       "visible": false,
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
         "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
-        "style": "default",
-        "matrixSet": "LAMBERT",
         "projection": "EPSG:32198",
         "params": {
           "version": "1.3.0",
-          "layers": "SDA_MUNIC_S",
-          "srs": "EPSG:32198"
-        }
+          "layers": "SMDVSP_STAT_METE_ASSU_AN_COUR"
+        },
+        "queryFormat": "html",
+        "queryHtmlTarget": "innerhtml"
       }
     },
     {
-      "id": "cadastre_reno",
-      "title": "Cadastre rénové",
       "visible": false,
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_fonciere",
-        "style": "default",
-        "matrixSet": "LAMBERT",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_compt_cent_serv",
         "projection": "EPSG:32198",
         "params": {
           "version": "1.3.0",
-          "layers": "CADASTRE_RENO_MERN",
-          "srs": "EPSG:32198"
+          "layers": "LOCVDS_CENT_SERV"
+        }
+      }
+    },
+    {
+      "visible": false,
+      "sourceOptions": {
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_limite_admin",
+        "projection": "EPSG:32198",
+        "params": {
+          "version": "1.3.0",
+          "layers": "SDA_MUNIC_S"
         }
       }
     },
     {
       "id": "cadastre",
-      "title": "Compilation cadastrale",
       "visible": false,
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
         "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_fonciere",
-        "style": "default",
         "projection": "EPSG:32198",
         "params": {
           "version": "1.3.0",
-          "layers": "COMPIL_CADAS_IGO2",
-          "srs": "EPSG:32198"
+          "layers": "COMPIL_CADAS_IGO2"
         }
       }
     },
     {
-      "title": "Stations météo foin (année précédente)",
       "visible": false,
       "sourceOptions": {
         "type": "wms",
         "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
-        "style": "default",
-        "matrixSet": "LAMBERT",
+        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_fonciere",
         "projection": "EPSG:32198",
         "params": {
           "version": "1.3.0",
-          "layers": "SMDVSP_STAT_METE_ASSU_AN_PREC",
-          "srs": "EPSG:32198"
-        },
-        "queryFormat": "html",
-        "queryHtmlTarget": "innerhtml"
-      }
-    },
-    {
-      "title": "Stations météo foin (année courante)",
-      "visible": false,
-      "sourceOptions": {
-        "type": "wms",
-        "optionsFromCapabilities": true,
-        "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_info_syst_coll",
-        "style": "default",
-        "matrixSet": "LAMBERT",
-        "projection": "EPSG:32198",
-        "params": {
-          "version": "1.3.0",
-          "layers": "SMDVSP_STAT_METE_ASSU_AN_COUR",
-          "srs": "EPSG:32198"
-        },
-        "queryFormat": "html",
-        "queryHtmlTarget": "innerhtml"
+          "layers": "CADASTRE_RENO_MERN"
+        }
       }
     }
   ],
@@ -211,7 +178,6 @@
     "importExport",
     "measurer",
     "print",
-    "addressEditor",
     "cadastre",
     "help"
   ],
@@ -349,49 +315,6 @@
     },
     {
       "name": "print"
-    },
-    {
-      "name": "addressEditor",
-	  "layerIdCadastre": "cadastre_reno",
-	  "layerIdMun": "mun",
-      "options": {
-        "layerOptions": [{
-          "id": "buildings",
-          "title": "Numéro d'immeubles",
-          "visible": true,
-          "sourceOptions": {
-            "type": "wms",
-            "optionsFromCapabilities": true,
-            "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_adresses_quebec",
-            "style": "default",
-            "matrixSet": "LAMBERT",
-            "projection": "EPSG:32198",
-            "params": {
-              "version": "1.1.1",
-              "layers": "AQ_MSP_ADRESSE_GEO",
-              "srs": "EPSG:32198"
-            }
-          }
-        },
-        {
-          "id": "buildingsCorrected",
-          "title": "Numéro d'immeubles corrigés",
-          "visible": true,
-          "sourceOptions": {
-            "type": "wms",
-            "optionsFromCapabilities": true,
-            "url": "/app/interne/servicescartographiques/w_m_s/service/fadq_adresses_fadq",
-            "style": "default",
-            "matrixSet": "LAMBERT",
-            "projection": "EPSG:32198",
-            "params": {
-              "version": "1.1.1",
-              "layers": "LOCTP_MODI_ADR_AQ",
-              "srs": "EPSG:32198"
-            }
-          }
-        }]
-      }
     },
     {
       "name": "cadastre",

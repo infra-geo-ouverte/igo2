@@ -1,5 +1,3 @@
-
-
 <mat-card>
   <mat-card-header>
     <div mat-card-avatar>
@@ -8,9 +6,16 @@
     <mat-card-title>{{'client.schemaElement.reinclude.message' | translate}}</mat-card-title>
   </mat-card-header>
 
-  <mat-card-content>
+  <mat-card-content [ngClass]="{'with-error-message': (errorMessage$ | async) !== undefined}">
+    <p
+      *ngIf="errorMessage$ | async as errorMessage"
+      class="fadq-error-text">
+      {{errorMessage}}
+    </p>
+
     <igo-entity-table
       class="table-compact"
+      [ngClass]="{'with-error-message': (errorMessage$ | async) !== undefined}"
       [store]="exclusionStore"
       [template]="tableTemplate">
     </igo-entity-table>

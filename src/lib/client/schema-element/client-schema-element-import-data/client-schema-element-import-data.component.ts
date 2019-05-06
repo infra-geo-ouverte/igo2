@@ -11,7 +11,15 @@ import { BehaviorSubject, Subject, zip } from 'rxjs';
 
 import { EntityTransaction, WidgetComponent } from '@igo2/common';
 import { LanguageService } from '@igo2/core';
-import { Feature, FeatureStore, ImportService, ImportError } from '@igo2/geo';
+import {
+  IgoMap,
+  Feature,
+  FeatureStore,
+  ImportService,
+  ImportError,
+  featureToOl,
+  moveToOlFeatures
+} from '@igo2/geo';
 import { uuid } from '@igo2/utils';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
@@ -20,7 +28,11 @@ import {
   ClientSchemaElementTypes
 } from '../shared/client-schema-element.interfaces';
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';
-import { generateOperationTitle } from '../shared/client-schema-element.utils';
+import {
+  generateOperationTitle,
+  computeSchemaElementArea,
+  getSchemaElementValidationMessage
+} from '../shared/client-schema-element.utils';
 
 @Component({
   selector: 'fadq-client-schema-element-import-data',
@@ -49,6 +61,11 @@ export class ClientSchemaElementImportDataComponent implements OnInit, WidgetCom
    * @internal
    */
   placeholder$: BehaviorSubject<string> = new BehaviorSubject(undefined);
+
+  /**
+   * Map to draw elements on
+   */
+  @Input() map: IgoMap;
 
   /**
    * Schema element store
@@ -124,24 +141,32 @@ export class ClientSchemaElementImportDataComponent implements OnInit, WidgetCom
         return acc;
       }
 
-      acc.push({
+      const element = {
         type: feature.type,
         projection: feature.projection,
         properties: {
           idElementGeometrique: undefined,
           typeElement: elementTypes[geometryType][0].value,
+          descriptionTypeElement: elementTypes[geometryType][0].title,
           etiquette: undefined,
           description: undefined,
-          descriptionTypeElement: undefined,
           anneeImage: undefined,
           timbreMaj: undefined,
-          usagerMaj: undefined
+          usagerMaj: undefined,
+          superficie: undefined
         },
         geometry: feature.geometry,
         meta: {
           id: uuid()
         },
-      });
+      };
+
+      element.properties.superficie = computeSchemaElementArea(element);
+      const errorMessage = getSchemaElementValidationMessage(element, this.languageService);
+      if (errorMessage !== undefined) {
+        acc.push(element);
+      }
+
       return acc;
     }, []);
 
@@ -155,11 +180,14 @@ export class ClientSchemaElementImportDataComponent implements OnInit, WidgetCom
         title: generateOperationTitle(element)
       });
     });
+
+    const olFeatures = features.map((feature: Feature) => featureToOl(feature, this.map.projection));
+    moveToOlFeatures(this.map, olFeatures);
+
     this.complete.emit();
   }
 
   private onImportError(error: ImportError) {
-    console.warn(error.message);
     const messageKey = 'client.schemaElement.importData.error.invalidFile';
     const message = this.languageService.translate.instant(messageKey);
     this.errorMessage$.next(message);

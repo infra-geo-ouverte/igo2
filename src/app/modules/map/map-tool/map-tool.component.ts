@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { ToolComponent } from '@igo2/common';
 import { ConfigService } from '@igo2/core';
-import { Layer, ImageLayer, WMSDataSource } from '@igo2/geo';
+import { Layer, ImageLayer,  WMSDataSource } from '@igo2/geo';
 
-import { substituteProperties } from 'src/lib/utils';
+import { LayerInfoDialogComponent } from './layer-info-dialog.component';
 
 /**
  * Tool to browse a map's layers or to choose a different map
@@ -22,30 +23,20 @@ import { substituteProperties } from 'src/lib/utils';
 })
 export class MapToolComponent {
 
-  @Input() baseUrl: string;
-
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private dialog: MatDialog
+  ) {}
 
   showInfoButton(layer: Layer): boolean {
     return layer.dataSource instanceof WMSDataSource;
   }
 
   onInfoButtonClick(layer: Layer) {
-    window.open(this.computeWMSLayerInfoLink(layer as ImageLayer), layer.title, 'width=800, height=600');
-    return false;
-  }
-
-  /**
-   * Compute the link to the layer's info
-   * @internal
-   * @param layer Layer
-   * @returns External link to the layer's info
-   */
-  private computeWMSLayerInfoLink(layer: ImageLayer): string {
-    const baseUrl = this.configService.getConfig('layer.infoLink');
-    return  substituteProperties(baseUrl, {
-      layerName: layer.dataSource.options.params.layers,
-      layerTitle: layer.title
-    });
+    const data = {
+      layer: layer as ImageLayer,
+      baseUrl: this.configService.getConfig('layer.infoLink')
+    };
+    this.dialog.open(LayerInfoDialogComponent, {data});
   }
 }

@@ -48,6 +48,9 @@ export interface IgoEnvironment {
     list: string;
     save: string;
   };
+  importExport: {
+    url: string;
+  };
 }
 
 /* tslint:disable */
@@ -65,6 +68,17 @@ export const igoEnvironment: IgoEnvironment = {
         type: 'adresse,code_postal,route,municipalite,mrc,region_administrative',
         limit: '5',
         geometrie: 'geom'
+      }
+    },
+    icherchereverse: {
+      enabled: true,
+      available: true,
+      searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/territoires/locate',
+      params: {
+        type: 'adresses,municipalites,mrc,regadmin',
+        limit: '5',
+        geometry: '1',
+        buffer: '10'
       }
     },
     datasource: {
@@ -94,6 +108,7 @@ export const igoEnvironment: IgoEnvironment = {
     api: {
       info: {
         get: '/igolocalisation/recherche_client/obtenirInformationClient/${clientNum}',
+        addresses: '/igolocalisation/recherche_client/obtenirAdressesClient/${clientNum}',
         link: ''
       },
       parcel: {
@@ -150,5 +165,8 @@ export const igoEnvironment: IgoEnvironment = {
   address : {
     list: '/igodonneesgeospatiales/edition_point_adresse/obtenirAdressesAQ',
     save: '/igodonneesgeospatiales/edition_point_adresse/modifierGeometrieAdresseQuebec/${idAdresseAQ}'
+  },
+  importExport: {
+    url: 'http://plssisigdev1.fadq.qc:3000'
   }
 };

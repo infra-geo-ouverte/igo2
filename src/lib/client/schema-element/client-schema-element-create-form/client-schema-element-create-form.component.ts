@@ -21,6 +21,7 @@ import {
   OnUpdateInputs,
   FormFieldSelectChoice
 } from '@igo2/common';
+import { LanguageService } from '@igo2/core';
 import { Feature, FeatureStore, IgoMap, GeoJSONGeometry } from '@igo2/geo';
 
 import { ClientSchema } from '../../schema/shared/client-schema.interfaces';
@@ -28,7 +29,11 @@ import { ClientSchemaElement, ClientSchemaElementTypes } from '../shared/client-
 import { ClientSchemaElementService } from '../shared/client-schema-element.service';
 import { ClientSchemaElementFormService } from '../shared/client-schema-element-form.service';
 
-import { generateOperationTitle, computeSchemaElementArea } from '../shared/client-schema-element.utils';
+import {
+  generateOperationTitle,
+  computeSchemaElementArea,
+  getSchemaElementValidationMessage
+} from '../shared/client-schema-element.utils';
 
 @Component({
   selector: 'fadq-client-schema-element-create-form',
@@ -43,13 +48,19 @@ export class ClientSchemaElementCreateFormComponent
    * Create form
    * @internal
    */
-  public form$ = new BehaviorSubject<Form>(undefined);
+  form$ = new BehaviorSubject<Form>(undefined);
 
   /**
    * Create form
    * @internal
    */
-  public tabIndex$ = new BehaviorSubject<number>(0);
+  tabIndex$ = new BehaviorSubject<number>(0);
+
+  /**
+   * Slice error, if any
+   * @internal
+   */
+  errorMessage$: BehaviorSubject<string> = new BehaviorSubject(undefined);
 
   /**
    * Subscriptiuon to the value changes event
@@ -89,6 +100,7 @@ export class ClientSchemaElementCreateFormComponent
   constructor(
     private clientSchemaElementService: ClientSchemaElementService,
     private clientSchemaElementFormService: ClientSchemaElementFormService,
+    private languageService: LanguageService,
     private cdRef: ChangeDetectorRef
   ) {}
 
@@ -118,7 +130,11 @@ export class ClientSchemaElementCreateFormComponent
   }
 
   onSubmit(data: Feature) {
-    this.onSubmitSuccess(this.formDataToElement(data));
+    const element = this.formDataToElement(data);
+    this.errorMessage$.next(getSchemaElementValidationMessage(element, this.languageService));
+    if (this.errorMessage$.value === undefined) {
+      this.onSubmitSuccess(element);
+    }
   }
 
   onCancel() {

@@ -34,24 +34,28 @@ mat-card {
 
 mat-card-content {
   height: calc(100% - 42px);
-}
 
-igo-entity-table {
-  max-height: calc(100% - 66px);
-
-  ::ng-deep {
-    td.mat-cell:first-child,
-    th.mat-header-cell:first-child {
-      text-align: center;
-      padding-left:0;
+  igo-entity-table {
+    max-height: calc(100% - 66px);
+  
+    ::ng-deep {
+      td.mat-cell:first-child,
+      th.mat-header-cell:first-child {
+        text-align: center;
+        padding-left:0;
+      }
     }
   }
 }
 
-igo-entity-table.with-error-message {
-  max-height: calc(100% - 66px - 36px);
+mat-card-content.with-error-message {
+  height: calc(100% - 62px);
+
+  igo-entity-table{
+    max-height: calc(100% - 66px - 52px) !important;
+  }
 }
 
-.fadq-error-text {
-  margin: 10px !important;
+p.fadq-error-text {
+  margin: 20px;
 }

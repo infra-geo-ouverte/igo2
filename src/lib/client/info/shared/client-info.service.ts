@@ -1,16 +1,18 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable, zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from 'src/lib/core/api';
 import { substituteProperties } from 'src/lib/utils';
 import {
   ClientInfo,
+  ClientInfoAddresses,
   ClientInfoApiConfig,
   ClientInfoGetResponse,
-  ClientInfoGetResponseData
+  ClientInfoAddressesResponse,
+  ClientInfoAddressData
 } from './client-info.interfaces';
 
 @Injectable()
@@ -24,12 +26,32 @@ export class ClientInfoService {
 
   getClientInfoByNum(clientNum: string): Observable<ClientInfo> {
     const url = this.apiService.buildUrl(this.apiConfig.get, {clientNum});
-
-    return this.http
+    const clientBaseInfo$ = this.http
       .get(url)
       .pipe(
         map((response: ClientInfoGetResponse) => {
           return this.extractClientInfoFromGetResponse(response);
+        })
+      );
+
+    const client$ = zip(
+      clientBaseInfo$,
+      this.getClientAddressesByNum(clientNum)
+    );
+
+    return client$.pipe(
+      map((results: [ClientInfo, ClientInfoAddresses]) => Object.assign(...results))
+    );
+  }
+
+  private getClientAddressesByNum(clientNum: string): Observable<ClientInfoAddresses> {
+    const url = this.apiService.buildUrl(this.apiConfig.addresses, {clientNum});
+
+    return this.http
+      .get(url)
+      .pipe(
+        map((response: ClientInfoAddressesResponse) => {
+          return this.extractClientAddressesFromResponse(response);
         })
       );
   }
@@ -52,29 +74,39 @@ export class ClientInfoService {
     return {
       numero: data.numeroClient,
       nom: data.nomClient,
-      adresseCor: this.extractAddressFromGetResponseData(data, 'Correspondance'),
-      adresseExp: this.extractAddressFromGetResponseData(data, 'Exploitation'),
-      adressePro: this.extractAddressFromGetResponseData(data, 'Production')
+      adresseCor: undefined,
+      adresseExp: undefined,
+      adressePro: undefined
     };
   }
 
-  private extractAddressFromGetResponseData(data: ClientInfoGetResponseData, suffix: string) {
-    const no = data[`adresse${suffix}`];
-    const suite = data[`suiteAdresse${suffix}`];
-    const mun = data[`municipaliteAdresse${suffix}`];
-    const code = data[`codePostalAdresse${suffix}`];
-    const province = data[`provinceAdresse${suffix}`] || {};
-    const provinceName = province['province'];
+  private extractClientAddressesFromResponse(response: ClientInfoAddressesResponse): ClientInfoAddresses {
+    const data = response.data;
+    return {
+      adresseCor: this.extractAddressFromGetResponseData(
+        data.find((address: ClientInfoAddressData) => address.typeAdresse === 'COR')
+      ),
+      adresseExp: this.extractAddressFromGetResponseData(
+        data.find((address: ClientInfoAddressData) => address.typeAdresse === 'EXP')
+      ),
+      adressePro: this.extractAddressFromGetResponseData(
+        data.find((address: ClientInfoAddressData) => address.typeAdresse === 'PRO')
+      )
+    };
+  }
 
-    let address = [no, suite, mun, code]
+  private extractAddressFromGetResponseData(data: ClientInfoAddressData) {
+    if (data === undefined) { return undefined; }
+ 
+    const no = data[`noAdresse`];
+    const suite = data[`suiteAdresse`];
+    const mun = data[`municipaliteAdresse`];
+    const code = data[`codePostalAdresse`];
+    const province = data[`provincePaysAdresse`];
+
+    return [no, suite, mun, code, `(${province})`]
       .filter((item: string) => item !== undefined)
       .join(' ');
-
-    if (provinceName !== undefined) {
-      address = address.concat(` (${provinceName})`);
-    }
-
-    return address;
   }
 
 }
