@@ -24,10 +24,10 @@ import { AddressState } from '../address.state';
 })
 export class AddressEditorToolComponent {
 
-  @Input() layerIdBuildings: string;
-  @Input() layerIdBuildingsCorrected: string;
-  @Input() layerIdCadastre: string;
-  @Input() layerIdMun: string;
+  @Input() layerAliasBuildings: string;
+  @Input() layerAliasBuildingsCorrected: string;
+  @Input() layerAliasCadastre: string;
+  @Input() layerAliasMun: string;
   @Input() layerOptions: ImageLayerOptions[];
   /**
    * Store Address

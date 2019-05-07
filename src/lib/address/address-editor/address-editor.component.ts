@@ -89,23 +89,23 @@ export class AddressEditorComponent implements OnInit, OnDestroy {
   /**
    * The layer Id of Buildings Layer
    */
-  @Input() layerIdBuildings: string;
+  @Input() layerAliasBuildings: string;
 
   /**
    * The layer Id of Buildings corrected Layer
    */
-  @Input() layerIdBuildingsCorrected: string;
+  @Input() layerAliasBuildingsCorrected: string;
 
   /**
    * The layer Id of Cadastres Layer
    */
-  @Input() layerIdCadastre: string;
+  @Input() layerAliasCadastre: string;
 
 
   /**
    * The layer Id of Municipalities Layer
    */
-  @Input() layerIdMun: string;
+  @Input() layerAliasMun: string;
 
 
   /**
@@ -315,22 +315,22 @@ export class AddressEditorComponent implements OnInit, OnDestroy {
    * Shows all layers related to this tool
    */
   private showLayers() {
-    this.showLayer('buildings', this.layerIdBuildings === 'buildings');
-    this.showLayer('buildingsCorrected', this.layerIdBuildingsCorrected === 'buildingsCorrected');
-    this.showLayer('mun', this.layerIdMun === 'mun');
-    this.showLayer('cadastre_reno', this.layerIdCadastre === 'cadastre_reno');
+    this.showLayer('buildings', this.layerAliasBuildings === 'buildings');
+    this.showLayer('buildingsCorrected', this.layerAliasBuildingsCorrected === 'buildingsCorrected');
+    this.showLayer('mun', this.layerAliasMun === 'mun');
+    this.showLayer('cadastre_reno', this.layerAliasCadastre === 'cadastre_reno');
   }
 /**
  * Shows layer
- * @param layerId Layer id
+ * @param layerAlias Layer alias
  * @param layerExist Indicates if the layer already exists on the map
  */
-private showLayer(layerId: string, layerExist: boolean) {
-  const layer: Layer = this.map.getLayerById(layerId);
+private showLayer(layerAlias: string, layerExist: boolean) {
+  const layer: Layer = this.map.getLayerByAlias(layerAlias);
   if (layerExist || layer !== undefined) {
     if (layer !== undefined) { layer.visible = true; }
   } else if (this.layerOptions !== undefined) {
-    const layerOptions = this.getLayerOptions(layerId);
+    const layerOptions = this.getLayerOptions(layerAlias);
     if (layerOptions !== undefined) {
       this.layerService.createAsyncLayer(Object.assign({}, layerOptions, {
         visible: true,
@@ -342,12 +342,12 @@ private showLayer(layerId: string, layerExist: boolean) {
 
   /**
    * Gets layer options from the layerOptions list received from the context
-   * @param layerId Layer id
+   * @param layerAlias Layer alias
    * @returns The layer options
    */
-  private getLayerOptions(layerId: string): LayerOptions {
+  private getLayerOptions(layerAlias: string): LayerOptions {
     for (const layerOptions of this.layerOptions) {
-      if (layerOptions.id === layerId) { return layerOptions; }
+      if (layerOptions.alias === layerAlias) { return layerOptions; }
     }
     return undefined;
   }

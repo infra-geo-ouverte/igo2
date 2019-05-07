@@ -42,7 +42,7 @@ import { CadastreState } from '../cadastre.state';
 })
 export class CadastreSearchToolComponent implements OnInit {
 
-  @Input() layerId: string;
+  @Input() layerAlias: string;
   @Input() layerOptions: ImageLayerOptions;
 
   private imageLayer = undefined;
@@ -408,9 +408,9 @@ export class CadastreSearchToolComponent implements OnInit {
   }
 
   private showCadastreImageLayer(visibility: boolean ) {
-    if (this.layerId && this.layerOptions === undefined) {
+    if (this.layerAlias && this.layerOptions === undefined) {
 
-      const layerCadastreImage: Layer = this.mapState.map.getLayerById(this.layerId);
+      const layerCadastreImage: Layer = this.mapState.map.getLayerByAlias(this.layerAlias);
       if (layerCadastreImage !== undefined) { layerCadastreImage.visible = visibility; }
 
     } else if (this.layerOptions !== undefined) {
