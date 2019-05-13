@@ -1,3 +1,18 @@
+<a name="0.25.13"></a>
+## [0.25.13](https://github.com/infra-geo-ouverte/igo2/compare/0.25.12...0.25.13) (2019-05-13)
+
+
+### Bug Fixes
+
+* **startup-message:** Changed messsge context uri ([#254](https://github.com/infra-geo-ouverte/igo2/issues/254)) ([9c00c76](https://github.com/infra-geo-ouverte/igo2/commit/9c00c76))
+
+
+### Features
+
+* **igo2-lib:** upgrade igo2-lib ([731823e](https://github.com/infra-geo-ouverte/igo2/commit/731823e))
+
+
+
 <a name="0.25.12"></a>
 ## [0.25.12](https://github.com/infra-geo-ouverte/igo2/compare/0.25.11...0.25.12) (2019-03-27)
 
