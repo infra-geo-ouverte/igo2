@@ -9,6 +9,9 @@ import {
 
 import { IgoCoreModule } from '@igo2/core';
 import {
+  IgoActionModule,
+  IgoEditionModule,
+  IgoEntityModule,
   IgoPanelModule,
   IgoBackdropModule,
   IgoFlexibleModule,
@@ -17,13 +20,17 @@ import {
 } from '@igo2/common';
 
 import {
+  IgoGeoEditionModule,
   IgoFeatureModule,
   IgoImportExportModule,
   IgoMapModule,
   IgoQueryModule,
   IgoSearchModule
 } from '@igo2/geo';
-import { IgoContextManagerModule, IgoContextMapButtonModule } from '@igo2/context';
+import {
+  IgoContextManagerModule,
+  IgoContextMapButtonModule
+} from '@igo2/context';
 
 import { IgoIntegrationModule } from '@igo2/integration';
 
@@ -46,6 +53,10 @@ import { PortalComponent } from './portal.component';
     IgoMapModule,
     IgoQueryModule.forRoot(),
     IgoSearchModule.forRoot(),
+    IgoActionModule,
+    IgoEditionModule,
+    IgoEntityModule,
+    IgoGeoEditionModule,
     IgoPanelModule,
     IgoToolModule,
     IgoBackdropModule,

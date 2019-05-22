@@ -10,10 +10,6 @@
 
   transition: height 280ms cubic-bezier(.4,0,.2,1);
   padding: $igo-padding;
-
-  @include mobile {
-    max-height: 40%;
-  }
 }
 
 :host.app-toast-panel-opened {

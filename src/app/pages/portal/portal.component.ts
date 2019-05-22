@@ -8,6 +8,8 @@ import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowse
 import { MediaService, ConfigService, Media } from '@igo2/core';
 import {
   ActionbarMode,
+  Editor,
+  EditorStore,
   EntityRecord,
   EntityStore,
   getEntityTitle,
@@ -32,6 +34,7 @@ import {
 
 import {
   ContextState,
+  EditionState,
   ToolState,
   MapState,
   SearchState
@@ -57,6 +60,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   };
 
   public searchResult: SearchResult;
+  public minSearchTermLength = 2;
 
   public expansionPanelExpanded = false;
   public hasExpansionPanel = true;
@@ -65,7 +69,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   // True after the initial context is loaded
   private contextLoaded = false;
   private context$$: Subscription;
-  private selectedEditor$$: Subscription;
   private searchResults$$: Subscription;
   private focusedSearchResult$$: Subscription;
 
@@ -73,7 +76,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   // True after the initial tool is loaded
   private toolLoaded = false;
-
 
   public tableStore = new EntityStore([]);
 
@@ -121,6 +123,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get actionbarMode(): ActionbarMode {
+    if (this.mediaService.media$.value === Media.Mobile) {
+      return ActionbarMode.Overlay;
+    }
     return this.expansionPanelExpanded
       ? ActionbarMode.Dock
       : ActionbarMode.Overlay;
@@ -140,7 +145,9 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get toastPanelContent(): string {
     let content;
-    if (this.searchResult !== undefined) {
+    if (this.editor !== undefined && this.editor.hasWidget) {
+      content = 'editor';
+    } else if (this.searchResult !== undefined) {
       content = this.searchResult.meta.dataType.toLowerCase();
     }
     return content;
@@ -148,13 +155,20 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get toastPanelTitle(): string {
     let title;
-    if (this.searchResult !== undefined) {
+    if (
+      this.toastPanelContent !== 'editor' &&
+      this.searchResult !== undefined
+    ) {
       title = getEntityTitle(this.searchResult);
     }
     return title;
   }
 
   get toastPanelOpened(): boolean {
+    const content = this.toastPanelContent;
+    if (content === 'editor') {
+      return true;
+    }
     return this._toastPanelOpened;
   }
   set toastPanelOpened(value: boolean) {
@@ -162,9 +176,18 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
   private _toastPanelOpened = false;
 
+  get editorStore(): EditorStore {
+    return this.editionState.store;
+  }
+
+  get editor(): Editor {
+    return this.editionState.editor$.value;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private configService: ConfigService,
+    private editionState: EditionState,
     public authService: AuthService,
     public mediaService: MediaService,
     public layerService: LayerService,
@@ -207,11 +230,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     this.tableStore.load([
-      {id: '2', name: 'Name 2', description: 'Description 2'},
-      {id: '1', name: 'Name 1', description: 'Description 1'},
-      {id: '3', name: 'Name 3', description: 'Description 3'},
-      {id: '4', name: 'Name 4', description: 'Description 4'},
-      {id: '5', name: 'Name 5', description: 'Description 5'}
+      { id: '2', name: 'Name 2', description: 'Description 2' },
+      { id: '1', name: 'Name 1', description: 'Description 1' },
+      { id: '3', name: 'Name 3', description: 'Description 3' },
+      { id: '4', name: 'Name 4', description: 'Description 4' },
+      { id: '5', name: 'Name 5', description: 'Description 5' }
     ]);
   }
 
@@ -250,6 +273,10 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
+    if (term.length < this.minSearchTermLength) {
+      return;
+    }
+
     this.onBeforeSearch();
   }
 
@@ -283,6 +310,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (queryResults.length > 0) {
       this.onSearchMap(queryResults as SearchResult<Feature>[]);
     }
+  }
+
+  onDeactivateEditorWidget() {
+    this.closeToastPanel();
   }
 
   private closeToastPanel() {
