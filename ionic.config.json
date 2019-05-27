@@ -1,0 +1,12 @@
+{
+  "defaultProject": "igo2",
+  "projects": {
+    "igo2": {
+      "name": "igo2",
+      "integrations": {
+        "cordova": {}
+      },
+      "type": "angular"
+    }
+  }
+}

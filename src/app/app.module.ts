@@ -22,6 +22,8 @@ import { environment } from '../environments/environment';
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -44,7 +46,8 @@ import { AppComponent } from './app.component';
     provideIChercheSearchSource(),
     provideReseauTransportsQuebecSearchSource(),
     provideDataSourceSearchSource(),
-    provideOsrmRoutingSource()
+    provideOsrmRoutingSource(),
+    AndroidPermissions
   ],
   bootstrap: [AppComponent]
 })
