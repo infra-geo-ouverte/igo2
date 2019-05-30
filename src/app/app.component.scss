@@ -30,3 +30,8 @@ igo-spinner {
   right: $igo-margin;
   z-index: 5;
 }
+
+/*** Message-center ***/
+igo-message-center ::ng-deep simple-notifications ::ng-deep div.simple-notification-wrapper {
+  right: 10px;
+}

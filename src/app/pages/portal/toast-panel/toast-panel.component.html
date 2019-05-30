@@ -3,18 +3,33 @@
   [withHeader]="withHeader"
   (click)="onToggleClick()">
 
-  <!--TODO:  Fix CSS in lib and remove that -->
+
   <button
-    *ngIf="withHeader && !empty"
     mat-icon-button
-    panelRightButton>
-    <mat-icon *ngIf="!opened"> arrow_drop_up</mat-icon>
-    <mat-icon *ngIf="opened"> arrow_drop_down</mat-icon>
+    panelLeftButton
+    (click)="onListClick()">
+    <mat-icon>list</mat-icon>
   </button>
+
   <button
-    *ngIf="withHeader && !empty"
     mat-icon-button
-    panelLeftButton>
+    panelLeftButton
+    (click)="onCloseClick()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    panelRightButton
+    (click)="onCloseClick()">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    panelRightButton
+    (click)="onCloseClick()">
+    <mat-icon>close</mat-icon>
   </button>
 
   <div

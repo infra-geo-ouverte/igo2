@@ -7,14 +7,6 @@
   display: block;
 }
 
-mat-sidenav-container {
-  height: 100%;
-  width: 100%;
-  background-color: #efefef;
-  z-index: 5;
-  display: unset;
-}
-
 /*** Menu button ***/
 
 .menu-button {
@@ -36,6 +28,13 @@ igo-map-browser {
   height: 100%;
 }
 
+igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution {
+  left: 495px;
+  @include mobile {
+    left: 90px;
+  }
+}
+
 /*** Search bar ***/
 igo-search-bar {
   background-color: $app-background-color;
@@ -53,21 +52,24 @@ igo-search-bar {
   }
 }
 
-igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution {
-  left: 495px;
-  @include mobile {
-    left: 90px;
-  }
+/*** Sidenav ***/
+mat-sidenav-container {
+  height: 100%;
+  width: 100%;
+  background-color: #efefef;
+  z-index: 5;
+  display: unset;
 }
 
+/*** Expansion Panel ***/
 app-expansion-panel {
   position: absolute;
-  left: 0;
   bottom: 0;
   z-index: 4;
   overflow: hidden;
 }
 
+/*** Toast Panel ***/
 app-toast-panel {
   position: absolute;
   bottom: 0;
@@ -89,45 +91,5 @@ app-toast-panel.app-toast-panel-opened {
   @include mobile {
     width: 100%;
     left: 0;
-  }
-}
-
-
-igo-expansion-panel:not(.igo-expansion-panel-expanded) {
-  @include small-screen {
-    igo-editor-selector,
-    igo-actionbar {
-      display: none;
-    }
-  }
-
-  @include tablet {
-    igo-editor-selector,
-    igo-actionbar {
-      display: none;
-    }
-  }
-
-  @include mobile {
-    igo-editor-selector,
-    igo-actionbar {
-      display: none;
-    }
-  }
-}
-
-igo-expansion-panel {
-  igo-editor-selector {
-    width: calc(#{$app-sidenav-width} - #{$igo-icon-size} - 65px)
-  }
-
-  @include mobile {
-    igo-editor-selector {
-      width: calc(#{$app-sidenav-width} - (2 * #{$igo-icon-size}) - 65px);
-    }
-  }
-
-  igo-actionbar {
-    margin-left: 5px;
   }
 }

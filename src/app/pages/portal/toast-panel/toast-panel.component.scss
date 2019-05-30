@@ -13,7 +13,8 @@
 }
 
 :host.app-toast-panel-opened {
-  height: $app-toast-panel-max-height;
+  height: auto;
+  max-height: $app-toast-panel-max-height;
 
   @include mobile {
     height: 40%;
@@ -27,4 +28,22 @@ igo-panel ::ng-deep .igo-panel-header:hover {
 div[igostoppropagation] {
   height: 100%;
   width: 100%;
+}
+
+igo-panel {
+  height: 100%;
+}
+
+igo-panel ::ng-deep h3 {
+  display: flex;
+}
+
+igo-panel ::ng-deep .igo-panel-title {
+  flex-grow: 2;
+  margin: 0;
+}
+
+igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelleftbutton],
+igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelrightbutton] {
+  margin: 0;
 }

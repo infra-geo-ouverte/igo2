@@ -41,6 +41,9 @@ import {
 } from '@igo2/integration';
 
 import {
+  expansionPanelAnimation,
+  toastPanelAnimation,
+  baselayersAnimation,
   controlSlideX,
   controlSlideY,
   mapSlideX,
@@ -51,7 +54,15 @@ import {
   selector: 'app-portal',
   templateUrl: './portal.component.html',
   styleUrls: ['./portal.component.scss'],
-  animations: [controlSlideX(), controlSlideY(), mapSlideX(), mapSlideY()]
+  animations: [
+    expansionPanelAnimation(),
+    toastPanelAnimation(),
+    baselayersAnimation(),
+    controlSlideX(),
+    controlSlideY(),
+    mapSlideX(),
+    mapSlideY()
+  ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
   static SWIPE_ACTION = {
@@ -109,9 +120,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get toastPanelShown(): boolean {
-    return (
-      this.mediaService.media$.value === Media.Mobile && !this.sidenavOpened
-    );
+    return true;
+    // return (
+    //   this.mediaService.media$.value === Media.Mobile && !this.sidenavOpened
+    // );
   }
 
   get expansionPanelBackdropShown(): boolean {

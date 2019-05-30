@@ -14,8 +14,7 @@ $app-toast-panel-max-height: 281px;
 $app-toast-panel-width: 30%;
 
 $app-sidenav-margin-top: 50px;
-$app-sidenav-height: calc(100% - #{$app-expansion-panel-collapsed-height} - #{$app-sidenav-margin-top});
-$app-sidenav-height-with-expansion-panel: calc(100% + #{$app-expansion-panel-collapsed-height} - #{$app-expansion-panel-height});
+$app-sidenav-height: calc(100% - #{$app-sidenav-margin-top});
 $app-sidenav-width: 400px;
 $app-sidenav-width-mobile: calc(100% - #{$app-mobile-min-space-right} - #{$igo-margin});
 

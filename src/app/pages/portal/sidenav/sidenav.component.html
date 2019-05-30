@@ -3,19 +3,20 @@
   [autoFocus]="false"
   [(opened)]="opened">
 
-  <div class="app-sidenav-content"
-    [ngClass]="{'app-sidenav-without-feature': topPanelState === 'initial'}">
+  <div class="app-sidenav-content">
 
-    <igo-flexible #topPanel
-      initial="100%"
-      initialMobile="100%"
-      collapsedMobile="100%"
-      expandedMobile="100%"
-      collapsed="70%"
-      expanded="calc(100% - 48px)"
-      [state]="topPanelState">
+      <div class="app-content" [ngClass]="{toolActived: toolbox.activeTool$ | async}">
 
-      <div class="app-content">
+        <button *ngIf="toolbox.activeTool$ | async"
+          id="homeButton"
+          mat-icon-button
+          tooltip-position="below"
+          matTooltipShowDelay="500"
+          [matTooltip]="'igo.context.sidenav.mainMenu' | translate"
+          (click)="onUnselectButtonClick()">
+          <mat-icon>home</mat-icon>
+        </button>
+
         <igo-panel [title]="title$ | async | translate">
           <button *ngIf="toolbox.activeTool$ | async"
             mat-icon-button
@@ -27,7 +28,7 @@
             <mat-icon>arrow_back</mat-icon>
           </button>
 
-          <button *ngIf="toolbox.activeTool$ | async"
+          <!-- <button *ngIf="toolbox.activeTool$ | async"
             mat-icon-button
             panelRightButton
             tooltip-position="below"
@@ -35,51 +36,14 @@
             [matTooltip]="'igo.context.sidenav.mainMenu' | translate"
             (click)="onUnselectButtonClick()">
             <mat-icon>close</mat-icon>
-          </button>
+          </button> -->
 
           <igo-toolbox
             [animate]="true"
             [toolbox]="toolbox">
           </igo-toolbox>
+
         </igo-panel>
       </div>
-
-      <div igoFlexibleFill class="app-content"
-        *ngIf="searchResult && searchResult.data && media !== 'mobile'">
-         <igo-panel
-           [title]="panelTitle">
-
-           <button
-             mat-icon-button
-             panelLeftButton
-             class="igo-icon-button"
-             (click)="toggleTopPanel()">
-             <mat-icon>
-               <ng-container *ngIf="['collapsed', 'initial'].indexOf(topPanelState) >= 0">
-                 arrow_downward
-               </ng-container>
-               <ng-container *ngIf="topPanelState === 'expanded'">
-                 arrow_upward
-               </ng-container>
-             </mat-icon>
-           </button>
-
-           <button
-             mat-icon-button
-             panelRightButton
-             class="igo-icon-button"
-             (click)="zoomToFeatureExtent()"
-             *ngIf="searchResult.data.geometry">
-             <mat-icon>zoom_in</mat-icon>
-           </button>
-
-           <igo-feature-details
-             [feature]="searchResult.data"
-             *ngIf="['collapsed', 'initial'].indexOf(topPanelState) >= 0">
-           </igo-feature-details>
-         </igo-panel>
-        </div>
-
-    </igo-flexible>
   </div>
 </mat-sidenav>

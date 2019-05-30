@@ -73,4 +73,6 @@ export class ToastPanelComponent {
   onToggleClick() {
     this.opened = !this.opened;
   }
+
+  onCloseClick() {}
 }
