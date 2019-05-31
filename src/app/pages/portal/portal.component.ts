@@ -44,6 +44,7 @@ import {
   expansionPanelAnimation,
   toastPanelAnimation,
   baselayersAnimation,
+  controlsAnimations,
   controlSlideX,
   controlSlideY,
   mapSlideX,
@@ -58,6 +59,7 @@ import {
     expansionPanelAnimation(),
     toastPanelAnimation(),
     baselayersAnimation(),
+    controlsAnimations(),
     controlSlideX(),
     controlSlideY(),
     mapSlideX(),
@@ -275,7 +277,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       source: querySearchSource
     };
     research.request.subscribe((_results: SearchResult<Feature>[]) => {
-      this.onSearch({ research, results: _results });
+      this.searchResult = _results[0];
+      this.openToastPanel();
+      // this.onSearch({ research, results: _results });
     });
   }
 
@@ -385,22 +389,22 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onFocusSearchResult(result: SearchResult) {
-    if (result === undefined) {
-      this.closeToastPanel();
-      this.searchResult = undefined;
-      return;
-    }
-
-    if (result.meta.dataType === FEATURE) {
-      if (this.mediaService.media$.value === Media.Mobile) {
-        this.closeSidenav();
-      }
-
-      this.searchResult = result;
-      this.openToastPanel();
-    } else {
-      this.searchResult = undefined;
-    }
+    // if (result === undefined) {
+    //   this.closeToastPanel();
+    //   this.searchResult = undefined;
+    //   return;
+    // }
+    //
+    // if (result.meta.dataType === FEATURE) {
+    //   if (this.mediaService.media$.value === Media.Mobile) {
+    //     this.closeSidenav();
+    //   }
+    //
+    //   this.searchResult = result;
+    //   this.openToastPanel();
+    // } else {
+    //   this.searchResult = undefined;
+    // }
   }
 
   private onClearSearch() {
@@ -418,8 +422,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   removeMapBrowserClass(e) {
-    e.element.classList.remove('toast-shown-offset');
-    e.element.classList.remove('toast-opened-offset');
+    e.element.classList.remove('expansion-offset');
     e.element.classList.remove('sidenav-offset');
   }
 
@@ -434,9 +437,14 @@ export class PortalComponent implements OnInit, OnDestroy {
     //   }
     //   return;
     // }
-    // if (this.sidenavOpened) {
-    //   e.element.classList.add("sidenav-offset");
-    // }
+
+    if (this.expansionPanelExpanded) {
+      e.element.classList.add('expansion-offset');
+    }
+
+    if (this.sidenavOpened) {
+      e.element.classList.add('sidenav-offset');
+    }
   }
 
   swipe(action: string) {

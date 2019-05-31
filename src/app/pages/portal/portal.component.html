@@ -38,22 +38,24 @@
     igoLayerContext
     igoDropGeoFile
     (query)="onMapQuery($event)"
-    [map]="map">
-    <!-- [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
+    [map]="map"
+    [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
     [@mapStateX]="sidenavOpened ? 'right' : 'left'"
     (@mapStateX.start)="removeMapBrowserClass($event)"
     (@mapStateX.done)="updateMapBrowserClass($event)"
-    [@mapStateY]="toastShown ? (toastPanelOpened ? 'up' : 'down') : 'close'"
+    [@mapStateY]="expansionPanelExpanded ? 'up' : 'down'"
     (@mapStateY.start)="removeMapBrowserClass($event)"
-    (@mapStateY.done)="updateMapBrowserClass($event)" -->
+    (@mapStateY.done)="updateMapBrowserClass($event)">
 
-    <igo-zoom-button [map]="map" color="primary"></igo-zoom-button>
+    <igo-zoom-button [map]="map" color="primary"
+      [@controlsOffsetY]="expansionPanelExpanded">
+    </igo-zoom-button>
     <igo-geolocate-button [map]="map" color="primary"
-      [@controlStateY]="toastShown ? (toastPanelOpened ? 'up' : 'down') : 'close'">
+      [@controlsOffsetY]="expansionPanelExpanded">
     </igo-geolocate-button>
     <igo-rotation-button [map]="map" color="primary"></igo-rotation-button>
     <igo-user-button [map]="map" color="primary"
-      [@controlStateY]="toastShown ? (toastPanelOpened ? 'up' : 'down') : 'close'">
+      [@controlsOffsetY]="expansionPanelExpanded">
     </igo-user-button>
     <igo-baselayers-switcher [map]="map"
       [@baselayersStateY]="expansionPanelExpanded ? 'up' : 'down'"
