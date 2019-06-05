@@ -47,3 +47,7 @@ igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelleftbutton],
 igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelrightbutton] {
   margin: 0;
 }
+
+igo-panel ::ng-deep .igo-panel-content {
+  max-height: 235px;
+}
