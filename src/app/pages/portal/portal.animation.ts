@@ -98,6 +98,42 @@ export function baselayersAnimation(): AnimationTriggerMetadata[] {
   ];
 }
 
+export function controlsAnimations(): AnimationTriggerMetadata[] {
+  return [
+    trigger('controlsOffsetX', [
+      state(
+        'false',
+        style({
+          left: '5px'
+        })
+      ),
+      state(
+        'true',
+        style({
+          left: '405px'
+        })
+      ),
+      transition('* => *', animate('200ms'))
+    ]),
+    trigger('controlsOffsetY', [
+      state('close', style({})),
+      state(
+        'false',
+        style({
+          bottom: '5px'
+        })
+      ),
+      state(
+        'true',
+        style({
+          bottom: '285px'
+        })
+      ),
+      transition('* => *', animate('200ms'))
+    ])
+  ];
+}
+
 export function controlSlideX(): AnimationTriggerMetadata {
   return trigger('controlStateX', [
     state(

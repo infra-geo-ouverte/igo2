@@ -18,7 +18,7 @@
   border-radius: 0;
 }
 
-.menu-button ::ng-deep div.mat-button-ripple-round  {
+.menu-button ::ng-deep div.mat-button-ripple-round {
   border-radius: 0;
 }
 
@@ -28,17 +28,26 @@ igo-map-browser {
   height: 100%;
 }
 
-igo-map-browser.igo-attribution-offset.sidenav-offset ::ng-deep .ol-attribution {
-  left: 495px;
-  @include mobile {
-    left: 90px;
-  }
+igo-map-browser ::ng-deep .ol-overlaycontainer-stopevent {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
+igo-map-browser.sidenav-offset ::ng-deep .ol-overlaycontainer-stopevent {
+  left: 380px;
+  width: calc(100% - 380px);
+}
+
+igo-map-browser.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
+  bottom: 279px;
 }
 
 /*** Search bar ***/
 igo-search-bar {
   background-color: $app-background-color;
-  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 16px;
   position: absolute;
   left: $search-bar-left;
   top: $igo-margin;
@@ -48,7 +57,7 @@ igo-search-bar {
   margin: 0 $igo-margin;
 
   @include mobile {
-    width: $search-bar-width-mobile
+    width: $search-bar-width-mobile;
   }
 }
 
@@ -92,4 +101,8 @@ app-toast-panel.app-toast-panel-opened {
     width: 100%;
     left: 0;
   }
+}
+
+igo-geolocate-button {
+  margin-bottom: 90px;
 }
