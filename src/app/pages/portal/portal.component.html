@@ -91,24 +91,10 @@
 </app-expansion-panel>
 
 <app-toast-panel
-  *ngIf="toastPanelShown"
-  [title]="toastPanelTitle"
-  [withHeader]="toastPanelContent === 'feature'"
-  [(opened)]="toastPanelOpened"
+  [results]="queryResults"
+  [store]="searchStore"
   [@toastPanelOffsetX]="sidenavOpened"
   [@toastPanelOffsetY]="expansionPanelExpanded">
-
-  <igo-feature-details
-    *ngIf="toastPanelContent === 'feature'"
-    [feature]="searchResult.data">
-  </igo-feature-details>
-
-  <!-- <igo-editor-outlet
-    *ngIf="toastPanelContent === 'editor'"
-    [editor]="editor"
-    (deactivateWidget)="onDeactivateEditorWidget()">
-  </igo-editor-outlet> -->
-
 </app-toast-panel>
 
   <!-- <igo-toast

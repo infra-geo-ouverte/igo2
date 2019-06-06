@@ -75,6 +75,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   public searchResult: SearchResult;
   public minSearchTermLength = 2;
 
+  public queryResults: SearchResult[];
+
   public expansionPanelExpanded = false;
   public hasExpansionPanel = true;
   public sidenavOpened = false;
@@ -276,9 +278,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       reverse: false,
       source: querySearchSource
     };
-    research.request.subscribe((_results: SearchResult<Feature>[]) => {
-      this.searchResult = _results[0];
-      this.openToastPanel();
+    research.request.subscribe((queryResults: SearchResult<Feature>[]) => {
+      this.queryResults = queryResults;
+      this.searchStore.load(queryResults);
+      // this.searchResult = _results[0];
+      // this.openToastPanel();
       // this.onSearch({ research, results: _results });
     });
   }

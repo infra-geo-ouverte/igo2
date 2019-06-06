@@ -1,11 +1,11 @@
 <igo-panel
-  [title]="title"
-  [withHeader]="withHeader"
+  *ngIf="results && results.length"
+  [title]="resultSelected ? getTitle(resultSelected) : 'Liste des résultats'"
   (click)="onToggleClick()">
-
 
   <button
     mat-icon-button
+    igoStopPropagation
     panelLeftButton
     (click)="onListClick()">
     <mat-icon>list</mat-icon>
@@ -13,20 +13,23 @@
 
   <button
     mat-icon-button
+    igoStopPropagation
     panelLeftButton
-    (click)="onCloseClick()">
+    (click)="onPreviousClick()">
     <mat-icon>chevron_left</mat-icon>
   </button>
 
   <button
     mat-icon-button
+    igoStopPropagation
     panelRightButton
-    (click)="onCloseClick()">
+    (click)="onNextClick()">
     <mat-icon>chevron_right</mat-icon>
   </button>
 
   <button
     mat-icon-button
+    igoStopPropagation
     panelRightButton
     (click)="onCloseClick()">
     <mat-icon>close</mat-icon>
@@ -36,6 +39,17 @@
     #content
     igoStopPropagation
     [@showContent]="opened">
-    <ng-content></ng-content>
+
+    <igo-feature-details
+      *ngIf="resultSelected"
+      [feature]="resultSelected.data">
+    </igo-feature-details>
+
+    <igo-search-results
+      *ngIf="!resultSelected"
+      [store]="store"
+      (resultSelect)="onResultSelect($event)">
+    </igo-search-results>
+
   </div>
 </igo-panel>

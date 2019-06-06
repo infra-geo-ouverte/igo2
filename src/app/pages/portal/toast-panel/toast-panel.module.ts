@@ -4,6 +4,7 @@ import { MatIconModule, MatButtonModule } from '@angular/material';
 
 import { IgoPanelModule, IgoStopPropagationModule } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
+import { IgoFeatureModule, IgoSearchResultsModule } from '@igo2/geo';
 
 import { ToastPanelComponent } from './toast-panel.component';
 
@@ -14,7 +15,9 @@ import { ToastPanelComponent } from './toast-panel.component';
     MatButtonModule,
     IgoLanguageModule,
     IgoPanelModule,
-    IgoStopPropagationModule
+    IgoStopPropagationModule,
+    IgoFeatureModule,
+    IgoSearchResultsModule
   ],
   exports: [ToastPanelComponent],
   declarations: [ToastPanelComponent]
