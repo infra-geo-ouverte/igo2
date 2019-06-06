@@ -56,6 +56,7 @@
     "@igo2/geo": "^1.0.0-alpha.1",
     "@igo2/integration": "^1.0.0-alpha.1",
     "@igo2/utils": "^1.0.0-alpha.1",
+    "@mdi/angular-material": "^3.6.95",
     "@turf/helpers": "^6.1.4",
     "@turf/line-intersect": "^6.0.2",
     "classlist.js": "^1.1.20150312",

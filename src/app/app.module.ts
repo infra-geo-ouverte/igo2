@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,6 +21,7 @@ import { environment } from '../environments/environment';
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 import { AppReseauTransportQuebecModule } from './shared/search/sources/reseau-transport-quebec.module';
+import { MatIconRegistry } from '@angular/material';
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,4 +49,7 @@ import { AppReseauTransportQuebecModule } from './shared/search/sources/reseau-t
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer){
+  matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg')); // Or whatever path you placed mdi.svg at
+  }
+}

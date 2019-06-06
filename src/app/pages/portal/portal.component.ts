@@ -8,8 +8,8 @@ import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowse
 import { MediaService, ConfigService, Media } from '@igo2/core';
 import {
   ActionbarMode,
-  Editor,
-  EditorStore,
+  Workspace,
+  WorkspaceStore,
   EntityRecord,
   EntityStore,
   getEntityTitle,
@@ -34,7 +34,7 @@ import {
 
 import {
   ContextState,
-  EditionState,
+  WorkspaceState,
   ToolState,
   MapState,
   SearchState
@@ -159,8 +159,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get toastPanelContent(): string {
     let content;
-    if (this.editor !== undefined && this.editor.hasWidget) {
-      content = 'editor';
+    if (this.workspace !== undefined && this.workspace.hasWidget) {
+      content = 'workspace';
     } else if (this.searchResult !== undefined) {
       content = this.searchResult.meta.dataType.toLowerCase();
     }
@@ -170,7 +170,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   get toastPanelTitle(): string {
     let title;
     if (
-      this.toastPanelContent !== 'editor' &&
+      this.toastPanelContent !== 'workspace' &&
       this.searchResult !== undefined
     ) {
       title = getEntityTitle(this.searchResult);
@@ -180,7 +180,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get toastPanelOpened(): boolean {
     const content = this.toastPanelContent;
-    if (content === 'editor') {
+    if (content === 'workspace') {
       return true;
     }
     return this._toastPanelOpened;
@@ -190,18 +190,18 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
   private _toastPanelOpened = false;
 
-  get editorStore(): EditorStore {
-    return this.editionState.store;
+  get workspaceStore(): WorkspaceStore {
+    return this.workspaceState.store;
   }
 
-  get editor(): Editor {
-    return this.editionState.editor$.value;
+  get workspace(): Workspace {
+    return this.workspaceState.workspace$.value;
   }
 
   constructor(
     private route: ActivatedRoute,
     private configService: ConfigService,
-    private editionState: EditionState,
+    private workspaceState: WorkspaceState,
     public authService: AuthService,
     public mediaService: MediaService,
     public layerService: LayerService,
@@ -328,7 +328,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  onDeactivateEditorWidget() {
+  onDeactivateWorkspaceWidget() {
     this.closeToastPanel();
   }
 

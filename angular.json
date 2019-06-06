@@ -38,7 +38,8 @@
                 "glob": "**/*",
                 "input": "./node_modules/@igo2/geo/assets/",
                 "output": "./assets/igo2/geo/"
-              }
+              },
+              { "glob": "mdi.svg", "input": "./node_modules/@mdi/angular-material", "output": "./assets" }
             ],
             "styles": ["src/styles.scss"],
             "scripts": [],

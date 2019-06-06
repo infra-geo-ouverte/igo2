@@ -14,7 +14,7 @@
           matTooltipShowDelay="500"
           [matTooltip]="'igo.context.sidenav.mainMenu' | translate"
           (click)="onUnselectButtonClick()">
-          <mat-icon>home</mat-icon>
+          <mat-icon svgIcon="home"></mat-icon>
         </button>
 
         <igo-panel [title]="title$ | async | translate">
@@ -25,7 +25,7 @@
             matTooltipShowDelay="500"
             [matTooltip]="'igo.context.sidenav.goBack' | translate"
             (click)="onPreviousButtonClick()">
-            <mat-icon>arrow_back</mat-icon>
+            <mat-icon svgIcon="arrow-left"></mat-icon>
           </button>
 
           <!-- <button *ngIf="toolbox.activeTool$ | async"
@@ -35,7 +35,7 @@
             matTooltipShowDelay="500"
             [matTooltip]="'igo.context.sidenav.mainMenu' | translate"
             (click)="onUnselectButtonClick()">
-            <mat-icon>close</mat-icon>
+            <mat-icon svgIcon="close"></mat-icon>
           </button> -->
 
           <igo-toolbox
