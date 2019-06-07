@@ -14,8 +14,7 @@
     matTooltipShowDelay="500"
     [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
     (click)="onToggleSidenavClick()">
-    <mat-icon>
-      <ng-container>menu</ng-container>
+    <mat-icon svgIcon="menu">
     </mat-icon>
   </button>
 
@@ -71,10 +70,10 @@
   [@expansionPanelSize]="sidenavOpened ? 'reduced' : 'full'">
 
   <ng-container expansionPanelHeader>
-    <!-- <igo-editor-selector igoEditorSelector [store]="editorStore" [map]="map"></igo-editor-selector> -->
+    <!-- <igo-workspace-selector igoWorkspaceSelector [store]="workspaceStore" [map]="map"></igo-workspace-selector> -->
     <!-- <igo-actionbar
-      *ngIf="editor"
-      [store]="editor.actionStore"
+      *ngIf="workspace"
+      [store]="workspace.actionStore"
       [horizontal]="true"
       [xPosition]="'after'"
       [yPosition]="'above'"
