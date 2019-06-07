@@ -23,7 +23,7 @@ import { showContent } from './toast-panel.animations';
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastPanelComponent {
-  private opened: boolean = true;
+  private opened = true;
   //
   // @Input()
   // get title(): string {
@@ -34,9 +34,7 @@ export class ToastPanelComponent {
   // }
   // private _title: string;
 
-  @Input() results: SearchResult<Feature>[];
-
-  @Input() store: EntityStore<SearchResult<Feature>[]>;
+  @Input() store: EntityStore<SearchResult<Feature>>;
 
   resultSelected: SearchResult<Feature>;
 
@@ -48,16 +46,20 @@ export class ToastPanelComponent {
     return this.opened;
   }
 
-  // @HostBinding('style.visibility')
-  // get displayStyle() {
-  //   return this.opened ? 'visible' : 'hidden';
-  // }
+  @HostBinding('style.visibility')
+  get displayStyle() {
+    return this.results.length ? 'visible' : 'hidden';
+  }
 
   // @ViewChild('content') content: ElementRef;
   //
   // get empty(): boolean {
   //   return this.content.nativeElement.children.length === 0;
   // }
+
+  get results(): SearchResult<Feature>[] {
+    return this.store.all();
+  }
 
   constructor() {}
 
@@ -70,11 +72,13 @@ export class ToastPanelComponent {
   }
 
   onToggleClick() {
+    console.log(this.store);
     this.opened = !this.opened;
   }
 
   onCloseClick() {
-    this.results = undefined;
+    this.store.clear();
+    this.selectResult(undefined);
   }
 
   onPreviousClick() {
