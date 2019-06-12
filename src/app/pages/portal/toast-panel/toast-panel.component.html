@@ -1,29 +1,38 @@
 <igo-panel
-  *ngIf="results && results.length"
-  [title]="resultSelected ? getTitle(resultSelected) : 'Liste des résultats'"
-  (click)="onToggleClick()">
+  *ngIf="store.entities$ | async"
+  [title]="resultSelected$.value ? getTitle(resultSelected$.value) : 'Liste des résultats'"
+  (click)="onToggleClick($event)"
+  (swipeleft)="swipe($event.type)"
+  (swiperight)="swipe($event.type)"
+  (swipeup)="swipe($event.type)"
+  (swipedown)="swipe($event.type)">
 
   <button
+    *ngIf="resultSelected$.value"
     mat-icon-button
     igoStopPropagation
     panelLeftButton
-    (click)="onListClick()">
+    (click)="unselectResult()">
     <mat-icon svgIcon="format-list-bulleted-square"></mat-icon>
   </button>
 
   <button
+    *ngIf="resultSelected$.value"
+    [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
     mat-icon-button
     igoStopPropagation
     panelLeftButton
-    (click)="onPreviousClick()">
+    (click)="previousResult()">
     <mat-icon svgIcon="chevron-left"></mat-icon>
   </button>
 
   <button
+    *ngIf="resultSelected$.value"
+    [disabled]="results[results.length-1].meta.id === resultSelected$.value.meta.id"
     mat-icon-button
     igoStopPropagation
     panelRightButton
-    (click)="onNextClick()">
+    (click)="nextResult()">
     <mat-icon svgIcon="chevron-right"></mat-icon>
   </button>
 
@@ -31,24 +40,24 @@
     mat-icon-button
     igoStopPropagation
     panelRightButton
-    (click)="onCloseClick()">
+    (click)="clear()">
     <mat-icon svgIcon="close"></mat-icon>
   </button>
 
   <div
     #content
-    igoStopPropagation
-    [@showContent]="opened">
+    igoStopPropagation>
 
     <igo-feature-details
-      *ngIf="resultSelected"
-      [feature]="resultSelected.data">
+      *ngIf="resultSelected$.value"
+      [feature]="resultSelected$.value.data">
     </igo-feature-details>
 
     <igo-search-results
-      *ngIf="!resultSelected"
+      *ngIf="!resultSelected$.value"
       [store]="store"
-      (resultSelect)="onResultSelect($event)">
+      (resultFocus)="focusResult($event)"
+      (resultSelect)="selectResult($event)">
     </igo-search-results>
 
   </div>

@@ -4,42 +4,46 @@ import {
   Output,
   EventEmitter,
   HostBinding,
-  ChangeDetectionStrategy,
-  ElementRef,
-  ViewChild
+  HostListener,
+  ChangeDetectionStrategy
 } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { getEntityTitle, EntityStore } from '@igo2/common';
-
 import { Feature, SearchResult } from '@igo2/geo';
-
-import { showContent } from './toast-panel.animations';
 
 @Component({
   selector: 'app-toast-panel',
   templateUrl: './toast-panel.component.html',
   styleUrls: ['./toast-panel.component.scss'],
-  animations: [showContent()]
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastPanelComponent {
+  @Input()
+  get store(): EntityStore<SearchResult<Feature>> {
+    return this._store;
+  }
+  set store(value: EntityStore<SearchResult<Feature>>) {
+    this._store = value;
+    this.store.entities$.subscribe(_entities => {
+      this.unselectResult();
+    });
+  }
+  private _store: EntityStore<SearchResult<Feature>>;
+
+  @Output() resultSelect = new EventEmitter<SearchResult<Feature>>();
+  @Output() resultFocus = new EventEmitter<SearchResult<Feature>>();
+
+  static SWIPE_ACTION = {
+    RIGHT: 'swiperight',
+    LEFT: 'swipeleft',
+    UP: 'swipeup',
+    DOWN: 'swipedown'
+  };
+
+  resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
+
   private opened = true;
-  //
-  // @Input()
-  // get title(): string {
-  //   return this._title;
-  // }
-  // set title(value: string) {
-  //   this._title = value;
-  // }
-  // private _title: string;
-
-  @Input() store: EntityStore<SearchResult<Feature>>;
-
-  resultSelected: SearchResult<Feature>;
-
-  // @Output() openedChange = new EventEmitter<boolean>();
-  // @Output() close = new EventEmitter<boolean>();
 
   @HostBinding('class.app-toast-panel-opened')
   get hasOpenedClass() {
@@ -51,13 +55,8 @@ export class ToastPanelComponent {
     return this.results.length ? 'visible' : 'hidden';
   }
 
-  // @ViewChild('content') content: ElementRef;
-  //
-  // get empty(): boolean {
-  //   return this.content.nativeElement.children.length === 0;
-  // }
-
   get results(): SearchResult<Feature>[] {
+    // return this.store.view.filter((e) => e.meta.dataType === FEATURE).all();
     return this.store.all();
   }
 
@@ -67,57 +66,73 @@ export class ToastPanelComponent {
     return getEntityTitle(result);
   }
 
+  focusResult(result: SearchResult<Feature>) {
+    this.resultFocus.emit(result);
+  }
+
   selectResult(result: SearchResult<Feature>) {
-    this.resultSelected = result;
+    this.store.state.update(
+      result,
+      {
+        focused: true,
+        selected: true
+      },
+      true
+    );
+    this.resultSelected$.next(result);
+    this.resultSelect.emit(result);
   }
 
-  onToggleClick() {
-    console.log(this.store);
-    this.opened = !this.opened;
+  unselectResult() {
+    this.resultSelected$.next(undefined);
+    this.store.state.clear();
   }
 
-  onCloseClick() {
+  clear() {
     this.store.clear();
-    this.selectResult(undefined);
+    this.unselectResult();
   }
 
-  onPreviousClick() {
-    let i = this.results.indexOf(this.resultSelected);
-    const previousResult = this.results[i--];
+  @HostListener('document:keydown.ArrowLeft')
+  previousResult() {
+    if (!this.resultSelected$.value) {
+      return;
+    }
+    let i = this.results.indexOf(this.resultSelected$.value);
+    const previousResult = this.results[--i];
     if (previousResult) {
       this.selectResult(previousResult);
     }
   }
 
-  onNextClick() {
-    let i = this.results.indexOf(this.resultSelected);
-    const nextResult = this.results[i++];
+  @HostListener('document:keydown.ArrowRight')
+  nextResult() {
+    if (!this.resultSelected$.value) {
+      return;
+    }
+    let i = this.results.indexOf(this.resultSelected$.value);
+    const nextResult = this.results[++i];
     if (nextResult) {
       this.selectResult(nextResult);
     }
   }
 
-  onListClick() {
-    this.selectResult(undefined);
+  swipe(action: string) {
+    if (action === ToastPanelComponent.SWIPE_ACTION.LEFT) {
+      this.previousResult();
+    } else if (action === ToastPanelComponent.SWIPE_ACTION.RIGHT) {
+      this.nextResult();
+    } else if (action === ToastPanelComponent.SWIPE_ACTION.UP) {
+      this.opened = true;
+    } else if (action === ToastPanelComponent.SWIPE_ACTION.DOWN) {
+      this.opened = false;
+    }
   }
 
-  onResultSelect(result: SearchResult<Feature>) {
-    this.selectResult(result);
-    this.addFeatureToMap(result);
-  }
-
-  // onResultSelect(result: SearchResult<Feature>) {
-  //   this.addFeatureToMap(result);
-  // }
-
-  private addFeatureToMap(result: SearchResult<Feature>) {
-    const feature = result.data;
-
-    // Somethimes features have no geometry. It happens with some GetFeatureInfo
-    if (feature.geometry === undefined) {
+  onToggleClick(e: MouseEvent) {
+    if (e.srcElement.className !== 'igo-panel-title') {
       return;
     }
-
-    // this.map.overlay.setFeatures([feature], FeatureMotion.Default);
+    this.opened = !this.opened;
   }
 }

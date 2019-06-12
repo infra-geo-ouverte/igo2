@@ -19,18 +19,19 @@
   </button>
 
   <igo-search-bar
+    [term]="searchBarTerm"
     [minLength]="minSearchTermLength"
     (change)="onSearchTermChange($event)"
     (search)="onSearch($event)">
   </igo-search-bar>
 
   <app-sidenav
-    [searchResult]="searchResult"
     [map]="map"
     [(opened)]="sidenavOpened">
   </app-sidenav>
 
   <igo-map-browser
+    #mapBrowser
     igoQuery
     [waitForAllQueries]="true"
     igoMapContext
@@ -38,6 +39,8 @@
     igoDropGeoFile
     (query)="onMapQuery($event)"
     [map]="map"
+    [igoContextMenu]=actionbarMenu
+    (menuPosition)="onContextMenuOpen($event)"
     [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
     [@mapStateX]="sidenavOpened ? 'right' : 'left'"
     (@mapStateX.start)="removeMapBrowserClass($event)"
@@ -90,17 +93,17 @@
 </app-expansion-panel>
 
 <app-toast-panel
-  [store]="searchStore"
+  [store]="queryStore"
   [@toastPanelOffsetX]="sidenavOpened"
-  [@toastPanelOffsetY]="expansionPanelExpanded">
+  [@toastPanelOffsetY]="expansionPanelExpanded"
+  (resultSelect)="addFeatureToMap($event)">
 </app-toast-panel>
 
-  <!-- <igo-toast
-    [map]="map"
-    [expanded]="toastOpened"
-    [feature]="featureService.focusedFeature$ | async"
-    (onOpened)="toastOpened=$event"
-    (swipeleft)="swipe($event.type)"
-    (swiperight)="swipe($event.type)"
-    *ngIf="toastShown">
-  </igo-toast> -->
+<ng-template #actionbarMenu>
+  <igo-actionbar
+    [store]="contextMenuStore"
+    [withIcon]="false"
+    [horizontal]="true"
+    mode="context">
+  </igo-actionbar>
+</ng-template>

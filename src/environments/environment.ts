@@ -29,13 +29,25 @@ export const environment: Environment = {
     },
     searchSources: {
       nominatim: {
-        enabled: false
+        available: false
       },
       icherche: {
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/icherche/geocode'
+        searchUrl: '/icherche/geocode',
+        params: {
+          limit: '8'
+        }
       },
-      datasource: {
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/layers/search'
+      icherchereverse: {
+        searchUrl: '/icherche/xy',
+        params: {
+          limit: '5'
+        }
+      },
+      ilayer: {
+        searchUrl: '/apis/layers/search',
+        params: {
+          limit: '5'
+        }
       }
     },
     language: {

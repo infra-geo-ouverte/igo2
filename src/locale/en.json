@@ -5,5 +5,8 @@
     "open": "Open Menu"
   },
   "IGO": "IGO",
-  "noEntityStore": "No tables available for this dataset"
+  "noEntityStore": "No tables available for this dataset",
+  "coordinates": "Show coordinates,",
+  "googleMap": "Show in Google maps",
+  "googleStreetView": "Show in Google Street view"
 }

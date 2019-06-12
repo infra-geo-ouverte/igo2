@@ -12,7 +12,9 @@ import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 import { IgoAuthModule } from '@igo2/auth';
 import {
   provideIChercheSearchSource,
+  provideIChercheReverseSearchSource,
   provideNominatimSearchSource,
+  provideCoordinatesReverseSearchSource,
   provideILayerSearchSource,
   provideOsrmRoutingSource
 } from '@igo2/geo';
@@ -20,7 +22,6 @@ import {
 import { environment } from '../environments/environment';
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
-import { AppReseauTransportQuebecModule } from './shared/search/sources/reseau-transport-quebec.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,8 +33,7 @@ import { AppReseauTransportQuebecModule } from './shared/search/sources/reseau-t
     IgoMessageModule,
     IgoSpinnerModule,
     IgoStopPropagationModule,
-    PortalModule,
-    AppReseauTransportQuebecModule
+    PortalModule
   ],
   providers: [
     provideConfigOptions({
@@ -43,6 +43,8 @@ import { AppReseauTransportQuebecModule } from './shared/search/sources/reseau-t
     RouteService,
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
+    provideIChercheReverseSearchSource(), // TODO: replace by territoire
+    provideCoordinatesReverseSearchSource(),
     provideILayerSearchSource(),
     provideOsrmRoutingSource()
   ],

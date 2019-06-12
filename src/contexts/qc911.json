@@ -16,8 +16,7 @@
       "visible": true,
       "sourceOptions": {
         "type": "xyz",
-        "url":
-          "https://geoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png"
+        "url": "https://geoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png"
       }
     },
     {
@@ -29,7 +28,7 @@
           "layers": "MSP_DESSERTE_MUN_911",
           "version": "1.3.0"
         },
-        "queryable": true,
+        "queryable": false,
         "queryFormat": "gml2",
         "queryTitle": "Municipalite"
       }
