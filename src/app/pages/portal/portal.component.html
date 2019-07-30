@@ -39,7 +39,7 @@
     igoDropGeoFile
     (query)="onMapQuery($event)"
     [map]="map"
-    [igoContextMenu]=actionbarMenu
+    [igoContextMenu]=contextMenu
     (menuPosition)="onContextMenuOpen($event)"
     [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
     [@mapStateX]="sidenavOpened ? 'right' : 'left'"
@@ -99,7 +99,7 @@
   (resultSelect)="addFeatureToMap($event)">
 </app-toast-panel>
 
-<ng-template #actionbarMenu>
+<ng-template #contextMenu>
   <igo-actionbar
     [store]="contextMenuStore"
     [withIcon]="false"

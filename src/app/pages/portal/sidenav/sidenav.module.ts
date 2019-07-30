@@ -12,7 +12,6 @@ import { IgoPanelModule, IgoFlexibleModule, IgoToolModule } from '@igo2/common';
 import { IgoFeatureModule } from '@igo2/geo';
 import { IgoContextManagerModule } from '@igo2/context';
 
-import { ToolboxModule } from '../toolbox/toolbox.module';
 import { SidenavComponent } from './sidenav.component';
 
 @NgModule({
@@ -27,8 +26,7 @@ import { SidenavComponent } from './sidenav.component';
     IgoFlexibleModule,
     IgoContextManagerModule,
     IgoToolModule,
-    IgoFeatureModule,
-    ToolboxModule
+    IgoFeatureModule
   ],
   exports: [SidenavComponent],
   declarations: [SidenavComponent]
