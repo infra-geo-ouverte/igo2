@@ -9,6 +9,11 @@
     "secure": false,
     "changeOrigin": true
   },
+  "/carto/": {
+    "target": "https://geoegl.msp.gouv.qc.ca",
+    "secure": false,
+    "changeOrigin": true
+  },
   "/apis/": {
     "target": "https://geoegl.msp.gouv.qc.ca",
     "secure": false,
