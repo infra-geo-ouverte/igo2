@@ -1,5 +1,5 @@
-import { LanguageOptions } from "@igo2/core";
-import { SearchSourceOptions } from "@igo2/geo";
+import { LanguageOptions } from '@igo2/core';
+import { SearchSourceOptions } from '@igo2/geo';
 
 interface Environment {
   production: boolean;
@@ -17,14 +17,14 @@ export const environment: Environment = {
         enabled: false
       },
       icherche: {
-        searchUrl: "/icherche/geocode"
+        searchUrl: '/icherche/geocode'
       },
       datasource: {
-        searchUrl: "/apis/layers/search"
+        searchUrl: '/apis/layers/search'
       }
     },
     language: {
-      prefix: "./locale/"
+      prefix: './locale/'
     }
   }
 };

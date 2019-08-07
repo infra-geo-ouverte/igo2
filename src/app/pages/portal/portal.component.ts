@@ -474,6 +474,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     this.onBeforeSearch();
     for (const i in results) {
+      if (!results[i]) { continue; }
       results[i].request.subscribe((_results: SearchResult<Feature>[]) => {
         this.onSearch({ research: results[i], results: _results });
       });

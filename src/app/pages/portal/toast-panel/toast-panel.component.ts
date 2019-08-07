@@ -19,6 +19,13 @@ import { Feature, SearchResult } from '@igo2/geo';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastPanelComponent {
+  static SWIPE_ACTION = {
+    RIGHT: 'swiperight',
+    LEFT: 'swipeleft',
+    UP: 'swipeup',
+    DOWN: 'swipedown'
+  };
+
   @Input()
   get store(): EntityStore<SearchResult<Feature>> {
     return this._store;
@@ -33,13 +40,6 @@ export class ToastPanelComponent {
 
   @Output() resultSelect = new EventEmitter<SearchResult<Feature>>();
   @Output() resultFocus = new EventEmitter<SearchResult<Feature>>();
-
-  static SWIPE_ACTION = {
-    RIGHT: 'swiperight',
-    LEFT: 'swipeleft',
-    UP: 'swipeup',
-    DOWN: 'swipedown'
-  };
 
   resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
 
