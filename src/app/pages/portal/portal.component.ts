@@ -417,7 +417,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   // }
   // }
 
-  private addFeatureToMap(result: SearchResult<Feature>) {
+  addFeatureToMap(result: SearchResult<Feature>) {
     const feature = result.data;
 
     // Somethimes features have no geometry. It happens with some GetFeatureInfo
