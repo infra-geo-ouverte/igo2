@@ -1,4 +1,29 @@
-<a name="0.23.1"></a>
+## [0.23.2-alpha.0](https://github.com/infra-geo-ouverte/igo2/compare/0.23.1...0.23.2-alpha.0) (2019-08-07)
+
+
+### Bug Fixes
+
+* **addFeature:** private to public function ([6117749](https://github.com/infra-geo-ouverte/igo2/commit/6117749))
+* **feature:** movetoFeature ([3e74a25](https://github.com/infra-geo-ouverte/igo2/commit/3e74a25))
+* **test:** upgrade ChromeDriver ([86d95f3](https://github.com/infra-geo-ouverte/igo2/commit/86d95f3))
+* **toast-panel:** overflow ([56e9bf1](https://github.com/infra-geo-ouverte/igo2/commit/56e9bf1))
+
+
+### Features
+
+* upgrade to angular 7 ([8a1b52d](https://github.com/infra-geo-ouverte/igo2/commit/8a1b52d))
+* **filter:** minor fixes ([c0669a8](https://github.com/infra-geo-ouverte/igo2/commit/c0669a8))
+* **igo2:** update igo2-lib ([b003604](https://github.com/infra-geo-ouverte/igo2/commit/b003604))
+* **loading:** loading animation ([d7fe26d](https://github.com/infra-geo-ouverte/igo2/commit/d7fe26d))
+* **query:** group by layer title ([05a2d96](https://github.com/infra-geo-ouverte/igo2/commit/05a2d96))
+* **query toas panel:** in progress ([aba4032](https://github.com/infra-geo-ouverte/igo2/commit/aba4032))
+* **search:** separe search and query results ([fe228b3](https://github.com/infra-geo-ouverte/igo2/commit/fe228b3))
+* **search-source:** reseau-transport-quebec ([5ca51df](https://github.com/infra-geo-ouverte/igo2/commit/5ca51df))
+* **toast:** in progress ([bbbba1f](https://github.com/infra-geo-ouverte/igo2/commit/bbbba1f))
+* **wfs:** wfs table ([e76307c](https://github.com/infra-geo-ouverte/igo2/commit/e76307c))
+
+
+
 ## [0.23.1](https://github.com/infra-geo-ouverte/igo2/compare/0.23.0...0.23.1) (2019-02-18)
 
 
@@ -8,7 +33,6 @@
 
 
 
-<a name="0.23.0"></a>
 # [0.23.0](https://github.com/infra-geo-ouverte/igo2/compare/0.22.3...0.23.0) (2019-02-18)
 
 
@@ -26,7 +50,6 @@
 
 
 
-<a name="0.22.3"></a>
 ## [0.22.3](https://github.com/infra-geo-ouverte/igo2/compare/0.22.2...0.22.3) (2019-02-08)
 
 
@@ -41,7 +64,6 @@
 
 
 
-<a name="0.22.2"></a>
 ## [0.22.2](https://github.com/infra-geo-ouverte/igo2/compare/0.22.1...0.22.2) (2019-02-08)
 
 
@@ -56,7 +78,6 @@
 
 
 
-<a name="0.22.1"></a>
 ## [0.22.1](https://github.com/infra-geo-ouverte/igo2/compare/0.22.0...0.22.1) (2019-02-07)
 
 
@@ -66,7 +87,6 @@
 
 
 
-<a name="0.22.0"></a>
 # [0.22.0](https://github.com/infra-geo-ouverte/igo2/compare/0.21.3...0.22.0) (2019-02-07)
 
 
@@ -84,7 +104,6 @@
 
 
 
-<a name="0.21.3"></a>
 ## [0.21.3](https://github.com/infra-geo-ouverte/igo2/compare/0.21.2...0.21.3) (2018-12-06)
 
 
@@ -94,7 +113,6 @@
 
 
 
-<a name="0.21.2"></a>
 ## [0.21.2](https://github.com/infra-geo-ouverte/igo2/compare/0.21.1...0.21.2) (2018-11-02)
 
 
@@ -109,7 +127,6 @@
 
 
 
-<a name="0.21.1"></a>
 ## [0.21.1](https://github.com/infra-geo-ouverte/igo2/compare/0.21.0...0.21.1) (2018-11-01)
 
 
@@ -126,7 +143,6 @@
 
 
 
-<a name="0.21.0"></a>
 # [0.21.0](https://github.com/infra-geo-ouverte/igo2/compare/0.20.0...0.21.0) (2018-10-30)
 
 
@@ -149,7 +165,6 @@
 
 
 
-<a name="0.20.0"></a>
 # [0.20.0](https://github.com/infra-geo-ouverte/igo2/compare/0.19.4...0.20.0) (2018-09-07)
 
 
@@ -159,7 +174,6 @@
 
 
 
-<a name="0.19.4"></a>
 ## [0.19.4](https://github.com/infra-geo-ouverte/igo2/compare/0.19.3...0.19.4) (2018-05-10)
 
 
@@ -169,7 +183,6 @@
 
 
 
-<a name="0.19.3"></a>
 ## [0.19.3](https://github.com/infra-geo-ouverte/igo2/compare/0.19.2...0.19.3) (2018-05-09)
 
 
@@ -185,7 +198,6 @@
 
 
 
-<a name="0.19.2"></a>
 ## [0.19.2](https://github.com/infra-geo-ouverte/igo2/compare/0.19.1...0.19.2) (2018-05-04)
 
 
@@ -195,7 +207,6 @@
 
 
 
-<a name="0.19.1"></a>
 ## [0.19.1](https://github.com/infra-geo-ouverte/igo2/compare/0.19.0...0.19.1) (2018-05-01)
 
 
@@ -206,7 +217,6 @@
 
 
 
-<a name="0.19.0"></a>
 # [0.19.0](https://github.com/infra-geo-ouverte/igo2/compare/0.18.0...0.19.0) (2018-05-01)
 
 
@@ -216,7 +226,6 @@
 
 
 
-<a name="0.18.0"></a>
 # [0.18.0](https://github.com/infra-geo-ouverte/igo2/compare/0.17.3...0.18.0) (2018-02-06)
 
 
@@ -227,7 +236,6 @@
 
 
 
-<a name="0.17.3"></a>
 ## [0.17.3](https://github.com/infra-geo-ouverte/igo2/compare/0.17.2...0.17.3) (2018-01-26)
 
 
@@ -237,7 +245,6 @@
 
 
 
-<a name="0.17.2"></a>
 ## [0.17.2](https://github.com/infra-geo-ouverte/igo2/compare/0.17.1...0.17.2) (2018-01-25)
 
 
@@ -247,7 +254,6 @@
 
 
 
-<a name="0.17.1"></a>
 ## [0.17.1](https://github.com/infra-geo-ouverte/igo2/compare/0.17.0...0.17.1) (2018-01-25)
 
 
@@ -262,7 +268,6 @@
 
 
 
-<a name="0.17.0"></a>
 # [0.17.0](https://github.com/infra-geo-ouverte/igo2/compare/0.16.0...0.17.0) (2018-01-12)
 
 
@@ -277,7 +282,6 @@
 
 
 
-<a name="0.16.0"></a>
 # [0.16.0](https://github.com/infra-geo-ouverte/igo2/compare/0.15.0...0.16.0) (2017-12-07)
 
 
@@ -287,7 +291,6 @@
 
 
 
-<a name="0.15.0"></a>
 # [0.15.0](https://github.com/infra-geo-ouverte/igo2/compare/0.14.0...0.15.0) (2017-12-06)
 
 
@@ -302,7 +305,6 @@
 
 
 
-<a name="0.14.0"></a>
 # [0.14.0](https://github.com/infra-geo-ouverte/igo2/compare/0.13.0...0.14.0) (2017-12-06)
 
 
@@ -312,7 +314,6 @@
 
 
 
-<a name="0.13.0"></a>
 # [0.13.0](https://github.com/infra-geo-ouverte/igo2/compare/0.12.1...0.13.0) (2017-11-14)
 
 
@@ -322,7 +323,6 @@
 
 
 
-<a name="0.12.1"></a>
 ## [0.12.1](https://github.com/infra-geo-ouverte/igo2/compare/0.12.0...0.12.1) (2017-11-03)
 
 
@@ -332,7 +332,6 @@
 
 
 
-<a name="0.12.0"></a>
 # [0.12.0](https://github.com/infra-geo-ouverte/igo2/compare/0.11.4...0.12.0) (2017-11-03)
 
 
@@ -343,7 +342,6 @@
 
 
 
-<a name="0.11.4"></a>
 ## [0.11.4](https://github.com/infra-geo-ouverte/igo2/compare/0.11.3...0.11.4) (2017-09-20)
 
 
@@ -353,7 +351,6 @@
 
 
 
-<a name="0.11.3"></a>
 ## [0.11.3](https://github.com/infra-geo-ouverte/igo2/compare/0.11.2...0.11.3) (2017-09-18)
 
 
@@ -364,7 +361,6 @@
 
 
 
-<a name="0.11.2"></a>
 ## [0.11.2](https://github.com/infra-geo-ouverte/igo2/compare/0.11.1...0.11.2) (2017-09-15)
 
 
@@ -374,7 +370,6 @@
 
 
 
-<a name="0.11.1"></a>
 ## [0.11.1](https://github.com/infra-geo-ouverte/igo2/compare/0.11.0...0.11.1) (2017-09-08)
 
 
@@ -384,7 +379,6 @@
 
 
 
-<a name="0.11.0"></a>
 # [0.11.0](https://github.com/infra-geo-ouverte/igo2/compare/0.10.0...0.11.0) (2017-09-01)
 
 
@@ -396,7 +390,6 @@
 
 
 
-<a name="0.10.0"></a>
 # [0.10.0](https://github.com/infra-geo-ouverte/igo2/compare/0.9.0...0.10.0) (2017-06-27)
 
 
@@ -411,7 +404,6 @@
 
 
 
-<a name="0.9.0"></a>
 # [0.9.0](https://github.com/infra-geo-ouverte/igo2/compare/0.8.1...0.9.0) (2017-06-12)
 
 
@@ -427,7 +419,6 @@
 
 
 
-<a name="0.8.1"></a>
 ## [0.8.1](https://github.com/infra-geo-ouverte/igo2/compare/0.8.0...0.8.1) (2017-06-02)
 
 
@@ -437,7 +428,6 @@
 
 
 
-<a name="0.8.0"></a>
 # [0.8.0](https://github.com/infra-geo-ouverte/igo2/compare/0.7.0...0.8.0) (2017-06-02)
 
 
@@ -457,7 +447,6 @@
 
 
 
-<a name="0.7.0"></a>
 # [0.7.0](https://github.com/infra-geo-ouverte/igo2/compare/0.6.1...0.7.0) (2017-05-16)
 
 
@@ -479,7 +468,6 @@
 
 
 
-<a name="0.6.1"></a>
 ## [0.6.1](https://github.com/infra-geo-ouverte/igo2/compare/0.6.0...0.6.1) (2017-04-05)
 
 
@@ -489,7 +477,6 @@
 
 
 
-<a name="0.6.0"></a>
 # [0.6.0](https://github.com/infra-geo-ouverte/igo2/compare/0.5.1...0.6.0) (2017-04-04)
 
 
@@ -504,7 +491,6 @@
 
 
 
-<a name="0.5.1"></a>
 ## [0.5.1](https://github.com/infra-geo-ouverte/igo2/compare/0.5.0...0.5.1) (2017-03-21)
 
 
@@ -521,7 +507,6 @@
 
 
 
-<a name="0.5.0"></a>
 # [0.5.0](https://github.com/infra-geo-ouverte/igo2/compare/0.4.0...0.5.0) (2017-03-16)
 
 
@@ -544,7 +529,6 @@
 
 
 
-<a name="0.4.0"></a>
 # [0.4.0](https://github.com/infra-geo-ouverte/igo2/compare/0.3.4...0.4.0) (2017-03-03)
 
 
@@ -569,7 +553,6 @@
 
 
 
-<a name="0.3.4"></a>
 ## [0.3.4](https://github.com/infra-geo-ouverte/igo2/compare/0.3.2...0.3.4) (2017-02-23)
 
 
@@ -596,7 +579,6 @@
 
 
 
-<a name="0.3.2"></a>
 ## [0.3.2](https://github.com/infra-geo-ouverte/igo2/compare/0.3.1...0.3.2) (2017-02-21)
 
 
@@ -612,7 +594,6 @@
 
 
 
-<a name="0.3.1"></a>
 ## [0.3.1](https://github.com/infra-geo-ouverte/igo2/compare/0.3.0...0.3.1) (2017-02-17)
 
 
@@ -620,7 +601,7 @@
 
 * package.json & .snyk to reduce vulnerabilities ([184f888](https://github.com/infra-geo-ouverte/igo2/commit/184f888))
 * package.json & .snyk to reduce vulnerabilities ([#49](https://github.com/infra-geo-ouverte/igo2/issues/49)) ([a7aac77](https://github.com/infra-geo-ouverte/igo2/commit/a7aac77))
-* **deps:** move angular-cli to [@angular](https://github.com/angular)/cli ([#61](https://github.com/infra-geo-ouverte/igo2/issues/61)) ([aa7b28a](https://github.com/infra-geo-ouverte/igo2/commit/aa7b28a))
+* **deps:** move angular-cli to @angular/cli ([#61](https://github.com/infra-geo-ouverte/igo2/issues/61)) ([aa7b28a](https://github.com/infra-geo-ouverte/igo2/commit/aa7b28a))
 * package.json & .snyk to reduce vulnerabilities ([#90](https://github.com/infra-geo-ouverte/igo2/issues/90)) ([c5c2a03](https://github.com/infra-geo-ouverte/igo2/commit/c5c2a03))
 * **flex:** fix warning "export FlexState was not found" ([#105](https://github.com/infra-geo-ouverte/igo2/issues/105)) ([11889df](https://github.com/infra-geo-ouverte/igo2/commit/11889df))
 * **icherche:** change url ([57ce93f](https://github.com/infra-geo-ouverte/igo2/commit/57ce93f))
