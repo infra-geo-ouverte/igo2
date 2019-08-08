@@ -32,15 +32,9 @@ export const environment: Environment = {
         available: false
       },
       icherche: {
-        searchUrl: '/icherche/geocode',
+        searchUrl: '/apis/icherche/geocode',
         params: {
           limit: '8'
-        }
-      },
-      icherchereverse: {
-        searchUrl: '/icherche/xy',
-        params: {
-          limit: '5'
         }
       },
       ilayer: {

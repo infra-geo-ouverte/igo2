@@ -17,10 +17,16 @@ export const environment: Environment = {
         enabled: false
       },
       icherche: {
-        searchUrl: '/icherche/geocode'
+        searchUrl: '/apis/icherche/geocode',
+        params: {
+          limit: '8'
+        }
       },
-      datasource: {
-        searchUrl: '/apis/layers/search'
+      ilayer: {
+        searchUrl: '/apis/layers/search',
+        params: {
+          limit: '5'
+        }
       }
     },
     language: {

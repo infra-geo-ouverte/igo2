@@ -43,7 +43,7 @@ import { AppComponent } from './app.component';
     RouteService,
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
-    provideIChercheReverseSearchSource(), // TODO: replace by territoire
+    provideIChercheReverseSearchSource(),
     provideCoordinatesReverseSearchSource(),
     provideILayerSearchSource(),
     provideOsrmRoutingSource()

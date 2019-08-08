@@ -118,9 +118,9 @@ export class ToastPanelComponent {
   }
 
   swipe(action: string) {
-    if (action === ToastPanelComponent.SWIPE_ACTION.LEFT) {
+    if (action === ToastPanelComponent.SWIPE_ACTION.RIGHT) {
       this.previousResult();
-    } else if (action === ToastPanelComponent.SWIPE_ACTION.RIGHT) {
+    } else if (action === ToastPanelComponent.SWIPE_ACTION.LEFT) {
       this.nextResult();
     } else if (action === ToastPanelComponent.SWIPE_ACTION.UP) {
       this.opened = true;
