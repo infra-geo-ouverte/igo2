@@ -1,21 +1,21 @@
 {
   "/icherche/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+    "target": "https://testgeoegl.msp.gouv.qc.ca",
     "changeOrigin": true,
     "secure": false
   },
   "/ws/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+    "target": "https://testgeoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },
   "/carto/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+    "target": "https://testgeoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },
   "/apis/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+    "target": "https://testgeoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },
