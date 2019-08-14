@@ -122,7 +122,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   };
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
+<<<<<<< HEAD
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
+=======
+>>>>>>> feat/ui(search): clean feature, geolocate-button replacement, queryable layer panel resize
 
   get map(): IgoMap {
     return this.mapState.map;
