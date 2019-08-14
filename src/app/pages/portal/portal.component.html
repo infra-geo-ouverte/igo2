@@ -94,7 +94,7 @@
 
 <app-toast-panel
   [store]="queryStore"
-  [@toastPanelOffsetX]="sidenavOpened"
+  [@toastPanelOffsetX]="(isMobile || !isLandscape) ? undefined : sidenavOpened"
   [@toastPanelOffsetY]="expansionPanelExpanded"
   (resultSelect)="addFeatureToMap($event)">
 </app-toast-panel>

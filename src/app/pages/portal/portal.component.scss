@@ -105,4 +105,7 @@ app-toast-panel.app-toast-panel-opened {
 
 igo-geolocate-button {
   margin-bottom: 90px;
+  @include mobile {
+    margin-bottom: 0px;
+  }
 }

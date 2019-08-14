@@ -130,9 +130,9 @@ export class ToastPanelComponent {
   }
 
   onToggleClick(e: MouseEvent) {
-    if (e.srcElement.className !== 'igo-panel-title') {
+/*     if (e.srcElement.className !== 'igo-panel-title') {
       return;
-    }
+    } */
     this.opened = !this.opened;
   }
 }
