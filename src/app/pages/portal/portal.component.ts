@@ -13,7 +13,7 @@ import { Subscription, of } from 'rxjs';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
 
-import { MediaService, ConfigService, Media } from '@igo2/core';
+import { MediaService, ConfigService, Media, MediaOrientation } from '@igo2/core';
 import {
   // ActionbarMode,
   // Workspace,
@@ -45,12 +45,11 @@ import {
 } from '@igo2/geo';
 
 import {
-  ContextState,
-  // WorkspaceState,
   ToolState,
   MapState,
   SearchState,
-  QueryState
+  QueryState,
+  ContextState
 } from '@igo2/integration';
 
 import {
@@ -121,8 +120,22 @@ export class PortalComponent implements OnInit, OnDestroy {
     ]
   };
 
+  @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
+
   get map(): IgoMap {
     return this.mapState.map;
+  }
+
+  isMobile(): boolean {
+    return (
+      this.mediaService.getMedia() === Media.Mobile
+    );
+  }
+
+  isLandscape(): boolean {
+    return (
+      this.mediaService.getOrientation() === MediaOrientation.Landscape
+    );
   }
 
   get backdropShown(): boolean {
@@ -212,8 +225,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   // get workspace(): Workspace {
   //   return this.workspaceState.workspace$.value;
   // }
-
-  @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -430,6 +441,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private onClearSearch() {
     this.searchStore.clear();
+    this.map.overlay.clear();
     // this.closeToastPanel();
   }
 
