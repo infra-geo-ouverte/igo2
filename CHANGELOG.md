@@ -1,4 +1,20 @@
-## [0.23.2-alpha.0](https://github.com/infra-geo-ouverte/igo2/compare/0.23.1...0.23.2-alpha.0) (2019-08-07)
+## [0.23.2-alpha.1](https://github.com/infra-geo-ouverte/igo2/compare/1.0.0-alpha.0...0.23.2-alpha.1) (2019-08-15)
+
+
+### Bug Fixes
+
+* minors fix ([141729c](https://github.com/infra-geo-ouverte/igo2/commit/141729c))
+
+
+### Features
+
+* **context:** add measure tool ([7572d1b](https://github.com/infra-geo-ouverte/igo2/commit/7572d1b))
+* **igo2:** updrade libs ([d9c354f](https://github.com/infra-geo-ouverte/igo2/commit/d9c354f))
+* **igo2-lib:** update igo2-lib ([53c52bd](https://github.com/infra-geo-ouverte/igo2/commit/53c52bd))
+
+
+
+# [1.0.0-alpha.0](https://github.com/infra-geo-ouverte/igo2/compare/0.23.2-alpha.0...1.0.0-alpha.0) (2019-08-07)
 
 
 ### Bug Fixes
