@@ -37,6 +37,10 @@ export const environment: Environment = {
           limit: '8'
         }
       },
+      icherchereverse: {
+        searchUrl: '/apis/territoires/locate',
+        enabled: true
+      },
       ilayer: {
         searchUrl: '/apis/layers/search',
         params: {

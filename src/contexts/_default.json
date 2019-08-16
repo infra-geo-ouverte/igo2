@@ -30,7 +30,7 @@
   "toolbar": [
     "searchResults",
     "contextManager",
-    "map",
+    "mapDetails",
     "directions",
     "timeAnalysis",
     "measurer",
@@ -68,7 +68,7 @@
       "name": "shareMap"
     },
     {
-      "name": "map",
+      "name": "mapDetails",
       "options": {
         "toggleLegendOnVisibilityChange": false,
         "layerListControls": {
