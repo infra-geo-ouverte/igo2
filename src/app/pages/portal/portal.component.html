@@ -21,6 +21,7 @@
   <igo-search-bar
     [term]="searchBarTerm"
     [minLength]="minSearchTermLength"
+    [searchSettings]="true"
     (change)="onSearchTermChange($event)"
     (search)="onSearch($event)">
   </igo-search-bar>
