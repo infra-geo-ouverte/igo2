@@ -1,64 +1,71 @@
-<igo-panel
-  *ngIf="store.entities$ | async"
-  [title]="resultSelected$.value ? getTitle(resultSelected$.value) : 'Liste des résultats'"
-  (click)="onToggleClick($event)"
-  (swipeleft)="swipe($event.type)"
-  (swiperight)="swipe($event.type)"
-  (swipeup)="swipe($event.type)"
-  (swipedown)="swipe($event.type)">
+<ng-template #toast>
+  <igo-panel
+    *ngIf="store.entities$ | async"
+    [title]="resultSelected$.value ? getTitle(resultSelected$.value) : 'Liste des résultats'"
+    (click)="onToggleClick($event)">
 
-  <button
-    *ngIf="resultSelected$.value"
-    mat-icon-button
-    igoStopPropagation
-    panelLeftButton
-    (click)="unselectResult()">
-    <mat-icon svgIcon="format-list-bulleted-square"></mat-icon>
-  </button>
-
-  <button
-    *ngIf="resultSelected$.value"
-    [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
-    mat-icon-button
-    igoStopPropagation
-    panelLeftButton
-    (click)="previousResult()">
-    <mat-icon svgIcon="chevron-left"></mat-icon>
-  </button>
-
-  <button
-    *ngIf="resultSelected$.value"
-    [disabled]="results[results.length-1].meta.id === resultSelected$.value.meta.id"
-    mat-icon-button
-    igoStopPropagation
-    panelRightButton
-    (click)="nextResult()">
-    <mat-icon svgIcon="chevron-right"></mat-icon>
-  </button>
-
-  <button
-    mat-icon-button
-    igoStopPropagation
-    panelRightButton
-    (click)="clear()">
-    <mat-icon svgIcon="close"></mat-icon>
-  </button>
-
-  <div
-    #content
-    igoStopPropagation>
-
-    <igo-feature-details
+    <button
       *ngIf="resultSelected$.value"
-      [feature]="resultSelected$.value.data">
-    </igo-feature-details>
+      mat-icon-button
+      igoStopPropagation
+      panelLeftButton
+      (click)="unselectResult()">
+      <mat-icon svgIcon="format-list-bulleted-square"></mat-icon>
+    </button>
 
-    <igo-search-results
-      *ngIf="!resultSelected$.value"
-      [store]="store"
-      (resultFocus)="focusResult($event)"
-      (resultSelect)="selectResult($event)">
-    </igo-search-results>
+    <button
+      *ngIf="resultSelected$.value"
+      [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
+      mat-icon-button
+      igoStopPropagation
+      panelLeftButton
+      (click)="previousResult()">
+      <mat-icon svgIcon="chevron-left"></mat-icon>
+    </button>
 
-  </div>
-</igo-panel>
+    <button
+      *ngIf="resultSelected$.value"
+      [disabled]="results[results.length-1].meta.id === resultSelected$.value.meta.id"
+      mat-icon-button
+      igoStopPropagation
+      panelRightButton
+      (click)="nextResult()">
+      <mat-icon svgIcon="chevron-right"></mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      igoStopPropagation
+      panelRightButton
+      (click)="clear()">
+      <mat-icon svgIcon="close"></mat-icon>
+    </button>
+
+    <div
+      #content
+      igoStopPropagation>
+
+      <igo-feature-details
+        *ngIf="resultSelected$.value"
+        [feature]="resultSelected$.value.data">
+      </igo-feature-details>
+
+      <igo-search-results
+        *ngIf="!resultSelected$.value"
+        [store]="store"
+        (resultFocus)="focusResult($event)"
+        (resultSelect)="selectResult($event)">
+      </igo-search-results>
+
+    </div>
+  </igo-panel>
+</ng-template>
+
+<div *ngIf="isMobile(); else toast"
+(swipeleft)="swipe($event.type)"
+(swiperight)="swipe($event.type)"
+(swipeup)="swipe($event.type)"
+(swipedown)="swipe($event.type)">
+
+<ng-template [ngTemplateOutlet]="toast"></ng-template>
+</div>

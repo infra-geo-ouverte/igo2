@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { getEntityTitle, EntityStore } from '@igo2/common';
 import { Feature, SearchResult } from '@igo2/geo';
+import { Media, MediaService } from '@igo2/core';
 
 @Component({
   selector: 'app-toast-panel',
@@ -60,7 +61,9 @@ export class ToastPanelComponent {
     return this.store.all();
   }
 
-  constructor() {}
+  constructor(
+    public mediaService: MediaService
+    ) {}
 
   getTitle(result: SearchResult) {
     return getEntityTitle(result);
@@ -91,6 +94,12 @@ export class ToastPanelComponent {
   clear() {
     this.store.clear();
     this.unselectResult();
+  }
+
+  isMobile(): boolean {
+    return (
+      this.mediaService.getMedia() === Media.Mobile
+    );
   }
 
   @HostListener('document:keydown.ArrowLeft')

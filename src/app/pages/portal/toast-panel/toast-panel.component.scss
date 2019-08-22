@@ -50,4 +50,8 @@ igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelrightbutton] {
 
 igo-panel ::ng-deep .igo-panel-content {
   max-height: 230px;
+  -webkit-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  user-select: auto !important;
 }
