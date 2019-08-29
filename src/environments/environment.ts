@@ -28,8 +28,8 @@ export const environment: Environment = {
       allowAnonymous: true
     },
     context: {
-      url: "/apis/igo2",
-      defaultContextUri: "5"
+      url: '/apis/igo2',
+      defaultContextUri: '5'
     },
     searchSources: {
       nominatim: {

@@ -4,6 +4,10 @@
     "close": "Fermer le menu",
     "open": "Menu"
   },
+  "toastPanel": {
+    "title": "Entités trouvées sur la carte",
+    "listButton": "Retourner à la liste des entités"
+  },
   "IGO": "IGO",
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
   "coordinates": "Afficher les coordonnées",

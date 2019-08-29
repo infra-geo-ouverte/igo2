@@ -85,6 +85,7 @@ export class ToastPanelComponent {
 
   unselectResult() {
     this.resultSelected$.next(undefined);
+    this.resultSelect.emit(undefined);
     this.store.state.clear();
   }
 

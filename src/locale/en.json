@@ -4,6 +4,10 @@
     "close": "Close Menu",
     "open": "Open Menu"
   },
+  "toastPanel": {
+    "title": "Entities found on the map",
+    "listButton": "Return to the list of entities"
+  },
   "IGO": "IGO",
   "noEntityStore": "No tables available for this dataset",
   "coordinates": "Show coordinates,",

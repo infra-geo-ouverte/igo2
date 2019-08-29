@@ -1,6 +1,6 @@
 <igo-panel
   *ngIf="store.entities$ | async"
-  [title]="resultSelected$.value ? getTitle(resultSelected$.value) : 'Liste des résultats'"
+  [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
   (click)="onToggleClick($event)"
   (swipeleft)="swipe($event.type)"
   (swiperight)="swipe($event.type)"
@@ -12,6 +12,7 @@
     mat-icon-button
     igoStopPropagation
     panelLeftButton
+    [matTooltip]="'toastPanel.listButton' | translate"
     (click)="unselectResult()">
     <mat-icon svgIcon="format-list-bulleted-square"></mat-icon>
   </button>
