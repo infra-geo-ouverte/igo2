@@ -9,10 +9,9 @@ import {
 } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
-import olFormatGeoJSON from 'ol/format/GeoJSON';
 
-import { Tool, Toolbox, getEntityTitle, FlexibleState } from '@igo2/common';
-import { SearchResult, IgoMap, moveToOlFeatures } from '@igo2/geo';
+import { Tool, Toolbox } from '@igo2/common';
+import { IgoMap } from '@igo2/geo';
 import { ToolState } from '@igo2/integration';
 
 @Component({
@@ -23,10 +22,8 @@ import { ToolState } from '@igo2/integration';
 })
 export class SidenavComponent implements OnInit, OnDestroy {
   title$: BehaviorSubject<string> = new BehaviorSubject<string>(undefined);
-  topPanelState: FlexibleState = 'initial';
 
   private activeTool$$: Subscription;
-  private format = new olFormatGeoJSON();
 
   @Input()
   get map(): IgoMap {
@@ -36,20 +33,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this._map = value;
   }
   private _map: IgoMap;
-
-  @Input()
-  get searchResult(): SearchResult {
-    return this._searchResult;
-  }
-  set searchResult(value: SearchResult) {
-    this._searchResult = value;
-    if (!value) {
-      this.topPanelState = 'initial';
-    } else if (this.topPanelState === 'initial') {
-      this.topPanelState = 'collapsed';
-    }
-  }
-  private _searchResult: SearchResult;
 
   @Input()
   get opened(): boolean {
@@ -66,17 +49,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
   private _opened: boolean;
 
   @Output() openedChange = new EventEmitter<boolean>();
+  @Output() toolChange = new EventEmitter<Tool>();
 
   get toolbox(): Toolbox {
     return this.toolState.toolbox;
-  }
-
-  get panelTitle(): string {
-    let title;
-    if (this.searchResult !== undefined) {
-      title = getEntityTitle(this.searchResult);
-    }
-    return title;
   }
 
   constructor(private toolState: ToolState) {}
@@ -84,6 +60,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.activeTool$$ = this.toolbox.activeTool$.subscribe((tool: Tool) => {
       this.title$.next(tool ? tool.title : 'IGO');
+      this.toolChange.emit(tool);
     });
   }
 
@@ -97,23 +74,5 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   onUnselectButtonClick() {
     this.toolbox.deactivateTool();
-  }
-
-  zoomToFeatureExtent() {
-    if (this.searchResult.data.geometry) {
-      const olFeature = this.format.readFeature(this.searchResult.data, {
-        dataProjection: this.searchResult.data.geometry.projection,
-        featureProjection: this.map.projection
-      });
-      moveToOlFeatures(this.map, olFeature);
-    }
-  }
-
-  toggleTopPanel() {
-    if (this.topPanelState === 'collapsed') {
-      this.topPanelState = 'expanded';
-    } else {
-      this.topPanelState = 'collapsed';
-    }
   }
 }

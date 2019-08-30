@@ -22,7 +22,8 @@ import {
   ActionStore,
   EntityStore,
   // getEntityTitle,
-  Toolbox
+  Toolbox,
+  Tool
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -121,6 +122,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   };
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
+  @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
 
   get map(): IgoMap {
     return this.mapState.map;
@@ -381,13 +383,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
   }
 
+  public toolChanged(tool: Tool) {
+    if (tool && tool.name === 'searchResults') {
+      this.searchBar.nativeElement.getElementsByTagName('input')[0].focus();
+    }
+  }
+
   private onChangeContext(context: DetailedContext) {
     if (context === undefined) {
       return;
     }
 
     if (this.contextLoaded) {
-      this.toolState.toolbox.activateTool('mapDetails');
+      this.toolbox.activateTool('mapDetails');
     }
 
     this.contextLoaded = true;
@@ -398,7 +406,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     //   this.closeToastPanel();
     // }
 
-    this.toolState.toolbox.activateTool('searchResults');
+    this.toolbox.activateTool('searchResults');
     this.openSidenav();
   }
 
@@ -429,17 +437,18 @@ export class PortalComponent implements OnInit, OnDestroy {
   // }
 
   addFeatureToMap(result: SearchResult<Feature>) {
-    const feature = result.data;
+    const feature = result ? result.data : undefined;
 
     // Somethimes features have no geometry. It happens with some GetFeatureInfo
-    if (feature.geometry === undefined) {
+    if (!feature || feature.geometry === undefined) {
+      this.map.overlay.clear();
       return;
     }
 
     this.map.overlay.setFeatures([feature], FeatureMotion.Default);
   }
 
-  private onClearSearch() {
+  public onClearSearch() {
     this.searchStore.clear();
     this.map.overlay.clear();
     // this.closeToastPanel();

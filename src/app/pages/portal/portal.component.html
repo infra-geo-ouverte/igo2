@@ -19,22 +19,26 @@
   </button>
 
   <igo-search-bar
+    #searchBar
     [term]="searchBarTerm"
     [minLength]="minSearchTermLength"
     [searchSettings]="true"
-    (change)="onSearchTermChange($event)"
-    (search)="onSearch($event)">
+    (searchTermChange)="onSearchTermChange($event)"
+    (search)="onSearch($event)"
+    (clearFeature)="onClearSearch()">
   </igo-search-bar>
 
   <app-sidenav
     [map]="map"
-    [(opened)]="sidenavOpened">
+    [(opened)]="sidenavOpened"
+    (toolChange)="toolChanged($event)">
   </app-sidenav>
 
   <igo-map-browser
     #mapBrowser
     igoQuery
     [waitForAllQueries]="true"
+    [queryFeatures]="true"
     igoMapContext
     igoLayerContext
     igoDropGeoFile
