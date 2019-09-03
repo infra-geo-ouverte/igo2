@@ -252,6 +252,29 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     // this.sidenavTitle = this.configService.getConfig('sidenavTitle');
 
+
+    this.route.queryParams.subscribe(params => {
+      if (params["layers"] && params["wmsUrl"]) {
+
+        const layersByService = params["layers"].split("),(");
+        const urls = params["wmsUrl"].split(',')
+        let cnt = 0;
+        urls.forEach(url => {
+          let currentLayersByService =layersByService[cnt];
+          currentLayersByService = currentLayersByService.startsWith('(') ? currentLayersByService.substr(1) : currentLayersByService
+          currentLayersByService = currentLayersByService.endsWith(')') ? currentLayersByService.slice(0,-1) : currentLayersByService
+          currentLayersByService = currentLayersByService.split(',')
+          currentLayersByService.forEach(layer => {
+            const layerFromUrl = layer.split(':igoz');
+            this.addLayerByName(url, layerFromUrl[0], parseInt(layerFromUrl[1]|| 1000));
+          });
+          cnt+=1
+        });
+      }
+    }
+    );
+
+
     this.authService.authenticate$.subscribe(
       () => (this.contextLoaded = false)
     );
@@ -547,34 +570,21 @@ export class PortalComponent implements OnInit, OnDestroy {
   //   });
   // }
 
-  // private addLayerByName(url: string, name: string) {
-  //   const properties = {
-  //     type: "wms" as any,
-  //     // format: 'wms',
-  //     url: url,
-  //     params: {
-  //       layers: name
-  //     }
-  //   };
-  //
-  //   this.capabilitiesService
-  //     .getWMSOptions(properties)
-  //     .subscribe(capabilities => {
-  //       this.dataSourceService
-  //         .createAsyncDataSource(capabilities)
-  //         .pipe(debounceTime(100))
-  //         .subscribe(dataSource => {
-  //           const layerOptions = {
-  //             source: Object.assign(dataSource, {
-  //               options: {
-  //                 optionsFromCapabilities: true,
-  //                 _layerOptionsFromCapabilities: (capabilities as any)
-  //                   ._layerOptionsFromCapabilities
-  //               }
-  //             })
-  //           };
-  //           this.map.addLayer(this.layerService.createLayer(layerOptions));
-  //         });
-  //     });
-  // }
+  private addLayerByName(url: string, name: string, zIndex: number = 100000) {
+
+    this.layerService
+    .createAsyncLayer({
+      zIndex: zIndex,
+      sourceOptions: {
+        optionsFromCapabilities: true,
+        type: 'wms',
+        url: url,
+        params: {
+          layers: name,
+          version: '1.3.0'
+        }
+      }
+    })
+    .subscribe(l => this.map.addLayer(l));
+  }
 }
