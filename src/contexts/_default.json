@@ -41,15 +41,6 @@
   ],
   "tools": [
     {
-      "name": "about",
-      "options": {
-        "html": "<h1>This is a IGO</h1>"
-      }
-    },
-    {
-      "name": "directions"
-    },
-    {
       "name": "searchResults",
       "options": {
         "focusFirst": true
@@ -82,13 +73,31 @@
       }
     },
     {
+      "name": "directions"
+    },
+    {
       "name": "timeAnalysis"
     },
     {
       "name": "measurer"
     },
     {
+      "name": "catalogBrowser"
+    },
+    {
+      "name": "catalog"
+    },
+    {
       "name": "print"
+    },
+    {
+      "name": "shareMap"
+    },
+    {
+      "name": "about",
+      "options": {
+        "html": "<h1>This is a IGO</h1>"
+      }
     }
   ]
 }

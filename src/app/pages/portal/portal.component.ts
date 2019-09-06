@@ -122,10 +122,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   };
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
-<<<<<<< HEAD
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
-=======
->>>>>>> feat/ui(search): clean feature, geolocate-button replacement, queryable layer panel resize
 
   get map(): IgoMap {
     return this.mapState.map;
@@ -517,6 +514,22 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     if (this.sidenavOpened) {
       e.element.classList.add('sidenav-offset');
+    }
+  }
+
+  getExpansionStatus() {
+    if (this.sidenavOpened === false) {
+      return 'full';
+    }
+    if (this.sidenavOpened === true && this.isMobile() === false) {
+      return 'reduced';
+    }
+    if (this.sidenavOpened === true && this.isMobile() === true) {
+      if (this.expansionPanelExpanded === true) {
+        return 'mobile';
+      } else {
+        return 'notVisible';
+      }
     }
   }
 

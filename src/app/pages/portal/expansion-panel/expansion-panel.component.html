@@ -1,6 +1,11 @@
 <div>
 
   <div class="app-expansion-panel-container">
+    <igo-backdrop
+      [shown]="backdropShown"
+      (click)="onBackdropClick()">
+    </igo-backdrop>
+
     <app-expansion-panel-header [(expanded)]="expanded">
       <ng-content select="[expansionPanelHeader]"></ng-content>
     </app-expansion-panel-header>
@@ -10,11 +15,6 @@
       [@showContent]="expanded">
       <ng-content></ng-content>
     </div>
-
-    <igo-backdrop
-      [shown]="backdropShown"
-      (click)="onBackdropClick()">
-    </igo-backdrop>
   </div>
 
 </div>
