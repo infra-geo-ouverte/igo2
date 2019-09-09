@@ -118,7 +118,7 @@ export function controlsAnimations(): AnimationTriggerMetadata[] {
       state(
         'false',
         style({
-          left: 'calc(100% - 40px)'
+          right: '5px'
         })
       ),
       state(
