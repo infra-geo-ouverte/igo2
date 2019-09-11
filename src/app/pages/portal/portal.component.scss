@@ -58,6 +58,7 @@ igo-search-bar {
 
   @include mobile {
     width: $search-bar-width-mobile;
+    max-width: 400px;
   }
 }
 
@@ -70,12 +71,22 @@ mat-sidenav-container {
   display: unset;
 }
 
+mat-sidenav-content {
+  @include mobile {
+    z-index: auto;
+  }
+}
+
 /*** Expansion Panel ***/
 app-expansion-panel {
   position: absolute;
   bottom: 0;
   z-index: 4;
   overflow: hidden;
+
+  @include mobile {
+    z-index: 1;
+  }
 }
 
 /*** Toast Panel ***/
@@ -107,5 +118,14 @@ igo-geolocate-button {
   margin-bottom: 90px;
   @include mobile {
     margin-bottom: 0px;
+  }
+  @include tablet {
+    margin-bottom: 0px;
+  }
+}
+
+igo-zoom-button {
+  @include tablet {
+    display: none;
   }
 }

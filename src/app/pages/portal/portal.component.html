@@ -1,82 +1,83 @@
 <mat-sidenav-container class="app-main-container">
+  <mat-sidenav-content>
 
-  <igo-backdrop
-    [shown]="backdropShown"
-    (click)="onBackdropClick()">
-  </igo-backdrop>
+    <igo-backdrop
+      [shown]="backdropShown"
+      (click)="onBackdropClick()">
+    </igo-backdrop>
 
-  <button
-    mat-icon-button
-    id="menu-button"
-    class="menu-button"
-    color="primary"
-    tooltip-position="below"
-    matTooltipShowDelay="500"
-    [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
-    (click)="onToggleSidenavClick()">
-    <mat-icon svgIcon="menu">
-    </mat-icon>
-  </button>
+    <button
+      mat-icon-button
+      id="menu-button"
+      class="menu-button"
+      color="primary"
+      tooltip-position="below"
+      matTooltipShowDelay="500"
+      [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
+      (click)="onToggleSidenavClick()">
+      <mat-icon svgIcon="menu">
+      </mat-icon>
+    </button>
 
-  <igo-search-bar
-    #searchBar
-    [term]="searchBarTerm"
-    [minLength]="minSearchTermLength"
-    [searchSettings]="true"
-    (searchTermChange)="onSearchTermChange($event)"
-    (search)="onSearch($event)"
-    (clearFeature)="onClearSearch()">
-  </igo-search-bar>
+    <igo-search-bar
+      #searchBar
+      [term]="searchBarTerm"
+      [minLength]="minSearchTermLength"
+      [searchSettings]="true"
+      (searchTermChange)="onSearchTermChange($event)"
+      (search)="onSearch($event)"
+      (clearFeature)="onClearSearch()">
+    </igo-search-bar>
 
-  <app-sidenav
-    [map]="map"
-    [(opened)]="sidenavOpened"
-    (toolChange)="toolChanged($event)">
-  </app-sidenav>
+    <app-sidenav
+      [map]="map"
+      [(opened)]="sidenavOpened"
+      (toolChange)="toolChanged($event)">
+    </app-sidenav>
 
-  <igo-map-browser
-    #mapBrowser
-    igoQuery
-    [waitForAllQueries]="true"
-    [queryFeatures]="true"
-    igoMapContext
-    igoLayerContext
-    [removeLayersOnContextChange]="true"
-    igoDropGeoFile
-    (query)="onMapQuery($event)"
-    [map]="map"
-    [igoContextMenu]=contextMenu
-    (menuPosition)="onContextMenuOpen($event)"
-    [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
-    [@mapStateX]="sidenavOpened ? 'right' : 'left'"
-    (@mapStateX.start)="removeMapBrowserClass($event)"
-    (@mapStateX.done)="updateMapBrowserClass($event)"
-    [@mapStateY]="expansionPanelExpanded ? 'up' : 'down'"
-    (@mapStateY.start)="removeMapBrowserClass($event)"
-    (@mapStateY.done)="updateMapBrowserClass($event)">
+    <igo-map-browser
+      #mapBrowser
+      igoQuery
+      [waitForAllQueries]="true"
+      [queryFeatures]="true"
+      igoMapContext
+      igoLayerContext
+      igoDropGeoFile
+      (query)="onMapQuery($event)"
+      [map]="map"
+      [igoContextMenu]=contextMenu
+      (menuPosition)="onContextMenuOpen($event)"
+      [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
+      [@mapStateX]="sidenavOpened ? 'right' : 'left'"
+      (@mapStateX.start)="removeMapBrowserClass($event)"
+      (@mapStateX.done)="updateMapBrowserClass($event)"
+      [@mapStateY]="expansionPanelExpanded ? 'up' : 'down'"
+      (@mapStateY.start)="removeMapBrowserClass($event)"
+      (@mapStateY.done)="updateMapBrowserClass($event)">
 
-    <igo-zoom-button [map]="map" color="primary"
-      [@controlsOffsetY]="expansionPanelExpanded">
-    </igo-zoom-button>
-    <igo-geolocate-button [map]="map" color="primary"
-      [@controlsOffsetY]="expansionPanelExpanded">
-    </igo-geolocate-button>
-    <igo-rotation-button [map]="map" color="primary"></igo-rotation-button>
-    <igo-user-button [map]="map" color="primary"
-      [@controlsOffsetY]="expansionPanelExpanded">
-    </igo-user-button>
-    <igo-baselayers-switcher [map]="map"
-      [@baselayersStateY]="expansionPanelExpanded ? 'up' : 'down'"
-      [@baselayersStateX]="(mediaService.media$ | async) !== 'mobile' && sidenavOpened ? 'right' : 'left'">
-    </igo-baselayers-switcher>
-  </igo-map-browser>
-
+      <igo-zoom-button [map]="map" color="primary"
+        [@controlsOffsetY]="expansionPanelExpanded">
+      </igo-zoom-button>
+      <igo-geolocate-button [map]="map" color="primary"
+        [@controlsOffsetY]="expansionPanelExpanded"
+        [@controlsOffsetX]="expansionPanelExpanded">
+      </igo-geolocate-button>
+      <igo-rotation-button [map]="map" color="primary"></igo-rotation-button>
+      <igo-user-button [map]="map" color="primary"
+        [@controlsOffsetY]="expansionPanelExpanded">
+      </igo-user-button>
+      <igo-baselayers-switcher [map]="map"
+        [@baselayersStateY]="expansionPanelExpanded ? 'up' : 'down'"
+        [@baselayersStateX]="(mediaService.media$ | async) !== 'mobile' && sidenavOpened ? 'right' : 'left'">
+      </igo-baselayers-switcher>
+    </igo-map-browser>
+  </mat-sidenav-content>
 </mat-sidenav-container>
 
 <app-expansion-panel
   *ngIf="hasExpansionPanel"
   [(expanded)]="expansionPanelExpanded"
-  [@expansionPanelSize]="sidenavOpened ? 'reduced' : 'full'">
+  [@expansionPanelSize]="getExpansionStatus()">
 
   <ng-container expansionPanelHeader>
     <!-- <igo-workspace-selector igoWorkspaceSelector [store]="workspaceStore" [map]="map"></igo-workspace-selector> -->

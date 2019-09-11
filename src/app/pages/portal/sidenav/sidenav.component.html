@@ -5,7 +5,7 @@
 
   <div class="app-sidenav-content">
 
-      <div class="app-content" [ngClass]="{toolActived: toolbox.activeTool$ | async}">
+      <div #content class="app-content" [ngClass]="{toolActived: toolbox.activeTool$ | async}">
 
         <button *ngIf="toolbox.activeTool$ | async"
           id="homeButton"
@@ -44,6 +44,6 @@
           </igo-toolbox>
 
         </igo-panel>
-      </div>
+    </div>
   </div>
 </mat-sidenav>
