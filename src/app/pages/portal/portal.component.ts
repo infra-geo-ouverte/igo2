@@ -13,7 +13,7 @@ import { Subscription, of } from 'rxjs';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
 
-import { MediaService, ConfigService, Media, MediaOrientation } from '@igo2/core';
+import { MediaService, Media, MediaOrientation } from '@igo2/core';
 import {
   // ActionbarMode,
   // Workspace,
@@ -129,15 +129,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   isMobile(): boolean {
-    return (
-      this.mediaService.getMedia() === Media.Mobile
-    );
+    return this.mediaService.getMedia() === Media.Mobile;
   }
 
   isLandscape(): boolean {
-    return (
-      this.mediaService.getOrientation() === MediaOrientation.Landscape
-    );
+    return this.mediaService.getOrientation() === MediaOrientation.Landscape;
   }
 
   get backdropShown(): boolean {
@@ -230,7 +226,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private configService: ConfigService,
     // private workspaceState: WorkspaceState,
     public authService: AuthService,
     public mediaService: MediaService,
@@ -252,28 +247,32 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     // this.sidenavTitle = this.configService.getConfig('sidenavTitle');
 
-
     this.route.queryParams.subscribe(params => {
-      if (params["layers"] && params["wmsUrl"]) {
-
-        const layersByService = params["layers"].split("),(");
-        const urls = params["wmsUrl"].split(',')
+      if (params['layers'] && params['wmsUrl']) {
+        const layersByService = params['layers'].split('),(');
+        const urls = params['wmsUrl'].split(',');
         let cnt = 0;
         urls.forEach(url => {
-          let currentLayersByService =layersByService[cnt];
-          currentLayersByService = currentLayersByService.startsWith('(') ? currentLayersByService.substr(1) : currentLayersByService
-          currentLayersByService = currentLayersByService.endsWith(')') ? currentLayersByService.slice(0,-1) : currentLayersByService
-          currentLayersByService = currentLayersByService.split(',')
+          let currentLayersByService = layersByService[cnt];
+          currentLayersByService = currentLayersByService.startsWith('(')
+            ? currentLayersByService.substr(1)
+            : currentLayersByService;
+          currentLayersByService = currentLayersByService.endsWith(')')
+            ? currentLayersByService.slice(0, -1)
+            : currentLayersByService;
+          currentLayersByService = currentLayersByService.split(',');
           currentLayersByService.forEach(layer => {
             const layerFromUrl = layer.split(':igoz');
-            this.addLayerByName(url, layerFromUrl[0], parseInt(layerFromUrl[1]|| 1000));
+            this.addLayerByName(
+              url,
+              layerFromUrl[0],
+              parseInt(layerFromUrl[1] || 1000, 10)
+            );
           });
-          cnt+=1
+          cnt += 1;
         });
       }
-    }
-    );
-
+    });
 
     this.authService.authenticate$.subscribe(
       () => (this.contextLoaded = false)
@@ -518,7 +517,9 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     this.onBeforeSearch();
     for (const i in results) {
-      if (!results[i]) { continue; }
+      if (!results[i]) {
+        continue;
+      }
       results[i].request.subscribe((_results: SearchResult<Feature>[]) => {
         this.onSearch({ research: results[i], results: _results });
       });
@@ -587,20 +588,19 @@ export class PortalComponent implements OnInit, OnDestroy {
   // }
 
   private addLayerByName(url: string, name: string, zIndex: number = 100000) {
-
     this.layerService
-    .createAsyncLayer({
-      zIndex: zIndex,
-      sourceOptions: {
-        optionsFromCapabilities: true,
-        type: 'wms',
-        url: url,
-        params: {
-          layers: name,
-          version: '1.3.0'
+      .createAsyncLayer({
+        zIndex: zIndex,
+        sourceOptions: {
+          optionsFromCapabilities: true,
+          type: 'wms',
+          url: url,
+          params: {
+            layers: name,
+            version: '1.3.0'
+          }
         }
-      }
-    })
-    .subscribe(l => this.map.addLayer(l));
+      })
+      .subscribe(l => this.map.addLayer(l));
   }
 }
