@@ -517,6 +517,22 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
+  getExpansionStatus() {
+    if (this.sidenavOpened === false) {
+      return 'full';
+    }
+    if (this.sidenavOpened === true && this.isMobile() === false) {
+      return 'reduced';
+    }
+    if (this.sidenavOpened === true && this.isMobile() === true) {
+      if (this.expansionPanelExpanded === true) {
+        return 'mobile';
+      } else {
+        return 'notVisible';
+      }
+    }
+  }
+
   // private handleContextChange(context: Context) {
   //   if (context !== undefined && this.contextLoaded) {
   //     const tool = this.toolService.getTool("mapDetails");

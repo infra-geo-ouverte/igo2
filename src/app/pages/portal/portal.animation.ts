@@ -1,3 +1,5 @@
+import './portal.variables.scss';
+
 import {
   trigger,
   state,
@@ -14,6 +16,18 @@ export function expansionPanelAnimation(): AnimationTriggerMetadata {
       style({
         left: '0px',
         'max-width': '100%'
+      })
+    ),
+    state(
+      'notVisible',
+      style({
+        display: 'none'
+      })
+    ),
+    state(
+      'mobile',
+      style({
+        left: 'calc(100% - 40px)',
       })
     ),
     state(
@@ -104,13 +118,13 @@ export function controlsAnimations(): AnimationTriggerMetadata[] {
       state(
         'false',
         style({
-          left: '5px'
+          right: '5px'
         })
       ),
       state(
         'true',
         style({
-          left: '405px'
+          left: 'calc(100% - 40px)'
         })
       ),
       transition('* => *', animate('200ms'))
