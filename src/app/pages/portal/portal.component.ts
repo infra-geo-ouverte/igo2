@@ -427,8 +427,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     // if (this.mediaService.media$.value === Media.Mobile) {
     //   this.closeToastPanel();
     // }
-
-    this.toolbox.activateTool('searchResults');
+    if (!this.toolbox.activeTool$.value || this.toolbox.activeTool$.value.name !== 'searchResults') {
+      this.toolbox.activateTool('searchResults');
+    }
     this.openSidenav();
   }
 
