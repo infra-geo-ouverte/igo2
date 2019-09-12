@@ -1,0 +1,7 @@
+@mixin app-sidenav-theming($theme) {
+  $primary: map-get($theme, primary);
+
+  app-sidenav #homeButton {
+    background-color: mat-color($primary);
+  }
+}

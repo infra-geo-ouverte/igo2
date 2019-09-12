@@ -1,0 +1,5 @@
+@import './sidenav/sidenav.theming';
+
+@mixin app-portal-theming($theme) {
+  @include app-sidenav-theming($theme);
+}

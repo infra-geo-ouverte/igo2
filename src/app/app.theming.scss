@@ -1,0 +1,5 @@
+@import './pages/portal/portal.theming';
+
+@mixin app-theming($theme) {
+  @include app-portal-theming($theme);
+}
