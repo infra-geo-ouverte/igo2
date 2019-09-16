@@ -27,10 +27,10 @@ export const environment: Environment = {
       tokenKey: 'id_token_igo',
       allowAnonymous: true
     },
-/*     context: {
-      url: '/apis/igo2',
-      defaultContextUri: '5'
-    }, */
+    // context: {
+    //   url: '/apis/igo2',
+    //   defaultContextUri: '5'
+    // },
     searchSources: {
       nominatim: {
         available: false
