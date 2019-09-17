@@ -67,6 +67,7 @@
         [@controlsOffsetY]="expansionPanelExpanded">
       </igo-user-button>
       <igo-baselayers-switcher [map]="map"
+        [useStaticIcon]="true"
         [@baselayersStateY]="expansionPanelExpanded ? 'up' : 'down'"
         [@baselayersStateX]="(mediaService.media$ | async) !== 'mobile' && sidenavOpened ? 'right' : 'left'">
       </igo-baselayers-switcher>

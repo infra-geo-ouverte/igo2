@@ -427,7 +427,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     // if (this.mediaService.media$.value === Media.Mobile) {
     //   this.closeToastPanel();
     // }
-    if (!this.toolbox.activeTool$.value || this.toolbox.activeTool$.value.name !== 'searchResults') {
+    if (
+      !this.toolbox.activeTool$.value ||
+      this.toolbox.activeTool$.value.name !== 'searchResults'
+    ) {
       this.toolbox.activateTool('searchResults');
     }
     this.openSidenav();
@@ -513,7 +516,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private searchCoordinate(coord: [number, number]) {
-    this.searchBarTerm = coord.join(', ');
+    this.searchBarTerm = coord.map(c => c.toFixed(6)).join(', ');
     const results = this.searchService.reverseSearch(coord);
 
     this.onBeforeSearch();
