@@ -13,7 +13,7 @@ import { Subscription, of } from 'rxjs';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
 
-import { MediaService, Media, MediaOrientation } from '@igo2/core';
+import { MediaService, Media, MediaOrientation, ConfigService } from '@igo2/core';
 import {
   // ActionbarMode,
   // Workspace,
@@ -81,8 +81,9 @@ import {
 })
 export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
+  public hasExpansionPanel = false;
   public expansionPanelExpanded = false;
-  public hasExpansionPanel = true;
+  public toastPanelOpened = true;
   public sidenavOpened = false;
   public searchBarTerm = '';
 
@@ -132,8 +133,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.mediaService.getMedia() === Media.Mobile;
   }
 
+  isTablet(): boolean {
+    return this.mediaService.getMedia() === Media.Tablet;
+  }
+
   isLandscape(): boolean {
     return this.mediaService.getOrientation() === MediaOrientation.Landscape;
+  }
+
+  isPortrait(): boolean {
+    return this.mediaService.getOrientation() === MediaOrientation.Portrait;
   }
 
   get backdropShown(): boolean {
@@ -239,8 +248,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     private queryState: QueryState,
     private toolState: ToolState,
     private searchSourceService: SearchSourceService,
-    private searchService: SearchService
-  ) {}
+    private searchService: SearchService,
+    private configService: ConfigService
+  ) {
+    this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
+  }
 
   ngOnInit() {
     window['IGO'] = this;
@@ -533,9 +545,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   removeMapBrowserClass(e) {
     e.element.classList.remove('expansion-offset');
     e.element.classList.remove('sidenav-offset');
+    e.element.classList.remove('toast-offset-scale-line');
+    e.element.classList.remove('toast-offset-attribution');
   }
 
   updateMapBrowserClass(e) {
+    const header = this.queryState.store.entities$.value.length > 0;
     if (this.expansionPanelExpanded) {
       e.element.classList.add('expansion-offset');
     }
@@ -543,20 +558,97 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.sidenavOpened) {
       e.element.classList.add('sidenav-offset');
     }
+
+    if (!this.toastPanelOpened && header) {
+      e.element.classList.add('toast-offset-scale-line');
+    }
+
+    if (!this.toastPanelOpened && header && (this.isMobile() || this.isTablet() || this.sidenavOpened)) {
+      e.element.classList.add('toast-offset-attribution');
+    }
   }
 
-  getExpansionStatus() {
+  getExpansionPanelStatus() {
     if (this.sidenavOpened === false) {
-      return 'full';
+      if (this.expansionPanelExpanded === true) {
+        return 'full';
+      }
+      return 'notTriggered';
     }
     if (this.sidenavOpened === true && this.isMobile() === false) {
-      return 'reduced';
+      if (this.expansionPanelExpanded === true) {
+        return 'reduced';
+      }
+      return 'reducedNotTriggered';
     }
     if (this.sidenavOpened === true && this.isMobile() === true) {
       if (this.expansionPanelExpanded === true) {
         return 'mobile';
       } else {
         return 'notVisible';
+      }
+    }
+  }
+
+  getExpansionToastPanelStatus() {
+    if (this.expansionPanelExpanded === true) {
+      if (this.toastPanelOpened === true) {
+        return 'down';
+      }
+      if (this.toastPanelOpened === false) {
+        if (this.queryState.store.entities$.value.length > 0) {
+          return 'down';
+        }
+        return 'up';
+      }
+      return 'up';
+    }
+    if (this.expansionPanelExpanded === false) {
+      if (this.toastPanelOpened === true) {
+        return 'down';
+      }
+      if (this.toastPanelOpened === false) {
+        if (this.queryState.store.entities$.value.length > 0) {
+          return 'up';
+        }
+        return 'down';
+      }
+      return 'down';
+    }
+  }
+
+  getToastPanelStatus() {
+    if (this.isMobile() === true && this.toastPanelOpened === false) {
+      if (this.sidenavOpened === false) {
+        if (this.expansionPanelExpanded === false) {
+          if (this.queryState.store.entities$.value.length > 0) {
+            return 'low';
+          }
+        }
+      }
+    }
+  }
+
+  getBaselayersSwitcherStatus() {
+    if (this.isMobile()) {
+      if (this.hasExpansionPanel === true) {
+        if (this.toastPanelOpened === false) {
+          if (this.expansionPanelExpanded === false) {
+            if (this.queryState.store.entities$.value.length > 0) {
+              return 'up';
+            }
+            return 'down';
+          }
+          return 'down';
+        }
+        return 'down';
+      }
+      if (this.hasExpansionPanel === false) {
+        if (this.toastPanelOpened === false) {
+          if (this.queryState.store.entities$.value.length > 0) {
+            return 'down';
+          }
+        }
       }
     }
   }

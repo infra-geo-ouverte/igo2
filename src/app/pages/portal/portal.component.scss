@@ -28,6 +28,34 @@ igo-map-browser {
   height: 100%;
 }
 
+igo-map-browser ::ng-deep .ol-attribution {
+  left: 50px;
+  bottom: $igo-margin;
+  text-align: left;
+  padding: 0;
+  margin-right: 90px;
+  background-color: rgba(255, 255, 255, 0);
+  width: calc(100% - 500px);
+
+  &.ol-logo-only {
+    height: inherit;
+  }
+  &.ol-collapsed {
+    background: none;
+    button {
+      transform: none;
+    }
+  }
+  button {
+    transform: rotate(180deg);
+    background-color: white;
+    cursor: pointer;
+  }
+  &.ol-uncollapsible {
+    height: auto;
+  }
+}
+
 igo-map-browser ::ng-deep .ol-overlaycontainer-stopevent {
   position: absolute;
   width: 100%;
@@ -36,12 +64,24 @@ igo-map-browser ::ng-deep .ol-overlaycontainer-stopevent {
 }
 
 igo-map-browser.sidenav-offset ::ng-deep .ol-overlaycontainer-stopevent {
-  left: 380px;
+  left: 400px;
   width: calc(100% - 380px);
+
+  @include mobile {
+    display: none;
+  }
 }
 
 igo-map-browser.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
   bottom: 279px;
+}
+
+igo-map-browser.toast-offset-scale-line ::ng-deep .ol-overlaycontainer-stopevent ::ng-deep .ol-scale-line {
+  bottom: 50px;
+}
+
+igo-map-browser.toast-offset-attribution ::ng-deep .ol-overlaycontainer-stopevent ::ng-deep .ol-attribution {
+  bottom: 50px;
 }
 
 /*** Search bar ***/
@@ -58,7 +98,7 @@ igo-search-bar {
 
   @include mobile {
     width: $search-bar-width-mobile;
-    max-width: 400px;
+    max-width: 350px;
   }
 }
 
@@ -103,6 +143,11 @@ app-toast-panel {
     left: $app-footer-height;
     margin-left: 0;
   }
+
+  @include tablet {
+    width: 500px;
+    left: calc(50% + 100px);
+  }
 }
 
 app-toast-panel.expansion-panel-expanded,
@@ -114,8 +159,15 @@ app-toast-panel.app-toast-panel-opened {
   }
 }
 
+app-toast-panel:not(.app-toast-panel-opened) {
+  ::ng-deep igo-panel ::ng-deep div.igo-panel-content {
+    visibility: hidden;
+  }
+}
+
 igo-geolocate-button {
-  margin-bottom: 90px;
+  margin-bottom: 85px;
+
   @include mobile {
     margin-bottom: 0px;
   }

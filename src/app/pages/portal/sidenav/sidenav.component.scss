@@ -21,7 +21,7 @@ mat-sidenav {
 
   @include mobile {
     width: $app-sidenav-width-mobile;
-    max-width: 450px;
+    max-width: 400px;
   }
 }
 
