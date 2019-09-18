@@ -17,14 +17,14 @@ export const environment: Environment = {
         available: false
       },
       icherche: {
-        searchUrl: '/apis/icherche/geocode',
+        searchUrl: '/apis/icherche',
         order: 2,
         params: {
           limit: '8'
         }
       },
       icherchereverse: {
-        searchUrl: '/apis/territoires/locate',
+        searchUrl: '/apis/territoires',
         order: 3,
         enabled: true
       },
