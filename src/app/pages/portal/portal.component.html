@@ -51,7 +51,7 @@
       [@mapStateX]="sidenavOpened ? 'right' : 'left'"
       (@mapStateX.start)="removeMapBrowserClass($event)"
       (@mapStateX.done)="updateMapBrowserClass($event)"
-      [@mapStateY]="expansionPanelExpanded ? 'up' : 'down'"
+      [@mapStateY]="getExpansionToastPanelStatus()"
       (@mapStateY.start)="removeMapBrowserClass($event)"
       (@mapStateY.done)="updateMapBrowserClass($event)">
 
@@ -60,16 +60,20 @@
       </igo-zoom-button>
       <igo-geolocate-button [map]="map" color="primary"
         [@controlsOffsetY]="expansionPanelExpanded"
-        [@controlsOffsetX]="expansionPanelExpanded">
+        [@mobileOffsetY]="getToastPanelStatus()">
       </igo-geolocate-button>
       <igo-rotation-button [map]="map" color="primary"></igo-rotation-button>
       <igo-user-button [map]="map" color="primary"
-        [@controlsOffsetY]="expansionPanelExpanded">
+        [@controlsOffsetY]="expansionPanelExpanded"
+        [@mobileOffsetY]="getToastPanelStatus()">
       </igo-user-button>
       <igo-baselayers-switcher [map]="map"
         [useStaticIcon]="true"
         [@baselayersStateY]="expansionPanelExpanded ? 'up' : 'down'"
-        [@baselayersStateX]="(mediaService.media$ | async) !== 'mobile' && sidenavOpened ? 'right' : 'left'">
+        [@baselayersStateX]="(mediaService.media$ | async) !== 'mobile' && sidenavOpened ? 'right' : 'left'"
+        [@baselayersWithExpansionPanel]="hasExpansionPanel ? 'true' : 'false'"
+        [@baselayersWithToastPanel]="getBaselayersSwitcherStatus()"
+        [useStaticIcon]="true">
       </igo-baselayers-switcher>
     </igo-map-browser>
   </mat-sidenav-content>
@@ -78,7 +82,8 @@
 <app-expansion-panel
   *ngIf="hasExpansionPanel"
   [(expanded)]="expansionPanelExpanded"
-  [@expansionPanelSize]="getExpansionStatus()">
+  [@expansionPanelSize]="getExpansionPanelStatus()"
+  [@toastOffsetY]="(isMobile() && !toastPanelOpened && queryState.store.entities$.value.length > 0 && !expansionPanelExpanded) ? 'true' : 'false'">
 
   <ng-container expansionPanelHeader>
     <!-- <igo-workspace-selector igoWorkspaceSelector [store]="workspaceStore" [map]="map"></igo-workspace-selector> -->
@@ -102,8 +107,10 @@
 
 <app-toast-panel
   [store]="queryStore"
-  [@toastPanelOffsetX]="(isMobile || !isLandscape) ? undefined : sidenavOpened"
+  [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : sidenavOpened"
   [@toastPanelOffsetY]="expansionPanelExpanded"
+  [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
+  (openedChange)="toastPanelOpened = $event"
   (resultSelect)="addFeatureToMap($event)">
 </app-toast-panel>
 

@@ -9,40 +9,81 @@ import {
   AnimationTriggerMetadata
 } from '@angular/animations';
 
-export function expansionPanelAnimation(): AnimationTriggerMetadata {
-  return trigger('expansionPanelSize', [
-    state(
-      'full',
-      style({
-        left: '0px',
-        'max-width': '100%'
-      })
-    ),
-    state(
-      'notVisible',
-      style({
-        display: 'none'
-      })
-    ),
-    state(
-      'mobile',
-      style({
-        left: 'calc(100% - 40px)',
-      })
-    ),
-    state(
-      'reduced',
-      style({
-        left: '405px',
-        'max-width': 'calc(100% - 405px)'
-      })
-    ),
-    transition('* => *', animate('200ms'))
-  ]);
+export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
+  return [
+    trigger('expansionPanelSize', [
+      state(
+        'full',
+        style({
+          left: '5px',
+          'max-width': '100%'
+        })
+      ),
+      state(
+        'notTriggered',
+        style({
+          left: '5px',
+          bottom: '5px',
+          'max-width': '100%'
+        })
+      ),
+      state(
+        'notVisible',
+        style({
+          display: 'none'
+        })
+      ),
+      state(
+        'mobile',
+        style({
+          left: 'calc(100% - 40px)',
+        })
+      ),
+      state(
+        'reduced',
+        style({
+          left: '405px',
+          'max-width': 'calc(100% - 405px)'
+        })
+      ),
+      state(
+        'reducedNotTriggered',
+        style({
+          left: '405px',
+          bottom: '5px',
+          'max-width': 'calc(100% - 405px)'
+        })
+      ),
+      transition('* => *', animate('200ms'))
+    ]),
+    trigger('toastOffsetY', [
+      state(
+        'true',
+        style({
+          bottom: '50px'
+        })
+      ),
+      state(
+        'false',
+        style({
+          bottom: '5px'
+        })
+      )
+    ])
+  ];
 }
 
 export function toastPanelAnimation(): AnimationTriggerMetadata[] {
   return [
+    trigger('toastPanelMobileSidenav', [
+      state(
+        'true',
+        style({
+          display: 'none'
+        })
+      ),
+      transition('* => *', animate('200ms')),
+    ]),
     trigger('toastPanelOffsetX', [
       state(
         'false',
@@ -68,7 +109,8 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
       state(
         'true',
         style({
-          bottom: '285px'
+          bottom: '285px',
+          zIndex: '1'
         })
       ),
       transition('* => *', animate('200ms'))
@@ -98,7 +140,7 @@ export function baselayersAnimation(): AnimationTriggerMetadata[] {
       state(
         'down',
         style({
-          bottom: '55px'
+          bottom: '47px'
         })
       ),
       state(
@@ -108,6 +150,35 @@ export function baselayersAnimation(): AnimationTriggerMetadata[] {
         })
       ),
       transition('* => *', animate('200ms'))
+    ]),
+    trigger('baselayersWithExpansionPanel', [
+      state(
+        'true',
+        style({
+          bottom: '47px'
+        })
+      ),
+      state(
+        'false',
+        style({
+          bottom: '5px'
+        })
+      ),
+      transition('* => *', animate('200ms'))
+    ]),
+    trigger('baselayersWithToastPanel', [
+      state(
+        'up',
+        style({
+          bottom: '92px'
+        })
+      ),
+      state(
+        'down',
+        style({
+          bottom: '47px'
+        })
+      )
     ])
   ];
 }
@@ -141,6 +212,15 @@ export function controlsAnimations(): AnimationTriggerMetadata[] {
         'true',
         style({
           bottom: '285px'
+        })
+      ),
+      transition('* => *', animate('200ms'))
+    ]),
+    trigger('mobileOffsetY', [
+      state(
+        'low',
+        style({
+          bottom: '50px'
         })
       ),
       transition('* => *', animate('200ms'))
@@ -201,7 +281,7 @@ export function mapSlideX(): AnimationTriggerMetadata {
         left: '0'
       })
     ),
-    transition('* => *', animate('250ms'))
+    transition('* => *', animate('200ms'))
   ]);
 }
 export function mapSlideY(): AnimationTriggerMetadata {
@@ -224,6 +304,6 @@ export function mapSlideY(): AnimationTriggerMetadata {
         bottom: '0'
       })
     ),
-    transition('* => *', animate('250ms'))
+    transition('* => *', animate('200ms'))
   ]);
 }

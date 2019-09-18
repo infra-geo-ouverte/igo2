@@ -39,12 +39,26 @@ export class ToastPanelComponent {
   }
   private _store: EntityStore<SearchResult<Feature>>;
 
+  @Input()
+  get opened(): boolean {
+    return this._opened;
+  }
+  set opened(value: boolean) {
+    if (value === this._opened) {
+      return;
+    }
+
+    this._opened = value;
+    this.openedChange.emit(this._opened);
+  }
+  private _opened = true;
+
+  @Output() openedChange = new EventEmitter<boolean>();
+
   @Output() resultSelect = new EventEmitter<SearchResult<Feature>>();
   @Output() resultFocus = new EventEmitter<SearchResult<Feature>>();
 
   resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
-
-  private opened = true;
 
   @HostBinding('class.app-toast-panel-opened')
   get hasOpenedClass() {
