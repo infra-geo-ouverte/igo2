@@ -55,3 +55,7 @@ igo-panel ::ng-deep .igo-panel-content {
   -ms-user-select: auto !important;
   user-select: auto !important;
 }
+
+igo-feature-details ::ng-deep iframe {
+  min-height: 227px;
+}
