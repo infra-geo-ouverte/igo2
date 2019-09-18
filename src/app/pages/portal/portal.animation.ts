@@ -15,7 +15,7 @@ export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
       state(
         'full',
         style({
-          left: '0px',
+          left: '5px',
           'max-width': '100%'
         })
       ),
