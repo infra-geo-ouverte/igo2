@@ -6,14 +6,19 @@ import {
   ViewChild,
   ElementRef
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of } from 'rxjs';
-// import { debounceTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
 
-import { MediaService, Media, MediaOrientation, ConfigService } from '@igo2/core';
+import {
+  MediaService,
+  Media,
+  MediaOrientation,
+  ConfigService
+} from '@igo2/core';
 import {
   // ActionbarMode,
   // Workspace,
@@ -26,7 +31,7 @@ import {
   Tool
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
-import { DetailedContext } from '@igo2/context';
+import { DetailedContext, Context } from '@igo2/context';
 import {
   DataSourceService,
   Feature,
@@ -98,9 +103,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   private context$$: Subscription;
   private searchResults$$: Subscription;
   private focusedSearchResult$$: Subscription;
-
-  // True after the initial tool is loaded
-  // private toolLoaded = false;
 
   public tableStore = new EntityStore([]);
   public tableTemplate = {
@@ -257,35 +259,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     window['IGO'] = this;
 
-    // this.sidenavTitle = this.configService.getConfig('sidenavTitle');
-
-    this.route.queryParams.subscribe(params => {
-      if (params['layers'] && params['wmsUrl']) {
-        const layersByService = params['layers'].split('),(');
-        const urls = params['wmsUrl'].split(',');
-        let cnt = 0;
-        urls.forEach(url => {
-          let currentLayersByService = layersByService[cnt];
-          currentLayersByService = currentLayersByService.startsWith('(')
-            ? currentLayersByService.substr(1)
-            : currentLayersByService;
-          currentLayersByService = currentLayersByService.endsWith(')')
-            ? currentLayersByService.slice(0, -1)
-            : currentLayersByService;
-          currentLayersByService = currentLayersByService.split(',');
-          currentLayersByService.forEach(layer => {
-            const layerFromUrl = layer.split(':igoz');
-            this.addLayerByName(
-              url,
-              layerFromUrl[0],
-              parseInt(layerFromUrl[1] || 1000, 10)
-            );
-          });
-          cnt += 1;
-        });
-      }
-    });
-
     this.authService.authenticate$.subscribe(
       () => (this.contextLoaded = false)
     );
@@ -312,21 +285,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     ]);
 
-    // this.focusedSearchResult$$ = this.searchStore.stateView
-    //   .firstBy$(
-    //     (record: EntityRecord<SearchResult>) => record.state.focused === true
-    //   )
-    //   .subscribe((record: EntityRecord<SearchResult>) => {
-    //     const result = record ? record.entity : undefined;
-    //     this.onFocusSearchResult(result);
-    //   });
-
-    // this.route.queryParams.pipe(debounceTime(500)).subscribe(params => {
-    //   if (params['sidenav'] === '1') {
-    //     this.openSidenav();
-    //   }
-    // });
-
     this.tableStore.load([
       { id: '2', name: 'Name 2', description: 'Description 2' },
       { id: '1', name: 'Name 1', description: 'Description 1' },
@@ -334,6 +292,8 @@ export class PortalComponent implements OnInit, OnDestroy {
       { id: '4', name: 'Name 4', description: 'Description 4' },
       { id: '5', name: 'Name 5', description: 'Description 5' }
     ]);
+
+    this.readQueryParams();
   }
 
   ngOnDestroy() {
@@ -428,6 +388,12 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.route.queryParams.pipe(debounceTime(250)).subscribe(params => {
+      if (params['context'] === context.uri) {
+        this.readLayersQueryParams(params);
+      }
+    });
+
     if (this.contextLoaded) {
       this.toolbox.activateTool('mapDetails');
     }
@@ -436,9 +402,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onBeforeSearch() {
-    // if (this.mediaService.media$.value === Media.Mobile) {
-    //   this.closeToastPanel();
-    // }
     if (
       !this.toolbox.activeTool$.value ||
       this.toolbox.activeTool$.value.name !== 'searchResults'
@@ -447,32 +410,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
     this.openSidenav();
   }
-
-  // private onSearchMap(results: SearchResult<Feature>[]) {
-  // if (results.length > 0) {
-  //   this.onBeforeSearch();
-  //   this.searchStore.state.update(results[0], { selected: true }, true);
-  // }
-  // }
-
-  // private onFocusSearchResult(result: SearchResult) {
-  // if (result === undefined) {
-  //   this.closeToastPanel();
-  //   this.searchResult = undefined;
-  //   return;
-  // }
-  //
-  // if (result.meta.dataType === FEATURE) {
-  //   if (this.mediaService.media$.value === Media.Mobile) {
-  //     this.closeSidenav();
-  //   }
-  //
-  //   this.searchResult = result;
-  //   this.openToastPanel();
-  // } else {
-  //   this.searchResult = undefined;
-  // }
-  // }
 
   addFeatureToMap(result: SearchResult<Feature>) {
     const feature = result ? result.data : undefined;
@@ -563,7 +500,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       e.element.classList.add('toast-offset-scale-line');
     }
 
-    if (!this.toastPanelOpened && header && (this.isMobile() || this.isTablet() || this.sidenavOpened)) {
+    if (
+      !this.toastPanelOpened &&
+      header &&
+      (this.isMobile() || this.isTablet() || this.sidenavOpened)
+    ) {
       e.element.classList.add('toast-offset-attribution');
     }
   }
@@ -653,35 +594,58 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  // private handleContextChange(context: Context) {
-  //   if (context !== undefined && this.contextLoaded) {
-  //     const tool = this.toolService.getTool("mapDetails");
-  //     this.toolService.selectTool(tool);
-  //   }
-  //
-  //   if (context !== undefined) {
-  //     this.contextLoaded = true;
-  //   }
-  //
-  //   this.route.queryParams.subscribe(params => {
-  //     if (params["layers"] && params["wmsUrl"]) {
-  //       const layers = params["layers"].split(",");
-  //       layers.forEach(layer => {
-  //         this.addLayerByName(params["wmsUrl"], layer);
-  //       });
-  //     }
-  //     if (params["tool"] && !this.toolLoaded) {
-  //       const toolNameToOpen = params["tool"];
-  //       if (this.toolService.allowedToolName.indexOf(toolNameToOpen) !== -1) {
-  //         const tool = this.toolService.getTool(toolNameToOpen);
-  //         setTimeout(() => {
-  //           this.toolService.selectTool(tool);
-  //         }, 250); // add delay for translationservice to be injected
-  //       }
-  //       this.toolLoaded = true;
-  //     }
-  //   });
-  // }
+  private readQueryParams() {
+    this.route.queryParams.pipe(debounceTime(250)).subscribe(params => {
+      this.readLayersQueryParams(params);
+      this.readToolParams(params);
+      this.readSearchParams(params);
+    });
+  }
+
+  private readSearchParams(params: Params) {
+    if (params['search']) {
+      this.searchBarTerm = params['search'];
+    }
+  }
+
+  private readToolParams(params: Params) {
+    if (params['tool']) {
+      this.toolbox.activateTool(params['tool']);
+    }
+
+    if (params['sidenav'] === '1') {
+      setTimeout(() => {
+        this.openSidenav();
+      }, 250);
+    }
+  }
+
+  private readLayersQueryParams(params: Params) {
+    if (params['layers'] && params['wmsUrl']) {
+      const layersByService = params['layers'].split('),(');
+      const urls = params['wmsUrl'].split(',');
+      let cnt = 0;
+      urls.forEach(url => {
+        let currentLayersByService = layersByService[cnt];
+        currentLayersByService = currentLayersByService.startsWith('(')
+          ? currentLayersByService.substr(1)
+          : currentLayersByService;
+        currentLayersByService = currentLayersByService.endsWith(')')
+          ? currentLayersByService.slice(0, -1)
+          : currentLayersByService;
+        currentLayersByService = currentLayersByService.split(',');
+        currentLayersByService.forEach(layer => {
+          const layerFromUrl = layer.split(':igoz');
+          this.addLayerByName(
+            url,
+            layerFromUrl[0],
+            parseInt(layerFromUrl[1] || 1000, 10)
+          );
+        });
+        cnt += 1;
+      });
+    }
+  }
 
   private addLayerByName(url: string, name: string, zIndex: number = 100000) {
     this.layerService
@@ -697,6 +661,8 @@ export class PortalComponent implements OnInit, OnDestroy {
           }
         }
       })
-      .subscribe(l => this.map.addLayer(l));
+      .subscribe(l => {
+        this.map.addLayer(l);
+      });
   }
 }
