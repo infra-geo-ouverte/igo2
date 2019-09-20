@@ -45,3 +45,7 @@
 igo-backdrop ::ng-deep > div {
   z-index: initial !important;
 }
+
+.app-expansion-panel-content ::ng-deep .igo-entity-table-with-selection {
+  width: 100%;
+}

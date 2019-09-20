@@ -56,6 +56,14 @@ igo-map-browser ::ng-deep .ol-attribution {
   }
 }
 
+igo-map-browser.has-expansion-panel igo-baselayers-switcher {
+  bottom: 47px;
+}
+
+igo-map-browser.sidenav-offset-baselayers igo-baselayers-switcher {
+  left: 405px;
+}
+
 igo-map-browser ::ng-deep .ol-overlaycontainer-stopevent {
   position: absolute;
   width: 100%;
@@ -81,7 +89,9 @@ igo-map-browser.toast-offset-scale-line ::ng-deep .ol-overlaycontainer-stopevent
 }
 
 igo-map-browser.toast-offset-attribution ::ng-deep .ol-overlaycontainer-stopevent ::ng-deep .ol-attribution {
-  bottom: 50px;
+  @include mobile {
+    bottom: 50px;
+  }
 }
 
 /*** Search bar ***/
@@ -121,11 +131,14 @@ mat-sidenav-content {
 app-expansion-panel {
   position: absolute;
   bottom: 0;
-  z-index: 4;
   overflow: hidden;
+  z-index: 5;
 
   @include mobile {
-    z-index: 1;
+    @supports (-webkit-appearance:none) and (not (overflow:-webkit-marquee))
+    and (not (-ms-ime-align:auto)) and (not (-moz-appearance:none)) {
+      z-index: 1;
+    }
   }
 }
 
@@ -136,7 +149,7 @@ app-toast-panel {
   left: 50%;
   margin-left: -300px;
   width: 600px;
-  z-index: 4;
+  z-index: 5;
 
   @include mobile {
     width: calc(100% - #{$app-footer-height});

@@ -49,11 +49,9 @@
       (menuPosition)="onContextMenuOpen($event)"
       [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
       [@mapStateX]="sidenavOpened ? 'right' : 'left'"
-      (@mapStateX.start)="removeMapBrowserClass($event)"
-      (@mapStateX.done)="updateMapBrowserClass($event)"
+      (@mapStateX.start)="updateMapBrowserClass($event)"
       [@mapStateY]="getExpansionToastPanelStatus()"
-      (@mapStateY.start)="removeMapBrowserClass($event)"
-      (@mapStateY.done)="updateMapBrowserClass($event)">
+      (@mapStateY.start)="updateMapBrowserClass($event)">
 
       <igo-zoom-button [map]="map" color="primary"
         [@controlsOffsetY]="expansionPanelExpanded">
@@ -69,9 +67,7 @@
       </igo-user-button>
       <igo-baselayers-switcher [map]="map"
         [useStaticIcon]="true"
-        [@baselayersStateY]="expansionPanelExpanded ? 'up' : 'down'"
-        [@baselayersStateX]="(mediaService.media$ | async) !== 'mobile' && sidenavOpened ? 'right' : 'left'"
-        [@baselayersWithExpansionPanel]="hasExpansionPanel ? 'true' : 'false'"
+        [@baselayersStateY]="expansionPanelExpanded ? 'up' : 'close'"
         [@baselayersWithToastPanel]="getBaselayersSwitcherStatus()"
         [useStaticIcon]="true">
       </igo-baselayers-switcher>
@@ -117,7 +113,7 @@
   [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : sidenavOpened"
   [@toastPanelOffsetY]="expansionPanelExpanded"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
-  (openedChange)="toastPanelOpened = $event"
+  (openedChange)="toastOpenedChange($event)"
   (resultSelect)="addFeatureToMap($event)">
 </app-toast-panel>
 
