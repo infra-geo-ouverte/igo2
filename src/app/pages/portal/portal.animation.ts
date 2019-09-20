@@ -54,7 +54,7 @@ export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
           'max-width': 'calc(100% - 405px)'
         })
       ),
-      transition('* => *', animate('200ms'))
+      transition('* => *', animate('100ms'))
     ]),
     trigger('toastOffsetY', [
       state(
@@ -120,48 +120,12 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
 
 export function baselayersAnimation(): AnimationTriggerMetadata[] {
   return [
-    trigger('baselayersStateX', [
-      state(
-        'left',
-        style({
-          left: '5px'
-        })
-      ),
-      state(
-        'right',
-        style({
-          left: '405px'
-        })
-      ),
-      transition('* => *', animate('200ms'))
-    ]),
     trigger('baselayersStateY', [
       state('close', style({})),
-      state(
-        'down',
-        style({
-          bottom: '47px'
-        })
-      ),
       state(
         'up',
         style({
           bottom: '285px'
-        })
-      ),
-      transition('* => *', animate('200ms'))
-    ]),
-    trigger('baselayersWithExpansionPanel', [
-      state(
-        'true',
-        style({
-          bottom: '47px'
-        })
-      ),
-      state(
-        'false',
-        style({
-          bottom: '5px'
         })
       ),
       transition('* => *', animate('200ms'))

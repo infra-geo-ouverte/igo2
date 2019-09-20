@@ -19,15 +19,15 @@
   @include mobile {
     height: 40%;
   }
+
+  .igo-stop-propagation {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 igo-panel ::ng-deep .igo-panel-header:hover {
   cursor: pointer;
-}
-
-div[igostoppropagation] {
-  height: 100%;
-  width: 100%;
 }
 
 igo-panel {
