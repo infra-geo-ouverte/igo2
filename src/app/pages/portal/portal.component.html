@@ -76,6 +76,12 @@
         [useStaticIcon]="true">
       </igo-baselayers-switcher>
     </igo-map-browser>
+
+    <app-map-overlay [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'"
+      [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
+                              sidenavOpened ? 'right' : 'left'">
+    </app-map-overlay>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
 

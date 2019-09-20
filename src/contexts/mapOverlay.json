@@ -1,6 +1,5 @@
 {
   "uri": "mapOverlay",
-  "title": "mapOverlay Demo",
   "map": {
     "view": {
       "projection": "EPSG:3857",
