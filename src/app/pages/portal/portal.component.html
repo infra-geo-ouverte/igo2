@@ -77,7 +77,8 @@
       </igo-baselayers-switcher>
     </igo-map-browser>
 
-    <app-map-overlay [@controlStateY]="toastShown ? (toastOpened ? 'up' : 'down') : 'close'"
+    <app-map-overlay
+      [@controlStateY]="expansionPanelExpanded ? 'up' : 'down'"
       [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
                               sidenavOpened ? 'right' : 'left'">
     </app-map-overlay>
