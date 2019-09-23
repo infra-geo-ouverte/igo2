@@ -1,3 +1,29 @@
+# [1.0.0](https://github.com/infra-geo-ouverte/igo2/compare/0.23.2-alpha.1...1.0.0) (2019-09-23)
+
+
+### Bug Fixes
+
+* minors fixs ([80b6c38](https://github.com/infra-geo-ouverte/igo2/commit/80b6c38))
+* **context:** visible property adjustment (default context) ([#280](https://github.com/infra-geo-ouverte/igo2/issues/280)) ([8b07744](https://github.com/infra-geo-ouverte/igo2/commit/8b07744))
+* **coordinates:** keep only 6 decimals ([3f1b13b](https://github.com/infra-geo-ouverte/igo2/commit/3f1b13b))
+* **home:** home button is now using theme ([b43184b](https://github.com/infra-geo-ouverte/igo2/commit/b43184b))
+* **mapOverlay:** move up if expansionPanel is expanded ([4a3a4d8](https://github.com/infra-geo-ouverte/igo2/commit/4a3a4d8))
+* **spinner:** directive changed name ([dae5a91](https://github.com/infra-geo-ouverte/igo2/commit/dae5a91))
+* **toast-panel:** label select in toast-panel content is now working ([#270](https://github.com/infra-geo-ouverte/igo2/issues/270)) ([df01cf1](https://github.com/infra-geo-ouverte/igo2/commit/df01cf1))
+* **toast-panel:** query in html takes all space ([92f2727](https://github.com/infra-geo-ouverte/igo2/commit/92f2727))
+
+
+### Features
+
+* **igo2:** upgrade igo2 lib to 1.0.0 ([f065545](https://github.com/infra-geo-ouverte/igo2/commit/f065545))
+* **overlay:** add map-overlay ([#316](https://github.com/infra-geo-ouverte/igo2/issues/316)) ([c421c96](https://github.com/infra-geo-ouverte/igo2/commit/c421c96))
+* **query params:** re-enable query params ([f7aafef](https://github.com/infra-geo-ouverte/igo2/commit/f7aafef))
+* **search:** clean feature, geolocate-button replacement, queryable layer panel resize [#275](https://github.com/infra-geo-ouverte/igo2/issues/275)) ([f485b8e](https://github.com/infra-geo-ouverte/igo2/commit/f485b8e))
+* **search:** serach order ([d87babc](https://github.com/infra-geo-ouverte/igo2/commit/d87babc))
+* **searchResult:** not active tool when already actived ([5e859c2](https://github.com/infra-geo-ouverte/igo2/commit/5e859c2))
+
+
+
 ## [0.23.2-alpha.1](https://github.com/infra-geo-ouverte/igo2/compare/1.0.0-alpha.0...0.23.2-alpha.1) (2019-08-15)
 
 
