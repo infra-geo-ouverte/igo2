@@ -26,6 +26,7 @@ export class AppComponent {
     const title = this.configService.getConfig('title');
     if (title) {
       this.titleService.setTitle(title);
+      this.metaService.addTag({ name: 'title', content: title });
     }
 
     const theme = this.configService.getConfig('theme') || this.themeClass;
@@ -33,9 +34,9 @@ export class AppComponent {
       this.renderer.addClass(document.body, theme);
     }
 
-    const meta = this.configService.getConfig('meta');
-    if (meta) {
-      this.metaService.addTags(meta);
+    const description = this.configService.getConfig('description');
+    if (description) {
+      this.metaService.addTag({ name: 'description', content: description });
     }
   }
 }
