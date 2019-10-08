@@ -1,9 +1,10 @@
 import { LanguageOptions } from '@igo2/core';
-import { SearchSourceOptions } from '@igo2/geo';
+import { SearchSourceOptions, ImportExportServiceOptions } from '@igo2/geo';
 
 interface Environment {
   production: boolean;
   igo: {
+    importExport?: ImportExportServiceOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     language?: LanguageOptions;
   };
@@ -12,6 +13,9 @@ interface Environment {
 export const environment: Environment = {
   production: true,
   igo: {
+    importExport: {
+      url: '/apis/ogre'
+    },
     searchSources: {
       nominatim: {
         available: false
@@ -29,7 +33,7 @@ export const environment: Environment = {
         enabled: true
       },
       ilayer: {
-        searchUrl: '/apis/layers/search',
+        searchUrl: '/apis/icherche/layers',
         order: 4,
         params: {
           limit: '5'

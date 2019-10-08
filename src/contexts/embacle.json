@@ -22,7 +22,7 @@
       "baseLayer": true,
       "sourceOptions": {
         "type": "xyz",
-        "url": "https://geoegl.msp.gouv.qc.ca/carto/tms/1.0.0/carte_gouv_qc_public@EPSG_3857/{z}/{x}/{-y}.png"
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_gouv_qc_public@EPSG_3857/{z}/{x}/{-y}.png"
       }
     },
     {
@@ -43,7 +43,7 @@
       "title": "WFS",
       "sourceOptions": {
         "type": "wfs",
-        "url": "/apis/ws/igo_gouvouvert.fcgi",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
         "params": {
           "featureTypes": "vg_observation_v_autre_wmst",
           "fieldNameGeometry": "geometry",
@@ -104,7 +104,7 @@
       "title": "Embâcle",
       "sourceOptions": {
         "type": "wms",
-        "url": "/apis/ws/igo_gouvouvert.fcgi",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
         "queryable": true,
         "params": {
           "layers": "vg_observation_v_inondation_embacle_wmst",
@@ -117,7 +117,6 @@
           "range": true,
           "type": "datetime"
         }
-
       },
       "metadata": {
         "url": "https://www.donneesquebec.ca/recherche/fr/dataset/historique-publique-d-embacles-repertories-au-msp",
