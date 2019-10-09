@@ -26,20 +26,6 @@
       }
     },
     {
-      "title": "TestfromCapabilities",
-      "optionsFromCapabilities": true,
-      "alias": "États-Unis",
-      "sourceOptions": {
-        "type": "wms",
-        "url": "http://demo.boundlessgeo.com/geoserver/wms",
-        "params": {
-          "layers": "topp:states",
-          "version": "1.3.0"
-        },
-        "serverType": "geoserver"
-      }
-    },
-    {
       "title": "WFS",
       "sourceOptions": {
         "type": "wfs",
@@ -65,37 +51,6 @@
             "propertyName": "code_municipalite",
             "expression": "10043"
           }
-        },
-        "serverType": "geoserver"
-      }
-    },
-    {
-      "title": "WMS Geoserver filterable",
-      "optionsFromCapabilities": true,
-      "sourceOptions": {
-        "type": "wms",
-        "url": "https://ahocevar.com/geoserver/wms",
-        "urlWfs": "https://ahocevar.com/geoserver/wfs",
-        "params": {
-          "layers": "water_areas",
-          "version": "1.3.0"
-        },
-        "paramsWFS": {
-          "featureTypes": "water_areas",
-          "fieldNameGeometry": "the_geom",
-          "maxFeatures": 10000,
-          "version": "1.1.0",
-          "outputFormat": "application/json",
-          "outputFormatDownload": "application/vnd.google-earth.kml+xml"
-        },
-        "sourceFields": [
-          { "name": "waterway", "alias": "Chemin d eau" },
-          { "name": "osm_id" },
-          { "name": "landuse" }
-        ],
-        "ogcFilters": {
-          "enabled": true,
-          "editable": true
         },
         "serverType": "geoserver"
       }

@@ -63,6 +63,23 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": false
+            },
+            "github": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.github.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false
             }
           }
         },
@@ -74,6 +91,9 @@
           "configurations": {
             "production": {
               "browserTarget": "igo2:build:production"
+            },
+            "github": {
+              "browserTarget": "igo2:build:github"
             }
           }
         },

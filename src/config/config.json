@@ -5,41 +5,5 @@
     }
   },
   "theme": "blue-theme",
-  "hasExpansionPanel": false,
-  "catalog": {
-    "sources": [
-      {
-        "id": "Gououvert",
-        "title": "Gouvouvert",
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi"
-      }
-    ]
-  },
-  "importExport": {
-    "url": "https://geoegl.msp.gouv.qc.ca/apis/ogre"
-  },
-  "searchSources": {
-    "nominatim": {
-      "available": false
-    },
-    "icherche": {
-      "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche",
-      "order": 2,
-      "params": {
-        "limit": "8"
-      }
-    },
-    "icherchereverse": {
-      "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/territoires",
-      "order": 3,
-      "enabled": true
-    },
-    "ilayer": {
-      "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche/layers",
-      "order": 4,
-      "params": {
-        "limit": "5"
-      }
-    }
-  }
+  "hasExpansionPanel": false
 }

@@ -11,11 +11,11 @@ import { SearchSourceOptions, CatalogServiceOptions } from '@igo2/geo';
 interface Environment {
   production: boolean;
   igo: {
-    searchSources?: { [key: string]: SearchSourceOptions };
-    language?: LanguageOptions;
     auth?: AuthOptions;
-    context?: ContextServiceOptions;
     catalog?: CatalogServiceOptions;
+    context?: ContextServiceOptions;
+    language?: LanguageOptions;
+    searchSources?: { [key: string]: SearchSourceOptions };
   };
 }
 
@@ -27,10 +27,22 @@ export const environment: Environment = {
       tokenKey: 'id_token_igo',
       allowAnonymous: true
     },
+    catalog: {
+      sources: [
+        {
+          id: 'Gououvert',
+          title: 'Gouvouvert',
+          url: '/apis/ws/igo_gouvouvert.fcgi'
+        }
+      ]
+    },
     // context: {
     //   url: '/apis/igo2',
     //   defaultContextUri: '5'
     // },
+    language: {
+      prefix: './locale/'
+    },
     searchSources: {
       nominatim: {
         available: false
@@ -54,9 +66,6 @@ export const environment: Environment = {
           limit: '5'
         }
       }
-    },
-    language: {
-      prefix: './locale/'
     }
   }
 };
