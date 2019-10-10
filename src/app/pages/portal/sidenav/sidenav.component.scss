@@ -43,9 +43,8 @@ igo-panel ::ng-deep .igo-panel-content {
 
 
 div.toolActivated > igo-panel ::ng-deep > div.igo-panel-header {
-  left: 48px;
+  margin-left: 48px;
   position: relative;
-  width: 350px;
 }
 
 #homeButton {
