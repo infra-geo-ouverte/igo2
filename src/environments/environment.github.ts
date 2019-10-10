@@ -24,6 +24,11 @@ export const environment: Environment = {
           id: 'Gououvert',
           title: 'Gouvouvert',
           url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi'
+        },
+        {
+          id: 'glace',
+          title: 'Carte de glace',
+          url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/radarsat.fcgi'
         }
       ]
     },

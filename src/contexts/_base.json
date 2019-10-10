@@ -1,0 +1,144 @@
+{
+  "map": {
+    "view": {
+      "projection": "EPSG:3857",
+      "center": [-71.938087, 48.446975],
+      "zoom": 6,
+      "maxZoom": 17
+    }
+  },
+  "layers": [
+    {
+      "id": "fond_osm",
+      "title": "OSM",
+      "visible": false,
+      "baseLayer": true,
+      "sourceOptions": {
+        "type": "osm",
+        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>"
+      }
+    },
+    {
+      "title": "Satellite",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz"
+      }
+    },
+    {
+      "title": "Blanc",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "attributions": "<a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
+        "type": "xyz"
+      }
+    },
+    {
+      "id": "carte_gouv_qc",
+      "title": "Route",
+      "visible": true,
+      "baseLayer": true,
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz"
+      }
+    },
+    {
+      "title": "Couleur",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_adn@EPSG_3857/{z}/{x}/{-y}.png",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz"
+      }
+    },
+    {
+      "title": "Gris",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/fond_thematique@EPSG_3857/{z}/{x}/{-y}.png",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz"
+      }
+    }
+  ],
+  "toolbar": [
+   "searchResults",
+   "contextManager",
+   "mapDetails",
+   "timeAnalysis",
+   "ogcFilter",
+   "measurer",
+   "directions",
+   "catalog",
+   "importExport",
+   "print",
+   "shareMap",
+   "about"
+ ],
+ "tools": [
+   {
+     "name": "searchResults",
+     "options": {
+       "focusFirst": false
+     }
+   },
+   {
+     "name": "contextManager"
+   },
+  {
+     "name": "about",
+     "options": {
+       "html": "<h2>IGO2</h2><p>IGO2 (<a target='_blank' href='http://igouverte.org/'>Infrastructure de Géomatique Ouverte</a>  - version 2) est une solution Web gouvernementale, libre et gratuite spécialisée en géomatique.<br><br>IGO2  a été conçue grâce à un réseau d’échanges regroupant des spécialistes en développement géomatique provenant de plusieurs ministères et organismes du gouvernement du Québec et intègre plusieurs <a href='http://igouverte.org/documentation/page-services-igo-msp/'>services Web gouvernementaux</a>. Ce faisant, elle permet de tirer profit d’une multitude de données géographiques (patrimoine culturel, territoires agricoles, écoles, casernes d'incendie, villages relais, etc.) grâce à une interface cartographique accessible par un navigateur Web.<br><br>Les internautes de partout dans le monde sont encouragés à <a target='_blank' href='http://igouverte.org/contribuer/'>contribuer</a> à IGO2 en vue de l’améliorer au bénéfice de ses utilisateurs. Par son développement basé sur un modèle collaboratif (« open source »), IGO2 est en constante évolution et est basé sur plusieurs autres logiciels libres de l'industrie. <br><br>IGO2 vous permet de consulter :<ul><li>Afficher votre position géographique</li><li>Rechercher un lieu/coordonnées gps ou une adresse</li><li>Partager une vue/thème/contexte carto</li><li>Changer les fonds de carte</li><li>Catalogues de services de données</li><li>Importer/exporter un fichier vertoriel (kml, geojson, shape)</li><li>Outil d'itinéraire</li><li>Menu d'impression</li><li>Filtre temporel.</ul></p>"
+     }
+   },
+   {
+     "name": "mapDetails",
+     "options": {
+       "toggleLegendOnVisibilityChange": true,
+       "layerListControls": {
+         "excludeBaseLayers": true
+       }
+     }
+   },
+   {
+     "name": "shareMap",
+     "options": {
+       "hasShareMapButton": false,
+       "hasCopyLinkButton": true
+     }
+   },
+   {
+     "name": "measurer"
+   },
+   {
+     "name": "directions"
+   },
+   {
+     "name": "catalog"
+   },
+   {
+     "name": "catalogBrowser"
+   },
+   {
+     "name": "timeAnalysis"
+   },
+   {
+     "name": "ogcFilter"
+   },
+   {
+     "name": "importExport"
+   },
+   {
+     "name": "print"
+   }
+ ]
+}

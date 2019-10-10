@@ -33,6 +33,11 @@ export const environment: Environment = {
           id: 'Gououvert',
           title: 'Gouvouvert',
           url: '/apis/ws/igo_gouvouvert.fcgi'
+        },
+        {
+          id: 'glace',
+          title: 'Carte de glace',
+          url: '/apis/ws/radarsat.fcgi'
         }
       ]
     },

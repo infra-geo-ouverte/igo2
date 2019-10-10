@@ -1,0 +1,64 @@
+{
+  "uri": "evenements",
+  "title": "Événements de sécurité civile",
+  "base": "_base",
+  "layers": [
+    {
+      "title": "WFS",
+      "sourceOptions": {
+        "type": "wfs",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+        "queryable": true,
+        "params": {
+          "featureTypes": "vg_observation_v_autre_wmst",
+          "fieldNameGeometry": "geometry",
+          "maxFeatures": 10000,
+          "version": "2.0.0",
+          "outputFormat": "geojson_utf8",
+          "outputFormatDownload": "shp"
+        },
+        "sourceFields": [
+          { "name": "code_municipalite", "alias": "# de la municipalitée" },
+          { "name": "date_observation" },
+          { "name": "urgence", "values": ["immédiate", "inconnue"] }
+        ],
+        "ogcFilters": {
+          "enabled": true,
+          "editable": true,
+          "filters": {
+            "operator": "PropertyIsEqualTo",
+            "propertyName": "code_municipalite",
+            "expression": "10043"
+          }
+        },
+        "serverType": "geoserver"
+      }
+    },
+    {
+      "title": "Filtre - Événements extrêmes",
+      "visible": false,
+      "sourceOptions": {
+        "queryable": true,
+        "params": {
+          "featureTypes": "vg_observation_v_autre_wmst",
+          "fieldNameGeometry": "geometry",
+          "maxFeatures": 10000,
+          "version": "2.0.0",
+          "outputFormat": "geojson_utf8",
+          "outputFormatDownload": "shp"
+        },
+        "type": "wfs",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+        "ogcFilters": {
+          "enabled": true,
+          "editable": true,
+          "filters": {
+            "operator": "PropertyIsEqualTo",
+            "propertyName": "severite",
+            "expression": "Extrême"
+          }
+        }
+      }
+    }
+  ]
+}
