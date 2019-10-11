@@ -450,9 +450,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     const contextmenuPoint = event;
     const boundingMapBrowser = this.mapBrowser.nativeElement.getBoundingClientRect();
     contextmenuPoint.y =
-      contextmenuPoint.y - boundingMapBrowser.top + window.scrollY;
+      contextmenuPoint.y - boundingMapBrowser.top + (window.scrollY || window.pageYOffset);
     contextmenuPoint.x =
-      contextmenuPoint.x - boundingMapBrowser.left + window.scrollX;
+      contextmenuPoint.x - boundingMapBrowser.left + (window.scrollX || window.pageXOffset);
     const pixel = [contextmenuPoint.x, contextmenuPoint.y];
 
     const coord = this.map.ol.getCoordinateFromPixel(pixel);
