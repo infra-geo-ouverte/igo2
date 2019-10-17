@@ -676,6 +676,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private addLayerByName(url: string, name: string, zIndex: number = 100000) {
+    if (!this.contextLoaded) {
+      return
+    }
     this.addedLayers$$.push(
       this.layerService
         .createAsyncLayer({
