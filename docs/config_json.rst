@@ -917,7 +917,7 @@ Base
 Exemples
 
 
-        - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
+        - Définition : `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
         - Utilisation: `igo2/src/contexts/_default.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_default.json>`_
         
 
@@ -942,7 +942,6 @@ Exemples
 
         .. code:: json
 
-            "theme": "blue-theme"
             "layers": [
                   {
                         "id": "fond_osm",
@@ -978,176 +977,11 @@ Exemples
             ]
 
 Propriétés
+    .. line-block::
+        Permet de définir une liste de couches. Référer-vous à la description de ce qu'est un `layer <https://igo2.readthedocs.io/fr/docdev/properties.html#couches-d-information-layer>`_ .
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
-    
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - baseLayer
-         - Boolean
-         - .. line-block::
-               Définir si la couche 
-               doit être considérée 
-               comme une couche de 
-               base. Les couches de
-               base sont présentés 
-               dans le "baselayer"
-               switcher dans le coin
-               inférieur gauche et
-               peuvent être exclues
-               visuellement de la
-               table des matières.
-         - .. line-block::
-               true
-               false
-         - false
-       * - id
-         - string
-         - .. line-block::
-               Identifiant unique 
-               de la couche à 
-               l'échelle de 
-               l'application. 
-               Particulièrement
-               utile pour batir le
-               lien pour le partage
-               de cartes.
-         -                
-         - uuid
-       * - legendOptions
-         - legendOptions
-         - .. line-block::
-               En construction
-         -                
-         - 
-       * - minResolution
-         - Number
-         - .. line-block::
-               Définir la résolution 
-               à laquelle la couche
-               d'information arrête
-               de s'afficher.
-
-               Pour les **WMS** 
-               récupérant certaines
-               propriétés du service,
-               cette valeur est peut
-               être récupérée.
-         - 
-         -   
-       * - maxResolution
-         - Number
-         - .. line-block::
-               Définir la résolution 
-               à laquelle la couche
-               d'information commence
-               de s'afficher. 
-               Intéressant pour les 
-               couches exigeantes à 
-               récupérer à très petite 
-               échelle (ex. 1: 5000000).
-
-               Pour les **WMS** 
-               récupérant certaines
-               propriétés du service,
-               cette valeur est peut
-               être récupérée. 
-         - 
-         -     
-       * - opacity
-         - Number
-         - .. line-block::
-               Définir la 
-               transparence de la couche.
-               0 = invisible 
-               1 = aucune transparence
-               Également controlable
-               par l'interface.
-         - de 0.0 à 1.0
-         - 1 
-       * - showInLayerList
-         - Boolean
-         - .. line-block::
-               Autoriser/Bloquer
-               la supression de la 
-               couche de la table
-               des matières.
-         - true false
-         - true
-       * - **sourceOptions***
-         - .. line-block::
-               - `ArcGis <https://igo2.readthedocs.io/fr/docdev/properties.html#arcgis>`_
-               - `Carto <https://igo2.readthedocs.io/fr/docdev/properties.html#arcgis>`_
-               - `OSM <https://igo2.readthedocs.io/fr/docdev/properties.html#osm>`_
-               - `Cluster <https://igo2.readthedocs.io/fr/docdev/properties.html#cluster>`_
-               - `Tile ArcGis <https://igo2.readthedocs.io/fr/docdev/properties.html#tile-arcgis>`_
-               - `TMS (xyz) <https://igo2.readthedocs.io/fr/docdev/properties.html#tms-xyz>`_
-               - `Vector Tiles <https://igo2.readthedocs.io/fr/docdev/properties.html#vector-tiles-mvt>`_
-               - `Vecteur <https://igo2.readthedocs.io/fr/docdev/properties.html#vecteur>`_
-               - `Websocket <https://igo2.readthedocs.io/fr/docdev/properties.html#websocket>`_
-               - `WFS <https://igo2.readthedocs.io/fr/docdev/properties.html#wfs>`_
-               - `WMS <https://igo2.readthedocs.io/fr/docdev/properties.html#wms>`_
-               - `WMTS <https://igo2.readthedocs.io/fr/docdev/properties.html#wmts>`_
-         - .. line-block::
-               Divers sources de 
-               données sont supportées.
-               Référez vous aux 
-               section suivantes pour
-               plus de détails.
-         - 
-         - 
-       * - **title***
-         - String
-         - .. line-block::
-               Titre de la couches
-               tel qu'affiché dans 
-               la table des matières
-               et dans les résultats 
-               d'interrogations.
-
-               Pour les **WMS** et 
-               **WMTS** récupérant 
-               certaines propriétés
-               du service, cette 
-               valeur est peut être
-               récupérée.
-         - 
-         - 
-       * - visible
-         - Boolean
-         - .. line-block::
-               Visibilité de la
-               couche à l'ouverture
-               de la thématique.
-         - true false
-         - true
-       * - zIndex
-         - Number
-         - .. line-block::
-               Ordre dans la table
-               des matières. Plus 
-               le nombre est élevé,
-               plus la couche apparait
-               au haut de la table
-               des matières. Si absent,
-               l'ordre dans le 
-               contexte.json fait office 
-               d'ordonnancement.
-         - 
-         - 
- 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
         - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
+        - `Layer IGO2 <https://igo2.readthedocs.io/fr/docdev/properties.html#couches-d-information-layer>`_
