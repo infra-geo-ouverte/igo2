@@ -642,7 +642,7 @@ Propriétés
                Liste de nombre définissant
                les limites d'application
                de la projection. L'ordre à 
-               respecteur est:
+               respecter est:
                [Xmin,YMin,XMax,YMax].
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.

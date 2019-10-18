@@ -529,11 +529,13 @@ source (base commune)
         Elles seront présentées dans les sections dédiées aux sources.
 
         Les sources disponible sont:
-            - Coordonnées
-            - iCherche (Québec)
+            - `Coordonnées`_
+            - `iCherche`_ (Québec)
+            - `iCherche Reverse`_ - par coordonnées (Québec)
             - iLayer (Québec)
             - Nominatim (internationnal)
             - StoredQueries, WFS 2.0 (Québec)
+            - StoredQueries Reverse, WFS 2.0  - par coordonnées (Québec)
 
         Selon votre contexte, les sources de recherche ayant une limitation au Québec, 
         peuvent être utilisées comme exemple afin d'adapter votre propre service de recherche.
@@ -632,11 +634,65 @@ Liens
 
         - `igo2-lib/packages/geo/src/lib/search/shared/sources/source.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/source.interfaces.ts>`_
 
+
+Coordonnées
+===============
+
+    .. line-block::
+        Le service de recherches de coordonnées permet de se localiser sous diverses structures de coordonnées. 
+            - Degré décimal 
+                - lon, lat (-68.165547, 48.644546)
+                - lat, lon (48.644546, -68.165547)
+            - Projeté
+                - -7588141.73,6214750.96       (exemple en 3857)
+            - À compléter
+
+        Le résultat de la recherche est la position du point, un lien vers Google Maps / Streetview.
+        Le service est disponible par défaut dans les applications. 
+    
+Exemples
+
+    .. code:: json
+
+        "coordinatesreverse": {
+            "order": 1,
+            "enabled": false,
+            "available": true
+        }
+
+Propriétés
+
+    Seulement les propriétés spécifique à ce service sont présentées.
+
+    .. list-table::
+       :widths: 10 80
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Valeur défaut
+       * - title
+         - .. line-block::
+               Basé sur la traduction de 2 fichiers. 
+               Propriété igo.geo.search.coordinates.name dans
+                   - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
+                   - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_    
+    
+    Pour les autres propriétés, référez vous à `source (base commune)`_
+
+Liens
+
+    - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
+    - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_   
+
+
 iCherche
 ===============
 
     .. line-block::
-        iCherche est un service de recherche développé par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
+        iCherche est un service de recherche développé 
+        par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
         afin de permettre des recherche textuelles sur les entités suivantes:
             - Adresses
             - Code postal
@@ -654,7 +710,6 @@ Exemples
 
             "icherche": {
                 "searchUrl": 'https://geoegl.msp.gouv.qc.ca/apis/icherche',
-                "order": 2,
                 "params": {
                     "limit": '8'
                  }
@@ -662,10 +717,7 @@ Exemples
 
 Propriétés
 
-    Seulement les propriétés avec des valeurs par défaut 
-    spécifique à ce service sont présentés dans la section.
-
-    Pour les autres propriétés, référez vous à `source (base commune)`_
+    Seulement les propriétés spécifique à ce service sont présentées.
 
     .. list-table::
        :widths: 10 80
@@ -682,10 +734,12 @@ Propriétés
          - `Ligne 79  <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L79>`_
        * - title
          - iCherche
+    
+    Pour les autres propriétés, référez vous à `source (base commune)`_
 
 Liens
 
-        - `iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`_
+        - `Code iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`_
         - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
 
 
@@ -693,7 +747,8 @@ iCherche Reverse
 ================
 
     .. line-block::
-        iCherche Reverse est un service de recherche développé par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
+        iCherche Reverse est un service de recherche développé 
+        par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
         afin de permettre des recherche par coordonnées / rayon sur les entités suivantes:
             - Adresses
             - Routes (segments de routes)
@@ -717,10 +772,7 @@ Exemples
 
 Propriétés
 
-    Seulement les propriétés avec des valeurs par défaut 
-    spécifique à ce service sont présentés dans la section.
-
-    Pour les autres propriétés, référez vous à `source (base commune)`_
+    Seulement les propriétés spécifique à ce service sont présentées.
 
     .. list-table::
        :widths: 10 80
@@ -737,8 +789,10 @@ Propriétés
          - `Ligne 427 <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L427>`_
        * - title
          - Territoire (Géocodage inversé)
+    
+    Pour les autres propriétés, référez vous à `source (base commune)`_
 
 Liens
 
-        - `iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`_
+        - `Code iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`_
         - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_

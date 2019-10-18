@@ -36,3 +36,5 @@ layers
 
 
 SearchSourceSettings []
+Coordonnées bug et partiellement complet pour les format bell et autres.
+
