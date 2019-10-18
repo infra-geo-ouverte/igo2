@@ -53,13 +53,13 @@ Résumé
          - Description
          - Outil lié
        * - auth
-         - Auth
+         - `Auth`_
          - .. line-block::
                Objet permettant d'activer le serveur 
                d'authentification.
          -
        * - catalog
-         - Catalog[]
+         - `Catalog`_ []
          - .. line-block::
                Doit être présente si l'outil de catalogue.
                Permet de gérer les sources WMS et WMTS
@@ -67,14 +67,14 @@ Résumé
                Catalog
                CatalogBrowser
        * - context
-         - context
+         - `Context`_
          - .. line-block::
                Activation de l'API de context d'IGO2. 
                Cette API sera documentée 
                indépendamment ce la présente 
                documentation.
          - ContextManager
-       * - hasExpansionPanel
+       * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
                Permet d'ouvrir un paneau d'expansion à partir 
@@ -85,7 +85,7 @@ Résumé
                ** Encore en développement **
          - 
        * - importExport
-         - ImportExport
+         - `ImportExport`_
          - .. line-block::
                Nécessaire si l'outil d'importation exportation
                pour gérer l'importation des Shapefiles  
@@ -93,32 +93,35 @@ Résumé
                Importation
                Exportation
        * - **language***
-         - Language
+         - `Language`_
          - .. line-block::
                Chemin d'accès des fichiers de traduction de 
                l'application. 
          - Tous 
        * - projections
-         - Projection[]
+         - `Projection`_ []
          - .. line-block::
                Liste de projections non enregistrées
                par défault par OpenLayers. 
          - 
        * - routingSources
-         - RoutingSource
+         - `RoutingSource`_
          - .. line-block::
                Source serveur pour la création des itinéraires.
                Actuellement, le serveur utilisé est OSRM.  
          - Itinéraire
        * - **searchSources***
-         - SearchSources
+         - `SearchSources`_
          - .. line-block::
                Nécessaire afin de permettre la recherche par
                texte et/ou la recherche par coordonnées.
          - .. line-block::
                Recherche
                Carte
-       * - **theme***
+       * - .. line-block::
+               **Theme***
+               voir : `Theme`_
+
          - String
          - .. line-block::
                Permet de définir les thèmes de l'application.
