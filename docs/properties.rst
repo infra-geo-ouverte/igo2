@@ -142,19 +142,19 @@ Propriétés
          - true
        * - **sourceOptions***
          - .. line-block::
-               - `ArcGis`_.
-               - `Tile ArcGis`_.
-               - `Carto`_.
-               - `OSM`_.
-               - `Cluster`_.
-               - `TMS (xyz)`_.
-               - `Vector Tiles (mvt)`_.
-               - `Vecteur`_.
-               - `Websocket`_.
-               - `WFS`_.
-               - `WMS`_.
-               - `WMTS`_.
-               - `ArcGis`_.
+               - `ArcGis`_
+               - `Tile ArcGis`_
+               - `Carto`_
+               - `OSM`_
+               - `Cluster`_
+               - `TMS (xyz)`_
+               - `Vector Tiles`_
+               - `Vecteur`_
+               - `Websocket`_
+               - `WFS`_
+               - `WMS`_
+               - `WMTS`_
+               - `ArcGis`_
          - .. line-block::
                Divers sources de 
                données sont supportées.
@@ -371,7 +371,7 @@ Liens
         - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
 
 
-Vector Tiles (mvt)
+Vector Tiles
 ==================
 
     .. line-block::
@@ -521,7 +521,7 @@ Sources de recherche (search-source)
     Description
 
 
-source (base commune)
+Source (base commune)
 =====================
 
     .. line-block::
@@ -679,7 +679,7 @@ Propriétés
                    - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
                    - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_    
     
-    Pour les autres propriétés, référez vous à `source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_
 
 Liens
 
@@ -735,7 +735,7 @@ Propriétés
        * - title
          - iCherche
     
-    Pour les autres propriétés, référez vous à `source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_
 
 Liens
 
@@ -790,7 +790,7 @@ Propriétés
        * - title
          - Territoire (Géocodage inversé)
     
-    Pour les autres propriétés, référez vous à `source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_
 
 Liens
 
