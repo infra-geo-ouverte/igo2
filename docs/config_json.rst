@@ -37,100 +37,100 @@ Si vous désirez changer, le chemin d'accès de ce fichier ou bien d'environneme
 
     - `/src/app/app.module.ts <https://github.com/infra-geo-ouverte/igo2/blob/54e74aa21ac66745f81dbbca77334c244e9f9b12/src/app/app.module.ts#L41>`_ ligne 41.
 
-Important# : Notez que le fichier config.json à préséance sur le fichier environment.*.ts
+Important : Notez que le fichier config.json à préséance sur le fichier environment.*.ts
 
 
 *********************
 Résumé
 *********************
 
-.. list-table::
-   :widths: 10 10 30 15
-   :header-rows: 1
+    .. list-table::
+       :widths: 10 10 30 15
+       :header-rows: 1
+    
+       * - Propriétés
+         - Type
+         - Description
+         - Outil lié
+       * - auth
+         - Auth
+         - .. line-block::
+               Objet permettant d'activer le serveur 
+               d'authentification.
+         -
+       * - catalog
+         - Catalog[]
+         - .. line-block::
+               Doit être présente si l'outil de catalogue.
+               Permet de gérer les sources WMS et WMTS
+         - .. line-block::
+               Catalog
+               CatalogBrowser
+       * - context
+         - context
+         - .. line-block::
+               Activation de l'API de context d'IGO2. 
+               Cette API sera documentée 
+               indépendamment ce la présente 
+               documentation.
+         - ContextManager
+       * - hasExpansionPanel
+         - Boolean
+         - .. line-block::
+               Permet d'ouvrir un paneau d'expansion à partir 
+               d'un bouton situé dans le coin inférieur gauche
+               de la carte. 
+               Ce dernier contient les données tabulaire pour
+                les données WFS / Vectorielle / Cluster
+               ** Encore en développement **
+         - 
+       * - importExport
+         - ImportExport
+         - .. line-block::
+               Nécessaire si l'outil d'importation exportation
+               pour gérer l'importation des Shapefiles  
+         - .. line-block::
+               Importation
+               Exportation
+       * - **language***
+         - Language
+         - .. line-block::
+               Chemin d'accès des fichiers de traduction de 
+               l'application. 
+         - Tous 
+       * - projections
+         - Projection[]
+         - .. line-block::
+               Liste de projections non enregistrées
+               par défault par OpenLayers. 
+         - 
+       * - routingSources
+         - RoutingSource
+         - .. line-block::
+               Source serveur pour la création des itinéraires.
+               Actuellement, le serveur utilisé est OSRM.  
+         - Itinéraire
+       * - **searchSources***
+         - SearchSources
+         - .. line-block::
+               Nécessaire afin de permettre la recherche par
+               texte et/ou la recherche par coordonnées.
+         - .. line-block::
+               Recherche
+               Carte
+       * - **theme***
+         - String
+         - .. line-block::
+               Permet de définir les thèmes de l'application.
+               Les choix sont:
+                   - blue-theme
+                   - bluegrey.theme
+                   - dark.theme
+               Le répertoire où sont conservés les thèmes est 
+               le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
+         -  
 
-   * - Propriétés
-     - Type
-     - Description
-     - Outil lié
-   * - auth
-     - Auth
-     - .. line-block::
-           Objet permettant d'activer le serveur 
-           d'authentification.
-     -
-   * - catalog
-     - Catalog[]
-     - .. line-block::
-           Doit être présente si l'outil de catalogue.
-           Permet de gérer les sources WMS et WMTS
-     - .. line-block::
-           Catalog
-           CatalogBrowser
-   * - context
-     - context
-     - .. line-block::
-           Activation de l'API de context d'IGO2. 
-           Cette API sera documentée 
-           indépendamment ce la présente 
-           documentation.
-     - ContextManager
-   * - hasExpansionPanel
-     - Boolean
-     - .. line-block::
-           Permet d'ouvrir un paneau d'expansion à partir 
-           d'un bouton situé dans le coin inférieur gauche
-           de la carte. 
-           Ce dernier contient les données tabulaire pour
-            les données WFS / Vectorielle / Cluster
-           ** Encore en développement **
-     - 
-   * - importExport
-     - ImportExport
-     - .. line-block::
-           Nécessaire si l'outil d'importation exportation
-           pour gérer l'importation des Shapefiles  
-     - .. line-block::
-           Importation
-           Exportation
-   * - **language***
-     - Language
-     - .. line-block::
-           Chemin d'accès des fichiers de traduction de 
-           l'application. 
-     - Tous 
-   * - projections
-     - Projection[]
-     - .. line-block::
-           Liste de projections non enregistrées
-           par défault par OpenLayers. 
-     - 
-   * - routingSources
-     - RoutingSource
-     - .. line-block::
-           Source serveur pour la création des itinéraires.
-           Actuellement, le serveur utilisé est OSRM.  
-     - Itinéraire
-   * - **searchSources***
-     - SearchSources
-     - .. line-block::
-           Nécessaire afin de permettre la recherche par
-           texte et/ou la recherche par coordonnées.
-     - .. line-block::
-           Recherche
-           Carte
-   * - **theme***
-     - String
-     - .. line-block::
-           Permet de définir les thèmes de l'application.
-           Les choix sont:
-               - blue-theme
-               - bluegrey.theme
-               - dark.theme
-           Le répertoire où sont conservés les thèmes est 
-           le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
-     -  
-
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 
 ***************
@@ -198,7 +198,7 @@ Propriétés
          - ...
          - ...
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -416,7 +416,7 @@ Propriétés
                (WMS|WMTS)
          - 1.0.0 (WMTS)
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -474,7 +474,7 @@ Propriétés
          - 
          -  _default
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -532,7 +532,7 @@ Propriétés
                https://geoegl.msp.gouv.qc.ca/apis/ogre
          - 
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -581,7 +581,7 @@ Propriétés
          - 
          - ./locale/
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -645,7 +645,7 @@ Propriétés
                respecteur est:
                [Xmin,YMin,XMax,YMax].
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
         - `http://epsg.io/ <http://epsg.io/>`_
@@ -703,7 +703,7 @@ Propriétés
          - 
          - `https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/ <https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/>`_
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -763,7 +763,7 @@ Propriétés
                - teal.theme
          - blue-theme
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -827,76 +827,76 @@ Important : Notez que le fichier nom_du_contexte.json à préséance sur le fich
 Résumé
 *********************  
 
-.. list-table::
-   :widths: 10 10 30 15
-   :header-rows: 1
-
-   * - Propriétés
-     - Type
-     - Description
-     - Outil lié
-   * - base
-     - string
-     - .. line-block::
-           Identification du nom
-           du ficher de base dont
-           les thématiques peuvent
-           hériter du contenu.
-     - .. line-block::
-           Map
-           ContextManager
-           Config d'outils
-           ...
-   * - **layers***
-     - layer[]
-     - .. line-block::
-           Liste des couches
-           d'informations
-           disponible pour
-           la thématique 
-           sélectionnée. 
-     - .. line-block::
-           Map
-           MapDetails
-   * - **map***
-     - map
-     - .. line-block::
-           Définition de la carte
-           lors de l'ouverture 
-           initial du contexte
-     - 
-   * - **uri***
-     - String
-     - .. line-block::
-           Nom ou identifiant
-           de la thématique.
-           Doit être unique
-           au sein de la 
-           même application.
-     - .. line-block::
-           Map
-           ShareMap
-   * - toolbar
-     - String[]
-     - .. line-block::
-           Liste des outils
-           disponible dans 
-           l'application.
-           L'ordre dans la 
-           liste correspond
-           à l'ordre 
-           d'apparition des 
-           outils dans IGO2.
-     - Tous 
-   * - tools
-     - Objet[]
-     - .. line-block::
-           Liste de configuration 
-           des outils présent dans
-           l'application.
-     - Tous
-
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    .. list-table::
+       :widths: 10 10 30 15
+       :header-rows: 1
+    
+       * - Propriétés
+         - Type
+         - Description
+         - Outil lié
+       * - base
+         - string
+         - .. line-block::
+               Identification du nom
+               du ficher de base dont
+               les thématiques peuvent
+               hériter du contenu.
+         - .. line-block::
+               Map
+               ContextManager
+               Config d'outils
+               ...
+       * - **layers***
+         - layer[]
+         - .. line-block::
+               Liste des couches
+               d'informations
+               disponible pour
+               la thématique 
+               sélectionnée. 
+         - .. line-block::
+               Map
+               MapDetails
+       * - **map***
+         - map
+         - .. line-block::
+               Définition de la carte
+               lors de l'ouverture 
+               initial du contexte
+         - 
+       * - **uri***
+         - String
+         - .. line-block::
+               Nom ou identifiant
+               de la thématique.
+               Doit être unique
+               au sein de la 
+               même application.
+         - .. line-block::
+               Map
+               ShareMap
+       * - toolbar
+         - String[]
+         - .. line-block::
+               Liste des outils
+               disponible dans 
+               l'application.
+               L'ordre dans la 
+               liste correspond
+               à l'ordre 
+               d'apparition des 
+               outils dans IGO2.
+         - Tous 
+       * - tools
+         - Objet[]
+         - .. line-block::
+               Liste de configuration 
+               des outils présent dans
+               l'application.
+         - Tous
+    
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 
 ***************

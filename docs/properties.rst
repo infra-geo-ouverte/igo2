@@ -203,7 +203,7 @@ Propriétés
          - 
          - 
  
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -298,7 +298,7 @@ Propriétés
          - osm
 
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -364,7 +364,7 @@ Propriétés
          - 
          - 
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -424,7 +424,7 @@ Propriétés
          - 
          - 
 
-Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
