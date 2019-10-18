@@ -6,12 +6,16 @@ Propriétés
 Composantes géométriques (geo)
 ==============================
 
+*****************************
+Couches d'information (layer)
+*****************************
 
+Couche
+===============
 
-
-******************
-Sources de données
-******************
+*******************************
+Sources de données (datasource)
+*******************************
 
 Certaines sources de données possèdent des propriétés identiques et spécifiques.
 

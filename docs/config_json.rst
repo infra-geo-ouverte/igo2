@@ -1086,18 +1086,18 @@ Propriétés
          - true
        * - **sourceOptions***
          - .. line-block::
-               - ArcGis
-               - Carto
-               - OSM
-               - Cluster
-               - Tile ArcGis
-               - TMS (xyz)
-               - Vector Tiles
-               - Vecteur
-               - Websocket
-               - WFS
-               - WMS
-               - WMTS
+               - `ArcGis <https://igo2.readthedocs.io/fr/docdev/properties.html#arcgis>`_
+               - `Carto <https://igo2.readthedocs.io/fr/docdev/properties.html#arcgis>`_
+               - `OSM <https://igo2.readthedocs.io/fr/docdev/properties.html#osm>`_
+               - `Cluster <https://igo2.readthedocs.io/fr/docdev/properties.html#cluster>`_
+               - `Tile ArcGis <https://igo2.readthedocs.io/fr/docdev/properties.html#tile-arcgis>`_
+               - `TMS (xyz) <https://igo2.readthedocs.io/fr/docdev/properties.html#tms-xyz>`_
+               - `Vector Tiles <https://igo2.readthedocs.io/fr/docdev/properties.html#vector-tiles-mvt>`_
+               - `Vecteur <https://igo2.readthedocs.io/fr/docdev/properties.html#vecteur>`_
+               - `Websocket <https://igo2.readthedocs.io/fr/docdev/properties.html#websocket>`_
+               - `WFS <https://igo2.readthedocs.io/fr/docdev/properties.html#wfs>`_
+               - `WMS <https://igo2.readthedocs.io/fr/docdev/properties.html#wms>`_
+               - `WMTS <https://igo2.readthedocs.io/fr/docdev/properties.html#wmts>`_
          - .. line-block::
                Divers sources de 
                données sont supportées.
