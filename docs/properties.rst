@@ -511,3 +511,234 @@ WMTS
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
+
+
+
+************************************
+Sources de recherche (search-source)
+************************************
+
+    Description
+
+
+source (base commune)
+=====================
+
+    .. line-block::
+        Toutes les sources de recherche possèdent des propriétés commnunes. Certaines spécificités existent pour chacune des sources de recherche. 
+        Elles seront présentées dans les sections dédiées aux sources.
+
+        Les sources disponible sont:
+            - Coordonnées
+            - iCherche (Québec)
+            - iLayer (Québec)
+            - Nominatim (internationnal)
+            - StoredQueries, WFS 2.0 (Québec)
+
+        Selon votre contexte, les sources de recherche ayant une limitation au Québec, 
+        peuvent être utilisées comme exemple afin d'adapter votre propre service de recherche.
+
+            
+Exemples
+
+    .. line-block::
+        Les exemples seront présentées pour chacune des sources de recherche. 
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - available
+         - Boolean
+         - .. line-block::
+               Permet de préciser si le 
+               service est utilisable dans 
+               l'application.
+         - true false
+         - true
+       * - enabled
+         - Boolean
+         - .. line-block::
+               Permet de préciser si le 
+               service est activé (coché) 
+               à l'ouverture de 
+               l'application.
+         - true false
+         - true
+       * - order
+         - Number
+         - .. line-block::
+               Définit la position des 
+               résultats dans la liste
+               des résultats de recherche.
+               Plus le nombre est élevé,
+               plus les résultats de 
+               cette source seront 
+               au bas de la liste.
+         - 
+         - 99
+       * - params
+         - Object {}
+         - .. line-block::
+               Paramètres supplémentaire 
+               à ajouter à la requête 
+               faite au serveur associé.
+               Spécifique selon la source.
+         - 
+         - 
+       * - searchUrl
+         - String
+         - .. line-block::
+               URL du serveur à utiliser.
+         - 
+         - .. line-block::
+               Spécifique 
+               selon la 
+               source.
+       * - settings
+         - SearchSourceSettings []
+         - En construction
+         - 
+         - .. line-block::
+               Spécifique 
+               selon la 
+               source.
+       * - **title***
+         - String
+         - .. line-block::
+               Titre du service 
+               de recherche
+         - 
+         - .. line-block::
+               Spécifique 
+               selon la 
+               source.
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+        - `igo2-lib/packages/geo/src/lib/search/shared/sources/source.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/source.interfaces.ts>`_
+
+iCherche
+===============
+
+    .. line-block::
+        iCherche est un service de recherche développé par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
+        afin de permettre des recherche textuelles sur les entités suivantes:
+            - Adresses
+            - Code postal
+            - Routes (segments de routes)
+            - Municipalités (et ancien municipalités)
+            - MRC
+            - Régions administratives
+            - Lieux nommés 
+        Le contenu accessible par le service de recherche est limité au territoire quuébécois. 
+        ** Le code de iCherche être utilisées comme exemple afin d'adapter votre propre service de recherche textuel.
+            
+Exemples
+
+        .. code:: json
+
+            "icherche": {
+                "searchUrl": 'https://geoegl.msp.gouv.qc.ca/apis/icherche',
+                "order": 2,
+                "params": {
+                    "limit": '8'
+                 }
+            }
+
+Propriétés
+
+    Seulement les propriétés avec des valeurs par défaut 
+    spécifique à ce service sont présentés dans la section.
+
+    Pour les autres propriétés, référez vous à `source (base commune)`_
+
+    .. list-table::
+       :widths: 10 80
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Valeur défaut
+       * - searchUrl
+         - .. line-block::
+               https://geoegl.msp.gouv.qc.ca/apis/icherche
+       * - settings
+         - `Ligne 79  <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L79>`_
+       * - title
+         - iCherche
+
+Liens
+
+        - `iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`_
+        - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+
+
+iCherche Reverse
+================
+
+    .. line-block::
+        iCherche Reverse est un service de recherche développé par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
+        afin de permettre des recherche par coordonnées / rayon sur les entités suivantes:
+            - Adresses
+            - Routes (segments de routes)
+            - Arrondissement (segments de routes)         
+            - Municipalités (et ancien municipalités)
+            - MRC
+            - Régions administratives
+        Le contenu accessible par le service de recherche est limité au territoire quuébécois. 
+        ** Le code de iCherche Reverse être utilisées comme exemple afin d'adapter votre propre service de recherche textuel.
+            
+Exemples
+
+        .. code:: json
+
+            "icherchereverse": {
+                "searchUrl": 'https://geoegl.msp.gouv.qc.ca/apis/territoires',
+                "params": {
+                    "bufffer": 12
+                 }
+            }
+
+Propriétés
+
+    Seulement les propriétés avec des valeurs par défaut 
+    spécifique à ce service sont présentés dans la section.
+
+    Pour les autres propriétés, référez vous à `source (base commune)`_
+
+    .. list-table::
+       :widths: 10 80
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Valeur défaut
+       * - searchUrl
+         - .. line-block::
+               https://geoegl.msp.gouv.qc.ca/apis/territoires
+       * - settings
+         - `Ligne 427 <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L427>`_
+       * - title
+         - Territoire (Géocodage inversé)
+
+Liens
+
+        - `iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`_
+        - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_

@@ -118,10 +118,7 @@ Résumé
          - .. line-block::
                Recherche
                Carte
-       * - .. line-block::
-               **Theme***
-               voir : `Theme`_
-
+       * - `Theme`_ *
          - String
          - .. line-block::
                Permet de définir les thèmes de l'application.
