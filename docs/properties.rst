@@ -1,9 +1,9 @@
 ---------------------
-Propriétés
+Composantes IGO2
 ---------------------
 
 ==============================
-Composantes géométriques (geo)
+Géométriques
 ==============================
 
 *****************************
@@ -207,7 +207,7 @@ Propriétés
 
 Liens
 
-        - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
+    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
 
 
 
@@ -302,7 +302,7 @@ Propriétés
 
 Liens
 
-        - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
+    - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
 
 
 Cluster
@@ -368,7 +368,7 @@ Propriétés
 
 Liens
 
-        - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
+    - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
 
 
 Vector Tiles
@@ -428,9 +428,9 @@ Propriétés
 
 Liens
 
-        - `Mapbox Vector Tiles (MVT) <https://docs.mapbox.com/vector-tiles/specification/>`_
-        - `Mapserver 7.2 + <https://mapserver.gis.umn.edu/it/development/rfc/ms-rfc-119.html>`_
-        - `Geoserver <https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html>`_
+    - `Mapbox Vector Tiles (MVT) <https://docs.mapbox.com/vector-tiles/specification/>`_
+    - `Mapserver 7.2 + <https://mapserver.gis.umn.edu/it/development/rfc/ms-rfc-119.html>`_
+    - `Geoserver <https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html>`_
 
 
 Vecteur
@@ -502,7 +502,7 @@ Propriétés
 
 Liens
 
-        - `WMS <https://www.opengeospatial.org/standards/wms>`_
+    - `WMS <https://www.opengeospatial.org/standards/wms>`_
 
 
 WMTS
@@ -532,10 +532,10 @@ Source (base commune)
             - `Coordonnées`_
             - `iCherche`_ (Québec)
             - `iCherche Reverse`_ - par coordonnées (Québec)
-            - iLayer (Québec)
-            - Nominatim (internationnal)
-            - StoredQueries, WFS 2.0 (Québec)
-            - StoredQueries Reverse, WFS 2.0  - par coordonnées (Québec)
+            - `iLayer`_ (Québec)
+            - `Nominatim`_ (internationnal)
+            - `StoredQueries`_ , WFS 2.0 (Québec)
+            - `StoredQueries Reverse`_    , WFS 2.0  - par coordonnées (Québec)
 
         Selon votre contexte, les sources de recherche ayant une limitation au Québec, 
         peuvent être utilisées comme exemple afin d'adapter votre propre service de recherche.
@@ -632,7 +632,7 @@ Propriétés
 
 Liens
 
-        - `igo2-lib/packages/geo/src/lib/search/shared/sources/source.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/source.interfaces.ts>`_
+    - `igo2-lib/packages/geo/src/lib/search/shared/sources/source.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/source.interfaces.ts>`_
 
 
 Coordonnées
@@ -702,7 +702,7 @@ iCherche
             - Régions administratives
             - Lieux nommés 
         Le contenu accessible par le service de recherche est limité au territoire quuébécois. 
-        ** Le code de iCherche être utilisées comme exemple afin d'adapter votre propre service de recherche textuel.
+        ** Le code de iCherche peut être utilisé comme exemple afin d'adapter votre propre service de recherche textuel.
             
 Exemples
 
@@ -734,13 +734,13 @@ Propriétés
          - `Ligne 79  <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L79>`_
        * - title
          - iCherche
-    
+
     Pour les autres propriétés, référez vous à `Source (base commune)`_
 
 Liens
 
-        - `Code iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`_
-        - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+    - `Code iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`_
+    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
 
 
 iCherche Reverse
@@ -757,7 +757,7 @@ iCherche Reverse
             - MRC
             - Régions administratives
         Le contenu accessible par le service de recherche est limité au territoire quuébécois. 
-        ** Le code de iCherche Reverse être utilisées comme exemple afin d'adapter votre propre service de recherche textuel.
+        ** Le code de iCherche Reverse peut être utilisé comme exemple afin d'adapter votre propre service de recherche textuel.
             
 Exemples
 
@@ -786,13 +786,310 @@ Propriétés
          - .. line-block::
                https://geoegl.msp.gouv.qc.ca/apis/territoires
        * - settings
-         - `Ligne 427 <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L427>`_
+         - `Ligne 427 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L427>`_
        * - title
          - Territoire (Géocodage inversé)
-    
+
     Pour les autres propriétés, référez vous à `Source (base commune)`_
 
 Liens
 
-        - `Code iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`_
-        - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+    - `Code iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`_
+    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+
+
+iLayer
+================
+
+    .. line-block::
+        iLayer est un service de recherche développé 
+        par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
+        afin de permettre des recherche de couches d'information par mot clef.
+        Le contenu accessible par le service de recherche est limité au territoire quuébécois. 
+        
+        Une fois la couche trouvée, il vous est possible de l'ajouter à la carte.
+
+        Actuellement, les couches retournées dans le service de recherche sont des couches WMS.
+
+        ** Le code de iLayer peut être utilisé comme exemple afin d'adapter votre propre service de recherche textuel.
+            
+Exemples
+
+        .. code:: json
+
+            "ilayer": {
+                "searchUrl": 'https://geoegl.msp.gouv.qc.ca/apis/layers/search',
+                "params": {
+                    "limit": 15
+                 }
+            }
+
+Propriétés
+
+    Seulement les propriétés spécifique à ce service sont présentées.
+
+    .. list-table::
+       :widths: 10 80
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Valeur défaut
+       * - searchUrl
+         - .. line-block::
+               https://geoegl.msp.gouv.qc.ca/apis/layers/search
+       * - settings
+         - `Ligne 93 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts#L93>`_
+       * - title
+         - .. line-block::
+               Basé sur la traduction de 2 fichiers. 
+               Propriété igo.geo.search.layer.title dans
+                   - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
+                   - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_    
+
+    Pour les autres propriétés, référez vous à `Source (base commune)`_
+
+Liens
+
+    - `Code iLayer <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts>`_
+    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+
+
+Nominatim
+================
+
+    .. line-block::
+        Nominatim est un service de recherche développé autour de la communauté
+        OpenStreetMap. Il est possible de faire des recherches par mot clef.
+
+        Pour plus de détails:
+            - `API Nominatim <https://nominatim.org/release-docs/develop/>`_
+       
+    .. note::
+        Bien que la recherche par coordonnées soit disponible par Nominatim, 
+        IGO2 ne gère pas les appels par coordonnées vers Nominatim.
+
+
+Exemples
+
+        .. code:: json
+
+            "ilayer": {
+                "searchUrl": 'https://nominatim.openstreetmap.org/search',
+                "params": {
+                    "limit": 15
+                 }
+            }
+
+Propriétés
+
+    Seulement les propriétés spécifique à ce service sont présentées.
+
+    .. list-table::
+       :widths: 10 80
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Valeur défaut
+       * - searchUrl
+         - .. line-block::
+               https://nominatim.openstreetmap.org/search
+       * - settings
+         - `Ligne 44 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/nominatim.ts#L44>`_
+       * - title
+         - Nominatim (OSM)
+
+    Pour les autres propriétés, référez vous à `Source (base commune)`_
+
+Liens
+
+    - `Code Nominatim <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts>`_
+    - `API Nominatim <https://nominatim.org/release-docs/develop/>`_
+    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+
+
+StoredQueries
+================
+
+    .. note::
+        Il se veut plus un EXEMPLE qu'un réel service de recherche. 
+
+    .. line-block::
+        StoredQueries est un service de recherche par mot clef exploitant les capacités WFS 2.0.
+        Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`_  
+        qui peut retourner:
+            - Route                                    ex: 138
+            - Route tronçon                            ex: 13801
+            - Route tronçon section (RTS)              ex: 13801110
+            - Route tronçon section sous-route (RTSS)  ex: 0013801110000C
+            - RTSS Chainage                            ex: 0013801110000C+12
+
+        Cette StoredQueries nécessite l'envoi au serveur de 2 attributs.
+            - rtss
+            - chainage
+
+        Ces 2 attributs et leurs valeurs par défault
+        sont définies par 2 champs dans la configuration 
+        (voir l'exemple ici-bas).
+
+Exemples
+
+        .. code:: json
+
+            "storedqueries": {
+                "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+                "storedquery_id": "rtss",
+                "fields": [
+                  {"name": "rtss","defaultValue": "-99"},
+                  {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
+                ],
+                "resultTitle": "etiquette"
+            }
+
+Propriétés
+
+    Seulement les propriétés spécifique à ce service sont présentées.
+
+    .. list-table::
+       :widths: 10 60 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - Description
+         - .. line-block::
+               Valeur défaut
+       * - **fields***
+         - .. line-block::
+               Liste des champs à interroger pour la StoredQueries.
+               la structure est la suivante:
+               1er attribut: {"name": "rtss","defaultValue": "-99"},
+               2e attribut : {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
+               afin de représenter le terme dans la barre de recherche:
+               0013801110000c+12 
+
+               Attention à la syntaxe du splitPrefix. Sensible au caractère REGEX.
+
+               Si votre requête consiste à l'envoi d'un seul attribut, vous pouvez définir
+               simplement un objet plutôt qu'une liste.
+         -
+       * - outputFormat
+         - .. line-block::
+               Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
+               Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`_  connu d'Openlayers.
+         - text/xml; subtype=gml/3.1.1
+       * - resultTitle
+         - .. line-block::
+               Nom de l'attribut à utiliser pour le titre du résultat.
+         -
+       * - searchUrl
+         - Url du service
+         - https://ws.mapserver.transports.gouv.qc.ca/swtq
+       * - srsname
+         - .. line-block::
+               SRS demandé au serveur
+         - EPSG:4326
+       * - **storedquery_id***
+         - .. line-block::
+               Nom de la requête à demander au serveur.
+         -
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+    Pour les autres propriétés, référez vous à `Source (base commune)`_
+
+Liens
+
+    - `Code Stored Queries Ligne 34 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/storedqueries.ts#L34>`_
+    - `Bug Openlayers et les GML 3.2+ en WFS <https://github.com/openlayers/openlayers/pull/6400>`_
+    - `Exemple d'appel StoredQueries <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=rtss&rtss=0013801110000C&chainage=0&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`_
+
+
+StoredQueries Reverse
+=====================
+
+    .. note::
+        Il se veut plus un EXEMPLE qu'un réel service de recherche. 
+
+    .. line-block::
+        StoredQueries Reverse est un service de recherche par coordonnées exploitant les capacités WFS 2.0.
+        Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`_  
+        qui peut retourner deux limites administratives du MTQ:
+            - Centre de services du MTQ
+            - Direction Générale Territoriales
+
+        Cette StoredQueries nécessite l'envoi au serveur de 2 attributs.
+            - long
+            - lat
+
+        Ces 2 attributs et leurs valeurs par défault
+        sont définies par 2 champs (longField et latField)
+        dans la configuration (voir l'exemple ici-bas).
+
+Exemples
+
+        .. code:: json
+
+            "storedqueriesreverse": {
+                "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+                "storedquery_id": "lim_adm",
+                "longField": "long",
+                "latField": "lat",
+                "resultTitle": "nom_unite"
+            }
+
+Propriétés
+
+    Seulement les propriétés spécifique à ce service sont présentées.
+
+    .. list-table::
+       :widths: 10 60 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - Description
+         - .. line-block::
+               Valeur défaut
+       * - **latField***
+         - .. line-block::
+               Nom du champ à demander au server pour la latitude.
+         -
+       * - **longField***
+         - .. line-block::
+               Nom du champ à demander au server pour la longitude.
+         -
+       * - outputFormat
+         - .. line-block::
+               Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
+               Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`_  connu d'Openlayers.
+         - text/xml; subtype=gml/3.1.1
+       * - resultTitle
+         - .. line-block::
+               Nom de l'attribut à utiliser pour le titre du résultat.
+         -
+       * - searchUrl
+         - Url du service
+         - https://ws.mapserver.transports.gouv.qc.ca/swtq
+       * - srsname
+         - .. line-block::
+               SRS demandé au serveur
+         - EPSG:4326
+       * - **storedquery_id***
+         - .. line-block::
+               Nom de la requête à demander au serveur.
+         -
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+    Pour les autres propriétés, référez vous à `Source (base commune)`_
+
+Liens
+
+    - `Code Stored Queries Reverse Ligne 273 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/storedqueries.ts#L273>`_
+    - `Bug Openlayers et les GML 3.2+ en WFS <https://github.com/openlayers/openlayers/pull/6400>`_
+    - `Exemple d'appel StoredQueries Reverse <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=lim_adm&long=-71.292469&lat=46.748107&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`_
+

@@ -33,8 +33,11 @@ layers
 
 
 
-
+icherche 
+Lien vers l'api? contenu a jour?
+https://gitlab.forge.gouv.qc.ca/geomatique/api/wikis/geocode ?
 
 SearchSourceSettings []
+
 Coordonnées bug et partiellement complet pour les format bell et autres.
 

@@ -633,7 +633,7 @@ Propriétés
                Paramètres associés à la
                définition de votre 
                projection / système de 
-               coordonnées. Référez vous
+               coordonnées.
        * - **extent***
          - .. line-block::
                Liste de 
