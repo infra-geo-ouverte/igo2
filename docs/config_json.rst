@@ -118,7 +118,10 @@ Résumé
          - .. line-block::
                Recherche
                Carte
-       * - `Theme`_ *
+       * - .. line-block::
+               **Theme***
+               Voir: `theme`_
+        
          - String
          - .. line-block::
                Permet de définir les thèmes de l'application.
@@ -405,10 +408,8 @@ Propriétés
        * - version
          - String
          - .. line-block::
-               Url du service WMS ou WMTS sans les paramètre
-               d'url normés OGC
-               (i.e. service=wms&request=GetCapabilities)
-               OU url du service de baselayers
+               Version du service 
+               WMS ou WMTS
          - .. line-block::
                Référer au 
                GetCapabilities
@@ -835,7 +836,7 @@ Résumé
          - Type
          - Description
          - Outil lié
-       * - base
+       * - `base`_
          - string
          - .. line-block::
                Identification du nom
@@ -847,7 +848,10 @@ Résumé
                ContextManager
                Config d'outils
                ...
-       * - **layers***
+       * - .. line-block::
+               **layers***
+               Voir 
+               `layers`_
          - layer[]
          - .. line-block::
                Liste des couches
@@ -907,7 +911,7 @@ Base
         Identification du nom du ficher de base dont les thématiques peuvent hériter du contenu. 
 
         À l'intérieur d'un fichier **base.json**, les propriétés tolérés sont:
-            - layers
+            - `layers`_
             - map
             - toolbar
             - tools
@@ -916,16 +920,8 @@ Base
                 
 Exemples
 
-
         - Définition : `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
         - Utilisation: `igo2/src/contexts/_default.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_default.json>`_
-        
-
-layers?: LayerOptions[];
-map?: ContextMap;
-uri?: string;
-toolbar?: string[];
-tools?: Tool[];
 
 
 ***************
@@ -985,3 +981,44 @@ Liens
 
         - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
         - `Layer IGO2 <https://igo2.readthedocs.io/fr/docdev/properties.html#couches-d-information-layer>`_
+
+
+
+***************
+Map
+***************
+
+    .. line-block::
+        Permet de définir les propriétés de la carte à l'ouverture du contexte.
+
+Exemples
+
+        .. code:: json
+
+            "map": {
+                  "view": {
+                        "projection": "EPSG:3857",
+                        "center": [-71.938087, 48.446975],
+                        "geolocate": true,
+                        "zoom": 6,
+                        "maxZoom": 17,
+                        "rotation": 15,
+                        "enableRotation": true
+                  }
+            }
+
+Propriétés
+    .. line-block::
+        Référez vous à `map <https://igo2.readthedocs.io/fr/docdev/properties.html#map>`_ .
+
+
+Liens
+
+        - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`_
+        - `Map IGO2 <https://igo2.readthedocs.io/fr/docdev/properties.html#map>`_
+
+
+map?: ContextMap;
+uri?: string;
+toolbar?: string[];
+tools?: Tool[];

@@ -31,6 +31,8 @@ Le fichier context.json:
 layers
     - tooltip
 
+map
+
 
 
 icherche 

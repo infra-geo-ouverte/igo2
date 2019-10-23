@@ -7,14 +7,19 @@ Géométriques
 ==============================
 
 *****************************
+Carte (map)
+*****************************
+
+    .. note::
+       En cours de construction.
+
+
+*****************************
 Couche d'information (layer)
 *****************************
 
     .. line-block::
-        Permet de définir une liste de couches d'informations disponible à l'usager lors de l'ouverture de l'application.
-        L'ordre d'apparition des couches dans la table des matières peut être controlée de divers moyens:
-            1- l'ordre d'apparition des couches dans le contexte. Plus la couche est au début de la liste, plus elle sera au bas de la table des matière.
-            2- La propriété zIndex de chaque couche d'information. Plus le zIndex et élevé, plus la couche sera au haut de la table des matières.
+        Permet de définir les propriétés d'une couche d'information.
 
 Exemples
 
