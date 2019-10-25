@@ -47,7 +47,9 @@ import {
   SearchSource,
   SearchService,
   SearchSourceService,
-  CapabilitiesService
+  CapabilitiesService,
+  sourceCanSearch,
+  sourceCanReverseSearch
 } from '@igo2/geo';
 
 import {
@@ -357,12 +359,18 @@ export class PortalComponent implements OnInit, OnDestroy {
   onSearch(event: { research: Research; results: SearchResult[] }) {
     const results = event.results;
 
-    // TODO: add property in searchSource
-    const reverseSearch =
-      event.research.source.getId().indexOf('reverse') !== -1;
-    const enabledSources = this.searchSourceService
+    const isReverseSearch = !sourceCanSearch(event.research.source)
+
+    let enabledSources;
+    if (isReverseSearch) {
+      enabledSources = this.searchSourceService
       .getEnabledSources()
-      .filter(s => (s.getId().indexOf('reverse') !== -1) === reverseSearch);
+      .filter(sourceCanReverseSearch);
+    } else {
+      enabledSources = this.searchSourceService
+      .getEnabledSources()
+      .filter(sourceCanSearch);
+    }
 
     const newResults = this.searchStore.entities$.value
       .filter(
