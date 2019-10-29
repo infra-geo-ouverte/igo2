@@ -35,6 +35,7 @@ Dernière mise à jour de la documentation : |date| (|time| UTC)
    introduction
    config_json  
    properties
+   url_control
    
 .. note::
    Cette documentation est en construction.
