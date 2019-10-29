@@ -136,10 +136,15 @@ Sélection du contexte
 ********************************
 
     Params :
-        - llck = mot clef pour filtrer la liste
-        - llca = 1 ou 0 , pour trier la table des matières en ordre alphabétique.
+        - llck = mot clef pour filtrer la liste des couches
+        - llca = 1 ou 0 , pour trier la table des matières en ordre 
+          alphabétique.
         - llcv = 1 ou 0 , pour ne montrer que les couches visibles.
-        - llcr = 1 ou 0 , pour ne montrer que les couches visibles selon l'échelle active de la carte
+        - llcr = 1 ou 0 , pour ne montrer que les couches visibles 
+          selon l'échelle active de la carte
+
+    0 = actif
+    1 = inactif
 
  
     Exemple:
