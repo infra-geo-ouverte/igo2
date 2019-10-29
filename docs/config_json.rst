@@ -144,7 +144,7 @@ Auth
        En cours de construction
 
     .. line-block::
-        Voici ma desc
+        Sert à effectuer l'authentification des usagers.
 
 Exemples
 
@@ -852,7 +852,7 @@ Résumé
                **layers***
                Voir 
                `layers`_
-         - layer[]
+         - `layer <https://igo2.readthedocs.io/fr/docdev/properties.html#couches-d-information-layer>`_ []
          - .. line-block::
                Liste des couches
                d'informations
@@ -869,18 +869,7 @@ Résumé
                lors de l'ouverture 
                initial du contexte
          - 
-       * - **uri***
-         - String
-         - .. line-block::
-               Nom ou identifiant
-               de la thématique.
-               Doit être unique
-               au sein de la 
-               même application.
-         - .. line-block::
-               Map
-               ShareMap
-       * - toolbar
+       * - `toolbar`_
          - String[]
          - .. line-block::
                Liste des outils
@@ -892,13 +881,26 @@ Résumé
                d'apparition des 
                outils dans IGO2.
          - Tous 
-       * - tools
+       * - `tools`_
          - Objet[]
          - .. line-block::
                Liste de configuration 
                des outils présent dans
                l'application.
          - Tous
+       * - .. line-block::
+               **uri***
+               Voir `uri`_
+         - String
+         - .. line-block::
+               Nom ou identifiant
+               de la thématique.
+               Doit être unique
+               au sein de la 
+               même application.
+         - .. line-block::
+               Map
+               ShareMap
     
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -1018,7 +1020,161 @@ Liens
         - `Map IGO2 <https://igo2.readthedocs.io/fr/docdev/properties.html#map>`_
 
 
-map?: ContextMap;
-uri?: string;
-toolbar?: string[];
-tools?: Tool[];
+
+***************
+Title
+***************
+
+    .. line-block::
+        Nom du contexte qui sera affiché dans l'application.
+
+Exemples
+
+        .. code:: json
+
+            "title": "Nom de votre contexte",
+
+
+***************
+Toolbar
+***************
+
+    .. line-block::
+        Définit la liste des outils permis dans le contexte.
+        L'ordre d'apparition des outils dans cette liste est importante puisqu'elle représente l'ordre des outils dans l'application.
+        Les outils existant:
+            - `about <https://igo2.readthedocs.io/fr/docdev/properties.html#about>`_
+            - `catalog <https://igo2.readthedocs.io/fr/docdev/properties.html#catalog>`_
+            - `catalogBrowser <https://igo2.readthedocs.io/fr/docdev/properties.html#catalogBrowser>`_
+            - `contextManager <https://igo2.readthedocs.io/fr/docdev/properties.html#contextManager>`_
+            - `directions <https://igo2.readthedocs.io/fr/docdev/properties.html#directions>`_
+            - `ogcFilter <https://igo2.readthedocs.io/fr/docdev/properties.html#ogcFilter>`_
+            - `timeAnalysis <https://igo2.readthedocs.io/fr/docdev/properties.html#timeAnalysis>`_
+            - `importExport <https://igo2.readthedocs.io/fr/docdev/properties.html#importExport>`_
+            - `mapDetails <https://igo2.readthedocs.io/fr/docdev/properties.html#mapDetails>`_
+            - `map <https://igo2.readthedocs.io/fr/docdev/properties.html#map>`_
+            - `print <https://igo2.readthedocs.io/fr/docdev/properties.html#print>`_
+            - `searchResults <https://igo2.readthedocs.io/fr/docdev/properties.html#searchResults>`_
+        Chacun de ces outils fait référence à un nom d'outil tel que définit dans le package "integration" d'igo2.
+        Pour en modifier les propriétées référez-vous à `tools`_
+
+Exemples
+
+        .. code:: json
+
+            "toolbar": [
+                  "searchResults", 
+                  "contextManager", 
+                  "mapDetails", 
+                  "catalog",
+                  "ogcFilter",
+                  "timeAnalysis", 
+                  "print",
+                  "measurer", 
+                  "shareMap", 
+                  "about"
+                  ]
+
+Liens
+
+        - `igo2-lib/tree/master/packages/integration/src/lib/... <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib>`_
+
+***************
+Tools
+***************
+
+    .. line-block::
+        Définit la liste des configuration permise pour chaque outil.
+
+        Pour les options spécifiques à chauque outil, veuillez vous référer aux descriptif de l'outil. Cette section détaille seulement les propriétés communes.
+        
+
+Exemples
+
+        .. code:: json
+
+            {
+                "icon" : "iconName" 
+                "name": "catalogBrowser",
+                "title": "TitreOutilQuiDoitEtreTraduit",
+                "options" : {
+                    ...
+                }
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur par défaut
+       * - **name***
+         - String
+         - .. line-block::
+               Le nom de l'outil
+         - .. line-block::
+               - `about <https://igo2.readthedocs.io/fr/docdev/properties.html#about>`_
+               - `catalog <https://igo2.readthedocs.io/fr/docdev/properties.html#catalog>`_
+               - `catalogBrowser <https://igo2.readthedocs.io/fr/docdev/properties.html#catalogBrowser>`_
+               - `contextManager <https://igo2.readthedocs.io/fr/docdev/properties.html#contextManager>`_
+               - `directions <https://igo2.readthedocs.io/fr/docdev/properties.html#directions>`_
+               - `ogcFilter <https://igo2.readthedocs.io/fr/docdev/properties.html#ogcFilter>`_
+               - `timeAnalysis <https://igo2.readthedocs.io/fr/docdev/properties.html#timeAnalysis>`_
+               - `importExport <https://igo2.readthedocs.io/fr/docdev/properties.html#importExport>`_
+               - `mapDetails <https://igo2.readthedocs.io/fr/docdev/properties.html#mapDetails>`_
+               - `map <https://igo2.readthedocs.io/fr/docdev/properties.html#map>`_
+               - `print <https://igo2.readthedocs.io/fr/docdev/properties.html#print>`_
+               - `searchResults <https://igo2.readthedocs.io/fr/docdev/properties.html#searchResults>`_
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans `Language`_
+         - 
+         - .. line-block::
+               Référer vous à 
+               l'outil désiré.
+               
+
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+
+Liens
+
+        - `igo2-lib/tree/master/packages/integration/src/lib/... <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib>`_
+
+
+
+
+***************
+Uri
+***************
+
+    .. line-block::
+        Identifiant du contexte. Particulièrement utile pour le partage de cartes. C'est cette propriété du contexte qui est utilisée pour bâtir l'url de partage de carte: 
+        
+            ex: .../?context=uriDuContexte...
+
+        Si votre contexte est dans un sous-répertoire, y inscrire également dans l'uri le chemin (repertoire/uriDuContexte)
+
+        Ne pas y inscrire d'extension du fichier.
+
+Exemples
+
+        .. code:: json
+
+            "uri": "uriDuContexte",

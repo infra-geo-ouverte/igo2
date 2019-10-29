@@ -33,7 +33,12 @@ layers
 
 map
 
+tools
 
+
+Shortcut
+
+Controle url
 
 icherche 
 Lien vers l'api? contenu a jour?

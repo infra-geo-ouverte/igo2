@@ -3,7 +3,7 @@ Composantes IGO2
 ---------------------
 
 ==============================
-Géométriques
+Géométrique
 ==============================
 
 *****************************
@@ -1100,3 +1100,392 @@ Liens
     - `Exemple d'appel StoredQueries Reverse <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=lim_adm&long=-71.292469&lat=46.748107&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`_
     - `Décrire la requête "lim_adm" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=lim_adm>`_
 
+
+
+
+
+==============================
+Intégration
+==============================
+
+    .. line-block::
+        La composante intégration permet de définir 
+        une gamme d'outils aisément intégrable à l'application grâce 
+        aux configuration d'outils (tools).
+
+        
+
+*******************************
+Outils (tools)
+*******************************
+
+    .. line-block::
+        Les outils existant:
+            - `about`_
+            - `catalog`_
+            - `catalogBrowser`_
+            - `contextManager`_
+            - `directions`_
+            - `ogcFilter`_
+            - `timeAnalysis`_
+            - `importExport`_
+            - `mapDetails`_
+            - `map`_
+            - `print`_
+            - `searchResults`_
+
+about
+===============
+
+    .. line-block::
+        Outil générique offrant la possibilitée d'informer les usagers grâce à un outil d'aide.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "about",
+                "options": {
+                    "html": "<p>Voici IGO</p>" // ou ["<p>Voici IGO</p>", "<p>Voici la seconde ligne</p>"]
+                }
+            },
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - help-circle
+       * - **name***
+         - String
+         - 
+         - about
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+         - 
+         - igo.integration.tools.about
+       * - options
+         - Object
+         - .. line-block::
+               Options de l'outil. Ici pour configurer le html qui sera
+               présenté dans l'outil.
+         - .. line-block::
+               { 
+                   htlm: '' 
+                   ou 
+                   htlm: ['','']
+               }
+         - `Voir html <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool/about-tool.component.ts>`_
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `about-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool>`_
+
+
+catalog
+===============
+
+    .. line-block::
+        Outil permettant de lister les catalogues disponibles configurés dans l'application:
+            - `Configuration des catalogues <https://igo2.readthedocs.io/fr/docdev/config_json.html#catalog>`_
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "catalog"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - layers-plus
+       * - **name***
+         - String
+         - 
+         - catalog
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+         - 
+         - igo.integration.tools.catalog
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `catalog-library-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-library-tool>`_
+    - `Configuration des catalogues <https://igo2.readthedocs.io/fr/docdev/config_json.html#catalog>`_
+
+
+catalogBrowser
+===============
+
+    .. line-block::
+        Outil permettant de lister les couches d'information du catalogue sélectionné par l'usager.
+        L'outil catalogue fore dans le catalogue jusqu'à concurence de 2 niveaux hiérarchiques.
+        Tous les couches d'information doivent être dans un groupe.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "catalogBrowser"
+
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - photo-browser
+       * - **name***
+         - String
+         - 
+         - catalogBrowser
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+         - 
+         - igo.integration.tools.catalog
+       * - options
+         - Object
+         - .. line-block::
+               Options de l'outil: 
+               toggleCollapsedGroup permet de force 
+               l'usager à entrer dans le groupe et 
+               d'y visualiser  les couches disponible
+               avant de pouvoir ajouter le groupe
+               à la carte.
+               **false** = le groupe doit être ouvert avant
+               de pouvoir l'ajouter à la carte
+         - .. line-block::
+               { 
+                   toggleCollapsedGroup: false
+               }
+         - .. line-block::
+               { 
+                   toggleCollapsedGroup: true
+               }
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `catalog-browser-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-browser-tool>`_
+
+
+contextManager
+===============
+
+    .. line-block::
+        Outil permettant de lister/gérer plusieurs contexte à l'intérieur d'une même application. 
+        Il existe un fichier de configuration définissant les contexte disponibles à l'intérieur du gestionnaire de contexte.
+            - `_context.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_contexts.json>`_
+        Ce dernier constitue une liste des contexte disponibles à l'intérieur du gestionnaire de contexte.
+
+        Si un contexte est non présent dans ce fichier, il ne sera pas mis à la disposition dans l'application. 
+        De ce fait, le seul moyen d'y accéder est par URL.
+            - http://votreDomaine/?context=nomDuContexteNonGéréParLeGestionnaireDeContexte
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "contextManager"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - star
+       * - **name***
+         - String
+         - 
+         - contextManager
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+         - 
+         - igo.integration.tools.contexts
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `catalog-browser-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-browser-tool>`_
+
+
+
+directions
+===============
+
+    .. line-block::
+        Outil permettant de configurer l'outil d'itinéraire, basé sur la configuration dans l'application:
+            - `Configuration des sources d'itinéraires <https://igo2.readthedocs.io/fr/docdev/config_json.html#routingsource>`_
+
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "directions"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - directions
+       * - **name***
+         - String
+         - 
+         - directions
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+         - 
+         - igo.integration.tools.directions
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/directions/directions-tool>`_
+
+
+
+ogcFilter
+===============
+
+timeAnalysis
+===============
+
+importExport
+===============
+
+mapDetails
+===============
+
+map
+===============
+
+print
+===============
+
+searchResults
+===============
