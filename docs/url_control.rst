@@ -1,6 +1,17 @@
 ---------------------
-Contrôles par URL
+Contrôle par URL
 ---------------------
+
+*******************************
+Ouverture du panneau latéral
+*******************************
+
+    Params :
+        - sidenav=   1 ou 0 (1 = ouvert)
+ 
+    Exemple:
+        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?sidenav=1
+
 
 
 *******************************
