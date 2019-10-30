@@ -1044,6 +1044,7 @@ Toolbar
         Les outils existant:
             - `about <https://igo2.readthedocs.io/fr/docdev/properties.html#about>`_
             - OBOUT :ref:`about <about>`.
+            - OBOUT :ref:`**about*** <about>`.
             - `catalog <https://igo2.readthedocs.io/fr/docdev/properties.html#catalog>`_
             - `catalogBrowser <https://igo2.readthedocs.io/fr/docdev/properties.html#catalogBrowser>`_
             - `contextManager <https://igo2.readthedocs.io/fr/docdev/properties.html#contextManager>`_
