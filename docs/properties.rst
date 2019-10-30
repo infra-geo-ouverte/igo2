@@ -1,10 +1,13 @@
 ---------------------
-Composantes IGO2
+Composante
 ---------------------
 
 ==============================
 Géométrique
 ==============================
+
+
+.. _igomap:
 
 *****************************
 Carte (map)
@@ -14,7 +17,7 @@ Carte (map)
        En cours de construction.
 
 
-.. _foobar:
+.. _igolayer:
 
 *****************************
 Couche d'information (layer)

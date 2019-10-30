@@ -852,7 +852,7 @@ Résumé
                **layers***
                Voir 
                `layers`_
-         - `layer <https://igo2.readthedocs.io/fr/docdev/properties.html#couches-d-information-layer>`_ [] You can see "foo bar" :ref:`here <foobar>`. 
+         - :ref:`layer[] <igolayer>`. 
          - .. line-block::
                Liste des couches
                d'informations
@@ -976,13 +976,12 @@ Exemples
 
 Propriétés
     .. line-block::
-        Permet de définir une liste de couches. Référer-vous à la description de ce qu'est un `layer <https://igo2.readthedocs.io/fr/docdev/properties.html#couches-d-information-layer>`_ .
-
+        Permet de définir une liste de couches. Référer-vous à la description de ce qu'est un :ref:`layer <igolayer>`. 
 
 Liens
 
         - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
-        - `Layer IGO2 <https://igo2.readthedocs.io/fr/docdev/properties.html#couches-d-information-layer>`_
+        - :ref:`Layer IGO2 <igolayer>`.
 
 
 
@@ -1011,13 +1010,13 @@ Exemples
 
 Propriétés
     .. line-block::
-        Référez vous à `map <https://igo2.readthedocs.io/fr/docdev/properties.html#map>`_ .
+        Référez vous à :ref:`map <igomap>`.
 
 
 Liens
 
         - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`_
-        - `Map IGO2 <https://igo2.readthedocs.io/fr/docdev/properties.html#map>`_
+        - :ref:`Map IGO2 <igomap>`.
 
 
 
@@ -1044,6 +1043,7 @@ Toolbar
         L'ordre d'apparition des outils dans cette liste est importante puisqu'elle représente l'ordre des outils dans l'application.
         Les outils existant:
             - `about <https://igo2.readthedocs.io/fr/docdev/properties.html#about>`_
+            - OBOUT :ref:`about <about>`.
             - `catalog <https://igo2.readthedocs.io/fr/docdev/properties.html#catalog>`_
             - `catalogBrowser <https://igo2.readthedocs.io/fr/docdev/properties.html#catalogBrowser>`_
             - `contextManager <https://igo2.readthedocs.io/fr/docdev/properties.html#contextManager>`_
