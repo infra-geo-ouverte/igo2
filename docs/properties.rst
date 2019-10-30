@@ -1191,7 +1191,7 @@ Propriétés
                Le titre affiché dans l'application. Sujet aux traduction.
                Si vous modifier le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+                   - fichiers dans :ref:`Language <igolanguage>`. 
          - 
          - igo.integration.tools.about
        * - options
@@ -1214,14 +1214,14 @@ Liens
     - `about-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool>`_
 
 
-.. _igocatalog:
+.. _igocatalogtool:
 
 catalog
 ===============
 
     .. line-block::
         Outil permettant de lister les catalogues disponibles configurés dans l'application:
-            - `Configuration des catalogues <https://igo2.readthedocs.io/fr/docdev/config_json.html#catalog>`_
+            - :ref:`Configuration des catalogue <igocatalog>`. 
 
 Exemples
 
@@ -1263,7 +1263,7 @@ Propriétés
                Le titre affiché dans l'application. Sujet aux traduction.
                Si vous modifier le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+                   - fichiers dans :ref:`Language <igolanguage>`. 
          - 
          - igo.integration.tools.catalog
 
@@ -1272,7 +1272,7 @@ Propriétés
 Liens
 
     - `catalog-library-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-library-tool>`_
-    - `Configuration des catalogues <https://igo2.readthedocs.io/fr/docdev/config_json.html#catalog>`_
+    - :ref:`Configuration des catalogue <igocatalog>`. 
 
 
 .. _igocatalogBrowser:
@@ -1326,7 +1326,7 @@ Propriétés
                Le titre affiché dans l'application. Sujet aux traduction.
                Si vous modifier le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+                   - fichiers dans :ref:`Language <igolanguage>`
          - 
          - igo.integration.tools.catalog
        * - options
@@ -1410,7 +1410,7 @@ Propriétés
                Le titre affiché dans l'application. Sujet aux traduction.
                Si vous modifier le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+                   - fichiers dans :ref:`Language <igolanguage>`. 
          - 
          - igo.integration.tools.contexts
 
@@ -1429,7 +1429,7 @@ directions
 
     .. line-block::
         Outil permettant de configurer l'outil d'itinéraire, basé sur la configuration dans l'application:
-            - `Configuration des sources d'itinéraires <https://igo2.readthedocs.io/fr/docdev/config_json.html#routingsource>`_
+            - :ref:`Configuration des sources d'itinéraires <igoroutingsource>`. 
 
 
 Exemples
@@ -1472,7 +1472,7 @@ Propriétés
                Le titre affiché dans l'application. Sujet aux traduction.
                Si vous modifier le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans `Language <https://igo2.readthedocs.io/fr/docdev/config_json.html#language>`_
+                   - fichiers dans :ref:`Language <igolanguage>`. 
          - 
          - igo.integration.tools.directions
 

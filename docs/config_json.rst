@@ -208,6 +208,8 @@ Liens
         - `igo2-lib/packages/auth/src/lib/shared/auth.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/2f8f274146b0fff4cc82d09f598bff838c6caaab/packages/auth/src/lib/shared/auth.interface.ts>`_
         
 
+.. _igocatalog:
+
 ***************
 Catalog
 ***************
@@ -540,6 +542,8 @@ Liens
         - `igo2-lib/packages/geo/src/lib/import-export/shared/import.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/a841bced1ccc305b001d6db84f913c4c2ba27bf7/packages/geo/src/lib/import-export/shared/import.interface.ts>`_
 
 
+.. _igolanguage:
+
 ***************
 Language
 ***************
@@ -653,6 +657,8 @@ Liens
         - `igo2-lib/packages/geo/src/lib/map/shared/projection.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/projection.interfaces.ts>`_
         - `igo2-lib/blob/master/demo/src/environments/environment.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/demo/src/environments/environment.ts>`_
 
+
+.. _igoroutingsource:
 
 ***************
 RoutingSource
@@ -1042,20 +1048,18 @@ Toolbar
         Définit la liste des outils permis dans le contexte.
         L'ordre d'apparition des outils dans cette liste est importante puisqu'elle représente l'ordre des outils dans l'application.
         Les outils existant:
-            - `about <https://igo2.readthedocs.io/fr/docdev/properties.html#about>`_
-            - OBOUT :ref:`about <igoabout>`.
-            - OBOUT **:ref:`about <about>`***.
-            - `catalog <https://igo2.readthedocs.io/fr/docdev/properties.html#catalog>`_
-            - `catalogBrowser <https://igo2.readthedocs.io/fr/docdev/properties.html#catalogBrowser>`_
-            - `contextManager <https://igo2.readthedocs.io/fr/docdev/properties.html#contextManager>`_
-            - `directions <https://igo2.readthedocs.io/fr/docdev/properties.html#directions>`_
-            - `ogcFilter <https://igo2.readthedocs.io/fr/docdev/properties.html#ogcFilter>`_
-            - `timeAnalysis <https://igo2.readthedocs.io/fr/docdev/properties.html#timeAnalysis>`_
-            - `importExport <https://igo2.readthedocs.io/fr/docdev/properties.html#importExport>`_
-            - `mapDetails <https://igo2.readthedocs.io/fr/docdev/properties.html#mapDetails>`_
-            - `map <https://igo2.readthedocs.io/fr/docdev/properties.html#map>`_
-            - `print <https://igo2.readthedocs.io/fr/docdev/properties.html#print>`_
-            - `searchResults <https://igo2.readthedocs.io/fr/docdev/properties.html#searchResults>`_
+            - :ref:`about <igoabout>`
+            - :ref:`catalog <igocatalogtool>`
+            - :ref:`catalogBrowser <igocatalogBrowser>`
+            - :ref:`contextManager <igocontextManager>`
+            - :ref:`directions <igodirections>`
+            - :ref:`ogcFilter <igoogcFilter>`
+            - :ref:`timeAnalysis <igotimeAnalysis>`
+            - :ref:`importExport <igoimportExport>`
+            - :ref:`mapDetails <igomapDetails>`
+            - :ref:`map <igomaptool>`
+            - :ref:`print <igoprint>`
+            - :ref:`searchResults <igosearchResults>`
         Chacun de ces outils fait référence à un nom d'outil tel que définit dans le package "integration" d'igo2.
         Pour en modifier les propriétées référez-vous à `tools`_
 
@@ -1124,18 +1128,18 @@ Propriétés
          - .. line-block::
                Le nom de l'outil
          - .. line-block::
-               - `about <https://igo2.readthedocs.io/fr/docdev/properties.html#about>`_
-               - `catalog <https://igo2.readthedocs.io/fr/docdev/properties.html#catalog>`_
-               - `catalogBrowser <https://igo2.readthedocs.io/fr/docdev/properties.html#catalogBrowser>`_
-               - `contextManager <https://igo2.readthedocs.io/fr/docdev/properties.html#contextManager>`_
-               - `directions <https://igo2.readthedocs.io/fr/docdev/properties.html#directions>`_
-               - `ogcFilter <https://igo2.readthedocs.io/fr/docdev/properties.html#ogcFilter>`_
-               - `timeAnalysis <https://igo2.readthedocs.io/fr/docdev/properties.html#timeAnalysis>`_
-               - `importExport <https://igo2.readthedocs.io/fr/docdev/properties.html#importExport>`_
-               - `mapDetails <https://igo2.readthedocs.io/fr/docdev/properties.html#mapDetails>`_
-               - `map <https://igo2.readthedocs.io/fr/docdev/properties.html#map>`_
-               - `print <https://igo2.readthedocs.io/fr/docdev/properties.html#print>`_
-               - `searchResults <https://igo2.readthedocs.io/fr/docdev/properties.html#searchResults>`_
+               - :ref:`about <igoabout>`
+               - :ref:`catalog <igocatalogtool>`
+               - :ref:`catalogBrowser <igocatalogBrowser>`
+               - :ref:`contextManager <igocontextManager>`
+               - :ref:`directions <igodirections>`
+               - :ref:`ogcFilter <igoogcFilter>`
+               - :ref:`timeAnalysis <igotimeAnalysis>`
+               - :ref:`importExport <igoimportExport>`
+               - :ref:`mapDetails <igomapDetails>`
+               - :ref:`map <igomaptool>`
+               - :ref:`print <igoprint>`
+               - :ref:`searchResults <igosearchResults>`
          - 
        * - title
          - String
