@@ -852,7 +852,7 @@ Résumé
                **layers***
                Voir 
                `layers`_
-         - `layer <https://igo2.readthedocs.io/fr/docdev/properties.html#couches-d-information-layer>`_ []
+         - `layer <https://igo2.readthedocs.io/fr/docdev/properties.html#couches-d-information-layer>`_ [] You can see "foo bar" :ref:`here <foobar>`. 
          - .. line-block::
                Liste des couches
                d'informations

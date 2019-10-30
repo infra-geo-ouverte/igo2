@@ -14,6 +14,8 @@ Carte (map)
        En cours de construction.
 
 
+.. _foobar:
+
 *****************************
 Couche d'information (layer)
 *****************************
