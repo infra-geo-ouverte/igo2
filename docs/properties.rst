@@ -1139,6 +1139,9 @@ Outils (tools)
             - `print`_
             - `searchResults`_
 
+
+.. _igoabout:
+
 about
 ===============
 
@@ -1211,6 +1214,8 @@ Liens
     - `about-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool>`_
 
 
+.. _igocatalog:
+
 catalog
 ===============
 
@@ -1269,6 +1274,8 @@ Liens
     - `catalog-library-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-library-tool>`_
     - `Configuration des catalogues <https://igo2.readthedocs.io/fr/docdev/config_json.html#catalog>`_
 
+
+.. _igocatalogBrowser:
 
 catalogBrowser
 ===============
@@ -1348,6 +1355,7 @@ Liens
 
     - `catalog-browser-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-browser-tool>`_
 
+.. _igocontextManager:
 
 contextManager
 ===============
@@ -1414,6 +1422,8 @@ Liens
 
 
 
+.. _igodirections:
+
 directions
 ===============
 
@@ -1474,23 +1484,37 @@ Liens
 
 
 
+.. _igoogcFilter:
+
 ogcFilter
 ===============
+
+.. _igotimeAnalysis:
 
 timeAnalysis
 ===============
 
+.. _igoimportExport:
+
 importExport
 ===============
+
+.. _igomapDetails:
 
 mapDetails
 ===============
 
+.. _igomaptool:
+
 map
 ===============
 
+.. _igoprint:
+
 print
 ===============
+
+.. _igosearchResults:
 
 searchResults
 ===============
