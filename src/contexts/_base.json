@@ -78,8 +78,6 @@
    "searchResults",
    "contextManager",
    "mapDetails",
-   "timeFilter",
-   "ogcFilter",
    "measurer",
    "directions",
    "catalog",

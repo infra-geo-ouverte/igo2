@@ -105,20 +105,6 @@
       "fixed": true
     }
   ],
-  "toolbar": [
-    "searchResults",
-    "contextManager",
-    "mapDetails",
-    "timeAnalysis",
-    "ogcFilter",
-    "measurer",
-    "directions",
-    "catalog",
-    "importExport",
-    "print",
-    "shareMap",
-    "about"
-  ],
   "tools": [
     {
       "name": "about",
