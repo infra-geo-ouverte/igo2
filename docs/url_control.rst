@@ -10,7 +10,7 @@ Ouverture du panneau latéral
         - sidenav=   1 ou 0 (1 = ouvert)
  
     Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?sidenav=1
+        - https://infra-geo-ouverte.github.io/igo2/?sidenav=1
 
 
 
@@ -22,9 +22,8 @@ Ajout de couches
         - wmsUrl=
         - layers=
  
-    Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?wmsUrl=https://ws.mapserver.transports.gouv.qc.ca/swtq&layers=zone_degel
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?wmsUrl=/apis/ws/swtq&layers=zone_degel
+    Exemple:    
+        - https://infra-geo-ouverte.github.io/igo2/?wmsUrl=https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi&layers=evenements
 
 *******************************
 Sélection du contexte
@@ -34,7 +33,7 @@ Sélection du contexte
         - context=
  
     Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?context=mtq
+        - https://infra-geo-ouverte.github.io/igo2/?context=simple2
 
 *******************************
  Zoom
@@ -44,7 +43,7 @@ Sélection du contexte
         - zoom=
  
     Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?zoom=10
+        - https://infra-geo-ouverte.github.io/igo2/?zoom=10
 
 *******************************
  Centre de la carte
@@ -54,7 +53,7 @@ Sélection du contexte
         - center=
  
     Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?center=-70.70426615422834,57.62669012416586
+        - https://infra-geo-ouverte.github.io/igo2/?center=-70.70426615422834,57.62669012416586
 
 *******************************
  Visibilité des couches
@@ -81,8 +80,7 @@ Sélection du contexte
         - invisiblelayers= (liste de id, séparés par une virgule OU * (tous) )
  
     Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?context=mtq&invisiblelayers=*&visiblelayers=bgr_v_centr_servc_geomt_act,bgr_v_sous_route_res_sup_act,satellite
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?invisiblelayers=*&visiblelayers=bb12b9975bbb86d5f5ca36ac4958c6be
+        - https://infra-geo-ouverte.github.io/igo2/?invisiblelayers=*&visiblelayers=6143562e58898a852eeb658ba493e8e7,carte_gouv_qc
 
 ********************************
  Outil actif lors de l'ouverture
@@ -92,18 +90,18 @@ Sélection du contexte
         - tool=
  
     Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=about
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=catalog
+        - https://infra-geo-ouverte.github.io/igo2/?tool=about
+        - https://infra-geo-ouverte.github.io/igo2/?tool=catalog
         - catalogBrowser (pas disponible car un catalogue doit être sélectionné)
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=contextManager
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=directions
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=ogcFilter
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=timeAnalysis
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=importExport
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=mapDetails
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=map
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=print
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=searchResults
+        - https://infra-geo-ouverte.github.io/igo2/?tool=contextManager
+        - https://infra-geo-ouverte.github.io/igo2/?tool=directions
+        - https://infra-geo-ouverte.github.io/igo2/?tool=ogcFilter
+        - https://infra-geo-ouverte.github.io/igo2/?tool=timeAnalysis
+        - https://infra-geo-ouverte.github.io/igo2/?tool=importExport
+        - https://infra-geo-ouverte.github.io/igo2/?tool=mapDetails
+        - https://infra-geo-ouverte.github.io/igo2/?tool=map
+        - https://infra-geo-ouverte.github.io/igo2/?tool=print
+        - https://infra-geo-ouverte.github.io/igo2/?tool=searchResults
 
 ********************************
  Recherche
@@ -116,8 +114,8 @@ Sélection du contexte
             - .... (à documenter)
  
     Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?search=feu&zoom=18
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?search=915%23adresse&zoom=18
+        - https://infra-geo-ouverte.github.io/igo2/?search=feu&zoom=18
+        - https://infra-geo-ouverte.github.io/igo2/?search=915%23adresse
 
 ********************************
  Itinéraire
@@ -129,7 +127,7 @@ Sélection du contexte
 
  
     Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?tool=directions&routing=-72.4540601953125,47.86101094949734;-70.65092909179685,47.24932843990587
+        - https://infra-geo-ouverte.github.io/igo2/?tool=directions&routing=-72.4540601953125,47.86101094949734;-70.65092909179685,47.24932843990587
 
 ********************************
  Table des matières
@@ -148,8 +146,8 @@ Sélection du contexte
 
  
     Exemple:
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?context=mtq&llck=rtss
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?context=mtq&llca=1
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?context=mtq&visiblelayers=bgr_v_sous_route_res_sup_act&llcv=1
-        - https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/?context=mtq&visiblelayers=bgr_v_sous_route_res_sup_act&llcr=1
+        - https://infra-geo-ouverte.github.io/igo2/?llck=rtss
+        - https://infra-geo-ouverte.github.io/igo2/?&llca=1
+        - https://infra-geo-ouverte.github.io/igo2/?context=mtq&visiblelayers=bgr_v_sous_route_res_sup_act&llcv=1
+        - https://infra-geo-ouverte.github.io/igo2/?context=mtq&visiblelayers=bgr_v_sous_route_res_sup_act&llcr=1
 
