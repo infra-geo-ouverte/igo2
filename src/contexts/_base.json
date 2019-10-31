@@ -78,8 +78,6 @@
    "searchResults",
    "contextManager",
    "mapDetails",
-   "timeAnalysis",
-   "ogcFilter",
    "measurer",
    "directions",
    "catalog",
@@ -114,11 +112,7 @@
      }
    },
    {
-     "name": "shareMap",
-     "options": {
-       "hasShareMapButton": false,
-       "hasCopyLinkButton": true
-     }
+     "name": "shareMap"
    },
    {
      "name": "measurer"
@@ -133,7 +127,7 @@
      "name": "catalogBrowser"
    },
    {
-     "name": "timeAnalysis"
+     "name": "timeFilter"
    },
    {
      "name": "ogcFilter"

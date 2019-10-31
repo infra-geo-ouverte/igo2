@@ -1,7 +1,14 @@
 @mixin app-sidenav-theming($theme) {
   $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
 
   app-sidenav #homeButton {
     background-color: mat-color($primary);
+
+    &:hover {
+      background-color: mat-color($accent, lighter);
+      color: mat-color($foreground, text);
+    }
   }
 }

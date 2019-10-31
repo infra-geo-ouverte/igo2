@@ -47,7 +47,9 @@ import {
   SearchSource,
   SearchService,
   SearchSourceService,
-  CapabilitiesService
+  CapabilitiesService,
+  sourceCanSearch,
+  sourceCanReverseSearch
 } from '@igo2/geo';
 
 import {
@@ -91,6 +93,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelOpened = true;
   public sidenavOpened = false;
   public searchBarTerm = '';
+  private addedLayers$$: Subscription[] = [];
 
   public contextMenuStore = new ActionStore([]);
   private contextMenuCoord: [number, number];
@@ -302,6 +305,14 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.focusedSearchResult$$.unsubscribe();
   }
 
+    /**
+   * Cancel ongoing add layer, if any
+   */
+  private cancelOngoingAddLayer() {
+    this.addedLayers$$.forEach((sub: Subscription) => sub.unsubscribe());
+    this.addedLayers$$ = [];
+  }
+
   onBackdropClick() {
     this.closeSidenav();
   }
@@ -348,12 +359,18 @@ export class PortalComponent implements OnInit, OnDestroy {
   onSearch(event: { research: Research; results: SearchResult[] }) {
     const results = event.results;
 
-    // TODO: add property in searchSource
-    const reverseSearch =
-      event.research.source.getId().indexOf('reverse') !== -1;
-    const enabledSources = this.searchSourceService
+    const isReverseSearch = !sourceCanSearch(event.research.source)
+
+    let enabledSources;
+    if (isReverseSearch) {
+      enabledSources = this.searchSourceService
       .getEnabledSources()
-      .filter(s => (s.getId().indexOf('reverse') !== -1) === reverseSearch);
+      .filter(sourceCanReverseSearch);
+    } else {
+      enabledSources = this.searchSourceService
+      .getEnabledSources()
+      .filter(sourceCanSearch);
+    }
 
     const newResults = this.searchStore.entities$.value
       .filter(
@@ -384,6 +401,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onChangeContext(context: DetailedContext) {
+    this.cancelOngoingAddLayer();
     if (context === undefined) {
       return;
     }
@@ -666,21 +684,25 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private addLayerByName(url: string, name: string, zIndex: number = 100000) {
-    this.layerService
-      .createAsyncLayer({
-        zIndex: zIndex,
-        sourceOptions: {
-          optionsFromCapabilities: true,
-          type: 'wms',
-          url: url,
-          params: {
-            layers: name,
-            version: '1.3.0'
+    if (!this.contextLoaded) {
+      return
+    }
+    this.addedLayers$$.push(
+      this.layerService
+        .createAsyncLayer({
+          zIndex: zIndex,
+          sourceOptions: {
+            optionsFromCapabilities: true,
+            type: 'wms',
+            url: url,
+            params: {
+              layers: name,
+              version: '1.3.0'
+            }
           }
-        }
-      })
-      .subscribe(l => {
-        this.map.addLayer(l);
-      });
+        })
+        .subscribe(l => {
+          this.map.addLayer(l);
+        }));
   }
 }
