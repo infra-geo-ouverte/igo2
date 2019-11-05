@@ -152,7 +152,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get backdropShown(): boolean {
     return (
-      this.mediaService.media$.value === Media.Mobile && this.sidenavOpened
+      (this.isMobile() || (this.isTablet() && this.isPortrait())) && this.sidenavOpened
     );
   }
 
