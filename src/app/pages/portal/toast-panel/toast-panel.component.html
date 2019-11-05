@@ -55,6 +55,7 @@
       <igo-search-results
         *ngIf="!resultSelected$.value"
         [store]="store"
+        [showIcons]="true"
         (resultFocus)="focusResult($event)"
         (resultSelect)="selectResult($event)">
       </igo-search-results>

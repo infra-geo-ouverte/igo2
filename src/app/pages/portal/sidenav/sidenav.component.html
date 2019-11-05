@@ -5,7 +5,7 @@
 
   <div class="app-sidenav-content">
 
-      <div #content class="app-content" [ngClass]="{toolActived: toolbox.activeTool$ | async}">
+      <div #content class="app-content" [ngClass]="{toolActivated: toolbox.activeTool$ | async}">
 
         <button *ngIf="toolbox.activeTool$ | async"
           id="homeButton"
@@ -39,6 +39,7 @@
           </button> -->
 
           <igo-toolbox
+            color="primary"
             [animate]="true"
             [toolbox]="toolbox">
           </igo-toolbox>

@@ -1,12 +1,6 @@
 {
   "uri": "mapOverlay",
-  "map": {
-    "view": {
-      "projection": "EPSG:3857",
-      "center": [-72, 52],
-      "zoom": 6
-    }
-  },
+  "base": "_base",
   "mapOverlay": [
     {
       "cssClass": "bottom-left",
@@ -111,55 +105,12 @@
       "fixed": true
     }
   ],
-  "layers": [
-    {
-      "title": "OSM",
-      "baseLayer": true,
-      "visible": true,
-      "sourceOptions": {
-        "type": "osm"
-      }
-    }
-  ],
-  "toolbar": [
-    "searchResults",
-    "contextManager",
-    "mapDetails",
-    "print",
-    "about"
-  ],
   "tools": [
-    {
-      "name": "searchResults",
-      "options": {
-        "focusFirst": true
-      }
-    },
-    {
-      "name": "contextManager"
-    },
     {
       "name": "about",
       "options": {
-        "html": "<h1>Demo of mapOverlay</h1></br>You can switch to a mobile or tablet for a diffent display. For more information about the mapOverlay context parameters, take a look to the interface: <i>src/app/pages/portal/map-overlay/map-overlay.interface.ts</i>"
+        "html": "<h1>Demo of mapOverlay</h1></br>You can switch to a mobile or tablet for a different display. For more information about the mapOverlay context parameters, take a look to the interface: <i>src/app/pages/portal/map-overlay/map-overlay.interface.ts</i>"
       }
-    },
-    {
-      "name": "mapDetails",
-      "options": {
-        "toggleLegendOnVisibilityChange": false,
-        "layerListControls": {
-          "showToolbar": "always",
-          "excludeBaseLayers": false,
-          "keyword": "",
-          "sortedAlpha": false,
-          "onlyVisible": false,
-          "onlyInRange": false
-        }
-      }
-    },
-    {
-      "name": "print"
     }
   ]
 }
