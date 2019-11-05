@@ -359,7 +359,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   onSearch(event: { research: Research; results: SearchResult[] }) {
     const results = event.results;
 
-    const isReverseSearch = !sourceCanSearch(event.research.source)
+    const isReverseSearch = !sourceCanSearch(event.research.source);
 
     let enabledSources;
     if (isReverseSearch) {
@@ -685,7 +685,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private addLayerByName(url: string, name: string, zIndex: number = 100000) {
     if (!this.contextLoaded) {
-      return
+      return;
     }
     this.addedLayers$$.push(
       this.layerService
