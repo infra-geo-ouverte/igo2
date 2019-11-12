@@ -1,5 +1,5 @@
 {
-  "welcome": "Welcome to {{title}}",
+  "welcome": "Welcome",
   "menu": {
     "close": "Close Menu",
     "open": "Open Menu"
