@@ -7,7 +7,7 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
@@ -93,7 +93,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelOpened = true;
   public sidenavOpened = false;
   public searchBarTerm = '';
+  public termDefinedInUrl: boolean = false;
   private addedLayers$$: Subscription[] = [];
+  private selectFirst: boolean;
+  private selectFirstSearchResult: boolean;
+  private selectFirstSearchResult$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  private selectFirstSearchResult$$: Subscription;
 
   public contextMenuStore = new ActionStore([]);
   private contextMenuCoord: [number, number];
@@ -353,6 +358,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.onClearSearch();
       return;
     }
+    this.selectFirstSearchResult = this.selectFirstSearchResult === undefined ? true : false;
+    this.selectFirstSearchResult$.next(this.selectFirstSearchResult);
+    if (!this.selectFirstSearchResult) {
+      this.selectFirstSearchResult$$.unsubscribe();
+    }
     this.onBeforeSearch();
   }
 
@@ -380,6 +390,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       )
       .concat(results);
     this.searchStore.load(newResults);
+    this.selectFirstSearchResult$.next(this.selectFirstSearchResult$.value);
   }
 
   private closeSidenav() {
@@ -635,11 +646,34 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readLayersQueryParams(params);
       this.readToolParams(params);
       this.readSearchParams(params);
+      this.readFocusFirst(params);
+      this.selectFirstSearchResult$$ =  this.selectFirstSearchResult$.subscribe(value => {
+        if (value) {
+          this.computeFocusFirst();
+        }
+      });
     });
+  }
+
+  private computeFocusFirst() {
+      if (this.selectFirst && this.termDefinedInUrl) {
+        const entities = this.searchStore.entities$.value;
+        if (entities.length === 0) {return};
+        let higherDisplayOrder  = Math.min(...entities.map(a => a.source.displayOrder));
+        this.searchStore.state.update(entities.filter(v => v.source.displayOrder === higherDisplayOrder)[0], { selected: true });
+      }
+  }
+
+  private readFocusFirst(params: Params) {
+    this.selectFirst = false;
+    if (params['sf']) {
+      this.selectFirst = params['sf'] === '1' ? true : false;
+    }
   }
 
   private readSearchParams(params: Params) {
     if (params['search']) {
+      this.termDefinedInUrl = true;
       this.searchBarTerm = params['search'];
     }
   }
