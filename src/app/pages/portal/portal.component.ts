@@ -93,7 +93,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelOpened = true;
   public sidenavOpened = false;
   public searchBarTerm = '';
-  public termDefinedInUrl: boolean = false;
+  public termDefinedInUrl = false;
   private addedLayers$$: Subscription[] = [];
   private selectFirst: boolean;
   private selectFirstSearchResult: boolean;
@@ -658,9 +658,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   private computeFocusFirst() {
       if (this.selectFirst && this.termDefinedInUrl) {
         const entities = this.searchStore.entities$.value;
-        if (entities.length === 0) {return};
-        let higherDisplayOrder  = Math.min(...entities.map(a => a.source.displayOrder));
-        this.searchStore.state.update(entities.filter(v => v.source.displayOrder === higherDisplayOrder)[0], { selected: true });
+        if (entities.length === 0) {return; }
+        const higherDisplayOrder  = Math.min(...entities.map(a => a.source.displayOrder));
+        this.searchStore.state.update(
+          entities.filter(v => v.source.displayOrder === higherDisplayOrder)[0], { selected: true }
+          );
       }
   }
 
