@@ -4,25 +4,7 @@
     [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
     (click)="onToggleClick($event)">
 
-  <!-- <button
-    *ngIf="resultSelected$.value"
-    mat-icon-button
-    igoStopPropagation
-    panelLeftButton
-    [matTooltip]="'toastPanel.listButton' | translate">
-    <mat-icon svgIcon="menu"></mat-icon>
-  </button> -->
-
-    <igo-actionbar *ngIf="resultSelected$.value !== undefined"
-      panelLeftButton
-      [store]="actionStore"
-      [withIcon]="true"
-      [withTitle]="actionbarMode === 'overlay'"
-      [horizontal]="true"
-      [mode]="actionbarMode">
-    </igo-actionbar>
-
-    <!-- <button
+    <button
       *ngIf="resultSelected$.value"
       mat-icon-button
       igoStopPropagation
