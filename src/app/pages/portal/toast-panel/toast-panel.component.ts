@@ -53,6 +53,8 @@ export class ToastPanelComponent {
   }
   private _opened = true;
 
+  private initialize = true;
+
   @Output() openedChange = new EventEmitter<boolean>();
 
   @Output() resultSelect = new EventEmitter<SearchResult<Feature>>();
@@ -67,7 +69,14 @@ export class ToastPanelComponent {
 
   @HostBinding('style.visibility')
   get displayStyle() {
-    return this.results.length ? 'visible' : 'hidden';
+    if (this.results.length) {
+      if (this.results.length === 1 && this.initialize) {
+        this.selectResult(this.store.entities$.value[0]);
+        this.initialize = false;
+      }
+      return 'visible';
+    }
+    return 'hidden';
   }
 
   get results(): SearchResult<Feature>[] {
@@ -109,6 +118,7 @@ export class ToastPanelComponent {
   clear() {
     this.store.clear();
     this.unselectResult();
+    this.initialize = true;
   }
 
   isMobile(): boolean {
