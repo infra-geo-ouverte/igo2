@@ -681,7 +681,6 @@ export class PortalComponent implements OnInit, OnDestroy {
             url,
             layerFromUrl[0],
             visibility,
-            id,
             parseInt(layerFromUrl[1] || 1000, 10)
           );
         });
@@ -690,7 +689,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private addLayerByName(url: string, name: string, visibility?: boolean, id?: string, zIndex: number = 100000) {
+  private addLayerByName(url: string, name: string, visibility: boolean = true, zIndex: number = 100000) {
     if (!this.contextLoaded) {
       return;
     }
@@ -698,7 +697,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.layerService
         .createAsyncLayer({
           zIndex: zIndex,
-          visible: visibility || true,
+          visible: visibility,
           sourceOptions: {
             optionsFromCapabilities: true,
             type: 'wms',
@@ -711,7 +710,6 @@ export class PortalComponent implements OnInit, OnDestroy {
         })
         .subscribe(l => {
           this.map.addLayer(l);
-          this.map.getLayerById(id).visible = visibility || true;
         }));
   }
 
