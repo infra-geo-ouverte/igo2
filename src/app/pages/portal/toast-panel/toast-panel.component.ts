@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { getEntityTitle, EntityStore } from '@igo2/common';
-import { Feature, SearchResult } from '@igo2/geo';
-import { Media, MediaService } from '@igo2/core';
+import { getEntityTitle, EntityStore, ActionStore, Action, ActionbarMode } from '@igo2/common';
+import { Feature, SearchResult, IgoMap, FeatureMotion } from '@igo2/geo';
+import { Media, MediaService, LanguageService } from '@igo2/core';
 
 @Component({
   selector: 'app-toast-panel',
@@ -26,6 +26,15 @@ export class ToastPanelComponent {
     UP: 'swipeup',
     DOWN: 'swipedown'
   };
+
+  @Input()
+  get map(): IgoMap {
+    return this._map;
+  }
+  set map(value: IgoMap) {
+    this._map = value;
+  }
+  private _map: IgoMap;
 
   @Input()
   get store(): EntityStore<SearchResult<Feature>> {
@@ -54,6 +63,10 @@ export class ToastPanelComponent {
   private _opened = true;
 
   private initialize = true;
+
+  public actionStore = new ActionStore([]);
+
+  public actionbarMode = ActionbarMode.Overlay;
 
   @Output() openedChange = new EventEmitter<boolean>();
 
@@ -85,8 +98,55 @@ export class ToastPanelComponent {
   }
 
   constructor(
-    public mediaService: MediaService
+    public mediaService: MediaService,
+    public languageService: LanguageService
     ) {}
+
+  ngOnInit() {
+    this.actionStore.load([
+      {
+        id: 'list',
+        title: 'Back to list',
+        icon: 'format-list-bulleted-square',
+        //tooltip: this.languageService.translate.instant('toastPanel.listButton'),
+        tooltip: 'Back to list',
+        handler: () => {
+          this.unselectResult();
+        }
+      },
+      {
+        id: 'zoomFeature',
+        title: 'Zoom on selected feature',
+        icon: 'magnify-plus-outline',
+        tooltip: 'Zoom on feature',
+        handler: () => {
+          this.map.overlay.setFeatures([this.resultSelected$.getValue().data], FeatureMotion.Default);
+        }
+      },
+      {
+        id: 'zoomResults',
+        title: 'Zoom on multiple features',
+        tooltip: 'Zoom on multiple features',
+        icon: 'magnify-plus',
+        handler: () => {
+          let features = [];
+          for (const feature of this.store.all()) {
+            features.push(feature.data);
+          }
+          this.map.overlay.setFeatures(features, FeatureMotion.Default);
+        }
+      },
+      {
+        id: 'zoomAuto',
+        title: 'Zoom auto',
+        icon: 'toggle-switch-off',
+        tooltip: 'Zoom auto',
+        handler: () => {
+          this.map.overlay.setFeatures([this.resultSelected$.getValue().data], FeatureMotion.Default);
+        }
+      },
+    ]);
+  }
 
   getTitle(result: SearchResult) {
     return getEntityTitle(result);
@@ -168,5 +228,14 @@ export class ToastPanelComponent {
       return;
     }
     this.opened = !this.opened;
+  }
+
+  /**
+   * Invoke the action handler
+   * @internal
+   */
+  onTriggerAction(action: Action) {
+    const args = action.args || [];
+    action.handler(...args);
   }
 }

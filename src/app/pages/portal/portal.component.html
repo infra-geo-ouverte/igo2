@@ -109,6 +109,7 @@
 </app-expansion-panel>
 
 <app-toast-panel
+  [map]="map"
   [store]="queryStore"
   [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : sidenavOpened"
   [@toastPanelOffsetY]="expansionPanelExpanded"
