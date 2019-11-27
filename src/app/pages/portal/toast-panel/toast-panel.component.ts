@@ -64,6 +64,10 @@ export class ToastPanelComponent {
 
   private initialize = true;
 
+  public actionStore = new ActionStore([]);
+
+  public actionbarMode = ActionbarMode.Overlay;
+
   @Output() openedChange = new EventEmitter<boolean>();
 
   @Output() resultSelect = new EventEmitter<SearchResult<Feature>>();
