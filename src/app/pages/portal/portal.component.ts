@@ -49,7 +49,9 @@ import {
   SearchSourceService,
   CapabilitiesService,
   sourceCanSearch,
-  sourceCanReverseSearch
+  sourceCanReverseSearch,
+  generateWMSIdFromSourceOptions,
+  WMSDataSourceOptions
 } from '@igo2/geo';
 
 import {
@@ -672,9 +674,14 @@ export class PortalComponent implements OnInit, OnDestroy {
         currentLayersByService = currentLayersByService.split(',');
         currentLayersByService.forEach(layer => {
           const layerFromUrl = layer.split(':igoz');
+          const layerOptions = {url: url, params: {LAYERS: layerFromUrl[0]}};
+          const id = generateWMSIdFromSourceOptions(layerOptions as WMSDataSourceOptions);
+          const visibility = this.computeLayerVisibilityFromUrl(params, id);
           this.addLayerByName(
             url,
             layerFromUrl[0],
+            visibility,
+            id,
             parseInt(layerFromUrl[1] || 1000, 10)
           );
         });
@@ -683,7 +690,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private addLayerByName(url: string, name: string, zIndex: number = 100000) {
+  private addLayerByName(url: string, name: string, visibility?: boolean, id?: string, zIndex: number = 100000) {
     if (!this.contextLoaded) {
       return;
     }
@@ -691,6 +698,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.layerService
         .createAsyncLayer({
           zIndex: zIndex,
+          visible: visibility || true,
           sourceOptions: {
             optionsFromCapabilities: true,
             type: 'wms',
@@ -703,6 +711,45 @@ export class PortalComponent implements OnInit, OnDestroy {
         })
         .subscribe(l => {
           this.map.addLayer(l);
+          this.map.getLayerById(id).visible = visibility || true;
         }));
+  }
+
+  private computeLayerVisibilityFromUrl(params: Params, currentLayerid: string): boolean {
+    const queryParams = params;
+    let visible = true;
+    if (!queryParams || !currentLayerid) {
+      return visible;
+    }
+    let visibleOnLayersParams = '';
+    let visibleOffLayersParams = '';
+    let visiblelayers: string[] = [];
+    let invisiblelayers: string[] = [];
+    if (queryParams['visiblelayers']) {
+      visibleOnLayersParams = queryParams['visiblelayers'];
+    }
+    if (queryParams['invisiblelayers']) {
+      visibleOffLayersParams = queryParams['invisiblelayers'];
+    }
+
+    /* This order is important because to control whichever
+     the order of * param. First whe open and close everything.*/
+    if (visibleOnLayersParams === '*') {
+      visible = true;
+    }
+    if (visibleOffLayersParams === '*') {
+      visible = false;
+    }
+
+    // After, managing named layer by id (context.json OR id from datasource)
+    visiblelayers = visibleOnLayersParams.split(',');
+    invisiblelayers = visibleOffLayersParams.split(',');
+    if (visiblelayers.indexOf(currentLayerid) > -1) {
+      visible = true;
+    }
+    if (invisiblelayers.indexOf(currentLayerid) > -1) {
+      visible = false;
+    }
+    return visible;
   }
 }
