@@ -4,7 +4,8 @@ import {
   OnDestroy,
   ChangeDetectorRef,
   ViewChild,
-  ElementRef
+  ElementRef,
+  Input
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
@@ -136,6 +137,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
+
+  @Input() zoomAuto = false;
 
   get map(): IgoMap {
     return this.mapState.map;
@@ -455,7 +458,8 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.map.overlay.setFeatures([feature], FeatureMotion.None);
+    this.zoomAuto ? this.map.overlay.setFeatures([feature], FeatureMotion.Default)
+      : this.map.overlay.setFeatures([feature], FeatureMotion.None);
   }
 
   public onClearSearch() {
