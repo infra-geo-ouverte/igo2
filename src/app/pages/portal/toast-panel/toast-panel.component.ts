@@ -65,13 +65,18 @@ export class ToastPanelComponent {
   private initialize = true;
 
   public actionStore = new ActionStore([]);
-
   public actionbarMode = ActionbarMode.Overlay;
+  public zoomAuto = false;
+
+  private multiple$ = new BehaviorSubject(false);
+  private isResultSelected$ = new BehaviorSubject(false);
 
   @Output() openedChange = new EventEmitter<boolean>();
 
   @Output() resultSelect = new EventEmitter<SearchResult<Feature>>();
   @Output() resultFocus = new EventEmitter<SearchResult<Feature>>();
+
+  @Output() zoomAutoEvent = new EventEmitter<boolean>();
 
   resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
 
@@ -106,28 +111,37 @@ export class ToastPanelComponent {
     this.actionStore.load([
       {
         id: 'list',
-        title: 'Back to list',
+        title: this.languageService.translate.instant('toastPanel.backToList'),
         icon: 'format-list-bulleted-square',
-        //tooltip: this.languageService.translate.instant('toastPanel.listButton'),
-        tooltip: 'Back to list',
+        tooltip: this.languageService.translate.instant('toastPanel.listButton'),
+        display: () => {
+          return this.isResultSelected$;
+        },
         handler: () => {
           this.unselectResult();
         }
       },
       {
         id: 'zoomFeature',
-        title: 'Zoom on selected feature',
+        title: this.languageService.translate.instant('toastPanel.zoomOnFeature'),
         icon: 'magnify-plus-outline',
-        tooltip: 'Zoom on feature',
+        tooltip: this.languageService.translate.instant('toastPanel.zoomOnFeatureTooltip'),
+        display: () => {
+          return this.isResultSelected$;
+        },
         handler: () => {
           this.map.overlay.setFeatures([this.resultSelected$.getValue().data], FeatureMotion.Default);
         }
       },
       {
         id: 'zoomResults',
-        title: 'Zoom on multiple features',
-        tooltip: 'Zoom on multiple features',
+        title: this.languageService.translate.instant('toastPanel.zoomOnFeatures'),
+        tooltip: this.languageService.translate.instant('toastPanel.zoomOnFeaturesTooltip'),
         icon: 'magnify-plus',
+        availability: () => {
+          this.store.all().length > 1 ? this.multiple$.next(true) : this.multiple$.next(false);
+          return this.multiple$;
+        },
         handler: () => {
           let features = [];
           for (const feature of this.store.all()) {
@@ -138,11 +152,16 @@ export class ToastPanelComponent {
       },
       {
         id: 'zoomAuto',
-        title: 'Zoom auto',
-        icon: 'toggle-switch-off',
-        tooltip: 'Zoom auto',
+        title: this.languageService.translate.instant('toastPanel.zoomAuto'),
+        tooltip: this.languageService.translate.instant('toastPanel.zoomAutoTooltip'),
+        checkbox: true,
+        checkCondition: this.zoomAuto,
         handler: () => {
-          this.map.overlay.setFeatures([this.resultSelected$.getValue().data], FeatureMotion.Default);
+          this.zoomAuto = !this.zoomAuto;
+          this.zoomAutoEvent.emit(this.zoomAuto);
+          if (this.zoomAuto && this.isResultSelected$.value === true) {
+            this.map.overlay.setFeatures([this.resultSelected$.getValue().data], FeatureMotion.Default);
+          }
         }
       },
     ]);
@@ -166,11 +185,13 @@ export class ToastPanelComponent {
       true
     );
     this.resultSelected$.next(result);
+    this.isResultSelected$.next(true);
     this.resultSelect.emit(result);
   }
 
   unselectResult() {
     this.resultSelected$.next(undefined);
+    this.isResultSelected$.next(false);
     this.resultSelect.emit(undefined);
     this.store.state.clear();
   }
