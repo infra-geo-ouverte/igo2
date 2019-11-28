@@ -65,7 +65,7 @@ export const environment: Environment = {
         }
       },
       icherchereverse: {
-        searchUrl: '/apis/territoires',
+        searchUrl: '/apis/terrapi',
         order: 3,
         enabled: true
       },

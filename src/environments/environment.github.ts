@@ -52,7 +52,7 @@ export const environment: Environment = {
         }
       },
       icherchereverse: {
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/territoires',
+        searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/terrapi',
         order: 3,
         enabled: true
       },
