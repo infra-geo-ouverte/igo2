@@ -97,6 +97,14 @@ export class ToastPanelComponent {
     return 'hidden';
   }
 
+  @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(event: KeyboardEvent) {
+    this.clear();
+  }
+
+  @HostListener('document:keydown.delete', ['$event']) onBackHandler(event: KeyboardEvent) {
+    this.unselectResult();
+  }
+
   get results(): SearchResult<Feature>[] {
     // return this.store.view.filter((e) => e.meta.dataType === FEATURE).all();
     return this.store.all();
