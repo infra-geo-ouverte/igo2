@@ -13,6 +13,7 @@ import { debounceTime } from 'rxjs/operators';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
+import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import {
   MediaService,
@@ -52,7 +53,9 @@ import {
   sourceCanSearch,
   sourceCanReverseSearch,
   generateWMSIdFromSourceOptions,
-  WMSDataSourceOptions
+  WMSDataSourceOptions,
+  createOverlayMarkerStyle,
+  moveToOlFeatures
 } from '@igo2/geo';
 
 import {
@@ -102,6 +105,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   private selectFirstSearchResult: boolean;
   private selectFirstSearchResult$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private selectFirstSearchResult$$: Subscription;
+  public zoomAuto = false;
+  private format = new olFormatGeoJSON();
 
   public contextMenuStore = new ActionStore([]);
   private contextMenuCoord: [number, number];
@@ -137,8 +142,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
-
-  @Input() zoomAuto = false;
 
   get map(): IgoMap {
     return this.mapState.map;
@@ -458,8 +461,24 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.zoomAuto ? this.map.overlay.setFeatures([feature], FeatureMotion.Default)
-      : this.map.overlay.setFeatures([feature], FeatureMotion.None);
+    const features = [];
+    features.push(feature);
+    for (const f of this.queryStore.all()) {
+      if (f.data !== feature) {
+        f.data.meta.style = createOverlayMarkerStyle('blue', undefined, 0.5);
+        features.push(f.data);
+      }
+    }
+
+    if (this.zoomAuto) {
+      this.map.overlay.setFeatures(features, FeatureMotion.Default);
+      const olFeature = this.format.readFeature(feature, {
+        dataProjection: feature.projection,
+        featureProjection: this.map.projection
+      });
+      moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
+    }
+    this.map.overlay.setFeatures(features, FeatureMotion.None);
   }
 
   public onClearSearch() {

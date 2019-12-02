@@ -114,6 +114,7 @@
   [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : sidenavOpened"
   [@toastPanelOffsetY]="expansionPanelExpanded"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
+  [zoomAuto]="zoomAuto"
   (openedChange)="toastOpenedChange($event)"
   (resultSelect)="addFeatureToMap($event)"
   (zoomAutoEvent)="zoomAuto = $event">

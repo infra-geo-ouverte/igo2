@@ -5,12 +5,13 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  OnInit
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { getEntityTitle, EntityStore, ActionStore, Action, ActionbarMode } from '@igo2/common';
-import { Feature, SearchResult, IgoMap, FeatureMotion } from '@igo2/geo';
+import { Feature, SearchResult, IgoMap, FeatureMotion, createOverlayMarkerStyle } from '@igo2/geo';
 import { Media, MediaService, LanguageService } from '@igo2/core';
 
 @Component({
@@ -19,7 +20,7 @@ import { Media, MediaService, LanguageService } from '@igo2/core';
   styleUrls: ['./toast-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToastPanelComponent {
+export class ToastPanelComponent implements OnInit {
   static SWIPE_ACTION = {
     RIGHT: 'swiperight',
     LEFT: 'swipeleft',
@@ -62,11 +63,12 @@ export class ToastPanelComponent {
   }
   private _opened = true;
 
+  @Input() zoomAuto: boolean;
+
   private initialize = true;
 
   public actionStore = new ActionStore([]);
   public actionbarMode = ActionbarMode.Overlay;
-  public zoomAuto = false;
 
   private multiple$ = new BehaviorSubject(false);
   private isResultSelected$ = new BehaviorSubject(false);
@@ -101,7 +103,7 @@ export class ToastPanelComponent {
     this.clear();
   }
 
-  @HostListener('document:keydown.delete', ['$event']) onBackHandler(event: KeyboardEvent) {
+  @HostListener('document:keydown.backspace', ['$event']) onBackHandler(event: KeyboardEvent) {
     this.unselectResult();
   }
 
@@ -138,7 +140,7 @@ export class ToastPanelComponent {
           return this.isResultSelected$;
         },
         handler: () => {
-          this.map.overlay.setFeatures([this.resultSelected$.getValue().data], FeatureMotion.Default);
+          this.map.overlay.setFeatures([this.resultSelected$.getValue().data], FeatureMotion.Zoom);
         }
       },
       {
@@ -151,11 +153,18 @@ export class ToastPanelComponent {
           return this.multiple$;
         },
         handler: () => {
-          let features = [];
+          const features = [];
           for (const feature of this.store.all()) {
+            if (this.isResultSelected$.getValue()) {
+              feature.data === this.resultSelected$.getValue().data ?
+                feature.data.meta.style = createOverlayMarkerStyle('blue', undefined, 1) :
+                  feature.data.meta.style = createOverlayMarkerStyle('blue', undefined, 0.5);
+            } else {
+              feature.data.meta.style = createOverlayMarkerStyle('blue', undefined, 0.5);
+            }
             features.push(feature.data);
           }
-          this.map.overlay.setFeatures(features, FeatureMotion.Default);
+          this.map.overlay.setFeatures(features, FeatureMotion.Zoom);
         }
       },
       {
@@ -193,6 +202,7 @@ export class ToastPanelComponent {
       true
     );
     this.resultSelected$.next(result);
+    this.resultSelected$.getValue().data.meta.style = createOverlayMarkerStyle('blue', undefined, 1);
     this.isResultSelected$.next(true);
     this.resultSelect.emit(result);
   }
@@ -202,6 +212,13 @@ export class ToastPanelComponent {
     this.isResultSelected$.next(false);
     this.resultSelect.emit(undefined);
     this.store.state.clear();
+
+    const features = [];
+    for (const feature of this.store.all()) {
+      feature.data.meta.style = createOverlayMarkerStyle('blue', undefined, 0.5);
+      features.push(feature.data);
+    }
+    this.map.overlay.setFeatures(features, FeatureMotion.None);
   }
 
   clear() {
