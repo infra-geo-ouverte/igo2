@@ -426,7 +426,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
 
     this.route.queryParams.pipe(debounceTime(250)).subscribe(params => {
-      if (params['context'] === context.uri) {
+      if (!params['context'] || params['context'] === context.uri) {
         this.readLayersQueryParams(params);
       }
     });
