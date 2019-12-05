@@ -452,35 +452,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.toastPanelOpened = opened;
   }
 
-  addFeatureToMap(result: SearchResult<Feature>) {
-    const feature = result ? result.data : undefined;
-
-    // Somethimes features have no geometry. It happens with some GetFeatureInfo
-    if (!feature || feature.geometry === undefined) {
-      this.map.overlay.clear();
-      return;
-    }
-
-    const features = [];
-    features.push(feature);
-    for (const f of this.queryStore.all()) {
-      if (f.data !== feature) {
-        f.data.meta.style = createOverlayMarkerStyle('blue', undefined, 0.5);
-        features.push(f.data);
-      }
-    }
-
-    if (this.zoomAuto) {
-      this.map.overlay.setFeatures(features, FeatureMotion.Default);
-      const olFeature = this.format.readFeature(feature, {
-        dataProjection: feature.projection,
-        featureProjection: this.map.projection
-      });
-      moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
-    }
-    this.map.overlay.setFeatures(features, FeatureMotion.None);
-  }
-
   public onClearSearch() {
     this.searchStore.clear();
     this.map.overlay.clear();

@@ -108,7 +108,7 @@
   </igo-entity-table>
 </app-expansion-panel>
 
-<app-toast-panel *ngIf="queryStore.entities$.value.length"
+<app-toast-panel *ngIf="!(queryStore.empty$ | async)"
   [map]="map"
   [store]="queryStore"
   [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : sidenavOpened"
@@ -116,7 +116,6 @@
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
   [zoomAuto]="zoomAuto"
   (openedChange)="toastOpenedChange($event)"
-  (resultSelect)="addFeatureToMap($event)"
   (zoomAutoEvent)="zoomAuto = $event">
 </app-toast-panel>
 

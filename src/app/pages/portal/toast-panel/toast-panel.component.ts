@@ -8,10 +8,11 @@ import {
   ChangeDetectionStrategy,
   OnInit
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, VirtualTimeScheduler, Observable } from 'rxjs';
+import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import { getEntityTitle, EntityStore, ActionStore, Action, ActionbarMode } from '@igo2/common';
-import { Feature, SearchResult, IgoMap, FeatureMotion, createOverlayMarkerStyle } from '@igo2/geo';
+import { Feature, SearchResult, IgoMap, FeatureMotion, createOverlayMarkerStyle, moveToOlFeatures } from '@igo2/geo';
 import { Media, MediaService, LanguageService } from '@igo2/core';
 
 @Component({
@@ -63,9 +64,9 @@ export class ToastPanelComponent implements OnInit {
   }
   private _opened = true;
 
-  @Input() zoomAuto: boolean;
+  @Input() zoomAuto = false;
 
-  private initialize = true;
+  public icon = 'menu';
 
   public actionStore = new ActionStore([]);
   public actionbarMode = ActionbarMode.Overlay;
@@ -73,11 +74,11 @@ export class ToastPanelComponent implements OnInit {
   private multiple$ = new BehaviorSubject(false);
   private isResultSelected$ = new BehaviorSubject(false);
 
+  private format = new olFormatGeoJSON();
+
+  public withZoomButton = true;
+
   @Output() openedChange = new EventEmitter<boolean>();
-
-  @Output() resultSelect = new EventEmitter<SearchResult<Feature>>();
-  @Output() resultFocus = new EventEmitter<SearchResult<Feature>>();
-
   @Output() zoomAutoEvent = new EventEmitter<boolean>();
 
   resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
@@ -90,9 +91,8 @@ export class ToastPanelComponent implements OnInit {
   @HostBinding('style.visibility')
   get displayStyle() {
     if (this.results.length) {
-      if (this.results.length === 1 && this.initialize) {
-        this.selectResult(this.store.entities$.value[0]);
-        this.initialize = false;
+      if (this.results.length === 1) {
+        this.selectResult(this.results[0]);
       }
       return 'visible';
     }
@@ -107,9 +107,32 @@ export class ToastPanelComponent implements OnInit {
     this.unselectResult();
   }
 
+  @HostListener('document:keydown.z', ['$event']) onZoomHandler(event: KeyboardEvent) {
+    if (this.isResultSelected$.getValue() === true) {
+      const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
+        dataProjection: this.resultSelected$.getValue().data.projection,
+        featureProjection: this.map.projection
+      });
+      moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
+    }
+  }
+
   get results(): SearchResult<Feature>[] {
     // return this.store.view.filter((e) => e.meta.dataType === FEATURE).all();
     return this.store.all();
+  }
+
+  get multiple(): Observable<boolean> {
+    this.results.length ? this.multiple$.next(true) : this.multiple$.next(false);
+    return this.multiple$;
+  }
+
+  private getSelectedMarkerStyle(feature: Feature)  {
+    return createOverlayMarkerStyle('blue', feature.meta.mapTitle, 1);
+  }
+
+  private getMarkerStyle(feature: Feature) {
+    return createOverlayMarkerStyle('blue', feature.meta.mapTitle, 0.5);
   }
 
   constructor(
@@ -140,7 +163,11 @@ export class ToastPanelComponent implements OnInit {
           return this.isResultSelected$;
         },
         handler: () => {
-          this.map.overlay.setFeatures([this.resultSelected$.getValue().data], FeatureMotion.Zoom);
+          const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
+            dataProjection: this.resultSelected$.getValue().data.projection,
+            featureProjection: this.map.projection
+          });
+          moveToOlFeatures(this.map, [olFeature], FeatureMotion.Zoom);
         }
       },
       {
@@ -149,22 +176,18 @@ export class ToastPanelComponent implements OnInit {
         tooltip: this.languageService.translate.instant('toastPanel.zoomOnFeaturesTooltip'),
         icon: 'magnify-plus',
         availability: () => {
-          this.store.all().length > 1 ? this.multiple$.next(true) : this.multiple$.next(false);
-          return this.multiple$;
+          return this.multiple;
         },
         handler: () => {
-          const features = [];
-          for (const feature of this.store.all()) {
-            if (this.isResultSelected$.getValue()) {
-              feature.data === this.resultSelected$.getValue().data ?
-                feature.data.meta.style = createOverlayMarkerStyle('blue', undefined, 1) :
-                  feature.data.meta.style = createOverlayMarkerStyle('blue', undefined, 0.5);
-            } else {
-              feature.data.meta.style = createOverlayMarkerStyle('blue', undefined, 0.5);
-            }
-            features.push(feature.data);
+          const olFeatures = [];
+          for (const result of this.store.all()) {
+            const olFeature = this.format.readFeature(result.data, {
+              dataProjection: result.data.projection,
+              featureProjection: this.map.projection
+            });
+            olFeatures.push(olFeature);
           }
-          this.map.overlay.setFeatures(features, FeatureMotion.Zoom);
+          moveToOlFeatures(this.map, olFeatures, FeatureMotion.Zoom);
         }
       },
       {
@@ -177,7 +200,7 @@ export class ToastPanelComponent implements OnInit {
           this.zoomAuto = !this.zoomAuto;
           this.zoomAutoEvent.emit(this.zoomAuto);
           if (this.zoomAuto && this.isResultSelected$.value === true) {
-            this.map.overlay.setFeatures([this.resultSelected$.getValue().data], FeatureMotion.Default);
+            this.selectResult(this.resultSelected$.getValue());
           }
         }
       },
@@ -189,7 +212,13 @@ export class ToastPanelComponent implements OnInit {
   }
 
   focusResult(result: SearchResult<Feature>) {
-    this.resultFocus.emit(result);
+    result.data.meta.style = this.getSelectedMarkerStyle(result.data);
+    this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
+  }
+
+  unfocusResult(result: SearchResult<Feature>) {
+    result.data.meta.style = this.getMarkerStyle(result.data);
+    this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
 
   selectResult(result: SearchResult<Feature>) {
@@ -202,20 +231,34 @@ export class ToastPanelComponent implements OnInit {
       true
     );
     this.resultSelected$.next(result);
-    this.resultSelected$.getValue().data.meta.style = createOverlayMarkerStyle('blue', undefined, 1);
+    const features = [];
+    for (const feature of this.store.all()) {
+      feature.data === this.resultSelected$.getValue().data ?
+        feature.data.meta.style = this.getSelectedMarkerStyle(feature.data) :
+          feature.data.meta.style = this.getMarkerStyle(feature.data);
+      features.push(feature.data);
+    }
+    this.map.overlay.setFeatures(features, FeatureMotion.None);
+
+    if (this.zoomAuto) {
+      const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
+        dataProjection: this.resultSelected$.getValue().data.projection,
+        featureProjection: this.map.projection
+      });
+      moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
+    }
+
     this.isResultSelected$.next(true);
-    this.resultSelect.emit(result);
   }
 
   unselectResult() {
     this.resultSelected$.next(undefined);
     this.isResultSelected$.next(false);
-    this.resultSelect.emit(undefined);
     this.store.state.clear();
 
     const features = [];
     for (const feature of this.store.all()) {
-      feature.data.meta.style = createOverlayMarkerStyle('blue', undefined, 0.5);
+      feature.data.meta.style = this.getMarkerStyle(feature.data);
       features.push(feature.data);
     }
     this.map.overlay.setFeatures(features, FeatureMotion.None);
@@ -224,7 +267,6 @@ export class ToastPanelComponent implements OnInit {
   clear() {
     this.store.clear();
     this.unselectResult();
-    this.initialize = true;
   }
 
   isMobile(): boolean {
