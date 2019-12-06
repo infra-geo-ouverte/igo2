@@ -8,11 +8,11 @@ import {
   ChangeDetectionStrategy,
   OnInit
 } from '@angular/core';
-import { BehaviorSubject, VirtualTimeScheduler, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import { getEntityTitle, EntityStore, ActionStore, Action, ActionbarMode } from '@igo2/common';
-import { Feature, SearchResult, IgoMap, FeatureMotion, createOverlayMarkerStyle, moveToOlFeatures } from '@igo2/geo';
+import { Feature, SearchResult, IgoMap, FeatureMotion, moveToOlFeatures, createOverlayMarkerStyle, createOverlayDefaultStyle } from '@igo2/geo';
 import { Media, MediaService, LanguageService } from '@igo2/core';
 
 @Component({
@@ -73,6 +73,7 @@ export class ToastPanelComponent implements OnInit {
 
   private multiple$ = new BehaviorSubject(false);
   private isResultSelected$ = new BehaviorSubject(false);
+  private initialized = true;
 
   private format = new olFormatGeoJSON();
 
@@ -91,7 +92,7 @@ export class ToastPanelComponent implements OnInit {
   @HostBinding('style.visibility')
   get displayStyle() {
     if (this.results.length) {
-      if (this.results.length === 1) {
+      if (this.results.length === 1 && this.initialized) {
         this.selectResult(this.results[0]);
       }
       return 'visible';
@@ -128,11 +129,19 @@ export class ToastPanelComponent implements OnInit {
   }
 
   private getSelectedMarkerStyle(feature: Feature)  {
-    return createOverlayMarkerStyle('blue', feature.meta.mapTitle, 1);
+    if (feature.geometry.type === 'Point') {
+      return createOverlayMarkerStyle(undefined, feature.meta.mapTitle);
+    } else {
+      return createOverlayDefaultStyle(undefined, feature.meta.mapTitle);
+    }
   }
 
   private getMarkerStyle(feature: Feature) {
-    return createOverlayMarkerStyle('blue', feature.meta.mapTitle, 0.5);
+    if (feature.geometry.type === 'Point') {
+      return createOverlayMarkerStyle(undefined, feature.meta.mapTitle, 0.5);
+    } else {
+      return createOverlayDefaultStyle(undefined, feature.meta.mapTitle, 0.15);
+    }
   }
 
   constructor(
@@ -141,6 +150,10 @@ export class ToastPanelComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    this.store.entities$.subscribe(() => {
+      this.initialized = true;
+    });
+
     this.actionStore.load([
       {
         id: 'list',
@@ -216,9 +229,13 @@ export class ToastPanelComponent implements OnInit {
     this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
   }
 
-  unfocusResult(result: SearchResult<Feature>) {
+  unfocusResult(result: SearchResult<Feature>, force?) {
+    if (!force && this.store.state.get(result).focused) {
+      return;
+    }
+
     result.data.meta.style = this.getMarkerStyle(result.data);
-    this.map.overlay.addFeature(result.data, FeatureMotion.None);
+    this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
   }
 
   selectResult(result: SearchResult<Feature>) {
@@ -249,6 +266,7 @@ export class ToastPanelComponent implements OnInit {
     }
 
     this.isResultSelected$.next(true);
+    this.initialized = false;
   }
 
   unselectResult() {

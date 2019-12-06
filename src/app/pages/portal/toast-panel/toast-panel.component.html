@@ -59,7 +59,9 @@
         [showIcons]="true"
         [withZoomButton]="withZoomButton"
         (resultFocus)="focusResult($event)"
-        (resultUnfocus)="unfocusResult($event)"
+        (resultUnfocus)="unfocusResult($event, true)"
+        (resultMouseenter)="focusResult($event)"
+        (resultMouseleave)="unfocusResult($event)"
         (resultSelect)="selectResult($event)">
       </igo-search-results>
     </div>
