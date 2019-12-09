@@ -130,17 +130,19 @@ export class ToastPanelComponent implements OnInit {
 
   private getSelectedMarkerStyle(feature: Feature)  {
     if (feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle(undefined, feature.meta.mapTitle);
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle});
     } else {
-      return createOverlayDefaultStyle(undefined, feature.meta.mapTitle);
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle});
     }
   }
 
   private getMarkerStyle(feature: Feature) {
     if (feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle(undefined, feature.meta.mapTitle, 0.5);
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle, opacity: 0.5});
+    } else if (feature.geometry.type === 'LineString' || feature.geometry.type === 'MultiLineString') {
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeOpacity: 0.5});
     } else {
-      return createOverlayDefaultStyle(undefined, feature.meta.mapTitle, 0.15);
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, fillOpacity: 0.15});
     }
   }
 
