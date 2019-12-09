@@ -5,13 +5,15 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  OnInit
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import olFormatGeoJSON from 'ol/format/GeoJSON';
 
-import { getEntityTitle, EntityStore } from '@igo2/common';
-import { Feature, SearchResult } from '@igo2/geo';
-import { Media, MediaService } from '@igo2/core';
+import { getEntityTitle, EntityStore, ActionStore, Action, ActionbarMode } from '@igo2/common';
+import { Feature, SearchResult, IgoMap, FeatureMotion, moveToOlFeatures, createOverlayMarkerStyle, createOverlayDefaultStyle } from '@igo2/geo';
+import { Media, MediaService, LanguageService } from '@igo2/core';
 
 @Component({
   selector: 'app-toast-panel',
@@ -19,13 +21,22 @@ import { Media, MediaService } from '@igo2/core';
   styleUrls: ['./toast-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToastPanelComponent {
+export class ToastPanelComponent implements OnInit {
   static SWIPE_ACTION = {
     RIGHT: 'swiperight',
     LEFT: 'swipeleft',
     UP: 'swipeup',
     DOWN: 'swipedown'
   };
+
+  @Input()
+  get map(): IgoMap {
+    return this._map;
+  }
+  set map(value: IgoMap) {
+    this._map = value;
+  }
+  private _map: IgoMap;
 
   @Input()
   get store(): EntityStore<SearchResult<Feature>> {
@@ -53,10 +64,23 @@ export class ToastPanelComponent {
   }
   private _opened = true;
 
-  @Output() openedChange = new EventEmitter<boolean>();
+  @Input() zoomAuto = false;
 
-  @Output() resultSelect = new EventEmitter<SearchResult<Feature>>();
-  @Output() resultFocus = new EventEmitter<SearchResult<Feature>>();
+  public icon = 'menu';
+
+  public actionStore = new ActionStore([]);
+  public actionbarMode = ActionbarMode.Overlay;
+
+  private multiple$ = new BehaviorSubject(false);
+  private isResultSelected$ = new BehaviorSubject(false);
+  private initialized = true;
+
+  private format = new olFormatGeoJSON();
+
+  public withZoomButton = true;
+
+  @Output() openedChange = new EventEmitter<boolean>();
+  @Output() zoomAutoEvent = new EventEmitter<boolean>();
 
   resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
 
@@ -67,7 +91,31 @@ export class ToastPanelComponent {
 
   @HostBinding('style.visibility')
   get displayStyle() {
-    return this.results.length ? 'visible' : 'hidden';
+    if (this.results.length) {
+      if (this.results.length === 1 && this.initialized) {
+        this.selectResult(this.results[0]);
+      }
+      return 'visible';
+    }
+    return 'hidden';
+  }
+
+  @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(event: KeyboardEvent) {
+    this.clear();
+  }
+
+  @HostListener('document:keydown.backspace', ['$event']) onBackHandler(event: KeyboardEvent) {
+    this.unselectResult();
+  }
+
+  @HostListener('document:keydown.z', ['$event']) onZoomHandler(event: KeyboardEvent) {
+    if (this.isResultSelected$.getValue() === true) {
+      const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
+        dataProjection: this.resultSelected$.getValue().data.projection,
+        featureProjection: this.map.projection
+      });
+      moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
+    }
   }
 
   get results(): SearchResult<Feature>[] {
@@ -75,16 +123,121 @@ export class ToastPanelComponent {
     return this.store.all();
   }
 
+  get multiple(): Observable<boolean> {
+    this.results.length ? this.multiple$.next(true) : this.multiple$.next(false);
+    return this.multiple$;
+  }
+
+  private getSelectedMarkerStyle(feature: Feature)  {
+    if (feature.geometry.type === 'Point') {
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle});
+    } else {
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle});
+    }
+  }
+
+  private getMarkerStyle(feature: Feature) {
+    if (feature.geometry.type === 'Point') {
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle, opacity: 0.5});
+    } else if (feature.geometry.type === 'LineString' || feature.geometry.type === 'MultiLineString') {
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeOpacity: 0.5});
+    } else {
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, fillOpacity: 0.15});
+    }
+  }
+
   constructor(
-    public mediaService: MediaService
+    public mediaService: MediaService,
+    public languageService: LanguageService
     ) {}
+
+  ngOnInit() {
+    this.store.entities$.subscribe(() => {
+      this.initialized = true;
+    });
+
+    this.actionStore.load([
+      {
+        id: 'list',
+        title: this.languageService.translate.instant('toastPanel.backToList'),
+        icon: 'format-list-bulleted-square',
+        tooltip: this.languageService.translate.instant('toastPanel.listButton'),
+        display: () => {
+          return this.isResultSelected$;
+        },
+        handler: () => {
+          this.unselectResult();
+        }
+      },
+      {
+        id: 'zoomFeature',
+        title: this.languageService.translate.instant('toastPanel.zoomOnFeature'),
+        icon: 'magnify-plus-outline',
+        tooltip: this.languageService.translate.instant('toastPanel.zoomOnFeatureTooltip'),
+        display: () => {
+          return this.isResultSelected$;
+        },
+        handler: () => {
+          const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
+            dataProjection: this.resultSelected$.getValue().data.projection,
+            featureProjection: this.map.projection
+          });
+          moveToOlFeatures(this.map, [olFeature], FeatureMotion.Zoom);
+        }
+      },
+      {
+        id: 'zoomResults',
+        title: this.languageService.translate.instant('toastPanel.zoomOnFeatures'),
+        tooltip: this.languageService.translate.instant('toastPanel.zoomOnFeaturesTooltip'),
+        icon: 'magnify-plus',
+        availability: () => {
+          return this.multiple;
+        },
+        handler: () => {
+          const olFeatures = [];
+          for (const result of this.store.all()) {
+            const olFeature = this.format.readFeature(result.data, {
+              dataProjection: result.data.projection,
+              featureProjection: this.map.projection
+            });
+            olFeatures.push(olFeature);
+          }
+          moveToOlFeatures(this.map, olFeatures, FeatureMotion.Zoom);
+        }
+      },
+      {
+        id: 'zoomAuto',
+        title: this.languageService.translate.instant('toastPanel.zoomAuto'),
+        tooltip: this.languageService.translate.instant('toastPanel.zoomAutoTooltip'),
+        checkbox: true,
+        checkCondition: this.zoomAuto,
+        handler: () => {
+          this.zoomAuto = !this.zoomAuto;
+          this.zoomAutoEvent.emit(this.zoomAuto);
+          if (this.zoomAuto && this.isResultSelected$.value === true) {
+            this.selectResult(this.resultSelected$.getValue());
+          }
+        }
+      },
+    ]);
+  }
 
   getTitle(result: SearchResult) {
     return getEntityTitle(result);
   }
 
   focusResult(result: SearchResult<Feature>) {
-    this.resultFocus.emit(result);
+    result.data.meta.style = this.getSelectedMarkerStyle(result.data);
+    this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
+  }
+
+  unfocusResult(result: SearchResult<Feature>, force?) {
+    if (!force && this.store.state.get(result).focused) {
+      return;
+    }
+
+    result.data.meta.style = this.getMarkerStyle(result.data);
+    this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
   }
 
   selectResult(result: SearchResult<Feature>) {
@@ -97,13 +250,38 @@ export class ToastPanelComponent {
       true
     );
     this.resultSelected$.next(result);
-    this.resultSelect.emit(result);
+    const features = [];
+    for (const feature of this.store.all()) {
+      feature.data === this.resultSelected$.getValue().data ?
+        feature.data.meta.style = this.getSelectedMarkerStyle(feature.data) :
+          feature.data.meta.style = this.getMarkerStyle(feature.data);
+      features.push(feature.data);
+    }
+    this.map.overlay.setFeatures(features, FeatureMotion.None);
+
+    if (this.zoomAuto) {
+      const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
+        dataProjection: this.resultSelected$.getValue().data.projection,
+        featureProjection: this.map.projection
+      });
+      moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
+    }
+
+    this.isResultSelected$.next(true);
+    this.initialized = false;
   }
 
   unselectResult() {
     this.resultSelected$.next(undefined);
-    this.resultSelect.emit(undefined);
+    this.isResultSelected$.next(false);
     this.store.state.clear();
+
+    const features = [];
+    for (const feature of this.store.all()) {
+      feature.data.meta.style = this.getMarkerStyle(feature.data);
+      features.push(feature.data);
+    }
+    this.map.overlay.setFeatures(features, FeatureMotion.None);
   }
 
   clear() {
@@ -158,5 +336,14 @@ export class ToastPanelComponent {
       return;
     }
     this.opened = !this.opened;
+  }
+
+  /**
+   * Invoke the action handler
+   * @internal
+   */
+  onTriggerAction(action: Action) {
+    const args = action.args || [];
+    action.handler(...args);
   }
 }

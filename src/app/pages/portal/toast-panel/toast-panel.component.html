@@ -4,15 +4,15 @@
     [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
     (click)="onToggleClick($event)">
 
-    <button
-      *ngIf="resultSelected$.value"
-      mat-icon-button
-      igoStopPropagation
+    <igo-actionbar
       panelLeftButton
-      [matTooltip]="'toastPanel.listButton' | translate"
-      (click)="unselectResult()">
-      <mat-icon svgIcon="format-list-bulleted-square"></mat-icon>
-    </button>
+      [store]="actionStore"
+      [withIcon]="true"
+      [icon]="icon"
+      [withTitle]="actionbarMode === 'overlay'"
+      [horizontal]="true"
+      [mode]="actionbarMode">
+    </igo-actionbar>
 
     <button
       *ngIf="resultSelected$.value"
@@ -54,12 +54,16 @@
 
       <igo-search-results
         *ngIf="!resultSelected$.value"
+        [map]="map"
         [store]="store"
         [showIcons]="true"
+        [withZoomButton]="withZoomButton"
         (resultFocus)="focusResult($event)"
+        (resultUnfocus)="unfocusResult($event, true)"
+        (resultMouseenter)="focusResult($event)"
+        (resultMouseleave)="unfocusResult($event)"
         (resultSelect)="selectResult($event)">
       </igo-search-results>
-
     </div>
   </igo-panel>
 </ng-template>

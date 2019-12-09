@@ -4,7 +4,8 @@ import {
   OnDestroy,
   ChangeDetectorRef,
   ViewChild,
-  ElementRef
+  ElementRef,
+  Input
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
@@ -12,6 +13,7 @@ import { debounceTime } from 'rxjs/operators';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
+import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import {
   MediaService,
@@ -51,7 +53,9 @@ import {
   sourceCanSearch,
   sourceCanReverseSearch,
   generateWMSIdFromSourceOptions,
-  WMSDataSourceOptions
+  WMSDataSourceOptions,
+  createOverlayMarkerStyle,
+  moveToOlFeatures
 } from '@igo2/geo';
 
 import {
@@ -101,6 +105,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   private selectFirstSearchResult: boolean;
   private selectFirstSearchResult$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private selectFirstSearchResult$$: Subscription;
+  public zoomAuto = false;
+  private format = new olFormatGeoJSON();
 
   public contextMenuStore = new ActionStore([]);
   private contextMenuCoord: [number, number];
@@ -444,18 +450,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   toastOpenedChange(opened: boolean) {
     this.toastPanelOpened = opened;
-  }
-
-  addFeatureToMap(result: SearchResult<Feature>) {
-    const feature = result ? result.data : undefined;
-
-    // Somethimes features have no geometry. It happens with some GetFeatureInfo
-    if (!feature || feature.geometry === undefined) {
-      this.map.overlay.clear();
-      return;
-    }
-
-    this.map.overlay.setFeatures([feature], FeatureMotion.Default);
   }
 
   public onClearSearch() {
