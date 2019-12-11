@@ -16,6 +16,7 @@ import {
   provideNominatimSearchSource,
   provideCoordinatesReverseSearchSource,
   provideILayerSearchSource,
+  provideStoredQueriesSearchSource,
   provideOsrmRoutingSource
 } from '@igo2/geo';
 
@@ -46,6 +47,7 @@ import { AppComponent } from './app.component';
     provideIChercheReverseSearchSource(),
     provideCoordinatesReverseSearchSource(),
     provideILayerSearchSource(),
+    provideStoredQueriesSearchSource(),
     provideOsrmRoutingSource()
   ],
   bootstrap: [AppComponent]

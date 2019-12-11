@@ -28,6 +28,9 @@ export const environment: Environment = {
       nominatim: {
         available: false
       },
+      storedqueries: {
+        available: false
+      },
       icherche: {
         searchUrl: '/apis/icherche',
         order: 2,
