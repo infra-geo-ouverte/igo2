@@ -103,7 +103,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   private addedLayers$$: Subscription[] = [];
   private selectFirst: boolean;
   private selectFirstSearchResult: boolean;
-  private selectFirstSearchResult$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  private selectFirstSearchResult$: BehaviorSubject<
+    boolean
+  > = new BehaviorSubject(true);
   private selectFirstSearchResult$$: Subscription;
   public zoomAuto = false;
   private format = new olFormatGeoJSON();
@@ -165,7 +167,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get backdropShown(): boolean {
     return (
-      (this.isMobile() || (this.isTablet() && this.isPortrait())) && this.sidenavOpened
+      (this.isMobile() || (this.isTablet() && this.isPortrait())) &&
+      this.sidenavOpened
     );
   }
 
@@ -318,7 +321,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.focusedSearchResult$$.unsubscribe();
   }
 
-    /**
+  /**
    * Cancel ongoing add layer, if any
    */
   private cancelOngoingAddLayer() {
@@ -366,7 +369,8 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.onClearSearch();
       return;
     }
-    this.selectFirstSearchResult = this.selectFirstSearchResult === undefined ? true : false;
+    this.selectFirstSearchResult =
+      this.selectFirstSearchResult === undefined ? true : false;
     this.selectFirstSearchResult$.next(this.selectFirstSearchResult);
     if (!this.selectFirstSearchResult) {
       this.selectFirstSearchResult$$.unsubscribe();
@@ -382,12 +386,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     let enabledSources;
     if (isReverseSearch) {
       enabledSources = this.searchSourceService
-      .getEnabledSources()
-      .filter(sourceCanReverseSearch);
+        .getEnabledSources()
+        .filter(sourceCanReverseSearch);
     } else {
       enabledSources = this.searchSourceService
-      .getEnabledSources()
-      .filter(sourceCanSearch);
+        .getEnabledSources()
+        .filter(sourceCanSearch);
     }
 
     const newResults = this.searchStore.entities$.value
@@ -475,9 +479,13 @@ export class PortalComponent implements OnInit, OnDestroy {
     const contextmenuPoint = event;
     const boundingMapBrowser = this.mapBrowser.nativeElement.getBoundingClientRect();
     contextmenuPoint.y =
-      contextmenuPoint.y - boundingMapBrowser.top + (window.scrollY || window.pageYOffset);
+      contextmenuPoint.y -
+      boundingMapBrowser.top +
+      (window.scrollY || window.pageYOffset);
     contextmenuPoint.x =
-      contextmenuPoint.x - boundingMapBrowser.left + (window.scrollX || window.pageXOffset);
+      contextmenuPoint.x -
+      boundingMapBrowser.left +
+      (window.scrollX || window.pageXOffset);
     const pixel = [contextmenuPoint.x, contextmenuPoint.y];
 
     const coord = this.map.ol.getCoordinateFromPixel(pixel);
@@ -495,17 +503,17 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private searchCoordinate(coord: [number, number]) {
     this.searchBarTerm = coord.map(c => c.toFixed(6)).join(', ');
-    const results = this.searchService.reverseSearch(coord);
+    // const results = this.searchService.reverseSearch(coord);
 
-    this.onBeforeSearch();
-    for (const i in results) {
-      if (!results[i]) {
-        continue;
-      }
-      results[i].request.subscribe((_results: SearchResult<Feature>[]) => {
-        this.onSearch({ research: results[i], results: _results });
-      });
-    }
+    // this.onBeforeSearch();
+    // for (const i in results) {
+    //   if (!results[i]) {
+    //     continue;
+    //   }
+    //   results[i].request.subscribe((_results: SearchResult<Feature>[]) => {
+    //     this.onSearch({ research: results[i], results: _results });
+    //   });
+    // }
   }
 
   updateMapBrowserClass(e) {
@@ -643,23 +651,30 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readToolParams(params);
       this.readSearchParams(params);
       this.readFocusFirst(params);
-      this.selectFirstSearchResult$$ =  this.selectFirstSearchResult$.subscribe(value => {
-        if (value) {
-          this.computeFocusFirst();
+      this.selectFirstSearchResult$$ = this.selectFirstSearchResult$.subscribe(
+        value => {
+          if (value) {
+            this.computeFocusFirst();
+          }
         }
-      });
+      );
     });
   }
 
   private computeFocusFirst() {
-      if (this.selectFirst && this.termDefinedInUrl) {
-        const entities = this.searchStore.entities$.value;
-        if (entities.length === 0) {return; }
-        const higherDisplayOrder  = Math.min(...entities.map(a => a.source.displayOrder));
-        this.searchStore.state.update(
-          entities.filter(v => v.source.displayOrder === higherDisplayOrder)[0], { selected: true }
-          );
+    if (this.selectFirst && this.termDefinedInUrl) {
+      const entities = this.searchStore.entities$.value;
+      if (entities.length === 0) {
+        return;
       }
+      const higherDisplayOrder = Math.min(
+        ...entities.map(a => a.source.displayOrder)
+      );
+      this.searchStore.state.update(
+        entities.filter(v => v.source.displayOrder === higherDisplayOrder)[0],
+        { selected: true }
+      );
+    }
   }
 
   private readFocusFirst(params: Params) {
@@ -704,8 +719,13 @@ export class PortalComponent implements OnInit, OnDestroy {
         currentLayersByService = currentLayersByService.split(',');
         currentLayersByService.forEach(layer => {
           const layerFromUrl = layer.split(':igoz');
-          const layerOptions = {url: url, params: {LAYERS: layerFromUrl[0]}};
-          const id = generateWMSIdFromSourceOptions(layerOptions as WMSDataSourceOptions);
+          const layerOptions = {
+            url: url,
+            params: { LAYERS: layerFromUrl[0] }
+          };
+          const id = generateWMSIdFromSourceOptions(
+            layerOptions as WMSDataSourceOptions
+          );
           const visibility = this.computeLayerVisibilityFromUrl(params, id);
           this.addLayerByName(
             url,
@@ -719,7 +739,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private addLayerByName(url: string, name: string, visibility: boolean = true, zIndex: number = 100000) {
+  private addLayerByName(
+    url: string,
+    name: string,
+    visibility: boolean = true,
+    zIndex: number = 100000
+  ) {
     if (!this.contextLoaded) {
       return;
     }
@@ -740,10 +765,14 @@ export class PortalComponent implements OnInit, OnDestroy {
         })
         .subscribe(l => {
           this.map.addLayer(l);
-        }));
+        })
+    );
   }
 
-  private computeLayerVisibilityFromUrl(params: Params, currentLayerid: string): boolean {
+  private computeLayerVisibilityFromUrl(
+    params: Params,
+    currentLayerid: string
+  ): boolean {
     const queryParams = params;
     let visible = true;
     if (!queryParams || !currentLayerid) {
