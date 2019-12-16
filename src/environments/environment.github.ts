@@ -51,7 +51,11 @@ export const environment: Environment = {
           limit: '8'
         }
       },
+      coordinatesreverse: {
+        showInPointerSummary: true
+      },
       icherchereverse: {
+        showInPointerSummary: true,
         searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/terrapi',
         order: 3,
         enabled: true

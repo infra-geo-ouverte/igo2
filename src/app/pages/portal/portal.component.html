@@ -25,6 +25,7 @@
       [minLength]="minSearchTermLength"
       [searchSettings]="true"
       (searchTermChange)="onSearchTermChange($event)"
+      (pointerSummaryEnabled)="onPointerSummaryEnabledChange($event)"
       (search)="onSearch($event)"
       (clearFeature)="onClearSearch()">
     </igo-search-bar>
@@ -36,6 +37,15 @@
     </app-sidenav>
 
     <igo-map-browser
+    igoPointerPositionByKey
+    [pointerPositionByKeyDelay]="500"
+    (pointerPositionByKeyCoord)="searchCoordinate($event)"
+
+    igoSearchPointerSummary
+    [igoSearchPointerSummaryDelay]="500"
+    [igoSearchPointerSummaryEnabled]=igoSearchPointerSummaryEnabled
+
+
       #mapBrowser
       igoQuery
       [waitForAllQueries]="true"

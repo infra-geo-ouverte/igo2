@@ -120,6 +120,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   private searchResults$$: Subscription;
   private focusedSearchResult$$: Subscription;
 
+  public igoSearchPointerSummaryEnabled: boolean = false;
+
   public tableStore = new EntityStore([]);
   public tableTemplate = {
     selection: true,
@@ -493,19 +495,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     window.open(GoogleLinks.getGoogleStreetViewLink(coord[0], coord[1]));
   }
 
-  private searchCoordinate(coord: [number, number]) {
+  private searchCoordinate(coord: [number, number],) {
     this.searchBarTerm = coord.map(c => c.toFixed(6)).join(', ');
-    const results = this.searchService.reverseSearch(coord);
-
-    this.onBeforeSearch();
-    for (const i in results) {
-      if (!results[i]) {
-        continue;
-      }
-      results[i].request.subscribe((_results: SearchResult<Feature>[]) => {
-        this.onSearch({ research: results[i], results: _results });
-      });
-    }
   }
 
   updateMapBrowserClass(e) {
@@ -550,6 +541,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     } else {
       e.element.classList.remove('toast-offset-attribution');
     }
+  }
+
+    
+  onPointerSummaryEnabledChange(value) {
+    this.igoSearchPointerSummaryEnabled = value;
+
   }
 
   getExpansionPanelStatus() {
