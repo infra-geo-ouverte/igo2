@@ -44,6 +44,9 @@ export const environment: Environment = {
       nominatim: {
         available: false
       },
+      storedqueries: {
+        available: false
+      },
       icherche: {
         searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/icherche',
         order: 2,
@@ -52,7 +55,7 @@ export const environment: Environment = {
         }
       },
       icherchereverse: {
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/territoires',
+        searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/terrapi',
         order: 3,
         enabled: true
       },

@@ -6,7 +6,14 @@
   },
   "toastPanel": {
     "title": "Entities found on the map",
-    "listButton": "Return to the list of entities"
+    "listButton": "Return to the list of entities",
+    "backToList": "Return to the list",
+    "zoomOnFeature": "Zoom on feature",
+    "zoomOnFeatureTooltip": "Zoom on selected feature",
+    "zoomOnFeatures": "Zoom on all features",
+    "zoomOnFeaturesTooltip": "Zoom on all the selected features",
+    "zoomAuto": "Zoom auto",
+    "zoomAutoTooltip": "Automatic zoom"
   },
   "IGO": "IGO",
   "noEntityStore": "No tables available for this dataset",

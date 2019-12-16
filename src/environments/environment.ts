@@ -57,6 +57,9 @@ export const environment: Environment = {
       nominatim: {
         available: false
       },
+      storedqueries: {
+        available: false
+      },
       icherche: {
         searchUrl: '/apis/icherche',
         order: 2,
@@ -65,7 +68,7 @@ export const environment: Environment = {
         }
       },
       icherchereverse: {
-        searchUrl: '/apis/territoires',
+        searchUrl: '/apis/terrapi',
         order: 3,
         enabled: true
       },
