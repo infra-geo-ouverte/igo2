@@ -13,7 +13,6 @@ import { debounceTime } from 'rxjs/operators';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
-import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import {
   MediaService,
@@ -106,7 +105,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   private selectFirstSearchResult$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private selectFirstSearchResult$$: Subscription;
   public zoomAuto = false;
-  private format = new olFormatGeoJSON();
 
   public contextMenuStore = new ActionStore([]);
   private contextMenuCoord: [number, number];
@@ -120,7 +118,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private searchResults$$: Subscription;
   private focusedSearchResult$$: Subscription;
 
-  public igoSearchPointerSummaryEnabled: boolean = false;
+  public igoSearchPointerSummaryEnabled = false;
 
   public tableStore = new EntityStore([]);
   public tableTemplate = {
@@ -495,7 +493,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     window.open(GoogleLinks.getGoogleStreetViewLink(coord[0], coord[1]));
   }
 
-  private searchCoordinate(coord: [number, number],) {
+  private searchCoordinate(coord: [number, number]) {
     this.searchBarTerm = coord.map(c => c.toFixed(6)).join(', ');
   }
 
@@ -543,10 +541,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-    
   onPointerSummaryEnabledChange(value) {
     this.igoSearchPointerSummaryEnabled = value;
-
   }
 
   getExpansionPanelStatus() {
