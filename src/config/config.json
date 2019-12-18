@@ -5,6 +5,5 @@
     }
   },
   "theme": "blue-theme",
-  "hasExpansionPanel": false,
-  "offlineButton": true
+  "hasExpansionPanel": false
 }
