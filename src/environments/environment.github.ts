@@ -44,6 +44,9 @@ export const environment: Environment = {
       nominatim: {
         available: false
       },
+      storedqueries: {
+        available: false
+      },
       icherche: {
         searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/icherche',
         order: 2,
