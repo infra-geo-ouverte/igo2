@@ -56,6 +56,10 @@
       <igo-zoom-button [map]="map" color="primary"
         [@controlsOffsetY]="expansionPanelExpanded">
       </igo-zoom-button>
+      <igo-offline-button [map]="map" color="primary"
+        [@controlsOffsetY]="expansionPanelExpanded"
+        [@mobileOffsetY]="getToastPanelStatus()">
+      </igo-offline-button>
       <igo-geolocate-button [map]="map" color="primary"
         [@controlsOffsetY]="expansionPanelExpanded"
         [@mobileOffsetY]="getToastPanelStatus()">
