@@ -41,6 +41,10 @@
       [pointerPositionByKeyDelay]="500"
       (pointerPositionByKeyCoord)="searchCoordinate($event)"
 
+      igoSearchPointerSummary
+      [igoSearchPointerSummaryDelay]="500"
+      [igoSearchPointerSummaryEnabled]=igoSearchPointerSummaryEnabled
+
       #mapBrowser
       igoQuery
       [waitForAllQueries]="true"
