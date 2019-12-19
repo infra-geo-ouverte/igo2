@@ -13,7 +13,6 @@ import { debounceTime } from 'rxjs/operators';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
-import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import {
   MediaService,
@@ -108,7 +107,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   > = new BehaviorSubject(true);
   private selectFirstSearchResult$$: Subscription;
   public zoomAuto = false;
-  private format = new olFormatGeoJSON();
 
   public contextMenuStore = new ActionStore([]);
   private contextMenuCoord: [number, number];
@@ -121,6 +119,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   private context$$: Subscription;
   private searchResults$$: Subscription;
   private focusedSearchResult$$: Subscription;
+
+  public igoSearchPointerSummaryEnabled = false;
 
   public tableStore = new EntityStore([]);
   public tableTemplate = {
@@ -503,17 +503,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private searchCoordinate(coord: [number, number]) {
     this.searchBarTerm = coord.map(c => c.toFixed(6)).join(', ');
-    // const results = this.searchService.reverseSearch(coord);
-
-    // this.onBeforeSearch();
-    // for (const i in results) {
-    //   if (!results[i]) {
-    //     continue;
-    //   }
-    //   results[i].request.subscribe((_results: SearchResult<Feature>[]) => {
-    //     this.onSearch({ research: results[i], results: _results });
-    //   });
-    // }
   }
 
   updateMapBrowserClass(e) {
@@ -558,6 +547,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     } else {
       e.element.classList.remove('toast-offset-attribution');
     }
+  }
+
+  onPointerSummaryEnabledChange(value) {
+    this.igoSearchPointerSummaryEnabled = value;
   }
 
   getExpansionPanelStatus() {

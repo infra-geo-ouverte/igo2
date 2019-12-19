@@ -38,7 +38,11 @@ export const environment: Environment = {
           limit: '8'
         }
       },
+      coordinatesreverse: {
+        showInPointerSummary: true
+      },
       icherchereverse: {
+        showInPointerSummary: true,
         searchUrl: '/apis/terrapi',
         order: 3,
         enabled: true
