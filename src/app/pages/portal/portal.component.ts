@@ -501,7 +501,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     window.open(GoogleLinks.getGoogleStreetViewLink(coord[0], coord[1]));
   }
 
-  private searchCoordinate(coord: [number, number]) {
+  searchCoordinate(coord: [number, number]) {
     this.searchBarTerm = coord.map(c => c.toFixed(6)).join(', ');
   }
 
