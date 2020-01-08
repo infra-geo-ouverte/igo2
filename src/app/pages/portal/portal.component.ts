@@ -174,18 +174,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get toastPanelShown(): boolean {
     return true;
-    // return (
-    //   this.mediaService.media$.value === Media.Mobile && !this.sidenavOpened
-    // );
   }
 
   get expansionPanelBackdropShown(): boolean {
     return false;
-    // return (
-    //   this.expansionPanelExpanded &&
-    //   this.toastPanelOpened &&
-    //   this.mediaService.media$.value !== Media.Mobile
-    // );
   }
 
   // get actionbarMode(): ActionbarMode {
@@ -312,6 +304,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       { id: '5', name: 'Name 5', description: 'Description 5' }
     ]);
 
+    this.queryStore.count$.subscribe((i) => {
+      this.map.viewController.padding[2] = i ? 280 : 0;
+    });
     this.readQueryParams();
   }
 
@@ -407,10 +402,12 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private closeSidenav() {
     this.sidenavOpened = false;
+    this.map.viewController.padding[3] = 0;
   }
 
   private openSidenav() {
     this.sidenavOpened = true;
+    this.map.viewController.padding[3] = this.isMobile() ? 0 : 400;
   }
 
   private toggleSidenav() {
@@ -453,13 +450,13 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   toastOpenedChange(opened: boolean) {
+    this.map.viewController.padding[2] = opened ? 280 : 0;
     this.toastPanelOpened = opened;
   }
 
   public onClearSearch() {
     this.searchStore.clear();
     this.map.overlay.clear();
-    // this.closeToastPanel();
   }
 
   private getQuerySearchSource(): SearchSource {
