@@ -77,7 +77,7 @@ export const environment: Environment = {
         enabled: true
       },
       ilayer: {
-        searchUrl: '/apis/layers/search',
+        searchUrl: '/apis/icherche/layers',
         order: 4,
         params: {
           limit: '5'
