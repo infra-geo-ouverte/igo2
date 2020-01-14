@@ -195,7 +195,7 @@ Propriétés
          - .. line-block::
                Visibilité de la
                couche à l'ouverture
-               de la thématique.
+               du contexte.
          - true false
          - true
        * - zIndex

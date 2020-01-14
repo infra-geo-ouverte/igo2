@@ -804,8 +804,8 @@ La configuration du contenu cartographie est possible grâce aux fichiers:
 Ces derniers sont situés dans le répertoire : 
     - `igo2/src/contexts <https://github.com/infra-geo-ouverte/igo2/tree/master/src/contexts>`_
 
-Le fichier **nom_du_contexte.json** contient les 
-spécifiques selon la thématiques à exploiter.
+Le fichier **nom_du_contexte.json** contient les éléments 
+spécifiques selon le contexte à exploiter.
 Exemple, dans une application cartographique vous pouvez avoir plusieurs contextes(thématiques):
 
       - hydrograhie.json
@@ -830,7 +830,7 @@ Selon l'exemple précédent, dans une application cartographique, vous avez 3 co
 Plutôt que de répéter 3 fois les mêmes éléments 
 (fonds cartographique, outils, couches de base) dans chaque contexte, 
 il est possibe de déclarer dans le **base.json** les éléments communs 
-aux 3 thématiques. La maintenance de l'application
+aux 3 contextes. La maintenance de l'application
 en sera facilitée.
 
 
@@ -854,7 +854,7 @@ Résumé
          - .. line-block::
                Identification du nom
                du ficher de base dont
-               les thématiques peuvent
+               les contextes peuvent
                hériter du contenu.
          - .. line-block::
                Map
@@ -870,7 +870,7 @@ Résumé
                Liste des couches
                d'informations
                disponible pour
-               la thématique 
+               le contexte 
                sélectionnée. 
          - .. line-block::
                Map
@@ -907,7 +907,7 @@ Résumé
          - String
          - .. line-block::
                Nom ou identifiant
-               de la thématique.
+               du contexte.
                Doit être unique
                au sein de la 
                même application.
@@ -923,7 +923,7 @@ Base
 ***************
 
     .. line-block::
-        Identification du nom du ficher de base dont les thématiques peuvent hériter du contenu. 
+        Identification du nom du ficher de base dont les contextes peuvent hériter du contenu. 
 
         À l'intérieur d'un fichier **base.json**, les propriétés tolérés sont:
             - `layers`_
