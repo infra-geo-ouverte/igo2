@@ -689,7 +689,7 @@ Propriétés
                    - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
                    - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_    
     
-    Pour les autres propriétés, référez vous à `Source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
 
 Liens
 
@@ -745,7 +745,7 @@ Propriétés
        * - title
          - iCherche
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
 
 Liens
 
@@ -800,7 +800,7 @@ Propriétés
        * - title
          - Territoire (Géocodage inversé)
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
 
 Liens
 
@@ -858,7 +858,7 @@ Propriétés
                    - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
                    - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_    
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
 
 Liens
 
@@ -912,7 +912,7 @@ Propriétés
        * - title
          - Nominatim (OSM)
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1009,7 +1009,7 @@ Propriétés
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1096,7 +1096,7 @@ Propriétés
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_
+    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1132,7 +1132,7 @@ Outils (tools)
             - `contextManager`_
             - `directions`_
             - `ogcFilter`_
-            - `timeAnalysis`_
+            - `timeFilter`_
             - `importExport`_
             - `mapDetails`_
             - `map`_
@@ -1291,7 +1291,6 @@ Exemples
 
             {
                 "name": "catalogBrowser"
-
             }
 
 Propriétés
@@ -1489,9 +1488,9 @@ Liens
 ogcFilter
 ===============
 
-.. _igotimeAnalysis:
+.. _igotimeFilter:
 
-timeAnalysis
+timeFilter
 ===============
 
 .. _igoimportExport:
