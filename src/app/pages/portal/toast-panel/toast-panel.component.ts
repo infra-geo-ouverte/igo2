@@ -189,7 +189,7 @@ export class ToastPanelComponent implements OnInit {
         id: 'zoomResults',
         title: this.languageService.translate.instant('toastPanel.zoomOnFeatures'),
         tooltip: this.languageService.translate.instant('toastPanel.zoomOnFeaturesTooltip'),
-        icon: 'magnify-plus',
+        icon: 'magnify-scan',
         availability: () => {
           return this.multiple;
         },
