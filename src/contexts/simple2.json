@@ -2,6 +2,14 @@
   "uri": "simple2",
   "title": "Protection de la Faune",
   "base": "_base",
+  "message": {
+    "title": "Info",
+    "text": "welcome",
+    "type": "info",
+    "options": {
+      "timeOut": 20000
+    }
+  },
   "layers": [
     {
       "sourceOptions": {

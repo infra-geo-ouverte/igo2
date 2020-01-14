@@ -1,3 +1,27 @@
+# [1.1.0](https://github.com/infra-geo-ouverte/igo2/compare/1.0.0...1.1.0) (2019-11-12)
+
+
+### Bug Fixes
+
+* fix examples for github ([ac9bc64](https://github.com/infra-geo-ouverte/igo2/commit/ac9bc64))
+* **demo:** demo by theme ([08d3ff7](https://github.com/infra-geo-ouverte/igo2/commit/08d3ff7))
+* **demo:** print baselayers ([4641457](https://github.com/infra-geo-ouverte/igo2/commit/4641457))
+* **show coord:** Internet Explorer issue NaN, NaN ([#333](https://github.com/infra-geo-ouverte/igo2/issues/333)) ([3dfae50](https://github.com/infra-geo-ouverte/igo2/commit/3dfae50))
+* **toast:** disabled click on disabled button ([aa48d0c](https://github.com/infra-geo-ouverte/igo2/commit/aa48d0c))
+
+
+### Features
+
+* **base:** ajust tools ([fbfe31f](https://github.com/infra-geo-ouverte/igo2/commit/fbfe31f))
+* **config:** add projections ([d190be1](https://github.com/infra-geo-ouverte/igo2/commit/d190be1))
+* **demo:** add push buttons filter ([57c7231](https://github.com/infra-geo-ouverte/igo2/commit/57c7231))
+* **igo-lib:** upgrade 1.1.0 ([645bd0c](https://github.com/infra-geo-ouverte/igo2/commit/645bd0c))
+* **meta:** add meta tags from config ([56aa55b](https://github.com/infra-geo-ouverte/igo2/commit/56aa55b))
+* **meta:** add meta tags from title/description config ([ce80368](https://github.com/infra-geo-ouverte/igo2/commit/ce80368))
+* **style:** ajust font, theme with libs ([d46e49a](https://github.com/infra-geo-ouverte/igo2/commit/d46e49a))
+
+
+
 # [1.0.0](https://github.com/infra-geo-ouverte/igo2/compare/0.23.2-alpha.1...1.0.0) (2019-09-23)
 
 

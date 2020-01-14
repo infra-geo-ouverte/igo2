@@ -75,74 +75,65 @@
     }
   ],
   "toolbar": [
-   "searchResults",
-   "contextManager",
-   "mapDetails",
-   "timeAnalysis",
-   "ogcFilter",
-   "measurer",
-   "directions",
-   "catalog",
-   "importExport",
-   "print",
-   "shareMap",
-   "about"
- ],
- "tools": [
-   {
-     "name": "searchResults",
-     "options": {
-       "focusFirst": false
-     }
-   },
-   {
-     "name": "contextManager"
-   },
-  {
-     "name": "about",
-     "options": {
-       "html": "<h2>IGO2</h2><p>IGO2 (<a target='_blank' href='http://igouverte.org/'>Infrastructure de Géomatique Ouverte</a>  - version 2) est une solution Web gouvernementale, libre et gratuite spécialisée en géomatique.<br><br>IGO2  a été conçue grâce à un réseau d’échanges regroupant des spécialistes en développement géomatique provenant de plusieurs ministères et organismes du gouvernement du Québec et intègre plusieurs <a href='http://igouverte.org/documentation/page-services-igo-msp/'>services Web gouvernementaux</a>. Ce faisant, elle permet de tirer profit d’une multitude de données géographiques (patrimoine culturel, territoires agricoles, écoles, casernes d'incendie, villages relais, etc.) grâce à une interface cartographique accessible par un navigateur Web.<br><br>Les internautes de partout dans le monde sont encouragés à <a target='_blank' href='http://igouverte.org/contribuer/'>contribuer</a> à IGO2 en vue de l’améliorer au bénéfice de ses utilisateurs. Par son développement basé sur un modèle collaboratif (« open source »), IGO2 est en constante évolution et est basé sur plusieurs autres logiciels libres de l'industrie. <br><br>IGO2 vous permet de consulter :<ul><li>Afficher votre position géographique</li><li>Rechercher un lieu/coordonnées gps ou une adresse</li><li>Partager une vue/thème/contexte carto</li><li>Changer les fonds de carte</li><li>Catalogues de services de données</li><li>Importer/exporter un fichier vertoriel (kml, geojson, shape)</li><li>Outil d'itinéraire</li><li>Menu d'impression</li><li>Filtre temporel.</ul></p>"
-     }
-   },
-   {
-     "name": "mapDetails",
-     "options": {
-       "toggleLegendOnVisibilityChange": true,
-       "layerListControls": {
-         "excludeBaseLayers": true
-       }
-     }
-   },
-   {
-     "name": "shareMap",
-     "options": {
-       "hasShareMapButton": false,
-       "hasCopyLinkButton": true
-     }
-   },
-   {
-     "name": "measurer"
-   },
-   {
-     "name": "directions"
-   },
-   {
-     "name": "catalog"
-   },
-   {
-     "name": "catalogBrowser"
-   },
-   {
-     "name": "timeAnalysis"
-   },
-   {
-     "name": "ogcFilter"
-   },
-   {
-     "name": "importExport"
-   },
-   {
-     "name": "print"
-   }
- ]
+    "searchResults",
+    "contextManager",
+    "mapDetails",
+    "measurer",
+    "directions",
+    "catalog",
+    "importExport",
+    "print",
+    "shareMap",
+    "about"
+  ],
+  "tools": [
+    {
+      "name": "searchResults",
+      "options": {
+        "focusFirst": false
+      }
+    },
+    {
+      "name": "contextManager"
+    },
+    {
+      "name": "about"
+    },
+    {
+      "name": "mapDetails",
+      "options": {
+        "toggleLegendOnVisibilityChange": true,
+        "layerListControls": {
+          "excludeBaseLayers": true
+        }
+      }
+    },
+    {
+      "name": "shareMap"
+    },
+    {
+      "name": "measurer"
+    },
+    {
+      "name": "directions"
+    },
+    {
+      "name": "catalog"
+    },
+    {
+      "name": "catalogBrowser"
+    },
+    {
+      "name": "timeFilter"
+    },
+    {
+      "name": "ogcFilter"
+    },
+    {
+      "name": "importExport"
+    },
+    {
+      "name": "print"
+    }
+  ]
 }
