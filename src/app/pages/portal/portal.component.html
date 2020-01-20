@@ -24,8 +24,9 @@
       [term]="searchBarTerm"
       [minLength]="minSearchTermLength"
       [searchSettings]="true"
+      [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
       (searchTermChange)="onSearchTermChange($event)"
-      (pointerSummaryEnabled)="onPointerSummaryEnabledChange($event)"
+      (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
       (search)="onSearch($event)"
       (clearFeature)="onClearSearch()">
     </igo-search-bar>
