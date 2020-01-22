@@ -13,7 +13,10 @@
     "zoomOnFeatures": "Zoom sur les éléments",
     "zoomOnFeaturesTooltip": "Zoomer sur les éléments sélectionnés",
     "zoomAuto": "Zoom auto",
-    "zoomAutoTooltip": "Zoom automatique"
+    "zoomAutoTooltip": "Zoom automatique",
+    "previousFeature": "Élément précédent ( raccouci clavier = flèche gauche )",
+    "nextFeature": "Prochain élément ( raccouci clavier = flèche droite )",
+    "zoomTo": "Zoom sur l'élément en cours ( raccouci clavier = z )"
   },
   "IGO": "IGO",
   "noEntityStore": "Aucune table disponible pour ce jeu de données",

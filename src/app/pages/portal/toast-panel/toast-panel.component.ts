@@ -319,6 +319,14 @@ export class ToastPanelComponent implements OnInit {
     }
   }
 
+  zoomTo() {
+    const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
+      dataProjection: this.resultSelected$.getValue().data.projection,
+      featureProjection: this.map.projection
+    });
+    moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
+  }
+
   swipe(action: string) {
     if (action === ToastPanelComponent.SWIPE_ACTION.RIGHT) {
       this.previousResult();
