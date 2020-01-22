@@ -360,7 +360,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearchTermChange(term?: string) {
-    if (term === undefined || term === '') {
+    this.searchState.setSearchTerm(term);
+    const termWithoutHashtag = term.replace(/(#[^\s]*)/g, '').trim();
+    if (termWithoutHashtag.length < 2) {
       this.onClearSearch();
       return;
     }
@@ -546,7 +548,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  onPointerSummaryEnabledChange(value) {
+  onPointerSummaryStatusChange(value) {
     this.igoSearchPointerSummaryEnabled = value;
   }
 
