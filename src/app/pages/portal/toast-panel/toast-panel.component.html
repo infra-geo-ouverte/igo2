@@ -20,7 +20,7 @@
       mat-icon-button
       igoStopPropagation
       panelLeftButton      
-      [matTooltip]="'toastPanel.previousFeature' | translate"
+      [matTooltip]="'toastPanel.previousFeatureTooltip' | translate"
       matTooltipShowDelay="500"
       (click)="previousResult()">
       <mat-icon svgIcon="chevron-left"></mat-icon>
@@ -32,7 +32,7 @@
       mat-icon-button
       igoStopPropagation
       panelRightButton
-      [matTooltip]="'toastPanel.nextFeature' | translate"
+      [matTooltip]="'toastPanel.nextFeatureTooltip' | translate"
       matTooltipShowDelay="500"
       (click)="nextResult()">
       <mat-icon svgIcon="chevron-right"></mat-icon>
@@ -43,7 +43,7 @@
       mat-icon-button 
       igoStopPropagation 
       panelRightButton
-      [matTooltip]="'toastPanel.zoomTo' | translate" 
+      [matTooltip]="'toastPanel.zoomOnFeatureTooltip' | translate" 
       matTooltipShowDelay="500" 
       (click)="zoomTo()">
       <mat-icon svgIcon="magnify-plus-outline"></mat-icon>
