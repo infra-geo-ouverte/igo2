@@ -1,27 +1,5 @@
 @import '~@igo2/core/style/partial/core.variables';
 
-:host {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  position: relative;
-  display: block;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  font-size: 14px;
-}
-
-:host ::ng-deep {
-  h3 {
-    font-size: 1.17em;
-    font-weight: bold;
-  }
-
-  h4 {
-    font-weigth: 400;
-  }
-}
-
 /*** Spinner ***/
 
 igo-spinner {

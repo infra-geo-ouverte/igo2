@@ -608,6 +608,7 @@ Exemples
 
             projections: [
                 {
+                    alias: 'Québec Lambert'
                     code: 'EPSG:32198,
                     def: '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs',
                     extent: [-886251.0296, 180252.9126, 897177.3418, 2106143.8139]
@@ -626,6 +627,12 @@ Propriétés
                Type
          - .. line-block::
                Description
+       * - alias
+         - String
+         - .. line-block::
+               Nom d'affichage que vous
+               voulez donner \à la 
+               projection ajoutée.
        * - **code***
          - String
          - .. line-block::
@@ -797,8 +804,8 @@ La configuration du contenu cartographie est possible grâce aux fichiers:
 Ces derniers sont situés dans le répertoire : 
     - `igo2/src/contexts <https://github.com/infra-geo-ouverte/igo2/tree/master/src/contexts>`_
 
-Le fichier **nom_du_contexte.json** contient les 
-spécifiques selon la thématiques à exploiter.
+Le fichier **nom_du_contexte.json** contient les éléments 
+spécifiques selon le contexte à exploiter.
 Exemple, dans une application cartographique vous pouvez avoir plusieurs contextes(thématiques):
 
       - hydrograhie.json
@@ -823,7 +830,7 @@ Selon l'exemple précédent, dans une application cartographique, vous avez 3 co
 Plutôt que de répéter 3 fois les mêmes éléments 
 (fonds cartographique, outils, couches de base) dans chaque contexte, 
 il est possibe de déclarer dans le **base.json** les éléments communs 
-aux 3 thématiques. La maintenance de l'application
+aux 3 contextes. La maintenance de l'application
 en sera facilitée.
 
 
@@ -847,7 +854,7 @@ Résumé
          - .. line-block::
                Identification du nom
                du ficher de base dont
-               les thématiques peuvent
+               les contextes peuvent
                hériter du contenu.
          - .. line-block::
                Map
@@ -858,12 +865,12 @@ Résumé
                **layers***
                Voir 
                `layers`_
-         - :ref:`layer[] <igolayer>`. 
+         - :ref:`layer[] <igolayer>`
          - .. line-block::
                Liste des couches
                d'informations
                disponible pour
-               la thématique 
+               le contexte 
                sélectionnée. 
          - .. line-block::
                Map
@@ -900,7 +907,7 @@ Résumé
          - String
          - .. line-block::
                Nom ou identifiant
-               de la thématique.
+               du contexte.
                Doit être unique
                au sein de la 
                même application.
@@ -916,7 +923,7 @@ Base
 ***************
 
     .. line-block::
-        Identification du nom du ficher de base dont les thématiques peuvent hériter du contenu. 
+        Identification du nom du ficher de base dont les contextes peuvent hériter du contenu. 
 
         À l'intérieur d'un fichier **base.json**, les propriétés tolérés sont:
             - `layers`_
@@ -1054,14 +1061,14 @@ Toolbar
             - :ref:`contextManager <igocontextManager>`
             - :ref:`directions <igodirections>`
             - :ref:`ogcFilter <igoogcFilter>`
-            - :ref:`timeAnalysis <igotimeAnalysis>`
+            - :ref:`timeFilter <igotimeFilter>`
             - :ref:`importExport <igoimportExport>`
             - :ref:`mapDetails <igomapDetails>`
             - :ref:`map <igomaptool>`
             - :ref:`print <igoprint>`
             - :ref:`searchResults <igosearchResults>`
-        Chacun de ces outils fait référence à un nom d'outil tel que définit dans le package "integration" d'igo2.
-        Pour en modifier les propriétées référez-vous à `tools`_
+        Chacun de ces outils fait référence à un nom d'outil tel que définit dans le package "integration" d'IGO2.
+        Pour en modifier les propriétées référez-vous à `tools`_ .
 
 Exemples
 
@@ -1073,7 +1080,7 @@ Exemples
                   "mapDetails", 
                   "catalog",
                   "ogcFilter",
-                  "timeAnalysis", 
+                  "timeFilter", 
                   "print",
                   "measurer", 
                   "shareMap", 
@@ -1134,7 +1141,7 @@ Propriétés
                - :ref:`contextManager <igocontextManager>`
                - :ref:`directions <igodirections>`
                - :ref:`ogcFilter <igoogcFilter>`
-               - :ref:`timeAnalysis <igotimeAnalysis>`
+               - :ref:`timeFilter <igotimeFilter>`
                - :ref:`importExport <igoimportExport>`
                - :ref:`mapDetails <igomapDetails>`
                - :ref:`map <igomaptool>`

@@ -13,6 +13,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { Tool, Toolbox } from '@igo2/common';
 import { IgoMap } from '@igo2/geo';
 import { ToolState } from '@igo2/integration';
+import { ConfigService } from '@igo2/core';
 
 @Component({
   selector: 'app-sidenav',
@@ -55,11 +56,14 @@ export class SidenavComponent implements OnInit, OnDestroy {
     return this.toolState.toolbox;
   }
 
-  constructor(private toolState: ToolState) {}
+  constructor(
+    private toolState: ToolState,
+    private configService: ConfigService) {}
 
   ngOnInit() {
     this.activeTool$$ = this.toolbox.activeTool$.subscribe((tool: Tool) => {
-      this.title$.next(tool ? tool.title : 'IGO');
+      const sidenavTitle = this.configService.getConfig('sidenavTitle') || 'IGO';
+      this.title$.next(tool ? tool.title : sidenavTitle);
       this.toolChange.emit(tool);
     });
   }

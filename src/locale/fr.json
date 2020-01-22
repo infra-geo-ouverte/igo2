@@ -1,14 +1,21 @@
 {
-  "welcome": "Bienvenue à {{title}}",
+  "welcome": "Bienvenue dans IGO",
   "menu": {
     "close": "Fermer le menu",
     "open": "Menu"
   },
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
-    "listButton": "Retourner à la liste des entités"
+    "listButton": "Retourner à la liste des entités",
+    "backToList": "Retourner à la liste",
+    "zoomOnFeature": "Zoom sur l'élément",
+    "zoomOnFeatureTooltip": "Zoomer sur l'élément sélectionné",
+    "zoomOnFeatures": "Zoom sur les éléments",
+    "zoomOnFeaturesTooltip": "Zoomer sur les éléments sélectionnés",
+    "zoomAuto": "Zoom auto",
+    "zoomAutoTooltip": "Zoom automatique"
   },
-  "IGO": "IGO2",
+  "IGO": "IGO",
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
   "coordinates": "Afficher les coordonnées",
   "googleMap": "Afficher sur Google maps",
