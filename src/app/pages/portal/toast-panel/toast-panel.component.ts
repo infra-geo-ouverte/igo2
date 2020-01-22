@@ -324,7 +324,7 @@ export class ToastPanelComponent implements OnInit {
       dataProjection: this.resultSelected$.getValue().data.projection,
       featureProjection: this.map.projection
     });
-    moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
+    moveToOlFeatures(this.map, [olFeature], FeatureMotion.Zoom);
   }
 
   swipe(action: string) {
