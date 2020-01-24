@@ -581,7 +581,7 @@ Exemples
                L'URL du service tuilées
          - 
          - 
-       * - **version***
+       * - version
          - String
          - .. line-block::
                La version WMTS du service demandée
