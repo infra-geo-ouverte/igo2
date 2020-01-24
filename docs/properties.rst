@@ -610,6 +610,7 @@ Source (base commune)
         Elles seront présentées dans les sections dédiées aux sources.
 
         Les sources disponible sont:
+            - `Cadastre`_
             - `Coordonnées`_
             - `iCherche`_ (Québec)
             - `iCherche Reverse`_ - par coordonnées (Québec)
@@ -715,6 +716,41 @@ Liens
 
     - `igo2-lib/packages/geo/src/lib/search/shared/sources/source.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/source.interfaces.ts>`_
 
+
+Cadastre
+===============
+
+    .. line-block::
+        Le service de recherches de lots rénovés du Québec. 
+
+        Le résultat de la recherche est la géométrie du lot rénové.
+    
+Exemples
+
+    .. code:: json
+
+        "cadastre": {
+            "searchUrl": 'https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?'
+        }
+
+Propriétés
+
+    Seulement les propriétés spécifique à ce service sont présentées.
+
+    .. list-table::
+       :widths: 10 80
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Valeur défaut
+       * - searchUrl
+         - .. line-block::
+               URL du service.
+         - https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?
+             
+    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
 
 Coordonnées
 ===============
