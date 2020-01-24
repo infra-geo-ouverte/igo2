@@ -164,7 +164,6 @@ Propriétés
                - `WFS`_
                - `WMS`_
                - `WMTS`_
-               - `ArcGis`_
          - .. line-block::
                Divers sources de 
                données sont supportées.
@@ -503,7 +502,7 @@ Exemples
                 "queryable": true,
                 "queryFormat": "gml2",
                 "queryTitle": "desclocal"
-                }
+            }
 
 Propriétés
 
@@ -518,10 +517,82 @@ Liens
 WMTS
 ===============
 
-    .. note::
-       Disponible actuellement mais la documentation est en cours de construction.
+    .. line-block::
+        Une source de données pour les services de données au format `WMS <https://www.opengeospatial.org/standards/wms>`_ .
+        Les diverses version WMS sont acceptés.
+
+Exemples
+
+        .. code:: json
+
+            "sourceOptions": {
+                "type": "wmts",
+                "url": "https://geoegl.msp.gouv.qc.ca/carto/wmts",
+                "format": "image/jpeg",
+                "matrixSet": "EPSG_3857",
+                "layer": "orthos"
+            }
 
 
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - format
+         - String
+         - .. line-block::
+               Format d'image demandées au serveur. Dépends des capacités du serveur (wmts Getcapabilities)
+         - Dépends des capacités du serveur
+         - image/jpeg
+       * - **layer***
+         - String
+         - Nom de la couche demandée
+         - 
+         - 
+       * - **matrixSet***
+         - String
+         - Le nom du matrix set demandé au serveur
+         - 
+         - 
+       * - projection
+         - String
+         - La projection de l'appel de tuile
+         - EPSG:3857
+         - La projection de la carte (vue carto)
+       * - style
+         - String
+         - .. line-block::
+               Le nom du style demandé tel que présenté dans le GetCapabilities du service
+         - 
+         - 
+       * - **url***
+         - String
+         - .. line-block::
+               L'URL du service tuilées
+         - 
+         - 
+       * - **version***
+         - String
+         - .. line-block::
+               La version WMTS du service demandée
+         - 1.0.0
+         - 1.0.0
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `WMS <https://www.opengeospatial.org/standards/wmts>`_
 
 
 ************************************
