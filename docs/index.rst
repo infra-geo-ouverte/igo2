@@ -36,6 +36,7 @@ Dernière mise à jour de la documentation : |date| (|time| UTC)
    config_json  
    properties
    url_control
+   shortcut
    
 .. note::
    Cette documentation est en construction.
