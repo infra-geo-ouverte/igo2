@@ -62,7 +62,8 @@ import {
   MapState,
   SearchState,
   QueryState,
-  ContextState
+  ContextState,
+  MapDetailsState
 } from '@igo2/integration';
 
 import {
@@ -119,6 +120,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   private context$$: Subscription;
   private searchResults$$: Subscription;
   private focusedSearchResult$$: Subscription;
+
+  private mapDetailsTool$$: Subscription;
+  private activateSearchTool$$: Subscription;
+  private activateCatalogTool$$: Subscription;
 
   public igoSearchPointerSummaryEnabled = false;
 
@@ -258,6 +263,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private contextState: ContextState,
     private mapState: MapState,
     private searchState: SearchState,
+    private mapDetailsState: MapDetailsState,
     private queryState: QueryState,
     private toolState: ToolState,
     private searchSourceService: SearchSourceService,
@@ -308,6 +314,19 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.map.viewController.padding[2] = i ? 280 : 0;
     });
     this.readQueryParams();
+
+    this.mapDetailsTool$$ = this.toolbox.activeTool$.subscribe(tool => {
+      if (tool) {
+        if (tool.name === 'mapDetails') {
+          this.activateSearchTool$$ = this.mapDetailsState.searchToolActivate.subscribe(() => {
+            this.toolbox.activateTool('searchResults');
+          })
+          this.activateCatalogTool$$ = this.mapDetailsState.catalogToolActivate.subscribe(() => {
+            this.toolbox.activateTool('catalog');
+          })
+        }
+      }
+    })
   }
 
   ngOnDestroy() {
