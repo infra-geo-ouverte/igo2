@@ -132,7 +132,7 @@ export class ToastPanelComponent implements OnInit {
     if (!feature.geometry || feature.geometry.type === 'Point') {
       return createOverlayMarkerStyle({text: feature.meta.mapTitle});
     } else {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle});
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeWidth: 4});
     }
   }
 
