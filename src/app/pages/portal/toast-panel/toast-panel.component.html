@@ -16,6 +16,15 @@
 
     <button
       *ngIf="resultSelected$.value"
+      disabled
+      mat-icon-button
+      igoStopPropagation
+      panelLeftButton>
+      <mat-icon svgIcon="blank"></mat-icon>
+    </button>
+    
+    <button
+      *ngIf="resultSelected$.value"
       [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
       mat-icon-button
       igoStopPropagation
