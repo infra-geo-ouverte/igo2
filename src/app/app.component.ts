@@ -3,6 +3,7 @@ import { Title, Meta } from '@angular/platform-browser';
 
 import { LanguageService, ConfigService, AnalyticsService } from '@igo2/core';
 import { AuthOptions } from '@igo2/auth';
+import { AnalyticsListenerService } from '@igo2/integration';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent {
     protected languageService: LanguageService,
     private configService: ConfigService,
     private analyticsService: AnalyticsService,
+    private analyticsListenerService: AnalyticsListenerService,
     private renderer: Renderer2,
     private titleService: Title,
     private metaService: Meta
@@ -38,5 +40,7 @@ export class AppComponent {
     if (description) {
       this.metaService.addTag({ name: 'description', content: description });
     }
+
+    this.analyticsListenerService.listen();
   }
 }
