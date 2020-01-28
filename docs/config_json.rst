@@ -208,7 +208,7 @@ Liens
         - `igo2-lib/packages/auth/src/lib/shared/auth.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/2f8f274146b0fff4cc82d09f598bff838c6caaab/packages/auth/src/lib/shared/auth.interface.ts>`_
         
 
-.. _igocatalog:
+.. _igocatalogconfig:
 
 ***************
 Catalog
@@ -288,7 +288,7 @@ Propriétés
          - .. line-block::
                Valeur défaut
        * - sources
-         - :ref:`Catalog[]<igocatalogobject>`
+         - :ref:`Catalog[] <igocatalogobject>`
          - .. line-block::
                Liste des catalogues hb
          - 
