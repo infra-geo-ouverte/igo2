@@ -329,11 +329,13 @@ Propriétés - Objet Catalog
                les catalogues entre eux.
          - 
          - uuid()
-       * - **id***
-         - String
+       * - groupImpose
+         - {id, title}
          - .. line-block::
                Identifiant unique permettant de différencier
-               les catalogues entre eux.
+               les groupes entre eux.
+               Titre pour le groupe qui sera utilisé
+               dans l'outil Catalog.
          - 
          - uuid()
        * - matrixSet
