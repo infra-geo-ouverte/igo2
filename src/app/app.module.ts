@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   provideConfigOptions,
   IgoMessageModule,
+  IgoGestureModule,
   RouteService
 } from '@igo2/core';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
@@ -31,6 +32,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
     IgoAuthModule.forRoot(),
+    IgoGestureModule.forRoot(),
     IgoMessageModule,
     IgoSpinnerModule,
     IgoStopPropagationModule,
