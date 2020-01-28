@@ -292,7 +292,7 @@ Propriétés
        * - sources
          - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
-               Liste des catalogues hb
+               Liste des catalogues qui sera présenté à l'usager.
          - 
          - []
 
