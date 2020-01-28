@@ -288,7 +288,7 @@ Propriétés
          - .. line-block::
                Valeur défaut
        * - sources
-         - :ref:`Catalog[] <igocatalogobject>`
+         - :ref:`Catalog <igocatalogobject>` []
          - .. line-block::
                Liste des catalogues hb
          - 
