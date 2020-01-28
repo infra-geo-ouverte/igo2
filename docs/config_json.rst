@@ -330,7 +330,7 @@ Propriétés - Objet Catalog
          - 
          - uuid()
        * - groupImpose
-         - {id, title}
+         - id: String, title: String
          - .. line-block::
                Identifiant unique permettant de différencier
                les groupes entre eux.
