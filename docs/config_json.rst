@@ -287,6 +287,32 @@ Propriétés
                Valeurs possibles
          - .. line-block::
                Valeur défaut
+       * - sources
+         - :ref:`Catalog[]<igocatalogobject>`
+         - .. line-block::
+               Liste des catalogues hb
+         - 
+         - []
+
+.. _igocatalogobject:
+
+Propriétés - Objet Catalog
+===============
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
        * - count
          - Integer
          - .. line-block::
@@ -294,6 +320,13 @@ Propriétés
                lors de requêtes **WMS** de GetFeatureInfo
          - 
          - 5
+       * - composite
+         - `Catalog`_ []
+         - .. line-block::
+               Liste des catalogues utilisés dans un catalogue 
+               composé.
+         - 
+         - 
        * - **id***
          - String
          - .. line-block::
@@ -595,7 +628,7 @@ Liens
 
 
 ***************
-Projection
+Projections
 ***************
 
     .. line-block::
@@ -615,7 +648,7 @@ Exemples
                   }
             ]
 
-Propriétés
+Propriétés - Objet Projection
 
     .. list-table::
        :widths: 10 10 30
