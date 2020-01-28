@@ -482,11 +482,11 @@ Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
                les catalogues entre eux.
          - 
          - 
-      * - **title***
+       * - **title***
          - String
          - .. line-block::
                Titre pour la source du catalogue qui sera utilisé
-               dans l'outil Catalog
+               dans l'outil Catalog.
          - 
          - 
        * - composite
