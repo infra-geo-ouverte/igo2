@@ -84,6 +84,7 @@
 </ng-template>
 
 <div *ngIf="isMobile(); else toast"
+class="swipe-fix"
 (swipeleft)="swipe($event.type)"
 (swiperight)="swipe($event.type)"
 (swipeup)="swipe($event.type)"
