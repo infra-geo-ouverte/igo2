@@ -58,8 +58,8 @@ Résumé
                Objet permettant d'activer le serveur 
                d'authentification.
          -
-       * - catalog
-         - `Catalog`_ []
+       * - :ref:`catalog <igocatalogConfig>`
+         - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
                Doit être présente si l'outil de catalogue.
                Permet de gérer les sources WMS et WMTS
@@ -99,7 +99,7 @@ Résumé
                l'application. 
          - Tous 
        * - projections
-         - `Projection`_ []
+         - :ref:`Projection <igoprojections>` []
          - .. line-block::
                Liste de projections non enregistrées
                par défault par OpenLayers. 
@@ -208,7 +208,7 @@ Liens
         - `igo2-lib/packages/auth/src/lib/shared/auth.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/2f8f274146b0fff4cc82d09f598bff838c6caaab/packages/auth/src/lib/shared/auth.interface.ts>`_
         
 
-.. _igocatalogconfig:
+.. _igocatalogConfig:
 
 ***************
 Catalog
@@ -221,6 +221,7 @@ Catalog
             - Service WMS 
             - Service WMTS
             - baselayers
+            - composite
       
         Les couches d'informations contenues dans ces services sont récupérées grâce au couches publiées dans le GetCapabilities du service.
 
@@ -272,6 +273,7 @@ Exemples
             }
 
 Propriétés
+===============
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -288,13 +290,13 @@ Propriétés
          - .. line-block::
                Valeur défaut
        * - sources
-         - Catalog[] :ref:`igocatalogobject` 
+         - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
                Liste des catalogues hb
          - 
          - []
 
-.. _igocatalogobject:
+.. _igocatalogObject:
 
 Propriétés - Objet Catalog
 ===============
@@ -320,13 +322,13 @@ Propriétés - Objet Catalog
                lors de requêtes **WMS** de GetFeatureInfo
          - 
          - 5
-       * - composite
-         - `Catalog`_ []
+       * - **id***
+         - String
          - .. line-block::
-               Liste des catalogues utilisés dans un catalogue 
-               composé.
+               Identifiant unique permettant de différencier
+               les catalogues entre eux.
          - 
-         - 
+         - uuid()
        * - **id***
          - String
          - .. line-block::
@@ -429,7 +431,7 @@ Propriétés - Objet Catalog
          - String
          - .. line-block::
                Type de service à appeler
-         - baselayers wmts wms
+         - baselayers composite wmts wms
          - wms
        * - **url***
          - String
@@ -453,6 +455,45 @@ Propriétés - Objet Catalog
          - 1.0.0 (WMTS)
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
+===============
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **id***
+         - String
+         - .. line-block::
+               Identifiant unique permettant de différencier
+               les catalogues entre eux.
+         - 
+         - 
+      * - **title***
+         - String
+         - .. line-block::
+               Titre pour la source du catalogue qui sera utilisé
+               dans l'outil Catalog
+         - 
+         - 
+       * - composite
+         - :ref:`Catalog <igocatalogObject>` []
+         - .. line-block::
+               Liste des catalogues utilisés dans un catalogue 
+               composé.
+         - 
+         - 
 
 Liens
 
@@ -627,6 +668,8 @@ Liens
         - `locale démo https://infra-geo-ouverte.github.io/igo2/  <https://github.com/infra-geo-ouverte/igo2/tree/gh-pages/locale>`_
 
 
+.. _igoprojections:
+
 ***************
 Projections
 ***************
@@ -649,6 +692,7 @@ Exemples
             ]
 
 Propriétés - Objet Projection
+===============
 
     .. list-table::
        :widths: 10 10 30
