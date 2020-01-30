@@ -93,6 +93,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelOpened = true;
   public sidenavOpened = false;
   public searchBarTerm = '';
+  public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
   private addedLayers$$: Subscription[] = [];
   private selectFirst: boolean;
@@ -298,6 +299,10 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.map.viewController.padding[2] = i ? 280 : 0;
     });
     this.readQueryParams();
+
+    this.onSettingsChange$.subscribe(() => {
+      this.searchState.setSearchSettingsChange();
+    })
   }
 
   ngOnDestroy() {
@@ -388,6 +393,10 @@ export class PortalComponent implements OnInit, OnDestroy {
       .concat(results);
     this.searchStore.load(newResults);
     this.selectFirstSearchResult$.next(this.selectFirstSearchResult$.value);
+  }
+
+  onSearchSettingsChange() {
+    this.onSettingsChange$.next(true);
   }
 
   private closeSidenav() {
