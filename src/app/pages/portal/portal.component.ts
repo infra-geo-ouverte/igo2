@@ -4,8 +4,7 @@ import {
   OnDestroy,
   ChangeDetectorRef,
   ViewChild,
-  ElementRef,
-  Input
+  ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
@@ -32,12 +31,10 @@ import {
   Tool
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
-import { DetailedContext, Context } from '@igo2/context';
+import { DetailedContext } from '@igo2/context';
 import {
   DataSourceService,
   Feature,
-  // FEATURE,
-  FeatureMotion,
   featureToSearchResult,
   GoogleLinks,
   IgoMap,
@@ -52,9 +49,7 @@ import {
   sourceCanSearch,
   sourceCanReverseSearch,
   generateWMSIdFromSourceOptions,
-  WMSDataSourceOptions,
-  createOverlayMarkerStyle,
-  moveToOlFeatures
+  WMSDataSourceOptions
 } from '@igo2/geo';
 
 import {
@@ -114,12 +109,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private contextLoaded = false;
 
-  // public searchResult: SearchResult;
-  // public queryResults: SearchResult[];
-
   private context$$: Subscription;
-  private searchResults$$: Subscription;
-  private focusedSearchResult$$: Subscription;
 
   public igoSearchPointerSummaryEnabled = false;
 
@@ -305,7 +295,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       { id: '5', name: 'Name 5', description: 'Description 5' }
     ]);
 
-    this.queryStore.count$.subscribe((i) => {
+    this.queryStore.count$.subscribe(i => {
       this.map.viewController.padding[2] = i ? 280 : 0;
     });
     this.readQueryParams();
@@ -317,8 +307,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
-    this.searchResults$$.unsubscribe();
-    this.focusedSearchResult$$.unsubscribe();
   }
 
   /**
