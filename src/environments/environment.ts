@@ -16,6 +16,9 @@ import {
 interface Environment {
   production: boolean;
   igo: {
+    app: {
+      forceCoordsNA: boolean;
+    };
     auth?: AuthOptions;
     catalog?: CatalogServiceOptions;
     context?: ContextServiceOptions;
@@ -29,6 +32,9 @@ interface Environment {
 export const environment: Environment = {
   production: false,
   igo: {
+    app: {
+      forceCoordsNA: true
+    },
     auth: {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
