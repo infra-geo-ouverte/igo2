@@ -100,6 +100,7 @@ Sélection du contexte
         - https://infra-geo-ouverte.github.io/igo2/?tool=importExport
         - https://infra-geo-ouverte.github.io/igo2/?tool=mapDetails
         - https://infra-geo-ouverte.github.io/igo2/?tool=map
+        - https://infra-geo-ouverte.github.io/igo2/?tool=measurer
         - https://infra-geo-ouverte.github.io/igo2/?tool=print
         - https://infra-geo-ouverte.github.io/igo2/?tool=searchResults
 

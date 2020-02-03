@@ -488,6 +488,10 @@ WMS
         Une source de données pour les services de données au format `WMS <https://www.opengeospatial.org/standards/wms>`_ .
         Les diverses version WMS sont acceptés.
 
+
+    .. note::
+        En cours de construction.        
+
 Exemples
 
         .. code:: json
@@ -506,11 +510,69 @@ Exemples
 
 Propriétés
 
-    .. note::
-       En cours de construction.
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **type***
+         - String
+         - 
+         - wms
+         - wms
+       * - **url***
+         - String
+         - .. line-block::
+               L'URL du service WMS utilisé
+               SANS les paramètres d'appels
+               WMS. L'application se charge
+               de compléter les paramètres 
+               envoyés au serveur (KVP).
+         - 
+         - 
+       * - **params***
+         - String
+         - .. line-block::
+               Paramètres WMS qui seront fait 
+               aux serveurs WMS pour les divers
+               type d'appels WMS
+               (GetMap, GetLegendGraphics, ...).
+               Paramètre OBLIGATOIRE:
+                   - layers  = couche(s) appelée
+               Auutomatiquement définis:
+                   - WIDTH
+                   - HEIGHT
+                   - BBOX
+                   - CRS (ou SRS version < 1.3.0).
+         - Référez-vous aux paramètres WMS.
+         - STYLES='' 
+           VERSION=1.3.0 
+       * - refreshIntervalSec
+         - Number
+         - .. line-block::
+               Nombre de secondes entre chaque
+               raffraichissement automatique 
+               de la source de donnée. Ainis,
+               aucun déplacement de la carte 
+               n'est nécessaire pour raffraichir
+               la donnée.
+         - en secondes
+         - Null si non définit
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
+    - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts>`_
     - `WMS <https://www.opengeospatial.org/standards/wms>`_
 
 
@@ -592,7 +654,7 @@ Exemples
 
 Liens
 
-    - `WMS <https://www.opengeospatial.org/standards/wmts>`_
+    - `WMTS <https://www.opengeospatial.org/standards/wmts>`_
 
 
 ************************************
