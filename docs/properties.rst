@@ -573,7 +573,7 @@ Propriétés
 Liens
 
     - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts>`_
-    - `WMS <https://www.opengeospatial.org/standards/wms>`_
+    - `OGC WMS <https://www.opengeospatial.org/standards/wms>`_
 
 
 WMTS
@@ -654,7 +654,7 @@ Exemples
 
 Liens
 
-    - `WMTS <https://www.opengeospatial.org/standards/wmts>`_
+    - `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_
 
 
 ************************************
