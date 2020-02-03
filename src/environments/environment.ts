@@ -44,7 +44,16 @@ export const environment: Environment = {
         {
           id: 'glace',
           title: 'Carte de glace',
-          url: '/apis/ws/radarsat.fcgi'
+          url: '/apis/ws/radarsat.fcgi',
+          showLegend: true
+        },
+        {
+          id: "baselayerWMTS",
+          title: "Fonds / Baselayers",
+          url: "/carto/wmts",
+          type: "wmts",
+          matrixSet: "EPSG_3857",
+          version: "1.3.0"
         }
       ]
     },
