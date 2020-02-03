@@ -36,7 +36,8 @@ export const environment: Environment = {
         {
           id: 'glace',
           title: 'Carte de glace',
-          url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/radarsat.fcgi'
+          url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/radarsat.fcgi',
+          showLegend: true
         }
       ]
     },
