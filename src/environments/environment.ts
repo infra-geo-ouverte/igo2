@@ -9,7 +9,8 @@ import { LanguageOptions } from '@igo2/core';
 import {
   SearchSourceOptions,
   CatalogServiceOptions,
-  Projection
+  Projection,
+  ImportExportServiceOptions
 } from '@igo2/geo';
 
 interface Environment {
@@ -18,6 +19,7 @@ interface Environment {
     auth?: AuthOptions;
     catalog?: CatalogServiceOptions;
     context?: ContextServiceOptions;
+    importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
@@ -53,6 +55,9 @@ export const environment: Environment = {
     language: {
       prefix: './locale/'
     },
+    importExport: {
+      url: '/apis/ogre'
+    },
     searchSources: {
       nominatim: {
         available: false
@@ -64,7 +69,7 @@ export const environment: Environment = {
         searchUrl: '/apis/icherche',
         order: 2,
         params: {
-          limit: '8'
+          limit: '5'
         }
       },
       coordinatesreverse: {

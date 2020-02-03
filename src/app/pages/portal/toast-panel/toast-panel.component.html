@@ -20,6 +20,8 @@
       mat-icon-button
       igoStopPropagation
       panelLeftButton
+      [matTooltip]="'toastPanel.previousFeatureTooltip' | translate"
+      matTooltipShowDelay="500"
       (click)="previousResult()">
       <mat-icon svgIcon="chevron-left"></mat-icon>
     </button>
@@ -30,8 +32,21 @@
       mat-icon-button
       igoStopPropagation
       panelRightButton
+      [matTooltip]="'toastPanel.nextFeatureTooltip' | translate"
+      matTooltipShowDelay="500"
       (click)="nextResult()">
       <mat-icon svgIcon="chevron-right"></mat-icon>
+    </button>
+
+    <button
+      *ngIf="resultSelected$.value"
+      mat-icon-button
+      igoStopPropagation
+      panelRightButton
+      [matTooltip]="'toastPanel.zoomOnFeatureTooltip' | translate"
+      matTooltipShowDelay="500"
+      (click)="zoomTo()">
+      <mat-icon svgIcon="magnify-plus-outline"></mat-icon>
     </button>
 
     <button
@@ -69,6 +84,7 @@
 </ng-template>
 
 <div *ngIf="isMobile(); else toast"
+class="swipe-fix"
 (swipeleft)="swipe($event.type)"
 (swiperight)="swipe($event.type)"
 (swipeup)="swipe($event.type)"
