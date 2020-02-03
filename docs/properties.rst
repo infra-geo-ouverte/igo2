@@ -485,7 +485,7 @@ WMS
 ===============
 
     .. line-block::
-        Une source de données pour les services de données au format `WMS <https://www.opengeospatial.org/standards/wms>`_ .
+        Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`_ .
         Les diverses version WMS sont acceptés.
 
 
@@ -580,8 +580,7 @@ WMTS
 ===============
 
     .. line-block::
-        Une source de données pour les services de données au format `WMS <https://www.opengeospatial.org/standards/wms>`_ .
-        Les diverses version WMS sont acceptés.
+        Une source de données pour les services de données au format `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_ .
 
 Exemples
 
