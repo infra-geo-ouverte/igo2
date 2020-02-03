@@ -25,6 +25,7 @@
       [minLength]="minSearchTermLength"
       [searchSettings]="true"
       [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
+      [forceNA]="forceCoordsNA"
       (searchTermChange)="onSearchTermChange($event)"
       (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
       (search)="onSearch($event)"

@@ -103,6 +103,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   > = new BehaviorSubject(true);
   private selectFirstSearchResult$$: Subscription;
   public zoomAuto = false;
+  public forceCoordsNA = false;
 
   public contextMenuStore = new ActionStore([]);
   private contextMenuCoord: [number, number];
@@ -256,6 +257,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private configService: ConfigService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
+    this.forceCoordsNA = this.configService.getConfig('forceCoordsNA');
   }
 
   ngOnInit() {

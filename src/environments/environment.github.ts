@@ -9,6 +9,9 @@ import {
 interface Environment {
   production: boolean;
   igo: {
+    app: {
+      forceCoordsNA: boolean;
+    };
     catalog?: CatalogServiceOptions;
     importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
@@ -20,6 +23,9 @@ interface Environment {
 export const environment: Environment = {
   production: true,
   igo: {
+    app: {
+      forceCoordsNA: false
+    },
     catalog: {
       sources: [
         {
