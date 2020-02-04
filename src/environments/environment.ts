@@ -9,15 +9,20 @@ import { LanguageOptions } from '@igo2/core';
 import {
   SearchSourceOptions,
   CatalogServiceOptions,
-  Projection
+  Projection,
+  ImportExportServiceOptions
 } from '@igo2/geo';
 
 interface Environment {
   production: boolean;
   igo: {
+    app: {
+      forceCoordsNA: boolean;
+    };
     auth?: AuthOptions;
     catalog?: CatalogServiceOptions;
     context?: ContextServiceOptions;
+    importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
@@ -27,11 +32,14 @@ interface Environment {
 export const environment: Environment = {
   production: false,
   igo: {
-    // auth: {
-    //   url: '/apis/users',
-    //   tokenKey: 'id_token_igo',
-    //   allowAnonymous: true
-    // },
+    app: {
+      forceCoordsNA: true
+    },
+    auth: {
+      url: '/apis/users',
+      tokenKey: 'id_token_igo',
+      allowAnonymous: true
+    },
     catalog: {
       sources: [
         {
@@ -43,6 +51,16 @@ export const environment: Environment = {
           id: 'glace',
           title: 'Carte de glace',
           url: '/apis/ws/radarsat.fcgi'
+                    showLegend: true
+        },
+        {
+          id: "baselayerWMTS",
+          title: "Fonds / Baselayers",
+          url: "/carto/wmts",
+          type: "wmts",
+          matrixSet: "EPSG_3857",
+          version: "1.3.0"
+        }
         },
         {
           id: 'fusion_catalog',
@@ -115,7 +133,6 @@ export const environment: Environment = {
               groupImpose: {id: 'mix_swtq_gouv', title: 'mix same name layer'}
             }
           ]
-        }
       ]
     },
     // context: {
@@ -124,6 +141,9 @@ export const environment: Environment = {
     // },
     language: {
       prefix: './locale/'
+    },
+    importExport: {
+      url: '/apis/ogre'
     },
     searchSources: {
       nominatim: {
@@ -136,7 +156,7 @@ export const environment: Environment = {
         searchUrl: '/apis/icherche',
         order: 2,
         params: {
-          limit: '8'
+          limit: '5'
         }
       },
       coordinatesreverse: {
