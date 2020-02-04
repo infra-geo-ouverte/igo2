@@ -9,8 +9,7 @@ import { LanguageOptions } from '@igo2/core';
 import {
   SearchSourceOptions,
   CatalogServiceOptions,
-  Projection,
-  ICompositeCatalog
+  Projection
 } from '@igo2/geo';
 
 interface Environment {
@@ -48,6 +47,7 @@ export const environment: Environment = {
         {
           id: 'fusion_catalog',
           title: '(composite catalog) fusion catalog',
+          url: '',
           composite: [
             {
               id: 'tq_swtq',
@@ -62,10 +62,11 @@ export const environment: Environment = {
               version: '1.0.0'
             }
           ]
-        } as ICompositeCatalog,
+        },
         {
           id: 'group_impose',
           title: '(composite catalog) group imposed and unique layer title for same source',
+          url: '',
           composite: [
             {
               id: 'tq_swtq',
@@ -95,10 +96,11 @@ export const environment: Environment = {
               groupImpose: {id: 'cartetopo', title: 'Carte topo échelle 1/20 000'}
             }
           ]
-        } as ICompositeCatalog,
+        },
         {
           id: 'tag_layernametitle',
           title: '(composite catalog) tag source on same layer title',
+          url: '',
           composite: [
             {
               id: 'tq_swtq',
@@ -113,7 +115,7 @@ export const environment: Environment = {
               groupImpose: {id: 'mix_swtq_gouv', title: 'mix same name layer'}
             }
           ]
-        } as ICompositeCatalog
+        }
       ]
     },
     // context: {
