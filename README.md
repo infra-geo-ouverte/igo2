@@ -39,7 +39,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 - [Installation](#installation-en)
 - [Demo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Demo IGO2 from Open Data Quebec (Canada)](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
-- [Documentation](http://igo2.readthedocs.io/fr/latest/english.html)
+- [Documentation (translation is not yet done)](http://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests-en)
 - [Contribute](#contribution)
 
