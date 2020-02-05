@@ -21,13 +21,12 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ---
 ## Table des matières (Français)
 
+- [Téléchargement](#téléchargement)
 - [Installation](#installation-et-démarrage)
 - [Démo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Démo d'IGO2 de Données Québec](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation](http://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests)
-- [Suivi du projet](https://overv.io/infra-geo-ouverte/igo2/)
-- [Docker](#docker)
 - [Contribuer](#contribuer)
 
 
@@ -36,16 +35,21 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ---
 ## Table of content (English)
 
+- [Download](#download)
 - [Installation](#installation-en)
 - [Demo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Demo IGO2 from Open Data Quebec (Canada)](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation](http://igo2.readthedocs.io/fr/latest/english.html)
 - [Tests](#tests-en)
-- [Follow in overvio](https://overv.io/infra-geo-ouverte/igo2/)
-- [Docker](#docker-en)
 - [Contribute](#contribution)
 
 ***
+
+## Téléchargement
+ 
+- [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
+- [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
+
 
 ## Installation et démarrage
 
@@ -93,17 +97,6 @@ $ npm start
 $ npm run e2e
 ```
 
-## Docker
-
-### Build de développement
-
-```bash
-$ docker-compose build
-$ docker-compose up -d
-```
-Ouvrir un navigateur http://localhost:4200/
-
-
 ***
 ## Contribuer
 Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, nous vous encourageons à lire le guide de [contribution](.github/CONTRIBUTING.md), la [LICENCE](LICENCE.txt) et le [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). Si vous avez d'autres questions, n'hésitez pas à communiquer avec nous à l'adresse suivante : info(a)igouverte.org.
@@ -111,6 +104,14 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 ***
 
 ***
+
+## Download
+ 
+- [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
+- [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
+
+
+
 
 ## Installation-en
 
@@ -159,19 +160,6 @@ $ npm run coverage
 $ npm start
 $ npm run e2e
 ```
-
-## Docker-en
-
-### Dev Build
-
-```bash
-$ docker-compose build
-$ docker-compose up -d
-```
-
-Open in a browser http://localhost:4200/
-
-***
 
 ## Contribution
 
