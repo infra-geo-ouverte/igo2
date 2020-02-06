@@ -547,9 +547,7 @@ Propriétés
                type d'appels WMS
                (GetMap, GetLegendGraphics, ...).
          - Référez-vous aux paramètres WMS ici-bas.
-         - .. line-block::
-               STYLES=''
-               VERSION=1.3.0 
+         - 
        * - refreshIntervalSec
          - Number
          - .. line-block::
@@ -573,15 +571,22 @@ Propriétés
          - .. line-block::
                Format d'interrogation de la couche.
          - .. line-block::
-               - gml2 (application/vnd.ogc.gml)
-               - gml3 (application/vnd.ogc.gml/3.1.1)
-               - json (application/json)
-               - geojson (application/geojson)
+               - gml2 
+               (application/vnd.ogc.gml)
+               - gml3 
+               (application/vnd.ogc.gml/3.1.1)
+               - json 
+               (application/json)
+               - geojson 
+               (application/geojson)
                - esrijson
-               - html (text/html)
-                 géométrie du clic auto générée
-               - htmlgml2 (text/html + application/vnd.ogc.gml)
-                 géométrie fournie par un second appel au format gml2
+               (esrijson)
+               - html  
+               (text/html)
+               géométrie du clic auto générée
+               - htmlgml2 
+               (text/html + application/vnd.ogc.gml)
+               géométrie fournie par un second appel au format gml2
          - gml2
        * - queryTitle
          - Boolean
