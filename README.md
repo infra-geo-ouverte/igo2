@@ -53,7 +53,13 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 
 ## Installation et démarrage
 
-Requis: node >=v6.5.0 et npm >=3.10.3
+Requis: 
+
+| IGO2 version | Node version         |
+|--------------|----------------------|
+| 1.x.x        | >= 6.5.0, <= 10.18.1 |
+| 0.x.x        | >= 6.5.0, <= 10.18.1 |
+ 
 
 ```bash
 $ git clone --depth 1 https://github.com/infra-geo-ouverte/igo2.git
@@ -64,17 +70,17 @@ $ npm install
 
 # Surveiller les fichiers et lancer une instance pour le développement
 $ npm start
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
  
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
 
 # Build prod
 $ npm run build.prod
 $ npm run serve.prod
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
 
 # Générer l'api de documentation
 $ npm run doc
@@ -115,7 +121,12 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ## Installation-en
 
-Require: node >=v6.5.0 & npm >=3.10.3
+Require: 
+
+| IGO2 version | Node version         |
+|--------------|----------------------|
+| 1.x.x        | >= 6.5.0, <= 10.18.1 |
+| 0.x.x        | >= 6.5.0, <= 10.18.1 |
 
 ```bash
 $ git clone https://github.com/infra-geo-ouverte/igo2.git
@@ -126,17 +137,17 @@ $ npm install
 
 # Check files and launch dev instance
 $ npm start
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Build prod
 $ npm run build.prod
 $ npm run serve.prod
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Doc API generation
 $ npm run doc
