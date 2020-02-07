@@ -3,7 +3,7 @@ const gulp = require('gulp');
 const jeditor = require('gulp-json-editor');
 const babel = require('gulp-babel');
 
-gulp.task( 'default', [ 'serve' ] );
+gulp.task( 'default', [ 'geo:fixOL', 'geo:fixMapbox' ] );
 
 gulp.task('geo:fixOL', done => {
   gulp
