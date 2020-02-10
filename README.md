@@ -57,10 +57,10 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 
 Requis: 
 
-| IGO2 version | Node version         |
-|--------------|----------------------|
-| 1.x.x        | >= 8.17.0, <= 11.15.0 |
-| 0.x.x        | >= 6.5.0, <= 10.18.1 |
+| IGO2 version | Node version         |   Git    |
+|--------------|----------------------|----------|
+| 1.x.x        | >= 8.17.0, <= 11.15.0 |   Yes |
+| 0.x.x        | >= 6.5.0, <= 10.18.1 |  Yes |
  
 
 ```bash
@@ -126,10 +126,10 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 Require: 
 
-| IGO2 version | Node version         |
-|--------------|----------------------|
-| 1.x.x        | >= 8.17.0, <= 11.15.0 |
-| 0.x.x        | >= 6.5.0, <= 10.18.1 |
+| IGO2 version | Node version         |   Git    |
+|--------------|----------------------|----------|
+| 1.x.x        | >= 8.17.0, <= 11.15.0 |   Yes |
+| 0.x.x        | >= 6.5.0, <= 10.18.1 |  Yes |
 
 ```bash
 $ git clone https://github.com/infra-geo-ouverte/igo2.git
