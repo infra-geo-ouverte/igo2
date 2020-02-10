@@ -1,14 +1,10 @@
 language: node_js
 node_js:
-- node   # Current stable
-- lts/*  # Most recent LTS version
-- 12
 - 11
-- 10     # Explicitly include an active LTS version
+- 10 
 - 9
-- 8      # Explicitly include the maintenance LTS version
-- 7
-- 6
+- 8      
+
 
 before_script:
   - npm install -g gulp-cli
