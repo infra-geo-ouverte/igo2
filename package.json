@@ -23,7 +23,7 @@
     "serve.coverage": "node_modules/live-server/live-server.js ./coverage/ --port=4210 --no-browser",
     "i18n": "ng2-translate-extract --dir ./src --output ./src/assets/locale/ --format=json --clean",
     "pretest": "ng lint",
-    "test": "ng test --watch=false",
+    "test": "ng test --watch=false --browsers=ChromeHeadless",
     "test.watch": "ng test",
     "test.all": "npm run test && npm run e2e",
     "clean": "rimraf ./dist && rimraf ./node_modules && npm cache clean --force && git checkout -- package.json && git checkout -- package-lock.json",

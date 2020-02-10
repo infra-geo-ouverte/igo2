@@ -54,12 +54,12 @@ export const environment: Environment = {
           showLegend: true
         },
         {
-          id: "baselayerWMTS",
-          title: "Fonds / Baselayers",
-          url: "/carto/wmts",
-          type: "wmts",
-          matrixSet: "EPSG_3857",
-          version: "1.3.0"
+          id: 'baselayerWMTS',
+          title: 'Fonds / Baselayers',
+          url: '/carto/wmts',
+          type: 'wmts',
+          matrixSet: 'EPSG_3857',
+          version: '1.3.0'
         }
       ]
     },

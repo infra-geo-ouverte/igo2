@@ -1,3 +1,9 @@
+[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
+[![Build Status](https://travis-ci.org/infra-geo-ouverte/igo2.svg?branch=master)](https://travis-ci.org/infra-geo-ouverte/igo2)
+[![Dependencies Status](https://david-dm.org/infra-geo-ouverte/igo2.svg)](https://david-dm.org/infra-geo-ouverte/igo2)
+[![devDependencies Status](https://david-dm.org/infra-geo-ouverte/igo2/dev-status.svg)](https://david-dm.org/infra-geo-ouverte/igo2?type=dev)
+[![Known Vulnerabilities](https://snyk.io/test/github/infra-geo-ouverte/igo2/badge.svg)](https://snyk.io/test/github/infra-geo-ouverte/igo2)
+
 # Infrastructure géomatique ouverte 2.0 (IGO2) / Open GIS Infrastructure 2.0
 ***
 
@@ -14,13 +20,12 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ---
 ## Table des matières (Français)
 
+- [Téléchargement](#téléchargement)
 - [Installation](#installation-et-démarrage)
 - [Démo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Démo d'IGO2 de Données Québec](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation](http://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests)
-- [Suivi du projet](https://overv.io/infra-geo-ouverte/igo2/)
-- [Docker](#docker)
 - [Contribuer](#contribuer)
 
 
@@ -29,20 +34,32 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ---
 ## Table of content (English)
 
+- [Download](#download)
 - [Installation](#installation-en)
 - [Demo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Demo IGO2 from Open Data Quebec (Canada)](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
-- [Documentation](http://igo2.readthedocs.io/fr/latest/english.html)
+- [Documentation (translation is not yet done)](http://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests-en)
-- [Follow in overvio](https://overv.io/infra-geo-ouverte/igo2/)
-- [Docker](#docker-en)
 - [Contribute](#contribution)
 
 ***
 
+## Téléchargement
+ 
+- [Version 1.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.2.0/igo2.zip)
+- [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
+- [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
+
+
 ## Installation et démarrage
 
-Requis: node >=v6.5.0 et npm >=3.10.3
+Requis: 
+
+| IGO2 version | Node version         |   Git    |
+|--------------|----------------------|----------|
+| 1.x.x        | >= 8.17.0, <= 11.15.0 |   Yes |
+| 0.x.x        | >= 6.5.0, <= 10.18.1 |  Yes |
+ 
 
 ```bash
 $ git clone --depth 1 https://github.com/infra-geo-ouverte/igo2.git
@@ -53,17 +70,17 @@ $ npm install
 
 # Surveiller les fichiers et lancer une instance pour le développement
 $ npm start
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
  
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
 
 # Build prod
 $ npm run build.prod
 $ npm run serve.prod
-# Ouvrir un navigateur http://localhost:4200/
+# Ouvrir un navigateur http://localhost:4201/
 
 # Générer l'api de documentation
 $ npm run doc
@@ -86,17 +103,6 @@ $ npm start
 $ npm run e2e
 ```
 
-## Docker
-
-### Build de développement
-
-```bash
-$ docker-compose build
-$ docker-compose up -d
-```
-Ouvrir un navigateur http://localhost:4200/
-
-
 ***
 ## Contribuer
 Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, nous vous encourageons à lire le guide de [contribution](.github/CONTRIBUTING.md), la [LICENCE](LICENCE.txt) et le [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). Si vous avez d'autres questions, n'hésitez pas à communiquer avec nous à l'adresse suivante : info(a)igouverte.org.
@@ -105,9 +111,23 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ***
 
+## Download
+ 
+- [Version 1.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.2.0/igo2.zip)
+- [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
+- [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
+
+
+
+
 ## Installation-en
 
-Require: node >=v6.5.0 & npm >=3.10.3
+Require: 
+
+| IGO2 version | Node version         |   Git    |
+|--------------|----------------------|----------|
+| 1.x.x        | >= 8.17.0, <= 11.15.0 |   Yes |
+| 0.x.x        | >= 6.5.0, <= 10.18.1 |  Yes |
 
 ```bash
 $ git clone https://github.com/infra-geo-ouverte/igo2.git
@@ -118,17 +138,17 @@ $ npm install
 
 # Check files and launch dev instance
 $ npm start
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Build prod
 $ npm run build.prod
 $ npm run serve.prod
-# Open your browser at http://localhost:4200/
+# Open your browser at http://localhost:4201/
 
 # Doc API generation
 $ npm run doc
@@ -152,19 +172,6 @@ $ npm run coverage
 $ npm start
 $ npm run e2e
 ```
-
-## Docker-en
-
-### Dev Build
-
-```bash
-$ docker-compose build
-$ docker-compose up -d
-```
-
-Open in a browser http://localhost:4200/
-
-***
 
 ## Contribution
 

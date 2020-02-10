@@ -304,7 +304,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     this.onSettingsChange$.subscribe(() => {
       this.searchState.setSearchSettingsChange();
-    })
+    });
   }
 
   ngOnDestroy() {
