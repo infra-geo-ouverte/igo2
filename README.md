@@ -4,8 +4,6 @@
 [![devDependencies Status](https://david-dm.org/infra-geo-ouverte/igo2/dev-status.svg)](https://david-dm.org/infra-geo-ouverte/igo2?type=dev)
 [![Known Vulnerabilities](https://snyk.io/test/github/infra-geo-ouverte/igo2/badge.svg)](https://snyk.io/test/github/infra-geo-ouverte/igo2)
 
-<!-- [![join chat https://gitter.im/igo2/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/igo2/Lobby) -->
-
 # Infrastructure géomatique ouverte 2.0 (IGO2) / Open GIS Infrastructure 2.0
 ***
 
