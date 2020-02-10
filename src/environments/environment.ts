@@ -9,15 +9,20 @@ import { LanguageOptions } from '@igo2/core';
 import {
   SearchSourceOptions,
   CatalogServiceOptions,
-  Projection
+  Projection,
+  ImportExportServiceOptions
 } from '@igo2/geo';
 
 interface Environment {
   production: boolean;
   igo: {
+    app: {
+      forceCoordsNA: boolean;
+    };
     auth?: AuthOptions;
     catalog?: CatalogServiceOptions;
     context?: ContextServiceOptions;
+    importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
@@ -27,6 +32,9 @@ interface Environment {
 export const environment: Environment = {
   production: false,
   igo: {
+    app: {
+      forceCoordsNA: true
+    },
     auth: {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
@@ -42,7 +50,16 @@ export const environment: Environment = {
         {
           id: 'glace',
           title: 'Carte de glace',
-          url: '/apis/ws/radarsat.fcgi'
+          url: '/apis/ws/radarsat.fcgi',
+          showLegend: true
+        },
+        {
+          id: "baselayerWMTS",
+          title: "Fonds / Baselayers",
+          url: "/carto/wmts",
+          type: "wmts",
+          matrixSet: "EPSG_3857",
+          version: "1.3.0"
         }
       ]
     },
@@ -53,24 +70,34 @@ export const environment: Environment = {
     language: {
       prefix: './locale/'
     },
+    importExport: {
+      url: '/apis/ogre'
+    },
     searchSources: {
       nominatim: {
+        available: false
+      },
+      storedqueries: {
         available: false
       },
       icherche: {
         searchUrl: '/apis/icherche',
         order: 2,
         params: {
-          limit: '8'
+          limit: '5'
         }
       },
+      coordinatesreverse: {
+        showInPointerSummary: true
+      },
       icherchereverse: {
-        searchUrl: '/apis/territoires',
+        showInPointerSummary: true,
+        searchUrl: '/apis/terrapi',
         order: 3,
         enabled: true
       },
       ilayer: {
-        searchUrl: '/apis/layers/search',
+        searchUrl: '/apis/icherche/layers',
         order: 4,
         params: {
           limit: '5'
@@ -80,14 +107,18 @@ export const environment: Environment = {
     projections: [
       {
         code: 'EPSG:32198',
+        alias: 'Quebec Lambert',
         def:
-          '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
+          '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 \
+          +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
         extent: [-799574, 45802, 891595.4, 1849567.5]
       },
       {
         code: 'EPSG:3798',
+        alias: 'MTQ Lambert',
         def:
-          '+proj=lcc +lat_1=50 +lat_2=46 +lat_0=44 +lon_0=-70 +x_0=800000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
+          '+proj=lcc +lat_1=50 +lat_2=46 +lat_0=44 +lon_0=-70 +x_0=800000 +y_0=0 \
+          +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
         extent: [31796.5834, 158846.2231, 1813323.4284, 2141241.0978]
       }
     ]

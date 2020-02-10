@@ -24,9 +24,13 @@
       [term]="searchBarTerm"
       [minLength]="minSearchTermLength"
       [searchSettings]="true"
+      [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
+      [forceNA]="forceCoordsNA"
       (searchTermChange)="onSearchTermChange($event)"
+      (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
       (search)="onSearch($event)"
-      (clearFeature)="onClearSearch()">
+      (clearFeature)="onClearSearch()"
+      (searchSettingsChange)="onSearchSettingsChange()">
     </igo-search-bar>
 
     <app-sidenav
@@ -36,6 +40,14 @@
     </app-sidenav>
 
     <igo-map-browser
+      igoPointerPositionByKey
+      [pointerPositionByKeyDelay]="500"
+      (pointerPositionByKeyCoord)="searchCoordinate($event)"
+
+      igoSearchPointerSummary
+      [igoSearchPointerSummaryDelay]="500"
+      [igoSearchPointerSummaryEnabled]=igoSearchPointerSummaryEnabled
+
       #mapBrowser
       igoQuery
       [waitForAllQueries]="true"
@@ -56,11 +68,15 @@
       <igo-zoom-button [map]="map" color="primary"
         [@controlsOffsetY]="expansionPanelExpanded">
       </igo-zoom-button>
+      <igo-offline-button [map]="map" color="primary"
+        [@controlsOffsetY]="expansionPanelExpanded"
+        [@mobileOffsetY]="getToastPanelStatus()">
+      </igo-offline-button>
       <igo-geolocate-button [map]="map" color="primary"
         [@controlsOffsetY]="expansionPanelExpanded"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-geolocate-button>
-      <igo-rotation-button [map]="map" color="primary"></igo-rotation-button>
+      <igo-rotation-button [showIfNoRotation]="false" [map]="map" color="primary"></igo-rotation-button>
       <igo-user-button [map]="map" color="primary"
         [@controlsOffsetY]="expansionPanelExpanded"
         [@mobileOffsetY]="getToastPanelStatus()">
@@ -108,13 +124,15 @@
   </igo-entity-table>
 </app-expansion-panel>
 
-<app-toast-panel
+<app-toast-panel *ngIf="!(queryStore.empty$ | async)"
+  [map]="map"
   [store]="queryStore"
   [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : sidenavOpened"
   [@toastPanelOffsetY]="expansionPanelExpanded"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
+  [zoomAuto]="zoomAuto"
   (openedChange)="toastOpenedChange($event)"
-  (resultSelect)="addFeatureToMap($event)">
+  (zoomAutoEvent)="zoomAuto = $event">
 </app-toast-panel>
 
 <ng-template #contextMenu>

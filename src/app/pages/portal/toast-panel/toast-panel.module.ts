@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import {
   MatIconModule,
   MatButtonModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatMenuModule
 } from '@angular/material';
 
-import { IgoPanelModule, IgoStopPropagationModule } from '@igo2/common';
+import { IgoPanelModule, IgoStopPropagationModule, IgoActionModule } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
 import { IgoFeatureModule, IgoSearchResultsModule } from '@igo2/geo';
 
@@ -18,9 +19,11 @@ import { ToastPanelComponent } from './toast-panel.component';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    MatMenuModule,
     IgoLanguageModule,
     IgoPanelModule,
     IgoStopPropagationModule,
+    IgoActionModule,
     IgoFeatureModule,
     IgoSearchResultsModule
   ],

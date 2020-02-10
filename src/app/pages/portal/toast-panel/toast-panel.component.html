@@ -4,15 +4,15 @@
     [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
     (click)="onToggleClick($event)">
 
-    <button
-      *ngIf="resultSelected$.value"
-      mat-icon-button
-      igoStopPropagation
+    <igo-actionbar
       panelLeftButton
-      [matTooltip]="'toastPanel.listButton' | translate"
-      (click)="unselectResult()">
-      <mat-icon svgIcon="format-list-bulleted-square"></mat-icon>
-    </button>
+      [store]="actionStore"
+      [withIcon]="true"
+      [icon]="icon"
+      [withTitle]="actionbarMode === 'overlay'"
+      [horizontal]="true"
+      [mode]="actionbarMode">
+    </igo-actionbar>
 
     <button
       *ngIf="resultSelected$.value"
@@ -20,6 +20,8 @@
       mat-icon-button
       igoStopPropagation
       panelLeftButton
+      [matTooltip]="'toastPanel.previousFeatureTooltip' | translate"
+      matTooltipShowDelay="500"
       (click)="previousResult()">
       <mat-icon svgIcon="chevron-left"></mat-icon>
     </button>
@@ -30,8 +32,21 @@
       mat-icon-button
       igoStopPropagation
       panelRightButton
+      [matTooltip]="'toastPanel.nextFeatureTooltip' | translate"
+      matTooltipShowDelay="500"
       (click)="nextResult()">
       <mat-icon svgIcon="chevron-right"></mat-icon>
+    </button>
+
+    <button
+      *ngIf="resultSelected$.value"
+      mat-icon-button
+      igoStopPropagation
+      panelRightButton
+      [matTooltip]="'toastPanel.zoomOnFeatureTooltip' | translate"
+      matTooltipShowDelay="500"
+      (click)="zoomTo()">
+      <mat-icon svgIcon="magnify-plus-outline"></mat-icon>
     </button>
 
     <button
@@ -54,17 +69,22 @@
 
       <igo-search-results
         *ngIf="!resultSelected$.value"
+        [map]="map"
         [store]="store"
         [showIcons]="true"
+        [withZoomButton]="withZoomButton"
         (resultFocus)="focusResult($event)"
+        (resultUnfocus)="unfocusResult($event, true)"
+        (resultMouseenter)="focusResult($event)"
+        (resultMouseleave)="unfocusResult($event)"
         (resultSelect)="selectResult($event)">
       </igo-search-results>
-
     </div>
   </igo-panel>
 </ng-template>
 
 <div *ngIf="isMobile(); else toast"
+class="swipe-fix"
 (swipeleft)="swipe($event.type)"
 (swiperight)="swipe($event.type)"
 (swipeup)="swipe($event.type)"

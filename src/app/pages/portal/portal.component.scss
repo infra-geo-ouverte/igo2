@@ -178,6 +178,17 @@ app-toast-panel:not(.app-toast-panel-opened) {
   }
 }
 
+igo-offline-button {
+  margin-bottom: 128px;
+
+  @include mobile {
+    margin-bottom: 45px;
+  }
+  @include tablet {
+    margin-bottom: 45px;
+  }
+}
+
 igo-geolocate-button {
   margin-bottom: 85px;
 

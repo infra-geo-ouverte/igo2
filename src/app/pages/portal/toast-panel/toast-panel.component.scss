@@ -59,3 +59,7 @@ igo-panel ::ng-deep .igo-panel-content {
 igo-feature-details ::ng-deep iframe {
   min-height: 227px;
 }
+
+.swipe-fix {
+  touch-action: pinch-zoom !important;
+}
