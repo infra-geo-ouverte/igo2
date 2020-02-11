@@ -25,7 +25,7 @@ Ce dernier est situé dans le répertoire :
 
     - `src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
 
-Il est également de configurer l'application grâce a un second 
+Il est également possible de configurer l'application grâce a un second 
 fichier selon l'environnement désiré (test ou production). 
 Pour modifier le comportement de l'application, vous pouvez modifier:
 
@@ -220,7 +220,6 @@ Catalog
         Les sources de cataloguage permise:
             - Service WMS 
             - Service WMTS
-            - baselayers
       
         Les couches d'informations contenues dans ces services sont récupérées grâce au couches publiées dans le GetCapabilities du service.
 
@@ -396,7 +395,7 @@ Propriétés
          - String
          - .. line-block::
                Type de service à appeler
-         - baselayers wmts wms
+         - wmts wms
          - wms
        * - **url***
          - String
