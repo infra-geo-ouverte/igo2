@@ -130,19 +130,19 @@ export class ToastPanelComponent implements OnInit {
 
   private getSelectedMarkerStyle(feature: Feature)  {
     if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({text: feature.meta.mapTitle});
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle, outline: '#00ffff'});
     } else {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeWidth: 4});
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeWidth: 4, strokeColor: [0, 255, 255]});
     }
   }
 
   private getMarkerStyle(feature: Feature) {
     if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({text: feature.meta.mapTitle, opacity: 0.5});
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle, opacity: 0.5, outline: '#00ffff'});
     } else if (feature.geometry.type === 'LineString' || feature.geometry.type === 'MultiLineString') {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeOpacity: 0.5});
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeOpacity: 0.5, strokeColor: [0, 255, 255]});
     } else {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle, fillOpacity: 0.15});
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, fillOpacity: 0.15, strokeColor: [0, 255, 255]});
     }
   }
 
@@ -227,7 +227,13 @@ export class ToastPanelComponent implements OnInit {
   }
 
   focusResult(result: SearchResult<Feature>) {
+    console.log(result);
+    console.log(this.map.overlay);
+    console.log(this.store.all().map(f => f.data));
+    console.log(FeatureMotion);
     result.data.meta.style = this.getSelectedMarkerStyle(result.data);
+    result.data.meta.style.setZIndex(2000);
+
     this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
   }
 
@@ -237,6 +243,7 @@ export class ToastPanelComponent implements OnInit {
     }
 
     result.data.meta.style = this.getMarkerStyle(result.data);
+    result.data.meta.style.setZIndex(undefined);
     this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
   }
 
@@ -252,10 +259,14 @@ export class ToastPanelComponent implements OnInit {
     this.resultSelected$.next(result);
     const features = [];
     for (const feature of this.store.all()) {
-      feature.data === this.resultSelected$.getValue().data ?
-        feature.data.meta.style = this.getSelectedMarkerStyle(feature.data) :
-          feature.data.meta.style = this.getMarkerStyle(feature.data);
-      features.push(feature.data);
+      if (feature.data === this.resultSelected$.getValue().data) {
+        feature.data.meta.style = this.getSelectedMarkerStyle(feature.data);
+        result.data.meta.style.setZIndex(2000);
+        features.push(feature.data);
+      } else {
+        feature.data.meta.style = this.getMarkerStyle(feature.data);
+        features.push(feature.data);
+      }
     }
     this.map.overlay.setFeatures(features, FeatureMotion.None);
 
