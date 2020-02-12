@@ -145,7 +145,6 @@ Auth
 
     .. line-block::
         Sert à effectuer l'authentification des usagers.
-        .. line-block::
         NB. : Pour une application sans authentification, simplement ne pas mettre ces configurations.
 
 Exemples
