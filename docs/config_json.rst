@@ -145,6 +145,8 @@ Auth
 
     .. line-block::
         Sert à effectuer l'authentification des usagers.
+        .. line-block::
+        NB. : Pour une application sans authentification, simplement ne pas mettre ces configurations.
 
 Exemples
 
@@ -944,9 +946,9 @@ Layers
 
     .. line-block::
         Permet de définir une liste de couches d'informations disponible à l'usager lors de l'ouverture de l'application.
-        L'ordre d'apparition des couches dans la table des matières peut être controlée de divers moyens:
-            1- l'ordre d'apparition des couches dans le contexte. Plus la couche est au début de la liste, plus elle sera au bas de la table des matière.
-            2- La propriété zIndex de chaque couche d'information. Plus le zIndex et élevé, plus la couche sera au haut de la table des matières.
+        L'ordre d'apparition des couches dans la liste présentée à l'utilisateur peut être controlée de divers moyens:
+            1- l'ordre d'apparition des couches dans le contexte. Plus la couche est au début de la liste, plus elle sera au bas de la la liste présentée.
+            2- La propriété zIndex de chaque couche d'information. Plus le zIndex et élevé, plus la couche sera au haut de la liste présentée.
 
 Exemples
 
@@ -1061,6 +1063,7 @@ Toolbar
             - :ref:`directions <igodirections>`
             - :ref:`ogcFilter <igoogcFilter>`
             - :ref:`timeFilter <igotimeFilter>`
+            - :ref:`spatialFilter <igospatialFilter>`
             - :ref:`importExport <igoimportExport>`
             - :ref:`mapDetails <igomapDetails>`
             - :ref:`map <igomaptool>`
@@ -1079,7 +1082,8 @@ Exemples
                   "mapDetails", 
                   "catalog",
                   "ogcFilter",
-                  "timeFilter", 
+                  "timeFilter",
+                  "spatialFilter"
                   "print",
                   "measurer", 
                   "shareMap", 
