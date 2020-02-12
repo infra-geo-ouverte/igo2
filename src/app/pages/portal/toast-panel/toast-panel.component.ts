@@ -101,7 +101,7 @@ export class ToastPanelComponent implements OnInit {
   }
 
   @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(event: KeyboardEvent) {
-    this.clear();
+    this.store.clear();
   }
 
   @HostListener('document:keydown.backspace', ['$event']) onBackHandler(event: KeyboardEvent) {
@@ -130,7 +130,7 @@ export class ToastPanelComponent implements OnInit {
 
   private getSelectedMarkerStyle(feature: Feature)  {
     if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({text: feature.meta.mapTitle, outline: '#00ffff'});
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle, outlineColor: [0, 255, 255]});
     } else {
       return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeWidth: 4, strokeColor: [0, 255, 255]});
     }
@@ -138,7 +138,7 @@ export class ToastPanelComponent implements OnInit {
 
   private getMarkerStyle(feature: Feature) {
     if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({text: feature.meta.mapTitle, opacity: 0.5, outline: '#00ffff'});
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle, opacity: 0.5, outlineColor: [0, 255, 255]});
     } else if (feature.geometry.type === 'LineString' || feature.geometry.type === 'MultiLineString') {
       return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeOpacity: 0.5, strokeColor: [0, 255, 255]});
     } else {
@@ -227,10 +227,6 @@ export class ToastPanelComponent implements OnInit {
   }
 
   focusResult(result: SearchResult<Feature>) {
-    console.log(result);
-    console.log(this.map.overlay);
-    console.log(this.store.all().map(f => f.data));
-    console.log(FeatureMotion);
     result.data.meta.style = this.getSelectedMarkerStyle(result.data);
     result.data.meta.style.setZIndex(2000);
 
@@ -293,11 +289,6 @@ export class ToastPanelComponent implements OnInit {
       features.push(feature.data);
     }
     this.map.overlay.setFeatures(features, FeatureMotion.None);
-  }
-
-  clear() {
-    this.store.clear();
-    this.unselectResult();
   }
 
   isMobile(): boolean {
