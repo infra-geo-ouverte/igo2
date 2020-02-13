@@ -546,16 +546,8 @@ Propriétés
                aux serveurs WMS pour les divers
                type d'appels WMS
                (GetMap, GetLegendGraphics, ...).
-               Paramètre OBLIGATOIRE:
-                   - layers  = couche(s) appelée
-               Auutomatiquement définis:
-                   - WIDTH
-                   - HEIGHT
-                   - BBOX
-                   - CRS (ou SRS version < 1.3.0).
-         - Référez-vous aux paramètres WMS.
-         - STYLES='' 
-           VERSION=1.3.0 
+         - Référez-vous aux paramètres WMS ici-bas.
+         - 
        * - refreshIntervalSec
          - Number
          - .. line-block::
@@ -567,8 +559,157 @@ Propriétés
                la donnée.
          - en secondes
          - Null si non définit
+       * - queryable
+         - Boolean
+         - .. line-block::
+               Définit si la couche d'information
+               est interrogeable ou non
+         - true/false 
+         - true
+       * - queryFormat
+         - Boolean
+         - .. line-block::
+               Format d'interrogation de la couche.
+         - .. line-block::
+               - gml2 
+               (application/vnd.ogc.gml)
+               - gml3 
+               (application/vnd.ogc.gml/3.1.1)
+               - json 
+               (application/json)
+               - geojson 
+               (application/geojson)
+               - esrijson
+               (esrijson)
+               - html  
+               (text/html)
+               géométrie du clic auto générée
+               - htmlgml2 
+               (text/html + application/vnd.ogc.gml)
+               géométrie fournie par un second appel au format gml2
+         - gml2
+       * - queryTitle
+         - Boolean
+         - .. line-block::
+               Lors que la couche interrogée est en
+               gml2, gml3, json, geojson, esrijson, 
+               cette propriété correspond au nom du 
+               champ retourné  qui sera utilisé dans 
+               le résultat de clic sur la carte comme
+               titre. 
+
+               Si cette propriété est absente, le titre
+               de la couche est utilisé comme titre 
+               pour chacun des résultat, suivi d'une 
+               numérotation séquentielle.
+         - .. line-block::
+               Exemple 1 seul champ:
+                   - "queryTitle": "desclocal"
+                Exemple 1 seul champ avec texte:
+                   - "queryTitle": "Description ${desclocal}",               
+               Exemple plusieurs champs:
+                   - "queryTitle": "${nomroute} ${desclocal} ",
+         - 
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Paramètre (params) WMS
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Paramètre
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **layers***
+         - String
+         - .. line-block::
+               Correspond au nom de la couche demandée.
+               Vous pouvez appeler plusieurs couches,
+               en séparant chacune de celles ci par un
+               virgule. 
+               IMP:
+                   - Pour les couches multiples, vous
+                     ne pourrez récupérer les propriétés 
+                     fournies par les GetCapabilities.
+                     Vous devez donc fournir les propriétés
+                     title, max/min Resolution (au besoin).
+                   - Si vous voulez appliquer des filters
+                     OGC à des couches multiples, elles
+                     doivent partager le même schéma de
+                     données (même champs). 
+         - .. line-block::
+               Exemple:
+               layers=nomDeLaCouche1
+               layers=nomDeLaCouche1,nomDeLaCouche2
+         - 
+       * - version
+         - String
+         - Version  de l'appel WMS
+         - .. line-block::
+               1.1.0
+               1.1.1
+               1.3.0
+         - 1.3.0
+       * - feature_count
+         - Number
+         - .. line-block::
+               Nombre de résultat retournés par le serveur
+               lors des appels GetFeatureInfo
+         - 
+         - 5
+       * - info_format
+         - String
+         - .. line-block::
+               Nom spécifique du format d'appel du GetFeatureInfo.
+               
+               Nécessaire si vos format d'appels diffèrent des 
+               nom standard gérés par IGO (décrit précédemment).
+         - 
+         - 
+       * - dpi
+         - Number
+         - .. line-block::
+               Nombre de point par pouces du résultat 
+               de l'appel du GetMap. Particulièrement 
+               utile dans IGO pour effectuer la conversion
+               entre la résolution et le nombre échelle.
+         - 
+         - 96
+       * - map_resolution
+         - Number
+         - .. line-block::
+               Nombre de point par pouces du résultat 
+               de l'appel du GetMap. Particulièrement 
+               utile dans IGO pour effectuer la conversion
+               entre la résolution et le nombre échelle.
+         - 
+         - 96
+       * - format_options
+         - Number
+         - .. line-block::
+               Nombre de point par pouces du résultat 
+               de l'appel du GetMap. Particulièrement 
+               utile dans IGO pour effectuer la conversion
+               entre la résolution et le nombre échelle.
+         - 
+         - dpi:96
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+    Pour les propriétés dpi, map_resolution et format_options, les 3 paramètres
+    sont envoyés au serveur en tout temps pour éviter les erreurs de conversion
+    d'échelle. La décision de faire l'appel des 3 paramètres en simultané s'est 
+    basé sur le fait que QGIS procède de la même manière. 
+
 
 Liens
 

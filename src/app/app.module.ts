@@ -18,7 +18,7 @@ import {
   provideCoordinatesReverseSearchSource,
   provideILayerSearchSource,
   provideStoredQueriesSearchSource,
-  provideOsrmRoutingSource
+  provideOsrmDirectionsSource
 } from '@igo2/geo';
 
 import { environment } from '../environments/environment';
@@ -50,7 +50,7 @@ import { AppComponent } from './app.component';
     provideCoordinatesReverseSearchSource(),
     provideILayerSearchSource(),
     provideStoredQueriesSearchSource(),
-    provideOsrmRoutingSource()
+    provideOsrmDirectionsSource()
   ],
   bootstrap: [AppComponent]
 })
