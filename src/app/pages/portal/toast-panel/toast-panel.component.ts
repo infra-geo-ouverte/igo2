@@ -101,7 +101,7 @@ export class ToastPanelComponent implements OnInit {
   }
 
   @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(event: KeyboardEvent) {
-    this.store.clear();
+    this.clear();
   }
 
   @HostListener('document:keydown.backspace', ['$event']) onBackHandler(event: KeyboardEvent) {
@@ -227,20 +227,22 @@ export class ToastPanelComponent implements OnInit {
   }
 
   focusResult(result: SearchResult<Feature>) {
+    this.map.overlay.removeFeature(result.data);
+
     result.data.meta.style = this.getSelectedMarkerStyle(result.data);
     result.data.meta.style.setZIndex(2000);
-
-    this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
+    this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
 
   unfocusResult(result: SearchResult<Feature>, force?) {
     if (!force && this.store.state.get(result).focused) {
       return;
     }
+    this.map.overlay.removeFeature(result.data);
 
     result.data.meta.style = this.getMarkerStyle(result.data);
     result.data.meta.style.setZIndex(undefined);
-    this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
+    this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
 
   selectResult(result: SearchResult<Feature>) {
@@ -253,18 +255,19 @@ export class ToastPanelComponent implements OnInit {
       true
     );
     this.resultSelected$.next(result);
+
     const features = [];
     for (const feature of this.store.all()) {
-      if (feature.data === this.resultSelected$.getValue().data) {
+      if (feature.meta.id === result.meta.id) {
         feature.data.meta.style = this.getSelectedMarkerStyle(feature.data);
-        result.data.meta.style.setZIndex(2000);
-        features.push(feature.data);
+        feature.data.meta.style.setZIndex(2000);
       } else {
-        feature.data.meta.style = this.getMarkerStyle(feature.data);
-        features.push(feature.data);
+        feature.data.meta.style = this.getMarkerStyle(feature.data)
       }
+      features.push(feature.data);
     }
-    this.map.overlay.setFeatures(features, FeatureMotion.None);
+    this.map.overlay.removeFeatures(features);
+    this.map.overlay.addFeatures(features, FeatureMotion.None);
 
     if (this.zoomAuto) {
       const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
@@ -288,7 +291,17 @@ export class ToastPanelComponent implements OnInit {
       feature.data.meta.style = this.getMarkerStyle(feature.data);
       features.push(feature.data);
     }
-    this.map.overlay.setFeatures(features, FeatureMotion.None);
+    this.map.overlay.removeFeatures(features);
+    this.map.overlay.addFeatures(features, FeatureMotion.None);
+  }
+
+  clear() {
+    for (const feature of this.store.all()) {
+      console.log(this.store.state.get(feature));
+    }
+    this.map.overlay.removeFeatures(this.store.all().map(f => f.data));
+    this.store.clear();
+    this.unselectResult();
   }
 
   isMobile(): boolean {
