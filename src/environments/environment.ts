@@ -43,9 +43,9 @@ export const environment: Environment = {
     catalog: {
       sources: [
         {
-          id: 'Securite',
-          title: 'Securite',
-          url: 'https://testgeoegl.msp.gouv.qc.ca/apis/wss/securite.fcgi'
+          id: 'Gououvert',
+          title: 'Gouvouvert',
+          url: '/apis/ws/igo_gouvouvert.fcgi'
         },
         {
           id: 'glace',
