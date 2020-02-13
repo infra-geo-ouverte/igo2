@@ -10,7 +10,7 @@
     "changeOrigin": true
   },
   "/apis/": {
-    "target": "https://testgeoegl.msp.gouv.qc.ca",
+    "target": "https://geoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },
