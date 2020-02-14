@@ -267,7 +267,7 @@ export class ToastPanelComponent implements OnInit {
       features.push(feature.data);
     }
     this.map.overlay.removeFeatures(features);
-    this.map.overlay.addFeatures(features, FeatureMotion.None);
+    this.map.overlay.addFeatures(features, FeatureMotion.Default);
 
     if (this.zoomAuto) {
       const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
@@ -296,9 +296,6 @@ export class ToastPanelComponent implements OnInit {
   }
 
   clear() {
-    for (const feature of this.store.all()) {
-      console.log(this.store.state.get(feature));
-    }
     this.map.overlay.removeFeatures(this.store.all().map(f => f.data));
     this.store.clear();
     this.unselectResult();
