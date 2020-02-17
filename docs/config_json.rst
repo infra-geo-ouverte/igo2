@@ -52,6 +52,10 @@ Résumé
          - Type
          - Description
          - Outil lié
+       * - analytic
+         - Objet
+         - Permet de définir un fournisseur de service d'analyse et de statistique.
+         -
        * - auth
          - `Auth`_
          - .. line-block::
@@ -131,7 +135,15 @@ Résumé
                    - dark.theme
                Le répertoire où sont conservés les thèmes est 
                le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
-         -  
+         -
+       * - **Title**
+         - String   
+         - Permet de définir le titre de l'application qu'on retrouve dans le menu d'acceuil.
+         - 
+       * - **Description**
+         - String
+         - Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche, comme par exemple Google.  
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
