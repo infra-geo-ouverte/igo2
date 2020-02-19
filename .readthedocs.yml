@@ -1,8 +1,5 @@
 # Required
 version: 2
 
-sphinx:
-  builder: html
-
 mkdocs:
   configuration: docs/mkdocs.yml
