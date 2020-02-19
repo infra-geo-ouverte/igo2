@@ -1,0 +1,2 @@
+mkdocs:
+  configuration: docs/mkdocs.yml
