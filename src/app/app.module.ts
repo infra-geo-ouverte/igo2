@@ -19,8 +19,7 @@ import {
   provideILayerSearchSource,
   provideStoredQueriesSearchSource,
   provideOsrmDirectionsSource,
-  OptionsService,
-  OptionsApiService
+  provideOptionsApi
 } from '@igo2/geo';
 
 import { environment } from '../environments/environment';
@@ -53,10 +52,7 @@ import { AppComponent } from './app.component';
     provideILayerSearchSource(),
     provideStoredQueriesSearchSource(),
     provideOsrmDirectionsSource(),
-    {
-      provide: OptionsService,
-      useClass: OptionsApiService
-    }
+    provideOptionsApi()
   ],
   bootstrap: [AppComponent]
 })
