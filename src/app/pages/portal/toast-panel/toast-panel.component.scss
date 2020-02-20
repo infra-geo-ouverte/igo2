@@ -20,7 +20,7 @@
     height: 40%;
   }
 
-  .igo-stop-propagation {
+  .toast-content {
     height: 100%;
     width: 100%;
   }
@@ -62,4 +62,8 @@ igo-feature-details ::ng-deep iframe {
 
 .swipe-fix {
   touch-action: pinch-zoom !important;
+}
+
+igo-panel ::ng-deep igo-list {
+  max-height: 230px;
 }

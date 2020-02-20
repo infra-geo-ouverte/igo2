@@ -262,7 +262,7 @@ export class ToastPanelComponent implements OnInit {
         feature.data.meta.style = this.getSelectedMarkerStyle(feature.data);
         feature.data.meta.style.setZIndex(2000);
       } else {
-        feature.data.meta.style = this.getMarkerStyle(feature.data)
+        feature.data.meta.style = this.getMarkerStyle(feature.data);
       }
       features.push(feature.data);
     }
@@ -291,8 +291,7 @@ export class ToastPanelComponent implements OnInit {
       feature.data.meta.style = this.getMarkerStyle(feature.data);
       features.push(feature.data);
     }
-    this.map.overlay.removeFeatures(features);
-    this.map.overlay.addFeatures(features, FeatureMotion.None);
+    this.map.overlay.setFeatures(features, FeatureMotion.None, 'map');
   }
 
   clear() {

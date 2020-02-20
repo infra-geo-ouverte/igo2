@@ -458,7 +458,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public onClearSearch() {
     this.searchStore.clear();
-    this.map.overlay.removeFeatures(this.searchStore.all().filter(f => f.meta.dataType === FEATURE).map(f => f.data as Feature));
+    this.map.overlay.removeFeatures(this.searchStore.all().filter(f =>
+      f.meta.dataType === FEATURE).map(f => f.data as Feature));
   }
 
   private getQuerySearchSource(): SearchSource {
