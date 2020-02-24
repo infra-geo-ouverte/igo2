@@ -63,3 +63,7 @@ igo-feature-details ::ng-deep iframe {
 .swipe-fix {
   touch-action: pinch-zoom !important;
 }
+
+igo-actionbar {
+  overflow: hidden;
+}
