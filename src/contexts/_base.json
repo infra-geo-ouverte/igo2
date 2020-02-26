@@ -72,6 +72,9 @@
   "toolbar": [
     "searchResults",
     "contextManager",
+    "map",
+    "mapLegend",
+    "mapTools",
     "mapDetails",
     "measurer",
     "spatialFilter",
@@ -94,6 +97,31 @@
     },
     {
       "name": "about"
+    },
+    {
+      "name": "map"
+    },
+    {
+      "name": "mapLegend",
+      "options": {
+        "allowShowAllLegends": true,
+        "layerAdditionAllowed": true,
+        "updateLegendOnResolutionChange": false,
+        "layerListControls": {
+          "excludeBaseLayers": true
+        }
+      }
+    },
+    {
+      "name": "mapTools",
+      "options": {
+        "selectedTabAtOpening": "legend",
+        "toggleLegendOnVisibilityChange": false,
+        "updateLegendOnResolutionChange": false,
+        "layerListControls": {
+          "excludeBaseLayers": true
+        }
+      }
     },
     {
       "name": "mapDetails",
