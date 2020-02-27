@@ -132,7 +132,7 @@ export class ToastPanelComponent implements OnInit {
     if (!feature.geometry || feature.geometry.type === 'Point') {
       return createOverlayMarkerStyle({text: feature.meta.mapTitle});
     } else {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle});
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeWidth: 4});
     }
   }
 
@@ -317,6 +317,14 @@ export class ToastPanelComponent implements OnInit {
     if (nextResult) {
       this.selectResult(nextResult);
     }
+  }
+
+  zoomTo() {
+    const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
+      dataProjection: this.resultSelected$.getValue().data.projection,
+      featureProjection: this.map.projection
+    });
+    moveToOlFeatures(this.map, [olFeature], FeatureMotion.Zoom);
   }
 
   swipe(action: string) {

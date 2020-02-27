@@ -9,6 +9,9 @@ import {
 interface Environment {
   production: boolean;
   igo: {
+    app: {
+      forceCoordsNA: boolean;
+    };
     importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
@@ -20,6 +23,9 @@ interface Environment {
 export const environment: Environment = {
   production: true,
   igo: {
+    app: {
+      forceCoordsNA: true
+    },
     importExport: {
       url: '/apis/ogre'
     },
@@ -37,7 +43,7 @@ export const environment: Environment = {
         searchUrl: '/apis/icherche',
         order: 2,
         params: {
-          limit: '8'
+          limit: '5'
         }
       },
       coordinatesreverse: {

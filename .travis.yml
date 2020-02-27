@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- 11
+- 10 
+- 9
+- 8      
+
+
+before_script:
+  - npm install -g gulp-cli
+
+addons:
+  chrome: stable

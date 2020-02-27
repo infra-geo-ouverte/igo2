@@ -4,72 +4,67 @@
       "projection": "EPSG:3857",
       "center": [-71.938087, 48.446975],
       "zoom": 6,
-      "maxZoom": 17
+      "maxZoom": 19,
+      "maxZoomOnExtent": 17
     }
   },
   "layers": [
     {
       "id": "fond_osm",
-      "title": "OSM",
+      "title": "Open Street Map",
       "visible": false,
       "baseLayer": true,
       "sourceOptions": {
         "type": "osm",
+        "maxZoom": 19,
         "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>"
       }
     },
     {
-      "title": "Satellite",
+      "title": "Imagerie",
       "baseLayer": true,
       "visible": false,
       "sourceOptions": {
         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
         "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
         "type": "xyz",
+        "maxZoom": 19,
         "crossOrigin": "anonymous"
       }
     },
     {
-      "title": "Blanc",
+      "title": "Aucun",
       "baseLayer": true,
       "visible": false,
       "sourceOptions": {
         "attributions": "<a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
         "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
-        "type": "xyz"
+        "type": "xyz",
+        "maxZoom": 19
       }
     },
     {
       "id": "carte_gouv_qc",
-      "title": "Route",
+      "title": "Carte Topo",
       "visible": true,
       "baseLayer": true,
       "sourceOptions": {
         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
         "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
         "type": "xyz",
+        "maxZoom": 17,
         "crossOrigin": "anonymous"
       }
     },
     {
-      "title": "Couleur",
-      "baseLayer": true,
-      "visible": false,
-      "sourceOptions": {
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_adn@EPSG_3857/{z}/{x}/{-y}.png",
-        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
-        "type": "xyz",
-        "crossOrigin": "anonymous"
-      }
-    },
-    {
-      "title": "Gris",
+      "title": "Relief",
       "baseLayer": true,
       "visible": false,
       "sourceOptions": {
         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/fond_thematique@EPSG_3857/{z}/{x}/{-y}.png",
         "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
         "type": "xyz",
+        "maxZoom": 11,
         "crossOrigin": "anonymous"
       }
     }
@@ -79,6 +74,7 @@
     "contextManager",
     "mapDetails",
     "measurer",
+    "spatialFilter",
     "directions",
     "catalog",
     "importExport",
@@ -122,6 +118,9 @@
     },
     {
       "name": "catalogBrowser"
+    },
+    {
+      "name": "spatialFilter"
     },
     {
       "name": "timeFilter"

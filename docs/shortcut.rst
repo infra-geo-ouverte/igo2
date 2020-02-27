@@ -2,6 +2,28 @@
 Raccourcis clavier
 ---------------------
 
+
+*******************************
+CTRL maintenu
+*******************************
+
+    .. line-block::
+        Lorsque vous maintenez la touche CTRL et que vous survolez la carte,
+        une recherche par coordonnée est activée. Les résultats de recherche
+        sont automatiquement chargés et le panneau de résultats de recherche
+        est ouvert.
+
+
+*******************************
+Majuscule (shift) maintenu
+*******************************
+
+    .. line-block::
+        Lorsque vous maintenez la touche majuscule (SHIFT) et que cliquez 
+        sur la carte, vous définirez une zone à l'intérieur de laquelle
+        vous pourrez aller zoomer une fois la zone définie.
+
+
 *******************************
 F2
 *******************************
@@ -10,15 +32,6 @@ F2
         Dans l'application, si un résumé de la position du curseur est disponible,
         F2 permet d'activer/désactiver le résumé de position.
 
-*******************************
-CTRL (maintenu)
-*******************************
-
-    .. line-block::
-        Lorsque vous maintenez la touche CTRL et que vous survolez la carte,
-        une recherche par coordonnée est activée. Les résultats de recherche
-        sont automatiquement chargés et le panneau de résultats de recherche
-        est ouvert.
 
 *******************************
 Z
@@ -31,7 +44,7 @@ Z
          
 
 *******************************
-Fl\èche gauche
+Flèche gauche
 *******************************
 
     .. line-block::
@@ -46,7 +59,7 @@ Fl\èche gauche
         
 
 *******************************
-Fl\èche droite
+Flèche droite
 *******************************
 
     .. line-block::

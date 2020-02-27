@@ -9,15 +9,20 @@ import { LanguageOptions } from '@igo2/core';
 import {
   SearchSourceOptions,
   CatalogServiceOptions,
-  Projection
+  Projection,
+  ImportExportServiceOptions
 } from '@igo2/geo';
 
 interface Environment {
   production: boolean;
   igo: {
+    app: {
+      forceCoordsNA: boolean;
+    };
     auth?: AuthOptions;
     catalog?: CatalogServiceOptions;
     context?: ContextServiceOptions;
+    importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
@@ -27,6 +32,9 @@ interface Environment {
 export const environment: Environment = {
   production: false,
   igo: {
+    app: {
+      forceCoordsNA: true
+    },
     auth: {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
@@ -42,7 +50,16 @@ export const environment: Environment = {
         {
           id: 'glace',
           title: 'Carte de glace',
-          url: '/apis/ws/radarsat.fcgi'
+          url: '/apis/ws/radarsat.fcgi',
+          showLegend: true
+        },
+        {
+          id: 'baselayerWMTS',
+          title: 'Fonds / Baselayers',
+          url: '/carto/wmts',
+          type: 'wmts',
+          matrixSet: 'EPSG_3857',
+          version: '1.3.0'
         }
       ]
     },
@@ -52,6 +69,9 @@ export const environment: Environment = {
     // },
     language: {
       prefix: './locale/'
+    },
+    importExport: {
+      url: '/apis/ogre'
     },
     searchSources: {
       nominatim: {
@@ -64,7 +84,7 @@ export const environment: Environment = {
         searchUrl: '/apis/icherche',
         order: 2,
         params: {
-          limit: '8'
+          limit: '5'
         }
       },
       coordinatesreverse: {

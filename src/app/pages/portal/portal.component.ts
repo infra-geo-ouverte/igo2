@@ -4,8 +4,7 @@ import {
   OnDestroy,
   ChangeDetectorRef,
   ViewChild,
-  ElementRef,
-  Input
+  ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
@@ -32,12 +31,10 @@ import {
   Tool
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
-import { DetailedContext, Context } from '@igo2/context';
+import { DetailedContext } from '@igo2/context';
 import {
   DataSourceService,
   Feature,
-  // FEATURE,
-  FeatureMotion,
   featureToSearchResult,
   GoogleLinks,
   IgoMap,
@@ -52,9 +49,7 @@ import {
   sourceCanSearch,
   sourceCanReverseSearch,
   generateWMSIdFromSourceOptions,
-  WMSDataSourceOptions,
-  createOverlayMarkerStyle,
-  moveToOlFeatures
+  WMSDataSourceOptions
 } from '@igo2/geo';
 
 import {
@@ -98,6 +93,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelOpened = true;
   public sidenavOpened = false;
   public searchBarTerm = '';
+  public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
   private addedLayers$$: Subscription[] = [];
   private selectFirst: boolean;
@@ -107,18 +103,14 @@ export class PortalComponent implements OnInit, OnDestroy {
   > = new BehaviorSubject(true);
   private selectFirstSearchResult$$: Subscription;
   public zoomAuto = false;
+  public forceCoordsNA = false;
 
   public contextMenuStore = new ActionStore([]);
   private contextMenuCoord: [number, number];
 
   private contextLoaded = false;
 
-  // public searchResult: SearchResult;
-  // public queryResults: SearchResult[];
-
   private context$$: Subscription;
-  private searchResults$$: Subscription;
-  private focusedSearchResult$$: Subscription;
 
   public igoSearchPointerSummaryEnabled = false;
 
@@ -265,6 +257,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private configService: ConfigService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
+    this.forceCoordsNA = this.configService.getConfig('forceCoordsNA');
   }
 
   ngOnInit() {
@@ -304,16 +297,18 @@ export class PortalComponent implements OnInit, OnDestroy {
       { id: '5', name: 'Name 5', description: 'Description 5' }
     ]);
 
-    this.queryStore.count$.subscribe((i) => {
+    this.queryStore.count$.subscribe(i => {
       this.map.viewController.padding[2] = i ? 280 : 0;
     });
     this.readQueryParams();
+
+    this.onSettingsChange$.subscribe(() => {
+      this.searchState.setSearchSettingsChange();
+    });
   }
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
-    this.searchResults$$.unsubscribe();
-    this.focusedSearchResult$$.unsubscribe();
   }
 
   /**
@@ -400,6 +395,10 @@ export class PortalComponent implements OnInit, OnDestroy {
       .concat(results);
     this.searchStore.load(newResults);
     this.selectFirstSearchResult$.next(this.selectFirstSearchResult$.value);
+  }
+
+  onSearchSettingsChange() {
+    this.onSettingsChange$.next(true);
   }
 
   private closeSidenav() {

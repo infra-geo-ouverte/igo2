@@ -486,8 +486,12 @@ WMS
 ===============
 
     .. line-block::
-        Une source de données pour les services de données au format `WMS <https://www.opengeospatial.org/standards/wms>`_ .
+        Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`_ .
         Les diverses version WMS sont acceptés.
+
+
+    .. note::
+        En cours de construction.        
 
 Exemples
 
@@ -503,25 +507,295 @@ Exemples
                 "queryable": true,
                 "queryFormat": "gml2",
                 "queryTitle": "desclocal"
-                }
+            }
 
 Propriétés
 
-    .. note::
-       En cours de construction.
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **type***
+         - String
+         - 
+         - wms
+         - wms
+       * - **url***
+         - String
+         - .. line-block::
+               L'URL du service WMS utilisé
+               SANS les paramètres d'appels
+               WMS. L'application se charge
+               de compléter les paramètres 
+               envoyés au serveur (KVP).
+         - 
+         - 
+       * - **params***
+         - String
+         - .. line-block::
+               Paramètres WMS qui seront fait 
+               aux serveurs WMS pour les divers
+               type d'appels WMS
+               (GetMap, GetLegendGraphics, ...).
+         - Référez-vous aux paramètres WMS ici-bas.
+         - 
+       * - refreshIntervalSec
+         - Number
+         - .. line-block::
+               Nombre de secondes entre chaque
+               raffraichissement automatique 
+               de la source de donnée. Ainis,
+               aucun déplacement de la carte 
+               n'est nécessaire pour raffraichir
+               la donnée.
+         - en secondes
+         - Null si non définit
+       * - queryable
+         - Boolean
+         - .. line-block::
+               Définit si la couche d'information
+               est interrogeable ou non
+         - true/false 
+         - true
+       * - queryFormat
+         - Boolean
+         - .. line-block::
+               Format d'interrogation de la couche.
+         - .. line-block::
+               - gml2 
+               (application/vnd.ogc.gml)
+               - gml3 
+               (application/vnd.ogc.gml/3.1.1)
+               - json 
+               (application/json)
+               - geojson 
+               (application/geojson)
+               - esrijson
+               (esrijson)
+               - html  
+               (text/html)
+               géométrie du clic auto générée
+               - htmlgml2 
+               (text/html + application/vnd.ogc.gml)
+               géométrie fournie par un second appel au format gml2
+         - gml2
+       * - queryTitle
+         - Boolean
+         - .. line-block::
+               Lors que la couche interrogée est en
+               gml2, gml3, json, geojson, esrijson, 
+               cette propriété correspond au nom du 
+               champ retourné  qui sera utilisé dans 
+               le résultat de clic sur la carte comme
+               titre. 
+
+               Si cette propriété est absente, le titre
+               de la couche est utilisé comme titre 
+               pour chacun des résultat, suivi d'une 
+               numérotation séquentielle.
+         - .. line-block::
+               Exemple 1 seul champ:
+                   - "queryTitle": "desclocal"
+                Exemple 1 seul champ avec texte:
+                   - "queryTitle": "Description ${desclocal}",               
+               Exemple plusieurs champs:
+                   - "queryTitle": "${nomroute} ${desclocal} ",
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Paramètre (params) WMS
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Paramètre
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **layers***
+         - String
+         - .. line-block::
+               Correspond au nom de la couche demandée.
+               Vous pouvez appeler plusieurs couches,
+               en séparant chacune de celles ci par un
+               virgule. 
+               IMP:
+                   - Pour les couches multiples, vous
+                     ne pourrez récupérer les propriétés 
+                     fournies par les GetCapabilities.
+                     Vous devez donc fournir les propriétés
+                     title, max/min Resolution (au besoin).
+                   - Si vous voulez appliquer des filters
+                     OGC à des couches multiples, elles
+                     doivent partager le même schéma de
+                     données (même champs). 
+         - .. line-block::
+               Exemple:
+               layers=nomDeLaCouche1
+               layers=nomDeLaCouche1,nomDeLaCouche2
+         - 
+       * - version
+         - String
+         - Version  de l'appel WMS
+         - .. line-block::
+               1.1.0
+               1.1.1
+               1.3.0
+         - 1.3.0
+       * - feature_count
+         - Number
+         - .. line-block::
+               Nombre de résultat retournés par le serveur
+               lors des appels GetFeatureInfo
+         - 
+         - 5
+       * - info_format
+         - String
+         - .. line-block::
+               Nom spécifique du format d'appel du GetFeatureInfo.
+               
+               Nécessaire si vos format d'appels diffèrent des 
+               nom standard gérés par IGO (décrit précédemment).
+         - 
+         - 
+       * - dpi
+         - Number
+         - .. line-block::
+               Nombre de point par pouces du résultat 
+               de l'appel du GetMap. Particulièrement 
+               utile dans IGO pour effectuer la conversion
+               entre la résolution et le nombre échelle.
+         - 
+         - 96
+       * - map_resolution
+         - Number
+         - .. line-block::
+               Nombre de point par pouces du résultat 
+               de l'appel du GetMap. Particulièrement 
+               utile dans IGO pour effectuer la conversion
+               entre la résolution et le nombre échelle.
+         - 
+         - 96
+       * - format_options
+         - Number
+         - .. line-block::
+               Nombre de point par pouces du résultat 
+               de l'appel du GetMap. Particulièrement 
+               utile dans IGO pour effectuer la conversion
+               entre la résolution et le nombre échelle.
+         - 
+         - dpi:96
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+    Pour les propriétés dpi, map_resolution et format_options, les 3 paramètres
+    sont envoyés au serveur en tout temps pour éviter les erreurs de conversion
+    d'échelle. La décision de faire l'appel des 3 paramètres en simultané s'est 
+    basé sur le fait que QGIS procède de la même manière. 
+
 
 Liens
 
-    - `WMS <https://www.opengeospatial.org/standards/wms>`_
+    - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts>`_
+    - `OGC WMS <https://www.opengeospatial.org/standards/wms>`_
 
 
 WMTS
 ===============
 
-    .. note::
-       Disponible actuellement mais la documentation est en cours de construction.
+    .. line-block::
+        Une source de données pour les services de données au format `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_ .
+
+Exemples
+
+        .. code:: json
+
+            "sourceOptions": {
+                "type": "wmts",
+                "url": "https://geoegl.msp.gouv.qc.ca/carto/wmts",
+                "format": "image/jpeg",
+                "matrixSet": "EPSG_3857",
+                "layer": "orthos"
+            }
 
 
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - format
+         - String
+         - .. line-block::
+               Format d'image demandées au serveur. Dépends des capacités du serveur (wmts Getcapabilities)
+         - Dépends des capacités du serveur
+         - image/jpeg
+       * - **layer***
+         - String
+         - Nom de la couche demandée
+         - 
+         - 
+       * - **matrixSet***
+         - String
+         - Le nom du matrix set demandé au serveur
+         - 
+         - 
+       * - projection
+         - String
+         - La projection de l'appel de tuile
+         - EPSG:3857
+         - La projection de la carte (vue carto)
+       * - style
+         - String
+         - .. line-block::
+               Le nom du style demandé tel que présenté dans le GetCapabilities du service
+         - 
+         - 
+       * - **url***
+         - String
+         - .. line-block::
+               L'URL du service tuilées
+         - 
+         - 
+       * - version
+         - String
+         - .. line-block::
+               La version WMTS du service demandée
+         - 1.0.0
+         - 1.0.0
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_
 
 
 ************************************
@@ -539,6 +813,7 @@ Source (base commune)
         Elles seront présentées dans les sections dédiées aux sources.
 
         Les sources disponible sont:
+            - `Cadastre`_
             - `Coordonnées`_
             - `iCherche`_ (Québec)
             - `iCherche Reverse`_ - par coordonnées (Québec)
@@ -644,6 +919,41 @@ Liens
 
     - `igo2-lib/packages/geo/src/lib/search/shared/sources/source.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/source.interfaces.ts>`_
 
+
+Cadastre
+===============
+
+    .. line-block::
+        Le service de recherches de lots rénovés du Québec. 
+
+        Le résultat de la recherche est la géométrie du lot rénové.
+    
+Exemples
+
+    .. code:: json
+
+        "cadastre": {
+            "searchUrl": 'https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?'
+        }
+
+Propriétés
+
+    Seulement les propriétés spécifique à ce service sont présentées.
+
+    .. list-table::
+       :widths: 10 80
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Valeur défaut
+       * - searchUrl
+         - .. line-block::
+               URL du service.
+         - https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?
+             
+    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
 
 Coordonnées
 ===============
