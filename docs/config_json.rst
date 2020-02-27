@@ -241,8 +241,8 @@ Catalog
 
         Note sur le comportement de l'objet :ref:`Composite Catalog <igocompositecatalogObject>`:
             - la propriété groupImpose met toutes les couches des sous-groupes enfants sur le même niveau.
-            - le titre des couches de même niveau (à la racine ou dans un groupe) est unique pour une même source.
-            - un tag est ajouté au nom des couches de même titre et de source différente.
+            - le titre des couches de même niveau (racine ou groupe) est unique pour une même source.
+            - un tag est ajouté sur les titres identique de couches de même niveau et de source différente.
 
 Exemples
 

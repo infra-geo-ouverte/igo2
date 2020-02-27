@@ -164,7 +164,6 @@ Propriétés
                - `WFS`_
                - `WMS`_
                - `WMTS`_
-               - `ArcGis`_
          - .. line-block::
                Divers sources de 
                données sont supportées.
