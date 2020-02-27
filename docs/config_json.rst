@@ -239,6 +239,11 @@ Catalog
       
         Chaque couche ajoutée possède un identifiant unique généré à partir du "layer name" et de l'url du service source. Se référer à :`igo2-lib/packages/geo/src/lib/datasource/utils/id-generator.ts#L15 <https://github.com/infra-geo-ouverte/igo2-lib/blob/6f37684adc809c82b185556719daac4bace0eea1/packages/geo/src/lib/datasource/utils/id-generator.ts#L15>`_
 
+        Note sur le comportement de l'objet :ref:`Composite Catalog <igocompositecatalogObject>`:
+            - la propriété groupImpose met toutes les couches des sous-groupes enfants sur le même niveau.
+            - le titre des couches de même niveau (à la racine ou dans un groupe) est unique pour une même source.
+            - un tag est ajouté au nom des couches de même titre et de source différente.
+
 Exemples
 
         .. code:: json
@@ -268,6 +273,33 @@ Exemples
                         "title": "MTQ (filtered by regex)",
                         "url": "/swtq",
                         "regFilters": ["zpegt"]
+                  },
+                  {
+                        id: 'group_impose',
+                        title: '(composite catalog) with group imposed',
+                        composite: [
+                              {
+                              id: 'tq_swtq',
+                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
+                              regFilters: ['zpegt'],
+                              groupImpose: {id: 'zpegt', title: 'zpegt'}
+                              },
+                              {
+                              id: 'Gououvert',
+                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
+                              regFilters: ['zpegt'],
+                              groupImpose: {id: 'zpegt', title: 'zpegt'}
+                              },
+                              {
+                              id: 'rn_wmts',
+                              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
+                              type: 'wmts',
+                              crossOrigin: true,
+                              matrixSet: 'EPSG_3857',
+                              version: '1.0.0',
+                              groupImpose: {id: 'cartetopo', title: 'Carte topo échelle 1/20 000'}
+                              }
+                        ]
                   }
                   ]
             }
@@ -332,12 +364,15 @@ Propriétés - Objet Catalog
        * - groupImpose
          - id*: String, title*: String
          - .. line-block::
-               Identifiant unique permettant de différencier
+               N.B: Propriété disponible sur un objet de type CompositeCatalog 
+               Permet d'imposer l'utilisation d'un groupe à l'ensemble
+               des couches appellées du catalogue.
+               - id: Identifiant unique permettant de différencier
                les groupes entre eux.
-               Titre pour le groupe qui sera utilisé
+               - title: Titre pour le groupe qui sera utilisé
                dans l'outil Catalog.
          - 
-         - uuid()
+         - 
        * - matrixSet
          - String
          - .. line-block::
@@ -394,6 +429,13 @@ Propriétés - Objet Catalog
                Afin de définir si l'entête de l'appel faite
                au serveur sera anonyme. Permet entre autres,
                d'éviter les problématiques de CORS 
+         - true false
+         - false
+       * - showLegend
+         - Boolean
+         - .. line-block::
+               Permet d'affiché la légende sur le click du titre
+               des couches. 
          - true false
          - false
        * - sortDirection
@@ -457,6 +499,8 @@ Propriétés - Objet Catalog
          - 1.0.0 (WMTS)
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+.. _igocompositecatalogObject:
 
 Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
 ===============
