@@ -257,7 +257,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private configService: ConfigService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
-    this.forceCoordsNA = this.configService.getConfig('forceCoordsNA');
+    this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
   }
 
   ngOnInit() {
