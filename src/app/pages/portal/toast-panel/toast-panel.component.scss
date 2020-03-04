@@ -67,3 +67,7 @@ igo-feature-details ::ng-deep iframe {
 igo-panel ::ng-deep igo-list {
   max-height: 230px;
 }
+
+igo-actionbar {
+  overflow: hidden;
+}
