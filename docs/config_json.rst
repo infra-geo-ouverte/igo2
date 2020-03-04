@@ -58,8 +58,8 @@ Résumé
                Objet permettant d'activer le serveur
                d'authentification.
          -
-       * - catalog
-         - `Catalog`_ []
+       * - :ref:`catalog <igocatalogConfig>`
+         - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
                Doit être présente si l'outil de catalogue.
                Permet de gérer les sources WMS et WMTS
@@ -99,7 +99,7 @@ Résumé
                l'application.
          - Tous
        * - projections
-         - `Projection`_ []
+         - :ref:`Projection <igoprojections>` []
          - .. line-block::
                Liste de projections non enregistrées
                par défault par OpenLayers.
@@ -208,7 +208,7 @@ Liens
         - `igo2-lib/packages/auth/src/lib/shared/auth.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/2f8f274146b0fff4cc82d09f598bff838c6caaab/packages/auth/src/lib/shared/auth.interface.ts>`_
 
 
-.. _igocatalog:
+.. _igocatalogConfig:
 
 ***************
 Catalog
@@ -221,7 +221,8 @@ Catalog
             - Service WMS
             - Service WMTS
             - baselayers
-
+            - composite
+      
         Les couches d'informations contenues dans ces services sont récupérées grâce au couches publiées dans le GetCapabilities du service.
 
         Dans la présente version
@@ -237,6 +238,11 @@ Catalog
                             - Il s'agit de la position du "layer" dans la table des matières. Ici la position 13.
 
         Chaque couche ajoutée possède un identifiant unique généré à partir du "layer name" et de l'url du service source. Se référer à :`igo2-lib/packages/geo/src/lib/datasource/utils/id-generator.ts#L15 <https://github.com/infra-geo-ouverte/igo2-lib/blob/6f37684adc809c82b185556719daac4bace0eea1/packages/geo/src/lib/datasource/utils/id-generator.ts#L15>`_
+
+        Note sur le comportement de l'objet :ref:`Composite Catalog <igocompositecatalogObject>`:
+            - la propriété groupImpose met toutes les couches des sous-groupes enfants sur le même niveau.
+            - le titre des couches de même niveau (racine ou groupe) est unique pour une même source.
+            - un tag est ajouté sur les titres identique de couches de même niveau et de source différente.
 
 Exemples
 
@@ -265,11 +271,65 @@ Exemples
                         "title": "MTQ (filtered by regex)",
                         "url": "/swtq",
                         "regFilters": ["zpegt"]
+                  },
+                  {
+                        id: 'group_impose',
+                        title: '(composite catalog) with group imposed',
+                        composite: [
+                              {
+                              id: 'tq_swtq',
+                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
+                              regFilters: ['zpegt'],
+                              groupImpose: {id: 'zpegt', title: 'zpegt'}
+                              },
+                              {
+                              id: 'Gououvert',
+                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
+                              regFilters: ['zpegt'],
+                              groupImpose: {id: 'zpegt', title: 'zpegt'}
+                              },
+                              {
+                              id: 'rn_wmts',
+                              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
+                              type: 'wmts',
+                              crossOrigin: true,
+                              matrixSet: 'EPSG_3857',
+                              version: '1.0.0',
+                              groupImpose: {id: 'cartetopo', title: 'Carte topo échelle 1/20 000'}
+                              }
+                        ]
                   }
                   ]
             }
 
 Propriétés
+===============
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - sources
+         - :ref:`Catalog <igocatalogObject>` []
+         - .. line-block::
+               Liste des catalogues qui sera présenté à l'usager.
+         - 
+         - []
+
+.. _igocatalogObject:
+
+Propriétés - Objet Catalog
+===============
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -299,6 +359,18 @@ Propriétés
                les catalogues entre eux.
          -
          - uuid()
+       * - groupImpose
+         - id*: String, title*: String
+         - .. line-block::
+               N.B: Propriété disponible sur un objet de type CompositeCatalog 
+               Permet d'imposer l'utilisation d'un groupe à l'ensemble
+               des couches appellées du catalogue.
+               - id: Identifiant unique permettant de différencier
+               les groupes entre eux.
+               - title: Titre pour le groupe qui sera utilisé
+               dans l'outil Catalog.
+         - 
+         - 
        * - matrixSet
          - String
          - .. line-block::
@@ -357,6 +429,13 @@ Propriétés
                d'éviter les problématiques de CORS
          - true false
          - false
+       * - showLegend
+         - Boolean
+         - .. line-block::
+               Permet d'affiché la légende sur le click du titre
+               des couches. 
+         - true false
+         - false
        * - sortDirection
          - String
          - .. line-block::
@@ -394,7 +473,7 @@ Propriétés
          - String
          - .. line-block::
                Type de service à appeler
-         - baselayers wmts wms
+         - baselayers composite wmts wms
          - wms
        * - **url***
          - String
@@ -418,6 +497,47 @@ Propriétés
          - 1.0.0 (WMTS)
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+.. _igocompositecatalogObject:
+
+Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
+===============
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **id***
+         - String
+         - .. line-block::
+               Identifiant unique permettant de différencier
+               les catalogues entre eux.
+         - 
+         - 
+       * - **title***
+         - String
+         - .. line-block::
+               Titre pour la source du catalogue qui sera utilisé
+               dans l'outil Catalog.
+         - 
+         - 
+       * - composite
+         - :ref:`Catalog <igocatalogObject>` []
+         - .. line-block::
+               Liste des catalogues utilisés dans un catalogue 
+               composé.
+         - 
+         - 
 
 Liens
 
@@ -592,8 +712,10 @@ Liens
         - `locale démo https://infra-geo-ouverte.github.io/igo2/  <https://github.com/infra-geo-ouverte/igo2/tree/gh-pages/locale>`_
 
 
+.. _igoprojections:
+
 ***************
-Projection
+Projections
 ***************
 
     .. line-block::
@@ -613,7 +735,8 @@ Exemples
                   }
             ]
 
-Propriétés
+Propriétés - Objet Projection
+===============
 
     .. list-table::
        :widths: 10 10 30
