@@ -306,7 +306,15 @@ export class ToastPanelComponent implements OnInit {
     );
   }
 
-  @HostListener('document:keydown.ArrowLeft')
+  handleKeyboardEvent(event) {
+    event.preventDefault();
+    if (event.keyCode === 37) {
+      this.previousResult();
+    } else if (event.keyCode === 39) {
+      this.nextResult();
+    }
+  }
+
   previousResult() {
     if (!this.resultSelected$.value) {
       return;
@@ -318,7 +326,6 @@ export class ToastPanelComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.ArrowRight')
   nextResult() {
     if (!this.resultSelected$.value) {
       return;
