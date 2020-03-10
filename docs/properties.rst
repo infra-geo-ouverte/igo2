@@ -951,12 +951,12 @@ Exemples
     .. code:: json
 
         "cadastre": {
-            "searchUrl": 'https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?'
+            "searchUrl": "https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?"
         }
 
 Propriétés
 
-    Seulement les propriétés spécifique à ce service sont présentées.
+    Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. list-table::
        :widths: 10 80
@@ -1049,9 +1049,9 @@ Exemples
             "icherche": {
                 "title":"ICherche",
                 "showInPointerSummary": true,
-                "searchUrl": 'https://geoegl.msp.gouv.qc.ca/apis/icherche',
+                "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche",
                 "params": {
-                    "limit": '8'
+                    "limit": "8"
                  }
             }
 
@@ -1106,7 +1106,7 @@ Exemples
         .. code:: json
 
             "icherchereverse": {
-                "searchUrl": 'https://geoegl.msp.gouv.qc.ca/apis/territoires',
+                "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/territoires",
                 "params": {
                     "bufffer": 12
                  }
@@ -1160,7 +1160,7 @@ Exemples
         .. code:: json
 
             "ilayer": {
-                "searchUrl": 'https://geoegl.msp.gouv.qc.ca/apis/layers/search',
+                "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/layers/search",
                 "params": {
                     "limit": 15
                  }
@@ -1168,7 +1168,7 @@ Exemples
 
 Propriétés
 
-    Seulement les propriétés spécifique à ce service sont présentées.
+    Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. list-table::
        :widths: 10 80
@@ -1218,7 +1218,7 @@ Exemples
         .. code:: json
 
             "ilayer": {
-                "searchUrl": 'https://nominatim.openstreetmap.org/search',
+                "searchUrl": "https://nominatim.openstreetmap.org/search",
                 "params": {
                     "limit": 15
                  }
@@ -1226,7 +1226,7 @@ Exemples
 
 Propriétés
 
-    Seulement les propriétés spécifique à ce service sont présentées.
+    Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. list-table::
        :widths: 10 80
@@ -1457,7 +1457,7 @@ Outils (tools)
 *******************************
 
     .. line-block::
-        Les outils existant:
+        Les outils existants:
             - `about`_
             - `catalog`_
             - `catalogBrowser`_
@@ -1477,8 +1477,9 @@ Outils (tools)
 
 .. _igoabout:
 
+******
 about
-===============
+******
 
     .. line-block::
         Outil générique offrant la possibilitée d'informer les usagers grâce à un outil d'aide.
@@ -1551,8 +1552,9 @@ Liens
 
 .. _igocatalogtool:
 
+*******
 catalog
-===============
+*******
 
     .. line-block::
         Outil permettant de lister les catalogues disponibles configurés dans l'application:
@@ -1612,8 +1614,9 @@ Liens
 
 .. _igocatalogBrowser:
 
+**************
 catalogBrowser
-===============
+**************
 
     .. line-block::
         Outil permettant de lister les couches d'information du catalogue sélectionné par l'usager.
@@ -1691,8 +1694,9 @@ Liens
 
 .. _igocontextManager:
 
+**************
 contextManager
-===============
+**************
 
     .. line-block::
         Outil permettant de lister/gérer plusieurs contexte à l'intérieur d'une même application. 
@@ -1758,8 +1762,9 @@ Liens
 
 .. _igodirections:
 
+************
 directions
-===============
+************
 
     .. line-block::
         Outil permettant de configurer l'outil d'itinéraire, basé sur la configuration dans l'application:
@@ -1820,8 +1825,9 @@ Liens
 
 .. _igoogcFilter:
 
+**********
 OgcFilter
-===============
+**********
 
 
     .. line-block::
@@ -1997,8 +2003,9 @@ Exemples d'un layer filtré OGC dans un contexte
 
 .. _igotimeFilter:
 
+**********
 timeFilter
-===============
+**********
 
     .. line-block::
         Outil permettant de configurer un filtre temporel sur une couche d'un service ayant une propriété temporelle (WMS-T)
@@ -2094,8 +2101,9 @@ Propriétés de l'objet timeFilter
 
 .. _igospatialFilter:
 
+**************
 spatialFilter
-===============
+**************
 
     .. line-block::
         Outil permetant de faire une recherche de facon spatiale selon un dessin tracé par utilisateur ou 
@@ -2112,8 +2120,9 @@ Exemples
 
 .. _igoimportExport:
 
+*************
 importExport
-===============
+*************
     .. line-block::
         Outil permetant d'importer et exporter des couches.
         Certaines restrictions s'appliquent: 
@@ -2135,8 +2144,9 @@ Exemples
 
 .. _igomapDetails:
 
+***********
 mapDetails
-===============
+***********
 
   .. line-block::
         Outil présentant la liste de couche à l'intérieur des contextes
@@ -2201,14 +2211,16 @@ Propriétés de l'objet options de mapDetails
 
 .. _igomaptool:
 
+***
 map
-===============
+***
 
 
 .. _igomeasurer:
 
+********
 measurer
-===============
+********
 
     .. line-block::
         Outil permetant de faire des mesure sur la carte
@@ -2225,8 +2237,9 @@ Exemples
 
 .. _igoprint:
 
+*****
 print
-===============
+*****
 
     .. line-block::
         Outil permetant d'imprimer la carte affichée à l'écran
@@ -2242,8 +2255,9 @@ Exemples
 
 .. _igosearchResults:
 
+**************
 searchResults
-===============
+**************
 
     .. line-block::
         Outil présentant les résultats de recherche.
@@ -2287,8 +2301,9 @@ Propriétés de l'objet options de searchResults
 
 .. _igoshareMap:
 
+*********
 shareMap
-===============
+*********
 
     .. line-block::
         Outil permetant de partager à l'aide d'un lien la carte à l'écran. 

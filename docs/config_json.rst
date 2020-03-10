@@ -297,7 +297,7 @@ Exemples
                               },
                         "queryHtmlTarget": "iframe",
                         "count": 365
-                        "tooltipType" : "abstract"
+                        "tooltipType": "abstract"
                   },
                   {
                         "id": "regexmtq",
@@ -667,7 +667,7 @@ Exemples
             ]
 
 Liens
-        - `https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json`_
+        - `Exemple de mapOverlay <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json>`_
 
 
 ***************
@@ -684,10 +684,10 @@ Exemples
 
             projections: [
                 {
-                    "alias" : "Québec Lambert"
-                    "code" : "EPSG:32198",
-                    "def" : "+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs",
-                    "extent" : [-886251.0296, 180252.9126, 897177.3418, 2106143.8139]
+                    "alias": "Québec Lambert"
+                    "code": "EPSG:32198",
+                    "def": "+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs",
+                    "extent": [-886251.0296, 180252.9126, 897177.3418, 2106143.8139]
                   }
             ]
 
@@ -757,7 +757,7 @@ Exemples
             "routingSources": {
                 "osrm": {
                     "enabled": true
-                    "url" : "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/"
+                    "url": "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/"
                 }
 
 Propriétés
