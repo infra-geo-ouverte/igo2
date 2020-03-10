@@ -1821,12 +1821,189 @@ Liens
 ogcFilter
 ===============
 
+
+    .. line-block::
+        Outil permet la possibilité de configurer des boutons poussoir sur certaines couches.
+         NB: L'activation de l'outil ce fait ici, mais la configuration de chaque filtre doit ce faire à l'intérieur de la couche dans les contextes. 
+         layer -> sourceOptions -> ogcFilters
+
+Exemples d'un layer filtré OGC dans un contexte
+
+        .. code:: json
+
+            {
+              "layers": [
+              {
+                "id":"pee_ori_couleur",
+                "title": "peup avec filtre bouton",
+
+                "sourceOptions": {
+                  
+                    "url": "@host/ws/mffpecofor.fcgi",
+                    "params": {
+                        "layers": "ori_pee_ori_prov",
+                        "version": "1.3.0"
+                    },
+                    "type": "wms",
+                    "optionsFromCapabilities": true,
+          
+                    "ogcFilters": {
+                      
+                      "enabled": true,
+                      "editable": true,
+                      "allowedOperatorsType": "*",
+
+
+                      "pushButtons": {
+                          "groups": [
+                            {
+                                "title": "filtre foret",
+                                "name":"1",
+                                "ids": ["type_couv", "densite"]
+                            },
+                      
+                            {
+                                "title": "filtre metadonnée",
+                                "name":"2",
+                                "ids": ["no_program"]
+                            }
+                          ],
+                          "bundles" : [
+                            {
+                                "id": "type_couv",
+                                "logical": "Or",
+                                "buttons": [
+                                    {
+                                        "title": "type couv = R",
+                                        "enabled": false,
+                                        "color": "255,0,0",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                            "operator": "PropertyIsEqualTo",
+                                            "propertyName": "type_couv",
+                                            "expression": "R"
+                                        }
+                                    },
+                                    {
+                                        "title": "type couv = F",
+                                        "enabled": false,
+                                        "color": "255,100,255",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                            "operator": "PropertyIsEqualTo",
+                                            "propertyName": "type_couv",
+                                            "expression": "F"
+                                        }
+                                    }
+                                ]
+                            },
+                          
+                            {
+                                "id": "densite",
+                                "logical": "Or",
+                                "vertical":false,
+                                "buttons": [
+                                    {
+                                        "title": "densite = A",
+                                        "enabled": false,
+                                        "color": "255,0,0",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                            "operator": "PropertyIsEqualTo",
+                                            "propertyName": "cl_dens",
+                                            "expression": "A"
+                                        }
+                                    },
+                                    {
+                                        "title": "densite = B",
+                                        "enabled": false,
+                                        "color": "255,100,255",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                            "operator": "PropertyIsEqualTo",
+                                            "propertyName": "cl_dens",
+                                            "expression": "B"
+                                        }
+                                    },
+                                    {
+                                        "title": "densite = A & B",
+                                        "enabled": false,
+                                        "color": "255,100,255",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                            "logical":"Or",
+                                            "filters":[
+                                                {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "A"},
+                                                {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "B"}
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "title": "pas A",
+                                        "enabled": false,
+                                        "color": "255,100,255",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                            "operator": "PropertyIsNotEqualTo",
+                                            "propertyName": "cl_dens",
+                                            "expression": "A"
+                                            }
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "no_program",
+                                "logical": "Or",
+                                "vertical":false,
+                                "buttons": [
+                                    {
+                                    "title": "prg no= 4",
+                                    "enabled": false,
+                                    "color": "255,0,0",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                        "operator": "PropertyIsEqualTo",
+                                        "propertyName": "no_prg",
+                                        "expression": "4"
+                                        }
+                                    },
+                                    {
+                                    "title": "prg no=5",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                        "operator": "PropertyIsEqualTo",
+                                        "propertyName": "no_prg",
+                                        "expression": "5"
+                                        }
+                                    }
+                                ]
+                            }    
+                        ]
+                    },
+          
+                    "sourceFields": [
+                      {"name": "type_couv", "alias": "type couv", "values": ["R", "F"]},
+                      {"name": "no_prg", "alias": "No inventaire", "values": ["3", "4", "5"]}
+                    ]
+                  }
+                  }
+              }
+            }
+
+
 .. _igotimeFilter:
 
 timeFilter
 ===============
 
 .. _igoimportExport:
+
+spatialFilter
+===============
+
+.. _igospatialFilter:
 
 importExport
 ===============
