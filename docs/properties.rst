@@ -87,7 +87,8 @@ Propriétés
                Particulièrement
                utile pour batir le
                lien pour le partage
-               de cartes.
+               de cartes. 
+               Attention si vous définissez un id, la couche ajoutée par le catalogue ou par la recherche sera considérée par l'app. comme une couche différente, vous aurez donc 2 fois la même couche.
          -                
          - uuid
        * - legendOptions
@@ -129,7 +130,14 @@ Propriétés
                cette valeur est peut
                être récupérée. 
          - 
-         -     
+         -    
+       * - metadata
+         - Object{}
+         - .. line-block::
+               Définir la source pour la metadonnées. Lien pour le bouton i de la couche -> 'i'. 
+               Externe: true ira chercher la metadonnée inscrite dans la configuration du service.
+         - {"extern": true}
+         -      
        * - opacity
          - Number
          - .. line-block::
@@ -175,7 +183,7 @@ Propriétés
        * - **title***
          - String
          - .. line-block::
-               Titre de la couches
+               Titre de la couche
                tel qu'affiché dans 
                la table des matières
                et dans les résultats 
@@ -185,8 +193,8 @@ Propriétés
                **WMTS** récupérant 
                certaines propriétés
                du service, cette 
-               valeur est peut être
-               récupérée.
+               valeur peut y être
+               récupérée et n'est plus obligatoire a ce moment.
          - 
          - 
        * - visible
@@ -247,30 +255,34 @@ Exemples
                 "crossOrigin": "anonymous"
             }
 
+---------------------
+Types source options:
+---------------------
 
+======
 ArcGis
-===============
+======
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-
+===========
 Tile ArcGis
-===============
+===========
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-
+=====
 Carto
-===============
+=====
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-
+====
 OSM
-===============
+====
 
     .. line-block::
         Le fond standard OpenStreetMap. 
@@ -313,16 +325,16 @@ Liens
 
     - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
 
-
+=======
 Cluster
-===============
+=======
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-
+=========
 TMS (xyz)
-===============
+=========
 
     .. line-block::
         Une source de données pour les services de données tuilées de type XYZ où le X et le Y représentent la position de la tuile appelée et le Z, le niveau de zoom (résolution) de la tuile.
@@ -379,9 +391,9 @@ Liens
 
     - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
 
-
+============
 Vector Tiles
-==================
+============
 
     .. line-block::
         Une source de données pour les services de données au format Vector tiles. Plus spécifiquement, 
@@ -441,23 +453,23 @@ Liens
     - `Mapserver 7.2 + <https://mapserver.gis.umn.edu/it/development/rfc/ms-rfc-119.html>`_
     - `Geoserver <https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html>`_
 
-
+=======
 Vecteur
-===============
+=======
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-
+=========
 Websocket
-===============
+=========
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-
+====
 WFS
-===============
+====
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
@@ -480,9 +492,9 @@ Exemples
                   }
             }
 
-
+===
 WMS
-===============
+===
 
     .. line-block::
         Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`_ .
@@ -505,7 +517,8 @@ Exemples
                 },
                 "queryable": true,
                 "queryFormat": "gml2",
-                "queryTitle": "desclocal"
+                "queryTitle": "desclocal",
+                "optionsFromCapabilities": true
             }
 
 Propriétés
@@ -539,6 +552,12 @@ Propriétés
                envoyés au serveur (KVP).
          - 
          - 
+       * - **optionsFromCapabilities**
+         - Boolean
+         - .. line-block::
+               Paramêtre pour récupérer des informations du service.
+         - true/false
+         - false
        * - **params***
          - String
          - .. line-block::
@@ -716,9 +735,9 @@ Liens
     - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts>`_
     - `OGC WMS <https://www.opengeospatial.org/standards/wms>`_
 
-
+====
 WMTS
-===============
+====
 
     .. line-block::
         Une source de données pour les services de données au format `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_ .
@@ -1020,7 +1039,7 @@ iCherche
             - MRC
             - Régions administratives
             - Lieux nommés 
-        Le contenu accessible par le service de recherche est limité au territoire quuébécois. 
+        Le contenu accessible par le service de recherche est limité au territoire québécois. 
         ** Le code de iCherche peut être utilisé comme exemple afin d'adapter votre propre service de recherche textuel.
             
 Exemples
@@ -1028,6 +1047,8 @@ Exemples
         .. code:: json
 
             "icherche": {
+                "title":"ICherche",
+                "showInPointerSummary": true,
                 "searchUrl": 'https://geoegl.msp.gouv.qc.ca/apis/icherche',
                 "params": {
                     "limit": '8'
@@ -1051,6 +1072,8 @@ Propriétés
                https://geoegl.msp.gouv.qc.ca/apis/icherche
        * - settings
          - `Ligne 79  <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L79>`_
+       * - showInPointerSummary
+         - true pour activer le bouton qui affichera les résultats de recherche au dessus du curseur
        * - title
          - iCherche
 
@@ -1442,6 +1465,7 @@ Outils (tools)
             - `directions`_
             - `ogcFilter`_
             - `timeFilter`_
+            - `spatialFilter`_
             - `importExport`_
             - `mapDetails`_
             - `map`_
@@ -1530,7 +1554,7 @@ catalog
 
     .. line-block::
         Outil permettant de lister les catalogues disponibles configurés dans l'application:
-            - :ref:`Configuration des catalogue <igocatalog>`. 
+            - :ref:`Configuration des catalogues <igocatalog>`. 
 
 Exemples
 
@@ -1581,7 +1605,7 @@ Propriétés
 Liens
 
     - `catalog-library-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-library-tool>`_
-    - :ref:`Configuration des catalogue <igocatalog>`. 
+    - :ref:`Configuration des catalogues <igocatalog>`. 
 
 
 .. _igocatalogBrowser:

@@ -909,6 +909,7 @@ il est possibe de déclarer dans le **base.json** les éléments communs
 aux 3 contextes. La maintenance de l'application
 en sera facilitée.
 
+Le contexte _default, sera le contexte affiché à l'arrivée dans l'application.
 
 Important : Notez que le fichier nom_du_contexte.json à préséance sur le fichier _base.json.
 
@@ -957,6 +958,11 @@ Résumé fichier de contexte
                Définition de la carte
                lors de l'ouverture 
                initial du contexte
+         - 
+       * - **message**
+         - `Message`_
+         - .. line-block::
+               Définition d'un message a l'ouverture du contexte.
          - 
        * - `toolbar`_
          - String[]
@@ -1107,6 +1113,26 @@ Liens
         - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`_
         - :ref:`Map IGO2 <igomap>`.
 
+
+***************
+Message
+***************
+
+    .. line-block::
+        Message affiché à l'ouverture du contexte
+
+Exemples
+
+        .. code:: json
+
+            "message": {
+                  "title": "Avertissement",
+                  "html": " "<head><meta charset='utf-8'><style> .page{padding-left: 0px;margin-right:-45px;} </style> </head>  <body> <div class='page' style='color: white;'> Bienvenue sur <b>IGO</b></div> </body>",
+                  "type": "info",
+                  "options": {
+                        "timeOut": 30000
+                  }
+            },
 
 
 ***************
