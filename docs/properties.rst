@@ -1469,8 +1469,10 @@ Outils (tools)
             - `importExport`_
             - `mapDetails`_
             - `map`_
+            - `measurer`_
             - `print`_
             - `searchResults`_
+            - `shareMap`_
 
 
 .. _igoabout:
@@ -1818,13 +1820,13 @@ Liens
 
 .. _igoogcFilter:
 
-ogcFilter
+OgcFilter
 ===============
 
 
     .. line-block::
-        Outil permet la possibilité de configurer des boutons poussoir sur certaines couches.
-         NB: L'activation de l'outil ce fait ici, mais la configuration de chaque filtre doit ce faire à l'intérieur de la couche dans les contextes. 
+        Outil permetant de configurer des boutons poussoirs pour filtrer une couche wms.
+         NB: L'activation de l'outil ce fait ici via les outils, mais la configuration de chaque filtre doit ce faire à l'intérieur de la couche dans les contextes. 
          layer -> sourceOptions -> ogcFilters
 
 Exemples d'un layer filtré OGC dans un contexte
@@ -1998,32 +2000,308 @@ Exemples d'un layer filtré OGC dans un contexte
 timeFilter
 ===============
 
-.. _igoimportExport:
+    .. line-block::
+        Outil permettant de configurer un filtre temporel sur une couche d'un service ayant une propriété temporelle (WMS-T)
+        NB: L'activation de l'outil ce fait via ici via les outils, mais la configuration de chaque filtre doit ce faire à l'intérieur de la couche dans les contextes. 
+        layer -> sourceOptions -> timeFilter
+
+
+Exemples
+
+        .. code:: json
+
+            {
+                "layers": [
+                    {
+                      "title": "Feux de forêt ↺",
+                      "sourceOptions": {
+                          "queryFormat": "htmlgml2",
+                          "queryHtmlTarget": "iframe",
+                          "url": "@host/ws/mffpecofor.fcgi",
+                          "params": {
+                              "layers": "ca_feux",
+                              "version": "1.3.0"
+                          },
+                          "type": "wms",
+                          "optionsFromCapabilities": true,
+                          "timeFilterable": true,
+                          "timeFilter": {
+                              "min": "1890",
+                              "max": "2019",
+                              "style": "calendar",
+                              "range": true,
+                              "step": 63072000000,
+                              "type": "year"
+                          }
+                      }
+                  }
+            }
+
+Propriétés de l'objet timeFilter
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **min**
+         - String
+         - Periode de temps minimum. 
+         - En fonction du type, peut être une année, une date ou une heure.
+         - 
+       * - **max**
+         - String
+         - Periode de temps maximum. 
+         - En fonction du type, peut être une année, une date ou une heure.
+         - 
+       * - **range**
+         - Boolean
+         - Intervalle a saisir par utilisateur.
+         - true/false
+         - 
+       * - **step**
+         - Number
+         - Le temps de l'intervalle en miliseconde.
+         - Ex: 63072000000 pour un an.
+         - 
+       * - **style**
+         - String
+         - Le style du calendrier.
+         - calendar, slider
+         - slider
+       * - **type**
+         - String
+         - Le type temporel de calendrier. En année, jour, heure, etc.
+         - year, date
+         - 
+       * - **timeInterval**
+         - Number
+         - Pour configuration en 'slider', le temps d'attente avant de passer au suivant, en miliseconde.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+
+.. _igospatialFilter:
 
 spatialFilter
 ===============
 
-.. _igospatialFilter:
+    .. line-block::
+        Outil permetant de faire une recherche de facon spatiale selon un dessin tracé par utilisateur ou 
+        certains contours définies comme les municipalité, mrc, etc. La recherche se fait en fonction de certains api de recherche comme Terrapi
+        voir: <https://geoegl.msp.gouv.qc.ca/apis/terrapi/docs>
+
+Exemples
+
+        .. code:: json
+
+          {
+            "name": "spatialFilter"
+          }
+
+.. _igoimportExport:
 
 importExport
 ===============
+    .. line-block::
+        Outil permetant d'importer et exporter des couches.
+        Certaines restrictions s'appliquent: 
+        Import:
+          - La projection doit être en 4326
+          - La taille du fichier doit être maximum 30Mo
+          - Les shapeFiles doivent être dans un .zip
+
+        Export: Seulement les couches en WFS peuvent être exportées.
+
+
+Exemples
+
+        .. code:: json
+
+          {
+            "name": "importExport"
+          }
 
 .. _igomapDetails:
 
 mapDetails
 ===============
 
+  .. line-block::
+        Outil présentant la liste de couche à l'intérieur des contextes
+
+Exemples
+
+        .. code:: json
+
+          {
+              "name": "mapDetails",
+              "title":"Couches",
+              "options": {
+                  "toggleLegendOnVisibilityChange": true,
+                  "expandLegendOfVisibleLayers":true,
+                  "layerListControls": {
+                      "showToolbar": "always",
+                      "excludeBaseLayers": false
+                    }
+              } 
+          }
+
+
+Propriétés de l'objet options de mapDetails
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **toggleLegendOnVisibilityChange**
+         - Boolean
+         - Si la légende s'ouvrira/fermera automatiquement lors de l'activation/désactivation de la couche.
+         - true/false
+         - false
+       * - **expandLegendOfVisibleLayers**
+         - Boolean
+         - Indique si les legendes sont ouvertes sur les couches ouvertes. Principalement pour l'ouverture à l'arrivée dans un contexte
+         - true/false
+         - false
+       * - **layerListControls.showToolbar**
+         - String
+         - "always", ...
+         - 
+         - 
+       * - **layerListControls.excludeBaseLayers**
+         - Boolean
+         - true/false
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+
 .. _igomaptool:
 
 map
 ===============
+
+
+.. _igomeasurer:
+
+measurer
+===============
+
+    .. line-block::
+        Outil permetant de faire des mesure sur la carte
+
+Exemples
+
+        .. code:: json
+
+          {
+            "name": "measurer"
+          }
+
+
 
 .. _igoprint:
 
 print
 ===============
 
+    .. line-block::
+        Outil permetant d'imprimer la carte affichée à l'écran
+
+Exemples
+
+        .. code:: json
+
+          {
+            "name": "print"
+          }
+
+
 .. _igosearchResults:
 
 searchResults
 ===============
+
+    .. line-block::
+        Outil présentant les résultats de recherche.
+
+Exemples
+
+        .. code:: json
+
+          {
+              "name": "searchResults",
+              "options": {
+                  "focusFirst": false
+                }
+          }
+
+Propriétés de l'objet options de searchResults
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **focusFirst**
+         - Boolean
+         - Focus automatique sur le résultat lorsqu'un résultat de recherche est trouvé.
+         - true/false
+         - false
+      
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+
+.. _igoshareMap:
+
+shareMap
+===============
+
+    .. line-block::
+        Outil permetant de partager à l'aide d'un lien la carte à l'écran. 
+
+Exemples
+
+        .. code:: json
+
+            {
+              "name": "shareMap",
+              "options": {
+                  "hasCopyLinkButton": true,
+                  "hasShareMapButton": false
+              }
+            }
+
