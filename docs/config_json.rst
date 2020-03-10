@@ -53,7 +53,7 @@ Résumé
          - Description
          - Outil lié
        * - analytic
-         - Objet
+         - `Analytics`_
          - Permet de définir un fournisseur de service d'analyse et de statistique.
          -
        * - auth
@@ -102,6 +102,11 @@ Résumé
                Chemin d'accès des fichiers de traduction de 
                l'application. 
          - Tous 
+       * - mapOverlay
+         - add link for mapoverlay
+         - .. line-block::
+              Éléments visuels à ajouter par dessus la carte de l'application.
+         -  
        * - projections
          - `Projection`_ []
          - .. line-block::
@@ -146,6 +151,26 @@ Résumé
          -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+
+
+***************
+Analytics
+***************
+
+    .. line-block::
+	  Sert à configurer une application pour effectuer le monitoring du site web pour les statistiques.
+	  NB. : Pour une application sans statistiques, simplement ne pas mettre ces configurations.
+
+Exemples
+
+	.. code:: json
+
+		"analytics": {
+			"provider": "matomo",
+			"url": "https://geoegl.msp.gouv.qc.ca/matomo/",
+			"id": "40"
+		}
 
 
 ***************
@@ -228,20 +253,20 @@ Catalog
 ***************
 
     .. line-block::
-        Cette section de la configuration permet de charger une liste de sources de cataloguage. Une fois les sources chargées, il est possible d'ajouter des couches d'informations à la carte.
+        Cette section de la configuration permet de charger une liste de sources de cataloguage. Une fois les sources chargées, il est possible d'ajouter ces couches d'informations à la carte.
       
-        Les sources de cataloguage permise:
+        Les sources de cataloguage permises:
             - Service WMS 
             - Service WMTS
       
-        Les couches d'informations contenues dans ces services sont récupérées grâce au couches publiées dans le GetCapabilities du service.
+        Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
         Dans la présente version
-            1- les couches ajoutées par le catalogue sont partagées lors du partage de carte.
+            1- Les couches ajoutées par le catalogue sont partagées lors du partage de carte.
             2- La structure de l'url pour les couches partagées est la suivante:
-                - wmsUrl =­­> une liste, séparé par une ',' (virgule) listant les url de service ajoutées.
+                - wmsUrl =­­> une liste, séparée par une ',' (virgule) listant les url de service ajoutées.
                       - Exemple : wmsUrl=urlDuService1,urlDuService2
-                - layers => une liste, séparé par une ',' (virgule) groupé par un bloc de parenthèses, respectant l'ordre des services déclarés dans wmsUrl
+                - layers => une liste, séparée par une ',' (virgule) groupée par un bloc de parenthèses, respectant l'ordre des services déclarés dans wmsUrl
                       - Exemple : layers=(layer1,layer2),(layer3,layer4)
                             - layer1 et layer2 proviennent de l'url "urlDuService1"
                             - layer3 et layer4 proviennent de l'url "urlDuService2"
@@ -606,6 +631,45 @@ Liens
         - `locale démo https://infra-geo-ouverte.github.io/igo2/  <https://github.com/infra-geo-ouverte/igo2/tree/gh-pages/locale>`_
 
 
+
+***************
+MapOverlay
+***************
+
+    .. line-block::
+        Permet de définir des éléments à ajouter par dessus le visuel de la carte.
+
+Exemples
+
+        .. code:: json
+
+            "mapOverlay": [{
+                        "media": ["desktop"],
+                        "cssClass": "top-center",
+                        "imgSrc": " ./particular/images/FO_logo_2c.png",
+                        "imgSize": "280px",
+                        "alt": "Foret ouverte",
+                        "fixed": true,
+                        "marginTop": "10px"
+                  },
+                  {
+                        "media": ["desktop"],
+                        "cssClass": "bottom-left",
+                        "link": "http://igouverte.org/",
+                        "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
+                        "imgSize": "30px",
+                        "fontSize": "6pt",
+                        "marginLeft": "38px",
+                        "marginBottom": "10px",
+                        "alt": "IGO",
+                        "fixed": false
+                  }
+            ]
+
+Liens
+        - `https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json`_
+
+
 ***************
 Projection
 ***************
@@ -809,7 +873,7 @@ Exemple complet
 Contenu cartographique
 =======================================
 
-La configuration du contenu cartographie est possible grâce aux fichiers:
+La configuration du contenu cartographie est possible grâce aux fichiers de contextes:
     1. **base.json**
     2. **nom_du_contexte.json** 
 
@@ -827,12 +891,12 @@ Exemple, dans une application cartographique vous pouvez avoir plusieurs context
 
 On peut y définir:
     - l'étendue cartographique
-    - les couches d'informations disponible
-    - les outils accessible 
-    - certaines configuration d'outils
+    - les couches d'informations disponibles
+    - les outils accessibles 
+    - certaines configurations d'outils
 
 Quant à lui, le fichier **base.json** contient les éléments 
-partagés entre chancun des contexte l'héritant.
+partagés entre chancun des contextes l'héritant.
 Selon l'exemple précédent, dans une application cartographique, vous avez 3 contextes (thématiques):
 
       - hydrograhie.json
@@ -840,7 +904,7 @@ Selon l'exemple précédent, dans une application cartographique, vous avez 3 co
       - risques.json
 
 Plutôt que de répéter 3 fois les mêmes éléments 
-(fonds cartographique, outils, couches de base) dans chaque contexte, 
+(fonds cartographiques, outils, couches de base) dans chaque contexte, 
 il est possibe de déclarer dans le **base.json** les éléments communs 
 aux 3 contextes. La maintenance de l'application
 en sera facilitée.
@@ -849,9 +913,9 @@ en sera facilitée.
 Important : Notez que le fichier nom_du_contexte.json à préséance sur le fichier _base.json.
 
 
-*********************
-Résumé
-*********************  
+***************************
+Résumé fichier de contexte
+***************************  
 
     .. list-table::
        :widths: 10 10 30 15
@@ -956,9 +1020,9 @@ Layers
 ***************
 
     .. line-block::
-        Permet de définir une liste de couches d'informations disponible à l'usager lors de l'ouverture de l'application.
+        Permet de définir une liste de couches d'informations disponibles à l'usager lors de l'ouverture dans l'application.
         L'ordre d'apparition des couches dans la liste présentée à l'utilisateur peut être controlée de divers moyens:
-            1- l'ordre d'apparition des couches dans le contexte. Plus la couche est au début de la liste, plus elle sera au bas de la la liste présentée.
+            1- L'ordre d'apparition des couches dans le contexte. Plus la couche est au début de la liste, plus elle sera au bas de la la liste présentée dans l'application.
             2- La propriété zIndex de chaque couche d'information. Plus le zIndex et élevé, plus la couche sera au haut de la liste présentée.
 
 Exemples
@@ -1001,7 +1065,7 @@ Exemples
 
 Propriétés
     .. line-block::
-        Permet de définir une liste de couches. Référer-vous à la description de ce qu'est un :ref:`layer <igolayer>`. 
+        Référer-vous à la description de ce qu'est un :ref:`layer <igolayer>`. 
 
 Liens
 
@@ -1110,9 +1174,9 @@ Tools
 ***************
 
     .. line-block::
-        Définit la liste des configuration permise pour chaque outil.
+        Définit la liste des configurations permises pour chaque outil.
 
-        Pour les options spécifiques à chauque outil, veuillez vous référer aux descriptif de l'outil. Cette section détaille seulement les propriétés communes.
+        Pour les options spécifiques à chaque outil, veuillez vous référer aux descriptif de l'outil. Cette section détaille seulement les propriétés communes.
         
 
 Exemples
@@ -1156,6 +1220,7 @@ Propriétés
                - :ref:`directions <igodirections>`
                - :ref:`ogcFilter <igoogcFilter>`
                - :ref:`timeFilter <igotimeFilter>`
+               - :ref:`spatialFilter <igospatialFilter>`
                - :ref:`importExport <igoimportExport>`
                - :ref:`mapDetails <igomapDetails>`
                - :ref:`map <igomaptool>`
