@@ -103,7 +103,7 @@ Résumé
                l'application. 
          - Tous 
        * - mapOverlay
-         - add link for mapoverlay
+         - `MapOverlay`_ []
          - .. line-block::
               Éléments visuels à ajouter par dessus la carte de l'application.
          -  
@@ -297,7 +297,7 @@ Exemples
                               },
                         "queryHtmlTarget": "iframe",
                         "count": 365
-                        "tooltipType": "abstract"
+                        "tooltipType" : "abstract"
                   },
                   {
                         "id": "regexmtq",
@@ -479,8 +479,8 @@ Exemples
         .. code:: json
  
             context: {
-                url: 'https://geoegl.msp.gouv.qc.ca/apis/igo2/...',
-                defaultContextUri: '5'
+                "url" : "https://geoegl.msp.gouv.qc.ca/apis/igo2/...",
+                "defaultContextUri" : "5"
             }
 
 Propriétés
@@ -545,7 +545,7 @@ Exemples
         .. code:: json
 
             importExport: {
-                url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre'
+                "url" : "https://geoegl.msp.gouv.qc.ca/apis/ogre"
             }
 
 Propriétés
@@ -595,7 +595,7 @@ Exemples
         .. code:: json
 
             language: {
-                prefix: './locale/'
+                "prefix": "./locale/"
             }
 
 Propriétés
@@ -684,10 +684,10 @@ Exemples
 
             projections: [
                 {
-                    alias: 'Québec Lambert'
-                    code: 'EPSG:32198,
-                    def: '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs',
-                    extent: [-886251.0296, 180252.9126, 897177.3418, 2106143.8139]
+                    "alias" : "Québec Lambert"
+                    "code" : "EPSG:32198",
+                    "def" : "+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs",
+                    "extent" : [-886251.0296, 180252.9126, 897177.3418, 2106143.8139]
                   }
             ]
 
@@ -757,7 +757,7 @@ Exemples
             "routingSources": {
                 "osrm": {
                     "enabled": true
-                    "url": "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/";
+                    "url" : "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/"
                 }
 
 Propriétés
@@ -1185,7 +1185,7 @@ Exemples
 
             {
                 "icon" : "iconName" 
-                "name": "catalogBrowser",
+                "name" : "catalogBrowser",
                 "title": "TitreOutilQuiDoitEtreTraduit",
                 "options" : {
                     ...
