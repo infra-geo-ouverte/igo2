@@ -66,7 +66,7 @@ Propriétés
                doit être considérée 
                comme une couche de 
                base. Les couches de
-               base sont présentés 
+               base sont présentées 
                dans le "baselayer"
                switcher dans le coin
                inférieur gauche et
@@ -85,10 +85,10 @@ Propriétés
                l'échelle de 
                l'application. 
                Particulièrement
-               utile pour batir le
+               utile pour bâtir le
                lien pour le partage
                de cartes. 
-               Attention si vous définissez un id, la couche ajoutée par le catalogue ou par la recherche sera considérée par l'app. comme une couche différente, vous aurez donc 2 fois la même couche.
+               Attention: si vous définissez un id, la couche ajoutée par le catalogue ou par la recherche sera considérée par l'app. comme une couche différente, vous aurez donc 2 fois la même couche.
          -                
          - uuid
        * - legendOptions
@@ -118,7 +118,7 @@ Propriétés
                Définir la résolution 
                à laquelle la couche
                d'information commence
-               de s'afficher. 
+               à s'afficher. 
                Intéressant pour les 
                couches exigeantes à 
                récupérer à très petite 
@@ -134,8 +134,8 @@ Propriétés
        * - metadata
          - Object{}
          - .. line-block::
-               Définir la source pour la metadonnées. Lien pour le bouton i de la couche -> 'i'. 
-               Externe: true ira chercher la metadonnée inscrite dans la configuration du service.
+               Définir la source pour les metadonnées. Lien pour le bouton i de la couche -> 'i'. 
+               Externe: true ira chercher les metadonnées inscrites dans la configuration du service.
          - {"extern": true}
          -      
        * - opacity
@@ -153,7 +153,7 @@ Propriétés
          - Boolean
          - .. line-block::
                Autoriser/Bloquer
-               la supression de la 
+               la suppression de la 
                couche de la table
                des matières.
          - true false
@@ -173,9 +173,9 @@ Propriétés
                - `WMS`_
                - `WMTS`_
          - .. line-block::
-               Divers sources de 
+               Diverses sources de 
                données sont supportées.
-               Référez vous aux 
+               Référez-vous aux 
                section suivantes pour
                plus de détails.
          - 
@@ -194,7 +194,7 @@ Propriétés
                certaines propriétés
                du service, cette 
                valeur peut y être
-               récupérée et n'est plus obligatoire a ce moment.
+               récupérée et n'est plus obligatoire à ce moment.
          - 
          - 
        * - visible
@@ -240,11 +240,11 @@ Quant au propriétés identiques, elle ne seront pas présentées ici bas.
 
 Les propriétés communes aux sources de données: 
 
-     - **atributions** (String) : Les droits d'auteurs lié à la couche. 
+     - **atributions** (String) : Les droits d'auteurs liés à la couche. 
         Pour OpenStreetMap, la valeur par défaut est @OpenStreetMap 
         contributors
 
-     - **crossOrigin** (Boolean): Permet définir l'entête de l'appel faite au serveur. Permet entre autres, d'éviter les problématiques de CORS. Référez à `réglages CORS <https://developer.mozilla.org/fr/docs/Web/HTML/Reglages_des_attributs_CORS>`_ . De manière plus commune, définir "crossOrigin": "anonymous"
+     - **crossOrigin** (Boolean): Permet de définir l'entête de l'appel faite au serveur. Permet entre autres, d'éviter les problématiques de CORS. Référez à `réglages CORS <https://developer.mozilla.org/fr/docs/Web/HTML/Reglages_des_attributs_CORS>`_ . De manière plus commune, définir "crossOrigin": "anonymous"
 
 Exemples
 
@@ -319,7 +319,7 @@ Propriétés
          - osm
 
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -372,7 +372,7 @@ Propriétés
        * - **url***
          - String
          - .. line-block::
-               L'URL du service tuilées
+               L'URL du service de données tuilées
                en spécifiant la position
                des tuiles en déclarant les
                balises de remplacement:
@@ -385,7 +385,7 @@ Propriétés
          - 
          - 
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -432,7 +432,7 @@ Propriétés
        * - **url***
          - String
          - .. line-block::
-               L'URL du service tuilées
+               L'URL du service de données tuilées
                en spécifiant la position
                des tuiles en déclarant les
                balises de remplacement:
@@ -445,7 +445,7 @@ Propriétés
          - 
          - 
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -498,7 +498,7 @@ WMS
 
     .. line-block::
         Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`_ .
-        Les diverses version WMS sont acceptés.
+        Les diverses version WMS sont acceptées.
 
 
     .. note::
@@ -552,10 +552,10 @@ Propriétés
                envoyés au serveur (KVP).
          - 
          - 
-       * - **optionsFromCapabilities**
+       * - optionsFromCapabilities
          - Boolean
          - .. line-block::
-               Paramêtre pour récupérer des informations du service.
+               Paramètre pour récupérer des informations du service.
          - true/false
          - false
        * - **params***
@@ -571,10 +571,10 @@ Propriétés
          - Number
          - .. line-block::
                Nombre de secondes entre chaque
-               raffraichissement automatique 
-               de la source de donnée. Ainis,
+               rafraichissement automatique 
+               de la source de données. Ainsi,
                aucun déplacement de la carte 
-               n'est nécessaire pour raffraichir
+               n'est nécessaire pour rafraichir
                la donnée.
          - en secondes
          - Null si non définit
@@ -610,7 +610,7 @@ Propriétés
        * - queryTitle
          - Boolean
          - .. line-block::
-               Lors que la couche interrogée est en
+               Lorsque la couche interrogée est en
                gml2, gml3, json, geojson, esrijson, 
                cette propriété correspond au nom du 
                champ retourné  qui sera utilisé dans 
@@ -630,7 +630,7 @@ Propriétés
                    - "queryTitle": "${nomroute} ${desclocal} ",
          - 
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Paramètre (params) WMS
 
@@ -653,7 +653,7 @@ Paramètre (params) WMS
          - .. line-block::
                Correspond au nom de la couche demandée.
                Vous pouvez appeler plusieurs couches,
-               en séparant chacune de celles ci par un
+               en séparant chacune de celles-ci par une
                virgule. 
                IMP:
                    - Pour les couches multiples, vous
@@ -681,7 +681,7 @@ Paramètre (params) WMS
        * - feature_count
          - Number
          - .. line-block::
-               Nombre de résultat retournés par le serveur
+               Nombre de résultats retournés par le serveur
                lors des appels GetFeatureInfo
          - 
          - 5
@@ -691,13 +691,13 @@ Paramètre (params) WMS
                Nom spécifique du format d'appel du GetFeatureInfo.
                
                Nécessaire si vos format d'appels diffèrent des 
-               nom standard gérés par IGO (décrit précédemment).
+               noms standards gérés par IGO (décrits précédemment).
          - 
          - 
        * - dpi
          - Number
          - .. line-block::
-               Nombre de point par pouces du résultat 
+               Nombre de points par pouce du résultat 
                de l'appel du GetMap. Particulièrement 
                utile dans IGO pour effectuer la conversion
                entre la résolution et le nombre échelle.
@@ -706,7 +706,7 @@ Paramètre (params) WMS
        * - map_resolution
          - Number
          - .. line-block::
-               Nombre de point par pouces du résultat 
+               Nombre de points par pouce du résultat 
                de l'appel du GetMap. Particulièrement 
                utile dans IGO pour effectuer la conversion
                entre la résolution et le nombre échelle.
@@ -715,7 +715,7 @@ Paramètre (params) WMS
        * - format_options
          - Number
          - .. line-block::
-               Nombre de point par pouces du résultat 
+               Nombre de points par pouce du résultat 
                de l'appel du GetMap. Particulièrement 
                utile dans IGO pour effectuer la conversion
                entre la résolution et le nombre échelle.
@@ -726,7 +726,7 @@ Paramètre (params) WMS
 
     Pour les propriétés dpi, map_resolution et format_options, les 3 paramètres
     sont envoyés au serveur en tout temps pour éviter les erreurs de conversion
-    d'échelle. La décision de faire l'appel des 3 paramètres en simultané s'est 
+    d'échelle. La décision de faire l'appel des 3 paramètres en simultané est 
     basé sur le fait que QGIS procède de la même manière. 
 
 
@@ -772,7 +772,7 @@ Exemples
        * - format
          - String
          - .. line-block::
-               Format d'image demandées au serveur. Dépends des capacités du serveur (wmts Getcapabilities)
+               Format d'image demandé au serveur. Dépend des capacités du serveur (wmts Getcapabilities)
          - Dépends des capacités du serveur
          - image/jpeg
        * - **layer***
@@ -799,17 +799,17 @@ Exemples
        * - **url***
          - String
          - .. line-block::
-               L'URL du service tuilées
+               L'URL du service de données tuilées
          - 
          - 
        * - version
          - String
          - .. line-block::
-               La version WMTS du service demandée
+               La version WMTS du service demandé
          - 1.0.0
          - 1.0.0
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -847,7 +847,7 @@ Source (base commune)
 Exemples
 
     .. line-block::
-        Les exemples seront présentées pour chacune des sources de recherche. 
+        Les exemples seront présentés pour chacune des sources de recherche. 
 
 Propriétés
 
@@ -897,7 +897,7 @@ Propriétés
        * - params
          - Object {}
          - .. line-block::
-               Paramètres supplémentaire 
+               Paramètres supplémentaires 
                à ajouter à la requête 
                faite au serveur associé.
                Spécifique selon la source.
@@ -931,7 +931,7 @@ Propriétés
                selon la 
                source.
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -971,7 +971,7 @@ Propriétés
                URL du service.
          - https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?
              
-    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Coordonnées
 ===============
@@ -1000,7 +1000,7 @@ Exemples
 
 Propriétés
 
-    Seulement les propriétés spécifique à ce service sont présentées.
+    Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. list-table::
        :widths: 10 80
@@ -1017,7 +1017,7 @@ Propriétés
                    - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
                    - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_    
     
-    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1031,7 +1031,7 @@ iCherche
     .. line-block::
         iCherche est un service de recherche développé 
         par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
-        afin de permettre des recherche textuelles sur les entités suivantes:
+        afin de permettre des recherches textuelles sur les entités suivantes:
             - Adresses
             - Code postal
             - Routes (segments de routes)
@@ -1057,7 +1057,7 @@ Exemples
 
 Propriétés
 
-    Seulement les propriétés spécifique à ce service sont présentées.
+    Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. list-table::
        :widths: 10 80
@@ -1073,11 +1073,11 @@ Propriétés
        * - settings
          - `Ligne 79  <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L79>`_
        * - showInPointerSummary
-         - true pour activer le bouton qui affichera les résultats de recherche au dessus du curseur
+         - true pour activer le bouton qui affichera les résultats de recherche au-dessus du curseur
        * - title
          - iCherche
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1091,14 +1091,14 @@ iCherche Reverse
     .. line-block::
         iCherche Reverse est un service de recherche développé 
         par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
-        afin de permettre des recherche par coordonnées / rayon sur les entités suivantes:
+        afin de permettre des recherches par coordonnées / rayon sur les entités suivantes:
             - Adresses
             - Routes (segments de routes)
-            - Arrondissement (segments de routes)         
+            - Arrondissements (segments de routes)         
             - Municipalités (et ancien municipalités)
             - MRC
             - Régions administratives
-        Le contenu accessible par le service de recherche est limité au territoire quuébécois. 
+        Le contenu accessible par le service de recherche est limité au territoire québécois. 
         ** Le code de iCherche Reverse peut être utilisé comme exemple afin d'adapter votre propre service de recherche textuel.
             
 Exemples
@@ -1114,7 +1114,7 @@ Exemples
 
 Propriétés
 
-    Seulement les propriétés spécifique à ce service sont présentées.
+    Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. list-table::
        :widths: 10 80
@@ -1132,7 +1132,7 @@ Propriétés
        * - title
          - Territoire (Géocodage inversé)
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1146,7 +1146,7 @@ iLayer
     .. line-block::
         iLayer est un service de recherche développé 
         par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_  
-        afin de permettre des recherche de couches d'information par mot clef.
+        afin de permettre des recherches de couches d'informations par mots clefs.
         Le contenu accessible par le service de recherche est limité au territoire quuébécois. 
         
         Une fois la couche trouvée, il vous est possible de l'ajouter à la carte.
@@ -1190,7 +1190,7 @@ Propriétés
                    - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
                    - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_    
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1203,7 +1203,7 @@ Nominatim
 
     .. line-block::
         Nominatim est un service de recherche développé autour de la communauté
-        OpenStreetMap. Il est possible de faire des recherches par mot clef.
+        OpenStreetMap. Il est possible de faire des recherches par mots clefs.
 
         Pour plus de détails:
             - `API Nominatim <https://nominatim.org/release-docs/develop/>`_
@@ -1244,7 +1244,7 @@ Propriétés
        * - title
          - Nominatim (OSM)
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1260,7 +1260,7 @@ StoredQueries
         Il se veut plus un EXEMPLE qu'un réel service de recherche. 
 
     .. line-block::
-        StoredQueries est un service de recherche par mot clef exploitant les capacités WFS 2.0.
+        StoredQueries est un service de recherche par mots clefs exploitant les capacités WFS 2.0.
         Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`_  
         qui peut retourner:
             - Route                                    ex: 138
@@ -1307,7 +1307,7 @@ Propriétés
        * - **fields***
          - .. line-block::
                Liste des champs à interroger pour la StoredQueries.
-               la structure est la suivante:
+               La structure est la suivante:
                1er attribut: {"name": "rtss","defaultValue": "-99"},
                2e attribut : {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
                afin de représenter le terme dans la barre de recherche:
@@ -1339,9 +1339,9 @@ Propriétés
                Nom de la requête à demander au serveur.
          -
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1426,9 +1426,9 @@ Propriétés
                Nom de la requête à demander au serveur.
          -
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-    Pour les autres propriétés, référez vous à `Source (base commune)`_ .
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
@@ -1447,7 +1447,7 @@ Intégration
 
     .. line-block::
         La composante intégration permet de définir 
-        une gamme d'outils aisément intégrable à l'application grâce 
+        une gamme d'outils aisément intégrables à l'application grâce 
         aux configuration d'outils (tools).
 
         
@@ -1482,7 +1482,7 @@ about
 ******
 
     .. line-block::
-        Outil générique offrant la possibilitée d'informer les usagers grâce à un outil d'aide.
+        Outil générique offrant la possibilité d'informer les usagers grâce à un outil d'aide.
 
 Exemples
 
@@ -1525,7 +1525,7 @@ Propriétés
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifiez le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
                    - fichiers dans :ref:`Language <igolanguage>`. 
          - 
@@ -1543,7 +1543,7 @@ Propriétés
                }
          - `Voir html <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool/about-tool.component.ts>`_
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -1598,13 +1598,13 @@ Propriétés
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifiez le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
                    - fichiers dans :ref:`Language <igolanguage>`. 
          - 
          - igo.integration.tools.catalog
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -1619,9 +1619,9 @@ catalogBrowser
 **************
 
     .. line-block::
-        Outil permettant de lister les couches d'information du catalogue sélectionné par l'usager.
+        Outil permettant de lister les couches d'informations du catalogue sélectionné par l'usager.
         L'outil catalogue fore dans le catalogue jusqu'à concurence de 2 niveaux hiérarchiques.
-        Tous les couches d'information doivent être dans un groupe.
+        Toutes les couches d'information doivent être dans un groupe.
 
 Exemples
 
@@ -1661,7 +1661,7 @@ Propriétés
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifiez le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
                    - fichiers dans :ref:`Language <igolanguage>`
          - 
@@ -1670,9 +1670,9 @@ Propriétés
          - Object
          - .. line-block::
                Options de l'outil: 
-               toggleCollapsedGroup permet de force 
+               toggleCollapsedGroup permet de forcer 
                l'usager à entrer dans le groupe et 
-               d'y visualiser  les couches disponible
+               d'y visualiser  les couches disponibles
                avant de pouvoir ajouter le groupe
                à la carte.
                **false** = le groupe doit être ouvert avant
@@ -1686,7 +1686,7 @@ Propriétés
                    toggleCollapsedGroup: true
                }
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -1699,10 +1699,10 @@ contextManager
 **************
 
     .. line-block::
-        Outil permettant de lister/gérer plusieurs contexte à l'intérieur d'une même application. 
+        Outil permettant de lister/gérer plusieurs contextes à l'intérieur d'une même application. 
         Il existe un fichier de configuration définissant les contexte disponibles à l'intérieur du gestionnaire de contexte.
             - `_context.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_contexts.json>`_
-        Ce dernier constitue une liste des contexte disponibles à l'intérieur du gestionnaire de contexte.
+        Ce dernier constitue une liste des contextes disponibles à l'intérieur du gestionnaire de contexte.
 
         Si un contexte est non présent dans ce fichier, il ne sera pas mis à la disposition dans l'application. 
         De ce fait, le seul moyen d'y accéder est par URL.
@@ -1745,14 +1745,14 @@ Propriétés
        * - title
          - String
          - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Le titre affiché dans l'application. Sujet aux traductions.
+               Si vous modifiez le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
                    - fichiers dans :ref:`Language <igolanguage>`. 
          - 
          - igo.integration.tools.contexts
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -1808,14 +1808,14 @@ Propriétés
        * - title
          - String
          - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Le titre affiché dans l'application. Sujet aux traductions.
+               Si vous modifiez le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
                    - fichiers dans :ref:`Language <igolanguage>`. 
          - 
          - igo.integration.tools.directions
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -1833,7 +1833,7 @@ OgcFilter
     .. line-block::
         Outil permetant de configurer des boutons poussoirs pour filtrer une couche wms.
          Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-         NB2: L'activation de l'outil ce fait ici via les outils, mais la configuration de chaque filtre doit ce faire à l'intérieur de la couche dans les contextes. 
+         NB2: L'activation de l'outil se fait ici via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes. 
          layer -> sourceOptions -> ogcFilters
 
 Exemples d'un layer filtré OGC dans un contexte
@@ -2010,7 +2010,7 @@ timeFilter
 
     .. line-block::
         Outil permettant de configurer un filtre temporel sur une couche d'un service ayant une propriété temporelle (WMS-T)
-        NB: L'activation de l'outil ce fait via ici via les outils, mais la configuration de chaque filtre doit ce faire à l'intérieur de la couche dans les contextes. 
+        NB: L'activation de l'outil se fait via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes. 
         layer -> sourceOptions -> timeFilter
 
 
@@ -2061,43 +2061,43 @@ Propriétés de l'objet timeFilter
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - **min**
+       * - min
          - String
          - Periode de temps minimum. 
          - En fonction du type, peut être une année, une date ou une heure.
          - 
-       * - **max**
+       * - max
          - String
          - Periode de temps maximum. 
          - En fonction du type, peut être une année, une date ou une heure.
          - 
-       * - **range**
+       * - range
          - Boolean
-         - Intervalle a saisir par utilisateur.
+         - Intervalle à saisir par utilisateur.
          - true/false
          - 
-       * - **step**
+       * - step
          - Number
-         - Le temps de l'intervalle en miliseconde.
+         - Le temps de l'intervalle en millisecondes.
          - Ex: 63072000000 pour un an.
          - 
-       * - **style**
+       * - style
          - String
          - Le style du calendrier.
          - calendar, slider
          - slider
-       * - **type**
+       * - type
          - String
          - Le type temporel de calendrier. En année, jour, heure, etc.
          - year, date
          - 
-       * - **timeInterval**
+       * - timeInterval
          - Number
-         - Pour configuration en 'slider', le temps d'attente avant de passer au suivant, en miliseconde.
+         - Pour configuration en 'slider', le temps d'attente avant de passer au suivant, en millisecondes.
          - 
          - 
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
 .. _igospatialFilter:
@@ -2107,8 +2107,8 @@ spatialFilter
 **************
 
     .. line-block::
-        Outil permetant de faire une recherche de facon spatiale selon un dessin tracé par utilisateur ou 
-        certains contours définies comme les municipalité, mrc, etc. La recherche se fait en fonction de certains api de recherche comme Terrapi
+        Outil permettant de faire une recherche de facon spatiale selon un dessin tracé par utilisateur ou 
+        certains contours définis comme les municipalité, mrc, etc. La recherche se fait en fonction de certains api de recherche comme Terrapi
         voir: <https://geoegl.msp.gouv.qc.ca/apis/terrapi/docs>
 
 Exemples
@@ -2125,14 +2125,15 @@ Exemples
 importExport
 *************
     .. line-block::
-        Outil permetant d'importer et exporter des couches.
+        Outil permettant d'importer et d'exporter des couches.
         Certaines restrictions s'appliquent: 
         Import:
-          - La projection doit être en 4326
-          - La taille du fichier doit être maximum 30Mo
+          - La projection doit être en EPSG:4326
+          - La taille du fichier doit être au maximum de 30Mo
           - Les shapeFiles doivent être dans un .zip
 
-        Export: Seulement les couches en WFS peuvent être exportées.
+        Export: 
+          - Seulement les couches en WFS peuvent être exportées.
 
 
 Exemples
@@ -2186,28 +2187,28 @@ Propriétés de l'objet options de mapDetails
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - **toggleLegendOnVisibilityChange**
+       * - toggleLegendOnVisibilityChange
          - Boolean
-         - Si la légende s'ouvrira/fermera automatiquement lors de l'activation/désactivation de la couche.
+         - Indique si la légende s'ouvrira/fermera automatiquement lors de l'activation/désactivation de la couche.
          - true/false
          - false
-       * - **expandLegendOfVisibleLayers**
+       * - expandLegendOfVisibleLayers
          - Boolean
-         - Indique si les legendes sont ouvertes sur les couches ouvertes. Principalement pour l'ouverture à l'arrivée dans un contexte
+         - Indique si les légendes sont ouvertes sur les couches activées. Principalement pour l'ouverture à l'arrivée dans un contexte
          - true/false
          - false
-       * - **layerListControls.showToolbar**
+       * - layerListControls.showToolbar
          - String
-         - "always", ...
+         - "always", "never", "default"
          - 
          - 
-       * - **layerListControls.excludeBaseLayers**
+       * - layerListControls.excludeBaseLayers
          - Boolean
          - true/false
          - 
          - 
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
 .. _igomaptool:
@@ -2224,7 +2225,7 @@ measurer
 ********
 
     .. line-block::
-        Outil permetant de faire des mesure sur la carte
+        Outil permettant de faire des mesures sur la carte
 
 Exemples
 
@@ -2243,7 +2244,7 @@ print
 *****
 
     .. line-block::
-        Outil permetant d'imprimer la carte affichée à l'écran
+        Outil permettant d'imprimer la carte affichée à l'écran
 
 Exemples
 
@@ -2290,14 +2291,14 @@ Propriétés de l'objet options de searchResults
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - **focusFirst**
+       * - focusFirst
          - Boolean
-         - Focus automatique sur le résultat lorsqu'un résultat de recherche est trouvé.
+         - Focus automatique lorsqu'un résultat de recherche est trouvé.
          - true/false
          - false
       
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
 .. _igoshareMap:
@@ -2307,7 +2308,7 @@ shareMap
 *********
 
     .. line-block::
-        Outil permetant de partager à l'aide d'un lien la carte à l'écran. 
+        Outil permettant de partager, à l'aide d'un lien, la carte à l'écran. 
 
 Exemples
 
