@@ -296,7 +296,7 @@ Exemples
                               "json": "stations_meteoroutieres"
                               },
                         "queryHtmlTarget": "iframe",
-                        "count": 365
+                        "count": 365,
                         "tooltipType": "abstract"
                   },
                   {
@@ -684,7 +684,7 @@ Exemples
 
             projections: [
                 {
-                    "alias": "Québec Lambert"
+                    "alias": "Québec Lambert",
                     "code": "EPSG:32198",
                     "def": "+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs",
                     "extent": [-886251.0296, 180252.9126, 897177.3418, 2106143.8139]
@@ -756,7 +756,7 @@ Exemples
 
             "routingSources": {
                 "osrm": {
-                    "enabled": true
+                    "enabled": true,
                     "url": "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/"
                 }
 
@@ -939,30 +939,28 @@ Résumé fichier de contexte
                Config d'outils
                ...
        * - .. line-block::
-               **layers***
-               Voir 
-               `layers`_
-         - :ref:`layer[] <igolayer>`
+               **layers***              
+         -     `layers`_ []
          - .. line-block::
                Liste des couches
                d'informations
                disponible pour
                le contexte 
-               sélectionnée. 
+               sélectionné. 
          - .. line-block::
                Map
                MapDetails
        * - **map***
-         - map
+         - `map`_
          - .. line-block::
                Définition de la carte
                lors de l'ouverture 
                initial du contexte
          - 
-       * - **message**
+       * - message
          - `Message`_
          - .. line-block::
-               Définition d'un message a l'ouverture du contexte.
+               Présentation d'un message à l'ouverture du contexte.
          - 
        * - `toolbar`_
          - String[]
@@ -1009,9 +1007,9 @@ Base
 
         À l'intérieur d'un fichier **base.json**, les propriétés tolérés sont:
             - `layers`_
-            - map
-            - toolbar
-            - tools
+            - `map`_
+            - `toolbar`_
+            - `tools`_
 
         Pour le détail de ces propriétés, référez-vous aux sections suivantes.
                 
@@ -1126,13 +1124,73 @@ Exemples
         .. code:: json
 
             "message": {
-                  "title": "Avertissement",
                   "html": " "<head><meta charset='utf-8'><style> .page{padding-left: 0px;margin-right:-45px;} </style> </head>  <body> <div class='page' style='color: white;'> Bienvenue sur <b>IGO</b></div> </body>",
                   "type": "info",
                   "options": {
                         "timeOut": 30000
                   }
             },
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur par défaut
+       * - format
+         - String
+         - Le format du message html ou text. Selon le choix, une deuxième configuration devra être définie soit html ou text.
+         - 'text', 'html'
+         - 
+       * - html
+         - String
+         - Le html du message. *Cette configuration est obligatoire si le format = 'html.   
+         - 
+         - 
+       * - icon
+         - String
+         - Icone à ajouter au message.  
+         - 
+         - 
+       * - options.template
+         - Sting
+         - En construction
+         - 
+         - 
+       * - options.timeOut
+         - Number
+         - Temps avant que le message disparaisse en miliseconde.
+         - 
+         - 
+       * - text
+         - Sting
+         - Le text du message à afficher. *Cette configuration remplace la configuration html.
+         - 
+         - 
+       * - title
+         - Sting
+         - Le titre du message à afficher. Cette configuration s'active seulement avec la configuration text et ne sera pas pris en compte avec la configuration html.
+         - 
+         - 
+       * - type
+         - Sting
+         - Le type du message à afficher. Avertissement, erreur ou information. Selon le type choisi une couleur spécifiée sera appliquée selon la thématique de couleur de l'application.
+         - 'alert', 'error', 'info', 'success'
+         - 
+               
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
 
 
 ***************

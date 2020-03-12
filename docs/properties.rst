@@ -1832,7 +1832,8 @@ OgcFilter
 
     .. line-block::
         Outil permetant de configurer des boutons poussoirs pour filtrer une couche wms.
-         NB: L'activation de l'outil ce fait ici via les outils, mais la configuration de chaque filtre doit ce faire à l'intérieur de la couche dans les contextes. 
+         Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+         NB2: L'activation de l'outil ce fait ici via les outils, mais la configuration de chaque filtre doit ce faire à l'intérieur de la couche dans les contextes. 
          layer -> sourceOptions -> ogcFilters
 
 Exemples d'un layer filtré OGC dans un contexte
