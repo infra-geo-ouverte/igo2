@@ -1124,6 +1124,7 @@ Exemples
         .. code:: json
 
             "message": {
+                  "format": "html",
                   "html": " "<head><meta charset='utf-8'><style> .page{padding-left: 0px;margin-right:-45px;} </style> </head>  <body> <div class='page' style='color: white;'> Bienvenue sur <b>IGO</b></div> </body>",
                   "type": "info",
                   "options": {
@@ -1154,7 +1155,7 @@ Propriétés
          - 
        * - html
          - String
-         - Le html du message. *Cette configuration est obligatoire si le format = 'html.   
+         - Le html du message sur une seule ligne. Cette configuration est obligatoire si le format = 'html.   
          - 
          - 
        * - icon
@@ -1174,7 +1175,7 @@ Propriétés
          - 
        * - text
          - Sting
-         - Le text du message à afficher. *Cette configuration remplace la configuration html.
+         - Le text du message à afficher. Cette configuration remplace la configuration html.
          - 
          - 
        * - title
