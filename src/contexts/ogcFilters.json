@@ -192,6 +192,7 @@
     "searchResults",
     "contextManager",
     "mapDetails",
+    "mapTools",
     "ogcFilter",
     "measurer",
     "directions",
