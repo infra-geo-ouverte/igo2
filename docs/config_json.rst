@@ -8,25 +8,28 @@
 Configuration requise
 ---------------------
 
-Cette section détaille les configurations possibles pour le 
-navigateur dans un contexe cartographique. 
+Cette section détaille les configurations possibles pour le
+navigateur dans un contexe cartographique.
 À l'aide de fichiers de configuration (fichiers JSON) , il est possible de paramétrer:
 
       - l'application 
       - le contenu cartographique
 
+
 ==============================
 Application
 ==============================
 
-La configuration de l'application est possible grâce 
-au fichier **config.json**. 
-Ce dernier est situé dans le répertoire : 
+La configuration de l'application est possible grâce
+au fichier **config.json**.
+Ce dernier est situé dans le répertoire :
 
     - `src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
 
+
 Il est également possible de configurer l'application grâce à un second 
 fichier selon l'environnement désiré (test ou production). 
+
 Pour modifier le comportement de l'application, vous pouvez modifier:
 
     - `igo2/src/environments/environment.prod.ts <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.prod.ts>`_
@@ -47,7 +50,7 @@ Résumé
     .. list-table::
        :widths: 10 10 30 15
        :header-rows: 1
-    
+
        * - Propriétés
          - Type
          - Description
@@ -59,11 +62,11 @@ Résumé
        * - auth
          - `Auth`_
          - .. line-block::
-               Objet permettant d'activer le serveur 
+               Objet permettant d'activer le serveur
                d'authentification.
          -
-       * - catalog
-         - `Catalog`_ []
+       * - :ref:`catalog <igocatalogConfig>`
+         - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
                Doit être présente si l'outil de catalogue.
                Permet de gérer les sources WMS et WMTS
@@ -73,26 +76,28 @@ Résumé
        * - context
          - `Context`_
          - .. line-block::
+
                Activation de l'API de context d'IGO2. 
                Cette API sera documentée 
                indépendamment de la présente 
+
                documentation.
          - ContextManager
        * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
-               Permet d'ouvrir un paneau d'expansion à partir 
+               Permet d'ouvrir un paneau d'expansion à partir
                d'un bouton situé dans le coin inférieur gauche
                de la carte. 
                Ce dernier contient les données tabulaires pour
                 les données WFS / Vectorielle / Cluster
                ** Encore en développement **
-         - 
+         -
        * - importExport
          - `ImportExport`_
          - .. line-block::
                Nécessaire si l'outil d'importation exportation
-               pour gérer l'importation des Shapefiles  
+               pour gérer l'importation des Shapefiles
          - .. line-block::
                Importation
                Exportation
@@ -108,16 +113,16 @@ Résumé
               Éléments visuels à ajouter par dessus la carte de l'application.
          -  
        * - projections
-         - `Projection`_ []
+         - :ref:`Projection <igoprojections>` []
          - .. line-block::
                Liste de projections non enregistrées
-               par défault par OpenLayers. 
-         - 
+               par défault par OpenLayers.
+         -
        * - routingSources
          - `RoutingSource`_
          - .. line-block::
                Source serveur pour la création des itinéraires.
-               Actuellement, le serveur utilisé est OSRM.  
+               Actuellement, le serveur utilisé est OSRM.
          - Itinéraire
        * - **searchSources***
          - `SearchSources`_
@@ -130,7 +135,7 @@ Résumé
        * - .. line-block::
                **Theme***
                Voir: `theme`_
-        
+
          - String
          - .. line-block::
                Permet de définir les thèmes de l'application.
@@ -138,9 +143,10 @@ Résumé
                    - blue-theme
                    - bluegrey.theme
                    - dark.theme
-               Le répertoire où sont conservés les thèmes est 
+               Le répertoire où sont conservés les thèmes est
                le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
          -
+
        * - Title
          - String   
          - Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
@@ -149,6 +155,7 @@ Résumé
          - String
          - Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche, comme par exemple Google.  
          -
+
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -199,7 +206,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -213,23 +220,23 @@ Propriétés
        * - **url***
          - String
          - .. line-block::
-               Définit l'url d'appel du service 
+               Définit l'url d'appel du service
                d'authentification
-         - 
-         - 
+         -
+         -
        * - **tokenKey***
          - String
          - .. line-block::
                Définit la clef de l'api d'authentification
                utilisée
-         - 
-         -  
+         -
+         -
        * - allowAnonymous
          - Boolean
          - .. line-block::
                Permet/Bloque l'accès aux usagers non
                authentifiés
-               d'accéder aux contextes publics 
+               d'accéder aux contextes publics
          - true | false
          - true
        * - ...
@@ -244,9 +251,9 @@ Propriétés
 Liens
 
         - `igo2-lib/packages/auth/src/lib/shared/auth.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/2f8f274146b0fff4cc82d09f598bff838c6caaab/packages/auth/src/lib/shared/auth.interface.ts>`_
-        
 
-.. _igocatalog:
+
+.. _igocatalogConfig:
 
 ***************
 Catalog
@@ -258,6 +265,7 @@ Catalog
         Les sources de cataloguage permises:
             - Service WMS 
             - Service WMTS
+
       
         Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
@@ -272,8 +280,13 @@ Catalog
                             - layer3 et layer4 proviennent de l'url "urlDuService2"
                             - si un "layer" possède le suffix :igoz13
                             - Il s'agit de la position du "layer" dans la table des matières. Ici la position 13.
-      
+
         Chaque couche ajoutée possède un identifiant unique généré à partir du "layer name" et de l'url du service source. Se référer à :`igo2-lib/packages/geo/src/lib/datasource/utils/id-generator.ts#L15 <https://github.com/infra-geo-ouverte/igo2-lib/blob/6f37684adc809c82b185556719daac4bace0eea1/packages/geo/src/lib/datasource/utils/id-generator.ts#L15>`_
+
+        Note sur le comportement de l'objet :ref:`Composite Catalog <igocompositecatalogObject>`:
+            - la propriété groupImpose met toutes les couches des sous-groupes enfants sur le même niveau.
+            - le titre des couches de même niveau (racine ou groupe) est unique pour une même source.
+            - un tag est ajouté sur les titres identique de couches de même niveau et de source différente.
 
 Exemples
 
@@ -297,6 +310,7 @@ Exemples
                               },
                         "queryHtmlTarget": "iframe",
                         "count": 365,
+
                         "tooltipType": "abstract"
                   },
                   {
@@ -304,11 +318,39 @@ Exemples
                         "title": "MTQ (filtered by regex)",
                         "url": "/swtq",
                         "regFilters": ["zpegt"]
+                  },
+                  {
+                        id: 'group_impose',
+                        title: '(composite catalog) with group imposed',
+                        composite: [
+                              {
+                              id: 'tq_swtq',
+                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
+                              regFilters: ['zpegt'],
+                              groupImpose: {id: 'zpegt', title: 'zpegt'}
+                              },
+                              {
+                              id: 'Gououvert',
+                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
+                              regFilters: ['zpegt'],
+                              groupImpose: {id: 'zpegt', title: 'zpegt'}
+                              },
+                              {
+                              id: 'rn_wmts',
+                              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
+                              type: 'wmts',
+                              crossOrigin: true,
+                              matrixSet: 'EPSG_3857',
+                              version: '1.0.0',
+                              groupImpose: {id: 'cartetopo', title: 'Carte topo échelle 1/20 000'}
+                              }
+                        ]
                   }
                   ]
             }
 
 Propriétés
+===============
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -324,42 +366,80 @@ Propriétés
                Valeurs possibles
          - .. line-block::
                Valeur défaut
+       * - sources
+         - :ref:`Catalog <igocatalogObject>` []
+         - .. line-block::
+               Liste des catalogues qui sera présenté à l'usager.
+         - 
+         - []
+
+.. _igocatalogObject:
+
+Propriétés - Objet Catalog
+===============
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
        * - count
          - Integer
          - .. line-block::
                Nombre de résultats retournés par le serveur
                lors de requêtes **WMS** de GetFeatureInfo
-         - 
+         -
          - 5
        * - **id***
          - String
          - .. line-block::
                Identifiant unique permettant de différencier
                les catalogues entre eux.
-         - 
+         -
          - uuid()
+       * - groupImpose
+         - id*: String, title*: String
+         - .. line-block::
+               N.B: Propriété disponible sur un objet de type CompositeCatalog 
+               Permet d'imposer l'utilisation d'un groupe à l'ensemble
+               des couches appellées du catalogue.
+               - id: Identifiant unique permettant de différencier
+               les groupes entre eux.
+               - title: Titre pour le groupe qui sera utilisé
+               dans l'outil Catalog.
+         - 
+         - 
        * - matrixSet
          - String
          - .. line-block::
-               Nom du matrixSet définit pour le service 
+               Nom du matrixSet définit pour le service
                WMTS seulement
                **Obligatoire pour les services WMTS**
-         - 
-         - 
+         -
+         -
        * - queryFormat
          - QueryFormat
          - .. line-block::
                Pour les services **WMS**, le format d'interrogation
                de la donnée.
          - Voir **QueryFormat**
-         -       
+         -
        * - queryHtmlTarget
          - String
          - .. line-block::
                Pour les services **WMS**, definit la destination des
                résultats d'interrogation pour les formats HTML.
          - iframe (intégré
-           à la plage) ou 
+           à la plage) ou
            _blank (ouverture
            page externe)
          - iframe
@@ -379,8 +459,8 @@ Propriétés
                permettant de limiter les couches 
                d'information présentées dans l'outil 
                CatalogBrowser
-         - 
-         - 
+         -
+         -
        * - requestEncoding
          - String
          - .. line-block::
@@ -393,7 +473,14 @@ Propriétés
          - .. line-block::
                Afin de définir si l'entête de l'appel faite
                au serveur sera anonyme. Permet entre autres,
-               d'éviter les problématiques de CORS 
+               d'éviter les problématiques de CORS
+         - true false
+         - false
+       * - showLegend
+         - Boolean
+         - .. line-block::
+               Permet d'affiché la légende sur le click du titre
+               des couches. 
          - true false
          - false
        * - sortDirection
@@ -409,7 +496,7 @@ Propriétés
        * - timeFilter
          - TimeFilterOptions
          - .. line-block::
-               Options temporelles liées à l'entièreté des 
+               Options temporelles liées à l'entièreté des
                couches du service web.
          - .. line-block::
                Voir **TimeFilter**
@@ -419,8 +506,8 @@ Propriétés
          - .. line-block::
                Titre pour la source du catalogue qui sera utilisé
                dans l'outil Catalog
-         - 
-         - 
+         -
+         -
        * - tooltipType
          - String
          - .. line-block::
@@ -433,7 +520,7 @@ Propriétés
          - String
          - .. line-block::
                Type de service à appeler
-         - wmts wms
+         - composite wmts wms
          - wms
        * - **url***
          - String
@@ -442,21 +529,62 @@ Propriétés
                d'url normé OGC
                (i.e. service=wms&request=GetCapabilities)
                OU url du service de baselayers
-         - 
-         - 
+         -
+         -
        * - version
          - String
          - .. line-block::
-               Version du service 
+               Version du service
                WMS ou WMTS
          - .. line-block::
-               Référer au 
+               Référer au
                GetCapabilities
-               du service 
+               du service
                (WMS|WMTS)
          - 1.0.0 (WMTS)
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+.. _igocompositecatalogObject:
+
+Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
+===============
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **id***
+         - String
+         - .. line-block::
+               Identifiant unique permettant de différencier
+               les catalogues entre eux.
+         - 
+         - 
+       * - **title***
+         - String
+         - .. line-block::
+               Titre pour la source du catalogue qui sera utilisé
+               dans l'outil Catalog.
+         - 
+         - 
+       * - composite
+         - :ref:`Catalog <igocatalogObject>` []
+         - .. line-block::
+               Liste des catalogues utilisés dans un catalogue 
+               composé.
+         - 
+         - 
 
 Liens
 
@@ -477,7 +605,7 @@ Context
 Exemples
 
         .. code:: json
- 
+
             context: {
                 "url" : "https://geoegl.msp.gouv.qc.ca/apis/igo2/...",
                 "defaultContextUri" : "5"
@@ -488,7 +616,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -502,16 +630,16 @@ Propriétés
        * - **url***
          - String
          - .. line-block::
-               Définit l'url d'appel du service 
+               Définit l'url d'appel du service
                de contexte
-         - 
-         - 
+         -
+         -
        * - **defaultContextUri***
          - String
          - .. line-block::
                Nom ou identifiant du contexte
                cartographique par défaut.
-         - 
+         -
          -  _default
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -520,7 +648,7 @@ Liens
 
         - `igo2-lib/packages/context/src/lib/context-manager/shared/context.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/context/src/lib/context-manager/shared/context.interface.ts>`_
 
-    
+
 *****************
 hasExpansionPanel
 *****************
@@ -536,7 +664,7 @@ ImportExport
     .. line-block::
         Cette configuration permet de définir un service qui sera en mesure de convertir des formats de fichiers géométriques non gérés par IGO2(OpenLayers).
 
-        Actuellement, les GeoJson, KML, KMZ sont acceptés par IGO2. Par contre, les `Esri Shapefile  <https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf>`_ doivent transiger par un serveur de conversion. 
+        Actuellement, les GeoJson, KML, KMZ sont acceptés par IGO2. Par contre, les `Esri Shapefile  <https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf>`_ doivent transiger par un serveur de conversion.
 
         C'est à partir ce cette propriété que vous pouvez définir le serveur de conversion qui vous retournera un fichier utilisable par IGO2 (GeoJson).
 
@@ -553,7 +681,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -570,7 +698,7 @@ Propriétés
                Url du service de conversion.
          - .. line-block::
                https://geoegl.msp.gouv.qc.ca/apis/ogre
-         - 
+         -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -586,7 +714,7 @@ Language
 ***************
 
     .. line-block::
-        Définir le dossier contenant les fichiers de traduction de l'appplication. 
+        Définir le dossier contenant les fichiers de traduction de l'appplication.
         IGO2 est actuellement disponible en anglais et en francais, selon les paramètres du navigateur.
         Il est toutefois possible de définir le language désiré à même le code de l'application.
 
@@ -603,7 +731,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -619,8 +747,8 @@ Propriétés
          - .. line-block::
                Définir le dossier contenant
                les fichiers de traduction
-               de l'appplication. 
-         - 
+               de l'appplication.
+         -
          - ./locale/
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -670,8 +798,10 @@ Liens
         - `Exemple de mapOverlay <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json>`_
 
 
+.. _igoprojections:
+
 ***************
-Projection
+Projections
 ***************
 
     .. line-block::
@@ -691,12 +821,13 @@ Exemples
                   }
             ]
 
-Propriétés
+Propriétés - Objet Projection
+===============
 
     .. list-table::
        :widths: 10 10 30
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -707,29 +838,29 @@ Propriétés
          - String
          - .. line-block::
                Nom d'affichage que vous
-               voulez donner \à la 
+               voulez donner \à la
                projection ajoutée.
        * - **code***
          - String
          - .. line-block::
                Code de la projection/
-               système de coordonnées 
+               système de coordonnées
                à ajouter à l'application.
        * - **def***
          - String
          - .. line-block::
                Paramètres associés à la
-               définition de votre 
-               projection / système de 
+               définition de votre
+               projection / système de
                coordonnées.
        * - **extent***
          - .. line-block::
-               Liste de 
+               Liste de
                nombre
          - .. line-block::
                Liste de nombre définissant
                les limites d'application
-               de la projection. L'ordre à 
+               de la projection. L'ordre à
                respecter est:
                [Xmin,YMin,XMax,YMax].
 
@@ -748,7 +879,7 @@ RoutingSource
 ***************
 
     .. line-block::
-        Source serveur pour la création des itinéraires. Actuellement, le serveur utilisé est OSRM. 
+        Source serveur pour la création des itinéraires. Actuellement, le serveur utilisé est OSRM.
 
 Exemples
 
@@ -765,7 +896,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -788,9 +919,9 @@ Propriétés
          - String
          - .. line-block::
                Url du serveur
-               retournant 
+               retournant
                l'itinéraire.
-         - 
+         -
          - `https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/ <https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/>`_
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -814,7 +945,7 @@ Theme
     .. line-block::
         Permet de définir les thèmes (couleurs, fonts) de l'application.
         Le répertoire où sont conservés les thèmes est le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
-     
+
 Exemples
 
         .. code:: json
@@ -826,7 +957,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -840,7 +971,7 @@ Propriétés
        * - **theme***
          - String
          - .. line-block::
-               Thème à utiliser pour 
+               Thème à utiliser pour
                la présente application
                configurée.
          - .. line-block::
@@ -875,12 +1006,12 @@ Contenu cartographique
 
 La configuration du contenu cartographique est possible grâce aux fichiers de contextes:
     1. **base.json**
-    2. **nom_du_contexte.json** 
+    2. **nom_du_contexte.json**
 
-Ces derniers sont situés dans le répertoire : 
+Ces derniers sont situés dans le répertoire :
     - `igo2/src/contexts <https://github.com/infra-geo-ouverte/igo2/tree/master/src/contexts>`_
 
-Le fichier **nom_du_contexte.json** contient les éléments 
+Le fichier **nom_du_contexte.json** contient les éléments
 spécifiques selon le contexte à exploiter.
 Exemple, dans une application cartographique vous pouvez avoir plusieurs contextes(thématiques):
 
@@ -897,6 +1028,7 @@ On peut y définir:
 
 Quant à lui, le fichier **base.json** contient les éléments 
 partagés entre chancun des contextes l'héritant.
+
 Selon l'exemple précédent, dans une application cartographique, vous avez 3 contextes (thématiques):
 
       - hydrograhie.json
@@ -914,6 +1046,7 @@ Le contexte _default, sera le contexte affiché à l'arrivée dans l'application
 Important : Notez que le fichier nom_du_contexte.json a préséance sur le fichier _base.json.
 
 
+
 ***************************
 Résumé fichier de contexte
 ***************************  
@@ -921,7 +1054,7 @@ Résumé fichier de contexte
     .. list-table::
        :widths: 10 10 30 15
        :header-rows: 1
-    
+
        * - Propriétés
          - Type
          - Description
@@ -940,7 +1073,7 @@ Résumé fichier de contexte
                ...
        * - .. line-block::
                **layers***              
-         -     `layers`_ []
+         -  :ref:`layer[] <igolayer>`
          - .. line-block::
                Liste des couches
                d'informations
@@ -954,7 +1087,7 @@ Résumé fichier de contexte
          - `map`_
          - .. line-block::
                Définition de la carte
-               lors de l'ouverture 
+               lors de l'ouverture
                initial du contexte
          - 
        * - message
@@ -968,12 +1101,12 @@ Résumé fichier de contexte
                Liste des outils
                disponibles dans 
                l'application.
-               L'ordre dans la 
+               L'ordre dans la
                liste correspond
-               à l'ordre 
-               d'apparition des 
+               à l'ordre
+               d'apparition des
                outils dans IGO2.
-         - Tous 
+         - Tous
        * - `tools`_
          - Objet[]
          - .. line-block::
@@ -989,12 +1122,12 @@ Résumé fichier de contexte
                Nom ou identifiant
                du contexte.
                Doit être unique
-               au sein de la 
+               au sein de la
                même application.
          - .. line-block::
                Map
                ShareMap
-    
+
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
@@ -1003,7 +1136,7 @@ Base
 ***************
 
     .. line-block::
-        Identification du nom du ficher de base dont les contextes peuvent hériter du contenu. 
+        Identification du nom du ficher de base dont les contextes peuvent hériter du contenu.
 
         À l'intérieur d'un fichier **base.json**, les propriétés tolérées sont:
             - `layers`_
@@ -1012,7 +1145,7 @@ Base
             - `tools`_
 
         Pour le détail de ces propriétés, référez-vous aux sections suivantes.
-                
+
 Exemples
 
         - Définition : `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
@@ -1069,7 +1202,8 @@ Exemples
 
 Propriétés
     .. line-block::
-        Référez-vous à la description de ce qu'est un :ref:`layer <igolayer>`. 
+        Permet de définir une liste de couches. Référez-vous à la description de ce qu'est un :ref:`layer <igolayer>`. 
+
 
 Liens
 
@@ -1237,16 +1371,16 @@ Exemples
         .. code:: json
 
             "toolbar": [
-                  "searchResults", 
-                  "contextManager", 
-                  "mapDetails", 
+                  "searchResults",
+                  "contextManager",
+                  "mapDetails",
                   "catalog",
                   "ogcFilter",
                   "timeFilter",
                   "spatialFilter"
                   "print",
-                  "measurer", 
-                  "shareMap", 
+                  "measurer",
+                  "shareMap",
                   "about"
                   ]
 
@@ -1282,7 +1416,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -1321,11 +1455,11 @@ Propriétés
                Si vous modifiez le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
                    - fichiers dans `Language`_
-         - 
+         -
          - .. line-block::
-               Référer vous à 
+               Référer vous à
                l'outil désiré.
-               
+
 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -1343,8 +1477,8 @@ Uri
 ***************
 
     .. line-block::
-        Identifiant du contexte. Particulièrement utile pour le partage de cartes. C'est cette propriété du contexte qui est utilisée pour bâtir l'url de partage de carte: 
-        
+        Identifiant du contexte. Particulièrement utile pour le partage de cartes. C'est cette propriété du contexte qui est utilisée pour bâtir l'url de partage de carte:
+
             ex: .../?context=uriDuContexte...
 
         Si votre contexte est dans un sous-répertoire, y inscrire également dans l'uri le chemin (repertoire/uriDuContexte)

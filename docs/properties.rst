@@ -1635,7 +1635,8 @@ catalog
 
     .. line-block::
         Outil permettant de lister les catalogues disponibles configurés dans l'application:
-            - :ref:`Configuration des catalogues <igocatalog>`.
+            - :ref:`Configuration des catalogue <_igocatalogConfig>`. 
+
 
 Exemples
 
@@ -1686,7 +1687,8 @@ Propriétés
 Liens
 
     - `catalog-library-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-library-tool>`_
-    - :ref:`Configuration des catalogues <igocatalog>`.
+    - :ref:`Configuration des catalogue <igocatalogConfig>`. 
+
 
 
 .. _igocatalogBrowser:
