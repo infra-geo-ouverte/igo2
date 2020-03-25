@@ -130,19 +130,19 @@ export class ToastPanelComponent implements OnInit {
 
   private getSelectedMarkerStyle(feature: Feature)  {
     if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({text: feature.meta.mapTitle});
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle, outlineColor: [0, 255, 255]});
     } else {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeWidth: 4});
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeWidth: 4, strokeColor: [0, 255, 255]});
     }
   }
 
   private getMarkerStyle(feature: Feature) {
     if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({text: feature.meta.mapTitle, opacity: 0.5});
+      return createOverlayMarkerStyle({text: feature.meta.mapTitle, opacity: 0.5, outlineColor: [0, 255, 255]});
     } else if (feature.geometry.type === 'LineString' || feature.geometry.type === 'MultiLineString') {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeOpacity: 0.5});
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeOpacity: 0.5, strokeColor: [0, 255, 255]});
     } else {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle, fillOpacity: 0.15});
+      return createOverlayDefaultStyle({text: feature.meta.mapTitle, fillOpacity: 0.15, strokeColor: [0, 255, 255]});
     }
   }
 
@@ -227,17 +227,22 @@ export class ToastPanelComponent implements OnInit {
   }
 
   focusResult(result: SearchResult<Feature>) {
+    this.map.overlay.removeFeature(result.data);
+
     result.data.meta.style = this.getSelectedMarkerStyle(result.data);
-    this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
+    result.data.meta.style.setZIndex(2000);
+    this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
 
   unfocusResult(result: SearchResult<Feature>, force?) {
     if (!force && this.store.state.get(result).focused) {
       return;
     }
+    this.map.overlay.removeFeature(result.data);
 
     result.data.meta.style = this.getMarkerStyle(result.data);
-    this.map.overlay.setFeatures(this.store.all().map(f => f.data), FeatureMotion.None);
+    result.data.meta.style.setZIndex(undefined);
+    this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
 
   selectResult(result: SearchResult<Feature>) {
@@ -250,14 +255,19 @@ export class ToastPanelComponent implements OnInit {
       true
     );
     this.resultSelected$.next(result);
+
     const features = [];
     for (const feature of this.store.all()) {
-      feature.data === this.resultSelected$.getValue().data ?
-        feature.data.meta.style = this.getSelectedMarkerStyle(feature.data) :
-          feature.data.meta.style = this.getMarkerStyle(feature.data);
+      if (feature.meta.id === result.meta.id) {
+        feature.data.meta.style = this.getSelectedMarkerStyle(feature.data);
+        feature.data.meta.style.setZIndex(2000);
+      } else {
+        feature.data.meta.style = this.getMarkerStyle(feature.data);
+      }
       features.push(feature.data);
     }
-    this.map.overlay.setFeatures(features, FeatureMotion.None);
+    this.map.overlay.removeFeatures(features);
+    this.map.overlay.addFeatures(features, FeatureMotion.Default);
 
     if (this.zoomAuto) {
       const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
@@ -281,10 +291,11 @@ export class ToastPanelComponent implements OnInit {
       feature.data.meta.style = this.getMarkerStyle(feature.data);
       features.push(feature.data);
     }
-    this.map.overlay.setFeatures(features, FeatureMotion.None);
+    this.map.overlay.setFeatures(features, FeatureMotion.None, 'map');
   }
 
   clear() {
+    this.map.overlay.removeFeatures(this.store.all().map(f => f.data));
     this.store.clear();
     this.unselectResult();
   }
@@ -295,7 +306,15 @@ export class ToastPanelComponent implements OnInit {
     );
   }
 
-  @HostListener('document:keydown.ArrowLeft')
+  handleKeyboardEvent(event) {
+    event.preventDefault();
+    if (event.keyCode === 37) {
+      this.previousResult();
+    } else if (event.keyCode === 39) {
+      this.nextResult();
+    }
+  }
+
   previousResult() {
     if (!this.resultSelected$.value) {
       return;
@@ -307,7 +326,6 @@ export class ToastPanelComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.ArrowRight')
   nextResult() {
     if (!this.resultSelected$.value) {
       return;
