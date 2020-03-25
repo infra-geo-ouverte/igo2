@@ -6,6 +6,7 @@ http://www.ericholscher.com/blog/2016/mar/15/dont-use-markdown-for-technical-doc
 CONFIG.JSON
 
 hasExpansionPanel
+
 Auth
 
     - loginRoute?: string;
@@ -35,6 +36,7 @@ map
 
 tools
 
+OGC filter -> propriété
 
 Shortcut
 
