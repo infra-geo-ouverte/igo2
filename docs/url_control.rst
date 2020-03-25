@@ -97,6 +97,7 @@ Sélection du contexte
         - https://infra-geo-ouverte.github.io/igo2/?tool=directions
         - https://infra-geo-ouverte.github.io/igo2/?tool=ogcFilter
         - https://infra-geo-ouverte.github.io/igo2/?tool=timeFilter
+        - https://infra-geo-ouverte.github.io/igo2/?tool=spatialFilter
         - https://infra-geo-ouverte.github.io/igo2/?tool=importExport
         - https://infra-geo-ouverte.github.io/igo2/?tool=mapDetails
         - https://infra-geo-ouverte.github.io/igo2/?tool=map

@@ -12,8 +12,9 @@ Cette section détaille les configurations possibles pour le
 navigateur dans un contexe cartographique.
 À l'aide de fichiers de configuration (fichiers JSON) , il est possible de paramétrer:
 
-      - l'application
-      - contenu cartographie.
+      - l'application 
+      - le contenu cartographique
+
 
 ==============================
 Application
@@ -25,19 +26,21 @@ Ce dernier est situé dans le répertoire :
 
     - `src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
 
-Il est également de configurer l'application grâce a un second
-fichier selon l'environnement désiré (soit test ou production).
+
+Il est également possible de configurer l'application grâce à un second 
+fichier selon l'environnement désiré (test ou production). 
+
 Pour modifier le comportement de l'application, vous pouvez modifier:
 
     - `igo2/src/environments/environment.prod.ts <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.prod.ts>`_
     - `igo2/src/environments/environment.ts <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
 
 
-Si vous désirez changer, le chemin d'accès de ce fichier ou bien d'environnement.*.ts , il est spécifié dans le code de l'application dans le fichier:
+Si vous désirez changer le chemin d'accès de ce fichier ou bien d'environnement.*.ts , il est spécifié dans le code de l'application dans le fichier:
 
     - `/src/app/app.module.ts <https://github.com/infra-geo-ouverte/igo2/blob/54e74aa21ac66745f81dbbca77334c244e9f9b12/src/app/app.module.ts#L41>`_ ligne 41.
 
-Important : Notez que le fichier config.json à préséance sur le fichier environment.*.ts
+Important : Notez que le fichier config.json a préséance sur le fichier environment.*.ts
 
 
 *********************
@@ -52,6 +55,10 @@ Résumé
          - Type
          - Description
          - Outil lié
+       * - analytic
+         - `Analytics`_
+         - Permet de définir un fournisseur de service d'analyse et de statistique.
+         -
        * - auth
          - `Auth`_
          - .. line-block::
@@ -69,9 +76,11 @@ Résumé
        * - context
          - `Context`_
          - .. line-block::
-               Activation de l'API de context d'IGO2.
-               Cette API sera documentée
-               indépendamment ce la présente
+
+               Activation de l'API de context d'IGO2. 
+               Cette API sera documentée 
+               indépendamment de la présente 
+
                documentation.
          - ContextManager
        * - `hasExpansionPanel`_
@@ -79,8 +88,8 @@ Résumé
          - .. line-block::
                Permet d'ouvrir un paneau d'expansion à partir
                d'un bouton situé dans le coin inférieur gauche
-               de la carte.
-               Ce dernier contient les données tabulaire pour
+               de la carte. 
+               Ce dernier contient les données tabulaires pour
                 les données WFS / Vectorielle / Cluster
                ** Encore en développement **
          -
@@ -95,9 +104,14 @@ Résumé
        * - **language***
          - `Language`_
          - .. line-block::
-               Chemin d'accès des fichiers de traduction de
-               l'application.
-         - Tous
+               Chemin d'accès des fichiers de traduction de 
+               l'application. 
+         - Tous 
+       * - mapOverlay
+         - `MapOverlay`_ []
+         - .. line-block::
+              Éléments visuels à ajouter par dessus la carte de l'application.
+         -  
        * - projections
          - :ref:`Projection <igoprojections>` []
          - .. line-block::
@@ -133,7 +147,37 @@ Résumé
                le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
          -
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+       * - Title
+         - String   
+         - Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
+         - 
+       * - Description
+         - String
+         - Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche, comme par exemple Google.  
+         -
+
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+
+
+***************
+Analytics
+***************
+
+    .. line-block::
+	  Sert à configurer une application pour effectuer le monitoring du site web pour les statistiques.
+	  NB. : Pour une application sans statistiques, simplement ne pas mettre ces configurations.
+
+Exemples
+
+	.. code:: json
+
+		"analytics": {
+			"provider": "matomo",
+			"url": "https://geoegl.msp.gouv.qc.ca/matomo/",
+			"id": "40"
+		}
 
 
 ***************
@@ -145,6 +189,7 @@ Auth
 
     .. line-block::
         Sert à effectuer l'authentification des usagers.
+        NB. : Pour une application sans authentification, simplement ne pas mettre ces configurations.
 
 Exemples
 
@@ -201,7 +246,7 @@ Propriétés
          - ...
          - ...
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -215,22 +260,21 @@ Catalog
 ***************
 
     .. line-block::
-        Cette section de la configuration permet de charger une liste de sources de cataloguage. Une fois les sources chargées, il est possible d'ajouter des couches d'informations à la carte.
-
-        Les sources de cataloguage permise:
-            - Service WMS
-            - Service WMTS
-            - baselayers
-            - composite
+        Cette section de la configuration permet de charger une liste de sources de cataloguage. Une fois les sources chargées, il est possible d'ajouter ces couches d'informations à la carte.
       
-        Les couches d'informations contenues dans ces services sont récupérées grâce au couches publiées dans le GetCapabilities du service.
+        Les sources de cataloguage permises:
+            - Service WMS 
+            - Service WMTS
+
+      
+        Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
         Dans la présente version
-            1- les couches ajoutées par le catalogue sont partagées lors du partage de carte.
+            1- Les couches ajoutées par le catalogue sont partagées lors du partage de carte.
             2- La structure de l'url pour les couches partagées est la suivante:
-                - wmsUrl =­­> une liste, séparé par une ',' (virgule) listant les url de service ajoutées.
+                - wmsUrl =­­> une liste, séparée par une ',' (virgule) listant les url de service ajoutées.
                       - Exemple : wmsUrl=urlDuService1,urlDuService2
-                - layers => une liste, séparé par une ',' (virgule) groupé par un bloc de parenthèses, respectant l'ordre des services déclarés dans wmsUrl
+                - layers => une liste, séparée par une ',' (virgule) groupée par un bloc de parenthèses, respectant l'ordre des services déclarés dans wmsUrl
                       - Exemple : layers=(layer1,layer2),(layer3,layer4)
                             - layer1 et layer2 proviennent de l'url "urlDuService1"
                             - layer3 et layer4 proviennent de l'url "urlDuService2"
@@ -261,9 +305,12 @@ Exemples
                         "url": "/swtq",
                         "sortDirection": "desc",
                         "queryFormat": {
-                          "htmlgml2": "*",
-                          "json": "stations_meteoroutieres"
-                        },
+                              "htmlgml2": "*",
+                              "json": "stations_meteoroutieres"
+                              },
+                        "queryHtmlTarget": "iframe",
+                        "count": 365,
+
                         "tooltipType": "abstract"
                   },
                   {
@@ -383,7 +430,7 @@ Propriétés - Objet Catalog
          - QueryFormat
          - .. line-block::
                Pour les services **WMS**, le format d'interrogation
-               de la données.
+               de la donnée.
          - Voir **QueryFormat**
          -
        * - queryHtmlTarget
@@ -399,25 +446,25 @@ Propriétés - Objet Catalog
        * - queryParams
          - objet {}
          - .. line-block::
-               Paramètre supplémentaires à ajouter à l'appel des
-               couches ajoutées à partir du service.
-               Que ce soit des paramètres normés (WMS|WMTS)
-               ou lié à votre service.
-         -
+               Paramètres supplémentaires à ajouter à l'appel des 
+               couches ajoutées à partir du service. 
+               Que ce soit des paramètres normés (WMS|WMTS) 
+               ou liés à votre service.
+         - 
          -
        * - regFilters
          - String[]
          - .. line-block::
-               Une liste d'expressions régulières (regex)
-               permettant de limiter les couches
-               d'information présentés dans l'outil
+               Une liste d'expressions régulières (regex) 
+               permettant de limiter les couches 
+               d'information présentées dans l'outil 
                CatalogBrowser
          -
          -
        * - requestEncoding
          - String
          - .. line-block::
-               Type d'encodage des paramètre demandés au
+               Type d'encodage des paramètres demandés au
                serveur
          - KVP REST
          - KVP
@@ -441,8 +488,8 @@ Propriétés - Objet Catalog
          - .. line-block::
                Permet de trier l'ordre d'apparition des couches
                du catalogue dans l'outil CatalogBrowser
-               Influence l'ordre d'ajout des couches
-               d'information à la carte.
+               Influence l'ordre d'ajout des couches 
+               d'informations à la carte.
          - asc desc
          - .. line-block::
                Aucun, l'ordre présenté par service
@@ -464,8 +511,8 @@ Propriétés - Objet Catalog
        * - tooltipType
          - String
          - .. line-block::
-               Pour les couches ajoutées, défini si le tooltip
-               (sulvol du titre) sera le résumé du "layer"
+               Pour les couches ajoutées, définit si le tooltip
+               (sulvol du titre) sera le résumé du "layer" 
                (**wms/wmts**) ou son titre
          - abstract title
          - title
@@ -473,13 +520,13 @@ Propriétés - Objet Catalog
          - String
          - .. line-block::
                Type de service à appeler
-         - baselayers composite wmts wms
+         - composite wmts wms
          - wms
        * - **url***
          - String
          - .. line-block::
                Url du service WMS ou WMTS sans les paramètre
-               d'url normés OGC
+               d'url normé OGC
                (i.e. service=wms&request=GetCapabilities)
                OU url du service de baselayers
          -
@@ -496,7 +543,7 @@ Propriétés - Objet Catalog
                (WMS|WMTS)
          - 1.0.0 (WMTS)
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 .. _igocompositecatalogObject:
 
@@ -553,15 +600,15 @@ Context
 
     .. line-block::
         Permet de rejoindre une API nous fournissant des contextes cartographiques.
-        Cette API sera documentée indépendamment ce la présente documentation.
+        Cette API sera documentée indépendamment de la présente documentation.
 
 Exemples
 
         .. code:: json
 
             context: {
-                url: 'https://geoegl.msp.gouv.qc.ca/apis/igo2/...',
-                defaultContextUri: '5'
+                "url" : "https://geoegl.msp.gouv.qc.ca/apis/igo2/...",
+                "defaultContextUri" : "5"
             }
 
 Propriétés
@@ -595,7 +642,7 @@ Propriétés
          -
          -  _default
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -626,7 +673,7 @@ Exemples
         .. code:: json
 
             importExport: {
-                url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre'
+                "url" : "https://geoegl.msp.gouv.qc.ca/apis/ogre"
             }
 
 Propriétés
@@ -653,7 +700,7 @@ Propriétés
                https://geoegl.msp.gouv.qc.ca/apis/ogre
          -
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -676,7 +723,7 @@ Exemples
         .. code:: json
 
             language: {
-                prefix: './locale/'
+                "prefix": "./locale/"
             }
 
 Propriétés
@@ -704,12 +751,51 @@ Propriétés
          -
          - ./locale/
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
         - `igo2-lib/packages/core/src/lib/language/shared/language.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/core/src/lib/language/shared/language.interface.ts>`_
         - `locale démo https://infra-geo-ouverte.github.io/igo2/  <https://github.com/infra-geo-ouverte/igo2/tree/gh-pages/locale>`_
+
+
+
+***************
+MapOverlay
+***************
+
+    .. line-block::
+        Permet de définir des éléments à ajouter par dessus le visuel de la carte.
+
+Exemples
+
+        .. code:: json
+
+            "mapOverlay": [{
+                        "media": ["desktop"],
+                        "cssClass": "top-center",
+                        "imgSrc": " ./particular/images/FO_logo_2c.png",
+                        "imgSize": "280px",
+                        "alt": "Foret ouverte",
+                        "fixed": true,
+                        "marginTop": "10px"
+                  },
+                  {
+                        "media": ["desktop"],
+                        "cssClass": "bottom-left",
+                        "link": "http://igouverte.org/",
+                        "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
+                        "imgSize": "30px",
+                        "fontSize": "6pt",
+                        "marginLeft": "38px",
+                        "marginBottom": "10px",
+                        "alt": "IGO",
+                        "fixed": false
+                  }
+            ]
+
+Liens
+        - `Exemple de mapOverlay <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json>`_
 
 
 .. _igoprojections:
@@ -728,10 +814,10 @@ Exemples
 
             projections: [
                 {
-                    alias: 'Québec Lambert'
-                    code: 'EPSG:32198,
-                    def: '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs',
-                    extent: [-886251.0296, 180252.9126, 897177.3418, 2106143.8139]
+                    "alias": "Québec Lambert",
+                    "code": "EPSG:32198",
+                    "def": "+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs",
+                    "extent": [-886251.0296, 180252.9126, 897177.3418, 2106143.8139]
                   }
             ]
 
@@ -778,7 +864,7 @@ Propriétés - Objet Projection
                respecter est:
                [Xmin,YMin,XMax,YMax].
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
         - `http://epsg.io/ <http://epsg.io/>`_
@@ -801,8 +887,8 @@ Exemples
 
             "routingSources": {
                 "osrm": {
-                    "enabled": true
-                    "url": "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/";
+                    "enabled": true,
+                    "url": "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/"
                 }
 
 Propriétés
@@ -838,7 +924,7 @@ Propriétés
          -
          - `https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/ <https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/>`_
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -857,7 +943,7 @@ Theme
 ***************
 
     .. line-block::
-        Permet de définir les thèmes (couleur, fonts) de l'application.
+        Permet de définir les thèmes (couleurs, fonts) de l'application.
         Le répertoire où sont conservés les thèmes est le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
 
 Exemples
@@ -898,7 +984,7 @@ Propriétés
                - teal.theme
          - blue-theme
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -918,7 +1004,7 @@ Exemple complet
 Contenu cartographique
 =======================================
 
-La configuration du contenu cartographie est possible grâce aux fichiers:
+La configuration du contenu cartographique est possible grâce aux fichiers de contextes:
     1. **base.json**
     2. **nom_du_contexte.json**
 
@@ -936,31 +1022,34 @@ Exemple, dans une application cartographique vous pouvez avoir plusieurs context
 
 On peut y définir:
     - l'étendue cartographique
-    - les couches d'informations disponible
-    - les outils accessible
-    - certaines configuration d'outils
+    - les couches d'informations disponibles
+    - les outils accessibles 
+    - certaines configurations d'outils
 
-Quant à lui, le fichier **base.json** contient les éléments
-partagés entre chancun des contexte l'héritant.
+Quant à lui, le fichier **base.json** contient les éléments 
+partagés entre chancun des contextes l'héritant.
+
 Selon l'exemple précédent, dans une application cartographique, vous avez 3 contextes (thématiques):
 
       - hydrograhie.json
       - routes.json
       - risques.json
 
-Plutôt que de répéter 3 fois les mêmes éléments
-(fonds cartographique, outils, couches de base) dans chaque contexte,
-il est possibe de déclarer dans le **base.json** les éléments communs
+Plutôt que de répéter 3 fois les mêmes éléments 
+(fonds cartographiques, outils, couches de base) dans chaque contexte, 
+il est possibe de déclarer dans le **base.json** les éléments communs 
 aux 3 contextes. La maintenance de l'application
 en sera facilitée.
 
+Le contexte _default, sera le contexte affiché à l'arrivée dans l'application.
 
-Important : Notez que le fichier nom_du_contexte.json à préséance sur le fichier _base.json.
+Important : Notez que le fichier nom_du_contexte.json a préséance sur le fichier _base.json.
 
 
-*********************
-Résumé
-*********************
+
+***************************
+Résumé fichier de contexte
+***************************  
 
     .. list-table::
        :widths: 10 10 30 15
@@ -983,31 +1072,34 @@ Résumé
                Config d'outils
                ...
        * - .. line-block::
-               **layers***
-               Voir
-               `layers`_
-         - :ref:`layer[] <igolayer>`
+               **layers***              
+         -  :ref:`layer[] <igolayer>`
          - .. line-block::
                Liste des couches
                d'informations
-               disponible pour
-               le contexte
-               sélectionnée.
+               disponibles pour
+               le contexte 
+               sélectionné. 
          - .. line-block::
                Map
                MapDetails
        * - **map***
-         - map
+         - `map`_
          - .. line-block::
                Définition de la carte
                lors de l'ouverture
                initial du contexte
-         -
+         - 
+       * - message
+         - `Message`_
+         - .. line-block::
+               Présentation d'un message a l'ouverture du contexte.
+         - 
        * - `toolbar`_
          - String[]
          - .. line-block::
                Liste des outils
-               disponible dans
+               disponibles dans 
                l'application.
                L'ordre dans la
                liste correspond
@@ -1018,8 +1110,8 @@ Résumé
        * - `tools`_
          - Objet[]
          - .. line-block::
-               Liste de configuration
-               des outils présent dans
+               Liste des configurations 
+               des outils présentes dans
                l'application.
          - Tous
        * - .. line-block::
@@ -1036,7 +1128,7 @@ Résumé
                Map
                ShareMap
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
 ***************
@@ -1046,11 +1138,11 @@ Base
     .. line-block::
         Identification du nom du ficher de base dont les contextes peuvent hériter du contenu.
 
-        À l'intérieur d'un fichier **base.json**, les propriétés tolérés sont:
+        À l'intérieur d'un fichier **base.json**, les propriétés tolérées sont:
             - `layers`_
-            - map
-            - toolbar
-            - tools
+            - `map`_
+            - `toolbar`_
+            - `tools`_
 
         Pour le détail de ces propriétés, référez-vous aux sections suivantes.
 
@@ -1065,10 +1157,10 @@ Layers
 ***************
 
     .. line-block::
-        Permet de définir une liste de couches d'informations disponible à l'usager lors de l'ouverture de l'application.
-        L'ordre d'apparition des couches dans la table des matières peut être controlée de divers moyens:
-            1- l'ordre d'apparition des couches dans le contexte. Plus la couche est au début de la liste, plus elle sera au bas de la table des matière.
-            2- La propriété zIndex de chaque couche d'information. Plus le zIndex et élevé, plus la couche sera au haut de la table des matières.
+        Permet de définir une liste de couches d'informations disponibles à l'usager lors de l'ouverture dans l'application.
+        L'ordre d'apparition des couches dans la liste présentée à l'utilisateur peut être contrôlée de divers moyens:
+            1- L'ordre d'apparition des couches dans le contexte. Plus la couche est au début de la liste, plus elle sera au bas de la la liste présentée dans l'application.
+            2- La propriété zIndex de chaque couche d'information. Plus le zIndex et élevé, plus la couche sera au haut de la liste présentée.
 
 Exemples
 
@@ -1110,7 +1202,8 @@ Exemples
 
 Propriétés
     .. line-block::
-        Permet de définir une liste de couches. Référer-vous à la description de ce qu'est un :ref:`layer <igolayer>`.
+        Permet de définir une liste de couches. Référez-vous à la description de ce qu'est un :ref:`layer <igolayer>`. 
+
 
 Liens
 
@@ -1153,6 +1246,87 @@ Liens
         - :ref:`Map IGO2 <igomap>`.
 
 
+***************
+Message
+***************
+
+    .. line-block::
+        Message affiché à l'ouverture du contexte
+
+Exemples
+
+        .. code:: json
+
+            "message": {
+                  "format": "html",
+                  "html": " "<head><meta charset='utf-8'><style> .page{padding-left: 0px;margin-right:-45px;} </style> </head>  <body> <div class='page' style='color: white;'> Bienvenue sur <b>IGO</b></div> </body>",
+                  "type": "info",
+                  "options": {
+                        "timeOut": 30000
+                  }
+            },
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur par défaut
+       * - format
+         - String
+         - Le format du message html ou text. Selon le choix, une deuxième configuration devra être définie soit html ou text.
+         - 'text', 'html'
+         - 
+       * - html
+         - String
+         - Le html du message sur une seule ligne. Cette configuration est obligatoire si le format = 'html.   
+         - 
+         - 
+       * - icon
+         - String
+         - Icone à ajouter au message.  
+         - 
+         - 
+       * - options.template
+         - Sting
+         - En construction
+         - 
+         - 
+       * - options.timeOut
+         - Number
+         - Temps avant la disparition du message, en miliseconde.
+         - 
+         - 
+       * - text
+         - Sting
+         - Le text du message à afficher. Cette configuration remplace la configuration html.
+         - 
+         - 
+       * - title
+         - Sting
+         - Le titre du message à afficher. Cette configuration s'active seulement avec la configuration text et ne sera pas pris en compte avec la configuration html.
+         - 
+         - 
+       * - type
+         - Sting
+         - Le type du message à afficher. Avertissement, erreur ou information. Selon le type choisi une couleur spécifiée sera appliquée selon la thématique de couleur de l'application.
+         - 'alert', 'error', 'info', 'success'
+         - 
+               
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+
 
 ***************
 Title
@@ -1183,13 +1357,14 @@ Toolbar
             - :ref:`directions <igodirections>`
             - :ref:`ogcFilter <igoogcFilter>`
             - :ref:`timeFilter <igotimeFilter>`
+            - :ref:`spatialFilter <igospatialFilter>`
             - :ref:`importExport <igoimportExport>`
             - :ref:`mapDetails <igomapDetails>`
             - :ref:`map <igomaptool>`
             - :ref:`print <igoprint>`
             - :ref:`searchResults <igosearchResults>`
         Chacun de ces outils fait référence à un nom d'outil tel que définit dans le package "integration" d'IGO2.
-        Pour en modifier les propriétées référez-vous à `tools`_ .
+        Pour en modifier les propriétés référez-vous à `tools`_ .
 
 Exemples
 
@@ -1202,6 +1377,7 @@ Exemples
                   "catalog",
                   "ogcFilter",
                   "timeFilter",
+                  "spatialFilter"
                   "print",
                   "measurer",
                   "shareMap",
@@ -1217,18 +1393,18 @@ Tools
 ***************
 
     .. line-block::
-        Définit la liste des configuration permise pour chaque outil.
+        Définit la liste des configurations permises pour chaque outil.
 
-        Pour les options spécifiques à chauque outil, veuillez vous référer aux descriptif de l'outil. Cette section détaille seulement les propriétés communes.
-
+        Pour les options spécifiques à chaque outil, veuillez vous référer aux descriptif de l'outil. Cette section détaille seulement les propriétés communes.
+        
 
 Exemples
 
         .. code:: json
 
             {
-                "icon" : "iconName"
-                "name": "catalogBrowser",
+                "icon" : "iconName", 
+                "name" : "catalogBrowser",
                 "title": "TitreOutilQuiDoitEtreTraduit",
                 "options" : {
                     ...
@@ -1263,17 +1439,20 @@ Propriétés
                - :ref:`directions <igodirections>`
                - :ref:`ogcFilter <igoogcFilter>`
                - :ref:`timeFilter <igotimeFilter>`
+               - :ref:`spatialFilter <igospatialFilter>`
                - :ref:`importExport <igoimportExport>`
                - :ref:`mapDetails <igomapDetails>`
+               - :ref:`mesurer <igomesurer>`
                - :ref:`map <igomaptool>`
                - :ref:`print <igoprint>`
                - :ref:`searchResults <igosearchResults>`
-         -
+               - :ref:`shareMap <igoshareMap>`
+         - 
        * - title
          - String
          - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
+               Le titre affiché dans l'application. Sujet aux traductions.
+               Si vous modifiez le titre par défaut, vous devez ajouter 
                ce titre dans les langues supportées par IGO2 (fr-en).
                    - fichiers dans `Language`_
          -
@@ -1283,7 +1462,7 @@ Propriétés
 
 
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
 Liens
