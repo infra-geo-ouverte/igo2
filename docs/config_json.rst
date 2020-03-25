@@ -673,7 +673,8 @@ Exemples
         .. code:: json
 
             importExport: {
-                "url" : "https://geoegl.msp.gouv.qc.ca/apis/ogre"
+                url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
+                clientSideFileSizeMaxMb: 30
             }
 
 Propriétés
@@ -699,8 +700,14 @@ Propriétés
          - .. line-block::
                https://geoegl.msp.gouv.qc.ca/apis/ogre
          -
-
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+       * - clientSideFileSizeMaxMb
+         - Number
+         - .. line-block::
+               Taille maximum du fichiers pouvant être lu par le fureteur.
+         - .. line-block::
+               
+         - 30
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
