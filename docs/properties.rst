@@ -14,7 +14,7 @@ Carte (map)
 *****************************
     .. line-block::
         Permet de définir les propriétés de la carte dans le contexte.
-        NB: Peux être définie une seule fois dans le contexte _base pour être appliqué à tous les contextes.
+        NB: Peut être définie une seule fois dans le contexte _base pour être appliqué à tous les contextes.
 
 Exemples
 
@@ -34,7 +34,7 @@ Exemples
           }
 
 
-Propriétés de objets "view" de map
+Propriétés de l'objet "view" de map
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -86,9 +86,9 @@ Propriétés de objets "view" de map
          - true
 
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-    ** En construction, propriété a complêter
+    ** En construction, propriété a compléter
 
 Liens
 
@@ -185,7 +185,7 @@ Propriétés
                Pour les **WMS**
                récupérant certaines
                propriétés du service,
-               cette valeur est peut
+               cette valeur peut
                être récupérée.
          -
          -
@@ -204,7 +204,7 @@ Propriétés
                Pour les **WMS**
                récupérant certaines
                propriétés du service,
-               cette valeur est peut
+               cette valeur peut
                être récupérée.
          -
          -
