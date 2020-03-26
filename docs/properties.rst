@@ -332,32 +332,32 @@ Exemples
                 "crossOrigin": "anonymous"
             }
 
----------------------
-Types source options:
----------------------
 
-======
+Types source options:
+
+
+
 ArcGis
 ======
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-===========
+
 Tile ArcGis
 ===========
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-=====
+
 Carto
 =====
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-====
+
 OSM
 ====
 
@@ -402,14 +402,14 @@ Liens
 
     - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
 
-=======
+
 Cluster
 =======
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-=========
+
 TMS (xyz)
 =========
 
@@ -468,7 +468,7 @@ Liens
 
     - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
 
-============
+
 Vector Tiles
 ============
 
@@ -530,21 +530,21 @@ Liens
     - `Mapserver 7.2 + <https://mapserver.gis.umn.edu/it/development/rfc/ms-rfc-119.html>`_
     - `Geoserver <https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html>`_
 
-=======
+
 Vecteur
 =======
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-=========
+
 Websocket
 =========
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
-====
+
 WFS
 ====
 
@@ -569,7 +569,6 @@ Exemples
                   }
             }
 
-===
 WMS
 ===
 
@@ -812,7 +811,7 @@ Liens
     - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts>`_
     - `OGC WMS <https://www.opengeospatial.org/standards/wms>`_
 
-====
+
 WMTS
 ====
 
@@ -1554,9 +1553,9 @@ Outils (tools)
 
 .. _igoabout:
 
-******
+
 about
-******
+=======
 
     .. line-block::
         Outil générique offrant la possibilité d'informer les usagers grâce à un outil d'aide.
@@ -1629,13 +1628,13 @@ Liens
 
 .. _igocatalogtool:
 
-*******
+
 catalog
-*******
+===========
 
     .. line-block::
         Outil permettant de lister les catalogues disponibles configurés dans l'application:
-            - :ref:`Configuration des catalogue <_igocatalogConfig>`. 
+            - :ref:`Configuration des catalogue <_igocatalogConfig>`.
 
 
 Exemples
@@ -1687,15 +1686,15 @@ Propriétés
 Liens
 
     - `catalog-library-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-library-tool>`_
-    - :ref:`Configuration des catalogue <igocatalogConfig>`. 
+    - :ref:`Configuration des catalogue <igocatalogConfig>`.
 
 
 
 .. _igocatalogBrowser:
 
-**************
+
 catalogBrowser
-**************
+===============
 
     .. line-block::
         Outil permettant de lister les couches d'informations du catalogue sélectionné par l'usager.
@@ -1773,9 +1772,9 @@ Liens
 
 .. _igocontextManager:
 
-**************
+
 contextManager
-**************
+================
 
     .. line-block::
         Outil permettant de lister/gérer plusieurs contextes à l'intérieur d'une même application.
@@ -1841,9 +1840,9 @@ Liens
 
 .. _igodirections:
 
-************
+
 directions
-************
+===========
 
     .. line-block::
         Outil permettant de configurer l'outil d'itinéraire, basé sur la configuration dans l'application:
@@ -1904,9 +1903,9 @@ Liens
 
 .. _igoogcFilter:
 
-**********
+
 OgcFilter
-**********
+===========
 
 
     .. line-block::
@@ -2083,9 +2082,9 @@ Exemples d'un layer filtré OGC dans un contexte
 
 .. _igotimeFilter:
 
-**********
+
 timeFilter
-**********
+============
 
     .. line-block::
         Outil permettant de configurer un filtre temporel sur une couche d'un service ayant une propriété temporelle (WMS-T)
@@ -2181,9 +2180,9 @@ Propriétés de l'objet timeFilter
 
 .. _igospatialFilter:
 
-**************
+
 spatialFilter
-**************
+==============
 
     .. line-block::
         Outil permettant de faire une recherche de facon spatiale selon un dessin tracé par utilisateur ou
@@ -2200,9 +2199,9 @@ Exemples
 
 .. _igoimportExport:
 
-*************
+
 importExport
-*************
+==============
     .. line-block::
         Outil permettant d'importer et d'exporter des couches.
         Certaines restrictions s'appliquent:
@@ -2225,9 +2224,9 @@ Exemples
 
 .. _igomapDetails:
 
-***********
+
 mapDetails
-***********
+============
 
   .. line-block::
         Outil présentant la liste de couche à l'intérieur des contextes
@@ -2292,16 +2291,16 @@ Propriétés de l'objet options de mapDetails
 
 .. _igomaptool:
 
-***
+
 map
-***
+======
 
 
 .. _igomeasurer:
 
-********
+
 measurer
-********
+=========
 
     .. line-block::
         Outil permettant de faire des mesures sur la carte
@@ -2318,9 +2317,9 @@ Exemples
 
 .. _igoprint:
 
-*****
+
 print
-*****
+=======
 
     .. line-block::
         Outil permettant d'imprimer la carte affichée à l'écran
@@ -2336,9 +2335,9 @@ Exemples
 
 .. _igosearchResults:
 
-**************
+
 searchResults
-**************
+================
 
     .. line-block::
         Outil présentant les résultats de recherche.
@@ -2382,9 +2381,9 @@ Propriétés de l'objet options de searchResults
 
 .. _igoshareMap:
 
-*********
+
 shareMap
-*********
+==========
 
     .. line-block::
         Outil permettant de partager, à l'aide d'un lien, la carte à l'écran.
