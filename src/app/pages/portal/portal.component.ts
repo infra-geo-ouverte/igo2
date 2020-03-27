@@ -423,6 +423,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onChangeContext(context: DetailedContext) {
+    console.log('context', context);
     this.cancelOngoingAddLayer();
     if (context === undefined) {
       return;
