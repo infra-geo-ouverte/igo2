@@ -19,7 +19,7 @@
         "sourceFields": [
           { "name": "code_municipalite", "alias": "# de la municipalitée" },
           { "name": "date_observation", "allowedOperatorsType": "time" },
-          { "name": "urgence", "allowedOperatorsType": "basic" }
+          { "name": "urgence", "values": ["Immédiate", "Inconnue"], "allowedOperatorsType": "basic" }
         ],
         "ogcFilters": {
           "allowedOperatorsType": "all",
