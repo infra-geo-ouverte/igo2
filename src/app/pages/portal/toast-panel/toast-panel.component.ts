@@ -267,7 +267,7 @@ export class ToastPanelComponent implements OnInit {
       features.push(feature.data);
     }
     this.map.overlay.removeFeatures(features);
-    this.map.overlay.addFeatures(features, FeatureMotion.Default);
+    this.map.overlay.addFeatures(features, FeatureMotion.None);
 
     if (this.zoomAuto) {
       const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
