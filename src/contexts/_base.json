@@ -72,10 +72,7 @@
   "toolbar": [
     "searchResults",
     "contextManager",
-    "map",
-    "mapLegend",
     "mapTools",
-    "mapDetails",
     "measurer",
     "spatialFilter",
     "directions",
@@ -115,7 +112,7 @@
     {
       "name": "mapTools",
       "options": {
-        "selectedTabAtOpening": "legend",
+        "selectedTabAtOpening": "",
         "toggleLegendOnVisibilityChange": false,
         "updateLegendOnResolutionChange": false,
         "layerListControls": {

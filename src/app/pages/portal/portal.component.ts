@@ -434,7 +434,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     if (this.contextLoaded) {
-      this.toolbox.activateTool('mapDetails');
+      this.toolbox.activateTool('mapTools');
     }
 
     this.contextLoaded = true;

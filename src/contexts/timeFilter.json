@@ -55,7 +55,6 @@
   "toolbar": [
     "searchResults",
     "contextManager",
-    "mapDetails",
     "mapTools",
     "timeFilter",
     "measurer",

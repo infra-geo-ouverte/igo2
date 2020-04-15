@@ -191,7 +191,6 @@
   "toolbar": [
     "searchResults",
     "contextManager",
-    "mapDetails",
     "mapTools",
     "ogcFilter",
     "measurer",
