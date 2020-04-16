@@ -81,9 +81,9 @@ Propriétés de l'objet "view" de map
          - true
        * - maxZoomOnExtent
          - Number
-         - Indique le niveau de zoom qu'aura l'application lors d'un clic sur un résultat de recherche de type point.
-         - true/false
-         - true
+         - Indique le niveau de zoom qu'aura l'application lors d'un clic sur un résultat de recherche qui n'est pas une couche.
+         -
+         -
 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
