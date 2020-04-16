@@ -333,33 +333,30 @@ Exemples
             }
 
 
-Types source options:
-
-
 
 ArcGis
-======
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 Tile ArcGis
-===========
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 Carto
-=====
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 OSM
-====
+===============
 
     .. line-block::
         Le fond standard OpenStreetMap.
@@ -404,14 +401,14 @@ Liens
 
 
 Cluster
-=======
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 TMS (xyz)
-=========
+===============
 
     .. line-block::
         Une source de données pour les services de données tuilées de type XYZ où le X et le Y représentent la position de la tuile appelée et le Z, le niveau de zoom (résolution) de la tuile.
@@ -470,7 +467,7 @@ Liens
 
 
 Vector Tiles
-============
+===============
 
     .. line-block::
         Une source de données pour les services de données au format Vector tiles. Plus spécifiquement,
@@ -532,21 +529,21 @@ Liens
 
 
 Vecteur
-=======
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 Websocket
-=========
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 WFS
-====
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
@@ -570,7 +567,7 @@ Exemples
             }
 
 WMS
-===
+===============
 
     .. line-block::
         Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`_ .
@@ -813,7 +810,7 @@ Liens
 
 
 WMTS
-====
+===============
 
     .. line-block::
         Une source de données pour les services de données au format `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_ .
