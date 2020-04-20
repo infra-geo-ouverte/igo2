@@ -72,6 +72,7 @@
   "toolbar": [
     "searchResults",
     "contextManager",
+    "mapLegend",
     "mapTools",
     "measurer",
     "spatialFilter",
@@ -102,6 +103,7 @@
       "name": "mapLegend",
       "options": {
         "allowShowAllLegends": true,
+        "showAllLegendsValue": true,
         "layerAdditionAllowed": true,
         "updateLegendOnResolutionChange": false,
         "layerListControls": {
@@ -113,6 +115,8 @@
       "name": "mapTools",
       "options": {
         "selectedTabAtOpening": "",
+        "allowShowAllLegends": true,
+        "layerAdditionAllowed": true,
         "toggleLegendOnVisibilityChange": false,
         "updateLegendOnResolutionChange": false,
         "layerListControls": {

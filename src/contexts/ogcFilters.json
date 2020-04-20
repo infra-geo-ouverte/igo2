@@ -49,7 +49,7 @@
         "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
         "ogcFilters": {
           "enabled": true,
-          "editable": true,
+          "editable": false,
           "filters": {
             "operator": "PropertyIsEqualTo",
             "propertyName": "severite",
@@ -64,12 +64,13 @@
         "type": "wms",
         "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
         "urlWfs": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+        "queryable": true,
         "params": {
           "layers": "radars_photos"
         },
         "ogcFilters": {
           "enabled": true,
-          "editable": true,
+          "editable": false,
           "pushButtons": {
             "groups": [
               {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]},
