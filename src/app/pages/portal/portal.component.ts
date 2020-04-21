@@ -434,7 +434,20 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     if (this.contextLoaded) {
-      this.toolbox.activateTool('mapTools');
+      const contextManager = this.toolbox.getTool('contextManager');
+      const mapTools = this.toolbox.getTool('mapTools');
+      const mapDetails = this.toolbox.getTool('mapDetails');
+      const mapLegend = this.toolbox.getTool('mapLegend');
+
+      const contextManagerOptions = contextManager ? contextManager.options : {};
+      let toolToOpen =
+        contextManagerOptions.toolToOpenOnContextChange ? contextManagerOptions.toolToOpenOnContextChange : undefined;
+      if (!toolToOpen) {
+        toolToOpen = mapTools ? 'mapTools' : mapDetails ? 'mapDetails' : mapLegend ? 'mapLegend' : undefined;
+      }
+      if (toolToOpen) {
+        this.toolbox.activateTool(toolToOpen);
+      }
     }
 
     this.contextLoaded = true;
