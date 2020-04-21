@@ -70,7 +70,7 @@
         },
         "ogcFilters": {
           "enabled": true,
-          "editable": false,
+          "editable": true,
           "pushButtons": {
             "groups": [
               {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]},
