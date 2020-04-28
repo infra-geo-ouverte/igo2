@@ -1458,6 +1458,7 @@ about
         Outil générique offrant la possibilitée d'informer les usagers grâce à un outil d'aide.
 
 Exemples
+------------------
 
         .. code:: json
 
@@ -1469,6 +1470,7 @@ Exemples
             },
 
 Propriétés
+------------------
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -1514,11 +1516,12 @@ Propriétés
                    ou 
                    htlm: ['','']
                }
-         - `Voir html <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool/about-tool.component.ts>`_
+         - `Sujet aux traductions <https://github.com/infra-geo-ouverte/igo2-lib/blob/514822f26d8d74674fd9e84687d581a35581cd44/packages/integration/src/lib/about/about-tool/about-tool.component.ts#L25>`_
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
+------------------
 
     - `about-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool>`_
 
