@@ -1516,7 +1516,7 @@ Propriétés
                    ou 
                    htlm: ['','']
                }
-         - `Sujet aux traductions <https://github.com/infra-geo-ouverte/igo2-lib/blob/514822f26d8d74674fd9e84687d581a35581cd44/packages/integration/src/lib/about/about-tool/about-tool.component.ts#L25>`_
+         - `Sujet aux traductions <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/integration/src/lib/about/about-tool/about-tool.component.ts#L25>`_
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
