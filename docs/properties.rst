@@ -940,11 +940,13 @@ Propriétés
     Seulement les propriétés spécifique à ce service sont présentées.
 
     .. list-table::
-       :widths: 10 80
+       :widths: 10 30 60
        :header-rows: 1
     
        * - .. line-block::
                Propriétés
+         - .. line-block::
+               Description
          - .. line-block::
                Valeur défaut
        * - searchUrl
@@ -1458,7 +1460,6 @@ about
         Outil générique offrant la possibilitée d'informer les usagers grâce à un outil d'aide.
 
 Exemples
-------------------
 
         .. code:: json
 
@@ -1470,7 +1471,6 @@ Exemples
             },
 
 Propriétés
-------------------
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -1507,21 +1507,41 @@ Propriétés
          - igo.integration.tools.about
        * - options
          - Object
-         - .. line-block::
-               Options de l'outil. Ici pour configurer le html qui sera
-               présenté dans l'outil.
-         - .. line-block::
-               { 
-                   htlm: '' 
-                   ou 
-                   htlm: ['','']
-               }
-         - `Sujet aux traductions <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/integration/src/lib/about/about-tool/about-tool.component.ts#L25>`_
+         - Voir les options ici-bas.
+         - 
+         - 
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - html
+         - String ou String[]
+         - .. line-block::
+               Configure le html qui sera
+               présenté dans l'outil.
+         - .. line-block::
+               "<p>Contenu html</p>" 
+               ou sous forme de liste (pour les changement de lignes)
+               ["<p>Contenu html de la première ligne</p>","<p>Contenu de la seconde ligne</p>"]
+         - igo.integration.about.html
+
+
 Liens
-------------------
 
     - `about-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool>`_
 
@@ -1602,7 +1622,10 @@ Exemples
         .. code:: json
 
             {
-                "name": "catalogBrowser"
+                "name": "catalogBrowser",
+                "options": {
+                    toggleCollapsedGroup: true
+                }
             }
 
 Propriétés
@@ -1642,25 +1665,40 @@ Propriétés
          - igo.integration.tools.catalog
        * - options
          - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
          - .. line-block::
-               Options de l'outil: 
-               toggleCollapsedGroup permet de force 
-               l'usager à entrer dans le groupe et 
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - toggleCollapsedGroup
+         - Boolean
+         - .. line-block::
+               Force l'usager à entrer dans le groupe et 
                d'y visualiser  les couches disponible
                avant de pouvoir ajouter le groupe
                à la carte.
                **false** = le groupe doit être ouvert avant
                de pouvoir l'ajouter à la carte
-         - .. line-block::
-               { 
-                   toggleCollapsedGroup: false
-               }
-         - .. line-block::
-               { 
-                   toggleCollapsedGroup: true
-               }
+         - toggleCollapsedGroup: false
+         - toggleCollapsedGroup: false
 
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
@@ -1686,7 +1724,10 @@ Exemples
         .. code:: json
 
             {
-                "name": "contextManager"
+                "name": "contextManager",
+                "options": {
+                    toolToOpenOnContextChange: "searchResults"
+                }
             }
 
 Propriétés
@@ -1724,8 +1765,39 @@ Propriétés
                    - fichiers dans :ref:`Language <igolanguage>`. 
          - 
          - igo.integration.tools.contexts
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - toolToOpenOnContextChange
+         - String
+         - .. line-block::
+               Nom de l'outil a ouvrir suite au changement de contexte
+         - .. line-block::
+               Voir le nom des divers outils de cette section
+         - .. line-block::
+               Dans l'ordre 'mapTools','mapDetails' et 'mapLegend' si ces outils sont disponibles.
+
 
 Liens
 
@@ -1794,23 +1866,382 @@ Liens
     - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/directions/directions-tool>`_
 
 
+.. _igoactiveogcFilter:
+
+activeOgcFilter
+===============
+
+    .. line-block::
+        Outil permettant de filtrer la couche active de service OGC filtrable,
+        WMS (Geoserver et Mapserver 7.2) et les WFS disponible à la carte.
+
+        Le bouton permettant de sélectionner une couche active est disponible dans l'outil mapTools.
+        L'outil apparait seulement lorsque le bouton est cliqué.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "activeOgcFilter"
+            }
+
+Liens
+
+    - `active-ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages\integration\src\lib\filter\active-ogc-filter-tool>`_
+    - `OGC FES <https://www.ogc.org/standards/filter>`_
+
 
 .. _igoogcFilter:
 
 ogcFilter
 ===============
 
+    .. line-block::
+        Outil permettant de filtrer toutes les couches de service OGC filtrable,
+        WMS (Geoserver et Mapserver 7.2) et les WFS disponible à la carte.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "ogcFilter"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - filter
+       * - **name***
+         - String
+         - 
+         - ogcFilter
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.ogcFilter
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/ogc-filter-tool>`_
+    - `OGC FES <https://www.ogc.org/standards/filter>`_
+
+
+.. _igoactivetimeFilter:
+
+activeTimeFilter
+================
+
+    .. line-block::
+        Outil permettant de filtrer la couche WMS active filtrable temporellement.
+
+        Le bouton permettant de sélectionner une couche active est disponible dans l'outil mapTools.
+        L'outil apparait seulement lorsque le bouton est cliqué.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "activeTimeFilter"
+            }
+
+Liens
+
+    - `active-time-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-time-filter-tool>`_
+
+
 .. _igotimeFilter:
 
 timeFilter
 ===============
+
+    .. line-block::
+        Outil permettant de filtrer toutes les couches WMS  filtrable temporellement disponible à la carte.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "timeFilter"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - history
+       * - **name***
+         - String
+         - 
+         - timeFilter
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.timeFilter
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `time-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/time-filter-tool>`_
+
 
 .. _igoimportExport:
 
 importExport
 ===============
 
+    .. line-block::
+        Outil permettant d'exporter certaines couches d'informations.
+
+        Noter que les couches WMS ne sont pas exportable.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "importExport"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - file-move
+       * - **name***
+         - String
+         - 
+         - importExport
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.importExport
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `import-export-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/import-export/import-export-tool>`_
+
+
+.. _igomapLegend:
+
+mapLegend
+===============
+
+    .. line-block::
+        Outil permettant de présenter le contenu de la carte sous forme de légende. 
+        Seul les légendes sont contenues.
+
+        Il est possible d'ajouter une option permettant de montrer toutes les légendes de la carte 
+        même pour les couches non visible OU hors échelle d'affichage.
+    
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "mapLegend",
+                "options": {
+                    "allowShowAllLegends": true,
+                    "showAllLegendsValue": true,
+                    "layerAdditionAllowed": true,
+                    "updateLegendOnResolutionChange": false,
+                    "layerListControls": {
+                        "excludeBaseLayers": true
+                    }
+                }
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - file-move
+       * - **name***
+         - String
+         - 
+         - importExport
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.importExport
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - allowShowAllLegends
+         - Boolean
+         - .. line-block::
+               Affiche un bouton permettant de montrer toutes les légendes de la carte, 
+               même pour les couches non visible OU hors échelle d'affichage.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - showAllLegendsValue
+         - Boolean
+         - .. line-block::
+               SI allowShowAllLegends est permis (true), définit la valeur à l'ouverture de l'application.
+               true = toutes les légendes sont affichées (même ceux non visibles à la carte)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerAdditionAllowed
+         - Boolean
+         - .. line-block::
+               Identifie si l'ajout de couches à la carte sont permises. 
+               Influence les messages d'aide à l'usager
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - updateLegendOnResolutionChange
+         - Boolean
+         - .. line-block::
+               Permet de rafraichir la légende à chaque changement de résolution (zoom)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerListControls
+         - Object
+         - .. line-block::
+               Divers contrôles effectués à la liste de couches affichées dans l'interface.
+         - .. line-block::
+               {
+                   "excludeBaseLayers": true // retire les couches identifiées comme baseLayer.
+               }
+         - .. line-block::
+               {
+                   "excludeBaseLayers": false
+               }
+
+
+Liens
+
+    - `import-export-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/import-export/import-export-tool>`_
+
+
 .. _igomapDetails:
+
 
 mapDetails
 ===============
