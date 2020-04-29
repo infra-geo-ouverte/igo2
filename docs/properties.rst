@@ -1628,7 +1628,7 @@ Exemples
             {
                 "name": "catalogBrowser",
                 "options": {
-                    toggleCollapsedGroup: true
+                    "toggleCollapsedGroup": true
                 }
             }
 
@@ -1730,7 +1730,7 @@ Exemples
             {
                 "name": "contextManager",
                 "options": {
-                    toolToOpenOnContextChange: "searchResults"
+                    "toolToOpenOnContextChange": "searchResults"
                 }
             }
 
@@ -2606,7 +2606,7 @@ Exemples
             {
                 "name": "searchResults",
                 "options": {
-                    showIcons: false
+                    "showIcons": false
                 }
             }
 
