@@ -1261,13 +1261,17 @@ Propriétés
                - :ref:`catalogBrowser <igocatalogBrowser>`
                - :ref:`contextManager <igocontextManager>`
                - :ref:`directions <igodirections>`
+               - :ref:`activeOgcFilter <igoactiveogcFilter>`
                - :ref:`ogcFilter <igoogcFilter>`
+               - :ref:`activeTimeFilter <igoactivetimeFilter>`
                - :ref:`timeFilter <igotimeFilter>`
                - :ref:`importExport <igoimportExport>`
-               - :ref:`mapDetails <igomapDetails>`
-               - :ref:`map <igomaptool>`
+               - :ref:`mapLegend <igomapLegend>`
+               - :ref:`mapTools <igomaptools>`
+               - :ref:`measurer <igomeasurer>`
                - :ref:`print <igoprint>`
                - :ref:`searchResults <igosearchResults>`
+               - :ref:`spatialFilter <igospatialFilter>`
          -
        * - title
          - String

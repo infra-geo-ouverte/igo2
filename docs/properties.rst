@@ -1449,6 +1449,7 @@ Outils (tools)
             - `importExport`_
             - `mapLegend`_
             - `mapTools`_
+            - `measurer`_
             - `print`_
             - `searchResults`_
             - `spatialFilter`_
