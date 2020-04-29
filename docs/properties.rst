@@ -2436,13 +2436,22 @@ Options
          - Object
          - .. line-block::
                Divers contrôles effectués à la liste de couches affichées dans l'interface.
+               
+                "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
+                "showToolbar" = Outil permettant de contrôler la liste des couche
+                                "always", "never" ou "default" = visible si 5 couches et +
+                "keyword" = Mot clef filtrant la liste de couches
+                "sortAlpha" = Tri la liste de couches alphabétiquement.
+                "onlyVisible" = Ne garde que dans la liste de couches, les couches visible.
+
+
          - .. line-block::
                "layerListControls": {
                    "excludeBaseLayers": true,
-                   "showToolbar": "always", Outil permettant de contrôler la liste des couches // "never" ou "default" = visible si 5 couches et +
-                   "keyword": "allo", // Mot clef filtrant la liste de couches
-                   "sortAlpha": true, // Tri la liste de couches alphabétiquement.
-                   "onlyVisible": true // Ne garde que dans la liste de couches, les couches visible.
+                   "showToolbar": "always",
+                   "keyword": "allo",
+                   "sortAlpha": true,
+                   "onlyVisible": true
                 }
          - .. line-block::
                {
