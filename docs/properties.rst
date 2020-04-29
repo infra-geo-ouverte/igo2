@@ -2690,7 +2690,7 @@ spatialFilter
 ===============
 
     .. line-block::
-        TODO 
+         Outil permettant d’appliquer un filtre sur des adresses ou des thématiques ciblées selon une zone prédéfinie ou selon une zone dessinée par l’utilisateur.
 
 Exemples
 
@@ -2767,24 +2767,24 @@ Options
        * - type
          - SpatialFilterType
          - .. line-block::
-               TODO.
+               Spécifie le type de zone sur lequel le filtrage sera appliqué
          - .. line-block::
-               Predefined = 
-               Polygon = 
-               Point = 
+               Predefined = Zone prédéfinie (Municipalités, Arrondissements, Région administratives...)
+               Polygon = Polygone dessinée par l'utilisateur
+               Point = Cercle dessinée par l'utilisateur
          - 
        * - itemType
          - SpatialFilterItemType
          - .. line-block::
-               TODO.
+               Spécifie le type des éléments qui seront filtrés
          - .. line-block::
-               Address = TODO.
-               Thematics = TODO.
+               Address = Adresses provenant de la couche d'Adresses Québec
+               Thematics = Données provenant de l'api terrAPI
          - Address
        * - freehandDrawIsActive
          - Boolean
          - .. line-block::
-               TODO.
+               Indique si le mode de dessin "à main levée" est actif ou non.
          - true / false
          - 
 
