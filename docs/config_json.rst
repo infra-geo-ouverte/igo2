@@ -74,6 +74,13 @@ Résumé
                indépendamment ce la présente
                documentation.
          - ContextManager
+       * - `hasSearchPointerSummary`_
+         - Boolean
+         - .. line-block::
+               Permet d'activé ou non la capacité d'afficher un résumé de la position du curseur.
+               Le résumé est dépendant des sources de recherche utilisées.
+               Désactivé par défaut.
+         - 
        * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
@@ -600,6 +607,15 @@ Propriétés
 Liens
 
         - `igo2-lib/packages/context/src/lib/context-manager/shared/context.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/context/src/lib/context-manager/shared/context.interface.ts>`_
+
+
+***********************
+hasSearchPointerSummary
+***********************
+
+    .. line-block::
+        Permet d'activé ou non la capacité d'afficher un résumé de la position du curseur.
+        Le résumé est dépendant des sources de recherche utilisées.
 
 
 *****************
