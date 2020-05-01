@@ -712,13 +712,19 @@ Propriétés
          - Object
          - .. line-block::
                Configuration du type de filtre temporel.
-         - Référez-vous à :`Configuration filtre temporel WMS-T (timeFilter)`_ .
+         - Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_ .
          -
        * - ogcFilters
          - Object
          - .. line-block::
                Configuration des filtres OGC appliqués.
-         - Référez-vous à :`Configuration filtre OGC (ogcFilters)`_ .
+         - Référez-vous à : `Configuration filtre OGC (ogcFilters)`_ .
+         -
+       * - sourceFields
+         - Object
+         - .. line-block::
+               Configuration d'alias sur des attributs.
+         - Référez-vous à : `Configuration d'alias sur des attributs (sourceFields)`_ .
          -
 
 
@@ -910,7 +916,7 @@ Liens
 
 
 ************************************
-Options de sources
+Options de sources avancées
 ************************************
 
 .. _igoTimeFilterObject:
@@ -1126,6 +1132,58 @@ Propriétés de l'objet ogcFilters
 
     .. note::
        En cours de construction
+
+.. _igosourceFieldsObject:
+
+Configuration d'alias sur des attributs (sourceFields)
+======================================================
+
+Une liste de nom d'attribut, de leur alias et des valeurs permises.
+
+Exemples
+
+        .. code:: json
+
+            [
+                  {"name": "type_couv", "alias": "type couv", "values": ["R", "F"]},
+                  {"name": "no_prg", "alias": "No inventaire", "values": ["3", "4", "5"]}
+            ]
+
+
+Propriétés de l'objet timeFilter
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **name***
+         - String
+         - Nom de l'attribut
+         - 
+         -
+       * - alias
+         - String
+         - Alias de l'attribut.
+         - 
+         - Le nom de l'attribut est utilisé si nul.
+       * - values
+         - Array (liste)
+         - Liste de valeurs permises 
+         - 
+         - .. line-block::
+               Si vide, pour les WFS, sera récupéré automatiquement.
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
 ************************************
@@ -2228,6 +2286,8 @@ activeOgcFilter
         Le bouton permettant de sélectionner une couche active est disponible dans les outils `mapTools`_, `mapTool`_ et `mapDetails`_.
         L'outil apparait seulement lorsque le bouton est cliqué.
 
+        Référez-vous à : `Configuration filtre OGC (ogcFilters)`_  pour configurer les filtres au niveau des couches.
+
 Exemples
 
         .. code:: json
@@ -2245,7 +2305,7 @@ Liens
 .. _igoogcFilter:
 
 
-OgcFilter
+ogcFilter
 ===========
 
 
@@ -2254,7 +2314,7 @@ OgcFilter
          Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
          NB2: L'activation de l'outil se fait ici via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes.
          layer -> sourceOptions -> ogcFilters
-         Référez-vous à :`Configuration filtre OGC (ogcFilters)`_ .
+         Référez-vous à : `Configuration filtre OGC (ogcFilters)`_  pour configurer les filtres au niveau des couches.
 
 
 Exemples
@@ -2320,6 +2380,8 @@ activeTimeFilter
         Le bouton permettant de sélectionner une couche active est disponible dans les outils `mapTools`_, `mapTool`_ et `mapDetails`_.
         L'outil apparait seulement lorsque le bouton est cliqué.
 
+        Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  pour configurer les filtres au niveau des couches.
+
 Exemples
 
         .. code:: json
@@ -2344,7 +2406,7 @@ timeFilter
         NB: L'activation de l'outil se fait via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes.
         layer -> sourceOptions -> timeFilter
 
-        Référez-vous à :`Configuration filtre temporel WMS-T (timeFilter)`_ .
+        Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  pour configurer les filtres au niveau des couches.
 
 
 Exemples
@@ -3583,7 +3645,7 @@ Propriétés
          - String
          - Icône dans la barre d'outil
          - `MDI <https://materialdesignicons.com/>`_
-         - share-variant'
+         - share-variant
        * - **name***
          - String
          - 
