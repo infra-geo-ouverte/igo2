@@ -706,15 +706,15 @@ Propriétés
          - .. line-block::
                Taille maximum du fichiers pouvant être lu par le fureteur.
          - .. line-block::
+               
          - 30
-         -
        * - gpxAggregateInComment
          - Boolean
          - .. line-block::
                Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur de l'ID au champ «name».
          - .. line-block::
-         - False
-         -
+               
+         - false
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
