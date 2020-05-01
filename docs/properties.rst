@@ -702,6 +702,25 @@ Propriétés
                Exemple plusieurs champs:
                    - "queryTitle": "${nomroute} ${desclocal} ",
          -
+       * - timeFilterable
+         - Boolean
+         - .. line-block::
+               Indique si oui/non la couche est filtrable temporellement
+         - true / false
+         - false
+       * - timeFilter
+         - Object
+         - .. line-block::
+               Configuration du type de filtre temporel.
+         - Référez-vous à :`Configuration filtre temporel WMS-T (timeFilter)`_ .
+         -
+       * - ogcFilters
+         - Object
+         - .. line-block::
+               Configuration des filtres OGC appliqués.
+         - Référez-vous à :`Configuration filtre OGC (ogcFilters)`_ .
+         -
+
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -887,6 +906,223 @@ Exemples
 Liens
 
     - `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_
+
+
+
+************************************
+Options de sources
+************************************
+
+.. _igoTimeFilterObject:
+
+Configuration filtre temporel WMS-T (timeFilter)
+================================================
+Exemples
+
+        .. code:: json
+
+            {
+                  "min": "1890",
+                  "max": "2019",
+                  "style": "calendar",
+                  "range": true,
+                  "step": 63072000000,
+                  "type": "year"
+            }
+
+Propriétés de l'objet timeFilter
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - min
+         - String
+         - Periode de temps minimum.
+         - En fonction du type, peut être une année, une date ou une heure.
+         -
+       * - max
+         - String
+         - Periode de temps maximum.
+         - En fonction du type, peut être une année, une date ou une heure.
+         -
+       * - range
+         - Boolean
+         - Intervalle à saisir par utilisateur.
+         - true/false
+         -
+       * - step
+         - Number
+         - Le temps de l'intervalle en millisecondes.
+         - Ex: 63072000000 pour un an.
+         -
+       * - style
+         - String
+         - Le style du calendrier.
+         - calendar, slider
+         - slider
+       * - type
+         - String
+         - Le type temporel de calendrier. En année, jour, heure, etc.
+         - year, date
+         -
+       * - timeInterval
+         - Number
+         - Pour configuration en 'slider', le temps d'attente avant de passer au suivant, en millisecondes.
+         -
+         -
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+.. _igoOgcFilterObject:
+
+Configuration filtre OGC (ogcFilters)
+================================================
+
+Exemples
+
+        .. code:: json
+
+            {
+                  "enabled": true,
+                  "editable": true,
+                  "allowedOperatorsType": "*",
+                  "pushButtons": {
+                        "groups": [
+                        {"title": "filtre foret","name":"1", "ids": ["type_couv", "densite"]},
+                        {"title": "filtre metadonnée", "name":"2", "ids": ["no_program"]}
+                        ],
+                        "bundles" : [
+                        {
+                              "id": "type_couv",
+                              "logical": "Or",
+                              "buttons": [
+                              {
+                                    "title": "type couv = R",
+                                    "enabled": false,
+                                    "color": "255,0,0",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "type_couv",
+                                          "expression": "R"
+                                    }
+                              },
+                              {
+                                    "title": "type couv = F",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "type_couv",
+                                          "expression": "F"
+                                    }
+                              }
+                              ]
+                        },
+
+                        {
+                              "id": "densite",
+                              "logical": "Or",
+                              "vertical":false,
+                              "buttons": [
+                              {
+                                    "title": "densite = A",
+                                    "enabled": false,
+                                    "color": "255,0,0",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "cl_dens",
+                                          "expression": "A"
+                                    }
+                              },
+                              {
+                                    "title": "densite = B",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "cl_dens",
+                                          "expression": "B"
+                                    }
+                              },
+                              {
+                                    "title": "densite = A & B",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "logical":"Or",
+                                          "filters":[
+                                          {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "A"},
+                                          {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "B"}
+                                          ]
+                                    }
+                              },
+                              {
+                                    "title": "pas A",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsNotEqualTo",
+                                          "propertyName": "cl_dens",
+                                          "expression": "A"
+                                          }
+                              }
+                              ]
+                        },
+                        {
+                              "id": "no_program",
+                              "logical": "Or",
+                              "vertical":false,
+                              "buttons": [
+                              {
+                              "title": "prg no= 4",
+                              "enabled": false,
+                              "color": "255,0,0",
+                              "tooltip": "Here a tooltip explaning ...",
+                              "filters": {
+                                    "operator": "PropertyIsEqualTo",
+                                    "propertyName": "no_prg",
+                                    "expression": "4"
+                                    }
+                              },
+                              {
+                              "title": "prg no=5",
+                              "enabled": false,
+                              "color": "255,100,255",
+                              "tooltip": "Here a tooltip explaning ...",
+                              "filters": {
+                                    "operator": "PropertyIsEqualTo",
+                                    "propertyName": "no_prg",
+                                    "expression": "5"
+                                    }
+                              }
+                              ]
+                        }
+                  ]
+                  }
+                  }
+
+
+Propriétés de l'objet ogcFilters
+
+    .. note::
+       En cours de construction
 
 
 ************************************
@@ -1156,6 +1392,7 @@ Propriétés
 
 Liens
 
+    - `Doc de l'api iCherche <https://geoegl.msp.gouv.qc.ca/apis/icherche/docs>`_
     - `Code iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`_
     - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
 
@@ -1168,7 +1405,7 @@ iCherche Reverse
         par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_
         afin de permettre des recherches par coordonnées / rayon sur les entités suivantes:
             - Adresses
-            - Routes (segments de routes)
+            - Routes (segments de /routes)
             - Arrondissements (segments de routes)
             - Municipalités (et ancien municipalités)
             - MRC
@@ -1211,6 +1448,7 @@ Propriétés
 
 Liens
 
+    - `Doc de l'api iCherche Reverse <https://geoegl.msp.gouv.qc.ca/apis/terrAPI/docs>`_
     - `Code iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`_
     - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
 
@@ -2009,180 +2247,12 @@ OgcFilter
 
 
     .. line-block::
-        Outil permetant de configurer des boutons poussoirs pour filtrer une couche wms.
+        Outil permettant de filtrer toutes les couches de service OGC filtrable.
          Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
          NB2: L'activation de l'outil se fait ici via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes.
          layer -> sourceOptions -> ogcFilters
+         Référez-vous à :`Configuration filtre OGC (ogcFilters)`_ .
 
-Exemples d'un layer filtré OGC dans un contexte
-
-        .. code:: json
-
-            {
-              "layers": [
-              {
-                "id":"pee_ori_couleur",
-                "title": "peup avec filtre bouton",
-
-                "sourceOptions": {
-
-                    "url": "@host/ws/mffpecofor.fcgi",
-                    "params": {
-                        "layers": "ori_pee_ori_prov",
-                        "version": "1.3.0"
-                    },
-                    "type": "wms",
-                    "optionsFromCapabilities": true,
-
-                    "ogcFilters": {
-
-                      "enabled": true,
-                      "editable": true,
-                      "allowedOperatorsType": "*",
-
-
-                      "pushButtons": {
-                          "groups": [
-                            {
-                                "title": "filtre foret",
-                                "name":"1",
-                                "ids": ["type_couv", "densite"]
-                            },
-
-                            {
-                                "title": "filtre metadonnée",
-                                "name":"2",
-                                "ids": ["no_program"]
-                            }
-                          ],
-                          "bundles" : [
-                            {
-                                "id": "type_couv",
-                                "logical": "Or",
-                                "buttons": [
-                                    {
-                                        "title": "type couv = R",
-                                        "enabled": false,
-                                        "color": "255,0,0",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsEqualTo",
-                                            "propertyName": "type_couv",
-                                            "expression": "R"
-                                        }
-                                    },
-                                    {
-                                        "title": "type couv = F",
-                                        "enabled": false,
-                                        "color": "255,100,255",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsEqualTo",
-                                            "propertyName": "type_couv",
-                                            "expression": "F"
-                                        }
-                                    }
-                                ]
-                            },
-
-                            {
-                                "id": "densite",
-                                "logical": "Or",
-                                "vertical":false,
-                                "buttons": [
-                                    {
-                                        "title": "densite = A",
-                                        "enabled": false,
-                                        "color": "255,0,0",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsEqualTo",
-                                            "propertyName": "cl_dens",
-                                            "expression": "A"
-                                        }
-                                    },
-                                    {
-                                        "title": "densite = B",
-                                        "enabled": false,
-                                        "color": "255,100,255",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsEqualTo",
-                                            "propertyName": "cl_dens",
-                                            "expression": "B"
-                                        }
-                                    },
-                                    {
-                                        "title": "densite = A & B",
-                                        "enabled": false,
-                                        "color": "255,100,255",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "logical":"Or",
-                                            "filters":[
-                                                {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "A"},
-                                                {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "B"}
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "title": "pas A",
-                                        "enabled": false,
-                                        "color": "255,100,255",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsNotEqualTo",
-                                            "propertyName": "cl_dens",
-                                            "expression": "A"
-                                            }
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "no_program",
-                                "logical": "Or",
-                                "vertical":false,
-                                "buttons": [
-                                    {
-                                    "title": "prg no= 4",
-                                    "enabled": false,
-                                    "color": "255,0,0",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                        "operator": "PropertyIsEqualTo",
-                                        "propertyName": "no_prg",
-                                        "expression": "4"
-                                        }
-                                    },
-                                    {
-                                    "title": "prg no=5",
-                                    "enabled": false,
-                                    "color": "255,100,255",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                        "operator": "PropertyIsEqualTo",
-                                        "propertyName": "no_prg",
-                                        "expression": "5"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-
-                    "sourceFields": [
-                      {"name": "type_couv", "alias": "type couv", "values": ["R", "F"]},
-                      {"name": "no_prg", "alias": "No inventaire", "values": ["3", "4", "5"]}
-                    ]
-                  }
-                  }
-              }
-            }
-
-
-    .. line-block::
-        Outil permettant de filtrer toutes les couches de service OGC filtrable,
-        WMS (Geoserver et Mapserver 7.2) et les WFS disponible à la carte.
 
 Exemples
 
@@ -2271,114 +2341,8 @@ timeFilter
         NB: L'activation de l'outil se fait via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes.
         layer -> sourceOptions -> timeFilter
 
+        Référez-vous à :`Configuration filtre temporel WMS-T (timeFilter)`_ .
 
-Exemples
-
-        .. code:: json
-
-            {
-                "layers": [
-                    {
-                      "title": "Feux de forêt ↺",
-                      "sourceOptions": {
-                          "queryFormat": "htmlgml2",
-                          "queryHtmlTarget": "iframe",
-                          "url": "@host/ws/mffpecofor.fcgi",
-                          "params": {
-                              "layers": "ca_feux",
-                              "version": "1.3.0"
-                          },
-                          "type": "wms",
-                          "optionsFromCapabilities": true,
-                          "timeFilterable": true,
-                          "timeFilter": {
-                              "min": "1890",
-                              "max": "2019",
-                              "style": "calendar",
-                              "range": true,
-                              "step": 63072000000,
-                              "type": "year"
-                          }
-                      }
-                  }
-            }
-
-Propriétés de l'objet timeFilter
-
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - min
-         - String
-         - Periode de temps minimum.
-         - En fonction du type, peut être une année, une date ou une heure.
-         -
-       * - max
-         - String
-         - Periode de temps maximum.
-         - En fonction du type, peut être une année, une date ou une heure.
-         -
-       * - range
-         - Boolean
-         - Intervalle à saisir par utilisateur.
-         - true/false
-         -
-       * - step
-         - Number
-         - Le temps de l'intervalle en millisecondes.
-         - Ex: 63072000000 pour un an.
-         -
-       * - style
-         - String
-         - Le style du calendrier.
-         - calendar, slider
-         - slider
-       * - type
-         - String
-         - Le type temporel de calendrier. En année, jour, heure, etc.
-         - year, date
-         -
-       * - timeInterval
-         - Number
-         - Pour configuration en 'slider', le temps d'attente avant de passer au suivant, en millisecondes.
-         -
-         -
-
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
-
-
-.. _igospatialFilter:
-
-
-spatialFilter
-==============
-
-    .. line-block::
-        Outil permettant de faire une recherche de facon spatiale selon un dessin tracé par utilisateur ou
-        certains contours définis comme les municipalité, mrc, etc. La recherche se fait en fonction de certains api de recherche comme Terrapi
-        voir: <https://geoegl.msp.gouv.qc.ca/apis/terrapi/docs>
-
-Exemples
-
-        .. code:: json
-
-          {
-            "name": "spatialFilter"
-          }
-
-    .. line-block::
-        Outil permettant de filtrer toutes les couches WMS  filtrable temporellement disponible à la carte.
 
 Exemples
 
@@ -2441,7 +2405,7 @@ importExport
         Certaines restrictions s'appliquent:
         Import:
           - La projection doit être en EPSG:4326
-          - La taille du fichier doit être au maximum de 30Mo
+          - La taille du fichier est configurable via la configuration. Voir :ref:`importExport <igoimportExport>`.Par défaut a 30Mo
           - Les shapeFiles doivent être dans un .zip
 
         Export:
@@ -3578,3 +3542,24 @@ Liens
 
     - `spatial-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/spatial-filter-tool>`_
 
+
+.. _igoshareMap:
+
+
+shareMap
+==========
+
+    .. line-block::
+        Outil permettant de partager, à l'aide d'un lien, la carte à l'écran.
+
+Exemples
+
+        .. code:: json
+
+            {
+              "name": "shareMap",
+              "options": {
+                  "hasCopyLinkButton": true,
+                  "hasShareMapButton": false
+              }
+            }
