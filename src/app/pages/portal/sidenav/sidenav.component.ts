@@ -71,6 +71,12 @@ export class SidenavComponent implements OnInit, OnDestroy {
               this.title$.next(catalog.title);
             }
           }
+        } else if (tool.name === 'activeTimeFilter' || tool.name === 'activeOgcFilter') {
+          for (const layer of this.map.layers) {
+            if (layer.options.active === true) {
+              this.title$.next(layer.title);
+            }
+          }
         } else {
           this.title$.next(tool.title);
         }

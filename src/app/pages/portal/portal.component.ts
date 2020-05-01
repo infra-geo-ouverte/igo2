@@ -259,6 +259,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
+    this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
+      'hasSearchPointerSummary'
+    );
   }
 
   ngOnInit() {
@@ -435,7 +438,27 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     if (this.contextLoaded) {
-      this.toolbox.activateTool('mapDetails');
+      const contextManager = this.toolbox.getTool('contextManager');
+      const contextManagerOptions = contextManager
+        ? contextManager.options
+        : {};
+      let toolToOpen = contextManagerOptions.toolToOpenOnContextChange
+        ? contextManagerOptions.toolToOpenOnContextChange
+        : undefined;
+
+      if (!toolToOpen) {
+        const toolOrderToOpen = ['mapTools', 'map', 'mapDetails', 'mapLegend'];
+        for (const toolName of toolOrderToOpen) {
+          toolToOpen = this.toolbox.getTool(toolName);
+          if (toolToOpen) {
+            break;
+          }
+        }
+      }
+
+      if (toolToOpen) {
+        this.toolbox.activateTool(toolToOpen);
+      }
     }
 
     this.contextLoaded = true;
@@ -458,8 +481,12 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public onClearSearch() {
     this.searchStore.clear();
-    this.map.overlay.removeFeatures(this.searchStore.all().filter(f =>
-      f.meta.dataType === FEATURE).map(f => f.data as Feature));
+    this.map.overlay.removeFeatures(
+      this.searchStore
+        .all()
+        .filter(f => f.meta.dataType === FEATURE)
+        .map(f => f.data as Feature)
+    );
   }
 
   private getQuerySearchSource(): SearchSource {

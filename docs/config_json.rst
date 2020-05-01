@@ -83,6 +83,13 @@ Résumé
 
                documentation.
          - ContextManager
+       * - `hasSearchPointerSummary`_
+         - Boolean
+         - .. line-block::
+               Permet d'activé ou non la capacité d'afficher un résumé de la position du curseur.
+               Le résumé est dépendant des sources de recherche utilisées.
+               Désactivé par défaut.
+         - 
        * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
@@ -647,6 +654,15 @@ Propriétés
 Liens
 
         - `igo2-lib/packages/context/src/lib/context-manager/shared/context.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/context/src/lib/context-manager/shared/context.interface.ts>`_
+
+
+***********************
+hasSearchPointerSummary
+***********************
+
+    .. line-block::
+        Permet d'activé ou non la capacité d'afficher un résumé de la position du curseur.
+        Le résumé est dépendant des sources de recherche utilisées.
 
 
 *****************
@@ -1452,17 +1468,22 @@ Propriétés
                - :ref:`catalogBrowser <igocatalogBrowser>`
                - :ref:`contextManager <igocontextManager>`
                - :ref:`directions <igodirections>`
+               - :ref:`activeOgcFilter <igoactiveogcFilter>`
                - :ref:`ogcFilter <igoogcFilter>`
+               - :ref:`activeTimeFilter <igoactivetimeFilter>`
                - :ref:`timeFilter <igotimeFilter>`
                - :ref:`spatialFilter <igospatialFilter>`
                - :ref:`importExport <igoimportExport>`
+               - :ref:`mapTool <igomaptool>`
+               - :ref:`mapLegend <igomapLegend>`
                - :ref:`mapDetails <igomapDetails>`
-               - :ref:`mesurer <igomesurer>`
-               - :ref:`map <igomaptool>`
+               - :ref:`mapTools <igomaptools>`
+               - :ref:`measurer <igomeasurer>`
                - :ref:`print <igoprint>`
                - :ref:`searchResults <igosearchResults>`
+               - :ref:`spatialFilter <igospatialFilter>`
                - :ref:`shareMap <igoshareMap>`
-         - 
+         -
        * - title
          - String
          - .. line-block::
