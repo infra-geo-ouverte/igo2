@@ -1282,7 +1282,9 @@ Propriétés
                - :ref:`activeTimeFilter <igoactivetimeFilter>`
                - :ref:`timeFilter <igotimeFilter>`
                - :ref:`importExport <igoimportExport>`
+               - :ref:`mapTool <igomaptool>`
                - :ref:`mapLegend <igomapLegend>`
+               - :ref:`mapDetails <igomapDetails>`
                - :ref:`mapTools <igomaptools>`
                - :ref:`measurer <igomeasurer>`
                - :ref:`print <igoprint>`

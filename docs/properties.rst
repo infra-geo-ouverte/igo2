@@ -1447,7 +1447,9 @@ Outils (tools)
             - `activeTimeFilter`_
             - `timeFilter`_
             - `importExport`_
+            - `mapTool`_
             - `mapLegend`_
+            - `mapDetails`_
             - `mapTools`_
             - `measurer`_
             - `print`_
@@ -1800,7 +1802,7 @@ Options
          - .. line-block::
                Voir le nom des divers outils de cette section
          - .. line-block::
-               Dans l'ordre 'mapTools','mapDetails' et 'mapLegend' si ces outils sont disponibles.
+               Dans l'ordre `mapTools`_', `mapTool`_, `mapDetails`_ et `mapLegend`_  si ces outils sont disponibles.
 
 
 Liens
@@ -1879,7 +1881,7 @@ activeOgcFilter
         Outil permettant de filtrer la couche active de service OGC filtrable,
         WMS (Geoserver et Mapserver 7.2) et les WFS disponible à la carte.
 
-        Le bouton permettant de sélectionner une couche active est disponible dans l'outil mapTools.
+        Le bouton permettant de sélectionner une couche active est disponible dans les outils `mapTools`_, `mapTool`_ et `mapDetails`_.
         L'outil apparait seulement lorsque le bouton est cliqué.
 
 Exemples
@@ -1965,7 +1967,7 @@ activeTimeFilter
     .. line-block::
         Outil permettant de filtrer la couche WMS active filtrable temporellement.
 
-        Le bouton permettant de sélectionner une couche active est disponible dans l'outil mapTools.
+        Le bouton permettant de sélectionner une couche active est disponible dans les outils `mapTools`_, `mapTool`_ et `mapDetails`_.
         L'outil apparait seulement lorsque le bouton est cliqué.
 
 Exemples
@@ -2099,6 +2101,193 @@ Propriétés
 Liens
 
     - `import-export-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/import-export/import-export-tool>`_
+
+
+.. _igomaptool:
+
+mapTool
+===============
+
+    .. line-block::
+        Outil permettant de présenter le contenu à l'aide de deux onglets distincts.
+            - Carte :   Couches disponible à la carte, avec paramètres et outils permettant de gérer les couches:
+                            - ordonnancement
+                            - visibilité
+                            - accès aux métadonnées (si disponible)
+                            - accès au téléchargements des données (si disponible)
+                            - filter les données (temporellement et par attributs si disponible)
+                            - supression de couches
+            - Gestionnaire de contexte :  Outil permettant de lister/gérer/changer de contexte à l'intérieur d'une même application. 
+   
+.. note::
+   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils 
+       - `activeOgcFilter`_
+       - `activeTimeFilter`_
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "map",
+                "options": {
+                    "updateLegendOnResolutionChange": false,
+                    "toggleLegendOnVisibilityChange": true,
+                    "expandLegendOfVisibleLayers": true,
+                    "ogcButton": false,
+                    "timeButton": false,
+                    "queryBadge": false,
+                    "layerListControls": {
+                        "excludeBaseLayers": true,
+                        "showToolbar": "default",
+                        "keyword": "allo",
+                        "sortAlpha": true,
+                        "onlyVisible": true
+                    }
+                }
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - map
+       * - **name***
+         - String
+         - 
+         - map
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.map'
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - expandLegendOfVisibleLayers
+         - Boolean
+         - .. line-block::
+               À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - ogcButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre OGC pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - queryBadge
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un "?" pour les couches interrogeable.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - timeButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre temporel pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - toggleLegendOnVisibilityChange
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité
+               d'une couche passe de non-visible à visible
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - updateLegendOnResolutionChange
+         - Boolean
+         - .. line-block::
+               Permet de rafraichir la légende à chaque changement de résolution (zoom)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerListControls
+         - Object
+         - .. line-block::
+               Divers contrôles effectués à la liste de couches affichées dans l'interface.
+               
+                "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
+                "showToolbar" = Outil permettant de contrôler la liste des couche
+                                "always", "never" ou "default" = visible si 5 couches et +
+                "keyword" = Mot clef filtrant la liste de couches
+                "sortAlpha" = Tri la liste de couches alphabétiquement.
+                "onlyVisible" = Ne garde que dans la liste de couches, les couches visible.
+
+
+         - .. line-block::
+               "layerListControls": {
+                   "excludeBaseLayers": true,
+                   "showToolbar": "always",
+                   "keyword": "allo",
+                   "sortAlpha": true,
+                   "onlyVisible": true
+                }
+         - .. line-block::
+               {
+                  "excludeBaseLayers": false,
+                  "showToolbar": "default",
+                  "sortAlpha": false,
+                  "onlyVisible": false
+              }
+
+
+Liens
+
+    - `map-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-tool>`_
 
 
 .. _igomapLegend:
@@ -2242,6 +2431,202 @@ Options
 Liens
 
     - `map-legend <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-legend>`_
+
+
+.. _igomapDetails:
+
+mapDetails
+===============
+
+    .. line-block::
+        Outil permettant de présenter les couches disponible à la carte, avec paramètres et outils permettant de gérer les couches:
+                            - ordonnancement
+                            - visibilité
+                            - accès aux métadonnées (si disponible)
+                            - accès au téléchargements des données (si disponible)
+                            - filter les données (temporellement et par attributs si disponible)
+                            - supression de couches
+   
+.. note::
+   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils 
+       - `activeOgcFilter`_
+       - `activeTimeFilter`_
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "mapDetails",
+                "options": {
+                    "layerAdditionAllowed": true,
+                    "updateLegendOnResolutionChange": false,
+                    "toggleLegendOnVisibilityChange": true,
+                    "expandLegendOfVisibleLayers": true,
+                    "ogcButton": false,
+                    "timeButton": false,
+                    "queryBadge": false,
+                    "layerListControls": {
+                        "excludeBaseLayers": true,
+                        "showToolbar": "default",
+                        "keyword": "allo",
+                        "sortAlpha": true,
+                        "onlyVisible": true
+                    }
+                }
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - map
+       * - **name***
+         - String
+         - 
+         - map
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.map'
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - expandLegendOfVisibleLayers
+         - Boolean
+         - .. line-block::
+               À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerAdditionAllowed
+         - Boolean
+         - .. line-block::
+               Identifie si l'ajout de couches à la carte sont permises. 
+               Influence les messages d'aide à l'usager
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - ogcButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre OGC pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - queryBadge
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un "?" pour les couches interrogeable.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - timeButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre temporel pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - toggleLegendOnVisibilityChange
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité
+               d'une couche passe de non-visible à visible
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - updateLegendOnResolutionChange
+         - Boolean
+         - .. line-block::
+               Permet de rafraichir la légende à chaque changement de résolution (zoom)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerListControls
+         - Object
+         - .. line-block::
+               Divers contrôles effectués à la liste de couches affichées dans l'interface.
+               
+                "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
+                "showToolbar" = Outil permettant de contrôler la liste des couche
+                                "always", "never" ou "default" = visible si 5 couches et +
+                "keyword" = Mot clef filtrant la liste de couches
+                "sortAlpha" = Tri la liste de couches alphabétiquement.
+                "onlyVisible" = Ne garde que dans la liste de couches, les couches visible.
+
+
+         - .. line-block::
+               "layerListControls": {
+                   "excludeBaseLayers": true,
+                   "showToolbar": "always",
+                   "keyword": "allo",
+                   "sortAlpha": true,
+                   "onlyVisible": true
+                }
+         - .. line-block::
+               {
+                  "excludeBaseLayers": false,
+                  "showToolbar": "default",
+                  "sortAlpha": false,
+                  "onlyVisible": false
+              }
+
+
+Liens
+
+    - `map-details-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-details-tool>`_
+
 
 .. _igomaptools:
 
