@@ -3475,7 +3475,7 @@ Propriétés
          - String
          - Icône dans la barre d'outil
          - `MDI <https://materialdesignicons.com/>`_
-         - selection-marker'
+         - selection-marker
        * - **name***
          - String
          - 
@@ -3558,8 +3558,46 @@ Exemples
 
             {
               "name": "shareMap",
-              "options": {
-                  "hasCopyLinkButton": true,
-                  "hasShareMapButton": false
-              }
             }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - share-variant'
+       * - **name***
+         - String
+         - 
+         - shareMap
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.shareMap
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `context-share-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/context/context-share-tool>`_
