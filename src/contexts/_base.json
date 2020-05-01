@@ -72,7 +72,7 @@
   "toolbar": [
     "searchResults",
     "contextManager",
-    "mapDetails",
+    "mapTools",
     "measurer",
     "spatialFilter",
     "directions",
@@ -90,15 +90,25 @@
       }
     },
     {
-      "name": "contextManager"
+      "name": "contextManager",
+      "options": {
+        "toolToOpenOnContextChange": "mapTools"
+      }
     },
     {
       "name": "about"
     },
     {
-      "name": "mapDetails",
+      "name": "map"
+    },
+    {
+      "name": "mapTools",
       "options": {
-        "toggleLegendOnVisibilityChange": true,
+        "selectedTabAtOpening": "",
+        "allowShowAllLegends": true,
+        "layerAdditionAllowed": true,
+        "toggleLegendOnVisibilityChange": false,
+        "updateLegendOnResolutionChange": false,
         "layerListControls": {
           "excludeBaseLayers": true
         }
@@ -127,6 +137,12 @@
     },
     {
       "name": "ogcFilter"
+    },
+    {
+      "name": "activeTimeFilter"
+    },
+    {
+      "name": "activeOgcFilter"
     },
     {
       "name": "importExport"
