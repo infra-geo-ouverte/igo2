@@ -690,7 +690,8 @@ Exemples
 
             importExport: {
                 url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
-                clientSideFileSizeMaxMb: 30
+                clientSideFileSizeMaxMb: 30,
+                gpxAggregateInComment: false
             }
 
 Propriétés
@@ -723,6 +724,13 @@ Propriétés
          - .. line-block::
                
          - 30
+       * - gpxAggregateInComment
+         - Boolean
+         - .. line-block::
+               Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur de l'ID au champ «name».
+         - .. line-block::
+               
+         - false
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
