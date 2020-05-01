@@ -437,6 +437,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.contextLoaded) {
       const contextManager = this.toolbox.getTool('contextManager');
       const mapTools = this.toolbox.getTool('mapTools');
+      const mapAndContext = this.toolbox.getTool('map');
       const mapDetails = this.toolbox.getTool('mapDetails');
       const mapLegend = this.toolbox.getTool('mapLegend');
 
@@ -444,7 +445,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       let toolToOpen =
         contextManagerOptions.toolToOpenOnContextChange ? contextManagerOptions.toolToOpenOnContextChange : undefined;
       if (!toolToOpen) {
-        toolToOpen = mapTools ? 'mapTools' : mapDetails ? 'mapDetails' : mapLegend ? 'mapLegend' : undefined;
+        toolToOpen = mapTools ? 'mapTools' : mapAndContext ? 'map' :   mapDetails ? 'mapDetails' : mapLegend ? 'mapLegend' : undefined;
       }
       if (toolToOpen) {
         this.toolbox.activateTool(toolToOpen);
