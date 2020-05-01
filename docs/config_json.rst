@@ -708,7 +708,8 @@ Propriétés
          - .. line-block::
                
          - 30
-      * - gpxAggregateInComment
+         -
+       * - gpxAggregateInComment
          - Boolean
          - .. line-block::
                Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur de l'ID au champ «name».
