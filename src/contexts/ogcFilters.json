@@ -12,16 +12,17 @@
         "params": {
           "featureTypes": "vg_observation_v_autre_wmst",
           "fieldNameGeometry": "geometry",
-          "maxFeatures": 10000,
+          "maxFeatures": 1000,
           "version": "2.0.0",
           "outputFormatDownload": "shp"
         },
         "sourceFields": [
           { "name": "code_municipalite", "alias": "# de la municipalitée" },
-          { "name": "date_observation" },
-          { "name": "urgence", "values": ["immédiate", "inconnue"] }
+          { "name": "date_observation", "allowedOperatorsType": "time" },
+          { "name": "urgence", "values": ["Immédiate", "Inconnue"], "allowedOperatorsType": "basic" }
         ],
         "ogcFilters": {
+          "allowedOperatorsType": "all",
           "enabled": true,
           "editable": true,
           "filters": {
