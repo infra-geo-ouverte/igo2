@@ -989,6 +989,9 @@ Propriétés de l'objet timeFilter
 Configuration filtre OGC (ogcFilters)
 ================================================
 
+    .. note::
+       En cours de construction
+
 Exemples
 
         .. code:: json
