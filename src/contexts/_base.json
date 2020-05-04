@@ -90,16 +90,10 @@
       }
     },
     {
-      "name": "contextManager",
-      "options": {
-        "toolToOpenOnContextChange": "mapTools"
-      }
+      "name": "contextManager"
     },
     {
       "name": "about"
-    },
-    {
-      "name": "map"
     },
     {
       "name": "mapTools",
