@@ -81,9 +81,9 @@ Propriétés de l'objet "view" de map
          - true
        * - maxZoomOnExtent
          - Number
-         - Indique le niveau de zoom qu'aura l'application lors d'un clic sur un résultat de recherche de type point.
-         - true/false
-         - true
+         - Indique le niveau de zoom qu'aura l'application lors d'un clic sur un résultat de recherche qui n'est pas une couche.
+         -
+         -
 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -333,33 +333,30 @@ Exemples
             }
 
 
-Types source options:
-
-
 
 ArcGis
-======
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 Tile ArcGis
-===========
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 Carto
-=====
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 OSM
-====
+===============
 
     .. line-block::
         Le fond standard OpenStreetMap.
@@ -404,14 +401,14 @@ Liens
 
 
 Cluster
-=======
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 TMS (xyz)
-=========
+===============
 
     .. line-block::
         Une source de données pour les services de données tuilées de type XYZ où le X et le Y représentent la position de la tuile appelée et le Z, le niveau de zoom (résolution) de la tuile.
@@ -470,7 +467,7 @@ Liens
 
 
 Vector Tiles
-============
+===============
 
     .. line-block::
         Une source de données pour les services de données au format Vector tiles. Plus spécifiquement,
@@ -532,21 +529,21 @@ Liens
 
 
 Vecteur
-=======
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 Websocket
-=========
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
 
 WFS
-====
+===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
@@ -570,7 +567,7 @@ Exemples
             }
 
 WMS
-===
+===============
 
     .. line-block::
         Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`_ .
@@ -705,6 +702,31 @@ Propriétés
                Exemple plusieurs champs:
                    - "queryTitle": "${nomroute} ${desclocal} ",
          -
+       * - timeFilterable
+         - Boolean
+         - .. line-block::
+               Indique si oui/non la couche est filtrable temporellement
+         - true / false
+         - false
+       * - timeFilter
+         - Object
+         - .. line-block::
+               Configuration du type de filtre temporel.
+         - Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_ .
+         -
+       * - ogcFilters
+         - Object
+         - .. line-block::
+               Configuration des filtres OGC appliqués.
+         - Référez-vous à : `Configuration filtre OGC (ogcFilters)`_ .
+         -
+       * - sourceFields
+         - Object
+         - .. line-block::
+               Configuration d'alias sur des attributs.
+         - Référez-vous à : `Configuration d'alias sur des attributs (sourceFields)`_ .
+         -
+
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -813,7 +835,7 @@ Liens
 
 
 WMTS
-====
+===============
 
     .. line-block::
         Une source de données pour les services de données au format `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_ .
@@ -890,6 +912,278 @@ Exemples
 Liens
 
     - `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_
+
+
+
+************************************
+Options de sources avancées
+************************************
+
+.. _igoTimeFilterObject:
+
+Configuration filtre temporel WMS-T (timeFilter)
+================================================
+Exemples
+
+        .. code:: json
+
+            {
+                  "min": "1890",
+                  "max": "2019",
+                  "style": "calendar",
+                  "range": true,
+                  "step": 63072000000,
+                  "type": "year"
+            }
+
+Propriétés de l'objet timeFilter
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - min
+         - String
+         - Periode de temps minimum.
+         - En fonction du type, peut être une année, une date ou une heure.
+         -
+       * - max
+         - String
+         - Periode de temps maximum.
+         - En fonction du type, peut être une année, une date ou une heure.
+         -
+       * - range
+         - Boolean
+         - Intervalle à saisir par utilisateur.
+         - true/false
+         -
+       * - step
+         - Number
+         - Le temps de l'intervalle en millisecondes.
+         - Ex: 63072000000 pour un an.
+         -
+       * - style
+         - String
+         - Le style du calendrier.
+         - calendar, slider
+         - slider
+       * - type
+         - String
+         - Le type temporel de calendrier. En année, jour, heure, etc.
+         - year, date
+         -
+       * - timeInterval
+         - Number
+         - Pour configuration en 'slider', le temps d'attente avant de passer au suivant, en millisecondes.
+         -
+         -
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+.. _igoOgcFilterObject:
+
+Configuration filtre OGC (ogcFilters)
+================================================
+
+    .. note::
+       En cours de construction
+
+Exemples
+
+        .. code:: json
+
+            {
+                  "enabled": true,
+                  "editable": true,
+                  "allowedOperatorsType": "*",
+                  "pushButtons": {
+                        "groups": [
+                        {"title": "filtre foret","name":"1", "ids": ["type_couv", "densite"]},
+                        {"title": "filtre metadonnée", "name":"2", "ids": ["no_program"]}
+                        ],
+                        "bundles" : [
+                        {
+                              "id": "type_couv",
+                              "logical": "Or",
+                              "buttons": [
+                              {
+                                    "title": "type couv = R",
+                                    "enabled": false,
+                                    "color": "255,0,0",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "type_couv",
+                                          "expression": "R"
+                                    }
+                              },
+                              {
+                                    "title": "type couv = F",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "type_couv",
+                                          "expression": "F"
+                                    }
+                              }
+                              ]
+                        },
+
+                        {
+                              "id": "densite",
+                              "logical": "Or",
+                              "vertical":false,
+                              "buttons": [
+                              {
+                                    "title": "densite = A",
+                                    "enabled": false,
+                                    "color": "255,0,0",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "cl_dens",
+                                          "expression": "A"
+                                    }
+                              },
+                              {
+                                    "title": "densite = B",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "cl_dens",
+                                          "expression": "B"
+                                    }
+                              },
+                              {
+                                    "title": "densite = A & B",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "logical":"Or",
+                                          "filters":[
+                                          {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "A"},
+                                          {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "B"}
+                                          ]
+                                    }
+                              },
+                              {
+                                    "title": "pas A",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsNotEqualTo",
+                                          "propertyName": "cl_dens",
+                                          "expression": "A"
+                                          }
+                              }
+                              ]
+                        },
+                        {
+                              "id": "no_program",
+                              "logical": "Or",
+                              "vertical":false,
+                              "buttons": [
+                              {
+                              "title": "prg no= 4",
+                              "enabled": false,
+                              "color": "255,0,0",
+                              "tooltip": "Here a tooltip explaning ...",
+                              "filters": {
+                                    "operator": "PropertyIsEqualTo",
+                                    "propertyName": "no_prg",
+                                    "expression": "4"
+                                    }
+                              },
+                              {
+                              "title": "prg no=5",
+                              "enabled": false,
+                              "color": "255,100,255",
+                              "tooltip": "Here a tooltip explaning ...",
+                              "filters": {
+                                    "operator": "PropertyIsEqualTo",
+                                    "propertyName": "no_prg",
+                                    "expression": "5"
+                                    }
+                              }
+                              ]
+                        }
+                  ]
+                  }
+                  }
+
+
+Propriétés de l'objet ogcFilters
+
+    .. note::
+       En cours de construction
+
+.. _igosourceFieldsObject:
+
+Configuration d'alias sur des attributs (sourceFields)
+======================================================
+
+Une liste de nom d'attribut, de leur alias et des valeurs permises.
+
+Exemples
+
+        .. code:: json
+
+            [
+                  {"name": "type_couv", "alias": "type couv", "values": ["R", "F"]},
+                  {"name": "no_prg", "alias": "No inventaire", "values": ["3", "4", "5"]}
+            ]
+
+
+Propriétés de l'objet timeFilter
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **name***
+         - String
+         - Nom de l'attribut
+         - 
+         -
+       * - alias
+         - String
+         - Alias de l'attribut.
+         - 
+         - Le nom de l'attribut est utilisé si nul.
+       * - values
+         - Array (liste)
+         - Liste de valeurs permises 
+         - 
+         - .. line-block::
+               Si vide, pour les WFS, sera récupéré automatiquement.
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
 ************************************
@@ -1035,11 +1329,13 @@ Propriétés
     Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. list-table::
-       :widths: 10 80
+       :widths: 10 30 60
        :header-rows: 1
 
        * - .. line-block::
                Propriétés
+         - .. line-block::
+               Description
          - .. line-block::
                Valeur défaut
        * - searchUrl
@@ -1157,6 +1453,7 @@ Propriétés
 
 Liens
 
+    - `Doc de l'api iCherche <https://geoegl.msp.gouv.qc.ca/apis/icherche/docs>`_
     - `Code iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`_
     - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
 
@@ -1169,7 +1466,7 @@ iCherche Reverse
         par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_
         afin de permettre des recherches par coordonnées / rayon sur les entités suivantes:
             - Adresses
-            - Routes (segments de routes)
+            - Routes (segments de /routes)
             - Arrondissements (segments de routes)
             - Municipalités (et ancien municipalités)
             - MRC
@@ -1212,6 +1509,7 @@ Propriétés
 
 Liens
 
+    - `Doc de l'api iCherche Reverse <https://geoegl.msp.gouv.qc.ca/apis/terrAPI/docs>`_
     - `Code iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`_
     - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
 
@@ -1539,15 +1837,19 @@ Outils (tools)
             - `catalogBrowser`_
             - `contextManager`_
             - `directions`_
+            - `activeOgcFilter`_
             - `ogcFilter`_
+            - `activeTimeFilter`_
             - `timeFilter`_
-            - `spatialFilter`_
             - `importExport`_
+            - `mapTool`_
+            - `mapLegend`_
             - `mapDetails`_
-            - `map`_
+            - `mapTools`_
             - `measurer`_
             - `print`_
             - `searchResults`_
+            - `spatialFilter`_
             - `shareMap`_
 
 
@@ -1608,18 +1910,38 @@ Propriétés
          - igo.integration.tools.about
        * - options
          - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
          - .. line-block::
-               Options de l'outil. Ici pour configurer le html qui sera
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - html
+         - String ou String[]
+         - .. line-block::
+               Configure le html qui sera
                présenté dans l'outil.
          - .. line-block::
-               {
-                   htlm: ''
-                   ou
-                   htlm: ['','']
-               }
-         - `Voir html <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool/about-tool.component.ts>`_
-
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+               "<p>Contenu html</p>" 
+               ou sous forme de liste (pour les changement de lignes)
+               ["<p>Contenu html de la première ligne</p>","<p>Contenu de la seconde ligne</p>"]
+         - igo.integration.about.html
 
 Liens
 
@@ -1706,7 +2028,10 @@ Exemples
         .. code:: json
 
             {
-                "name": "catalogBrowser"
+                "name": "catalogBrowser",
+                "options": {
+                    "toggleCollapsedGroup": true
+                }
             }
 
 Propriétés
@@ -1746,25 +2071,40 @@ Propriétés
          - igo.integration.tools.catalog
        * - options
          - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
          - .. line-block::
-               Options de l'outil:
-               toggleCollapsedGroup permet de forcer
-               l'usager à entrer dans le groupe et
-               d'y visualiser  les couches disponibles
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - toggleCollapsedGroup
+         - Boolean
+         - .. line-block::
+               Force l'usager à entrer dans le groupe et 
+               d'y visualiser  les couches disponible
                avant de pouvoir ajouter le groupe
                à la carte.
                **false** = le groupe doit être ouvert avant
                de pouvoir l'ajouter à la carte
-         - .. line-block::
-               {
-                   toggleCollapsedGroup: false
-               }
-         - .. line-block::
-               {
-                   toggleCollapsedGroup: true
-               }
+         - toggleCollapsedGroup: false
+         - toggleCollapsedGroup: false
 
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
@@ -1791,7 +2131,10 @@ Exemples
         .. code:: json
 
             {
-                "name": "contextManager"
+                "name": "contextManager",
+                "options": {
+                    "toolToOpenOnContextChange": "searchResults"
+                }
             }
 
 Propriétés
@@ -1829,8 +2172,39 @@ Propriétés
                    - fichiers dans :ref:`Language <igolanguage>`.
          -
          - igo.integration.tools.contexts
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - toolToOpenOnContextChange
+         - String
+         - .. line-block::
+               Nom de l'outil a ouvrir suite au changement de contexte
+         - .. line-block::
+               Voir le nom des divers outils de cette section
+         - .. line-block::
+               Dans l'ordre `mapTools`_', `mapTool`_, `mapDetails`_ et `mapLegend`_  si ces outils sont disponibles.
+
 
 Liens
 
@@ -1900,184 +2274,125 @@ Liens
     - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/directions/directions-tool>`_
 
 
+.. _igoactiveogcFilter:
 
-.. _igoogcFilter:
-
-
-OgcFilter
-===========
-
+activeOgcFilter
+===============
 
     .. line-block::
-        Outil permetant de configurer des boutons poussoirs pour filtrer une couche wms.
-         Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-         NB2: L'activation de l'outil se fait ici via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes.
-         layer -> sourceOptions -> ogcFilters
+        Outil permettant de filtrer la couche active de service OGC filtrable,
+        WMS (Geoserver et Mapserver 7.2) et les WFS disponible à la carte.
 
-Exemples d'un layer filtré OGC dans un contexte
+        Le bouton permettant de sélectionner une couche active est disponible dans les outils `mapTools`_, `mapTool`_ et `mapDetails`_.
+        L'outil apparait seulement lorsque le bouton est cliqué.
+
+        Référez-vous à : `Configuration filtre OGC (ogcFilters)`_  pour configurer les filtres au niveau des couches.
+
+Exemples
 
         .. code:: json
 
             {
-              "layers": [
-              {
-                "id":"pee_ori_couleur",
-                "title": "peup avec filtre bouton",
-
-                "sourceOptions": {
-
-                    "url": "@host/ws/mffpecofor.fcgi",
-                    "params": {
-                        "layers": "ori_pee_ori_prov",
-                        "version": "1.3.0"
-                    },
-                    "type": "wms",
-                    "optionsFromCapabilities": true,
-
-                    "ogcFilters": {
-
-                      "enabled": true,
-                      "editable": true,
-                      "allowedOperatorsType": "*",
-
-
-                      "pushButtons": {
-                          "groups": [
-                            {
-                                "title": "filtre foret",
-                                "name":"1",
-                                "ids": ["type_couv", "densite"]
-                            },
-
-                            {
-                                "title": "filtre metadonnée",
-                                "name":"2",
-                                "ids": ["no_program"]
-                            }
-                          ],
-                          "bundles" : [
-                            {
-                                "id": "type_couv",
-                                "logical": "Or",
-                                "buttons": [
-                                    {
-                                        "title": "type couv = R",
-                                        "enabled": false,
-                                        "color": "255,0,0",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsEqualTo",
-                                            "propertyName": "type_couv",
-                                            "expression": "R"
-                                        }
-                                    },
-                                    {
-                                        "title": "type couv = F",
-                                        "enabled": false,
-                                        "color": "255,100,255",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsEqualTo",
-                                            "propertyName": "type_couv",
-                                            "expression": "F"
-                                        }
-                                    }
-                                ]
-                            },
-
-                            {
-                                "id": "densite",
-                                "logical": "Or",
-                                "vertical":false,
-                                "buttons": [
-                                    {
-                                        "title": "densite = A",
-                                        "enabled": false,
-                                        "color": "255,0,0",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsEqualTo",
-                                            "propertyName": "cl_dens",
-                                            "expression": "A"
-                                        }
-                                    },
-                                    {
-                                        "title": "densite = B",
-                                        "enabled": false,
-                                        "color": "255,100,255",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsEqualTo",
-                                            "propertyName": "cl_dens",
-                                            "expression": "B"
-                                        }
-                                    },
-                                    {
-                                        "title": "densite = A & B",
-                                        "enabled": false,
-                                        "color": "255,100,255",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "logical":"Or",
-                                            "filters":[
-                                                {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "A"},
-                                                {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "B"}
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "title": "pas A",
-                                        "enabled": false,
-                                        "color": "255,100,255",
-                                        "tooltip": "Here a tooltip explaning ...",
-                                        "filters": {
-                                            "operator": "PropertyIsNotEqualTo",
-                                            "propertyName": "cl_dens",
-                                            "expression": "A"
-                                            }
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "no_program",
-                                "logical": "Or",
-                                "vertical":false,
-                                "buttons": [
-                                    {
-                                    "title": "prg no= 4",
-                                    "enabled": false,
-                                    "color": "255,0,0",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                        "operator": "PropertyIsEqualTo",
-                                        "propertyName": "no_prg",
-                                        "expression": "4"
-                                        }
-                                    },
-                                    {
-                                    "title": "prg no=5",
-                                    "enabled": false,
-                                    "color": "255,100,255",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                        "operator": "PropertyIsEqualTo",
-                                        "propertyName": "no_prg",
-                                        "expression": "5"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-
-                    "sourceFields": [
-                      {"name": "type_couv", "alias": "type couv", "values": ["R", "F"]},
-                      {"name": "no_prg", "alias": "No inventaire", "values": ["3", "4", "5"]}
-                    ]
-                  }
-                  }
-              }
+                "name": "activeOgcFilter"
             }
+
+Liens
+
+    - `active-ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages\integration\src\lib\filter\active-ogc-filter-tool>`_
+    - `OGC FES <https://www.ogc.org/standards/filter>`_
+
+
+.. _igoogcFilter:
+
+
+ogcFilter
+===========
+
+
+    .. line-block::
+        Outil permettant de filtrer toutes les couches de service OGC filtrable.
+         Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+         NB2: L'activation de l'outil se fait ici via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes.
+         layer -> sourceOptions -> ogcFilters
+         Référez-vous à : `Configuration filtre OGC (ogcFilters)`_  pour configurer les filtres au niveau des couches.
+
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "ogcFilter"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - filter
+       * - **name***
+         - String
+         - 
+         - ogcFilter
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.ogcFilter
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/ogc-filter-tool>`_
+    - `OGC FES <https://www.ogc.org/standards/filter>`_
+
+
+.. _igoactivetimeFilter:
+
+activeTimeFilter
+================
+
+    .. line-block::
+        Outil permettant de filtrer la couche WMS active filtrable temporellement.
+
+        Le bouton permettant de sélectionner une couche active est disponible dans les outils `mapTools`_, `mapTool`_ et `mapDetails`_.
+        L'outil apparait seulement lorsque le bouton est cliqué.
+
+        Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  pour configurer les filtres au niveau des couches.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "activeTimeFilter"
+            }
+
+Liens
+
+    - `active-time-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-time-filter-tool>`_
 
 
 .. _igotimeFilter:
@@ -2091,44 +2406,23 @@ timeFilter
         NB: L'activation de l'outil se fait via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes.
         layer -> sourceOptions -> timeFilter
 
+        Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  pour configurer les filtres au niveau des couches.
+
 
 Exemples
 
         .. code:: json
 
             {
-                "layers": [
-                    {
-                      "title": "Feux de forêt ↺",
-                      "sourceOptions": {
-                          "queryFormat": "htmlgml2",
-                          "queryHtmlTarget": "iframe",
-                          "url": "@host/ws/mffpecofor.fcgi",
-                          "params": {
-                              "layers": "ca_feux",
-                              "version": "1.3.0"
-                          },
-                          "type": "wms",
-                          "optionsFromCapabilities": true,
-                          "timeFilterable": true,
-                          "timeFilter": {
-                              "min": "1890",
-                              "max": "2019",
-                              "style": "calendar",
-                              "range": true,
-                              "step": 63072000000,
-                              "type": "year"
-                          }
-                      }
-                  }
+                "name": "timeFilter"
             }
 
-Propriétés de l'objet timeFilter
+Propriétés
 
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-
+    
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -2139,63 +2433,32 @@ Propriétés de l'objet timeFilter
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - min
+       * - icon
          - String
-         - Periode de temps minimum.
-         - En fonction du type, peut être une année, une date ou une heure.
-         -
-       * - max
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - history
+       * - **name***
          - String
-         - Periode de temps maximum.
-         - En fonction du type, peut être une année, une date ou une heure.
-         -
-       * - range
-         - Boolean
-         - Intervalle à saisir par utilisateur.
-         - true/false
-         -
-       * - step
-         - Number
-         - Le temps de l'intervalle en millisecondes.
-         - Ex: 63072000000 pour un an.
-         -
-       * - style
+         - 
+         - timeFilter
+         - 
+       * - title
          - String
-         - Le style du calendrier.
-         - calendar, slider
-         - slider
-       * - type
-         - String
-         - Le type temporel de calendrier. En année, jour, heure, etc.
-         - year, date
-         -
-       * - timeInterval
-         - Number
-         - Pour configuration en 'slider', le temps d'attente avant de passer au suivant, en millisecondes.
-         -
-         -
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.timeFilter
 
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
+Liens
 
-.. _igospatialFilter:
+    - `time-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/time-filter-tool>`_
 
-
-spatialFilter
-==============
-
-    .. line-block::
-        Outil permettant de faire une recherche de facon spatiale selon un dessin tracé par utilisateur ou
-        certains contours définis comme les municipalité, mrc, etc. La recherche se fait en fonction de certains api de recherche comme Terrapi
-        voir: <https://geoegl.msp.gouv.qc.ca/apis/terrapi/docs>
-
-Exemples
-
-        .. code:: json
-
-          {
-            "name": "spatialFilter"
-          }
 
 .. _igoimportExport:
 
@@ -2207,7 +2470,7 @@ importExport
         Certaines restrictions s'appliquent:
         Import:
           - La projection doit être en EPSG:4326
-          - La taille du fichier doit être au maximum de 30Mo
+          - La taille du fichier est configurable via la configuration. Voir :ref:`importExport <igoimportExport>`.Par défaut a 30Mo
           - Les shapeFiles doivent être dans un .zip
 
         Export:
@@ -2222,39 +2485,17 @@ Exemples
             "name": "importExport"
           }
 
-.. _igomapDetails:
+    .. line-block::
+        Outil permettant d'exporter certaines couches d'informations.
 
+        Noter que les couches WMS ne sont pas exportable.
 
-mapDetails
-============
-
-  .. line-block::
-        Outil présentant la liste de couche à l'intérieur des contextes
-
-Exemples
-
-        .. code:: json
-
-          {
-              "name": "mapDetails",
-              "title":"Couches",
-              "options": {
-                  "toggleLegendOnVisibilityChange": true,
-                  "expandLegendOfVisibleLayers":true,
-                  "layerListControls": {
-                      "showToolbar": "always",
-                      "excludeBaseLayers": false
-                    }
-              }
-          }
-
-
-Propriétés de l'objet options de mapDetails
+Propriétés
 
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-
+    
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -2265,100 +2506,83 @@ Propriétés de l'objet options de mapDetails
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - toggleLegendOnVisibilityChange
-         - Boolean
-         - Indique si la légende s'ouvrira/fermera automatiquement lors de l'activation/désactivation de la couche.
-         - true/false
-         - false
-       * - expandLegendOfVisibleLayers
-         - Boolean
-         - Indique si les légendes sont ouvertes sur les couches activées. Principalement pour l'ouverture à l'arrivée dans un contexte
-         - true/false
-         - false
-       * - layerListControls.showToolbar
+       * - icon
          - String
-         - "always", "never", "default"
-         -
-         -
-       * - layerListControls.excludeBaseLayers
-         - Boolean
-         - true/false
-         -
-         -
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - file-move
+       * - **name***
+         - String
+         - 
+         - importExport
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.importExport
 
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `import-export-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/import-export/import-export-tool>`_
 
 
 .. _igomaptool:
 
-
-map
-======
-
-
-.. _igomeasurer:
-
-
-measurer
-=========
+mapTool
+===============
 
     .. line-block::
-        Outil permettant de faire des mesures sur la carte
+        Outil permettant de présenter le contenu à l'aide de deux onglets distincts.
+            - Carte :   Couches disponible à la carte, avec paramètres et outils permettant de gérer les couches:
+                            - ordonnancement
+                            - visibilité
+                            - accès aux métadonnées (si disponible)
+                            - accès au téléchargements des données (si disponible)
+                            - filter les données (temporellement et par attributs si disponible)
+                            - supression de couches
+            - Gestionnaire de contexte :  Outil permettant de lister/gérer/changer de contexte à l'intérieur d'une même application. 
+   
+.. note::
+   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils 
+       - `activeOgcFilter`_
+       - `activeTimeFilter`_
 
 Exemples
 
         .. code:: json
 
-          {
-            "name": "measurer"
-          }
-
-
-
-.. _igoprint:
-
-
-print
-=======
-
-    .. line-block::
-        Outil permettant d'imprimer la carte affichée à l'écran
-
-Exemples
-
-        .. code:: json
-
-          {
-            "name": "print"
-          }
-
-
-.. _igosearchResults:
-
-
-searchResults
-================
-
-    .. line-block::
-        Outil présentant les résultats de recherche.
-
-Exemples
-
-        .. code:: json
-
-          {
-              "name": "searchResults",
-              "options": {
-                  "focusFirst": false
+            {
+                "name": "map",
+                "options": {
+                    "updateLegendOnResolutionChange": false,
+                    "toggleLegendOnVisibilityChange": true,
+                    "expandLegendOfVisibleLayers": true,
+                    "ogcButton": false,
+                    "timeButton": false,
+                    "queryBadge": false,
+                    "layerListControls": {
+                        "excludeBaseLayers": true,
+                        "showToolbar": "default",
+                        "keyword": "allo",
+                        "sortAlpha": true,
+                        "onlyVisible": true
+                    }
                 }
-          }
+            }
 
-Propriétés de l'objet options de searchResults
+Propriétés
 
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-
+    
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -2369,14 +2593,1019 @@ Propriétés de l'objet options de searchResults
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - focusFirst
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - map
+       * - **name***
+         - String
+         - 
+         - map
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.map'
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - expandLegendOfVisibleLayers
          - Boolean
-         - Focus automatique lorsqu'un résultat de recherche est trouvé.
-         - true/false
-         - false
+         - .. line-block::
+               À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - ogcButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre OGC pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - queryBadge
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un "?" pour les couches interrogeable.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - timeButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre temporel pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - toggleLegendOnVisibilityChange
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité
+               d'une couche passe de non-visible à visible
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - updateLegendOnResolutionChange
+         - Boolean
+         - .. line-block::
+               Permet de rafraichir la légende à chaque changement de résolution (zoom)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerListControls
+         - Object
+         - .. line-block::
+               Divers contrôles effectués à la liste de couches affichées dans l'interface.
+               
+                "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
+                "showToolbar" = Outil permettant de contrôler la liste des couche
+                                "always", "never" ou "default" = visible si 5 couches et +
+                "keyword" = Mot clef filtrant la liste de couches
+                "sortAlpha" = Tri la liste de couches alphabétiquement.
+                "onlyVisible" = Ne garde que dans la liste de couches, les couches visible.
 
 
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+         - .. line-block::
+               "layerListControls": {
+                   "excludeBaseLayers": true,
+                   "showToolbar": "always",
+                   "keyword": "allo",
+                   "sortAlpha": true,
+                   "onlyVisible": true
+                }
+         - .. line-block::
+               {
+                  "excludeBaseLayers": false,
+                  "showToolbar": "default",
+                  "sortAlpha": false,
+                  "onlyVisible": false
+              }
+
+
+Liens
+
+    - `map-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-tool>`_
+
+
+.. _igomapLegend:
+
+mapLegend
+===============
+
+    .. line-block::
+        Outil permettant de présenter le contenu de la carte sous forme de légende. 
+        Seul les légendes sont contenues.
+
+        Il est possible d'ajouter une option permettant de montrer toutes les légendes de la carte 
+        même pour les couches non visible OU hors échelle d'affichage.
+    
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "mapLegend",
+                "options": {
+                    "allowShowAllLegends": true,
+                    "showAllLegendsValue": true,
+                    "layerAdditionAllowed": true,
+                    "updateLegendOnResolutionChange": false,
+                    "layerListControls": {
+                        "excludeBaseLayers": true
+                    }
+                }
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - format-list-bulleted-type'
+       * - **name***
+         - String
+         - 
+         - mapLegend
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.legend
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - allowShowAllLegends
+         - Boolean
+         - .. line-block::
+               Affiche un bouton permettant de montrer toutes les légendes de la carte, 
+               même pour les couches non visible OU hors échelle d'affichage.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - showAllLegendsValue
+         - Boolean
+         - .. line-block::
+               SI allowShowAllLegends est permis (true), définit la valeur à l'ouverture de l'application.
+               true = toutes les légendes sont affichées (même ceux non visibles à la carte)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerAdditionAllowed
+         - Boolean
+         - .. line-block::
+               Identifie si l'ajout de couches à la carte sont permises. 
+               Influence les messages d'aide à l'usager
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - updateLegendOnResolutionChange
+         - Boolean
+         - .. line-block::
+               Permet de rafraichir la légende à chaque changement de résolution (zoom)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerListControls
+         - Object
+         - .. line-block::
+               Divers contrôles effectués à la liste de couches affichées dans l'interface.
+         - .. line-block::
+               {
+                   "excludeBaseLayers": true // retire les couches identifiées comme baseLayer.
+               }
+         - .. line-block::
+               {
+                   "excludeBaseLayers": false
+               }
+
+
+Liens
+
+    - `map-legend <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-legend>`_
+
+
+.. _igomapDetails:
+
+mapDetails
+===============
+
+    .. line-block::
+        Outil permettant de présenter les couches disponible à la carte, avec paramètres et outils permettant de gérer les couches:
+                            - ordonnancement
+                            - visibilité
+                            - accès aux métadonnées (si disponible)
+                            - accès au téléchargements des données (si disponible)
+                            - filter les données (temporellement et par attributs si disponible)
+                            - supression de couches
+   
+.. note::
+   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils 
+       - `activeOgcFilter`_
+       - `activeTimeFilter`_
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "mapDetails",
+                "options": {
+                    "layerAdditionAllowed": true,
+                    "updateLegendOnResolutionChange": false,
+                    "toggleLegendOnVisibilityChange": true,
+                    "expandLegendOfVisibleLayers": true,
+                    "ogcButton": false,
+                    "timeButton": false,
+                    "queryBadge": false,
+                    "layerListControls": {
+                        "excludeBaseLayers": true,
+                        "showToolbar": "default",
+                        "keyword": "allo",
+                        "sortAlpha": true,
+                        "onlyVisible": true
+                    }
+                }
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - map
+       * - **name***
+         - String
+         - 
+         - map
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.map'
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - expandLegendOfVisibleLayers
+         - Boolean
+         - .. line-block::
+               À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerAdditionAllowed
+         - Boolean
+         - .. line-block::
+               Identifie si l'ajout de couches à la carte sont permises. 
+               Influence les messages d'aide à l'usager
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - ogcButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre OGC pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - queryBadge
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un "?" pour les couches interrogeable.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - timeButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre temporel pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - toggleLegendOnVisibilityChange
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité
+               d'une couche passe de non-visible à visible
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - updateLegendOnResolutionChange
+         - Boolean
+         - .. line-block::
+               Permet de rafraichir la légende à chaque changement de résolution (zoom)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerListControls
+         - Object
+         - .. line-block::
+               Divers contrôles effectués à la liste de couches affichées dans l'interface.
+               
+                "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
+                "showToolbar" = Outil permettant de contrôler la liste des couche
+                                "always", "never" ou "default" = visible si 5 couches et +
+                "keyword" = Mot clef filtrant la liste de couches
+                "sortAlpha" = Tri la liste de couches alphabétiquement.
+                "onlyVisible" = Ne garde que dans la liste de couches, les couches visible.
+
+
+         - .. line-block::
+               "layerListControls": {
+                   "excludeBaseLayers": true,
+                   "showToolbar": "always",
+                   "keyword": "allo",
+                   "sortAlpha": true,
+                   "onlyVisible": true
+                }
+         - .. line-block::
+               {
+                  "excludeBaseLayers": false,
+                  "showToolbar": "default",
+                  "sortAlpha": false,
+                  "onlyVisible": false
+              }
+
+
+Liens
+
+    - `map-details-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-details-tool>`_
+
+
+.. _igomaptools:
+
+mapTools
+===============
+
+    .. line-block::
+        Outil permettant de présenter le contenu à l'aide de deux onglets distincts.
+            - Carte :   Couches disponible à la carte, avec paramètres et outils permettant de gérer les couches:
+                            - ordonnancement
+                            - visibilité
+                            - accès aux métadonnées (si disponible)
+                            - accès au téléchargements des données (si disponible)
+                            - filter les données (temporellement et par attributs si disponible)
+                            - supression de couches
+            - Légende : Légendes de la carte 
+   
+.. note::
+   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils 
+       - activeOgcFilter
+       - activeTimeFilter  
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "mapTools",
+                "options": {
+                    "allowShowAllLegends": true,
+                    "showAllLegendsValue": true,
+                    "layerAdditionAllowed": true,
+                    "updateLegendOnResolutionChange": false,
+                    "toggleLegendOnVisibilityChange": true,
+                    "expandLegendOfVisibleLayers": true,
+                    "selectedTabAtOpening" : "legend",
+                    "ogcButton": false,
+                    "timeButton": false,
+                    "queryBadge": false,
+                    "layerListControls": {
+                        "excludeBaseLayers": true,
+                        "showToolbar": "default",
+                        "keyword": "allo",
+                        "sortAlpha": true,
+                        "onlyVisible": true
+                    }
+                }
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - map
+       * - **name***
+         - String
+         - 
+         - mapTools
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.map'
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - allowShowAllLegends
+         - Boolean
+         - .. line-block::
+               Affiche un bouton permettant de montrer toutes les légendes de la carte, 
+               même pour les couches non visible OU hors échelle d'affichage.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - showAllLegendsValue
+         - Boolean
+         - .. line-block::
+               SI allowShowAllLegends est permis (true), définit la valeur à l'ouverture de l'application.
+               true = toutes les légendes sont affichées (même ceux non visibles à la carte)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - expandLegendOfVisibleLayers
+         - Boolean
+         - .. line-block::
+               À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerAdditionAllowed
+         - Boolean
+         - .. line-block::
+               Identifie si l'ajout de couches à la carte sont permises. 
+               Influence les messages d'aide à l'usager
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - ogcButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre OGC pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - queryBadge
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un "?" pour les couches interrogeable.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - timeButton
+         - Boolean
+         - .. line-block::
+               Permet d'afficher le bouton filtre temporel pour les couches le permettant.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - selectedTabAtOpening
+         - String
+         - .. line-block::
+               Permet de définir, lors de la première ouverture de l'outil, quel onglet est ouvert.
+         - .. line-block::
+               'legend'
+         - L'onglet Carte est ouvert par défaut.
+       * - toggleLegendOnVisibilityChange
+         - Boolean
+         - .. line-block::
+               Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité
+               d'une couche passe de non-visible à visible
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+       * - updateLegendOnResolutionChange
+         - Boolean
+         - .. line-block::
+               Permet de rafraichir la légende à chaque changement de résolution (zoom)
+         - .. line-block::
+               true / false
+         - .. line-block::
+               false
+       * - layerListControls
+         - Object
+         - .. line-block::
+               Divers contrôles effectués à la liste de couches affichées dans l'interface.
+               
+                "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
+                "showToolbar" = Outil permettant de contrôler la liste des couche
+                                "always", "never" ou "default" = visible si 5 couches et +
+                "keyword" = Mot clef filtrant la liste de couches
+                "sortAlpha" = Tri la liste de couches alphabétiquement.
+                "onlyVisible" = Ne garde que dans la liste de couches, les couches visible.
+
+
+         - .. line-block::
+               "layerListControls": {
+                   "excludeBaseLayers": true,
+                   "showToolbar": "always",
+                   "keyword": "allo",
+                   "sortAlpha": true,
+                   "onlyVisible": true
+                }
+         - .. line-block::
+               {
+                  "excludeBaseLayers": false,
+                  "showToolbar": "default",
+                  "sortAlpha": false,
+                  "onlyVisible": false
+              }
+
+
+Liens
+
+    - `map-tools <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-tools>`_
+
+
+.. _igomeasurer:
+
+measurer
+===============
+
+    .. line-block::
+        Outil permettant d'effectuer des mesures sur la carte. 
+
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "measurer"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - ruler
+       * - **name***
+         - String
+         - 
+         - measurer
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.measurer
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `measurer-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/measure/measurer-tool>`_
+
+
+.. _igoprint:
+
+print
+===============
+
+    .. line-block::
+        Outil permettant d'effectuer des impressions de la carte. 
+
+        Actuellemnt exclut de l'impression:
+            - itinéraires
+            - mesures
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "print"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - printer
+       * - **name***
+         - String
+         - 
+         - print
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.print
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `print-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/print/print-tool>`_
+
+
+.. _igosearchResults:
+
+searchResults
+===============
+
+    .. line-block::
+        Outil permettant d'afficher les résultats effectués à l'aide de la barre de recherche
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "searchResults",
+                "options": {
+                    "showIcons": false
+                }
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - magnify
+       * - **name***
+         - String
+         - 
+         - print
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.searchResults
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - showIcons
+         - Boolean
+         - .. line-block::
+               Permet de faire afficher ou non des icônes pour chacun des résultats de recherche.
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+
+
+Liens
+
+    - `search-results-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/search/search-results-tool>`_
+
+
+.. _igospatialFilter:
+
+spatialFilter
+===============
+
+    .. line-block::
+         Outil permettant d’appliquer un filtre sur des adresses ou des thématiques ciblées selon une zone prédéfinie ou selon une zone dessinée par l’utilisateur.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "spatialFilter",
+                "options": {
+                    "type": "Predefined",
+                    "itemType": "Thematics",
+                    "freehandDrawIsActive": true
+                }
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - selection-marker
+       * - **name***
+         - String
+         - 
+         - spatialFilter
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.spatialFilter
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - type
+         - SpatialFilterType
+         - .. line-block::
+               Spécifie le type de zone sur lequel le filtrage sera appliqué
+         - .. line-block::
+               Predefined = Zone prédéfinie (Municipalités, Arrondissements, Région administratives...)
+               Polygon = Polygone dessinée par l'utilisateur
+               Point = Cercle dessinée par l'utilisateur
+         - 
+       * - itemType
+         - SpatialFilterItemType
+         - .. line-block::
+               Spécifie le type des éléments qui seront filtrés
+         - .. line-block::
+               Address = Adresses provenant de la couche d'Adresses Québec
+               Thematics = Données provenant de l'api terrAPI
+         - Address
+       * - freehandDrawIsActive
+         - Boolean
+         - .. line-block::
+               Indique si le mode de dessin "à main levée" est actif ou non.
+         - true / false
+         - 
+
+Liens
+
+    - `spatial-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/spatial-filter-tool>`_
 
 
 .. _igoshareMap:
@@ -2394,9 +3623,46 @@ Exemples
 
             {
               "name": "shareMap",
-              "options": {
-                  "hasCopyLinkButton": true,
-                  "hasShareMapButton": false
-              }
             }
 
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+    
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`_
+         - share-variant
+       * - **name***
+         - String
+         - 
+         - shareMap
+         - 
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traduction.
+               Si vous modifier le titre par défaut, vous devez ajouter 
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`. 
+         - 
+         - igo.integration.tools.shareMap
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `context-share-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/context/context-share-tool>`_

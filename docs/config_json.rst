@@ -83,6 +83,13 @@ Résumé
 
                documentation.
          - ContextManager
+       * - `hasSearchPointerSummary`_
+         - Boolean
+         - .. line-block::
+               Permet d'activé ou non la capacité d'afficher un résumé de la position du curseur.
+               Le résumé est dépendant des sources de recherche utilisées.
+               Désactivé par défaut.
+         - 
        * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
@@ -649,6 +656,15 @@ Liens
         - `igo2-lib/packages/context/src/lib/context-manager/shared/context.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/context/src/lib/context-manager/shared/context.interface.ts>`_
 
 
+***********************
+hasSearchPointerSummary
+***********************
+
+    .. line-block::
+        Permet d'activé ou non la capacité d'afficher un résumé de la position du curseur.
+        Le résumé est dépendant des sources de recherche utilisées.
+
+
 *****************
 hasExpansionPanel
 *****************
@@ -674,7 +690,8 @@ Exemples
 
             importExport: {
                 url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
-                clientSideFileSizeMaxMb: 30
+                clientSideFileSizeMaxMb: 30,
+                gpxAggregateInComment: false
             }
 
 Propriétés
@@ -707,6 +724,13 @@ Propriétés
          - .. line-block::
                
          - 30
+       * - gpxAggregateInComment
+         - Boolean
+         - .. line-block::
+               Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur de l'ID au champ «name».
+         - .. line-block::
+               
+         - false
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
@@ -1444,17 +1468,22 @@ Propriétés
                - :ref:`catalogBrowser <igocatalogBrowser>`
                - :ref:`contextManager <igocontextManager>`
                - :ref:`directions <igodirections>`
+               - :ref:`activeOgcFilter <igoactiveogcFilter>`
                - :ref:`ogcFilter <igoogcFilter>`
+               - :ref:`activeTimeFilter <igoactivetimeFilter>`
                - :ref:`timeFilter <igotimeFilter>`
                - :ref:`spatialFilter <igospatialFilter>`
                - :ref:`importExport <igoimportExport>`
+               - :ref:`mapTool <igomaptool>`
+               - :ref:`mapLegend <igomapLegend>`
                - :ref:`mapDetails <igomapDetails>`
-               - :ref:`mesurer <igomesurer>`
-               - :ref:`map <igomaptool>`
+               - :ref:`mapTools <igomaptools>`
+               - :ref:`measurer <igomeasurer>`
                - :ref:`print <igoprint>`
                - :ref:`searchResults <igosearchResults>`
+               - :ref:`spatialFilter <igospatialFilter>`
                - :ref:`shareMap <igoshareMap>`
-         - 
+         -
        * - title
          - String
          - .. line-block::
