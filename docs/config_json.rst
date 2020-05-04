@@ -731,6 +731,20 @@ Propriétés
          - .. line-block::
                
          - false
+       * - forceNaming
+         - Boolean
+         - .. line-block::
+               Ajoute une boite texte au formulaire d'exportation qui permet de nommer le fichier exporter.
+         - .. line-block::
+               
+         - false
+       * - formats
+         - string array
+         - .. line-block::
+               La liste des formats qu'il est possible d'exporter.
+         - .. line-block::
+               'GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV'
+         - ['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV']
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
