@@ -691,7 +691,9 @@ Exemples
             importExport: {
                 url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
                 clientSideFileSizeMaxMb: 30,
-                gpxAggregateInComment: false
+                gpxAggregateInComment: false,
+                forceNaming: false,
+                formats: ['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV']
             }
 
 Propriétés
@@ -739,7 +741,7 @@ Propriétés
                
          - false
        * - formats
-         - string array
+         - String[]
          - .. line-block::
                La liste des formats qu'il est possible d'exporter.
          - .. line-block::
