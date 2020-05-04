@@ -442,15 +442,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       const contextManagerOptions = contextManager
         ? contextManager.options
         : {};
-      let toolToOpen = contextManagerOptions.toolToOpenOnContextChange
-        ? contextManagerOptions.toolToOpenOnContextChange
-        : undefined;
+      let toolToOpen = contextManagerOptions.toolToOpenOnContextChange;
 
       if (!toolToOpen) {
         const toolOrderToOpen = ['mapTools', 'map', 'mapDetails', 'mapLegend'];
         for (const toolName of toolOrderToOpen) {
-          toolToOpen = this.toolbox.getTool(toolName);
-          if (toolToOpen) {
+          if (this.toolbox.getTool(toolName)) {
+            toolToOpen = toolName;
             break;
           }
         }
