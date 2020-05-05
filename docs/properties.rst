@@ -2676,7 +2676,7 @@ Options
          - .. line-block::
                true / false
          - .. line-block::
-               true
+               false
        * - updateLegendOnResolutionChange
          - Boolean
          - .. line-block::
