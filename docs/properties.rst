@@ -443,7 +443,7 @@ Propriétés
                L'URL du fichier contenant les entités.
          -
          -
-       * - **excludeAttribute**
+       * - excludeAttribute
          - Array.<String>
          - .. line-block::
                Liste des attributs exclus du 
@@ -451,7 +451,7 @@ Propriétés
                est en ligne.
          - 
          - 
-       * - **excludeAttributeOffline**
+       * - excludeAttributeOffline
          - Array.<String>
          - .. line-block::
                Liste des attributs exclus du 
@@ -459,7 +459,7 @@ Propriétés
                est hors-ligne.
          - 
          -
-       * - **distance**
+       * - distance
          - Number
          - Distance en pixel entre les entités
          - 
@@ -584,7 +584,7 @@ Propriétés
                tandis que le Z, le zoom.
          -
          -
-       * - **excludeAttribute**
+       * - excludeAttribute
          - Array.<String>
          - .. line-block::
                Liste des attributs exclus du 
@@ -592,7 +592,7 @@ Propriétés
                est en ligne.
          - 
          - 
-       * - **excludeAttributeOffline**
+       * - excludeAttributeOffline
          - Array.<String>
          - .. line-block::
                Liste des attributs exclus du 
@@ -600,7 +600,7 @@ Propriétés
                est hors-ligne.
          - 
          - 
-       * - **featureClass**
+       * - featureClass
          - String
          - .. line-block::
                Définir cette option en tant que
