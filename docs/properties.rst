@@ -404,7 +404,73 @@ Cluster
 ===============
 
     .. note::
-       Disponible actuellement mais la documentation est en cours de construction.
+       Une source de données pour les données vectorielle composées de points. Elle génere des regroupements d'entité lorsque ceux-ci se retrouve près l'une de l'autre.
+
+Exemples
+
+        .. code:: json
+
+            "sourceOptions": {
+                "url": "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson",
+                "type": "cluster",
+                "distance": 50
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **type***
+         - String
+         -
+         - cluster
+         - cluster
+       * - **url***
+         - String
+         - .. line-block::
+               L'URL du fichier contenant les entités.
+         -
+         -
+       * - **excludeAttribute**
+         - Array.<String>
+         - .. line-block::
+               Liste des attributs exclus du 
+               getInfo lorsque l'application
+               est en ligne.
+         - 
+         - 
+       * - **excludeAttributeOffline**
+         - Array.<String>
+         - .. line-block::
+               Liste des attributs exclus du 
+               getInfo lorsque l'application
+               est hors-ligne.
+         - 
+         -
+       * - **distance**
+         - Number
+         - Distance en pixel entre les entités
+         - 
+         - 20
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Liens
+
+    - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
+
 
 
 TMS (xyz)
@@ -518,6 +584,36 @@ Propriétés
                tandis que le Z, le zoom.
          -
          -
+       * - **excludeAttribute**
+         - Array.<String>
+         - .. line-block::
+               Liste des attributs exclus du 
+               getInfo lorsque l'application
+               est en ligne.
+         - 
+         - 
+       * - **excludeAttributeOffline**
+         - Array.<String>
+         - .. line-block::
+               Liste des attributs exclus du 
+               getInfo lorsque l'application
+               est hors-ligne.
+         - 
+         - 
+       * - **featureClass**
+         - String
+         - .. line-block::
+               Définir cette option en tant que
+               'feature' pour obtenir une prise
+               en charge complète de l'édition
+               et de la géométrie des tuiles.
+               Cette option diminue les performances
+               de rendu des tuiles.
+
+               Ne pas utiliser cette option pour 
+               optimiser le rendu des tuiles.
+         - feature
+         - 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
