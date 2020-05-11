@@ -1,3 +1,25 @@
+# [1.3.0](https://github.com/infra-geo-ouverte/igo2/compare/1.2.0...1.3.0) (2020-05-11)
+
+
+### Bug Fixes
+
+* **contextManager:** default tool after context change ([79a1239](https://github.com/infra-geo-ouverte/igo2/commit/79a1239e2c9adc9e7054122817d6d7408db7fd4e))
+* **forceCoordsNA:** bad config ([5d20457](https://github.com/infra-geo-ouverte/igo2/commit/5d204578d438ef3afd8c2f16b7134dcf257856be))
+* **query:** zoom auto on single query feature ([#429](https://github.com/infra-geo-ouverte/igo2/issues/429)) ([17f931a](https://github.com/infra-geo-ouverte/igo2/commit/17f931aec0c62864826ea86b28920669d8507a3b))
+* **toast-panel:** zoom menu icon IE fix ([#414](https://github.com/infra-geo-ouverte/igo2/issues/414)) ([043ad72](https://github.com/infra-geo-ouverte/igo2/commit/043ad72248d8c89c8ece9ffea27657f265bbef94))
+
+
+### Features
+
+* **catalog-browser-tool:** set catalog browser tool title to the selected catalog ([#416](https://github.com/infra-geo-ouverte/igo2/issues/416)) ([eae7764](https://github.com/infra-geo-ouverte/igo2/commit/eae77640cefb3e3f5427a691a911131eaa96ce51))
+* **datasource:** Provide options service ([#410](https://github.com/infra-geo-ouverte/igo2/issues/410)) ([2d98d78](https://github.com/infra-geo-ouverte/igo2/commit/2d98d7869403fb5d9ca2e6ae868cd3811f746dee))
+* **docs:** cluster documentation and mvt documentation enhanced ([#451](https://github.com/infra-geo-ouverte/igo2/issues/451)) ([5202295](https://github.com/infra-geo-ouverte/igo2/commit/520229589d51b700c66b7de95efd1a5591330770))
+* **igo2-lib:** update to 1.3.0 ([8a17f42](https://github.com/infra-geo-ouverte/igo2/commit/8a17f42a449c5fb660e13758bffc53e762e8901c))
+* **layers:** Enhanced table of content for layers management ([#446](https://github.com/infra-geo-ouverte/igo2/issues/446)) ([b85c688](https://github.com/infra-geo-ouverte/igo2/commit/b85c688aa458890f67777a19597b31ab694453c0))
+* **search results:** manage focus/unfocus and select action on search results (and get feature info) ([#413](https://github.com/infra-geo-ouverte/igo2/issues/413)) ([4e8aa78](https://github.com/infra-geo-ouverte/igo2/commit/4e8aa78b4096d3f796bc9b76d967ee2b979c06d7))
+
+
+
 # [1.2.0](https://github.com/infra-geo-ouverte/igo2/compare/1.1.0...1.2.0) (2020-02-10)
 
 
