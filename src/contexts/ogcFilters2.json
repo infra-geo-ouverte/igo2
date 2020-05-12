@@ -5,11 +5,13 @@
     "layers": [
       {
         "title": "Destination WMS",
+        "visible": false,
         "id": "12",
         "linkedLayers": {
           "linkId": "wms2"
         },
         "sourceOptions": {
+          "queryable": true,
           "type": "wms",
           "url": "/swtq",
           "urlWfs": "/swtq",
@@ -33,11 +35,12 @@
           "linkId": "wms",
           "links": [{
             "bidirectionnal": true,
-            "linkedIds": ["wms2", "wfs"],
-            "properties": ["visible","ogcFilters"]
+            "linkedIds": ["wms2","wfs"],
+            "properties": ["ogcFilters"]
           }]
         },
         "sourceOptions": {
+          "queryable": true,
           "type": "wms",
           "url": "/swtq",
           "urlWfs": "/swtq",
@@ -169,6 +172,7 @@
         "linkedLayers": {
           "linkId": "wfs"
         },
+        "showInLayerList": false,
         "visible": true,
         "sourceOptions": {
           "queryable": true,
