@@ -16,6 +16,10 @@
     "title": "Filtre attributaire (Attribute filter)"
   },
   {
+    "uri": "ogcFilters2",
+    "title": "Synchronisation de layers (Filtre attributaire)"
+  },
+  {
     "uri": "mapOverlay",
     "title": "Superposition de carte (Map overlay)"
   }
