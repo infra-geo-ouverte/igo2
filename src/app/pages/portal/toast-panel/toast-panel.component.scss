@@ -8,7 +8,7 @@
   height: $app-toast-panel-collapsed-height;
   max-height: $app-toast-panel-max-height;
 
-  transition: height 280ms cubic-bezier(.4,0,.2,1);
+  transition: height 280ms cubic-bezier(0.4, 0, 0.2, 1);
   padding: $igo-padding;
 }
 
@@ -57,7 +57,7 @@ igo-panel ::ng-deep .igo-panel-content {
 }
 
 igo-feature-details ::ng-deep iframe {
-  min-height: 227px;
+  min-height: 226px;
 }
 
 .swipe-fix {
