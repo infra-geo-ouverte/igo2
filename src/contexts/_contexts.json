@@ -18,5 +18,10 @@
   {
     "uri": "mapOverlay",
     "title": "Superposition de carte (Map overlay)"
+  },
+  {
+    "uri": "mffp_foret",
+    "title": "Volumineux - MFFP Forêt"
   }
+
 ]

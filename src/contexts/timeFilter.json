@@ -50,7 +50,37 @@
         },
         "type": "wms"
       }
-    }
+    },
+    {
+
+      "title": "MFFP Feux de forêt ↺",
+      "zIndex": 54,
+      "visible": false,
+      "metadata": {
+          "extern": true
+      },
+      "sourceOptions": {
+          "crossOrigin": "anonymous",
+          "queryFormat": "htmlgml2",
+          "queryHtmlTarget": "iframe",
+          "url": "/ws/mffpecofor.fcgi",
+          "params": {
+              "layers": "ca_feux",
+              "version": "1.3.0"
+          },
+          "type": "wms",
+          "optionsFromCapabilities": true,
+          "timeFilterable": true,
+          "timeFilter": {
+              "min": "1984",
+              "max": "2019",
+              "style": "calendar",
+              "range": true,
+              "step": 63072000000,
+              "type": "year"
+          }
+      }
+  }
   ],
   "toolbar": [
     "searchResults",
