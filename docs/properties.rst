@@ -1246,7 +1246,7 @@ Exemples
             ]
 
 
-Propriétés de l'objet timeFilter
+Propriétés de l'objet sourceFields
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -1278,6 +1278,18 @@ Propriétés de l'objet timeFilter
          - 
          - .. line-block::
                Si vide, pour les WFS, sera récupéré automatiquement.
+       * - excludeFromOgcFilters
+         - Boolean
+         - Indique si l'attribut est utilisé dans l'outil de filtre OGC.
+         - true/false
+         - true
+       * - allowedOperatorsType
+         - String
+         - Indique les opérateurs permis pour cet attribut
+         - .. line-block::
+               BasicNumericOperator OU Basic OU BasicAndSpatial OU Spatial OU All OU Time
+               Référez vous à `ce lien <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`_ pour les opérateurs correspondants.
+         - BasicAndSpatial
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
