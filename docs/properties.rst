@@ -1287,7 +1287,7 @@ Propriétés de l'objet sourceFields
          - String
          - Indique les opérateurs permis pour cet attribut
          - .. line-block::
-               BasicNumericOperator OU Basic OU BasicAndSpatial OU Spatial OU All OU TIME
+               BasicNumericOperator OU Basic OU BasicAndSpatial OU Spatial OU All OU Time
                Référez vous à `ce lien <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`_ pour les opérateurs correspondants.
          - BasicAndSpatial
 
