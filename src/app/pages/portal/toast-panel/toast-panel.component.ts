@@ -66,6 +66,9 @@ export class ToastPanelComponent implements OnInit {
 
   @Input() zoomAuto = false;
 
+  // To allow the toast to use much larger extent on the map
+  @Input() fullExtent = false;
+
   public icon = 'menu';
 
   public actionStore = new ActionStore([]);
@@ -98,6 +101,11 @@ export class ToastPanelComponent implements OnInit {
       return 'visible';
     }
     return 'hidden';
+  }
+
+  @HostBinding('class.app-full-toast-panel-opened')
+  get hasFullOpenedClass() {
+    return this.opened && this.fullExtent && this.isResultSelected$.getValue();
   }
 
   @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(event: KeyboardEvent) {
