@@ -14,6 +14,8 @@
     "zoomOnFeaturesTooltip": "Zoom on all the selected features",
     "zoomAuto": "Zoom auto",
     "zoomAutoTooltip": "Automatic zoom",
+    "fullExtent": "Extend",
+    "fullExtentTooltip": "Extend panel",
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
     "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
   },

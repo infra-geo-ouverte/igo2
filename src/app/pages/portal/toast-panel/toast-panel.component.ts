@@ -227,6 +227,16 @@ export class ToastPanelComponent implements OnInit {
           }
         }
       },
+      {
+        id: 'fullExtent',
+        title: this.languageService.translate.instant('toastPanel.fullExtent'),
+        tooltip: this.languageService.translate.instant('toastPanel.fullExtentTooltip'),
+        checkbox: true,
+        checkCondition: this.fullExtent,
+        handler: () => {
+          this.fullExtent = !this.fullExtent;
+        }
+      }
     ]);
   }
 
