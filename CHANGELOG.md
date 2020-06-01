@@ -1,3 +1,18 @@
+## [1.3.1](https://github.com/infra-geo-ouverte/igo2/compare/1.3.0...1.3.1) (2020-06-01)
+
+
+### Bug Fixes
+
+* **export:** export with IE ([#463](https://github.com/infra-geo-ouverte/igo2/issues/463)) ([1f58a97](https://github.com/infra-geo-ouverte/igo2/commit/1f58a9730e2ec31d675d370319e2012c2ba4e271))
+* **pointerPositionByKey:** removed because randomly triggered ([ff9f1d0](https://github.com/infra-geo-ouverte/igo2/commit/ff9f1d06e4290355cce35c53d879851351413453))
+
+
+### Features
+
+* **igo2-lib:** update to 1.3.1 ([b5a5374](https://github.com/infra-geo-ouverte/igo2/commit/b5a5374890f0fc2ed99a06494460d18f2e4c8589))
+
+
+
 # [1.3.0](https://github.com/infra-geo-ouverte/igo2/compare/1.2.0...1.3.0) (2020-05-11)
 
 
