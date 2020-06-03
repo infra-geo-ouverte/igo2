@@ -34,6 +34,17 @@
       (searchSettingsChange)="onSearchSettingsChange()">
     </igo-search-bar>
 
+    <button
+      id="tour-button"
+      mat-raised-button
+      color="warn"
+      aria-label="test"
+      (click)="startTour()"
+      matTooltip= "Tour interactif de présentation de application. Fonctionnement étape par étape"
+      *ngIf="!sidenavOpened">
+      Découvrir application
+    </button>
+
     <app-sidenav
       [map]="map"
       [(opened)]="sidenavOpened"

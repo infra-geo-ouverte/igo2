@@ -6,5 +6,129 @@
   },
   "theme": "blue-theme",
   "hasExpansionPanel": false,
-  "hasSearchPointerSummary": false
+  "hasSearchPointerSummary": false,
+
+  "introOptions" :{
+
+    "skipLabel": "<h3 style='color:blue'>Fermer </h3>",
+    "nextLabel": "<h3 style='color:blue'>Suivant</h3>",
+    "prevLabel": "",
+    "doneLabel": "Terminé",
+    "hidePrev": true,
+    "hideNext": true,
+    "positionPrecedence": ["right", "bottom", "top", "left"],
+
+    "keyboardNavigation": true,
+    "showStepNumbers": false,
+    "showBullets": true,
+    "showProgress": false,
+    "showButtons": true,
+    "disableInteraction": true,
+    "exitOnOverlayClick": false,
+    "helperElementPadding": 2,
+    "scrollToElement":true,
+    "scrollTo": "element",
+    "highlightClass":"igo-introjs-helperLayer",
+    "buttonClass":"mat-raised-button",
+    "tooltipClass":"mat-h2",
+
+    "steps": [
+
+      {
+        "no": 0,
+        "element": "menu-button",
+        "intro": "MENU <br> Ouvre et fermer le menu",
+        "position": "right",
+        "disableInteraction": false
+      },
+      {
+        "no": 1,
+        "element": "menu-button",
+        "intro": "MENU CLICK<br> En appuyant sur le bouton menu, le menu général ouvre",
+        "position": "right",
+        "disableInteraction": false,
+        "action": "clickOnMenu"
+      },
+
+      {
+        "no": 2,
+        "element": "igo-search-bar-container",
+        "intro": "BARRE RECHERCHE <br> Saisir un nom de couche ,de ville, d'adresse, point GPS, etc"
+      },
+
+      {
+        "no": 3,
+        "element": "search-bar-buttons",
+        "intro": "OPTIONS DE RECHERCHE<br> Configurer les options comme le nombre de résultats souhaités, le type de résultat, etc."
+      },
+
+      {
+        "no": 4,
+        "element": "igo-toolbox",
+      "intro": "LES OUTILS<br> Les outils disponibles pour la consultation des couches. Sur sélection de l'outil l'application bascule à l'intérieur et vous affiche son contenu",
+        "position": "right"
+      },
+      {
+        "no": 5,
+        "element": "igo-actionbar-item:nth-child(2)",
+        "intro": "LES CONTEXTES<br> sont des regroupements de couche selon des thématiques, des cartes prédéfinies construites pour vous. C'est l'un des endroits ou l'on retrouve les couches de données.",
+        "position": "right"
+
+      },
+      {
+        "no": 6,
+        "element": ".igo-panel-title",
+        "intro": "En sélectionnant l'outil CONTEXTE, l'application bascule à l'intérieur. Le titre ainsi que la couleur de l'icone vous indique quel outil est sélectionné",
+        "action": "clickOnTool1"
+      },
+
+      {
+        "no": 7,
+        "element": "igo-context-list",
+        "intro": "Une fois à l'intérieur des CONTEXTES, l'outil affiche la liste des cartes prédéfinies construites selon certaines thématique. "
+      },
+
+
+      {
+        "no": 8,
+        "element": "igo-context-item",
+        "intro": "Ici vous avez le contexte SIMPLE qui contient plusieurs couches"
+
+      },
+      {
+        "no": 9,
+        "element": "igo-context-item:nth-child(3) mat-list-item",
+        "intro": "et ici le contexte FILTRE TEMPOREL qui contient un autre regroupement de couche.<br> Les couches peuvent donc se retrouver à l'intérieur de plusieurs context en fonction de la thématique"
+      },
+      {
+        "no": 10,
+        "element": "igo-context-item:nth-child(3)",
+        "intro": "Sélectionnons le contexte FILTRE TEMPOREL"
+      },
+      {
+        "no": 11,
+        "element": "igo-map-browser",
+        "intro": "L'application bascule alors à l'intérieur du contexte choisi et LA CARTE affiche maintenant les couches contenu dans ce contexte",
+        "action": "clickOnContext2"
+      },
+      {
+        "no": 12,
+        "element": "igo-list",
+        "intro": "La liste de couches qui constitue le contexte est alors affichée. On remarque que certaine sont actives et donc visible dans la carte. Les couches non actives sont indiquées par un oeil noir barré. "
+      },
+
+      {
+        "element": "igo-geolocate-button",
+        "intro": "GEOLOCALISATION",
+        "position": "top"
+      },
+
+      {
+        "element": "igo-baselayers-switcher",
+        "intro": "BASE LAYER SWITCH",
+        "position": "top"
+      }
+
+    ]
+  }
 }

@@ -28,7 +28,8 @@ import {
   EntityStore,
   // getEntityTitle,
   Toolbox,
-  Tool
+  Tool,
+  InteractiveTourService
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -71,6 +72,10 @@ import {
   mapSlideX,
   mapSlideY
 } from './portal.animation';
+
+import * as introJs from 'intro.js/intro.js'
+import { Button, ElementFinder } from 'protractor';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-portal',
@@ -134,6 +139,8 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     ]
   };
+
+  public introJS = introJs();
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
@@ -255,7 +262,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private toolState: ToolState,
     private searchSourceService: SearchSourceService,
     private searchService: SearchService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private interactiveTourService: InteractiveTourService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
@@ -826,5 +834,12 @@ export class PortalComponent implements OnInit, OnDestroy {
       visible = false;
     }
     return visible;
+  }
+
+  public startTour(){
+
+    console.log('tour partie');
+    this.interactiveTourService.startTour('global');
+
   }
 }
