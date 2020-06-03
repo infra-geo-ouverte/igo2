@@ -8,7 +8,9 @@
   "hasExpansionPanel": false,
   "hasSearchPointerSummary": false,
 
-  "introOptions" :{
+
+
+  "introOptionsglobal" :{
 
     "skipLabel": "<h3 style='color:blue'>Fermer </h3>",
     "nextLabel": "<h3 style='color:blue'>Suivant</h3>",
@@ -65,7 +67,7 @@
       {
         "no": 4,
         "element": "igo-toolbox",
-      "intro": "LES OUTILS<br> Les outils disponibles pour la consultation des couches. Sur sélection de l'outil l'application bascule à l'intérieur et vous affiche son contenu",
+       "intro": "LES OUTILS<br> Les outils disponibles pour la consultation des couches. Sur sélection de l'outil l'application bascule à l'intérieur et vous affiche son contenu",
         "position": "right"
       },
       {
@@ -73,7 +75,6 @@
         "element": "igo-actionbar-item:nth-child(2)",
         "intro": "LES CONTEXTES<br> sont des regroupements de couche selon des thématiques, des cartes prédéfinies construites pour vous. C'est l'un des endroits ou l'on retrouve les couches de données.",
         "position": "right"
-
       },
       {
         "no": 6,
@@ -97,24 +98,42 @@
       },
       {
         "no": 9,
-        "element": "igo-context-item:nth-child(3) mat-list-item",
+        "element": "igo-context-item:nth-child(5) mat-list-item",
         "intro": "et ici le contexte FILTRE TEMPOREL qui contient un autre regroupement de couche.<br> Les couches peuvent donc se retrouver à l'intérieur de plusieurs context en fonction de la thématique"
       },
       {
         "no": 10,
-        "element": "igo-context-item:nth-child(3)",
+        "element": "igo-context-item:nth-child(5)",
         "intro": "Sélectionnons le contexte FILTRE TEMPOREL"
       },
       {
         "no": 11,
-        "element": "igo-map-browser",
+        "element": "igo-list",
         "intro": "L'application bascule alors à l'intérieur du contexte choisi et LA CARTE affiche maintenant les couches contenu dans ce contexte",
-        "action": "clickOnContext2"
+        "action": "clickOnContext2",
+        "position": "right"
       },
       {
         "no": 12,
         "element": "igo-list",
         "intro": "La liste de couches qui constitue le contexte est alors affichée. On remarque que certaine sont actives et donc visible dans la carte. Les couches non actives sont indiquées par un oeil noir barré. "
+      },
+      {
+        "no": 13,
+        "element": "igo-layer-item:nth-child(3)",
+        "intro": "Couche des embâcles lors d'inondation. Pour afficher la légende, cliquer sur le titre"
+      },
+      {
+        "no": 14,
+        "element": "igo-layer-item:nth-child(3)",
+        "action": "clickOnLayer1",
+        "intro": "(clickOnlayer1) en cliquant sur le titre la légende ouvre"
+      },
+      {
+        "no": 15,
+        "element": "igo-layer-item:nth-child(3) button",
+        "action": "clickOnElem",
+        "intro": "(clickOnElem) clique sur oeil, désactive la couche"
       },
 
       {
@@ -130,5 +149,76 @@
       }
 
     ]
+  },
+
+  "introOptionscontextManager" : {
+    "skipLabel": "<h3 style='color:blue'>Fermer </h3>",
+    "nextLabel": "<h3 style='color:blue'>Suivant</h3>",
+    "prevLabel": "",
+    "doneLabel": "Terminé",
+    "hidePrev": true,
+    "hideNext": true,
+    "positionPrecedence": ["right", "bottom", "top", "left"],
+
+    "keyboardNavigation": true,
+    "showStepNumbers": false,
+    "showBullets": true,
+    "showProgress": false,
+    "showButtons": true,
+    "disableInteraction": true,
+    "exitOnOverlayClick": false,
+    "helperElementPadding": 2,
+    "scrollToElement":true,
+    "scrollTo": "element",
+    "highlightClass":"igo-introjs-helperLayer",
+    "buttonClass":"mat-raised-button",
+    "tooltipClass":"mat-h2",
+
+  "steps": [
+    {
+      "element": "div.igo-panel-title",
+      "intro": "Tour pour outil context",
+      "position": "right"
+    }
+
+    ]
+  },
+
+
+  "introOptionsmeasurer" :{
+
+    "skipLabel": "<h3 style='color:blue'>Fermer </h3>",
+    "nextLabel": "<h3 style='color:blue'>Suivant</h3>",
+    "prevLabel": "",
+    "doneLabel": "Terminé",
+    "hidePrev": true,
+    "hideNext": true,
+    "positionPrecedence": ["right", "bottom", "top", "left"],
+
+    "keyboardNavigation": true,
+    "showStepNumbers": false,
+    "showBullets": true,
+    "showProgress": false,
+    "showButtons": true,
+    "disableInteraction": true,
+    "exitOnOverlayClick": false,
+    "helperElementPadding": 2,
+    "scrollToElement":true,
+    "scrollTo": "element",
+    "highlightClass":"igo-introjs-helperLayer",
+    "buttonClass":"mat-raised-button",
+    "tooltipClass":"mat-h2",
+
+    "steps": [
+
+      {
+        "no": 0,
+        "element": "div.igo-panel-title",
+        "intro": "Tour outil mesurer",
+        "position": "right",
+        "disableInteraction": false
+      }
+    ]
   }
+
 }
