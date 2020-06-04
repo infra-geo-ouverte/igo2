@@ -10,7 +10,7 @@
 
 
 
-  "introOptionsglobal" :{
+  "introOptions_global" :{
 
     "skipLabel": "<h3 style='color:blue'>Fermer </h3>",
     "nextLabel": "<h3 style='color:blue'>Suivant</h3>",
@@ -151,7 +151,7 @@
     ]
   },
 
-  "introOptionscontextManager" : {
+  "introOptions_contextManager" : {
     "skipLabel": "<h3 style='color:blue'>Fermer </h3>",
     "nextLabel": "<h3 style='color:blue'>Suivant</h3>",
     "prevLabel": "",
@@ -185,7 +185,7 @@
   },
 
 
-  "introOptionsmeasurer" :{
+  "introOptions_measurer" :{
 
     "skipLabel": "<h3 style='color:blue'>Fermer </h3>",
     "nextLabel": "<h3 style='color:blue'>Suivant</h3>",

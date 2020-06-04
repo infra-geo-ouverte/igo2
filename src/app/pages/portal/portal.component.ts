@@ -73,7 +73,6 @@ import {
   mapSlideY
 } from './portal.animation';
 
-import * as introJs from 'intro.js/intro.js'
 import { Button, ElementFinder } from 'protractor';
 import { debug } from 'util';
 
@@ -139,8 +138,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     ]
   };
-
-  public introJS = introJs();
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
@@ -836,9 +833,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     return visible;
   }
 
-  public startTour(){
+  public startTour() {
 
-    console.log('tour partie');
     this.interactiveTourService.startTour('global');
 
   }
