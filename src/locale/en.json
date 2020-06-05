@@ -25,5 +25,9 @@
   "noEntityStore": "No tables available for this dataset",
   "coordinates": "Show coordinates,",
   "googleMap": "Show in Google maps",
-  "googleStreetView": "Show in Google Street view"
+  "googleStreetView": "Show in Google Street view",
+  "oldBrowser": {
+    "title": "Too old browser",
+    "message": "IGO2 does not fully support your browser. Please update it or use a different one."
+  }
 }
