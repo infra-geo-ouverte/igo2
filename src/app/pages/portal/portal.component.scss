@@ -175,7 +175,8 @@ app-toast-panel.app-toast-panel-opened {
 
 app-toast-panel.app-full-toast-panel-opened {
   @include mobile {
-    height: 70%;
+    max-height: 70%;
+    height: auto;
     width: 100%;
   }
 }

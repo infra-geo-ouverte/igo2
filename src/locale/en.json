@@ -16,6 +16,8 @@
     "zoomAutoTooltip": "Automatic zoom",
     "fullExtent": "Extend",
     "fullExtentTooltip": "Extend panel",
+    "standardExtent": "Reduce",
+    "standardExtentTooltip": "Reduce panel",
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
     "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
   },
