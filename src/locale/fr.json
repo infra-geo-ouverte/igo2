@@ -14,6 +14,10 @@
     "zoomOnFeaturesTooltip": "Zoomer sur les éléments sélectionnés",
     "zoomAuto": "Zoom auto",
     "zoomAutoTooltip": "Zoom automatique",
+    "fullExtent": "Agrandir",
+    "fullExtentTooltip": "Agrandir la fenêtre",
+    "standardExtent": "Réduire",
+    "standardExtentTooltip": "Réduire la fenêtre",
     "previousFeatureTooltip": "Élément précédent ( raccouci clavier = flèche gauche )",
     "nextFeatureTooltip": "Prochain élément ( raccouci clavier = flèche droite )"
   },

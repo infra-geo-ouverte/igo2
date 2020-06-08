@@ -66,6 +66,20 @@ export class ToastPanelComponent implements OnInit {
 
   @Input() zoomAuto = false;
 
+  // To allow the toast to use much larger extent on the map
+  @Input()
+  get fullExtent() {
+    return this._fullExtent;
+  }
+  set fullExtent(value: boolean) {
+    this._fullExtent = value;
+    this.fullExtent$.next(value);
+    this.notfullExtent$.next(!value);
+  }
+  private _fullExtent = false;
+  public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(undefined);
+  public notfullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(undefined);
+
   public icon = 'menu';
 
   public actionStore = new ActionStore([]);
@@ -81,6 +95,8 @@ export class ToastPanelComponent implements OnInit {
 
   @Output() openedChange = new EventEmitter<boolean>();
   @Output() zoomAutoEvent = new EventEmitter<boolean>();
+
+  @Output() fullExtentEvent = new EventEmitter<boolean>();
 
   resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
 
@@ -98,6 +114,11 @@ export class ToastPanelComponent implements OnInit {
       return 'visible';
     }
     return 'hidden';
+  }
+
+  @HostBinding('class.app-full-toast-panel-opened')
+  get hasFullOpenedClass() {
+    return this.opened && this.fullExtent;
   }
 
   @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(event: KeyboardEvent) {
@@ -219,6 +240,32 @@ export class ToastPanelComponent implements OnInit {
           }
         }
       },
+      {
+        id: 'fullExtent',
+        title: this.languageService.translate.instant('toastPanel.fullExtent'),
+        tooltip: this.languageService.translate.instant('toastPanel.fullExtentTooltip'),
+        icon: 'resize',
+        display: () => {
+          return this.notfullExtent$;
+        },
+        handler: () => {
+          this.fullExtent = !this.fullExtent;
+          this.fullExtentEvent.emit(this.fullExtent);
+        }
+      },
+      {
+        id: 'standardExtent',
+        title: this.languageService.translate.instant('toastPanel.standardExtent'),
+        tooltip: this.languageService.translate.instant('toastPanel.standardExtentTooltip'),
+        icon: 'resize',
+        display: () => {
+          return this.fullExtent$;
+        },
+        handler: () => {
+          this.fullExtent = !this.fullExtent;
+          this.fullExtentEvent.emit(this.fullExtent);
+        }
+      }
     ]);
   }
 
