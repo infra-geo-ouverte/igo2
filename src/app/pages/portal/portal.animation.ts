@@ -82,7 +82,8 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
           display: 'none'
         })
       ),
-      transition('* => *', animate('200ms')),
+      transition('* => void', animate('0ms')),
+      transition('* => *', animate('200ms'))
     ]),
     trigger('toastPanelOffsetX', [
       state(
@@ -128,7 +129,8 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
           zIndex: '1'
         })
       ),
-      transition('* => *', animate('200ms'))
+      transition('* => void', animate('0ms')),
+      transition('* => *', animate('200ms')),
     ])
   ];
 }
