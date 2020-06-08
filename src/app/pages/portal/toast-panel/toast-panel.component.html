@@ -1,5 +1,5 @@
 <ng-template #toast>
-  <div tabindex="0" (keydown)="handleKeyboardEvent($event)">
+  <div class="toastDiv" tabindex="0" (keydown)="handleKeyboardEvent($event)">
     <igo-panel
       *ngIf="store.entities$ | async"
       [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"

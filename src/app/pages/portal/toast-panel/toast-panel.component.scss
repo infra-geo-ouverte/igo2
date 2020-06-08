@@ -40,6 +40,10 @@
     width: 100%;
   }
 }
+    
+.toastDiv {
+  outline: none;
+}
 
 igo-panel ::ng-deep .igo-panel-header:hover {
   cursor: pointer;
