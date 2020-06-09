@@ -35,13 +35,14 @@
     </igo-search-bar>
 
     <button
-      *ngIf="!sidenavOpened && this.interactiveTourService.isToolHaveTourConfig('global')"
+      *ngIf="!sidenavOpened && showTourButton"
       id="tour-button"
       mat-raised-button
       color="primary"
       (click)="startTour()"
       matTooltip= "Tour interactif de présentation de application. Fonctionnement étape par étape">
-      Découvrir application <mat-icon svgIcon="presentation-play"></mat-icon>
+      <span class="tour-button-title">Découvrir application </span>
+      <mat-icon svgIcon="presentation-play"></mat-icon>
     </button>
 
     <app-sidenav

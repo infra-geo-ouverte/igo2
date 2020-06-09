@@ -202,6 +202,24 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.toolState.toolbox;
   }
 
+  get showTourButton(): Boolean {
+
+    const haveTour = this.interactiveTourService.isToolHaveTourConfig('global') ;
+    if (haveTour === false) {
+      return false;
+    }
+    const media = this.mediaService.getMedia();
+    let showInMobile;
+    if (media === 'mobile') {
+      showInMobile = this.configService.getConfig('introInteractiveTourInMobile');
+      if (showInMobile === false) {
+        return false;
+      }
+    }
+
+    return true;
+}
+
   // get toastPanelContent(): string {
   //   let content;
   //   if (this.workspace !== undefined && this.workspace.hasWidget) {
