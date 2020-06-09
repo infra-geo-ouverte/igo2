@@ -82,22 +82,38 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
           display: 'none'
         })
       ),
-      transition('* => *', animate('200ms')),
+      transition('* => void', animate('0ms')),
+      transition('* => *', animate('200ms'))
     ]),
     trigger('toastPanelOffsetX', [
       state(
-        'false',
+        'fullStandard',
+        style({
+          left: '45%'
+        })
+      ),
+      state(
+        'standard',
         style({
           left: '50%'
         })
       ),
       state(
-        'true',
+        'fullOffsetX',
+        style({
+          left: 'calc(45% + 202px)'
+        })
+      ),
+      state(
+        'standardOffsetX',
         style({
           left: 'calc(50% + 202px)'
         })
       ),
-      transition('* => *', animate('200ms'))
+      transition('fullStandard => fullOffsetX', animate('200ms')),
+      transition('fullOffsetX => fullStandard', animate('200ms')),
+      transition('standard => standardOffsetX', animate('200ms')),
+      transition('standardOffsetX => standard', animate('200ms')),
     ]),
     trigger('toastPanelOffsetY', [
       state(
@@ -113,7 +129,8 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
           zIndex: '1'
         })
       ),
-      transition('* => *', animate('200ms'))
+      transition('* => void', animate('0ms')),
+      transition('* => *', animate('200ms')),
     ])
   ];
 }

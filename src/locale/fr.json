@@ -14,6 +14,10 @@
     "zoomOnFeaturesTooltip": "Zoomer sur les éléments sélectionnés",
     "zoomAuto": "Zoom auto",
     "zoomAutoTooltip": "Zoom automatique",
+    "fullExtent": "Agrandir",
+    "fullExtentTooltip": "Agrandir la fenêtre",
+    "standardExtent": "Réduire",
+    "standardExtentTooltip": "Réduire la fenêtre",
     "previousFeatureTooltip": "Élément précédent ( raccouci clavier = flèche gauche )",
     "nextFeatureTooltip": "Prochain élément ( raccouci clavier = flèche droite )"
   },
@@ -21,5 +25,9 @@
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
   "coordinates": "Afficher les coordonnées",
   "googleMap": "Afficher sur Google maps",
-  "googleStreetView": "Afficher sur Google Street view"
+  "googleStreetView": "Afficher sur Google Street view",
+  "oldBrowser": {
+    "title": "Navigateur obsolète",
+    "message": "IGO2 ne supporte pas pleinement votre navigateur. Veuillez le mettre à jour ou utilisez un navigateur différent."
+  }
 }
