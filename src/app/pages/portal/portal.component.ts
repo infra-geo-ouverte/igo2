@@ -139,6 +139,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     ]
   };
 
+  private appTitle = ((!this.configService.getConfig('title')) ? 'IGO' : this.configService.getConfig('title'));
+
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
 
