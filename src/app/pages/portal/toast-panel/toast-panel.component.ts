@@ -13,7 +13,7 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import { getEntityTitle, EntityStore, ActionStore, Action, ActionbarMode } from '@igo2/common';
 import { Feature, SearchResult, IgoMap, FeatureMotion, moveToOlFeatures, createOverlayMarkerStyle, createOverlayDefaultStyle } from '@igo2/geo';
-import { Media, MediaService, LanguageService } from '@igo2/core';
+import { Media, MediaService, LanguageService, StorageService } from '@igo2/core';
 
 @Component({
   selector: 'app-toast-panel',
@@ -64,21 +64,25 @@ export class ToastPanelComponent implements OnInit {
   }
   private _opened = true;
 
-  @Input() zoomAuto = false;
+  get zoomAuto(): boolean {
+    if (this.storageService.get('zoomAuto') === 'true') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // To allow the toast to use much larger extent on the map
-  @Input()
   get fullExtent() {
-    return this._fullExtent;
+    if (this.storageService.get('fullExtent') === 'true') {
+      return true;
+    } else {
+      return false;
+    }
   }
-  set fullExtent(value: boolean) {
-    this._fullExtent = value;
-    this.fullExtent$.next(value);
-    this.notfullExtent$.next(!value);
-  }
-  private _fullExtent = false;
-  public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(undefined);
-  public notfullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(undefined);
+
+  public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(this.fullExtent);
+  public notfullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(!this.fullExtent);
 
   public icon = 'menu';
 
@@ -169,7 +173,8 @@ export class ToastPanelComponent implements OnInit {
 
   constructor(
     public mediaService: MediaService,
-    public languageService: LanguageService
+    public languageService: LanguageService,
+    private storageService: StorageService
     ) {}
 
   ngOnInit() {
@@ -231,9 +236,10 @@ export class ToastPanelComponent implements OnInit {
         title: this.languageService.translate.instant('toastPanel.zoomAuto'),
         tooltip: this.languageService.translate.instant('toastPanel.zoomAutoTooltip'),
         checkbox: true,
-        checkCondition: this.zoomAuto,
+        checkCondition: this.storageService.get('zoomAuto') === 'true',
         handler: () => {
-          this.zoomAuto = !this.zoomAuto;
+          this.storageService.get('zoomAuto') === 'true' ? this.storageService.set('zoomAuto', 'false') :
+            this.storageService.set('zoomAuto', 'true');
           this.zoomAutoEvent.emit(this.zoomAuto);
           if (this.zoomAuto && this.isResultSelected$.value === true) {
             this.selectResult(this.resultSelected$.getValue());
@@ -249,7 +255,9 @@ export class ToastPanelComponent implements OnInit {
           return this.notfullExtent$;
         },
         handler: () => {
-          this.fullExtent = !this.fullExtent;
+          this.storageService.set('fullExtent', 'true');
+          this.fullExtent$.next(true);
+          this.notfullExtent$.next(false);
           this.fullExtentEvent.emit(this.fullExtent);
         }
       },
@@ -262,7 +270,9 @@ export class ToastPanelComponent implements OnInit {
           return this.fullExtent$;
         },
         handler: () => {
-          this.fullExtent = !this.fullExtent;
+          this.storageService.set('fullExtent', 'false');
+          this.fullExtent$.next(false);
+          this.notfullExtent$.next(true);
           this.fullExtentEvent.emit(this.fullExtent);
         }
       }
