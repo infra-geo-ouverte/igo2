@@ -98,7 +98,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
   private addedLayers$$: Subscription[] = [];
-  public zoomAuto = false;
   public forceCoordsNA = false;
 
   public contextMenuStore = new ActionStore([]);
