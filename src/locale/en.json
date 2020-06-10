@@ -4,6 +4,11 @@
     "close": "Close Menu",
     "open": "Open Menu"
   },
+  "tourButton": {
+    "tooltip": "Application interactive tour",
+    "title": "Discovert "
+  },
+
   "toastPanel": {
     "title": "Entities found on the map",
     "listButton": "Return to the list of entities",

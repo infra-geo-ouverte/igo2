@@ -40,8 +40,8 @@
       mat-raised-button
       color="primary"
       (click)="startTour()"
-      matTooltip= "Tour interactif de présentation de l'application. Fonctionnement étape par étape">
-      <span class="tour-button-title">Découvrir {{appTitle}} </span>
+      [matTooltip]= "'tourButton.tooltip' | translate">
+      <span class="tour-button-title">{{'tourButton.title' | translate}} {{appTitle}} </span>
       <mat-icon svgIcon="presentation-play"></mat-icon>
     </button>
 

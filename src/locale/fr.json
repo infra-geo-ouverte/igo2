@@ -4,6 +4,10 @@
     "close": "Fermer le menu",
     "open": "Menu"
   },
+  "tourButton": {
+    "tooltip": "Tour interactif de l'application, fonctionnement étape par étape",
+    "title": "Découvrir "
+  },
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
     "listButton": "Retourner à la liste des entités",

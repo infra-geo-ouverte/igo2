@@ -32,7 +32,6 @@
     "scrollToElement":true,
     "scrollTo": "element",
     "highlightClass":"igo-introjs-helperLayer",
-    "buttonClass":"mat-raised-button",
     "tooltipClass":"mat-h2",
 
     "steps": [

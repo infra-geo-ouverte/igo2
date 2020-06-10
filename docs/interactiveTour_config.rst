@@ -7,8 +7,8 @@ Sommaire
 ===============
 
 Il est possible de configurer des tours interactifs pour présenter le fonctionnement de l'application et de ces outils.
-La librairie utilisé pour ce faire est Intro.js (https://introjs.com/). Plusieurs tours de présentation sont possibles,
-un tour globale et des particuliers pour les outils. Chaque tour à sa propre configurations. Les tours sont constitués de
+La librairie utilisée pour ce faire est Intro.js (https://introjs.com/). Plusieurs tours de présentation sont possibles,
+un tour globale et des particuliers pour chacun des outils. Chaque tour à sa propre configurations. Les tours sont constitués de
 plusieurs étapes, communémant apellé des 'steps'. Chaque step met en surbrillance un élément de l'application et affiche
 un message de description de l'élément. Le pilote peut ainsi configurer plusieurs 'step' à son tour interactif. En plus de
 sélectionner des éléments à mettre en surblillance, le pilote peux aussi configurer certaines actions lors du tour.
@@ -40,11 +40,13 @@ Exemples
                 {
                   "element": "menu-button",
                   "intro": "MENU <br> Ouvre et fermer le menu",
+                  "introEnglish": "this is the menu button, open and close menu",
                   "position": "right",
                 },
                 {
                   "element": "igo-search-bar-container",
-                  "intro": "BARRE RECHERCHE <br> Saisir un nom de couche ,de ville, d'adresse, point GPS, etc"
+                  "intro": "BARRE RECHERCHE <br> Saisir un nom de couche ,de ville, d'adresse, point GPS, etc",
+                  "introEnglish": "SEARCHBAR You can write town, adress and more"
                 }
               ]
             }
@@ -57,7 +59,8 @@ Configurer les tours
 Chaque tour possède des options de configuration qui s'appliqueront à CE tour et/ou s'appliqueront a chaque step de ce tour.
 Voir les propriétés disponible de la librarie intro.js ici: (https://introjs.com/docs/intro/options/)
 
-Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible: "introInteractiveTourInMobile": true.
+Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible: "introInteractiveTourInMobile": true
+par default les tours interactifs seront présent en mode mobile.
 
 Chaque tour possède des options de configuration qui s'appliqueront à ce tour et/ou s'appliqueront a chaque step de ce tour.
 Voir les propriétés disponibles de la librarie intro.js. Les tours sont définis dans le fichier config.json
@@ -74,10 +77,18 @@ surbrillance. On peut indiquer un nom ID, de CLASS ou tout élément HTML qui pe
 document.getElementsByTagName(), document.getElementsByClassName(), document.querySelector(), document.getElementById().
 Pour voir vos éléments html vous pouvez utiliser l'inspecteur de votre navigateur internet (clic droit sur l'élément -> inspecter)
 
-le second élément obligatoire d'un 'step' est "intro" ou est inscrit le message de la boîte. Du HTML peut y être inséré.
+Le second élément obligatoire d'un 'step' est "intro" ou est inscrit le message de la boîte. Du HTML peut y être inséré.
 
 NB: attention à la séquence que prendra votre tour, l'élément doit être visible au moment ou le step est déclanché pour être
-mis en surbrillance sinon votre tour pourra être en problème.
+mis en surbrillance sinon votre tour pourrait avoir certain problème.
+
+
+Steps, traduction
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Il est possible de mettre une traduction anglaise du message, pour ce faire ajouter le paramètre "introEnglish": "message to show in english"
+au step voulu. Le message en anglais s'affichera en fonction de la langue de votre navigateur internet. Si le paramètre "introEnglish" n'est pas
+présent, le message présenté sera celui présent dans le paramètre "intro".
+
 
 
 Exemples
@@ -89,6 +100,7 @@ Exemples
         {
           "element": "menu-button",
           "intro": "element est un ID",
+          "introEnglish": "this is an ID element"
           "position": "right"
         },
         {
@@ -98,6 +110,7 @@ Exemples
         {
           "element": "igo-actionbar-item:nth-child(2)",
           "intro": "le child 2 de <strong>l'élément</strong> igo-actionbar",
+          "introEnglish": "this is the second child of igo-actionbar"
         }
       ]
     }
@@ -109,12 +122,13 @@ Steps, propriétés en options
 
 En plus des 2 propriétées essentielles à chaque step, il est possible d'en ajouter d'autre, par exemple
 "position": "right", pour que cette boite de message particulière ce place à droite de l'élément en surbrillance.
-Voir la librairie IntroJS et les propriétés disponibles sur les steps: (mettre le lien)
+Voir la librairie IntroJS et les propriétés disponibles sur les steps.
 
  ** NB: Les index des éléments sont ceux des éléments de l'application, il se peut donc qu'il ne pas débute pas à 1, par
  exemple lorsque l'élément filtre de couche est présent ou non dans une liste, l'index ne sera pas le même. Particulièrement
- lorsqu'on sélectionne un élément avec "nth-child(x)". Exemple pour sélection élément du 1er context lorsque le filtre de contexte
- est présent vous devrez mettre dans 'element': 'igo-context-item:nth-child(3)' et se même si vous voulez sélectionner le 1er...
+ lorsqu'on sélectionne un élément avec "nth-child(x)". Exemple pour sélectioner l'élément du 1er context lorsque le filtre de contexte
+ est présent vous devrez mettre dans 'element': 'igo-context-item:nth-child(3)' et se même si vous voulez sélectionner le 1er context.
+ Toujours bien vérifier dans l'inspecteur de votre navigateur que vous ciblez le bon élément.
 
 
 Steps, actions
