@@ -9,8 +9,8 @@ Sommaire
 Il est possible de configurer des tours interactifs pour présenter le fonctionnement de l'application et de ces outils.
 La librairie utilisée pour ce faire est Intro.js (https://introjs.com/). Plusieurs tours de présentation sont possibles,
 un tour globale et des particuliers pour chacun des outils. Chaque tour à sa propre configurations. Les tours sont constitués de
-plusieurs étapes, communémant apellé des 'steps'. Chaque step met en surbrillance un élément de l'application et affiche
-un message de description de l'élément. Le pilote peut ainsi configurer plusieurs 'step' à son tour interactif. En plus de
+plusieurs étapes, communément apellé des 'steps'. Chaque step met en surbrillance un élément de l'application et affiche
+un message de description de cet élément. Le pilote peut ainsi configurer plusieurs 'step' à son tour interactif. En plus de
 sélectionner des éléments à mettre en surblillance, le pilote peux aussi configurer certaines actions lors du tour.
 
 
@@ -57,10 +57,10 @@ Configurer les tours
 ---------------------
 
 Chaque tour possède des options de configuration qui s'appliqueront à CE tour et/ou s'appliqueront a chaque step de ce tour.
-Voir les propriétés disponible de la librarie intro.js ici: (https://introjs.com/docs/intro/options/)
+Voir les propriétés disponibles de la librarie intro.js ici: (https://introjs.com/docs/intro/options/)
 
 Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible: "introInteractiveTourInMobile": true
-par default les tours interactifs seront présent en mode mobile.
+par default les tours interactifs seront présents en mode mobile.
 
 Chaque tour possède des options de configuration qui s'appliqueront à ce tour et/ou s'appliqueront a chaque step de ce tour.
 Voir les propriétés disponibles de la librarie intro.js. Les tours sont définis dans le fichier config.json
@@ -177,7 +177,13 @@ Exemples
           {
               element: 'igo-layer-item:nth-child(2) button',
               intro: "click sur bouton oeil ->  Active et désactive  la couche",
-              action: 'clickOnElem',
+              action: 'clickOnElem'
+          },
+          {
+              "element": "igo-layer-item:nth-child(3) button:nth-of-type(2)",
+              "action": "clickOnElem",
+              "intro": "Click sur les outils disponibles sur CETTE couche",
+              "introEnglish" : "Activate tool available on THAT layer"
           }
         ]
       }

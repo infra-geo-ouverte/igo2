@@ -5,8 +5,8 @@
     "open": "Open Menu"
   },
   "tourButton": {
-    "tooltip": "Application interactive tour",
-    "title": "Discovert "
+    "tooltip": "Interactive tour of the application",
+    "title": "Discover"
   },
 
   "toastPanel": {
