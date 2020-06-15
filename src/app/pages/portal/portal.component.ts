@@ -20,7 +20,7 @@ import {
   ConfigService
 } from '@igo2/core';
 import {
-  // ActionbarMode,
+  ActionbarMode,
   Workspace,
   WorkspaceStore,
   // EntityRecord,
@@ -92,7 +92,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   // public expansionPanelExpanded = false;
-  public toastPanelOpened = true;
+  // public toastPanelOpened = true;
   public fullExtent;
   public sidenavOpened = false;
   public searchBarTerm = '';
@@ -109,6 +109,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   private context$$: Subscription;
 
   public igoSearchPointerSummaryEnabled = false;
+
+  public toastPanelForExpansionOpened = true;
+  private _toastPanelOpened = false;
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
@@ -152,21 +155,21 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get expansionPanelBackdropShown(): boolean {
-    return false;
+    return this.expansionPanelExpanded && this.toastPanelForExpansionOpened;
   }
 
-  // get actionbarMode(): ActionbarMode {
-  //   if (this.mediaService.media$.value === Media.Mobile) {
-  //     return ActionbarMode.Overlay;
-  //   }
-  //   return this.expansionPanelExpanded
-  //     ? ActionbarMode.Dock
-  //     : ActionbarMode.Overlay;
-  // }
-  //
-  // get actionbarWithTitle(): boolean {
-  //   return this.actionbarMode === ActionbarMode.Overlay;
-  // }
+  get actionbarMode(): ActionbarMode {
+    const media = this.mediaService.media$.value;
+    const orientation = this.mediaService.orientation$.value;
+    if (media === Media.Desktop && orientation === MediaOrientation.Landscape) {
+      return ActionbarMode.Dock;
+    }
+    return ActionbarMode.Overlay;
+  }
+
+  get actionbarWithTitle(): boolean {
+    return this.actionbarMode === ActionbarMode.Overlay;
+  }
 
   get searchStore(): EntityStore<SearchResult> {
     return this.searchState.store;
@@ -180,15 +183,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.toolState.toolbox;
   }
 
-  // get toastPanelContent(): string {
-  //   let content;
-  //   if (this.workspace !== undefined && this.workspace.hasWidget) {
-  //     content = 'workspace';
-  //   } else if (this.searchResult !== undefined) {
-  //     content = this.searchResult.meta.dataType.toLowerCase();
-  //   }
-  //   return content;
-  // }
+  get toastPanelContent(): string {
+    let content;
+    if (this.workspace !== undefined && this.workspace.hasWidget) {
+      content = 'workspace';
+    } /*else if (this.searchResult !== undefined) {
+      content = this.searchResult.meta.dataType.toLowerCase();
+    }*/
+    return content;
+  }
 
   // get toastPanelTitle(): string {
   //   let title;
@@ -201,22 +204,21 @@ export class PortalComponent implements OnInit, OnDestroy {
   //   return title;
   // }
 
-  // get toastPanelOpened(): boolean {
-  //   const content = this.toastPanelContent;
-  //   if (content === 'workspace') {
-  //     return true;
-  //   }
-  //   return this._toastPanelOpened;
-  // }
-  // set toastPanelOpened(value: boolean) {
-  //   this._toastPanelOpened = value;
-  // }
-  // private _toastPanelOpened = false;
+  get toastPanelOpened(): boolean {
+    const content = this.toastPanelContent;
+    if (content === 'workspace') {
+      return true;
+    }
+    return this._toastPanelOpened;
+  }
+  set toastPanelOpened(value: boolean) {
+    this._toastPanelOpened = value;
+  }
 
   get workspaceStore(): WorkspaceStore {
     return this.workspaceState.store;
   }
-  
+
   get workspace(): Workspace {
     return this.workspaceState.workspace$.value;
   }
