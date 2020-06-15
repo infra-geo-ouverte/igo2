@@ -517,36 +517,36 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchBarTerm = coord.map(c => c.toFixed(6)).join(', ');
   }
 
-  updateMapBrowserClass(e) {
+  updateMapBrowserClass() {
     const header = this.queryState.store.entities$.value.length > 0;
     if (this.hasExpansionPanel) {
-      e.element.classList.add('has-expansion-panel');
+      this.mapBrowser.nativeElement.classList.add('has-expansion-panel');
     } else {
-      e.element.classList.remove('has-expansion-panel');
+      this.mapBrowser.nativeElement.classList.remove('has-expansion-panel');
     }
 
     if (this.expansionPanelExpanded) {
-      e.element.classList.add('expansion-offset');
+      this.mapBrowser.nativeElement.classList.add('expansion-offset');
     } else {
-      e.element.classList.remove('expansion-offset');
+      this.mapBrowser.nativeElement.classList.remove('expansion-offset');
     }
 
     if (this.sidenavOpened) {
-      e.element.classList.add('sidenav-offset');
+      this.mapBrowser.nativeElement.classList.add('sidenav-offset');
     } else {
-      e.element.classList.remove('sidenav-offset');
+      this.mapBrowser.nativeElement.classList.remove('sidenav-offset');
     }
 
     if (this.sidenavOpened && !this.isMobile()) {
-      e.element.classList.add('sidenav-offset-baselayers');
+      this.mapBrowser.nativeElement.classList.add('sidenav-offset-baselayers');
     } else {
-      e.element.classList.remove('sidenav-offset-baselayers');
+      this.mapBrowser.nativeElement.classList.remove('sidenav-offset-baselayers');
     }
 
     if (!this.toastPanelOpened && header && !this.expansionPanelExpanded) {
-      e.element.classList.add('toast-offset-scale-line');
+      this.mapBrowser.nativeElement.classList.add('toast-offset-scale-line');
     } else {
-      e.element.classList.remove('toast-offset-scale-line');
+      this.mapBrowser.nativeElement.classList.remove('toast-offset-scale-line');
     }
 
     if (
@@ -555,9 +555,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       (this.isMobile() || this.isTablet() || this.sidenavOpened) &&
       !this.expansionPanelExpanded
     ) {
-      e.element.classList.add('toast-offset-attribution');
+      this.mapBrowser.nativeElement.classList.add('toast-offset-attribution');
     } else {
-      e.element.classList.remove('toast-offset-attribution');
+      this.mapBrowser.nativeElement.classList.remove('toast-offset-attribution');
     }
   }
 

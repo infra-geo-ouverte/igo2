@@ -59,9 +59,9 @@
       (menuPosition)="onContextMenuOpen($event)"
       [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
       [@mapStateX]="sidenavOpened ? 'right' : 'left'"
-      (@mapStateX.start)="updateMapBrowserClass($event)"
+      (@mapStateX.start)="updateMapBrowserClass()"
       [@mapStateY]="getExpansionToastPanelStatus()"
-      (@mapStateY.start)="updateMapBrowserClass($event)">
+      (@mapStateY.start)="updateMapBrowserClass()">
 
       <igo-zoom-button [map]="map" color="primary"
         [@controlsOffsetY]="expansionPanelExpanded">
