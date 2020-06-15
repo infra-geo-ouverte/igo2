@@ -21,8 +21,8 @@ import {
 } from '@igo2/core';
 import {
   // ActionbarMode,
-  // Workspace,
-  // WorkspaceStore,
+  Workspace,
+  WorkspaceStore,
   // EntityRecord,
   ActionStore,
   EntityStore,
@@ -58,7 +58,8 @@ import {
   MapState,
   SearchState,
   QueryState,
-  ContextState
+  ContextState,
+  WorkspaceState
 } from '@igo2/integration';
 
 import {
@@ -90,7 +91,7 @@ import {
 export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
-  public expansionPanelExpanded = false;
+  // public expansionPanelExpanded = false;
   public toastPanelOpened = true;
   public fullExtent;
   public sidenavOpened = false;
@@ -159,6 +160,13 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
   }
 
+  get expansionPanelExpanded(): boolean {
+    return this.workspaceState.workspacePanelExpanded;
+  }
+  set expansionPanelExpanded(value: boolean) {
+    this.workspaceState.workspacePanelExpanded = value;
+  }
+
   get toastPanelShown(): boolean {
     return true;
   }
@@ -225,17 +233,17 @@ export class PortalComponent implements OnInit, OnDestroy {
   // }
   // private _toastPanelOpened = false;
 
-  // get workspaceStore(): WorkspaceStore {
-  //   return this.workspaceState.store;
-  // }
-  //
-  // get workspace(): Workspace {
-  //   return this.workspaceState.workspace$.value;
-  // }
+  get workspaceStore(): WorkspaceStore {
+    return this.workspaceState.store;
+  }
+  
+  get workspace(): Workspace {
+    return this.workspaceState.workspace$.value;
+  }
 
   constructor(
     private route: ActivatedRoute,
-    // private workspaceState: WorkspaceState,
+    private workspaceState: WorkspaceState,
     public authService: AuthService,
     public mediaService: MediaService,
     public layerService: LayerService,
@@ -519,7 +527,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   updateMapBrowserClass() {
     const header = this.queryState.store.entities$.value.length > 0;
-    if (this.hasExpansionPanel) {
+    if (this.hasExpansionPanel && this.workspaceState.workspaceEnabled$.value) {
       this.mapBrowser.nativeElement.classList.add('has-expansion-panel');
     } else {
       this.mapBrowser.nativeElement.classList.remove('has-expansion-panel');

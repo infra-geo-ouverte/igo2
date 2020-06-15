@@ -97,7 +97,7 @@
 </mat-sidenav-container>
 
 <app-expansion-panel
-  *ngIf="hasExpansionPanel"
+  *ngIf="hasExpansionPanel && (workspaceState.workspaceEnabled$ | async)"
   [(expanded)]="expansionPanelExpanded"
   [@expansionPanelSize]="getExpansionPanelStatus()"
   [@toastOffsetY]="(isMobile() && !toastPanelOpened && queryState.store.entities$.value.length > 0 && !expansionPanelExpanded) ? 'true' : 'false'">
