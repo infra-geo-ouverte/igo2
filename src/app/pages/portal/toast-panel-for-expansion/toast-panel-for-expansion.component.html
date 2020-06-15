@@ -1,0 +1,29 @@
+<igo-panel
+  [title]="title"
+  [withHeader]="withHeader"
+  >
+
+  <!--TODO:  Fix CSS in lib and remove that -->
+  <button
+    *ngIf="withHeader && !empty"
+    mat-icon-button
+    panelLeftButton>
+    <mat-icon *ngIf="!opened" svgIcon="menu-up"></mat-icon>
+    <mat-icon *ngIf="opened" svgIcon="menu-down"></mat-icon>
+  </button>
+  <button
+    *ngIf="withHeader && !empty"
+    mat-icon-button
+    panelRightButton
+    igoStopPropagation
+    (click)="onClearButtonClick()">
+    <mat-icon svgIcon="close"></mat-icon>
+  </button>
+
+  <div
+    #content
+    
+    [@showContent]="opened">
+    <ng-content></ng-content>
+  </div>
+</igo-panel>

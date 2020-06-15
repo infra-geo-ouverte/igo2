@@ -122,6 +122,20 @@
   </igo-entity-table>
 </app-expansion-panel>
 
+<app-toast-panel-for-expansion   
+  [withHeader]="false"
+  [(opened)]="toastPanelForExpansionOpened">
+
+  <div class="toast-panel-for-expansion-close-button-container">
+    <button
+      mat-icon-button
+      color="warn"
+      (click)="toastPanelForExpansionOpened = false">
+      <mat-icon svgIcon="close"></mat-icon>  
+    </button>
+  </div>
+</app-toast-panel-for-expansion >
+
 <app-toast-panel *ngIf="!(queryStore.empty$ | async)"
   [map]="map"
   [store]="queryStore"

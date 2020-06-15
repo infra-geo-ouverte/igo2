@@ -41,6 +41,7 @@ import { AppToastPanelModule } from './toast-panel/toast-panel.module';
 import { AppSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
+import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toast-panel-for-expansion.module';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { PortalComponent } from './portal.component';
     IgoIntegrationModule,
     AppExpansionPanelModule,
     AppToastPanelModule,
+    AppToastPanelForExpansionModule,
     AppSidenavModule,
     MapOverlayModule,
     IgoContextManagerModule,
