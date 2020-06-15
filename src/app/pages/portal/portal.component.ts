@@ -324,11 +324,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initWorkspace() {
-    
-  }
-
-
   selectedWorkspace(workspace: Workspace) {
     // this.se lectedkWorkspace$.next(workspace);
     if (this.toolToActivate$$) {
