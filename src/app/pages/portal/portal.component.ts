@@ -110,26 +110,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public igoSearchPointerSummaryEnabled = false;
 
-  public tableStore = new EntityStore([]);
-  public tableTemplate = {
-    selection: true,
-    sort: true,
-    columns: [
-      {
-        name: 'id',
-        title: 'ID'
-      },
-      {
-        name: 'name',
-        title: 'Name'
-      },
-      {
-        name: 'description',
-        title: 'Description'
-      }
-    ]
-  };
-
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
 
@@ -293,14 +273,6 @@ export class PortalComponent implements OnInit, OnDestroy {
         title: 'googleStreetView',
         handler: () => this.openGoogleStreetView(this.contextMenuCoord)
       }
-    ]);
-
-    this.tableStore.load([
-      { id: '2', name: 'Name 2', description: 'Description 2' },
-      { id: '1', name: 'Name 1', description: 'Description 1' },
-      { id: '3', name: 'Name 3', description: 'Description 3' },
-      { id: '4', name: 'Name 4', description: 'Description 4' },
-      { id: '5', name: 'Name 5', description: 'Description 5' }
     ]);
 
     this.queryStore.count$.subscribe(i => {
