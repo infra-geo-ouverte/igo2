@@ -23,12 +23,13 @@ import {
   ActionbarMode,
   Workspace,
   WorkspaceStore,
-  // EntityRecord,
   ActionStore,
   EntityStore,
   // getEntityTitle,
   Toolbox,
-  Tool
+  Tool,
+  EntityTableScrollBehavior,
+  Widget
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -50,7 +51,8 @@ import {
   sourceCanReverseSearch,
   generateWMSIdFromSourceOptions,
   WMSDataSourceOptions,
-  FEATURE
+  FEATURE,
+  ExportOptions
 } from '@igo2/geo';
 
 import {
@@ -59,7 +61,8 @@ import {
   SearchState,
   QueryState,
   ContextState,
-  WorkspaceState
+  WorkspaceState,
+  ImportExportState
 } from '@igo2/integration';
 
 import {
@@ -111,6 +114,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   public igoSearchPointerSummaryEnabled = false;
 
   public toastPanelForExpansionOpened = true;
+  private activeWidget$$: Subscription;
+  public showToastPanelForExpansionToggle = false;
+  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(undefined);
+  private toolToActivate$$: Subscription;
   private _toastPanelOpened = false;
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
@@ -239,7 +246,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private toolState: ToolState,
     private searchSourceService: SearchSourceService,
     private searchService: SearchService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private importExportState: ImportExportState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
@@ -285,10 +293,82 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.onSettingsChange$.subscribe(() => {
       this.searchState.setSearchSettingsChange();
     });
+
+    this.workspaceState.workspaceEnabled$.next(this.hasExpansionPanel);
+    this.workspaceState.store.empty$.subscribe(workspaceEmpty => {
+      if (!this.hasExpansionPanel) { return; }
+      this.workspaceState.workspaceEnabled$.next(workspaceEmpty ? false : true);
+      if (workspaceEmpty) {
+        this.expansionPanelExpanded = false;
+      }
+      this.updateMapBrowserClass();
+    });
+
+    this.workspaceState.workspace$.subscribe(activeWks => {
+      if (activeWks) {
+        this.selectedWorkspace$.next(activeWks);
+        this.expansionPanelExpanded = true;
+      } else {
+        this.expansionPanelExpanded = false;
+      }
+    });
+
+    this.activeWidget$$ = this.workspaceState.activeWorkspaceWidget$.subscribe((widget: Widget) => {
+      if (widget !== undefined) {
+        this.openToastPanelForExpansion();
+        this.showToastPanelForExpansionToggle = true;
+      } else {
+        this.closeToastPanelForExpansion();
+        this.showToastPanelForExpansionToggle = false;
+      }
+    });
+  }
+
+  private initWorkspace() {
+    
+  }
+
+
+  selectedWorkspace(workspace: Workspace) {
+    // this.se lectedkWorkspace$.next(workspace);
+    if (this.toolToActivate$$) {
+      this.toolToActivate$$.unsubscribe();
+    }
+    this.toolToActivate$$ = workspace.toolToActivate$.subscribe(r => {
+      if (!r) { return; }
+      if (r.options && r.toolbox === 'importExport') {
+        let exportOptions: ExportOptions = this.importExportState.exportOptions$.value;
+        if (!exportOptions) {
+          exportOptions = {
+            layer: r.options.layer,
+            featureInMapExtent: r.options.featureInMapExtent,
+            format: undefined,
+            name: undefined
+          };
+        } else {
+          exportOptions.layer = r.options.layer;
+          exportOptions.featureInMapExtent = r.options.featureInMapExtent;
+        }
+        this.importExportState.setsExportOptions(exportOptions);
+        this.importExportState.setSelectedTab(1);
+      }
+
+
+      if (this.toolbox.getTool(r.toolbox)) {
+        this.toolbox.activateTool(r.toolbox);
+        if (!this.sidenavOpened) {
+          this.openSidenav();
+        }
+      }
+    });
   }
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
+    if (this.toolToActivate$$) {
+      this.toolToActivate$$.unsubscribe();
+    }
+    this.activeWidget$$.unsubscribe();
   }
 
   /**
@@ -305,6 +385,18 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   onToggleSidenavClick() {
     this.toggleSidenav();
+  }
+
+  onDeactivateWorkspaceWidget() {
+    this.closeToastPanelForExpansion();
+  }
+
+  closeToastPanelForExpansion() {
+    this.toastPanelForExpansionOpened = false;
+  }
+
+  openToastPanelForExpansion() {
+    this.toastPanelForExpansionOpened = true;
   }
 
   onMapQuery(event: { features: Feature[]; event: OlMapBrowserPointerEvent }) {
@@ -507,7 +599,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.mapBrowser.nativeElement.classList.remove('has-expansion-panel');
     }
 
-    if (this.expansionPanelExpanded) {
+    if (this.hasExpansionPanel && this.expansionPanelExpanded) {
       this.mapBrowser.nativeElement.classList.add('expansion-offset');
     } else {
       this.mapBrowser.nativeElement.classList.remove('expansion-offset');

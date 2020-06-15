@@ -96,24 +96,42 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
+<!-- NEED TO TRIGGER THE WORKSPACE UPDATE DIRECTIVE -->
+<igo-workspace-selector *ngIf="hasExpansionPanel" igoWorkspaceSelector [store]="workspaceStore" [map]="map">
+</igo-workspace-selector>
+
 <app-expansion-panel
   *ngIf="hasExpansionPanel && (workspaceState.workspaceEnabled$ | async)"
+  [backdropShown]="expansionPanelBackdropShown"
   [(expanded)]="expansionPanelExpanded"
   [@expansionPanelSize]="getExpansionPanelStatus()"
   [@toastOffsetY]="(isMobile() && !toastPanelOpened && queryState.store.entities$.value.length > 0 && !expansionPanelExpanded) ? 'true' : 'false'">
 
   <ng-container expansionPanelHeader>
-    <!-- <igo-workspace-selector igoWorkspaceSelector [store]="workspaceStore" [map]="map"></igo-workspace-selector> -->
-    <!-- <igo-actionbar
-      *ngIf="workspace"
-      [store]="workspace.actionStore"
-      [horizontal]="true"
-      [xPosition]="'after'"
-      [yPosition]="'above'"
-      [withToggleButton]="true"
-      [withTitle]="actionbarWithTitle"
-      [mode]="actionbarMode">
-    </igo-actionbar> -->
+    <igo-workspace-selector 
+      igoWorkspaceSelector
+      [store]="workspaceStore"
+      [map]="map"
+      (selectedChange)="selectedWorkspace($event.value)">
+    </igo-workspace-selector>
+
+    <ng-container *ngIf="selectedWorkspace$ | async as workspace">
+      <igo-actionbar
+        *ngIf="workspace.actionStore"
+        [store]="workspace.actionStore"
+        [withIcon]="true"
+        [withTitle]="actionbarWithTitle"
+        [horizontal]="true"
+        [withToggleButton]="actionbarMode === 'overlay'"
+        [mode]="actionbarMode">
+      </igo-actionbar>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="selectedWorkspace$ | async as workspace">
+    <igo-entity-table *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate"
+      [store]="workspace.entityStore" [template]="workspace.meta.tableTemplate">
+    </igo-entity-table>
   </ng-container>
 
 </app-expansion-panel>
@@ -130,6 +148,13 @@
       <mat-icon svgIcon="close"></mat-icon>  
     </button>
   </div>
+
+  <igo-workspace-widget-outlet
+    *ngIf="selectedWorkspace$ | async as workspace"
+    [workspace]="workspace"
+    (deactivateWidget)="onDeactivateWorkspaceWidget()">
+  </igo-workspace-widget-outlet>
+
 </app-toast-panel-for-expansion >
 
 <app-toast-panel *ngIf="!(queryStore.empty$ | async)"
