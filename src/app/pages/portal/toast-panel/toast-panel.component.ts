@@ -13,7 +13,7 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import { getEntityTitle, EntityStore, ActionStore, Action, ActionbarMode } from '@igo2/common';
 import { Feature, SearchResult, IgoMap, FeatureMotion, moveToOlFeatures, createOverlayMarkerStyle, createOverlayDefaultStyle } from '@igo2/geo';
-import { Media, MediaService, LanguageService } from '@igo2/core';
+import { Media, MediaService, LanguageService, StorageService } from '@igo2/core';
 
 @Component({
   selector: 'app-toast-panel',
@@ -64,7 +64,25 @@ export class ToastPanelComponent implements OnInit {
   }
   private _opened = true;
 
-  @Input() zoomAuto = false;
+  get zoomAuto(): boolean {
+    if (this.storageService.get('zoomAuto') === 'true') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // To allow the toast to use much larger extent on the map
+  get fullExtent() {
+    if (this.storageService.get('fullExtent') === 'true') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(this.fullExtent);
+  public notfullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(!this.fullExtent);
 
   public icon = 'menu';
 
@@ -82,6 +100,8 @@ export class ToastPanelComponent implements OnInit {
   @Output() openedChange = new EventEmitter<boolean>();
   @Output() zoomAutoEvent = new EventEmitter<boolean>();
 
+  @Output() fullExtentEvent = new EventEmitter<boolean>();
+
   resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
 
   @HostBinding('class.app-toast-panel-opened')
@@ -98,6 +118,11 @@ export class ToastPanelComponent implements OnInit {
       return 'visible';
     }
     return 'hidden';
+  }
+
+  @HostBinding('class.app-full-toast-panel-opened')
+  get hasFullOpenedClass() {
+    return this.opened && this.fullExtent;
   }
 
   @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(event: KeyboardEvent) {
@@ -148,7 +173,8 @@ export class ToastPanelComponent implements OnInit {
 
   constructor(
     public mediaService: MediaService,
-    public languageService: LanguageService
+    public languageService: LanguageService,
+    private storageService: StorageService
     ) {}
 
   ngOnInit() {
@@ -210,15 +236,46 @@ export class ToastPanelComponent implements OnInit {
         title: this.languageService.translate.instant('toastPanel.zoomAuto'),
         tooltip: this.languageService.translate.instant('toastPanel.zoomAutoTooltip'),
         checkbox: true,
-        checkCondition: this.zoomAuto,
+        checkCondition: this.storageService.get('zoomAuto') === 'true',
         handler: () => {
-          this.zoomAuto = !this.zoomAuto;
+          this.storageService.get('zoomAuto') === 'true' ? this.storageService.set('zoomAuto', 'false') :
+            this.storageService.set('zoomAuto', 'true');
           this.zoomAutoEvent.emit(this.zoomAuto);
           if (this.zoomAuto && this.isResultSelected$.value === true) {
             this.selectResult(this.resultSelected$.getValue());
           }
         }
       },
+      {
+        id: 'fullExtent',
+        title: this.languageService.translate.instant('toastPanel.fullExtent'),
+        tooltip: this.languageService.translate.instant('toastPanel.fullExtentTooltip'),
+        icon: 'resize',
+        display: () => {
+          return this.notfullExtent$;
+        },
+        handler: () => {
+          this.storageService.set('fullExtent', 'true');
+          this.fullExtent$.next(true);
+          this.notfullExtent$.next(false);
+          this.fullExtentEvent.emit(this.fullExtent);
+        }
+      },
+      {
+        id: 'standardExtent',
+        title: this.languageService.translate.instant('toastPanel.standardExtent'),
+        tooltip: this.languageService.translate.instant('toastPanel.standardExtentTooltip'),
+        icon: 'resize',
+        display: () => {
+          return this.fullExtent$;
+        },
+        handler: () => {
+          this.storageService.set('fullExtent', 'false');
+          this.fullExtent$.next(false);
+          this.notfullExtent$.next(true);
+          this.fullExtentEvent.emit(this.fullExtent);
+        }
+      }
     ]);
   }
 

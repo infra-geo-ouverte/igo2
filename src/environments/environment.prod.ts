@@ -2,6 +2,7 @@ import { LanguageOptions } from '@igo2/core';
 import {
   SearchSourceOptions,
   ImportExportServiceOptions,
+  OptionsApiOptions,
   Projection,
   SpatialFilterOptions
 } from '@igo2/geo';
@@ -15,6 +16,7 @@ interface Environment {
     importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
+    optionsApi?: OptionsApiOptions;
     projections?: Projection[];
     spatialFilter?: SpatialFilterOptions;
   };
@@ -62,6 +64,9 @@ export const environment: Environment = {
           limit: '5'
         }
       }
+    },
+    optionsApi: {
+      url: '/apis/igo2/layers/options'
     },
     spatialFilter: {
       url: '/apis/terrapi/'

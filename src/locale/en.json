@@ -14,6 +14,10 @@
     "zoomOnFeaturesTooltip": "Zoom on all the selected features",
     "zoomAuto": "Zoom auto",
     "zoomAutoTooltip": "Automatic zoom",
+    "fullExtent": "Extend",
+    "fullExtentTooltip": "Extend panel",
+    "standardExtent": "Reduce",
+    "standardExtentTooltip": "Reduce panel",
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
     "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
   },
@@ -21,5 +25,9 @@
   "noEntityStore": "No tables available for this dataset",
   "coordinates": "Show coordinates,",
   "googleMap": "Show in Google maps",
-  "googleStreetView": "Show in Google Street view"
+  "googleStreetView": "Show in Google Street view",
+  "oldBrowser": {
+    "title": "Too old browser",
+    "message": "IGO2 does not fully support your browser. Please update it or use a different one."
+  }
 }

@@ -145,7 +145,6 @@ app-expansion-panel {
 /*** Toast Panel ***/
 app-toast-panel {
   position: absolute;
-  bottom: 0;
   left: 50%;
   margin-left: -300px;
   width: 600px;
@@ -159,22 +158,26 @@ app-toast-panel {
 
   @include tablet {
     width: 500px;
-    left: calc(50% + 100px);
+    left: calc(50% + 60px);
   }
 }
 
 app-toast-panel.expansion-panel-expanded,
 app-toast-panel:not(.has-expansion-panel),
 app-toast-panel.app-toast-panel-opened {
+  bottom: 0;
+
   @include mobile {
     width: 100%;
     left: 0;
   }
 }
 
-app-toast-panel:not(.app-toast-panel-opened) {
-  ::ng-deep igo-panel ::ng-deep div.igo-panel-content {
-    visibility: hidden;
+app-toast-panel.app-full-toast-panel-opened {
+  @include mobile {
+    max-height: 70%;
+    height: auto;
+    width: 100%;
   }
 }
 

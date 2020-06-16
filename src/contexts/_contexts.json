@@ -22,5 +22,9 @@
   {
     "uri": "mapOverlay",
     "title": "Superposition de carte (Map overlay)"
+  },
+  {
+    "uri": "testExport",
+    "title": "Test export"
   }
 ]

@@ -8,7 +8,7 @@
   height: $app-toast-panel-collapsed-height;
   max-height: $app-toast-panel-max-height;
 
-  transition: height 280ms cubic-bezier(.4,0,.2,1);
+  transition: height 280ms cubic-bezier(0.4, 0, 0.2, 1);
   padding: $igo-padding;
 }
 
@@ -24,6 +24,25 @@
     height: 100%;
     width: 100%;
   }
+}
+
+:host.app-full-toast-panel-opened {
+  height: auto;
+  max-height: $app-full-toast-panel-max-height;
+  width: $app-full-toast-panel-max-width;
+
+  @include tablet {
+    width: 500px;
+  }
+
+  .toast-content {
+    height: 100%;
+    width: 100%;
+  }
+}
+    
+.toastDiv {
+  outline: none;
 }
 
 igo-panel ::ng-deep .igo-panel-header:hover {
@@ -56,8 +75,21 @@ igo-panel ::ng-deep .igo-panel-content {
   user-select: auto !important;
 }
 
+:host.app-full-toast-panel-opened igo-panel ::ng-deep .igo-panel-content {
+  max-height: 746px;
+  overflow: hidden;
+  -webkit-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  user-select: auto !important;
+
+  igo-list {
+    max-height: $app-full-toast-panel-max-height;
+  }
+}
+
 igo-feature-details ::ng-deep iframe {
-  min-height: 227px;
+  min-height: 226px;
 }
 
 .swipe-fix {
