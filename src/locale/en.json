@@ -8,7 +8,6 @@
     "tooltip": "Interactive tour of the application",
     "title": "Discover"
   },
-
   "toastPanel": {
     "title": "Entities found on the map",
     "listButton": "Return to the list of entities",

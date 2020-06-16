@@ -73,9 +73,6 @@ import {
   mapSlideY
 } from './portal.animation';
 
-import { Button, ElementFinder } from 'protractor';
-import { debug } from 'util';
-
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
@@ -138,8 +135,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     ]
   };
-
-  private appTitle = ((!this.configService.getConfig('title')) ? 'IGO' : this.configService.getConfig('title'));
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
@@ -205,7 +200,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get showTourButton(): Boolean {
-
     const haveTour = this.interactiveTourService.isToolHaveTourConfig('global') ;
     if (haveTour === false) {
       return false;
@@ -854,8 +848,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public startTour() {
-
     this.interactiveTourService.startTour('global');
-
   }
 }

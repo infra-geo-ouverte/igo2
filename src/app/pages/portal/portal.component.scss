@@ -1,17 +1,15 @@
 @import './portal.variables';
 
-
-#tour-button{
+#tour-button {
   font-weight: bold;
   position: absolute;
   left: $igo-margin;
   top: 50px;
   z-index: 4;
-
 }
 .tour-button-title {
   @include mobile {
-  display: none;
+    display: none;
   }
 }
 
@@ -99,11 +97,19 @@ igo-map-browser.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
   bottom: 279px;
 }
 
-igo-map-browser.toast-offset-scale-line ::ng-deep .ol-overlaycontainer-stopevent ::ng-deep .ol-scale-line {
+igo-map-browser.toast-offset-scale-line
+  ::ng-deep
+  .ol-overlaycontainer-stopevent
+  ::ng-deep
+  .ol-scale-line {
   bottom: 50px;
 }
 
-igo-map-browser.toast-offset-attribution ::ng-deep .ol-overlaycontainer-stopevent ::ng-deep .ol-attribution {
+igo-map-browser.toast-offset-attribution
+  ::ng-deep
+  .ol-overlaycontainer-stopevent
+  ::ng-deep
+  .ol-attribution {
   @include mobile {
     bottom: 50px;
   }
@@ -150,8 +156,8 @@ app-expansion-panel {
   z-index: 5;
 
   @include mobile {
-    @supports (-webkit-appearance:none) and (not (overflow:-webkit-marquee))
-    and (not (-ms-ime-align:auto)) and (not (-moz-appearance:none)) {
+    @supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee))
+      and (not (-ms-ime-align: auto)) and (not (-moz-appearance: none)) {
       z-index: 1;
     }
   }

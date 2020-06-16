@@ -3,7 +3,6 @@
     <igo-panel
       *ngIf="store.entities$ | async"
       [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
-      [toast]="true"
       (click)="onToggleClick($event)">
 
       <igo-actionbar

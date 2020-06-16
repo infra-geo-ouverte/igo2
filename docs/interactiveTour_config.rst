@@ -100,7 +100,7 @@ Exemples
         {
           "element": "menu-button",
           "intro": "element est un ID",
-          "introEnglish": "this is an ID element"
+          "introEnglish": "this is an ID element",
           "position": "right"
         },
         {
@@ -175,9 +175,9 @@ Exemples
               "intro": "Cliquer sur le titre de couche -> la légende ouvre"
           },
           {
-              element: 'igo-layer-item:nth-child(2) button',
-              intro: "click sur bouton oeil ->  Active et désactive  la couche",
-              action: 'clickOnElem'
+              "element": "igo-layer-item:nth-child(2) button",
+              "intro": "click sur bouton oeil ->  Active et désactive  la couche",
+              "action": "clickOnElem"
           },
           {
               "element": "igo-layer-item:nth-child(3) button:nth-of-type(2)",

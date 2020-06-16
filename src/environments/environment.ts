@@ -26,7 +26,7 @@ interface Environment {
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
-    introOptions?:{};
+    introOptions?: {};
   };
 }
 
