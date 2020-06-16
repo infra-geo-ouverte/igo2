@@ -31,12 +31,14 @@
       {
         "title": "Source WMS",
         "id": "1",
+        "minResolution": 0,
+        "maxResolution": 400,
         "linkedLayers": {
           "linkId": "wms",
           "links": [{
             "bidirectionnal": true,
             "linkedIds": ["wms2","wfs"],
-            "properties": ["ogcFilters"]
+            "properties": ["ogcFilters","minResolution", "maxResolution" ]
           }]
         },
         "sourceOptions": {
@@ -172,7 +174,7 @@
         "linkedLayers": {
           "linkId": "wfs"
         },
-        "showInLayerList": false,
+        "showInLayerList": true,
         "visible": true,
         "sourceOptions": {
           "queryable": true,
