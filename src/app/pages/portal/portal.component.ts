@@ -207,7 +207,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const media = this.mediaService.getMedia();
     let showInMobile;
     if (media === 'mobile') {
-      showInMobile = this.configService.getConfig('introInteractiveTourInMobile');
+      showInMobile = this.configService.getConfig('interactiveTourInMobile');
       if (showInMobile === false) {
         return false;
       }
