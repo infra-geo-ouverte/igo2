@@ -57,8 +57,8 @@ Configurer les tours
 ---------------------
 
 Chaque tour possède des options de configuration qui s'appliqueront à CE tour et/ou s'appliqueront a chaque step de ce tour.
-Voir les propriétés disponibles de la librarie intro.js ici: (https://introjs.com/docs/intro/options/)
-
+Voir les propriétés disponibles de la librarie intro.js (`IntroJs : <https://introjs.com/docs/intro/options/>`_) ou dans interface
+IGO (`TourOptions interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface>`_
 Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible dans le fichier config.json:
 "introInteractiveTourInMobile": true
 par default les tours interactifs seront présents en mode mobile.
@@ -66,9 +66,9 @@ par default les tours interactifs seront présents en mode mobile.
 Chaque tour possède des options de configuration qui s'appliqueront à ce tour et/ou s'appliqueront a chaque step de ce tour.
 Voir les propriétés disponibles de la librarie intro.js. Les tours sont définis dans le fichier interactiveTour_configOptions.json
 dans le dossier locale de l'application. À l'intérieur il doivent avoir la syntaxe suivante: introOptions_nomGénériqueDeOutil:{...} ou
-introOptions_global: {...} pour le tour global de présentation. Voir documentation Tools propriété name pour la liste de nom des outils.
-Lorsqu'une certaine configuration est détecté par l'application, le bouton relié apparait automatiquement. Par exemple, lorsque vous aurez
-configuré un tour pour un outil X, le bouton de présentation apparaitera dans l'entête de l'outil.
+introOptions_global: {...} pour le tour global de présentation. Voir documentation Tools pour la liste de nom générique des outils (`IGO doc <https://igo2.readthedocs.io/fr/latest/properties.html#outils-tools>`_)
+Lorsqu'une certaine configuration est détectée par l'application, le bouton relié apparait automatiquement. Par exemple, lorsque vous aurez
+configuré un tour pour un outil X, le bouton de présentation apparaitra dans l'entête de l'outil.
 
 
 Configurer les steps du tours
@@ -82,7 +82,7 @@ Pour voir vos éléments html vous pouvez utiliser l'inspecteur de votre navigat
 Le second élément obligatoire d'un 'step' est "intro" ou est inscrit le message de la boîte. Du HTML peut y être inséré.
 
 NB: attention à la séquence que prendra votre tour, l'élément doit être visible au moment ou le step est déclanché pour être
-mis en surbrillance sinon votre tour pourrait avoir certain problème.
+mis en surbrillance sinon votre tour pourrait avoir certain problème et ne fonctionnera pas.
 
 
 Steps, traduction
@@ -209,4 +209,4 @@ Propriétés
 Liens
  ** a faire **
         - `Exemple de configuration <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/src/locale/interactiveTour_configOptions.json>`_
-        - `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
+        - `igo2-lib/packages/common/src/lib/interactive-tour <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour>`_
