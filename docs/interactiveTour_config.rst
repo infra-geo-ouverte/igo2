@@ -8,7 +8,7 @@ Sommaire
 
 Il est possible de configurer des tours interactifs pour présenter le fonctionnement de l'application et de ces outils.
 La librairie utilisée pour ce faire est Intro.js (https://introjs.com/). Plusieurs tours de présentation sont possibles,
-un tour globale et des particuliers pour chacun des outils. Chaque tour à sa propre configurations. Les tours sont constitués de
+un tour global, général et des particuliers pour chacun des outils. Chaque tour à sa propre configurations. Les tours sont constitués de
 plusieurs étapes, communément apellé des 'steps'. Chaque step met en surbrillance un élément de l'application et affiche
 un message de description de cet élément. Le pilote peut ainsi configurer plusieurs 'step' à son tour interactif. En plus de
 sélectionner des éléments à mettre en surblillance, le pilote peux aussi configurer certaines actions lors du tour.
@@ -59,21 +59,23 @@ Configurer les tours
 Chaque tour possède des options de configuration qui s'appliqueront à CE tour et/ou s'appliqueront a chaque step de ce tour.
 Voir les propriétés disponibles de la librarie intro.js ici: (https://introjs.com/docs/intro/options/)
 
-Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible: "introInteractiveTourInMobile": true
+Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible dans le fichier config.json:
+"introInteractiveTourInMobile": true
 par default les tours interactifs seront présents en mode mobile.
 
 Chaque tour possède des options de configuration qui s'appliqueront à ce tour et/ou s'appliqueront a chaque step de ce tour.
-Voir les propriétés disponibles de la librarie intro.js. Les tours sont définis dans le fichier config.json
-et doivent avoir la syntaxe suivante: introOptions_nomGénériqueDeOutil:{...} ou introOptions_global: {...} pour le tour global
-de présentation. Voir documentation Tools propriété name pour la liste de nom des outils. Lorsque vous aurez configurer un tour pour un outil,
-le bouton de présentation apparaitera dans l'entête de l'outil.
+Voir les propriétés disponibles de la librarie intro.js. Les tours sont définis dans le fichier interactiveTour_configOptions.json
+dans le dossier locale de l'application. À l'intérieur il doivent avoir la syntaxe suivante: introOptions_nomGénériqueDeOutil:{...} ou
+introOptions_global: {...} pour le tour global de présentation. Voir documentation Tools propriété name pour la liste de nom des outils.
+Lorsqu'une certaine configuration est détecté par l'application, le bouton relié apparait automatiquement. Par exemple, lorsque vous aurez
+configuré un tour pour un outil X, le bouton de présentation apparaitera dans l'entête de l'outil.
 
 
 Configurer les steps du tours
 --------------------------------
 
 Chaque step est constitué d'au minimum 2 éléments. Le premier "element" correspond à l'élément HTML qui doit être mis en
-surbrillance. On peut indiquer un nom ID, de CLASS ou tout élément HTML qui peut être retrouvé via :
+surbrillance. On peut indiquer un nom ID, de CLASS ou tout élément HTML qui peut être retrouvé via les fonctions de document HTML:
 document.getElementsByTagName(), document.getElementsByClassName(), document.querySelector(), document.getElementById().
 Pour voir vos éléments html vous pouvez utiliser l'inspecteur de votre navigateur internet (clic droit sur l'élément -> inspecter)
 
@@ -120,20 +122,15 @@ Exemples
 Steps, propriétés en options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-En plus des 2 propriétées essentielles à chaque step, il est possible d'en ajouter d'autre, par exemple
-"position": "right", pour que cette boite de message particulière ce place à droite de l'élément en surbrillance.
-Voir la librairie IntroJS et les propriétés disponibles sur les steps.
+En plus des 2 propriétées essentielles à chaque step, il est possible d'en ajouter certaines comme la position dans le cas ou l'on voudrait
+que cette boite particulière soit disposée d'une autre facon. Exemple on ajoute "position": "right" dans le step, pour que cette boite de message
+particulière ce place à droite de l'élément en surbrillance. Voir la librairie IntroJs et les propriétés disponibles sur les steps.
 
- ** NB: Les index des éléments sont ceux des éléments de l'application, il se peut donc qu'il ne pas débute pas à 1, par
- exemple lorsque l'élément filtre de couche est présent ou non dans une liste, l'index ne sera pas le même. Particulièrement
- lorsqu'on sélectionne un élément avec "nth-child(x)". Exemple pour sélectioner l'élément du 1er context lorsque le filtre de contexte
- est présent vous devrez mettre dans 'element': 'igo-context-item:nth-child(3)' et se même si vous voulez sélectionner le 1er context.
- Toujours bien vérifier dans l'inspecteur de votre navigateur que vous ciblez le bon élément.
 
 
 Steps, actions
 ^^^^^^^^^^^^^^^^^^^^^
-Il est possible de réaliser des actions lors d'un step. Pour ce faire simplement ajouter action dans les propriété
+Il est possible de réaliser des actions lors d'un step. Pour ce faire simplement ajouter action dans les propriétés
 du step et indiquer l'action voulu.
 Actions possibles:
 
@@ -144,7 +141,7 @@ Actions possibles:
     * clickOnElem : Cliquer sur l'élément qui est sélectionné dans la propriété élément. NB: Pour fonctionner, l'élément html doit avoir une fonction click. Il doit être possible d'effectuer dessus -> element.click().
 
 ** NB: Les index des actions débute toujours à 0
-       Les éléments doivent être visibles et sélectionnables au moment ou est lancé le step.
+       Les éléments doivent être visibles et sélectionnables au moment ou est lancé le step, avant que l'action soit exécutée.
 
 Exemples
 
@@ -189,6 +186,21 @@ Exemples
       }
 
 
+ ** NB: Les index des éléments sont ceux des éléments de l'application, il se peut donc qu'il ne pas débute pas à 1, par
+ exemple lorsque l'élément filtre de couche est présent ou non dans une liste, l'index ne sera pas le même. Particulièrement
+ lorsqu'on sélectionne un élément avec "nth-child(x)". Exemple pour sélectioner l'élément du 1er context lorsque le filtre de contexte
+ est présent vous devrez mettre dans 'element': 'igo-context-item:nth-child(3)' et se même si vous voulez sélectionner le 1er context.
+ Toujours bien vérifier dans l'inspecteur de votre navigateur que vous ciblez le bon élément.
+
+
+Dépannage
+-----------
+
+Je ne vois pas le bouton de mon tour apparaitre.
+** Solution:
+    Vérifier que le fichier interactiveTour_configOptions.json est bien présent dans le dosisier locale et que le nom est exactement identique.
+    Vérifier que le nom de l'outil est bien exact et que la syntaxe du tour est bien présenté de cette facon: introOptions_nomGénériqueDeOutil:{...}
+    Si vous êtes en mobile vérifier la configuration dans le fichier de config: "introInteractiveTourInMobile": true
 
 
 Propriétés
@@ -196,5 +208,5 @@ Propriétés
 
 Liens
  ** a faire **
-        - `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
+        - `Exemple de configuration <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/src/locale/interactiveTour_configOptions.json>`_
         - `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
