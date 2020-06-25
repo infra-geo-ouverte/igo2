@@ -200,7 +200,7 @@
     ]
   },
 
-  "introOptions_contextManager" : {
+  "introOptions_timeFilter" : {
     "skipLabel": "<h3 style='color:blue'>Fermer </h3>",
     "nextLabel": "<h3 style='color:blue'>Suivant</h3>",
     "prevLabel": "",
@@ -220,14 +220,19 @@
     "scrollToElement":true,
     "scrollTo": "element",
     "highlightClass":"igo-introjs-helperLayer",
-    "buttonClass":"mat-raised-button",
     "tooltipClass":"mat-h2",
 
   "steps": [
     {
       "element": "div.igo-panel-title",
-      "intro": "Exemple pour outil context",
-      "introEnglish" : "Exemple for tool context manager",
+      "intro": "FILTRE TEMPOREL<br>Le filtre temporel permet de délimiter une période de temps qui filtrera la couche et affichera uniquement les résultats qui corespondent à la période de temps définie ",
+      "introEnglish" : "TIME FILTER<br> allow to define a time laps the filter the layer",
+      "position": "right"
+    },
+    {
+      "element": "div.igo-panel-title",
+      "intro": "S'applique uniquement sur certaine couches ou le filtre peut s'appliquer et qui sont présentes dans la carte",
+      "introEnglish" : "Apply on layer who have time filter config and who are inside map",
       "position": "right"
     }
     ]
@@ -254,7 +259,6 @@
     "scrollToElement":true,
     "scrollTo": "element",
     "highlightClass":"igo-introjs-helperLayer",
-    "buttonClass":"mat-raised-button",
     "tooltipClass":"mat-h2",
 
     "steps": [
