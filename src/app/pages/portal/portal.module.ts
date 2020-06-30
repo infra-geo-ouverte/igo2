@@ -17,7 +17,8 @@ import {
   IgoFlexibleModule,
   IgoContextMenuModule,
   IgoToolModule,
-  IgoEntityTableModule
+  IgoEntityTableModule,
+  IgoInteractiveTourModule
 } from '@igo2/common';
 
 import {
@@ -71,7 +72,8 @@ import { PortalComponent } from './portal.component';
     MapOverlayModule,
     IgoContextManagerModule,
     IgoContextMapButtonModule,
-    IgoEntityTableModule
+    IgoEntityTableModule,
+    IgoInteractiveTourModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]

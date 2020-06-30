@@ -134,7 +134,8 @@ Il est possible de réaliser des actions lors d'un step. Pour ce faire simplemen
 du step et indiquer l'action voulu.
 Actions possibles:
 
-    * clickOnMenu : Cliquer sur le bouton menu, si ce dernier est ouvert, il se fermera sinon il ouvrira.
+    * openMenu : Cliquer sur ouvrir le menu.
+    * closeMenu : Cliquer sur le fermer le menu.
     * clickOnToolX : Cliquer sur l'outil numéro X. Remplacer le X par le numéro d'outil voulu. Attention le numéro est fonction de l'ordre de présentation des outils.
     * clickOnContextX : Cliquer sur le context X. Remplacer le X par le numéro du context (clickOnContext4).
     * clickOnLayerX: Cliquer sur le context X. Rempalcer le X par le no du layer (clickOnLayer12).

@@ -28,7 +28,12 @@
             <mat-icon svgIcon="arrow-left"></mat-icon>
           </button>
 
-          <igo-interactive-tour panelRightButton></igo-interactive-tour>
+          <igo-interactive-tour
+            panelRightButton
+            styleButton = 'icon'
+            menuIsOpen = true
+            >
+          </igo-interactive-tour>
 
           <!-- <button *ngIf="toolbox.activeTool$ | async"
             mat-icon-button

@@ -28,8 +28,7 @@ import {
   EntityStore,
   // getEntityTitle,
   Toolbox,
-  Tool,
-  InteractiveTourService
+  Tool
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -199,22 +198,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.toolState.toolbox;
   }
 
-  get showTourButton(): Boolean {
-    const haveTour = this.interactiveTourService.isToolHaveTourConfig('global') ;
-    if (haveTour === false) {
-      return false;
-    }
-    const media = this.mediaService.getMedia();
-    let showInMobile;
-    if (media === 'mobile') {
-      showInMobile = this.configService.getConfig('interactiveTourInMobile');
-      if (showInMobile === false) {
-        return false;
-      }
-    }
-
-    return true;
-}
 
   // get toastPanelContent(): string {
   //   let content;
@@ -274,7 +257,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     private searchSourceService: SearchSourceService,
     private searchService: SearchService,
     private configService: ConfigService,
-    private interactiveTourService: InteractiveTourService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
@@ -847,7 +829,5 @@ export class PortalComponent implements OnInit, OnDestroy {
     return visible;
   }
 
-  public startTour() {
-    this.interactiveTourService.startTour('global');
-  }
+
 }

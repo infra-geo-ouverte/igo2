@@ -34,16 +34,15 @@
       (searchSettingsChange)="onSearchSettingsChange()">
     </igo-search-bar>
 
-    <button
-      *ngIf="!sidenavOpened && showTourButton"
+
+    <igo-interactive-tour
+      *ngIf="!sidenavOpened"
       id="tour-button"
-      mat-raised-button
-      color="primary"
-      (click)="startTour()"
-      [matTooltip]= "'tourButton.tooltip' | translate">
-      <span class="tour-button-title">{{'tourButton.title' | translate}} {{'IGO' | translate}} </span>
-      <mat-icon svgIcon="presentation-play"></mat-icon>
-    </button>
+      panelRightButton
+      styleButton = 'raised'
+      menuIsOpen = false
+      >
+    </igo-interactive-tour>
 
     <app-sidenav
       [map]="map"

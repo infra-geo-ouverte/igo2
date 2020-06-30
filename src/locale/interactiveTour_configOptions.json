@@ -39,18 +39,18 @@
         "introEnglish": "CLICK ON MENU<br>Open the menu",
         "position": "right",
         "disableInteraction": false,
-        "action": "clickOnMenu"
+        "action": "openMenu"
       },
       {
         "no": 2,
         "element": "igo-search-bar-container",
-        "intro": "BARRE RECHERCHE <br> Saisir un nom de couche ,de ville, d'adresse, point GPS, etc",
+        "intro": "BARRE RECHERCHE <br>Saisir un nom de couche, de ville, d'adresse, point GPS, etc",
         "introEnglish": "SEARCH BAR<br>You can whrite town name, adress and more"
       },
       {
         "no": 3,
         "element": "search-bar-buttons",
-        "intro": "OPTIONS DE RECHERCHE<br> Permet de configurer: le type de recherche, le nombre de résultats souhaités, le type de résultat, etc.",
+        "intro": "OPTIONS DE RECHERCHE<br>Permet de configurer: le type de recherche, le nombre de résultats souhaités, le type de résultat, etc.",
         "introEnglish": "SEARCH OPTION<br> To set some search option like type of search, result number and more "
       },
       {
@@ -177,7 +177,7 @@
         "intro": "Cliquer pour fermer le menu",
         "introEnglish" : "Click to close menu",
         "position": "right",
-        "action": "clickOnMenu"
+        "action": "closeMenu"
       },
       {
         "element": "igo-geolocate-button",
