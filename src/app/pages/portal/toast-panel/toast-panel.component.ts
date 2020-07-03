@@ -11,9 +11,28 @@ import {
 import { BehaviorSubject, Observable } from 'rxjs';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 
-import { getEntityTitle, EntityStore, ActionStore, Action, ActionbarMode } from '@igo2/common';
-import { Feature, SearchResult, IgoMap, FeatureMotion, moveToOlFeatures, createOverlayMarkerStyle, createOverlayDefaultStyle } from '@igo2/geo';
-import { Media, MediaService, LanguageService, StorageService } from '@igo2/core';
+import {
+  getEntityTitle,
+  EntityStore,
+  ActionStore,
+  Action,
+  ActionbarMode
+} from '@igo2/common';
+import {
+  Feature,
+  SearchResult,
+  IgoMap,
+  FeatureMotion,
+  moveToOlFeatures,
+  createOverlayMarkerStyle,
+  createOverlayDefaultStyle
+} from '@igo2/geo';
+import {
+  Media,
+  MediaService,
+  LanguageService,
+  StorageService
+} from '@igo2/core';
 
 @Component({
   selector: 'app-toast-panel',
@@ -65,24 +84,20 @@ export class ToastPanelComponent implements OnInit {
   private _opened = true;
 
   get zoomAuto(): boolean {
-    if (this.storageService.get('zoomAuto') === 'true') {
-      return true;
-    } else {
-      return false;
-    }
+    return this.storageService.get('zoomAuto') as boolean;
   }
 
   // To allow the toast to use much larger extent on the map
-  get fullExtent() {
-    if (this.storageService.get('fullExtent') === 'true') {
-      return true;
-    } else {
-      return false;
-    }
+  get fullExtent(): boolean {
+    return this.storageService.get('fullExtent') as boolean;
   }
 
-  public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(this.fullExtent);
-  public notfullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(!this.fullExtent);
+  public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
+    this.fullExtent
+  );
+  public notfullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
+    !this.fullExtent
+  );
 
   public icon = 'menu';
 
@@ -125,20 +140,29 @@ export class ToastPanelComponent implements OnInit {
     return this.opened && this.fullExtent;
   }
 
-  @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(event: KeyboardEvent) {
+  @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(
+    event: KeyboardEvent
+  ) {
     this.clear();
   }
 
-  @HostListener('document:keydown.backspace', ['$event']) onBackHandler(event: KeyboardEvent) {
+  @HostListener('document:keydown.backspace', ['$event']) onBackHandler(
+    event: KeyboardEvent
+  ) {
     this.unselectResult();
   }
 
-  @HostListener('document:keydown.z', ['$event']) onZoomHandler(event: KeyboardEvent) {
+  @HostListener('document:keydown.z', ['$event']) onZoomHandler(
+    event: KeyboardEvent
+  ) {
     if (this.isResultSelected$.getValue() === true) {
-      const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
-        dataProjection: this.resultSelected$.getValue().data.projection,
-        featureProjection: this.map.projection
-      });
+      const olFeature = this.format.readFeature(
+        this.resultSelected$.getValue().data,
+        {
+          dataProjection: this.resultSelected$.getValue().data.projection,
+          featureProjection: this.map.projection
+        }
+      );
       moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
     }
   }
@@ -149,25 +173,49 @@ export class ToastPanelComponent implements OnInit {
   }
 
   get multiple(): Observable<boolean> {
-    this.results.length ? this.multiple$.next(true) : this.multiple$.next(false);
+    this.results.length
+      ? this.multiple$.next(true)
+      : this.multiple$.next(false);
     return this.multiple$;
   }
 
-  private getSelectedMarkerStyle(feature: Feature)  {
+  private getSelectedMarkerStyle(feature: Feature) {
     if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({text: feature.meta.mapTitle, outlineColor: [0, 255, 255]});
+      return createOverlayMarkerStyle({
+        text: feature.meta.mapTitle,
+        outlineColor: [0, 255, 255]
+      });
     } else {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeWidth: 4, strokeColor: [0, 255, 255]});
+      return createOverlayDefaultStyle({
+        text: feature.meta.mapTitle,
+        strokeWidth: 4,
+        strokeColor: [0, 255, 255]
+      });
     }
   }
 
   private getMarkerStyle(feature: Feature) {
     if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({text: feature.meta.mapTitle, opacity: 0.5, outlineColor: [0, 255, 255]});
-    } else if (feature.geometry.type === 'LineString' || feature.geometry.type === 'MultiLineString') {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle, strokeOpacity: 0.5, strokeColor: [0, 255, 255]});
+      return createOverlayMarkerStyle({
+        text: feature.meta.mapTitle,
+        opacity: 0.5,
+        outlineColor: [0, 255, 255]
+      });
+    } else if (
+      feature.geometry.type === 'LineString' ||
+      feature.geometry.type === 'MultiLineString'
+    ) {
+      return createOverlayDefaultStyle({
+        text: feature.meta.mapTitle,
+        strokeOpacity: 0.5,
+        strokeColor: [0, 255, 255]
+      });
     } else {
-      return createOverlayDefaultStyle({text: feature.meta.mapTitle, fillOpacity: 0.15, strokeColor: [0, 255, 255]});
+      return createOverlayDefaultStyle({
+        text: feature.meta.mapTitle,
+        fillOpacity: 0.15,
+        strokeColor: [0, 255, 255]
+      });
     }
   }
 
@@ -175,7 +223,7 @@ export class ToastPanelComponent implements OnInit {
     public mediaService: MediaService,
     public languageService: LanguageService,
     private storageService: StorageService
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.store.entities$.subscribe(() => {
@@ -187,7 +235,9 @@ export class ToastPanelComponent implements OnInit {
         id: 'list',
         title: this.languageService.translate.instant('toastPanel.backToList'),
         icon: 'format-list-bulleted-square',
-        tooltip: this.languageService.translate.instant('toastPanel.listButton'),
+        tooltip: this.languageService.translate.instant(
+          'toastPanel.listButton'
+        ),
         display: () => {
           return this.isResultSelected$;
         },
@@ -197,24 +247,35 @@ export class ToastPanelComponent implements OnInit {
       },
       {
         id: 'zoomFeature',
-        title: this.languageService.translate.instant('toastPanel.zoomOnFeature'),
+        title: this.languageService.translate.instant(
+          'toastPanel.zoomOnFeature'
+        ),
         icon: 'magnify-plus-outline',
-        tooltip: this.languageService.translate.instant('toastPanel.zoomOnFeatureTooltip'),
+        tooltip: this.languageService.translate.instant(
+          'toastPanel.zoomOnFeatureTooltip'
+        ),
         display: () => {
           return this.isResultSelected$;
         },
         handler: () => {
-          const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
-            dataProjection: this.resultSelected$.getValue().data.projection,
-            featureProjection: this.map.projection
-          });
+          const olFeature = this.format.readFeature(
+            this.resultSelected$.getValue().data,
+            {
+              dataProjection: this.resultSelected$.getValue().data.projection,
+              featureProjection: this.map.projection
+            }
+          );
           moveToOlFeatures(this.map, [olFeature], FeatureMotion.Zoom);
         }
       },
       {
         id: 'zoomResults',
-        title: this.languageService.translate.instant('toastPanel.zoomOnFeatures'),
-        tooltip: this.languageService.translate.instant('toastPanel.zoomOnFeaturesTooltip'),
+        title: this.languageService.translate.instant(
+          'toastPanel.zoomOnFeatures'
+        ),
+        tooltip: this.languageService.translate.instant(
+          'toastPanel.zoomOnFeaturesTooltip'
+        ),
         icon: 'magnify-scan',
         availability: () => {
           return this.multiple;
@@ -234,12 +295,15 @@ export class ToastPanelComponent implements OnInit {
       {
         id: 'zoomAuto',
         title: this.languageService.translate.instant('toastPanel.zoomAuto'),
-        tooltip: this.languageService.translate.instant('toastPanel.zoomAutoTooltip'),
+        tooltip: this.languageService.translate.instant(
+          'toastPanel.zoomAutoTooltip'
+        ),
         checkbox: true,
-        checkCondition: this.storageService.get('zoomAuto') === 'true',
+        checkCondition: this.storageService.get('zoomAuto') as boolean,
         handler: () => {
-          this.storageService.get('zoomAuto') === 'true' ? this.storageService.set('zoomAuto', 'false') :
-            this.storageService.set('zoomAuto', 'true');
+          this.storageService.set('zoomAuto', !this.storageService.get(
+            'zoomAuto'
+          ) as boolean);
           this.zoomAutoEvent.emit(this.zoomAuto);
           if (this.zoomAuto && this.isResultSelected$.value === true) {
             this.selectResult(this.resultSelected$.getValue());
@@ -249,13 +313,15 @@ export class ToastPanelComponent implements OnInit {
       {
         id: 'fullExtent',
         title: this.languageService.translate.instant('toastPanel.fullExtent'),
-        tooltip: this.languageService.translate.instant('toastPanel.fullExtentTooltip'),
+        tooltip: this.languageService.translate.instant(
+          'toastPanel.fullExtentTooltip'
+        ),
         icon: 'resize',
         display: () => {
           return this.notfullExtent$;
         },
         handler: () => {
-          this.storageService.set('fullExtent', 'true');
+          this.storageService.set('fullExtent', true);
           this.fullExtent$.next(true);
           this.notfullExtent$.next(false);
           this.fullExtentEvent.emit(this.fullExtent);
@@ -263,14 +329,18 @@ export class ToastPanelComponent implements OnInit {
       },
       {
         id: 'standardExtent',
-        title: this.languageService.translate.instant('toastPanel.standardExtent'),
-        tooltip: this.languageService.translate.instant('toastPanel.standardExtentTooltip'),
+        title: this.languageService.translate.instant(
+          'toastPanel.standardExtent'
+        ),
+        tooltip: this.languageService.translate.instant(
+          'toastPanel.standardExtentTooltip'
+        ),
         icon: 'resize',
         display: () => {
           return this.fullExtent$;
         },
         handler: () => {
-          this.storageService.set('fullExtent', 'false');
+          this.storageService.set('fullExtent', false);
           this.fullExtent$.next(false);
           this.notfullExtent$.next(true);
           this.fullExtentEvent.emit(this.fullExtent);
@@ -327,10 +397,13 @@ export class ToastPanelComponent implements OnInit {
     this.map.overlay.addFeatures(features, FeatureMotion.None);
 
     if (this.zoomAuto) {
-      const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
-        dataProjection: this.resultSelected$.getValue().data.projection,
-        featureProjection: this.map.projection
-      });
+      const olFeature = this.format.readFeature(
+        this.resultSelected$.getValue().data,
+        {
+          dataProjection: this.resultSelected$.getValue().data.projection,
+          featureProjection: this.map.projection
+        }
+      );
       moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
     }
 
@@ -358,9 +431,7 @@ export class ToastPanelComponent implements OnInit {
   }
 
   isMobile(): boolean {
-    return (
-      this.mediaService.getMedia() === Media.Mobile
-    );
+    return this.mediaService.getMedia() === Media.Mobile;
   }
 
   handleKeyboardEvent(event) {
@@ -395,10 +466,13 @@ export class ToastPanelComponent implements OnInit {
   }
 
   zoomTo() {
-    const olFeature = this.format.readFeature(this.resultSelected$.getValue().data, {
-      dataProjection: this.resultSelected$.getValue().data.projection,
-      featureProjection: this.map.projection
-    });
+    const olFeature = this.format.readFeature(
+      this.resultSelected$.getValue().data,
+      {
+        dataProjection: this.resultSelected$.getValue().data.projection,
+        featureProjection: this.map.projection
+      }
+    );
     moveToOlFeatures(this.map, [olFeature], FeatureMotion.Zoom);
   }
 
