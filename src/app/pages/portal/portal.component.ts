@@ -508,7 +508,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private openGoogleMaps(coord: [number, number]) {
-    window.open(GoogleLinks.getGoogleMapsLink(coord[0], coord[1]));
+    window.open(GoogleLinks.getGoogleMapsCoordLink(coord[0], coord[1]));
   }
 
   private openGoogleStreetView(coord: [number, number]) {
