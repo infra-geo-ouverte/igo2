@@ -131,8 +131,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     ]
   };
 
-  @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
-  @ViewChild('searchBar', { read: ElementRef }) searchBar: ElementRef;
+  @ViewChild('mapBrowser', { read: ElementRef, static: true }) mapBrowser: ElementRef;
+  @ViewChild('searchBar', { read: ElementRef, static: true }) searchBar: ElementRef;
 
   get map(): IgoMap {
     return this.mapState.map;
