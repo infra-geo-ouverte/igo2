@@ -851,7 +851,7 @@ export class PortalComponent implements OnInit, OnDestroy {
             version: '1.0.0',
             layer: name
           }
-        })
+        } as any)
         .subscribe(l => {
           this.map.addLayer(l);
         })

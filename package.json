@@ -12,7 +12,7 @@
     "build": "ng build",
     "lint": "ng lint",
     "e2e": "ng e2e --port 4300",
-    "postinstall": "gulp geo:fixOL && gulp geo:fixMapbox",
+    "postinstall": "gulp geo:fixOL && gulp geo:fixMapbox && ngcc",
     "build.prod": "ng build --prod",
     "serve.prod": "node_modules/live-server/live-server.js ./dist/igo2/ --port=4200 --no-browser",
     "doc": "compodoc -p src/tsconfig.app.json -s --port 4220",
