@@ -15,22 +15,3 @@ gulp.task('geo:fixOL', done => {
 
   done();
 });
-
-gulp.task('geo:fixMapbox', done => {
-  gulp
-    .src(
-      [
-        './node_modules/@mapbox/mapbox-gl-style-spec/deref.js',
-        './node_modules/ol-mapbox-style/stylefunction.js'
-      ],
-      { base: './' }
-    )
-    .pipe(
-      babel({
-        presets: ['@babel/env']
-      })
-    )
-    .pipe(gulp.dest('.'));
-
-  done();
-});
