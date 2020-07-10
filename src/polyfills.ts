@@ -18,11 +18,11 @@
 * BROWSER POLYFILLS
 */
 
-import 'core-js/es7/object';
-import 'core-js/es7/string';
+import 'core-js/es/object';
+import 'core-js/es/string';
 
-import 'core-js/fn/array/includes';
-import 'core-js/fn/array/flat-map';
+import 'core-js/es/array/includes';
+import 'core-js/es/array/flat-map';
 
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
 import 'classlist.js'; // Run `npm install --save classlist.js`.
@@ -34,8 +34,7 @@ import 'unorm/lib/unorm.js';
 import 'web-animations-js'; // Run `npm install --save web-animations-js`.
 
 /** Evergreen browsers require these. **/
-import 'core-js/es6/reflect';
-import 'core-js/es7/reflect';
+import 'core-js/es/reflect';
 
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
