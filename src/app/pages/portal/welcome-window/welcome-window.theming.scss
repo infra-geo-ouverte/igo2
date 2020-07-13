@@ -1,0 +1,37 @@
+
+
+@mixin igo-welcome-window-theming($theme) {
+  $primary: map-get($theme, primary);
+  // $accent: map-get($theme, accent);
+  // $foreground: map-get($theme, foreground);
+  // $warn: map-get($theme, warn);
+
+
+  // app-welcome-window > div.welcome-window {
+  //   z-index:190;
+  //   position: fixed;
+  //   top: 20%;
+  //   left: 50%;
+  //   bottom: 30%;
+  //   transform: translate(-50%, 0);
+  //   // background-color: mat-color($primary);
+  //   // color: mat-color($primary, default-contrast);
+  // }
+
+
+
+  .mat-dialog-container{
+    z-index:190;
+    box-shadow: 0 0 0 1000em rgba(0, 0, 0, 0.6);
+    // position: fixed;
+    // top: 20%;
+    // left: 30%;
+    // bottom: 30%;
+    // width: 50%;
+    // height: 50%;
+    transform: translate(-50%, 0);
+    // background-color: mat-color($primary);
+    // color: mat-color($primary, default-contrast);
+  }
+
+}

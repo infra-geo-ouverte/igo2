@@ -72,6 +72,10 @@ import {
   mapSlideY
 } from './portal.animation';
 
+import {MatDialog, MatDialogConfig } from '@angular/material';
+
+import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
+import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
@@ -257,12 +261,18 @@ export class PortalComponent implements OnInit, OnDestroy {
     private searchSourceService: SearchSourceService,
     private searchService: SearchService,
     private configService: ConfigService,
+    private welcomeWindowService: WelcomeWindowService,
+    public dialogWindow: MatDialog
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
+    // setTimeout(() => this.createWelcomeWindow(), 2000 );
+    // if (this.configService.getConfig('hasWelcomeWindow')) {
+    this.createWelcomeWindow();
+
   }
 
   ngOnInit() {
@@ -829,5 +839,14 @@ export class PortalComponent implements OnInit, OnDestroy {
     return visible;
   }
 
+	createWelcomeWindow() {
 
+    if (this.welcomeWindowService.hasWelcomeWindow()) {
+      const welcomWindowConfig: MatDialogConfig = this.welcomeWindowService.getConfig();
+      this.dialogWindow.open(WelcomeWindowComponent, welcomWindowConfig);
+    // setTimeout(() => {
+    //   this.dialogWindow.closeAll();
+    // }, 10000);
+  }
+}
 }

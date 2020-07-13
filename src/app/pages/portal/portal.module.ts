@@ -4,7 +4,8 @@ import {
   MatTooltipModule,
   MatIconModule,
   MatButtonModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { IgoCoreModule } from '@igo2/core';
@@ -42,6 +43,8 @@ import { AppToastPanelModule } from './toast-panel/toast-panel.module';
 import { AppSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
+import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
+import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
 
 @NgModule({
   imports: [
@@ -50,6 +53,7 @@ import { PortalComponent } from './portal.component';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
+    MatDialogModule,
     IgoCoreModule,
     IgoFeatureModule,
     IgoImportExportModule,
@@ -73,9 +77,13 @@ import { PortalComponent } from './portal.component';
     IgoContextManagerModule,
     IgoContextMapButtonModule,
     IgoEntityTableModule,
-    IgoInteractiveTourModule
+    IgoInteractiveTourModule,
+    IgoWelcomeWindowModule
   ],
   exports: [PortalComponent],
-  declarations: [PortalComponent]
+  declarations: [PortalComponent],
+  entryComponents: [
+    WelcomeWindowComponent
+  ]
 })
 export class PortalModule {}

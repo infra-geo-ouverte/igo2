@@ -1,5 +1,8 @@
 @import './sidenav/sidenav.theming';
+@import './welcome-window/welcome-window.theming';
 
 @mixin app-portal-theming($theme) {
   @include app-sidenav-theming($theme);
+  @include igo-welcome-window-theming($theme);
+
 }

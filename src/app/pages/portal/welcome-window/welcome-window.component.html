@@ -1,0 +1,40 @@
+
+
+<div class="welcome-window">
+
+  <mat-toolbar color="primary">
+    <div mat-dialog-title>{{'welcomeWindow.title' | translate}}</div>
+    <span class="spacer"></span>
+    <input type="checkbox" (click)="doNotShowCheck()">
+    <label> Ne plus afficher</label>
+  </mat-toolbar>
+
+
+
+  <div mat-dialog-content class="text">
+    <igo-custom-html class="mat-typography"
+      [html]="html |  translate">
+    </igo-custom-html>
+  </div>
+
+
+   <p></p>
+   <div class="button-container">
+      <igo-interactive-tour
+        id="tour-button"
+        panelRightButton
+        styleButton = 'raised'
+        menuIsOpen = false
+        (click)= 'closeWelcomeWindow()'
+        >
+      </igo-interactive-tour>
+
+    <button mat-raised-button class='button-close' color="primary" mat-dialog-close>{{'welcomeWindow.closeButton' | translate}}</button>
+  </div>
+
+</div>
+
+
+<!-- <simple-notifications [options]="options" ></simple-notifications> -->
+<!-- <simple-notifications [options]="options" (create)="created($event)"></simple-notifications> -->
+

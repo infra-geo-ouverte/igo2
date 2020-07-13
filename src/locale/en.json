@@ -25,5 +25,10 @@
   "noEntityStore": "No tables available for this dataset",
   "coordinates": "Show coordinates,",
   "googleMap": "Show in Google maps",
-  "googleStreetView": "Show in Google Street view"
+  "googleStreetView": "Show in Google Street view",
+  "welcomeWindow": {
+    "html": "<h1>Welcome to the Québec goverment mapping application IGO</h1>",
+    "title": "test titre anglais",
+    "closeButton": "Close"
+  }
 }

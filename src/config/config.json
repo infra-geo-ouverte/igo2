@@ -9,6 +9,8 @@
   "hasSearchPointerSummary": false,
   "title": "IGO Démo",
 
-  "interactiveTourInMobile": true
+  "interactiveTourInMobile": true,
+  "hasWelcomeWindow": true
+
 
 }

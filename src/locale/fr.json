@@ -25,5 +25,11 @@
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
   "coordinates": "Afficher les coordonnées",
   "googleMap": "Afficher sur Google maps",
-  "googleStreetView": "Afficher sur Google Street view"
+  "googleStreetView": "Afficher sur Google Street view",
+  "welcomeWindow": {
+    "html": "<h1>Bienvenue dans IGO, l'application cartographique du gouvernement du Québec</h1><h3>Débuter en sélectionnant un contexte</h3>",
+    "title": "Fenêtre d'accueil",
+    "closeButton": "Fermer"
+  }
+
 }

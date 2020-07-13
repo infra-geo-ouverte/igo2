@@ -194,23 +194,6 @@ export const environment: Environment = {
           +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
         extent: [31796.5834, 158846.2231, 1813323.4284, 2141241.0978]
       }
-    ],
-    introOptions:{
-      skipLabel: "<h3>Fermer </h3>",
-      nextLabel: "<h3>suivant</h3>",
-      prevLabel: "<h3>précédent </h3>",
-
-      highlightClass:'igo-introjs-helperLayer',
-      buttonClass:"mat-raised-button",
-
-      steps: [
-        {
-          element: "#menu-button",
-          intro: "MENU <br> Ouvre et fermer le menu",
-          position: "right",
-          disableInteraction: true
-        }
-      ]
-    }
+    ]
   }
 };
