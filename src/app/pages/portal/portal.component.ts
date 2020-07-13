@@ -49,7 +49,9 @@ import {
   sourceCanSearch,
   sourceCanReverseSearch,
   generateWMSIdFromSourceOptions,
+  generateWMTSIdFromSourceOptions,
   WMSDataSourceOptions,
+  WMTSDataSourceOptions,
   FEATURE
 } from '@igo2/geo';
 
@@ -517,7 +519,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private openGoogleMaps(coord: [number, number]) {
-    window.open(GoogleLinks.getGoogleMapsLink(coord[0], coord[1]));
+    window.open(GoogleLinks.getGoogleMapsCoordLink(coord[0], coord[1]));
   }
 
   private openGoogleStreetView(coord: [number, number]) {
@@ -733,19 +735,18 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private readLayersQueryParams(params: Params) {
-    if (params['layers'] && params['wmsUrl']) {
-      const layersByService = params['layers'].split('),(');
+    this.readLayersQueryParamsWMS(params);
+    this.readLayersQueryParamsWMTS(params);
+  }
+
+  private readLayersQueryParamsWMS(params: Params) {
+    if ((params['layers'] || params['wmsLayers']) && params['wmsUrl']) {
+      const nameParamLayers =  (params['wmsLayers']) ? 'wmsLayers' : 'layers';  // for maintain compatibility
+      const layersByService = params[nameParamLayers].split('),(');
       const urls = params['wmsUrl'].split(',');
       let cnt = 0;
       urls.forEach(url => {
-        let currentLayersByService = layersByService[cnt];
-        currentLayersByService = currentLayersByService.startsWith('(')
-          ? currentLayersByService.substr(1)
-          : currentLayersByService;
-        currentLayersByService = currentLayersByService.endsWith(')')
-          ? currentLayersByService.slice(0, -1)
-          : currentLayersByService;
-        currentLayersByService = currentLayersByService.split(',');
+        const currentLayersByService = this.extractLayersByService(layersByService[cnt]);
         currentLayersByService.forEach(layer => {
           const layerFromUrl = layer.split(':igoz');
           const layerOptions = {
@@ -756,7 +757,7 @@ export class PortalComponent implements OnInit, OnDestroy {
             layerOptions as WMSDataSourceOptions
           );
           const visibility = this.computeLayerVisibilityFromUrl(params, id);
-          this.addLayerByName(
+          this.addWmsLayerByName(
             url,
             layerFromUrl[0],
             visibility,
@@ -768,7 +769,47 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private addLayerByName(
+  private readLayersQueryParamsWMTS(params: Params) {
+    if (params['wmtsLayers'] && params['wmtsUrl']) {
+      const layersByService = params['wmtsLayers'].split('),(');
+      const urls = params['wmtsUrl'].split(',');
+      let cnt = 0;
+      urls.forEach(url => {
+        const currentLayersByService = this.extractLayersByService(layersByService[cnt]);
+        currentLayersByService.forEach(layer => {
+          const layerFromUrl = layer.split(':igoz');
+          const layerOptions = {
+            url: url,
+            layer: layerFromUrl[0]
+          };
+          const id = generateWMTSIdFromSourceOptions(
+            layerOptions as WMTSDataSourceOptions
+          );
+          const visibility = this.computeLayerVisibilityFromUrl(params, id);
+          this.addWmtsLayerByName(
+            url,
+            layerFromUrl[0],
+            visibility,
+            parseInt(layerFromUrl[1] || 1000, 10)
+          );
+        });
+        cnt += 1;
+      });
+    }
+  }
+
+  private extractLayersByService(layersByService: string): any[] {
+    let outLayersByService = layersByService;
+    outLayersByService = outLayersByService.startsWith('(')
+      ? outLayersByService.substr(1)
+      : outLayersByService;
+    outLayersByService = outLayersByService.endsWith(')')
+      ? outLayersByService.slice(0, -1)
+      : outLayersByService;
+    return outLayersByService.split(',');
+  }
+
+  private addWmsLayerByName(
     url: string,
     name: string,
     visibility: boolean = true,
@@ -790,6 +831,36 @@ export class PortalComponent implements OnInit, OnDestroy {
               layers: name,
               version: '1.3.0'
             }
+          }
+        })
+        .subscribe(l => {
+          this.map.addLayer(l);
+        })
+    );
+  }
+
+  private addWmtsLayerByName(
+    url: string,
+    name: string,
+    visibility: boolean = true,
+    zIndex: number = 100000
+  ) {
+    if (!this.contextLoaded) {
+      return;
+    }
+    this.addedLayers$$.push(
+      this.layerService
+        .createAsyncLayer({
+          zIndex: zIndex,
+          visible: visibility,
+          sourceOptions: {
+            optionsFromCapabilities: true,
+            type: 'wmts',
+            url: url,
+            crossOrigin: true,
+            // matrixSet: 'GoogleMapsCompatibleExt2:epsg:3857',
+            version: '1.0.0',
+            layer: name
           }
         })
         .subscribe(l => {
