@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, take } from 'rxjs/operators';
 
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
@@ -96,18 +96,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   public hasExpansionPanel = false;
   public expansionPanelExpanded = false;
   public toastPanelOpened = true;
+  public fullExtent;
   public sidenavOpened = false;
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
   private addedLayers$$: Subscription[] = [];
-  private selectFirst: boolean;
-  private selectFirstSearchResult: boolean;
-  private selectFirstSearchResult$: BehaviorSubject<
-    boolean
-  > = new BehaviorSubject(true);
-  private selectFirstSearchResult$$: Subscription;
-  public zoomAuto = false;
   public forceCoordsNA = false;
 
   public contextMenuStore = new ActionStore([]);
@@ -376,12 +370,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.onClearSearch();
       return;
     }
-    this.selectFirstSearchResult =
-      this.selectFirstSearchResult === undefined ? true : false;
-    this.selectFirstSearchResult$.next(this.selectFirstSearchResult);
-    if (!this.selectFirstSearchResult) {
-      this.selectFirstSearchResult$$.unsubscribe();
-    }
     this.onBeforeSearch();
   }
 
@@ -409,7 +397,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       )
       .concat(results);
     this.searchStore.load(newResults);
-    this.selectFirstSearchResult$.next(this.selectFirstSearchResult$.value);
   }
 
   onSearchSettingsChange() {
@@ -585,6 +572,22 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
+  getExtent() {
+    if (!this.sidenavOpened) {
+      if (this.fullExtent) {
+        return 'fullStandard';
+      } else {
+        return 'standard';
+      }
+    } else if (this.sidenavOpened) {
+      if (this.fullExtent) {
+        return 'fullOffsetX';
+      } else {
+        return 'standardOffsetX';
+      }
+    }
+  }
+
   onPointerSummaryStatusChange(value) {
     this.igoSearchPointerSummaryEnabled = value;
   }
@@ -680,36 +683,33 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readToolParams(params);
       this.readSearchParams(params);
       this.readFocusFirst(params);
-      this.selectFirstSearchResult$$ = this.selectFirstSearchResult$.subscribe(
-        value => {
-          if (value) {
-            this.computeFocusFirst();
-          }
-        }
-      );
     });
   }
 
   private computeFocusFirst() {
-    if (this.selectFirst && this.termDefinedInUrl) {
-      const entities = this.searchStore.entities$.value;
-      if (entities.length === 0) {
-        return;
+    setTimeout(() => {
+      const resultItem: any = document
+        .getElementsByTagName('igo-search-results-item')
+        .item(0);
+      if (resultItem) {
+        resultItem.click();
       }
-      const higherDisplayOrder = Math.min(
-        ...entities.map(a => a.source.displayOrder)
-      );
-      this.searchStore.state.update(
-        entities.filter(v => v.source.displayOrder === higherDisplayOrder)[0],
-        { selected: true }
-      );
-    }
+    }, 1);
   }
 
   private readFocusFirst(params: Params) {
-    this.selectFirst = false;
-    if (params['sf']) {
-      this.selectFirst = params['sf'] === '1' ? true : false;
+    if (params['sf'] === '1' && this.termDefinedInUrl) {
+      const entities$$ = this.searchStore.entities$
+        .pipe(
+          debounceTime(500),
+          take(1)
+        )
+        .subscribe(entities => {
+          entities$$.unsubscribe();
+          if (entities.length) {
+            this.computeFocusFirst();
+          }
+        });
     }
   }
 

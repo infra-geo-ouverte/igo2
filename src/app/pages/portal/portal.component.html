@@ -135,12 +135,11 @@
 <app-toast-panel *ngIf="!(queryStore.empty$ | async)"
   [map]="map"
   [store]="queryStore"
-  [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : sidenavOpened"
+  [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getExtent()"
   [@toastPanelOffsetY]="expansionPanelExpanded"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
-  [zoomAuto]="zoomAuto"
   (openedChange)="toastOpenedChange($event)"
-  (zoomAutoEvent)="zoomAuto = $event">
+  (fullExtentEvent)="fullExtent = $event">
 </app-toast-panel>
 
 <ng-template #contextMenu>

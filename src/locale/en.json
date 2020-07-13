@@ -18,6 +18,10 @@
     "zoomOnFeaturesTooltip": "Zoom on all the selected features",
     "zoomAuto": "Zoom auto",
     "zoomAutoTooltip": "Automatic zoom",
+    "fullExtent": "Extend",
+    "fullExtentTooltip": "Extend panel",
+    "standardExtent": "Reduce",
+    "standardExtentTooltip": "Reduce panel",
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
     "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
   },
@@ -30,5 +34,9 @@
     "html": "<h1>Welcome to the Québec goverment mapping application IGO</h1>",
     "title": "test titre anglais",
     "closeButton": "Close"
+  },
+  "oldBrowser": {
+    "title": "Too old browser",
+    "message": "IGO2 does not fully support your browser. Please update it or use a different one."
   }
 }

@@ -18,6 +18,10 @@
     "zoomOnFeaturesTooltip": "Zoomer sur les éléments sélectionnés",
     "zoomAuto": "Zoom auto",
     "zoomAutoTooltip": "Zoom automatique",
+    "fullExtent": "Agrandir",
+    "fullExtentTooltip": "Agrandir la fenêtre",
+    "standardExtent": "Réduire",
+    "standardExtentTooltip": "Réduire la fenêtre",
     "previousFeatureTooltip": "Élément précédent ( raccouci clavier = flèche gauche )",
     "nextFeatureTooltip": "Prochain élément ( raccouci clavier = flèche droite )"
   },
@@ -30,6 +34,10 @@
     "html": "<h1>Bienvenue dans IGO, l'application cartographique du gouvernement du Québec</h1><h3>Débuter en sélectionnant un contexte</h3>",
     "title": "Fenêtre d'accueil",
     "closeButton": "Fermer"
-  }
+  },
 
+  "oldBrowser": {
+    "title": "Navigateur obsolète",
+    "message": "IGO2 ne supporte pas pleinement votre navigateur. Veuillez le mettre à jour ou utilisez un navigateur différent."
+  }
 }
