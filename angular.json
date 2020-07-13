@@ -45,7 +45,22 @@
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": ["src/style/partial"]
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "angular2-notifications",
+              "hammerjs",
+              "typy",
+              "jspdf",
+              "file-saver",
+              "jwt-decode",
+              "@turf/helpers",
+              "@turf/line-segment",
+              "@turf/meta",
+              "@turf/invariant",
+              "@turf/line-intersect",
+              "pbf",
+              "geojson-rbush"
+            ]
           },
           "configurations": {
             "production": {
