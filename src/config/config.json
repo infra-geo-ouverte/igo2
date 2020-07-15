@@ -10,7 +10,8 @@
   "title": "IGO Démo",
 
   "interactiveTourInMobile": true,
-  "hasWelcomeWindow": true
-
+  "hasWelcomeWindow": true,
+  "welcomeWindowShowAgainOnNewIGOVersion": true,
+  "welcomeWindowNbVisitToShowAgain": 25
 
 }

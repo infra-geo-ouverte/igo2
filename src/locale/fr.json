@@ -4,10 +4,6 @@
     "close": "Fermer le menu",
     "open": "Menu"
   },
-  "tourButton": {
-    "tooltip": "Tour interactif de l'application, fonctionnement étape par étape",
-    "title": "Découvrir"
-  },
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
     "listButton": "Retourner à la liste des entités",
@@ -31,13 +27,15 @@
   "googleMap": "Afficher sur Google maps",
   "googleStreetView": "Afficher sur Google Street view",
   "welcomeWindow": {
-    "html": "<h1>Bienvenue dans IGO, l'application cartographique du gouvernement du Québec</h1><h3>Débuter en sélectionnant un contexte</h3>",
+    "html": "<h1>Bienvenue dans IGO, l'application cartographique du gouvernement du Québec</h1><h2>Débutez en sélectionnant un contexte &#x2605;</h2>",
     "title": "Fenêtre d'accueil",
-    "closeButton": "Fermer"
+    "closeButton": "Fermer",
+    "notShowCheck": "  ne plus afficher"
   },
 
   "oldBrowser": {
     "title": "Navigateur obsolète",
     "message": "IGO2 ne supporte pas pleinement votre navigateur. Veuillez le mettre à jour ou utilisez un navigateur différent."
   }
+
 }

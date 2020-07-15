@@ -265,8 +265,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
-    // setTimeout(() => this.createWelcomeWindow(), 2000 );
-    // if (this.configService.getConfig('hasWelcomeWindow')) {
     this.createWelcomeWindow();
 
   }
@@ -910,11 +908,17 @@ export class PortalComponent implements OnInit, OnDestroy {
     return visible;
   }
 
-	createWelcomeWindow() {
-
+  private createWelcomeWindow(): void {
     if (this.welcomeWindowService.hasWelcomeWindow()) {
       const welcomWindowConfig: MatDialogConfig = this.welcomeWindowService.getConfig();
-      this.dialogWindow.open(WelcomeWindowComponent, welcomWindowConfig);
+
+      const dialogRef = this.dialogWindow.open(WelcomeWindowComponent, welcomWindowConfig);
+      // dialogRef.afterOpened().subscribe(result => {
+      //   this.welcomeWindowService.afterOpenWelcomeWindow();
+      // });
+      dialogRef.afterClosed().subscribe(result => {
+        this.welcomeWindowService.afterClosedWelcomeWindow();
+      });
     // setTimeout(() => {
     //   this.dialogWindow.closeAll();
     // }, 10000);

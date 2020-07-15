@@ -4,10 +4,7 @@
     "close": "Close Menu",
     "open": "Open Menu"
   },
-  "tourButton": {
-    "tooltip": "Interactive tour of the application",
-    "title": "Discover"
-  },
+
   "toastPanel": {
     "title": "Entities found on the map",
     "listButton": "Return to the list of entities",
@@ -31,9 +28,10 @@
   "googleMap": "Show in Google maps",
   "googleStreetView": "Show in Google Street view",
   "welcomeWindow": {
-    "html": "<h1>Welcome to the Québec goverment mapping application IGO</h1>",
-    "title": "test titre anglais",
-    "closeButton": "Close"
+    "html": "<h1>Welcome to IGO the Québec goverment mapping application </h1>",
+    "title": "",
+    "closeButton": "Close",
+    "notShowCheck": "   do not show again"
   },
   "oldBrowser": {
     "title": "Too old browser",

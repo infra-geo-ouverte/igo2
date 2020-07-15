@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import {MatDialogModule,
   MatButtonModule,
@@ -17,6 +18,7 @@ import { IgoInteractiveTourModule, IgoCustomHtmlModule } from '@igo2/common';
 @NgModule({
   imports: [IgoLanguageModule,
     CommonModule,
+    FormsModule,
     MatDialogModule,
     IgoInteractiveTourModule,
     IgoCustomHtmlModule,
@@ -26,9 +28,6 @@ import { IgoInteractiveTourModule, IgoCustomHtmlModule } from '@igo2/common';
     MatToolbarModule],
   declarations: [WelcomeWindowComponent],
   exports: [WelcomeWindowComponent],
-  // entryComponents: [
-  //   WelcomeWindowComponent
-  // ],
 })
 export class IgoWelcomeWindowModule {
   static forRoot(): ModuleWithProviders {
