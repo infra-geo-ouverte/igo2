@@ -265,7 +265,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
-    this.trowWelcomeWindow();
+    this.initWelcomeWindow();
 
   }
 
@@ -909,12 +909,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     return visible;
   }
 
-  private trowWelcomeWindow(): void {
+  private initWelcomeWindow(): void {
     const authConfig = this.configService.getConfig('auth');
     if (authConfig) {
       this.authService.evCloseAuthWindow.subscribe(data => {
-
-        this.createWelcomeWindow(); });
+        this.createWelcomeWindow();
+      });
     } else {
       this.createWelcomeWindow();
     }
