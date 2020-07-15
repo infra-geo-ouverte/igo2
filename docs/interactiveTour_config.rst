@@ -56,20 +56,19 @@ Exemples
 Configurer les tours
 ---------------------
 
-Chaque tour possède des options de configuration qui s'appliqueront à CE tour et/ou s'appliqueront a chaque step de ce tour.
-Voir les propriétés disponibles de la librarie intro.js (`IntroJs : <https://introjs.com/docs/intro/options/>`_) ou dans interface
-IGO (`TourOptions interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface>`_
-Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible dans le fichier config.json:
-"interactiveTourInMobile": true
-par default les tours interactifs seront présents en mode mobile.
+Les tours sont définis dans le fichier interactiveTour_configOptions.json déposé dans le dossier locale de l'application.
 
 Chaque tour possède des options de configuration qui s'appliqueront à ce tour et/ou s'appliqueront a chaque step de ce tour.
-Voir les propriétés disponibles de la librarie intro.js. Les tours sont définis dans le fichier interactiveTour_configOptions.json
-dans le dossier locale de l'application. À l'intérieur il doivent avoir la syntaxe suivante: introOptions_nomGénériqueDeOutil:{...} ou
+Voir les propriétés disponibles de la librarie intro.js.(`IntroJs : <https://introjs.com/docs/intro/options/>`_) ou dans interface
+IGO (`TourOptions interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface>`_
+ À l'intérieur il doivent avoir la syntaxe suivante: introOptions_nomGénériqueDeOutil:{...} ou
 introOptions_global: {...} pour le tour global de présentation. Voir documentation Tools pour la liste de nom générique des outils (`IGO doc <https://igo2.readthedocs.io/fr/latest/properties.html#outils-tools>`_)
 Lorsqu'une certaine configuration est détectée par l'application, le bouton relié apparait automatiquement. Par exemple, lorsque vous aurez
 configuré un tour pour un outil X, le bouton de présentation apparaitra dans l'entête de l'outil.
 
+Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible dans le fichier config.json:
+"interactiveTourInMobile": true
+par default les tours interactifs seront présents en mode mobile.
 
 Configurer les steps du tours
 --------------------------------
