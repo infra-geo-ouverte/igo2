@@ -18,7 +18,6 @@ export class WelcomeWindowComponent {
     private welcomeWindowService: WelcomeWindowService) {}
 
   closeWelcomeWindow() {
-    console.log('ferme fenetre');
     this.dialog.closeAll();
 }
 
@@ -29,7 +28,6 @@ export class WelcomeWindowComponent {
 
   setShowAgain() {
     this.welcomeWindowService.showAgain = this.showAgain;
-    console.log(this.showAgain);
 
   }
 

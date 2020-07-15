@@ -35,15 +35,6 @@
     </igo-search-bar>
 
 
-    <igo-interactive-tour
-      *ngIf="!sidenavOpened"
-      id="tour-button"
-      panelRightButton
-      styleButton = 'raised'
-      menuIsOpen = false
-      >
-    </igo-interactive-tour>
-
     <app-sidenav
       [map]="map"
       [(opened)]="sidenavOpened"

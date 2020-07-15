@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import {
   ConfigService,
-  StorageService
+  StorageService,
 } from '@igo2/core';
 import {MatDialogConfig} from '@angular/material';
 
@@ -15,7 +15,9 @@ export class WelcomeWindowService {
   showAgain: boolean;
   igoVersionDifferentFromStorage = false;
 
-  constructor(private configService: ConfigService, private storageService: StorageService) {
+  constructor(
+    private configService: ConfigService,
+    private storageService: StorageService) {
     this.igoVersionDifferentFromStorage = this.isVersionDifferentFromStorage();
     this.setStorageConfig();
   }
@@ -67,7 +69,6 @@ export class WelcomeWindowService {
 
     return dialogConfig;
   }
-
 
   afterClosedWelcomeWindow() {
     this.storageService.set('welcomeWindow_showAgain', this.showAgain );

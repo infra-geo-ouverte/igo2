@@ -265,7 +265,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
-    this.createWelcomeWindow();
+    this.trowWelcomeWindow();
 
   }
 
@@ -318,6 +318,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
+    this.authService.evCloseAuthWindow.unsubscribe();
   }
 
   /**
@@ -908,7 +909,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     return visible;
   }
 
+  private trowWelcomeWindow(): void {
+    const authConfig = this.configService.getConfig('auth');
+    if (authConfig) {
+      this.authService.evCloseAuthWindow.subscribe(data => {
+
+        this.createWelcomeWindow(); });
+    } else {
+      this.createWelcomeWindow();
+    }
+  }
+
   private createWelcomeWindow(): void {
+
     if (this.welcomeWindowService.hasWelcomeWindow()) {
       const welcomWindowConfig: MatDialogConfig = this.welcomeWindowService.getConfig();
 
@@ -922,6 +935,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     // setTimeout(() => {
     //   this.dialogWindow.closeAll();
     // }, 10000);
+    }
   }
-}
+
 }
