@@ -43,11 +43,11 @@ export class WelcomeWindowService {
   hasWelcomeWindow(): boolean {
 
     if (this.storageService.get('welcomeWindow_showAgain') === false ||  this.storageService.get('welcomeWindow_showAgain') === 'false') {
-      if (this.nbVisit >= this.configService.getConfig('welcomeWindowNbVisitToShowAgain')) {
+      if (this.nbVisit >= this.configService.getConfig('welcomeWindow.nbVisitToShowAgain')) {
         this.storageService.set('welcomeWindow_nbVisit', 0);
         this.storageService.remove('welcomeWindow_showAgain');
         return true;
-      } else if (this.configService.getConfig('welcomeWindowShowAgainOnNewIGOVersion')) {
+      } else if (this.configService.getConfig('welcomeWindow.showAgainOnNewIGOVersion')) {
         if (this.igoVersionDifferentFromStorage) {
           return true;
         }
@@ -55,7 +55,7 @@ export class WelcomeWindowService {
       return false;
     }
 
-    return this.configService.getConfig('hasWelcomeWindow');
+    return this.configService.getConfig('welcomeWindow');
   }
 
   getConfig(): MatDialogConfig {

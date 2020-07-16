@@ -14,8 +14,9 @@
     "pathToConfigFile": "./config/interactiveTour.json"
   },
 
-  "hasWelcomeWindow": true,
-  "welcomeWindowShowAgainOnNewIGOVersion": true,
-  "welcomeWindowNbVisitToShowAgain": 25
+  "welcomeWindow": {
+    "showAgainOnNewIGOVersion": true,
+    "nbVisitToShowAgain": 3
+  }
 
 }
