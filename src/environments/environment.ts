@@ -26,7 +26,7 @@ interface Environment {
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
-    introOptions?: {};
+    interactiveTour?: {tourInMobile: boolean, pathToConfigFile: string};
   };
 }
 
@@ -142,6 +142,10 @@ export const environment: Environment = {
     // },
     language: {
       prefix: './locale/'
+    },
+    interactiveTour: {
+      tourInMobile: true,
+      pathToConfigFile: './config/interactiveTour.json'
     },
     importExport: {
       url: '/apis/ogre'

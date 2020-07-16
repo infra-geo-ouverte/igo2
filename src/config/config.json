@@ -9,7 +9,11 @@
   "hasSearchPointerSummary": false,
   "title": "IGO Démo",
 
-  "interactiveTourInMobile": true,
+  "interactiveTour": {
+    "tourInMobile": true,
+    "pathToConfigFile": "./config/interactiveTour.json"
+  },
+
   "hasWelcomeWindow": true,
   "welcomeWindowShowAgainOnNewIGOVersion": true,
   "welcomeWindowNbVisitToShowAgain": 25
