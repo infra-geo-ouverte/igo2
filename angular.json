@@ -40,9 +40,7 @@
                 "output": "./assets/igo2/geo/"
               }
             ],
-            "styles": ["src/styles.scss",
-              "node_modules/intro.js/introjs.css"
-            ],
+            "styles": ["src/styles.scss", "node_modules/intro.js/introjs.css"],
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": ["src/style/partial"]

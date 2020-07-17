@@ -1,4 +1,4 @@
-import { Component, Renderer2, Output, EventEmitter } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { zip } from 'rxjs';
 
@@ -7,7 +7,7 @@ import {
   LanguageService,
   ConfigService,
   AnalyticsService,
-  MessageService
+  MessageService,
 } from '@igo2/core';
 import { AuthOptions } from '@igo2/auth';
 import { AnalyticsListenerService } from '@igo2/integration';
@@ -15,7 +15,7 @@ import { AnalyticsListenerService } from '@igo2/integration';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   public authConfig: AuthOptions;
@@ -68,7 +68,7 @@ export class AppComponent {
     const oldBrowser = userAgent.satisfies({
       ie: '<11',
       chrome: '<64',
-      firefox: '<60'
+      firefox: '<60',
     });
 
     if (oldBrowser) {
@@ -77,10 +77,10 @@ export class AppComponent {
       const message$ = translate.get('oldBrowser.message');
       zip(title$, message$, (title: string, message: string) => ({
         title,
-        message
-      })).subscribe(rep =>
+        message,
+      })).subscribe((rep) =>
         this.messageService.alert(rep.message, rep.title, {
-          timeOut: 15000
+          timeOut: 15000,
         })
       );
     }

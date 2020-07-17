@@ -4,7 +4,7 @@ import {
   OnDestroy,
   ChangeDetectorRef,
   ViewChild,
-  ElementRef
+  ElementRef,
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
@@ -17,7 +17,7 @@ import {
   MediaService,
   Media,
   MediaOrientation,
-  ConfigService
+  ConfigService,
 } from '@igo2/core';
 import {
   // ActionbarMode,
@@ -28,7 +28,7 @@ import {
   EntityStore,
   // getEntityTitle,
   Toolbox,
-  Tool
+  Tool,
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -52,7 +52,7 @@ import {
   generateWMTSIdFromSourceOptions,
   WMSDataSourceOptions,
   WMTSDataSourceOptions,
-  FEATURE
+  FEATURE,
 } from '@igo2/geo';
 
 import {
@@ -60,7 +60,7 @@ import {
   MapState,
   SearchState,
   QueryState,
-  ContextState
+  ContextState,
 } from '@igo2/integration';
 
 import {
@@ -71,10 +71,10 @@ import {
   controlSlideX,
   controlSlideY,
   mapSlideX,
-  mapSlideY
+  mapSlideY,
 } from './portal.animation';
 
-import {MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
@@ -90,8 +90,8 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     controlSlideX(),
     controlSlideY(),
     mapSlideX(),
-    mapSlideY()
-  ]
+    mapSlideY(),
+  ],
 })
 export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
@@ -122,17 +122,17 @@ export class PortalComponent implements OnInit, OnDestroy {
     columns: [
       {
         name: 'id',
-        title: 'ID'
+        title: 'ID',
       },
       {
         name: 'name',
-        title: 'Name'
+        title: 'Name',
       },
       {
         name: 'description',
-        title: 'Description'
-      }
-    ]
+        title: 'Description',
+      },
+    ],
   };
 
   @ViewChild('mapBrowser', { read: ElementRef }) mapBrowser: ElementRef;
@@ -197,7 +197,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   get toolbox(): Toolbox {
     return this.toolState.toolbox;
   }
-
 
   // get toastPanelContent(): string {
   //   let content;
@@ -265,16 +264,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
-    this.initWelcomeWindow();
-
   }
 
   ngOnInit() {
     window['IGO'] = this;
 
-    this.authService.authenticate$.subscribe(
-      () => (this.contextLoaded = false)
-    );
+    this.initWelcomeWindow();
+
+    this.authService.authenticate$.subscribe((authenticated) => {
+      this.contextLoaded = false;
+    });
 
     this.context$$ = this.contextState.context$.subscribe(
       (context: DetailedContext) => this.onChangeContext(context)
@@ -284,18 +283,18 @@ export class PortalComponent implements OnInit, OnDestroy {
       {
         id: 'coordinates',
         title: 'coordinates',
-        handler: () => this.searchCoordinate(this.contextMenuCoord)
+        handler: () => this.searchCoordinate(this.contextMenuCoord),
       },
       {
         id: 'googleMaps',
         title: 'googleMap',
-        handler: () => this.openGoogleMaps(this.contextMenuCoord)
+        handler: () => this.openGoogleMaps(this.contextMenuCoord),
       },
       {
         id: 'googleStreetView',
         title: 'googleStreetView',
-        handler: () => this.openGoogleStreetView(this.contextMenuCoord)
-      }
+        handler: () => this.openGoogleStreetView(this.contextMenuCoord),
+      },
     ]);
 
     this.tableStore.load([
@@ -303,10 +302,10 @@ export class PortalComponent implements OnInit, OnDestroy {
       { id: '1', name: 'Name 1', description: 'Description 1' },
       { id: '3', name: 'Name 3', description: 'Description 3' },
       { id: '4', name: 'Name 4', description: 'Description 4' },
-      { id: '5', name: 'Name 5', description: 'Description 5' }
+      { id: '5', name: 'Name 5', description: 'Description 5' },
     ]);
 
-    this.queryStore.count$.subscribe(i => {
+    this.queryStore.count$.subscribe((i) => {
       this.map.viewController.padding[2] = i ? 280 : 0;
     });
     this.readQueryParams();
@@ -318,7 +317,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
-    this.authService.authLogin.unsubscribe();
   }
 
   /**
@@ -343,11 +341,11 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     const results = event.features.map((feature: Feature) => {
       let querySearchSource = querySearchSourceArray.find(
-        s => s.title === feature.meta.sourceTitle
+        (s) => s.title === feature.meta.sourceTitle
       );
       if (!querySearchSource) {
         querySearchSource = new QuerySearchSource({
-          title: feature.meta.sourceTitle
+          title: feature.meta.sourceTitle,
         });
         querySearchSourceArray.push(querySearchSource);
       }
@@ -357,7 +355,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const research = {
       request: of(results),
       reverse: false,
-      source: baseQuerySearchSource
+      source: baseQuerySearchSource,
     };
     research.request.subscribe((queryResults: SearchResult<Feature>[]) => {
       this.queryStore.load(queryResults);
@@ -430,7 +428,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.route.queryParams.pipe(debounceTime(250)).subscribe(params => {
+    this.route.queryParams.pipe(debounceTime(250)).subscribe((params) => {
       if (!params['context'] || params['context'] === context.uri) {
         this.readLayersQueryParams(params);
       }
@@ -481,8 +479,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.map.overlay.removeFeatures(
       this.searchStore
         .all()
-        .filter(f => f.meta.dataType === FEATURE)
-        .map(f => f.data as Feature)
+        .filter((f) => f.meta.dataType === FEATURE)
+        .map((f) => f.data as Feature)
     );
   }
 
@@ -526,7 +524,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   searchCoordinate(coord: [number, number]) {
-    this.searchBarTerm = coord.map(c => c.toFixed(6)).join(', ');
+    this.searchBarTerm = coord.map((c) => c.toFixed(6)).join(', ');
   }
 
   updateMapBrowserClass(e) {
@@ -679,7 +677,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private readQueryParams() {
-    this.route.queryParams.pipe(debounceTime(250)).subscribe(params => {
+    this.route.queryParams.pipe(debounceTime(250)).subscribe((params) => {
       this.readLayersQueryParams(params);
       this.readToolParams(params);
       this.readSearchParams(params);
@@ -701,11 +699,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   private readFocusFirst(params: Params) {
     if (params['sf'] === '1' && this.termDefinedInUrl) {
       const entities$$ = this.searchStore.entities$
-        .pipe(
-          debounceTime(500),
-          take(1)
-        )
-        .subscribe(entities => {
+        .pipe(debounceTime(500), take(1))
+        .subscribe((entities) => {
           entities$$.unsubscribe();
           if (entities.length) {
             this.computeFocusFirst();
@@ -740,17 +735,19 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private readLayersQueryParamsWMS(params: Params) {
     if ((params['layers'] || params['wmsLayers']) && params['wmsUrl']) {
-      const nameParamLayers =  (params['wmsLayers']) ? 'wmsLayers' : 'layers';  // for maintain compatibility
+      const nameParamLayers = params['wmsLayers'] ? 'wmsLayers' : 'layers'; // for maintain compatibility
       const layersByService = params[nameParamLayers].split('),(');
       const urls = params['wmsUrl'].split(',');
       let cnt = 0;
-      urls.forEach(url => {
-        const currentLayersByService = this.extractLayersByService(layersByService[cnt]);
-        currentLayersByService.forEach(layer => {
+      urls.forEach((url) => {
+        const currentLayersByService = this.extractLayersByService(
+          layersByService[cnt]
+        );
+        currentLayersByService.forEach((layer) => {
           const layerFromUrl = layer.split(':igoz');
           const layerOptions = {
             url: url,
-            params: { LAYERS: layerFromUrl[0] }
+            params: { LAYERS: layerFromUrl[0] },
           };
           const id = generateWMSIdFromSourceOptions(
             layerOptions as WMSDataSourceOptions
@@ -773,13 +770,15 @@ export class PortalComponent implements OnInit, OnDestroy {
       const layersByService = params['wmtsLayers'].split('),(');
       const urls = params['wmtsUrl'].split(',');
       let cnt = 0;
-      urls.forEach(url => {
-        const currentLayersByService = this.extractLayersByService(layersByService[cnt]);
-        currentLayersByService.forEach(layer => {
+      urls.forEach((url) => {
+        const currentLayersByService = this.extractLayersByService(
+          layersByService[cnt]
+        );
+        currentLayersByService.forEach((layer) => {
           const layerFromUrl = layer.split(':igoz');
           const layerOptions = {
             url: url,
-            layer: layerFromUrl[0]
+            layer: layerFromUrl[0],
           };
           const id = generateWMTSIdFromSourceOptions(
             layerOptions as WMTSDataSourceOptions
@@ -828,11 +827,11 @@ export class PortalComponent implements OnInit, OnDestroy {
             url: url,
             params: {
               layers: name,
-              version: '1.3.0'
-            }
-          }
+              version: '1.3.0',
+            },
+          },
         })
-        .subscribe(l => {
+        .subscribe((l) => {
           this.map.addLayer(l);
         })
     );
@@ -859,10 +858,10 @@ export class PortalComponent implements OnInit, OnDestroy {
             crossOrigin: true,
             // matrixSet: 'GoogleMapsCompatibleExt2:epsg:3857',
             version: '1.0.0',
-            layer: name
-          }
+            layer: name,
+          },
         })
-        .subscribe(l => {
+        .subscribe((l) => {
           this.map.addLayer(l);
         })
     );
@@ -912,34 +911,29 @@ export class PortalComponent implements OnInit, OnDestroy {
   private initWelcomeWindow(): void {
     const authConfig = this.configService.getConfig('auth');
     if (authConfig) {
-      if (this.authService.isAuthenticated()) {
-        this.createWelcomeWindow();
-      } else {
-      this.authService.authLogin.subscribe(data => {
-        this.createWelcomeWindow();
+      this.authService.logged$.subscribe((logged) => {
+        console.log(logged);
+        if (logged) {
+          this.createWelcomeWindow();
+        }
       });
-      }
     } else {
       this.createWelcomeWindow();
     }
   }
 
   private createWelcomeWindow(): void {
-
     if (this.welcomeWindowService.hasWelcomeWindow()) {
       const welcomWindowConfig: MatDialogConfig = this.welcomeWindowService.getConfig();
 
-      const dialogRef = this.dialogWindow.open(WelcomeWindowComponent, welcomWindowConfig);
-      // dialogRef.afterOpened().subscribe(result => {
-      //   this.welcomeWindowService.afterOpenWelcomeWindow();
-      // });
-      dialogRef.afterClosed().subscribe(result => {
+      const dialogRef = this.dialogWindow.open(
+        WelcomeWindowComponent,
+        welcomWindowConfig
+      );
+
+      dialogRef.afterClosed().subscribe((result) => {
         this.welcomeWindowService.afterClosedWelcomeWindow();
       });
-    // setTimeout(() => {
-    //   this.dialogWindow.closeAll();
-    // }, 10000);
     }
   }
-
 }
