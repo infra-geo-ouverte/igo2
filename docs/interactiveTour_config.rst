@@ -1,4 +1,6 @@
 
+.. _interactiveTourRef:
+
 ******************************
 Tour interactif configuration
 ******************************

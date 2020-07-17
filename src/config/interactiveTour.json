@@ -4,7 +4,7 @@
     "skipLabel": "<h3 style='color:blue'>Fermer </h3>",
     "nextLabel": "<h3 style='color:blue'>Suivant</h3>",
     "prevLabel": "",
-    "doneLabel": "Terminé",
+    "doneLabel": "<h3 style='color:blue'>Terminé</h3>",
     "hidePrev": true,
     "hideNext": true,
     "positionPrecedence": ["right", "bottom", "top", "left"],

@@ -318,7 +318,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
-    this.authService.evCloseAuthWindow.unsubscribe();
+    this.authService.authLogin.unsubscribe();
   }
 
   /**
@@ -912,9 +912,13 @@ export class PortalComponent implements OnInit, OnDestroy {
   private initWelcomeWindow(): void {
     const authConfig = this.configService.getConfig('auth');
     if (authConfig) {
-      this.authService.evCloseAuthWindow.subscribe(data => {
+      if (this.authService.isAuthenticated()) {
+        this.createWelcomeWindow();
+      } else {
+      this.authService.authLogin.subscribe(data => {
         this.createWelcomeWindow();
       });
+      }
     } else {
       this.createWelcomeWindow();
     }

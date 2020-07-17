@@ -16,7 +16,7 @@
 
   "welcomeWindow": {
     "showAgainOnNewIGOVersion": true,
-    "nbVisitToShowAgain": 3
+    "nbVisitToShowAgain": 30
   }
 
 }

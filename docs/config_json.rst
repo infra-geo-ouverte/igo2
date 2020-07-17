@@ -100,17 +100,6 @@ Résumé
                 les données WFS / Vectorielle / Cluster
                ** Encore en développement **
          -
-       * - hasWelcomeWindow
-         - Boolean
-         - .. line-block::
-               Permet d'ouvrir une fenêtre d'accueil. Si la valeur est à true, son contenu DOIT
-               être configurer à l'aide les fichiers de traduction en.json et fr.json.
-                "welcomeWindow": {
-                  "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>",
-                  "title": "Fenêtre d'accueil",
-                  "closeButton": "Fermer",
-                  "notShowCheck": "  ne plus afficher"}
-         -
        * - importExport
          - `ImportExport`_
          - .. line-block::
@@ -119,9 +108,9 @@ Résumé
          - .. line-block::
                Importation
                Exportation
-       * - interactiveTourInMobile
-         - Boolean
-         - Lorsque des tour interactifs de présentation de l'application sont disponibles, ce paramètre indique si les tours interactifs sont présents en mode mobile.
+       * - interactiveTour
+         - `interactiveTour`_
+         - Permet de configurer les tours interactifs de présentation de l'application.
          -
        * - **language***
          - `Language`_
@@ -177,13 +166,16 @@ Résumé
          - String
          - Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche, comme par exemple Google.
          -
-       * - welcomeWindowNbVisitToShowAgain
-         - Number
-         - Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra après le nombre de visite indiqué dans ce paramètre.
-         -
-       * - welcomeWindowShowAgainOnNewIGOVersion
-         - Boolean
-         - Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra si la version IGO est différente de la version lors de sa visite précédente.
+       * - welcomeWindow
+         - `WelcomeWindow`_
+         - .. line-block::
+               Permet d'ouvrir une fenêtre d'accueil à l'arrivé dans application. Le contenu doit
+               être configurer à l'aide les fichiers de traduction en.json et fr.json.
+                "welcomeWindow": {
+                  "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>",
+                  "title": "Fenêtre d'accueil",
+                  "closeButton": "Fermer",
+                  "notShowCheck": "  ne plus afficher"}
          -
 
 
@@ -778,6 +770,58 @@ Liens
 
 .. _igolanguage:
 
+
+
+***************
+interactiveTour
+***************
+
+    .. line-block::
+        Tours intéractif de présentation de l'application
+
+
+Exemples
+
+        .. code:: json
+
+                "interactiveTour": {
+                  "tourInMobile": true,
+                  "pathToConfigFile": "./config/interactiveTour.json"
+                },
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - pathToConfigFile
+         - String
+         - .. line-block::
+               Indique ou ce retrouve le fichier de configuartion des tours dans l'application. Voir la documentation plus loin sur les détails de la configurations des tours.
+               :ref:`Tour interactif configuration <Sommaire>`
+         -
+         - "./config/interactiveTour.json"
+       * - tourInMobile
+         - Boolean
+         - .. line-block::
+                Indique si les tours interactifs sont aussi disponible en mode mobile.
+         - true/false
+         -
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+
 ***************
 Language
 ***************
@@ -1058,6 +1102,58 @@ Propriétés
 Liens
 
         - `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
+
+
+
+
+***************
+WelcomeWindow
+***************
+
+    .. line-block::
+        Affiche une fenêtre accueil à l'entrée dans l'application.
+        NB. : Pour une application sans authentification, simplement ne pas mettre ces configurations.
+
+Exemples
+
+        .. code:: json
+
+              "welcomeWindow": {
+                "showAgainOnNewIGOVersion": true,
+                "nbVisitToShowAgain": 30
+              }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - nbVisitToShowAgain
+         - Number
+         - .. line-block::
+               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra après le nombre de visite indiqué dans ce paramètre.
+         -
+         - 30
+       * - showAgainOnNewIGOVersion
+         - Boolean
+         - .. line-block::
+               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra si la version IGO est différente de la version lors de sa visite précédente.
+         -
+         - true
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
 
 
 ***************
