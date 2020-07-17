@@ -22,7 +22,7 @@ export class WelcomeWindowComponent {
 }
 
   get html() {
-    const _html: string = 'welcomeWindow.html';
+    const _html = 'welcomeWindow.html';
     return _html;
   }
 
