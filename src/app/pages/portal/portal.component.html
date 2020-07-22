@@ -41,6 +41,8 @@
     </app-sidenav>
 
     <igo-map-browser
+      igoWorkspaceUpdator
+      [workspaceStore]="workspaceStore"
 
       igoSearchPointerSummary
       [igoSearchPointerSummaryDelay]="500"
@@ -95,10 +97,6 @@
 
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<!-- NEED TO TRIGGER THE WORKSPACE UPDATE DIRECTIVE -->
-<igo-workspace-selector *ngIf="hasExpansionPanel" igoWorkspaceSelector [store]="workspaceStore" [map]="map">
-</igo-workspace-selector>
 
 <app-expansion-panel
   *ngIf="hasExpansionPanel && (workspaceState.workspaceEnabled$ | async)"
