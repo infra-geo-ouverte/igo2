@@ -63,6 +63,9 @@ export const environment: Environment = {
         params: {
           limit: '5'
         }
+      },
+      cadastre: {
+        enabled: false
       }
     },
     optionsApi: {
