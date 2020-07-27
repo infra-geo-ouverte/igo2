@@ -17,7 +17,9 @@ import {
   MediaService,
   Media,
   MediaOrientation,
-  ConfigService
+  ConfigService,
+  LanguageService,
+  MessageService
 } from '@igo2/core';
 import {
   // ActionbarMode,
@@ -52,7 +54,10 @@ import {
   generateWMTSIdFromSourceOptions,
   WMSDataSourceOptions,
   WMTSDataSourceOptions,
-  FEATURE
+  FEATURE,
+  ImportService,
+  handleFileImportError,
+  handleFileImportSuccess
 } from '@igo2/geo';
 
 import {
@@ -73,6 +78,7 @@ import {
   mapSlideX,
   mapSlideY
 } from './portal.animation';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-portal',
@@ -251,7 +257,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     private toolState: ToolState,
     private searchSourceService: SearchSourceService,
     private searchService: SearchService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private importService: ImportService,
+    private http: HttpClient,
+    private languageService: LanguageService,
+    private messageService: MessageService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
@@ -726,6 +736,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private readLayersQueryParams(params: Params) {
     this.readLayersQueryParamsWMS(params);
     this.readLayersQueryParamsWMTS(params);
+    this.readVectorQueryParams(params);
   }
 
   private readLayersQueryParamsWMS(params: Params) {
@@ -785,6 +796,43 @@ export class PortalComponent implements OnInit, OnDestroy {
         cnt += 1;
       });
     }
+  }
+
+  private readVectorQueryParams(params: Params) {
+    if (params['vector']) {
+      const url = params['vector'] as string;
+      const lastIndex = url.lastIndexOf('/');
+      const fileName = url.slice(lastIndex + 1, url.length);
+
+      this.http.get(`${url}`, {responseType: "blob"}).
+        subscribe((data) => {
+          const file = new File([data], fileName, {type: data.type, lastModified: Date.now()});
+          this.importService.import(file).
+            subscribe(
+              (features: Feature[]) => this.onFileImportSuccess(file, features),
+              (error: Error) => this.onFileImportError(file, error)
+            );
+        })
+    }
+  }
+
+  private onFileImportSuccess(file: File, features: Feature[]) {
+    handleFileImportSuccess(
+      file,
+      features,
+      this.map,
+      this.messageService,
+      this.languageService
+    );
+  }
+
+  private onFileImportError(file: File, error: Error) {
+    handleFileImportError(
+      file,
+      error,
+      this.messageService,
+      this.languageService
+    );
   }
 
   private extractLayersByService(layersByService: string): any[] {
