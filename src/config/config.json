@@ -6,5 +6,10 @@
   },
   "theme": "blue-theme",
   "hasExpansionPanel": false,
-  "hasSearchPointerSummary": false
+  "hasSearchPointerSummary": false,
+  "searchSources": {
+    "cadastre": {
+      "enabled": true
+    }
+  }
 }
