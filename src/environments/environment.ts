@@ -26,6 +26,7 @@ interface Environment {
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
+    interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
   };
 }
 
@@ -129,13 +130,19 @@ export const environment: Environment = {
               id: 'tq_swtq',
               url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
               regFilters: ['limtn_charg'],
-              groupImpose: { id: 'mix_swtq_gouv', title: 'mix same name layer' }
+              groupImpose: {
+                id: 'mix_swtq_gouv',
+                title: 'mix same name layer'
+              }
             },
             {
               id: 'Gououvert',
               url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
               regFilters: ['limtn_charg'],
-              groupImpose: { id: 'mix_swtq_gouv', title: 'mix same name layer' }
+              groupImpose: {
+                id: 'mix_swtq_gouv',
+                title: 'mix same name layer'
+              }
             }
           ]
         }
@@ -147,6 +154,10 @@ export const environment: Environment = {
     // },
     language: {
       prefix: './locale/'
+    },
+    interactiveTour: {
+      tourInMobile: true,
+      pathToConfigFile: './config/interactiveTour.json'
     },
     importExport: {
       url: '/apis/ogre'
