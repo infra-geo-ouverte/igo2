@@ -21,9 +21,12 @@ Ajout de couches
     Params :
         - wmsUrl=
         - layers=
+        - vector=
  
     Exemple:    
         - https://infra-geo-ouverte.github.io/igo2/?wmsUrl=https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi&layers=evenements
+        - https://donnees.ville.montreal.qc.ca/dataset/8889ef01-29ee-476a-980b-cd7ab06c98e9/resource/f7fcccaf-5a50-45d8-bf30-72a42fffa1ef/download/programmation-culturelle-estivale-2020.geojson
+        - https://www.donneesquebec.ca/recherche/fr/dataset/f647f5ed-a8f3-4a47-8ceb-977cbf090675/resource/68e0e20a-415d-44f5-af82-a90311784616/download/bornes-incendies.geojson
 
 *******************************
 Sélection du contexte
