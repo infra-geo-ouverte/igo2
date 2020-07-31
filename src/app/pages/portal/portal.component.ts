@@ -680,7 +680,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private readQueryParams() {
     this.route.queryParams.pipe(debounceTime(250)).subscribe(params => {
-      this.readLayersQueryParams(params);
       this.readToolParams(params);
       this.readSearchParams(params);
       this.readFocusFirst(params);
