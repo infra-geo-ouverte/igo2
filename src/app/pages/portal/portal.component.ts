@@ -803,7 +803,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       const lastIndex = url.lastIndexOf('/');
       const fileName = url.slice(lastIndex + 1, url.length);
 
-      this.http.get(`${url}`, {responseType: "blob"}).
+      this.http.get(`${url}`, {responseType: 'blob'}).
         subscribe((data) => {
           const file = new File([data], fileName, {type: data.type, lastModified: Date.now()});
           this.importService.import(file).
@@ -811,7 +811,7 @@ export class PortalComponent implements OnInit, OnDestroy {
               (features: Feature[]) => this.onFileImportSuccess(file, features),
               (error: Error) => this.onFileImportError(file, error)
             );
-        })
+        });
     }
   }
 
