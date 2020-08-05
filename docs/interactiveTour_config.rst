@@ -108,7 +108,7 @@ Propriétés - Objet InteractiveTourOptions
        * - scrollToElement
          - Boolean
          - .. line-block::
-               Indique si on bascule sur l'élément en surbrillance
+               Indique si on défile la page sur l'élément en surbrillance
          - true | false
          -
        * - steps
@@ -120,7 +120,7 @@ Propriétés - Objet InteractiveTourOptions
        * - title
          - String
          - .. line-block::
-               Le message indiquer dans les titres de toutes les boites aide
+               Le titre de toutes les boites aide
          - ...
          - ...
 
@@ -191,7 +191,7 @@ Exemples
             {
               "element": ".menu-button",
               "text": "Un step avec ces options",
-              "title": "<h1>titre de la boite </h1>,
+              "title": "<h1>titre de la boite </h1>",
               "position": "bottom",
               "disableInteraction": true
             },
@@ -334,7 +334,7 @@ Propriétés - Objet InteractiveTourStep
        * - scrollToElement
          - Boolean
          - .. line-block::
-               Indique si on bascule sur l'élément en surbrillance
+               Indique si on défile la page sur l'élément en surbrillance
          - true | false
          -
        * - text
@@ -346,7 +346,7 @@ Propriétés - Objet InteractiveTourStep
        * - title
          - String
          - .. line-block::
-               Le message indiquer dans les titres de toutes les boites aide
+               Le titre de toutes les boites aide
          - ...
          - ...
 
@@ -420,7 +420,7 @@ L'élément de mon tour n'est pas mis en surbrillance.
     Solution:
         - Vérifier que votre élément est bien sélectionnable via la console et document.querySelector('monElement')
         - Vérifier selon la séquence si votre élément est bien disponible lors du déclanchement du step. Il se pourrait que vous deviez ajouter
-          une action ainsi qu'un wait sur votre élément HTML si par exemple vous cliquer sur un menu et voulez sélectionner un élément à l'intérieur
+          une action ainsi qu'un wait sur votre élément HTML si par exemple vous cliquez sur un menu et voulez sélectionner un élément à l'intérieur
           dans l'étape suivante.
 
 
