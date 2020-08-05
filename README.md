@@ -13,7 +13,7 @@ IGO2 permet de tirer profit d’une multitude de données géographiques grâce 
 IGO2 a été initié par l'administration publique du Québec (Canada) et issu d’un travail collaboratif basé sur la philosophie des logiciels libres et ouverts (« open source »). Les membres du public en géomatique et du Web qui soumettent des contributions conservent leurs droits d'auteur s'ils partagent leur code source selon la [LICENCE LiLiQ-R de type LGPL](LICENCE.txt).
 ***
 ### What is IGO?
-IGO2 (for Open GIS Infrastructure - version 2.0) is a free open source Web Geospatial solution developed at first in Quebec, Canada based on [Angular - Material](https://github.com/angular/angular), [OpenLayers](https://github.com/openlayers/openlayers) and [IGO2lib](https://github.com/infra-geo-ouverte/igo2-lib). 
+IGO2 (for Open GIS Infrastructure - version 2.0) is a free open source Web Geospatial solution developed at first in Quebec, Canada based on [Angular - Material](https://github.com/angular/angular), [OpenLayers](https://github.com/openlayers/openlayers) and [IGO2lib](https://github.com/infra-geo-ouverte/igo2-lib).
 IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and Mobile and many more available at [http://igo2.readthedocs.io/fr/latest/english.html](http://igo2.readthedocs.io/fr/latest/english.html). Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
 ***
 
@@ -45,7 +45,8 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ***
 
 ## Téléchargement
- 
+
+- [Version 1.4.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.0/igo2.zip)
 - [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)
 - [Version 1.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.2.0/igo2.zip)
 - [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
@@ -54,13 +55,13 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 
 ## Installation et démarrage
 
-Requis: 
+Requis:
 
 | IGO2 version | Node version         |   Git    |
 |--------------|----------------------|----------|
 | 1.x.x        | >= 8.17.0, <= 11.15.0 |   Yes |
 | 0.x.x        | >= 6.5.0, <= 10.18.1 |  Yes |
- 
+
 
 ```bash
 $ git clone --depth 1 https://github.com/infra-geo-ouverte/igo2.git
@@ -72,7 +73,7 @@ $ npm install
 # Surveiller les fichiers et lancer une instance pour le développement
 $ npm start
 # Ouvrir un navigateur http://localhost:4201/
- 
+
 # Build dev
 $ npm run build.dev
 $ npm run serve.dev
@@ -114,6 +115,7 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ## Download
 
+- [Version 1.4.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.0/igo2.zip)
 - [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)
 - [Version 1.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.2.0/igo2.zip)
 - [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
@@ -124,7 +126,7 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ## Installation-en
 
-Require: 
+Require:
 
 | IGO2 version | Node version         |   Git    |
 |--------------|----------------------|----------|
@@ -177,5 +179,4 @@ $ npm run e2e
 
 ## Contribution
 
-Before contributing, please read the [guidelines](.github/CONTRIBUTING.md), the [LICENCE](LICENSE_ENGLISH.txt) and the [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). If you have any question and want to contribute, contact the main email of IGO: info(a)igouverte.org. 
-
+Before contributing, please read the [guidelines](.github/CONTRIBUTING.md), the [LICENCE](LICENSE_ENGLISH.txt) and the [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). If you have any question and want to contribute, contact the main email of IGO: info(a)igouverte.org.

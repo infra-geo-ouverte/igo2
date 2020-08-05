@@ -1,3 +1,23 @@
+# [1.4.0](https://github.com/infra-geo-ouverte/igo2/compare/1.3.1...1.4.0) (2020-08-04)
+
+
+### Bug Fixes
+
+* **route-params:** fix select first result in list ([51c1b61](https://github.com/infra-geo-ouverte/igo2/commit/51c1b61c23a42d38e528fca31ba1f954b43854db))
+* **toast:** fix animation bug when close toast panel ([495270f](https://github.com/infra-geo-ouverte/igo2/commit/495270fee6ea54acd7ee5d17f7607cb038d38c39))
+
+
+### Features
+
+* **browser:** add message for old browsers ([bb45f5a](https://github.com/infra-geo-ouverte/igo2/commit/bb45f5a1d27b3202c7c2323c293b3f389a3b20d5))
+* **libs:** upgrade igo2-lib to 1.4.1 ([0609c05](https://github.com/infra-geo-ouverte/igo2/commit/0609c0568958b6bfbf65afdc644ef8e6e886e616))
+* **libs:** upgrade igo2-lib to 1.4.2 ([6c22f15](https://github.com/infra-geo-ouverte/igo2/commit/6c22f15d7d2e1bc581559dc6638565a2598d9703))
+* **query-params:** add vector layer by url ([#480](https://github.com/infra-geo-ouverte/igo2/issues/480)) ([e7290bf](https://github.com/infra-geo-ouverte/igo2/commit/e7290bf30885a04310f41e2ace8308344d1aeb2f))
+* **toast-panel:** add storage service for zoom auto and extended getInfo ([#470](https://github.com/infra-geo-ouverte/igo2/issues/470)) ([7e17029](https://github.com/infra-geo-ouverte/igo2/commit/7e17029db86b977cea81dd5f751644dfe1273d29))
+* **toast-panel:** Allow the toast panel (getInfo) to use much larger… ([#466](https://github.com/infra-geo-ouverte/igo2/issues/466)) ([d5d87b1](https://github.com/infra-geo-ouverte/igo2/commit/d5d87b1d9ad2e99fc269f82b4b25e652be921e6d))
+
+
+
 ## [1.3.1](https://github.com/infra-geo-ouverte/igo2/compare/1.3.0...1.3.1) (2020-06-01)
 
 
