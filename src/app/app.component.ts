@@ -1,6 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { zip } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { userAgent } from '@igo2/utils';
 import {
@@ -75,14 +76,18 @@ export class AppComponent {
       const translate = this.languageService.translate;
       const title$ = translate.get('oldBrowser.title');
       const message$ = translate.get('oldBrowser.message');
-      zip(title$, message$, (title: string, message: string) => ({
-        title,
-        message
-      })).subscribe(rep =>
-        this.messageService.alert(rep.message, rep.title, {
-          timeOut: 15000
-        })
-      );
+      zip(title$, message$)
+        .pipe(
+          map(([title, message]) => ({
+            title,
+            message
+          }))
+        )
+        .subscribe(rep =>
+          this.messageService.alert(rep.message, rep.title, {
+            timeOut: 15000
+          })
+        );
     }
   }
 }

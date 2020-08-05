@@ -11,13 +11,14 @@
       "schematics": {
         "@schematics/angular:component": {
           "inlineTemplate": false,
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/igo2",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -44,10 +45,31 @@
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": ["src/style/partial"]
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "angular2-notifications",
+              "hammerjs",
+              "typy",
+              "jspdf",
+              "file-saver",
+              "jwt-decode",
+              "@turf/helpers",
+              "@turf/line-segment",
+              "@turf/meta",
+              "@turf/invariant",
+              "@turf/line-intersect",
+              "pbf",
+              "geojson-rbush"
+            ]
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -56,15 +78,21 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false
+              "vendorChunk": true,
+              "buildOptimizer": true
             },
             "github": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -73,13 +101,13 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false
+              "vendorChunk": true,
+              "buildOptimizer": true
             }
           }
         },
