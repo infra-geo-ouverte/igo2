@@ -9,10 +9,10 @@ Sommaire
 ===============
 
 Il est possible de configurer des tours interactifs pour présenter le fonctionnement de l'application et de ces outils.
-La librairie utilisée pour ce faire est Shepherdjs (https://shepherdjs.dev). Plusieurs tours de présentation sont possibles,
+La librairie utilisée par IGO pour ce faire est Shepherdjs (https://shepherdjs.dev). Plusieurs tours de présentation sont possibles,
 un tour global, général et des particuliers pour chacun des outils. Chaque tour à sa propre configuration. Les tours sont constitués de
-plusieurs étapes, communément apelé des 'steps'. Chaque 'step' met en surbrillance un élément de l'application et affiche
-un message de description de cet élément. Le pilote peut ainsi configurer plusieurs 'step' à chaqu'un de ces tours interactifs. 
+plusieurs étapes, communément appelé des 'steps' ou étapes. Chaque 'step' met en surbrillance un élément de l'application et affiche
+un message de description de cet élément. Le pilote peut ainsi configurer plusieurs 'step' à chacun de ces tours interactifs.
 En plus de sélectionner des éléments à mettre en surbrillance, le pilote peut aussi configurer certaines actions lors du tour.
 
 
@@ -23,16 +23,14 @@ Configurer les tours
 Les tours sont définis dans le fichier interactiveTour.json déposé dans le dossier config de l'application.
 
 Chaque tour possède des options de configuration qui s'appliqueront à ce tour et/ou s'appliqueront à chaque step de ce tour.
-Voir les propriétés disponibles de la librairie Shepherdjs(`Shepherdjs.dev  <https://shepherdjs.dev/docs/Step.html>`_) ou dans interface
-IGO (`TourOptions interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface>`_)
-À l'intérieur du fichier, chaque tour doit avoir la syntaxe suivante: global : {...} ou nomGénériqueDeOutil: {...} 
+À l'intérieur du fichier, chaque tour doit avoir la syntaxe suivante: global : {...} ou nomGénériqueDeOutil: {...}
 pour les tours sur les outils. Voir documentation Tools pour la liste de nom générique des outils (`IGO doc <https://igo2.readthedocs.io/fr/latest/properties.html#outils-tools>`_)
 Lorsqu'une certaine configuration est détectée par l'application, le bouton relié apparait automatiquement. Par exemple, lorsque vous aurez
 configuré un tour pour un outil X, le bouton de présentation apparaitra dans l'entête de l'outil.
 
 Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible dans le fichier config.json:
 "interactiveTourInMobile": true
-par defaut les tours interactifs seront présents en mode mobile.
+par défaut les tours interactifs seront présents en mode mobile.
 
 
 Exemples
@@ -67,7 +65,7 @@ Exemples
           }
         }
 
-Propriétés - InteractiveTourOptions
+Propriétés - Objet InteractiveTourOptions
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -86,116 +84,120 @@ Propriétés - InteractiveTourOptions
        * - class
          - String
          - .. line-block::
-               Définit la classe a appliquer aux boites contenant les messages d'aide
+               Définit la classe à appliquer aux boites contenant les messages d'aide
          -
          -
        * - disableInteraction
          - Boolean
          - .. line-block::
-              Permet ou non à l'utilisateur de cliquer sur les élément en surbrillance
+              Permet ou non à l'utilisateur de cliquer sur les éléments en surbrillance
          - true | false
          - true
        * - highlightClass
          - Boolean
          - .. line-block::
-                Définit la classe a appliquer aux éléments en surbrillance
-         - 
-         - 
+                Définit la classe à appliquer aux éléments en surbrillance
+         -
+         -
        * - position
          - String
          - .. line-block::
                Définit la position des boites aide
-         - 'auto', 'right', 'left', 'bottom', 'top'. NB: Si la propriété position n'est pas présente, les boites seront disposées au centre de l'écran. 
-         - 
+         - 'auto', 'right', 'left', 'bottom', 'top'. NB.: Si la propriété position n'est pas présente, les boites seront disposées au centre de l'écran.
+         -
        * - scrollToElement
          - Boolean
          - .. line-block::
                Indique si on bascule sur l'élément en surbrillance
          - true | false
-         - 
+         -
        * - steps
-         - InteractiveTourStep
+         - :ref:`InteractiveTourStep <igoInteractiveTourStep>`
          - .. line-block::
-               Une list de step
-         - 
-         - 
+               Une liste de step
+         -
+         -
        * - title
          - String
          - .. line-block::
-               Le message indiquer dans les titres de toutes les boites aide 
+               Le message indiquer dans les titres de toutes les boites aide
          - ...
          - ...
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
+Liens
+      - `TourOptions interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface>`_
 
-Configurer les steps des tours
+
+Configurer les 'steps' des tours
 --------------------------------
 
-Chaque step est constitué d'au minimum 2 éléments. 
-D'abord "element" correspond à l'élément HTML qui doit être mis en surbrillance. On peut indiquer un nom ID, une CLASS ou autre élément HTML 
-qui peut être retrouvé via les fonctions de document HTML: document.getElementsByTagName(), document.getElementsByClassName(), 
+Chaque 'step' est constitué d'au minimum 2 éléments.
+D'abord "element" correspond à l'élément HTML qui doit être mis en surbrillance. On peut indiquer un nom ID, une CLASS ou autre élément HTML
+qui peut être retrouvé via les fonctions de document HTML: document.getElementsByTagName(), document.getElementsByClassName(),
 document.querySelector(), document.getElementById().
 Pour voir vos éléments html vous pouvez utiliser l'inspecteur de votre navigateur internet (clic droit sur l'élément -> inspecter)
 
 Le second élément obligatoire est "text" ou l'on saisit le message inscrit dans de la boîte. Du HTML peut y être inséré.
 
-NB: attention à la séquence que prendra votre tour, l'élément doit être visible au moment ou le step est déclenché pour être
-mis en surbrillance sinon votre tour pourrait avoir certains problèmes et/ou vous devrez ajouter des actions pour attendre que l'élément HTML 
+NB.: attention à la séquence que prendra votre tour, l'élément doit être visible au moment où le step est déclenché pour être
+mis en surbrillance sinon votre tour pourrait avoir certains problèmes et/ou vous devrez ajouter des actions pour attendre que l'élément HTML
 soit visible.
 
 
 
-Steps, propriétés en options
+Steps, autres propriétés
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-En plus des 2 propriétées essentielles à chaque step, il est possible d'en ajouter d'autre comme "title" qui indique le text placé dans la 
-barre de titre. Il y a aussi la position dans le cas où l'on voudrait que cette boite particulière soit disposée d'une autre façon. Exemple on ajoute "position": "right" dans le step, pour que cette boite de 
-message particulière ce place à droite de l'élément en surbrillance. Si aucune position n'est définit, la boite s'affichera au centre de l'écran.
-"disableInteraction": true, pour ne pas permettre les clics par l'utilisateur dans ce step.
-Voir les options possibles (`InteractiveTourStep interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface>`_)
- 
+En plus des 2 propriétés essentielles à chaque step, il est possible d'en ajouter d'autre comme "title" ou "position" pour mettre un titre
+à la boite d'aide et indiquer la position de la boite. Il est aussi possible de ne pas permettre les clics par l'utilisateur dans ce step à
+l'aide de "disableInteraction": true.
 
 
 
-Steps, actions et déclanchements
-^^^^^^^^^^^^^^^^^^^^^
-Il est possible de réaliser des actions lors d'un step. Pour ce faire simplement ajouter le moment ou doit être déclanché l'action 
+
+Steps, actions et déclenchements
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Il est aussi possible de réaliser des actions lors d'un step. Pour ce faire simplement ajouter le moment ou doit être déclenché l'action
 dans le step et indiquer l'action voulu.
 
 
-Possibilité de déclanchement:
-  * beforeShow: Déclanchement avant l'apparition de la boite. Attends avant d'ouvrir l'étape (en combinaison de waitFor qui prend du css)
-  * beforeChange: Déclanchement avant le changement de boite. Attends avant de passer à l'étape suivante (en combinaison de waitFor qui prend du css)
-  * onShow: Déclanchement lors de l'apparition de la boite
-  * onHide: Déclanchement lorsque la boite disparait
+Possibilité de déclenchement:
+  * beforeShow: Déclenchement avant l'apparition de la boite. Attends avant d'ouvrir l'étape (en combinaison de waitFor qui prend du css)
+  * beforeChange: Déclenchement avant le changement de boite. Attends avant de passer à l'étape suivante (en combinaison de waitFor qui prend du css)
+  * onShow: Déclenchement lors de l'apparition de la boite
+  * onHide: Déclenchement lorsque la boite disparait
 
 
 Actions possibles:
-
-    * click : Cliquer sur l'élément
+  * click : Cliquer sur l'élément
 
 Options des actions:
-  * waitFor: Indiquer l'élement html a attendre avant de fare l'action
-  * maxWait: Temps a attendre avant l'abandon
-  * condition: Condition a respecter pour effectuer l'action
+  * waitFor: Indiquer l'élement html à attendre avant de fare l'action
+  * maxWait: Temps à attendre avant l'abandon
+  * condition: Condition à respecter pour effectuer l'action
   * element: Élement à cliquer sur
-   
+
 
 Exemples
 
     .. code:: json
 
       {
+        "global": {
           "steps": [
             {
               "element": ".menu-button",
-              "text": "menu menu"
+              "text": "Un step avec ces options",
+              "title": "<h1>titre de la boite </h1>,
+              "position": "bottom",
+              "disableInteraction": true
             },
             {
               "element": ".menu-button",
-              "text": "Effectue un clic sur le bouton menu à l'arrivé de cette boite d'aide",
+              "text": "Effectue un clic sur le bouton menu à l'arrivée de cette boite d'aide",
               "onShow": {
                 "action": "click"
               }
@@ -210,11 +212,11 @@ Exemples
             },
             {
               "element": ".menu-button",
-              "text": "test menu menu"
+              "text": "Voici le menu "
             },
             {
               "element": ".menu-button",
-              "text": "Effectue un clic avant l'arrivé de la boite seulement si le menu est fermé",
+              "text": "Effectue un clic à l'arrivée de la boite seulement si le menu est fermé",
               "onShow": {
                 "action": "click",
                 "condition": "app-sidenav:not([ng-reflect-opened=true])"
@@ -222,7 +224,7 @@ Exemples
             },
             {
               "element": ".menu-button",
-              "text": "test menu menu"
+              "text": "Voici le menu"
             },
             {
               "element": "igo-actionbar-item:nth-child(2) mat-list-item",
@@ -233,7 +235,7 @@ Exemples
             },
             {
               "element": "igo-actionbar-item:nth-child(2) mat-list-item",
-              "text": "clic sur l'outil context mais avant que la boite apparaissent clic sur le conteneur d'outil et avant l'apparaission de la boite, clic sur le bouton home",
+              "text": "clic sur l'outil context mais avant que la boite apparaisse clic sur le conteneur d'outil et avant l'apparition de la boite, clic sur le bouton home",
               "beforeShow": {
                 "element": "#homeButton",
                 "action": "click"
@@ -252,11 +254,14 @@ Exemples
               }
             }
           ]
+        }
       }
 
 
 
-Propriétés - InteractiveTourStep
+.. _igoInteractiveTourStep:
+
+Propriétés - Objet InteractiveTourStep
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -275,19 +280,19 @@ Propriétés - InteractiveTourStep
        * - beforeChange
          - InteractiveTourAction
          - .. line-block::
-               Déclanchement avant le changement de boite. Attends avant de passer à l'étape suivante (en combinaison de waitFor qui prend du css)
+               Déclenchement avant le changement de boite. Attends avant de passer à l'étape suivante (en combinaison de waitFor qui prend du css)
          -
          -
        * - beforeShow
          - InteractiveTourAction
          - .. line-block::
-               Déclanchement avant l'apparition de la boite. Attends avant d'ouvrir l'étape (en combinaison de waitFor qui prend du css)
+               Déclenchement avant l'apparition de la boite. Attends avant d'ouvrir l'étape (en combinaison de waitFor qui prend du css)
          -
          -
        * - class
          - String
          - .. line-block::
-                Définit la classe a appliquer aux boites contenant les messages d'aide
+                Définit la classe à appliquer aux boites contenant les messages d'aide
          -
          -
        * - disableInteraction
@@ -299,62 +304,64 @@ Propriétés - InteractiveTourStep
        * - element
          - string
          - .. line-block::
-                Element HTML à mettre en surbrillance. NB.: doit être visible lors du décanchement
-         - 
-         - 
+                Elément HTML à mettre en surbrillance. NB.: doit être visible lors du déclanchement
+         -
+         -
        * - highlightClass
          - Boolean
          - .. line-block::
-                Définit la classe a appliquer aux éléments en surbrillance
-         - 
-         - 
+                Définit la classe à appliquer aux éléments en surbrillance
+         -
+         -
        * - onHide
          - InteractiveTourAction
          - .. line-block::
-                Déclanchement lorsque la boite disparait
-         - 
-         - 
+                Déclenchement lorsque la boite disparait
+         -
+         -
        * - onShow
          - InteractiveTourAction
          - .. line-block::
-                Déclanchement lors de l'apparition de la boite
-         - 
-         - 
+                Déclenchement lors de l'apparition de la boite
+         -
+         -
        * - position
          - String
          - .. line-block::
                Définit la position des boites aide
-         - 'auto', 'right', 'left', 'bottom', 'top'. NB: Si la propriété position n'est pas présente, les boites seront disposées au centre de l'écran. 
-         - 
+         - 'auto', 'right', 'left', 'bottom', 'top'. NB.: Si la propriété position n'est pas présente, les boites seront disposées au centre de l'écran.
+         -
        * - scrollToElement
          - Boolean
          - .. line-block::
                Indique si on bascule sur l'élément en surbrillance
          - true | false
-         - 
+         -
        * - text
          - String
          - .. line-block::
                Le texte inscrit dans la boite d'aide. On peut y mettre du html. NB.: voir traduction
-         - 
-         - 
+         -
+         -
        * - title
          - String
          - .. line-block::
-               Le message indiquer dans les titres de toutes les boites aide 
+               Le message indiquer dans les titres de toutes les boites aide
          - ...
          - ...
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
+Liens
+      - `InteractiveTourStep interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface>`_
 
 
-* Traduction
+
+Traduction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-Il est possible de mettre une traduction aux différents message, pour ce faire vous devez utiliser une clé de traduction à l'intérieur de votre tour 
-et inscrire le message a afficher dans les fichiers en.json et fr.json.
-Le message s'affichera en fonction de la langue de votre navigateur internet.
+Il est possible de mettre une traduction aux différents messages, pour ce faire vous devez utiliser une clé de traduction que vous définissez
+ et inscrire le message fichier dans les fichiers en.json et fr.json. Le message s'affichera en fonction de la langue de votre navigateur internet.
 
 
 
@@ -365,13 +372,15 @@ interactifTour.json
   .. code:: json
 
           {
-            "steps": [
+            "global": {
+                "steps": [
                       {
                       "element": ".igo-search-bar-container",
                       "title": "interactiveTour.global.maCleDeTraduction_titre",
                       "text": "interactiveTour.global.maCleDeTraduction"
                     },
-            ]
+                ]
+            }
           }
 
 en.json
@@ -392,7 +401,7 @@ fr.json
     {
         "interactiveTour": {
           "global": {
-            "maCleDeTraduction_titre": "Super tour interatif",
+            "maCleDeTraduction_titre": "Super tour intératif",
             "maCleDeTraduction": "Voici la barre de recherche "
     }
 
@@ -401,16 +410,22 @@ Dépannage
 -----------
 
 Je ne vois pas le bouton de mon tour apparaitre.
-** Solution:
-    Vérifier que le fichier interactiveTour_configOptions.json est bien présent dans le dosisier locale et que le nom est exactement identique.
-    Vérifier que le nom de l'outil est bien exact et que la syntaxe du tour est bien présenté de cette facon: introOptions_nomGénériqueDeOutil:{...}
-    Si vous êtes en mobile vérifier la configuration dans le fichier de config: "introInteractiveTourInMobile": true
+    Solution:
+        - Vérifier que le fichier interactiveTour.json est bien présent dans le dossier config de votre application.
+        - Vérifier que le nom de l'outil est bien exact
+        - Vérifier que la syntaxe du tour est bien présentée de cette façon: global: {...} ou nomGénériqueDeOutil:{...}
+        - Si vous êtes en mode mobile vérifier la configuration dans le fichier config.json: "introInteractiveTourInMobile": true
+
+L'élément de mon tour n'est pas mis en surbrillance.
+    Solution:
+        - Vérifier que votre élément est bien sélectionnable via la console et document.querySelector('monElement')
+        - Vérifier selon la séquence si votre élément est bien disponible lors du déclanchement du step. Il se pourrait que vous deviez ajouter
+          une action ainsi qu'un wait sur votre élément HTML si par exemple vous cliquer sur un menu et voulez sélectionner un élément à l'intérieur
+          dans l'étape suivante.
 
 
-Propriétés
- ** Voir librairie IntroJs **
 
 Liens
- ** a faire **
-        - `Exemple de configuration <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/src/locale/interactiveTour_configOptions.json>`_
-        - `igo2-lib/packages/common/src/lib/interactive-tour <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour>`_
+
+        - `Exemple de configuration <https://github.com/infra-geo-ouverte/igo2/tree/master/src/config/configOptions.json>`_
+        - `component igo2-lib/packages/common/src/lib/interactive-tour <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour>`_
