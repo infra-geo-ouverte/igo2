@@ -75,6 +75,7 @@
         "element": "igo-list",
         "title": "interactiveTour.global.layers-title",
         "text": "interactiveTour.global.layers",
+        "noBackButton": true,
         "beforeShow": {
           "action": "click",
           "element": "igo-actionbar-item:nth-child(3) mat-list-item"

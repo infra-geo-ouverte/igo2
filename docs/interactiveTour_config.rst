@@ -50,7 +50,8 @@ Exemples
               },
               {
                 "element": ".igo-search-bar-container",
-                "text": "interactiveTour.global.search-bar"
+                "text": "interactiveTour.global.search-bar",
+                "noBackButton": true,
               },
               {
                 "element": "igo-toolbox",
@@ -153,7 +154,7 @@ Steps, autres propriétés
 
 En plus des 2 propriétés essentielles à chaque step, il est possible d'en ajouter d'autre comme "title" ou "position" pour mettre un titre
 à la boite d'aide et indiquer la position de la boite. Il est aussi possible de ne pas permettre les clics par l'utilisateur dans ce step à
-l'aide de "disableInteraction": true.
+l'aide de "disableInteraction": true ou de ne pas mettre le bouton précédent dans un step particulier à l'aide de la propriété "noBackButton".
 
 
 
@@ -313,6 +314,12 @@ Propriétés - Objet InteractiveTourStep
                 Définit la classe à appliquer aux éléments en surbrillance
          -
          -
+       * - noBackButton
+         - Boolean
+         - .. line-block::
+                Définit si le step aura un bouton précédent
+         -
+         -
        * - onHide
          - InteractiveTourAction
          - .. line-block::
@@ -361,13 +368,13 @@ Liens
 Traduction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 Il est possible de mettre une traduction aux différents messages, pour ce faire vous devez utiliser une clé de traduction que vous définissez
- et inscrire le message fichier dans les fichiers en.json et fr.json. Le message s'affichera en fonction de la langue de votre navigateur internet.
+ et inscrire le message dans les fichiers en.json et fr.json. Le message s'affichera en fonction de la langue de votre navigateur internet.
 
 
 
 Exemple
 
-interactifTour.json
+interactiveTour.json
 
   .. code:: json
 
