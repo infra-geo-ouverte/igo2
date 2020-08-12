@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  MatTooltipModule,
-  MatIconModule,
-  MatButtonModule,
-  MatSidenavModule
-} from '@angular/material';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { IgoCoreModule } from '@igo2/core';
 import {
@@ -17,7 +17,8 @@ import {
   IgoFlexibleModule,
   IgoContextMenuModule,
   IgoToolModule,
-  IgoEntityTableModule
+  IgoEntityTableModule,
+  IgoInteractiveTourModule
 } from '@igo2/common';
 
 import {
@@ -42,6 +43,8 @@ import { AppSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
 import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toast-panel-for-expansion.module';
+import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
+import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
 
 @NgModule({
   imports: [
@@ -50,6 +53,7 @@ import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toa
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
+    MatDialogModule,
     IgoCoreModule,
     IgoFeatureModule,
     IgoImportExportModule,
@@ -73,9 +77,12 @@ import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toa
     MapOverlayModule,
     IgoContextManagerModule,
     IgoContextMapButtonModule,
-    IgoEntityTableModule
+    IgoEntityTableModule,
+    IgoInteractiveTourModule,
+    IgoWelcomeWindowModule
   ],
   exports: [PortalComponent],
-  declarations: [PortalComponent]
+  declarations: [PortalComponent],
+  entryComponents: [WelcomeWindowComponent]
 })
 export class PortalModule {}

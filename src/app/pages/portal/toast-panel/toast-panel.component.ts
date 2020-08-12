@@ -489,7 +489,7 @@ export class ToastPanelComponent implements OnInit {
   }
 
   onToggleClick(e: MouseEvent) {
-    if (e.srcElement.className !== 'igo-panel-title') {
+    if ((e.target as any).className !== 'igo-panel-title') {
       return;
     }
     this.opened = !this.opened;

@@ -5,6 +5,16 @@
     }
   },
   "theme": "blue-theme",
-  "hasExpansionPanel": true,
-  "hasSearchPointerSummary": false
+  "hasExpansionPanel": false,
+  "hasSearchPointerSummary": false,
+  "searchSources": {
+    "cadastre": {
+      "enabled": true
+    }
+  },
+  "title": "IGO Démo",
+  "welcomeWindow": {
+    "showAgainOnNewIGOVersion": true,
+    "nbVisitToShowAgain": 30
+  }
 }
