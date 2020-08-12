@@ -245,7 +245,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private workspaceState: WorkspaceState,
+    public workspaceState: WorkspaceState,
     public authService: AuthService,
     public mediaService: MediaService,
     public layerService: LayerService,

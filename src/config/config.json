@@ -5,7 +5,7 @@
     }
   },
   "theme": "blue-theme",
-  "hasExpansionPanel": false,
+  "hasExpansionPanel": true,
   "hasSearchPointerSummary": false,
   "searchSources": {
     "cadastre": {

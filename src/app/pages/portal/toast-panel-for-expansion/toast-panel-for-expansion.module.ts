@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  MatIconModule,
-  MatButtonModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { IgoPanelModule, IgoStopPropagationModule } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
