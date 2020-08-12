@@ -4,6 +4,7 @@
     "close": "Close Menu",
     "open": "Open Menu"
   },
+
   "toastPanel": {
     "title": "Entities found on the map",
     "listButton": "Return to the list of entities",
@@ -21,13 +22,63 @@
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
     "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
   },
-  "IGO": "IGO",
+  "IGO": "IGO Demo",
   "noEntityStore": "No tables available for this dataset",
   "coordinates": "Show coordinates,",
   "googleMap": "Show in Google maps",
   "googleStreetView": "Show in Google Street view",
+  "welcomeWindow": {
+    "html": "<h1>Welcome to IGO the Québec goverment mapping application </h1>",
+    "title": "",
+    "closeButton": "Close",
+    "notShowCheck": "do not show again"
+  },
   "oldBrowser": {
     "title": "Too old browser",
     "message": "IGO2 does not fully support your browser. Please update it or use a different one."
+  },
+  "interactiveTour": {
+    "global": {
+      "title": "Interactive tour",
+      "menu-button-title": "MENU",
+      "menu-button": "Click on the menu button to open the general menu",
+      "search-bar-title": "SEARCH BAR",
+      "search-bar": "Find an address, a GPS point, a layer, etc.",
+      "search-settings-title": "SEARCH SETTINGS",
+      "search-settings": "Allows you to configure: the type of result, the number of desired results, etc.",
+      "toolbox-title": "TOOLBOX",
+      "toolbox": "On selection of the tool, the application switches inside and displays its content",
+      "context-title": "CONTEXTS",
+      "context": "A context is a predefined map made up of several layers grouped together according to a theme",
+      "context-list": "Inside CONTEXTS, the tool displays the list of predefined thematic maps",
+      "context-item": "The SIMPLE context which represents a theme and contains certain layers",
+      "context-filter": "The 'FILTRE TEMPOREL' context contains another grouping",
+      "context-filter-click": "Let's select the 'FILTRE TEMPOREL' context",
+      "layers-title": "MAP",
+      "layers": "The application switches inside and displays the layers that make up THE MAP of this context",
+      "layers-visible": "Note that some layers are active and visible in the map. Non-active / visible layers are indicated by the crossed out black eye",
+      "layer-embacle": "Layer of ice jams during flooding",
+      "legend": "By clicking on the title the legend opens",
+      "layer-eye": "Un clique sur oeil, active ou désactive l'affichage de la couche",
+      "layer-tool-btn": "A click on eye, activates or deactivates the display of the layer",
+      "layer-tool": "Tools panel available for this layer",
+      "home-button": "Back to main menu",
+      "menu-button-close": "Click to close menu",
+      "geolocate-title": "GEOLOCATE",
+      "geolocate": "To zoom the map to your location",
+      "baselayers-title": "BASELAYERS",
+      "baselayers": "To change the basemap",
+      "end-title": "END",
+      "end": "End of interactive tour"
+    },
+    "timeFilter": {
+      "title": "TIME FILTER",
+      "start": "The temporal filter allows to delimit a period of time which will filter the layer and display only the results which correspond to the defined period of time",
+      "end": "Applies only to certain layers where the filter can be applied and which are present in the map"
+    },
+    "measurer": {
+      "title": "MEASURER",
+      "start": "Guided tour of the measuring tool"
+    }
   }
 }

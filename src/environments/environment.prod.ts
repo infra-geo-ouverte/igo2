@@ -19,6 +19,7 @@ interface Environment {
     optionsApi?: OptionsApiOptions;
     projections?: Projection[];
     spatialFilter?: SpatialFilterOptions;
+    interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
   };
 }
 
@@ -33,6 +34,10 @@ export const environment: Environment = {
     },
     language: {
       prefix: './locale/'
+    },
+    interactiveTour: {
+      tourInMobile: true,
+      pathToConfigFile: './config/interactiveTour.json'
     },
     searchSources: {
       nominatim: {

@@ -83,7 +83,7 @@ export class AppComponent {
             message
           }))
         )
-        .subscribe(rep =>
+        .subscribe((rep) =>
           this.messageService.alert(rep.message, rep.title, {
             timeOut: 15000
           })

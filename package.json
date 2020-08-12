@@ -58,6 +58,7 @@
     "@igo2/utils": "^1.4.2",
     "@mat-datetimepicker/core": "^4.1.0",
     "@turf/point-on-feature": "^5.1.5",
+    "angular-shepherd": "^0.7.0",
     "bowser": "^2.9.0",
     "classlist.js": "^1.1.20150312",
     "core-js": "^3.6.5",
