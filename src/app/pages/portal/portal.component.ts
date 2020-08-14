@@ -128,7 +128,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   private activeWidget$$: Subscription;
   public showToastPanelForExpansionToggle = false;
   public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(undefined);
-  private toolToActivate$$: Subscription;
   private _toastPanelOpened = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
@@ -179,11 +178,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get actionbarMode(): ActionbarMode {
-    const media = this.mediaService.media$.value;
-    const orientation = this.mediaService.orientation$.value;
-    if (media === Media.Desktop && orientation === MediaOrientation.Landscape) {
-      return ActionbarMode.Dock;
-    }
     return ActionbarMode.Overlay;
   }
 
@@ -344,45 +338,33 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
   }
 
-  selectedWorkspace(workspace: Workspace) {
-    // this.se lectedkWorkspace$.next(workspace);
-    if (this.toolToActivate$$) {
-      this.toolToActivate$$.unsubscribe();
+  toolToActivateFromWorkspace(toolToActivate: { tool: string; options: {[key: string]: any} }) {
+    if (!toolToActivate) { return; }
+    if (toolToActivate.tool === 'importExport') {
+      let exportOptions: ExportOptions = this.importExportState.exportOptions$.value;
+      if (!exportOptions) {
+        exportOptions = {
+          layer: toolToActivate.options.layer,
+          featureInMapExtent: toolToActivate.options.featureInMapExtent
+        };
+      } else {
+        exportOptions.layer = toolToActivate.options.layer;
+        exportOptions.featureInMapExtent = toolToActivate.options.featureInMapExtent;
+      }
+      this.importExportState.setsExportOptions(exportOptions);
+      this.importExportState.setMode('export');
     }
-    this.toolToActivate$$ = workspace.toolToActivate$.subscribe(r => {
-      if (!r) { return; }
-      if (r.options && r.toolbox === 'importExport') {
-        let exportOptions: ExportOptions = this.importExportState.exportOptions$.value;
-        if (!exportOptions) {
-          exportOptions = {
-            layer: r.options.layer,
-            featureInMapExtent: r.options.featureInMapExtent,
-            format: undefined,
-            name: undefined
-          };
-        } else {
-          exportOptions.layer = r.options.layer;
-          exportOptions.featureInMapExtent = r.options.featureInMapExtent;
-        }
-        this.importExportState.setsExportOptions(exportOptions);
-        this.importExportState.setMode('export');
-      }
 
-
-      if (this.toolbox.getTool(r.toolbox)) {
-        this.toolbox.activateTool(r.toolbox);
-        if (!this.sidenavOpened) {
-          this.openSidenav();
-        }
+    if (this.toolbox.getTool(toolToActivate.tool)) {
+      this.toolbox.activateTool(toolToActivate.tool);
+      if (!this.sidenavOpened) {
+        this.openSidenav();
       }
-    });
+    }
   }
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
-    if (this.toolToActivate$$) {
-      this.toolToActivate$$.unsubscribe();
-    }
     this.activeWidget$$.unsubscribe();
   }
 
