@@ -43,7 +43,7 @@
     <igo-map-browser
       igoWorkspaceUpdator
       [workspaceStore]="workspaceStore"
-
+      (toolToActivate)="toolToActivateFromWorkspace($event)"
       igoSearchPointerSummary
       [igoSearchPointerSummaryDelay]="500"
       [igoSearchPointerSummaryEnabled]=igoSearchPointerSummaryEnabled
@@ -108,9 +108,9 @@
   <ng-container expansionPanelHeader>
     <igo-workspace-selector 
       igoWorkspaceSelector
+      (toolToActivate)="toolToActivateFromWorkspace($event)"
       [store]="workspaceStore"
-      [map]="map"
-      (selectedChange)="selectedWorkspace($event.value)">
+      [map]="map">
     </igo-workspace-selector>
 
     <ng-container *ngIf="selectedWorkspace$ | async as workspace">
