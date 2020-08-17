@@ -169,9 +169,9 @@ Propriétés
          -
          - uuid
        * - legendOptions
-         - legendOptions
+         - `legendOptions`_
          - .. line-block::
-               En construction
+               Permet de définir des options sur la légende
          -
          -
        * - minResolution
@@ -302,6 +302,60 @@ Propriétés
 Liens
 
     - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
+
+
+
+
+Propriétés de legendOptions - Objet
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - collapsed
+         - Boolean
+         - .. line-block::
+               Définir si la légende est ouverte
+         - .. line-block::
+               true | false
+
+         -
+       * - display
+         - Boolean
+         - .. line-block::
+               Indique si on affiche la légende
+         - true | false
+         - true
+       * - html
+         - String
+         - Inscription html pour la légende
+         -
+         -
+       * - stylesAvailable
+         - ItemStyleOptions[]
+         - Permet de modifier les noms des styles provenant du service web
+         - Ex:  "stylesAvailable": [
+                  { "name": "raster", "title": "pixel" },
+                  { "name": "Contour", "title": "aucune couleur" }
+                ]
+         -
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
+
 
 
 
@@ -446,23 +500,23 @@ Propriétés
        * - excludeAttribute
          - Array.<String>
          - .. line-block::
-               Liste des attributs exclus du 
+               Liste des attributs exclus du
                getInfo lorsque l'application
                est en ligne.
-         - 
-         - 
+         -
+         -
        * - excludeAttributeOffline
          - Array.<String>
          - .. line-block::
-               Liste des attributs exclus du 
+               Liste des attributs exclus du
                getInfo lorsque l'application
                est hors-ligne.
-         - 
+         -
          -
        * - distance
          - Number
          - Distance en pixel entre les entités
-         - 
+         -
          - 20
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -587,19 +641,19 @@ Propriétés
        * - excludeAttribute
          - Array.<String>
          - .. line-block::
-               Liste des attributs exclus du 
+               Liste des attributs exclus du
                getInfo lorsque l'application
                est en ligne.
-         - 
-         - 
+         -
+         -
        * - excludeAttributeOffline
          - Array.<String>
          - .. line-block::
-               Liste des attributs exclus du 
+               Liste des attributs exclus du
                getInfo lorsque l'application
                est hors-ligne.
-         - 
-         - 
+         -
+         -
        * - featureClass
          - String
          - .. line-block::
@@ -610,10 +664,10 @@ Propriétés
                Cette option diminue les performances
                de rendu des tuiles.
 
-               Ne pas utiliser cette option pour 
+               Ne pas utiliser cette option pour
                optimiser le rendu des tuiles.
          - feature
-         - 
+         -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1265,17 +1319,17 @@ Propriétés de l'objet sourceFields
        * - **name***
          - String
          - Nom de l'attribut
-         - 
+         -
          -
        * - alias
          - String
          - Alias de l'attribut.
-         - 
+         -
          - Le nom de l'attribut est utilisé si nul.
        * - values
          - Array (liste)
-         - Liste de valeurs permises 
-         - 
+         - Liste de valeurs permises
+         -
          - .. line-block::
                Si vide, pour les WFS, sera récupéré automatiquement.
        * - excludeFromOgcFilters
@@ -2019,8 +2073,8 @@ Propriétés
        * - options
          - Object
          - Voir les options ici-bas.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -2029,7 +2083,7 @@ Options
      .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                options
          - .. line-block::
@@ -2046,7 +2100,7 @@ Options
                Configure le html qui sera
                présenté dans l'outil.
          - .. line-block::
-               "<p>Contenu html</p>" 
+               "<p>Contenu html</p>"
                ou sous forme de liste (pour les changement de lignes)
                ["<p>Contenu html de la première ligne</p>","<p>Contenu de la seconde ligne</p>"]
          - igo.integration.about.html
@@ -2180,8 +2234,8 @@ Propriétés
        * - options
          - Object
          - Voir les options ici-bas.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -2190,7 +2244,7 @@ Options
      .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                options
          - .. line-block::
@@ -2204,7 +2258,7 @@ Options
        * - toggleCollapsedGroup
          - Boolean
          - .. line-block::
-               Force l'usager à entrer dans le groupe et 
+               Force l'usager à entrer dans le groupe et
                d'y visualiser  les couches disponible
                avant de pouvoir ajouter le groupe
                à la carte.
@@ -2283,8 +2337,8 @@ Propriétés
        * - options
          - Object
          - Voir les options ici-bas.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -2293,7 +2347,7 @@ Options
      .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                options
          - .. line-block::
@@ -2438,7 +2492,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -2456,17 +2510,17 @@ Propriétés
          - filter
        * - **name***
          - String
-         - 
+         -
          - ogcFilter
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.ogcFilter
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
@@ -2530,7 +2584,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -2548,17 +2602,17 @@ Propriétés
          - history
        * - **name***
          - String
-         - 
+         -
          - timeFilter
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.timeFilter
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
@@ -2603,7 +2657,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -2621,17 +2675,17 @@ Propriétés
          - file-move
        * - **name***
          - String
-         - 
+         -
          - importExport
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.importExport
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
@@ -2655,10 +2709,10 @@ mapTool
                             - accès au téléchargements des données (si disponible)
                             - filter les données (temporellement et par attributs si disponible)
                             - supression de couches
-            - Gestionnaire de contexte :  Outil permettant de lister/gérer/changer de contexte à l'intérieur d'une même application. 
-   
+            - Gestionnaire de contexte :  Outil permettant de lister/gérer/changer de contexte à l'intérieur d'une même application.
+
 .. note::
-   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils 
+   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils
        - `activeOgcFilter`_
        - `activeTimeFilter`_
 
@@ -2690,7 +2744,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -2708,23 +2762,23 @@ Propriétés
          - map
        * - **name***
          - String
-         - 
+         -
          - map
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.map'
        * - options
          - Object
          - Voir les options ici-bas.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -2733,7 +2787,7 @@ Options
      .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                options
          - .. line-block::
@@ -2797,7 +2851,7 @@ Options
          - Object
          - .. line-block::
                Divers contrôles effectués à la liste de couches affichées dans l'interface.
-               
+
                 "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
                 "showToolbar" = Outil permettant de contrôler la liste des couche
                                 "always", "never" ou "default" = visible si 5 couches et +
@@ -2834,12 +2888,12 @@ mapLegend
 ===============
 
     .. line-block::
-        Outil permettant de présenter le contenu de la carte sous forme de légende. 
+        Outil permettant de présenter le contenu de la carte sous forme de légende.
         Seul les légendes sont contenues.
 
-        Il est possible d'ajouter une option permettant de montrer toutes les légendes de la carte 
+        Il est possible d'ajouter une option permettant de montrer toutes les légendes de la carte
         même pour les couches non visible OU hors échelle d'affichage.
-    
+
 
 Exemples
 
@@ -2863,7 +2917,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -2881,23 +2935,23 @@ Propriétés
          - format-list-bulleted-type'
        * - **name***
          - String
-         - 
+         -
          - mapLegend
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.legend
        * - options
          - Object
          - Voir les options ici-bas.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -2906,7 +2960,7 @@ Options
      .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                options
          - .. line-block::
@@ -2920,7 +2974,7 @@ Options
        * - allowShowAllLegends
          - Boolean
          - .. line-block::
-               Affiche un bouton permettant de montrer toutes les légendes de la carte, 
+               Affiche un bouton permettant de montrer toutes les légendes de la carte,
                même pour les couches non visible OU hors échelle d'affichage.
          - .. line-block::
                true / false
@@ -2938,7 +2992,7 @@ Options
        * - layerAdditionAllowed
          - Boolean
          - .. line-block::
-               Identifie si l'ajout de couches à la carte sont permises. 
+               Identifie si l'ajout de couches à la carte sont permises.
                Influence les messages d'aide à l'usager
          - .. line-block::
                true / false
@@ -2984,9 +3038,9 @@ mapDetails
                             - accès au téléchargements des données (si disponible)
                             - filter les données (temporellement et par attributs si disponible)
                             - supression de couches
-   
+
 .. note::
-   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils 
+   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils
        - `activeOgcFilter`_
        - `activeTimeFilter`_
 
@@ -3019,7 +3073,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -3037,23 +3091,23 @@ Propriétés
          - map
        * - **name***
          - String
-         - 
+         -
          - map
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.map'
        * - options
          - Object
          - Voir les options ici-bas.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -3062,7 +3116,7 @@ Options
      .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                options
          - .. line-block::
@@ -3084,7 +3138,7 @@ Options
        * - layerAdditionAllowed
          - Boolean
          - .. line-block::
-               Identifie si l'ajout de couches à la carte sont permises. 
+               Identifie si l'ajout de couches à la carte sont permises.
                Influence les messages d'aide à l'usager
          - .. line-block::
                true / false
@@ -3135,7 +3189,7 @@ Options
          - Object
          - .. line-block::
                Divers contrôles effectués à la liste de couches affichées dans l'interface.
-               
+
                 "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
                 "showToolbar" = Outil permettant de contrôler la liste des couche
                                 "always", "never" ou "default" = visible si 5 couches et +
@@ -3180,12 +3234,12 @@ mapTools
                             - accès au téléchargements des données (si disponible)
                             - filter les données (temporellement et par attributs si disponible)
                             - supression de couches
-            - Légende : Légendes de la carte 
-   
+            - Légende : Légendes de la carte
+
 .. note::
-   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils 
+   Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils
        - activeOgcFilter
-       - activeTimeFilter  
+       - activeTimeFilter
 
 Exemples
 
@@ -3219,7 +3273,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -3237,23 +3291,23 @@ Propriétés
          - map
        * - **name***
          - String
-         - 
+         -
          - mapTools
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.map'
        * - options
          - Object
          - Voir les options ici-bas.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -3262,7 +3316,7 @@ Options
      .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                options
          - .. line-block::
@@ -3276,7 +3330,7 @@ Options
        * - allowShowAllLegends
          - Boolean
          - .. line-block::
-               Affiche un bouton permettant de montrer toutes les légendes de la carte, 
+               Affiche un bouton permettant de montrer toutes les légendes de la carte,
                même pour les couches non visible OU hors échelle d'affichage.
          - .. line-block::
                true / false
@@ -3302,7 +3356,7 @@ Options
        * - layerAdditionAllowed
          - Boolean
          - .. line-block::
-               Identifie si l'ajout de couches à la carte sont permises. 
+               Identifie si l'ajout de couches à la carte sont permises.
                Influence les messages d'aide à l'usager
          - .. line-block::
                true / false
@@ -3360,7 +3414,7 @@ Options
          - Object
          - .. line-block::
                Divers contrôles effectués à la liste de couches affichées dans l'interface.
-               
+
                 "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
                 "showToolbar" = Outil permettant de contrôler la liste des couche
                                 "always", "never" ou "default" = visible si 5 couches et +
@@ -3397,7 +3451,7 @@ measurer
 ===============
 
     .. line-block::
-        Outil permettant d'effectuer des mesures sur la carte. 
+        Outil permettant d'effectuer des mesures sur la carte.
 
 
 Exemples
@@ -3413,7 +3467,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -3431,17 +3485,17 @@ Propriétés
          - ruler
        * - **name***
          - String
-         - 
+         -
          - measurer
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.measurer
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
@@ -3457,7 +3511,7 @@ print
 ===============
 
     .. line-block::
-        Outil permettant d'effectuer des impressions de la carte. 
+        Outil permettant d'effectuer des impressions de la carte.
 
         Actuellemnt exclut de l'impression:
             - itinéraires
@@ -3476,7 +3530,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -3494,17 +3548,17 @@ Propriétés
          - printer
        * - **name***
          - String
-         - 
+         -
          - print
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.print
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
@@ -3538,7 +3592,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -3556,23 +3610,23 @@ Propriétés
          - magnify
        * - **name***
          - String
-         - 
+         -
          - print
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.searchResults
        * - options
          - Object
          - Voir les options ici-bas.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -3581,7 +3635,7 @@ Options
      .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                options
          - .. line-block::
@@ -3633,7 +3687,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -3651,23 +3705,23 @@ Propriétés
          - selection-marker
        * - **name***
          - String
-         - 
+         -
          - spatialFilter
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.spatialFilter
        * - options
          - Object
          - Voir les options ici-bas.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -3676,7 +3730,7 @@ Options
      .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                options
          - .. line-block::
@@ -3695,7 +3749,7 @@ Options
                Predefined = Zone prédéfinie (Municipalités, Arrondissements, Région administratives...)
                Polygon = Polygone dessinée par l'utilisateur
                Point = Cercle dessinée par l'utilisateur
-         - 
+         -
        * - itemType
          - SpatialFilterItemType
          - .. line-block::
@@ -3709,7 +3763,7 @@ Options
          - .. line-block::
                Indique si le mode de dessin "à main levée" est actif ou non.
          - true / false
-         - 
+         -
 
 Liens
 
@@ -3738,7 +3792,7 @@ Propriétés
     .. list-table::
        :widths: 10 10 30 15 10
        :header-rows: 1
-    
+
        * - .. line-block::
                Propriétés
          - .. line-block::
@@ -3756,17 +3810,17 @@ Propriétés
          - share-variant
        * - **name***
          - String
-         - 
+         -
          - shareMap
-         - 
+         -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter 
+               Si vous modifier le titre par défaut, vous devez ajouter
                ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`. 
-         - 
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
          - igo.integration.tools.shareMap
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.

@@ -1,5 +1,6 @@
 
-.. _interactiveTourRef:
+
+.. _igoInteractiveTourConfig:
 
 ******************************
 Tour interactif configuration
@@ -41,27 +42,14 @@ Exemples
           "global": {
             "title": "interactiveTour.global.title",
             "position": "auto",
+            "class": "mat-form-field",
+            "scrollToElement":true,
+            "title": "Titre de toutes les boites du tour",
             "steps": [
               {
-                "element": ".menu-button",
-                "title": "interactiveTour.global.menu-button-title",
-                "text": "interactiveTour.global.menu-button",
-                "position": "right",
-              },
-              {
-                "element": ".igo-search-bar-container",
-                "text": "interactiveTour.global.search-bar",
-                "noBackButton": true,
-              },
-              {
-                "element": "igo-toolbox",
-                "title": "interactiveTour.global.toolbox-title",
-                "text": "interactiveTour.global.toolbox",
-                "beforeShow": {
-                  "element": "#homeButton",
-                  "action": "click"
-                }
+                "text": "Bienvenue dans le tour de présentation IGO",
               }
+
             ]
           }
         }
@@ -188,6 +176,7 @@ Exemples
 
       {
         "global": {
+          "position": "auto",
           "steps": [
             {
               "element": ".menu-button",
