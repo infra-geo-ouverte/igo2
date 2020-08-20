@@ -171,10 +171,111 @@
 
   "measurer": {
     "title": "interactiveTour.measurer.title",
+    "position": "auto",
     "steps": [
       {
         "element": "div.igo-panel-title",
         "text": "interactiveTour.measurer.start"
+      },
+      {
+        "element": "div.measure-type-toggle",
+        "text": "interactiveTour.measurer.type",
+        "title": "interactiveTour.measurer.type-title"
+      },
+      {
+        "element": "div.measure-options",
+        "text": "interactiveTour.measurer.options",
+        "title": "interactiveTour.measurer.options-title"
+      },
+      {
+        "element": "#mat-slide-toggle-2",
+        "text": "interactiveTour.measurer.toggle-2",
+        "title": "interactiveTour.measurer.toggle-2-title"
+      },
+      {
+        "element": "#mat-slide-toggle-3",
+        "text": "interactiveTour.measurer.toggle-3",
+        "title": "interactiveTour.measurer.toggle-3-title"
+      },
+      {
+        "element": "#mat-slide-toggle-4",
+        "text": "interactiveTour.measurer.toggle-4",
+        "title": "interactiveTour.measurer.toggle-4-title"
+      },
+      {
+        "element": "mat-sidenav-content",
+        "text": "interactiveTour.measurer.map",
+        "title": "interactiveTour.measurer.map-title",
+        "position": "",
+        "beforeChange": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "mat-form-field.measure-field",
+        "text": "interactiveTour.measurer.measure-field",
+        "title": "interactiveTour.measurer.measure-field-title"
+      },
+      {
+        "element": "mat-form-field.unit-field",
+        "text": "interactiveTour.measurer.measure-unit",
+        "title": "interactiveTour.measurer.measure-unit-title"
+      },
+      {
+        "element": "#mat-button-toggle-2-button",
+        "text": "interactiveTour.measurer.area-click",
+        "onHide": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "mat-form-field.measure-field",
+        "text": "interactiveTour.measurer.perimeter",
+        "title": "interactiveTour.measurer.perimeter-title"
+      },
+      {
+        "element": "mat-form-field.measure-field.ng-tns-c112-25",
+        "text": "interactiveTour.measurer.area-field",
+        "title": "interactiveTour.measurer.area-field-title"
+      },
+      {
+        "element": "mat-form-field.unit-field.ng-tns-c112-26",
+        "text": "interactiveTour.measurer.area-unit",
+        "title": "interactiveTour.measurer.area-unit-title"
+      },
+      {
+        "element": "mat-sidenav-content",
+        "text": "interactiveTour.measurer.map-2",
+        "title": "interactiveTour.measurer.map-title",
+        "position": "",
+        "onHide": {
+          "action": "click",
+          "waitFor": "tbody",
+          "condition": "!tbody"
+        }
+      },
+      {
+        "element": "igo-entity-table.table-compact",
+        "text": "interactiveTour.measurer.results",
+        "title": "interactiveTour.measurer.results-title"
+      },
+      {
+        "element": "div.measure-store-buttons",
+        "text": "interactiveTour.measurer.results-buttons",
+        "title": "interactiveTour.measurer.results-buttons-title"
+      },
+      {
+        "element": "div.mat-checkbox-inner-container",
+        "text": "interactiveTour.measurer.check-measure",
+        "title": "interactiveTour.measurer.check-measure-title",
+        "onShow": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.measure-store-buttons",
+        "text": "interactiveTour.measurer.active-results-buttons",
+        "title": "interactiveTour.measurer.active-results-buttons-title"
       }
     ]
   }
