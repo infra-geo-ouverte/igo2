@@ -59,7 +59,9 @@ import {
   ImportService,
   handleFileImportError,
   handleFileImportSuccess,
-  ExportOptions
+  ExportOptions,
+  FeatureMotion,
+  getSelectedMarkerStyle
 } from '@igo2/geo';
 
 import {
@@ -86,6 +88,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-portal',
@@ -105,6 +108,9 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
+  public workspacePaginator: MatPaginator;
+  public workspaceEntitySortChange$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
   // public expansionPanelExpanded = false;
   // public toastPanelOpened = true;
   public fullExtent;
@@ -361,6 +367,36 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.openSidenav();
       }
     }
+  }
+
+  paginatorChange(matPaginator: MatPaginator) {
+    this.workspacePaginator = matPaginator;
+  }
+
+  entitySortChange() {
+    this.workspaceEntitySortChange$.next(true);
+  }
+
+  entitySelectChange(result: { added: Feature[] }) {
+    console.log('entitySelectChange', result);
+    // result.added.map(res => {
+    //   console.log('res', res);
+    //   this.map.overlay.removeFeature(res);
+    //   res.meta.style = getSelectedMarkerStyle(res);
+    //   res.meta.style.setZIndex(undefined);
+    //   this.map.overlay.addFeature(res, FeatureMotion.None);
+    // });
+  }
+
+  entityFocus(result) {
+    // this.map.overlay.removeFeature(result);
+    // result.meta.style = getSelectedMarkerStyle(result);
+    // result.meta.style.setZIndex(undefined);
+    // this.map.overlay.addFeature(result, FeatureMotion.None);
+  }
+
+  entityUnFocus(result) {
+   // this.map.overlay.removeFeature(result);
   }
 
   ngOnDestroy() {

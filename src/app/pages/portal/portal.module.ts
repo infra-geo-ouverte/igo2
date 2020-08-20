@@ -18,6 +18,7 @@ import {
   IgoContextMenuModule,
   IgoToolModule,
   IgoEntityTableModule,
+  IgoEntityTablePaginatorModule,
   IgoInteractiveTourModule
 } from '@igo2/common';
 
@@ -78,6 +79,7 @@ import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
     IgoContextManagerModule,
     IgoContextMapButtonModule,
     IgoEntityTableModule,
+    IgoEntityTablePaginatorModule,
     IgoInteractiveTourModule,
     IgoWelcomeWindowModule
   ],
