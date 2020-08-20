@@ -137,6 +137,7 @@
       [paginator]="workspacePaginator"
       *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate"
       [store]="workspace.entityStore"
+      (entitySortChange)="entitySortChange()"
       [template]="workspace.meta.tableTemplate">
     </igo-entity-table>
   </ng-container>
