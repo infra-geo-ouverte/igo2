@@ -389,6 +389,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   entityFocus(result) {
+    console.log('entityFocus', result);
     // this.map.overlay.removeFeature(result);
     // result.meta.style = getSelectedMarkerStyle(result);
     // result.meta.style.setZIndex(undefined);
@@ -396,6 +397,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   entityUnFocus(result) {
+    console.log('entityUnFocus', result);
    // this.map.overlay.removeFeature(result);
   }
 

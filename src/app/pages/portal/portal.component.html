@@ -138,6 +138,9 @@
       *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate"
       [store]="workspace.entityStore"
       (entitySortChange)="entitySortChange()"
+      (entitySelectChange)="entitySelectChange($event)"
+      (entityFocus)="entityFocus($event)"
+      (entityUnFocus)="entityUnFocus($event)"
       [template]="workspace.meta.tableTemplate">
     </igo-entity-table>
   </ng-container>
