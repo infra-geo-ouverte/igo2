@@ -809,7 +809,7 @@ Propriétés
          - String
          - .. line-block::
                Indique ou ce retrouve le fichier de configuartion des tours dans l'application. Voir la documentation plus loin sur les détails de la configurations des tours.
-               :ref:`Tour interactif configuration <Sommaire>`
+               Référez vous à :ref:`Tour interactif configuration <igoInteractiveTourConfig>`.
          -
          - "./config/interactiveTour.json"
        * - tourInMobile
