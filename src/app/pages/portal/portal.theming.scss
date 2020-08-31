@@ -4,4 +4,9 @@
 @mixin app-portal-theming($theme) {
   @include app-sidenav-theming($theme);
   @include igo-welcome-window-theming($theme);
+  $primary: map-get($theme, primary);
+
+  igo-actionbar{
+    color: mat-color($primary);
+  }
 }

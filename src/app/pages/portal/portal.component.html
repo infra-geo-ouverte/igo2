@@ -107,7 +107,7 @@
   [@toastOffsetY]="(isMobile() && !toastPanelOpened && queryState.store.entities$.value.length > 0 && !expansionPanelExpanded) ? 'true' : 'false'">
 
   <ng-container expansionPanelHeader>
-    <igo-workspace-selector 
+    <igo-workspace-selector
       igoWorkspaceSelector
       (toolToActivate)="toolToActivateFromWorkspace($event)"
       [store]="workspaceStore"
@@ -124,7 +124,8 @@
         [withToggleButton]="actionbarMode === 'overlay'"
         [mode]="actionbarMode">
       </igo-actionbar>
-      <igo-entity-table-paginator 
+      <div class="spacer"></div>
+      <igo-entity-table-paginator
         [store]="workspace.entityStore"
         [entitySortChange$]="workspaceEntitySortChange$"
         (paginatorChange)="paginatorChange($event)">
@@ -133,7 +134,7 @@
   </ng-container>
 
   <ng-container *ngIf="selectedWorkspace$ | async as workspace">
-    <igo-entity-table 
+    <igo-entity-table
       [paginator]="workspacePaginator"
       *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate"
       [store]="workspace.entityStore"
@@ -147,7 +148,7 @@
 
 </app-expansion-panel>
 
-<app-toast-panel-for-expansion   
+<app-toast-panel-for-expansion
   [withHeader]="false"
   [(opened)]="toastPanelForExpansionOpened">
 
@@ -156,7 +157,7 @@
       mat-icon-button
       color="warn"
       (click)="toastPanelForExpansionOpened = false">
-      <mat-icon svgIcon="close"></mat-icon>  
+      <mat-icon svgIcon="close"></mat-icon>
     </button>
   </div>
 

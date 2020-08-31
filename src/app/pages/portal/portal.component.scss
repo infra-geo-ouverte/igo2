@@ -149,6 +149,27 @@ mat-sidenav-content {
 }
 
 /*** Expansion Panel ***/
+.spacer {
+  flex: 1 1 auto;
+}
+
+igo-actionbar {
+  padding-left: 7px;
+  padding-top: 5px;
+}
+
+igo-workspace-selector {
+  @include mobile {
+    width: 100px;
+  }
+}
+
+igo-entity-table-paginator {
+  @include mobile {
+    margin-left: -30px;
+  }
+}
+
 app-expansion-panel {
   position: absolute;
   bottom: 0;

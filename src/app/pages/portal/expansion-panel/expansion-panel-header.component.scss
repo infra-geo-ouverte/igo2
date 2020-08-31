@@ -3,6 +3,7 @@
 :host {
   display: block;
   height: $app-expansion-panel-header-height;
+  border-bottom: 2px solid aliceblue;
 }
 
 :host > div {
@@ -11,5 +12,5 @@
 
 .app-expansion-panel-trigger-container,
 .app-expansion-panel-content {
-  display: inline-flex;
+  display: contents;
 }
