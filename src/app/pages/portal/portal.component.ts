@@ -350,11 +350,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       let exportOptions: ExportOptions = this.importExportState.exportOptions$.value;
       if (!exportOptions) {
         exportOptions = {
-          layer: toolToActivate.options.layer,
+          layers: toolToActivate.options.layers,
           featureInMapExtent: toolToActivate.options.featureInMapExtent
         };
       } else {
-        exportOptions.layer = toolToActivate.options.layer;
+        exportOptions.layers = toolToActivate.options.layers;
         exportOptions.featureInMapExtent = toolToActivate.options.featureInMapExtent;
       }
       this.importExportState.setsExportOptions(exportOptions);
