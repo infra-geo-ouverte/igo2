@@ -78,6 +78,31 @@
     "measurer": {
       "title": "MESURE",
       "start": "Tour guidé de l'outil de mesure"
+    },
+    "spatial-filter": {
+      "title": "FILTRE SPATIAL",
+      "start": "Tour guidé de l'outil de filtre spatial",
+      "zone-type": "Sélectionner le type de zone à ajouter à la carte",
+      "predefined": "Une zone prédéfinie est une entité surfacique déjà existente comme une municipalités ou une MRC",
+      "drawing": "L'onglet dessin permet plutôt de dessiner directement une zone sur la carte",
+      "search-by": "Si le choix est une zone prédéfinie, le type devra être choisi ici",
+      "zone": "Le choix de la zone sera fait ensuite ici",
+      "results-type": "La sélection spatiale peut être fait soit par adresses, soit par couches thématiques",
+      "address": "La recherche par adresse permet de rechercher l'ensemble des adresses présentes dans la zone",
+      "warning-address": "À faire attention, dépendamment de la zone choisie, le résultat peut-être excessivement grand!",
+      "thematics": "Les thématiques sont un ensemble de couches de données classifiés par thème global. On peut ainsi rechercher des écoles, des hôpitaux, des entités hydropgraphiques etc.",
+      "initialize": "Une fois un ou plusieurs paramètres sélectionnés, il est possible de réinitialiser ceux-ci à tout moment",
+      "drawing-select": "Choisissons le mode dessin",
+      "drawing-type": "Il est possible de choisir de dessiner une zone polygonale ou un cercle",
+      "activate-drawing": "La première option permet d'autoriser ou non l'action de dessiner sur la carte",
+      "freehand-drawing": "La deuxième permet de dessiner à main levée (clic gauche enfoncé et relâcher pour terminer le dessin)",
+      "drawing-map": "Pour dessiner une zone en mode standard, un clic pour démarrer le dessin et deux clics pour le terminer",
+      "clear-drawing": "Une fois le dessin réalisé, il est toujours possible de retirer ce dernier de la carte",
+      "multi-drawing": "Si plusieurs zones sont présentes dans la carte, la recherche sera effectuée sur l'ensemble de ces zones",
+      "launch": "Une fois les paramètres remplis, la recherche peut ensuite être lancée",
+      "results-table": "Les résultats apparaîtront dans ce tableau",
+      "clear-results": "Les résultats de la recherche peuvent être retirer à tout moment",
+      "export": "Il est aussi possible d'exporter les résultats par l'outil d'export"
     }
   }
 }

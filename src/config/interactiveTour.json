@@ -177,5 +177,104 @@
         "text": "interactiveTour.measurer.start"
       }
     ]
+  },
+
+  "spatialFilter": {
+    "title": "interactiveTour.spatial-filter.title",
+    "position": "auto",
+    "steps": [
+      {
+        "element": "div.igo-panel-title",
+        "text": "interactiveTour.spatial-filter.start",
+        "onShow": {
+          "element": "#mat-tab-label-0-0",
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.mat-tab-label-container",
+        "text": "interactiveTour.spatial-filter.zone-type"
+      },
+      {
+        "element": "#mat-tab-label-0-0",
+        "text": "interactiveTour.spatial-filter.predefined"
+      },
+      {
+        "element": "#mat-tab-label-0-1",
+        "text": "interactiveTour.spatial-filter.drawing"
+      },
+      {
+        "element": "div.mat-tab-body-content .mat-form-field",
+        "text": "interactiveTour.spatial-filter.search-by"
+      },
+      {
+        "element": "igo-spatial-filter-list .mat-form-field",
+        "text": "interactiveTour.spatial-filter.zone"
+      },
+      {
+        "element": "igo-spatial-filter-item .mat-radio-group",
+        "text": "interactiveTour.spatial-filter.results-type"
+      },
+      {
+        "element": "#mat-radio-29",
+        "text": "interactiveTour.spatial-filter.address"
+      },
+      {
+        "element": "#mat-radio-29",
+        "text": "interactiveTour.spatial-filter.warning-address"
+      },
+      {
+        "element": "#mat-radio-30",
+        "text": "interactiveTour.spatial-filter.thematics"
+      },
+      {
+        "element": "div.buttons .clear-search-button",
+        "text": "interactiveTour.spatial-filter.initialize"
+      },
+      {
+        "element": "#mat-tab-label-0-1",
+        "text": "interactiveTour.spatial-filter.drawing-select",
+        "onShow": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.spatial-type-toggle",
+        "text": "interactiveTour.spatial-filter.drawing-type"
+      },
+      {
+        "element": "div.header",
+        "text": "interactiveTour.spatial-filter.activate-drawing"
+      },
+      {
+        "element": "div.header",
+        "text": "interactiveTour.spatial-filter.freehand-drawing"
+      },
+      {
+        "element": "mat-sidenav-content",
+        "text": "interactiveTour.spatial-filter.drawing-map",
+        "position": ""
+      },
+      {
+        "element": "button.clear-form-button",
+        "text": "interactiveTour.spatial-filter.clear-drawing"
+      },
+      {
+        "element": "button.search-button",
+        "text": "interactiveTour.spatial-filter.launch"
+      },
+      {
+        "element": "div.results",
+        "text": "interactiveTour.spatial-filter.results-table"
+      },
+      {
+        "element": "button.remove-button",
+        "text": "interactiveTour.spatial-filter.clear-results"
+      },
+      {
+        "element": "button.export-button",
+        "text": "interactiveTour.spatial-filter.export"
+      }
+    ]
   }
 }
