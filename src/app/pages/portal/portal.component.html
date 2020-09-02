@@ -43,7 +43,6 @@
     <igo-map-browser
       igoWorkspaceUpdator
       [workspaceStore]="workspaceStore"
-      (toolToActivate)="toolToActivateFromWorkspace($event)"
       igoSearchPointerSummary
       [igoSearchPointerSummaryDelay]="500"
       [igoSearchPointerSummaryEnabled]=igoSearchPointerSummaryEnabled
@@ -140,8 +139,6 @@
       [store]="workspace.entityStore"
       (entitySortChange)="entitySortChange()"
       (entitySelectChange)="entitySelectChange($event)"
-      (entityFocus)="entityFocus($event)"
-      (entityUnFocus)="entityUnFocus($event)"
       [template]="workspace.meta.tableTemplate">
     </igo-entity-table>
   </ng-container>

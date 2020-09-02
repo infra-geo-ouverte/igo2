@@ -60,8 +60,8 @@ import {
   handleFileImportError,
   handleFileImportSuccess,
   ExportOptions,
-  FeatureMotion,
-  getSelectedMarkerStyle
+  featureFromOl,
+  QueryService
 } from '@igo2/geo';
 
 import {
@@ -127,6 +127,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private contextLoaded = false;
 
   private context$$: Subscription;
+  private openSidenav$$: Subscription;
 
   public igoSearchPointerSummaryEnabled = false;
 
@@ -265,7 +266,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private languageService: LanguageService,
     private messageService: MessageService,
     private welcomeWindowService: WelcomeWindowService,
-    public dialogWindow: MatDialog
+    public dialogWindow: MatDialog,
+    private queryService: QueryService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
@@ -342,31 +344,13 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.showToastPanelForExpansionToggle = false;
       }
     });
-  }
 
-  toolToActivateFromWorkspace(toolToActivate: { tool: string; options: {[key: string]: any} }) {
-    if (!toolToActivate) { return; }
-    if (toolToActivate.tool === 'importExport') {
-      let exportOptions: ExportOptions = this.importExportState.exportOptions$.value;
-      if (!exportOptions) {
-        exportOptions = {
-          layers: toolToActivate.options.layers,
-          featureInMapExtent: toolToActivate.options.featureInMapExtent
-        };
-      } else {
-        exportOptions.layers = toolToActivate.options.layers;
-        exportOptions.featureInMapExtent = toolToActivate.options.featureInMapExtent;
-      }
-      this.importExportState.setsExportOptions(exportOptions);
-      this.importExportState.setMode('export');
-    }
-
-    if (this.toolbox.getTool(toolToActivate.tool)) {
-      this.toolbox.activateTool(toolToActivate.tool);
-      if (!this.sidenavOpened) {
+    this.openSidenav$$ = this.toolState.openSidenav$.subscribe((openSidenav: boolean) => {
+      if (openSidenav) {
         this.openSidenav();
+        this.toolState.openSidenav$.next(false);
       }
-    }
+    });
   }
 
   paginatorChange(matPaginator: MatPaginator) {
@@ -378,32 +362,47 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   entitySelectChange(result: { added: Feature[] }) {
-    console.log('entitySelectChange', result);
-    // result.added.map(res => {
-    //   console.log('res', res);
-    //   this.map.overlay.removeFeature(res);
-    //   res.meta.style = getSelectedMarkerStyle(res);
-    //   res.meta.style.setZIndex(undefined);
-    //   this.map.overlay.addFeature(res, FeatureMotion.None);
-    // });
-  }
+    const baseQuerySearchSource = this.getQuerySearchSource();
+    const querySearchSourceArray: QuerySearchSource[] = [];
+    if (result && result.added) {
 
-  entityFocus(result) {
-    console.log('entityFocus', result);
-    // this.map.overlay.removeFeature(result);
-    // result.meta.style = getSelectedMarkerStyle(result);
-    // result.meta.style.setZIndex(undefined);
-    // this.map.overlay.addFeature(result, FeatureMotion.None);
-  }
+      const results = result.added.map(res => {
+        if (
+          res &&
+          res.ol &&
+          res.ol.getProperties()._featureStore.layer &&
+          res.ol.getProperties()._featureStore.layer.visible) {
+          const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
+          const feature = featureFromOl(res.ol, featureStoreLayer.map.projection, featureStoreLayer.ol);
 
-  entityUnFocus(result) {
-    console.log('entityUnFocus', result);
-   // this.map.overlay.removeFeature(result);
+          feature.meta.alias = this.queryService.getAllowedFieldsAndAlias(featureStoreLayer);
+          feature.meta.title = this.queryService.getQueryTitle(feature, featureStoreLayer) || feature.meta.title;
+          let querySearchSource = querySearchSourceArray.find((s) => s.title === feature.meta.sourceTitle);
+          if (!querySearchSource) {
+            querySearchSource = new QuerySearchSource({
+              title: feature.meta.sourceTitle
+            });
+            querySearchSourceArray.push(querySearchSource);
+          }
+          return featureToSearchResult(feature, querySearchSource);
+        }
+      });
+
+      const research = {
+        request: of(results),
+        reverse: false,
+        source: baseQuerySearchSource
+      };
+      research.request.subscribe((queryResults: SearchResult<Feature>[]) => {
+        this.queryStore.load(queryResults);
+      });
+    }
   }
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
     this.activeWidget$$.unsubscribe();
+    this.openSidenav$$.unsubscribe();
   }
 
   /**
