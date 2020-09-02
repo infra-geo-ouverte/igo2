@@ -32,9 +32,12 @@ import {
   MediaService,
   LanguageService,
   StorageService,
-  StorageScope
+  StorageScope,
+  StorageServiceEvent
 } from '@igo2/core';
 
+import { StorageState } from '@igo2/integration';
+import { skipWhile } from 'rxjs/operators';
 @Component({
   selector: 'app-toast-panel',
   templateUrl: './toast-panel.component.html',
@@ -48,6 +51,10 @@ export class ToastPanelComponent implements OnInit {
     UP: 'swipeup',
     DOWN: 'swipedown'
   };
+
+  get storageService(): StorageService {
+    return this.storageState.storageService;
+  }
 
   @Input()
   get map(): IgoMap {
@@ -111,6 +118,7 @@ export class ToastPanelComponent implements OnInit {
   private format = new olFormatGeoJSON();
 
   public withZoomButton = true;
+  zoomAuto$: BehaviorSubject<boolean> = new BehaviorSubject(undefined);
 
   @Output() openedChange = new EventEmitter<boolean>();
   @Output() zoomAutoEvent = new EventEmitter<boolean>();
@@ -179,13 +187,21 @@ export class ToastPanelComponent implements OnInit {
     return this.multiple$;
   }
 
-
-
   constructor(
     public mediaService: MediaService,
     public languageService: LanguageService,
-    private storageService: StorageService
-  ) {}
+    private storageState: StorageState
+  ) {
+
+    this.zoomAuto$.next(this.zoomAuto);
+    this.storageService.storageChange$
+      .pipe(skipWhile((storageChange: StorageServiceEvent) => storageChange.key !== 'zoomAuto'))
+      .subscribe((storageChange: StorageServiceEvent) => {
+        this.zoomAuto$.next(this.zoomAuto);
+      }
+      );
+
+  }
 
   ngOnInit() {
     this.store.entities$.subscribe(() => {
@@ -261,7 +277,7 @@ export class ToastPanelComponent implements OnInit {
           'toastPanel.zoomAutoTooltip'
         ),
         checkbox: true,
-        checkCondition: this.storageService.get('zoomAuto') as boolean,
+        checkCondition: this.zoomAuto$,
         handler: () => {
           this.storageService.set('zoomAuto', !this.storageService.get(
             'zoomAuto'
