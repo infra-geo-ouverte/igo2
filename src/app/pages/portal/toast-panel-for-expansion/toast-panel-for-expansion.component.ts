@@ -37,8 +37,6 @@ export class ToastPanelForExpansionComponent {
 
   @Output() openedChange = new EventEmitter<boolean>();
 
-  @Output() clear = new EventEmitter<void>();
-
   @HostBinding('class.toast-panel-for-expansion-opened')
   get hasOpenedClass() {
     return this.opened;
@@ -49,19 +47,6 @@ export class ToastPanelForExpansionComponent {
     return (this.withHeader || this.opened) ? 'visible' : 'hidden';
   }
 
-  @ViewChild('content') content: ElementRef;
-
-  get empty(): boolean {
-    return this.content.nativeElement.children.length === 0;
-  }
-
   constructor() {}
 
-  onToggleClick() {
-    this.opened = !this.opened;
-  }
-
-  onClearButtonClick() {
-    this.clear.emit();
-  }
 }

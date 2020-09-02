@@ -43,7 +43,8 @@
 }
 
 igo-backdrop ::ng-deep > div {
-  z-index: initial !important;
+  // 120 because material tables use z-index = 110 for sticky headers 
+  z-index: 120 !important;
 }
 
 .app-expansion-panel-content ::ng-deep .igo-entity-table-with-selection {
