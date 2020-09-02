@@ -14,7 +14,6 @@
   },
   "title": "IGO Démo",
   "welcomeWindow": {
-    "showAgainOnNewIGOVersion": true,
-    "nbVisitToShowAgain": 30
+    "showAgainOnNewIGOVersion": true
   }
 }
