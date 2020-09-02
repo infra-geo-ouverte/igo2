@@ -4,9 +4,7 @@ import {
   Output,
   EventEmitter,
   HostBinding,
-  ChangeDetectionStrategy,
-  ElementRef,
-  ViewChild
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { showContent } from './toast-panel-for-expansion.animations';
 
