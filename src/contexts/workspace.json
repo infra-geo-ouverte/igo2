@@ -8,9 +8,9 @@
         "visible": true,
         "sourceOptions": {
           "queryable": true,
-          "url": "/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=telephone_urg&outputFormat=geojson",
-          "type": "vector",
-          "distance": 50
+          "queryTitle": "nomnavcana",
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
+          "type": "vector"
         }
       },
       {
@@ -18,18 +18,20 @@
         "visible": false,
         "sourceOptions": {
           "queryable": true,
-          "url": "/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=telephone_urg&outputFormat=geojson",
+          "queryTitle": "identificationDesTravaux",
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
           "type": "cluster",
           "distance": 50
         }
       },
       {
         "title": "WFS",
-        "visible": false,
+        "visible": true,
         "sourceOptions": {
           "type": "wfs",
-          "url": "/swtq",
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
           "queryable": true,
+          "queryTitle": "desclocal",
           "params": {
             "featureTypes": "telephone_urg",
             "fieldNameGeometry": "geometry",
@@ -38,12 +40,6 @@
             "outputFormat": "geojson",
             "outputFormatDownload": "shp"
           },
-          "sourceFields": [
-            { "alias": "Identifiant", "name": "desc_local" , "excludeFromOgcFilters": true },
-            { "alias": "Direction", "name": "dirrte", "allowedOperatorsType": "basic"},
-            { "alias": "Responsable", "name": "orgresp", "allowedOperatorsType": "all"},
-            { "alias": "Emplacement", "name": "emplacemen" }
-        ],
   
         "ogcFilters": {
           "enabled": true,
@@ -54,7 +50,7 @@
             "propertyName": "orgresp",
             "expression": "Bell"
           },
-          "k2pushButtons": {
+          "pushButtons": {
             "groups": [
               {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
             ],
@@ -86,30 +82,6 @@
             ]
         }}
         }
-      }
-     ,
-      {
-        "title": "MVT dataSource",
-        "visible": false,
-        "sourceOptions": {
-          "featureClass": "feature" ,
-          "type": "mvt",
-          "queryable": true,
-          "url": "/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=telephone_urg&map.imagetype=mvt"
-        }
-      }],
-    "toolbar": [
-      "searchResults",
-      "contextManager",
-      "mapTools",
-      "ogcFilter",
-      "measurer",
-      "directions",
-      "catalog",
-      "importExport",
-      "print",
-      "shareMap",
-      "about"
-    ]
+      }]
   }
   
