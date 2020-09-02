@@ -17,6 +17,7 @@ interface Environment {
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
+    interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
   };
 }
 
@@ -47,6 +48,10 @@ export const environment: Environment = {
     language: {
       prefix: './locale/'
     },
+    interactiveTour: {
+      tourInMobile: true,
+      pathToConfigFile: './config/interactiveTour.json'
+    },
     searchSources: {
       nominatim: {
         available: false
@@ -76,6 +81,9 @@ export const environment: Environment = {
         params: {
           limit: '5'
         }
+      },
+      cadastre: {
+        enabled: false
       }
     },
     projections: [

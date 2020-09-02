@@ -21,13 +21,63 @@
     "previousFeatureTooltip": "Élément précédent ( raccouci clavier = flèche gauche )",
     "nextFeatureTooltip": "Prochain élément ( raccouci clavier = flèche droite )"
   },
-  "IGO": "IGO",
+  "IGO": "IGO Démo",
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
   "coordinates": "Afficher les coordonnées",
   "googleMap": "Afficher sur Google maps",
   "googleStreetView": "Afficher sur Google Street view",
+  "welcomeWindow": {
+    "html": "<h1>Bienvenue dans IGO, l'application cartographique du gouvernement du Québec</h1><h2>Débutez en sélectionnant un contexte &#x2605;</h2>",
+    "title": "Fenêtre d'accueil",
+    "closeButton": "Fermer",
+    "notShowCheck": "ne plus afficher"
+  },
   "oldBrowser": {
     "title": "Navigateur obsolète",
     "message": "IGO2 ne supporte pas pleinement votre navigateur. Veuillez le mettre à jour ou utilisez un navigateur différent."
+  },
+  "interactiveTour": {
+    "global": {
+      "title": "Tour interatif",
+      "menu-button-title": "MENU",
+      "menu-button": "Cliquer sur le bouton menu pour ouvrir le menu général",
+      "search-bar-title": "BARRE DE RECHERCHE",
+      "search-bar": "Rechercher une adresse, un point GPS, une couche, etc.",
+      "search-settings-title": "OPTIONS DE RECHERCHE",
+      "search-settings": "Permet de configurer: le type de résultat, le nombre de résultats souhaités, etc.",
+      "toolbox-title": "LES OUTILS",
+      "toolbox": "Sur sélection de l'outil, l'application bascule à l'intérieur et affiche son contenu",
+      "context-title": "LES CONTEXTES",
+      "context": "Un contexte est une carte prédéfinie constituée de plusieurs couches regroupées selon une thématique",
+      "context-list": "À l'intérieur des CONTEXTES, l'outil affiche la liste des cartes thématiques prédéfinies",
+      "context-item": "Ici le contexte SIMPLE qui représente une thématique et contient certaines couches",
+      "context-filter": "Ici le contexte FILTRE TEMPOREL contient un autre regroupement",
+      "context-filter-click": "Sélectionnons le contexte FILTRE TEMPOREL",
+      "layers-title": "LA CARTE",
+      "layers": "L'application bascule à l'intérieur et affiche les couches qui constituent LA CARTE de ce contexte",
+      "layers-visible": "On remarque que certaines couches sont actives et visibles dans la carte. Les couches non actives/visibles sont indiquées par l'oeil noir barré",
+      "layer-embacle": "Couche des embâcles lors d'inondation",
+      "legend": "En cliquant sur le titre la légende ouvre",
+      "layer-eye": "Un clique sur oeil, active ou désactive l'affichage de la couche",
+      "layer-tool-btn": "Activer les outils disponibles sur CETTE couche",
+      "layer-tool": "Panneau des outils disponibles pour cette couche",
+      "home-button": "Retour au menu principal",
+      "menu-button-close": "Cliquer pour fermer le menu",
+      "geolocate-title": "GEOLOCALISATION",
+      "geolocate": "Pour zoomer la carte sur votre position",
+      "baselayers-title": "FONDS DE CARTE",
+      "baselayers": "Changer le fond de carte",
+      "end-title": "FIN",
+      "end": "Fin du tour interatif"
+    },
+    "timeFilter": {
+      "title": "FILTRE TEMPOREL",
+      "start": "Le filtre temporel permet de délimiter une période de temps qui filtrera la couche et affichera uniquement les résultats qui corespondent à la période de temps définie",
+      "end": "S'applique uniquement sur certaine couches ou le filtre peut s'appliquer et qui sont présentes dans la carte"
+    },
+    "measurer": {
+      "title": "MESURE",
+      "start": "Tour guidé de l'outil de mesure"
+    }
   }
 }
