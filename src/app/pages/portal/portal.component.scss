@@ -94,7 +94,7 @@ igo-map-browser.sidenav-offset ::ng-deep .ol-overlaycontainer-stopevent {
 }
 
 igo-map-browser.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
-  bottom: 279px;
+  bottom: $app-expansion-panel-height;
 }
 
 igo-map-browser.toast-offset-scale-line
