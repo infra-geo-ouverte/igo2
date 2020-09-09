@@ -48,17 +48,10 @@
       "toolbox-title": "LES OUTILS",
       "toolbox": "Sur sélection de l'outil, l'application bascule à l'intérieur et affiche son contenu",
       "context-title": "LES CONTEXTES",
-<<<<<<< HEAD
-      "context": "Un contexte est une carte prédéfinie constituée de plusieurs couches regroupées selon une thématique. Ils sont personnalisables",
-      "context-list": "À l'intérieur des CONTEXTES, l'outil affiche la liste des cartes thématiques prédéfinies",
-      "context-item": "Ici le contexte SIMPLE représente une thématique et contient certaines couches",
-      "context-filter": "Ici le contexte FILTRE TEMPOREL contient un autre regroupement de couches",
-=======
       "context": "Un contexte est une carte prédéfinie constituée de plusieurs couches regroupées selon une thématique",
       "context-list": "À l'intérieur des CONTEXTES, l'outil affiche la liste des cartes thématiques prédéfinies",
       "context-item": "Ici le contexte SIMPLE qui représente une thématique et contient certaines couches",
       "context-filter": "Ici le contexte FILTRE TEMPOREL contient un autre regroupement",
->>>>>>> origin/next
       "context-filter-click": "Sélectionnons le contexte FILTRE TEMPOREL",
       "layers-title": "LA CARTE",
       "layers": "L'application bascule à l'intérieur et affiche les couches qui constituent LA CARTE de ce contexte",
