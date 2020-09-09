@@ -31,7 +31,7 @@
     "html": "<h1>Welcome to IGO the Québec goverment mapping application </h1>",
     "title": "",
     "closeButton": "Close",
-    "notShowCheck": "do not show again"
+    "notShowCheck": "Do not show again"
   },
   "oldBrowser": {
     "title": "Too old browser",
