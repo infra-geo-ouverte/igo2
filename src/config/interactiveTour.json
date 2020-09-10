@@ -211,7 +211,7 @@
         "text": "interactiveTour.measurer.measure-unit"
       },
       {
-        "element": "mat-button-toggle[ng-reflect-value=area] button",
+        "element": "mat-button-toggle:last-of-type button",
         "text": "interactiveTour.measurer.area-click",
         "onHide": {
           "action": "click"
