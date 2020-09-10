@@ -76,7 +76,7 @@
       "end": "S'applique uniquement sur certaine couches ou le filtre peut s'appliquer et qui sont présentes dans la carte"
     },
     "measurer": {
-      "title": "MESURE",
+      "title": "OUTIL DE MESURE",
       "start": "Tour guidé de l'outil de mesure",
       "type-title": "Type de mesure",
       "type": "Choisir le type de mesure souhaité",
@@ -108,7 +108,7 @@
       "results-buttons-title": "Boutons de la table des résultats",
       "check-measure": "Pour activer les boutons de la table, sélectionner une ou plusieurs mesures",
       "check-measure-title": "Sélection des mesures",
-      "active-results-buttons": "Les boutons sont maintenant actifs!",
+      "active-results-buttons": "Si des mesures sont sélectionnées, les boutons seront maintenant activés!",
       "active-results-buttons-title": "Boutons de la table des résultats"
     }
   }

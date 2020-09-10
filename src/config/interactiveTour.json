@@ -179,47 +179,36 @@
       },
       {
         "element": "div.measure-type-toggle",
-        "text": "interactiveTour.measurer.type",
-        "title": "interactiveTour.measurer.type-title"
+        "text": "interactiveTour.measurer.type"
       },
       {
         "element": "div.measure-options",
-        "text": "interactiveTour.measurer.options",
-        "title": "interactiveTour.measurer.options-title"
+        "text": "interactiveTour.measurer.options"
       },
       {
         "element": "div.measure-options mat-slide-toggle:first-child",
-        "text": "interactiveTour.measurer.toggle-2",
-        "title": "interactiveTour.measurer.toggle-2-title"
+        "text": "interactiveTour.measurer.toggle-2"
       },
       {
         "element": "div.measure-options mat-slide-toggle:nth-child(2)",
-        "text": "interactiveTour.measurer.toggle-3",
-        "title": "interactiveTour.measurer.toggle-3-title"
+        "text": "interactiveTour.measurer.toggle-3"
       },
       {
         "element": "div.measure-options mat-slide-toggle:last-child",
-        "text": "interactiveTour.measurer.toggle-4",
-        "title": "interactiveTour.measurer.toggle-4-title"
+        "text": "interactiveTour.measurer.toggle-4"
       },
       {
-        "element": "mat-sidenav-content",
+        "element": "app-map-overlay",
         "text": "interactiveTour.measurer.map",
-        "title": "interactiveTour.measurer.map-title",
-        "position": "",
-        "beforeChange": {
-          "action": "click"
-        }
+        "position": ""
       },
       {
         "element": "igo-measurer-item[ng-reflect-measure-type=length] mat-form-field.measure-field",
-        "text": "interactiveTour.measurer.measure-field",
-        "title": "interactiveTour.measurer.measure-field-title"
+        "text": "interactiveTour.measurer.measure-field"
       },
       {
         "element": "igo-measurer-item[ng-reflect-measure-type=length] mat-form-field.unit-field",
-        "text": "interactiveTour.measurer.measure-unit",
-        "title": "interactiveTour.measurer.measure-unit-title"
+        "text": "interactiveTour.measurer.measure-unit"
       },
       {
         "element": "mat-button-toggle[ng-reflect-value=area] button",
@@ -230,23 +219,19 @@
       },
       {
         "element": "igo-measurer-item[ng-reflect-measure-type=length] mat-form-field.measure-field",
-        "text": "interactiveTour.measurer.perimeter",
-        "title": "interactiveTour.measurer.perimeter-title"
+        "text": "interactiveTour.measurer.perimeter"
       },
       {
         "element": "igo-measurer-item[ng-reflect-measure-type=area] mat-form-field.measure-field",
-        "text": "interactiveTour.measurer.area-field",
-        "title": "interactiveTour.measurer.area-field-title"
+        "text": "interactiveTour.measurer.area-field"
       },
       {
         "element": "igo-measurer-item[ng-reflect-measure-type=area] mat-form-field.unit-field",
-        "text": "interactiveTour.measurer.area-unit",
-        "title": "interactiveTour.measurer.area-unit-title"
+        "text": "interactiveTour.measurer.area-unit"
       },
       {
-        "element": "mat-sidenav-content",
+        "element": "app-map-overlay",
         "text": "interactiveTour.measurer.map-2",
-        "title": "interactiveTour.measurer.map-title",
         "position": "",
         "onHide": {
           "action": "click",
@@ -256,18 +241,15 @@
       },
       {
         "element": "igo-entity-table.table-compact",
-        "text": "interactiveTour.measurer.results",
-        "title": "interactiveTour.measurer.results-title"
+        "text": "interactiveTour.measurer.results"
       },
       {
         "element": "div.measure-store-buttons",
-        "text": "interactiveTour.measurer.results-buttons",
-        "title": "interactiveTour.measurer.results-buttons-title"
+        "text": "interactiveTour.measurer.results-buttons"
       },
       {
         "element": "div.mat-checkbox-inner-container",
         "text": "interactiveTour.measurer.check-measure",
-        "title": "interactiveTour.measurer.check-measure-title",
         "onShow": {
           "action": "click",
           "condition": "div.measure-store-buttons .mat-focus-indicator:disabled"
@@ -275,8 +257,7 @@
       },
       {
         "element": "div.measure-store-buttons",
-        "text": "interactiveTour.measurer.active-results-buttons",
-        "title": "interactiveTour.measurer.active-results-buttons-title"
+        "text": "interactiveTour.measurer.active-results-buttons"
       }
     ]
   }
