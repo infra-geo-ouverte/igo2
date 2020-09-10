@@ -37,8 +37,9 @@
           "linkId": "wms",
           "links": [{
             "bidirectionnal": true,
+            "syncedDelete": true,
             "linkedIds": ["wms2","wfs"],
-            "properties": ["ogcFilters","minResolution", "maxResolution" ]
+            "properties": ["zIndex", "opacity","visible","ogcFilters","minResolution", "maxResolution" ]
           }]
         },
         "sourceOptions": {

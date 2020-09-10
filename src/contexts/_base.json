@@ -40,6 +40,7 @@
         "linkId": "HybrideAuto",
         "links": [{
           "bidirectionnal": false,
+          "syncedDelete": true,
           "linkedIds": ["bgr_v_sous_route_res_sup_act"],
           "properties": ["visible"]
         }]
@@ -61,6 +62,7 @@
       },
       "sourceOptions": {
         "type": "wms",
+        "queryable": true,
         "url": "/swtq",
         "params": {
           "layers": "bgr_v_sous_route_res_sup_act"
@@ -75,6 +77,7 @@
         "linkId": "HybrideVelo",
         "links": [{
           "bidirectionnal": false,
+          "syncedDelete": true,
           "linkedIds": ["convi_velo_glv"],
           "properties": ["visible"]
         }]
