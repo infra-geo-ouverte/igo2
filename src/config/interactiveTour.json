@@ -29,7 +29,8 @@
         "text": "interactiveTour.global.toolbox",
         "beforeShow": {
           "element": "#homeButton",
-          "action": "click"
+          "action": "click",
+          "condition": "app-sidenav:not([ng-reflect-opened=true])"
         }
       },
       {
