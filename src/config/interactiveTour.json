@@ -9,7 +9,7 @@
         "text": "interactiveTour.global.menu-button",
         "onHide": {
           "action": "click",
-          "condition": "app-sidenav:not([ng-reflect-opened=true])"
+          "condition": "mat-sidenav:not(.mat-drawer-opened)"
         }
       },
       {
