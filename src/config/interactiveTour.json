@@ -203,11 +203,11 @@
         "position": ""
       },
       {
-        "element": "igo-measurer-item[ng-reflect-measure-type=length] mat-form-field.measure-field",
+        "element": "igo-measurer-item:first-of-type mat-form-field.measure-field",
         "text": "interactiveTour.measurer.measure-field"
       },
       {
-        "element": "igo-measurer-item[ng-reflect-measure-type=length] mat-form-field.unit-field",
+        "element": "igo-measurer-item:first-of-type mat-form-field.unit-field",
         "text": "interactiveTour.measurer.measure-unit"
       },
       {
@@ -218,15 +218,15 @@
         }
       },
       {
-        "element": "igo-measurer-item[ng-reflect-measure-type=length] mat-form-field.measure-field",
+        "element": "igo-measurer-item:first-of-type mat-form-field.measure-field",
         "text": "interactiveTour.measurer.perimeter"
       },
       {
-        "element": "igo-measurer-item[ng-reflect-measure-type=area] mat-form-field.measure-field",
+        "element": "igo-measurer-item:last-of-type mat-form-field.measure-field",
         "text": "interactiveTour.measurer.area-field"
       },
       {
-        "element": "igo-measurer-item[ng-reflect-measure-type=area] mat-form-field.unit-field",
+        "element": "igo-measurer-item:last-of-type mat-form-field.unit-field",
         "text": "interactiveTour.measurer.area-unit"
       },
       {
