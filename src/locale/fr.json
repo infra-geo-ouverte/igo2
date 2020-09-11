@@ -30,7 +30,7 @@
     "html": "<h1>Bienvenue dans IGO, l'application cartographique du gouvernement du Québec</h1><h2>Débutez en sélectionnant un contexte &#x2605;</h2>",
     "title": "Fenêtre d'accueil",
     "closeButton": "Fermer",
-    "notShowCheck": "ne plus afficher"
+    "notShowCheck": "Ne plus afficher"
   },
   "oldBrowser": {
     "title": "Navigateur obsolète",
@@ -76,8 +76,40 @@
       "end": "S'applique uniquement sur certaine couches ou le filtre peut s'appliquer et qui sont présentes dans la carte"
     },
     "measurer": {
-      "title": "MESURE",
-      "start": "Tour guidé de l'outil de mesure"
+      "title": "OUTIL DE MESURE",
+      "start": "Tour guidé de l'outil de mesure",
+      "type-title": "Type de mesure",
+      "type": "Choisir le type de mesure souhaité",
+      "options": "Voici l'ensemble des options de mesure possibles",
+      "options-title": "Options de mesure",
+      "toggle-2": "Activer et désactiver pour permettre de dessiner sur la carte",
+      "toggle-2-title": "Contrôle du dessin",
+      "toggle-3": "Activer et désactiver pour permettre l'affichage des mesures sur la carte",
+      "toggle-3-title": "Affichage des mesures",
+      "toggle-4": "Les unités automatiques permettent l'affichage et le calcul dans des unités de mesures prédéfinies",
+      "toggle-4-title": "Unités automatiques",
+      "map": "Pour utiliser cet outil, un clic permet de démarrer le dessin et deux clics permettent de le terminer",
+      "map-title": "Utilsation de l'outil dans la carte",
+      "map-2": "De la même manière que la distance, un clic permet de démarrer le dessin et deux clics permettent de le terminer",
+      "measure-field": "Le résultat de la mesure active apparaîtra dans ce champ",
+      "measure-field-title": "Résultat de distance",
+      "measure-unit": "Il est également possible de modifier l'unité de mesure du résultat obtenu",
+      "measure-unit-title": "Unités du résultat",
+      "area-click": "Sélectionnons maintenant le mode Superficie",
+      "perimeter": "En mode Superficie, la champ de distance devient le périmètre de la surface",
+      "perimeter-title": "Périmètre",
+      "area-field": "Le résultat de la superficie active apparaîtra dans ce champ",
+      "area-field-title": "Résultat de superficie",
+      "area-unit": "Il est également possible de modifier l'unité de mesure du résultat obtenu",
+      "area-unit-title": "Unités du résultat",
+      "results": "L'ensemble des résultats apparîtront dans cette table",
+      "results-title": "Table des résultats",
+      "results-buttons": "Ces boutons permettent d'effectuer des calculs et de supprimer des mesures",
+      "results-buttons-title": "Boutons de la table des résultats",
+      "check-measure": "Pour activer les boutons de la table, sélectionner une ou plusieurs mesures",
+      "check-measure-title": "Sélection des mesures",
+      "active-results-buttons": "Si des mesures sont sélectionnées, les boutons seront maintenant activés!",
+      "active-results-buttons-title": "Boutons de la table des résultats"
     }
   }
 }

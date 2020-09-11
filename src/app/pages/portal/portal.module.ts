@@ -44,6 +44,7 @@ import { AppSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
 import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toast-panel-for-expansion.module';
+
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
 
