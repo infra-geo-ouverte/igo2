@@ -23,6 +23,7 @@
 :host.app-expansion-panel-expanded {
   height: $app-expansion-panel-height;
   width: 100%;
+  z-index: 6;
 
   @include mobile {
     &.footer {

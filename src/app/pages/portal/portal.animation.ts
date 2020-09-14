@@ -133,7 +133,7 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
         'expansionAndToastClosed',
         style({
           bottom: '285px',
-          zIndex: '1'
+          zIndex: '5'
         })
       ),
     transition('noExpansion => noExpansion', animate('10ms')),
