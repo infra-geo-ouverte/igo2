@@ -19,7 +19,8 @@ import {
   MediaOrientation,
   ConfigService,
   LanguageService,
-  MessageService
+  MessageService,
+  StorageService
 } from '@igo2/core';
 import {
   ActionbarMode,
@@ -111,8 +112,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   public workspacePaginator: MatPaginator;
   public workspaceEntitySortChange$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  // public expansionPanelExpanded = false;
-  // public toastPanelOpened = true;
   public fullExtent;
   public sidenavOpened = false;
   public searchBarTerm = '';
@@ -135,7 +134,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   private activeWidget$$: Subscription;
   public showToastPanelForExpansionToggle = false;
   public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(undefined);
-  private _toastPanelOpened = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
@@ -226,14 +224,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   // }
 
   get toastPanelOpened(): boolean {
-    const content = this.toastPanelContent;
-    if (content === 'workspace') {
-      return true;
-    }
-    return this._toastPanelOpened;
-  }
-  set toastPanelOpened(value: boolean) {
-    this._toastPanelOpened = value;
+    return this.storageService.get('toastOpened') as boolean;
   }
 
   get workspaceStore(): WorkspaceStore {
@@ -267,7 +258,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private welcomeWindowService: WelcomeWindowService,
     public dialogWindow: MatDialog,
-    private queryService: QueryService
+    private queryService: QueryService,
+    private storageService: StorageService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
@@ -569,7 +561,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   toastOpenedChange(opened: boolean) {
     this.map.viewController.padding[2] = opened ? 280 : 0;
-    this.toastPanelOpened = opened;
   }
 
   public onClearSearch() {
@@ -736,6 +727,22 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       return 'down';
     }
+  }
+
+  getToastPanelOffsetY() {
+    let status = 'noExpansion';
+    console.log('this.toastPanelOpened', this.toastPanelOpened);
+    if (this.expansionPanelExpanded) {
+      if (this.toastPanelOpened) {
+        status = 'expansionAndToastOpened';
+      } else {
+        status = 'expansionAndToastClosed';
+      }
+    } else {
+      status = 'noExpansion';
+    }
+    console.log('status', status);
+    return status;
   }
 
   getToastPanelStatus() {

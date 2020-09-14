@@ -117,21 +117,29 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
     ]),
     trigger('toastPanelOffsetY', [
       state(
-        'false',
+        'noExpansion',
         style({
           bottom: '0'
         })
       ),
       state(
-        'true',
+        'expansionAndToastOpened',
+        style({
+          bottom: '285px',
+          zIndex: '999'
+        })
+      ),
+      state(
+        'expansionAndToastClosed',
         style({
           bottom: '285px',
           zIndex: '1'
         })
       ),
-      transition('* => void', animate('0ms')),
-      transition('* => *', animate('200ms')),
-    ])
+    transition('noExpansion => noExpansion', animate('10ms')),
+    transition('expansionAndToastOpened => expansionAndToastOpened', animate('200ms')),
+    transition('expansionAndToastClosed => expansionAndToastClosed', animate('200ms')),
+       ])
   ];
 }
 

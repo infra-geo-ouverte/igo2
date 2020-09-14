@@ -170,7 +170,7 @@
   [map]="map"
   [store]="queryStore"
   [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getExtent()"
-  [@toastPanelOffsetY]="expansionPanelExpanded"
+  [@toastPanelOffsetY]="getToastPanelOffsetY()"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
   (openedChange)="toastOpenedChange($event)"
   (fullExtentEvent)="fullExtent = $event">
