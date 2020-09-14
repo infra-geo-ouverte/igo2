@@ -33,6 +33,116 @@
         }
       },
       {
+        "element": "igo-actionbar-item:nth-child(1) mat-list-item",
+        "title": "interactiveTour.global.search-tool-title",
+        "text": "interactiveTour.global.search-tool",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(2) mat-list-item",
+        "title": "interactiveTour.global.context-title",
+        "text": "interactiveTour.global.context",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(3) mat-list-item",
+        "title": "interactiveTour.global.map-tool-title",
+        "text": "interactiveTour.global.map-tool",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(4) mat-list-item",
+        "title": "interactiveTour.global.spatial-filter-title",
+        "text": "interactiveTour.global.spatial-filter",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(5) mat-list-item",
+        "title": "interactiveTour.global.measurer-tool-title",
+        "text": "interactiveTour.global.measurer-tool",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(6) mat-list-item",
+        "title": "interactiveTour.global.directions-tool-title",
+        "text": "interactiveTour.global.directions-tool",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(7) mat-list-item",
+        "title": "interactiveTour.global.catalog-tool-title",
+        "text": "interactiveTour.global.catalog-tool",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(8) mat-list-item",
+        "title": "interactiveTour.global.import-export-title",
+        "text": "interactiveTour.global.import-export",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(9) mat-list-item",
+        "title": "interactiveTour.global.print-tool-title",
+        "text": "interactiveTour.global.print-tool",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(10) mat-list-item",
+        "title": "interactiveTour.global.share-map-title",
+        "text": "interactiveTour.global.share-map",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(11) mat-list-item",
+        "title": "interactiveTour.global.about-title",
+        "text": "interactiveTour.global.about",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
         "element": "igo-actionbar-item:nth-child(2) mat-list-item",
         "title": "interactiveTour.global.context-title",
         "text": "interactiveTour.global.context",
