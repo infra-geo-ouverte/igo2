@@ -731,7 +731,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   getToastPanelOffsetY() {
     let status = 'noExpansion';
-    console.log('this.toastPanelOpened', this.toastPanelOpened);
     if (this.expansionPanelExpanded) {
       if (this.toastPanelOpened) {
         status = 'expansionAndToastOpened';
@@ -741,7 +740,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     } else {
       status = 'noExpansion';
     }
-    console.log('status', status);
     return status;
   }
 
