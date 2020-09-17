@@ -103,16 +103,6 @@
         "disableInteraction": true
       },
       {
-        "element": "igo-actionbar-item:nth-child(12) mat-list-item",
-        "title": "interactiveTour.global.about-title",
-        "text": "interactiveTour.global.about",
-        "disableInteraction": true,
-        "onShow": {
-          "element": "#homeButton",
-          "action": "click"
-        }
-      },
-      {
         "element": "igo-actionbar-item:nth-child(2) mat-list-item",
         "title": "interactiveTour.global.context-title",
         "text": "interactiveTour.global.context-choose",
