@@ -59,7 +59,7 @@
       },
 
       {
-        "title": "WMS OGCFilters Destination",
+        "title": "WMS OgcFilters Destination",
         "visible": false,
         "id": "DestinationWMSOGCFILTERS",
         "linkedLayers": {
