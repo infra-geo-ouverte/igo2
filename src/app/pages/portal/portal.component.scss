@@ -165,6 +165,7 @@ igo-workspace-selector {
 }
 
 igo-entity-table-paginator {
+  z-index: -1;
   @include mobile {
     margin-left: -30px;
   }

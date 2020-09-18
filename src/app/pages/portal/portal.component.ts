@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
-import { debounceTime, take } from 'rxjs/operators';
+import { debounceTime, take, pairwise } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
@@ -20,7 +20,8 @@ import {
   ConfigService,
   LanguageService,
   MessageService,
-  StorageService
+  StorageService,
+  StorageScope
 } from '@igo2/core';
 import {
   ActionbarMode,
@@ -227,6 +228,13 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.storageService.get('toastOpened') as boolean;
   }
 
+  set toastPanelOpened(value: boolean) {
+    if (value === this.storageService.get('toastOpened')) {
+      return;
+    }
+    this.storageService.set('toastOpened', value, StorageScope.SESSION);
+  }
+
   get workspaceStore(): WorkspaceStore {
     return this.workspaceState.store;
   }
@@ -299,9 +307,16 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     ]);
 
-    this.queryStore.count$.subscribe((i) => {
-      this.map.viewController.padding[2] = i ? 280 : 0;
-    });
+    this.queryStore.count$
+      .pipe(pairwise())
+      .subscribe(([prevCnt, currentCnt]) => {
+        this.map.viewController.padding[2] = currentCnt ? 280 : 0;
+        // on mobile. Close the toast if workspace is opened, on new query
+        if (prevCnt === 0 && currentCnt !== prevCnt && this.isMobile() &&
+          this.hasExpansionPanel && this.expansionPanelExpanded && this.toastPanelOpened) {
+          this.toastPanelOpened = false;
+        }
+      });
     this.readQueryParams();
 
     this.onSettingsChange$.subscribe(() => {
@@ -561,6 +576,13 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   toastOpenedChange(opened: boolean) {
     this.map.viewController.padding[2] = opened ? 280 : 0;
+    this.handleExpansionAndToastOnMobile();
+  }
+
+  private handleExpansionAndToastOnMobile() {
+    if (this.isMobile() && this.hasExpansionPanel && this.expansionPanelExpanded && this.toastPanelOpened) {
+      this.expansionPanelExpanded = false;
+    }
   }
 
   public onClearSearch() {
