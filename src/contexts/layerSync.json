@@ -1,14 +1,69 @@
 {
-    "uri": "ogcFilters2",
-    "title": "Événements de sécurité civile",
+    "uri": "layerSync",
+    "title": "Layer Sync",
     "base": "_base",
     "layers": [
-      {
-        "title": "Destination WMS",
-        "visible": false,
-        "id": "12",
+      {        
+        "title": "WMS TimeFilter Destination",
+        "id": "TIMEFILTERDestination",
         "linkedLayers": {
-          "linkId": "wms2"
+          "linkId": "wmsTimeFilterDest"
+        },
+        "visible": true,
+        "sourceOptions": {
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+          "timeFilterable": true,
+          "queryable": true,
+          "queryFormat": "gml2",
+          "queryTitle": "date_observation",
+          "optionsFromCapabilities": true,
+          "params": {
+            "layers": "vg_observation_v_autre_wmst",
+            "version": "1.3.0"
+          },
+          "type": "wms"
+        }
+      },
+      {        
+        "title": "WMS TimeFilter Source",
+        "id": "TIMEFILTERSource",
+        "linkedLayers": {
+          "linkId": "wmsTimeFilterSrc",
+          "links": [{
+            "bidirectionnal": true,
+            "linkedIds": ["wmsTimeFilterDest"],
+            "properties": ["opacity","timeFilter","visible"]
+            }]
+        },
+        "visible": true,
+        "sourceOptions": {
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+          "timeFilterable": true,
+          "timeFilter": {
+            "min": "1990-01-01",
+            "max": "2020-03-28",
+            "style": "calendar",
+            "range": true,
+            "type": "date"
+          },
+          "queryable": true,
+          "queryFormat": "gml2",
+          "queryTitle": "date_observation",
+          "optionsFromCapabilities": true,
+          "params": {
+            "layers": "vg_observation_v_autre_wmst",
+            "version": "1.3.0"
+          },
+          "type": "wms"
+        }
+      },
+
+      {
+        "title": "WMS OGCFilters Destination",
+        "visible": false,
+        "id": "DestinationWMSOGCFILTERS",
+        "linkedLayers": {
+          "linkId": "wmsOgcFiltersDest"
         },
         "sourceOptions": {
           "queryable": true,
@@ -29,16 +84,16 @@
         }
       },
       {
-        "title": "Source WMS",
-        "id": "1",
+        "title": "WMS OgcFilters Source",
+        "id": "wmsOgcFiltersSrc",
         "minResolution": 0,
         "maxResolution": 400,
         "linkedLayers": {
-          "linkId": "wms",
+          "linkId": "wmsOgcFiltersSrc",
           "links": [{
             "bidirectionnal": true,
             "syncedDelete": true,
-            "linkedIds": ["wms2","wfs"],
+            "linkedIds": ["wmsOgcFiltersDest","wfsOgcFilterDest"],
             "properties": ["zIndex", "opacity","visible","ogcFilters","minResolution", "maxResolution" ]
           }]
         },
@@ -171,9 +226,9 @@
         }
       },
       {
-        "title": "Destination WFS",
+        "title": "WFS OgcFilters Destination",
         "linkedLayers": {
-          "linkId": "wfs"
+          "linkId": "wfsOgcFilterDest"
         },
         "showInLayerList": true,
         "visible": true,
@@ -196,6 +251,7 @@
       "contextManager",
       "mapTools",
       "ogcFilter",
+      "timeFilter",
       "measurer",
       "directions",
       "catalog",

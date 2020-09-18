@@ -39,7 +39,7 @@
       "linkedLayers": {
         "linkId": "HybrideAuto",
         "links": [{
-          "bidirectionnal": false,
+          "bidirectionnal": true,
           "syncedDelete": true,
           "linkedIds": ["bgr_v_sous_route_res_sup_act"],
           "properties": ["visible"]
@@ -76,7 +76,7 @@
       "linkedLayers": {
         "linkId": "HybrideVelo",
         "links": [{
-          "bidirectionnal": false,
+          "bidirectionnal": true,
           "syncedDelete": true,
           "linkedIds": ["convi_velo_glv"],
           "properties": ["visible"]

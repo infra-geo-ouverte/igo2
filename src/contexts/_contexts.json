@@ -16,8 +16,8 @@
     "title": "Filtre attributaire (Attribute filter)"
   },
   {
-    "uri": "ogcFilters2",
-    "title": "Synchronisation de layers (Filtre attributaire)"
+    "uri": "layerSync",
+    "title": "Synchronisation de layers"
   },
   {
     "uri": "mapOverlay",
