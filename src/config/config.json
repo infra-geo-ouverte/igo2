@@ -7,6 +7,7 @@
   "theme": "blue-theme",
   "hasExpansionPanel": false,
   "hasSearchPointerSummary": false,
+  "hasFeatureEmphasisOnSelection": true,
   "searchSources": {
     "cadastre": {
       "enabled": true

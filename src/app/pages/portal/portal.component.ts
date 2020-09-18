@@ -101,6 +101,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
+  public hasFeatureEmphasisOnSelection: Boolean = false;
   public expansionPanelExpanded = false;
   public toastPanelOpened = true;
   public fullExtent;
@@ -271,6 +272,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
+    this.hasFeatureEmphasisOnSelection = this.configService.getConfig('hasFeatureEmphasisOnSelection');
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
