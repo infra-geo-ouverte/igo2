@@ -9,7 +9,7 @@
         "text": "interactiveTour.global.menu-button",
         "onHide": {
           "action": "click",
-          "condition": "app-sidenav:not([ng-reflect-opened=true])"
+          "condition": "mat-sidenav:not(.mat-drawer-opened)"
         }
       },
       {
@@ -175,6 +175,88 @@
       {
         "element": "div.igo-panel-title",
         "text": "interactiveTour.measurer.start"
+      },
+      {
+        "element": "div.measure-type-toggle",
+        "text": "interactiveTour.measurer.type"
+      },
+      {
+        "element": "div.measure-options",
+        "text": "interactiveTour.measurer.options"
+      },
+      {
+        "element": "div.measure-options mat-slide-toggle:first-child",
+        "text": "interactiveTour.measurer.toggle-2"
+      },
+      {
+        "element": "div.measure-options mat-slide-toggle:nth-child(2)",
+        "text": "interactiveTour.measurer.toggle-3"
+      },
+      {
+        "element": "div.measure-options mat-slide-toggle:last-child",
+        "text": "interactiveTour.measurer.toggle-4"
+      },
+      {
+        "element": "app-map-overlay",
+        "text": "interactiveTour.measurer.map",
+        "position": ""
+      },
+      {
+        "element": "igo-measurer-item:first-of-type mat-form-field.measure-field",
+        "text": "interactiveTour.measurer.measure-field"
+      },
+      {
+        "element": "igo-measurer-item:first-of-type mat-form-field.unit-field",
+        "text": "interactiveTour.measurer.measure-unit"
+      },
+      {
+        "element": "mat-button-toggle:last-of-type button",
+        "text": "interactiveTour.measurer.area-click",
+        "onHide": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-measurer-item:first-of-type mat-form-field.measure-field",
+        "text": "interactiveTour.measurer.perimeter"
+      },
+      {
+        "element": "igo-measurer-item:last-of-type mat-form-field.measure-field",
+        "text": "interactiveTour.measurer.area-field"
+      },
+      {
+        "element": "igo-measurer-item:last-of-type mat-form-field.unit-field",
+        "text": "interactiveTour.measurer.area-unit"
+      },
+      {
+        "element": "app-map-overlay",
+        "text": "interactiveTour.measurer.map-2",
+        "position": "",
+        "onHide": {
+          "action": "click",
+          "waitFor": "tbody",
+          "condition": "!tbody"
+        }
+      },
+      {
+        "element": "igo-entity-table.table-compact",
+        "text": "interactiveTour.measurer.results"
+      },
+      {
+        "element": "div.measure-store-buttons",
+        "text": "interactiveTour.measurer.results-buttons"
+      },
+      {
+        "element": "div.mat-checkbox-inner-container",
+        "text": "interactiveTour.measurer.check-measure",
+        "onShow": {
+          "action": "click",
+          "condition": "div.measure-store-buttons .mat-focus-indicator:disabled"
+        }
+      },
+      {
+        "element": "div.measure-store-buttons",
+        "text": "interactiveTour.measurer.active-results-buttons"
       }
     ]
   },
@@ -233,10 +315,7 @@
       },
       {
         "element": "#mat-tab-label-0-1",
-        "text": "interactiveTour.spatial-filter.drawing-select",
-        "onShow": {
-          "action": "click"
-        }
+        "text": "interactiveTour.spatial-filter.drawing-select"
       },
       {
         "element": "div.spatial-type-toggle",

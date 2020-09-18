@@ -84,7 +84,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": true,
-              "buildOptimizer": true
+              "buildOptimizer": false
             },
             "github": {
               "budgets": [
@@ -107,7 +107,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": true,
-              "buildOptimizer": true
+              "buildOptimizer": false
             }
           }
         },
