@@ -18,6 +18,7 @@ import {
   IgoContextMenuModule,
   IgoToolModule,
   IgoEntityTableModule,
+  IgoEntityTablePaginatorModule,
   IgoInteractiveTourModule
 } from '@igo2/common';
 
@@ -42,6 +43,8 @@ import { AppToastPanelModule } from './toast-panel/toast-panel.module';
 import { AppSidenavModule } from './sidenav/sidenav.module';
 
 import { PortalComponent } from './portal.component';
+import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toast-panel-for-expansion.module';
+
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
 
@@ -71,11 +74,13 @@ import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
     IgoIntegrationModule,
     AppExpansionPanelModule,
     AppToastPanelModule,
+    AppToastPanelForExpansionModule,
     AppSidenavModule,
     MapOverlayModule,
     IgoContextManagerModule,
     IgoContextMapButtonModule,
     IgoEntityTableModule,
+    IgoEntityTablePaginatorModule,
     IgoInteractiveTourModule,
     IgoWelcomeWindowModule
   ],

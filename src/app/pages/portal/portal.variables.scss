@@ -7,7 +7,7 @@ $app-mobile-min-space-right: 40px;
 $app-expansion-panel-collapsed-height: 40px;
 $app-expansion-panel-collapsed-width: 40px;
 $app-expansion-panel-height: 281px;
-$app-expansion-panel-header-height: $app-expansion-panel-collapsed-height;
+$app-expansion-panel-header-height: calc(#{$app-expansion-panel-collapsed-height} + 10px);
 
 $app-toast-panel-collapsed-height: 48px;
 $app-toast-panel-max-height: 281px;
@@ -20,10 +20,11 @@ $app-sidenav-height: calc(100% - #{$app-sidenav-margin-top});
 $app-sidenav-width: 400px;
 $app-sidenav-width-mobile: calc(100% - #{$app-mobile-min-space-right} - #{$igo-margin});
 
-$igo-toast-panel-collapsed-height: 48px;
-$igo-toast-panel-max-height: 300px;
-$igo-toast-panel-width: 30%;
-
 $search-bar-left: $igo-icon-size + $igo-margin;
 $search-bar-width: calc(#{$app-sidenav-width} - #{$search-bar-left} - (2 * #{$igo-margin}));
 $search-bar-width-mobile: calc(100% - #{$app-mobile-min-space-right} - #{$search-bar-left} - (3 * #{$igo-margin}));
+
+$app-footer-height: 49px;
+$toast-panel-for-expansion-collapsed-height: 48px;
+$toast-panel-for-expansion-max-height: 329px;
+$toast-panel-for-expansion-width: 30%;

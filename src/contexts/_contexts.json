@@ -16,6 +16,10 @@
     "title": "Filtre attributaire (Attribute filter)"
   },
   {
+    "uri": "workspace",
+    "title": "Workspace (vue tabulaire)"
+  },
+  {
     "uri": "mapOverlay",
     "title": "Superposition de carte (Map overlay)"
   },

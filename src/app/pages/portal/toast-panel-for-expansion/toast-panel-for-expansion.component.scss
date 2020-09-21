@@ -1,0 +1,39 @@
+@import '../portal.variables';
+
+:host {
+  @extend %box-shadowed;
+
+  background-color: white;
+
+  height: $toast-panel-for-expansion-collapsed-height;
+  max-height: $toast-panel-for-expansion-max-height;
+
+  transition: height 280ms cubic-bezier(.4,0,.2,1);
+  padding: $igo-padding;
+
+  @include mobile {
+    max-height: 40%;
+  }
+}
+
+:host.toast-panel-for-expansion-opened {
+  height: $toast-panel-for-expansion-max-height;
+
+  @include mobile {
+    height: 40%;
+  }
+}
+
+igo-panel {
+  position: relative;
+  height: 100%;
+
+  ::ng-deep .igo-panel-header:hover {
+    cursor: pointer;
+  }
+}
+
+div[igostoppropagation] {
+  height: 100%;
+  width: 100%;
+}
