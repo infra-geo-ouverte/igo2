@@ -169,6 +169,7 @@
 <app-toast-panel *ngIf="!(queryStore.empty$ | async)"
   [map]="map"
   [store]="queryStore"
+  [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
   [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getExtent()"
   [@toastPanelOffsetY]="getToastPanelOffsetY()"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"

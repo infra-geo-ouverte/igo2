@@ -99,6 +99,14 @@ Résumé
                Ce dernier contient les données tabulaires pour
                 les données WFS / Vectorielle / Cluster
          -
+       * - `hasFeatureEmphasisOnSelection`
+         - Boolean
+         - .. line-block::
+               Permet d'ajouter à la carte une géométrie ponctuelle pour les entités 
+               linéaire ou polygonale sélectionnées ou survolées lors d'une 
+               interrogation de la carte et qui sont de trop petite taille par 
+               rapport à l'étendue de la carte. 
+         -
        * - importExport
          - `ImportExport`_
          - .. line-block::

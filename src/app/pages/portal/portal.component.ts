@@ -110,6 +110,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
+  public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspacePaginator: MatPaginator;
   public workspaceEntitySortChange$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -271,6 +272,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
+    this.hasFeatureEmphasisOnSelection = this.configService.getConfig('hasFeatureEmphasisOnSelection');
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
