@@ -27,8 +27,6 @@ import {
   IgoMap,
   FeatureMotion,
   moveToOlFeatures,
-  createOverlayMarkerStyle,
-  createOverlayDefaultStyle,
   featureToOl,
   featuresAreTooDeepInView,
   featureFromOl,
@@ -80,7 +78,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   set store(value: EntityStore<SearchResult<Feature>>) {
     this._store = value;
-    this.store.entities$.subscribe(_entities => {
+    this.store.entities$.subscribe((_entities) => {
       this.unselectResult();
     });
   }
@@ -129,7 +127,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   private format = new olFormatGeoJSON();
 
   private resultOrResolution$$: Subscription;
-  private focusedResult$: BehaviorSubject<SearchResult<Feature>> = new BehaviorSubject(undefined);
+  private focusedResult$: BehaviorSubject<
+    SearchResult<Feature>
+  > = new BehaviorSubject(undefined);
   private abstractFocusedOrSelectedResult: Feature;
 
   public withZoomButton = true;
@@ -207,15 +207,17 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     public languageService: LanguageService,
     private storageState: StorageState
   ) {
-
     this.zoomAuto$.next(this.zoomAuto);
     this.storageService.storageChange$
-      .pipe(skipWhile((storageChange: StorageServiceEvent) => storageChange.key !== 'zoomAuto'))
+      .pipe(
+        skipWhile(
+          (storageChange: StorageServiceEvent) =>
+            storageChange.key !== 'zoomAuto'
+        )
+      )
       .subscribe((storageChange: StorageServiceEvent) => {
         this.zoomAuto$.next(this.zoomAuto);
-      }
-      );
-
+      });
   }
 
   ngOnInit() {
@@ -227,14 +229,22 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     let trigger;
     if (this.hasFeatureEmphasisOnSelection) {
       this.resultOrResolution$$ = combineLatest([
-        this.focusedResult$.pipe(tap((res) => {latestResult = res; trigger = 'focused'; })),
-        this.resultSelected$.pipe(tap((res) => {latestResult = res; trigger = 'selected'; })),
+        this.focusedResult$.pipe(
+          tap((res) => {
+            latestResult = res;
+            trigger = 'focused';
+          })
+        ),
+        this.resultSelected$.pipe(
+          tap((res) => {
+            latestResult = res;
+            trigger = 'selected';
+          })
+        ),
         this.map.viewController.resolution$,
-        this.store.entities$]
-      ).subscribe(() => this.buildResultEmphasis(latestResult, trigger));
+        this.store.entities$
+      ]).subscribe(() => this.buildResultEmphasis(latestResult, trigger));
     }
-
-
 
     this.actionStore.load([
       {
@@ -307,9 +317,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         checkbox: true,
         checkCondition: this.zoomAuto$,
         handler: () => {
-          this.storageService.set('zoomAuto', !this.storageService.get(
-            'zoomAuto'
-          ) as boolean);
+          this.storageService.set(
+            'zoomAuto',
+            !this.storageService.get('zoomAuto') as boolean
+          );
           this.zoomAutoEvent.emit(this.zoomAuto);
           if (this.zoomAuto && this.isResultSelected$.value === true) {
             this.selectResult(this.resultSelected$.getValue());
@@ -363,9 +374,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   private buildResultEmphasis(
     result: SearchResult<Feature>,
-    trigger: 'selected' | 'focused' | undefined) {
+    trigger: 'selected' | 'focused' | undefined
+  ) {
     this.clearFeatureEmphasis();
-    if (!result || (trigger === 'selected' && this.zoomAuto)) { return; }
+    if (!result || (trigger === 'selected' && this.zoomAuto)) {
+      return;
+    }
     const myOlFeature = featureToOl(result.data, this.map.projection);
     const olGeometry = myOlFeature.getGeometry();
     if (result.data.geometry.type !== 'Point') {
@@ -375,13 +389,20 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         const y = extent[1] + (extent[3] - extent[1]) / 2;
         const feature1 = new olFeature({
           name: 'abstractFocusedOrSelectedResult',
-          geometry: new olPoint([x, y]),
+          geometry: new olPoint([x, y])
         });
-        this.abstractFocusedOrSelectedResult = featureFromOl(feature1, this.map.projection);
-        this.abstractFocusedOrSelectedResult.meta.style =
-          this.getSelectedMarkerStyle(this.abstractFocusedOrSelectedResult);
+        this.abstractFocusedOrSelectedResult = featureFromOl(
+          feature1,
+          this.map.projection
+        );
+        this.abstractFocusedOrSelectedResult.meta.style = getSelectedMarkerStyle(
+          this.abstractFocusedOrSelectedResult
+        );
         this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
-        this.map.overlay.addFeature(this.abstractFocusedOrSelectedResult, FeatureMotion.None);
+        this.map.overlay.addFeature(
+          this.abstractFocusedOrSelectedResult,
+          FeatureMotion.None
+        );
       }
     }
   }
@@ -472,7 +493,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   clear() {
     this.clearFeatureEmphasis();
-    this.map.overlay.removeFeatures(this.store.all().map(f => f.data));
+    this.map.overlay.removeFeatures(this.store.all().map((f) => f.data));
     this.store.clear();
     this.unselectResult();
   }

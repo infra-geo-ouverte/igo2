@@ -112,7 +112,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   public hasExpansionPanel = false;
   public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspacePaginator: MatPaginator;
-  public workspaceEntitySortChange$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public workspaceEntitySortChange$: BehaviorSubject<
+    boolean
+  > = new BehaviorSubject(false);
 
   public fullExtent;
   public sidenavOpened = false;
@@ -135,7 +137,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
   public showToastPanelForExpansionToggle = false;
-  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(undefined);
+  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
+    undefined
+  );
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
@@ -272,7 +276,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
-    this.hasFeatureEmphasisOnSelection = this.configService.getConfig('hasFeatureEmphasisOnSelection');
+    this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
+      'hasFeatureEmphasisOnSelection'
+    );
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
@@ -314,8 +320,14 @@ export class PortalComponent implements OnInit, OnDestroy {
       .subscribe(([prevCnt, currentCnt]) => {
         this.map.viewController.padding[2] = currentCnt ? 280 : 0;
         // on mobile. Close the toast if workspace is opened, on new query
-        if (prevCnt === 0 && currentCnt !== prevCnt && this.isMobile() &&
-          this.hasExpansionPanel && this.expansionPanelExpanded && this.toastPanelOpened) {
+        if (
+          prevCnt === 0 &&
+          currentCnt !== prevCnt &&
+          this.isMobile() &&
+          this.hasExpansionPanel &&
+          this.expansionPanelExpanded &&
+          this.toastPanelOpened
+        ) {
           this.toastPanelOpened = false;
         }
       });
@@ -326,8 +338,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     this.workspaceState.workspaceEnabled$.next(this.hasExpansionPanel);
-    this.workspaceState.store.empty$.subscribe(workspaceEmpty => {
-      if (!this.hasExpansionPanel) { return; }
+    this.workspaceState.store.empty$.subscribe((workspaceEmpty) => {
+      if (!this.hasExpansionPanel) {
+        return;
+      }
       this.workspaceState.workspaceEnabled$.next(workspaceEmpty ? false : true);
       if (workspaceEmpty) {
         this.expansionPanelExpanded = false;
@@ -335,7 +349,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.updateMapBrowserClass();
     });
 
-    this.workspaceState.workspace$.subscribe(activeWks => {
+    this.workspaceState.workspace$.subscribe((activeWks) => {
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
         this.expansionPanelExpanded = true;
@@ -344,22 +358,26 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.activeWidget$$ = this.workspaceState.activeWorkspaceWidget$.subscribe((widget: Widget) => {
-      if (widget !== undefined) {
-        this.openToastPanelForExpansion();
-        this.showToastPanelForExpansionToggle = true;
-      } else {
-        this.closeToastPanelForExpansion();
-        this.showToastPanelForExpansionToggle = false;
+    this.activeWidget$$ = this.workspaceState.activeWorkspaceWidget$.subscribe(
+      (widget: Widget) => {
+        if (widget !== undefined) {
+          this.openToastPanelForExpansion();
+          this.showToastPanelForExpansionToggle = true;
+        } else {
+          this.closeToastPanelForExpansion();
+          this.showToastPanelForExpansionToggle = false;
+        }
       }
-    });
+    );
 
-    this.openSidenav$$ = this.toolState.openSidenav$.subscribe((openSidenav: boolean) => {
-      if (openSidenav) {
-        this.openSidenav();
-        this.toolState.openSidenav$.next(false);
+    this.openSidenav$$ = this.toolState.openSidenav$.subscribe(
+      (openSidenav: boolean) => {
+        if (openSidenav) {
+          this.openSidenav();
+          this.toolState.openSidenav$.next(false);
+        }
       }
-    });
+    );
   }
 
   paginatorChange(matPaginator: MatPaginator) {
@@ -374,19 +392,29 @@ export class PortalComponent implements OnInit, OnDestroy {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
     if (result && result.added) {
-
-      const results = result.added.map(res => {
+      const results = result.added.map((res) => {
         if (
           res &&
           res.ol &&
           res.ol.getProperties()._featureStore.layer &&
-          res.ol.getProperties()._featureStore.layer.visible) {
+          res.ol.getProperties()._featureStore.layer.visible
+        ) {
           const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
-          const feature = featureFromOl(res.ol, featureStoreLayer.map.projection, featureStoreLayer.ol);
+          const feature = featureFromOl(
+            res.ol,
+            featureStoreLayer.map.projection,
+            featureStoreLayer.ol
+          );
 
-          feature.meta.alias = this.queryService.getAllowedFieldsAndAlias(featureStoreLayer);
-          feature.meta.title = this.queryService.getQueryTitle(feature, featureStoreLayer) || feature.meta.title;
-          let querySearchSource = querySearchSourceArray.find((s) => s.title === feature.meta.sourceTitle);
+          feature.meta.alias = this.queryService.getAllowedFieldsAndAlias(
+            featureStoreLayer
+          );
+          feature.meta.title =
+            this.queryService.getQueryTitle(feature, featureStoreLayer) ||
+            feature.meta.title;
+          let querySearchSource = querySearchSourceArray.find(
+            (s) => s.title === feature.meta.sourceTitle
+          );
           if (!querySearchSource) {
             querySearchSource = new QuerySearchSource({
               title: feature.meta.sourceTitle
@@ -582,7 +610,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private handleExpansionAndToastOnMobile() {
-    if (this.isMobile() && this.hasExpansionPanel && this.expansionPanelExpanded && this.toastPanelOpened) {
+    if (
+      this.isMobile() &&
+      this.hasExpansionPanel &&
+      this.expansionPanelExpanded &&
+      this.toastPanelOpened
+    ) {
       this.expansionPanelExpanded = false;
     }
   }
@@ -663,7 +696,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.sidenavOpened && !this.isMobile()) {
       this.mapBrowser.nativeElement.classList.add('sidenav-offset-baselayers');
     } else {
-      this.mapBrowser.nativeElement.classList.remove('sidenav-offset-baselayers');
+      this.mapBrowser.nativeElement.classList.remove(
+        'sidenav-offset-baselayers'
+      );
     }
 
     if (!this.toastPanelOpened && header && !this.expansionPanelExpanded) {
@@ -680,7 +715,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     ) {
       this.mapBrowser.nativeElement.classList.add('toast-offset-attribution');
     } else {
-      this.mapBrowser.nativeElement.classList.remove('toast-offset-attribution');
+      this.mapBrowser.nativeElement.classList.remove(
+        'toast-offset-attribution'
+      );
     }
   }
 
