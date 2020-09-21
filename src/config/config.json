@@ -5,7 +5,7 @@
     }
   },
   "theme": "blue-theme",
-  "hasExpansionPanel": false,
+  "hasExpansionPanel": true,
   "hasSearchPointerSummary": false,
   "hasFeatureEmphasisOnSelection": true,
   "searchSources": {
@@ -15,7 +15,6 @@
   },
   "title": "IGO Démo",
   "welcomeWindow": {
-    "showAgainOnNewIGOVersion": true,
-    "nbVisitToShowAgain": 30
+    "showAgainOnNewIGOVersion": true
   }
 }

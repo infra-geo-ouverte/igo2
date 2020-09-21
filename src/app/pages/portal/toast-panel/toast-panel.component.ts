@@ -31,16 +31,22 @@ import {
   createOverlayDefaultStyle,
   featureToOl,
   featuresAreTooDeepInView,
-  featureFromOl
+  featureFromOl,
+  getMarkerStyle,
+  getSelectedMarkerStyle
 } from '@igo2/geo';
 import {
   Media,
   MediaService,
   LanguageService,
-  StorageService
+  StorageService,
+  StorageScope,
+  StorageServiceEvent
 } from '@igo2/core';
 import { tap } from 'rxjs/operators';
 
+import { StorageState } from '@igo2/integration';
+import { skipWhile } from 'rxjs/operators';
 @Component({
   selector: 'app-toast-panel',
   templateUrl: './toast-panel.component.html',
@@ -54,6 +60,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     UP: 'swipeup',
     DOWN: 'swipedown'
   };
+
+  get storageService(): StorageService {
+    return this.storageState.storageService;
+  }
 
   @Input()
   get map(): IgoMap {
@@ -78,17 +88,16 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   @Input()
   get opened(): boolean {
-    return this._opened;
+    return this.storageService.get('toastOpened') as boolean;
   }
   set opened(value: boolean) {
-    if (value === this._opened) {
+    if (value === this.storageService.get('toastOpened')) {
       return;
     }
+    this.storageService.set('toastOpened', value, StorageScope.SESSION);
 
-    this._opened = value;
-    this.openedChange.emit(this._opened);
+    this.openedChange.emit(this.storageService.get('toastOpened') as boolean);
   }
-  private _opened = true;
 
   @Input() hasFeatureEmphasisOnSelection: Boolean = false;
 
@@ -124,6 +133,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   private abstractFocusedOrSelectedResult: Feature;
 
   public withZoomButton = true;
+  zoomAuto$: BehaviorSubject<boolean> = new BehaviorSubject(undefined);
 
   @Output() openedChange = new EventEmitter<boolean>();
   @Output() zoomAutoEvent = new EventEmitter<boolean>();
@@ -192,51 +202,21 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     return this.multiple$;
   }
 
-  private getSelectedMarkerStyle(feature: Feature) {
-    if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({
-        text: feature.meta.mapTitle,
-        outlineColor: [0, 255, 255]
-      });
-    } else {
-      return createOverlayDefaultStyle({
-        text: feature.meta.mapTitle,
-        strokeWidth: 4,
-        strokeColor: [0, 255, 255]
-      });
-    }
-  }
-
-  private getMarkerStyle(feature: Feature) {
-    if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({
-        text: feature.meta.mapTitle,
-        opacity: 0.5,
-        outlineColor: [0, 255, 255]
-      });
-    } else if (
-      feature.geometry.type === 'LineString' ||
-      feature.geometry.type === 'MultiLineString'
-    ) {
-      return createOverlayDefaultStyle({
-        text: feature.meta.mapTitle,
-        strokeOpacity: 0.5,
-        strokeColor: [0, 255, 255]
-      });
-    } else {
-      return createOverlayDefaultStyle({
-        text: feature.meta.mapTitle,
-        fillOpacity: 0.15,
-        strokeColor: [0, 255, 255]
-      });
-    }
-  }
-
   constructor(
     public mediaService: MediaService,
     public languageService: LanguageService,
-    private storageService: StorageService
-  ) {}
+    private storageState: StorageState
+  ) {
+
+    this.zoomAuto$.next(this.zoomAuto);
+    this.storageService.storageChange$
+      .pipe(skipWhile((storageChange: StorageServiceEvent) => storageChange.key !== 'zoomAuto'))
+      .subscribe((storageChange: StorageServiceEvent) => {
+        this.zoomAuto$.next(this.zoomAuto);
+      }
+      );
+
+  }
 
   ngOnInit() {
     this.store.entities$.subscribe(() => {
@@ -325,7 +305,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           'toastPanel.zoomAutoTooltip'
         ),
         checkbox: true,
-        checkCondition: this.storageService.get('zoomAuto') as boolean,
+        checkCondition: this.zoomAuto$,
         handler: () => {
           this.storageService.set('zoomAuto', !this.storageService.get(
             'zoomAuto'
@@ -421,7 +401,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.focusedResult$.next(result);
     this.map.overlay.removeFeature(result.data);
 
-    result.data.meta.style = this.getSelectedMarkerStyle(result.data);
+    result.data.meta.style = getSelectedMarkerStyle(result.data);
     result.data.meta.style.setZIndex(2000);
     this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -433,7 +413,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
     this.map.overlay.removeFeature(result.data);
 
-    result.data.meta.style = this.getMarkerStyle(result.data);
+    result.data.meta.style = getMarkerStyle(result.data);
     result.data.meta.style.setZIndex(undefined);
     this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -452,10 +432,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     const features = [];
     for (const feature of this.store.all()) {
       if (feature.meta.id === result.meta.id) {
-        feature.data.meta.style = this.getSelectedMarkerStyle(feature.data);
+        feature.data.meta.style = getSelectedMarkerStyle(feature.data);
         feature.data.meta.style.setZIndex(2000);
       } else {
-        feature.data.meta.style = this.getMarkerStyle(feature.data);
+        feature.data.meta.style = getMarkerStyle(feature.data);
       }
       features.push(feature.data);
     }
@@ -484,7 +464,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
     const features = [];
     for (const feature of this.store.all()) {
-      feature.data.meta.style = this.getMarkerStyle(feature.data);
+      feature.data.meta.style = getMarkerStyle(feature.data);
       features.push(feature.data);
     }
     this.map.overlay.setFeatures(features, FeatureMotion.None, 'map');

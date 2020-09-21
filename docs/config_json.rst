@@ -98,7 +98,6 @@ Résumé
                de la carte.
                Ce dernier contient les données tabulaires pour
                 les données WFS / Vectorielle / Cluster
-               ** Encore en développement **
          -
        * - `hasFeatureEmphasisOnSelection`
          - Boolean
@@ -691,8 +690,11 @@ hasSearchPointerSummary
 hasExpansionPanel
 *****************
 
-    .. note::
-       En cours de construction
+    .. line-block::
+        Permet d'ouvrir un paneau d'expansion à partir
+        d'un bouton situé dans le coin inférieur gauche de la carte.
+        Ce dernier contient les données tabulaires pour
+        les données WFS / Vectorielle / Cluster.
 
 
 ***************
