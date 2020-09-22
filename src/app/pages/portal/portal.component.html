@@ -41,7 +41,8 @@
     </app-sidenav>
 
     <igo-map-browser
-
+      igoWorkspaceUpdator
+      [workspaceStore]="workspaceStore"
       igoSearchPointerSummary
       [igoSearchPointerSummaryDelay]="500"
       [igoSearchPointerSummaryEnabled]=igoSearchPointerSummaryEnabled
@@ -51,6 +52,7 @@
       [queryFeaturesHitTolerance]=5
       [waitForAllQueries]="true"
       [queryFeatures]="true"
+      [queryFeaturesHitTolerance]="15"
       igoMapContext
       igoLayerContext
       igoDropGeoFile
@@ -60,9 +62,9 @@
       (menuPosition)="onContextMenuOpen($event)"
       [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
       [@mapStateX]="sidenavOpened ? 'right' : 'left'"
-      (@mapStateX.start)="updateMapBrowserClass($event)"
+      (@mapStateX.start)="updateMapBrowserClass()"
       [@mapStateY]="getExpansionToastPanelStatus()"
-      (@mapStateY.start)="updateMapBrowserClass($event)">
+      (@mapStateY.start)="updateMapBrowserClass()">
 
       <igo-zoom-button [map]="map" color="primary"
         [@controlsOffsetY]="expansionPanelExpanded">
@@ -98,36 +100,79 @@
 </mat-sidenav-container>
 
 <app-expansion-panel
-  *ngIf="hasExpansionPanel"
+  *ngIf="hasExpansionPanel && (workspaceState.workspaceEnabled$ | async)"
+  [backdropShown]="expansionPanelBackdropShown"
   [(expanded)]="expansionPanelExpanded"
   [@expansionPanelSize]="getExpansionPanelStatus()"
   [@toastOffsetY]="(isMobile() && !toastPanelOpened && queryState.store.entities$.value.length > 0 && !expansionPanelExpanded) ? 'true' : 'false'">
 
   <ng-container expansionPanelHeader>
-    <!-- <igo-workspace-selector igoWorkspaceSelector [store]="workspaceStore" [map]="map"></igo-workspace-selector> -->
-    <!-- <igo-actionbar
-      *ngIf="workspace"
-      [store]="workspace.actionStore"
-      [horizontal]="true"
-      [xPosition]="'after'"
-      [yPosition]="'above'"
-      [withToggleButton]="true"
-      [withTitle]="actionbarWithTitle"
-      [mode]="actionbarMode">
-    </igo-actionbar> -->
+    <igo-workspace-selector
+      igoWorkspaceSelector
+      (toolToActivate)="toolToActivateFromWorkspace($event)"
+      [store]="workspaceStore"
+      [map]="map">
+    </igo-workspace-selector>
+
+    <ng-container *ngIf="selectedWorkspace$ | async as workspace">
+      <igo-actionbar
+        *ngIf="workspace.actionStore"
+        [store]="workspace.actionStore"
+        [withIcon]="true"
+        [withTitle]="actionbarWithTitle"
+        [horizontal]="true"
+        [withToggleButton]="actionbarMode === 'overlay'"
+        [mode]="actionbarMode">
+      </igo-actionbar>
+      <div class="spacer"></div>
+      <igo-entity-table-paginator
+        [store]="workspace.entityStore"
+        [entitySortChange$]="workspaceEntitySortChange$"
+        (paginatorChange)="paginatorChange($event)">
+      </igo-entity-table-paginator>
+    </ng-container>
   </ng-container>
 
-  <igo-entity-table
-    [store]="tableStore"
-    [template]="tableTemplate">
-  </igo-entity-table>
+  <ng-container *ngIf="selectedWorkspace$ | async as workspace">
+    <igo-entity-table
+      [paginator]="workspacePaginator"
+      *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate"
+      [store]="workspace.entityStore"
+      (entitySortChange)="entitySortChange()"
+      (entitySelectChange)="entitySelectChange($event)"
+      [template]="workspace.meta.tableTemplate">
+    </igo-entity-table>
+  </ng-container>
+
 </app-expansion-panel>
+
+<app-toast-panel-for-expansion
+  [withHeader]="false"
+  [(opened)]="toastPanelForExpansionOpened">
+
+  <div class="toast-panel-for-expansion-close-button-container">
+    <button
+      mat-icon-button
+      color="warn"
+      (click)="toastPanelForExpansionOpened = false">
+      <mat-icon svgIcon="close"></mat-icon>
+    </button>
+  </div>
+
+  <igo-workspace-widget-outlet
+    *ngIf="selectedWorkspace$ | async as workspace"
+    [workspace]="workspace"
+    (deactivateWidget)="onDeactivateWorkspaceWidget()">
+  </igo-workspace-widget-outlet>
+
+</app-toast-panel-for-expansion >
 
 <app-toast-panel *ngIf="!(queryStore.empty$ | async)"
   [map]="map"
   [store]="queryStore"
+  [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
   [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getExtent()"
-  [@toastPanelOffsetY]="expansionPanelExpanded"
+  [@toastPanelOffsetY]="getToastPanelOffsetY()"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
   (openedChange)="toastOpenedChange($event)"
   (fullExtentEvent)="fullExtent = $event">

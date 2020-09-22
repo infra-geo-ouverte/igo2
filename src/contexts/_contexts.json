@@ -14,10 +14,14 @@
   {
     "uri": "ogcFilters",
     "title": "Filtre attributaire (Attribute filter)"
-  },
+  },  
   {
     "uri": "layerSync",
     "title": "Synchronisation de layers"
+  },
+  {
+    "uri": "workspace",
+    "title": "Workspace (vue tabulaire)"
   },
   {
     "uri": "mapOverlay",
