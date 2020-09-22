@@ -278,11 +278,11 @@
         "text": "interactiveTour.spatial-filter.zone-type"
       },
       {
-        "element": "#mat-tab-label-0-0",
+        "element": "div.mat-tab-labels div:first-of-type",
         "text": "interactiveTour.spatial-filter.predefined"
       },
       {
-        "element": "#mat-tab-label-0-1",
+        "element": "div.mat-tab-labels div:nth-of-type(2)",
         "text": "interactiveTour.spatial-filter.drawing"
       },
       {
@@ -298,24 +298,31 @@
         "text": "interactiveTour.spatial-filter.results-type"
       },
       {
-        "element": "#mat-radio-29",
+        "element": "mat-radio-group mat-radio-button:first-of-type",
         "text": "interactiveTour.spatial-filter.address"
       },
       {
-        "element": "#mat-radio-29",
+        "element": "mat-radio-group mat-radio-button:first-of-type",
         "text": "interactiveTour.spatial-filter.warning-address"
       },
       {
-        "element": "#mat-radio-30",
+        "element": "mat-radio-group mat-radio-button:last-of-type",
         "text": "interactiveTour.spatial-filter.thematics"
       },
       {
         "element": "div.buttons .clear-search-button",
-        "text": "interactiveTour.spatial-filter.initialize"
+        "text": "interactiveTour.spatial-filter.initialize",
+        "beforeShow": {
+          "element": "div.mat-tab-labels div:first-of-type",
+          "action":"click"
+        }
       },
       {
-        "element": "#mat-tab-label-0-1",
-        "text": "interactiveTour.spatial-filter.drawing-select"
+        "element": "div.mat-tab-labels div:nth-of-type(2)",
+        "text": "interactiveTour.spatial-filter.drawing-select",
+        "onShow": {
+          "action": "click"
+        }
       },
       {
         "element": "div.spatial-type-toggle",
