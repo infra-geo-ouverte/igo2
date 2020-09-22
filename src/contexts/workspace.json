@@ -1,0 +1,86 @@
+{
+    "uri": "workspace",
+    "title": "Workspace",
+    "base": "_base",
+    "layers": [
+      {
+        "title": "Vector dataSource",
+        "visible": true,
+        "sourceOptions": {
+          "queryable": true,
+          "queryTitle": "nomnavcana",
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
+          "type": "vector"
+        }
+      },
+      {
+        "title": "Cluster dataSource",
+        "visible": false,
+        "sourceOptions": {
+          "queryable": true,
+          "queryTitle": "identificationDesTravaux",
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
+          "type": "cluster",
+          "distance": 50
+        }
+      },
+      {
+        "title": "WFS",
+        "visible": true,
+        "sourceOptions": {
+          "type": "wfs",
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+          "queryable": true,
+          "queryTitle": "desclocal",
+          "params": {
+            "featureTypes": "telephone_urg",
+            "fieldNameGeometry": "geometry",
+            "maxFeatures": 10000,
+            "version": "1.1.0",
+            "outputFormat": "geojson",
+            "outputFormatDownload": "shp"
+          },
+
+        "ogcFilters": {
+          "enabled": true,
+          "editable": true,
+          "allowedOperatorsType": "all",
+          "filters": {
+            "operator": "PropertyIsEqualTo",
+            "propertyName": "orgresp",
+            "expression": "Bell"
+          },
+          "pushButtons": {
+            "groups": [
+              {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
+            ],
+            "bundles": [
+              {
+                "id": "id1",
+                "logical": "Or",
+                "buttons": [
+                  {
+                    "title": "Bell",
+                    "enabled": true,
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "orgresp",
+                      "expression": "Bell"
+                    }
+                  },
+                  {
+                    "title": "MTQ",
+                    "enabled": false,
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "orgresp",
+                      "expression": "MTQ"
+                    }
+                  }
+                ]
+              }
+            ]
+        }}
+        }
+      }]
+  }

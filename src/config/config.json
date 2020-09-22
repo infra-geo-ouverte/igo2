@@ -5,8 +5,9 @@
     }
   },
   "theme": "blue-theme",
-  "hasExpansionPanel": false,
+  "hasExpansionPanel": true,
   "hasSearchPointerSummary": false,
+  "hasFeatureEmphasisOnSelection": true,
   "searchSources": {
     "cadastre": {
       "enabled": true
@@ -14,7 +15,6 @@
   },
   "title": "IGO Démo",
   "welcomeWindow": {
-    "showAgainOnNewIGOVersion": true,
-    "nbVisitToShowAgain": 30
+    "showAgainOnNewIGOVersion": true
   }
 }
