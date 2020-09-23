@@ -312,14 +312,15 @@
       {
         "element": "div.buttons .clear-search-button",
         "text": "interactiveTour.spatial-filter.initialize",
-        "beforeShow": {
+        "beforeShow":{
           "element": "div.mat-tab-labels div:first-of-type",
-          "action":"click"
+          "action": "click"
         }
       },
       {
         "element": "div.mat-tab-labels div:nth-of-type(2)",
         "text": "interactiveTour.spatial-filter.drawing-select",
+        "noBackButton": true,
         "onShow": {
           "action": "click"
         }
@@ -337,7 +338,7 @@
         "text": "interactiveTour.spatial-filter.freehand-drawing"
       },
       {
-        "element": "mat-sidenav-content",
+        "element": "app-map-overlay",
         "text": "interactiveTour.spatial-filter.drawing-map",
         "position": ""
       },
@@ -350,8 +351,11 @@
         "text": "interactiveTour.spatial-filter.launch"
       },
       {
-        "element": "div.results",
-        "text": "interactiveTour.spatial-filter.results-table"
+        "element": "app-expansion-panel",
+        "text": "interactiveTour.spatial-filter.results-table",
+        "onShow":{
+          "action": "click"
+        }
       },
       {
         "element": "button.remove-button",
