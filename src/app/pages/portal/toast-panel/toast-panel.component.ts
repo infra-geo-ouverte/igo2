@@ -147,6 +147,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     return this.opened;
   }
 
+  @HostBinding('class.app-full-toast-panel-collapsed')
+  get hasFullCollapsedClass() {
+    return !this.opened && this.fullExtent;
+  }
+
   @HostBinding('style.visibility')
   get displayStyle() {
     if (this.results.length) {
