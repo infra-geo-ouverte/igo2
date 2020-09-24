@@ -171,7 +171,7 @@ Propriétés
        * - legendOptions
          - `legendOptions`_
          - .. line-block::
-               Permet de définir des options sur la légende
+               Permet de définir des options sur la légende.
          -
          -
        * - minResolution
@@ -306,7 +306,7 @@ Liens
 
 
 
-Propriétés de legendOptions - Objet
+Propriétés de legendOptions
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -325,7 +325,7 @@ Propriétés de legendOptions - Objet
        * - collapsed
          - Boolean
          - .. line-block::
-               Définir si la légende est ouverte
+               Définir si la légende est ouverte.
          - .. line-block::
                true | false
 
@@ -333,12 +333,12 @@ Propriétés de legendOptions - Objet
        * - display
          - Boolean
          - .. line-block::
-               Indique si on affiche la légende
+               Indique si on affiche la légende.
          - true | false
          - true
        * - html
          - String
-         - Inscription html pour la légende
+         - Inscription html pour la légende.
          -
          -
        * - stylesAvailable
@@ -348,6 +348,7 @@ Propriétés de legendOptions - Objet
                   { "name": "raster", "title": "pixel" },
                   { "name": "Contour", "title": "aucune couleur" }
                 ]
+
          -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
@@ -861,20 +862,20 @@ Propriétés
        * - timeFilter
          - Object
          - .. line-block::
-               Configuration du type de filtre temporel.
+               Configuration du filtre temporel.
          - Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_ .
          -
        * - ogcFilters
          - Object
          - .. line-block::
-               Configuration des filtres OGC appliqués.
+               Configuration des filtres attributaires(OGC) appliqués sur la couche.
          - Référez-vous à : `Configuration filtre OGC (ogcFilters)`_ .
          -
        * - sourceFields
          - Object
          - .. line-block::
-               Configuration d'alias sur des attributs.
-         - Référez-vous à : `Configuration d'alias sur des attributs (sourceFields)`_ .
+               Configuration des attributs du layer. (champs source de la couche)
+         - Référez-vous à : `Configuration des attributs (sourceFields)`_ .
          -
 
 
@@ -1073,6 +1074,7 @@ Options de sources avancées
 
 Configuration filtre temporel WMS-T (timeFilter)
 ================================================
+
 Exemples
 
         .. code:: json
@@ -1142,153 +1144,448 @@ Propriétés de l'objet timeFilter
 
 .. _igoOgcFilterObject:
 
-Configuration filtre OGC (ogcFilters)
+
+
+Configuration filtre attributaire OGC (ogcFilters)
 ================================================
 
-    .. note::
-       En cours de construction
+  Permet de définir la configuration des filtres attributaires(OGC) qui seront appliqués par l'utilisateur sur la couche.
+  Plusieurs configuration de filtre sont disponibles. Par exemple, il est possible de créer des boutons sur lesquels l'utilisateur
+  pourra appuyer pour filtrer la couche affichée, de réaliser des groupes de filtre, ou bien de donner la possibilité à l'utilisateur
+  de créer lui même ces propres filtres à l'aide des filtres avancés.
 
-Exemples
+  ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+  ** Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils.
+
+  ** Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à : `Configuration des attributs (sourceFields)`_ .
+
+Exemple - filtre avancé avec 3 attributs filtrables et quelque valeurs diponibles chacun.
 
         .. code:: json
 
             {
-                  "enabled": true,
-                  "editable": true,
-                  "allowedOperatorsType": "*",
-                  "pushButtons": {
+                  "ogcFilters": {
+                        "enabled": true,
+                        "editable": true,
+                        "allowedOperatorsType": "Basic"
+                      },
+                    "sourceFields": [
+                      {"name": "reg_eco", "alias": "région ecologique", "values": ["1a", "2b", "2b", "2c", "4F","5g"]},
+                      {"name": "dom_bio", "alias": "domaine bio-climatique", "allowedOperatorsType": "BasicAndSpatial"},
+                      {"name": "szone_veg", "alias": "sous zone véggtation ", "values": ["Z21", "z12"]}
+                    ]
+            }
+
+
+Exemple - filtre avancé (zone_veg = Z2) appliqué sur la couche mais non disponible pour modification par l'utilisateur
+
+        .. code:: json
+
+            {
+                "ogcFilters": {
+                    "enabled": true,
+                    "editable": false,
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "zone_veg",
+                      "expression": "Z2"
+                    }
+                }
+            }
+
+Exemple - filtre 2 boutons avec l'un eux activé. Filtre avancé non disponible
+
+      .. code:: json
+
+            {
+                "ogcFilters": {
+                    "enabled": true,
+                    "editable": false,
+                    "pushButtons": {
+                      "groups": [
+                        {"title": "Group 1","name": "1","ids": ["id1"]}
+                      ],
+                      "bundles": [
+                        {
+                          "id": "id1",
+                          "logical": "Or",
+                          "buttons": [
+                            {
+                              "title": "Radar photo fixe",
+                              "enabled": true,
+                              "color": "0,0,255",
+                              "tooltip": "Here a tooltip explaning ...",
+                              "filters": {
+                                "operator": "PropertyIsEqualTo",
+                                "propertyName": "typeAppareil",
+                                "expression": "Radar photo fixe"
+                              }
+                            },
+                            {
+                              "title": "Radar photo mobile",
+                              "enabled": false,
+                              "color": "255,200,0",
+                              "tooltip": "Here a tooltip explaning ...",
+                              "filters": {
+                                "operator": "PropertyIsEqualTo",
+                                "propertyName": "typeAppareil",
+                                "expression": "Radar photo mobile"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                }
+            }
+
+
+Exemple - groupe de filtre avec boutons
+
+        .. code:: json
+
+            {
+                "ogcFilters": {
+                    "enabled": true,
+                    "editable": true,
+                    "allowedOperatorsType": "All",
+                    "pushButtons": {
                         "groups": [
-                        {"title": "filtre foret","name":"1", "ids": ["type_couv", "densite"]},
-                        {"title": "filtre metadonnée", "name":"2", "ids": ["no_program"]}
+                            {"title": "filtre foret","name":"1", "ids": ["type_couv", "densite"]},
+                            {"title": "filtre metadonnée", "name":"2", "ids": ["no_program"]}
                         ],
                         "bundles" : [
-                        {
-                              "id": "type_couv",
-                              "logical": "Or",
-                              "buttons": [
-                              {
-                                    "title": "type couv = R",
-                                    "enabled": false,
-                                    "color": "255,0,0",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                          "operator": "PropertyIsEqualTo",
-                                          "propertyName": "type_couv",
-                                          "expression": "R"
-                                    }
-                              },
-                              {
-                                    "title": "type couv = F",
-                                    "enabled": false,
-                                    "color": "255,100,255",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                          "operator": "PropertyIsEqualTo",
-                                          "propertyName": "type_couv",
-                                          "expression": "F"
-                                    }
-                              }
+                            {
+                                "id": "type_couv",
+                                "logical": "Or",
+                                "buttons": [
+                                  {
+                                        "title": "type couv = R",
+                                        "enabled": false,
+                                        "color": "255,0,0",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                              "operator": "PropertyIsEqualTo",
+                                              "propertyName": "type_couv",
+                                              "expression": "R"
+                                        }
+                                  },
+                                  {
+                                        "title": "type couv = F",
+                                        "enabled": false,
+                                        "color": "255,100,255",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                              "operator": "PropertyIsEqualTo",
+                                              "propertyName": "type_couv",
+                                              "expression": "F"
+                                        }
+                                  }
                               ]
-                        },
+                            },
 
-                        {
-                              "id": "densite",
-                              "logical": "Or",
-                              "vertical":false,
-                              "buttons": [
-                              {
-                                    "title": "densite = A",
-                                    "enabled": false,
-                                    "color": "255,0,0",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                          "operator": "PropertyIsEqualTo",
-                                          "propertyName": "cl_dens",
-                                          "expression": "A"
-                                    }
-                              },
-                              {
-                                    "title": "densite = B",
-                                    "enabled": false,
-                                    "color": "255,100,255",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                          "operator": "PropertyIsEqualTo",
-                                          "propertyName": "cl_dens",
-                                          "expression": "B"
-                                    }
-                              },
-                              {
-                                    "title": "densite = A & B",
-                                    "enabled": false,
-                                    "color": "255,100,255",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                          "logical":"Or",
-                                          "filters":[
-                                          {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "A"},
-                                          {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "B"}
-                                          ]
-                                    }
-                              },
-                              {
-                                    "title": "pas A",
-                                    "enabled": false,
-                                    "color": "255,100,255",
-                                    "tooltip": "Here a tooltip explaning ...",
-                                    "filters": {
-                                          "operator": "PropertyIsNotEqualTo",
-                                          "propertyName": "cl_dens",
-                                          "expression": "A"
-                                          }
-                              }
-                              ]
-                        },
-                        {
-                              "id": "no_program",
-                              "logical": "Or",
-                              "vertical":false,
-                              "buttons": [
-                              {
-                              "title": "prg no= 4",
-                              "enabled": false,
-                              "color": "255,0,0",
-                              "tooltip": "Here a tooltip explaning ...",
-                              "filters": {
-                                    "operator": "PropertyIsEqualTo",
-                                    "propertyName": "no_prg",
-                                    "expression": "4"
-                                    }
-                              },
-                              {
-                              "title": "prg no=5",
-                              "enabled": false,
-                              "color": "255,100,255",
-                              "tooltip": "Here a tooltip explaning ...",
-                              "filters": {
-                                    "operator": "PropertyIsEqualTo",
-                                    "propertyName": "no_prg",
-                                    "expression": "5"
-                                    }
-                              }
-                              ]
-                        }
-                  ]
-                  }
-                  }
+                            {
+                                "id": "densite",
+                                "logical": "Or",
+                                "vertical": false,
+                                "buttons": [
+                                  {
+                                        "title": "densite = A",
+                                        "enabled": false,
+                                        "color": "255,0,0",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                              "operator": "PropertyIsEqualTo",
+                                              "propertyName": "cl_dens",
+                                              "expression": "A"
+                                        }
+                                  },
+                                  {
+                                        "title": "densite = A & B",
+                                        "enabled": false,
+                                        "color": "255,100,255",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                              "logical":"Or",
+                                              "filters":[
+                                              {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "A"},
+                                              {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "B"}
+                                              ]
+                                        }
+                                  },
+                                  {
+                                        "title": "différent de A",
+                                        "enabled": false,
+                                        "color": "255,100,255",
+                                        "tooltip": "Here a tooltip explaning ...",
+                                        "filters": {
+                                              "operator": "PropertyIsNotEqualTo",
+                                              "propertyName": "cl_dens",
+                                              "expression": "A"
+                                              }
+                                  }
+                                ]
+                            },
+                            {
+                                "id": "no_program",
+                                "logical": "Or",
+                                "vertical":false,
+                                "buttons": [
+                                  {
+                                  "title": "prg no= 4",
+                                  "enabled": false,
+                                  "color": "255,0,0",
+                                  "tooltip": "Here a tooltip explaning ...",
+                                  "filters": {
+                                        "operator": "PropertyIsEqualTo",
+                                        "propertyName": "no_prg",
+                                        "expression": "4"
+                                        }
+                                  },
+                                  {
+                                  "title": "prg no=5",
+                                  "enabled": false,
+                                  "color": "255,100,255",
+                                  "tooltip": "Here a tooltip explaning ...",
+                                  "filters": {
+                                        "operator": "PropertyIsEqualTo",
+                                        "propertyName": "no_prg",
+                                        "expression": "5"
+                                        }
+                                  }
+                                ]
+                            }
+                        ]
+                    }
+                }
+
+            }
 
 
-Propriétés de l'objet ogcFilters
 
-    .. note::
-       En cours de construction
+Propriétés de ogcFilter
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - allowedOperatorsType
+         - String
+         - Paramètre relatif aux filtres avancés. Les opérateurs pour construire l'expression filtrante qui seront accessible
+           à l'utilisateur.
+           NB: Ce paramètre s'appliquera a tous les champs definit dans sourceField mais ce paramètre peut aussi être définit
+           à l'intérieur de sourceField pour le définir au niveau du champ si besoin.
+         - BasicNumericOperator, Basic, BasicAndSpatial, Spatial, All, time.
+         - BasicAndSpatial
+       * - editable
+         - Boolean
+         - Active ou non la possibilité à l'utilisateur de ce construire des filtres avancés.
+         - true | false
+         - true
+       * - enabled
+         - Boolean
+         - Active ou non les filtres modifiable par l'utilisateur sur la couche. Si = false, le bouton de filtre n'apparait plus.
+           Par exemple dans le cas que le pilote voudrait filtrer une couche mais que ce filtre ne soit pas modifiable par l'utilisateur.
+         - true | false
+         - true
+       * - filters
+         - IgoLogicalArrayOptions | AnyBaseOgcFilterOptions;
+         - Permet de définir un filtre avancé. `Propriétés de l'objet filters`_.
+         -
+         -
+       * - pushButtons
+         - PushButton
+         - Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
+         -
+         -
+
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+
+Liens
+
+    - `ogc-filter.interface.ts<https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.interface.ts>`_
+
+
+
+
+Propriétés de l'objet ogcFilter.pushButtons.groups
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - ids
+         -
+         - Liste des identifiants pour le classement des paquets("bundled") de boutons dans les groupes.
+         -
+         -
+       * - title
+         - String
+         - Le titre du groupe qui apparaitra à l'utilisateur.
+         -
+         -
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+
+Propriétés de l'objet ogcFilter.pushButtons.bundles
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - buttons
+         - OgcPushButton[]
+         - Liste de boutton
+         -
+         -
+       * - **id***
+         - String
+         - Id rataché au groupe pour le classement dans le groupe. Doit être présente et identique dans
+         ogcFilter.pushButtons.groups.ids
+         -
+         -
+       * - **logical***
+         - String
+         - Opérateur logique à appliquer entre les boutons lorsque plusieurs boutons seront activés. "ET", "OU"
+         - Or, And
+         - Doit être définit
+       * - vertical
+         - Boolean
+         - Indique si la disposition des boutons dans la fenetre se fait de manière verticale
+         - true | false
+         -
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+
+
+Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - color
+         - String
+         - La couleur du bouton lorsque celui-ci sera activé. En RGB, exemple: "255,0,0".
+         - valeur "R,G,B"
+         - "224, 224, 224"
+       * - enabled
+         - Boolean
+         - Indique si le bouton est actif ou non.
+         - true | false
+         - true
+       * - filters
+         - IgoLogicalArrayOptions | AnyBaseOgcFilterOptions
+         - Configuration de l'expression filtrante appliquée sur l'activation du bouton. Voir `Propriétés de l'objet filters`_.
+         -
+         -
+       * - title
+         - String
+         - Indique ce qu'il y aura d'inscrit sur le bouton.
+         -
+         - " " blanc
+       * - tooltip
+         - String
+         - Indique ce qu'il y aura d'inscrit dans l'info-bulle sur le bouton.
+         -
+         -
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+
+
+Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - expression
+         - String
+         - Valeur ou RegEx applicable
+         -
+         -
+       * - operator
+         - String
+         - Opérateurs à appliquer
+         - PropertyIsEqualTo - ...
+         -
+       * - propertyName
+         - String
+         - Nom de la propriété sur laquelle appliquer le filtre (nom de la colonne)
+         -
+         -
+       * - A compléter
+         -
+         -
+         -
+         -
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 .. _igosourceFieldsObject:
 
-Configuration d'alias sur des attributs (sourceFields)
+
+Configuration des attributs champs source de donnée (sourceFields)
 ======================================================
 
-Une liste de nom d'attribut, de leur alias et des valeurs permises.
+Une liste de nom d'attribut, de leur alias, valeurs permises et autres configurations.
+** Nécessaire pour utilisation des filtres attributaires avancés. Ce sont ces configurations qui définiront ce qui sera
+présentées à l'utilisateur lors de l'utilisation des filtres avancés.
 
 Exemples
 
@@ -1296,7 +1593,10 @@ Exemples
 
             [
                   {"name": "type_couv", "alias": "type couv", "values": ["R", "F"]},
-                  {"name": "no_prg", "alias": "No inventaire", "values": ["3", "4", "5"]}
+                  {"name": "no_prg", "alias": "No inventaire", "values": ["3", "4", "5"]},
+                  { "name": "code_municipalite", "alias": "# de la municipalitée" },
+                  { "name": "date_observation", "allowedOperatorsType": "time" },
+                  { "name": "urgence", "values": ["Immédiate", "Inconnue"], "allowedOperatorsType": "basic" }
             ]
 
 
@@ -1475,8 +1775,8 @@ Cadastre
 
     .. line-block::
         Le service de recherches de lots rénovés du Québec.
-
         Le résultat de la recherche est la géométrie du lot rénové.
+        ** Pour fonctionner l'application doit avoir accès au service CPTAQ (sécurité, CORS)
 
 Exemples
 
@@ -1680,8 +1980,7 @@ iLayer
 ================
 
     .. line-block::
-        iLayer est un service de recherche développé
-        par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_
+        iLayer est un service de recherche développé par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_
         afin de permettre des recherches de couches d'informations par mots clefs.
         Le contenu accessible par le service de recherche est limité au territoire quuébécois.
 
@@ -1696,10 +1995,15 @@ Exemples
         .. code:: json
 
             "ilayer": {
-                "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/layers/search",
+                "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche/layers",
                 "params": {
                     "limit": 15
-                 }
+                 },
+                "queryFormat": {
+                  "html": {
+                      "urls": ["https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi"]
+                  }
+                }
             }
 
 Propriétés
@@ -1725,6 +2029,9 @@ Propriétés
                Propriété igo.geo.search.layer.title dans
                    - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
                    - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_
+       * - queryFormat
+         - .. line-block::
+               Possibilité de définir le format par URL pour la présentation des informations lors de l'intérogation de la couche.
 
     Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
@@ -1829,7 +2136,7 @@ Exemples
 
 Propriétés
 
-    Seulement les propriétés spécifique à ce service sont présentées.
+    Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. list-table::
        :widths: 10 60 10
@@ -2436,45 +2743,24 @@ Liens
     - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/directions/directions-tool>`_
 
 
-.. _igoactiveogcFilter:
-
-activeOgcFilter
-===============
-
-    .. line-block::
-        Outil permettant de filtrer la couche active de service OGC filtrable,
-        WMS (Geoserver et Mapserver 7.2) et les WFS disponible à la carte.
-
-        Le bouton permettant de sélectionner une couche active est disponible dans les outils `mapTools`_, `mapTool`_ et `mapDetails`_.
-        L'outil apparait seulement lorsque le bouton est cliqué.
-
-        Référez-vous à : `Configuration filtre OGC (ogcFilters)`_  pour configurer les filtres au niveau des couches.
-
-Exemples
-
-        .. code:: json
-
-            {
-                "name": "activeOgcFilter"
-            }
-
-Liens
-
-    - `active-ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages\integration\src\lib\filter\active-ogc-filter-tool>`_
-    - `OGC FES <https://www.ogc.org/standards/filter>`_
-
-
 .. _igoogcFilter:
-
 
 ogcFilter
 ===========
 
-
     .. line-block::
-        Outil permettant de filtrer toutes les couches de service OGC filtrable.
-         Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-         NB2: L'activation de l'outil se fait ici via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes.
+      Outil permettant de définir des filtres que l'utilisateur pourra appliquer sur les couches visibles dans la carte et ainsi voir
+      seulement les objets géométriques(points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
+      configurés comme des boutons que l'utilisateur peut activer ou comme filtres avancés, dans ce cas c'est l'utilisateur qui doit
+      saisir le champ, l'opérateur à appliquer ainsi que la valeur à filtrer.
+
+      ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+
+      Cet outil présente toutes les couches de la carte ayant un ou plusieurs filtres configurés. Comparativement à l'outil
+      activeOgcFilter qui lui présente uniquement le/les filtres de la couche active sélectionnée.
+
+      NB: L'activation de l'outil se fait ici via "tools", mais la configuration de chaque filtre disponible doit se faire à l'intérieur
+      de la couche dans les contextes.
          layer -> sourceOptions -> ogcFilters
          Référez-vous à : `Configuration filtre OGC (ogcFilters)`_  pour configurer les filtres au niveau des couches.
 
@@ -2484,7 +2770,9 @@ Exemples
         .. code:: json
 
             {
-                "name": "ogcFilter"
+                "name": "ogcFilter",
+                "icon": "filter",
+                "title": "igo.integration.tools.ogcFilter"
             }
 
 Propriétés
@@ -2510,15 +2798,15 @@ Propriétés
          - filter
        * - **name***
          - String
-         -
+         - Le nom de l'outil
          - ogcFilter
          -
        * - title
          - String
          - .. line-block::
                Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
+               Pour modifiez le titre par défaut, vous devez faire la
+               modification dans les fichiers de traduction locale: en-fr.json
                    - fichiers dans :ref:`Language <igolanguage>`.
          -
          - igo.integration.tools.ogcFilter
@@ -2531,34 +2819,46 @@ Liens
     - `OGC FES <https://www.ogc.org/standards/filter>`_
 
 
-.. _igoactivetimeFilter:
 
-activeTimeFilter
-================
+.. _igoactiveogcFilter:
+
+activeOgcFilter
+===============
 
     .. line-block::
-        Outil permettant de filtrer la couche WMS active filtrable temporellement.
+      Outil permettant de définir un ou plusieurs filtres sur **la couche active** de service OGC filtrable.
 
-        Le bouton permettant de sélectionner une couche active est disponible dans les outils `mapTools`_, `mapTool`_ et `mapDetails`_.
-        L'outil apparait seulement lorsque le bouton est cliqué.
+      Outil relatif à la couche active. Une fois activé dans "tools" l'outil sera disponible dans les outils de la couche
+      sélectionnée.
+      ** Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
 
-        Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  pour configurer les filtres au niveau des couches.
+      Cet outil présente uniquement le ou les filtres qui sont applicables sur la couche **active**, comparativement à l'outil
+      ogcFilter, qui lui présentera toute les couches ayant un filtre configuré. Comme cet outil présente uniquement le filtre appliqué
+       sur une seule couche, la configuration classique est de ne pas présenter cet outil dans la barre verticale avec les autres outils
+        de l'application et de le laisser uniquement dans les outils de la couche active.
+        Pour ce faire, vous devez mettre l'outil dans "tools" et ne pas le mettre dans "toolbar"
+
+      NB: L'activation se fait ici via les outils, mais la configuration du filtre doit se faire à l'intérieur
+      de la couche dans les contextes.
+         layer -> sourceOptions -> ogcFilters
+         Référez-vous à : `Configuration filtre OGC (ogcFilters)`_  pour configurer les filtres au niveau des couches.
 
 Exemples
 
         .. code:: json
 
             {
-                "name": "activeTimeFilter"
+                "name": "activeOgcFilter"
             }
 
 Liens
 
-    - `active-time-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-time-filter-tool>`_
+    - `active-ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-ogc-filter-tool>`_
+    - `OGC FES <https://www.ogc.org/standards/filter>`_
+    - `Exemple IGO-DEMO <https://infra-geo-ouverte.github.io/igo2/?context=ogcFilters&zoom=6&center=-71.93809,48.44698&invisiblelayers=*&visiblelayers=89596908775de376b7aa497efdf49d50,c2499974-5dc9-37d5-d0ba-f595690a06c7,carte_gouv_qc>`_
 
 
 .. _igotimeFilter:
-
 
 timeFilter
 ============
@@ -2622,8 +2922,36 @@ Liens
     - `time-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/time-filter-tool>`_
 
 
-.. _igoimportExport:
+.. _igoactivetimeFilter:
 
+activeTimeFilter
+================
+
+    .. line-block::
+        Outil permettant de filtrer la couche WMS active filtrable temporellement.
+        Outil relatif à la couche active. Une fois activé dans "tools" l'outil sera alors disponible dans les outils de la couche
+        sélectionnée.
+
+        Le bouton permettant de sélectionner une couche active est disponible dans les outils `mapTools`_, `mapTool`_ et `mapDetails`_.
+        L'outil apparait seulement lorsque le bouton est cliqué.
+
+        Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  pour configurer les filtres au niveau des couches.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "activeTimeFilter"
+            }
+
+Liens
+
+    - `active-time-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-time-filter-tool>`_
+
+
+
+.. _igoimportExport:
 
 importExport
 ==============

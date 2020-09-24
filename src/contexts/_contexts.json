@@ -26,5 +26,9 @@
   {
     "uri": "testExport",
     "title": "Test export"
+  },
+  {
+    "uri": "_exempleFiltre",
+    "title": "Test filtre"
   }
 ]
