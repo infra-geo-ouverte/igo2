@@ -2766,7 +2766,6 @@ Liens
 ogcFilter
 ===========
 
-    .. line-block::
       Outil permettant de définir des filtres que l'utilisateur pourra appliquer sur les couches visibles dans la carte et ainsi voir
       seulement les objets géométriques(points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
       configurés comme des boutons que l'utilisateur peut activer ou comme filtres avancés, dans ce cas c'est l'utilisateur qui doit
@@ -2843,7 +2842,6 @@ Liens
 activeOgcFilter
 ===============
 
-    .. line-block::
       Outil permettant de définir un ou plusieurs filtres sur **la couche active** de service OGC filtrable.
 
       Outil relatif à la couche active. Une fois activé dans "tools" l'outil sera disponible dans les outils de la couche
