@@ -2776,10 +2776,10 @@ ogcFilter
       Cet outil présente toutes les couches de la carte ayant un ou plusieurs filtres configurés. Comparativement à l'outil
       activeOgcFilter qui lui présente uniquement le/les filtres de la couche active sélectionnée.
 
-      NB: L'activation de l'outil se fait ici via "tools", mais la configuration de chaque filtre disponible doit se faire à l'intérieur
+      | NB: L'activation de l'outil se fait ici via "tools", mais la configuration de chaque filtre disponible doit se faire à l'intérieur
       de la couche dans les contextes.
-         layer -> sourceOptions -> ogcFilters
-         Référez-vous à  :ref:`Configuration des filtre attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
+      | layer -> sourceOptions -> ogcFilters
+      | Référez-vous à:  :ref:`Configuration des filtre attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
 
 
 Exemples
@@ -2850,14 +2850,14 @@ activeOgcFilter
 
       Cet outil présente uniquement le ou les filtres qui sont applicables sur la couche **active**, comparativement à l'outil
       ogcFilter, qui lui présentera toute les couches ayant un filtre configuré. Comme cet outil présente uniquement le filtre appliqué
-       sur une seule couche, la configuration classique est de ne pas présenter cet outil dans la barre verticale avec les autres outils
-        de l'application et de le laisser uniquement dans les outils de la couche active.
-        Pour ce faire, vous devez mettre l'outil dans "tools" et ne pas le mettre dans "toolbar"
+      sur une seule couche, la configuration classique est de ne pas présenter cet outil dans la barre verticale avec les autres outils
+      de l'application et de le laisser uniquement dans les outils de la couche active.
+      Pour ce faire, vous devez mettre l'outil dans "tools" et ne pas le mettre dans "toolbar"
 
-      NB: L'activation se fait ici via les outils, mais la configuration du filtre doit se faire à l'intérieur
+      | NB: L'activation se fait ici via les outils, mais la configuration du filtre doit se faire à l'intérieur
       de la couche dans les contextes.
-         layer -> sourceOptions -> ogcFilters
-         Référez-vous à : `Configuration des filtre attributaires OGC <igoOgcFilterObject>`_  pour configurer les filtres au niveau des couches.
+      | layer -> sourceOptions -> ogcFilters
+      | Référez-vous à: :ref:`Configuration des filtre attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
 
 Exemples
 
