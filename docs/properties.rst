@@ -1147,16 +1147,17 @@ Propriétés de l'objet timeFilter
 
 
 Configuration filtre attributaire OGC (ogcFilters)
-================================================
+===================================================
 
   Permet de définir la configuration des filtres attributaires(OGC) qui seront appliqués par l'utilisateur sur la couche.
   Plusieurs configuration de filtre sont disponibles. Par exemple, il est possible de créer des boutons sur lesquels l'utilisateur
   pourra appuyer pour filtrer la couche affichée, de réaliser des groupes de filtre, ou bien de donner la possibilité à l'utilisateur
   de créer lui même ces propres filtres à l'aide des filtres avancés.
 
-    ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-    ** Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils.
-    ** Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à : `Configuration des attributs`_
+* NB.:
+    1. Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+    2. Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils.
+    3. Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à : `sourceFields`_
 
 Exemple - filtre avancé disponible à l'utilisateur avec 3 attributs filtrables et quelques valeurs diponibles chacun.
 
@@ -1580,7 +1581,7 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 
 
 Configuration des attributs champs source de donnée (sourceFields)
-======================================================
+======================================================================
 
 Une liste de nom d'attribut, de leur alias, valeurs permises et autres configurations.
 ** Nécessaire pour utilisation des filtres attributaires avancés. Ce sont ces configurations qui définiront ce qui sera
