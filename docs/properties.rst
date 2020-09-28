@@ -1409,8 +1409,8 @@ Propriétés de ogcFilters
          -
        * - pushButtons
          - PushButton
-         - Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
-           :ref:`igoOgcFilterPushButtons`. Doit contenir obligatoirement groups[] et bundles[]
+         - | Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
+           | Voir :ref:`pushButtons <igoOgcFilterPushButtons>`. Doit contenir obligatoirement groups[] et bundles[]
          -
          -
 
@@ -1425,6 +1425,7 @@ Liens
 
 
 .. _igoOgcFilterPushButtons:
+
 Propriétés de l'objet ogcFilter.pushButtons.groups
 
     .. list-table::
@@ -1454,7 +1455,9 @@ Propriétés de l'objet ogcFilter.pushButtons.groups
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
+
 .. _igoOgcFilterButtonsBundlesObject:
+
 Propriétés de l'objet ogcFilter.pushButtons.bundles
 
     .. list-table::
@@ -1478,8 +1481,7 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles
          -
        * - **id***
          - String
-         - Id rataché au groupe pour le classement dans le groupe. Doit être présente et identique dans
-         ogcFilter.pushButtons.groups.ids
+         - Id rataché au groupe pour le classement dans le groupe. Doit être présente et identique dans ogcFilter.pushButtons.groups.ids
          -
          -
        * - **logical***
@@ -1543,6 +1545,7 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
 
 
 .. _igoOgcFilterFiltersObject:
+
 Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 
     .. list-table::
@@ -1588,9 +1591,9 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 Configuration des attributs champs source de donnée (sourceFields)
 ======================================================================
 
-Une liste de nom d'attribut, de leur alias, valeurs permises et autres configurations.
-** Nécessaire pour utilisation des filtres attributaires avancés. Ce sont ces configurations qui définiront ce qui sera
-présentées à l'utilisateur lors de l'utilisation des filtres avancés.
+| Une liste de nom d'attribut, de leur alias, valeurs permises et autres configurations.
+| ** Nécessaire pour utilisation des filtres attributaires avancés. Ce sont ces configurations qui définiront ce qui seront présentées à
+ l'utilisateur lors de l'utilisation des filtres avancés.
 
 Exemples
 
@@ -1647,7 +1650,7 @@ Propriétés de l'objet sourceFields
          - Indique les opérateurs permis pour cet attribut
          - .. line-block::
                BasicNumericOperator OU Basic OU BasicAndSpatial OU Spatial OU All OU Time
-               Référez vous à `ce lien <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`_ pour les opérateurs correspondants.
+               Référez vous à `ogc-filter.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`_ pour les opérateurs correspondants.
          - BasicAndSpatial
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
