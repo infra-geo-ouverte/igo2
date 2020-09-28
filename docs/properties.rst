@@ -2780,7 +2780,7 @@ ogcFilter
       NB: L'activation de l'outil se fait ici via "tools", mais la configuration de chaque filtre disponible doit se faire à l'intérieur
       de la couche dans les contextes.
          layer -> sourceOptions -> ogcFilters
-         Référez-vous à : `Configuration filtre OGC (ogcFilters)`_  pour configurer les filtres au niveau des couches.
+         Référez-vous à : :ref:`Configuration des filtre attributaires OGC <igoOgcFilterObject>`_  pour configurer les filtres au niveau des couches.
 
 
 Exemples
@@ -2859,7 +2859,7 @@ activeOgcFilter
       NB: L'activation se fait ici via les outils, mais la configuration du filtre doit se faire à l'intérieur
       de la couche dans les contextes.
          layer -> sourceOptions -> ogcFilters
-         Référez-vous à : `Configuration filtre OGC (ogcFilters)`_  pour configurer les filtres au niveau des couches.
+         Référez-vous à : :ref:`Configuration des filtre attributaires OGC <igoOgcFilterObject>`_  pour configurer les filtres au niveau des couches.
 
 Exemples
 
