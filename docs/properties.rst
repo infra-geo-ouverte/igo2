@@ -1154,10 +1154,9 @@ Configuration filtre attributaire OGC (ogcFilters)
   pourra appuyer pour filtrer la couche affichée, de réaliser des groupes de filtre, ou bien de donner la possibilité à l'utilisateur
   de créer lui même ces propres filtres à l'aide des filtres avancés.
 
-* NB.:
-    1. Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-    2. Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils.
-    3. Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à : `sourceFields`_
+  ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+  ** Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils.
+  ** Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à sourceField : :ref:`igosourceFieldsObject`
 
 Exemple - filtre avancé disponible à l'utilisateur avec 3 attributs filtrables et quelques valeurs diponibles chacun.
 
@@ -1577,8 +1576,8 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-.. _igosourceFieldsObject:
 
+.. _igosourceFieldsObject:
 
 Configuration des attributs champs source de donnée (sourceFields)
 ======================================================================
