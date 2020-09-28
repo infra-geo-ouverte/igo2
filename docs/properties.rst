@@ -1153,8 +1153,8 @@ Configuration filtre attributaire OGC (ogcFilters)
   pourra appuyer pour filtrer la couche affichée, de réaliser des groupes de filtre, ou bien de donner la possibilité à l'utilisateur
   de créer lui même ces propres filtres à l'aide des filtres avancés.
 
-    - Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-    - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils.
+    - **Limitation**: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+    - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils ('tool'). (:ref:`igoactiveogcFilter` et :ref:`igoogcFilter` )
     - Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à: :ref:`igosourceFieldsObject`
 
 
@@ -1309,11 +1309,11 @@ Exemple - groupe de filtre avec boutons
                                         "color": "255,100,255",
                                         "tooltip": "Here a tooltip explaning ...",
                                         "filters": {
-                                              "logical":"Or",
-                                              "filters":[
+                                            "logical":"Or",
+                                            "filters":[
                                               {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "A"},
                                               {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "B"}
-                                              ]
+                                            ]
                                         }
                                   },
                                   {
@@ -1322,10 +1322,10 @@ Exemple - groupe de filtre avec boutons
                                         "color": "255,100,255",
                                         "tooltip": "Here a tooltip explaning ...",
                                         "filters": {
-                                              "operator": "PropertyIsNotEqualTo",
-                                              "propertyName": "cl_dens",
-                                              "expression": "A"
-                                              }
+                                            "operator": "PropertyIsNotEqualTo",
+                                            "propertyName": "cl_dens",
+                                            "expression": "A"
+                                        }
                                   }
                                 ]
                             },
@@ -1340,22 +1340,22 @@ Exemple - groupe de filtre avec boutons
                                   "color": "255,0,0",
                                   "tooltip": "Here a tooltip explaning ...",
                                   "filters": {
-                                        "operator": "PropertyIsEqualTo",
-                                        "propertyName": "no_prg",
-                                        "expression": "4"
-                                        }
-                                  },
-                                  {
+                                      "operator": "PropertyIsEqualTo",
+                                      "propertyName": "no_prg",
+                                      "expression": "4"
+                                  }
+                                },
+                                {
                                   "title": "prg no=5",
                                   "enabled": false,
                                   "color": "255,100,255",
                                   "tooltip": "Here a tooltip explaning ...",
                                   "filters": {
-                                        "operator": "PropertyIsEqualTo",
-                                        "propertyName": "no_prg",
-                                        "expression": "5"
-                                        }
+                                      "operator": "PropertyIsEqualTo",
+                                      "propertyName": "no_prg",
+                                      "expression": "5"
                                   }
+                                }
                                 ]
                             }
                         ]
@@ -1366,7 +1366,7 @@ Exemple - groupe de filtre avec boutons
 
 
 
-Propriétés de ogcFilter
+Propriétés de ogcFilters
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -1403,12 +1403,13 @@ Propriétés de ogcFilter
          - true
        * - filters
          - IgoLogicalArrayOptions | AnyBaseOgcFilterOptions;
-         - Permet de définir un filtre avancé. :ref:`igoOgcFilterObjectExemples`.
+         - Permet de définir un filtre avancé. :ref:`igoOgcFilterFiltersObject`
          -
          -
        * - pushButtons
          - PushButton
          - Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
+           :ref:`igoOgcFilterPushButtons:`
          -
          -
 
@@ -1422,7 +1423,7 @@ Liens
 
 
 
-
+.. _igoOgcFilterPushButtons:
 Propriétés de l'objet ogcFilter.pushButtons.groups
 
     .. list-table::
@@ -1452,7 +1453,7 @@ Propriétés de l'objet ogcFilter.pushButtons.groups
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-
+.. _igoOgcFilterButtonsBundlesObject:
 Propriétés de l'objet ogcFilter.pushButtons.bundles
 
     .. list-table::
@@ -1494,7 +1495,7 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
-
+.. _igoOgcFilterButtonsButtonsObject:
 Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
 
     .. list-table::
@@ -1523,7 +1524,7 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
          - true
        * - filters
          - IgoLogicalArrayOptions | AnyBaseOgcFilterOptions
-         - Configuration de l'expression filtrante appliquée sur l'activation du bouton. Voir :ref:`igoOgcFilterObjectExemples`.
+         - Configuration de l'expression filtrante appliquée sur l'activation du bouton. Voir :ref:`igoOgcFilterFiltersObject`.
          -
          -
        * - title
