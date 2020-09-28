@@ -1142,9 +1142,8 @@ Propriétés de l'objet timeFilter
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
+
 .. _igoOgcFilterObject:
-
-
 
 Configuration filtre attributaire OGC (ogcFilters)
 ===================================================
@@ -1154,9 +1153,14 @@ Configuration filtre attributaire OGC (ogcFilters)
   pourra appuyer pour filtrer la couche affichée, de réaliser des groupes de filtre, ou bien de donner la possibilité à l'utilisateur
   de créer lui même ces propres filtres à l'aide des filtres avancés.
 
-  ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-  ** Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils.
-  ** Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à sourceField : :ref:`igosourceFieldsObject`
+    - Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+    - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils.
+    - Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à: :ref:`igosourceFieldsObject`
+
+
+
+Exemples
+----------
 
 Exemple - filtre avancé disponible à l'utilisateur avec 3 attributs filtrables et quelques valeurs diponibles chacun.
 
@@ -1399,7 +1403,7 @@ Propriétés de ogcFilter
          - true
        * - filters
          - IgoLogicalArrayOptions | AnyBaseOgcFilterOptions;
-         - Permet de définir un filtre avancé. `Propriétés de l'objet filters`_.
+         - Permet de définir un filtre avancé. :ref:`igoOgcFilterObjectExemples`.
          -
          -
        * - pushButtons
@@ -1519,7 +1523,7 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
          - true
        * - filters
          - IgoLogicalArrayOptions | AnyBaseOgcFilterOptions
-         - Configuration de l'expression filtrante appliquée sur l'activation du bouton. Voir `Propriétés de l'objet filters`_.
+         - Configuration de l'expression filtrante appliquée sur l'activation du bouton. Voir :ref:`igoOgcFilterObjectExemples`.
          -
          -
        * - title
@@ -1536,7 +1540,7 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
-
+.. _igoOgcFilterFiltersObject:
 Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 
     .. list-table::
