@@ -2766,20 +2766,19 @@ Liens
 ogcFilter
 ===========
 
-      Outil permettant de définir des filtres que l'utilisateur pourra appliquer sur les couches visibles dans la carte et ainsi voir
-      seulement les objets géométriques(points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
-      configurés comme des boutons que l'utilisateur peut activer ou comme filtres avancés, dans ce cas c'est l'utilisateur qui doit
-      saisir le champ, l'opérateur à appliquer ainsi que la valeur à filtrer.
+    Outil permettant de définir des filtres que l'utilisateur pourra appliquer sur les couches visibles dans la carte et ainsi voir
+    seulement les objets géométriques(points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
+    configurés comme des boutons que l'utilisateur peut activer ou comme filtres avancés, dans ce cas c'est l'utilisateur qui doit
+    saisir le champ, l'opérateur à appliquer ainsi que la valeur à filtrer.
 
-      ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+    | ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
 
-      Cet outil présente toutes les couches de la carte ayant un ou plusieurs filtres configurés. Comparativement à l'outil
-      activeOgcFilter qui lui présente uniquement le/les filtres de la couche active sélectionnée.
+    | Cet outil présente toutes les couches de la carte ayant un ou plusieurs filtres configurés. Comparativement à l'outil
+    activeOgcFilter qui lui présente uniquement le/les filtres de la couche active sélectionnée.
 
-      | NB: L'activation de l'outil se fait ici via "tools", mais la configuration de chaque filtre disponible doit se faire à l'intérieur
-      de la couche dans les contextes.
-      | layer -> sourceOptions -> ogcFilters
-      | Référez-vous à:  :ref:`Configuration des filtre attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
+    | NB: L'activation de l'outil se fait ici via "tools", mais la configuration de chaque filtre disponible doit se faire à l'intérieur de la couche dans les contextes.
+    | layer -> sourceOptions -> ogcFilters
+    | Référez-vous à:  :ref:`Configuration des filtres attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
 
 
 Exemples
@@ -2846,18 +2845,17 @@ activeOgcFilter
 
       Outil relatif à la couche active. Une fois activé dans "tools" l'outil sera disponible dans les outils de la couche
       sélectionnée.
-      ** Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+      |** Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
 
-      Cet outil présente uniquement le ou les filtres qui sont applicables sur la couche **active**, comparativement à l'outil
+      Cet outil présente uniquement le ou les filtres qui sont applicables sur **la couche active**, comparativement à l'outil
       ogcFilter, qui lui présentera toute les couches ayant un filtre configuré. Comme cet outil présente uniquement le filtre appliqué
       sur une seule couche, la configuration classique est de ne pas présenter cet outil dans la barre verticale avec les autres outils
       de l'application et de le laisser uniquement dans les outils de la couche active.
       Pour ce faire, vous devez mettre l'outil dans "tools" et ne pas le mettre dans "toolbar"
 
-      | NB: L'activation se fait ici via les outils, mais la configuration du filtre doit se faire à l'intérieur
-      de la couche dans les contextes.
+      | NB: L'activation se fait ici via les outils, mais la configuration du filtre doit se faire à l'intérieur de la couche dans les contextes.
       | layer -> sourceOptions -> ogcFilters
-      | Référez-vous à: :ref:`Configuration des filtre attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
+      | Référez-vous à: :ref:`Configuration des filtres attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
 
 Exemples
 
