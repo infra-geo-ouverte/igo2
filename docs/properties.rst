@@ -1154,8 +1154,8 @@ Configuration filtre attributaire OGC (ogcFilters)
   de créer lui même ces propres filtres à l'aide des filtres avancés.
 
     - **Limitation**: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-    - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils ('tool'). (:ref:`igoactiveogcFilter` et :ref:`igoogcFilter` )
-    - Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à: :ref:`igosourceFieldsObject`
+    - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils ('tools'). (:ref:`igoactiveogcFilter` et :ref:`igoogcFilter` )
+    - Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField pour les champs à filtrer. Référez-vous à: :ref:`igosourceFieldsObject`
 
 
 
@@ -1243,7 +1243,7 @@ Exemple - filtre 2 boutons avec l'un eux activé. Filtre avancé non disponible
             }
 
 
-Exemple - groupe de filtre avec boutons
+Exemple - 2 groupe de filtre avec boutons spécifiques à chaque groupe
 
         .. code:: json
 
@@ -1263,7 +1263,7 @@ Exemple - groupe de filtre avec boutons
                                 "logical": "Or",
                                 "buttons": [
                                   {
-                                        "title": "type couv = R",
+                                        "title": "type couv = Résineux",
                                         "enabled": false,
                                         "color": "255,0,0",
                                         "tooltip": "Here a tooltip explaning ...",
@@ -1274,7 +1274,7 @@ Exemple - groupe de filtre avec boutons
                                         }
                                   },
                                   {
-                                        "title": "type couv = F",
+                                        "title": "type couv = Feuillus",
                                         "enabled": false,
                                         "color": "255,100,255",
                                         "tooltip": "Here a tooltip explaning ...",
@@ -1384,10 +1384,11 @@ Propriétés de ogcFilters
                Valeur défaut
        * - allowedOperatorsType
          - String
-         - Paramètre relatif aux filtres avancés. Les opérateurs pour construire l'expression filtrante qui seront accessible
-           à l'utilisateur.
-           NB: Ce paramètre s'appliquera a tous les champs definit dans sourceField mais ce paramètre peut aussi être définit
-           à l'intérieur de sourceField pour le définir au niveau du champ si besoin.
+         - .. line-block::
+            Paramètre relatif aux filtres avancés. Les opérateurs pour construire l'expression filtrante qui seront accessible
+            à l'utilisateur.
+            NB: Ce paramètre s'appliquera a tous les champs definit dans sourceField mais ce paramètre peut aussi être définit
+            à l'intérieur de sourceField pour le définir au niveau du champ si besoin.
          - BasicNumericOperator, Basic, BasicAndSpatial, Spatial, All, time.
          - BasicAndSpatial
        * - editable
