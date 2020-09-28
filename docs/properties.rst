@@ -1243,7 +1243,7 @@ Exemple - filtre 2 boutons avec l'un eux activé. Filtre avancé non disponible
             }
 
 
-Exemple - 2 groupe de filtre avec boutons spécifiques à chaque groupe
+Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
 
         .. code:: json
 
@@ -1600,7 +1600,7 @@ Configuration des attributs champs source de donnée (sourceFields)
 ======================================================================
 
 | Une liste de nom d'attribut, de leur alias, valeurs permises et autres configurations.
-| ** Nécessaire pour utilisation des filtres attributaires avancés. Ce sont ces configurations qui définiront ce qui seront présentées à
+| ** Nécessaire pour utilisation des filtres attributaires avancés. Ce sont ces configurations qui définiront ce qui sera présenté à
  l'utilisateur lors de l'utilisation des filtres avancés.
 
 Exemples
