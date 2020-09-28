@@ -1122,7 +1122,7 @@ WelcomeWindow
 
     .. line-block::
         Affiche une fenêtre accueil à l'entrée dans l'application.
-        NB. : Pour une application sans authentification, simplement ne pas mettre ces configurations.
+        NB. : Pour une application sans fenêtre accueil, simplement ne pas mettre ces configurations.
 
 Exemples
 
@@ -1152,13 +1152,15 @@ Propriétés
        * - nbVisitToShowAgain
          - Number
          - .. line-block::
-               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra après le nombre de visite indiqué dans ce paramètre.
+               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra après le nombre de visite indiqué
+               dans ce paramètre.
          -
          - 30
        * - showAgainOnNewIGOVersion
          - Boolean
          - .. line-block::
-               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra si la version IGO est différente de la version lors de sa visite précédente.
+               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra si la version IGO est différente
+               de la version lors de sa visite précédente.
          -
          - true
 
@@ -1499,7 +1501,7 @@ Résumé fichier de contexte
        * - message
          - `Message`_
          - .. line-block::
-               Présentation d'un message a l'ouverture du contexte.
+               Présentation d'un message à l'ouverture du contexte.
          -
        * - `toolbar`_
          - String[]
@@ -1704,7 +1706,7 @@ Propriétés
          -
          -
        * - options.template
-         - Sting
+         - String
          - En construction
          -
          -
@@ -1714,18 +1716,23 @@ Propriétés
          -
          -
        * - text
-         - Sting
-         - Le text du message à afficher. Cette configuration remplace la configuration html.
+         - String
+         - Le text du message à afficher. Cette configuration remplace la configuration html. NB.: pour un message qui sera
+           traduction en fonction du navigateur simplement ce créer une clef de traduction indiquer ici et de mettre sont
+           équivalent dans les fichiers de traduction local en.json, fr.json. Exemple: "text": "messageContextXyz",
+           dans fr.json : "messageContextXyz": <h3>mon super message</h3> et en.json: "messageContextXyz": <h3>message in english</h3>
          -
          -
        * - title
-         - Sting
-         - Le titre du message à afficher. Cette configuration s'active seulement avec la configuration text et ne sera pas pris en compte avec la configuration html.
+         - String
+         - Le titre du message à afficher. Cette configuration s'active seulement avec la configuration text et ne sera pas pris
+           en compte avec la configuration html.
          -
          -
        * - type
-         - Sting
-         - Le type du message à afficher. Avertissement, erreur ou information. Selon le type choisi une couleur spécifiée sera appliquée selon la thématique de couleur de l'application.
+         - String
+         - Le type du message à afficher. Avertissement, erreur ou information. Selon le type choisi une couleur spécifiée sera
+           appliquée selon la thématique de couleur de l'application.
          - 'alert', 'error', 'info', 'success'
          -
 

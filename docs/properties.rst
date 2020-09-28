@@ -1156,10 +1156,8 @@ Configuration filtre attributaire OGC (ogcFilters)
 
   ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
   ** Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils.
-
-  ** Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à : `Configuration des attributs (sourceFields)`_ .
-
-Exemple - filtre avancé avec 3 attributs filtrables et quelque valeurs diponibles chacun.
+  ** Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField. Référez-vous à : `Configuration des attributs`_
+Exemple - filtre avancé avec 3 attributs filtrables et quelques valeurs diponibles chacun.
 
         .. code:: json
 
