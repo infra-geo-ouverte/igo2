@@ -2845,7 +2845,7 @@ activeOgcFilter
 
       Outil relatif à la couche active. Une fois activé dans "tools" l'outil sera disponible dans les outils de la couche
       sélectionnée.
-      |** Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+      | ** Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
 
       Cet outil présente uniquement le ou les filtres qui sont applicables sur **la couche active**, comparativement à l'outil
       ogcFilter, qui lui présentera toute les couches ayant un filtre configuré. Comme cet outil présente uniquement le filtre appliqué
