@@ -1154,7 +1154,7 @@ Configuration filtre attributaire OGC (ogcFilters)
   de créer lui même ces propres filtres à l'aide des filtres avancés.
 
     - **Limitation**: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-    - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils ('tools'). (:ref:`igoactiveogcFilter` et :ref:`igoogcFilter` )
+    - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils ('tools'). (Voir :ref:`igoactiveogcFilter` et :ref:`igoogcFilter` dans la section outil )
     - Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField pour les champs à filtrer. Référez-vous à: :ref:`igosourceFieldsObject`
 
 
@@ -1408,13 +1408,13 @@ Propriétés de ogcFilters
        * - filters
          - | IgoLogicalArrayOptions
            | AnyBaseOgcFilterOptions
-         - Permet de définir un filtre avancé. :ref:`objet filters <igoOgcFilterFiltersObject>`
+         - Permet de définir un filtre avancé. :ref:`voir configuration filters <igoOgcFilterFiltersObject>`
          -
          -
        * - pushButtons
          - PushButton
          - | Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
-           | Voir :ref:`pushButtons <igoOgcFilterPushButtons>`. Doit contenir obligatoirement groups[] et bundles[].
+           | Doit contenir obligatoirement groups[] et bundles[].
          -
          -
 
@@ -1424,7 +1424,7 @@ Propriétés de ogcFilters
 
 Liens
 
-    - `ogc-filter.interface.ts<https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.interface.ts>`_
+    - `ogc-filter.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.interface.ts>`_
 
 
 
@@ -1457,10 +1457,9 @@ Propriétés de l'objet ogcFilter.pushButtons.groups
          -
          -
 
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
-
 
 .. _igoOgcFilterButtonsBundlesObject:
+
 
 Propriétés de l'objet ogcFilter.pushButtons.bundles
 
@@ -1538,7 +1537,7 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
          - String
          - Indique ce qu'il y aura d'inscrit sur le bouton.
          -
-         - " " blanc
+         - blanc
        * - tooltip
          - String
          - Indique ce qu'il y aura d'inscrit dans l'info-bulle sur le bouton.
@@ -1574,7 +1573,7 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
        * - operator
          - String
          - | Opérateurs à appliquer. ** Certains opérateurs sont disponibles uniquement sur certain type de filtre.
-           | Par exemple l'opérateur during est disponible uniquement sur le filtre de type time
+           | Par exemple, l'opérateur during est disponible uniquement sur le filtre de type time
          - | PropertyIsEqualTo, PropertyIsNotEqualTo,
            | PropertyIsGreaterThan, PropertyIsGreaterThanOrEqualTo,
            | PropertyIsLessThan, PropertyIsLessThanOrEqualTo,
