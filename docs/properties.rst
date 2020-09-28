@@ -1389,7 +1389,10 @@ Propriétés de ogcFilters
             à l'utilisateur.
             NB: Ce paramètre s'appliquera a tous les champs definits dans sourceField mais ce paramètre peut aussi être définit
             à l'intérieur de sourceField pour l'appliquer au niveau d'un champ spécifique si besoin.
-         - BasicNumericOperator, Basic, BasicAndSpatial, Spatial, All, time.
+         - | BasicNumericOperator,
+           | Basic, Spatial,
+           | BasicAndSpatial,
+           | All, time.
          - BasicAndSpatial
        * - editable
          - Boolean
@@ -1403,14 +1406,15 @@ Propriétés de ogcFilters
          - true | false
          - true
        * - filters
-         - IgoLogicalArrayOptions | AnyBaseOgcFilterOptions;
-         - Permet de définir un filtre avancé. :ref:`igoOgcFilterFiltersObject`
+         - | IgoLogicalArrayOptions
+           | AnyBaseOgcFilterOptions
+         - Permet de définir un filtre avancé. :ref:`objet filters <igoOgcFilterFiltersObject>`
          -
          -
        * - pushButtons
          - PushButton
          - | Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
-           | Voir :ref:`pushButtons <igoOgcFilterPushButtons>`. Doit contenir obligatoirement groups[] et bundles[]
+           | Voir :ref:`pushButtons <igoOgcFilterPushButtons>`. Doit contenir obligatoirement groups[] et bundles[].
          -
          -
 
@@ -1486,12 +1490,12 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles
          -
        * - **logical***
          - String
-         - Opérateur logique à appliquer entre les boutons lorsque plusieurs boutons seront activés. "ET", "OU"
+         - Opérateur logique à appliquer entre les boutons lorsque plusieurs boutons seront activés. "ET", "OU".
          - Or, And
          - Doit être définit
        * - vertical
          - Boolean
-         - Indique si la disposition des boutons dans la fenetre se fait de manière verticale
+         - Indique si la disposition des boutons dans la fenêtre se fait de manière verticale.
          - true | false
          -
 
@@ -1527,7 +1531,7 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
          - true
        * - filters
          - IgoLogicalArrayOptions | AnyBaseOgcFilterOptions
-         - Configuration de l'expression filtrante appliquée sur l'activation du bouton. Voir :ref:`igoOgcFilterFiltersObject`.
+         - Configuration de l'expression filtrante appliquée sur l'activation du bouton. Voir :ref:`filters <igoOgcFilterFiltersObject>`.
          -
          -
        * - title
@@ -1569,8 +1573,13 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
          -
        * - operator
          - String
-         - Opérateurs à appliquer
-         - PropertyIsEqualTo - ...
+         - | Opérateurs à appliquer. ** Certains opérateurs sont disponibles uniquement sur certain type de filtre.
+           | Par exemple l'opérateur during est disponible uniquement sur le filtre de type time
+         - | PropertyIsEqualTo, PropertyIsNotEqualTo,
+           | PropertyIsGreaterThan, PropertyIsGreaterThanOrEqualTo,
+           | PropertyIsLessThan, PropertyIsLessThanOrEqualTo,
+           | Intersects, Within
+           | During
          -
        * - propertyName
          - String
@@ -1649,7 +1658,9 @@ Propriétés de l'objet sourceFields
          - String
          - Indique les opérateurs permis pour cet attribut
          - .. line-block::
-               BasicNumericOperator OU Basic OU BasicAndSpatial OU Spatial OU All OU Time
+               BasicNumericOperator OU Basic
+               OU BasicAndSpatial OU Spatial
+               OU All OU Time
                Référez vous à `ogc-filter.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`_ pour les opérateurs correspondants.
          - BasicAndSpatial
 
