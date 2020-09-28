@@ -1409,7 +1409,7 @@ Propriétés de ogcFilters
        * - pushButtons
          - PushButton
          - Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
-           :ref:`igoOgcFilterPushButtons:`
+           :ref:`igoOgcFilterPushButtons`
          -
          -
 
