@@ -1387,8 +1387,8 @@ Propriétés de ogcFilters
          - .. line-block::
             Paramètre relatif aux filtres avancés. Les opérateurs pour construire l'expression filtrante qui seront accessible
             à l'utilisateur.
-            NB: Ce paramètre s'appliquera a tous les champs definit dans sourceField mais ce paramètre peut aussi être définit
-            à l'intérieur de sourceField pour le définir au niveau du champ si besoin.
+            NB: Ce paramètre s'appliquera a tous les champs definits dans sourceField mais ce paramètre peut aussi être définit
+            à l'intérieur de sourceField pour l'appliquer au niveau d'un champ spécifique si besoin.
          - BasicNumericOperator, Basic, BasicAndSpatial, Spatial, All, time.
          - BasicAndSpatial
        * - editable
@@ -1398,8 +1398,8 @@ Propriétés de ogcFilters
          - true
        * - enabled
          - Boolean
-         - Active ou non les filtres modifiable par l'utilisateur sur la couche. Si = false, le bouton de filtre n'apparait plus.
-           Par exemple dans le cas que le pilote voudrait filtrer une couche mais que ce filtre ne soit pas modifiable par l'utilisateur.
+         - | Active ou non les filtres modifiable par l'utilisateur sur la couche. Si = false, le bouton de filtre n'apparait plus.
+           | Par exemple, dans le cas que le pilote voudrait filtrer une couche mais que ce filtre ne soit pas modifiable par l'utilisateur.
          - true | false
          - true
        * - filters
@@ -1410,7 +1410,7 @@ Propriétés de ogcFilters
        * - pushButtons
          - PushButton
          - Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
-           :ref:`igoOgcFilterPushButtons`
+           :ref:`igoOgcFilterPushButtons`. Doit contenir obligatoirement groups[] et bundles[]
          -
          -
 
@@ -1443,7 +1443,7 @@ Propriétés de l'objet ogcFilter.pushButtons.groups
                Valeur défaut
        * - ids
          -
-         - Liste des identifiants pour le classement des paquets("bundled") de boutons dans les groupes.
+         - Liste des identifiants pour le classement des paquets("bundles") de boutons dans les groupes.
          -
          -
        * - title
