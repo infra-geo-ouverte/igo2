@@ -1167,6 +1167,8 @@ Propriétés
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
+La configuration du titre et du message présentés se fait dans les fichiers locaux de traduction en.json et fr.json.
+
 
 ***************
 Exemple complet config.json
