@@ -98,7 +98,14 @@ Résumé
                de la carte.
                Ce dernier contient les données tabulaires pour
                 les données WFS / Vectorielle / Cluster
-               ** Encore en développement **
+         -
+       * - `hasFeatureEmphasisOnSelection`
+         - Boolean
+         - .. line-block::
+               Permet d'ajouter à la carte une géométrie ponctuelle pour les entités 
+               linéaire ou polygonale sélectionnées ou survolées lors d'une 
+               interrogation de la carte et qui sont de trop petite taille par 
+               rapport à l'étendue de la carte. 
          -
        * - importExport
          - `ImportExport`_
@@ -683,8 +690,11 @@ hasSearchPointerSummary
 hasExpansionPanel
 *****************
 
-    .. note::
-       En cours de construction
+    .. line-block::
+        Permet d'ouvrir un paneau d'expansion à partir
+        d'un bouton situé dans le coin inférieur gauche de la carte.
+        Ce dernier contient les données tabulaires pour
+        les données WFS / Vectorielle / Cluster.
 
 
 ***************

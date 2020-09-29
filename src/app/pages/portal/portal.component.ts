@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
-import { debounceTime, take } from 'rxjs/operators';
+import { debounceTime, take, pairwise } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
@@ -19,18 +19,21 @@ import {
   MediaOrientation,
   ConfigService,
   LanguageService,
-  MessageService
+  MessageService,
+  StorageService,
+  StorageScope
 } from '@igo2/core';
 import {
-  // ActionbarMode,
-  // Workspace,
-  // WorkspaceStore,
-  // EntityRecord,
+  ActionbarMode,
+  Workspace,
+  WorkspaceStore,
   ActionStore,
   EntityStore,
   // getEntityTitle,
   Toolbox,
-  Tool
+  Tool,
+  EntityTableScrollBehavior,
+  Widget
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -57,7 +60,10 @@ import {
   FEATURE,
   ImportService,
   handleFileImportError,
-  handleFileImportSuccess
+  handleFileImportSuccess,
+  ExportOptions,
+  featureFromOl,
+  QueryService
 } from '@igo2/geo';
 
 import {
@@ -65,7 +71,9 @@ import {
   MapState,
   SearchState,
   QueryState,
-  ContextState
+  ContextState,
+  WorkspaceState,
+  ImportExportState
 } from '@igo2/integration';
 
 import {
@@ -82,6 +90,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-portal',
@@ -101,8 +110,12 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
-  public expansionPanelExpanded = false;
-  public toastPanelOpened = true;
+  public hasFeatureEmphasisOnSelection: Boolean = false;
+  public workspacePaginator: MatPaginator;
+  public workspaceEntitySortChange$: BehaviorSubject<
+    boolean
+  > = new BehaviorSubject(false);
+
   public fullExtent;
   public sidenavOpened = false;
   public searchBarTerm = '';
@@ -117,28 +130,16 @@ export class PortalComponent implements OnInit, OnDestroy {
   private contextLoaded = false;
 
   private context$$: Subscription;
+  private openSidenav$$: Subscription;
 
   public igoSearchPointerSummaryEnabled = false;
 
-  public tableStore = new EntityStore([]);
-  public tableTemplate = {
-    selection: true,
-    sort: true,
-    columns: [
-      {
-        name: 'id',
-        title: 'ID'
-      },
-      {
-        name: 'name',
-        title: 'Name'
-      },
-      {
-        name: 'description',
-        title: 'Description'
-      }
-    ]
-  };
+  public toastPanelForExpansionOpened = true;
+  private activeWidget$$: Subscription;
+  public showToastPanelForExpansionToggle = false;
+  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
+    undefined
+  );
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
@@ -172,26 +173,28 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
   }
 
+  get expansionPanelExpanded(): boolean {
+    return this.workspaceState.workspacePanelExpanded;
+  }
+  set expansionPanelExpanded(value: boolean) {
+    this.workspaceState.workspacePanelExpanded = value;
+  }
+
   get toastPanelShown(): boolean {
     return true;
   }
 
   get expansionPanelBackdropShown(): boolean {
-    return false;
+    return this.expansionPanelExpanded && this.toastPanelForExpansionOpened;
   }
 
-  // get actionbarMode(): ActionbarMode {
-  //   if (this.mediaService.media$.value === Media.Mobile) {
-  //     return ActionbarMode.Overlay;
-  //   }
-  //   return this.expansionPanelExpanded
-  //     ? ActionbarMode.Dock
-  //     : ActionbarMode.Overlay;
-  // }
-  //
-  // get actionbarWithTitle(): boolean {
-  //   return this.actionbarMode === ActionbarMode.Overlay;
-  // }
+  get actionbarMode(): ActionbarMode {
+    return ActionbarMode.Overlay;
+  }
+
+  get actionbarWithTitle(): boolean {
+    return this.actionbarMode === ActionbarMode.Overlay;
+  }
 
   get searchStore(): EntityStore<SearchResult> {
     return this.searchState.store;
@@ -205,15 +208,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.toolState.toolbox;
   }
 
-  // get toastPanelContent(): string {
-  //   let content;
-  //   if (this.workspace !== undefined && this.workspace.hasWidget) {
-  //     content = 'workspace';
-  //   } else if (this.searchResult !== undefined) {
-  //     content = this.searchResult.meta.dataType.toLowerCase();
-  //   }
-  //   return content;
-  // }
+  get toastPanelContent(): string {
+    let content;
+    if (this.workspace !== undefined && this.workspace.hasWidget) {
+      content = 'workspace';
+    } /*else if (this.searchResult !== undefined) {
+      content = this.searchResult.meta.dataType.toLowerCase();
+    }*/
+    return content;
+  }
 
   // get toastPanelTitle(): string {
   //   let title;
@@ -226,29 +229,28 @@ export class PortalComponent implements OnInit, OnDestroy {
   //   return title;
   // }
 
-  // get toastPanelOpened(): boolean {
-  //   const content = this.toastPanelContent;
-  //   if (content === 'workspace') {
-  //     return true;
-  //   }
-  //   return this._toastPanelOpened;
-  // }
-  // set toastPanelOpened(value: boolean) {
-  //   this._toastPanelOpened = value;
-  // }
-  // private _toastPanelOpened = false;
+  get toastPanelOpened(): boolean {
+    return this.storageService.get('toastOpened') as boolean;
+  }
 
-  // get workspaceStore(): WorkspaceStore {
-  //   return this.workspaceState.store;
-  // }
-  //
-  // get workspace(): Workspace {
-  //   return this.workspaceState.workspace$.value;
-  // }
+  set toastPanelOpened(value: boolean) {
+    if (value === this.storageService.get('toastOpened')) {
+      return;
+    }
+    this.storageService.set('toastOpened', value, StorageScope.SESSION);
+  }
+
+  get workspaceStore(): WorkspaceStore {
+    return this.workspaceState.store;
+  }
+
+  get workspace(): Workspace {
+    return this.workspaceState.workspace$.value;
+  }
 
   constructor(
     private route: ActivatedRoute,
-    // private workspaceState: WorkspaceState,
+    public workspaceState: WorkspaceState,
     public authService: AuthService,
     public mediaService: MediaService,
     public layerService: LayerService,
@@ -263,14 +265,20 @@ export class PortalComponent implements OnInit, OnDestroy {
     private searchSourceService: SearchSourceService,
     private configService: ConfigService,
     private importService: ImportService,
+    private importExportState: ImportExportState,
     private http: HttpClient,
     private languageService: LanguageService,
     private messageService: MessageService,
     private welcomeWindowService: WelcomeWindowService,
-    public dialogWindow: MatDialog
+    public dialogWindow: MatDialog,
+    private queryService: QueryService,
+    private storageService: StorageService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
+    this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
+      'hasFeatureEmphasisOnSelection'
+    );
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
@@ -307,26 +315,131 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     ]);
 
-    this.tableStore.load([
-      { id: '2', name: 'Name 2', description: 'Description 2' },
-      { id: '1', name: 'Name 1', description: 'Description 1' },
-      { id: '3', name: 'Name 3', description: 'Description 3' },
-      { id: '4', name: 'Name 4', description: 'Description 4' },
-      { id: '5', name: 'Name 5', description: 'Description 5' }
-    ]);
-
-    this.queryStore.count$.subscribe((i) => {
-      this.map.viewController.padding[2] = i ? 280 : 0;
-    });
+    this.queryStore.count$
+      .pipe(pairwise())
+      .subscribe(([prevCnt, currentCnt]) => {
+        this.map.viewController.padding[2] = currentCnt ? 280 : 0;
+        // on mobile. Close the toast if workspace is opened, on new query
+        if (
+          prevCnt === 0 &&
+          currentCnt !== prevCnt &&
+          this.isMobile() &&
+          this.hasExpansionPanel &&
+          this.expansionPanelExpanded &&
+          this.toastPanelOpened
+        ) {
+          this.toastPanelOpened = false;
+        }
+      });
     this.readQueryParams();
 
     this.onSettingsChange$.subscribe(() => {
       this.searchState.setSearchSettingsChange();
     });
+
+    this.workspaceState.workspaceEnabled$.next(this.hasExpansionPanel);
+    this.workspaceState.store.empty$.subscribe((workspaceEmpty) => {
+      if (!this.hasExpansionPanel) {
+        return;
+      }
+      this.workspaceState.workspaceEnabled$.next(workspaceEmpty ? false : true);
+      if (workspaceEmpty) {
+        this.expansionPanelExpanded = false;
+      }
+      this.updateMapBrowserClass();
+    });
+
+    this.workspaceState.workspace$.subscribe((activeWks) => {
+      if (activeWks) {
+        this.selectedWorkspace$.next(activeWks);
+        this.expansionPanelExpanded = true;
+      } else {
+        this.expansionPanelExpanded = false;
+      }
+    });
+
+    this.activeWidget$$ = this.workspaceState.activeWorkspaceWidget$.subscribe(
+      (widget: Widget) => {
+        if (widget !== undefined) {
+          this.openToastPanelForExpansion();
+          this.showToastPanelForExpansionToggle = true;
+        } else {
+          this.closeToastPanelForExpansion();
+          this.showToastPanelForExpansionToggle = false;
+        }
+      }
+    );
+
+    this.openSidenav$$ = this.toolState.openSidenav$.subscribe(
+      (openSidenav: boolean) => {
+        if (openSidenav) {
+          this.openSidenav();
+          this.toolState.openSidenav$.next(false);
+        }
+      }
+    );
+  }
+
+  paginatorChange(matPaginator: MatPaginator) {
+    this.workspacePaginator = matPaginator;
+  }
+
+  entitySortChange() {
+    this.workspaceEntitySortChange$.next(true);
+  }
+
+  entitySelectChange(result: { added: Feature[] }) {
+    const baseQuerySearchSource = this.getQuerySearchSource();
+    const querySearchSourceArray: QuerySearchSource[] = [];
+    if (result && result.added) {
+      const results = result.added.map((res) => {
+        if (
+          res &&
+          res.ol &&
+          res.ol.getProperties()._featureStore.layer &&
+          res.ol.getProperties()._featureStore.layer.visible
+        ) {
+          const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
+          const feature = featureFromOl(
+            res.ol,
+            featureStoreLayer.map.projection,
+            featureStoreLayer.ol
+          );
+
+          feature.meta.alias = this.queryService.getAllowedFieldsAndAlias(
+            featureStoreLayer
+          );
+          feature.meta.title =
+            this.queryService.getQueryTitle(feature, featureStoreLayer) ||
+            feature.meta.title;
+          let querySearchSource = querySearchSourceArray.find(
+            (s) => s.title === feature.meta.sourceTitle
+          );
+          if (!querySearchSource) {
+            querySearchSource = new QuerySearchSource({
+              title: feature.meta.sourceTitle
+            });
+            querySearchSourceArray.push(querySearchSource);
+          }
+          return featureToSearchResult(feature, querySearchSource);
+        }
+      });
+
+      const research = {
+        request: of(results),
+        reverse: false,
+        source: baseQuerySearchSource
+      };
+      research.request.subscribe((queryResults: SearchResult<Feature>[]) => {
+        this.queryStore.load(queryResults);
+      });
+    }
   }
 
   ngOnDestroy() {
     this.context$$.unsubscribe();
+    this.activeWidget$$.unsubscribe();
+    this.openSidenav$$.unsubscribe();
   }
 
   /**
@@ -343,6 +456,18 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   onToggleSidenavClick() {
     this.toggleSidenav();
+  }
+
+  onDeactivateWorkspaceWidget() {
+    this.closeToastPanelForExpansion();
+  }
+
+  closeToastPanelForExpansion() {
+    this.toastPanelForExpansionOpened = false;
+  }
+
+  openToastPanelForExpansion() {
+    this.toastPanelForExpansionOpened = true;
   }
 
   onMapQuery(event: { features: Feature[]; event: OlMapBrowserPointerEvent }) {
@@ -481,7 +606,18 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   toastOpenedChange(opened: boolean) {
     this.map.viewController.padding[2] = opened ? 280 : 0;
-    this.toastPanelOpened = opened;
+    this.handleExpansionAndToastOnMobile();
+  }
+
+  private handleExpansionAndToastOnMobile() {
+    if (
+      this.isMobile() &&
+      this.hasExpansionPanel &&
+      this.expansionPanelExpanded &&
+      this.toastPanelOpened
+    ) {
+      this.expansionPanelExpanded = false;
+    }
   }
 
   public onClearSearch() {
@@ -537,36 +673,38 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchBarTerm = coord.map((c) => c.toFixed(6)).join(', ');
   }
 
-  updateMapBrowserClass(e) {
+  updateMapBrowserClass() {
     const header = this.queryState.store.entities$.value.length > 0;
-    if (this.hasExpansionPanel) {
-      e.element.classList.add('has-expansion-panel');
+    if (this.hasExpansionPanel && this.workspaceState.workspaceEnabled$.value) {
+      this.mapBrowser.nativeElement.classList.add('has-expansion-panel');
     } else {
-      e.element.classList.remove('has-expansion-panel');
+      this.mapBrowser.nativeElement.classList.remove('has-expansion-panel');
     }
 
-    if (this.expansionPanelExpanded) {
-      e.element.classList.add('expansion-offset');
+    if (this.hasExpansionPanel && this.expansionPanelExpanded) {
+      this.mapBrowser.nativeElement.classList.add('expansion-offset');
     } else {
-      e.element.classList.remove('expansion-offset');
+      this.mapBrowser.nativeElement.classList.remove('expansion-offset');
     }
 
     if (this.sidenavOpened) {
-      e.element.classList.add('sidenav-offset');
+      this.mapBrowser.nativeElement.classList.add('sidenav-offset');
     } else {
-      e.element.classList.remove('sidenav-offset');
+      this.mapBrowser.nativeElement.classList.remove('sidenav-offset');
     }
 
     if (this.sidenavOpened && !this.isMobile()) {
-      e.element.classList.add('sidenav-offset-baselayers');
+      this.mapBrowser.nativeElement.classList.add('sidenav-offset-baselayers');
     } else {
-      e.element.classList.remove('sidenav-offset-baselayers');
+      this.mapBrowser.nativeElement.classList.remove(
+        'sidenav-offset-baselayers'
+      );
     }
 
     if (!this.toastPanelOpened && header && !this.expansionPanelExpanded) {
-      e.element.classList.add('toast-offset-scale-line');
+      this.mapBrowser.nativeElement.classList.add('toast-offset-scale-line');
     } else {
-      e.element.classList.remove('toast-offset-scale-line');
+      this.mapBrowser.nativeElement.classList.remove('toast-offset-scale-line');
     }
 
     if (
@@ -575,9 +713,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       (this.isMobile() || this.isTablet() || this.sidenavOpened) &&
       !this.expansionPanelExpanded
     ) {
-      e.element.classList.add('toast-offset-attribution');
+      this.mapBrowser.nativeElement.classList.add('toast-offset-attribution');
     } else {
-      e.element.classList.remove('toast-offset-attribution');
+      this.mapBrowser.nativeElement.classList.remove(
+        'toast-offset-attribution'
+      );
     }
   }
 
@@ -648,6 +788,20 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       return 'down';
     }
+  }
+
+  getToastPanelOffsetY() {
+    let status = 'noExpansion';
+    if (this.expansionPanelExpanded) {
+      if (this.toastPanelOpened) {
+        status = 'expansionAndToastOpened';
+      } else {
+        status = 'expansionAndToastClosed';
+      }
+    } else {
+      status = 'noExpansion';
+    }
+    return status;
   }
 
   getToastPanelStatus() {
