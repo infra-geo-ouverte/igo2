@@ -2,7 +2,6 @@
   "global": {
     "title": "interactiveTour.global.title",
     "position": "auto",
-    "class": "mat-typography",
     "steps": [
       {
         "element": ".menu-button",
