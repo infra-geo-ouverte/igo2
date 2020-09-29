@@ -2,6 +2,7 @@
   "global": {
     "title": "interactiveTour.global.title",
     "position": "auto",
+    "class": "mat-typography",
     "steps": [
       {
         "element": ".menu-button",
@@ -100,87 +101,18 @@
         "element": "igo-actionbar-item:nth-child(11) mat-list-item",
         "title": "interactiveTour.global.about-title",
         "text": "interactiveTour.global.about",
-        "disableInteraction": true
-      },
-      {
-        "element": "igo-actionbar-item:nth-child(2) mat-list-item",
-        "title": "interactiveTour.global.context-title",
-        "text": "interactiveTour.global.context-choose",
         "disableInteraction": true,
         "beforeShow": {
+          "action": "click",
           "element": "#homeButton",
-          "action": "click"
-        },
-        "beforeChange": {
-          "action": "click",
-          "waitFor": ".igo-tool-container"
+          "condition": "#homeButton"
         }
       },
       {
-        "element": ".igo-tool-container",
+        "element": "igo-actionbar-item:nth-child(3) mat-list-item button",
         "title": "interactiveTour.global.context-title",
-        "text": "interactiveTour.global.context-list",
+        "text": "interactiveTour.global.tool-choose",
         "disableInteraction": true,
-        "noBackButton": true
-      },
-      {
-        "element": "igo-context-item",
-        "title": "interactiveTour.global.context-title",
-        "text": "interactiveTour.global.context-item"
-      },
-      {
-        "element": "igo-context-item:nth-of-type(2) mat-list-item",
-        "title": "interactiveTour.global.context-title",
-        "text": "interactiveTour.global.context-item2",
-        "beforeShow": {
-          "action": "click",
-          "element": "igo-actionbar-item:nth-child(2) mat-list-item",
-          "waitFor": "igo-context-item"
-        }
-      },
-      {
-        "element": "igo-list",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layers",
-        "noBackButton": true,
-        "beforeShow": {
-          "action": "click",
-          "element": "igo-actionbar-item:nth-child(3) mat-list-item",
-          "waitFor": "igo-list"
-        }
-      },
-      {
-        "element": "igo-layer-item:nth-of-type(1)",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layer-name"
-      },
-      {
-        "element": "igo-layer-item:nth-of-type(1) h4",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.legend",
-        "onShow": {
-          "action": "click"
-        }
-      },
-      {
-        "element": "igo-layer-item:first-of-type button",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layer-eye"
-      },
-      {
-        "element": "igo-layer-item:first-of-type button:nth-of-type(2)",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layer-tool-btn",
-        "beforeChange": {
-          "action": "click",
-          "waitFor": ".igo-layer-actions-container",
-          "condition": "!.igo-layer-actions-container"
-        }
-      },
-      {
-        "element": ".igo-layer-actions-container",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layer-tool",
         "beforeShow": {
           "action": "click",
           "element": "igo-actionbar-item:nth-child(3) mat-list-item"
