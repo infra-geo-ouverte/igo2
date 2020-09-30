@@ -7,7 +7,7 @@
         "visible": false,
         "sourceOptions": {
           "download": {
-            "url": "https://www.donneesquebec.ca/recherche/fr/dataset/zone-potentiellement-exposee-aux-glissements-de-terrain-zpegt"
+            "url": "https://www.donneesquebec.ca/recherche/fr/dataset/radar-photo"
           },
           "queryable": true,
           "params": {
@@ -18,7 +18,7 @@
             "outputFormatDownload": "shp"
           },
           "type": "wfs",
-          "url": "/swtq"
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq"
         }
       },
       {
@@ -50,7 +50,7 @@
         "title": "WMS & Download URL",
         "sourceOptions": {
           "download": {
-            "url": "https://www.donneesquebec.ca/recherche/fr/dataset/zone-potentiellement-exposee-aux-glissements-de-terrain-zpegt"
+            "url": "https://www.donneesquebec.ca/recherche/fr/dataset/desserte-des-centres-durgences-9-1-1"
           },
           "type": "wms",
           "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
