@@ -129,6 +129,35 @@
       "check-measure-title": "Sélection des mesures",
       "active-results-buttons": "Si des mesures sont sélectionnées, les boutons seront maintenant activés!",
       "active-results-buttons-title": "Boutons de la table des résultats"
+    },
+    "spatial-filter": {
+      "title": "FILTRE SPATIAL",
+      "start": "Tour guidé de l'outil de filtre spatial",
+      "zone-type": "Pour sélectionner le type de zone à ajouter à la carte",
+      "predefined": "Une zone prédéfinie est une entité surfacique déjà existente comme une municipalités ou une MRC",
+      "drawing": "L'onglet dessin permet plutôt de dessiner directement une zone sur la carte",
+      "search-by": "Si le choix est une zone prédéfinie, le type devra être choisi ici (municipalité, région administrative, etc.)",
+      "zone": "La zone en question pourra ensuite être choisi ici",
+      "results-type": "La sélection spatiale peut être fait soit pour des adresses, soit pour des couches thématiques",
+      "address": "La recherche par adresse permet de rechercher l'ensemble des adresses présentes dans la zone",
+      "warning-address": "À faire attention, dépendamment de la zone choisie, le résultat peut-être excessivement grand!",
+      "thematics": "Les thématiques sont un ensemble de couches de données classifiés par thème global",
+      "thematics-choose": "On peut ainsi rechercher des écoles, des hôpitaux, des entités hydropgraphiques etc.",
+      "initialize": "Une fois un ou plusieurs paramètres sélectionnés, il est possible de réinitialiser ceux-ci à tout moment",
+      "drawing-select": "Choisissons le mode dessin",
+      "drawing-type": "Il est possible de choisir de dessiner une zone polygonale ou un cercle",
+      "activate-drawing": "Autoriser ou non l'action de dessiner sur la carte",
+      "freehand-drawing": "Dessiner la zone à main levée",
+      "circle-choose": "Choisissons le mode cercle",
+      "circle-radius": "Il nous est alors possible de prédéterminer la taille de notre cercle à partir du rayon",
+      "circle-freehand": "Si nous activons le mode à main levée, le rayon n'est plus tenu en compte",
+      "drawing-map": "Pour dessiner une zone en mode main levée, tenir clic droit enfoncé, puis relâcher. En mode standard, un clic pour démarrer le dessin et deux clics pour le terminer.",
+      "thematics-choose-2": "Choisir une thématique à rechercher si cela n'est pas déjà fait",
+      "clear-drawing": "Une fois le dessin réalisé, il est toujours possible de retirer ce dernier de la carte",
+      "launch": "Une fois les paramètres remplis, la recherche peut ensuite être lancée",
+      "results-table": "Les résultats apparaîtront dans ce tableau",
+      "clear-results": "Les résultats de la recherche peuvent être retirer à tout moment",
+      "export": "Il est aussi possible d'exporter les résultats par l'outil d'export"
     }
   }
 }

@@ -192,6 +192,7 @@ app-toast-panel {
   margin-left: -300px;
   width: 600px;
   z-index: 5;
+  outline: none;
 
   @include mobile {
     width: calc(100% - #{$app-footer-height});
@@ -203,6 +204,10 @@ app-toast-panel {
     width: 500px;
     left: calc(50% + 60px);
   }
+}
+
+app-toast-panel.app-full-toast-panel-collapsed {
+  width: 55%;
 }
 
 app-toast-panel.expansion-panel-expanded,

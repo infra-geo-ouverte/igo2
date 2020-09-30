@@ -130,6 +130,35 @@
       "check-measure-title": "Measure selection",
       "active-results-buttons": "If so measure are selected, button's are now active!",
       "active-results-buttons-title": "Results table buttons"
+    },
+    "spatial-filter": {
+      "title": "SPATIAL FILTER",
+      "start": "The spatial filter allow to select certain features that match with a specified area. Results are added to the map",
+      "zone-type": "To select the area/zone type",
+      "predefined": "A predefined zone is a surface entity that already exists like a municipality or a RCM",
+      "drawing": "Drawing tab allow to draw directly the zone on the map",
+      "search-by": "If predefined zone is selected, the type's going to be chosen here",
+      "zone": "The choice for the zone is made here",
+      "results-type": "The spatial selection can be done by address or by thematics layer",
+      "address": "Address research allow to search all the addresses inside the zone",
+      "warning-address": "Be careful, depending on the zone size, result can be excessively huge!",
+      "thematics": "Thematics are a set of layers classfied by global theme. We can then search schools, hospitals, hydrographics entities.",
+      "thematics-choose": "We can then search schools, hospitals, hydrography entities etc.",
+      "initialize": "Once one or multiple parameters are selected, it is possible do reset them anytime",
+      "drawing-select": "Let's choose the drawing mode",
+      "drawing-type": "It is possible to choose to draw a polygon or a circle",
+      "activate-drawing": "First option allow to enable or not the action of drawing on the map",
+      "freehand-drawing": "Second option allow to enable the freehand drawing (left click down and up to finish the drawing).",
+      "circle-choose": "Let's choose circle mode",
+      "circle-radius": "Here, we can establish the size of the circle based on his radius",
+      "circle-freehand": "If we activate freehand drawing option, radius isn't use anymore",
+      "drawing-map": "To draw in standard mode, one click allow to start the drawing and two clicks allow to finish it",
+      "clear-drawing": "Once the drawing is finish, it is always possible to delete it from the map",
+      "thematics-choose-2": "Choose thematics to search if you haven't yet",
+      "launch": "Once parameters are selected, the spatial selection can be launch",
+      "results-table": "Results will appear in this table",
+      "clear-results": "Results can be deleted from the map anytime with this button",
+      "export": "It is also possible to export the result using the export tool"
     }
   }
 }
