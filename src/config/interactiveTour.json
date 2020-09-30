@@ -33,100 +33,95 @@
         }
       },
       {
-        "element": "igo-actionbar-item:nth-child(2) mat-list-item",
-        "title": "interactiveTour.global.context-title",
-        "text": "interactiveTour.global.context",
+        "element": "igo-actionbar-item:nth-child(1) mat-list-item",
+        "title": "interactiveTour.global.search-tool-title",
+        "text": "interactiveTour.global.search-tool",
         "disableInteraction": true,
         "beforeShow": {
           "element": "#homeButton",
           "action": "click"
-        },
-        "beforeChange": {
-          "action": "click",
-          "waitFor": ".igo-tool-container"
         }
       },
       {
-        "element": ".igo-tool-container",
+        "element": "igo-actionbar-item:nth-child(2) mat-list-item",
         "title": "interactiveTour.global.context-title",
-        "text": "interactiveTour.global.context-list",
+        "text": "interactiveTour.global.context",
         "disableInteraction": true
       },
       {
-        "element": "igo-context-item",
-        "title": "interactiveTour.global.context-title",
-        "text": "interactiveTour.global.context-item"
+        "element": "igo-actionbar-item:nth-child(3) mat-list-item",
+        "title": "interactiveTour.global.map-tool-title",
+        "text": "interactiveTour.global.map-tool",
+        "disableInteraction": true
       },
       {
-        "element": "igo-context-item:nth-of-type(3)",
-        "title": "interactiveTour.global.context-title",
-        "text": "interactiveTour.global.context-filter"
+        "element": "igo-actionbar-item:nth-child(4) mat-list-item",
+        "title": "interactiveTour.global.spatial-filter-title",
+        "text": "interactiveTour.global.spatial-filter",
+        "disableInteraction": true
       },
       {
-        "element": "igo-context-item:nth-of-type(3)",
-        "title": "interactiveTour.global.context-title",
-        "text": "interactiveTour.global.context-filter-click",
-        "beforeChange": {
+        "element": "igo-actionbar-item:nth-child(5) mat-list-item",
+        "title": "interactiveTour.global.measurer-tool-title",
+        "text": "interactiveTour.global.measurer-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(6) mat-list-item",
+        "title": "interactiveTour.global.directions-tool-title",
+        "text": "interactiveTour.global.directions-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(7) mat-list-item",
+        "title": "interactiveTour.global.catalog-tool-title",
+        "text": "interactiveTour.global.catalog-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(8) mat-list-item",
+        "title": "interactiveTour.global.import-export-title",
+        "text": "interactiveTour.global.import-export",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(9) mat-list-item",
+        "title": "interactiveTour.global.print-tool-title",
+        "text": "interactiveTour.global.print-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(10) mat-list-item",
+        "title": "interactiveTour.global.share-map-title",
+        "text": "interactiveTour.global.share-map",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(11) mat-list-item",
+        "title": "interactiveTour.global.about-title",
+        "text": "interactiveTour.global.about",
+        "disableInteraction": true,
+        "beforeShow": {
           "action": "click",
-          "waitFor": "igo-list"
+          "element": "#homeButton",
+          "condition": "#homeButton"
         }
       },
       {
-        "element": "igo-list",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layers",
-        "noBackButton": true,
+        "element": "igo-actionbar-item:nth-child(3) mat-list-item button",
+        "title": "interactiveTour.global.context-title",
+        "text": "interactiveTour.global.tool-choose",
+        "disableInteraction": true,
         "beforeShow": {
           "action": "click",
           "element": "igo-actionbar-item:nth-child(3) mat-list-item"
         }
       },
       {
-        "element": "igo-list",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layers-visible"
-      },
-      {
-        "element": "igo-layer-item:nth-of-type(2)",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layer-embacle"
-      },
-      {
-        "element": "igo-layer-item:nth-of-type(2) h4",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.legend",
-        "onShow": {
-          "action": "click"
-        }
-      },
-      {
-        "element": "igo-layer-item:nth-child(2) button",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layer-eye",
-        "onShow": {
-          "action": "click"
-        }
-      },
-      {
-        "element": "igo-layer-item:nth-child(2) button:nth-of-type(2)",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layer-tool-btn",
-        "beforeChange": {
-          "action": "click",
-          "waitFor": ".igo-layer-actions-container",
-          "condition": "!.igo-layer-actions-container"
-        }
-      },
-      {
-        "element": ".igo-layer-actions-container",
-        "title": "interactiveTour.global.layers-title",
-        "text": "interactiveTour.global.layer-tool"
-      },
-      {
         "element": "#homeButton",
         "title": "interactiveTour.global.menu-button-title",
         "text": "interactiveTour.global.home-button",
-        "onHide": {
+        "beforeChange": {
           "action": "click"
         }
       },
@@ -134,14 +129,25 @@
         "element": "#menu-button",
         "title": "interactiveTour.global.menu-button-title",
         "text": "interactiveTour.global.menu-button-close",
-        "onHide": {
-          "action": "click"
+        "beforeShow": {
+          "action": "click",
+          "condition": "mat-sidenav:not(.mat-drawer-opened)"
+        },
+        "beforeChange": {
+          "action": "click",
+          "element": "igo-actionbar-item:nth-child(3) mat-list-item",
+          "waitFor": "igo-actionbar-item"
         }
       },
       {
         "element": "igo-geolocate-button",
         "title": "interactiveTour.global.geolocate-title",
-        "text": "interactiveTour.global.geolocate"
+        "text": "interactiveTour.global.geolocate",
+        "beforeShow": {
+          "action": "click",
+          "element": "#menu-button",
+          "condition": "mat-sidenav.mat-drawer-opened"
+        }
       },
       {
         "element": "igo-baselayers-switcher",
