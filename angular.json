@@ -59,7 +59,10 @@
               "@turf/invariant",
               "@turf/line-intersect",
               "pbf",
-              "geojson-rbush"
+              "geojson-rbush",
+              "minimatch",
+              "path",
+              "brace-expansion"
             ]
           },
           "configurations": {
@@ -67,7 +70,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "8kb"
                 }
               ],
               "fileReplacements": [
@@ -90,7 +93,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "8kb"
                 }
               ],
               "fileReplacements": [
