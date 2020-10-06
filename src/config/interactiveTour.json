@@ -109,7 +109,7 @@
       },
       {
         "element": "igo-actionbar-item:nth-child(3) mat-list-item button",
-        "title": "interactiveTour.global.context-title",
+        "title": "interactiveTour.global.tool-choose-title",
         "text": "interactiveTour.global.tool-choose",
         "disableInteraction": true,
         "beforeShow": {
