@@ -171,16 +171,13 @@ Résumé
                Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
                Constante pouvant être réutilisée dans le welcomeWindow.
          - 
-      * - releaseDate
-         - String
-         - .. line-block::
-               Permet de définir une constante, pour la date de déploiement de l'application.
-               Constante pouvant être réutilisée dans le welcomeWindow.
-         -
       * - version
-         - String
+         - {app: String, releaseDateApp: String}
          - .. line-block::
-               Permet de définir une constante, pour la version de déploiement de l'application.
+               Permet de définir une constante, pour la version du présent déploiement et de la
+               date de déploiement de l'application. releaseDateApp, doit être un format reconnu et 
+               interprétable au format Date. Si le format n'est pas convertissable en date,
+               la valeur fournie sera utilisée directement.
                Constante pouvant être réutilisée dans le welcomeWindow.
          -
        * - description
@@ -204,8 +201,8 @@ Résumé
                ex: "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>Version {{version}}"
                - title provient de la propriété title ci haut.
                - description provient de la propriété description ci haut.
-               - version provient de la propriété version ci haut OU de la version de la librairie associée (igo2-lib)
-               - releaseDate provient de la propriété releaseDate ci haut OU de la releaseDate de la librairie associée (igo2-lib)
+               - version provient de la propriété version.app ci haut OU de la version de la librairie associée (igo2-lib)
+               - releaseDate provient de la propriété version.releaseDateApp ci haut OU de la releaseDate de la librairie associée (igo2-lib)
       });
          -
 

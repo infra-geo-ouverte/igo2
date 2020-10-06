@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfigService, version } from '@igo2/core';
+import { ConfigService, LanguageService } from '@igo2/core';
 import { WelcomeWindowService } from './welcome-window.service';
-import { ObjectUtils } from '@igo2/utils';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-welcome-window',
@@ -16,7 +16,8 @@ export class WelcomeWindowComponent {
   constructor(
     public dialog: MatDialog,
     private welcomeWindowService: WelcomeWindowService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    protected languageService: LanguageService
   ) { }
 
   closeWelcomeWindow() {
@@ -24,19 +25,48 @@ export class WelcomeWindowComponent {
   }
 
   get translationParameters() {
-    const releaseDate = new Date(version.releaseDate);
-    let day: any = releaseDate.getDate();
-    if (day < 10) {
-      day = '0' + day;
+    let deltaDay = 0;
+    let isDateParsable = true;
+    let releaseDate = new Date(this.configService.getConfig('version.releaseDate'));
+
+    const releaseDateAppConfig = this.configService.getConfig('version.releaseDateApp');
+
+
+    if (releaseDateAppConfig) {
+      const releaseDateApp = new Date(releaseDateAppConfig);
+      if (isNaN(releaseDateApp.getDate())) {
+        console.log('The releaseDateApp config is not a valid date format');
+        isDateParsable = false;
+      } else {
+        deltaDay = 1;
+        releaseDate = releaseDateApp;
+      }
     }
-    const releaseDateString = `${releaseDate.getFullYear()}-${releaseDate.getMonth() + 1}-${day}`;
-    return ObjectUtils.removeUndefined(
-      {
-        title: this.configService.getConfig('title'),
-        description: this.configService.getConfig('description'),
-        version: this.configService.getConfig('version') || version.lib,
-        releaseDate: this.configService.getConfig('releaseDate') || releaseDateString
-      });
+
+    let releaseDateString = '';
+
+    if (isDateParsable) {
+      let day: any = releaseDate.getDate() + deltaDay;
+      if (day < 10) {
+        day = '0' + day;
+      }
+      let month: any = releaseDate.getMonth() + 1;
+      if (month < 10) {
+        month = '0' + month;
+      }
+      const year = releaseDate.getFullYear();
+      releaseDateString = `${year}-${month}-${day}`;
+    } else {
+      releaseDateString = releaseDateAppConfig;
+    }
+
+    return {
+      title: this.configService.getConfig('title') || '',
+      description: this.configService.getConfig('description') || '',
+      version: this.configService.getConfig('version.app') || this.configService.getConfig('version.lib') || '',
+      releaseDate: releaseDateString || ''
+    };
+
   }
 
   get html() {
