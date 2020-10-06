@@ -12,13 +12,13 @@
 
   <div mat-dialog-content class="text">
     <igo-custom-html class="mat-typography"
-      [html]="html |  translate">
+      [html]="html |  translate:translationParameters">
     </igo-custom-html>
   </div>
 
   <p></p>
   <div class="button-container">
-    <igo-interactive-tour
+    <igo-interactive-tour 
       id="tour-button"
       styleButton = "raised"
       (click)= "closeWelcomeWindow()">
