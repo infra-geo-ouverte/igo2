@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigService, LanguageService } from '@igo2/core';
 import { WelcomeWindowService } from './welcome-window.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-welcome-window',

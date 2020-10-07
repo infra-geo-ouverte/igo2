@@ -117,8 +117,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     boolean
   > = new BehaviorSubject(false);
   public paginatorOptions: EntityTablePaginatorOptions = {
-    pageSize: 5, // Number of items to display on a page.
-    pageSizeOptions: [1, 5, 10, 15, 30, 50, 100], // The set of provided page size options to display to the user.
+    pageSize: 50, // Number of items to display on a page.
+    pageSizeOptions: [1, 5, 10, 20, 50, 100, 500], // The set of provided page size options to display to the user.
   };
 
   public fullExtent = this.storageService.get('fullExtent') as boolean;
