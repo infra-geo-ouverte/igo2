@@ -102,10 +102,10 @@ Résumé
        * - `hasFeatureEmphasisOnSelection`
          - Boolean
          - .. line-block::
-               Permet d'ajouter à la carte une géométrie ponctuelle pour les entités 
-               linéaire ou polygonale sélectionnées ou survolées lors d'une 
-               interrogation de la carte et qui sont de trop petite taille par 
-               rapport à l'étendue de la carte. 
+               Permet d'ajouter à la carte une géométrie ponctuelle pour les entités
+               linéaire ou polygonale sélectionnées ou survolées lors d'une
+               interrogation de la carte et qui sont de trop petite taille par
+               rapport à l'étendue de la carte.
          -
        * - importExport
          - `ImportExport`_
@@ -141,7 +141,7 @@ Résumé
          - .. line-block::
                Source serveur pour la création des itinéraires.
                Actuellement, le serveur utilisé est OSRM.
-         - Itinéraire
+         - itinéraire
        * - **searchSources***
          - `SearchSources`_
          - .. line-block::
@@ -167,11 +167,24 @@ Résumé
 
        * - title
          - String
-         - Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
+         - .. line-block::
+               Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
+               Constante pouvant être réutilisée dans le welcomeWindow.
+         - 
+      * - version
+         - {app: String, releaseDateApp: String}
+         - .. line-block::
+               Permet de définir une constante, pour la version du présent déploiement et de la
+               date de déploiement de l'application. releaseDateApp, doit être un format reconnu et 
+               interprétable au format Date. Si le format n'est pas convertissable en date,
+               la valeur fournie sera utilisée directement.
+               Constante pouvant être réutilisée dans le welcomeWindow.
          -
        * - description
          - String
-         - Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche, comme par exemple Google.
+         - .. line-block::
+               Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche, comme par exemple Google.
+               Constante pouvant être réutilisée dans le welcomeWindow.
          -
        * - welcomeWindow
          - `WelcomeWindow`_
@@ -183,6 +196,14 @@ Résumé
                   "title": "Fenêtre d'accueil",
                   "closeButton": "Fermer",
                   "notShowCheck": "  ne plus afficher"}
+               Les propriétés title, description, version, releaseDate peuvent être utilisé dans le contenu html 
+               pour ajouter du contenu statique non traduit.
+               ex: "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>Version {{version}}"
+               - title provient de la propriété title ci haut.
+               - description provient de la propriété description ci haut.
+               - version provient de la propriété version.app ci haut OU de la version de la librairie associée (igo2-lib)
+               - releaseDate provient de la propriété version.releaseDateApp ci haut OU de la releaseDate de la librairie associée (igo2-lib)
+      });
          -
 
 
@@ -787,7 +808,7 @@ interactiveTour
 ***************
 
     .. line-block::
-        Tours intéractif de présentation de l'application
+        Tours intéractifs de présentation de l'application
 
 
 Exemples
@@ -1122,7 +1143,7 @@ WelcomeWindow
 
     .. line-block::
         Affiche une fenêtre accueil à l'entrée dans l'application.
-        NB. : Pour une application sans authentification, simplement ne pas mettre ces configurations.
+        NB. : Pour une application sans fenêtre accueil, simplement ne pas mettre ces configurations.
 
 Exemples
 
@@ -1152,26 +1173,261 @@ Propriétés
        * - nbVisitToShowAgain
          - Number
          - .. line-block::
-               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra après le nombre de visite indiqué dans ce paramètre.
+               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra après le nombre de visite indiqué
+               dans ce paramètre.
          -
          - 30
        * - showAgainOnNewIGOVersion
          - Boolean
          - .. line-block::
-               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra si la version IGO est différente de la version lors de sa visite précédente.
+               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra si la version IGO est différente
+               de la version lors de sa visite précédente.
          -
          - true
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
+La configuration du titre et du message présentés se fait dans les fichiers locaux de traduction en.json et fr.json.
+
 
 ***************
-Exemple complet
+Exemple complet config.json
 ***************
 
-    .. note::
-       En cours de construction
+        .. code:: json
+
+            {
+
+                  "title": "Forêt ouverte",
+                  "theme": "teal-theme",
+                  "description": "Forêt ouverte est un portail de diffusion des données écoforestières du Gouvernement du Québec.",
+                  "analytics": {
+                    "provider": "matomo",
+                    "url": "https://geoegl.msp.gouv.qc.ca/Visiteur",
+                    "id": "40"
+                  },
+                  "hasSearchPointerSummary": true,
+
+                  "mapOverlay": [
+                    {
+                      "media": ["desktop"],
+                      "cssClass": "top-center",
+                      "imgSrc": " ./particular/images/FO_logo_2c.png",
+                      "imgSize": "280px",
+                      "alt": "Foret ouverte",
+                      "fixed": true,
+                      "marginTop": "10px"
+                    },
+                    {
+                      "media": ["desktop"],
+                      "cssClass": "bottom-left",
+                      "link": "http://igouverte.org/",
+                      "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
+                      "imgSize": "30px",
+                      "fontSize": "6pt",
+                      "marginLeft": "38px",
+                      "marginBottom": "10px",
+                      "alt": "IGO",
+                      "fixed": false
+                    },
+
+                    {
+                      "media": ["desktop"],
+                      "cssClass": "bottom-right",
+                      "imgSrc": "./particular/images/QUEB.png",
+                      "imgSize": "150px",
+                      "link": "https://www.quebec.ca",
+                      "marginRight": "60px",
+                      "marginBottom": "20px"
+                    },
+                    {
+                      "media": ["desktop"],
+                      "cssClass": "bottom-right",
+                      "text": "© Gouvernement du Québec 2019",
+                      "fontSize": "10pt",
+                      "link": "http://www.droitauteur.gouv.qc.ca/copyright.php",
+                      "marginRight": "70px",
+                      "marginBottom": "10px"
+                    },
+                    {
+                      "media": ["mobile"],
+                      "cssClass": "top-center",
+                      "imgSrc": " ./particular/images/FO_logo_2c.png",
+                      "imgSize": "200px",
+                      "alt": "Foret ouverte",
+                      "marginTop": "60px",
+                      "fixed": true
+                    },
+
+                    {
+                      "media": ["mobile"],
+                      "cssClass": "bottom-left",
+                      "link": "http://igouverte.org/",
+                      "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
+                      "imgSize": "33px",
+                      "alt": "IGO",
+                      "fixed": true,
+                      "marginLeft": "50px",
+                      "marginBottom": "5px"
+                    },
+
+                    {
+                      "media": ["mobile"],
+                      "cssClass": "bottom-right",
+                      "imgSrc": "./particular/images/QUEB.png",
+                      "imgSize": "100px",
+                      "link": "https://www.quebec.ca",
+                      "marginRight": "37px",
+                      "marginBottom": "3px"
+                    },
+                  ],
+                  "searchSources": {
+                        "cadastre": {
+                          "title": "Cadastre",
+                          "enabled": true
+                        },
+                        "nominatim": {
+                            "enabled": false
+                        },
+                        "ilayer": {
+                            "searchUrl": "/apis/icherche/layers",
+                            "order": 4,
+                            "params": {
+                                "limit": 10
+                            },
+                            "queryFormat": {
+                                "html": {
+                                    "urls": ["/apis/ws/mffpecofor.fcgi"]
+                                }
+                            }
+                        },
+                        "icherche": {
+                            "title": "ICherche",
+                            "searchUrl": "/apis/icherche",
+                            "showInPointerSummary": true,
+                            "order": 2,
+                            "params": {
+                                "limit": "5"
+                            }
+                        },
+                        "icherchereverse": {
+                            "searchUrl": "/apis/terrapi",
+                            "order": 3,
+                            "params": {
+                                "limit": 5,
+                                "buffer":10
+                            }
+                        }
+                    },
+                    "optionsApi": {
+                      "url": "/apis/igo2/layers/options"
+                      },
+                    "importExport": {
+                        "url": "/apis/ogre"
+                    },
+                    "routingSources": {
+                        "osrm": {
+                        "url": "/services/itineraire/route/v1/driving/",
+                        "enabled": true
+                        }
+                    },
+                    "language": {
+                        "prefix": "./particular/locale/"
+                    },
+                    "forceCoordsNA": true,
+                    "catalog": {
+                      "sources": [
+                        {
+                          "id":1,
+                          "title": "Découpages territoriaux",
+                          "composite": [
+                            {
+                              "id": "admin_mern",
+                              "url": "https://serviceswebcarto.mern.gouv.qc.ca/pes/services/Territoire/SDA_WMS/MapServer/WmsServer?",
+                              "crossOrigin": true,
+                              "showLegend":false,
+                              "queryFormat": {
+                                  "geojson": "*"
+                              },
+                              "groupImpose": {"id": "decoup_admin", "title": "Découpages administratifs"}
+                            },
+                            {
+                                "id": "2",
+                                "url": "/ws/mffpecofor.fcgi",
+                                "sourceOptions": {
+                                    "crossOrigin": "anonymous",
+                                    "queryFormat": "htmlgml2",
+                                    "queryHtmlTarget": "iframe",
+                                    "type": "wms",
+                                    "optionsFromCapabilities": true
+                                },
+                                "regFilters": ["^feuillets_20k$","^fuseaux_mtm$","^fuseaux_utm$"],
+                                "groupImpose": {
+                                    "id": "decoup_carto", "title": "Découpages cartographiques"}
+                              }
+                          ]
+                        },
+                        {
+                            "id":3,
+                            "title": "Données Québec",
+                            "url": "/ws/igo_gouvouvert.fcgi",
+                            "crossOrigin": true,
+                            "showLegend":false,
+                            "queryFormat": {
+                                "gml": "*"
+                            }
+                        },
+                        {
+                            "id": 5,
+                            "title": "Imagerie aérienne et satellitaire",
+                            "composite": [
+                              {
+                                "id": "5",
+                                "url": "/ws/mffpecofor.fcgi",
+                                "sourceOptions": {
+                                    "crossOrigin": "anonymous",
+                                    "queryFormat": "htmlgml2",
+                                    "queryHtmlTarget": "iframe",
+                                    "type": "wms",
+                                    "optionsFromCapabilities": true
+                                },
+                                "regFilters": ["telecharge_index_250k"],
+                                "groupImpose": {
+                                  "id": "telechargement", "title": "Téléchargement - mosaïques d'images satellites"}
+                              },
+                              {
+                                "id": "5",
+                                "url": "/ws/mffpecofor.fcgi",
+                                "regFilters": ["^sentinel","^lsat"],
+                                "groupImpose": {
+                                  "id": "mosaiques", "title": "Mosaïques d'images satellites"}
+                              },
+                              {
+                                "id": "5",
+                                "url": "https://servicesvectoriels.atlas.gouv.qc.ca/IDS_INVENTAIRE_ECOFORESTIER_WMS/service.svc/get?",
+                                "queryFormat": "htmlgml2",
+                                "queryHtmlTarget": "iframe",
+                                "groupImpose": {
+                                  "id": "giin", "title": "Photos aériennes de l'inventaire écoforestier"}
+                              },
+                              {
+                                "id": "5",
+                                "title": "test wmts-GIIN",
+                                "url": "https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Inventaire_Ecoforestier?",
+                                "crossOrigin": true,
+                                "matrixSet": "GoogleMapsCompatibleExt2:epsg:3857",
+                                "type": "wmts",
+                                "groupImpose": {
+                                  "id": "giin", "title": "Photos aériennes de l'inventaire écoforestier"}
+                              }
+
+                            ]
+                        }
+                      ]
+                    }
+                }
+
 
 
 
@@ -1268,7 +1524,7 @@ Résumé fichier de contexte
        * - message
          - `Message`_
          - .. line-block::
-               Présentation d'un message a l'ouverture du contexte.
+               Présentation d'un message à l'ouverture du contexte.
          -
        * - `toolbar`_
          - String[]
@@ -1473,7 +1729,7 @@ Propriétés
          -
          -
        * - options.template
-         - Sting
+         - String
          - En construction
          -
          -
@@ -1483,18 +1739,23 @@ Propriétés
          -
          -
        * - text
-         - Sting
-         - Le text du message à afficher. Cette configuration remplace la configuration html.
+         - String
+         - Le text du message à afficher. Cette configuration remplace la configuration html. NB.: pour un message qui sera
+           traduction en fonction du navigateur simplement ce créer une clef de traduction indiquer ici et de mettre sont
+           équivalent dans les fichiers de traduction local en.json, fr.json. Exemple: "text": "messageContextXyz",
+           dans fr.json : "messageContextXyz": <h3>mon super message</h3> et en.json: "messageContextXyz": <h3>message in english</h3>
          -
          -
        * - title
-         - Sting
-         - Le titre du message à afficher. Cette configuration s'active seulement avec la configuration text et ne sera pas pris en compte avec la configuration html.
+         - String
+         - Le titre du message à afficher. Cette configuration s'active seulement avec la configuration text et ne sera pas pris
+           en compte avec la configuration html.
          -
          -
        * - type
-         - Sting
-         - Le type du message à afficher. Avertissement, erreur ou information. Selon le type choisi une couleur spécifiée sera appliquée selon la thématique de couleur de l'application.
+         - String
+         - Le type du message à afficher. Avertissement, erreur ou information. Selon le type choisi une couleur spécifiée sera
+           appliquée selon la thématique de couleur de l'application.
          - 'alert', 'error', 'info', 'success'
          -
 
