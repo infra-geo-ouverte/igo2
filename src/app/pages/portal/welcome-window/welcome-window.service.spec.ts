@@ -6,7 +6,7 @@ describe('WelcomeWindowService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: WelcomeWindowService = TestBed.get(WelcomeWindowService);
+    const service: WelcomeWindowService = TestBed.inject(WelcomeWindowService);
     expect(service).toBeTruthy();
   });
 });

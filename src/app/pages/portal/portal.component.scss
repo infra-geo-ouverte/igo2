@@ -88,6 +88,10 @@ igo-map-browser.sidenav-offset ::ng-deep .ol-overlaycontainer-stopevent {
   left: 400px;
   width: calc(100% - 380px);
 
+  .ol-scale-line {
+    left: 40%;
+  }
+
   @include mobile {
     display: none;
   }
@@ -165,7 +169,6 @@ igo-workspace-selector {
 }
 
 igo-entity-table-paginator {
-  z-index: -1;
   @include mobile {
     margin-left: -30px;
   }
@@ -207,7 +210,7 @@ app-toast-panel {
 }
 
 app-toast-panel.app-full-toast-panel-collapsed {
-  width: 55%;
+  width: 45%;
 }
 
 app-toast-panel.expansion-panel-expanded,

@@ -33,7 +33,8 @@ import {
   Toolbox,
   Tool,
   EntityTableScrollBehavior,
-  Widget
+  Widget,
+  EntityTablePaginatorOptions
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -115,8 +116,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   public workspaceEntitySortChange$: BehaviorSubject<
     boolean
   > = new BehaviorSubject(false);
+  public paginatorOptions: EntityTablePaginatorOptions = {
+    pageSize: 50, // Number of items to display on a page.
+    pageSizeOptions: [1, 5, 10, 20, 50, 100, 500], // The set of provided page size options to display to the user.
+  };
 
-  public fullExtent;
+  public fullExtent = this.storageService.get('fullExtent') as boolean;
   public sidenavOpened = false;
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
