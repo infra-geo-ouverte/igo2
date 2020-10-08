@@ -61,7 +61,7 @@ export class WelcomeWindowComponent {
     }
 
     return {
-      title: this.configService.getConfig('title') || '',
+      title: this.languageService.translate.instant(this.configService.getConfig('title') || ''),
       description: this.configService.getConfig('description') || '',
       version: this.configService.getConfig('version.app') || this.configService.getConfig('version.lib') || '',
       releaseDate: releaseDateString || ''
