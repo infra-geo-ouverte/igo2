@@ -11,7 +11,7 @@ import { WelcomeWindowService } from './welcome-window.service';
 export class WelcomeWindowComponent {
   // isVisible = true;
   showAgain = false;
-  public discoverTitleInLocale = 'IGO';
+  public discoverTitleInLocale = this.configService.getConfig('title');
 
   constructor(
     public dialog: MatDialog,
