@@ -49,8 +49,7 @@ export class AppComponent {
         this.titleService.setTitle(title);
         this.metaService.addTag({ name: 'title', content: title });
       }
-    }
-    );
+    });
   }
 
   private readThemeConfig() {
