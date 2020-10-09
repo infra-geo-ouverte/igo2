@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigService, LanguageService } from '@igo2/core';
+import { Observable, of } from 'rxjs';
 import { WelcomeWindowService } from './welcome-window.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { WelcomeWindowService } from './welcome-window.service';
 export class WelcomeWindowComponent {
   // isVisible = true;
   showAgain = false;
+  public discoverTitleInLocale$: Observable<string> = of(this.configService.getConfig('title'));
 
   constructor(
     public dialog: MatDialog,
@@ -60,7 +62,7 @@ export class WelcomeWindowComponent {
     }
 
     return {
-      title: this.configService.getConfig('title') || '',
+      title: this.languageService.translate.instant(this.configService.getConfig('title') || ''),
       description: this.configService.getConfig('description') || '',
       version: this.configService.getConfig('version.app') || this.configService.getConfig('version.lib') || '',
       releaseDate: releaseDateString || ''
