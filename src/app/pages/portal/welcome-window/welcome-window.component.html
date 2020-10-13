@@ -1,4 +1,4 @@
-<div class="welcome-window">
+<div class="welcome-window"  *ngIf="html$ | async">
 
   <mat-toolbar color="primary">
     <h2>{{'welcomeWindow.title' | translate}}</h2>
