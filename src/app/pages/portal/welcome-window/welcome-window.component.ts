@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigService, LanguageService } from '@igo2/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { WelcomeWindowService } from './welcome-window.service';
 
 @Component({
@@ -9,10 +9,11 @@ import { WelcomeWindowService } from './welcome-window.service';
   templateUrl: './welcome-window.component.html',
   styleUrls: ['./welcome-window.component.scss']
 })
-export class WelcomeWindowComponent {
+export class WelcomeWindowComponent implements OnDestroy {
   // isVisible = true;
   showAgain = false;
   public discoverTitleInLocale$: Observable<string> = of(this.configService.getConfig('title'));
+  private title$$: Subscription;
 
   constructor(
     public dialog: MatDialog,
@@ -63,14 +64,15 @@ export class WelcomeWindowComponent {
 
     let params;
 
-    this.languageService.translate.get(this.configService.getConfig('title') || '').subscribe((title) => {
-      params = {
-        title,
-        description: this.configService.getConfig('description') || '',
-        version: this.configService.getConfig('version.app') || this.configService.getConfig('version.lib') || '',
-        releaseDate: releaseDateString || ''
-      };
-    });
+    this.title$$ = this.languageService.translate
+      .get(this.configService.getConfig('title') || '').subscribe((title) => {
+        params = {
+          title,
+          description: this.configService.getConfig('description') || '',
+          version: this.configService.getConfig('version.app') || this.configService.getConfig('version.lib') || '',
+          releaseDate: releaseDateString || ''
+        };
+      });
 
     return params;
   }
@@ -81,5 +83,11 @@ export class WelcomeWindowComponent {
 
   setShowAgain() {
     this.welcomeWindowService.showAgain = this.showAgain;
+  }
+
+  ngOnDestroy(): void {
+    if (this.title$$) {
+      this.title$$.unsubscribe();
+    }
   }
 }
