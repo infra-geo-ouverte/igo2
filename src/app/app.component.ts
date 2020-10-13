@@ -44,11 +44,12 @@ export class AppComponent {
   }
 
   private readTitleConfig() {
-    const title = this.configService.getConfig('title');
-    if (title) {
-      this.titleService.setTitle(title);
-      this.metaService.addTag({ name: 'title', content: title });
-    }
+    this.languageService.translate.get(this.configService.getConfig('title')).subscribe(title => {
+      if (title) {
+        this.titleService.setTitle(title);
+        this.metaService.addTag({ name: 'title', content: title });
+      }
+    });
   }
 
   private readThemeConfig() {
