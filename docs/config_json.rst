@@ -170,12 +170,12 @@ Résumé
          - .. line-block::
                Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
                Constante pouvant être réutilisée dans le welcomeWindow.
-         - 
+         -
       * - version
          - {app: String, releaseDateApp: String}
          - .. line-block::
                Permet de définir une constante, pour la version du présent déploiement et de la
-               date de déploiement de l'application. releaseDateApp, doit être un format reconnu et 
+               date de déploiement de l'application. releaseDateApp, doit être un format reconnu et
                interprétable au format Date. Si le format n'est pas convertissable en date,
                la valeur fournie sera utilisée directement.
                Constante pouvant être réutilisée dans le welcomeWindow.
@@ -196,7 +196,7 @@ Résumé
                   "title": "Fenêtre d'accueil",
                   "closeButton": "Fermer",
                   "notShowCheck": "  ne plus afficher"}
-               Les propriétés title, description, version, releaseDate peuvent être utilisé dans le contenu html 
+               Les propriétés title, description, version, releaseDate peuvent être utilisées dans le contenu html
                pour ajouter du contenu statique non traduit.
                ex: "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>Version {{version}}"
                - title provient de la propriété title ci haut.
@@ -1151,7 +1151,8 @@ Exemples
 
               "welcomeWindow": {
                 "showAgainOnNewIGOVersion": true,
-                "nbVisitToShowAgain": 30
+                "nbVisitToShowAgain": 30,
+                "nbVisitToShow":3
               }
 
 Propriétés
@@ -1170,13 +1171,19 @@ Propriétés
                Valeurs possibles
          - .. line-block::
                Valeur défaut
+       * - nbVisitToShow
+         - Number
+         - .. line-block::
+               Nombre de fois que sera présenté la fenêtre d'accueil. S'appliquera aussi après être revenu par exemple lors d'une nouvelle
+               version IGO.
+         -
+         -
        * - nbVisitToShowAgain
          - Number
          - .. line-block::
-               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra après le nombre de visite indiqué
-               dans ce paramètre.
+               La fenêtre d'accueil reviendra après le nombre de visite indiqué par ce paramètre.
          -
-         - 30
+         -
        * - showAgainOnNewIGOVersion
          - Boolean
          - .. line-block::
@@ -1189,7 +1196,7 @@ Propriétés
 
 
 La configuration du titre et du message présentés se fait dans les fichiers locaux de traduction en.json et fr.json.
-
+Les variables de nb. visite et de présentation ou non sont conservés dans les 'local storage' du navigateur internet.
 
 ***************
 Exemple complet config.json
