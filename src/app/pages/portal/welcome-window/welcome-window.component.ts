@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigService, LanguageService } from '@igo2/core';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { WelcomeWindowService } from './welcome-window.service';
   templateUrl: './welcome-window.component.html',
   styleUrls: ['./welcome-window.component.scss']
 })
-export class WelcomeWindowComponent implements OnDestroy {
+export class WelcomeWindowComponent implements OnInit, OnDestroy {
   // isVisible = true;
   showAgain = false;
   public discoverTitleInLocale$: Observable<string> = of(this.configService.getConfig('title'));
@@ -24,11 +24,15 @@ export class WelcomeWindowComponent implements OnDestroy {
     protected languageService: LanguageService
   ) { }
 
+  ngOnInit(): void {
+    this.computeHtml();
+  }
+
   closeWelcomeWindow() {
     this.dialog.closeAll();
   }
 
-  get html() {
+  private computeHtml() {
     let deltaDay = 0;
     let isDateParsable = true;
     let releaseDate = new Date(this.configService.getConfig('version.releaseDate'));
