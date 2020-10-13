@@ -8,6 +8,7 @@
   "hasExpansionPanel": true,
   "hasSearchPointerSummary": false,
   "hasFeatureEmphasisOnSelection": true,
+  "menuButtonReverseColor": false,
   "searchSources": {
     "cadastre": {
       "enabled": true
@@ -15,6 +16,8 @@
   },
   "title": "IGO",
   "welcomeWindow": {
-    "showAgainOnNewIGOVersion": true
+    "showAgainOnNewIGOVersion": true,
+    "nbVisitToShow": 2,
+    "nbVisitToShowAgain": 30
   }
 }
