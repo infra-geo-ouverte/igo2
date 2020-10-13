@@ -61,13 +61,18 @@ export class WelcomeWindowComponent {
       releaseDateString = releaseDateAppConfig;
     }
 
-    return {
-      title: this.languageService.translate.instant(this.configService.getConfig('title') || ''),
-      description: this.configService.getConfig('description') || '',
-      version: this.configService.getConfig('version.app') || this.configService.getConfig('version.lib') || '',
-      releaseDate: releaseDateString || ''
-    };
+    let params;
 
+    this.languageService.translate.get(this.configService.getConfig('title') || '').subscribe((title) => {
+      params = {
+        title,
+        description: this.configService.getConfig('description') || '',
+        version: this.configService.getConfig('version.app') || this.configService.getConfig('version.lib') || '',
+        releaseDate: releaseDateString || ''
+      };
+    });
+
+    return params;
   }
 
   get html() {
