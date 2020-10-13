@@ -145,6 +145,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
     undefined
   );
+  private menuButtonReverseColor = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
@@ -287,6 +288,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
+    if (typeof this.configService.getConfig('menuButtonReverseColor') !== 'undefined') {
+      this.menuButtonReverseColor = this.configService.getConfig('menuButtonReverseColor');
+    }
   }
 
   ngOnInit() {
@@ -383,6 +387,20 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       }
     );
+  }
+
+  getClassMenuButton() {
+    if (this.sidenavOpened) {
+      return {
+        'menu-button': this.menuButtonReverseColor === false,
+        'menu-button-reverse-color': this.menuButtonReverseColor === true
+      };
+    } else {
+      return {
+        'menu-button': this.menuButtonReverseColor === false,
+        'menu-button-reverse-color-close ': this.menuButtonReverseColor === true
+      };
+    }
   }
 
   paginatorChange(matPaginator: MatPaginator) {

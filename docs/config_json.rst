@@ -130,6 +130,11 @@ Résumé
          - .. line-block::
               Éléments visuels à ajouter par dessus la carte de l'application.
          -
+       * - menuButtonReverseColor
+         - Boolean
+         - .. line-block::
+              Indique si les couleurs du bouton de menu seront inversés.
+         -
        * - projections
          - :ref:`Projection <igoprojections>` []
          - .. line-block::
