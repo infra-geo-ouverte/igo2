@@ -22,6 +22,25 @@
 
 /*** Menu button ***/
 
+.menu-button-reverse-color {
+  height: 40px;
+  position: absolute;
+  top: 3px;
+  z-index: 4;
+  border-radius: 0;
+  height: 45px;
+  width: 48px;
+}
+
+.menu-button-reverse-color-close {
+
+  position: absolute;
+  left: $igo-margin;
+  top: $igo-margin;
+  z-index: 4;
+  border-radius: 0;
+}
+
 .menu-button {
   background-color: $app-background-color;
   position: absolute;

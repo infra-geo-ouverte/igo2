@@ -130,6 +130,11 @@ Résumé
          - .. line-block::
               Éléments visuels à ajouter par dessus la carte de l'application.
          -
+       * - menuButtonReverseColor
+         - Boolean
+         - .. line-block::
+              Indique si les couleurs du bouton de menu seront inversés.
+         -
        * - projections
          - :ref:`Projection <igoprojections>` []
          - .. line-block::
@@ -170,12 +175,12 @@ Résumé
          - .. line-block::
                Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
                Constante pouvant être réutilisée dans le welcomeWindow.
-         - 
+         -
       * - version
          - {app: String, releaseDateApp: String}
          - .. line-block::
                Permet de définir une constante, pour la version du présent déploiement et de la
-               date de déploiement de l'application. releaseDateApp, doit être un format reconnu et 
+               date de déploiement de l'application. releaseDateApp, doit être un format reconnu et
                interprétable au format Date. Si le format n'est pas convertissable en date,
                la valeur fournie sera utilisée directement.
                Constante pouvant être réutilisée dans le welcomeWindow.
@@ -196,7 +201,7 @@ Résumé
                   "title": "Fenêtre d'accueil",
                   "closeButton": "Fermer",
                   "notShowCheck": "  ne plus afficher"}
-               Les propriétés title, description, version, releaseDate peuvent être utilisé dans le contenu html 
+               Les propriétés title, description, version, releaseDate peuvent être utilisé dans le contenu html
                pour ajouter du contenu statique non traduit.
                ex: "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>Version {{version}}"
                - title provient de la propriété title ci haut.

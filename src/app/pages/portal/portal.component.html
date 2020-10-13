@@ -8,9 +8,8 @@
 
     <button
       mat-icon-button
-      id="menu-button"
-      class="menu-button"
-      color="primary"
+      id= "menu-button"
+      [ngClass]="getClassMenuButton()"
       tooltip-position="below"
       matTooltipShowDelay="500"
       [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
