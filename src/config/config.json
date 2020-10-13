@@ -14,8 +14,10 @@
       "enabled": true
     }
   },
-  "title": "IGO Démo",
+  "title": "IGO",
   "welcomeWindow": {
-    "showAgainOnNewIGOVersion": true
+    "showAgainOnNewIGOVersion": true,
+    "nbVisitToShow": 2,
+    "nbVisitToShowAgain": 30
   }
 }

@@ -1,4 +1,4 @@
-<div class="welcome-window">
+<div class="welcome-window"  *ngIf="html$ | async">
 
   <mat-toolbar color="primary">
     <h2>{{'welcomeWindow.title' | translate}}</h2>
@@ -12,7 +12,7 @@
 
   <div mat-dialog-content class="text">
     <igo-custom-html class="mat-typography"
-    [html]="html | translate:translationParameters">
+    [html]="html$ | async">
     </igo-custom-html>
   </div>
 
@@ -21,6 +21,7 @@
     <igo-interactive-tour
       id="tour-button"
       styleButton = "raised"
+      [discoverTitleInLocale$]="discoverTitleInLocale$"
       (click)= "closeWelcomeWindow()">
     </igo-interactive-tour>
 

@@ -60,10 +60,19 @@ export class WelcomeWindowService {
         this.configService.getConfig('welcomeWindow.showAgainOnNewIGOVersion')
       ) {
         if (this.igoVersionDifferentFromStorage) {
+          this.storageService.set('welcomeWindow_nbVisit', 0);
+          this.storageService.remove('welcomeWindow_showAgain');
           return true;
         }
       }
       return false;
+    }
+
+    if (typeof this.configService.getConfig('welcomeWindow.nbVisitToShow') !== 'undefined' ) {
+      if (this.nbVisit > this.configService.getConfig('welcomeWindow.nbVisitToShow') ) {
+        this.storageService.set('welcomeWindow_showAgain', false);
+        return false;
+      }
     }
 
     return this.configService.getConfig('welcomeWindow');
