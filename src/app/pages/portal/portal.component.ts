@@ -347,7 +347,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (result && this.isMobile()) {
         this.closeSidenav();
       }
-    })
+    });
 
     this.workspaceState.workspaceEnabled$.next(this.hasExpansionPanel);
     this.workspaceState.store.empty$.subscribe((workspaceEmpty) => {
