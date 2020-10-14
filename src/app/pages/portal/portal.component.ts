@@ -346,6 +346,12 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.searchState.setSearchSettingsChange();
     });
 
+    this.searchState.selectedResult$.subscribe((result) => {
+      if (result && this.isMobile()) {
+        this.closeSidenav();
+      }
+    })
+
     this.workspaceState.workspaceEnabled$.next(this.hasExpansionPanel);
     this.workspaceState.store.empty$.subscribe((workspaceEmpty) => {
       if (!this.hasExpansionPanel) {
