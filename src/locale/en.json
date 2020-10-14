@@ -150,6 +150,10 @@
       "results-table": "Results will appear in this table",
       "clear-results": "Results can be deleted from the map anytime with this button",
       "export": "It is also possible to export the result using the export tool"
+    },
+    "context": {
+      "title": "CONTEXTS",
+      "start": "Guided tour of the measuring tool"
     }
   }
 }

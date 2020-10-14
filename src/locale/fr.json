@@ -149,6 +149,10 @@
       "results-table": "Les résultats apparaîtront dans ce tableau",
       "clear-results": "Les résultats de la recherche peuvent être retirer à tout moment",
       "export": "Il est aussi possible d'exporter les résultats par l'outil d'export"
+    },
+    "context": {
+      "title": "CONTEXTES",
+      "start": "Tour guidé de l'outil de contexte"
     }
   }
 }

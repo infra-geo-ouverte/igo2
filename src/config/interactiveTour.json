@@ -419,5 +419,15 @@
         "text": "interactiveTour.spatial-filter.export"
       }
     ]
+  },
+
+  "contextManager": {
+    "title": "interactiveTour.context.title",
+    "steps": [
+      {
+        "element": "div.igo-panel-title",
+        "text": "interactiveTour.context.start"
+      }
+    ]
   }
 }
