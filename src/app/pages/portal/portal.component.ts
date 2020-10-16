@@ -151,6 +151,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.mapState.map;
   }
 
+  get toastPanelOpened(): boolean {
+    return this._toastPanelOpened;
+  }
+  set toastPanelOpened(value: boolean) {
+    if (value !== !this._toastPanelOpened) {
+      return;
+    }
+    this._toastPanelOpened = value;
+    this.cdRef.detectChanges();
+  }
+  private _toastPanelOpened =
+    (this.storageService.get('toastOpened') as boolean) !== false;
+
   isMobile(): boolean {
     return this.mediaService.getMedia() === Media.Mobile;
   }
@@ -229,19 +242,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   //   }
   //   return title;
   // }
-
-  get toastPanelOpened(): boolean {
-    return this._toastPanelOpened;
-  }
-  set toastPanelOpened(value: boolean) {
-    if (value !== !this._toastPanelOpened) {
-      return;
-    }
-    this._toastPanelOpened = value;
-    this.cdRef.detectChanges();
-  }
-  private _toastPanelOpened =
-    (this.storageService.get('toastOpened') as boolean) !== false;
 
   get workspaceStore(): WorkspaceStore {
     return this.workspaceState.store;
