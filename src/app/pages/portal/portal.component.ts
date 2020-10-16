@@ -20,8 +20,7 @@ import {
   ConfigService,
   LanguageService,
   MessageService,
-  StorageService,
-  StorageScope
+  StorageService
 } from '@igo2/core';
 import {
   ActionbarMode,
@@ -70,8 +69,7 @@ import {
   SearchState,
   QueryState,
   ContextState,
-  WorkspaceState,
-  ImportExportState
+  WorkspaceState
 } from '@igo2/integration';
 
 import {
@@ -115,7 +113,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   > = new BehaviorSubject(false);
   public paginatorOptions: EntityTablePaginatorOptions = {
     pageSize: 50, // Number of items to display on a page.
-    pageSizeOptions: [1, 5, 10, 20, 50, 100, 500], // The set of provided page size options to display to the user.
+    pageSizeOptions: [1, 5, 10, 20, 50, 100, 500] // The set of provided page size options to display to the user.
   };
 
   public fullExtent = this.storageService.get('fullExtent') as boolean;
@@ -233,15 +231,17 @@ export class PortalComponent implements OnInit, OnDestroy {
   // }
 
   get toastPanelOpened(): boolean {
-    return this.storageService.get('toastOpened') as boolean;
+    return this._toastPanelOpened;
   }
-
   set toastPanelOpened(value: boolean) {
-    if (value === this.storageService.get('toastOpened')) {
+    if (value !== !this._toastPanelOpened) {
       return;
     }
-    this.storageService.set('toastOpened', value, StorageScope.SESSION);
+    this._toastPanelOpened = value;
+    this.cdRef.detectChanges();
   }
+  private _toastPanelOpened =
+    (this.storageService.get('toastOpened') as boolean) !== false;
 
   get workspaceStore(): WorkspaceStore {
     return this.workspaceState.store;
@@ -268,7 +268,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     private searchSourceService: SearchSourceService,
     private configService: ConfigService,
     private importService: ImportService,
-    private importExportState: ImportExportState,
     private http: HttpClient,
     private languageService: LanguageService,
     private messageService: MessageService,
@@ -285,8 +284,13 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
-    if (typeof this.configService.getConfig('menuButtonReverseColor') !== 'undefined') {
-      this.menuButtonReverseColor = this.configService.getConfig('menuButtonReverseColor');
+    if (
+      typeof this.configService.getConfig('menuButtonReverseColor') !==
+      'undefined'
+    ) {
+      this.menuButtonReverseColor = this.configService.getConfig(
+        'menuButtonReverseColor'
+      );
     }
   }
 
@@ -633,6 +637,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   toastOpenedChange(opened: boolean) {
     this.map.viewController.padding[2] = opened ? 280 : 0;
     this.handleExpansionAndToastOnMobile();
+    this.toastPanelOpened = opened;
   }
 
   private handleExpansionAndToastOnMobile() {
