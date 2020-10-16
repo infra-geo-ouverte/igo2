@@ -689,8 +689,66 @@ Vecteur
 Websocket
 ===============
 
-    .. note::
-       Disponible actuellement mais la documentation est en cours de construction.
+      .. line-block::
+        Une source de données provenant d'un websocket.
+        voir https://developer.mozilla.org/fr/docs/Web/API/WebSocket
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **onmessage***
+         - String
+         - .. line-block::
+                  Action déclenchée lors de la réception 
+                  de la donnée par le websocket
+         - update|delete|add
+         - add
+       * - **onopen**
+         - String
+         - .. line-block::
+                  Action déclenchée lors de l'ouverture du websocket.
+         -
+         -
+       * - **onclose**
+         - String
+         - .. line-block::
+                  Action déclenchée lors de la fermeture du websocket.
+         -
+         -
+       * - **onerror**
+         - String
+         - .. line-block::
+                  Action déclenchée lors d'une erreur du websocket.
+         -
+         -
+
+Exemple
+      .. code:: json
+
+            {
+                  "title": "Points temps réel",
+                  "visible": true,
+                  "sourceOptions": {
+                        "type": "websocket",
+                        "url": "wss://websocket.domain/api/websocket/",
+                        "onmessage": "update",
+                        "queryable": true,
+                        "queryTitle": "Véhicule : ${unitid}",
+                  ...
+
 
 
 WFS
