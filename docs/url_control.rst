@@ -66,7 +66,8 @@ Sélection du contexte
     dans les contexte OU assigné automatiquement (uuid).
 
         .. code:: json
-
+            :force:
+            
             { 
                 "title": "OSM",
                 "baseLayer": true,
@@ -117,6 +118,8 @@ Sélection du contexte
             - #couche pour n'avoir que les couches
             - #adresse
             - .... (à documenter)
+        - search=patate&sf=1
+            - **sf=1** permet de zoomer sur le premier résultat
  
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?search=feu&zoom=18
