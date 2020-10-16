@@ -714,7 +714,7 @@ Propriétés
          - .. line-block::
                   Action déclenchée lors de la réception 
                   de la donnée par le websocket
-         - update|delete|add
+         - update | delete | add
          - add
        * - **onopen**
          - String
@@ -1422,7 +1422,39 @@ Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
 
             }
 
+Exemple - Filtre temporel avec minimum, maximum et pas de temps.
+      
+      .. code:: json
 
+              {
+                  "type": "wfs",
+                  "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+                  "params": {
+                        "featureTypes": "vg_observation_v_autre_wmst",
+                        "fieldNameGeometry": "geometry",
+                        "maxFeatures": 10000,
+                        "version": "2.0.0"
+                  },
+                  "sourceFields": [{
+                        "name": "date_observation",
+                        "alias": "Date de l\"observation",
+                        "allowedOperatorsType": "time"
+                  }],
+                  "ogcFilters": {
+                        "enabled": true,
+                        "editable": true,
+                        "allowedOperatorsType": "time",
+                        "filters": {
+                              "operator": "During",
+                              "propertyName": "date_observation",
+                              "begin": "today - 2 days",
+                              "end": "today"
+                        }
+                  },
+                  "minDate": "2016-01-01T00:00:00-05:00",
+                  "maxDate": "2025-12-31T00:00:00-05:00",
+                  "stepDate": "P1D"
+            }
 
 Propriétés de ogcFilters
 
@@ -1636,7 +1668,7 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
            | PropertyIsGreaterThan, PropertyIsGreaterThanOrEqualTo,
            | PropertyIsLessThan, PropertyIsLessThanOrEqualTo,
            | Intersects, Within
-           | During
+           | :ref:`During <igoogcfilterduringoptions>`
          -
        * - propertyName
          - String
@@ -1648,6 +1680,47 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
          -
          -
          -
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+.. _igoogcfilterduringoptions:
+
+Propriétés de l'objet filter de type **During**
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - begin
+         - String
+         - Valeur de début du filtre temporel
+         -
+         - Valeur **minDate** de la couche
+       * - end
+         - String
+         - Valeur de fin du filtre temporel
+         -
+         - Valeur **maxDate** de la couche
+       * - step
+         - String
+         - Pas de temps défini selon la norme ISO-8601 
+         - Voir `wiki <https://fr.wikipedia.org/wiki/ISO_8601#Dur%C3%A9e>`_
+         - 60000 millisecondes
+       * - restrictedToStep
+         - Boolean
+         - True si le filtre doit respecter le pas de temps depuis l'attribut **minDate**. Sinon le pas de temps est respecté selon l'attribut **begin**
+         - True | False
+         - False
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
