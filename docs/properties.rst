@@ -112,10 +112,10 @@ Exemples
                 "baseLayer": true,
                 "visible": false,
                 "sourceOptions": {
-                    "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                    "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
-                    "type": "xyz",
-                    "crossOrigin": "anonymous"
+                        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
+                        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "type": "xyz",
+                        "crossOrigin": "anonymous"
                 }
             }
 
@@ -380,15 +380,15 @@ Les propriétés communes aux sources de données:
 
 Exemples
 
-        .. code:: json
+      .. code:: json
+            :force:
 
             "sourceOptions": {
-                "attributions": "Droits d'auteurs que vous désirez afficher avec votre couche.",
-                "crossOrigin": "anonymous"
+                  "attributions": "Droits d'auteurs que vous désirez afficher avec votre couche.",
+                  "crossOrigin": "anonymous"
             }
-
-
-
+            
+            
 ArcGis
 ===============
 
@@ -419,11 +419,13 @@ OSM
 
 Exemples
 
-        .. code:: json
-
+      .. code:: json
+            :force:
+            
             "sourceOptions": {
-                "type": "osm",
+                  "type": "osm"
             }
+            
 
 Propriétés
 
@@ -463,13 +465,15 @@ Cluster
 
 Exemples
 
-        .. code:: json
-
+      .. code:: json
+            :force:
+            
             "sourceOptions": {
-                "url": "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson",
-                "type": "cluster",
-                "distance": 50
+                  "url": "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson",
+                  "type": "cluster",
+                  "distance": 50
             }
+                       
 
 Propriétés
 
@@ -536,12 +540,14 @@ TMS (xyz)
 
 Exemples
 
-        .. code:: json
-
+      .. code:: json
+            :force:
+            
             "sourceOptions": {
-                "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                "type": "xyz"
+                  "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
+                  "type": "xyz"
             }
+
 
 Propriétés
 
@@ -596,12 +602,14 @@ Vector Tiles
 
 Exemples
 
-        .. code:: json
-
+      .. code:: json
+            :force:
+            
             "sourceOptions": {
-                "type": "mvt",
-                "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_sous_route_res_inv_act&map.imagetype=mvt"
+                  "type": "mvt",
+                  "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_sous_route_res_inv_act&map.imagetype=mvt"
             }
+            
 
 Propriétés
 
@@ -689,8 +697,69 @@ Vecteur
 Websocket
 ===============
 
-    .. note::
-       Disponible actuellement mais la documentation est en cours de construction.
+      .. line-block::
+        Une source de données provenant d'un websocket.
+        voir https://developer.mozilla.org/fr/docs/Web/API/WebSocket
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **onmessage***
+         - String
+         - .. line-block::
+                  Action déclenchée lors de la réception 
+                  de la donnée par le websocket
+         - update | delete | add
+         - add
+       * - **onopen**
+         - String
+         - .. line-block::
+                  Action déclenchée lors de l'ouverture du websocket.
+         -
+         -
+       * - **onclose**
+         - String
+         - .. line-block::
+                  Action déclenchée lors de la fermeture du websocket.
+         -
+         -
+       * - **onerror**
+         - String
+         - .. line-block::
+                  Action déclenchée lors d'une erreur du websocket.
+         -
+         -
+
+Exemple
+      .. code:: json
+            :force:
+
+            {
+                  
+                  "title": "Points temps réel",
+                  "sourceOptions": {
+                        "type": "websocket",
+                        "url": "wss://websocket.domain/api/websocket/",
+                        "onmessage": "update",
+                        "queryable": true,
+                        "queryTitle": "Véhicule : ${unitid}"
+                  }
+                  ...
+            }
+
 
 
 WFS
@@ -703,19 +772,22 @@ Exemples
 
         .. code:: json
 
-            "sourceOptions": {
-                  "type": "wfs",
-                  "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
-                  "queryable": true,
-                  "params": {
-                        "featureTypes": "vg_observation_v_autre_wmst",
-                        "fieldNameGeometry": "geometry",
-                        "maxFeatures": 10000,
-                        "version": "2.0.0",
-                        "outputFormat": "geojson_utf8",
-                        "outputFormatDownload": "shp"
+            {
+                  "sourceOptions": {
+                        "type": "wfs",
+                        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+                        "queryable": true,
+                        "params": {
+                              "featureTypes": "vg_observation_v_autre_wmst",
+                              "fieldNameGeometry": "geometry",
+                              "maxFeatures": 10000,
+                              "version": "2.0.0",
+                              "outputFormat": "geojson_utf8",
+                              "outputFormatDownload": "shp"
+                        }
                   }
             }
+            
 
 WMS
 ===============
@@ -732,17 +804,19 @@ Exemples
 
         .. code:: json
 
-            "sourceOptions": {
-                "type": "wms",
-                "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
-                "params": {
-                    "layers": "telephone_urg",
-                    "version": "1.3.0"
-                },
-                "queryable": true,
-                "queryFormat": "gml2",
-                "queryTitle": "desclocal",
-                "optionsFromCapabilities": true
+            {
+                  "sourceOptions": {
+                        "type": "wms",
+                        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+                        "params": {
+                              "layers": "telephone_urg",
+                              "version": "1.3.0"
+                        },
+                        "queryable": true,
+                        "queryFormat": "gml2",
+                        "queryTitle": "desclocal",
+                        "optionsFromCapabilities": true
+                  }
             }
 
 Propriétés
@@ -994,6 +1068,7 @@ WMTS
 Exemples
 
         .. code:: json
+            :force:
 
             "sourceOptions": {
                 "type": "wmts",
@@ -1364,7 +1439,39 @@ Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
 
             }
 
+Exemple - Filtre temporel avec minimum, maximum et pas de temps.
+      
+      .. code:: json
 
+              {
+                  "type": "wfs",
+                  "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+                  "params": {
+                        "featureTypes": "vg_observation_v_autre_wmst",
+                        "fieldNameGeometry": "geometry",
+                        "maxFeatures": 10000,
+                        "version": "2.0.0"
+                  },
+                  "sourceFields": [{
+                        "name": "date_observation",
+                        "alias": "Date de l\"observation",
+                        "allowedOperatorsType": "time"
+                  }],
+                  "ogcFilters": {
+                        "enabled": true,
+                        "editable": true,
+                        "allowedOperatorsType": "time",
+                        "filters": {
+                              "operator": "During",
+                              "propertyName": "date_observation",
+                              "begin": "today - 2 days",
+                              "end": "today"
+                        }
+                  },
+                  "minDate": "2016-01-01T00:00:00-05:00",
+                  "maxDate": "2025-12-31T00:00:00-05:00",
+                  "stepDate": "P1D"
+            }
 
 Propriétés de ogcFilters
 
@@ -1578,7 +1685,7 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
            | PropertyIsGreaterThan, PropertyIsGreaterThanOrEqualTo,
            | PropertyIsLessThan, PropertyIsLessThanOrEqualTo,
            | Intersects, Within
-           | During
+           | :ref:`During <igoogcfilterduringoptions>`
          -
        * - propertyName
          - String
@@ -1590,6 +1697,47 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
          -
          -
          -
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+.. _igoogcfilterduringoptions:
+
+Propriétés de l'objet filter de type **During**
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - begin
+         - String
+         - Valeur de début du filtre temporel
+         -
+         - Valeur **minDate** de la couche
+       * - end
+         - String
+         - Valeur de fin du filtre temporel
+         -
+         - Valeur **maxDate** de la couche
+       * - step
+         - String
+         - Pas de temps défini selon la norme ISO-8601 
+         - Voir `wiki <https://fr.wikipedia.org/wiki/ISO_8601#Dur%C3%A9e>`_
+         - 60000 millisecondes
+       * - restrictedToStep
+         - Boolean
+         - True si le filtre doit respecter le pas de temps depuis l'attribut **minDate**. Sinon le pas de temps est respecté selon l'attribut **begin**
+         - True | False
+         - False
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1799,7 +1947,8 @@ Cadastre
 Exemples
 
     .. code:: json
-
+      :force:
+      
         "cadastre": {
             "searchUrl": "https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?"
         }
@@ -1842,13 +1991,14 @@ Coordonnées
 
 Exemples
 
-    .. code:: json
+      .. code:: json
+            :force:
 
-        "coordinatesreverse": {
-            "order": 1,
-            "enabled": false,
-            "available": true
-        }
+            "coordinatesreverse": {
+                  "order": 1,
+                  "enabled": false,
+                  "available": true
+            }
 
 Propriétés
 
@@ -1896,16 +2046,18 @@ iCherche
 
 Exemples
 
-        .. code:: json
-
+      .. code:: json
+            :force:
+            
             "icherche": {
-                "title":"ICherche",
-                "showInPointerSummary": true,
-                "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche",
-                "params": {
-                    "limit": "8"
-                 }
+                  "title":"ICherche",
+                  "showInPointerSummary": true,
+                  "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche",
+                  "params": {
+                        "limit": "8"
+                  }
             }
+            
 
 Propriétés
 
@@ -1956,14 +2108,16 @@ iCherche Reverse
 
 Exemples
 
-        .. code:: json
+      .. code:: json
+            :force:
 
             "icherchereverse": {
-                "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/territoires",
-                "params": {
-                    "bufffer": 12
-                 }
+                  "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/territoires",
+                  "params": {
+                        "bufffer": 12
+                  }
             }
+                  
 
 Propriétés
 
@@ -2010,19 +2164,21 @@ iLayer
 
 Exemples
 
-        .. code:: json
-
+      .. code:: json
+            :force:
+             
             "ilayer": {
-                "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche/layers",
-                "params": {
-                    "limit": 15
-                 },
-                "queryFormat": {
-                  "html": {
-                      "urls": ["https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi"]
+                  "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche/layers",
+                        "params": {
+                        "limit": 15
+                  },
+                  "queryFormat": {
+                        "html": {
+                              "urls": ["https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi"]
+                        }
                   }
-                }
             }
+      
 
 Propriétés
 
@@ -2076,14 +2232,16 @@ Nominatim
 
 Exemples
 
-        .. code:: json
-
+      .. code:: json
+            :force:
+            
             "ilayer": {
-                "searchUrl": "https://nominatim.openstreetmap.org/search",
-                "params": {
-                    "limit": 15
-                 }
+                  "searchUrl": "https://nominatim.openstreetmap.org/search",
+                  "params": {
+                        "limit": 15
+                  }
             }
+            
 
 Propriétés
 
@@ -2140,17 +2298,19 @@ StoredQueries
 
 Exemples
 
-        .. code:: json
-
+      .. code:: json
+            :force:
+            
             "storedqueries": {
-                "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-                "storedquery_id": "rtss",
-                "fields": [
-                  {"name": "rtss","defaultValue": "-99"},
-                  {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
-                ],
-                "resultTitle": "etiquette"
+                  "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+                  "storedquery_id": "rtss",
+                  "fields": [
+                        {"name": "rtss","defaultValue": "-99"},
+                        {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
+                  ],
+                  "resultTitle": "etiquette"
             }
+            
 
 Propriétés
 
@@ -2235,15 +2395,17 @@ StoredQueries Reverse
 
 Exemples
 
-        .. code:: json
+      .. code:: json
+            :force:
 
             "storedqueriesreverse": {
-                "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-                "storedquery_id": "lim_adm",
-                "longField": "long",
-                "latField": "lat",
-                "resultTitle": "nom_unite"
+                  "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+                  "storedquery_id": "lim_adm",
+                  "longField": "long",
+                  "latField": "lat",
+                  "resultTitle": "nom_unite"
             }
+      
 
 Propriétés
 
@@ -2352,13 +2514,15 @@ about
 Exemples
 
         .. code:: json
+            :force:
 
             {
                 "name": "about",
                 "options": {
                     "html": "<p>Voici IGO</p>" // ou ["<p>Voici IGO</p>", "<p>Voici la seconde ligne</p>"]
                 }
-            },
+            }
+            ...
 
 Propriétés
 
