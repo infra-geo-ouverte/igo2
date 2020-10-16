@@ -153,7 +153,23 @@
     },
     "context": {
       "title": "CONTEXTS",
-      "start": "Guided tour of the measuring tool"
+      "start": "Guided tour of the measuring tool",
+      "description": "A context is a predefined map made up of several layers grouped together according to a theme.",
+      "options": "A context can also be cloned, masked and, based on the permissions that has been set, edited and shared.",
+      "select": "Active context appears highlighted. To switch the active context, click on the context you want to display.",
+      "favorite": "To bookmark a context and thereby be active at login.",
+      "context-options": "To see which actions can be done on this context, click on this button.",
+      "context-options-opened": "Possible actions vary depending on the context",
+      "context-clone": "This button enable to clone this context and thereby personalize yours from this one.",
+      "context-edit": "This button is used to change the context's name and to share his id.",
+      "context-hide": "This button allows to hide the context. It won't be display by default.",
+      "context-delete": "Click here to delete the context.",
+      "filter": "Type text here to filter the list by name",
+      "alpha": "Click to sort alphabetically. Initially, contexts list is sort by creation date.",
+      "add-context": "To create an empty context or from map's layers.",
+      "users-filter": "Click to see user's profil filter options",
+      "users-filter-menu": "Check associated context profil that you want to be display on the list.",
+      "users-filter-hide": "It is possible to display hide contexts from this menu."
     }
   }
 }

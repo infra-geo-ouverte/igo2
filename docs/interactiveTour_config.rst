@@ -106,6 +106,12 @@ Propriétés - Objet InteractiveTourOptions
                Une liste de step
          -
          -
+       * - condition
+         - String
+         - .. line-block::
+               L'élément HTML qui doit être présent pour activer le bouton du tour
+         -
+         -
        * - title
          - String
          - .. line-block::
