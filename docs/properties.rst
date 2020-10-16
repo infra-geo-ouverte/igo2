@@ -112,10 +112,10 @@ Exemples
                 "baseLayer": true,
                 "visible": false,
                 "sourceOptions": {
-                    "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                    "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
-                    "type": "xyz",
-                    "crossOrigin": "anonymous"
+                        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
+                        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "type": "xyz",
+                        "crossOrigin": "anonymous"
                 }
             }
 
@@ -423,7 +423,7 @@ Exemples
             :force:
             
             "sourceOptions": {
-                  "type": "osm",
+                  "type": "osm"
             }
             
 
