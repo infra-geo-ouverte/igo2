@@ -6,3 +6,8 @@
   max-width: 100%;
   margin: auto;
 }
+
+.highlight .err {
+  border: inherit;
+  box-sizing: inherit;
+}
