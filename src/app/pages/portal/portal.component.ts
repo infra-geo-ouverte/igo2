@@ -32,7 +32,6 @@ import {
   // getEntityTitle,
   Toolbox,
   Tool,
-  EntityTableScrollBehavior,
   Widget,
   EntityTablePaginatorOptions
 } from '@igo2/common';
@@ -49,7 +48,6 @@ import {
   Research,
   SearchResult,
   SearchSource,
-  SearchService,
   SearchSourceService,
   CapabilitiesService,
   sourceCanSearch,
@@ -62,7 +60,6 @@ import {
   ImportService,
   handleFileImportError,
   handleFileImportSuccess,
-  ExportOptions,
   featureFromOl,
   QueryService
 } from '@igo2/geo';
@@ -350,7 +347,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (result && this.isMobile()) {
         this.closeSidenav();
       }
-    })
+    });
 
     this.workspaceState.workspaceEnabled$.next(this.hasExpansionPanel);
     this.workspaceState.store.empty$.subscribe((workspaceEmpty) => {

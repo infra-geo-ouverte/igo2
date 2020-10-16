@@ -22,7 +22,7 @@
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
     "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
   },
-  "IGO": "IGO Demo",
+  "IGO": "IGO",
   "noEntityStore": "No tables available for this dataset",
   "coordinates": "Show coordinates,",
   "googleMap": "Show in Google maps",

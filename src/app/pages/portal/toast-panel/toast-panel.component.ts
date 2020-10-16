@@ -86,7 +86,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   @Input()
   get opened(): boolean {
-    return this.storageService.get('toastOpened') as boolean;
+    return this.storageService.get('toastOpened') as boolean || true;
   }
   set opened(value: boolean) {
     if (value === this.storageService.get('toastOpened')) {

@@ -21,7 +21,7 @@
     "previousFeatureTooltip": "Élément précédent ( raccouci clavier = flèche gauche )",
     "nextFeatureTooltip": "Prochain élément ( raccouci clavier = flèche droite )"
   },
-  "IGO": "IGO Démo",
+  "IGO": "IGO",
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
   "coordinates": "Afficher les coordonnées",
   "googleMap": "Afficher sur Google maps",
