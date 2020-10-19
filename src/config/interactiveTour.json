@@ -431,13 +431,9 @@
         "text": "interactiveTour.context.start"
       },
       {
-        "element": "igo-context-item:first-of-type mat-list-item",
+        "element": "igo-context-item",
         "text": "interactiveTour.context.description",
-        "disableInteraction": true,
-        "beforeChange": {
-          "action": "click",
-          "element": "igo-actionbar-item:nth-child(2) mat-list-item"
-        }
+        "disableInteraction": true
       },
       {
         "element": "igo-context-item",
@@ -450,11 +446,19 @@
       },
       {
         "text": "interactiveTour.context.select",
-        "disableInteraction": true
+        "beforeChange": {
+          "action": "click",
+          "element": "igo-actionbar-item:nth-child(2) mat-list-item"
+        }
       },
       {
         "element": "igo-context-item button:first-of-type",
         "text": "interactiveTour.context.favorite"
+      },
+      {
+        "element": "igo-context-item button.save-button",
+        "text": "interactiveTour.context.save-context",
+        "deleteAfterNext": true
       },
       {
         "element": "igo-context-item:first-of-type button.actions-button",
@@ -475,7 +479,8 @@
       },
       {
         "element": "div.igo-actions-expand-container button.edit-button",
-        "text": "interactiveTour.context.context-edit"
+        "text": "interactiveTour.context.context-edit",
+        "deleteAfterNext": true
       },
       {
         "element": "div.igo-actions-expand-container button.hide-button",
@@ -484,6 +489,7 @@
       {
         "element": "div.igo-actions-expand-container button.delete-button",
         "text": "interactiveTour.context.context-delete",
+        "deleteAfterNext": true,
         "onHide": {
           "action": "click",
           "element": "igo-context-item:first-of-type button.actions-button"

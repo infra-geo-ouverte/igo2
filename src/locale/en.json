@@ -158,6 +158,7 @@
       "options": "A context can also be cloned, masked and, based on the permissions that has been set, edited and shared.",
       "select": "Active context appears highlighted. To switch the active context, click on the context you want to display.",
       "favorite": "To bookmark a context and thereby be active at login.",
+      "save-context": "Click here to save active context.",
       "context-options": "To see which actions can be done on this context, click on this button.",
       "context-options-opened": "Possible actions vary depending on the context",
       "context-clone": "This button enable to clone this context and thereby personalize yours from this one.",

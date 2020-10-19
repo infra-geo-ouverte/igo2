@@ -157,6 +157,7 @@
       "options": "Un contexte peut ensuite être cloné, masqué et, selon les permissions qui y sont attibuées, édité et partagé.",
       "select": "Le contexte actif apparaît en surligné. Pour changer le contexte actif, il suffit de cliquer sur le contexte souhaité.",
       "favorite": "Cliquez ici pour mettre un contexte en favori et qu'il soit ainsi actif par défaut à l'ouverture votre session.",
+      "save-context": "Cliquez ici vous permet de sauvegarder le contexte actif",
       "context-options": "Pour afficher les actions possibles à effectuer sur le contexte, cliquez sur ce bouton.",
       "context-options-opened": "Les actions possibles varies selon le contexte",
       "context-clone": "Ce bouton permet de cloner le contexte et d'ainsi pouvoir personnaliser votre contexte à partir de ce dernier.",
