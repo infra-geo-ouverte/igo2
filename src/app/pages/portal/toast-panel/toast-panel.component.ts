@@ -10,6 +10,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 import olFeature from 'ol/Feature';
 import olPoint from 'ol/geom/Point';
@@ -38,13 +39,10 @@ import {
   MediaService,
   LanguageService,
   StorageService,
-  StorageScope,
-  StorageServiceEvent
+  StorageScope
 } from '@igo2/core';
-import { tap } from 'rxjs/operators';
-
 import { StorageState } from '@igo2/integration';
-import { skipWhile } from 'rxjs/operators';
+
 @Component({
   selector: 'app-toast-panel',
   templateUrl: './toast-panel.component.html',
@@ -86,33 +84,50 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   @Input()
   get opened(): boolean {
-    return this.storageService.get('toastOpened') as boolean || true;
+    return this._opened;
   }
   set opened(value: boolean) {
-    if (value === this.storageService.get('toastOpened')) {
+    if (value !== !this._opened) {
       return;
     }
+    this._opened = value;
     this.storageService.set('toastOpened', value, StorageScope.SESSION);
-
-    this.openedChange.emit(this.storageService.get('toastOpened') as boolean);
+    this.openedChange.emit(value);
   }
+  private _opened = true;
 
   @Input() hasFeatureEmphasisOnSelection: Boolean = false;
 
   get zoomAuto(): boolean {
-    return this.storageService.get('zoomAuto') as boolean;
+    return this._zoomAuto;
   }
+  set zoomAuto(value) {
+    if (value !== !this._zoomAuto) {
+      return;
+    }
+    this._zoomAuto = value;
+    this.zoomAuto$.next(value);
+    this.storageService.set('zoomAuto', value);
+  }
+  private _zoomAuto = false;
 
   // To allow the toast to use much larger extent on the map
   get fullExtent(): boolean {
-    return this.storageService.get('fullExtent') as boolean;
+    return this._fullExtent;
   }
+  set fullExtent(value) {
+    if (value !== !this._fullExtent) {
+      return;
+    }
+    this._fullExtent = value;
+    this.fullExtent$.next(value);
+    this.fullExtentEvent.emit(value);
+    this.storageService.set('fullExtent', value);
+  }
+  private _fullExtent = false;
 
   public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
     this.fullExtent
-  );
-  public notfullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
-    !this.fullExtent
   );
 
   public icon = 'menu';
@@ -133,10 +148,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   private abstractFocusedOrSelectedResult: Feature;
 
   public withZoomButton = true;
-  zoomAuto$: BehaviorSubject<boolean> = new BehaviorSubject(undefined);
+  zoomAuto$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   @Output() openedChange = new EventEmitter<boolean>();
-  @Output() zoomAutoEvent = new EventEmitter<boolean>();
 
   @Output() fullExtentEvent = new EventEmitter<boolean>();
 
@@ -212,17 +226,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     public languageService: LanguageService,
     private storageState: StorageState
   ) {
-    this.zoomAuto$.next(this.zoomAuto);
-    this.storageService.storageChange$
-      .pipe(
-        skipWhile(
-          (storageChange: StorageServiceEvent) =>
-            storageChange.key !== 'zoomAuto'
-        )
-      )
-      .subscribe((storageChange: StorageServiceEvent) => {
-        this.zoomAuto$.next(this.zoomAuto);
-      });
+    this.opened = this.storageService.get('toastOpened') as boolean;
+    this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
+    this.fullExtent = this.storageService.get('fullExtent') as boolean;
   }
 
   ngOnInit() {
@@ -322,11 +328,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         checkbox: true,
         checkCondition: this.zoomAuto$,
         handler: () => {
-          this.storageService.set(
-            'zoomAuto',
-            !this.storageService.get('zoomAuto') as boolean
-          );
-          this.zoomAutoEvent.emit(this.zoomAuto);
+          this.zoomAuto = !this.zoomAuto;
           if (this.zoomAuto && this.isResultSelected$.value === true) {
             this.selectResult(this.resultSelected$.getValue());
           }
@@ -340,13 +342,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         ),
         icon: 'resize',
         display: () => {
-          return this.notfullExtent$;
+          return this.fullExtent$.pipe(map((v) => !v));
         },
         handler: () => {
-          this.storageService.set('fullExtent', true);
-          this.fullExtent$.next(true);
-          this.notfullExtent$.next(false);
-          this.fullExtentEvent.emit(this.fullExtent);
+          this.fullExtent = true;
         }
       },
       {
@@ -362,10 +361,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           return this.fullExtent$;
         },
         handler: () => {
-          this.storageService.set('fullExtent', false);
-          this.fullExtent$.next(false);
-          this.notfullExtent$.next(true);
-          this.fullExtentEvent.emit(this.fullExtent);
+          this.fullExtent = false;
         }
       }
     ]);

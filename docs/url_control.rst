@@ -66,7 +66,8 @@ Sélection du contexte
     dans les contexte OU assigné automatiquement (uuid).
 
         .. code:: json
-
+            :force:
+            
             { 
                 "title": "OSM",
                 "baseLayer": true,
@@ -116,11 +117,25 @@ Sélection du contexte
         - search=
             - #couche pour n'avoir que les couches
             - #adresse
-            - .... (à documenter)
+            - #route
+            - #municipalites, #mun
+            - #mrc
+            - #entreprise
+            - #lieu
+            - #sumi, #borne, #bornes
+            - #code-postal
+            - #anciennes-adresses
+            - #ancienne-municipalites
+            - #région-administrative ou #regadmin
+            - #borne, #bornes, #repère, #km
+        - search=patate&sf=1
+            - **sf=1** permet de zoomer sur le premier résultat
  
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?search=feu&zoom=18
         - https://infra-geo-ouverte.github.io/igo2/?search=915%23adresse
+        - https://infra-geo-ouverte.github.io/igo2/?search=cabaret%23lieu
+        - https://infra-geo-ouverte.github.io/igo2/?search=g1v4j7%23code-postal&sf=1
 
 ********************************
  Itinéraire
