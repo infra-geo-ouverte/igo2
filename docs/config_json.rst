@@ -66,7 +66,7 @@ Résumé
                d'authentification.
          -
        * - :ref:`catalog <igocatalogConfig>`
-         - :ref:`Catalog <igocatalogObject>` []
+         - :ref:`Catalog objet <igocatalogObject>` []
          - .. line-block::
                Doit être présente si l'outil de catalogue.
                Permet de gérer les sources WMS et WMTS
@@ -425,7 +425,7 @@ Propriétés
 .. _igocatalogObject:
 
 Propriétés - Objet Catalog
-===============
+=============================
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -597,7 +597,7 @@ Propriétés - Objet Catalog
 .. _igocompositecatalogObject:
 
 Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
-===============
+==========================================================================
 
     .. list-table::
        :widths: 10 10 30 15 10
