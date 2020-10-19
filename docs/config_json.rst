@@ -66,7 +66,7 @@ Résumé
                d'authentification.
          -
        * - :ref:`catalog <igocatalogConfig>`
-         - :ref:`Catalog <igocatalogObject>` []
+         - :ref:`Catalog objet <igocatalogObject>` []
          - .. line-block::
                Doit être présente si l'outil de catalogue.
                Permet de gérer les sources WMS et WMTS
@@ -76,11 +76,9 @@ Résumé
        * - context
          - `Context`_
          - .. line-block::
-
                Activation de l'API de context d'IGO2.
                Cette API sera documentée
                indépendamment de la présente
-
                documentation.
          - ContextManager
        * - `hasSearchPointerSummary`_
@@ -158,7 +156,6 @@ Résumé
        * - .. line-block::
                **theme***
                Voir: `theme`_
-
          - String
          - .. line-block::
                Permet de définir les thèmes de l'application.
@@ -169,15 +166,14 @@ Résumé
                Le répertoire où sont conservés les thèmes est
                le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
          -
-
        * - title
          - String
          - .. line-block::
                Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
                Constante pouvant être réutilisée dans le welcomeWindow.
          -
-      * - version
-         - {app: String, releaseDateApp: String}
+       * - version
+         - app: String, releaseDateApp: String
          - .. line-block::
                Permet de définir une constante, pour la version du présent déploiement et de la
                date de déploiement de l'application. releaseDateApp, doit être un format reconnu et
@@ -208,7 +204,6 @@ Résumé
                - description provient de la propriété description ci haut.
                - version provient de la propriété version.app ci haut OU de la version de la librairie associée (igo2-lib)
                - releaseDate provient de la propriété version.releaseDateApp ci haut OU de la releaseDate de la librairie associée (igo2-lib)
-      });
          -
 
 
@@ -430,7 +425,7 @@ Propriétés
 .. _igocatalogObject:
 
 Propriétés - Objet Catalog
-===============
+=============================
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -602,7 +597,7 @@ Propriétés - Objet Catalog
 .. _igocompositecatalogObject:
 
 Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
-===============
+==========================================================================
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -821,6 +816,7 @@ Exemples
         .. code:: json
 
                 "interactiveTour": {
+                  "activateInteractiveTour": true
                   "tourInMobile": true,
                   "pathToConfigFile": "./config/interactiveTour.json"
                 },
@@ -841,6 +837,12 @@ Propriétés
                Valeurs possibles
          - .. line-block::
                Valeur défaut
+       * - activateInteractiveTour
+         - Boolean
+         - .. line-block::
+               Indique si le tour interactif de présentation de l'application est activé.
+         - true | false
+         - true
        * - pathToConfigFile
          - String
          - .. line-block::
