@@ -659,6 +659,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         .map((f) => f.data as Feature)
     );
     this.searchStore.clear();
+    this.searchState.setSelectedResult(undefined);
   }
 
   private getQuerySearchSource(): SearchSource {
