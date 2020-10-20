@@ -446,6 +446,8 @@
       },
       {
         "text": "interactiveTour.context.select",
+        "element": "igo-context-item.igo-list-item-selected",
+        "deleteAfterNext": true,
         "beforeChange": {
           "action": "click",
           "element": "igo-actionbar-item:nth-child(2) mat-list-item"
