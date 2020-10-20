@@ -1,3 +1,12 @@
+## [1.5.1](https://github.com/infra-geo-ouverte/igo2/compare/1.5.0...1.5.1) (2020-10-20)
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.5.1 ([554feb9](https://github.com/infra-geo-ouverte/igo2/commit/554feb99947c5ce78a783a2550cd3107952b9000))
+
+
+
 # [1.5.0](https://github.com/infra-geo-ouverte/igo2/compare/1.4.1...1.5.0) (2020-10-16)
 
 
