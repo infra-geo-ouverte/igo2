@@ -419,5 +419,25 @@
         "text": "interactiveTour.spatial-filter.export"
       }
     ]
+  },
+
+  "mapTools": {
+    "title": "interactiveTour.map-tool.title",
+    "position": "auto",
+    "conditions": ["igo-layer-item"],
+    "steps": [
+      {
+        "element": "div.igo-panel-title",
+        "text": "interactiveTour.map-tool.start",
+        "onShow": {
+          "element": "div.mat-tab-labels div:first-of-type",
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.mat-tab-labels div:first-of-type",
+        "text": "interactiveTour.map-tool.layer-list"
+      }
+    ]
   }
 }

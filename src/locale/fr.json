@@ -149,6 +149,14 @@
       "results-table": "Les résultats apparaîtront dans ce tableau",
       "clear-results": "Les résultats de la recherche peuvent être retirer à tout moment",
       "export": "Il est aussi possible d'exporter les résultats par l'outil d'export"
+    },
+    "map-tool": {
+      "title": "CARTE",
+      "start": "Tour guidé de l'outil de carte",
+      "layer-list": "L'onglet carte peut être utilisée pour présenter la liste des couches des couches présentes dans la carte.",
+      "legend-list": "L'onglet carte peut aussi être utilisée pour présenter la liste des légendes associées à ces mêmes couches. Nous y reviendrons plus tard.",
+      "layer-item": "Une couche représente un ensemble d'entités du même type.",
+      "layer-item-click": "Un clic sur le titre de la couche permet d'afficher la légende."
     }
   }
 }
