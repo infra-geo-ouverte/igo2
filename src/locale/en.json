@@ -4,7 +4,13 @@
     "close": "Close Menu",
     "open": "Open Menu"
   },
-
+  "workspace": {
+    "disabled" : {
+      "resolution": "The workspace is not available at this resolution",
+      "visible": "The layer is not loaded. Try to set the layer visibility.",
+      "loading": "Loading..."
+    }
+  },
   "toastPanel": {
     "title": "Entities found on the map",
     "listButton": "Return to the list of entities",
