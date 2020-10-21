@@ -113,15 +113,6 @@
     </igo-workspace-selector>
 
     <ng-container *ngIf="selectedWorkspace$ | async as workspace">
-      <igo-actionbar
-        *ngIf="workspace.actionStore"
-        [store]="workspace.actionStore"
-        [withIcon]="true"
-        [withTitle]="actionbarWithTitle"
-        [horizontal]="true"
-        [withToggleButton]="actionbarMode === 'overlay'"
-        [mode]="actionbarMode">
-      </igo-actionbar>
       <button
         mat-icon-button
         [color]="workspace.layer.visible ? 'primary' : 'default'"
@@ -137,6 +128,15 @@
           [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'">
         </mat-icon>
     </button>
+    <igo-actionbar
+      *ngIf="workspace.actionStore"
+      [store]="workspace.actionStore"
+      [withIcon]="true"
+      [withTitle]="actionbarWithTitle"
+      [horizontal]="true"
+      [withToggleButton]="actionbarMode === 'overlay'"
+      [mode]="actionbarMode">
+    </igo-actionbar>
       <div class="spacer"></div>
       <igo-entity-table-paginator
       *ngIf="workspaceVisibility()"
