@@ -7,8 +7,7 @@
   "workspace": {
     "disabled" : {
       "resolution": "La vue tabulaire n'est pas disponible à cette échelle",
-      "visible": "La couche n'a pas été chargée. Veuillez rendre visible la couche pour découvrir la donnée.",
-      "loading": "Chargement..."
+      "visible": "La couche n'a pas été chargée. Veuillez rendre visible la couche pour découvrir la donnée."
     }
   },
   "toastPanel": {

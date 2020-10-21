@@ -7,8 +7,7 @@
   "workspace": {
     "disabled" : {
       "resolution": "The workspace is not available at this resolution",
-      "visible": "The layer is not loaded. Try to set the layer visibility.",
-      "loading": "Loading..."
+      "visible": "The layer is not loaded. Try to set the layer visibility."
     }
   },
   "toastPanel": {
