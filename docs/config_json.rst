@@ -760,7 +760,9 @@ Propriétés
        * - gpxAggregateInComment
          - Boolean
          - .. line-block::
-               Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur de l'ID au champ «name».
+               Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler
+               les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur
+               de l'ID au champ «name».
          - .. line-block::
 
          - false
@@ -832,7 +834,8 @@ Propriétés
        * - pathToConfigFile
          - String
          - .. line-block::
-               Indique ou ce retrouve le fichier de configuartion des tours dans l'application. Voir la documentation plus loin sur les détails de la configurations des tours.
+               Indique ou ce retrouve le fichier de configuartion des tours dans l'application.
+               Voir la documentation plus loin sur les détails de la configurations des tours.
                Référez vous à :ref:`Tour interactif configuration <igoInteractiveTourConfig>`.
          -
          - "./config/interactiveTour.json"
@@ -1186,7 +1189,8 @@ Propriétés
        * - nbVisitToShow
          - Number
          - .. line-block::
-               Nombre de fois que sera présenté la fenêtre d'accueil. S'appliquera aussi après être revenu par exemple lors d'une nouvelle
+               Nombre de fois que sera présenté la fenêtre d'accueil. S'appliquera aussi après
+               être revenu par exemple lors d'une nouvelle
                version IGO.
          -
          -
@@ -1199,8 +1203,8 @@ Propriétés
        * - showAgainOnNewIGOVersion
          - Boolean
          - .. line-block::
-               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra si la version IGO est différente
-               de la version lors de sa visite précédente.
+               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra
+               si la version IGO est différente de la version lors de sa visite précédente.
          -
          - true
 
@@ -1210,9 +1214,9 @@ Propriétés
 La configuration du titre et du message présentés se fait dans les fichiers locaux de traduction en.json et fr.json.
 Les variables de nb. visite et de présentation ou non sont conservés dans les 'local storage' du navigateur internet.
 
-***************
+***************************
 Exemple complet config.json
-***************
+****************************
 
         .. code:: json
 
@@ -1734,7 +1738,9 @@ Propriétés
                Valeur par défaut
        * - format
          - String
-         - Le format du message html ou text. Selon le choix, une deuxième configuration devra être définie soit html ou text.
+         - .. line-block::
+              Le format du message html ou text. Selon le choix, une deuxième configuration devra
+              être définie soit html ou text.
          - 'text', 'html'
          -
        * - html
@@ -1759,23 +1765,32 @@ Propriétés
          -
        * - text
          - String
-         - Le text du message à afficher. Cette configuration remplace la configuration html. NB.: pour un message qui sera
-           traduction en fonction du navigateur simplement ce créer une clef de traduction indiquer ici et de mettre sont
-           équivalent dans les fichiers de traduction local en.json, fr.json. Exemple: "text": "messageContextXyz",
-           dans fr.json : "messageContextXyz": <h3>mon super message</h3> et en.json: "messageContextXyz": <h3>message in english</h3>
+         - .. line-block::
+              Le text du message à afficher. Cette configuration remplace la configuration html.
+              NB.: pour un message qui sera traduction en fonction du navigateur simplement ce
+              créer une clef de traduction indiquer ici et de mettre sont équivalent dans les
+              fichiers de traduction local en.json, fr.json. Exemple:
+              "text": "messageContextXyz",
+               fr.json = "messageContextXyz": <h3>mon super message</h3>
+               en.json = "messageContextXyz": <h3>message in english</h3>
          -
          -
        * - title
          - String
-         - Le titre du message à afficher. Cette configuration s'active seulement avec la configuration text et ne sera pas pris
-           en compte avec la configuration html.
+         - .. line-block::
+              Le titre du message à afficher. Cette configuration s'active seulement avec la
+              configuration text et ne sera pas pris en compte avec la configuration html.
          -
          -
        * - type
          - String
-         - Le type du message à afficher. Avertissement, erreur ou information. Selon le type choisi une couleur spécifiée sera
-           appliquée selon la thématique de couleur de l'application.
-         - 'alert', 'error', 'info', 'success'
+         - .. line-block::
+              Le type du message à afficher. Avertissement, erreur ou information.
+              Selon le type choisi une couleur spécifiée sera appliquée selon la
+              thématique de couleur de l'application.
+         - .. line-block::
+              'alert', 'error',
+              'info', 'success'
          -
 
 
@@ -1803,7 +1818,8 @@ Toolbar
 
     .. line-block::
         Définit la liste des outils permis dans le contexte.
-        L'ordre d'apparition des outils dans cette liste est importante puisqu'elle représente l'ordre des outils dans l'application.
+        L'ordre d'apparition des outils dans cette liste est importante puisqu'elle
+        représente l'ordre des outils dans l'application.
         Les outils existant:
             - :ref:`about <igoabout>`
             - :ref:`catalog <igocatalogtool>`
@@ -1818,8 +1834,9 @@ Toolbar
             - :ref:`map <igomaptool>`
             - :ref:`print <igoprint>`
             - :ref:`searchResults <igosearchResults>`
-        Chacun de ces outils fait référence à un nom d'outil tel que définit dans le package "integration" d'IGO2.
-        Pour en modifier les propriétés référez-vous à `tools`_ .
+        Chacun de ces outils fait référence à un nom d'outil tel que définit dans
+        le package "integration" d'IGO2. Pour en modifier les propriétés
+        référez-vous à `tools`_ .
 
 Exemples
 
