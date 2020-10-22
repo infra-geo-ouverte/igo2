@@ -62,24 +62,20 @@ Résumé
        * - auth
          - `Auth`_
          - .. line-block::
-               Objet permettant d'activer le serveur
-               d'authentification.
+               Objet permettant d'activer le serveur d'authentification.
          -
        * - :ref:`catalog <igocatalogConfig>`
-         - :ref:`Catalog objet <igocatalogObject>` []
+         - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
-               Doit être présente si l'outil de catalogue.
-               Permet de gérer les sources WMS et WMTS
+               Doit être présente si l'outil de catalogue. Permet de gérer les sources WMS et WMTS
          - .. line-block::
                Catalog
                CatalogBrowser
        * - context
          - `Context`_
          - .. line-block::
-               Activation de l'API de context d'IGO2.
-               Cette API sera documentée
-               indépendamment de la présente
-               documentation.
+               Activation de l'API de context d'IGO2. Cette API sera documentée indépendamment
+               de la présente documentation.
          - ContextManager
        * - `hasSearchPointerSummary`_
          - Boolean
@@ -91,25 +87,20 @@ Résumé
        * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
-               Permet d'ouvrir un paneau d'expansion à partir
-               d'un bouton situé dans le coin inférieur gauche
-               de la carte.
-               Ce dernier contient les données tabulaires pour
-                les données WFS / Vectorielle / Cluster
+               Permet d'ouvrir un paneau d'expansion à partir d'un bouton situé dans le coin inférieur gauche
+               de la carte. Ce dernier contient les données tabulaires pour les données WFS / Vectorielle / Cluster
          -
        * - `hasFeatureEmphasisOnSelection`
          - Boolean
          - .. line-block::
-               Permet d'ajouter à la carte une géométrie ponctuelle pour les entités
-               linéaire ou polygonale sélectionnées ou survolées lors d'une
-               interrogation de la carte et qui sont de trop petite taille par
-               rapport à l'étendue de la carte.
+               Permet d'ajouter à la carte une géométrie ponctuelle pour les entités linéaire ou
+               polygonale sélectionnées ou survolées lors d'une interrogation de la carte et qui
+               sont de trop petite taille par rapport à l'étendue de la carte.
          -
        * - importExport
          - `ImportExport`_
          - .. line-block::
-               Nécessaire si l'outil d'importation exportation
-               pour gérer l'importation des Shapefiles
+               Nécessaire si l'outil d'importation exportation pour gérer l'importation des Shapefiles.
          - .. line-block::
                Importation
                Exportation
@@ -120,8 +111,7 @@ Résumé
        * - **language***
          - `Language`_
          - .. line-block::
-               Chemin d'accès des fichiers de traduction de
-               l'application.
+               Chemin d'accès des fichiers de traduction de l'application.
          - Tous
        * - mapOverlay
          - `MapOverlay`_ []
@@ -136,26 +126,23 @@ Résumé
        * - optionsApi
          - `optionsApi`_
          - .. line-block::
-              Indique le chemin pour api fournissant certaine options de couches lors
-              de l'ajout de celles-ci par la recherche.
+              Indique le chemin pour api fournissant certaine options de couches lors de l'ajout de celles-ci
+              par la recherche.
          -
        * - projections
          - :ref:`Projection <igoprojections>` []
          - .. line-block::
-               Liste de projections non enregistrées
-               par défault par OpenLayers.
+               Liste de projections non enregistrées par défault par OpenLayers.
          -
        * - routingSources
          - `RoutingSource`_
          - .. line-block::
-               Source serveur pour la création des itinéraires.
-               Actuellement, le serveur utilisé est OSRM.
+               Source serveur pour la création des itinéraires. Actuellement, le serveur utilisé est OSRM.
          - itinéraire
        * - **searchSources***
          - `SearchSources`_
          - .. line-block::
-               Nécessaire afin de permettre la recherche par
-               texte et/ou la recherche par coordonnées.
+               Nécessaire afin de permettre la recherche par texte et/ou la recherche par coordonnées.
          - .. line-block::
                Recherche
                Carte
@@ -164,11 +151,11 @@ Résumé
                Voir: `theme`_
          - String
          - .. line-block::
-               Permet de définir les thèmes de l'application.
-               Les choix sont:
+               Permet de définir les thèmes de l'application. Les choix sont:
                    - blue-theme
                    - bluegrey.theme
                    - dark.theme
+                   - teal.theme
                Le répertoire où sont conservés les thèmes est
                le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
          -
@@ -179,7 +166,9 @@ Résumé
                Constante pouvant être réutilisée dans le welcomeWindow.
          -
        * - version
-         - app: String, releaseDateApp: String
+         - .. line-block::
+              app: String,
+              releaseDateApp: String
          - .. line-block::
                Permet de définir une constante, pour la version du présent déploiement et de la
                date de déploiement de l'application. releaseDateApp, doit être un format reconnu et
@@ -462,126 +451,109 @@ Propriétés - Objet Catalog
        * - count
          - Integer
          - .. line-block::
-               Nombre de résultats retournés par le serveur
-               lors de requêtes **WMS** de GetFeatureInfo
+               Nombre de résultats retournés par le serveur lors de requêtes **WMS** de GetFeatureInfo
          -
          - 5
        * - **id***
          - String
          - .. line-block::
-               Identifiant unique permettant de différencier
-               les catalogues entre eux.
+               Identifiant unique permettant de différencier les catalogues entre eux.
          -
          - uuid()
        * - groupImpose
-         - id*: String, title*: String
+         - .. line-block::
+            id*: String,
+            title*: String
          - .. line-block::
                N.B: Propriété disponible sur un objet de type CompositeCatalog
-               Permet d'imposer l'utilisation d'un groupe à l'ensemble
-               des couches appellées du catalogue.
-               - id: Identifiant unique permettant de différencier
-               les groupes entre eux.
-               - title: Titre pour le groupe qui sera utilisé
-               dans l'outil Catalog.
+               Permet d'imposer l'utilisation d'un groupe à l'ensemble des couches appellées du catalogue.
+               - id: Identifiant unique permettant de différencier les groupes entre eux.
+               - title: Titre pour le groupe qui sera utilisé dans l'outil Catalog.
          -
          -
        * - matrixSet
          - String
          - .. line-block::
-               Nom du matrixSet définit pour le service
-               WMTS seulement
+               Nom du matrixSet définit pour le service WMTS seulement
                **Obligatoire pour les services WMTS**
          -
          -
        * - queryFormat
          - QueryFormat
          - .. line-block::
-               Pour les services **WMS**, le format d'interrogation
-               de la donnée.
+               Pour les services **WMS**, le format d'interrogation de la donnée.
          - Voir **QueryFormat**
          -
        * - queryHtmlTarget
          - String
          - .. line-block::
-               Pour les services **WMS**, definit la destination des
-               résultats d'interrogation pour les formats HTML.
-         - iframe (intégré
-           à la plage) ou
-           _blank (ouverture
-           page externe)
+               Pour les services **WMS**, definit la destination des résultats d'interrogation
+               pour les formats HTML.
+         - .. line-block::
+              iframe (intégré à la plage)
+              _blank (ouverture page externe)
          - iframe
        * - queryParams
          - objet {}
          - .. line-block::
-               Paramètres supplémentaires à ajouter à l'appel des
-               couches ajoutées à partir du service.
-               Que ce soit des paramètres normés (WMS|WMTS)
-               ou liés à votre service.
+               Paramètres supplémentaires à ajouter à l'appel des couches ajoutées à partir du service.
+               Que ce soit des paramètres normés (WMS|WMTS) ou liés à votre service.
          -
          -
        * - regFilters
          - String[]
          - .. line-block::
-               Une liste d'expressions régulières (regex)
-               permettant de limiter les couches
-               d'information présentées dans l'outil
-               CatalogBrowser
+               Une liste d'expressions régulières (regex) permettant de limiter les couches
+               d'information présentées dans l'outil CatalogBrowser
          -
          -
        * - requestEncoding
          - String
          - .. line-block::
-               Type d'encodage des paramètres demandés au
-               serveur
+               Type d'encodage des paramètres demandés au serveur
          - KVP REST
          - KVP
        * - setCrossOriginAnonymous
          - Boolean
          - .. line-block::
-               Afin de définir si l'entête de l'appel faite
-               au serveur sera anonyme. Permet entre autres,
-               d'éviter les problématiques de CORS
-         - true false
+               Afin de définir si l'entête de l'appel faite au serveur sera anonyme. Permet entre autres,
+               d'éviter les problématiques de CORS.
+         - true | false
          - false
        * - showLegend
          - Boolean
          - .. line-block::
-               Permet d'affiché la légende sur le click du titre
-               des couches.
-         - true false
+               Permet d'affiché la légende sur le click du titre des couches.
+         - true | false
          - false
        * - sortDirection
          - String
          - .. line-block::
-               Permet de trier l'ordre d'apparition des couches
-               du catalogue dans l'outil CatalogBrowser
-               Influence l'ordre d'ajout des couches
-               d'informations à la carte.
-         - asc desc
+               Permet de trier l'ordre d'apparition des couches du catalogue dans l'outil CatalogBrowser
+               Influence l'ordre d'ajout des couches d'informations à la carte.
+         - asc | desc
          - .. line-block::
-               Aucun, l'ordre présenté par service
+               Aucun, l'ordre
+               présenté par service
        * - timeFilter
          - TimeFilterOptions
          - .. line-block::
-               Options temporelles liées à l'entièreté des
-               couches du service web.
+               Options temporelles liées à l'entièreté des couches du service web.
          - .. line-block::
                Voir **TimeFilter**
          - 1.0.0 (WMTS)
        * - **title***
          - String
          - .. line-block::
-               Titre pour la source du catalogue qui sera utilisé
-               dans l'outil Catalog
+              Titre pour la source du catalogue qui sera utilisédans l'outil Catalog.
          -
          -
        * - tooltipType
          - String
          - .. line-block::
-               Pour les couches ajoutées, définit si le tooltip
-               (sulvol du titre) sera le résumé du "layer"
-               (**wms/wmts**) ou son titre
-         - abstract title
+              Pour les couches ajoutées, définit si le tooltip (sulvol du titre) sera le
+              résumé du "layer" (**wms/wmts**) ou son titre
+         - abstract | title
          - title
        * - type
          - String
@@ -592,8 +564,7 @@ Propriétés - Objet Catalog
        * - **url***
          - String
          - .. line-block::
-               Url du service WMS ou WMTS sans les paramètre
-               d'url normé OGC
+               Url du service WMS ou WMTS sans les paramètre d'url normé OGC
                (i.e. service=wms&request=GetCapabilities)
                OU url du service de baselayers
          -
@@ -634,22 +605,19 @@ Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
        * - **id***
          - String
          - .. line-block::
-               Identifiant unique permettant de différencier
-               les catalogues entre eux.
+               Identifiant unique permettant de différencier les catalogues entre eux.
          -
          -
        * - **title***
          - String
          - .. line-block::
-               Titre pour la source du catalogue qui sera utilisé
-               dans l'outil Catalog.
+              Titre pour la source du catalogue qui sera utilisé dans l'outil Catalog.
          -
          -
        * - composite
          - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
-               Liste des catalogues utilisés dans un catalogue
-               composé.
+              Liste des catalogues utilisés dans un catalogue composé.
          -
          -
 
