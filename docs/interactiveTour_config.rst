@@ -40,9 +40,7 @@ Exemples
 
         {
           "global": {
-            "title": "interactiveTour.global.title",
             "position": "auto",
-            "class": "mat-form-field",
             "scrollToElement":true,
             "title": "Titre de toutes les boites du tour",
             "steps": [
@@ -70,12 +68,6 @@ Propriétés - Objet InteractiveTourOptions
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - class
-         - String
-         - .. line-block::
-               Définit la classe à appliquer aux boites contenant les messages d'aide
-         -
-         -
        * - disableInteraction
          - Boolean
          - .. line-block::
@@ -277,12 +269,6 @@ Propriétés - Objet InteractiveTourStep
          - InteractiveTourAction
          - .. line-block::
                Déclenchement avant l'apparition de la boite. Attends avant d'ouvrir l'étape (en combinaison de waitFor qui prend du css)
-         -
-         -
-       * - class
-         - String
-         - .. line-block::
-                Définit la classe à appliquer aux boites contenant les messages d'aide
          -
          -
        * - disableInteraction

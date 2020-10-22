@@ -1771,8 +1771,8 @@ Propriétés
               créer une clef de traduction indiquer ici et de mettre sont équivalent dans les
               fichiers de traduction local en.json, fr.json. Exemple:
               "text": "messageContextXyz",
-               fr.json = "messageContextXyz": <h3>mon super message</h3>
-               en.json = "messageContextXyz": <h3>message in english</h3>
+              fr.json = "messageContextXyz": <h3>mon super message</h3>
+              en.json = "messageContextXyz": <h3>message in english</h3>
          -
          -
        * - title
