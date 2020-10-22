@@ -1152,12 +1152,16 @@ Propriétés de l'objet timeFilter
        * - min
          - String
          - Periode de temps minimum.
-         - En fonction du type, peut être une année, une date ou une heure.
+         - .. line-block::
+            En fonction du type, peut être une année, une date ou une heure.
+            NB: Si la valeur est absente, le système appliquera ce qui est définit dans le service.
          -
        * - max
          - String
          - Periode de temps maximum.
-         - En fonction du type, peut être une année, une date ou une heure.
+         - .. line-block::
+            En fonction du type, peut être une année, une date ou une heure.
+            NB: Si la valeur est absente, le système appliquera ce qui est définit dans le service.
          -
        * - range
          - Boolean
