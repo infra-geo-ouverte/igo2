@@ -1114,17 +1114,23 @@ Options de sources avancées
 Configuration filtre temporel WMS-T (timeFilter)
 ================================================
 
+La configuration du filtre temporel doit être configurée dans sourceOptions {}
 Exemples
 
         .. code:: json
 
             {
-                  "min": "1890",
-                  "max": "2019",
-                  "style": "calendar",
-                  "range": true,
-                  "step": 63072000000,
-                  "type": "year"
+              "sourceOptions": {
+                  "timeFilterable": true,
+                  "timeFilter": {
+                          "min": "1890",
+                          "max": "2019",
+                          "style": "calendar",
+                          "range": true,
+                          "step": 63072000000,
+                          "type": "year"
+                    }
+              }
             }
 
 Propriétés de l'objet timeFilter

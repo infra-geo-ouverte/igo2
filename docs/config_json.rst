@@ -313,10 +313,12 @@ Catalog
             - Service WMS
             - Service WMTS
 
-
         Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
-        Dans la présente version
+        NB: Il est possible de configurer certaines options dans les catalogues comme le format de présentation des informations(queryFormat) ou la configuration des
+        filtres temporels souhaités (Voir exemples)
+
+        Partage de carte:
             1- Les couches ajoutées par le catalogue sont partagées lors du partage de carte.
             2- La structure de l'url pour les couches partagées est la suivante:
                 - wmsUrl =­­> une liste, séparée par une ',' (virgule) listant les url de service ajoutées.
@@ -345,6 +347,19 @@ Exemples
                       "id": "opendataqc",
                       "title": "Données Ouvertes Québec",
                       "url": "/ws/igo_gouvouvert.fcgi"
+                  },
+                  {
+                      "id": "mffp",
+                      "title": "MFFP",
+                      "url": "/ws/mffpecofor.fcgi",
+                      "sourceOptions": {
+                        "timeFilter": {
+                          "style": "calendar",
+                          "range": true,
+                          "step": 63072000000,
+                          "type": "year"
+                        }
+                      }
                   },
                   {
                       "id": "mtq",
