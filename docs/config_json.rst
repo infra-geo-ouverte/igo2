@@ -133,6 +133,12 @@ Résumé
          - .. line-block::
               Indique si les couleurs du bouton de menu seront inversés.
          -
+       * - optionsApi
+         - `optionsApi`_
+         - .. line-block::
+              Indique le chemin pour api fournissant certaine options de couches lors
+              de l'ajout de celles-ci par la recherche.
+         -
        * - projections
          - :ref:`Projection <igoprojections>` []
          - .. line-block::
@@ -963,6 +969,25 @@ Liens
 
 .. _igoprojections:
 
+
+.. _optionsApi:
+
+************
+optionsApi
+************
+
+  Permet de définir le chemin vers API pour les options supplémentaires sur les couches ajoutées par la recherche.
+  Par exemple, les configurations de filtre.
+
+Exemple
+
+        .. code:: json
+
+              "optionsApi": {
+                  "url": "/apis/igo2/layers/options"
+              }
+
+
 ***************
 Projections
 ***************
@@ -971,7 +996,7 @@ Projections
         Permet de définir une **liste** de projections non enregistrées par défault par IGO2 (Proj4). On parle ici de projection non mondiale ou à référence locale (ex: mtm, Lambert MTQ...)
         Référez vous à : `http://epsg.io/ <http://epsg.io/>`_. Ils y définissent l'entièreté des paramètres nécessaires.
 
-Exemples
+Exemple
 
         .. code:: json
 
