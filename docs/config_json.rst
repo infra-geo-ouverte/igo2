@@ -184,8 +184,8 @@ Résumé
        * - description
          - String
          - .. line-block::
-               Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche, comme par exemple Google.
-               Constante pouvant être réutilisée dans le welcomeWindow.
+               Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche,
+               comme par exemple Google. Constante pouvant être réutilisée dans le welcomeWindow.
          -
        * - welcomeWindow
          - `WelcomeWindow`_
@@ -197,13 +197,14 @@ Résumé
                   "title": "Fenêtre d'accueil",
                   "closeButton": "Fermer",
                   "notShowCheck": "  ne plus afficher"}
-               Les propriétés title, description, version, releaseDate peuvent être utilisées dans le contenu html
-               pour ajouter du contenu statique non traduit.
+               Les propriétés title, description, version, releaseDate peuvent être utilisées dans le
+               contenu html pour ajouter du contenu statique non traduit.
                ex: "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>Version {{version}}"
                - title provient de la propriété title ci haut.
                - description provient de la propriété description ci haut.
                - version provient de la propriété version.app ci haut OU de la version de la librairie associée (igo2-lib)
-               - releaseDate provient de la propriété version.releaseDateApp ci haut OU de la releaseDate de la librairie associée (igo2-lib)
+               - releaseDate provient de la propriété version.releaseDateApp ci haut OU de la releaseDate
+                 de la librairie associée (igo2-lib)
          -
 
 
@@ -269,22 +270,19 @@ Propriétés
        * - **url***
          - String
          - .. line-block::
-               Définit l'url d'appel du service
-               d'authentification
+               Définit l'url d'appel du service d'authentification
          -
          -
        * - **tokenKey***
          - String
          - .. line-block::
-               Définit la clef de l'api d'authentification
-               utilisée
+               Définit la clef de l'api d'authentification utilisée
          -
          -
        * - allowAnonymous
          - Boolean
          - .. line-block::
-               Permet/Bloque l'accès aux usagers non
-               authentifiés
+               Permet/Bloque l'accès aux usagers non authentifiés
                d'accéder aux contextes publics
          - true | false
          - true
@@ -344,57 +342,56 @@ Exemples
             "catalog": {
                   "sources": [
                   {
-                        "id": "opendataqc",
-                        "title": "Données Ouvertes Québec",
-                        "url": "/ws/igo_gouvouvert.fcgi"
+                      "id": "opendataqc",
+                      "title": "Données Ouvertes Québec",
+                      "url": "/ws/igo_gouvouvert.fcgi"
                   },
                   {
-                        "id": "mtq",
-                        "title": "MTQ",
-                        "url": "/swtq",
-                        "sortDirection": "desc",
-                        "queryFormat": {
-                              "htmlgml2": "*",
-                              "json": "stations_meteoroutieres"
-                              },
-                        "queryHtmlTarget": "iframe",
-                        "count": 365,
-
-                        "tooltipType": "abstract"
+                      "id": "mtq",
+                      "title": "MTQ",
+                      "url": "/swtq",
+                      "sortDirection": "desc",
+                      "queryFormat": {
+                            "htmlgml2": "*",
+                            "json": "stations_meteoroutieres"
+                            },
+                      "queryHtmlTarget": "iframe",
+                      "count": 365,
+                      "tooltipType": "abstract"
                   },
                   {
-                        "id": "regexmtq",
-                        "title": "MTQ (filtered by regex)",
-                        "url": "/swtq",
-                        "regFilters": ["zpegt"]
+                      "id": "regexmtq",
+                      "title": "MTQ (filtered by regex)",
+                      "url": "/swtq",
+                      "regFilters": ["zpegt"]
                   },
                   {
-                        id: 'group_impose',
-                        title: '(composite catalog) with group imposed',
-                        composite: [
-                              {
-                              id: 'tq_swtq',
-                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
-                              regFilters: ['zpegt'],
-                              groupImpose: {id: 'zpegt', title: 'zpegt'}
-                              },
-                              {
-                              id: 'Gououvert',
-                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
-                              regFilters: ['zpegt'],
-                              groupImpose: {id: 'zpegt', title: 'zpegt'}
-                              },
-                              {
-                              id: 'rn_wmts',
-                              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
-                              type: 'wmts',
-                              crossOrigin: true,
-                              matrixSet: 'EPSG_3857',
-                              version: '1.0.0',
-                              groupImpose: {id: 'cartetopo', title: 'Carte topo échelle 1/20 000'}
-                              }
-                        ]
-                  }
+                      "id": "group_impose",
+                      "title": "(composite catalog) with group imposed",
+                      "composite": [
+                            {
+                            "id": "tq_swtq",
+                            "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+                            "regFilters": ["zpegt"],
+                            "groupImpose": {"id": "zpegt", "title": "zpegt"}
+                            },
+                            {
+                              "id": "Gououvert",
+                              "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+                              "regFilters": ["zpegt"],
+                              "groupImpose": {"id": "zpegt", "title": "zpegt"}
+                            },
+                            {
+                              "id": "rn_wmts",
+                              "url": "https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images",
+                              "type": "wmts",
+                              "crossOrigin": true,
+                              "matrixSet": "EPSG_3857",
+                              "version": "1.0.0",
+                              "groupImpose": {"id": "cartetopo", "title": "Carte topo échelle 1/20 000"}
+                            }
+                      ]
+                }
                   ]
             }
 
