@@ -139,7 +139,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   private multiple$ = new BehaviorSubject(false);
   private isResultSelected$ = new BehaviorSubject(false);
-  private isSelectedResultOutOfView$ = new BehaviorSubject(false);
+  public isSelectedResultOutOfView$ = new BehaviorSubject(false);
   private isSelectedResultOutOfView$$: Subscription;
   private initialized = true;
 
