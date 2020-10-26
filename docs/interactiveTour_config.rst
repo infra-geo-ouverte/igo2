@@ -40,9 +40,7 @@ Exemples
 
         {
           "global": {
-            "title": "interactiveTour.global.title",
             "position": "auto",
-            "class": "mat-form-field",
             "scrollToElement":true,
             "title": "Titre de toutes les boites du tour",
             "steps": [
@@ -70,12 +68,6 @@ Propriétés - Objet InteractiveTourOptions
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - class
-         - String
-         - .. line-block::
-               Définit la classe à appliquer aux boites contenant les messages d'aide
-         -
-         -
        * - disableInteraction
          - Boolean
          - .. line-block::
@@ -215,7 +207,7 @@ Exemples
               "text": "Effectue un clic à l'arrivée de la boite seulement si le menu est fermé",
               "onShow": {
                 "action": "click",
-                "condition": "app-sidenav:not([ng-reflect-opened=true])"
+                "condition": "mat-sidenav:not(.mat-drawer-opened)"
               }
             },
             {
@@ -285,12 +277,6 @@ Propriétés - Objet InteractiveTourStep
                Déclenchement avant l'apparition de la boite. Attends avant d'ouvrir l'étape (en combinaison de waitFor qui prend du css)
          -
          -
-       * - class
-         - String
-         - .. line-block::
-                Définit la classe à appliquer aux boites contenant les messages d'aide
-         -
-         -
        * - disableInteraction
          - Boolean
          - .. line-block::
@@ -331,7 +317,10 @@ Propriétés - Objet InteractiveTourStep
          - String
          - .. line-block::
                Définit la position des boites aide
-         - 'auto', 'right', 'left', 'bottom', 'top'. NB.: Si la propriété position n'est pas présente, les boites seront disposées au centre de l'écran.
+         - .. line-block::
+              'auto', 'right', 'left', 'bottom', 'top'.
+              NB.: Si la propriété position n'est pas présente,
+              les boites seront disposées au centre de l'écran
          -
        * - scrollToElement
          - Boolean
@@ -348,7 +337,7 @@ Propriétés - Objet InteractiveTourStep
        * - title
          - String
          - .. line-block::
-               Le titre de toutes les boites aide
+               Le titre de la boite d'aide
          - ...
          - ...
 
@@ -356,7 +345,7 @@ Propriétés - Objet InteractiveTourStep
 
 
 Liens
-      - `InteractiveTourStep interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface>`_
+      - `InteractiveTourStep interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface.ts>`_
 
 
 
@@ -429,5 +418,5 @@ L'élément de mon tour n'est pas mis en surbrillance.
 
 Liens
 
-        - `Exemple de configuration <https://github.com/infra-geo-ouverte/igo2/tree/master/src/config/configOptions.json>`_
+        - `Exemple de configuration <https://github.com/infra-geo-ouverte/igo2/tree/master/src/config/interactiveTour.json>`_
         - `component igo2-lib/packages/common/src/lib/interactive-tour <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour>`_
