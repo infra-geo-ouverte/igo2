@@ -4,6 +4,12 @@
     "close": "Fermer le menu",
     "open": "Menu"
   },
+  "workspace": {
+    "disabled" : {
+      "resolution": "La vue tabulaire n'est pas disponible à cette échelle",
+      "visible": "La couche n'a pas été chargée. Veuillez rendre visible la couche pour découvrir la donnée."
+    }
+  },
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
     "listButton": "Retourner à la liste des entités",
