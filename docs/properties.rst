@@ -326,6 +326,14 @@ Propriétés de legendOptions objet
                 ]
 
          -
+       * - url
+         - String
+         -  .. line-block::
+            URL du getLegend
+            Exemple: "/ws/mffpecofor.fcgi?&REQUEST=GetLegendGraphic&SERVICE=WMS&FORMAT=image/png&
+            SLD_VERSION=1.1.0&VERSION=1.3.0&LAYER=lidar_index_extraction"
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
