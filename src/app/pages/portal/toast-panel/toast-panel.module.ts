@@ -10,10 +10,12 @@ import { IgoLanguageModule } from '@igo2/core';
 import { IgoFeatureModule, IgoSearchResultsModule } from '@igo2/geo';
 
 import { ToastPanelComponent } from './toast-panel.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatBadgeModule,
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
