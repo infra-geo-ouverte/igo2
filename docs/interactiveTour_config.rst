@@ -201,7 +201,7 @@ Exemples
               "text": "Effectue un clic à l'arrivée de la boite seulement si le menu est fermé",
               "onShow": {
                 "action": "click",
-                "condition": "app-sidenav:not([ng-reflect-opened=true])"
+                "condition": "mat-sidenav:not(.mat-drawer-opened)"
               }
             },
             {

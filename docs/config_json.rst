@@ -1212,7 +1212,7 @@ Propriétés
 
 
 La configuration du titre et du message présentés se fait dans les fichiers locaux de traduction en.json et fr.json.
-Les variables de nb. visite et de présentation ou non sont conservés dans les 'local storage' du navigateur internet.
+Les variables de nb. visite et de présentation ou non sont conservés dans le 'local storage' du navigateur internet.
 
 ***************************
 Exemple complet config.json
