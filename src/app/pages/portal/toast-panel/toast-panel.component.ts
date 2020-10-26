@@ -235,7 +235,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
   }
 
-  private monitorMapViewControllerOrResult() {
+  private monitorResultOutOfView() {
     this.isSelectedResultOutOfView$$ = combineLatest([
       this.map.viewController.state$,
       this.resultSelected$
@@ -258,7 +258,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.store.entities$.subscribe(() => {
       this.initialized = true;
     });
-    this.monitorMapViewControllerOrResult();
+    this.monitorResultOutOfView();
 
     let latestResult;
     let trigger;
