@@ -11,6 +11,7 @@
     "backToList": "Return to the list",
     "zoomOnFeature": "Zoom on feature",
     "zoomOnFeatureTooltip": "Zoom on selected feature ( shortcut = z )",
+    "zoomOnFeatureTooltipOutOfView": "The feature is out of view. Zoom on selected feature ( shortcut = z )",
     "zoomOnFeatures": "Zoom on all features",
     "zoomOnFeaturesTooltip": "Zoom on all the selected features",
     "zoomAuto": "Zoom auto",
