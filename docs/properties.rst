@@ -139,16 +139,11 @@ Propriétés
        * - baseLayer
          - Boolean
          - .. line-block::
-               Définir si la couche
-               doit être considérée
-               comme une couche de
-               base. Les couches de
-               base sont présentées
-               dans le "baselayer"
-               switcher dans le coin
-               inférieur gauche et
-               peuvent être exclues
-               visuellement de la
+               Définir si la couche doit être considérée
+               comme une couche de base. Les couches de
+               base sont présentées dans le "baselayer"
+               switcher dans le coin inférieur gauche et
+               peuvent être exclues visuellement de la
                table des matières.
          - .. line-block::
                true
@@ -157,19 +152,19 @@ Propriétés
        * - id
          - string
          - .. line-block::
-               Identifiant unique
-               de la couche à
-               l'échelle de
-               l'application.
-               Particulièrement
-               utile pour bâtir le
-               lien pour le partage
+               Identifiant unique de la couche à
+               l'échelle de l'application. Particulièrement
+               utile pour bâtir le lien pour le partage
                de cartes.
-               Attention: si vous définissez un id, la couche ajoutée par le catalogue ou par la recherche sera considérée par l'app. comme une couche différente, vous aurez donc 2 fois la même couche.
+               Attention: si vous définissez un id,
+               la couche ajoutée par le catalogue
+               ou par la recherche sera considérée par l'app.
+               comme une couche différente,
+               vous aurez donc 2 fois la même couche.
          -
          - uuid
        * - legendOptions
-         - `legendOptions`_
+         -  :ref:`legendOptions objet <igolegendoptions>`_ {}
          - .. line-block::
                Permet de définir des options sur la légende.
          -
@@ -177,62 +172,50 @@ Propriétés
        * - minResolution
          - Number
          - .. line-block::
-               Définir la résolution
-               à laquelle la couche
-               d'information arrête
-               de s'afficher.
+               Définir la résolution à laquelle la couche
+               d'information arrête de s'afficher.
 
-               Pour les **WMS**
-               récupérant certaines
-               propriétés du service,
-               cette valeur peut
+               Pour les **WMS** récupérant certaines
+               propriétés du service, cette valeur peut
                être récupérée.
          -
          -
        * - maxResolution
          - Number
          - .. line-block::
-               Définir la résolution
-               à laquelle la couche
-               d'information commence
-               à s'afficher.
-               Intéressant pour les
-               couches exigeantes à
-               récupérer à très petite
-               échelle (ex. 1: 5000000).
+               Définir la résolution à laquelle la couche
+               d'information commence à s'afficher.
+               Intéressant pour les couches exigeantes à
+               récupérer à très petite échelle (ex. 1: 5000000).
 
-               Pour les **WMS**
-               récupérant certaines
-               propriétés du service,
-               cette valeur peut
+               Pour les **WMS** récupérant certaines
+               propriétés du service, cette valeur peut
                être récupérée.
          -
          -
        * - metadata
          - Object{}
          - .. line-block::
-               Définir la source pour les metadonnées. Lien pour le bouton i de la couche -> 'i'.
-               Externe: true ira chercher les metadonnées inscrites dans la configuration du service.
+               Définir la source pour les metadonnées. Lien pour
+               le bouton i de la couche -> 'i'.
+               Externe: true ira chercher les metadonnées inscrites
+               dans la configuration du service.
          - {"extern": true}
          -
        * - opacity
          - Number
          - .. line-block::
-               Définir la
-               transparence de la couche.
+               Définir la transparence de la couche.
                0 = invisible
                1 = aucune transparence
-               Également controlable
-               par l'interface.
+               Également controlable par l'interface.
          - de 0.0 à 1.0
          - 1
        * - showInLayerList
          - Boolean
          - .. line-block::
-               Autoriser/Bloquer
-               la suppression de la
-               couche de la table
-               des matières.
+               Autoriser/Bloquer la suppression de la
+               couche de la table des matières.
          - true false
          - true
        * - **sourceOptions***
@@ -250,28 +233,22 @@ Propriétés
                - `WMS`_
                - `WMTS`_
          - .. line-block::
-               Diverses sources de
-               données sont supportées.
-               Référez-vous aux
-               section suivantes pour
+               Diverses sources de données sont supportées.
+               Référez-vous aux section suivantes pour
                plus de détails.
          -
          -
        * - **title***
          - String
          - .. line-block::
-               Titre de la couche
-               tel qu'affiché dans
-               la table des matières
-               et dans les résultats
+               Titre de la couche tel qu'affiché dans
+               la table des matières et dans les résultats
                d'interrogations.
 
-               Pour les **WMS** et
-               **WMTS** récupérant
-               certaines propriétés
-               du service, cette
-               valeur peut y être
-               récupérée et n'est plus obligatoire à ce moment.
+               Pour les **WMS** et **WMTS** récupérant
+               certaines propriétés du service, cette
+               valeur peut y être récupérée et n'est plus obligatoire
+               à ce moment.
          -
          -
        * - visible
@@ -285,15 +262,11 @@ Propriétés
        * - zIndex
          - Number
          - .. line-block::
-               Ordre dans la table
-               des matières. Plus
-               le nombre est élevé,
-               plus la couche apparait
-               au haut de la table
-               des matières. Si absent,
-               l'ordre dans le
-               contexte.json fait office
-               d'ordonnancement.
+               Ordre dans la table des matières. Plus
+               le nombre est élevé, plus la couche
+               apparait au haut de la table
+               des matières. Si absent, l'ordre dans le
+               contexte.json fait office d'ordonnancement.
          -
          -
 
@@ -305,8 +278,10 @@ Liens
 
 
 
+.. _igolegendOptions:
 
-Propriétés de legendOptions
+Propriétés de legendOptions objet
+=============================
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -344,11 +319,20 @@ Propriétés de legendOptions
        * - stylesAvailable
          - ItemStyleOptions[]
          - Permet de modifier les noms des styles provenant du service web
-         - Ex:  "stylesAvailable": [
+         - .. line-block::
+               Ex:  "stylesAvailable": [
                   { "name": "raster", "title": "pixel" },
                   { "name": "Contour", "title": "aucune couleur" }
                 ]
 
+         -
+       * - url
+         - String
+         -  .. line-block::
+            URL du getLegend
+            Exemple: "/ws/mffpecofor.fcgi?&REQUEST=GetLegendGraphic&SERVICE=WMS&FORMAT=image/png&
+            SLD_VERSION=1.1.0&VERSION=1.3.0&LAYER=lidar_index_extraction"
+         -
          -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
@@ -387,8 +371,8 @@ Exemples
                   "attributions": "Droits d'auteurs que vous désirez afficher avec votre couche.",
                   "crossOrigin": "anonymous"
             }
-            
-            
+
+
 ArcGis
 ===============
 
@@ -421,11 +405,11 @@ Exemples
 
       .. code:: json
             :force:
-            
+
             "sourceOptions": {
                   "type": "osm"
             }
-            
+
 
 Propriétés
 
@@ -467,13 +451,13 @@ Exemples
 
       .. code:: json
             :force:
-            
+
             "sourceOptions": {
                   "url": "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson",
                   "type": "cluster",
                   "distance": 50
             }
-                       
+
 
 Propriétés
 
@@ -505,16 +489,14 @@ Propriétés
        * - excludeAttribute
          - Array.<String>
          - .. line-block::
-               Liste des attributs exclus du
-               getInfo lorsque l'application
+               Liste des attributs exclus du getInfo lorsque l'application
                est en ligne.
          -
          -
        * - excludeAttributeOffline
          - Array.<String>
          - .. line-block::
-               Liste des attributs exclus du
-               getInfo lorsque l'application
+               Liste des attributs exclus du getInfo lorsque l'application
                est hors-ligne.
          -
          -
@@ -542,7 +524,7 @@ Exemples
 
       .. code:: json
             :force:
-            
+
             "sourceOptions": {
                   "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
                   "type": "xyz"
@@ -573,15 +555,12 @@ Propriétés
        * - **url***
          - String
          - .. line-block::
-               L'URL du service de données tuilées
-               en spécifiant la position
-               des tuiles en déclarant les
-               balises de remplacement:
+               L'URL du service de données tuilées en spécifiant la position
+               des tuiles en déclarant les balises de remplacement:
                   - {x}
                   - {-y}
                   - {z}
-               X et Y représentent la
-               position de la tuile appelée
+               X et Y représentent la position de la tuile appelée
                tandis que le Z, le zoom.
          -
          -
@@ -604,12 +583,12 @@ Exemples
 
       .. code:: json
             :force:
-            
+
             "sourceOptions": {
                   "type": "mvt",
                   "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_sous_route_res_inv_act&map.imagetype=mvt"
             }
-            
+
 
 Propriétés
 
@@ -635,43 +614,36 @@ Propriétés
        * - **url***
          - String
          - .. line-block::
-               L'URL du service de données tuilées
-               en spécifiant la position
-               des tuiles en déclarant les
-               balises de remplacement:
+               L'URL du service de données tuilées en spécifiant la position
+               des tuiles en déclarant les balises de remplacement:
                   - {x}
                   - {-y}
                   - {z}
-               X et Y représentent la
-               position de la tuile appelée
+               X et Y représentent la position de la tuile appelée
                tandis que le Z, le zoom.
          -
          -
        * - excludeAttribute
          - Array.<String>
          - .. line-block::
-               Liste des attributs exclus du
-               getInfo lorsque l'application
+               Liste des attributs exclus du getInfo lorsque l'application
                est en ligne.
          -
          -
        * - excludeAttributeOffline
          - Array.<String>
          - .. line-block::
-               Liste des attributs exclus du
-               getInfo lorsque l'application
+               Liste des attributs exclus du getInfo lorsque l'application
                est hors-ligne.
          -
          -
        * - featureClass
          - String
          - .. line-block::
-               Définir cette option en tant que
-               'feature' pour obtenir une prise
-               en charge complète de l'édition
+               Définir cette option en tant que 'feature' pour obtenir
+               une prise en charge complète de l'édition
                et de la géométrie des tuiles.
-               Cette option diminue les performances
-               de rendu des tuiles.
+               Cette option diminue les performances de rendu des tuiles.
 
                Ne pas utiliser cette option pour
                optimiser le rendu des tuiles.
@@ -720,7 +692,7 @@ Propriétés
        * - **onmessage***
          - String
          - .. line-block::
-                  Action déclenchée lors de la réception 
+                  Action déclenchée lors de la réception
                   de la donnée par le websocket
          - update | delete | add
          - add
@@ -748,7 +720,7 @@ Exemple
             :force:
 
             {
-                  
+
                   "title": "Points temps réel",
                   "sourceOptions": {
                         "type": "websocket",
@@ -787,7 +759,7 @@ Exemples
                         }
                   }
             }
-            
+
 
 WMS
 ===============
@@ -1150,17 +1122,23 @@ Options de sources avancées
 Configuration filtre temporel WMS-T (timeFilter)
 ================================================
 
+La configuration du filtre temporel doit être configurée dans sourceOptions {}
 Exemples
 
         .. code:: json
 
             {
-                  "min": "1890",
-                  "max": "2019",
-                  "style": "calendar",
-                  "range": true,
-                  "step": 63072000000,
-                  "type": "year"
+              "sourceOptions": {
+                  "timeFilterable": true,
+                  "timeFilter": {
+                          "min": "1890",
+                          "max": "2019",
+                          "style": "calendar",
+                          "range": true,
+                          "step": 63072000000,
+                          "type": "year"
+                    }
+              }
             }
 
 Propriétés de l'objet timeFilter
@@ -1182,12 +1160,16 @@ Propriétés de l'objet timeFilter
        * - min
          - String
          - Periode de temps minimum.
-         - En fonction du type, peut être une année, une date ou une heure.
+         - .. line-block::
+            En fonction du type, peut être une année, une date ou une heure.
+            NB: Si la valeur est absente, le système appliquera ce qui est définit dans le service.
          -
        * - max
          - String
          - Periode de temps maximum.
-         - En fonction du type, peut être une année, une date ou une heure.
+         - .. line-block::
+            En fonction du type, peut être une année, une date ou une heure.
+            NB: Si la valeur est absente, le système appliquera ce qui est définit dans le service.
          -
        * - range
          - Boolean
@@ -1440,7 +1422,7 @@ Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
             }
 
 Exemple - Filtre temporel avec minimum, maximum et pas de temps.
-      
+
       .. code:: json
 
               {
@@ -1730,7 +1712,7 @@ Propriétés de l'objet filter de type **During**
          - Valeur **maxDate** de la couche
        * - step
          - String
-         - Pas de temps défini selon la norme ISO-8601 
+         - Pas de temps défini selon la norme ISO-8601
          - Voir `wiki <https://fr.wikipedia.org/wiki/ISO_8601#Dur%C3%A9e>`_
          - 60000 millisecondes
        * - restrictedToStep
@@ -1948,7 +1930,7 @@ Exemples
 
     .. code:: json
       :force:
-      
+
         "cadastre": {
             "searchUrl": "https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?"
         }
@@ -2048,7 +2030,7 @@ Exemples
 
       .. code:: json
             :force:
-            
+
             "icherche": {
                   "title":"ICherche",
                   "showInPointerSummary": true,
@@ -2057,7 +2039,7 @@ Exemples
                         "limit": "8"
                   }
             }
-            
+
 
 Propriétés
 
@@ -2117,7 +2099,7 @@ Exemples
                         "bufffer": 12
                   }
             }
-                  
+
 
 Propriétés
 
@@ -2166,7 +2148,7 @@ Exemples
 
       .. code:: json
             :force:
-             
+
             "ilayer": {
                   "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche/layers",
                         "params": {
@@ -2178,7 +2160,7 @@ Exemples
                         }
                   }
             }
-      
+
 
 Propriétés
 
@@ -2234,14 +2216,14 @@ Exemples
 
       .. code:: json
             :force:
-            
+
             "ilayer": {
                   "searchUrl": "https://nominatim.openstreetmap.org/search",
                   "params": {
                         "limit": 15
                   }
             }
-            
+
 
 Propriétés
 
@@ -2300,7 +2282,7 @@ Exemples
 
       .. code:: json
             :force:
-            
+
             "storedqueries": {
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "rtss",
@@ -2310,7 +2292,7 @@ Exemples
                   ],
                   "resultTitle": "etiquette"
             }
-            
+
 
 Propriétés
 
@@ -2405,7 +2387,7 @@ Exemples
                   "latField": "lat",
                   "resultTitle": "nom_unite"
             }
-      
+
 
 Propriétés
 
