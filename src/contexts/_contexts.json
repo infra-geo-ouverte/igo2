@@ -26,5 +26,9 @@
   {
     "uri": "testExport",
     "title": "Test export"
+  },
+  {
+    "uri": "variousFormats",
+    "title": "Divers format à titre d'exemple"
   }
 ]

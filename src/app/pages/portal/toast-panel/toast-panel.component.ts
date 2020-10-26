@@ -10,7 +10,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { debounceTime, map, tap } from 'rxjs/operators';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 import olFeature from 'ol/Feature';
 import olPoint from 'ol/geom/Point';
@@ -32,7 +32,9 @@ import {
   featuresAreTooDeepInView,
   featureFromOl,
   getMarkerStyle,
-  getSelectedMarkerStyle
+  getSelectedMarkerStyle,
+  featuresAreOutOfView,
+  computeOlFeaturesExtent
 } from '@igo2/geo';
 import {
   Media,
@@ -137,6 +139,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   private multiple$ = new BehaviorSubject(false);
   private isResultSelected$ = new BehaviorSubject(false);
+  public isSelectedResultOutOfView$ = new BehaviorSubject(false);
+  private isSelectedResultOutOfView$$: Subscription;
   private initialized = true;
 
   private format = new olFormatGeoJSON();
@@ -231,10 +235,30 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
   }
 
+  private monitorResultOutOfView() {
+    this.isSelectedResultOutOfView$$ = combineLatest([
+      this.map.viewController.state$,
+      this.resultSelected$
+    ])
+    .pipe(debounceTime(100))
+    .subscribe((bunch) => {
+      const selectedResult = bunch[1];
+      if (!selectedResult) {
+        this.isSelectedResultOutOfView$.next(false);
+        return;
+      }
+      const selectedOlFeature = featureToOl(selectedResult.data, this.map.projection);
+      const selectedOlFeatureExtent = computeOlFeaturesExtent(this.map, [selectedOlFeature]);
+      this.isSelectedResultOutOfView$.next(featuresAreOutOfView(this.map, selectedOlFeatureExtent));
+    });
+  }
+
+
   ngOnInit() {
     this.store.entities$.subscribe(() => {
       this.initialized = true;
     });
+    this.monitorResultOutOfView();
 
     let latestResult;
     let trigger;
@@ -370,6 +394,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.resultOrResolution$$) {
       this.resultOrResolution$$.unsubscribe();
+    }
+    if (this.isSelectedResultOutOfView$$) {
+      this.isSelectedResultOutOfView$$.unsubscribe();
     }
   }
 
