@@ -113,17 +113,33 @@
     </igo-workspace-selector>
 
     <ng-container *ngIf="selectedWorkspace$ | async as workspace">
-      <igo-actionbar
-        *ngIf="workspace.actionStore"
-        [store]="workspace.actionStore"
-        [withIcon]="true"
-        [withTitle]="actionbarWithTitle"
-        [horizontal]="true"
-        [withToggleButton]="actionbarMode === 'overlay'"
-        [mode]="actionbarMode">
-      </igo-actionbar>
+      <button
+        mat-icon-button
+        [color]="workspace.layer.visible ? 'primary' : 'default'"
+        collapsibleButton
+        tooltip-position="below"
+        matTooltipShowDelay="500"
+        [matTooltip]="workspace.layer.visible ?
+                      ('igo.geo.layer.hideLayer' | translate) :
+                      ('igo.geo.layer.showLayer' | translate)"
+        (click)="workspace.layer.visible = !workspace.layer.visible">
+        <mat-icon
+          [ngClass]="{disabled: !(workspace.inResolutionRange$ | async)}"
+          [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'">
+        </mat-icon>
+    </button>
+    <igo-actionbar
+      *ngIf="workspace.actionStore"
+      [store]="workspace.actionStore"
+      [withIcon]="true"
+      [withTitle]="actionbarWithTitle"
+      [horizontal]="true"
+      [withToggleButton]="actionbarMode === 'overlay'"
+      [mode]="actionbarMode">
+    </igo-actionbar>
       <div class="spacer"></div>
       <igo-entity-table-paginator
+      *ngIf="workspaceVisibility()"
         [store]="workspace.entityStore"
         [entitySortChange$]="workspaceEntitySortChange$"
         [paginatorOptions]="paginatorOptions"
@@ -135,12 +151,13 @@
   <ng-container *ngIf="selectedWorkspace$ | async as workspace">
     <igo-entity-table
       [paginator]="workspacePaginator"
-      *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate"
+      *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate && workspaceVisibility()"
       [store]="workspace.entityStore"
       (entitySortChange)="entitySortChange()"
       (entitySelectChange)="entitySelectChange($event)"
       [template]="workspace.meta.tableTemplate">
     </igo-entity-table>
+    <span class="mat-typography">{{workspaceNotAvailableMessage | translate}}</span>
   </ng-container>
 
 </app-expansion-panel>

@@ -7,8 +7,8 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject } from 'rxjs';
-import { debounceTime, take, pairwise } from 'rxjs/operators';
+import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
+import { debounceTime, take, pairwise, skipWhile, mergeMap, map, concatMap, tap } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
@@ -60,7 +60,9 @@ import {
   handleFileImportError,
   handleFileImportSuccess,
   featureFromOl,
-  QueryService
+  QueryService,
+  WfsWorkspace,
+  FeatureWorkspace
 } from '@igo2/geo';
 
 import {
@@ -107,6 +109,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasFeatureEmphasisOnSelection: Boolean = false;
+  public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
   public workspaceEntitySortChange$: BehaviorSubject<
     boolean
@@ -365,7 +368,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.updateMapBrowserClass();
     });
 
-    this.workspaceState.workspace$.subscribe((activeWks) => {
+    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
         this.expansionPanelExpanded = true;
@@ -409,6 +412,21 @@ export class PortalComponent implements OnInit, OnDestroy {
       };
     }
   }
+
+  workspaceVisibility(): boolean {
+    const wks = (this.selectedWorkspace$.value as WfsWorkspace | FeatureWorkspace);
+    if (wks.inResolutionRange$.value) {
+      if (wks.entityStore.empty$.value && !wks.layer.visible) {
+        this.workspaceNotAvailableMessage = 'workspace.disabled.visible';
+      } else {
+        this.workspaceNotAvailableMessage = '';
+      }
+    } else {
+      this.workspaceNotAvailableMessage = 'workspace.disabled.resolution';
+    }
+    return wks.inResolutionRange$.value;
+  }
+
 
   paginatorChange(matPaginator: MatPaginator) {
     this.workspacePaginator = matPaginator;
@@ -659,6 +677,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         .map((f) => f.data as Feature)
     );
     this.searchStore.clear();
+    this.searchState.setSelectedResult(undefined);
   }
 
   private getQuerySearchSource(): SearchSource {
