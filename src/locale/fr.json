@@ -16,6 +16,7 @@
     "backToList": "Retourner à la liste",
     "zoomOnFeature": "Zoom sur l'élément",
     "zoomOnFeatureTooltip": "Zoomer sur l'élément sélectionné ( raccouci clavier = z )",
+    "zoomOnFeatureTooltipOutOfView": "L'élément est hors de la vue. Zoomer sur l'élément sélectionné ( raccouci clavier = z )",
     "zoomOnFeatures": "Zoom sur les éléments",
     "zoomOnFeaturesTooltip": "Zoomer sur les éléments sélectionnés",
     "zoomAuto": "Zoom auto",
