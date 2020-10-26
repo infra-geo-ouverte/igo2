@@ -5,20 +5,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { IgoPanelModule, IgoStopPropagationModule, IgoActionModule } from '@igo2/common';
+import { IgoPanelModule, IgoStopPropagationModule, IgoActionModule, IgoMatBadgeIconModule } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
 import { IgoFeatureModule, IgoSearchResultsModule } from '@igo2/geo';
 
 import { ToastPanelComponent } from './toast-panel.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatBadgeModule,
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
     MatMenuModule,
     IgoLanguageModule,
+    IgoMatBadgeIconModule,
     IgoPanelModule,
     IgoStopPropagationModule,
     IgoActionModule,
