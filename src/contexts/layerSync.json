@@ -4,7 +4,7 @@
     "base": "_base",
     "layers": [
       {        
-        "title": "WMS TimeFilter Destination",
+        "title": "TimeFilter WMS Destination",
         "id": "TIMEFILTERDestination",
         "linkedLayers": {
           "linkId": "wmsTimeFilterDest"
@@ -25,7 +25,7 @@
         }
       },
       {        
-        "title": "WMS TimeFilter Source",
+        "title": "TimeFilter WMS Source",
         "id": "TIMEFILTERSource",
         "linkedLayers": {
           "linkId": "wmsTimeFilterSrc",
@@ -59,17 +59,20 @@
       },
 
       {
-        "title": "WMS OgcFilters Destination",
+        "title": "OgcFilters WMS Destination",
         "visible": false,
         "id": "DestinationWMSOGCFILTERS",
         "linkedLayers": {
           "linkId": "wmsOgcFiltersDest"
         },
+        "workspace": {
+          "enabled": false
+        },
         "sourceOptions": {
           "queryable": true,
           "type": "wms",
-          "url": "/swtq",
-          "urlWfs": "/swtq",
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+          "urlWfs": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
           "params": {
             "layers": "radars_photos"
           },
@@ -84,7 +87,7 @@
         }
       },
       {
-        "title": "WMS OgcFilters Source",
+        "title": "OgcFilters WMS Source",
         "id": "wmsOgcFiltersSrc",
         "minResolution": 0,
         "maxResolution": 400,
@@ -97,11 +100,14 @@
             "properties": ["zIndex", "opacity","visible","ogcFilters","minResolution", "maxResolution" ]
           }]
         },
+        "workspace": {
+          "enabled": false
+        },
         "sourceOptions": {
           "queryable": true,
           "type": "wms",
-          "url": "/swtq",
-          "urlWfs": "/swtq",
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+          "urlWfs": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
           "params": {
             "layers": "radars_photos"
           },
@@ -226,9 +232,12 @@
         }
       },
       {
-        "title": "WFS OgcFilters Destination",
+        "title": "OgcFilters WFS Destination",
         "linkedLayers": {
           "linkId": "wfsOgcFilterDest"
+        },
+        "workspace": {
+          "enabled": false
         },
         "showInLayerList": true,
         "visible": true,
@@ -242,7 +251,7 @@
             "outputFormatDownload": "shp"
           },
           "type": "wfs",
-          "url": "/swtq"
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq"
         }
       }
     ],
