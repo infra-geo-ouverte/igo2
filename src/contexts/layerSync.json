@@ -65,9 +65,6 @@
         "linkedLayers": {
           "linkId": "wmsOgcFiltersDest"
         },
-        "workspace": {
-          "enabled": false
-        },
         "sourceOptions": {
           "queryable": true,
           "type": "wms",
@@ -99,9 +96,6 @@
             "linkedIds": ["wmsOgcFiltersDest","wfsOgcFilterDest"],
             "properties": ["zIndex", "opacity","visible","ogcFilters","minResolution", "maxResolution" ]
           }]
-        },
-        "workspace": {
-          "enabled": false
         },
         "sourceOptions": {
           "queryable": true,
@@ -235,9 +229,6 @@
         "title": "OgcFilters WFS Destination",
         "linkedLayers": {
           "linkId": "wfsOgcFilterDest"
-        },
-        "workspace": {
-          "enabled": false
         },
         "showInLayerList": true,
         "visible": true,
