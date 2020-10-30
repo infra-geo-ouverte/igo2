@@ -58,6 +58,7 @@
     "@igo2/integration": "~1.5.1",
     "@igo2/utils": "~1.5.1",
     "@mat-datetimepicker/core": "^4.1.0",
+    "@turf/buffer": "^5.1.5",
     "@turf/point-on-feature": "^5.1.5",
     "angular-shepherd": "^0.7.0",
     "bowser": "^2.9.0",
