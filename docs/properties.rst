@@ -1961,14 +1961,25 @@ Coordonnées
 
     .. line-block::
         Le service de recherches de coordonnées permet de se localiser sous diverses structures de coordonnées.
-            - Degré décimal
+            - Degré décimal (dd.ddd)
                 - lon, lat (-68.165547, 48.644546)
                 - lat, lon (48.644546, -68.165547)
+            - Degré minute seconde (dd mm ss)
+                - lon, lat (-68 9 56, 48 38 40)
+                - lat, lon (48 38 40, -68 9 56)
+            - Degré minute décimal (dd mm.mmmm)
+                - lon, lat (-68 9.56, 48 38.40)
+                - lat, lon (48 38.40, -68 9.567)
             - Projeté
-                - -7588141.73,6214750.96       (exemple en 3857)
-            - À compléter
+                - -7588141.73,6214750.96         (exemple en 3857)
+                - MTM-6 255760.176, 5389773.700  (exemple en MTM)
+                - UTM-19 561466.861, 5388278.862 (exemple en UTM)
+            - BELL
+                - Lat: 48 38 40N Long: 68 9 56W UNC:100 CONF:90
+            - Metre Metre (MM)
+                - -111594.63, 445854.74;32198 (exemple en 32198)
 
-        Le résultat de la recherche est la position du point, un lien vers Google Maps / Streetview.
+        Le résultat de la recherche est la position du point ainsi qu'un lien vers Google Maps / Streetview.
         Le service est disponible par défaut dans les applications.
 
 Exemples
