@@ -112,6 +112,15 @@
         "title": "interactiveTour.global.tool-choose-title",
         "text": "interactiveTour.global.tool-choose",
         "disableInteraction": true,
+        "onShow": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.igo-tool-container",
+        "title": "interactiveTour.global.tool-choose-title",
+        "text": "interactiveTour.global.tool-enter",
+        "disableInteraction": true,
         "beforeShow": {
           "action": "click",
           "element": "igo-actionbar-item:nth-child(3) mat-list-item"
@@ -121,6 +130,8 @@
         "element": "#homeButton",
         "title": "interactiveTour.global.menu-button-title",
         "text": "interactiveTour.global.home-button",
+        "disableInteraction": true,
+        "deleteAfterNext": false,
         "beforeShow": {
           "action": "click",
           "element": "igo-actionbar-item:nth-child(3) mat-list-item"
@@ -139,7 +150,8 @@
         "element": "igo-user-button",
         "title": "interactiveTour.global.user-title",
         "text": "interactiveTour.global.user-button",
-        "disabledInteraction": true
+        "disableInteraction": true,
+        "position": "top"
       },
       {
         "element": "igo-baselayers-switcher",
