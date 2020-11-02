@@ -6,12 +6,16 @@ import {
   ViewChild,
   ElementRef
 } from '@angular/core';
+import 'ol/ol.css';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, take, pairwise, skipWhile, mergeMap, map, concatMap, tap } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
+
+import {getRenderPixel} from 'ol/render';
+import SwipeCtrl from 'ol-ext/control/Swipe';
 
 import {
   MediaService,
@@ -62,7 +66,8 @@ import {
   featureFromOl,
   QueryService,
   WfsWorkspace,
-  FeatureWorkspace
+  FeatureWorkspace,
+  Layer
 } from '@igo2/geo';
 
 import {
@@ -144,6 +149,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     undefined
   );
   private menuButtonReverseColor = false;
+
+  public isMagnified: Boolean = false;
+  public magnifiedOrSwipeLayer: Layer;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
@@ -311,6 +319,21 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
 
     this.contextMenuStore.load([
+      {
+        id: 'ol-ext swipe',
+        title: 'ol-ext swipe',
+        handler: () => this.olswipe()
+      },
+      {
+        id: 'magnify',
+        title: 'magnify',
+        handler: () => this.magnify()
+      },
+      {
+        id: 'compare',
+        title: 'compare',
+        handler: () => this.compare()
+      },
       {
         id: 'coordinates',
         title: 'coordinates',
@@ -717,6 +740,150 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private openGoogleStreetView(coord: [number, number]) {
     window.open(GoogleLinks.getGoogleStreetViewLink(coord[0], coord[1]));
+  }
+
+  olswipe() {
+
+    this.magnifiedOrSwipeLayer = this.map.layers[2];
+
+    const mark = new SwipeCtrl();
+    this.map.ol.addControl(mark);
+    // Set stamen on left
+    // ctrl.addLayer(stamen);
+    // OSM on right
+    mark.addLayer(this.magnifiedOrSwipeLayer.ol, true);
+  }
+
+  magnify() {
+
+    this.magnifiedOrSwipeLayer = this.map.layers[2];
+    const container = document.getElementById(this.map.ol.getTarget());
+    let radius = 75;
+    document.addEventListener('keydown', (evt) => {
+      if (evt.which === 38) {
+        radius = Math.min(radius + 5, 150);
+        this.map.ol.render();
+        evt.preventDefault();
+      } else if (evt.which === 40) {
+        radius = Math.max(radius - 5, 25);
+        this.map.ol.render();
+        evt.preventDefault();
+      }
+    });
+
+    // get the pixel position with every move
+    let mousePosition = null;
+
+    container.addEventListener('mousemove', (event) => {
+      mousePosition = this.map.ol.getEventPixel(event);
+      this.map.ol.render();
+    });
+
+    container.addEventListener('mouseout', () => {
+      mousePosition = null;
+      this.map.ol.render();
+    });
+    if (this.isMagnified) {
+      this.magnifiedOrSwipeLayer.ol.un('postrender', (event) => this.magnifyLayer(event, mousePosition, radius));
+    } else {
+      this.magnifiedOrSwipeLayer.ol.on('postrender', (event) => this.magnifyLayer(event, mousePosition, radius));
+    }
+
+
+
+    this.isMagnified = !this.isMagnified;
+
+
+
+
+
+  }
+
+
+  magnifyLayer(event, mousePosition, radius) {
+    if (mousePosition) {
+      const pixel = getRenderPixel(event, mousePosition);
+      const offset = getRenderPixel(event, [
+        mousePosition[0] + radius,
+        mousePosition[1] ]);
+        const half = Math.sqrt(
+        Math.pow(offset[0] - pixel[0], 2) + Math.pow(offset[1] - pixel[1], 2)
+      );
+      const context = event.context;
+      const centerX = pixel[0];
+      const centerY = pixel[1];
+      const originX = centerX - half;
+      const originY = centerY - half;
+      const size = Math.round(2 * half + 1);
+      const sourceData = context.getImageData(originX, originY, size, size).data;
+      const dest = context.createImageData(size, size);
+      const destData = dest.data;
+      for (let j = 0; j < size; ++j) {
+        for (let i = 0; i < size; ++i) {
+          const dI = i - half;
+          const dJ = j - half;
+          const dist = Math.sqrt(dI * dI + dJ * dJ);
+          let sourceI = i;
+          let sourceJ = j;
+          if (dist < half) {
+            sourceI = Math.round(half + dI / 2);
+            sourceJ = Math.round(half + dJ / 2);
+          }
+          const destOffset = (j * size + i) * 4;
+          const sourceOffset = (sourceJ * size + sourceI) * 4;
+          destData[destOffset] = sourceData[sourceOffset];
+          destData[destOffset + 1] = sourceData[sourceOffset + 1];
+          destData[destOffset + 2] = sourceData[sourceOffset + 2];
+          destData[destOffset + 3] = sourceData[sourceOffset + 3];
+        }
+      }
+      context.beginPath();
+      context.arc(centerX, centerY, half, 0, 2 * Math.PI);
+      context.lineWidth = (3 * half) / radius;
+      context.strokeStyle = 'rgba(255,255,255,0.5)';
+      context.putImageData(dest, originX, originY);
+      context.stroke();
+      context.restore();
+    }
+  }
+
+  compare() {
+
+    this.magnifiedOrSwipeLayer = this.map.layers[2];
+    const swipe = document.getElementById('swipe');
+    this.magnifiedOrSwipeLayer.ol.on('prerender', (event) => {
+      const ctx = event.context;
+      const mapSize = this.map.ol.getSize();
+      const inputValue = parseInt((<HTMLInputElement>swipe).value, 10);
+      const width = mapSize[0] * (inputValue / 100);
+      const tl = getRenderPixel(event, [width, 0]);
+      const tr = getRenderPixel(event, [mapSize[0], 0]);
+      const bl = getRenderPixel(event, [width, mapSize[1]]);
+      const br = getRenderPixel(event, mapSize);
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(tl[0], tl[1]);
+      ctx.lineTo(bl[0], bl[1]);
+      ctx.lineTo(br[0], br[1]);
+      ctx.lineTo(tr[0], tr[1]);
+      ctx.closePath();
+      ctx.clip();
+    });
+
+    this.magnifiedOrSwipeLayer.ol.on('postrender', function (event) {
+      const ctx = event.context;
+      ctx.restore();
+    });
+
+    swipe.addEventListener(
+      'input',
+      () => {
+        this.map.ol.render();
+      },
+      false
+    );
+
+
   }
 
   searchCoordinate(coord: [number, number]) {
