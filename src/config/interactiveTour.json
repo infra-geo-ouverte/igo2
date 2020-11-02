@@ -423,7 +423,7 @@
 
   "contextManager": {
     "title": "interactiveTour.context.title",
-    "conditions": ["igo-context-item", ".add-context-button"],
+    "conditions": ["igo-context-item"],
     "position": "auto",
     "steps": [
       {
