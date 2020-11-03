@@ -164,11 +164,19 @@ Propriétés
          -
          - uuid
        * - legendOptions
-         -  objet `ArcGis`_
+         -  objet `LegendOptions`_
          - .. line-block::
                Permet de définir des options sur la légende.
          -
          -
+       * - workspace
+         -  objet `WorkspaceOptions`_
+         - .. line-block::
+               Permet de définir si une source possèdera une table
+               d'attribut dans l'application ainsi 
+               que ses propriétés associées.
+         - workspace: { enabled: true, minResolution: 0, maxResolution: 400}
+         - Voir dans l'objet `WorkspaceOptions`_
        * - minResolution
          - Number
          - .. line-block::
@@ -219,7 +227,7 @@ Propriétés
          - true false
          - true
        * - **sourceOptions***
-         -  `sourceOptions`_
+         -  `SourceOptions`_
          - .. line-block::
                Diverses sources de données sont supportées.
                Référez-vous aux section suivantes pour
@@ -266,7 +274,7 @@ Liens
 
 
 
-legendOptions
+LegendOptions
 ===============
 
     .. line-block::
@@ -353,7 +361,7 @@ Liens
 
 
 
-sourceOptions
+SourceOptions
 ===============
 
     .. line-block::
@@ -373,6 +381,75 @@ sourceOptions
         - `WFS`_
         - `WMS`_
         - `WMTS`_
+
+WorkspaceOptions
+===============
+
+    .. line-block::
+        Permet de définir si une source possèdera une table
+        d'attribut dans l'application ainsi 
+        que ses propriétés associées. 
+
+Exemples
+
+      .. code:: json
+            :force:
+
+            "workspace": {
+                  "enabled": true,
+                  "minResolution": 0
+                  "maxResolution": 400
+            },
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - enabled
+         - Boolean
+         - .. line-block::
+               Définir si la couche aura ou non une table d'attributs.
+         - .. line-block::
+               true | false
+         - .. line-block::
+               Pour les sources vectorielles, true par défault.
+               Pour les wms avec des propriétés 
+               WFS associées, false par défault
+       * - minResolution
+         - Number
+         - .. line-block::
+               Indique la résolution minimale (grande échelle, très zoomé) 
+               à laquelle la table d'attribut pourra faire apparaitre des 
+               enregistrements.
+         - 0 à Infinity ou absent
+         - 
+       * - maxResolution
+         - Number
+         - .. line-block::
+               Indique la résolution maximale (petite échelle, peu zoomé) 
+               à laquelle la table d'attribut pourra faire apparaitre des 
+               enregistrements.
+         - 0 à Infinity ou absent
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
+
 
 
 
@@ -787,8 +864,7 @@ Exemples
                               "fieldNameGeometry": "geometry",
                               "maxFeatures": 10000,
                               "version": "2.0.0",
-                              "outputFormat": "geojson_utf8",
-                              "outputFormatDownload": "shp"
+                              "outputFormat": "geojson_utf8"
                         }
                   }
             }
