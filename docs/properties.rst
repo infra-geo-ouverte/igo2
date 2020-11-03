@@ -164,7 +164,7 @@ Propriétés
          -
          - uuid
        * - legendOptions
-         -  :ref:`legendOptions objet <igolegendoptions>`_ {}
+         -  objet `ArcGis`_
          - .. line-block::
                Permet de définir des options sur la légende.
          -
@@ -219,19 +219,7 @@ Propriétés
          - true false
          - true
        * - **sourceOptions***
-         - .. line-block::
-               - `ArcGis`_
-               - `Tile ArcGis`_
-               - `Carto`_
-               - `OSM`_
-               - `Cluster`_
-               - `TMS (xyz)`_
-               - `Vector Tiles`_
-               - `Vecteur`_
-               - `Websocket`_
-               - `WFS`_
-               - `WMS`_
-               - `WMTS`_
+         -  `sourceOptions`_
          - .. line-block::
                Diverses sources de données sont supportées.
                Référez-vous aux section suivantes pour
@@ -278,10 +266,29 @@ Liens
 
 
 
-.. _igolegendOptions:
+legendOptions
+===============
 
-Propriétés de legendOptions objet
-=============================
+    .. line-block::
+        Propriétés de l'ojet legendOptions.
+        Permet de controler le rendu de légende. 
+
+Exemples
+
+      .. code:: json
+            :force:
+
+            "legendOptions": {
+                  "collapsed": false,
+                  "display": true,
+                  "url": "https://v.seloger.com/s/width/1144/visuels/0/m/l/4/0ml42xbt1n3itaboek3qec5dtskdgw6nlscu7j69k.jpg",
+                  "stylesAvailable": [
+                        { "name": "rain", "title": "Pluie" },
+                        { "name": "raster", "title": "Défaut" }
+                        ] 
+            }
+
+Propriétés
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -318,7 +325,10 @@ Propriétés de legendOptions objet
          -
        * - stylesAvailable
          - ItemStyleOptions[]
-         - Permet de modifier les noms des styles provenant du service web
+         - .. line-block::
+               Permet de modifier/contrôler la liste des styles provenant du 
+               service web. Correspond aux styles disponible pour le layer 
+               WMS tel que décrit dans le GetCapabilities WMS. 
          - .. line-block::
                Ex:  "stylesAvailable": [
                   { "name": "raster", "title": "pixel" },
@@ -340,6 +350,29 @@ Propriétés de legendOptions objet
 Liens
 
     - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
+
+
+
+sourceOptions
+===============
+
+    .. line-block::
+        Diverses sources de données sont supportées.
+        Référez-vous aux section suivantes pour
+        plus de détails.
+
+        - `ArcGis`_
+        - `Tile ArcGis`_
+        - `Carto`_
+        - `OSM`_
+        - `Cluster`_
+        - `TMS (xyz)`_
+        - `Vector Tiles`_
+        - `Vecteur`_
+        - `Websocket`_
+        - `WFS`_
+        - `WMS`_
+        - `WMTS`_
 
 
 
