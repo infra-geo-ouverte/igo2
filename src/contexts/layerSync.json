@@ -78,8 +78,7 @@
             "fieldNameGeometry": "geometry",
             "maxFeatures": 10000,
             "version": "1.1.0",
-            "outputFormat": "geojson",
-            "outputFormatDownload": "shp"
+            "outputFormat": "geojson"
           }
         }
       },
@@ -220,8 +219,7 @@
             "fieldNameGeometry": "geometry",
             "maxFeatures": 10000,
             "version": "1.1.0",
-            "outputFormat": "geojson",
-            "outputFormatDownload": "shp"
+            "outputFormat": "geojson"
           }
         }
       },
@@ -238,8 +236,7 @@
             "featureTypes": "radars_photos",
             "fieldNameGeometry": "geometry",
             "maxFeatures": 10000,
-            "version": "2.0.0",
-            "outputFormatDownload": "shp"
+            "version": "2.0.0"
           },
           "type": "wfs",
           "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq"
