@@ -4,6 +4,38 @@
     "base": "_base",
     "layers": [
       {
+        "title": "WMS with underlying WFS params",
+        "visible": true,
+        "maxResolution": 1200,
+        "workspace": {
+          "enabled": true,
+          "maxResolution": 400
+        },
+        "sourceOptions": {
+          "queryable": true,
+          "queryTitle": "nometablis",
+          "type": "wms",
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+          "urlWfs": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+          "params": {
+            "layers": "etablissement_mtq"
+          },
+          "paramsWFS": {
+            "featureTypes": "etablissement_mtq",
+            "fieldNameGeometry": "geometry",
+            "maxFeatures": 5000,
+            "outputFormat": "geojson",
+            "outputFormatDownload": "shp"
+          },
+          "ogcFilters": {
+            "enabled": true,
+            "editable": true
+          }
+
+        }
+      },
+
+      {
         "title": "Vector dataSource",
         "visible": true,
         "sourceOptions": {
