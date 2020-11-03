@@ -227,7 +227,7 @@ Propriétés
          - true false
          - true
        * - **sourceOptions***
-         -  `SourceOptions`_
+         -  objet `SourceOptions`_
          - .. line-block::
                Diverses sources de données sont supportées.
                Référez-vous aux section suivantes pour
@@ -283,8 +283,8 @@ LegendOptions
 
 Exemples
 
+
       .. code:: json
-            :force:
 
             "legendOptions": {
                   "collapsed": false,
@@ -346,10 +346,10 @@ Propriétés
          -
        * - url
          - String
-         -  .. line-block::
-            URL du getLegend
-            Exemple: "/ws/mffpecofor.fcgi?&REQUEST=GetLegendGraphic&SERVICE=WMS&FORMAT=image/png&
-            SLD_VERSION=1.1.0&VERSION=1.3.0&LAYER=lidar_index_extraction"
+         - .. line-block::
+               URL imposé pour l'appel de la légende.
+               Exemple: "/ws/mffpecofor.fcgi?&REQUEST=GetLegendGraphic&SERVICE=WMS&FORMAT=image/png&
+               SLD_VERSION=1.1.0&VERSION=1.3.0&LAYER=lidar_index_extraction"
          -
          -
 
@@ -393,7 +393,6 @@ WorkspaceOptions
 Exemples
 
       .. code:: json
-            :force:
 
             "workspace": {
                   "enabled": true,
