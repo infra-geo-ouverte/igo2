@@ -474,7 +474,6 @@ Les propriétés communes aux sources de données:
 Exemples
 
       .. code:: json
-            :force:
 
             "sourceOptions": {
                   "attributions": "Droits d'auteurs que vous désirez afficher avec votre couche.",
@@ -513,7 +512,6 @@ OSM
 Exemples
 
       .. code:: json
-            :force:
 
             "sourceOptions": {
                   "type": "osm"
@@ -559,7 +557,6 @@ Cluster
 Exemples
 
       .. code:: json
-            :force:
 
             "sourceOptions": {
                   "url": "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson",
@@ -632,7 +629,6 @@ TMS (xyz)
 Exemples
 
       .. code:: json
-            :force:
 
             "sourceOptions": {
                   "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
@@ -691,7 +687,6 @@ Vector Tiles
 Exemples
 
       .. code:: json
-            :force:
 
             "sourceOptions": {
                   "type": "mvt",
@@ -826,7 +821,6 @@ Propriétés
 
 Exemple
       .. code:: json
-            :force:
 
             {
 
@@ -1148,7 +1142,6 @@ WMTS
 Exemples
 
         .. code:: json
-            :force:
 
             "sourceOptions": {
                 "type": "wmts",
@@ -2093,7 +2086,6 @@ Coordonnées
 Exemples
 
       .. code:: json
-            :force:
 
             "coordinatesreverse": {
                   "order": 1,
@@ -2148,7 +2140,6 @@ iCherche
 Exemples
 
       .. code:: json
-            :force:
 
             "icherche": {
                   "title":"ICherche",
@@ -2210,7 +2201,6 @@ iCherche Reverse
 Exemples
 
       .. code:: json
-            :force:
 
             "icherchereverse": {
                   "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/territoires",
@@ -2266,7 +2256,6 @@ iLayer
 Exemples
 
       .. code:: json
-            :force:
 
             "ilayer": {
                   "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche/layers",
@@ -2334,7 +2323,6 @@ Nominatim
 Exemples
 
       .. code:: json
-            :force:
 
             "ilayer": {
                   "searchUrl": "https://nominatim.openstreetmap.org/search",
@@ -2400,7 +2388,6 @@ StoredQueries
 Exemples
 
       .. code:: json
-            :force:
 
             "storedqueries": {
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
@@ -2497,7 +2484,6 @@ StoredQueries Reverse
 Exemples
 
       .. code:: json
-            :force:
 
             "storedqueriesreverse": {
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
@@ -2615,7 +2601,6 @@ about
 Exemples
 
         .. code:: json
-            :force:
 
             {
                 "name": "about",
