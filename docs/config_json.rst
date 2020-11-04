@@ -343,10 +343,11 @@ Exemples
                   {
                       "id": "Arcgis Rest",
                       "title": "Arcgis Rest",
-                      "url": "https://sampleserver1.arcgisonline.com//ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                      "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
                       "type": "arcgisrest",
                       "sourceOptions": {
                           "queryable": true
+                          "idColumn": "OBJECTID"
                       }
                   },
                   {

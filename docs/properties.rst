@@ -682,7 +682,8 @@ Exemples
                     "layer": "2",
                     "queryable": true,
                     "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
-                    "queryFormat": "esrijson"
+                    "queryFormat": "esrijson",
+                    "idColumn": "OBJECTID"
                 }
             }
 
@@ -704,7 +705,8 @@ Exemples
                     "layer": "1",
                     "queryable": true,
                     "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
-                    "queryFormat": "esrijson"
+                    "queryFormat": "esrijson",
+                    "idColumn": "OBJECTID"
                 }
             }
 
