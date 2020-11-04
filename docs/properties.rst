@@ -205,11 +205,38 @@ Propriétés
          - Object{}
          - .. line-block::
                Définir la source pour les metadonnées. Lien pour
-               le bouton i de la couche -> 'i'.
-               Externe: true ira chercher les metadonnées inscrites
-               dans la configuration du service.
-         - {"extern": true}
+               le bouton i de la couche -> 'i'. Si la balise url 
+               est configurée, elle permet de définir un url au choix.
+               Pour les WMS, si la couche wms a une balise dataUrl et que 
+               la source wms à l'option optionsFromCapabilities : true, 
+               l'application ira récupérer le lien dans le service WMS.
+               La valeur pilotée à préséance sur la valeur récupérée du service.
+               Les propriété permises sont:
+                   - url
+                   - extern
+                   - keyword = liste de mot clef. Sert à la recherche de couches dans la liste de couches
+                   - abstract = résumé de la couche. Sert au tooltip ici bas.    
+         - {url: "http://www.igouverte.org/", extern: true}
          -
+       * - tooltip
+         - Object{}
+         - .. line-block::
+               Permet de définir le type de tooltip à afficher sur survol de la couche
+               dans la table des matières (liste de couche).    
+               Les divers types sont:
+                   - title
+                   - abstract
+                   - custom
+               Le type title présente uniquement le titre de la couche
+               Le type abstract récupère le "abstract" de la balise metadata.
+               Le type custom récupère le texte de la balise text
+         - .. line-block::
+               {  type: 'title'
+                    ou  'abstract'
+                    ou  'custom', 
+                  text: 'text à afficher si le type est custom' 
+               }
+         - {  type: 'title'}
        * - opacity
          - Number
          - .. line-block::
@@ -577,19 +604,17 @@ Liens
 Sources de données (datasource)
 ********************************
 
-Certaines sources de données possèdent des propriétés identiques et spécifiques.
+Certaines sources de données possèdent des propriétés communes et spécifiques.
 
-Les spécifiques seront traitées dans les sections suivantes.
+Les propriétés communes et spécifiques seront traitées et différenciées dans les sections suivantes.
 
-Quant au propriétés identiques, elle ne seront pas présentées ici bas.
 
-Les propriétés communes aux sources de données:
+Propriétés communes
+=====================
 
-     - **atributions** (String) : Les droits d'auteurs liés à la couche.
-        Pour OpenStreetMap, la valeur par défaut est @OpenStreetMap
-        contributors
+    .. line-block::
+        Les propriétés communes aux sources de données (sourceOptions).
 
-     - **crossOrigin** (Boolean): Permet de définir l'entête de l'appel faite au serveur. Permet entre autres, d'éviter les problématiques de CORS. Référez à `réglages CORS <https://developer.mozilla.org/fr/docs/Web/HTML/Reglages_des_attributs_CORS>`__ . De manière plus commune, définir "crossOrigin": "anonymous"
 
 Exemples
 
@@ -599,6 +624,45 @@ Exemples
                   "attributions": "Droits d'auteurs que vous désirez afficher avec votre couche.",
                   "crossOrigin": "anonymous"
             }}
+
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - attributions
+         - String
+         - .. line-block::
+               Les droits d'auteurs liés à la couche.
+         - 
+         - .. line-block::
+               Pour OpenStreetMap, la valeur par défaut est @OpenStreetMap contributors
+       * - crossOrigin
+         - String
+         - .. line-block::
+               Permet de définir l'entête de l'appel faite au serveur.
+               Permet entre autres, d'éviter les problématiques de CORS. 
+               De manière plus commune, définir "crossOrigin": "anonymous".
+         -  anonymous | use-credentials | null
+         - 
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Liens
+
+    - `Réglages CORS <https://developer.mozilla.org/fr/docs/Web/HTML/Reglages_des_attributs_CORS>`__
 
 
 ArcGis
