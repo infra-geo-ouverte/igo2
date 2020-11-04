@@ -114,6 +114,7 @@
 
     <ng-container *ngIf="selectedWorkspace$ | async as workspace">
       <button
+        class="eye-workspace"
         mat-icon-button
         [color]="workspace.layer.visible ? 'primary' : 'default'"
         collapsibleButton
@@ -129,6 +130,7 @@
         </mat-icon>
     </button>
     <igo-actionbar
+      class="actionbar-workspace"
       *ngIf="workspace.actionStore"
       [store]="workspace.actionStore"
       [withIcon]="true"
@@ -136,8 +138,9 @@
       [horizontal]="true"
       [withToggleButton]="actionbarMode === 'overlay'"
       [iconColor]="'primary'"
-      [color]="'primary'"
-      [mode]="actionbarMode">
+      [color]="'primary'"    
+      [mode]="actionbarMode"
+      [overlayClass]="workspaceMenuClass">
     </igo-actionbar>
       <div class="spacer"></div>
       <igo-entity-table-paginator
