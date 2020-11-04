@@ -92,7 +92,7 @@ Propriétés de l'objet "view" de map
 
 Liens
 
-    - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`_
+    - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`__
 
 .. _igolayer:
 
@@ -164,11 +164,19 @@ Propriétés
          -
          - uuid
        * - legendOptions
-         -  :ref:`legendOptions objet <igolegendoptions>`_ {}
+         -  objet `LegendOptions`_
          - .. line-block::
                Permet de définir des options sur la légende.
          -
          -
+       * - workspace
+         -  objet `WorkspaceOptions`_
+         - .. line-block::
+               Permet de définir si une source possèdera une table
+               d'attribut dans l'application ainsi 
+               que ses propriétés associées.
+         - workspace: { enabled: true, minResolution: 0, maxResolution: 400}
+         - Voir dans l'objet `WorkspaceOptions`_
        * - minResolution
          - Number
          - .. line-block::
@@ -197,11 +205,38 @@ Propriétés
          - Object{}
          - .. line-block::
                Définir la source pour les metadonnées. Lien pour
-               le bouton i de la couche -> 'i'.
-               Externe: true ira chercher les metadonnées inscrites
-               dans la configuration du service.
-         - {"extern": true}
+               le bouton i de la couche -> 'i'. Si la balise url 
+               est configurée, elle permet de définir un url au choix.
+               Pour les WMS, si la couche wms a une balise dataUrl et que 
+               la source wms à l'option optionsFromCapabilities : true, 
+               l'application ira récupérer le lien dans le service WMS.
+               La valeur pilotée à préséance sur la valeur récupérée du service.
+               Les propriété permises sont:
+                   - url
+                   - extern
+                   - keyword
+                   - abstract = résumé de la couche. Sert au tooltip ici bas.    
+         - {url: "http://www.igouverte.org/", extern: true}
          -
+       * - tooltip
+         - Object{}
+         - .. line-block::
+               Permet de définir le type de tooltip à afficher sur survol de la couche
+               dans la table des matières (liste de couche).    
+               Les divers types sont:
+                   - title
+                   - abstract
+                   - custom
+               Le type title présente uniquement le titre de la couche
+               Le type abstract récupère le "abstract" de la balise metadata.
+               Le type custom récupère le texte de la balise text
+         - .. line-block::
+               {  type: 'title'
+                    ou  'abstract'
+                    ou  'custom', 
+                  text: 'text à afficher si le type est custom' 
+               }
+         - {  type: 'title'}
        * - opacity
          - Number
          - .. line-block::
@@ -219,19 +254,7 @@ Propriétés
          - true false
          - true
        * - **sourceOptions***
-         - .. line-block::
-               - `ArcGis`_
-               - `Tile ArcGis`_
-               - `Carto`_
-               - `OSM`_
-               - `Cluster`_
-               - `TMS (xyz)`_
-               - `Vector Tiles`_
-               - `Vecteur`_
-               - `Websocket`_
-               - `WFS`_
-               - `WMS`_
-               - `WMTS`_
+         -  objet `SourceOptions`_
          - .. line-block::
                Diverses sources de données sont supportées.
                Référez-vous aux section suivantes pour
@@ -274,14 +297,33 @@ Propriétés
 
 Liens
 
-    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
+    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`__
 
 
 
-.. _igolegendOptions:
+LegendOptions
+===============
 
-Propriétés de legendOptions objet
-=============================
+    .. line-block::
+        Propriétés de l'objet legendOptions.
+        Permet de controler le rendu de légende. 
+
+Exemples
+
+
+      .. code:: json
+
+            {"legendOptions": {
+                  "collapsed": false,
+                  "display": true,
+                  "url": "https://v.seloger.com/s/width/1144/visuels/0/m/l/4/0ml42xbt1n3itaboek3qec5dtskdgw6nlscu7j69k.jpg",
+                  "stylesAvailable": [
+                        { "name": "rain", "title": "Pluie" },
+                        { "name": "raster", "title": "Défaut" }
+                  ] 
+            }}
+
+Propriétés
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -318,7 +360,10 @@ Propriétés de legendOptions objet
          -
        * - stylesAvailable
          - ItemStyleOptions[]
-         - Permet de modifier les noms des styles provenant du service web
+         - .. line-block::
+               Permet de modifier/contrôler la liste des styles provenant du 
+               service web. Correspond aux styles disponible pour le layer 
+               WMS tel que décrit dans le GetCapabilities WMS. 
          - .. line-block::
                Ex:  "stylesAvailable": [
                   { "name": "raster", "title": "pixel" },
@@ -328,10 +373,10 @@ Propriétés de legendOptions objet
          -
        * - url
          - String
-         -  .. line-block::
-            URL du getLegend
-            Exemple: "/ws/mffpecofor.fcgi?&REQUEST=GetLegendGraphic&SERVICE=WMS&FORMAT=image/png&
-            SLD_VERSION=1.1.0&VERSION=1.3.0&LAYER=lidar_index_extraction"
+         - .. line-block::
+               URL imposé pour l'appel de la légende.
+               Exemple: "/ws/mffpecofor.fcgi?&REQUEST=GetLegendGraphic&SERVICE=WMS&FORMAT=image/png&
+               SLD_VERSION=1.1.0&VERSION=1.3.0&LAYER=lidar_index_extraction"
          -
          -
 
@@ -339,38 +384,285 @@ Propriétés de legendOptions objet
 
 Liens
 
-    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`_
+    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`__
 
 
 
+SourceOptions
+===============
 
-*******************************
-Sources de données (datasource)
-*******************************
+    .. line-block::
+        Diverses sources de données sont supportées.
+        Référez-vous aux section suivantes pour
+        plus de détails.
 
-Certaines sources de données possèdent des propriétés identiques et spécifiques.
+        - `ArcGis`_
+        - `Tile ArcGis`_
+        - `Carto`_
+        - `OSM`_
+        - `Cluster`_
+        - `TMS (xyz)`_
+        - `Vector Tiles`_
+        - `Vecteur`_
+        - `Websocket`_
+        - `WFS`_
+        - `WMS`_
+        - `WMTS`_
 
-Les spécifiques seront traitées dans les sections suivantes.
+WorkspaceOptions
+================
 
-Quant au propriétés identiques, elle ne seront pas présentées ici bas.
-
-Les propriétés communes aux sources de données:
-
-     - **atributions** (String) : Les droits d'auteurs liés à la couche.
-        Pour OpenStreetMap, la valeur par défaut est @OpenStreetMap
-        contributors
-
-     - **crossOrigin** (Boolean): Permet de définir l'entête de l'appel faite au serveur. Permet entre autres, d'éviter les problématiques de CORS. Référez à `réglages CORS <https://developer.mozilla.org/fr/docs/Web/HTML/Reglages_des_attributs_CORS>`_ . De manière plus commune, définir "crossOrigin": "anonymous"
+    .. line-block::
+        Permet de définir si une source possèdera une table
+        d'attribut dans l'application ainsi 
+        que ses propriétés associées. 
 
 Exemples
 
       .. code:: json
-            :force:
 
-            "sourceOptions": {
+            {"workspace": {
+                  "enabled": true,
+                  "minResolution": 0,
+                  "maxResolution": 400
+            }}
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - enabled
+         - Boolean
+         - .. line-block::
+               Définir si la couche aura ou non une table d'attributs.
+         - .. line-block::
+               true | false
+         - .. line-block::
+               Pour les sources vectorielles, true par défault.
+               Pour les wms avec des propriétés 
+               WFS associées, false par défault
+       * - minResolution
+         - Number
+         - .. line-block::
+               Indique la résolution minimale (grande échelle, très zoomé) 
+               à laquelle la table d'attribut pourra faire apparaitre des 
+               enregistrements.
+         - 0 à Infinity ou absent
+         - 
+       * - maxResolution
+         - Number
+         - .. line-block::
+               Indique la résolution maximale (petite échelle, peu zoomé) 
+               à laquelle la table d'attribut pourra faire apparaitre des 
+               enregistrements.
+         - 0 à Infinity ou absent
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`__
+    - `Exemples <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/workspace.json>`__
+
+
+LinkedLayersOptions
+===================
+
+    .. line-block::
+        Permet de définir un lien entre des couches et
+        de synchroniser les propriétés choisies.
+
+Exemples
+
+      .. code:: json
+
+            {"linkedLayers": {
+                "linkId": "wmsTimeFilterSrc",
+                "links": [{
+                            "bidirectionnal": true,
+                            "linkedIds": ["wmsTimeFilterDest"],
+                            "syncedDelete": true,
+                            "properties": ["opacity","timeFilter","visible"]
+                          }]
+            }}
+
+Propriétés de LinkedLayersOptions
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - **linkId**
+         - String
+         - .. line-block::
+               Identifiant de liaison de la présente couche.
+               Diffère du ID du la couche car cet id doit être 
+               connu au pilotage, pas seulement lors l'éxécution 
+               du code.
+         - 
+         - 
+       * - links
+         - :ref:`LayersLinkProperties[] <LayersLinkProperties>`
+         - .. line-block::
+               Définit la liste des couches "enfant" liées 
+               ainsi que leurs propriété qui sont synchronisées.
+               Obligatoire pour les couches parents.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+
+.. _LayersLinkProperties:
+
+Propriétés de LayersLinkProperties
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - bidirectionnal
+         - Boolean
+         - .. line-block::
+               Indique si les 2 couches sont liées de manière 
+               bi-directionnelles. C'est à dire, si une modification 
+               de l'enfant est transférée au parent et inversement.
+         - true | false
+         - true
+       * - **linkedIds**
+         - string[]
+         - .. line-block::
+               Liste des identifiants de liaison.
+               C'est à dire, une liste des linkId des couches enfant.
+         - 
+         - 
+       * - syncedDelete
+         - Boolean
+         - .. line-block::
+               Indique si les 2 couches doivent être supprimées 
+               simultanément lorsque une ou l'autre des couches 
+               est supprimée de la liste des couches.
+         - true | false
+         - false
+       * - **properties**
+         - String[]
+         - .. line-block::
+               Indique les propriétés à maintenir entre les 2 couches liées.
+                   - opacity
+                   - visible
+                   - :ref:`ogcFilters <igoOgcFilterObject>`
+                   - minResolution
+                   - maxResolution
+                   - zIndex
+                   - timeFilter => `Configuration filtre temporel WMS-T (timeFilter)`_
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`__
+    - `Exemples <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/layerSync.json>`__
+
+
+
+********************************
+Sources de données (datasource)
+********************************
+
+Certaines sources de données possèdent des propriétés communes et spécifiques.
+
+Les propriétés communes et spécifiques seront traitées et différenciées dans les sections suivantes.
+
+
+Propriétés communes
+=====================
+
+    .. line-block::
+        Les propriétés communes aux sources de données (sourceOptions).
+
+
+Exemples
+
+      .. code:: json
+
+            {"sourceOptions": {
                   "attributions": "Droits d'auteurs que vous désirez afficher avec votre couche.",
                   "crossOrigin": "anonymous"
-            }
+            }}
+
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - attributions
+         - String
+         - .. line-block::
+               Les droits d'auteurs liés à la couche.
+         - 
+         - .. line-block::
+               Pour OpenStreetMap, la valeur par défaut est @OpenStreetMap contributors
+       * - crossOrigin
+         - String
+         - .. line-block::
+               Permet de définir l'entête de l'appel faite au serveur.
+               Permet entre autres, d'éviter les problématiques de CORS. 
+               De manière plus commune, définir "crossOrigin": "anonymous".
+         -  anonymous | use-credentials | null
+         - 
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Liens
+
+    - `Réglages CORS <https://developer.mozilla.org/fr/docs/Web/HTML/Reglages_des_attributs_CORS>`__
 
 
 ArcGis
@@ -380,6 +672,22 @@ ArcGis
        Disponible actuellement mais la documentation est en cours de construction.
 
 
+Exemples
+
+      .. code:: json
+
+            {
+                "sourceOptions": {
+                    "type": "arcgisrest",
+                    "layer": "2",
+                    "queryable": true,
+                    "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                    "queryFormat": "esrijson",
+                    "idColumn": "OBJECTID"
+                }
+            }
+
+
 Tile ArcGis
 ===============
 
@@ -387,11 +695,55 @@ Tile ArcGis
        Disponible actuellement mais la documentation est en cours de construction.
 
 
+Exemples
+
+      .. code:: json
+
+            {
+                "sourceOptions": {
+                    "type": "tilearcgisrest",
+                    "layer": "1",
+                    "queryable": true,
+                    "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                    "queryFormat": "esrijson",
+                    "idColumn": "OBJECTID"
+                }
+            }
+
+
 Carto
 ===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
+
+
+Exemples
+
+      .. code:: json
+
+            {
+              "sourceOptions": {
+              "type": "carto",
+              "account": "common-data",
+              "queryable": true,
+              "queryFormat": "geojson",
+              "queryPrecision": "5000",
+              "crossOrigin": "anonymous",
+              "config": {
+                  "version": "1.3.0",
+                  "layers": [
+                        {
+                            "type": "cartodb",
+                            "options": {
+                                "cartocss_version": "2.3.0",
+                                "cartocss": "#layer { line-width: 3; line-color: ramp([yr], (#5F4690, #1D6996, #38A6A5, #0F8554, #73AF48, #EDAD08, #E17C05, #CC503E, #94346E, #6F4070, #666666), (\"2004\", \"2008\", \"2011\", \"1998\", \"2003\", \"1999\", \"1992\", \"2010\", \"2005\", \"1995\"), \"=\"); }",
+                                "sql": "select * from tornado"
+                                }
+                        }
+                  ]
+              }}
+            }
 
 
 OSM
@@ -404,11 +756,10 @@ OSM
 Exemples
 
       .. code:: json
-            :force:
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "type": "osm"
-            }
+            }}
 
 
 Propriétés
@@ -438,7 +789,7 @@ Propriétés
 
 Liens
 
-    - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
+    - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/osm-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/osm-datasource.interface.ts>`__
 
 
 Cluster
@@ -450,13 +801,12 @@ Cluster
 Exemples
 
       .. code:: json
-            :force:
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "url": "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson",
                   "type": "cluster",
                   "distance": 50
-            }
+            }}
 
 
 Propriétés
@@ -510,7 +860,7 @@ Propriétés
 
 Liens
 
-    - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
+    - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/cluster-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/cluster-datasource.interface.ts>`__
 
 
 
@@ -523,12 +873,11 @@ TMS (xyz)
 Exemples
 
       .. code:: json
-            :force:
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
                   "type": "xyz"
-            }
+            }}
 
 
 Propriétés
@@ -569,7 +918,7 @@ Propriétés
 
 Liens
 
-    - `igo2/src/contexts/_base.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_base.json>`_
+    - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/xyz-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/xyz-datasource.interface.ts>`__
 
 
 Vector Tiles
@@ -577,17 +926,16 @@ Vector Tiles
 
     .. line-block::
         Une source de données pour les services de données au format Vector tiles. Plus spécifiquement,
-        au format `Mapbox Vector Tiles (MVT) <https://docs.mapbox.com/vector-tiles/specification/>`_ .
+        au format `Mapbox Vector Tiles (MVT) <https://docs.mapbox.com/vector-tiles/specification/>`__ .
 
 Exemples
 
       .. code:: json
-            :force:
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "type": "mvt",
                   "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_sous_route_res_inv_act&map.imagetype=mvt"
-            }
+            }}
 
 
 Propriétés
@@ -654,9 +1002,10 @@ Propriétés
 
 Liens
 
-    - `Mapbox Vector Tiles (MVT) <https://docs.mapbox.com/vector-tiles/specification/>`_
-    - `Mapserver 7.2 + <https://mapserver.gis.umn.edu/it/development/rfc/ms-rfc-119.html>`_
-    - `Geoserver <https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html>`_
+    - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/mvt-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/mvt-datasource.interface.ts>`__
+    - `Mapbox Vector Tiles (MVT) <https://docs.mapbox.com/vector-tiles/specification/>`__
+    - `Mapserver 7.2 + <https://mapserver.gis.umn.edu/it/development/rfc/ms-rfc-119.html>`__
+    - `Geoserver <https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html>`__
 
 
 Vecteur
@@ -665,13 +1014,21 @@ Vecteur
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
 
+Exemples
+
+      .. code:: json
+
+            {"sourceOptions": {
+                  "type": "vector",
+                  "url": "https://ws.mapserver.transports.gouv.qc.ca//swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson"
+            }}
+
 
 Websocket
 ===============
 
       .. line-block::
         Une source de données provenant d'un websocket.
-        voir https://developer.mozilla.org/fr/docs/Web/API/WebSocket
 
 Propriétés
 
@@ -715,9 +1072,11 @@ Propriétés
          -
          -
 
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+
 Exemple
       .. code:: json
-            :force:
 
             {
 
@@ -729,9 +1088,13 @@ Exemple
                         "queryable": true,
                         "queryTitle": "Véhicule : ${unitid}"
                   }
-                  ...
             }
 
+
+Liens
+
+    - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/websocket-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/websocket-datasource.interface.ts>`__
+    - `Websocket <https://developer.mozilla.org/fr/docs/Web/API/WebSocket>`__
 
 
 WFS
@@ -754,8 +1117,7 @@ Exemples
                               "fieldNameGeometry": "geometry",
                               "maxFeatures": 10000,
                               "version": "2.0.0",
-                              "outputFormat": "geojson_utf8",
-                              "outputFormatDownload": "shp"
+                              "outputFormat": "geojson_utf8"
                         }
                   }
             }
@@ -765,7 +1127,7 @@ WMS
 ===============
 
     .. line-block::
-        Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`_ .
+        Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`__ .
         Les diverses version WMS sont acceptées.
 
 
@@ -787,7 +1149,8 @@ Exemples
                         "queryable": true,
                         "queryFormat": "gml2",
                         "queryTitle": "desclocal",
-                        "optionsFromCapabilities": true
+                        "optionsFromCapabilities": true,
+                        "optionsFromApi": true
                   }
             }
 
@@ -837,6 +1200,13 @@ Propriétés
                (GetMap, GetLegendGraphics, ...).
          - Référez-vous aux paramètres WMS ici-bas.
          -
+       * - optionsFromApi
+         - Boolean
+         - .. line-block::
+               Paramètre pour récupérer des informations supplémentaires
+               par un service d'options de couches..
+         - true/false
+         - false
        * - refreshIntervalSec
          - Number
          - .. line-block::
@@ -915,13 +1285,13 @@ Propriétés
          - Object
          - .. line-block::
                Configuration des filtres attributaires(OGC) appliqués sur la couche.
-         - Référez-vous à : `Configuration filtre OGC (ogcFilters)`_ .
+         - Référez-vous à : :ref:`ogcFilters <igoOgcFilterObject>` .
          -
        * - sourceFields
          - Object
          - .. line-block::
                Configuration des attributs du layer. (champs source de la couche)
-         - Référez-vous à : `Configuration des attributs (sourceFields)`_ .
+         - Référez-vous à : :ref:`sourceFields <igosourceFieldsObject>` .
          -
 
 
@@ -1027,28 +1397,27 @@ Paramètre (params) WMS
 
 Liens
 
-    - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts>`_
-    - `OGC WMS <https://www.opengeospatial.org/standards/wms>`_
+    - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts>`__
+    - `OGC WMS <https://www.opengeospatial.org/standards/wms>`__
 
 
 WMTS
 ===============
 
     .. line-block::
-        Une source de données pour les services de données au format `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_ .
+        Une source de données pour les services de données au format `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`__ .
 
 Exemples
 
         .. code:: json
-            :force:
 
-            "sourceOptions": {
+            {"sourceOptions": {
                 "type": "wmts",
                 "url": "https://geoegl.msp.gouv.qc.ca/carto/wmts",
                 "format": "image/jpeg",
                 "matrixSet": "EPSG_3857",
                 "layer": "orthos"
-            }
+            }}
 
 
     .. list-table::
@@ -1109,7 +1478,7 @@ Exemples
 
 Liens
 
-    - `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`_
+    - `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`__
 
 
 
@@ -1122,7 +1491,8 @@ Options de sources avancées
 Configuration filtre temporel WMS-T (timeFilter)
 ================================================
 
-La configuration du filtre temporel doit être configurée dans sourceOptions {}
+La configuration du filtre temporel doit être configurée dans `SourceOptions`_
+
 Exemples
 
         .. code:: json
@@ -1219,7 +1589,7 @@ Configuration filtre attributaire OGC (ogcFilters)
 Exemples
 ----------
 
-Exemple - filtre avancé disponible à l'utilisateur avec 3 attributs filtrables et quelques valeurs diponibles chacun.
+Exemple - filtre avancé disponible à l'utilisateur.
 
         .. code:: json
 
@@ -1228,12 +1598,7 @@ Exemple - filtre avancé disponible à l'utilisateur avec 3 attributs filtrables
                         "enabled": true,
                         "editable": true,
                         "allowedOperatorsType": "Basic"
-                      },
-                    "sourceFields": [
-                      {"name": "reg_eco", "alias": "région ecologique", "values": ["1a", "2b", "2b", "2c", "4F","5g"]},
-                      {"name": "dom_bio", "alias": "domaine bio-climatique", "allowedOperatorsType": "BasicAndSpatial"},
-                      {"name": "szone_veg", "alias": "sous zone véggtation ", "values": ["Z21", "z12"]}
-                    ]
+                      }
             }
 
 
@@ -1513,7 +1878,7 @@ Propriétés de ogcFilters
 
 Liens
 
-    - `ogc-filter.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.interface.ts>`_
+    - `ogc-filter.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.interface.ts>`__
 
 
 
@@ -1591,6 +1956,7 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles
 
 
 .. _igoOgcFilterButtonsButtonsObject:
+
 Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
 
     .. list-table::
@@ -1713,7 +2079,7 @@ Propriétés de l'objet filter de type **During**
        * - step
          - String
          - Pas de temps défini selon la norme ISO-8601
-         - Voir `wiki <https://fr.wikipedia.org/wiki/ISO_8601#Dur%C3%A9e>`_
+         - Voir `wiki <https://fr.wikipedia.org/wiki/ISO_8601#Dur%C3%A9e>`__
          - 60000 millisecondes
        * - restrictedToStep
          - Boolean
@@ -1790,7 +2156,7 @@ Propriétés de l'objet sourceFields
                BasicNumericOperator OU Basic
                OU BasicAndSpatial OU Spatial
                OU All OU Time
-               Référez vous à `ogc-filter.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`_ pour les opérateurs correspondants.
+               Référez vous à `ogc-filter.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`__ pour les opérateurs correspondants.
          - BasicAndSpatial
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -1915,7 +2281,7 @@ Propriétés
 
 Liens
 
-    - `igo2-lib/packages/geo/src/lib/search/shared/sources/source.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/source.interfaces.ts>`_
+    - `igo2-lib/packages/geo/src/lib/search/shared/sources/source.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/source.interfaces.ts>`__
 
 
 Cadastre
@@ -1929,11 +2295,10 @@ Cadastre
 Exemples
 
     .. code:: json
-      :force:
 
-        "cadastre": {
+        {"cadastre": {
             "searchUrl": "https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?"
-        }
+        }}
 
 Propriétés
 
@@ -1985,13 +2350,12 @@ Coordonnées
 Exemples
 
       .. code:: json
-            :force:
 
-            "coordinatesreverse": {
+            {"coordinatesreverse": {
                   "order": 1,
                   "enabled": false,
                   "available": true
-            }
+            }}
 
 Propriétés
 
@@ -2009,15 +2373,15 @@ Propriétés
          - .. line-block::
                Basé sur la traduction de 2 fichiers.
                Propriété igo.geo.search.coordinates.name dans
-                   - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
-                   - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_
+                   - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`__
+                   - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`__
 
     Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
-    - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
-    - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_
+    - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`__
+    - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`__
 
 
 iCherche
@@ -2025,7 +2389,7 @@ iCherche
 
     .. line-block::
         iCherche est un service de recherche développé
-        par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_
+        par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`__
         afin de permettre des recherches textuelles sur les entités suivantes:
             - Adresses
             - Code postal
@@ -2040,16 +2404,15 @@ iCherche
 Exemples
 
       .. code:: json
-            :force:
 
-            "icherche": {
+            {"icherche": {
                   "title":"ICherche",
                   "showInPointerSummary": true,
                   "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche",
                   "params": {
                         "limit": "8"
                   }
-            }
+            }}
 
 
 Propriétés
@@ -2078,9 +2441,9 @@ Propriétés
 
 Liens
 
-    - `Doc de l'api iCherche <https://geoegl.msp.gouv.qc.ca/apis/icherche/docs>`_
-    - `Code iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`_
-    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+    - `Doc de l'api iCherche <https://geoegl.msp.gouv.qc.ca/apis/icherche/docs>`__
+    - `Code iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`__
+    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`__
 
 
 iCherche Reverse
@@ -2088,7 +2451,7 @@ iCherche Reverse
 
     .. line-block::
         iCherche Reverse est un service de recherche développé
-        par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_
+        par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`__
         afin de permettre des recherches par coordonnées / rayon sur les entités suivantes:
             - Adresses
             - Routes (segments de /routes)
@@ -2102,14 +2465,13 @@ iCherche Reverse
 Exemples
 
       .. code:: json
-            :force:
 
-            "icherchereverse": {
+            {"icherchereverse": {
                   "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/territoires",
                   "params": {
                         "bufffer": 12
                   }
-            }
+            }}
 
 
 Propriétés
@@ -2128,7 +2490,7 @@ Propriétés
          - .. line-block::
                https://geoegl.msp.gouv.qc.ca/apis/territoires
        * - settings
-         - `Ligne 427 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L427>`_
+         - `Ligne 427 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L427>`__
        * - title
          - Territoire (Géocodage inversé)
 
@@ -2136,16 +2498,16 @@ Propriétés
 
 Liens
 
-    - `Doc de l'api iCherche Reverse <https://geoegl.msp.gouv.qc.ca/apis/terrAPI/docs>`_
-    - `Code iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`_
-    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+    - `Doc de l'api iCherche Reverse <https://geoegl.msp.gouv.qc.ca/apis/terrAPI/docs>`__
+    - `Code iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`__
+    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`__
 
 
 iLayer
 ================
 
     .. line-block::
-        iLayer est un service de recherche développé par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`_
+        iLayer est un service de recherche développé par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`__
         afin de permettre des recherches de couches d'informations par mots clefs.
         Le contenu accessible par le service de recherche est limité au territoire quuébécois.
 
@@ -2158,9 +2520,8 @@ iLayer
 Exemples
 
       .. code:: json
-            :force:
 
-            "ilayer": {
+            {"ilayer": {
                   "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche/layers",
                         "params": {
                         "limit": 15
@@ -2170,7 +2531,7 @@ Exemples
                               "urls": ["https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi"]
                         }
                   }
-            }
+            }}
 
 
 Propriétés
@@ -2189,13 +2550,13 @@ Propriétés
          - .. line-block::
                https://geoegl.msp.gouv.qc.ca/apis/layers/search
        * - settings
-         - `Ligne 93 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts#L93>`_
+         - `Ligne 93 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts#L93>`__
        * - title
          - .. line-block::
                Basé sur la traduction de 2 fichiers.
                Propriété igo.geo.search.layer.title dans
-                   - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`_
-                   - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`_
+                   - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`__
+                   - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`__
        * - queryFormat
          - .. line-block::
                Possibilité de définir le format par URL pour la présentation des informations lors de l'intérogation de la couche.
@@ -2204,8 +2565,8 @@ Propriétés
 
 Liens
 
-    - `Code iLayer <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts>`_
-    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+    - `Code iLayer <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts>`__
+    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`__
 
 
 Nominatim
@@ -2216,7 +2577,7 @@ Nominatim
         OpenStreetMap. Il est possible de faire des recherches par mots clefs.
 
         Pour plus de détails:
-            - `API Nominatim <https://nominatim.org/release-docs/develop/>`_
+            - `API Nominatim <https://nominatim.org/release-docs/develop/>`__
 
     .. note::
         Bien que la recherche par coordonnées soit disponible par Nominatim,
@@ -2226,14 +2587,13 @@ Nominatim
 Exemples
 
       .. code:: json
-            :force:
 
-            "ilayer": {
+            {"ilayer": {
                   "searchUrl": "https://nominatim.openstreetmap.org/search",
                   "params": {
                         "limit": 15
                   }
-            }
+            }}
 
 
 Propriétés
@@ -2252,7 +2612,7 @@ Propriétés
          - .. line-block::
                https://nominatim.openstreetmap.org/search
        * - settings
-         - `Ligne 44 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/nominatim.ts#L44>`_
+         - `Ligne 44 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/nominatim.ts#L44>`__
        * - title
          - Nominatim (OSM)
 
@@ -2260,9 +2620,9 @@ Propriétés
 
 Liens
 
-    - `Code Nominatim <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts>`_
-    - `API Nominatim <https://nominatim.org/release-docs/develop/>`_
-    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+    - `Code Nominatim <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts>`__
+    - `API Nominatim <https://nominatim.org/release-docs/develop/>`__
+    - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`__
 
 
 StoredQueries
@@ -2273,7 +2633,7 @@ StoredQueries
 
     .. line-block::
         StoredQueries est un service de recherche par mots clefs exploitant les capacités WFS 2.0.
-        Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`_
+        Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__
         qui peut retourner:
             - Route                                    ex: 138
             - Route tronçon                            ex: 13801
@@ -2292,9 +2652,8 @@ StoredQueries
 Exemples
 
       .. code:: json
-            :force:
 
-            "storedqueries": {
+            {"storedqueries": {
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "rtss",
                   "fields": [
@@ -2302,7 +2661,7 @@ Exemples
                         {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
                   ],
                   "resultTitle": "etiquette"
-            }
+            }}
 
 
 Propriétés
@@ -2335,7 +2694,7 @@ Propriétés
        * - outputFormat
          - .. line-block::
                Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
-               Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`_  connu d'Openlayers.
+               Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
          - text/xml; subtype=gml/3.1.1
        * - resultTitle
          - .. line-block::
@@ -2359,10 +2718,10 @@ Propriétés
 
 Liens
 
-    - `Code Stored Queries Ligne 34 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/storedqueries.ts#L34>`_
-    - `Bug Openlayers et les GML 3.2+ en WFS <https://github.com/openlayers/openlayers/pull/6400>`_
-    - `Exemple d'appel StoredQueries <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=rtss&rtss=0013801110000C&chainage=0&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`_
-    - `Décrire la requête "rtss" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=rtss>`_
+    - `Code Stored Queries Ligne 34 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/storedqueries.ts#L34>`__
+    - `Bug Openlayers et les GML 3.2+ en WFS(StoredQueries) <https://github.com/openlayers/openlayers/pull/6400>`__
+    - `Exemple d'appel StoredQueries <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=rtss&rtss=0013801110000C&chainage=0&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
+    - `Décrire la requête "rtss" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=rtss>`__
 
 
 StoredQueries Reverse
@@ -2373,7 +2732,7 @@ StoredQueries Reverse
 
     .. line-block::
         StoredQueries Reverse est un service de recherche par coordonnées exploitant les capacités WFS 2.0.
-        Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`_
+        Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__
         qui peut retourner deux limites administratives du MTQ:
             - Centre de services du MTQ
             - Direction Générale Territoriales
@@ -2389,15 +2748,14 @@ StoredQueries Reverse
 Exemples
 
       .. code:: json
-            :force:
 
-            "storedqueriesreverse": {
+            {"storedqueriesreverse": {
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "lim_adm",
                   "longField": "long",
                   "latField": "lat",
                   "resultTitle": "nom_unite"
-            }
+            }}
 
 
 Propriétés
@@ -2424,7 +2782,7 @@ Propriétés
        * - outputFormat
          - .. line-block::
                Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
-               Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`_  connu d'Openlayers.
+               Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
          - text/xml; subtype=gml/3.1.1
        * - resultTitle
          - .. line-block::
@@ -2448,10 +2806,10 @@ Propriétés
 
 Liens
 
-    - `Code Stored Queries Reverse Ligne 273 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/storedqueries.ts#L273>`_
-    - `Bug Openlayers et les GML 3.2+ en WFS <https://github.com/openlayers/openlayers/pull/6400>`_
-    - `Exemple d'appel StoredQueries Reverse <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=lim_adm&long=-71.292469&lat=46.748107&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`_
-    - `Décrire la requête "lim_adm" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=lim_adm>`_
+    - `Code Stored Queries Reverse Ligne 273 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/storedqueries.ts#L273>`__
+    - `Bug Openlayers et les GML 3.2+ en WFS <https://github.com/openlayers/openlayers/pull/6400>`__
+    - `Exemple d'appel StoredQueries Reverse <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=lim_adm&long=-71.292469&lat=46.748107&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
+    - `Décrire la requête "lim_adm" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=lim_adm>`__
 
 
 
@@ -2507,15 +2865,13 @@ about
 Exemples
 
         .. code:: json
-            :force:
 
             {
                 "name": "about",
                 "options": {
-                    "html": "<p>Voici IGO</p>" // ou ["<p>Voici IGO</p>", "<p>Voici la seconde ligne</p>"]
+                    "html": ["<p>Voici IGO</p>", "<p>Voici la seconde ligne</p>"]
                 }
             }
-            ...
 
 Propriétés
 
@@ -2536,7 +2892,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - help-circle
        * - **name***
          - String
@@ -2589,7 +2945,7 @@ Options
 
 Liens
 
-    - `about-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool>`_
+    - `about-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/about/about-tool>`__
 
 
 .. _igocatalogtool:
@@ -2630,7 +2986,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - layers-plus
        * - **name***
          - String
@@ -2651,7 +3007,7 @@ Propriétés
 
 Liens
 
-    - `catalog-library-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-library-tool>`_
+    - `catalog-library-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-library-tool>`__
     - :ref:`Configuration des catalogue <igocatalogConfig>`.
 
 
@@ -2697,7 +3053,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - photo-browser
        * - **name***
          - String
@@ -2752,7 +3108,7 @@ Options
 
 Liens
 
-    - `catalog-browser-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-browser-tool>`_
+    - `catalog-browser-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-browser-tool>`__
 
 .. _igocontextManager:
 
@@ -2763,7 +3119,7 @@ contextManager
     .. line-block::
         Outil permettant de lister/gérer plusieurs contextes à l'intérieur d'une même application.
         Il existe un fichier de configuration définissant les contexte disponibles à l'intérieur du gestionnaire de contexte.
-            - `_context.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_contexts.json>`_
+            - `_context.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_contexts.json>`__
         Ce dernier constitue une liste des contextes disponibles à l'intérieur du gestionnaire de contexte.
 
         Si un contexte est non présent dans ce fichier, il ne sera pas mis à la disposition dans l'application.
@@ -2800,7 +3156,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - star
        * - **name***
          - String
@@ -2852,7 +3208,7 @@ Options
 
 Liens
 
-    - `catalog-browser-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-browser-tool>`_
+    - `catalog-browser-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-browser-tool>`__
 
 
 
@@ -2894,7 +3250,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - directions
        * - **name***
          - String
@@ -2915,7 +3271,7 @@ Propriétés
 
 Liens
 
-    - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/directions/directions-tool>`_
+    - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/directions/directions-tool>`__
 
 
 .. _igoogcFilter:
@@ -2923,19 +3279,21 @@ Liens
 ogcFilter
 ===========
 
-    Outil permettant de définir des filtres que l'utilisateur pourra appliquer sur les couches visibles dans la carte et ainsi voir
-    seulement les objets géométriques(points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
-    configurés comme des boutons que l'utilisateur peut activer ou comme filtres avancés, dans ce cas c'est l'utilisateur qui doit
-    saisir le champ, l'opérateur à appliquer ainsi que la valeur à filtrer.
-
-    | ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-
-    | Cet outil présente toutes les couches de la carte ayant un ou plusieurs filtres configurés. Comparativement à l'outil
-    activeOgcFilter qui lui présente uniquement le/les filtres de la couche active sélectionnée.
-
-    | NB: L'activation de l'outil se fait ici via "tools", mais la configuration de chaque filtre disponible doit se faire à l'intérieur de la couche dans les contextes.
-    | layer -> sourceOptions -> ogcFilters
-    | Référez-vous à:  :ref:`Configuration des filtres attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
+    .. line-block::
+        Outil permettant de définir des filtres que l'utilisateur pourra appliquer sur les couches visibles dans la carte et ainsi voir
+        seulement les objets géométriques(points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
+        configurés comme des boutons que l'utilisateur peut activer ou comme filtres avancés, dans ce cas c'est l'utilisateur qui doit
+        saisir le champ, l'opérateur à appliquer ainsi que la valeur à filtrer.
+        
+        | ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+        
+        | Cet outil présente toutes les couches de la carte ayant un ou plusieurs filtres configurés. Comparativement à l'outil
+        
+        activeOgcFilter qui lui présente uniquement le/les filtres de la couche active sélectionnée.
+        
+        | NB: L'activation de l'outil se fait ici via "tools", mais la configuration de chaque filtre disponible doit se faire à l'intérieur de la couche dans les contextes.
+        | layer -> sourceOptions -> ogcFilters
+        | Référez-vous à:  :ref:`Configuration des filtres attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
 
 
 Exemples
@@ -2967,7 +3325,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - filter
        * - **name***
          - String
@@ -2988,8 +3346,8 @@ Propriétés
 
 Liens
 
-    - `ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/ogc-filter-tool>`_
-    - `OGC FES <https://www.ogc.org/standards/filter>`_
+    - `ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/ogc-filter-tool>`__
+    - `OGC FES <https://www.ogc.org/standards/filter>`__
 
 
 
@@ -3024,9 +3382,9 @@ Exemples
 
 Liens
 
-    - `active-ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-ogc-filter-tool>`_
-    - `OGC FES <https://www.ogc.org/standards/filter>`_
-    - `Exemple IGO-DEMO <https://infra-geo-ouverte.github.io/igo2/?context=ogcFilters&zoom=6&center=-71.93809,48.44698&invisiblelayers=*&visiblelayers=89596908775de376b7aa497efdf49d50,c2499974-5dc9-37d5-d0ba-f595690a06c7,carte_gouv_qc>`_
+    - `active-ogc-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-ogc-filter-tool>`__
+    - `OGC FES <https://www.ogc.org/standards/filter>`__
+    - `Exemple IGO-DEMO <https://infra-geo-ouverte.github.io/igo2/?context=ogcFilters&zoom=6&center=-71.93809,48.44698&invisiblelayers=*&visiblelayers=89596908775de376b7aa497efdf49d50,c2499974-5dc9-37d5-d0ba-f595690a06c7,carte_gouv_qc>`__
 
 
 .. _igotimeFilter:
@@ -3069,7 +3427,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - history
        * - **name***
          - String
@@ -3090,7 +3448,7 @@ Propriétés
 
 Liens
 
-    - `time-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/time-filter-tool>`_
+    - `time-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/time-filter-tool>`__
 
 
 .. _igoactivetimeFilter:
@@ -3118,7 +3476,7 @@ Exemples
 
 Liens
 
-    - `active-time-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-time-filter-tool>`_
+    - `active-time-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-time-filter-tool>`__
 
 
 
@@ -3170,7 +3528,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - file-move
        * - **name***
          - String
@@ -3191,7 +3549,7 @@ Propriétés
 
 Liens
 
-    - `import-export-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/import-export/import-export-tool>`_
+    - `import-export-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/import-export/import-export-tool>`__
 
 
 .. _igomaptool:
@@ -3257,7 +3615,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - map
        * - **name***
          - String
@@ -3378,7 +3736,7 @@ Options
 
 Liens
 
-    - `map-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-tool>`_
+    - `map-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-tool>`__
 
 
 .. _igomapLegend:
@@ -3430,7 +3788,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - format-list-bulleted-type'
        * - **name***
          - String
@@ -3521,7 +3879,7 @@ Options
 
 Liens
 
-    - `map-legend <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-legend>`_
+    - `map-legend <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-legend>`__
 
 
 .. _igomapDetails:
@@ -3586,7 +3944,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - map
        * - **name***
          - String
@@ -3716,7 +4074,7 @@ Options
 
 Liens
 
-    - `map-details-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-details-tool>`_
+    - `map-details-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-details-tool>`__
 
 
 .. _igomaptools:
@@ -3786,7 +4144,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - map
        * - **name***
          - String
@@ -3941,7 +4299,7 @@ Options
 
 Liens
 
-    - `map-tools <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-tools>`_
+    - `map-tools <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/map/map-tools>`__
 
 
 .. _igomeasurer:
@@ -3980,7 +4338,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - ruler
        * - **name***
          - String
@@ -4001,7 +4359,7 @@ Propriétés
 
 Liens
 
-    - `measurer-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/measure/measurer-tool>`_
+    - `measurer-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/measure/measurer-tool>`__
 
 
 .. _igoprint:
@@ -4043,7 +4401,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - printer
        * - **name***
          - String
@@ -4064,7 +4422,7 @@ Propriétés
 
 Liens
 
-    - `print-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/print/print-tool>`_
+    - `print-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/print/print-tool>`__
 
 
 .. _igosearchResults:
@@ -4105,7 +4463,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - magnify
        * - **name***
          - String
@@ -4157,7 +4515,7 @@ Options
 
 Liens
 
-    - `search-results-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/search/search-results-tool>`_
+    - `search-results-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/search/search-results-tool>`__
 
 
 .. _igospatialFilter:
@@ -4200,7 +4558,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - selection-marker
        * - **name***
          - String
@@ -4266,7 +4624,7 @@ Options
 
 Liens
 
-    - `spatial-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/spatial-filter-tool>`_
+    - `spatial-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/spatial-filter-tool>`__
 
 
 .. _igoshareMap:
@@ -4283,7 +4641,7 @@ Exemples
         .. code:: json
 
             {
-              "name": "shareMap",
+              "name": "shareMap"
             }
 
 Propriétés
@@ -4305,7 +4663,7 @@ Propriétés
        * - icon
          - String
          - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`_
+         - `MDI <https://materialdesignicons.com/>`__
          - share-variant
        * - **name***
          - String
@@ -4326,4 +4684,4 @@ Propriétés
 
 Liens
 
-    - `context-share-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/context/context-share-tool>`_
+    - `context-share-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/context/context-share-tool>`__

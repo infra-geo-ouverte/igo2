@@ -24,8 +24,7 @@
             "featureTypes": "etablissement_mtq",
             "fieldNameGeometry": "geometry",
             "maxFeatures": 5000,
-            "outputFormat": "geojson",
-            "outputFormatDownload": "shp"
+            "outputFormat": "geojson"
           },
           "ogcFilters": {
             "enabled": true,
@@ -67,10 +66,8 @@
           "params": {
             "featureTypes": "telephone_urg",
             "fieldNameGeometry": "geometry",
-            "maxFeatures": 10000,
-            "version": "1.1.0",
-            "outputFormat": "geojson",
-            "outputFormatDownload": "shp"
+            "maxFeatures": 5001,
+            "outputFormat": "geojson"
           },
 
         "ogcFilters": {
