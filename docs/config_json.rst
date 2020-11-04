@@ -346,7 +346,7 @@ Exemples
                       "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
                       "type": "arcgisrest",
                       "sourceOptions": {
-                          "queryable": true
+                          "queryable": true,
                           "idColumn": "OBJECTID"
                       }
                   },
