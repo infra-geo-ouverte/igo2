@@ -4,18 +4,8 @@
     "base": "_base",
     "layers": [
       {
-        "title": "MVT",
-        "visible": true,
-        "sourceOptions": {
-          "queryable": true,
-          "queryTitle": "nometablis",
-          "type": "mvt",
-          "url": "/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=etablissement_mtq&map.imagetype=mvt"
-        }
-      },
-      {
         "title": "WMS with underlying WFS params",
-        "visible": false,
+        "visible": true,
         "maxResolution": 1200,
         "workspace": {
           "enabled": true,
@@ -25,8 +15,8 @@
           "queryable": true,
           "queryTitle": "nometablis",
           "type": "wms",
-          "url": "/swtq",
-          "urlWfs": "/swtq",
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+          "urlWfs": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
           "params": {
             "layers": "etablissement_mtq"
           },
@@ -46,11 +36,11 @@
 
       {
         "title": "Vector dataSource",
-        "visible": false,
+        "visible": true,
         "sourceOptions": {
           "queryable": true,
           "queryTitle": "nomnavcana",
-          "url": "/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
           "type": "vector"
         }
       },
@@ -59,25 +49,24 @@
         "visible": false,
         "sourceOptions": {
           "queryable": true,
-          "queryTitle": "nometablis",
-          "url": "/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=etablissement_mtq&outputFormat=geojson",
+          "queryTitle": "identificationDesTravaux",
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
           "type": "cluster",
           "distance": 50
         }
       },
       {
         "title": "WFS",
-        "visible": false,
+        "visible": true,
         "sourceOptions": {
           "type": "wfs",
-          "url": "/swtq",
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
           "queryable": true,
           "queryTitle": "desclocal",
           "params": {
             "featureTypes": "telephone_urg",
             "fieldNameGeometry": "geometry",
-            "maxFeatures": 10000,
-            "version": "1.1.0",
+            "maxFeatures": 5001,
             "outputFormat": "geojson"
           },
 

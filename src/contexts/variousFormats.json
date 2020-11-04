@@ -23,28 +23,28 @@
           "queryable": true,
           "queryTitle": "nomcartrou",
           "type": "mvt",
-          "url": "/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=lieuhabite&map.imagetype=mvt"
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=lieuhabite&map.imagetype=mvt"
         }
       },
       {
         "title": "WFS",
         "sourceOptions": {
           "type": "wfs",
-          "url": "/swtq",
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
           "queryable": true,
           "params": {
-            "featureTypes": "etablissement_mtq",
+            "featureTypes": "vg_observation_v_autre_wmst",
             "fieldNameGeometry": "geometry",
             "maxFeatures": 1000,
             "version": "2.0.0",
-            "srsName": "EPSG:3798"
+            "srsName": "EPSG:32198"
           },
-          "kksourceFields": [
+          "sourceFields": [
             { "name": "code_municipalite", "alias": "# de la municipalitée" },
             { "name": "date_observation", "allowedOperatorsType": "time" },
             { "name": "urgence", "values": ["Immédiate", "Inconnue"], "allowedOperatorsType": "basic" }
           ],
-          "kkogcFilters": {
+          "ogcFilters": {
             "allowedOperatorsType": "all",
             "enabled": true,
             "editable": true,
@@ -62,7 +62,7 @@
         "sourceOptions": {
           "queryable": true,
           "queryTitle": "identificationDesTravaux",
-          "url": "/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
+          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
           "type": "cluster",
           "distance": 50
         }
