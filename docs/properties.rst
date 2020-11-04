@@ -214,7 +214,7 @@ Propriétés
                Les propriété permises sont:
                    - url
                    - extern
-                   - keyword = liste de mot clef. Sert à la recherche de couches dans la liste de couches
+                   - keyword
                    - abstract = résumé de la couche. Sert au tooltip ici bas.    
          - {url: "http://www.igouverte.org/", extern: true}
          -
