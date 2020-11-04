@@ -451,6 +451,124 @@ Liens
     - `Exemples <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/workspace.json>`__
 
 
+LinkedLayersOptions
+===================
+
+    .. line-block::
+        Permet de définir un lien entre des couches et
+        de synchroniser les propriétés choisies.
+
+Exemples
+
+      .. code:: json
+
+            {"linkedLayers": {
+                "linkId": "wmsTimeFilterSrc",
+                "links": [{
+                            "bidirectionnal": true,
+                            "linkedIds": ["wmsTimeFilterDest"],
+                            "syncedDelete": true,
+                            "properties": ["opacity","timeFilter","visible"]
+                          }]
+            }}
+
+Propriétés de LinkedLayersOptions
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - linkId
+         - String
+         - .. line-block::
+               Identifiant de liaison de la présente couche.
+               Diffère du ID du la couche car cet id doit être 
+               connu au pilotage, pas seulement lors l'éxécution 
+               du code.
+         - 
+         - 
+       * - links
+         - :ref:`LayersLinkProperties[] <LayersLinkProperties>`
+         - .. line-block::
+               Définit la liste des couches "enfant" liées 
+               ainsi que leurs propriété qui sont synchronisées.
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+
+.. _LayersLinkProperties:
+
+Propriétés de LayersLinkProperties
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - bidirectionnal
+         - Boolean
+         - .. line-block::
+               Indique si les 2 couches sont liées de manière 
+               bi-directionnelles. C'est à dire, si une modification 
+               de l'enfant est transférée au parent et inversement.
+         - true | false
+         - true
+       * - linkedIds
+         - string[]
+         - .. line-block::
+               Liste des identifiants de liaison.
+               C'est à dire, une liste des linkId des couches enfant.
+         - 
+         - 
+       * - syncedDelete
+         - Boolean
+         - .. line-block::
+               Indique si les 2 couches doivent être supprimées 
+               simultanément lorsque une ou l'autre des couches 
+               est supprimée de la liste des couches.
+         - true | false
+         - false
+       * - properties
+         - String[]
+         - .. line-block::
+               Indique si les propriétés à maintenir entre les 2 couches liées.
+                   - opacity
+                   - visible
+                   - :ref:`ogcFilters <igoOgcFilterObject>`
+                   - minResolution
+                   - maxResolution
+                   - zIndex
+                   - timeFilter => `Configuration filtre temporel WMS-T (timeFilter)`_
+         - 
+         - 
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Liens
+
+    - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`__
+    - `Exemples <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/layerSync.json>`__
 
 
 
