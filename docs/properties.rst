@@ -488,7 +488,7 @@ Propriétés de LinkedLayersOptions
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - linkId
+       * - **linkId**
          - String
          - .. line-block::
                Identifiant de liaison de la présente couche.
@@ -502,6 +502,7 @@ Propriétés de LinkedLayersOptions
          - .. line-block::
                Définit la liste des couches "enfant" liées 
                ainsi que leurs propriété qui sont synchronisées.
+               Obligatoire pour les couches parents.
          - 
          - 
 
@@ -534,7 +535,7 @@ Propriétés de LayersLinkProperties
                de l'enfant est transférée au parent et inversement.
          - true | false
          - true
-       * - linkedIds
+       * - **linkedIds**
          - string[]
          - .. line-block::
                Liste des identifiants de liaison.
@@ -549,7 +550,7 @@ Propriétés de LayersLinkProperties
                est supprimée de la liste des couches.
          - true | false
          - false
-       * - properties
+       * - **properties**
          - String[]
          - .. line-block::
                Indique si les propriétés à maintenir entre les 2 couches liées.
@@ -895,7 +896,7 @@ Exemples
 
             {"sourceOptions": {
                   "type": "vector",
-                  "url": "https://ws.mapserver.trnsports.gouv.qc.ca//swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson"
+                  "url": "https://ws.mapserver.transports.gouv.qc.ca//swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson"
             }}
 
 
