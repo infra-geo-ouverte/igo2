@@ -307,6 +307,8 @@ Catalog
         Les sources de cataloguage permises:
             - Service WMS
             - Service WMTS
+            - Service ArcGIS REST
+            - Sercice Tile ArcGIS Rest
 
         Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
@@ -314,7 +316,7 @@ Catalog
         filtres temporels souhaités (Voir exemples)
 
         Partage de carte:
-            1- Les couches ajoutées par le catalogue sont partagées lors du partage de carte.
+            1- Les couches ajoutées (WMS-WMTS) par le catalogue sont partagées lors du partage de carte.
             2- La structure de l'url pour les couches partagées est la suivante:
                 - wmsUrl =­­> une liste, séparée par une ',' (virgule) listant les url de service ajoutées.
                       - Exemple : wmsUrl=urlDuService1,urlDuService2
@@ -338,6 +340,15 @@ Exemples
 
             "catalog": {
                   "sources": [
+                  {
+                      "id": "Arcgis Rest",
+                      "title": "Arcgis Rest",
+                      "url": "https://sampleserver1.arcgisonline.com//ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                      "type": "arcgisrest",
+                      "sourceOptions": {
+                          "queryable": true
+                      }
+                  },
                   {
                       "id": "opendataqc",
                       "title": "Données Ouvertes Québec",

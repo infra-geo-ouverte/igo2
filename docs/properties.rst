@@ -672,6 +672,21 @@ ArcGis
        Disponible actuellement mais la documentation est en cours de construction.
 
 
+Exemples
+
+      .. code:: json
+
+            {
+                "sourceOptions": {
+                    "type": "arcgisrest",
+                    "layer": "2",
+                    "queryable": true,
+                    "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                    "queryFormat": "esrijson"
+                }
+            }
+
+
 Tile ArcGis
 ===============
 
@@ -679,11 +694,54 @@ Tile ArcGis
        Disponible actuellement mais la documentation est en cours de construction.
 
 
+Exemples
+
+      .. code:: json
+
+            {
+                "sourceOptions": {
+                    "type": "tilearcgisrest",
+                    "layer": "1",
+                    "queryable": true,
+                    "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                    "queryFormat": "esrijson"
+                }
+            }
+
+
 Carto
 ===============
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
+
+
+Exemples
+
+      .. code:: json
+
+            {
+              "sourceOptions": {
+              "type": "carto",
+              "account": "common-data",
+              "queryable": true,
+              "queryFormat": "geojson",
+              "queryPrecision": "5000",
+              "crossOrigin": "anonymous",
+              "config": {
+                  "version": "1.3.0",
+                  "layers": [
+                        {
+                            "type": "cartodb",
+                            "options": {
+                                "cartocss_version": "2.3.0",
+                                "cartocss": "#layer { line-width: 3; line-color: ramp([yr], (#5F4690, #1D6996, #38A6A5, #0F8554, #73AF48, #EDAD08, #E17C05, #CC503E, #94346E, #6F4070, #666666), (\"2004\", \"2008\", \"2011\", \"1998\", \"2003\", \"1999\", \"1992\", \"2010\", \"2005\", \"1995\"), \"=\"); }",
+                                "sql": "select * from tornado"
+                                }
+                        }
+                  ]
+              }}
+            }
 
 
 OSM
