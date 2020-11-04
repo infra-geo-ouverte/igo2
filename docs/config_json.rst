@@ -307,6 +307,8 @@ Catalog
         Les sources de cataloguage permises:
             - Service WMS
             - Service WMTS
+            - Service ArcGIS REST
+            - Sercice Tile ArcGIS Rest
 
         Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
@@ -314,7 +316,7 @@ Catalog
         filtres temporels souhaités (Voir exemples)
 
         Partage de carte:
-            1- Les couches ajoutées par le catalogue sont partagées lors du partage de carte.
+            1- Les couches ajoutées (WMS-WMTS) par le catalogue sont partagées lors du partage de carte.
             2- La structure de l'url pour les couches partagées est la suivante:
                 - wmsUrl =­­> une liste, séparée par une ',' (virgule) listant les url de service ajoutées.
                       - Exemple : wmsUrl=urlDuService1,urlDuService2
@@ -338,6 +340,16 @@ Exemples
 
             "catalog": {
                   "sources": [
+                  {
+                      "id": "Arcgis Rest",
+                      "title": "Arcgis Rest",
+                      "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                      "type": "arcgisrest",
+                      "sourceOptions": {
+                          "queryable": true,
+                          "idColumn": "OBJECTID"
+                      }
+                  },
                   {
                       "id": "opendataqc",
                       "title": "Données Ouvertes Québec",
@@ -834,7 +846,7 @@ Propriétés
        * - pathToConfigFile
          - String
          - .. line-block::
-               Indique ou ce retrouve le fichier de configuartion des tours dans l'application.
+               Indique ou ce retrouve le fichier de configuration des tours dans l'application.
                Voir la documentation plus loin sur les détails de la configurations des tours.
                Référez vous à :ref:`Tour interactif configuration <igoInteractiveTourConfig>`.
          -
@@ -948,7 +960,8 @@ optionsApi
 ************
 
   Permet de définir le chemin vers API pour les options supplémentaires sur les couches ajoutées par la recherche.
-  Par exemple, les configurations de filtre.
+  Par exemple, les configurations de filtre. Retourne un objet JSON venant se fusionner avec les propriété de la couche.
+  La configuration faite au pilotage a priorité à celles fournies par l'API d'options.
 
 Exemple
 
