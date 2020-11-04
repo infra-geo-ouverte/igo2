@@ -553,7 +553,7 @@ Propriétés de LayersLinkProperties
        * - **properties**
          - String[]
          - .. line-block::
-               Indique si les propriétés à maintenir entre les 2 couches liées.
+               Indique les propriétés à maintenir entre les 2 couches liées.
                    - opacity
                    - visible
                    - :ref:`ogcFilters <igoOgcFilterObject>`
