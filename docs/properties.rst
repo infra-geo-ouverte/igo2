@@ -448,6 +448,7 @@ Propriétés
 Liens
 
     - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`__
+    - `Exemples <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/workspace.json>`__
 
 
 
@@ -1247,7 +1248,8 @@ Options de sources avancées
 Configuration filtre temporel WMS-T (timeFilter)
 ================================================
 
-La configuration du filtre temporel doit être configurée dans sourceOptions {}
+La configuration du filtre temporel doit être configurée dans `SourceOptions`_
+
 Exemples
 
         .. code:: json
@@ -1344,7 +1346,7 @@ Configuration filtre attributaire OGC (ogcFilters)
 Exemples
 ----------
 
-Exemple - filtre avancé disponible à l'utilisateur avec 3 attributs filtrables et quelques valeurs diponibles chacun.
+Exemple - filtre avancé disponible à l'utilisateur.
 
         .. code:: json
 
@@ -1353,12 +1355,7 @@ Exemple - filtre avancé disponible à l'utilisateur avec 3 attributs filtrables
                         "enabled": true,
                         "editable": true,
                         "allowedOperatorsType": "Basic"
-                      },
-                    "sourceFields": [
-                      {"name": "reg_eco", "alias": "région ecologique", "values": ["1a", "2b", "2b", "2c", "4F","5g"]},
-                      {"name": "dom_bio", "alias": "domaine bio-climatique", "allowedOperatorsType": "BasicAndSpatial"},
-                      {"name": "szone_veg", "alias": "sous zone véggtation ", "values": ["Z21", "z12"]}
-                    ]
+                      }
             }
 
 
