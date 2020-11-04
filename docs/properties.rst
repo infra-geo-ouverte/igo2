@@ -286,7 +286,7 @@ Exemples
 
       .. code:: json
 
-            "legendOptions": {
+            {"legendOptions": {
                   "collapsed": false,
                   "display": true,
                   "url": "https://v.seloger.com/s/width/1144/visuels/0/m/l/4/0ml42xbt1n3itaboek3qec5dtskdgw6nlscu7j69k.jpg",
@@ -294,7 +294,7 @@ Exemples
                         { "name": "rain", "title": "Pluie" },
                         { "name": "raster", "title": "Défaut" }
                   ] 
-            }
+            }}
 
 Propriétés
 
@@ -394,11 +394,11 @@ Exemples
 
       .. code:: json
 
-            "workspace": {
+            {"workspace": {
                   "enabled": true,
-                  "minResolution": 0
+                  "minResolution": 0,
                   "maxResolution": 400
-            },
+            }}
 
 Propriétés
 
@@ -475,10 +475,10 @@ Exemples
 
       .. code:: json
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "attributions": "Droits d'auteurs que vous désirez afficher avec votre couche.",
                   "crossOrigin": "anonymous"
-            }
+            }}
 
 
 ArcGis
@@ -513,9 +513,9 @@ Exemples
 
       .. code:: json
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "type": "osm"
-            }
+            }}
 
 
 Propriétés
@@ -558,11 +558,11 @@ Exemples
 
       .. code:: json
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "url": "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson",
                   "type": "cluster",
                   "distance": 50
-            }
+            }}
 
 
 Propriétés
@@ -630,10 +630,10 @@ Exemples
 
       .. code:: json
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
                   "type": "xyz"
-            }
+            }}
 
 
 Propriétés
@@ -688,10 +688,10 @@ Exemples
 
       .. code:: json
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "type": "mvt",
                   "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_sous_route_res_inv_act&map.imagetype=mvt"
-            }
+            }}
 
 
 Propriétés
@@ -774,10 +774,10 @@ Exemples
 
       .. code:: json
 
-            "sourceOptions": {
+            {"sourceOptions": {
                   "type": "vector",
-                  "url": "https://ws.mapserver.transports.gouv.qc.ca//swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
-            }
+                  "url": "https://ws.mapserver.trnsports.gouv.qc.ca//swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson"
+            }}
 
 
 Websocket
@@ -844,7 +844,6 @@ Exemple
                         "queryable": true,
                         "queryTitle": "Véhicule : ${unitid}"
                   }
-                  ...
             }
 
 
@@ -1168,13 +1167,13 @@ Exemples
 
         .. code:: json
 
-            "sourceOptions": {
+            {"sourceOptions": {
                 "type": "wmts",
                 "url": "https://geoegl.msp.gouv.qc.ca/carto/wmts",
                 "format": "image/jpeg",
                 "matrixSet": "EPSG_3857",
                 "layer": "orthos"
-            }
+            }}
 
 
     .. list-table::
@@ -2056,11 +2055,10 @@ Cadastre
 Exemples
 
     .. code:: json
-      :force:
 
-        "cadastre": {
+        {"cadastre": {
             "searchUrl": "https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?"
-        }
+        }}
 
 Propriétés
 
@@ -2113,11 +2111,11 @@ Exemples
 
       .. code:: json
 
-            "coordinatesreverse": {
+            {"coordinatesreverse": {
                   "order": 1,
                   "enabled": false,
                   "available": true
-            }
+            }}
 
 Propriétés
 
@@ -2167,14 +2165,14 @@ Exemples
 
       .. code:: json
 
-            "icherche": {
+            {"icherche": {
                   "title":"ICherche",
                   "showInPointerSummary": true,
                   "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche",
                   "params": {
                         "limit": "8"
                   }
-            }
+            }}
 
 
 Propriétés
@@ -2228,12 +2226,12 @@ Exemples
 
       .. code:: json
 
-            "icherchereverse": {
+            {"icherchereverse": {
                   "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/territoires",
                   "params": {
                         "bufffer": 12
                   }
-            }
+            }}
 
 
 Propriétés
@@ -2283,7 +2281,7 @@ Exemples
 
       .. code:: json
 
-            "ilayer": {
+            {"ilayer": {
                   "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche/layers",
                         "params": {
                         "limit": 15
@@ -2293,7 +2291,7 @@ Exemples
                               "urls": ["https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi"]
                         }
                   }
-            }
+            }}
 
 
 Propriétés
@@ -2350,12 +2348,12 @@ Exemples
 
       .. code:: json
 
-            "ilayer": {
+            {"ilayer": {
                   "searchUrl": "https://nominatim.openstreetmap.org/search",
                   "params": {
                         "limit": 15
                   }
-            }
+            }}
 
 
 Propriétés
@@ -2415,7 +2413,7 @@ Exemples
 
       .. code:: json
 
-            "storedqueries": {
+            {"storedqueries": {
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "rtss",
                   "fields": [
@@ -2423,7 +2421,7 @@ Exemples
                         {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
                   ],
                   "resultTitle": "etiquette"
-            }
+            }}
 
 
 Propriétés
@@ -2511,13 +2509,13 @@ Exemples
 
       .. code:: json
 
-            "storedqueriesreverse": {
+            {"storedqueriesreverse": {
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "lim_adm",
                   "longField": "long",
                   "latField": "lat",
                   "resultTitle": "nom_unite"
-            }
+            }}
 
 
 Propriétés
@@ -2631,10 +2629,9 @@ Exemples
             {
                 "name": "about",
                 "options": {
-                    "html": "<p>Voici IGO</p>" // ou ["<p>Voici IGO</p>", "<p>Voici la seconde ligne</p>"]
+                    "html": ["<p>Voici IGO</p>", "<p>Voici la seconde ligne</p>"]
                 }
             }
-            ...
 
 Propriétés
 
@@ -4404,7 +4401,7 @@ Exemples
         .. code:: json
 
             {
-              "name": "shareMap",
+              "name": "shareMap"
             }
 
 Propriétés
