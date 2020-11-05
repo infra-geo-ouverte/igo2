@@ -39,7 +39,8 @@ export const environment: Environment = {
     auth: {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
-      allowAnonymous: true
+      allowAnonymous: true,
+      trustHosts: ['geoegl.msp.gouv.qc.ca']
     },
     catalog: {
       sources: [
