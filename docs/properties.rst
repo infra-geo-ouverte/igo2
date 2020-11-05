@@ -3504,7 +3504,8 @@ Exemples
             "name": "importExport",
              "options": {
                  "projectionsLimitations": {
-                        "projFromConfig": true,"nad83": true,
+                        "projFromConfig": true,
+                        "nad83": true,
                         "wgs84": true,
                         "webMercator": true,
                         "utm": true,
