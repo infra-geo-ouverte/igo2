@@ -118,6 +118,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     pageSize: 50, // Number of items to display on a page.
     pageSizeOptions: [1, 5, 10, 20, 50, 100, 500] // The set of provided page size options to display to the user.
   };
+  public workspaceMenuClass = 'workspace-menu';
 
   public fullExtent = this.storageService.get('fullExtent') as boolean;
   public sidenavOpened = false;

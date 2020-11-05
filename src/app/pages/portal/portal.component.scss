@@ -341,3 +341,20 @@ app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container 
     line-height: 24px;
   }
 }
+
+.eye-workspace {
+  margin-left: 7px;
+  margin-top: 5px;
+}
+
+.actionbar-workspace {
+  padding-left: 0px;
+}
+
+::ng-deep div.workspace-menu {
+  max-width: fit-content !important;
+
+  div.mat-menu-content ::ng-deep span.mat-checkbox-label, div.mat-menu-content ::ng-deep div.mat-list-text {
+    font-size: 12px;
+  }
+}
