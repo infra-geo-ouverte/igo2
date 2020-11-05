@@ -214,7 +214,25 @@
       "name": "activeOgcFilter"
     },
     {
-      "name": "importExport"
+      "name": "importExport",
+      "options": {
+        "projectionsLimitations": {
+          "projFromConfig": true,
+          "nad83": true,
+          "wgs84": true,
+          "webMercator": true,
+          "utm": true,
+          "mtm": true,
+          "utmZone": {
+            "minZone": 17,
+            "maxZone": 21
+          },
+          "mtmZone": {
+            "minZone": 3,
+            "maxZone": 10
+          }
+        }
+      }
     },
     {
       "name": "print"

@@ -3501,7 +3501,24 @@ Exemples
         .. code:: json
 
           {
-            "name": "importExport"
+            "name": "importExport",
+             "options": {
+                 "projectionsLimitations": {
+                        "projFromConfig": true,"nad83": true,
+                        "wgs84": true,
+                        "webMercator": true,
+                        "utm": true,
+                        "mtm": true,
+                        "utmZone": {
+                              "minZone": 17,
+                              "maxZone": 21
+                              },
+                              "mtmZone": {
+                              "minZone": 4,
+                              "maxZone": 10
+                              }
+                  }
+            }
           }
 
     .. line-block::
@@ -3544,8 +3561,67 @@ Propriétés
                    - fichiers dans :ref:`Language <igolanguage>`.
          -
          - igo.integration.tools.importExport
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - projectionsLimitations
+         - {}
+         - .. line-block::
+               Permet de controler la liste des projections disponible dans l'outil.
+         - .. line-block::
+               {
+               "projFromConfig": true, // Utiliser les projections définies dans la configuration 
+               "nad83": true, // Utiliser le NAD83
+               "wgs84": true, // Utiliser le WGS84
+               "webMercator": true, // Utiliser le WebMercator (EPSG:3857)
+               "utm": true, // Utiliser les projections UTM
+               "mtm": true, // Utiliser les projections MTM
+               "utmZone": {
+                 "minZone": 17, // Zone minimale UTM
+                 "maxZone": 21  // Zone maximale UTM
+               },
+               "mtmZone": {
+                 "minZone": 4, // Zone minimale MTM
+                 "maxZone": 10  // Zone maximale MTM
+               }}
+         - .. line-block::
+               {
+               "projFromConfig": true,
+               "nad83": true,
+               "wgs84": true,
+               "webMercator": true,
+               "utm": true,
+               "mtm": true,
+               "utmZone": {
+                 "minZone": 1,
+                 "maxZone": 60
+               },
+               "mtmZone": {
+                 "minZone": 1,
+                 "maxZone": 10
+               }}
+               
 
 Liens
 
