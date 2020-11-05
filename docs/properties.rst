@@ -3503,6 +3503,7 @@ Exemples
           {
             "name": "importExport",
              "options": {
+                 "selectFirstProj": false,
                  "projectionsLimitations": {
                         "projFromConfig": true,
                         "nad83": true,
@@ -3586,6 +3587,12 @@ Options
                Valeurs possibles
          - .. line-block::
                Valeur défaut
+       * - selectFirstProj
+         - boolean
+         - .. line-block::
+               Permet de controler si la première projection rencontrée dans la liste sera sélectionnée.
+         - true / false
+         - false
        * - projectionsLimitations
          - {}
          - .. line-block::
