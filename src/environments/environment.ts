@@ -26,6 +26,7 @@ interface Environment {
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
+    interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
   };
 }
 
@@ -72,9 +73,10 @@ export const environment: Environment = {
             },
             {
               id: 'rn_wmts',
-              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
+              url:
+                'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
               type: 'wmts',
-              crossOrigin: true,
+              setCrossOriginAnonymous: true,
               matrixSet: 'EPSG_3857',
               version: '1.0.0'
             }
@@ -82,35 +84,40 @@ export const environment: Environment = {
         },
         {
           id: 'group_impose',
-          title: '(composite catalog) group imposed and unique layer title for same source',
+          title:
+            '(composite catalog) group imposed and unique layer title for same source',
           url: '',
           composite: [
             {
               id: 'tq_swtq',
               url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
               regFilters: ['zpegt'],
-              groupImpose: {id: 'zpegt', title: 'zpegt'}
+              groupImpose: { id: 'zpegt', title: 'zpegt' }
             },
             {
               id: 'Gououvert',
               url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
               regFilters: ['zpegt'],
-              groupImpose: {id: 'zpegt', title: 'zpegt'}
+              groupImpose: { id: 'zpegt', title: 'zpegt' }
             },
             {
               id: 'Gououvert',
               url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
               regFilters: ['zpegt'],
-              groupImpose: {id: 'zpegt', title: 'zpegt'}
+              groupImpose: { id: 'zpegt', title: 'zpegt' }
             },
             {
               id: 'rn_wmts',
-              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
+              url:
+                'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
               type: 'wmts',
-              crossOrigin: true,
+              setCrossOriginAnonymous: true,
               matrixSet: 'EPSG_3857',
               version: '1.0.0',
-              groupImpose: {id: 'cartetopo', title: 'Carte topo échelle 1/20 000'}
+              groupImpose: {
+                id: 'cartetopo',
+                title: 'Carte topo échelle 1/20 000'
+              }
             }
           ]
         },
@@ -123,13 +130,19 @@ export const environment: Environment = {
               id: 'tq_swtq',
               url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
               regFilters: ['limtn_charg'],
-              groupImpose: {id: 'mix_swtq_gouv', title: 'mix same name layer'}
+              groupImpose: {
+                id: 'mix_swtq_gouv',
+                title: 'mix same name layer'
+              }
             },
             {
               id: 'Gououvert',
               url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
               regFilters: ['limtn_charg'],
-              groupImpose: {id: 'mix_swtq_gouv', title: 'mix same name layer'}
+              groupImpose: {
+                id: 'mix_swtq_gouv',
+                title: 'mix same name layer'
+              }
             }
           ]
         }
@@ -141,6 +154,10 @@ export const environment: Environment = {
     // },
     language: {
       prefix: './locale/'
+    },
+    interactiveTour: {
+      tourInMobile: true,
+      pathToConfigFile: './config/interactiveTour.json'
     },
     importExport: {
       url: '/apis/ogre'

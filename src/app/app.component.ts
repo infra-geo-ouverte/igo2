@@ -1,6 +1,7 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { zip } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { userAgent } from '@igo2/utils';
 import {
@@ -43,11 +44,12 @@ export class AppComponent {
   }
 
   private readTitleConfig() {
-    const title = this.configService.getConfig('title');
-    if (title) {
-      this.titleService.setTitle(title);
-      this.metaService.addTag({ name: 'title', content: title });
-    }
+    this.languageService.translate.get(this.configService.getConfig('title')).subscribe(title => {
+      if (title) {
+        this.titleService.setTitle(title);
+        this.metaService.addTag({ name: 'title', content: title });
+      }
+    });
   }
 
   private readThemeConfig() {
@@ -75,14 +77,18 @@ export class AppComponent {
       const translate = this.languageService.translate;
       const title$ = translate.get('oldBrowser.title');
       const message$ = translate.get('oldBrowser.message');
-      zip(title$, message$, (title: string, message: string) => ({
-        title,
-        message
-      })).subscribe(rep =>
-        this.messageService.alert(rep.message, rep.title, {
-          timeOut: 15000
-        })
-      );
+      zip(title$, message$)
+        .pipe(
+          map(([title, message]) => ({
+            title,
+            message
+          }))
+        )
+        .subscribe((rep) =>
+          this.messageService.alert(rep.message, rep.title, {
+            timeOut: 15000
+          })
+        );
     }
   }
 }

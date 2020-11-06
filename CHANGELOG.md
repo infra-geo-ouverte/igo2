@@ -1,3 +1,52 @@
+## [1.5.1](https://github.com/infra-geo-ouverte/igo2/compare/1.5.0...1.5.1) (2020-10-20)
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.5.1 ([554feb9](https://github.com/infra-geo-ouverte/igo2/commit/554feb99947c5ce78a783a2550cd3107952b9000))
+
+
+
+# [1.5.0](https://github.com/infra-geo-ouverte/igo2/compare/1.4.1...1.5.0) (2020-10-16)
+
+
+### Bug Fixes
+
+* **docs:** fix url control vector docs ([#496](https://github.com/infra-geo-ouverte/igo2/issues/496)) ([d37df93](https://github.com/infra-geo-ouverte/igo2/commit/d37df93b38cafe2153955b694f3745b9d98242af))
+* **interactive-tour:** fix menu button click ([#498](https://github.com/infra-geo-ouverte/igo2/issues/498)) ([a9396f9](https://github.com/infra-geo-ouverte/igo2/commit/a9396f9304d730425fb6c2e2b343f6db20374d61))
+* **iphone:** zoom auto on form ([d6da10b](https://github.com/infra-geo-ouverte/igo2/commit/d6da10b7b8010482df2a0f5c5ca29a818ead0005))
+* **measurer-tool:** fix interactive tour ([#501](https://github.com/infra-geo-ouverte/igo2/issues/501)) ([8c4e74e](https://github.com/infra-geo-ouverte/igo2/commit/8c4e74eba586c5cdd2d1d532c0798b589a81049a))
+* **measurer-tour:** remove last ng-reflect attribute ([#502](https://github.com/infra-geo-ouverte/igo2/issues/502)) ([6dd0a3e](https://github.com/infra-geo-ouverte/igo2/commit/6dd0a3e2dd444562dd9624daade9fc56e26976d3))
+* **portal/toast/interactive:** fix release 1.5 ([#521](https://github.com/infra-geo-ouverte/igo2/issues/521)) ([1612209](https://github.com/infra-geo-ouverte/igo2/commit/1612209bea44d0094edc37170fb5a83a9f0b13fd))
+* **prod:** fix toolbar not working in production ([68b2602](https://github.com/infra-geo-ouverte/igo2/commit/68b2602eddefc047e7adaf9fdd10fb1ef7eed263))
+* **prod:** fix warning build prod ([40fadd6](https://github.com/infra-geo-ouverte/igo2/commit/40fadd6d42fd81df9f23f83bbcbde20c5538a23b))
+* **search-bar:** fix clear search bar item when other tool is open ([#490](https://github.com/infra-geo-ouverte/igo2/issues/490)) ([845ff04](https://github.com/infra-geo-ouverte/igo2/commit/845ff04b415d5acf6fc09e1a20f416c8f1e9ce60)), closes [#485](https://github.com/infra-geo-ouverte/igo2/issues/485) [#487](https://github.com/infra-geo-ouverte/igo2/issues/487) [#488](https://github.com/infra-geo-ouverte/igo2/issues/488)
+* **sidenav:** close sidenav when result is selected in mobile ([#528](https://github.com/infra-geo-ouverte/igo2/issues/528)) ([4351014](https://github.com/infra-geo-ouverte/igo2/commit/4351014340a2f7a07e08513a27aaa3b1fa1f75d4))
+* **toast-panel:** toast is opened by default ([3de8948](https://github.com/infra-geo-ouverte/igo2/commit/3de8948cebaf95c702eba9ce9eed0813a9f6585b))
+
+
+### Features
+
+* **auth:** add microsoft azure authentification ([d20a754](https://github.com/infra-geo-ouverte/igo2/commit/d20a754fe394b4c961b54d2c21e2565b6e3877ba))
+* **igo2-lib:** upgrade to 1.5.0 ([b9ab59b](https://github.com/infra-geo-ouverte/igo2/commit/b9ab59bc436f6f396ba60d03c8eeb25c4707eb8b))
+* **interactive-tour:** add measurer tool interactive tour ([#489](https://github.com/infra-geo-ouverte/igo2/issues/489)) ([0b0cdef](https://github.com/infra-geo-ouverte/igo2/commit/0b0cdef5210d233e1c84bd8d4f23abaeaaac818b)), closes [#485](https://github.com/infra-geo-ouverte/igo2/issues/485) [#487](https://github.com/infra-geo-ouverte/igo2/issues/487) [#488](https://github.com/infra-geo-ouverte/igo2/issues/488)
+* **libs:** upgrade librairies ([#485](https://github.com/infra-geo-ouverte/igo2/issues/485)) ([031afce](https://github.com/infra-geo-ouverte/igo2/commit/031afce64817046ff5a1603c440c84e1d3ffb75e))
+* **spatial-filter:** add spatial filter interactive tour ([#492](https://github.com/infra-geo-ouverte/igo2/issues/492)) ([fa9fd3a](https://github.com/infra-geo-ouverte/igo2/commit/fa9fd3ac8735d86397fda40cb1a59239b28e8a10)), closes [#485](https://github.com/infra-geo-ouverte/igo2/issues/485) [#487](https://github.com/infra-geo-ouverte/igo2/issues/487) [#488](https://github.com/infra-geo-ouverte/igo2/issues/488)
+* **tour:** Interactive tour general ([#510](https://github.com/infra-geo-ouverte/igo2/issues/510)) ([03830bc](https://github.com/infra-geo-ouverte/igo2/commit/03830bc125cd0ac951e0aa20e733cd050606d344))
+* **welcomeWindow:** provide parameters to the welcome message. ([#522](https://github.com/infra-geo-ouverte/igo2/issues/522)) ([fed8d2a](https://github.com/infra-geo-ouverte/igo2/commit/fed8d2a27c62035cfbef46a9c447a11e90417667))
+* **workspace:** enabling table view for vector layers ([#471](https://github.com/infra-geo-ouverte/igo2/issues/471)) ([989f9d4](https://github.com/infra-geo-ouverte/igo2/commit/989f9d4bc7c2b6335da0f8865a8eaf4d869bfa16)), closes [#485](https://github.com/infra-geo-ouverte/igo2/issues/485) [#487](https://github.com/infra-geo-ouverte/igo2/issues/487) [#488](https://github.com/infra-geo-ouverte/igo2/issues/488)
+
+
+
+## [1.4.1](https://github.com/infra-geo-ouverte/igo2/compare/1.4.0...1.4.1) (2020-09-08)
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.4.3 ([9e11606](https://github.com/infra-geo-ouverte/igo2/commit/9e116061242f9dddd1b7d4bd517d9f34e290c103))
+
+
+
 # [1.4.0](https://github.com/infra-geo-ouverte/igo2/compare/1.3.1...1.4.0) (2020-08-04)
 
 
@@ -592,9 +641,9 @@
 
 ### Bug Fixes
 
-* package.json & .snyk to reduce vulnerabilities ([#215](https://github.com/infra-geo-ouverte/igo2/issues/215)) ([19a76f1](https://github.com/infra-geo-ouverte/igo2/commit/19a76f1fa135895f0dd848b4fbcec7af517878f8))
 * **polyfill:** add intl polyfill, needed for safari < 10 ([56b49f7](https://github.com/infra-geo-ouverte/igo2/commit/56b49f74db98faebb98e38606da5b86ac352b557))
 * **travis:** fix npm cache with npm5 and node v8.0 ([#216](https://github.com/infra-geo-ouverte/igo2/issues/216)) ([0db0dc2](https://github.com/infra-geo-ouverte/igo2/commit/0db0dc2da0424ba2c4f91d3426fd90d6a4baf14c))
+* package.json & .snyk to reduce vulnerabilities ([#215](https://github.com/infra-geo-ouverte/igo2/issues/215)) ([19a76f1](https://github.com/infra-geo-ouverte/igo2/commit/19a76f1fa135895f0dd848b4fbcec7af517878f8))
 
 
 ### Features
@@ -611,8 +660,8 @@
 
 ### Bug Fixes
 
-* package.json & .snyk to reduce vulnerabilities ([#209](https://github.com/infra-geo-ouverte/igo2/issues/209)) ([5819a03](https://github.com/infra-geo-ouverte/igo2/commit/5819a035e23b42a8e7ac6cd8a6c9038be8bd7547))
 * **assets:** fix path favicons and remove unused assets ([6ba0d97](https://github.com/infra-geo-ouverte/igo2/commit/6ba0d97ce4a409aad88ca3c02e9fe576188f2d2c))
+* package.json & .snyk to reduce vulnerabilities ([#209](https://github.com/infra-geo-ouverte/igo2/issues/209)) ([5819a03](https://github.com/infra-geo-ouverte/igo2/commit/5819a035e23b42a8e7ac6cd8a6c9038be8bd7547))
 * **favicon:** fix favicon url ([e87f1a5](https://github.com/infra-geo-ouverte/igo2/commit/e87f1a5ce6279ac6804e6099a42f22060d523b56))
 
 
@@ -655,9 +704,9 @@
 
 ### Bug Fixes
 
+* **tool history:** Prevent the same tool from appearing more than once in the tool history ([#174](https://github.com/infra-geo-ouverte/igo2/issues/174)) ([d6df0eb](https://github.com/infra-geo-ouverte/igo2/commit/d6df0eb9bf4d0a499ad783f58eefa3eedd731859))
 * package.json & .snyk to reduce vulnerabilities ([#170](https://github.com/infra-geo-ouverte/igo2/issues/170)) ([f1cca8d](https://github.com/infra-geo-ouverte/igo2/commit/f1cca8d45a0514f58043f7cc6cd57a5821ddd2d0))
 * package.json & .snyk to reduce vulnerabilities ([#171](https://github.com/infra-geo-ouverte/igo2/issues/171)) ([c678440](https://github.com/infra-geo-ouverte/igo2/commit/c67844075f425fa4010a9d1a28db53957ce13d2f))
-* **tool history:** Prevent the same tool from appearing more than once in the tool history ([#174](https://github.com/infra-geo-ouverte/igo2/issues/174)) ([d6df0eb](https://github.com/infra-geo-ouverte/igo2/commit/d6df0eb9bf4d0a499ad783f58eefa3eedd731859))
 
 
 ### Features
@@ -758,21 +807,19 @@
 
 ### Bug Fixes
 
-* package.json & .snyk to reduce vulnerabilities ([184f888](https://github.com/infra-geo-ouverte/igo2/commit/184f888651701f2c7641af770b041a2f047d81d6))
-* package.json & .snyk to reduce vulnerabilities ([#49](https://github.com/infra-geo-ouverte/igo2/issues/49)) ([a7aac77](https://github.com/infra-geo-ouverte/igo2/commit/a7aac7785b6c7707896a077a2633c3a858c0521c))
 * **deps:** move angular-cli to @angular/cli ([#61](https://github.com/infra-geo-ouverte/igo2/issues/61)) ([aa7b28a](https://github.com/infra-geo-ouverte/igo2/commit/aa7b28a4b4050ca5aab58d6d6ba4cb24deb0d94d))
-* package.json & .snyk to reduce vulnerabilities ([#90](https://github.com/infra-geo-ouverte/igo2/issues/90)) ([c5c2a03](https://github.com/infra-geo-ouverte/igo2/commit/c5c2a03ff28f7bd461badcb70a25e4c6d059396f))
 * **flex:** fix warning "export FlexState was not found" ([#105](https://github.com/infra-geo-ouverte/igo2/issues/105)) ([11889df](https://github.com/infra-geo-ouverte/igo2/commit/11889dfef17d45e4b4c225126fe2845c563217b8))
 * **icherche:** change url ([57ce93f](https://github.com/infra-geo-ouverte/igo2/commit/57ce93f22bfe0bc55e828e4f825e83fe648c15c8))
 * **ui issue:** Fix minor ui issue causing scrollbars to appear ([2feb8d1](https://github.com/infra-geo-ouverte/igo2/commit/2feb8d13c45b3334526117698104d4e4c97ff491))
+* package.json & .snyk to reduce vulnerabilities ([184f888](https://github.com/infra-geo-ouverte/igo2/commit/184f888651701f2c7641af770b041a2f047d81d6))
+* package.json & .snyk to reduce vulnerabilities ([#49](https://github.com/infra-geo-ouverte/igo2/issues/49)) ([a7aac77](https://github.com/infra-geo-ouverte/igo2/commit/a7aac7785b6c7707896a077a2633c3a858c0521c))
+* package.json & .snyk to reduce vulnerabilities ([#90](https://github.com/infra-geo-ouverte/igo2/issues/90)) ([c5c2a03](https://github.com/infra-geo-ouverte/igo2/commit/c5c2a03ff28f7bd461badcb70a25e4c6d059396f))
 
 
 ### Features
 
-* Add a toolbar component and keep track of the selected tool ([2b7fd78](https://github.com/infra-geo-ouverte/igo2/commit/2b7fd78c92935522d1b02c8966090bd8a93a4648))
-* **group results:** Group results by source in a collapsible component ([#98](https://github.com/infra-geo-ouverte/igo2/issues/98)) ([73af76d](https://github.com/infra-geo-ouverte/igo2/commit/73af76d29f7c2519c28b083432fa177008873167))
-* Flex pane component and dummy primary/secondary pane ([#51](https://github.com/infra-geo-ouverte/igo2/issues/51)) ([f027fdc](https://github.com/infra-geo-ouverte/igo2/commit/f027fdcd6594af0611bc12ae2032015c16712d05))
 * **favicon:** Change favicon and title ([#112](https://github.com/infra-geo-ouverte/igo2/issues/112)) ([628bb20](https://github.com/infra-geo-ouverte/igo2/commit/628bb207e9fdf3ef2dfc032140e09f2f771ecbfd))
+* **group results:** Group results by source in a collapsible component ([#98](https://github.com/infra-geo-ouverte/igo2/issues/98)) ([73af76d](https://github.com/infra-geo-ouverte/igo2/commit/73af76d29f7c2519c28b083432fa177008873167))
 * **icherche:** change url ([f829354](https://github.com/infra-geo-ouverte/igo2/commit/f829354827f6bd4d52669b3176e12c6648b7f9c9))
 * **search result:** Search result focused and selected states ([#73](https://github.com/infra-geo-ouverte/igo2/issues/73)) ([4e7eaf9](https://github.com/infra-geo-ouverte/igo2/commit/4e7eaf94233e7a8af5e824c28b3de41a8cc874c9))
 * **search result bbox and feature:** Use the search result bbox if availabe to pan/zoom the map and add the search result vector feature ([7c645c9](https://github.com/infra-geo-ouverte/igo2/commit/7c645c978d92dc7696c56976d9d12ec0fb48d16b))
@@ -785,6 +832,8 @@
 * **wmts:** add WMTS layer support ([#107](https://github.com/infra-geo-ouverte/igo2/issues/107)) ([0c4d0ff](https://github.com/infra-geo-ouverte/igo2/commit/0c4d0ff3073da1d04819a3a978215f72cd786127))
 * **xyz layer:** add Xyz layer ([#60](https://github.com/infra-geo-ouverte/igo2/issues/60)) ([0f857bf](https://github.com/infra-geo-ouverte/igo2/commit/0f857bf96e4dd49033784448f1770af3fd21994c))
 * **zoom:** Zoom component ([#109](https://github.com/infra-geo-ouverte/igo2/issues/109)) ([fd85bf9](https://github.com/infra-geo-ouverte/igo2/commit/fd85bf979705c7cbeab579758d4c7ec9d3458fc0))
+* Add a toolbar component and keep track of the selected tool ([2b7fd78](https://github.com/infra-geo-ouverte/igo2/commit/2b7fd78c92935522d1b02c8966090bd8a93a4648))
+* Flex pane component and dummy primary/secondary pane ([#51](https://github.com/infra-geo-ouverte/igo2/issues/51)) ([f027fdc](https://github.com/infra-geo-ouverte/igo2/commit/f027fdcd6594af0611bc12ae2032015c16712d05))
 
 
 ### Reverts

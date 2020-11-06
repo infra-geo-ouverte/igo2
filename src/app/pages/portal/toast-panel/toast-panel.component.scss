@@ -28,21 +28,18 @@
 
 :host.app-full-toast-panel-opened {
   height: auto;
-  max-height: $app-full-toast-panel-max-height;
-  width: $app-full-toast-panel-max-width;
+  max-height: 650px;
+  width: 45%;
 
   @include tablet {
     width: 500px;
+    max-height: 500px;
   }
 
   .toast-content {
     height: 100%;
     width: 100%;
   }
-}
-    
-.toastDiv {
-  outline: none;
 }
 
 igo-panel ::ng-deep .igo-panel-header:hover {
@@ -51,6 +48,7 @@ igo-panel ::ng-deep .igo-panel-header:hover {
 
 igo-panel {
   height: 100%;
+  outline: none;
 }
 
 igo-panel ::ng-deep h3 {
@@ -76,20 +74,20 @@ igo-panel ::ng-deep .igo-panel-content {
 }
 
 :host.app-full-toast-panel-opened igo-panel ::ng-deep .igo-panel-content {
-  max-height: 746px;
-  overflow: hidden;
-  -webkit-user-select: auto !important;
-  -moz-user-select: auto !important;
-  -ms-user-select: auto !important;
-  user-select: auto !important;
-
-  igo-list {
-    max-height: $app-full-toast-panel-max-height;
-  }
+  max-height: calc(650px - 46px);
+  overflow: auto;
 }
 
 igo-feature-details ::ng-deep iframe {
   min-height: 226px;
+}
+
+host.app-full-toast-panel-opened igo-feature-details[_ngcontent-fiq-c23] iframe {
+  min-height: 450px;
+
+  @include mobile {
+    min-height: 350px;
+  }
 }
 
 .swipe-fix {

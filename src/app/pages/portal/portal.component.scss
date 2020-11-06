@@ -1,5 +1,18 @@
 @import './portal.variables';
 
+#tour-button {
+  font-weight: bold;
+  position: absolute;
+  left: $igo-margin;
+  top: 50px;
+  z-index: 4;
+}
+.tour-button-title {
+  @include mobile {
+    display: none;
+  }
+}
+
 /*** Main ***/
 :host {
   width: 100%;
@@ -8,6 +21,29 @@
 }
 
 /*** Menu button ***/
+
+.menu-button-reverse-color {
+  height: 40px;
+  position: absolute;
+  top: 3px;
+  z-index: 4;
+  border-radius: 0;
+  height: 45px;
+  width: 48px;
+}
+
+.menu-button-reverse-color-close {
+
+  position: absolute;
+  left: $igo-margin;
+  top: $igo-margin;
+  z-index: 4;
+  border-radius: 0;
+}
+
+mat-icon.disabled {
+  color: rgba(0, 0, 0, 0.38);
+}
 
 .menu-button {
   background-color: $app-background-color;
@@ -75,20 +111,32 @@ igo-map-browser.sidenav-offset ::ng-deep .ol-overlaycontainer-stopevent {
   left: 400px;
   width: calc(100% - 380px);
 
+  .ol-scale-line {
+    left: 40%;
+  }
+
   @include mobile {
     display: none;
   }
 }
 
 igo-map-browser.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
-  bottom: 279px;
+  bottom: $app-expansion-panel-height;
 }
 
-igo-map-browser.toast-offset-scale-line ::ng-deep .ol-overlaycontainer-stopevent ::ng-deep .ol-scale-line {
+igo-map-browser.toast-offset-scale-line
+  ::ng-deep
+  .ol-overlaycontainer-stopevent
+  ::ng-deep
+  .ol-scale-line {
   bottom: 50px;
 }
 
-igo-map-browser.toast-offset-attribution ::ng-deep .ol-overlaycontainer-stopevent ::ng-deep .ol-attribution {
+igo-map-browser.toast-offset-attribution
+  ::ng-deep
+  .ol-overlaycontainer-stopevent
+  ::ng-deep
+  .ol-attribution {
   @include mobile {
     bottom: 50px;
   }
@@ -128,6 +176,27 @@ mat-sidenav-content {
 }
 
 /*** Expansion Panel ***/
+.spacer {
+  flex: 1 1 auto;
+}
+
+igo-actionbar {
+  padding-left: 7px;
+  padding-top: 5px;
+}
+
+igo-workspace-selector {
+  @include mobile {
+    width: 100px;
+  }
+}
+
+igo-entity-table-paginator {
+  @include mobile {
+    margin-left: -30px;
+  }
+}
+
 app-expansion-panel {
   position: absolute;
   bottom: 0;
@@ -135,8 +204,8 @@ app-expansion-panel {
   z-index: 5;
 
   @include mobile {
-    @supports (-webkit-appearance:none) and (not (overflow:-webkit-marquee))
-    and (not (-ms-ime-align:auto)) and (not (-moz-appearance:none)) {
+    @supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee))
+      and (not (-ms-ime-align: auto)) and (not (-moz-appearance: none)) {
       z-index: 1;
     }
   }
@@ -149,6 +218,7 @@ app-toast-panel {
   margin-left: -300px;
   width: 600px;
   z-index: 5;
+  outline: none;
 
   @include mobile {
     width: calc(100% - #{$app-footer-height});
@@ -160,6 +230,10 @@ app-toast-panel {
     width: 500px;
     left: calc(50% + 60px);
   }
+}
+
+app-toast-panel.app-full-toast-panel-collapsed {
+  width: 45%;
 }
 
 app-toast-panel.expansion-panel-expanded,
@@ -206,5 +280,64 @@ igo-geolocate-button {
 igo-zoom-button {
   @include tablet {
     display: none;
+  }
+}
+
+
+
+/*** Info panel ***/
+app-toast-panel-for-expansion {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -300px;
+  width: 600px;
+  z-index: 6;
+
+  @include medium-screen {
+    width: 480px;
+    margin-left: -240px;
+  }
+
+  @include small-screen {
+    width: 480px;
+    margin-left: -240px;
+  }
+
+  @include tablet {
+    width: calc(100% - 2 * #{$app-footer-height});
+    left: $app-footer-height;
+    margin-left: 0;
+  }
+
+  @include mobile {
+    width: calc(100% - 2 * #{$app-footer-height});
+    left: $app-footer-height;
+    margin-left: 0;
+  }
+}
+
+toast-panel-for-expansion.toast-panel-for-expansion-opened {
+  @include mobile {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.mat-table thead mat-header-row .mat-table-sticky {
+  background: none;
+}
+
+/*** Info panel close/open buttons ***/
+app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container {
+  position: absolute;
+  top: -10px;
+  right: -15px;
+  z-index: 6;
+  padding: 5px;
+
+  button {
+    height: 24px;
+    line-height: 24px;
   }
 }

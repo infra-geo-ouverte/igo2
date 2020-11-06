@@ -1,85 +1,86 @@
 <ng-template #toast>
-  <div class="toastDiv" tabindex="0" (keydown)="handleKeyboardEvent($event)">
-    <igo-panel
-      *ngIf="store.entities$ | async"
-      [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
-      (click)="onToggleClick($event)">
+  <igo-panel
+    *ngIf="store.entities$ | async"
+    [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
+    (click)="onToggleClick($event)"
+    tabindex="0"
+    (keydown)="handleKeyboardEvent($event)">
 
-      <igo-actionbar
-        panelLeftButton
-        [store]="actionStore"
-        [withIcon]="true"
-        [icon]="icon"
-        [withTitle]="actionbarMode === 'overlay'"
-        [horizontal]="true"
-        [mode]="actionbarMode">
-      </igo-actionbar>
+    <igo-actionbar
+      id="igo-actionbar"
+      panelLeftButton
+      [store]="actionStore"
+      [withIcon]="true"
+      [icon]="icon"
+      [withTitle]="actionbarMode === 'overlay'"
+      [horizontal]="true"
+      [mode]="actionbarMode">
+    </igo-actionbar>
 
-      <button
+    <button
+      *ngIf="resultSelected$.value"
+      [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
+      mat-icon-button
+      igoStopPropagation
+      panelLeftButton
+      [matTooltip]="'toastPanel.previousFeatureTooltip' | translate"
+      matTooltipShowDelay="500"
+      (click)="previousResult()">
+      <mat-icon svgIcon="chevron-left"></mat-icon>
+    </button>
+
+    <button
+      *ngIf="resultSelected$.value"
+      [disabled]="results[results.length-1].meta.id === resultSelected$.value.meta.id"
+      mat-icon-button
+      igoStopPropagation
+      panelRightButton
+      [matTooltip]="'toastPanel.nextFeatureTooltip' | translate"
+      matTooltipShowDelay="500"
+      (click)="nextResult()">
+      <mat-icon svgIcon="chevron-right"></mat-icon>
+    </button>
+
+    <button
+      *ngIf="resultSelected$.value"
+      mat-icon-button
+      igoStopPropagation
+      panelRightButton
+      [matTooltip]="'toastPanel.zoomOnFeatureTooltip' | translate"
+      matTooltipShowDelay="500"
+      (click)="zoomTo()">
+      <mat-icon svgIcon="magnify-plus-outline"></mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      igoStopPropagation
+      panelRightButton
+      (click)="clear()">
+      <mat-icon svgIcon="close"></mat-icon>
+    </button>
+
+    <div #content class="toast-content">
+
+      <igo-feature-details
         *ngIf="resultSelected$.value"
-        [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
-        mat-icon-button
-        igoStopPropagation
-        panelLeftButton
-        [matTooltip]="'toastPanel.previousFeatureTooltip' | translate"
-        matTooltipShowDelay="500"
-        (click)="previousResult()">
-        <mat-icon svgIcon="chevron-left"></mat-icon>
-      </button>
+        [feature]="resultSelected$.value.data">
+      </igo-feature-details>
 
-      <button
-        *ngIf="resultSelected$.value"
-        [disabled]="results[results.length-1].meta.id === resultSelected$.value.meta.id"
-        mat-icon-button
-        igoStopPropagation
-        panelRightButton
-        [matTooltip]="'toastPanel.nextFeatureTooltip' | translate"
-        matTooltipShowDelay="500"
-        (click)="nextResult()">
-        <mat-icon svgIcon="chevron-right"></mat-icon>
-      </button>
-
-      <button
-        *ngIf="resultSelected$.value"
-        mat-icon-button
-        igoStopPropagation
-        panelRightButton
-        [matTooltip]="'toastPanel.zoomOnFeatureTooltip' | translate"
-        matTooltipShowDelay="500"
-        (click)="zoomTo()">
-        <mat-icon svgIcon="magnify-plus-outline"></mat-icon>
-      </button>
-
-      <button
-        mat-icon-button
-        igoStopPropagation
-        panelRightButton
-        (click)="clear()">
-        <mat-icon svgIcon="close"></mat-icon>
-      </button>
-
-      <div #content class="toast-content">
-
-        <igo-feature-details
-          *ngIf="resultSelected$.value"
-          [feature]="resultSelected$.value.data">
-        </igo-feature-details>
-
-        <igo-search-results
-          *ngIf="!resultSelected$.value"
-          [map]="map"
-          [store]="store"
-          [showIcons]="true"
-          [withZoomButton]="withZoomButton"
-          (resultFocus)="focusResult($event)"
-          (resultUnfocus)="unfocusResult($event, true)"
-          (resultMouseenter)="focusResult($event)"
-          (resultMouseleave)="unfocusResult($event)"
-          (resultSelect)="selectResult($event)">
-        </igo-search-results>
-      </div>
-    </igo-panel>
-  </div>
+      <igo-search-results
+        *ngIf="!resultSelected$.value"
+        [map]="map"
+        [store]="store"
+        [showIcons]="true"
+        [withZoomButton]="withZoomButton"
+        (resultFocus)="focusResult($event)"
+        (resultUnfocus)="unfocusResult($event, true)"
+        (resultMouseenter)="focusResult($event)"
+        (resultMouseleave)="unfocusResult($event)"
+        (resultSelect)="selectResult($event)">
+      </igo-search-results>
+    </div>
+  </igo-panel>
 </ng-template>
 
 <div *ngIf="isMobile(); else toast"

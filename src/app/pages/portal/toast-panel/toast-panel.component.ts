@@ -6,10 +6,14 @@ import {
   HostBinding,
   HostListener,
   ChangeDetectionStrategy,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
+import olFeature from 'ol/Feature';
+import olPoint from 'ol/geom/Point';
 
 import {
   getEntityTitle,
@@ -24,15 +28,20 @@ import {
   IgoMap,
   FeatureMotion,
   moveToOlFeatures,
-  createOverlayMarkerStyle,
-  createOverlayDefaultStyle
+  featureToOl,
+  featuresAreTooDeepInView,
+  featureFromOl,
+  getMarkerStyle,
+  getSelectedMarkerStyle
 } from '@igo2/geo';
 import {
   Media,
   MediaService,
   LanguageService,
-  StorageService
+  StorageService,
+  StorageScope
 } from '@igo2/core';
+import { StorageState } from '@igo2/integration';
 
 @Component({
   selector: 'app-toast-panel',
@@ -40,13 +49,17 @@ import {
   styleUrls: ['./toast-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToastPanelComponent implements OnInit {
+export class ToastPanelComponent implements OnInit, OnDestroy {
   static SWIPE_ACTION = {
     RIGHT: 'swiperight',
     LEFT: 'swipeleft',
     UP: 'swipeup',
     DOWN: 'swipedown'
   };
+
+  get storageService(): StorageService {
+    return this.storageState.storageService;
+  }
 
   @Input()
   get map(): IgoMap {
@@ -63,7 +76,7 @@ export class ToastPanelComponent implements OnInit {
   }
   set store(value: EntityStore<SearchResult<Feature>>) {
     this._store = value;
-    this.store.entities$.subscribe(_entities => {
+    this.store.entities$.subscribe((_entities) => {
       this.unselectResult();
     });
   }
@@ -74,29 +87,47 @@ export class ToastPanelComponent implements OnInit {
     return this._opened;
   }
   set opened(value: boolean) {
-    if (value === this._opened) {
+    if (value !== !this._opened) {
       return;
     }
-
     this._opened = value;
-    this.openedChange.emit(this._opened);
+    this.storageService.set('toastOpened', value, StorageScope.SESSION);
+    this.openedChange.emit(value);
   }
   private _opened = true;
 
+  @Input() hasFeatureEmphasisOnSelection: Boolean = false;
+
   get zoomAuto(): boolean {
-    return this.storageService.get('zoomAuto') as boolean;
+    return this._zoomAuto;
   }
+  set zoomAuto(value) {
+    if (value !== !this._zoomAuto) {
+      return;
+    }
+    this._zoomAuto = value;
+    this.zoomAuto$.next(value);
+    this.storageService.set('zoomAuto', value);
+  }
+  private _zoomAuto = false;
 
   // To allow the toast to use much larger extent on the map
   get fullExtent(): boolean {
-    return this.storageService.get('fullExtent') as boolean;
+    return this._fullExtent;
   }
+  set fullExtent(value) {
+    if (value !== !this._fullExtent) {
+      return;
+    }
+    this._fullExtent = value;
+    this.fullExtent$.next(value);
+    this.fullExtentEvent.emit(value);
+    this.storageService.set('fullExtent', value);
+  }
+  private _fullExtent = false;
 
   public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
     this.fullExtent
-  );
-  public notfullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
-    !this.fullExtent
   );
 
   public icon = 'menu';
@@ -110,10 +141,16 @@ export class ToastPanelComponent implements OnInit {
 
   private format = new olFormatGeoJSON();
 
+  private resultOrResolution$$: Subscription;
+  private focusedResult$: BehaviorSubject<
+    SearchResult<Feature>
+  > = new BehaviorSubject(undefined);
+  private abstractFocusedOrSelectedResult: Feature;
+
   public withZoomButton = true;
+  zoomAuto$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   @Output() openedChange = new EventEmitter<boolean>();
-  @Output() zoomAutoEvent = new EventEmitter<boolean>();
 
   @Output() fullExtentEvent = new EventEmitter<boolean>();
 
@@ -122,6 +159,11 @@ export class ToastPanelComponent implements OnInit {
   @HostBinding('class.app-toast-panel-opened')
   get hasOpenedClass() {
     return this.opened;
+  }
+
+  @HostBinding('class.app-full-toast-panel-collapsed')
+  get hasFullCollapsedClass() {
+    return !this.opened && this.fullExtent;
   }
 
   @HostBinding('style.visibility')
@@ -156,14 +198,14 @@ export class ToastPanelComponent implements OnInit {
     event: KeyboardEvent
   ) {
     if (this.isResultSelected$.getValue() === true) {
-      const olFeature = this.format.readFeature(
+      const localOlFeature = this.format.readFeature(
         this.resultSelected$.getValue().data,
         {
           dataProjection: this.resultSelected$.getValue().data.projection,
           featureProjection: this.map.projection
         }
       );
-      moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
+      moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Default);
     }
   }
 
@@ -179,56 +221,41 @@ export class ToastPanelComponent implements OnInit {
     return this.multiple$;
   }
 
-  private getSelectedMarkerStyle(feature: Feature) {
-    if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({
-        text: feature.meta.mapTitle,
-        outlineColor: [0, 255, 255]
-      });
-    } else {
-      return createOverlayDefaultStyle({
-        text: feature.meta.mapTitle,
-        strokeWidth: 4,
-        strokeColor: [0, 255, 255]
-      });
-    }
-  }
-
-  private getMarkerStyle(feature: Feature) {
-    if (!feature.geometry || feature.geometry.type === 'Point') {
-      return createOverlayMarkerStyle({
-        text: feature.meta.mapTitle,
-        opacity: 0.5,
-        outlineColor: [0, 255, 255]
-      });
-    } else if (
-      feature.geometry.type === 'LineString' ||
-      feature.geometry.type === 'MultiLineString'
-    ) {
-      return createOverlayDefaultStyle({
-        text: feature.meta.mapTitle,
-        strokeOpacity: 0.5,
-        strokeColor: [0, 255, 255]
-      });
-    } else {
-      return createOverlayDefaultStyle({
-        text: feature.meta.mapTitle,
-        fillOpacity: 0.15,
-        strokeColor: [0, 255, 255]
-      });
-    }
-  }
-
   constructor(
     public mediaService: MediaService,
     public languageService: LanguageService,
-    private storageService: StorageService
-  ) {}
+    private storageState: StorageState
+  ) {
+    this.opened = this.storageService.get('toastOpened') as boolean;
+    this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
+    this.fullExtent = this.storageService.get('fullExtent') as boolean;
+  }
 
   ngOnInit() {
     this.store.entities$.subscribe(() => {
       this.initialized = true;
     });
+
+    let latestResult;
+    let trigger;
+    if (this.hasFeatureEmphasisOnSelection) {
+      this.resultOrResolution$$ = combineLatest([
+        this.focusedResult$.pipe(
+          tap((res) => {
+            latestResult = res;
+            trigger = 'focused';
+          })
+        ),
+        this.resultSelected$.pipe(
+          tap((res) => {
+            latestResult = res;
+            trigger = 'selected';
+          })
+        ),
+        this.map.viewController.resolution$,
+        this.store.entities$
+      ]).subscribe(() => this.buildResultEmphasis(latestResult, trigger));
+    }
 
     this.actionStore.load([
       {
@@ -258,14 +285,14 @@ export class ToastPanelComponent implements OnInit {
           return this.isResultSelected$;
         },
         handler: () => {
-          const olFeature = this.format.readFeature(
+          const localOlFeature = this.format.readFeature(
             this.resultSelected$.getValue().data,
             {
               dataProjection: this.resultSelected$.getValue().data.projection,
               featureProjection: this.map.projection
             }
           );
-          moveToOlFeatures(this.map, [olFeature], FeatureMotion.Zoom);
+          moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Zoom);
         }
       },
       {
@@ -283,11 +310,11 @@ export class ToastPanelComponent implements OnInit {
         handler: () => {
           const olFeatures = [];
           for (const result of this.store.all()) {
-            const olFeature = this.format.readFeature(result.data, {
+            const localOlFeature = this.format.readFeature(result.data, {
               dataProjection: result.data.projection,
               featureProjection: this.map.projection
             });
-            olFeatures.push(olFeature);
+            olFeatures.push(localOlFeature);
           }
           moveToOlFeatures(this.map, olFeatures, FeatureMotion.Zoom);
         }
@@ -299,12 +326,9 @@ export class ToastPanelComponent implements OnInit {
           'toastPanel.zoomAutoTooltip'
         ),
         checkbox: true,
-        checkCondition: this.storageService.get('zoomAuto') as boolean,
+        checkCondition: this.zoomAuto$,
         handler: () => {
-          this.storageService.set('zoomAuto', !this.storageService.get(
-            'zoomAuto'
-          ) as boolean);
-          this.zoomAutoEvent.emit(this.zoomAuto);
+          this.zoomAuto = !this.zoomAuto;
           if (this.zoomAuto && this.isResultSelected$.value === true) {
             this.selectResult(this.resultSelected$.getValue());
           }
@@ -318,13 +342,10 @@ export class ToastPanelComponent implements OnInit {
         ),
         icon: 'resize',
         display: () => {
-          return this.notfullExtent$;
+          return this.fullExtent$.pipe(map((v) => !v));
         },
         handler: () => {
-          this.storageService.set('fullExtent', true);
-          this.fullExtent$.next(true);
-          this.notfullExtent$.next(false);
-          this.fullExtentEvent.emit(this.fullExtent);
+          this.fullExtent = true;
         }
       },
       {
@@ -340,13 +361,58 @@ export class ToastPanelComponent implements OnInit {
           return this.fullExtent$;
         },
         handler: () => {
-          this.storageService.set('fullExtent', false);
-          this.fullExtent$.next(false);
-          this.notfullExtent$.next(true);
-          this.fullExtentEvent.emit(this.fullExtent);
+          this.fullExtent = false;
         }
       }
     ]);
+  }
+
+  ngOnDestroy(): void {
+    if (this.resultOrResolution$$) {
+      this.resultOrResolution$$.unsubscribe();
+    }
+  }
+
+  private buildResultEmphasis(
+    result: SearchResult<Feature>,
+    trigger: 'selected' | 'focused' | undefined
+  ) {
+    this.clearFeatureEmphasis();
+    if (!result || (trigger === 'selected' && this.zoomAuto)) {
+      return;
+    }
+    const myOlFeature = featureToOl(result.data, this.map.projection);
+    const olGeometry = myOlFeature.getGeometry();
+    if (result.data.geometry.type !== 'Point') {
+      if (featuresAreTooDeepInView(this.map, olGeometry.getExtent(), 0.0025)) {
+        const extent = olGeometry.getExtent();
+        const x = extent[0] + (extent[2] - extent[0]) / 2;
+        const y = extent[1] + (extent[3] - extent[1]) / 2;
+        const feature1 = new olFeature({
+          name: 'abstractFocusedOrSelectedResult',
+          geometry: new olPoint([x, y])
+        });
+        this.abstractFocusedOrSelectedResult = featureFromOl(
+          feature1,
+          this.map.projection
+        );
+        this.abstractFocusedOrSelectedResult.meta.style = getSelectedMarkerStyle(
+          this.abstractFocusedOrSelectedResult
+        );
+        this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
+        this.map.overlay.addFeature(
+          this.abstractFocusedOrSelectedResult,
+          FeatureMotion.None
+        );
+      }
+    }
+  }
+
+  private clearFeatureEmphasis() {
+    if (this.abstractFocusedOrSelectedResult) {
+      this.map.overlay.removeFeature(this.abstractFocusedOrSelectedResult);
+      this.abstractFocusedOrSelectedResult = undefined;
+    }
   }
 
   getTitle(result: SearchResult) {
@@ -354,20 +420,22 @@ export class ToastPanelComponent implements OnInit {
   }
 
   focusResult(result: SearchResult<Feature>) {
+    this.focusedResult$.next(result);
     this.map.overlay.removeFeature(result.data);
 
-    result.data.meta.style = this.getSelectedMarkerStyle(result.data);
+    result.data.meta.style = getSelectedMarkerStyle(result.data);
     result.data.meta.style.setZIndex(2000);
     this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
 
   unfocusResult(result: SearchResult<Feature>, force?) {
+    this.focusedResult$.next(undefined);
     if (!force && this.store.state.get(result).focused) {
       return;
     }
     this.map.overlay.removeFeature(result.data);
 
-    result.data.meta.style = this.getMarkerStyle(result.data);
+    result.data.meta.style = getMarkerStyle(result.data);
     result.data.meta.style.setZIndex(undefined);
     this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -386,10 +454,10 @@ export class ToastPanelComponent implements OnInit {
     const features = [];
     for (const feature of this.store.all()) {
       if (feature.meta.id === result.meta.id) {
-        feature.data.meta.style = this.getSelectedMarkerStyle(feature.data);
+        feature.data.meta.style = getSelectedMarkerStyle(feature.data);
         feature.data.meta.style.setZIndex(2000);
       } else {
-        feature.data.meta.style = this.getMarkerStyle(feature.data);
+        feature.data.meta.style = getMarkerStyle(feature.data);
       }
       features.push(feature.data);
     }
@@ -397,14 +465,14 @@ export class ToastPanelComponent implements OnInit {
     this.map.overlay.addFeatures(features, FeatureMotion.None);
 
     if (this.zoomAuto) {
-      const olFeature = this.format.readFeature(
+      const localOlFeature = this.format.readFeature(
         this.resultSelected$.getValue().data,
         {
           dataProjection: this.resultSelected$.getValue().data.projection,
           featureProjection: this.map.projection
         }
       );
-      moveToOlFeatures(this.map, [olFeature], FeatureMotion.Default);
+      moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Default);
     }
 
     this.isResultSelected$.next(true);
@@ -418,14 +486,15 @@ export class ToastPanelComponent implements OnInit {
 
     const features = [];
     for (const feature of this.store.all()) {
-      feature.data.meta.style = this.getMarkerStyle(feature.data);
+      feature.data.meta.style = getMarkerStyle(feature.data);
       features.push(feature.data);
     }
     this.map.overlay.setFeatures(features, FeatureMotion.None, 'map');
   }
 
   clear() {
-    this.map.overlay.removeFeatures(this.store.all().map(f => f.data));
+    this.clearFeatureEmphasis();
+    this.map.overlay.removeFeatures(this.store.all().map((f) => f.data));
     this.store.clear();
     this.unselectResult();
   }
@@ -466,14 +535,14 @@ export class ToastPanelComponent implements OnInit {
   }
 
   zoomTo() {
-    const olFeature = this.format.readFeature(
+    const localOlFeature = this.format.readFeature(
       this.resultSelected$.getValue().data,
       {
         dataProjection: this.resultSelected$.getValue().data.projection,
         featureProjection: this.map.projection
       }
     );
-    moveToOlFeatures(this.map, [olFeature], FeatureMotion.Zoom);
+    moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Zoom);
   }
 
   swipe(action: string) {
@@ -489,7 +558,7 @@ export class ToastPanelComponent implements OnInit {
   }
 
   onToggleClick(e: MouseEvent) {
-    if (e.srcElement.className !== 'igo-panel-title') {
+    if ((e.target as any).className !== 'igo-panel-title') {
       return;
     }
     this.opened = !this.opened;

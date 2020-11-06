@@ -1,0 +1,423 @@
+{
+  "global": {
+    "title": "interactiveTour.global.title",
+    "position": "auto",
+    "steps": [
+      {
+        "element": ".menu-button",
+        "title": "interactiveTour.global.menu-button-title",
+        "text": "interactiveTour.global.menu-button",
+        "onHide": {
+          "action": "click",
+          "condition": "mat-sidenav:not(.mat-drawer-opened)"
+        }
+      },
+      {
+        "element": ".igo-search-bar-container",
+        "title": "interactiveTour.global.search-bar-title",
+        "text": "interactiveTour.global.search-bar"
+      },
+      {
+        "element": ".search-bar-buttons",
+        "title": "interactiveTour.global.search-settings-title",
+        "text": "interactiveTour.global.search-settings",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-toolbox",
+        "title": "interactiveTour.global.toolbox-title",
+        "text": "interactiveTour.global.toolbox",
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(1) mat-list-item",
+        "title": "interactiveTour.global.search-tool-title",
+        "text": "interactiveTour.global.search-tool",
+        "disableInteraction": true,
+        "beforeShow": {
+          "element": "#homeButton",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(2) mat-list-item",
+        "title": "interactiveTour.global.context-title",
+        "text": "interactiveTour.global.context",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(3) mat-list-item",
+        "title": "interactiveTour.global.map-tool-title",
+        "text": "interactiveTour.global.map-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(4) mat-list-item",
+        "title": "interactiveTour.global.spatial-filter-title",
+        "text": "interactiveTour.global.spatial-filter",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(5) mat-list-item",
+        "title": "interactiveTour.global.measurer-tool-title",
+        "text": "interactiveTour.global.measurer-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(6) mat-list-item",
+        "title": "interactiveTour.global.directions-tool-title",
+        "text": "interactiveTour.global.directions-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(7) mat-list-item",
+        "title": "interactiveTour.global.catalog-tool-title",
+        "text": "interactiveTour.global.catalog-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(8) mat-list-item",
+        "title": "interactiveTour.global.import-export-title",
+        "text": "interactiveTour.global.import-export",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(9) mat-list-item",
+        "title": "interactiveTour.global.print-tool-title",
+        "text": "interactiveTour.global.print-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(10) mat-list-item",
+        "title": "interactiveTour.global.share-map-title",
+        "text": "interactiveTour.global.share-map",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(11) mat-list-item",
+        "title": "interactiveTour.global.about-title",
+        "text": "interactiveTour.global.about",
+        "disableInteraction": true,
+        "beforeShow": {
+          "action": "click",
+          "element": "#homeButton",
+          "condition": "#homeButton"
+        }
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(3) mat-list-item button",
+        "title": "interactiveTour.global.tool-choose-title",
+        "text": "interactiveTour.global.tool-choose",
+        "disableInteraction": true,
+        "beforeShow": {
+          "action": "click",
+          "element": "igo-actionbar-item:nth-child(3) mat-list-item"
+        }
+      },
+      {
+        "element": "#homeButton",
+        "title": "interactiveTour.global.menu-button-title",
+        "text": "interactiveTour.global.home-button",
+        "beforeChange": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "#menu-button",
+        "title": "interactiveTour.global.menu-button-title",
+        "text": "interactiveTour.global.menu-button-close",
+        "beforeShow": {
+          "action": "click",
+          "condition": "mat-sidenav:not(.mat-drawer-opened)"
+        },
+        "beforeChange": {
+          "action": "click",
+          "element": "igo-actionbar-item:nth-child(3) mat-list-item",
+          "waitFor": "igo-actionbar-item"
+        }
+      },
+      {
+        "element": "igo-geolocate-button",
+        "title": "interactiveTour.global.geolocate-title",
+        "text": "interactiveTour.global.geolocate",
+        "beforeShow": {
+          "action": "click",
+          "element": "#menu-button",
+          "condition": "mat-sidenav.mat-drawer-opened"
+        }
+      },
+      {
+        "element": "igo-baselayers-switcher",
+        "title": "interactiveTour.global.baselayers-title",
+        "text": "interactiveTour.global.baselayers"
+      },
+      {
+        "title": "interactiveTour.global.end-title",
+        "text": "interactiveTour.global.end"
+      }
+    ]
+  },
+
+  "timeFilter": {
+    "title": "interactiveTour.timeFilter.title",
+    "steps": [
+      {
+        "element": "div.igo-panel-title",
+        "text": "interactiveTour.timeFilter.start"
+      },
+      {
+        "element": "div.igo-panel-title",
+        "text": "interactiveTour.timeFilter.end"
+      }
+    ]
+  },
+
+  "measurer": {
+    "title": "interactiveTour.measurer.title",
+    "steps": [
+      {
+        "element": "div.igo-panel-title",
+        "text": "interactiveTour.measurer.start"
+      },
+      {
+        "element": "div.measure-type-toggle",
+        "text": "interactiveTour.measurer.type"
+      },
+      {
+        "element": "div.measure-options",
+        "text": "interactiveTour.measurer.options"
+      },
+      {
+        "element": "div.measure-options mat-slide-toggle:first-child",
+        "text": "interactiveTour.measurer.toggle-2"
+      },
+      {
+        "element": "div.measure-options mat-slide-toggle:nth-child(2)",
+        "text": "interactiveTour.measurer.toggle-3"
+      },
+      {
+        "element": "div.measure-options mat-slide-toggle:last-child",
+        "text": "interactiveTour.measurer.toggle-4"
+      },
+      {
+        "element": "app-map-overlay",
+        "text": "interactiveTour.measurer.map",
+        "position": ""
+      },
+      {
+        "element": "igo-measurer-item:first-of-type mat-form-field.measure-field",
+        "text": "interactiveTour.measurer.measure-field"
+      },
+      {
+        "element": "igo-measurer-item:first-of-type mat-form-field.unit-field",
+        "text": "interactiveTour.measurer.measure-unit"
+      },
+      {
+        "element": "mat-button-toggle:last-of-type button",
+        "text": "interactiveTour.measurer.area-click",
+        "onHide": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-measurer-item:first-of-type mat-form-field.measure-field",
+        "text": "interactiveTour.measurer.perimeter"
+      },
+      {
+        "element": "igo-measurer-item:last-of-type mat-form-field.measure-field",
+        "text": "interactiveTour.measurer.area-field"
+      },
+      {
+        "element": "igo-measurer-item:last-of-type mat-form-field.unit-field",
+        "text": "interactiveTour.measurer.area-unit"
+      },
+      {
+        "element": "app-map-overlay",
+        "text": "interactiveTour.measurer.map-2",
+        "position": "",
+        "onHide": {
+          "action": "click",
+          "waitFor": "tbody",
+          "condition": "!tbody"
+        }
+      },
+      {
+        "element": "igo-entity-table.table-compact",
+        "text": "interactiveTour.measurer.results"
+      },
+      {
+        "element": "div.measure-store-buttons",
+        "text": "interactiveTour.measurer.results-buttons"
+      },
+      {
+        "element": "div.mat-checkbox-inner-container",
+        "text": "interactiveTour.measurer.check-measure",
+        "onShow": {
+          "action": "click",
+          "condition": "div.measure-store-buttons .mat-focus-indicator:disabled"
+        }
+      },
+      {
+        "element": "div.measure-store-buttons",
+        "text": "interactiveTour.measurer.active-results-buttons"
+      }
+    ]
+  },
+
+  "spatialFilter": {
+    "title": "interactiveTour.spatial-filter.title",
+    "position": "auto",
+    "steps": [
+      {
+        "element": "div.igo-panel-title",
+        "text": "interactiveTour.spatial-filter.start",
+        "onShow": {
+          "element": "div.mat-tab-labels div:first-of-type",
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.mat-tab-label-container",
+        "text": "interactiveTour.spatial-filter.zone-type",
+        "disableInteraction": true
+      },
+      {
+        "element": "div.mat-tab-labels div:first-of-type",
+        "text": "interactiveTour.spatial-filter.predefined"
+      },
+      {
+        "element": "div.mat-tab-labels div:nth-of-type(2)",
+        "text": "interactiveTour.spatial-filter.drawing",
+        "disableInteraction": true
+      },
+      {
+        "element": "div.mat-tab-body-content .mat-form-field",
+        "text": "interactiveTour.spatial-filter.search-by",
+        "position": "right",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-spatial-filter-list mat-form-field",
+        "text": "interactiveTour.spatial-filter.zone",
+        "position": "right",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-spatial-filter-item .mat-radio-group",
+        "text": "interactiveTour.spatial-filter.results-type"
+      },
+      {
+        "element": "mat-radio-group mat-radio-button:first-of-type",
+        "text": "interactiveTour.spatial-filter.address"
+      },
+      {
+        "element": "mat-radio-group mat-radio-button:first-of-type",
+        "text": "interactiveTour.spatial-filter.warning-address"
+      },
+      {
+        "element": "mat-radio-group mat-radio-button:last-of-type",
+        "text": "interactiveTour.spatial-filter.thematics",
+        "onShow": {
+          "action": "click",
+          "element": "mat-radio-group mat-radio-button:last-of-type .mat-radio-label"
+        }
+      },
+      {
+        "element": "div.thematics",
+        "text": "interactiveTour.spatial-filter.thematics-choose"
+      },
+      {
+        "element": "div.buttons button:first-of-type",
+        "text": "interactiveTour.spatial-filter.initialize",
+        "beforeShow":{
+          "element": "div.mat-tab-labels div:first-of-type",
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.mat-tab-labels div:nth-of-type(2)",
+        "text": "interactiveTour.spatial-filter.drawing-select",
+        "noBackButton": true,
+        "onShow": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.spatial-type-toggle",
+        "text": "interactiveTour.spatial-filter.drawing-type",
+        "disableInteraction": true,
+        "position": "right"
+      },
+      {
+        "element": "div.header mat-slide-toggle:first-of-type .mat-slide-toggle-label",
+        "text": "interactiveTour.spatial-filter.activate-drawing",
+        "position": "right",
+        "disableInteraction": true
+      },
+      {
+        "element": "div.header mat-slide-toggle:last-of-type .mat-slide-toggle-label",
+        "text": "interactiveTour.spatial-filter.freehand-drawing",
+        "position": "right",
+        "disableInteraction": true
+      },
+      {
+        "element": "div.spatial-type-toggle mat-button-toggle:last-of-type button",
+        "text": "interactiveTour.spatial-filter.circle-choose",
+        "position": "right",
+        "onShow": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.radius-unit",
+        "text": "interactiveTour.spatial-filter.circle-radius",
+        "position": "right"
+      },
+      {
+        "element": "div.header mat-slide-toggle:last-of-type .mat-slide-toggle-label",
+        "text": "interactiveTour.spatial-filter.circle-freehand",
+        "position": "right",
+        "disableInteraction": true,
+        "onShow": {
+          "action": "click",
+          "element": "div.header mat-slide-toggle:last-of-type .mat-slide-toggle-label"
+        }
+      },
+      {
+        "element": "app-map-overlay",
+        "text": "interactiveTour.spatial-filter.drawing-map",
+        "position": ""
+      },
+      {
+        "element": "button.clear-form-button",
+        "text": "interactiveTour.spatial-filter.clear-drawing",
+        "beforeChange": {
+          "action": "click",
+          "element": "mat-radio-group mat-radio-button:last-of-type .mat-radio-label"
+        }
+      },
+      {
+        "element": "div.thematics",
+        "text": "interactiveTour.spatial-filter.thematics-choose-2"
+      },
+      {
+        "element": "button.search-button",
+        "text": "interactiveTour.spatial-filter.launch",
+        "beforeChange": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "button.remove-button",
+        "text": "interactiveTour.spatial-filter.clear-results"
+      },
+      {
+        "element": "button.export-button",
+        "text": "interactiveTour.spatial-filter.export"
+      }
+    ]
+  }
+}
