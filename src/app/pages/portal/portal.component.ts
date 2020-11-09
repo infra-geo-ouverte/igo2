@@ -1080,8 +1080,7 @@ export class PortalComponent implements OnInit, OnDestroy {
             type: 'wms',
             url: url,
             params: {
-              layers: name,
-              version: '1.3.0'
+              layers: name
             }
           }
         })
