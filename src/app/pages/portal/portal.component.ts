@@ -1076,6 +1076,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           visible: visibility,
           sourceOptions: {
             optionsFromCapabilities: true,
+            optionsFromApi: true,
             type: 'wms',
             url: url,
             params: {
