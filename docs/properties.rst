@@ -3501,7 +3501,11 @@ Exemples
         .. code:: json
 
           {
-            "name": "importExport"
+            "name": "importExport",
+            "options": {
+                "importExportType": "layer"
+                "importExportShowBothType": true
+            }
           }
 
     .. line-block::
@@ -3544,8 +3548,49 @@ Propriétés
                    - fichiers dans :ref:`Language <igolanguage>`.
          -
          - igo.integration.tools.importExport
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - importExportType
+         - String
+         - .. line-block::
+               Définit quel type d'exportation sera ouvert par défaut
+         - .. line-block::
+               layer ou context
+         - .. line-block::
+               layer
+       * - importExportShowBothType
+         - Boolean
+         - .. line-block::
+               Permet d'afficher ou non les 2 types d'importation ou exportation (layer ou contexte)
+               Si false, le type définit précédemment, sera le seul type affiché. 
+               Se base sur l'option importExportType. 
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
+
 
 Liens
 
