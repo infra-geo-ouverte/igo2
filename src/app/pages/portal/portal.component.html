@@ -99,7 +99,7 @@
   *ngIf="hasExpansionPanel && (workspaceState.workspaceEnabled$ | async)"
   [backdropShown]="expansionPanelBackdropShown"
   [(expanded)]="expansionPanelExpanded"
-  [full]="workspaceFullExtent$ | async"
+  [maximized]="workspaceMaximize$ | async"
   [@expansionPanelSize]="getExpansionPanelStatus()"
   [@toastOffsetY]="(isMobile() && !toastPanelOpened && queryState.store.entities$.value.length > 0 && !expansionPanelExpanded) ? 'true' : 'false'">
 

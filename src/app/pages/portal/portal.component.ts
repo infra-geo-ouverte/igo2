@@ -119,9 +119,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   public workspaceMenuClass = 'workspace-menu';
 
   public fullExtent = this.storageService.get('fullExtent') as boolean;
-  private workspaceFullExtent$$: Subscription[] = [];
-  readonly workspaceFullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
-    this.storageService.get('workspaceFullExtent') as boolean
+  private workspaceMaximize$$: Subscription[] = [];
+  readonly workspaceMaximize$: BehaviorSubject<boolean> = new BehaviorSubject(
+    this.storageService.get('workspaceMaximize') as boolean
   );
   public sidenavOpened = false;
   public searchBarTerm = '';
@@ -371,14 +371,14 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.updateMapBrowserClass();
     });
 
-    this.workspaceFullExtent$$.push(this.workspaceState.workspaceFullExtent$.subscribe((workspaceFullExtent) => {
-      const wksFull = this.mediaService.isMobile() ? false : workspaceFullExtent;
-      this.storageService.set('workspaceFullExtent', wksFull);
-      this.workspaceFullExtent$.next(wksFull);
+    this.workspaceMaximize$$.push(this.workspaceState.workspaceMaximize$.subscribe((workspaceMaximize) => {
+      const wksFull = this.mediaService.isMobile() ? false : workspaceMaximize;
+      this.storageService.set('workspaceMaximize', wksFull);
+      this.workspaceMaximize$.next(wksFull);
       this.updateMapBrowserClass();
     }));
-    this.workspaceFullExtent$$.push(
-      this.workspaceFullExtent$.subscribe(() => this.updateMapBrowserClass())
+    this.workspaceMaximize$$.push(
+      this.workspaceMaximize$.subscribe(() => this.updateMapBrowserClass())
     );
 
     this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
@@ -501,7 +501,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.context$$.unsubscribe();
     this.activeWidget$$.unsubscribe();
     this.openSidenav$$.unsubscribe();
-    this.workspaceFullExtent$$.map(f => f.unsubscribe());
+    this.workspaceMaximize$$.map(f => f.unsubscribe());
   }
 
   /**
@@ -746,7 +746,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
 
     if (this.hasExpansionPanel && this.expansionPanelExpanded) {
-      if (this.workspaceFullExtent$.value) {
+      if (this.workspaceMaximize$.value) {
         this.mapBrowser.nativeElement.classList.add('expansion-offset-full');
         this.mapBrowser.nativeElement.classList.remove('expansion-offset');
       } else {
@@ -754,7 +754,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.mapBrowser.nativeElement.classList.remove('expansion-offset-full');
       }
     } else {
-      if (this.workspaceFullExtent$.value) {
+      if (this.workspaceMaximize$.value) {
         this.mapBrowser.nativeElement.classList.remove('expansion-offset-full');
       } else {
         this.mapBrowser.nativeElement.classList.remove('expansion-offset');
@@ -840,7 +840,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   getToastPanelOffsetY() {
     let status = 'noExpansion';
     if (this.expansionPanelExpanded) {
-      if (this.workspaceFullExtent$.value) {
+      if (this.workspaceMaximize$.value) {
         if (this.toastPanelOpened) {
           status = 'expansionFullAndToastOpened';
         } else {
@@ -871,7 +871,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
   getControlsOffsetY() {
-    return this.expansionPanelExpanded ? this.workspaceFullExtent$.value ? 'firstRowFromBottom-expanded-full' : 'firstRowFromBottom-expanded' : 'firstRowFromBottom';
+    return this.expansionPanelExpanded ? this.workspaceMaximize$.value ? 'firstRowFromBottom-expanded-full' : 'firstRowFromBottom-expanded' : 'firstRowFromBottom';
   }
 
   getBaselayersSwitcherStatus() {
@@ -903,7 +903,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     } else {
       if (this.workspaceState.workspaceEnabled$.value) {
         if (this.expansionPanelExpanded) {
-          if (this.workspaceFullExtent$.value) {
+          if (this.workspaceMaximize$.value) {
             status = 'firstRowFromBottom-expanded-full';
           } else {
             status = 'firstRowFromBottom-expanded';
