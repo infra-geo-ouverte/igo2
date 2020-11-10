@@ -108,6 +108,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
+  public hasGeolocateButton = true;
   public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
@@ -281,6 +282,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
+    this.hasGeolocateButton =
+    this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton') ;
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
       'hasFeatureEmphasisOnSelection'
