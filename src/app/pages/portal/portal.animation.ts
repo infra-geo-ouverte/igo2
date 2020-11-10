@@ -137,14 +137,14 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
         })
       ),
       state(
-        'expansionFullAndToastOpened',
+        'expansionMaximizedAndToastOpened',
         style({
           bottom: '500px', // workspace full size
           zIndex: '999'
         })
       ),
       state(
-        'expansionFullAndToastClosed',
+        'expansionMaximizedAndToastClosed',
         style({
           bottom: '500px', // workspace full size
           zIndex: '5'
@@ -153,8 +153,8 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
     transition('noExpansion => noExpansion', animate('10ms')),
     transition('expansionAndToastOpened => expansionAndToastOpened', animate('200ms')),
     transition('expansionAndToastClosed => expansionAndToastClosed', animate('200ms')),
-    transition('expansionFullAndToastOpened => expansionFullAndToastOpened', animate('200ms')),
-    transition('expansionFullAndToastClosed => expansionFullAndToastClosed', animate('200ms')),
+    transition('expansionMaximizedAndToastOpened => expansionMaximizedAndToastOpened', animate('200ms')),
+    transition('expansionMaximizedAndToastClosed => expansionMaximizedAndToastClosed', animate('200ms')),
        ])
   ];
 }
@@ -176,7 +176,7 @@ export function controlsAnimations(): AnimationTriggerMetadata[] {
         })
       ),
       state(
-        'firstRowFromBottom-expanded-full',
+        'firstRowFromBottom-expanded-maximized',
         style({
           bottom: '500px'
         })
@@ -261,7 +261,7 @@ export function controlSlideY(): AnimationTriggerMetadata {
       })
     ),
     state(
-      'firstRowFromBottom-expanded-full',
+      'firstRowFromBottom-expanded-maximized',
       style({
         bottom: '500px', // workspace full size
         'margin-left': '-55px'

@@ -124,8 +124,8 @@ igo-map-browser.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
   bottom: $app-expansion-panel-height;
 }
 
-igo-map-browser.expansion-offset-full ::ng-deep .ol-overlaycontainer-stopevent {
-  bottom: $app-expansion-panel-height-full;
+igo-map-browser.expansion-offset-maximized ::ng-deep .ol-overlaycontainer-stopevent {
+  bottom: $app-expansion-panel-height-maximized;
 }
 
 igo-map-browser.toast-offset-scale-line

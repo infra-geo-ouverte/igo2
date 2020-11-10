@@ -745,15 +745,15 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     if (this.hasExpansionPanel && this.expansionPanelExpanded) {
       if (this.workspaceMaximize$.value) {
-        this.mapBrowser.nativeElement.classList.add('expansion-offset-full');
+        this.mapBrowser.nativeElement.classList.add('expansion-offset-maximized');
         this.mapBrowser.nativeElement.classList.remove('expansion-offset');
       } else {
         this.mapBrowser.nativeElement.classList.add('expansion-offset');
-        this.mapBrowser.nativeElement.classList.remove('expansion-offset-full');
+        this.mapBrowser.nativeElement.classList.remove('expansion-offset-maximized');
       }
     } else {
       if (this.workspaceMaximize$.value) {
-        this.mapBrowser.nativeElement.classList.remove('expansion-offset-full');
+        this.mapBrowser.nativeElement.classList.remove('expansion-offset-maximized');
       } else {
         this.mapBrowser.nativeElement.classList.remove('expansion-offset');
       }
@@ -840,9 +840,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.expansionPanelExpanded) {
       if (this.workspaceMaximize$.value) {
         if (this.toastPanelOpened) {
-          status = 'expansionFullAndToastOpened';
+          status = 'expansionMaximizedAndToastOpened';
         } else {
-          status = 'expansionFullAndToastClosed';
+          status = 'expansionMaximizedAndToastClosed';
         }
       } else {
         if (this.toastPanelOpened) {
@@ -869,7 +869,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
   getControlsOffsetY() {
-    return this.expansionPanelExpanded ? this.workspaceMaximize$.value ? 'firstRowFromBottom-expanded-full' : 'firstRowFromBottom-expanded' : 'firstRowFromBottom';
+    return this.expansionPanelExpanded ? this.workspaceMaximize$.value ? 'firstRowFromBottom-expanded-maximized' : 'firstRowFromBottom-expanded' : 'firstRowFromBottom';
   }
 
   getBaselayersSwitcherStatus() {
@@ -902,7 +902,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (this.workspaceState.workspaceEnabled$.value) {
         if (this.expansionPanelExpanded) {
           if (this.workspaceMaximize$.value) {
-            status = 'firstRowFromBottom-expanded-full';
+            status = 'firstRowFromBottom-expanded-maximized';
           } else {
             status = 'firstRowFromBottom-expanded';
           }
