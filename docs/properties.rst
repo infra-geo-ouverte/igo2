@@ -3503,7 +3503,7 @@ Exemples
           {
             "name": "importExport",
             "options": {
-                "importExportType": "layer"
+                "importExportType": "layer",
                 "importExportShowBothType": true
             }
           }
