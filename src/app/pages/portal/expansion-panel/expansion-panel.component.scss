@@ -32,6 +32,18 @@
   }
 }
 
+:host.app-expansion-panel-expanded-full {
+  height: $app-expansion-panel-height-full;
+  width: 100%;
+  z-index: 6;
+
+  @include mobile {
+    &.footer {
+      margin-bottom: 48px;
+    }
+  }
+}
+
 :host > div {
   height: 100%;
   width: 100%;

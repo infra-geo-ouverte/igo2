@@ -136,71 +136,79 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
           zIndex: '5'
         })
       ),
+      state(
+        'expansionFullAndToastOpened',
+        style({
+          bottom: '500px', // workspace full size
+          zIndex: '999'
+        })
+      ),
+      state(
+        'expansionFullAndToastClosed',
+        style({
+          bottom: '500px', // workspace full size
+          zIndex: '5'
+        })
+      ),
     transition('noExpansion => noExpansion', animate('10ms')),
     transition('expansionAndToastOpened => expansionAndToastOpened', animate('200ms')),
     transition('expansionAndToastClosed => expansionAndToastClosed', animate('200ms')),
+    transition('expansionFullAndToastOpened => expansionFullAndToastOpened', animate('200ms')),
+    transition('expansionFullAndToastClosed => expansionFullAndToastClosed', animate('200ms')),
        ])
-  ];
-}
-
-export function baselayersAnimation(): AnimationTriggerMetadata[] {
-  return [
-    trigger('baselayersStateY', [
-      state('close', style({})),
-      state(
-        'up',
-        style({
-          bottom: '285px'
-        })
-      ),
-      transition('* => *', animate('200ms'))
-    ]),
-    trigger('baselayersWithToastPanel', [
-      state(
-        'up',
-        style({
-          bottom: '92px'
-        })
-      ),
-      state(
-        'down',
-        style({
-          bottom: '47px'
-        })
-      )
-    ])
   ];
 }
 
 export function controlsAnimations(): AnimationTriggerMetadata[] {
   return [
-    trigger('controlsOffsetX', [
-      state(
-        'false',
-        style({
-          right: '5px'
-        })
-      ),
-      state(
-        'true',
-        style({
-          left: 'calc(100% - 40px)'
-        })
-      ),
-      transition('* => *', animate('200ms'))
-    ]),
     trigger('controlsOffsetY', [
       state('close', style({})),
       state(
-        'false',
+        'firstRowFromBottom',
         style({
           bottom: '5px'
         })
       ),
       state(
-        'true',
+        'firstRowFromBottom-expanded',
         style({
           bottom: '285px'
+        })
+      ),
+      state(
+        'firstRowFromBottom-expanded-full',
+        style({
+          bottom: '500px'
+        })
+      ),
+      state(
+        'secondRowFromBottom',
+        style({
+          bottom: '47px'
+        })
+      ),
+      state(
+        'thirdRowFromBottom',
+        style({
+          bottom: '104px'
+        })
+      ),
+      state(
+        '',
+        style({
+          bottom: 'calc(285px)'
+        })
+      ),
+      state(
+        'secondRowFromBottom-expanded',
+        style({
+          bottom: 'calc(285px + 52px)'
+        })
+      ),
+      state(
+        'thirdRowFromBottom-expanded',
+        style({
+          bottom: 'calc(285px + 104px)'
         })
       ),
       transition('* => *', animate('200ms'))
@@ -239,16 +247,23 @@ export function controlSlideY(): AnimationTriggerMetadata {
   return trigger('controlStateY', [
     state('close', style({})),
     state(
-      'down',
+      'firstRowFromBottom',
       style({
         bottom: '2px',
         'margin-left': '0px'
       })
     ),
     state(
-      'up',
+      'firstRowFromBottom-expanded',
       style({
         bottom: '285px',
+        'margin-left': '-55px'
+      })
+    ),
+    state(
+      'firstRowFromBottom-expanded-full',
+      style({
+        bottom: '500px', // workspace full size
         'margin-left': '-55px'
       })
     ),
@@ -276,19 +291,7 @@ export function mapSlideX(): AnimationTriggerMetadata {
 export function mapSlideY(): AnimationTriggerMetadata {
   return trigger('mapStateY', [
     state(
-      'close',
-      style({
-        bottom: '0'
-      })
-    ),
-    state(
-      'down',
-      style({
-        bottom: '0'
-      })
-    ),
-    state(
-      'up',
+      '*',
       style({
         bottom: '0'
       })

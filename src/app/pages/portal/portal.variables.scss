@@ -7,10 +7,12 @@ $app-mobile-min-space-right: 40px;
 $app-expansion-panel-collapsed-height: 40px;
 $app-expansion-panel-collapsed-width: 40px;
 $app-expansion-panel-height: 281px;
+$app-expansion-panel-height-full: 496px;
 $app-expansion-panel-header-height: calc(#{$app-expansion-panel-collapsed-height} + 10px);
 
 $app-toast-panel-collapsed-height: 48px;
 $app-toast-panel-max-height: 281px;
+$app-toast-panel-max-height-full: 496px;
 $app-full-toast-panel-max-height: 800px;
 $app-full-toast-panel-max-width: 750px;
 $app-toast-panel-width: 30%;

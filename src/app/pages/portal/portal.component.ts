@@ -77,7 +77,6 @@ import {
 import {
   expansionPanelAnimation,
   toastPanelAnimation,
-  baselayersAnimation,
   controlsAnimations,
   controlSlideX,
   controlSlideY,
@@ -97,7 +96,6 @@ import { MatPaginator } from '@angular/material/paginator';
   animations: [
     expansionPanelAnimation(),
     toastPanelAnimation(),
-    baselayersAnimation(),
     controlsAnimations(),
     controlSlideX(),
     controlSlideY(),
@@ -121,6 +119,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   public workspaceMenuClass = 'workspace-menu';
 
   public fullExtent = this.storageService.get('fullExtent') as boolean;
+  private workspaceFullExtent$$: Subscription[] = [];
+  readonly workspaceFullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
+    this.storageService.get('workspaceFullExtent') as boolean
+  );
   public sidenavOpened = false;
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
@@ -369,6 +371,16 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.updateMapBrowserClass();
     });
 
+    this.workspaceFullExtent$$.push(this.workspaceState.workspaceFullExtent$.subscribe((workspaceFullExtent) => {
+      const wksFull = this.mediaService.isMobile() ? false : workspaceFullExtent;
+      this.storageService.set('workspaceFullExtent', wksFull);
+      this.workspaceFullExtent$.next(wksFull);
+      this.updateMapBrowserClass();
+    }));
+    this.workspaceFullExtent$$.push(
+      this.workspaceFullExtent$.subscribe(() => this.updateMapBrowserClass())
+    );
+
     this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
@@ -489,6 +501,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.context$$.unsubscribe();
     this.activeWidget$$.unsubscribe();
     this.openSidenav$$.unsubscribe();
+    this.workspaceFullExtent$$.map(f => f.unsubscribe());
   }
 
   /**
@@ -733,9 +746,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
 
     if (this.hasExpansionPanel && this.expansionPanelExpanded) {
-      this.mapBrowser.nativeElement.classList.add('expansion-offset');
+      if (this.workspaceFullExtent$.value) {
+        this.mapBrowser.nativeElement.classList.add('expansion-offset-full');
+        this.mapBrowser.nativeElement.classList.remove('expansion-offset');
+      } else {
+        this.mapBrowser.nativeElement.classList.add('expansion-offset');
+        this.mapBrowser.nativeElement.classList.remove('expansion-offset-full');
+      }
     } else {
-      this.mapBrowser.nativeElement.classList.remove('expansion-offset');
+      if (this.workspaceFullExtent$.value) {
+        this.mapBrowser.nativeElement.classList.remove('expansion-offset-full');
+      } else {
+        this.mapBrowser.nativeElement.classList.remove('expansion-offset');
+      }
     }
 
     if (this.sidenavOpened) {
@@ -814,40 +837,21 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  getExpansionToastPanelStatus() {
-    if (this.expansionPanelExpanded === true) {
-      if (this.toastPanelOpened === true) {
-        return 'down';
-      }
-      if (this.toastPanelOpened === false) {
-        if (this.queryState.store.entities$.value.length > 0) {
-          return 'down';
-        }
-        return 'up';
-      }
-      return 'up';
-    }
-    if (this.expansionPanelExpanded === false) {
-      if (this.toastPanelOpened === true) {
-        return 'down';
-      }
-      if (this.toastPanelOpened === false) {
-        if (this.queryState.store.entities$.value.length > 0) {
-          return 'up';
-        }
-        return 'down';
-      }
-      return 'down';
-    }
-  }
-
   getToastPanelOffsetY() {
     let status = 'noExpansion';
     if (this.expansionPanelExpanded) {
-      if (this.toastPanelOpened) {
-        status = 'expansionAndToastOpened';
+      if (this.workspaceFullExtent$.value) {
+        if (this.toastPanelOpened) {
+          status = 'expansionFullAndToastOpened';
+        } else {
+          status = 'expansionFullAndToastClosed';
+        }
       } else {
-        status = 'expansionAndToastClosed';
+        if (this.toastPanelOpened) {
+          status = 'expansionAndToastOpened';
+        } else {
+          status = 'expansionAndToastClosed';
+        }
       }
     } else {
       status = 'noExpansion';
@@ -866,29 +870,52 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     }
   }
+  getControlsOffsetY() {
+    return this.expansionPanelExpanded ? this.workspaceFullExtent$.value ? 'firstRowFromBottom-expanded-full' : 'firstRowFromBottom-expanded' : 'firstRowFromBottom';
+  }
 
   getBaselayersSwitcherStatus() {
+    let status;
     if (this.isMobile()) {
-      if (this.hasExpansionPanel === true) {
-        if (this.toastPanelOpened === false) {
-          if (this.expansionPanelExpanded === false) {
-            if (this.queryState.store.entities$.value.length > 0) {
-              return 'up';
-            }
-            return 'down';
-          }
-          return 'down';
+
+      if (this.workspaceState.workspaceEnabled$.value) {
+        if (this.expansionPanelExpanded === false) {
+          if (this.queryState.store.entities$.value.length === 0) {
+            status = 'secondRowFromBottom';
+           } else {
+            status =  'thirdRowFromBottom';
+           }
+        } else {
+          if (this.queryState.store.entities$.value.length === 0) {
+            status = 'firstRowFromBottom-expanded';
+           } else {
+            status =  'secondRowFromBottom-expanded';
+           }
         }
-        return 'down';
+
+      } else {
+        if (this.queryState.store.entities$.value.length === 0) {
+          status =  'firstRowFromBottom';
+         } else {
+          status =  'secondRowFromBottom';
+         }
       }
-      if (this.hasExpansionPanel === false) {
-        if (this.toastPanelOpened === false) {
-          if (this.queryState.store.entities$.value.length > 0) {
-            return 'down';
+    } else {
+      if (this.workspaceState.workspaceEnabled$.value) {
+        if (this.expansionPanelExpanded) {
+          if (this.workspaceFullExtent$.value) {
+            status = 'firstRowFromBottom-expanded-full';
+          } else {
+            status = 'firstRowFromBottom-expanded';
           }
+        } else {
+          status = 'secondRowFromBottom';
         }
+      } else {
+        status = 'firstRowFromBottom';
       }
     }
+    return status;
   }
 
   private readQueryParams() {
