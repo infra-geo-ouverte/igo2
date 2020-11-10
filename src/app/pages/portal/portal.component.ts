@@ -372,9 +372,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     this.workspaceMaximize$$.push(this.workspaceState.workspaceMaximize$.subscribe((workspaceMaximize) => {
-      const wksFull = this.mediaService.isMobile() ? false : workspaceMaximize;
-      this.storageService.set('workspaceMaximize', wksFull);
-      this.workspaceMaximize$.next(wksFull);
+      this.workspaceMaximize$.next(workspaceMaximize);
       this.updateMapBrowserClass();
     }));
     this.workspaceMaximize$$.push(
