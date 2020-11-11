@@ -1104,11 +1104,11 @@ export class PortalComponent implements OnInit, OnDestroy {
           visible: visibility,
           sourceOptions: {
             optionsFromCapabilities: true,
+            optionsFromApi: true,
             type: 'wms',
             url: url,
             params: {
-              layers: name,
-              version: '1.3.0'
+              layers: name
             }
           }
         })
