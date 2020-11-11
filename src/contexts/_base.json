@@ -214,7 +214,11 @@
       "name": "activeOgcFilter"
     },
     {
-      "name": "importExport"
+      "name": "importExport",
+      "options": {
+        "importExportType": "layer",
+        "importExportShowBothType": true
+      }
     },
     {
       "name": "print"
