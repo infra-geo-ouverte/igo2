@@ -61,37 +61,35 @@
       [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
       [@mapStateX]="sidenavOpened ? 'right' : 'left'"
       (@mapStateX.start)="updateMapBrowserClass()"
-      [@mapStateY]="getExpansionToastPanelStatus()"
+      [@mapStateY]="getControlsOffsetY()"
       (@mapStateY.start)="updateMapBrowserClass()">
 
       <igo-zoom-button [map]="map" color="primary"
-        [@controlsOffsetY]="expansionPanelExpanded">
+        [@controlsOffsetY]="getControlsOffsetY()">
       </igo-zoom-button>
       <igo-offline-button [map]="map" color="primary"
-        [@controlsOffsetY]="expansionPanelExpanded"
+        [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-offline-button>
       <igo-geolocate-button 
         *ngIf="hasGeolocateButton"
         [map]="map" color="primary"
-        [@controlsOffsetY]="expansionPanelExpanded"
+        [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-geolocate-button>
       <igo-rotation-button [showIfNoRotation]="false" [map]="map" color="primary"></igo-rotation-button>
       <igo-user-button [map]="map" color="primary"
-        [@controlsOffsetY]="expansionPanelExpanded"
+        [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-user-button>
       <igo-baselayers-switcher [map]="map"
-        [useStaticIcon]="true"
-        [@baselayersStateY]="expansionPanelExpanded ? 'up' : 'close'"
-        [@baselayersWithToastPanel]="getBaselayersSwitcherStatus()"
+        [@controlsOffsetY]="getBaselayersSwitcherStatus()"
         [useStaticIcon]="true">
       </igo-baselayers-switcher>
     </igo-map-browser>
 
     <app-map-overlay
-      [@controlStateY]="expansionPanelExpanded ? 'up' : 'down'"
+      [@controlStateY]="getControlsOffsetY()"
       [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
                               sidenavOpened ? 'right' : 'left'">
     </app-map-overlay>
@@ -103,6 +101,7 @@
   *ngIf="hasExpansionPanel && (workspaceState.workspaceEnabled$ | async)"
   [backdropShown]="expansionPanelBackdropShown"
   [(expanded)]="expansionPanelExpanded"
+  [maximized]="workspaceMaximize$ | async"
   [@expansionPanelSize]="getExpansionPanelStatus()"
   [@toastOffsetY]="(isMobile() && !toastPanelOpened && queryState.store.entities$.value.length > 0 && !expansionPanelExpanded) ? 'true' : 'false'">
 
