@@ -3502,7 +3502,24 @@ Exemples
 
           {
             "name": "importExport",
-            "options": {
+             "options": {
+                 "selectFirstProj": false,
+                 "projectionsLimitations": {
+                        "projFromConfig": true,
+                        "nad83": true,
+                        "wgs84": true,
+                        "webMercator": true,
+                        "utm": true,
+                        "mtm": true,
+                        "utmZone": {
+                              "minZone": 17,
+                              "maxZone": 21
+                        },
+                        "mtmZone": {
+                              "minZone": 4,
+                              "maxZone": 10
+                        }
+                  },
                 "importExportType": "layer",
                 "importExportShowBothType": true
             }
@@ -3572,6 +3589,48 @@ Options
                Valeurs possibles
          - .. line-block::
                Valeur défaut
+       * - selectFirstProj
+         - boolean
+         - .. line-block::
+               Permet de controler si la première projection rencontrée dans la liste sera sélectionnée.
+         - true / false
+         - false
+       * - projectionsLimitations
+         - {}
+         - .. line-block::
+               Permet de controler la liste des projections disponible dans l'outil.
+         - .. line-block::
+               {
+               "projFromConfig": true, // Utiliser les projections définies dans la configuration 
+               "nad83": true, // Utiliser le NAD83
+               "wgs84": true, // Utiliser le WGS84
+               "webMercator": true, // Utiliser le WebMercator (EPSG:3857)
+               "utm": true, // Utiliser les projections UTM
+               "mtm": true, // Utiliser les projections MTM
+               "utmZone": {
+                 "minZone": 17, // Zone minimale UTM
+                 "maxZone": 21  // Zone maximale UTM
+               },
+               "mtmZone": {
+                 "minZone": 4, // Zone minimale MTM
+                 "maxZone": 10  // Zone maximale MTM
+               }}
+         - .. line-block::
+               {
+               "projFromConfig": true,
+               "nad83": true,
+               "wgs84": true,
+               "webMercator": true,
+               "utm": true,
+               "mtm": true,
+               "utmZone": {
+                 "minZone": 1,
+                 "maxZone": 60
+               },
+               "mtmZone": {
+                 "minZone": 1,
+                 "maxZone": 10
+               }}  
        * - importExportType
          - String
          - .. line-block::
@@ -3590,7 +3649,6 @@ Options
                true / false
          - .. line-block::
                true
-
 
 Liens
 
