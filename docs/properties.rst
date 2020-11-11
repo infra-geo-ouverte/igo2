@@ -3514,12 +3514,14 @@ Exemples
                         "utmZone": {
                               "minZone": 17,
                               "maxZone": 21
-                              },
-                              "mtmZone": {
+                        },
+                        "mtmZone": {
                               "minZone": 4,
                               "maxZone": 10
-                              }
-                  }
+                        }
+                  },
+                "importExportType": "layer",
+                "importExportShowBothType": true
             }
           }
 
@@ -3628,8 +3630,25 @@ Options
                "mtmZone": {
                  "minZone": 1,
                  "maxZone": 10
-               }}
-               
+               }}  
+       * - importExportType
+         - String
+         - .. line-block::
+               Définit quel type d'exportation sera ouvert par défaut
+         - .. line-block::
+               layer ou context
+         - .. line-block::
+               layer
+       * - importExportShowBothType
+         - Boolean
+         - .. line-block::
+               Permet d'afficher ou non les 2 types d'importation ou exportation (layer ou contexte)
+               Si false, le type définit précédemment, sera le seul type affiché. 
+               Se base sur l'option importExportType. 
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
 
 Liens
 

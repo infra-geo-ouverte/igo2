@@ -30,7 +30,7 @@
   },
   "IGO": "IGO",
   "noEntityStore": "No tables available for this dataset",
-  "coordinates": "Show coordinates,",
+  "coordinates": "Show coordinates",
   "googleMap": "Show in Google maps",
   "googleStreetView": "Show in Google Street view",
   "welcomeWindow": {

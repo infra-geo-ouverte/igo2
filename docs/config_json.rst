@@ -84,6 +84,12 @@ Résumé
                Le résumé est dépendant des sources de recherche utilisées.
                Désactivé par défaut.
          -
+       * - `hasGeolocateButton`_
+         - Boolean
+         - .. line-block::
+               Permet de définir s'il y aura un bouton de 
+               géolocalisation par le fureteur dans l'application
+         -
        * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
@@ -714,6 +720,15 @@ hasExpansionPanel
         d'un bouton situé dans le coin inférieur gauche de la carte.
         Ce dernier contient les données tabulaires pour
         les données WFS / Vectorielle / Cluster.
+
+
+*****************
+hasGeolocateButton
+*****************
+
+    .. line-block::
+        Permet de définir s'il y aura un bouton de 
+        géolocalisation par le fureteur dans l'application
 
 
 ***************

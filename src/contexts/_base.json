@@ -229,7 +229,9 @@
             "minZone": 3,
             "maxZone": 10
           }
-        }
+        },
+        "importExportType": "layer",
+        "importExportShowBothType": true
       }
     },
     {
