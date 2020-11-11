@@ -387,10 +387,33 @@ Liens
     - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`__
 
 
-
 SourceOptions
 ===============
 
+
+    .. line-block::
+        Diverses sources de données sont supportées.
+        Référez-vous aux section suivantes pour
+        plus de détails.
+
+        - `ArcGis`_
+        - `Tile ArcGis`_
+        - `Carto`_
+        - `OSM`_
+        - `Cluster`_
+        - `TMS (xyz)`_
+        - `Vector Tiles`_
+        - `Vecteur`_
+        - `Websocket`_
+        - `WFS`_
+        - `WMS`_
+        - `WMTS`_
+
+WorkspaceOptions
+================
+
+    .. line-block::
+=======
     .. line-block::
         Diverses sources de données sont supportées.
         Référez-vous aux section suivantes pour
@@ -3501,7 +3524,28 @@ Exemples
         .. code:: json
 
           {
-            "name": "importExport"
+            "name": "importExport",
+             "options": {
+                 "selectFirstProj": false,
+                 "projectionsLimitations": {
+                        "projFromConfig": true,
+                        "nad83": true,
+                        "wgs84": true,
+                        "webMercator": true,
+                        "utm": true,
+                        "mtm": true,
+                        "utmZone": {
+                              "minZone": 17,
+                              "maxZone": 21
+                        },
+                        "mtmZone": {
+                              "minZone": 4,
+                              "maxZone": 10
+                        }
+                  },
+                "importExportType": "layer",
+                "importExportShowBothType": true
+            }
           }
 
     .. line-block::
@@ -3544,8 +3588,90 @@ Propriétés
                    - fichiers dans :ref:`Language <igolanguage>`.
          -
          - igo.integration.tools.importExport
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - selectFirstProj
+         - boolean
+         - .. line-block::
+               Permet de controler si la première projection rencontrée dans la liste sera sélectionnée.
+         - true / false
+         - false
+       * - projectionsLimitations
+         - {}
+         - .. line-block::
+               Permet de controler la liste des projections disponible dans l'outil.
+         - .. line-block::
+               {
+               "projFromConfig": true, // Utiliser les projections définies dans la configuration 
+               "nad83": true, // Utiliser le NAD83
+               "wgs84": true, // Utiliser le WGS84
+               "webMercator": true, // Utiliser le WebMercator (EPSG:3857)
+               "utm": true, // Utiliser les projections UTM
+               "mtm": true, // Utiliser les projections MTM
+               "utmZone": {
+                 "minZone": 17, // Zone minimale UTM
+                 "maxZone": 21  // Zone maximale UTM
+               },
+               "mtmZone": {
+                 "minZone": 4, // Zone minimale MTM
+                 "maxZone": 10  // Zone maximale MTM
+               }}
+         - .. line-block::
+               {
+               "projFromConfig": true,
+               "nad83": true,
+               "wgs84": true,
+               "webMercator": true,
+               "utm": true,
+               "mtm": true,
+               "utmZone": {
+                 "minZone": 1,
+                 "maxZone": 60
+               },
+               "mtmZone": {
+                 "minZone": 1,
+                 "maxZone": 10
+               }}  
+       * - importExportType
+         - String
+         - .. line-block::
+               Définit quel type d'exportation sera ouvert par défaut
+         - .. line-block::
+               layer ou context
+         - .. line-block::
+               layer
+       * - importExportShowBothType
+         - Boolean
+         - .. line-block::
+               Permet d'afficher ou non les 2 types d'importation ou exportation (layer ou contexte)
+               Si false, le type définit précédemment, sera le seul type affiché. 
+               Se base sur l'option importExportType. 
+         - .. line-block::
+               true / false
+         - .. line-block::
+               true
 
 Liens
 

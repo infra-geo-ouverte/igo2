@@ -14,19 +14,19 @@
     "title": "Entités trouvées sur la carte",
     "listButton": "Retourner à la liste des entités",
     "backToList": "Retourner à la liste",
-    "zoomOnFeature": "Zoom sur l'élément",
-    "zoomOnFeatureTooltip": "Zoomer sur l'élément sélectionné ( raccouci clavier = z )",
-    "zoomOnFeatureTooltipOutOfView": "L'élément est hors de la vue. Zoomer sur l'élément sélectionné ( raccouci clavier = z )",
-    "zoomOnFeatures": "Zoom sur les éléments",
-    "zoomOnFeaturesTooltip": "Zoomer sur les éléments sélectionnés",
+    "zoomOnFeature": "Zoom sur l'entité",
+    "zoomOnFeatureTooltip": "Zoomer sur l'entité sélectionnée ( raccouci clavier = z )",
+    "zoomOnFeatureTooltipOutOfView": "L'entité est hors de la vue. Zoomer sur l'entité sélectionnée ( raccouci clavier = z )",
+    "zoomOnFeatures": "Zoom sur les entités",
+    "zoomOnFeaturesTooltip": "Zoomer sur les entités sélectionnées",
     "zoomAuto": "Zoom auto",
     "zoomAutoTooltip": "Zoom automatique",
     "fullExtent": "Agrandir",
     "fullExtentTooltip": "Agrandir la fenêtre",
     "standardExtent": "Réduire",
     "standardExtentTooltip": "Réduire la fenêtre",
-    "previousFeatureTooltip": "Élément précédent ( raccouci clavier = flèche gauche )",
-    "nextFeatureTooltip": "Prochain élément ( raccouci clavier = flèche droite )"
+    "previousFeatureTooltip": "Entité précédente ( raccouci clavier = flèche gauche )",
+    "nextFeatureTooltip": "Prochaine entité ( raccouci clavier = flèche droite )"
   },
   "IGO": "IGO",
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
@@ -157,6 +157,7 @@
       "results-table": "Les résultats apparaîtront dans ce tableau.",
       "clear-results": "Les résultats de la recherche peuvent être retirer à tout moment.",
       "export": "Il est aussi possible d'exporter les résultats par l'outil d'export."
+<<<<<<< HEAD
     },
     "context": {
       "title": "CONTEXTES",
@@ -178,6 +179,8 @@
       "users-filter": "Cliquez pour voir les différentes options possible pour filtrer la liste par profil d'utilisateur",
       "users-filter-menu": "Cochez les profils dont vous souhaitez afficher les contextes associés.",
       "users-filter-hide": "Il est possible de faire afficher les contextes masqués à partir de ce menu."
+=======
+>>>>>>> origin/next
     }
   }
 }

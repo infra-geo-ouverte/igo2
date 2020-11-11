@@ -159,10 +159,7 @@
   ],
   "tools": [
     {
-      "name": "searchResults",
-      "options": {
-        "focusFirst": false
-      }
+      "name": "searchResults"
     },
     {
       "name": "contextManager"
@@ -214,7 +211,28 @@
       "name": "activeOgcFilter"
     },
     {
-      "name": "importExport"
+      "name": "importExport",
+      "options": {
+        "selectFirstProj": false,
+        "projectionsLimitations": {
+          "projFromConfig": true,
+          "nad83": true,
+          "wgs84": true,
+          "webMercator": true,
+          "utm": true,
+          "mtm": true,
+          "utmZone": {
+            "minZone": 17,
+            "maxZone": 21
+          },
+          "mtmZone": {
+            "minZone": 3,
+            "maxZone": 10
+          }
+        },
+        "importExportType": "layer",
+        "importExportShowBothType": true
+      }
     },
     {
       "name": "print"
