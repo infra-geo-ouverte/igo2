@@ -5,7 +5,6 @@ http://www.ericholscher.com/blog/2016/mar/15/dont-use-markdown-for-technical-doc
 
 CONFIG.JSON
 
-hasExpansionPanel
 
 Auth
 
@@ -28,19 +27,6 @@ Le fichier context.json:
     .. warning::
        Section context.json en cours de construction
 
-
-layers
-    - tooltip
-
-map
-
-tools
-
-OGC filter -> propriété
-
-Shortcut
-
-Controle url
 
 icherche 
 Lien vers l'api? contenu a jour?
