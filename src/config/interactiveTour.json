@@ -131,7 +131,6 @@
         "title": "interactiveTour.global.menu-button-title",
         "text": "interactiveTour.global.home-button",
         "disableInteraction": true,
-        "deleteAfterNext": false,
         "beforeShow": {
           "action": "click",
           "element": "igo-actionbar-item:nth-child(3) mat-list-item"
@@ -451,7 +450,6 @@
       {
         "text": "interactiveTour.context.select",
         "element": "igo-context-item.igo-list-item-selected",
-        "deleteAfterNext": true,
         "beforeChange": {
           "action": "click",
           "element": "igo-actionbar-item:nth-child(2) mat-list-item"
@@ -463,8 +461,7 @@
       },
       {
         "element": "igo-context-item button.save-button",
-        "text": "interactiveTour.context.save-context",
-        "deleteAfterNext": true
+        "text": "interactiveTour.context.save-context"
       },
       {
         "element": "igo-context-item:first-of-type button.actions-button",
@@ -485,8 +482,7 @@
       },
       {
         "element": "div.igo-actions-expand-container button.edit-button",
-        "text": "interactiveTour.context.context-edit",
-        "deleteAfterNext": true
+        "text": "interactiveTour.context.context-edit"
       },
       {
         "element": "div.igo-actions-expand-container button.hide-button",
@@ -495,7 +491,6 @@
       {
         "element": "div.igo-actions-expand-container button.delete-button",
         "text": "interactiveTour.context.context-delete",
-        "deleteAfterNext": true,
         "onHide": {
           "action": "click",
           "element": "igo-context-item:first-of-type button.actions-button"
@@ -511,7 +506,8 @@
       },
       {
         "element": "igo-context-list igo-actionbar.add-context-button",
-        "text": "interactiveTour.context.add-context"
+        "text": "interactiveTour.context.add-context",
+        "disableInteraction": true
       },
       {
         "element": "igo-context-list button.users-filter",
@@ -525,6 +521,16 @@
         "element": "div.mat-menu-panel",
         "text": "interactiveTour.context.users-filter-menu",
         "position": ""
+      },
+      {
+        "element": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:first-of-type",
+        "text": "interactiveTour.context.users-filter-active",
+        "position": "",
+        "onShow": {
+          "action": "click",
+          "element": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:first-of-type mat-checkbox .mat-checkbox-layout",
+          "condition": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:first-of-type mat-checkbox:not(.mat-checkbox-checked)"
+        }
       },
       {
         "element": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:last-of-type",

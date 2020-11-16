@@ -178,7 +178,8 @@
       "add-context": "To create an empty context or from map's layers.",
       "users-filter": "Click to see user's profil filter options",
       "users-filter-menu": "Check associated context profil that you want to be display on the list.",
-      "users-filter-hide": "It is possible to display hide contexts from this menu."
+      "users-filter-active": "For example, it is possible to display or not self shared contexts.",
+      "users-filter-hide": "It is also possible to display hide contexts."
     }
   }
 }

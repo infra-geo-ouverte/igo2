@@ -157,30 +157,28 @@
       "results-table": "Les résultats apparaîtront dans ce tableau.",
       "clear-results": "Les résultats de la recherche peuvent être retirer à tout moment.",
       "export": "Il est aussi possible d'exporter les résultats par l'outil d'export."
-<<<<<<< HEAD
     },
     "context": {
       "title": "CONTEXTES",
       "start": "Tour guidé de l'outil de contexte",
-      "description": "Un contexte est une carte prédéfinie constituée de plusieurs couches regroupées selon une thématique.",
+      "description": "Un contexte est une carte prédéfinie constituée de plusieurs couches dans le but de les regrouper selon une thématique précise.",
       "options": "Un contexte peut ensuite être cloné, masqué et, selon les permissions qui y sont attibuées, édité et partagé.",
-      "select": "Le contexte actif apparaît en surligné. Pour changer le contexte actif, il suffit de cliquer sur le contexte souhaité. On basculera alors dans l'outil de carte.",
-      "favorite": "Cliquez ici pour mettre un contexte en favori et qu'il soit ainsi actif par défaut à l'ouverture votre session.",
-      "save-context": "Cliquez ici vous permet de sauvegarder le contexte actif",
-      "context-options": "Pour afficher les actions possibles à effectuer sur le contexte, cliquez sur ce bouton.",
-      "context-options-opened": "Les actions possibles varies selon le contexte",
-      "context-clone": "Ce bouton permet de cloner le contexte et d'ainsi pouvoir personnaliser votre contexte à partir de ce dernier.",
-      "context-edit": "Ce bouton permet de changer le nom d'un contexte et de partager son identifiant.",
-      "context-hide": "Ce bouton permet de masquer le contexte. De cette façon, celui-ci ne sera plus visible par défaut.",
+      "select": "Le contexte actif apparaît en surligné. Pour changer le contexte actif, il suffit de cliquer sur le contexte que l'on souhaite afficher. On basculera alors dans l'outil de carte.",
+      "favorite": "Cliquez ici pour mettre un contexte en favori et qu'il soit ainsi actif par défaut à l'ouverture de votre session.",
+      "save-context": "Cliquez ici pour vous permettre de sauvegarder le contexte actif",
+      "context-options": "Pour afficher les actions possibles à effectuer sur un contexte, cliquez sur ce bouton.",
+      "context-options-opened": "Comme mentionné plus tôt, les actions possibles varient selon les permissions du contexte",
+      "context-clone": "Ce bouton permet de cloner le contexte et d'ainsi pouvoir le personnaliser. Il est à noter que le contexte original ne sera pas modifié à partir de la copie.",
+      "context-edit": "Cliquez ici pour changer le nom d'un contexte et partager son identifiant.",
+      "context-hide": "Ce bouton permet de masquer le contexte. De cette façon, celui-ci ne sera plus visible par défaut dans la liste.",
       "context-delete": "Cliquez ici pour supprimer le contexte.",
       "filter": "Entrez du texte ici afin de filtrer la liste par nom",
       "alpha": "Cliquez pour trier par ordre alphabétique. Par défaut, les contextes sont triés par date de création.",
       "add-context": "Permet la création d'un contexte vide ou encore à partir des couches déjà présentes sur la carte.",
-      "users-filter": "Cliquez pour voir les différentes options possible pour filtrer la liste par profil d'utilisateur",
+      "users-filter": "Cliquez pour voir les différentes options de filtrage par profil d'utilisateur pour la liste de contexte.",
       "users-filter-menu": "Cochez les profils dont vous souhaitez afficher les contextes associés.",
-      "users-filter-hide": "Il est possible de faire afficher les contextes masqués à partir de ce menu."
-=======
->>>>>>> origin/next
+      "users-filter-active": "Par exemple, il est possible d'afficher ou d'enlever les contextes partagés à soi-même.",
+      "users-filter-hide": "Il est également possible de faire afficher les contextes masqués."
     }
   }
 }
