@@ -387,10 +387,33 @@ Liens
     - `igo2-lib/packages/geo/src/lib/layer/shared/layers/layer.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/layer/shared/layers/layer.interface.ts>`__
 
 
-
 SourceOptions
 ===============
 
+
+    .. line-block::
+        Diverses sources de données sont supportées.
+        Référez-vous aux section suivantes pour
+        plus de détails.
+
+        - `ArcGis`_
+        - `Tile ArcGis`_
+        - `Carto`_
+        - `OSM`_
+        - `Cluster`_
+        - `TMS (xyz)`_
+        - `Vector Tiles`_
+        - `Vecteur`_
+        - `Websocket`_
+        - `WFS`_
+        - `WMS`_
+        - `WMTS`_
+
+WorkspaceOptions
+================
+
+    .. line-block::
+=======
     .. line-block::
         Diverses sources de données sont supportées.
         Référez-vous aux section suivantes pour
