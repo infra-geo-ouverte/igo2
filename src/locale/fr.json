@@ -186,7 +186,22 @@
       "layer-list": "L'onglet carte peut être utilisée pour présenter la liste des couches des couches présentes dans la carte.",
       "legend-list": "L'onglet carte peut aussi être utilisée pour présenter la liste des légendes associées à ces mêmes couches. Nous y reviendrons plus tard.",
       "layer-item": "Une couche représente un ensemble d'entités du même type.",
-      "layer-item-click": "Un clic sur le titre de la couche permet d'afficher la légende."
+      "layer-item-click": "Un clic sur le titre de la couche permet d'afficher et de cacher la légende.",
+      "eye-button": "Un clic sur l'oeil permet d'afficher et de masquer la couche sur la carte. Un oeil grisé indique que la couche n'est pas visible à l'échelle active. Zoomer ou dézoomer pour voir la couche.",
+      "actions-button": "Cliquez ici pour voir les actions possibles à effectuer sur la couche.",
+      "layer-actions-group": "La barre d'outils apparait ici.",
+      "workspace-button": "Ce bouton permet l'ouverture de la vue tabulaire (table des résultats).",
+      "export-button": "Cliquez ici pour exporter la couche par l'entremise de l'outil d'export IGO.",
+      "ogc-button": "Le filtre OGC est un filtre attributaire permettant d'épurer le visuel de la couche par rapport à certains attributs.",
+      "time-button": "Le filtre temporel permet quand à lui de faire ressortir les éléments de la couche répertoriés dans un certain intervalle de temps.",
+      "metadata-button": "Cliquez ici pour accéder aux métadonnées de la couche.",
+      "opacity-button": "L'opacité de la couche (transparence) peut être modifier à partir de ce bouton.",
+      "up-button": "Permet de monter la couche d'un rang dans l'ordre d'apprence des couches sur la carte. Elle montera également d'un rang dans la liste.",
+      "down-button": "Permet de descendre la couche d'un rang dans l'ordre d'apparence des couches sur la carte. Elle descendra également d'un rang dans la liste.",
+      "delete-button": "Cliquez sur ce bouton pour supprimer la couche de la carte active.",
+      "name-filter": "Entrez du texte ici afin de filtrer la liste par nom",
+      "alpha": "Cliquez pour trier par ordre alphabétique. Par défaut, les couches sont triés par ordre d'apparence. Il est à noter que trié la liste ne changera PAS l'ordre d'apparence des couches.",
+      "eye-filter": "Cliquez pour ne conserve que les couches visibles à l'échelle active"
     }
   }
 }

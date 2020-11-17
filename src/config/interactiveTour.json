@@ -490,11 +490,7 @@
       },
       {
         "element": "div.igo-actions-expand-container button.delete-button",
-        "text": "interactiveTour.context.context-delete",
-        "onHide": {
-          "action": "click",
-          "element": "igo-context-item:first-of-type button.actions-button"
-        }
+        "text": "interactiveTour.context.context-delete"
       },
       {
         "element": "igo-context-list mat-list mat-form-field",
