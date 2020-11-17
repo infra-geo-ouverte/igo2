@@ -62,24 +62,20 @@ Résumé
        * - auth
          - `Auth`_
          - .. line-block::
-               Objet permettant d'activer le serveur
-               d'authentification.
+               Objet permettant d'activer le serveur d'authentification.
          -
        * - :ref:`catalog <igocatalogConfig>`
-         - :ref:`Catalog objet <igocatalogObject>` []
+         - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
-               Doit être présente si l'outil de catalogue.
-               Permet de gérer les sources WMS et WMTS
+               Doit être présente si l'outil de catalogue. Permet de gérer les sources WMS et WMTS
          - .. line-block::
                Catalog
                CatalogBrowser
        * - context
          - `Context`_
          - .. line-block::
-               Activation de l'API de context d'IGO2.
-               Cette API sera documentée
-               indépendamment de la présente
-               documentation.
+               Activation de l'API de context d'IGO2. Cette API sera documentée indépendamment
+               de la présente documentation.
          - ContextManager
        * - `hasSearchPointerSummary`_
          - Boolean
@@ -88,28 +84,29 @@ Résumé
                Le résumé est dépendant des sources de recherche utilisées.
                Désactivé par défaut.
          -
+       * - `hasGeolocateButton`_
+         - Boolean
+         - .. line-block::
+               Permet de définir s'il y aura un bouton de 
+               géolocalisation par le fureteur dans l'application
+         -
        * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
-               Permet d'ouvrir un paneau d'expansion à partir
-               d'un bouton situé dans le coin inférieur gauche
-               de la carte.
-               Ce dernier contient les données tabulaires pour
-                les données WFS / Vectorielle / Cluster
+               Permet d'ouvrir un paneau d'expansion à partir d'un bouton situé dans le coin inférieur gauche
+               de la carte. Ce dernier contient les données tabulaires pour les données WFS / Vectorielle / Cluster
          -
        * - `hasFeatureEmphasisOnSelection`
          - Boolean
          - .. line-block::
-               Permet d'ajouter à la carte une géométrie ponctuelle pour les entités
-               linéaire ou polygonale sélectionnées ou survolées lors d'une
-               interrogation de la carte et qui sont de trop petite taille par
-               rapport à l'étendue de la carte.
+               Permet d'ajouter à la carte une géométrie ponctuelle pour les entités linéaire ou
+               polygonale sélectionnées ou survolées lors d'une interrogation de la carte et qui
+               sont de trop petite taille par rapport à l'étendue de la carte.
          -
        * - importExport
          - `ImportExport`_
          - .. line-block::
-               Nécessaire si l'outil d'importation exportation
-               pour gérer l'importation des Shapefiles
+               Nécessaire si l'outil d'importation exportation pour gérer l'importation des Shapefiles.
          - .. line-block::
                Importation
                Exportation
@@ -120,8 +117,7 @@ Résumé
        * - **language***
          - `Language`_
          - .. line-block::
-               Chemin d'accès des fichiers de traduction de
-               l'application.
+               Chemin d'accès des fichiers de traduction de l'application.
          - Tous
        * - mapOverlay
          - `MapOverlay`_ []
@@ -133,23 +129,26 @@ Résumé
          - .. line-block::
               Indique si les couleurs du bouton de menu seront inversés.
          -
+       * - optionsApi
+         - `optionsApi`_
+         - .. line-block::
+              Indique le chemin pour api fournissant certaine options de couches lors de l'ajout de celles-ci
+              par la recherche.
+         -
        * - projections
          - :ref:`Projection <igoprojections>` []
          - .. line-block::
-               Liste de projections non enregistrées
-               par défault par OpenLayers.
+               Liste de projections non enregistrées par défault par OpenLayers.
          -
        * - routingSources
          - `RoutingSource`_
          - .. line-block::
-               Source serveur pour la création des itinéraires.
-               Actuellement, le serveur utilisé est OSRM.
+               Source serveur pour la création des itinéraires. Actuellement, le serveur utilisé est OSRM.
          - itinéraire
        * - **searchSources***
          - `SearchSources`_
          - .. line-block::
-               Nécessaire afin de permettre la recherche par
-               texte et/ou la recherche par coordonnées.
+               Nécessaire afin de permettre la recherche par texte et/ou la recherche par coordonnées.
          - .. line-block::
                Recherche
                Carte
@@ -158,11 +157,11 @@ Résumé
                Voir: `theme`_
          - String
          - .. line-block::
-               Permet de définir les thèmes de l'application.
-               Les choix sont:
+               Permet de définir les thèmes de l'application. Les choix sont:
                    - blue-theme
                    - bluegrey.theme
                    - dark.theme
+                   - teal.theme
                Le répertoire où sont conservés les thèmes est
                le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
          -
@@ -173,7 +172,9 @@ Résumé
                Constante pouvant être réutilisée dans le welcomeWindow.
          -
        * - version
-         - app: String, releaseDateApp: String
+         - .. line-block::
+              app: String,
+              releaseDateApp: String
          - .. line-block::
                Permet de définir une constante, pour la version du présent déploiement et de la
                date de déploiement de l'application. releaseDateApp, doit être un format reconnu et
@@ -184,8 +185,8 @@ Résumé
        * - description
          - String
          - .. line-block::
-               Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche, comme par exemple Google.
-               Constante pouvant être réutilisée dans le welcomeWindow.
+               Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche,
+               comme par exemple Google. Constante pouvant être réutilisée dans le welcomeWindow.
          -
        * - welcomeWindow
          - `WelcomeWindow`_
@@ -197,13 +198,14 @@ Résumé
                   "title": "Fenêtre d'accueil",
                   "closeButton": "Fermer",
                   "notShowCheck": "  ne plus afficher"}
-               Les propriétés title, description, version, releaseDate peuvent être utilisées dans le contenu html
-               pour ajouter du contenu statique non traduit.
+               Les propriétés title, description, version, releaseDate peuvent être utilisées dans le
+               contenu html pour ajouter du contenu statique non traduit.
                ex: "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>Version {{version}}"
                - title provient de la propriété title ci haut.
                - description provient de la propriété description ci haut.
                - version provient de la propriété version.app ci haut OU de la version de la librairie associée (igo2-lib)
-               - releaseDate provient de la propriété version.releaseDateApp ci haut OU de la releaseDate de la librairie associée (igo2-lib)
+               - releaseDate provient de la propriété version.releaseDateApp ci haut OU de la releaseDate
+                 de la librairie associée (igo2-lib)
          -
 
 
@@ -269,22 +271,19 @@ Propriétés
        * - **url***
          - String
          - .. line-block::
-               Définit l'url d'appel du service
-               d'authentification
+               Définit l'url d'appel du service d'authentification
          -
          -
        * - **tokenKey***
          - String
          - .. line-block::
-               Définit la clef de l'api d'authentification
-               utilisée
+               Définit la clef de l'api d'authentification utilisée
          -
          -
        * - allowAnonymous
          - Boolean
          - .. line-block::
-               Permet/Bloque l'accès aux usagers non
-               authentifiés
+               Permet/Bloque l'accès aux usagers non authentifiés
                d'accéder aux contextes publics
          - true | false
          - true
@@ -314,12 +313,16 @@ Catalog
         Les sources de cataloguage permises:
             - Service WMS
             - Service WMTS
-
+            - Service ArcGIS REST
+            - Sercice Tile ArcGIS Rest
 
         Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
-        Dans la présente version
-            1- Les couches ajoutées par le catalogue sont partagées lors du partage de carte.
+        NB: Il est possible de configurer certaines options dans les catalogues comme le format de présentation des informations(queryFormat) ou la configuration des
+        filtres temporels souhaités (Voir exemples)
+
+        Partage de carte:
+            1- Les couches ajoutées (WMS-WMTS) par le catalogue sont partagées lors du partage de carte.
             2- La structure de l'url pour les couches partagées est la suivante:
                 - wmsUrl =­­> une liste, séparée par une ',' (virgule) listant les url de service ajoutées.
                       - Exemple : wmsUrl=urlDuService1,urlDuService2
@@ -344,57 +347,79 @@ Exemples
             "catalog": {
                   "sources": [
                   {
-                        "id": "opendataqc",
-                        "title": "Données Ouvertes Québec",
-                        "url": "/ws/igo_gouvouvert.fcgi"
+                      "id": "Arcgis Rest",
+                      "title": "Arcgis Rest",
+                      "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                      "type": "arcgisrest",
+                      "sourceOptions": {
+                          "queryable": true,
+                          "idColumn": "OBJECTID"
+                      }
                   },
                   {
-                        "id": "mtq",
-                        "title": "MTQ",
-                        "url": "/swtq",
-                        "sortDirection": "desc",
-                        "queryFormat": {
-                              "htmlgml2": "*",
-                              "json": "stations_meteoroutieres"
-                              },
-                        "queryHtmlTarget": "iframe",
-                        "count": 365,
-
-                        "tooltipType": "abstract"
+                      "id": "opendataqc",
+                      "title": "Données Ouvertes Québec",
+                      "url": "/ws/igo_gouvouvert.fcgi"
                   },
                   {
-                        "id": "regexmtq",
-                        "title": "MTQ (filtered by regex)",
-                        "url": "/swtq",
-                        "regFilters": ["zpegt"]
+                      "id": "mffp",
+                      "title": "MFFP",
+                      "url": "/ws/mffpecofor.fcgi",
+                      "sourceOptions": {
+                        "timeFilter": {
+                          "style": "calendar",
+                          "range": true,
+                          "step": 63072000000,
+                          "type": "year"
+                        }
+                      }
                   },
                   {
-                        id: 'group_impose',
-                        title: '(composite catalog) with group imposed',
-                        composite: [
-                              {
-                              id: 'tq_swtq',
-                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
-                              regFilters: ['zpegt'],
-                              groupImpose: {id: 'zpegt', title: 'zpegt'}
-                              },
-                              {
-                              id: 'Gououvert',
-                              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
-                              regFilters: ['zpegt'],
-                              groupImpose: {id: 'zpegt', title: 'zpegt'}
-                              },
-                              {
-                              id: 'rn_wmts',
-                              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
-                              type: 'wmts',
-                              crossOrigin: true,
-                              matrixSet: 'EPSG_3857',
-                              version: '1.0.0',
-                              groupImpose: {id: 'cartetopo', title: 'Carte topo échelle 1/20 000'}
-                              }
-                        ]
-                  }
+                      "id": "mtq",
+                      "title": "MTQ",
+                      "url": "/swtq",
+                      "sortDirection": "desc",
+                      "queryFormat": {
+                            "htmlgml2": "*",
+                            "json": "stations_meteoroutieres"
+                            },
+                      "queryHtmlTarget": "iframe",
+                      "count": 365,
+                      "tooltipType": "abstract"
+                  },
+                  {
+                      "id": "regexmtq",
+                      "title": "MTQ (filtered by regex)",
+                      "url": "/swtq",
+                      "regFilters": ["zpegt"]
+                  },
+                  {
+                      "id": "group_impose",
+                      "title": "(composite catalog) with group imposed",
+                      "composite": [
+                            {
+                            "id": "tq_swtq",
+                            "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+                            "regFilters": ["zpegt"],
+                            "groupImpose": {"id": "zpegt", "title": "zpegt"}
+                            },
+                            {
+                              "id": "Gououvert",
+                              "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+                              "regFilters": ["zpegt"],
+                              "groupImpose": {"id": "zpegt", "title": "zpegt"}
+                            },
+                            {
+                              "id": "rn_wmts",
+                              "url": "https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images",
+                              "type": "wmts",
+                              "crossOrigin": true,
+                              "matrixSet": "EPSG_3857",
+                              "version": "1.0.0",
+                              "groupImpose": {"id": "cartetopo", "title": "Carte topo échelle 1/20 000"}
+                            }
+                      ]
+                }
                   ]
             }
 
@@ -444,126 +469,109 @@ Propriétés - Objet Catalog
        * - count
          - Integer
          - .. line-block::
-               Nombre de résultats retournés par le serveur
-               lors de requêtes **WMS** de GetFeatureInfo
+               Nombre de résultats retournés par le serveur lors de requêtes **WMS** de GetFeatureInfo
          -
          - 5
        * - **id***
          - String
          - .. line-block::
-               Identifiant unique permettant de différencier
-               les catalogues entre eux.
+               Identifiant unique permettant de différencier les catalogues entre eux.
          -
          - uuid()
        * - groupImpose
-         - id*: String, title*: String
+         - .. line-block::
+            id*: String,
+            title*: String
          - .. line-block::
                N.B: Propriété disponible sur un objet de type CompositeCatalog
-               Permet d'imposer l'utilisation d'un groupe à l'ensemble
-               des couches appellées du catalogue.
-               - id: Identifiant unique permettant de différencier
-               les groupes entre eux.
-               - title: Titre pour le groupe qui sera utilisé
-               dans l'outil Catalog.
+               Permet d'imposer l'utilisation d'un groupe à l'ensemble des couches appellées du catalogue.
+               - id: Identifiant unique permettant de différencier les groupes entre eux.
+               - title: Titre pour le groupe qui sera utilisé dans l'outil Catalog.
          -
          -
        * - matrixSet
          - String
          - .. line-block::
-               Nom du matrixSet définit pour le service
-               WMTS seulement
+               Nom du matrixSet définit pour le service WMTS seulement
                **Obligatoire pour les services WMTS**
          -
          -
        * - queryFormat
          - QueryFormat
          - .. line-block::
-               Pour les services **WMS**, le format d'interrogation
-               de la donnée.
+               Pour les services **WMS**, le format d'interrogation de la donnée.
          - Voir **QueryFormat**
          -
        * - queryHtmlTarget
          - String
          - .. line-block::
-               Pour les services **WMS**, definit la destination des
-               résultats d'interrogation pour les formats HTML.
-         - iframe (intégré
-           à la plage) ou
-           _blank (ouverture
-           page externe)
+               Pour les services **WMS**, definit la destination des résultats d'interrogation
+               pour les formats HTML.
+         - .. line-block::
+              iframe (intégré à la plage)
+              _blank (ouverture page externe)
          - iframe
        * - queryParams
          - objet {}
          - .. line-block::
-               Paramètres supplémentaires à ajouter à l'appel des
-               couches ajoutées à partir du service.
-               Que ce soit des paramètres normés (WMS|WMTS)
-               ou liés à votre service.
+               Paramètres supplémentaires à ajouter à l'appel des couches ajoutées à partir du service.
+               Que ce soit des paramètres normés (WMS|WMTS) ou liés à votre service.
          -
          -
        * - regFilters
          - String[]
          - .. line-block::
-               Une liste d'expressions régulières (regex)
-               permettant de limiter les couches
-               d'information présentées dans l'outil
-               CatalogBrowser
+               Une liste d'expressions régulières (regex) permettant de limiter les couches
+               d'information présentées dans l'outil CatalogBrowser
          -
          -
        * - requestEncoding
          - String
          - .. line-block::
-               Type d'encodage des paramètres demandés au
-               serveur
+               Type d'encodage des paramètres demandés au serveur
          - KVP REST
          - KVP
        * - setCrossOriginAnonymous
          - Boolean
          - .. line-block::
-               Afin de définir si l'entête de l'appel faite
-               au serveur sera anonyme. Permet entre autres,
-               d'éviter les problématiques de CORS
-         - true false
+               Afin de définir si l'entête de l'appel faite au serveur sera anonyme. Permet entre autres,
+               d'éviter les problématiques de CORS.
+         - true | false
          - false
        * - showLegend
          - Boolean
          - .. line-block::
-               Permet d'affiché la légende sur le click du titre
-               des couches.
-         - true false
+               Permet d'affiché la légende sur le click du titre des couches.
+         - true | false
          - false
        * - sortDirection
          - String
          - .. line-block::
-               Permet de trier l'ordre d'apparition des couches
-               du catalogue dans l'outil CatalogBrowser
-               Influence l'ordre d'ajout des couches
-               d'informations à la carte.
-         - asc desc
+               Permet de trier l'ordre d'apparition des couches du catalogue dans l'outil CatalogBrowser
+               Influence l'ordre d'ajout des couches d'informations à la carte.
+         - asc | desc
          - .. line-block::
-               Aucun, l'ordre présenté par service
+               Aucun, l'ordre
+               présenté par service
        * - timeFilter
          - TimeFilterOptions
          - .. line-block::
-               Options temporelles liées à l'entièreté des
-               couches du service web.
+               Options temporelles liées à l'entièreté des couches du service web.
          - .. line-block::
                Voir **TimeFilter**
          - 1.0.0 (WMTS)
        * - **title***
          - String
          - .. line-block::
-               Titre pour la source du catalogue qui sera utilisé
-               dans l'outil Catalog
+              Titre pour la source du catalogue qui sera utilisédans l'outil Catalog.
          -
          -
        * - tooltipType
          - String
          - .. line-block::
-               Pour les couches ajoutées, définit si le tooltip
-               (sulvol du titre) sera le résumé du "layer"
-               (**wms/wmts**) ou son titre
-         - abstract title
+              Pour les couches ajoutées, définit si le tooltip (sulvol du titre) sera le
+              résumé du "layer" (**wms/wmts**) ou son titre
+         - abstract | title
          - title
        * - type
          - String
@@ -574,8 +582,7 @@ Propriétés - Objet Catalog
        * - **url***
          - String
          - .. line-block::
-               Url du service WMS ou WMTS sans les paramètre
-               d'url normé OGC
+               Url du service WMS ou WMTS sans les paramètre d'url normé OGC
                (i.e. service=wms&request=GetCapabilities)
                OU url du service de baselayers
          -
@@ -616,22 +623,19 @@ Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
        * - **id***
          - String
          - .. line-block::
-               Identifiant unique permettant de différencier
-               les catalogues entre eux.
+               Identifiant unique permettant de différencier les catalogues entre eux.
          -
          -
        * - **title***
          - String
          - .. line-block::
-               Titre pour la source du catalogue qui sera utilisé
-               dans l'outil Catalog.
+              Titre pour la source du catalogue qui sera utilisé dans l'outil Catalog.
          -
          -
        * - composite
          - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
-               Liste des catalogues utilisés dans un catalogue
-               composé.
+              Liste des catalogues utilisés dans un catalogue composé.
          -
          -
 
@@ -718,6 +722,15 @@ hasExpansionPanel
         les données WFS / Vectorielle / Cluster.
 
 
+*****************
+hasGeolocateButton
+*****************
+
+    .. line-block::
+        Permet de définir s'il y aura un bouton de 
+        géolocalisation par le fureteur dans l'application
+
+
 ***************
 ImportExport
 ***************
@@ -774,7 +787,9 @@ Propriétés
        * - gpxAggregateInComment
          - Boolean
          - .. line-block::
-               Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur de l'ID au champ «name».
+               Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler
+               les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur
+               de l'ID au champ «name».
          - .. line-block::
 
          - false
@@ -846,7 +861,8 @@ Propriétés
        * - pathToConfigFile
          - String
          - .. line-block::
-               Indique ou ce retrouve le fichier de configuartion des tours dans l'application. Voir la documentation plus loin sur les détails de la configurations des tours.
+               Indique ou ce retrouve le fichier de configuration des tours dans l'application.
+               Voir la documentation plus loin sur les détails de la configurations des tours.
                Référez vous à :ref:`Tour interactif configuration <igoInteractiveTourConfig>`.
          -
          - "./config/interactiveTour.json"
@@ -951,6 +967,26 @@ Liens
 
 .. _igoprojections:
 
+
+.. _optionsApi:
+
+************
+optionsApi
+************
+
+  Permet de définir le chemin vers API pour les options supplémentaires sur les couches ajoutées par la recherche.
+  Par exemple, les configurations de filtre. Retourne un objet JSON venant se fusionner avec les propriété de la couche.
+  La configuration faite au pilotage a priorité à celles fournies par l'API d'options.
+
+Exemple
+
+        .. code:: json
+
+              "optionsApi": {
+                  "url": "/apis/igo2/layers/options"
+              }
+
+
 ***************
 Projections
 ***************
@@ -959,7 +995,7 @@ Projections
         Permet de définir une **liste** de projections non enregistrées par défault par IGO2 (Proj4). On parle ici de projection non mondiale ou à référence locale (ex: mtm, Lambert MTQ...)
         Référez vous à : `http://epsg.io/ <http://epsg.io/>`_. Ils y définissent l'entièreté des paramètres nécessaires.
 
-Exemples
+Exemple
 
         .. code:: json
 
@@ -1181,7 +1217,8 @@ Propriétés
        * - nbVisitToShow
          - Number
          - .. line-block::
-               Nombre de fois que sera présenté la fenêtre d'accueil. S'appliquera aussi après être revenu par exemple lors d'une nouvelle
+               Nombre de fois que sera présenté la fenêtre d'accueil. S'appliquera aussi après
+               être revenu par exemple lors d'une nouvelle
                version IGO.
          -
          -
@@ -1194,8 +1231,8 @@ Propriétés
        * - showAgainOnNewIGOVersion
          - Boolean
          - .. line-block::
-               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra si la version IGO est différente
-               de la version lors de sa visite précédente.
+               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra
+               si la version IGO est différente de la version lors de sa visite précédente.
          -
          - true
 
@@ -1203,11 +1240,11 @@ Propriétés
 
 
 La configuration du titre et du message présentés se fait dans les fichiers locaux de traduction en.json et fr.json.
-Les variables de nb. visite et de présentation ou non sont conservés dans les 'local storage' du navigateur internet.
+Les variables de nb. visite et de présentation ou non sont conservés dans le 'local storage' du navigateur internet.
 
-***************
+***************************
 Exemple complet config.json
-***************
+****************************
 
         .. code:: json
 
@@ -1729,7 +1766,9 @@ Propriétés
                Valeur par défaut
        * - format
          - String
-         - Le format du message html ou text. Selon le choix, une deuxième configuration devra être définie soit html ou text.
+         - .. line-block::
+              Le format du message html ou text. Selon le choix, une deuxième configuration devra
+              être définie soit html ou text.
          - 'text', 'html'
          -
        * - html
@@ -1754,23 +1793,32 @@ Propriétés
          -
        * - text
          - String
-         - Le text du message à afficher. Cette configuration remplace la configuration html. NB.: pour un message qui sera
-           traduction en fonction du navigateur simplement ce créer une clef de traduction indiquer ici et de mettre sont
-           équivalent dans les fichiers de traduction local en.json, fr.json. Exemple: "text": "messageContextXyz",
-           dans fr.json : "messageContextXyz": <h3>mon super message</h3> et en.json: "messageContextXyz": <h3>message in english</h3>
+         - .. line-block::
+              Le text du message à afficher. Cette configuration remplace la configuration html.
+              NB.: pour un message qui sera traduction en fonction du navigateur simplement ce
+              créer une clef de traduction indiquer ici et de mettre sont équivalent dans les
+              fichiers de traduction local en.json, fr.json. Exemple:
+              "text": "messageContextXyz",
+              fr.json = "messageContextXyz": <h3>mon super message</h3>
+              en.json = "messageContextXyz": <h3>message in english</h3>
          -
          -
        * - title
          - String
-         - Le titre du message à afficher. Cette configuration s'active seulement avec la configuration text et ne sera pas pris
-           en compte avec la configuration html.
+         - .. line-block::
+              Le titre du message à afficher. Cette configuration s'active seulement avec la
+              configuration text et ne sera pas pris en compte avec la configuration html.
          -
          -
        * - type
          - String
-         - Le type du message à afficher. Avertissement, erreur ou information. Selon le type choisi une couleur spécifiée sera
-           appliquée selon la thématique de couleur de l'application.
-         - 'alert', 'error', 'info', 'success'
+         - .. line-block::
+              Le type du message à afficher. Avertissement, erreur ou information.
+              Selon le type choisi une couleur spécifiée sera appliquée selon la
+              thématique de couleur de l'application.
+         - .. line-block::
+              'alert', 'error',
+              'info', 'success'
          -
 
 
@@ -1798,7 +1846,8 @@ Toolbar
 
     .. line-block::
         Définit la liste des outils permis dans le contexte.
-        L'ordre d'apparition des outils dans cette liste est importante puisqu'elle représente l'ordre des outils dans l'application.
+        L'ordre d'apparition des outils dans cette liste est importante puisqu'elle
+        représente l'ordre des outils dans l'application.
         Les outils existant:
             - :ref:`about <igoabout>`
             - :ref:`catalog <igocatalogtool>`
@@ -1813,8 +1862,9 @@ Toolbar
             - :ref:`map <igomaptool>`
             - :ref:`print <igoprint>`
             - :ref:`searchResults <igosearchResults>`
-        Chacun de ces outils fait référence à un nom d'outil tel que définit dans le package "integration" d'IGO2.
-        Pour en modifier les propriétés référez-vous à `tools`_ .
+        Chacun de ces outils fait référence à un nom d'outil tel que définit dans
+        le package "integration" d'IGO2. Pour en modifier les propriétés
+        référez-vous à `tools`_ .
 
 Exemples
 
