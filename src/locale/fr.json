@@ -201,7 +201,13 @@
       "delete-button": "Cliquez sur ce bouton pour supprimer la couche de la carte active.",
       "name-filter": "Entrez du texte ici afin de filtrer la liste par nom",
       "alpha": "Cliquez pour trier par ordre alphabétique. Par défaut, les couches sont triés par ordre d'apparence. Il est à noter que trié la liste ne changera PAS l'ordre d'apparence des couches.",
-      "eye-filter": "Cliquez pour ne conserve que les couches visibles à l'échelle active"
+      "eye-filter": "Cliquez pour ne conserve que les couches visibles à l'échelle active",
+      "selection-mode": "En cliquant ici, nous basculons vers le mode de sélection multiple",
+      "check-layer": "Il devient alors possible de réaliser les actions sur plusieurs couches simultanément en sélectionnant les couches souhaitées.",
+      "layer-actions-group-selection": "La barre d'outils sera active dès qu'une couche est sélectionnée. Il est à noter que seul les actions communes à toutes les couches sont accessibles.",
+      "select-all": "Ce bouton permet de sélectionner ou de déselectionner toutes les couches présentes sur la carte active.",
+      "legend-tab": "Basculons vers l'onglet Légende.",
+      "legend-tab-description": "Cet onglet permet de visualiser rapidement l'ensemble des légendes simultanément."
     }
   }
 }
