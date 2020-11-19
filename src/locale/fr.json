@@ -183,7 +183,7 @@
     "map-tool": {
       "title": "CARTE",
       "start": "Tour guidé de l'outil de carte",
-      "layer-list": "L'onglet carte peut être utilisée pour présenter la liste des couches des couches présentes dans la carte.",
+      "layer-list": "L'onglet carte permet d'afficher la liste des couches présentes dans la carte.",
       "legend-list": "L'onglet carte peut aussi être utilisée pour présenter la liste des légendes associées à ces mêmes couches. Nous y reviendrons plus tard.",
       "layer-item": "Une couche représente un ensemble d'entités du même type.",
       "layer-item-click": "Un clic sur le titre de la couche permet d'afficher et de cacher la légende.",
@@ -207,7 +207,8 @@
       "layer-actions-group-selection": "La barre d'outils sera active dès qu'une couche est sélectionnée. Il est à noter que seul les actions communes à toutes les couches sont accessibles.",
       "select-all": "Ce bouton permet de sélectionner ou de déselectionner toutes les couches présentes sur la carte active.",
       "legend-tab": "Basculons vers l'onglet Légende.",
-      "legend-tab-description": "Cet onglet permet de visualiser rapidement l'ensemble des légendes simultanément."
+      "legend-tab-description": "Cet onglet permet de visualiser rapidement l'ensemble des légendes simultanément. Par défaut, seuls les légendes des couches visibles à l'échelle active sont présentées.",
+      "legend-tab-all": "Permet de visualiser aussi l'ensemble des légendes des couches non visibles à l'échelle active."
     }
   }
 }

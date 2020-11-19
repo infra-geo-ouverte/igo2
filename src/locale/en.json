@@ -184,6 +184,32 @@
   },
   "map-tool": {
     "title": "MAP",
-    "start": "Guided tour of the map tool"
+    "start": "Guided tour of the map's tool",
+    "layer-list": "Map's tool allow to display the list of layers on the active map.",
+    "legend-list": "Map's tool can also be used to present layer's legend list. We'll come back to this later.",
+    "layer-item": "A layer contains a set of element of the same type.",
+    "layer-item-click": "One clic on the layer's title allows to show and hide layer's legend.",
+    "eye-button": "On clic on the eye allow to show and hide the layer. A grey eye indicate a non visible layer at the active scale. Zoom in or out to see the layer.",
+    "actions-button": "Click here to display possible actions that can be done on the layer.",
+    "layer-actions-group": "Layer's toolbar is gonna be accessible here.",
+    "workspace-button": "This button allows the opening of the tabular view (results table).",
+    "export-button": "Cliquez ici pour exporter la couche par l'entremise de l'outil d'export IGO.",
+    "ogc-button": "Le filtre OGC est un filtre attributaire permettant d'épurer le visuel de la couche par rapport à certains attributs.",
+    "time-button": "Le filtre temporel permet quand à lui de faire ressortir les éléments de la couche répertoriés dans un certain intervalle de temps.",
+    "metadata-button": "Cliquez ici pour accéder aux métadonnées de la couche.",
+    "opacity-button": "L'opacité de la couche (transparence) peut être modifier à partir de ce bouton.",
+    "up-button": "Permet de monter la couche d'un rang dans l'ordre d'apprence des couches sur la carte. Elle montera également d'un rang dans la liste.",
+    "down-button": "Permet de descendre la couche d'un rang dans l'ordre d'apparence des couches sur la carte. Elle descendra également d'un rang dans la liste.",
+    "delete-button": "Cliquez sur ce bouton pour supprimer la couche de la carte active.",
+    "name-filter": "Entrez du texte ici afin de filtrer la liste par nom",
+    "alpha": "Cliquez pour trier par ordre alphabétique. Par défaut, les couches sont triés par ordre d'apparence. Il est à noter que trié la liste ne changera PAS l'ordre d'apparence des couches.",
+    "eye-filter": "Cliquez pour ne conserve que les couches visibles à l'échelle active",
+    "selection-mode": "En cliquant ici, nous basculons vers le mode de sélection multiple",
+    "check-layer": "Il devient alors possible de réaliser les actions sur plusieurs couches simultanément en sélectionnant les couches souhaitées.",
+    "layer-actions-group-selection": "La barre d'outils sera active dès qu'une couche est sélectionnée. Il est à noter que seul les actions communes à toutes les couches sont accessibles.",
+    "select-all": "Ce bouton permet de sélectionner ou de déselectionner toutes les couches présentes sur la carte active.",
+    "legend-tab": "Basculons vers l'onglet Légende.",
+    "legend-tab-description": "Cet onglet permet de visualiser rapidement l'ensemble des légendes simultanément. Par défaut, seuls les légendes des couches visibles à l'échelle active sont présentées.",
+    "legend-tab-all": "Permet de visualiser aussi l'ensemble des légendes des couches non visibles à l'échelle active."
   }
 }
