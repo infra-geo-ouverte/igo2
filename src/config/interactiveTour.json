@@ -567,7 +567,8 @@
       {
         "element": "div.mat-tab-labels div:nth-of-type(2)",
         "text": "interactiveTour.map-tool.legend-list",
-        "disableInteraction": true
+        "disableInteraction": true,
+        "position": "right"
       },
       {
         "element": "igo-layer-item:first-of-type",
@@ -606,30 +607,36 @@
       },
       {
         "element": "igo-layer-list igo-panel igo-workspace-button button",
-        "text": "interactiveTour.map-tool.workspace-button"
+        "text": "interactiveTour.map-tool.workspace-button",
+        "position": "top"
       },
       {
-        "element": "igo-layer-list igo-panel igo-export-button button",
+        "element": "igo-layer-list igo-panel igo-export-button",
         "text": "interactiveTour.map-tool.export-button",
-        "disableInteraction": true
+        "disableInteraction": true,
+        "position": "top"
       },
       {
-        "element": "igo-layer-list igo-panel igo-ogc-filter-button button",
+        "element": "igo-layer-list igo-panel igo-ogc-filter-button",
         "text": "interactiveTour.map-tool.ogc-button",
-        "disableInteraction": true
+        "disableInteraction": true,
+        "position": "top"
       },
       {
-        "element": "igo-layer-list igo-panel igo-time-filter-button button",
+        "element": "igo-layer-list igo-panel igo-time-filter-button",
         "text": "interactiveTour.map-tool.time-button",
-        "disableInteraction": true
+        "disableInteraction": true,
+        "position": "top"
       },
       {
         "element": "igo-layer-list igo-panel igo-metadata-button button",
-        "text": "interactiveTour.map-tool.metadata-button"
+        "text": "interactiveTour.map-tool.metadata-button",
+        "position": "top"
       },
       {
         "element": "igo-layer-list igo-panel button.opacity-button",
-        "text": "interactiveTour.map-tool.opacity-button"
+        "text": "interactiveTour.map-tool.opacity-button",
+        "position": "top"
       },
       {
         "element": "igo-layer-list igo-panel button.up-button",
@@ -646,7 +653,12 @@
       },
       {
         "element": "igo-layer-list mat-list mat-form-field",
-        "text": "interactiveTour.map-tool.name-filter"
+        "text": "interactiveTour.map-tool.name-filter",
+        "onShow": {
+          "element": "igo-layer-item:first-of-type button:last-of-type",
+          "action": "click",
+          "condition": "igo-layer-list igo-list.igo-list-max-height"
+        }
       },
       {
         "element": "igo-layer-list div.mat-list-item-content button.sort-alpha",
@@ -655,12 +667,59 @@
       {
         "element": "igo-layer-list div.mat-list-item-content button.only-visible",
         "text": "interactiveTour.map-tool.eye-filter",
-        "disableInteraction": true
+        "disableInteraction": true,
+        "onShow": {
+          "element": "igo-layer-list div.mat-list-item-content button.selection-mode",
+          "action": "click",
+          "condition": "igo-layer-item:first-of-type mat-checkbox"
+        }
       },
       {
         "element": "igo-layer-list div.mat-list-item-content button.selection-mode",
         "text": "interactiveTour.map-tool.selection-mode",
+        "disableInteraction": true,
+        "position": "right",
+        "onShow": {
+          "element": "igo-layer-list div.mat-list-item-content button.selection-mode",
+          "action": "click",
+          "condition": "igo-layer-item button.actions-button"
+        }
+      },
+      {
+        "element": "igo-layer-item:first-of-type mat-checkbox",
+        "text": "interactiveTour.map-tool.check-layer",
+        "onShow": {
+          "element": "igo-layer-item:first-of-type mat-checkbox .mat-checkbox-layout",
+          "action": "click",
+          "condition": "igo-layer-item:first-of-type mat-checkbox:not(.mat-checkbox-checked)"
+        }
+      },
+      {
+        "element": "igo-layer-list igo-panel",
+        "text": "interactiveTour.map-tool.layer-actions-group-selection",
         "disableInteraction": true
+      },
+      {
+        "element": "igo-layer-list igo-panel button:first-of-type",
+        "text": "interactiveTour.map-tool.select-all"
+      },
+      {
+        "element": "div.mat-tab-labels div:nth-of-type(2)",
+        "text": "interactiveTour.map-tool.legend-tab",
+        "onShow": {
+          "element": "div.mat-tab-labels div:nth-of-type(2)",
+          "action": "click"
+        }
+      },
+      {
+        "element": "igo-map-tools mat-tab-group div.mat-tab-body-wrapper",
+        "text": "interactiveTour.map-tool.legend-tab-description",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-layer-legend-list mat-slide-toggle",
+        "text": "interactiveTour.map-tool.legend-tab-all",
+        "position": "right"
       }
     ]
   }
