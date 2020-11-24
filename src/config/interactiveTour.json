@@ -131,7 +131,6 @@
         "title": "interactiveTour.global.menu-button-title",
         "text": "interactiveTour.global.home-button",
         "disableInteraction": true,
-        "deleteAfterNext": false,
         "beforeShow": {
           "action": "click",
           "element": "igo-actionbar-item:nth-child(3) mat-list-item"
@@ -421,6 +420,127 @@
       {
         "element": "button.export-button",
         "text": "interactiveTour.spatial-filter.export"
+      }
+    ]
+  },
+
+  "contextManager": {
+    "title": "interactiveTour.context.title",
+    "conditions": ["igo-context-item"],
+    "position": "auto",
+    "steps": [
+      {
+        "element": "div.igo-panel-title",
+        "text": "interactiveTour.context.start"
+      },
+      {
+        "element": "igo-context-item",
+        "text": "interactiveTour.context.description",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-context-item",
+        "text": "interactiveTour.context.options",
+        "disableInteraction": true,
+        "beforeChange": {
+          "action": "click",
+          "element": "igo-actionbar-item:nth-child(2) mat-list-item"
+        }
+      },
+      {
+        "text": "interactiveTour.context.select",
+        "element": "igo-context-item.igo-list-item-selected",
+        "beforeChange": {
+          "action": "click",
+          "element": "igo-actionbar-item:nth-child(2) mat-list-item"
+        }
+      },
+      {
+        "element": "igo-context-item button:first-of-type",
+        "text": "interactiveTour.context.favorite"
+      },
+      {
+        "element": "igo-context-item button.save-button",
+        "text": "interactiveTour.context.save-context"
+      },
+      {
+        "element": "igo-context-item:first-of-type button.actions-button",
+        "text": "interactiveTour.context.context-options",
+        "onHide": {
+          "action": "click",
+          "condition": "igo-context-item:first-of-type button.actions-button.collapsed"
+        },
+        "disableInteraction": true
+      },
+      {
+        "element": "div.igo-actions-expand-container",
+        "text": "interactiveTour.context.context-options-opened"
+      },
+      {
+        "element": "div.igo-actions-expand-container button.clone-button",
+        "text": "interactiveTour.context.context-clone"
+      },
+      {
+        "element": "div.igo-actions-expand-container button.edit-button",
+        "text": "interactiveTour.context.context-edit"
+      },
+      {
+        "element": "div.igo-actions-expand-container button.hide-button",
+        "text": "interactiveTour.context.context-hide"
+      },
+      {
+        "element": "div.igo-actions-expand-container button.delete-button",
+        "text": "interactiveTour.context.context-delete",
+        "onHide": {
+          "action": "click",
+          "element": "igo-context-item:first-of-type button.actions-button"
+        }
+      },
+      {
+        "element": "igo-context-list mat-list mat-form-field",
+        "text": "interactiveTour.context.filter"
+      },
+      {
+        "element": "igo-context-list button.sort-alpha",
+        "text": "interactiveTour.context.alpha"
+      },
+      {
+        "element": "igo-context-list igo-actionbar.add-context-button",
+        "text": "interactiveTour.context.add-context",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-context-list button.users-filter",
+        "text": "interactiveTour.context.users-filter",
+        "disableInteraction": true,
+        "onShow": {
+          "action": "click"
+        }
+      },
+      {
+        "element": "div.mat-menu-panel",
+        "text": "interactiveTour.context.users-filter-menu",
+        "position": ""
+      },
+      {
+        "element": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:first-of-type",
+        "text": "interactiveTour.context.users-filter-active",
+        "position": "",
+        "onShow": {
+          "action": "click",
+          "element": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:first-of-type mat-checkbox .mat-checkbox-layout",
+          "condition": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:first-of-type mat-checkbox:not(.mat-checkbox-checked)"
+        }
+      },
+      {
+        "element": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:last-of-type",
+        "text": "interactiveTour.context.users-filter-hide",
+        "position": "",
+        "onShow": {
+          "action": "click",
+          "element": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:last-of-type mat-checkbox .mat-checkbox-layout",
+          "condition": "div.mat-menu-panel div.mat-menu-content span.profilsMenu:last-of-type mat-checkbox:not(.mat-checkbox-checked)"
+        }
       }
     ]
   }
