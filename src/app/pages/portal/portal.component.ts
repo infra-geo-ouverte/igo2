@@ -34,7 +34,7 @@ import {
   Widget,
   EntityTablePaginatorOptions
 } from '@igo2/common';
-import { AuthService } from '@igo2/auth';
+import { AuthOptions, AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
 import {
   DataSourceService,
@@ -156,6 +156,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get map(): IgoMap {
     return this.mapState.map;
+  }
+
+  get auth(): AuthOptions {
+    return this.configService.getConfig('auth') || [];
   }
 
   get toastPanelOpened(): boolean {
@@ -305,6 +309,9 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window['IGO'] = this;
+    if (this.auth?.autoLoginAnonymous) {
+      this.authService.loginAnonymous();
+    }
 
     this.initWelcomeWindow();
 
@@ -1190,8 +1197,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private initWelcomeWindow(): void {
-    const authConfig = this.configService.getConfig('auth');
-    if (authConfig) {
+    if (this.auth) {
       this.authService.logged$.subscribe((logged) => {
         if (logged) {
           this.createWelcomeWindow();
