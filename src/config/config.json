@@ -8,6 +8,7 @@
   "hasExpansionPanel": true,
   "hasSearchPointerSummary": false,
   "hasGeolocateButton": true,
+  "showRotationButtonIfNoRotation": false,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
   "searchSources": {
