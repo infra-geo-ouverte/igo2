@@ -161,7 +161,7 @@
     },
     "context": {
       "title": "CONTEXTS",
-      "start": "Guided tour of the measuring tool",
+      "start": "Guided tour of the context tool",
       "description": "A context is a predefined map made up of several layers grouped together according to a theme.",
       "options": "A context can also be cloned, masked and, based on the permissions that has been set, edited and shared.",
       "select": "Active context appears highlighted. To switch the active context, click on the context you want to display. The sidenav will then toggle on the map tool.",
