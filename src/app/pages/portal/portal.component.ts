@@ -954,6 +954,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           entities$$.unsubscribe();
           if (entities.length && !this.termDefinedInUrlTriggered) {
             this.computeFocusFirst();
+            this.termDefinedInUrlTriggered = true;
           }
         });
     }
