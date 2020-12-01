@@ -127,9 +127,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   );
   public sidenavOpened = false;
   public searchBarTerm = '';
-  public firstSearchBarTerm = true;
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
+  public termDefinedInUrlTriggered = false;
   private addedLayers$$: Subscription[] = [];
   public forceCoordsNA = false;
 
@@ -565,9 +565,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearchTermChange(term?: string) {
-    if (term || term !== '') {
-      this.firstSearchBarTerm = false;
-    }
     this.searchState.setSearchTerm(term);
     const termWithoutHashtag = term.replace(/(#[^\s]*)/g, '').trim();
     if (termWithoutHashtag.length < 2) {
@@ -955,7 +952,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         )
         .subscribe((entities) => {
           entities$$.unsubscribe();
-          if (entities.length && this.firstSearchBarTerm) {
+          if (entities.length && !this.termDefinedInUrlTriggered) {
             this.computeFocusFirst();
           }
         });
