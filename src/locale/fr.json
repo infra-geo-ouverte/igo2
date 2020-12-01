@@ -73,9 +73,9 @@
       "print-tool-title": "IMPRESSION",
       "print-tool": "Permet d'imprimer la carte active en format image ou PDF.",
       "ogc-tool-title": "FILTRER DES DONNÉES",
-      "ogc-tool": "Le filtre de données permet aux couches WMS et WFS d'être filtrées en se basant sur divers opérateurs de comparaison (Égal, différent...) ou par opérateur spatial (intersect, contenu...) . S'applique uniquement sur certaine couches ou le filtre peut s'appliquer et qui sont présentes dans la carte.",
+      "ogc-tool": "Le filtre de données permet aux couches WMS et WFS d'être filtrées en se basant sur divers opérateurs de comparaison (Égal, différent...) ou par opérateur spatial (intersect, contenu...) . S'applique uniquement sur certaines couches ou le filtre peut s'appliquer et qui sont présentes dans la carte.",
       "time-tool-title": "FILTRE TEMPOREL",
-      "time-tool": "Le filtre temporel permet de délimiter une période de temps qui filtrera la couche et affichera uniquement les résultats qui corespondent à la période de temps définie. S'applique uniquement sur certaine couches ou le filtre peut s'appliquer et qui sont présentes dans la carte.",
+      "time-tool": "Le filtre temporel permet de délimiter une période de temps qui filtrera la couche et affichera uniquement les résultats qui correspondent à la période de temps définie. S'applique uniquement sur certaines couches ou le filtre peut s'appliquer et qui sont présentes dans la carte.",
       "share-map-title": "PARTAGE",
       "share-map": "Permet de partager une carte à partir d'un URL.",
       "about-title": "À PROPOS",
@@ -95,8 +95,8 @@
     },
     "timeFilter": {
       "title": "FILTRE TEMPOREL",
-      "start": "Le filtre temporel permet de délimiter une période de temps qui filtrera la couche et affichera uniquement les résultats qui corespondent à la période de temps définie",
-      "end": "S'applique uniquement sur certaine couches ou le filtre peut s'appliquer et qui sont présentes dans la carte"
+      "start": "Le filtre temporel permet de délimiter une période de temps qui filtrera la couche et affichera uniquement les résultats qui correspondent à la période de temps définie",
+      "end": "S'applique uniquement sur certaines couches ou le filtre peut s'appliquer et qui sont présentes dans la carte"
     },
     "measurer": {
       "title": "MESURE",
