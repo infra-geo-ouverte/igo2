@@ -12,6 +12,7 @@ import { IgoBackdropModule } from '@igo2/common';
 
 import { ExpansionPanelComponent } from './expansion-panel.component';
 import { ExpansionPanelHeaderComponent } from './expansion-panel-header.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { ExpansionPanelHeaderComponent } from './expansion-panel-header.componen
     MatMenuModule,
     MatListModule,
     MatSelectModule,
+    MatTooltipModule,
     IgoLanguageModule,
     IgoBackdropModule
   ],
