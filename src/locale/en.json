@@ -5,6 +5,8 @@
     "open": "Open Menu"
   },
   "workspace": {
+    "open": "Open the table view",
+    "close": "Close the table view",
     "disabled" : {
       "resolution": "The workspace is not available at this resolution",
       "visible": "The layer is not loaded. Try to set the layer visibility."

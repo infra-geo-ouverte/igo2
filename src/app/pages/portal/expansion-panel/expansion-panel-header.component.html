@@ -1,7 +1,7 @@
 <div>
   <div class="app-expansion-panel-trigger-container">
     <button mat-icon-button (click)="onToggleClick()" 
-    [matTooltip]="(!expanded ? 'workspace.expand' : 'workspace.collapse') | translate"
+    [matTooltip]="(!expanded ? 'workspace.open' : 'workspace.close') | translate"
     color="primary">
       <mat-icon *ngIf="!expanded" svgIcon="launch"></mat-icon>
       <mat-icon *ngIf="expanded" style="transform: rotate(180deg)" svgIcon="launch"></mat-icon>
