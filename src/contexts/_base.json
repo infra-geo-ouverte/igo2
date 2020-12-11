@@ -165,7 +165,10 @@
       "name": "contextManager"
     },
     {
-      "name": "about"
+      "name": "about",
+      "options": {
+        "trainingGuideURL": "https://testgeoegl.msp.gouv.qc.ca/igo2/portail/particular/guides/IGO2-MSP_Guide_utilisateur.pdf"
+      }
     },
     {
       "name": "mapTools",
