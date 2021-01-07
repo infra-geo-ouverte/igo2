@@ -3,15 +3,15 @@ Raccourcis clavier
 ---------------------
 
 
-*******************************
-CTRL maintenu
-*******************************
+************************************
+CTRL maintenu + lick drag + relâche
+************************************
 
     .. line-block::
-        Lorsque vous maintenez la touche CTRL et que vous survolez la carte,
-        une recherche par coordonnée est activée. Les résultats de recherche
-        sont automatiquement chargés et le panneau de résultats de recherche
-        est ouvert.
+        Lorsque vous avez des données tabulaire(vectorielle), 
+        permet de faire une sélection par rectangle sur ces entités.
+        Lorsque vous effectuez plusieurs rectangle consécutif, 
+        la sélection effectuée est ajoutée à la précédente sélection.
 
 
 *******************************
@@ -19,7 +19,7 @@ Majuscule (shift) maintenu
 *******************************
 
     .. line-block::
-        Lorsque vous maintenez la touche majuscule (SHIFT) et que cliquez 
+        Lorsque vous maintenez la touche majuscule (SHIFT) et que vous cliquez 
         sur la carte, vous définirez une zone à l'intérieur de laquelle
         vous pourrez aller zoomer une fois la zone définie.
 

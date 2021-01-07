@@ -39,10 +39,20 @@ export const environment: Environment = {
     auth: {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
-      allowAnonymous: true
+      allowAnonymous: true,
+      trustHosts: ['geoegl.msp.gouv.qc.ca']
     },
     catalog: {
       sources: [
+        {
+          id: 'Arcgis Rest',
+          title: 'Arcgis Rest',
+          url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer',
+          type: 'arcgisrest',
+          sourceOptions: {
+            queryable: true
+          }
+        },
         {
           id: 'Gououvert',
           title: 'Gouvouvert',

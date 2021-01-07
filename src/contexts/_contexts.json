@@ -14,6 +14,10 @@
   {
     "uri": "ogcFilters",
     "title": "Filtre attributaire (Attribute filter)"
+  },  
+  {
+    "uri": "layerSync",
+    "title": "Synchronisation de layers"
   },
   {
     "uri": "workspace",
@@ -26,5 +30,9 @@
   {
     "uri": "testExport",
     "title": "Test export"
+  },
+  {
+    "uri": "variousFormats",
+    "title": "Divers format à titre d'exemple"
   }
 ]
