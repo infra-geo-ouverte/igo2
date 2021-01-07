@@ -66,6 +66,8 @@
       "spatial-filter": "Spatial filter allow to extract entities by predefined or drawn zone.",
       "measurer-tool-title": "MEASURER",
       "measurer-tool": "For distance, perimeter and ground area calculation.",
+      "draw-tool-title": "DRAW",
+      "draw-tool": "drawing points, lines, polygons and circles on the map.",
       "directions-tool-title": "DIRECTIONS",
       "directions-tool": "Allow route creation based on departure, arrival and intermediate stop.",
       "catalog-tool-title": "DATA CATALOG",

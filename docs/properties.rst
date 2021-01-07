@@ -3302,7 +3302,7 @@ draw
 ===========
 
     .. line-block::
-        Outil permettant de faire des croquis sur la carte.
+        Outil permettant de faire des dessins sur la carte.
 
 
 Exemples
