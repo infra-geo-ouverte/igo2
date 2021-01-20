@@ -68,36 +68,42 @@
       },
       {
         "element": "igo-actionbar-item:nth-child(6) mat-list-item",
+        "title": "interactiveTour.global.draw-tool-title",
+        "text": "interactiveTour.global.draw-tool",
+        "disableInteraction": true
+      },
+      {
+        "element": "igo-actionbar-item:nth-child(7) mat-list-item",
         "title": "interactiveTour.global.directions-tool-title",
         "text": "interactiveTour.global.directions-tool",
         "disableInteraction": true
       },
       {
-        "element": "igo-actionbar-item:nth-child(7) mat-list-item",
+        "element": "igo-actionbar-item:nth-child(8) mat-list-item",
         "title": "interactiveTour.global.catalog-tool-title",
         "text": "interactiveTour.global.catalog-tool",
         "disableInteraction": true
       },
       {
-        "element": "igo-actionbar-item:nth-child(8) mat-list-item",
+        "element": "igo-actionbar-item:nth-child(9) mat-list-item",
         "title": "interactiveTour.global.import-export-title",
         "text": "interactiveTour.global.import-export",
         "disableInteraction": true
       },
       {
-        "element": "igo-actionbar-item:nth-child(9) mat-list-item",
+        "element": "igo-actionbar-item:nth-child(10) mat-list-item",
         "title": "interactiveTour.global.print-tool-title",
         "text": "interactiveTour.global.print-tool",
         "disableInteraction": true
       },
       {
-        "element": "igo-actionbar-item:nth-child(10) mat-list-item",
+        "element": "igo-actionbar-item:nth-child(11) mat-list-item",
         "title": "interactiveTour.global.share-map-title",
         "text": "interactiveTour.global.share-map",
         "disableInteraction": true
       },
       {
-        "element": "igo-actionbar-item:nth-child(11) mat-list-item",
+        "element": "igo-actionbar-item:nth-child(12) mat-list-item",
         "title": "interactiveTour.global.about-title",
         "text": "interactiveTour.global.about",
         "disableInteraction": true,

@@ -66,6 +66,8 @@
       "spatial-filter": "Le filtre spatial permet l'extraction d'entités par zones prédéfinies ou dessinées par l'usager.",
       "measurer-tool-title": "MESURE",
       "measurer-tool": "Permet de calculer des distances, des périmètres et des superficies terrain.",
+      "draw-tool-title": "DESSIN",
+      "draw-tool": "Permet de dessiner des points, lignes, polygones et cercles sur la carte.",
       "directions-tool-title": "ITINÉRAIRE",
       "directions-tool": "Permet la création d'itinéraire à partir d'un départ, d'une arrivée et de points intermédiaires.",
       "catalog-tool-title": "CATALOGUE DE DONNÉES",

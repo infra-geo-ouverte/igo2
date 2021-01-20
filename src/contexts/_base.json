@@ -150,6 +150,7 @@
     "mapTools",
     "spatialFilter",
     "measurer",
+    "draw",
     "directions",
     "catalog",
     "importExport",
@@ -185,6 +186,9 @@
     },
     {
       "name": "measurer"
+    },
+    {
+      "name": "draw"
     },
     {
       "name": "directions"
