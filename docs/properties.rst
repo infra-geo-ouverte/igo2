@@ -1241,6 +1241,21 @@ Propriétés
                la donnée.
          - en secondes
          - Null si non définit
+       * - contentDependentLegend
+         - Boolean
+         - .. line-block::
+               Pour Mapserver et Geoserver, il est possible de retourner 
+               la légende WMS du contenu de la carte et non pas toute la
+               légende de la couche. Exemple: Si ce paramètre est définit
+               à true et que vous zoomer sur un secteur dans lequel il y 
+               seulement 1 classe de symbologie, la légende retournée sera
+               composée d'une seule couleur. Si vous zoomez a l'échelle 
+               provinciale et que vous voyez tous les classes de données,
+               la légende retournée sera composée de toutes les classes de 
+               la couche. 
+               IMPORTANT: Ne tient pas compte des filtres OGC appliqués. 
+         - true/false
+         - false
        * - queryable
          - Boolean
          - .. line-block::
