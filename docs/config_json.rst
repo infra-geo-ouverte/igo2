@@ -90,6 +90,12 @@ Résumé
                Permet de définir s'il y aura un bouton de 
                géolocalisation par le fureteur dans l'application
          -
+       * - `showRotationButtonIfNoRotation`_
+         - Boolean
+         - .. line-block::
+               Permet de définir si le bouton de réinitialisation de la
+               rotation est visible si aucune rotation n'est active.
+         -
        * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
@@ -729,6 +735,15 @@ hasGeolocateButton
     .. line-block::
         Permet de définir s'il y aura un bouton de 
         géolocalisation par le fureteur dans l'application
+
+
+********************************
+showRotationButtonIfNoRotation
+********************************
+
+    .. line-block::
+        Permet de définir si le bouton de réinitialisation de la
+        rotation est visible si aucune rotation n'est active. False par défaut.
 
 
 ***************

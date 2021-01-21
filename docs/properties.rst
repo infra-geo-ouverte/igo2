@@ -1241,6 +1241,21 @@ Propriétés
                la donnée.
          - en secondes
          - Null si non définit
+       * - contentDependentLegend
+         - Boolean
+         - .. line-block::
+               Pour Mapserver et Geoserver, il est possible de retourner 
+               la légende WMS du contenu de la carte et non pas toute la
+               légende de la couche. Exemple: Si ce paramètre est définit
+               à true et que vous zoomer sur un secteur dans lequel il y 
+               seulement 1 classe de symbologie, la légende retournée sera
+               composée d'une seule couleur. Si vous zoomez a l'échelle 
+               provinciale et que vous voyez tous les classes de données,
+               la légende retournée sera composée de toutes les classes de 
+               la couche. 
+               IMPORTANT: Ne tient pas compte des filtres OGC appliqués. 
+         - true/false
+         - false
        * - queryable
          - Boolean
          - .. line-block::
@@ -2860,6 +2875,7 @@ Outils (tools)
             - `catalogBrowser`_
             - `contextManager`_
             - `directions`_
+            - `draw`_
             - `activeOgcFilter`_
             - `ogcFilter`_
             - `activeTimeFilter`_
@@ -3295,6 +3311,64 @@ Propriétés
 Liens
 
     - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/directions/directions-tool>`__
+
+
+draw
+===========
+
+    .. line-block::
+        Outil permettant de faire des dessins sur la carte.
+
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "draw"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`__
+         - pencil
+       * - **name***
+         - String
+         -
+         - draw
+         -
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traductions.
+               Si vous modifiez le titre par défaut, vous devez ajouter
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
+         - igo.integration.tools.directions
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Liens
+
+    - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/draw/drawing-tool>`__
 
 
 .. _igoogcFilter:
