@@ -211,6 +211,8 @@ Propriétés
                la source wms à l'option optionsFromCapabilities : true, 
                l'application ira récupérer le lien dans le service WMS.
                La valeur pilotée à préséance sur la valeur récupérée du service.
+               Pour les sources WMS, WMTS et ArcGISREST, si celui-ci n'est pas
+               défini, c'est l'abstract du catalogue qui sera utilisé.
                Les propriété permises sont:
                    - url
                    - extern

@@ -93,6 +93,44 @@ export const environment: Environment = {
           ]
         },
         {
+          id: 'forced_properties',
+          title: 'Forced properties catalog (layer name and abstract)',
+          url:'',
+          composite: [
+            {
+              id: 'forcedProperties_wmts',
+              url:
+                'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
+              type: 'wmts',
+              setCrossOriginAnonymous: true,
+              matrixSet: 'EPSG_3857',
+              version: '1.0.0',
+              forcedProperties: [{
+                layerName: 'BDTQ-20K_Allegee',
+                title: 'Nouveau nom pour cette couche WMTS'
+              }]
+            },
+            {
+              id: 'forcedProperties_wms',
+              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
+              type: 'wms',
+              forcedProperties: [{
+                layerName: 'lieuhabite',
+                title: 'Nouveau nom pour cette couche WMS'
+              }]
+            },
+            {
+              id: 'forcedProperties_arcgisrest',
+              url: 'https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer',
+              type: 'arcgisrest',
+              forcedProperties: [{
+                layerName: 'Sediment substrate / Substrat sédimentaire',
+                title: 'Nouveau nom pour cette couche ArcGIS REST'
+              }]
+            }
+          ]
+        },
+        {
           id: 'group_impose',
           title:
             '(composite catalog) group imposed and unique layer title for same source',
