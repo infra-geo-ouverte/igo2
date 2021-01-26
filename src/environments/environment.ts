@@ -95,7 +95,7 @@ export const environment: Environment = {
         {
           id: 'forced_properties',
           title: 'Forced properties catalog (layer name and abstract)',
-          url:'',
+          url: '',
           composite: [
             {
               id: 'forcedProperties_wmts',
