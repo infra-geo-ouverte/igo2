@@ -404,10 +404,10 @@ Exemples
                       "title": "(composite catalog) with group imposed",
                       "composite": [
                             {
-                            "id": "tq_swtq",
-                            "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
-                            "regFilters": ["zpegt"],
-                            "groupImpose": {"id": "zpegt", "title": "zpegt"}
+                              "id": "tq_swtq",
+                              "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+                              "regFilters": ["zpegt"],
+                              "groupImpose": {"id": "zpegt", "title": "zpegt"}
                             },
                             {
                               "id": "Gououvert",
@@ -425,8 +425,44 @@ Exemples
                               "groupImpose": {"id": "cartetopo", "title": "Carte topo échelle 1/20 000"}
                             }
                       ]
-                }
-                  ]
+                  },
+                  {
+                      "id": "forced_properties",
+                      "title": "Forced properties catalog (layer name and abstract)",
+                      "composite": [
+                              {
+                                "id": "forcedProperties_wmts",
+                                "url": "https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images",
+                                "type": "wmts",
+                                "setCrossOriginAnonymous": true,
+                                "matrixSet": "EPSG_3857",
+                                "version": "1.0.0",
+                                "forcedProperties": [{
+                                  "layerName": "BDTQ-20K_Allegee",
+                                  "title": "Nouveau nom pour cette couche WMTS"
+                                }]
+                              },
+                              {
+                                "id": "forcedProperties_wms",
+                                "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swt",
+                                "type": "wms",
+                                "forcedProperties": [{
+                                  "layerName": "lieuhabite",
+                                  "title": "Nouveau nom pour cette couche WMS"
+                                }]
+                              },
+                              {
+                                "id": "forcedProperties_arcgisrest",
+                                "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer",
+                                "type": "arcgisrest",
+                                "forcedProperties": [{
+                                  "layerName": "Sediment substrate / Substrat sédimentaire",
+                                  "title": "Nouveau nom pour cette couche ArcGIS REST"
+                                }]
+                              },
+                       ]
+                  },
+                 ]
             }
 
 Propriétés
@@ -477,6 +513,12 @@ Propriétés - Objet Catalog
          - .. line-block::
                Nombre de résultats retournés par le serveur lors de requêtes **WMS** de GetFeatureInfo
          -
+         -
+       * - abstract
+         - String
+         - .. line-block::
+               Résumé des données contenues dans le catalogue
+         -
          - 5
        * - **id***
          - String
@@ -493,6 +535,16 @@ Propriétés - Objet Catalog
                Permet d'imposer l'utilisation d'un groupe à l'ensemble des couches appellées du catalogue.
                - id: Identifiant unique permettant de différencier les groupes entre eux.
                - title: Titre pour le groupe qui sera utilisé dans l'outil Catalog.
+         -
+         -
+       * - forcedProperties
+         - .. line-block::
+            layerName*: String,
+            title*: String
+         - .. line-block::
+               Permet d'imposer un nom à une couche spécifique.
+               - layerName: Nom de la couche dans le catalogue d'origine (propriété layer name). Permet d'aller chercher la couche en question dans le service.
+               - title: Nouveau titre pour la couche.
          -
          -
        * - matrixSet
