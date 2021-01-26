@@ -438,8 +438,8 @@ Exemples
                                 "matrixSet": "EPSG_3857",
                                 "version": "1.0.0",
                                 "forcedProperties": [{
-                                  layerName: "BDTQ-20K_Allegee",
-                                  title: "Nouveau nom pour cette couche WMTS"
+                                  "layerName": "BDTQ-20K_Allegee",
+                                  "title": "Nouveau nom pour cette couche WMTS"
                                 }]
                               },
                               {
@@ -447,8 +447,8 @@ Exemples
                                 "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swt",
                                 "type": "wms",
                                 "forcedProperties": [{
-                                  layerName: "lieuhabite",
-                                  title: "Nouveau nom pour cette couche WMS"
+                                  "layerName": "lieuhabite",
+                                  "title": "Nouveau nom pour cette couche WMS"
                                 }]
                               },
                               {
@@ -456,8 +456,8 @@ Exemples
                                 "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer",
                                 "type": "arcgisrest",
                                 "forcedProperties": [{
-                                  layerName: "Sediment substrate / Substrat sédimentaire",
-                                  title: "Nouveau nom pour cette couche ArcGIS REST"
+                                  "layerName": "Sediment substrate / Substrat sédimentaire",
+                                  "title": "Nouveau nom pour cette couche ArcGIS REST"
                                 }]
                               },
                        ]
