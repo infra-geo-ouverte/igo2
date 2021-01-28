@@ -117,29 +117,6 @@
           "queryFormat": "geojson",
           "queryTitle": "desclocal"
         }
-      },
-      {
-        "title": "Arcgis Rest",
-        "sourceOptions": {
-          "type": "arcgisrest",
-          "layer": "2",
-          "queryable": true,
-          "url":
-            "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
-          "queryFormat": "esrijson"
-        }
-      },
-      {
-        "title": "Tile Arcgis Rest",
-        "sourceOptions": {
-          "type": "tilearcgisrest",
-          "layer": "1",
-          "queryable": true,
-          "url":
-            "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
-          "queryFormat": "esrijson"
-        }
       }
-
     ]
   }
