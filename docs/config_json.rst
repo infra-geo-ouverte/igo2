@@ -1017,7 +1017,7 @@ Exemples
                   {
                         "media": ["desktop"],
                         "cssClass": "bottom-left",
-                        "link": "http://igouverte.org/",
+                        "link": "https://www.igouverte.org/",
                         "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
                         "imgSize": "30px",
                         "fontSize": "6pt",
@@ -1060,7 +1060,7 @@ Projections
 
     .. line-block::
         Permet de définir une **liste** de projections non enregistrées par défault par IGO2 (Proj4). On parle ici de projection non mondiale ou à référence locale (ex: mtm, Lambert MTQ...)
-        Référez vous à : `http://epsg.io/ <http://epsg.io/>`_. Ils y définissent l'entièreté des paramètres nécessaires.
+        Référez vous à : `https://epsg.io/ <https://epsg.io/>`_. Ils y définissent l'entièreté des paramètres nécessaires.
 
 Exemple
 
@@ -1121,7 +1121,7 @@ Propriétés - Objet Projection
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
-        - `http://epsg.io/ <http://epsg.io/>`_
+        - `https://epsg.io/ <https://epsg.io/>`_
         - `igo2-lib/packages/geo/src/lib/map/shared/projection.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/projection.interfaces.ts>`_
         - `igo2-lib/blob/master/demo/src/environments/environment.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/demo/src/environments/environment.ts>`_
 
@@ -1340,7 +1340,7 @@ Exemple complet config.json
                     {
                       "media": ["desktop"],
                       "cssClass": "bottom-left",
-                      "link": "http://igouverte.org/",
+                      "link": "https://www.igouverte.org/",
                       "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
                       "imgSize": "30px",
                       "fontSize": "6pt",
@@ -1364,7 +1364,7 @@ Exemple complet config.json
                       "cssClass": "bottom-right",
                       "text": "© Gouvernement du Québec 2019",
                       "fontSize": "10pt",
-                      "link": "http://www.droitauteur.gouv.qc.ca/copyright.php",
+                      "link": "https://www.droitauteur.gouv.qc.ca/copyright.php",
                       "marginRight": "70px",
                       "marginBottom": "10px"
                     },
@@ -1381,7 +1381,7 @@ Exemple complet config.json
                     {
                       "media": ["mobile"],
                       "cssClass": "bottom-left",
-                      "link": "http://igouverte.org/",
+                      "link": "https://www.igouverte.org/",
                       "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
                       "imgSize": "33px",
                       "alt": "IGO",
@@ -1723,7 +1723,7 @@ Exemples
                         "baseLayer": true,
                         "sourceOptions": {
                         "type": "osm",
-                        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>"
+                        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>"
                         }
                   },
                   {
@@ -1732,7 +1732,7 @@ Exemples
                         "visible": false,
                         "sourceOptions": {
                         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "© <a href='https://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "type": "xyz",
                         "crossOrigin": "anonymous"
                         }
@@ -1742,7 +1742,7 @@ Exemples
                         "baseLayer": true,
                         "visible": false,
                         "sourceOptions": {
-                        "attributions": "<a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
                         "type": "xyz"
                         }

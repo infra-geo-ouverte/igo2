@@ -23,7 +23,7 @@
           "queryable": true,
           "queryTitle": "nomcartrou",
           "type": "mvt",
-          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=lieuhabite&map.imagetype=mvt"
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=lieuhabite&map.imagetype=mvt"
         }
       },
       {
@@ -62,7 +62,7 @@
         "sourceOptions": {
           "queryable": true,
           "queryTitle": "identificationDesTravaux",
-          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
           "type": "cluster",
           "distance": 50
         }
@@ -112,7 +112,7 @@
         "title": "Vector geojson d'apel WFS",
         "sourceOptions": {
           "type": "vector",
-          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
           "queryable": true,
           "queryFormat": "geojson",
           "queryTitle": "desclocal"
