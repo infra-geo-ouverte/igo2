@@ -78,7 +78,7 @@
         "links": [{
           "bidirectionnal": true,
           "syncedDelete": true,
-          "linkedIds": ["convi_velo_glv"],
+          "linkedIds": ["convivialite_velo"],
           "properties": ["visible"]
         }]
       },
@@ -91,17 +91,17 @@
       }
     },
     {
-      "title": "convi_velo_glv",
+      "title": "convivialite_velo",
       "opacity": 0.5,
       "showInLayerList": false,
       "linkedLayers": {
-        "linkId": "convi_velo_glv"
+        "linkId": "convivialite_velo"
       },
       "sourceOptions": {
         "type": "wms",
         "url": "/swtq",
         "params": {
-          "layers": "convi_velo_glv"
+          "layers": "convivialite_velo"
         }
       }
     },
