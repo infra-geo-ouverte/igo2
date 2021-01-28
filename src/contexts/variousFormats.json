@@ -109,7 +109,7 @@
         }
       },
       {
-        "title": "Vector geojson d'apel WFS",
+        "title": "Vector geojson d'appel WFS",
         "sourceOptions": {
           "type": "vector",
           "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
