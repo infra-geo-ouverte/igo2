@@ -19,7 +19,7 @@ IGO2 a été initié par l'administration publique du Québec (Canada) et issu d
 ### What is IGO?
 
 IGO2 (for Open GIS Infrastructure - version 2.0) is a free open source Web Geospatial solution developed at first in Quebec, Canada based on [Angular - Material](https://github.com/angular/angular), [OpenLayers](https://github.com/openlayers/openlayers) and [IGO2lib](https://github.com/infra-geo-ouverte/igo2-lib).
-IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and Mobile and many more available at [http://igo2.readthedocs.io/fr/latest/english.html](http://igo2.readthedocs.io/fr/latest/english.html). Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
+IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and Mobile and many more available at [https://igo2.readthedocs.io/fr/latest/english.html](https://igo2.readthedocs.io/fr/latest/english.html). Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
 
 ---
 
@@ -31,7 +31,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 - [Installation](#installation-et-démarrage)
 - [Démo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Démo d'IGO2 de Données Québec](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
-- [Documentation](http://igo2.readthedocs.io/fr/latest/)
+- [Documentation](https://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests)
 - [Contribuer](#contribuer)
 
@@ -45,7 +45,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 - [Installation](#installation-en)
 - [Demo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Demo IGO2 from Open Data Quebec (Canada)](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
-- [Documentation (translation is not yet done)](http://igo2.readthedocs.io/fr/latest/)
+- [Documentation (translation is not yet done)](https://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests-en)
 - [Contribute](#contribution)
 

@@ -113,7 +113,7 @@ Exemples
                 "visible": false,
                 "sourceOptions": {
                         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "© <a href='https://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "type": "xyz",
                         "crossOrigin": "anonymous"
                 }
@@ -218,7 +218,7 @@ Propriétés
                    - extern
                    - keyword
                    - abstract = résumé de la couche. Sert au tooltip ici bas.
-         - {url: "http://www.igouverte.org/", extern: true}
+         - {url: "https://www.igouverte.org/", extern: true}
          -
        * - tooltip
          - Object{}
@@ -3196,7 +3196,7 @@ contextManager
 
         Si un contexte est non présent dans ce fichier, il ne sera pas mis à la disposition dans l'application.
         De ce fait, le seul moyen d'y accéder est par URL.
-            - http://votreDomaine/?context=nomDuContexteNonGéréParLeGestionnaireDeContexte
+            - ...votreDomaine/?context=nomDuContexteNonGéréParLeGestionnaireDeContexte
 
 Exemples
 
