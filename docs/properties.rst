@@ -1050,6 +1050,8 @@ Vecteur
   NB: Le site web ou est stockés le fichier, par exemple https://www.donneesquebec.ca doit être ajouté à la sécurité du site IGO et
    le site IGO doit être ajouté à la sécurité du site de donnée.
 
+  NB2: Pour que le partage de carte fonctionne bien il est nécessaire d'ajouter un id à la couche
+
 
 Exemples
 
@@ -1058,6 +1060,7 @@ Exemples
 
             {
               "title": "Donnée geojson sur DQ (pas de service)",
+              "id": "vector1",
               "sourceOptions": {
                 "type": "vector",
                 "url": "https://www.donneesquebec.ca/recherche/dataset/f647f5ed-a8f3-4a47-8ceb-977cbf090675/resource/68e0e20a-415d-44f5-af82-a90311784616/download/bornes-incendies.geojson"
@@ -1071,6 +1074,7 @@ Exemples
               }
             },
             {
+              "id": "vector2",
               "title": "Geojson provenant d'un apel wfs",
               "sourceOptions": {
                   "queryable": true,
