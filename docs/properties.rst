@@ -152,14 +152,12 @@ Propriétés
        * - id
          - string
          - .. line-block::
-               Identifiant unique de la couche à
-               l'échelle de l'application. Particulièrement
-               utile pour bâtir le lien pour le partage
-               de cartes.
-               Attention: si vous définissez un id,
-               la couche ajoutée par le catalogue
-               ou par la recherche sera considérée par l'app.
-               comme une couche différente,
+               Identifiant unique de la couche à l'échelle de l'application. 
+               Particulièrement utile pour bâtir le lien pour le partage
+               de cartes. Si vous avez plusieurs fois la même couche dans un context
+               vous devez avoir un id pour que le lien de partage foinctionne bien.
+               Attention: si vous définissez un id, la couche ajoutée par le catalogue
+               ou par la recherche sera considérée par l'app. comme une couche différente,
                vous aurez donc 2 fois la même couche.
          -
          - uuid
@@ -175,7 +173,11 @@ Propriétés
                Permet de définir si une source possèdera une table
                d'attribut dans l'application ainsi
                que ses propriétés associées.
-         - workspace: { enabled: true, minResolution: 0, maxResolution: 400}
+         - .. line-block::
+              workspace: 
+              { enabled: true, 
+              minResolution: 0, 
+              maxResolution: 400}
          - Voir dans l'objet `WorkspaceOptions`_
        * - minResolution
          - Number
@@ -1050,6 +1052,8 @@ Vecteur
   NB: Le site web ou est stockés le fichier, par exemple https://www.donneesquebec.ca doit être ajouté à la sécurité du site IGO et
    le site IGO doit être ajouté à la sécurité du site de donnée.
 
+  NB2: Pour que le partage de carte fonctionne bien il est nécessaire d'ajouter un id à la couche
+
 
 Exemples
 
@@ -1058,6 +1062,7 @@ Exemples
 
             {
               "title": "Donnée geojson sur DQ (pas de service)",
+              "id": "vector1",
               "sourceOptions": {
                 "type": "vector",
                 "url": "https://www.donneesquebec.ca/recherche/dataset/f647f5ed-a8f3-4a47-8ceb-977cbf090675/resource/68e0e20a-415d-44f5-af82-a90311784616/download/bornes-incendies.geojson"
@@ -1071,6 +1076,7 @@ Exemples
               }
             },
             {
+              "id": "vector2",
               "title": "Geojson provenant d'un apel wfs",
               "sourceOptions": {
                   "queryable": true,
@@ -1647,14 +1653,14 @@ Configuration filtre attributaire OGC (ogcFilters)
 ===================================================
 
   Permet de définir la configuration des filtres attributaires(OGC) qui seront appliqués par l'utilisateur sur la couche.
-  Plusieurs configuration de filtre sont disponibles. Par exemple, il est possible de créer des boutons sur lesquels l'utilisateur
+  Plusieurs configurations de filtre sont disponibles. Par exemple, il est possible de créer des boutons sur lesquels l'utilisateur
   pourra appuyer pour filtrer la couche affichée, de réaliser des groupes de filtre, ou bien de donner la possibilité à l'utilisateur
   de créer lui même ces propres filtres à l'aide des filtres avancés.
 
     - **Limitation**: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
     - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils ('tools'). (Voir :ref:`igoactiveogcFilter` et :ref:`igoogcFilter` dans la section outil )
     - Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField pour les champs à filtrer. Référez-vous à: :ref:`igosourceFieldsObject`
-
+    - Il est possible de définir plusieurs opérateurs sur un même filtre.
 
 
 Exemples
