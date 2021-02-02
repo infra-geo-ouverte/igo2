@@ -1,3 +1,12 @@
+## [1.6.1](https://github.com/infra-geo-ouverte/igo2/compare/1.6.0...1.6.1) (2021-02-02)
+
+
+### Features
+
+* **igo2:** upgrade to 1.6.1 ([3f74e01](https://github.com/infra-geo-ouverte/igo2/commit/3f74e0111a272e2d06892e8066d93d37704aa2a4))
+
+
+
 # [1.6.0](https://github.com/infra-geo-ouverte/igo2/compare/1.5.3...1.6.0) (2021-02-01)
 
 
