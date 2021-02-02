@@ -1,5 +1,4 @@
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
-[![Build Status](https://travis-ci.org/infra-geo-ouverte/igo2.svg?branch=master)](https://travis-ci.org/infra-geo-ouverte/igo2)
 [![Dependencies Status](https://david-dm.org/infra-geo-ouverte/igo2.svg)](https://david-dm.org/infra-geo-ouverte/igo2)
 [![devDependencies Status](https://david-dm.org/infra-geo-ouverte/igo2/dev-status.svg)](https://david-dm.org/infra-geo-ouverte/igo2?type=dev)
 [![Known Vulnerabilities](https://snyk.io/test/github/infra-geo-ouverte/igo2/badge.svg)](https://snyk.io/test/github/infra-geo-ouverte/igo2)
@@ -53,7 +52,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 
 ## Téléchargement
 
-- [Version 1.6.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.0/igo2.zip)
+- [Version 1.6.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.1/igo2.zip)
 - [Version 1.5.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.5.3/igo2.zip)
 - [Version 1.4.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.1/igo2.zip)
 - [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)
@@ -125,7 +124,7 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ## Download
 
-- [Version 1.6.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.0/igo2.zip)
+- [Version 1.6.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.1/igo2.zip)
 - [Version 1.5.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.5.3/igo2.zip)
 - [Version 1.4.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.1/igo2.zip)
 - [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)
