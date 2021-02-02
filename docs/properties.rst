@@ -152,14 +152,12 @@ Propriétés
        * - id
          - string
          - .. line-block::
-               Identifiant unique de la couche à
-               l'échelle de l'application. Particulièrement
-               utile pour bâtir le lien pour le partage
-               de cartes.
-               Attention: si vous définissez un id,
-               la couche ajoutée par le catalogue
-               ou par la recherche sera considérée par l'app.
-               comme une couche différente,
+               Identifiant unique de la couche à l'échelle de l'application. 
+               Particulièrement utile pour bâtir le lien pour le partage
+               de cartes. Si vous avez plusieurs fois la même couche dans un context
+               vous devez avoir un id pour que le lien de partage foinctionne bien.
+               Attention: si vous définissez un id, la couche ajoutée par le catalogue
+               ou par la recherche sera considérée par l'app. comme une couche différente,
                vous aurez donc 2 fois la même couche.
          -
          - uuid
