@@ -45,10 +45,10 @@ export const environment: Environment = {
     catalog: {
       sources: [
         {
-          id: 'Arcgis Rest',
-          title: 'Arcgis Rest',
+          id: 'Image Arcgis Rest',
+          title: 'Image Arcgis Rest',
           url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer',
-          type: 'arcgisrest',
+          type: 'imagearcgisrest',
           sourceOptions: {
             queryable: true
           }
