@@ -320,7 +320,8 @@ Catalog
             - Service WMS
             - Service WMTS
             - Service ArcGIS REST
-            - Sercice Tile ArcGIS Rest
+            - Service Image ArcGIS Rest
+            - Service Tile ArcGIS Rest
 
         Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
@@ -353,10 +354,10 @@ Exemples
             "catalog": {
                   "sources": [
                   {
-                      "id": "Arcgis Rest",
-                      "title": "Arcgis Rest",
+                      "id": "Image Arcgis Rest",
+                      "title": "Image Arcgis Rest",
                       "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
-                      "type": "arcgisrest",
+                      "type": "imagearcgisrest",
                       "sourceOptions": {
                           "queryable": true,
                           "idColumn": "OBJECTID"
@@ -454,10 +455,10 @@ Exemples
                               {
                                 "id": "forcedProperties_arcgisrest",
                                 "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer",
-                                "type": "arcgisrest",
+                                "type": "imagearcgisrest",
                                 "forcedProperties": [{
                                   "layerName": "Sediment substrate / Substrat sédimentaire",
-                                  "title": "Nouveau nom pour cette couche ArcGIS REST"
+                                  "title": "Nouveau nom pour cette couche Image ArcGIS REST"
                                 }]
                               },
                        ]

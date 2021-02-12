@@ -399,6 +399,7 @@ SourceOptions
         plus de détails.
 
         - `ArcGis`_
+        - `Image ArcGis`_
         - `Tile ArcGis`_
         - `Carto`_
         - `OSM`_
@@ -422,6 +423,7 @@ WorkspaceOptions
         plus de détails.
 
         - `ArcGis`_
+        - `Image ArcGis`_
         - `Tile ArcGis`_
         - `Carto`_
         - `OSM`_
@@ -695,6 +697,8 @@ ArcGis
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
+       Problématique observée pour les styles complexe. Même QGIS ne rends pas correctement les styles complexe.
+       https://github.com/infra-geo-ouverte/igo2-lib/issues/810
 
 
 Exemples
@@ -708,6 +712,32 @@ Exemples
                     "queryable": true,
                     "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
                     "queryFormat": "esrijson",
+                    "queryPrecision": 20 , // unité en mètres pour l'interrogation de la couche
+                    "idColumn": "OBJECTID"
+                }
+            }
+
+
+Image ArcGis
+===============
+
+    .. note::
+       Disponible actuellement mais la documentation est en cours de construction.
+       C'est la version qui effectue un seul appel pour toute l'étendu de la carte.
+
+
+Exemples
+
+      .. code:: json
+
+            {
+                "sourceOptions": {
+                    "type": "imagearcgisrest",
+                    "layer": "1",
+                    "queryable": true,
+                    "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                    "queryFormat": "esrijson",
+                    "queryPrecision": 20 , // unité en mètres pour l'interrogation de la couche
                     "idColumn": "OBJECTID"
                 }
             }
@@ -718,6 +748,8 @@ Tile ArcGis
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
+       C'est la version qui effectue plusieurs appels pour l'étendue de la carte.
+       Peut être conflictuel pour les étiquettes qui seront dupliqués pour chacune des tuiles.
 
 
 Exemples
@@ -731,6 +763,7 @@ Exemples
                     "queryable": true,
                     "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
                     "queryFormat": "esrijson",
+                    "queryPrecision": 20 , // unité en mètres pour l'interrogation de la couche
                     "idColumn": "OBJECTID"
                 }
             }
