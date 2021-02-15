@@ -52,7 +52,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 
 ## Téléchargement
 
-- [Version 1.6.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.1/igo2.zip)
+- [Version 1.6.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.2/igo2.zip)
 - [Version 1.5.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.5.3/igo2.zip)
 - [Version 1.4.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.1/igo2.zip)
 - [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)
@@ -124,7 +124,7 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ## Download
 
-- [Version 1.6.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.1/igo2.zip)
+- [Version 1.6.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.2/igo2.zip)
 - [Version 1.5.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.5.3/igo2.zip)
 - [Version 1.4.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.1/igo2.zip)
 - [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)
