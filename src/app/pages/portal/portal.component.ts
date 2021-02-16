@@ -977,7 +977,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private readLayersQueryParams(params: Params) {   
+  private readLayersQueryParams(params: Params) {
     this.readLayersQueryParamsByType(params, 'wms');
     this.readLayersQueryParamsByType(params, 'wmts');
     this.readLayersQueryParamsByType(params, 'arcgisrest');
@@ -992,31 +992,31 @@ export class PortalComponent implements OnInit, OnDestroy {
     switch (type) {
       case 'wms':
         if ((params['layers'] || params['wmsLayers']) && params['wmsUrl']) {
-          urlsKey = 'wmsUrl'
+          urlsKey = 'wmsUrl';
           nameParamLayersKey = params['wmsLayers'] ? 'wmsLayers' : 'layers'; // for maintain compatibility
         }
         break;
       case 'wmts':
         if (params['wmtsLayers'] && params['wmtsUrl']) {
-          urlsKey = 'wmtsUrl'
+          urlsKey = 'wmtsUrl';
           nameParamLayersKey = 'wmtsLayers';
         }
         break;
       case 'arcgisrest':
         if (params['arcgisLayers'] && params['arcgisUrl']) {
-          urlsKey = 'arcgisUrl'
+          urlsKey = 'arcgisUrl';
           nameParamLayersKey = 'arcgisLayers';
         }
         break;
       case 'imagearcgisrest':
         if (params['iarcgisLayers'] && params['iarcgisUrl']) {
-          urlsKey = 'iarcgisUrl'
+          urlsKey = 'iarcgisUrl';
           nameParamLayersKey = 'iarcgisLayers';
         }
         break;
       case 'tilearcgisrest':
         if (params['tarcgisLayers'] && params['tarcgisUrl']) {
-          urlsKey = 'tarcgisUrl'
+          urlsKey = 'tarcgisUrl';
           nameParamLayersKey = 'tarcgisLayers';
         }
         break;
@@ -1039,10 +1039,9 @@ export class PortalComponent implements OnInit, OnDestroy {
           type,
           url: url,
           layer: layerFromUrl[0],
-          params: type === 'wms' ? { LAYERS: layerFromUrl[0] }: undefined
-        });    
+          params: type === 'wms' ? { LAYERS: layerFromUrl[0] } : undefined
+        });
         const id = generateIdFromSourceOptions(layerOptions);
-        console.log(id)
         const visibility = this.computeLayerVisibilityFromUrl(params, id);
         this.addLayerFromURL(
           url,
@@ -1120,19 +1119,20 @@ export class PortalComponent implements OnInit, OnDestroy {
       crossOrigin: true,
       type,
       url
-    }
+    };
+    const arcgisClause = (type === 'arcgisrest' || type === 'imagearcgisrest' || type === 'tilearcgisrest');
     let sourceOptions = {
       version: type === 'wmts' ? '1.0.0' : undefined,
-      queryable: (type === 'arcgisrest' || type === 'imagearcgisrest' || type === 'tilearcgisrest')  ? true : false,
-      queryFormat: (type === 'arcgisrest' || type === 'imagearcgisrest' || type === 'tilearcgisrest')  ? 'esrijson' : undefined,
+      queryable: arcgisClause  ? true : false,
+      queryFormat: arcgisClause  ? 'esrijson' : undefined,
       layer: name
-    }
+    };
     if (type === 'wms') {
-      sourceOptions =  { params: {LAYERS: name}} as any
+      sourceOptions =  { params: {LAYERS: name}} as any;
     }
 
     sourceOptions = ObjectUtils.removeUndefined(Object.assign({}, sourceOptions, commonSourceOptions));
-    
+
     this.addedLayers$$.push(
       this.layerService
         .createAsyncLayer({
