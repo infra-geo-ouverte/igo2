@@ -4,6 +4,7 @@
   "base": "_base",
   "layers": [
     {
+      "id":"1",
       "title": "WFS",
       "sourceOptions": {
         "type": "wfs",
@@ -13,8 +14,7 @@
           "featureTypes": "vg_observation_v_autre_wmst",
           "fieldNameGeometry": "geometry",
           "maxFeatures": 1000,
-          "version": "2.0.0",
-          "outputFormatDownload": "shp"
+          "version": "2.0.0"
         },
         "sourceFields": [
           { "name": "code_municipalite", "alias": "# de la municipalitée" },
@@ -30,11 +30,11 @@
             "propertyName": "code_municipalite",
             "expression": "10043"
           }
-        },
-        "serverType": "geoserver"
+        }
       }
     },
     {
+      "id":"2",
       "title": "Filtre - Événements extrêmes",
       "visible": false,
       "sourceOptions": {
@@ -43,8 +43,7 @@
           "featureTypes": "vg_observation_v_autre_wmst",
           "fieldNameGeometry": "geometry",
           "maxFeatures": 10000,
-          "version": "2.0.0",
-          "outputFormatDownload": "shp"
+          "version": "2.0.0"
         },
         "type": "wfs",
         "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
@@ -60,6 +59,7 @@
       }
     },
     {
+      "id":3,
       "title": "Filterable WMS layers with predefined filters (buttons)",
       "sourceOptions": {
         "type": "wms",
@@ -184,8 +184,7 @@
           "fieldNameGeometry": "geometry",
           "maxFeatures": 10000,
           "version": "1.1.0",
-          "outputFormat": "geojson",
-          "outputFormatDownload": "shp"
+          "outputFormat": "geojson"
         }
       }
     }

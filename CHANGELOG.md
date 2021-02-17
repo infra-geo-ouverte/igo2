@@ -1,3 +1,56 @@
+## [1.6.2](https://github.com/infra-geo-ouverte/igo2/compare/1.6.1...1.6.2) (2021-02-15)
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.6.2 ([97ce3d4](https://github.com/infra-geo-ouverte/igo2/commit/97ce3d443d05669283e7fbfe4f20cde00a579cd8))
+
+
+
+## [1.6.1](https://github.com/infra-geo-ouverte/igo2/compare/1.6.0...1.6.1) (2021-02-02)
+
+
+### Features
+
+* **igo2:** upgrade to 1.6.1 ([3f74e01](https://github.com/infra-geo-ouverte/igo2/commit/3f74e0111a272e2d06892e8066d93d37704aa2a4))
+
+
+
+# [1.6.0](https://github.com/infra-geo-ouverte/igo2/compare/1.5.3...1.6.0) (2021-02-01)
+
+
+### Features
+
+* **igo2:** upgrade to 1.6.0 ([f3904ad](https://github.com/infra-geo-ouverte/igo2/commit/f3904adae48c01d435f88a31c84d8af7bcb9ca14))
+
+
+
+## [1.5.3](https://github.com/infra-geo-ouverte/igo2/compare/1.5.2...1.5.3) (2020-11-19)
+
+
+### Features
+
+* **igo2-lib:** upgrade igo2 to 1.5.3 ([9c8a0aa](https://github.com/infra-geo-ouverte/igo2/commit/9c8a0aa98701c6b0d3c91e0bd6c42ee52dc7273a))
+* **tour:** Context interactive tour ([#537](https://github.com/infra-geo-ouverte/igo2/issues/537)) ([57145a3](https://github.com/infra-geo-ouverte/igo2/commit/57145a3f6b5331f0db42c09ce01912af20c4a624)), closes [#536](https://github.com/infra-geo-ouverte/igo2/issues/536) [#540](https://github.com/infra-geo-ouverte/igo2/issues/540) [#541](https://github.com/infra-geo-ouverte/igo2/issues/541) [#540](https://github.com/infra-geo-ouverte/igo2/issues/540) [#541](https://github.com/infra-geo-ouverte/igo2/issues/541) [#543](https://github.com/infra-geo-ouverte/igo2/issues/543) [#545](https://github.com/infra-geo-ouverte/igo2/issues/545) [#546](https://github.com/infra-geo-ouverte/igo2/issues/546) [#513](https://github.com/infra-geo-ouverte/igo2/issues/513) [#411](https://github.com/infra-geo-ouverte/igo2/issues/411) [#414](https://github.com/infra-geo-ouverte/igo2/issues/414) [#410](https://github.com/infra-geo-ouverte/igo2/issues/410) [#417](https://github.com/infra-geo-ouverte/igo2/issues/417) [#416](https://github.com/infra-geo-ouverte/igo2/issues/416) [#423](https://github.com/infra-geo-ouverte/igo2/issues/423) [#426](https://github.com/infra-geo-ouverte/igo2/issues/426) [#412](https://github.com/infra-geo-ouverte/igo2/issues/412) [#424](https://github.com/infra-geo-ouverte/igo2/issues/424) [#413](https://github.com/infra-geo-ouverte/igo2/issues/413) [#428](https://github.com/infra-geo-ouverte/igo2/issues/428) [#427](https://github.com/infra-geo-ouverte/igo2/issues/427) [#429](https://github.com/infra-geo-ouverte/igo2/issues/429) [#437](https://github.com/infra-geo-ouverte/igo2/issues/437) [#448](https://github.com/infra-geo-ouverte/igo2/issues/448) [#446](https://github.com/infra-geo-ouverte/igo2/issues/446) [#449](https://github.com/infra-geo-ouverte/igo2/issues/449) [#412](https://github.com/infra-geo-ouverte/igo2/issues/412) [#485](https://github.com/infra-geo-ouverte/igo2/issues/485) [#487](https://github.com/infra-geo-ouverte/igo2/issues/487) [#488](https://github.com/infra-geo-ouverte/igo2/issues/488) [#536](https://github.com/infra-geo-ouverte/igo2/issues/536) [#540](https://github.com/infra-geo-ouverte/igo2/issues/540) [#541](https://github.com/infra-geo-ouverte/igo2/issues/541) [#551](https://github.com/infra-geo-ouverte/igo2/issues/551) [#549](https://github.com/infra-geo-ouverte/igo2/issues/549)
+
+
+
+## [1.5.2](https://github.com/infra-geo-ouverte/igo2/compare/1.5.1...1.5.2) (2020-11-11)
+
+
+### Bug Fixes
+
+* **workspace:** CSS fix for actionbar menu ([#549](https://github.com/infra-geo-ouverte/igo2/issues/549)) ([d68b932](https://github.com/infra-geo-ouverte/igo2/commit/d68b932f1fbbfece6bedc40c1f57c60f5e99ebec))
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.5.2 ([c822104](https://github.com/infra-geo-ouverte/igo2/commit/c82210414037d51910a4f879a0a341d678557318))
+* **layer:** Bindind layers together (some identified properties and deletion) ([#513](https://github.com/infra-geo-ouverte/igo2/issues/513)) ([2d8254b](https://github.com/infra-geo-ouverte/igo2/commit/2d8254b36392c75d11445e936aa42c0b16353677)), closes [#411](https://github.com/infra-geo-ouverte/igo2/issues/411) [#414](https://github.com/infra-geo-ouverte/igo2/issues/414) [#410](https://github.com/infra-geo-ouverte/igo2/issues/410) [#417](https://github.com/infra-geo-ouverte/igo2/issues/417) [#416](https://github.com/infra-geo-ouverte/igo2/issues/416) [#423](https://github.com/infra-geo-ouverte/igo2/issues/423) [#426](https://github.com/infra-geo-ouverte/igo2/issues/426) [#412](https://github.com/infra-geo-ouverte/igo2/issues/412) [#424](https://github.com/infra-geo-ouverte/igo2/issues/424) [#413](https://github.com/infra-geo-ouverte/igo2/issues/413) [#428](https://github.com/infra-geo-ouverte/igo2/issues/428) [#427](https://github.com/infra-geo-ouverte/igo2/issues/427) [#429](https://github.com/infra-geo-ouverte/igo2/issues/429) [#437](https://github.com/infra-geo-ouverte/igo2/issues/437) [#448](https://github.com/infra-geo-ouverte/igo2/issues/448) [#446](https://github.com/infra-geo-ouverte/igo2/issues/446) [#449](https://github.com/infra-geo-ouverte/igo2/issues/449) [#412](https://github.com/infra-geo-ouverte/igo2/issues/412) [#485](https://github.com/infra-geo-ouverte/igo2/issues/485) [#487](https://github.com/infra-geo-ouverte/igo2/issues/487) [#488](https://github.com/infra-geo-ouverte/igo2/issues/488) [#536](https://github.com/infra-geo-ouverte/igo2/issues/536) [#540](https://github.com/infra-geo-ouverte/igo2/issues/540) [#541](https://github.com/infra-geo-ouverte/igo2/issues/541)
+* **toast-panel:** Add a warning icon/tooltip if the selected result is out of the current view. ([#541](https://github.com/infra-geo-ouverte/igo2/issues/541)) ([b06588b](https://github.com/infra-geo-ouverte/igo2/commit/b06588bdb077ac40612ae9aac05b4a65ff9d0742))
+
+
+
 ## [1.5.1](https://github.com/infra-geo-ouverte/igo2/compare/1.5.0...1.5.1) (2020-10-20)
 
 

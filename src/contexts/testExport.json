@@ -14,8 +14,7 @@
             "featureTypes": "radars_photos",
             "fieldNameGeometry": "geometry",
             "maxFeatures": 10000,
-            "version": "2.0.0",
-            "outputFormatDownload": "shp"
+            "version": "2.0.0"
           },
           "type": "wfs",
           "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq"
@@ -30,8 +29,7 @@
             "featureTypes": "vg_observation_v_autre_wmst",
             "fieldNameGeometry": "geometry",
             "maxFeatures": 10000,
-            "version": "2.0.0",
-            "outputFormatDownload": "shp"
+            "version": "2.0.0"
           },
           "type": "wfs",
           "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",

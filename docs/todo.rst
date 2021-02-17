@@ -1,11 +1,10 @@
 http://docutils.sourceforge.net/docs/ref/rst/directives.html#code
 https://livesphinx.herokuapp.com/
-http://www.ericholscher.com/blog/2016/mar/15/dont-use-markdown-for-technical-docs/
+https://www.ericholscher.com/blog/2016/mar/15/dont-use-markdown-for-technical-docs/
 
 
 CONFIG.JSON
 
-hasExpansionPanel
 
 Auth
 
@@ -28,19 +27,6 @@ Le fichier context.json:
     .. warning::
        Section context.json en cours de construction
 
-
-layers
-    - tooltip
-
-map
-
-tools
-
-OGC filter -> propriété
-
-Shortcut
-
-Controle url
 
 icherche 
 Lien vers l'api? contenu a jour?

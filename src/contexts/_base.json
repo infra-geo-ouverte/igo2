@@ -17,7 +17,7 @@
       "sourceOptions": {
         "type": "osm",
         "maxZoom": 19,
-        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>"
+        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>"
       }
     },
     {
@@ -26,18 +26,93 @@
       "visible": false,
       "sourceOptions": {
         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
         "type": "xyz",
         "maxZoom": 19,
         "crossOrigin": "anonymous"
       }
     },
     {
+      "title": "Hybride automobile",
+      "baseLayer": true,
+      "visible": true,
+      "linkedLayers": {
+        "linkId": "HybrideAuto",
+        "links": [{
+          "bidirectionnal": true,
+          "syncedDelete": true,
+          "linkedIds": ["bgr_v_sous_route_res_sup_act"],
+          "properties": ["visible"]
+        }]
+      },
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz",
+        "maxZoom": 19,
+        "crossOrigin": "anonymous"
+      }
+    },
+    {
+      "title": "bgr_v_sous_route_res_sup_act",
+      "opacity": 0.5,
+      "showInLayerList": false,
+      "linkedLayers": {
+        "linkId": "bgr_v_sous_route_res_sup_act"
+      },
+      "sourceOptions": {
+        "type": "wms",
+        "queryable": true,
+        "url": "/swtq",
+        "params": {
+          "layers": "bgr_v_sous_route_res_sup_act"
+        }
+      }
+    },
+    {
+      "title": "Hybride vélo",
+      "baseLayer": true,
+      "visible": false,
+      "linkedLayers": {
+        "linkId": "HybrideVelo",
+        "links": [{
+          "bidirectionnal": true,
+          "syncedDelete": true,
+          "linkedIds": ["convivialite_velo"],
+          "properties": ["visible"]
+        }]
+      },
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz",
+        "maxZoom": 19,
+        "crossOrigin": "anonymous"
+      }
+    },
+    {
+      "title": "convivialite_velo",
+      "opacity": 0.5,
+      "showInLayerList": false,
+      "linkedLayers": {
+        "linkId": "convivialite_velo"
+      },
+      "sourceOptions": {
+        "type": "wms",
+        "url": "/swtq",
+        "params": {
+          "layers": "convivialite_velo"
+        }
+      }
+    },
+
+
+    {
       "title": "Aucun",
       "baseLayer": true,
       "visible": false,
       "sourceOptions": {
-        "attributions": "<a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
         "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
         "type": "xyz",
         "maxZoom": 19
@@ -46,11 +121,11 @@
     {
       "id": "carte_gouv_qc",
       "title": "Carte Topo",
-      "visible": true,
+      "visible": false,
       "baseLayer": true,
       "sourceOptions": {
         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
-        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
         "type": "xyz",
         "maxZoom": 17,
         "crossOrigin": "anonymous"
@@ -62,7 +137,7 @@
       "visible": false,
       "sourceOptions": {
         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/fond_thematique@EPSG_3857/{z}/{x}/{-y}.png",
-        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
         "type": "xyz",
         "maxZoom": 11,
         "crossOrigin": "anonymous"
@@ -75,6 +150,7 @@
     "mapTools",
     "spatialFilter",
     "measurer",
+    "draw",
     "directions",
     "catalog",
     "importExport",
@@ -84,10 +160,7 @@
   ],
   "tools": [
     {
-      "name": "searchResults",
-      "options": {
-        "focusFirst": false
-      }
+      "name": "searchResults"
     },
     {
       "name": "contextManager"
@@ -115,6 +188,9 @@
       "name": "measurer"
     },
     {
+      "name": "draw"
+    },
+    {
       "name": "directions"
     },
     {
@@ -139,7 +215,28 @@
       "name": "activeOgcFilter"
     },
     {
-      "name": "importExport"
+      "name": "importExport",
+      "options": {
+        "selectFirstProj": false,
+        "projectionsLimitations": {
+          "projFromConfig": true,
+          "nad83": true,
+          "wgs84": true,
+          "webMercator": true,
+          "utm": true,
+          "mtm": true,
+          "utmZone": {
+            "minZone": 17,
+            "maxZone": 21
+          },
+          "mtmZone": {
+            "minZone": 3,
+            "maxZone": 10
+          }
+        },
+        "importExportType": "layer",
+        "importExportShowBothType": true
+      }
     },
     {
       "name": "print"

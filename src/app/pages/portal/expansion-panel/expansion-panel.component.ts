@@ -31,6 +31,8 @@ export class ExpansionPanelComponent {
   }
   private _expanded: boolean;
 
+  @Input() maximized: Boolean = false;
+
   @Input()
   get backdropShown(): boolean {
     return this._backdropShown;
@@ -44,7 +46,12 @@ export class ExpansionPanelComponent {
 
   @HostBinding('class.app-expansion-panel-expanded')
   get hasExpandedClass() {
-    return this.expanded;
+    return this.expanded && !this.maximized;
+  }
+
+  @HostBinding('class.app-expansion-panel-expanded-maximized')
+  get hasExpandedFullClass() {
+    return this.expanded && this.maximized;
   }
 
   constructor() {}

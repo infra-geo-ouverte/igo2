@@ -16,14 +16,14 @@
     {
       "cssClass": "bottom-right",
       "text": "bottom-right",
-      "link": "http://www.google.ca",
+      "link": "https://www.google.ca",
       "marginRight": "55px"
     },
     {
       "cssClass": "top-left",
       "imgSrc": "./assets/images/igo-loading.gif",
       "imgSize": "70px",
-      "link": "http://www.google.ca/search?q=top-left",
+      "link": "https://www.google.ca/search?q=top-left",
       "alt": "Loading",
       "marginTop": "50px"
     },
@@ -86,7 +86,7 @@
       "media": ["mobile", "tablet"],
       "cssClass": "bottom-right",
       "text": "b-r mob/tab",
-      "link": "http://www.google.ca",
+      "link": "https://www.google.ca",
       "marginRight": "50px",
       "fontSize": "10pt"
     },
