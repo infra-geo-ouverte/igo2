@@ -1026,7 +1026,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
     const layersByService = params[nameParamLayersKey].split('),(');
     const urls = params[urlsKey].split(',');
-    console.log(urls, layersByService);
 
     let cnt = 0;
     urls.forEach((url) => {
