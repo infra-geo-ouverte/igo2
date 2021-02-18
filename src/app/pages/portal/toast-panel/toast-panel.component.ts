@@ -286,7 +286,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.storageChange$$ = this.storageService.storageChange$
       .pipe(skipWhile((storageChange: StorageServiceEvent) => storageChange.key !== 'zoomAuto'))
       .subscribe((change) => {
-        this.zoomAuto = change.currentValue
+        this.zoomAuto = change.currentValue;
       });
 
     this.actionStore.load([
