@@ -5,6 +5,8 @@
     "open": "Open Menu"
   },
   "workspace": {
+    "open": "Open the table view",
+    "close": "Close the table view",
     "disabled" : {
       "resolution": "The workspace is not available at this resolution",
       "visible": "The layer is not loaded. Try to set the layer visibility."
@@ -54,7 +56,7 @@
       "search-settings": "Allows you to configure: the type of result, the number of desired results, etc.",
       "toolbox-title": "TOOLBOX",
       "toolbox": "On selection of the tool, the application switches inside and displays its content.",
-      "search-tool-title": "SEARCH RESULTS TOOL",
+      "search-tool-title": "SEARCH RESULTS",
       "search-tool": "Search results tool allow to display the results that come from the search bar input.",
       "context-title": "CONTEXTS",
       "context": "A context is a predefined map made up of several layers grouped together according to a theme.",
@@ -62,8 +64,10 @@
       "map-tool": "All layers are display in this tool. Some manipulations can also be done on these.",
       "spatial-filter-title": "SPATIAL FILTER",
       "spatial-filter": "Spatial filter allow to extract entities by predefined or drawn zone.",
-      "measurer-tool-title": "MEASURER TOOL",
+      "measurer-tool-title": "MEASURER",
       "measurer-tool": "For distance, perimeter and ground area calculation.",
+      "draw-tool-title": "DRAW",
+      "draw-tool": "drawing points, lines, polygons and circles on the map.",
       "directions-tool-title": "DIRECTIONS",
       "directions-tool": "Allow route creation based on departure, arrival and intermediate stop.",
       "catalog-tool-title": "DATA CATALOG",
@@ -72,9 +76,13 @@
       "import-export": "Import-export tool allow layers importation and exportation.",
       "print-tool-title": "PRINT",
       "print-tool": "Print the active map according to certain format.",
-      "share-map-title": "SHARE-MAP TOOL",
+      "ogc-tool-title": "DATA FILTER",
+      "ogc-tool": "The data filter allows to filter WMS and WFS data based on various comparison operators (Equal, different...) or with a spatial operator (intersect, within...). Applies only to certain layers where the filter can be applied and which are present in the map",
+      "time-tool-title": "TIME FILTER",
+      "time-tool": "The temporal filter allows to delimit a period of time which will filter the layer and display only the results which correspond to the defined period of time. Applies only to certain layers where the filter can be applied and which are present in the map",
+      "share-map-title": "SHARE",
       "share-map": "Share a map by his URL link",
-      "about-title": "À PROPOS",
+      "about-title": "ABOUT",
       "about": "About IGO and his features!",
       "tool-choose-title": "SELECTED TOOL",
       "tool-choose": "When we select a tool from the toolbox...",
@@ -95,7 +103,7 @@
       "end": "Applies only to certain layers where the filter can be applied and which are present in the map"
     },
     "measurer": {
-      "title": "MEASURER TOOL",
+      "title": "MEASURER",
       "start": "Guided tour of the measuring tool",
       "type-title": "Measure type",
       "type": "Choose the desired measure",
@@ -161,7 +169,7 @@
     },
     "context": {
       "title": "CONTEXTS",
-      "start": "Guided tour of the measuring tool",
+      "start": "Guided tour of the context tool",
       "description": "A context is a predefined map made up of several layers grouped together according to a theme.",
       "options": "A context can also be cloned, masked and, based on the permissions that has been set, edited and shared.",
       "select": "Active context appears highlighted. To switch the active context, click on the context you want to display. The sidenav will then toggle on the map tool.",
@@ -181,5 +189,35 @@
       "users-filter-active": "For example, it is possible to display or not self shared contexts.",
       "users-filter-hide": "It is also possible to display hide contexts."
     }
+  },
+  "map-tool": {
+    "title": "MAP",
+    "start": "Guided tour of the map's tool",
+    "layer-list": "Map's tool allow to display the list of layers on the active map.",
+    "legend-list": "Map's tool can also be used to present layer's legend list. We'll come back to this later.",
+    "layer-item": "A layer contains a set of element of the same type.",
+    "layer-item-click": "One clic on the layer's title allows to show and hide layer's legend.",
+    "eye-button": "On clic on the eye allow to show and hide the layer. A grey eye indicate a non visible layer at the active scale. Zoom in or out to see the layer.",
+    "actions-button": "A click here display possible actions that can be done on the layer.",
+    "layer-actions-group": "Layer's toolbar is gonna be accessible here.",
+    "workspace-button": "This button allows the opening of the tabular view (results table).",
+    "export-button": "Click here to export the layer through IGO's export tool.",
+    "ogc-button": "OGC filter is an attribute filter that allow to refine layer's visual in relation with certain attributes.",
+    "time-button": "Time filter can be used to bring out layer's elements listed within a certain time interval.",
+    "metadata-button": "Click here to access layer's metadata.",
+    "opacity-button": "Layer's opacity can be modified from this button.",
+    "up-button": "Allow to raise the layer's rank of appearance by one on the active map. It is also going to raise in the layer's list.",
+    "down-button": "Allow to lower the layer's rank of appearance by one on the active map. It is also going to lower in the layer's list",
+    "delete-button": "Click on this button to delete the layer from the active map.",
+    "name-filter": "Enter text here to filter the layer's list y name.",
+    "alpha": "Click to sort the list alphabetically. By default, layers are sorted by appearence order. Take notice that the sorting WON'T affect the appearance order on the map.",
+    "eye-filter": "Click to keep only the visible layers at active scale.",
+    "selection-mode": "With a click here, we toggle the multiple selection mode.",
+    "check-layer": "It is now possible to perform actions simultaneously on multiple layers by selecting many of them.",
+    "layer-actions-group-selection": "Toolbar activate as soon as one layer is selected. Take notice that only layer's commons actions are accessible.",
+    "select-all": "This button allow to select or deselect all layers of the list.",
+    "legend-tab": "Let's toggle legend tab.",
+    "legend-tab-description": "This tab can be used to display all layer's legend. By default, only visible layers at active scale will have their legend displayed.",
+    "legend-tab-all": "Allow to also display non visible layer's legend at active scale."
   }
 }

@@ -4,6 +4,7 @@
   "base": "_base",
   "layers": [
     {
+      "id":"1",
       "title": "WFS",
       "sourceOptions": {
         "type": "wfs",
@@ -33,6 +34,7 @@
       }
     },
     {
+      "id":"2",
       "title": "Filtre - Événements extrêmes",
       "visible": false,
       "sourceOptions": {
@@ -57,6 +59,7 @@
       }
     },
     {
+      "id":3,
       "title": "Filterable WMS layers with predefined filters (buttons)",
       "sourceOptions": {
         "type": "wms",

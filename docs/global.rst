@@ -3,7 +3,7 @@
 .. |time| date:: %H:%M
 
 
-.. _original page: http://igouverte.org/documentation/
+.. _original page: https://www.igouverte.org/documentation/
 
 .. |CC| image:: images/CC-BY-SA.png
 
