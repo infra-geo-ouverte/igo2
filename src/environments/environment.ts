@@ -47,10 +47,10 @@ export const environment: Environment = {
     catalog: {
       sources: [
         {
-          id: 'Arcgis Rest',
-          title: 'Arcgis Rest',
+          id: 'Image Arcgis Rest',
+          title: 'Image Arcgis Rest',
           url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer',
-          type: 'arcgisrest',
+          type: 'imagearcgisrest',
           sourceOptions: {
             queryable: true
           }
@@ -91,6 +91,44 @@ export const environment: Environment = {
               setCrossOriginAnonymous: true,
               matrixSet: 'EPSG_3857',
               version: '1.0.0'
+            }
+          ]
+        },
+        {
+          id: 'forced_properties',
+          title: 'Forced properties catalog (layer name and abstract)',
+          url: '',
+          composite: [
+            {
+              id: 'forcedProperties_wmts',
+              url:
+                'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
+              type: 'wmts',
+              setCrossOriginAnonymous: true,
+              matrixSet: 'EPSG_3857',
+              version: '1.0.0',
+              forcedProperties: [{
+                layerName: 'BDTQ-20K_Allegee',
+                title: 'Nouveau nom pour cette couche WMTS'
+              }]
+            },
+            {
+              id: 'forcedProperties_wms',
+              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
+              type: 'wms',
+              forcedProperties: [{
+                layerName: 'lieuhabite',
+                title: 'Nouveau nom pour cette couche WMS'
+              }]
+            },
+            {
+              id: 'forcedProperties_arcgisrest',
+              url: 'https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer',
+              type: 'arcgisrest',
+              forcedProperties: [{
+                layerName: 'Sediment substrate / Substrat sédimentaire',
+                title: 'Nouveau nom pour cette couche ArcGIS REST'
+              }]
             }
           ]
         },

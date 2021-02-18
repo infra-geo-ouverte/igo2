@@ -1,6 +1,6 @@
 http://docutils.sourceforge.net/docs/ref/rst/directives.html#code
 https://livesphinx.herokuapp.com/
-http://www.ericholscher.com/blog/2016/mar/15/dont-use-markdown-for-technical-docs/
+https://www.ericholscher.com/blog/2016/mar/15/dont-use-markdown-for-technical-docs/
 
 
 CONFIG.JSON
