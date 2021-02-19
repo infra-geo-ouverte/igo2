@@ -85,7 +85,6 @@
                   {
                     "title": "Radar photo fixe",
                     "enabled": true,
-                    "color": "0,0,255",
                     "tooltip": "Here a tooltip explaning ...",
                     "filters": {
                       "operator": "PropertyIsEqualTo",
@@ -107,7 +106,6 @@
                   {
                     "title": "Radar photo fixe + feu rouge",
                     "enabled": false,
-                    "color": "0,200,0",
                     "tooltip": "Here a tooltip explaning ...",
                     "filters": {
                       "operator": "PropertyIsEqualTo",

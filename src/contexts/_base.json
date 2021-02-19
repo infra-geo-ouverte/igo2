@@ -35,7 +35,7 @@
     {
       "title": "Hybride automobile",
       "baseLayer": true,
-      "visible": true,
+      "visible": false,
       "linkedLayers": {
         "linkId": "HybrideAuto",
         "links": [{
@@ -121,7 +121,7 @@
     {
       "id": "carte_gouv_qc",
       "title": "Carte Topo",
-      "visible": false,
+      "visible": true,
       "baseLayer": true,
       "sourceOptions": {
         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
