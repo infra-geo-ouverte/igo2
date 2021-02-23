@@ -550,7 +550,7 @@
   "mapTools": {
     "title": "interactiveTour.map-tool.title",
     "position": "auto",
-    "conditions": ["igo-layer-item"],
+    "conditions": ["mat-list-item"],
     "steps": [
       {
         "element": "div.igo-panel-title",
