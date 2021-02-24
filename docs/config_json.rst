@@ -406,7 +406,7 @@ Exemples
                       "composite": [
                             {
                               "id": "tq_swtq",
-                              "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+                              "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                               "regFilters": ["zpegt"],
                               "groupImpose": {"id": "zpegt", "title": "zpegt"}
                             },
