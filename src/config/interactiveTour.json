@@ -707,7 +707,12 @@
       },
       {
         "element": "igo-layer-list igo-panel button:first-of-type",
-        "text": "interactiveTour.map-tool.select-all"
+        "text": "interactiveTour.map-tool.select-all",
+        "onHide": {
+          "element": "igo-layer-list div.mat-list-item-content button.selection-mode",
+          "action": "click",
+          "condition": "igo-layer-item:first-of-type mat-checkbox"
+        }
       },
       {
         "element": "div.mat-tab-labels div:nth-of-type(2)",
