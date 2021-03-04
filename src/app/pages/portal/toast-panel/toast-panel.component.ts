@@ -132,8 +132,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
     this.fullExtent
   );
-  public isHtmlLargeDisplay:boolean = false;
-  public isHtmlDisplay:boolean = false;
+  public isHtmlLargeDisplay = false;
+  public isHtmlDisplay = false;
   public iconResizeWindows = 'crop-square';
 
   public icon = 'menu';
@@ -178,8 +178,16 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   getClassPanel() {
     return {
       'app-toast-panel-opened' : this.opened && !this.fullExtent && !this.isHtmlDisplay,
-      'app-toast-panel-html' : this.opened && this.resultSelected$.value && this.isHtmlDisplay && !this.isHtmlLargeDisplay,
-      'app-toast-panel-html-large' : this.opened && this.resultSelected$.value && this.isHtmlDisplay && this.isHtmlLargeDisplay,
+      'app-toast-panel-html' : 
+        this.opened && 
+        this.resultSelected$.value && 
+        this.isHtmlDisplay && 
+        !this.isHtmlLargeDisplay,
+      'app-toast-panel-html-large' : 
+        this.opened && 
+        this.resultSelected$.value && 
+        this.isHtmlDisplay && 
+        this.isHtmlLargeDisplay,
       'app-full-toast-panel-opened' : this.opened && this.fullExtent && !this.isHtmlDisplay,
 
       'app-toast-panel-collapsed': !this.opened && !this.fullExtent && !this.isHtmlDisplay,
@@ -559,7 +567,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.store.clear();
     this.unselectResult();
     this.setHtmlDisplay(false);
-    this.resizeHtmlWindows()
+    this.resizeHtmlWindows();
   }
 
   isMobile(): boolean {
@@ -639,7 +647,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     action.handler(...args);
   }
   
-  setHtmlDisplay(value:boolean) {
+  setHtmlDisplay(value: boolean) {
     if (value === true) {
       this.isHtmlDisplay = true;
       this.windowHtmlDisplayEvent.emit(true);
@@ -649,7 +657,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  isHtmlAndDesktop():boolean {
+  isHtmlAndDesktop(): boolean {
     if (this.isHtmlDisplay && this.isDesktop()) {
       return true;
     } else {
@@ -672,10 +680,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   enlargeHtmlWindows() {
     this.setWindowsHtmlLargeDisplay(true);
-    this.iconResizeWindows = "vector-arrange-below";
+    this.iconResizeWindows = 'vector-arrange-below';
   }
 
-  setWindowsHtmlLargeDisplay(value:boolean) {
+  setWindowsHtmlLargeDisplay(value: boolean) {
     this.isHtmlLargeDisplay = value;
   }
 

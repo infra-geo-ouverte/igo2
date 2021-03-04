@@ -148,7 +148,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     undefined
   );
   private menuButtonReverseColor = false;
-  public toastPanelHtmlDisplay:boolean = false;
+  public toastPanelHtmlDisplay = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
@@ -801,8 +801,8 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   getToastPanelExtent() {
     if (!this.sidenavOpened) {
-      if(this.toastPanelHtmlDisplay && this.mediaService.isDesktop()) {
-        return 'htmlDisplay'
+      if (this.toastPanelHtmlDisplay && this.mediaService.isDesktop()) {
+        return 'htmlDisplay';
       }
       if (this.fullExtent) {
         return 'fullStandard';
@@ -810,8 +810,8 @@ export class PortalComponent implements OnInit, OnDestroy {
         return 'standard';
       }
     } else if (this.sidenavOpened) {
-      if(this.toastPanelHtmlDisplay && this.mediaService.isDesktop()) {
-        return 'htmlDisplayOffsetX'
+      if (this.toastPanelHtmlDisplay && this.mediaService.isDesktop()) {
+        return 'htmlDisplayOffsetX';
       }
       if (this.fullExtent) {
         return 'fullOffsetX';
