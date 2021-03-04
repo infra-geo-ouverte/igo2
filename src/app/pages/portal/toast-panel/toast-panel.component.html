@@ -1,6 +1,7 @@
 <ng-template #toast>
   <igo-panel
     *ngIf="store.entities$ | async"
+    [ngClass] = "getClassPanel()"
     [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
     (click)="onToggleClick($event)"
     tabindex="0"
@@ -56,7 +57,14 @@
       [matBadgeHidden]="!(isSelectedResultOutOfView$ | async)"     
       svgIcon="magnify-plus-outline"></mat-icon>
     </button>
-
+    <button
+     *ngIf = "isHtmlAndDesktop() && resultSelected$.value"
+      mat-icon-button
+      igoStopPropagation
+      panelRightButton
+      (click)="resizeHtmlWindows()">
+      <mat-icon svgIcon={{iconResizeWindows}}></mat-icon>
+    </button>
     <button
       mat-icon-button
       igoStopPropagation
@@ -69,7 +77,8 @@
 
       <igo-feature-details
         *ngIf="resultSelected$.value"
-        [feature]="resultSelected$.value.data">
+        [feature]="resultSelected$.value.data"
+        (htmlDisplayEvent)=setHtmlDisplay($event)>
       </igo-feature-details>
 
       <igo-search-results

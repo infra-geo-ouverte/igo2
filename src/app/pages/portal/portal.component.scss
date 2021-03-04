@@ -224,24 +224,29 @@ app-toast-panel {
   position: absolute;
   left: 50%;
   margin-left: -300px;
-  width: 600px;
+  // width: 600px;
+  max-height:70%;
+  max-width: fit-content;
   z-index: 5;
   outline: none;
 
   @include mobile {
-    width: calc(100% - #{$app-footer-height});
+    // width: calc(100% - #{$app-footer-height});
     left: $app-footer-height;
     margin-left: 0;
+    min-width: 100%;
   }
 
   @include tablet {
-    width: 500px;
+    // width: 500px;
+    max-width: inherit;
     left: calc(50% + 60px);
   }
 }
 
 app-toast-panel.app-full-toast-panel-collapsed {
   width: 45%;
+  height: $app-toast-panel-collapsed-height;
 }
 
 app-toast-panel.expansion-panel-expanded,
@@ -250,18 +255,18 @@ app-toast-panel.app-toast-panel-opened {
   bottom: 0;
 
   @include mobile {
-    width: 100%;
+    // width: 100%; ##deplacer dans app-toast-panel
     left: 0;
   }
 }
-
-app-toast-panel.app-full-toast-panel-opened {
-  @include mobile {
-    max-height: 70%;
-    height: auto;
-    width: 100%;
-  }
-}
+// deplacer dans app-toast
+// app-toast-panel.app-full-toast-panel-opened {
+//   @include mobile {
+//     max-height: 70%;
+//     height: auto;
+//     width: 100%;
+//   }
+// }
 
 igo-offline-button {
   margin-bottom: 128px;

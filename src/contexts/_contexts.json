@@ -1,5 +1,9 @@
 [
   {
+    "uri": "_htmlTest",
+    "title": "test html info"
+  },
+  {
     "uri": "_default",
     "title": "Simple"
   },

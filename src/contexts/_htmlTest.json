@@ -1,0 +1,197 @@
+
+{
+    "uri": "_htmlTest",
+    "title": "test html",
+    "base": "_base",
+    "message": {
+      "title": "Info",
+      "text": "welcome",
+      "type": "info",
+      "options": {
+        "timeOut": 20000
+      }
+    },
+    "layers": [
+  
+      {
+        "title": "Aire d'intensification de la production ligneuse (AIPL)",
+        "zIndex": 2,
+        "visible" : true,
+        "metadata": {
+            "url": "https://www.donneesquebec.ca/recherche/fr/dataset/aire-d-intensification-de-la-production-ligneuse-aipl",
+            "extern": "false"
+            },
+        "sourceOptions": {
+            "queryable": true,
+            "crossOrigin": "anonymous",
+            "queryFormat": "geojson",
+            "url": "https://servicescarto.mern.gouv.qc.ca/pes/services/Forets/STF_WMS/MapServer/WMSServer?",
+            "params": {
+                "layers": "Aire intensification de la production ligneuse"
+            },
+            "type": "wms"       
+        }
+      },
+      {
+        "title": "html - Aire d'intensification de la production ligneuse (AIPL)",
+        "zIndex": 2,
+        "visible" : true,
+        "metadata": {
+            "url": "https://www.donneesquebec.ca/recherche/fr/dataset/aire-d-intensification-de-la-production-ligneuse-aipl",
+            "extern": "false"
+            },
+        "sourceOptions": {
+            "queryable": true,
+            "crossOrigin": "anonymous",
+            "queryFormat": "html",
+            "queryHtmlTarget": "iframe",
+            "url": "https://servicescarto.mern.gouv.qc.ca/pes/services/Forets/STF_WMS/MapServer/WMSServer?",
+            "params": {
+                "layers": "Aire intensification de la production ligneuse"
+            },
+            "type": "wms"       
+        }
+      },
+  
+      {
+        "title": "Vector dataSource",
+        "visible": true,
+        "sourceOptions": {
+          "queryable": true,
+          "queryTitle": "nomnavcana",
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
+          "type": "vector"
+        }
+      },
+      {
+        "title": "Peuplements écoforestiers",
+        "zIndex": 3.1,
+        "visible": true,
+        "metadata": {
+            "extern": true
+        },
+        "sourceOptions": {
+            "crossOrigin": "anonymous",
+            "queryable": true, 
+            "queryFormat": "htmlgml2",
+            "queryHtmlTarget": "iframe",
+            "type": "wms",
+            "optionsFromCapabilities": true,
+            "url": "/ws/mffpecofor.fcgi", 
+            "params": {
+                "layers": "ori_pee_close_scale",
+                "version": "1.3.0"
+            }
+          }
+      },
+  
+      {
+        "zIndex": 4,
+        "title": "reg eco-html",
+        "sourceOptions": {
+          "url": "/ws/mffpecofor.fcgi",
+          "optionsFromCapabilities": true,
+          "params": {
+            "layers": "sh_reg_eco",
+            "version": "1.3.0"
+          },
+          "type": "wms",
+          "queryTitle": "test",
+          "queryFormat":"html",
+          "queryHtmlTarget": "iframe"
+        }
+      },
+      {
+        "zIndex": 5,
+        "title": "reg eco htm2gml",
+        "visible": false,
+        "baseLayer": false,
+        "metadata": {
+            "extern": true
+        },
+        "sourceOptions": {
+            "crossOrigin": "anonymous",
+            "queryFormat": "htmlgml2",
+            "queryHtmlTarget": "iframe",
+            "url": "/ws/mffpecofor.fcgi",
+            "params": {
+                "layers": "sh_reg_eco",
+                "version": "1.3.0"
+            },
+            "type": "wms",
+            "optionsFromCapabilities": true
+        }
+    },
+  
+  
+    {
+      "zIndex": 7,
+      "title": "reg eco- gml",
+      "visible":false,
+      "sourceOptions": {
+        "url": "/ws/mffpecofor.fcgi",
+        "optionsFromCapabilities": true,
+        "params": {
+          "layers": "sh_reg_eco",
+          "version": "1.3.0"
+        },
+        "type": "wms"
+      }
+    },
+    {
+      "zIndex": 8,
+      "visible" : false,
+      "metadata": {
+          "url": "https://www.donneesquebec.ca/recherche/fr/dataset/refuge-biologique-designe-et-en-projet",
+          "extern": "false"
+          },
+      "sourceOptions": {
+          "crossOrigin": "anonymous",
+          "queryFormat": "html",
+          "queryHtmlTarget": "iframe",
+          "url": "https://servicescarto.mern.gouv.qc.ca/pes/services/Forets/STF_WMS/MapServer/WMSServer?",
+          "params": {
+              "layers": "Refuge biologique désigné",
+              "version": "1.3.0"
+          },
+          "type": "wms",
+          "optionsFromCapabilities": true         
+      }
+    },
+  
+    {
+      "title": "mtq html",
+      "visible" : true,
+      "zIndex": 9,
+  
+      "sourceOptions": {
+          "crossOrigin": "anonymous",
+          "queryFormat": "html",
+          "queryHtmlTarget": "iframe",
+          "url": "/swtq",
+          "params": {
+              "layers": "stations_meteoroutieres",
+              "version": "1.3.0"
+          },
+          "type": "wms",
+          "optionsFromCapabilities": true         
+      }
+    },
+    {
+      "title": "UG",
+      "sourceOptions": {
+      "queryable": true,
+      "queryFormat": "geojson",
+      "crossOrigin": "anonymous",
+      "queryHtmlTarget": "iframe",
+      "url": "https://servicescarto.mern.gouv.qc.ca/pes/services/Forets/STF_WMS/MapServer/WMSServer?",
+      "params": {
+        "layers": "Unité de gestion {1:20 000},Unité de gestion {1:1 000 000}",
+        "version": "1.3.0"
+      },
+      "type": "wms"
+     }
+    }
+  
+    ]
+  }

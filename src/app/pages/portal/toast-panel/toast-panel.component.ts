@@ -132,6 +132,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
     this.fullExtent
   );
+  public isHtmlLargeDisplay:boolean = false;
+  public isHtmlDisplay:boolean = false;
+  public iconResizeWindows = 'crop-square';
 
   public icon = 'menu';
 
@@ -159,18 +162,32 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   @Output() openedChange = new EventEmitter<boolean>();
 
   @Output() fullExtentEvent = new EventEmitter<boolean>();
+  @Output() windowHtmlDisplayEvent = new EventEmitter<boolean>();
 
   resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
 
-  @HostBinding('class.app-toast-panel-opened')
-  get hasOpenedClass() {
-    return this.opened;
+  // @HostBinding('class.app-toast-panel-opened')
+  // get hasOpenedClass() {
+  //   return this.opened;
+  // }
+
+  // @HostBinding('class.app-full-toast-panel-collapsed')
+  // get hasFullCollapsedClass() {
+  //   return !this.opened && this.fullExtent;
+  // }
+  getClassPanel() {
+    return {
+      'app-toast-panel-opened' : this.opened && !this.fullExtent && !this.isHtmlDisplay,
+      'app-toast-panel-html' : this.opened && this.resultSelected$.value && this.isHtmlDisplay && !this.isHtmlLargeDisplay,
+      'app-toast-panel-html-large' : this.opened && this.resultSelected$.value && this.isHtmlDisplay && this.isHtmlLargeDisplay,
+      'app-full-toast-panel-opened' : this.opened && this.fullExtent && !this.isHtmlDisplay,
+
+      'app-toast-panel-collapsed': !this.opened && !this.fullExtent && !this.isHtmlDisplay,
+      'app-full-toast-panel-collapsed' : !this.opened && this.fullExtent && !this.isHtmlDisplay,
+      'app-toast-panel-html-collapsed' : !this.opened && this.isHtmlDisplay
+    }
   }
 
-  @HostBinding('class.app-full-toast-panel-collapsed')
-  get hasFullCollapsedClass() {
-    return !this.opened && this.fullExtent;
-  }
 
   @HostBinding('style.visibility')
   get displayStyle() {
@@ -183,10 +200,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     return 'hidden';
   }
 
-  @HostBinding('class.app-full-toast-panel-opened')
-  get hasFullOpenedClass() {
-    return this.opened && this.fullExtent;
-  }
+  // @HostBinding('class.app-full-toast-panel-opened')
+  // get hasFullOpenedClass() {
+  //   return this.opened && this.fullExtent;
+  // }
 
   @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(
     event: KeyboardEvent
@@ -488,6 +505,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       true
     );
     this.resultSelected$.next(result);
+    if (result.data.properties && result.data.properties.target === 'iframe') {
+      this.setHtmlDisplay(true);
+    } else {
+      this.setHtmlDisplay(false);
+    }
 
     const features = [];
     for (const feature of this.store.all()) {
@@ -520,6 +542,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   unselectResult() {
     this.resultSelected$.next(undefined);
     this.isResultSelected$.next(false);
+    this.setHtmlDisplay(false);
     this.store.state.clear();
 
     const features = [];
@@ -535,10 +558,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.map.overlay.removeFeatures(this.store.all().map((f) => f.data));
     this.store.clear();
     this.unselectResult();
+    this.setHtmlDisplay(false);
+    this.resizeHtmlWindows()
   }
 
   isMobile(): boolean {
     return this.mediaService.getMedia() === Media.Mobile;
+  }
+  isDesktop(): boolean {
+    return this.mediaService.isDesktop();
   }
 
   handleKeyboardEvent(event) {
@@ -610,4 +638,45 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     const args = action.args || [];
     action.handler(...args);
   }
+  
+  setHtmlDisplay(value:boolean) {
+    if (value === true) {
+      this.isHtmlDisplay = true;
+      this.windowHtmlDisplayEvent.emit(true);
+    } else {
+      this.isHtmlDisplay = false;
+      this.windowHtmlDisplayEvent.emit(false);
+    }
+  }
+
+  isHtmlAndDesktop():boolean {
+    if (this.isHtmlDisplay && this.isDesktop()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  resizeHtmlWindows() {
+    if (this.isHtmlLargeDisplay) {
+      this.minimizeHtmlWindow();
+    } else {
+      this.enlargeHtmlWindows();
+    }
+  }
+
+  minimizeHtmlWindow() {
+    this.setWindowsHtmlLargeDisplay(false);
+    this.iconResizeWindows = 'crop-square';
+  }
+
+  enlargeHtmlWindows() {
+    this.setWindowsHtmlLargeDisplay(true);
+    this.iconResizeWindows = "vector-arrange-below";
+  }
+
+  setWindowsHtmlLargeDisplay(value:boolean) {
+    this.isHtmlLargeDisplay = value;
+  }
+
 }
