@@ -148,6 +148,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
     undefined
   );
+  private routeParams: Params;
   private menuButtonReverseColor = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
@@ -925,9 +926,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private readQueryParams() {
     this.route.queryParams.pipe(debounceTime(250)).subscribe((params) => {
-      this.readToolParams(params);
-      this.readSearchParams(params);
-      this.readFocusFirst(params);
+      this.routeParams = params;
+      this.readToolParams();
+      this.readSearchParams();
+      this.readFocusFirst();
     });
   }
 
@@ -942,8 +944,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     }, 1);
   }
 
-  private readFocusFirst(params: Params) {
-    if (params['sf'] === '1' && this.termDefinedInUrl) {
+  private readFocusFirst() {
+    if (this.routeParams['sf'] === '1' && this.termDefinedInUrl) {
       const entities$$ = this.searchStore.entities$
         .pipe(
           skipWhile((entities) => entities.length === 0),
@@ -960,19 +962,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private readSearchParams(params: Params) {
-    if (params['search']) {
+  private readSearchParams() {
+    if (this.routeParams['search']) {
       this.termDefinedInUrl = true;
-      this.searchBarTerm = params['search'];
+      this.searchBarTerm = this.routeParams['search'];
     }
   }
 
-  private readToolParams(params: Params) {
-    if (params['tool']) {
-      this.toolbox.activateTool(params['tool']);
+  private readToolParams() {
+    if (this.routeParams['tool']) {
+      this.toolbox.activateTool(this.routeParams['tool']);
     }
 
-    if (params['sidenav'] === '1') {
+    if (this.routeParams['sidenav'] === '1') {
       setTimeout(() => {
         this.openSidenav();
       }, 250);
