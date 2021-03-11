@@ -127,6 +127,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
+  public termSplitter = "|";
   public termDefinedInUrlTriggered = false;
   private addedLayers$$: Subscription[] = [];
   public forceCoordsNA = false;
@@ -307,6 +308,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window['IGO'] = this;
+    this.searchState.searchTermSplitter$.next(this.termSplitter)
 
     this.initWelcomeWindow();
 
