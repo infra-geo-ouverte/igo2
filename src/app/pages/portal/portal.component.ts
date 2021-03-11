@@ -32,7 +32,8 @@ import {
   Toolbox,
   Tool,
   Widget,
-  EntityTablePaginatorOptions
+  EntityTablePaginatorOptions,
+  EntityRecord
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -59,7 +60,8 @@ import {
   QueryService,
   WfsWorkspace,
   FeatureWorkspace,
-  generateIdFromSourceOptions
+  generateIdFromSourceOptions,
+  computeOlFeaturesExtent
 } from '@igo2/geo';
 
 import {
@@ -86,6 +88,7 @@ import { WelcomeWindowComponent } from './welcome-window/welcome-window.componen
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils } from '@igo2/utils';
+import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 @Component({
   selector: 'app-portal',
@@ -972,6 +975,29 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.termDefinedInUrl = true;
       if (this.routeParams['exactMatch'] === '1') {
         this.searchState.activateCustomFilterTermStrategy()
+      }
+      if (this.routeParams['ztr'] === '1') {
+        
+        const entities$$ = this.searchStore.stateView.all$()
+        .pipe(
+          skipWhile((entities) => entities.length === 0),
+          debounceTime(500),
+          take(1)
+        )
+        .subscribe((entities) => {
+          entities$$.unsubscribe();
+          const searchResultsOlFeatures = entities
+            .filter(e => e.entity.meta.dataType === FEATURE)
+            .map((entity: EntityRecord<SearchResult>) =>
+
+              new olFormatGeoJSON().readFeature(entity.entity.data, {
+                dataProjection: entity.entity.data.projection,
+                featureProjection: this.map.projection
+              })
+            )
+            const totalExtent = computeOlFeaturesExtent(this.map, searchResultsOlFeatures)
+            this.map.viewController.zoomToExtent(totalExtent);
+        });
       }
       this.searchBarTerm = this.routeParams['search'];
     }

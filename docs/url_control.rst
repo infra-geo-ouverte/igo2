@@ -132,6 +132,8 @@ Sélection du contexte
             - **sf=1** permet de zoomer sur le premier résultat
         - search=1000000&exactMatch=1
             - **exactMatch=1** permet de conserver dans la liste des résultats que ceux ayant un match exact. Controle par URL pour la 1ère recherche par url seulement.
+        - search=915%23adresse&ztr=1
+            - **ztr=1** Zoom To Result (ztr) permet de zoomer sur l'étendue de tous les résultats de recherche
  
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?search=feu&zoom=18
