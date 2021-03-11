@@ -566,6 +566,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearchTermChange(term?: string) {
+    if (this.routeParams?.search &&  term !== this.routeParams.search) {      
+      this.searchState.deactivateCustomFilterTermStrategy();
+  }
+
     this.searchState.setSearchTerm(term);
     const termWithoutHashtag = term.replace(/(#[^\s]*)/g, '').trim();
     if (termWithoutHashtag.length < 2) {
@@ -698,6 +702,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
     this.searchStore.clear();
     this.searchState.setSelectedResult(undefined);
+    this.searchState.deactivateCustomFilterTermStrategy();
   }
 
   private getQuerySearchSource(): SearchSource {
@@ -946,7 +951,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private readFocusFirst() {
     if (this.routeParams['sf'] === '1' && this.termDefinedInUrl) {
-      const entities$$ = this.searchStore.entities$
+      const entities$$ = this.searchStore.stateView.all$()
         .pipe(
           skipWhile((entities) => entities.length === 0),
           debounceTime(500),
@@ -965,6 +970,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   private readSearchParams() {
     if (this.routeParams['search']) {
       this.termDefinedInUrl = true;
+      if (this.routeParams['exactMatch'] === '1') {
+        this.searchState.activateCustomFilterTermStrategy()
+      }
       this.searchBarTerm = this.routeParams['search'];
     }
   }
