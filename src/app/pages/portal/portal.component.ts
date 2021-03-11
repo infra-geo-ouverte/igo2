@@ -130,7 +130,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
-  public termSplitter = "|";
+  public termSplitter = '|';
   public termDefinedInUrlTriggered = false;
   private addedLayers$$: Subscription[] = [];
   public forceCoordsNA = false;
@@ -312,7 +312,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window['IGO'] = this;
-    this.searchState.searchTermSplitter$.next(this.termSplitter)
+    this.searchState.searchTermSplitter$.next(this.termSplitter);
 
     this.initWelcomeWindow();
 
@@ -569,7 +569,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearchTermChange(term?: string) {
-    if (this.routeParams?.search &&  term !== this.routeParams.search) {      
+    if (this.routeParams?.search &&  term !== this.routeParams.search) {
       this.searchState.deactivateCustomFilterTermStrategy();
   }
 
@@ -974,10 +974,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.routeParams['search']) {
       this.termDefinedInUrl = true;
       if (this.routeParams['exactMatch'] === '1') {
-        this.searchState.activateCustomFilterTermStrategy()
+        this.searchState.activateCustomFilterTermStrategy();
       }
       if (this.routeParams['ztr'] === '1') {
-        
         const entities$$ = this.searchStore.stateView.all$()
         .pipe(
           skipWhile((entities) => entities.length === 0),
@@ -989,13 +988,12 @@ export class PortalComponent implements OnInit, OnDestroy {
           const searchResultsOlFeatures = entities
             .filter(e => e.entity.meta.dataType === FEATURE)
             .map((entity: EntityRecord<SearchResult>) =>
-
               new olFormatGeoJSON().readFeature(entity.entity.data, {
                 dataProjection: entity.entity.data.projection,
                 featureProjection: this.map.projection
               })
-            )
-            const totalExtent = computeOlFeaturesExtent(this.map, searchResultsOlFeatures)
+            );
+            const totalExtent = computeOlFeaturesExtent(this.map, searchResultsOlFeatures);
             this.map.viewController.zoomToExtent(totalExtent);
         });
       }
