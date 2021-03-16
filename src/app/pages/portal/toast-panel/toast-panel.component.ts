@@ -434,9 +434,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           feature1,
           this.map.projection
         );
-        this.abstractFocusedOrSelectedResult.meta.style = getSelectedMarkerStyle(
-          this.abstractFocusedOrSelectedResult
-        );
+        this.abstractFocusedOrSelectedResult.meta.style = getSelectedMarkerStyle({feature: this.abstractFocusedOrSelectedResult});
         this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
         this.map.overlay.addFeature(
           this.abstractFocusedOrSelectedResult,
@@ -461,7 +459,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.focusedResult$.next(result);
     this.map.overlay.removeFeature(result.data);
 
-    result.data.meta.style = getSelectedMarkerStyle(result.data);
+    result.data.meta.style = getSelectedMarkerStyle({feature: result.data});
     result.data.meta.style.setZIndex(2000);
     this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -473,7 +471,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
     this.map.overlay.removeFeature(result.data);
 
-    result.data.meta.style = getMarkerStyle(result.data);
+    result.data.meta.style = getMarkerStyle({feature: result.data});
     result.data.meta.style.setZIndex(undefined);
     this.map.overlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -492,10 +490,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     const features = [];
     for (const feature of this.store.all()) {
       if (feature.meta.id === result.meta.id) {
-        feature.data.meta.style = getSelectedMarkerStyle(feature.data);
+        feature.data.meta.style = getSelectedMarkerStyle({feature: feature.data});
         feature.data.meta.style.setZIndex(2000);
       } else {
-        feature.data.meta.style = getMarkerStyle(feature.data);
+        feature.data.meta.style = getMarkerStyle({feature: feature.data});
       }
       features.push(feature.data);
     }
@@ -524,7 +522,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
     const features = [];
     for (const feature of this.store.all()) {
-      feature.data.meta.style = getMarkerStyle(feature.data);
+      feature.data.meta.style = getMarkerStyle({feature: feature.data});
       features.push(feature.data);
     }
     this.map.overlay.setFeatures(features, FeatureMotion.None, 'map');
