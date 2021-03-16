@@ -22,11 +22,11 @@ interface Environment {
     };
     queryOverlayStyle?: {
       selection?: CommonVectorStyleOptions,
-      focus?: CommonVectorStyleOptions 
+      focus?: CommonVectorStyleOptions
     };
     searchOverlayStyle?: {
       selection?: CommonVectorStyleOptions,
-      focus?: CommonVectorStyleOptions 
+      focus?: CommonVectorStyleOptions
     };
     auth?: AuthOptions;
     catalog?: CatalogServiceOptions;
@@ -60,7 +60,7 @@ export const environment: Environment = {
         strokeColor: undefined,         // line and poly
         strokeWidth: undefined          // line and poly
       }
-    },    
+    },
     queryOverlayStyle: {
       focus: {
         markerColor: undefined,         // marker fill

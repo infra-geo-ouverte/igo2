@@ -440,7 +440,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
             { feature: this.abstractFocusedOrSelectedResult },
             this.searchState.searchOverlayStyleSelection));
       this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
-      this.map.overlay.addFeature(
+      this.map.queryResultsOverlay.addFeature(
         this.abstractFocusedOrSelectedResult,
         FeatureMotion.None
       );
@@ -449,7 +449,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   private clearFeatureEmphasis() {
     if (this.abstractFocusedOrSelectedResult) {
-      this.map.overlay.removeFeature(this.abstractFocusedOrSelectedResult);
+      this.map.queryResultsOverlay.removeFeature(this.abstractFocusedOrSelectedResult);
       this.abstractFocusedOrSelectedResult = undefined;
     }
   }
@@ -460,14 +460,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   focusResult(result: SearchResult<Feature>) {
     this.focusedResult$.next(result);
-    this.map.overlay.removeFeature(result.data);
+    this.map.queryResultsOverlay.removeFeature(result.data);
 
     result.data.meta.style = getSelectedMarkerStyle(
       Object.assign({},
         { feature: result.data },
         this.searchState.searchOverlayStyleSelection));
     result.data.meta.style.setZIndex(2000);
-    this.map.overlay.addFeature(result.data, FeatureMotion.None);
+    this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
 
   unfocusResult(result: SearchResult<Feature>, force?) {
@@ -475,14 +475,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     if (!force && this.store.state.get(result).focused) {
       return;
     }
-    this.map.overlay.removeFeature(result.data);
+    this.map.queryResultsOverlay.removeFeature(result.data);
 
     result.data.meta.style = getMarkerStyle(
       Object.assign({},
         { feature: result.data },
-        this.searchState.searchOverlayStyleFocus))
+        this.searchState.searchOverlayStyleFocus));
     result.data.meta.style.setZIndex(undefined);
-    this.map.overlay.addFeature(result.data, FeatureMotion.None);
+    this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
 
   selectResult(result: SearchResult<Feature>) {
@@ -507,12 +507,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         feature.data.meta.style = getMarkerStyle(
           Object.assign({},
             { feature: feature.data },
-            this.searchState.searchOverlayStyleFocus))
+            this.searchState.searchOverlayStyleFocus));
       }
       features.push(feature.data);
     }
-    this.map.overlay.removeFeatures(features);
-    this.map.overlay.addFeatures(features, FeatureMotion.None);
+    this.map.queryResultsOverlay.removeFeatures(features);
+    this.map.queryResultsOverlay.addFeatures(features, FeatureMotion.None);
 
     if (this.zoomAuto) {
       const localOlFeature = this.format.readFeature(
@@ -539,15 +539,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       feature.data.meta.style = getMarkerStyle(
         Object.assign({},
           { feature: feature.data },
-          this.searchState.searchOverlayStyleFocus))
+          this.searchState.searchOverlayStyleFocus));
       features.push(feature.data);
     }
-    this.map.overlay.setFeatures(features, FeatureMotion.None, 'map');
+    this.map.queryResultsOverlay.setFeatures(features, FeatureMotion.None, 'map');
   }
 
   clear() {
     this.clearFeatureEmphasis();
-    this.map.overlay.removeFeatures(this.store.all().map((f) => f.data));
+    this.map.queryResultsOverlay.clear();
     this.store.clear();
     this.unselectResult();
   }
