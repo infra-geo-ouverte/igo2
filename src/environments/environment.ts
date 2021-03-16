@@ -10,7 +10,8 @@ import {
   SearchSourceOptions,
   CatalogServiceOptions,
   Projection,
-  ImportExportServiceOptions
+  ImportExportServiceOptions,
+  CommonVectorStyleOptions
 } from '@igo2/geo';
 
 interface Environment {
@@ -18,6 +19,14 @@ interface Environment {
   igo: {
     app: {
       forceCoordsNA: boolean;
+    };
+    queryOverlayStyle?: {
+      selection?: CommonVectorStyleOptions,
+      focus?: CommonVectorStyleOptions 
+    };
+    searchOverlayStyle?: {
+      selection?: CommonVectorStyleOptions,
+      focus?: CommonVectorStyleOptions 
     };
     auth?: AuthOptions;
     catalog?: CatalogServiceOptions;
@@ -35,6 +44,38 @@ export const environment: Environment = {
   igo: {
     app: {
       forceCoordsNA: true
+    },
+    searchOverlayStyle: {
+      focus: {
+        markerColor: undefined,         // marker fill
+        fillColor: undefined,           // poly
+        outlineColor: undefined,        // marker contour
+        strokeColor: undefined,         // line and poly
+        strokeWidth: undefined          // line and poly
+      },
+      selection: {
+        markerColor: undefined,         // marker fill
+        fillColor: undefined,           // poly
+        outlineColor: undefined,        // marker contour
+        strokeColor: undefined,         // line and poly
+        strokeWidth: undefined          // line and poly
+      }
+    },    
+    queryOverlayStyle: {
+      focus: {
+        markerColor: undefined,         // marker fill
+        fillColor: undefined,           // poly
+        outlineColor: undefined,        // marker contour
+        strokeColor: undefined,         // line and poly
+        strokeWidth: undefined          // line and poly
+      },
+      selection: {
+        markerColor: undefined,         // marker fill
+        fillColor: undefined,           // poly
+        outlineColor: undefined,        // marker contour
+        strokeColor: undefined,         // line and poly
+        strokeWidth: undefined          // line and poly
+      }
     },
     auth: {
       url: '/apis/users',
@@ -221,7 +262,8 @@ export const environment: Environment = {
         searchUrl: '/apis/icherche',
         order: 2,
         params: {
-          limit: '5'
+          limit: '5',
+          key: '9DYtDyvIjFbC8'
         }
       },
       coordinatesreverse: {
@@ -231,13 +273,17 @@ export const environment: Environment = {
         showInPointerSummary: true,
         searchUrl: '/apis/terrapi',
         order: 3,
-        enabled: true
+        enabled: true,
+        params: {
+          key: '9DYtDyvIjFbC8'
+        }
       },
       ilayer: {
         searchUrl: '/apis/icherche/layers',
         order: 4,
         params: {
-          limit: '5'
+          limit: '5',
+          key: '9DYtDyvIjFbC8'
         }
       },
       cadastre: {
