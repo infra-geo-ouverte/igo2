@@ -5,6 +5,8 @@
     "open": "Open Menu"
   },
   "workspace": {
+    "open": "Open the table view",
+    "close": "Close the table view",
     "disabled" : {
       "resolution": "The workspace is not available at this resolution",
       "visible": "The layer is not loaded. Try to set the layer visibility."
@@ -64,6 +66,8 @@
       "spatial-filter": "Spatial filter allow to extract entities by predefined or drawn zone.",
       "measurer-tool-title": "MEASURER",
       "measurer-tool": "For distance, perimeter and ground area calculation.",
+      "draw-tool-title": "DRAW",
+      "draw-tool": "drawing points, lines, polygons and circles on the map.",
       "directions-tool-title": "DIRECTIONS",
       "directions-tool": "Allow route creation based on departure, arrival and intermediate stop.",
       "catalog-tool-title": "DATA CATALOG",

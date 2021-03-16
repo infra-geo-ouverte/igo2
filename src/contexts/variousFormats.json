@@ -3,7 +3,7 @@
     "base": "_base",
     "layers": [
       {
-        "title": "MSP Tel. Urgence",
+        "title": "WMS - MSP Tel. Urgence",
         "sourceOptions": {
           "type": "wms",
           "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
@@ -23,7 +23,7 @@
           "queryable": true,
           "queryTitle": "nomcartrou",
           "type": "mvt",
-          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=lieuhabite&map.imagetype=mvt"
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=lieuhabite&map.imagetype=mvt"
         }
       },
       {
@@ -62,7 +62,7 @@
         "sourceOptions": {
           "queryable": true,
           "queryTitle": "identificationDesTravaux",
-          "url": "http://geoegl.msp.gouv.qc.ca/apis/ws/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
           "type": "cluster",
           "distance": 50
         }
@@ -93,28 +93,31 @@
         }
       },
       {
-        "title": "Arcgis Rest",
+        "title": "Geojson sur DQ (pas de service)",
+        "id": "dq1",
         "sourceOptions": {
-          "type": "arcgisrest",
-          "layer": "2",
+          "type": "vector",
+          "url": "https://www.donneesquebec.ca/recherche/dataset/f647f5ed-a8f3-4a47-8ceb-977cbf090675/resource/68e0e20a-415d-44f5-af82-a90311784616/download/bornes-incendies.geojson",
           "queryable": true,
-          "url":
-            "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
-          "queryFormat": "esrijson"
+          "queryFormat": "geojson",
+          "queryTitle": "Le titre",
+
+          "formatOptions": {
+            "dataProjection": "EPSG:4326",
+            "featureProjection":"EPSG:3857"
+          }
         }
       },
       {
-        "title": "Tile Arcgis Rest",
+        "title": "Vector geojson d'appel WFS",
+        "id": "vector2",
         "sourceOptions": {
-          "type": "tilearcgisrest",
-          "layer": "1",
+          "type": "vector",
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
           "queryable": true,
-          "url":
-            "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
-          "queryFormat": "esrijson"
+          "queryFormat": "geojson",
+          "queryTitle": "desclocal"
         }
       }
-
     ]
   }
-  

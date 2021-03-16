@@ -1,3 +1,59 @@
+## [1.6.4](https://github.com/infra-geo-ouverte/igo2/compare/1.6.3...1.6.4) (2021-03-15)
+
+
+### Bug Fixes
+
+* **interactiveTour:** uncheck the select multiple option on tour. ([#591](https://github.com/infra-geo-ouverte/igo2/issues/591)) ([b87e4ca](https://github.com/infra-geo-ouverte/igo2/commit/b87e4ca4a7d6735f1b2cd984cbcaacd30048936e))
+
+
+### Features
+
+* **deps:** upgrade igo2-lib ([d2f214c](https://github.com/infra-geo-ouverte/igo2/commit/d2f214ccbb72e936c2ebb33c55a03f23a484c035))
+
+
+
+## [1.6.3](https://github.com/infra-geo-ouverte/igo2/compare/1.6.2...1.6.3) (2021-02-23)
+
+
+### Bug Fixes
+
+* **interactiveTour-mapTools:** works when the legend tab is selected ([5e5b3b0](https://github.com/infra-geo-ouverte/igo2/commit/5e5b3b08d37298b43a7533fa824579dd88b165cc))
+
+
+### Features
+
+* **export:** Export format, restricted list by layer, examples ([#588](https://github.com/infra-geo-ouverte/igo2/issues/588)) ([3ad23f1](https://github.com/infra-geo-ouverte/igo2/commit/3ad23f17505d7a44a8b4ac7918fb7494a51b5993))
+* **igo2-lib:** upgrade to 1.6.3 ([883f71b](https://github.com/infra-geo-ouverte/igo2/commit/883f71b3955b8fc63da97c076ec64580c1ac46fd))
+
+
+
+## [1.6.2](https://github.com/infra-geo-ouverte/igo2/compare/1.6.1...1.6.2) (2021-02-15)
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.6.2 ([97ce3d4](https://github.com/infra-geo-ouverte/igo2/commit/97ce3d443d05669283e7fbfe4f20cde00a579cd8))
+
+
+
+## [1.6.1](https://github.com/infra-geo-ouverte/igo2/compare/1.6.0...1.6.1) (2021-02-02)
+
+
+### Features
+
+* **igo2:** upgrade to 1.6.1 ([3f74e01](https://github.com/infra-geo-ouverte/igo2/commit/3f74e0111a272e2d06892e8066d93d37704aa2a4))
+
+
+
+# [1.6.0](https://github.com/infra-geo-ouverte/igo2/compare/1.5.3...1.6.0) (2021-02-01)
+
+
+### Features
+
+* **igo2:** upgrade to 1.6.0 ([f3904ad](https://github.com/infra-geo-ouverte/igo2/commit/f3904adae48c01d435f88a31c84d8af7bcb9ca14))
+
+
+
 ## [1.5.3](https://github.com/infra-geo-ouverte/igo2/compare/1.5.2...1.5.3) (2020-11-19)
 
 

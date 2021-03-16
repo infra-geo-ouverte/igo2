@@ -1,5 +1,4 @@
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
-[![Build Status](https://travis-ci.org/infra-geo-ouverte/igo2.svg?branch=master)](https://travis-ci.org/infra-geo-ouverte/igo2)
 [![Dependencies Status](https://david-dm.org/infra-geo-ouverte/igo2.svg)](https://david-dm.org/infra-geo-ouverte/igo2)
 [![devDependencies Status](https://david-dm.org/infra-geo-ouverte/igo2/dev-status.svg)](https://david-dm.org/infra-geo-ouverte/igo2?type=dev)
 [![Known Vulnerabilities](https://snyk.io/test/github/infra-geo-ouverte/igo2/badge.svg)](https://snyk.io/test/github/infra-geo-ouverte/igo2)
@@ -19,7 +18,7 @@ IGO2 a été initié par l'administration publique du Québec (Canada) et issu d
 ### What is IGO?
 
 IGO2 (for Open GIS Infrastructure - version 2.0) is a free open source Web Geospatial solution developed at first in Quebec, Canada based on [Angular - Material](https://github.com/angular/angular), [OpenLayers](https://github.com/openlayers/openlayers) and [IGO2lib](https://github.com/infra-geo-ouverte/igo2-lib).
-IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and Mobile and many more available at [http://igo2.readthedocs.io/fr/latest/english.html](http://igo2.readthedocs.io/fr/latest/english.html). Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
+IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and Mobile and many more available at [https://igo2.readthedocs.io/fr/latest/english.html](https://igo2.readthedocs.io/fr/latest/english.html). Since this project is open source, anyone can contribute as long as they share their work on the same open source [LICENCE LGPL-Style](LICENSE_ENGLISH.txt). All contributors in IGO keep their property rights.
 
 ---
 
@@ -31,7 +30,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 - [Installation](#installation-et-démarrage)
 - [Démo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Démo d'IGO2 de Données Québec](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
-- [Documentation](http://igo2.readthedocs.io/fr/latest/)
+- [Documentation](https://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests)
 - [Contribuer](#contribuer)
 
@@ -45,7 +44,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 - [Installation](#installation-en)
 - [Demo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Demo IGO2 from Open Data Quebec (Canada)](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
-- [Documentation (translation is not yet done)](http://igo2.readthedocs.io/fr/latest/)
+- [Documentation (translation is not yet done)](https://igo2.readthedocs.io/fr/latest/)
 - [Tests](#tests-en)
 - [Contribute](#contribution)
 
@@ -53,6 +52,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 
 ## Téléchargement
 
+- [Version 1.6.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.3/igo2.zip)
 - [Version 1.5.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.5.3/igo2.zip)
 - [Version 1.4.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.1/igo2.zip)
 - [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)
@@ -124,6 +124,7 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ## Download
 
+- [Version 1.6.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.3/igo2.zip)
 - [Version 1.5.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.5.3/igo2.zip)
 - [Version 1.4.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.1/igo2.zip)
 - [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)

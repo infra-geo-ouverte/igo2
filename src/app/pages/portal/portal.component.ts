@@ -51,10 +51,6 @@ import {
   CapabilitiesService,
   sourceCanSearch,
   sourceCanReverseSearch,
-  generateWMSIdFromSourceOptions,
-  generateWMTSIdFromSourceOptions,
-  WMSDataSourceOptions,
-  WMTSDataSourceOptions,
   FEATURE,
   ImportService,
   handleFileImportError,
@@ -62,7 +58,8 @@ import {
   featureFromOl,
   QueryService,
   WfsWorkspace,
-  FeatureWorkspace
+  FeatureWorkspace,
+  generateIdFromSourceOptions
 } from '@igo2/geo';
 
 import {
@@ -88,6 +85,7 @@ import { HttpClient } from '@angular/common/http';
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { ObjectUtils } from '@igo2/utils';
 
 @Component({
   selector: 'app-portal',
@@ -107,6 +105,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasGeolocateButton = true;
+  public showRotationButtonIfNoRotation = false;
   public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
@@ -128,6 +127,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
+  public termDefinedInUrlTriggered = false;
   private addedLayers$$: Subscription[] = [];
   public forceCoordsNA = false;
 
@@ -286,6 +286,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton =
     this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton') ;
+    this.showRotationButtonIfNoRotation =
+    this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ? false : this.configService.getConfig('showRotationButtonIfNoRotation') ;
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
       'hasFeatureEmphasisOnSelection'
@@ -941,11 +943,16 @@ export class PortalComponent implements OnInit, OnDestroy {
   private readFocusFirst(params: Params) {
     if (params['sf'] === '1' && this.termDefinedInUrl) {
       const entities$$ = this.searchStore.entities$
-        .pipe(debounceTime(500), take(1))
+        .pipe(
+          skipWhile((entities) => entities.length === 0),
+          debounceTime(500),
+          take(1)
+        )
         .subscribe((entities) => {
           entities$$.unsubscribe();
-          if (entities.length) {
+          if (entities.length && !this.termDefinedInUrlTriggered) {
             this.computeFocusFirst();
+            this.termDefinedInUrlTriggered = true;
           }
         });
     }
@@ -971,72 +978,80 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private readLayersQueryParams(params: Params) {
-    this.readLayersQueryParamsWMS(params);
-    this.readLayersQueryParamsWMTS(params);
+    this.readLayersQueryParamsByType(params, 'wms');
+    this.readLayersQueryParamsByType(params, 'wmts');
+    this.readLayersQueryParamsByType(params, 'arcgisrest');
+    this.readLayersQueryParamsByType(params, 'imagearcgisrest');
+    this.readLayersQueryParamsByType(params, 'tilearcgisrest');
     this.readVectorQueryParams(params);
   }
 
-  private readLayersQueryParamsWMS(params: Params) {
-    if ((params['layers'] || params['wmsLayers']) && params['wmsUrl']) {
-      const nameParamLayers = params['wmsLayers'] ? 'wmsLayers' : 'layers'; // for maintain compatibility
-      const layersByService = params[nameParamLayers].split('),(');
-      const urls = params['wmsUrl'].split(',');
-      let cnt = 0;
-      urls.forEach((url) => {
-        const currentLayersByService = this.extractLayersByService(
-          layersByService[cnt]
-        );
-        currentLayersByService.forEach((layer) => {
-          const layerFromUrl = layer.split(':igoz');
-          const layerOptions = {
-            url: url,
-            params: { LAYERS: layerFromUrl[0] }
-          };
-          const id = generateWMSIdFromSourceOptions(
-            layerOptions as WMSDataSourceOptions
-          );
-          const visibility = this.computeLayerVisibilityFromUrl(params, id);
-          this.addWmsLayerByName(
-            url,
-            layerFromUrl[0],
-            visibility,
-            parseInt(layerFromUrl[1] || 1000, 10)
-          );
-        });
-        cnt += 1;
-      });
+  private readLayersQueryParamsByType(params: Params, type) {
+    let nameParamLayersKey;
+    let urlsKey;
+    switch (type) {
+      case 'wms':
+        if ((params['layers'] || params['wmsLayers']) && params['wmsUrl']) {
+          urlsKey = 'wmsUrl';
+          nameParamLayersKey = params['wmsLayers'] ? 'wmsLayers' : 'layers'; // for maintain compatibility
+        }
+        break;
+      case 'wmts':
+        if (params['wmtsLayers'] && params['wmtsUrl']) {
+          urlsKey = 'wmtsUrl';
+          nameParamLayersKey = 'wmtsLayers';
+        }
+        break;
+      case 'arcgisrest':
+        if (params['arcgisLayers'] && params['arcgisUrl']) {
+          urlsKey = 'arcgisUrl';
+          nameParamLayersKey = 'arcgisLayers';
+        }
+        break;
+      case 'imagearcgisrest':
+        if (params['iarcgisLayers'] && params['iarcgisUrl']) {
+          urlsKey = 'iarcgisUrl';
+          nameParamLayersKey = 'iarcgisLayers';
+        }
+        break;
+      case 'tilearcgisrest':
+        if (params['tarcgisLayers'] && params['tarcgisUrl']) {
+          urlsKey = 'tarcgisUrl';
+          nameParamLayersKey = 'tarcgisLayers';
+        }
+        break;
     }
-  }
+    if (!nameParamLayersKey || !urlsKey) {
+      return;
+    }
+    const layersByService = params[nameParamLayersKey].split('),(');
+    const urls = params[urlsKey].split(',');
 
-  private readLayersQueryParamsWMTS(params: Params) {
-    if (params['wmtsLayers'] && params['wmtsUrl']) {
-      const layersByService = params['wmtsLayers'].split('),(');
-      const urls = params['wmtsUrl'].split(',');
-      let cnt = 0;
-      urls.forEach((url) => {
-        const currentLayersByService = this.extractLayersByService(
-          layersByService[cnt]
-        );
-        currentLayersByService.forEach((layer) => {
-          const layerFromUrl = layer.split(':igoz');
-          const layerOptions = {
-            url: url,
-            layer: layerFromUrl[0]
-          };
-          const id = generateWMTSIdFromSourceOptions(
-            layerOptions as WMTSDataSourceOptions
-          );
-          const visibility = this.computeLayerVisibilityFromUrl(params, id);
-          this.addWmtsLayerByName(
-            url,
-            layerFromUrl[0],
-            visibility,
-            parseInt(layerFromUrl[1] || 1000, 10)
-          );
+    let cnt = 0;
+    urls.forEach((url) => {
+      const currentLayersByService = this.extractLayersByService(
+        layersByService[cnt]
+      );
+      currentLayersByService.forEach((layer) => {
+        const layerFromUrl = layer.split(':igoz');
+        const layerOptions = ObjectUtils.removeUndefined({
+          type,
+          url: url,
+          layer: layerFromUrl[0],
+          params: type === 'wms' ? { LAYERS: layerFromUrl[0] } : undefined
         });
-        cnt += 1;
+        const id = generateIdFromSourceOptions(layerOptions);
+        const visibility = this.computeLayerVisibilityFromUrl(params, id);
+        this.addLayerFromURL(
+          url,
+          layerFromUrl[0],
+          type,
+          visibility,
+          parseInt(layerFromUrl[1] || 1000, 10)
+        );
       });
-    }
+      cnt += 1;
+    });
   }
 
   private readVectorQueryParams(params: Params) {
@@ -1087,61 +1102,43 @@ export class PortalComponent implements OnInit, OnDestroy {
       : outLayersByService;
     return outLayersByService.split(',');
   }
-
-  private addWmsLayerByName(
+  private addLayerFromURL(
     url: string,
     name: string,
+    type: 'wms' | 'wmts' | 'arcgisrest'| 'imagearcgisrest' | 'tilearcgisrest',
     visibility: boolean = true,
     zIndex: number = 100000
   ) {
     if (!this.contextLoaded) {
       return;
     }
-    this.addedLayers$$.push(
-      this.layerService
-        .createAsyncLayer({
-          zIndex: zIndex,
-          visible: visibility,
-          sourceOptions: {
-            optionsFromCapabilities: true,
-            optionsFromApi: true,
-            type: 'wms',
-            url: url,
-            params: {
-              layers: name
-            }
-          }
-        })
-        .subscribe((l) => {
-          this.map.addLayer(l);
-        })
-    );
-  }
-
-  private addWmtsLayerByName(
-    url: string,
-    name: string,
-    visibility: boolean = true,
-    zIndex: number = 100000
-  ) {
-    if (!this.contextLoaded) {
-      return;
+    const commonSourceOptions = {
+      optionsFromCapabilities: true,
+      optionsFromApi: true,
+      crossOrigin: true,
+      type,
+      url
+    };
+    const arcgisClause = (type === 'arcgisrest' || type === 'imagearcgisrest' || type === 'tilearcgisrest');
+    let sourceOptions = {
+      version: type === 'wmts' ? '1.0.0' : undefined,
+      queryable: arcgisClause  ? true : false,
+      queryFormat: arcgisClause  ? 'esrijson' : undefined,
+      layer: name
+    };
+    if (type === 'wms') {
+      sourceOptions =  { params: {LAYERS: name}} as any;
     }
+
+    sourceOptions = ObjectUtils.removeUndefined(Object.assign({}, sourceOptions, commonSourceOptions));
+
     this.addedLayers$$.push(
       this.layerService
         .createAsyncLayer({
           zIndex: zIndex,
           visible: visibility,
-          sourceOptions: {
-            optionsFromCapabilities: true,
-            type: 'wmts',
-            url: url,
-            crossOrigin: true,
-            // matrixSet: 'GoogleMapsCompatibleExt2:epsg:3857',
-            version: '1.0.0',
-            layer: name
-          }
-        } as any)
+          sourceOptions
+        })
         .subscribe((l) => {
           this.map.addLayer(l);
         })
@@ -1180,10 +1177,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     // After, managing named layer by id (context.json OR id from datasource)
     visiblelayers = visibleOnLayersParams.split(',');
     invisiblelayers = visibleOffLayersParams.split(',');
-    if (visiblelayers.indexOf(currentLayerid) > -1) {
+    if (visiblelayers.indexOf(currentLayerid) > -1  || visiblelayers.indexOf(currentLayerid.toString()) > -1) {
       visible = true;
     }
-    if (invisiblelayers.indexOf(currentLayerid) > -1) {
+    if (invisiblelayers.indexOf(currentLayerid) > -1 || invisiblelayers.indexOf(currentLayerid.toString()) > -1) {
       visible = false;
     }
     return visible;

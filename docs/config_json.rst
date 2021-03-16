@@ -90,6 +90,12 @@ Résumé
                Permet de définir s'il y aura un bouton de 
                géolocalisation par le fureteur dans l'application
          -
+       * - `showRotationButtonIfNoRotation`_
+         - Boolean
+         - .. line-block::
+               Permet de définir si le bouton de réinitialisation de la
+               rotation est visible si aucune rotation n'est active.
+         -
        * - `hasExpansionPanel`_
          - Boolean
          - .. line-block::
@@ -314,7 +320,8 @@ Catalog
             - Service WMS
             - Service WMTS
             - Service ArcGIS REST
-            - Sercice Tile ArcGIS Rest
+            - Service Image ArcGIS Rest
+            - Service Tile ArcGIS Rest
 
         Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
@@ -347,10 +354,10 @@ Exemples
             "catalog": {
                   "sources": [
                   {
-                      "id": "Arcgis Rest",
-                      "title": "Arcgis Rest",
+                      "id": "Image Arcgis Rest",
+                      "title": "Image Arcgis Rest",
                       "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
-                      "type": "arcgisrest",
+                      "type": "imagearcgisrest",
                       "sourceOptions": {
                           "queryable": true,
                           "idColumn": "OBJECTID"
@@ -398,10 +405,10 @@ Exemples
                       "title": "(composite catalog) with group imposed",
                       "composite": [
                             {
-                            "id": "tq_swtq",
-                            "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
-                            "regFilters": ["zpegt"],
-                            "groupImpose": {"id": "zpegt", "title": "zpegt"}
+                              "id": "tq_swtq",
+                              "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+                              "regFilters": ["zpegt"],
+                              "groupImpose": {"id": "zpegt", "title": "zpegt"}
                             },
                             {
                               "id": "Gououvert",
@@ -419,8 +426,44 @@ Exemples
                               "groupImpose": {"id": "cartetopo", "title": "Carte topo échelle 1/20 000"}
                             }
                       ]
-                }
-                  ]
+                  },
+                  {
+                      "id": "forced_properties",
+                      "title": "Forced properties catalog (layer name and abstract)",
+                      "composite": [
+                              {
+                                "id": "forcedProperties_wmts",
+                                "url": "https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images",
+                                "type": "wmts",
+                                "setCrossOriginAnonymous": true,
+                                "matrixSet": "EPSG_3857",
+                                "version": "1.0.0",
+                                "forcedProperties": [{
+                                  "layerName": "BDTQ-20K_Allegee",
+                                  "title": "Nouveau nom pour cette couche WMTS"
+                                }]
+                              },
+                              {
+                                "id": "forcedProperties_wms",
+                                "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swt",
+                                "type": "wms",
+                                "forcedProperties": [{
+                                  "layerName": "lieuhabite",
+                                  "title": "Nouveau nom pour cette couche WMS"
+                                }]
+                              },
+                              {
+                                "id": "forcedProperties_arcgisrest",
+                                "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer",
+                                "type": "imagearcgisrest",
+                                "forcedProperties": [{
+                                  "layerName": "Sediment substrate / Substrat sédimentaire",
+                                  "title": "Nouveau nom pour cette couche Image ArcGIS REST"
+                                }]
+                              },
+                       ]
+                  },
+                 ]
             }
 
 Propriétés
@@ -471,6 +514,12 @@ Propriétés - Objet Catalog
          - .. line-block::
                Nombre de résultats retournés par le serveur lors de requêtes **WMS** de GetFeatureInfo
          -
+         -
+       * - abstract
+         - String
+         - .. line-block::
+               Résumé des données contenues dans le catalogue
+         -
          - 5
        * - **id***
          - String
@@ -487,6 +536,16 @@ Propriétés - Objet Catalog
                Permet d'imposer l'utilisation d'un groupe à l'ensemble des couches appellées du catalogue.
                - id: Identifiant unique permettant de différencier les groupes entre eux.
                - title: Titre pour le groupe qui sera utilisé dans l'outil Catalog.
+         -
+         -
+       * - forcedProperties
+         - .. line-block::
+            layerName*: String,
+            title*: String
+         - .. line-block::
+               Permet d'imposer un nom à une couche spécifique.
+               - layerName: Nom de la couche dans le catalogue d'origine (propriété layer name). Permet d'aller chercher la couche en question dans le service.
+               - title: Nouveau titre pour la couche.
          -
          -
        * - matrixSet
@@ -731,6 +790,15 @@ hasGeolocateButton
         géolocalisation par le fureteur dans l'application
 
 
+********************************
+showRotationButtonIfNoRotation
+********************************
+
+    .. line-block::
+        Permet de définir si le bouton de réinitialisation de la
+        rotation est visible si aucune rotation n'est active. False par défaut.
+
+
 ***************
 ImportExport
 ***************
@@ -950,7 +1018,7 @@ Exemples
                   {
                         "media": ["desktop"],
                         "cssClass": "bottom-left",
-                        "link": "http://igouverte.org/",
+                        "link": "https://www.igouverte.org/",
                         "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
                         "imgSize": "30px",
                         "fontSize": "6pt",
@@ -993,7 +1061,7 @@ Projections
 
     .. line-block::
         Permet de définir une **liste** de projections non enregistrées par défault par IGO2 (Proj4). On parle ici de projection non mondiale ou à référence locale (ex: mtm, Lambert MTQ...)
-        Référez vous à : `http://epsg.io/ <http://epsg.io/>`_. Ils y définissent l'entièreté des paramètres nécessaires.
+        Référez vous à : `https://epsg.io/ <https://epsg.io/>`_. Ils y définissent l'entièreté des paramètres nécessaires.
 
 Exemple
 
@@ -1054,7 +1122,7 @@ Propriétés - Objet Projection
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
-        - `http://epsg.io/ <http://epsg.io/>`_
+        - `https://epsg.io/ <https://epsg.io/>`_
         - `igo2-lib/packages/geo/src/lib/map/shared/projection.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/projection.interfaces.ts>`_
         - `igo2-lib/blob/master/demo/src/environments/environment.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/demo/src/environments/environment.ts>`_
 
@@ -1273,7 +1341,7 @@ Exemple complet config.json
                     {
                       "media": ["desktop"],
                       "cssClass": "bottom-left",
-                      "link": "http://igouverte.org/",
+                      "link": "https://www.igouverte.org/",
                       "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
                       "imgSize": "30px",
                       "fontSize": "6pt",
@@ -1297,7 +1365,7 @@ Exemple complet config.json
                       "cssClass": "bottom-right",
                       "text": "© Gouvernement du Québec 2019",
                       "fontSize": "10pt",
-                      "link": "http://www.droitauteur.gouv.qc.ca/copyright.php",
+                      "link": "https://www.droitauteur.gouv.qc.ca/copyright.php",
                       "marginRight": "70px",
                       "marginBottom": "10px"
                     },
@@ -1314,7 +1382,7 @@ Exemple complet config.json
                     {
                       "media": ["mobile"],
                       "cssClass": "bottom-left",
-                      "link": "http://igouverte.org/",
+                      "link": "https://www.igouverte.org/",
                       "imgSrc": "./particular/images/2a-logo_bleu_sans_icone.png",
                       "imgSize": "33px",
                       "alt": "IGO",
@@ -1656,7 +1724,7 @@ Exemples
                         "baseLayer": true,
                         "sourceOptions": {
                         "type": "osm",
-                        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>"
+                        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>"
                         }
                   },
                   {
@@ -1665,7 +1733,7 @@ Exemples
                         "visible": false,
                         "sourceOptions": {
                         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "© <a href='https://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "type": "xyz",
                         "crossOrigin": "anonymous"
                         }
@@ -1675,7 +1743,7 @@ Exemples
                         "baseLayer": true,
                         "visible": false,
                         "sourceOptions": {
-                        "attributions": "<a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
                         "type": "xyz"
                         }

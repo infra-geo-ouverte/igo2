@@ -113,7 +113,7 @@ Exemples
                 "visible": false,
                 "sourceOptions": {
                         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='http://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "© <a href='https://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "type": "xyz",
                         "crossOrigin": "anonymous"
                 }
@@ -152,14 +152,12 @@ Propriétés
        * - id
          - string
          - .. line-block::
-               Identifiant unique de la couche à
-               l'échelle de l'application. Particulièrement
-               utile pour bâtir le lien pour le partage
-               de cartes.
-               Attention: si vous définissez un id,
-               la couche ajoutée par le catalogue
-               ou par la recherche sera considérée par l'app.
-               comme une couche différente,
+               Identifiant unique de la couche à l'échelle de l'application. 
+               Particulièrement utile pour bâtir le lien pour le partage
+               de cartes. Si vous avez plusieurs fois la même couche dans un context
+               vous devez avoir un id pour que le lien de partage foinctionne bien.
+               Attention: si vous définissez un id, la couche ajoutée par le catalogue
+               ou par la recherche sera considérée par l'app. comme une couche différente,
                vous aurez donc 2 fois la même couche.
          -
          - uuid
@@ -173,9 +171,13 @@ Propriétés
          -  objet `WorkspaceOptions`_
          - .. line-block::
                Permet de définir si une source possèdera une table
-               d'attribut dans l'application ainsi 
+               d'attribut dans l'application ainsi
                que ses propriétés associées.
-         - workspace: { enabled: true, minResolution: 0, maxResolution: 400}
+         - .. line-block::
+              workspace: 
+              { enabled: true, 
+              minResolution: 0, 
+              maxResolution: 400}
          - Voir dans l'objet `WorkspaceOptions`_
        * - minResolution
          - Number
@@ -205,24 +207,26 @@ Propriétés
          - Object{}
          - .. line-block::
                Définir la source pour les metadonnées. Lien pour
-               le bouton i de la couche -> 'i'. Si la balise url 
+               le bouton i de la couche -> 'i'. Si la balise url
                est configurée, elle permet de définir un url au choix.
-               Pour les WMS, si la couche wms a une balise dataUrl et que 
-               la source wms à l'option optionsFromCapabilities : true, 
+               Pour les WMS, si la couche wms a une balise dataUrl et que
+               la source wms à l'option optionsFromCapabilities : true,
                l'application ira récupérer le lien dans le service WMS.
                La valeur pilotée à préséance sur la valeur récupérée du service.
+               Pour les sources WMS, WMTS et ArcGISREST, si celui-ci n'est pas
+               défini, c'est l'abstract du catalogue qui sera utilisé.
                Les propriété permises sont:
                    - url
                    - extern
                    - keyword
-                   - abstract = résumé de la couche. Sert au tooltip ici bas.    
-         - {url: "http://www.igouverte.org/", extern: true}
+                   - abstract = résumé de la couche. Sert au tooltip ici bas.
+         - {url: "https://www.igouverte.org/", extern: true}
          -
        * - tooltip
          - Object{}
          - .. line-block::
                Permet de définir le type de tooltip à afficher sur survol de la couche
-               dans la table des matières (liste de couche).    
+               dans la table des matières (liste de couche).
                Les divers types sont:
                    - title
                    - abstract
@@ -233,8 +237,8 @@ Propriétés
          - .. line-block::
                {  type: 'title'
                     ou  'abstract'
-                    ou  'custom', 
-                  text: 'text à afficher si le type est custom' 
+                    ou  'custom',
+                  text: 'text à afficher si le type est custom'
                }
          - {  type: 'title'}
        * - opacity
@@ -306,7 +310,7 @@ LegendOptions
 
     .. line-block::
         Propriétés de l'objet legendOptions.
-        Permet de controler le rendu de légende. 
+        Permet de controler le rendu de légende.
 
 Exemples
 
@@ -320,7 +324,7 @@ Exemples
                   "stylesAvailable": [
                         { "name": "rain", "title": "Pluie" },
                         { "name": "raster", "title": "Défaut" }
-                  ] 
+                  ]
             }}
 
 Propriétés
@@ -361,9 +365,9 @@ Propriétés
        * - stylesAvailable
          - ItemStyleOptions[]
          - .. line-block::
-               Permet de modifier/contrôler la liste des styles provenant du 
-               service web. Correspond aux styles disponible pour le layer 
-               WMS tel que décrit dans le GetCapabilities WMS. 
+               Permet de modifier/contrôler la liste des styles provenant du
+               service web. Correspond aux styles disponible pour le layer
+               WMS tel que décrit dans le GetCapabilities WMS.
          - .. line-block::
                Ex:  "stylesAvailable": [
                   { "name": "raster", "title": "pixel" },
@@ -397,6 +401,7 @@ SourceOptions
         plus de détails.
 
         - `ArcGis`_
+        - `Image ArcGis`_
         - `Tile ArcGis`_
         - `Carto`_
         - `OSM`_
@@ -420,6 +425,7 @@ WorkspaceOptions
         plus de détails.
 
         - `ArcGis`_
+        - `Image ArcGis`_
         - `Tile ArcGis`_
         - `Carto`_
         - `OSM`_
@@ -437,8 +443,8 @@ WorkspaceOptions
 
     .. line-block::
         Permet de définir si une source possèdera une table
-        d'attribut dans l'application ainsi 
-        que ses propriétés associées. 
+        d'attribut dans l'application ainsi
+        que ses propriétés associées.
 
 Exemples
 
@@ -474,24 +480,24 @@ Propriétés
                true | false
          - .. line-block::
                Pour les sources vectorielles, true par défault.
-               Pour les wms avec des propriétés 
+               Pour les wms avec des propriétés
                WFS associées, false par défault
        * - minResolution
          - Number
          - .. line-block::
-               Indique la résolution minimale (grande échelle, très zoomé) 
-               à laquelle la table d'attribut pourra faire apparaitre des 
+               Indique la résolution minimale (grande échelle, très zoomé)
+               à laquelle la table d'attribut pourra faire apparaitre des
                enregistrements.
          - 0 à Infinity ou absent
-         - 
+         -
        * - maxResolution
          - Number
          - .. line-block::
-               Indique la résolution maximale (petite échelle, peu zoomé) 
-               à laquelle la table d'attribut pourra faire apparaitre des 
+               Indique la résolution maximale (petite échelle, peu zoomé)
+               à laquelle la table d'attribut pourra faire apparaitre des
                enregistrements.
          - 0 à Infinity ou absent
-         - 
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -542,19 +548,19 @@ Propriétés de LinkedLayersOptions
          - String
          - .. line-block::
                Identifiant de liaison de la présente couche.
-               Diffère du ID du la couche car cet id doit être 
-               connu au pilotage, pas seulement lors l'éxécution 
+               Diffère du ID du la couche car cet id doit être
+               connu au pilotage, pas seulement lors l'éxécution
                du code.
-         - 
-         - 
+         -
+         -
        * - links
          - :ref:`LayersLinkProperties[] <LayersLinkProperties>`
          - .. line-block::
-               Définit la liste des couches "enfant" liées 
+               Définit la liste des couches "enfant" liées
                ainsi que leurs propriété qui sont synchronisées.
                Obligatoire pour les couches parents.
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -580,8 +586,8 @@ Propriétés de LayersLinkProperties
        * - bidirectionnal
          - Boolean
          - .. line-block::
-               Indique si les 2 couches sont liées de manière 
-               bi-directionnelles. C'est à dire, si une modification 
+               Indique si les 2 couches sont liées de manière
+               bi-directionnelles. C'est à dire, si une modification
                de l'enfant est transférée au parent et inversement.
          - true | false
          - true
@@ -590,13 +596,13 @@ Propriétés de LayersLinkProperties
          - .. line-block::
                Liste des identifiants de liaison.
                C'est à dire, une liste des linkId des couches enfant.
-         - 
-         - 
+         -
+         -
        * - syncedDelete
          - Boolean
          - .. line-block::
-               Indique si les 2 couches doivent être supprimées 
-               simultanément lorsque une ou l'autre des couches 
+               Indique si les 2 couches doivent être supprimées
+               simultanément lorsque une ou l'autre des couches
                est supprimée de la liste des couches.
          - true | false
          - false
@@ -611,8 +617,8 @@ Propriétés de LayersLinkProperties
                    - maxResolution
                    - zIndex
                    - timeFilter => `Configuration filtre temporel WMS-T (timeFilter)`_
-         - 
-         - 
+         -
+         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -669,17 +675,17 @@ Propriétés
          - String
          - .. line-block::
                Les droits d'auteurs liés à la couche.
-         - 
+         -
          - .. line-block::
                Pour OpenStreetMap, la valeur par défaut est @OpenStreetMap contributors
        * - crossOrigin
          - String
          - .. line-block::
                Permet de définir l'entête de l'appel faite au serveur.
-               Permet entre autres, d'éviter les problématiques de CORS. 
+               Permet entre autres, d'éviter les problématiques de CORS.
                De manière plus commune, définir "crossOrigin": "anonymous".
          -  anonymous | use-credentials | null
-         - 
+         -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -693,6 +699,8 @@ ArcGis
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
+       Problématique observée pour les styles complexe. Même QGIS ne rends pas correctement les styles complexe.
+       https://github.com/infra-geo-ouverte/igo2-lib/issues/810
 
 
 Exemples
@@ -706,6 +714,32 @@ Exemples
                     "queryable": true,
                     "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
                     "queryFormat": "esrijson",
+                    "queryPrecision": 20 , // unité en mètres pour l'interrogation de la couche
+                    "idColumn": "OBJECTID"
+                }
+            }
+
+
+Image ArcGis
+===============
+
+    .. note::
+       Disponible actuellement mais la documentation est en cours de construction.
+       C'est la version qui effectue un seul appel pour toute l'étendu de la carte.
+
+
+Exemples
+
+      .. code:: json
+
+            {
+                "sourceOptions": {
+                    "type": "imagearcgisrest",
+                    "layer": "1",
+                    "queryable": true,
+                    "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                    "queryFormat": "esrijson",
+                    "queryPrecision": 20 , // unité en mètres pour l'interrogation de la couche
                     "idColumn": "OBJECTID"
                 }
             }
@@ -716,6 +750,8 @@ Tile ArcGis
 
     .. note::
        Disponible actuellement mais la documentation est en cours de construction.
+       C'est la version qui effectue plusieurs appels pour l'étendue de la carte.
+       Peut être conflictuel pour les étiquettes qui seront dupliqués pour chacune des tuiles.
 
 
 Exemples
@@ -729,6 +765,7 @@ Exemples
                     "queryable": true,
                     "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
                     "queryFormat": "esrijson",
+                    "queryPrecision": 20 , // unité en mètres pour l'interrogation de la couche
                     "idColumn": "OBJECTID"
                 }
             }
@@ -1034,17 +1071,52 @@ Liens
 Vecteur
 ===============
 
-    .. note::
-       Disponible actuellement mais la documentation est en cours de construction.
+
+.. line-block::
+  Source de donnée permettant d'afficher des données vectorielles provenant de fichier en ligne ou de service donnant des entitées.
+
+  La projection doit être EPSG:3857. Si ce n'est pas le cas il faut ajouter les paramètres dans formatOptions pour convertir.
+  Par exemple pour le format Geojson:
+      - dataProjection = la projection de la donnée source
+      - featureProjection = la projection IGO -> 3857
+  Les paramètres possibles dans formatOptions sont ratachés au format de openLayer.
+  Par exemple ici pour le `Geojson <https://openlayers.org/en/latest/apidoc/module-ol_format_GeoJSON-GeoJSON.html>`__
+
+  NB: Le site web ou est stockés le fichier, par exemple https://www.donneesquebec.ca doit être ajouté à la sécurité du site IGO et
+   le site IGO doit être ajouté à la sécurité du site de donnée.
+
+  NB2: Pour que le partage de carte fonctionne bien il est nécessaire d'ajouter un id à la couche
+
 
 Exemples
 
       .. code:: json
 
-            {"sourceOptions": {
+
+            {
+              "title": "Donnée geojson sur DQ (pas de service)",
+              "id": "vector1",
+              "sourceOptions": {
+                "type": "vector",
+                "url": "https://www.donneesquebec.ca/recherche/dataset/f647f5ed-a8f3-4a47-8ceb-977cbf090675/resource/68e0e20a-415d-44f5-af82-a90311784616/download/bornes-incendies.geojson"
+                "queryable": true,
+                "queryFormat": "geojson",
+                "queryTitle": "Le titre",
+                "formatOptions": {
+                  "dataProjection": "EPSG:4326",
+                  "featureProjection":"EPSG:3857"
+                },
+              }
+            },
+            {
+              "id": "vector2",
+              "title": "Geojson provenant d'un apel wfs",
+              "sourceOptions": {
+                  "queryable": true,
                   "type": "vector",
                   "url": "https://ws.mapserver.transports.gouv.qc.ca//swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson"
-            }}
+              }
+            }
 
 
 Websocket
@@ -1241,6 +1313,21 @@ Propriétés
                la donnée.
          - en secondes
          - Null si non définit
+       * - contentDependentLegend
+         - Boolean
+         - .. line-block::
+               Pour Mapserver et Geoserver, il est possible de retourner
+               la légende WMS du contenu de la carte et non pas toute la
+               légende de la couche. Exemple: Si ce paramètre est définit
+               à true et que vous zoomer sur un secteur dans lequel il y
+               seulement 1 classe de symbologie, la légende retournée sera
+               composée d'une seule couleur. Si vous zoomez a l'échelle
+               provinciale et que vous voyez tous les classes de données,
+               la légende retournée sera composée de toutes les classes de
+               la couche.
+               IMPORTANT: Ne tient pas compte des filtres OGC appliqués.
+         - true/false
+         - false
        * - queryable
          - Boolean
          - .. line-block::
@@ -1599,14 +1686,14 @@ Configuration filtre attributaire OGC (ogcFilters)
 ===================================================
 
   Permet de définir la configuration des filtres attributaires(OGC) qui seront appliqués par l'utilisateur sur la couche.
-  Plusieurs configuration de filtre sont disponibles. Par exemple, il est possible de créer des boutons sur lesquels l'utilisateur
+  Plusieurs configurations de filtre sont disponibles. Par exemple, il est possible de créer des boutons sur lesquels l'utilisateur
   pourra appuyer pour filtrer la couche affichée, de réaliser des groupes de filtre, ou bien de donner la possibilité à l'utilisateur
   de créer lui même ces propres filtres à l'aide des filtres avancés.
 
     - **Limitation**: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
     - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils ('tools'). (Voir :ref:`igoactiveogcFilter` et :ref:`igoogcFilter` dans la section outil )
     - Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField pour les champs à filtrer. Référez-vous à: :ref:`igosourceFieldsObject`
-
+    - Il est possible de définir plusieurs opérateurs sur un même filtre.
 
 
 Exemples
@@ -2860,6 +2947,7 @@ Outils (tools)
             - `catalogBrowser`_
             - `contextManager`_
             - `directions`_
+            - `draw`_
             - `activeOgcFilter`_
             - `ogcFilter`_
             - `activeTimeFilter`_
@@ -3147,7 +3235,7 @@ contextManager
 
         Si un contexte est non présent dans ce fichier, il ne sera pas mis à la disposition dans l'application.
         De ce fait, le seul moyen d'y accéder est par URL.
-            - http://votreDomaine/?context=nomDuContexteNonGéréParLeGestionnaireDeContexte
+            - ...votreDomaine/?context=nomDuContexteNonGéréParLeGestionnaireDeContexte
 
 Exemples
 
@@ -3297,6 +3385,64 @@ Liens
     - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/directions/directions-tool>`__
 
 
+draw
+===========
+
+    .. line-block::
+        Outil permettant de faire des dessins sur la carte.
+
+
+Exemples
+
+        .. code:: json
+
+            {
+                "name": "draw"
+            }
+
+Propriétés
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - icon
+         - String
+         - Icône dans la barre d'outil
+         - `MDI <https://materialdesignicons.com/>`__
+         - pencil
+       * - **name***
+         - String
+         -
+         - draw
+         -
+       * - title
+         - String
+         - .. line-block::
+               Le titre affiché dans l'application. Sujet aux traductions.
+               Si vous modifiez le titre par défaut, vous devez ajouter
+               ce titre dans les langues supportées par IGO2 (fr-en).
+                   - fichiers dans :ref:`Language <igolanguage>`.
+         -
+         - igo.integration.tools.directions
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Liens
+
+    - `directions-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/draw/drawing-tool>`__
+
+
 .. _igoogcFilter:
 
 ogcFilter
@@ -3307,13 +3453,13 @@ ogcFilter
         seulement les objets géométriques(points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
         configurés comme des boutons que l'utilisateur peut activer ou comme filtres avancés, dans ce cas c'est l'utilisateur qui doit
         saisir le champ, l'opérateur à appliquer ainsi que la valeur à filtrer.
-        
+
         | ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-        
+
         | Cet outil présente toutes les couches de la carte ayant un ou plusieurs filtres configurés. Comparativement à l'outil
-        
+
         activeOgcFilter qui lui présente uniquement le/les filtres de la couche active sélectionnée.
-        
+
         | NB: L'activation de l'outil se fait ici via "tools", mais la configuration de chaque filtre disponible doit se faire à l'intérieur de la couche dans les contextes.
         | layer -> sourceOptions -> ogcFilters
         | Référez-vous à:  :ref:`Configuration des filtres attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
@@ -3624,7 +3770,7 @@ Options
                Permet de controler la liste des projections disponible dans l'outil.
          - .. line-block::
                {
-               "projFromConfig": true, // Utiliser les projections définies dans la configuration 
+               "projFromConfig": true, // Utiliser les projections définies dans la configuration
                "nad83": true, // Utiliser le NAD83
                "wgs84": true, // Utiliser le WGS84
                "webMercator": true, // Utiliser le WebMercator (EPSG:3857)
@@ -3653,7 +3799,7 @@ Options
                "mtmZone": {
                  "minZone": 1,
                  "maxZone": 10
-               }}  
+               }}
        * - importExportType
          - String
          - .. line-block::
@@ -3666,8 +3812,8 @@ Options
          - Boolean
          - .. line-block::
                Permet d'afficher ou non les 2 types d'importation ou exportation (layer ou contexte)
-               Si false, le type définit précédemment, sera le seul type affiché. 
-               Se base sur l'option importExportType. 
+               Si false, le type définit précédemment, sera le seul type affiché.
+               Se base sur l'option importExportType.
          - .. line-block::
                true / false
          - .. line-block::
