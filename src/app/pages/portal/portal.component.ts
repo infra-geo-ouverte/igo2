@@ -358,7 +358,9 @@ export class PortalComponent implements OnInit, OnDestroy {
           this.toastPanelOpened = false;
         }
       });
-    this.readQueryParams();
+    this.map.ol.once('postrender', () => {
+      this.readQueryParams();
+    });
 
     this.onSettingsChange$.subscribe(() => {
       this.searchState.setSearchSettingsChange();
