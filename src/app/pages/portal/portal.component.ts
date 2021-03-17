@@ -222,7 +222,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get searchResultsGeometryEnabled(): boolean {
-    return this.searchState.searchResultsGeometryEnabled$.value
+    return this.searchState.searchResultsGeometryEnabled$.value;
   }
 
   get queryStore(): EntityStore<SearchResult> {
