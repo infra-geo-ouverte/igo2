@@ -978,7 +978,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (this.routeParams['exactMatch'] === '1') {
         this.searchState.activateCustomFilterTermStrategy();
       }
-      if (this.routeParams['ztr'] === '1') {
+      if (this.routeParams['search'] && !this.routeParams['zoom'] && this.routeParams['sf'] === '1') {
         const entities$$ = this.searchStore.stateView.all$()
         .pipe(
           skipWhile((entities) => entities.length === 0),
