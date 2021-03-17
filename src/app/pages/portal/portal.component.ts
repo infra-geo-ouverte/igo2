@@ -598,6 +598,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchStore.load(newResults);
   }
 
+  onSearchResultsGeometryStatusChange(value) {
+    this.searchState.searchResultsGeometryEnabled$.next(value);
+  }
+
   onSearchSettingsChange() {
     this.onSettingsChange$.next(true);
   }
