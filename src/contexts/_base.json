@@ -34,6 +34,7 @@
     },
     {
       "title": "Hybride automobile",
+      "id": "hybrideAuto",
       "baseLayer": true,
       "visible": true,
       "linkedLayers": {
@@ -41,7 +42,7 @@
         "links": [{
           "bidirectionnal": true,
           "syncedDelete": true,
-          "linkedIds": ["bgr_v_sous_route_res_sup_act"],
+          "linkedIds": ["hybrideAutoRoute"],
           "properties": ["visible"]
         }]
       },
@@ -55,10 +56,11 @@
     },
     {
       "title": "bgr_v_sous_route_res_sup_act",
+      "id": "hybrideAutoRoute",
       "opacity": 0.5,
       "showInLayerList": false,
       "linkedLayers": {
-        "linkId": "bgr_v_sous_route_res_sup_act"
+        "linkId": "hybrideAutoRoute"
       },
       "sourceOptions": {
         "type": "wms",
@@ -71,6 +73,7 @@
     },
     {
       "title": "Hybride vélo",
+      "id": "hybrideVelo",
       "baseLayer": true,
       "visible": false,
       "linkedLayers": {
@@ -78,7 +81,7 @@
         "links": [{
           "bidirectionnal": true,
           "syncedDelete": true,
-          "linkedIds": ["convivialite_velo"],
+          "linkedIds": ["hybrideVeloConviv"],
           "properties": ["visible"]
         }]
       },
@@ -92,10 +95,11 @@
     },
     {
       "title": "convivialite_velo",
+      "id": "hybrideVeloConviv",
       "opacity": 0.5,
       "showInLayerList": false,
       "linkedLayers": {
-        "linkId": "convivialite_velo"
+        "linkId": "hybrideVeloConviv"
       },
       "sourceOptions": {
         "type": "wms",
