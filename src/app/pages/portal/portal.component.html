@@ -28,6 +28,7 @@
       [store]="searchStore"
       (searchTermChange)="onSearchTermChange($event)"
       (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
+      [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
       (searchResultsGeometryStatus)="onSearchResultsGeometryStatusChange($event)"
       (search)="onSearch($event)"
       (clearFeature)="onClearSearch()"

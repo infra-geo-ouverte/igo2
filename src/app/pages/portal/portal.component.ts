@@ -221,6 +221,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.searchState.store;
   }
 
+  get searchResultsGeometryEnabled(): boolean {
+    return this.searchState.searchResultsGeometryEnabled$.value
+  }
+
   get queryStore(): EntityStore<SearchResult> {
     return this.queryState.store;
   }
@@ -961,6 +965,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (params['search']) {
       this.termDefinedInUrl = true;
       this.searchBarTerm = params['search'];
+    }
+    if (params['searchGeom'] === '1') {
+      this.searchState.searchResultsGeometryEnabled$.next(true);
     }
   }
 
