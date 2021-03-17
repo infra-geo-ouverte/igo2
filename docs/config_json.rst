@@ -394,7 +394,7 @@ Exemples
                   {
                       "id": "mtq",
                       "title": "MTQ",
-                      "url": "/swtq",
+                      "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                       "sortDirection": "desc",
                       "queryFormat": {
                             "htmlgml2": "*",
@@ -407,7 +407,7 @@ Exemples
                   {
                       "id": "regexmtq",
                       "title": "MTQ (filtered by regex)",
-                      "url": "/swtq",
+                      "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                       "regFilters": ["zpegt"]
                   },
                   {
@@ -455,7 +455,7 @@ Exemples
                               },
                               {
                                 "id": "forcedProperties_wms",
-                                "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swt",
+                                "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                                 "type": "wms",
                                 "forcedProperties": [{
                                   "layerName": "lieuhabite",

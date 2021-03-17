@@ -63,7 +63,7 @@
       "sourceOptions": {
         "type": "wms",
         "queryable": true,
-        "url": "/swtq",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
         "params": {
           "layers": "bgr_v_sous_route_res_sup_act"
         }
@@ -99,7 +99,7 @@
       },
       "sourceOptions": {
         "type": "wms",
-        "url": "/swtq",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
         "params": {
           "layers": "convivialite_velo"
         }

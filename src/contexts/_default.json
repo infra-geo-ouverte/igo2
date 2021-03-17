@@ -20,10 +20,9 @@
       "title": "MSP Tel. Urgence",
       "sourceOptions": {
         "type": "wms",
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
         "params": {
-          "layers": "telephone_urg",
-          "version": "1.3.0"
+          "layers": "telephone_urg"
         },
         "queryable": true,
         "queryFormat": "gml2",
