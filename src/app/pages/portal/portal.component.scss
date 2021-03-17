@@ -90,6 +90,10 @@ igo-map-browser ::ng-deep .ol-attribution {
   &.ol-uncollapsible {
     height: auto;
   }
+  ul {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 2px 0.5em;
+  }
 }
 
 igo-map-browser.has-expansion-panel igo-baselayers-switcher {

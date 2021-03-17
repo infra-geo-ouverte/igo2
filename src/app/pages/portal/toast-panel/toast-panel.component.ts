@@ -10,7 +10,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest, Subscription } from 'rxjs';
-import { debounceTime, map, tap } from 'rxjs/operators';
+import { debounceTime, map, skipWhile, tap } from 'rxjs/operators';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 import olFeature from 'ol/Feature';
 import olPoint from 'ol/geom/Point';
@@ -41,7 +41,8 @@ import {
   MediaService,
   LanguageService,
   StorageService,
-  StorageScope
+  StorageScope,
+  StorageServiceEvent
 } from '@igo2/core';
 import { StorageState } from '@igo2/integration';
 
@@ -141,6 +142,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   private isResultSelected$ = new BehaviorSubject(false);
   public isSelectedResultOutOfView$ = new BehaviorSubject(false);
   private isSelectedResultOutOfView$$: Subscription;
+  private storageChange$$: Subscription;
   private initialized = true;
 
   private format = new olFormatGeoJSON();
@@ -281,6 +283,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       ]).subscribe(() => this.buildResultEmphasis(latestResult, trigger));
     }
 
+    this.storageChange$$ = this.storageService.storageChange$
+      .pipe(skipWhile((storageChange: StorageServiceEvent) => storageChange.key !== 'zoomAuto'))
+      .subscribe((change) => {
+        this.zoomAuto = change.currentValue;
+      });
+
     this.actionStore.load([
       {
         id: 'list',
@@ -397,6 +405,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
     if (this.isSelectedResultOutOfView$$) {
       this.isSelectedResultOutOfView$$.unsubscribe();
+    }
+    if (this.storageChange$$) {
+      this.storageChange$$.unsubscribe();
     }
   }
 

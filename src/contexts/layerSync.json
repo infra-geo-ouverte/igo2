@@ -68,8 +68,8 @@
         "sourceOptions": {
           "queryable": true,
           "type": "wms",
-          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
-          "urlWfs": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+          "urlWfs": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
           "params": {
             "layers": "radars_photos"
           },
@@ -99,8 +99,8 @@
         "sourceOptions": {
           "queryable": true,
           "type": "wms",
-          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
-          "urlWfs": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq",
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+          "urlWfs": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
           "params": {
             "layers": "radars_photos"
           },
@@ -239,7 +239,7 @@
             "version": "2.0.0"
           },
           "type": "wfs",
-          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq"
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq"
         }
       }
     ],

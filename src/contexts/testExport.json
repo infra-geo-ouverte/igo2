@@ -17,7 +17,61 @@
             "version": "2.0.0"
           },
           "type": "wfs",
-          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swtq"
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq"
+        }
+      },
+      {
+        "title": "WFS with imposed export format 2",
+        "visible": false,
+        "sourceOptions": {
+          "download": {
+            "allowedFormats": ["kml","csvcomma"]
+          },
+          "queryable": true,
+          "params": {
+            "featureTypes": "vg_observation_v_autre_wmst",
+            "fieldNameGeometry": "geometry",
+            "maxFeatures": 10000,
+            "version": "2.0.0"
+          },
+          "type": "wfs",
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+          "ogcFilters": {
+            "enabled": true,
+            "editable": false,
+            "filters": {
+              "operator": "PropertyIsEqualTo",
+              "propertyName": "severite",
+              "expression": "Extrême"
+            }
+          }
+        }
+      },
+      {
+        "title": "WFS with imposed export format 1",
+        "visible": false,
+        "sourceOptions": {
+          "download": {
+            "allowedFormats": ["geojson","csvcomma"]
+          },
+          "queryable": true,
+          "params": {
+            "featureTypes": "vg_observation_v_autre_wmst",
+            "fieldNameGeometry": "geometry",
+            "maxFeatures": 10000,
+            "version": "2.0.0"
+          },
+          "type": "wfs",
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+          "ogcFilters": {
+            "enabled": true,
+            "editable": false,
+            "filters": {
+              "operator": "PropertyIsEqualTo",
+              "propertyName": "severite",
+              "expression": "Extrême"
+            }
+          }
         }
       },
       {

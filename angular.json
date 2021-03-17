@@ -63,7 +63,8 @@
               "minimatch",
               "path",
               "pixelworks",
-              "brace-expansion"
+              "brace-expansion",
+              "rbush"
             ]
           },
           "configurations": {
