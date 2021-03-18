@@ -132,7 +132,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
     this.fullExtent
   );
-  public isHtmlLargeDisplay = false;
   public isHtmlDisplay = false;
   public iconResizeWindows = 'crop-square';
 
@@ -178,22 +177,31 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   getClassPanel() {
     return {
       'app-toast-panel-opened' : this.opened && !this.fullExtent && !this.isHtmlDisplay,
-      'app-toast-panel-html' : 
+      'app-full-toast-panel-opened' : 
+        this.opened && this.fullExtent && 
+        !this.isHtmlDisplay,
+
+      'app-toast-panel-html' :
+        this.opened &&
+        !this.fullExtent &&
+        this.resultSelected$.value &&
+        this.isHtmlDisplay,
+        
+      'app-toast-panel-html-large' :
+        this.opened &&
+        this.fullExtent &&
+        this.resultSelected$.value &&
+        this.isHtmlDisplay,
+
+      'app-toast-panel-html-large-workspace-maximize':
         this.opened && 
-        this.resultSelected$.value && 
-        this.isHtmlDisplay && 
-        !this.isHtmlLargeDisplay,
-      'app-toast-panel-html-large' : 
-        this.opened && 
-        this.resultSelected$.value && 
-        this.isHtmlDisplay && 
-        this.isHtmlLargeDisplay,
-      'app-full-toast-panel-opened' : this.opened && this.fullExtent && !this.isHtmlDisplay,
+        this.fullExtent &&
+        this.isHtmlDisplay,
 
       'app-toast-panel-collapsed': !this.opened && !this.fullExtent && !this.isHtmlDisplay,
       'app-full-toast-panel-collapsed' : !this.opened && this.fullExtent && !this.isHtmlDisplay,
       'app-toast-panel-html-collapsed' : !this.opened && this.isHtmlDisplay
-    }
+    };
   }
 
 
@@ -260,6 +268,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
+    this.setResizeWindowIcon();
   }
 
   private monitorResultOutOfView() {
@@ -399,7 +408,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         ),
         icon: 'resize',
         display: () => {
-          return this.fullExtent$.pipe(map((v) => !v));
+          return this.fullExtent$.pipe(map((v) => !v  && !this.isDesktop()));
         },
         handler: () => {
           this.fullExtent = true;
@@ -415,7 +424,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         ),
         icon: 'resize',
         display: () => {
-          return this.fullExtent$;
+          return this.fullExtent$.pipe(map((v) => v && !this.isDesktop()));
         },
         handler: () => {
           this.fullExtent = false;
@@ -567,7 +576,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.store.clear();
     this.unselectResult();
     this.setHtmlDisplay(false);
-    this.resizeHtmlWindows();
   }
 
   isMobile(): boolean {
@@ -646,7 +654,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     const args = action.args || [];
     action.handler(...args);
   }
-  
+
   setHtmlDisplay(value: boolean) {
     if (value === true) {
       this.isHtmlDisplay = true;
@@ -665,26 +673,31 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  resizeHtmlWindows() {
-    if (this.isHtmlLargeDisplay) {
-      this.minimizeHtmlWindow();
+  setResizeWindowIcon() {
+    if (this.fullExtent) {
+      this.iconResizeWindows = 'vector-arrange-below';
     } else {
-      this.enlargeHtmlWindows();
+      this.iconResizeWindows = 'crop-square';
     }
   }
 
-  minimizeHtmlWindow() {
-    this.setWindowsHtmlLargeDisplay(false);
+  resizeWindows() {
+    this.storageService.set('fullExtent', !this.fullExtent);
+    if (this.fullExtent) {
+        this.reduceWindow();
+    } else {
+        this.enlargeWindows();
+      }
+  }
+
+  reduceWindow() {
     this.iconResizeWindows = 'crop-square';
+    this.fullExtent = false;
   }
 
-  enlargeHtmlWindows() {
-    this.setWindowsHtmlLargeDisplay(true);
+  enlargeWindows() {
     this.iconResizeWindows = 'vector-arrange-below';
-  }
-
-  setWindowsHtmlLargeDisplay(value: boolean) {
-    this.isHtmlLargeDisplay = value;
+    this.fullExtent = true;
   }
 
 }

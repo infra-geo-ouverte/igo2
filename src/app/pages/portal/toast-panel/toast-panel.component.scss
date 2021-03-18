@@ -39,6 +39,16 @@
   // max-height: fit-content;
   width: $app-toast-panel-html-width;
 
+  @include mobile {
+    width: 100%;
+    max-height: $app-full-toast-panel-max-height;
+    height: $app-full-toast-panel-height-mobile;
+  }
+
+  @include tablet {
+    width: $app-toast-panel-width-tablet;
+  }
+
   .toast-content {
     height: 100%;
     width: 100%;
@@ -53,7 +63,7 @@
   max-width: $app-toast-panel-max-width;
 
   @include mobile {
-    // height: 40%;
+    height: $app-toast-panel-height-mobile;
     max-height: $app-toast-panel-height-mobile;
     width: 100%;
   }

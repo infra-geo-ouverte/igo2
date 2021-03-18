@@ -12,10 +12,24 @@
       }
     },
     "layers": [
-  
+      {
+        "title": "poe",
+        "visible" : false,
+        "sourceOptions": {
+            "queryable": true,
+            "crossOrigin": "anonymous",
+            "queryFormat": "html",
+            "queryHtmlTarget": "iframe",
+            "url": "/ws/mffpecofor.fcgi", 
+            "type": "wms",      
+            "params": {
+                "layers": "sond_poe",
+                "version": "1.3.0"
+            }        
+        }
+      },
       {
         "title": "Aire d'intensification de la production ligneuse (AIPL)",
-        "zIndex": 2,
         "visible" : true,
         "metadata": {
             "url": "https://www.donneesquebec.ca/recherche/fr/dataset/aire-d-intensification-de-la-production-ligneuse-aipl",
@@ -25,16 +39,15 @@
             "queryable": true,
             "crossOrigin": "anonymous",
             "queryFormat": "geojson",
+            "type": "wms", 
             "url": "https://servicescarto.mern.gouv.qc.ca/pes/services/Forets/STF_WMS/MapServer/WMSServer?",
             "params": {
                 "layers": "Aire intensification de la production ligneuse"
-            },
-            "type": "wms"       
+            }   
         }
       },
       {
         "title": "html - Aire d'intensification de la production ligneuse (AIPL)",
-        "zIndex": 2,
         "visible" : true,
         "metadata": {
             "url": "https://www.donneesquebec.ca/recherche/fr/dataset/aire-d-intensification-de-la-production-ligneuse-aipl",
@@ -65,7 +78,6 @@
       },
       {
         "title": "Peuplements écoforestiers",
-        "zIndex": 3.1,
         "visible": true,
         "metadata": {
             "extern": true

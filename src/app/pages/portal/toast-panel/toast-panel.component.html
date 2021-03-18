@@ -20,6 +20,22 @@
 
     <button
       *ngIf="resultSelected$.value"
+      mat-icon-button
+      igoStopPropagation
+      panelLeftButton
+      [matTooltip]="((isSelectedResultOutOfView$ | async) ? 'toastPanel.zoomOnFeatureTooltipOutOfView' : 'toastPanel.zoomOnFeatureTooltip') | translate"
+      matTooltipShowDelay="500"
+      (click)="zoomTo()">
+      <mat-icon
+      [matBadge]="(isSelectedResultOutOfView$ | async) ? '!' : ''"
+      matBadgeColor="accent"
+      matBadgeSize="small"
+      [matBadgeHidden]="!(isSelectedResultOutOfView$ | async)"     
+      svgIcon="magnify-plus-outline"></mat-icon>
+    </button>
+
+    <button
+      *ngIf="resultSelected$.value"
       [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
       mat-icon-button
       igoStopPropagation
@@ -43,26 +59,11 @@
     </button>
 
     <button
-      *ngIf="resultSelected$.value"
+     *ngIf = "isDesktop() && resultSelected$.value"
       mat-icon-button
       igoStopPropagation
       panelRightButton
-      [matTooltip]="((isSelectedResultOutOfView$ | async) ? 'toastPanel.zoomOnFeatureTooltipOutOfView' : 'toastPanel.zoomOnFeatureTooltip') | translate"
-      matTooltipShowDelay="500"
-      (click)="zoomTo()">
-      <mat-icon
-      [matBadge]="(isSelectedResultOutOfView$ | async) ? '!' : ''"
-      matBadgeColor="accent"
-      matBadgeSize="small"
-      [matBadgeHidden]="!(isSelectedResultOutOfView$ | async)"     
-      svgIcon="magnify-plus-outline"></mat-icon>
-    </button>
-    <button
-     *ngIf = "isHtmlAndDesktop() && resultSelected$.value"
-      mat-icon-button
-      igoStopPropagation
-      panelRightButton
-      (click)="resizeHtmlWindows()">
+      (click)="resizeWindows()">
       <mat-icon svgIcon={{iconResizeWindows}}></mat-icon>
     </button>
     <button
