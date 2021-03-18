@@ -1,6 +1,6 @@
 {
   "/ws/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+    "target": "https://pregeoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },
@@ -18,5 +18,16 @@
     "target": "https://ws.mapserver.transports.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
+  },
+  "/igo2/": {
+    "target": "https://pregeoegl.msp.gouv.qc.ca",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/igo2/mffpecofor/particular/css/mffp.css": {
+    "target": "https://pregeoegl.msp.gouv.qc.ca",
+    "secure": false,
+    "changeOrigin": true
   }
+  
 }

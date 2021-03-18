@@ -177,8 +177,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   getClassPanel() {
     return {
       'app-toast-panel-opened' : this.opened && !this.fullExtent && !this.isHtmlDisplay,
-      'app-full-toast-panel-opened' : 
-        this.opened && this.fullExtent && 
+      'app-full-toast-panel-opened' :
+        this.opened && this.fullExtent &&
         !this.isHtmlDisplay,
 
       'app-toast-panel-html' :
@@ -186,7 +186,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         !this.fullExtent &&
         this.resultSelected$.value &&
         this.isHtmlDisplay,
-        
+
       'app-toast-panel-html-large' :
         this.opened &&
         this.fullExtent &&
@@ -194,7 +194,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         this.isHtmlDisplay,
 
       'app-toast-panel-html-large-workspace-maximize':
-        this.opened && 
+        this.opened &&
         this.fullExtent &&
         this.isHtmlDisplay,
 
