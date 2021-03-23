@@ -197,10 +197,10 @@ export const environment: Environment = {
         }
       ]
     },
-    context: {
-      url: '/apis/igo2',
-      defaultContextUri: '5'
-    },
+    // context: {
+    //   url: '/apis/igo2',
+    //   defaultContextUri: '5'
+    // },
     depot: {
       url: '/apis/depot'
     },

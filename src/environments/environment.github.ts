@@ -18,7 +18,7 @@ interface Environment {
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
     interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
-    trainingGuide?: {url: string};
+    depot?: { url: string };
   };
 }
 

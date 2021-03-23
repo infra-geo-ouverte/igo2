@@ -20,7 +20,7 @@ interface Environment {
     projections?: Projection[];
     spatialFilter?: SpatialFilterOptions;
     interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
-    trainingGuide?: {url: string};
+    depot?: { url: string };
   };
 }
 
