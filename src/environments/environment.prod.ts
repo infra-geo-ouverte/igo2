@@ -20,6 +20,7 @@ interface Environment {
     projections?: Projection[];
     spatialFilter?: SpatialFilterOptions;
     interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
+    depot?: { url: string };
   };
 }
 
@@ -72,6 +73,9 @@ export const environment: Environment = {
       cadastre: {
         enabled: false
       }
+    },
+    depot: {
+      url: '/apis/depot'
     },
     optionsApi: {
       url: '/apis/igo2/layers/options'

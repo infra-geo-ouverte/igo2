@@ -27,6 +27,7 @@ interface Environment {
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
     interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
+    depot?: { url: string };
   };
 }
 
@@ -200,6 +201,9 @@ export const environment: Environment = {
     //   url: '/apis/igo2',
     //   defaultContextUri: '5'
     // },
+    depot: {
+      url: '/apis/depot'
+    },
     language: {
       prefix: './locale/'
     },
