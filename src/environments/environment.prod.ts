@@ -74,6 +74,9 @@ export const environment: Environment = {
         enabled: false
       }
     },
+    depot: {
+      url: '/apis/depot'
+    },
     optionsApi: {
       url: '/apis/igo2/layers/options'
     },
