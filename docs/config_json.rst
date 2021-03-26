@@ -109,6 +109,11 @@ Résumé
                polygonale sélectionnées ou survolées lors d'une interrogation de la carte et qui
                sont de trop petite taille par rapport à l'étendue de la carte.
          -
+       * - `drawingToolIcons`
+         - String[]
+         - .. line-block::
+               Permet d'ajouter à l'outil de dessin un liste d'icônes à utiliser.
+         -
        * - importExport
          - `ImportExport`_
          - .. line-block::
@@ -797,6 +802,27 @@ showRotationButtonIfNoRotation
     .. line-block::
         Permet de définir si le bouton de réinitialisation de la
         rotation est visible si aucune rotation n'est active. False par défaut.
+
+***************
+DrawingToolIcons
+***************
+
+    .. line-block::
+        Cette configuration permet de créer un liste d'url représentant des icônes afin que ceux-ci
+        puissent être utilisés dans `l'outil de dessin <https://igo2.readthedocs.io/fr/latest/properties.html#draw>`
+
+Exemples
+
+        .. code:: json
+
+            drawingToolIcons: {
+                  "https://icons.duckduckgo.com/ip3/www.google.com.ico",
+                  "https://img.icons8.com/color/search/96"
+            }
+
+Liens
+
+        - `igo2-lib/tree/master/packages/geo/src/lib/draw/draw <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/geo/src/lib/draw/draw>`_
 
 
 ***************
