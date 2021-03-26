@@ -27,6 +27,7 @@ interface Environment {
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
     interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
+    depot?: { url: string };
   };
 }
 
@@ -79,7 +80,7 @@ export const environment: Environment = {
           composite: [
             {
               id: 'tq_swtq',
-              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq'
+              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq'
             },
             {
               id: 'rn_wmts',
@@ -112,7 +113,7 @@ export const environment: Environment = {
             },
             {
               id: 'forcedProperties_wms',
-              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
+              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
               type: 'wms',
               forcedProperties: [{
                 layerName: 'lieuhabite',
@@ -138,7 +139,7 @@ export const environment: Environment = {
           composite: [
             {
               id: 'tq_swtq',
-              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
+              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
               regFilters: ['zpegt'],
               groupImpose: { id: 'zpegt', title: 'zpegt' }
             },
@@ -176,7 +177,7 @@ export const environment: Environment = {
           composite: [
             {
               id: 'tq_swtq',
-              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/swtq',
+              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
               regFilters: ['limtn_charg'],
               groupImpose: {
                 id: 'mix_swtq_gouv',
@@ -200,6 +201,9 @@ export const environment: Environment = {
     //   url: '/apis/igo2',
     //   defaultContextUri: '5'
     // },
+    depot: {
+      url: '/apis/depot'
+    },
     language: {
       prefix: './locale/'
     },
