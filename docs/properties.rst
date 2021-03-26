@@ -1114,7 +1114,7 @@ Exemples
               "sourceOptions": {
                   "queryable": true,
                   "type": "vector",
-                  "url": "https://ws.mapserver.transports.gouv.qc.ca//swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson"
+                  "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson"
               }
             }
 

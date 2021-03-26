@@ -152,25 +152,3 @@ Sélection du contexte
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?tool=directions&routing=-72.4540601953125,47.86101094949734;-70.65092909179685,47.24932843990587
 
-********************************
- Table des matières
-********************************
-
-    Params :
-        - llck = mot clef pour filtrer la liste des couches
-        - llca = 1 ou 0 , pour trier la table des matières en ordre 
-          alphabétique.
-        - llcv = 1 ou 0 , pour ne montrer que les couches visibles.
-        - llcr = 1 ou 0 , pour ne montrer que les couches visibles 
-          selon l'échelle active de la carte
-
-    0 = actif
-    1 = inactif
-
- 
-    Exemple:
-        - https://infra-geo-ouverte.github.io/igo2/?llck=rtss
-        - https://infra-geo-ouverte.github.io/igo2/?&llca=1
-        - https://infra-geo-ouverte.github.io/igo2/?context=mtq&visiblelayers=bgr_v_sous_route_res_sup_act&llcv=1
-        - https://infra-geo-ouverte.github.io/igo2/?context=mtq&visiblelayers=bgr_v_sous_route_res_sup_act&llcr=1
-
