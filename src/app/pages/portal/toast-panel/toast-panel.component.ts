@@ -31,8 +31,8 @@ import {
   featureToOl,
   featuresAreTooDeepInView,
   featureFromOl,
-  getMarkerStyle,
-  getSelectedMarkerStyle,
+  getCommonVectorStyle,
+  getCommonVectorSelectedStyle,
   featuresAreOutOfView,
   computeOlFeaturesExtent
 } from '@igo2/geo';
@@ -435,7 +435,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         this.map.projection
       );
       this.abstractFocusedOrSelectedResult.meta.style =
-        getSelectedMarkerStyle(
+        getCommonVectorSelectedStyle(
           Object.assign({},
             { feature: this.abstractFocusedOrSelectedResult },
             this.searchState.searchOverlayStyleSelection));
@@ -462,7 +462,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.focusedResult$.next(result);
     this.map.queryResultsOverlay.removeFeature(result.data);
 
-    result.data.meta.style = getSelectedMarkerStyle(
+    result.data.meta.style = getCommonVectorSelectedStyle(
       Object.assign({},
         { feature: result.data },
         this.searchState.searchOverlayStyleSelection));
@@ -477,7 +477,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
     this.map.queryResultsOverlay.removeFeature(result.data);
 
-    result.data.meta.style = getMarkerStyle(
+    result.data.meta.style = getCommonVectorStyle(
       Object.assign({},
         { feature: result.data },
         this.searchState.searchOverlayStyleFocus));
@@ -499,12 +499,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     const features = [];
     for (const feature of this.store.all()) {
       if (feature.meta.id === result.meta.id) {
-        feature.data.meta.style = getSelectedMarkerStyle(
+        feature.data.meta.style = getCommonVectorSelectedStyle(
           Object.assign({}, { feature: feature.data },
             this.searchState.searchOverlayStyleSelection));
         feature.data.meta.style.setZIndex(2000);
       } else {
-        feature.data.meta.style = getMarkerStyle(
+        feature.data.meta.style = getCommonVectorStyle(
           Object.assign({},
             { feature: feature.data },
             this.searchState.searchOverlayStyleFocus));
@@ -536,7 +536,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
     const features = [];
     for (const feature of this.store.all()) {
-      feature.data.meta.style = getMarkerStyle(
+      feature.data.meta.style = getCommonVectorStyle(
         Object.assign({},
           { feature: feature.data },
           this.searchState.searchOverlayStyleFocus));
