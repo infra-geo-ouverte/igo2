@@ -73,10 +73,6 @@ igo-panel ::ng-deep .igo-panel-content {
   user-select: auto !important;
 }
 
-button[disabled="true"] {
-    color: rgba(0,0,0,.26);
-}
-
 :host.app-full-toast-panel-opened igo-panel ::ng-deep .igo-panel-content {
   max-height: calc(650px - 46px);
   overflow: auto;

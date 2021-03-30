@@ -1047,7 +1047,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           layerFromUrl[0],
           type,
           visibility,
-          parseInt(layerFromUrl[1] || 1000, 10)
+          layerFromUrl[1] ? parseInt(layerFromUrl[1], 10) : undefined
         );
       });
       cnt += 1;
@@ -1107,7 +1107,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     name: string,
     type: 'wms' | 'wmts' | 'arcgisrest'| 'imagearcgisrest' | 'tilearcgisrest',
     visibility: boolean = true,
-    zIndex: number = 100000
+    zIndex: number
   ) {
     if (!this.contextLoaded) {
       return;
