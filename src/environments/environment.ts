@@ -48,15 +48,15 @@ export const environment: Environment = {
     searchOverlayStyle: {
       focus: {
         markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
-        outlineColor: undefined,        // marker contour
         strokeColor: undefined,         // line and poly
         strokeWidth: undefined          // line and poly
       },
       selection: {
         markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
-        outlineColor: undefined,        // marker contour
         strokeColor: undefined,         // line and poly
         strokeWidth: undefined          // line and poly
       }
@@ -64,15 +64,15 @@ export const environment: Environment = {
     queryOverlayStyle: {
       focus: {
         markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
-        outlineColor: undefined,        // marker contour
         strokeColor: undefined,         // line and poly
         strokeWidth: undefined          // line and poly
       },
       selection: {
         markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
-        outlineColor: undefined,        // marker contour
         strokeColor: undefined,         // line and poly
         strokeWidth: undefined          // line and poly
       }
@@ -262,8 +262,7 @@ export const environment: Environment = {
         searchUrl: '/apis/icherche',
         order: 2,
         params: {
-          limit: '5',
-          key: '9DYtDyvIjFbC8'
+          limit: '5'
         }
       },
       coordinatesreverse: {
@@ -273,17 +272,13 @@ export const environment: Environment = {
         showInPointerSummary: true,
         searchUrl: '/apis/terrapi',
         order: 3,
-        enabled: true,
-        params: {
-          key: '9DYtDyvIjFbC8'
-        }
+        enabled: true
       },
       ilayer: {
         searchUrl: '/apis/icherche/layers',
         order: 4,
         params: {
-          limit: '5',
-          key: '9DYtDyvIjFbC8'
+          limit: '5'
         }
       },
       cadastre: {
