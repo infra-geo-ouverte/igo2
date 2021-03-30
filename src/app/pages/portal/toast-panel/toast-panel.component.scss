@@ -17,7 +17,6 @@
 }
 
 
-
 .app-toast-panel-html {
   height: $app-toast-panel-height;
   max-height: fit-content;
@@ -35,8 +34,6 @@
 
 .app-toast-panel-html-large {
   height: $app-toast-panel-html-large-height;
-  // max-height: 50%;
-  // max-height: fit-content;
   width: $app-toast-panel-html-width;
 
   @include mobile {
@@ -61,14 +58,13 @@
   max-height: $app-toast-panel-max-height;
   width: $app-toast-panel-width;
   max-width: $app-toast-panel-max-width;
+  margin-bottom: 7px;
 
   @include mobile {
-    height: $app-toast-panel-height-mobile;
     max-height: $app-toast-panel-height-mobile;
     width: 100%;
   }
   @include tablet {
-    // max-height: 500px;
     width: $app-toast-panel-width-tablet;
   }
 
@@ -81,37 +77,34 @@
 
 .app-full-toast-panel-opened {
   height: auto;
-  // max-height: 650px;
-  // width: 45%;
   max-height: $app-full-toast-panel-max-height;
   width: $app-full-toast-panel-width;
 
+  .toast-content {
+    height: 100%;
+    width: 100%;
+    max-height: calc(#{$app-full-toast-panel-max-height} - 8vh); // scroll inside panel on overflow
+  }
   @include tablet {
-    // width: 500px;
     width: $app-toast-panel-width-tablet;
     max-height: 500px;
 
     .toast-content {
-      max-height: 456px !important; // scroll inside panel on overflow;
+      max-height: calc(#{$app-full-toast-panel-max-height} - 21vh);
     }
   }
 
   @include mobile {
     width: 100%;
     max-height: $app-full-toast-panel-max-height;
-    }
-
-
-  .toast-content {
-    height: 100%;
-    width: 100%;
-    max-height: calc(#{$app-full-toast-panel-max-height} - 4vh); // scroll inside panel on overflow
   }
+
+
 }
 
 
 .app-toast-panel-collapsed {
-  height: $app-toast-panel-collapsed-height;
+  height: $app-toast-panel-collapsed-height !important; // !important needed when expansion-panel is maximised
   width: $app-toast-panel-width;
   max-width: $app-toast-panel-max-width;
 
@@ -124,7 +117,7 @@
 }
 
 .app-full-toast-panel-collapsed {
-  height: $app-toast-panel-collapsed-height;
+  height: $app-toast-panel-collapsed-height !important;
   width: $app-full-toast-panel-width;
 
   @include mobile {
@@ -136,7 +129,7 @@
 }
 
 .app-toast-panel-html-collapsed {
-  height: $app-toast-panel-collapsed-height;
+  height: $app-toast-panel-collapsed-height !important; 
   width: $app-toast-panel-html-width;
 
   @include mobile {
@@ -171,17 +164,12 @@ igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelrightbutton] {
 }
 
 igo-panel ::ng-deep .igo-panel-content {
-  // max-height: 230px;  pour permettre html max 
   -webkit-user-select: auto !important;
   -moz-user-select: auto !important;
   -ms-user-select: auto !important;
   user-select: auto !important;
 }
 
-// :host.app-full-toast-panel-opened igo-panel ::ng-deep .igo-panel-content {
-//   max-height: calc(650px - 46px);
-//   overflow: auto;
-// }
 
 igo-feature-details ::ng-deep iframe {
   // min-height: 226px;

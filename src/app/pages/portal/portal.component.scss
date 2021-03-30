@@ -224,29 +224,62 @@ app-toast-panel {
   position: absolute;
   left: 50%;
   margin-left: -300px;
-  // width: 600px;
-  max-height:70%;
   max-width: fit-content;
   z-index: 5;
   outline: none;
 
   @include mobile {
-    // width: calc(100% - #{$app-footer-height});
     left: $app-footer-height;
     margin-left: 0;
     min-width: 100%;
   }
 
   @include tablet {
-    // width: 500px;
     max-width: inherit;
     left: calc(50% + 60px);
   }
 }
 
-app-toast-panel.app-full-toast-panel-collapsed {
-  width: 45%;
-  height: $app-toast-panel-collapsed-height;
+// Reduce max-height for info panel in mobile when expansion-workspace is open
+app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > div ::ng-deep igo-panel.app-full-toast-panel-opened,
+app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > div ::ng-deep igo-panel.app-toast-panel-html-large,
+app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion +app-toast-panel ::ng-deep igo-panel.app-full-toast-panel-opened,
+app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion +app-toast-panel ::ng-deep igo-panel.app-toast-panel-html-large
+{
+  @include mobile {
+    max-height: 50vh;
+
+    .toast-content {
+      max-height: calc(50vh - 8vh)
+    }
+  }
+}
+
+// Reduce height-max when expansion-workspace is max + infopanel is max
+app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > igo-panel {
+  max-height: 45vh;
+ .toast-content {
+    max-height: 40vh; 
+  }
+
+  @include tablet {
+    max-height: 30vh;
+    .toast-content {
+      max-height: calc(30vh - 6vh)
+    }
+  }
+}
+
+app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > igo-panel.app-toast-panel-html {
+  height: 30vh;
+}
+
+app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > igo-panel.app-toast-panel-opened {
+  height: auto;
+  max-height: 30vh;
+  .toast-content {
+    max-height: 25vh; 
+  }
 }
 
 app-toast-panel.expansion-panel-expanded,
@@ -255,18 +288,9 @@ app-toast-panel.app-toast-panel-opened {
   bottom: 0;
 
   @include mobile {
-    // width: 100%; ##deplacer dans app-toast-panel
     left: 0;
   }
 }
-// deplacer dans app-toast
-// app-toast-panel.app-full-toast-panel-opened {
-//   @include mobile {
-//     max-height: 70%;
-//     height: auto;
-//     width: 100%;
-//   }
-// }
 
 igo-offline-button {
   margin-bottom: 128px;

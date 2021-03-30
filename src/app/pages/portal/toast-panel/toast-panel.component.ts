@@ -193,11 +193,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         this.resultSelected$.value &&
         this.isHtmlDisplay,
 
-      'app-toast-panel-html-large-workspace-maximize':
-        this.opened &&
-        this.fullExtent &&
-        this.isHtmlDisplay,
-
       'app-toast-panel-collapsed': !this.opened && !this.fullExtent && !this.isHtmlDisplay,
       'app-full-toast-panel-collapsed' : !this.opened && this.fullExtent && !this.isHtmlDisplay,
       'app-toast-panel-html-collapsed' : !this.opened && this.isHtmlDisplay
