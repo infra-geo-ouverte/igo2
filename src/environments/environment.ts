@@ -48,15 +48,15 @@ export const environment: Environment = {
     searchOverlayStyle: {
       focus: {
         markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
-        outlineColor: undefined,        // marker contour
         strokeColor: undefined,         // line and poly
         strokeWidth: undefined          // line and poly
       },
       selection: {
         markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
-        outlineColor: undefined,        // marker contour
         strokeColor: undefined,         // line and poly
         strokeWidth: undefined          // line and poly
       }
@@ -64,15 +64,15 @@ export const environment: Environment = {
     queryOverlayStyle: {
       focus: {
         markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
-        outlineColor: undefined,        // marker contour
         strokeColor: undefined,         // line and poly
         strokeWidth: undefined          // line and poly
       },
       selection: {
         markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
-        outlineColor: undefined,        // marker contour
         strokeColor: undefined,         // line and poly
         strokeWidth: undefined          // line and poly
       }
