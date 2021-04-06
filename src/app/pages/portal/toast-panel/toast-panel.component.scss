@@ -13,6 +13,7 @@
 
   @include mobile {
     width: 100%;
+    min-width: 100%;
   }
 }
 
@@ -24,6 +25,7 @@
 
   @include mobile {
     width: 100%;
+    min-width: 100%;
     height: $app-toast-panel-height-mobile;
   }
 
@@ -38,6 +40,7 @@
 
   @include mobile {
     width: 100%;
+    min-width: 100%;
     max-height: $app-full-toast-panel-max-height;
     height: $app-full-toast-panel-height-mobile;
   }
@@ -63,6 +66,7 @@
   @include mobile {
     max-height: $app-toast-panel-height-mobile;
     width: 100%;
+    min-width: 100%;
   }
   @include tablet {
     width: $app-toast-panel-width-tablet;
@@ -96,6 +100,7 @@
 
   @include mobile {
     width: 100%;
+    min-width: 100%;
     max-height: $app-full-toast-panel-max-height;
   }
 
@@ -110,6 +115,8 @@
 
   @include mobile {
     width: 100%;
+    min-width: 100%;
+    height: $app-toast-panel-collapsed-height-mobile !important;
   }
   @include tablet {
     width: $app-toast-panel-width-tablet;
@@ -122,6 +129,8 @@
 
   @include mobile {
     width: 100%;
+    min-width: 100%;
+    height: $app-toast-panel-collapsed-height-mobile !important;
   }
   @include tablet {
     width: $app-toast-panel-width-tablet;
@@ -134,6 +143,8 @@
 
   @include mobile {
     width: 100%;
+    min-width: 100%;
+    height: $app-toast-panel-collapsed-height-mobile !important;
   }
   @include tablet {
     width: $app-toast-panel-width-tablet;

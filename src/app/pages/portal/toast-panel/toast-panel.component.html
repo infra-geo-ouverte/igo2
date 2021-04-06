@@ -63,7 +63,9 @@
       mat-icon-button
       igoStopPropagation
       panelRightButton
-      (click)="resizeWindows()">
+      (click)="resizeWindows()"
+      [matTooltip]="((this.fullExtent$ | async) ? 'toastPanel.standardExtentTooltip' : 'toastPanel.fullExtentTooltip') | translate"
+      matTooltipShowDelay="500">
       <mat-icon svgIcon={{iconResizeWindows}}></mat-icon>
     </button>
     <button

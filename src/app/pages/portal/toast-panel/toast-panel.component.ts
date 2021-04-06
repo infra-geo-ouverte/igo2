@@ -133,7 +133,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.fullExtent
   );
   public isHtmlDisplay = false;
-  public iconResizeWindows = 'crop-square';
+  public iconResizeWindows = '';
 
   public icon = 'menu';
 
@@ -401,7 +401,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.fullExtentTooltip'
         ),
-        icon: 'resize',
+        icon: 'arrow-expand',
         display: () => {
           return this.fullExtent$.pipe(map((v) => !v  && !this.isDesktop()));
         },
@@ -417,7 +417,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.standardExtentTooltip'
         ),
-        icon: 'resize',
+        icon: 'arrow-collapse',
         display: () => {
           return this.fullExtent$.pipe(map((v) => v && !this.isDesktop()));
         },
@@ -670,9 +670,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   setResizeWindowIcon() {
     if (this.fullExtent) {
-      this.iconResizeWindows = 'vector-arrange-below';
+      this.iconResizeWindows = 'arrow-collapse';
+      // this.iconResizeWindows = 'vector-arrange-below';
     } else {
-      this.iconResizeWindows = 'crop-square';
+      this.iconResizeWindows = 'arrow-expand';
+      // this.iconResizeWindows = 'crop-square';
     }
   }
 
@@ -686,13 +688,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   reduceWindow() {
-    this.iconResizeWindows = 'crop-square';
     this.fullExtent = false;
+    this.setResizeWindowIcon();
   }
 
   enlargeWindows() {
-    this.iconResizeWindows = 'vector-arrange-below';
     this.fullExtent = true;
+    this.setResizeWindowIcon();
   }
 
 }

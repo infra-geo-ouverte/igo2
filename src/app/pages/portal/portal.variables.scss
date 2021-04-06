@@ -10,7 +10,8 @@ $app-expansion-panel-height: 281px;
 $app-expansion-panel-height-maximized: 496px;
 $app-expansion-panel-header-height: calc(#{$app-expansion-panel-collapsed-height} + 10px);
 
-$app-toast-panel-collapsed-height: 48px;
+$app-toast-panel-collapsed-height: 46px;
+$app-toast-panel-collapsed-height-mobile: 35px;
 // $app-toast-panel-max-height: 281px;
 // $app-full-toast-panel-max-height: 800px;
 // $app-full-toast-panel-max-width: 750px;
