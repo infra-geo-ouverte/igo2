@@ -359,7 +359,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           this.toastPanelOpened = false;
         }
       });
-    this.map.ol.once('postrender', () => {
+    this.map.ol.once('rendercomplete', () => {
       this.readQueryParams();
     });
 
@@ -942,7 +942,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private readQueryParams() {
-    this.route.queryParams.pipe(debounceTime(250)).subscribe((params) => {
+    this.route.queryParams.subscribe((params) => {
       this.routeParams = params;
       this.readToolParams();
       this.readSearchParams();
