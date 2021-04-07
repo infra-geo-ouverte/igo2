@@ -195,12 +195,13 @@
   [map]="map"
   [store]="queryStore"
   [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
-  [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getExtent()"
+  [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getToastPanelExtent()"
   [@toastPanelOffsetY]="getToastPanelOffsetY()"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
   [opened]="toastPanelOpened"
   (openedChange)="toastOpenedChange($event)"
-  (fullExtentEvent)="fullExtent = $event">
+  (fullExtentEvent)="fullExtent = $event"
+  (windowHtmlDisplayEvent)="toastPanelHtmlDisplay= $event">
 </app-toast-panel>
 
 <ng-template #contextMenu>

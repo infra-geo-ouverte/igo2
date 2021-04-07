@@ -148,6 +148,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     undefined
   );
   private menuButtonReverseColor = false;
+  public toastPanelHtmlDisplay = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
@@ -805,14 +806,20 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  getExtent() {
+  getToastPanelExtent() {
     if (!this.sidenavOpened) {
+      if (this.toastPanelHtmlDisplay && this.mediaService.isDesktop()) {
+        return 'htmlDisplay';
+      }
       if (this.fullExtent) {
         return 'fullStandard';
       } else {
         return 'standard';
       }
     } else if (this.sidenavOpened) {
+      if (this.toastPanelHtmlDisplay && this.mediaService.isDesktop()) {
+        return 'htmlDisplayOffsetX';
+      }
       if (this.fullExtent) {
         return 'fullOffsetX';
       } else {
@@ -1054,7 +1061,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           layerFromUrl[0],
           type,
           visibility,
-          parseInt(layerFromUrl[1] || 1000, 10)
+          layerFromUrl[1] ? parseInt(layerFromUrl[1], 10) : undefined
         );
       });
       cnt += 1;
@@ -1114,7 +1121,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     name: string,
     type: 'wms' | 'wmts' | 'arcgisrest'| 'imagearcgisrest' | 'tilearcgisrest',
     visibility: boolean = true,
-    zIndex: number = 100000
+    zIndex: number
   ) {
     if (!this.contextLoaded) {
       return;
