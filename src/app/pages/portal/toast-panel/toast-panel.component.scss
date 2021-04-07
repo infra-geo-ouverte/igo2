@@ -75,7 +75,7 @@
   .toast-content {
     height: 100%;
     width: 100%;
-    max-height: calc(#{$app-toast-panel-max-height} - 4vh); // scroll bar inside panel
+    max-height: calc(#{$app-toast-panel-max-height} - 34px); // scroll bar inside panel
   }
 }
 
@@ -87,7 +87,7 @@
   .toast-content {
     height: 100%;
     width: 100%;
-    max-height: calc(#{$app-full-toast-panel-max-height} - 8vh); // scroll inside panel on overflow
+    max-height: calc(#{$app-full-toast-panel-max-height} - 41px); // scroll inside panel on overflow
   }
   @include tablet {
     width: $app-toast-panel-width-tablet;
@@ -138,7 +138,7 @@
 }
 
 .app-toast-panel-html-collapsed {
-  height: $app-toast-panel-collapsed-height !important; 
+  height: $app-toast-panel-collapsed-height !important;
   width: $app-toast-panel-html-width;
 
   @include mobile {
@@ -201,10 +201,6 @@ host.app-full-toast-panel-opened igo-feature-details[_ngcontent-fiq-c23] iframe 
 
 .swipe-fix {
   touch-action: pinch-zoom !important;
-}
-
-igo-panel ::ng-deep igo-list {
-  max-height: 230px;
 }
 
 igo-actionbar {
