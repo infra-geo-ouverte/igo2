@@ -44,7 +44,7 @@ import {
   StorageScope,
   StorageServiceEvent
 } from '@igo2/core';
-import { SearchState, StorageState } from '@igo2/integration';
+import { QueryState, StorageState } from '@igo2/integration';
 
 @Component({
   selector: 'app-toast-panel',
@@ -259,7 +259,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     public mediaService: MediaService,
     public languageService: LanguageService,
     private storageState: StorageState,
-    private searchState: SearchState
+    private queryState: QueryState
   ) {
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
@@ -467,7 +467,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         getCommonVectorSelectedStyle(
           Object.assign({},
             { feature: this.abstractFocusedOrSelectedResult },
-            this.searchState.searchOverlayStyleSelection));
+            this.queryState.queryOverlayStyleSelection));
       this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
       this.map.queryResultsOverlay.addFeature(
         this.abstractFocusedOrSelectedResult,
@@ -494,7 +494,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     result.data.meta.style = getCommonVectorSelectedStyle(
       Object.assign({},
         { feature: result.data },
-        this.searchState.searchOverlayStyleSelection));
+        this.queryState.queryOverlayStyleSelection));
     result.data.meta.style.setZIndex(2000);
     this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -509,7 +509,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     result.data.meta.style = getCommonVectorStyle(
       Object.assign({},
         { feature: result.data },
-        this.searchState.searchOverlayStyleFocus));
+        this.queryState.queryOverlayStyleFocus));
     result.data.meta.style.setZIndex(undefined);
     this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -535,13 +535,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       if (feature.meta.id === result.meta.id) {
         feature.data.meta.style = getCommonVectorSelectedStyle(
           Object.assign({}, { feature: feature.data },
-            this.searchState.searchOverlayStyleSelection));
+            this.queryState.queryOverlayStyleSelection));
         feature.data.meta.style.setZIndex(2000);
       } else {
         feature.data.meta.style = getCommonVectorStyle(
           Object.assign({},
             { feature: feature.data },
-            this.searchState.searchOverlayStyleFocus));
+            this.queryState.queryOverlayStyleFocus));
       }
       features.push(feature.data);
     }
@@ -574,7 +574,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       feature.data.meta.style = getCommonVectorStyle(
         Object.assign({},
           { feature: feature.data },
-          this.searchState.searchOverlayStyleFocus));
+          this.queryState.queryOverlayStyleFocus));
       features.push(feature.data);
     }
     this.map.queryResultsOverlay.setFeatures(features, FeatureMotion.None, 'map');
