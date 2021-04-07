@@ -21,10 +21,12 @@ interface Environment {
       forceCoordsNA: boolean;
     };
     queryOverlayStyle?: {
+      base?: CommonVectorStyleOptions,
       selection?: CommonVectorStyleOptions,
       focus?: CommonVectorStyleOptions
     };
     searchOverlayStyle?: {
+      base?: CommonVectorStyleOptions,
       selection?: CommonVectorStyleOptions,
       focus?: CommonVectorStyleOptions
     };
@@ -47,6 +49,13 @@ export const environment: Environment = {
       forceCoordsNA: true
     },
     searchOverlayStyle: {
+      base: {
+        markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
+        fillColor: undefined,           // poly
+        strokeColor: undefined,         // line and poly
+        strokeWidth: undefined          // line and poly
+      },
       focus: {
         markerColor: undefined,         // marker fill
         markerOutlineColor: undefined,  // marker contour
@@ -63,6 +72,13 @@ export const environment: Environment = {
       }
     },
     queryOverlayStyle: {
+      base: {
+        markerColor: undefined,         // marker fill
+        markerOutlineColor: undefined,  // marker contour
+        fillColor: undefined,           // poly
+        strokeColor: undefined,         // line and poly
+        strokeWidth: undefined          // line and poly
+      },
       focus: {
         markerColor: undefined,         // marker fill
         markerOutlineColor: undefined,  // marker contour

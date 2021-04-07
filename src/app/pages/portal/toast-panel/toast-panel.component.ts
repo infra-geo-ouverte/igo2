@@ -467,7 +467,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         getCommonVectorSelectedStyle(
           Object.assign({},
             { feature: this.abstractFocusedOrSelectedResult },
-            this.queryState.queryOverlayStyleSelection));
+            trigger === 'selected' ?
+              this.queryState.queryOverlayStyleSelection :
+              this.queryState.queryOverlayStyleFocus));
       this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
       this.map.queryResultsOverlay.addFeature(
         this.abstractFocusedOrSelectedResult,
@@ -494,7 +496,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     result.data.meta.style = getCommonVectorSelectedStyle(
       Object.assign({},
         { feature: result.data },
-        this.queryState.queryOverlayStyleSelection));
+        this.queryState.queryOverlayStyleFocus));
     result.data.meta.style.setZIndex(2000);
     this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -509,7 +511,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     result.data.meta.style = getCommonVectorStyle(
       Object.assign({},
         { feature: result.data },
-        this.queryState.queryOverlayStyleFocus));
+        this.queryState.queryOverlayStyle));
     result.data.meta.style.setZIndex(undefined);
     this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -541,7 +543,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         feature.data.meta.style = getCommonVectorStyle(
           Object.assign({},
             { feature: feature.data },
-            this.queryState.queryOverlayStyleFocus));
+            this.queryState.queryOverlayStyle));
       }
       features.push(feature.data);
     }
@@ -574,7 +576,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       feature.data.meta.style = getCommonVectorStyle(
         Object.assign({},
           { feature: feature.data },
-          this.queryState.queryOverlayStyleFocus));
+          this.queryState.queryOverlayStyle));
       features.push(feature.data);
     }
     this.map.queryResultsOverlay.setFeatures(features, FeatureMotion.None, 'map');
