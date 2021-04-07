@@ -1078,6 +1078,13 @@ Exemple
         .. code:: json
               "queryOverlayStyle": {},
               "searchOverlayStyle": {
+                  "base": {
+                      "markerColor": "purple",         // marker fill
+                      "fillColor": [233,66,133],       // poly
+                      "outlineColor": "LightPink",      // marker contour
+                      "strokeColor": "green",           // line and poly
+                      "strokeWidth": 1                  // line and poly
+                  },
                   "selection": {
                       "markerColor": "#32a852",         // marker fill
                       "fillColor": [95,96,133],         // poly
