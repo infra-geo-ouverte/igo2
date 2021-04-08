@@ -57,7 +57,7 @@ export const environment: Environment = {
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
         strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly   
+        strokeWidth: undefined          // line and poly
       },
       focus: {
         markerColor: undefined,         // marker fill
@@ -67,7 +67,7 @@ export const environment: Environment = {
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
         strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly   
+        strokeWidth: undefined          // line and poly
       },
       selection: {
         markerColor: undefined,         // marker fill
@@ -77,7 +77,7 @@ export const environment: Environment = {
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
         strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly     
+        strokeWidth: undefined          // line and poly  
       }
     },
     queryOverlayStyle: {
@@ -89,7 +89,7 @@ export const environment: Environment = {
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
         strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly   
+        strokeWidth: undefined          // line and poly
       },
       focus: {
         markerColor: undefined,         // marker fill
@@ -99,7 +99,7 @@ export const environment: Environment = {
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
         strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly   
+        strokeWidth: undefined          // line and poly
       },
       selection: {
         markerColor: undefined,         // marker fill
@@ -109,7 +109,7 @@ export const environment: Environment = {
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
         strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly   
+        strokeWidth: undefined          // line and poly
       }
     },
     auth: {
