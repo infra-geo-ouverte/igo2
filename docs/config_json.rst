@@ -255,7 +255,11 @@ Exemples
             "auth": {
                 "url": "/apis/users",
                 "tokenKey": "id_token_igo",
-                "allowAnonymous": true
+                "allowAnonymous": true,
+                "hostsWithCredentials": [{
+                                           withCredentials: true,
+                                           domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
+                                        }]
             }
 
 Propriétés
@@ -293,12 +297,18 @@ Propriétés
                d'accéder aux contextes publics
          - true | false
          - true
-       * - ...
-         - ...
+       * - hostsWithCredentials
+         - {}[] (liste d'objet)
          - .. line-block::
-               ...
-         - ...
-         - ...
+               Indique à l'application, la liste des domaines a être interceptés
+               et à y ajouter dans l'appel.
+               "withCredentials": true/false selon la valeur définie.
+               exemple: [{
+                             withCredentials: true,
+                             domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
+                        }]
+         - 
+         - 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
