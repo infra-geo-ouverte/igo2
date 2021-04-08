@@ -226,6 +226,78 @@
           "outputFormat": "geojson"
         }
       }
+    },
+    {
+      "id":4,
+      "title": "Filterable WMS layers with predefined filters and time ogc",
+      "sourceOptions": {
+        "type": "wms",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+        "queryable": true,
+        "paramsWFS": {
+          "featureTypes": "vg_observation_v_autre_wmst",
+          "fieldNameGeometry": "geometry",
+          "maxFeatures": 10000,
+          "version": "2.0.0",
+          "outputFormat": "geojson",
+          "outputFormatDownload": "SHP"
+        },
+        "params": {
+          "layers": "vg_observation_v_autre_wmst"
+        },
+        "sourceFields": [
+          {"name": "date_observation", "alias": "Date de l'observation", "allowedOperatorsType": "Time"},
+          {"name": "type", "alias": "type", "allowedOperatorsType": "all"}
+        ],
+        "ogcFilters": {
+          "enabled": true,
+          "editable": true,
+          "pushButtons": {
+            "selectorType": "pushButton",
+            "groups": [
+              {"title": "Group 1 Title","name": "1","ids": ["id1"]}
+            ],
+            "bundles": [
+              {
+                "id": "id1",
+                "logical": "Or",
+                "title": "Évènements",
+                "selectors": [
+                  {
+                    "title": "Mouvement de terrain",
+                    "tooltip": "Here a tooltip explaning ...",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "type",
+                      "expression": "Mouvement de terrain"
+                    }
+                  },
+                  {
+                    "title": "Inondation",
+                    "tooltip": "Here a tooltip explaning ...",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "type",
+                      "expression": "Inondation"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "filters":
+            {
+              "operator": "During",
+              "propertyName": "date_observation",
+              "begin": "2016-01-21T00:00:00-05:00",
+              "end": "today"
+            },
+          "allowedOperatorsType": "basic"
+        },
+        "minDate": "2010-01-01T00:00:00-05:00",
+        "maxDate": "2025-12-31T00:00:00-05:00",
+        "stepDate": "P1D"
+      }
     }
   ],
   "toolbar": [
