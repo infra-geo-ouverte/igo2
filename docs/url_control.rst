@@ -130,6 +130,8 @@ Sélection du contexte
             - #borne, #bornes, #repère, #km
         - search=patate&sf=1
             - **sf=1** permet de zoomer sur le premier résultat
+        - search=1000000&exactMatch=1
+            - **exactMatch=1** permet de conserver dans la liste des résultats que ceux ayant un match exact. Controle par URL pour la 1ère recherche par url seulement.
  
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?search=feu&zoom=18
