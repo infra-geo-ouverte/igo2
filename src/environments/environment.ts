@@ -77,7 +77,7 @@ export const environment: Environment = {
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
         strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly  
+        strokeWidth: undefined          // line and poly
       }
     },
     queryOverlayStyle: {
