@@ -56,7 +56,7 @@ export const environment: Environment = {
         fillColor: undefined,           // poly
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeOpacity is provided
+        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: undefined          // line and poly   
       },
       focus: {
@@ -66,7 +66,7 @@ export const environment: Environment = {
         fillColor: undefined,           // poly
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeOpacity is provided
+        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: undefined          // line and poly   
       },
       selection: {
@@ -76,7 +76,7 @@ export const environment: Environment = {
         fillColor: undefined,           // poly
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeOpacity is provided
+        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: undefined          // line and poly     
       }
     },
@@ -88,7 +88,7 @@ export const environment: Environment = {
         fillColor: undefined,           // poly
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeOpacity is provided
+        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: undefined          // line and poly   
       },
       focus: {
@@ -98,7 +98,7 @@ export const environment: Environment = {
         fillColor: undefined,           // poly
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeOpacity is provided
+        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: undefined          // line and poly   
       },
       selection: {
@@ -108,7 +108,7 @@ export const environment: Environment = {
         fillColor: undefined,           // poly
         fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeOpacity is provided
+        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: undefined          // line and poly   
       }
     },
