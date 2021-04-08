@@ -51,46 +51,64 @@ export const environment: Environment = {
     searchOverlayStyle: {
       base: {
         markerColor: undefined,         // marker fill
+        markerOpacity: undefined,       // marker opacity not applied if a rgba is provided
         markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
+        fillOpacity: undefined,         // poly fill opacity not applied if a rgba is provided
         strokeColor: undefined,         // line and poly
-        strokeWidth: undefined          // line and poly
+        strokeOpacity: undefined,       // line and poly not applied if a rgba is provided
+        strokeWidth: undefined          // line and poly   
       },
       focus: {
         markerColor: undefined,         // marker fill
+        markerOpacity: undefined,       // marker opacity not applied if a rgba is provided
         markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
+        fillOpacity: undefined,         // poly fill opacity not applied if a rgba is provided
         strokeColor: undefined,         // line and poly
-        strokeWidth: undefined          // line and poly
+        strokeOpacity: undefined,       // line and poly not applied if a rgba is provided
+        strokeWidth: undefined          // line and poly  
       },
       selection: {
         markerColor: undefined,         // marker fill
+        markerOpacity: undefined,       // marker opacity not applied if a rgba is provided
         markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
+        fillOpacity: undefined,         // poly fill opacity not applied if a rgba is provided
         strokeColor: undefined,         // line and poly
-        strokeWidth: undefined          // line and poly
+        strokeOpacity: undefined,       // line and poly not applied if a rgba is provided
+        strokeWidth: undefined          // line and poly 
       }
     },
     queryOverlayStyle: {
       base: {
         markerColor: undefined,         // marker fill
+        markerOpacity: undefined,       // marker opacity not applied if a rgba is provided
         markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
+        fillOpacity: undefined,         // poly fill opacity not applied if a rgba is provided
         strokeColor: undefined,         // line and poly
+        strokeOpacity: undefined,       // line and poly not applied if a rgba is provided
         strokeWidth: undefined          // line and poly
       },
       focus: {
         markerColor: undefined,         // marker fill
+        markerOpacity: undefined,       // marker opacity not applied if a rgba is provided
         markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
+        fillOpacity: undefined,         // poly fill opacity not applied if a rgba is provided
         strokeColor: undefined,         // line and poly
+        strokeOpacity: undefined,       // line and poly not applied if a rgba is provided
         strokeWidth: undefined          // line and poly
       },
       selection: {
         markerColor: undefined,         // marker fill
+        markerOpacity: undefined,       // marker opacity not applied if a rgba is provided
         markerOutlineColor: undefined,  // marker contour
         fillColor: undefined,           // poly
+        fillOpacity: undefined,         // poly fill opacity not applied if a rgba is provided
         strokeColor: undefined,         // line and poly
+        strokeOpacity: undefined,       // line and poly not applied if a rgba is provided
         strokeWidth: undefined          // line and poly
       }
     },
