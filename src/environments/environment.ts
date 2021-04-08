@@ -42,11 +42,9 @@ export const environment: Environment = {
       tokenKey: 'id_token_igo',
       allowAnonymous: true,
       trustHosts: ['geoegl.msp.gouv.qc.ca'],
-      autoLoginAnonymous: true,
-      loginButton: true
     },
     catalog: {
-      sources: [
+      sources: [               
         {
           id: 'Image Arcgis Rest',
           title: 'Image Arcgis Rest',

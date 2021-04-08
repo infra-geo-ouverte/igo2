@@ -256,8 +256,6 @@ Exemples
                 "url": "/apis/users",
                 "tokenKey": "id_token_igo",
                 "allowAnonymous": true,
-                "autoLoginAnonymous": true,
-                "loginButton": true;
                 "hostsWithCredentials": [{
                                            withCredentials: true,
                                            domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
@@ -297,18 +295,6 @@ Propriétés
          - .. line-block::
                Permet/Bloque l'accès aux usagers non authentifiés
                d'accéder aux contextes publics
-         - true | false
-         - true
-       * - autoLoginAnonymous
-         - Boolean
-         - .. line-block::
-               Accède automatiquement à l'application en mode anonyme.
-         - true | false
-         - false
-       * - loginButton
-         - Boolean
-         - .. line-block::
-               Indique si oui ou non le bouton doit être visible.
          - true | false
          - true
        * - hostsWithCredentials

@@ -79,7 +79,7 @@
       </igo-geolocate-button>
       <igo-rotation-button [showIfNoRotation]="showRotationButtonIfNoRotation" [map]="map" color="primary"></igo-rotation-button>
       <igo-user-button 
-        *ngIf="auth.loginButton"
+        *ngIf="auth.url"
         [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">

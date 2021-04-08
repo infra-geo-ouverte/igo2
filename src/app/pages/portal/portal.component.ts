@@ -312,9 +312,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window['IGO'] = this;
-    if (this.auth?.allowAnonymous && this.auth?.autoLoginAnonymous) {
-      this.authService.loginAnonymous();
-    }
 
     this.initWelcomeWindow();
 
