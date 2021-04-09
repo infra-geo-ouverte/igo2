@@ -21,6 +21,7 @@
     <igo-search-bar
       #searchBar
       [term]="searchBarTerm"
+      [termSplitter]="termSplitter"
       [minLength]="minSearchTermLength"
       [searchSettings]="true"
       [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
@@ -78,7 +79,9 @@
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-geolocate-button>
       <igo-rotation-button [showIfNoRotation]="showRotationButtonIfNoRotation" [map]="map" color="primary"></igo-rotation-button>
-      <igo-user-button [map]="map" color="primary"
+      <igo-user-button 
+        *ngIf="auth.url"
+        [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-user-button>
