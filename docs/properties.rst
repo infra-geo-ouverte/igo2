@@ -221,10 +221,8 @@ Propriétés
          - .. line-block::
                Définir l'échelle à laquelle la couche d'information commence
                 à s'afficher. Le chiffre inscrit correspond à l'échelle.
-                Ex. 2000000 correspond a 1:2000000
+                Ex. 2000000 correspond à 1:2000000
          -
-
-
        * - maxZoom
          - Number
          - .. line-block::
