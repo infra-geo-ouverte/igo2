@@ -44,7 +44,7 @@ export const environment: Environment = {
       trustHosts: ['geoegl.msp.gouv.qc.ca'],
     },
     catalog: {
-      sources: [               
+      sources: [
         {
           id: 'Image Arcgis Rest',
           title: 'Image Arcgis Rest',
