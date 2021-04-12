@@ -15,19 +15,6 @@
         "queryFormat": "gml2",
         "queryTitle": "Municipalite"
       }
-    },
-    {
-      "title": "MSP Tel. Urgence",
-      "sourceOptions": {
-        "type": "wms",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-        "params": {
-          "layers": "telephone_urg"
-        },
-        "queryable": true,
-        "queryFormat": "gml2",
-        "queryTitle": "desclocal"
-      }
     }
   ]
 }

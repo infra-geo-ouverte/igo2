@@ -50,66 +50,66 @@ export const environment: Environment = {
     },
     searchOverlayStyle: {
       base: {
-        markerColor: undefined,         // marker fill
-        markerOpacity: undefined,       // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: undefined,  // marker contour
-        fillColor: undefined,           // poly
-        fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly
+        markerColor: '#5ed0fb',          // marker fill
+        markerOpacity: 0.8,              // marker opacity not applied if a rgba markerColor is provided
+        markerOutlineColor: '#a7e7ff',   // marker contour
+        fillColor: '#5ed0fb',            // poly
+        fillOpacity: 0.2,                // poly fill opacity not applied if a rgba fillColor is provided
+        strokeColor: '#5ed0fb',          // line and poly
+        strokeOpacity: 0.7,              // line and poly not applied if a rgba strokeColor is provided
+        strokeWidth: 2                   // line and poly
       },
       focus: {
-        markerColor: undefined,         // marker fill
-        markerOpacity: undefined,       // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: undefined,  // marker contour
-        fillColor: undefined,           // poly
-        fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly
+        markerColor: '#5ed0fb',          // marker fill
+        markerOpacity: 1,                // marker opacity not applied if a rgba markerColor is provided
+        markerOutlineColor: '#DFF7FF',   // marker contour
+        fillColor: '#5ed0fb',            // poly
+        fillOpacity: 0.3,                // poly fill opacity not applied if a rgba fillColor is provided
+        strokeColor: '#DFF7FF',          // line and poly
+        strokeOpacity: 1,                // line and poly not applied if a rgba strokeColor is provided
+        strokeWidth: 2                   // line and poly
       },
       selection: {
-        markerColor: undefined,         // marker fill
-        markerOpacity: undefined,       // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: undefined,  // marker contour
-        fillColor: undefined,           // poly
-        fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly
+        markerColor: '#00a1de',           // marker fill
+        markerOpacity: 1,                 // marker opacity not applied if a rgba markerColor is provided
+        markerOutlineColor: '#ffffff',    // marker contour
+        fillColor: '#00a1de',             // poly
+        fillOpacity: 0.3,                 // poly fill opacity not applied if a rgba fillColor is provided
+        strokeColor: '#00A1DE',           // line and poly
+        strokeOpacity: 1,                 // line and poly not applied if a rgba strokeColor is provided
+        strokeWidth: 2                    // line and poly
       }
     },
     queryOverlayStyle: {
       base: {
-        markerColor: undefined,         // marker fill
-        markerOpacity: undefined,       // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: undefined,  // marker contour
-        fillColor: undefined,           // poly
-        fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly
+        markerColor: '#5ed0fb',          // marker fill
+        markerOpacity: 0.8,              // marker opacity not applied if a rgba markerColor is provided
+        markerOutlineColor: '#a7e7ff',   // marker contour
+        fillColor: '#5ed0fb',            // poly
+        fillOpacity: 0.2,                // poly fill opacity not applied if a rgba fillColor is provided
+        strokeColor: '#5ed0fb',          // line and poly
+        strokeOpacity: 0.7,              // line and poly not applied if a rgba strokeColor is provided
+        strokeWidth: 2                   // line and poly
       },
       focus: {
-        markerColor: undefined,         // marker fill
-        markerOpacity: undefined,       // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: undefined,  // marker contour
-        fillColor: undefined,           // poly
-        fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly
+        markerColor: '#5ed0fb',          // marker fill
+        markerOpacity: 1,                // marker opacity not applied if a rgba markerColor is provided
+        markerOutlineColor: '#DFF7FF',   // marker contour
+        fillColor: '#5ed0fb',            // poly
+        fillOpacity: 0.3,                // poly fill opacity not applied if a rgba fillColor is provided
+        strokeColor: '#DFF7FF',          // line and poly
+        strokeOpacity: 1,                // line and poly not applied if a rgba strokeColor is provided
+        strokeWidth: 2                   // line and poly
       },
       selection: {
-        markerColor: undefined,         // marker fill
-        markerOpacity: undefined,       // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: undefined,  // marker contour
-        fillColor: undefined,           // poly
-        fillOpacity: undefined,         // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: undefined,         // line and poly
-        strokeOpacity: undefined,       // line and poly not applied if a rgba strokeColor is provided
-        strokeWidth: undefined          // line and poly
+        markerColor: '#00a1de',           // marker fill
+        markerOpacity: 1,                 // marker opacity not applied if a rgba markerColor is provided
+        markerOutlineColor: '#ffffff',    // marker contour
+        fillColor: '#00a1de',             // poly
+        fillOpacity: 0.3,                 // poly fill opacity not applied if a rgba fillColor is provided
+        strokeColor: '#00A1DE',           // line and poly
+        strokeOpacity: 1,                 // line and poly not applied if a rgba strokeColor is provided
+        strokeWidth: 2                    // line and poly
       }
     },
     auth: {

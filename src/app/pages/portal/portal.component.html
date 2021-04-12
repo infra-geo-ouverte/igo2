@@ -23,10 +23,10 @@
       [term]="searchBarTerm"
       [minLength]="minSearchTermLength"
       [searchSettings]="true"
-      [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
       [forceNA]="forceCoordsNA"
       [store]="searchStore"
       (searchTermChange)="onSearchTermChange($event)"
+      [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
       (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
       [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
       (searchResultsGeometryStatus)="onSearchResultsGeometryStatusChange($event)"
@@ -73,7 +73,7 @@
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-offline-button>
-      <igo-geolocate-button 
+      <igo-geolocate-button
         *ngIf="hasGeolocateButton"
         [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
@@ -141,7 +141,7 @@
       [horizontal]="true"
       [withToggleButton]="actionbarMode === 'overlay'"
       [iconColor]="'primary'"
-      [color]="'primary'"    
+      [color]="'primary'"
       [mode]="actionbarMode"
       [overlayClass]="workspaceMenuClass">
     </igo-actionbar>

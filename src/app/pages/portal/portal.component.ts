@@ -7,8 +7,8 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
-import { debounceTime, take, pairwise, skipWhile, mergeMap, map, concatMap, tap } from 'rxjs/operators';
+import { Subscription, of, BehaviorSubject } from 'rxjs';
+import { debounceTime, take, pairwise, skipWhile } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
@@ -51,7 +51,6 @@ import {
   CapabilitiesService,
   sourceCanSearch,
   sourceCanReverseSearch,
-  FEATURE,
   ImportService,
   handleFileImportError,
   handleFileImportSuccess,
@@ -139,7 +138,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private context$$: Subscription;
   private openSidenav$$: Subscription;
 
-  public igoSearchPointerSummaryEnabled = false;
+  public igoSearchPointerSummaryEnabled: boolean;
 
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
@@ -297,9 +296,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
       'hasFeatureEmphasisOnSelection'
     );
+
+
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
+    if (this.igoSearchPointerSummaryEnabled === undefined) {
+      this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
+    }
+
     if (
       typeof this.configService.getConfig('menuButtonReverseColor') !==
       'undefined'
@@ -604,7 +609,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearchResultsGeometryStatusChange(value) {
-    this.searchState.searchResultsGeometryEnabled$.next(value);
+    this.searchState.setSearchResultsGeometryStatus(value);
   }
 
   onSearchSettingsChange() {
@@ -825,6 +830,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onPointerSummaryStatusChange(value) {
+    this.storageService.set('searchPointerSummaryEnabled', value);
     this.igoSearchPointerSummaryEnabled = value;
   }
 
