@@ -179,22 +179,6 @@ Propriétés
               minResolution: 0, 
               maxResolution: 400}
          - Voir dans l'objet `WorkspaceOptions`_
-       * - minResolution
-         - Number
-         - .. line-block::
-               Définir la résolution à laquelle la couche d'information arrête
-                de s'afficher.
-
-               Pour les **WMS** récupérant certaines propriétés du service, 
-               cette valeur peut y être récupérée.
-         -
-       * - minScaleDenom
-         - Number
-         - .. line-block::
-               Définir l'échelle à laquelle la couche d'information arrête 
-               de s'afficher. Le chiffre inscrit correspond a l'échelle.
-               Ex. 20000 correspond à 1:20000
-         -
        * - maxResolution
          - Number
          - .. line-block::
@@ -207,13 +191,27 @@ Propriétés
                propriétés du service, cette valeur peut
                être récupérée.
          -
-
        * - maxScaleDenom
          - Number
          - .. line-block::
                Définir l'échelle à laquelle la couche d'information commence
                 à s'afficher. Le chiffre inscrit correspond à l'échelle.
                 Ex. 2000000 correspond à 1:2000000
+       * - minResolution
+         - Number
+         - .. line-block::
+            Définir la résolution à laquelle la couche d'information arrête
+            de s'afficher.
+
+            Pour les **WMS** récupérant certaines propriétés du service, 
+            cette valeur peut y être récupérée.
+         -
+       * - minScaleDenom
+         - Number
+         - .. line-block::
+            Définir l'échelle à laquelle la couche d'information arrête 
+            de s'afficher. Le chiffre inscrit correspond a l'échelle.
+            Ex. 20000 correspond à 1:20000
          -
        * - metadata
          - Object{}
