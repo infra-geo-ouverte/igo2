@@ -2276,7 +2276,7 @@ Propriétés de l'objet sourceFields
 Sources de recherche (search-source)
 ************************************
 
-    Description
+    Configuration des sources qui seront impliquées dans la recherche faite dans la barre de recherche. Il peut y en avoir plusieurs.
 
 
 Source (base commune)
@@ -2296,8 +2296,8 @@ Source (base commune)
             - `StoredQueries`_ , WFS 2.0 (Québec)
             - `StoredQueries Reverse`_    , WFS 2.0  - par coordonnées (Québec)
 
-        Selon votre contexte, les sources de recherche ayant une limitation au Québec,
-        peuvent être utilisées comme exemple afin d'adapter votre propre service de recherche.
+        Selon votre contexte, les sources de recherche ayant une limitation au Québec, peuvent être utilisées comme exemple afin d'adapter 
+        votre propre service de recherche.
 
 
 Exemples
@@ -2755,8 +2755,7 @@ StoredQueries
             - rtss
             - chainage
 
-        Ces 2 attributs et leurs valeurs par défault
-        sont définies par 2 champs dans la configuration
+        Ces 2 attributs et leurs valeurs par défault sont définies par 2 champs dans la configuration
         (voir l'exemple ici-bas).
 
 Exemples
@@ -2764,6 +2763,7 @@ Exemples
       .. code:: json
 
             {"storedqueries": {
+                  "available": true,
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "rtss",
                   "fields": [
@@ -2787,6 +2787,9 @@ Propriétés
          - Description
          - .. line-block::
                Valeur défaut
+         - available
+         - active le service de recherche via les storedquery
+         - false
        * - **fields***
          - .. line-block::
                Liste des champs à interroger pour la StoredQueries.
