@@ -195,14 +195,6 @@ Propriétés
                de s'afficher. Le chiffre inscrit correspond a l'échelle.
                Ex. 20000 correspond à 1:20000
          -
-
-       * - minZoom
-         - Number
-         - .. line-block::
-               Niveau de zoom IGO minimal ou la couche s'affiche.
-               Ex. : 2  La couche ne s'affichera pas au niveau de zoom inférieur à 2.
-         -
-         -
        * - maxResolution
          - Number
          - .. line-block::
@@ -222,13 +214,6 @@ Propriétés
                Définir l'échelle à laquelle la couche d'information commence
                 à s'afficher. Le chiffre inscrit correspond à l'échelle.
                 Ex. 2000000 correspond à 1:2000000
-         -
-       * - maxZoom
-         - Number
-         - .. line-block::
-               Niveau de zoom IGO maximal ou la couche s'affiche.
-               Ex. : 15. La couche s'affichera jusqu'au niveau de zoom 15.
-         -
          -
        * - metadata
          - Object{}
