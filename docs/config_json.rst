@@ -146,6 +146,16 @@ Résumé
          - .. line-block::
                Liste de projections non enregistrées par défault par OpenLayers.
          -
+      * - queryOverlayStyle
+        - `overlayStyle`_
+        - .. line-block::
+              Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une interrogation par clic.
+           -
+      * - searchOverlayStyle
+        - `overlayStyle`_
+        - .. line-block::
+              Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une recherche.
+           -
        * - routingSources
          - `RoutingSource`_
          - .. line-block::
@@ -394,7 +404,7 @@ Exemples
                   {
                       "id": "mtq",
                       "title": "MTQ",
-                      "url": "/swtq",
+                      "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                       "sortDirection": "desc",
                       "queryFormat": {
                             "htmlgml2": "*",
@@ -407,7 +417,7 @@ Exemples
                   {
                       "id": "regexmtq",
                       "title": "MTQ (filtered by regex)",
-                      "url": "/swtq",
+                      "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                       "regFilters": ["zpegt"]
                   },
                   {
@@ -455,7 +465,7 @@ Exemples
                               },
                               {
                                 "id": "forcedProperties_wms",
-                                "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swt",
+                                "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                                 "type": "wms",
                                 "forcedProperties": [{
                                   "layerName": "lieuhabite",
@@ -1043,9 +1053,6 @@ Liens
         - `Exemple de mapOverlay <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json>`_
 
 
-.. _igoprojections:
-
-
 .. _optionsApi:
 
 ************
@@ -1064,6 +1071,48 @@ Exemple
                   "url": "/apis/igo2/layers/options"
               }
 
+
+.. _overlayStyle:
+
+************
+overlayStyle
+************
+
+  Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une interrogation par clic ou par une recherche.
+  Les objets sélection et focus sont facultatifs. Les propriétés contenues par ces objets sont également facultatives. 
+  Si les objects sont vide ou absent, le style par défaut sera appliqué (bleu et turquoise). 
+  Les couleurs acceptées peuvent être en couleur HEX, en liste RGB ou en couleur nommée.
+
+Exemple
+
+        .. code:: json
+              "queryOverlayStyle": {},
+              "searchOverlayStyle": {
+                  "base": {
+                      "markerColor": "purple",         // marker fill
+                      "fillColor": [233,66,133],       // poly
+                      "outlineColor": "LightPink",      // marker contour
+                      "strokeColor": "green",           // line and poly
+                      "strokeWidth": 1                  // line and poly
+                  },
+                  "selection": {
+                      "markerColor": "#32a852",         // marker fill
+                      "fillColor": [95,96,133],         // poly
+                      "outlineColor": "#a62997",        // marker contour
+                      "strokeColor": "#a62997",         // line and poly
+                      "strokeWidth": 4                  // line and poly
+                  },
+                  "focus": {
+                      "markerColor": "blue",            // marker fill
+                      "fillColor": "red",               // poly
+                      "outlineColor": "LightPink",      // marker contour
+                      "strokeColor": "Sienna",          // line and poly
+                      "strokeWidth": 2                  // line and poly
+                  }
+              }
+
+
+.. _igoprojections:
 
 ***************
 Projections

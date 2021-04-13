@@ -31,8 +31,8 @@ import {
   featureToOl,
   featuresAreTooDeepInView,
   featureFromOl,
-  getMarkerStyle,
-  getSelectedMarkerStyle,
+  getCommonVectorStyle,
+  getCommonVectorSelectedStyle,
   featuresAreOutOfView,
   computeOlFeaturesExtent
 } from '@igo2/geo';
@@ -44,7 +44,7 @@ import {
   StorageScope,
   StorageServiceEvent
 } from '@igo2/core';
-import { StorageState } from '@igo2/integration';
+import { QueryState, StorageState } from '@igo2/integration';
 
 @Component({
   selector: 'app-toast-panel',
@@ -258,7 +258,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   constructor(
     public mediaService: MediaService,
     public languageService: LanguageService,
-    private storageState: StorageState
+    private storageState: StorageState,
+    private queryState: QueryState
   ) {
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
@@ -271,17 +272,17 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       this.map.viewController.state$,
       this.resultSelected$
     ])
-    .pipe(debounceTime(100))
-    .subscribe((bunch) => {
-      const selectedResult = bunch[1];
-      if (!selectedResult) {
-        this.isSelectedResultOutOfView$.next(false);
-        return;
-      }
-      const selectedOlFeature = featureToOl(selectedResult.data, this.map.projection);
-      const selectedOlFeatureExtent = computeOlFeaturesExtent(this.map, [selectedOlFeature]);
-      this.isSelectedResultOutOfView$.next(featuresAreOutOfView(this.map, selectedOlFeatureExtent));
-    });
+      .pipe(debounceTime(100))
+      .subscribe((bunch) => {
+        const selectedResult = bunch[1];
+        if (!selectedResult) {
+          this.isSelectedResultOutOfView$.next(false);
+          return;
+        }
+        const selectedOlFeature = featureToOl(selectedResult.data, this.map.projection);
+        const selectedOlFeatureExtent = computeOlFeaturesExtent(this.map, [selectedOlFeature]);
+        this.isSelectedResultOutOfView$.next(featuresAreOutOfView(this.map, selectedOlFeatureExtent));
+      });
   }
 
 
@@ -450,34 +451,36 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
     const myOlFeature = featureToOl(result.data, this.map.projection);
     const olGeometry = myOlFeature.getGeometry();
-    if (result.data.geometry.type !== 'Point') {
-      if (featuresAreTooDeepInView(this.map, olGeometry.getExtent(), 0.0025)) {
-        const extent = olGeometry.getExtent();
-        const x = extent[0] + (extent[2] - extent[0]) / 2;
-        const y = extent[1] + (extent[3] - extent[1]) / 2;
-        const feature1 = new olFeature({
-          name: 'abstractFocusedOrSelectedResult',
-          geometry: new olPoint([x, y])
-        });
-        this.abstractFocusedOrSelectedResult = featureFromOl(
-          feature1,
-          this.map.projection
-        );
-        this.abstractFocusedOrSelectedResult.meta.style = getSelectedMarkerStyle(
-          this.abstractFocusedOrSelectedResult
-        );
-        this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
-        this.map.overlay.addFeature(
-          this.abstractFocusedOrSelectedResult,
-          FeatureMotion.None
-        );
-      }
+    if (featuresAreTooDeepInView(this.map, olGeometry.getExtent(), 0.0025)) {
+      const extent = olGeometry.getExtent();
+      const x = extent[0] + (extent[2] - extent[0]) / 2;
+      const y = extent[1] + (extent[3] - extent[1]) / 2;
+      const feature1 = new olFeature({
+        name: 'abstractFocusedOrSelectedResult',
+        geometry: new olPoint([x, y])
+      });
+      this.abstractFocusedOrSelectedResult = featureFromOl(
+        feature1,
+        this.map.projection
+      );
+      this.abstractFocusedOrSelectedResult.meta.style =
+        getCommonVectorSelectedStyle(
+          Object.assign({},
+            { feature: this.abstractFocusedOrSelectedResult },
+            trigger === 'selected' ?
+              this.queryState.queryOverlayStyleSelection :
+              this.queryState.queryOverlayStyleFocus));
+      this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
+      this.map.queryResultsOverlay.addFeature(
+        this.abstractFocusedOrSelectedResult,
+        FeatureMotion.None
+      );
     }
   }
 
   private clearFeatureEmphasis() {
     if (this.abstractFocusedOrSelectedResult) {
-      this.map.overlay.removeFeature(this.abstractFocusedOrSelectedResult);
+      this.map.queryResultsOverlay.removeFeature(this.abstractFocusedOrSelectedResult);
       this.abstractFocusedOrSelectedResult = undefined;
     }
   }
@@ -488,11 +491,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   focusResult(result: SearchResult<Feature>) {
     this.focusedResult$.next(result);
-    this.map.overlay.removeFeature(result.data);
+    this.map.queryResultsOverlay.removeFeature(result.data);
 
-    result.data.meta.style = getSelectedMarkerStyle(result.data);
+    result.data.meta.style = getCommonVectorSelectedStyle(
+      Object.assign({},
+        { feature: result.data },
+        this.queryState.queryOverlayStyleFocus));
     result.data.meta.style.setZIndex(2000);
-    this.map.overlay.addFeature(result.data, FeatureMotion.None);
+    this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
 
   unfocusResult(result: SearchResult<Feature>, force?) {
@@ -500,11 +506,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     if (!force && this.store.state.get(result).focused) {
       return;
     }
-    this.map.overlay.removeFeature(result.data);
+    this.map.queryResultsOverlay.removeFeature(result.data);
 
-    result.data.meta.style = getMarkerStyle(result.data);
+    result.data.meta.style = getCommonVectorStyle(
+      Object.assign({},
+        { feature: result.data },
+        this.queryState.queryOverlayStyle));
     result.data.meta.style.setZIndex(undefined);
-    this.map.overlay.addFeature(result.data, FeatureMotion.None);
+    this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
 
   selectResult(result: SearchResult<Feature>) {
@@ -526,15 +535,20 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     const features = [];
     for (const feature of this.store.all()) {
       if (feature.meta.id === result.meta.id) {
-        feature.data.meta.style = getSelectedMarkerStyle(feature.data);
+        feature.data.meta.style = getCommonVectorSelectedStyle(
+          Object.assign({}, { feature: feature.data },
+            this.queryState.queryOverlayStyleSelection));
         feature.data.meta.style.setZIndex(2000);
       } else {
-        feature.data.meta.style = getMarkerStyle(feature.data);
+        feature.data.meta.style = getCommonVectorStyle(
+          Object.assign({},
+            { feature: feature.data },
+            this.queryState.queryOverlayStyle));
       }
       features.push(feature.data);
     }
-    this.map.overlay.removeFeatures(features);
-    this.map.overlay.addFeatures(features, FeatureMotion.None);
+    this.map.queryResultsOverlay.removeFeatures(features);
+    this.map.queryResultsOverlay.addFeatures(features, FeatureMotion.None);
 
     if (this.zoomAuto) {
       const localOlFeature = this.format.readFeature(
@@ -559,15 +573,18 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
     const features = [];
     for (const feature of this.store.all()) {
-      feature.data.meta.style = getMarkerStyle(feature.data);
+      feature.data.meta.style = getCommonVectorStyle(
+        Object.assign({},
+          { feature: feature.data },
+          this.queryState.queryOverlayStyle));
       features.push(feature.data);
     }
-    this.map.overlay.setFeatures(features, FeatureMotion.None, 'map');
+    this.map.queryResultsOverlay.setFeatures(features, FeatureMotion.None, 'map');
   }
 
   clear() {
     this.clearFeatureEmphasis();
-    this.map.overlay.removeFeatures(this.store.all().map((f) => f.data));
+    this.map.queryResultsOverlay.clear();
     this.store.clear();
     this.unselectResult();
     this.setHtmlDisplay(false);

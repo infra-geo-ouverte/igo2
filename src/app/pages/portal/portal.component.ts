@@ -7,8 +7,8 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
-import { debounceTime, take, pairwise, skipWhile, mergeMap, map, concatMap, tap } from 'rxjs/operators';
+import { Subscription, of, BehaviorSubject } from 'rxjs';
+import { debounceTime, take, pairwise, skipWhile } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
@@ -52,7 +52,6 @@ import {
   CapabilitiesService,
   sourceCanSearch,
   sourceCanReverseSearch,
-  FEATURE,
   ImportService,
   handleFileImportError,
   handleFileImportSuccess,
@@ -143,7 +142,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private context$$: Subscription;
   private openSidenav$$: Subscription;
 
-  public igoSearchPointerSummaryEnabled = false;
+  public igoSearchPointerSummaryEnabled: boolean;
 
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
@@ -231,6 +230,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.searchState.store;
   }
 
+  get searchResultsGeometryEnabled(): boolean {
+    return this.searchState.searchResultsGeometryEnabled$.value;
+  }
+
   get queryStore(): EntityStore<SearchResult> {
     return this.queryState.store;
   }
@@ -302,9 +305,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
       'hasFeatureEmphasisOnSelection'
     );
+
+
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
+    if (this.igoSearchPointerSummaryEnabled === undefined) {
+      this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
+    }
+
     if (
       typeof this.configService.getConfig('menuButtonReverseColor') !==
       'undefined'
@@ -615,6 +624,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchStore.load(newResults);
   }
 
+  onSearchResultsGeometryStatusChange(value) {
+    this.searchState.setSearchResultsGeometryStatus(value);
+  }
+
   onSearchSettingsChange() {
     this.onSettingsChange$.next(true);
   }
@@ -704,12 +717,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public onClearSearch() {
-    this.map.overlay.removeFeatures(
-      this.searchStore
-        .all()
-        .filter((f) => f.meta.dataType === FEATURE)
-        .map((f) => f.data as Feature)
-    );
+    this.map.searchResultsOverlay.clear();
     this.searchStore.clear();
     this.searchState.setSelectedResult(undefined);
     this.searchState.deactivateCustomFilterTermStrategy();
@@ -839,6 +847,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onPointerSummaryStatusChange(value) {
+    this.storageService.set('searchPointerSummaryEnabled', value);
     this.igoSearchPointerSummaryEnabled = value;
   }
 
@@ -1011,6 +1020,9 @@ export class PortalComponent implements OnInit, OnDestroy {
         });
       }
       this.searchBarTerm = this.routeParams['search'];
+    }
+    if (params['searchGeom'] === '1') {
+      this.searchState.searchResultsGeometryEnabled$.next(true);
     }
   }
 
