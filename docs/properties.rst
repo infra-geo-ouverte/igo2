@@ -2774,6 +2774,7 @@ Exemples
 
             {"storedqueries": {
                   "available": true,
+                  "title": "le titre interface",
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "rtss",
                   "fields": [
@@ -2833,6 +2834,10 @@ Propriétés
        * - **storedquery_id***
          - .. line-block::
                Nom de la requête à demander au serveur.
+         -
+       * - title
+         - .. line-block::
+               Le titre de recherche qui apparait dans l'interface
          -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
