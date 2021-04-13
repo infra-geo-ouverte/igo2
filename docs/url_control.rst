@@ -132,6 +132,8 @@ Sélection du contexte
             - **sf=1** permet de zoomer sur le premier résultat
         - search=915&searchGeom=1
             - **searchGeom=1** permet de faire afficher la géométrie des résultats retournés par la recherche.
+        - search=1000000&exactMatch=1
+            - **exactMatch=1** permet de conserver dans la liste des résultats que ceux ayant un match exact. Controle par URL pour la 1ère recherche par url seulement.
  
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?search=feu&zoom=18
