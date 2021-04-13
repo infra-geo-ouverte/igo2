@@ -40,6 +40,7 @@ import { DetailedContext } from '@igo2/context';
 import {
   DataSourceService,
   Feature,
+  FEATURE,
   featureToSearchResult,
   GoogleLinks,
   IgoMap,
@@ -658,9 +659,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.route.queryParams.pipe(debounceTime(250)).subscribe((params) => {
-      if (!params['context'] || params['context'] === context.uri) {
-        this.readLayersQueryParams(params);
+    this.route.queryParams.pipe(debounceTime(250)).subscribe((qParams) => {
+      if (!qParams['context'] || qParams['context'] === context.uri) {
+        this.readLayersQueryParams(qParams);
       }
     });
 
@@ -1021,7 +1022,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       this.searchBarTerm = this.routeParams['search'];
     }
-    if (params['searchGeom'] === '1') {
+    if (this.routeParams['searchGeom'] === '1') {
       this.searchState.searchResultsGeometryEnabled$.next(true);
     }
   }
