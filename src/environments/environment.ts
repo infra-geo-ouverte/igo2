@@ -28,7 +28,7 @@ interface Environment {
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
     interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
-    depot?: { url: string };
+    depot?: { url: string; trainingGuides?: string[]; };
     queryOverlayStyle?: {
       base?: CommonVectorStyleOptions,
       selection?: CommonVectorStyleOptions,
