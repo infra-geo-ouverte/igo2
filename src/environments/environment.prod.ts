@@ -21,7 +21,7 @@ interface Environment {
     projections?: Projection[];
     spatialFilter?: SpatialFilterOptions;
     interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
-    depot?: { url: string };
+    depot?: { url: string; trainingGuides?: string[]; };
     queryOverlayStyle?: {
       base?: CommonVectorStyleOptions,
       selection?: CommonVectorStyleOptions,
