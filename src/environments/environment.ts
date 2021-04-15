@@ -52,7 +52,7 @@ export const environment: Environment = {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
       allowAnonymous: true,
-      trustHosts: ['geoegl.msp.gouv.qc.ca'],      
+      trustHosts: ['geoegl.msp.gouv.qc.ca']
     },
     catalog: {
       sources: [
