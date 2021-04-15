@@ -179,17 +179,6 @@ Propriétés
               minResolution: 0, 
               maxResolution: 400}
          - Voir dans l'objet `WorkspaceOptions`_
-       * - minResolution
-         - Number
-         - .. line-block::
-               Définir la résolution à laquelle la couche
-               d'information arrête de s'afficher.
-
-               Pour les **WMS** récupérant certaines
-               propriétés du service, cette valeur peut
-               être récupérée.
-         -
-         -
        * - maxResolution
          - Number
          - .. line-block::
@@ -202,6 +191,27 @@ Propriétés
                propriétés du service, cette valeur peut
                être récupérée.
          -
+       * - maxScaleDenom
+         - Number
+         - .. line-block::
+               Définir l'échelle à laquelle la couche d'information commence
+                à s'afficher. Le chiffre inscrit correspond à l'échelle.
+                Ex. 2000000 correspond à 1:2000000
+       * - minResolution
+         - Number
+         - .. line-block::
+            Définir la résolution à laquelle la couche d'information arrête
+            de s'afficher.
+
+            Pour les **WMS** récupérant certaines propriétés du service, 
+            cette valeur peut y être récupérée.
+         -
+       * - minScaleDenom
+         - Number
+         - .. line-block::
+            Définir l'échelle à laquelle la couche d'information arrête 
+            de s'afficher. Le chiffre inscrit correspond a l'échelle.
+            Ex. 20000 correspond à 1:20000
          -
        * - metadata
          - Object{}
@@ -2276,7 +2286,7 @@ Propriétés de l'objet sourceFields
 Sources de recherche (search-source)
 ************************************
 
-    Description
+    Configuration des sources qui seront impliquées dans la recherche faite dans la barre de recherche. Il peut y en avoir plusieurs.
 
 
 Source (base commune)
@@ -2296,8 +2306,8 @@ Source (base commune)
             - `StoredQueries`_ , WFS 2.0 (Québec)
             - `StoredQueries Reverse`_    , WFS 2.0  - par coordonnées (Québec)
 
-        Selon votre contexte, les sources de recherche ayant une limitation au Québec,
-        peuvent être utilisées comme exemple afin d'adapter votre propre service de recherche.
+        Selon votre contexte, les sources de recherche ayant une limitation au Québec, peuvent être utilisées comme exemple afin d'adapter 
+        votre propre service de recherche.
 
 
 Exemples
@@ -2755,8 +2765,7 @@ StoredQueries
             - rtss
             - chainage
 
-        Ces 2 attributs et leurs valeurs par défault
-        sont définies par 2 champs dans la configuration
+        Ces 2 attributs et leurs valeurs par défault sont définies par 2 champs dans la configuration
         (voir l'exemple ici-bas).
 
 Exemples
@@ -2764,6 +2773,8 @@ Exemples
       .. code:: json
 
             {"storedqueries": {
+                  "available": true,
+                  "title": "le titre interface",
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "rtss",
                   "fields": [
@@ -2787,6 +2798,9 @@ Propriétés
          - Description
          - .. line-block::
                Valeur défaut
+         - available
+         - active le service de recherche via les storedquery
+         - false
        * - **fields***
          - .. line-block::
                Liste des champs à interroger pour la StoredQueries.
@@ -2820,6 +2834,10 @@ Propriétés
        * - **storedquery_id***
          - .. line-block::
                Nom de la requête à demander au serveur.
+         -
+       * - title
+         - .. line-block::
+               Le titre de recherche qui apparait dans l'interface
          -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
