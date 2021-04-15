@@ -3094,6 +3094,17 @@ Exemples
 
             {
                 "name": "catalog"
+                "options": {
+                    "addCatalogAllowed": true,
+                    "predefinedCatalogs": [
+                        {
+                            "id": "Gououvert3",
+                            "title": "Gouvouvert3",
+                            "externalProvider": true,
+                            "url": "/apis/ws/igo_gouvouvert.fcgi"
+                        }
+                    ]
+                }
             }
 
 Propriétés
@@ -3131,8 +3142,48 @@ Propriétés
                    - fichiers dans :ref:`Language <igolanguage>`.
          -
          - igo.integration.tools.catalog
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         -
+         -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - addCatalogAllowed
+         - Boolean
+         - .. line-block::
+               Définit  si le formulaire d'ajout de 
+               catalogue est disponible ou non. Les 
+               catalogues ajoutés sont enregistrés 
+               dans la mémoire du fureteur.
+         - true/false
+         - false
+       * - predefinedCatalogs
+         - :ref:`Catalog[] <igocatalogObject>`.
+         - .. line-block::
+               Liste préféfinie de catalogues
+               permettant de pré-remplir un 
+               menu de sélection, afin d'ajouter
+               des catalogues.
+         - true/false
+         - false
 
 Liens
 

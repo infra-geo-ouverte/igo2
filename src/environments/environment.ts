@@ -52,13 +52,14 @@ export const environment: Environment = {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
       allowAnonymous: true,
-      trustHosts: ['geoegl.msp.gouv.qc.ca'],
+      trustHosts: ['geoegl.msp.gouv.qc.ca'],      
     },
     catalog: {
       sources: [
         {
           id: 'Image Arcgis Rest',
           title: 'Image Arcgis Rest',
+          externalProvider: true,
           url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer',
           type: 'imagearcgisrest',
           sourceOptions: {
@@ -134,6 +135,7 @@ export const environment: Environment = {
             {
               id: 'forcedProperties_arcgisrest',
               url: 'https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer',
+              externalProvider: true,
               type: 'arcgisrest',
               forcedProperties: [{
                 layerName: 'Sediment substrate / Substrat sédimentaire',

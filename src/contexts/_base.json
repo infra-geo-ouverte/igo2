@@ -198,7 +198,16 @@
       "name": "directions"
     },
     {
-      "name": "catalog"
+      "name": "catalog",
+      "options": {
+        "addCatalogAllowed": true,
+        "predefinedCatalogs": [
+          {
+            "externalProvider": false,
+            "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq"
+          }
+        ]
+      }
     },
     {
       "name": "catalogBrowser"
