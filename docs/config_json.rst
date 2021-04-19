@@ -780,6 +780,58 @@ Liens
 
         - `igo2-lib/packages/context/src/lib/context-manager/shared/context.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/context/src/lib/context-manager/shared/context.interface.ts>`_
 
+***************
+Depot
+***************
+
+.. note::
+      En cours de construction
+
+.. line-block::
+      Permet de rejoindre une API de dépôt nous fournissant des fichiers (par exemple, un guide d'autoformation).
+      Cette API sera documentée indépendamment de la présente documentation.
+
+Exemples
+
+      .. code:: json
+
+            depot: {
+            "url" : "https://geoegl.msp.gouv.qc.ca/apis/depot/...",
+            "trainingGuides?" : ["fichier1", "fichier2"]
+            }
+
+Propriétés
+
+.. list-table::
+      :widths: 10 10 30 15 10
+      :header-rows: 1
+
+      * - .. line-block::
+            Propriétés
+      - .. line-block::
+            Type
+      - .. line-block::
+            Description
+      - .. line-block::
+            Valeurs possibles
+      - .. line-block::
+            Valeur défaut
+      * - **url***
+      - String
+      - .. line-block::
+            Définit l'url d'appel du service
+            de dépôt de fichier
+      -
+      -
+      * - trainingGuides
+      - String[]
+      - .. line-block::
+            Nom ou identifiant des guides d'autoformation
+            à accéder.
+      -
+      -
+
+Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 ***********************
 hasSearchPointerSummary
