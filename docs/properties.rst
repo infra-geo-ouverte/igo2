@@ -2175,7 +2175,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
          -
        * - **id***
          - String
-         - Id rataché au groupe pour le classement dans le groupe. Doit être présente et identique dans ogcFilter.pushButtons.groups.ids
+         - Id rataché au groupe pour le classement dans le groupe. Doit être présente et identique dans ogcFilter.{selector}.groups.ids
          -
          -
        * - **logical***
@@ -2203,7 +2203,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
 
 .. _igoOgcFilterButtonsButtonsObject:
 
-Propriétés de l'objet ogcFilter.pushButtons.bundles.selector
+Propriétés de l'objet ogcFilter.{selector}.bundles.selector
 
     .. list-table::
        :widths: 10 10 30 15 10

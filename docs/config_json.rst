@@ -77,6 +77,11 @@ Résumé
                Activation de l'API de context d'IGO2. Cette API sera documentée indépendamment
                de la présente documentation.
          - ContextManager
+       * - depot
+         - `Depot`_
+         - .. line-block::
+               Activation de l'API de dépôt. Cette API sera documentée indépendamment
+               de la présente documentation.
        * - `hasSearchPointerSummary`_
          - Boolean
          - .. line-block::
