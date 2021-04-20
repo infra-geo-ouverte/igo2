@@ -21,13 +21,16 @@
     <igo-search-bar
       #searchBar
       [term]="searchBarTerm"
+      [termSplitter]="termSplitter"
       [minLength]="minSearchTermLength"
       [searchSettings]="true"
-      [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
       [forceNA]="forceCoordsNA"
       [store]="searchStore"
       (searchTermChange)="onSearchTermChange($event)"
+      [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
       (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
+      [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
+      (searchResultsGeometryStatus)="onSearchResultsGeometryStatusChange($event)"
       (search)="onSearch($event)"
       (clearFeature)="onClearSearch()"
       (searchSettingsChange)="onSearchSettingsChange()">
@@ -71,14 +74,16 @@
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-offline-button>
-      <igo-geolocate-button 
+      <igo-geolocate-button
         *ngIf="hasGeolocateButton"
         [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-geolocate-button>
       <igo-rotation-button [showIfNoRotation]="showRotationButtonIfNoRotation" [map]="map" color="primary"></igo-rotation-button>
-      <igo-user-button [map]="map" color="primary"
+      <igo-user-button 
+        *ngIf="auth.url"
+        [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-user-button>
@@ -139,7 +144,7 @@
       [horizontal]="true"
       [withToggleButton]="actionbarMode === 'overlay'"
       [iconColor]="'primary'"
-      [color]="'primary'"    
+      [color]="'primary'"
       [mode]="actionbarMode"
       [overlayClass]="workspaceMenuClass">
     </igo-actionbar>
@@ -193,12 +198,13 @@
   [map]="map"
   [store]="queryStore"
   [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
-  [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getExtent()"
+  [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getToastPanelExtent()"
   [@toastPanelOffsetY]="getToastPanelOffsetY()"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
   [opened]="toastPanelOpened"
   (openedChange)="toastOpenedChange($event)"
-  (fullExtentEvent)="fullExtent = $event">
+  (fullExtentEvent)="fullExtent = $event"
+  (windowHtmlDisplayEvent)="toastPanelHtmlDisplay= $event">
 </app-toast-panel>
 
 <ng-template #contextMenu>

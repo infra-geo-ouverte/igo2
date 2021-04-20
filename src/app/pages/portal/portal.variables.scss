@@ -10,11 +10,28 @@ $app-expansion-panel-height: 281px;
 $app-expansion-panel-height-maximized: 496px;
 $app-expansion-panel-header-height: calc(#{$app-expansion-panel-collapsed-height} + 10px);
 
-$app-toast-panel-collapsed-height: 48px;
-$app-toast-panel-max-height: 281px;
-$app-full-toast-panel-max-height: 800px;
-$app-full-toast-panel-max-width: 750px;
-$app-toast-panel-width: 30%;
+$app-toast-panel-collapsed-height: 46px;
+$app-toast-panel-collapsed-height-mobile: 35px;
+// $app-toast-panel-max-height: 281px;
+// $app-full-toast-panel-max-height: 800px;
+// $app-full-toast-panel-max-width: 750px;
+// $app-toast-panel-width: 30%;
+$app-toast-panel-width-tablet: 500px;
+
+$app-toast-panel-width: 42vw;
+$app-toast-panel-max-width: 600px;
+$app-toast-panel-height: 30vh;
+$app-toast-panel-max-height: 30vh;
+$app-toast-panel-height-mobile: 34vh;
+
+$app-full-toast-panel-width: 45vw;
+$app-full-toast-panel-max-height: 65vh;
+$app-full-toast-panel-height-mobile: 55vh;
+
+$app-toast-panel-html-width: 60vw;
+$app-toast-panel-html-height: 32vh;
+
+$app-toast-panel-html-large-height: 55vh;
 
 $app-sidenav-margin-top: 50px;
 $app-sidenav-height: calc(100% - #{$app-sidenav-margin-top});
