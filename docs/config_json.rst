@@ -109,7 +109,7 @@ Résumé
                polygonale sélectionnées ou survolées lors d'une interrogation de la carte et qui
                sont de trop petite taille par rapport à l'étendue de la carte.
          -
-       * - `drawingToolIcons`
+       * - `drawingTool`
          - String[]
          - .. line-block::
                Permet d'ajouter à l'outil de dessin un liste d'icônes à utiliser.
@@ -824,7 +824,7 @@ showRotationButtonIfNoRotation
         rotation est visible si aucune rotation n'est active. False par défaut.
 
 ***************
-DrawingToolIcons
+DrawingTool
 ***************
 
     .. line-block::
@@ -835,9 +835,11 @@ Exemples
 
         .. code:: json
 
-            drawingToolIcons: {
+            drawingTool: {
+                icons: [
                   "https://icons.duckduckgo.com/ip3/www.google.com.ico",
                   "https://img.icons8.com/color/search/96"
+                ]
             }
 
 Liens
