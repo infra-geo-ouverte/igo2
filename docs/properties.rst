@@ -3407,7 +3407,7 @@ draw
 ===========
 
     .. line-block::
-        Outil permettant de faire des dessins sur la carte.
+        Outil permettant de faire des dessins sur la carte. Il est aussi possible de remplacer les points dessinés par une liste d'icônes.
 
 
 Exemples
