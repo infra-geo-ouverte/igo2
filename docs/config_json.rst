@@ -67,7 +67,7 @@ Résumé
        * - :ref:`catalog <igocatalogConfig>`
          - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
-               Doit être présente si l'outil de catalogue. Permet de gérer les sources WMS et WMTS
+               Doit être présente si l'outil de catalogue. Permet de gérer les sources WMS, WMTS et ArcGISRest + tile et image
          - .. line-block::
                Catalog
                CatalogBrowser
@@ -387,6 +387,7 @@ Exemples
                       "id": "Image Arcgis Rest",
                       "title": "Image Arcgis Rest",
                       "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                      "externalProvider": true,
                       "type": "imagearcgisrest",
                       "sourceOptions": {
                           "queryable": true,
@@ -485,6 +486,7 @@ Exemples
                               {
                                 "id": "forcedProperties_arcgisrest",
                                 "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer",
+                                "externalProvider": true,
                                 "type": "imagearcgisrest",
                                 "forcedProperties": [{
                                   "layerName": "Sediment substrate / Substrat sédimentaire",
@@ -676,6 +678,12 @@ Propriétés - Objet Catalog
                OU url du service de baselayers
          -
          -
+       * - **externalProvider***
+         - Boolean
+         - .. line-block::
+               Définit si le catalogue provient d'une organisation externe.
+         - true/false
+         - false
        * - version
          - String
          - .. line-block::
