@@ -2001,14 +2001,32 @@ Propriétés
          - Icone à ajouter au message.
          -
          -
+       * - options.*
+         - Notification
+         - .. line-block::
+              Voir les options Notifications dans le projet 
+              `angular2-notification options. <https://github.com/flauc/angular2-notifications#options>`_
+         -
+         -
        * - options.template
          - String
          - En construction
          -
          -
-       * - options.timeOut
-         - Number
-         - Temps avant la disparition du message, en miliseconde.
+       * - options.from
+         - Date | String
+         - .. line-block::
+              Date de début de l'application du message.
+              Peut être une date OU un string interprétable
+              en javascript. `https://developer.mozilla.org/fr/docs... <https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/parse>`_
+         -
+         -
+       * - options.to
+         - Date | String
+         - .. line-block::
+              Date de fin de l'application du message.
+              Peut être une date OU un string interprétable
+              en javascript. `https://developer.mozilla.org/fr/docs... <https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/parse>`_
          -
          -
        * - text
