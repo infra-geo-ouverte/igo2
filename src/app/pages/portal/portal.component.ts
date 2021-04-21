@@ -622,7 +622,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           enabledSources.includes(result.source)
       )
       .concat(results);
-    this.searchStore.load(newResults);
+    this.searchStore.updateMany(newResults);
   }
 
   onSearchResultsGeometryStatusChange(value) {
