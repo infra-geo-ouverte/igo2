@@ -60,7 +60,7 @@
     },
     {
       "id":3,
-      "title": "Filterable WMS layers with predefined filters (buttons)",
+      "title": "Filterable WMS layers with predefined filters",
       "sourceOptions": {
         "type": "wms",
         "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
@@ -73,66 +73,18 @@
           "enabled": true,
           "editable": true,
           "pushButtons": {
+            "selectorType": "pushButton",
+            "order": 2,
             "groups": [
-              {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]},
-              {"title": "Group 2 Title", "name": "2", "ids": ["id1"]}
+              {"title": "Group 1 Title","name": "1","ids": ["id1"]},
+              {"title": "Group 2 Title","name": "2","ids": ["id1", "id2"]}
             ],
             "bundles": [
               {
                 "id": "id1",
+                "title": "Régions",
                 "logical": "Or",
-                "buttons": [
-                  {
-                    "title": "Radar photo fixe",
-                    "enabled": true,
-                    "color": "0,0,255",
-                    "tooltip": "Here a tooltip explaning ...",
-                    "filters": {
-                      "operator": "PropertyIsEqualTo",
-                      "propertyName": "typeAppareil",
-                      "expression": "Radar photo fixe"
-                    }
-                  },
-                  {
-                    "title": "Radar photo mobile",
-                    "enabled": false,
-                    "color": "255,200,0",
-                    "tooltip": "Here a tooltip explaning ...",
-                    "filters": {
-                      "operator": "PropertyIsEqualTo",
-                      "propertyName": "typeAppareil",
-                      "expression": "Radar photo mobile"
-                    }
-                  },
-                  {
-                    "title": "Radar photo fixe + feu rouge",
-                    "enabled": false,
-                    "color": "0,200,0",
-                    "tooltip": "Here a tooltip explaning ...",
-                    "filters": {
-                      "operator": "PropertyIsEqualTo",
-                      "propertyName": "typeAppareil",
-                      "expression": "Radar photo fixe et surveillance au feu rouge"
-                    }
-                  },
-                  {
-                    "title": "Radar feu rouge",
-                    "enabled": false,
-                    "color": "255,0,0",
-                    "tooltip": "Here a tooltip explaning ...",
-                    "filters": {
-                      "operator": "PropertyIsEqualTo",
-                      "propertyName": "typeAppareil",
-                      "expression": "Appareil de surveillance au feu rouge"
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "id2",
-                "logical": "Or",
-                "vertical": true,
-                "buttons": [
+                "selectors": [
                   {
                     "title": "Montréal & Laval",
                     "enabled": false,
@@ -174,6 +126,93 @@
                     }
                   }
                 ]
+              },
+              {
+                "id": "id2",
+                "logical": "Or",
+                "title": "Type de radar photo",
+                "selectors": [
+                  {
+                    "title": "Radar photo fixe",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "typeAppareil",
+                      "expression": "Radar photo fixe"
+                    }
+                  },
+                  {
+                    "title": "Radar photo mobile",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "typeAppareil",
+                      "expression": "Radar photo mobile"
+                    }
+                  },
+                  {
+                    "title": "Radar photo fixe + feu rouge",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "typeAppareil",
+                      "expression": "Radar photo fixe et surveillance au feu rouge"
+                    }
+                  },
+                  {
+                    "title": "Radar feu rouge",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "typeAppareil",
+                      "expression": "Appareil de surveillance au feu rouge"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "checkboxes": {
+            "selectorType": "checkbox",
+            "order": 1,
+            "groups": [
+              {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
+            ],
+            "bundles": [
+              {
+                "id": "id1",
+                "logical": "Or",
+                "title": "Type de radar photo",
+                "selectors": [
+                  {
+                    "title": "Radar photo fixe",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "typeAppareil",
+                      "expression": "Radar photo fixe"
+                    }
+                  },
+                  {
+                    "title": "Radar photo mobile",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "typeAppareil",
+                      "expression": "Radar photo mobile"
+                    }
+                  },
+                  {
+                    "title": "Radar photo fixe + feu rouge",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "typeAppareil",
+                      "expression": "Radar photo fixe et surveillance au feu rouge"
+                    }
+                  },
+                  {
+                    "title": "Radar feu rouge",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "typeAppareil",
+                      "expression": "Appareil de surveillance au feu rouge"
+                    }
+                  }
+                ]
               }
             ]
           },
@@ -186,6 +225,78 @@
           "version": "1.1.0",
           "outputFormat": "geojson"
         }
+      }
+    },
+    {
+      "id":4,
+      "title": "Filterable WMS layers with predefined filters and time ogc",
+      "sourceOptions": {
+        "type": "wms",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+        "queryable": true,
+        "paramsWFS": {
+          "featureTypes": "vg_observation_v_autre_wmst",
+          "fieldNameGeometry": "geometry",
+          "maxFeatures": 10000,
+          "version": "2.0.0",
+          "outputFormat": "geojson",
+          "outputFormatDownload": "SHP"
+        },
+        "params": {
+          "layers": "vg_observation_v_autre_wmst"
+        },
+        "sourceFields": [
+          {"name": "date_observation", "alias": "Date de l'observation", "allowedOperatorsType": "Time"},
+          {"name": "type", "alias": "type", "allowedOperatorsType": "all"}
+        ],
+        "ogcFilters": {
+          "enabled": true,
+          "editable": true,
+          "pushButtons": {
+            "selectorType": "pushButton",
+            "groups": [
+              {"title": "Group 1 Title","name": "1","ids": ["id1"]}
+            ],
+            "bundles": [
+              {
+                "id": "id1",
+                "logical": "Or",
+                "title": "Évènements",
+                "selectors": [
+                  {
+                    "title": "Mouvement de terrain",
+                    "tooltip": "Here a tooltip explaning ...",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "type",
+                      "expression": "Mouvement de terrain"
+                    }
+                  },
+                  {
+                    "title": "Inondation",
+                    "tooltip": "Here a tooltip explaning ...",
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "type",
+                      "expression": "Inondation"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "filters":
+            {
+              "operator": "During",
+              "propertyName": "date_observation",
+              "begin": "2016-01-21T00:00:00-05:00",
+              "end": "today"
+            },
+          "allowedOperatorsType": "basic"
+        },
+        "minDate": "2010-01-01T00:00:00-05:00",
+        "maxDate": "2025-12-31T00:00:00-05:00",
+        "stepDate": "P1D"
       }
     }
   ],
