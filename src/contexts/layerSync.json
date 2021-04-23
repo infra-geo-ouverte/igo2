@@ -225,6 +225,7 @@
       },
       {
         "title": "OgcFilters WFS Destination",
+        "id": "wfsOgcFilterDest",
         "linkedLayers": {
           "linkId": "wfsOgcFilterDest"
         },

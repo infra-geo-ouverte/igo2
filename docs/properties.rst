@@ -179,17 +179,6 @@ Propriétés
               minResolution: 0, 
               maxResolution: 400}
          - Voir dans l'objet `WorkspaceOptions`_
-       * - minResolution
-         - Number
-         - .. line-block::
-               Définir la résolution à laquelle la couche
-               d'information arrête de s'afficher.
-
-               Pour les **WMS** récupérant certaines
-               propriétés du service, cette valeur peut
-               être récupérée.
-         -
-         -
        * - maxResolution
          - Number
          - .. line-block::
@@ -202,6 +191,27 @@ Propriétés
                propriétés du service, cette valeur peut
                être récupérée.
          -
+       * - maxScaleDenom
+         - Number
+         - .. line-block::
+               Définir l'échelle à laquelle la couche d'information commence
+                à s'afficher. Le chiffre inscrit correspond à l'échelle.
+                Ex. 2000000 correspond à 1:2000000
+       * - minResolution
+         - Number
+         - .. line-block::
+            Définir la résolution à laquelle la couche d'information arrête
+            de s'afficher.
+
+            Pour les **WMS** récupérant certaines propriétés du service, 
+            cette valeur peut y être récupérée.
+         -
+       * - minScaleDenom
+         - Number
+         - .. line-block::
+            Définir l'échelle à laquelle la couche d'information arrête 
+            de s'afficher. Le chiffre inscrit correspond a l'échelle.
+            Ex. 20000 correspond à 1:20000
          -
        * - metadata
          - Object{}
@@ -1115,7 +1125,7 @@ Exemples
               "sourceOptions": {
                   "queryable": true,
                   "type": "vector",
-                  "url": "https://ws.mapserver.transports.gouv.qc.ca//swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson"
+                  "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson"
               }
             }
 
@@ -1709,7 +1719,7 @@ Exemple - filtre avancé disponible à l'utilisateur.
                         "enabled": true,
                         "editable": true,
                         "allowedOperatorsType": "Basic"
-                      }
+                  }
             }
 
 
@@ -1718,15 +1728,15 @@ Exemple - filtre avancé définit (zone_veg = Z2) appliqué sur la couche et non
         .. code:: json
 
             {
-                "ogcFilters": {
-                    "enabled": true,
-                    "editable": false,
-                    "filters": {
-                      "operator": "PropertyIsEqualTo",
-                      "propertyName": "zone_veg",
-                      "expression": "Z2"
-                    }
-                }
+                  "ogcFilters": {
+                        "enabled": true,
+                        "editable": false,
+                        "filters": {
+                              "operator": "PropertyIsEqualTo",
+                              "propertyName": "zone_veg",
+                              "expression": "Z2"
+                        }
+                  }
             }
 
 Exemple - filtre 2 boutons avec l'un eux activé. Filtre avancé non disponible
@@ -1734,49 +1744,51 @@ Exemple - filtre 2 boutons avec l'un eux activé. Filtre avancé non disponible
       .. code:: json
 
             {
-                "ogcFilters": {
-                    "enabled": true,
-                    "editable": false,
-                    "pushButtons": {
-                      "groups": [
-                        {"title": "Group 1","name": "1","ids": ["id1"]}
-                      ],
-                      "bundles": [
-                        {
-                          "id": "id1",
-                          "logical": "Or",
-                          "buttons": [
-                            {
-                              "title": "Radar photo fixe",
-                              "enabled": true,
-                              "color": "0,0,255",
-                              "tooltip": "Here a tooltip explaning ...",
-                              "filters": {
-                                "operator": "PropertyIsEqualTo",
-                                "propertyName": "typeAppareil",
-                                "expression": "Radar photo fixe"
-                              }
-                            },
-                            {
-                              "title": "Radar photo mobile",
-                              "enabled": false,
-                              "color": "255,200,0",
-                              "tooltip": "Here a tooltip explaning ...",
-                              "filters": {
-                                "operator": "PropertyIsEqualTo",
-                                "propertyName": "typeAppareil",
-                                "expression": "Radar photo mobile"
-                              }
-                            }
-                          ]
+                  "ogcFilters": {
+                        "enabled": true,
+                        "editable": false,
+                        "pushButtons": {
+                              "selectorType": "pushButton",
+                              "groups": [
+                                    {"title": "Group 1","name": "1","ids": ["id1"]}
+                              ],
+                              "bundles": [
+                                    {
+                                          "id": "id1",
+                                          "logical": "Or",
+                                          "title": "Type de radar photo",
+                                          "selector": [
+                                                {
+                                                      "title": "Radar photo fixe",
+                                                      "enabled": true,
+                                                      "color": "0,0,255",
+                                                      "tooltip": "Here a tooltip explaning ...",
+                                                      "filters": {
+                                                            "operator": "PropertyIsEqualTo",
+                                                            "propertyName": "typeAppareil",
+                                                            "expression": "Radar photo fixe"
+                                                      }
+                                                },
+                                                {
+                                                      "title": "Radar photo mobile",
+                                                      "enabled": false,
+                                                      "color": "255,200,0",
+                                                      "tooltip": "Here a tooltip explaning ...",
+                                                      "filters": {
+                                                            "operator": "PropertyIsEqualTo",
+                                                            "propertyName": "typeAppareil",
+                                                            "expression": "Radar photo mobile"
+                                                      }
+                                                }
+                                          ]
+                                    }
+                              ]
                         }
-                      ]
-                    }
-                }
+                  }
             }
 
 
-Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
+Exemple - 2 groupes de filtre avec radio boutons et cases à cocher spécifiques à chaque groupe
 
         .. code:: json
 
@@ -1785,17 +1797,20 @@ Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
                     "enabled": true,
                     "editable": true,
                     "allowedOperatorsType": "All",
-                    "pushButtons": {
+                    "radioButtons": {
+                        "selectorType": "radioButton",
+                        "order": 2,
                         "groups": [
                             {"title": "filtre foret","name":"1", "ids": ["type_couv", "densite"]},
-                            {"title": "filtre metadonnée", "name":"2", "ids": ["no_program"]}
+                            {"title": "filtre metadonnée et densité", "name":"2", "ids": ["densite", "no_program"]}
                         ],
                         "bundles" : [
                             {
                                 "id": "type_couv",
                                 "logical": "Or",
-                                "buttons": [
-                                  {
+                                "title": "Type",
+                                "selector": [
+                                    {
                                         "title": "type couv = Résineux",
                                         "enabled": false,
                                         "color": "255,0,0",
@@ -1804,9 +1819,9 @@ Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
                                               "operator": "PropertyIsEqualTo",
                                               "propertyName": "type_couv",
                                               "expression": "R"
-                                        }
-                                  },
-                                  {
+                                         }
+                                    },
+                                    {
                                         "title": "type couv = Feuillus",
                                         "enabled": false,
                                         "color": "255,100,255",
@@ -1815,17 +1830,17 @@ Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
                                               "operator": "PropertyIsEqualTo",
                                               "propertyName": "type_couv",
                                               "expression": "F"
-                                        }
-                                  }
-                              ]
+                                         }
+                                    }
+                                ]
                             },
-
                             {
                                 "id": "densite",
                                 "logical": "Or",
                                 "vertical": false,
-                                "buttons": [
-                                  {
+                                "title": "Densité",
+                                "selector": [
+                                    {
                                         "title": "densite = A",
                                         "enabled": false,
                                         "color": "255,0,0",
@@ -1834,9 +1849,9 @@ Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
                                               "operator": "PropertyIsEqualTo",
                                               "propertyName": "cl_dens",
                                               "expression": "A"
-                                        }
-                                  },
-                                  {
+                                         }
+                                    },
+                                    {
                                         "title": "densite = A & B",
                                         "enabled": false,
                                         "color": "255,100,255",
@@ -1847,9 +1862,9 @@ Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
                                               {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "A"},
                                               {"operator": "PropertyIsEqualTo","propertyName": "cl_dens", "expression": "B"}
                                             ]
-                                        }
-                                  },
-                                  {
+                                         }
+                                    },
+                                    {
                                         "title": "différent de A",
                                         "enabled": false,
                                         "color": "255,100,255",
@@ -1858,39 +1873,46 @@ Exemple - 2 groupes de filtre avec boutons spécifiques à chaque groupe
                                             "operator": "PropertyIsNotEqualTo",
                                             "propertyName": "cl_dens",
                                             "expression": "A"
-                                        }
-                                  }
+                                         }
+                                    }
                                 ]
-                            },
-                            {
+                             },
+                        ]
+                    },
+                    "checkboxes": {
+                        "selectorType": "checkbox",
+                        "order": 1,
+                        "bundles" : [
+                              {
                                 "id": "no_program",
                                 "logical": "Or",
                                 "vertical":false,
-                                "buttons": [
+                                "title": "Programme"
+                                "selector": [
                                   {
-                                  "title": "prg no= 4",
-                                  "enabled": false,
-                                  "color": "255,0,0",
-                                  "tooltip": "Here a tooltip explaning ...",
-                                  "filters": {
-                                      "operator": "PropertyIsEqualTo",
-                                      "propertyName": "no_prg",
-                                      "expression": "4"
+                                    "title": "prg no= 4",
+                                    "enabled": false,
+                                    "color": "255,0,0",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "no_prg",
+                                          "expression": "4"
+                                    }
+                                  },
+                                  {
+                                    "title": "prg no=5",
+                                    "enabled": false,
+                                    "color": "255,100,255",
+                                    "tooltip": "Here a tooltip explaning ...",
+                                    "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "no_prg",
+                                          "expression": "5"
+                                    }
                                   }
-                                },
-                                {
-                                  "title": "prg no=5",
-                                  "enabled": false,
-                                  "color": "255,100,255",
-                                  "tooltip": "Here a tooltip explaning ...",
-                                  "filters": {
-                                      "operator": "PropertyIsEqualTo",
-                                      "propertyName": "no_prg",
-                                      "expression": "5"
-                                  }
-                                }
                                 ]
-                            }
+                              }
                         ]
                     }
                 }
@@ -1927,6 +1949,76 @@ Exemple - Filtre temporel avec minimum, maximum et pas de temps.
                         }
                   },
                   "minDate": "2016-01-01T00:00:00-05:00",
+                  "maxDate": "2025-12-31T00:00:00-05:00",
+                  "stepDate": "P1D"
+            }
+
+Exemple - filtre avec boutons spécifique à un groupe et calendrier (filtrage temporel)
+
+            {
+                  "type": "wms",
+                  "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+                  "queryable": true,
+                  "paramsWFS": {
+                        "featureTypes": "vg_observation_v_autre_wmst",
+                        "fieldNameGeometry": "geometry",
+                        "maxFeatures": 10000,
+                        "version": "2.0.0",
+                        "outputFormat": "geojson",
+                        "outputFormatDownload": "SHP"
+                  },
+                  "params": {
+                        "layers": "vg_observation_v_autre_wmst"
+                  },
+                  "sourceFields": [
+                        {"name": "date_observation", "alias": "Date de l'observation", "allowedOperatorsType": "Time"},
+                        {"name": "type", "alias": "type", "allowedOperatorsType": "all"}
+                  ],
+                  "ogcFilters": {
+                        "enabled": true,
+                        "editable": true,
+                        "pushButtons": {
+                           "selectorType": "pushButton",
+                           "groups": [
+                              {"title": "Group 1 Title","name": "1","ids": ["id1"]}
+                           ],
+                           "bundles": [
+                              {
+                                 "id": "id1",
+                                 "logical": "Or",
+                                 "title": "Évènements",
+                                 "selectors": [
+                                    {
+                                       "title": "Mouvement de terrain",
+                                       "tooltip": "Here a tooltip explaning ...",
+                                       "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "type",
+                                          "expression": "Mouvement de terrain"
+                                       }
+                                    },
+                                    {
+                                       "title": "Inondation",
+                                       "tooltip": "Here a tooltip explaning ...",
+                                       "filters": {
+                                          "operator": "PropertyIsEqualTo",
+                                          "propertyName": "type",
+                                          "expression": "Inondation"
+                                       }
+                                    }
+                                 ]
+                              }
+                           ]
+                        },
+                        "filters": {
+                           "operator": "During",
+                           "propertyName": "date_observation",
+                           "begin": "2016-01-21T00:00:00-05:00",
+                           "end": "today"
+                        },
+                        "allowedOperatorsType": "basic"
+                  },
+                  "minDate": "2010-01-01T00:00:00-05:00",
                   "maxDate": "2025-12-31T00:00:00-05:00",
                   "stepDate": "P1D"
             }
@@ -1979,7 +2071,19 @@ Propriétés de ogcFilters
        * - pushButtons
          - PushButton
          - | Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
-           | Doit contenir obligatoirement groups[] et bundles[].
+           | Doit contenir obligatoirement selectorType et bundles[].
+         -
+
+       * - checkboxes
+         - Checkbox
+         - | Permet de définir des bcases à cocher qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
+           | Doit contenir obligatoirement selectorType et bundles[].
+         -
+
+       * - radioButtons
+         - RadioButton
+         - | Permet de définir des radio boutons qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
+           | Doit contenir obligatoirement selectorType et bundles[].
          -
          -
 
@@ -1992,10 +2096,33 @@ Liens
     - `ogc-filter.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.interface.ts>`__
 
 
+.. _igoOgcFilterPushButtons:
+
+Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.selectorType
+
+    .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               Propriétés
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - title
+         - String
+         - Le type de sélecteur.
+         - pushButton, checkbox, radioButton
+         -
 
 .. _igoOgcFilterPushButtons:
 
-Propriétés de l'objet ogcFilter.pushButtons.groups
+Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.groups
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -2026,7 +2153,7 @@ Propriétés de l'objet ogcFilter.pushButtons.groups
 .. _igoOgcFilterButtonsBundlesObject:
 
 
-Propriétés de l'objet ogcFilter.pushButtons.bundles
+Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -2042,14 +2169,14 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles
                Valeurs possibles
          - .. line-block::
                Valeur défaut
-       * - buttons
-         - OgcPushButton[]
-         - Liste de boutton
+       * - selector
+         - OgcPushButton[], OgcCheckbox[], OgcRadioButton[]
+         - Liste de selecteur pour filtrer les entités de la carte
          -
          -
        * - **id***
          - String
-         - Id rataché au groupe pour le classement dans le groupe. Doit être présente et identique dans ogcFilter.pushButtons.groups.ids
+         - Id rataché au groupe pour le classement dans le groupe. Doit être présente et identique dans ogcFilter.{selector}.groups.ids
          -
          -
        * - **logical***
@@ -2062,13 +2189,22 @@ Propriétés de l'objet ogcFilter.pushButtons.bundles
          - Indique si la disposition des boutons dans la fenêtre se fait de manière verticale.
          - true | false
          -
-
+       * - title
+         - String
+         - Indique le sous-titre à afficher pour le sélecteur en question.
+         -
+         -
+       * - order
+         - Integer
+         - Indique l'ordre d'apparition du sélecteur en question.
+         - 1, 2, 3...
+         -
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
 .. _igoOgcFilterButtonsButtonsObject:
 
-Propriétés de l'objet ogcFilter.pushButtons.bundles.buttons
+Propriétés de l'objet ogcFilter.{selector}.bundles.selector
 
     .. list-table::
        :widths: 10 10 30 15 10
@@ -2277,7 +2413,7 @@ Propriétés de l'objet sourceFields
 Sources de recherche (search-source)
 ************************************
 
-    Description
+    Configuration des sources qui seront impliquées dans la recherche faite dans la barre de recherche. Il peut y en avoir plusieurs.
 
 
 Source (base commune)
@@ -2297,8 +2433,8 @@ Source (base commune)
             - `StoredQueries`_ , WFS 2.0 (Québec)
             - `StoredQueries Reverse`_    , WFS 2.0  - par coordonnées (Québec)
 
-        Selon votre contexte, les sources de recherche ayant une limitation au Québec,
-        peuvent être utilisées comme exemple afin d'adapter votre propre service de recherche.
+        Selon votre contexte, les sources de recherche ayant une limitation au Québec, peuvent être utilisées comme exemple afin d'adapter 
+        votre propre service de recherche.
 
 
 Exemples
@@ -2756,8 +2892,7 @@ StoredQueries
             - rtss
             - chainage
 
-        Ces 2 attributs et leurs valeurs par défault
-        sont définies par 2 champs dans la configuration
+        Ces 2 attributs et leurs valeurs par défault sont définies par 2 champs dans la configuration
         (voir l'exemple ici-bas).
 
 Exemples
@@ -2765,6 +2900,8 @@ Exemples
       .. code:: json
 
             {"storedqueries": {
+                  "available": true,
+                  "title": "le titre interface",
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "rtss",
                   "fields": [
@@ -2788,6 +2925,9 @@ Propriétés
          - Description
          - .. line-block::
                Valeur défaut
+         - available
+         - active le service de recherche via les storedquery
+         - false
        * - **fields***
          - .. line-block::
                Liste des champs à interroger pour la StoredQueries.
@@ -2821,6 +2961,10 @@ Propriétés
        * - **storedquery_id***
          - .. line-block::
                Nom de la requête à demander au serveur.
+         -
+       * - title
+         - .. line-block::
+               Le titre de recherche qui apparait dans l'interface
          -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -3077,6 +3221,17 @@ Exemples
 
             {
                 "name": "catalog"
+                "options": {
+                    "addCatalogAllowed": true,
+                    "predefinedCatalogs": [
+                        {
+                            "id": "Gououvert3",
+                            "title": "Gouvouvert3",
+                            "externalProvider": true,
+                            "url": "/apis/ws/igo_gouvouvert.fcgi"
+                        }
+                    ]
+                }
             }
 
 Propriétés
@@ -3114,8 +3269,48 @@ Propriétés
                    - fichiers dans :ref:`Language <igolanguage>`.
          -
          - igo.integration.tools.catalog
+       * - options
+         - Object
+         - Voir les options ici-bas.
+         -
+         -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Options
+
+     .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+               options
+         - .. line-block::
+               Type
+         - .. line-block::
+               Description
+         - .. line-block::
+               Valeurs possibles
+         - .. line-block::
+               Valeur défaut
+       * - addCatalogAllowed
+         - Boolean
+         - .. line-block::
+               Définit  si le formulaire d'ajout de 
+               catalogue est disponible ou non. Les 
+               catalogues ajoutés sont enregistrés 
+               dans la mémoire du fureteur.
+         - true/false
+         - false
+       * - predefinedCatalogs
+         - :ref:`Catalog[] <igocatalogObject>`.
+         - .. line-block::
+               Liste préféfinie de catalogues
+               permettant de pré-remplir un 
+               menu de sélection, afin d'ajouter
+               des catalogues.
+         - true/false
+         - false
 
 Liens
 
@@ -3390,7 +3585,7 @@ draw
 ===========
 
     .. line-block::
-        Outil permettant de faire des dessins sur la carte.
+        Outil permettant de faire des dessins sur la carte. Il est aussi possible de remplacer les points dessinés par une liste d'icônes.
 
 
 Exemples
@@ -3451,8 +3646,8 @@ ogcFilter
 
     .. line-block::
         Outil permettant de définir des filtres que l'utilisateur pourra appliquer sur les couches visibles dans la carte et ainsi voir
-        seulement les objets géométriques(points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
-        configurés comme des boutons que l'utilisateur peut activer ou comme filtres avancés, dans ce cas c'est l'utilisateur qui doit
+        seulement les objets géométriques (points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
+        configurés comme des boutons ou des cases à cocher que l'utilisateur peut activer ou comme filtres avancés. Dans ce cas, c'est l'utilisateur qui doit
         saisir le champ, l'opérateur à appliquer ainsi que la valeur à filtrer.
 
         | ** Limitation: Disponible uniquement sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
