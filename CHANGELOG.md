@@ -1,4 +1,26 @@
-## [1.6.4](https://github.com/infra-geo-ouverte/igo2/compare/1.6.3...1.6.4) (2021-03-15)
+# [1.7.0](https://github.com/infra-geo-ouverte/igo2/compare/1.7.0-alpha.1...1.7.0) (2021-04-26)
+
+
+### Bug Fixes
+
+* **map:** order of layers after adding on the fly [#530](https://github.com/infra-geo-ouverte/igo2/issues/530) ([5ebce68](https://github.com/infra-geo-ouverte/igo2/commit/5ebce688afde3b76f2e3d068735f9b80cb2730a9))
+* **toast-panel:** Info panel display++ ([#600](https://github.com/infra-geo-ouverte/igo2/issues/600)) ([0a3551f](https://github.com/infra-geo-ouverte/igo2/commit/0a3551f6a115b392f0274ca023458ad072bca6e0))
+
+
+### Features
+
+* **about-tool:** add link to IGO training guide ([#597](https://github.com/infra-geo-ouverte/igo2/issues/597)) ([d567f49](https://github.com/infra-geo-ouverte/igo2/commit/d567f491f8dc3a5c61312bf6d01b33fcea2b2aae))
+* **auth-interceptor:** allow to pass credentials by domain, based on regex ([#589](https://github.com/infra-geo-ouverte/igo2/issues/589)) ([c33e3b2](https://github.com/infra-geo-ouverte/igo2/commit/c33e3b27597244fe679d3f3eb60a46cbfb83906a))
+* **demo:** external provider for catalog ([#606](https://github.com/infra-geo-ouverte/igo2/issues/606)) ([499d830](https://github.com/infra-geo-ouverte/igo2/commit/499d8305ef6e2f7f5a0c98c06defa76cf96aba58))
+* **draw:** draw points as icons ([#609](https://github.com/infra-geo-ouverte/igo2/issues/609)) ([bed595f](https://github.com/infra-geo-ouverte/igo2/commit/bed595fbea444127db240d2ac3e2214fd2700360))
+* **igo2-lib:** upgrade to 1.7.0 ([7818a57](https://github.com/infra-geo-ouverte/igo2/commit/7818a578f07b28b3125892481a67316efbbeca13))
+* **ogc-filter:** adjust ogc filter context to follow ogc filter reshuffle ([#601](https://github.com/infra-geo-ouverte/igo2/issues/601)) ([87dc63b](https://github.com/infra-geo-ouverte/igo2/commit/87dc63be72fa4008ab04cd9b3f51c3a1148d5f46))
+* **search:** add a method to manage if search results's geometrie are shown on map ([#596](https://github.com/infra-geo-ouverte/igo2/issues/596)) ([1503af5](https://github.com/infra-geo-ouverte/igo2/commit/1503af59aff065758ddc9d1b1460b5db97adbb30))
+* **trainingGuide:** allow training guide in depot config ([#605](https://github.com/infra-geo-ouverte/igo2/issues/605)) ([d6bf024](https://github.com/infra-geo-ouverte/igo2/commit/d6bf024d6ace3f914575d20462fcac75d1ef1985))
+
+
+
+# [1.7.0-alpha.1](https://github.com/infra-geo-ouverte/igo2/compare/1.6.4...1.7.0-alpha.1) (2021-03-15)
 
 
 ### Bug Fixes
