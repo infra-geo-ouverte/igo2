@@ -73,7 +73,6 @@
           "enabled": true,
           "editable": true,
           "pushButtons": {
-            "selectorType": "pushButton",
             "order": 2,
             "groups": [
               {"title": "Group 1 Title","name": "1","ids": ["id1"]},
@@ -169,7 +168,6 @@
             ]
           },
           "checkboxes": {
-            "selectorType": "checkbox",
             "order": 1,
             "groups": [
               {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
@@ -253,7 +251,6 @@
           "enabled": true,
           "editable": true,
           "pushButtons": {
-            "selectorType": "pushButton",
             "groups": [
               {"title": "Group 1 Title","name": "1","ids": ["id1"]}
             ],
