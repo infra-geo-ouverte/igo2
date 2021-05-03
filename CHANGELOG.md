@@ -1,3 +1,17 @@
+## [1.7.1](https://github.com/infra-geo-ouverte/igo2/compare/1.7.0...1.7.1) (2021-05-03)
+
+
+### Bug Fixes
+
+* **demo:** wrong properties ([#612](https://github.com/infra-geo-ouverte/igo2/issues/612)) ([6f122c8](https://github.com/infra-geo-ouverte/igo2/commit/6f122c8b17ca67920eecda5f53bc93f9968db26c))
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.7.1 ([3912e82](https://github.com/infra-geo-ouverte/igo2/commit/3912e824f7a7b1ff45f6bd5da534af4588cbbeb1))
+
+
+
 # [1.7.0](https://github.com/infra-geo-ouverte/igo2/compare/1.7.0-alpha.1...1.7.0) (2021-04-26)
 
 
