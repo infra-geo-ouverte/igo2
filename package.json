@@ -114,7 +114,7 @@
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "live-server": "^1.2.1",
-    "ng-packagr": "^10.0.0",
+    "ng-packagr": "^10.1.1",
     "npx": "^10.2.0",
     "protractor": "~7.0.0",
     "publish-release": "^1.6.0",
