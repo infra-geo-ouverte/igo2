@@ -2875,12 +2875,13 @@ StoredQueries
 ================
 
     .. note::
-        Il se veut plus un EXEMPLE qu'un réel service de recherche.
+        Il se veut plus des EXEMPLES qu'un réel service de recherche.
 
     .. line-block::
-        StoredQueries est un service de recherche par mots clefs exploitant les capacités WFS 2.0.
-        Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__
-        qui peut retourner:
+        StoredQueries est un service de recherche par mots clefs exploitant les capacités WFS 2.0. disponibles sur serveurs cartographiques comme Mapserver ou Geoserver(`Geoserver StoredQuery <https://geoserver-pdf.readthedocs.io/en/latest/services/wfs/reference.html#createstoredquery>`__
+        
+      Exemple 1:
+        Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__ qui peut retourner:
             - Route                                    ex: 138
             - Route tronçon                            ex: 13801
             - Route tronçon section (RTS)              ex: 13801110
@@ -2891,10 +2892,7 @@ StoredQueries
             - rtss
             - chainage
 
-        Ces 2 attributs et leurs valeurs par défault sont définies par 2 champs dans la configuration
-        (voir l'exemple ici-bas).
-
-Exemples
+        Ces 2 attributs et leurs valeurs par défault sont définies par 2 champs dans la configuration (voir l'exemple ici-bas).
 
       .. code:: json
 
@@ -2909,6 +2907,31 @@ Exemples
                   ],
                   "resultTitle": "etiquette"
             }}
+
+      Exemple 2
+        Le Ministère des forêts de la faune et des parcs a développé un storedQuery qui retourne les feuillets SNRC au 250k et 20k.
+        Il suffit alors à l'utilisateur de saisir un feuillet ou un début de feuillet SNRC dans la barre de recherche IGO. (31P08)
+        et l'application retournera la/les géométries associées aux résultats trouvés par la storedQueries.
+
+        Cette StoredQueries nécessite l'envoie au serveur de l'attribut qui sera définit dans la configuration.
+            - no_feuillet
+
+
+      .. code:: json
+
+            "storedqueries": {
+                  "available": true,
+                  "title": "Feuillets SNRC",
+                  "searchUrl": "/ws/mffpecofor.fcgi",
+                  "storedquery_id": "sq250et20kFeuillet",
+                  "fields": [
+                        {"name": "no_feuillet","defaultValue": "0"}
+                  ],
+                  "resultTitle": "feuillet",
+                  "params": {
+                        "limit": 10
+                  }
+            }
 
 
 Propriétés
@@ -2946,6 +2969,12 @@ Propriétés
                Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
                Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
          - text/xml; subtype=gml/3.1.1
+
+       * - param
+         - .. line-block::
+               Objet contenant les paramètres suplémentaires a envoyer au serveur lors de l'apel.
+               Le paramètre 'limit' peut aussi être utilisé pour restreindre les résultats de recherche présentés.
+         -
        * - resultTitle
          - .. line-block::
                Nom de l'attribut à utiliser pour le titre du résultat.
@@ -2974,7 +3003,8 @@ Liens
 
     - `Code Stored Queries Ligne 34 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/storedqueries.ts#L34>`__
     - `Bug Openlayers et les GML 3.2+ en WFS(StoredQueries) <https://github.com/openlayers/openlayers/pull/6400>`__
-    - `Exemple d'appel StoredQueries <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=rtss&rtss=0013801110000C&chainage=0&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
+    - `Exemple d'appel StoredQueries rstt MTQ <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=rtss&rtss=0013801110000C&chainage=0&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
+    - `Exemple d'appel StoredQueries feuillet SNRC MFFP <https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?REQUEST=GetFeature&STOREDQUERY_ID=sq250et20kFeuillet&service=wfs&version=2.0.0&no_feuillet=31P08>`__
     - `Décrire la requête "rtss" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=rtss>`__
 
 
