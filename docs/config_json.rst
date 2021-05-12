@@ -67,7 +67,7 @@ Résumé
        * - :ref:`catalog <igocatalogConfig>`
          - :ref:`Catalog <igocatalogObject>` []
          - .. line-block::
-               Doit être présente si l'outil de catalogue. Permet de gérer les sources WMS et WMTS
+               Doit être présente si l'outil de catalogue. Permet de gérer les sources WMS, WMTS et ArcGISRest + tile et image
          - .. line-block::
                Catalog
                CatalogBrowser
@@ -77,6 +77,11 @@ Résumé
                Activation de l'API de context d'IGO2. Cette API sera documentée indépendamment
                de la présente documentation.
          - ContextManager
+       * - depot
+         - `Depot`_
+         - .. line-block::
+               Activation de l'API de dépôt. Cette API sera documentée indépendamment
+               de la présente documentation.
        * - `hasSearchPointerSummary`_
          - Boolean
          - .. line-block::
@@ -108,6 +113,11 @@ Résumé
                Permet d'ajouter à la carte une géométrie ponctuelle pour les entités linéaire ou
                polygonale sélectionnées ou survolées lors d'une interrogation de la carte et qui
                sont de trop petite taille par rapport à l'étendue de la carte.
+         -
+       * - `drawingTool`
+         - String[]
+         - .. line-block::
+               Permet d'ajouter à l'outil de dessin un liste d'icônes à utiliser.
          -
        * - importExport
          - `ImportExport`_
@@ -146,6 +156,16 @@ Résumé
          - .. line-block::
                Liste de projections non enregistrées par défault par OpenLayers.
          -
+      * - queryOverlayStyle
+        - `overlayStyle`_
+        - .. line-block::
+              Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une interrogation par clic.
+           -
+      * - searchOverlayStyle
+        - `overlayStyle`_
+        - .. line-block::
+              Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une recherche.
+           -
        * - routingSources
          - `RoutingSource`_
          - .. line-block::
@@ -255,7 +275,11 @@ Exemples
             "auth": {
                 "url": "/apis/users",
                 "tokenKey": "id_token_igo",
-                "allowAnonymous": true
+                "allowAnonymous": true,
+                "hostsWithCredentials": [{
+                                           withCredentials: true,
+                                           domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
+                                        }]
             }
 
 Propriétés
@@ -293,12 +317,18 @@ Propriétés
                d'accéder aux contextes publics
          - true | false
          - true
-       * - ...
-         - ...
+       * - hostsWithCredentials
+         - {}[] (liste d'objet)
          - .. line-block::
-               ...
-         - ...
-         - ...
+               Indique à l'application, la liste des domaines a être interceptés
+               et à y ajouter dans l'appel.
+               "withCredentials": true/false selon la valeur définie.
+               exemple: [{
+                             withCredentials: true,
+                             domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
+                        }]
+         - 
+         - 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -357,6 +387,7 @@ Exemples
                       "id": "Image Arcgis Rest",
                       "title": "Image Arcgis Rest",
                       "url": "https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer",
+                      "externalProvider": true,
                       "type": "imagearcgisrest",
                       "sourceOptions": {
                           "queryable": true,
@@ -384,7 +415,7 @@ Exemples
                   {
                       "id": "mtq",
                       "title": "MTQ",
-                      "url": "/swtq",
+                      "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                       "sortDirection": "desc",
                       "queryFormat": {
                             "htmlgml2": "*",
@@ -397,7 +428,7 @@ Exemples
                   {
                       "id": "regexmtq",
                       "title": "MTQ (filtered by regex)",
-                      "url": "/swtq",
+                      "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                       "regFilters": ["zpegt"]
                   },
                   {
@@ -445,7 +476,7 @@ Exemples
                               },
                               {
                                 "id": "forcedProperties_wms",
-                                "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/swt",
+                                "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                                 "type": "wms",
                                 "forcedProperties": [{
                                   "layerName": "lieuhabite",
@@ -455,6 +486,7 @@ Exemples
                               {
                                 "id": "forcedProperties_arcgisrest",
                                 "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer",
+                                "externalProvider": true,
                                 "type": "imagearcgisrest",
                                 "forcedProperties": [{
                                   "layerName": "Sediment substrate / Substrat sédimentaire",
@@ -646,6 +678,12 @@ Propriétés - Objet Catalog
                OU url du service de baselayers
          -
          -
+       * - **externalProvider***
+         - Boolean
+         - .. line-block::
+               Définit si le catalogue provient d'une organisation externe.
+         - true/false
+         - false
        * - version
          - String
          - .. line-block::
@@ -760,6 +798,58 @@ Liens
 
         - `igo2-lib/packages/context/src/lib/context-manager/shared/context.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/context/src/lib/context-manager/shared/context.interface.ts>`_
 
+***************
+Depot
+***************
+
+.. note::
+      En cours de construction
+
+.. line-block::
+      Permet de rejoindre une API de dépôt nous fournissant des fichiers (par exemple, un guide d'autoformation).
+      Cette API sera documentée indépendamment de la présente documentation.
+
+Exemples
+
+      .. code:: json
+
+            depot: {
+            "url" : "https://geoegl.msp.gouv.qc.ca/apis/depot/...",
+            "trainingGuides?" : ["fichier1", "fichier2"]
+            }
+
+Propriétés
+
+.. list-table::
+      :widths: 10 10 30 15 10
+      :header-rows: 1
+
+      * - .. line-block::
+            Propriétés
+      - .. line-block::
+            Type
+      - .. line-block::
+            Description
+      - .. line-block::
+            Valeurs possibles
+      - .. line-block::
+            Valeur défaut
+      * - **url***
+      - String
+      - .. line-block::
+            Définit l'url d'appel du service
+            de dépôt de fichier
+      -
+      -
+      * - trainingGuides
+      - String[]
+      - .. line-block::
+            Nom ou identifiant des guides d'autoformation
+            à accéder.
+      -
+      -
+
+Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 ***********************
 hasSearchPointerSummary
@@ -797,6 +887,29 @@ showRotationButtonIfNoRotation
     .. line-block::
         Permet de définir si le bouton de réinitialisation de la
         rotation est visible si aucune rotation n'est active. False par défaut.
+
+***************
+DrawingTool
+***************
+
+    .. line-block::
+        Cette configuration permet de créer un liste d'url représentant des icônes afin que ceux-ci
+        puissent être utilisés dans `l'outil de dessin <https://igo2.readthedocs.io/fr/latest/properties.html#draw>`
+
+Exemples
+
+        .. code:: json
+
+            drawingTool: {
+                icons: [
+                  "https://icons.duckduckgo.com/ip3/www.google.com.ico",
+                  "https://img.icons8.com/color/search/96"
+                ]
+            }
+
+Liens
+
+        - `igo2-lib/tree/master/packages/geo/src/lib/draw/draw <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/geo/src/lib/draw/draw>`_
 
 
 ***************
@@ -1033,9 +1146,6 @@ Liens
         - `Exemple de mapOverlay <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json>`_
 
 
-.. _igoprojections:
-
-
 .. _optionsApi:
 
 ************
@@ -1054,6 +1164,48 @@ Exemple
                   "url": "/apis/igo2/layers/options"
               }
 
+
+.. _overlayStyle:
+
+************
+overlayStyle
+************
+
+  Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une interrogation par clic ou par une recherche.
+  Les objets sélection et focus sont facultatifs. Les propriétés contenues par ces objets sont également facultatives. 
+  Si les objects sont vide ou absent, le style par défaut sera appliqué (bleu et turquoise). 
+  Les couleurs acceptées peuvent être en couleur HEX, en liste RGB ou en couleur nommée.
+
+Exemple
+
+        .. code:: json
+              "queryOverlayStyle": {},
+              "searchOverlayStyle": {
+                  "base": {
+                      "markerColor": "purple",         // marker fill
+                      "fillColor": [233,66,133],       // poly
+                      "outlineColor": "LightPink",      // marker contour
+                      "strokeColor": "green",           // line and poly
+                      "strokeWidth": 1                  // line and poly
+                  },
+                  "selection": {
+                      "markerColor": "#32a852",         // marker fill
+                      "fillColor": [95,96,133],         // poly
+                      "outlineColor": "#a62997",        // marker contour
+                      "strokeColor": "#a62997",         // line and poly
+                      "strokeWidth": 4                  // line and poly
+                  },
+                  "focus": {
+                      "markerColor": "blue",            // marker fill
+                      "fillColor": "red",               // poly
+                      "outlineColor": "LightPink",      // marker contour
+                      "strokeColor": "Sienna",          // line and poly
+                      "strokeWidth": 2                  // line and poly
+                  }
+              }
+
+
+.. _igoprojections:
 
 ***************
 Projections
@@ -1849,14 +2001,32 @@ Propriétés
          - Icone à ajouter au message.
          -
          -
+       * - options.*
+         - Notification
+         - .. line-block::
+              Voir les options Notifications dans le projet 
+              `angular2-notification options. <https://github.com/flauc/angular2-notifications#options>`_
+         -
+         -
        * - options.template
          - String
          - En construction
          -
          -
-       * - options.timeOut
-         - Number
-         - Temps avant la disparition du message, en miliseconde.
+       * - options.from
+         - Date | String
+         - .. line-block::
+              Date de début de l'application du message.
+              Peut être une date OU un string interprétable
+              en javascript. `https://developer.mozilla.org/fr/docs... <https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/parse>`_
+         -
+         -
+       * - options.to
+         - Date | String
+         - .. line-block::
+              Date de fin de l'application du message.
+              Peut être une date OU un string interprétable
+              en javascript. `https://developer.mozilla.org/fr/docs... <https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/parse>`_
          -
          -
        * - text

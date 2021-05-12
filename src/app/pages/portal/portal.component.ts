@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import 'ol/ol.css';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
-import { debounceTime, take, pairwise, skipWhile, mergeMap, map, concatMap, tap } from 'rxjs/operators';
+import { Subscription, of, BehaviorSubject } from 'rxjs';
+import { debounceTime, take, pairwise, skipWhile } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
@@ -36,13 +36,15 @@ import {
   Toolbox,
   Tool,
   Widget,
-  EntityTablePaginatorOptions
+  EntityTablePaginatorOptions,
+  EntityRecord
 } from '@igo2/common';
-import { AuthService } from '@igo2/auth';
+import { AuthOptions, AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
 import {
   DataSourceService,
   Feature,
+  FEATURE,
   featureToSearchResult,
   GoogleLinks,
   IgoMap,
@@ -55,7 +57,6 @@ import {
   CapabilitiesService,
   sourceCanSearch,
   sourceCanReverseSearch,
-  FEATURE,
   ImportService,
   handleFileImportError,
   handleFileImportSuccess,
@@ -63,7 +64,8 @@ import {
   QueryService,
   WfsWorkspace,
   FeatureWorkspace,
-  generateIdFromSourceOptions
+  generateIdFromSourceOptions,
+  computeOlFeaturesExtent
 } from '@igo2/geo';
 
 import {
@@ -90,6 +92,7 @@ import { WelcomeWindowComponent } from './welcome-window/welcome-window.componen
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils } from '@igo2/utils';
+import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 @Component({
   selector: 'app-portal',
@@ -131,6 +134,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
+  public termSplitter = '|';
   public termDefinedInUrlTriggered = false;
   private addedLayers$$: Subscription[] = [];
   public forceCoordsNA = false;
@@ -143,7 +147,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private context$$: Subscription;
   private openSidenav$$: Subscription;
 
-  public igoSearchPointerSummaryEnabled = false;
+  public igoSearchPointerSummaryEnabled: boolean;
 
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
@@ -151,7 +155,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
     undefined
   );
+  private routeParams: Params;
   private menuButtonReverseColor = false;
+  public toastPanelHtmlDisplay = false;
 
   public isMagnified: Boolean = false;
   public magnifiedOrSwipeLayer: Layer;
@@ -163,6 +169,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get map(): IgoMap {
     return this.mapState.map;
+  }
+
+  get auth(): AuthOptions {
+    return this.configService.getConfig('auth') || [];
   }
 
   get toastPanelOpened(): boolean {
@@ -226,6 +236,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get searchStore(): EntityStore<SearchResult> {
     return this.searchState.store;
+  }
+
+  get searchResultsGeometryEnabled(): boolean {
+    return this.searchState.searchResultsGeometryEnabled$.value;
   }
 
   get queryStore(): EntityStore<SearchResult> {
@@ -299,9 +313,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
       'hasFeatureEmphasisOnSelection'
     );
+
+
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
+    if (this.igoSearchPointerSummaryEnabled === undefined) {
+      this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
+    }
+
     if (
       typeof this.configService.getConfig('menuButtonReverseColor') !==
       'undefined'
@@ -314,6 +334,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window['IGO'] = this;
+    this.searchState.searchTermSplitter$.next(this.termSplitter);
 
     this.initWelcomeWindow();
 
@@ -374,7 +395,9 @@ export class PortalComponent implements OnInit, OnDestroy {
           this.toastPanelOpened = false;
         }
       });
-    this.readQueryParams();
+    this.map.ol.once('rendercomplete', () => {
+      this.readQueryParams();
+    });
 
     this.onSettingsChange$.subscribe(() => {
       this.searchState.setSearchSettingsChange();
@@ -585,6 +608,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearchTermChange(term?: string) {
+    if (this.routeParams?.search &&  term !== this.routeParams.search) {
+      this.searchState.deactivateCustomFilterTermStrategy();
+  }
+
     this.searchState.setSearchTerm(term);
     const termWithoutHashtag = term.replace(/(#[^\s]*)/g, '').trim();
     if (termWithoutHashtag.length < 2) {
@@ -617,7 +644,11 @@ export class PortalComponent implements OnInit, OnDestroy {
           enabledSources.includes(result.source)
       )
       .concat(results);
-    this.searchStore.load(newResults);
+    this.searchStore.updateMany(newResults);
+  }
+
+  onSearchResultsGeometryStatusChange(value) {
+    this.searchState.setSearchResultsGeometryStatus(value);
   }
 
   onSearchSettingsChange() {
@@ -650,9 +681,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.route.queryParams.pipe(debounceTime(250)).subscribe((params) => {
-      if (!params['context'] || params['context'] === context.uri) {
-        this.readLayersQueryParams(params);
+    this.route.queryParams.pipe(debounceTime(250)).subscribe((qParams) => {
+      if (!qParams['context'] || qParams['context'] === context.uri) {
+        this.readLayersQueryParams(qParams);
       }
     });
 
@@ -709,14 +740,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public onClearSearch() {
-    this.map.overlay.removeFeatures(
-      this.searchStore
-        .all()
-        .filter((f) => f.meta.dataType === FEATURE)
-        .map((f) => f.data as Feature)
-    );
+    this.map.searchResultsOverlay.clear();
     this.searchStore.clear();
     this.searchState.setSelectedResult(undefined);
+    this.searchState.deactivateCustomFilterTermStrategy();
   }
 
   private getQuerySearchSource(): SearchSource {
@@ -964,14 +991,20 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  getExtent() {
+  getToastPanelExtent() {
     if (!this.sidenavOpened) {
+      if (this.toastPanelHtmlDisplay && this.mediaService.isDesktop()) {
+        return 'htmlDisplay';
+      }
       if (this.fullExtent) {
         return 'fullStandard';
       } else {
         return 'standard';
       }
     } else if (this.sidenavOpened) {
+      if (this.toastPanelHtmlDisplay && this.mediaService.isDesktop()) {
+        return 'htmlDisplayOffsetX';
+      }
       if (this.fullExtent) {
         return 'fullOffsetX';
       } else {
@@ -981,6 +1014,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onPointerSummaryStatusChange(value) {
+    this.storageService.set('searchPointerSummaryEnabled', value);
     this.igoSearchPointerSummaryEnabled = value;
   }
 
@@ -1088,10 +1122,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private readQueryParams() {
-    this.route.queryParams.pipe(debounceTime(250)).subscribe((params) => {
-      this.readToolParams(params);
-      this.readSearchParams(params);
-      this.readFocusFirst(params);
+    this.route.queryParams.subscribe((params) => {
+      this.routeParams = params;
+      this.readToolParams();
+      this.readSearchParams();
+      this.readFocusFirst();
     });
   }
 
@@ -1106,9 +1141,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     }, 1);
   }
 
-  private readFocusFirst(params: Params) {
-    if (params['sf'] === '1' && this.termDefinedInUrl) {
-      const entities$$ = this.searchStore.entities$
+  private readFocusFirst() {
+    if (this.routeParams['sf'] === '1' && this.termDefinedInUrl) {
+      const entities$$ = this.searchStore.stateView.all$()
         .pipe(
           skipWhile((entities) => entities.length === 0),
           debounceTime(500),
@@ -1124,19 +1159,46 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private readSearchParams(params: Params) {
-    if (params['search']) {
+  private readSearchParams() {
+    if (this.routeParams['search']) {
       this.termDefinedInUrl = true;
-      this.searchBarTerm = params['search'];
+      if (this.routeParams['exactMatch'] === '1') {
+        this.searchState.activateCustomFilterTermStrategy();
+      }
+      if (this.routeParams['search'] && !this.routeParams['zoom'] && this.routeParams['sf'] !== '1') {
+        const entities$$ = this.searchStore.stateView.all$()
+        .pipe(
+          skipWhile((entities) => entities.length === 0),
+          debounceTime(500),
+          take(1)
+        )
+        .subscribe((entities) => {
+          entities$$.unsubscribe();
+          const searchResultsOlFeatures = entities
+            .filter(e => e.entity.meta.dataType === FEATURE)
+            .map((entity: EntityRecord<SearchResult>) =>
+              new olFormatGeoJSON().readFeature(entity.entity.data, {
+                dataProjection: entity.entity.data.projection,
+                featureProjection: this.map.projection
+              })
+            );
+            const totalExtent = computeOlFeaturesExtent(this.map, searchResultsOlFeatures);
+            this.map.viewController.zoomToExtent(totalExtent);
+        });
+      }
+      this.searchBarTerm = this.routeParams['search'];
+    }
+    if (this.routeParams['searchGeom'] === '1') {
+      this.searchState.searchResultsGeometryEnabled$.next(true);
     }
   }
 
-  private readToolParams(params: Params) {
-    if (params['tool']) {
-      this.toolbox.activateTool(params['tool']);
+  private readToolParams() {
+    if (this.routeParams['tool']) {
+      this.toolbox.activateTool(this.routeParams['tool']);
     }
 
-    if (params['sidenav'] === '1') {
+    if (this.routeParams['sidenav'] === '1') {
       setTimeout(() => {
         this.openSidenav();
       }, 250);
@@ -1213,7 +1275,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           layerFromUrl[0],
           type,
           visibility,
-          parseInt(layerFromUrl[1] || 1000, 10)
+          layerFromUrl[1] ? parseInt(layerFromUrl[1], 10) : undefined
         );
       });
       cnt += 1;
@@ -1273,7 +1335,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     name: string,
     type: 'wms' | 'wmts' | 'arcgisrest'| 'imagearcgisrest' | 'tilearcgisrest',
     visibility: boolean = true,
-    zIndex: number = 100000
+    zIndex: number
   ) {
     if (!this.contextLoaded) {
       return;
@@ -1353,8 +1415,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private initWelcomeWindow(): void {
-    const authConfig = this.configService.getConfig('auth');
-    if (authConfig) {
+    if (this.auth) {
       this.authService.logged$.subscribe((logged) => {
         if (logged) {
           this.createWelcomeWindow();

@@ -87,7 +87,7 @@
               {
                 "id": "id1",
                 "logical": "Or",
-                "buttons": [
+                "selectors": [
                   {
                     "title": "Bell",
                     "enabled": true,

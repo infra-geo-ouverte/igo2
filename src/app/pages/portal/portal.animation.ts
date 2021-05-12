@@ -99,6 +99,12 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
         })
       ),
       state(
+        'htmlDisplay',
+        style({
+          left: '40%'
+        })
+      ),
+      state(
         'fullOffsetX',
         style({
           left: 'calc(45% + 202px)'
@@ -110,10 +116,20 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
           left: 'calc(50% + 202px)'
         })
       ),
+      state(
+        'htmlDisplayOffsetX',
+        style({
+          left: 'calc(40% + 160px)'
+        })
+    ),
       transition('fullStandard => fullOffsetX', animate('200ms')),
       transition('fullOffsetX => fullStandard', animate('200ms')),
       transition('standard => standardOffsetX', animate('200ms')),
       transition('standardOffsetX => standard', animate('200ms')),
+      transition('htmlDisplay => htmlDisplayOffsetX', animate('200ms')),
+      transition('htmlDisplayOffsetX => htmlDisplay', animate('200ms')),
+      // transition('standard => htmlDisplay', animate('200ms')),
+      // transition('htmlDisplay => standard', animate('200ms')),
     ]),
     trigger('toastPanelOffsetY', [
       state(

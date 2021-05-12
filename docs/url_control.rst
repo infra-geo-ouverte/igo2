@@ -128,14 +128,19 @@ Sélection du contexte
             - #ancienne-municipalites
             - #région-administrative ou #regadmin
             - #borne, #bornes, #repère, #km
-        - search=patate&sf=1
+        - search=915&sf=1
             - **sf=1** permet de zoomer sur le premier résultat
+        - search=915&searchGeom=1
+            - **searchGeom=1** permet de faire afficher la géométrie des résultats retournés par la recherche.
+        - search=1000000&exactMatch=1
+            - **exactMatch=1** permet de conserver dans la liste des résultats que ceux ayant un match exact. Controle par URL pour la 1ère recherche par url seulement.
  
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?search=feu&zoom=18
         - https://infra-geo-ouverte.github.io/igo2/?search=915%23adresse
         - https://infra-geo-ouverte.github.io/igo2/?search=cabaret%23lieu
         - https://infra-geo-ouverte.github.io/igo2/?search=g1v4j7%23code-postal&sf=1
+        - https://infra-geo-ouverte.github.io/igo2/?search=915%23adresse&searchGeom=1
 
 ********************************
  Itinéraire
@@ -148,26 +153,4 @@ Sélection du contexte
  
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?tool=directions&routing=-72.4540601953125,47.86101094949734;-70.65092909179685,47.24932843990587
-
-********************************
- Table des matières
-********************************
-
-    Params :
-        - llck = mot clef pour filtrer la liste des couches
-        - llca = 1 ou 0 , pour trier la table des matières en ordre 
-          alphabétique.
-        - llcv = 1 ou 0 , pour ne montrer que les couches visibles.
-        - llcr = 1 ou 0 , pour ne montrer que les couches visibles 
-          selon l'échelle active de la carte
-
-    0 = actif
-    1 = inactif
-
- 
-    Exemple:
-        - https://infra-geo-ouverte.github.io/igo2/?llck=rtss
-        - https://infra-geo-ouverte.github.io/igo2/?&llca=1
-        - https://infra-geo-ouverte.github.io/igo2/?context=mtq&visiblelayers=bgr_v_sous_route_res_sup_act&llcv=1
-        - https://infra-geo-ouverte.github.io/igo2/?context=mtq&visiblelayers=bgr_v_sous_route_res_sup_act&llcr=1
 
