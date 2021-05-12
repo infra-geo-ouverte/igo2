@@ -16,6 +16,7 @@
     }
   },
   "title": "IGO",
+  "emailAddress": "geomsp@msp.gouv.qc.ca",
   "welcomeWindow": {
     "showAgainOnNewIGOVersion": true,
     "nbVisitToShow": 2,
