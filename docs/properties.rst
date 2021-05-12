@@ -2913,14 +2913,13 @@ Exemple 1
           }
 
 
-      Exemple 2
+      Exemple 2:
         Le Ministère des forêts de la faune et des parcs a développé une storedQueries qui retourne les feuillets SNRC au 250k et 20k.
         Une fois que cette storedQueries est ajoutée a la configuration IGO, il suffit alors à l'utilisateur de saisir un feuillet ou 
         un début de feuillet SNRC dans la barre de recherche IGO. (Ex: 31P08) et l'application retournera la/les géométries associées 
         aux résultats trouvés par la recherche via la storedQueries.
 
-        Cette StoredQueries nécessite l'envoie au serveur de l'attribut qui sera définit dans la configuration.
-            - no_feuillet
+        Cette StoredQueries nécessite l'envoie au serveur de l'attribut: no_feuillet qui sera définit dans la configuration.
 
 
 Exemple 2
@@ -2979,7 +2978,6 @@ Propriétés
                Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
                Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
          - text/xml; subtype=gml/3.1.1
-
        * - param
          - .. line-block::
                Objet contenant les paramètres suplémentaires a envoyer au serveur lors de l'apel.
