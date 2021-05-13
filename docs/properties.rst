@@ -2964,7 +2964,7 @@ Seulement les propriétés spécifiques à ce service sont présentées.
                - .. line-block::
                      Valeur défaut
              * - available
-               - active le service de recherche via les storedquery
+               - Active le service de recherche via les storedquery
                - false
              * - **fields***
                - .. line-block:: 
@@ -2977,8 +2977,7 @@ Seulement les propriétés spécifiques à ce service sont présentées.
 
                      Attention à la syntaxe du splitPrefix. Sensible au caractère REGEX.
 
-                     Si votre requête consiste à l’envoi d’un seul attribut, vous pouvez définir
-                     simplement un objet plutôt qu’une liste.
+                     Si votre requête consiste à l’envoi d’un seul attribut, vous pouvez définir simplement un objet plutôt qu’une liste.
                - 
              * - outputFormat
                - .. line-block::
@@ -2986,8 +2985,9 @@ Seulement les propriétés spécifiques à ce service sont présentées.
                      Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
                - text/xml; subtype=gml/3.1.1
              * - param
-               - Objet contenant les paramètres suiplémentaires à envoyer au service lors de l'apel de la storedqueries.
-                 Le paramètre 'limit' peut aussi y être utilisé pour limité le nombre de résultat de recherche.
+               - .. line-block:: 
+                  Objet contenant les paramètres suiplémentaires à envoyer au service lors de l'apel de la storedqueries.
+                  Le paramètre 'limit' peut aussi y être utilisé pour limité le nombre de résultat de recherche.
                -
              * - resultTitle
                - .. line-block::
