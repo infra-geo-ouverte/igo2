@@ -429,29 +429,7 @@ SourceOptions
         - `WMS`_
         - `WMTS`_
 
-WorkspaceOptions
-================
 
-    .. line-block::
-=======
-    .. line-block::
-        Diverses sources de données sont supportées.
-        Référez-vous aux section suivantes pour
-        plus de détails.
-
-        - `ArcGis`_
-        - `Image ArcGis`_
-        - `Tile ArcGis`_
-        - `Carto`_
-        - `OSM`_
-        - `Cluster`_
-        - `TMS (xyz)`_
-        - `Vector Tiles`_
-        - `Vecteur`_
-        - `Websocket`_
-        - `WFS`_
-        - `WMS`_
-        - `WMTS`_
 
 WorkspaceOptions
 ================
