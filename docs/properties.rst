@@ -29,6 +29,16 @@ Exemples
                     "zoom": 6,
                     "geolocate": false,
                     "maxZoomOnExtent":15
+                },
+                "controls": {
+                    "attribution":true,
+                    "scaleLine": {
+                        "units":"metric",
+                        "bar": true,
+                        "steps": 4,
+                        "text": true,
+                        "minWidth": 140
+                    }
                 }
               }
           }
@@ -85,7 +95,32 @@ Propriétés de l'objet "view" de map
          -
          -
 
+Propriétés de l'objet "controls" de map
 
+      .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
+
+       * - .. line-block::
+            Propriétés
+         - .. line-block::
+            Type
+         - .. line-block::
+            Description
+         - .. line-block::
+            Valeurs possibles
+         - .. line-block::
+            Valeur défaut
+       * - attributions
+         - Boolean
+         - Indique si la carte doit avoir des attributions pour tout ses contextes.
+         -
+         -  
+       * - scaleLine
+         - Boolean ou objet json de scaleLine de Openlayers
+         - Permet de masquer la scaleLine dans la carte ou de la personalisé
+         - 
+         -
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
     ** En construction, propriété a compléter
