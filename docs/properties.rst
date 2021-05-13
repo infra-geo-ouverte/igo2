@@ -191,12 +191,15 @@ Propriétés
                propriétés du service, cette valeur peut
                être récupérée.
          -
+         - 
        * - maxScaleDenom
          - Number
          - .. line-block::
                Définir l'échelle à laquelle la couche d'information commence
                 à s'afficher. Le chiffre inscrit correspond à l'échelle.
                 Ex. 2000000 correspond à 1:2000000
+         -
+         - 
        * - minResolution
          - Number
          - .. line-block::
@@ -206,12 +209,14 @@ Propriétés
             Pour les **WMS** récupérant certaines propriétés du service, 
             cette valeur peut y être récupérée.
          -
+         -
        * - minScaleDenom
          - Number
          - .. line-block::
             Définir l'échelle à laquelle la couche d'information arrête 
             de s'afficher. Le chiffre inscrit correspond a l'échelle.
             Ex. 20000 correspond à 1:20000
+         -
          -
        * - metadata
          - Object{}
@@ -2880,7 +2885,7 @@ StoredQueries
     .. line-block::
         StoredQueries est un service de recherche par mots clefs exploitant les capacités WFS 2.0. disponibles sur serveurs cartographiques comme Mapserver ou Geoserver(`Geoserver StoredQuery <https://geoserver-pdf.readthedocs.io/en/latest/services/wfs/reference.html#createstoredquery>`__)
         
-      Exemple 1:
+Exemple 1:
         RTSS: Cette storedQueries interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__ qui peut retourner:
             - Route                                    ex: 138
             - Route tronçon                            ex: 13801
@@ -2913,7 +2918,7 @@ Exemple 1
           }
 
 
-      Exemple 2:
+Exemple 2:
         Le Ministère des forêts de la faune et des parcs a développé une storedQueries qui retourne les feuillets SNRC au 250k et 20k.
         Une fois que cette storedQueries est ajoutée a la configuration IGO, il suffit alors à l'utilisateur de saisir un feuillet ou 
         un début de feuillet SNRC dans la barre de recherche IGO. (Ex: 31P08) et l'application retournera la/les géométries associées 
@@ -2943,69 +2948,64 @@ Exemple 2
           }
 
 
+
 Propriétés
 
-    Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. list-table::
-       :widths: 10 60 10
-       :header-rows: 1
+Seulement les propriétés spécifiques à ce service sont présentées.
+      
+          .. list-table::
+             :widths: 10 60 10
+             :header-rows: 1
+      
+             * - .. line-block::
+                     Propriétés
+               - Description
+               - .. line-block::
+                     Valeur défaut
+             * - available
+               - active le service de recherche via les storedquery
+               - false
+             * - **fields***
+               - .. line-block:: 
+                     Liste des champs à intéroger pour la StoredQueries
+                     La structure est la suivante:
+                     1er attribut: {« name »: « rtss », »defaultValue »: « -99 »},
+                     2e attribut : {« name »: « chainage », »defaultValue »: « 0 », »splitPrefix »: « \+ »}
+                     afin de représenter le terme dans la barre de recherche:
+                     0013801110000c+12
 
-       * - .. line-block::
-               Propriétés
-         - Description
-         - .. line-block::
-               Valeur défaut
-         - available
-         - active le service de recherche via les storedquery
-         - false
-       * - **fields***
-         - .. line-block::
-               Liste des champs à interroger pour la StoredQueries.
-               La structure est la suivante:
-               1er attribut: {"name": "rtss","defaultValue": "-99"},
-               2e attribut : {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
-               afin de représenter le terme dans la barre de recherche:
-               0013801110000c+12
+                     Attention à la syntaxe du splitPrefix. Sensible au caractère REGEX.
 
-               Attention à la syntaxe du splitPrefix. Sensible au caractère REGEX.
+                     Si votre requête consiste à l’envoi d’un seul attribut, vous pouvez définir
+                     simplement un objet plutôt qu’une liste.
+               - 
+             * - outputFormat
+               - .. line-block::
+                     Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
+                     Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
+               - text/xml; subtype=gml/3.1.1
+             * - param
+               - Objet contenant les paramètres suiplémentaires à envoyer au service lors de l'apel de la storedqueries.
+                 Le paramètre 'limit' peut aussi y être utilisé pour limité le nombre de résultat de recherche.
+               -
+             * - resultTitle
+               - .. line-block::
+                     Nom de l'attribut à utiliser pour le titre du résultat.
+               -
+             * - searchUrl
+               - Url du service
+               - https://ws.mapserver.transports.gouv.qc.ca/swtq
+             * - **storedquery_id***
+               - .. line-block::
+                     Nom de la requête à demander au serveur.
+               -
+      
 
-               Si votre requête consiste à l'envoi d'un seul attribut, vous pouvez définir
-               simplement un objet plutôt qu'une liste.
-         -
-       * - outputFormat
-         - .. line-block::
-               Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
-               Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
-         - text/xml; subtype=gml/3.1.1
-       * - param
-         - .. line-block::
-               Objet contenant les paramètres suplémentaires a envoyer au serveur lors de l'apel.
-               Le paramètre 'limit' peut aussi être utilisé pour restreindre les résultats de recherche présentés.
-         -
-       * - resultTitle
-         - .. line-block::
-               Nom de l'attribut à utiliser pour le titre du résultat.
-         -
-       * - searchUrl
-         - Url du service
-         - https://ws.mapserver.transports.gouv.qc.ca/swtq
-       * - srsname
-         - .. line-block::
-               SRS demandé au serveur
-         - EPSG:4326
-       * - **storedquery_id***
-         - .. line-block::
-               Nom de la requête à demander au serveur.
-         -
-       * - title
-         - .. line-block::
-               Le titre de recherche qui apparait dans l'interface
-         -
 
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
+Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
