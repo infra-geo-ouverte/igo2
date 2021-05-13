@@ -2933,7 +2933,7 @@ Propriétés
 Seulement les propriétés spécifiques à ce service sont présentées.
       
           .. list-table::
-             :widths: 10 60 10
+             :widths: 10 50 10
              :header-rows: 1
       
              * - .. line-block::
