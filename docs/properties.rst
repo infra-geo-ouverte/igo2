@@ -111,7 +111,7 @@ Propriétés de l'objet "controls" de map
             Valeurs possibles
          - .. line-block::
             Valeur défaut
-       * - attributions
+       * - attribution
          - Boolean
          - Indique si la carte doit avoir des attributions pour tous ses contextes.
          - true/false
