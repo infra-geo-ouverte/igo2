@@ -113,21 +113,24 @@ Propriétés de l'objet "controls" de map
             Valeur défaut
        * - attributions
          - Boolean
-         - Indique si la carte doit avoir des attributions pour tout ses contextes.
-         -
-         -  
+         - Indique si la carte doit avoir des attributions pour tous ses contextes.
+         - true/false
+         - 
        * - scaleLine
          - Boolean ou objet json de scaleLine de Openlayers
-         - Permet de masquer la scaleLine dans la carte ou de la personalisé
-         - 
+         - Permet de masquer le scaleLine dans la carte ou de la personalisé
+         - Voir la documentation de Openlayers
          -
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-    ** En construction, propriété a compléter
+
+Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+** En construction, propriété a compléter
 
 Liens
 
     - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`__
+    - `Documentation sur l'objet scaleLine d'OpenLayers <https://openlayers.org/en/latest/apidoc/module-ol_control_ScaleLine-ScaleLine.html>`__
 
 .. _igolayer:
 
