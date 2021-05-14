@@ -118,7 +118,7 @@ Propriétés de l'objet "controls" de map
          - 
        * - scaleLine
          - Boolean ou objet json de scaleLine de Openlayers
-         - Permet de masquer le scaleLine dans la carte ou de la personalisé
+         - Permet de masquer la scaleLine dans la carte ou de la personalisé
          - Voir la documentation de Openlayers
          -
 
