@@ -26,6 +26,7 @@ import {
 import { environment } from '../environments/environment';
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +40,8 @@ import { AppComponent } from './app.component';
     IgoSpinnerModule,
     IgoStopPropagationModule,
     PortalModule,
-    HammerModule
+    HammerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     provideConfigOptions({
