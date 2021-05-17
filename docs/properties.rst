@@ -191,12 +191,15 @@ Propriétés
                propriétés du service, cette valeur peut
                être récupérée.
          -
+         - 
        * - maxScaleDenom
          - Number
          - .. line-block::
                Définir l'échelle à laquelle la couche d'information commence
                 à s'afficher. Le chiffre inscrit correspond à l'échelle.
                 Ex. 2000000 correspond à 1:2000000
+         -
+         - 
        * - minResolution
          - Number
          - .. line-block::
@@ -206,12 +209,14 @@ Propriétés
             Pour les **WMS** récupérant certaines propriétés du service, 
             cette valeur peut y être récupérée.
          -
+         -
        * - minScaleDenom
          - Number
          - .. line-block::
             Définir l'échelle à laquelle la couche d'information arrête 
             de s'afficher. Le chiffre inscrit correspond a l'échelle.
             Ex. 20000 correspond à 1:20000
+         -
          -
        * - metadata
          - Object{}
@@ -424,29 +429,7 @@ SourceOptions
         - `WMS`_
         - `WMTS`_
 
-WorkspaceOptions
-================
 
-    .. line-block::
-=======
-    .. line-block::
-        Diverses sources de données sont supportées.
-        Référez-vous aux section suivantes pour
-        plus de détails.
-
-        - `ArcGis`_
-        - `Image ArcGis`_
-        - `Tile ArcGis`_
-        - `Carto`_
-        - `OSM`_
-        - `Cluster`_
-        - `TMS (xyz)`_
-        - `Vector Tiles`_
-        - `Vecteur`_
-        - `Websocket`_
-        - `WFS`_
-        - `WMS`_
-        - `WMTS`_
 
 WorkspaceOptions
 ================
@@ -2873,106 +2856,139 @@ StoredQueries
 ================
 
     .. note::
-        Il se veut plus un EXEMPLE qu'un réel service de recherche.
+        Il se veut plus des EXEMPLES qu'un réel service de recherche.
 
     .. line-block::
-        StoredQueries est un service de recherche par mots clefs exploitant les capacités WFS 2.0.
-        Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__
-        qui peut retourner:
+        StoredQueries est un service de recherche par mots clefs exploitant les capacités WFS 2.0. disponibles sur serveurs cartographiques comme Mapserver ou Geoserver(`Geoserver StoredQuery <https://geoserver-pdf.readthedocs.io/en/latest/services/wfs/reference.html#createstoredquery>`__)
+        
+Exemple 1:
+        RTSS: Cette storedQueries interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__ qui peut retourner:
             - Route                                    ex: 138
             - Route tronçon                            ex: 13801
             - Route tronçon section (RTS)              ex: 13801110
             - Route tronçon section sous-route (RTSS)  ex: 0013801110000C
             - RTSS Chainage                            ex: 0013801110000C+12
 
-        Cette StoredQueries nécessite l'envoi au serveur de 2 attributs.
+        Elle nécessite l'envoi au serveur de 2 attributs.
             - rtss
             - chainage
 
-        Ces 2 attributs et leurs valeurs par défault sont définies par 2 champs dans la configuration
-        (voir l'exemple ici-bas).
+        Ces 2 attributs et leurs valeurs par défault sont définies par 2 champs dans la configuration (voir l'exemple ici-bas).
 
-Exemples
+Exemple 1
 
-      .. code:: json
+        .. code:: json
 
-            {"storedqueries": {
+          {
+              "storedqueries": {
                   "available": true,
                   "title": "le titre interface",
                   "searchUrl": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                   "storedquery_id": "rtss",
                   "fields": [
-                        {"name": "rtss","defaultValue": "-99"},
-                        {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
+                      {"name": "rtss","defaultValue": "-99"},
+                      {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
                   ],
                   "resultTitle": "etiquette"
-            }}
+              }
+          }
+
+
+Exemple 2:
+        Le Ministère des forêts de la faune et des parcs a développé une storedQueries qui retourne les feuillets SNRC au 250k et 20k.
+        Une fois que cette storedQueries est ajoutée a la configuration IGO, il suffit alors à l'utilisateur de saisir un feuillet ou 
+        un début de feuillet SNRC dans la barre de recherche IGO. (Ex: 31P08) et l'application retournera la/les géométries associées 
+        aux résultats trouvés par la recherche via la storedQueries.
+
+        Cette StoredQueries nécessite l'envoie au serveur de l'attribut: no_feuillet qui sera définit dans la configuration.
+
+
+Exemple 2
+
+        .. code:: json
+
+          {
+              "storedqueries": {
+                  "available": true,
+                  "title": "Feuillets SNRC",
+                  "searchUrl": "/ws/mffpecofor.fcgi",
+                  "storedquery_id": "sq250et20kFeuillet",
+                  "fields": [
+                        {"name": "no_feuillet","defaultValue": "0"}
+                  ],
+                  "resultTitle": "feuillet",
+                  "params": {
+                        "limit": 10
+                  }
+              }
+          }
+
 
 
 Propriétés
 
-    Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. list-table::
-       :widths: 10 60 10
-       :header-rows: 1
+Seulement les propriétés spécifiques à ce service sont présentées.
+      
+          .. list-table::
+             :widths: 10 50 10
+             :header-rows: 1
+      
+             * - .. line-block::
+                     Propriétés
+               - Description
+               - .. line-block::
+                     Valeur défaut
+             * - available
+               - Active le service de recherche via les storedquery
+               - false
+             * - **fields***
+               - .. line-block:: 
+                     Liste des champs à intéroger pour la StoredQueries
+                     La structure est la suivante:
+                     1er attribut: {« name »: « rtss », »defaultValue »: « -99 »},
+                     2e attribut : {« name »: « chainage », »defaultValue »: « 0 », »splitPrefix »: « \+ »}
+                     afin de représenter le terme dans la barre de recherche:
+                     0013801110000c+12
 
-       * - .. line-block::
-               Propriétés
-         - Description
-         - .. line-block::
-               Valeur défaut
-         - available
-         - active le service de recherche via les storedquery
-         - false
-       * - **fields***
-         - .. line-block::
-               Liste des champs à interroger pour la StoredQueries.
-               La structure est la suivante:
-               1er attribut: {"name": "rtss","defaultValue": "-99"},
-               2e attribut : {"name": "chainage","defaultValue": "0","splitPrefix": "\\+"}
-               afin de représenter le terme dans la barre de recherche:
-               0013801110000c+12
+                     Attention à la syntaxe du splitPrefix. Sensible au caractère REGEX.
 
-               Attention à la syntaxe du splitPrefix. Sensible au caractère REGEX.
+                     Si votre requête consiste à l’envoi d’un seul attribut, vous pouvez définir simplement un objet plutôt qu’une liste.
+               - 
+             * - outputFormat
+               - .. line-block::
+                     Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
+                     Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
+               - text/xml; subtype=gml/3.1.1
+             * - param
+               - .. line-block:: 
+                  Objet contenant les paramètres suiplémentaires à envoyer au service lors de l'apel de la storedqueries.
+                  Le paramètre 'limit' peut aussi y être utilisé pour limité le nombre de résultat de recherche.
+               -
+             * - resultTitle
+               - .. line-block::
+                     Nom de l'attribut à utiliser pour le titre du résultat.
+               -
+             * - searchUrl
+               - Url du service
+               - https://ws.mapserver.transports.gouv.qc.ca/swtq
+             * - **storedquery_id***
+               - .. line-block::
+                     Nom de la requête à demander au serveur.
+               -
+      
 
-               Si votre requête consiste à l'envoi d'un seul attribut, vous pouvez définir
-               simplement un objet plutôt qu'une liste.
-         -
-       * - outputFormat
-         - .. line-block::
-               Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
-               Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
-         - text/xml; subtype=gml/3.1.1
-       * - resultTitle
-         - .. line-block::
-               Nom de l'attribut à utiliser pour le titre du résultat.
-         -
-       * - searchUrl
-         - Url du service
-         - https://ws.mapserver.transports.gouv.qc.ca/swtq
-       * - srsname
-         - .. line-block::
-               SRS demandé au serveur
-         - EPSG:4326
-       * - **storedquery_id***
-         - .. line-block::
-               Nom de la requête à demander au serveur.
-         -
-       * - title
-         - .. line-block::
-               Le titre de recherche qui apparait dans l'interface
-         -
 
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
+Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Liens
 
     - `Code Stored Queries Ligne 34 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/storedqueries.ts#L34>`__
     - `Bug Openlayers et les GML 3.2+ en WFS(StoredQueries) <https://github.com/openlayers/openlayers/pull/6400>`__
-    - `Exemple d'appel StoredQueries <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=rtss&rtss=0013801110000C&chainage=0&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
+    - `Exemple d'appel StoredQueries rtss MTQ <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=rtss&rtss=0013801110000C&chainage=0&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
+    - `Exemple d'appel StoredQueries feuillet SNRC MFFP <https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?REQUEST=GetFeature&STOREDQUERY_ID=sq250et20kFeuillet&service=wfs&version=2.0.0&no_feuillet=31P08>`__
     - `Décrire la requête "rtss" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=rtss>`__
 
 
@@ -3012,7 +3028,7 @@ Exemples
 
 Propriétés
 
-    Seulement les propriétés spécifique à ce service sont présentées.
+    Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. list-table::
        :widths: 10 60 10
@@ -3072,8 +3088,7 @@ Intégration
 ==============================
 
     .. line-block::
-        La composante intégration permet de définir
-        une gamme d'outils aisément intégrables à l'application grâce
+        La composante intégration permet de définir une gamme d'outils aisément intégrables à l'application grâce
         aux configuration d'outils (tools).
 
 
