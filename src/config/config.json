@@ -13,19 +13,6 @@
   "searchSources": {
     "cadastre": {
       "enabled": true
-    },
-    "storedqueries": {
-      "available": true,
-      "title": "Feuillets SNRC",
-      "searchUrl": "/ws/mffpecofor.fcgi",
-      "storedquery_id": "sq250et20kFeuillet",
-      "fields": [
-          {"name": "no_feuillet","defaultValue": "0"}
-      ],
-      "resultTitle": "feuillet",
-      "params": {
-          "limit": 10
-      }
     }
   },
   "title": "IGO",
