@@ -6,3 +6,7 @@
   visibility: visible;
   pointer-events: initial;
 }
+
+.mat-tooltip-trigger {
+  touch-action: auto !important;
+}
