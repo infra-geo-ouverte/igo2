@@ -1415,7 +1415,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private initWelcomeWindow(): void {
-    if (this.auth) {
+    if (this.auth?.url) {
       this.authService.logged$.subscribe((logged) => {
         if (logged) {
           this.createWelcomeWindow();

@@ -1,3 +1,19 @@
+## [1.7.2](https://github.com/infra-geo-ouverte/igo2/compare/1.7.1...1.7.2) (2021-05-17)
+
+
+### Bug Fixes
+
+* **mobile scroll:** fix mobile scroll problem (toolbar and search settings) ([#623](https://github.com/infra-geo-ouverte/igo2/issues/623)) ([bbc7938](https://github.com/infra-geo-ouverte/igo2/commit/bbc7938283a93e867aca38a62cb4e4c7446483ad))
+* **ogc-filter docs:** fix seletorType attribute ([#614](https://github.com/infra-geo-ouverte/igo2/issues/614)) ([26c8021](https://github.com/infra-geo-ouverte/igo2/commit/26c80215a0dadab99d9ea7942c9a896f75c59320))
+* **welcomewindow:** trigger the welcome window if no auth url defined ([#613](https://github.com/infra-geo-ouverte/igo2/issues/613)) ([ea9a1ee](https://github.com/infra-geo-ouverte/igo2/commit/ea9a1ee809193505bb1f66b95d0494cc4ee50960))
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.7.2 ([8537078](https://github.com/infra-geo-ouverte/igo2/commit/85370782c90e5122b11235196d0b8acd0734be50))
+
+
+
 ## [1.7.1](https://github.com/infra-geo-ouverte/igo2/compare/1.7.0...1.7.1) (2021-05-03)
 
 
