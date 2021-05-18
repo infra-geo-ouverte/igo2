@@ -1,5 +1,5 @@
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -23,10 +23,14 @@ import {
   provideCadastreSearchSource
 } from '@igo2/geo';
 
+import { PwaService } from './services/pwa.service';
+
 import { environment } from '../environments/environment';
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+
+const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
 @NgModule({
   declarations: [AppComponent],
@@ -57,7 +61,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     provideStoredQueriesSearchSource(),
     provideOsrmDirectionsSource(),
     provideOptionsApi(),
-    provideCadastreSearchSource()
+    provideCadastreSearchSource(),
+    {provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true},
   ],
   bootstrap: [AppComponent]
 })
