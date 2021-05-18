@@ -14,7 +14,7 @@
     "e2e": "ng e2e --port 4300",
     "postinstall": "gulp geo:fixOL && ngcc",
     "build.prod": "ng build --prod",
-    "serve.prod": "node node_modules/live-server/live-server.js ./dist/igo2/ --port=4200 --no-browser",
+    "serve.prod": "node_modules/live-server/live-server.js ./dist/igo2/ --port=4200 --no-browser",
     "doc": "compodoc -p src/tsconfig.app.json -s --port 4220",
     "build.doc": "compodoc -p src/tsconfig.app.json",
     "serve.doc": "compodoc -s --port 4220",
@@ -35,8 +35,7 @@
     "preghpages": "npm run build -- --configuration=github --output-path ./dist/ghpages --base-href /igo2/ && echo \"include: ['_default.json', '_contexts.json', '_base.json']\" > dist/ghpages/_config.yml",
     "ghpages": "VERSION=$(node -p -e \"require('./package.json').version\") && npx ngh --dir=dist/ghpages --no-silent=false --message=$VERSION",
     "postghpages": "rimraf ./dist/ghpages",
-    "ghrelease": "VERSION=$(node -p -e \"require('./package.json').version\") && publish-release --owner infra-geo-ouverte --repo igo2 --tag $VERSION --name $VERSION --reuse-release --notes \"$(npm run changelog-current -s)\" --assets dist/igo2.zip",
-    "start-pwa": "ng build --prod && http-server -p 4202 -c-1 dist/igo2"
+    "ghrelease": "VERSION=$(node -p -e \"require('./package.json').version\") && publish-release --owner infra-geo-ouverte --repo igo2 --tag $VERSION --name $VERSION --reuse-release --notes \"$(npm run changelog-current -s)\" --assets dist/igo2.zip"
   },
   "private": true,
   "dependencies": {
