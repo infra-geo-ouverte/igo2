@@ -29,6 +29,23 @@
   "layers": [
     {
       "title": "MSP DESSERTE MUN 911",
+      "visible": false,
+      "messages": [{
+        "title": "Info",
+        "text": "Message d'une liste, 1ère position dans un layer.",
+        "type": "info",
+        "options": {
+          "timeOut": 20000
+        }
+      },
+      {
+        "title": "Info",
+        "text": "Message d'uune liste, 2ieme position dans un layer.",
+        "type": "info",
+        "options": {
+          "timeOut": 20000
+        }
+      }],
       "sourceOptions": {
         "type": "wms",
         "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
