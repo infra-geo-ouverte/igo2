@@ -21,6 +21,18 @@
       }
     },
     {
+      "id": "fond_osm_hot",
+      "title": "Open Street Map - Humanitaire",
+      "visible": false,
+      "baseLayer": true,
+      "sourceOptions": {
+        "url": "https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+        "type": "osm",
+        "maxZoom": 19,
+        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>"
+      }
+    },
+    {
       "title": "Imagerie",
       "baseLayer": true,
       "visible": false,
