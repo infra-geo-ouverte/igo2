@@ -1,6 +1,31 @@
 {
   "uri": "_default",
   "base": "_base",
+  "message": {
+    "title": "Info",
+    "text": "Message unique dans un contexte enfant.",
+    "type": "info",
+    "options": {
+      "timeOut": 20000
+    }
+  },
+  "messages": [{
+    "title": "Info",
+    "text": "Message d'une liste, 1ère position dans un contexte enfant.",
+    "type": "info",
+    "options": {
+      "timeOut": 20000
+    }
+  },
+  {
+    "title": "Info",
+    "text": "Message d'uune liste, 2ieme position dans un contexte enfant.",
+    "type": "info",
+    "options": {
+      "timeOut": 20000
+    }
+  }],
+
   "layers": [
     {
       "title": "MSP DESSERTE MUN 911",

@@ -8,6 +8,31 @@
       "maxZoomOnExtent": 17
     }
   },
+  "message": {
+    "title": "Info",
+    "text": "Message unique dans un contexte parent.",
+    "type": "info",
+    "options": {
+      "timeOut": 20000
+    }
+  },
+  "messages": [{
+    "title": "Info",
+    "text": "Message d'une liste, 1ère position dans un contexte parent.",
+    "type": "info",
+    "options": {
+      "timeOut": 20000
+    }
+  },
+  {
+    "title": "Info",
+    "text": "Message d'uune liste, 2ieme position dans un contexte parent.",
+    "type": "info",
+    "options": {
+      "timeOut": 20000
+    }
+  }],
+
   "layers": [
     {
       "id": "fond_osm",
