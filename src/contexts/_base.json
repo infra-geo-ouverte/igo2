@@ -6,6 +6,16 @@
       "zoom": 6,
       "maxZoom": 19,
       "maxZoomOnExtent": 17
+    },
+    "controls": {
+      "attribution":true,
+      "scaleLine": {
+          "units":"metric",
+          "bar": true,
+          "steps": 4,
+          "text": true,
+          "minWidth": 140
+      }
     }
   },
   "layers": [

@@ -29,6 +29,16 @@ Exemples
                     "zoom": 6,
                     "geolocate": false,
                     "maxZoomOnExtent":15
+                },
+                "controls": {
+                    "attribution":true,
+                    "scaleLine": {
+                        "units":"metric",
+                        "bar": true,
+                        "steps": 4,
+                        "text": true,
+                        "minWidth": 140
+                    }
                 }
               }
           }
@@ -85,14 +95,42 @@ Propriétés de l'objet "view" de map
          -
          -
 
+Propriétés de l'objet "controls" de map
 
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+      .. list-table::
+       :widths: 10 10 30 15 10
+       :header-rows: 1
 
-    ** En construction, propriété a compléter
+       * - .. line-block::
+            Propriétés
+         - .. line-block::
+            Type
+         - .. line-block::
+            Description
+         - .. line-block::
+            Valeurs possibles
+         - .. line-block::
+            Valeur défaut
+       * - attribution
+         - Boolean
+         - Indique si la carte doit avoir des attributions pour tous ses contextes.
+         - true/false
+         - 
+       * - scaleLine
+         - Boolean ou objet json de scaleLine de Openlayers
+         - Permet de masquer la scaleLine dans la carte ou de la personalisé
+         - Voir la documentation de Openlayers
+         -
+
+
+Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+** En construction, propriété a compléter
 
 Liens
 
     - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`__
+    - `Documentation sur l'objet scaleLine d'OpenLayers <https://openlayers.org/en/latest/apidoc/module-ol_control_ScaleLine-ScaleLine.html>`__
 
 .. _igolayer:
 
