@@ -221,7 +221,9 @@ Propriétés
        * - messages
          - `Message`_[]
          - .. line-block::
-            Affichage d'un list des messages. Des messages s'affichent seulement 1 fois pendant la session lorsque la couche s'affiche.
+            Affichage d'un list des messages.
+            Des messages s'affichent seulement 1 fois
+            pendant la session lorsque la couche s'affiche.
          -
          -
        * - metadata
