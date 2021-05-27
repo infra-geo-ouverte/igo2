@@ -1795,7 +1795,12 @@ Résumé fichier de contexte
        * - message
          - `Message`_
          - .. line-block::
-               Présentation d'un message à l'ouverture du contexte.
+               Présentation d'un message à l'ouverture du contexte. Propriété qui n'est plus favorisée. Il vous suggère d'utiliser 'messages'
+         -
+       * - messages
+         - `Message`_[]
+         - .. line-block::
+               Présentation d'un list des messages à l'ouverture du contexte.
          -
        * - `toolbar`_
          - String[]

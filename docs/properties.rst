@@ -218,6 +218,12 @@ Propriétés
             Ex. 20000 correspond à 1:20000
          -
          -
+       * - messages
+         - `Message`_[]
+         - .. line-block::
+            Affichage d'un list des messages. Des messages s'affichent seulement 1 fois pendant la session lorsque la couche s'affiche.
+         -
+         -
        * - metadata
          - Object{}
          - .. line-block::
