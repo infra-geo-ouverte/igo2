@@ -1804,7 +1804,7 @@ Résumé fichier de contexte
                d'utiliser 'messages'
          -
        * - messages
-         - `Message`_[]
+         - `Message`_ []
          - .. line-block::
                Présentation d'un
                list des messages
