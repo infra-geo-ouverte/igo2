@@ -1961,6 +1961,7 @@ Liens
         - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`_
         - :ref:`Map IGO2 <igomap>`.
 
+.. _igomessage:
 
 ***************
 Message

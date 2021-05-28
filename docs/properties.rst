@@ -219,7 +219,7 @@ Propriétés
          -
          -
        * - messages
-         - `Message`_[]
+         - ref:`Message[] <_igomessage>`.
          - .. line-block::
             Affichage d'un list des messages.
             Des messages s'affichent seulement 1 fois
