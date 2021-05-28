@@ -1738,7 +1738,6 @@ Exemple - filtre 2 boutons avec l'un eux activé. Filtre avancé non disponible
                         "enabled": true,
                         "editable": false,
                         "pushButtons": {
-                              "selectorType": "pushButton",
                               "groups": [
                                     {"title": "Group 1","name": "1","ids": ["id1"]}
                               ],
@@ -1788,7 +1787,6 @@ Exemple - 2 groupes de filtre avec radio boutons et cases à cocher spécifiques
                     "editable": true,
                     "allowedOperatorsType": "All",
                     "radioButtons": {
-                        "selectorType": "radioButton",
                         "order": 2,
                         "groups": [
                             {"title": "filtre foret","name":"1", "ids": ["type_couv", "densite"]},
@@ -1870,7 +1868,6 @@ Exemple - 2 groupes de filtre avec radio boutons et cases à cocher spécifiques
                         ]
                     },
                     "checkboxes": {
-                        "selectorType": "checkbox",
                         "order": 1,
                         "bundles" : [
                               {
@@ -1945,6 +1942,8 @@ Exemple - Filtre temporel avec minimum, maximum et pas de temps.
 
 Exemple - filtre avec boutons spécifique à un groupe et calendrier (filtrage temporel)
 
+      .. code:: json
+
             {
                   "type": "wms",
                   "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
@@ -1968,7 +1967,6 @@ Exemple - filtre avec boutons spécifique à un groupe et calendrier (filtrage t
                         "enabled": true,
                         "editable": true,
                         "pushButtons": {
-                           "selectorType": "pushButton",
                            "groups": [
                               {"title": "Group 1 Title","name": "1","ids": ["id1"]}
                            ],
@@ -2061,19 +2059,19 @@ Propriétés de ogcFilters
        * - pushButtons
          - PushButton
          - | Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
-           | Doit contenir obligatoirement selectorType et bundles[].
+           | Doit contenir obligatoirement bundles[].
          -
 
        * - checkboxes
          - Checkbox
          - | Permet de définir des bcases à cocher qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
-           | Doit contenir obligatoirement selectorType et bundles[].
+           | Doit contenir obligatoirement bundles[].
          -
 
        * - radioButtons
          - RadioButton
          - | Permet de définir des radio boutons qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
-           | Doit contenir obligatoirement selectorType et bundles[].
+           | Doit contenir obligatoirement bundles[].
          -
          -
 

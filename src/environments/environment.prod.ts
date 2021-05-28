@@ -82,7 +82,7 @@ export const environment: Environment = {
         }
       },
       cadastre: {
-        enabled: false
+        available: false
       }
     },
     depot: {
