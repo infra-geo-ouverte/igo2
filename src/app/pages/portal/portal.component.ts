@@ -12,6 +12,7 @@ import { debounceTime, take, pairwise, skipWhile } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
+import { createFromTemplate } from 'ol/tileurlfunction.js'
 
 import {
   MediaService,
@@ -61,7 +62,8 @@ import {
   WfsWorkspace,
   FeatureWorkspace,
   generateIdFromSourceOptions,
-  computeOlFeaturesExtent
+  computeOlFeaturesExtent,
+  TileDownloaderService
 } from '@igo2/geo';
 
 import {
@@ -295,7 +297,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private welcomeWindowService: WelcomeWindowService,
     public dialogWindow: MatDialog,
     private queryService: QueryService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private downloadService: TileDownloaderService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton =
@@ -340,6 +343,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
 
     this.contextMenuStore.load([
+      {
+        id: 'download',
+        title: 'download',
+        handler: () => this.downloadTile(this.contextMenuCoord)
+      },
       {
         id: 'coordinates',
         title: 'coordinates',
@@ -738,6 +746,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private getClickCoordinate(event: { x: number; y: number }) {
+    
     const contextmenuPoint = event;
     const boundingMapBrowser = this.mapBrowser.nativeElement.getBoundingClientRect();
     contextmenuPoint.y =
@@ -749,7 +758,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       boundingMapBrowser.left +
       (window.scrollX || window.pageXOffset);
     const pixel = [contextmenuPoint.x, contextmenuPoint.y];
-
     const coord = this.map.ol.getCoordinateFromPixel(pixel);
     const proj = this.map.projection;
     return olProj.transform(coord, proj, 'EPSG:4326');
@@ -764,7 +772,37 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   searchCoordinate(coord: [number, number]) {
+    //console.log(coord);
+    
     this.searchBarTerm = coord.map((c) => c.toFixed(6)).join(', ');
+  }
+
+  downloadTile(clickCoord: [number, number]) {
+    console.log(clickCoord);
+    const proj = this.map.projection;
+    const mapCoord = olProj.transform(clickCoord, 'EPSG:4326', proj);
+    // console.log(coord);
+    const pixel = this.map.ol.getPixelFromCoordinate(mapCoord);
+    // console.log(pixel)
+    // console.log(this.map)
+    this.map.ol.forEachLayerAtPixel(pixel, (layer, value) => {
+      const url = layer.values_.sourceOptions.url;
+      const tileGrid = layer.getSource().tileGrid;
+      const z = this.map.ol.getView().getZoom()
+      // console.log(tileGrid);
+      console.log(url);
+      if(tileGrid) {
+        const urlGen = createFromTemplate(url, tileGrid);
+        // console.log(mapCoord);
+        const tileCoord = tileGrid.getTileCoordForCoordAndZ(mapCoord, z);
+        console.log(tileCoord);
+        this.downloadService.downloadFromCoord(tileCoord, tileGrid, url);
+        // console.log(tileCoord);
+        const tileUrl = urlGen(tileCoord, 0, 0);
+        console.log(tileUrl);
+      }
+
+    })
   }
 
   updateMapBrowserClass() {

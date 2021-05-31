@@ -35,7 +35,8 @@
     "preghpages": "npm run build -- --configuration=github --output-path ./dist/ghpages --base-href /igo2/ && echo \"include: ['_default.json', '_contexts.json', '_base.json']\" > dist/ghpages/_config.yml",
     "ghpages": "VERSION=$(node -p -e \"require('./package.json').version\") && npx ngh --dir=dist/ghpages --no-silent=false --message=$VERSION",
     "postghpages": "rimraf ./dist/ghpages",
-    "ghrelease": "VERSION=$(node -p -e \"require('./package.json').version\") && publish-release --owner infra-geo-ouverte --repo igo2 --tag $VERSION --name $VERSION --reuse-release --notes \"$(npm run changelog-current -s)\" --assets dist/igo2.zip"
+    "ghrelease": "VERSION=$(node -p -e \"require('./package.json').version\") && publish-release --owner infra-geo-ouverte --repo igo2 --tag $VERSION --name $VERSION --reuse-release --notes \"$(npm run changelog-current -s)\" --assets dist/igo2.zip",
+    "start-pwa": "ng build --prod && http-server -p 4202 -c-1 dist/igo2"
   },
   "private": true,
   "dependencies": {
@@ -77,6 +78,7 @@
     "natives": "^1.1.6",
     "ngx-cacheable": "^1.0.9",
     "ngx-color-picker": "^10.1.0",
+    "ngx-indexed-db": "^8.0.5",
     "ol": "^6.3.1",
     "ol-mapbox-style": "^6.1.2",
     "proj4": "^2.6.2",
