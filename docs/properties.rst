@@ -28,7 +28,8 @@ Exemples
                     "center": [-73, 50.5],
                     "zoom": 6,
                     "geolocate": false,
-                    "maxZoomOnExtent":15
+                    "maxZoomOnExtent":15,
+                    "maxLayerZoomExtents": [-10000000, 5000000, 6000000, 9500000]
                 }
               }
           }
@@ -82,6 +83,13 @@ Propriétés de l'objet "view" de map
        * - maxZoomOnExtent
          - Number
          - Indique le niveau de zoom qu'aura l'application lors d'un clic sur un résultat de recherche qui n'est pas une couche.
+         -
+       * - maxLayerZoomExtent
+         - Array []
+         - .. line-block::
+                  Indique l'étendue maximale considérée comme étant valide pour un cadrage
+                  lors du calcul de l'étendue d'une ou plusieurs couches. Les coordonnées
+                  minimales et maximales doivent être compatibles avec la projection donnée.
          -
          -
 
