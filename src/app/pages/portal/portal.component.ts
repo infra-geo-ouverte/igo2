@@ -63,7 +63,8 @@ import {
   FeatureWorkspace,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent,
-  TileDownloaderService
+  TileDownloaderService,
+  XYZDataSource
 } from '@igo2/geo';
 
 import {
@@ -786,9 +787,13 @@ export class PortalComponent implements OnInit, OnDestroy {
     // console.log(pixel)
     // console.log(this.map)
     this.map.ol.forEachLayerAtPixel(pixel, (layer, value) => {
-      const url = layer.values_.sourceOptions.url;
+      const igoLayer = this.map.getLayerByOlUId(layer.ol_uid);
+      if (!igoLayer  || !(igoLayer.dataSource instanceof XYZDataSource)){
+        return;
+      }
+      const url = igoLayer.dataSource.options.url
       const tileGrid = layer.getSource().tileGrid;
-      const z = this.map.ol.getView().getZoom()
+      const z = this.map.viewController.getZoom();
       // console.log(tileGrid);
       console.log(url);
       if(tileGrid) {
