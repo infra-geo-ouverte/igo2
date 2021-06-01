@@ -29,7 +29,7 @@ Exemples
                     "zoom": 6,
                     "geolocate": false,
                     "maxZoomOnExtent":15,
-                    "maxLayerZoomExtents": [-10000000, 5000000, 6000000, 9500000]
+                    "maxLayerZoomExtent": [-10000000, 5000000, 6000000, 9500000]
                 }
               }
           }
