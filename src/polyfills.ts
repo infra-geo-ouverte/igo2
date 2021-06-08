@@ -28,7 +28,7 @@ import 'core-js/es/array/flat-map';
 import 'classlist.js'; // Run `npm install --save classlist.js`.
 
 /** IE do not support TextDecoder() */
-import 'fast-text-encoding'
+import 'fast-text-encoding';
 
 /** IE10 and IE11 requires the following for string normalization */
 import 'unorm/lib/unorm.js';
