@@ -222,6 +222,7 @@
               {
                 "id": "id1",
                 "title": "Régions",
+                "unfiltered": false,
                 "logical": "Or",
                 "selectors": [
                   {
@@ -315,6 +316,7 @@
                 "id": "id1",
                 "logical": "Or",
                 "multiple": true,
+                "unfiltered": true,
                 "title": "Type de radar photo",
                 "selectors": [
                   {
@@ -328,7 +330,7 @@
                   },
                   {
                     "title": "Radar photo mobile",
-                    "enabled": true,
+                    "enabled": false,
                     "filters": {
                       "operator": "PropertyIsEqualTo",
                       "propertyName": "typeAppareil",
@@ -337,6 +339,7 @@
                   },
                   {
                     "title": "Radar photo fixe + feu rouge",
+                    "enabled": true,
                     "filters": {
                       "operator": "PropertyIsEqualTo",
                       "propertyName": "typeAppareil",

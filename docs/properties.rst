@@ -2181,6 +2181,11 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
          - Indique si une liste déroulante permet la sélection de plusieurs éléments.
          - true | false
          -
+       * - unfiltered
+         - Boolean
+         - Indique si une option permettant de réinitialiser les filtres appliqués est disponible.
+         - true | false
+         -
        * - order
          - Integer
          - Indique l'ordre d'apparition du sélecteur en question.
