@@ -18,5 +18,19 @@
     "target": "https://ws.mapserver.transports.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
+  },
+  "/contexts": {
+    "target": "http://localhost:5000",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/contexts": "/"
+    },
+    "headers": {
+      "x-consumer-id": "1234",
+      "x-consumer-username": "pelord",
+      "x-consumer-custom-id": "1234",
+      "x-consumer-groups": "admin, dgeo"
+    }
   }
 }
