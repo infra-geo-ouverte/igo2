@@ -60,6 +60,7 @@
     "@igo2/integration": "~1.7.2",
     "@igo2/utils": "~1.7.2",
     "@mat-datetimepicker/core": "^5.1.2",
+    "@ngbmodule/material-carousel": "^0.7.1",
     "@turf/buffer": "^5.1.5",
     "@turf/point-on-feature": "^5.1.5",
     "angular-shepherd": "^0.7.0",

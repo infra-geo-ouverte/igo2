@@ -73,7 +73,9 @@ import {
   SearchState,
   QueryState,
   ContextState,
-  WorkspaceState
+  WorkspaceState,
+  DownloadToolComponent,
+  DownloadState
 } from '@igo2/integration';
 
 import {
@@ -299,7 +301,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     public dialogWindow: MatDialog,
     private queryService: QueryService,
     private storageService: StorageService,
-    private downloadService: TileDownloaderService
+    private downloadService: TileDownloaderService,
+    private downloadState: DownloadState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton =
@@ -347,7 +350,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       {
         id: 'download',
         title: 'download',
-        handler: () => this.downloadTile(this.contextMenuCoord)
+        handler: () => {
+          this.onBeforeDownload();
+        }
       },
       {
         id: 'coordinates',
@@ -709,6 +714,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openSidenav();
   }
 
+  private onBeforeDownload() {
+
+    this.tileTodownload(this.contextMenuCoord);
+    this.toolbox.activateTool('download');
+    this.openSidenav();
+    // add coord to downloadComponent
+    //this.downloadTile(this.contextMenuCoord);
+  }
+
   toastOpenedChange(opened: boolean) {
     this.map.viewController.padding[2] = opened ? 280 : 0;
     this.handleExpansionAndToastOnMobile();
@@ -778,7 +792,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchBarTerm = coord.map((c) => c.toFixed(6)).join(', ');
   }
 
-  downloadTile(clickCoord: [number, number]) {
+  tileTodownload(clickCoord: [number, number]) {
     console.log(clickCoord);
     const proj = this.map.projection;
     const mapCoord = olProj.transform(clickCoord, 'EPSG:4326', proj);
@@ -791,22 +805,14 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (!igoLayer  || !(igoLayer.dataSource instanceof XYZDataSource)){
         return;
       }
-      const url = igoLayer.dataSource.options.url
+      const templateUrl = igoLayer.dataSource.options.url
       const tileGrid = layer.getSource().tileGrid;
       const z = this.map.viewController.getZoom();
-      // console.log(tileGrid);
-      console.log(url);
       if(tileGrid) {
-        const urlGen = createFromTemplate(url, tileGrid);
-        // console.log(mapCoord);
-        const tileCoord = tileGrid.getTileCoordForCoordAndZ(mapCoord, z);
-        console.log(tileCoord);
-        this.downloadService.downloadFromCoord(tileCoord, tileGrid, url);
-        // console.log(tileCoord);
-        const tileUrl = urlGen(tileCoord, 0, 0);
-        console.log(tileUrl);
+        const coord = tileGrid.getTileCoordForCoordAndZ(mapCoord, z);
+        console.log({coord, templateUrl, tileGrid});
+        this.downloadState.addNewTileToDownload({coord, templateUrl, tileGrid});
       }
-
     })
   }
 
