@@ -1,4 +1,4 @@
-«,Type,Descriptions,Outil lié
+Propriétés,Type,Descriptions,Outil lié
 analytic,`Analytics`_ ,Permet de définir un fournisseur de service d'analyse et de statistique.,
 auth,`Auth`_ ,Objet permettant d'activer le serveur d'authentification.,
-ref:`catalog <igocatalogConfig>` ,:ref:`Catalog <igocatalogObject>` [] ,".. line-block::               Doit être présente si l'outil de catalogue. Permet de gérer les sources WMS, WMTS et ArcGISRest + tile et image ",.. line-block::               Catalog               CatalogBrowser 
+:ref:`catalog <igocatalogConfig>` ,:ref:`Catalog <igocatalogObject>` [] ,"Doit être présente si l'outil de catalogue. Permet de gérer les sources WMS, WMTS et ArcGISRest + tile et image ", Catalog et CatalogBrowser 
