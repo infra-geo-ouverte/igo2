@@ -715,12 +715,15 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private onBeforeDownload() {
-
+    if (
+      !this.toolbox.activeTool$.value ||
+      this.toolbox.activeTool$.value.name !== 'download'
+      ) {
+      this.downloadState.openedWithMouse = true;
+    }
     this.tileTodownload(this.contextMenuCoord);
     this.toolbox.activateTool('download');
     this.openSidenav();
-    // add coord to downloadComponent
-    //this.downloadTile(this.contextMenuCoord);
   }
 
   toastOpenedChange(opened: boolean) {
@@ -793,7 +796,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   tileTodownload(clickCoord: [number, number]) {
-    console.log(clickCoord);
+    // console.log(clickCoord);
     const proj = this.map.projection;
     const mapCoord = olProj.transform(clickCoord, 'EPSG:4326', proj);
     // console.log(coord);
@@ -810,7 +813,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       const z = this.map.viewController.getZoom();
       if(tileGrid) {
         const coord = tileGrid.getTileCoordForCoordAndZ(mapCoord, z);
-        console.log({coord, templateUrl, tileGrid});
+        //console.log({coord, templateUrl, tileGrid});
         this.downloadState.addNewTileToDownload({coord, templateUrl, tileGrid});
       }
     })
