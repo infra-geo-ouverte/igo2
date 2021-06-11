@@ -12,10 +12,9 @@ Configuration requise
 .. tabularcolumns:: |p{1cm}|p{7cm}|
 
 .. csv-table:: Lorem Ipsum
-   :file: _tables/lorem-tab.csv
+   :file: _tables/config-summary-fr.csv
    :header-rows: 1
-   :class: longtable
-   :widths: 1 1
+   :widths: 10 10 30 15
 
 
 Cette section détaille les configurations possibles pour le
