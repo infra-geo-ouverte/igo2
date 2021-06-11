@@ -2,3 +2,6 @@ Propriétés,Type,Descriptions,Outil lié
 analytic,`Analytics`_ ,Permet de définir un fournisseur de service d'analyse et de statistique.,
 auth,`Auth`_ ,Objet permettant d'activer le serveur d'authentification.,
 :ref:`catalog <igocatalogConfig>` ,:ref:`Catalog <igocatalogObject>` [] ,"Doit être présente si l'outil de catalogue. Permet de gérer les sources WMS, WMTS et ArcGISRest + tile et image ", Catalog et CatalogBrowser 
+context ,`Context`_ ,Activation de l'API de context d'IGO2. Cette API sera documentée indépendamment               de la présente documentation. ,ContextManager 
+depot ,`Depot`_ ,Activation de l'API de dépôt. Cette API sera documentée indépendamment de la présente documentation. ,
+`hasSearchPointerSummary`_ ,Boolean ,Permet d'activé ou non la capacité d'afficher un résumé de la position du curseur.Le résumé est dépendant des sources de recherche utilisées. Désactivé par défaut. ,
