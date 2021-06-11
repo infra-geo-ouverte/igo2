@@ -8,15 +8,6 @@
 Configuration requise
 ---------------------
 
-
-.. tabularcolumns:: |p{1cm}|p{7cm}|
-
-.. csv-table:: Lorem Ipsum
-   :file: _tables/config-summary-fr.csv
-   :header-rows: 1
-   :widths: 10 10 30 15
-
-
 Cette section détaille les configurations possibles pour le
 navigateur dans un contexe cartographique.
 À l'aide de fichiers de configuration (fichiers JSON) , il est possible de paramétrer:
@@ -57,6 +48,11 @@ Résumé
 *********************
 
 
+    .. csv-table:: Lorem Ipsum
+       :file: _tables/config-summary-fr.csv
+       :header-rows: 1
+       :widths: 10 10 30 15
+
     .. list-table::
        :widths: 10 10 30 15
        :header-rows: 1
@@ -92,6 +88,7 @@ Résumé
          - .. line-block::
                Activation de l'API de dépôt. Cette API sera documentée indépendamment
                de la présente documentation.
+         -
        * - `hasSearchPointerSummary`_
          - Boolean
          - .. line-block::
