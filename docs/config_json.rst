@@ -47,6 +47,7 @@ Important : Notez que le fichier config.json a préséance sur le fichier enviro
 Résumé
 *********************
 
+    .. tabularcolumns:: |p{1cm}|p{7cm}|p{7cm}||p{2cm}|
 
     .. csv-table:: Lorem Ipsum
        :file: _tables/config-summary-fr.csv
