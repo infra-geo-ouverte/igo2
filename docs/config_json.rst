@@ -166,83 +166,83 @@ Résumé
          - .. line-block::
                Liste de projections non enregistrées par défault par OpenLayers.
          -
-      * - queryOverlayStyle
-        - `overlayStyle`_
-        - .. line-block::
-              Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une interrogation par clic.
-           -
-      * - searchOverlayStyle
-        - `overlayStyle`_
-        - .. line-block::
-              Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une recherche.
-           -
-       * - routingSources
-         - `RoutingSource`_
+       * - queryOverlayStyle
+         - `overlayStyle`_
          - .. line-block::
-               Source serveur pour la création des itinéraires. Actuellement, le serveur utilisé est OSRM.
-         - itinéraire
-       * - **searchSources***
-         - `SearchSources`_
-         - .. line-block::
-               Nécessaire afin de permettre la recherche par texte et/ou la recherche par coordonnées.
-         - .. line-block::
-               Recherche
-               Carte
-       * - .. line-block::
-               **theme***
-               Voir: `theme`_
-         - String
-         - .. line-block::
-               Permet de définir les thèmes de l'application. Les choix sont:
-                   - blue-theme
-                   - bluegrey.theme
-                   - dark.theme
-                   - teal.theme
-               Le répertoire où sont conservés les thèmes est
-               le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
+               Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une interrogation par clic.
          -
-       * - title
-         - String
+       * - searchOverlayStyle
+         - `overlayStyle`_
          - .. line-block::
-               Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
-               Constante pouvant être réutilisée dans le welcomeWindow.
+               Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une recherche.
          -
-       * - version
-         - .. line-block::
-              app: String,
-              releaseDateApp: String
-         - .. line-block::
-               Permet de définir une constante, pour la version du présent déploiement et de la
-               date de déploiement de l'application. releaseDateApp, doit être un format reconnu et
-               interprétable au format Date. Si le format n'est pas convertissable en date,
-               la valeur fournie sera utilisée directement.
-               Constante pouvant être réutilisée dans le welcomeWindow.
-         -
-       * - description
-         - String
-         - .. line-block::
-               Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche,
-               comme par exemple Google. Constante pouvant être réutilisée dans le welcomeWindow.
-         -
-       * - welcomeWindow
-         - `WelcomeWindow`_
-         - .. line-block::
-               Permet d'ouvrir une fenêtre d'accueil à l'arrivé dans application. Le contenu doit
-               être configurer à l'aide les fichiers de traduction en.json et fr.json.
-                "welcomeWindow": {
-                  "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>",
-                  "title": "Fenêtre d'accueil",
-                  "closeButton": "Fermer",
-                  "notShowCheck": "  ne plus afficher"}
-               Les propriétés title, description, version, releaseDate peuvent être utilisées dans le
-               contenu html pour ajouter du contenu statique non traduit.
-               ex: "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>Version {{version}}"
-               - title provient de la propriété title ci haut.
-               - description provient de la propriété description ci haut.
-               - version provient de la propriété version.app ci haut OU de la version de la librairie associée (igo2-lib)
-               - releaseDate provient de la propriété version.releaseDateApp ci haut OU de la releaseDate
-                 de la librairie associée (igo2-lib)
-         -
+        * - routingSources
+          - `RoutingSource`_
+          - .. line-block::
+                Source serveur pour la création des itinéraires. Actuellement, le serveur utilisé est OSRM.
+          - itinéraire
+        * - **searchSources***
+          - `SearchSources`_
+          - .. line-block::
+                Nécessaire afin de permettre la recherche par texte et/ou la recherche par coordonnées.
+          - .. line-block::
+                Recherche
+                Carte
+        * - .. line-block::
+                **theme***
+                Voir: `theme`_
+          - String
+          - .. line-block::
+                Permet de définir les thèmes de l'application. Les choix sont:
+                    - blue-theme
+                    - bluegrey.theme
+                    - dark.theme
+                    - teal.theme
+                Le répertoire où sont conservés les thèmes est
+                le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
+          -
+        * - title
+          - String
+          - .. line-block::
+                Permet de définir le titre de l'application qu'on retrouve dans le menu d'accueil.
+                Constante pouvant être réutilisée dans le welcomeWindow.
+          -
+        * - version
+          - .. line-block::
+               app: String,
+               releaseDateApp: String
+          - .. line-block::
+                Permet de définir une constante, pour la version du présent déploiement et de la
+                date de déploiement de l'application. releaseDateApp, doit être un format reconnu et
+                interprétable au format Date. Si le format n'est pas convertissable en date,
+                la valeur fournie sera utilisée directement.
+                Constante pouvant être réutilisée dans le welcomeWindow.
+          -
+        * - description
+          - String
+          - .. line-block::
+                Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche,
+                comme par exemple Google. Constante pouvant être réutilisée dans le welcomeWindow.
+          -
+        * - welcomeWindow
+          - `WelcomeWindow`_
+          - .. line-block::
+                Permet d'ouvrir une fenêtre d'accueil à l'arrivé dans application. Le contenu doit
+                être configurer à l'aide les fichiers de traduction en.json et fr.json.
+                 "welcomeWindow": {
+                   "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>",
+                   "title": "Fenêtre d'accueil",
+                   "closeButton": "Fermer",
+                   "notShowCheck": "  ne plus afficher"}
+                Les propriétés title, description, version, releaseDate peuvent être utilisées dans le
+                contenu html pour ajouter du contenu statique non traduit.
+                ex: "html": "<h1>Débutez en sélectionnant un contexte &#x2605;</h2>Version {{version}}"
+                - title provient de la propriété title ci haut.
+                - description provient de la propriété description ci haut.
+                - version provient de la propriété version.app ci haut OU de la version de la librairie associée (igo2-lib)
+                - releaseDate provient de la propriété version.releaseDateApp ci haut OU de la releaseDate
+                  de la librairie associée (igo2-lib)
+          -
 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
