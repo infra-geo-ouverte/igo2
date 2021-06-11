@@ -12,7 +12,7 @@ Configuration requise
 .. tabularcolumns:: |p{1cm}|p{7cm}|
 
 .. csv-table:: Lorem Ipsum
-   :file: _tables/config-summary-fr.csv
+   :file: _files/lorem-tab.csv
    :header-rows: 1
    :class: longtable
    :widths: 1 1
