@@ -26,7 +26,7 @@ drawingTool ,String[] ,Permet d'ajouter à l'outil de dessin un liste d'
 importExport ,`ImportExport`_ ,Nécessaire si l'outil d'importation exportation pour gérer l'importation des Shapefiles. ,"| Importation 
 | Exportation "
 interactiveTour ,`interactiveTour`_ ,Permet de configurer les tours interactifs de présentation de l'application. ,
-**language*** ,`Language`_[],"| Chemins d'accès des fichiers de traduction de l'application. 
+**language*** ,`Language`_ [],"| Chemins d'accès des fichiers de traduction de l'application. 
 | La dernier de la liste a priorité sur les clés précédentes",Tous 
 mapOverlay ,`MapOverlay`_ [] ,Éléments visuels à ajouter par dessus la carte de l'application. ,
 menuButtonReverseColor ,Boolean ,Indique si les couleurs du bouton de menu seront inversés. ,
