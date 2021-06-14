@@ -2065,7 +2065,7 @@ Propriétés de ogcFilters
          - | Permet de définir des boutons radio qui pourront être activés par l'utilisateur pour appliquer des filtres voulus.
            | Doit contenir obligatoirement bundles[].
          -
-       * - selectMulti
+       * - select
          - Select
          - | Permet de définir une liste déroulante permettant à l'utilisateur d'appliquer un ou plusieurs filtres.
          - | Doit contenir obligatoirement bundles[].
@@ -2100,7 +2100,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.selector
        * - title
          - String
          - Le type de sélecteur.
-         - pushButton, checkbox, radioButton, selectMulti
+         - pushButton, checkbox, radioButton, select
          -
 
 .. _igoOgcFilterPushButtons:
@@ -2153,7 +2153,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
          - .. line-block::
                Valeur défaut
        * - selector
-         - OgcPushButton[], OgcCheckbox[], OgcRadioButton[], OgcSelectMulti[]
+         - OgcPushButton[], OgcCheckbox[], OgcRadioButton[], OgcSelect[]
          - Liste de selecteur pour filtrer les entités de la carte
          -
          -

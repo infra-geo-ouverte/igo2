@@ -306,7 +306,7 @@
               }
             ]
           },
-          "selectMulti": {
+          "select": {
             "order": 3,
             "groups": [
               {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
@@ -316,12 +316,11 @@
                 "id": "id1",
                 "logical": "Or",
                 "multiple": true,
-                "unfiltered": true,
+                "unfiltered": false,
                 "title": "Type de radar photo",
                 "selectors": [
                   {
                     "title": "Radar photo fixe",
-                    "enabled": true,
                     "filters": {
                       "operator": "PropertyIsEqualTo",
                       "propertyName": "typeAppareil",
@@ -330,7 +329,6 @@
                   },
                   {
                     "title": "Radar photo mobile",
-                    "enabled": false,
                     "filters": {
                       "operator": "PropertyIsEqualTo",
                       "propertyName": "typeAppareil",
@@ -339,7 +337,6 @@
                   },
                   {
                     "title": "Radar photo fixe + feu rouge",
-                    "enabled": true,
                     "filters": {
                       "operator": "PropertyIsEqualTo",
                       "propertyName": "typeAppareil",
