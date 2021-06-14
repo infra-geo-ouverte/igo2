@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
-import { once } from 'process';
+import { AnalyticsService, StorageScope, StorageService } from '@igo2/core';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +8,13 @@ import { once } from 'process';
 export class PwaService {
   promptEvent: any;
   constructor(
-    private platform: Platform
+    private platform: Platform,
+    private analyticsService: AnalyticsService,
+    private storageService: StorageService
   ) { }
 
-  public initPwaPrompt() {
+
+  public async initPwaPrompt() {
     if (!this.platform.IOS) {
       window.addEventListener('beforeinstallprompt', (event: any) => {
         event.preventDefault();
@@ -25,7 +28,11 @@ export class PwaService {
     window.addEventListener('click', () => { this.showPrompt(); }, { once: true });
   }
 
-  private showPrompt() {
+  private async showPrompt() {
     this.promptEvent.prompt();
+    const outcome = await this.promptEvent.userChoice;
+    this.analyticsService.trackEvent('app', 'installPwa', outcome.outcome);
+    this.storageService.set('pwaInstalled', outcome.outcome, StorageScope.LOCAL)
+    this.promptEvent = undefined;
   }
 }
