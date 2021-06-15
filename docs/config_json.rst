@@ -47,7 +47,7 @@ Important : Notez que le fichier config.json a préséance sur le fichier enviro
 Résumé
 *********************
 
-    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}||p{2cm}|
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|
 
     .. csv-table::
        :file: _tables/config-summary-fr.csv
@@ -103,51 +103,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **url***
-         - String
-         - .. line-block::
-               Définit l'url d'appel du service d'authentification
-         -
-         -
-       * - **tokenKey***
-         - String
-         - .. line-block::
-               Définit la clef de l'api d'authentification utilisée
-         -
-         -
-       * - allowAnonymous
-         - Boolean
-         - .. line-block::
-               Permet/Bloque l'accès aux usagers non authentifiés
-               d'accéder aux contextes publics
-         - true | false
-         - true
-       * - hostsWithCredentials
-         - {}[] (liste d'objet)
-         - .. line-block::
-               Indique à l'application, la liste des domaines a être interceptés
-               et à y ajouter dans l'appel.
-               "withCredentials": true/false selon la valeur définie.
-               exemple: [{
-                             withCredentials: true,
-                             domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
-                        }]
-         - 
-         - 
+    .. csv-table::
+      :file: _tables/auth-fr.csv
+      :header-rows: 1
+      :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
