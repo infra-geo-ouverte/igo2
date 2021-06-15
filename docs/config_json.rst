@@ -1795,7 +1795,21 @@ Résumé fichier de contexte
        * - message
          - `Message`_
          - .. line-block::
-               Présentation d'un message à l'ouverture du contexte.
+               Présentation d'un
+               message à l'ouverture
+               du contexte.
+               Propriété qui n'est
+               plus favorisée.
+               Il vous suggère
+               d'utiliser 'messages'
+         -
+       * - messages
+         - `Message`_ []
+         - .. line-block::
+               Présentation d'un
+               list des messages
+               à l'ouverture
+               du contexte.
          -
        * - `toolbar`_
          - String[]
@@ -1947,6 +1961,7 @@ Liens
         - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`_
         - :ref:`Map IGO2 <igomap>`.
 
+.. _igomessage:
 
 ***************
 Message
