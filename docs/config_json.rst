@@ -50,7 +50,7 @@ Résumé
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/config-summary-fr.csv
+       :file: _tables/fr/config-summary.csv
        :header-rows: 1
        :widths: 10 10 30 15
 
@@ -106,7 +106,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-      :file: _tables/auth-fr.csv
+      :file: _tables/fr/auth.csv
       :header-rows: 1
       :widths: 10 10 30 15 10
 
@@ -281,200 +281,25 @@ Exemples
 Propriétés
 ===============
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - sources
-         - :ref:`Catalog <igocatalogObject>` []
-         - .. line-block::
-               Liste des catalogues qui sera présenté à l'usager.
-         -
-         - []
+    .. csv-table::
+       :file: _tables/fr/catalog-src.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
 .. _igocatalogObject:
 
 Propriétés - Objet Catalog
 =============================
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - count
-         - Integer
-         - .. line-block::
-               Nombre de résultats retournés par le serveur lors de requêtes **WMS** de GetFeatureInfo
-         -
-         -
-       * - abstract
-         - String
-         - .. line-block::
-               Résumé des données contenues dans le catalogue
-         -
-         - 5
-       * - **id***
-         - String
-         - .. line-block::
-               Identifiant unique permettant de différencier les catalogues entre eux.
-         -
-         - uuid()
-       * - groupImpose
-         - .. line-block::
-            id*: String,
-            title*: String
-         - .. line-block::
-               N.B: Propriété disponible sur un objet de type CompositeCatalog
-               Permet d'imposer l'utilisation d'un groupe à l'ensemble des couches appellées du catalogue.
-               - id: Identifiant unique permettant de différencier les groupes entre eux.
-               - title: Titre pour le groupe qui sera utilisé dans l'outil Catalog.
-         -
-         -
-       * - forcedProperties
-         - .. line-block::
-            layerName*: String,
-            title*: String
-         - .. line-block::
-               Permet d'imposer un nom à une couche spécifique.
-               - layerName: Nom de la couche dans le catalogue d'origine (propriété layer name). Permet d'aller chercher la couche en question dans le service.
-               - title: Nouveau titre pour la couche.
-         -
-         -
-       * - matrixSet
-         - String
-         - .. line-block::
-               Nom du matrixSet définit pour le service WMTS seulement
-               **Obligatoire pour les services WMTS**
-         -
-         -
-       * - queryFormat
-         - QueryFormat
-         - .. line-block::
-               Pour les services **WMS**, le format d'interrogation de la donnée.
-         - Voir **QueryFormat**
-         -
-       * - queryHtmlTarget
-         - String
-         - .. line-block::
-               Pour les services **WMS**, definit la destination des résultats d'interrogation
-               pour les formats HTML.
-         - .. line-block::
-              iframe (intégré à la plage)
-              _blank (ouverture page externe)
-         - iframe
-       * - queryParams
-         - objet {}
-         - .. line-block::
-               Paramètres supplémentaires à ajouter à l'appel des couches ajoutées à partir du service.
-               Que ce soit des paramètres normés (WMS|WMTS) ou liés à votre service.
-         -
-         -
-       * - regFilters
-         - String[]
-         - .. line-block::
-               Une liste d'expressions régulières (regex) permettant de limiter les couches
-               d'information présentées dans l'outil CatalogBrowser
-         -
-         -
-       * - requestEncoding
-         - String
-         - .. line-block::
-               Type d'encodage des paramètres demandés au serveur
-         - KVP REST
-         - KVP
-       * - setCrossOriginAnonymous
-         - Boolean
-         - .. line-block::
-               Afin de définir si l'entête de l'appel faite au serveur sera anonyme. Permet entre autres,
-               d'éviter les problématiques de CORS.
-         - true | false
-         - false
-       * - showLegend
-         - Boolean
-         - .. line-block::
-               Permet d'affiché la légende sur le click du titre des couches.
-         - true | false
-         - false
-       * - sortDirection
-         - String
-         - .. line-block::
-               Permet de trier l'ordre d'apparition des couches du catalogue dans l'outil CatalogBrowser
-               Influence l'ordre d'ajout des couches d'informations à la carte.
-         - asc | desc
-         - .. line-block::
-               Aucun, l'ordre
-               présenté par service
-       * - timeFilter
-         - TimeFilterOptions
-         - .. line-block::
-               Options temporelles liées à l'entièreté des couches du service web.
-         - .. line-block::
-               Voir **TimeFilter**
-         - 1.0.0 (WMTS)
-       * - **title***
-         - String
-         - .. line-block::
-              Titre pour la source du catalogue qui sera utilisédans l'outil Catalog.
-         -
-         -
-       * - tooltipType
-         - String
-         - .. line-block::
-              Pour les couches ajoutées, définit si le tooltip (sulvol du titre) sera le
-              résumé du "layer" (**wms/wmts**) ou son titre
-         - abstract | title
-         - title
-       * - type
-         - String
-         - .. line-block::
-               Type de service à appeler
-         - composite wmts wms
-         - wms
-       * - **url***
-         - String
-         - .. line-block::
-               Url du service WMS ou WMTS sans les paramètre d'url normé OGC
-               (i.e. service=wms&request=GetCapabilities)
-               OU url du service de baselayers
-         -
-         -
-       * - **externalProvider***
-         - Boolean
-         - .. line-block::
-               Définit si le catalogue provient d'une organisation externe.
-         - true/false
-         - false
-       * - version
-         - String
-         - .. line-block::
-               Version du service
-               WMS ou WMTS
-         - .. line-block::
-               Référer au
-               GetCapabilities
-               du service
-               (WMS|WMTS)
-         - 1.0.0 (WMTS)
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+      :file: _tables/fr/catalog.csv
+      :header-rows: 1
+      :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -483,38 +308,12 @@ Propriétés - Objet Catalog
 Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
 ==========================================================================
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **id***
-         - String
-         - .. line-block::
-               Identifiant unique permettant de différencier les catalogues entre eux.
-         -
-         -
-       * - **title***
-         - String
-         - .. line-block::
-              Titre pour la source du catalogue qui sera utilisé dans l'outil Catalog.
-         -
-         -
-       * - composite
-         - :ref:`Catalog <igocatalogObject>` []
-         - .. line-block::
-              Liste des catalogues utilisés dans un catalogue composé.
-         -
-         -
+    .. csv-table::
+       :file: _tables/fr/catalog-composite.csv
+       :header-rows: 1
+       :widths: 10 10 30
 
 Liens
 
@@ -543,34 +342,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **url***
-         - String
-         - .. line-block::
-               Définit l'url d'appel du service
-               de contexte
-         -
-         -
-       * - **defaultContextUri***
-         - String
-         - .. line-block::
-               Nom ou identifiant du contexte
-               cartographique par défaut.
-         -
-         -  _default
+    .. csv-table::
+       :file: _tables/fr/context-api.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -600,34 +377,12 @@ Exemples
 
 Propriétés
 
-.. list-table::
-      :widths: 10 10 30 15 10
-      :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|
 
-      * - .. line-block::
-            Propriétés
-      - .. line-block::
-            Type
-      - .. line-block::
-            Description
-      - .. line-block::
-            Valeurs possibles
-      - .. line-block::
-            Valeur défaut
-      * - **url***
-      - String
-      - .. line-block::
-            Définit l'url d'appel du service
-            de dépôt de fichier
-      -
-      -
-      * - trainingGuides
-      - String[]
-      - .. line-block::
-            Nom ou identifiant des guides d'autoformation
-            à accéder.
-      -
-      -
+    .. csv-table::
+       :file: _tables/fr/depot-api.csv
+       :header-rows: 1
+       :widths: 10 10 30
 
 Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -698,9 +453,7 @@ ImportExport
 
     .. line-block::
         Cette configuration permet de définir un service qui sera en mesure de convertir des formats de fichiers géométriques non gérés par IGO2(OpenLayers).
-
         Actuellement, les GeoJson, KML, KMZ sont acceptés par IGO2. Par contre, les `Esri Shapefile  <https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf>`_ doivent transiger par un serveur de conversion.
-
         C'est à partir ce cette propriété que vous pouvez définir le serveur de conversion qui vous retournera un fichier utilisable par IGO2 (GeoJson).
 
 Exemples
@@ -717,57 +470,13 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/import-export.csv
        :header-rows: 1
+       :widths: 10 10 30 15 10
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **url***
-         - String
-         - .. line-block::
-               Url du service de conversion.
-         - .. line-block::
-               https://geoegl.msp.gouv.qc.ca/apis/ogre
-         -
-       * - clientSideFileSizeMaxMb
-         - Number
-         - .. line-block::
-               Taille maximum du fichiers pouvant être lu par le fureteur.
-         - .. line-block::
-
-         - 30
-       * - gpxAggregateInComment
-         - Boolean
-         - .. line-block::
-               Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler
-               les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur
-               de l'ID au champ «name».
-         - .. line-block::
-
-         - false
-       * - forceNaming
-         - Boolean
-         - .. line-block::
-               Ajoute une boite texte au formulaire d'exportation qui permet de nommer le fichier exporter.
-         - .. line-block::
-
-         - false
-       * - formats
-         - String[]
-         - .. line-block::
-               La liste des formats qu'il est possible d'exporter.
-         - .. line-block::
-               'GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV'
-         - ['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV']
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
@@ -776,7 +485,6 @@ Liens
 
 
 .. _igolanguage:
-
 
 
 ***************
