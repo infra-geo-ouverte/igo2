@@ -1179,8 +1179,9 @@ overlayStyle
 Exemple
 
         .. code:: json
-              "queryOverlayStyle": {},
-              "searchOverlayStyle": {
+
+            "queryOverlayStyle": {},
+            "searchOverlayStyle": {
                   "base": {
                       "markerColor": "purple",         // marker fill
                       "fillColor": [233,66,133],       // poly
