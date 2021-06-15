@@ -32,7 +32,7 @@ export class PwaService {
     this.promptEvent.prompt();
     const outcome = await this.promptEvent.userChoice;
     this.analyticsService.trackEvent('app', 'installPwa', outcome.outcome);
-    this.storageService.set('pwaInstalled', outcome.outcome, StorageScope.LOCAL)
+    this.storageService.set('pwaInstalled', outcome.outcome, StorageScope.LOCAL);
     this.promptEvent = undefined;
   }
 }
