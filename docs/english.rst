@@ -8,17 +8,6 @@
 English
 --------------------
 
-
-
-
-
-
-
-
-
-
-
-
 ----------
 
 .. toctree::
@@ -26,8 +15,6 @@ English
    
    config_json_en
 
-
-
-
 .. note::
+
    This documentation is under construction.
