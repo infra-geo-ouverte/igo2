@@ -50,7 +50,7 @@ Résumé
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/config-summary.csv
+       :file: _tables/fr/config/config-summary.csv
        :header-rows: 1
        :widths: 10 10 30 15
 
@@ -106,7 +106,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-      :file: _tables/fr/auth.csv
+      :file: _tables/fr/config/auth.csv
       :header-rows: 1
       :widths: 10 10 30 15 10
 
@@ -284,7 +284,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/catalog-src.csv
+       :file: _tables/fr/config/catalog-src.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -297,7 +297,7 @@ Propriétés - Objet Catalog
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-      :file: _tables/fr/catalog.csv
+      :file: _tables/fr/config/catalog.csv
       :header-rows: 1
       :widths: 10 10 30 15 10
 
@@ -311,7 +311,7 @@ Propriétés - Objet CompositeCatalog (spécialisation de l'objet Catalog)
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|
 
     .. csv-table::
-       :file: _tables/fr/catalog-composite.csv
+       :file: _tables/fr/config/catalog-composite.csv
        :header-rows: 1
        :widths: 10 10 30
 
@@ -345,7 +345,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/context-api.csv
+       :file: _tables/fr/config/context-api.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -380,7 +380,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|
 
     .. csv-table::
-       :file: _tables/fr/depot-api.csv
+       :file: _tables/fr/config/depot-api.csv
        :header-rows: 1
        :widths: 10 10 30
 
@@ -473,7 +473,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/import-export.csv
+       :file: _tables/fr/config/import-export.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -510,7 +510,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/interactiveTour.csv
+       :file: _tables/fr/config/interactiveTour.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -539,7 +539,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/locale.csv
+       :file: _tables/fr/config/locale.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -679,7 +679,7 @@ Propriétés - Objet Projection
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|
 
     .. csv-table::
-       :file: _tables/fr/projection.csv
+       :file: _tables/fr/config/projection.csv
        :header-rows: 1
        :widths: 10 10 30
 
@@ -715,7 +715,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/directions.csv
+       :file: _tables/fr/config/directions.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -752,7 +752,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/theme.csv
+       :file: _tables/fr/config/theme.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -786,7 +786,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/welcomeWindow.csv
+       :file: _tables/fr/config/welcomeWindow.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -1090,7 +1090,7 @@ Résumé fichier de contexte
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/context-summary.csv
+       :file: _tables/fr/config/context-summary.csv
        :header-rows: 1
        :widths: 10 10 30 15
 
@@ -1238,7 +1238,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/message.csv
+       :file: _tables/fr/config/message.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -1335,7 +1335,7 @@ Propriétés
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-       :file: _tables/fr/tools.csv
+       :file: _tables/fr/config/tools.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
