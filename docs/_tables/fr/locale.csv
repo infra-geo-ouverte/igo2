@@ -1,0 +1,3 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**prefix*** ,String [],"| Définir le dossier contenant les fichiers de traduction
+| de l'appplication. ",,[‘./locale/’ ]

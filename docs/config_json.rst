@@ -14,7 +14,7 @@ navigateur dans un contexe cartographique.
 
       - l'application
       - le contenu cartographique
- 
+
 
 ==============================
 Application
@@ -507,40 +507,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - activateInteractiveTour
-         - Boolean
-         - .. line-block::
-               Indique si le tour interactif de présentation de l'application est activé.
-         - true | false
-         - true
-       * - pathToConfigFile
-         - String
-         - .. line-block::
-               Indique ou ce retrouve le fichier de configuration des tours dans l'application.
-               Voir la documentation plus loin sur les détails de la configurations des tours.
-               Référez vous à :ref:`Tour interactif configuration <igoInteractiveTourConfig>`.
-         -
-         - "./config/interactiveTour.json"
-       * - tourInMobile
-         - Boolean
-         - .. line-block::
-                Indique si les tours interactifs sont aussi disponible en mode mobile.
-         - true/false
-         -
+    .. csv-table::
+       :file: _tables/fr/interactiveTour.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -564,28 +536,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **prefix***
-         - String
-         - .. line-block::
-               Définir le dossier contenant
-               les fichiers de traduction
-               de l'appplication.
-         -
-         - ./locale/
+    .. csv-table::
+       :file: _tables/fr/locale.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -719,45 +675,12 @@ Exemple
 Propriétés - Objet Projection
 ===============
 
-    .. list-table::
-       :widths: 10 10 30
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-       * - alias
-         - String
-         - .. line-block::
-               Nom d'affichage que vous
-               voulez donner \à la
-               projection ajoutée.
-       * - **code***
-         - String
-         - .. line-block::
-               Code de la projection/
-               système de coordonnées
-               à ajouter à l'application.
-       * - **def***
-         - String
-         - .. line-block::
-               Paramètres associés à la
-               définition de votre
-               projection / système de
-               coordonnées.
-       * - **extent***
-         - .. line-block::
-               Liste de
-               nombre
-         - .. line-block::
-               Liste de nombre définissant
-               les limites d'application
-               de la projection. L'ordre à
-               respecter est:
-               [Xmin,YMin,XMax,YMax].
+    .. csv-table::
+       :file: _tables/fr/projection.csv
+       :header-rows: 1
+       :widths: 10 10 30
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -788,36 +711,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - enabled
-         - Boolean
-         - .. line-block::
-               Permet d'activer
-               / désactiver
-               la source.
-         - true | false
-         - true
-       * - url
-         - String
-         - .. line-block::
-               Url du serveur
-               retournant
-               l'itinéraire.
-         -
-         - `https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/ <https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/>`_
+    .. csv-table::
+       :file: _tables/fr/directions.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -849,43 +748,18 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **theme***
-         - String
-         - .. line-block::
-               Thème à utiliser pour
-               la présente application
-               configurée.
-         - .. line-block::
-               - blue-theme
-               - bluegrey.theme
-               - dark.theme
-               - deeppurple.theme
-               - indigo.theme
-               - orange.theme
-               - teal.theme
-         - blue-theme
+    .. csv-table::
+       :file: _tables/fr/theme.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
 
         - `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
-
-
 
 
 ***************
@@ -908,41 +782,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - nbVisitToShow
-         - Number
-         - .. line-block::
-               Nombre de fois que sera présenté la fenêtre d'accueil. S'appliquera aussi après
-               être revenu par exemple lors d'une nouvelle
-               version IGO.
-         -
-         -
-       * - nbVisitToShowAgain
-         - Number
-         - .. line-block::
-               La fenêtre d'accueil reviendra après le nombre de visite indiqué par ce paramètre.
-         -
-         -
-       * - showAgainOnNewIGOVersion
-         - Boolean
-         - .. line-block::
-               Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra
-               si la version IGO est différente de la version lors de sa visite précédente.
-         -
-         - true
+    .. csv-table::
+       :file: _tables/fr/welcomeWindow.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1241,82 +1086,12 @@ Important : Notez que le fichier nom_du_contexte.json a préséance sur le fichi
 Résumé fichier de contexte
 ***************************
 
-    .. list-table::
-       :widths: 10 10 30 15
-       :header-rows: 1
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|
 
-       * - Propriétés
-         - Type
-         - Description
-         - Outil lié
-       * - `base`_
-         - string
-         - .. line-block::
-               Identification du nom
-               du ficher de base dont
-               les contextes peuvent
-               hériter du contenu.
-         - .. line-block::
-               Map
-               ContextManager
-               Config d'outils
-               ...
-       * - .. line-block::
-               **layers***
-         -  :ref:`layer[] <igolayer>`
-         - .. line-block::
-               Liste des couches
-               d'informations
-               disponibles pour
-               le contexte
-               sélectionné.
-         - .. line-block::
-               Map
-               MapDetails
-       * - **map***
-         - `map`_
-         - .. line-block::
-               Définition de la carte
-               lors de l'ouverture
-               initial du contexte
-         -
-       * - message
-         - `Message`_
-         - .. line-block::
-               Présentation d'un message à l'ouverture du contexte.
-         -
-       * - `toolbar`_
-         - String[]
-         - .. line-block::
-               Liste des outils
-               disponibles dans
-               l'application.
-               L'ordre dans la
-               liste correspond
-               à l'ordre
-               d'apparition des
-               outils dans IGO2.
-         - Tous
-       * - `tools`_
-         - Objet[]
-         - .. line-block::
-               Liste des configurations
-               des outils présentes dans
-               l'application.
-         - Tous
-       * - .. line-block::
-               **uri***
-               Voir `uri`_
-         - String
-         - .. line-block::
-               Nom ou identifiant
-               du contexte.
-               Doit être unique
-               au sein de la
-               même application.
-         - .. line-block::
-               Map
-               ShareMap
+    .. csv-table::
+       :file: _tables/fr/context-summary.csv
+       :header-rows: 1
+       :widths: 10 10 30 15
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1458,95 +1233,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/message.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur par défaut
-       * - format
-         - String
-         - .. line-block::
-              Le format du message html ou text. Selon le choix, une deuxième configuration devra
-              être définie soit html ou text.
-         - 'text', 'html'
-         -
-       * - html
-         - String
-         - Le html du message sur une seule ligne. Cette configuration est obligatoire si le format = 'html.
-         -
-         -
-       * - icon
-         - String
-         - Icone à ajouter au message.
-         -
-         -
-       * - options.*
-         - Notification
-         - .. line-block::
-              Voir les options Notifications dans le projet 
-              `angular2-notification options. <https://github.com/flauc/angular2-notifications#options>`_
-         -
-         -
-       * - options.template
-         - String
-         - En construction
-         -
-         -
-       * - options.from
-         - Date | String
-         - .. line-block::
-              Date de début de l'application du message.
-              Peut être une date OU un string interprétable
-              en javascript. `https://developer.mozilla.org/fr/docs... <https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/parse>`_
-         -
-         -
-       * - options.to
-         - Date | String
-         - .. line-block::
-              Date de fin de l'application du message.
-              Peut être une date OU un string interprétable
-              en javascript. `https://developer.mozilla.org/fr/docs... <https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/parse>`_
-         -
-         -
-       * - text
-         - String
-         - .. line-block::
-              Le text du message à afficher. Cette configuration remplace la configuration html.
-              NB.: pour un message qui sera traduction en fonction du navigateur simplement ce
-              créer une clef de traduction indiquer ici et de mettre sont équivalent dans les
-              fichiers de traduction local en.json, fr.json. Exemple:
-              "text": "messageContextXyz",
-              fr.json = "messageContextXyz": <h3>mon super message</h3>
-              en.json = "messageContextXyz": <h3>message in english</h3>
-         -
-         -
-       * - title
-         - String
-         - .. line-block::
-              Le titre du message à afficher. Cette configuration s'active seulement avec la
-              configuration text et ne sera pas pris en compte avec la configuration html.
-         -
-         -
-       * - type
-         - String
-         - .. line-block::
-              Le type du message à afficher. Avertissement, erreur ou information.
-              Selon le type choisi une couleur spécifiée sera appliquée selon la
-              thématique de couleur de l'application.
-         - .. line-block::
-              'alert', 'error',
-              'info', 'success'
-         -
-
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -1620,7 +1312,6 @@ Tools
 
     .. line-block::
         Définit la liste des configurations permises pour chaque outil.
-
         Pour les options spécifiques à chaque outil, veuillez vous référer aux descriptif de l'outil. Cette section détaille seulement les propriétés communes.
 
 
@@ -1639,59 +1330,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/tools.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur par défaut
-       * - **name***
-         - String
-         - .. line-block::
-               Le nom de l'outil
-         - .. line-block::
-               - :ref:`about <igoabout>`
-               - :ref:`catalog <igocatalogtool>`
-               - :ref:`catalogBrowser <igocatalogBrowser>`
-               - :ref:`contextManager <igocontextManager>`
-               - :ref:`directions <igodirections>`
-               - :ref:`activeOgcFilter <igoactiveogcFilter>`
-               - :ref:`ogcFilter <igoogcFilter>`
-               - :ref:`activeTimeFilter <igoactivetimeFilter>`
-               - :ref:`timeFilter <igotimeFilter>`
-               - :ref:`spatialFilter <igospatialFilter>`
-               - :ref:`importExport <igoimportExport>`
-               - :ref:`mapTool <igomaptool>`
-               - :ref:`mapLegend <igomapLegend>`
-               - :ref:`mapDetails <igomapDetails>`
-               - :ref:`mapTools <igomaptools>`
-               - :ref:`measurer <igomeasurer>`
-               - :ref:`print <igoprint>`
-               - :ref:`searchResults <igosearchResults>`
-               - :ref:`spatialFilter <igospatialFilter>`
-               - :ref:`shareMap <igoshareMap>`
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traductions.
-               Si vous modifiez le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans `Language`_
-         -
-         - .. line-block::
-               Référer vous à
-               l'outil désiré.
-
-
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 

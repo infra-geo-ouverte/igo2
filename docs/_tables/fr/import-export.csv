@@ -4,5 +4,5 @@ clientSideFileSizeMaxMb ,Number ,Taille maximum du fichiers pouvant être 
 gpxAggregateInComment ,Boolean,"| Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler
 | les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur
 | de l'ID au champ «name». ",,false 
-forceNaming ,Ajoute une boite texte au formulaire d'exportation qui permet de nommer le fichier exporter. ,La liste des formats qu'il est possible d'exporter. ,"'GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV' ","['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV'] "
-formats ,String[] ,,,
+forceNaming ,Boolean,Ajoute une boite texte au formulaire d'exportation qui permet de nommer le fichier exporter. ,,false 
+formats ,String[] ,La liste des formats qu'il est possible d'exporter. ,"'GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV' ","['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV'] "
