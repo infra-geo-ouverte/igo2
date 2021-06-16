@@ -37,61 +37,12 @@ Exemples
 
 Propriétés de l'objet "view" de map
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+    
+    .. csv-table::
+       :file: _tables/fr/properties/map-view.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - enableRotation
-         - Boolean
-         - .. line-block::
-               Définir si, lors de l'utilisation en mobile, on peut tourner la carte et de cette facon ne plus avoir le nord en haut.
-         - .. line-block::
-               true
-               false
-         - true
-       * - projection
-         - String
-         - .. line-block::
-               Indique la projection de la carte en indiquant le code EPSG.
-         -
-         -
-       * - center
-         - Array []
-         - Coordonnée du positionnement du centre de la carte lors de l'arrivée dans le contexte.
-         -
-         -
-       * - zoom
-         - Number
-         - Indique le niveau de zoom de la carte lors de l'arrivée dans le contexte.
-         -
-         -
-       * - geolocate
-         - Boolean
-         - Indique si la carte est zommée sur la localisation de l'utilisateur lors de l'arrivée dans le contexte.
-         - true/false
-         - true
-       * - maxZoomOnExtent
-         - Number
-         - Indique le niveau de zoom qu'aura l'application lors d'un clic sur un résultat de recherche qui n'est pas une couche.
-         -
-       * - maxLayerZoomExtent
-         - Array []
-         - .. line-block::
-                  Indique l'étendue maximale considérée comme étant valide pour un cadrage
-                  lors du calcul de l'étendue d'une ou plusieurs couches. Les coordonnées
-                  minimales et maximales doivent être compatibles avec la projection donnée.
-         -
-         -
+       :widths: 10 10 30 15 10
 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -130,203 +81,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+        
+    .. csv-table::
+       :file: _tables/fr/properties/layer.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - baseLayer
-         - Boolean
-         - .. line-block::
-               Définir si la couche doit être considérée
-               comme une couche de base. Les couches de
-               base sont présentées dans le "baselayer"
-               switcher dans le coin inférieur gauche et
-               peuvent être exclues visuellement de la
-               table des matières.
-         - .. line-block::
-               true
-               false
-         - false
-       * - id
-         - string
-         - .. line-block::
-               Identifiant unique de la couche à l'échelle de l'application. 
-               Particulièrement utile pour bâtir le lien pour le partage
-               de cartes. Si vous avez plusieurs fois la même couche dans un context
-               vous devez avoir un id pour que le lien de partage foinctionne bien.
-               Attention: si vous définissez un id, la couche ajoutée par le catalogue
-               ou par la recherche sera considérée par l'app. comme une couche différente,
-               vous aurez donc 2 fois la même couche.
-         -
-         - uuid
-       * - legendOptions
-         -  objet `LegendOptions`_
-         - .. line-block::
-               Permet de définir des options sur la légende.
-         -
-         -
-       * - workspace
-         -  objet `WorkspaceOptions`_
-         - .. line-block::
-               Permet de définir si une source possèdera une table
-               d'attribut dans l'application ainsi
-               que ses propriétés associées.
-         - .. line-block::
-              workspace: 
-              { enabled: true, 
-              minResolution: 0, 
-              maxResolution: 400}
-         - Voir dans l'objet `WorkspaceOptions`_
-       * - maxResolution
-         - Number
-         - .. line-block::
-               Définir la résolution à laquelle la couche
-               d'information commence à s'afficher.
-               Intéressant pour les couches exigeantes à
-               récupérer à très petite échelle (ex. 1: 5000000).
-
-               Pour les **WMS** récupérant certaines
-               propriétés du service, cette valeur peut
-               être récupérée.
-         -
-         - 
-       * - maxScaleDenom
-         - Number
-         - .. line-block::
-               Définir l'échelle à laquelle la couche d'information commence
-                à s'afficher. Le chiffre inscrit correspond à l'échelle.
-                Ex. 2000000 correspond à 1:2000000
-         -
-         - 
-       * - minResolution
-         - Number
-         - .. line-block::
-            Définir la résolution à laquelle la couche d'information arrête
-            de s'afficher.
-
-            Pour les **WMS** récupérant certaines propriétés du service, 
-            cette valeur peut y être récupérée.
-         -
-         -
-       * - minScaleDenom
-         - Number
-         - .. line-block::
-            Définir l'échelle à laquelle la couche d'information arrête 
-            de s'afficher. Le chiffre inscrit correspond a l'échelle.
-            Ex. 20000 correspond à 1:20000
-         -
-         -
-       * - messages
-         - ref:`Message[] <_igomessage>`.
-         - .. line-block::
-            Affichage d'un list des messages.
-            Des messages s'affichent seulement 1 fois
-            pendant la session lorsque la couche s'affiche.
-         -
-         -
-       * - metadata
-         - Object{}
-         - .. line-block::
-               Définir la source pour les metadonnées. Lien pour
-               le bouton i de la couche -> 'i'. Si la balise url
-               est configurée, elle permet de définir un url au choix.
-               Pour les WMS, si la couche wms a une balise dataUrl et que
-               la source wms à l'option optionsFromCapabilities : true,
-               l'application ira récupérer le lien dans le service WMS.
-               La valeur pilotée à préséance sur la valeur récupérée du service.
-               Pour les sources WMS, WMTS et ArcGISREST, si celui-ci n'est pas
-               défini, c'est l'abstract du catalogue qui sera utilisé.
-               Les propriété permises sont:
-                   - url
-                   - extern
-                   - keyword
-                   - abstract = résumé de la couche. Sert au tooltip ici bas.
-         - {url: "https://www.igouverte.org/", extern: true}
-         -
-       * - tooltip
-         - Object{}
-         - .. line-block::
-               Permet de définir le type de tooltip à afficher sur survol de la couche
-               dans la table des matières (liste de couche).
-               Les divers types sont:
-                   - title
-                   - abstract
-                   - custom
-               Le type title présente uniquement le titre de la couche
-               Le type abstract récupère le "abstract" de la balise metadata.
-               Le type custom récupère le texte de la balise text
-         - .. line-block::
-               {  type: 'title'
-                    ou  'abstract'
-                    ou  'custom',
-                  text: 'text à afficher si le type est custom'
-               }
-         - {  type: 'title'}
-       * - opacity
-         - Number
-         - .. line-block::
-               Définir la transparence de la couche.
-               0 = invisible
-               1 = aucune transparence
-               Également controlable par l'interface.
-         - de 0.0 à 1.0
-         - 1
-       * - showInLayerList
-         - Boolean
-         - .. line-block::
-               Autoriser/Bloquer la suppression de la
-               couche de la table des matières.
-         - true false
-         - true
-       * - **sourceOptions***
-         -  objet `SourceOptions`_
-         - .. line-block::
-               Diverses sources de données sont supportées.
-               Référez-vous aux section suivantes pour
-               plus de détails.
-         -
-         -
-       * - **title***
-         - String
-         - .. line-block::
-               Titre de la couche tel qu'affiché dans
-               la table des matières et dans les résultats
-               d'interrogations.
-
-               Pour les **WMS** et **WMTS** récupérant
-               certaines propriétés du service, cette
-               valeur peut y être récupérée et n'est plus obligatoire
-               à ce moment.
-         -
-         -
-       * - visible
-         - Boolean
-         - .. line-block::
-               Visibilité de la
-               couche à l'ouverture
-               du contexte.
-         - true false
-         - true
-       * - zIndex
-         - Number
-         - .. line-block::
-               Ordre dans la table des matières. Plus
-               le nombre est élevé, plus la couche
-               apparait au haut de la table
-               des matières. Si absent, l'ordre dans le
-               contexte.json fait office d'ordonnancement.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -360,60 +120,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/legendOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - collapsed
-         - Boolean
-         - .. line-block::
-               Définir si la légende est ouverte.
-         - .. line-block::
-               true | false
-
-         -
-       * - display
-         - Boolean
-         - .. line-block::
-               Indique si on affiche la légende.
-         - true | false
-         - true
-       * - html
-         - String
-         - Inscription html pour la légende.
-         -
-         -
-       * - stylesAvailable
-         - ItemStyleOptions[]
-         - .. line-block::
-               Permet de modifier/contrôler la liste des styles provenant du
-               service web. Correspond aux styles disponible pour le layer
-               WMS tel que décrit dans le GetCapabilities WMS.
-         - .. line-block::
-               Ex:  "stylesAvailable": [
-                  { "name": "raster", "title": "pixel" },
-                  { "name": "Contour", "title": "aucune couleur" }
-                ]
-
-         -
-       * - url
-         - String
-         - .. line-block::
-               URL imposé pour l'appel de la légende.
-               Exemple: "/ws/mffpecofor.fcgi?&REQUEST=GetLegendGraphic&SERVICE=WMS&FORMAT=image/png&
-               SLD_VERSION=1.1.0&VERSION=1.3.0&LAYER=lidar_index_extraction"
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -467,46 +179,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/workspaceOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - enabled
-         - Boolean
-         - .. line-block::
-               Définir si la couche aura ou non une table d'attributs.
-         - .. line-block::
-               true | false
-         - .. line-block::
-               Pour les sources vectorielles, true par défault.
-               Pour les wms avec des propriétés
-               WFS associées, false par défault
-       * - minResolution
-         - Number
-         - .. line-block::
-               Indique la résolution minimale (grande échelle, très zoomé)
-               à laquelle la table d'attribut pourra faire apparaitre des
-               enregistrements.
-         - 0 à Infinity ou absent
-         -
-       * - maxResolution
-         - Number
-         - .. line-block::
-               Indique la résolution maximale (petite échelle, peu zoomé)
-               à laquelle la table d'attribut pourra faire apparaitre des
-               enregistrements.
-         - 0 à Infinity ou absent
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -539,37 +217,12 @@ Exemples
 
 Propriétés de LinkedLayersOptions
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/linkedLayersOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **linkId**
-         - String
-         - .. line-block::
-               Identifiant de liaison de la présente couche.
-               Diffère du ID du la couche car cet id doit être
-               connu au pilotage, pas seulement lors l'éxécution
-               du code.
-         -
-         -
-       * - links
-         - :ref:`LayersLinkProperties[] <LayersLinkProperties>`
-         - .. line-block::
-               Définit la liste des couches "enfant" liées
-               ainsi que leurs propriété qui sont synchronisées.
-               Obligatoire pour les couches parents.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -578,56 +231,12 @@ Propriétés de LinkedLayersOptions
 
 Propriétés de LayersLinkProperties
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/layersLinkProperties.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - bidirectionnal
-         - Boolean
-         - .. line-block::
-               Indique si les 2 couches sont liées de manière
-               bi-directionnelles. C'est à dire, si une modification
-               de l'enfant est transférée au parent et inversement.
-         - true | false
-         - true
-       * - **linkedIds**
-         - string[]
-         - .. line-block::
-               Liste des identifiants de liaison.
-               C'est à dire, une liste des linkId des couches enfant.
-         -
-         -
-       * - syncedDelete
-         - Boolean
-         - .. line-block::
-               Indique si les 2 couches doivent être supprimées
-               simultanément lorsque une ou l'autre des couches
-               est supprimée de la liste des couches.
-         - true | false
-         - false
-       * - **properties**
-         - String[]
-         - .. line-block::
-               Indique les propriétés à maintenir entre les 2 couches liées.
-                   - opacity
-                   - visible
-                   - :ref:`ogcFilters <igoOgcFilterObject>`
-                   - minResolution
-                   - maxResolution
-                   - zIndex
-                   - timeFilter => `Configuration filtre temporel WMS-T (timeFilter)`_
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -666,35 +275,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sourceOptions-common.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - attributions
-         - String
-         - .. line-block::
-               Les droits d'auteurs liés à la couche.
-         -
-         - .. line-block::
-               Pour OpenStreetMap, la valeur par défaut est @OpenStreetMap contributors
-       * - crossOrigin
-         - String
-         - .. line-block::
-               Permet de définir l'entête de l'appel faite au serveur.
-               Permet entre autres, d'éviter les problématiques de CORS.
-               De manière plus commune, définir "crossOrigin": "anonymous".
-         -  anonymous | use-credentials | null
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -833,25 +419,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sources/osm.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **type***
-         - String
-         -
-         - osm
-         - osm
+       :widths: 10 10 30 15 10
 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -880,50 +453,13 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sources/cluster.csv
        :header-rows: 1
+       :widths: 10 10 30 15 10
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **type***
-         - String
-         -
-         - cluster
-         - cluster
-       * - **url***
-         - String
-         - .. line-block::
-               L'URL du fichier contenant les entités.
-         -
-         -
-       * - excludeAttribute
-         - Array.<String>
-         - .. line-block::
-               Liste des attributs exclus du getInfo lorsque l'application
-               est en ligne.
-         -
-         -
-       * - excludeAttributeOffline
-         - Array.<String>
-         - .. line-block::
-               Liste des attributs exclus du getInfo lorsque l'application
-               est hors-ligne.
-         -
-         -
-       * - distance
-         - Number
-         - Distance en pixel entre les entités
-         -
-         - 20
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
