@@ -40,6 +40,7 @@ hasExpansionPanel
        En cours de construction
 
     .. line-block::
+
         Voici ma desc
 
 Exemples
