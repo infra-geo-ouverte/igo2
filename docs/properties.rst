@@ -1284,6 +1284,7 @@ Source (base commune)
 =====================
 
     .. line-block::
+
         Toutes les sources de recherche possèdent des propriétés commnunes. Certaines spécificités existent pour chacune des sources de recherche.
         Elles seront présentées dans les sections dédiées aux sources.
 
@@ -1304,6 +1305,7 @@ Source (base commune)
 Exemples
 
     .. line-block::
+
         Les exemples seront présentés pour chacune des sources de recherche.
 
 Propriétés
@@ -1326,6 +1328,7 @@ Cadastre
 ===============
 
     .. line-block::
+
         Le service de recherches de lots rénovés du Québec.
         Le résultat de la recherche est la géométrie du lot rénové.
         ** Pour fonctionner l'application doit avoir accès au service CPTAQ (sécurité, CORS)
@@ -1355,6 +1358,7 @@ Coordonnées
 ===============
 
     .. line-block::
+
         Le service de recherches de coordonnées permet de se localiser sous diverses structures de coordonnées.
             - Degré décimal (dd.ddd)
                 - lon, lat (-68.165547, 48.644546)
@@ -1391,7 +1395,7 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. tabularcolumns:: |p{3cm}p{12cm}|
+    .. tabularcolumns:: |p{3cm}|p{12cm}|
             
     .. csv-table::
        :file: _tables/fr/properties/search/coord.csv
@@ -1410,6 +1414,7 @@ iCherche
 ===============
 
     .. line-block::
+
         iCherche est un service de recherche développé
         par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`__
         afin de permettre des recherches textuelles sur les entités suivantes:
@@ -1441,7 +1446,7 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. tabularcolumns:: |p{3cm}p{12cm}|
+    .. tabularcolumns:: |p{3cm}|p{12cm}|
             
     .. csv-table::
        :file: _tables/fr/properties/search/iCherche.csv
@@ -1461,6 +1466,7 @@ iCherche Reverse
 ================
 
     .. line-block::
+
         iCherche Reverse est un service de recherche développé
         par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`__
         afin de permettre des recherches par coordonnées / rayon sur les entités suivantes:
@@ -1489,7 +1495,7 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. tabularcolumns:: |p{3cm}p{12cm}|
+    .. tabularcolumns:: |p{3cm}|p{12cm}|
             
     .. csv-table::
        :file: _tables/fr/properties/search/iChercheReverse.csv
@@ -1509,6 +1515,7 @@ iLayer
 ================
 
     .. line-block::
+
         iLayer est un service de recherche développé par le `Ministère de la Sécurité Publique du Québec <https://www.securitepublique.gouv.qc.ca>`__
         afin de permettre des recherches de couches d'informations par mots clefs.
         Le contenu accessible par le service de recherche est limité au territoire quuébécois.
@@ -1540,7 +1547,7 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. tabularcolumns:: |p{3cm}p{12cm}|
+    .. tabularcolumns:: |p{3cm}|p{12cm}|
             
     .. csv-table::
        :file: _tables/fr/properties/search/iLayer.csv
@@ -1559,6 +1566,7 @@ Nominatim
 ================
 
     .. line-block::
+
         Nominatim est un service de recherche développé autour de la communauté
         OpenStreetMap. Il est possible de faire des recherches par mots clefs.
 
@@ -1566,6 +1574,7 @@ Nominatim
             - `API Nominatim <https://nominatim.org/release-docs/develop/>`__
 
     .. note::
+
         Bien que la recherche par coordonnées soit disponible par Nominatim,
         IGO2 ne gère pas les appels par coordonnées vers Nominatim.
 
@@ -1586,7 +1595,7 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. tabularcolumns:: |p{3cm}p{12cm}|
+    .. tabularcolumns:: |p{3cm}|p{12cm}|
             
     .. csv-table::
        :file: _tables/fr/properties/search/nominatim.csv
@@ -1606,9 +1615,11 @@ StoredQueries
 ================
 
     .. note::
+
         Il se veut plus des EXEMPLES qu'un réel service de recherche.
 
     .. line-block::
+
         StoredQueries est un service de recherche par mots clefs exploitant les capacités WFS 2.0. disponibles sur serveurs cartographiques comme Mapserver ou Geoserver(`Geoserver StoredQuery <https://geoserver-pdf.readthedocs.io/en/latest/services/wfs/reference.html#createstoredquery>`__)
         
 Exemple 1:
@@ -1680,54 +1691,12 @@ Propriétés
 
 Seulement les propriétés spécifiques à ce service sont présentées.
       
-          .. list-table::
-             :widths: 10 50 10
-             :header-rows: 1
-      
-             * - .. line-block::
-                     Propriétés
-               - Description
-               - .. line-block::
-                     Valeur défaut
-             * - available
-               - Active le service de recherche via les storedquery
-               - false
-             * - **fields***
-               - .. line-block:: 
-                     Liste des champs à intéroger pour la StoredQueries
-                     La structure est la suivante:
-                     1er attribut: {« name »: « rtss », »defaultValue »: « -99 »},
-                     2e attribut : {« name »: « chainage », »defaultValue »: « 0 », »splitPrefix »: « \+ »}
-                     afin de représenter le terme dans la barre de recherche:
-                     0013801110000c+12
-
-                     Attention à la syntaxe du splitPrefix. Sensible au caractère REGEX.
-
-                     Si votre requête consiste à l’envoi d’un seul attribut, vous pouvez définir simplement un objet plutôt qu’une liste.
-               - 
-             * - outputFormat
-               - .. line-block::
-                     Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
-                     Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
-               - text/xml; subtype=gml/3.1.1
-             * - param
-               - .. line-block:: 
-                  Objet contenant les paramètres suiplémentaires à envoyer au service lors de l'apel de la storedqueries.
-                  Le paramètre 'limit' peut aussi y être utilisé pour limité le nombre de résultat de recherche.
-               -
-             * - resultTitle
-               - .. line-block::
-                     Nom de l'attribut à utiliser pour le titre du résultat.
-               -
-             * - searchUrl
-               - Url du service
-               - https://ws.mapserver.transports.gouv.qc.ca/swtq
-             * - **storedquery_id***
-               - .. line-block::
-                     Nom de la requête à demander au serveur.
-               -
-      
-
+    .. tabularcolumns:: |p{1cm}|p{7cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/storedQueries.csv
+       :header-rows: 1
+       :widths: 10 60 10
 
 Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1749,6 +1718,7 @@ StoredQueries Reverse
         Il se veut plus un EXEMPLE qu'un réel service de recherche.
 
     .. line-block::
+
         StoredQueries Reverse est un service de recherche par coordonnées exploitant les capacités WFS 2.0.
         Actuellement, il interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__
         qui peut retourner deux limites administratives du MTQ:
@@ -1780,43 +1750,13 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. list-table::
-       :widths: 10 60 10
+    .. tabularcolumns:: |p{1cm}|p{7cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/storedQueriesReverse.csv
        :header-rows: 1
+       :widths: 10 60 10
 
-       * - .. line-block::
-               Propriétés
-         - Description
-         - .. line-block::
-               Valeur défaut
-       * - **latField***
-         - .. line-block::
-               Nom du champ à demander au server pour la latitude.
-         -
-       * - **longField***
-         - .. line-block::
-               Nom du champ à demander au server pour la longitude.
-         -
-       * - outputFormat
-         - .. line-block::
-               Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
-               Vous ne pouvez définir de GML 3.2 + compte tenu d'un `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers.
-         - text/xml; subtype=gml/3.1.1
-       * - resultTitle
-         - .. line-block::
-               Nom de l'attribut à utiliser pour le titre du résultat.
-         -
-       * - searchUrl
-         - Url du service
-         - https://ws.mapserver.transports.gouv.qc.ca/swtq
-       * - srsname
-         - .. line-block::
-               SRS demandé au serveur
-         - EPSG:4326
-       * - **storedquery_id***
-         - .. line-block::
-               Nom de la requête à demander au serveur.
-         -
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1838,6 +1778,7 @@ Intégration
 ==============================
 
     .. line-block::
+
         La composante intégration permet de définir une gamme d'outils aisément intégrables à l'application grâce
         aux configuration d'outils (tools).
 
@@ -1848,6 +1789,7 @@ Outils (tools)
 *******************************
 
     .. line-block::
+
         Les outils existants:
             - `about`_
             - `catalog`_
@@ -1878,6 +1820,7 @@ about
 =======
 
     .. line-block::
+
         Outil générique offrant la possibilité d'informer les usagers grâce à un outil d'aide.
 
 Exemples
@@ -1893,73 +1836,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/about.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - help-circle
-       * - **name***
-         - String
-         -
-         - about
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifiez le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.about
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/aboutOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - html
-         - String ou String[]
-         - .. line-block::
-               Configure le html qui sera
-               présenté dans l'outil.
-         - .. line-block::
-               "<p>Contenu html</p>"
-               ou sous forme de liste (pour les changement de lignes)
-               ["<p>Contenu html de la première ligne</p>","<p>Contenu de la seconde ligne</p>"]
-         - igo.integration.about.html
+       :widths: 10 10 30 15 10
 
 Liens
 
@@ -1998,81 +1891,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/catalog.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - layers-plus
-       * - **name***
-         - String
-         -
-         - catalog
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifiez le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.catalog
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/catalogOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - addCatalogAllowed
-         - Boolean
-         - .. line-block::
-               Définit  si le formulaire d'ajout de 
-               catalogue est disponible ou non. Les 
-               catalogues ajoutés sont enregistrés 
-               dans la mémoire du fureteur.
-         - true/false
-         - false
-       * - predefinedCatalogs
-         - :ref:`Catalog[] <igocatalogObject>`.
-         - .. line-block::
-               Liste préféfinie de catalogues
-               permettant de pré-remplir un 
-               menu de sélection, afin d'ajouter
-               des catalogues.
-         - true/false
-         - false
+       :widths: 10 10 30 15 10
 
 Liens
 
