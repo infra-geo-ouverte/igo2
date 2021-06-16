@@ -1,0 +1,22 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+min ,String,Période de temps minimum. ,"| En fonction du type, 
+| peut être une année, 
+| une date ou une heure. 
+|            
+| NB: Si la valeur est absente, 
+| le système appliquera ce qui 
+| est définit dans le service. ",
+max ,String,Période de temps maximum. ,"| En fonction du type, 
+| peut être une année, 
+| une date ou une heure. 
+|            
+| NB: Si la valeur est absente, 
+| le système appliquera ce qui 
+| est définit dans le service. ",
+range,Boolean,Intervalle à saisir par utilisateur. ,true/false ,
+step ,Number,Le temps de l'intervalle en millisecondes. ,Ex: 63072000000 pour un an. ,
+style ,String,Le style du selecteur temporel,"calendar, slider ",slider 
+type ,String,"Le type temporel de calendrier. En année, jour, heure, etc. ","year, date ",
+timeInterval ,Number,"| Pour configuration en 'slider', 
+| le temps d'attente avant de passer 
+| au suivant, en millisecondes. ",,

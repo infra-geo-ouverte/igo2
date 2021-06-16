@@ -487,37 +487,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sources/tms.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **type***
-         - String
-         -
-         - xyz
-         - xyz
-       * - **url***
-         - String
-         - .. line-block::
-               L'URL du service de données tuilées en spécifiant la position
-               des tuiles en déclarant les balises de remplacement:
-                  - {x}
-                  - {-y}
-                  - {z}
-               X et Y représentent la position de la tuile appelée
-               tandis que le Z, le zoom.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -545,63 +520,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sources/mvt.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **type***
-         - String
-         -
-         - mvt
-         - mvt
-       * - **url***
-         - String
-         - .. line-block::
-               L'URL du service de données tuilées en spécifiant la position
-               des tuiles en déclarant les balises de remplacement:
-                  - {x}
-                  - {-y}
-                  - {z}
-               X et Y représentent la position de la tuile appelée
-               tandis que le Z, le zoom.
-         -
-         -
-       * - excludeAttribute
-         - Array.<String>
-         - .. line-block::
-               Liste des attributs exclus du getInfo lorsque l'application
-               est en ligne.
-         -
-         -
-       * - excludeAttributeOffline
-         - Array.<String>
-         - .. line-block::
-               Liste des attributs exclus du getInfo lorsque l'application
-               est hors-ligne.
-         -
-         -
-       * - featureClass
-         - String
-         - .. line-block::
-               Définir cette option en tant que 'feature' pour obtenir
-               une prise en charge complète de l'édition
-               et de la géométrie des tuiles.
-               Cette option diminue les performances de rendu des tuiles.
-
-               Ne pas utiliser cette option pour
-               optimiser le rendu des tuiles.
-         - feature
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -672,45 +596,12 @@ Websocket
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sources/websocket.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **onmessage***
-         - String
-         - .. line-block::
-                  Action déclenchée lors de la réception
-                  de la donnée par le websocket
-         - update | delete | add
-         - add
-       * - **onopen**
-         - String
-         - .. line-block::
-                  Action déclenchée lors de l'ouverture du websocket.
-         -
-         -
-       * - **onclose**
-         - String
-         - .. line-block::
-                  Action déclenchée lors de la fermeture du websocket.
-         -
-         -
-       * - **onerror**
-         - String
-         - .. line-block::
-                  Action déclenchée lors d'une erreur du websocket.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -796,251 +687,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sources/wms.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **type***
-         - String
-         -
-         - wms
-         - wms
-       * - **url***
-         - String
-         - .. line-block::
-               L'URL du service WMS utilisé
-               SANS les paramètres d'appels
-               WMS. L'application se charge
-               de compléter les paramètres
-               envoyés au serveur (KVP).
-         -
-         -
-       * - optionsFromCapabilities
-         - Boolean
-         - .. line-block::
-               Paramètre pour récupérer des informations du service.
-         - true/false
-         - false
-       * - **params***
-         - String
-         - .. line-block::
-               Paramètres WMS qui seront fait
-               aux serveurs WMS pour les divers
-               type d'appels WMS
-               (GetMap, GetLegendGraphics, ...).
-         - Référez-vous aux paramètres WMS ici-bas.
-         -
-       * - optionsFromApi
-         - Boolean
-         - .. line-block::
-               Paramètre pour récupérer des informations supplémentaires
-               par un service d'options de couches..
-         - true/false
-         - false
-       * - refreshIntervalSec
-         - Number
-         - .. line-block::
-               Nombre de secondes entre chaque
-               rafraichissement automatique
-               de la source de données. Ainsi,
-               aucun déplacement de la carte
-               n'est nécessaire pour rafraichir
-               la donnée.
-         - en secondes
-         - Null si non définit
-       * - contentDependentLegend
-         - Boolean
-         - .. line-block::
-               Pour Mapserver et Geoserver, il est possible de retourner
-               la légende WMS du contenu de la carte et non pas toute la
-               légende de la couche. Exemple: Si ce paramètre est définit
-               à true et que vous zoomer sur un secteur dans lequel il y
-               seulement 1 classe de symbologie, la légende retournée sera
-               composée d'une seule couleur. Si vous zoomez a l'échelle
-               provinciale et que vous voyez tous les classes de données,
-               la légende retournée sera composée de toutes les classes de
-               la couche.
-               IMPORTANT: Ne tient pas compte des filtres OGC appliqués.
-         - true/false
-         - false
-       * - queryable
-         - Boolean
-         - .. line-block::
-               Définit si la couche d'information
-               est interrogeable ou non
-         - true/false
-         - true
-       * - queryFormat
-         - Boolean
-         - .. line-block::
-               Format d'interrogation de la couche.
-         - .. line-block::
-               - gml2
-               (application/vnd.ogc.gml)
-               - gml3
-               (application/vnd.ogc.gml/3.1.1)
-               - json
-               (application/json)
-               - geojson
-               (application/geojson)
-               - esrijson
-               (esrijson)
-               - html
-               (text/html)
-               géométrie du clic auto générée
-               - htmlgml2
-               (text/html + application/vnd.ogc.gml)
-               géométrie fournie par un second appel au format gml2
-         - gml2
-       * - queryTitle
-         - Boolean
-         - .. line-block::
-               Lorsque la couche interrogée est en
-               gml2, gml3, json, geojson, esrijson,
-               cette propriété correspond au nom du
-               champ retourné  qui sera utilisé dans
-               le résultat de clic sur la carte comme
-               titre.
-
-               Si cette propriété est absente, le titre
-               de la couche est utilisé comme titre
-               pour chacun des résultat, suivi d'une
-               numérotation séquentielle.
-         - .. line-block::
-               Exemple 1 seul champ:
-                   - "queryTitle": "desclocal"
-                Exemple 1 seul champ avec texte:
-                   - "queryTitle": "Description ${desclocal}",
-               Exemple plusieurs champs:
-                   - "queryTitle": "${nomroute} ${desclocal} ",
-         -
-       * - timeFilterable
-         - Boolean
-         - .. line-block::
-               Indique si oui/non la couche est filtrable temporellement
-         - true / false
-         - false
-       * - timeFilter
-         - Object
-         - .. line-block::
-               Configuration du filtre temporel.
-         - Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_ .
-         -
-       * - ogcFilters
-         - Object
-         - .. line-block::
-               Configuration des filtres attributaires(OGC) appliqués sur la couche.
-         - Référez-vous à : :ref:`ogcFilters <igoOgcFilterObject>` .
-         -
-       * - sourceFields
-         - Object
-         - .. line-block::
-               Configuration des attributs du layer. (champs source de la couche)
-         - Référez-vous à : :ref:`sourceFields <igosourceFieldsObject>` .
-         -
-
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Paramètre (params) WMS
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sources/wms-params.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Paramètre
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **layers***
-         - String
-         - .. line-block::
-               Correspond au nom de la couche demandée.
-               Vous pouvez appeler plusieurs couches,
-               en séparant chacune de celles-ci par une
-               virgule.
-               IMP:
-                   - Pour les couches multiples, vous
-                     ne pourrez récupérer les propriétés
-                     fournies par les GetCapabilities.
-                     Vous devez donc fournir les propriétés
-                     title, max/min Resolution (au besoin).
-                   - Si vous voulez appliquer des filters
-                     OGC à des couches multiples, elles
-                     doivent partager le même schéma de
-                     données (même champs).
-         - .. line-block::
-               Exemple:
-               layers=nomDeLaCouche1
-               layers=nomDeLaCouche1,nomDeLaCouche2
-         -
-       * - version
-         - String
-         - Version  de l'appel WMS
-         - .. line-block::
-               1.1.0
-               1.1.1
-               1.3.0
-         - 1.3.0
-       * - feature_count
-         - Number
-         - .. line-block::
-               Nombre de résultats retournés par le serveur
-               lors des appels GetFeatureInfo
-         -
-         - 5
-       * - info_format
-         - String
-         - .. line-block::
-               Nom spécifique du format d'appel du GetFeatureInfo.
-
-               Nécessaire si vos format d'appels diffèrent des
-               noms standards gérés par IGO (décrits précédemment).
-         -
-         -
-       * - dpi
-         - Number
-         - .. line-block::
-               Nombre de points par pouce du résultat
-               de l'appel du GetMap. Particulièrement
-               utile dans IGO pour effectuer la conversion
-               entre la résolution et le nombre échelle.
-         -
-         - 96
-       * - map_resolution
-         - Number
-         - .. line-block::
-               Nombre de points par pouce du résultat
-               de l'appel du GetMap. Particulièrement
-               utile dans IGO pour effectuer la conversion
-               entre la résolution et le nombre échelle.
-         -
-         - 96
-       * - format_options
-         - Number
-         - .. line-block::
-               Nombre de points par pouce du résultat
-               de l'appel du GetMap. Particulièrement
-               utile dans IGO pour effectuer la conversion
-               entre la résolution et le nombre échelle.
-         -
-         - dpi:96
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -1074,60 +737,15 @@ Exemples
                 "layer": "orthos"
             }}
 
+Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - format
-         - String
-         - .. line-block::
-               Format d'image demandé au serveur. Dépend des capacités du serveur (wmts Getcapabilities)
-         - Dépends des capacités du serveur
-         - image/jpeg
-       * - **layer***
-         - String
-         - Nom de la couche demandée
-         -
-         -
-       * - **matrixSet***
-         - String
-         - Le nom du matrix set demandé au serveur
-         -
-         -
-       * - projection
-         - String
-         - La projection de l'appel de tuile
-         - EPSG:3857
-         - La projection de la carte (vue carto)
-       * - style
-         - String
-         - .. line-block::
-               Le nom du style demandé tel que présenté dans le GetCapabilities du service
-         -
-         -
-       * - **url***
-         - String
-         - .. line-block::
-               L'URL du service de données tuilées
-         -
-         -
-       * - version
-         - String
-         - .. line-block::
-               La version WMTS du service demandé
-         - 1.0.0
-         - 1.0.0
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+                
+    .. csv-table::
+          :file: _tables/fr/properties/sources/wmts.csv
+          :header-rows: 1
+          :widths: 10 10 30 15 10
+        
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1168,59 +786,12 @@ Exemples
 
 Propriétés de l'objet timeFilter
 
-    .. list-table::
-       :widths: 10 10 30 15 10
-       :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - min
-         - String
-         - Periode de temps minimum.
-         - .. line-block::
-            En fonction du type, peut être une année, une date ou une heure.
-            NB: Si la valeur est absente, le système appliquera ce qui est définit dans le service.
-         -
-       * - max
-         - String
-         - Periode de temps maximum.
-         - .. line-block::
-            En fonction du type, peut être une année, une date ou une heure.
-            NB: Si la valeur est absente, le système appliquera ce qui est définit dans le service.
-         -
-       * - range
-         - Boolean
-         - Intervalle à saisir par utilisateur.
-         - true/false
-         -
-       * - step
-         - Number
-         - Le temps de l'intervalle en millisecondes.
-         - Ex: 63072000000 pour un an.
-         -
-       * - style
-         - String
-         - Le style du calendrier.
-         - calendar, slider
-         - slider
-       * - type
-         - String
-         - Le type temporel de calendrier. En année, jour, heure, etc.
-         - year, date
-         -
-       * - timeInterval
-         - Number
-         - Pour configuration en 'slider', le temps d'attente avant de passer au suivant, en millisecondes.
-         -
-         -
+     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+                
+    .. csv-table::
+          :file: _tables/fr/properties/filter/timeFilter.csv
+          :header-rows: 1
+          :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1557,71 +1128,12 @@ Exemple - filtre avec boutons spécifique à un groupe et calendrier (filtrage t
 
 Propriétés de ogcFilters
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/filter/ogcFilters.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - allowedOperatorsType
-         - String
-         - .. line-block::
-            Paramètre relatif aux filtres avancés. Les opérateurs pour construire l'expression filtrante qui seront accessible
-            à l'utilisateur.
-            NB: Ce paramètre s'appliquera a tous les champs definits dans sourceField mais ce paramètre peut aussi être définit
-            à l'intérieur de sourceField pour l'appliquer au niveau d'un champ spécifique si besoin.
-         - | BasicNumericOperator,
-           | Basic, Spatial,
-           | BasicAndSpatial,
-           | All, time.
-         - BasicAndSpatial
-       * - editable
-         - Boolean
-         - Active ou non la possibilité à l'utilisateur de ce construire des filtres avancés.
-         - true | false
-         - true
-       * - enabled
-         - Boolean
-         - | Active ou non les filtres modifiable par l'utilisateur sur la couche. Si = false, le bouton de filtre n'apparait plus.
-           | Par exemple, dans le cas que le pilote voudrait filtrer une couche mais que ce filtre ne soit pas modifiable par l'utilisateur.
-         - true | false
-         - true
-       * - filters
-         - | IgoLogicalArrayOptions
-           | AnyBaseOgcFilterOptions
-         - Permet de définir un filtre avancé. :ref:`voir configuration filters <igoOgcFilterFiltersObject>`
-         -
-         -
-       * - pushButtons
-         - PushButton
-         - | Permet de définir des boutons poussoirs qui pourront être activés par l'utilisateur pour appliquer des filtres voulus.
-           | Doit contenir obligatoirement bundles[].
-         -
-
-       * - checkboxes
-         - Checkbox
-         - | Permet de définir des cases à cocher qui pourront être activées par l'utilisateur pour appliquer des filtres voulus.
-           | Doit contenir obligatoirement bundles[].
-         -
-
-       * - radioButtons
-         - RadioButton
-         - | Permet de définir des boutons radio qui pourront être activés par l'utilisateur pour appliquer des filtres voulus.
-           | Doit contenir obligatoirement bundles[].
-         -
-       * - select
-         - Select
-         - | Permet de définir une liste déroulante permettant à l'utilisateur d'appliquer un ou plusieurs filtres.
-         - | Doit contenir obligatoirement bundles[].
-
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
