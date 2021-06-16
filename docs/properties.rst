@@ -1164,54 +1164,23 @@ Liens
 
 Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.selectorType
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/filter/pb-cb-rb-selectorType.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - title
-         - String
-         - Le type de sélecteur.
-         - pushButton, checkbox, radioButton, select
-         -
+       :widths: 10 10 30 15 10
 
 .. _igoOgcFilterPushButtons:
 
 Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.groups
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/filter/pb-cb-rb-groups.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - ids
-         -
-         - Liste des identifiants pour le classement des paquets("bundles") de boutons dans les groupes.
-         -
-         -
-       * - title
-         - String
-         - Le titre du groupe qui apparaitra à l'utilisateur.
-         -
-         -
+       :widths: 10 10 30 15 10
 
 
 .. _igoOgcFilterButtonsBundlesObject:
@@ -1219,59 +1188,13 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.groups
 
 Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/filter/pb-cb-rb-groups.csv
        :header-rows: 1
+       :widths: 10 10 30 15 10
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - selector
-         - OgcPushButton[], OgcCheckbox[], OgcRadioButton[], OgcSelect[]
-         - Liste de selecteur pour filtrer les entités de la carte
-         -
-         -
-       * - **id***
-         - String
-         - Id rataché au groupe pour le classement dans le groupe. Doit être présente et identique dans ogcFilter.{selector}.groups.ids
-         -
-         -
-       * - **logical***
-         - String
-         - Opérateur logique à appliquer entre les boutons lorsque plusieurs boutons seront activés. "ET", "OU".
-         - Or, And
-         - Doit être définit
-       * - vertical
-         - Boolean
-         - Indique si la disposition des boutons dans la fenêtre se fait de manière verticale.
-         - true | false
-         -
-       * - title
-         - String
-         - Indique le sous-titre à afficher pour le sélecteur en question.
-         -
-       * - multiple
-         - Boolean
-         - Indique si une liste déroulante permet la sélection de plusieurs éléments.
-         - true | false
-         -
-       * - unfiltered
-         - Boolean
-         - Indique si une option permettant de réinitialiser les filtres appliqués est disponible.
-         - true | false
-         -
-       * - order
-         - Integer
-         - Indique l'ordre d'apparition du sélecteur en question.
-         - 1, 2, 3...
-         -
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
@@ -1279,45 +1202,12 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
 
 Propriétés de l'objet ogcFilter.{selector}.bundles.selector
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/filter/pb-cb-rb-bundles-selector.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - color
-         - String
-         - La couleur du bouton lorsque celui-ci sera activé. En RGB, exemple: "255,0,0".
-         - valeur "R,G,B"
-         - "224, 224, 224"
-       * - enabled
-         - Boolean
-         - Indique si le bouton est actif ou non.
-         - true | false
-         - true
-       * - filters
-         - IgoLogicalArrayOptions | AnyBaseOgcFilterOptions
-         - Configuration de l'expression filtrante appliquée sur l'activation du bouton. Voir :ref:`filters <igoOgcFilterFiltersObject>`.
-         -
-         -
-       * - title
-         - String
-         - Indique ce qu'il y aura d'inscrit sur le bouton.
-         -
-         - blanc
-       * - tooltip
-         - String
-         - Indique ce qu'il y aura d'inscrit dans l'info-bulle sur le bouton.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1326,45 +1216,12 @@ Propriétés de l'objet ogcFilter.{selector}.bundles.selector
 
 Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/filter/igoOgcFilterFiltersObject.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - expression
-         - String
-         - Valeur ou RegEx applicable
-         -
-         -
-       * - operator
-         - String
-         - | Opérateurs à appliquer. ** Certains opérateurs sont disponibles uniquement sur certain type de filtre.
-           | Par exemple, l'opérateur during est disponible uniquement sur le filtre de type time
-         - | PropertyIsEqualTo, PropertyIsNotEqualTo,
-           | PropertyIsGreaterThan, PropertyIsGreaterThanOrEqualTo,
-           | PropertyIsLessThan, PropertyIsLessThanOrEqualTo,
-           | Intersects, Within
-           | :ref:`During <igoogcfilterduringoptions>`
-         -
-       * - propertyName
-         - String
-         - Nom de la propriété sur laquelle appliquer le filtre (nom de la colonne)
-         -
-         -
-       * - A compléter
-         -
-         -
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1372,40 +1229,12 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 
 Propriétés de l'objet filter de type **During**
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/filter/igoogcfilterduringoptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - begin
-         - String
-         - Valeur de début du filtre temporel
-         -
-         - Valeur **minDate** de la couche
-       * - end
-         - String
-         - Valeur de fin du filtre temporel
-         -
-         - Valeur **maxDate** de la couche
-       * - step
-         - String
-         - Pas de temps défini selon la norme ISO-8601
-         - Voir `wiki <https://fr.wikipedia.org/wiki/ISO_8601#Dur%C3%A9e>`__
-         - 60000 millisecondes
-       * - restrictedToStep
-         - Boolean
-         - True si le filtre doit respecter le pas de temps depuis l'attribut **minDate**. Sinon le pas de temps est respecté selon l'attribut **begin**
-         - True | False
-         - False
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1434,50 +1263,12 @@ Exemples
 
 Propriétés de l'objet sourceFields
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sourceFields.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - **name***
-         - String
-         - Nom de l'attribut
-         -
-         -
-       * - alias
-         - String
-         - Alias de l'attribut.
-         -
-         - Le nom de l'attribut est utilisé si nul.
-       * - values
-         - Array (liste)
-         - Liste de valeurs permises
-         -
-         - .. line-block::
-               Si vide, pour les WFS, sera récupéré automatiquement.
-       * - excludeFromOgcFilters
-         - Boolean
-         - Indique si l'attribut est utilisé dans l'outil de filtre OGC.
-         - true/false
-         - true
-       * - allowedOperatorsType
-         - String
-         - Indique les opérateurs permis pour cet attribut
-         - .. line-block::
-               BasicNumericOperator OU Basic
-               OU BasicAndSpatial OU Spatial
-               OU All OU Time
-               Référez vous à `ogc-filter.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`__ pour les opérateurs correspondants.
-         - BasicAndSpatial
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1517,85 +1308,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/common.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - available
-         - Boolean
-         - .. line-block::
-               Permet de préciser si le
-               service est utilisable dans
-               l'application.
-         - true false
-         - true
-       * - enabled
-         - Boolean
-         - .. line-block::
-               Permet de préciser si le
-               service est activé (coché)
-               à l'ouverture de
-               l'application.
-         - true false
-         - true
-       * - order
-         - Number
-         - .. line-block::
-               Définit la position des
-               résultats dans la liste
-               des résultats de recherche.
-               Plus le nombre est élevé,
-               plus les résultats de
-               cette source seront
-               au bas de la liste.
-         -
-         - 99
-       * - params
-         - Object {}
-         - .. line-block::
-               Paramètres supplémentaires
-               à ajouter à la requête
-               faite au serveur associé.
-               Spécifique selon la source.
-         -
-         -
-       * - searchUrl
-         - String
-         - .. line-block::
-               URL du serveur à utiliser.
-         -
-         - .. line-block::
-               Spécifique
-               selon la
-               source.
-       * - settings
-         - SearchSourceSettings []
-         - En construction
-         -
-         - .. line-block::
-               Spécifique
-               selon la
-               source.
-       * - **title***
-         - String
-         - .. line-block::
-               Titre du service
-               de recherche
-         -
-         - .. line-block::
-               Spécifique
-               selon la
-               source.
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -1624,20 +1342,12 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. list-table::
-       :widths: 10 30 60
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/cadastre.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeur défaut
-       * - searchUrl
-         - .. line-block::
-               URL du service.
-         - https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?
+       :widths: 10 10 30 15
 
     Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
@@ -1681,20 +1391,12 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. list-table::
-       :widths: 10 80
+    .. tabularcolumns:: |p{3cm}p{12cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/coord.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Valeur défaut
-       * - title
-         - .. line-block::
-               Basé sur la traduction de 2 fichiers.
-               Propriété igo.geo.search.coordinates.name dans
-                   - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`__
-                   - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`__
+       :widths: 10 80
 
     Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
@@ -1739,23 +1441,12 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. list-table::
-       :widths: 10 80
+    .. tabularcolumns:: |p{3cm}p{12cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/iCherche.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Valeur défaut
-       * - searchUrl
-         - .. line-block::
-               https://geoegl.msp.gouv.qc.ca/apis/icherche
-       * - settings
-         - `Ligne 79  <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L79>`_
-       * - showInPointerSummary
-         - true pour activer le bouton qui affichera les résultats de recherche au-dessus du curseur
-       * - title
-         - iCherche
+       :widths: 10 80
 
     Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
@@ -1798,21 +1489,12 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. list-table::
-       :widths: 10 80
+    .. tabularcolumns:: |p{3cm}p{12cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/iChercheReverse.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Valeur défaut
-       * - searchUrl
-         - .. line-block::
-               https://geoegl.msp.gouv.qc.ca/apis/territoires
-       * - settings
-         - `Ligne 427 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L427>`__
-       * - title
-         - Territoire (Géocodage inversé)
+       :widths: 10 80
 
     Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
@@ -1858,28 +1540,12 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. list-table::
-       :widths: 10 80
+    .. tabularcolumns:: |p{3cm}p{12cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/iLayer.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Valeur défaut
-       * - searchUrl
-         - .. line-block::
-               https://geoegl.msp.gouv.qc.ca/apis/layers/search
-       * - settings
-         - `Ligne 93 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts#L93>`__
-       * - title
-         - .. line-block::
-               Basé sur la traduction de 2 fichiers.
-               Propriété igo.geo.search.layer.title dans
-                   - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`__
-                   - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`__
-       * - queryFormat
-         - .. line-block::
-               Possibilité de définir le format par URL pour la présentation des informations lors de l'intérogation de la couche.
+       :widths: 10 80
 
     Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
@@ -1920,21 +1586,12 @@ Propriétés
 
     Seulement les propriétés spécifiques à ce service sont présentées.
 
-    .. list-table::
-       :widths: 10 80
+    .. tabularcolumns:: |p{3cm}p{12cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/nominatim.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Valeur défaut
-       * - searchUrl
-         - .. line-block::
-               https://nominatim.openstreetmap.org/search
-       * - settings
-         - `Ligne 44 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/nominatim.ts#L44>`__
-       * - title
-         - Nominatim (OSM)
+       :widths: 10 80
 
     Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
