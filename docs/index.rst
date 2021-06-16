@@ -1,6 +1,7 @@
 .. include:: global.rst
 
 .. meta::
+
    :DC.creator: Gouvernement du Québec
    :DC.language: fr
 
@@ -40,4 +41,5 @@ Dernière mise à jour de la documentation : |date| (|time| UTC)
    shortcut
 
 .. note::
+
    Cette documentation est en construction.

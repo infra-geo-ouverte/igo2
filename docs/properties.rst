@@ -13,6 +13,7 @@ Géométrique
 Carte (map)
 *****************************
     .. line-block::
+
         Permet de définir les propriétés de la carte dans le contexte.
         NB: Peut être définie une seule fois dans le contexte _base pour être appliqué à tous les contextes.
 
@@ -60,6 +61,7 @@ Couche d'information (layer)
 *****************************
 
     .. line-block::
+
         Permet de définir les propriétés d'une couche d'information.
 
 Exemples
@@ -100,6 +102,7 @@ LegendOptions
 ===============
 
     .. line-block::
+
         Propriétés de l'objet legendOptions.
         Permet de controler le rendu de légende.
 
@@ -139,6 +142,7 @@ SourceOptions
 
 
     .. line-block::
+
         Diverses sources de données sont supportées.
         Référez-vous aux section suivantes pour
         plus de détails.
@@ -163,6 +167,7 @@ WorkspaceOptions
 ================
 
     .. line-block::
+
         Permet de définir si une source possèdera une table
         d'attribut dans l'application ainsi
         que ses propriétés associées.
@@ -198,6 +203,7 @@ LinkedLayersOptions
 ===================
 
     .. line-block::
+
         Permet de définir un lien entre des couches et
         de synchroniser les propriétés choisies.
 
@@ -260,6 +266,7 @@ Propriétés communes
 =====================
 
     .. line-block::
+
         Les propriétés communes aux sources de données (sourceOptions).
 
 
@@ -293,6 +300,7 @@ ArcGis
 ===============
 
     .. note::
+
        Disponible actuellement mais la documentation est en cours de construction.
        Problématique observée pour les styles complexe. Même QGIS ne rends pas correctement les styles complexe.
        https://github.com/infra-geo-ouverte/igo2-lib/issues/810
@@ -319,6 +327,7 @@ Image ArcGis
 ===============
 
     .. note::
+
        Disponible actuellement mais la documentation est en cours de construction.
        C'est la version qui effectue un seul appel pour toute l'étendu de la carte.
 
@@ -344,6 +353,7 @@ Tile ArcGis
 ===============
 
     .. note::
+
        Disponible actuellement mais la documentation est en cours de construction.
        C'est la version qui effectue plusieurs appels pour l'étendue de la carte.
        Peut être conflictuel pour les étiquettes qui seront dupliqués pour chacune des tuiles.
@@ -370,6 +380,7 @@ Carto
 ===============
 
     .. note::
+
        Disponible actuellement mais la documentation est en cours de construction.
 
 
@@ -405,6 +416,7 @@ OSM
 ===============
 
     .. line-block::
+
         Le fond standard OpenStreetMap.
         Ce type de service n'est pas interrogeable.
 
@@ -438,6 +450,7 @@ Cluster
 ===============
 
     .. note::
+
        Une source de données pour les données vectorielle composées de points. Elle génere des regroupements d'entité lorsque ceux-ci se retrouve près l'une de l'autre.
 
 Exemples
@@ -473,6 +486,7 @@ TMS (xyz)
 ===============
 
     .. line-block::
+
         Une source de données pour les services de données tuilées de type XYZ où le X et le Y représentent la position de la tuile appelée et le Z, le niveau de zoom (résolution) de la tuile.
 
 Exemples
@@ -505,6 +519,7 @@ Vector Tiles
 ===============
 
     .. line-block::
+
         Une source de données pour les services de données au format Vector tiles. Plus spécifiquement,
         au format `Mapbox Vector Tiles (MVT) <https://docs.mapbox.com/vector-tiles/specification/>`__ .
 
@@ -542,6 +557,7 @@ Vecteur
 
 
 .. line-block::
+
   Source de donnée permettant d'afficher des données vectorielles provenant de fichier en ligne ou de service donnant des entitées.
 
   La projection doit être EPSG:3857. Si ce n'est pas le cas il faut ajouter les paramètres dans formatOptions pour convertir.
@@ -592,6 +608,7 @@ Websocket
 ===============
 
       .. line-block::
+
         Une source de données provenant d'un websocket.
 
 Propriétés
@@ -632,6 +649,7 @@ WFS
 ===============
 
     .. note::
+
        Disponible actuellement mais la documentation est en cours de construction.
 
 Exemples
@@ -658,6 +676,7 @@ WMS
 ===============
 
     .. line-block::
+
         Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`__ .
         Les diverses version WMS sont acceptées.
 
@@ -723,6 +742,7 @@ WMTS
 ===============
 
     .. line-block::
+
         Une source de données pour les services de données au format `OGC WMTS <https://www.opengeospatial.org/standards/wmts>`__ .
 
 Exemples
