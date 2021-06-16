@@ -1246,7 +1246,7 @@ Configuration des attributs champs source de donnée (sourceFields)
 
 | Une liste de nom d'attribut, de leur alias, valeurs permises et autres configurations.
 | ** Nécessaire pour utilisation des filtres attributaires avancés. Ce sont ces configurations qui définiront ce qui sera présenté à
- l'utilisateur lors de l'utilisation des filtres avancés.
+| l'utilisateur lors de l'utilisation des filtres avancés.
 
 Exemples
 
@@ -1685,7 +1685,6 @@ Exemple 2
           }
 
 
-
 Propriétés
 
 
@@ -1715,6 +1714,7 @@ StoredQueries Reverse
 =====================
 
     .. note::
+
         Il se veut plus un EXEMPLE qu'un réel service de recherche.
 
     .. line-block::
@@ -1770,9 +1770,6 @@ Liens
     - `Décrire la requête "lim_adm" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=lim_adm>`__
 
 
-
-
-
 ==============================
 Intégration
 ==============================
@@ -1781,7 +1778,6 @@ Intégration
 
         La composante intégration permet de définir une gamme d'outils aisément intégrables à l'application grâce
         aux configuration d'outils (tools).
-
 
 
 *******************************
@@ -1866,6 +1862,7 @@ catalog
 ===========
 
     .. line-block::
+
         Outil permettant de lister les catalogues disponibles configurés dans l'application:
             - :ref:`Configuration des catalogue <_igocatalogConfig>`.
 
@@ -1915,7 +1912,6 @@ Liens
     - :ref:`Configuration des catalogue <igocatalogConfig>`.
 
 
-
 .. _igocatalogBrowser:
 
 
@@ -1923,6 +1919,7 @@ catalogBrowser
 ===============
 
     .. line-block::
+
         Outil permettant de lister les couches d'informations du catalogue sélectionné par l'usager.
         L'outil catalogue fore dans le catalogue jusqu'à concurence de 2 niveaux hiérarchiques.
         Toutes les couches d'information doivent être dans un groupe.
@@ -2115,7 +2112,6 @@ Liens
     - `catalog-browser-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/catalog/catalog-browser-tool>`__
 
 
-
 .. _igodirections:
 
 
@@ -2123,6 +2119,7 @@ directions
 ===========
 
     .. line-block::
+
         Outil permettant de configurer l'outil d'itinéraire, basé sur la configuration dans l'application:
             - :ref:`Configuration des sources d'itinéraires <igoroutingsource>`.
 
