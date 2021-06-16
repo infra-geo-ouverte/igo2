@@ -623,8 +623,9 @@ overlayStyle
 Exemple
 
         .. code:: json
-              "queryOverlayStyle": {},
-              "searchOverlayStyle": {
+
+            "queryOverlayStyle": {},
+            "searchOverlayStyle": {
                   "base": {
                       "markerColor": "purple",         // marker fill
                       "fillColor": [233,66,133],       // poly
@@ -1210,6 +1211,7 @@ Liens
         - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`_
         - :ref:`Map IGO2 <igomap>`.
 
+.. _igomessage:
 
 ***************
 Message

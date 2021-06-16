@@ -226,6 +226,14 @@ Propriétés
             Ex. 20000 correspond à 1:20000
          -
          -
+       * - messages
+         - ref:`Message[] <_igomessage>`.
+         - .. line-block::
+            Affichage d'un list des messages.
+            Des messages s'affichent seulement 1 fois
+            pendant la session lorsque la couche s'affiche.
+         -
+         -
        * - metadata
          - Object{}
          - .. line-block::
@@ -2058,22 +2066,25 @@ Propriétés de ogcFilters
          -
        * - pushButtons
          - PushButton
-         - | Permet de définir des boutons poussoirs qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
+         - | Permet de définir des boutons poussoirs qui pourront être activés par l'utilisateur pour appliquer des filtres voulus.
            | Doit contenir obligatoirement bundles[].
          -
 
        * - checkboxes
          - Checkbox
-         - | Permet de définir des bcases à cocher qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
+         - | Permet de définir des cases à cocher qui pourront être activées par l'utilisateur pour appliquer des filtres voulus.
            | Doit contenir obligatoirement bundles[].
          -
 
        * - radioButtons
          - RadioButton
-         - | Permet de définir des radio boutons qui pouront être activés par l'utilisateur pour appliquer des filtres voulus.
+         - | Permet de définir des boutons radio qui pourront être activés par l'utilisateur pour appliquer des filtres voulus.
            | Doit contenir obligatoirement bundles[].
          -
-         -
+       * - select
+         - Select
+         - | Permet de définir une liste déroulante permettant à l'utilisateur d'appliquer un ou plusieurs filtres.
+         - | Doit contenir obligatoirement bundles[].
 
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
@@ -2105,7 +2116,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.selector
        * - title
          - String
          - Le type de sélecteur.
-         - pushButton, checkbox, radioButton
+         - pushButton, checkbox, radioButton, select
          -
 
 .. _igoOgcFilterPushButtons:
@@ -2158,7 +2169,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
          - .. line-block::
                Valeur défaut
        * - selector
-         - OgcPushButton[], OgcCheckbox[], OgcRadioButton[]
+         - OgcPushButton[], OgcCheckbox[], OgcRadioButton[], OgcSelect[]
          - Liste de selecteur pour filtrer les entités de la carte
          -
          -
@@ -2181,6 +2192,15 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
          - String
          - Indique le sous-titre à afficher pour le sélecteur en question.
          -
+       * - multiple
+         - Boolean
+         - Indique si une liste déroulante permet la sélection de plusieurs éléments.
+         - true | false
+         -
+       * - unfiltered
+         - Boolean
+         - Indique si une option permettant de réinitialiser les filtres appliqués est disponible.
+         - true | false
          -
        * - order
          - Integer

@@ -11,7 +11,8 @@ Propriétés,Type,Descriptions,Outil lié
 | Maptools"
 **map*** ,`map`_ ,"| Définition de la carte lors de l'ouverture
 | initiale du contexte ",
-message ,`Message`_ ,Présentation d'un message à l'ouverture du contexte. ,
+message ,`Message`_ ,Propriété qui n'est plus favorisée. Il vous est suggéré d'utiliser 'messages' ,
+messages,`Message`_ [] ,Présentation d'une liste des messages à l'ouverture du contexte. ,
 `toolbar`_ ,String[] ,"| Liste des outils disponibles dans
 | l'application. L'ordre dans la
 | liste correspond à l'ordre
