@@ -44,7 +44,7 @@ hasExpansionPanel
 
         Voici ma desc
 
-Exemples 
+Exemples
 
     .. code:: json
 
