@@ -64,8 +64,8 @@ Analytics
 
     .. line-block::
 
-	  Sert à configurer une application pour effectuer le monitoring du site web pour les statistiques.
-	  NB. : Pour une application sans statistiques, simplement ne pas mettre ces configurations.
+        Sert à configurer une application pour effectuer le monitoring du site web pour les statistiques.
+        NB. : Pour une application sans statistiques, simplement ne pas mettre ces configurations.
 
 Exemples
 
@@ -83,6 +83,7 @@ Auth
 ***************
 
     .. note::
+
        En cours de construction
 
     .. line-block::
@@ -329,6 +330,7 @@ Context
 ***************
 
     .. note::
+
        En cours de construction
 
     .. line-block::
@@ -365,9 +367,11 @@ Depot
 ***************
 
 .. note::
+
       En cours de construction
 
 .. line-block::
+
       Permet de rejoindre une API de dépôt nous fournissant des fichiers (par exemple, un guide d'autoformation).
       Cette API sera documentée indépendamment de la présente documentation.
 
@@ -564,7 +568,6 @@ Liens
         - `locale démo https://infra-geo-ouverte.github.io/igo2/  <https://github.com/infra-geo-ouverte/igo2/tree/gh-pages/locale>`_
 
 
-
 ***************
 MapOverlay
 ***************
@@ -610,9 +613,9 @@ Liens
 optionsApi
 ************
 
-  Permet de définir le chemin vers API pour les options supplémentaires sur les couches ajoutées par la recherche.
-  Par exemple, les configurations de filtre. Retourne un objet JSON venant se fusionner avec les propriété de la couche.
-  La configuration faite au pilotage a priorité à celles fournies par l'API d'options.
+    Permet de définir le chemin vers API pour les options supplémentaires sur les couches ajoutées par la recherche.
+    Par exemple, les configurations de filtre. Retourne un objet JSON venant se fusionner avec les propriété de la couche.
+    La configuration faite au pilotage a priorité à celles fournies par l'API d'options.
 
 Exemple
 
@@ -629,10 +632,10 @@ Exemple
 overlayStyle
 ************
 
-  Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une interrogation par clic ou par une recherche.
-  Les objets sélection et focus sont facultatifs. Les propriétés contenues par ces objets sont également facultatives. 
-  Si les objects sont vide ou absent, le style par défaut sera appliqué (bleu et turquoise). 
-  Les couleurs acceptées peuvent être en couleur HEX, en liste RGB ou en couleur nommée.
+    Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une interrogation par clic ou par une recherche.
+    Les objets sélection et focus sont facultatifs. Les propriétés contenues par ces objets sont également facultatives. 
+    Si les objects sont vide ou absent, le style par défaut sera appliqué (bleu et turquoise). 
+    Les couleurs acceptées peuvent être en couleur HEX, en liste RGB ou en couleur nommée.
 
 Exemple
 
@@ -746,6 +749,7 @@ SearchSources
 ***************
 
     .. note::
+
        En cours de construction
 
 
@@ -1052,8 +1056,6 @@ Exemple complet config.json
                 }
 
 
-
-
 =======================================
 Contenu cartographique
 =======================================
@@ -1098,7 +1100,6 @@ en sera facilitée.
 Le contexte _default, sera le contexte affiché à l'arrivée dans l'application.
 
 Important : Notez que le fichier nom_du_contexte.json a préséance sur le fichier _base.json.
-
 
 
 ***************************
@@ -1199,7 +1200,6 @@ Liens
         - :ref:`Layer IGO2 <igolayer>`.
 
 
-
 ***************
 Map
 ***************
@@ -1268,7 +1268,6 @@ Propriétés
        :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
-
 
 
 ***************
@@ -1373,8 +1372,6 @@ Propriétés
 Liens
 
         - `igo2-lib/tree/master/packages/integration/src/lib/... <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib>`_
-
-
 
 
 ***************

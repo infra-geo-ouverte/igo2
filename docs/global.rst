@@ -6,9 +6,6 @@
 
 .. |CC| image:: images/CC-BY-SA.png
 
-  
-.. _igo2: https://github.com/infra-geo-ouverte/igo2/
-
 .. |openlayers| replace:: `OpenLayers`
 
 .. |ang2| replace:: `Angular`
