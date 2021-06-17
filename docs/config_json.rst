@@ -1,6 +1,7 @@
 .. include:: global.rst
 
 .. meta::
+
    :DC.creator: Gouvernement du Québec
    :DC.language: fr
 
@@ -62,6 +63,7 @@ Analytics
 ***************
 
     .. line-block::
+
 	  Sert à configurer une application pour effectuer le monitoring du site web pour les statistiques.
 	  NB. : Pour une application sans statistiques, simplement ne pas mettre ces configurations.
 
@@ -84,6 +86,7 @@ Auth
        En cours de construction
 
     .. line-block::
+
         Sert à effectuer l'authentification des usagers.
         NB. : Pour une application sans authentification, simplement ne pas mettre ces configurations.
 
@@ -124,6 +127,7 @@ Catalog
 ***************
 
     .. line-block::
+
         Cette section de la configuration permet de charger une liste de sources de cataloguage. Une fois les sources chargées, il est possible d'ajouter ces couches d'informations à la carte.
 
         Les sources de cataloguage permises:
@@ -328,6 +332,7 @@ Context
        En cours de construction
 
     .. line-block::
+
         Permet de rejoindre une API nous fournissant des contextes cartographiques.
         Cette API sera documentée indépendamment de la présente documentation.
 
@@ -391,6 +396,7 @@ hasSearchPointerSummary
 ***********************
 
     .. line-block::
+
         Permet d'activé ou non la capacité d'afficher un résumé de la position du curseur.
         Le résumé est dépendant des sources de recherche utilisées.
 
@@ -400,6 +406,7 @@ hasExpansionPanel
 *****************
 
     .. line-block::
+
         Permet d'ouvrir un paneau d'expansion à partir
         d'un bouton situé dans le coin inférieur gauche de la carte.
         Ce dernier contient les données tabulaires pour
@@ -411,6 +418,7 @@ hasGeolocateButton
 *****************
 
     .. line-block::
+
         Permet de définir s'il y aura un bouton de 
         géolocalisation par le fureteur dans l'application
 
@@ -420,6 +428,7 @@ showRotationButtonIfNoRotation
 ********************************
 
     .. line-block::
+
         Permet de définir si le bouton de réinitialisation de la
         rotation est visible si aucune rotation n'est active. False par défaut.
 
@@ -428,6 +437,7 @@ DrawingTool
 ***************
 
     .. line-block::
+
         Cette configuration permet de créer un liste d'url représentant des icônes afin que ceux-ci
         puissent être utilisés dans `l'outil de dessin <https://igo2.readthedocs.io/fr/latest/properties.html#draw>`
 
@@ -452,6 +462,7 @@ ImportExport
 ***************
 
     .. line-block::
+
         Cette configuration permet de définir un service qui sera en mesure de convertir des formats de fichiers géométriques non gérés par IGO2(OpenLayers).
         Actuellement, les GeoJson, KML, KMZ sont acceptés par IGO2. Par contre, les `Esri Shapefile  <https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf>`_ doivent transiger par un serveur de conversion.
         C'est à partir ce cette propriété que vous pouvez définir le serveur de conversion qui vous retournera un fichier utilisable par IGO2 (GeoJson).
@@ -492,6 +503,7 @@ interactiveTour
 ***************
 
     .. line-block::
+
         Tours intéractifs de présentation de l'application
 
 
@@ -522,6 +534,7 @@ Language
 ***************
 
     .. line-block::
+
         Définir le dossier contenant les fichiers de traduction de l'appplication.
         IGO2 est actuellement disponible en anglais et en francais, selon les paramètres du navigateur.
         Il est toutefois possible de définir le language désiré à même le code de l'application.
@@ -557,6 +570,7 @@ MapOverlay
 ***************
 
     .. line-block::
+
         Permet de définir des éléments à ajouter par dessus le visuel de la carte.
 
 Exemples
@@ -657,6 +671,7 @@ Projections
 ***************
 
     .. line-block::
+
         Permet de définir une **liste** de projections non enregistrées par défault par IGO2 (Proj4). On parle ici de projection non mondiale ou à référence locale (ex: mtm, Lambert MTQ...)
         Référez vous à : `https://epsg.io/ <https://epsg.io/>`_. Ils y définissent l'entièreté des paramètres nécessaires.
 
@@ -698,6 +713,7 @@ RoutingSource
 ***************
 
     .. line-block::
+
         Source serveur pour la création des itinéraires. Actuellement, le serveur utilisé est OSRM.
 
 Exemples
@@ -738,6 +754,7 @@ Theme
 ***************
 
     .. line-block::
+
         Permet de définir les thèmes (couleurs, fonts) de l'application.
         Le répertoire où sont conservés les thèmes est le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
 
@@ -768,6 +785,7 @@ WelcomeWindow
 ***************
 
     .. line-block::
+
         Affiche une fenêtre accueil à l'entrée dans l'application.
         NB. : Pour une application sans fenêtre accueil, simplement ne pas mettre ces configurations.
 
@@ -1102,6 +1120,7 @@ Base
 ***************
 
     .. line-block::
+
         Identification du nom du ficher de base dont les contextes peuvent hériter du contenu.
 
         À l'intérieur d'un fichier **base.json**, les propriétés tolérées sont:
@@ -1123,6 +1142,7 @@ Layers
 ***************
 
     .. line-block::
+
         Permet de définir une liste de couches d'informations disponibles à l'usager lors de l'ouverture dans l'application.
         L'ordre d'apparition des couches dans la liste présentée à l'utilisateur peut être contrôlée de divers moyens:
             1- L'ordre d'apparition des couches dans le contexte. Plus la couche est au début de la liste, plus elle sera au bas de la la liste présentée dans l'application.
@@ -1167,7 +1187,9 @@ Exemples
             ]
 
 Propriétés
+
     .. line-block::
+
         Permet de définir une liste de couches. Référez-vous à la description de ce qu'est un :ref:`layer <igolayer>`.
 
 
@@ -1183,6 +1205,7 @@ Map
 ***************
 
     .. line-block::
+
         Permet de définir les propriétés de la carte à l'ouverture du contexte.
 
 Exemples
@@ -1203,6 +1226,7 @@ Exemples
 
 Propriétés
     .. line-block::
+
         Référez vous à :ref:`map <igomap>`.
 
 
@@ -1218,6 +1242,7 @@ Message
 ***************
 
     .. line-block::
+
         Message affiché à l'ouverture du contexte
 
 Exemples
@@ -1251,6 +1276,7 @@ Title
 ***************
 
     .. line-block::
+
         Nom du contexte qui sera affiché dans l'application.
 
 Exemples
@@ -1265,6 +1291,7 @@ Toolbar
 ***************
 
     .. line-block::
+
         Définit la liste des outils permis dans le contexte.
         L'ordre d'apparition des outils dans cette liste est importante puisqu'elle
         représente l'ordre des outils dans l'application.
@@ -1313,6 +1340,7 @@ Tools
 ***************
 
     .. line-block::
+
         Définit la liste des configurations permises pour chaque outil.
         Pour les options spécifiques à chaque outil, veuillez vous référer aux descriptif de l'outil. Cette section détaille seulement les propriétés communes.
 
@@ -1354,6 +1382,7 @@ Uri
 ***************
 
     .. line-block::
+
         Identifiant du contexte. Particulièrement utile pour le partage de cartes. C'est cette propriété du contexte qui est utilisée pour bâtir l'url de partage de carte:
 
             ex: .../?context=uriDuContexte...

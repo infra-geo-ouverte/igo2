@@ -2132,27 +2132,23 @@ Liens
     - `OGC FES <https://www.ogc.org/standards/filter>`__
 
 
-
 .. _igoactiveogcFilter:
 
 activeOgcFilter
 ===============
 
-      Outil permettant de définir un ou plusieurs filtres sur **la couche active** de service OGC filtrable.
-
-      Outil relatif à la couche active. Une fois activé dans "tools" l'outil sera disponible dans les outils de la couche
-      sélectionnée.
-      | ** Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
-
-      Cet outil présente uniquement le ou les filtres qui sont applicables sur **la couche active**, comparativement à l'outil
-      ogcFilter, qui lui présentera toute les couches ayant un filtre configuré. Comme cet outil présente uniquement le filtre appliqué
-      sur une seule couche, la configuration classique est de ne pas présenter cet outil dans la barre verticale avec les autres outils
-      de l'application et de le laisser uniquement dans les outils de la couche active.
-      Pour ce faire, vous devez mettre l'outil dans "tools" et ne pas le mettre dans "toolbar"
-
-      | NB: L'activation se fait ici via les outils, mais la configuration du filtre doit se faire à l'intérieur de la couche dans les contextes.
-      | layer -> sourceOptions -> ogcFilters
-      | Référez-vous à: :ref:`Configuration des filtres attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
+    Outil permettant de définir un ou plusieurs filtres sur **la couche active** de service OGC filtrable.
+    Outil relatif à la couche active. Une fois activé dans "tools" l'outil sera disponible dans les outils de la couche
+    sélectionnée.
+    | ** Limitation: Disponible sur des couches de type WFS ou WMS produite par mapServer 7.2 et+ ou geoserver.
+    Cet outil présente uniquement le ou les filtres qui sont applicables sur **la couche active**, comparativement à l'outil
+    ogcFilter, qui lui présentera toute les couches ayant un filtre configuré. Comme cet outil présente uniquement le filtre appliqué
+    sur une seule couche, la configuration classique est de ne pas présenter cet outil dans la barre verticale avec les autres outils
+    de l'application et de le laisser uniquement dans les outils de la couche active.
+    Pour ce faire, vous devez mettre l'outil dans "tools" et ne pas le mettre dans "toolbar"
+    | NB: L'activation se fait ici via les outils, mais la configuration du filtre doit se faire à l'intérieur de la couche dans les contextes.
+    | layer -> sourceOptions -> ogcFilters
+    | Référez-vous à: :ref:`Configuration des filtres attributaires OGC <igoOgcFilterObject>`  pour configurer les filtres au niveau des couches.
 
 Exemples
 
@@ -2234,7 +2230,6 @@ Exemples
 Liens
 
     - `active-time-filter-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/filter/active-time-filter-tool>`__
-
 
 
 .. _igoimportExport:
@@ -2331,6 +2326,7 @@ mapTool
             - Gestionnaire de contexte :  Outil permettant de lister/gérer/changer de contexte à l'intérieur d'une même application.
 
 .. note::
+
    Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils
        - `activeOgcFilter`_
        - `activeTimeFilter`_
@@ -2457,6 +2453,7 @@ mapDetails
                             - supression de couches
 
 .. note::
+
    Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils
        - `activeOgcFilter`_
        - `activeTimeFilter`_
@@ -2529,6 +2526,7 @@ mapTools
             - Légende : Légendes de la carte
 
 .. note::
+
    Si vous voulez pouvoir filtrer des données WMS/WFS temporellement et par attributs, activez les outils
        - activeOgcFilter
        - activeTimeFilter
@@ -2658,6 +2656,7 @@ searchResults
 ===============
 
     .. line-block::
+
         Outil permettant d'afficher les résultats effectués à l'aide de la barre de recherche
 
 Exemples
@@ -2703,6 +2702,7 @@ spatialFilter
 ===============
 
     .. line-block::
+
          Outil permettant d’appliquer un filtre sur des adresses ou des thématiques ciblées selon une zone prédéfinie ou selon une zone dessinée par l’utilisateur.
 
 Exemples
@@ -2750,6 +2750,7 @@ shareMap
 ==========
 
     .. line-block::
+
         Outil permettant de partager, à l'aide d'un lien, la carte à l'écran.
 
 Exemples

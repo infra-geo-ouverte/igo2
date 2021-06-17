@@ -37,6 +37,7 @@ hasExpansionPanel
 =================
 
     .. warning::
+
        En cours de construction
 
     .. line-block::
