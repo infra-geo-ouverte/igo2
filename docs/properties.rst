@@ -1937,74 +1937,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/catalogBrowser.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - photo-browser
-       * - **name***
-         - String
-         -
-         - catalogBrowser
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifiez le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`
-         -
-         - igo.integration.tools.catalog
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/catalogBrowserOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - toggleCollapsedGroup
-         - Boolean
-         - .. line-block::
-               Force l'usager à entrer dans le groupe et
-               d'y visualiser  les couches disponible
-               avant de pouvoir ajouter le groupe
-               à la carte.
-               **false** = le groupe doit être ouvert avant
-               de pouvoir l'ajouter à la carte
-         - toggleCollapsedGroup: false
-         - toggleCollapsedGroup: false
+       :widths: 10 10 30 15 10
 
 
 Liens
@@ -2018,6 +1967,7 @@ contextManager
 ================
 
     .. line-block::
+
         Outil permettant de lister/gérer plusieurs contextes à l'intérieur d'une même application.
         Il existe un fichier de configuration définissant les contexte disponibles à l'intérieur du gestionnaire de contexte.
             - `_context.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/_contexts.json>`__
@@ -2040,71 +1990,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/contextManager.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - star
-       * - **name***
-         - String
-         -
-         - contextManager
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traductions.
-               Si vous modifiez le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.contexts
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/contextManagerOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - toolToOpenOnContextChange
-         - String
-         - .. line-block::
-               Nom de l'outil a ouvrir suite au changement de contexte
-         - .. line-block::
-               Voir le nom des divers outils de cette section
-         - .. line-block::
-               Dans l'ordre `mapTools`_', `mapTool`_, `mapDetails`_ et `mapLegend`_  si ces outils sont disponibles.
+       :widths: 10 10 30 15 10
 
 
 Liens
@@ -2134,39 +2036,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/directions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - directions
-       * - **name***
-         - String
-         -
-         - directions
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traductions.
-               Si vous modifiez le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.directions
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -2179,6 +2054,7 @@ draw
 ===========
 
     .. line-block::
+
         Outil permettant de faire des dessins sur la carte. Il est aussi possible de remplacer les points dessinés par une liste d'icônes.
 
 
@@ -2192,39 +2068,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/draw.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - pencil
-       * - **name***
-         - String
-         -
-         - draw
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traductions.
-               Si vous modifiez le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.directions
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -2239,6 +2088,7 @@ ogcFilter
 ===========
 
     .. line-block::
+
         Outil permettant de définir des filtres que l'utilisateur pourra appliquer sur les couches visibles dans la carte et ainsi voir
         seulement les objets géométriques (points, polygones, etc) qui correspondent aux filtres qu'il a appliqués. Les filtres peuvent être
         configurés comme des boutons ou des cases à cocher que l'utilisateur peut activer ou comme filtres avancés. Dans ce cas, c'est l'utilisateur qui doit
@@ -2267,39 +2117,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/ogcFilter.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - filter
-       * - **name***
-         - String
-         - Le nom de l'outil
-         - ogcFilter
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Pour modifiez le titre par défaut, vous devez faire la
-               modification dans les fichiers de traduction locale: en-fr.json
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.ogcFilter
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -2352,6 +2175,7 @@ timeFilter
 ============
 
     .. line-block::
+
         Outil permettant de configurer un filtre temporel sur une couche d'un service ayant une propriété temporelle (WMS-T)
         NB: L'activation de l'outil se fait via les outils, mais la configuration de chaque filtre doit se faire à l'intérieur de la couche dans les contextes.
         layer -> sourceOptions -> timeFilter
@@ -2369,39 +2193,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/timeFilter.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - history
-       * - **name***
-         - String
-         -
-         - timeFilter
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.timeFilter
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -2416,6 +2213,7 @@ activeTimeFilter
 ================
 
     .. line-block::
+
         Outil permettant de filtrer la couche WMS active filtrable temporellement.
         Outil relatif à la couche active. Une fois activé dans "tools" l'outil sera alors disponible dans les outils de la couche
         sélectionnée.
@@ -2444,6 +2242,7 @@ Liens
 importExport
 ==============
     .. line-block::
+
         Outil permettant d'importer et d'exporter des couches.
         Certaines restrictions s'appliquent:
         Import:
@@ -2485,129 +2284,29 @@ Exemples
           }
 
     .. line-block::
-        Outil permettant d'exporter certaines couches d'informations.
 
+        Outil permettant d'exporter certaines couches d'informations.
         Noter que les couches WMS ne sont pas exportable.
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/importExport.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - file-move
-       * - **name***
-         - String
-         -
-         - importExport
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.importExport
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/importExportOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - selectFirstProj
-         - boolean
-         - .. line-block::
-               Permet de controler si la première projection rencontrée dans la liste sera sélectionnée.
-         - true / false
-         - false
-       * - projectionsLimitations
-         - {}
-         - .. line-block::
-               Permet de controler la liste des projections disponible dans l'outil.
-         - .. line-block::
-               {
-               "projFromConfig": true, // Utiliser les projections définies dans la configuration
-               "nad83": true, // Utiliser le NAD83
-               "wgs84": true, // Utiliser le WGS84
-               "webMercator": true, // Utiliser le WebMercator (EPSG:3857)
-               "utm": true, // Utiliser les projections UTM
-               "mtm": true, // Utiliser les projections MTM
-               "utmZone": {
-                 "minZone": 17, // Zone minimale UTM
-                 "maxZone": 21  // Zone maximale UTM
-               },
-               "mtmZone": {
-                 "minZone": 4, // Zone minimale MTM
-                 "maxZone": 10  // Zone maximale MTM
-               }}
-         - .. line-block::
-               {
-               "projFromConfig": true,
-               "nad83": true,
-               "wgs84": true,
-               "webMercator": true,
-               "utm": true,
-               "mtm": true,
-               "utmZone": {
-                 "minZone": 1,
-                 "maxZone": 60
-               },
-               "mtmZone": {
-                 "minZone": 1,
-                 "maxZone": 10
-               }}
-       * - importExportType
-         - String
-         - .. line-block::
-               Définit quel type d'exportation sera ouvert par défaut
-         - .. line-block::
-               layer ou context
-         - .. line-block::
-               layer
-       * - importExportShowBothType
-         - Boolean
-         - .. line-block::
-               Permet d'afficher ou non les 2 types d'importation ou exportation (layer ou contexte)
-               Si false, le type définit précédemment, sera le seul type affiché.
-               Se base sur l'option importExportType.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
+       :widths: 10 10 30 15 10
 
 Liens
 
@@ -2620,6 +2319,7 @@ mapTool
 ===============
 
     .. line-block::
+
         Outil permettant de présenter le contenu à l'aide de deux onglets distincts.
             - Carte :   Couches disponible à la carte, avec paramètres et outils permettant de gérer les couches:
                             - ordonnancement
@@ -2660,140 +2360,24 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/mapTool.csv
        :header-rows: 1
+       :widths: 10 10 30 15 10
 
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - map
-       * - **name***
-         - String
-         -
-         - map
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.map'
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/mapToolOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - expandLegendOfVisibleLayers
-         - Boolean
-         - .. line-block::
-               À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - ogcButton
-         - Boolean
-         - .. line-block::
-               Permet d'afficher le bouton filtre OGC pour les couches le permettant.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - queryBadge
-         - Boolean
-         - .. line-block::
-               Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un "?" pour les couches interrogeable.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - timeButton
-         - Boolean
-         - .. line-block::
-               Permet d'afficher le bouton filtre temporel pour les couches le permettant.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - toggleLegendOnVisibilityChange
-         - Boolean
-         - .. line-block::
-               Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité
-               d'une couche passe de non-visible à visible
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - updateLegendOnResolutionChange
-         - Boolean
-         - .. line-block::
-               Permet de rafraichir la légende à chaque changement de résolution (zoom)
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - layerListControls
-         - Object
-         - .. line-block::
-               Divers contrôles effectués à la liste de couches affichées dans l'interface.
-
-                "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
-                "showToolbar" = Outil permettant de contrôler la liste des couche
-                                "always", "never" ou "default" = visible si 5 couches et +
-                "keyword" = Mot clef filtrant la liste de couches
-                "sortAlpha" = Tri la liste de couches alphabétiquement.
-                "onlyVisible" = Ne garde que dans la liste de couches, les couches visible.
-
-
-         - .. line-block::
-               "layerListControls": {
-                   "excludeBaseLayers": true,
-                   "showToolbar": "always",
-                   "keyword": "allo",
-                   "sortAlpha": true,
-                   "onlyVisible": true
-                }
-         - .. line-block::
-               {
-                  "excludeBaseLayers": false,
-                  "showToolbar": "default",
-                  "sortAlpha": false,
-                  "onlyVisible": false
-              }
+       :widths: 10 10 30 15 10
 
 
 Liens
@@ -2807,6 +2391,7 @@ mapLegend
 ===============
 
     .. line-block::
+
         Outil permettant de présenter le contenu de la carte sous forme de légende.
         Seul les légendes sont contenues.
 
@@ -2833,111 +2418,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/mapLegend.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - format-list-bulleted-type'
-       * - **name***
-         - String
-         -
-         - mapLegend
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.legend
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+                
+    .. csv-table::
+       :file: _tables/fr/properties/tools/mapLegendOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - allowShowAllLegends
-         - Boolean
-         - .. line-block::
-               Affiche un bouton permettant de montrer toutes les légendes de la carte,
-               même pour les couches non visible OU hors échelle d'affichage.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - showAllLegendsValue
-         - Boolean
-         - .. line-block::
-               SI allowShowAllLegends est permis (true), définit la valeur à l'ouverture de l'application.
-               true = toutes les légendes sont affichées (même ceux non visibles à la carte)
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - layerAdditionAllowed
-         - Boolean
-         - .. line-block::
-               Identifie si l'ajout de couches à la carte sont permises.
-               Influence les messages d'aide à l'usager
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - updateLegendOnResolutionChange
-         - Boolean
-         - .. line-block::
-               Permet de rafraichir la légende à chaque changement de résolution (zoom)
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - layerListControls
-         - Object
-         - .. line-block::
-               Divers contrôles effectués à la liste de couches affichées dans l'interface.
-         - .. line-block::
-               {
-                   "excludeBaseLayers": true // retire les couches identifiées comme baseLayer.
-               }
-         - .. line-block::
-               {
-                   "excludeBaseLayers": false
-               }
-
+       :widths: 10 10 30 15 10
 
 Liens
 
@@ -2950,6 +2447,7 @@ mapDetails
 ===============
 
     .. line-block::
+
         Outil permettant de présenter les couches disponible à la carte, avec paramètres et outils permettant de gérer les couches:
                             - ordonnancement
                             - visibilité
@@ -2989,149 +2487,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/mapDetails.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - map
-       * - **name***
-         - String
-         -
-         - map
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.map'
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/mapDetailsOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - expandLegendOfVisibleLayers
-         - Boolean
-         - .. line-block::
-               À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - layerAdditionAllowed
-         - Boolean
-         - .. line-block::
-               Identifie si l'ajout de couches à la carte sont permises.
-               Influence les messages d'aide à l'usager
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - ogcButton
-         - Boolean
-         - .. line-block::
-               Permet d'afficher le bouton filtre OGC pour les couches le permettant.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - queryBadge
-         - Boolean
-         - .. line-block::
-               Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un "?" pour les couches interrogeable.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - timeButton
-         - Boolean
-         - .. line-block::
-               Permet d'afficher le bouton filtre temporel pour les couches le permettant.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - toggleLegendOnVisibilityChange
-         - Boolean
-         - .. line-block::
-               Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité
-               d'une couche passe de non-visible à visible
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - updateLegendOnResolutionChange
-         - Boolean
-         - .. line-block::
-               Permet de rafraichir la légende à chaque changement de résolution (zoom)
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - layerListControls
-         - Object
-         - .. line-block::
-               Divers contrôles effectués à la liste de couches affichées dans l'interface.
-
-                "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
-                "showToolbar" = Outil permettant de contrôler la liste des couche
-                                "always", "never" ou "default" = visible si 5 couches et +
-                "keyword" = Mot clef filtrant la liste de couches
-                "sortAlpha" = Tri la liste de couches alphabétiquement.
-                "onlyVisible" = Ne garde que dans la liste de couches, les couches visible.
-
-
-         - .. line-block::
-               "layerListControls": {
-                   "excludeBaseLayers": true,
-                   "showToolbar": "always",
-                   "keyword": "allo",
-                   "sortAlpha": true,
-                   "onlyVisible": true
-                }
-         - .. line-block::
-               {
-                  "excludeBaseLayers": false,
-                  "showToolbar": "default",
-                  "sortAlpha": false,
-                  "onlyVisible": false
-              }
+       :widths: 10 10 30 15 10
 
 
 Liens
@@ -3145,6 +2517,7 @@ mapTools
 ===============
 
     .. line-block::
+
         Outil permettant de présenter le contenu à l'aide de deux onglets distincts.
             - Carte :   Couches disponible à la carte, avec paramètres et outils permettant de gérer les couches:
                             - ordonnancement
@@ -3189,175 +2562,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/mapTools.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - map
-       * - **name***
-         - String
-         -
-         - mapTools
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.map'
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/mapToolsOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - allowShowAllLegends
-         - Boolean
-         - .. line-block::
-               Affiche un bouton permettant de montrer toutes les légendes de la carte,
-               même pour les couches non visible OU hors échelle d'affichage.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - showAllLegendsValue
-         - Boolean
-         - .. line-block::
-               SI allowShowAllLegends est permis (true), définit la valeur à l'ouverture de l'application.
-               true = toutes les légendes sont affichées (même ceux non visibles à la carte)
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - expandLegendOfVisibleLayers
-         - Boolean
-         - .. line-block::
-               À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - layerAdditionAllowed
-         - Boolean
-         - .. line-block::
-               Identifie si l'ajout de couches à la carte sont permises.
-               Influence les messages d'aide à l'usager
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - ogcButton
-         - Boolean
-         - .. line-block::
-               Permet d'afficher le bouton filtre OGC pour les couches le permettant.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - queryBadge
-         - Boolean
-         - .. line-block::
-               Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un "?" pour les couches interrogeable.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - timeButton
-         - Boolean
-         - .. line-block::
-               Permet d'afficher le bouton filtre temporel pour les couches le permettant.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - selectedTabAtOpening
-         - String
-         - .. line-block::
-               Permet de définir, lors de la première ouverture de l'outil, quel onglet est ouvert.
-         - .. line-block::
-               'legend'
-         - L'onglet Carte est ouvert par défaut.
-       * - toggleLegendOnVisibilityChange
-         - Boolean
-         - .. line-block::
-               Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité
-               d'une couche passe de non-visible à visible
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
-       * - updateLegendOnResolutionChange
-         - Boolean
-         - .. line-block::
-               Permet de rafraichir la légende à chaque changement de résolution (zoom)
-         - .. line-block::
-               true / false
-         - .. line-block::
-               false
-       * - layerListControls
-         - Object
-         - .. line-block::
-               Divers contrôles effectués à la liste de couches affichées dans l'interface.
-
-                "excludeBaseLayers" = Retire les couches identifiées comme baseLayer.
-                "showToolbar" = Outil permettant de contrôler la liste des couche
-                                "always", "never" ou "default" = visible si 5 couches et +
-                "keyword" = Mot clef filtrant la liste de couches
-                "sortAlpha" = Tri la liste de couches alphabétiquement.
-                "onlyVisible" = Ne garde que dans la liste de couches, les couches visible.
-
-
-         - .. line-block::
-               "layerListControls": {
-                   "excludeBaseLayers": true,
-                   "showToolbar": "always",
-                   "keyword": "allo",
-                   "sortAlpha": true,
-                   "onlyVisible": true
-                }
-         - .. line-block::
-               {
-                  "excludeBaseLayers": false,
-                  "showToolbar": "default",
-                  "sortAlpha": false,
-                  "onlyVisible": false
-              }
-
+       :widths: 10 10 30 15 10
 
 Liens
 
@@ -3370,6 +2591,7 @@ measurer
 ===============
 
     .. line-block::
+
         Outil permettant d'effectuer des mesures sur la carte.
 
 
@@ -3383,39 +2605,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/measurer.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - ruler
-       * - **name***
-         - String
-         -
-         - measurer
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.measurer
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -3430,11 +2625,8 @@ print
 ===============
 
     .. line-block::
-        Outil permettant d'effectuer des impressions de la carte.
 
-        Actuellemnt exclut de l'impression:
-            - itinéraires
-            - mesures
+        Outil permettant d'effectuer des impressions de la carte.
 
 Exemples
 
@@ -3446,39 +2638,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/print.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - printer
-       * - **name***
-         - String
-         -
-         - print
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.print
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
@@ -3508,71 +2673,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/searchResults.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - magnify
-       * - **name***
-         - String
-         -
-         - print
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.searchResults
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/searchResultsOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - showIcons
-         - Boolean
-         - .. line-block::
-               Permet de faire afficher ou non des icônes pour chacun des résultats de recherche.
-         - .. line-block::
-               true / false
-         - .. line-block::
-               true
+       :widths: 10 10 30 15 10
 
 
 Liens
@@ -3603,86 +2720,23 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/spatialFilter.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - selection-marker
-       * - **name***
-         - String
-         -
-         - spatialFilter
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.spatialFilter
-       * - options
-         - Object
-         - Voir les options ici-bas.
-         -
-         -
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Options
 
-     .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/spatialFilterOptions.csv
        :header-rows: 1
-
-       * - .. line-block::
-               options
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - type
-         - SpatialFilterType
-         - .. line-block::
-               Spécifie le type de zone sur lequel le filtrage sera appliqué
-         - .. line-block::
-               Predefined = Zone prédéfinie (Municipalités, Arrondissements, Région administratives...)
-               Polygon = Polygone dessinée par l'utilisateur
-               Point = Cercle dessinée par l'utilisateur
-         -
-       * - itemType
-         - SpatialFilterItemType
-         - .. line-block::
-               Spécifie le type des éléments qui seront filtrés
-         - .. line-block::
-               Address = Adresses provenant de la couche d'Adresses Québec
-               Thematics = Données provenant de l'api terrAPI
-         - Address
-       * - freehandDrawIsActive
-         - Boolean
-         - .. line-block::
-               Indique si le mode de dessin "à main levée" est actif ou non.
-         - true / false
-         -
+       :widths: 10 10 30 15 10
 
 Liens
 
@@ -3708,39 +2762,12 @@ Exemples
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/tools/shareMap.csv
        :header-rows: 1
-
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - icon
-         - String
-         - Icône dans la barre d'outil
-         - `MDI <https://materialdesignicons.com/>`__
-         - share-variant
-       * - **name***
-         - String
-         -
-         - shareMap
-         -
-       * - title
-         - String
-         - .. line-block::
-               Le titre affiché dans l'application. Sujet aux traduction.
-               Si vous modifier le titre par défaut, vous devez ajouter
-               ce titre dans les langues supportées par IGO2 (fr-en).
-                   - fichiers dans :ref:`Language <igolanguage>`.
-         -
-         - igo.integration.tools.shareMap
+       :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
