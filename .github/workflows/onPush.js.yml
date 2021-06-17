@@ -22,5 +22,5 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install @angular/cli
+    # - run: npm install @angular/cli
     - run: npm run lint
