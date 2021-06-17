@@ -47,9 +47,15 @@ hasExpansionPanel
 Exemples
 
 
-        .. code:: json
-
-            indenté
+    .. code:: json
+          {
+              "icon" : "iconName",
+              "name" : "catalogBrowser",
+              "title": "TitreOutilQuiDoitEtreTraduit",
+              "options" : {
+                  "optiona": 2
+              }
+          }
 
 Propriétés
 

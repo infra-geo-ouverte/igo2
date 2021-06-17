@@ -65,12 +65,11 @@ Visibilité des couches
     dans les contexte OU assigné automatiquement (uuid).
 
         .. code:: json
-            :force:
             
             { 
                 "title": "OSM",
                 "baseLayer": true,
-                **"id":"osm1",**
+                "**id**":"osm1",
                 "sourceOptions": { 
                     "type": "osm" 
                     } 
