@@ -46,8 +46,8 @@ hasExpansionPanel
 
 Exemples
 
-
     .. code:: json
+
           {
               "icon" : "iconName",
               "name" : "catalogBrowser",
