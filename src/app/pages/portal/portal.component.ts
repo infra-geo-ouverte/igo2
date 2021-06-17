@@ -376,9 +376,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.map.ol.once('rendercomplete', () => {
       this.readQueryParams();
       if (this.storageService.get('pwaInstalled') === 'accepted') {
-        this.messageService.info('Ouvrir l\'app dans le bouton a droite de l\'url', 'Application déja installée')
+        this.messageService.info('Ouvrir l\'app dans le bouton a droite de l\'url', 'Application déja installée');
       }
-  
+
       // event non reconnu ni declanche...
      // window.addEventListener('appinstalled', () => {
         // Hide the app-provided install promotion
