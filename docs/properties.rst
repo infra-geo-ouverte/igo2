@@ -1167,7 +1167,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.selector
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
             
     .. csv-table::
-       :file: _tables/fr/properties/filter/pb-cb-rb-selectorType.csv
+       :file: _tables/fr/properties/filter/buttons-selectorType.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -1178,7 +1178,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.groups
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
             
     .. csv-table::
-       :file: _tables/fr/properties/filter/pb-cb-rb-groups.csv
+       :file: _tables/fr/properties/filter/buttons-groups.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -1191,7 +1191,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
             
     .. csv-table::
-       :file: _tables/fr/properties/filter/pb-cb-rb-groups.csv
+       :file: _tables/fr/properties/filter/buttons-groups.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
@@ -1205,7 +1205,7 @@ Propriétés de l'objet ogcFilter.{selector}.bundles.selector
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
             
     .. csv-table::
-       :file: _tables/fr/properties/filter/pb-cb-rb-bundles-selector.csv
+       :file: _tables/fr/properties/filter/buttons-bundles-selector.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
 
