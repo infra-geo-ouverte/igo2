@@ -1,0 +1,12 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**type*** ,String ,,wmts,wmts
+format ,String ,"| Format d'image demandé au serveur. 
+| Dépend des capacités du serveur (wmts Getcapabilities) ","Dépends des capacités du serveur 
+",image/jpeg 
+**layer*** ,String ,Nom de la couche demandée ,,
+**matrixSet*** ,String ,Le nom du matrix set demandé au serveur ,,
+projection,String ,La projection de l'appel de tuile ,EPSG:3857 ,La projection de la carte
+style ,,"| Le nom du style demandé tel que présenté dans le 
+| GetCapabilities du service ",,
+**url*** ,String ,L'URL du service de données tuilées ,,
+version,String ,La version WMTS du service demandé ,1.0.0 ,1.0.0 

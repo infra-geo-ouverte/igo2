@@ -1,0 +1,16 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+beforeChange ,InteractiveTourAction ,"| Déclenchement avant le changement de boite. Attends avant de passer à 
+| l'étape suivante (en combinaison de waitFor qui prend du css)",,
+beforeShow ,InteractiveTourAction ,"| Déclenchement avant l'apparition de la boite. Attends avant d'ouvrir l'étape 
+| (en combinaison de waitFor qui prend du css) ",,
+disableInteraction ,Boolean,Permet ou non à l'utilisateur de cliquer sur l'éléments du step en surbrillance ,true | false ,true
+element ,String,Elément HTML à mettre en surbrillance. NB.: doit être visible lors du déclanchement ,,
+highlightClass ,String,Définit la classe à appliquer aux éléments en surbrillance ,,
+noBackButton ,Boolean,Définit si le step aura un bouton précédent,,
+onHide ,InteractiveTourAction ,Déclenchement lorsque la boite disparait ,,
+onShow ,InteractiveTourAction ,Déclenchement lors de l'apparition de la boite ,,
+position ,String,Définit la position des boites aide ,"'auto', 'right', 'left', 'bottom', 'top'.      ","| NB.: Si la propriété position n'est pas présente, 
+| les boites seront disposées au centre de l'écran "
+scrollToElement ,Boolean,Indique si on défile la page sur l'élément en surbrillance ,true | false ,
+text ,String,Le texte inscrit dans la boite d'aide. On peut y mettre du html. NB.: voir traduction ,,
+title ,String,Le titre de la boite d'aide ,,

@@ -1,0 +1,10 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+enabled ,Boolean ,Définir si la couche aura ou non une table d'attributs. ,true | false ,"| Pour les sources vectorielles, true par défault.
+| Pour les wms avec des propriétés
+| WFS associées, false par défault"
+minResolution ,Number ,"| Indique la résolution minimale (grande échelle, très zoomé)
+| à laquelle la table d'attribut pourra faire apparaître des
+| enregistrements. ",0 à Infinity ou absent ,
+maxResolution ,Number ,"| Indique la résolution maximale (petite échelle,peu zoomé)
+| à laquelle la table d'attribut pourra faire apparaître des
+| enregistrements. ",0 à Infinity ou absent ,

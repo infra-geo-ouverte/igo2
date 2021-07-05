@@ -1,0 +1,8 @@
+Propriétés,Valeur défaut
+searchUrl ,https://geoegl.msp.gouv.qc.ca/apis/layers/search 
+settings ,`Ligne 93 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/ilayer.ts#L93>`__ 
+title ,"| Basé sur la traduction de 2 fichiers.
+| Propriété igo.geo.search.layer.title dans
+| - `en.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/en.geo.json>`__ 
+| - `fr.geo.json  <https://github.com/infra-geo-ouverte/igo2-lib/blob/eaa7565fd0cfbc66eefcae6906489cb30ad11e50/packages/geo/src/locale/fr.geo.json>`__ "
+queryFormat ,Possibilité de définir le format par URL pour la présentation des informations lors de l’interrogation de la couche par clic.
