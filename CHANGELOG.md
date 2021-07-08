@@ -1,3 +1,12 @@
+## [1.8.1](https://github.com/infra-geo-ouverte/igo2/compare/1.8.0...1.8.1) (2021-07-08)
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.8.1 ([0ee3ce5](https://github.com/infra-geo-ouverte/igo2/commit/0ee3ce5df34424cd33e0c88653ef8e7f76eed313))
+
+
+
 # [1.8.0](https://github.com/infra-geo-ouverte/igo2/compare/1.7.1...1.8.0) (2021-07-07)
 
 
