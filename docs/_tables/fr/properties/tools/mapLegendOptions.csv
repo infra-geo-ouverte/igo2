@@ -1,0 +1,9 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+allowShowAllLegends ,Boolean ,"| Affiche un bouton permettant de montrer toutes les légendes de la carte,
+| même pour les couches non visible OU hors échelle d'affichage. ",true / false ,false
+showAllLegendsValue ,Boolean ,"| Si allowShowAllLegends est permis (true), définit la valeur à l'ouverture de l'application.
+| true = toutes les légendes sont affichées (même ceux non visibles à la carte) ",true / false ,false
+layerAdditionAllowed ,Boolean ,"| Identifie si l'ajout de couches à la carte sont permises.
+| Influence les messages d'aide à l'usager",true / false ,true
+updateLegendOnResolutionChange ,Boolean ,Permet de rafraichir la légende à chaque changement de résolution (zoom) ,true / false ,false
+layerListControls ,Objet,Divers contrôles effectués à la liste de couches affichées dans l'interface. ,,"{""excludeBaseLayers"": false} "

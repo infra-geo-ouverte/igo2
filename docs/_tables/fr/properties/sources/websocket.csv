@@ -1,0 +1,6 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**onmessage*** ,String ,"| Action déclenchée lors de la réception
+| de la donnée par le websocket ",update | delete | add ,add
+**onopen** ,String ,Action déclenchée lors de l'ouverture du websocket. ,,
+**onclose** ,String ,Action déclenchée lors de la fermeture du websocket. ,,
+**onerror** ,String ,Action déclenchée lors d'une erreur du websocket. ,,

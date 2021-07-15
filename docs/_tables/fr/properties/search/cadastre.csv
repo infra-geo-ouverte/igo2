@@ -1,0 +1,2 @@
+Propriétés,Type,Description,Valeur défaut
+searchUrl ,String,URL du service. ,https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php? 

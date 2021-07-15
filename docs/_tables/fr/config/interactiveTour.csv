@@ -1,0 +1,6 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+activateInteractiveTour ,Boolean ,Indique si le tour interactif de présentation de l'application est activé. ,true | false ,true 
+pathToConfigFile ,String ,"| Indique ou ce retrouve le fichier de configuration des tours dans l'application.
+| Voir la documentation plus loin sur les détails de la configurations des tours.
+| Référez vous à :ref:`Tour interactif configuration <igoInteractiveTourConfig>`. ",,"""./config/interactiveTour.json"" "
+tourInMobile ,Boolean ,Indique si les tours interactifs sont aussi disponible en mode mobile. ,true/false ,

@@ -1,0 +1,2 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+showIcons ,Boolean ,Permet de faire afficher ou non des icônes pour chacun des résultats de recherche. ,true / false ,true

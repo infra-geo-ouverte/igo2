@@ -1,0 +1,12 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+type ,SpatialFilterType ,"| Spécifie le type de zone sur lequel le filtrage sera appliqué 
+| Predefined = Zone prédéfinie (Municipalités, Arrondissements, Région administratives...)
+| Polygon = Polygone dessinée par l'utilisateur
+| Point = Cercle dessinée par l'utilisateur","| Predefined
+| Polygon
+| Point",
+itemType ,SpatialFilterItemType ,"| Spécifie le type des éléments qui seront filtrés 
+| Address = Adresses provenant de la couche d'Adresses Québec
+| Thematics = Données provenant de l'api terrAPI","| Address
+| Thematics",Address
+freehandDrawIsActive ,Boolean ,"Indique si le mode de dessin ""à main levée"" est actif ou non. ",True | false,

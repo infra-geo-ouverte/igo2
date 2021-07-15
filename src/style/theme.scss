@@ -42,3 +42,8 @@
   @include igo-all-theming($theme);
   @include app-theming($theme);
 }
+
+.bluedq-theme {
+  @import '~@igo2/core/style/themes/bluedq.theme';
+  @include igo-all-theming($theme);
+}
