@@ -9,6 +9,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --port 4201 --proxy-config proxy.conf.json",
+    "start-pwa": "ng build --prod && http-server -p 4201 -c-1 dist/igo2",
     "build": "ng build",
     "lint": "ng lint",
     "e2e": "ng e2e --port 4300",
@@ -49,6 +50,7 @@
     "@angular/platform-browser": "^10.0.3",
     "@angular/platform-browser-dynamic": "^10.0.3",
     "@angular/router": "^10.0.3",
+    "@angular/service-worker": "^10.0.3",
     "@azure/msal-angular": "^2.0.0",
     "@azure/msal-browser": "^2.14.2",
     "@igo2/auth": "~1.8.1",

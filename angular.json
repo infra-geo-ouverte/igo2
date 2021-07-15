@@ -39,7 +39,8 @@
                 "glob": "**/*",
                 "input": "./node_modules/@igo2/geo/assets/",
                 "output": "./assets/igo2/geo/"
-              }
+              },
+              "src/manifest.webmanifest"
             ],
             "styles": ["src/styles.scss"],
             "scripts": [],
@@ -89,7 +90,9 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": true,
-              "buildOptimizer": false
+              "buildOptimizer": false,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             },
             "github": {
               "budgets": [
@@ -112,7 +115,9 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": true,
-              "buildOptimizer": false
+              "buildOptimizer": false,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
@@ -145,7 +150,11 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "assets": ["src/favicon.ico", "src/assets"]
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ]
           }
         },
         "lint": {
@@ -178,5 +187,8 @@
       }
     }
   },
-  "defaultProject": "igo2"
+  "defaultProject": "igo2",
+  "cli": {
+    "analytics": "ca035909-016f-4273-bdf6-934d4b48af64"
+  }
 }
