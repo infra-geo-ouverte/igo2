@@ -1,0 +1,13 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+available ,Boolean ,Permet de préciser si le service est utilisable dans l'application. ,true | false ,true
+enabled ,Boolean ,"| Permet de préciser si le service est activé (coché) 
+| à l'ouverture de l'application.",true | false ,true
+order ,Number ,"| Définit la position des résultats dans la liste
+| des résultats de recherche. Plus le nombre est élevé,
+| plus les résultats de cette source seront
+| au bas de la liste. ",,99
+params ,Object {} ,"| Paramètres supplémentaires à ajouter à la requête
+| faite au serveur associé. Spécifique selon la source.",,
+searchUrl ,String,URL du serveur à utiliser. ,,Spécifique selon la source. 
+settings ,SearchSourceSettings [] ,En construction ,,Spécifique selon la source. 
+**title*** ,String ,Titre du service de recherche ,,Spécifique selon la source. 

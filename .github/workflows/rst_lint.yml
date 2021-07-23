@@ -1,0 +1,21 @@
+# .github/workflows/rst_lint.yaml
+name: RST Lint
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    doctor-rst:
+        name: DOCtor-RST
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: DOCtor-RST
+              uses: docker://oskarstark/doctor-rst
+              with:
+                  args: --short --error-format=github       
+              env:
+                  DOCS_DIR: 'docs/'

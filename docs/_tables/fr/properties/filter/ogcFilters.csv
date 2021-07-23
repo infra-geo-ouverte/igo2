@@ -1,0 +1,34 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+allowedOperatorsType ,String,"| Paramètre relatif aux filtres avancés. 
+| Les opérateurs pour construire l'expression filtrante 
+| qui seront accessible à l'utilisateur.
+| 
+| NB: Ce paramètre s'appliquera a tous les champs 
+| définit dans sourceField mais ce paramètre peut aussi
+| être définit à l'intérieur de sourceField pour l'appliquer | au niveau d'un champ spécifique si besoin. ","| BasicNumericOperator,           
+| Basic, 
+| Spatial,           
+| BasicAndSpatial,           
+| All
+| time. ",BasicAndSpatial 
+editable ,Boolean,"| Active ou non la possibilité à l'utilisateur de
+| construire des filtres avancés. ",true | false ,true
+enabled ,Boolean,"| Active ou non les filtres modifiable par l'utilisateur sur 
+| la couche. Si = false, le bouton de filtre n'apparait plus.
+| Par exemple, dans le cas que le pilote voudrait filtrer une 
+| couche mais que ce filtre ne soit pas modifiable par l'utilisateur. ",true | false ,true
+filters ,"| IgoLogicalArrayOptions
+| AnyBaseOgcFilterOptions ","| Permet de définir un filtre avancé.
+| :ref:`voir configuration filters <igoOgcFilterFiltersObject>` ",,
+pushButtons ,PushButton ,"| Permet de définir des boutons poussoirs qui pourront être 
+| activés par l'utilisateur pour appliquer des filtres voulus.
+| Doit contenir obligatoirement bundles[]. ",,
+checkboxes ,Checkbox ,"| Permet de définir des cases à cocher qui pourront être 
+| activées par l'utilisateur pour appliquer des filtres voulus.
+| Doit contenir obligatoirement bundles[]. ",,
+radioButtons ,RadioButton ,"| Permet de définir des boutons radio qui pourront être 
+| activés par l'utilisateur pour appliquer des filtres voulus.
+| Doit contenir obligatoirement bundles[]. ",,
+select ,Select ,"| Permet de définir une liste déroulante permettant à 
+| l'utilisateur d'appliquer un ou plusieurs filtres.
+| Doit contenir obligatoirement bundles[].",,

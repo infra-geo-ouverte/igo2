@@ -1,0 +1,3 @@
+Propriétés,Type,Description
+url,String,Définit l'url d'appel du service de dépôt de fichier 
+trainingGuides ,String[] ,Nom ou identifiant des guides d'autoformation à accéder. 

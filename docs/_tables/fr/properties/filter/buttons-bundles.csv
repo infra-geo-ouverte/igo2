@@ -1,0 +1,18 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+selector ,"| OgcPushButton[]
+| OgcCheckbox[]
+| OgcRadioButton[]
+| OgcSelect[] ",Liste de selecteur pour filtrer les entités de la carte ,,
+**id*** ,String ,"| Id rataché au groupe pour le classement dans le groupe. 
+| Doit être présente et identique dans 
+| ogcFilter.{selector}.groups.ids ",,
+**logical*** ,String ,"| Opérateur logique à appliquer entre les boutons lorsque 
+| plusieurs boutons seront activés. ""ET"", ""OU"". ","Or, And ",
+vertical ,Boolean ,"| Indique si la disposition des boutons dans la 
+| fenêtre se fait de manière verticale. ",true | false ,false
+title ,String ,Indique le sous-titre à afficher pour le sélecteur en question. ,,
+multiple ,Boolean ,"| Indique si une liste déroulante permet la sélection de 
+| plusieurs éléments. ",true | false ,true
+unfiltered ,Boolean ,"| Indique si une option permettant de réinitialiser les filtres 
+| appliqués est disponible. ",true | false ,
+order ,Number,Indique l'ordre d'apparition du sélecteur en question. ,,

@@ -8,6 +8,7 @@ CTRL maintenu + lick drag + relâche
 ************************************
 
     .. line-block::
+
         Lorsque vous avez des données tabulaire(vectorielle), 
         permet de faire une sélection par rectangle sur ces entités.
         Lorsque vous effectuez plusieurs rectangle consécutif, 
@@ -19,6 +20,7 @@ Majuscule (shift) maintenu
 *******************************
 
     .. line-block::
+
         Lorsque vous maintenez la touche majuscule (SHIFT) et que vous cliquez 
         sur la carte, vous définirez une zone à l'intérieur de laquelle
         vous pourrez aller zoomer une fois la zone définie.
@@ -29,6 +31,7 @@ F2
 *******************************
 
     .. line-block::
+
         Dans l'application, si un résumé de la position du curseur est disponible,
         F2 permet d'activer/désactiver le résumé de position.
 
@@ -38,6 +41,7 @@ Z
 *******************************
 
     .. line-block::
+
         Lorsque vous avez effectué une interrogation \à la carte (clic dans la carte)
         et que vous avez sélectionné un résultat d'interrogation, si vous appuyez sur 
         la touche z, vous zoomerez sur le résultat en cours.
@@ -48,6 +52,7 @@ Flèche gauche
 *******************************
 
     .. line-block::
+
         Lorsque vous avez effectué une interrogation \à la carte (clic dans la carte)
         et que vous avez sélectionné un résultat d'interrogation, si vous appuyez sur 
         la touche fl\èche gauche, vous accéderez au résultat de recherche qui précède
@@ -63,6 +68,7 @@ Flèche droite
 *******************************
 
     .. line-block::
+
         Lorsque vous avez effectué une interrogation \à la carte (clic dans la carte)
         et que vous avez sélectionné un résultat d'interrogation, si vous appuyez sur 
         la touche fl\èche droite, vous accéderez au résultat de recherche qui succède

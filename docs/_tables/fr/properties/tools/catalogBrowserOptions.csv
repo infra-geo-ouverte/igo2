@@ -1,0 +1,5 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+toggleCollapsedGroup ,Boolean ,"| Force l'usager à entrer dans le groupe et d'y visualiser
+| les couches disponible avant de pouvoir ajouter le groupe
+| à la carte. **false** = le groupe doit être ouvert avant
+| de pouvoir l'ajouter à la carte ",true | false,false 

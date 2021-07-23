@@ -1,0 +1,13 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**name*** ,String,Nom de l'attribut ,,
+alias ,String,Alias de l'attribut.,,Le nom de l'attribut est utilisé si nul. 
+values ,[],Liste de valeurs permises ,,"| Si vide, pour les WFS, 
+| sera récupéré automatiquement. "
+excludeFromOgcFilters ,Boolean ,Indique si l'attribut est utilisé dans l'outil de filtre OGC. ,true/false ,true
+allowedOperatorsType ,String,Indique les opérateurs permis pour cet attribut ,"| BasicNumericOperator
+| Basic
+| BasicAndSpatial
+| Spatial
+| All
+| Time
+| Référez vous à `ogc-filter.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`__ pour les opérateurs correspondants.",BasicAndSpatial 

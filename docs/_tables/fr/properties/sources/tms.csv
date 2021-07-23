@@ -1,0 +1,9 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**type*** ,String ,,xyz,xyz
+**url*** ,String ,"| L'URL du service de données tuilées en spécifiant la position
+| des tuiles en déclarant les balises de remplacement:
+|     - {x}
+|     - {-y}
+|     - {z}
+| X et Y représentent la position de la tuile appelée
+| tandis que le Z, le zoom. ",,

@@ -1,0 +1,74 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+baseLayer ,Boolean,"| Définir si la couche doit être considérée comme une couche de base. Les couches de
+| base sont présentées dans le ""baselayer"" switcher dans le coin inférieur gauche et
+| peuvent être exclues visuellement de la table des matières.",true| false,false
+id ,String ,"| Identifiant unique de la couche à l'échelle de l'application. 
+| Particulièrement utile pour bâtir le lien pour le partage
+| de cartes. Si vous avez plusieurs fois la même couche dans un context
+| vous devez avoir un id pour que le lien de partage foinctionne bien.
+| Attention: si vous définissez un id, la couche ajoutée par le catalogue
+| ou par la recherche sera considérée par l'app. comme une couche différente,
+| vous aurez donc 2 fois la même couche.",,Uuid ()
+legendOptions ,`LegendOptions`_ ,Permet de définir des options sur la légende. ,,
+workspace ,`WorkspaceOptions`_ ,"| Permet de définir si une source possèdera une table
+| d'attribut dans l'application ainsi que ses propriétés associées. ","workspace: 
+| {  enabled: true, 
+|     minResolution: 0, 
+|     maxResolution: 400} ",Voir dans l'objet `WorkspaceOptions`_ 
+maxResolution ,Number ,"| Définir la résolution à laquelle la couche d'information commence à s'afficher. | 
+| Intéressant pour les couches exigeantes à récupérer à très petite échelle (ex. 1: 5000000). 
+| Pour les **WMS** récupérant certaines propriétés du service, cette valeur peut
+| être récupérée.",,
+maxScaleDenom ,Number ,"| Définir l'échelle à laquelle la couche d'information commence
+| à s'afficher. Le chiffre inscrit correspond à l'échelle.
+| Ex. 2000000 correspond à 1:2000000 ",,
+minResolution ,Number ,"| Définir la résolution à laquelle la couche d'information arrête de s'afficher
+| 
+| Pour les **WMS** récupérant certaines propriétés du service, 
+| cette valeur peut y être récupérée.",,
+minScaleDenom ,Number ,"| Définir l'échelle à laquelle la couche d'information arrête
+| de s'afficher. Le chiffre inscrit correspond à l'échelle.
+| Ex. 2000000 correspond à 1:2000000 ",,
+messages ,ref:`Message[] <_igomessage>`. ,"| Affichage d'une liste des messages. Les messages s'affichent seulement 1 fois 
+| pendant la session lorsque la couche s'affiche. ",,
+metadata ,Object{} ,"| Définir la source pour les metadonnées. Lien pour le bouton i de la couche. 
+| Si la balise url est configurée, elle permet de définir un url au choix.
+| Pour les WMS, si la couche wms a une balise dataUrl et que la source wms à 
+| l'option optionsFromCapabilities : true, | | l'application ira récupérer le lien dans le service WMS.
+| La valeur pilotée à préséance sur la valeur récupérée du service. 
+| Pour les sources WMS, WMTS et ArcGISREST, si celui-ci n'est pas défini, c'est l'abstract 
+| du catalogue qui sera utilisé. Les propriété permises sont:
+|     - url
+|     - extern
+|     - keyword
+|     - abstract = résumé de la couche. Sert au tooltip ici bas. ","{url: ""https://www.igouverte.org/"", extern: true} ",
+tooltip ,Object{} ,"| Permet de définir le type de tooltip à afficher sur survol de la couche
+| dans la table des matières (liste de couche).
+| Les divers types sont:
+|    - title
+|    - abstract
+|    - custom
+| Le type title présente uniquement le titre de la couche
+| Le type abstract récupère le ""abstract"" de la balise metadata.
+| Le type custom récupère le texte de la balise text","| {  type: 'title'
+| ou  'abstract'
+| ou  'custom',
+| text: 'text à afficher'
+| si le type est custom'} ",{  type: 'title'} 
+opacity ,Number ,"| Définir la transparence de la couche.  0 = invisible 1 = aucune transparence
+| Également controlable par l'interface.",de 0.0 à 1.0 ,1
+showInLayerList ,Boolean,Définit si la couche est visible ou non dans la table des matières,true| false,true
+**sourceOptions*** ,`SourceOptions`_ ,"| Diverses sources de données sont supportées.
+| Référez-vous aux section suivantes pour plus de détails.",,
+**title*** ,String ,"| Titre de la couche tel qu'affiché dans
+| la table des matières et dans les résultats
+| d'interrogations. 
+
+| Pour les **WMS** et **WMTS** récupérant
+| certaines propriétés du service, cette
+| valeur peut y être récupérée et n'est plus obligatoire à ce moment.",,
+visible ,Boolean ,Visibilité de la couche à l'ouverture du contexte. ,true| false,true
+zIndex ,Number ,"| Ordre dans la table des matières. Plus
+| le nombre est élevé, plus la couche
+| apparait au haut de la table des matières. 
+| Si absent, l'ordre dans le contexte.json fait office d'ordonnancement. ",,
