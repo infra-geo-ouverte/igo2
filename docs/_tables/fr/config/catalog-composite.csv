@@ -1,0 +1,4 @@
+Propriétés,Type,Description
+**id*** ,String ,Identifiant unique permettant de différencier les catalogues entre eux. 
+**title*** ,String ,Titre pour la source du catalogue qui sera utilisé dans l'outil Catalog. 
+composite ,:ref:`Catalog <igocatalogObject>` [] ,Liste des catalogues utilisés dans un catalogue composé. 

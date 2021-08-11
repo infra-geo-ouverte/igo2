@@ -12,7 +12,7 @@
   "menuButtonReverseColor": false,
   "searchSources": {
     "cadastre": {
-      "enabled": true
+      "available": false
     }
   },
   "title": "IGO",

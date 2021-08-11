@@ -1,0 +1,33 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+allowShowAllLegends ,Boolean ,"| Affiche un bouton permettant de montrer toutes les légendes de la carte,
+| même pour les couches non visible OU hors échelle d'affichage. ",true / false ,false
+showAllLegendsValue ,Boolean ,"| Si allowShowAllLegends est permis (true), définit la valeur à l'ouverture de l'application.
+| true = toutes les légendes sont affichées (même ceux non visibles à la carte) ",true / false ,false
+expandLegendOfVisibleLayers ,Boolean ,"À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles. ",true / false ,false
+layerAdditionAllowed ,Boolean ,"| Identifie si l'ajout de couches à la carte sont permises.
+| Influence les messages d'aide à l'usager ",true / false ,true
+ogcButton ,Boolean ,Permet d'afficher le bouton filtre OGC pour les couches le permettant. ,true / false ,true
+queryBadge ,Boolean ,"Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un ""?"" pour les couches interrogeable. ",true / false ,false
+timeButton ,Boolean ,Permet d'afficher le bouton filtre temporel pour les couches le permettant. ,true / false ,true
+selectedTabAtOpening ,String ,"Permet de définir, lors de la première ouverture de l'outil, quel onglet est ouvert. ",'legend' ,L'onglet Carte est ouvert par défaut. 
+toggleLegendOnVisibilityChange ,Boolean ,"| Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité 
+| d'une couche passe de non-visible à visible ",true / false ,false
+updateLegendOnResolutionChange ,Boolean ,Permet de rafraichir la légende à chaque changement de résolution (zoom) ,true / false ,false
+layerListControls ,Objet,"| Divers contrôles effectués à la liste de couches affichées dans l'interface.
+| ""excludeBaseLayers"" = Retire les couches identifiées comme baseLayer.
+| ""showToolbar"" = Outil permettant de contrôler la liste des couche                 
+|                   ""always"", ""never"" ou ""default"" = visible si 5 couches et +
+| ""keyword"" = Mot clef filtrant la liste de couches
+| ""sortAlpha"" = Tri la liste de couches alphabétiquement.
+| ""onlyVisible"" = Ne garde que dans la liste de couches, les couches visible.","| ""layerListControls"": {
+|       ""excludeBaseLayers"": true,
+|       ""showToolbar"": ""always"",
+|       ""keyword"": ""allo"",
+|       ""sortAlpha"": true,
+|       ""onlyVisible"": true
+| }","| ""layerListControls"": {
+|       ""excludeBaseLayers"": false,
+|       ""showToolbar"": ""default"",
+|       ""sortAlpha"": false,
+|       ""onlyVisible"": false
+| }"

@@ -1,0 +1,15 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+enableRotation ,Boolean,"| Définir si, lors de l'utilisation en mobile, on peut tourner
+| la carte et de cette facon ne plus avoir le nord en haut. ",true | false,true
+projection ,String ,Indique la projection de la carte en indiquant le code EPSG. ,,
+center ,Array [] ,"| Coordonnée du positionnement du centre de la carte lors de 
+| l'arrivée dans le contexte. ",,
+zoom ,Number,"| Indique le niveau de zoom de la carte lors de 
+| l'arrivée dans le contexte. ",,
+geolocate ,Boolean,"| Indique si la carte est zommée sur la localisation de l'utilisateur 
+| lors de l'arrivée dans le contexte. ",true | false,true
+maxZoomOnExtent ,Number,"| Indique le niveau de zoom qu'aura l'application lors d'un clic 
+| sur un résultat de recherche qui n'est pas une couche. ",,
+maxLayerZoomExtent ,Array [] ,"| Indique l'étendue maximale considérée comme étant valide pour un cadrage
+| lors du calcul de l'étendue d'une ou plusieurs couches. Les coordonnées
+| minimales et maximales doivent être compatibles avec la projection donnée. ",,

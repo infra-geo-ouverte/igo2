@@ -1,0 +1,6 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**type*** ,String ,,cluster ,cluster 
+**url*** ,String ,L'URL du fichier contenant les entités. ,,
+excludeAttribute ,String[],Liste des attributs exclus du getInfo lorsque l'application est en ligne. ,,
+excludeAttributeOffline ,String[],Liste des attributs exclus du getInfo lorsque l'application est en hors-ligne. ,,
+distance ,Number,Distance en pixel entre les entités afin d’être agrégées en grappe.,,20

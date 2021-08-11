@@ -1,0 +1,24 @@
+Propriétés,Type,Descriptions,Outil lié
+`base`_ ,string ,"| Identification du nom du ficher de base dont
+| les contextes peuvent hériter du contenu. ","| Map
+| MapDetails 
+| MapLegend
+| Maptools"
+**layers*** ,:ref:`layer[] <igolayer>` ,"| Liste des couches d'informations 
+| disponibles pour le contexte sélectionné. ","| Map
+| MapDetails 
+| MapLegend
+| Maptools"
+**map*** ,`map`_ ,"| Définition de la carte lors de l'ouverture
+| initiale du contexte ",
+message ,`Message`_ ,Propriété qui n'est plus favorisée. Il vous est suggéré d'utiliser 'messages' ,
+messages,`Message`_ [] ,Présentation d'une liste des messages à l'ouverture du contexte. ,
+`toolbar`_ ,String[] ,"| Liste des outils disponibles dans
+| l'application. L'ordre dans la
+| liste correspond à l'ordre
+| d'apparition des outils dans IGO2. ",Tous 
+`tools`_ ,Objet[] ,Liste des configurations des outils présentes dans l'application. ,Tous 
+"| **uri***     
+| Voir `uri`_ ",string ,"| Nom ou identifiant du contexte. 
+| Doit être uniqueau sein de la même application. ","| Map
+| ShareMap "

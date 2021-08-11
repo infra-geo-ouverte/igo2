@@ -1,0 +1,4 @@
+Propriétés,Valeur défaut
+searchUrl ,https://geoegl.msp.gouv.qc.ca/apis/terrapi
+settings ,`Ligne 427 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L427>`__ 
+title ,Recherche par coordonnées

@@ -1,0 +1,7 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**linkId** ,String,"| Identifiant de liaison de la présente couche.
+| Diffère du ID du la couche car cet id doit être
+| connu au pilotage, pas seulement lors l'éxécution du code. ",,
+links ,:ref:`LayersLinkProperties[] <LayersLinkProperties>` ,"| Définit la liste des couches ""enfant"" liées
+| ainsi que leurs propriété qui sont synchronisées.
+| Obligatoire pour les couches parents.",,

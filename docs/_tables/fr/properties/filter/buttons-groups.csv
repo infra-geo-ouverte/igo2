@@ -1,0 +1,4 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+ids ,String [],"| Liste des identifiants pour le classement des paquets
+| (""bundles"") de boutons dans les groupes. ",,
+title ,String ,Le titre du groupe qui apparaitra à l'utilisateur. ,,

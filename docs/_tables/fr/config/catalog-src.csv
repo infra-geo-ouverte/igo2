@@ -1,0 +1,2 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut 
+sources ,:ref:`Catalog <igocatalogObject>` [] ,Liste des catalogues qui sera présenté à l'usager. ,,

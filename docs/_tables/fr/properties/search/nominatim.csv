@@ -1,0 +1,4 @@
+Propriétés,Valeur défaut
+searchUrl ,https://nominatim.openstreetmap.org/search 
+settings ,`Ligne 44 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/nominatim.ts#L44>`__ 
+title ,Nominatim (OSM) 

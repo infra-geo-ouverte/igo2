@@ -1,0 +1,4 @@
+Propriétés,Valeur défaut
+searchUrl ,https://geoegl.msp.gouv.qc.ca/apis/icherche 
+settings ,`Ligne 79  <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L79>`_ 
+title ,iCherche 

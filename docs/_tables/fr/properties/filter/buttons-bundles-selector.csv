@@ -1,0 +1,8 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+color ,String ,La couleur du bouton lorsque celui-ci sera activé.,"valeur ""R,G,B"" ","""224, 224, 224"" "
+enabled ,Boolean ,Indique si le bouton est actif ou non. ,true | false ,false
+filters ,"| IgoLogicalArrayOptions 
+| AnyBaseOgcFilterOptions","| Configuration de l'expression filtrante appliquée sur l'activation du bouton. 
+| Voir :ref:`filters <igoOgcFilterFiltersObject>`. ",,
+title ,String ,Indique ce qu'il y aura d'inscrit sur le bouton. ,,
+tooltip ,String ,Indique ce qu'il y aura d'inscrit dans l'info-bulle sur le bouton. ,,

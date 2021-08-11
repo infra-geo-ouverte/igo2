@@ -1,23 +1,13 @@
 .. include:: global.rst
 
 .. meta::
+
    :DC.creator: Gouvernement du Québec
    :DC.language: en
 
 --------------------
 English
 --------------------
-
-
-
-
-
-
-
-
-
-
-
 
 ----------
 
@@ -26,8 +16,6 @@ English
    
    config_json_en
 
-
-
-
 .. note::
+
    This documentation is under construction.

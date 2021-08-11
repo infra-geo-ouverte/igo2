@@ -1,0 +1,35 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+selectFirstProj ,Boolean ,Permet de controler si la première projection rencontrée dans la liste sera sélectionnée. ,true / false ,false
+projectionsLimitations ,Objet,Permet de controler la liste des projections disponible dans l'outil. ,"| {
+| ""projFromConfig"": true, // Utiliser les projections définies dans la configuration
+| ""nad83"": true, // Utiliser le NAD83
+| ""wgs84"": true, // Utiliser le WGS84
+| ""webMercator"": true, // Utiliser le WebMercator (EPSG:3857)
+| ""utm"": true, // Utiliser les projections UTM
+| ""mtm"": true, // Utiliser les projections MTM
+| ""utmZone"": {
+| ""minZone"": 17, // Zone minimale UTM
+| ""maxZone"": 21  // Zone maximale UTM
+| },
+| ""mtmZone"": {
+""| minZone"": 4, // Zone minimale MTM
+| ""maxZone"": 10  // Zone maximale MTM
+| }}","| {
+| ""projFromConfig"": true,
+| ""nad83"": true,
+| ""wgs84"": true,
+| ""webMercator"": true,
+| ""utm"": true,
+| ""mtm"": true,
+| ""utmZone"": {
+| ""minZone"": 1,
+| ""maxZone"": 60
+| },
+| ""mtmZone"": {
+""| minZone"": 1,
+| ""maxZone"": 10
+| }}"
+importExportType ,String ,Définit quel type d'exportation sera ouvert par défaut ,layer ou context ,layer 
+importExportShowBothType ,Boolean ,"| Permet d'afficher ou non les 2 types d'importation ou exportation 
+| (layer ou contexte) Si false, le type définit précédemment, sera
+| le seul type affiché.Se base sur l'option importExportType.",true / false ,true
