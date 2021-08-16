@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
 import { AnalyticsService, StorageScope, StorageService } from '@igo2/core';
 import { SwUpdate } from '@angular/service-worker';
-import { interval } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +23,27 @@ export class PwaService {
       }
     });
   }
+
+  /*
+    constructor(
+    private platform: Platform,
+    private analyticsService: AnalyticsService,
+    private storageService: StorageService,
+    public updates: SwUpdate,
+    public languageService: LanguageService
+  ) {
+
+    updates.available.subscribe(event => {
+      const message = this.languageService.translate.instant('pwa.new-version');
+      const title = this.languageService.translate.instant('pwa.new-version-title');
+
+      if (confirm(`${title} ${message}`)) {
+        updates.activateUpdate().then(() => document.location.reload());
+      }
+    });
+  }
+  
+  */
 
 
   public async initPwaPrompt() {

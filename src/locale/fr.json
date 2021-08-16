@@ -218,5 +218,9 @@
       "legend-tab-description": "Cet onglet permet de visualiser rapidement l'ensemble des légendes. Par défaut, seules les légendes des couches visibles à l'échelle active sont présentées.",
       "legend-tab-all": "Permet de visualiser aussi l'ensemble des légendes des couches non visibles à l'échelle active."
     }
+  },
+  "pwa": {
+    "new-version-title": "Une nouvelle version de l'application est disponible",
+    "new-version": "Voulez vous recharger l'application?"
   }
 }

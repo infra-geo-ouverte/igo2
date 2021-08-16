@@ -219,5 +219,9 @@
     "legend-tab": "Let's toggle legend tab.",
     "legend-tab-description": "This tab can be used to display all layer's legend. By default, only visible layers at active scale will have their legend displayed.",
     "legend-tab-all": "Allow to also display non visible layer's legend at active scale."
+  },
+  "pwa": {
+    "new-version-title": "New version available",
+    "new-version": "Do you want to reload the app?"
   }
 }
