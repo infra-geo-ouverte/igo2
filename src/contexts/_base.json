@@ -172,9 +172,13 @@
     "importExport",
     "print",
     "shareMap",
-    "about"
+    "about",
+    "advancedMap"
   ],
-  "tools": [
+  "tools": [    
+    {
+      "name": "advancedMap"
+    },
     {
       "name": "searchResults"
     },
