@@ -1,3 +1,17 @@
+## [1.8.2](https://github.com/infra-geo-ouverte/igo2/compare/1.8.1...1.8.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* **bluedq-theme:** add missing app-theming ([7b32156](https://github.com/infra-geo-ouverte/igo2/commit/7b32156af2ef684295890d7dd59dca041178cec9))
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.8.2 ([d8cc7af](https://github.com/infra-geo-ouverte/igo2/commit/d8cc7af9860da68f333da68e0ceedf7997a984d1))
+
+
+
 ## [1.8.1](https://github.com/infra-geo-ouverte/igo2/compare/1.8.0...1.8.1) (2021-07-08)
 
 
