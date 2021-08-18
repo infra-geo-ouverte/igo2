@@ -10,8 +10,10 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
 import { debounceTime, take, pairwise, skipWhile } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
+import MapBrowserEvent from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
+import olFeature from 'ol/Feature';
+import type { default as OlGeometry } from 'ol/geom/Geometry';
 
 import {
   MediaService,
@@ -486,9 +488,10 @@ export class PortalComponent implements OnInit, OnDestroy {
           res.ol.getProperties()._featureStore.layer &&
           res.ol.getProperties()._featureStore.layer.visible
         ) {
+          const ol = res.ol as olFeature<OlGeometry>;
           const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
           const feature = featureFromOl(
-            res.ol,
+            ol,
             featureStoreLayer.map.projection,
             featureStoreLayer.ol
           );
@@ -558,7 +561,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.toastPanelForExpansionOpened = true;
   }
 
-  onMapQuery(event: { features: Feature[]; event: OlMapBrowserPointerEvent }) {
+  onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
 
@@ -734,7 +737,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onContextMenuOpen(event: { x: number; y: number }) {
-    this.contextMenuCoord = this.getClickCoordinate(event);
+    this.contextMenuCoord = this.getClickCoordinate(event) as [number, number];
   }
 
   private getClickCoordinate(event: { x: number; y: number }) {

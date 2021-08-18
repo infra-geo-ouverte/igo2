@@ -64,7 +64,10 @@
               "path",
               "pixelworks",
               "brace-expansion",
-              "rbush"
+              "rbush",
+              "@babel/runtime-corejs3",
+              "core-js-pure",
+              "raf"
             ]
           },
           "configurations": {
