@@ -1,0 +1,5 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+attributions ,String ,Les droits d'auteurs liés à la couche. ,,
+crossOrigin ,String ,"| Permet de définir l'entête de l'appel faite au serveur.
+| Permet entre autres, d'éviter les problématiques de CORS.
+| De manière plus commune, définir ""crossOrigin"": ""anonymous"". ",anonymous | use-credentials | null ,

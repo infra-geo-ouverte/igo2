@@ -1,0 +1,25 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**name*** ,String,Le nom de l'outil ,"| - :ref:`about <igoabout>`
+| - :ref:`catalog <igocatalogtool>`
+| - :ref:`catalogBrowser <igocatalogBrowser>`
+| - :ref:`contextManager <igocontextManager>`
+| - :ref:`directions <igodirections>`
+| - :ref:`activeOgcFilter <igoactiveogcFilter>`
+| - :ref:`ogcFilter <igoogcFilter>`
+| - :ref:`activeTimeFilter <igoactivetimeFilter>`
+| - :ref:`timeFilter <igotimeFilter>`
+| - :ref:`spatialFilter <igospatialFilter>`
+| - :ref:`importExport <igoimportExport>`
+| - :ref:`mapTool <igomaptool>`
+| - :ref:`mapLegend <igomapLegend>`
+| - :ref:`mapDetails <igomapDetails>`
+| - :ref:`mapTools <igomaptools>`
+| - :ref:`measurer <igomeasurer>`
+| - :ref:`print <igoprint>`
+| - :ref:`searchResults <igosearchResults>`
+| - :ref:`spatialFilter <igospatialFilter>`
+| - :ref:`shareMap <igoshareMap>` ",
+title ,String,"| Le titre affiché dans l'application. Sujet aux traductions.
+| Si vous modifiez le titre par défaut, vous devez ajouter
+| ce titre dans les langues supportées par IGO2 (fr-en).
+|     - fichiers dans `Language`_ ",,Référer vous à l'outil désiré. 

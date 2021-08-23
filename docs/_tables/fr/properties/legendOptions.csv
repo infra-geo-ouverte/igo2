@@ -1,0 +1,12 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+collapsed ,Boolean,Définir si la légende est ouverte. ,true | false ,
+display ,Boolean,Indique si on affiche la légende. ,true | false ,true
+html ,String,Inscription html pour la légende. ,,
+stylesAvailable ,ItemStyleOptions[] ,"| Permet de modifier/contrôler la liste des styles provenant du
+| service web. Correspond aux styles disponible pour le layer
+| WMS tel que décrit dans le GetCapabilities WMS.","| Ex:  ""stylesAvailable"": [  
+| { ""name"": ""raster"", ""title"": ""pixel"" },
+| { ""name"": ""Contour"", ""title"": ""aucune couleur"" }
+| ] ",
+url ,String,"| URL imposé pour l'appel de la légende.
+| Exemple: ""/ws/mffpecofor.fcgi?&REQUEST=GetLegendGraphic&SERVICE=WMS&FORMAT=image/png&SLD_VERSION=1.1.0&VERSION=1.3.0&LAYER=lidar_index_extraction"" ",,

@@ -1,0 +1,7 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+icon ,String ,Icône dans la barre d'outil ,`MDI <https://materialdesignicons.com/>`__ ,directions 
+**name*** ,String ,,directions ,
+title ,String ,"| Le titre affiché dans l'application. Sujet aux traduction.
+| Si vous modifiez le titre par défaut, vous devez ajouter
+| ce titre dans les langues supportées par IGO2 (fr-en).
+|       - fichiers dans :ref:`Language <igolanguage>`. ",,igo.integration.tools.directions 

@@ -1,0 +1,26 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+expandLegendOfVisibleLayers ,Boolean ,"À l'ouverture de l'outil, sous l'onglet Carte, déroule (affiche) les légendes des couches visibles. ",true / false ,false
+ogcButton ,Boolean ,Permet d'afficher le bouton filtre OGC pour les couches le permettant. ,true / false ,true
+queryBadge ,Boolean ,"Sous l'onglet Carte, affiche en superposition à l'oeil de visiblité, un ""?"" pour les couches interrogeable. ",true / false ,false
+timeButton ,Boolean ,Permet d'afficher le bouton filtre temporel pour les couches le permettant. ,true / false ,true
+toggleLegendOnVisibilityChange ,Boolean ,"| Sous l'onglet Carte, déroule (affiche) les légendes lorsque le statut de visibilité 
+| d'une couche passe de non-visible à visible ",true / false ,false
+updateLegendOnResolutionChange ,Boolean ,Permet de rafraichir la légende à chaque changement de résolution (zoom) ,true / false ,false
+layerListControls ,Objet,"| Divers contrôles effectués à la liste de couches affichées dans l'interface.
+| ""excludeBaseLayers"" = Retire les couches identifiées comme baseLayer.
+| ""showToolbar"" = Outil permettant de contrôler la liste des couche                 
+|                   ""always"", ""never"" ou ""default"" = visible si 5 couches et +
+| ""keyword"" = Mot clef filtrant la liste de couches
+| ""sortAlpha"" = Tri la liste de couches alphabétiquement.
+| ""onlyVisible"" = Ne garde que dans la liste de couches, les couches visible.","| ""layerListControls"": {
+|       ""excludeBaseLayers"": true,
+|       ""showToolbar"": ""always"",
+|       ""keyword"": ""allo"",
+|       ""sortAlpha"": true,
+|       ""onlyVisible"": true
+| }","| ""layerListControls"": {
+|       ""excludeBaseLayers"": false,
+|       ""showToolbar"": ""default"",
+|       ""sortAlpha"": false,
+|       ""onlyVisible"": false
+| }"

@@ -1,0 +1,13 @@
+Propriétés,Type,Description
+alias ,String,"| Nom d'affichage que vous voulez donner \à la
+| projection ajoutée. "
+**code*** ,String,"| Code de la projection/ système de coordonnées
+| à ajouter à l'application. "
+**def*** ,String,"| Paramètres associés à la définition de votre
+| projection / système de coordonnées. 
+| voir epsg.io"
+**extent*** ,Liste de  nombre ,"| Liste de nombre définissant
+| les limites d'application
+| de la projection. L'ordre à
+| respecter est:
+| [Xmin,YMin,XMax,YMax]."

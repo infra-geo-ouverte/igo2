@@ -8,6 +8,10 @@
     "title": "Simple 2"
   },
   {
+    "uri": "messages",
+    "title": "Messages"
+  },
+  {
     "uri": "timeFilter",
     "title": "Filtre temporel (Time filter)"
   },

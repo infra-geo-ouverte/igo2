@@ -1,0 +1,18 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+bidirectionnal ,Boolean ,"| Indique si les 2 couches sont liées de manière
+| bi-directionnelles. C'est à dire, si une modification
+| de l'enfant est transférée au parent et inversement.",true | false,true
+**linkedIds** ,String[] ,"| Liste des identifiants de liaison.
+| C'est à dire, une liste des linkId des couches enfant. 
+",,
+syncedDelete ,Boolean ,"| Indique si les 2 couches doivent être supprimées
+| simultanément lorsque une ou l'autre des couches
+| est supprimée de la liste des couches. ",true | false,false
+**properties** ,String[] ,"| Indique les propriétés à maintenir entre les 2 couches liées.
+|       - opacity
+|       - visible
+|       - :ref:`ogcFilters <igoOgcFilterObject>`
+|       - minResolution
+|       - maxResolution
+|       - zIndex
+|       - timeFilter => `Configuration filtre temporel WMS-T (timeFilter)`_",,

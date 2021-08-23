@@ -1,0 +1,5 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+addCatalogAllowed ,Boolean ,"| Définit  si le formulaire d'ajout de catalogue est disponible ou non. 
+| Les catalogues ajoutés sont enregistrés dans la mémoire du fureteur. ",true | false,false 
+predefinedCatalogs ,:ref:`Catalog[] <igocatalogObject>`. ,"| Liste prédéfinie de catalogues permettant de pré-remplir un 
+| menu de sélection, afin d'ajouter des catalogues.",,

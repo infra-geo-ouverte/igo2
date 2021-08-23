@@ -1,0 +1,8 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+toolToOpenOnContextChange ,String,Nom de l'outil a ouvrir suite au changement de contexte ,Voir le nom des divers outils de cette section ,"Dans l'ordre 
+| `mapTools`_', 
+| `mapTool`_, 
+| `mapDetails`_ 
+| `mapLegend`_  
+| si ces outils sont 
+| disponibles."

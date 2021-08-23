@@ -1,0 +1,4 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+html ,String ou String[] ,Configure le html qui sera présenté dans l'outil.,"| ""<p>Contenu html</p>""
+| ou sous forme de liste (pour les changement de lignes)
+| [""<p>Contenu html de la première ligne</p>"",""<p>Contenu de la seconde ligne</p>""]",igo.integration.about.html 

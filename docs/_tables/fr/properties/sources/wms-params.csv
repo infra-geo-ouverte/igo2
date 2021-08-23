@@ -1,0 +1,38 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**layers*** ,String ,"| Correspond au nom de la couche demandée.
+| Vous pouvez appeler plusieurs couches,
+| en séparant chacune de celles-ci par une virgule.
+| 
+| IMP:      
+| - Pour les couches multiples, vous 
+|   ne pourrez récupérer les propriétés
+|   fournies par les GetCapabilities.
+|   Vous devez donc fournir les propriétés 
+|   title, max/min Resolution (au besoin). 
+| 
+| - Si vous voulez appliquer des filters
+|   OGC à des couches multiples, elles
+|   doivent partager le même schéma de
+|   données (même champs). ","| Exemple:
+| Layers=nomDeLaCouche1
+| layers=nomDeLaCouche1,nomDeLaCouche2 ",
+version ,String ,Version  de l'appel WMS ,"| 1.1.0 
+| 1.1.1
+| 1.3.0 ",1.3.0 
+feature_count ,Number,"| Nombre de résultats retournés par le serveur
+| lors des appels GetFeatureInfo (clic sur carte)",,5
+info_format ,String ,"| Nom spécifique du format d'appel du GetFeatureInfo.
+| Nécessaire si vos format d'appels diffèrent des
+| noms standards gérés par IGO (décrits précédemment). ",,
+dpi ,Number,"| Nombre de points par pouce du résultat
+| de l'appel du GetMap. Particulièrement
+| utile dans IGO pour effectuer la conversion
+| entre la résolution et le nombre échelle. ",,96
+map_resolution ,Number,"| Nombre de points par pouce du résultat
+| de l'appel du GetMap. Particulièrement
+| utile dans IGO pour effectuer la conversion
+| entre la résolution et le nombre échelle. ",,96
+format_options ,String ,"| Nombre de points par pouce du résultat
+| de l'appel du GetMap. Particulièrement
+| utile dans IGO pour effectuer la conversion
+| entre la résolution et le nombre échelle. ",,dpi:96 

@@ -1,0 +1,3 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+enabled ,Boolean ,Permet d'activer/ désactiver la source. ,true | false ,true 
+url ,String ,Url du serveur retournant l'itinéraire. ,,`https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/ <https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/>`_ 

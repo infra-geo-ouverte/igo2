@@ -1,0 +1,3 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+url,String,Définit l'url d'appel du service de contexte ,,
+**defaultContextUri*** ,String ,Nom ou identifiant du contexte cartographique par défaut. ,,_default 

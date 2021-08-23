@@ -1,0 +1,10 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+expression ,String ,Valeur,,
+operator ,String ,"| Opérateurs à appliquer. 
+| ** Certains opérateurs sont disponibles uniquement sur certain type de filtre.
+| Par exemple, l'opérateur during est disponible uniquement sur le filtre de type time ","| PropertyIsEqualTo, PropertyIsNotEqualTo,
+| PropertyIsGreaterThan, PropertyIsGreaterThanOrEqualTo,
+| PropertyIsLessThan, PropertyIsLessThanOrEqualTo,
+| Intersects, Within
+| :ref:`During <igoogcfilterduringoptions>`",
+propertyName ,String ,Nom de la propriété sur laquelle appliquer le filtre (nom de la colonne) ,,

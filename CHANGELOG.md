@@ -1,16 +1,44 @@
-## [1.7.2](https://github.com/infra-geo-ouverte/igo2/compare/1.7.1...1.7.2) (2021-05-17)
+## [1.8.2](https://github.com/infra-geo-ouverte/igo2/compare/1.8.1...1.8.2) (2021-08-12)
 
 
 ### Bug Fixes
 
-* **mobile scroll:** fix mobile scroll problem (toolbar and search settings) ([#623](https://github.com/infra-geo-ouverte/igo2/issues/623)) ([bbc7938](https://github.com/infra-geo-ouverte/igo2/commit/bbc7938283a93e867aca38a62cb4e4c7446483ad))
-* **ogc-filter docs:** fix seletorType attribute ([#614](https://github.com/infra-geo-ouverte/igo2/issues/614)) ([26c8021](https://github.com/infra-geo-ouverte/igo2/commit/26c80215a0dadab99d9ea7942c9a896f75c59320))
-* **welcomewindow:** trigger the welcome window if no auth url defined ([#613](https://github.com/infra-geo-ouverte/igo2/issues/613)) ([ea9a1ee](https://github.com/infra-geo-ouverte/igo2/commit/ea9a1ee809193505bb1f66b95d0494cc4ee50960))
+* **bluedq-theme:** add missing app-theming ([7b32156](https://github.com/infra-geo-ouverte/igo2/commit/7b32156af2ef684295890d7dd59dca041178cec9))
 
 
 ### Features
 
-* **igo2-lib:** upgrade to 1.7.2 ([8537078](https://github.com/infra-geo-ouverte/igo2/commit/85370782c90e5122b11235196d0b8acd0734be50))
+* **igo2-lib:** upgrade to 1.8.2 ([d8cc7af](https://github.com/infra-geo-ouverte/igo2/commit/d8cc7af9860da68f333da68e0ceedf7997a984d1))
+
+
+
+## [1.8.1](https://github.com/infra-geo-ouverte/igo2/compare/1.8.0...1.8.1) (2021-07-08)
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.8.1 ([0ee3ce5](https://github.com/infra-geo-ouverte/igo2/commit/0ee3ce5df34424cd33e0c88653ef8e7f76eed313))
+
+
+
+# [1.8.0](https://github.com/infra-geo-ouverte/igo2/compare/1.7.1...1.8.0) (2021-07-07)
+
+
+### Bug Fixes
+
+* **cadastre:** delete cadastre search source ([#626](https://github.com/infra-geo-ouverte/igo2/issues/626)) ([88fedc0](https://github.com/infra-geo-ouverte/igo2/commit/88fedc0a84f2e041751774df24a7b236d7531533))
+* **doc:** missing examplle for overlaystyle ([#640](https://github.com/infra-geo-ouverte/igo2/issues/640)) ([b686ce0](https://github.com/infra-geo-ouverte/igo2/commit/b686ce0ab6b7744eb2281ebb78b9905cb0b9b2bb))
+* **mobile scroll:** fix mobile scroll problem (toolbar and search settings) ([#623](https://github.com/infra-geo-ouverte/igo2/issues/623)) ([8e181c0](https://github.com/infra-geo-ouverte/igo2/commit/8e181c0c85ef89c9197c3eb736bff1b80bad3b98))
+* **ogc-filter docs:** fix seletorType attribute ([#614](https://github.com/infra-geo-ouverte/igo2/issues/614)) ([5ba34f2](https://github.com/infra-geo-ouverte/igo2/commit/5ba34f21c4b2b5d102bb52f215869e6006143c25))
+* **welcomewindow:** trigger the welcome window if no auth url defined ([#613](https://github.com/infra-geo-ouverte/igo2/issues/613)) ([c2370b0](https://github.com/infra-geo-ouverte/igo2/commit/c2370b0b500b48cb6a94bcde0eb85e5a5e7f9379))
+
+
+### Features
+
+* **igo2-lib:** upgrade to 1.7.2 ([a89fd5c](https://github.com/infra-geo-ouverte/igo2/commit/a89fd5c7253fa5437d57f6ab75ae8bc9444a0980))
+* **igo2-lib:** upgrade to 1.8.0 ([c9c0c26](https://github.com/infra-geo-ouverte/igo2/commit/c9c0c2665004efab3faf859ee931440df1cac219))
+* **msal:** upgrade msal libs ([4202d09](https://github.com/infra-geo-ouverte/igo2/commit/4202d09d426e5677cb9dc8009664512315933106))
+* **theme:** create a new theme bluedq ([#652](https://github.com/infra-geo-ouverte/igo2/issues/652)) ([d3558fb](https://github.com/infra-geo-ouverte/igo2/commit/d3558fbf247c0dd24a19e91e1d2b1eefa066e77a))
 
 
 

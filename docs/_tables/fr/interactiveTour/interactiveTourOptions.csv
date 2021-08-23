@@ -1,0 +1,9 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+disableInteraction ,Boolean ,Permet ou non à l'utilisateur de cliquer sur les éléments en surbrillance ,true | false ,true 
+highlightClass ,Boolean ,Définit la classe à appliquer aux éléments en surbrillance ,,
+position ,String ,Définit la position des boites aide ,"'auto', 'right', 'left', 'bottom', 'top'.","| NB.: Si la propriété position n'est pas présente, 
+| les boites seront disposées au centre de l'écran."
+scrollToElement ,Boolean ,Indique si on défile la page sur l'élément en surbrillance ,true | false ,
+steps ,:ref:`InteractiveTourStep <igoInteractiveTourStep>` , Une liste de step (étapes du tour inteactif),,
+conditions ,String ,Les éléments HTML qui doivent être présents pour activer le bouton du tour ,,
+title ,String ,Le titre de toutes les boites aide ,,

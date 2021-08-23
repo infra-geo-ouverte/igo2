@@ -1,0 +1,6 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+nbVisitToShow ,Number ,"| Nombre de fois que sera présenté la fenêtre d'accueil. S'appliquera aussi après
+| être revenu par exemple lors d'une nouvelle version IGO. ",,
+nbVisitToShowAgain ,Number ,La fenêtre d'accueil reviendra après le nombre de visite indiqué par ce paramètre. ,,
+showAgainOnNewIGOVersion ,Boolean ,"| Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra
+| si la version IGO est différente de la version lors de sa visite précédente. ",,true 
