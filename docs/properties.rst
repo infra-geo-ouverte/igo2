@@ -1072,6 +1072,22 @@ Exemple - Filtre temporel avec minimum, maximum et pas de temps.
                   "stepDate": "P1D"
             }
 
+Exemple - filtre temporel en mode année
+
+        .. code:: json
+
+            {
+                  "filters" :{
+                        "operator": "During",
+                        "propertyName": "annee_date",
+                        "begin": "1890-01-01T00:00:00-05:00",
+                        "end": "2021-12-31T00:00:00-05:00",
+                        "restrictedToStep": false,
+                        "calendarModeYear": true
+                    } 
+                  "stepDate": "P1Y"
+            }
+
 Exemple - filtre avec boutons spécifique à un groupe et calendrier (filtrage temporel)
 
       .. code:: json
