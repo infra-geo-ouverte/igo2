@@ -1249,7 +1249,7 @@ Propriétés de l'objet filter de type **During**
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
-    :file: _tables/fr/properties/filter/igoOgcFilterDuring.csv
+    :file: _tables/fr/properties/filter/igoogcfilterduringoptions.csv
     :header-rows: 1
     :widths: 10 10 30 15 10
 
