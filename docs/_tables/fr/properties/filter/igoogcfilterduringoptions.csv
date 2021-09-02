@@ -6,7 +6,7 @@ restrictedToStep ,Boolean,"| True si le filtre doit respecter le pas de temps de
 | l'attribut **minDate**. 
 | 
 | Sinon le pas de temps est respecté selon l'attribut **begin**",True | False ,False 
-calendarModeYearBoolean,,"Lorsque true, l’interface présentera uniquement des 
+calendarModeYearBoolean,,"| Lorsque true, l’interface présentera uniquement des 
 | années et ajustera les requête aux service pour 
 | que l’année de début et de fin soit incluse dans 
 | le retour.",True | False ,False 
