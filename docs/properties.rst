@@ -1244,7 +1244,7 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 .. _igoogcfilterduringoptions:
 
 
-    Propriétés de l'objet filter de type **During**
+Propriétés de l'objet filter de type **During**
 
         .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
         .. csv-table::
