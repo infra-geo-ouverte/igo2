@@ -1243,16 +1243,16 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 
 .. _igoogcfilterduringoptions:
 
-Propriétés de l'objet filter de type **During**
 
-    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
-    .. csv-table::
-       :file: _tables/fr/properties/filter/igoogcfilterduringoptions.csv
-       :header-rows: 1
-       :widths: 10 10 30 15 10
+    Propriétés de l'objet filter de type **During**
 
-    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+        .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+        .. csv-table::
+        :file: _tables/fr/properties/filter/igoOgcFilterDuring.csv
+        :header-rows: 1
+        :widths: 10 10 30 15 10
+
+        Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 
 .. _igosourceFieldsObject:
