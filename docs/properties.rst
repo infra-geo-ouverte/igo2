@@ -736,12 +736,11 @@ Liens
     - `OGC WMS <https://www.opengeospatial.org/standards/wms>`__
 
 
-
-
 WMS avec WFS combinés
 ======================
 
 .. line-block::
+    
     Il est possible de combiner un wms et à partir d'une certaine échelle d'apeller la couche en WFS si le service web offre les 2 options.
 
     ** Attention le champ ID du service doit être bien définie car ce sera ce champ qui servira a reconnaitre chaque entitée WFS, par exemple dans 
