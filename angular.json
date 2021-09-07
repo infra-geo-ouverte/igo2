@@ -44,10 +44,14 @@
             "styles": ["src/styles.scss"],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/style/partial"]
+              "includePaths": [
+                "src/style/partial",
+                "src/app/pages/portal",
+                "node_modules"
+              ]
             },
             "allowedCommonJsDependencies": [
-              "angular2-notifications",
+              "@igo2/angular2-notifications",
               "hammerjs",
               "typy",
               "jspdf",
@@ -148,6 +152,13 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": ["src/styles.scss"],
             "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/style/partial",
+                "src/app/pages/portal",
+                "node_modules"
+              ]
+            },
             "assets": ["src/favicon.ico", "src/assets"]
           }
         },
