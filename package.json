@@ -8,7 +8,7 @@
   "license": "LiLiQ-R",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --port 4201 --proxy-config proxy.conf.json",
+    "start": "gulp concatStyles && ng serve --host 0.0.0.0 --port 4201 --proxy-config proxy.conf.json",
     "build": "ng build",
     "lint": "ng lint",
     "e2e": "ng e2e --port 4300",
@@ -51,6 +51,7 @@
     "@angular/router": "^12.1.3",
     "@azure/msal-angular": "^2.0.1",
     "@azure/msal-browser": "^2.15.0",
+    "@igo2/angular2-notifications": "^12.0.1",
     "@igo2/auth": "~1.8.1",
     "@igo2/common": "~1.8.1",
     "@igo2/context": "~1.8.1",

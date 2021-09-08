@@ -5,16 +5,18 @@ const babel = require('gulp-babel');
 const replace = require('gulp-replace');
 const concat = require('gulp-concat');
 
-gulp.task('core:concatStyles', done => {
+gulp.task('concatStyles', done => {
   gulp
     .src([
+      './node_modules/@igo2/core/style/index.theming.scss',
+      './src/style/reset.scss',
       './src/app/app.theming.scss',
       './src/app/pages/portal/portal.theming.scss',
       './src/app/pages/portal/sidenav/sidenav.theming.scss',
       './src/app/pages/portal/welcome-window/welcome-window.theming.scss'
     ])
-    .pipe(concat('app.theming.scss'))
-    .pipe(gulp.dest('./src/app', { overwrite: true }));
+    .pipe(concat('theme.scss'))
+    .pipe(gulp.dest('./src/style', { overwrite: true }));
 
   done();
 });
