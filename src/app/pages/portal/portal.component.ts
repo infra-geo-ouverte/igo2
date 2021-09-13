@@ -123,6 +123,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   };
   public workspaceMenuClass = 'workspace-menu';
 
+  public menuButtonClass;
+
   public fullExtent = this.storageService.get('fullExtent') as boolean;
   private workspaceMaximize$$: Subscription[] = [];
   readonly workspaceMaximize$: BehaviorSubject<boolean> = new BehaviorSubject(
@@ -436,6 +438,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           this.openSidenav();
           this.toolState.openSidenav$.next(false);
         }
+        this.menuButtonClass = this.getClassMenuButton();
       }
     );
   }
