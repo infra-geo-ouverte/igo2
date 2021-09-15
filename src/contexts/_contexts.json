@@ -28,6 +28,10 @@
     "title": "Workspace (vue tabulaire)"
   },
   {
+    "uri": "edition",
+    "title": "Édition"
+  },
+  {
     "uri": "mapOverlay",
     "title": "Superposition de carte (Map overlay)"
   },
