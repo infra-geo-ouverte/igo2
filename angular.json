@@ -71,7 +71,14 @@
               "rbush",
               "@babel/runtime-corejs3",
               "core-js-pure",
-              "raf"
+              "raf",
+              "txml",
+              "lru-cache",
+              "lerc",
+              "pako/lib/inflate",
+              "through2",
+              "yallist",
+              "debug"
             ]
           },
           "configurations": {
