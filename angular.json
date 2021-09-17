@@ -78,7 +78,8 @@
               "pako/lib/inflate",
               "through2",
               "yallist",
-              "debug"
+              "debug",
+              "striptags"
             ]
           },
           "configurations": {
