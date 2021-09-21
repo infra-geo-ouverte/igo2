@@ -1,50 +1,8 @@
+@use '~@igo2/core/style/index.theming.scss';
 @import '~@igo2/core/style/all.theming';
+@import './src/style/reset.scss';
+@import '../app//app.theming.scss';
+@import '../app//pages/portal/portal.theming.scss';
+@import '../app//pages/portal/sidenav/sidenav.theming.scss';
+@import '../app/pages/portal/welcome-window/welcome-window.theming.scss';
 @import '../app/app.theming';
-
-.blue-theme {
-  @import '~@igo2/core/style/themes/blue.theme';
-  @include igo-all-theming($theme);
-  @include app-theming($theme);
-}
-
-.indigo-theme {
-  @import '~@igo2/core/style/themes/indigo.theme';
-  @include igo-all-theming($theme);
-  @include app-theming($theme);
-}
-
-.deeppurple-theme {
-  @import '~@igo2/core/style/themes/deeppurple.theme';
-  @include igo-all-theming($theme);
-  @include app-theming($theme);
-}
-
-.orange-theme {
-  @import '~@igo2/core/style/themes/orange.theme';
-  @include igo-all-theming($theme);
-  @include app-theming($theme);
-}
-
-.bluegrey-theme {
-  @import '~@igo2/core/style/themes/bluegrey.theme';
-  @include igo-all-theming($theme);
-  @include app-theming($theme);
-}
-
-.dark-theme {
-  @import '~@igo2/core/style/themes/dark.theme';
-  @include igo-all-theming($theme);
-  @include app-theming($theme);
-}
-
-.teal-theme {
-  @import '~@igo2/core/style/themes/teal.theme';
-  @include igo-all-theming($theme);
-  @include app-theming($theme);
-}
-
-.bluedq-theme {
-  @import '~@igo2/core/style/themes/bluedq.theme';
-  @include igo-all-theming($theme);
-  @include app-theming($theme);
-}

@@ -4,11 +4,11 @@
   $foreground: map-get($theme, foreground);
 
   app-sidenav #homeButton {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
 
     &:hover {
-      background-color: mat-color($accent, lighter);
-      color: mat-color($foreground, text);
+      background-color: mat.get-color-from-palette($accent, lighter);
+      color: mat.get-color-from-palette($foreground, text);
     }
   }
 }
