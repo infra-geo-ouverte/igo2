@@ -1,3 +1,18 @@
+# [1.9.0](https://github.com/infra-geo-ouverte/igo2/compare/1.8.2...1.9.0) (2021-09-22)
+
+
+### Bug Fixes
+
+* **portal:** behavior between html getinfo and animation offset x ([7c5d767](https://github.com/infra-geo-ouverte/igo2/commit/7c5d7673eabff90832e3be75f645aa65e54b3a88))
+
+
+### Features
+
+* **igo:** upgrade to igo2 1.9.0 ([baa253b](https://github.com/infra-geo-ouverte/igo2/commit/baa253b73eda6c7bec8f3bda5b2121b4dca6caf0))
+* **map:** Advanced tools ([#658](https://github.com/infra-geo-ouverte/igo2/issues/658)) ([d13c673](https://github.com/infra-geo-ouverte/igo2/commit/d13c673d99df21eea3f824fd33fdd0228086f6da))
+
+
+
 ## [1.8.2](https://github.com/infra-geo-ouverte/igo2/compare/1.8.1...1.8.2) (2021-08-12)
 
 
