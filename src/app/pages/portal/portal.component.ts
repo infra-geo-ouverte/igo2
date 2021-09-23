@@ -159,7 +159,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     undefined
   );
   private routeParams: Params;
-  private menuButtonReverseColor = false;
+  public menuButtonReverseColor = false;
+  public menuButtonStyle = {'color': 'primary', 'background-color': 'white'};
   public toastPanelHtmlDisplay = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
@@ -450,6 +451,9 @@ export class PortalComponent implements OnInit, OnDestroy {
           this.toolState.openSidenav$.next(false);
         }
         this.menuButtonClass = this.getClassMenuButton();
+        if (this.menuButtonReverseColor) {
+          this.menuButtonStyle = {'color': 'white', 'background-color': 'primary'};
+        }
       }
     );
 
@@ -482,7 +486,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     } else {
       return {
         'menu-button': this.menuButtonReverseColor === false,
-        'menu-button-reverse-color-close ': this.menuButtonReverseColor === true
+        'menu-button-reverse-color-close': this.menuButtonReverseColor === true
       };
     }
   }

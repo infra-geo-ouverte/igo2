@@ -10,7 +10,7 @@
       mat-icon-button
       id= "menu-button"
       [ngClass]="menuButtonClass"
-      color="primary"
+      [ngStyle]="menuButtonStyle"
       tooltip-position="below"
       matTooltipShowDelay="500"
       [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
