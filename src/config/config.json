@@ -4,6 +4,11 @@
       "enabled": true
     }
   },
+  "directionsSources": {
+    "osrm": {
+      "url": "/services/itineraire/route/v1/driving/"
+    }
+  },
   "theme": "blue-theme",
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,

@@ -44,10 +44,14 @@
             "styles": ["src/styles.scss"],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/style/partial"]
+              "includePaths": [
+                "src/style/partial",
+                "src/app/pages/portal",
+                "node_modules"
+              ]
             },
             "allowedCommonJsDependencies": [
-              "angular2-notifications",
+              "@igo2/angular2-notifications",
               "hammerjs",
               "typy",
               "jspdf",
@@ -64,7 +68,18 @@
               "path",
               "pixelworks",
               "brace-expansion",
-              "rbush"
+              "rbush",
+              "@babel/runtime-corejs3",
+              "core-js-pure",
+              "raf",
+              "txml",
+              "lru-cache",
+              "lerc",
+              "pako/lib/inflate",
+              "through2",
+              "yallist",
+              "debug",
+              "striptags"
             ]
           },
           "configurations": {
@@ -72,7 +87,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "8kb"
+                  "maximumWarning": "12kb"
                 }
               ],
               "fileReplacements": [
@@ -95,7 +110,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "8kb"
+                  "maximumWarning": "12kb"
                 }
               ],
               "fileReplacements": [
@@ -145,6 +160,13 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": ["src/styles.scss"],
             "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/style/partial",
+                "src/app/pages/portal",
+                "node_modules"
+              ]
+            },
             "assets": ["src/favicon.ico", "src/assets"]
           }
         },

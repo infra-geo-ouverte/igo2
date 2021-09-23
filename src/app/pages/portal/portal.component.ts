@@ -7,11 +7,13 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject } from 'rxjs';
+import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, take, pairwise, skipWhile } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
+import MapBrowserEvent from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
+import olFeature from 'ol/Feature';
+import type { default as OlGeometry } from 'ol/geom/Geometry';
 
 import {
   MediaService,
@@ -105,6 +107,8 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
+  public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(undefined);
+  public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasGeolocateButton = true;
@@ -121,12 +125,14 @@ export class PortalComponent implements OnInit, OnDestroy {
   };
   public workspaceMenuClass = 'workspace-menu';
 
+  public menuButtonClass;
+
   public fullExtent = this.storageService.get('fullExtent') as boolean;
   private workspaceMaximize$$: Subscription[] = [];
   readonly workspaceMaximize$: BehaviorSubject<boolean> = new BehaviorSubject(
     this.storageService.get('workspaceMaximize') as boolean
   );
-  public sidenavOpened = false;
+
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
@@ -142,6 +148,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private context$$: Subscription;
   private openSidenav$$: Subscription;
+  private sidenavMediaAndOrientation$$: Subscription;
 
   public igoSearchPointerSummaryEnabled: boolean;
 
@@ -162,6 +169,14 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get map(): IgoMap {
     return this.mapState.map;
+  }
+
+  get sidenavOpened(): boolean {
+    return this.sidenavOpened$.value;
+  }
+
+  set sidenavOpened(value: boolean) {
+    this.sidenavOpened$.next(value);
   }
 
   get auth(): AuthOptions {
@@ -434,8 +449,28 @@ export class PortalComponent implements OnInit, OnDestroy {
           this.openSidenav();
           this.toolState.openSidenav$.next(false);
         }
+        this.menuButtonClass = this.getClassMenuButton();
       }
     );
+
+    this.sidenavMediaAndOrientation$$ =
+      combineLatest([
+        this.sidenavOpened$,
+        this.mediaService.media$,
+        this.mediaService.orientation$]
+      ).pipe(
+        debounceTime(50)
+      ).subscribe((sidenavMediaAndOrientation: [boolean, string, string]) => {
+        this.computeToastPanelOffsetX();
+      });
+  }
+
+  computeToastPanelOffsetX() {
+    if (this.isMobile() || !this.isLandscape()) {
+      this.toastPanelOffsetX$.next(undefined);
+    } else {
+      this.toastPanelOffsetX$.next(this.getToastPanelExtent());
+    }
   }
 
   getClassMenuButton() {
@@ -486,9 +521,10 @@ export class PortalComponent implements OnInit, OnDestroy {
           res.ol.getProperties()._featureStore.layer &&
           res.ol.getProperties()._featureStore.layer.visible
         ) {
+          const ol = res.ol as olFeature<OlGeometry>;
           const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
           const feature = featureFromOl(
-            res.ol,
+            ol,
             featureStoreLayer.map.projection,
             featureStoreLayer.ol
           );
@@ -528,6 +564,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.activeWidget$$.unsubscribe();
     this.openSidenav$$.unsubscribe();
     this.workspaceMaximize$$.map(f => f.unsubscribe());
+    this.sidenavMediaAndOrientation$$.unsubscribe();
   }
 
   /**
@@ -558,7 +595,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.toastPanelForExpansionOpened = true;
   }
 
-  onMapQuery(event: { features: Feature[]; event: OlMapBrowserPointerEvent }) {
+  onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
 
@@ -734,7 +771,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onContextMenuOpen(event: { x: number; y: number }) {
-    this.contextMenuCoord = this.getClickCoordinate(event);
+    this.contextMenuCoord = this.getClickCoordinate(event) as [number, number];
   }
 
   private getClickCoordinate(event: { x: number; y: number }) {
