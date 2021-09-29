@@ -125,8 +125,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   };
   public workspaceMenuClass = 'workspace-menu';
 
-  public menuButtonClass;
-
   public fullExtent = this.storageService.get('fullExtent') as boolean;
   private workspaceMaximize$$: Subscription[] = [];
   readonly workspaceMaximize$: BehaviorSubject<boolean> = new BehaviorSubject(
@@ -159,7 +157,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     undefined
   );
   private routeParams: Params;
-  private menuButtonReverseColor = false;
   public toastPanelHtmlDisplay = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
@@ -329,15 +326,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.igoSearchPointerSummaryEnabled === undefined) {
       this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
     }
-
-    if (
-      typeof this.configService.getConfig('menuButtonReverseColor') !==
-      'undefined'
-    ) {
-      this.menuButtonReverseColor = this.configService.getConfig(
-        'menuButtonReverseColor'
-      );
-    }
   }
 
   ngOnInit() {
@@ -449,7 +437,6 @@ export class PortalComponent implements OnInit, OnDestroy {
           this.openSidenav();
           this.toolState.openSidenav$.next(false);
         }
-        this.menuButtonClass = this.getClassMenuButton();
       }
     );
 
@@ -470,20 +457,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.toastPanelOffsetX$.next(undefined);
     } else {
       this.toastPanelOffsetX$.next(this.getToastPanelExtent());
-    }
-  }
-
-  getClassMenuButton() {
-    if (this.sidenavOpened) {
-      return {
-        'menu-button': this.menuButtonReverseColor === false,
-        'menu-button-reverse-color': this.menuButtonReverseColor === true
-      };
-    } else {
-      return {
-        'menu-button': this.menuButtonReverseColor === false,
-        'menu-button-reverse-color-close ': this.menuButtonReverseColor === true
-      };
     }
   }
 
