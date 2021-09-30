@@ -138,6 +138,20 @@
           [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'">
         </mat-icon>
     </button>
+    <button
+      *ngIf="isEditionWorkspace(workspace)"
+      class="add-feature"
+      mat-icon-button
+      color="primary"
+      collapsibleButton
+      tooltip-position="below"
+      matTooltipShowDelay="500"
+      [matTooltip]="('workspace.addFeature') | translate"
+      (click)="addFeature(workspace)">
+      <mat-icon
+        svgIcon="plus">
+      </mat-icon>
+    </button>
     <igo-actionbar
       class="actionbar-workspace"
       *ngIf="workspace.actionStore"

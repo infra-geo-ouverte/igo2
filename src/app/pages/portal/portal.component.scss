@@ -205,6 +205,12 @@ igo-entity-table-paginator {
   }
 }
 
+igo-entity-table ::ng-deep td.mat-column-edition {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
 app-expansion-panel {
   position: absolute;
   bottom: 0;
@@ -381,6 +387,10 @@ app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container 
 
 .eye-workspace {
   margin-left: 7px;
+  margin-top: 5px;
+}
+
+.add-feature {
   margin-top: 5px;
 }
 

@@ -10,7 +10,8 @@
     "disabled" : {
       "resolution": "La vue tabulaire n'est pas disponible à cette échelle",
       "visible": "La couche n'a pas été chargée. Veuillez rendre visible la couche pour découvrir la donnée."
-    }
+    },
+    "addFeature": "Ajouter une entité à la couche en édition"
   },
   "toastPanel": {
     "title": "Entités trouvées sur la carte",

@@ -62,6 +62,7 @@ import {
   QueryService,
   WfsWorkspace,
   FeatureWorkspace,
+  EditionWorkspace,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent
 } from '@igo2/geo';
@@ -422,7 +423,8 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.workspaceMaximize$.subscribe(() => this.updateMapBrowserClass())
     );
 
-    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
+    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace | EditionWorkspace) => {
+      console.log(activeWks);
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
         this.expansionPanelExpanded = true;
@@ -488,7 +490,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   workspaceVisibility(): boolean {
-    const wks = (this.selectedWorkspace$.value as WfsWorkspace | FeatureWorkspace);
+    const wks = (this.selectedWorkspace$.value as WfsWorkspace | FeatureWorkspace | EditionWorkspace);
     if (wks.inResolutionRange$.value) {
       if (wks.entityStore.empty$.value && !wks.layer.visible) {
         this.workspaceNotAvailableMessage = 'workspace.disabled.visible';
@@ -501,6 +503,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     return wks.inResolutionRange$.value;
   }
 
+  isEditionWorkspace(workspace) {
+    if (workspace instanceof EditionWorkspace) {
+      return true;
+    }
+    return false;
+  }
+
+  addFeature(workspace: EditionWorkspace) {
+    console.log('Entité ajoutée!');
+  }
 
   paginatorChange(matPaginator: MatPaginator) {
     this.workspacePaginator = matPaginator;
