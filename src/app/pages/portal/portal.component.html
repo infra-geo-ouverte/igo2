@@ -6,18 +6,10 @@
       (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <button
-      mat-icon-button
-      id= "menu-button"
-      [ngClass]="menuButtonClass"
-      color="primary"
-      tooltip-position="below"
-      matTooltipShowDelay="500"
-      [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
-      (click)="onToggleSidenavClick()">
-      <mat-icon svgIcon="menu">
-      </mat-icon>
-    </button>
+    <igo-menu-button
+      [sidenavOpened]="sidenavOpened"
+      (openSidenav)="onToggleSidenavClick()">
+    </igo-menu-button>
 
     <igo-search-bar
       #searchBar
