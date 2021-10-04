@@ -178,6 +178,7 @@
 
   <ng-container *ngIf="selectedWorkspace$ | async as workspace">
     <igo-entity-table
+      [class]="isEditionWorkspace(workspace) ? 'edition-table' : ''"
       [paginator]="workspacePaginator"
       *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate && workspaceVisibility()"
       [store]="workspace.entityStore"
