@@ -193,7 +193,7 @@
   [map]="map"
   [store]="queryStore"
   [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
-  [@toastPanelOffsetX]="toastPanelOffsetX$ | async"
+  [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getToastPanelExtent()"
   [@toastPanelOffsetY]="getToastPanelOffsetY()"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
   [opened]="toastPanelOpened"
