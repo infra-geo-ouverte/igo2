@@ -452,11 +452,16 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
   }
 
+  setToastPanelHtmlDisplay(value) {
+    this.toastPanelHtmlDisplay = value;
+    this.computeToastPanelOffsetX();
+  }
+
   computeToastPanelOffsetX() {
     if (this.isMobile() || !this.isLandscape()) {
-      this.toastPanelOffsetX$.next(undefined);
+      Promise.resolve().then(() => this.toastPanelOffsetX$.next(undefined));
     } else {
-      this.toastPanelOffsetX$.next(this.getToastPanelExtent());
+      Promise.resolve().then(() => this.toastPanelOffsetX$.next(this.getToastPanelExtent()));
     }
   }
 
@@ -655,6 +660,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private toggleSidenav() {
     this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
+    this.computeToastPanelOffsetX();
   }
 
   public toolChanged(tool: Tool) {
