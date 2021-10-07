@@ -63,8 +63,10 @@ import {
   WfsWorkspace,
   FeatureWorkspace,
   EditionWorkspace,
+  EditionWorkspaceService,
   generateIdFromSourceOptions,
-  computeOlFeaturesExtent
+  computeOlFeaturesExtent,
+  FeatureStoreInMapExtentStrategy
 } from '@igo2/geo';
 
 import {
@@ -308,7 +310,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private welcomeWindowService: WelcomeWindowService,
     public dialogWindow: MatDialog,
     private queryService: QueryService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private editionWorkspaceService: EditionWorkspaceService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton =
@@ -412,7 +415,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
 
     this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace | EditionWorkspace) => {
-      console.log(activeWks);
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
         this.expansionPanelExpanded = true;
@@ -484,6 +486,13 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
+    this.workspaceState.workspace$.getValue().entityStore.deactivateStrategyOfType(FeatureStoreInMapExtentStrategy);
+    let feature =
+    {
+      type: "Feature"
+    };
+    this.workspaceState.workspace$.getValue().entityStore.insert(feature);
+    console.log(workspace);
     console.log('Entité ajoutée!');
   }
 
