@@ -1057,6 +1057,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.readLayersQueryParamsByType(params, 'tilearcgisrest');
     this.readVectorQueryParams(params);
   }
+  
+  getQueryParam( name, url ) {
+    if (!url) url = location.href;
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( url );
+    return results == null ? null : results[1];
+}
 
   private readLayersQueryParamsByType(params: Params, type) {
     let nameParamLayersKey;
@@ -1100,7 +1109,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     const urls = params[urlsKey].split(',');
 
     let cnt = 0;
-    urls.forEach((url) => {
+    urls.forEach((urlSrc) => {
+      let url = urlSrc;
+      const version = 
+        this.getQueryParam('VERSION', url) ||
+        this.getQueryParam('version', url) ||
+        undefined;
+      if (version) {
+        url = url.replace('VERSION=' + version, '').replace('version=' + version, '');
+      }
+
       const currentLayersByService = this.extractLayersByService(
         layersByService[cnt]
       );
@@ -1118,6 +1136,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           url,
           layerFromUrl[0],
           type,
+          version,
           visibility,
           layerFromUrl[1] ? parseInt(layerFromUrl[1], 10) : undefined
         );
@@ -1178,6 +1197,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     url: string,
     name: string,
     type: 'wms' | 'wmts' | 'arcgisrest'| 'imagearcgisrest' | 'tilearcgisrest',
+    version: string = undefined,
     visibility: boolean = true,
     zIndex: number
   ) {
@@ -1199,7 +1219,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       layer: name
     };
     if (type === 'wms') {
-      sourceOptions =  { params: {LAYERS: name}} as any;
+      sourceOptions =  { params: {LAYERS: name, VERSION: version}} as any;
     }
 
     sourceOptions = ObjectUtils.removeUndefined(Object.assign({}, sourceOptions, commonSourceOptions));
