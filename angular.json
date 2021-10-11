@@ -79,7 +79,15 @@
               "through2",
               "yallist",
               "debug",
-              "striptags"
+              "striptags",
+              "core-js/modules/es.promise.js",
+              "core-js/modules/es.regexp.to-string.js",
+              "core-js/modules/es.array.reverse.js",
+              "core-js/modules/es.array.index-of.js",
+              "core-js/modules/es.array.reduce.js",
+              "core-js/modules/web.dom-collections.iterator.js",    
+              "core-js/modules/es.array.iterator.js"
+              
             ]
           },
           "configurations": {
