@@ -126,7 +126,7 @@
                       ('igo.geo.layer.showLayer' | translate)"
         (click)="workspace.layer.visible = !workspace.layer.visible">
         <mat-icon
-          [ngClass]="{disabled: !(workspace.inResolutionRange$ | async)}"
+          [ngClass]="{disabled: (workspace.inResolutionRange$ | async)!==true}"
           [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'">
         </mat-icon>
     </button>
@@ -189,7 +189,7 @@
 
 </app-toast-panel-for-expansion >
 
-<app-toast-panel *ngIf="!(queryStore.empty$ | async)"
+<app-toast-panel *ngIf="(queryStore.empty$ | async)!===true"
   [map]="map"
   [store]="queryStore"
   [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
