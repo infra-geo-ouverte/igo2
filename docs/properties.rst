@@ -736,56 +736,6 @@ Liens
     - `OGC WMS <https://www.opengeospatial.org/standards/wms>`__
 
 
-WMS avec WFS combinés
-======================
-
-
-    .. note::
-
-       Disponible actuellement mais la documentation est en cours de construction.
-    
-    .. line-block::
-
-        Il est possible de combiner un wms et à partir d'une certaine échelle d'apeller la couche en WFS si le service web offre les 2 options.
-
-        ** Attention le champ ID du service doit être bien définie car ce sera ce champ qui servira a reconnaitre chaque entitée WFS, par exemple dans 
-        la table attributaire. Si le champ id n'est pas bien définie dans le service ou que vous configurez une sortie dans un type ou ID n'est
-        pas présent au 1er niveau de l'objet dans le retour du service (geojson, GML, etc), vous pourez avoir des problèmes d'entitées qui sont dédoublées.
-
-
-Exemples
-
-        .. code:: json
-
-           {"title": "WMS with underlying WFS params",
-                "visible": true,
-                "maxResolution": 1200,
-                "workspace": {
-                    "enabled": true,
-                    "maxResolution": 100
-                },
-                "sourceOptions": {
-                    "queryable": true,
-                    "queryTitle": "nometablis",
-                    "type": "wms",
-                    "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-                    "urlWfs": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-                    "params": {
-                        "layers": "etablissement_mtq"
-                    },
-                    "paramsWFS": {
-                        "featureTypes": "etablissement_mtq",
-                        "fieldNameGeometry": "geometry",
-                        "maxFeatures": 5000
-                    },
-                    "ogcFilters": {
-                        "enabled": true,
-                        "editable": true
-                    }
-                }
-            }
-
-
 WMTS
 ===============
 
@@ -1122,22 +1072,6 @@ Exemple - Filtre temporel avec minimum, maximum et pas de temps.
                   "stepDate": "P1D"
             }
 
-Exemple - filtre temporel en mode année
-
-        .. code:: json
-
-            {
-                  "filters" :{
-                        "operator": "During",
-                        "propertyName": "annee_date",
-                        "begin": "1890-01-01T00:00:00-05:00",
-                        "end": "2021-12-31T00:00:00-05:00",
-                        "restrictedToStep": false,
-                        "calendarModeYear": true
-                    } 
-                  "stepDate": "P1Y"
-            }
-
 Exemple - filtre avec boutons spécifique à un groupe et calendrier (filtrage temporel)
 
       .. code:: json
@@ -1292,7 +1226,6 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 .. _igoogcfilterduringoptions:
-
 
 Propriétés de l'objet filter de type **During**
 

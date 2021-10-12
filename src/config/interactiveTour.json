@@ -4,7 +4,7 @@
     "position": "auto",
     "steps": [
       {
-        "element": "#menu-button",
+        "element": ".menu-button",
         "title": "interactiveTour.global.menu-button-title",
         "text": "interactiveTour.global.menu-button",
         "onHide": {
