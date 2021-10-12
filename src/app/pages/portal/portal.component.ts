@@ -86,7 +86,7 @@ import {
   mapSlideX,
   mapSlideY
 } from './portal.animation';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
@@ -1116,12 +1116,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   getQueryParam(name, url) {
-    if (!url) { url = location.href; }
-    name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
-    const regexS = '[\\?&]' + name + '=([^&#]*)';
-    const regex = new RegExp(regexS);
-    const results = regex.exec(url);
-    return results == null ? null : results[1];
+    let paramValue;
+    if (url.includes('?')) {
+      const httpParams = new HttpParams({ fromString: url.split('?')[1] });
+      paramValue = httpParams.get(name);
+    }
+    return paramValue;
   }
 
   private readLayersQueryParamsByType(params: Params, type) {
