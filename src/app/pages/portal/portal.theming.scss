@@ -2,18 +2,4 @@
   @include app-sidenav-theming($theme);
   @include igo-welcome-window-theming($theme);
   $primary: map-get($theme, primary);
-
-  .menu-button-reverse-color-close {
-    background-color: mat.get-color-from-palette($primary);
-    color: mat.get-color-from-palette($primary, default-contrast);
-  }
-
-  .menu-button-reverse-color {
-    background-color: matget-color-from-palette($primary);
-    color: mat.get-color-from-palette($primary, default-contrast);
-  }
-
-  .menu-button {
-    color: mat.get-color-from-palette($primary);
-  }
 }

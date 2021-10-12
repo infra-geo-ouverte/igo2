@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
-import { debounceTime, take, pairwise, skipWhile } from 'rxjs/operators';
+import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
@@ -63,7 +63,8 @@ import {
   WfsWorkspace,
   FeatureWorkspace,
   generateIdFromSourceOptions,
-  computeOlFeaturesExtent
+  computeOlFeaturesExtent,
+  addStopToStore
 } from '@igo2/geo';
 
 import {
@@ -72,7 +73,8 @@ import {
   SearchState,
   QueryState,
   ContextState,
-  WorkspaceState
+  WorkspaceState,
+  DirectionState
 } from '@igo2/integration';
 
 import {
@@ -125,8 +127,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   };
   public workspaceMenuClass = 'workspace-menu';
 
-  public menuButtonClass;
-
   public fullExtent = this.storageService.get('fullExtent') as boolean;
   private workspaceMaximize$$: Subscription[] = [];
   readonly workspaceMaximize$: BehaviorSubject<boolean> = new BehaviorSubject(
@@ -159,7 +159,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     undefined
   );
   private routeParams: Params;
-  private menuButtonReverseColor = false;
   public toastPanelHtmlDisplay = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
@@ -310,7 +309,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private welcomeWindowService: WelcomeWindowService,
     public dialogWindow: MatDialog,
     private queryService: QueryService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton =
@@ -328,15 +328,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
     if (this.igoSearchPointerSummaryEnabled === undefined) {
       this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
-    }
-
-    if (
-      typeof this.configService.getConfig('menuButtonReverseColor') !==
-      'undefined'
-    ) {
-      this.menuButtonReverseColor = this.configService.getConfig(
-        'menuButtonReverseColor'
-      );
     }
   }
 
@@ -449,7 +440,6 @@ export class PortalComponent implements OnInit, OnDestroy {
           this.openSidenav();
           this.toolState.openSidenav$.next(false);
         }
-        this.menuButtonClass = this.getClassMenuButton();
       }
     );
 
@@ -470,20 +460,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.toastPanelOffsetX$.next(undefined);
     } else {
       this.toastPanelOffsetX$.next(this.getToastPanelExtent());
-    }
-  }
-
-  getClassMenuButton() {
-    if (this.sidenavOpened) {
-      return {
-        'menu-button': this.menuButtonReverseColor === false,
-        'menu-button-reverse-color': this.menuButtonReverseColor === true
-      };
-    } else {
-      return {
-        'menu-button': this.menuButtonReverseColor === false,
-        'menu-button-reverse-color-close ': this.menuButtonReverseColor === true
-      };
     }
   }
 
@@ -1073,6 +1049,54 @@ export class PortalComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.openSidenav();
       }, 250);
+    }
+
+    if (this.routeParams['routing']) {
+      let routingCoordLoaded = false;
+      const stopCoords = this.routeParams['routing'].split(';');
+      const routingOptions = this.routeParams['routingOptions'];
+      let resultSelection: number;
+      if (routingOptions) {
+        resultSelection = parseInt(routingOptions.split('result:')[1], 10);
+      }
+      this.directionState.stopsStore.storeInitialized$
+        .pipe(skipWhile(init => !init), first())
+        .subscribe((init: boolean) => {
+          if (init && !routingCoordLoaded) {
+            routingCoordLoaded = true;
+            stopCoords.map((coord, i) => {
+              if (i > 1) {
+                addStopToStore(this.directionState.stopsStore);
+              }
+            });
+            setTimeout(() => {
+              stopCoords.map((coord, i) => {
+                const stop = this.directionState.stopsStore.all().find(e => e.position === i);
+                stop.text = coord;
+                stop.coordinates = coord.split(',');
+                this.directionState.stopsStore.update(stop);
+              });
+            }, this.directionState.debounceTime * 1.25); // this delay is due to the default component debounce time
+          }
+        });
+      // zoom to active route
+      this.directionState.routesFeatureStore.count$
+        .pipe(skipWhile(c => c < 1), first())
+        .subscribe(c => {
+          if (c >= 1) {
+            this.directionState.zoomToActiveRoute$.next();
+          }
+        });
+      // select the active route by url controls
+      this.directionState.routesFeatureStore.count$
+        .pipe(skipWhile(c => c < 2), first())
+        .subscribe(() => {
+          if (resultSelection) {
+            this.directionState.routesFeatureStore.entities$.value.map(d => d.properties.active = false);
+            this.directionState.routesFeatureStore.entities$.value[resultSelection].properties.active = true;
+            this.directionState.zoomToActiveRoute$.next();
+          }
+        });
     }
   }
 
