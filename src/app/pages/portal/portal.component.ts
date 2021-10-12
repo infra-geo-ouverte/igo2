@@ -1114,15 +1114,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.readLayersQueryParamsByType(params, 'tilearcgisrest');
     this.readVectorQueryParams(params);
   }
-  
-  getQueryParam( name, url ) {
-    if (!url) url = location.href;
-    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-    var regexS = "[\\?&]"+name+"=([^&#]*)";
-    var regex = new RegExp( regexS );
-    var results = regex.exec( url );
+
+  getQueryParam(name, url) {
+    if (!url) { url = location.href; }
+    name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
+    const regexS = '[\\?&]' + name + '=([^&#]*)';
+    const regex = new RegExp(regexS);
+    const results = regex.exec(url);
     return results == null ? null : results[1];
-}
+  }
 
   private readLayersQueryParamsByType(params: Params, type) {
     let nameParamLayersKey;
@@ -1168,7 +1168,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     let cnt = 0;
     urls.forEach((urlSrc) => {
       let url = urlSrc;
-      const version = 
+      const version =
         this.getQueryParam('VERSION', url) ||
         this.getQueryParam('version', url) ||
         undefined;
@@ -1254,7 +1254,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     url: string,
     name: string,
     type: 'wms' | 'wmts' | 'arcgisrest'| 'imagearcgisrest' | 'tilearcgisrest',
-    version: string = undefined,
+    version: string,
     visibility: boolean = true,
     zIndex: number
   ) {
