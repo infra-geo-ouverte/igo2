@@ -199,7 +199,7 @@
   [opened]="toastPanelOpened"
   (openedChange)="toastOpenedChange($event)"
   (fullExtentEvent)="fullExtent = $event"
-  (windowHtmlDisplayEvent)="toastPanelHtmlDisplay= $event">
+  (windowHtmlDisplayEvent)="setToastPanelHtmlDisplay($event)">
 </app-toast-panel>
 
 <ng-template #contextMenu>
