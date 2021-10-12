@@ -1,0 +1,72 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "src/tsconfig.app.json",
+          "src/tsconfig.spec.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        // https://eslint.org/docs/rules/
+        "arrow-spacing": "error",
+        "max-len": [
+          "error",
+          {
+            "code": 140,
+            "comments": 140,
+            "ignoreTrailingComments": true,
+            "ignoreUrls": true,
+            "ignoreTemplateLiterals": true,
+            "ignoreRegExpLiterals": true
+          }
+        ],
+        "unused-imports/no-unused-imports": "error",
+        "no-multi-spaces": "error",
+        "eqeqeq": ["error", "always"],
+        "semi": ["error", "always"],
+        "no-trailing-spaces": "error",
+        "no-multiple-empty-lines": "error",
+        "eol-last": ["error", "always"],
+        "@angular-eslint/no-output-native": "off",
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
