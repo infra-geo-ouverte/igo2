@@ -86,7 +86,7 @@ import {
   mapSlideX,
   mapSlideY
 } from './portal.animation';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
@@ -1115,6 +1115,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.readVectorQueryParams(params);
   }
 
+  getQueryParam(name, url) {
+    let paramValue;
+    if (url.includes('?')) {
+      const httpParams = new HttpParams({ fromString: url.split('?')[1] });
+      paramValue = httpParams.get(name);
+    }
+    return paramValue;
+  }
+
   private readLayersQueryParamsByType(params: Params, type) {
     let nameParamLayersKey;
     let urlsKey;
@@ -1157,7 +1166,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     const urls = params[urlsKey].split(',');
 
     let cnt = 0;
-    urls.forEach((url) => {
+    urls.forEach((urlSrc) => {
+      let url = urlSrc;
+      const version =
+        this.getQueryParam('VERSION', url) ||
+        this.getQueryParam('version', url) ||
+        undefined;
+      if (version) {
+        url = url.replace('VERSION=' + version, '').replace('version=' + version, '');
+      }
+
       const currentLayersByService = this.extractLayersByService(
         layersByService[cnt]
       );
@@ -1175,6 +1193,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           url,
           layerFromUrl[0],
           type,
+          version,
           visibility,
           layerFromUrl[1] ? parseInt(layerFromUrl[1], 10) : undefined
         );
@@ -1235,6 +1254,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     url: string,
     name: string,
     type: 'wms' | 'wmts' | 'arcgisrest'| 'imagearcgisrest' | 'tilearcgisrest',
+    version: string,
     visibility: boolean = true,
     zIndex: number
   ) {
@@ -1256,7 +1276,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       layer: name
     };
     if (type === 'wms') {
-      sourceOptions =  { params: {LAYERS: name}} as any;
+      sourceOptions =  { params: {LAYERS: name, VERSION: version}} as any;
     }
 
     sourceOptions = ObjectUtils.removeUndefined(Object.assign({}, sourceOptions, commonSourceOptions));
