@@ -404,7 +404,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         ),
         icon: 'arrow-expand',
         display: () => {
-          return this.fullExtent$.pipe(map((v) => !v  && !this.isDesktop()));
+          return this.fullExtent$.pipe(map((v) => !v && !this.isDesktop()));
         },
         handler: () => {
           this.fullExtent = true;

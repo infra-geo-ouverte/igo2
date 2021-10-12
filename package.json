@@ -116,6 +116,7 @@
     "angular-cli-ghpages": "^1.0.0-rc.2",
     "conventional-changelog-cli": "^2.0.12",
     "eslint": "^7.26.0",
+    "eslint-plugin-unused-imports": "^1.1.5",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
     "jasmine-core": "~3.8.0",
