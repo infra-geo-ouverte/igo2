@@ -1,3 +1,17 @@
+## [1.9.1](https://github.com/infra-geo-ouverte/igo2/compare/1.9.0...1.9.1) (2021-10-13)
+
+
+### Features
+
+* **sharemap:** keep the layer wms version on share map ([#671](https://github.com/infra-geo-ouverte/igo2/issues/671)) ([ca002b2](https://github.com/infra-geo-ouverte/igo2/commit/ca002b276726a380cfce2efd70eed8116849481c))
+
+
+### Reverts
+
+* Revert "Direction tool fix (#673)" (#674) ([2f4ed2b](https://github.com/infra-geo-ouverte/igo2/commit/2f4ed2ba45220faea48db79c1e387cf05db24714)), closes [#673](https://github.com/infra-geo-ouverte/igo2/issues/673) [#674](https://github.com/infra-geo-ouverte/igo2/issues/674)
+
+
+
 # [1.9.0](https://github.com/infra-geo-ouverte/igo2/compare/1.8.2...1.9.0) (2021-09-22)
 
 
