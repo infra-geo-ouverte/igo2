@@ -34,7 +34,7 @@
     "postversion": "git push && git push --tags && rimraf igo2.zip && cd ./dist/igo2/ && zip -r ../igo2.zip ./* && npm run ghpages && npm run ghrelease",
     "preversion.win": "npm run test.all && rimraf ./dist && npm run build.prod",
     "version.win": "npm run changelog && git add -A CHANGELOG.md",
-    "postversion.win": "git push && git push --tags && rimraf igo2.zip && cd ./dist/igo2/ && tar.exe -a -c -f ../igo2.zip * && npm run ghpages.win && npm run ghrelease.win",
+    "postversion.win": "git push && git push --tags && rimraf igo2.zip && cd ./dist/igo2/ && tar -a -c -f ../igo2.zip * && npm run ghpages.win && npm run ghrelease.win",
     "preghpages": "npm run build -- --configuration=github --output-path ./dist/ghpages --base-href /igo2/ && echo \"include: ['_default.json', '_contexts.json', '_base.json']\" > dist/ghpages/_config.yml",
     "ghpages": "VERSION=$(node -p -e \"require('./package.json').version\") && npx ngh --dir=dist/ghpages --no-silent=false --message=$VERSION",
     "postghpages": "rimraf ./dist/ghpages",
