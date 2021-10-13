@@ -40,9 +40,7 @@
     "postghpages": "rimraf ./dist/ghpages",
     "preghpages.win": "npm run build -- --configuration=github --output-path ./dist/ghpages --base-href /igo2/ && echo include: ['_default.json', '_contexts.json', '_base.json'] > dist/ghpages/_config.yml",
     "ghpages.win": "npx ngh --dir=dist/ghpages --no-silent=false --message=%npm_package_version%",
-    "postghpages.win": "rimraf ./dist/ghpages",
-    "ghrelease": "VERSION=$(node -p -e \"require('./package.json').version\") && publish-release --owner infra-geo-ouverte --repo igo2 --tag $VERSION --name $VERSION --reuse-release --notes \"$(npm run changelog-current -s)\" --assets dist/igo2.zip",
-    "ghrelease.win": "publish-release --owner infra-geo-ouverte --repo igo2 --tag %npm_package_version% --name %npm_package_version% --reuse-release --notes \"$(npm run changelog-current -s)\" --assets dist/igo2.zip"
+    "postghpages.win": "rimraf ./dist/ghpages"
   },
   "private": true,
   "dependencies": {
@@ -128,7 +126,6 @@
     "ng-packagr": "^12.1.2",
     "npx": "^10.2.0",
     "protractor": "~7.0.0",
-    "publish-release": "^1.6.1",
     "sass": "^1.37.5",
     "ts-node": "^10.1.0",
     "tslint": "~6.1.0",
