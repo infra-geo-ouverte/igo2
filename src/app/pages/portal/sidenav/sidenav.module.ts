@@ -12,7 +12,7 @@ import {
   IgoToolModule,
   IgoInteractiveTourModule
 } from '@igo2/common';
-import { IgoFeatureModule } from '@igo2/geo';
+import { IgoFeatureModule, IgoMapModule } from '@igo2/geo';
 import { IgoContextManagerModule } from '@igo2/context';
 
 import { SidenavComponent } from './sidenav.component';
@@ -30,6 +30,7 @@ import { SidenavComponent } from './sidenav.component';
     IgoContextManagerModule,
     IgoToolModule,
     IgoFeatureModule,
+    IgoMapModule,
     IgoInteractiveTourModule
   ],
   exports: [SidenavComponent],
