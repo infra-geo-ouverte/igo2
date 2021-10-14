@@ -66,7 +66,8 @@ import {
   EditionWorkspaceService,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent,
-  FeatureStoreInMapExtentStrategy
+  FeatureStoreInMapExtentStrategy,
+  FeatureStoreInMapResolutionStrategy
 } from '@igo2/geo';
 
 import {
@@ -486,13 +487,21 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
-    this.workspaceState.workspace$.getValue().entityStore.deactivateStrategyOfType(FeatureStoreInMapExtentStrategy);
-    let feature =
-    {
-      type: "Feature"
-    };
-    this.workspaceState.workspace$.getValue().entityStore.insert(feature);
-    console.log(workspace);
+    // workspace.entityStore.deactivateStrategyOfType(FeatureStoreInMapExtentStrategy);
+    // this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
+    // let feature =
+    // {
+    //   type: "Feature",
+    //   properties: {}
+    // };
+
+    // for (const column of workspace.meta.tableTemplate.columns) {
+    //   const columnName = column.name.slice(11);
+    //   feature.properties[columnName] = '';
+    // }
+    // console.log(feature);
+    // this.workspaceState.workspace$.getValue().entityStore.insert(feature);
+    // console.log(workspace);
     console.log('Entité ajoutée!');
   }
 
