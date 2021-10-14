@@ -90,6 +90,17 @@
             ]
           },
           "configurations": {
+            "dev": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": false
+            },
             "production": {
               "budgets": [
                 {
@@ -141,7 +152,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "igo2:build"
+            "browserTarget": "igo2:build:dev"
           },
           "configurations": {
             "production": {
