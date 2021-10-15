@@ -102,6 +102,11 @@ Exemples
                 "hostsWithCredentials": [{
                                            withCredentials: true,
                                            domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
+                                        }],
+                "hostsByKey": [{
+                                           keyProperty: 'theNameOfYourKey,
+                                           keyValue: 'theValueOfYourKey',
+                                           domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
                                         }]
             }
 
