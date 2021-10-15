@@ -316,7 +316,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.hasGeolocateButton =
     this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton') ;
     this.showRotationButtonIfNoRotation =
-    this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ? false : this.configService.getConfig('showRotationButtonIfNoRotation') ;
+      this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ?
+        false :
+        this.configService.getConfig('showRotationButtonIfNoRotation');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
       'hasFeatureEmphasisOnSelection'
@@ -604,7 +606,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearchTermChange(term?: string) {
-    if (this.routeParams?.search &&  term !== this.routeParams.search) {
+    if (this.routeParams?.search && term !== this.routeParams.search) {
       this.searchState.deactivateCustomFilterTermStrategy();
   }
 
@@ -927,7 +929,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
   getControlsOffsetY() {
-    return this.expansionPanelExpanded ? this.workspaceMaximize$.value ? 'firstRowFromBottom-expanded-maximized' : 'firstRowFromBottom-expanded' : 'firstRowFromBottom';
+    return this.expansionPanelExpanded ?
+      this.workspaceMaximize$.value ? 'firstRowFromBottom-expanded-maximized' : 'firstRowFromBottom-expanded' :
+      'firstRowFromBottom';
   }
 
   getBaselayersSwitcherStatus() {
@@ -939,21 +943,21 @@ export class PortalComponent implements OnInit, OnDestroy {
           if (this.queryState.store.entities$.value.length === 0) {
             status = 'secondRowFromBottom';
            } else {
-            status =  'thirdRowFromBottom';
+            status = 'thirdRowFromBottom';
            }
         } else {
           if (this.queryState.store.entities$.value.length === 0) {
             status = 'firstRowFromBottom-expanded';
            } else {
-            status =  'secondRowFromBottom-expanded';
+            status = 'secondRowFromBottom-expanded';
            }
         }
 
       } else {
         if (this.queryState.store.entities$.value.length === 0) {
-          status =  'firstRowFromBottom';
+          status = 'firstRowFromBottom';
          } else {
-          status =  'secondRowFromBottom';
+          status = 'secondRowFromBottom';
          }
       }
     } else {
@@ -1271,12 +1275,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     const arcgisClause = (type === 'arcgisrest' || type === 'imagearcgisrest' || type === 'tilearcgisrest');
     let sourceOptions = {
       version: type === 'wmts' ? '1.0.0' : undefined,
-      queryable: arcgisClause  ? true : false,
-      queryFormat: arcgisClause  ? 'esrijson' : undefined,
+      queryable: arcgisClause ? true : false,
+      queryFormat: arcgisClause ? 'esrijson' : undefined,
       layer: name
     };
     if (type === 'wms') {
-      sourceOptions =  { params: {LAYERS: name, VERSION: version}} as any;
+      sourceOptions = { params: {LAYERS: name, VERSION: version}} as any;
     }
 
     sourceOptions = ObjectUtils.removeUndefined(Object.assign({}, sourceOptions, commonSourceOptions));
@@ -1326,7 +1330,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     // After, managing named layer by id (context.json OR id from datasource)
     visiblelayers = visibleOnLayersParams.split(',');
     invisiblelayers = visibleOffLayersParams.split(',');
-    if (visiblelayers.indexOf(currentLayerid) > -1  || visiblelayers.indexOf(currentLayerid.toString()) > -1) {
+    if (visiblelayers.indexOf(currentLayerid) > -1 || visiblelayers.indexOf(currentLayerid.toString()) > -1) {
       visible = true;
     }
     if (invisiblelayers.indexOf(currentLayerid) > -1 || invisiblelayers.indexOf(currentLayerid.toString()) > -1) {
