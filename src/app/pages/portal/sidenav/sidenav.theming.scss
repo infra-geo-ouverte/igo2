@@ -2,13 +2,4 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
-
-  app-sidenav #homeButton {
-    background-color: mat.get-color-from-palette($primary);
-
-    &:hover {
-      background-color: mat.get-color-from-palette($accent, lighter);
-      color: mat.get-color-from-palette($foreground, text);
-    }
-  }
 }
