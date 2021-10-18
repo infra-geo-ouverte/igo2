@@ -100,7 +100,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1000.1",
+    "@angular-devkit/build-angular": "~12.2.9",
     "@angular-eslint/builder": "12.5.0",
     "@angular-eslint/eslint-plugin": "12.5.0",
     "@angular-eslint/eslint-plugin-template": "12.5.0",
@@ -138,6 +138,6 @@
     "ts-node": "^10.1.0",
     "typescript": "~4.3.5",
     "webdriver-manager": "^12.1.6",
-    "webpack": "^4.41.2"
+    "webpack": "^5.58.1"
   }
 }

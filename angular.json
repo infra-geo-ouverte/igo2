@@ -16,6 +16,7 @@
       },
       "architect": {
         "build": {
+          "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
@@ -113,6 +114,14 @@
               "vendorChunk": true,
               "buildOptimizer": false
             },
+            "developpement": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "github": {
               "budgets": [
                 {
@@ -139,11 +148,15 @@
           }
         },
         "serve": {
+          "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "igo2:build"
           },
           "configurations": {
+            "developpement": {
+              "browserTarget": "igo2:build:developpement"
+            },
             "production": {
               "browserTarget": "igo2:build:production"
             },
