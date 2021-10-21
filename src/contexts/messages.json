@@ -3,14 +3,16 @@
     "title": "Messages",
     "base": "_base",
     "messages": [
-        {
-            "title": "Info",
-            "text": "Message at the context level. Open the layer 'MSP Tel. Urgence' to see messages at the layer level.",
-            "type": "info",
-            "options": {
-                "timeOut": 20000
-            }
+      {
+        "title": "messages.title",
+        "text": "messages.message",
+        "type": "success",
+        "options": {
+          "timeOut": 30000,
+          "titleClass": "toast-title-red",
+          "messageClass": "toast-message-gray"
         }
+    }
     ],
     "layers": [
         {
