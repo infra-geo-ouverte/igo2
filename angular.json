@@ -52,7 +52,6 @@
               ]
             },
             "allowedCommonJsDependencies": [
-              "@igo2/angular2-notifications",
               "hammerjs",
               "typy",
               "jspdf",
