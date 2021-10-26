@@ -9,7 +9,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --port 4201 --proxy-config proxy.conf.json",
-    "start-pwa": "ng build --prod && http-server -p 4201 -c-1 dist/igo2",
+    "start-pwa": "ng build --configuration production && http-server -p 4201 -c-1 dist/igo2",
     "build": "ng build",
     "lint": "ng lint",
     "lint.fix": "ng lint --fix",
@@ -66,7 +66,7 @@
     "@igo2/geo": "~1.9.3",
     "@igo2/integration": "~1.9.3",
     "@igo2/utils": "~1.9.3",
-    "@mat-datetimepicker/core":"^7.0.1",
+    "@mat-datetimepicker/core": "^7.0.1",
     "@turf/buffer": "^6.5.0",
     "@turf/point-on-feature": "^6.5.0",
     "angular-shepherd": "12.0.0",
