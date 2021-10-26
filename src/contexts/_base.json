@@ -68,13 +68,13 @@
     },
     {
       "title": "bgr_v_sous_route_res_sup_act",
-      "id": "hybrideAutoRoute",
       "opacity": 0.5,
       "showInLayerList": false,
       "linkedLayers": {
         "linkId": "hybrideAutoRoute"
       },
       "sourceOptions": {
+        "id": "hybrideAutoRoute",
         "type": "wms",
         "queryable": true,
         "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
@@ -107,13 +107,13 @@
     },
     {
       "title": "convivialite_velo",
-      "id": "hybrideVeloConviv",
       "opacity": 0.5,
       "showInLayerList": false,
       "linkedLayers": {
         "linkId": "hybrideVeloConviv"
       },
       "sourceOptions": {
+        "id": "hybrideVeloConviv",
         "type": "wms",
         "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
         "params": {
@@ -172,9 +172,13 @@
     "importExport",
     "print",
     "shareMap",
-    "about"
+    "about",
+    "advancedMap"
   ],
-  "tools": [
+  "tools": [    
+    {
+      "name": "advancedMap"
+    },
     {
       "name": "searchResults"
     },

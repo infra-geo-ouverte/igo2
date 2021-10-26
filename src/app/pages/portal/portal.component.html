@@ -6,17 +6,10 @@
       (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <button
-      mat-icon-button
-      id= "menu-button"
-      [ngClass]="getClassMenuButton()"
-      tooltip-position="below"
-      matTooltipShowDelay="500"
-      [matTooltip]="(sidenavOpened ? 'menu.close' : 'menu.open') | translate"
-      (click)="onToggleSidenavClick()">
-      <mat-icon svgIcon="menu">
-      </mat-icon>
-    </button>
+    <igo-menu-button
+      [sidenavOpened]="sidenavOpened"
+      (openSidenav)="onToggleSidenavClick()">
+    </igo-menu-button>
 
     <igo-search-bar
       #searchBar
@@ -70,6 +63,8 @@
       <igo-zoom-button [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()">
       </igo-zoom-button>
+      <igo-swipe-control [map]="map"></igo-swipe-control>
+      <igo-map-center [map]="map"></igo-map-center>
       <igo-offline-button [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
@@ -131,7 +126,7 @@
                       ('igo.geo.layer.showLayer' | translate)"
         (click)="workspace.layer.visible = !workspace.layer.visible">
         <mat-icon
-          [ngClass]="{disabled: !(workspace.inResolutionRange$ | async)}"
+          [ngClass]="{disabled: (workspace.inResolutionRange$ | async)!==true}"
           [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'">
         </mat-icon>
     </button>
@@ -194,17 +189,17 @@
 
 </app-toast-panel-for-expansion >
 
-<app-toast-panel *ngIf="!(queryStore.empty$ | async)"
+<app-toast-panel *ngIf="(queryStore.empty$ | async)!==true"
   [map]="map"
   [store]="queryStore"
   [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
-  [@toastPanelOffsetX]="(isMobile() || !isLandscape()) ? undefined : getToastPanelExtent()"
+  [@toastPanelOffsetX]="toastPanelOffsetX$ | async"
   [@toastPanelOffsetY]="getToastPanelOffsetY()"
   [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
   [opened]="toastPanelOpened"
   (openedChange)="toastOpenedChange($event)"
   (fullExtentEvent)="fullExtent = $event"
-  (windowHtmlDisplayEvent)="toastPanelHtmlDisplay= $event">
+  (windowHtmlDisplayEvent)="setToastPanelHtmlDisplay($event)">
 </app-toast-panel>
 
 <ng-template #contextMenu>
