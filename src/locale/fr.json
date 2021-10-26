@@ -36,7 +36,7 @@
   "googleMap": "Afficher sur Google maps",
   "googleStreetView": "Afficher sur Google Street view",
   "welcomeWindow": {
-    "html": "<h1>Bienvenue dans {{title}}, l'application cartographique du gouvernement du Québec</h1><h2>Débutez en sélectionnant un contexte &#x2605;</h2><h2>Version {{version}}, en date du {{releaseDate}}</h2>",
+    "html": "<h1>Bienvenue dans {{title}}, l'application cartographique du Ministère de la Sécurité publique</h1><h2>Débutez en sélectionnant un contexte &#x2605;</h2><h2>Version {{version}}, en date du {{releaseDate}}</h2>",
     "title": "Fenêtre d'accueil",
     "closeButton": "Fermer",
     "notShowCheck": "Ne plus afficher"

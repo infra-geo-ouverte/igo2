@@ -36,7 +36,7 @@
   "googleMap": "Show in Google maps",
   "googleStreetView": "Show in Google Street view",
   "welcomeWindow": {
-    "html": "<h1>Welcome to {{title}, the Québec goverment mapping application </h1><h2>Version {{version}}, build on {{releaseDate}}</h2>",
+    "html": "<h1>Welcome to {{title}, the Ministère de la Sécurité publique mapping application </h1><h2>Version {{version}}, build on {{releaseDate}}</h2>",
     "title": "",
     "closeButton": "Close",
     "notShowCheck": "Do not show again"
