@@ -69,24 +69,31 @@
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-offline-button>
-      <igo-geolocate-button
-        *ngIf="hasGeolocateButton"
-        [map]="map" color="primary"
-        [@controlsOffsetY]="getControlsOffsetY()"
-        [@mobileOffsetY]="getToastPanelStatus()">
-      </igo-geolocate-button>
+
       <igo-rotation-button [showIfNoRotation]="showRotationButtonIfNoRotation" [map]="map" color="primary"></igo-rotation-button>
+
+    </igo-map-browser>
+      <igo-baselayers-switcher 
+          [map]="map"
+          [useStaticIcon]="true"
+          [ngStyle]="{left: getBaseLayerSwitcherLeft()}"
+          [@controlsOffsetY]="getBaselayersSwitcherStatus()">
+      </igo-baselayers-switcher>
+
       <igo-user-button 
         *ngIf="auth.url"
         [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-user-button>
-      <igo-baselayers-switcher [map]="map"
-        [@controlsOffsetY]="getBaselayersSwitcherStatus()"
-        [useStaticIcon]="true">
-      </igo-baselayers-switcher>
-    </igo-map-browser>
+
+      <igo-geolocate-button
+        *ngIf="hasGeolocateButton"
+        [map]="map" color="primary"
+        [@controlsOffsetY]="getControlsOffsetY()"
+        [@mobileOffsetY]="getToastPanelStatus()">
+      </igo-geolocate-button>
+
 
     <app-map-overlay
       [@controlStateY]="getControlsOffsetY()"

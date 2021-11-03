@@ -69,13 +69,27 @@ igo-map-browser ::ng-deep .ol-attribution {
   }
 }
 
-igo-map-browser.has-expansion-panel igo-baselayers-switcher {
-  bottom: 47px;
+// igo-map-browser.has-expansion-panel igo-baselayers-switcher {
+//   bottom: 47px;
+// }
+
+// igo-map-browser.sidenav-offset-baselayers ::ng-deep igo-baselayers-switcher {
+//   left: 405px;
+// }
+
+// ::ng-deep  igo-map-browser.sidenav-offset-baselayers ::ng-deep igo-baselayers-switcher {
+//   left: 406px;
+// }
+
+// ::ng-deep  igo-map-browser ::ng-deep igo-baselayers-switcher {
+//   left: 407px;
+// }
+
+igo-baselayers-switcher {
+  position: absolute;
+  left: 5px;
 }
 
-igo-map-browser.sidenav-offset-baselayers igo-baselayers-switcher {
-  left: 405px;
-}
 
 igo-map-browser ::ng-deep .ol-overlaycontainer-stopevent {
   position: absolute;
@@ -277,15 +291,30 @@ igo-offline-button {
 }
 
 igo-geolocate-button {
-  margin-bottom: 85px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
 
+igo-user-button {
+  position: absolute;
+  bottom: 5px;
+  right: 60px;
   @include mobile {
-    margin-bottom: 0px;
-  }
-  @include tablet {
-    margin-bottom: 0px;
+    right: 90px;
   }
 }
+
+// igo-geolocate-button {
+//   margin-bottom: 85px;
+
+//   @include mobile {
+//     margin-bottom: 0px;
+//   }
+//   @include tablet {
+//     margin-bottom: 0px;
+//   }
+// }
 
 igo-zoom-button {
   @include tablet {

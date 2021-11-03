@@ -788,6 +788,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchBarTerm = coord.map((c) => c.toFixed(6)).join(', ');
   }
 
+
+  getBaseLayerSwitcherLeft() {
+    if(this.sidenavOpened ) {
+      return '405px';
+    } else {
+      return '5px';
+    }
+}
+
   updateMapBrowserClass() {
     const header = this.queryState.store.entities$.value.length > 0;
     if (this.hasExpansionPanel && this.workspaceState.workspaceEnabled$.value) {
