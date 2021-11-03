@@ -1,13 +1,14 @@
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { TranslateService } from '@ngx-translate/core';
 import {
   provideConfigOptions,
   IgoMessageModule,
   IgoGestureModule,
-  RouteService
+  RouteService,
+  LanguageService
 } from '@igo2/core';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 import { IgoAuthModule } from '@igo2/auth';
@@ -29,8 +30,6 @@ import { environment } from '../environments/environment';
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
-const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
 @NgModule({
   declarations: [AppComponent],
@@ -62,8 +61,21 @@ const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt()
     provideOsrmDirectionsSource(),
     provideOptionsApi(),
     provideCadastreSearchSource(),
-    {provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true},
+    {provide: APP_INITIALIZER, useFactory: appInitializerFactory, deps: [LanguageService, PwaService, Injector], multi: true},
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+export function appInitializerFactory(languageService: LanguageService, pwaService: PwaService, injector: Injector) {
+  return () => new Promise<any>((resolve: any) => {
+      languageService.translate.getTranslation(languageService.getLanguage()).subscribe(() => {
+        console.info(`Successfully initialized '${languageService.getLanguage()}' language.'`);
+        pwaService.initPwaPrompt();
+      }, err => {
+        console.error(`Problem with '${languageService.getLanguage()}' language initialization.'`);
+      }, () => {
+        resolve(null);
+      });
+  });
+}
