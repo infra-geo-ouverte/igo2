@@ -109,6 +109,7 @@
     <igo-workspace-selector
       igoWorkspaceSelector
       (toolToActivate)="toolToActivateFromWorkspace($event)"
+      (changeWorkspace)="directiveSelectorEventChange($event)" 
       [store]="workspaceStore"
       [map]="map">
     </igo-workspace-selector>
