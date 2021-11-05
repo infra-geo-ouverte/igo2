@@ -514,7 +514,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
     console.log(feature);
     workspace.addFeature(feature, workspace);
-    console.log(workspace);
+    this.workspaceState.selectOnlyCheckCondition$.next(false);
     console.log('Entité ajoutée!');
     //workspace.entityStore.activateStrategyOfType(FeatureStoreInMapExtentStrategy);
   }
