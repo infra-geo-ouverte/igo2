@@ -166,9 +166,7 @@ WorkspaceOptions
 
     .. line-block::
 
-        Permet de définir si une source possèdera une table
-        d'attribut dans l'application ainsi
-        que ses propriétés associées.
+        Permet de définir si une source possèdera une table d'attribut dans l'application ainsi que ses propriétés associées.
 
 Exemples
 
@@ -177,7 +175,9 @@ Exemples
             {"workspace": {
                   "enabled": true,
                   "minResolution": 0,
-                  "maxResolution": 400
+                  "maxResolution": 400,
+                  "noQueryOnClickInTab": true,
+                  "noMapQueryOnOpenTab": true
             }}
 
 Propriétés
@@ -675,7 +675,8 @@ WMS
     .. line-block::
 
         Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`__ .
-        Les diverses version WMS sont acceptées.
+        Les diverses version WMS sont acceptées. 
+        NB: Il est possible de combiner une couche WMS et WFS en ajoutant les parametres WFS à l'intérieur.
 
 
     .. note::
@@ -729,6 +730,16 @@ Paramètre (params) WMS
     d'échelle. La décision de faire l'appel des 3 paramètres en simultané est
     basé sur le fait que QGIS procède de la même manière.
 
+Paramètre - paramsWFS (Pour une couche combinée WMS-WFS)
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sources/wms-wfs-params.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 Liens
 
