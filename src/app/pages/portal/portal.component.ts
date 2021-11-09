@@ -508,14 +508,14 @@ export class PortalComponent implements OnInit, OnDestroy {
             }
           }
         }
-      } 
+      }
   }
 
   entitySelectChange(result: { added: Feature[] }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
     const noQueryToastPanel = this.getNoQueryClickInWorkspace(result);
-    if (noQueryToastPanel) { return };
+    if (noQueryToastPanel) { return; };
     if (result && result.added) {
       const results = result.added.map((res) => {
         if (
