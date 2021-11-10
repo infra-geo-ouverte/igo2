@@ -18,5 +18,5 @@ python:
    version: "3.7"
    install:
       - method: pip
-        path: docutils=0.17
+        path: docutils==0.17
    # - requirements: docs/requirements.txt
