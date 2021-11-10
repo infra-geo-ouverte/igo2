@@ -4,7 +4,7 @@ Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 | SANS les paramètres d'appels WMS. L'application se charge
 | de compléter les paramètres envoyés au serveur (KVP). ",,
 urlWfs, String, URL pour le service WFS dans le cas d'une couche combinée WMS-WFS. ,,
-paramsWFS, Object{}, Dans le cas d'une couche combinée WMS-WFS voir paramWfs. ,,
+paramsWFS, Object{}, Dans le cas d'une couche combinée WMS-WFS voir paramWFS. ,,
 optionsFromCapabilities ,Boolean,Paramètre pour récupérer des informations du service. ,true | false,false
 **params*** ,Objet{},"| Paramètres WMS qui seront fait aux serveurs WMS pour les divers
 | type d'appels WMS (GetMap, GetLegendGraphics, ...). ",Référez-vous aux paramètres WMS ici-bas. ,
