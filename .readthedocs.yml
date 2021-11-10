@@ -18,8 +18,8 @@ build:
       docutils: "0.17"
 # Optionally set the version of Python and requirements required to build your docs
 python:
-   version: 3.7
+   version: "3.7"
    install:
       - method: pip
-      path: "docutils=0.17"
+      path: docutils=0.17
    # - requirements: docs/requirements.txt
