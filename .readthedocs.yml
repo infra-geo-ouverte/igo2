@@ -18,10 +18,4 @@ python:
    version: "3.7"
    install:
    - requirements: docs/requirements.txt
-   #    - method: pip
-   #      docutils==0.17
-      #   path: docutils==0.17
-#         /home/docs/checkouts/readthedocs.org/user_builds/igo2/envs/newqueryparam-workspace-and-wmswfscombine/bin/python -m pip install --upgrade --upgrade-strategy eager --no-cache-dir ./docutils==0.17
-# ERROR: Invalid requirement: './docutils==0.17'
-# Hint: It looks like a path. File './docutils==0.17' does not exist.
-   # - requirements: docs/requirements.txt
+   # check here: probleme shinx version VS docutils version   https://githubmemory.com/repo/ivadomed/ivadomed/issues/973
