@@ -789,7 +789,8 @@ Exemples
                     "paramsWFS": {
                         "featureTypes": "etablissement_mtq",
                         "fieldNameGeometry": "geometry",
-                        "maxFeatures": 5000
+                        "maxFeatures": 5000,
+                        "combineLayerWFSMapQuerySameAsWms": true
                     },
                     "ogcFilters": {
                         "enabled": true,
