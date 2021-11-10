@@ -730,6 +730,7 @@ Paramètre (params) WMS
     d'échelle. La décision de faire l'appel des 3 paramètres en simultané est
     basé sur le fait que QGIS procède de la même manière.
 
+
 Paramètre - paramsWFS (Pour une couche combinée WMS-WFS)
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
@@ -740,6 +741,7 @@ Paramètre - paramsWFS (Pour une couche combinée WMS-WFS)
        :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
+
 
 Liens
 
