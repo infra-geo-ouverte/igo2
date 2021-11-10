@@ -1,2 +1,6 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 featureTypes ,String ,Nom de la couche WFS ,,
+fieldNameGeometry ,String,Nom du champ possédant la geometrie ,,
+maxFeatures , Number, Nb. d'entités retournés par le getFeature ,,
+outputFormat , String, Format de sortie ,,
+version, String, Version appel WFS ,,
