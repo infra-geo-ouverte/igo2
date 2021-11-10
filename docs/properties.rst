@@ -731,18 +731,6 @@ Paramètre (params) WMS
     basé sur le fait que QGIS procède de la même manière.
 
 
-Paramètre - paramsWFS (Pour une couche combinée WMS-WFS)
-
-    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
-    .. csv-table::
-       :file: _tables/fr/properties/sources/wms-wfs-params.csv
-       :header-rows: 1
-       :widths: 10 10 30 15 10
-
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
-
-
 Liens
 
     - `igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/wms-datasource.interface.ts>`__
@@ -798,6 +786,18 @@ Exemples
                     }
                 }
             }
+
+
+Paramètre spécifique couches WMS-WFS combinées - paramsWFS 
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/sources/wms-wfs-params.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 
 WMTS
