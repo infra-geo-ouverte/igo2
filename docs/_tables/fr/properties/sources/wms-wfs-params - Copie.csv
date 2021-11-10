@@ -4,5 +4,6 @@ fieldNameGeometry ,String,Nom du champ possédant la géométrie ,,
 maxFeatures , Number,Nb. d'entités retournés par le getFeature ,,
 outputFormat , String,Format de sortie ,,
 version, String,Version appel WFS ,,
-combineLayerWFSMapQuerySameAsWms, Boolean,"| Nombre de résultats retournés par le serveur
-| lors des appels GetFeatureInfo (clic sur carte)",,
+combineLayerWFSMapQuerySameAsWms, Boolean,"| Pour couche combinée WMS-WFS
+| Indique si l'interrogation de la couche est lancée
+| en WMS à l'échelle WFS ",,
