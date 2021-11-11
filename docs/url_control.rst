@@ -63,9 +63,13 @@ Centre de la carte
 Étendue de la carte
 *******************************
 
+    Permet de zoomer à l'étendue désirée à l'ouverture de la carte.
     Les coordonnées sont en latitude longitude, selon la logique suivante
     [minx, miny, maxx, maxy]. Elles seront converties selon la projection
     de la carte.
+
+    Ce paramètre d'URL a été introduite  car le zoom et le center (par url) 
+    ne permettent pas d'obtenir le même résultat, par mobile, tablette ou bureau.
 
     Params :
         - zoomExtent=
