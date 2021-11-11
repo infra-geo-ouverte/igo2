@@ -51,11 +51,27 @@ Zoom
 Centre de la carte
 *******************************
 
+    Les coordonnées sont en latitude longitude.
+
     Params :
         - center=
  
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?center=-70.70426615422834,57.62669012416586
+
+*******************************
+Étendue de la carte
+*******************************
+
+    Les coordonnées sont en latitude longitude, selon la logique suivante
+    [minx, miny, maxx, maxy]. Elles seront converties selon la projection
+    de la carte.
+
+    Params :
+        - zoomExtent=
+ 
+    Exemple:
+        - https://infra-geo-ouverte.github.io/igo2/?zoomExtent=-72,60,-71,61
 
 *******************************
 Visibilité des couches

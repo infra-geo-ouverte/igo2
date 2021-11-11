@@ -984,7 +984,20 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readToolParams();
       this.readSearchParams();
       this.readFocusFirst();
+      this.computeZoomToExtent();
     });
+  }
+
+  private computeZoomToExtent() {
+    if (this.routeParams['zoomExtent']) {
+      const extentParams = this.routeParams['zoomExtent'].split(',');
+      const olExtent = olProj.transformExtent(
+        extentParams,
+        'EPSG:4326',
+        this.map.projection
+      );
+      this.map.viewController.zoomToExtent(olExtent as [number, number, number, number]);
+    }
   }
 
   private computeFocusFirst() {
