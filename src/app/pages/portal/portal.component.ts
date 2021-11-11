@@ -497,7 +497,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   getNoQueryClickInWorkspace(result): boolean {
-    debugger;
       const layers = this.map.layers;
       for (const lay of layers) {
         if (!(lay.dataSource instanceof WMSDataSource)) {
