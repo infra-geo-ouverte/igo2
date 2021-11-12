@@ -497,9 +497,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
+    console.log(workspace);
     workspace.entityStore.deactivateStrategyOfType(FeatureStoreInMapExtentStrategy);
     this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
-    this.workspaceState.selectOnlyCheckCondition$.next(true);
+    //this.workspaceState.selectOnlyCheckCondition$.next(true);
     let feature =
     {
       type: "Feature",
@@ -507,15 +508,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     };
 
     for (const column of workspace.meta.tableTemplate.columns) {
-      if(column.name.includes('properties.')) {
+      if (column.name.includes('properties.')) {
       const columnName = column.name.slice(11);
       feature.properties[columnName] = '';
       }
     }
-    console.log(feature);
-    workspace.addFeature(feature, workspace);
-    this.workspaceState.selectOnlyCheckCondition$.next(false);
-    console.log('Entité ajoutée!');
+    // console.log(feature);
+    //workspace.entityStore.insert(feature);
+    workspace.editFeature(feature, workspace);
+    // this.workspaceState.selectOnlyCheckCondition$.next(false);
+    // console.log('Entité ajoutée!');
     //workspace.entityStore.activateStrategyOfType(FeatureStoreInMapExtentStrategy);
   }
 
