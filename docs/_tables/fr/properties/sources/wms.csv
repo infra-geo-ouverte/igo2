@@ -1,15 +1,13 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 **type*** ,String ,,wms,wms
 **url*** ,,"| L'URL du service WMS utilisé
-| SANS les paramètres d'appels
-| WMS. L'application se charge
-| de compléter les paramètres
-| envoyés au serveur (KVP). ",,
+| SANS les paramètres d'appels WMS. L'application se charge
+| de compléter les paramètres envoyés au serveur (KVP). ",,
+urlWfs, String, URL pour le service WFS dans le cas d'une couche combinée WMS-WFS. ,,
+paramsWFS, Object{}, Dans le cas d'une couche combinée WMS-WFS voir paramWFS. ,,
 optionsFromCapabilities ,Boolean,Paramètre pour récupérer des informations du service. ,true | false,false
-**params*** ,Objet{},"| Paramètres WMS qui seront fait
-| aux serveurs WMS pour les divers
-| type d'appels WMS
-| (GetMap, GetLegendGraphics, ...). ",Référez-vous aux paramètres WMS ici-bas. ,
+**params*** ,Objet{},"| Paramètres WMS qui seront fait aux serveurs WMS pour les divers
+| type d'appels WMS (GetMap, GetLegendGraphics, ...). ",Référez-vous aux paramètres WMS ici-bas. ,
 optionsFromApi ,Boolean,"| Paramètre pour récupérer des informations supplémentaires
 | par un service d'options de couches.. ",true | false,false
 refreshIntervalSec ,Number,"| Nombre de secondes entre chaque rafraichissement automatique
@@ -28,16 +26,11 @@ contentDependentLegend ,Boolean ,"| Pour Mapserver et Geoserver, il est po
 queryable ,Boolean,Définit si la couche d'information est interrogeable par clic ou non ,true | false,true
 queryFormat ,String ,Format d'interrogation de la couche. ,"| - gml2
 | (application/vnd.ogc.gml) 
-| - gml3
-| (application/vnd.ogc.gml/3.1.1)
-| - json
-| (application/json)
-| - geojson
-| (application/geojson)
-| - esrijson
-| (esrijson)
-| - html
-| (text/html)
+| - gml3 (application/vnd.ogc.gml/3.1.1)
+| - json (application/json)
+| - geojson (application/geojson)
+| - esrijson (esrijson)
+| - html (text/html)
 | géométrie du clic auto générée
 | - htmlgml2
 | (text/html + application/vnd.ogc.gml)

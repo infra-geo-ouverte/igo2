@@ -1,10 +1,16 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
-enabled ,Boolean ,Définir si la couche aura ou non une table d'attributs. ,true | false ,"| Pour les sources vectorielles, true par défault.
+enabled ,Boolean ,Définir si la couche aura ou non une table d'attributs. ,true | false ,"| Pour les sources vectorielles true par défault.
 | Pour les wms avec des propriétés
-| WFS associées, false par défault"
-minResolution ,Number ,"| Indique la résolution minimale (grande échelle, très zoomé)
+| WFS associées false par défault"
+minResolution ,Number ,"| Indique la résolution minimale (grande échelle très zoomé)
 | à laquelle la table d'attribut pourra faire apparaître des
 | enregistrements. ",0 à Infinity ou absent ,
-maxResolution ,Number ,"| Indique la résolution maximale (petite échelle,peu zoomé)
+maxResolution ,Number,"| Indique la résolution maximale (petite échelle peu zoomé)
 | à laquelle la table d'attribut pourra faire apparaître des
-| enregistrements. ",0 à Infinity ou absent ,
+| enregistrements.",0 à Infinity ou absent ,
+noQueryOnClickInTab,Boolean,"| Indique si un query sera fait sur
+| click dans la table attribut.", true false, false 
+noMapQueryOnOpenTab ,Boolean,"| Indique si un query sera fait sur
+| click sur un élément dans la carte lorsque
+| la table attribut est ouverte sur la
+| même couche.", true false, false 
