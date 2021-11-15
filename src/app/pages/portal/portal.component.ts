@@ -59,6 +59,7 @@ import {
   handleFileImportError,
   handleFileImportSuccess,
   featureFromOl,
+  getFeatureLayerId,
   QueryService,
   WfsWorkspace,
   FeatureWorkspace,
@@ -68,7 +69,8 @@ import {
   computeOlFeaturesExtent,
   FeatureStoreInMapExtentStrategy,
   FeatureStoreInMapResolutionStrategy,
-  addStopToStore
+  addStopToStore,
+  WMSDataSource
 } from '@igo2/geo';
 
 import {
@@ -227,6 +229,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
   set expansionPanelExpanded(value: boolean) {
     this.workspaceState.workspacePanelExpanded = value;
+    this.workspaceState.workspacePanelExpanded$.next(value);
   }
 
   get toastPanelShown(): boolean {
@@ -529,9 +532,25 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.workspaceEntitySortChange$.next(true);
   }
 
+  getNoQueryClickInWorkspace(result): boolean {
+      const layers = this.map.layers;
+      for (const lay of layers) {
+        if (!(lay.dataSource instanceof WMSDataSource)) {
+          if (lay.options.workspace && lay.options.workspace.noQueryOnClickInTab) {
+            let featureLayerId = getFeatureLayerId(result.added[0]);
+            if (featureLayerId === lay.id) {
+              return true;
+            }
+          }
+        }
+      }
+  }
+
   entitySelectChange(result: { added: Feature[] }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
+    const noQueryToastPanel = this.getNoQueryClickInWorkspace(result);
+    if (noQueryToastPanel) { return; };
     if (result && result.added) {
       const results = result.added.map((res) => {
         if (
