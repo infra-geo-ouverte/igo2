@@ -13,7 +13,8 @@ import { WelcomeWindowService } from './welcome-window.service';
 export class WelcomeWindowComponent implements OnInit, OnDestroy {
   // isVisible = true;
   showAgain = false;
-  public discoverTitleInLocale$: Observable<string> = of(this.configService.getConfig('title'));
+  public discoverTitleInLocale$: Observable<string> =
+    of(this.configService.getConfig('welcomeWindow.discoverTitleInLocale') || this.configService.getConfig('title'));
   private title$$: Subscription;
   public html$: BehaviorSubject<string> = new BehaviorSubject(undefined);
 
