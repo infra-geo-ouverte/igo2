@@ -35,7 +35,8 @@ import {
   Tool,
   Widget,
   EntityTablePaginatorOptions,
-  EntityRecord
+  EntityRecord,
+  EntityStoreFilterSelectionStrategy
 } from '@igo2/common';
 import { AuthOptions, AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -70,7 +71,9 @@ import {
   FeatureStoreInMapExtentStrategy,
   FeatureStoreInMapResolutionStrategy,
   addStopToStore,
-  WMSDataSource
+  WMSDataSource,
+  FeatureStoreSelectionStrategy,
+  FeatureStoreLoadingStrategy
 } from '@igo2/geo';
 
 import {
@@ -500,9 +503,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
-    console.log(workspace);
-    workspace.entityStore.deactivateStrategyOfType(FeatureStoreInMapExtentStrategy);
-    this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
+    //workspace.entityStore.deactivateStrategyOfType(FeatureStoreInMapExtentStrategy);
+    //this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
     //this.workspaceState.selectOnlyCheckCondition$.next(true);
     let feature =
     {
@@ -510,14 +512,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       properties: {}
     };
 
-    for (const column of workspace.meta.tableTemplate.columns) {
-      if (column.name.includes('properties.')) {
-      const columnName = column.name.slice(11);
-      feature.properties[columnName] = '';
-      }
-    }
+    // for (const column of workspace.meta.tableTemplate.columns) {
+    //   if (column.name.includes('properties.') && column.type !== 'relation') {
+    //   const columnName = column.name.slice(11);
+    //   feature.properties[columnName] = '';
+    //   }
+    // }
     // console.log(feature);
-    //workspace.entityStore.insert(feature);
     workspace.editFeature(feature, workspace);
     // this.workspaceState.selectOnlyCheckCondition$.next(false);
     // console.log('Entité ajoutée!');
