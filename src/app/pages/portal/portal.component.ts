@@ -503,26 +503,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
-    //workspace.entityStore.deactivateStrategyOfType(FeatureStoreInMapExtentStrategy);
-    //this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
-    //this.workspaceState.selectOnlyCheckCondition$.next(true);
-    let feature =
-    {
+    let feature = {
       type: "Feature",
       properties: {}
     };
-
-    // for (const column of workspace.meta.tableTemplate.columns) {
-    //   if (column.name.includes('properties.') && column.type !== 'relation') {
-    //   const columnName = column.name.slice(11);
-    //   feature.properties[columnName] = '';
-    //   }
-    // }
-    // console.log(feature);
     workspace.editFeature(feature, workspace);
-    // this.workspaceState.selectOnlyCheckCondition$.next(false);
-    // console.log('Entité ajoutée!');
-    //workspace.entityStore.activateStrategyOfType(FeatureStoreInMapExtentStrategy);
   }
 
   paginatorChange(matPaginator: MatPaginator) {
