@@ -1,6 +1,6 @@
 {
   "name": "igo",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "Infrastructure géomatique ouverte",
   "repository": {
     "url": "https://github.com/infra-geo-ouverte/igo2"
@@ -58,13 +58,13 @@
     "@azure/msal-angular": "^2.0.1",
     "@azure/msal-browser": "^2.15.0",
     "@igo2/angular2-notifications": "^12.0.1",
-    "@igo2/auth": "~1.9.3",
-    "@igo2/common": "~1.9.3",
-    "@igo2/context": "~1.9.3",
-    "@igo2/core": "~1.9.3",
-    "@igo2/geo": "~1.9.3",
-    "@igo2/integration": "~1.9.3",
-    "@igo2/utils": "~1.9.3",
+    "@igo2/auth": "~1.9.4",
+    "@igo2/common": "~1.9.4",
+    "@igo2/context": "~1.9.4",
+    "@igo2/core": "~1.9.4",
+    "@igo2/geo": "~1.9.4",
+    "@igo2/integration": "~1.9.4",
+    "@igo2/utils": "~1.9.4",
     "@mat-datetimepicker/core": "^7.0.1",
     "@turf/buffer": "^6.5.0",
     "@turf/point-on-feature": "^6.5.0",

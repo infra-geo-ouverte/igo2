@@ -1,3 +1,13 @@
+## [1.9.4](https://github.com/infra-geo-ouverte/igo2/compare/1.9.3...1.9.4) (2021-11-16)
+
+
+### Features
+
+* **auth:** provide a config to setup a key value based on regex value (domain) ([#682](https://github.com/infra-geo-ouverte/igo2/issues/682)) ([7620768](https://github.com/infra-geo-ouverte/igo2/commit/7620768bbc650d3a6de4bef17c92f392062a59eb))
+* **igo2:** upgrade igo2-lib ([6b07452](https://github.com/infra-geo-ouverte/igo2/commit/6b07452df6bb0b007ccb0c1d15ef77cc62a9ed4e))
+
+
+
 ## [1.9.3](https://github.com/infra-geo-ouverte/igo2/compare/1.9.2...1.9.3) (2021-10-18)
 
 

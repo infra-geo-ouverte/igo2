@@ -10,3 +10,11 @@ hostsWithCredentials,{}[] (liste d'objet),"| Indique à l'application, la 
 |            withCredentials: true,
 |            domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
 |        }] ",,
+hostsByKey,{}[] (liste d'objet),"| Indique à l'application, la liste des domaines a être interceptés
+| et à y ajouter dans l'appel la clé/valeur en paramètres.  
+| ""withCredentials"": true/false selon la valeur définie.exemple: 
+|       [{
+|            keyProperty: 'theNameOfYourKey’,
+|            keyValue: 'theValueOfYourKey’,
+|            domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
+|        }] ",,
