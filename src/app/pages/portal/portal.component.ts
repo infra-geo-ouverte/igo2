@@ -35,8 +35,7 @@ import {
   Tool,
   Widget,
   EntityTablePaginatorOptions,
-  EntityRecord,
-  EntityStoreFilterSelectionStrategy
+  EntityRecord
 } from '@igo2/common';
 import { AuthOptions, AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -68,12 +67,8 @@ import {
   EditionWorkspaceService,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent,
-  FeatureStoreInMapExtentStrategy,
-  FeatureStoreInMapResolutionStrategy,
   addStopToStore,
   WMSDataSource,
-  FeatureStoreSelectionStrategy,
-  FeatureStoreLoadingStrategy
 } from '@igo2/geo';
 
 import {
