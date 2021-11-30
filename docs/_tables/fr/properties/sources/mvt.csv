@@ -17,7 +17,7 @@ featureClass ,String ,"| Définir cette option en tant que 'feature' pour
 | Cette option diminue les performances de rendu des tuiles.
 | Ne pas utiliser cette option pour
 | optimiser le rendu des tuiles. ",feature ,
-queryFeature ,Boolean ,Définit si les entitées vectorielles de la couche seront interrogées ,true | false, true
+queryLayerFeatures ,Boolean ,Définit si les entitées vectorielles de la couche seront interrogées ,true | false, true
 queryUrl ,String , "| Paramètres possibles dans l'url:
 | {ymin}, {xmax}, {ymax}, {xmin}, {x}, {y}, {resolution}, {srid}", "| Exemple:
 | ""queryUrl"": ""https://mapserver.com/test?x={x}&y={y}"" ", Null si non défini

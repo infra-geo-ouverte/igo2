@@ -26,7 +26,7 @@ contentDependentLegend ,Boolean ,"| Pour Mapserver et Geoserver, il est po
 | la couche.
 | IMPORTANT: Ne tient pas compte des filtres OGC appliqués. ",true | false,false
 queryable ,Boolean,Définit si la couche d'information est interrogeable par clic ou non ,true | false,true
-queryFeature ,Boolean ,Définit si les entitées vectorielles de la couche seront interrogées ,true | false, true
+queryLayerFeatures ,Boolean ,Définit si les entitées vectorielles de la couche seront interrogées ,true | false, true
 queryUrl ,String , "| Paramètres possibles dans l'url:
 | {ymin}, {xmax}, {ymax}, {xmin}, {x}, {y}, {resolution}, {srid}", "| Exemple:
 | ""queryUrl"": ""https://mapserver.com/test?x={x}&y={y}"" ", Null si non défini
