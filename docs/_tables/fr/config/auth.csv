@@ -1,0 +1,20 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+url,String,Définit l'url d'appel du service d'authentification,,
+**tokenKey***,String,Définit la clef de l'api d'authentification utilisée,,
+allowAnonymous,Boolean,"|  Permet/Bloque l'accès aux usagers non authentifiés
+| d'accéder aux contextes publics ",true | false,true
+hostsWithCredentials,{}[] (liste d'objet),"| Indique à l'application, la liste des domaines a être interceptés
+| et à y ajouter dans l'appel. 
+| ""withCredentials"": true/false selon la valeur définie.exemple: 
+|       [{
+|            withCredentials: true,
+|            domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
+|        }] ",,
+hostsByKey,{}[] (liste d'objet),"| Indique à l'application, la liste des domaines a être interceptés
+| et à y ajouter dans l'appel la clé/valeur en paramètres.  
+| ""withCredentials"": true/false selon la valeur définie.exemple: 
+|       [{
+|            keyProperty: 'theNameOfYourKey’,
+|            keyValue: 'theValueOfYourKey’,
+|            domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
+|        }] ",,

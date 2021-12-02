@@ -7,11 +7,13 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject } from 'rxjs';
-import { debounceTime, take, pairwise, skipWhile } from 'rxjs/operators';
+import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
+import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MapBrowserPointerEvent as OlMapBrowserPointerEvent } from 'ol/MapBrowserEvent';
+import MapBrowserEvent from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
+import olFeature from 'ol/Feature';
+import type { default as OlGeometry } from 'ol/geom/Geometry';
 
 import {
   MediaService,
@@ -61,7 +63,8 @@ import {
   WfsWorkspace,
   FeatureWorkspace,
   generateIdFromSourceOptions,
-  computeOlFeaturesExtent
+  computeOlFeaturesExtent,
+  addStopToStore
 } from '@igo2/geo';
 
 import {
@@ -70,7 +73,8 @@ import {
   SearchState,
   QueryState,
   ContextState,
-  WorkspaceState
+  WorkspaceState,
+  DirectionState
 } from '@igo2/integration';
 
 import {
@@ -82,7 +86,7 @@ import {
   mapSlideX,
   mapSlideY
 } from './portal.animation';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
@@ -105,6 +109,8 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
+  public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(undefined);
+  public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasGeolocateButton = true;
@@ -126,7 +132,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   readonly workspaceMaximize$: BehaviorSubject<boolean> = new BehaviorSubject(
     this.storageService.get('workspaceMaximize') as boolean
   );
-  public sidenavOpened = false;
+
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
@@ -142,6 +148,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private context$$: Subscription;
   private openSidenav$$: Subscription;
+  private sidenavMediaAndOrientation$$: Subscription;
 
   public igoSearchPointerSummaryEnabled: boolean;
 
@@ -152,7 +159,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     undefined
   );
   private routeParams: Params;
-  private menuButtonReverseColor = false;
   public toastPanelHtmlDisplay = false;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
@@ -162,6 +168,14 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get map(): IgoMap {
     return this.mapState.map;
+  }
+
+  get sidenavOpened(): boolean {
+    return this.sidenavOpened$.value;
+  }
+
+  set sidenavOpened(value: boolean) {
+    this.sidenavOpened$.next(value);
   }
 
   get auth(): AuthOptions {
@@ -295,13 +309,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     private welcomeWindowService: WelcomeWindowService,
     public dialogWindow: MatDialog,
     private queryService: QueryService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton =
     this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton') ;
     this.showRotationButtonIfNoRotation =
-    this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ? false : this.configService.getConfig('showRotationButtonIfNoRotation') ;
+      this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ?
+        false :
+        this.configService.getConfig('showRotationButtonIfNoRotation');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
       'hasFeatureEmphasisOnSelection'
@@ -313,15 +330,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
     if (this.igoSearchPointerSummaryEnabled === undefined) {
       this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
-    }
-
-    if (
-      typeof this.configService.getConfig('menuButtonReverseColor') !==
-      'undefined'
-    ) {
-      this.menuButtonReverseColor = this.configService.getConfig(
-        'menuButtonReverseColor'
-      );
     }
   }
 
@@ -436,19 +444,29 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       }
     );
+
+    this.sidenavMediaAndOrientation$$ =
+      combineLatest([
+        this.sidenavOpened$,
+        this.mediaService.media$,
+        this.mediaService.orientation$]
+      ).pipe(
+        debounceTime(50)
+      ).subscribe((sidenavMediaAndOrientation: [boolean, string, string]) => {
+        this.computeToastPanelOffsetX();
+      });
   }
 
-  getClassMenuButton() {
-    if (this.sidenavOpened) {
-      return {
-        'menu-button': this.menuButtonReverseColor === false,
-        'menu-button-reverse-color': this.menuButtonReverseColor === true
-      };
+  setToastPanelHtmlDisplay(value) {
+    this.toastPanelHtmlDisplay = value;
+    this.computeToastPanelOffsetX();
+  }
+
+  computeToastPanelOffsetX() {
+    if (this.isMobile() || !this.isLandscape()) {
+      Promise.resolve().then(() => this.toastPanelOffsetX$.next(undefined));
     } else {
-      return {
-        'menu-button': this.menuButtonReverseColor === false,
-        'menu-button-reverse-color-close ': this.menuButtonReverseColor === true
-      };
+      Promise.resolve().then(() => this.toastPanelOffsetX$.next(this.getToastPanelExtent()));
     }
   }
 
@@ -486,9 +504,10 @@ export class PortalComponent implements OnInit, OnDestroy {
           res.ol.getProperties()._featureStore.layer &&
           res.ol.getProperties()._featureStore.layer.visible
         ) {
+          const ol = res.ol as olFeature<OlGeometry>;
           const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
           const feature = featureFromOl(
-            res.ol,
+            ol,
             featureStoreLayer.map.projection,
             featureStoreLayer.ol
           );
@@ -528,6 +547,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.activeWidget$$.unsubscribe();
     this.openSidenav$$.unsubscribe();
     this.workspaceMaximize$$.map(f => f.unsubscribe());
+    this.sidenavMediaAndOrientation$$.unsubscribe();
   }
 
   /**
@@ -558,7 +578,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.toastPanelForExpansionOpened = true;
   }
 
-  onMapQuery(event: { features: Feature[]; event: OlMapBrowserPointerEvent }) {
+  onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
 
@@ -586,7 +606,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearchTermChange(term?: string) {
-    if (this.routeParams?.search &&  term !== this.routeParams.search) {
+    if (this.routeParams?.search && term !== this.routeParams.search) {
       this.searchState.deactivateCustomFilterTermStrategy();
   }
 
@@ -645,6 +665,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private toggleSidenav() {
     this.sidenavOpened ? this.closeSidenav() : this.openSidenav();
+    this.computeToastPanelOffsetX();
   }
 
   public toolChanged(tool: Tool) {
@@ -734,7 +755,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onContextMenuOpen(event: { x: number; y: number }) {
-    this.contextMenuCoord = this.getClickCoordinate(event);
+    this.contextMenuCoord = this.getClickCoordinate(event) as [number, number];
   }
 
   private getClickCoordinate(event: { x: number; y: number }) {
@@ -908,7 +929,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
   getControlsOffsetY() {
-    return this.expansionPanelExpanded ? this.workspaceMaximize$.value ? 'firstRowFromBottom-expanded-maximized' : 'firstRowFromBottom-expanded' : 'firstRowFromBottom';
+    return this.expansionPanelExpanded ?
+      this.workspaceMaximize$.value ? 'firstRowFromBottom-expanded-maximized' : 'firstRowFromBottom-expanded' :
+      'firstRowFromBottom';
   }
 
   getBaselayersSwitcherStatus() {
@@ -920,21 +943,21 @@ export class PortalComponent implements OnInit, OnDestroy {
           if (this.queryState.store.entities$.value.length === 0) {
             status = 'secondRowFromBottom';
            } else {
-            status =  'thirdRowFromBottom';
+            status = 'thirdRowFromBottom';
            }
         } else {
           if (this.queryState.store.entities$.value.length === 0) {
             status = 'firstRowFromBottom-expanded';
            } else {
-            status =  'secondRowFromBottom-expanded';
+            status = 'secondRowFromBottom-expanded';
            }
         }
 
       } else {
         if (this.queryState.store.entities$.value.length === 0) {
-          status =  'firstRowFromBottom';
+          status = 'firstRowFromBottom';
          } else {
-          status =  'secondRowFromBottom';
+          status = 'secondRowFromBottom';
          }
       }
     } else {
@@ -1037,6 +1060,54 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.openSidenav();
       }, 250);
     }
+
+    if (this.routeParams['routing']) {
+      let routingCoordLoaded = false;
+      const stopCoords = this.routeParams['routing'].split(';');
+      const routingOptions = this.routeParams['routingOptions'];
+      let resultSelection: number;
+      if (routingOptions) {
+        resultSelection = parseInt(routingOptions.split('result:')[1], 10);
+      }
+      this.directionState.stopsStore.storeInitialized$
+        .pipe(skipWhile(init => !init), first())
+        .subscribe((init: boolean) => {
+          if (init && !routingCoordLoaded) {
+            routingCoordLoaded = true;
+            stopCoords.map((coord, i) => {
+              if (i > 1) {
+                addStopToStore(this.directionState.stopsStore);
+              }
+            });
+            setTimeout(() => {
+              stopCoords.map((coord, i) => {
+                const stop = this.directionState.stopsStore.all().find(e => e.position === i);
+                stop.text = coord;
+                stop.coordinates = coord.split(',');
+                this.directionState.stopsStore.update(stop);
+              });
+            }, this.directionState.debounceTime * 1.25); // this delay is due to the default component debounce time
+          }
+        });
+      // zoom to active route
+      this.directionState.routesFeatureStore.count$
+        .pipe(skipWhile(c => c < 1), first())
+        .subscribe(c => {
+          if (c >= 1) {
+            this.directionState.zoomToActiveRoute$.next();
+          }
+        });
+      // select the active route by url controls
+      this.directionState.routesFeatureStore.count$
+        .pipe(skipWhile(c => c < 2), first())
+        .subscribe(() => {
+          if (resultSelection) {
+            this.directionState.routesFeatureStore.entities$.value.map(d => d.properties.active = false);
+            this.directionState.routesFeatureStore.entities$.value[resultSelection].properties.active = true;
+            this.directionState.zoomToActiveRoute$.next();
+          }
+        });
+    }
   }
 
   private readLayersQueryParams(params: Params) {
@@ -1046,6 +1117,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.readLayersQueryParamsByType(params, 'imagearcgisrest');
     this.readLayersQueryParamsByType(params, 'tilearcgisrest');
     this.readVectorQueryParams(params);
+  }
+
+  getQueryParam(name, url) {
+    let paramValue;
+    if (url.includes('?')) {
+      const httpParams = new HttpParams({ fromString: url.split('?')[1] });
+      paramValue = httpParams.get(name);
+    }
+    return paramValue;
   }
 
   private readLayersQueryParamsByType(params: Params, type) {
@@ -1090,7 +1170,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     const urls = params[urlsKey].split(',');
 
     let cnt = 0;
-    urls.forEach((url) => {
+    urls.forEach((urlSrc) => {
+      let url = urlSrc;
+      const version =
+        this.getQueryParam('VERSION', url) ||
+        this.getQueryParam('version', url) ||
+        undefined;
+      if (version) {
+        url = url.replace('VERSION=' + version, '').replace('version=' + version, '');
+      }
+
       const currentLayersByService = this.extractLayersByService(
         layersByService[cnt]
       );
@@ -1108,6 +1197,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           url,
           layerFromUrl[0],
           type,
+          version,
           visibility,
           layerFromUrl[1] ? parseInt(layerFromUrl[1], 10) : undefined
         );
@@ -1168,6 +1258,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     url: string,
     name: string,
     type: 'wms' | 'wmts' | 'arcgisrest'| 'imagearcgisrest' | 'tilearcgisrest',
+    version: string,
     visibility: boolean = true,
     zIndex: number
   ) {
@@ -1184,12 +1275,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     const arcgisClause = (type === 'arcgisrest' || type === 'imagearcgisrest' || type === 'tilearcgisrest');
     let sourceOptions = {
       version: type === 'wmts' ? '1.0.0' : undefined,
-      queryable: arcgisClause  ? true : false,
-      queryFormat: arcgisClause  ? 'esrijson' : undefined,
+      queryable: arcgisClause ? true : false,
+      queryFormat: arcgisClause ? 'esrijson' : undefined,
       layer: name
     };
     if (type === 'wms') {
-      sourceOptions =  { params: {LAYERS: name}} as any;
+      sourceOptions = { params: {LAYERS: name, VERSION: version}} as any;
     }
 
     sourceOptions = ObjectUtils.removeUndefined(Object.assign({}, sourceOptions, commonSourceOptions));
@@ -1239,7 +1330,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     // After, managing named layer by id (context.json OR id from datasource)
     visiblelayers = visibleOnLayersParams.split(',');
     invisiblelayers = visibleOffLayersParams.split(',');
-    if (visiblelayers.indexOf(currentLayerid) > -1  || visiblelayers.indexOf(currentLayerid.toString()) > -1) {
+    if (visiblelayers.indexOf(currentLayerid) > -1 || visiblelayers.indexOf(currentLayerid.toString()) > -1) {
       visible = true;
     }
     if (invisiblelayers.indexOf(currentLayerid) > -1 || invisiblelayers.indexOf(currentLayerid.toString()) > -1) {

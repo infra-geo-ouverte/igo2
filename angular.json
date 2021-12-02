@@ -16,6 +16,7 @@
       },
       "architect": {
         "build": {
+          "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
@@ -44,10 +45,14 @@
             "styles": ["src/styles.scss"],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/style/partial"]
+              "includePaths": [
+                "src/style/partial",
+                "src/app/pages/portal",
+                "node_modules"
+              ]
             },
             "allowedCommonJsDependencies": [
-              "angular2-notifications",
+              "@igo2/angular2-notifications",
               "hammerjs",
               "typy",
               "jspdf",
@@ -64,7 +69,25 @@
               "path",
               "pixelworks",
               "brace-expansion",
-              "rbush"
+              "rbush",
+              "@babel/runtime-corejs3",
+              "core-js-pure",
+              "raf",
+              "txml",
+              "lru-cache",
+              "lerc",
+              "pako/lib/inflate",
+              "through2",
+              "yallist",
+              "debug",
+              "striptags",
+              "core-js/modules/es.promise.js",
+              "core-js/modules/es.regexp.to-string.js",
+              "core-js/modules/es.array.reverse.js",
+              "core-js/modules/es.array.index-of.js",
+              "core-js/modules/es.array.reduce.js",
+              "core-js/modules/web.dom-collections.iterator.js",
+              "core-js/modules/es.array.iterator.js"
             ]
           },
           "configurations": {
@@ -72,7 +95,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "8kb"
+                  "maximumWarning": "12kb"
                 }
               ],
               "fileReplacements": [
@@ -91,11 +114,19 @@
               "vendorChunk": true,
               "buildOptimizer": false
             },
+            "developpement": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "github": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "8kb"
+                  "maximumWarning": "12kb"
                 }
               ],
               "fileReplacements": [
@@ -117,11 +148,15 @@
           }
         },
         "serve": {
+          "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "igo2:build"
           },
           "configurations": {
+            "developpement": {
+              "browserTarget": "igo2:build:developpement"
+            },
             "production": {
               "browserTarget": "igo2:build:production"
             },
@@ -145,14 +180,23 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": ["src/styles.scss"],
             "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/style/partial",
+                "src/app/pages/portal",
+                "node_modules"
+              ]
+            },
             "assets": ["src/favicon.ico", "src/assets"]
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
@@ -169,14 +213,18 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "e2e/**/*.ts"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "igo2"
+  "defaultProject": "igo2",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

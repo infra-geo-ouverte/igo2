@@ -47,16 +47,6 @@ div.toolActivated > igo-panel ::ng-deep > div.igo-panel-header {
   position: relative;
 }
 
-#homeButton {
-  position: absolute;
-  top: 50px;
-  left: 0px;
-  color: white;
-  border-radius: 0;
-  height: 46px;
-  width: 48px;
-}
-
 igo-toolbox {
   @include mobile {
     overflow: auto;

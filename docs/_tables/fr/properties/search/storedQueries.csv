@@ -1,0 +1,15 @@
+Propriétés,Description,Valeur défaut
+**fields*** ,"| Liste des champs à intéroger pour la StoredQueries.
+| La structure est la suivante:
+| 1er attribut: {« name »: « rtss », »defaultValue »: « -99 »},
+| 2e attribut : {« name »: « chainage », »defaultValue »: « 0 », »splitPrefix »: « \+ »}
+| afin de représenter le terme dans la barre de recherche:  0013801110000c+12",
+outputFormat ,"| Référer au GetCapabilities pour découvrir les formats supportés par votre serveur.
+| Vous ne pouvez définir de GML 3.2 + compte tenu d'un 
+| `bug <https://github.com/openlayers/openlayers/pull/6400>`__  connu d'Openlayers. ",text/xml; subtype=gml/3.1.1 
+param ,"| Objet contenant les paramètres supplémentaires à envoyer au service lors de l'appel
+| de la storedqueries.
+| Le paramètre 'limit' peut aussi y être utilisé pour limité le nombre de résultat de recherche. ",
+resultTitle ,Nom de l'attribut à utiliser pour le titre du résultat. ,
+searchUrl ,Url du service ,https://ws.mapserver.transports.gouv.qc.ca/swtq 
+**storedquery_id*** ,Nom de la requête à demander au serveur. ,

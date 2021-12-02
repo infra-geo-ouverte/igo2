@@ -37,40 +37,34 @@ hasExpansionPanel
 =================
 
     .. warning::
+
        En cours de construction
 
     .. line-block::
+
         Voici ma desc
 
 Exemples
 
+    .. code:: json
 
-        .. code:: json
-
-            indenté
+          {
+              "icon" : "iconName",
+              "name" : "catalogBrowser",
+              "title": "TitreOutilQuiDoitEtreTraduit",
+              "options" : {
+                  "optiona": 2
+              }
+          }
 
 Propriétés
 
-    .. list-table::
-       :widths: 10 10 30 15 10
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/template.csv
        :header-rows: 1
-    
-       * - .. line-block::
-               Propriétés
-         - .. line-block::
-               Type
-         - .. line-block::
-               Description
-         - .. line-block::
-               Valeurs possibles
-         - .. line-block::
-               Valeur défaut
-       * - 
-         - 
-         - .. line-block::
-               Desc
-         - enum?
-         - val
+       :widths: 10 10 30 15 10
 
 Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 

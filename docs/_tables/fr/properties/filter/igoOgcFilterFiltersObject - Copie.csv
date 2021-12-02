@@ -1,0 +1,2 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+title ,String ,Le type de sélecteur. ,"pushButton, checkbox, radioButton, select ",
