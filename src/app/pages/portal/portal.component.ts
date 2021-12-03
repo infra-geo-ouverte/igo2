@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
 import olFeature from 'ol/Feature';
@@ -133,6 +133,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.storageService.get('workspaceMaximize') as boolean
   );
 
+  public matDialogRef$ = new BehaviorSubject<MatDialogRef<any>>(undefined);
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
@@ -1065,7 +1066,14 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private readToolParams() {
     if (this.routeParams['tool']) {
-      this.toolbox.activateTool(this.routeParams['tool']);
+      this.matDialogRef$.pipe(
+        skipWhile(r => r !== undefined),
+        first()
+      ).subscribe(matDialogOpened => {
+        if (!matDialogOpened) {
+          this.toolbox.activateTool(this.routeParams['tool']);
+        }
+      });
     }
 
     if (this.routeParams['sidenav'] === '1') {
@@ -1368,13 +1376,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.welcomeWindowService.hasWelcomeWindow()) {
       const welcomWindowConfig: MatDialogConfig = this.welcomeWindowService.getConfig();
 
-      const dialogRef = this.dialogWindow.open(
-        WelcomeWindowComponent,
-        welcomWindowConfig
-      );
+      this.matDialogRef$.next(
+          this.dialogWindow.open(
+          WelcomeWindowComponent,
+          welcomWindowConfig
+        ));
 
-      dialogRef.afterClosed().subscribe((result) => {
+        this.matDialogRef$.value.afterClosed().subscribe((result) => {
         this.welcomeWindowService.afterClosedWelcomeWindow();
+        this.matDialogRef$.next(undefined);
       });
     }
   }

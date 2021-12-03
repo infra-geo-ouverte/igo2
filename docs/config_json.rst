@@ -805,7 +805,8 @@ Exemples
               "welcomeWindow": {
                 "showAgainOnNewIGOVersion": true,
                 "nbVisitToShowAgain": 30,
-                "nbVisitToShow":3
+                "nbVisitToShow":3,
+                "discoverTitleInLocale": "votre application préférée"
               }
 
 Propriétés
