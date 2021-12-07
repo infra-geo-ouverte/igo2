@@ -74,7 +74,7 @@
         "styleByAttribute": {
           "type": "circle",
           "attribute": "MODELE",
-          "data": ["2.5\" X 2.5\" X 4\"","2.5\" X 2.5\"","2.5\" X 2.5\" X 4\" STORZ", null],
+          "data": ["^2.5\" X 2.5\" X 4\"$","^2.5\" X 2.5\"$","^2.5\" X 2.5\" X 4\" STORZ$", null],
           "color": ["orange","red","green","blue"],
           "fill": ["orange","red","green","blue"],
           "hstroke": ["orange","red","green","blue"],
@@ -128,7 +128,7 @@
       },
 
       {
-        "title": "Polygons - MVT - Style by attribute",
+        "title": "Polygons - MVT - Hover",
         "id": "mvtsbap",
         "visible": false,
         "hoverStyle": {
@@ -162,7 +162,7 @@
         }
       },
       {
-        "title": "Lines - MVT - Style by attribute",
+        "title": "Lines - MVT - Style by attribute + hover",
         "id": "mvtsbal",
         "visible": true,
         "declutter": true,
@@ -221,7 +221,7 @@
         }
       },
       {
-        "title": "Point - MVT - Style by attribute",
+        "title": "Point - MVT - Hover ",
         "id": "mvtsbapt",
         "visible": true,
         "declutter": true,
