@@ -30,6 +30,9 @@
     "previousFeatureTooltip": "Entité précédente ( raccouci clavier = flèche gauche )",
     "nextFeatureTooltip": "Prochaine entité ( raccouci clavier = flèche droite )"
   },
+  "initial-button": {
+    "tooltip": "Retourner à la position initiale"
+  },
   "IGO": "IGO",
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
   "coordinates": "Afficher les coordonnées",

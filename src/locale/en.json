@@ -30,6 +30,9 @@
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
     "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
   },
+  "initial": {
+    "tooltip": "Go back to initial position"
+  },
   "IGO": "IGO",
   "noEntityStore": "No tables available for this dataset",
   "coordinates": "Show coordinates",

@@ -15,6 +15,11 @@
   "showRotationButtonIfNoRotation": false,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
+  "hasInitialButton": {
+
+    "initCenter": [-73.938087, 49.500000],
+    "initZoom" : 6
+  },
   "searchSources": {
     "cadastre": {
       "available": false

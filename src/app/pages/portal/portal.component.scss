@@ -232,7 +232,7 @@ app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion 
 app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > igo-panel {
   max-height: 45vh;
  .toast-content {
-    max-height: 40vh; 
+    max-height: 40vh;
   }
 
   @include tablet {
@@ -251,7 +251,7 @@ app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-
   height: auto;
   max-height: 30vh;
   .toast-content {
-    max-height: 25vh; 
+    max-height: 25vh;
   }
 }
 
@@ -286,6 +286,18 @@ igo-geolocate-button {
     margin-bottom: 0px;
   }
 }
+
+igo-initial-button {
+  @include mobile {
+    margin-bottom: 0px;
+    right: 105px;
+  }
+  @include tablet {
+    margin-bottom: 0px;
+    right: 105px;
+  }
+}
+
 
 igo-zoom-button {
   @include tablet {
