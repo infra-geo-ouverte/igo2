@@ -290,11 +290,11 @@ igo-geolocate-button {
 igo-initial-button {
   @include mobile {
     margin-bottom: 0px;
-    right: 105px;
+    right: calc((2 * #{$igo-icon-size}) +  (4 * #{$igo-margin}))
   }
   @include tablet {
     margin-bottom: 0px;
-    right: 105px;
+    right: calc((2 * #{$igo-icon-size}) +  (4 * #{$igo-margin}))
   }
 }
 
