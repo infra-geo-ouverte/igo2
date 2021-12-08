@@ -1,0 +1,92 @@
+{
+  "version": 8,
+  "name": "Example Style Vector Tile",
+  "metadata": {"maputnik:renderer": "mbgljs"},
+  "sources": {
+    "ahocevar": {
+      "type": "vector",
+      "minZoom": 0,
+      "maxZoom": 22
+    }
+  },
+  "sprite": "",
+  "layers": [
+    {
+      "id": "line_style_canada",
+      "type": "line",
+      "source": "ahocevar",
+      "source-layer": "ne_10m_admin_0_countries",
+      "filter": ["any", ["==", "admin", "Canada"]],
+      "paint": {
+        "line-color": "rgba(0, 0, 0, 1)"
+      },
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+       }
+    },
+    {
+      "id": "fill_style_canada",
+      "type": "fill",
+      "source": "ahocevar",
+      "source-layer": "ne_10m_admin_0_countries",
+      "filter": ["any", ["==", "admin", "Canada"]],
+      "paint": {
+        "fill-color": "rgba(255, 10, 10, 0.5)"
+      },
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+       }
+    },
+    {
+      "id": "line_style_usa",
+      "type": "line",
+      "source": "ahocevar",
+      "source-layer": "ne_10m_admin_0_countries",
+      "filter": ["any", ["==", "admin", "United States of America"]],
+      "paint": {
+        "line-color": "rgba(0, 50, 255, 1)",
+        "line-width": 3
+      },
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+       }
+    },
+    {
+      "id": "fill_style_usa",
+      "type": "fill",
+      "source": "ahocevar",
+      "source-layer": "ne_10m_admin_0_countries",
+      "filter": ["any", ["==", "admin", "United States of America"]],
+      "paint": {
+        "fill-color": "rgba(0, 50, 255, 0.5)"
+      },
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+       }
+    },
+    {
+      "id": "fill_style_usa",
+      "type": "fill",
+      "source": "ahocevar",
+      "source-layer": "ne_10m_admin_0_countries",
+      "filter": ["any", ["==", "admin", "Liechtenstein"]],
+      "paint": {
+        "fill-color": "rgba(255, 255, 0, 1)"
+      },
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+       }
+    }
+  ],
+  "id": "vectortileid"
+}
