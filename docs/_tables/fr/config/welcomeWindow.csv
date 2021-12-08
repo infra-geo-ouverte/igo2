@@ -4,3 +4,5 @@ nbVisitToShow ,Number ,"| Nombre de fois que sera présenté la fenêtre�
 nbVisitToShowAgain ,Number ,La fenêtre d'accueil reviendra après le nombre de visite indiqué par ce paramètre. ,,
 showAgainOnNewIGOVersion ,Boolean ,"| Lorsque l'utilisateur coche la case ne plus afficher, la fenêtre d'accueil reviendra
 | si la version IGO est différente de la version lors de sa visite précédente. ",,true 
+discoverTitleInLocale ,string ,"| Permet de définir un titre pour le bouton lié au tour interactif. Si nul,
+| la clé IGO sera utilisé dans le fichier de traductiion. ",,IGO 

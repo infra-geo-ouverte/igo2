@@ -32,10 +32,11 @@
             "messages": [
                 {
                     "title": "Info",
-                    "text": "First message at layer level",
+                    "text": "First message at layer level, always shown when the layer is set to be visible",
                     "type": "info",
                     "options": {
-                        "timeOut": 20000
+                        "timeOut": 20000,
+                        "showOnEachLayerVisibility": true
                     }
                 },
                 {

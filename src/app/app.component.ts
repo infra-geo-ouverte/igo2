@@ -70,9 +70,10 @@ export class AppComponent {
 
   private detectOldBrowser() {
     const oldBrowser = userAgent.satisfies({
-      ie: '<11',
+      ie: '<=11',
       chrome: '<64',
-      firefox: '<60'
+      firefox: '<60',
+      safari: '<=11'
     });
 
     if (oldBrowser) {

@@ -102,6 +102,11 @@ Exemples
                 "hostsWithCredentials": [{
                                            withCredentials: true,
                                            domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
+                                        }],
+                "hostsByKey": [{
+                                           keyProperty: 'theNameOfYourKey,
+                                           keyValue: 'theValueOfYourKey',
+                                           domainRegFilters: '(https:\/\/|http:\/\/)(.*domain.com)(.*)'
                                         }]
             }
 
@@ -800,7 +805,8 @@ Exemples
               "welcomeWindow": {
                 "showAgainOnNewIGOVersion": true,
                 "nbVisitToShowAgain": 30,
-                "nbVisitToShow":3
+                "nbVisitToShow":3,
+                "discoverTitleInLocale": "votre application préférée"
               }
 
 Propriétés
