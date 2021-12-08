@@ -145,6 +145,11 @@
           "action": "click"
         }
       },
+      "element": "igo-initial-button",
+      "title": "interactiveTour.global.initial-title",
+      "text": "interactiveTour.global.initial",
+      "noBackButton": true
+    },
       {
         "element": "igo-geolocate-button",
         "title": "interactiveTour.global.geolocate-title",
