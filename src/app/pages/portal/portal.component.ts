@@ -64,8 +64,7 @@ import {
   FeatureWorkspace,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent,
-  addStopToStore,
-  WMSDataSource
+  addStopToStore
 } from '@igo2/geo';
 
 import {
