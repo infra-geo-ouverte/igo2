@@ -91,6 +91,8 @@
       "tool-choose": "Si nous sélectionnons un outil de la boîte à outils...",
       "tool-enter": "...son contenu s'affichera ici.",
       "home-button": "Ce bouton nous permet ensuite le retour au menu principal.",
+      "initial-title": "ÉTENDUE INITIALE",
+      "initial": "Pour revenir à l'étendue initiale de la carte.",
       "geolocate-title": "GEOLOCALISATION",
       "geolocate": "Pour zoomer la carte sur votre position.",
       "user-title": "UTILISATEUR",

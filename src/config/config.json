@@ -15,9 +15,9 @@
   "showRotationButtonIfNoRotation": false,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
-  "hasInitialButton": {
-
-    "initCenter": [-73.938087, 49.500000],
+  "setInitialButton": {
+    "initExtent":[-9000000, 5790000,-7500000, 6770000],
+    "initCenter": [-73.938087, 49.000000],
     "initZoom" : 6
   },
   "searchSources": {
