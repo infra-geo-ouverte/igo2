@@ -222,5 +222,8 @@
   "pwa": {
     "new-version-title": "Une nouvelle version de l'application est disponible",
     "new-version": "Voulez vous recharger l'application?"
+  },"messages": {
+    "title": "Titre provenant d'une traduction",
+    "message": "Message provenant d'une traduction - <div class='toast-message-green-div'>Message provenant du contexte</div>Ouvrez lea couche 'MSP Tel. Urgence' pour voir les messages liés."
   }
 }

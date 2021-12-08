@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
 import olFeature from 'ol/Feature';
@@ -133,6 +133,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.storageService.get('workspaceMaximize') as boolean
   );
 
+  public matDialogRef$ = new BehaviorSubject<MatDialogRef<any>>(undefined);
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
@@ -314,7 +315,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton =
-    this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton') ;
+      this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton');
     this.showRotationButtonIfNoRotation =
       this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ?
         false :
@@ -619,7 +620,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   onSearchTermChange(term?: string) {
     if (this.routeParams?.search && term !== this.routeParams.search) {
       this.searchState.deactivateCustomFilterTermStrategy();
-  }
+    }
 
     this.searchState.setSearchTerm(term);
     const termWithoutHashtag = term.replace(/(#[^\s]*)/g, '').trim();
@@ -953,23 +954,23 @@ export class PortalComponent implements OnInit, OnDestroy {
         if (this.expansionPanelExpanded === false) {
           if (this.queryState.store.entities$.value.length === 0) {
             status = 'secondRowFromBottom';
-           } else {
+          } else {
             status = 'thirdRowFromBottom';
-           }
+          }
         } else {
           if (this.queryState.store.entities$.value.length === 0) {
             status = 'firstRowFromBottom-expanded';
-           } else {
+          } else {
             status = 'secondRowFromBottom-expanded';
-           }
+          }
         }
 
       } else {
         if (this.queryState.store.entities$.value.length === 0) {
           status = 'firstRowFromBottom';
-         } else {
+        } else {
           status = 'secondRowFromBottom';
-         }
+        }
       }
     } else {
       if (this.workspaceState.workspaceEnabled$.value) {
@@ -995,7 +996,20 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readToolParams();
       this.readSearchParams();
       this.readFocusFirst();
+      this.computeZoomToExtent();
     });
+  }
+
+  private computeZoomToExtent() {
+    if (this.routeParams['zoomExtent']) {
+      const extentParams = this.routeParams['zoomExtent'].split(',');
+      const olExtent = olProj.transformExtent(
+        extentParams,
+        'EPSG:4326',
+        this.map.projection
+      );
+      this.map.viewController.zoomToExtent(olExtent as [number, number, number, number]);
+    }
   }
 
   private computeFocusFirst() {
@@ -1035,24 +1049,24 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       if (this.routeParams['search'] && !this.routeParams['zoom'] && this.routeParams['sf'] !== '1') {
         const entities$$ = this.searchStore.stateView.all$()
-        .pipe(
-          skipWhile((entities) => entities.length === 0),
-          debounceTime(500),
-          take(1)
-        )
-        .subscribe((entities) => {
-          entities$$.unsubscribe();
-          const searchResultsOlFeatures = entities
-            .filter(e => e.entity.meta.dataType === FEATURE)
-            .map((entity: EntityRecord<SearchResult>) =>
-              new olFormatGeoJSON().readFeature(entity.entity.data, {
-                dataProjection: entity.entity.data.projection,
-                featureProjection: this.map.projection
-              })
-            );
+          .pipe(
+            skipWhile((entities) => entities.length === 0),
+            debounceTime(500),
+            take(1)
+          )
+          .subscribe((entities) => {
+            entities$$.unsubscribe();
+            const searchResultsOlFeatures = entities
+              .filter(e => e.entity.meta.dataType === FEATURE)
+              .map((entity: EntityRecord<SearchResult>) =>
+                new olFormatGeoJSON().readFeature(entity.entity.data, {
+                  dataProjection: entity.entity.data.projection,
+                  featureProjection: this.map.projection
+                })
+              );
             const totalExtent = computeOlFeaturesExtent(this.map, searchResultsOlFeatures);
             this.map.viewController.zoomToExtent(totalExtent);
-        });
+          });
       }
       this.searchBarTerm = this.routeParams['search'];
     }
@@ -1063,7 +1077,14 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private readToolParams() {
     if (this.routeParams['tool']) {
-      this.toolbox.activateTool(this.routeParams['tool']);
+      this.matDialogRef$.pipe(
+        skipWhile(r => r !== undefined),
+        first()
+      ).subscribe(matDialogOpened => {
+        if (!matDialogOpened) {
+          this.toolbox.activateTool(this.routeParams['tool']);
+        }
+      });
     }
 
     if (this.routeParams['sidenav'] === '1') {
@@ -1268,7 +1289,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private addLayerFromURL(
     url: string,
     name: string,
-    type: 'wms' | 'wmts' | 'arcgisrest'| 'imagearcgisrest' | 'tilearcgisrest',
+    type: 'wms' | 'wmts' | 'arcgisrest' | 'imagearcgisrest' | 'tilearcgisrest',
     version: string,
     visibility: boolean = true,
     zIndex: number
@@ -1291,7 +1312,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       layer: name
     };
     if (type === 'wms') {
-      sourceOptions = { params: {LAYERS: name, VERSION: version}} as any;
+      sourceOptions = { params: { LAYERS: name, VERSION: version } } as any;
     }
 
     sourceOptions = ObjectUtils.removeUndefined(Object.assign({}, sourceOptions, commonSourceOptions));
@@ -1366,13 +1387,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.welcomeWindowService.hasWelcomeWindow()) {
       const welcomWindowConfig: MatDialogConfig = this.welcomeWindowService.getConfig();
 
-      const dialogRef = this.dialogWindow.open(
-        WelcomeWindowComponent,
-        welcomWindowConfig
-      );
+      this.matDialogRef$.next(
+          this.dialogWindow.open(
+          WelcomeWindowComponent,
+          welcomWindowConfig
+        ));
 
-      dialogRef.afterClosed().subscribe((result) => {
+        this.matDialogRef$.value.afterClosed().subscribe((result) => {
         this.welcomeWindowService.afterClosedWelcomeWindow();
+        this.matDialogRef$.next(undefined);
       });
     }
   }

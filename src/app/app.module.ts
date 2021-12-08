@@ -21,7 +21,8 @@ import {
   provideStoredQueriesSearchSource,
   provideOsrmDirectionsSource,
   provideOptionsApi,
-  provideCadastreSearchSource
+  provideCadastreSearchSource,
+  provideStyleListOptions
 } from '@igo2/geo';
 
 import { PwaService } from './services/pwa.service';
@@ -62,6 +63,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     provideOptionsApi(),
     provideCadastreSearchSource(),
     {provide: APP_INITIALIZER, useFactory: appInitializerFactory, deps: [LanguageService, PwaService, Injector], multi: true},
+    provideStyleListOptions({
+      path: './assets/list-style.json'
+    })
   ],
   bootstrap: [AppComponent]
 })
