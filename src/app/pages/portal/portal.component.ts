@@ -69,6 +69,9 @@ import {
   computeOlFeaturesExtent,
   addStopToStore,
   WMSDataSource,
+  ImageLayer,
+  VectorLayer,
+  FeatureStoreInMapExtentStrategy,
 } from '@igo2/geo';
 
 import {
@@ -503,7 +506,21 @@ export class PortalComponent implements OnInit, OnDestroy {
       type: "Feature",
       properties: {}
     };
+    feature.properties = this.createFeatureProperties(workspace.layer);
+    if (!workspace.layer.options.sourceOptions.edition.addWithDraw) {
+      console.log('ici');
+      workspace.entityStore.deactivateStrategyOfType(FeatureStoreInMapExtentStrategy);
+      this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
+    }
     workspace.editFeature(feature, workspace);
+  }
+
+  createFeatureProperties(layer: ImageLayer | VectorLayer) {
+    let properties = {};
+    layer.options.sourceOptions.sourceFields.forEach(field => {
+      properties[field.name] = "";
+    });
+    return properties;
   }
 
   paginatorChange(matPaginator: MatPaginator) {
