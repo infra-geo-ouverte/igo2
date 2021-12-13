@@ -1,3 +1,23 @@
+# [1.10.0](https://github.com/infra-geo-ouverte/igo2/compare/1.9.4...1.10.0) (2021-12-13)
+
+
+### Bug Fixes
+
+* **toast:** allow ctrl-c to copy content ([#703](https://github.com/infra-geo-ouverte/igo2/issues/703)) ([e8acc0e](https://github.com/infra-geo-ouverte/igo2/commit/e8acc0e168245836df9b4be137e0092fb6e370ec))
+* **tour:** when the tool was activated by url, the wrong tour was used. ([#691](https://github.com/infra-geo-ouverte/igo2/issues/691)) ([c76bc01](https://github.com/infra-geo-ouverte/igo2/commit/c76bc01bd5191f330c6b04d4f0d63b8cf0fc0829))
+
+
+### Features
+
+* **app:** provide list-style list options ([#659](https://github.com/infra-geo-ouverte/igo2/issues/659)) ([c663f1f](https://github.com/infra-geo-ouverte/igo2/commit/c663f1f81ce66d8a7aa73fa77696614f76cc00e4))
+* **app:** upgrade igo2-lib ([036ca47](https://github.com/infra-geo-ouverte/igo2/commit/036ca47031a8097b906b47907c368ce11d4b16ff))
+* **demo:** add style context demo. ([#702](https://github.com/infra-geo-ouverte/igo2/issues/702)) ([a4f7bf5](https://github.com/infra-geo-ouverte/igo2/commit/a4f7bf51d412e7036cd5ae4ded31f03366749da7))
+* **messages:** a message is always show when the layer become visible ([#697](https://github.com/infra-geo-ouverte/igo2/issues/697)) ([496ebe1](https://github.com/infra-geo-ouverte/igo2/commit/496ebe1868d46d61c85190807d74160ba80f2f53))
+* notification are now based on ngx-toastr ([9e02fca](https://github.com/infra-geo-ouverte/igo2/commit/9e02fcaa5cf35b8926329de42efb82e564827f55))
+* **portal:** allow to control the initial extent by url ([#690](https://github.com/infra-geo-ouverte/igo2/issues/690)) ([0cc2cad](https://github.com/infra-geo-ouverte/igo2/commit/0cc2cad74f2eaf456520b5bd48501c6beec01051))
+
+
+
 ## [1.9.4](https://github.com/infra-geo-ouverte/igo2/compare/1.9.3...1.9.4) (2021-11-16)
 
 

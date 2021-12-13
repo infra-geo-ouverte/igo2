@@ -32,6 +32,8 @@ export class AppComponent {
     private metaService: Meta,
     private messageService: MessageService
   ) {
+   this.languageService.translate.getTranslation(this.languageService.getLanguage()).subscribe();
+
     this.authConfig = this.configService.getConfig('auth');
 
     this.readTitleConfig();

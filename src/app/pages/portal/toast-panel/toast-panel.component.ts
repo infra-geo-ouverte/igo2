@@ -598,7 +598,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   handleKeyboardEvent(event) {
-    event.preventDefault();
     if (event.keyCode === 37) {
       this.previousResult();
     } else if (event.keyCode === 39) {
