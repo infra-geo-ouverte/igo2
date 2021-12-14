@@ -89,6 +89,7 @@
       "tool-enter": "...son contenu s'affichera ici.",
       "home-button": "Ce bouton nous permet ensuite le retour au menu principal.",
       "geolocate-title": "GEOLOCALISATION",
+      "initial": "Pour retourner à l'étendue initiale de la carte",
       "geolocate": "Pour zoomer la carte sur votre position.",
       "user-title": "UTILISATEUR",
       "user-button": "Pour vous authentifier à IGO2 ou vous déconnecter et demeurer anonyme.",

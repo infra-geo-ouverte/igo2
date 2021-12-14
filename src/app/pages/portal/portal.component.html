@@ -71,6 +71,7 @@
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-offline-button>
+      <igo-initial-button [map]="map" color="primary" ></igo-initial-button>
       <igo-geolocate-button
         *ngIf="hasGeolocateButton"
         [map]="map" color="primary"

@@ -166,6 +166,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef, static: true })
   searchBar: ElementRef;
+  setInitialButton: any;
 
   get map(): IgoMap {
     return this.mapState.map;
@@ -316,7 +317,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton =
       this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton');
-    this.showRotationButtonIfNoRotation =
+    this.setInitialButton =
+       this.configService.getConfig('setInitialButton') === undefined ? true : this.configService.getConfig('setInitialButton') ;
+      this.showRotationButtonIfNoRotation =
       this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ?
         false :
         this.configService.getConfig('showRotationButtonIfNoRotation');

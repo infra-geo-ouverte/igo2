@@ -11,6 +11,11 @@
   },
   "theme": "blue-theme",
   "hasExpansionPanel": true,
+  "setInitialButton": {
+     "initExtent":[-9000000, 5790000,-7500000, 6770000],
+     "initCenter": [-73.938087, 49.000000],
+     "initZoom" : 6
+  },
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
   "hasFeatureEmphasisOnSelection": true,
