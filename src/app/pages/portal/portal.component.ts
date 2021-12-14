@@ -508,7 +508,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     };
     feature.properties = this.createFeatureProperties(workspace.layer);
     if (!workspace.layer.options.sourceOptions.edition.addWithDraw) {
-      console.log('ici');
       workspace.entityStore.deactivateStrategyOfType(FeatureStoreInMapExtentStrategy);
       this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
     }
