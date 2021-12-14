@@ -20,7 +20,8 @@ import {
   provideStoredQueriesSearchSource,
   provideOsrmDirectionsSource,
   provideOptionsApi,
-  provideCadastreSearchSource
+  provideCadastreSearchSource,
+  provideStyleListOptions
 } from '@igo2/geo';
 
 import { environment } from '../environments/environment';
@@ -55,7 +56,10 @@ import { AppComponent } from './app.component';
     provideStoredQueriesSearchSource(),
     provideOsrmDirectionsSource(),
     provideOptionsApi(),
-    provideCadastreSearchSource()
+    provideCadastreSearchSource(),
+    provideStyleListOptions({
+      path: './assets/list-style.json'
+    })
   ],
   bootstrap: [AppComponent]
 })
