@@ -195,7 +195,7 @@
                 "src/app/pages/portal",
                 "node_modules"
               ]
-            },
+            }
           }
         },
         "lint": {
