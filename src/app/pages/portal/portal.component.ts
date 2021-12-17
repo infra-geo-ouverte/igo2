@@ -513,7 +513,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   createFeatureProperties(layer: ImageLayer | VectorLayer) {
     let properties = {};
     layer.options.sourceOptions.sourceFields.forEach(field => {
-      if (!field.primary && field.visible !== false) {
+      if (!field.primary && field.visible) {
         properties[field.name] = '';
       }
     });
