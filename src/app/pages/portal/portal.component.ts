@@ -520,12 +520,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     return properties;
   }
 
-  rowsInMapExtentCheckConditionChange() {
-    if (this.selectedWorkspace$.value) {
-      this.workspaceState.rowsInMapExtentCheckCondition$.next(true);
-    }
-  }
-
   paginatorChange(matPaginator: MatPaginator) {
     this.workspacePaginator = matPaginator;
   }
