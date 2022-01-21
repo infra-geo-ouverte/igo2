@@ -7,15 +7,10 @@
 
       <div #content class="app-content" [ngClass]="{toolActivated: toolbox.activeTool$ | async}">
 
-        <button *ngIf="toolbox.activeTool$ | async"
-          id="homeButton"
-          mat-icon-button
-          tooltip-position="below"
-          matTooltipShowDelay="500"
-          [matTooltip]="'igo.context.sidenav.mainMenu' | translate"
-          (click)="onUnselectButtonClick()">
-          <mat-icon svgIcon="home"></mat-icon>
-        </button>
+        <igo-home-button
+          *ngIf="toolbox.activeTool$ | async"
+          (unselectButton)="onUnselectButtonClick()">
+        </igo-home-button>
 
         <igo-panel [title]="title$ | async | translate">
           <button *ngIf="toolbox.activeTool$ | async"

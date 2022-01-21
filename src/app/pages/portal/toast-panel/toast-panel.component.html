@@ -30,7 +30,7 @@
       [matBadge]="(isSelectedResultOutOfView$ | async) ? '!' : ''"
       matBadgeColor="accent"
       matBadgeSize="small"
-      [matBadgeHidden]="!(isSelectedResultOutOfView$ | async)"     
+      [matBadgeHidden]="(isSelectedResultOutOfView$ | async)!==true"     
       svgIcon="magnify-plus-outline"></mat-icon>
     </button>
 

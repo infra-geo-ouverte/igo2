@@ -4,7 +4,7 @@ format ,String,"| Le format du message html ou text. Selon le choix, u
 html ,String,Le html du message sur une seule ligne. Cette configuration est obligatoire si le format = 'html. ,,
 icon ,String,Icone à ajouter au message. ,,
 options.* ,Notification ,"| Voir les options Notifications dans le projet 
-| `angular2-notification options. <https://github.com/flauc/angular2-notifications#options>`_ ",,
+| `ngx-toastr options. <https://github.com/scttcper/ngx-toastr#individual-options>`_ ",,
 options.template ,String ,En construction ,,
 options.from ,Date | String ,"| Date de début de l'application du message.
 | Peut être une date OU un string interprétable

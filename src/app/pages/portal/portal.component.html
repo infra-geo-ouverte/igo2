@@ -41,7 +41,9 @@
       igoSearchPointerSummary
       [igoSearchPointerSummaryDelay]="500"
       [igoSearchPointerSummaryEnabled]=igoSearchPointerSummaryEnabled
-
+      igoHoverFeature
+      [igoHoverFeatureDelay]="250"
+      [igoHoverFeatureEnabled]="true"
       #mapBrowser
       igoQuery
       [waitForAllQueries]="true"
@@ -126,7 +128,7 @@
                       ('igo.geo.layer.showLayer' | translate)"
         (click)="workspace.layer.visible = !workspace.layer.visible">
         <mat-icon
-          [ngClass]="{disabled: !(workspace.inResolutionRange$ | async)}"
+          [ngClass]="{disabled: (workspace.inResolutionRange$ | async)!==true}"
           [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'">
         </mat-icon>
     </button>
@@ -189,7 +191,7 @@
 
 </app-toast-panel-for-expansion >
 
-<app-toast-panel *ngIf="!(queryStore.empty$ | async)"
+<app-toast-panel *ngIf="(queryStore.empty$ | async)!==true"
   [map]="map"
   [store]="queryStore"
   [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
@@ -199,7 +201,7 @@
   [opened]="toastPanelOpened"
   (openedChange)="toastOpenedChange($event)"
   (fullExtentEvent)="fullExtent = $event"
-  (windowHtmlDisplayEvent)="toastPanelHtmlDisplay= $event">
+  (windowHtmlDisplayEvent)="setToastPanelHtmlDisplay($event)">
 </app-toast-panel>
 
 <ng-template #contextMenu>
