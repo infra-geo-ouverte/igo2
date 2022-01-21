@@ -114,13 +114,13 @@ export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasGeolocateButton = true;
+  public showMenuButton = false;
+  public showSearchBar = true;
   public showRotationButtonIfNoRotation = false;
   public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
-  public workspaceEntitySortChange$: BehaviorSubject<
-    boolean
-  > = new BehaviorSubject(false);
+  public workspaceEntitySortChange$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public paginatorOptions: EntityTablePaginatorOptions = {
     pageSize: 50, // Number of items to display on a page.
     pageSizeOptions: [1, 5, 10, 20, 50, 100, 500] // The set of provided page size options to display to the user.
@@ -314,21 +314,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
-    this.hasGeolocateButton =
-      this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton');
-    this.showRotationButtonIfNoRotation =
-      this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ?
-        false :
-        this.configService.getConfig('showRotationButtonIfNoRotation');
+    this.hasGeolocateButton = this.configService.getConfig('hasGeolocateButton') === undefined ? true :
+      this.configService.getConfig('hasGeolocateButton');
+    this.showRotationButtonIfNoRotation = this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ? false :
+      this.configService.getConfig('showRotationButtonIfNoRotation');
+    this.showMenuButton = this.configService.getConfig('showMenuButton') === undefined ? true :
+      this.configService.getConfig('showMenuButton');
+    this.showSearchBar = this.configService.getConfig('showSearchBar') === undefined ? true :
+      this.configService.getConfig('showSearchBar');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
-    this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
-      'hasFeatureEmphasisOnSelection'
-    );
+    this.hasFeatureEmphasisOnSelection = this.configService.getConfig('hasFeatureEmphasisOnSelection');
 
 
-    this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
-      'hasSearchPointerSummary'
-    );
+    this.igoSearchPointerSummaryEnabled = this.configService.getConfig('hasSearchPointerSummary');
     if (this.igoSearchPointerSummaryEnabled === undefined) {
       this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
     }
