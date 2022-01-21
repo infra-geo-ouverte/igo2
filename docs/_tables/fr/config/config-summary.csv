@@ -1,7 +1,7 @@
 Propriété,Type,Description,Outil lié
 analytic,`Analytics`_,Permet de définir un fournisseur de service d'analyse et de statistiques.,
 auth,`Auth`_,Permet d'activer le serveur d'authentification.,
-:ref:`catalog <igocatalogConfig>`,:ref:`Catalog <igocatalogObject>` [],"Permet de gérer les sources WMS, WMTS et ArcGISRest + tile et image présentes dans le catalogue","| Catalog | CatalogBrowser"
+:ref:`catalog <igocatalogConfig>`,:ref:`Catalog <igocatalogObject>` [],"Permet de gérer les sources WMS, WMTS et ArcGIS REST présentes dans le catalogue","| Catalog | CatalogBrowser"
 context,`Context`_,"| Permet d'activer l'API de contexte d'IGO2. | Cette API sera documentée indépendamment de la présente documentation.",ContextManager
 depot,`Depot`_,"| Permet d'activer de l'API de dépôt. | Cette API sera documentée indépendamment de la présente documentation.",
 `description`_,String,"| Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche (p. ex. Google). | Constante pouvant être réutilisée dans le welcomeWindow.",
