@@ -42,5 +42,9 @@
   {
     "uri": "variousStyles",
     "title": "Divers styles à titre d'exemple"
+  },
+  {
+    "uri": "geolocation",
+    "title": "Geolocation"
   }
 ]
