@@ -114,6 +114,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasGeolocateButton = true;
+  public showMenuButton = true;
+  public showSearchBar = true;
   public showRotationButtonIfNoRotation = false;
   public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
@@ -324,7 +326,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
       'hasFeatureEmphasisOnSelection'
     );
-
+    this.showMenuButton = this.configService.getConfig('showMenuButton') === undefined ? true : this.configService.getConfig('showMenuButton');
+    this.showSearchBar = this.configService.getConfig('showSearchBar') === undefined ? true : this.configService.getConfig('showSearchBar');
 
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'

@@ -3,31 +3,28 @@
   "base": "_base",
   "layers": [
     {
-      "title": "MSP DESSERTE MUN 911",
+      "title": "Services de police",
+      "id": "dq2",
+      "styleByAttribute": {
+        "type": "circle",
+        "attribute": "type",
+        "data": ["Autres services de police","Sûreté du Québec","Services de police municipaux", "Services de police autochtones"],
+        "fill": ["orange","red","green","blue"],
+        "stroke": ["black","black","black","black"],
+        "width": [1,1,1,1],
+        "maxLabelScale": [4000, 4000, 4000, 4000],
+        "icon": ["./assets/images/styles/pin.svg","./assets/images/styles/pin.svg","./assets/images/styles/pin.svg","./assets/images/styles/pin.svg"],
+        "radius": [10,10,10,10],
+        "label": {
+          "attribute": "no_civique"
+        }
+      },
       "sourceOptions": {
-        "type": "wms",
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
-        "params": {
-          "layers": "MSP_DESSERTE_MUN_911",
-          "version": "1.3.0"
-        },
-        "queryable": false,
-        "queryFormat": "gml2",
-        "queryTitle": "Municipalite"
-      }
-    },
-    {
-      "title": "MSP Tel. Urgence",
-      "sourceOptions": {
-        "type": "wms",
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
-        "params": {
-          "layers": "telephone_urg",
-          "version": "1.3.0"
-        },
+        "type": "vector",
+        "url": "./assets/images/styles/data.geojson",
         "queryable": true,
-        "queryFormat": "gml2",
-        "queryTitle": "desclocal"
+        "queryFormat": "geojson",
+        "queryTitle": "Service de police"
       }
     }
   ]
