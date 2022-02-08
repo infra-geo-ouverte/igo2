@@ -3,6 +3,7 @@
     "title": "Exemples de légendes",
     "base": "_base",
     "layers": [{
+        "id": 1,
         "title": "WMS Example 1",
         "sourceOptions": {
           "type": "wms",
@@ -16,6 +17,7 @@
         }
     },
     {
+        "id": 2,
         "title": "WMS Example 2",
         "sourceOptions": {
           "type": "wms",
@@ -28,6 +30,7 @@
         }
     },
     {
+        "id": 3,
         "title": "ArcGIS REST Example 1 (Legend image)",
         "sourceOptions": {
             "type": "arcgisrest",
@@ -37,6 +40,7 @@
         }
     },
     {
+        "id": 4,
         "title": "ArcGIS REST Example 2 (Legend SVG (Dashed line))",
         "sourceOptions": {
             "type": "arcgisrest",
@@ -46,6 +50,7 @@
         }
     },
     {
+        "id": 5,
         "title": "ArcGIS REST Example 3 (Legend SVG (Unique values))",
         "sourceOptions": {
             "type": "arcgisrest",
@@ -55,6 +60,7 @@
         }
     },
     {
+        "id": 6,
         "title": "ArcGIS REST Example 4 (Legend SVG (Simple line))",
         "sourceOptions": {
             "type": "arcgisrest",
@@ -64,6 +70,7 @@
         }
     },
     {
+        "id": 7,
         "title": "ArcGIS REST Example 5 (Legend SVG (Polygon))",
         "sourceOptions": {
             "type": "arcgisrest",
@@ -73,15 +80,7 @@
         }
     },
     {
-        "title": "ArcGIS REST Example 6 (Legend SVG (Point) and image)",
-        "sourceOptions": {
-            "type": "arcgisrest",
-            "layer": "9",
-            "queryable": true,
-            "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/ArcGIS/rest/services/Terrain_CKQ_WFL1/FeatureServer"
-        }
-    },
-    {
+        "id": 8,
         "title": "Image ArcGIS REST Example 1",
         "sourceOptions": {
             "type": "imagearcgisrest",
@@ -91,12 +90,23 @@
         }
     },
     {
+        "id": 9,
         "title": "Image ArcGIS REST Example 2",
         "sourceOptions": {
             "type": "imagearcgisrest",
             "layer": "1",
             "queryable": true,
             "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer"
+        }
+    },
+    {
+        "id": 10,
+        "title": "Image ArcGIS REST Example 3",
+        "sourceOptions": {
+            "type": "imagearcgisrest",
+            "layer": "0",
+            "queryable": true,
+            "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer"
         }
     }]
 }
