@@ -77,7 +77,7 @@
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-geolocate-button>
-      <igo-initial-button [map]="map" color="primary" ></igo-initial-button>
+      <igo-home-extent-button [map]="map" color="primary" ></igo-home-extent-button>
       <igo-rotation-button [showIfNoRotation]="showRotationButtonIfNoRotation" [map]="map" color="primary"></igo-rotation-button>
       <igo-user-button
         *ngIf="auth.url"

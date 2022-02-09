@@ -15,10 +15,10 @@
   "showRotationButtonIfNoRotation": false,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
-  "setInitialButton": {
-    "initExtent":[-9000000, 5790000,-7500000, 6770000],
-    "initCenter": [-73.938087, 49.000000],
-    "initZoom" : 6
+  "setHomeExtentButton": {
+    "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
+    "homeExtButtonCenter": [-73.938087, 49.000000],
+    "homeExtButtonZoom" : 6
   },
   "searchSources": {
     "cadastre": {

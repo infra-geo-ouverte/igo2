@@ -287,7 +287,7 @@ igo-geolocate-button {
   }
 }
 
-igo-initial-button {
+igo-home-extent-button {
   @include mobile {
     margin-bottom: 0px;
     right: calc((2 * #{$igo-icon-size}) +  (4 * #{$igo-margin}))

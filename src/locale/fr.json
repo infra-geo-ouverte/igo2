@@ -30,8 +30,8 @@
     "previousFeatureTooltip": "Entité précédente ( raccouci clavier = flèche gauche )",
     "nextFeatureTooltip": "Prochaine entité ( raccouci clavier = flèche droite )"
   },
-  "initial-button": {
-    "tooltip": "Retourner à la position initiale"
+  "home-extent": {
+    "tooltip": "Aller à l'étendue de la carte"
   },
   "IGO": "IGO",
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
@@ -91,8 +91,8 @@
       "tool-choose": "Si nous sélectionnons un outil de la boîte à outils...",
       "tool-enter": "...son contenu s'affichera ici.",
       "home-button": "Ce bouton nous permet ensuite le retour au menu principal.",
-      "initial-title": "ÉTENDUE INITIALE",
-      "initial": "Pour revenir à l'étendue initiale de la carte.",
+      "home-extent-title": "ÉTENDUE DE LA CARTE",
+      "home-extent-text": "Pour revenir à l'étendue de la carte.",
       "geolocate-title": "GEOLOCALISATION",
       "geolocate": "Pour zoomer la carte sur votre position.",
       "user-title": "UTILISATEUR",
