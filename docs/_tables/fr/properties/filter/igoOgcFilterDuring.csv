@@ -1,12 +1,12 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
-begin ,String ,Valeur de début du filtre temporel ,,Valeur **minDate** de la couche
-end ,String ,Valeur de fin du filtre temporel ,,Valeur **maxDate** de la couche
+begin ,String ,Valeur de début du filtre temporel. NB.: avec calendarModeYear il ne doit pas avoir de temps d'inscris,,Valeur **minDate** de la couche
+end ,String ,Valeur de fin du filtre temporel.NB.: avec calendarModeYear il ne doit pas avoir de temps d'inscris ,,Valeur **maxDate** de la couche
 step ,String ,Pas de temps défini selon la norme ISO-8601 ,Voir `Wiki<https://fr.wikipedia.org/wiki/ISO_8601#Dur%C3%A9e>`__ ,60000 millisecondes
-restrictedToStep ,Boolean, "| True si le filtre doit respecter le pas de temps depuis
+restrictToStep ,Boolean, "| True si le filtre doit respecter le pas de temps depuis
 | l'attribut **minDate**.
-|
+| En mode calendrier à true, n'affichera plus la date de fin, le filtre sera : date début + pas de temps.
 | Sinon le pas de temps est respecté selon l'attribut **begin**" ,True | False ,False
-calendarModeYearBoolean,,"| Lorsque true, l’interface présentera uniquement des
+calendarModeYear,Boolean,"| Lorsque true, l’interface présentera uniquement des
 | années et ajustera les requête aux service pour
 | que l’année de début et de fin soit incluse dans
 | le retour.",True | False ,False
