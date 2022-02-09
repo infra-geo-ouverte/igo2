@@ -315,10 +315,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
-    this.hasGeolocateButton = this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton');
-    this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton') ;
+    this.hasGeolocateButton =
+    this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton');
     this.setHomeExtentButton =
-    this.configService.getConfig('setHomeExtentButton') === undefined ? true : this.configService.getConfig('setHomeExtentButton') ;
+    this.configService.getConfig('setHomeExtentButton') === undefined ? true : this.configService.getConfig('setHomeExtentButton');
     this.showRotationButtonIfNoRotation =
       this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ?
         false :
