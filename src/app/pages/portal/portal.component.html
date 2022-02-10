@@ -111,9 +111,11 @@
     <igo-workspace-selector
       igoWorkspaceSelector
       (toolToActivate)="toolToActivateFromWorkspace($event)"
-      (changeWorkspace)="directiveSelectorEventChange($event)"
+      (changeWorkspace)="changeWorkspace($event)"
+      (disableSwitch)="disableWorkspaceSwitch($event)"
       (rowsInMapExtentCheckCondition)="workspaceState.rowsInMapExtentCheckCondition$.next($event)"
       [store]="workspaceStore"
+      [disabled]="workspaceSwitchDisabled"
       [map]="map">
     </igo-workspace-selector>
 

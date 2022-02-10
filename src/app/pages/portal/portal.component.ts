@@ -127,6 +127,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public workspaceEntitySortChange$: BehaviorSubject<
     boolean
   > = new BehaviorSubject(false);
+  public workspaceSwitchDisabled = false;
   public paginatorOptions: EntityTablePaginatorOptions = {
     pageSize: 50, // Number of items to display on a page.
     pageSizeOptions: [1, 5, 10, 20, 50, 100, 500] // The set of provided page size options to display to the user.
@@ -1439,7 +1440,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  public directiveSelectorEventChange(event) {
+  public changeWorkspace(event) {
+    console.log(event);
     this.workspaceState.setActiveWorkspaceByTitle(event);
+  }
+
+  public disableWorkspaceSwitch(event) {
+    this.workspaceSwitchDisabled = event;
   }
 }
