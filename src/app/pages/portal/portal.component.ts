@@ -114,6 +114,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasGeolocateButton = true;
+  public setHomeExtentButton = true;
   public showRotationButtonIfNoRotation = false;
   public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
@@ -316,6 +317,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton =
       this.configService.getConfig('hasGeolocateButton') === undefined ? true : this.configService.getConfig('hasGeolocateButton');
+    this.setHomeExtentButton =
+      this.configService.getConfig('setHomeExtentButton') === undefined ? true : this.configService.getConfig('setHomeExtentButton');
     this.showRotationButtonIfNoRotation =
       this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ?
         false :

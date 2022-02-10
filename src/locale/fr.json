@@ -45,6 +45,9 @@
     "title": "Navigateur obsolète",
     "message": "IGO2 ne supporte pas pleinement votre navigateur. Veuillez le mettre à jour ou utilisez un navigateur différent."
   },
+  "home-extent": {
+    "tooltip": "Aller à l'étendue de la carte"
+  },
   "interactiveTour": {
     "global": {
       "title": "Tour interatif",
