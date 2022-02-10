@@ -2,7 +2,7 @@
   "map": {
     "view": {
       "projection": "EPSG:3857",
-      "center": [-71.938087, 48.446975],
+      "center": [73.938087, 49.000000],
       "zoom": 6,
       "maxZoom": 19,
       "maxZoomOnExtent": 17
