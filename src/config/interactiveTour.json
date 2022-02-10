@@ -133,7 +133,7 @@
         }
       },
       {
-        "element": "#homeExtentButton",
+        "element": "#homeButton",
         "title": "interactiveTour.global.menu-button-title",
         "text": "interactiveTour.global.home-button",
         "disableInteraction": true,
