@@ -1441,7 +1441,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public changeWorkspace(event) {
-    console.log(event);
     this.workspaceState.setActiveWorkspaceByTitle(event);
   }
 
