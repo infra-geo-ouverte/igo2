@@ -15,7 +15,7 @@
   "showRotationButtonIfNoRotation": false,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
-  "setHomeExtentButton": {
+  "homeExtentButton": {
     "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
     "homeExtButtonCenter": [-73.938087, 49.000000],
     "homeExtButtonZoom" : 6

@@ -224,5 +224,9 @@
     "legend-tab": "Let's toggle legend tab.",
     "legend-tab-description": "This tab can be used to display all layer's legend. By default, only visible layers at active scale will have their legend displayed.",
     "legend-tab-all": "Allow to also display non visible layer's legend at active scale."
+  },
+  "messages": {
+    "title": "Title from a translation",
+    "message": "Message from a translation - <div class='toast-message-green-div'>Message at the context level </div>Open the layer 'MSP Tel. Urgence' to see messages at the layer level."
   }
 }
