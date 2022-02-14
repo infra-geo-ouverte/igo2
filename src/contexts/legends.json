@@ -70,16 +70,6 @@
         }
     },
     {
-        "id": 7,
-        "title": "ArcGIS REST Example 5 (Legend SVG (Polygon))",
-        "sourceOptions": {
-            "type": "arcgisrest",
-            "layer": "22",
-            "queryable": true,
-            "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/ArcGIS/rest/services/Harricana_WFL1/FeatureServer"
-        }
-    },
-    {
         "id": 8,
         "title": "Image ArcGIS REST Example 1",
         "sourceOptions": {
