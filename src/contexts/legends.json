@@ -84,6 +84,7 @@
         "title": "Image ArcGIS REST Example 1",
         "sourceOptions": {
             "type": "imagearcgisrest",
+            "queryFormat": "esrijson",
             "layer": "2",
             "queryable": true,
             "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer"
@@ -94,6 +95,7 @@
         "title": "Image ArcGIS REST Example 2",
         "sourceOptions": {
             "type": "imagearcgisrest",
+            "queryFormat": "esrijson",
             "layer": "1",
             "queryable": true,
             "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer"
@@ -104,6 +106,7 @@
         "title": "Image ArcGIS REST Example 3",
         "sourceOptions": {
             "type": "imagearcgisrest",
+            "queryFormat": "esrijson",
             "layer": "0",
             "queryable": true,
             "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer"
