@@ -17,7 +17,7 @@
   "menuButtonReverseColor": false,
   "homeExtentButton": {
     "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
-    "homeExtButtonCenter": [-73.938087, 49.000000],
+    "homeExtButtonCenter": [-71.938087, 48.446975],
     "homeExtButtonZoom" : 6
   },
   "searchSources": {
