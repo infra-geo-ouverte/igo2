@@ -1,0 +1,9 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**name*** ,String,Nom de l'attribut ,,
+name ,String,nom de la relation.
+alias ,String,Alias de la relation.
+title ,String ,Titre du workspace à faire le lien avec.
+icon ,String ,Icône du bouton permettant de faire la liaison (https://materialdesignicons.com/).
+table ,Boolean ,Indique si le champ doit être visible ou non dans la table d'édition. ,true/false ,true
+parent ,String ,Indique la table parent.
+parentId ,String ,Indique la clé primaire de la table parent.

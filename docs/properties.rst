@@ -1326,8 +1326,8 @@ Configuration des attributs champs source de donnée (sourceFields)
 ======================================================================
 
 | Une liste de nom d'attribut, de leur alias, valeurs permises et autres configurations.
-| ** Nécessaire pour utilisation des filtres attributaires avancés. Ce sont ces configurations qui définiront ce qui sera présenté à
-| l'utilisateur lors de l'utilisation des filtres avancés.
+| ** Nécessaire pour utilisation des filtres attributaires avancés et de l'outil d'édition. Ce sont ces configurations qui définiront ce qui sera
+| présenté à l'utilisateur lors de l'utilisation des filtres avancés et de la table d'édition.
 
 Exemples
 
@@ -1352,6 +1352,49 @@ Propriétés de l'objet sourceFields
        :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+.. _igosEditionObject:
+
+Configuration de l'édition d'une couche
+======================================================================
+
+| Une liste de configuration permettant l'utilisation de la table d'édition sur la couche.
+| ** Les sourceFields permettront de définir les champs à visualiser ainsi que les formats de saisies
+| et les validations attributaires.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "enabled": true,
+                "baseUrl": "odrsi_vehicule_ssi",
+                "addUrl": "",
+                "deleteUrl": "id_vehicule=eq.",
+                "modifyUrl": "id_vehicule=eq.",
+                "geomType": "Point",
+                "addWithDraw": false,
+                "messages": [{ "odrsi_vehicule_ssi_unique_no_vehicule": "Le numéro de véhicule doit être unique pour la caserne." }]
+            }
+
+
+Propriétés de l'objet edition
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/edition.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+Propriétés de l'objet relations
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/relations.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
 
 ************************************
