@@ -6,12 +6,12 @@
       (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <igo-menu-button
+    <igo-menu-button *ngIf="showMenuButton"
       [sidenavOpened]="sidenavOpened"
       (openSidenav)="onToggleSidenavClick()">
     </igo-menu-button>
 
-    <igo-search-bar
+    <igo-search-bar *ngIf="showSearchBar"
       #searchBar
       [term]="searchBarTerm"
       [termSplitter]="termSplitter"
@@ -78,7 +78,7 @@
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-geolocate-button>
       <igo-rotation-button [showIfNoRotation]="showRotationButtonIfNoRotation" [map]="map" color="primary"></igo-rotation-button>
-      <igo-user-button 
+      <igo-user-button
         *ngIf="auth.url"
         [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
