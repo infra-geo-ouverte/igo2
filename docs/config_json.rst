@@ -1312,7 +1312,10 @@ Message
 
     .. line-block::
 
-        Message affiché à l'ouverture du contexte
+        Message affiché à l'ouverture du contexte ou à l'ouverture de la couche.
+        - Une librairie tierce est utilisée pour l'affichage de message : `NGX-TOASTR  <https://www.npmjs.com/package/ngx-toastr>`_
+        NB.: Les classes connues de l'application peuvent être utilisées. Des classes personalisées spécifiques aux messages peuvent être ajoutés.
+         `IGO2 styles.scss <https://github.com/infra-geo-ouverte/igo2/blob/master/src/styles.scss#L13>`_  
 
 Exemples
 
@@ -1320,7 +1323,7 @@ Exemples
 
             "message": {
                   "format": "html",
-                  "html": " "<head><meta charset='utf-8'><style> .page{padding-left: 0px;margin-right:-45px;} </style> </head>  <body> <div class='page' style='color: white;'> Bienvenue sur <b>IGO</b></div> </body>",
+                  "html": "<div class='class-custom-rouge'> Bienvenue sur <b>IGO</b></div>",
                   "type": "info",
                   "options": {
                         "timeOut": 30000
