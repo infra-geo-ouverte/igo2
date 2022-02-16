@@ -4,6 +4,7 @@
     "layers": [
       {
         "title": "WFS & Download URL",
+        "id": 1,
         "visible": false,
         "sourceOptions": {
           "download": {
@@ -22,6 +23,7 @@
       },
       {
         "title": "WFS with imposed export format 2",
+        "id": 2,
         "visible": false,
         "sourceOptions": {
           "download": {
@@ -49,6 +51,7 @@
       },
       {
         "title": "WFS with imposed export format 1",
+        "id": 3,
         "visible": false,
         "sourceOptions": {
           "download": {
@@ -76,6 +79,7 @@
       },
       {
         "title": "WFS",
+        "id": 4,
         "visible": false,
         "sourceOptions": {
           "queryable": true,
@@ -100,6 +104,7 @@
       },
       {
         "title": "WMS & Download URL",
+        "id": 5,
         "sourceOptions": {
           "download": {
             "url": "https://www.donneesquebec.ca/recherche/fr/dataset/desserte-des-centres-durgences-9-1-1"
@@ -117,6 +122,7 @@
       },
       {
         "title": "WMS",
+        "id": 6,
         "sourceOptions": {
           "type": "wms",
           "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
@@ -131,4 +137,3 @@
       }
     ]
   }
-  
