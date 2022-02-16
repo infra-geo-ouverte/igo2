@@ -16,33 +16,20 @@ navigateur dans un contexe cartographique.
       - l'application
       - le contenu cartographique
 
-
 ==============================
 Application
 ==============================
 
 La configuration de l'application est possible grâce
-au fichier **config.json**.
-Ce dernier est situé dans le répertoire :
-
-    - `src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
-
+au fichier `config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_.
 
 Il est également possible de configurer l'application grâce à un second
-fichier selon l'environnement désiré (test ou production).
+fichier selon l'environnement désiré (`test <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
+ou `production <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.prod.ts>`_).
 
-Pour modifier le comportement de l'application, vous pouvez modifier:
+Il est possible de modifier les chemins d'accès de ces fichiers dans `ce fichier <https://github.com/infra-geo-ouverte/igo2/blob/54e74aa21ac66745f81dbbca77334c244e9f9b12/src/app/app.module.ts#L41>`_
 
-    - `igo2/src/environments/environment.prod.ts <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.prod.ts>`_
-    - `igo2/src/environments/environment.ts <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`_
-
-
-Si vous désirez changer le chemin d'accès de ce fichier ou bien d'environnement.*.ts , il est spécifié dans le code de l'application dans le fichier:
-
-    - `/src/app/app.module.ts <https://github.com/infra-geo-ouverte/igo2/blob/54e74aa21ac66745f81dbbca77334c244e9f9b12/src/app/app.module.ts#L41>`_ ligne 41.
-
-Important : Notez que le fichier config.json a préséance sur le fichier environment.*.ts
-
+Important : Notez que le fichier config.json a préséance sur les fichiers environment.*.ts
 
 *********************
 Résumé
@@ -53,10 +40,9 @@ Résumé
     .. csv-table::
        :file: _tables/fr/config/config-summary.csv
        :header-rows: 1
-       :widths: 10 10 30 15
+       :widths: 10 10 25 15
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
-
 
 ***************
 Analytics
@@ -64,10 +50,10 @@ Analytics
 
     .. line-block::
 
-        Sert à configurer une application pour effectuer le monitoring du site web pour les statistiques.
-        NB. : Pour une application sans statistiques, simplement ne pas mettre ces configurations.
+        Permet de définir un fournisseur de service d'analyse et de statistiques.
+        NB.: Pour une application sans statistiques, simplement ne pas inclure ces configurations.
 
-Exemples
+Exemple
 
 	.. code:: json
 
@@ -76,7 +62,6 @@ Exemples
 			"url": "https://geoegl.msp.gouv.qc.ca/matomo/",
 			"id": "40"
 		}
-
 
 ***************
 Auth
@@ -88,8 +73,8 @@ Auth
 
     .. line-block::
 
-        Sert à effectuer l'authentification des usagers.
-        NB. : Pour une application sans authentification, simplement ne pas mettre ces configurations.
+        Permet d'activer le serveur d'authentification.
+        NB.: Pour une application sans authentification, simplement ne pas inclure ces configurations.
 
 Exemples
 
@@ -134,9 +119,9 @@ Catalog
 
     .. line-block::
 
-        Cette section de la configuration permet de charger une liste de sources de cataloguage. Une fois les sources chargées, il est possible d'ajouter ces couches d'informations à la carte.
+        Permet de charger une liste de sources de catalogage. Une fois les sources chargées, il est possible d'ajouter ces couches d'informations à la carte.
 
-        Les sources de cataloguage permises:
+        Les sources de catalogage permises:
             - Service WMS
             - Service WMTS
             - Service ArcGIS REST
@@ -145,22 +130,21 @@ Catalog
 
         Les couches d'informations contenues dans ces services sont récupérées grâce aux couches publiées dans le GetCapabilities du service.
 
-        NB: Il est possible de configurer certaines options dans les catalogues comme le format de présentation des informations(queryFormat) ou la configuration des
+        NB.: Il est possible de configurer certaines options dans les catalogues comme le format de présentation des informations(queryFormat) ou la configuration des
         filtres temporels souhaités (Voir exemples)
 
         Partage de carte:
             1- Les couches ajoutées (WMS-WMTS) par le catalogue sont partagées lors du partage de carte.
-            2- La structure de l'url pour les couches partagées est la suivante:
-                - wmsUrl =­­> une liste, séparée par une ',' (virgule) listant les url de service ajoutées.
+            2- La structure de l'URL pour les couches partagées est la suivante:
+                - wmsUrl =­­> une liste, séparée par des ',' (virgules) listant les URL de services ajoutées.
                       - Exemple : wmsUrl=urlDuService1,urlDuService2
-                - layers => une liste, séparée par une ',' (virgule) groupée par un bloc de parenthèses, respectant l'ordre des services déclarés dans wmsUrl
+                - layers => une liste, séparée par des ',' (virgules) groupée par un bloc de parenthèses, respectant l'ordre des services déclarés dans wmsUrl.
                       - Exemple : layers=(layer1,layer2),(layer3,layer4)
-                            - layer1 et layer2 proviennent de l'url "urlDuService1"
-                            - layer3 et layer4 proviennent de l'url "urlDuService2"
-                            - si un "layer" possède le suffix :igoz13
-                            - Il s'agit de la position du "layer" dans la table des matières. Ici la position 13.
+                            - layer1 et layer2 proviennent de l'URL "urlDuService1"
+                            - layer3 et layer4 proviennent de l'URL "urlDuService2"
+                            - si un "layer" possède le suffix (p. ex. igoz13), il s'agit de la position du "layer" dans la table des matières. Ici la position 13.
 
-        Chaque couche ajoutée possède un identifiant unique généré à partir du "layer name" et de l'url du service source. Se référer à :`igo2-lib/packages/geo/src/lib/datasource/utils/id-generator.ts#L15 <https://github.com/infra-geo-ouverte/igo2-lib/blob/6f37684adc809c82b185556719daac4bace0eea1/packages/geo/src/lib/datasource/utils/id-generator.ts#L15>`_
+        Chaque couche ajoutée possède un identifiant unique généré à partir du "layer name" et de l'URL du service source. Se référer à :`igo2-lib/packages/geo/src/lib/datasource/utils/id-generator.ts#L15 <https://github.com/infra-geo-ouverte/igo2-lib/blob/6f37684adc809c82b185556719daac4bace0eea1/packages/geo/src/lib/datasource/utils/id-generator.ts#L15>`_
 
         Note sur le comportement de l'objet :ref:`Composite Catalog <igocompositecatalogObject>`:
             - la propriété groupImpose met toutes les couches des sous-groupes enfants sur le même niveau.
@@ -303,7 +287,6 @@ Propriétés
 Propriétés - Objet Catalog
 =============================
 
-
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
@@ -340,7 +323,7 @@ Context
 
     .. line-block::
 
-        Permet de rejoindre une API nous fournissant des contextes cartographiques.
+        Permet de rejoindre une API fournissant des contextes cartographiques.
         Cette API sera documentée indépendamment de la présente documentation.
 
 Exemples
@@ -377,7 +360,7 @@ Depot
 
 .. line-block::
 
-      Permet de rejoindre une API de dépôt nous fournissant des fichiers (par exemple, un guide d'autoformation).
+      Permet de rejoindre une API de dépôt fournissant des fichiers (par exemple, un guide d'autoformation).
       Cette API sera documentée indépendamment de la présente documentation.
 
 Exemples
@@ -385,8 +368,8 @@ Exemples
       .. code:: json
 
             depot: {
-            "url" : "https://geoegl.msp.gouv.qc.ca/apis/depot/...",
-            "trainingGuides?" : ["fichier1", "fichier2"]
+                "url" : "https://geoegl.msp.gouv.qc.ca/apis/depot/...",
+                "trainingGuides?" : ["fichier1", "fichier2"]
             }
 
 Propriétés
@@ -401,45 +384,14 @@ Propriétés
 Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 ***********************
-hasSearchPointerSummary
+Description
 ***********************
 
     .. line-block::
 
-        Permet d'activé ou non la capacité d'afficher un résumé de la position du curseur.
+        Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche (p. ex. Google).
+        Constante pouvant être réutilisée dans le welcomeWindow.
         Le résumé est dépendant des sources de recherche utilisées.
-
-
-*****************
-hasExpansionPanel
-*****************
-
-    .. line-block::
-
-        Permet d'ouvrir un paneau d'expansion à partir
-        d'un bouton situé dans le coin inférieur gauche de la carte.
-        Ce dernier contient les données tabulaires pour
-        les données WFS / Vectorielle / Cluster.
-
-
-*****************
-hasGeolocateButton
-*****************
-
-    .. line-block::
-
-        Permet de définir s'il y aura un bouton de 
-        géolocalisation par le fureteur dans l'application
-
-
-********************************
-showRotationButtonIfNoRotation
-********************************
-
-    .. line-block::
-
-        Permet de définir si le bouton de réinitialisation de la
-        rotation est visible si aucune rotation n'est active. False par défaut.
 
 ***************
 DrawingTool
@@ -447,8 +399,8 @@ DrawingTool
 
     .. line-block::
 
-        Cette configuration permet de créer un liste d'url représentant des icônes afin que ceux-ci
-        puissent être utilisés dans `l'outil de dessin <https://igo2.readthedocs.io/fr/latest/properties.html#draw>`
+        Permet de créer un liste d'URL représentant des icônes afin que ceux-ci
+        puissent être utilisés dans `l'outil de dessin <https://igo2.readthedocs.io/fr/latest/properties.html#draw>`_
 
 Exemples
 
@@ -465,6 +417,44 @@ Liens
 
         - `igo2-lib/tree/master/packages/geo/src/lib/draw/draw <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/geo/src/lib/draw/draw>`_
 
+*****************
+hasExpansionPanel
+*****************
+
+    .. line-block::
+
+        Permet d'ouvrir un paneau d'expansion à partir
+        d'un bouton situé dans le coin inférieur gauche de la carte.
+        Ce dernier contient les données tabulaires pour
+        les données WFS / Vectorielle / Cluster.
+
+***********************
+hasFeatureEmphasisOnSelection
+***********************
+
+    .. line-block::
+
+        Permet d'ajouter à la carte une géométrie ponctuelle pour les
+        entités linéaires ou polygonales sélectionnées ou survolées
+        lors d'une interrogation de la carte et qui sont de trop petite
+        taille par rapport à l'étendue de la carte.
+
+*****************
+hasGeolocateButton
+*****************
+
+    .. line-block::
+
+        Permet d'afficher ou non un bouton de géolocalisation dans l'application.
+
+***********************
+hasSearchPointerSummary
+***********************
+
+    .. line-block::
+
+        Permet d'afficher ou non un résumé de la position du curseur.
+        Le résumé est dépendant des sources de recherche utilisées.
 
 ***************
 ImportExport
@@ -472,9 +462,9 @@ ImportExport
 
     .. line-block::
 
-        Cette configuration permet de définir un service qui sera en mesure de convertir des formats de fichiers géométriques non gérés par IGO2(OpenLayers).
-        Actuellement, les GeoJson, KML, KMZ sont acceptés par IGO2. Par contre, les `Esri Shapefile  <https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf>`_ doivent transiger par un serveur de conversion.
-        C'est à partir ce cette propriété que vous pouvez définir le serveur de conversion qui vous retournera un fichier utilisable par IGO2 (GeoJson).
+        Permet de définir un service permettant de convertir des formats de fichiers géométriques non gérés par IGO2 (OpenLayers).
+        Actuellement, les formats GeoJson, KML, KMZ sont acceptés par IGO2. Par contre, les `Esri Shapefile <https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf>`_ doivent transiger par un serveur de conversion.
+        C'est à partir ce cette propriété qu'il est possible de définir le serveur de conversion qui vous retournera un fichier utilisable par IGO2 (GeoJson).
 
 Exemples
 
@@ -503,17 +493,13 @@ Liens
 
         - `igo2-lib/packages/geo/src/lib/import-export/shared/import.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/a841bced1ccc305b001d6db84f913c4c2ba27bf7/packages/geo/src/lib/import-export/shared/import.interface.ts>`_
 
-
-.. _igolanguage:
-
-
 ***************
-interactiveTour
+InteractiveTour
 ***************
 
     .. line-block::
 
-        Tours intéractifs de présentation de l'application
+        Permet de configurer le tour interactif de présentation de l'application.
 
 
 Exemples
@@ -537,6 +523,7 @@ Propriétés
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
+.. _igolanguage:
 
 ***************
 Language
@@ -544,9 +531,10 @@ Language
 
     .. line-block::
 
-        Définir le dossier contenant les fichiers de traduction de l'appplication.
-        IGO2 est actuellement disponible en anglais et en francais, selon les paramètres du navigateur.
-        Il est toutefois possible de définir le language désiré à même le code de l'application.
+        Permet de spécifier une liste de chemins d'accès des fichiers de traduction de l'application.
+        Le dernier chemin de la liste a priorité sur les précédents.
+        IGO2 est actuellement disponible en anglais et en français, selon les paramètres du navigateur.
+        Il est toutefois possible de définir la langue désirée à même le code de l'application.
 
 Exemples
 
@@ -572,14 +560,13 @@ Liens
         - `igo2-lib/packages/core/src/lib/language/shared/language.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/core/src/lib/language/shared/language.interface.ts>`_
         - `locale démo https://infra-geo-ouverte.github.io/igo2/  <https://github.com/infra-geo-ouverte/igo2/tree/gh-pages/locale>`_
 
-
 ***************
 MapOverlay
 ***************
 
     .. line-block::
 
-        Permet de définir des éléments à ajouter par dessus le visuel de la carte.
+        Permet d'ajouter une liste d'éléments visuels à ajouter sur la carte de l'application (p. ex. logos).
 
 Exemples
 
@@ -611,15 +598,22 @@ Exemples
 Liens
         - `Exemple de mapOverlay <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json>`_
 
+*****************
+menuButtonReverseColor
+*****************
+
+    .. line-block::
+
+        Permet d'indiquer si les couleurs du bouton de menu sont inversées ou non.
 
 .. _optionsApi:
 
 ************
-optionsApi
+OptionsApi
 ************
 
-    Permet de définir le chemin vers API pour les options supplémentaires sur les couches ajoutées par la recherche.
-    Par exemple, les configurations de filtre. Retourne un objet JSON venant se fusionner avec les propriété de la couche.
+    Permet d'indiquer le chemin pour l'API fournissant certaines options de couches lors de l'ajout de celles-ci par la recherche
+    (p. ex. configurations de filtres). Retourne un objet JSON venant se fusionner avec les propriété de la couche.
     La configuration faite au pilotage a priorité à celles fournies par l'API d'options.
 
 Exemple
@@ -634,12 +628,12 @@ Exemple
 .. _overlayStyle:
 
 ************
-overlayStyle
+OverlayStyle
 ************
 
     Permet de définir le style des éléments ajoutés à la carte (overlay), suite a une interrogation par clic ou par une recherche.
-    Les objets sélection et focus sont facultatifs. Les propriétés contenues par ces objets sont également facultatives. 
-    Si les objects sont vide ou absent, le style par défaut sera appliqué (bleu et turquoise). 
+    Les propriétés "selection" et "focus" sont facultatives. Les propriétés contenues par ces objets sont également facultatives.
+    Si les propriétés sont vides ou absentes, le style par défaut est appliqué.
     Les couleurs acceptées peuvent être en couleur HEX, en liste RGB ou en couleur nommée.
 
 Exemple
@@ -671,7 +665,6 @@ Exemple
                   }
               }
 
-
 .. _igoprojections:
 
 ***************
@@ -680,8 +673,8 @@ Projections
 
     .. line-block::
 
-        Permet de définir une **liste** de projections non enregistrées par défault par IGO2 (Proj4). On parle ici de projection non mondiale ou à référence locale (ex: mtm, Lambert MTQ...)
-        Référez vous à : `https://epsg.io/ <https://epsg.io/>`_. Ils y définissent l'entièreté des paramètres nécessaires.
+        Permet de spécifier une liste de projections non enregistrées par défault par OpenLayers. On parle ici de projection non mondiale ou à référence locale (ex: MTM, Lambert MTQ, etc.)
+        Référez vous à: `https://epsg.io/ <https://epsg.io/>`_ pour les propriétés à définir.
 
 Exemple
 
@@ -722,7 +715,7 @@ RoutingSource
 
     .. line-block::
 
-        Source serveur pour la création des itinéraires. Actuellement, le serveur utilisé est OSRM.
+        Permet de définir la source serveur utilisée pour la création d'itinéraires. Actuellement, le serveur utilisé est OSRM.
 
 Exemples
 
@@ -749,6 +742,32 @@ Liens
 
         - `igo2/blob/master/src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
 
+********************************
+showMenuButton
+********************************
+
+    .. line-block::
+
+        Permet de définir si le bouton de menu permettant d'accéder
+        aux outils est affiché dans le coin supérieur gauche.
+
+********************************
+showRotationButtonIfNoRotation
+********************************
+
+    .. line-block::
+
+        Permet de définir si le bouton de réinitialisation de la
+        rotation est visible si aucune rotation n'est active.
+
+********************************
+showSearchBar
+********************************
+
+    .. line-block::
+
+        Permet de définir si la barre de recherche est affichée ou non.
+
 ***************
 SearchSources
 ***************
@@ -764,7 +783,7 @@ Theme
 
     .. line-block::
 
-        Permet de définir les thèmes (couleurs, fonts) de l'application.
+        Permet de définir les thèmes de l'application (couleurs, polices).
         Le répertoire où sont conservés les thèmes est le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
 
 Exemples
@@ -788,6 +807,32 @@ Liens
 
         - `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
 
+********************************
+Title
+********************************
+
+    .. line-block::
+
+        Permet de définir le titre de l'application que l'on retrouve dans le menu d'accueil.
+        Constante pouvant être réutilisée dans le welcomeWindow.
+
+********************************
+Version
+********************************
+
+    .. line-block::
+
+        Permet de définir la version et la date de déploiement de l'application.
+        Constante pouvant être réutilisée dans le welcomeWindow.
+
+Exemple
+
+	.. code:: json
+
+		"version": {
+			"app": "1.8.1",
+			"releaseDateApp": "2021-09-01"
+		}
 
 ***************
 WelcomeWindow
@@ -795,8 +840,26 @@ WelcomeWindow
 
     .. line-block::
 
-        Affiche une fenêtre accueil à l'entrée dans l'application.
-        NB. : Pour une application sans fenêtre accueil, simplement ne pas mettre ces configurations.
+        Permet d'ouvrir une fenêtre d'accueil à l'arrivée dans application.
+        NB.: Pour une application sans fenêtre accueil, simplement ne pas inclure ces configurations.
+
+    .. line-block::
+
+        Le contenu doit être configuré à l'aide des fichiers de traduction en.json et fr.json.
+
+    .. code:: json
+
+        "welcomeWindow": {
+            "html": "<h1>Débutez en sélectionnant un contexte</h1>",
+            "title": "Fenêtre d'accueil",
+            "closeButton": "Fermer",
+            "notShowCheck": "Ne plus afficher"
+        }
+
+    .. line-block::
+
+        Les configurations "title", "description" et "version"
+        peuvent être utilisées dans la propriété "html" afin d'ajouter du contenu non traduit.
 
 Exemples
 
@@ -822,7 +885,7 @@ Propriétés
 
 
 La configuration du titre et du message présentés se fait dans les fichiers locaux de traduction en.json et fr.json.
-Les variables de nb. visite et de présentation ou non sont conservés dans le 'local storage' du navigateur internet.
+Les variables nbVisitToShow et nbVisitToShowAgain sont conservées dans les fichiers du navigateur Internet.
 
 ***************************
 Exemple complet config.json
@@ -1386,7 +1449,7 @@ Uri
 
     .. line-block::
 
-        Identifiant du contexte. Particulièrement utile pour le partage de cartes. C'est cette propriété du contexte qui est utilisée pour bâtir l'url de partage de carte:
+        Identifiant du contexte. Particulièrement utile pour le partage de cartes. C'est cette propriété du contexte qui est utilisée pour bâtir l'URL de partage de carte:
 
             ex: .../?context=uriDuContexte...
 
