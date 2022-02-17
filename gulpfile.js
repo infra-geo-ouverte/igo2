@@ -2,11 +2,11 @@
 const gulp = require('gulp');
 const bump = require('gulp-bump');
 
-gulp.task('bumpPwaVersion', function(){
+gulp.task('bumpPwaVersion', done => {
 
     gulp.src(['./ngsw-config.json'])
     .pipe(bump({type:'prerelease'}))
     .pipe(gulp.dest('./'));
+
+    done();
   });
-
-
