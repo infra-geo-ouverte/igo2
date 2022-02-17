@@ -9,9 +9,7 @@
         "workspace": {
           "enabled": false
         },
-        "offlineOptions": {
-          "available": true     
-        },
+
         "legendOptions": {
           "collapsed": false,
           "display": true,
@@ -45,9 +43,7 @@
         "workspace": {
           "enabled": false
         },
-        "offlineOptions": {
-          "available": true     
-        },
+
         "legendOptions": {
           "collapsed": false,
           "display": true,
@@ -81,9 +77,7 @@
         "title": "Ponceau",
         "id": "m012Mau",
         "maxResolution": 40,
-        "offlineOptions": {
-          "available": true     
-        },
+
         "legendOptions": {
           "collapsed": false,
           "display": true,
@@ -117,11 +111,9 @@
       },
       {
         "title": "Réseau routier - RTSS",
-        "id": "rtss",
+        "id": "rtssCalculCh",
         "maxResolution": 40,
-        "offlineOptions": {
-          "available": true     
-        },
+
         "legendOptions": {
           "collapsed": false,
           "display": true,
@@ -158,9 +150,7 @@
         "title": "GSQ",
         "id": "gsqMau",
         "maxResolution": 40,
-        "offlineOptions": {
-          "available": true     
-        },
+
         "legendOptions": {
           "collapsed": false,
           "display": true,
