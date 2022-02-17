@@ -1,20 +1,23 @@
-[  {
+[  
+  {
     "uri": "ab",
     "title": "Abitibi-Témiscamingue"
-  },{
+  },
+  {
     "uri": "bsl",
     "title": "Bas-Saint-Laurent"
-  },{
-    "uri": "ca",
-    "title": "Chaudière-Appalaches"
+  },
+  {
+    "uri": "cnat",
+    "title": "Capitale-Nationale"
   },
   {
     "uri": "cdq",
     "title": "Centre-du-Québec"
   },
   {
-    "uri": "cnat",
-    "title": "Capitale-Nationale"
+    "uri": "ca",
+    "title": "Chaudière-Appalaches"
   },
   {
     "uri": "cn",
@@ -22,7 +25,7 @@
   },
   {
     "uri": "dgprmm",
-    "title": "DGPRMM"
+    "title": "Direction générale principale de la région métropolitaine de Montréal"
   },
   {
     "uri": "estrie",
@@ -49,7 +52,7 @@
     "title": "Outaouais"
   },
   {
-    "uri": "slj",
-    "title": "Saguenay - Lac-Saint-Jean - Chibougamau"
+    "uri": "slsjc",
+    "title": "Saguenay–Lac-Saint-Jean–Chibougamau"
   }
 ]
