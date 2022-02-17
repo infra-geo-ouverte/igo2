@@ -476,17 +476,21 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.http.get('ngsw.json').pipe(
           concatMap((ngsw: any) => {
             const datas$ = [];
+            let hasDataInDataDir: boolean = false;
             if (ngsw) {
               const currentVersion = ngsw.appData.version;
               const cachedDataVersion = this.storageService.get('cachedDataVersion');
               if (currentVersion !== cachedDataVersion) {
                 ((ngsw as any).assetGroups as any).map((assetGroup) => {
                   if (assetGroup.name === 'data' || assetGroup.name === 'contexts') {
+                    if (assetGroup.name === 'data') {
+                      hasDataInDataDir = assetGroup.urls.concat(assetGroup.files).length > 0;
+                    }
                     const elemToDownload = assetGroup.urls.concat(assetGroup.files).filter(f => f);
                     elemToDownload.map((url,i) => datas$.push(this.http.get(url).pipe(delay(750))));
                   }
                 });
-                if (datas$.length > 0) {
+                if (hasDataInDataDir) {
                   const message = this.languageService.translate.instant('pwa.data-download-start');
                   downloadMessage = this.messageService
                     .info(message, undefined, { timeOut: 0, progressBar: false, closeButton: true, tapToDismiss: false });

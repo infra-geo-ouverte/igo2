@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
-import { AnalyticsService, LanguageService } from '@igo2/core';
+import { AnalyticsService, ConfigService, LanguageService } from '@igo2/core';
 import { SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,36 +14,40 @@ export class PwaService {
     private platform: Platform,
     private analyticsService: AnalyticsService,
     public updates: SwUpdate,
-    public languageService: LanguageService
+    public languageService: LanguageService,
+    private configService: ConfigService
   ) {
     if (updates.isEnabled) {
-      interval(6 * 60 * 60).subscribe(() => updates.checkForUpdate());
+      interval(60 * 1000 * 2).subscribe(() => updates.checkForUpdate());
     }
   }
 
   public checkForUpdates(): void {
-    this.updates.available.subscribe(event => this.promptUser(event));
-  }
 
-  private promptUser(event): void {
-    console.log('current version is', event.current);
-    console.log('available version is', event.available);
-    console.log(this.languageService.translate.instant('igo.auth.accessAnonymous'));
-    const title = this.languageService.translate.instant('pwa.new-version-title');
-    const body = this.languageService.translate.instant('pwa.new-version');
-    const message = `${title} ${body}`;
-    if (confirm(message)) {
-      this.updates.activateUpdate().then(() => document.location.reload());
-    }
+    if (this.updates.isEnabled) {
+      this.updates.available
+      .pipe(debounceTime(25000))
+      .subscribe(() => {
+        const title = this.languageService.translate.instant('pwa.new-version-title');
+        const body = this.languageService.translate.instant('pwa.new-version');
+        const message = `${title} ${body}`;
+          if(confirm(message)) {
+              window.location.reload();
+          }
+      });
+  }
   }
 
   public async initPwaPrompt() {
-    if (!this.platform.IOS) {
-      window.addEventListener('beforeinstallprompt', (event: any) => {
-        event.preventDefault();
-        this.promptEvent = event;
-        this.listenToUserAction();
-      }, { once: true });
+    const promotePWA = this.configService.getConfig('promotePWA');
+    if (promotePWA) {
+      if (!this.platform.IOS) {
+        window.addEventListener('beforeinstallprompt', (event: any) => {
+          event.preventDefault();
+          this.promptEvent = event;
+          this.listenToUserAction();
+        }, { once: true });
+      }
     }
   }
 
