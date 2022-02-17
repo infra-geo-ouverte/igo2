@@ -222,7 +222,10 @@
   },
   "pwa": {
     "new-version-title": "New version available",
-    "new-version": "Do you want to reload the app?"
+    "new-version": "Do you want to reload the app?",
+    "data-download-start": "Downloading data for offline use. Please don't quit.",
+    "data-download-completed": "Offline data download completed"
+
   },
   "messages": {
     "title": "Title from a translation",

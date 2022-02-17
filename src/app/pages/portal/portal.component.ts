@@ -7,8 +7,8 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
-import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
+import { Subscription, of, BehaviorSubject, combineLatest, zip } from 'rxjs';
+import { debounceTime, take, pairwise, skipWhile, first, concatMap, delay } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
@@ -465,6 +465,51 @@ export class PortalComponent implements OnInit, OnDestroy {
       ).subscribe((sidenavMediaAndOrientation: [boolean, string, string]) => {
         this.computeToastPanelOffsetX();
       });
+      this.initSW();
+  }
+
+  private initSW() {
+    if ('serviceWorker' in navigator) {
+      let downloadMessage;
+      navigator.serviceWorker.ready.then((registration) => {
+        console.log('Service Worker Ready');
+        this.http.get('ngsw.json').pipe(
+          concatMap((ngsw: any) => {
+            const datas$ = [];
+            if (ngsw) {
+              const currentVersion = ngsw.appData.version;
+              const cachedDataVersion = this.storageService.get('cachedDataVersion');
+              if (currentVersion !== cachedDataVersion) {
+                ((ngsw as any).assetGroups as any).map((assetGroup) => {
+                  if (assetGroup.name === 'data' || assetGroup.name === 'contexts') {
+                    const elemToDownload = assetGroup.urls.concat(assetGroup.files).filter(f => f);
+                    elemToDownload.map((url,i) => datas$.push(this.http.get(url).pipe(delay(750))));
+                  }
+                });
+                if (datas$.length > 0) {
+                  const message = this.languageService.translate.instant('pwa.data-download-start');
+                  downloadMessage = this.messageService
+                    .info(message, undefined, { timeOut: 0, progressBar: false, closeButton: true, tapToDismiss: false });
+                    this.storageService.set('cachedDataVersion', currentVersion);
+                }
+                return zip(...datas$);
+              }
+
+            }
+            return zip(...datas$);
+          })
+        )
+        .pipe(delay(1000))
+        .subscribe(() => {
+          if (downloadMessage) {
+            this.messageService.remove((downloadMessage as any).toastId);
+            const message = this.languageService.translate.instant('pwa.data-download-completed');
+            this.messageService.success(message, undefined, { timeOut: 40000 });
+          }
+        });
+
+      });
+    }
   }
 
   setToastPanelHtmlDisplay(value) {

@@ -1,6 +1,7 @@
 {
-  "name": "igo2",
-  "short_name": "igo2",
+  "name": "IGO - APP",
+  "short_name": "IGO",
+  "description": "IGO in a PWA mode",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

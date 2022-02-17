@@ -3,12 +3,33 @@
   "index": "/index.html",
   "appData": {
     "changelog": "Initial version",
-    "version": "1.8.2"
+    "version": "1.10.0-pwa.0"
   },
   "assetGroups": [
     {
+      "name": "contexts",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/contexts/**"
+        ]
+      }
+    },
+    {
+      "name": "data",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/data/**"
+        ]
+      }
+    },
+    {
       "name": "app",
       "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
@@ -17,8 +38,7 @@
           "/*.css",
           "/*.js",
           "/locale/**",
-          "/config/**",
-          "/contexts/**"
+          "/config/**"
         ]
       }
     }, {
