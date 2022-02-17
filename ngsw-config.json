@@ -3,7 +3,7 @@
   "index": "/index.html",
   "appData": {
     "changelog": "Initial version",
-    "version": "1.10.0-pwa.0"
+    "version": "1.10.0"
   },
   "assetGroups": [
     {
