@@ -1451,12 +1451,4 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
     }
   }
-
-  public changeWorkspace(event) {
-    this.workspaceState.setActiveWorkspaceByTitle(event);
-  }
-
-  public disableWorkspaceSwitch(event) {
-    this.workspaceSwitchDisabled = event;
-  }
 }

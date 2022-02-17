@@ -6,4 +6,3 @@ title ,String ,Titre du workspace à faire le lien avec.
 icon ,String ,Icône du bouton permettant de faire la liaison (https://materialdesignicons.com/).
 table ,Boolean ,Indique si le champ doit être visible ou non dans la table d'édition. ,true/false ,true
 parent ,String ,Indique la table parent.
-parentId ,String ,Indique la clé primaire de la table parent.
