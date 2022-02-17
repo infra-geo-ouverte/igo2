@@ -13,12 +13,12 @@
     "title": "Centre-du-Québec"
   },
   {
-    "uri": "cn",
-    "title": "Côte-Nord"
-  },
-  {
     "uri": "cnat",
     "title": "Capitale-Nationale"
+  },
+  {
+    "uri": "cn",
+    "title": "Côte-Nord"
   },
   {
     "uri": "dgprmm",
