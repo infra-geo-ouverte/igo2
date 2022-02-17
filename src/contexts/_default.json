@@ -10,35 +10,31 @@
         "attribute": "type",
         "data": ["Autres services de police","Sûreté du Québec","Services de police municipaux", "Services de police autochtones"],
         "fill": ["orange","red","green","blue"],
-        "stroke": ["black","black","black","black"],
-        "width": [1,1,1,1],
-        "maxLabelScale": [4000, 4000, 4000, 4000],
         "icon": ["./assets/images/styles/pin.svg","./assets/images/styles/pin.svg","./assets/images/styles/pin.svg","./assets/images/styles/pin.svg"],
-        "radius": [10,10,10,10],
+        "radius": [1,1,1,1],
         "label": {
-          "attribute": "no_civique"
+          "attribute": "id_police",
+          "style": {
+            "textAlign": "center",
+            "textBaseline": "center",
+            "font": "bold 8px Calibri,sans-serif",
+            "fill": {
+              "color": "#000"
+            },
+            "stroke": {
+              "color": "rgba(255, 255, 255, 1)"
+            },
+            "overflow": "true",
+            "offsetY": -5
+          }
         }
       },
       "sourceOptions": {
         "type": "vector",
         "url": "./assets/images/styles/data.geojson",
-        "queryable": true,
+        "queryable": false,
         "queryFormat": "geojson",
         "queryTitle": "Service de police"
-      }
-    },
-    {
-      "title": "Établissements MTQ",
-      "sourceOptions": {
-        "type": "wms",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-        "params": {
-          "layers": "etablissement_mtq",
-          "version": "1.3.0"
-        },
-        "queryable": true,
-        "queryFormat": "htmlgml2",
-        "queryTitle": "nometablis"
       }
     }
   ]
