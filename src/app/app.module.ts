@@ -2,7 +2,6 @@ import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateService } from '@ngx-translate/core';
 import {
   provideConfigOptions,
   IgoMessageModule,
@@ -45,7 +44,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     IgoStopPropagationModule,
     PortalModule,
     HammerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerWithDelay:5000' })
   ],
   providers: [
     provideConfigOptions({
