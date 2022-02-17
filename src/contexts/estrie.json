@@ -1,0 +1,211 @@
+{
+  "uri": "estrie",
+  "base": "_base",
+  "layers": [
+    {
+      "title": "Municipalité",
+      "id": "mun",
+      "maxResolution": 300,
+      "workspace": {
+        "enabled": false
+      },
+      "offlineOptions": {
+        "available": true     
+      },
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/mun.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/estrie/mun.geojson",
+        "pathOffline": "data/dt/estrie/mun.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "Mun: ${MUS_NM_MUN}",
+        "sourceFields": [
+          { "alias": "Mun:", "name": "MUS_NM_MUN"},
+          { "alias": "Rég. Adm.", "name": "MUS_NM_REG"}
+      ]
+
+      },
+      "styleByAttribute": {
+        "type": "regular",
+        "attribute": "",
+        "data": [""],
+        "fill": ["rgba(255,255,255,0)"],
+        "stroke": ["rgba(20,100,200)"],
+        "width": [2]
+      }
+    },
+    {
+      "title": "Centre de services",
+      "id": "cs",
+      "workspace": {
+        "enabled": false
+      },
+      "offlineOptions": {
+        "available": true     
+      },
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/cs.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/estrie/cs.geojson",
+        "pathOffline": "data/dt/estrie/cs.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "nom_unite_",
+        "sourceFields": [
+          { "alias": "Nom", "name": "nom_unite_"},
+          { "alias": "Adresse", "name": "val_adrs_u"},
+          { "alias": "Code", "name": "cod_niv_hi" }
+      ]
+
+      },
+      "style": {
+        "stroke": { 
+          "color": "rgba(153, 238, 153)"
+          },          
+          "fill": { 
+            "color": "rgba(153, 238, 153,0)"
+        },
+        "width": 5
+      }
+    },
+    {
+      "title": "Ponceau",
+      "id": "m012",
+      "maxResolution": 40,
+      "offlineOptions": {
+        "available": true     
+      },
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/ponceau.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/estrie/ponceau.geojson",
+        "pathOffline": "data/dt/estrie/ponceau.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "num_refrn_",
+        "sourceFields": [
+          { "alias": "Référence ponceau", "name": "num_refrn_" },
+          { "alias": "Type", "name": "des_long_t" },
+          { "alias": "Sous-type", "name": "des_long_s" },
+          { "alias": "Longueur (m)", "name": "val_mesr" },
+          { "alias": "Largeur/diamètre (mm)", "name": "val_larg_1" },
+          { "alias": "Hauteur (mm)", "name": "val_hautr" },
+          { "alias": "Année construction", "name": "val_annee_" },
+          { "alias": "Année réhabilitation", "name": "val_anne_1" }
+      ]
+      },
+      "styleByAttribute": {
+        "type": "regular",
+        "attribute": "",
+        "data": [""],
+        "stroke": ["rgba(0,0,0)"],
+        "width": [4]
+      }
+    },
+    {
+      "title": "Réseau routier - RTSS",
+      "id": "rtss",
+      "maxResolution": 40,
+      "offlineOptions": {
+        "available": true     
+      },
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/rtss.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/estrie/rtss.geojson",
+        "pathOffline": "data/dt/estrie/rtss.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "RTSS : ${num_route}-${num_tronc}-${num_sectn}-${cod_sous_r}${seq_sous_r}${cod_sous_c}${cod_cote_c}",
+        "sourceFields": [
+          { "alias": "RTSS", "name": "num_rts" },
+          { "alias": "Longueur", "name": "val_longr_" },
+          { "alias": "Classe fonctionnelle", "name": "des_clasf_" },
+          { "alias": "Nom de la route", "name": "nom_sous_r" },
+          { "alias": "Nom organisme gestion", "name": "nom_orgns_" },
+          { "alias": "Nom organisme entretien", "name": "nom_orgn00" },
+          { "alias": "# route:", "name": "num_route" }
+      ]
+
+      },
+      "styleByAttribute": {
+        "type": "regular",
+        "attribute": "des_clasf_",
+        "data": ["Autoroute", "Nationale", "Régionale","Collectrice","Accès ressources","Ressources et aux localités isolées", "Local 1", "Local 2", "Local 3"],
+        "stroke": ["rgba(255,216,12)","rgba(240,0,0)", "rgba(231,100,29)", "rgba(231,100,29)", "rgba(210,210,210)", "rgba(210,210,210)", "rgba(95,93,92)", "rgba(95,93,92)", "rgba(95,93,92)"],
+        "width": [5,4,4,3,2,2,2,2,2],
+        "label" : ""
+        }
+    },
+    {
+      "title": "GSQ",
+      "id": "gsq",
+      "maxResolution": 40,
+      "offlineOptions": {
+        "available": true     
+      },
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/gsq.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/estrie/gsq.geojson",
+        "pathOffline": "data/dt/estrie/gsq.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "num_dossr",
+        "sourceFields": [
+          { "alias": "Numéro de dossier", "name": "num_dossr" },
+          { "alias": "Nom de l'obstacle", "name": "nom_obstc" },
+          { "alias": "Année de construction", "name": "val_annee_", "values" : [""] },
+          { "alias": "Type de structure", "name": "code_des_t", "values": ["11 - Ponceau à dalle en béton armé", "12 - Ponceau portique en béton armé", "13 - Ponceau rectang. en béton armé", "14 - Ponceau circul. en béton armé", "15 - Ponceau circulaire en acier", "16 - Ponceau circ. polyéthylène", "17 - Ponceau elliptique en acier", "18 - Ponceau arqué en acier", "19 - Ponceau voûté en béton armé", "20 - Ponceau voûté en acier", "21 - Ponceau rectangulaire en bois", "31 - Pont à dalle pleine en béton armé", "32 - Pont à dalle pleine en béton précont.", "33 - Pont à dalle évidée en béton armé", "34 - Pont à dalle évidée en béton précont.", "35 - Portique en béton armé", "36 - Port. béton armé, ss remblai", "37 - Portique en béton précontraint", "38 - Pont à béquilles, béton armé", "39 - Pont à béquil., béton précont.", "41 - Pont à poutres en béton armé", "42 - Pont à pout. béton précont., préfabr.", "43 - Pont à pout. béton préc., coul. place", "44 - Pont à poutres en acier", "45 - Pont acier-bois", "46 - Pont à poutres en bois", "47 - Portique en béton", "50 - Pont à béquilles en béton", "51 - Pont à béquilles, en acier", "52 - Pont à poutres en acier enr. de béton", "56 - Pont à poutres-caissons en béton armé", "57 - Pont à pout.-cais. en béton précont.", "58 - Pont à poutres-caissons en acier", "61 - Pont à tablier inférieur, en acier", "62 - Pont à tablier interméd., en acier", "63 - Pont de type Pony-Warren, en acier", "64 - Pont de type Bailey, en acier", "65 - Pont à tablier supérieur, en acier", "66 - Pont en bois", "67 - Pont couvert", "71 - Pont à tablier infér., béton armé", "72 - Pont à tablier inférieur, en acier", "73 - Pont à tablier interm., béton armé", "74 - Pont à tablier intermédiaire, acier", "75 - Pont à tablier supér., béton armé", "76 - Pont à tablier supérieur, en acier", "77 - Pont à tablier supérieur, en bois", "81 - Pont suspendu", "82 - Pont à haubans", "85 - Pont mobile", "94 - Tunnel", "97 - Mur", "98 - Station de pompage"] }
+      ]
+
+      },
+      "styleByAttribute": {
+        "type": "circle",
+        "attribute": "",
+        "data": [""],
+        "color": ["green"],
+        "fill": ["green"],
+        "stroke": ["blue"],
+        "radius": [4],
+        "label" : ""
+        }
+    }
+    
+  ],
+  "toolbar": [
+    "searchResults",
+    "contextManager",
+    "mapTools",
+    "map-rtss-proximity","map-proximity",
+    "measurer",
+    "draw",
+    "directions",
+    "importExport",
+    "print",
+    "shareMap",
+    "about",
+    "advancedMap"
+  ]
+}

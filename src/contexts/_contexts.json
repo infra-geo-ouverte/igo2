@@ -1,50 +1,55 @@
-[
-  {
-    "uri": "_default",
-    "title": "Simple"
+[  {
+    "uri": "ab",
+    "title": "Abitibi-Témiscamingue"
+  },{
+    "uri": "bsl",
+    "title": "Bas-Saint-Laurent"
+  },{
+    "uri": "ca",
+    "title": "Chaudière-Appalaches"
   },
   {
-    "uri": "simple2",
-    "title": "Simple 2"
+    "uri": "cdq",
+    "title": "Centre-du-Québec"
   },
   {
-    "uri": "messages",
-    "title": "Messages"
+    "uri": "cn",
+    "title": "Côte-Nord"
   },
   {
-    "uri": "timeFilter",
-    "title": "Filtre temporel (Time filter)"
+    "uri": "cnat",
+    "title": "Capitale-Nationale"
   },
   {
-    "uri": "ogcFilters",
-    "title": "Filtre attributaire (Attribute filter)"
+    "uri": "dgprmm",
+    "title": "DGPRMM"
   },
   {
-    "uri": "layerSync",
-    "title": "Synchronisation de layers"
+    "uri": "estrie",
+    "title": "Estrie"
   },
   {
-    "uri": "workspace",
-    "title": "Workspace (vue tabulaire)"
+    "uri": "gidlm",
+    "title": "Gaspésie - Îles-de-la-Madeleine"
   },
   {
-    "uri": "mapOverlay",
-    "title": "Superposition de carte (Map overlay)"
+    "uri": "ll",
+    "title": "Laurentides - Lanaudière"
   },
   {
-    "uri": "testExport",
-    "title": "Test export"
+    "uri": "mau",
+    "title": "Mauricie"
   },
   {
-    "uri": "variousFormats",
-    "title": "Divers format à titre d'exemple"
+    "uri": "monte",
+    "title": "Montérégie"
   },
   {
-    "uri": "variousStyles",
-    "title": "Divers styles à titre d'exemple"
+    "uri": "ou",
+    "title": "Outaouais"
   },
   {
-    "uri": "legends",
-    "title": "Exemples de légendes"
+    "uri": "slj",
+    "title": "Saguenay - Lac-Saint-Jean - Chibougamau"
   }
 ]
