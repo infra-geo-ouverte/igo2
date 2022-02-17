@@ -13,6 +13,8 @@
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
+  "showMenuButton": true,
+  "showSearchBar": true,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
   "searchSources": {
