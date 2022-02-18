@@ -63,6 +63,7 @@
       [@mapStateY]="getControlsOffsetY()"
       (@mapStateY.start)="updateMapBrowserClass()">
 
+      <igo-info-section [infoContent]="infoContent"></igo-info-section>
       <igo-zoom-button [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()">
       </igo-zoom-button>

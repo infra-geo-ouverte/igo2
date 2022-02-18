@@ -74,7 +74,9 @@ import {
   QueryState,
   ContextState,
   WorkspaceState,
-  DirectionState
+  DirectionState,
+  MapRtssProximityState,
+  MapProximityState
 } from '@igo2/integration';
 
 import {
@@ -109,6 +111,7 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
+  public infoContent = undefined;
   public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(undefined);
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public minSearchTermLength = 2;
@@ -311,7 +314,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     public dialogWindow: MatDialog,
     private queryService: QueryService,
     private storageService: StorageService,
-    private directionState: DirectionState
+    private directionState: DirectionState,
+    private mapRtssProximityState: MapRtssProximityState,
+    private mapProximityState: MapProximityState
+
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasGeolocateButton = this.configService.getConfig('hasGeolocateButton') === undefined ? true :
@@ -455,6 +461,17 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.computeToastPanelOffsetX();
       });
       this.initSW();
+      this.mapRtssProximityState.currentRTSSCh$.subscribe(rtss => {
+        if (rtss) {
+          this.mapProximityState.proximityFeatureStore.delete(rtss);
+          this.mapProximityState.proximityFeatureStore.insert(rtss);
+          this.infoContent = `${rtss.properties.element}
+  ${rtss.properties.distance}m`;
+        } else {
+          this.infoContent = undefined;
+        }
+      });
+
   }
 
   private initSW() {
