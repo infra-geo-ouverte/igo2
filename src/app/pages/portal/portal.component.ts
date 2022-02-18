@@ -482,7 +482,7 @@ export class PortalComponent implements OnInit, OnDestroy {
                 if (hasDataInDataDir) {
                   const message = this.languageService.translate.instant('pwa.data-download-start');
                   downloadMessage = this.messageService
-                    .info(message, undefined, { timeOut: 0, progressBar: false, closeButton: true, tapToDismiss: false });
+                    .info(message, undefined, { disableTimeOut: true, progressBar: false, closeButton: true, tapToDismiss: false });
                     this.storageService.set('cachedDataVersion', currentVersion);
                 }
                 return zip(...datas$);
