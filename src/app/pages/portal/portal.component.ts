@@ -1449,4 +1449,20 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  refreshRelationsWorkspace(relationLayers: ImageLayer[] | VectorLayer[]) {
+    if (relationLayers?.length) {
+      for (const layer of relationLayers) {
+        const relationWorkspace = this.workspaceStore.all().find(workspace => layer.options.workspace.workspaceId.includes(workspace.id));
+        relationWorkspace.meta.tableTemplate.columns.forEach(col => {
+          // Update domain list
+          if (col.type === 'list' || col.type === 'autocomplete') {
+            this.editionWorkspaceService.getDomainValues(col.relation.table).subscribe(result => {
+              col.domainValues = result;
+            });
+          }
+        });
+      }
+    }
+  }
 }

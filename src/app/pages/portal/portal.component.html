@@ -113,6 +113,7 @@
       (toolToActivate)="toolToActivateFromWorkspace($event)"
       (changeWorkspace)="workspaceState.setActiveWorkspaceByTitle($event)"
       (disableSwitch)="workspaceSwitchDisabled = $event"
+      (relationLayers)="refreshRelationsWorkspace($event)"
       (rowsInMapExtentCheckCondition)="workspaceState.rowsInMapExtentCheckCondition$.next($event)"
       [store]="workspaceStore"
       [disabled]="workspaceSwitchDisabled"
