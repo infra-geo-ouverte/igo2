@@ -467,7 +467,8 @@
               "operator": "During",
               "propertyName": "date_observation",
               "begin": "2016-01-21T00:00:00-05:00",
-              "end": "today"
+              "end": "today",
+              "title": "Date de l'observation"
             },
           "allowedOperatorsType": "basic"
         },
