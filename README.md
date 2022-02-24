@@ -26,7 +26,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ## Table des matières (Français)
 
 - [Téléchargement](#téléchargement)
-- [Installation pour déploiement serveur](#installation-(pour-déploiement-serveur))
+- [Installation pour déploiement serveur](#installation-pour-déploiement-serveur)
 - [Installation pour développeurs](#installation-et-démarrage-pour-développeurs)
 - [Démo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Démo d'IGO2 de Données Québec](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
@@ -41,8 +41,8 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ## Table of content (English)
 
 - [Download](#download)
-- [Installation (for server deployment)](#installation-(for-server-deployment))
-- [Installation for developpers](#installation-(for-developpers))
+- [Installation (for server deployment)](#installation-for-server-deployment)
+- [Installation for developpers](#installation-for-developpers)
 - [Demo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Demo IGO2 from Open Data Quebec (Canada)](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation (translation is not yet done)](https://igo2.readthedocs.io/fr/latest/)
