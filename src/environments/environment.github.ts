@@ -1,3 +1,4 @@
+import { AuthOptions } from '@igo2/auth';
 import { LanguageOptions } from '@igo2/core';
 import {
   SearchSourceOptions,
@@ -13,12 +14,13 @@ interface Environment {
     app: {
       forceCoordsNA: boolean;
     };
+    auth?: AuthOptions;
     catalog?: CatalogServiceOptions;
     importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
-    interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
+    interactiveTour?: { activateInteractiveTour: boolean, tourInMobile: boolean; pathToConfigFile: string };
     depot?: { url: string; trainingGuides?: string[]; };
     queryOverlayStyle?: {
       base?: CommonVectorStyleOptions,
@@ -38,6 +40,17 @@ export const environment: Environment = {
   igo: {
     app: {
       forceCoordsNA: false
+    },
+    auth: {
+      // url: '/apis/users',
+      tokenKey: 'id_token_igo',
+      allowAnonymous: true,
+      trustHosts: ['geoegl.msp.gouv.qc.ca']
+      ,hostsByKey: [{
+        domainRegFilters: '(https:\/\/|http:\/\/)?(.*geoegl)(.*)',
+        keyProperty: 'key',
+        keyValue: 'd8UA0Y9iMIynBa',
+     }]
     },
     catalog: {
       sources: [
@@ -61,9 +74,10 @@ export const environment: Environment = {
       url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre'
     },
     language: {
-      prefix: './locale/'
+      prefix: ['./locale/', './locale/offline/']
     },
     interactiveTour: {
+      activateInteractiveTour: false,
       tourInMobile: true,
       pathToConfigFile: './config/interactiveTour.json'
     },

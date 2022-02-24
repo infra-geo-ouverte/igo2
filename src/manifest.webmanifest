@@ -1,7 +1,7 @@
 {
-  "name": "IGO - APP",
-  "short_name": "IGO",
-  "description": "IGO in a PWA mode",
+  "name": "SIGO Terrain",
+  "short_name": "SIGO Terrain",
+  "description": "Outil permettant de récupérer les RTSS Chainage en ligne et hors ligne. EN DEV.",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

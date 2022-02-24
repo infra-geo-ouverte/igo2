@@ -3,7 +3,7 @@
   "index": "/index.html",
   "appData": {
     "changelog": "Initial version",
-    "version": "1.10.0-pwa"
+    "version": "1.10.0-pwa.7"
   },
   "assetGroups": [
     {
@@ -13,16 +13,6 @@
       "resources": {
         "files": [
           "/contexts/**"
-        ]
-      }
-    },
-    {
-      "name": "data",
-      "installMode": "prefetch",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
-          "/data/**"
         ]
       }
     },
@@ -43,7 +33,7 @@
       }
     }, {
       "name": "assets",
-      "installMode": "lazy",
+      "installMode": "prefetch",
       "updateMode": "prefetch",
       "resources": {
         "files": [

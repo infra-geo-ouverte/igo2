@@ -6,7 +6,7 @@
   },
   "directionsSources": {
     "osrm": {
-      "url": "/services/itineraire/route/v1/driving/"
+      "url": "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/"
     }
   },
   "theme": "blue-theme",
@@ -23,6 +23,7 @@
     }
   },
   "title": "IGO",
+  "description": "L'application SIGO en mode déconnecté",
   "welcomeWindow": {
     "showAgainOnNewIGOVersion": true,
     "nbVisitToShow": 2,

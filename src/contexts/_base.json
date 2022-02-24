@@ -83,7 +83,10 @@
       }
     },
     {
-      "name": "about"
+      "name": "about",
+      "options": {
+          "html": "<img src='https://www.transports.gouv.qc.ca/ImagesCommunesDTI/LogoMinistereGrand.gif'> <br> <br>La mission du ministère des Transports est d’assurer, sur tout le territoire, la mobilité durable des personnes et des marchandises par des systèmes de transport efficaces et sécuritaires qui contribuent au développement du Québec. <br><hr> <h3>Nous joindre:</h3><a href='mailto:geomatique@transports.gouv.qc.ca'>geomatique@transports.gouv.qc.ca</a><br><a href='https://www.donneesquebec.ca/recherche/fr/organization/mtq' target='_blank'>Transport Québec sur Données Québec</a>"
+      }
     },
     {
       "name": "mapTools",
