@@ -26,7 +26,8 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ## Table des matières (Français)
 
 - [Téléchargement](#téléchargement)
-- [Installation](#installation-et-démarrage)
+- [Installation pour déploiement serveur](#Installation-(pour-déploiement-serveur))
+- [Installation pour développeurs](#Installation-et-démarrage-pour-développeurs)
 - [Démo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Démo d'IGO2 de Données Québec](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation](https://igo2.readthedocs.io/fr/latest/)
@@ -40,7 +41,8 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ## Table of content (English)
 
 - [Download](#download)
-- [Installation](#installation-en)
+- [Installation (for server deployment)](#Installation-(for-server-deployment))
+- [Installation for developpers](#Installation-en-(for-developpers))
 - [Demo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Demo IGO2 from Open Data Quebec (Canada)](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation (translation is not yet done)](https://igo2.readthedocs.io/fr/latest/)
@@ -63,7 +65,15 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 - [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
 - [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
 
-## Installation et démarrage
+## Installation (pour déploiement serveur)
+
+1. [Télécharger](#téléchargement) la version désirée.
+2. Décompresser le fichier télécharger
+3. Déploier l'application sur un serveur Web (NGinx, Apache HTTPD, IIS ...)
+4. Servir le fichier index.html
+5. Personnaliser le contenu cartogtaphique (contexts.json et _default.json ou ...)
+
+## Installation et démarrage (pour développeurs)
 
 Requis:
 
@@ -138,7 +148,15 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 - [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
 - [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
 
-## Installation-en
+
+## Installation (for server deployment)
+
+1. [Download](#download) the desired version.
+2. Unzip the download file
+3. Deploy the application on a web server (NGinx, Apache HTTPD, IIS...)
+4. Serve the index.html file
+5. Customize map content (contexts.json and _default.json)
+## Installation-en (for developpers)
 
 Require:
 
