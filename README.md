@@ -1,6 +1,5 @@
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
-[![Dependencies Status](https://david-dm.org/infra-geo-ouverte/igo2.svg)](https://david-dm.org/infra-geo-ouverte/igo2)
-[![devDependencies Status](https://david-dm.org/infra-geo-ouverte/igo2/dev-status.svg)](https://david-dm.org/infra-geo-ouverte/igo2?type=dev)
+[![join chat https://gitter.im/igo2/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/igo2/Lobby)
 [![Known Vulnerabilities](https://snyk.io/test/github/infra-geo-ouverte/igo2/badge.svg)](https://snyk.io/test/github/infra-geo-ouverte/igo2)
 
 # Infrastructure géomatique ouverte 2.0 (IGO2) / Open GIS Infrastructure 2.0
@@ -85,12 +84,11 @@ $ cd igo2
 $ npm install
 
 # Surveiller les fichiers et lancer une instance pour le développement
+# Il est possible que vos changements de librairies ne soient pas appliqués.
+# Webpack (suite au npm start) ne surveille plus les changement de node_modules. Il observe seulement la version des dépendances. De ce fait, les 
+# changements de code ne sont pas recompilées.
+# Pour corriger ceci, désactiver la cache avec la variable d'environnement NG_BUILD_CACHE = "false"
 $ npm start
-# Ouvrir un navigateur http://localhost:4201/
-
-# Build dev
-$ npm run build.dev
-$ npm run serve.dev
 # Ouvrir un navigateur http://localhost:4201/
 
 # Build prod
@@ -123,7 +121,7 @@ $ npm run e2e
 
 ## Contribuer
 
-Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, nous vous encourageons à lire le guide de [contribution](.github/CONTRIBUTING.md), la [LICENCE](LICENCE.txt) et le [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). Si vous avez d'autres questions, n'hésitez pas à communiquer avec nous à l'adresse suivante : info(a)igouverte.org.
+Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, nous vous encourageons à lire le guide de [contribution](.github/CONTRIBUTING.md), la [LICENCE](LICENCE.txt) et le [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki/IGO2-:-Auto-formation-pour-d%C3%A9veloppeurs). Si vous avez d'autres questions, n'hésitez pas à communiquer avec nous à l'adresse suivante info(a)igouverte.org ou par [Gitter](https://gitter.im/igo2/).
 
 ---
 
@@ -164,12 +162,11 @@ $ cd igo2
 $ npm install
 
 # Check files and launch dev instance
+# Your library changes may not be applied.
+# Webpack (following npm start) no longer monitors node_modules changes. It only observes the version of the dependencies. Therefore, the
+# code changes are not recompiled.
+# To fix this, disable the cache with the environment variable NG_BUILD_CACHE = "false"
 $ npm start
-# Open your browser at http://localhost:4201/
-
-# Build dev
-$ npm run build.dev
-$ npm run serve.dev
 # Open your browser at http://localhost:4201/
 
 # Build prod
@@ -202,4 +199,4 @@ $ npm run e2e
 
 ## Contribution
 
-Before contributing, please read the [guidelines](.github/CONTRIBUTING.md), the [LICENCE](LICENSE_ENGLISH.txt) and the [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). If you have any question and want to contribute, contact the main email of IGO: info(a)igouverte.org.
+Before contributing, please read the [guidelines](.github/CONTRIBUTING.md), the [LICENCE](LICENSE_ENGLISH.txt) and the [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). If you have any question and want to contribute, contact the main email of IGO info(a)igouverte.org or on [Gitter](https://gitter.im/igo2/)
