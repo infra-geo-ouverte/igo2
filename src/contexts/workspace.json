@@ -9,7 +9,9 @@
         "maxResolution": 1200,
         "workspace": {
           "enabled": true,
-          "maxResolution": 400
+          "maxResolution": 400,
+          "noMapQueryOnOpenTab": true,
+          "noQueryOnClickInTab": true
         },
         "sourceOptions": {
           "queryable": true,
@@ -25,12 +27,7 @@
             "fieldNameGeometry": "geometry",
             "maxFeatures": 5000,
             "outputFormat": "geojson"
-          },
-          "ogcFilters": {
-            "enabled": true,
-            "editable": true
           }
-
         }
       },
 

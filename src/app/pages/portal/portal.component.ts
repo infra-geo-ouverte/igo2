@@ -224,6 +224,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
   set expansionPanelExpanded(value: boolean) {
     this.workspaceState.workspacePanelExpanded = value;
+    this.queryService.layerIdWksActiveAndOpen = this.getLayerIdWksActiveAndOpen();
   }
 
   get toastPanelShown(): boolean {
@@ -417,6 +418,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
+        activeWks.inResolutionRange$.subscribe(inRes => {
+          this.queryService.layerIdWksActiveAndOpen = this.getLayerIdWksActiveAndOpen();
+        })
         this.expansionPanelExpanded = true;
       } else {
         this.expansionPanelExpanded = false;
@@ -495,6 +499,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   entitySelectChange(result: { added: Feature[] }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
+
+    if (this.selectedWorkspace$.value instanceof WfsWorkspace || this.selectedWorkspace$.value instanceof FeatureWorkspace) {
+      if (this.selectedWorkspace$.value.getLayerWksOptionNoQueryClickInTab()) {return;}
+    }
     if (result && result.added) {
       const results = result.added.map((res) => {
         if (
@@ -1385,5 +1393,15 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.matDialogRef$.next(undefined);
       });
     }
+  }
+
+  private getLayerIdWksActiveAndOpen(): string {
+    if(this.workspace) {
+      const activeWks = this.workspace as WfsWorkspace;
+      if(activeWks.active && activeWks.inResolutionRange$.value && this.workspaceState.workspacePanelExpanded) {
+        return activeWks.layer.id;
+      } 
+    }
+    return undefined;
   }
 }
