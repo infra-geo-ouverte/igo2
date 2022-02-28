@@ -420,7 +420,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.selectedWorkspace$.next(activeWks);
         activeWks.inResolutionRange$.subscribe(inRes => {
           this.queryService.layerIdWksActiveAndOpen = this.getLayerIdWksActiveAndOpen();
-        })
+        });
         this.expansionPanelExpanded = true;
       } else {
         this.expansionPanelExpanded = false;
@@ -1400,7 +1400,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       const activeWks = this.workspace as WfsWorkspace;
       if(activeWks.active && activeWks.inResolutionRange$.value && this.workspaceState.workspacePanelExpanded) {
         return activeWks.layer.id;
-      } 
+      }
     }
     return undefined;
   }
