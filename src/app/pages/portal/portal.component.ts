@@ -678,6 +678,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (context === undefined) {
       return;
     }
+    if (!this.queryState.store.empty) {
+      this.queryState.store.softClear();
+    }
 
     this.route.queryParams.pipe(debounceTime(250)).subscribe((qParams) => {
       if (!qParams['context'] || qParams['context'] === context.uri) {
