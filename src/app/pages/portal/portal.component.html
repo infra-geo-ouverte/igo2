@@ -6,12 +6,12 @@
       (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <igo-menu-button
+    <igo-menu-button *ngIf="showMenuButton"
       [sidenavOpened]="sidenavOpened"
       (openSidenav)="onToggleSidenavClick()">
     </igo-menu-button>
 
-    <igo-search-bar
+    <igo-search-bar *ngIf="showSearchBar"
       #searchBar
       [term]="searchBarTerm"
       [termSplitter]="termSplitter"
@@ -83,7 +83,7 @@
         [map]="map"
         color="primary">
       </igo-home-extent-button>
-      <igo-user-button 
+      <igo-user-button
         *ngIf="auth.url"
         [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
