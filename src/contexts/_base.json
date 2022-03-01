@@ -28,14 +28,26 @@
     {
       "title": "Aucun",
       "baseLayer": true,
-      "visible": true,
+      "visible": false,
       "sourceOptions": {
         "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
         "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
-        "type": "xyz",
-        "maxZoom": 22
+        "pathOffline": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
+        "type": "xyz"
       }
     },
+    {
+      "title": "Noir",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk2A8AAMUAwUPJ2C4AAAAASUVORK5CYII=",
+        "pathOffline": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk2A8AAMUAwUPJ2C4AAAAASUVORK5CYII=",
+        "type": "xyz"
+      }
+    },
+
     {
       "id": "carte_gouv_qc",
       "title": "Carte Topo",

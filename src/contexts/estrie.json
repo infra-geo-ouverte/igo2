@@ -66,54 +66,17 @@
       "style": {
         "stroke": { 
           "color": "rgba(153, 238, 153)"
-          },          
-          "fill": { 
-            "color": "rgba(153, 238, 153,0)"
-        },
+        },          
+        "fill": { 
+          "color": "rgba(153, 238, 153,0)"
+        },                   
         "width": 5
-      }
-    },
-    {
-      "title": "Ponceau",
-      "id": "m012",
-      "maxResolution": 40,
-
-      "legendOptions": {
-        "collapsed": false,
-        "display": true,
-        "url": "assets/images/legends/ponceau.png"
-      },
-      "sourceOptions": {
-        "type": "vector",
-        "url": "data/dt/estrie/ponceau.geojson",
-        "pathOffline": "data/dt/estrie/ponceau.geojson",
-        "queryable": true,
-        "queryFormat": "geojson",
-        "queryTitle": "Ponceau: ${num_refrn_}",
-        "sourceFields": [
-          { "alias": "Référence ponceau", "name": "num_refrn_" },
-          { "alias": "Type", "name": "des_long_t" },
-          { "alias": "Sous-type", "name": "des_long_s" },
-          { "alias": "Longueur (m)", "name": "val_mesr" },
-          { "alias": "Largeur/diamètre (mm)", "name": "val_larg_1" },
-          { "alias": "Hauteur (mm)", "name": "val_hautr" },
-          { "alias": "Année construction", "name": "val_annee_" },
-          { "alias": "Année réhabilitation", "name": "val_anne_1" }
-      ]
-      },
-      "styleByAttribute": {
-        "type": "regular",
-        "attribute": "",
-        "data": [""],
-        "stroke": ["rgba(0,0,0)"],
-        "width": [4]
       }
     },
     {
       "title": "Réseau routier - RTSS",
       "id": "rtssCalculCh",
-      "maxResolution": 40,
-
+      "maxResolution": 80,
       "legendOptions": {
         "collapsed": false,
         "display": true,
@@ -125,7 +88,7 @@
         "pathOffline": "data/dt/estrie/rtss.geojson",
         "queryable": true,
         "queryFormat": "geojson",
-        "queryTitle": "RTSS : ${num_route}-${num_tronc}-${num_sectn}-${cod_sous_r}${seq_sous_r}${cod_sous_c}${cod_cote_c}",
+        "queryTitle": "${num_route}-${num_tronc}-${num_sectn}-${cod_sous_r}${seq_sous_r}${cod_sous_c}${cod_cote_c}",
         "sourceFields": [
           { "alias": "RTSS", "name": "num_rts" },
           { "alias": "Longueur", "name": "val_longr_" },
@@ -145,6 +108,42 @@
         "width": [5,4,4,3,2,2,2,2,2],
         "label" : ""
         }
+    },
+    {
+      "title": "Ponceau",
+      "id": "m012",
+      "maxResolution": 40,
+
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/ponceau.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/estrie/ponceau.geojson",
+        "pathOffline": "data/dt/estrie/ponceau.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "Ponceau: ${ide_drang_}",
+        "sourceFields": [
+          { "alias": "Identifiant IIT", "name": "ide_drang_" },
+          { "alias": "Type", "name": "des_long_t" },
+          { "alias": "Sous-type", "name": "des_long_s" },
+          { "alias": "Longueur (m)", "name": "val_mesr" },
+          { "alias": "Largeur/diamètre (mm)", "name": "val_larg_1" },
+          { "alias": "Hauteur (mm)", "name": "val_hautr" },
+          { "alias": "Année construction", "name": "val_annee_" },
+          { "alias": "Année réhabilitation", "name": "val_anne_1" }
+      ]
+      },
+      "styleByAttribute": {
+        "type": "regular",
+        "attribute": "",
+        "data": [""],
+        "stroke": ["rgba(0,0,0)"],
+        "width": [4]
+      }
     },
     {
       "title": "GSQ",
@@ -175,10 +174,11 @@
         "type": "circle",
         "attribute": "",
         "data": [""],
-        "color": ["green"],
-        "fill": ["green"],
-        "stroke": ["blue"],
-        "radius": [4],
+        "color": ["blue"],
+        "fill": ["blue"],
+        "hstroke": ["black"],
+        "icon": ["./assets/images/styles/square.svg"],
+        "scale": [0.5],
         "label" : ""
         }
     }

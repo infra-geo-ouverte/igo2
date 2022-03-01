@@ -1,201 +1,201 @@
 {
-    "uri": "ca",
-    "base": "_base",
-    "layers": [
-      {
-        "title": "Municipalité",
-        "id": "mun",
-        "maxResolution": 300,
-        "workspace": {
-          "enabled": false
-        },
-
-        "legendOptions": {
-          "collapsed": false,
-          "display": true,
-          "url": "assets/images/legends/mun.png"
-        },
-        "sourceOptions": {
-          "type": "vector",
-          "url": "data/dt/ca/mun.geojson",
-          "pathOffline": "data/dt/ca/mun.geojson",
-          "queryable": true,
-          "queryFormat": "geojson",
-          "queryTitle": "Mun: ${MUS_NM_MUN}",
-          "sourceFields": [
-            { "alias": "Mun:", "name": "MUS_NM_MUN"},
-            { "alias": "Rég. Adm.", "name": "MUS_NM_REG"}
-        ]
-
-        },
-        "styleByAttribute": {
-          "type": "regular",
-          "attribute": "",
-          "data": [""],
-          "fill": ["rgba(255,255,255,0)"],
-          "stroke": ["rgba(20,100,200)"],
-          "width": [2]
-        }
+  "uri": "ca",
+  "base": "_base",
+  "layers": [
+    {
+      "title": "Municipalité",
+      "id": "mun",
+      "maxResolution": 300,
+      "workspace": {
+        "enabled": false
       },
-      {
-        "title": "Centre de services",
-        "id": "cs",
-        "workspace": {
-          "enabled": false
-        },
 
-        "legendOptions": {
-          "collapsed": false,
-          "display": true,
-          "url": "assets/images/legends/cs.png"
-        },
-        "sourceOptions": {
-          "type": "vector",
-          "url": "data/dt/ca/cs.geojson",
-          "pathOffline": "data/dt/ca/cs.geojson",
-          "queryable": true,
-          "queryFormat": "geojson",
-          "queryTitle": "nom_unite_",
-          "sourceFields": [
-            { "alias": "Nom", "name": "nom_unite_"},
-            { "alias": "Adresse", "name": "val_adrs_u"},
-            { "alias": "Code", "name": "cod_niv_hi" }
-        ]
-
-        },
-        "style": {
-          "stroke": { 
-            "color": "rgba(153, 238, 153)"
-          },          
-          "fill": { 
-            "color": "rgba(153, 238, 153,0)"
-          },
-          "width": 5
-        }
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/mun.png"
       },
-      {
-        "title": "Ponceau",
-        "id": "m012",
-        "maxResolution": 40,
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/ca/mun.geojson",
+        "pathOffline": "data/dt/ca/mun.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "Mun: ${MUS_NM_MUN}",
+        "sourceFields": [
+          { "alias": "Mun:", "name": "MUS_NM_MUN"},
+          { "alias": "Rég. Adm.", "name": "MUS_NM_REG"}
+      ]
 
-        "legendOptions": {
-          "collapsed": false,
-          "display": true,
-          "url": "assets/images/legends/ponceau.png"
-        },
-        "sourceOptions": {
-          "type": "vector",
-          "url": "data/dt/ca/ponceau.geojson",
-          "pathOffline": "data/dt/ca/ponceau.geojson",
-          "queryable": true,
-          "queryFormat": "geojson",
-          "queryTitle": "Ponceau: ${num_refrn_}",
-          "sourceFields": [
-            { "alias": "Référence ponceau", "name": "num_refrn_" },
-            { "alias": "Type", "name": "des_long_t" },
-            { "alias": "Sous-type", "name": "des_long_s" },
-            { "alias": "Longueur (m)", "name": "val_mesr" },
-            { "alias": "Largeur/diamètre (mm)", "name": "val_larg_1" },
-            { "alias": "Hauteur (mm)", "name": "val_hautr" },
-            { "alias": "Année construction", "name": "val_annee_" },
-            { "alias": "Année réhabilitation", "name": "val_anne_1" }
-        ]
-        },
-        "styleByAttribute": {
-          "type": "regular",
-          "attribute": "",
-          "data": [""],
-          "stroke": ["rgba(0,0,0)"],
-          "width": [4]
-        }
       },
-      {
-        "title": "Réseau routier - RTSS",
-        "id": "rtssCalculCh",
-        "maxResolution": 40,
-
-        "legendOptions": {
-          "collapsed": false,
-          "display": true,
-          "url": "assets/images/legends/rtss.png"
-        },
-        "sourceOptions": {
-          "type": "vector",
-          "url": "data/dt/ca/rtss.geojson",
-          "pathOffline": "data/dt/ca/rtss.geojson",
-          "queryable": true,
-          "queryFormat": "geojson",
-          "queryTitle": "RTSS : ${num_route}-${num_tronc}-${num_sectn}-${cod_sous_r}${seq_sous_r}${cod_sous_c}${cod_cote_c}",
-          "sourceFields": [
-            { "alias": "RTSS", "name": "num_rts" },
-            { "alias": "Longueur", "name": "val_longr_" },
-            { "alias": "Classe fonctionnelle", "name": "des_clasf_" },
-            { "alias": "Nom de la route", "name": "nom_sous_r" },
-            { "alias": "Nom organisme gestion", "name": "nom_orgns_" },
-            { "alias": "Nom organisme entretien", "name": "nom_orgn00" },
-            { "alias": "# route:", "name": "num_route" }
-        ]
-
-        },
-        "styleByAttribute": {
-          "type": "regular",
-          "attribute": "des_clasf_",
-          "data": ["Autoroute", "Nationale", "Régionale","Collectrice","Accès ressources","Ressources et aux localités isolées", "Local 1", "Local 2", "Local 3"],
-          "stroke": ["rgba(255,216,12)","rgba(240,0,0)", "rgba(231,100,29)", "rgba(231,100,29)", "rgba(210,210,210)", "rgba(210,210,210)", "rgba(95,93,92)", "rgba(95,93,92)", "rgba(95,93,92)"],
-          "width": [5,4,4,3,2,2,2,2,2],
-          "label" : ""
-          }
-      },
-      {
-        "title": "GSQ",
-        "id": "gsq",
-        "maxResolution": 40,
-
-        "legendOptions": {
-          "collapsed": false,
-          "display": true,
-          "url": "assets/images/legends/gsq.png"
-        },
-        "sourceOptions": {
-          "type": "vector",
-          "url": "data/dt/ca/gsq.geojson",
-          "pathOffline": "data/dt/ca/gsq.geojson",
-          "queryable": true,
-          "queryFormat": "geojson",
-          "queryTitle": "Structure: ${num_dossr}",
-          "sourceFields": [
-            { "alias": "Numéro de dossier", "name": "num_dossr" },
-            { "alias": "Nom de l'obstacle", "name": "nom_obstc" },
-            { "alias": "Année de construction", "name": "val_annee_"},
-            { "alias": "Type de structure", "name": "code_des_t"}
-        ]
-
-        },
-        "styleByAttribute": {
-          "type": "circle",
-          "attribute": "",
-          "data": [""],
-          "color": ["green"],
-          "fill": ["green"],
-          "stroke": ["blue"],
-          "radius": [4],
-          "label" : ""
-          }
+      "styleByAttribute": {
+        "type": "regular",
+        "attribute": "",
+        "data": [""],
+        "fill": ["rgba(255,255,255,0)"],
+        "stroke": ["rgba(20,100,200)"],
+        "width": [2]
       }
-      
-    ],
-    "toolbar": [
-      "searchResults",
-      "contextManager",
-      "mapTools",
-      "map-rtss-proximity","map-proximity",
-      "measurer",
-      "draw",
-      "directions",
-      "importExport",
-      "print",
-      "shareMap",
-      "about",
-      "advancedMap"
-    ]
-  }
+    },
+    {
+      "title": "Centre de services",
+      "id": "cs",
+      "workspace": {
+        "enabled": false
+      },
+
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/cs.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/ca/cs.geojson",
+        "pathOffline": "data/dt/ca/cs.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "nom_unite_",
+        "sourceFields": [
+          { "alias": "Nom", "name": "nom_unite_"},
+          { "alias": "Adresse", "name": "val_adrs_u"},
+          { "alias": "Code", "name": "cod_niv_hi" }
+      ]
+
+      },
+      "style": {
+        "stroke": { 
+          "color": "rgba(153, 238, 153)"
+        },          
+        "fill": { 
+          "color": "rgba(153, 238, 153,0)"
+        },                   
+        "width": 5
+      }
+    },
+    {
+      "title": "Réseau routier - RTSS",
+      "id": "rtssCalculCh",
+      "maxResolution": 80,
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/rtss.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/ca/rtss.geojson",
+        "pathOffline": "data/dt/ca/rtss.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "${num_route}-${num_tronc}-${num_sectn}-${cod_sous_r}${seq_sous_r}${cod_sous_c}${cod_cote_c}",
+        "sourceFields": [
+          { "alias": "RTSS", "name": "num_rts" },
+          { "alias": "Longueur", "name": "val_longr_" },
+          { "alias": "Classe fonctionnelle", "name": "des_clasf_" },
+          { "alias": "Nom de la route", "name": "nom_sous_r" },
+          { "alias": "Nom organisme gestion", "name": "nom_orgns_" },
+          { "alias": "Nom organisme entretien", "name": "nom_orgn00" },
+          { "alias": "# route:", "name": "num_route" }
+      ]
+
+      },
+      "styleByAttribute": {
+        "type": "regular",
+        "attribute": "des_clasf_",
+        "data": ["Autoroute", "Nationale", "Régionale","Collectrice","Accès ressources","Ressources et aux localités isolées", "Local 1", "Local 2", "Local 3"],
+        "stroke": ["rgba(255,216,12)","rgba(240,0,0)", "rgba(231,100,29)", "rgba(231,100,29)", "rgba(210,210,210)", "rgba(210,210,210)", "rgba(95,93,92)", "rgba(95,93,92)", "rgba(95,93,92)"],
+        "width": [5,4,4,3,2,2,2,2,2],
+        "label" : ""
+        }
+    },
+    {
+      "title": "Ponceau",
+      "id": "m012",
+      "maxResolution": 40,
+
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/ponceau.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/ca/ponceau.geojson",
+        "pathOffline": "data/dt/ca/ponceau.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "Ponceau: ${ide_drang_}",
+        "sourceFields": [
+          { "alias": "Identifiant IIT", "name": "ide_drang_" },
+          { "alias": "Type", "name": "des_long_t" },
+          { "alias": "Sous-type", "name": "des_long_s" },
+          { "alias": "Longueur (m)", "name": "val_mesr" },
+          { "alias": "Largeur/diamètre (mm)", "name": "val_larg_1" },
+          { "alias": "Hauteur (mm)", "name": "val_hautr" },
+          { "alias": "Année construction", "name": "val_annee_" },
+          { "alias": "Année réhabilitation", "name": "val_anne_1" }
+      ]
+      },
+      "styleByAttribute": {
+        "type": "regular",
+        "attribute": "",
+        "data": [""],
+        "stroke": ["rgba(0,0,0)"],
+        "width": [4]
+      }
+    },
+    {
+      "title": "GSQ",
+      "id": "gsq",
+      "maxResolution": 40,
+
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/gsq.png"
+      },
+      "sourceOptions": {
+        "type": "vector",
+        "url": "data/dt/ca/gsq.geojson",
+        "pathOffline": "data/dt/ca/gsq.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "Structure: ${num_dossr}",
+        "sourceFields": [
+          { "alias": "Numéro de dossier", "name": "num_dossr" },
+          { "alias": "Nom de l'obstacle", "name": "nom_obstc" },
+          { "alias": "Année de construction", "name": "val_annee_"},
+          { "alias": "Type de structure", "name": "code_des_t"}
+      ]
+
+      },
+      "styleByAttribute": {
+        "type": "circle",
+        "attribute": "",
+        "data": [""],
+        "color": ["blue"],
+        "fill": ["blue"],
+        "hstroke": ["black"],
+        "icon": ["./assets/images/styles/square.svg"],
+        "scale": [0.5],
+        "label" : ""
+        }
+    }
+    
+  ],
+  "toolbar": [
+    "searchResults",
+    "contextManager",
+    "mapTools",
+    "map-rtss-proximity","map-proximity",
+    "measurer",
+    "draw",
+    "directions",
+    "importExport",
+    "print",
+    "shareMap",
+    "about",
+    "advancedMap"
+  ]
+}
