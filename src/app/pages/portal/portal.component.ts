@@ -224,7 +224,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
   set expansionPanelExpanded(value: boolean) {
     this.workspaceState.workspacePanelExpanded = value;
-    this.queryService.layerIdWksActiveAndOpen = this.getLayerIdWksActiveAndOpen();
   }
 
   get toastPanelShown(): boolean {
@@ -418,9 +417,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
-        activeWks.inResolutionRange$.subscribe(inRes => {
-          this.queryService.layerIdWksActiveAndOpen = this.getLayerIdWksActiveAndOpen();
-        });
         this.expansionPanelExpanded = true;
       } else {
         this.expansionPanelExpanded = false;
@@ -501,7 +497,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const querySearchSourceArray: QuerySearchSource[] = [];
 
     if (this.selectedWorkspace$.value instanceof WfsWorkspace || this.selectedWorkspace$.value instanceof FeatureWorkspace) {
-      if (this.selectedWorkspace$.value.getLayerWksOptionNoQueryClickInTab()) {return;}
+      if (!this.selectedWorkspace$.value.getLayerWksOptionTabQuery()) {return;}
     }
     if (result && result.added) {
       const results = result.added.map((res) => {
@@ -588,11 +584,15 @@ export class PortalComponent implements OnInit, OnDestroy {
   onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
-
-    const results = event.features.map((feature: Feature) => {
+    let results = event.features.map((feature: Feature) => {
       let querySearchSource = querySearchSourceArray.find(
         (s) => s.title === feature.meta.sourceTitle
       );
+      if (this.getFeatureIsSameActiveWks(feature)) {
+        if (this.getWksActiveOpenInResolution() && !(this.workspace as WfsWorkspace).getLayerWksOptionMapQuery()) {
+          return;
+        }
+      }
       if (!querySearchSource) {
         querySearchSource = new QuerySearchSource({
           title: feature.meta.sourceTitle
@@ -601,7 +601,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       return featureToSearchResult(feature, querySearchSource);
     });
-
+    results = results.filter(x => x !== undefined);
     const research = {
       request: of(results),
       reverse: false,
@@ -1395,13 +1395,27 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getLayerIdWksActiveAndOpen(): string {
+  private getFeatureIsSameActiveWks(feature: Feature): boolean {
+    if (this.workspace) {
+      const featureTitle = feature.meta.sourceTitle;
+      const wksTitle = this.workspace.title;
+      if (wksTitle === featureTitle) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  private getWksActiveOpenInResolution(): boolean {
     if(this.workspace) {
       const activeWks = this.workspace as WfsWorkspace;
       if(activeWks.active && activeWks.inResolutionRange$.value && this.workspaceState.workspacePanelExpanded) {
-        return activeWks.layer.id;
+        return true;
       }
     }
-    return undefined;
-  }
+    return false;
+   }
+
 }

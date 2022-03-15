@@ -10,8 +10,10 @@
         "workspace": {
           "enabled": true,
           "maxResolution": 400,
-          "noMapQueryOnOpenTab": true,
-          "noQueryOnClickInTab": true
+          "queryOptions": {
+            "mapQueryOnOpenTab": false,
+            "tabQuery": false
+          }
         },
         "sourceOptions": {
           "queryable": true,
