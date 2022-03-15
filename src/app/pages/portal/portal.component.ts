@@ -30,7 +30,6 @@ import {
   WorkspaceStore,
   ActionStore,
   EntityStore,
-  // getEntityTitle,
   Toolbox,
   Tool,
   Widget,
@@ -112,11 +111,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(undefined);
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public minSearchTermLength = 2;
-  public hasExpansionPanel = false;
-  public hasGeolocateButton = true;
-  public showMenuButton = true;
-  public showSearchBar = true;
-  public showRotationButtonIfNoRotation = false;
+  public hasExpansionPanel: boolean = false;
+  public showSimpleFeatureList: boolean = false;
+  public hasGeolocateButton: boolean = true;
+  public showMenuButton: boolean = true;
+  public showSearchBar: boolean = true;
+  public showRotationButtonIfNoRotation: boolean = false;
   public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
@@ -156,9 +156,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
   public showToastPanelForExpansionToggle = false;
-  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
-    undefined
-  );
+  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(undefined);
   private routeParams: Params;
   public toastPanelHtmlDisplay = false;
 
@@ -314,6 +312,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
+    this.showSimpleFeatureList = this.configService.getConfig('simpleFeatureList.show') === undefined ? false :
+      this.configService.getConfig('simpleFeatureList.show');
     this.hasGeolocateButton = this.configService.getConfig('hasGeolocateButton') === undefined ? true :
       this.configService.getConfig('hasGeolocateButton');
     this.showRotationButtonIfNoRotation = this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ? false :
@@ -412,14 +412,21 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.workspaceMaximize$.subscribe(() => this.updateMapBrowserClass())
     );
 
-    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
-      if (activeWks) {
-        this.selectedWorkspace$.next(activeWks);
+    this.workspaceState.workspace$.subscribe((activeWorkspace: WfsWorkspace | FeatureWorkspace) => {
+      if (activeWorkspace) {
+        this.selectedWorkspace$.next(activeWorkspace);
         this.expansionPanelExpanded = true;
       } else {
         this.expansionPanelExpanded = false;
       }
     });
+
+    if (this.showSimpleFeatureList && typeof this.configService.getConfig('simpleFeatureList.layerId') === 'string') {
+      setTimeout(() => {
+        this.workspaceState.setActiveWorkspaceById(this.configService.getConfig('simpleFeatureList.layerId'));
+        this.expansionPanelExpanded = true;
+      }, 1000);
+    }
 
     this.activeWidget$$ = this.workspaceState.activeWorkspaceWidget$.subscribe(
       (widget: Widget) => {
@@ -495,33 +502,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     const querySearchSourceArray: QuerySearchSource[] = [];
     if (result && result.added) {
       const results = result.added.map((res) => {
-        if (
-          res &&
-          res.ol &&
-          res.ol.getProperties()._featureStore.layer &&
-          res.ol.getProperties()._featureStore.layer.visible
-        ) {
+        if (res?.ol?.getProperties()._featureStore.layer?.visible) {
           const ol = res.ol as olFeature<OlGeometry>;
           const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
-          const feature = featureFromOl(
-            ol,
-            featureStoreLayer.map.projection,
-            featureStoreLayer.ol
-          );
-
-          feature.meta.alias = this.queryService.getAllowedFieldsAndAlias(
-            featureStoreLayer
-          );
-          feature.meta.title =
-            this.queryService.getQueryTitle(feature, featureStoreLayer) ||
-            feature.meta.title;
-          let querySearchSource = querySearchSourceArray.find(
-            (s) => s.title === feature.meta.sourceTitle
-          );
+          const feature = featureFromOl(ol, featureStoreLayer.map.projection, featureStoreLayer.ol);
+          feature.meta.alias = this.queryService.getAllowedFieldsAndAlias(featureStoreLayer);
+          feature.meta.title = this.queryService.getQueryTitle(feature, featureStoreLayer) || feature.meta.title;
+          let querySearchSource = querySearchSourceArray.find((s) => s.title === feature.meta.sourceTitle);
           if (!querySearchSource) {
-            querySearchSource = new QuerySearchSource({
-              title: feature.meta.sourceTitle
-            });
+            querySearchSource = new QuerySearchSource({title: feature.meta.sourceTitle});
             querySearchSourceArray.push(querySearchSource);
           }
           return featureToSearchResult(feature, querySearchSource);

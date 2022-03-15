@@ -188,7 +188,7 @@ export function controlsAnimations(): AnimationTriggerMetadata[] {
       state(
         'firstRowFromBottom-expanded',
         style({
-          bottom: '285px'
+          bottom: '5px'
         })
       ),
       state(

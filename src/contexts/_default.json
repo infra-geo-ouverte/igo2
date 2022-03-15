@@ -32,9 +32,7 @@
       "sourceOptions": {
         "type": "vector",
         "url": "./assets/images/styles/data.geojson",
-        "queryable": false,
-        "queryFormat": "geojson",
-        "queryTitle": "Service de police"
+        "queryable": false
       }
     }
   ]

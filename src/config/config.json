@@ -10,12 +10,30 @@
     }
   },
   "theme": "blue-theme",
-  "hasExpansionPanel": true,
+  "hasExpansionPanel": false,
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
   "showMenuButton": false,
   "showSearchBar": false,
-  "hasFeatureEmphasisOnSelection": true,
+  "simpleFeatureList": {
+    "show": true,
+    "layerId": "dq2",
+    "personalizedAttributeFormatting": [
+      {"attributeName": "adresse", "formatting": "[no_civique], [adresse], [code_postal], [municipalite]"},
+      {"attributeName": "responsable", "formatting": "[prenom] [nom]"}
+    ],
+    "attributeOrder": [
+      {"attributeName": "corps_policier"},
+      {"attributeName": "adresse", "description": "Adresse"},
+      {"attributeName": "responsable", "description": "Responsable"},
+      {"attributeName": "telephone", "description": "Téléphone"},
+      {"attributeName": "site_internet", "description": "Site Web"}],
+    "sortBy": {"attributeName": "corps_policier", "order": "ascending"},
+    "firstAttributeIsTitle": true,
+    "formatURL": true,
+    "formatEmail": true
+  },
+  "hasFeatureEmphasisOnSelection": false,
   "menuButtonReverseColor": false,
   "searchSources": {
     "cadastre": {

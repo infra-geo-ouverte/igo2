@@ -131,20 +131,20 @@
           [ngClass]="{disabled: (workspace.inResolutionRange$ | async)!==true}"
           [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'">
         </mat-icon>
-    </button>
-    <igo-actionbar
-      class="actionbar-workspace"
-      *ngIf="workspace.actionStore"
-      [store]="workspace.actionStore"
-      [withIcon]="true"
-      [withTitle]="actionbarWithTitle"
-      [horizontal]="true"
-      [withToggleButton]="actionbarMode === 'overlay'"
-      [iconColor]="'primary'"
-      [color]="'primary'"
-      [mode]="actionbarMode"
-      [overlayClass]="workspaceMenuClass">
-    </igo-actionbar>
+      </button>
+      <igo-actionbar
+        class="actionbar-workspace"
+        *ngIf="workspace.actionStore"
+        [store]="workspace.actionStore"
+        [withIcon]="true"
+        [withTitle]="actionbarWithTitle"
+        [horizontal]="true"
+        [withToggleButton]="actionbarMode === 'overlay'"
+        [iconColor]="'primary'"
+        [color]="'primary'"
+        [mode]="actionbarMode"
+        [overlayClass]="workspaceMenuClass">
+      </igo-actionbar>
       <div class="spacer"></div>
       <igo-entity-table-paginator
       *ngIf="workspaceVisibility()"
@@ -212,3 +212,8 @@
     mode="context">
   </igo-actionbar>
 </ng-template>
+
+<igo-simple-feature-list *ngIf="showSimpleFeatureList && selectedWorkspace$ | async as workspace"
+  [entityStore]="workspace.entityStore"
+  (listSelection)="entitySelectChange($event)">
+</igo-simple-feature-list>
