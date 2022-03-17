@@ -232,7 +232,7 @@ app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion 
 app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > igo-panel {
   max-height: 45vh;
  .toast-content {
-    max-height: 40vh; 
+    max-height: 40vh;
   }
 
   @include tablet {
@@ -251,7 +251,7 @@ app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-
   height: auto;
   max-height: 30vh;
   .toast-content {
-    max-height: 25vh; 
+    max-height: 25vh;
   }
 }
 
@@ -367,4 +367,11 @@ app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container 
   div.mat-menu-content ::ng-deep span.mat-checkbox-label, div.mat-menu-content ::ng-deep div.mat-list-text {
     font-size: 12px;
   }
+}
+
+igo-simple-feature-list {
+  position: absolute;
+  overflow-y: auto;
+  height: 200px;
+  width: 100%;
 }

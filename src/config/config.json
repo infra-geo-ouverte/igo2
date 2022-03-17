@@ -18,18 +18,13 @@
   "simpleFeatureList": {
     "show": true,
     "layerId": "dq2",
-    "personalizedAttributeFormatting": [
-      {"attributeName": "adresse", "formatting": "[no_civique], [adresse], [code_postal], [municipalite]"},
-      {"attributeName": "responsable", "formatting": "[prenom] [nom]"}
-    ],
     "attributeOrder": [
-      {"attributeName": "corps_policier"},
-      {"attributeName": "adresse", "description": "Adresse"},
-      {"attributeName": "responsable", "description": "Responsable"},
+      {"attributeName": "corps_policier", "header": "h4"},
+      {"attributeName": "adresse", "personalizedFormatting": "[no_civique], [adresse], [code_postal], [municipalite]", "description": "Adresse"},
+      {"attributeName": "responsable", "personalizedFormatting": "[prenom] [nom]", "description": "Responsable"},
       {"attributeName": "telephone", "description": "Téléphone"},
       {"attributeName": "site_internet", "description": "Site Web"}],
-    "sortBy": {"attributeName": "corps_policier", "order": "ascending"},
-    "firstAttributeIsTitle": true,
+    "sortBy": {"attributeName": "corps_policier", "order": "descending"},
     "formatURL": true,
     "formatEmail": true
   },
