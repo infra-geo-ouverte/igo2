@@ -81,6 +81,9 @@
       <igo-home-extent-button
         *ngIf="hasHomeExtentButton"
         [map]="map"
+        [extentOverride]="homeExtent"
+        [centerOverride]="homeCenter"
+        [zoomOverride]="homeZoom"
         color="primary">
       </igo-home-extent-button>
       <igo-user-button
