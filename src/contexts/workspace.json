@@ -17,7 +17,7 @@
         },
         "sourceOptions": {
           "queryable": true,
-          "queryTitle": "test",
+          "queryTitle": "photographies aériennes",
           "crossOrigin": "anonymous",
           "queryFormat": "htmlgml2",
           "queryHtmlTarget": "iframe",
