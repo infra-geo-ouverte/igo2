@@ -99,7 +99,24 @@
           "fill": ["orange","red","green","blue"],
           "hstroke": ["orange","red","green","blue"],
           "radius": [8,8,8,2],
-          "label" : ""
+          "label": { 
+            "attribute": "MARQUE: ${MARQUE}",
+            "minResolution": 0,
+            "maxResolution": 2,
+            "style": {
+              "textAlign": "left",
+              "textBaseline": "top",
+              "font": "12px Calibri,sans-serif",
+              "fill": { "color": "#000" },
+              "backgroundFill": { "color": "rgba(255, 255, 255, 0.5)" },
+              "backgroundStroke": { "color": "rgba(200, 200, 200, 0.75)", "width": 2 },
+              "stroke": { "color": "#fff", "width": 3 },
+              "overflow": true,
+              "offsetX": 20,
+              "offsetY": 10,
+              "padding": [2.5, 2.5, 2.5, 2.5]
+            }
+          }
           },
         "sourceOptions": {
           "type": "vector",
