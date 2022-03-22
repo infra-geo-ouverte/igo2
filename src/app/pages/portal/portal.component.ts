@@ -584,7 +584,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
-    let results = event.features.map((feature: Feature) => {
+    const results = event.features.map((feature: Feature) => {
       let querySearchSource = querySearchSourceArray.find(
         (s) => s.title === feature.meta.sourceTitle
       );
@@ -601,9 +601,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       return featureToSearchResult(feature, querySearchSource);
     });
-    results = results.filter(x => x !== undefined);
+    const filteredResults = results.filter(x => x !== undefined);
     const research = {
-      request: of(results),
+      request: of(filteredResults),
       reverse: false,
       source: baseQuerySearchSource
     };

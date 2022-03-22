@@ -177,7 +177,11 @@ Exemples
             {"workspace": {
                   "enabled": true,
                   "minResolution": 0,
-                  "maxResolution": 400
+                  "maxResolution": 400,
+                  "queryOptions": {
+                    "mapQueryOnOpenTab": false,
+                    "tabQuery": false
+                  }
             }}
 
 Propriétés
@@ -676,6 +680,7 @@ WMS
 
         Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`__ .
         Les diverses version WMS sont acceptées.
+        NB: Il est possible de combiner une couche WMS et WFS en ajoutant les paramètres WFS à l'intérieur.
 
 
     .. note::
@@ -776,7 +781,8 @@ Exemples
                     "paramsWFS": {
                         "featureTypes": "etablissement_mtq",
                         "fieldNameGeometry": "geometry",
-                        "maxFeatures": 5000
+                        "maxFeatures": 5000,
+                        "queryFormatAsWms": true
                     },
                     "ogcFilters": {
                         "enabled": true,
