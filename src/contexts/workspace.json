@@ -21,6 +21,7 @@
           "crossOrigin": "anonymous",
           "queryFormat": "htmlgml2",
           "queryHtmlTarget": "iframe",
+          "queryFormatAsWms": true,
           "type": "wms",
           "optionsFromCapabilities": true,
           "url": "/ws/mffpecofor.fcgi",
@@ -32,8 +33,7 @@
           "paramsWFS": {
             "featureTypes": "nord_photo_oblique",
             "maxFeatures": 1000,
-            "version": "2.0.0",
-            "queryFormatAsWms": true
+            "version": "2.0.0"
           },
           "sourceFields": [
             {"name": "LATITUDE", "alias": "latitude"},

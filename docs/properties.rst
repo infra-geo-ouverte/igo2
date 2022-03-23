@@ -772,6 +772,7 @@ Exemples
                 "sourceOptions": {
                     "queryable": true,
                     "queryTitle": "nometablis",
+                    "queryFormatAsWms": true,
                     "type": "wms",
                     "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                     "urlWfs": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
@@ -781,8 +782,7 @@ Exemples
                     "paramsWFS": {
                         "featureTypes": "etablissement_mtq",
                         "fieldNameGeometry": "geometry",
-                        "maxFeatures": 5000,
-                        "queryFormatAsWms": true
+                        "maxFeatures": 5000
                     },
                     "ogcFilters": {
                         "enabled": true,
