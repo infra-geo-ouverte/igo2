@@ -61,6 +61,7 @@ queryTitle ,String ,"| Lorsque la couche interrogée est en
 |    - ""queryTitle"": ""Description ${desclocal}"",
 | Exemple plusieurs champs:
 |    - ""queryTitle"": ""${nomroute} ${desclocal} "", ",
+queryFormatAsWms , Boolean , Pour couche WMS-WFS, indique si le query à résolution WFS sera fait en format WMS , false | true, false
 timeFilterable ,Boolean,Indique si oui/non la couche est filtrable temporellement ,true | false,false
 timeFilter ,Object ,Configuration du filtre temporel. ,Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  ,
 ogcFilters ,Object ,Configuration des filtres attributaires(OGC) appliqués sur la couche. ,Référez-vous à : :ref:`ogcFilters <igoOgcFilterObject>` . ,
