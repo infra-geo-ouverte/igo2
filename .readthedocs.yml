@@ -15,7 +15,6 @@ formats:
 
 # Optionally set the version of Python and requirements required to build your docs
 python:
-   version: "3.7"
-   install:
-   - requirements: docs/requirements.txt
-   # check here: probleme shinx version VS docutils version   https://githubmemory.com/repo/ivadomed/ivadomed/issues/973
+   version: 3.7
+   #install:
+   #- requirements: docs/requirements.txt

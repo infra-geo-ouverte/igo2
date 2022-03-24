@@ -166,7 +166,9 @@ WorkspaceOptions
 
     .. line-block::
 
-        Permet de définir si une source possèdera une table d'attribut dans l'application ainsi que ses propriétés associées.
+        Permet de définir si une source possèdera une table
+        d'attribut dans l'application ainsi
+        que ses propriétés associées.
 
 Exemples
 
@@ -175,9 +177,12 @@ Exemples
             {"workspace": {
                   "enabled": true,
                   "minResolution": 0,
+                  "maxResolution": 400
                   "maxResolution": 400,
-                  "noQueryOnClickInTab": true,
-                  "noMapQueryOnOpenTab": true
+                  "queryOptions": {
+                    "mapQueryOnOpenTab": false,
+                    "tabQuery": false
+                  }
             }}
 
 Propriétés
@@ -676,7 +681,7 @@ WMS
 
         Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`__ .
         Les diverses version WMS sont acceptées. 
-        NB: Il est possible de combiner une couche WMS et WFS en ajoutant les parametres WFS à l'intérieur.
+        NB: Il est possible de combiner une couche WMS et WFS en ajoutant les paramètres WFS à l'intérieur.
 
 
     .. note::
@@ -768,6 +773,7 @@ Exemples
                 "sourceOptions": {
                     "queryable": true,
                     "queryTitle": "nometablis",
+                    "queryFormatAsWms": true,
                     "type": "wms",
                     "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
                     "urlWfs": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
@@ -777,8 +783,7 @@ Exemples
                     "paramsWFS": {
                         "featureTypes": "etablissement_mtq",
                         "fieldNameGeometry": "geometry",
-                        "maxFeatures": 5000,
-                        "combineLayerWFSMapQuerySameAsWms": true
+                        "maxFeatures": 5000
                     },
                     "ogcFilters": {
                         "enabled": true,
@@ -786,18 +791,6 @@ Exemples
                     }
                 }
             }
-
-
-Paramètre spécifique couches WMS-WFS combinées - paramsWFS 
-
-    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
-    .. csv-table::
-       :file: _tables/fr/properties/sources/wms-wfs-params.csv
-       :header-rows: 1
-       :widths: 10 10 30 15 10
-
-    Important : Les propriétés en caractère gras suivis d'un * sont obligatoires.
 
 
 WMTS
