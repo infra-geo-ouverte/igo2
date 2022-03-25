@@ -645,10 +645,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       return featureToSearchResult(feature, querySearchSource);
     });
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/next
     const filteredResults = results.filter(x => x !== undefined);
     const research = {
       request: of(filteredResults),
