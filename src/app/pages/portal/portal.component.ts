@@ -663,7 +663,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public toolChanged(tool: Tool) {
-    if (tool && tool.name === 'searchResults') {
+    if (tool && tool.name === 'searchResults' && this.searchBar) {
       this.searchBar.nativeElement.getElementsByTagName('input')[0].focus();
     }
   }
