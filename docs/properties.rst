@@ -177,7 +177,6 @@ Exemples
             {"workspace": {
                   "enabled": true,
                   "minResolution": 0,
-                  "maxResolution": 400
                   "maxResolution": 400,
                   "queryOptions": {
                     "mapQueryOnOpenTab": false,
@@ -680,7 +679,7 @@ WMS
     .. line-block::
 
         Une source de données pour les services de données au format `OGC WMS <https://www.opengeospatial.org/standards/wms>`__ .
-        Les diverses version WMS sont acceptées. 
+        Les diverses version WMS sont acceptées.
         NB: Il est possible de combiner une couche WMS et WFS en ajoutant les paramètres WFS à l'intérieur.
 
 

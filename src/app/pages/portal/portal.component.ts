@@ -645,7 +645,10 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       return featureToSearchResult(feature, querySearchSource);
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/next
     const filteredResults = results.filter(x => x !== undefined);
     const research = {
       request: of(filteredResults),
@@ -730,6 +733,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.cancelOngoingAddLayer();
     if (context === undefined) {
       return;
+    }
+    if (!this.queryState.store.empty) {
+      this.queryState.store.softClear();
     }
 
     this.route.queryParams.pipe(debounceTime(250)).subscribe((qParams) => {

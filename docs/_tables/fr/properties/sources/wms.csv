@@ -52,17 +52,17 @@ queryTitle ,String ,"| Lorsque la couche interrogée est en
 | champ retourné  qui sera utilisé dans
 | le résultat de clic sur la carte comme
 | titre.
-| Si cette propriété est absente, le titre
-| de la couche est utilisé comme titre
-| pour chacun des résultat, suivi d'une
-| numérotation séquentielle. ","| Exemple 1 seul champ:
-|    - ""queryTitle"": ""desclocal""
-| Exemple 1 seul champ avec texte:
-|    - ""queryTitle"": ""Description ${desclocal}"",
-| Exemple plusieurs champs:
-|    - ""queryTitle"": ""${nomroute} ${desclocal} "", ",
+| Si cette propriété est absente, le titre
+| de la couche est utilisé comme titre
+| pour chacun des résultat, suivi d'une
+| numérotation séquentielle. ","| Exemple 1 seul champ:
+|    - ""queryTitle"": ""desclocal""
+| Exemple 1 seul champ avec texte:
+|    - ""queryTitle"": ""Description ${desclocal}"",
+| Exemple plusieurs champs:
+|    - ""queryTitle"": ""${nomroute} ${desclocal} "", ",
 queryFormatAsWms , Boolean , Pour couche WMS-WFS, indique si le query à résolution WFS sera fait en format WMS , false | true, false
-timeFilterable ,Boolean,Indique si oui/non la couche est filtrable temporellement ,true | false,false
-timeFilter ,Object ,Configuration du filtre temporel. ,Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  ,
-ogcFilters ,Object ,Configuration des filtres attributaires(OGC) appliqués sur la couche. ,Référez-vous à : :ref:`ogcFilters <igoOgcFilterObject>` . ,
-sourceFields ,Object ,Configuration des attributs du layer. (champs source de la couche) ,Référez vous à : :ref:`sourceFields <igosourceFieldsObject>` . ,
+timeFilterable ,Boolean,Indique si oui/non la couche est filtrable temporellement ,true | false,false
+timeFilter ,Object ,Configuration du filtre temporel. ,Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  ,
+ogcFilters ,Object ,Configuration des filtres attributaires(OGC) appliqués sur la couche. ,Référez-vous à : :ref:`ogcFilters <igoOgcFilterObject>` . ,
+sourceFields ,Object ,Configuration des attributs du layer. (champs source de la couche) ,Référez vous à : :ref:`sourceFields <igosourceFieldsObject>` . ,
