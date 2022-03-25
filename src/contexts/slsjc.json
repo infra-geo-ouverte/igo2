@@ -1,7 +1,42 @@
 {
   "uri": "slsjc",
   "base": "_base",
+  "messages": [
+    {
+      "text": "La donnée présente sur cette carte est valide en date du 2022-02-25",
+      "type": "info",
+      "options": {
+        "timeOut": 10000
+      }
+    }
+  ],
   "layers": [
+        {
+      "title": "Noir",
+      "id": "noir",
+      "baseLayer": true,
+      "visible": true,
+      "sourceOptions": {
+        "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk2A8AAMUAwUPJ2C4AAAAASUVORK5CYII=",
+        "pathOffline": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk2A8AAMUAwUPJ2C4AAAAASUVORK5CYII=",
+        "type": "xyz"
+      }
+    },
+
+    {
+      "id": "carte_gouv_qc",
+      "title": "Carte Topo",
+      "visible": false,
+      "baseLayer": true,
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz",
+        "maxZoom": 17,
+        "crossOrigin": "anonymous"
+      }
+    },
     {
       "title": "Municipalité",
       "id": "mun",
@@ -33,7 +68,7 @@
         "attribute": "",
         "data": [""],
         "fill": ["rgba(255,255,255,0)"],
-        "stroke": ["rgba(20,100,200)"],
+        "stroke": ["rgba(53,99,51)"],
         "width": [2]
       }
     },
@@ -65,12 +100,12 @@
       },
       "style": {
         "stroke": { 
-          "color": "rgba(153, 238, 153)"
+          "color": "rgba(121,28,248)",                   
+          "width": 3
         },          
         "fill": { 
-          "color": "rgba(153, 238, 153,0)"
-        },                   
-        "width": 5
+          "color": "rgba(255,255,255,0)"
+        }
       }
     },
     {
@@ -137,12 +172,11 @@
           { "alias": "Année réhabilitation", "name": "val_anne_1" }
       ]
       },
-      "styleByAttribute": {
-        "type": "regular",
-        "attribute": "",
-        "data": [""],
-        "stroke": ["rgba(0,0,0)"],
-        "width": [4]
+      "style": {
+        "stroke": { 
+          "color": "rgba(0,0,255)",
+          "width": 3
+        }
       }
     },
     {
@@ -171,15 +205,11 @@
 
       },
       "styleByAttribute": {
-        "type": "circle",
         "attribute": "",
         "data": [""],
-        "color": ["blue"],
-        "fill": ["blue"],
-        "hstroke": ["black"],
+        "fill": ["rgba(0,0,0)"],
         "icon": ["./assets/images/styles/square.svg"],
-        "scale": [0.5],
-        "label" : ""
+        "scale": [0.5]
         }
     }
     

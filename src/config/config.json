@@ -23,6 +23,7 @@
     }
   },
   "title": "IGO",
+  "sidenavTitle": "SIGO-Terrain",
   "description": "L'application SIGO en mode déconnecté",
   "welcomeWindow": {
     "showAgainOnNewIGOVersion": true,
