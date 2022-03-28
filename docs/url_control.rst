@@ -68,12 +68,12 @@ Centre de la carte
     [minx, miny, maxx, maxy]. Elles seront converties selon la projection
     de la carte.
 
-    Ce paramètre d'URL a été introduite  car le zoom et le center (par url) 
+    Ce paramètre d'URL a été introduit car le zoom et le center (par url)
     ne permettent pas d'obtenir le même résultat, par mobile, tablette ou bureau.
 
     Params :
         - zoomExtent=
- 
+
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?zoomExtent=-72,60,-71,61
 
@@ -167,7 +167,7 @@ Itinéraire
         - tool=directions
         - routing= (liste de longitude,latitude, séparé par virgules)
 
- 
+
     Exemple:
         - https://infra-geo-ouverte.github.io/igo2/?tool=directions&routing=-72.4540601953125,47.86101094949734;-70.65092909179685,47.24932843990587
 

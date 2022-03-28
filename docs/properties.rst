@@ -54,6 +54,57 @@ Liens
 
     - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`__
 
+.. _igohomeextent:
+
+*****************************
+Étendue de base (homeExtent)
+*****************************
+
+Bouton de l'interface utilisateur permettant de d'afficher la carte selon un point central ou une étendue.
+Il peut être définit par :
+ - l'étendue (extent), soit les 4 points limitant l'affichage (MINX | MINY | MAXX | MAXY)
+ - un point central (center + zoom). Plus le nombre du niveau de zoom est grand, plus l'affichage est zoomé sur le point central.
+
+
+Cet affichage est définit à deux niveaux :
+
+.. line-block::
+
+    - 1 - il s'applique de façon générale, peu importe la couche ou le contexte. Il peut être définit pour un portail.
+    Si les 3 paramètres sont définis, l'étendue (extent) sera affichée.
+
+    Fichier de configuration : src\config\config.json
+
+    Exemple :
+    "homeExtentButton": {
+        "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
+        "homeExtButtonCenter": [-71.938087, 48.446975],
+        "homeExtButtonZoom" : 6
+    }
+
+
+    - 2 - il s'applique par contexte
+    Si les 3 paramètres sont définis, le point central (center + zoom) sera affiché.
+
+    Fichier de configuration : src\contexts\homeExtent.json
+
+    Exemple :
+        {
+            "uri": "homeExtent",
+            "base": "_base",
+            "map": {
+                "view": {
+                "projection": "EPSG:3857",
+                "homeExtent": {
+                    "extent": [-9000000, 5790000,-7500000, 6770000],
+                    "center": [-72.069923, 48.672381],
+                    "zoom": 10
+                    }
+                }
+            }
+        }
+
+
 .. _igolayer:
 
 *****************************
@@ -123,7 +174,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/legendOptions.csv
        :header-rows: 1
@@ -877,11 +928,7 @@ Configuration filtre attributaire OGC (ogcFilters)
     - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils ('tools'). (Voir :ref:`igoactiveogcFilter` et :ref:`igoogcFilter` dans la section outil )
     - Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField pour les champs à filtrer. Référez-vous à: :ref:`igosourceFieldsObject`
     - Il est possible de définir plusieurs opérateurs sur un même filtre.
-    - les paramètres de sourceOptions maxDate et minDate sont comparés pour indiquer si le filtre temporel est actif (badge rouge dans les options de la couche). 
-    Si le param de sourceOptions optionsFromCapabilities est true les valeurs min et max peuvent provenir du service.
 
-    **NB**: Lorsqu'une couche a une échelle d'affichage définit dans le service, vous devez activer le paramètre dans sourceOptions -> optionsFromCapabilities:true. 
-    Dans le cas contraire, des apels contenant les filtres seront fait au service et ce, même à l'échelle ou la couche n'est pas affichée.
 
 Exemples
 ----------
@@ -1134,9 +1181,9 @@ Exemple - filtre temporel en mode année
                   "filters" :{
                         "operator": "During",
                         "propertyName": "annee_date",
-                        "begin": "1920",
-                        "end": "2020",
-                        "restrictToStep": false,
+                        "begin": "1890-01-01T00:00:00-05:00",
+                        "end": "2021-12-31T00:00:00-05:00",
+                        "restrictedToStep": false,
                         "calendarModeYear": true
                     } 
                   "stepDate": "P1Y"
@@ -1167,7 +1214,7 @@ Exemple - filtre avec boutons spécifique à un groupe et calendrier (filtrage t
                   ],
                   "ogcFilters": {
                         "enabled": true,
-                        "editable": false,
+                        "editable": true,
                         "pushButtons": {
                            "groups": [
                               {"title": "Group 1 Title","name": "1","ids": ["id1"]}
@@ -1697,9 +1744,9 @@ Exemple 1:
         RTSS: Cette storedQueries interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__ qui peut retourner:
             - Route                                    ex: 138
             - Route tronçon                            ex: 13801
-            - Route tronçon section (RTS)              ex: 13801116
-            - Route tronçon section sous-route (RTSS)  ex: 0013801116000C
-            - RTSS Chainage                            ex: 0013801116000C+12
+            - Route tronçon section (RTS)              ex: 13801110
+            - Route tronçon section sous-route (RTSS)  ex: 0013801110000C
+            - RTSS Chainage                            ex: 0013801110000C+12
 
         Elle nécessite l'envoi au serveur de 2 attributs.
             - rtss
@@ -1776,7 +1823,7 @@ Liens
 
     - `Code Stored Queries Ligne 34 <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/storedqueries.ts#L34>`__
     - `Bug Openlayers et les GML 3.2+ en WFS(StoredQueries) <https://github.com/openlayers/openlayers/pull/6400>`__
-    - `Exemple d'appel StoredQueries rtss MTQ <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=rtss&rtss=0013801116000C&chainage=0&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
+    - `Exemple d'appel StoredQueries rtss MTQ <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=rtss&rtss=0013801110000C&chainage=0&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
     - `Exemple d'appel StoredQueries feuillet SNRC MFFP <https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?REQUEST=GetFeature&STOREDQUERY_ID=sq250et20kFeuillet&service=wfs&version=2.0.0&no_feuillet=31P08>`__
     - `Décrire la requête "rtss" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=rtss>`__
 
@@ -2835,7 +2882,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/shareMap.csv
        :header-rows: 1
