@@ -64,7 +64,8 @@ import {
   FeatureWorkspace,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent,
-  addStopToStore
+  addStopToStore,
+  MapExtent
 } from '@igo2/geo';
 
 import {
@@ -114,6 +115,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasGeolocateButton = true;
+  public hasHomeExtentButton = false;
   public showMenuButton = true;
   public showSearchBar = true;
   public showRotationButtonIfNoRotation = false;
@@ -162,6 +164,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   private routeParams: Params;
   public toastPanelHtmlDisplay = false;
 
+  public homeExtent: MapExtent
+  public homeCenter: [number, number];
+  public homeZoom: number;
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef, static: true })
@@ -314,6 +319,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
+    this.hasHomeExtentButton =
+      this.configService.getConfig('homeExtentButton') === undefined ? false : true;
     this.hasGeolocateButton = this.configService.getConfig('hasGeolocateButton') === undefined ? true :
       this.configService.getConfig('hasGeolocateButton');
     this.showRotationButtonIfNoRotation = this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ? false :
@@ -681,6 +688,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
+  private computeHomeExtentValues(context: DetailedContext) {
+    if (context?.map?.view?.homeExtent) {
+      this.homeExtent = context.map.view.homeExtent.extent;
+      this.homeCenter = context.map.view.homeExtent.center;
+      this.homeZoom = context.map.view.homeExtent.zoom;
+    } else {
+      this.homeExtent = undefined;
+      this.homeCenter = undefined;
+      this.homeZoom = undefined;
+    }
+
+  }
+
   private onChangeContext(context: DetailedContext) {
     this.cancelOngoingAddLayer();
     if (context === undefined) {
@@ -689,6 +709,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (!this.queryState.store.empty) {
       this.queryState.store.softClear();
     }
+
+    this.computeHomeExtentValues(context);
 
     this.route.queryParams.pipe(debounceTime(250)).subscribe((qParams) => {
       if (!qParams['context'] || qParams['context'] === context.uri) {

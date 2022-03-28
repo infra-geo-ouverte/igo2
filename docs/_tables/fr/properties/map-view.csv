@@ -6,6 +6,8 @@ center ,Array [] ,"| Coordonnée du positionnement du centre de la carte
 | l'arrivée dans le contexte. ",,
 zoom ,Number,"| Indique le niveau de zoom de la carte lors de 
 | l'arrivée dans le contexte. ",,
+homeExtentButtonExtent ,String,"| Coordonnées de l'étendue de la carte lorsque l'utilisateur
+| clique sur le bouton homeExtent. ","MINX | MINY | MAXX | MAXY",
 geolocate ,Boolean,"| Indique si la carte est zommée sur la localisation de l'utilisateur 
 | lors de l'arrivée dans le contexte. ",true | false,true
 maxZoomOnExtent ,Number,"| Indique le niveau de zoom qu'aura l'application lors d'un clic 
