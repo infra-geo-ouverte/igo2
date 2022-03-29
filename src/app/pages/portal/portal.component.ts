@@ -502,6 +502,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   entitySelectChange(result: { added: Feature[] }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
+
+    if (this.selectedWorkspace$.value instanceof WfsWorkspace || this.selectedWorkspace$.value instanceof FeatureWorkspace) {
+      if (!this.selectedWorkspace$.value.getLayerWksOptionTabQuery()) {return;}
+    }
     if (result && result.added) {
       const results = result.added.map((res) => {
         if (
@@ -587,11 +591,15 @@ export class PortalComponent implements OnInit, OnDestroy {
   onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
-
     const results = event.features.map((feature: Feature) => {
       let querySearchSource = querySearchSourceArray.find(
         (s) => s.title === feature.meta.sourceTitle
       );
+      if (this.getFeatureIsSameActiveWks(feature)) {
+        if (this.getWksActiveOpenInResolution() && !(this.workspace as WfsWorkspace).getLayerWksOptionMapQuery()) {
+          return;
+        }
+      }
       if (!querySearchSource) {
         querySearchSource = new QuerySearchSource({
           title: feature.meta.sourceTitle
@@ -600,9 +608,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       return featureToSearchResult(feature, querySearchSource);
     });
-
+    const filteredResults = results.filter(x => x !== undefined);
     const research = {
-      request: of(results),
+      request: of(filteredResults),
       reverse: false,
       source: baseQuerySearchSource
     };
@@ -675,7 +683,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public toolChanged(tool: Tool) {
-    if (tool && tool.name === 'searchResults') {
+    if (tool && tool.name === 'searchResults' && this.searchBar) {
       this.searchBar.nativeElement.getElementsByTagName('input')[0].focus();
     }
   }
@@ -698,6 +706,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (context === undefined) {
       return;
     }
+    if (!this.queryState.store.empty) {
+      this.queryState.store.softClear();
+    }
+
+    this.computeHomeExtentValues(context);
 
     this.computeHomeExtentValues(context);
 
@@ -1408,4 +1421,28 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  private getFeatureIsSameActiveWks(feature: Feature): boolean {
+    if (this.workspace) {
+      const featureTitle = feature.meta.sourceTitle;
+      const wksTitle = this.workspace.title;
+      if (wksTitle === featureTitle) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  private getWksActiveOpenInResolution(): boolean {
+    if(this.workspace) {
+      const activeWks = this.workspace as WfsWorkspace;
+      if(activeWks.active && activeWks.inResolutionRange$.value && this.workspaceState.workspacePanelExpanded) {
+        return true;
+      }
+    }
+    return false;
+   }
+
 }
