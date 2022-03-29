@@ -54,6 +54,57 @@ Liens
 
     - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`__
 
+.. _igohomeextent:
+
+*****************************
+Étendue de base (homeExtent)
+*****************************
+
+Bouton de l'interface utilisateur permettant de d'afficher la carte selon un point central ou une étendue.
+Il peut être définit par :
+ - l'étendue (extent), soit les 4 points limitant l'affichage (MINX | MINY | MAXX | MAXY)
+ - un point central (center + zoom). Plus le nombre du niveau de zoom est grand, plus l'affichage est zoomé sur le point central.
+
+
+Cet affichage est définit à deux niveaux :
+
+.. line-block::
+
+    - 1 - il s'applique de façon générale, peu importe la couche ou le contexte. Il peut être définit pour un portail.
+    Si les 3 paramètres sont définis, l'étendue (extent) sera affichée.
+
+    Fichier de configuration : src\config\config.json
+
+    Exemple :
+    "homeExtentButton": {
+        "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
+        "homeExtButtonCenter": [-71.938087, 48.446975],
+        "homeExtButtonZoom" : 6
+    }
+
+
+    - 2 - il s'applique par contexte
+    Si les 3 paramètres sont définis, le point central (center + zoom) sera affiché.
+
+    Fichier de configuration : src\contexts\homeExtent.json
+
+    Exemple :
+        {
+            "uri": "homeExtent",
+            "base": "_base",
+            "map": {
+                "view": {
+                "projection": "EPSG:3857",
+                "homeExtent": {
+                    "extent": [-9000000, 5790000,-7500000, 6770000],
+                    "center": [-72.069923, 48.672381],
+                    "zoom": 10
+                    }
+                }
+            }
+        }
+
+
 .. _igolayer:
 
 *****************************
