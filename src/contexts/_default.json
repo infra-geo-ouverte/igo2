@@ -33,6 +33,14 @@
         "type": "vector",
         "url": "./assets/images/styles/data.geojson",
         "queryable": false
+      },
+      "workspace": {
+        "enabled": true,
+        "queryOptions": {
+          "maxResolution": 300,
+          "mapQueryOnOpenTab": false,
+          "tabQuery": false
+        }
       }
     }
   ]
