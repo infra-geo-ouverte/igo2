@@ -3,6 +3,9 @@ Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 alias ,String,Alias de l'attribut.,,Le nom de l'attribut est utilisé si nul. 
 values ,[],Liste de valeurs permises ,,"| Si vide, pour les WFS, 
 | sera récupéré automatiquement. "
+visible ,Boolean ,Indique si le champ doit être visible ou non dans la table d'édition. ,true/false ,true
+type ,String ,Indique le type de saisie pour l'outil d'édition. ,number/string/autocomplete/list/date
+multiple ,Boolean ,Indique si la liste en saisie doit être multiple ou non ,true/false ,false
 excludeFromOgcFilters ,Boolean ,Indique si l'attribut est utilisé dans l'outil de filtre OGC. ,true/false ,true
 allowedOperatorsType ,String,Indique les opérateurs permis pour cet attribut ,"| BasicNumericOperator
 | Basic
@@ -11,3 +14,5 @@ allowedOperatorsType ,String,Indique les opérateurs permis pour cet attri
 | All
 | Time
 | Référez vous à `ogc-filter.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`__ pour les opérateurs correspondants.",BasicAndSpatial 
+validation ,Object ,Indique les validations lors de la sauvegarde d'une entité ,"| Référez vous à `entity.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/common/src/lib/entity/shared/entity.interfaces.ts>`__ ."
+relation ,String ,Indique les relations à lier pour la saisie des champs de type list ,"| Référez vous à `datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/datasource.interface.ts>`__ ."

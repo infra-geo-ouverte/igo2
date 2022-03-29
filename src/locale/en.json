@@ -10,7 +10,8 @@
     "disabled" : {
       "resolution": "The workspace is not available at this resolution",
       "visible": "The layer is not loaded. Try to set the layer visibility."
-    }
+    },
+    "addFeature": "Add entity to the edited layer"
   },
   "toastPanel": {
     "title": "Entities found on the map",
