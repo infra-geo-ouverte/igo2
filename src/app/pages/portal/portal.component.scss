@@ -293,6 +293,17 @@ igo-geolocate-button {
   }
 }
 
+igo-home-extent-button {
+  @include mobile {
+    margin-bottom: 0px;
+    right: calc((2 * #{$igo-icon-size}) +  (4 * #{$igo-margin}))
+  }
+  @include tablet {
+    margin-bottom: 0px;
+    right: calc((2 * #{$igo-icon-size}) +  (4 * #{$igo-margin}))
+  }
+}
+
 igo-zoom-button {
   @include tablet {
     display: none;
