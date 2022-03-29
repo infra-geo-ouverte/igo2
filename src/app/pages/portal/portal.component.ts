@@ -62,9 +62,13 @@ import {
   QueryService,
   WfsWorkspace,
   FeatureWorkspace,
+  EditionWorkspace,
+  EditionWorkspaceService,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent,
   addStopToStore,
+  ImageLayer,
+  VectorLayer,
   MapExtent
 } from '@igo2/geo';
 
@@ -123,6 +127,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
   public workspaceEntitySortChange$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public workspaceSwitchDisabled = false;
   public paginatorOptions: EntityTablePaginatorOptions = {
     pageSize: 50, // Number of items to display on a page.
     pageSizeOptions: [1, 5, 10, 20, 50, 100, 500] // The set of provided page size options to display to the user.
@@ -164,7 +169,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private routeParams: Params;
   public toastPanelHtmlDisplay = false;
 
-  public homeExtent: MapExtent
+  public homeExtent: MapExtent;
   public homeCenter: [number, number];
   public homeZoom: number;
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
@@ -316,6 +321,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     public dialogWindow: MatDialog,
     private queryService: QueryService,
     private storageService: StorageService,
+    private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
@@ -421,10 +427,22 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.workspaceMaximize$.subscribe(() => this.updateMapBrowserClass())
     );
 
-    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
+    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace | EditionWorkspace) => {
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
         this.expansionPanelExpanded = true;
+
+        if (activeWks.layer.options.workspace?.pageSize && activeWks.layer.options.workspace?.pageSizeOptions) {
+          this.paginatorOptions = {
+            pageSize: activeWks.layer.options.workspace?.pageSize,
+            pageSizeOptions: activeWks.layer.options.workspace?.pageSizeOptions
+          };
+        } else {
+          this.paginatorOptions = {
+            pageSize: 50,
+            pageSizeOptions: [1, 5, 10, 20, 50, 100, 500]
+          };
+        }
       } else {
         this.expansionPanelExpanded = false;
       }
@@ -477,7 +495,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   workspaceVisibility(): boolean {
-    const wks = (this.selectedWorkspace$.value as WfsWorkspace | FeatureWorkspace);
+    const wks = (this.selectedWorkspace$.value as WfsWorkspace | FeatureWorkspace | EditionWorkspace);
     if (wks.inResolutionRange$.value) {
       if (wks.entityStore.empty$.value && !wks.layer.visible) {
         this.workspaceNotAvailableMessage = 'workspace.disabled.visible';
@@ -490,6 +508,32 @@ export class PortalComponent implements OnInit, OnDestroy {
     return wks.inResolutionRange$.value;
   }
 
+  isEditionWorkspace(workspace) {
+    if (workspace instanceof EditionWorkspace) {
+      return true;
+    }
+    return false;
+  }
+
+  addFeature(workspace: EditionWorkspace) {
+    let feature = {
+      type: "Feature",
+      properties: {}
+    };
+    feature.properties = this.createFeatureProperties(workspace.layer);
+    this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
+    workspace.editFeature(feature, workspace);
+  }
+
+  createFeatureProperties(layer: ImageLayer | VectorLayer) {
+    let properties = {};
+    layer.options.sourceOptions.sourceFields.forEach(field => {
+      if (!field.primary && field.visible) {
+        properties[field.name] = '';
+      }
+    });
+    return properties;
+  }
 
   paginatorChange(matPaginator: MatPaginator) {
     this.workspacePaginator = matPaginator;
@@ -1443,4 +1487,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     return false;
    }
 
+  refreshRelationsWorkspace(relationLayers: ImageLayer[] | VectorLayer[]) {
+    if (relationLayers?.length) {
+      for (const layer of relationLayers) {
+        const relationWorkspace = this.workspaceStore.all().find(workspace => layer.options.workspace.workspaceId.includes(workspace.id));
+        relationWorkspace?.meta.tableTemplate.columns.forEach(col => {
+          // Update domain list
+          if (col.type === 'list' || col.type === 'autocomplete') {
+            this.editionWorkspaceService.getDomainValues(col.relation.table).subscribe(result => {
+              col.domainValues = result;
+            });
+          }
+        });
+      }
+    }
+  }
 }
