@@ -115,6 +115,7 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
 export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(undefined);
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public clickedEntity$: BehaviorSubject<Feature[]> = new BehaviorSubject(undefined);
   public minSearchTermLength = 2;
   public hasExpansionPanel: boolean = false;
   public showSimpleFeatureList: boolean = false;
@@ -620,6 +621,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
+    this.clickedEntity$.next(event.features);
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
     const results = event.features.map((feature: Feature) => {

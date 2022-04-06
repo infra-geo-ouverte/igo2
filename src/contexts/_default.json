@@ -3,41 +3,22 @@
   "base": "_base",
   "layers": [
     {
-      "title": "Services de police",
+      "title": "WFS",
       "id": "dq2",
-      "styleByAttribute": {
-        "type": "circle",
-        "attribute": "type",
-        "data": ["Autres services de police","Sûreté du Québec","Services de police municipaux", "Services de police autochtones"],
-        "fill": ["orange","red","green","blue"],
-        "icon": ["./assets/images/styles/pin.svg","./assets/images/styles/pin.svg","./assets/images/styles/pin.svg","./assets/images/styles/pin.svg"],
-        "radius": [1,1,1,1],
-        "label": {
-          "attribute": "id_police",
-          "style": {
-            "textAlign": "center",
-            "textBaseline": "center",
-            "font": "bold 8px Calibri,sans-serif",
-            "fill": {
-              "color": "#000"
-            },
-            "stroke": {
-              "color": "rgba(255, 255, 255, 1)"
-            },
-            "overflow": "true",
-            "offsetY": -5
-          }
-        }
-      },
+      "visible": true,
       "sourceOptions": {
-        "type": "vector",
-        "url": "./assets/images/styles/data.geojson",
-        "queryable": false
+        "type": "wfs",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "queryable": true,
+        "params": {
+          "featureTypes": "telephone_urg",
+          "fieldNameGeometry": "geometry",
+          "outputFormat": "geojson"
+        }
       },
       "workspace": {
         "enabled": true,
         "queryOptions": {
-          "maxResolution": 300,
           "mapQueryOnOpenTab": false,
           "tabQuery": false
         }
