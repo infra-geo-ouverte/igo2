@@ -62,10 +62,15 @@ import {
   QueryService,
   WfsWorkspace,
   FeatureWorkspace,
+  EditionWorkspace,
+  EditionWorkspaceService,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent,
   addStopToStore,
-  GeoDBService
+  GeoDBService,
+  ImageLayer,
+  VectorLayer,
+  MapExtent
 } from '@igo2/geo';
 
 import {
@@ -118,6 +123,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasGeolocateButton = true;
+  public hasHomeExtentButton = false;
   public showMenuButton = true;
   public showSearchBar = true;
   public showRotationButtonIfNoRotation = false;
@@ -125,6 +131,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
   public workspaceEntitySortChange$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public workspaceSwitchDisabled = false;
   public paginatorOptions: EntityTablePaginatorOptions = {
     pageSize: 50, // Number of items to display on a page.
     pageSizeOptions: [1, 5, 10, 20, 50, 100, 500] // The set of provided page size options to display to the user.
@@ -166,6 +173,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   private routeParams: Params;
   public toastPanelHtmlDisplay = false;
 
+  public homeExtent: MapExtent;
+  public homeCenter: [number, number];
+  public homeZoom: number;
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef, static: true })
@@ -315,13 +325,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     public dialogWindow: MatDialog,
     private queryService: QueryService,
     private storageService: StorageService,
+    private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
     private mapRtssProximityState: MapRtssProximityState,
     private mapProximityState: MapProximityState,
     private geoDBService: GeoDBService
-
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
+    this.hasHomeExtentButton =
+      this.configService.getConfig('homeExtentButton') === undefined ? false : true;
     this.hasGeolocateButton = this.configService.getConfig('hasGeolocateButton') === undefined ? true :
       this.configService.getConfig('hasGeolocateButton');
     this.showRotationButtonIfNoRotation = this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ? false :
@@ -422,10 +434,22 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.workspaceMaximize$.subscribe(() => this.updateMapBrowserClass())
     );
 
-    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
+    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace | EditionWorkspace) => {
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
         this.expansionPanelExpanded = true;
+
+        if (activeWks.layer.options.workspace?.pageSize && activeWks.layer.options.workspace?.pageSizeOptions) {
+          this.paginatorOptions = {
+            pageSize: activeWks.layer.options.workspace?.pageSize,
+            pageSizeOptions: activeWks.layer.options.workspace?.pageSizeOptions
+          };
+        } else {
+          this.paginatorOptions = {
+            pageSize: 50,
+            pageSizeOptions: [1, 5, 10, 20, 50, 100, 500]
+          };
+        }
       } else {
         this.expansionPanelExpanded = false;
       }
@@ -479,7 +503,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           console.log('rtss', rtss.properties.num_rts, route, tronc, sect, srte, chainage)
 
           this.infoContent = `${route}-${tronc}-${sect}-${srte}
-${thousand}+${units}
+${thousand}+${units};
 ${rtss.properties.distance}m`;
         } else {
           this.infoContent = undefined;
@@ -650,7 +674,7 @@ ${rtss.properties.distance}m`;
   }
 
   workspaceVisibility(): boolean {
-    const wks = (this.selectedWorkspace$.value as WfsWorkspace | FeatureWorkspace);
+    const wks = (this.selectedWorkspace$.value as WfsWorkspace | FeatureWorkspace | EditionWorkspace);
     if (wks.inResolutionRange$.value) {
       if (wks.entityStore.empty$.value && !wks.layer.visible) {
         this.workspaceNotAvailableMessage = 'workspace.disabled.visible';
@@ -663,6 +687,32 @@ ${rtss.properties.distance}m`;
     return wks.inResolutionRange$.value;
   }
 
+  isEditionWorkspace(workspace) {
+    if (workspace instanceof EditionWorkspace) {
+      return true;
+    }
+    return false;
+  }
+
+  addFeature(workspace: EditionWorkspace) {
+    let feature = {
+      type: "Feature",
+      properties: {}
+    };
+    feature.properties = this.createFeatureProperties(workspace.layer);
+    this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
+    workspace.editFeature(feature, workspace);
+  }
+
+  createFeatureProperties(layer: ImageLayer | VectorLayer) {
+    let properties = {};
+    layer.options.sourceOptions.sourceFields.forEach(field => {
+      if (!field.primary && field.visible) {
+        properties[field.name] = '';
+      }
+    });
+    return properties;
+  }
 
   paginatorChange(matPaginator: MatPaginator) {
     this.workspacePaginator = matPaginator;
@@ -675,6 +725,10 @@ ${rtss.properties.distance}m`;
   entitySelectChange(result: { added: Feature[] }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
+
+    if (this.selectedWorkspace$.value instanceof WfsWorkspace || this.selectedWorkspace$.value instanceof FeatureWorkspace) {
+      if (!this.selectedWorkspace$.value.getLayerWksOptionTabQuery()) {return;}
+    }
     if (result && result.added) {
       const results = result.added.map((res) => {
         if (
@@ -760,11 +814,15 @@ ${rtss.properties.distance}m`;
   onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
-
     const results = event.features.map((feature: Feature) => {
       let querySearchSource = querySearchSourceArray.find(
         (s) => s.title === feature.meta.sourceTitle
       );
+      if (this.getFeatureIsSameActiveWks(feature)) {
+        if (this.getWksActiveOpenInResolution() && !(this.workspace as WfsWorkspace).getLayerWksOptionMapQuery()) {
+          return;
+        }
+      }
       if (!querySearchSource) {
         querySearchSource = new QuerySearchSource({
           title: feature.meta.sourceTitle
@@ -773,9 +831,9 @@ ${rtss.properties.distance}m`;
       }
       return featureToSearchResult(feature, querySearchSource);
     });
-
+    const filteredResults = results.filter(x => x !== undefined);
     const research = {
-      request: of(results),
+      request: of(filteredResults),
       reverse: false,
       source: baseQuerySearchSource
     };
@@ -853,11 +911,29 @@ ${rtss.properties.distance}m`;
     }
   }
 
+  private computeHomeExtentValues(context: DetailedContext) {
+    if (context?.map?.view?.homeExtent) {
+      this.homeExtent = context.map.view.homeExtent.extent;
+      this.homeCenter = context.map.view.homeExtent.center;
+      this.homeZoom = context.map.view.homeExtent.zoom;
+    } else {
+      this.homeExtent = undefined;
+      this.homeCenter = undefined;
+      this.homeZoom = undefined;
+    }
+
+  }
+
   private onChangeContext(context: DetailedContext) {
     this.cancelOngoingAddLayer();
     if (context === undefined) {
       return;
     }
+    if (!this.queryState.store.empty) {
+      this.queryState.store.softClear();
+    }
+
+    this.computeHomeExtentValues(context);
 
     this.route.queryParams.pipe(debounceTime(250)).subscribe((qParams) => {
       if (!qParams['context'] || qParams['context'] === context.uri) {
@@ -1564,6 +1640,45 @@ ${rtss.properties.distance}m`;
         this.welcomeWindowService.afterClosedWelcomeWindow();
         this.matDialogRef$.next(undefined);
       });
+    }
+  }
+
+  private getFeatureIsSameActiveWks(feature: Feature): boolean {
+    if (this.workspace) {
+      const featureTitle = feature.meta.sourceTitle;
+      const wksTitle = this.workspace.title;
+      if (wksTitle === featureTitle) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  private getWksActiveOpenInResolution(): boolean {
+    if(this.workspace) {
+      const activeWks = this.workspace as WfsWorkspace;
+      if(activeWks.active && activeWks.inResolutionRange$.value && this.workspaceState.workspacePanelExpanded) {
+        return true;
+      }
+    }
+    return false;
+   }
+
+  refreshRelationsWorkspace(relationLayers: ImageLayer[] | VectorLayer[]) {
+    if (relationLayers?.length) {
+      for (const layer of relationLayers) {
+        const relationWorkspace = this.workspaceStore.all().find(workspace => layer.options.workspace.workspaceId.includes(workspace.id));
+        relationWorkspace?.meta.tableTemplate.columns.forEach(col => {
+          // Update domain list
+          if (col.type === 'list' || col.type === 'autocomplete') {
+            this.editionWorkspaceService.getDomainValues(col.relation.table).subscribe(result => {
+              col.domainValues = result;
+            });
+          }
+        });
+      }
     }
   }
 }

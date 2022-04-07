@@ -1,6 +1,5 @@
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
-[![Dependencies Status](https://david-dm.org/infra-geo-ouverte/igo2.svg)](https://david-dm.org/infra-geo-ouverte/igo2)
-[![devDependencies Status](https://david-dm.org/infra-geo-ouverte/igo2/dev-status.svg)](https://david-dm.org/infra-geo-ouverte/igo2?type=dev)
+[![join chat https://gitter.im/igo2/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/igo2/Lobby)
 [![Known Vulnerabilities](https://snyk.io/test/github/infra-geo-ouverte/igo2/badge.svg)](https://snyk.io/test/github/infra-geo-ouverte/igo2)
 
 # Infrastructure géomatique ouverte 2.0 (IGO2) / Open GIS Infrastructure 2.0
@@ -27,7 +26,8 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ## Table des matières (Français)
 
 - [Téléchargement](#téléchargement)
-- [Installation](#installation-et-démarrage)
+- [Installation pour déploiement serveur](#installation-pour-déploiement-serveur)
+- [Installation pour développeurs](#installation-et-démarrage-pour-développeurs)
 - [Démo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Démo d'IGO2 de Données Québec](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation](https://igo2.readthedocs.io/fr/latest/)
@@ -41,7 +41,8 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ## Table of content (English)
 
 - [Download](#download)
-- [Installation](#installation-en)
+- [Installation (for server deployment)](#installation-for-server-deployment)
+- [Installation for developpers](#installation-for-developpers)
 - [Demo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Demo IGO2 from Open Data Quebec (Canada)](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation (translation is not yet done)](https://igo2.readthedocs.io/fr/latest/)
@@ -52,11 +53,9 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 
 ## Téléchargement
 
+- [Version 1.11.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.11.0/igo2.zip)
 - [Version 1.10.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.10.0/igo2.zip)
 - [Version 1.9.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.4/igo2.zip)
-- [Version 1.9.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.3/igo2.zip)
-- [Version 1.9.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.2/igo2.zip)
-- [Version 1.9.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.0/igo2.zip)
 - [Version 1.8.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.8.2/igo2.zip)
 - [Version 1.7.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.7.2/igo2.zip)
 - [Version 1.6.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.3/igo2.zip)
@@ -67,7 +66,15 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 - [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
 - [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
 
-## Installation et démarrage
+## Installation (pour déploiement serveur)
+
+1. [Télécharger](#téléchargement) la version désirée.
+2. Décompresser le fichier télécharger
+3. Déploier l'application sur un serveur Web (NGinx, Apache HTTPD, IIS ...)
+4. Servir le fichier index.html
+5. Personnaliser le contenu cartogtaphique (contexts.json et _default.json ou ...)
+
+## Installation et démarrage (pour développeurs)
 
 Requis:
 
@@ -85,12 +92,11 @@ $ cd igo2
 $ npm install
 
 # Surveiller les fichiers et lancer une instance pour le développement
+# Il est possible que vos changements de librairies ne soient pas appliqués.
+# Webpack (suite au npm start) ne surveille plus les changement de node_modules. Il observe seulement la version des dépendances. De ce fait, les 
+# changements de code ne sont pas recompilées.
+# Pour corriger ceci, désactiver la cache avec la variable d'environnement NG_BUILD_CACHE = "false"
 $ npm start
-# Ouvrir un navigateur http://localhost:4201/
-
-# Build dev
-$ npm run build.dev
-$ npm run serve.dev
 # Ouvrir un navigateur http://localhost:4201/
 
 # Build prod
@@ -123,7 +129,7 @@ $ npm run e2e
 
 ## Contribuer
 
-Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, nous vous encourageons à lire le guide de [contribution](.github/CONTRIBUTING.md), la [LICENCE](LICENCE.txt) et le [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). Si vous avez d'autres questions, n'hésitez pas à communiquer avec nous à l'adresse suivante : info(a)igouverte.org.
+Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, nous vous encourageons à lire le guide de [contribution](.github/CONTRIBUTING.md), la [LICENCE](LICENCE.txt) et le [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki/IGO2-:-Auto-formation-pour-d%C3%A9veloppeurs). Si vous avez d'autres questions, n'hésitez pas à communiquer avec nous à l'adresse suivante info(a)igouverte.org ou par [Gitter](https://gitter.im/igo2/).
 
 ---
 
@@ -131,11 +137,9 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ## Download
 
+- [Version 1.11.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.11.0/igo2.zip)
 - [Version 1.10.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.10.0/igo2.zip)
 - [Version 1.9.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.4/igo2.zip)
-- [Version 1.9.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.3/igo2.zip)
-- [Version 1.9.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.2/igo2.zip)
-- [Version 1.9.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.0/igo2.zip)
 - [Version 1.8.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.8.2/igo2.zip)
 - [Version 1.7.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.7.2/igo2.zip)
 - [Version 1.6.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.3/igo2.zip)
@@ -146,7 +150,15 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 - [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
 - [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
 
-## Installation-en
+
+## Installation (for server deployment)
+
+1. [Download](#download) the desired version.
+2. Unzip the download file
+3. Deploy the application on a web server (NGinx, Apache HTTPD, IIS...)
+4. Serve the index.html file
+5. Customize map content (contexts.json and _default.json)
+## Installation (for developpers)
 
 Require:
 
@@ -164,12 +176,11 @@ $ cd igo2
 $ npm install
 
 # Check files and launch dev instance
+# Your library changes may not be applied.
+# Webpack (following npm start) no longer monitors node_modules changes. It only observes the version of the dependencies. Therefore, the
+# code changes are not recompiled.
+# To fix this, disable the cache with the environment variable NG_BUILD_CACHE = "false"
 $ npm start
-# Open your browser at http://localhost:4201/
-
-# Build dev
-$ npm run build.dev
-$ npm run serve.dev
 # Open your browser at http://localhost:4201/
 
 # Build prod
@@ -202,4 +213,4 @@ $ npm run e2e
 
 ## Contribution
 
-Before contributing, please read the [guidelines](.github/CONTRIBUTING.md), the [LICENCE](LICENSE_ENGLISH.txt) and the [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). If you have any question and want to contribute, contact the main email of IGO: info(a)igouverte.org.
+Before contributing, please read the [guidelines](.github/CONTRIBUTING.md), the [LICENCE](LICENSE_ENGLISH.txt) and the [WIKI](https://github.com/infra-geo-ouverte/igo2/wiki). If you have any question and want to contribute, contact the main email of IGO info(a)igouverte.org or on [Gitter](https://gitter.im/igo2/)

@@ -80,6 +80,14 @@
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-geolocate-button>
       <igo-rotation-button [showIfNoRotation]="showRotationButtonIfNoRotation" [map]="map" color="primary"></igo-rotation-button>
+      <igo-home-extent-button
+        *ngIf="hasHomeExtentButton"
+        [map]="map"
+        [extentOverride]="homeExtent"
+        [centerOverride]="homeCenter"
+        [zoomOverride]="homeZoom"
+        color="primary">
+      </igo-home-extent-button>
       <igo-user-button
         *ngIf="auth.url"
         [map]="map" color="primary"
@@ -113,7 +121,12 @@
     <igo-workspace-selector
       igoWorkspaceSelector
       (toolToActivate)="toolToActivateFromWorkspace($event)"
+      (changeWorkspace)="workspaceState.setActiveWorkspaceByTitle($event)"
+      (disableSwitch)="workspaceSwitchDisabled = $event"
+      (relationLayers)="refreshRelationsWorkspace($event)"
+      (rowsInMapExtentCheckCondition)="workspaceState.rowsInMapExtentCheckCondition$.next($event)"
       [store]="workspaceStore"
+      [disabled]="workspaceSwitchDisabled"
       [map]="map">
     </igo-workspace-selector>
 
@@ -133,23 +146,37 @@
           [ngClass]="{disabled: (workspace.inResolutionRange$ | async)!==true}"
           [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'">
         </mat-icon>
-    </button>
-    <igo-actionbar
-      class="actionbar-workspace"
-      *ngIf="workspace.actionStore"
-      [store]="workspace.actionStore"
-      [withIcon]="true"
-      [withTitle]="actionbarWithTitle"
-      [horizontal]="true"
-      [withToggleButton]="actionbarMode === 'overlay'"
-      [iconColor]="'primary'"
-      [color]="'primary'"
-      [mode]="actionbarMode"
-      [overlayClass]="workspaceMenuClass">
-    </igo-actionbar>
+      </button>
+      <button
+        *ngIf="isEditionWorkspace(workspace)"
+        class="add-feature"
+        mat-icon-button
+        color="primary"
+        collapsibleButton
+        tooltip-position="below"
+        matTooltipShowDelay="500"
+        [matTooltip]="('workspace.addFeature') | translate"
+        (click)="addFeature(workspace)">
+        <mat-icon
+          svgIcon="plus">
+        </mat-icon>
+      </button>
+      <igo-actionbar
+        class="actionbar-workspace"
+        *ngIf="workspace.actionStore"
+        [store]="workspace.actionStore"
+        [withIcon]="true"
+        [withTitle]="actionbarWithTitle"
+        [horizontal]="true"
+        [withToggleButton]="actionbarMode === 'overlay'"
+        [iconColor]="'primary'"
+        [color]="'primary'"
+        [mode]="actionbarMode"
+        [overlayClass]="workspaceMenuClass">
+      </igo-actionbar>
       <div class="spacer"></div>
       <igo-entity-table-paginator
-      *ngIf="workspaceVisibility()"
+        *ngIf="workspaceVisibility()"
         [store]="workspace.entityStore"
         [entitySortChange$]="workspaceEntitySortChange$"
         [paginatorOptions]="paginatorOptions"
@@ -160,6 +187,7 @@
 
   <ng-container *ngIf="selectedWorkspace$ | async as workspace">
     <igo-entity-table
+      [class]="isEditionWorkspace(workspace) ? 'edition-table' : ''"
       [paginator]="workspacePaginator"
       *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate && workspaceVisibility()"
       [store]="workspace.entityStore"

@@ -9,6 +9,7 @@
       "url": "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/"
     }
   },
+  "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,
@@ -17,6 +18,11 @@
   "showSearchBar": true,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
+  "homeExtentButton": {
+    "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
+    "homeExtButtonCenter": [-71.938087, 48.446975],
+    "homeExtButtonZoom" : 6
+  },
   "searchSources": {
     "cadastre": {
       "available": false
@@ -29,5 +35,8 @@
     "showAgainOnNewIGOVersion": true,
     "nbVisitToShow": 2,
     "nbVisitToShowAgain": 30
+  },
+  "edition": {
+    "url": "/apis/postgrest/"
   }
 }
