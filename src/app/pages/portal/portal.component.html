@@ -243,6 +243,6 @@
 
 <igo-simple-feature-list *ngIf="showSimpleFeatureList && selectedWorkspace$ | async as workspace"
   [entityStore]="workspace.entityStore"
-  [clickedEntity]="clickedEntity$ | async"
+  [clickedEntities]="clickedEntities$ | async"
   (listSelection)="entitySelectChange($event)">
 </igo-simple-feature-list>
