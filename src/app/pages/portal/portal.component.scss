@@ -23,10 +23,15 @@
 ::ng-deep igo-info-section.rtssOverlay .infoSection {
   color: #ffffff;
   font-weight: 900;
-  font-size: 1.5em;
+  font-size: 2.75em;
   text-shadow: 0 0 5px black, 0 0 10px black, 0 0 15px black;
   background-color: transparent;
   @include mobile {
+    top: calc(#{$igo-icon-size} + 5px + #{$igo-margin});
+    left: 10px;
+    text-align: left;
+  }  
+  @include tablet {
     top: calc(#{$igo-icon-size} + 5px + #{$igo-margin});
     left: 10px;
     text-align: left;
