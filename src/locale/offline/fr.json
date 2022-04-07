@@ -1,5 +1,5 @@
 {
-  "IGO": "SIGO-Terrain",
+  "IGO": "SIGO - Terrain",
   "coordinates": "Afficher l'information",
   "igo": {
     "integration": {
@@ -14,6 +14,6 @@
     }
   },
   "welcomeWindow": {
-    "html": "<h1>Bienvenue dans {{title}} </h1><h2>{{description}}</h2><h3>Débutez en sélectionnant le menu &#9776;</h3><h3>Poursuivez en sélectionnant une DGT dans &#x2605;</h3><h3>Version {{version}}</h3>"
+    "html": "<h1>Bienvenue dans {{title}} </h1><h2>{{description}}</h2><h3>Débutez en sélectionnant le menu &#9776;</h3><h3>Poursuivez en sélectionnant une DGT dans &#x2605;</h3><br>ATTENTION : L'utilisation des fonds cartographique 'Imagerie et 'Carte Topo' pourrait consommer des données sur votre forfait cellulaire. Utilisez les fonds 'Noir' ou 'Aucun' pour éviter d'utiliser votre forfait.<br><br>Version {{version}}"
   }
 }
