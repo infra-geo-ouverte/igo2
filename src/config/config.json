@@ -16,7 +16,6 @@
   "showMenuButton": false,
   "showSearchBar": false,
   "simpleFeatureList": {
-    "show": true,
     "layerId": "dq2",
     "attributeOrder": [
       {"attributeName": "idtelsec", "header": "h4"},
@@ -24,7 +23,11 @@
     ],
     "sortBy": {"attributeName": "idtelsec", "order": "descending"},
     "formatURL": true,
-    "formatEmail": true
+    "formatEmail": true,
+    "paginator": {
+      "pageSize": 10,
+      "pageSizeOptions": [5, 10, 25, 50, 100]
+    }
   },
   "hasFeatureEmphasisOnSelection": false,
   "menuButtonReverseColor": false,
