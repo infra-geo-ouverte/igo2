@@ -25,7 +25,9 @@
     "formatURL": true,
     "formatEmail": true,
     "paginator": {
-      "pageSize": 10
+      "pageSize": 15,
+      "showFirstLastPageButtons": true,
+      "showPreviousNextPageButtons": true
     }
   },
   "hasFeatureEmphasisOnSelection": false,
