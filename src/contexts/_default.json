@@ -5,13 +5,15 @@
     {
       "title": "WFS",
       "id": "dq2",
-      "visible": true,
       "sourceOptions": {
-        "type": "wfs",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-        "queryable": true,
+        "type": "wms",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
         "params": {
-          "featureTypes": "telephone_urg",
+          "layers": "MSP_DIRECTION_REG_COG_P_V"
+        },
+        "urlWFS": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+        "paramsWFS": {
+          "featureTypes": "MSP_DIRECTION_REG_COG_P_V",
           "fieldNameGeometry": "geometry",
           "outputFormat": "geojson"
         }
