@@ -224,21 +224,21 @@ export const environment: Environment = {
     depot: {
       url: '/apis/depot'
     },
-    dom: [
-      {
-        name: 'test-dom',
-        value: [
-          {
-            id: "Radar photo fixe",
-            value: "Radar photo fixe"
-          },
-          {
-            id: "Radar photo fixe",
-            value: "Radar photo mobile"
-          }
-        ]
-      }
-    ],
+    // dom: [
+    //   {
+    //     name: 'test-dom',
+    //     value: [
+    //       {
+    //         id: "Radar photo fixe",
+    //         value: "Radar photo fixe"
+    //       },
+    //       {
+    //         id: "Radar photo fixe",
+    //         value: "Radar photo mobile"
+    //       }
+    //     ]
+    //   }
+    // ],
     language: {
       prefix: './locale/'
     },
