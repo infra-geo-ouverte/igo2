@@ -18,14 +18,18 @@
   "simpleFeatureList": {
     "layerId": "dq2",
     "attributeOrder": [
-      {"attributeName": "idtelsec", "header": "h4"},
-      {"attributeName": "coords", "personalizedFormatting": "[longitude], [latitude]", "description": "Emplacement"}
+      {"attributeName": "bureau", "personalizedFormatting": "[nom] de [region]", "header": "h6"},
+      {"attributeName": "adressebur", "description": "Adresse"},
+      {"attributeName": "responsable", "description": "Responsable"},
+      {"attributeName": "telephonebur", "description": "Téléphone"},
+      {"attributeName": "telecopieurbur", "description": "Télécopieur"},
+      {"attributeName": "courriel"}
     ],
     "sortBy": {"attributeName": "idtelsec", "order": "descending"},
     "formatURL": true,
     "formatEmail": true,
     "paginator": {
-      "pageSize": 15,
+      "pageSize": 5,
       "showFirstLastPageButtons": true,
       "showPreviousNextPageButtons": true
     }
