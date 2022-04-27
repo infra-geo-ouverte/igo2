@@ -15,17 +15,21 @@
   "showRotationButtonIfNoRotation": false,
   "showMenuButton": false,
   "showSearchBar": false,
+  "simpleFilters": [
+    {"filter": "municipalites", "description": "Municipalité", "multiple": false},
+    {"filter": "mrc", "description": "MRC", "multiple": true}
+  ],
   "simpleFeatureList": {
     "layerId": "dq2",
     "attributeOrder": [
       {"attributeName": "bureau", "personalizedFormatting": "[nom] de [region]", "header": "h6"},
-      {"attributeName": "adressebur", "description": "Adresse"},
+      {"attributeName": "adressebur"},
       {"attributeName": "responsable", "description": "Responsable"},
       {"attributeName": "telephonebur", "description": "Téléphone"},
       {"attributeName": "telecopieurbur", "description": "Télécopieur"},
       {"attributeName": "courriel"}
     ],
-    "sortBy": {"attributeName": "idtelsec", "order": "descending"},
+    "sortBy": {"attributeName": "region"},
     "formatURL": true,
     "formatEmail": true,
     "paginator": {
