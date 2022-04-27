@@ -1,7 +1,7 @@
 {
-  "name": "SIGO Terrain",
-  "short_name": "SIGO Terrain",
-  "description": "Outil permettant de récupérer les RTSS Chainage en ligne et hors ligne. EN DEV.",
+  "name": "SIGO - Terrain",
+  "short_name": "SIGO - Terrain",
+  "description": "Outil permettant de récupérer les RTSS Chaînage en ligne et hors ligne.",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

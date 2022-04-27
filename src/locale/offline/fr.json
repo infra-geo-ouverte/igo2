@@ -1,15 +1,25 @@
 {
   "IGO": "SIGO - Terrain",
   "coordinates": "Afficher l'information",
-  "igo": {
+  "igo": {    
+    "geo": {
+      "importExportForm": {
+        "importFormatAuthorized": "Hors ligne: Geojson seulement, sinon les formats autorisés sont: geojson, kml, gpx, gml, shapefile"
+      }
+    },
     "integration": {
+      "directions": {
+        "warning": {
+          "title": "Avertissement - Outil disponible en ligne seulement"
+        }
+      },
       "tools": {
         "map": "Ma carte",
         "searchResults": "Résultat de recherche"
       },
       "searchResultsTool": {
         "noResults": "Aucun résultat",
-        "examples": "Vous devez être en ligne pour effectuer des recherches textuelles. Les recherche par coordonnées (-68.165547, 48.644546) peuvent être effectuées hors ligne. </br></br Voici quelques exemples : </br></br> Nom complet ou partiel d’une couche : <ul> <li>sortie, Sortie d’autoroute</li> <li>milieu, milieu humide, Milieu humide non boisé</li> </ul>iCherche : Adresse, code postal, municipalité, lieu, intersections, etc. :<ul> <li>5833 Pierre-Bertrand</li> <li>H2L0A1</li> <li>Saint-césaire</li> <li>hopital de magog</li> <li>McDo Lévis</li> <li>principale + église (une intersection)</li> </ul>Numéro de route partiel ou RTSS et chaînage précis :<ul> <li>0005001070000D+8090</li> <li>5001070000D+8090</li> <li>5001070000D+8090</li> </ul>Repère KM :<ul> <li>Lévis#km, 20#km, 20-314#km, 20 314#km, 314#km</li> </ul>Coordonnées :<ul> <li>Degré décimal (-68.165547, 48.644546)</li> <li>Degré minute seconde (-68 9 56, 48 38 40)</li> <li>Degré minute décimal (-68 9.56, 48 38.40)</li> <li>UTM (UTM-19 561466.861, 5388278.862)</li> <li>MTM (MTM-6 255776.67 5389766.47)</li> <li>MTM (MTM6 255776.67 5389766.47)</li> <li>Projection Google (-7588142.43 6214761.09;3857)</li> <li>Lambert MTQ (935103.79 517928.39;3798)</li> <li>Lambert Québec (111594.63, 445854.74;32198)</li> </ul>Vous pouvez aussi utiliser des mots clés pour préciser votre recherche. Exemples:<ul> <li>#mun québec (pour rechercher une municipalité)</li> <li>#sante Lévis (pour rechercher un établissement de santé)</li> <li>#cpe joyeux (pour rechercher un centre de la petite enfance)</li> </ul>*Les mots clés apparaissent dans le menu des Options de recherche au survol d'un Type de résultat."
+        "examples": "Vous devez être en ligne pour effectuer des recherches textuelles. Les recherche par coordonnées (-68.165547, 48.644546) peuvent être effectuées hors ligne. </br></br Voici quelques exemples : </br></br> iCherche : Adresse, code postal, municipalité, lieu, intersections, etc. :<ul> <li>5833 Pierre-Bertrand</li> <li>H2L0A1</li> <li>Saint-césaire</li> <li>hopital de magog</li> <li>McDo Lévis</li> <li>principale + église (une intersection)</li> </ul>Numéro de route partiel ou RTSS et chaînage précis :<ul> <li>0005001070000D+8090</li> <li>00138-01-106-000C</li> <li>5001070000D+8090</li> </ul>Repère KM :<ul> <li>Lévis#km, 20#km, 20-314#km, 20 314#km, 314#km</li> </ul>Coordonnées :<ul> <li>Degré décimal (-68.165547, 48.644546)</li> <li>Degré minute seconde (-68 9 56, 48 38 40)</li> <li>Degré minute décimal (-68 9.56, 48 38.40)</li> <li>UTM (UTM-19 561466.861, 5388278.862)</li> <li>MTM (MTM-6 255776.67 5389766.47)</li> <li>MTM (MTM6 255776.67 5389766.47)</li> <li>Projection Google (-7588142.43 6214761.09;3857)</li> <li>Lambert MTQ (935103.79 517928.39;3798)</li> <li>Lambert Québec (111594.63, 445854.74;32198)</li> </ul>Vous pouvez aussi utiliser des mots clés pour préciser votre recherche. Exemples:<ul> <li>#mun québec (pour rechercher une municipalité)</li> <li>#sante Lévis (pour rechercher un établissement de santé)</li> <li>#cpe joyeux (pour rechercher un centre de la petite enfance)</li> </ul>*Les mots clés apparaissent dans le menu des Options de recherche au survol d'un Type de résultat."
       }
     }
   },

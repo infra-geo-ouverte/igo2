@@ -2,14 +2,25 @@
   "IGO": "SIGO - Terrain",
   "coordinates": "Show informations",
   "igo": {
+    "geo": {
+      "importExportForm": {
+        "importFormatAuthorized": "Offline: Geojson only, otherwise, authorized formats are: geojson, kml, gpx, gml, shapefile"
+      }
+    },
     "integration": {
+
+      "directions": {
+        "warning": {
+          "title": "Warning - This tool is only availaible online"
+        }
+      },
       "tools": {
         "map": "My map",
         "searchResults": "Search results"
       },
       "searchResultsTool": {
         "noResults": "No results",
-        "examples": "You must be online to perform text searches. Searches by coordinates (-68.165547, 48.644546) can be done offline. </br></br Here are some examples: </br></br> Full or partial name of a layer: <ul> <li>exit, highway exit</li> <li>middle, middle wetland, Non-forested wetland</li> </ul>iSearch: Address, postal code, municipality, place, intersections, etc. :<ul> <li>5833 Pierre-Bertrand</li> <li>H2L0A1</li> <li>Saint-Césaire</li> <li>magog hospital</li> <li>McDo Lévis</ li> <li>main + church (one intersection)</li> </ul>Partial road number or RTSS and precise chaining:<ul> <li>0005001070000D+8090</li> <li>5001070000D+8090< /li> <li>5001070000D+8090</li> </ul>KM marker:<ul> <li>Lévis#km, 20#km, 20-314#km, 20 314#km, 314#km</ li> </ul>Coordinates:<ul> <li>Decimal degree (-68.165547, 48.644546)</li> <li>Degree minute second (-68 9 56, 48 38 40)</li> <li>Degree decimal minute (-68 9.56, 48 38.40)</li> <li>UTM (UTM-19 561466.861, 5388278.862)</li> <li>MTM (MTM-6 255776.67 5389766.47)</li> <li>MTM ( MTM6 255776.67 5389766.47)</li> <li>Google Projection (-7588142.43 6214761.09;3857)</li> <li>Lambert MTQ (935103.79 517928.39;3798)</li> <li>Lambert Quebec (111594.635.484, 9798) )</li> </ul>You can also use keywords to refine your search. Examples:<ul> <li>#mun québec (to search for a municipality)</li> <li>#sante Lévis (to search for a health establishment)</li> <li>#cpe Joyeux (to search for a center Early Childhood)</li> </ul>*Keywords appear in the Search Options menu when hovering over a Result Type."
+        "examples": "You must be online to perform text searches. Searches by coordinates (-68.165547, 48.644546) can be done offline. </br></br> Here are some examples: </br></br> iSearch: Address, postal code, municipality, place, intersections, etc. :<ul> <li>5833 Pierre-Bertrand</li> <li>H2L0A1</li> <li>Saint-Césaire</li> <li>magog hospital</li> <li>McDo Lévis</ li> <li>main + church (one intersection)</li> </ul>Partial road number or RTSS and precise chaining:<ul> <li>0005001070000D+8090</li> <li>00138-01-106-000C< /li> <li>5001070000D+8090</li> </ul>KM marker:<ul> <li>Lévis#km, 20#km, 20-314#km, 20 314#km, 314#km</ li> </ul>Coordinates:<ul> <li>Decimal degree (-68.165547, 48.644546)</li> <li>Degree minute second (-68 9 56, 48 38 40)</li> <li>Degree decimal minute (-68 9.56, 48 38.40)</li> <li>UTM (UTM-19 561466.861, 5388278.862)</li> <li>MTM (MTM-6 255776.67 5389766.47)</li> <li>MTM ( MTM6 255776.67 5389766.47)</li> <li>Google Projection (-7588142.43 6214761.09;3857)</li> <li>Lambert MTQ (935103.79 517928.39;3798)</li> <li>Lambert Quebec (111594.635.484, 9798) )</li> </ul>You can also use keywords to refine your search. Examples:<ul> <li>#mun québec (to search for a municipality)</li> <li>#sante Lévis (to search for a health establishment)</li> <li>#cpe Joyeux (to search for a center Early Childhood)</li> </ul>*Keywords appear in the Search Options menu when hovering over a Result Type."
       }
     }
   },

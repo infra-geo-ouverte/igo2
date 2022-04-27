@@ -10,6 +10,7 @@
     }
   },
   "favoriteContext4NonAuthenticated": true,
+  "wakeLockApiButton": true,
   "theme": "blue-theme",
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,
@@ -30,7 +31,7 @@
   },
   "title": "IGO",
   "sidenavTitle": "SIGO - Terrain",
-  "description": "L'application SIGO en mode déconnecté",
+  "description": "L'application SIGO - Terrain en mode déconnecté",
   "welcomeWindow": {
     "showAgainOnNewIGOVersion": true,
     "nbVisitToShow": 2,
