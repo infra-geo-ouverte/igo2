@@ -62,9 +62,14 @@ import {
   QueryService,
   WfsWorkspace,
   FeatureWorkspace,
+  EditionWorkspace,
+  EditionWorkspaceService,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent,
-  addStopToStore
+  addStopToStore,
+  ImageLayer,
+  VectorLayer,
+  MapExtent
 } from '@igo2/geo';
 
 import {
@@ -114,6 +119,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public minSearchTermLength = 2;
   public hasExpansionPanel = false;
   public hasGeolocateButton = true;
+  public hasHomeExtentButton = false;
   public showMenuButton = true;
   public showSearchBar = true;
   public showRotationButtonIfNoRotation = false;
@@ -121,6 +127,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
   public workspaceEntitySortChange$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public workspaceSwitchDisabled = false;
   public paginatorOptions: EntityTablePaginatorOptions = {
     pageSize: 50, // Number of items to display on a page.
     pageSizeOptions: [1, 5, 10, 20, 50, 100, 500] // The set of provided page size options to display to the user.
@@ -162,6 +169,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   private routeParams: Params;
   public toastPanelHtmlDisplay = false;
 
+  public homeExtent: MapExtent;
+  public homeCenter: [number, number];
+  public homeZoom: number;
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef, static: true })
@@ -311,9 +321,12 @@ export class PortalComponent implements OnInit, OnDestroy {
     public dialogWindow: MatDialog,
     private queryService: QueryService,
     private storageService: StorageService,
+    private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
+    this.hasHomeExtentButton =
+      this.configService.getConfig('homeExtentButton') === undefined ? false : true;
     this.hasGeolocateButton = this.configService.getConfig('hasGeolocateButton') === undefined ? true :
       this.configService.getConfig('hasGeolocateButton');
     this.showRotationButtonIfNoRotation = this.configService.getConfig('showRotationButtonIfNoRotation') === undefined ? false :
@@ -414,10 +427,22 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.workspaceMaximize$.subscribe(() => this.updateMapBrowserClass())
     );
 
-    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace) => {
+    this.workspaceState.workspace$.subscribe((activeWks: WfsWorkspace | FeatureWorkspace | EditionWorkspace) => {
       if (activeWks) {
         this.selectedWorkspace$.next(activeWks);
         this.expansionPanelExpanded = true;
+
+        if (activeWks.layer.options.workspace?.pageSize && activeWks.layer.options.workspace?.pageSizeOptions) {
+          this.paginatorOptions = {
+            pageSize: activeWks.layer.options.workspace?.pageSize,
+            pageSizeOptions: activeWks.layer.options.workspace?.pageSizeOptions
+          };
+        } else {
+          this.paginatorOptions = {
+            pageSize: 50,
+            pageSizeOptions: [1, 5, 10, 20, 50, 100, 500]
+          };
+        }
       } else {
         this.expansionPanelExpanded = false;
       }
@@ -519,7 +544,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   workspaceVisibility(): boolean {
-    const wks = (this.selectedWorkspace$.value as WfsWorkspace | FeatureWorkspace);
+    const wks = (this.selectedWorkspace$.value as WfsWorkspace | FeatureWorkspace | EditionWorkspace);
     if (wks.inResolutionRange$.value) {
       if (wks.entityStore.empty$.value && !wks.layer.visible) {
         this.workspaceNotAvailableMessage = 'workspace.disabled.visible';
@@ -532,6 +557,32 @@ export class PortalComponent implements OnInit, OnDestroy {
     return wks.inResolutionRange$.value;
   }
 
+  isEditionWorkspace(workspace) {
+    if (workspace instanceof EditionWorkspace) {
+      return true;
+    }
+    return false;
+  }
+
+  addFeature(workspace: EditionWorkspace) {
+    let feature = {
+      type: "Feature",
+      properties: {}
+    };
+    feature.properties = this.createFeatureProperties(workspace.layer);
+    this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
+    workspace.editFeature(feature, workspace);
+  }
+
+  createFeatureProperties(layer: ImageLayer | VectorLayer) {
+    let properties = {};
+    layer.options.sourceOptions.sourceFields.forEach(field => {
+      if (!field.primary && field.visible) {
+        properties[field.name] = '';
+      }
+    });
+    return properties;
+  }
 
   paginatorChange(matPaginator: MatPaginator) {
     this.workspacePaginator = matPaginator;
@@ -725,9 +776,22 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public toolChanged(tool: Tool) {
-    if (tool && tool.name === 'searchResults') {
+    if (tool && tool.name === 'searchResults' && this.searchBar) {
       this.searchBar.nativeElement.getElementsByTagName('input')[0].focus();
     }
+  }
+
+  private computeHomeExtentValues(context: DetailedContext) {
+    if (context?.map?.view?.homeExtent) {
+      this.homeExtent = context.map.view.homeExtent.extent;
+      this.homeCenter = context.map.view.homeExtent.center;
+      this.homeZoom = context.map.view.homeExtent.zoom;
+    } else {
+      this.homeExtent = undefined;
+      this.homeCenter = undefined;
+      this.homeZoom = undefined;
+    }
+
   }
 
   private onChangeContext(context: DetailedContext) {
@@ -738,6 +802,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (!this.queryState.store.empty) {
       this.queryState.store.softClear();
     }
+
+    this.computeHomeExtentValues(context);
 
     this.route.queryParams.pipe(debounceTime(250)).subscribe((qParams) => {
       if (!qParams['context'] || qParams['context'] === context.uri) {
@@ -1470,4 +1536,19 @@ export class PortalComponent implements OnInit, OnDestroy {
     return false;
    }
 
+  refreshRelationsWorkspace(relationLayers: ImageLayer[] | VectorLayer[]) {
+    if (relationLayers?.length) {
+      for (const layer of relationLayers) {
+        const relationWorkspace = this.workspaceStore.all().find(workspace => layer.options.workspace.workspaceId.includes(workspace.id));
+        relationWorkspace?.meta.tableTemplate.columns.forEach(col => {
+          // Update domain list
+          if (col.type === 'list' || col.type === 'autocomplete') {
+            this.editionWorkspaceService.getDomainValues(col.relation.table).subscribe(result => {
+              col.domainValues = result;
+            });
+          }
+        });
+      }
+    }
+  }
 }

@@ -10,7 +10,8 @@
     "disabled" : {
       "resolution": "La vue tabulaire n'est pas disponible à cette échelle",
       "visible": "La couche n'a pas été chargée. Veuillez rendre visible la couche pour découvrir la donnée."
-    }
+    },
+    "addFeature": "Ajouter une entité à la couche en édition"
   },
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
@@ -29,6 +30,9 @@
     "standardExtentTooltip": "Réduire la fenêtre",
     "previousFeatureTooltip": "Entité précédente ( raccouci clavier = flèche gauche )",
     "nextFeatureTooltip": "Prochaine entité ( raccouci clavier = flèche droite )"
+  },
+  "home-extent": {
+    "tooltip": "Aller à l'étendue de la carte"
   },
   "IGO": "IGO",
   "noEntityStore": "Aucune table disponible pour ce jeu de données",
@@ -88,6 +92,8 @@
       "tool-choose": "Si nous sélectionnons un outil de la boîte à outils...",
       "tool-enter": "...son contenu s'affichera ici.",
       "home-button": "Ce bouton nous permet ensuite le retour au menu principal.",
+      "home-extent-title": "ÉTENDUE DE LA CARTE",
+      "home-extent-text": "Pour revenir à l'étendue de la carte.",
       "geolocate-title": "GEOLOCALISATION",
       "geolocate": "Pour zoomer la carte sur votre position.",
       "user-title": "UTILISATEUR",

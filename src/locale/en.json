@@ -10,7 +10,8 @@
     "disabled" : {
       "resolution": "The workspace is not available at this resolution",
       "visible": "The layer is not loaded. Try to set the layer visibility."
-    }
+    },
+    "addFeature": "Add entity to the edited layer"
   },
   "toastPanel": {
     "title": "Entities found on the map",
@@ -29,6 +30,9 @@
     "standardExtentTooltip": "Reduce panel",
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
     "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
+  },
+  "home-extent": {
+    "tooltip": "Go back to initial position"
   },
   "IGO": "IGO",
   "noEntityStore": "No tables available for this dataset",
@@ -90,6 +94,8 @@
       "home-button": "This button allow to get back to main menu",
       "geolocate-title": "GEOLOCATE",
       "geolocate": "To zoom the map to your location.",
+      "home-extent-title": "HOME EXTENT",
+      "home-extent-text": "To go to the home map extent",
       "user-title": "USER",
       "user-button": "To authenticate you or to disconnect and stay anonymous.",
       "baselayers-title": "BASELAYERS",

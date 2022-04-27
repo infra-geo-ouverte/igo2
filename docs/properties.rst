@@ -54,6 +54,57 @@ Liens
 
     - `igo2-lib/packages/geo/src/lib/map/shared/map.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/map/shared/map.interface.ts>`__
 
+.. _igohomeextent:
+
+*****************************
+Étendue de base (homeExtent)
+*****************************
+
+Bouton de l'interface utilisateur permettant de d'afficher la carte selon un point central ou une étendue.
+Il peut être définit par :
+ - l'étendue (extent), soit les 4 points limitant l'affichage (MINX | MINY | MAXX | MAXY)
+ - un point central (center + zoom). Plus le nombre du niveau de zoom est grand, plus l'affichage est zoomé sur le point central.
+
+
+Cet affichage est définit à deux niveaux :
+
+.. line-block::
+
+    - 1 - il s'applique de façon générale, peu importe la couche ou le contexte. Il peut être définit pour un portail.
+    Si les 3 paramètres sont définis, l'étendue (extent) sera affichée.
+
+    Fichier de configuration : src\config\config.json
+
+    Exemple :
+    "homeExtentButton": {
+        "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
+        "homeExtButtonCenter": [-71.938087, 48.446975],
+        "homeExtButtonZoom" : 6
+    }
+
+
+    - 2 - il s'applique par contexte
+    Si les 3 paramètres sont définis, le point central (center + zoom) sera affiché.
+
+    Fichier de configuration : src\contexts\homeExtent.json
+
+    Exemple :
+        {
+            "uri": "homeExtent",
+            "base": "_base",
+            "map": {
+                "view": {
+                "projection": "EPSG:3857",
+                "homeExtent": {
+                    "extent": [-9000000, 5790000,-7500000, 6770000],
+                    "center": [-72.069923, 48.672381],
+                    "zoom": 10
+                    }
+                }
+            }
+        }
+
+
 .. _igolayer:
 
 *****************************
@@ -1322,8 +1373,8 @@ Configuration des attributs champs source de donnée (sourceFields)
 ======================================================================
 
 | Une liste de nom d'attribut, de leur alias, valeurs permises et autres configurations.
-| ** Nécessaire pour utilisation des filtres attributaires avancés. Ce sont ces configurations qui définiront ce qui sera présenté à
-| l'utilisateur lors de l'utilisation des filtres avancés.
+| ** Nécessaire pour utilisation des filtres attributaires avancés et de l'outil d'édition. Ce sont ces configurations qui définiront ce qui sera
+| présenté à l'utilisateur lors de l'utilisation des filtres avancés et de la table d'édition.
 
 Exemples
 
@@ -1348,6 +1399,49 @@ Propriétés de l'objet sourceFields
        :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+.. _igosEditionObject:
+
+Configuration de l'édition d'une couche
+======================================================================
+
+| Une liste de configuration permettant l'utilisation de la table d'édition sur la couche.
+| ** Les sourceFields permettront de définir les champs à visualiser ainsi que les formats de saisies
+| et les validations attributaires.
+
+Exemples
+
+        .. code:: json
+
+            {
+                "enabled": true,
+                "baseUrl": "odrsi_vehicule_ssi",
+                "addUrl": "",
+                "deleteUrl": "id_vehicule=eq.",
+                "modifyUrl": "id_vehicule=eq.",
+                "geomType": "Point",
+                "addWithDraw": false,
+                "messages": [{ "odrsi_vehicule_ssi_unique_no_vehicule": "Le numéro de véhicule doit être unique pour la caserne." }]
+            }
+
+
+Propriétés de l'objet edition
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/edition.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+Propriétés de l'objet relations
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/relations.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
 
 ************************************
