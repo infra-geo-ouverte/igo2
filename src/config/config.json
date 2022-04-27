@@ -23,7 +23,7 @@
   "showSearchBar": true,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
-  "homeExtentButton": {
+  "kkhomeExtentButton": {
     "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
     "homeExtButtonCenter": [-71.938087, 48.446975],
     "homeExtButtonZoom" : 6
