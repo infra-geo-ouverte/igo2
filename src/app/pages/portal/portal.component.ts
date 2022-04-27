@@ -516,19 +516,19 @@ ${rtss.properties.distance} m`;
   }
 
   private initSW() {
-
     const urlBase = "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain";
     const dgts = [
       "Aeroportuaire", "DGT29", "DGT63-65", "DGT64-70",
       "DGT66", "DGT67", "DGT68", "DGT71", "DGT81-91", "DGT86", "DGT88", "DGT89", "DGT90"
     ];
-    const ds = ["rtss","gsq","pon","cs","mun"];
+    const ds = ["rtss", "gsq", "pon", "cs", "mun"];
     const dataList = [];
     dgts.map(dgt => {
       ds.map(d => dataList.push(`${urlBase}/${dgt}/${d}.geojson`));
     });
 
-    if ('serviceWorker' in navigator) {
+    const dataDownload = this.configService.getConfig('pwa.dataDownload');
+    if ('serviceWorker' in navigator && dataDownload) {
       let downloadMessage;
       let currentVersion;
       navigator.serviceWorker.ready.then((registration) => {

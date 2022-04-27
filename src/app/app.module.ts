@@ -1,5 +1,5 @@
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { APP_INITIALIZER, InjectionToken, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -7,7 +7,10 @@ import {
   IgoMessageModule,
   IgoGestureModule,
   RouteService,
-  LanguageService
+  LanguageService,
+  ConfigService,
+  ConfigOptions,
+  CONFIG_OPTIONS
 } from '@igo2/core';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 import { IgoAuthModule } from '@igo2/auth';
@@ -31,6 +34,19 @@ import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+export let CONFIG_LOADER = new InjectionToken<Promise<ConfigService>>('Config Loader');
+
+function configLoader(
+  configService: ConfigService,
+  configOptions: ConfigOptions,
+): Promise<unknown> {
+  const promiseOrTrue = configService.load(configOptions);
+  if (promiseOrTrue instanceof Promise) {
+    return promiseOrTrue;
+  }
+  return Promise.resolve();
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -51,6 +67,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       default: environment.igo,
       path: './config/config.json'
     }),
+    {
+      provide: CONFIG_LOADER,
+      useFactory: configLoader,
+      deps: [ConfigService, CONFIG_OPTIONS],
+    },
     RouteService,
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
@@ -61,7 +82,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     provideOsrmDirectionsSource(),
     provideOptionsApi(),
     provideCadastreSearchSource(),
-    {provide: APP_INITIALIZER, useFactory: appInitializerFactory, deps: [LanguageService, PwaService, Injector], multi: true},
+
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [CONFIG_LOADER, LanguageService, PwaService],
+      multi: true
+    },
     provideStyleListOptions({
       path: './assets/list-style.json'
     })
@@ -70,15 +97,18 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 })
 export class AppModule {}
 
-export function appInitializerFactory(languageService: LanguageService, pwaService: PwaService, injector: Injector) {
+function appInitializerFactory(
+  configLoader: Promise<unknown>,
+  languageService: LanguageService,
+  pwaService: PwaService
+) {
   return () => new Promise<any>((resolve: any) => {
-      languageService.translate.getTranslation(languageService.getLanguage()).subscribe(() => {
-        console.info(`Successfully initialized '${languageService.getLanguage()}' language.'`);
-        pwaService.initPwaPrompt();
-      }, err => {
-        console.error(`Problem with '${languageService.getLanguage()}' language initialization.'`);
-      }, () => {
-        resolve(null);
+    configLoader.then(() => {
+      const secondPromises = [languageService.translate.getTranslation(languageService.getLanguage())];
+      Promise.all(secondPromises).then(() => {
+        const thirdPromises = [pwaService.initPwaPrompt()];
+        Promise.all(thirdPromises).then(() => resolve());
       });
+    });
   });
 }
