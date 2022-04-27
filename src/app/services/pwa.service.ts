@@ -38,8 +38,8 @@ export class PwaService {
   }
   }
 
-  public async initPwaPrompt() {
-    const promotePWA = this.configService.getConfig('promotePWA');
+  public async initPwaPrompt(): Promise<any> {
+    const promotePWA = this.configService.getConfig('pwa.promote');
     if (promotePWA) {
       if (!this.platform.IOS) {
         window.addEventListener('beforeinstallprompt', (event: any) => {

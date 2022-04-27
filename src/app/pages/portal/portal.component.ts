@@ -483,7 +483,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private initSW() {
-    if ('serviceWorker' in navigator) {
+    const dataDownload = this.configService.getConfig('pwa.dataDownload');
+    if ('serviceWorker' in navigator && dataDownload) {
       let downloadMessage;
       navigator.serviceWorker.ready.then((registration) => {
         console.log('Service Worker Ready');
