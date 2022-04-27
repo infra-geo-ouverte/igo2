@@ -498,18 +498,17 @@ export class PortalComponent implements OnInit, OnDestroy {
           const chainage = rtss.properties.chainage;
           const thousand = Math.floor(chainage/1000);
           const units = this.padWithZero(chainage%1000,3);
-
-
-          console.log('rtss', rtss.properties.num_rts, route, tronc, sect, srte, chainage)
-
           this.infoContent = `${route}-${tronc}-${sect}-${srte}
-${thousand}+${units};
-${rtss.properties.distance}m`;
+${thousand}+${units}
+${rtss.properties.distance} m`;
         } else {
           this.infoContent = undefined;
         }
       });
 
+    if (this.storageService.get('favorite.context.uri')) {
+      this.toolbox.activateTool("map-rtss-proximity");
+    }
   }
 
   padWithZero(num, targetLength) {
@@ -518,79 +517,16 @@ ${rtss.properties.distance}m`;
 
   private initSW() {
 
-    const dataList = [
-      "data/dt/ab/cs.geojson",
-      "data/dt/ab/gsq.geojson",
-      "data/dt/ab/mun.geojson",
-      "data/dt/ab/ponceau.geojson",
-      "data/dt/ab/rtss.geojson",
-      "data/dt/bsl/cs.geojson",
-      "data/dt/bsl/gsq.geojson",
-      "data/dt/bsl/mun.geojson",
-      "data/dt/bsl/ponceau.geojson",
-      "data/dt/bsl/rtss.geojson",
-      "data/dt/ca/cs.geojson",
-      "data/dt/ca/gsq.geojson",
-      "data/dt/ca/mun.geojson",
-      "data/dt/ca/ponceau.geojson",
-      "data/dt/ca/rtss.geojson",
-      "data/dt/cdq/cs.geojson",
-      "data/dt/cdq/gsq.geojson",
-      "data/dt/cdq/mun.geojson",
-      "data/dt/cdq/ponceau.geojson",
-      "data/dt/cdq/rtss.geojson",
-      "data/dt/cn/cs.geojson",
-      "data/dt/cn/gsq.geojson",
-      "data/dt/cn/mun.geojson",
-      "data/dt/cn/ponceau.geojson",
-      "data/dt/cn/rtss.geojson",
-      "data/dt/cnat/cs.geojson",
-      "data/dt/cnat/gsq.geojson",
-      "data/dt/cnat/mun.geojson",
-      "data/dt/cnat/ponceau.geojson",
-      "data/dt/cnat/rtss.geojson",
-      "data/dt/dgprmm/cs.geojson",
-      "data/dt/dgprmm/gsq.geojson",
-      "data/dt/dgprmm/mun.geojson",
-      "data/dt/dgprmm/ponceau.geojson",
-      "data/dt/dgprmm/rtss.geojson",
-      "data/dt/estrie/cs.geojson",
-      "data/dt/estrie/gsq.geojson",
-      "data/dt/estrie/mun.geojson",
-      "data/dt/estrie/ponceau.geojson",
-      "data/dt/estrie/rtss.geojson",
-      "data/dt/gidlm/cs.geojson",
-      "data/dt/gidlm/gsq.geojson",
-      "data/dt/gidlm/mun.geojson",
-      "data/dt/gidlm/ponceau.geojson",
-      "data/dt/gidlm/rtss.geojson",
-      "data/dt/ll/cs.geojson",
-      "data/dt/ll/csmp.geojson",
-      "data/dt/ll/gsq.geojson",
-      "data/dt/ll/mun.geojson",
-      "data/dt/ll/ponceau.geojson",
-      "data/dt/ll/rtss.geojson",
-      "data/dt/mau/cs.geojson",
-      "data/dt/mau/gsq.geojson",
-      "data/dt/mau/mun.geojson",
-      "data/dt/mau/ponceau.geojson",
-      "data/dt/mau/rtss.geojson",
-      "data/dt/monte/cs.geojson",
-      "data/dt/monte/gsq.geojson",
-      "data/dt/monte/mun.geojson",
-      "data/dt/monte/ponceau.geojson",
-      "data/dt/monte/rtss.geojson",
-      "data/dt/ou/cs.geojson",
-      "data/dt/ou/gsq.geojson",
-      "data/dt/ou/mun.geojson",
-      "data/dt/ou/ponceau.geojson",
-      "data/dt/ou/rtss.geojson",
-      "data/dt/slsjc/cs.geojson",
-      "data/dt/slsjc/gsq.geojson",
-      "data/dt/slsjc/mun.geojson",
-      "data/dt/slsjc/ponceau.geojson",
-      "data/dt/slsjc/rtss.geojson"
+    const urlBase = "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain";
+    const dgts = [
+      "Aeroportuaire", "DGT29", "DGT63-65", "DGT64-70",
+      "DGT66", "DGT67", "DGT68", "DGT71", "DGT81-91", "DGT86", "DGT88", "DGT89", "DGT90"
     ];
+    const ds = ["rtss","gsq","pon","cs","mun"];
+    const dataList = [];
+    dgts.map(dgt => {
+      ds.map(d => dataList.push(`${urlBase}/${dgt}/${d}.geojson`));
+    });
 
     if ('serviceWorker' in navigator) {
       let downloadMessage;
@@ -608,7 +544,7 @@ ${rtss.properties.distance}m`;
               if (currentVersion !== cachedDataVersion) {
                 ((ngsw as any).assetGroups as any).map((assetGroup) => {
                   if (assetGroup.name === 'contexts') {
-                    if (assetGroup.name === 'data') {
+                    if (assetGroup.name === 'data') { // pas necessaire
                       hasDataInDataDir = assetGroup.urls.concat(assetGroup.files).length > 0;
                     }
                     const elemToDownload = assetGroup.urls.concat(assetGroup.files).filter(f => f);

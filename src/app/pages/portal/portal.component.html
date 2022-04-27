@@ -53,6 +53,7 @@
       igoMapContext
       igoLayerContext
       igoDropGeoFile
+      [allowedExtensions]="['json', 'geojson', 'kml', 'gpx']"
       (query)="onMapQuery($event)"
       [map]="map"
       [igoContextMenu]=contextMenu
@@ -69,6 +70,7 @@
       </igo-zoom-button>
       <igo-swipe-control [map]="map"></igo-swipe-control>
       <igo-map-center [map]="map"></igo-map-center>
+      <igo-wake-lock-button [map]="map" color="primary"></igo-wake-lock-button>
       <igo-offline-button [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
