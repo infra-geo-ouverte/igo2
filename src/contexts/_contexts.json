@@ -1,0 +1,58 @@
+[  
+  {
+    "uri": "_default",
+    "title": "De base (sans données)"
+  },
+  {
+    "uri": "DGT81-91",
+    "title": "Abitibi-Témiscamingue"
+  },
+  {
+    "uri": "DGT63-65",
+    "title": "Bas-Saint-Laurent–Gaspésie–Îles-de-la-Madeleine"
+  },
+  {
+    "uri": "DGT71",
+    "title": "Capitale-Nationale"
+  },
+  {
+    "uri": "DGT66",
+    "title": "Chaudière-Appalaches"
+  },
+  {
+    "uri": "DGT67",
+    "title": "Côte-Nord"
+  },
+  {
+    "uri": "DGT90",
+    "title": "Estrie"
+  },
+  {
+    "uri": "DGT88",
+    "title": "Laurentides–Lanaudière"
+  },
+  {
+    "uri": "DGT64-70",
+    "title": "Mauricie–Centre-du-Québec"
+  },
+  {
+    "uri": "DGT86",
+    "title": "Montérégie"
+  },
+  {
+    "uri": "DGT89",
+    "title": "Outaouais"
+  },
+  {
+    "uri": "DGT68",
+    "title": "Saguenay–Lac-Saint-Jean–Chibougamau"
+  },
+  {
+    "uri": "DGT29",
+    "title": "Principale de la région métropolitaine de Montréal"
+  },
+  {
+    "uri": "aeroportuaire",
+    "title": "Aéroportuaire"
+  }
+]

@@ -1,0 +1,245 @@
+{
+  "uri": "DGT29",
+  "base": "_base",
+  "messages": [
+    {
+      "text": "La donnée présente sur cette carte est valide en date du 2022-04-14",
+      "type": "info",
+      "options": {
+        "timeOut": 10000
+      }
+    }
+  ],
+  "layers": [
+        {
+      "title": "Noir",
+      "id": "noir",
+      "baseLayer": true,
+      "visible": true,
+      "sourceOptions": {
+        "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk2A8AAMUAwUPJ2C4AAAAASUVORK5CYII=",
+        "pathOffline": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk2A8AAMUAwUPJ2C4AAAAASUVORK5CYII=",
+        "type": "xyz"
+      }
+    },
+
+    {
+      "id": "carte_gouv_qc",
+      "title": "Carte Topo",
+      "visible": false,
+      "baseLayer": true,
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz",
+        "maxZoom": 17,
+        "crossOrigin": "anonymous"
+      }
+    },
+    {
+      "title": "Municipalité",
+      "id": "mun",
+      "maxResolution": 300,
+      "workspace": {
+        "enabled": false
+      },
+
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/mun.png"
+      },
+      "sourceOptions": {
+        "download": {
+          "allowedFormats": ["GeoJSON"]
+        },
+        "type": "vector",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/mun.geojson",
+        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/mun.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "Mun: ${MUS_NM_MUN}",
+        "sourceFields": [
+          { "alias": "Mun:", "name": "MUS_NM_MUN"}
+      ]
+
+      },
+      "styleByAttribute": {
+        "type": "regular",
+        "attribute": "",
+        "data": [""],
+        "fill": ["rgba(255,255,255,0)"],
+        "stroke": ["rgba(53,99,51)"],
+        "width": [2]
+      }
+    },
+    {
+      "title": "Centre de services",
+      "id": "cs",
+      "workspace": {
+        "enabled": false
+      },
+
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/cs.png"
+      },
+      "sourceOptions": {
+        "download": {
+          "allowedFormats": ["GeoJSON"]
+        },
+        "type": "vector",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/cs.geojson",
+        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/cs.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "nom_unite",
+        "sourceFields": [
+          { "alias": "Nom", "name": "nom_unite"},
+          { "alias": "Adresse", "name": "val_adrs_u"},
+          { "alias": "Code", "name": "cod_niv_hi" }
+      ]
+
+      },
+      "style": {
+        "stroke": { 
+          "color": "rgba(170,95,255)",                   
+          "width": 3
+        },          
+        "fill": { 
+          "color": "rgba(255,255,255,0)"
+        }
+      }
+    },
+    {
+      "title": "Réseau routier - RTSS",
+      "id": "rtssCalculCh",
+      "maxResolution": 80,
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/rtss.png"
+      },
+      "sourceOptions": {
+        "download": {
+          "allowedFormats": ["GeoJSON"]
+        },
+        "type": "vector",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/rtss.geojson",
+        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/rtss.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "${num_route}-${num_tronc}-${num_sectn}-${cod_sous_r}${seq_sous_r}${cod_sous_c}${cod_cote_c}",
+        "sourceFields": [
+          { "alias": "RTSS", "name": "num_rts" },
+          { "alias": "Longueur", "name": "val_longr_" },
+          { "alias": "Classe fonctionnelle", "name": "des_clasf_" },
+          { "alias": "Nom de la route", "name": "nom_sous_r" },
+          { "alias": "Nom organisme gestion", "name": "nom_orgns_" },
+          { "alias": "Nom organisme entretien", "name": "nom_orgn00" },
+          { "alias": "# route:", "name": "num_route" }
+      ]
+
+      },
+      "styleByAttribute": {
+        "type": "regular",
+        "attribute": "des_clasf_",
+        "data": ["Autoroute", "Nationale", "Régionale","Collectrice","Accès ressources","Ressources et aux localités isolées", "Local 1", "Local 2", "Local 3"],
+        "stroke": ["rgba(255,216,12)","rgba(240,0,0)", "rgba(231,100,29)", "rgba(231,100,29)", "rgba(210,210,210)", "rgba(210,210,210)", "rgba(95,93,92)", "rgba(95,93,92)", "rgba(95,93,92)"],
+        "width": [5,4,4,3,2,2,2,2,2],
+        "label" : ""
+        }
+    },
+    {
+      "title": "Ponceau",
+      "id": "m012",
+      "maxResolution": 40,
+
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/ponceau.png"
+      },
+      "sourceOptions": {
+        "download": {
+          "allowedFormats": ["GeoJSON"]
+        },
+        "type": "vector",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/pon.geojson",
+        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/pon.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "Ponceau: ${ide_drang_}",
+        "sourceFields": [
+          { "alias": "Identifiant IIT", "name": "ide_drang_" },
+          { "alias": "Type", "name": "des_long_t" },
+          { "alias": "Sous-type", "name": "des_long_s" },
+          { "alias": "Longueur (m)", "name": "val_mesr" },
+          { "alias": "Largeur/diamètre (mm)", "name": "val_larg_1" },
+          { "alias": "Hauteur (mm)", "name": "val_hautr" },
+          { "alias": "Année construction", "name": "val_annee" },
+          { "alias": "Année réhabilitation", "name": "val_anne_1" }
+      ]
+      },
+      "style": {
+        "stroke": { 
+          "color": "rgba(0,0,255)",
+          "width": 3
+        }
+      }
+    },
+    {
+      "title": "GSQ",
+      "id": "gsq",
+      "maxResolution": 40,
+
+      "legendOptions": {
+        "collapsed": false,
+        "display": true,
+        "url": "assets/images/legends/gsq.png"
+      },
+      "sourceOptions": {
+        "download": {
+          "allowedFormats": ["GeoJSON"]
+        },
+        "type": "vector",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/gsq.geojson",
+        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/gsq.geojson",
+        "queryable": true,
+        "queryFormat": "geojson",
+        "queryTitle": "Structure: ${num_dossr}",
+        "sourceFields": [
+          { "alias": "Numéro de dossier", "name": "num_dossr" },
+          { "alias": "Nom de l'obstacle", "name": "nom_obstc" },
+          { "alias": "Année de construction", "name": "val_annee"},
+          { "alias": "Type de structure", "name": "code_des_t"}
+      ]
+
+      },
+      "styleByAttribute": {
+        "attribute": "",
+        "data": [""],
+        "fill": ["rgba(0,0,0)"],
+        "icon": ["./assets/images/styles/square.svg"],
+        "scale": [0.5]
+        }
+    }
+    
+  ],
+  "toolbar": [
+    "searchResults",
+    "contextManager",
+    "mapTools",
+    "map-rtss-proximity","map-proximity",
+    "measurer",
+    "draw",
+    "directions",
+    "importExport",
+    "print",
+    "shareMap",
+    "about",
+    "advancedMap"
+  ]
+}

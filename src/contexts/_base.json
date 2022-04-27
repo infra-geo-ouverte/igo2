@@ -1,0 +1,197 @@
+{
+  "map": {
+    "view": {
+      "projection": "EPSG:3857",
+      "center": [-71.938087, 48.446975],
+      "zoom": 6,
+      "maxZoom": 19,
+      "maxZoomOnExtent": 17,
+      "geolocate": true,
+      "alwaysTracking": true
+    }
+  },
+  "messages": [
+    {
+      "title": "Avertissement",
+      "text": "L'utilisation des fonds cartographique 'Imagerie et 'Carte Topo' pourrait consommer des données sur votre forfait cellulaire. Utilisez les fonds 'Noir' ou 'Aucun' pour éviter d'utiliser votre forfait.",
+      "type": "info",
+      "options": {
+        "timeOut": 25000
+      }
+    }
+  ],
+  "layers": [
+    {
+      "title": "Imagerie",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz",
+        "maxZoom": 19,
+        "crossOrigin": "anonymous"
+      }
+    },
+
+
+    {
+      "title": "Aucun",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
+        "pathOffline": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
+        "type": "xyz"
+      }
+    },
+    {
+      "title": "Noir",
+      "id": "noir",
+      "baseLayer": true,
+      "visible": false,
+      "sourceOptions": {
+        "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk2A8AAMUAwUPJ2C4AAAAASUVORK5CYII=",
+        "pathOffline": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk2A8AAMUAwUPJ2C4AAAAASUVORK5CYII=",
+        "type": "xyz"
+      }
+    },
+
+    {
+      "id": "carte_gouv_qc",
+      "title": "Carte Topo",
+      "visible": true,
+      "baseLayer": true,
+      "sourceOptions": {
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/carte_gouv_qc_ro@EPSG_3857/{z}/{x}/{-y}.png",
+        "attributions": "© <a href='http://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+        "type": "xyz",
+        "maxZoom": 17,
+        "crossOrigin": "anonymous"
+      }
+    }
+  ],
+  "toolbar": [
+    "searchResults",
+    "contextManager",
+    "measurer",
+    "draw",
+    "directions",
+    "print",
+    "shareMap",
+    "about",
+    "advancedMap"
+  ],
+  "tools": [    
+    {
+      "name": "map-rtss-proximity",
+      "title": "Info RTSS"
+    },
+    {
+      "name": "map-proximity"
+    },
+    {
+      "name": "advancedMap"
+    },
+    {
+      "name": "searchResults"
+    },
+    {
+      "name": "contextManager",
+      "title": "Directions générales territoriales",
+      "options": {
+        "toolToOpenOnContextChange": "map-rtss-proximity"
+      }
+    },
+    {
+      "name": "about",
+      "options": {
+          "html": "<img src='https://www.transports.gouv.qc.ca/ImagesCommunesDTI/LogoMinistereGrand.gif'> <br> <br>La mission du ministère des Transports est d’assurer, sur tout le territoire, la mobilité durable des personnes et des marchandises par des systèmes de transport efficaces et sécuritaires qui contribuent au développement du Québec. <br><hr> <h3>Nous joindre:</h3><a href='mailto:geomatique@transports.gouv.qc.ca'>geomatique@transports.gouv.qc.ca</a><br><a href='https://www.donneesquebec.ca/recherche/fr/organization/mtq' target='_blank'>Transport Québec sur Données Québec</a>"
+      }
+    },
+    {
+      "name": "mapTools",
+      "options": {
+        "selectedTabAtOpening": "",
+        "allowShowAllLegends": true,
+        "layerAdditionAllowed": true,
+        "toggleLegendOnVisibilityChange": false,
+        "updateLegendOnResolutionChange": false,
+        "layerListControls": {
+          "excludeBaseLayers": true
+        }
+      }
+    },
+    {
+      "name": "shareMap"
+    },
+    {
+      "name": "measurer"
+    },
+    {
+      "name": "draw"
+    },
+    {
+      "name": "directions"
+    },
+    {
+      "name": "catalog",
+      "options": {
+        "addCatalogAllowed": true,
+        "predefinedCatalogs": [
+          {
+            "externalProvider": false,
+            "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq"
+          }
+        ]
+      }
+    },
+    {
+      "name": "catalogBrowser"
+    },
+    {
+      "name": "spatialFilter"
+    },
+    {
+      "name": "timeFilter"
+    },
+    {
+      "name": "ogcFilter"
+    },
+    {
+      "name": "activeTimeFilter"
+    },
+    {
+      "name": "activeOgcFilter"
+    },
+    {
+      "name": "importExport",
+      "options": {
+        "selectFirstProj": false,
+        "projectionsLimitations": {
+          "projFromConfig": true,
+          "nad83": true,
+          "wgs84": true,
+          "webMercator": true,
+          "utm": true,
+          "mtm": true,
+          "utmZone": {
+            "minZone": 17,
+            "maxZone": 21
+          },
+          "mtmZone": {
+            "minZone": 3,
+            "maxZone": 10
+          }
+        },
+        "importExportType": "layer",
+        "importExportShowBothType": false
+      }
+    },
+    {
+      "name": "print"
+    }
+  ]
+}
