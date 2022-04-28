@@ -25,6 +25,6 @@
     }
   },
   "welcomeWindow": {
-    "html": "<h1>Welcome to {{title}} </h1><h2>{{description}}</h2><h3>Start by selecting the menu &#9776;</h3><h3> Continue by selecting a DGT in &#x2605;</h3><br>WARNING: Using the 'Imagery' and 'Topo Map' map backgrounds could consume data on your cellular plan. Use the 'Black' or 'None' backgrounds to avoid to use your plan.<br><br>Version {{version}}"
+    "html": "<h1>Welcome to {{title}} </h1><h2>{{description}}</h2><h3>Start by selecting the menu &#9776;</h3><h3> Continue by selecting a DGT in &#x2605;</h3><h3>For more information, please see the <a href='./assets/SIGO_Terrain_Guide.pdf' target='_blank'>user guide </a>.<br><br>Version {{version}}"
   }
 }
