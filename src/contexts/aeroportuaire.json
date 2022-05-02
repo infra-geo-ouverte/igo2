@@ -167,7 +167,7 @@
         "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/pon.geojson",
         "queryable": true,
         "queryFormat": "geojson",
-        "queryTitle": "Ponceau: ${ide_drang_}",
+        "queryTitle": "ide_drang_",
         "sourceFields": [
           { "alias": "Identifiant IIT", "name": "ide_drang_" },
           { "alias": "Type", "name": "des_long_t" },
