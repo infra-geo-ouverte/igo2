@@ -750,6 +750,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (context === undefined) {
       return;
     }
+    if (this.workspace && !this.workspace.entityStore.empty) {
+      this.workspace.entityStore.clear();
+    }
+    
     if (!this.queryState.store.empty) {
       this.queryState.store.softClear();
     }
