@@ -1,36 +1,36 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 **type*** ,String ,,wms,wms
-**url*** ,,"| L'URL du service WMS utilisé
-| SANS les paramètres d'appels
-| WMS. L'application se charge
-| de compléter les paramètres
-| envoyés au serveur (KVP). ",,
-optionsFromCapabilities ,Boolean,Paramètre pour récupérer des informations du service. ,true | false,false
-**params*** ,Objet{},"| Paramètres WMS qui seront fait
-| aux serveurs WMS pour les divers
-| type d'appels WMS
-| (GetMap, GetLegendGraphics, ...). ",Référez-vous aux paramètres WMS ici-bas. ,
-optionsFromApi ,Boolean,"| Paramètre pour récupérer des informations supplémentaires
-| par un service d'options de couches.. ",true | false,false
-refreshIntervalSec ,Number,"| Nombre de secondes entre chaque rafraichissement automatique
-| de la source de données. Ainsi, aucun déplacement de la carte
-| n'est nécessaire pour rafraichir la donnée. ",en secondes ,Null si non définit 
-contentDependentLegend ,Boolean ,"| Pour Mapserver et Geoserver, il est possible de retourner
-| la légende WMS du contenu de la carte et non pas toute la
-| légende de la couche. Exemple: Si ce paramètre est définit
-| à true et que vous zoomer sur un secteur dans lequel il y
-| seulement 1 classe de symbologie, la légende retournée sera
-| composée d'une seule couleur. Si vous zoomez a l'échelle
-| provinciale et que vous voyez tous les classes de données,
-| la légende retournée sera composée de toutes les classes de
-| la couche.
-| IMPORTANT: Ne tient pas compte des filtres OGC appliqués. ",true | false,false
-queryable ,Boolean,Définit si la couche d'information est interrogeable par clic ou non ,true | false,true
+**url*** ,,"| L'URL du service WMS utilisé
+| SANS les paramètres d'appels
+| WMS. L'application se charge
+| de compléter les paramètres
+| envoyés au serveur (KVP). ",,
+optionsFromCapabilities ,Boolean,Paramètre pour récupérer des informations du service. ,true | false,false
+**params*** ,Objet{},"| Paramètres WMS qui seront fait
+| aux serveurs WMS pour les divers
+| type d'appels WMS
+| (GetMap, GetLegendGraphics, ...). ",Référez-vous aux paramètres WMS ici-bas. ,
+optionsFromApi ,Boolean,"| Paramètre pour récupérer des informations supplémentaires
+| par un service d'options de couches.. ",true | false,false
+refreshIntervalSec ,Number,"| Nombre de secondes entre chaque rafraichissement automatique
+| de la source de données. Ainsi, aucun déplacement de la carte
+| n'est nécessaire pour rafraichir la donnée. ",en secondes ,Null si non définit 
+contentDependentLegend ,Boolean ,"| Pour Mapserver et Geoserver, il est possible de retourner
+| la légende WMS du contenu de la carte et non pas toute la
+| légende de la couche. Exemple: Si ce paramètre est définit
+| à true et que vous zoomer sur un secteur dans lequel il y
+| seulement 1 classe de symbologie, la légende retournée sera
+| composée d'une seule couleur. Si vous zoomez a l'échelle
+| provinciale et que vous voyez tous les classes de données,
+| la légende retournée sera composée de toutes les classes de
+| la couche.
+| IMPORTANT: Ne tient pas compte des filtres OGC appliqués. ",true | false,false
+queryable ,Boolean,Définit si la couche d'information est interrogeable par clic ou non ,true | false,true
 queryLayerFeatures ,Boolean ,Définit si les entitées vectorielles de la couche seront interrogées ,true | false, true
 queryUrl ,String , "| Paramètres possibles dans l'url:
 | {ymin}, {xmax}, {ymax}, {xmin}, {x}, {y}, {resolution}, {srid}", "| Exemple:
 | ""queryUrl"": ""https://mapserver.com/test?x={x}&y={y}"" ", Null si non défini
-queryFormat ,String ,Format d'interrogation de la couche. ,"| - gml2
+queryFormat ,String ,Format d'interrogation de la couche. ,"| - gml2
 | (application/vnd.ogc.gml) 
 | - gml3
 | (application/vnd.ogc.gml/3.1.1)
@@ -46,11 +46,11 @@ queryFormat ,String ,Format d'interrogation de la couche. ,"| - gml2
 | - htmlgml2
 | (text/html + application/vnd.ogc.gml)
 | géométrie fournie par un second appel au format gml2",gml2
-queryTitle ,String ,"| Lorsque la couche interrogée est en
-| gml2, gml3, json, geojson, esrijson,
-| cette propriété correspond au nom du
-| champ retourné  qui sera utilisé dans
-| le résultat de clic sur la carte comme
+queryTitle ,String ,"| Lorsque la couche interrogée est en
+| gml2, gml3, json, geojson, esrijson,
+| cette propriété correspond au nom du
+| champ retourné  qui sera utilisé dans
+| le résultat de clic sur la carte comme
 | titre.
 | Si cette propriété est absente, le titre
 | de la couche est utilisé comme titre
@@ -61,6 +61,7 @@ queryTitle ,String ,"| Lorsque la couche interrogée est en
 |    - ""queryTitle"": ""Description ${desclocal}"",
 | Exemple plusieurs champs:
 |    - ""queryTitle"": ""${nomroute} ${desclocal} "", ",
+queryFormatAsWms , Boolean , Pour couche WMS-WFS, indique si le query à résolution WFS sera fait en format WMS , false | true, false
 timeFilterable ,Boolean,Indique si oui/non la couche est filtrable temporellement ,true | false,false
 timeFilter ,Object ,Configuration du filtre temporel. ,Référez-vous à : `Configuration filtre temporel WMS-T (timeFilter)`_  ,
 ogcFilters ,Object ,Configuration des filtres attributaires(OGC) appliqués sur la couche. ,Référez-vous à : :ref:`ogcFilters <igoOgcFilterObject>` . ,

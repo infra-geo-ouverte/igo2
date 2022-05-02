@@ -46,5 +46,9 @@
   {
     "uri": "legends",
     "title": "Exemples de légendes"
+  },
+  {
+    "uri": "homeExtent",
+    "title": "Étendue de la carte(Home Extent)"
   }
 ]

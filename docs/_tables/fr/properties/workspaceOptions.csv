@@ -1,5 +1,5 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
-enabled ,Boolean ,Définir si la couche aura ou non une table d'attributs. ,true | false ,"| Pour les sources vectorielles, true par défault.
+enabled ,Boolean ,Définir si la couche aura ou non une table d'attributs. ,true | false ,"| Pour les sources vectorielles, true par défault.
 | Pour les wms avec des propriétés
 | WFS associées, false par défault"
 minResolution ,Number ,"| Indique la résolution minimale (grande échelle, très zoomé)
@@ -8,3 +8,14 @@ minResolution ,Number ,"| Indique la résolution minimale (grande échelle,
 maxResolution ,Number ,"| Indique la résolution maximale (petite échelle,peu zoomé)
 | à laquelle la table d'attribut pourra faire apparaître des
 | enregistrements. ",0 à Infinity ou absent ,
+queryOptions , Object{} , "mapQueryOnOpenTab: Boolean. 
+| Indique si les info seront présentés sur clic dans la map lorsque la table attribut est ouverte
+| tabQuery: Boolean.
+| Indique si les info seront présentés sur clic dans la table d'attribut", True, True ,
+pageSize ,Number,"| Indique le nombre d'entités maximum à faire apparaître dans
+| une seule page de la table d'attribut.",1 à [...] ou absent
+| (par défaut = 50) ,
+pageSizeOptions ,Number[],"| Indique les possibilités de changement du nombre
+| d'entités pouvant être affichés sur une seule page (pageSize)."
+| ,0 à Infinity ou absent 
+| (par défaut = 1, 5, 10, 20, 50, 100, 500),
