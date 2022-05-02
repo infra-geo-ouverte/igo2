@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
-import { AnalyticsService, ConfigService, LanguageService } from '@igo2/core';
+import { ConfigService, LanguageService } from '@igo2/core';
 import { SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -12,7 +12,6 @@ export class PwaService {
   promptEvent: any;
   constructor(
     private platform: Platform,
-    private analyticsService: AnalyticsService,
     public updates: SwUpdate,
     public languageService: LanguageService,
     private configService: ConfigService
@@ -58,7 +57,6 @@ export class PwaService {
   private async showPrompt() {
     this.promptEvent.prompt();
     const outcome = await this.promptEvent.userChoice;
-    this.analyticsService.trackEvent('app', 'installPwa', outcome.outcome);
     this.promptEvent = undefined;
   }
 }
