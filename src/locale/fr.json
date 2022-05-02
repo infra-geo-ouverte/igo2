@@ -226,7 +226,7 @@
     }
   },
   "pwa": {
-    "new-version-title": "Une nouvelle version de l'application est disponible",
+    "new-version-title": "Une nouvelle version de l'application est disponible. ",
     "new-version": "Voulez-vous recharger l'application?",
     "data-download-start": "Téléchargement des données pour utilisation hors-ligne. Veuillez ne pas quitter.",
     "data-download-completed": "Téléchargement des données hors-ligne terminé"
