@@ -18,7 +18,7 @@
   {
     "uri": "ogcFilters",
     "title": "Filtre attributaire (Attribute filter)"
-  },  
+  },
   {
     "uri": "layerSync",
     "title": "Synchronisation de layers"
@@ -43,6 +43,14 @@
     "uri": "variousStyles",
     "title": "Divers styles à titre d'exemple"
   },
+  {
+    "uri": "legends",
+    "title": "Exemples de légendes"
+  },
+  {
+    "uri": "homeExtent",
+    "title": "Étendue de la carte(Home Extent)"
+  }, 
   {
     "uri": "geolocation",
     "title": "Geolocation"

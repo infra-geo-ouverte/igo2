@@ -1,0 +1,13 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**name*** ,String,Nom de l'attribut ,,
+enabled ,Boolean ,Activer ou non la table d'édition sur la couche. ,true/false ,false
+baseUrl ,String ,Url de base du service à appeler.
+addUrl ,String ,Url d'appel pour l'ajout d'une entité.
+deleteUrl ,String ,Url d'appel pour la suppression d'une entité (par le champ primaire).
+modifyUrl ,String ,Url d'appel pour la modification d'une entité(par le champ primaire).
+geomType ,String ,Géométrie de la couche (Point/Ligne/Polygone).
+addWithDraw ,Boolean ,Activer ou non le dession lors de l'ajout de l'entité. ,true/false ,false
+messages ,Object[] ,Personnaliser les messages affichés à l'utilisateur.
+addHeaders ,Object ,Personnaliser les headers de l'appel fait à l'ajout
+modifyProtocole ,String ,Personnaliser le protocole d'appel fait la modification ,,patch
+modifyHeaders ,Object ,Personnaliser les headers de l'appel fait à la modification

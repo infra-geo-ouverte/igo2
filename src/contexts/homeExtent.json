@@ -1,0 +1,13 @@
+{
+  "uri": "homeExtent",
+  "base": "_base",
+  "map": {
+    "view": {
+      "projection": "EPSG:3857",
+      "homeExtent": {
+        "center": [-68.79600,51.32676],
+        "zoom": 10
+      }
+    }
+  }
+}
