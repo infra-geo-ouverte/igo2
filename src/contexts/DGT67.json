@@ -171,7 +171,7 @@
         "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT67/pon.geojson",
         "queryable": true,
         "queryFormat": "geojson",
-        "queryTitle": "ide_drang_",
+        "queryTitle": "Élément de drainage: ${ide_drang_}",
         "sourceFields": [
           { "alias": "Identifiant IIT", "name": "ide_drang_" },
           { "alias": "Type", "name": "des_long_t" },
