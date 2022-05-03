@@ -27,7 +27,7 @@
               "enabled": true,
               "editable": true,
               "allowedOperatorsType": "basic",
-            
+
               "filters":
               {
                 "operator": "During",
@@ -36,11 +36,11 @@
                 "end": "2020",
                 "restrictedToStep": false,
                 "calendarModeYear": true
-              } 
+              }
           },
           "stepDate": "P1Y"
-      }    
-    }, 
+      }
+    },
     {
       "id":"1",
       "title": "Filtre - Événements (WFS avec filtre avancé)",
@@ -394,27 +394,6 @@
               }
             ]
           },
-          "autocomplete": {
-            "order": 4,
-            "groups": [
-              {"title": "Autocomplete","name": "1","ids": ["id1","id2"]}
-            ],
-            "bundles": [
-              {
-                "id": "id1",
-                "logical": "Or",
-                "unfiltered": true,
-                "title": "test-dom",
-                "domSelectors": [
-                  {
-                    "name": "test-dom",
-                    "operator": "PropertyIsEqualTo",
-                    "propertyName": "typeAppareil"
-                  }
-                ]
-              }
-            ]
-          },
           "allowedOperatorsType": "basic"
         },
         "paramsWFS": {
@@ -498,7 +477,7 @@
         "stepDate": "P1D"
       }
     }
-   
+
   ],
   "toolbar": [
     "searchResults",
