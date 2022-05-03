@@ -16,8 +16,8 @@
   "showMenuButton": false,
   "showSearchBar": false,
   "simpleFilters": [
-    {"filter": "municipalites", "description": "Municipalité", "multiple": false},
-    {"filter": "mrc", "description": "MRC", "multiple": true}
+    {"type": "municipalites", "description": "Municipalité"},
+    {"type": "mrc", "description": "MRC"}
   ],
   "simpleFeatureList": {
     "layerId": "dq2",
