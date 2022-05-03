@@ -394,6 +394,27 @@
               }
             ]
           },
+          "autocomplete": {
+            "order": 4,
+            "groups": [
+              {"title": "Autocomplete","name": "1","ids": ["id1","id2"]}
+            ],
+            "bundles": [
+              {
+                "id": "id1",
+                "logical": "Or",
+                "unfiltered": true,
+                "title": "test-dom",
+                "domSelectors": [
+                  {
+                    "name": "test-dom",
+                    "operator": "PropertyIsEqualTo",
+                    "propertyName": "typeAppareil"
+                  }
+                ]
+              }
+            ]
+          },
           "allowedOperatorsType": "basic"
         },
         "paramsWFS": {
