@@ -4,6 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 import { AuthOptions } from '@igo2/auth';
+import { DOMOptions } from '@igo2/common';
 import { ContextServiceOptions } from '@igo2/context';
 import { LanguageOptions } from '@igo2/core';
 import {
@@ -29,6 +30,7 @@ interface Environment {
     projections?: Projection[];
     interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
     depot?: { url: string; trainingGuides?: string[]; };
+    dom?: DOMOptions[];
     queryOverlayStyle?: {
       base?: CommonVectorStyleOptions,
       selection?: CommonVectorStyleOptions,
@@ -211,6 +213,21 @@ export const environment: Environment = {
     depot: {
       url: '/apis/depot'
     },
+    // dom: [
+    //   {
+    //     name: 'test-dom',
+    //     value: [
+    //       {
+    //         id: "Radar photo fixe",
+    //         value: "Radar photo fixe"
+    //       },
+    //       {
+    //         id: "Radar photo fixe",
+    //         value: "Radar photo mobile"
+    //       }
+    //     ]
+    //   }
+    // ],
     language: {
       prefix: './locale/'
     },
