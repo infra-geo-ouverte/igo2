@@ -233,7 +233,7 @@ export const environment: Environment = {
     //         value: "Radar photo fixe"
     //       },
     //       {
-    //         id: "Radar photo fixe",
+    //         id: "Radar photo mobile",
     //         value: "Radar photo mobile"
     //       }
     //     ]
