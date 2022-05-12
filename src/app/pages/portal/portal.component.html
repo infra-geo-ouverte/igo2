@@ -153,6 +153,7 @@
         collapsibleButton
         tooltip-position="below"
         matTooltipShowDelay="500"
+        [disabled]="workspace.layer.options.sourceOptions.edition.addButton === false ? true : false"
         [matTooltip]="('workspace.addFeature') | translate"
         (click)="addFeature(workspace)">
         <mat-icon
