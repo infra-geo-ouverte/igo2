@@ -16,8 +16,9 @@
   "showMenuButton": false,
   "showSearchBar": false,
   "simpleFilters": [
-    {"type": "municipalites", "description": "Municipalité"},
-    {"type": "mrc", "description": "MRC"}
+    {"type": "regadmin", "description": "Région administrative"},
+    {"type": "mrc", "description": "MRC"},
+    {"type": "municipalites", "description": "Municipalité"}
   ],
   "simpleFeatureList": {
     "layerId": "dq2",

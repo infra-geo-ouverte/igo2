@@ -25,6 +25,7 @@
 
 app-root {
   width: 50%;
-  height: 50%;
+  height: 100%;
   position: absolute;
+  overflow-y: auto;
 }
