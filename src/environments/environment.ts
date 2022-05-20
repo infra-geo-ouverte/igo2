@@ -125,7 +125,8 @@ export const environment: Environment = {
               version: '1.0.0',
               forcedProperties: [{
                 layerName: 'BDTQ-20K_Allegee',
-                title: 'Nouveau nom pour cette couche WMTS'
+                title: 'Nouveau nom pour cette couche WMTS',
+                newMetadataUrlAll: 'https://www.donneesquebec.ca/'
               }]
             },
             {
@@ -134,7 +135,8 @@ export const environment: Environment = {
               type: 'wms',
               forcedProperties: [{
                 layerName: 'lieuhabite',
-                title: 'Nouveau nom pour cette couche WMS'
+                title: 'Nouveau nom pour cette couche WMS',
+                newMetadataAbstract: "Ceci est un nouvel abstract"
               }]
             },
             {
@@ -144,7 +146,8 @@ export const environment: Environment = {
               type: 'arcgisrest',
               forcedProperties: [{
                 layerName: 'Sediment substrate / Substrat sédimentaire',
-                title: 'Nouveau nom pour cette couche ArcGIS REST'
+                title: 'Nouveau nom pour cette couche ArcGIS REST',
+                newMetadataUrl: "https://www.donneesquebec.ca/"
               }]
             }
           ]
