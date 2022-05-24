@@ -124,9 +124,9 @@ export const environment: Environment = {
               matrixSet: 'EPSG_3857',
               version: '1.0.0',
               forcedProperties: [{
+                newMetadataUrlAll: 'https://www.donneesquebec.ca/',
                 layerName: 'BDTQ-20K_Allegee',
                 title: 'Nouveau nom pour cette couche WMTS',
-                newMetadataUrlAll: 'https://www.donneesquebec.ca/'
               }]
             },
             {
