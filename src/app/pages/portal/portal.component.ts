@@ -113,6 +113,7 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
+  public simpleFiltersValue$: BehaviorSubject<object> = new BehaviorSubject(undefined);
   public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(undefined);
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public clickedEntities$: BehaviorSubject<Feature[]> = new BehaviorSubject(undefined);
@@ -1491,5 +1492,9 @@ export class PortalComponent implements OnInit, OnDestroy {
         });
       }
     }
+  }
+
+  onFilterSelection(event: object) {
+    this.simpleFiltersValue$.next(event);
   }
 }

@@ -1,5 +1,5 @@
-<igo-simple-filters *ngIf="showSimpleFilters">
-
+<igo-simple-filters *ngIf="showSimpleFilters"
+  (filterSelection)="onFilterSelection($event)">
 </igo-simple-filters>
 
 <mat-sidenav-container class="app-main-container">
@@ -248,5 +248,6 @@
 <igo-simple-feature-list *ngIf="showSimpleFeatureList && selectedWorkspace$ | async as workspace"
   [entityStore]="workspace.entityStore"
   [clickedEntities]="clickedEntities$ | async"
+  [simpleFiltersValue]="simpleFiltersValue$ | async"
   (listSelection)="entitySelectChange($event)">
 </igo-simple-feature-list>
