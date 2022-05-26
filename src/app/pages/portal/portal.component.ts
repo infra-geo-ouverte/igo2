@@ -113,13 +113,11 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
-  public simpleFiltersValue$: BehaviorSubject<object> = new BehaviorSubject(undefined);
   public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(undefined);
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public clickedEntities$: BehaviorSubject<Feature[]> = new BehaviorSubject(undefined);
   public minSearchTermLength = 2;
   public hasExpansionPanel: boolean = false;
-  public showSimpleFilters: boolean = false;
   public showSimpleFeatureList: boolean = false;
   public hasGeolocateButton: boolean = true;
   public showMenuButton: boolean = true;
@@ -326,7 +324,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
-    this.showSimpleFilters = this.configService.getConfig('simpleFilters') === undefined ? false : true;
     this.showSimpleFeatureList = this.configService.getConfig('simpleFeatureList') === undefined ? false : true;
     this.hasHomeExtentButton =
       this.configService.getConfig('homeExtentButton') === undefined ? false : true;
@@ -1492,9 +1489,5 @@ export class PortalComponent implements OnInit, OnDestroy {
         });
       }
     }
-  }
-
-  onFilterSelection(event: object) {
-    this.simpleFiltersValue$.next(event);
   }
 }
