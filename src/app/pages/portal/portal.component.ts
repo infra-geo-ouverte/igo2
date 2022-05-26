@@ -1485,7 +1485,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         relationWorkspace?.meta.tableTemplate.columns.forEach(col => {
           // Update domain list
           if (col.type === 'list' || col.type === 'autocomplete') {
-            this.editionWorkspaceService.getDomainValues(col.relation.table).subscribe(result => {
+            this.editionWorkspaceService.getDomainValues(col.relation).subscribe(result => {
               col.domainValues = result;
             });
           }
