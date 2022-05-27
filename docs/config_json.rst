@@ -768,6 +768,47 @@ showSearchBar
 
         Permet de définir si la barre de recherche est affichée ou non.
 
+********************************
+simpleFeatureList
+********************************
+
+    .. line-block::
+
+        Permet de définir une liste simple des entités contenues dans la carte.
+
+    Exemple
+        .. code:: json
+
+            "simpleFeatureList": {
+                "layerId": "dq2",
+                "attributeOrder": [
+                    {"attributeName": "bureau", "personalizedFormatting": "[nom] de [region]", "header": "h6"},
+                    {"attributeName": "adressebur"},
+                    {"attributeName": "responsable", "description": "Responsable"},
+                    {"attributeName": "telephonebur", "description": "Téléphone"},
+                    {"attributeName": "telecopieurbur", "description": "Télécopieur"},
+                    {"attributeName": "courriel"}
+                ],
+                "sortBy": {"attributeName": "region"},
+                "formatURL": true,
+                "formatEmail": true,
+                "paginator": {
+                    "pageSize": 5,
+                    "showFirstLastPageButtons": true,
+                    "showPreviousNextPageButtons": true
+                }
+            }
+
+    Propriétés
+        .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+        .. csv-table::
+            :file: _tables/fr/config/simpleFeatureList.csv
+            :header-rows: 1
+            :widths: 10 10 30 15 10
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
 ***************
 SearchSources
 ***************
@@ -1315,7 +1356,7 @@ Message
         Message affiché à l'ouverture du contexte ou à l'ouverture de la couche.
         - Une librairie tierce est utilisée pour l'affichage de message : `NGX-TOASTR  <https://www.npmjs.com/package/ngx-toastr>`_
         NB.: Les classes connues de l'application peuvent être utilisées. Des classes personalisées spécifiques aux messages peuvent être ajoutés.
-         `IGO2 styles.scss <https://github.com/infra-geo-ouverte/igo2/blob/master/src/styles.scss#L13>`_  
+         `IGO2 styles.scss <https://github.com/infra-geo-ouverte/igo2/blob/master/src/styles.scss#L13>`_
 
 Exemples
 

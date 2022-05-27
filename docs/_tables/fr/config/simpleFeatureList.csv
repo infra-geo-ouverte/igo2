@@ -1,0 +1,7 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+**layerId***,String,ID de la couche à utiliser pour créer la liste,
+**attributeOrder",Liste d'Objects,"| Attributs à afficher dans la liste accompagnés d'options.|**attributeName** (String): Nom de l'attribut à afficher.| personalizedFormatting (String): Combinaison d'attributs (entre crochets) à combiner afin de créer une version personnalisée.| description (String): Description à afficher devant la valeur d'attribut.",
+sortBy,Object,"| Attribut à utiliser afin de trier la liste.| attributeName (String): Nom de l'attribut à utiliser pour le tri.| order (String): Ordre du tri (croissant ou décroissant)",order: 'ascending' | 'descending',order: 'ascending',
+formatURL,Boolean,Permet de définir si un lien doit être formatté ou non.,true | false,false,
+formatEmail,Boolean,Permet de définir si une adresse courriel doit être formattée ou non.,true |false, false
+paginator,Object,"| Permet de définir une pagination personnalisée.| pageSize (Nombre): Nombre d'éléments par page.| showFirstLastPageButtons (Boolean): Permet de définir si les boutons permettant d'accéder à la première et la dernière page sont visibles.| showPreviousNextPageButtons (Boolean): Permet de définir si les boutons permettant d'accéder à la page suivante et la page précédente sont visibles.,"| showFirstLastPageButtons: true | false| showPreviousNextPageButtons: true | false","| pageSize: 5| showFirstLastPageButtons: true| showPreviousNextPageButtons: true",
