@@ -777,6 +777,7 @@ simpleFeatureList
         Permet de définir une liste simple des entités contenues dans la carte.
 
     Exemple
+
         .. code:: json
 
             "simpleFeatureList": {
@@ -800,6 +801,7 @@ simpleFeatureList
             }
 
     Propriétés
+
         .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
         .. csv-table::
