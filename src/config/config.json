@@ -15,14 +15,6 @@
   "showRotationButtonIfNoRotation": false,
   "showMenuButton": false,
   "showSearchBar": false,
-  "simpleFilters": {
-    "type": "attribute",
-    "filters": [
-      {"type": "regadmin", "description": "Région administrative"},
-      {"type": "mrc", "description": "MRC"},
-      {"type": "municipalites", "description": "Municipalité"},
-      {"type": "prenom_resp", "description": "Prénom"}
-    ]},
   "simpleFeatureList": {
     "layerId": "dq2",
     "attributeOrder": [
