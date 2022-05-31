@@ -69,7 +69,9 @@ import {
   addStopToStore,
   ImageLayer,
   VectorLayer,
-  MapExtent
+  MapExtent,
+  moveToOlFeatures,
+  FeatureMotion
 } from '@igo2/geo';
 
 import {
@@ -1502,4 +1504,26 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  zoomToSelectedFeatureWks() {
+    let format = new olFormatGeoJSON();
+    const featuresSelected = this.workspace.entityStore.state.getFeaturesSelected();
+    if (featuresSelected.length === 0) {
+      return;
+    }
+    const olFeaturesSelected = [];
+    for (const feat of featuresSelected) {
+      let localOlFeature = format.readFeature(feat, 
+        {
+          dataProjection: feat.projection,
+          featureProjection: this.map.projection
+        })
+        olFeaturesSelected.push(localOlFeature);
+    }
+    if (this.map.viewController.padding[2] === 0) {
+      this.map.viewController.setPaddingTop(280);
+    }
+    moveToOlFeatures(this.map, olFeaturesSelected, FeatureMotion.Zoom);
+  }
+
 }

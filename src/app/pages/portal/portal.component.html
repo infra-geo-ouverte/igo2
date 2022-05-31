@@ -172,6 +172,19 @@
         [mode]="actionbarMode"
         [overlayClass]="workspaceMenuClass">
       </igo-actionbar>
+      <button
+        *ngIf="workspaceVisibility()"
+        mat-icon-button
+        color="primary"
+        collapsibleButton
+        tooltip-position="below"
+        matTooltipShowDelay="500"
+        [matTooltip]="('toastPanel.zoomOnFeaturesTooltip') | translate"
+        (click)="zoomToSelectedFeatureWks()">
+        <mat-icon
+          svgIcon="magnify-plus-outline">
+        </mat-icon>
+      </button>
       <div class="spacer"></div>
       <igo-entity-table-paginator
         *ngIf="workspaceVisibility()"
