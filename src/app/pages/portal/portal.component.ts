@@ -1513,11 +1513,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
     const olFeaturesSelected = [];
     for (const feat of featuresSelected) {
-      let localOlFeature = format.readFeature(feat, 
+      let localOlFeature = format.readFeature(feat,
         {
           dataProjection: feat.projection,
           featureProjection: this.map.projection
-        })
+        });
         olFeaturesSelected.push(localOlFeature);
     }
     if (this.map.viewController.padding[2] === 0) {
