@@ -1,37 +1,41 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 count ,Integer ,Nombre de résultats retournés par le serveur lors de requêtes **WMS** de GetFeatureInfo ,,
 abstract ,String ,Résumé des données contenues dans le catalogue ,,5
-**id*** ,String ,Identifiant unique permettant de différencier les catalogues entre eux. ,,uuid() 
+**id*** ,String ,Identifiant unique permettant de différencier les catalogues entre eux. ,,uuid()
 groupImpose ,"| id*: String,
 | title*: String ","| N.B: Propriété disponible sur un objet de type CompositeCatalog
 | Permet d'imposer l'utilisation d'un groupe à l'ensemble des couches appellées du | catalogue.
 |                - id: Identifiant unique permettant de différencier les groupes entre eux.
 |                - title: Titre pour le groupe qui sera utilisé dans l'outil Catalog.",,
 forcedProperties ,"| layerName*: String,
-| title*: String ","| Permet d'imposer un nom à une couche spécifique.
+| title*: String, metadataUrl: String, metadataAbstract: String, metadataAbstractAll: String, metadataUrlAll: String ","| Permet d'imposer un nom à une couche spécifique.
 |               - layerName: Nom de la couche dans le catalogue d'origine (propriété layer name). Permet d'aller chercher la couche en question dans le service.
-|               - title: Nouveau titre pour la couche.",,
+|               - title: Nouveau titre pour la couche, lié à la couche via layerName.
+                - metadataUrl: Nouveau lien url menant à la page d'informations sur la couche, lié à la couche via layerName.
+                - metadataAbstract: Nouveau texte metadata donnant des explications sur la couche, lié à la couche via layerName.
+                - metadataUrlAll: Nouveau lien url menant à la page d'informations sur les couches, s'applique à toutes les couches du lien source. Lié via layerName en utilisant "All" en tant que layerName.
+                - metadataAbstractAll: Nouveau texte metadata donnant des explications sur les couches, s'applique à toutes les couches du lien source. Lié via layerName en utilisant "All" en tant que layerName.",,
 matrixSet ,String ,"| Nom du matrixSet définit pour le service WMTS seulement
 | **Obligatoire pour les services WMTS** ",,
 queryFormat ,QueryFormat ,"Pour les services **WMS**, le format d'interrogation de la donnée. ",Voir **QueryFormat** ,
-queryHtmlTarget ,String ,"| Pour les services **WMS**, definit la destination des résultats d'interrogation 
+queryHtmlTarget ,String ,"| Pour les services **WMS**, definit la destination des résultats d'interrogation
 | pour les formats HTML. ","|  iframe (intégré à la plage)
-|  _blank (ouverture page externe) ",iframe 
+|  _blank (ouverture page externe) ",iframe
 queryParams ,objet {} ,"| Paramètres supplémentaires à ajouter à l'appel des couches ajoutées à partir du service.
 | Que ce soit des paramètres normés (WMS|WMTS) ou liés à votre service.",,
 regFilters ,String[] ,"| Une liste d'expressions régulières (regex) permettant de limiter les couches
 | d'information présentées dans l'outil CatalogBrowser ",,
 requestEncoding ,String ,Type d'encodage des paramètres demandés au serveur ,KVP REST ,KVP
-setCrossOriginAnonymous ,Boolean,"| Afin de définir si l'entête de l'appel faite au serveur sera anonyme. Permet entre autres, 
+setCrossOriginAnonymous ,Boolean,"| Afin de définir si l'entête de l'appel faite au serveur sera anonyme. Permet entre autres,
 | d'éviter les problématiques de CORS. ",true | false ,false
 showLegend ,Boolean ,Permet d'affiché la légende sur le click du titre des couches. ,true | false ,false
 sortDirection ,String ,"| Permet de trier l'ordre d'apparition des couches du catalogue dans l'outil CatalogBrowser
 | Influence l'ordre d'ajout des couches d'informations à la carte.",asc | desc ,"Aucun, l'ordre  présenté par service "
 timeFilter ,TimeFilterOptions ,Options temporelles liées à l'entièreté des couches du service web. ,Voir **TimeFilter** ,
 **title*** ,String ,Titre pour la source du catalogue qui sera utilisédans l'outil Catalog. ,,
-tooltipType ,String ,"| Pour les couches ajoutées, définit si le tooltip (sulvol du titre) sera le 
-| résumé du ""layer"" (**wms/wmts**) ou son titre ",abstract | title ,title 
-type ,String ,Type de service à appeler ,composite wmts wms ,wms 
+tooltipType ,String ,"| Pour les couches ajoutées, définit si le tooltip (sulvol du titre) sera le
+| résumé du ""layer"" (**wms/wmts**) ou son titre ",abstract | title ,title
+type ,String ,Type de service à appeler ,composite wmts wms ,wms
 **url*** ,String ,"| Url du service WMS ou WMTS sans les paramètre d'url normé OGC
 | (i.e. service=wms&request=GetCapabilities)
 | OU url du service de baselayers ",,

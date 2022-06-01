@@ -124,20 +124,29 @@ export const environment: Environment = {
               matrixSet: 'EPSG_3857',
               version: '1.0.0',
               forcedProperties: [{
-                newMetadataUrlAll: 'https://www.donneesquebec.ca/',
+                newMetadataAbstract: 'Nouvel abstract',
                 layerName: 'BDTQ-20K_Allegee',
-                title: 'Nouveau nom pour cette couche WMTS',
+                title: 'Nouveau nom et abstract pour cette couche WMTS',
               }]
             },
             {
               id: 'forcedProperties_wms',
               url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
               type: 'wms',
-              forcedProperties: [{
-                layerName: 'lieuhabite',
-                title: 'Nouveau nom pour cette couche WMS',
-                newMetadataAbstract: "Ceci est un nouvel abstract"
-              }]
+              forcedProperties: [
+                {
+                  newMetadataUrl: 'https://www.donneesquebec.ca/',
+                  layerName: 'lieuhabite',
+                  title: 'Nouveau nom pour cette couche WMS et nouvel url pour toutes les couches',
+                  //metadataAbstract: "New WMS Abstract",
+                  //metadataUrl: "https://gitlab.com/",
+                },
+              {
+                layerName: "All",
+                //metadataUrlAll: "https://quebec.ca/",
+                metadataAbstractAll: "New WMS abstract to all layers"
+              }
+              ]
             },
             {
               id: 'forcedProperties_arcgisrest',
@@ -146,8 +155,8 @@ export const environment: Environment = {
               type: 'arcgisrest',
               forcedProperties: [{
                 layerName: 'Sediment substrate / Substrat sédimentaire',
-                title: 'Nouveau nom pour cette couche ArcGIS REST',
-                newMetadataUrl: "https://www.donneesquebec.ca/"
+                title: 'Nouveau nom et nouvel url pour cette couche ArcGIS REST',
+                newMetadataAbstract: "https://www.donneesquebec.ca/"
               }]
             }
           ]
