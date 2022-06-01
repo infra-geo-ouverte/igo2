@@ -108,9 +108,7 @@
     {
       "name": "about",
       "options": {
-        "discoverTitleInLocale": "IGO",
-          "html": "<head> <meta charset='utf-8'> <style> .page { padding-left: 0px; font-family: 'Verdana', 'Arial', 'Times New Roman'; }  .bold_class { font-weight: bold; }  .red { color: red; }  .tool_name { border-top: 1px solid #00897B; /* padding-left: 5px; */ padding-right: 1%; padding-bottom: 1%; }  .titre_outil { font-weight: bold; font-size: 18px; }  .align_right { text-align: right; }  .describe { text-align: left; } </style> </head>  <body> <div align='center'><img src='./assets/images/LogoMinistereGrand.gif' alt='SIGO - Terrain' width='220' style='margin-left:0px'></div> <h3> La mission du ministère des Transports est d’assurer, sur tout le territoire, la mobilité durable des personnes et des marchandises par des systèmes de transport efficaces et sécuritaires qui contribuent au développement du Québec. </h3>  <div class='page' style='color: black;'> <table> <tr> <th></th> </tr> <tbody> <tr> <td>Aide:</td> <td><a href='./assets/SIGO_Terrain_Guide.pdf' target='_blank'>Guide d'utilisation</a></td> </tr> <tr> <td>Contact:</td> <td><a href='mailto:geomatique@transports.gouv.qc.ca?subject=SIGO - Terrain'>geomatique@transports.gouv.qc.ca</a></td> </tr> </tbody> </table></br><br> </body>"
-      }
+        "discoverTitleInLocale": "IGO"}
     },
     {
       "name": "mapTools",
