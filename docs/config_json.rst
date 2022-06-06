@@ -418,6 +418,16 @@ Liens
         - `igo2-lib/tree/master/packages/geo/src/lib/draw/draw <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/geo/src/lib/draw/draw>`_
 
 *****************
+favoriteContext4NonAuthenticated
+*****************
+
+    .. line-block::
+
+        Permet d'afficher ou non le bouton de contexte favori (contextManager)
+        pour les utilisateurs non authentifiés. Le contexte favori sera enregistré
+        dans le "LocalStorage" du fureteur.
+
+*****************
 hasExpansionPanel
 *****************
 
