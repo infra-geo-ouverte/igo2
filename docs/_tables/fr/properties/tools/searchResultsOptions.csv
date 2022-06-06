@@ -1,2 +1,3 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 showIcons ,Boolean ,Permet de faire afficher ou non des icônes pour chacun des résultats de recherche. ,true / false ,true
+topPanelStateDefault ,String ,Permet de définir l'état par défaut du panneau de détails. ,'expanded'/ 'collapsed' ,'expanded'
