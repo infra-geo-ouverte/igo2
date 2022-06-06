@@ -132,7 +132,7 @@
                       "title": "Radar photo mobile",
                       "enabled": false,
                       "color": "255,200,0",
-                      "tooltip": "Here a tooltip explaning ...",
+                      "tooltip": "Here a tooltip explaning...",
                       "filters": {
                         "operator": "PropertyIsEqualTo",
                         "propertyName": "typeAppareil",
@@ -143,7 +143,7 @@
                       "title": "Radar photo fixe + feu rouge",
                       "enabled": false,
                       "color": "0,200,0",
-                      "tooltip": "Here a tooltip explaning ...",
+                      "tooltip": "Here a tooltip explaning...",
                       "filters": {
                         "operator": "PropertyIsEqualTo",
                         "propertyName": "typeAppareil",
