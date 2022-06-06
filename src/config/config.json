@@ -9,6 +9,7 @@
       "url": "/services/itineraire/route/v1/driving/"
     }
   },
+  "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,

@@ -6,6 +6,7 @@ context,`Context`_,"| Permet d'activer l'API de contexte d'IGO2. | Cette A
 depot,`Depot`_,"| Permet d'activer de l'API de dépôt. | Cette API sera documentée indépendamment de la présente documentation.",
 `description`_,String,"| Permet de définir ce qui sera affiché lors de la recherche dans les moteurs de recherche (p. ex. Google). | Constante pouvant être réutilisée dans le welcomeWindow.",
 `drawingTool`_,String [],Permet d'ajouter une liste d'icônes à utiliser dans l'outil Dessin.,Draw
+`favoriteContext4NonAuthenticated`_,Boolean,"| Permet d'afficher ou non le bouton de contexte favori (contextManager) pour les utilisateurs non authentifiés. Le contexte favori sera enregistré dans le "LocalStorage" du fureteur. | True par défaut.",
 `hasExpansionPanel`_,Boolean,"| Permet d'ouvrir un panneau d'expansion à partir d'un bouton situé dans le coin inférieur gauche de la carte. | Ce dernier montre les données tabulaires pour les données WFS / Vectorielle / Cluster. | Désactivé par défaut.",
 `hasFeatureEmphasisOnSelection`_,Boolean,"| Permet d'ajouter à la carte une géométrie ponctuelle pour les entités linéaires ou polygonales sélectionnées ou survolées | lors d'une interrogation de la carte et qui sont de trop petite taille par rapport à l'étendue de la carte.",
 `hasGeolocateButton`_,Boolean,"| Permet d'afficher ou non un bouton de géolocalisation dans l'application. | Activé par défaut.",
