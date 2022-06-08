@@ -17,7 +17,7 @@
   "showMenuButton": false,
   "showSearchBar": false,
   "simpleFeatureList": {
-    "layerId": "dq2",
+    "layerId": "simpleList",
     "attributeOrder": [
       {"attributeName": "bureau", "personalizedFormatting": "[nom] de [region]", "header": "h6"},
       {"attributeName": "adressebur"},
@@ -50,7 +50,7 @@
   "title": "IGO",
   "welcomeWindow": {
     "showAgainOnNewIGOVersion": true,
-    "nbVisitToShow":2,
+    "nbVisitToShow": 2,
     "nbVisitToShowAgain": 30
   },
   "edition": {

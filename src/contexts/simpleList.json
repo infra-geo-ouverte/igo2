@@ -1,0 +1,30 @@
+{
+	"uri": "simpleList",
+  "title": "Liste à l'extérieur de la carte",
+  "base": "_base",
+	"layers": [
+  {
+    "title": "Bureaux régionaux de la sécurité civile et de la sécurité incendie",
+    "id": "simpleList",
+    "sourceOptions": {
+      "type": "wms",
+      "url": "https://geoegl.msp.gouv.qc.ca/apis/wss/all.fcgi",
+      "params": {
+        "layers": "MSP_DIRECTION_REG_COG_P_V"
+      },
+      "urlWFS": "https://geoegl.msp.gouv.qc.ca/apis/wss/all.fcgi",
+      "paramsWFS": {
+        "featureTypes": "MSP_DIRECTION_REG_COG_P_V",
+        "fieldNameGeometry": "geometry",
+        "outputFormat": "geojson"
+      }
+    },
+    "workspace": {
+      "enabled": true,
+      "queryOptions": {
+        "mapQueryOnOpenTab": false,
+        "tabQuery": false
+      }
+    }
+  }]
+}
