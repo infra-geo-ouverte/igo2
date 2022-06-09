@@ -300,17 +300,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.workspaceState.workspace$.value;
   }
 
-  get workspaceSelection() {
-    return this.workspaceState.workspace$.value?.entityStore.stateView.manyBy((r) => r.state.selected === true);
-  }
-
-  get workspaceSelection$(): Observable<EntityRecord<object, EntityState>[]> {
-    if (this.workspaceState.workspace$.value) {
-      return this.workspaceState.workspace$.value?.entityStore?.stateView.manyBy$((r) => r.state.selected === true);
-    } else {
-      return undefined;
-    }
-  }
 
   constructor(
     private route: ActivatedRoute,
@@ -1520,7 +1509,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   zoomToSelectedFeatureWks() {
     let format = new olFormatGeoJSON();
-    const featuresSelected = this.workspaceSelection.map(rec => (rec.entity as Feature));
+    const featuresSelected = this.workspaceState.workspaceSelection.map(rec => (rec.entity as Feature));
     if (featuresSelected.length === 0) {
       return;
     }
