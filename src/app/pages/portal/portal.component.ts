@@ -7,7 +7,7 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
@@ -35,8 +35,7 @@ import {
   Tool,
   Widget,
   EntityTablePaginatorOptions,
-  EntityRecord,
-  EntityState
+  EntityRecord
 } from '@igo2/common';
 import { AuthOptions, AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
