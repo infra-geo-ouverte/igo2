@@ -301,12 +301,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get workspaceSelection() {
-    return this.workspaceState.workspace$.value?.entityStore.stateView.manyBy((r) => r.state.selected === true)
+    return this.workspaceState.workspace$.value?.entityStore.stateView.manyBy((r) => r.state.selected === true);
   }
 
   get workspaceSelection$(): Observable<EntityRecord<object, EntityState>[]> {
     if (this.workspaceState.workspace$.value) {
-      return this.workspaceState.workspace$.value?.entityStore?.stateView.manyBy$((r) => r.state.selected === true)
+      return this.workspaceState.workspace$.value?.entityStore?.stateView.manyBy$((r) => r.state.selected === true);
     } else {
       return undefined;
     }
