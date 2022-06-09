@@ -173,7 +173,9 @@
         [overlayClass]="workspaceMenuClass">
       </igo-actionbar>
       <button
+        class="zoom-workspace"
         *ngIf="workspaceVisibility()"
+        [disabled]= "((workspaceSelection$ | async) == undefined ? true : (workspaceSelection$ | async).length === 0)"
         mat-icon-button
         color="primary"
         collapsibleButton
@@ -182,7 +184,7 @@
         [matTooltip]="('toastPanel.zoomOnFeaturesTooltip') | translate"
         (click)="zoomToSelectedFeatureWks()">
         <mat-icon
-          svgIcon="magnify-plus-outline">
+        svgIcon="{{((workspaceSelection$ | async) != undefine ? ((workspaceSelection$ | async).length > 1 ?  'magnify-scan' : 'magnify-plus-outline'): 'magnify-plus-outline')}}">
         </mat-icon>
       </button>
       <div class="spacer"></div>

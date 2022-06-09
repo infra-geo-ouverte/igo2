@@ -7,7 +7,7 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
+import { Subscription, of, BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
@@ -35,7 +35,8 @@ import {
   Tool,
   Widget,
   EntityTablePaginatorOptions,
-  EntityRecord
+  EntityRecord,
+  EntityState
 } from '@igo2/common';
 import { AuthOptions, AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -297,6 +298,18 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   get workspace(): Workspace {
     return this.workspaceState.workspace$.value;
+  }
+
+  get workspaceSelection() {
+    return this.workspaceState.workspace$.value?.entityStore.stateView.manyBy((r) => r.state.selected === true)
+  }
+
+  get workspaceSelection$(): Observable<EntityRecord<object, EntityState>[]> {
+    if (this.workspaceState.workspace$.value) {
+      return this.workspaceState.workspace$.value?.entityStore?.stateView.manyBy$((r) => r.state.selected === true)
+    } else {
+      return undefined;
+    }
   }
 
   constructor(
@@ -1507,7 +1520,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   zoomToSelectedFeatureWks() {
     let format = new olFormatGeoJSON();
-    const featuresSelected = this.workspace.entityStore.state.getFeaturesSelected();
+    const featuresSelected = this.workspaceSelection.map(rec => (rec.entity as Feature));
     if (featuresSelected.length === 0) {
       return;
     }
@@ -1521,7 +1534,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         olFeaturesSelected.push(localOlFeature);
     }
     if (this.map.viewController.padding[2] === 0) {
-      this.map.viewController.setPaddingTop(280);
+      this.map.viewController.setPaddingBottom(280);
     }
     moveToOlFeatures(this.map, olFeaturesSelected, FeatureMotion.Zoom);
   }
