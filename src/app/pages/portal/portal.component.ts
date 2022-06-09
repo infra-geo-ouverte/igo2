@@ -1522,7 +1522,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         olFeaturesSelected.push(localOlFeature);
     }
     if (this.map.viewController.padding[2] === 0) {
-      this.map.viewController.setPaddingBottom(280);
+      this.map.viewController.setPadding({bottom: 280});
     }
     moveToOlFeatures(this.map, olFeaturesSelected, FeatureMotion.Zoom);
   }

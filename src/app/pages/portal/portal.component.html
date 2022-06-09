@@ -175,7 +175,7 @@
       <button
         class="zoom-workspace"
         *ngIf="workspaceVisibility()"
-        [disabled]= "((workspaceState.workspaceSelection$ | async) === undefined || (workspaceState.workspaceSelection$ | async) === null ? true : (workspaceState.workspaceSelection$ | async).length === 0)"
+        [disabled]= "(workspaceState.workspaceSelection$ | async).length === 0 ? true : false"
         mat-icon-button
         color="primary"
         collapsibleButton
@@ -184,7 +184,7 @@
         [matTooltip]="('toastPanel.zoomOnFeaturesTooltip') | translate"
         (click)="zoomToSelectedFeatureWks()">
         <mat-icon
-        svgIcon="{{((workspaceState.workspaceSelection$ | async) !== undefine && (workspaceState.workspaceSelection$ | async) !== null ? ((workspaceState.workspaceSelection$ | async).length > 1 ?  'magnify-scan' : 'magnify-plus-outline'): 'magnify-plus-outline')}}">
+        svgIcon="{{(workspaceState.workspaceSelection$ | async).length > 1 ?  'magnify-scan' : 'magnify-plus-outline'}}">
         </mat-icon>
       </button>
       <div class="spacer"></div>
