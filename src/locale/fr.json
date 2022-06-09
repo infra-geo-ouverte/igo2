@@ -226,7 +226,9 @@
     }
   },
   "messages": {
-    "title": "Titre provenant d'une traduction",
-    "message": "Message provenant d'une traduction - <div class='toast-message-green-div'>Message provenant du contexte</div>Ouvrez lea couche 'MSP Tel. Urgence' pour voir les messages liés."
+    "title": "Titre provenant d'une traduction. {{content}}",
+    "message": "Message provenant d'une traduction - <div class='toast-message-green-div'>Message provenant du contexte</div>Ouvrez la couche 'MSP Tel. Urgence' pour voir les messages liés. {{content}}",
+    "content": "Du contenu dynamique peut également être ajouté au message"
+  
   }
 }
