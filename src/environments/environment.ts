@@ -226,8 +226,9 @@ export const environment: Environment = {
     },
     dom: [
       // {
+      //   id: 1,
       //   name: 'test-dom',
-      //   value: [
+      //   values: [
       //     {
       //       id: "Radar photo fixe",
       //       value: "Radar photo fixe"
