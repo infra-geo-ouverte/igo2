@@ -224,21 +224,26 @@ export const environment: Environment = {
     depot: {
       url: '/apis/depot'
     },
-    // dom: [
-    //   {
-    //     name: 'test-dom',
-    //     value: [
-    //       {
-    //         id: "Radar photo fixe",
-    //         value: "Radar photo fixe"
-    //       },
-    //       {
-    //         id: "Radar photo mobile",
-    //         value: "Radar photo mobile"
-    //       }
-    //     ]
-    //   }
-    // ],
+    dom: [
+      // {
+      //   name: 'test-dom',
+      //   value: [
+      //     {
+      //       id: "Radar photo fixe",
+      //       value: "Radar photo fixe"
+      //     },
+      //     {
+      //       id: "Radar photo mobile",
+      //       value: "Radar photo mobile"
+      //     }
+      //   ]
+      // },
+      {
+        id: 1,
+        name: 'dom_test',
+        url: "https://ws.mapserver.transports.gouv.qc.ca/applicatif?service=WFS&request=GetFeature&version=2.0.0&outputformat=dom&typenames=dom&dom=dom_test"
+      }
+    ],
     language: {
       prefix: './locale/'
     },

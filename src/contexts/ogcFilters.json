@@ -404,10 +404,11 @@
                 "id": "id1",
                 "logical": "Or",
                 "unfiltered": true,
-                "title": "test-dom",
+                "title": "dom",
                 "domSelectors": [
                   {
-                    "name": "test-dom",
+                    "id": 1,
+                    "name": "dom_test",
                     "operator": "PropertyIsEqualTo",
                     "propertyName": "typeAppareil"
                   }
