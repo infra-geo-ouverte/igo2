@@ -2837,7 +2837,8 @@ Exemples
             {
                 "name": "searchResults",
                 "options": {
-                    "showIcons": false
+                    "showIcons": false,
+                    "topPanelStateDefault": "expanded"
                 }
             }
 

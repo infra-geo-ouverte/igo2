@@ -26,7 +26,7 @@
           "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=getfeature&typename=ms:liaison_maritime&outputformat=geojson&srsname=EPSG:4326",
           "queryable": true,
           "queryFormat": "geojson",
-          "queryTitle": "MARQUE",
+          "queryTitle": "De: ${depart}, À: ${arrivee}",
 
           "formatOptions": {
             "dataProjection": "EPSG:4326",
@@ -37,6 +37,26 @@
           "stroke": { 
             "color": "blue",
             "lineDash": [10, 5]
+          },
+          "text": {
+            "minScaleDenom": 50000,
+            "maxScaleDenom": 200000,
+            "minResolution": 100,
+            "maxResolution": 400,
+            "attribute": "De: ${depart}, À: ${arrivee}",
+            "text": "MY HARCODED TEXT",
+            "stroke": { 
+              "color": "blue",
+              "width": 0.75
+            },
+            "fill": { 
+              "color": "black"
+            },
+            "font": "20px sans-serif",
+            "overflow": true,
+            "offsetX": 10,
+            "offsetY": 20,
+            "padding": [2.5, 2.5, 2.5, 2.5]
           },
           "width": 5
         }
@@ -79,7 +99,24 @@
           "fill": ["orange","red","green","blue"],
           "hstroke": ["orange","red","green","blue"],
           "radius": [8,8,8,2],
-          "label" : ""
+          "label": { 
+            "attribute": "MARQUE: ${MARQUE}",
+            "minResolution": 0,
+            "maxResolution": 2,
+            "style": {
+              "textAlign": "left",
+              "textBaseline": "top",
+              "font": "12px Calibri,sans-serif",
+              "fill": { "color": "#000" },
+              "backgroundFill": { "color": "rgba(255, 255, 255, 0.5)" },
+              "backgroundStroke": { "color": "rgba(200, 200, 200, 0.75)", "width": 2 },
+              "stroke": { "color": "#fff", "width": 3 },
+              "overflow": true,
+              "offsetX": 20,
+              "offsetY": 10,
+              "padding": [2.5, 2.5, 2.5, 2.5]
+            }
+          }
           },
         "sourceOptions": {
           "type": "vector",
@@ -104,7 +141,6 @@
           "fill": ["orange","red","green"],
           "icon": ["./assets/images/styles/fire-hydrant.svg","./assets/images/styles/fire-hydrant.svg","./assets/images/styles/fire-hydrant.svg"],
           "anchor": [[0.5,1],[0.5,1],[0.5,1]],
-          "maxLabelScale": [4000,4000,4000],
           "baseStyle": {
             "icon": {
                 "src": "./assets/images/styles/fire-hydrant.svg",
