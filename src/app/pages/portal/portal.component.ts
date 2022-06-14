@@ -236,6 +236,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
   set expansionPanelExpanded(value: boolean) {
     this.workspaceState.workspacePanelExpanded = value;
+    if (value === true) {
+      this.map.viewController.setPadding({bottom: 280});
+    } else {
+      this.map.viewController.setPadding({bottom: 0});
+    }
   }
 
   get toastPanelShown(): boolean {
@@ -1520,9 +1525,6 @@ export class PortalComponent implements OnInit, OnDestroy {
           featureProjection: this.map.projection
         });
         olFeaturesSelected.push(localOlFeature);
-    }
-    if (this.map.viewController.padding[2] === 0) {
-      this.map.viewController.setPadding({bottom: 280});
     }
     moveToOlFeatures(this.map, olFeaturesSelected, FeatureMotion.Zoom);
   }
