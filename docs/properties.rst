@@ -1270,6 +1270,40 @@ Exemple - filtre avec boutons spécifique à un groupe et calendrier (filtrage t
                   "stepDate": "P1D"
             }
 
+Exemple - groupe de filtre avec autocomplétion et domaine de valeurs (dom)
+
+        .. code:: json
+
+            {
+                "ogcFilters": {
+                    "enabled": true,
+                    "editable": true,
+                    "allowedOperatorsType": "All",
+                    "autocomplete": {
+                        "groups": [
+                            {"title": "Autocomplete","name": "1","ids": ["id1"]}
+                        ],
+                        "bundles": [
+                            {
+                                "id": "id1",
+                                "logical": "Or",
+                                "unfiltered": true,
+                                "title": "dom",
+                                "domSelectors": [
+                                    {
+                                        "id": 1
+                                        "name": "dom",
+                                        "operator": "PropertyIsEqualTo",
+                                        "propertyName": "typeAppareil"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+
+            }
+
 Propriétés de ogcFilters
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
