@@ -126,28 +126,27 @@ export const environment: Environment = {
               matrixSet: 'EPSG_3857',
               version: '1.0.0',
               forcedProperties: [{
-                newMetadataAbstract: 'Nouvel abstract',
+                metadataAbstract: 'Nouvel abstract',
                 layerName: 'BDTQ-20K_Allegee',
                 title: 'Nouveau nom et abstract pour cette couche WMTS',
               }]
             },
             {
               id: 'forcedProperties_wms',
-              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
+              url: 'https://cartes.geogratis.gc.ca/wms/canvec_fr',
               type: 'wms',
               forcedProperties: [
                 {
-                  newMetadataUrl: 'https://www.donneesquebec.ca/',
-                  layerName: 'lieuhabite',
+                  layerName: "*",
+                  //metadataUrlAll: "https://quebec.ca/",
+                  metadataAbstractAll: "New WMS abstract to all layers"
+                },
+                {
+                  layerName: 'atlas_named_feature_polygon_large',
                   title: 'Nouveau nom pour cette couche WMS et nouvel url pour toutes les couches',
                   //metadataAbstract: "New WMS Abstract",
-                  //metadataUrl: "https://gitlab.com/",
-                },
-              {
-                layerName: "All",
-                //metadataUrlAll: "https://quebec.ca/",
-                metadataAbstractAll: "New WMS abstract to all layers"
-              }
+                  metadataUrl: 'https://www.donneesquebec.ca/'
+                }
               ]
             },
             {
@@ -158,8 +157,13 @@ export const environment: Environment = {
               forcedProperties: [{
                 layerName: 'Sediment substrate / Substrat sédimentaire',
                 title: 'Nouveau nom et nouvel url pour cette couche ArcGIS REST',
-                newMetadataAbstract: "https://www.donneesquebec.ca/"
-              }]
+                //metadataUrl: "https://www.donneesquebec.ca/",
+              },
+            {
+              layerName: "*",
+              //metadataUrlAll: "https://quebec.ca/",
+              metadataAbstractAll: "New WMS abstract to all layers"
+            }]
             }
           ]
         },

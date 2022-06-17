@@ -13,8 +13,8 @@ forcedProperties ,"| layerName*: String,
 |               - title: Nouveau titre pour la couche, lié à la couche via layerName.
                 - metadataUrl: Nouveau lien url menant à la page d'informations sur la couche, lié à la couche via layerName.
                 - metadataAbstract: Nouveau texte metadata donnant des explications sur la couche, lié à la couche via layerName.
-                - metadataUrlAll: Nouveau lien url menant à la page d'informations sur les couches, s'applique à toutes les couches du lien source. Lié via layerName en utilisant "All" en tant que layerName.
-                - metadataAbstractAll: Nouveau texte metadata donnant des explications sur les couches, s'applique à toutes les couches du lien source. Lié via layerName en utilisant "All" en tant que layerName.",,
+                - metadataUrlAll: Nouveau lien url menant à la page d'informations sur les couches, s'applique à toutes les couches du lien source. Lié via layerName en utilisant "*" en tant que layerName.
+                - metadataAbstractAll: Nouveau texte metadata donnant des explications sur les couches, s'applique à toutes les couches du lien source. Lié via layerName en utilisant "*" en tant que layerName.",,
 matrixSet ,String ,"| Nom du matrixSet définit pour le service WMTS seulement
 | **Obligatoire pour les services WMTS** ",,
 queryFormat ,QueryFormat ,"Pour les services **WMS**, le format d'interrogation de la donnée. ",Voir **QueryFormat** ,

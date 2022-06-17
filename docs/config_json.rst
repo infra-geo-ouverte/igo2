@@ -276,7 +276,7 @@ Exemples
                                   type: 'arcgisrest',
                                   forcedProperties: [
                                     {
-                                      layerName: "All",
+                                      layerName: "*",
                                       metadataAbstractAll: "New abstract to all layers"
                                     }
                                   ]
@@ -288,7 +288,7 @@ Exemples
                                   type: 'arcgisrest',
                                   forcedProperties: [
                                     {
-                                      layerName: "All",
+                                      layerName: "*",
                                       metadataUrlAll: "https://github.com/infra-geo-ouverte/igo2-lib/"
                                     }
                                   ]
