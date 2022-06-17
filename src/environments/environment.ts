@@ -162,7 +162,7 @@ export const environment: Environment = {
             {
               layerName: "*",
               //metadataUrlAll: "https://quebec.ca/",
-              metadataAbstractAll: "New WMS abstract to all layers"
+              metadataAbstractAll: "New arcgisrest abstract to all layers"
             }]
             }
           ]
