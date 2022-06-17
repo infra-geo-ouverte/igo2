@@ -32,3 +32,6 @@ radioButtons ,RadioButton ,"| Permet de définir des boutons radio qui p
 select ,Select ,"| Permet de définir une liste déroulante permettant à 
 | l'utilisateur d'appliquer un ou plusieurs filtres.
 | Doit contenir obligatoirement bundles[].",,
+autocomplete ,Automcomplete ,"| Permet de définir un autocomplétion permettant à 
+| l'utilisateur d'appliquer un ou plusieurs filtres à partir d'un domaine de valeurs.
+| Doit contenir obligatoirement domSelectors[].",,

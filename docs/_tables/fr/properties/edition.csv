@@ -11,3 +11,6 @@ messages ,Object[] ,Personnaliser les messages affichés à l'utilisateur.
 addHeaders ,Object ,Personnaliser les headers de l'appel fait à l'ajout
 modifyProtocole ,String ,Personnaliser le protocole d'appel fait la modification ,,patch
 modifyHeaders ,Object ,Personnaliser les headers de l'appel fait à la modification
+addButton ,Boolean ,Activer ou non le bouton d'ajout sur la couche. ,true/false ,true
+modifyButton ,Boolean ,Activer ou non le bouton de modification sur la couche. ,true/false ,true
+deleteButton ,Boolean ,Activer ou non le bouton de suppression sur la couche. ,true/false ,true
