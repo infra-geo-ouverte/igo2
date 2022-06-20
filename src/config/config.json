@@ -11,6 +11,7 @@
   },
   "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
+  "hasHeader": true,
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,

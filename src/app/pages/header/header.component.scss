@@ -1,0 +1,157 @@
+//@import '../src/style/qcca-theme/qcca-theme.scss';
+
+.banner {
+    display: flex;
+    width: 100%;
+    height: 72px;
+    box-sizing: border-box;
+    background-color: #095797;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+.zone-logo-title {
+    padding: 0.5rem 1.1rem 0.5rem 0;
+}
+
+.zone-title {
+    font-size: 1rem;
+}
+
+.zone-links {
+    padding-left: 1.1rem;
+    max-width: 100%;
+    margin: auto;
+    list-style: none;
+    display: block;
+    color: white;
+}
+
+.piv .titreM {
+    padding-bottom: 2%
+  }
+
+  #pivImage {
+    width:100%;
+    min-width: 8rem;
+    max-height: 28px;
+  }
+
+  ul li:last-child {
+    padding: 0;
+  }
+
+  .listePiv {
+    font: normal 0.8rem/1.2rem "roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-align: left;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #pivImagePrint {
+    display: none;
+  }
+
+  ::ng-deep body > vg-root > vg-portal > igo-map-browser > igo-zoom-button > div > button:nth-child(1) > span.mat-button-wrapper > mat-icon, ::ng-deep .mat-icon {
+    color: #095797!important;
+    border-color: #095797;
+    border-radius: 0;
+  }
+
+.listePiv a:hover,.listePiv a:focus {
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+.buttonLanguage{
+    background: none;
+    border-style: none;
+    padding: 0;
+    font: normal 0.8rem/1rem "roboto", sans-serif;
+    color: unset;
+}
+
+#title-mobile {
+    margin: auto 0;
+    display: block;
+}
+
+#title-desktop {
+    display:none;
+    color: #fff;
+    margin: auto 0;
+    padding: 0;
+}
+
+igo-map-browser {
+    height: calc(100% - $app-header-height);
+}
+
+/* //just for fun
+#title-desktop:hover {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23453886' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 20%;
+    border-bottom: 0;
+    padding-bottom: .3em;
+    text-decoration: none;
+}*/
+
+@media screen and (min-width: 576px) {
+
+    .zone-logo-title, .zone-links {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+
+    .col-md-10 {
+        flex: 0 0 83.33333%;
+        max-width: 83.33333%;
+    }
+
+    .zone-links {
+        -ms-flex: 0 0 16.66667%;
+        flex: 0 0 16.66667%;
+        max-width: 16.66667%;
+    }
+
+}
+
+@media screen and (min-width: 824px) {
+
+    #pivImage {
+        max-height: 39px;
+        padding-right: 3.75rem;
+    }
+
+    .banner {
+        height:72px;
+    }
+
+    .d-md-block {
+        display: block !important;
+    }
+
+    .d-md-none {
+        display: none !important;
+    }
+
+    .zone-logo-title {
+        -ms-flex: 0 0 83.33333%;
+        flex: 0 0 83.33333%;
+        max-width: 83.33333%;
+    }
+}

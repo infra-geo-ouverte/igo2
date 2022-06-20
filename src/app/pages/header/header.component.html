@@ -1,0 +1,21 @@
+<div class = banner role = banner>
+	<div class="container piv">
+		<div class="row" id="entetePiv">
+			<div class="col-6 col-md-10 d-flex flex-wrap align-items-center zone-logo-title">
+				<a class="logo" tabindex="5" routerLink="">
+                    <img id="pivImage" alt="Logo" src="assets/images/signature-PIV.svg">
+                </a>
+				<img id="pivImagePrint" alt="Logo" src="assets/images/quebecPrint.gif" width="199" height="60" />
+				<p lang="fr" id="title-desktop" class="zone-title  d-none d-md-block">{{('header.title')}}</p>
+			</div>
+			<div class="col-6 col-md-2 d-flex justify-content-end zone-links">
+				<ul class="listePiv nav flex-column">
+					<li><button class="buttonLanguage" disabled (click)="changeLanguage()">{{'header.language'}}</button></li>
+					<li><a alt="('workspace.external_links' | translate)" [href]="('header.url-contactus' )" target="_blank">{{'header.contactus'}}</a></li>
+				</ul>
+			</div>
+			<p lang="fr" id="title-mobile" class="zone-title d-md-none col-12"><a>{{('header.title')}}</a></p>
+		</div>
+	</div>
+</div>
+
