@@ -49,8 +49,8 @@ export class AppComponent {
 
     this.detectOldBrowser();
 
-    this.hasHeader = this.configService.getConfig('hasHeader') === undefined ? false :
-    this.configService.getConfig('hasHeader');
+    this.hasHeader = this.configService.getConfig('header.hasHeader') === undefined ? false :
+    this.configService.getConfig('header.hasHeader');
   }
 
   private readTitleConfig() {

@@ -11,7 +11,12 @@
   },
   "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
-  "hasHeader": true,
+  "header": {
+    "hasHeader": true,
+    "logo": "src/assets/images/signature-PIV.svg",
+    "logoPrint": "src/assets/images/signature-PIV.svg",
+    "contactUsUrl": "https://www.quebec.ca/gouvernement/ministere/securite-publique/coordonnee"
+  },
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
