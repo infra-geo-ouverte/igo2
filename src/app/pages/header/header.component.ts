@@ -14,8 +14,11 @@ export class HeaderComponent {
   public headerTitle: string;
   public headerContactUsUrl: string;
 
-  constructor(private configService: ConfigService,
-    protected languageService: LanguageService) {}
+  constructor(
+    private configService: ConfigService,
+    protected languageService: LanguageService) {
+      this.computeHeader();
+    }
 
 
   computeHeader() {
