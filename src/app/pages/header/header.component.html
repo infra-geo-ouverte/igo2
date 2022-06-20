@@ -3,16 +3,16 @@
 		<div class="row" id="entetePiv">
 			<div class="col-6 col-md-10 d-flex flex-wrap align-items-center zone-logo-title">
 				<a class="logo" tabindex="5" routerLink="">
-                    <img id="pivImage" alt="Logo" src="{{('headerLogo')}}">
+                    <img id="pivImage" alt="Logo" src="{{computeHeader.headerLogo}}">
 					
                 </a>
-				<img id="pivImagePrint" alt="Logo" src="{{('headerLogoPrint')}}" width="199" height="60" />
+				<img id="pivImagePrint" alt="Logo" src="{{headerLogoPrint}}" width="199" height="60" />
 				<p lang="fr" id="title-desktop" class="zone-title  d-none d-md-block">{{('headerTitle')}}</p>
 			</div>
 			<div class="col-6 col-md-2 d-flex justify-content-end zone-links">
 				<ul class="listePiv nav flex-column">
 					<li><button class="buttonLanguage" disabled (click)="changeLanguage()">{{'header.language'}}</button></li>
-					<li><a alt="('workspace.external_links' | translate)" [href]="('contactUsUrl' )" target="_blank">Nous joindre</a></li>
+					<li><a alt="('workspace.external_links' | translate)" [href]="('contactUsUrl')" target="_blank">{{'header.contactus' | translate}}</a></li>
 				</ul>
 			</div>
 			<p lang="fr" id="title-mobile" class="zone-title d-md-none col-12"><a>{{('headerTitle')}}</a></p>
