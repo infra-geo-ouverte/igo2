@@ -10,7 +10,7 @@ import { Observable, of } from 'rxjs';
 export class HeaderComponent {
 
   public title$: Observable<string> =
-  of(this.configService.getConfig('Header.title') || this.configService.getConfig('title'));
+  of(this.configService.getConfig('headerTitle') || this.configService.getConfig('title'));
 
   constructor(private configService: ConfigService,
     protected languageService: LanguageService) {}
