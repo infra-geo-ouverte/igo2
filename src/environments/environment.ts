@@ -133,7 +133,7 @@ export const environment: Environment = {
             },
             {
               id: 'forcedProperties_wms',
-              url: 'https://cartes.geogratis.gc.ca/wms/canvec_fr',
+              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
               type: 'wms',
               forcedProperties: [
                 {
@@ -142,7 +142,7 @@ export const environment: Environment = {
                   metadataAbstractAll: "New WMS abstract to all layers"
                 },
                 {
-                  layerName: 'atlas_named_feature_polygon_large',
+                  layerName: 'etablissement_mtq',
                   title: 'Nouveau nom pour cette couche WMS et nouvel url pour toutes les couches',
                   //metadataAbstract: "New WMS Abstract",
                   metadataUrl: 'https://www.donneesquebec.ca/'
