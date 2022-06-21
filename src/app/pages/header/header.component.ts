@@ -24,8 +24,6 @@ export class HeaderComponent {
     this.headerLogo = this.configService.getConfig('header.logo');
     this.headerLogoPrint = this.configService.getConfig('header.logoPrint');
     this.headerLogoPrint = this.configService.getConfig('header.logoPrint');
-    this.headerTitle = this.configService.getConfig('title');
-    this.headerContactUsUrl = this.configService.getConfig('header.contactUsUrl');
   }
 
   // Future translation system

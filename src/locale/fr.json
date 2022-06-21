@@ -14,6 +14,7 @@
     "addFeature": "Ajouter une entité à la couche en édition"
   },
   "header": {
+    "title": "IGO",
     "language": "English",
     "contactUsUrl" : "https://www.quebec.ca/nous-joindre/renseignements-generaux",
     "contactUs" : "Nous joindre",

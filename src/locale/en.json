@@ -14,6 +14,7 @@
     "addFeature": "Add entity to the edited layer"
   },
   "header": {
+    "title": "IGO",
     "language": "Français",
     "contactUsUrl" : "https://www.quebec.ca/en/how-to-reach-us/general-information",
     "contactUs" : "Contact us",

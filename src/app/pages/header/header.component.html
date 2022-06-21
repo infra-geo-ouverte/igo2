@@ -7,12 +7,12 @@
 					
                 </a>
 				<img id="header-logo-print" alt="Logo" src="{{headerLogoPrint}}" width="199" height="60" />
-				<p lang="fr" id="title-desktop" class="zone-title  d-none d-md-block">{{(headerTitle)}}</p>
+				<p lang="fr" id="title-desktop" class="zone-title  d-none d-md-block">{{'header.title' | translate}}</p>
 			</div>
 			<div class="col-6 col-md-2 d-flex justify-content-end zone-links">
 				<ul class="nav flex-column">
 					<!--<li><button class="buttonLanguage" disabled (click)="changeLanguage()">{{'header.language'}}</button></li>-->
-					<li><a alt="('header.contactUsUrl' | translate)" [href]="('contactUsUrl')" target="_blank">{{'header.contactUs' | translate}}</a></li>
+					<li><a alt="('header.contactUsUrl' | translate)" href="{{'header.contactUsUrl' | translate}}" target="_blank">{{'header.contactUs' | translate}}</a></li>
 				</ul>
 			</div>
 			<p lang="fr" id="title-mobile" class="zone-title d-md-none col-12"><a>{{(headerTitle)}}</a></p>
