@@ -13,6 +13,12 @@
     },
     "addFeature": "Add entity to the edited layer"
   },
+  "header": {
+    "language": "Français",
+    "contactUsUrl" : "https://www.quebec.ca/en/how-to-reach-us/general-information",
+    "contactUs" : "Contact us",
+    "externallinks": "This link will open in a new window"
+  },
   "toastPanel": {
     "title": "Entities found on the map",
     "listButton": "Return to the list of entities",

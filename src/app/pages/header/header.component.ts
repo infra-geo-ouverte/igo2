@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ConfigService, LanguageService } from '@igo2/core';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -29,12 +28,13 @@ export class HeaderComponent {
     this.headerContactUsUrl = this.configService.getConfig('header.contactUsUrl');
   }
 
-  changeLanguage() {
+  // Future translation system
+  /*changeLanguage() {
     if (this.languageService.getLanguage() === 'fr'){
       this.languageService.setLanguage('en');
     } else {
       this.languageService.setLanguage('fr');
     }
-  }
+  }*/
 
 }

@@ -13,6 +13,12 @@
     },
     "addFeature": "Ajouter une entité à la couche en édition"
   },
+  "header": {
+    "language": "English",
+    "contactUsUrl" : "https://www.quebec.ca/nous-joindre/renseignements-generaux",
+    "contactUs" : "Nous joindre",
+    "externallinks": "Cet hyperlien s’ouvrira dans une nouvelle fenêtre"
+  },
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
     "listButton": "Retourner à la liste des entités",
