@@ -117,10 +117,10 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
 export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(undefined);
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  public clickedEntities$: BehaviorSubject<Feature[]> = new BehaviorSubject(undefined);
+  public clickedFeatures$: BehaviorSubject<Feature[]> = new BehaviorSubject(undefined);
   public minSearchTermLength = 2;
   public hasExpansionPanel: boolean = false;
-  public showSimpleFeatureList: boolean = false;
+  public showSimpleEntityList: boolean = false;
   public hasGeolocateButton: boolean = true;
   public showMenuButton: boolean = true;
   public showSearchBar: boolean = true;
@@ -332,7 +332,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
-    this.showSimpleFeatureList = this.configService.getConfig('simpleFeatureList') === undefined ? false : true;
+    this.showSimpleEntityList = this.configService.getConfig('simpleEntityList') === undefined ? false : true;
     this.hasHomeExtentButton =
       this.configService.getConfig('homeExtentButton') === undefined ? false : true;
     this.hasGeolocateButton = this.configService.getConfig('hasGeolocateButton') === undefined ? true :
@@ -454,11 +454,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     });
 
-    if (this.showSimpleFeatureList && typeof this.configService.getConfig('simpleFeatureList.layerId') === 'string') {
+    if (this.showSimpleEntityList && typeof this.configService.getConfig('simpleEntityList.layerId') === 'string') {
       setTimeout(() => {
-        this.workspaceState.setActiveWorkspaceById(this.configService.getConfig('simpleFeatureList.layerId'));
+        this.workspaceState.setActiveWorkspaceById(this.configService.getConfig('simpleEntityList.layerId'));
         this.expansionPanelExpanded = true;
-      }, 2000);
+      }, 4000);
     }
 
     this.activeWidget$$ = this.workspaceState.activeWorkspaceWidget$.subscribe(
@@ -628,7 +628,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
-    this.clickedEntities$.next(event.features);
+    this.clickedFeatures$.next(event.features);
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
     const results = event.features.map((feature: Feature) => {

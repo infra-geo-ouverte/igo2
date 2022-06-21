@@ -16,7 +16,7 @@
   "showRotationButtonIfNoRotation": false,
   "showMenuButton": false,
   "showSearchBar": false,
-  "simpleFeatureList": {
+  "simpleEntityList": {
     "layerId": "simpleList",
     "attributeOrder": [
       {"attributeName": "bureau", "personalizedFormatting": "[nom] de [region]", "header": "h6"},

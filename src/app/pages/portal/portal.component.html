@@ -257,8 +257,8 @@
   </igo-actionbar>
 </ng-template>
 
-<igo-simple-feature-list *ngIf="showSimpleFeatureList && selectedWorkspace$ | async as workspace"
+<igo-simple-entity-list *ngIf="showSimpleEntityList && selectedWorkspace$ | async as workspace"
   [entityStore]="workspace.entityStore"
-  [clickedEntities]="clickedEntities$ | async"
-  (listSelection)="zoomToSelectedFeatureWks()">
-</igo-simple-feature-list>
+  [clickedFeatures]="clickedFeatures$ | async"
+  (selection)="zoomToSelectedFeatureWks()">
+</igo-simple-entity-list>
