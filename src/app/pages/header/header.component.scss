@@ -32,7 +32,7 @@ font-family: 'Open sans', sans-serif;
   }
 }
 
-html, body, div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, a, header, nav {
 margin: 0;
 padding: 0;
 border: 0;
@@ -42,7 +42,8 @@ vertical-align: baseline;
 html, body {
   font-family: 'Open sans', sans-serif;
 }
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-pgu-sm-1, .col-pgu-sm-2, .col-pgu-sm-3, .col-pgu-sm-4, .col-pgu-sm-5, .col-pgu-sm-6, .col-pgu-sm-7, .col-pgu-sm-8, .col-pgu-sm-9, .col-pgu-sm-10, .col-pgu-sm-11, .col-pgu-sm-12, .col-pgu-sm, .col-pgu-sm-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+
+.col-6, .col-md-2, .col-md-10 {
 position: relative;
 width: 100%;
 }
@@ -51,7 +52,6 @@ width: 100%;
 flex: 0 0 100%;
 max-width: 100%;
 }
-
 
 .container {
 width: 100%;
@@ -148,6 +148,11 @@ align-self: flex-end !important;
     vertical-align: baseline;
 }
 
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
 .zone-logo-title {
     padding: 0.5rem 1.1rem 0.5rem 0;
 }
@@ -165,21 +170,17 @@ align-self: flex-end !important;
     color: white;
 }
 
-.piv .titreM {
-    padding-bottom: 2%
-  }
-
-  #pivImage {
+#header-logo {
     width:100%;
-    min-width: 8rem;
+    min-width: 7rem;
     max-height: 28px;
-  }
+}
 
-  ul li:last-child {
-    padding: 0;
-  }
+#header-logo-print {
+    display: none;
+}
 
-  .listePiv {
+.zone-links ul {
     font: normal 0.8rem/1.2rem "roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     text-align: left;
@@ -187,24 +188,18 @@ align-self: flex-end !important;
     list-style: none;
     padding: 0;
     margin: 0;
-  }
+}
 
-  #pivImagePrint {
-    display: none;
-  }
+ul li:last-child {
+    padding: 0;
+}
 
-  ::ng-deep body > vg-root > vg-portal > igo-map-browser > igo-zoom-button > div > button:nth-child(1) > span.mat-button-wrapper > mat-icon, ::ng-deep .mat-icon {
-    color: #095797!important;
-    border-color: #095797;
-    border-radius: 0;
-  }
-
-.listePiv a:hover,.listePiv a:focus {
+.zone-links ul a:hover, .zone-links ul a:focus {
     text-decoration: underline;
     cursor:pointer;
 }
 
-.buttonLanguage{
+.buttonLanguage {
     background: none;
     border-style: none;
     padding: 0;
@@ -227,17 +222,6 @@ align-self: flex-end !important;
 igo-map-browser {
     height: calc(100% - $app-header-height);
 }
-
-/* //just for fun
-#title-desktop:hover {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23453886' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
-    background-position: bottom;
-    background-repeat: repeat-x;
-    background-size: 20%;
-    border-bottom: 0;
-    padding-bottom: .3em;
-    text-decoration: none;
-}*/
 
 @media screen and (min-width: 576px) {
 
@@ -266,7 +250,7 @@ igo-map-browser {
 
 @media screen and (min-width: 824px) {
 
-    #pivImage {
+    #header-logo {
         max-height: 39px;
         padding-right: 3.75rem;
     }

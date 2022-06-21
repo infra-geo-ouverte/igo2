@@ -1,16 +1,16 @@
 <div class = banner role = banner>
-	<div class="container piv">
-		<div class="row" id="entetePiv">
+	<div class="container">
+		<div class="row">
 			<div class="col-6 col-md-10 d-flex flex-wrap align-items-center zone-logo-title">
 				<a class="logo" tabindex="5" routerLink="">
-                    <img id="pivImage" alt="Logo" src="{{headerLogo}}">
+                    <img id="header-logo" alt="Logo" src="{{headerLogo}}">
 					
                 </a>
-				<img id="pivImagePrint" alt="Logo" src="{{headerLogoPrint}}" width="199" height="60" />
+				<img id="header-logo-print" alt="Logo" src="{{headerLogoPrint}}" width="199" height="60" />
 				<p lang="fr" id="title-desktop" class="zone-title  d-none d-md-block">{{(headerTitle)}}</p>
 			</div>
 			<div class="col-6 col-md-2 d-flex justify-content-end zone-links">
-				<ul class="listePiv nav flex-column">
+				<ul class="nav flex-column">
 					<!--<li><button class="buttonLanguage" disabled (click)="changeLanguage()">{{'header.language'}}</button></li>-->
 					<li><a alt="('header.contactUsUrl' | translate)" [href]="('contactUsUrl')" target="_blank">{{'header.contactUs' | translate}}</a></li>
 				</ul>
