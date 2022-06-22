@@ -54,8 +54,8 @@ export class AppComponent {
     this.hasHeader = this.configService.getConfig('header.hasHeader') === undefined ? false :
     this.configService.getConfig('header.hasHeader');
 
-    this.hasFooter = this.configService.getConfig('header.hasFooter') === undefined ? false :
-    this.configService.getConfig('header.hasFooter');
+    this.hasFooter = this.configService.getConfig('hasFooter') === undefined ? false :
+    this.configService.getConfig('hasFooter');
   }
 
   private readTitleConfig() {

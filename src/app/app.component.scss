@@ -30,6 +30,10 @@ height: calc( 100% - #{$header-height-mobile} )!important;
   height: calc( 100% - #{$header-height-mobile} - #{$footer-height} )!important;
 }
 
+::ng-deep .portal-footer {
+  height: calc( 100% - #{$footer-height} )!important;
+}
+
 @media screen and (min-width: 824px) {
   ::ng-deep .portal-with-header {
         height: calc( 100% - #{$header-height} )!important;
