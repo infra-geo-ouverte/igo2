@@ -1,5 +1,4 @@
-
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { zip } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -24,8 +23,6 @@ export class AppComponent {
   private themeClass = 'blue-theme';
   public hasHeader = true;
   public HeaderComponent = HeaderComponent;
-  @ViewChild('searchBar', { read: ElementRef, static: true })
-  searchBar: ElementRef;
 
   constructor(
     protected languageService: LanguageService,

@@ -3,10 +3,9 @@
 // Adjust portal height
 
 $header-height: 72px;
-$header-height-mobile: 103px;
 
 ::ng-deep .portal-with-header {
-height: calc(100% - #{$header-height-mobile})!important;
+height: calc(100% - #{$header-height})!important;
 }
 
 @media screen and (min-width: 824px) {
