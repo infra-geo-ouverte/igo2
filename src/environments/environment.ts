@@ -157,7 +157,7 @@ export const environment: Environment = {
               forcedProperties: [{
                 layerName: 'Sediment substrate / Substrat sédimentaire',
                 title: 'Nouveau nom et nouvel url pour cette couche ArcGIS REST',
-                //metadataUrl: "https://www.donneesquebec.ca/",
+                metadataUrl: "https://www.donneesquebec.ca/",
               },
             {
               layerName: "*",
