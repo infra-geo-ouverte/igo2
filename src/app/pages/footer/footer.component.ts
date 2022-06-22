@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LanguageService } from '@igo2/core';
+import { ConfigService, LanguageService } from '@igo2/core';
 
 @Component({
   selector: 'app-footer',
@@ -9,6 +9,7 @@ import { LanguageService } from '@igo2/core';
 export class FooterComponent {
 
   constructor(
+    private configService: ConfigService,
     protected languageService: LanguageService) {
     }
 

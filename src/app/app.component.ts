@@ -24,8 +24,8 @@ export class AppComponent {
   private themeClass = 'blue-theme';
   public hasHeader = true;
   public HeaderComponent = HeaderComponent;
-  public FooterComponent = FooterComponent;
   public hasFooter = true;
+  public FooterComponent = FooterComponent;
   @ViewChild('searchBar', { read: ElementRef, static: true })
   searchBar: ElementRef;
 

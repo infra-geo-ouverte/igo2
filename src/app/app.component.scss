@@ -18,3 +18,24 @@ igo-message-center ::ng-deep simple-notifications ::ng-deep div.simple-notificat
   right: 10px;
 }
 
+$header-height: 72px;
+$header-height-mobile: 72px;
+$footer-height: 29px;
+
+::ng-deep .portal-with-header {
+height: calc( 100% - #{$header-height-mobile} )!important;
+}
+
+::ng-deep .portal-with-header-footer {
+  height: calc( 100% - #{$header-height-mobile} - #{$footer-height} )!important;
+}
+
+@media screen and (min-width: 824px) {
+  ::ng-deep .portal-with-header {
+        height: calc( 100% - #{$header-height} )!important;
+        }
+
+  ::ng-deep .portal-with-header-footer {
+      height: calc( 100% - #{$header-height} - - #{$footer-height} )!important;
+      }
+}
