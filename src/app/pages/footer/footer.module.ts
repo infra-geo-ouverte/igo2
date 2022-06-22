@@ -15,4 +15,4 @@ import { IgoLanguageModule } from '@igo2/core';
     FooterComponent
   ]
 })
-export class FooterQccaModule { }
+export class FooterModule { }

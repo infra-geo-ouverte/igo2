@@ -1,4 +1,3 @@
-
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { zip } from 'rxjs';
@@ -13,6 +12,7 @@ import {
 import { AuthOptions } from '@igo2/auth';
 import { AnalyticsListenerService } from '@igo2/integration';
 import { HeaderComponent } from './pages/header/header.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +24,7 @@ export class AppComponent {
   private themeClass = 'blue-theme';
   public hasHeader = true;
   public HeaderComponent = HeaderComponent;
+  public FooterComponent = FooterComponent;
   public hasFooter = true;
   @ViewChild('searchBar', { read: ElementRef, static: true })
   searchBar: ElementRef;
