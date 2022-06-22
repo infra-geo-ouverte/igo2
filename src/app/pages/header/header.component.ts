@@ -10,8 +10,6 @@ export class HeaderComponent {
 
   public headerLogo: string;
   public headerLogoPrint: string;
-  public headerTitle: string;
-  public headerContactUsUrl: string;
 
   constructor(
     private configService: ConfigService,
@@ -19,10 +17,8 @@ export class HeaderComponent {
       this.computeHeader();
     }
 
-
   computeHeader() {
     this.headerLogo = this.configService.getConfig('header.logo');
-    this.headerLogoPrint = this.configService.getConfig('header.logoPrint');
     this.headerLogoPrint = this.configService.getConfig('header.logoPrint');
   }
 
