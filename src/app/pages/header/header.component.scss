@@ -6,7 +6,13 @@ $header-height: 72px;
 $header-height-mobile: 103px;
 
 ::ng-deep .portal-with-header {
-height: calc(100% - #{$header-height})!important;
+height: calc(100% - #{$header-height-mobile})!important;
+}
+
+@media screen and (min-width: 824px) {
+    ::ng-deep .portal-with-header {
+        height: calc(100% - #{$header-height})!important;
+        }
 }
 
 // Grids
