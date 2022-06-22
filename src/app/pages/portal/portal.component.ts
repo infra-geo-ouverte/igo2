@@ -30,7 +30,7 @@ import {
   WorkspaceStore,
   ActionStore,
   EntityStore,
-  // getEntityTable
+  // getEntityTitle
   Toolbox,
   Tool,
   Widget,
