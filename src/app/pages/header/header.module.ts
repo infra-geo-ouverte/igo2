@@ -10,7 +10,7 @@ import { IgoLanguageModule } from '@igo2/core';
   imports: [
     CommonModule,
     IgoLanguageModule
-    ],
+  ],
   exports: [
     HeaderComponent
   ]
