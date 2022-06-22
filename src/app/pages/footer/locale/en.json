@@ -1,0 +1,13 @@
+{
+  "workspace":{
+    "externallinks": "This link will open in a new window"
+  },
+  "footer":{
+          "ministry": "Ministère de la Sécurité publique",
+          "url-ministry": "https://www.quebec.ca/gouvernement/ministere/securite-publique",
+          "conditions": "Terms of use",
+          "url-conditions": "",
+          "gov": "© Gouvernement du Québec, 2022",
+          "url-gov": "http://www.droitauteur.gouv.qc.ca/copyright.php"
+        }
+}

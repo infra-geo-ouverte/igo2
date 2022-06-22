@@ -5,3 +5,5 @@
 <app-header *ngIf="hasHeader" #header></app-header>
 
 <app-portal [ngClass]="hasHeader? 'portal-with-header' : 'portal' " igoStopDropPropagation></app-portal>
+
+<app-footer *ngIf="hasFooter" #footer></app-footer>

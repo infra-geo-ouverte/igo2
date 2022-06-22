@@ -24,6 +24,7 @@ export class AppComponent {
   private themeClass = 'blue-theme';
   public hasHeader = true;
   public HeaderComponent = HeaderComponent;
+  public hasFooter = true;
   @ViewChild('searchBar', { read: ElementRef, static: true })
   searchBar: ElementRef;
 
@@ -51,6 +52,9 @@ export class AppComponent {
 
     this.hasHeader = this.configService.getConfig('header.hasHeader') === undefined ? false :
     this.configService.getConfig('header.hasHeader');
+
+    this.hasFooter = this.configService.getConfig('header.hasFooter') === undefined ? false :
+    this.configService.getConfig('header.hasFooter');
   }
 
   private readTitleConfig() {
