@@ -1,0 +1,341 @@
+// https://design.quebec.ca/
+
+:root {
+--breakpoint-pgu-sm: 403px;
+--breakpoint-sm: 576px;
+--breakpoint-md: 768px;
+--breakpoint-lg: 992px;
+--breakpoint-xl: 1200px;
+}
+    
+html,body {
+padding: 0;
+margin: 0!important;
+width: 100%;
+font-size: 16px;
+font-family: 'Open sans', sans-serif;
+}
+
+@media (min-width: 1280px) and (orientation: landscape){
+    body {
+    margin: 0!important;
+    }
+}
+
+html, body, div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+vertical-align: baseline;
+}
+
+html, body {
+    font-family: 'Open sans', sans-serif;
+}
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-pgu-sm-1, .col-pgu-sm-2, .col-pgu-sm-3, .col-pgu-sm-4, .col-pgu-sm-5, .col-pgu-sm-6, .col-pgu-sm-7, .col-pgu-sm-8, .col-pgu-sm-9, .col-pgu-sm-10, .col-pgu-sm-11, .col-pgu-sm-12, .col-pgu-sm, .col-pgu-sm-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+position: relative;
+width: 100%;
+}
+
+.col-12 {
+flex: 0 0 100%;
+max-width: 100%;
+}
+
+
+.container {
+width: 100%;
+margin-right: auto;
+margin-left: auto;
+}
+
+.row {
+-ms-display: flex;
+display: flex;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+height: 100%;
+width: 98%;
+align-content: center;
+margin: auto;
+}
+
+.col-6 {
+flex: 0 0 50%;
+max-width: 50%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #095797 !important;
+}
+
+a {
+word-break: break-word;
+overflow-wrap: break-word;
+cursor: pointer;
+}
+
+// Pour afficher le symbole de lien externe. Ex de HTML : 
+/*
+<a href="https://www.quebec.ca/" target="_blank" rel="noreferrer">Lien qui ouvrira dans une nouvelle fenêtre.&nbsp;<img class="linkExtImg" src="/typo3conf/ext/gabarit_pgu/Resources/Public/Images/Templates/lien-externe.svg" alt="Cet hyperlien s'ouvrira dans une nouvelle fenêtre."></a>
+*/
+
+.linkExtImg {
+    max-height: 11px;
+    max-width: 11px;
+    margin-bottom: 0.16rem;
+}
+
+img {
+vertical-align: middle;
+border-style: none;
+}
+
+*, *::before, *::after {
+box-sizing: border-box;
+}
+
+.d-none {
+display: none;
+}
+
+.flex-column {
+display: flex;
+flex-direction: column !important;
+}
+
+.flex-wrap {
+flex-wrap: wrap !important;
+}
+
+.d-flex {
+display: -ms-flexbox !important;
+display: flex !important;
+}
+
+.align-items-center {
+-ms-flex-align: center !important;
+align-items: center !important;
+}
+
+.justify-content-end {
+-ms-flex-pack: end !important;
+justify-content: flex-end !important
+}
+
+d-md-none {
+display: none;
+}
+
+.align-self-end {
+align-self: flex-end !important;
+}
+
+.piv {
+background: #095797;
+color: #fff;
+font: normal 1rem/1rem "Roboto", sans-serif;
+word-break: break-all;
+line-height: 1rem;
+}
+
+.piv a {
+color: #fff;
+text-decoration: none;
+}
+
+.piv a:hover {
+text-decoration: underline
+}
+
+a, .mat-toolbar.mat-primary {
+color: #095797;
+}
+
+:disabled, mat-icon.disabled, :disabled :hover {
+color: #223654!important;
+text-decoration: none;
+}
+
+igo-baselayers-switcher, igo-geolocate-button {
+box-shadow: 0 1px 4px rgb(34 54 84 / 24%);
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+margin-bottom: 1.2rem;
+font-family: 'Roboto', sans-serif;
+font-weight: 500;
+line-height: 1.2;
+color: #223654;
+}
+
+h1 {
+font-size: 2rem;
+font-weight: bold;
+line-height: 3rem;
+margin-bottom: 2rem;
+}
+
+h1:after {
+content: "";
+display: block;
+margin: 0;
+width: 4.8rem;
+padding-top: 0.4rem;
+border-bottom: 4px solid #f09686;
+}
+
+// ANGULAR MATERIAL
+
+::ng-deep .mat-stroked-button {
+    border: 2px solid currentColor;
+}
+
+::ng-deep .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+    border-radius: 0!important;
+}
+
+::ng-deep .mat-flat-button.mat-basic, ::ng-deep .mat-raised-button.mat-basic, ::ng-deep .mat-fab.mat-basic, ::ng-deep .mat-mini-fab.mat-basic {
+    color: #095797!important;
+    font-family: 'Open sans', sans-serif!important;
+    font-weight: 600!important;
+}
+
+
+span.surtitre {
+    font-family: Open Sans;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: normal;
+    color: #647287;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+// FONTS
+
+p {
+    font-family: "Open Sans",sans-serif;
+    color: #223654;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 24px;
+}
+
+h1 {
+    font-family: Roboto;
+    font-size: 48px;
+    line-height: 54px;
+    font-weight: bold;
+    color: #223654;
+    margin-top: 72px;
+    margin-bottom: 32px;
+}
+
+@media (max-width: 1200px) {
+    h1 {
+        font-family: Roboto;
+        font-size: 36px;
+        line-height: 40px;
+        font-weight: bold;
+        color: #223654;
+        margin-top: 48px;
+        margin-bottom: 16px;
+    }
+}
+
+h1:after {
+   content: "";
+   display: block;
+   margin: 0px;
+   width: 48px;
+   padding-top: 4px;
+   border-bottom: 4px solid #F09686;
+}
+
+h2 {
+    font-family: Roboto;
+    font-size: 35px;
+    line-height: 40px;
+    font-weight: bold;
+    color: #223654;
+    margin-top: 48px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 1200px) {
+    h2 {
+        font-family: Roboto;
+        font-size: 29px;
+        line-height: 32px;
+        font-weight: bold;
+        color: #223654;
+        margin-top: 48px;
+        margin-bottom: 16px;
+    }
+}
+
+h3 {
+    font-family: Roboto;
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: bold;
+    color: #223654;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 1200px) {
+    h3 {
+        font-family: Roboto;
+        font-size: 25px;
+        line-height: 32px;
+        font-weight: bold;
+        color: #223654;
+        margin-top: 24px;
+        margin-bottom: 16px;
+    }
+}
+
+h4 {
+    font-family: Roboto;
+    font-size: 21px;
+    line-height: 24px;
+    font-weight: bold;
+    color: #223654;
+    margin-top: 24px;
+    margin-bottom: 8px;
+}
+
+h5 {
+    font-family: Roboto;
+    font-size: 19px;
+    line-height: 24px;
+    font-weight: bold;
+    color: #223654;
+    margin-top: 16px;
+    margin-bottom: 0px;
+}
+
+h6 {
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: bold;
+    color: #223654;
+    margin-top: 16px;
+    margin-bottom: 0px;
+}
+
+span.surtitre {
+    font-family: Open Sans;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: normal;
+    color: #647287;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+

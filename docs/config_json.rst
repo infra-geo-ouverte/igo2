@@ -813,6 +813,8 @@ Propriétés
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
+    NB. Pour le thème qc-ca, si pour appliquer l'ensemble du style (qui s'applique aux autres éléments qui ne font pas partie de Angular material), il faut aller dans l'assemblage, src/styles.scss et décommenter la ligne "@import './qcca-theme/qcca-theme.scss';"" 
+
 Liens
 
         - `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
