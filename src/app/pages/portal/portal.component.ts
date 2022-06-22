@@ -1522,7 +1522,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   zoomToSelectedFeatureWks() {
     let format = new olFormatGeoJSON();
-    console.log(this.workspaceState);
     const featuresSelected = this.workspaceState.workspaceSelection.map(rec => (rec.entity as Feature));
     if (featuresSelected.length === 0) {
       return;
