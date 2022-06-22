@@ -30,7 +30,7 @@ height: calc( 100% - #{$header-height-mobile} )!important;
   height: calc( 100% - #{$header-height-mobile} - #{$footer-height} )!important;
 }
 
-::ng-deep .portal-footer {
+::ng-deep .portal-with-footer {
   height: calc( 100% - #{$footer-height} )!important;
 }
 

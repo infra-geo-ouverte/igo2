@@ -12,11 +12,11 @@
   "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
   "header": {
-    "hasHeader": true,
+    "hasHeader": false,
     "logo": "assets/images/signature-PIV.svg",
     "logoPrint": "assets/images/signature-PIV.svg"
   },
-  "hasFooter": true,
+  "hasFooter": false,
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
