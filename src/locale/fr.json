@@ -17,7 +17,7 @@
   "header": {
     "title": "IGO",
     "language": "English",
-    "contactUsUrl" : "https://www.quebec.ca/nous-joindre/renseignements-generaux",
+    "contactUsUrl" : "mailto:geomsp@msp.gouv.qc.ca",
     "contactUs" : "Nous joindre"
   },
   "footer":{

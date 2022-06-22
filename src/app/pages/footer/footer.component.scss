@@ -33,11 +33,9 @@ span.footer-text a{
 
 
 ::ng-deep .ol-scale-line {
-    position: unset;
-    background: unset;
     display: flex;
     flex-direction: row;
-    margin-left: 0.5%;
+    left: 5%!important;
 }
 
 ::ng-deep .ol-scale-line-inner {
