@@ -30,6 +30,7 @@ import {
   WorkspaceStore,
   ActionStore,
   EntityStore,
+  // getEntityTable
   Toolbox,
   Tool,
   Widget,
@@ -166,7 +167,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
   public showToastPanelForExpansionToggle = false;
-  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(undefined);
+  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
+    undefined
+  );
   private routeParams: Params;
   public toastPanelHtmlDisplay = false;
 

@@ -35,7 +35,7 @@
       "showPreviousNextPageButtons": true
     }
   },
-  "hasFeatureEmphasisOnSelection": false,
+  "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
   "homeExtentButton": {
     "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
