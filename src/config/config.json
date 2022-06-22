@@ -11,11 +11,11 @@
   },
   "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
-  "hasExpansionPanel": false,
+  "hasExpansionPanel": true,
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
-  "showMenuButton": false,
-  "showSearchBar": false,
+  "showMenuButton": true,
+  "showSearchBar": true,
   "simpleEntityList": {
     "layerId": "simpleList",
     "attributeOrder": [
@@ -38,7 +38,7 @@
   "hasFeatureEmphasisOnSelection": false,
   "menuButtonReverseColor": false,
   "homeExtentButton": {
-    "homeExtButtonExtent": [-9000000, 5790000,-7500000, 6770000],
+    "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
     "homeExtButtonCenter": [-71.938087, 48.446975],
     "homeExtButtonZoom" : 6
   },
