@@ -2,4 +2,6 @@
 
 <igo-auth-form *ngIf="authConfig && authConfig.url"></igo-auth-form>
 
-<app-portal igoStopDropPropagation></app-portal>
+<app-header *ngIf="hasHeader" #header></app-header>
+
+<app-portal [ngClass]="hasHeader? 'portal-with-header' : 'portal' " igoStopDropPropagation></app-portal>

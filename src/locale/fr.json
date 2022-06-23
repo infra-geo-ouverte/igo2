@@ -13,6 +13,13 @@
     },
     "addFeature": "Ajouter une entité à la couche en édition"
   },
+  "header": {
+    "title": "IGO",
+    "language": "English",
+    "contactUsUrl" : "https://www.igouverte.org/#footer",
+    "contactUs" : "Nous joindre",
+    "externallinks": "Cet hyperlien s’ouvrira dans une nouvelle fenêtre"
+  },
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
     "listButton": "Retourner à la liste des entités",

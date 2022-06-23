@@ -10,6 +10,18 @@ Géométrique
 .. _igomap:
 
 *****************************
+Entête (header)
+*****************************
+    .. line-block::
+
+        Entête comprenant un logo, un titre et un petit menu pour changer la langue et afficher le lien Nous joindre.
+        L'entête est optionnelle.
+        Les options de configuration sont dans src/config.json sous "header" :
+            "hasHeader": boolean (activer ou désactiver l'entête)
+            "logo": string (lien vers l'image du logo)
+            "logoPrint": string (lien vers l'image du logo pour impression, si nécessaire)
+
+*****************************
 Carte (map)
 *****************************
     .. line-block::
