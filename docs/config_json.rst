@@ -701,6 +701,7 @@ Exemple
                   }
               }
 
+
 Liens
         - `Interface vers overlayStyle <https://github.com/infra-geo-ouverte/igo2-lib/blob/1.11.1/packages/geo/src/lib/utils/commonVectorStyle.interface.ts>`_
 
