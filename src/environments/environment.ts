@@ -126,18 +126,28 @@ export const environment: Environment = {
               matrixSet: 'EPSG_3857',
               version: '1.0.0',
               forcedProperties: [{
+                metadataAbstract: 'Nouvel abstract',
                 layerName: 'BDTQ-20K_Allegee',
-                title: 'Nouveau nom pour cette couche WMTS'
+                title: 'Nouveau nom et abstract pour cette couche WMTS',
               }]
             },
             {
               id: 'forcedProperties_wms',
               url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
               type: 'wms',
-              forcedProperties: [{
-                layerName: 'lieuhabite',
-                title: 'Nouveau nom pour cette couche WMS'
-              }]
+              forcedProperties: [
+                {
+                  layerName: "*",
+                  //metadataUrlAll: "https://quebec.ca/",
+                  metadataAbstractAll: "New WMS abstract to all layers"
+                },
+                {
+                  layerName: 'etablissement_mtq',
+                  title: 'Nouveau nom pour cette couche WMS et nouvel url pour toutes les couches',
+                  //metadataAbstract: "New WMS Abstract",
+                  metadataUrl: 'https://www.donneesquebec.ca/'
+                }
+              ]
             },
             {
               id: 'forcedProperties_arcgisrest',
@@ -146,8 +156,14 @@ export const environment: Environment = {
               type: 'arcgisrest',
               forcedProperties: [{
                 layerName: 'Sediment substrate / Substrat sédimentaire',
-                title: 'Nouveau nom pour cette couche ArcGIS REST'
-              }]
+                title: 'Nouveau nom et nouvel url pour cette couche ArcGIS REST',
+                metadataUrl: "https://www.donneesquebec.ca/",
+              },
+            {
+              layerName: "*",
+              //metadataUrlAll: "https://quebec.ca/",
+              metadataAbstractAll: "New arcgisrest abstract to all layers"
+            }]
             }
           ]
         },

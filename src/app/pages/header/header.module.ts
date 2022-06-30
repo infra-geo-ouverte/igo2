@@ -12,7 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     CommonModule,
     IgoLanguageModule,
     MatToolbarModule
-  ],
+    ],
   exports: [
     HeaderComponent
   ]
