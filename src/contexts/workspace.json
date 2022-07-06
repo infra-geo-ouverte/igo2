@@ -24,12 +24,12 @@
           "queryFormatAsWms": true,
           "type": "wms",
           "optionsFromCapabilities": true,
-          "url": "/ws/mffpecofor.fcgi",
+          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi",
           "params": {
             "layers": "nord_photo_oblique",
             "version": "1.3.0"
           },
-          "urlWfs": "/ws/mffpecofor.fcgi",
+          "urlWfs": "https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi",
           "paramsWFS": {
             "featureTypes": "nord_photo_oblique",
             "maxFeatures": 1000,
