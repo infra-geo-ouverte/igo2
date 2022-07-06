@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { zip } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -6,7 +6,6 @@ import { userAgent } from '@igo2/utils';
 import {
   LanguageService,
   ConfigService,
-  AnalyticsService,
   MessageService
 } from '@igo2/core';
 import { AuthOptions } from '@igo2/auth';
@@ -26,13 +25,10 @@ export class AppComponent {
   public HeaderComponent = HeaderComponent;
   public hasFooter = true;
   public FooterComponent = FooterComponent;
-  @ViewChild('searchBar', { read: ElementRef, static: true })
-  searchBar: ElementRef;
 
   constructor(
     protected languageService: LanguageService,
     private configService: ConfigService,
-    private analyticsService: AnalyticsService,
     private analyticsListenerService: AnalyticsListenerService,
     private renderer: Renderer2,
     private titleService: Title,
