@@ -86,7 +86,8 @@
               "core-js/modules/es.array.index-of.js",
               "core-js/modules/es.array.reduce.js",
               "core-js/modules/web.dom-collections.iterator.js",
-              "core-js/modules/es.array.iterator.js"
+              "core-js/modules/es.array.iterator.js",
+              "nosleep.js"
             ]
           },
           "configurations": {
@@ -106,7 +107,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -137,7 +137,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,

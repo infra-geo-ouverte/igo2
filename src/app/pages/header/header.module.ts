@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { IgoLanguageModule } from '@igo2/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { IgoLanguageModule } from '@igo2/core';
   ],
   imports: [
     CommonModule,
-    IgoLanguageModule
+    IgoLanguageModule,
+    MatToolbarModule
     ],
   exports: [
     HeaderComponent
