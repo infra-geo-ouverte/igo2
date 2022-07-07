@@ -21,12 +21,12 @@
     "externallinks": "This link will open in a new window"
   },
   "footer":{
-    "ministry": "Ministère de la Sécurité publique",
-    "url-ministry": "https://www.quebec.ca/gouvernement/ministere/securite-publique",
     "conditions": "Terms of use",
     "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
+    "ministry": "Ministry name",
+    "url-ministry": "https://www.quebec.ca/government/ministry/",
     "gov": "© Gouvernement du Québec, 2022",
-    "url-gov": "http://www.droitauteur.gouv.qc.ca/copyright.php"
+    "url-gov": "http://www.droitauteur.gouv.qc.ca/en/index.php"
   },
   "toastPanel": {
     "title": "Entities found on the map",
