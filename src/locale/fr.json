@@ -21,8 +21,8 @@
     "contactUs" : "Nous joindre"
   },
   "footer":{
-    "ministry": "Ministère de la Sécurité publique",
-    "url-ministry": "https://www.quebec.ca/gouvernement/ministere/securite-publique",
+    "ministry": "Nom du ministère",
+    "url-ministry": "https://www.quebec.ca/gouvernement/",
     "conditions": "Conditions d'utilisation",
     "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
     "gov": "© Gouvernement du Québec, 2022",
