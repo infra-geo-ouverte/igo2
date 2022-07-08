@@ -11,8 +11,7 @@
       "resolution": "La vue tabulaire n'est pas disponible à cette échelle",
       "visible": "La couche n'a pas été chargée. Veuillez rendre visible la couche pour découvrir la donnée."
     },
-    "addFeature": "Ajouter une entité à la couche en édition",
-    "externallinks": "Cet hyperlien s’ouvrira dans une nouvelle fenêtre"
+    "addFeature": "Ajouter une entité à la couche en édition"
   },
   "header": {
     "title": "IGO",
@@ -28,6 +27,7 @@
     "gov": "© Gouvernement du Québec, 2022",
     "url-gov": "http://www.droitauteur.gouv.qc.ca/copyright.php"
   },
+  "externallinks": "Cet hyperlien s’ouvrira dans une nouvelle fenêtre",
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
     "listButton": "Retourner à la liste des entités",

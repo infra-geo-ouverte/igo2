@@ -8,8 +8,6 @@ import { LanguageService } from '@igo2/core';
 })
 export class FooterComponent {
 
-  constructor(
-    protected languageService: LanguageService) {
-    }
+  constructor(protected languageService: LanguageService) {}
 
 }

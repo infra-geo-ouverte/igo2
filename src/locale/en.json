@@ -17,8 +17,7 @@
     "title": "IGO",
     "language": "Français",
     "contactUsUrl" : "https://www.igouverte.org/english/#footer",
-    "contactUs" : "Contact us",
-    "externallinks": "This link will open in a new window"
+    "contactUs" : "Contact us"
   },
   "footer":{
     "conditions": "Terms of use",
@@ -28,6 +27,7 @@
     "gov": "© Gouvernement du Québec, 2022",
     "url-gov": "http://www.droitauteur.gouv.qc.ca/en/index.php"
   },
+  "externallinks": "This link will open in a new window",
   "toastPanel": {
     "title": "Entities found on the map",
     "listButton": "Return to the list of entities",
