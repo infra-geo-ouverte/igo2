@@ -16,10 +16,18 @@
   "header": {
     "title": "IGO",
     "language": "Français",
-    "contactUsUrl" : "https://www.igouverte.org/#footer",
-    "contactUs" : "Contact us",
-    "externallinks": "This link will open in a new window"
+    "contactUsUrl" : "https://www.igouverte.org/english/#footer",
+    "contactUs" : "Contact us"
   },
+  "footer":{
+    "conditions": "Terms of use",
+    "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
+    "ministry": "Ministry name",
+    "url-ministry": "https://www.quebec.ca/government/ministry/",
+    "gov": "© Gouvernement du Québec, 2022",
+    "url-gov": "http://www.droitauteur.gouv.qc.ca/en/index.php"
+  },
+  "externallinks": "This link will open in a new window",
   "toastPanel": {
     "title": "Entities found on the map",
     "listButton": "Return to the list of entities",

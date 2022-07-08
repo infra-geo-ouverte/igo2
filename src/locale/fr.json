@@ -17,9 +17,17 @@
     "title": "IGO",
     "language": "English",
     "contactUsUrl" : "https://www.igouverte.org/#footer",
-    "contactUs" : "Nous joindre",
-    "externallinks": "Cet hyperlien s’ouvrira dans une nouvelle fenêtre"
+    "contactUs" : "Nous joindre"
   },
+  "footer":{
+    "conditions": "Conditions d'utilisation",
+    "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
+    "ministry": "Nom du ministère",
+    "url-ministry": "https://www.quebec.ca/gouvernement/ministère/",
+    "gov": "© Gouvernement du Québec, 2022",
+    "url-gov": "http://www.droitauteur.gouv.qc.ca/copyright.php"
+  },
+  "externallinks": "Cet hyperlien s’ouvrira dans une nouvelle fenêtre",
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
     "listButton": "Retourner à la liste des entités",
