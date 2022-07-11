@@ -67,12 +67,14 @@
   "interactiveTour": {
     "global": {
       "title": "Tour interatif",
+      "advanced-map-tool-title": "OUTILS AVANCÉS",
+      "advanced-map-tool": "Permet de comparer des couches de données et d’obtenir des informations sur la carte.",
       "menu-button-title": "MENU",
-      "menu-button": "Cliquez sur ce bouton pour ouvrir et fermer le menu général.",
+      "menu-button": "Permet d’ouvrir et de fermer le menu général.",
       "search-bar-title": "BARRE DE RECHERCHE",
       "search-bar": "Permet de rechercher une adresse, un point GPS, une couche, etc.",
       "search-settings-title": "OPTIONS DE RECHERCHE",
-      "search-settings": "Permet de configurer: le type de résultat, le nombre de résultats souhaités, etc.",
+      "search-settings": "Permet de configurer le choix des services de recherche, le type de résultat, le nombre de résultats souhaités, etc.",
       "toolbox-title": "LA BOÎTE À OUTILS",
       "toolbox": "Sur sélection de l'outil, l'application bascule à l'intérieur et affiche son contenu.",
       "search-tool-title": "RÉSULTATS DE RECHERCHE",
