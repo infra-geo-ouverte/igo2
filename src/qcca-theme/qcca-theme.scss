@@ -326,14 +326,3 @@ span.surtitre {
 ::ng-deep igo-actionbar-item .mat-focus-indicator .mat-icon svg, body > app-root > app-portal > mat-sidenav-container > mat-sidenav-content > app-sidenav > mat-sidenav > div > div > div > igo-panel > div.igo-panel-content > igo-toolbox > igo-actionbar > mat-list > igo-actionbar-item button.mat-focus-indicator .mat-icon svg{
     color: #223654!important;
 }
-
-
-@mixin igo-panel-theming($theme) {
-    $primary: map-get($theme, primary);
-  
-    igo-panel > div.igo-panel-header {
-      background-color: mat.get-color-from-palette($primary);
-      color: mat.get-color-from-palette($primary, 50, 50);
-    }
-  
-  }
