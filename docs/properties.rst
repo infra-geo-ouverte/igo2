@@ -340,7 +340,12 @@ Exemples
 
             {"sourceOptions": {
                   "attributions": "Droits d'auteurs que vous désirez afficher avec votre couche.",
-                  "crossOrigin": "anonymous"
+                  "crossOrigin": "anonymous",
+                  "download": {
+                    "url": "https://diffusion.mffp.gouv.qc.ca/Diffusion/DonneeGratuite/Foret/IMAGERIE/Mosaiques_Landsat/Mosaique_Sentinel_2021/",
+                    "extern": true,
+                    "allowedFormats": ["URL"]
+                  }
             }}
 
 

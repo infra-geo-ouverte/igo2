@@ -679,27 +679,31 @@ Exemple
             "queryOverlayStyle": {},
             "searchOverlayStyle": {
                   "base": {
-                      "markerColor": "purple",         // marker fill
-                      "fillColor": [233,66,133],       // poly
-                      "outlineColor": "LightPink",      // marker contour
-                      "strokeColor": "green",           // line and poly
-                      "strokeWidth": 1                  // line and poly
+                      "markerColor": "purple",              // marker fill
+                      "fillColor": [233,66,133],            // poly
+                      "markerOutlineColor": "LightPink",    // marker contour
+                      "strokeColor": "green",               // line and poly
+                      "strokeWidth": 1                      // line and poly
                   },
                   "selection": {
                       "markerColor": "#32a852",         // marker fill
                       "fillColor": [95,96,133],         // poly
-                      "outlineColor": "#a62997",        // marker contour
+                      "markerOutlineColor": "#a62997",  // marker contour
                       "strokeColor": "#a62997",         // line and poly
                       "strokeWidth": 4                  // line and poly
                   },
                   "focus": {
-                      "markerColor": "blue",            // marker fill
-                      "fillColor": "red",               // poly
-                      "outlineColor": "LightPink",      // marker contour
-                      "strokeColor": "Sienna",          // line and poly
-                      "strokeWidth": 2                  // line and poly
+                      "markerColor": "blue",                // marker fill
+                      "fillColor": "red",                   // poly
+                      "markerOutlineColor": "LightPink",    // marker contour
+                      "strokeColor": "Sienna",              // line and poly
+                      "strokeWidth": 2                      // line and poly
                   }
               }
+
+
+Liens
+        - `Interface vers overlayStyle <https://github.com/infra-geo-ouverte/igo2-lib/blob/1.11.1/packages/geo/src/lib/utils/commonVectorStyle.interface.ts>`_
 
 .. _igoprojections:
 

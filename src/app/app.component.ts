@@ -6,12 +6,10 @@ import { userAgent } from '@igo2/utils';
 import {
   LanguageService,
   ConfigService,
-  AnalyticsService,
   MessageService
 } from '@igo2/core';
 import { AuthOptions } from '@igo2/auth';
 import { AnalyticsListenerService } from '@igo2/integration';
-import { HeaderComponent } from './pages/header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -22,12 +20,11 @@ export class AppComponent {
   public authConfig: AuthOptions;
   private themeClass = 'blue-theme';
   public hasHeader = true;
-  public HeaderComponent = HeaderComponent;
+  public hasFooter = true;
 
   constructor(
     protected languageService: LanguageService,
     private configService: ConfigService,
-    private analyticsService: AnalyticsService,
     private analyticsListenerService: AnalyticsListenerService,
     private renderer: Renderer2,
     private titleService: Title,
@@ -48,6 +45,9 @@ export class AppComponent {
 
     this.hasHeader = this.configService.getConfig('header.hasHeader') === undefined ? false :
     this.configService.getConfig('header.hasHeader');
+
+    this.hasFooter = this.configService.getConfig('hasFooter') === undefined ? false :
+    this.configService.getConfig('hasFooter');
   }
 
   private readTitleConfig() {
