@@ -1,4 +1,5 @@
 // https://design.quebec.ca/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Roboto:wght@400;500;700&display=swap');
 
 :root {
 --breakpoint-sm: 320px;
@@ -13,6 +14,7 @@ margin: 0!important;
 width: 100%;
 font-size: 16px;
 font-family: 'Open sans', sans-serif;
+color: #223654;
 }
 
 @media (min-width: 1024px) and (orientation: landscape){
@@ -139,6 +141,9 @@ color: #fff;
 text-decoration: none;
 }
 
+igo-panel-header, igo-panel-title, igo-panel-header button  {
+    color: #fff!important;
+}
 .piv a:hover {
 text-decoration: underline
 }
@@ -158,6 +163,11 @@ box-shadow: 0 1px 4px rgb(34 54 84 / 24%);
 
 // FONTS
 
+::ng-deep .qcca-theme .mat-toolbar.mat-primary h2, ::ng-deep .igo-panel-title, ::ng-deep .igo-panel-header h3, ::ng-deep .qcca-theme igo-panel > div.igo-panel-header, ::ng-deep .qcca-theme igo-panel > div.igo-panel-header h3,
+.igo-panel-title[_ngcontent-eeh-c247], ::ng-deep .igo-panel-title[_ngcontent-eeh-c247]{
+    color: white!important;
+}
+
 p {
     font-family: "Open Sans",sans-serif;
     color: #223654;
@@ -166,9 +176,9 @@ p {
     margin-bottom: 24px;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .mat-dialog-title {
+h1, h2, h4, h5, h6, .mat-dialog-title { //h3 a été retiré car en conflit avec igo-panel-title
   font-family: 'Roboto', sans-serif!important;
-  font-weight: 600!important;
+  font-weight: 600;
   color: #223654;
   }
   
@@ -194,7 +204,6 @@ h1:after {
         font-size: 36px;
         line-height: 40px;
         font-weight: bold;
-        color: #223654;
         margin-top: 48px;
         margin-bottom: 16px;
     }
@@ -204,7 +213,6 @@ h2 {
     font-size: 35px;
     line-height: 40px;
     font-weight: bold;
-    color: #223654;
     margin-top: 48px;
     margin-bottom: 16px;
 }
@@ -214,7 +222,6 @@ h2 {
         font-size: 29px;
         line-height: 32px;
         font-weight: bold;
-        color: #223654;
         margin-top: 48px;
         margin-bottom: 16px;
     }
@@ -224,7 +231,6 @@ h3 {
     font-size: 28px;
     line-height: 32px;
     font-weight: bold;
-    color: #223654;
     margin-top: 24px;
     margin-bottom: 16px;
 }
@@ -234,7 +240,6 @@ h3 {
         font-size: 25px;
         line-height: 32px;
         font-weight: bold;
-        color: #223654;
         margin-top: 24px;
         margin-bottom: 16px;
     }
@@ -244,7 +249,6 @@ h4 {
     font-size: 21px;
     line-height: 24px;
     font-weight: bold;
-    color: #223654;
     margin-top: 24px;
     margin-bottom: 8px;
 }
@@ -253,7 +257,6 @@ h5 {
     font-size: 19px;
     line-height: 24px;
     font-weight: bold;
-    color: #223654;
     margin-top: 16px;
     margin-bottom: 0px;
 }
@@ -262,7 +265,6 @@ h6 {
     font-size: 16px;
     line-height: 24px;
     font-weight: bold;
-    color: #223654;
     margin-top: 16px;
     margin-bottom: 0px;
 }
@@ -286,22 +288,53 @@ span.surtitre {
       margin-bottom: 1rem;
   }
 
+  igo-toolbox h4 {
+    font-weight: 500!important;
+  }
+
 // ANGULAR MATERIAL
 
 ::ng-deep .mat-stroked-button {
     border: 2px solid currentColor;
 }
 
-::ng-deep .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+::ng-deep .mat-button, ::ng-deep .mat-icon-button, ::ng-deep .mat-stroked-button, ::ng-deep .mat-flat-button, ::ng-deep .mat-form-field-outline-start, ::ng-deep .mat-form-field-outline-end {
     border-radius: 0!important;
 }
 
-::ng-deep .mat-flat-button, ::ng-deep .mat-raised-button, ::ng-deep .mat-raised-button,
+::ng-deep .mat-flat-button, ::ng-deep button, ::ng-deep .mat-raised-button, ::ng-deep .mat-raised-button,
 ::ng-deep button, button, .mat-flat-button, ::ng-deep .mat-raised-button, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep .blue-theme .mat-flat-button, 
-::ng-deep .mat-raised-button, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep span.mat-button-wrapper {
+::ng-deep .mat-raised-button, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep span.mat-button-wrapper, 
+::ng-deep .mat-icon-no-color .ng-star-inserted svg {
     color: #095797!important;
     font-family: 'Open sans', sans-serif!important;
     font-weight: 600!important;
     font-size: 0.9rem !important;
     border-radius: 0 !important;
 }
+
+::ng-deep .qcca-theme .mat-button-toggle-checked, ::ng-deep .igo-list-item-selected, ::ng-deep .mat-focus-indicator .mat-line, ::ng-deep .ng-star-inserted,
+::ng-deep .mat-selected, ::ng-deep .select div:hover, ::ng-deep .qcca-theme .mat-focus-indicator {
+    color: #f2f1f1!important;
+}
+
+.mat-list-item:hover {
+    background: #dae6f0!important;
+}
+
+.mat-list-item, .mat-list-item-content, .mat-list-item-content:hover, .qcca-theme, .qcca-theme .mat-list-base, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title) .mat-icon svg:hover, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title).selected .mat-icon svg,
+::ng-deep igo-actionbar-item .mat-focus-indicator .mat-icon svg, body > app-root > app-portal > mat-sidenav-container > mat-sidenav-content > app-sidenav > mat-sidenav > div > div > div > igo-panel > div.igo-panel-content > igo-toolbox > igo-actionbar > mat-list > igo-actionbar-item button.mat-focus-indicator .mat-icon svg{
+    color: #223654!important;
+}
+
+
+
+@mixin igo-panel-theming($theme) {
+    $primary: map-get($theme, primary);
+  
+    igo-panel > div.igo-panel-header {
+      background-color: mat.get-color-from-palette($primary);
+      color: mat.get-color-from-palette($primary, 50, 50);
+    }
+  
+  }
