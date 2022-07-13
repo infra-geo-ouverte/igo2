@@ -403,6 +403,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
     this.map.ol.once('rendercomplete', () => {
       this.readQueryParams();
+      if (this.configService.getConfig('geolocate.activateDefault') !== undefined) {
+        this.map.geolocationController.tracking =  this.configService.getConfig('geolocate.activateDefault');
+      }
     });
 
     this.onSettingsChange$.subscribe(() => {
