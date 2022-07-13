@@ -454,6 +454,22 @@ favoriteContext4NonAuthenticated
         dans le "LocalStorage" du fureteur.
 
 *****************
+geolocate
+*****************
+
+    .. line-block::
+
+        Permet de gérer l'activation par défaut de l'attribut "followPosition". Utile pour ceux qui n'utilisent pas le module "advancedMapTools".
+
+Exemples
+
+        .. code:: json
+
+            geolocate: {
+                "followPosition": "false"
+            }
+
+*****************
 hasExpansionPanel
 *****************
 
