@@ -1,8 +1,10 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 **theme*** ,String ,Thème à utiliser pour la présente application configurée. ,"| - blue-theme
+| - qcca.theme
 | - bluegrey.theme
 | - dark.theme
 | - deeppurple.theme
 | - indigo.theme
 | - orange.theme
 | - teal.theme",blue-theme 
+
