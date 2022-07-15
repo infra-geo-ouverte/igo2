@@ -1,5 +1,8 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+# bundled locale for the demo
+/src/locale/libs_locale
+
 # compiled output
 /dist
 /tmp
@@ -24,6 +27,7 @@
 !.vscode/extensions.json
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage/*
