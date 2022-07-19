@@ -59,7 +59,7 @@
     "@angular/router": "^13.3.11",
     "@azure/msal-angular": "^2.0.1",
     "@azure/msal-browser": "^2.15.0",
-    "@igo2/auth": "~1.13.0-alpha.1",
+    "@igo2/auth": "~1.13.0-alpha.0",
     "@igo2/common": "~1.13.0-alpha.1",
     "@igo2/context": "~1.13.0-alpha.1",
     "@igo2/core": "~1.13.0-alpha.1",
