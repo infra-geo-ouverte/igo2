@@ -13,7 +13,7 @@
     "lint": "ng lint",
     "lint.fix": "ng lint --fix",
     "e2e": "ng e2e --port 4300",
-    "postinstall": "ngcc --tsconfig src/tsconfig.app.json",
+    "postinstall": "ngcc --tsconfig src/tsconfig.app.json && gulp copyLocaleFromLib",
     "build.prod": "ng build --configuration production",
     "serve.prod": "http-server ./dist/igo2/ --port=4200 --no-browser",
     "doc": "compodoc -p src/tsconfig.app.json -s --port 4220",
