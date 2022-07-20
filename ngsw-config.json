@@ -2,8 +2,8 @@
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
   "appData": {
-    "changelog": "Initial version",
-    "version": "1.10.0-pwa.8"
+    "changelog": "Version juillet 2022",
+    "version": "1.11.1-pwa.220720.0"
   },
   "assetGroups": [
     {
@@ -38,7 +38,7 @@
       "resources": {
         "files": [
           "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/*.(pdf|eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
     }

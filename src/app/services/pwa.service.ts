@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
-import { ConfigService, LanguageService } from '@igo2/core';
+import { ConfigService, LanguageService, StorageService } from '@igo2/core';
 import { SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { ConfirmDialogService } from '@igo2/common';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,9 @@ export class PwaService {
     private platform: Platform,
     public updates: SwUpdate,
     public languageService: LanguageService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private confirmDialogService: ConfirmDialogService,
+    private storageService: StorageService
   ) {
     if (updates.isEnabled) {
       interval(60 * 1000 * 2).subscribe(() => updates.checkForUpdate());
@@ -25,14 +27,17 @@ export class PwaService {
 
     if (this.updates.isEnabled) {
       this.updates.available
-      .pipe(debounceTime(25000))
+     // .pipe(debounceTime(25000))
       .subscribe(() => {
         const title = this.languageService.translate.instant('pwa.new-version-title');
         const body = this.languageService.translate.instant('pwa.new-version');
         const message = `${title} ${body}`;
-          if(confirm(message)) {
-              window.location.reload();
+        this.confirmDialogService.open(message).subscribe((confirm) => {
+          if (confirm) {
+            this.storageService.set('dataLoadSource', 'newVersion');
+            window.location.reload();
           }
+        });
       });
   }
   }

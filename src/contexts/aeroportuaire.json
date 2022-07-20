@@ -3,7 +3,7 @@
   "base": "_base",
   "messages": [
     {
-      "text": "La donnée présente sur cette carte est valide en date du 2022-06-01",
+      "text": "La donnée présente sur cette carte est valide en date du 2022-07-20",
       "type": "info",
       "options": {
         "timeOut": 10000
@@ -103,11 +103,11 @@
 
       },
       "style": {
-        "stroke": { 
-          "color": "rgba(170,95,255)",                   
+        "stroke": {
+          "color": "rgba(170,95,255)",
           "width": 3
-        },          
-        "fill": { 
+        },
+        "fill": {
           "color": "rgba(255,255,255,0)"
         }
       }
@@ -180,7 +180,7 @@
       ]
       },
       "style": {
-        "stroke": { 
+        "stroke": {
           "color": "rgba(0,0,255)",
           "width": 3
         }
@@ -220,7 +220,7 @@
         "scale": [0.5]
         }
     }
-    
+
   ],
   "toolbar": [
     "searchResults",
