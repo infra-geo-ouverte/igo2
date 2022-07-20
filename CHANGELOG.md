@@ -1,3 +1,13 @@
+## [1.12.1](https://github.com/infra-geo-ouverte/igo2/compare/1.12.0...1.12.1) (2022-07-13)
+
+
+### Features
+
+* **app:** upgrade igo2-lib ([f96e179](https://github.com/infra-geo-ouverte/igo2/commit/f96e179ef2fab7b32c03031c2c18b92c0194d484))
+* **pages:** Footer ([#806](https://github.com/infra-geo-ouverte/igo2/issues/806)) ([ec97933](https://github.com/infra-geo-ouverte/igo2/commit/ec97933eebf15fd0c45bddec81c63cf972c76970))
+
+
+
 # [1.12.0](https://github.com/infra-geo-ouverte/igo2/compare/1.11.1...1.12.0) (2022-06-23)
 
 

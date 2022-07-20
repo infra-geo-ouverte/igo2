@@ -3,3 +3,4 @@ attributions ,String ,Les droits d'auteurs liés à la couche. ,,
 crossOrigin ,String ,"| Permet de définir l'entête de l'appel faite au serveur.
 | Permet entre autres, d'éviter les problématiques de CORS.
 | De manière plus commune, définir ""crossOrigin"": ""anonymous"". ",anonymous | use-credentials | null ,
+download ,Object{} ,Les options de téléchargement. |Attention si vous avez un wms avec un| fichier en URL vous ne devez pas permettre |les formats géometriques,"allowedFormats" : ["URL", "GeoJSON", "GML", "GPX", "KML", "Shapefile", "CSVcomma", "CSVsemicolon"],

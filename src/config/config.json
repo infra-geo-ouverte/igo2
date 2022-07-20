@@ -16,6 +16,7 @@
     "logo": "assets/images/signature-PIV.svg",
     "logoPrint": "assets/images/signature-PIV.svg"
   },
+  "hasFooter": false,
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
