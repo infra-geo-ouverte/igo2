@@ -1,14 +1,18 @@
 {
   "IGO": "SIGO - Terrain",
   "coordinates": "Show informations",
+  "chromeOrEdgeOnIos": {
+    "title": "iOS (Apple device)",
+    "text": "Use Safari instead to access full features from this application."
+  },
   "igo": {
     "geo": {
       "importExportForm": {
-        "importFormatAuthorized": "Offline: Geojson only, otherwise, authorized formats are: geojson, kml, gpx, gml, shapefile"
+        "importFormatAuthorized": "Offline: geojson, kml and gpx only, otherwise, authorized formats are: geojson, kml, gpx, gml, shapefile"
       }
     },
     "integration": {
-
+      "aboutTool": { "html": "<head> <meta charset='utf-8'> <style> .page { padding-left: 0px; }  .bold_class { font-weight: bold; }  .red { color: red; }  .tool_name { border-top: 1px solid #00897B; /* padding-left: 5px; */ padding-right: 1%; padding-bottom: 1%; }  .titre_outil { font-weight: bold; font-size: 18px; }  .align_right { text-align: right; }  .describe { text-align: left; } </style> </head>  <body> <div align='center'><img src='./assets/images/LogoMinistereGrand.gif' alt='SIGO - Terrain' width='220' style='margin-left:0px'></div> The mission of the Ministère des Transports is to ensure the sustainable mobility of people throughout the territory. and goods through efficient and safe transportation systems that contribute to the development of Quebec. <div class='page' style='color: black;'> <table> <tr> <th></th> </tr> <tbody>       <tr> <td>Help:</td> <td><a href='./assets/SIGO_Terrain_Guide.pdf' target='_blank'>User manual</a></td> </tr> <tr> <td></td> <td><a href='./assets/SIGO_Terrain_Changements.pdf' target='_blank'>Changelog</a></td> </tr> <tr> <td>Support:</td> <td><a href='mailto:geomatique@transports.gouv.qc.ca?subject=SIGO - Terrain'>geomatique@transports.gouv.qc.ca</a> </td> </tr> </tbody> </table></br><br> </body> Version: {{version.app}}"},
       "directions": {
         "warning": {
           "title": "Warning - This tool is only availaible online"
@@ -25,6 +29,6 @@
     }
   },
   "welcomeWindow": {
-    "html": "<h1>Welcome to {{title}} </h1><h2>{{description}}</h2><h3>Start by selecting the menu &#9776;</h3><h3> Continue by selecting a DGT in &#x2605;</h3><h3>For more information, please see the <a href='./assets/SIGO_Terrain_Guide.pdf' target='_blank'>user guide </a>.<br><br>Version {{version}}"
+    "html": "<h1>Welcome to {{title}} </h1><h2>{{description}}</h2><h3>Start by selecting the menu &#9776;</h3><h3> Continue by selecting a DGT in &#x2605;</h3><h3>For more information, please see the <a href='./assets/SIGO_Terrain_Guide.pdf' target='_blank'>user guide </a> or the <a href='./assets/SIGO_Terrain_Changements.pdf' target='_blank'>changelog</a>.<br><br>Version {{version}}"
   }
 }

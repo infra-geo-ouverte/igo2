@@ -149,6 +149,31 @@
               "buildOptimizer": false,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
+            },
+            "sigot": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "12kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sigot.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
@@ -167,6 +192,9 @@
             },
             "github": {
               "browserTarget": "igo2:build:github"
+            },
+            "sigot": {
+              "browserTarget": "igo2:build:sigot"
             }
           }
         },

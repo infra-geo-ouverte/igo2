@@ -101,6 +101,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
+import { PwaService } from '../../services/pwa.service';
 
 @Component({
   selector: 'app-portal',
@@ -329,7 +330,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState,
     private mapRtssProximityState: MapRtssProximityState,
     private mapProximityState: MapProximityState,
-    private geoDBService: GeoDBService
+    private geoDBService: GeoDBService,
+    private pwaService: PwaService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasHomeExtentButton =
@@ -531,6 +533,7 @@ ${rtss.properties.distance} m`;
     if ('serviceWorker' in navigator && dataDownload) {
       let downloadMessage;
       let currentVersion;
+      const dataLoadSource = this.storageService.get('dataLoadSource');
       navigator.serviceWorker.ready.then((registration) => {
         console.log('Service Worker Ready');
         this.http.get('ngsw.json').pipe(
@@ -541,7 +544,10 @@ ${rtss.properties.distance} m`;
               // IF FILE NOT IN THIS LIST... DELETE?
               currentVersion = ngsw.appData.version;
               const cachedDataVersion = this.storageService.get('cachedDataVersion');
-              if (currentVersion !== cachedDataVersion) {
+              if (currentVersion !== cachedDataVersion && dataLoadSource === 'pending' ) {
+                this.pwaService.updates.checkForUpdate();
+              }
+              if (dataLoadSource === 'newVersion' || !dataLoadSource) {
                 ((ngsw as any).assetGroups as any).map((assetGroup) => {
                   if (assetGroup.name === 'contexts') {
                     if (assetGroup.name === 'data') { // pas necessaire
@@ -562,6 +568,7 @@ ${rtss.properties.distance} m`;
             }
             return zip(...datas$);
           }),
+          delay(dataLoadSource ? 0 : 14000),
           concatMap((datas) => {
             if (datas.length > 0 && dataList.length > 0) {
               const message = this.languageService.translate.instant('pwa.data-download-start');
@@ -587,6 +594,7 @@ ${rtss.properties.distance} m`;
             const message = this.languageService.translate.instant('pwa.data-download-completed');
             this.messageService.success(message, undefined, { timeOut: 40000 });
             if (currentVersion) {
+              this.storageService.set('dataLoadSource', 'pending');
               this.storageService.set('cachedDataVersion', currentVersion);
             }
           }

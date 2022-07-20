@@ -1,13 +1,18 @@
 {
   "IGO": "SIGO - Terrain",
   "coordinates": "Afficher l'information",
+  "chromeOrEdgeOnIos": {
+    "title": "iOS (appareil Apple)",
+    "text": "Veuillez utiliser Safari pour accéder à toutes les fonctionnalités de cette application."
+  },
   "igo": {    
     "geo": {
       "importExportForm": {
-        "importFormatAuthorized": "Hors ligne: Geojson seulement, sinon les formats autorisés sont: geojson, kml, gpx, gml, shapefile"
+        "importFormatAuthorized": "Hors ligne: geojson, kml et gpx seulement, sinon les formats autorisés sont: geojson, kml, gpx, gml, shapefile"
       }
     },
     "integration": {
+      "aboutTool": { "html": "<head> <meta charset='utf-8'> <style> .page { padding-left: 0px; }  .bold_class { font-weight: bold; }  .red { color: red; }  .tool_name { border-top: 1px solid #00897B; /* padding-left: 5px; */ padding-right: 1%; padding-bottom: 1%; }  .titre_outil { font-weight: bold; font-size: 18px; }  .align_right { text-align: right; }  .describe { text-align: left; } </style> </head>  <body> <div align='center'><img src='./assets/images/LogoMinistereGrand.gif' alt='SIGO - Terrain' width='220' style='margin-left:0px'></div> La mission du ministère des Transports est d’assurer, sur tout le territoire, la mobilité durable des personnes et des marchandises par des systèmes de transport efficaces et sécuritaires qui contribuent au développement du Québec. <div class='page' style='color: black;'> <table> <tr> <th></th> </tr> <tbody> <tr> <td>Aide:</td> <td><a href='./assets/SIGO_Terrain_Guide.pdf' target='_blank'>Guide d'utilisation</a></td> </tr><tr> <td></td> <td><a href='./assets/SIGO_Terrain_Changements.pdf' target='_blank'>Liste des changements</a></td> </tr> <tr> <td>Contact:</td> <td><a href='mailto:geomatique@transports.gouv.qc.ca?subject=SIGO - Terrain'>geomatique@transports.gouv.qc.ca</a> </td> </tr> </tbody> </table></br><br> </body> Version: {{version.app}}"},
       "directions": {
         "warning": {
           "title": "Avertissement - Outil disponible en ligne seulement"
@@ -24,6 +29,6 @@
     }
   },
   "welcomeWindow": {
-    "html": "<h1>Bienvenue dans {{title}} </h1><h2>{{description}}</h2><h3>Débutez en sélectionnant le menu &#9776;</h3><h3>Poursuivez en sélectionnant une DGT dans &#x2605;</h3><h3>Pour plus d'informations, veuillez consulter le <a href='./assets/SIGO_Terrain_Guide.pdf' target='_blank'>Guide d'utilisation</a>.<br><br>Version {{version}}"
+    "html": "<h1>Bienvenue dans {{title}} </h1><h2>{{description}}</h2><h3>Débutez en sélectionnant le menu &#9776;</h3><h3>Poursuivez en sélectionnant une DGT dans &#x2605;</h3><h3>Pour plus d'informations, veuillez consulter le <a href='./assets/SIGO_Terrain_Guide.pdf' target='_blank'>Guide d'utilisation</a> ou la <a href='./assets/SIGO_Terrain_Changements.pdf' target='_blank'>liste des changements</a>.<br><br>Version {{version}}"
   }
 }
