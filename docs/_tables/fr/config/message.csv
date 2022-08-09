@@ -2,9 +2,10 @@ Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 format ,String,"| Le format du message html ou text. Selon le choix, une deuxième configuration devra
 | être définie soit html ou text. ","'text', 'html' ",
 html ,String,Le html du message sur une seule ligne. Cette configuration est obligatoire si le format = 'html. ,,
-icon ,String,Icone à ajouter au message. ,,
+noIcon , Boolean, Indique si l'icone est présent dans l'affichage du message , true/false, false
 options.* ,Notification ,"| Voir les options Notifications dans le projet 
 | `ngx-toastr options. <https://github.com/scttcper/ngx-toastr#individual-options>`_ ",,
+options.disableTimeOut , Boolean, Enlève le délais de temps ou est affiché le message, true/false, false
 options.template ,String ,En construction ,,
 options.from ,Date | String ,"| Date de début de l'application du message.
 | Peut être une date OU un string interprétable
@@ -14,7 +15,7 @@ options.to,Date | String ,"| Date de fin de l'application du message.
 | en javascript. `https://developer.mozilla.org/fr/docs... <https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date/parse>`_ ",,
 text ,String,"| Le text du message à afficher. Cette configuration remplace la configuration html.
 | NB.: pour un message qui sera traduction en fonction du navigateur simplement
-| créer une clef de traduction indiquer ici et de mettre sont équivalent dans les
+| créer une clef de traduction indiquée ici et mettre son équivalent dans les
 | fichiers de traduction local en.json, fr.json. Exemple:
 | ""text"": ""messageContextXyz"",
 | fr.json = ""messageContextXyz"": <h3>mon super message</h3>
@@ -23,5 +24,5 @@ title ,String,"| Le titre du message à afficher. Cette configuration s'
 | configuration text et ne sera pas pris en compte avec la configuration html. ",,
 type ,String,"| Le type du message à afficher. Avertissement, erreur ou information.
 | Selon le type choisi une couleur spécifiée sera appliquée selon la
-| thématique de couleur de l'application. ","| 'alert', 'error',
-| 'info', 'success'",
+| thématique de couleur de l'application. ","| 'warning', 'error',
+| 'info', 'success', 'show'",

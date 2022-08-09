@@ -1372,7 +1372,7 @@ Message
 
         Message affiché à l'ouverture du contexte ou à l'ouverture de la couche.
         - Une librairie tierce est utilisée pour l'affichage de message : `NGX-TOASTR  <https://www.npmjs.com/package/ngx-toastr>`_
-        NB.: Les classes connues de l'application peuvent être utilisées. Des classes personalisées spécifiques aux messages peuvent être ajoutés.
+        NB.: Les classes connues de l'application peuvent être utilisées. Des classes personalisées spécifiques aux messages peuvent être ajoutées dedans:.
          `IGO2 styles.scss <https://github.com/infra-geo-ouverte/igo2/blob/master/src/styles.scss#L13>`_
 
 Exemples
@@ -1381,8 +1381,9 @@ Exemples
 
             "message": {
                   "format": "html",
-                  "html": "<div class='class-custom-rouge'> Bienvenue sur <b>IGO</b></div>",
+                  "html": "<div class='toast-title-red'> Bienvenue sur <b>IGO</b></div>",
                   "type": "info",
+                  "noIcon": true,
                   "options": {
                         "timeOut": 30000
                   }
