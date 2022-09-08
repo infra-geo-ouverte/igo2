@@ -63,6 +63,7 @@
     "importExport",
     "print",
     "shareMap",
-    "about"
+    "about",
+    "advancedMap"
   ]
 }

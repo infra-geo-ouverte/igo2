@@ -245,7 +245,8 @@ Exemples
                                 "version": "1.0.0",
                                 "forcedProperties": [{
                                   "layerName": "BDTQ-20K_Allegee",
-                                  "title": "Nouveau nom pour cette couche WMTS"
+                                  "title": "Nouveau nom pour cette couche WMTS",
+                                  "metadataUrl": "New WMS Abstract"
                                 }]
                               },
                               {
@@ -254,7 +255,8 @@ Exemples
                                 "type": "wms",
                                 "forcedProperties": [{
                                   "layerName": "lieuhabite",
-                                  "title": "Nouveau nom pour cette couche WMS"
+                                  "title": "Nouveau nom pour cette couche WMS",
+                                  "metadataAbstract": "New WMS Abstract"
                                 }]
                               },
                               {
@@ -267,6 +269,30 @@ Exemples
                                   "title": "Nouveau nom pour cette couche Image ArcGIS REST"
                                 }]
                               },
+                              {
+                                  id: 'arcgisrestcatalogmaritime',
+                                  title: 'ArcGIS Rest Focus Maritime catalog',
+                                  url: 'https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/CHS/ENC_MaritimeChartService/MapServer/exts/MaritimeChartService/MapServer',
+                                  type: 'arcgisrest',
+                                  forcedProperties: [
+                                    {
+                                      layerName: "*",
+                                      metadataAbstractAll: "New abstract to all layers"
+                                    }
+                                  ]
+                              },
+                              {
+                                  id: 'arcgisrestcatalog',
+                                  title: 'ArcGIS Rest Corals catalog',
+                                  url: 'https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/CSAS_Corals_Sponges_2010_FR/MapServer',
+                                  type: 'arcgisrest',
+                                  forcedProperties: [
+                                    {
+                                      layerName: "*",
+                                      metadataUrlAll: "https://github.com/infra-geo-ouverte/igo2-lib/"
+                                    }
+                                  ]
+                              }
                        ]
                   },
                  ]
@@ -416,6 +442,32 @@ Exemples
 Liens
 
         - `igo2-lib/tree/master/packages/geo/src/lib/draw/draw <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/geo/src/lib/draw/draw>`_
+
+*****************
+favoriteContext4NonAuthenticated
+*****************
+
+    .. line-block::
+
+        Permet d'afficher ou non le bouton de contexte favori (contextManager)
+        pour les utilisateurs non authentifiés. Le contexte favori sera enregistré
+        dans le "LocalStorage" du fureteur.
+
+*****************
+geolocate
+*****************
+
+    .. line-block::
+
+        Permet de gérer l'activation par défaut de l'attribut "followPosition". Utile pour ceux qui n'utilisent pas le module "advancedMapTools".
+
+Exemples
+
+        .. code:: json
+
+            geolocate: {
+                "followPosition": "false"
+            }
 
 *****************
 hasExpansionPanel
@@ -643,27 +695,31 @@ Exemple
             "queryOverlayStyle": {},
             "searchOverlayStyle": {
                   "base": {
-                      "markerColor": "purple",         // marker fill
-                      "fillColor": [233,66,133],       // poly
-                      "outlineColor": "LightPink",      // marker contour
-                      "strokeColor": "green",           // line and poly
-                      "strokeWidth": 1                  // line and poly
+                      "markerColor": "purple",              // marker fill
+                      "fillColor": [233,66,133],            // poly
+                      "markerOutlineColor": "LightPink",    // marker contour
+                      "strokeColor": "green",               // line and poly
+                      "strokeWidth": 1                      // line and poly
                   },
                   "selection": {
                       "markerColor": "#32a852",         // marker fill
                       "fillColor": [95,96,133],         // poly
-                      "outlineColor": "#a62997",        // marker contour
+                      "markerOutlineColor": "#a62997",  // marker contour
                       "strokeColor": "#a62997",         // line and poly
                       "strokeWidth": 4                  // line and poly
                   },
                   "focus": {
-                      "markerColor": "blue",            // marker fill
-                      "fillColor": "red",               // poly
-                      "outlineColor": "LightPink",      // marker contour
-                      "strokeColor": "Sienna",          // line and poly
-                      "strokeWidth": 2                  // line and poly
+                      "markerColor": "blue",                // marker fill
+                      "fillColor": "red",                   // poly
+                      "markerOutlineColor": "LightPink",    // marker contour
+                      "strokeColor": "Sienna",              // line and poly
+                      "strokeWidth": 2                      // line and poly
                   }
               }
+
+
+Liens
+        - `Interface vers overlayStyle <https://github.com/infra-geo-ouverte/igo2-lib/blob/1.11.1/packages/geo/src/lib/utils/commonVectorStyle.interface.ts>`_
 
 .. _igoprojections:
 
@@ -802,6 +858,8 @@ Propriétés
        :widths: 10 10 30 15 10
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+    NB. Pour le thème qc-ca, si pour appliquer l'ensemble du style (qui s'applique aux autres éléments qui ne font pas partie de Angular material), il faut aller dans l'assemblage, src/styles.scss et décommenter la ligne "@import './qcca-theme/qcca-theme.scss';"" 
 
 Liens
 
@@ -1315,7 +1373,7 @@ Message
         Message affiché à l'ouverture du contexte ou à l'ouverture de la couche.
         - Une librairie tierce est utilisée pour l'affichage de message : `NGX-TOASTR  <https://www.npmjs.com/package/ngx-toastr>`_
         NB.: Les classes connues de l'application peuvent être utilisées. Des classes personalisées spécifiques aux messages peuvent être ajoutés.
-         `IGO2 styles.scss <https://github.com/infra-geo-ouverte/igo2/blob/master/src/styles.scss#L13>`_  
+         `IGO2 styles.scss <https://github.com/infra-geo-ouverte/igo2/blob/master/src/styles.scss#L13>`_
 
 Exemples
 

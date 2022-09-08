@@ -1,3 +1,34 @@
+## [1.12.1](https://github.com/infra-geo-ouverte/igo2/compare/1.12.0...1.12.1) (2022-07-13)
+
+
+### Features
+
+* **app:** upgrade igo2-lib ([f96e179](https://github.com/infra-geo-ouverte/igo2/commit/f96e179ef2fab7b32c03031c2c18b92c0194d484))
+* **pages:** Footer ([#806](https://github.com/infra-geo-ouverte/igo2/issues/806)) ([ec97933](https://github.com/infra-geo-ouverte/igo2/commit/ec97933eebf15fd0c45bddec81c63cf972c76970))
+
+
+
+# [1.12.0](https://github.com/infra-geo-ouverte/igo2/compare/1.11.1...1.12.0) (2022-06-23)
+
+
+### Bug Fixes
+
+* **app:** upgrade igo2-lib 1.12.0 ([e6efda3](https://github.com/infra-geo-ouverte/igo2/commit/e6efda3b2212fdafe229c7370bd7b2973cb44bca))
+* **edition:** fix refresh of relation layers ([e73e677](https://github.com/infra-geo-ouverte/igo2/commit/e73e67775d52dc962ee41a16900d40eb68ddbe94))
+* **portal:** chrome 101 update app-expansion-panel z-index was set to 1 ([3cc2bf8](https://github.com/infra-geo-ouverte/igo2/commit/3cc2bf894be6e76ab2a5d24ded819558e2406b20))
+* **spinner:** fix ponctual spinner display problems ([#799](https://github.com/infra-geo-ouverte/igo2/issues/799)) ([44421de](https://github.com/infra-geo-ouverte/igo2/commit/44421de1c5d09914f37bd709cdcb31fddac8c567))
+
+
+### Features
+
+* **app:** upgrade igo2-lib 1.12.0 ([72069d5](https://github.com/infra-geo-ouverte/igo2/commit/72069d58c80e01297218ed32e45a96ae3a0a225f))
+* **edition:** add button is now configurable ([#784](https://github.com/infra-geo-ouverte/igo2/issues/784)) ([8c7d2e0](https://github.com/infra-geo-ouverte/igo2/commit/8c7d2e0c2c8454578473e923232dced6e71911c3))
+* favorite context for non authenticated user (local storage) ([#760](https://github.com/infra-geo-ouverte/igo2/issues/760)) ([29c5cb0](https://github.com/infra-geo-ouverte/igo2/commit/29c5cb0f9b86568278cea4544eb80a77f8dd63ce))
+* **ogc-filters:** ogc filters dom value  ([#774](https://github.com/infra-geo-ouverte/igo2/issues/774)) ([6ae5e79](https://github.com/infra-geo-ouverte/igo2/commit/6ae5e79df2ae9a0c23737a731a53cfba6a0d3b00))
+* **pages:** add Header ([#803](https://github.com/infra-geo-ouverte/igo2/issues/803)) ([b74b981](https://github.com/infra-geo-ouverte/igo2/commit/b74b981d09c449fa12c87baa27fb032a8f4249f3))
+
+
+
 ## [1.11.1](https://github.com/infra-geo-ouverte/igo2/compare/1.11.0...1.11.1) (2022-04-07)
 
 

@@ -165,6 +165,9 @@ igo-actionbar {
   padding-left: 7px;
   padding-top: 5px;
 }
+.zoom-workspace {
+  padding-top: 5px;
+}
 
 igo-workspace-selector {
   @include mobile {
@@ -175,6 +178,11 @@ igo-workspace-selector {
 igo-entity-table-paginator {
   @include mobile {
     margin-left: -30px;
+  }
+}
+igo-entity-table-paginator ::ng-deep .mat-paginator-range-label {
+  @include mobile {
+    margin: 10px 1px 0px 20px;
   }
 }
 
@@ -193,7 +201,7 @@ app-expansion-panel {
   @include mobile {
     @supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee))
       and (not (-ms-ime-align: auto)) and (not (-moz-appearance: none)) {
-      z-index: 1;
+      z-index: 5;
     }
   }
 }
