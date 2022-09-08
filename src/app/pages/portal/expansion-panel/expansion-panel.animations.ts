@@ -16,15 +16,13 @@ export function showContent(
     state(
       'true',
       style({
-        opacity: 1,
-        display: 'block'
+        opacity: 1
       })
     ),
     state(
       'false',
       style({
-        opacity: 0,
-        display: 'none'
+        opacity: 0
       })
     ),
     transition('false => true', animate(`${duration} ${delay} ${easing}`)),
