@@ -4,6 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 import { AuthOptions } from '@igo2/auth';
+import { DOMOptions } from '@igo2/common';
 import { ContextServiceOptions } from '@igo2/context';
 import { LanguageOptions } from '@igo2/core';
 import {
@@ -29,6 +30,7 @@ interface Environment {
     projections?: Projection[];
     interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
     depot?: { url: string; trainingGuides?: string[]; };
+    dom?: DOMOptions[];
     queryOverlayStyle?: {
       base?: CommonVectorStyleOptions,
       selection?: CommonVectorStyleOptions,
@@ -124,18 +126,28 @@ export const environment: Environment = {
               matrixSet: 'EPSG_3857',
               version: '1.0.0',
               forcedProperties: [{
+                metadataAbstract: 'Nouvel abstract',
                 layerName: 'BDTQ-20K_Allegee',
-                title: 'Nouveau nom pour cette couche WMTS'
+                title: 'Nouveau nom et abstract pour cette couche WMTS',
               }]
             },
             {
               id: 'forcedProperties_wms',
               url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
               type: 'wms',
-              forcedProperties: [{
-                layerName: 'lieuhabite',
-                title: 'Nouveau nom pour cette couche WMS'
-              }]
+              forcedProperties: [
+                {
+                  layerName: "*",
+                  //metadataUrlAll: "https://quebec.ca/",
+                  metadataAbstractAll: "New WMS abstract to all layers"
+                },
+                {
+                  layerName: 'etablissement_mtq',
+                  title: 'Nouveau nom pour cette couche WMS et nouvel url pour toutes les couches',
+                  //metadataAbstract: "New WMS Abstract",
+                  metadataUrl: 'https://www.donneesquebec.ca/'
+                }
+              ]
             },
             {
               id: 'forcedProperties_arcgisrest',
@@ -144,8 +156,14 @@ export const environment: Environment = {
               type: 'arcgisrest',
               forcedProperties: [{
                 layerName: 'Sediment substrate / Substrat sédimentaire',
-                title: 'Nouveau nom pour cette couche ArcGIS REST'
-              }]
+                title: 'Nouveau nom et nouvel url pour cette couche ArcGIS REST',
+                metadataUrl: "https://www.donneesquebec.ca/",
+              },
+            {
+              layerName: "*",
+              //metadataUrlAll: "https://quebec.ca/",
+              metadataAbstractAll: "New arcgisrest abstract to all layers"
+            }]
             }
           ]
         },
@@ -222,6 +240,27 @@ export const environment: Environment = {
     depot: {
       url: '/apis/depot'
     },
+    dom: [
+      // {
+      //   id: 1,
+      //   name: 'test-dom',
+      //   values: [
+      //     {
+      //       id: "Radar photo fixe",
+      //       value: "Radar photo fixe"
+      //     },
+      //     {
+      //       id: "Radar photo mobile",
+      //       value: "Radar photo mobile"
+      //     }
+      //   ]
+      // },
+      {
+        id: 1,
+        name: 'dom_test',
+        url: "https://ws.mapserver.transports.gouv.qc.ca/applicatif?service=WFS&request=GetFeature&version=2.0.0&outputformat=dom&typenames=dom&dom=dom_test"
+      }
+    ],
     language: {
       prefix: './locale/'
     },

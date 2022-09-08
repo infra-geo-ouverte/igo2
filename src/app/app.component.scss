@@ -17,3 +17,29 @@ igo-spinner {
 igo-message-center ::ng-deep simple-notifications ::ng-deep div.simple-notification-wrapper {
   right: 10px;
 }
+
+$header-height: 72px;
+$header-height-mobile: 72px;
+$footer-height: 29px;
+
+::ng-deep .portal-with-header {
+height: calc( 100% - #{$header-height-mobile} )!important;
+}
+
+::ng-deep .portal-with-header-footer {
+  height: calc( 100% - #{$header-height-mobile} - #{$footer-height} )!important;
+}
+
+::ng-deep .portal-with-footer {
+  height: calc( 100% - #{$footer-height} )!important;
+}
+
+@media screen and (min-width: 824px) {
+  ::ng-deep .portal-with-header {
+        height: calc( 100% - #{$header-height} )!important;
+        }
+
+  ::ng-deep .portal-with-header-footer {
+      height: calc( 100% - #{$header-height} - #{$footer-height} )!important;
+      }
+}

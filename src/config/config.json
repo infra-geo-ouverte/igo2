@@ -11,6 +11,12 @@
   },
   "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
+  "header": {
+    "hasHeader": false,
+    "logo": "assets/images/signature-PIV.svg",
+    "logoPrint": "assets/images/signature-PIV.svg"
+  },
+  "hasFooter": false,
   "hasExpansionPanel": true,
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
@@ -35,6 +41,6 @@
     "nbVisitToShowAgain": 30
   },
   "edition": {
-    "url": "/apis/postgrest/"
+    "url": "/apis/inedit/"
   }
 }

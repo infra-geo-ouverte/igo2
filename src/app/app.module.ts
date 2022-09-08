@@ -27,6 +27,8 @@ import {
 import { environment } from '../environments/environment';
 import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
+import { HeaderModule } from './pages/header/header.module';
+import { FooterModule } from './pages/footer/footer.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,7 +42,9 @@ import { AppComponent } from './app.component';
     IgoSpinnerModule,
     IgoStopPropagationModule,
     PortalModule,
-    HammerModule
+    HammerModule,
+    HeaderModule,
+    FooterModule
   ],
   providers: [
     provideConfigOptions({

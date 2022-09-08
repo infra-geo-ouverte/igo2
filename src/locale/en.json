@@ -13,6 +13,21 @@
     },
     "addFeature": "Add entity to the edited layer"
   },
+  "header": {
+    "title": "IGO",
+    "language": "Français",
+    "contactUsUrl" : "https://www.igouverte.org/english/#footer",
+    "contactUs" : "Contact us"
+  },
+  "footer":{
+    "conditions": "Terms of use",
+    "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
+    "ministry": "Ministry name",
+    "url-ministry": "https://www.quebec.ca/government/ministry/",
+    "gov": "© Gouvernement du Québec, 2022",
+    "url-gov": "http://www.droitauteur.gouv.qc.ca/en/index.php"
+  },
+  "externallinks": "This link will open in a new window",
   "toastPanel": {
     "title": "Entities found on the map",
     "listButton": "Return to the list of entities",
@@ -52,6 +67,8 @@
   "interactiveTour": {
     "global": {
       "title": "Interactive tour",
+      "advanced-map-tool-title": "ADVANCED TOOLS",
+      "advanced-map-tool": "Allows you to compare data layers and get map information.",
       "menu-button-title": "MENU",
       "menu-button": "Click on the menu button to open and close the main menu.",
       "search-bar-title": "SEARCH BAR",

@@ -10,6 +10,18 @@ Géométrique
 .. _igomap:
 
 *****************************
+Entête (header)
+*****************************
+    .. line-block::
+
+        Entête comprenant un logo, un titre et un petit menu pour changer la langue et afficher le lien Nous joindre.
+        L'entête est optionnelle.
+        Les options de configuration sont dans src/config.json sous "header" :
+            "hasHeader": boolean (activer ou désactiver l'entête)
+            "logo": string (lien vers l'image du logo)
+            "logoPrint": string (lien vers l'image du logo pour impression, si nécessaire)
+
+*****************************
 Carte (map)
 *****************************
     .. line-block::
@@ -328,7 +340,12 @@ Exemples
 
             {"sourceOptions": {
                   "attributions": "Droits d'auteurs que vous désirez afficher avec votre couche.",
-                  "crossOrigin": "anonymous"
+                  "crossOrigin": "anonymous",
+                  "download": {
+                    "url": "https://diffusion.mffp.gouv.qc.ca/Diffusion/DonneeGratuite/Foret/IMAGERIE/Mosaiques_Landsat/Mosaique_Sentinel_2021/",
+                    "extern": true,
+                    "allowedFormats": ["URL"]
+                  }
             }}
 
 
@@ -1268,6 +1285,40 @@ Exemple - filtre avec boutons spécifique à un groupe et calendrier (filtrage t
                   "minDate": "2010-01-01T00:00:00-05:00",
                   "maxDate": "2025-12-31T00:00:00-05:00",
                   "stepDate": "P1D"
+            }
+
+Exemple - groupe de filtre avec autocomplétion et domaine de valeurs (dom)
+
+        .. code:: json
+
+            {
+                "ogcFilters": {
+                    "enabled": true,
+                    "editable": true,
+                    "allowedOperatorsType": "All",
+                    "autocomplete": {
+                        "groups": [
+                            {"title": "Autocomplete","name": "1","ids": ["id1"]}
+                        ],
+                        "bundles": [
+                            {
+                                "id": "id1",
+                                "logical": "Or",
+                                "unfiltered": true,
+                                "title": "dom",
+                                "domSelectors": [
+                                    {
+                                        "id": 1
+                                        "name": "dom",
+                                        "operator": "PropertyIsEqualTo",
+                                        "propertyName": "typeAppareil"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+
             }
 
 Propriétés de ogcFilters

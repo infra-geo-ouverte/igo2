@@ -13,6 +13,21 @@
     },
     "addFeature": "Ajouter une entité à la couche en édition"
   },
+  "header": {
+    "title": "IGO",
+    "language": "English",
+    "contactUsUrl" : "https://www.igouverte.org/#footer",
+    "contactUs" : "Nous joindre"
+  },
+  "footer":{
+    "conditions": "Conditions d'utilisation",
+    "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
+    "ministry": "Nom du ministère",
+    "url-ministry": "https://www.quebec.ca/gouvernement/ministère/",
+    "gov": "© Gouvernement du Québec, 2022",
+    "url-gov": "http://www.droitauteur.gouv.qc.ca/copyright.php"
+  },
+  "externallinks": "Cet hyperlien s’ouvrira dans une nouvelle fenêtre",
   "toastPanel": {
     "title": "Entités trouvées sur la carte",
     "listButton": "Retourner à la liste des entités",
@@ -52,12 +67,14 @@
   "interactiveTour": {
     "global": {
       "title": "Tour interatif",
+      "advanced-map-tool-title": "OUTILS AVANCÉS",
+      "advanced-map-tool": "Permet de comparer des couches de données et d’obtenir des informations sur la carte.",
       "menu-button-title": "MENU",
-      "menu-button": "Cliquez sur ce bouton pour ouvrir et fermer le menu général.",
+      "menu-button": "Permet d’ouvrir et de fermer le menu général.",
       "search-bar-title": "BARRE DE RECHERCHE",
       "search-bar": "Permet de rechercher une adresse, un point GPS, une couche, etc.",
       "search-settings-title": "OPTIONS DE RECHERCHE",
-      "search-settings": "Permet de configurer: le type de résultat, le nombre de résultats souhaités, etc.",
+      "search-settings": "Permet de configurer le choix des services de recherche, le type de résultat, le nombre de résultats souhaités, etc.",
       "toolbox-title": "LA BOÎTE À OUTILS",
       "toolbox": "Sur sélection de l'outil, l'application bascule à l'intérieur et affiche son contenu.",
       "search-tool-title": "RÉSULTATS DE RECHERCHE",

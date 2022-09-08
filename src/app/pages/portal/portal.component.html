@@ -153,6 +153,7 @@
         collapsibleButton
         tooltip-position="below"
         matTooltipShowDelay="500"
+        [disabled]="workspace.layer.options.sourceOptions.edition.addButton === false ? true : false"
         [matTooltip]="('workspace.addFeature') | translate"
         (click)="addFeature(workspace)">
         <mat-icon
@@ -172,6 +173,21 @@
         [mode]="actionbarMode"
         [overlayClass]="workspaceMenuClass">
       </igo-actionbar>
+      <button
+        class="zoom-workspace"
+        *ngIf="workspaceVisibility()"
+        [disabled]= "(workspaceState.workspaceSelection$ | async).length === 0 ? true : false"
+        mat-icon-button
+        color="primary"
+        collapsibleButton
+        tooltip-position="below"
+        matTooltipShowDelay="500"
+        [matTooltip]="('toastPanel.zoomOnFeaturesTooltip') | translate"
+        (click)="zoomToSelectedFeatureWks()">
+        <mat-icon
+        svgIcon="{{(workspaceState.workspaceSelection$ | async).length > 1 ?  'magnify-scan' : 'magnify-plus-outline'}}">
+        </mat-icon>
+      </button>
       <div class="spacer"></div>
       <igo-entity-table-paginator
         *ngIf="workspaceVisibility()"
