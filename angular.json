@@ -231,6 +231,10 @@
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "cache": {
+      "enabled": false,
+      "environment": "all"
+    }
   }
 }
