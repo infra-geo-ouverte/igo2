@@ -36,7 +36,7 @@ export const tooltipDefaultOptions: MatTooltipDefaultOptions = {
   showDelay: 500,
   hideDelay: 0,
   touchendHideDelay: 0
-}
+};
 
 @NgModule({
   declarations: [AppComponent],
