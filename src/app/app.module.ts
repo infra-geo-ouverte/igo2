@@ -29,14 +29,14 @@ import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './pages/header/header.module';
 import { FooterModule } from './pages/footer/footer.module';
-import { MatTooltipDefaultOptions, MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions } from '@angular/material/tooltip';
 
-export const tooltipDefaultOptions: MatTooltipDefaultOptions = {
-  disableTooltipInteractivity: true,
+export const defaultTooltipOptions: MatTooltipDefaultOptions = {
   showDelay: 500,
   hideDelay: 0,
-  touchendHideDelay: 0
-};
+  touchendHideDelay: 0,
+  disableTooltipInteractivity: true
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -55,7 +55,6 @@ export const tooltipDefaultOptions: MatTooltipDefaultOptions = {
     FooterModule
   ],
   providers: [
-    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipDefaultOptions },
     provideConfigOptions({
       default: environment.igo,
       path: './config/config.json'
@@ -72,7 +71,8 @@ export const tooltipDefaultOptions: MatTooltipDefaultOptions = {
     provideCadastreSearchSource(),
     provideStyleListOptions({
       path: './assets/list-style.json'
-    })
+    }),
+    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: defaultTooltipOptions }
   ],
   bootstrap: [AppComponent]
 })
