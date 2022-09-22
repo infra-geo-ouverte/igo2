@@ -36,7 +36,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
   hideDelay: 0,
   touchendHideDelay: 0,
   disableTooltipInteractivity: true
-}
+};
 
 @NgModule({
   declarations: [AppComponent],
