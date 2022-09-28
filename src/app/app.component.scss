@@ -1,4 +1,4 @@
-@import '~@igo2/core/style/partial/core.variables';
+@import '../../node_modules/@igo2/core/style/partial/core.variables';
 
 :host {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -43,3 +43,5 @@ height: calc( 100% - #{$header-height-mobile} )!important;
       height: calc( 100% - #{$header-height} - #{$footer-height} )!important;
       }
 }
+
+::ng-deep .mat-tooltip-hide { display: none!important; } // temporary fix (https://github.com/angular/components/issues/24614)

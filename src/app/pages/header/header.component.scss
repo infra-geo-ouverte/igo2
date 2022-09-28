@@ -223,7 +223,7 @@ ul li:last-child {
 }
 
 igo-map-browser {
-    height: calc(100% - $app-header-height);
+    height: calc(100% - $header-height);
 }
 
 @media screen and (min-width: 576px) {
