@@ -279,7 +279,6 @@ Exemples
             {"linkedLayers": {
                 "linkId": "wmsTimeFilterSrc",
                 "links": [{
-                            "bidirectionnal": true,
                             "linkedIds": ["wmsTimeFilterDest"],
                             "syncedDelete": true,
                             "properties": ["opacity","timeFilter","visible"]
