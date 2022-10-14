@@ -12,27 +12,37 @@
   },
   "layers": [
     {
+      "zIndex": 8,
+      "title": "Directions régionales de la Protection de la faune",
+      "visible": true,
       "sourceOptions": {
-        "optionsFromCapabilities": true,
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+        "crossOrigin": "anonymous",
+        "queryable": true,
+        "queryFormat": "gml",
+        "optionsFromCapabilities": false,
+        "url": "https://servicesvecto3.mern.gouv.qc.ca/geoserver/SmartFaunePub/ows?",
         "params": {
-          "layers": "mffp_dgpf_limites_regions_s",
+          "layers": "LIMITE_REGIONS_PFQ",
           "version": "1.3.0"
         },
-        "type": "wms",
-        "queryTitle": "reg_adm"
+        "type": "wms"
       }
     },
     {
+      "zIndex": 9,
+      "title": "Bureaux de la Protection de la faune du Québec",
+      "visible": true,
       "sourceOptions": {
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
-        "optionsFromCapabilities": true,
+        "crossOrigin": "anonymous",
+        "queryable": true,
+        "queryFormat": "gml",
+        "url": "https://servicesvecto3.mern.gouv.qc.ca/geoserver/SmartFaunePub/ows?",
+        "optionsFromCapabilities": false,
         "params": {
-          "layers": "mffp_dgpf_bureaux_locaux_p",
+          "layers": "Bureaux_protection_faune",
           "version": "1.3.0"
         },
-        "type": "wms",
-        "queryTitle": "nom_du_bureau"
+        "type": "wms"
       }
     }
   ]
