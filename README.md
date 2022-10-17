@@ -139,7 +139,7 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 
 ## Download
 
-- [Version 1.13.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.12.1/igo2.zip)
+- [Version 1.13.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.13.0/igo2.zip)
 - [Version 1.12.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.12.1/igo2.zip)
 - [Version 1.11.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.11.1/igo2.zip)
 - [Version 1.10.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.10.0/igo2.zip)
