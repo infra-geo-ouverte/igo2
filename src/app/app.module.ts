@@ -48,6 +48,14 @@ function configLoader(
   }
   return Promise.resolve();
 }
+import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions } from '@angular/material/tooltip';
+
+export const defaultTooltipOptions: MatTooltipDefaultOptions = {
+  showDelay: 500,
+  hideDelay: 0,
+  touchendHideDelay: 0,
+  disableTooltipInteractivity: true
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -95,7 +103,8 @@ function configLoader(
     },
     provideStyleListOptions({
       path: './assets/list-style.json'
-    })
+    }),
+    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: defaultTooltipOptions }
   ],
   bootstrap: [AppComponent]
 })

@@ -30,7 +30,6 @@
         "linkedLayers": {
           "linkId": "wmsTimeFilterSrc",
           "links": [{
-            "bidirectionnal": true,
             "linkedIds": ["wmsTimeFilterDest"],
             "properties": ["opacity","timeFilter","visible"]
             }]
@@ -90,7 +89,6 @@
         "linkedLayers": {
           "linkId": "wmsOgcFiltersSrc",
           "links": [{
-            "bidirectionnal": true,
             "syncedDelete": true,
             "linkedIds": ["wmsOgcFiltersDest","wfsOgcFilterDest"],
             "properties": ["zIndex", "opacity","visible","ogcFilters","minResolution", "maxResolution" ]

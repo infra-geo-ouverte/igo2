@@ -43,3 +43,5 @@ height: calc( 100% - #{$header-height-mobile} )!important;
       height: calc( 100% - #{$header-height} - #{$footer-height} )!important;
       }
 }
+
+::ng-deep .mat-tooltip-hide { display: none!important; } // temporary fix (https://github.com/angular/components/issues/24614)
