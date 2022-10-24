@@ -7,6 +7,7 @@
         "title": "messages.title",
         "text": "messages.message",
         "type": "success",
+        "textInterpolateParams": { "content": "messages.content"},
         "showIcon": true,
         "options": {
           "timeOut": 30000,
