@@ -1383,7 +1383,7 @@ Exemples
                   "format": "html",
                   "html": "<div class='toast-title-red'> Bienvenue sur <b>IGO</b></div>",
                   "type": "info",
-                  "noIcon": true,
+                  "showIcon": false,
                   "options": {
                         "timeOut": 30000
                   }

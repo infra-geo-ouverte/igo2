@@ -2,7 +2,7 @@ Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 format ,String,"| Le format du message html ou text. Selon le choix, une deuxième configuration devra
 | être définie soit html ou text. ","'text', 'html' ",
 html ,String,Le html du message sur une seule ligne. Cette configuration est obligatoire si le format = 'html. ,,
-noIcon , Boolean, Indique si l'icone est présent dans l'affichage du message , true/false, false
+showIcon , Boolean, Indique si l'icone est présent dans l'affichage du message , true/false, true
 options.* ,Notification ,"| Voir les options Notifications dans le projet 
 | `ngx-toastr options. <https://github.com/scttcper/ngx-toastr#individual-options>`_ ",,
 options.disableTimeOut , Boolean, Enlève le délais de temps ou est affiché le message, true/false, false

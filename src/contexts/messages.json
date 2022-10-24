@@ -7,7 +7,7 @@
         "title": "messages.title",
         "text": "messages.message",
         "type": "success",
-        "noIcon": true,
+        "showIcon": true,
         "options": {
           "timeOut": 30000,
           "titleClass": "toast-title-red",
@@ -53,7 +53,7 @@
                     "title": "Info no icon",
                     "text": "Second message at layer level",
                     "type": "info",
-                    "noIcon": true,
+                    "showIcon": true,
                     "options": {
                         "timeOut": 20000
                     }
@@ -62,7 +62,7 @@
                     "title": "Show message type",
                     "text": "3e message at layer level",
                     "type": "show",
-                    "noIcon": true,
+                    "showIcon": true,
                     "options": {
                         "timeOut": 20000
                     }
