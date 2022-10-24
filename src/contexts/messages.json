@@ -7,10 +7,20 @@
         "title": "messages.title",
         "text": "messages.message",
         "type": "success",
+        "showIcon": true,
         "options": {
           "timeOut": 30000,
           "titleClass": "toast-title-red",
           "messageClass": "toast-message-gray"
+        }
+    },
+    {
+        "title": "Warning with noTimeout",
+        "text": "Warning xxxxxx<br>Click on message to indicate you have read the warning",
+        "type": "warning",
+        "format": "html",
+        "options": {
+            "disableTimeOut": true
         }
     }
     ],
@@ -40,13 +50,24 @@
                     }
                 },
                 {
-                    "title": "Info",
+                    "title": "Info no icon",
                     "text": "Second message at layer level",
                     "type": "info",
+                    "showIcon": false,
+                    "options": {
+                        "timeOut": 20000
+                    }
+                },
+                {
+                    "title": "Show message type",
+                    "text": "3e message at layer level",
+                    "type": "show",
+                    "showIcon": false,
                     "options": {
                         "timeOut": 20000
                     }
                 }
+    
             ]
         }
     ]

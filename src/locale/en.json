@@ -245,6 +245,6 @@
   },
   "messages": {
     "title": "Title from a translation",
-    "message": "Message from a translation - <div class='toast-message-green-div'>Message at the context level </div>Open the layer 'MSP Tel. Urgence' to see messages at the layer level."
+    "message": "Message from a translation - no icon - <div class='toast-message-green-div'>Message at the context level </div>Open the layer 'MSP Tel. Urgence' to see messages at the layer level."
   }
 }

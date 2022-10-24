@@ -2467,7 +2467,7 @@ importExport
           - Les shapeFiles doivent être dans un .zip
 
         Export:
-          - Seulement les couches en WFS peuvent être exportées.
+          - Seulement les couches en WFS peuvent être exportées, les couches WMS ne sont pas exportable.
 
 
 Exemples
@@ -2501,8 +2501,11 @@ Exemples
 
     .. line-block::
 
-        Outil permettant d'exporter certaines couches d'informations.
-        Noter que les couches WMS ne sont pas exportable.
+        Noter que des précisions peuvent etre ajoutées dans l'interface pour guider l'utilisateur. Ceci à l'aide des traductions disponibles:
+        Import: liste= importTabTitle, importClarifications, importSizeMax, importFormatAuthorized, importShpZip, importHtmlClarifications
+                ou plutot que la liste, vous pouvez définir du html personnalisé avec la balise importHtmlClarifications
+        Export: Définir du html personnalisé avec la balise exportHtmlClarifications.
+         - `Fichier traduction en.json <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/locale/en.geo.json#L135>`__
 
 Propriétés
 
