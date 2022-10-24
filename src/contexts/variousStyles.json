@@ -258,6 +258,7 @@
       },
       {
         "title": "Point - MVT - Hover ",
+        "maxResolution": 10,
         "id": "mvtsbapt",
         "visible": true,
         "declutter": true,

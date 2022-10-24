@@ -403,6 +403,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
     this.map.ol.once('rendercomplete', () => {
       this.readQueryParams();
+      if (this.configService.getConfig('geolocate.activateDefault') !== undefined) {
+        this.map.geolocationController.tracking = this.configService.getConfig('geolocate.activateDefault');
+      }
     });
 
     this.onSettingsChange$.subscribe(() => {
@@ -1285,6 +1288,9 @@ export class PortalComponent implements OnInit, OnDestroy {
         undefined;
       if (version) {
         url = url.replace('VERSION=' + version, '').replace('version=' + version, '');
+      }
+      if (url.endsWith('?')) {
+        url = url.substring(0, url.length - 1);
       }
 
       const currentLayersByService = this.extractLayersByService(

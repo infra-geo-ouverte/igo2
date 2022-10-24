@@ -1,3 +1,22 @@
+# [1.13.0](https://github.com/infra-geo-ouverte/igo2/compare/1.12.1...1.13.0) (2022-10-17)
+
+
+### Bug Fixes
+
+* **app:** fix tooltip interactivity ([#835](https://github.com/infra-geo-ouverte/igo2/issues/835)) ([47944a4](https://github.com/infra-geo-ouverte/igo2/commit/47944a4ff7a2c55dfa675b966ccd4b61322c6b43))
+* **demo:** new url and layer name for these 2 layers ([cea148f](https://github.com/infra-geo-ouverte/igo2/commit/cea148f1888c35c80a0507ded3bcadea20ac7877))
+* **dev-serve:** fix enabled cache on ng serve ([#832](https://github.com/infra-geo-ouverte/igo2/issues/832)) ([980ba93](https://github.com/infra-geo-ouverte/igo2/commit/980ba933d4247a0a1e564bfd80b606798376a88a))
+* **footer/header:** remove spec file ([3e03b13](https://github.com/infra-geo-ouverte/igo2/commit/3e03b13a41a304da0a2c5fea0dc349a20a5b32fb))
+* **readme:** fix 1.13.0 link ([3b6443e](https://github.com/infra-geo-ouverte/igo2/commit/3b6443eeae098407b3c98e39852452639c95230f))
+
+
+### Features
+
+* **app:** upgrade igo2-lib ([6263b3c](https://github.com/infra-geo-ouverte/igo2/commit/6263b3caa7884be3812388bb99aac17aefe72525))
+* **app:** upgrade libs + angular14 ([#824](https://github.com/infra-geo-ouverte/igo2/issues/824)) ([4c062af](https://github.com/infra-geo-ouverte/igo2/commit/4c062afbbe4e839be0bc6f1632e3dcf7079987d0))
+
+
+
 ## [1.12.1](https://github.com/infra-geo-ouverte/igo2/compare/1.12.0...1.12.1) (2022-07-13)
 
 
