@@ -53,7 +53,7 @@
                     "title": "Info no icon",
                     "text": "Second message at layer level",
                     "type": "info",
-                    "showIcon": true,
+                    "showIcon": false,
                     "options": {
                         "timeOut": 20000
                     }
@@ -62,7 +62,7 @@
                     "title": "Show message type",
                     "text": "3e message at layer level",
                     "type": "show",
-                    "showIcon": true,
+                    "showIcon": false,
                     "options": {
                         "timeOut": 20000
                     }
