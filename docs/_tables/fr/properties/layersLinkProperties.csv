@@ -1,7 +1,4 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
-bidirectionnal ,Boolean ,"| Indique si les 2 couches sont liées de manière
-| bi-directionnelles. C'est à dire, si une modification
-| de l'enfant est transférée au parent et inversement.",true | false,true
 **linkedIds** ,String[] ,"| Liste des identifiants de liaison.
 | C'est à dire, une liste des linkId des couches enfant. 
 ",,

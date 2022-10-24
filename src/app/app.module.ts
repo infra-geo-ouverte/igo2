@@ -29,6 +29,14 @@ import { PortalModule } from './pages';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './pages/header/header.module';
 import { FooterModule } from './pages/footer/footer.module';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions } from '@angular/material/tooltip';
+
+export const defaultTooltipOptions: MatTooltipDefaultOptions = {
+  showDelay: 500,
+  hideDelay: 0,
+  touchendHideDelay: 0,
+  disableTooltipInteractivity: true
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -63,7 +71,8 @@ import { FooterModule } from './pages/footer/footer.module';
     provideCadastreSearchSource(),
     provideStyleListOptions({
       path: './assets/list-style.json'
-    })
+    }),
+    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: defaultTooltipOptions }
   ],
   bootstrap: [AppComponent]
 })
