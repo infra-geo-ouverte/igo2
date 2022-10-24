@@ -1286,6 +1286,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (version) {
         url = url.replace('VERSION=' + version, '').replace('version=' + version, '');
       }
+      if (url.endsWith('?')) {
+        url = url.substring(0, url.length - 1);
+      }
 
       const currentLayersByService = this.extractLayersByService(
         layersByService[cnt]
