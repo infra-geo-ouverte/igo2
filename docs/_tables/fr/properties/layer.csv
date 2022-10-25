@@ -42,6 +42,7 @@ metadata ,Object{} ,"| Définir la source pour les metadonnées. Lien pou
 |     - extern
 |     - keyword
 |     - abstract = résumé de la couche. Sert au tooltip ici bas. ","{url: ""https://www.igouverte.org/"", extern: true} ",
+notShowOptionButtonZoomToExtent,Boolean, N'affiche pas le bouton de zoom sur l'étendu dans les options de la couche ,,
 tooltip ,Object{} ,"| Permet de définir le type de tooltip à afficher sur survol de la couche
 | dans la table des matières (liste de couche).
 | Les divers types sont:
