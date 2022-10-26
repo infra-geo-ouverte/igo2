@@ -2,7 +2,6 @@
 const gulp = require('gulp');
 const bump = require('gulp-bump');
 const package = require('./package.json')
-var gulp = require('gulp');
 
 gulp.task('copyLocaleFromLib', done => {
   gulp
