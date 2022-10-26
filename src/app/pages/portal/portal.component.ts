@@ -100,6 +100,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
+import { PwaService } from '../../services/pwa.service';
 
 @Component({
   selector: 'app-portal',
@@ -304,7 +305,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.workspaceState.workspace$.value;
   }
 
-
   constructor(
     private route: ActivatedRoute,
     public workspaceState: WorkspaceState,
@@ -330,7 +330,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private queryService: QueryService,
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
-    private directionState: DirectionState
+    private directionState: DirectionState,
+    private pwaService: PwaService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasHomeExtentButton =
@@ -497,6 +498,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     const dataDownload = this.configService.getConfig('pwa.dataDownload');
     if ('serviceWorker' in navigator && dataDownload) {
       let downloadMessage;
+      let currentVersion;
+      const dataLoadSource = this.storageService.get('dataLoadSource');
       navigator.serviceWorker.ready.then((registration) => {
         console.log('Service Worker Ready');
         this.http.get('ngsw.json').pipe(
@@ -504,14 +507,15 @@ export class PortalComponent implements OnInit, OnDestroy {
             const datas$ = [];
             let hasDataInDataDir: boolean = false;
             if (ngsw) {
-              const currentVersion = ngsw.appData.version;
+              // IF FILE NOT IN THIS LIST... DELETE?
+              currentVersion = ngsw.appData.version;
               const cachedDataVersion = this.storageService.get('cachedDataVersion');
-              if (currentVersion !== cachedDataVersion) {
+              if (currentVersion !== cachedDataVersion && dataLoadSource === 'pending' ) {
+                this.pwaService.updates.checkForUpdate();
+              }
+              if (dataLoadSource === 'newVersion' || !dataLoadSource) {
                 ((ngsw as any).assetGroups as any).map((assetGroup) => {
-                  if (assetGroup.name === 'data' || assetGroup.name === 'contexts') {
-                    if (assetGroup.name === 'data') {
-                      hasDataInDataDir = assetGroup.urls.concat(assetGroup.files).length > 0;
-                    }
+                  if (assetGroup.name === 'contexts') {
                     const elemToDownload = assetGroup.urls.concat(assetGroup.files).filter(f => f);
                     elemToDownload.map((url,i) => datas$.push(this.http.get(url).pipe(delay(750))));
                   }
@@ -535,6 +539,10 @@ export class PortalComponent implements OnInit, OnDestroy {
             this.messageService.remove((downloadMessage as any).toastId);
             const message = this.languageService.translate.instant('pwa.data-download-completed');
             this.messageService.success(message, undefined, { timeOut: 40000 });
+            if (currentVersion) {
+              this.storageService.set('dataLoadSource', 'pending');
+              this.storageService.set('cachedDataVersion', currentVersion);
+            }
           }
         });
 

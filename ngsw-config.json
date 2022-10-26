@@ -17,16 +17,6 @@
       }
     },
     {
-      "name": "data",
-      "installMode": "prefetch",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
-          "/data/**"
-        ]
-      }
-    },
-    {
       "name": "app",
       "installMode": "prefetch",
       "updateMode": "prefetch",
