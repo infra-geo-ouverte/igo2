@@ -71,7 +71,8 @@ import {
   VectorLayer,
   MapExtent,
   moveToOlFeatures,
-  FeatureMotion
+  FeatureMotion,
+  ConfigFileToGeoDBService
 } from '@igo2/geo';
 
 import {
@@ -330,7 +331,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private queryService: QueryService,
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
-    private directionState: DirectionState
+    private directionState: DirectionState,
+    private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasHomeExtentButton =
@@ -490,6 +492,8 @@ export class PortalComponent implements OnInit, OnDestroy {
       ).subscribe((sidenavMediaAndOrientation: [boolean, string, string]) => {
         this.computeToastPanelOffsetX();
       });
+
+      this.configFileToGeoDBService.load('./data/geoDataToIDB.json');
   }
 
   setToastPanelHtmlDisplay(value) {
