@@ -2,6 +2,7 @@
   "name": "igo",
   "version": "1.13.0",
   "description": "Infrastructure géomatique ouverte",
+  "author": "Communauté IGO",
   "repository": {
     "url": "https://github.com/infra-geo-ouverte/igo2"
   },
