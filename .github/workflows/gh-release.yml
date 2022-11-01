@@ -1,0 +1,23 @@
+name: GH_RELEASE
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install conventional-changelog@3.1.25
+        if: startsWith(github.ref, 'refs/tags/')
+        run: npm install conventional-changelog@3.1.25
+      - name: Generate Changelog-current
+        run: npm run changelog-current |  grep -v "^>" | sed '/^$/d' > ${{ github.workspace }}-CHANGELOG.txt
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: ${{ github.workspace }}-CHANGELOG.txt
