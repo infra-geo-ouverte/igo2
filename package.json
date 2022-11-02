@@ -83,7 +83,7 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.29.4",
     "natives": "^1.1.6",
-    "ngx-color-picker": "^10.1.0",
+    "ngx-color-picker": "^13.0.0",
     "ngx-indexed-db": "^11.0.2",
     "ngx-toastr": "^15.0.0",
     "ol": "^7.1.0",
