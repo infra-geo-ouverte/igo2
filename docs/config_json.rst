@@ -459,14 +459,17 @@ geolocate
 
     .. line-block::
 
-        Permet de gérer l'activation par défaut de l'attribut "followPosition". Utile pour ceux qui n'utilisent pas le module "advancedMapTools".
+        Permet de gérer l'activation par défaut de l'attribut "followPosition". Surtout Utile pour ceux qui n'utilisent pas le module "advancedMapTools".
+        Permet aussi de gérer le changement d'icône ou non ("basic") ainsi que l'activation par défaut de la géolocalisation ("activateDefault").
 
 Exemples
 
         .. code:: json
 
             geolocate: {
-                "followPosition": "false"
+                "followPosition": "false",
+                "basic": "true",
+                "activateDefault": "false"
             }
 
 *****************
