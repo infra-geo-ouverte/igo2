@@ -1,3 +1,19 @@
+## [1.13.1](https://github.com/infra-geo-ouverte/igo2/compare/1.13.0...1.13.1) (2022-11-07)
+
+
+### Bug Fixes
+
+* **header,spinner:** fixed header variables and spinner position ([#817](https://github.com/infra-geo-ouverte/igo2/issues/817)) ([1cc84e7](https://github.com/infra-geo-ouverte/igo2/commit/1cc84e73f0eacedbb65e44449f7f834ab80b4988))
+* url with version on share map link ([#837](https://github.com/infra-geo-ouverte/igo2/issues/837)) ([294c645](https://github.com/infra-geo-ouverte/igo2/commit/294c6458e9ac764cd5767bb1fd69e688330d97f2))
+
+
+### Features
+
+* **app:** upgrade igo2-lib ([8640dbf](https://github.com/infra-geo-ouverte/igo2/commit/8640dbf272fc61ae58e5177660540bbea7f5e8c0))
+* **geolocate:** add geolocate activateDefault config ([#814](https://github.com/infra-geo-ouverte/igo2/issues/814)) ([8020f42](https://github.com/infra-geo-ouverte/igo2/commit/8020f4248dbf87b635d4063e6d6d2c17bdd6b8d4))
+
+
+
 # [1.13.0](https://github.com/infra-geo-ouverte/igo2/compare/1.12.1...1.13.0) (2022-10-17)
 
 
