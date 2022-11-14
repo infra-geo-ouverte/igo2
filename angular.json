@@ -30,6 +30,7 @@
               "src/assets",
               "src/config",
               "src/contexts",
+              "src/data",
               "src/locale",
               {
                 "glob": "**/*",
