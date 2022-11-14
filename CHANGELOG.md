@@ -1,3 +1,14 @@
+## [1.13.2](https://github.com/infra-geo-ouverte/igo2/compare/1.13.1...1.13.2) (2022-11-14)
+
+
+### Features
+
+* **app:** upgrade igo2-lib 1.13.2 ([1dcd962](https://github.com/infra-geo-ouverte/igo2/commit/1dcd96269e7e28cf64e1d84420a1f8e320228ff9))
+* **geoDB:** service to load data from config file into the indexed-db ([#847](https://github.com/infra-geo-ouverte/igo2/issues/847)) ([75e4d02](https://github.com/infra-geo-ouverte/igo2/commit/75e4d023bb3e30eb1369b8fef3836f5c26c26df8))
+* **map-browser:** add longpress directive ([#852](https://github.com/infra-geo-ouverte/igo2/issues/852)) ([8a3b5d6](https://github.com/infra-geo-ouverte/igo2/commit/8a3b5d604dafbc3a40a4d0f8e086f1f9470fad1f))
+
+
+
 ## [1.13.1](https://github.com/infra-geo-ouverte/igo2/compare/1.13.0...1.13.1) (2022-11-07)
 
 
