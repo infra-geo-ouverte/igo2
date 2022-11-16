@@ -494,7 +494,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
 
     if (this.configService.getConfig('importExport')) {
-      const configFileToGeoDBService = this.configService.getConfig('importExport.configFileToGeoDBService')
+      const configFileToGeoDBService = this.configService.getConfig('importExport.configFileToGeoDBService');
       if (configFileToGeoDBService) {
         this.configFileToGeoDBService.load(configFileToGeoDBService);
       }
