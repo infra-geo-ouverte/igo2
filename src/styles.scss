@@ -30,7 +30,8 @@
 
 .toast-message-a-blue {
   color: blue !important;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: blue;
 }
 
 .toast-message-a-blue:hover {
