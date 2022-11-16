@@ -17,7 +17,7 @@
     },
     {
         "title": "Warning with noTimeout",
-        "text": "Warning xxxxxx<br>Click on message to indicate you have read the warning<br­><a class='toast-message-a-blue' href='https://www.w3schools.com'>link exemple with custom class toast-message-a-blue</a>",
+        "text": "Warning xxxxxx<br>Click on message to indicate you have read the warning<a class='toast-message-a-blue' href='https://www.w3schools.com'>link exemple with custom class toast-message-a-blue</a>",
         "type": "warning",
         "format": "html",
         "options": {
