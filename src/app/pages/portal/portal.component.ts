@@ -493,7 +493,12 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.computeToastPanelOffsetX();
       });
 
-      this.configFileToGeoDBService.load('./data/geoDataToIDB.json');
+    if (this.configService.getConfig('importExport')) {
+      const configFileToGeoDBService = this.configService.getConfig('importExport.configFileToGeoDBService');
+      if (configFileToGeoDBService) {
+        this.configFileToGeoDBService.load(configFileToGeoDBService);
+      }
+    }
   }
 
   setToastPanelHtmlDisplay(value) {

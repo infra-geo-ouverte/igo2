@@ -530,7 +530,8 @@ Exemples
                 clientSideFileSizeMaxMb: 30,
                 gpxAggregateInComment: false,
                 forceNaming: false,
-                formats: ['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV']
+                formats: ['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV'],
+                configFileToGeoDBService: './data/geoDataToIDB.json'
             }
 
 Propriétés

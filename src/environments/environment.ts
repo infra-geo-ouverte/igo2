@@ -269,7 +269,8 @@ export const environment: Environment = {
       pathToConfigFile: './config/interactiveTour.json'
     },
     importExport: {
-      url: '/apis/ogre'
+      url: '/apis/ogre',
+      configFileToGeoDBService: './data/geoDataToIDB.json'
     },
     searchSources: {
       nominatim: {

@@ -58,7 +58,8 @@ export const environment: Environment = {
       url: '/apis/depot'
     },
     importExport: {
-      url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre'
+      url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
+      configFileToGeoDBService: './data/geoDataToIDB.json'
     },
     language: {
       prefix: './locale/'
