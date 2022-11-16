@@ -18,13 +18,14 @@ jobs:
         run: npm run changelog-current |  grep -v "^>" | sed '/^$/d' > ${{ github.workspace }}-CHANGELOG.txt
       - name: Build production
         run: npm run build.prod
-      - name: Zip production build
+      - name: Install zip
         uses: montudor/action-zip@v1
-        with:
-           args: zip -qq -r dist/igo2.zip dist/igo2
+      - name: Zip output
+        run: zip igo2.zip *
+        working-directory: dist/igo2
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: ${{ github.workspace }}-CHANGELOG.txt
-          files: dist/igo2.zip
+          files: dist/igo2/igo2.zip
