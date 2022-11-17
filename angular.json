@@ -34,6 +34,11 @@
               "src/locale",
               {
                 "glob": "**/*",
+                "input": "./node_modules/@igo2/common/assets/",
+                "output": "./assets/igo2/common/"
+              },
+              {
+                "glob": "**/*",
                 "input": "./node_modules/@igo2/core/assets/",
                 "output": "./assets/igo2/core/"
               },

@@ -1,3 +1,39 @@
+## [1.13.3](https://github.com/infra-geo-ouverte/igo2/compare/1.13.2...1.13.3) (2022-11-16)
+
+
+### Features
+
+* **app:** upgrade igo2-lib 1.13.3 ([483e219](https://github.com/infra-geo-ouverte/igo2/commit/483e21941ef4503052dc0f5d603695251399ee82))
+
+
+
+## [1.13.2](https://github.com/infra-geo-ouverte/igo2/compare/1.13.1...1.13.2) (2022-11-14)
+
+
+### Features
+
+* **app:** upgrade igo2-lib 1.13.2 ([1dcd962](https://github.com/infra-geo-ouverte/igo2/commit/1dcd96269e7e28cf64e1d84420a1f8e320228ff9))
+* **geoDB:** service to load data from config file into the indexed-db ([#847](https://github.com/infra-geo-ouverte/igo2/issues/847)) ([75e4d02](https://github.com/infra-geo-ouverte/igo2/commit/75e4d023bb3e30eb1369b8fef3836f5c26c26df8))
+* **map-browser:** add longpress directive ([#852](https://github.com/infra-geo-ouverte/igo2/issues/852)) ([8a3b5d6](https://github.com/infra-geo-ouverte/igo2/commit/8a3b5d604dafbc3a40a4d0f8e086f1f9470fad1f))
+
+
+
+## [1.13.1](https://github.com/infra-geo-ouverte/igo2/compare/1.13.0...1.13.1) (2022-11-07)
+
+
+### Bug Fixes
+
+* **header,spinner:** fixed header variables and spinner position ([#817](https://github.com/infra-geo-ouverte/igo2/issues/817)) ([1cc84e7](https://github.com/infra-geo-ouverte/igo2/commit/1cc84e73f0eacedbb65e44449f7f834ab80b4988))
+* url with version on share map link ([#837](https://github.com/infra-geo-ouverte/igo2/issues/837)) ([294c645](https://github.com/infra-geo-ouverte/igo2/commit/294c6458e9ac764cd5767bb1fd69e688330d97f2))
+
+
+### Features
+
+* **app:** upgrade igo2-lib ([8640dbf](https://github.com/infra-geo-ouverte/igo2/commit/8640dbf272fc61ae58e5177660540bbea7f5e8c0))
+* **geolocate:** add geolocate activateDefault config ([#814](https://github.com/infra-geo-ouverte/igo2/issues/814)) ([8020f42](https://github.com/infra-geo-ouverte/igo2/commit/8020f4248dbf87b635d4063e6d6d2c17bdd6b8d4))
+
+
+
 # [1.13.0](https://github.com/infra-geo-ouverte/igo2/compare/1.12.1...1.13.0) (2022-10-17)
 
 

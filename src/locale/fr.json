@@ -249,7 +249,7 @@
     "data-download-completed": "Téléchargement des données hors-ligne terminé"
   },
   "messages": {
-    "title": "Titre provenant d'une traduction. {{content}}",
+    "title": "Titre provenant d'une traduction.",
     "message": "Message provenant d'une traduction - **Config sans icône- <div class='toast-message-green-div'>Message provenant du contexte</div>Ouvrez lea couche 'MSP Tel. Urgence' pour voir les messages liés. {{content}}",
     "content": "Du contenu dynamique peut également être ajouté au message"
   }

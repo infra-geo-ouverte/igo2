@@ -1,0 +1,19 @@
+{
+  "geoDatas": [
+    {
+      "triggerDate": "2022-11-01",
+      "action": "delete",
+      "urls": [
+        "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson"
+      ]
+    },
+    {
+      "triggerDate": "2022-11-01",
+      "action": "update",
+      "urls": [
+        "https://www.donneesquebec.ca/recherche/dataset/f647f5ed-a8f3-4a47-8ceb-977cbf090675/resource/68e0e20a-415d-44f5-af82-a90311784616/download/bornes-incendies.geojson"
+      ],
+      "source": "nov2022"
+    }
+  ]
+}

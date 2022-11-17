@@ -71,7 +71,8 @@ import {
   VectorLayer,
   MapExtent,
   moveToOlFeatures,
-  FeatureMotion
+  FeatureMotion,
+  ConfigFileToGeoDBService
 } from '@igo2/geo';
 
 import {
@@ -331,7 +332,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private pwaService: PwaService
+    private pwaService: PwaService,
+    private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasHomeExtentButton =
@@ -491,7 +493,14 @@ export class PortalComponent implements OnInit, OnDestroy {
       ).subscribe((sidenavMediaAndOrientation: [boolean, string, string]) => {
         this.computeToastPanelOffsetX();
       });
-      this.initSW();
+
+    if (this.configService.getConfig('importExport')) {
+      const configFileToGeoDBService = this.configService.getConfig('importExport.configFileToGeoDBService');
+      if (configFileToGeoDBService) {
+        this.configFileToGeoDBService.load(configFileToGeoDBService);
+      }
+    }
+    // this.initSW();
   }
 
   private initSW() {
@@ -510,21 +519,21 @@ export class PortalComponent implements OnInit, OnDestroy {
               // IF FILE NOT IN THIS LIST... DELETE?
               currentVersion = ngsw.appData.version;
               const cachedDataVersion = this.storageService.get('cachedDataVersion');
-              if (currentVersion !== cachedDataVersion && dataLoadSource === 'pending' ) {
+              if (currentVersion !== cachedDataVersion && dataLoadSource === 'pending') {
                 this.pwaService.updates.checkForUpdate();
               }
               if (dataLoadSource === 'newVersion' || !dataLoadSource) {
                 ((ngsw as any).assetGroups as any).map((assetGroup) => {
                   if (assetGroup.name === 'contexts') {
                     const elemToDownload = assetGroup.urls.concat(assetGroup.files).filter(f => f);
-                    elemToDownload.map((url,i) => datas$.push(this.http.get(url).pipe(delay(750))));
+                    elemToDownload.map((url, i) => datas$.push(this.http.get(url).pipe(delay(750))));
                   }
                 });
                 if (hasDataInDataDir) {
                   const message = this.languageService.translate.instant('pwa.data-download-start');
                   downloadMessage = this.messageService
                     .info(message, undefined, { disableTimeOut: true, progressBar: false, closeButton: true, tapToDismiss: false });
-                    this.storageService.set('cachedDataVersion', currentVersion);
+                  this.storageService.set('cachedDataVersion', currentVersion);
                 }
                 return zip(...datas$);
               }
@@ -533,18 +542,18 @@ export class PortalComponent implements OnInit, OnDestroy {
             return zip(...datas$);
           })
         )
-        .pipe(delay(1000))
-        .subscribe(() => {
-          if (downloadMessage) {
-            this.messageService.remove((downloadMessage as any).toastId);
-            const message = this.languageService.translate.instant('pwa.data-download-completed');
-            this.messageService.success(message, undefined, { timeOut: 40000 });
-            if (currentVersion) {
-              this.storageService.set('dataLoadSource', 'pending');
-              this.storageService.set('cachedDataVersion', currentVersion);
+          .pipe(delay(1000))
+          .subscribe(() => {
+            if (downloadMessage) {
+              this.messageService.remove((downloadMessage as any).toastId);
+              const message = this.languageService.translate.instant('pwa.data-download-completed');
+              this.messageService.success(message, undefined, { timeOut: 40000 });
+              if (currentVersion) {
+                this.storageService.set('dataLoadSource', 'pending');
+                this.storageService.set('cachedDataVersion', currentVersion);
+              }
             }
-          }
-        });
+          });
 
       });
     }

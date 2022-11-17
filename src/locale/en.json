@@ -251,7 +251,7 @@
 
   },
   "messages": {
-    "title": "Title from a translation. {{content}}",
+    "title": "Title from a translation.",
     "message": "Message from a translation - no icon - <div class='toast-message-green-div'>Message at the context level </div>Open the layer 'MSP Tel. Urgence' to see messages at the layer level. {{content}}",
     "content": "Dynamic content can also be added to the message"
   }
