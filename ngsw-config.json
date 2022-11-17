@@ -3,9 +3,19 @@
   "index": "/index.html",
   "appData": {
     "changelog": "Initial version",
-    "version": "1.10.0-pwa"
+    "version": "1.13.1-10"
   },
   "assetGroups": [
+    {
+      "name": "data",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/data/**"
+        ]
+      }
+    },
     {
       "name": "contexts",
       "installMode": "prefetch",
