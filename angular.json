@@ -126,8 +126,7 @@
               "extractLicenses": true,
               "vendorChunk": true,
               "buildOptimizer": false,
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              "serviceWorker": false
             },
             "developpement": {
               "buildOptimizer": false,
@@ -148,6 +147,29 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.github.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "serviceWorker": false
+            },
+            "pwa": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "12kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.pwa.ts"
                 }
               ],
               "optimization": true,

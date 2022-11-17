@@ -1,8 +1,4 @@
 {
-  "pwa": {
-    "promote": true,
-    "dataDownload": true
-  },
   "routingSources": {
     "osrm": {
       "enabled": true

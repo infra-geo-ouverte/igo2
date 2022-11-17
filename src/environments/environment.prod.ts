@@ -8,11 +8,12 @@ import {
   CommonVectorStyleOptions
 } from '@igo2/geo';
 
-interface Environment {
+export interface Environment {
   production: boolean;
   igo: {
     app: {
       forceCoordsNA: boolean;
+      promotePwa?: boolean;
     };
     importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;

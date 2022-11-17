@@ -1,55 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
-import { ConfigService, LanguageService, NetworkService, StorageService } from '@igo2/core';
+import { ConfigService, LanguageService } from '@igo2/core';
 import { SwUpdate, VersionDetectedEvent } from '@angular/service-worker';
-import { interval, timer } from 'rxjs';
+import { interval } from 'rxjs';
 import { ConfirmDialogService } from '@igo2/common';
-import { filter, skip } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PwaService {
   promptEvent: any;
-  private userDismissInThisSession: boolean = false;
-  private confimInProgress: boolean = false;
   constructor(
     private platform: Platform,
     public updates: SwUpdate,
     public languageService: LanguageService,
     private configService: ConfigService,
-    private confirmDialogService: ConfirmDialogService,
-    private storageService: StorageService,
-    private networkService: NetworkService
+    private confirmDialogService: ConfirmDialogService
   ) {
     if (updates.isEnabled) {
       interval(60 * 1000 * 2).subscribe(() => updates.checkForUpdate());
-
-      timer(20000).subscribe(() => {
-        const pwaUpdate = this.storageService.get('pwaUpdate');
-        if (
-          window.navigator.onLine &&
-          (pwaUpdate === 'dismiss' || pwaUpdate === 'failed') &&
-          !this.userDismissInThisSession &&
-          !this.confimInProgress) {
-          this.modalUpdatePWA();
-        }
-      });
-      this.networkService.currentState().pipe(skip(1)).subscribe((r) => {
-        const pwaUpdate = this.storageService.get('pwaUpdate');
-        if (
-          r.connection &&
-          (pwaUpdate === 'dismiss' || pwaUpdate === 'failed') &&
-          !this.userDismissInThisSession &&
-          !this.confimInProgress) {
-          this.modalUpdatePWA();
-        }
-      });
     }
   }
 
-  private modalUpdatePWA(){
-    this.confimInProgress = true;
+  private modalUpdatePWA() {
     const title = this.languageService.translate.instant('pwa.new-version-title');
     const body = this.languageService.translate.instant('pwa.new-version');
     const message = `${title} ${body}`;
@@ -57,20 +31,15 @@ export class PwaService {
       if (confirm) {
         this.updates.activateUpdate().then(() => {
           if (window.navigator.onLine) {
-            this.storageService.set('dataLoadSource', 'newVersion');
-            this.storageService.set('pwaUpdate', undefined);
             document.location.reload();
           } else {
             alert(`Hors-ligne / Offline. Vous devez être en ligne pour mettre à jour l\'application. You must be online to update the application.`);
-            this.storageService.set('pwaUpdate', 'failed');
-            this.userDismissInThisSession = false;
+            setTimeout(() => {
+              this.modalUpdatePWA();
+            }, 900000);
           }
         });
-      } else {
-        this.storageService.set('pwaUpdate', 'dismiss');
-        this.userDismissInThisSession = true;
       }
-    this.confimInProgress = false;
     });
   }
 
@@ -85,8 +54,7 @@ export class PwaService {
   }
 
   public async initPwaPrompt(): Promise<any> {
-    const promotePWA = this.configService.getConfig('pwa.promote');
-    if (promotePWA) {
+    if (this.configService.getConfig('app') && this.configService.getConfig('app.promotePwa')) {
       if (!this.platform.IOS) {
         window.addEventListener('beforeinstallprompt', (event: any) => {
           event.preventDefault();

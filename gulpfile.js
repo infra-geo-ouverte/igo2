@@ -21,11 +21,3 @@ gulp.task('bumpPwaVersionDev', done => {
     .pipe(gulp.dest('./'));
   done();
 });
-
-gulp.task('bumpPwaVersionProd', done => {
-  const packageVersion = package.version;
-  gulp.src(['./ngsw-config.json'])
-    .pipe(bump({ version: packageVersion+'-pwa' }))
-    .pipe(gulp.dest('./'));
-  done();
-});
