@@ -14,6 +14,7 @@ import MapBrowserEvent from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
 import olFeature from 'ol/Feature';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
 
 import {
   MediaService,
@@ -303,6 +304,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    private ngxIndexedDBService: NgxIndexedDBService,
     private route: ActivatedRoute,
     public workspaceState: WorkspaceState,
     public authService: AuthService,
@@ -518,15 +520,20 @@ ${rtss.properties.distance} m`;
   }
 
   private initSW() {
-    const urlBase = "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain";
+    const oldUrlBase = "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain";
+    const urlBase = "/igo2/sigo-terrain/data";
     const dgts = [
       "Aeroportuaire", "DGT29", "DGT63-65", "DGT64-70",
       "DGT66", "DGT67", "DGT68", "DGT71", "DGT81-91", "DGT86", "DGT88", "DGT89", "DGT90"
     ];
     const ds = ["rtss", "gsq", "pon", "cs", "mun"];
+    const oldDataList = [];
     const dataList = [];
     dgts.map(dgt => {
-      ds.map(d => dataList.push(`${urlBase}/${dgt}/${d}.geojson`));
+      ds.map(d => {
+        oldDataList.push(`${oldUrlBase}/${dgt}/${d}.geojson`);
+        dataList.push(`${urlBase}/${dgt}/${d}.geojson`);
+      });
     });
 
     const dataDownload = this.configService.getConfig('pwa.dataDownload');
@@ -575,6 +582,11 @@ ${rtss.properties.distance} m`;
               downloadMessage = this.messageService
                 .info(message, undefined, { disableTimeOut: true, progressBar: false, closeButton: true, tapToDismiss: false });
               const datas2$ = [];
+
+              oldDataList.map((url,i) => datas2$.push(
+                    this.ngxIndexedDBService.deleteByKey('geoData', url)
+                ));
+
               dataList.map((url,i) => datas2$.push(
                 this.http.get(url).pipe(
                   concatMap(r => {

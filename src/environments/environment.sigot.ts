@@ -42,7 +42,7 @@ export const environment: Environment = {
   igo: {
     version: {
       app: "1.11.1.220720.0",
-      releaseDateApp: new Date('2022-09-02').getTime()
+      releaseDateApp: new Date('2022-10-13').getTime()
     },
     app: {
       forceCoordsNA: true

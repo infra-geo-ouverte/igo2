@@ -3,7 +3,7 @@
   "base": "_base",
   "messages": [
     {
-      "text": "La donnée présente sur cette carte est valide en date du 2022-09-02",
+      "text": "La donnée présente sur cette carte est valide en date du 2022-10-13",
       "type": "info",
       "options": {
         "timeOut": 10000
@@ -55,8 +55,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/mun.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/mun.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT29/mun.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT29/mun.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "Mun: ${MUS_NM_MUN}",
@@ -91,8 +91,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/cs.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/cs.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT29/cs.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT29/cs.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "nom_unite",
@@ -127,8 +127,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/rtss.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/rtss.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT29/rtss.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT29/rtss.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "${num_route}-${num_tronc}-${num_sectn}-${cod_sous_r}${seq_sous_r}${cod_sous_c}${cod_cote_c}",
@@ -167,8 +167,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/pon.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/pon.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT29/pon.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT29/pon.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "Élément de drainage: ${ide_drang_}",
@@ -205,8 +205,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/gsq.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/DGT29/gsq.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT29/gsq.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT29/gsq.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "Structure: ${num_dossr}",

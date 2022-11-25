@@ -3,7 +3,7 @@
   "base": "_base",
   "messages": [
     {
-      "text": "La donnée présente sur cette carte est valide en date du 2022-09-02",
+      "text": "La donnée présente sur cette carte est valide en date du 2022-10-13",
       "type": "info",
       "options": {
         "timeOut": 10000
@@ -54,8 +54,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/mun.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/mun.geojson",
+        "url": "/igo2/sigo-terrain/data/Aeroportuaire/mun.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/Aeroportuaire/mun.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "Mun: ${MUS_NM_MUN}",
@@ -90,8 +90,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/cs.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/cs.geojson",
+        "url": "/igo2/sigo-terrain/data/Aeroportuaire/cs.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/Aeroportuaire/cs.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "nom_unite",
@@ -125,8 +125,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/rtss.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/rtss.geojson",
+        "url": "/igo2/sigo-terrain/data/Aeroportuaire/rtss.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/Aeroportuaire/rtss.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "${num_route}-${num_tronc}-${num_sectn}-${cod_sous_r}${seq_sous_r}${cod_sous_c}${cod_cote_c}",
@@ -163,8 +163,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/pon.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/pon.geojson",
+        "url": "/igo2/sigo-terrain/data/Aeroportuaire/pon.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/Aeroportuaire/pon.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "Élément de drainage: ${ide_drang_}",
@@ -199,8 +199,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/gsq.geojson",
-        "pathOffline": "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain/Aeroportuaire/gsq.geojson",
+        "url": "/igo2/sigo-terrain/data/Aeroportuaire/gsq.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/Aeroportuaire/gsq.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "Structure: ${num_dossr}",
