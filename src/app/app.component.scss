@@ -45,3 +45,10 @@ height: calc( 100% - #{$header-height-mobile} )!important;
 }
 
 ::ng-deep .mat-tooltip-hide { display: none!important; } // temporary fix (https://github.com/angular/components/issues/24614)
+
+::ng-deep .mat-form-field-suffix {
+  ::ng-deep mat-icon  {
+    width: auto !important;
+    height: -webkit-fill-available;
+  }
+}
