@@ -49,6 +49,6 @@ height: calc( 100% - #{$header-height-mobile} )!important;
 ::ng-deep .mat-form-field-suffix {
   ::ng-deep mat-icon  {
     width: auto !important;
-    height: -webkit-fill-available;
+    height: -webkit-fill-available !important;
   }
 }
