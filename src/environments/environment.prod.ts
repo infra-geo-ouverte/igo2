@@ -13,7 +13,6 @@ export interface Environment {
   igo: {
     app: {
       forceCoordsNA: boolean;
-      promotePwa?: boolean;
     };
     importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
