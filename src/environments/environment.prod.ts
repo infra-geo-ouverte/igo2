@@ -8,7 +8,7 @@ import {
   CommonVectorStyleOptions
 } from '@igo2/geo';
 
-interface Environment {
+export interface Environment {
   production: boolean;
   igo: {
     app: {

@@ -1,5 +1,7 @@
 /*jshint esversion: 6 */
-var gulp = require('gulp');
+const gulp = require('gulp');
+const bump = require('gulp-bump');
+const package = require('./package.json')
 
 gulp.task('copyLocaleFromLib', done => {
   gulp
@@ -13,5 +15,9 @@ gulp.task('watch:locale', function () {
   gulp.watch('./node_modules/@igo2/core/locale/*.json', gulp.series('copyLocaleFromLib'));
 });
 
-
-
+gulp.task('bumpPwaVersionDev', done => {
+  gulp.src(['./ngsw-config.json'])
+    .pipe(bump({ type: 'prerelease' }))
+    .pipe(gulp.dest('./'));
+  done();
+});

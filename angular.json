@@ -46,7 +46,8 @@
                 "glob": "**/*",
                 "input": "./node_modules/@igo2/geo/assets/",
                 "output": "./assets/igo2/geo/"
-              }
+              },
+              "src/manifest.webmanifest"
             ],
             "styles": ["src/styles.scss"],
             "scripts": [],
@@ -124,7 +125,8 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": true,
-              "buildOptimizer": false
+              "buildOptimizer": false,
+              "serviceWorker": false
             },
             "developpement": {
               "buildOptimizer": false,
@@ -154,7 +156,32 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": true,
-              "buildOptimizer": false
+              "buildOptimizer": false,
+              "serviceWorker": false
+            },
+            "pwa": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "12kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.pwa.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
@@ -191,14 +218,18 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": ["src/styles.scss"],
             "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/style/partial",
                 "src/app/pages/portal",
                 "node_modules"
               ]
-            },
-            "assets": ["src/favicon.ico", "src/assets"]
+            }
           }
         },
         "lint": {

@@ -12,6 +12,7 @@ interface Environment {
   igo: {
     app: {
       forceCoordsNA: boolean;
+      promotePwa?: boolean;
     };
     catalog?: CatalogServiceOptions;
     importExport?: ImportExportServiceOptions;

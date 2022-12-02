@@ -10,6 +10,7 @@ import {
 } from '@igo2/core';
 import { AuthOptions } from '@igo2/auth';
 import { AnalyticsListenerService } from '@igo2/integration';
+import { PwaService } from './services/pwa.service';
 
 @Component({
   selector: 'app-root',
@@ -29,9 +30,11 @@ export class AppComponent {
     private renderer: Renderer2,
     private titleService: Title,
     private metaService: Meta,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private pwaService: PwaService
   ) {
-   this.languageService.translate.getTranslation(this.languageService.getLanguage()).subscribe();
+    this.pwaService.checkForUpdates();
+    this.languageService.translate.getTranslation(this.languageService.getLanguage()).subscribe();
 
     this.authConfig = this.configService.getConfig('auth');
 

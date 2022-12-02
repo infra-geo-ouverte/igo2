@@ -242,6 +242,12 @@
       "legend-tab-all": "Permet de visualiser aussi l'ensemble des légendes des couches non visibles à l'échelle active."
     }
   },
+  "pwa": {
+    "new-version-title": "Une nouvelle version de l'application est disponible. ",
+    "new-version": "Voulez-vous recharger l'application?",
+    "data-download-start": "Téléchargement des données pour utilisation hors-ligne. Veuillez ne pas quitter.",
+    "data-download-completed": "Téléchargement des données hors-ligne terminé"
+  },
   "messages": {
     "title": "Titre provenant d'une traduction.",
     "message": "Message provenant d'une traduction - **Config sans icône- <div class='toast-message-green-div'>Message provenant du contexte</div>Ouvrez lea couche 'MSP Tel. Urgence' pour voir les messages liés. {{content}}",
