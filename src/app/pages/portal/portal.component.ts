@@ -1173,7 +1173,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       const entities$$ = this.searchStore.stateView.all$()
         .pipe(
           skipWhile((entities) => entities.length === 0),
-          debounceTime(500),
+          debounceTime(1000),
           take(1)
         )
         .subscribe((entities) => {
