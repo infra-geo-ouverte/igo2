@@ -55,8 +55,8 @@
   "googleMap": "Show in Google Maps",
   "googleStreetView": "Show in Google Street View",
   "welcomeWindow": {
-    "html": "<h1>Welcome to {{title}, the Québec goverment mapping application </h1><h2>Version {{version}}, build on {{releaseDate}}</h2>",
-    "title": "",
+    "html": "<h1>Welcome to {{title}}, the Québec government mapping application </h1><h2>Version {{version}}, build on {{releaseDate}}</h2>",
+    "title": "Home window",
     "closeButton": "Close",
     "notShowCheck": "Do not show again"
   },
