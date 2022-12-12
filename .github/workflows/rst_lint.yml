@@ -16,6 +16,7 @@ jobs:
             - name: DOCtor-RST
               uses: docker://oskarstark/doctor-rst
               with:
-                  args: --short --error-format=github       
+                  args: --short --error-format=github
+                  php-version: '8.1'
               env:
                   DOCS_DIR: 'docs/'
