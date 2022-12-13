@@ -1150,9 +1150,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private readLanguageParam(params) {
-    if (params['language']) {
+    if (params['lang']) {
       this.authService.languageForce = true;
-      this.languageService.setLanguage(params['language']);
+      this.languageService.setLanguage(params['lang']);
     }
   }
 

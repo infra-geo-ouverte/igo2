@@ -3,6 +3,20 @@ Contrôle par URL
 ---------------------
 
 *******************************
+Langage de l'application
+*******************************
+
+    Permet de contrôler par url le langage utilisé dans l'application.
+    Si le langage demandé n'existe pas, c'est l'anglais (en) qui sera utilisé.
+
+    Params :
+        - lang=   fr ou en
+ 
+    Exemple:
+        - https://infra-geo-ouverte.github.io/igo2/?lang=fr
+
+
+*******************************
 Ouverture du panneau latéral
 *******************************
 
