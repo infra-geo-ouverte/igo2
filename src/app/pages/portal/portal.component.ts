@@ -362,6 +362,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     this.initWelcomeWindow();
 
+    this.route.queryParams.subscribe((params) => {
+      this.readLanguageParam(params);
+    });
+
     this.authService.authenticate$.subscribe((authenticated) => {
       this.contextLoaded = false;
     });
@@ -1143,6 +1147,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readFocusFirst();
       this.computeZoomToExtent();
     });
+  }
+
+  private readLanguageParam(params) {
+    if (params['lang']) {
+      this.authService.languageForce = true;
+      this.languageService.setLanguage(params['lang']);
+    }
   }
 
   private computeZoomToExtent() {
