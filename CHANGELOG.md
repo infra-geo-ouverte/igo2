@@ -1,3 +1,19 @@
+# [1.14.0](https://github.com/infra-geo-ouverte/igo2/compare/1.13.4...1.14.0) (2022-12-15)
+
+
+### Bug Fixes
+
+* **mat-form-field-suffix:** fix css icon size ([#873](https://github.com/infra-geo-ouverte/igo2/issues/873)) ([92fb147](https://github.com/infra-geo-ouverte/igo2/commit/92fb1472bd59cac5768d6043f45ab1aa477b6e4c))
+* **portal:** fix search sf params ([#877](https://github.com/infra-geo-ouverte/igo2/issues/877)) ([801bdf8](https://github.com/infra-geo-ouverte/igo2/commit/801bdf84730215c3238bedfb59cda11f22e7e680))
+
+
+### Features
+
+* **app:** allow force language by url param ([#881](https://github.com/infra-geo-ouverte/igo2/issues/881)) ([d2c341d](https://github.com/infra-geo-ouverte/igo2/commit/d2c341deceed336e7f17d6c522460bcba27a6cc0))
+* **app:** upgrade igo2-lib ([b9c176c](https://github.com/infra-geo-ouverte/igo2/commit/b9c176cf9f3821ee9eae00ae2ddde3e0ee0917b2))
+
+
+
 ## [1.13.4](https://github.com/infra-geo-ouverte/igo2/compare/1.13.3...1.13.4) (2022-11-22)
 
 
