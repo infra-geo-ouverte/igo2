@@ -17,7 +17,7 @@
     "e2e": "ng e2e --port 4300",
     "postinstall": "ngcc --tsconfig src/tsconfig.app.json && gulp copyLocaleFromLib",
     "build.prod": "ng build --configuration production",
-    "build.github": "npm build --configuration=github --output-path ./dist/ghpages --base-href /igo2/",
+    "build.github": "ng build --configuration=github --output-path ./dist/ghpages --base-href /igo2/",
     "build.pwa": "ng build --configuration pwa --output-path ./dist/pwa",
     "serve.prod": "http-server ./dist/igo2/ --port 4201 --no-browser",
     "serve.pwa": "http-server ./dist/pwa/ --port 4201 --no-browser",
