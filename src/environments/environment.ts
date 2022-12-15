@@ -3,7 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-import { AuthOptions } from '@igo2/auth';
+import { AuthOptions, AuthStorageOptions } from '@igo2/auth';
 import { DOMOptions } from '@igo2/common';
 import { ContextServiceOptions } from '@igo2/context';
 import { LanguageOptions } from '@igo2/core';
@@ -22,6 +22,7 @@ interface Environment {
       forceCoordsNA: boolean;
     };
     auth?: AuthOptions;
+    storage: AuthStorageOptions
     catalog?: CatalogServiceOptions;
     context?: ContextServiceOptions;
     importExport?: ImportExportServiceOptions;
@@ -61,6 +62,11 @@ export const environment: Environment = {
          keyValue: '123456',
       }]*/
     },
+    storage: {
+      url: "/user/igo",
+      key: 'igo'
+    },
+
     catalog: {
       sources: [
         {
