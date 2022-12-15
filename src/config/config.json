@@ -29,11 +29,6 @@
     "homeExtButtonCenter": [-71.938087, 48.446975],
     "homeExtButtonZoom" : 6
   },
-  "searchSources": {
-    "cadastre": {
-      "available": false
-    }
-  },
   "title": "IGO",
   "welcomeWindow": {
     "showAgainOnNewIGOVersion": true,

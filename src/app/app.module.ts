@@ -23,7 +23,6 @@ import {
   provideStoredQueriesSearchSource,
   provideOsrmDirectionsSource,
   provideOptionsApi,
-  provideCadastreSearchSource,
   provideStyleListOptions
 } from '@igo2/geo';
 
@@ -93,8 +92,6 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     provideStoredQueriesSearchSource(),
     provideOsrmDirectionsSource(),
     provideOptionsApi(),
-    provideCadastreSearchSource(),
-
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,

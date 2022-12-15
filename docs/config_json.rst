@@ -1069,10 +1069,6 @@ Exemple complet config.json
                     },
                   ],
                   "searchSources": {
-                        "cadastre": {
-                          "title": "Cadastre",
-                          "enabled": true
-                        },
                         "nominatim": {
                             "enabled": false
                         },
