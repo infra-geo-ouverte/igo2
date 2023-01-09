@@ -163,6 +163,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private sidenavMediaAndOrientation$$: Subscription;
 
   public igoSearchPointerSummaryEnabled: boolean;
+  public igoChangeSearchCoordsFormatEnabled: boolean;
 
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
@@ -354,6 +355,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.igoSearchPointerSummaryEnabled === undefined) {
       this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
     }
+
+    this.igoChangeSearchCoordsFormatEnabled = this.storageService.get('changeSearchCoordsFormatEnabled') as boolean || false;
   }
 
   ngOnInit() {
@@ -789,6 +792,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchState.setSearchResultsGeometryStatus(value);
   }
 
+  onchangeCoordsFormatStatusChange(value) {
+    this.storageService.set('changeSearchCoordsFormatEnabled', value);
+    this.igoChangeSearchCoordsFormatEnabled = value;
+  }
+
   onSearchSettingsChange() {
     this.onSettingsChange$.next(true);
   }
@@ -946,7 +954,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   searchCoordinate(coord: [number, number]) {
-    this.searchBarTerm = coord.map((c) => c.toFixed(6)).join(', ');
+    this.searchBarTerm = (!this.igoChangeSearchCoordsFormatEnabled) ?
+    coord.map((c) => c.toFixed(6)).join(', ') : coord.reverse().map((c) => c.toFixed(6)).join(', ');
   }
 
   updateMapBrowserClass() {
@@ -1151,7 +1160,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private readLanguageParam(params) {
     if (params['lang']) {
-      this.authService.languageForce = true;
+      //this.authService.languageForce = true;
       this.languageService.setLanguage(params['lang']);
     }
   }
