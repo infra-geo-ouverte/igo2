@@ -163,7 +163,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private sidenavMediaAndOrientation$$: Subscription;
 
   public igoSearchPointerSummaryEnabled: boolean;
-  public igoChangeSearchCoordsFormatEnabled: boolean;
+  public igoReverseSearchCoordsFormatEnabled: boolean;
 
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
@@ -356,7 +356,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
     }
 
-    this.igoChangeSearchCoordsFormatEnabled = this.storageService.get('changeSearchCoordsFormatEnabled') as boolean || false;
+    this.igoReverseSearchCoordsFormatEnabled = this.storageService.get('reverseSearchCoordsFormatEnabled') as boolean || false;
   }
 
   ngOnInit() {
@@ -792,9 +792,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchState.setSearchResultsGeometryStatus(value);
   }
 
-  onchangeCoordsFormatStatusChange(value) {
-    this.storageService.set('changeSearchCoordsFormatEnabled', value);
-    this.igoChangeSearchCoordsFormatEnabled = value;
+  onReverseCoordsFormatStatusChange(value) {
+    console.log('reverce coords evanbled:', value); /**** */
+    this.storageService.set('reverseSearchCoordsFormatEnabled', value);
+    this.igoReverseSearchCoordsFormatEnabled = value;
   }
 
   onSearchSettingsChange() {
@@ -954,7 +955,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   searchCoordinate(coord: [number, number]) {
-    this.searchBarTerm = (!this.igoChangeSearchCoordsFormatEnabled) ?
+    this.searchBarTerm = (!this.igoReverseSearchCoordsFormatEnabled) ?
     coord.map((c) => c.toFixed(6)).join(', ') : coord.reverse().map((c) => c.toFixed(6)).join(', ');
   }
 
