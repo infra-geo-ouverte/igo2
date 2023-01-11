@@ -92,7 +92,8 @@
         [withZoomButton]="withZoomButton"
         (resultFocus)="focusResult($event)"
         (resultUnfocus)="unfocusResult($event, true)"
-        (resultSelect)="selectResult($event)">
+        (resultSelect)="selectResult($event)"
+        [tabsMode]="true">
       </igo-search-results>
     </div>
   </igo-panel>
