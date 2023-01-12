@@ -444,14 +444,23 @@ Liens
         - `igo2-lib/tree/master/packages/geo/src/lib/draw/draw <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/geo/src/lib/draw/draw>`_
 
 *****************
-favoriteContext4NonAuthenticated
+favoriteContext
 *****************
 
     .. line-block::
 
-        Permet d'afficher ou non le bouton de contexte favori (contextManager)
-        pour les utilisateurs non authentifiés. Le contexte favori sera enregistré
-        dans le "LocalStorage" du fureteur.
+        Permet d'afficher ou non le bouton de contexte favori (contextManager) pour les utilisateurs non authentifiés et de définir le style de bouton. 
+        Le contexte favori sera enregistré dans le "LocalStorage" du fureteur.
+
+Exemples
+
+        .. code:: json
+
+            "favoriteContext": {
+                "favoriteContext4NonAuthenticated": true,
+                "lightIcon": false
+            }
+
 
 *****************
 geolocate
@@ -466,10 +475,10 @@ Exemples
 
         .. code:: json
 
-            geolocate: {
-                "followPosition": "false",
-                "basic": "true",
-                "activateDefault": "false"
+            "geolocate": {
+                "followPosition": false,
+                "basic": true,
+                "activateDefault": false
             }
 
 *****************
@@ -500,7 +509,7 @@ hasGeolocateButton
 
     .. line-block::
 
-        Permet d'afficher ou non un bouton de géolocalisation dans l'application.
+        Permet d'afficher ou non un bouton de géolocalisation sur la carte dans l'application.
 
 ***********************
 hasSearchPointerSummary

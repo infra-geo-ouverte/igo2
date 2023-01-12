@@ -9,7 +9,11 @@
       "url": "/services/itineraire/route/v1/driving/"
     }
   },
-  "favoriteContext4NonAuthenticated": true,
+  "favoriteContext": {
+    "favoriteContext4NonAuthenticated": true,
+    "lightIcon": false
+  },
+
   "theme": "blue-theme",
   "header": {
     "hasHeader": false,
