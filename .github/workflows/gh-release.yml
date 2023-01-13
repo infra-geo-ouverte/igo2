@@ -21,7 +21,7 @@ jobs:
       - name: Install zip
         uses: montudor/action-zip@v1
       - name: Zip output
-        run: zip igo2.zip *
+        run: zip -qq -r igo2.zip *
         working-directory: dist/igo2
       - name: Release
         uses: softprops/action-gh-release@v1
