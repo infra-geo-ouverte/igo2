@@ -21,7 +21,10 @@
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
   "showMenuButton": true,
-  "showSearchBar": true,
+  "searchBar": {
+    "showSearchBar": true,
+    "showSearchButton": true
+  },
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
   "homeExtentButton": {
