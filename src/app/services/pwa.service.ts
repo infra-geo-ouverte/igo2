@@ -54,7 +54,11 @@ export class PwaService {
   }
 
   public async initPwaPrompt(): Promise<any> {
-    if (this.configService.getConfig('app') && this.configService.getConfig('app.promotePwa')) {
+    if (
+      this.configService.getConfig('app') &&
+      this.configService.getConfig('app.pwa') &&
+      this.configService.getConfig('app.pwa.enabled') &&
+      this.configService.getConfig('app.pwa.promote')) {
       if (!this.platform.IOS) {
         window.addEventListener('beforeinstallprompt', (event: any) => {
           event.preventDefault();
