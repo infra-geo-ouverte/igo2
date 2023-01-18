@@ -20,6 +20,10 @@ interface Environment {
   igo: {
     app: {
       forceCoordsNA: boolean;
+      pwa?: {
+        enabled?: boolean;
+        promote?: boolean;
+      }
     };
     auth?: AuthOptions;
     storage: AuthStorageOptions
@@ -49,7 +53,11 @@ export const environment: Environment = {
   production: false,
   igo: {
     app: {
-      forceCoordsNA: true
+      forceCoordsNA: true,
+      pwa: {
+        enabled: false,
+        promote: false
+      }
     },
     auth: {
       url: '/apis/users',

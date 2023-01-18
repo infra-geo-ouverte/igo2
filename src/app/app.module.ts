@@ -71,7 +71,10 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     HammerModule,
     HeaderModule,
     FooterModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerWithDelay:5000' })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.igo.app.pwa.enabled,
+      registrationStrategy: 'registerWithDelay:5000'
+    })
   ],
   providers: [
     provideConfigOptions({
