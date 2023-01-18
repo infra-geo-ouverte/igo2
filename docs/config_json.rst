@@ -821,12 +821,30 @@ showRotationButtonIfNoRotation
         rotation est visible si aucune rotation n'est active.
 
 ********************************
-showSearchBar
+searchBar
 ********************************
 
     .. line-block::
 
-        Permet de définir si la barre de recherche est affichée ou non.
+        Permet de définir des paramètres de la barre de recherche.
+
+Exemples
+
+    .. code:: json
+
+        "searchBar": {
+            "showSearchBar": true,
+            "showSearchButton": false
+        }
+
+Propriétés
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/search-bar.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
 ***************
 SearchSources
