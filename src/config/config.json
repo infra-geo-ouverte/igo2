@@ -23,7 +23,7 @@
   "showMenuButton": true,
   "searchBar": {
     "showSearchBar": true,
-    "showSearchButton": true
+    "showSearchButton": false
   },
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
