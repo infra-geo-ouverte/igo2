@@ -444,21 +444,23 @@ Liens
         - `igo2-lib/tree/master/packages/geo/src/lib/draw/draw <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/geo/src/lib/draw/draw>`_
 
 *****************
-favoriteContext
+contextConfig
 *****************
 
     .. line-block::
 
-        Permet d'afficher ou non le bouton de contexte favori (contextManager) pour les utilisateurs non authentifiés et de définir le style de bouton. 
-        Le contexte favori sera enregistré dans le "LocalStorage" du fureteur.
+        Permet de définir des configurations diverses sur les contexts. 
+        Ce sont des configurations générales autres que celles touchant l'outil contexte.
+        Lorsqu'un favori est définit pour les utilisateurs non authentifiés, le contexte favori sera enregistré dans le "LocalStorage" du fureteur.
 
 Exemples
 
         .. code:: json
-
-            "favoriteContext": {
-                "favoriteContext4NonAuthenticated": true,
-                "lightIcon": false
+            "contextConfig": {
+                "favoriteContext": {
+                    "favoriteContext4NonAuthenticated": true,
+                    "lightIcon": false
+                }
             }
 
 
