@@ -344,8 +344,8 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.configService.getConfig('showRotationButtonIfNoRotation');
     this.showMenuButton = this.configService.getConfig('showMenuButton') === undefined ? true :
       this.configService.getConfig('showMenuButton');
-    this.showSearchBar = this.configService.getConfig('showSearchBar') === undefined ? true :
-      this.configService.getConfig('showSearchBar');
+    this.showSearchBar = this.configService.getConfig('searchBar.showSearchBar') === undefined ? true :
+      this.configService.getConfig('searchBar.showSearchBar');
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig('hasFeatureEmphasisOnSelection');
 

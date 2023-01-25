@@ -23,7 +23,6 @@ import {
   provideStoredQueriesSearchSource,
   provideOsrmDirectionsSource,
   provideOptionsApi,
-  provideCadastreSearchSource,
   provideStyleListOptions
 } from '@igo2/geo';
 
@@ -72,7 +71,10 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     HammerModule,
     HeaderModule,
     FooterModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerWithDelay:5000' })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.igo.app.pwa.enabled,
+      registrationStrategy: 'registerWithDelay:5000'
+    })
   ],
   providers: [
     provideConfigOptions({
@@ -93,8 +95,6 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     provideStoredQueriesSearchSource(),
     provideOsrmDirectionsSource(),
     provideOptionsApi(),
-    provideCadastreSearchSource(),
-
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,

@@ -821,12 +821,30 @@ showRotationButtonIfNoRotation
         rotation est visible si aucune rotation n'est active.
 
 ********************************
-showSearchBar
+searchBar
 ********************************
 
     .. line-block::
 
-        Permet de définir si la barre de recherche est affichée ou non.
+        Permet de définir des paramètres de la barre de recherche.
+
+Exemples
+
+    .. code:: json
+
+        "searchBar": {
+            "showSearchBar": true,
+            "showSearchButton": false
+        }
+
+Propriétés
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/search-bar.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
 ***************
 SearchSources
@@ -836,6 +854,34 @@ SearchSources
 
        En cours de construction
 
+************
+storageOptions
+************
+
+    Permet de modifier la sauvegarde de préférence dans le storage (LocalStorage).
+    Deux (2) propriétés sont permises, key et url.
+
+    key = prefixe de la clé enregistrée dans le storage. Par dégaut, 'igo'. 
+    Utile pour différencier des préférence sur un serveur hébergeant plusieurs applications.
+    url = Si une api de contexte est disponible, l'url de sauvegarde des préférence utilisateur.
+    La propriété url provient de l'interface 'AuthStorageOptions'. Particulièrement utile 
+    pour obtenir les propriétés de partage de contextes en provenance de l'api de contexte.
+
+
+Exemple
+
+        .. code:: json
+
+              "storageOptions": {
+                  "key": "/apis/igo2/layers/options",
+                  "url": "/user/igo"
+              }
+
+Liens
+
+        - `igo2-lib/core/src/lib/storage/storage.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/core/src/lib/storage/storage.interface.ts>`_
+        - `igo2-lib/auth/src/lib/shared/storage.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/auth/src/lib/shared/storage.interface.ts>`_
+        - `API de contexte <https://github.com/infra-geo-ouverte/igo2-api>`_
 
 ***************
 Theme
@@ -843,7 +889,7 @@ Theme
 
     .. line-block::
 
-        Permet de définir les thèmes de l'application (couleurs, polices).
+        Permet de définir les thèmes de l'application (couleurs, polices).
         Le répertoire où sont conservés les thèmes est le `igo2-lib/packages/core/src/style/themes <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/core/src/style/themes>`_
 
 Exemples
@@ -1041,10 +1087,6 @@ Exemple complet config.json
                     },
                   ],
                   "searchSources": {
-                        "cadastre": {
-                          "title": "Cadastre",
-                          "enabled": true
-                        },
                         "nominatim": {
                             "enabled": false
                         },

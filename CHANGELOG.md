@@ -1,3 +1,36 @@
+## [1.14.1](https://github.com/infra-geo-ouverte/igo2/compare/1.14.0...1.14.1) (2023-01-25)
+
+
+### Bug Fixes
+
+* **app:** fix angular/cli ([f25fd2e](https://github.com/infra-geo-ouverte/igo2/commit/f25fd2e3465425eb98a055889887c87ca853867e))
+* **gh-release:** github action for zipped build ([#895](https://github.com/infra-geo-ouverte/igo2/issues/895)) ([37da9ef](https://github.com/infra-geo-ouverte/igo2/commit/37da9eff660f854e68cec369b75402fb19319721))
+* **portal:** error on non pwa app on ngsw registration ([#897](https://github.com/infra-geo-ouverte/igo2/issues/897)) ([5bbdbef](https://github.com/infra-geo-ouverte/igo2/commit/5bbdbef626647a0d7646cd177a32181ac6f15acc))
+
+
+### Features
+
+* **app:** upgrade angular lts ([49106fb](https://github.com/infra-geo-ouverte/igo2/commit/49106fb978546730ba164d3223b0cdfc6a17888d))
+* **app:** upgrade igo2-lib ([a5358c4](https://github.com/infra-geo-ouverte/igo2/commit/a5358c467ea7bcffd1ee8c4a91fac810f83f2685))
+
+
+
+# [1.14.0](https://github.com/infra-geo-ouverte/igo2/compare/1.13.4...1.14.0) (2022-12-15)
+
+
+### Bug Fixes
+
+* **mat-form-field-suffix:** fix css icon size ([#873](https://github.com/infra-geo-ouverte/igo2/issues/873)) ([92fb147](https://github.com/infra-geo-ouverte/igo2/commit/92fb1472bd59cac5768d6043f45ab1aa477b6e4c))
+* **portal:** fix search sf params ([#877](https://github.com/infra-geo-ouverte/igo2/issues/877)) ([801bdf8](https://github.com/infra-geo-ouverte/igo2/commit/801bdf84730215c3238bedfb59cda11f22e7e680))
+
+
+### Features
+
+* **app:** allow force language by url param ([#881](https://github.com/infra-geo-ouverte/igo2/issues/881)) ([d2c341d](https://github.com/infra-geo-ouverte/igo2/commit/d2c341deceed336e7f17d6c522460bcba27a6cc0))
+* **app:** upgrade igo2-lib ([b9c176c](https://github.com/infra-geo-ouverte/igo2/commit/b9c176cf9f3821ee9eae00ae2ddde3e0ee0917b2))
+
+
+
 ## [1.13.4](https://github.com/infra-geo-ouverte/igo2/compare/1.13.3...1.13.4) (2022-11-22)
 
 
