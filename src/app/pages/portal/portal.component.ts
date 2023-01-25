@@ -524,7 +524,7 @@ ${rtss.properties.distance} m`;
     const urlBase = "/igo2/sigo-terrain/data";
     const dgts = [
       "Aeroportuaire", "DGT29", "DGT63-65", "DGT64-70",
-      "DGT66", "DGT67", "DGT68", "DGT71", "DGT81-91", "DGT86", "DGT88", "DGT89", "DGT90"
+      "DGT66", "DGT67", "DGT68", "DGT71", "DGT91", "DGT93", "DGT86", "DGT88", "DGT89", "DGT90"
     ];
     const ds = ["rtss", "gsq", "pon", "cs", "mun"];
     const oldDataList = [];

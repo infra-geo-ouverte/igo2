@@ -1,10 +1,10 @@
-[  
+[
   {
     "uri": "_default",
     "title": "De base (sans données)"
   },
   {
-    "uri": "DGT81-91",
+    "uri": "DGT91",
     "title": "Abitibi-Témiscamingue"
   },
   {
@@ -26,6 +26,10 @@
   {
     "uri": "DGT90",
     "title": "Estrie"
+  },
+  {
+    "uri": "DGT93",
+    "title": "Eeyou Istchee Baie-James"
   },
   {
     "uri": "DGT88",

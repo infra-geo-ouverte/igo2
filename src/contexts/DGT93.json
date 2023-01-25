@@ -1,5 +1,5 @@
 {
-  "uri": "DGT81-91",
+  "uri": "DGT93",
   "base": "_base",
   "messages": [
     {
@@ -55,8 +55,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "/igo2/sigo-terrain/data/DGT81-91/mun.geojson",
-        "pathOffline": "/igo2/sigo-terrain/data/DGT81-91/mun.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT93/mun.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT93/mun.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "Mun: ${MUS_NM_MUN}",
@@ -91,8 +91,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "/igo2/sigo-terrain/data/DGT81-91/cs.geojson",
-        "pathOffline": "/igo2/sigo-terrain/data/DGT81-91/cs.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT93/cs.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT93/cs.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "nom_unite",
@@ -127,8 +127,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "/igo2/sigo-terrain/data/DGT81-91/rtss.geojson",
-        "pathOffline": "/igo2/sigo-terrain/data/DGT81-91/rtss.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT93/rtss.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT93/rtss.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "${num_route}-${num_tronc}-${num_sectn}-${cod_sous_r}${seq_sous_r}${cod_sous_c}${cod_cote_c}",
@@ -167,8 +167,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "/igo2/sigo-terrain/data/DGT81-91/pon.geojson",
-        "pathOffline": "/igo2/sigo-terrain/data/DGT81-91/pon.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT93/pon.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT93/pon.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "Élément de drainage: ${ide_drang_}",
@@ -205,8 +205,8 @@
           "allowedFormats": ["GeoJSON"]
         },
         "type": "vector",
-        "url": "/igo2/sigo-terrain/data/DGT81-91/gsq.geojson",
-        "pathOffline": "/igo2/sigo-terrain/data/DGT81-91/gsq.geojson",
+        "url": "/igo2/sigo-terrain/data/DGT93/gsq.geojson",
+        "pathOffline": "/igo2/sigo-terrain/data/DGT93/gsq.geojson",
         "queryable": true,
         "queryFormat": "geojson",
         "queryTitle": "Structure: ${num_dossr}",
