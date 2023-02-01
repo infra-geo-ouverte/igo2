@@ -9,6 +9,11 @@
       "url": "/services/itineraire/route/v1/driving/"
     }
   },
+  "searchSources": {
+    "cadastre": {
+      "available": false
+    }
+  },
   "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
   "header": {
