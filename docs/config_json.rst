@@ -832,9 +832,79 @@ showSearchBar
 SearchSources
 ***************
 
-    .. note::
+    .. line-block::
 
-       En cours de construction
+       Permet effectuer la personnalisation de la section de recherches à partir de l'ensemble de propriétés définies.
+
+Exemples
+
+        .. code:: json
+
+            "searchSources": {
+              "showResultsCount":false
+              "cadastre": {
+                "title": "Cadastre",
+                "enabled": true
+              },
+              "nominatim": {
+                "enabled": false
+              },
+              "ilayer": {
+                "searchUrl": "/apis/icherche/layers",
+                "order": 4,
+                "params": {
+                  "limit": 10
+                  },
+                "queryFormat": {
+                  "html": {
+                    "urls": ["/apis/ws/mffpecofor.fcgi"]
+                  }
+                }
+              },
+              "icherche": {
+                "title": "ICherche",
+                "searchUrl": "/apis/icherche",
+                "showInPointerSummary": true,
+                "order": 2,
+                "params": {
+                  "limit": "5"
+                  }
+                },
+
+              "icherchereverse": {
+                "searchUrl": "/apis/terrapi",
+                "order": 3,
+                "params": {
+                  "limit": 5,
+                  "buffer":10
+                  }
+                }
+              }
+
+Propriétés
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/search-sources.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Propriétés de cadastre, nominatim, ilayer, icherche et icherchereverse
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/search-sources-prop.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+Liens
+
+        - `igo2/blob/master/src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
+
 
 
 ***************
@@ -863,7 +933,7 @@ Propriétés
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-    NB. Pour le thème qc-ca, si pour appliquer l'ensemble du style (qui s'applique aux autres éléments qui ne font pas partie de Angular material), il faut aller dans l'assemblage, src/styles.scss et décommenter la ligne "@import './qcca-theme/qcca-theme.scss';"" 
+    NB. Pour le thème qc-ca, si pour appliquer l'ensemble du style (qui s'applique aux autres éléments qui ne font pas partie de Angular material), il faut aller dans l'assemblage, src/styles.scss et décommenter la ligne "@import './qcca-theme/qcca-theme.scss';""
 
 Liens
 

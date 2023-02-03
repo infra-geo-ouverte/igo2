@@ -1,0 +1,12 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+title,String, Le titre que comprend une description spéciphique de la propriété,""title": "ICherche", - "title": "Cadastre",",
+searchUrl, String,Définit l'url d'accès à la proprieté souhaité," "searchUrl": "/apis/icherche/layers", et "searchUrl": "/apis/icherche", et "searchUrl": "/apis/terrapi",",Selon le besoin
+available,Boolean,,"true|false "available": false et "available": true",
+enabled,Boolean, La valeur permet/bloque l'accesibilité de la propriété,""enabled": false et "enabled": true",
+order,number,montre une liste ordonnée,""order": 4,",
+distance,number,,,
+params,String, il posède deux proprieté: limit (number) et buffer(number). Limit pour limiter les resultats de la recherche efféctué.Buffer est un limite pourdefinir,""limit": 5,"buffer":10",
+settings,SearchSourceSettings[],,,
+queryFormat,String, Il posède une proprieté html,""urls": ["/apis/ws/mffpecofor.fcgi"]",""urls": ["/apis/ws/mffpecofor.fcgi"]"
+showInPointerSummary, Boolean,,true|false, true
+showInSettings,Boolean,,true|false,
