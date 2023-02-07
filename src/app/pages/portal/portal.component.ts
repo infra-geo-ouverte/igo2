@@ -778,6 +778,16 @@ export class PortalComponent implements OnInit, OnDestroy {
         .filter(sourceCanSearch);
     }
 
+    if(this.contextMenuCoord) {
+      const index = (results.findIndex(item => item.meta.id === this.searchBarTerm.replace(/\s/g, '')) !== -1) ?
+      results.findIndex(item => item.meta.id === this.searchBarTerm.replace(/\s/g, '')) :
+      results.findIndex(item => item.meta.id === this.searchBarTerm.replace(/\s/g, '').split(',').reverse().join(','));
+      if(index !== -1) {
+        results[index].meta.title = this.searchBarTerm;
+        results[index].meta.titleHtml = this.searchBarTerm;
+      }
+    }
+
     const newResults = this.searchStore.entities$.value
       .filter(
         (result: SearchResult) =>
@@ -785,6 +795,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           enabledSources.includes(result.source)
       )
       .concat(results);
+      
     this.searchStore.updateMany(newResults);
   }
 
@@ -792,10 +803,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchState.setSearchResultsGeometryStatus(value);
   }
 
-  onReverseCoordsFormatStatusChange(value) {
-    console.log('reverce coords evanbled:', value); /**** */
+  onReverseCoordsFormatStatusChange(value: boolean) {
     this.storageService.set('reverseSearchCoordsFormatEnabled', value);
     this.igoReverseSearchCoordsFormatEnabled = value;
+    this.searchBarTerm = this.searchBarTerm.split(', ').reverse().join(', ');
+    this.searchStore.clear();
   }
 
   onSearchSettingsChange() {
@@ -1161,7 +1173,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private readLanguageParam(params) {
     if (params['lang']) {
-      //this.authService.languageForce = true;
+      this.authService.languageForce = true;
       this.languageService.setLanguage(params['lang']);
     }
   }
