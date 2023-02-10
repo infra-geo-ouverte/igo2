@@ -1,8 +1,8 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
-showResultsCount,boolean,Permet de montrer le nombre des résultats que correspondent à la recherche d'un terme dans la barre de recherche, true|false, false
-cadastre,les proprietés se montren dans la prochaine table,"Permet d'activer la recherche sur categorie Cadastre qui effectue une recherche par numero de lot,(title et enabled)",,
-nominatim,les proprietés se montren dans la prochaine table,Permet de préciser l'utilisation de la categorie nominatim,enabled: true|false,
-ilayer,les proprietés se montren dans la prochaine table,"Permet d'activer la recherche par couches(pour verifier)", "L'exemple: |-searchUrl, |-order, |-params, |-queryFormat ",
-icherche,les proprietés se montren dans la prochaine table, "Permet effectuer des précisions par rapport à la recherche selon type et le nombre de résultat, l'ecart et l'étendue.", "L'exemple: |-title, |-searchUrl,|-showInPointerSummary,|-order, |-params,
-icherchereverse,les proprietés se montren dans la prochaine table,Permet activer la recherche des mot clés en correspondance à une geometrie quelconque, "L'exemple:|-searchUrl,|-order,|-params(limit,buffer),
+showResultsCount ,boolean,Permet d'afficher ou non le nombre de résultats de chaque source, true/false, true
+cadastre ,,Permet de définir la recherche par cadastre (numéro de lot),,
+nominatim ,,Permet de définir l'utilisation de la recherche nominatim,,
+ilayer ,,Permet d'activer icherche pour les couches de données,,
+icherche ,,Permet d'activer icherche (géocodage),,
+icherchereverse ,,Permet d'activer icherche reverse (géocodage inversé),,
 

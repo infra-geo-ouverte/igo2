@@ -906,7 +906,6 @@ Liens
         - `igo2/blob/master/src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
 
 
-
 ***************
 Theme
 ***************

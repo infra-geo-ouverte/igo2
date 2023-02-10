@@ -1,12 +1,12 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
-title,String, Le titre que comprend une description spéciphique de la propriété,""title": "ICherche", - "title": "Cadastre",",
-searchUrl, String,Définit l'url d'accès à la proprieté souhaité," "searchUrl": "/apis/icherche/layers", et "searchUrl": "/apis/icherche", et "searchUrl": "/apis/terrapi",",Selon le besoin
-available,Boolean,,"true|false "available": false et "available": true",
-enabled,Boolean, La valeur permet/bloque l'accesibilité de la propriété,""enabled": false et "enabled": true",
-order,number,montre une liste ordonnée,""order": 4,",
-distance,number,,,
-params,String, il posède deux proprieté: limit (number) et buffer(number). Limit pour limiter les resultats de la recherche efféctué.Buffer est un limite pourdefinir,""limit": 5,"buffer":10",
-settings,SearchSourceSettings[],,,
-queryFormat,String, Il posède une proprieté html,""urls": ["/apis/ws/mffpecofor.fcgi"]",""urls": ["/apis/ws/mffpecofor.fcgi"]"
-showInPointerSummary, Boolean,,true|false, true
-showInSettings,Boolean,,true|false,
+title ,String,Le titre de la source de recherche,"icherche,ilayer,icherchereverse,nominatim",
+searchUrl ,String,Définit l'url de la source de recherche,,
+available ,Boolean,,true/false,
+enabled ,Boolean, La valeur permet/bloque l'accesibilité de la propriété,true/false,
+order ,number,Ordre d'apparition des résultats de recherche,,
+distance ,number,Rayon de recherche à appliquer pour la icherche reverse,100,500,1000,2000,5000,
+params ,String,Permet de modifier les paramètres d'url,limit: 5 (limite le nombre de resultats de recherche à 5),
+settings ,SearchSourceSettings[],Permet de modifier les paramètres d'affichage de la source,,
+queryFormat ,String, Permet de forcer un format pour l'interrogation (query),,
+showInPointerSummary ,Boolean,Afficher ou non la possibilité du pointeur sommaire,true/false, true
+showInSettings ,Boolean,Permettre l'affichage de la source dans les paramètres de la recherche,true/false,
