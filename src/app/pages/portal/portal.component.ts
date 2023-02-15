@@ -504,63 +504,6 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.configFileToGeoDBService.load(configFileToGeoDBService);
       }
     }
-    // this.initSW();
-  }
-
-  private initSW() {
-    const dataDownload = this.configService.getConfig('pwa.dataDownload');
-    if ('serviceWorker' in navigator && dataDownload) {
-      let downloadMessage;
-      let currentVersion;
-      const dataLoadSource = this.storageService.get('dataLoadSource');
-      navigator.serviceWorker.ready.then((registration) => {
-        console.log('Service Worker Ready');
-        this.http.get('ngsw.json').pipe(
-          concatMap((ngsw: any) => {
-            const datas$ = [];
-            let hasDataInDataDir: boolean = false;
-            if (ngsw) {
-              // IF FILE NOT IN THIS LIST... DELETE?
-              currentVersion = ngsw.appData.version;
-              const cachedDataVersion = this.storageService.get('cachedDataVersion');
-              if (currentVersion !== cachedDataVersion && dataLoadSource === 'pending') {
-                this.pwaService.updates.checkForUpdate();
-              }
-              if (dataLoadSource === 'newVersion' || !dataLoadSource) {
-                ((ngsw as any).assetGroups as any).map((assetGroup) => {
-                  if (assetGroup.name === 'contexts') {
-                    const elemToDownload = assetGroup.urls.concat(assetGroup.files).filter(f => f);
-                    elemToDownload.map((url, i) => datas$.push(this.http.get(url).pipe(delay(750))));
-                  }
-                });
-                if (hasDataInDataDir) {
-                  const message = this.languageService.translate.instant('pwa.data-download-start');
-                  downloadMessage = this.messageService
-                    .info(message, undefined, { disableTimeOut: true, progressBar: false, closeButton: true, tapToDismiss: false });
-                  this.storageService.set('cachedDataVersion', currentVersion);
-                }
-                return zip(...datas$);
-              }
-
-            }
-            return zip(...datas$);
-          })
-        )
-          .pipe(delay(1000))
-          .subscribe(() => {
-            if (downloadMessage) {
-              this.messageService.remove((downloadMessage as any).toastId);
-              const message = this.languageService.translate.instant('pwa.data-download-completed');
-              this.messageService.success(message, undefined, { timeOut: 40000 });
-              if (currentVersion) {
-                this.storageService.set('dataLoadSource', 'pending');
-                this.storageService.set('cachedDataVersion', currentVersion);
-              }
-            }
-          });
-
-      });
-    }
   }
 
   setToastPanelHtmlDisplay(value) {
