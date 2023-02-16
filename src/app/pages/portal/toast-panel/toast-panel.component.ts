@@ -42,7 +42,8 @@ import {
   LanguageService,
   StorageService,
   StorageScope,
-  StorageServiceEvent
+  StorageServiceEvent,
+  ConfigService
 } from '@igo2/core';
 import { QueryState, StorageState } from '@igo2/integration';
 
@@ -59,6 +60,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     UP: 'swipeup',
     DOWN: 'swipedown'
   };
+
+  public tabsMode = false;
 
   get storageService(): StorageService {
     return this.storageState.storageService;
@@ -259,8 +262,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     public mediaService: MediaService,
     public languageService: LanguageService,
     private storageState: StorageState,
-    private queryState: QueryState
+    private queryState: QueryState,
+    private configService: ConfigService
   ) {
+    this.tabsMode = this.configService.getConfig('queryTabs')
+      ? this.configService.getConfig('queryTabs')
+      : false;
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
