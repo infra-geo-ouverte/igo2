@@ -958,7 +958,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   searchCoordinate(coord: [number, number]) {
     this.searchBarTerm = (!this.igoReverseSearchCoordsFormatEnabled) ?
     coord.map((c) => c.toFixed(6)).join(', ') : coord.reverse().map((c) => c.toFixed(6)).join(', ');
-    // this.searchBarTerm = coord.map((c) => c.toFixed(6)).join(', ');
   }
 
   updateMapBrowserClass() {
