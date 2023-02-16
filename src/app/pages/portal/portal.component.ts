@@ -778,16 +778,6 @@ export class PortalComponent implements OnInit, OnDestroy {
         .filter(sourceCanSearch);
     }
 
-    if(this.contextMenuCoord) {
-      const index = (results.findIndex(item => item.meta.id === this.searchBarTerm.replace(/\s/g, '')) !== -1) ?
-      results.findIndex(item => item.meta.id === this.searchBarTerm.replace(/\s/g, '')) :
-      results.findIndex(item => item.meta.id === this.searchBarTerm.replace(/\s/g, '').split(',').reverse().join(','));
-      if(index !== -1) {
-        results[index].meta.title = this.searchBarTerm;
-        results[index].meta.titleHtml = this.searchBarTerm;
-      }
-    }
-
     const newResults = this.searchStore.entities$.value
       .filter(
         (result: SearchResult) =>
@@ -806,7 +796,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.storageService.set('reverseSearchCoordsFormatEnabled', value);
     this.igoReverseSearchCoordsFormatEnabled = value;
     this.searchBarTerm = this.searchBarTerm.split(', ').reverse().join(', ');
-    this.searchStore.clear();
+    this.onClearSearch();
   }
 
   onSearchSettingsChange() {
@@ -968,6 +958,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   searchCoordinate(coord: [number, number]) {
     this.searchBarTerm = (!this.igoReverseSearchCoordsFormatEnabled) ?
     coord.map((c) => c.toFixed(6)).join(', ') : coord.reverse().map((c) => c.toFixed(6)).join(', ');
+    // this.searchBarTerm = coord.map((c) => c.toFixed(6)).join(', ');
   }
 
   updateMapBrowserClass() {
