@@ -1,0 +1,3 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+showSearchBar,Boolean,Permet de définir si la barre de recherche est affichée ou non.,true | false,true
+showSearchButton,Boolean,Permet de définir si un bouton de recherche est visible ou non.,true | false,false

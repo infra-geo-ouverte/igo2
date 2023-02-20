@@ -1,3 +1,20 @@
+## [1.14.1](https://github.com/infra-geo-ouverte/igo2/compare/1.14.0...1.14.1) (2023-01-25)
+
+
+### Bug Fixes
+
+* **app:** fix angular/cli ([f25fd2e](https://github.com/infra-geo-ouverte/igo2/commit/f25fd2e3465425eb98a055889887c87ca853867e))
+* **gh-release:** github action for zipped build ([#895](https://github.com/infra-geo-ouverte/igo2/issues/895)) ([37da9ef](https://github.com/infra-geo-ouverte/igo2/commit/37da9eff660f854e68cec369b75402fb19319721))
+* **portal:** error on non pwa app on ngsw registration ([#897](https://github.com/infra-geo-ouverte/igo2/issues/897)) ([5bbdbef](https://github.com/infra-geo-ouverte/igo2/commit/5bbdbef626647a0d7646cd177a32181ac6f15acc))
+
+
+### Features
+
+* **app:** upgrade angular lts ([49106fb](https://github.com/infra-geo-ouverte/igo2/commit/49106fb978546730ba164d3223b0cdfc6a17888d))
+* **app:** upgrade igo2-lib ([a5358c4](https://github.com/infra-geo-ouverte/igo2/commit/a5358c467ea7bcffd1ee8c4a91fac810f83f2685))
+
+
+
 # [1.14.0](https://github.com/infra-geo-ouverte/igo2/compare/1.13.4...1.14.0) (2022-12-15)
 
 

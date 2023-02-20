@@ -1,0 +1,8 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+showResultsCount ,boolean,Permet d'afficher ou non le nombre de résultats de chaque source, true/false, true
+cadastre ,,Permet de définir la recherche par cadastre (numéro de lot),,
+nominatim ,,Permet de définir l'utilisation de la recherche nominatim,,
+ilayer ,,Permet d'activer icherche pour les couches de données,,
+icherche ,,Permet d'activer icherche (géocodage),,
+icherchereverse ,,Permet d'activer icherche reverse (géocodage inversé),,
+
