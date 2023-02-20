@@ -2,6 +2,7 @@
   <igo-panel
     *ngIf="store.entities$ | async"
     [ngClass] = "getClassPanel()"
+    [id]="getSpecificDesignIdSelector()"
     [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
     (click)="onToggleClick($event)"
     tabindex="0"

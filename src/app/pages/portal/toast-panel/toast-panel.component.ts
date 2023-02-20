@@ -202,6 +202,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     };
   }
 
+  // specific design
+  getSpecificDesignIdSelector() {
+    if(this.tabsMode && !this.fullExtent && !this.isHtmlDisplay) {
+      return 'app-toast-panel-opened-max-height';
+    } else if(this.tabsMode && this.opened &&
+      this.fullExtent && !this.isHtmlDisplay) {
+      return 'app-full-toast-panel-opened-max-height';
+    }
+  }
 
   @HostBinding('style.visibility')
   get displayStyle() {

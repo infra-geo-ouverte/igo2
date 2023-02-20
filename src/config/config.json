@@ -22,7 +22,7 @@
   "showRotationButtonIfNoRotation": false,
   "showMenuButton": true,
   "showSearchBar": true,
-  "queryTabs": true,
+  "queryTabs": false,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
   "homeExtentButton": {
