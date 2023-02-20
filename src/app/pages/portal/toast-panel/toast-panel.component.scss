@@ -57,7 +57,7 @@
 
 
 .app-toast-panel-opened {
-  height: auto;
+  height: $app-toast-panel-max-height;
   max-height: $app-toast-panel-max-height;
   width: $app-toast-panel-width;
   max-width: $app-toast-panel-max-width;
@@ -80,7 +80,7 @@
 }
 
 .app-full-toast-panel-opened {
-  height: auto;
+  height: $app-full-toast-panel-max-height;
   max-height: $app-full-toast-panel-max-height;
   width: $app-full-toast-panel-width;
 
