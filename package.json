@@ -78,6 +78,7 @@
     "core-js": "^3.24.1",
     "fast-text-encoding": "^1.0.4",
     "file-saver": "^2.0.2",
+    "flexsearch": "0.7.21",
     "hammerjs": "^2.0.8",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",

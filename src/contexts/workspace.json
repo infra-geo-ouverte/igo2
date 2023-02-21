@@ -79,7 +79,23 @@
           "queryable": true,
           "queryTitle": "nomnavcana",
           "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
-          "type": "vector"
+          "type": "vector",
+          "sourceFields": [
+            { "name": "longpiste2"},
+            { "name": "idobj", "searchIndex": {"enabled": true, "tokenize": "strict"}},
+            { "name": "codeindic", "searchIndex": {"enabled": true}},
+            { "name": "nomnavcana", "searchIndex": {"enabled": true}},
+            { "name": "nbrpiste"},
+            { "name": "indicpiste"},
+            { "name": "surface"},
+            { "name": "province"},
+            { "name": "datdebappt"},
+            { "name": "datmodif"},
+            { "name": "version"},
+            { "name": "source", "searchIndex": {"enabled": true}},
+            { "name": "remarque", "searchIndex": {"enabled": true}},
+            { "name": "objectid"}
+          ]
         }
       },
       {
