@@ -752,7 +752,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.routeParams?.search && term !== this.routeParams.search) {
       this.searchState.deactivateCustomFilterTermStrategy();
     }
-
+    this.searchBarTerm = term;
     this.searchState.setSearchTerm(term);
     const termWithoutHashtag = term.replace(/(#[^\s]*)/g, '').trim();
     if (termWithoutHashtag.length < 2) {
@@ -795,7 +795,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   onReverseCoordsFormatStatusChange(value) {
     this.storageService.set('reverseSearchCoordsFormatEnabled', value);
     this.igoReverseSearchCoordsFormatEnabled = value;
-    this.searchBarTerm = this.searchBarTerm.split(', ').reverse().join(', ');
+    const searchedTerm = this.searchBarTerm.replace(/\s/g, '');
+    this.searchBarTerm = searchedTerm.split(',').reverse().join(', ');
     this.onClearSearch();
   }
 
