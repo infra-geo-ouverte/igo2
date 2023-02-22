@@ -464,6 +464,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     if (this.storageChange$$) {
       this.storageChange$$.unsubscribe();
     }
+    if (this.tabsMode) {
+      this.storageService.set('fullExtent', true);
+    }
   }
 
   private buildResultEmphasis(
