@@ -22,7 +22,7 @@ interface Environment {
       forceCoordsNA: boolean;
     };
     auth?: AuthOptions;
-    storage: AuthStorageOptions
+    storage?: AuthStorageOptions
     catalog?: CatalogServiceOptions;
     context?: ContextServiceOptions;
     importExport?: ImportExportServiceOptions;
