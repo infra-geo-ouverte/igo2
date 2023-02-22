@@ -202,8 +202,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     };
   }
 
-  // specific design
-  getSpecificDesignIdSelector() {
+  // if query tabs mode activated
+  // fix Heigh of igo-panel
+  setHeighPanelTabsMode() {
+    if(this.resultSelected$.value){
+      return '';
+    }
+
     if(this.tabsMode && !this.fullExtent && !this.isHtmlDisplay) {
       return 'app-toast-panel-opened-max-height';
     } else if(this.tabsMode && this.opened &&
@@ -303,6 +308,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    if (this.tabsMode) {
+      this.storageService.set('fullExtent', true);
+    }
+
     this.store.entities$.subscribe(() => {
       this.initialized = true;
     });
