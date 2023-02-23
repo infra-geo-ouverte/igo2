@@ -795,9 +795,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   onReverseCoordsFormatStatusChange(value) {
     this.storageService.set('reverseSearchCoordsFormatEnabled', value);
     this.igoReverseSearchCoordsFormatEnabled = value;
-    const searchedTerm = this.searchBarTerm.replace(/\s/g, '');
-    this.searchBarTerm = searchedTerm.split(',').reverse().join(', ');
-    this.onClearSearch();
   }
 
   onSearchSettingsChange() {
