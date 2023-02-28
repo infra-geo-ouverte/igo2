@@ -178,7 +178,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   //   return !this.opened && this.fullExtent;
   // }
   getClassPanel() {
-    return {
+    let cls = {
       'app-toast-panel-opened' : this.opened && !this.fullExtent && !this.isHtmlDisplay,
       'app-full-toast-panel-opened' :
         this.opened && this.fullExtent &&
@@ -200,6 +200,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       'app-full-toast-panel-collapsed' : !this.opened && this.fullExtent && !this.isHtmlDisplay,
       'app-toast-panel-html-collapsed' : !this.opened && this.isHtmlDisplay
     };
+    
+    if (this.tabsMode && this.isResultSelected$.value) {
+      cls['app-full-toast-panel-opened'] = true;
+      cls['app-toast-panel-opened'] = false;
+    }
+
+    return cls;
   }
 
   // if query tabs mode activated
@@ -308,9 +315,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    if (this.tabsMode) {
-      this.storageService.set('fullExtent', true);
-    }
+    this.isResultSelected$.subscribe((res) => {
+      console.log('if selected', res,'class list', this.getClassPanel());
+    });
 
     this.store.entities$.subscribe(() => {
       this.initialized = true;
