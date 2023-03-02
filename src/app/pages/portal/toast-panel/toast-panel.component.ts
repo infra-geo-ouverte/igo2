@@ -177,8 +177,18 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   // get hasFullCollapsedClass() {
   //   return !this.opened && this.fullExtent;
   // }
+  private firstTimeTabMode: boolean = false;
   getClassPanel() {
-    let cls = {
+
+    if(this.tabsMode) {
+      if(this.firstTimeTabMode && !this.fullExtent && this.isResultSelected$.value) {
+        this.enlargeWindows();
+      } else if(this.firstTimeTabMode && this.fullExtent && !this.isResultSelected$.value) {
+        this.reduceWindow();
+      }
+    }
+
+    return {
       'app-toast-panel-opened' : this.opened && !this.fullExtent && !this.isHtmlDisplay,
       'app-full-toast-panel-opened' :
         this.opened && this.fullExtent &&
@@ -200,19 +210,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       'app-full-toast-panel-collapsed' : !this.opened && this.fullExtent && !this.isHtmlDisplay,
       'app-toast-panel-html-collapsed' : !this.opened && this.isHtmlDisplay
     };
-    
-    if (this.tabsMode && this.isResultSelected$.value) {
-      cls['app-full-toast-panel-opened'] = true;
-      cls['app-toast-panel-opened'] = false;
-    }
-
-    return cls;
   }
 
   // if query tabs mode activated
   // fix Heigh of igo-panel
   setHeighPanelTabsMode() {
-    if(this.resultSelected$.value){
+    if(this.resultSelected$.value || !this.opened){
       return '';
     }
 
@@ -315,12 +318,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.isResultSelected$.subscribe((res) => {
-      console.log('if selected', res,'class list', this.getClassPanel());
-    });
-
     this.store.entities$.subscribe(() => {
       this.initialized = true;
+      this.firstTimeTabMode = (this.tabsMode) ? true : false;
     });
     this.monitorResultOutOfView();
 
@@ -470,9 +470,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
     if (this.storageChange$$) {
       this.storageChange$$.unsubscribe();
-    }
-    if (this.tabsMode) {
-      this.storageService.set('fullExtent', true);
     }
   }
 
@@ -731,11 +728,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   resizeWindows() {
     this.storageService.set('fullExtent', !this.fullExtent);
+    if((this.fullExtent || !this.fullExtent) && this.tabsMode && this.firstTimeTabMode) {
+      this.firstTimeTabMode = false;
+    }
+
     if (this.fullExtent) {
-        this.reduceWindow();
+      this.reduceWindow();
     } else {
-        this.enlargeWindows();
-      }
+      this.enlargeWindows();
+    }
   }
 
   reduceWindow() {
