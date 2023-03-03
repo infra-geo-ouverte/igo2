@@ -23,7 +23,7 @@ searchOverlayStyle,`OverlayStyle`_,Permet de définir le style des éléme
 routingSources,`RoutingSource`_,"| Permet de définir la source serveur utilisée pour la création d'itinéraires. | Actuellement, le serveur utilisé est OSRM.",Itinéraire
 `showMenuButton`_,Boolean,"| Permet de définir si le bouton de menu permettant d'accéder aux outils est affiché dans le coin supérieur gauche. | Activé par défaut",
 `showRotationButtonIfNoRotation`_,Boolean,"| Permet de définir si le bouton de réinitialisation de la rotation est visible si aucune rotation n'est active. | Désactivé par défaut.",
-`showSearchBar`_,Boolean,"| Permet de définir si la barre de recherche est affichée ou non. | Activé par défaut.",
+`searchBar`_,Boolean,"Permet de définir des paramètres de la barre de recherche.",
 **searchSources***,`SearchSources`_,Nécessaire afin de permettre la recherche par texte et/ou la recherche par coordonnées.,"| Recherche | Carte"
 "| **theme*** | Voir: `theme`_",String,Permet de définir les thèmes de l'application.,
 title,String,"| Permet de définir le titre de l'application que l'on retrouve dans le menu d'accueil. | Constante pouvant être réutilisée dans le welcomeWindow.",
