@@ -177,16 +177,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   // get hasFullCollapsedClass() {
   //   return !this.opened && this.fullExtent;
   // }
-  private firstTimeTabMode: boolean = false;
-  getClassPanel() {
 
-    if(this.tabsMode) {
-      if(this.firstTimeTabMode && !this.fullExtent && this.isResultSelected$.value) {
-        this.enlargeWindows();
-      } else if(this.firstTimeTabMode && this.fullExtent && !this.isResultSelected$.value) {
-        this.reduceWindow();
-      }
-    }
+  getClassPanel() {
 
     return {
       'app-toast-panel-opened' : this.opened && !this.fullExtent && !this.isHtmlDisplay,
@@ -320,7 +312,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.entities$.subscribe(() => {
       this.initialized = true;
-      this.firstTimeTabMode = (this.tabsMode) ? true : false;
     });
     this.monitorResultOutOfView();
 
@@ -728,9 +719,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   resizeWindows() {
     this.storageService.set('fullExtent', !this.fullExtent);
-    if((this.fullExtent || !this.fullExtent) && this.tabsMode && this.firstTimeTabMode) {
-      this.firstTimeTabMode = false;
-    }
 
     if (this.fullExtent) {
       this.reduceWindow();
