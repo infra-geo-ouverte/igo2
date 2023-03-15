@@ -163,6 +163,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private sidenavMediaAndOrientation$$: Subscription;
 
   public igoSearchPointerSummaryEnabled: boolean;
+  public igoReverseSearchCoordsFormatEnabled: boolean;
 
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
@@ -354,6 +355,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.igoSearchPointerSummaryEnabled === undefined) {
       this.igoSearchPointerSummaryEnabled = this.storageService.get('searchPointerSummaryEnabled') as boolean || false;
     }
+
+    this.igoReverseSearchCoordsFormatEnabled = this.storageService.get('reverseSearchCoordsFormatEnabled') as boolean || false;
   }
 
   ngOnInit() {
@@ -692,7 +695,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.routeParams?.search && term !== this.routeParams.search) {
       this.searchState.deactivateCustomFilterTermStrategy();
     }
-
+    this.searchBarTerm = term;
     this.searchState.setSearchTerm(term);
     const termWithoutHashtag = term.replace(/(#[^\s]*)/g, '').trim();
     if (termWithoutHashtag.length < 2) {
@@ -730,6 +733,11 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   onSearchResultsGeometryStatusChange(value) {
     this.searchState.setSearchResultsGeometryStatus(value);
+  }
+
+  onReverseCoordsFormatStatusChange(value) {
+    this.storageService.set('reverseSearchCoordsFormatEnabled', value);
+    this.igoReverseSearchCoordsFormatEnabled = value;
   }
 
   onSearchSettingsChange() {
@@ -889,7 +897,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   searchCoordinate(coord: [number, number]) {
-    this.searchBarTerm = coord.map((c) => c.toFixed(6)).join(', ');
+    this.searchBarTerm = (!this.igoReverseSearchCoordsFormatEnabled) ?
+    coord.map((c) => c.toFixed(6)).join(', ') : coord.reverse().map((c) => c.toFixed(6)).join(', ');
   }
 
   updateMapBrowserClass() {

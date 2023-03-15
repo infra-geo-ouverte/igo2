@@ -24,6 +24,8 @@
       (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
       [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
       (searchResultsGeometryStatus)="onSearchResultsGeometryStatusChange($event)"
+      [reverseSearchCoordsFormatEnabled]="igoReverseSearchCoordsFormatEnabled"
+      (reverseSearchCoordsFormatStatus)="onReverseCoordsFormatStatusChange($event)"
       (search)="onSearch($event)"
       (clearFeature)="onClearSearch()"
       (searchSettingsChange)="onSearchSettingsChange()">
