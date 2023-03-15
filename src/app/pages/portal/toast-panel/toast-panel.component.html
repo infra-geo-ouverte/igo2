@@ -2,6 +2,7 @@
   <igo-panel
     *ngIf="store.entities$ | async"
     [ngClass] = "getClassPanel()"
+    [id]="setHeighPanelTabsMode()"
     [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
     (click)="onToggleClick($event)"
     tabindex="0"
@@ -92,7 +93,8 @@
         [withZoomButton]="withZoomButton"
         (resultFocus)="focusResult($event)"
         (resultUnfocus)="unfocusResult($event, true)"
-        (resultSelect)="selectResult($event)">
+        (resultSelect)="selectResult($event)"
+        [tabsMode]="tabsMode">
       </igo-search-results>
     </div>
   </igo-panel>

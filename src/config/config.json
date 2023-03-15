@@ -25,6 +25,7 @@
     "showSearchBar": true,
     "showSearchButton": false
   },
+  "queryTabs": false,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
   "homeExtentButton": {

@@ -42,7 +42,8 @@ import {
   LanguageService,
   StorageService,
   StorageScope,
-  StorageServiceEvent
+  StorageServiceEvent,
+  ConfigService
 } from '@igo2/core';
 import { QueryState, StorageState } from '@igo2/integration';
 
@@ -59,6 +60,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     UP: 'swipeup',
     DOWN: 'swipedown'
   };
+
+  public tabsMode = false;
 
   get storageService(): StorageService {
     return this.storageState.storageService;
@@ -174,7 +177,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   // get hasFullCollapsedClass() {
   //   return !this.opened && this.fullExtent;
   // }
+
   getClassPanel() {
+
     return {
       'app-toast-panel-opened' : this.opened && !this.fullExtent && !this.isHtmlDisplay,
       'app-full-toast-panel-opened' :
@@ -199,6 +204,20 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     };
   }
 
+  // if query tabs mode activated
+  // fix Heigh of igo-panel
+  setHeighPanelTabsMode() {
+    if(this.resultSelected$.value || !this.opened){
+      return '';
+    }
+
+    if(this.tabsMode && !this.fullExtent && !this.isHtmlDisplay) {
+      return 'app-toast-panel-opened-max-height';
+    } else if(this.tabsMode && this.opened &&
+      this.fullExtent && !this.isHtmlDisplay) {
+      return 'app-full-toast-panel-opened-max-height';
+    }
+  }
 
   @HostBinding('style.visibility')
   get displayStyle() {
@@ -259,8 +278,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     public mediaService: MediaService,
     public languageService: LanguageService,
     private storageState: StorageState,
-    private queryState: QueryState
+    private queryState: QueryState,
+    private configService: ConfigService
   ) {
+    this.tabsMode = this.configService.getConfig('queryTabs')
+      ? this.configService.getConfig('queryTabs')
+      : false;
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
@@ -696,11 +719,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   resizeWindows() {
     this.storageService.set('fullExtent', !this.fullExtent);
+
     if (this.fullExtent) {
-        this.reduceWindow();
+      this.reduceWindow();
     } else {
-        this.enlargeWindows();
-      }
+      this.enlargeWindows();
+    }
   }
 
   reduceWindow() {
