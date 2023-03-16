@@ -767,6 +767,22 @@ Liens
         - `igo2-lib/blob/master/demo/src/environments/environment.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/demo/src/environments/environment.ts>`_
 
 
+********************************
+QueryTabs
+********************************
+
+    .. line-block::
+
+        Permet de définir le type d'affichage de la résultat de Query,
+        affichage par liste ou onglet.
+
+Exemples
+
+    .. code:: json
+
+            "queryTabs": true
+
+
 .. _igoroutingsource:
 
 ***************

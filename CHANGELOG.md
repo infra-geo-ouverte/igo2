@@ -1,3 +1,13 @@
+## [1.14.2](https://github.com/infra-geo-ouverte/igo2/compare/1.14.1...1.14.2) (2023-03-15)
+
+
+### Features
+
+* **app:** upgrade igo2-lib ([ee6d8f2](https://github.com/infra-geo-ouverte/igo2/commit/ee6d8f24c8afc1a27385beb6bf48c5b9a8e58b2c))
+* **geo:** add new option to reverse coordinates lonLat to latLon ([#890](https://github.com/infra-geo-ouverte/igo2/issues/890)) ([65bc846](https://github.com/infra-geo-ouverte/igo2/commit/65bc8466ca8ba4aba8b46e88a22cfac776110a4c))
+
+
+
 ## [1.14.1](https://github.com/infra-geo-ouverte/igo2/compare/1.14.0...1.14.1) (2023-01-25)
 
 
