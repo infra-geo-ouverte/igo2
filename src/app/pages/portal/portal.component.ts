@@ -1373,8 +1373,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       file,
       features,
       this.map,
-      this.messageService,
-      this.languageService
+      this.messageService
     );
   }
 
@@ -1382,8 +1381,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     handleFileImportError(
       file,
       error,
-      this.messageService,
-      this.languageService
+      this.messageService
     );
   }
 
