@@ -287,6 +287,10 @@ export const environment: Environment = {
       configFileToGeoDBService: './data/geoDataToIDB.json'
     },
     searchSources: {
+      workspace: {
+        available: true,
+        enabled: true
+      },
       nominatim: {
         available: false
       },

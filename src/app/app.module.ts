@@ -15,6 +15,7 @@ import {
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 import { IgoAuthModule } from '@igo2/auth';
 import {
+  provideWorkspaceSearchSource,
   provideIChercheSearchSource,
   provideIChercheReverseSearchSource,
   provideNominatimSearchSource,
@@ -89,6 +90,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     RouteService,
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
+    provideWorkspaceSearchSource(),
     provideIChercheReverseSearchSource(),
     provideCoordinatesReverseSearchSource(),
     provideILayerSearchSource(),
