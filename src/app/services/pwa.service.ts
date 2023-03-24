@@ -4,13 +4,14 @@ import { ConfigService, LanguageService } from '@igo2/core';
 import { SwUpdate, VersionDetectedEvent } from '@angular/service-worker';
 import { interval } from 'rxjs';
 import { ConfirmDialogService } from '@igo2/common';
-import { filter } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PwaService {
   promptEvent: any;
+  private confirmOpened: boolean = false;
   constructor(
     private platform: Platform,
     public updates: SwUpdate,
@@ -24,11 +25,15 @@ export class PwaService {
   }
 
   private modalUpdatePWA() {
+    if (this.confirmOpened) {
+      return;
+    }
     const title = this.languageService.translate.instant('pwa.new-version-title');
     const body = this.languageService.translate.instant('pwa.new-version');
     const message = `${title} ${body}`;
-    this.confirmDialogService.open(message).subscribe((confirm) => {
+    this.confirmDialogService.open(message).pipe(tap(() => this.confirmOpened = true)).subscribe((confirm) => {
       if (confirm) {
+        this.confirmOpened = false;
         this.updates.activateUpdate().then(() => {
           if (window.navigator.onLine) {
             document.location.reload();
