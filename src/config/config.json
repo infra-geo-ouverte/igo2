@@ -26,6 +26,7 @@
     "showSearchButton": false
   },
   "queryTabs": false,
+  "saveSearchResultInLayer": true,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
   "homeExtentButton": {
