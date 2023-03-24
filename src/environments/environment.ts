@@ -283,6 +283,7 @@ export const environment: Environment = {
       pathToConfigFile: './config/interactiveTour.json'
     },
     importExport: {
+      importWithStyle: false,
       url: '/apis/ogre',
       configFileToGeoDBService: './data/geoDataToIDB.json'
     },
