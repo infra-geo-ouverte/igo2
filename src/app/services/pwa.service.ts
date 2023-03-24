@@ -31,7 +31,7 @@ export class PwaService {
     const title = this.languageService.translate.instant('pwa.new-version-title');
     const body = this.languageService.translate.instant('pwa.new-version');
     const message = `${title} ${body}`;
-    this.confirmDialogService.open(message).pipe(tap(() =>this.confirmOpened = true)).subscribe((confirm) => {
+    this.confirmDialogService.open(message).pipe(tap(() => this.confirmOpened = true)).subscribe((confirm) => {
       if (confirm) {
         this.confirmOpened = false;
         this.updates.activateUpdate().then(() => {
