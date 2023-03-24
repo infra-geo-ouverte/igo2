@@ -968,6 +968,20 @@ Liens
         - `igo2-lib/auth/src/lib/shared/storage.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/auth/src/lib/shared/storage.interface.ts>`_
         - `API de contexte <https://github.com/infra-geo-ouverte/igo2-api>`_
 
+********************************
+saveSearchResultInLayer
+********************************
+
+    .. line-block::
+
+        Permet d'activer ou désactiver l'enregistrement d'un résultat de recherche dans une couche.
+
+Exemples
+
+    .. code:: json
+
+            "saveSearchResultInLayer": true
+
 ***************
 Theme
 ***************
