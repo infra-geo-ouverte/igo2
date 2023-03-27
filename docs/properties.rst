@@ -241,6 +241,7 @@ Exemples
                   "enabled": true,
                   "minResolution": 0,
                   "maxResolution": 400,
+                  "searchIndexEnabled": false,
                   "queryOptions": {
                     "mapQueryOnOpenTab": false,
                     "tabQuery": false

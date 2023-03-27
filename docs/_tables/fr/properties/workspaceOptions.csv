@@ -19,3 +19,6 @@ pageSizeOptions ,Number[],"| Indique les possibilités de changement du nombre
 | d'entités pouvant être affichés sur une seule page (pageSize)."
 | ,0 à Infinity ou absent 
 | (par défaut = 1, 5, 10, 20, 50, 100, 500),
+searchIndexEnabled ,boolean,"| Indique si oui ou non, la couche devrait etre indexée (cherchable)
+| ,true/false
+| false
