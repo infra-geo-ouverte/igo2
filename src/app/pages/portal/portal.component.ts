@@ -520,6 +520,7 @@ ${rtss.properties.distance} m`;
   }
 
   private initSW() {
+    // todo delete dgt81-91 files
     const oldUrlBase = "https://ws.mapserver.transports.gouv.qc.ca/donnees/geomatique/sigo-terrain";
     const urlBase = "/igo2/sigo-terrain/data";
     const dgts = [

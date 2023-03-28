@@ -44,7 +44,7 @@
     "preghpages": "npm run build -- --configuration=github --output-path ./dist/ghpages --base-href /igo2/ && echo \"include: ['_default.json', '_contexts.json', '_base.json']\" > dist/ghpages/_config.yml",
     "ghpages": "VERSION=$(node -p -e \"require('./package.json').version\") && npx ngh --dir=dist/ghpages --no-silent=false --message=$VERSION",
     "postghpages": "rimraf ./dist/ghpages",
-    "preghpages.win": "npm run build -- --configuration=github --output-path ./dist/ghpages --base-href /igo2/ && echo include: ['_default.json', '_contexts.json', '_base.json', 'DGT29.json', 'DGT63-65.json', 'DGT64-70.json', 'DGT66.json', 'DGT67.json', 'DGT68.json', 'DGT71.json', 'DGT81-91.json', 'DGT86.json', 'DGT88.json', 'DGT89.json', 'DGT90.json'] > dist/ghpages/_config.yml",
+    "preghpages.win": "npm run build -- --configuration=github --output-path ./dist/ghpages --base-href /igo2/ && echo include: ['_default.json', '_contexts.json', '_base.json', 'DGT29.json', 'DGT63-65.json', 'DGT64-70.json', 'DGT66.json', 'DGT67.json', 'DGT68.json', 'DGT71.json', 'DGT91.json','DGT93.json', 'DGT86.json', 'DGT88.json', 'DGT89.json', 'DGT90.json'] > dist/ghpages/_config.yml",
     "ghpages.win": "npx ngh --dir=dist/ghpages --no-silent=false --message=%npm_package_version%",
     "ghrelease": "VERSION=$(node -p -e \"require('./package.json').version\") && publish-release --owner infra-geo-ouverte --repo igo2 --tag $VERSION --name $VERSION --reuse-release --notes \"$(npm run changelog-current -s)\" --assets dist/igo2.zip",
     "preghrelease.win": "rimraf igo2.zip && cd ./dist/igo2/ && tar -a -c -f ../igo2.zip *",

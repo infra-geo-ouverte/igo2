@@ -3,7 +3,7 @@
   "base": "_base",
   "messages": [
     {
-      "text": "La donnée présente sur cette carte est valide en date du 2023-01-12",
+      "text": "La donnée présente sur cette carte est valide en date du 2023-01-31",
       "type": "info",
       "options": {
         "timeOut": 10000
