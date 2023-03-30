@@ -125,6 +125,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public hasHomeExtentButton = false;
   public showMenuButton = true;
   public showSearchBar = true;
+  public showOfflineButton = false;
   public showRotationButtonIfNoRotation = false;
   public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
@@ -345,6 +346,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.configService.getConfig('showMenuButton');
     this.showSearchBar = this.configService.getConfig('searchBar.showSearchBar') === undefined ? true :
       this.configService.getConfig('searchBar.showSearchBar');
+    this.showOfflineButton = this.configService.getConfig('offlineButton') === undefined ? false :
+      this.configService.getConfig('offlineButton');
+
     this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
     this.hasFeatureEmphasisOnSelection = this.configService.getConfig('hasFeatureEmphasisOnSelection');
 
