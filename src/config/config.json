@@ -41,5 +41,6 @@
   },
   "edition": {
     "url": "/apis/inedit/"
-  }
+  },
+  "offlineButton": false
 }

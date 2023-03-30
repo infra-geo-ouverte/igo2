@@ -72,6 +72,7 @@
       <igo-swipe-control [map]="map"></igo-swipe-control>
       <igo-map-center [map]="map"></igo-map-center>
       <igo-offline-button [map]="map" color="primary"
+        *ngIf="showOfflineButton"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-offline-button>
