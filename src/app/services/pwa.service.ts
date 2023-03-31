@@ -34,16 +34,14 @@ export class PwaService {
     this.confirmDialogService.open(message).pipe(tap(() => this.confirmOpened = true)).subscribe((confirm) => {
       if (confirm) {
         this.confirmOpened = false;
-        this.updates.activateUpdate().then(() => {
-          if (window.navigator.onLine) {
-            document.location.reload();
-          } else {
-            alert(`Hors-ligne / Offline. Vous devez être en ligne pour mettre à jour l\'application. You must be online to update the application.`);
-            setTimeout(() => {
-              this.modalUpdatePWA();
-            }, 900000);
-          }
-        });
+        if (window.navigator.onLine) {
+          document.location.reload();
+        } else {
+          alert(`Hors-ligne / Offline. Vous devez être en ligne pour mettre à jour l\'application. You must be online to update the application.`);
+          setTimeout(() => {
+            this.modalUpdatePWA();
+          }, 900000);
+        }
       }
     });
   }
