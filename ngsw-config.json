@@ -3,7 +3,7 @@
   "index": "/index.html",
   "appData": {
     "changelog": "Version update",
-    "version": "1.13.5"
+    "version": "1.14.2"
   },
   "assetGroups": [
     {
@@ -48,7 +48,7 @@
       "resources": {
         "files": [
           "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/*.(pdf|eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
     }
