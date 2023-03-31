@@ -43,6 +43,6 @@
   "edition": {
     "url": "/apis/inedit/"
   },
-  "wakeLockApiButton": true,
+  "wakeLockApiButton": false,
   "offlineButton": false
 }
