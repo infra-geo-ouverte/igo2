@@ -34,7 +34,6 @@ export class PwaService {
     this.confirmDialogService.open(message).pipe(tap(() => this.confirmOpened = true)).subscribe((confirm) => {
       if (confirm) {
         this.confirmOpened = false;
-        this.updates.activateUpdate().then(() => {
           if (window.navigator.onLine) {
             document.location.reload();
           } else {
@@ -43,7 +42,6 @@ export class PwaService {
               this.modalUpdatePWA();
             }, 900000);
           }
-        });
       }
     });
   }
