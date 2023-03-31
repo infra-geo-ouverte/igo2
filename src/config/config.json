@@ -1,9 +1,4 @@
 {
-  "routingSources": {
-    "osrm": {
-      "enabled": true
-    }
-  },
   "directionsSources": {
     "osrm": {
       "url": "/services/itineraire/route/v1/driving/"
@@ -43,6 +38,6 @@
   "edition": {
     "url": "/apis/inedit/"
   },
-  "wakeLockApiButton": true,
+  "wakeLockApiButton": false,
   "offlineButton": false
 }
