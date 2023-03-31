@@ -285,7 +285,9 @@ export const environment: Environment = {
     importExport: {
       importWithStyle: false,
       url: '/apis/ogre',
-      configFileToGeoDBService: './data/geoDataToIDB.json'
+      configFileToGeoDBService: './data/geoDataToIDB.json',
+      clientSideFileSizeMaxMb: 32,
+      allowToStoreLayer: true
     },
     searchSources: {
       workspace: {
