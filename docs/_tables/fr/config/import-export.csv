@@ -7,3 +7,4 @@ gpxAggregateInComment ,Boolean,"| Lorsque l'option est activée l'exportatio
 forceNaming ,Boolean,Ajoute une boite texte au formulaire d'exportation qui permet de nommer le fichier exporter. ,,false 
 formats ,String[] ,La liste des formats qu'il est possible d'exporter. ,"'GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV' ","['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV'] "
 configFileToGeoDBService ,String ,Fichiers de configuration à utiliser afin d'intégrer des données dans la base de données Indexed-db de l'application.,"un url, relatif ou absolu",
+allowToStoreLayer ,Boolean ,Indique si les données importées doivent être stockées dans la l'Indexed-DB, true/false, false
