@@ -85,7 +85,7 @@ export class AppComponent {
     if (oldBrowser) {
       this.messageService.alert('oldBrowser.message', 'oldBrowser.title', {
         timeOut: 15000
-      })
+      });
     }
   }
 }
