@@ -1,9 +1,4 @@
 {
-  "routingSources": {
-    "osrm": {
-      "enabled": true
-    }
-  },
   "directionsSources": {
     "osrm": {
       "url": "/services/itineraire/route/v1/driving/"
