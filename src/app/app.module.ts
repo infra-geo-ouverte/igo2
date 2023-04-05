@@ -7,7 +7,6 @@ import {
   IgoMessageModule,
   IgoGestureModule,
   RouteService,
-  LanguageService,
   ConfigService,
   ConfigOptions,
   CONFIG_OPTIONS
