@@ -100,7 +100,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,
-      deps: [CONFIG_LOADER, LanguageService, PwaService],
+      deps: [PwaService],
       multi: true
     },
     provideStyleListOptions({
@@ -113,17 +113,9 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
 export class AppModule {}
 
 function appInitializerFactory(
-  configLoader: Promise<unknown>,
-  languageService: LanguageService,
   pwaService: PwaService
 ) {
   return () => new Promise<any>((resolve: any) => {
-    configLoader.then(() => {
-      const secondPromises = [languageService.translate.getTranslation(languageService.getLanguage())];
-      Promise.all(secondPromises).then(() => {
-        const thirdPromises = [pwaService.initPwaPrompt()];
-        Promise.all(thirdPromises).then(() => resolve());
-      });
-    });
+    pwaService.initPwaPrompt().then(() => resolve());
   });
 }
