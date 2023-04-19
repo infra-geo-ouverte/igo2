@@ -1,10 +1,10 @@
-import { ApplicationRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
 import { ConfigService, LanguageService } from '@igo2/core';
 import { SwUpdate, VersionDetectedEvent } from '@angular/service-worker';
-import { concat, interval } from 'rxjs';
+import { interval } from 'rxjs';
 import { ConfirmDialogService } from '@igo2/common';
-import { filter, first, tap } from 'rxjs/operators';
+import { filter, skip } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,30 +16,20 @@ export class PwaService {
     public updates: SwUpdate,
     public languageService: LanguageService,
     private configService: ConfigService,
-    private confirmDialogService: ConfirmDialogService,
-    private appRef: ApplicationRef,
+    private confirmDialogService: ConfirmDialogService
   ) {
-    const everyTwoMinutesOnceAppIsStable$ = concat(
-      this.appRef.isStable.pipe(
-        first(isStable => isStable === true),
-        tap(() => {
-          this.checkForUpdates();
-          this.initPwaPrompt();
-        })
-        ),
-      interval(60 * 1000 * 2)
-    );
-    everyTwoMinutesOnceAppIsStable$.subscribe(async () => {
-      if (updates.isEnabled) {
+    if (updates.isEnabled) {
+      this.checkForUpdates();
+      this.initPwaPrompt();
+      interval(60 * 1000 * 2).pipe(skip(1)).subscribe(async () => {
         try {
           const updateFound = await updates.checkForUpdate();
           console.log(updateFound ? 'A new version is available.' : 'Already on the latest version.');
         } catch (err) {
           console.error('Failed to check for updates:', err);
         }
-      }
-    });
-
+      });
+    }
   }
 
   private modalUpdatePWA() {
