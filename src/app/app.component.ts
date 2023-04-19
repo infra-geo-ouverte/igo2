@@ -33,8 +33,6 @@ export class AppComponent {
     private messageService: MessageService,
     private pwaService: PwaService
   ) {
-    this.pwaService.checkForUpdates();
-    this.languageService.translate.getTranslation(this.languageService.getLanguage()).subscribe();
 
     this.authConfig = this.configService.getConfig('auth');
 

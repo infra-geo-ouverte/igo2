@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { ApplicationRef, Injectable } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
 import { ConfigService, LanguageService } from '@igo2/core';
 import { SwUpdate, VersionDetectedEvent } from '@angular/service-worker';
-import { interval } from 'rxjs';
+import { concat, interval } from 'rxjs';
 import { ConfirmDialogService } from '@igo2/common';
-import { filter } from 'rxjs/operators';
+import { filter, first, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,30 @@ export class PwaService {
     public updates: SwUpdate,
     public languageService: LanguageService,
     private configService: ConfigService,
-    private confirmDialogService: ConfirmDialogService
+    private confirmDialogService: ConfirmDialogService,
+    private appRef: ApplicationRef,
   ) {
-    if (updates.isEnabled) {
-      interval(60 * 1000 * 2).subscribe(() => updates.checkForUpdate());
-    }
+    const everyTwoMinutesOnceAppIsStable$ = concat(
+      this.appRef.isStable.pipe(
+        first(isStable => isStable === true),
+        tap(() => {
+          this.checkForUpdates();
+          this.initPwaPrompt();
+        })
+        ),
+      interval(60 * 1000 * 2)
+    );
+    everyTwoMinutesOnceAppIsStable$.subscribe(async () => {
+      if (updates.isEnabled) {
+        try {
+          const updateFound = await updates.checkForUpdate();
+          console.log(updateFound ? 'A new version is available.' : 'Already on the latest version.');
+        } catch (err) {
+          console.error('Failed to check for updates:', err);
+        }
+      }
+    });
+
   }
 
   private modalUpdatePWA() {
@@ -43,7 +62,7 @@ export class PwaService {
     });
   }
 
-  public checkForUpdates(): void {
+  private checkForUpdates(): void {
     if (this.updates.isEnabled) {
       this.updates.versionUpdates.pipe(
         filter((evt): evt is VersionDetectedEvent => evt.type === 'VERSION_DETECTED'))
@@ -53,7 +72,7 @@ export class PwaService {
   }
   }
 
-  public async initPwaPrompt(): Promise<any> {
+  private async initPwaPrompt() {
     if (
       this.configService.getConfig('app') &&
       this.configService.getConfig('app.pwa') &&

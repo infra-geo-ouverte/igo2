@@ -101,7 +101,6 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
-import { PwaService } from '../../services/pwa.service';
 
 @Component({
   selector: 'app-portal',
@@ -333,7 +332,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private pwaService: PwaService,
     private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
