@@ -96,6 +96,7 @@ function appInitializerFactory(
   injector: Injector,
   applicationRef: ApplicationRef
 ) {
+  // ensure to have the proper translations loaded once, whe the app is stable.
   return () => new Promise<any>((resolve: any) => {
     applicationRef.isStable.pipe(
       first(isStable => isStable === true),
