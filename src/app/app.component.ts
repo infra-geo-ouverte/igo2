@@ -75,17 +75,15 @@ export class AppComponent {
         window.addEventListener('beforeinstallprompt', (event: any) => {
           event.preventDefault();
           this.promptEvent = event;
-          window.addEventListener('click', () => this.showPrompt(), { once: true });
+          window.addEventListener('click', () => {
+            setTimeout(() => {
+              this.promptEvent.prompt();
+              this.promptEvent = undefined;
+            }, 750);
+          }, { once: true });
         }, { once: true });
       }
     }
-  }
-
-  private async showPrompt() {
-    setTimeout(() => {
-      this.promptEvent.prompt();
-      this.promptEvent = undefined;
-    }, 750);
   }
 
 
