@@ -50,8 +50,8 @@ export const environment: Environment = {
     app: {
       forceCoordsNA: true,
       install: {
-        enabled: true,
-        promote: true
+        enabled: false,
+        promote: false
       },
       pwa: {
         enabled: false
