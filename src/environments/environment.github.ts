@@ -67,7 +67,9 @@ export const environment: Environment = {
     },
     importExport: {
       url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
-      configFileToGeoDBService: './data/geoDataToIDB.json'
+      configFileToGeoDBService: './data/geoDataToIDB.json',
+      clientSideFileSizeMaxMb: 30,
+      allowToStoreLayer: true
     },
     language: {
       prefix: './locale/'

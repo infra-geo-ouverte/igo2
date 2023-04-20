@@ -247,6 +247,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
+  get contextUri(): string {
+    return this.contextState.context$?.getValue() ? this.contextState.context$.getValue().uri : undefined;
+  }
+
   get toastPanelShown(): boolean {
     return true;
   }
@@ -1378,7 +1382,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       file,
       features,
       this.map,
-      this.messageService
+      this.contextState.context$.value.uri,
+      this.messageService,
+      this.layerService
     );
   }
 

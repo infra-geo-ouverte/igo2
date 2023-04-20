@@ -531,7 +531,8 @@ Exemples
                 gpxAggregateInComment: false,
                 forceNaming: false,
                 formats: ['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV'],
-                configFileToGeoDBService: './data/geoDataToIDB.json'
+                configFileToGeoDBService: './data/geoDataToIDB.json',
+                allowToStoreLayer: true
             }
 
 Propriétés
