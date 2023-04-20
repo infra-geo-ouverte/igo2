@@ -11,15 +11,20 @@ import { skip, tap } from 'rxjs/operators';
 export class PwaService {
   private confirmOpened: boolean = false;
   constructor(
-    public updates: SwUpdate,
-    public languageService: LanguageService,
+    private updates: SwUpdate,
+    private languageService: LanguageService,
     private confirmDialogService: ConfirmDialogService
   ) {
     if (updates.isEnabled) {
-      this.checkForUpdates();
+      this.handleVersionUpdates();
+    }
+  }
+
+  checkForUpdates() {
+    if (this.updates.isEnabled) {
       interval(60 * 1000 * 2).pipe(skip(1)).subscribe(async () => {
         try {
-          const updateFound = await updates.checkForUpdate();
+          const updateFound = await this.updates.checkForUpdate();
           console.log(updateFound ? 'A new version is available.' : 'Already on the latest version.');
         } catch (err) {
           console.error('Failed to check for updates:', err);
@@ -50,7 +55,7 @@ export class PwaService {
     });
   }
 
-  private checkForUpdates(): void {
+  private handleVersionUpdates(): void {
     this.updates.versionUpdates.subscribe(evt => {
       switch (evt.type) {
         case 'VERSION_DETECTED':
@@ -59,7 +64,7 @@ export class PwaService {
         case 'VERSION_READY':
           console.log(`Current app version: ${evt.currentVersion.hash}`);
           console.log(`New app version ready for use: ${evt.latestVersion.hash}`);
-        this.modalUpdatePWA();
+          this.modalUpdatePWA();
           break;
         case 'VERSION_INSTALLATION_FAILED':
           console.error(`Failed to install app version '${evt.version.hash}': ${evt.error}`);

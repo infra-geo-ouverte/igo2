@@ -29,7 +29,7 @@ export class AppComponent {
     private titleService: Title,
     private metaService: Meta,
     private messageService: MessageService,
-    private pwaService: PwaService // let there to be handled (based on configs: app.pwa.enabled)
+    private pwaService: PwaService
   ) {
     this.authConfig = this.configService.getConfig('auth');
 
@@ -49,6 +49,7 @@ export class AppComponent {
 
     this.setManifest();
     this.installPrompt();
+    this.pwaService.checkForUpdates();
   }
 
   private readTitleConfig() {
