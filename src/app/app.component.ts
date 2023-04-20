@@ -20,7 +20,7 @@ export class AppComponent {
   private themeClass = 'blue-theme';
   public hasHeader = true;
   public hasFooter = true;
-
+  private promptEvent: any;
   constructor(
     protected languageService: LanguageService,
     private configService: ConfigService,
@@ -46,6 +46,9 @@ export class AppComponent {
 
     this.hasFooter = this.configService.getConfig('hasFooter') === undefined ? false :
     this.configService.getConfig('hasFooter');
+
+    this.setManifest();
+    this.installPrompt();
   }
 
   private readTitleConfig() {
@@ -56,6 +59,35 @@ export class AppComponent {
       }
     });
   }
+
+  private setManifest() {
+    const appConfig = this.configService.getConfig('app');
+    if (appConfig?.install?.enabled) {
+      const manifestPath = appConfig.install.manifestPath || 'manifest.webmanifest';
+      document.querySelector('#igoManifestByConfig').setAttribute('href', manifestPath);
+    }
+  }
+
+  private installPrompt() {
+    const appConfig = this.configService.getConfig('app');
+    if (appConfig?.install?.enabled && appConfig?.install?.promote) {
+      if (userAgent.getOSName() !== 'iOS') {
+        window.addEventListener('beforeinstallprompt', (event: any) => {
+          event.preventDefault();
+          this.promptEvent = event;
+          window.addEventListener('click', () => this.showPrompt(), { once: true });
+        }, { once: true });
+      }
+    }
+  }
+
+  private async showPrompt() {
+    setTimeout(() => {
+      this.promptEvent.prompt();
+      this.promptEvent = undefined;
+    }, 750);
+  }
+
 
   private readThemeConfig() {
     const theme = this.configService.getConfig('theme') || this.themeClass;

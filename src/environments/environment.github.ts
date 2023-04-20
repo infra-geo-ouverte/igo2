@@ -7,22 +7,17 @@ import {
   CommonVectorStyleOptions
 } from '@igo2/geo';
 
+import { AppOptions, InteractiveTourConfigOptions } from './environnement.interface';
 interface Environment {
   production: boolean;
   igo: {
-    app: {
-      forceCoordsNA: boolean;
-      pwa?: {
-        enabled?: boolean;
-        promote?: boolean;
-      }
-    };
+    app: AppOptions,
     catalog?: CatalogServiceOptions;
     importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
-    interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
+    interactiveTour?: InteractiveTourConfigOptions;
     depot?: { url: string; trainingGuides?: string[]; };
     queryOverlayStyle?: {
       base?: CommonVectorStyleOptions,
@@ -42,9 +37,13 @@ export const environment: Environment = {
   igo: {
     app: {
       forceCoordsNA: false,
+      install: {
+        enabled: true,
+        promote: true,
+        manifestPath: './config/github.webmanifest'
+      },
       pwa: {
         enabled: false,
-        promote: false
       }
     },
     catalog: {

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Platform } from '@angular/cdk/platform';
-import { ConfigService, LanguageService } from '@igo2/core';
+import { LanguageService } from '@igo2/core';
 import { SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
 import { ConfirmDialogService } from '@igo2/common';
@@ -10,18 +9,14 @@ import { skip, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PwaService {
-  promptEvent: any;
   private confirmOpened: boolean = false;
   constructor(
-    private platform: Platform,
     public updates: SwUpdate,
     public languageService: LanguageService,
-    private configService: ConfigService,
     private confirmDialogService: ConfirmDialogService
   ) {
     if (updates.isEnabled) {
       this.checkForUpdates();
-      this.initPwaPrompt();
       interval(60 * 1000 * 2).pipe(skip(1)).subscribe(async () => {
         try {
           const updateFound = await updates.checkForUpdate();
@@ -71,31 +66,5 @@ export class PwaService {
           break;
       }
     });
-  }
-
-  private async initPwaPrompt() {
-    if (
-      this.configService.getConfig('app') &&
-      this.configService.getConfig('app.pwa') &&
-      this.configService.getConfig('app.pwa.enabled') &&
-      this.configService.getConfig('app.pwa.promote')) {
-      if (!this.platform.IOS) {
-        window.addEventListener('beforeinstallprompt', (event: any) => {
-          event.preventDefault();
-          this.promptEvent = event;
-          this.listenToUserAction();
-        }, { once: true });
-      }
-    }
-  }
-
-  private listenToUserAction() {
-    window.addEventListener('click', () => { this.showPrompt(); }, { once: true });
-  }
-
-  private async showPrompt() {
-    this.promptEvent.prompt();
-    const outcome = await this.promptEvent.userChoice;
-    this.promptEvent = undefined;
   }
 }

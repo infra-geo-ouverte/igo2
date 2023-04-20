@@ -14,17 +14,12 @@ import {
   ImportExportServiceOptions,
   CommonVectorStyleOptions
 } from '@igo2/geo';
+import { AppOptions, InteractiveTourConfigOptions } from './environnement.interface';
 
 interface Environment {
   production: boolean;
   igo: {
-    app: {
-      forceCoordsNA: boolean;
-      pwa?: {
-        enabled?: boolean;
-        promote?: boolean;
-      }
-    };
+    app: AppOptions;
     auth?: AuthOptions;
     storage: AuthStorageOptions
     catalog?: CatalogServiceOptions;
@@ -33,7 +28,7 @@ interface Environment {
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
-    interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
+    interactiveTour?: InteractiveTourConfigOptions;
     depot?: { url: string; trainingGuides?: string[]; };
     dom?: DOMOptions[];
     queryOverlayStyle?: {
@@ -54,9 +49,12 @@ export const environment: Environment = {
   igo: {
     app: {
       forceCoordsNA: true,
+      install: {
+        enabled: true,
+        promote: true
+      },
       pwa: {
-        enabled: false,
-        promote: false
+        enabled: false
       }
     },
     auth: {

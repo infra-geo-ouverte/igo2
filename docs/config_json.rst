@@ -45,6 +45,45 @@ Résumé
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 ***************
+App
+***************
+
+    .. line-block::
+
+        Permet d'activer des options pour l'application.
+
+Exemples
+
+        .. code:: json
+
+            "app": {
+                "forceCoordsNA": false,
+                "install": {
+                    enabled: true,
+                    promote: false,
+                    manifestPath: '../config/github.webmanifest'
+                },
+                "pwa": {
+                    enable: true
+                }
+            }
+
+Propriétés
+
+    .. line-block::
+
+        forceCoordsNA:  true/false = force les coordonnées en Amérique du Nord
+        install: Object permettant de dire comment l'application sera installée.
+        install.enabled: true/false = Application installable ou non.
+        install.manifestPath: Identifie un chemin d'accès pour le manifest (info sur l'app).
+                              Par défaut: 'manifest.webmanifest'
+        install.promote: true/false = Permet (Windows/Android) de faire afficher un message 
+                                      incitant les utilisateurs a installer l'application
+        pwa: Object permettant de dire comment l'application sera mis en mémoire cache.
+        pwa.enabled: true/false = Identifie si l'application sera mis en mémoire cache. 
+
+
+***************
 Analytics
 ***************
 
