@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@angular/cdk/platform';
 import { ConfigService, LanguageService } from '@igo2/core';
-import { SwUpdate, VersionDetectedEvent } from '@angular/service-worker';
+import { SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
 import { ConfirmDialogService } from '@igo2/common';
-import { filter, tap } from 'rxjs/operators';
+import { skip, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,16 @@ export class PwaService {
     private confirmDialogService: ConfirmDialogService
   ) {
     if (updates.isEnabled) {
-      interval(60 * 1000 * 2).subscribe(() => updates.checkForUpdate());
+      this.checkForUpdates();
+      this.initPwaPrompt();
+      interval(60 * 1000 * 2).pipe(skip(1)).subscribe(async () => {
+        try {
+          const updateFound = await updates.checkForUpdate();
+          console.log(updateFound ? 'A new version is available.' : 'Already on the latest version.');
+        } catch (err) {
+          console.error('Failed to check for updates:', err);
+        }
+      });
     }
   }
 
@@ -46,17 +55,25 @@ export class PwaService {
     });
   }
 
-  public checkForUpdates(): void {
-    if (this.updates.isEnabled) {
-      this.updates.versionUpdates.pipe(
-        filter((evt): evt is VersionDetectedEvent => evt.type === 'VERSION_DETECTED'))
-      .subscribe(() => {
+  private checkForUpdates(): void {
+    this.updates.versionUpdates.subscribe(evt => {
+      switch (evt.type) {
+        case 'VERSION_DETECTED':
+          console.log(`Downloading new app version: ${evt.version.hash}`);
+          break;
+        case 'VERSION_READY':
+          console.log(`Current app version: ${evt.currentVersion.hash}`);
+          console.log(`New app version ready for use: ${evt.latestVersion.hash}`);
         this.modalUpdatePWA();
-      });
-  }
+          break;
+        case 'VERSION_INSTALLATION_FAILED':
+          console.error(`Failed to install app version '${evt.version.hash}': ${evt.error}`);
+          break;
+      }
+    });
   }
 
-  public async initPwaPrompt(): Promise<any> {
+  private async initPwaPrompt() {
     if (
       this.configService.getConfig('app') &&
       this.configService.getConfig('app.pwa') &&
