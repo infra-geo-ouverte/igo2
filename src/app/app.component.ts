@@ -29,11 +29,8 @@ export class AppComponent {
     private titleService: Title,
     private metaService: Meta,
     private messageService: MessageService,
-    private pwaService: PwaService
+    private pwaService: PwaService // let there to be handled (based on configs: app.pwa.enabled)
   ) {
-    this.pwaService.checkForUpdates();
-    this.languageService.translate.getTranslation(this.languageService.getLanguage()).subscribe();
-
     this.authConfig = this.configService.getConfig('auth');
 
     this.readTitleConfig();
