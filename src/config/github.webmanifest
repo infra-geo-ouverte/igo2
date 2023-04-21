@@ -1,12 +1,13 @@
 {
+  "id": "igo2DemoGitHub",
   "name": "Demo Github - IGO2",
   "short_name": "Demo Github - IGO",
   "description": "Demo Github - IGO2 installable",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
+  "scope": "../",
+  "start_url": "../",
   "orientation": "any",
   "icons": [
     {
