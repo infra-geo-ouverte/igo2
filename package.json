@@ -10,7 +10,7 @@
   "scripts": {
     "ng": "ng",
     "start": "gulp watch:locale | ng serve --host 0.0.0.0 --port 4201 --proxy-config proxy.conf.json",
-    "start-pwa": "gulp bumpPwaVersionDev && ng build --configuration pwa --output-path ./dist/pwa && npm run serve.pwa",
+    "start-pwa": "ng build --configuration pwa --output-path ./dist/pwa && npm run serve.pwa",
     "build": "ng build",
     "lint": "ng lint",
     "lint.fix": "ng lint --fix",
@@ -126,7 +126,6 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
-    "gulp-bump": "^3.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-replace": "^1.1.3",
     "http-server": "^13.1.0",
