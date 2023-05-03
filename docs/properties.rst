@@ -650,6 +650,11 @@ Exemples
               "title": "Donnée geojson sur DQ (pas de service)",
               "id": "vector1",
               "sourceOptions": {
+                "preload": {
+                   "comment": "Charger la donnée dans la source même si le layer est non visible ou hors échelle d'affichage."
+                   "bypassVisible": true
+                   "bypassResolution": true
+                },
                 "type": "vector",
                 "url": "https://www.donneesquebec.ca/recherche/dataset/f647f5ed-a8f3-4a47-8ceb-977cbf090675/resource/68e0e20a-415d-44f5-af82-a90311784616/download/bornes-incendies.geojson"
                 "queryable": true,
