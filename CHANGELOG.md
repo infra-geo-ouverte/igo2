@@ -1,3 +1,25 @@
+# [1.15.0](https://github.com/infra-geo-ouverte/igo2/compare/1.14.2...1.15.0) (2023-05-03)
+
+
+### Bug Fixes
+
+* **portal:** changes due to .../igo2-lib/pull/1196 ([15d5f4f](https://github.com/infra-geo-ouverte/igo2/commit/15d5f4f797a8bb58d77e4bf6a2bbcc121985f2ad))
+* **pwa-service:** prevent update next app inside current app (angular recommendation) ([f015384](https://github.com/infra-geo-ouverte/igo2/commit/f015384ed996426e57c6e7d619b6ac43e46d0c8a))
+* **pwa:** prevent multiple confirm dialog to reload app ([#917](https://github.com/infra-geo-ouverte/igo2/issues/917)) ([c191bbe](https://github.com/infra-geo-ouverte/igo2/commit/c191bbe2a9afed34f75362262ecbc52d9584e2d2))
+
+
+### Features
+
+* **app:** add pdf to service worker cache ([b7722d4](https://github.com/infra-geo-ouverte/igo2/commit/b7722d41eef8db6c6c53818cdbf24b45bd8012b4))
+* **app:** App installation is now configurable ([#929](https://github.com/infra-geo-ouverte/igo2/issues/929)) ([13b76fe](https://github.com/infra-geo-ouverte/igo2/commit/13b76fe405d84b145738b03b831870595aca11d6))
+* **app:** searchable workspaces ([#910](https://github.com/infra-geo-ouverte/igo2/issues/910)) ([5924e90](https://github.com/infra-geo-ouverte/igo2/commit/5924e909eaaf892d45d5b60df67294b9cbc0518b))
+* **app:** upgrade igo2-lib ([fff5660](https://github.com/infra-geo-ouverte/igo2/commit/fff56607e8cc84bfccbddec314eebecf56db02f1))
+* **geo:** add tabsMode for search-results in toast panel ([#891](https://github.com/infra-geo-ouverte/igo2/issues/891)) ([991137c](https://github.com/infra-geo-ouverte/igo2/commit/991137c008227342908d189c12d78da9e7bb0143))
+* **integration:** Add save search result option on config file ([#916](https://github.com/infra-geo-ouverte/igo2/issues/916)) ([c665d8a](https://github.com/infra-geo-ouverte/igo2/commit/c665d8a65b92925b50fe57511a14a38c5139e79d))
+* **vector:** preload data despite visibiliy or resolution range ([#933](https://github.com/infra-geo-ouverte/igo2/issues/933)) ([a838e2e](https://github.com/infra-geo-ouverte/igo2/commit/a838e2e0246d93192ec151ef90f122a2e4e81fc9))
+
+
+
 ## [1.14.2](https://github.com/infra-geo-ouverte/igo2/compare/1.14.1...1.14.2) (2023-03-15)
 
 
