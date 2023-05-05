@@ -55,7 +55,7 @@
     "@angular/compiler": "^14.3.0",
     "@angular/core": "^14.3.0",
     "@angular/forms": "^14.3.0",
-    "@angular/material": "^14.2.7",
+    "@angular/material": "^16.0.0",
     "@angular/platform-browser": "^14.3.0",
     "@angular/router": "^14.3.0",
     "@angular/service-worker": "^14.3.0",
