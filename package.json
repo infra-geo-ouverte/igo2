@@ -71,7 +71,7 @@
     "@mat-datetimepicker/core": "~10.0.0",
     "@turf/buffer": "^6.5.0",
     "@turf/point-on-feature": "^6.5.0",
-    "ajv": "^6.9.1",
+    "ajv": "^8.12.0",
     "angular-shepherd": "14.0.0",
     "bowser": "^2.10.0",
     "core-js": "^3.24.1",
