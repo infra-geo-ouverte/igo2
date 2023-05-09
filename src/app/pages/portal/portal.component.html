@@ -70,7 +70,7 @@
       <igo-zoom-button [map]="map" color="primary"
         [@controlsOffsetY]="getControlsOffsetY()">
       </igo-zoom-button>
-      <igo-record-button></igo-record-button>
+      <igo-record-button [contextUri]="contextUri"></igo-record-button>
       <igo-swipe-control [map]="map"></igo-swipe-control>
       <igo-map-center [map]="map"></igo-map-center>
       <igo-wake-lock-button *ngIf="showWakeLockButton"></igo-wake-lock-button>
