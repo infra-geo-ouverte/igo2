@@ -8,19 +8,19 @@ import {
   CommonVectorStyleOptions
 } from '@igo2/geo';
 
+import { AppOptions, InteractiveTourConfigOptions } from './environnement.interface';
+
 export interface Environment {
   production: boolean;
   igo: {
-    app: {
-      forceCoordsNA: boolean;
-    };
+    app: AppOptions;
     importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     optionsApi?: OptionsApiOptions;
     projections?: Projection[];
     spatialFilter?: SpatialFilterOptions;
-    interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
+    interactiveTour?: InteractiveTourConfigOptions;
     depot?: { url: string; trainingGuides?: string[]; };
     queryOverlayStyle?: {
       base?: CommonVectorStyleOptions,
@@ -39,7 +39,14 @@ export const environment: Environment = {
   production: true,
   igo: {
     app: {
-      forceCoordsNA: true
+      forceCoordsNA: true,
+      install: {
+        enabled: false,
+        promote: false
+      },
+      pwa: {
+        enabled: false,
+      }
     },
     importExport: {
       url: '/apis/ogre'

@@ -1,7 +1,5 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
-import { zip } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { userAgent } from '@igo2/utils';
 import {
   LanguageService,
@@ -22,7 +20,7 @@ export class AppComponent {
   private themeClass = 'blue-theme';
   public hasHeader = true;
   public hasFooter = true;
-
+  private promptEvent: any;
   constructor(
     protected languageService: LanguageService,
     private configService: ConfigService,
@@ -33,9 +31,6 @@ export class AppComponent {
     private messageService: MessageService,
     private pwaService: PwaService
   ) {
-    this.pwaService.checkForUpdates();
-    this.languageService.translate.getTranslation(this.languageService.getLanguage()).subscribe();
-
     this.authConfig = this.configService.getConfig('auth');
 
     this.readTitleConfig();
@@ -51,6 +46,10 @@ export class AppComponent {
 
     this.hasFooter = this.configService.getConfig('hasFooter') === undefined ? false :
     this.configService.getConfig('hasFooter');
+
+    this.setManifest();
+    this.installPrompt();
+    this.pwaService.checkForUpdates();
   }
 
   private readTitleConfig() {
@@ -61,6 +60,33 @@ export class AppComponent {
       }
     });
   }
+
+  private setManifest() {
+    const appConfig = this.configService.getConfig('app');
+    if (appConfig?.install?.enabled) {
+      const manifestPath = appConfig.install.manifestPath || 'manifest.webmanifest';
+      document.querySelector('#igoManifestByConfig').setAttribute('href', manifestPath);
+    }
+  }
+
+  private installPrompt() {
+    const appConfig = this.configService.getConfig('app');
+    if (appConfig?.install?.enabled && appConfig?.install?.promote) {
+      if (userAgent.getOSName() !== 'iOS') {
+        window.addEventListener('beforeinstallprompt', (event: any) => {
+          event.preventDefault();
+          this.promptEvent = event;
+          window.addEventListener('click', () => {
+            setTimeout(() => {
+              this.promptEvent.prompt();
+              this.promptEvent = undefined;
+            }, 750);
+          }, { once: true });
+        }, { once: true });
+      }
+    }
+  }
+
 
   private readThemeConfig() {
     const theme = this.configService.getConfig('theme') || this.themeClass;
@@ -85,21 +111,9 @@ export class AppComponent {
     });
 
     if (oldBrowser) {
-      const translate = this.languageService.translate;
-      const title$ = translate.get('oldBrowser.title');
-      const message$ = translate.get('oldBrowser.message');
-      zip(title$, message$)
-        .pipe(
-          map(([title, message]) => ({
-            title,
-            message
-          }))
-        )
-        .subscribe((rep) =>
-          this.messageService.alert(rep.message, rep.title, {
-            timeOut: 15000
-          })
-        );
+      this.messageService.alert('oldBrowser.message', 'oldBrowser.title', {
+        timeOut: 15000
+      });
     }
   }
 }

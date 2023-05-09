@@ -45,6 +45,45 @@ Résumé
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 ***************
+App
+***************
+
+    .. line-block::
+
+        Permet d'activer des options pour l'application.
+
+Exemples
+
+        .. code:: json
+
+            "app": {
+                "forceCoordsNA": false,
+                "install": {
+                    enabled: true,
+                    promote: false,
+                    manifestPath: '../config/github.webmanifest'
+                },
+                "pwa": {
+                    enable: true
+                }
+            }
+
+Propriétés
+
+    .. line-block::
+
+        forceCoordsNA:  true/false = force les coordonnées en Amérique du Nord
+        install: Object permettant de dire comment l'application sera installée.
+        install.enabled: true/false = Application installable ou non.
+        install.manifestPath: Identifie un chemin d'accès pour le manifest (info sur l'app).
+                              Par défaut: 'manifest.webmanifest'
+        install.promote: true/false = Permet (Windows/Android) de faire afficher un message 
+                                      incitant les utilisateurs a installer l'application
+        pwa: Object permettant de dire comment l'application sera mis en mémoire cache.
+        pwa.enabled: true/false = Identifie si l'application sera mis en mémoire cache. 
+
+
+***************
 Analytics
 ***************
 
@@ -531,7 +570,8 @@ Exemples
                 gpxAggregateInComment: false,
                 forceNaming: false,
                 formats: ['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV'],
-                configFileToGeoDBService: './data/geoDataToIDB.json'
+                configFileToGeoDBService: './data/geoDataToIDB.json',
+                allowToStoreLayer: true
             }
 
 Propriétés
@@ -767,6 +807,22 @@ Liens
         - `igo2-lib/blob/master/demo/src/environments/environment.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/demo/src/environments/environment.ts>`_
 
 
+********************************
+QueryTabs
+********************************
+
+    .. line-block::
+
+        Permet de définir le type d'affichage de la résultat de Query,
+        affichage par liste ou onglet.
+
+Exemples
+
+    .. code:: json
+
+            "queryTabs": true
+
+
 .. _igoroutingsource:
 
 ***************
@@ -821,20 +877,107 @@ showRotationButtonIfNoRotation
         rotation est visible si aucune rotation n'est active.
 
 ********************************
-showSearchBar
+searchBar
 ********************************
 
     .. line-block::
 
-        Permet de définir si la barre de recherche est affichée ou non.
+        Permet de définir des paramètres de la barre de recherche.
+
+Exemples
+
+    .. code:: json
+
+        "searchBar": {
+            "showSearchBar": true,
+            "showSearchButton": false
+        }
+
+Propriétés
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/search-bar.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
 
 ***************
 SearchSources
 ***************
 
-    .. note::
+    .. line-block::
 
-       En cours de construction
+       Permet effectuer la personnalisation de la section de recherches à partir de l'ensemble de propriétés définies.
+
+Exemples
+
+        .. code:: json
+
+            "searchSources": {
+              "showResultsCount":false
+              "cadastre": {
+                "title": "Cadastre",
+                "enabled": true
+              },
+              "nominatim": {
+                "enabled": false
+              },
+              "ilayer": {
+                "searchUrl": "/apis/icherche/layers",
+                "order": 4,
+                "params": {
+                  "limit": 10
+                  },
+                "queryFormat": {
+                  "html": {
+                    "urls": ["/apis/ws/mffpecofor.fcgi"]
+                  }
+                }
+              },
+              "icherche": {
+                "title": "ICherche",
+                "searchUrl": "/apis/icherche",
+                "showInPointerSummary": true,
+                "order": 2,
+                "params": {
+                  "limit": "5"
+                  }
+                },
+
+              "icherchereverse": {
+                "searchUrl": "/apis/terrapi",
+                "order": 3,
+                "params": {
+                  "limit": 5,
+                  "buffer":10
+                  }
+                }
+              }
+
+Propriétés
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/search-sources.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+    Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
+
+Propriétés de cadastre, nominatim, ilayer, icherche et icherchereverse
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/search-sources-prop.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+Liens
+
+        - `igo2/blob/master/src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
 
 ************
 storageOptions
@@ -865,6 +1008,20 @@ Liens
         - `igo2-lib/auth/src/lib/shared/storage.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/auth/src/lib/shared/storage.interface.ts>`_
         - `API de contexte <https://github.com/infra-geo-ouverte/igo2-api>`_
 
+********************************
+saveSearchResultInLayer
+********************************
+
+    .. line-block::
+
+        Permet d'activer ou désactiver l'enregistrement d'un résultat de recherche dans une couche.
+
+Exemples
+
+    .. code:: json
+
+            "saveSearchResultInLayer": true
+
 ***************
 Theme
 ***************
@@ -891,7 +1048,7 @@ Propriétés
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-    NB. Pour le thème qc-ca, si pour appliquer l'ensemble du style (qui s'applique aux autres éléments qui ne font pas partie de Angular material), il faut aller dans l'assemblage, src/styles.scss et décommenter la ligne "@import './qcca-theme/qcca-theme.scss';"" 
+    NB. Pour le thème qc-ca, si pour appliquer l'ensemble du style (qui s'applique aux autres éléments qui ne font pas partie de Angular material), il faut aller dans l'assemblage, src/styles.scss et décommenter la ligne "@import './qcca-theme/qcca-theme.scss';""
 
 Liens
 

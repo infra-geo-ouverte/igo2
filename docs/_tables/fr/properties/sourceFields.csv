@@ -14,5 +14,16 @@ allowedOperatorsType ,String,Indique les opérateurs permis pour cet attri
 | All
 | Time
 | Référez vous à `ogc-filter.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/filter/shared/ogc-filter.ts#L291>`__ pour les opérateurs correspondants.",BasicAndSpatial 
-validation ,Object ,Indique les validations lors de la sauvegarde d'une entité ,"| Référez vous à `entity.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/common/src/lib/entity/shared/entity.interfaces.ts>`__ ."
-relation ,String ,Indique les relations à lier pour la saisie des champs de type list ,"| Référez vous à `datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/datasource.interface.ts>`__ ."
+validation ,Object ,Indique les validations lors de la sauvegarde d'une entité ,| Référez vous à `entity.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/common/src/lib/entity/shared/entity.interfaces.ts>`__ .,
+relation ,String ,Indique les relations à lier pour la saisie des champs de type list ,| Référez vous à `datasource.interface.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/datasource/shared/datasources/datasource.interface.ts>`__ .,
+searchIndex,Object ,Indique si et comment le champs doit etre indexé pour etre recherchable (vector source seulement),"| enabled?: boolean;
+| preset?: Preset;
+| tokenize?: Tokenizer;
+| cache?: boolean | number;
+| resolution?: number;
+| context?: boolean;
+| optimize?: boolean;
+| language?: string;
+| encode?: Encoders;
+| Si aucun champ n’est renseigné, la valeur par défaut s’appliquera. Seuls les champs dont l’occurrence des valeurs est supérieure a 2% sera indexé OU si le contenu n’est pas du float. 
+| Voir https://github.com/nextapps-de/flexsearch/ pour les propriétés associées.","tokenize: ""full"""

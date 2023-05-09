@@ -1,9 +1,4 @@
 {
-  "routingSources": {
-    "osrm": {
-      "enabled": true
-    }
-  },
   "directionsSources": {
     "osrm": {
       "url": "/services/itineraire/route/v1/driving/"
@@ -21,7 +16,12 @@
   "hasGeolocateButton": true,
   "showRotationButtonIfNoRotation": false,
   "showMenuButton": true,
-  "showSearchBar": true,
+  "searchBar": {
+    "showSearchBar": true,
+    "showSearchButton": false
+  },
+  "queryTabs": false,
+  "saveSearchResultInLayer": true,
   "hasFeatureEmphasisOnSelection": true,
   "menuButtonReverseColor": false,
   "homeExtentButton": {
@@ -37,5 +37,7 @@
   },
   "edition": {
     "url": "/apis/inedit/"
-  }
+  },
+  "wakeLockApiButton": false,
+  "offlineButton": false
 }

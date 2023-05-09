@@ -24,6 +24,8 @@
       (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
       [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
       (searchResultsGeometryStatus)="onSearchResultsGeometryStatusChange($event)"
+      [reverseSearchCoordsFormatEnabled]="igoReverseSearchCoordsFormatEnabled"
+      (reverseSearchCoordsFormatStatus)="onReverseCoordsFormatStatusChange($event)"
       (search)="onSearch($event)"
       (clearFeature)="onClearSearch()"
       (searchSettingsChange)="onSearchSettingsChange()">
@@ -54,6 +56,7 @@
       igoMapContext
       igoLayerContext
       igoDropGeoFile
+      [contextUri]="contextUri"
       (query)="onMapQuery($event)"
       [map]="map"
       [igoContextMenu]=contextMenu
@@ -70,7 +73,9 @@
       <igo-record-button></igo-record-button>
       <igo-swipe-control [map]="map"></igo-swipe-control>
       <igo-map-center [map]="map"></igo-map-center>
+      <igo-wake-lock-button *ngIf="showWakeLockButton"></igo-wake-lock-button>
       <igo-offline-button [map]="map" color="primary"
+        *ngIf="showOfflineButton"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()">
       </igo-offline-button>

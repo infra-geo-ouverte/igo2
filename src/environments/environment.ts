@@ -14,13 +14,12 @@ import {
   ImportExportServiceOptions,
   CommonVectorStyleOptions
 } from '@igo2/geo';
+import { AppOptions, InteractiveTourConfigOptions } from './environnement.interface';
 
 interface Environment {
   production: boolean;
   igo: {
-    app: {
-      forceCoordsNA: boolean;
-    };
+    app: AppOptions;
     auth?: AuthOptions;
     storage: AuthStorageOptions
     catalog?: CatalogServiceOptions;
@@ -29,7 +28,7 @@ interface Environment {
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
-    interactiveTour?: { tourInMobile: boolean; pathToConfigFile: string };
+    interactiveTour?: InteractiveTourConfigOptions;
     depot?: { url: string; trainingGuides?: string[]; };
     dom?: DOMOptions[];
     queryOverlayStyle?: {
@@ -49,7 +48,14 @@ export const environment: Environment = {
   production: false,
   igo: {
     app: {
-      forceCoordsNA: true
+      forceCoordsNA: true,
+      install: {
+        enabled: false,
+        promote: false
+      },
+      pwa: {
+        enabled: false
+      }
     },
     auth: {
       url: '/apis/users',
@@ -275,10 +281,17 @@ export const environment: Environment = {
       pathToConfigFile: './config/interactiveTour.json'
     },
     importExport: {
+      importWithStyle: false,
       url: '/apis/ogre',
-      configFileToGeoDBService: './data/geoDataToIDB.json'
+      configFileToGeoDBService: './data/geoDataToIDB.json',
+      clientSideFileSizeMaxMb: 32,
+      allowToStoreLayer: true
     },
     searchSources: {
+      workspace: {
+        available: true,
+        enabled: true
+      },
       nominatim: {
         available: false
       },

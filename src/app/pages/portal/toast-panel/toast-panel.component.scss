@@ -206,3 +206,11 @@ host.app-full-toast-panel-opened igo-feature-details[_ngcontent-fiq-c23] iframe 
 igo-actionbar {
   overflow: hidden;
 }
+
+#app-toast-panel-opened-max-height {
+  height: $app-toast-panel-max-height !important;
+}
+
+#app-full-toast-panel-opened-max-height {
+  height: $app-full-toast-panel-max-height !important;
+}

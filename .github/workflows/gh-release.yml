@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install conventional-changelog@3.1.25
         if: startsWith(github.ref, 'refs/tags/')
         run: npm install conventional-changelog@3.1.25
@@ -21,7 +21,7 @@ jobs:
       - name: Install zip
         uses: montudor/action-zip@v1
       - name: Zip output
-        run: zip igo2.zip *
+        run: zip -qq -r igo2.zip *
         working-directory: dist/igo2
       - name: Release
         uses: softprops/action-gh-release@v1

@@ -29,7 +29,7 @@ Lorsqu'une certaine configuration est détectée par l'application, le bouton re
 configuré un tour pour un outil X, le bouton de présentation apparaitra dans l'entête de l'outil.
 
 Une configuration pour ne pas avoir de tour interactif en mode mobile est aussi disponible dans le fichier config.json:
-"interactiveTourInMobile": true
+"tourInMobile": true
 par défaut les tours interactifs seront présents en mode mobile.
 
 
@@ -265,7 +265,7 @@ Je ne vois pas le bouton de mon tour apparaitre.
         - Vérifier que le fichier interactiveTour.json est bien présent dans le dossier config de votre application.
         - Vérifier que le nom de l'outil est bien exact
         - Vérifier que la syntaxe du tour est bien présentée de cette façon: global: {...} ou nomGénériqueDeOutil:{...}
-        - Si vous êtes en mode mobile vérifier la configuration dans le fichier config.json: "introInteractiveTourInMobile": true
+        - Si vous êtes en mode mobile vérifier la configuration dans le fichier config.json: "tourInMobile": true
 
 L'élément de mon tour n'est pas mis en surbrillance.
     Solution:

@@ -1,5 +1,5 @@
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, InjectionToken, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ApplicationRef, Injector, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -7,14 +7,12 @@ import {
   IgoMessageModule,
   IgoGestureModule,
   RouteService,
-  LanguageService,
-  ConfigService,
-  ConfigOptions,
-  CONFIG_OPTIONS
+  LanguageService
 } from '@igo2/core';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 import { IgoAuthModule } from '@igo2/auth';
 import {
+  provideWorkspaceSearchSource,
   provideIChercheSearchSource,
   provideIChercheReverseSearchSource,
   provideNominatimSearchSource,
@@ -26,7 +24,6 @@ import {
   provideStyleListOptions
 } from '@igo2/geo';
 
-import { PwaService } from './services/pwa.service';
 
 import { environment } from '../environments/environment';
 import { PortalModule } from './pages';
@@ -35,19 +32,8 @@ import { HeaderModule } from './pages/header/header.module';
 import { FooterModule } from './pages/footer/footer.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-export let CONFIG_LOADER = new InjectionToken<Promise<ConfigService>>('Config Loader');
-
-function configLoader(
-  configService: ConfigService,
-  configOptions: ConfigOptions,
-): Promise<unknown> {
-  const promiseOrTrue = configService.load(configOptions);
-  if (promiseOrTrue instanceof Promise) {
-    return promiseOrTrue;
-  }
-  return Promise.resolve();
-}
 import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions } from '@angular/material/tooltip';
+import { concatMap, first } from 'rxjs';
 
 export const defaultTooltipOptions: MatTooltipDefaultOptions = {
   showDelay: 500,
@@ -71,21 +57,20 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     HammerModule,
     HeaderModule,
     FooterModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerWithDelay:5000' })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.igo.app.pwa.enabled,
+      registrationStrategy: 'registerWithDelay:5000'
+    })
   ],
   providers: [
     provideConfigOptions({
       default: environment.igo,
       path: './config/config.json'
     }),
-    {
-      provide: CONFIG_LOADER,
-      useFactory: configLoader,
-      deps: [ConfigService, CONFIG_OPTIONS],
-    },
     RouteService,
     provideNominatimSearchSource(),
     provideIChercheSearchSource(),
+    provideWorkspaceSearchSource(),
     provideIChercheReverseSearchSource(),
     provideCoordinatesReverseSearchSource(),
     provideILayerSearchSource(),
@@ -95,7 +80,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,
-      deps: [CONFIG_LOADER, LanguageService, PwaService],
+      deps: [Injector, ApplicationRef],
       multi: true
     },
     provideStyleListOptions({
@@ -105,20 +90,26 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
 
 function appInitializerFactory(
-  configLoader: Promise<unknown>,
-  languageService: LanguageService,
-  pwaService: PwaService
+  injector: Injector,
+  applicationRef: ApplicationRef
 ) {
+  // ensure to have the proper translations loaded once, whe the app is stable.
   return () => new Promise<any>((resolve: any) => {
-    configLoader.then(() => {
-      const secondPromises = [languageService.translate.getTranslation(languageService.getLanguage())];
-      Promise.all(secondPromises).then(() => {
-        const thirdPromises = [pwaService.initPwaPrompt()];
-        Promise.all(thirdPromises).then(() => resolve());
+    applicationRef.isStable.pipe(
+      first(isStable => isStable === true),
+      concatMap(() => {
+        const languageService = injector.get(LanguageService);
+        const lang = languageService.getLanguage();
+        return languageService.translate.getTranslation(lang);
+      }))
+      .subscribe((translations) => {
+        const languageService = injector.get(LanguageService);
+        const lang = languageService.getLanguage();
+        languageService.translate.setTranslation(lang, translations);
+        resolve();
       });
-    });
   });
 }
