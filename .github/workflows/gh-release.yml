@@ -16,8 +16,9 @@ jobs:
         run: npm install conventional-changelog@3.1.25
       - name: Generate Changelog-current
         run: npm run changelog-current |  grep -v "^>" | sed '/^$/d' > ${{ github.workspace }}-CHANGELOG.txt
-      - name: Build production
+      - name: Ensure to have locales from lib
         run: npm run postinstall
+      - name: Build production
         run: npm run build.prod
       - name: Install zip
         uses: montudor/action-zip@v1
