@@ -101,7 +101,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
-import { distribuerGiin, isGiinWksLayer } from './giin/giin.utils'
+import { distribuerGiin, isGiinWksLayer } from './giin/giin.utils';
 
 @Component({
   selector: 'app-portal',

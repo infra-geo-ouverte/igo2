@@ -1,1 +1,1 @@
-export * from './giin-distribuer-dialog.component'
+export * from './giin-distribuer-dialog.component';

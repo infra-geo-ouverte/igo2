@@ -662,12 +662,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     if (!resultSelected) {
       return false;
     }
-    return isGiinResult(this.resultSelected$)
+    return isGiinResult(this.resultSelected$);
   }
 
   handleGiin_distribuer() {
-    const resultSelected = this.resultSelected$.getValue(); 
-    const giinUuids = [resultSelected.data.properties.uuid]
+    const resultSelected = this.resultSelected$.getValue();
+    const giinUuids = [resultSelected.data.properties.uuid];
     distribuerGiin(this.dialogWindow, this.http, this.messageService, giinUuids);
   }
 

@@ -1,11 +1,11 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import {  StorageService } from '@igo2/core';
+import { StorageService } from '@igo2/core';
 
 
 @Component({
-  selector: 'igo-giin-distribuer-dialog',
+  selector: 'app-giin-distribuer-dialog',
   templateUrl: './giin-distribuer-dialog.component.html',
   styleUrls: ['./giin-distribuer-dialog.component.scss']
 })
