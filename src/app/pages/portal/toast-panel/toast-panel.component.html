@@ -35,6 +35,12 @@
       svgIcon="magnify-plus-outline"></mat-icon>
     </button>
 
+    <button *ngIf="hasGeoService()" mat-icon-button igoStopPropagation panelLeftButton tooltip-position="below"
+      matTooltipShowDelay="500" [color]="(potententialLayerisAdded$ | async) ? 'warn' : ''" (click)="handleLayer()">
+      <mat-icon [svgIcon]="(potententialLayerisAdded$ | async) ? 'delete' : 'plus'">
+      </mat-icon>
+    </button>
+
     <button
       *ngIf="resultSelected$.value"
       [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
@@ -80,6 +86,7 @@
     <div #content class="toast-content">
 
       <igo-feature-details
+        [map]="map"
         *ngIf="resultSelected$.value"
         [feature]="resultSelected$.value.data"
         (htmlDisplayEvent)=setHtmlDisplay($event)>
