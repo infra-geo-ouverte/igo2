@@ -1,0 +1,29 @@
+<h1 mat-dialog-title class="mat-typography">Inscrire votre identifiant et mot de passe au portail GIIN *</h1>
+
+
+<form [formGroup]="form" (ngSubmit)="distribuer()">
+
+    <mat-form-field class="full-width">
+      <input matInput required type="email" class="email-container" autocomplete="email" placeholder="Utilisateur de GIIN" formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput required [type]="hide ? 'password' : 'text'" placeholder="Mot de passe GIIN" formControlName="password">
+      <mat-icon matSuffix (click)="hide = !hide" [svgIcon]="hide ? 'eye-off' : 'eye'" ></mat-icon>
+
+    </mat-form-field>
+
+  <button [disabled]="!form.valid" mat-raised-button type="submit">Commander les images</button>
+  
+  <button mat-raised-button type="button" (click)="cancel()" class="cancel">
+    Annuler
+  </button>
+
+  <div class="mat-typography">
+    <br>
+    * Si vous n'avez pas encore d'accès sécurisé au portail GIIN, veuillez auparavant en <br>faire la demande en suivant la procédure 
+    <a href="http://intranet.mtqprm.qc/GestInfr/Routieres/Geomatique/Documents/GIIN_Demande_Acces.pdf" target="_blank">Demande_accès_GIIN</a>.
+    <br><br>
+    Après avoir exécuté la commande d'image, vous pourrez récupérer les images en suivant  <br>
+    <a href="http://intranet.mtqprm.qc/GestInfr/Routieres/Geomatique/Documents/R%C3%A9cup%C3%A9ration%20des%20images%20GIIN%20par%20FTP_29082022.pdf" target="_blank">la procédure de récupération par FTP</a>.  
+  </div>
+</form>

@@ -46,7 +46,7 @@ import { PortalComponent } from './portal.component';
 import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toast-panel-for-expansion.module';
 
 import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
-
+import { IgoGIINModule } from './giin/giin.module'
 @NgModule({
     imports: [
         CommonModule,
@@ -81,6 +81,7 @@ import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
         IgoEntityTableModule,
         IgoEntityTablePaginatorModule,
         IgoInteractiveTourModule,
+        IgoGIINModule,
         IgoWelcomeWindowModule
     ],
     exports: [PortalComponent],

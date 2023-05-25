@@ -195,6 +195,14 @@
         svgIcon="{{(workspaceState.workspaceSelection$ | async).length > 1 ?  'magnify-scan' : 'magnify-plus-outline'}}">
         </mat-icon>
       </button>
+        <button class="zoom-workspace" *ngIf="isGiinWksLayer()"
+          [disabled]="(workspaceState.workspaceSelection$ | async).length === 0 ? true : false" mat-icon-button color="primary"
+          collapsibleButton tooltip-position="below" matTooltipShowDelay="500" matTooltip="Commander des images GIIN"
+          (click)="handleDistribuerGiin()">
+          <mat-icon svgIcon="download-lock">
+          </mat-icon>
+        </button>
+
       <div class="spacer"></div>
       <igo-entity-table-paginator
         *ngIf="workspaceVisibility()"

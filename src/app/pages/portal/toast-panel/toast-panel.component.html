@@ -35,6 +35,19 @@
       svgIcon="magnify-plus-outline"></mat-icon>
     </button>
 
+    <button 
+      *ngIf="isGiinResult()"
+      mat-icon-button
+      igoStopPropagation
+      panelLeftButton
+      collapsibleButton
+      tooltip-position="below"
+      matTooltipShowDelay="500"
+      matTooltip="Commander l'image GIIN"
+      (click)="handleGiin_distribuer()">
+      <mat-icon svgIcon="download-lock"></mat-icon>
+    </button>
+
     <button
       *ngIf="resultSelected$.value"
       [disabled]="results[0].meta.id === resultSelected$.value.meta.id"

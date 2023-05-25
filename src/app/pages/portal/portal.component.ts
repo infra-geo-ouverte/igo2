@@ -101,6 +101,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
+import { distribuerGiin, isGiinWksLayer } from './giin/giin.utils'
 
 @Component({
   selector: 'app-portal',
@@ -1577,4 +1578,13 @@ export class PortalComponent implements OnInit, OnDestroy {
     moveToOlFeatures(this.map, olFeaturesSelected, FeatureMotion.Zoom);
   }
 
+  isGiinWksLayer(): boolean {
+    return isGiinWksLayer(this.selectedWorkspace$);
+  }
+
+  handleDistribuerGiin() {
+    const selectedFeatures = this.workspaceState.workspaceSelection.map(rec => (rec.entity as Feature));
+    const giinUuids = selectedFeatures.map(sf => sf.properties.uuid);
+    distribuerGiin(this.dialogWindow, this.http, this.messageService, giinUuids);
+  }
 }

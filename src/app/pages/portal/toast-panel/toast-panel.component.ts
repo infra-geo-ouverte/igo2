@@ -43,9 +43,13 @@ import {
   StorageService,
   StorageScope,
   StorageServiceEvent,
-  ConfigService
+  ConfigService,
+  MessageService
 } from '@igo2/core';
 import { QueryState, StorageState } from '@igo2/integration';
+import { distribuerGiin, isGiinResult } from '../giin/giin.utils';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-toast-panel',
@@ -279,7 +283,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     public languageService: LanguageService,
     private storageState: StorageState,
     private queryState: QueryState,
-    private configService: ConfigService
+    private configService: ConfigService,
+    public dialogWindow: MatDialog,
+    private http: HttpClient,
+    private messageService: MessageService
   ) {
     this.tabsMode = this.configService.getConfig('queryTabs')
       ? this.configService.getConfig('queryTabs')
@@ -648,6 +655,20 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     if (nextResult) {
       this.selectResult(nextResult);
     }
+  }
+
+  isGiinResult(): boolean {
+    const resultSelected = this.resultSelected$.getValue();
+    if (!resultSelected) {
+      return false;
+    }
+    return isGiinResult(this.resultSelected$)
+  }
+
+  handleGiin_distribuer() {
+    const resultSelected = this.resultSelected$.getValue(); 
+    const giinUuids = [resultSelected.data.properties.uuid]
+    distribuerGiin(this.dialogWindow, this.http, this.messageService, giinUuids);
   }
 
   zoomTo() {
