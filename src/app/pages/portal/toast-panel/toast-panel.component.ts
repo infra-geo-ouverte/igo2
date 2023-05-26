@@ -714,8 +714,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     } else {
       this.layerService
         .createAsyncLayer(potententialLayerToAdd.sourceOptions)
-        .subscribe(l => {
-          this.map.addLayer(l);
+        .subscribe(layer => {
+          this.map.layersAddedByClick$.next([layer]);
+          this.map.addLayer(layer);
           this.potententialLayerisAdded$.next(true);
         }
         );
