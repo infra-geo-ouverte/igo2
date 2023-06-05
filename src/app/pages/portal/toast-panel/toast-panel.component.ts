@@ -34,7 +34,12 @@ import {
   getCommonVectorStyle,
   getCommonVectorSelectedStyle,
   featuresAreOutOfView,
-  computeOlFeaturesExtent
+  computeOlFeaturesExtent,
+  PropertyTypeDetectorService,
+  generateIdFromSourceOptions,
+  LayerService,
+  Layer,
+  GeoServiceDefinition
 } from '@igo2/geo';
 import {
   Media,
@@ -46,10 +51,15 @@ import {
   ConfigService,
   MessageService
 } from '@igo2/core';
-import { QueryState, StorageState } from '@igo2/integration';
 import { distribuerGiin, isGiinResult } from '../giin/giin.utils';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+import { QueryState, StorageState, WorkspaceState } from '@igo2/integration';
+import { ObjectUtils } from '@igo2/utils';
+
+interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
+  propertyForUrl: string
+}
 
 @Component({
   selector: 'app-toast-panel',
@@ -135,6 +145,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.storageService.set('fullExtent', value);
   }
   private _fullExtent = false;
+
+  public potententialLayerToAdd$: BehaviorSubject<any> = new BehaviorSubject(undefined);
+  public potententialLayerisAdded$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
     this.fullExtent
@@ -286,7 +299,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     public dialogWindow: MatDialog,
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private workspaceState: WorkspaceState,
+    private propertyTypeDetectorService: PropertyTypeDetectorService,
+    private layerService: LayerService
   ) {
     this.tabsMode = this.configService.getConfig('queryTabs')
       ? this.configService.getConfig('queryTabs')
@@ -457,6 +473,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         }
       }
     ]);
+    this.computeFeatureGeoServiceStatus();
+    combineLatest([
+      this.resultSelected$,
+      this.map.layers$ as BehaviorSubject<Layer[]>
+    ])
+      .subscribe(() => {
+        this.computeFeatureGeoServiceStatus();
+      });
   }
 
   ngOnDestroy(): void {
@@ -612,7 +636,20 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.map.queryResultsOverlay.setFeatures(features, FeatureMotion.None, 'map');
   }
 
+  handleWksSelection() {
+    const entities = this.store.entities$.getValue();
+    const layersTitle = [...new Set(entities.map(e => e.source.title))];
+    const workspaces = this.workspaceState.store.entities$.getValue();
+    if (workspaces.length) {
+      const wksToHandle = workspaces.filter(wks => layersTitle.includes(wks.title));
+      wksToHandle.map(ws => {
+        ws.entityStore.state.updateMany(ws.entityStore.view.all(), { selected: false });
+      });
+    }
+  }
+
   clear() {
+    this.handleWksSelection();
     this.clearFeatureEmphasis();
     this.map.queryResultsOverlay.clear();
     this.store.clear();
@@ -669,6 +706,98 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     const resultSelected = this.resultSelected$.getValue();
     const giinUuids = [resultSelected.data.properties.uuid];
     distribuerGiin(this.dialogWindow, this.http, this.messageService, giinUuids);
+  }
+  hasGeoService() {
+    return this.getGeoServices().length;
+  }
+
+  private getGeoServices(): ExtendedGeoServiceDefinition[] {
+    const resultSelected = this.resultSelected$.getValue();
+    if (!resultSelected) {
+      return [];
+    }
+    const hasGeoServiceProperties: ExtendedGeoServiceDefinition[] = [];
+    const keys = Object.keys(resultSelected.data.properties);
+    Object.entries(resultSelected.data.properties).forEach((entry) => {
+      const [key, value] = entry;
+      const geoService = this.propertyTypeDetectorService.getGeoService(value, keys);
+      const extendedGeoService: ExtendedGeoServiceDefinition = Object.assign({},geoService, {propertyForUrl: undefined});
+      if (geoService) {
+        extendedGeoService.propertyForUrl = key;
+        hasGeoServiceProperties.push(extendedGeoService);
+      }
+
+    });
+    return hasGeoServiceProperties;
+  }
+
+  handleLayer() {
+    const layersIds = this.map.layers.map(layer => layer.id);
+    let potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
+    if (!potententialLayerToAdd) {
+      this.computeFeatureGeoServiceStatus();
+    }
+    potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
+
+    if (layersIds.includes(potententialLayerToAdd.id)) {
+      const layerToRemove = this.map.getLayerById(potententialLayerToAdd.id);
+      if (layerToRemove) {
+        this.map.removeLayer(layerToRemove);
+        this.potententialLayerisAdded$.next(false);
+      }
+    } else {
+      this.layerService
+        .createAsyncLayer(potententialLayerToAdd.sourceOptions)
+        .subscribe(layer => {
+          this.map.layersAddedByClick$.next([layer]);
+          this.map.addLayer(layer);
+          this.potententialLayerisAdded$.next(true);
+        }
+        );
+    }
+  }
+
+  private computeFeatureGeoServiceStatus() {
+    const resultSelected = this.resultSelected$.getValue();
+    if (!resultSelected) {
+      return;
+    }
+    const geoServices = this.getGeoServices();
+    if (geoServices.length) {
+      const firstGeoService = geoServices[0];
+      const so = this.computeSourceOptionsFromProperties(resultSelected.data.properties, firstGeoService);
+      const soId = generateIdFromSourceOptions(so.sourceOptions);
+      this.potententialLayerToAdd$.next({ id: soId, sourceOptions: so });
+      const layersIds = this.map.layers.map(l => l.id);
+      this.potententialLayerisAdded$.next(layersIds.includes(soId) ? true : false);
+    }
+  }
+
+  private computeSourceOptionsFromProperties(properties: {}, geoService: ExtendedGeoServiceDefinition) {
+    const keys = Object.keys(properties);
+    const propertiesForLayerName = keys.filter(p => geoService.propertiesForLayerName.includes(p));
+    // providing the the first matching regex;
+    let layerName = properties[propertiesForLayerName[0]];
+    const url = properties[geoService.propertyForUrl];
+    let appliedLayerName = layerName;
+    let arcgisLayerName = undefined;
+    if (['arcgisrest', 'imagearcgisrest', 'tilearcgisrest'].includes(geoService.type)) {
+      arcgisLayerName = layerName;
+      appliedLayerName = undefined;
+    }
+    const so = ObjectUtils.removeUndefined({
+      sourceOptions: {
+        type: geoService.type || 'wms',
+        url,
+        optionsFromCapabilities: true,
+        optionsFromApi: true,
+        params: {
+          LAYERS: appliedLayerName,
+          LAYER: arcgisLayerName
+        }
+      }
+    });
+    return so;
   }
 
   zoomTo() {

@@ -47,6 +47,11 @@
       (click)="handleGiin_distribuer()">
       <mat-icon svgIcon="download-lock"></mat-icon>
     </button>
+    <button *ngIf="hasGeoService()" mat-icon-button igoStopPropagation panelLeftButton tooltip-position="below"
+      matTooltipShowDelay="500" [color]="(potententialLayerisAdded$ | async) ? 'warn' : ''" (click)="handleLayer()">
+      <mat-icon [svgIcon]="(potententialLayerisAdded$ | async) ? 'delete' : 'plus'">
+      </mat-icon>
+    </button>
 
     <button
       *ngIf="resultSelected$.value"
@@ -93,6 +98,7 @@
     <div #content class="toast-content">
 
       <igo-feature-details
+        [map]="map"
         *ngIf="resultSelected$.value"
         [feature]="resultSelected$.value.data"
         (htmlDisplayEvent)=setHtmlDisplay($event)>
