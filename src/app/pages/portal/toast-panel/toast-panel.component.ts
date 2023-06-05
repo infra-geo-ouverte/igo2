@@ -50,7 +50,7 @@ import {
   StorageServiceEvent,
   ConfigService
 } from '@igo2/core';
-import { QueryState, StorageState } from '@igo2/integration';
+import { QueryState, StorageState, WorkspaceState } from '@igo2/integration';
 import { ObjectUtils } from '@igo2/utils';
 
 interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
@@ -292,6 +292,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     public languageService: LanguageService,
     private storageState: StorageState,
     private queryState: QueryState,
+    private workspaceState: WorkspaceState,
     private configService: ConfigService,
     private propertyTypeDetectorService: PropertyTypeDetectorService,
     private layerService: LayerService
@@ -628,7 +629,20 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.map.queryResultsOverlay.setFeatures(features, FeatureMotion.None, 'map');
   }
 
+  handleWksSelection() {
+    const entities = this.store.entities$.getValue();
+    const layersTitle = [...new Set(entities.map(e => e.source.title))];
+    const workspaces = this.workspaceState.store.entities$.getValue();
+    if (workspaces.length) {
+      const wksToHandle = workspaces.filter(wks => layersTitle.includes(wks.title));
+      wksToHandle.map(ws => {
+        ws.entityStore.state.updateMany(ws.entityStore.view.all(), { selected: false });
+      });
+    }
+  }
+
   clear() {
+    this.handleWksSelection();
     this.clearFeatureEmphasis();
     this.map.queryResultsOverlay.clear();
     this.store.clear();
