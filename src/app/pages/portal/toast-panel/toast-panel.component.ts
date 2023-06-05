@@ -637,7 +637,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       const wksToHandle = workspaces.filter(wks => layersTitle.includes(wks.title));
       wksToHandle.map(ws => {
         ws.entityStore.state.updateMany(ws.entityStore.view.all(), { selected: false });
-      })
+      });
     }
   }
 
