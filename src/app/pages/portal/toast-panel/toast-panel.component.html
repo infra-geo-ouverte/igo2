@@ -36,6 +36,7 @@
     </button>
 
     <button *ngIf="hasGeoService()" mat-icon-button igoStopPropagation panelLeftButton tooltip-position="below"
+      [matTooltip]="((potententialLayerisAdded$ | async) ? 'toastPanel.removeLayer' : 'toastPanel.addLayer') | translate"
       matTooltipShowDelay="500" [color]="(potententialLayerisAdded$ | async) ? 'warn' : ''" (click)="handleLayer()">
       <mat-icon [svgIcon]="(potententialLayerisAdded$ | async) ? 'delete' : 'plus'">
       </mat-icon>

@@ -44,7 +44,9 @@
     "standardExtent": "Reduce",
     "standardExtentTooltip": "Reduce panel",
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
-    "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
+    "nextFeatureTooltip": "Next feature ( shortcut = right arrow)",
+    "addLayer": "Add the associated layer to the map",
+    "removeLayer": "Remove the associated layer from the map"
   },
   "home-extent": {
     "tooltip": "Go back to initial position"
