@@ -39,5 +39,14 @@
     "url": "/apis/inedit/"
   },
   "wakeLockApiButton": false,
-  "offlineButton": false
+  "offlineButton": false,
+  "regex": {
+    "geoservice": [
+      {
+        "url": "https://servicesmatriciels.mern.qc/erdas-iws/ogc/wms/.*",
+        "type": "wms",
+        "propertiesForLayerName": ["nom_couche_service", "nom_mosaique_wms", "wmsName"]
+      }
+    ]
+  }
 }
