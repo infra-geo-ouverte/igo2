@@ -1,0 +1,26 @@
+{
+    "uri": "addLayerFromIndex",
+    "base": "_base",
+    "layers": [
+        {
+            "title": "Index",
+            "id": "wmsIndex",
+            "sourceOptions": {
+                "type": "vector",
+                "url": "/data/wmsIndex.geojson",
+                "queryable": true,
+                "queryTitle": "Nom de la couche: ${name}"
+            },
+            "messages": [
+                {
+                    "text": "messages.addLayerFromIndex",
+                    "type": "success",
+                    "options": {
+                        "tapToDismiss": false,
+                        "timeOut": 0
+                    }
+                }
+            ]
+        }
+    ]
+}

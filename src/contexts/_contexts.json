@@ -50,5 +50,9 @@
   {
     "uri": "geolocation",
     "title": "Geolocation"
+  },
+  {
+    "uri": "addLayerFromIndex",
+    "title": "Ajout de couche à partir d'un index"
   }
 ]

@@ -43,9 +43,9 @@
   "regex": {
     "geoservice": [
       {
-        "url": "https://servicesmatriciels.mern.qc/erdas-iws/ogc/wms/.*",
+        "url": "https:\/\/geoegl.msp.gouv.qc.ca\/ws\/mffpecofor.fcgi",
         "type": "wms",
-        "propertiesForLayerName": ["nom_couche_service", "nom_mosaique_wms", "wmsName"]
+        "propertiesForLayerName": ["name"]
       }
     ]
   }
