@@ -87,7 +87,7 @@
     "natives": "^1.1.6",
     "ngx-color-picker": "^13.0.0",
     "ngx-indexed-db": "^11.0.2",
-    "ngx-toastr": "^15.0.0",
+    "ngx-toastr": "^16.2.0",
     "ol": "^7.3.0",
     "proj4": "^2.8.0",
     "rxjs": "^7.5.6",
