@@ -105,7 +105,7 @@
     "@angular-eslint/builder": "14.1.2",
     "@angular-eslint/eslint-plugin": "14.1.2",
     "@angular-eslint/eslint-plugin-template": "14.1.2",
-    "@angular-eslint/schematics": "14.1.2",
+    "@angular-eslint/schematics": "16.0.3",
     "@angular-eslint/template-parser": "14.1.2",
     "@angular/platform-browser-dynamic": "^14.3.0",
     "@angular/cli": "^14.2.10",
