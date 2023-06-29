@@ -9,6 +9,7 @@
   "license": "LiLiQ-R",
   "scripts": {
     "ng": "ng",
+    "ng-update": "ng update @angular/material@15 --force",
     "start": "gulp watch:locale | ng serve --host 0.0.0.0 --port 4201 --proxy-config proxy.conf.json",
     "start-pwa": "ng build --configuration pwa --output-path ./dist/pwa && npm run serve.pwa",
     "build": "ng build",
