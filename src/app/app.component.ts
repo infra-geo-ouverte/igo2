@@ -1,4 +1,5 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 import { userAgent } from '@igo2/utils';
 import {
@@ -10,6 +11,8 @@ import { AuthOptions } from '@igo2/auth';
 import { AnalyticsListenerService } from '@igo2/integration';
 import { PwaService } from './services/pwa.service';
 
+const DEFAULT_THEME: string = 'blue-theme';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,15 +20,16 @@ import { PwaService } from './services/pwa.service';
 })
 export class AppComponent {
   public authConfig: AuthOptions;
-  private themeClass = 'blue-theme';
+  private currentTheme: string = DEFAULT_THEME;
   public hasHeader = true;
   public hasFooter = true;
   private promptEvent: any;
+
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     protected languageService: LanguageService,
     private configService: ConfigService,
     private analyticsListenerService: AnalyticsListenerService,
-    private renderer: Renderer2,
     private titleService: Title,
     private metaService: Meta,
     private messageService: MessageService,
@@ -87,12 +91,32 @@ export class AppComponent {
     }
   }
 
-
   private readThemeConfig() {
-    const theme = this.configService.getConfig('theme') || this.themeClass;
-    if (theme) {
-      this.renderer.addClass(document.body, theme);
+    const theme = this.configService.getConfig('theme');
+    if (theme && theme !== this.currentTheme) {
+      this.currentTheme = theme;
+      this.loadTheme(theme);
     }
+  }
+
+  private loadTheme(theme: string): void {
+    const src = `assets/igo2/core/theming/prebuilt-themes/${theme}.css`;
+    const id = 'prebuilt-theme';
+    const head = this.document.getElementsByTagName('head')[0];
+
+    let themeLink = this.document.getElementById(id) as HTMLLinkElement;
+    themeLink
+      ? themeLink.href = src
+      : this.createHtmlLink(id, src, head);
+  }
+
+  private createHtmlLink(id: string, src: string, parent: HTMLElement): void {
+    const style = this.document.createElement('link');
+    style.id = id;
+    style.rel = 'stylesheet';
+    style.href = src;
+
+    parent.appendChild(style);
   }
 
   private readDescriptionConfig() {
