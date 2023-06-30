@@ -9,7 +9,11 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatLegacyDialog as MatDialog,
+  MatLegacyDialogConfig as MatDialogConfig,
+  MatLegacyDialogRef as MatDialogRef
+} from '@angular/material/legacy-dialog';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import * as olProj from 'ol/proj';
 import olFeature from 'ol/Feature';
@@ -98,7 +102,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { ObjectUtils } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 
@@ -139,11 +143,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   };
   public workspaceMenuClass = 'workspace-menu';
 
-  public fullExtent = this.storageService.get('fullExtent') as boolean;
+  public fullExtent: boolean;
   private workspaceMaximize$$: Subscription[] = [];
-  readonly workspaceMaximize$: BehaviorSubject<boolean> = new BehaviorSubject(
-    this.storageService.get('workspaceMaximize') as boolean
-  );
+  readonly workspaceMaximize$: BehaviorSubject<boolean>;
 
   public matDialogRef$ = new BehaviorSubject<MatDialogRef<any>>(undefined);
   public searchBarTerm = '';
@@ -209,8 +211,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this._toastPanelOpened = value;
     this.cdRef.detectChanges();
   }
-  private _toastPanelOpened =
-    (this.storageService.get('toastOpened') as boolean) !== false;
+  private _toastPanelOpened: boolean;
 
   isMobile(): boolean {
     return this.mediaService.getMedia() === Media.Mobile;
@@ -340,6 +341,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState,
     private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
+    this.fullExtent = this.storageService.get('fullExtent') as boolean;
+    this.workspaceMaximize$ = new BehaviorSubject(
+      this.storageService.get('workspaceMaximize') as boolean
+    );
+    this. _toastPanelOpened = (this.storageService.get('toastOpened') as boolean) !== false;
     this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
     this.hasHomeExtentButton =
       this.configService.getConfig('homeExtentButton') === undefined ? false : true;

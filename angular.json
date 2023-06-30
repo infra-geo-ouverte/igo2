@@ -64,7 +64,6 @@
               ]
             },
             "allowedCommonJsDependencies": [
-              "hammerjs",
               "typy",
               "jspdf",
               "file-saver",
