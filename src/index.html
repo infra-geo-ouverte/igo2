@@ -1,16 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>IGO2</title>
-  <base href="/">
+  <head>
+    <meta charset="utf-8" />
+    <title>IGO2</title>
+    <base href="/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=0">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-  <!-- inline spinner styles to be able to display spinner right away -->
+    <!-- inline spinner styles to be able to display spinner right away -->
     <style type="text/css">
-      body, html {
+      body,
+      html {
         height: 100%;
       }
       .app-loading {
@@ -63,20 +67,38 @@
       }
     </style>
 
-    <link rel="manifest" id="igoManifestByConfig">
-    <link rel="apple-touch-icon" href="assets/icons/icon-192x192-full.png">
-    <link id="prebuilt-theme" rel="stylesheet" type="text/css" href="assets/igo2/core/theming/prebuilt-themes/blue-theme.css">
-  <meta name="theme-color" content="#1976d2">
-</head>
+    <link rel="manifest" id="igoManifestByConfig" />
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192-full.png" />
+    <link
+      rel="stylesheet"
+      href="assets/igo2/core/theming/prebuilt-themes/shared-theme.css"
+    />
+    <link
+      id="theme-styles"
+      rel="stylesheet"
+      href="assets/igo2/core/theming/prebuilt-themes/blue-theme.css"
+    />
+    <meta name="theme-color" content="#1976d2" />
+  </head>
   <body>
     <app-root>
       <div class="app-loading">
         Loading...
         <svg class="spinner" viewBox="25 25 50 50">
-          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+          <circle
+            class="path"
+            cx="50"
+            cy="50"
+            r="20"
+            fill="none"
+            stroke-width="2"
+            stroke-miterlimit="10"
+          />
         </svg>
       </div>
     </app-root>
-    <noscript>Please enable JavaScript to continue using this application.</noscript>
-</body>
-  </html>
+    <noscript
+      >Please enable JavaScript to continue using this application.</noscript
+    >
+  </body>
+</html>

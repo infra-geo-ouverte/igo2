@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
-import { userAgent } from '@igo2/utils';
+import { loadTheme, userAgent } from '@igo2/utils';
 import {
   LanguageService,
   ConfigService,
@@ -93,30 +93,12 @@ export class AppComponent {
 
   private readThemeConfig() {
     const theme = this.configService.getConfig('theme');
-    if (theme && theme !== this.currentTheme) {
-      this.currentTheme = theme;
-      this.loadTheme(theme);
+    if (!theme || theme === this.currentTheme) {
+      return;
     }
-  }
 
-  private loadTheme(theme: string): void {
-    const src = `assets/igo2/core/theming/prebuilt-themes/${theme}.css`;
-    const id = 'prebuilt-theme';
-    const head = this.document.getElementsByTagName('head')[0];
-
-    let themeLink = this.document.getElementById(id) as HTMLLinkElement;
-    themeLink
-      ? themeLink.href = src
-      : this.createHtmlLink(id, src, head);
-  }
-
-  private createHtmlLink(id: string, src: string, parent: HTMLElement): void {
-    const style = this.document.createElement('link');
-    style.id = id;
-    style.rel = 'stylesheet';
-    style.href = src;
-
-    parent.appendChild(style);
+    this.currentTheme = theme;
+    loadTheme(this.document, theme);
   }
 
   private readDescriptionConfig() {
