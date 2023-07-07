@@ -1,4 +1,4 @@
-import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, ApplicationRef, Injector, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,7 +33,10 @@ import { HeaderModule } from './pages/header/header.module';
 import { FooterModule } from './pages/footer/footer.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { MAT_LEGACY_TOOLTIP_DEFAULT_OPTIONS as MAT_TOOLTIP_DEFAULT_OPTIONS, MatLegacyTooltipDefaultOptions as MatTooltipDefaultOptions } from '@angular/material/legacy-tooltip';
+import {
+  MAT_LEGACY_TOOLTIP_DEFAULT_OPTIONS as MAT_TOOLTIP_DEFAULT_OPTIONS,
+  MatLegacyTooltipDefaultOptions as MatTooltipDefaultOptions
+} from '@angular/material/legacy-tooltip';
 import { concatMap, first } from 'rxjs';
 
 export const defaultTooltipOptions: MatTooltipDefaultOptions = {
@@ -55,7 +58,6 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     IgoSpinnerModule,
     IgoStopPropagationModule,
     PortalModule,
-    HammerModule,
     HeaderModule,
     FooterModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
