@@ -83,6 +83,7 @@
     "hammerjs": "^2.0.8",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.29",
     "jszip": "^3.10.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.29.4",
