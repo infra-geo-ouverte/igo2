@@ -6,30 +6,32 @@
       (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <igo-menu-button *ngIf="showMenuButton"
-      [sidenavOpened]="sidenavOpened"
-      (openSidenav)="onToggleSidenavClick()">
-    </igo-menu-button>
+    <div class="navbar-container">
+      <igo-menu-button *ngIf="showMenuButton"
+        [sidenavOpened]="sidenavOpened"
+        (openSidenav)="onToggleSidenavClick()">
+      </igo-menu-button>
 
-    <igo-search-bar *ngIf="showSearchBar"
-      #searchBar
-      [term]="searchBarTerm"
-      [termSplitter]="termSplitter"
-      [minLength]="minSearchTermLength"
-      [searchSettings]="true"
-      [forceNA]="forceCoordsNA"
-      [store]="searchStore"
-      (searchTermChange)="onSearchTermChange($event)"
-      [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
-      (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
-      [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
-      (searchResultsGeometryStatus)="onSearchResultsGeometryStatusChange($event)"
-      [reverseSearchCoordsFormatEnabled]="igoReverseSearchCoordsFormatEnabled"
-      (reverseSearchCoordsFormatStatus)="onReverseCoordsFormatStatusChange($event)"
-      (search)="onSearch($event)"
-      (clearFeature)="onClearSearch()"
-      (searchSettingsChange)="onSearchSettingsChange()">
-    </igo-search-bar>
+      <igo-search-bar *ngIf="showSearchBar"
+        #searchBar
+        [term]="searchBarTerm"
+        [termSplitter]="termSplitter"
+        [minLength]="minSearchTermLength"
+        [searchSettings]="true"
+        [forceNA]="forceCoordsNA"
+        [store]="searchStore"
+        (searchTermChange)="onSearchTermChange($event)"
+        [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
+        (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
+        [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
+        (searchResultsGeometryStatus)="onSearchResultsGeometryStatusChange($event)"
+        [reverseSearchCoordsFormatEnabled]="igoReverseSearchCoordsFormatEnabled"
+        (reverseSearchCoordsFormatStatus)="onReverseCoordsFormatStatusChange($event)"
+        (search)="onSearch($event)"
+        (clearFeature)="onClearSearch()"
+        (searchSettingsChange)="onSearchSettingsChange()">
+      </igo-search-bar>
+    </div>
 
     <app-sidenav
       [map]="map"
