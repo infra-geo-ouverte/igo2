@@ -11,17 +11,18 @@
     top: 5px;
     display: flex;
     width: $search-bar-width;
+    z-index: 4;
+    
+    @include mobile {
+      width: $search-bar-width-mobile;
+      max-width: 350px;
+    }
 
     igo-search-bar {
+      flex: 1;
       background-color: $app-background-color;
       font-size: 16px;
-      z-index: 4;
       margin: 0 $igo-margin;
-  
-      @include mobile {
-        width: $search-bar-width-mobile;
-        max-width: 350px;
-      }
     }
   }
 
@@ -176,7 +177,7 @@ igo-entity-table-paginator {
     margin-left: -30px;
   }
 }
-igo-entity-table-paginator ::ng-deep .mat-paginator-range-label {
+igo-entity-table-paginator ::ng-deep .mat-mdc-paginator-range-label {
   @include mobile {
     margin: 10px 1px 0px 20px;
   }
@@ -355,7 +356,7 @@ toast-panel-for-expansion.toast-panel-for-expansion-opened {
   }
 }
 
-.mat-table thead mat-header-row .mat-table-sticky {
+.mat-mdc-table thead mat-header-row .mat-mdc-table-sticky {
   background: none;
 }
 
@@ -388,8 +389,8 @@ app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container 
 
 ::ng-deep div.workspace-menu {
   max-width: fit-content !important;
-
-  div.mat-menu-content ::ng-deep span.mat-checkbox-label, div.mat-menu-content ::ng-deep div.mat-list-text {
+  /*TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.*/
+  div.mat-mdc-menu-content ::ng-deep span.mat-checkbox-label, div.mat-mdc-menu-content ::ng-deep div.mdc-list-item__primary-text {
     font-size: 12px;
   }
 }

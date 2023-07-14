@@ -2,53 +2,64 @@
 
 :host {
   background-color: rgb(255, 255, 255);
-}
 
-// This is needed because whe using the
-// sidenav "side" mode, the z-index is 1
-// and the sidenav appears below our backdrop.
-// The "side" mode is required to prevent
-// the sidenav from focusing a random button on open.
-:host ::ng-deep mat-sidenav {
-  z-index: 3 !important;
-}
+  
 
-mat-sidenav {
-  @extend %box-shadowed-bottom-right;
-
-  height: 100%;
-  width: $app-sidenav-width;
-
-  @include mobile {
-    width: $app-sidenav-width-mobile;
-    max-width: 400px;
+  ::ng-deep {
+    .igo-panel-header {
+      position: relative;
+    }
   }
-}
+  
+  mat-sidenav {
+    // This is needed because whe using the
+    // sidenav "side" mode, the z-index is 1
+    // and the sidenav appears below our backdrop.
+    // The "side" mode is required to prevent
+    // the sidenav from focusing a random button on open.
+    z-index: 3 !important;
 
-.app-content, igo-panel {
+    @extend %box-shadowed-bottom-right;
+  
     height: 100%;
-}
-
-.app-sidenav-content {
-  margin-top: $app-sidenav-margin-top;
-  height: $app-sidenav-height;
-  @include mobile {
-    height: calc(100% - #{$app-sidenav-margin-top});
+    width: $app-sidenav-width;
+  
+    @include mobile {
+      width: $app-sidenav-width-mobile;
+      max-width: 400px;
+    }
   }
-}
 
-igo-panel ::ng-deep .igo-panel-content {
-  position: relative;
-}
-
-
-div.toolActivated > igo-panel ::ng-deep > div.igo-panel-header {
-  margin-left: 50px;
-  position: relative;
-}
-
-igo-toolbox {
-  @include mobile {
-    overflow: auto;
+  igo-home-button {
+    position: absolute;
+    top: 53px;
+  }
+  
+  .app-content, igo-panel {
+      height: 100%;
+  }
+  
+  .app-sidenav-content {
+    margin-top: $app-sidenav-margin-top;
+    height: $app-sidenav-height;
+    @include mobile {
+      height: calc(100% - #{$app-sidenav-margin-top});
+    }
+  }
+  
+  igo-panel ::ng-deep .igo-panel-content {
+    position: relative;
+  }
+  
+  
+  div.toolActivated > igo-panel ::ng-deep > div.igo-panel-header {
+    margin-left: 50px;
+    position: relative;
+  }
+  
+  igo-toolbox {
+    @include mobile {
+      overflow: auto;
+    }
   }
 }

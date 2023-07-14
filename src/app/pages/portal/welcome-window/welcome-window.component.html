@@ -1,10 +1,10 @@
 <div class="welcome-window"  *ngIf="html$ | async">
 
   <mat-toolbar color="primary">
-    <h2>{{'welcomeWindow.title' | translate}}</h2>
+    <h4>{{'welcomeWindow.title' | translate}}</h4>
     <span class="spacer"></span>
 
-    <label>
+    <label class="mat-body-1">
       <input id="doNotShowCheck" type="checkbox" [(ngModel)]="showAgain" (click)="setShowAgain()">
       {{'welcomeWindow.notShowCheck' | translate}}
     </label>

@@ -34,9 +34,9 @@ import { FooterModule } from './pages/footer/footer.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import {
-  MAT_LEGACY_TOOLTIP_DEFAULT_OPTIONS as MAT_TOOLTIP_DEFAULT_OPTIONS,
-  MatLegacyTooltipDefaultOptions as MatTooltipDefaultOptions
-} from '@angular/material/legacy-tooltip';
+  MAT_TOOLTIP_DEFAULT_OPTIONS,
+  MatTooltipDefaultOptions
+} from '@angular/material/tooltip';
 import { concatMap, first } from 'rxjs';
 
 export const defaultTooltipOptions: MatTooltipDefaultOptions = {
