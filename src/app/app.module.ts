@@ -7,7 +7,8 @@ import {
   IgoMessageModule,
   IgoGestureModule,
   RouteService,
-  LanguageService
+  LanguageService,
+  ConfigService
 } from '@igo2/core';
 import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
 import { IgoAuthModule } from '@igo2/auth';
@@ -37,8 +38,11 @@ import {
   MAT_TOOLTIP_DEFAULT_OPTIONS,
   MatTooltipDefaultOptions
 } from '@angular/material/tooltip';
-import { concatMap, first } from 'rxjs';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { concatMap, first } from 'rxjs';
+import { loadTheme } from '@igo2/utils';
+
+const DEFAULT_THEME: string = 'blue-theme';
 
 export const defaultTooltipOptions: MatTooltipDefaultOptions = {
   showDelay: 500,
@@ -106,7 +110,7 @@ function appInitializerFactory(
   injector: Injector,
   applicationRef: ApplicationRef
 ) {
-  // ensure to have the proper translations loaded once, whe the app is stable.
+  // ensure to have the proper translations loaded once, when the app is stable.
   return () => new Promise<any>((resolve: any) => {
     applicationRef.isStable.pipe(
       first(isStable => isStable === true),
@@ -119,6 +123,9 @@ function appInitializerFactory(
         const languageService = injector.get(LanguageService);
         const lang = languageService.getLanguage();
         languageService.translate.setTranslation(lang, translations);
+        const configService = injector.get(ConfigService);
+        const theme = configService.getConfig('theme') || DEFAULT_THEME;
+        loadTheme(document, theme);
         resolve();
       });
   });

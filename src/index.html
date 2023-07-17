@@ -11,91 +11,96 @@
     />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-    <!-- inline spinner styles to be able to display spinner right away -->
-    <style type="text/css">
-      body,
-      html {
-        height: 100%;
-      }
-      .app-loading {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        font-family: Arial, Helvetica, sans-serif;
-        color: #bbb;
-      }
-      .app-loading .spinner {
-        height: 200px;
-        width: 200px;
-        animation: rotate 2s linear infinite;
-        transform-origin: center center;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-      }
-      .app-loading .spinner .path {
-        stroke-dasharray: 1, 200;
-        stroke-dashoffset: 0;
-        animation: dash 1.5s ease-in-out infinite;
-        stroke-linecap: round;
-        stroke: #ddd;
-      }
-      @keyframes rotate {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      @keyframes dash {
-        0% {
-          stroke-dasharray: 1, 200;
-          stroke-dashoffset: 0;
-        }
-        50% {
-          stroke-dasharray: 89, 200;
-          stroke-dashoffset: -35px;
-        }
-        100% {
-          stroke-dasharray: 89, 200;
-          stroke-dashoffset: -124px;
-        }
-      }
-    </style>
-
     <link rel="manifest" id="igoManifestByConfig" />
     <link rel="apple-touch-icon" href="assets/icons/icon-192x192-full.png" />
-    <link
-      id="theme-styles"
-      rel="stylesheet"
-      href="assets/igo2/core/theming/prebuilt-themes/blue-theme.css"
-    />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;bold&display=swap" rel="stylesheet">
+    <link id="theme-styles" rel="stylesheet" />
     <meta name="theme-color" content="#1976d2" />
-  </head>
-  <body class="mat-typography">
-    <app-root>
-      <div class="app-loading">
-        Loading...
-        <svg class="spinner" viewBox="25 25 50 50">
-          <circle
-            class="path"
-            cx="50"
-            cy="50"
-            r="20"
-            fill="none"
-            stroke-width="2"
-            stroke-miterlimit="10"
-          />
-        </svg>
-      </div>
-    </app-root>
-    <noscript
-      >Please enable JavaScript to continue using this application.</noscript
-    >
-  </body>
+</head>
+
+<body>
+  <app-root></app-root>
+  <div id="splash-screen" class="is-loaded">
+    <div id="splash-screen__filmstrip">
+      <img alt="" aria-hidden="true" src="assets/logo.png" />
+      <h1 id="splash-screen-title"></h1>
+    </div>
+    <svg id="splash-screen__spinner" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 21a9 9 0 1 0-9-9" fill="none" stroke="#b0bec5" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </div>
+
+  <style id="splash-screen-stylesheet">
+    #splash-screen {
+      align-items: center;
+      background-color: #f5f7f9;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      left: 0;
+      opacity: 1;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translateZ(0);
+      z-index: 1999;
+      transition: all 300ms;
+    }
+
+    #splash-screen h1 {
+      font-family: sans-serif;
+      color: rgba(0, 0, 0, 0.64);
+    }
+
+    #splash-screen.is-destroying {
+      opacity: 0;
+    }
+
+    #splash-screen__filmstrip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    #splash-screen__filmstrip img {
+      width: fit-content;
+      height: 95px;
+    }
+
+    #splash-screen__spinner {
+      margin-top: 0;
+      opacity: 0;
+    }
+
+    #splash-screen.is-loaded #splash-screen__spinner {
+      animation: spinner-fade 0.2s ease 0.8s,
+        spinner-rotate 1s linear infinite;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes spinner-fade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes spinner-rotate {
+      from {
+        transform: translateZ(0) rotate(0deg);
+      }
+
+      to {
+        transform: translateZ(0) rotate(360deg);
+      }
+    }
+  </style>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+</body>
+
 </html>
