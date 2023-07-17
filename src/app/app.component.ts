@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
-import { loadTheme, userAgent } from '@igo2/utils';
+import { userAgent } from '@igo2/utils';
 import {
   LanguageService,
   ConfigService,
@@ -11,8 +11,6 @@ import { AuthOptions } from '@igo2/auth';
 import { AnalyticsListenerService } from '@igo2/integration';
 import { PwaService } from './services/pwa.service';
 
-const DEFAULT_THEME: string = 'blue-theme';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,7 +18,6 @@ const DEFAULT_THEME: string = 'blue-theme';
 })
 export class AppComponent {
   public authConfig: AuthOptions;
-  private currentTheme: string = DEFAULT_THEME;
   public hasHeader = true;
   public hasFooter = true;
   private promptEvent: any;
@@ -38,7 +35,6 @@ export class AppComponent {
     this.authConfig = this.configService.getConfig('auth');
 
     this.readTitleConfig();
-    this.readThemeConfig();
     this.readDescriptionConfig();
 
     this.analyticsListenerService.listen();
@@ -91,15 +87,6 @@ export class AppComponent {
     }
   }
 
-  private readThemeConfig() {
-    const theme = this.configService.getConfig('theme');
-    if (!theme || theme === this.currentTheme) {
-      return;
-    }
-
-    this.currentTheme = theme;
-    loadTheme(this.document, theme);
-  }
 
   private readDescriptionConfig() {
     const description = this.configService.getConfig('description');
