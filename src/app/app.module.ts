@@ -38,6 +38,7 @@ import {
   MatTooltipDefaultOptions
 } from '@angular/material/tooltip';
 import { concatMap, first } from 'rxjs';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 export const defaultTooltipOptions: MatTooltipDefaultOptions = {
   showDelay: 500,
@@ -91,7 +92,11 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     provideStyleListOptions({
       path: './assets/list-style.json'
     }),
-    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: defaultTooltipOptions }
+    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: defaultTooltipOptions },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' }
+    },
   ],
   bootstrap: [AppComponent]
 })

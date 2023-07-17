@@ -17,10 +17,7 @@
     // and the sidenav appears below our backdrop.
     // The "side" mode is required to prevent
     // the sidenav from focusing a random button on open.
-    z-index: 3 !important;
-
-    @extend %box-shadowed-bottom-right;
-  
+    z-index: 3 !important;  
     height: 100%;
     width: $app-sidenav-width;
   
