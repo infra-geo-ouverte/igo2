@@ -1,0 +1,89 @@
+{
+    "uri": "geostylerStyles",
+    "base": "_base",
+    "layers": [
+      {
+        "title": "World,  Geostyler definition's based",
+        "zIndex": 10,
+        "id": "gs-style",
+        "sourceOptions": {
+          "queryable": false,
+          "type": "mvt",
+          "url": "https://ahocevar.com/geoserver/gwc/service/tms/1.0.0/ne:ne_10m_admin_0_countries@EPSG:900913@pbf/{z}/{x}/{-y}.pbf"
+        },
+        "igoStyle": {
+          "geoStyler": {
+            "name": "GeoStyler Test",
+            "symbolizers":[
+              {
+              "kind": "Mark",
+              "color": "#ff0000",
+              "width": 5
+              }
+            ],
+            "scaleDenominator": {
+              "min": 50,
+              "max": 200
+            }
+          }
+        }
+      },
+      {
+        "title": "WFS - Geostyler",
+        "visible": true,
+        "sourceOptions": {
+          "type": "wfs",
+          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+          "queryable": true,
+          "queryTitle": "desclocal",
+          "params": {
+            "featureTypes": "telephone_urg",
+            "fieldNameGeometry": "geometry",
+            "maxFeatures": 5001,
+            "outputFormat": "geojson"
+          },
+
+        "ogcFilters": {
+          "enabled": true,
+          "editable": true,
+          "allowedOperatorsType": "all",
+          "filters": {
+            "operator": "PropertyIsEqualTo",
+            "propertyName": "orgresp",
+            "expression": "Bell"
+          },
+          "pushButtons": {
+            "groups": [
+              {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
+            ],
+            "bundles": [
+              {
+                "id": "id1",
+                "logical": "Or",
+                "selectors": [
+                  {
+                    "title": "Bell",
+                    "enabled": true,
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "orgresp",
+                      "expression": "Bell"
+                    }
+                  },
+                  {
+                    "title": "MTQ",
+                    "enabled": false,
+                    "filters": {
+                      "operator": "PropertyIsEqualTo",
+                      "propertyName": "orgresp",
+                      "expression": "MTQ"
+                    }
+                  }
+                ]
+              }
+            ]
+        }}
+        }
+      }
+    ]
+    }

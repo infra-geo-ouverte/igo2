@@ -15,6 +15,8 @@ import * as olProj from 'ol/proj';
 import olFeature from 'ol/Feature';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 
+import OpenLayersParser from "geostyler-openlayers-parser";
+
 import {
   MediaService,
   Media,
@@ -386,7 +388,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       (context: DetailedContext) => this.onChangeContext(context)
     );
 
-    const contextActions = [{
+    const contextActions = [
+      {
+        id: 'change style',
+        title: 'Change style',
+        handler: () => this.changeStyle()
+      },
+      {
       id: 'coordinates',
       title: 'coordinates',
       handler: () => this.searchCoordinate(this.contextMenuCoord)
@@ -639,6 +647,45 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.openSidenav$$.unsubscribe();
     this.workspaceMaximize$$.map(f => f.unsubscribe());
     this.sidenavMediaAndOrientation$$.unsubscribe();
+  }
+
+  changeStyle() {
+    const lastLayer = this.map.layers
+    .filter(l => l.showInLayerList)
+    .filter(l => l.dataSource.options.type === 'wfs').pop();
+	
+    const geoStylerStyle: any = {
+      "name": "Basic Circle",
+      "rules": [
+        {
+          "name": "Rule 1",
+          "symbolizers": [
+            {
+              "kind": "Mark",
+              "wellKnownName": "circle",
+              "color": "#ff8000",
+              "radius": 30
+            },
+            {
+              "kind": "Text",
+              "label": "{{desclocal}}",
+              "color": "#000000",
+              "opacity": 1,
+              "size": 12
+            }
+          ]
+        }
+      ]
+    };
+    const olParser = new OpenLayersParser();
+    olParser.writeStyle(geoStylerStyle)
+    .then((output) => {
+      console.log(output);
+      (lastLayer.ol as any).setStyle(output.output)
+      console.log(output.output)
+    })
+    .catch(error => console.log(error));
+    console.log(lastLayer)
   }
 
   /**

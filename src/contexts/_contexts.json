@@ -50,5 +50,9 @@
   {
     "uri": "geolocation",
     "title": "Geolocation"
+  },
+  {
+    "uri": "geostylerStyles",
+    "title": "GeostylerStyles"
   }
 ]
