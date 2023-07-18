@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 @import './portal.variables';
 
 :host {
@@ -11,21 +13,37 @@
     top: 5px;
     display: flex;
     width: $search-bar-width;
+    max-width: $search-bar-width;
     z-index: 4;
+    transition: all 300ms;
+
+    &.navbar-fixed {
+      left: 0;
+      width: $app-sidenav-width - 5px;
+    }
     
     @include mobile {
       width: $search-bar-width-mobile;
-      max-width: 350px;
+      max-width: min($search-bar-width-mobile, 350px);
     }
 
     igo-search-bar {
       flex: 1;
       background-color: $app-background-color;
       font-size: 16px;
-      margin: 0 $igo-margin;
+      margin-left: $igo-margin;
     }
   }
+  .workspace-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
+  .workspace-actions {
+    display: flex;
+    align-items: center;
+  }
 }
 
 #tour-button {
@@ -158,14 +176,6 @@ mat-sidenav-content {
   flex: 1 1 auto;
 }
 
-igo-actionbar {
-  padding-left: 7px;
-  padding-top: 5px;
-}
-.zoom-workspace {
-  padding-top: 5px;
-}
-
 igo-workspace-selector {
   @include mobile {
     width: 100px;
@@ -192,7 +202,6 @@ igo-entity-table ::ng-deep td.mat-column-edition {
 app-expansion-panel {
   position: absolute;
   bottom: 0;
-  overflow: hidden;
   z-index: 5;
 
   @include mobile {
@@ -310,6 +319,10 @@ igo-home-extent-button {
 }
 
 igo-zoom-button {
+  ::ng-deep button {
+    @include mat.elevation(2);
+  }
+
   @include tablet {
     display: none;
   }
@@ -372,11 +385,6 @@ app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container 
     height: 24px;
     line-height: 24px;
   }
-}
-
-.eye-workspace {
-  margin-left: 7px;
-  margin-top: 5px;
 }
 
 .add-feature {

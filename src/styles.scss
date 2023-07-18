@@ -1,6 +1,6 @@
-@import '@igo2/core/all-style';
-
-@import 'style/reset.scss';
+@use '@igo2/core/all-style';
+@use 'style/reset.scss';
+@use 'style/theme.scss';
 
 .shepherd-element[data-popper-reference-hidden]:not(.shepherd-centered) {
   opacity: 1;
@@ -13,7 +13,7 @@
 }
 .toast-title-red {
   color:red;
-  font-size:32px;
+  font-size:22px;
   font-weight:bold;
 }
 

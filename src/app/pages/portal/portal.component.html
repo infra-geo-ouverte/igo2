@@ -3,7 +3,7 @@
     <igo-backdrop [shown]="backdropShown" (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <div class="navbar-container">
+    <div class="navbar-container" [class.navbar-fixed]="sidenavOpened">
       <igo-menu-button
         *ngIf="showMenuButton"
         [class.mat-elevation-z2]="!sidenavOpened"
@@ -78,7 +78,6 @@
       (@mapStateY.start)="updateMapBrowserClass()"
     >
       <igo-zoom-button
-        class="mat-elevation-z2"
         [map]="map"
         color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
@@ -189,94 +188,97 @@
     </igo-workspace-selector>
 
     <ng-container *ngIf="selectedWorkspace$ | async as workspace">
-      <button
-        class="eye-workspace"
-        mat-icon-button
-        [color]="workspace.layer.visible ? 'primary' : 'default'"
-        collapsibleButton
-        tooltip-position="below"
-        matTooltipShowDelay="500"
-        [matTooltip]="
-          workspace.layer.visible
-            ? ('igo.geo.layer.hideLayer' | translate)
-            : ('igo.geo.layer.showLayer' | translate)
-        "
-        (click)="workspace.layer.visible = !workspace.layer.visible"
-      >
-        <mat-icon
-          [ngClass]="{
-            disabled: (workspace.inResolutionRange$ | async) !== true
-          }"
-          [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'"
-        >
-        </mat-icon>
-      </button>
-      <button
-        *ngIf="isEditionWorkspace(workspace)"
-        class="add-feature"
-        mat-icon-button
-        color="primary"
-        collapsibleButton
-        tooltip-position="below"
-        matTooltipShowDelay="500"
-        [disabled]="
-          workspace.layer.options.sourceOptions.edition.addButton === false
-            ? true
-            : false
-        "
-        [matTooltip]="'workspace.addFeature' | translate"
-        (click)="addFeature(workspace)"
-      >
-        <mat-icon svgIcon="plus"> </mat-icon>
-      </button>
-      <igo-actionbar
-        class="actionbar-workspace"
-        *ngIf="workspace.actionStore"
-        [store]="workspace.actionStore"
-        [withIcon]="true"
-        [withTitle]="actionbarWithTitle"
-        [horizontal]="true"
-        [withToggleButton]="actionbarMode === 'overlay'"
-        [iconColor]="'primary'"
-        [color]="'primary'"
-        [mode]="actionbarMode"
-        [overlayClass]="workspaceMenuClass"
-      >
-      </igo-actionbar>
-      <button
-        class="zoom-workspace"
-        *ngIf="workspaceVisibility()"
-        [disabled]="
-          (workspaceState.workspaceSelection$ | async).length === 0
-            ? true
-            : false
-        "
-        mat-icon-button
-        color="primary"
-        collapsibleButton
-        tooltip-position="below"
-        matTooltipShowDelay="500"
-        [matTooltip]="'toastPanel.zoomOnFeaturesTooltip' | translate"
-        (click)="zoomToSelectedFeatureWks()"
-      >
-        <mat-icon
-          svgIcon="{{
-            (workspaceState.workspaceSelection$ | async).length > 1
-              ? 'magnify-scan'
-              : 'magnify-plus-outline'
-          }}"
-        >
-        </mat-icon>
-      </button>
-      <div class="spacer"></div>
-      <igo-entity-table-paginator
-        *ngIf="workspaceVisibility()"
-        [store]="workspace.entityStore"
-        [entitySortChange$]="workspaceEntitySortChange$"
-        [paginatorOptions]="paginatorOptions"
-        (paginatorChange)="paginatorChange($event)"
-      >
-      </igo-entity-table-paginator>
+      <div class="workspace-container">
+        <div class="workspace-actions">
+          <button
+            class="eye-workspace"
+            mat-icon-button
+            [color]="workspace.layer.visible ? 'primary' : 'default'"
+            collapsibleButton
+            tooltip-position="below"
+            matTooltipShowDelay="500"
+            [matTooltip]="
+              workspace.layer.visible
+                ? ('igo.geo.layer.hideLayer' | translate)
+                : ('igo.geo.layer.showLayer' | translate)
+            "
+            (click)="workspace.layer.visible = !workspace.layer.visible"
+          >
+            <mat-icon
+              [ngClass]="{
+                disabled: (workspace.inResolutionRange$ | async) !== true
+              }"
+              [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'"
+            >
+            </mat-icon>
+          </button>
+          <button
+            *ngIf="isEditionWorkspace(workspace)"
+            class="add-feature"
+            mat-icon-button
+            color="primary"
+            collapsibleButton
+            tooltip-position="below"
+            matTooltipShowDelay="500"
+            [disabled]="
+              workspace.layer.options.sourceOptions.edition.addButton === false
+                ? true
+                : false
+            "
+            [matTooltip]="'workspace.addFeature' | translate"
+            (click)="addFeature(workspace)"
+          >
+            <mat-icon svgIcon="plus"> </mat-icon>
+          </button>
+          <igo-actionbar
+            class="actionbar-workspace"
+            *ngIf="workspace.actionStore"
+            [store]="workspace.actionStore"
+            [withIcon]="true"
+            [withTitle]="actionbarWithTitle"
+            [horizontal]="true"
+            [withToggleButton]="actionbarMode === 'overlay'"
+            [iconColor]="'primary'"
+            [color]="'primary'"
+            [mode]="actionbarMode"
+            [overlayClass]="workspaceMenuClass"
+          >
+          </igo-actionbar>
+          <button
+            class="zoom-workspace"
+            *ngIf="workspaceVisibility()"
+            [disabled]="
+              (workspaceState.workspaceSelection$ | async).length === 0
+                ? true
+                : false
+            "
+            mat-icon-button
+            color="primary"
+            collapsibleButton
+            tooltip-position="below"
+            matTooltipShowDelay="500"
+            [matTooltip]="'toastPanel.zoomOnFeaturesTooltip' | translate"
+            (click)="zoomToSelectedFeatureWks()"
+          >
+            <mat-icon
+              svgIcon="{{
+                (workspaceState.workspaceSelection$ | async).length > 1
+                  ? 'magnify-scan'
+                  : 'magnify-plus-outline'
+              }}"
+            >
+            </mat-icon>
+          </button>
+        </div>
+        <igo-entity-table-paginator
+          *ngIf="workspaceVisibility()"
+          [store]="workspace.entityStore"
+          [entitySortChange$]="workspaceEntitySortChange$"
+          [paginatorOptions]="paginatorOptions"
+          (paginatorChange)="paginatorChange($event)"
+          >
+        </igo-entity-table-paginator>
+      </div>
     </ng-container>
   </ng-container>
 
@@ -296,9 +298,7 @@
       [template]="workspace.meta.tableTemplate"
     >
     </igo-entity-table>
-    <span class="mat-typography">{{
-      workspaceNotAvailableMessage | translate
-    }}</span>
+    <span>{{workspaceNotAvailableMessage | translate}}</span>
   </ng-container>
 </app-expansion-panel>
 

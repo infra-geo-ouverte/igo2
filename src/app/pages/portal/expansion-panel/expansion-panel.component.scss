@@ -13,23 +13,37 @@
   transition:
     height 200ms cubic-bezier(.4, 0, .2, 1),
     width 200ms cubic-bezier(.4, 0, .2, 1);
+
+  &:not(.app-expansion-panel-expanded) {
+    ::ng-deep {
+      .app-expansion-panel-content {
+        display: none;
+      }
+    }
+  }
+
+  &.app-expansion-panel-expanded {
+    height: $app-expansion-panel-height;
+    width: 100%;
+    z-index: 6;
+
+    ::ng-deep {
+      .app-expansion-panel-trigger-container {
+        box-shadow: none;
+      }
+    }
+  
+    @include mobile {
+      &.footer {
+        margin-bottom: 48px;
+      }
+    }
+  }
 }
 
 .app-expansion-panel-container {
   height: 100%;
   width: 100%;
-}
-
-:host.app-expansion-panel-expanded {
-  height: $app-expansion-panel-height;
-  width: 100%;
-  z-index: 6;
-
-  @include mobile {
-    &.footer {
-      margin-bottom: 48px;
-    }
-  }
 }
 
 :host.app-expansion-panel-expanded-maximized {
