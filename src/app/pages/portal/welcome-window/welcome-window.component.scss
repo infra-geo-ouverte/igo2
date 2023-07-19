@@ -14,3 +14,9 @@
 mat-toolbar h2 {
   margin: revert;
 }
+
+.mat-dialog-container {
+  z-index: 1000;
+  box-shadow: 0 0 0 1000em rgba(0, 0, 0, 0.6);
+  transform: translate(-50%, 0);
+}

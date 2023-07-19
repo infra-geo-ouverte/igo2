@@ -1,6 +1,7 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
-import { userAgent } from '@igo2/utils';
+import { DomUtils, userAgent } from '@igo2/utils';
 import {
   LanguageService,
   ConfigService,
@@ -9,32 +10,34 @@ import {
 import { AuthOptions } from '@igo2/auth';
 import { AnalyticsListenerService } from '@igo2/integration';
 import { PwaService } from './services/pwa.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { delay, first } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public authConfig: AuthOptions;
-  private themeClass = 'blue-theme';
   public hasHeader = true;
   public hasFooter = true;
   private promptEvent: any;
+
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     protected languageService: LanguageService,
     private configService: ConfigService,
     private analyticsListenerService: AnalyticsListenerService,
-    private renderer: Renderer2,
     private titleService: Title,
     private metaService: Meta,
     private messageService: MessageService,
-    private pwaService: PwaService
+    private pwaService: PwaService,
+    private router: Router
   ) {
     this.authConfig = this.configService.getConfig('auth');
 
     this.readTitleConfig();
-    this.readThemeConfig();
     this.readDescriptionConfig();
 
     this.analyticsListenerService.listen();
@@ -42,14 +45,45 @@ export class AppComponent {
     this.detectOldBrowser();
 
     this.hasHeader = this.configService.getConfig('header.hasHeader') === undefined ? false :
-    this.configService.getConfig('header.hasHeader');
+      this.configService.getConfig('header.hasHeader');
 
     this.hasFooter = this.configService.getConfig('hasFooter') === undefined ? false :
-    this.configService.getConfig('hasFooter');
+      this.configService.getConfig('hasFooter');
 
     this.setManifest();
     this.installPrompt();
     this.pwaService.checkForUpdates();
+  }
+
+  ngOnInit(): void {
+    this.handleSplashScreen();
+  }
+
+  private handleSplashScreen(): void {
+    this.router.events
+      .pipe(
+        first((events) => events instanceof NavigationEnd),
+        delay(500),
+      )
+      .subscribe(() => {
+        this._removeSplashScreen();
+      });
+  }
+
+  private _removeSplashScreen(): void {
+    const intro = this.document.getElementById('splash-screen');
+    if (!intro) {
+      return;
+    }
+    intro.classList.add('is-destroying');
+
+    const destroyingAnimationTime = 300;
+    const stylesheet = this.document.getElementById('splash-screen-stylesheet');
+
+    setTimeout(() => {
+      DomUtils.remove(intro);
+      DomUtils.remove(stylesheet);
+    }, destroyingAnimationTime);
   }
 
   private readTitleConfig() {
@@ -57,6 +91,10 @@ export class AppComponent {
       if (title) {
         this.titleService.setTitle(title);
         this.metaService.addTag({ name: 'title', content: title });
+        const splashScreenTitle = this.document.getElementById('splash-screen-title');
+        if (splashScreenTitle) {
+          splashScreenTitle.innerText = title;
+        }
       }
     });
   }
@@ -87,13 +125,6 @@ export class AppComponent {
     }
   }
 
-
-  private readThemeConfig() {
-    const theme = this.configService.getConfig('theme') || this.themeClass;
-    if (theme) {
-      this.renderer.addClass(document.body, theme);
-    }
-  }
 
   private readDescriptionConfig() {
     const description = this.configService.getConfig('description');

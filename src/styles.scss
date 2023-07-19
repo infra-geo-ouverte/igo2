@@ -1,6 +1,6 @@
+@import '@igo2/core/all-style';
+
 @import 'style/reset.scss';
-@import 'style/theme.scss';
-//@import './qcca-theme/qcca-theme.scss';
 
 .shepherd-element[data-popper-reference-hidden]:not(.shepherd-centered) {
   opacity: 1;
