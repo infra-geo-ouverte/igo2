@@ -114,7 +114,7 @@
     "@angular/platform-browser-dynamic": "^14.3.0",
     "@babel/core": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
-    "@compodoc/compodoc": "^1.1.19",
+    "@compodoc/compodoc": "^1.1.21",
     "@types/geojson": "^7946.0.10",
     "@types/hammerjs": "^2.0.41",
     "@types/jasmine": "^3.10.6",
