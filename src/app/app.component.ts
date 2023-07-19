@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
         this.metaService.addTag({ name: 'title', content: title });
         const splashScreenTitle = this.document.getElementById('splash-screen-title');
         if (splashScreenTitle) {
-          splashScreenTitle.innerText = title
+          splashScreenTitle.innerText = title;
         }
       }
     });
