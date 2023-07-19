@@ -20,6 +20,7 @@
     z-index: 3 !important;  
     height: 100%;
     width: $app-sidenav-width;
+    box-sizing: content-box;
   
     @include mobile {
       width: $app-sidenav-width-mobile;

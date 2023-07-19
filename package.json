@@ -70,7 +70,7 @@
     "@igo2/geo": "1.15.4",
     "@igo2/integration": "1.15.4",
     "@igo2/utils": "1.15.4",
-    "@mat-datetimepicker/core": "~10.0.0",
+    "@mat-datetimepicker/core": "^11.0.3",
     "@turf/buffer": "^6.5.0",
     "@turf/point-on-feature": "^6.5.0",
     "ajv": "^6.9.1",
