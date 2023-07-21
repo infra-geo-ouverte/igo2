@@ -13,93 +13,112 @@
 
     <link rel="manifest" id="igoManifestByConfig" />
     <link rel="apple-touch-icon" href="assets/icons/icon-192x192-full.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link id="theme-styles" rel="stylesheet" />
     <meta name="theme-color" content="#1976d2" />
-</head>
+  </head>
 
-<body>
-  <app-root></app-root>
-  <div id="splash-screen" class="is-loaded">
-    <div id="splash-screen__filmstrip">
-      <img alt="" aria-hidden="true" src="assets/logo.png" />
-      <h1 id="splash-screen-title"></h1>
+  <body class="mat-typography">
+    <app-root></app-root>
+    <div id="splash-screen" class="is-loaded">
+      <div id="splash-screen__filmstrip">
+        <img alt="" aria-hidden="true" src="assets/logo.png" />
+        <h1 id="splash-screen-title"></h1>
+      </div>
+      <svg
+        id="splash-screen__spinner"
+        width="24"
+        height="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 21a9 9 0 1 0-9-9"
+          fill="none"
+          stroke="#b0bec5"
+          stroke-width="2"
+          stroke-linecap="round"
+        ></path>
+      </svg>
     </div>
-    <svg id="splash-screen__spinner" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 21a9 9 0 1 0-9-9" fill="none" stroke="#b0bec5" stroke-width="2" stroke-linecap="round"></path>
-    </svg>
-  </div>
 
-  <style id="splash-screen-stylesheet">
-    #splash-screen {
-      align-items: center;
-      background-color: #f5f7f9;
-      bottom: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      left: 0;
-      opacity: 1;
-      position: absolute;
-      right: 0;
-      top: 0;
-      transform: translateZ(0);
-      z-index: 1999;
-      transition: all 300ms;
-    }
+    <style id="splash-screen-stylesheet">
+      #splash-screen {
+        align-items: center;
+        background-color: #f5f7f9;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        left: 0;
+        opacity: 1;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translateZ(0);
+        z-index: 1999;
+        transition: all 300ms;
+      }
 
-    #splash-screen h1 {
-      font-family: sans-serif;
-      color: rgba(0, 0, 0, 0.64);
-    }
+      #splash-screen h1 {
+        font-family: sans-serif !important;
+        color: rgba(0, 0, 0, 0.64) !important;
+        font-size: 32px !important;
+        font-weight: 700 !important;
+        margin: 16px 0;
+      }
 
-    #splash-screen.is-destroying {
-      opacity: 0;
-    }
-
-    #splash-screen__filmstrip {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
-    #splash-screen__filmstrip img {
-      width: fit-content;
-      height: 95px;
-    }
-
-    #splash-screen__spinner {
-      margin-top: 0;
-      opacity: 0;
-    }
-
-    #splash-screen.is-loaded #splash-screen__spinner {
-      animation: spinner-fade 0.2s ease 0.8s,
-        spinner-rotate 1s linear infinite;
-      animation-fill-mode: forwards;
-    }
-
-    @keyframes spinner-fade {
-      from {
+      #splash-screen.is-destroying {
         opacity: 0;
       }
 
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes spinner-rotate {
-      from {
-        transform: translateZ(0) rotate(0deg);
+      #splash-screen__filmstrip {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 24px;
       }
 
-      to {
-        transform: translateZ(0) rotate(360deg);
+      #splash-screen__filmstrip img {
+        width: fit-content;
+        height: 95px;
       }
-    }
-  </style>
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
-</body>
 
+      #splash-screen__spinner {
+        margin-top: 0;
+        opacity: 0;
+      }
+
+      #splash-screen.is-loaded #splash-screen__spinner {
+        animation: spinner-fade 0.2s ease 0.8s,
+          spinner-rotate 1s linear infinite;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes spinner-fade {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes spinner-rotate {
+        from {
+          transform: translateZ(0) rotate(0deg);
+        }
+
+        to {
+          transform: translateZ(0) rotate(360deg);
+        }
+      }
+    </style>
+    <noscript
+      >Please enable JavaScript to continue using this application.</noscript
+    >
+  </body>
 </html>

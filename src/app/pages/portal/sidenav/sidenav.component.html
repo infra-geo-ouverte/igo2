@@ -1,4 +1,5 @@
 <mat-sidenav
+  class="mat-elevation-z3"
   mode="side"
   [autoFocus]="false"
   [(opened)]="opened">
@@ -27,16 +28,6 @@
             panelRightButton
             styleButton = 'icon'>
           </igo-interactive-tour>
-
-          <!-- <button *ngIf="toolbox.activeTool$ | async"
-            mat-icon-button
-            panelRightButton
-            tooltip-position="below"
-            matTooltipShowDelay="500"
-            [matTooltip]="'igo.context.sidenav.mainMenu' | translate"
-            (click)="onUnselectButtonClick()">
-            <mat-icon svgIcon="close"></mat-icon>
-          </button> -->
 
           <igo-toolbox
             class="igo-toolbox"

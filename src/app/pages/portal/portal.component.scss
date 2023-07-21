@@ -1,4 +1,51 @@
+@use '@angular/material' as mat;
+
 @import './portal.variables';
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  .navbar-container {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    display: flex;
+    width: $search-bar-width;
+    max-width: $search-bar-width;
+    z-index: 4;
+
+    &.navbar-fixed {
+      left: 0;
+      top: 0;
+      height: $app-sidenav-margin-top;
+      align-items: center;
+    }
+    
+    @include mobile {
+      width: $search-bar-width-mobile;
+      max-width: min($search-bar-width-mobile, 350px);
+    }
+
+    igo-search-bar {
+      flex: 1;
+      background-color: $app-background-color;
+      font-size: 16px;
+      margin-left: $igo-margin;
+    }
+  }
+  .workspace-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .workspace-actions {
+    display: flex;
+    align-items: center;
+  }
+}
 
 #tour-button {
   font-weight: bold;
@@ -13,20 +60,7 @@
   }
 }
 
-/*** Main ***/
-:host {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
 /*** Menu button ***/
-
-igo-menu-button {
-  position: absolute;
-  z-index: 4;
-}
-
 mat-icon.disabled {
   color: rgba(0, 0, 0, 0.38);
 }
@@ -123,24 +157,6 @@ igo-map-browser.toast-offset-attribution
   }
 }
 
-/*** Search bar ***/
-igo-search-bar {
-  background-color: $app-background-color;
-  font-size: 16px;
-  position: absolute;
-  left: $search-bar-left;
-  top: $igo-margin;
-  z-index: 4;
-  width: $search-bar-width;
-  height: $igo-icon-size;
-  margin: 0 $igo-margin;
-
-  @include mobile {
-    width: $search-bar-width-mobile;
-    max-width: 350px;
-  }
-}
-
 /*** Sidenav ***/
 mat-sidenav-container {
   height: 100%;
@@ -161,14 +177,6 @@ mat-sidenav-content {
   flex: 1 1 auto;
 }
 
-igo-actionbar {
-  padding-left: 7px;
-  padding-top: 5px;
-}
-.zoom-workspace {
-  padding-top: 5px;
-}
-
 igo-workspace-selector {
   @include mobile {
     width: 100px;
@@ -180,7 +188,7 @@ igo-entity-table-paginator {
     margin-left: -30px;
   }
 }
-igo-entity-table-paginator ::ng-deep .mat-paginator-range-label {
+igo-entity-table-paginator ::ng-deep .mat-mdc-paginator-range-label {
   @include mobile {
     margin: 10px 1px 0px 20px;
   }
@@ -195,7 +203,6 @@ igo-entity-table ::ng-deep td.mat-column-edition {
 app-expansion-panel {
   position: absolute;
   bottom: 0;
-  overflow: hidden;
   z-index: 5;
 
   @include mobile {
@@ -313,6 +320,10 @@ igo-home-extent-button {
 }
 
 igo-zoom-button {
+  ::ng-deep button {
+    @include mat.elevation(2);
+  }
+
   @include tablet {
     display: none;
   }
@@ -359,7 +370,7 @@ toast-panel-for-expansion.toast-panel-for-expansion-opened {
   }
 }
 
-.mat-table thead mat-header-row .mat-table-sticky {
+.mat-mdc-table thead mat-header-row .mat-mdc-table-sticky {
   background: none;
 }
 
@@ -377,11 +388,6 @@ app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container 
   }
 }
 
-.eye-workspace {
-  margin-left: 7px;
-  margin-top: 5px;
-}
-
 .add-feature {
   margin-top: 5px;
 }
@@ -392,8 +398,8 @@ app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container 
 
 ::ng-deep div.workspace-menu {
   max-width: fit-content !important;
-
-  div.mat-menu-content ::ng-deep span.mat-checkbox-label, div.mat-menu-content ::ng-deep div.mat-list-text {
+  /*TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.*/
+  div.mat-mdc-menu-content ::ng-deep span.mat-checkbox-label, div.mat-mdc-menu-content ::ng-deep div.mdc-list-item__primary-text {
     font-size: 12px;
   }
 }

@@ -2,7 +2,7 @@
 @import 'variables';
 
 $app-footer-height: 48px;
-$app-mobile-min-space-right: 40px;
+$app-mobile-min-space-right: 48px;
 
 $app-expansion-panel-collapsed-height: 40px;
 $app-expansion-panel-collapsed-width: 40px;
@@ -33,14 +33,14 @@ $app-toast-panel-html-height: 32vh;
 
 $app-toast-panel-html-large-height: 55vh;
 
-$app-sidenav-margin-top: 50px;
+$app-sidenav-margin-top: 48px + 5px; // Search bar height + margin-top
 $app-sidenav-height: calc(100% - #{$app-sidenav-margin-top});
 $app-sidenav-width: 400px;
 $app-sidenav-width-mobile: calc(100% - #{$app-mobile-min-space-right} - #{$igo-margin});
 
 $search-bar-left: $igo-icon-size + $igo-margin;
-$search-bar-width: calc(#{$app-sidenav-width} - #{$search-bar-left} - (2 * #{$igo-margin}));
-$search-bar-width-mobile: calc(100% - #{$app-mobile-min-space-right} - #{$search-bar-left} - (3 * #{$igo-margin}));
+$search-bar-width: $app-sidenav-width;
+$search-bar-width-mobile: calc(100% - #{$app-mobile-min-space-right} - (2 * #{$igo-margin}));
 
 $app-footer-height: 49px;
 $toast-panel-for-expansion-collapsed-height: 48px;

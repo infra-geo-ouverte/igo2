@@ -1,40 +1,50 @@
 <mat-sidenav-container class="app-main-container">
   <mat-sidenav-content>
-
-    <igo-backdrop
-      [shown]="backdropShown"
-      (click)="onBackdropClick()">
+    <igo-backdrop [shown]="backdropShown" (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <igo-menu-button *ngIf="showMenuButton"
-      [sidenavOpened]="sidenavOpened"
-      (openSidenav)="onToggleSidenavClick()">
-    </igo-menu-button>
+    <div class="navbar-container" [class.navbar-fixed]="sidenavOpened">
+      <igo-menu-button
+        *ngIf="showMenuButton"
+        [class.mat-elevation-z2]="!sidenavOpened"
+        [sidenavOpened]="sidenavOpened"
+        (openSidenav)="onToggleSidenavClick()"
+      >
+      </igo-menu-button>
 
-    <igo-search-bar *ngIf="showSearchBar"
-      #searchBar
-      [term]="searchBarTerm"
-      [termSplitter]="termSplitter"
-      [minLength]="minSearchTermLength"
-      [searchSettings]="true"
-      [forceNA]="forceCoordsNA"
-      [store]="searchStore"
-      (searchTermChange)="onSearchTermChange($event)"
-      [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
-      (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
-      [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
-      (searchResultsGeometryStatus)="onSearchResultsGeometryStatusChange($event)"
-      [reverseSearchCoordsFormatEnabled]="igoReverseSearchCoordsFormatEnabled"
-      (reverseSearchCoordsFormatStatus)="onReverseCoordsFormatStatusChange($event)"
-      (search)="onSearch($event)"
-      (clearFeature)="onClearSearch()"
-      (searchSettingsChange)="onSearchSettingsChange()">
-    </igo-search-bar>
+      <igo-search-bar
+        *ngIf="showSearchBar"
+        #searchBar
+        [class.mat-elevation-z2]="!sidenavOpened"
+        [term]="searchBarTerm"
+        [termSplitter]="termSplitter"
+        [minLength]="minSearchTermLength"
+        [searchSettings]="true"
+        [forceNA]="forceCoordsNA"
+        [store]="searchStore"
+        (searchTermChange)="onSearchTermChange($event)"
+        [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
+        (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
+        [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
+        (searchResultsGeometryStatus)="
+          onSearchResultsGeometryStatusChange($event)
+        "
+        [reverseSearchCoordsFormatEnabled]="igoReverseSearchCoordsFormatEnabled"
+        (reverseSearchCoordsFormatStatus)="
+          onReverseCoordsFormatStatusChange($event)
+        "
+        (search)="onSearch($event)"
+        (clearFeature)="onClearSearch()"
+        (searchSettingsChange)="onSearchSettingsChange()"
+      >
+      </igo-search-bar>
+    </div>
 
     <app-sidenav
       [map]="map"
       [(opened)]="sidenavOpened"
-      (toolChange)="toolChanged($event)">
+      (toolChange)="toolChanged($event)"
+    >
     </app-sidenav>
 
     <igo-map-browser
@@ -59,58 +69,90 @@
       [contextUri]="contextUri"
       (query)="onMapQuery($event)"
       [map]="map"
-      [igoContextMenu]=contextMenu
+      [igoContextMenu]="contextMenu"
       (menuPosition)="onContextMenuOpen($event)"
-      [ngClass]="{'igo-attribution-offset': map.getBaseLayers().length > 1}"
+      [ngClass]="{ 'igo-attribution-offset': map.getBaseLayers().length > 1 }"
       [@mapStateX]="sidenavOpened ? 'right' : 'left'"
       (@mapStateX.start)="updateMapBrowserClass()"
       [@mapStateY]="getControlsOffsetY()"
-      (@mapStateY.start)="updateMapBrowserClass()">
-
-      <igo-zoom-button [map]="map" color="primary"
-        [@controlsOffsetY]="getControlsOffsetY()">
-      </igo-zoom-button>
-      <igo-swipe-control [map]="map"></igo-swipe-control>
-      <igo-map-center [map]="map"></igo-map-center>
-      <igo-wake-lock-button *ngIf="showWakeLockButton"></igo-wake-lock-button>
-      <igo-offline-button [map]="map" color="primary"
-        *ngIf="showOfflineButton"
+      (@mapStateY.start)="updateMapBrowserClass()"
+    >
+      <igo-zoom-button
+        [map]="map"
+        color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
-        [@mobileOffsetY]="getToastPanelStatus()">
+      >
+      </igo-zoom-button>
+      <igo-swipe-control
+        class="mat-elevation-z2"
+        [map]="map"
+      ></igo-swipe-control>
+      <igo-map-center class="mat-elevation-z2" [map]="map"></igo-map-center>
+      <igo-wake-lock-button
+        *ngIf="showWakeLockButton"
+        class="mat-elevation-z2"
+      ></igo-wake-lock-button>
+      <igo-offline-button
+        [map]="map"
+        color="primary"
+        *ngIf="showOfflineButton"
+        class="mat-elevation-z2"
+        [@controlsOffsetY]="getControlsOffsetY()"
+        [@mobileOffsetY]="getToastPanelStatus()"
+      >
       </igo-offline-button>
       <igo-geolocate-button
         *ngIf="hasGeolocateButton"
-        [map]="map" color="primary"
+        class="mat-elevation-z2"
+        [map]="map"
+        color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
-        [@mobileOffsetY]="getToastPanelStatus()">
+        [@mobileOffsetY]="getToastPanelStatus()"
+      >
       </igo-geolocate-button>
-      <igo-rotation-button [showIfNoRotation]="showRotationButtonIfNoRotation" [map]="map" color="primary"></igo-rotation-button>
+      <igo-rotation-button
+        class="mat-elevation-z2"
+        [showIfNoRotation]="showRotationButtonIfNoRotation"
+        [map]="map"
+        color="primary"
+      ></igo-rotation-button>
       <igo-home-extent-button
         *ngIf="hasHomeExtentButton"
+        class="mat-elevation-z2"
         [map]="map"
         [extentOverride]="homeExtent"
         [centerOverride]="homeCenter"
         [zoomOverride]="homeZoom"
-        color="primary">
+        color="primary"
+      >
       </igo-home-extent-button>
       <igo-user-button
         *ngIf="auth.url"
-        [map]="map" color="primary"
+        class="mat-elevation-z2"
+        [map]="map"
+        color="primary"
         [@controlsOffsetY]="getControlsOffsetY()"
-        [@mobileOffsetY]="getToastPanelStatus()">
+        [@mobileOffsetY]="getToastPanelStatus()"
+      >
       </igo-user-button>
-      <igo-baselayers-switcher [map]="map"
+      <igo-baselayers-switcher
+        class="mat-elevation-z2"
+        [map]="map"
         [@controlsOffsetY]="getBaselayersSwitcherStatus()"
-        [useStaticIcon]="true">
+        [useStaticIcon]="true"
+      >
       </igo-baselayers-switcher>
     </igo-map-browser>
 
     <app-map-overlay
       [@controlStateY]="getControlsOffsetY()"
-      [@controlStateX]="(mediaService.media$ | async) !== 'mobile' &&
-                              sidenavOpened ? 'right' : 'left'">
+      [@controlStateX]="
+        (mediaService.media$ | async) !== 'mobile' && sidenavOpened
+          ? 'right'
+          : 'left'
+      "
+    >
     </app-map-overlay>
-
   </mat-sidenav-content>
 </mat-sidenav-container>
 
@@ -120,8 +162,15 @@
   [(expanded)]="expansionPanelExpanded"
   [maximized]="workspaceMaximize$ | async"
   [@expansionPanelSize]="getExpansionPanelStatus()"
-  [@toastOffsetY]="(isMobile() && !toastPanelOpened && queryState.store.entities$.value.length > 0 && !expansionPanelExpanded) ? 'true' : 'false'">
-
+  [@toastOffsetY]="
+    isMobile() &&
+    !toastPanelOpened &&
+    queryState.store.entities$.value.length > 0 &&
+    !expansionPanelExpanded
+      ? 'true'
+      : 'false'
+  "
+>
   <ng-container expansionPanelHeader>
     <igo-workspace-selector
       igoWorkspaceSelector
@@ -129,80 +178,107 @@
       (changeWorkspace)="workspaceState.setActiveWorkspaceByTitle($event)"
       (disableSwitch)="workspaceSwitchDisabled = $event"
       (relationLayers)="refreshRelationsWorkspace($event)"
-      (rowsInMapExtentCheckCondition)="workspaceState.rowsInMapExtentCheckCondition$.next($event)"
+      (rowsInMapExtentCheckCondition)="
+        workspaceState.rowsInMapExtentCheckCondition$.next($event)
+      "
       [store]="workspaceStore"
       [disabled]="workspaceSwitchDisabled"
-      [map]="map">
+      [map]="map"
+    >
     </igo-workspace-selector>
 
     <ng-container *ngIf="selectedWorkspace$ | async as workspace">
-      <button
-        class="eye-workspace"
-        mat-icon-button
-        [color]="workspace.layer.visible ? 'primary' : 'default'"
-        collapsibleButton
-        tooltip-position="below"
-        matTooltipShowDelay="500"
-        [matTooltip]="workspace.layer.visible ?
-                      ('igo.geo.layer.hideLayer' | translate) :
-                      ('igo.geo.layer.showLayer' | translate)"
-        (click)="workspace.layer.visible = !workspace.layer.visible">
-        <mat-icon
-          [ngClass]="{disabled: (workspace.inResolutionRange$ | async)!==true}"
-          [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'">
-        </mat-icon>
-      </button>
-      <button
-        *ngIf="isEditionWorkspace(workspace)"
-        class="add-feature"
-        mat-icon-button
-        color="primary"
-        collapsibleButton
-        tooltip-position="below"
-        matTooltipShowDelay="500"
-        [disabled]="workspace.layer.options.sourceOptions.edition.addButton === false ? true : false"
-        [matTooltip]="('workspace.addFeature') | translate"
-        (click)="addFeature(workspace)">
-        <mat-icon
-          svgIcon="plus">
-        </mat-icon>
-      </button>
-      <igo-actionbar
-        class="actionbar-workspace"
-        *ngIf="workspace.actionStore"
-        [store]="workspace.actionStore"
-        [withIcon]="true"
-        [withTitle]="actionbarWithTitle"
-        [horizontal]="true"
-        [withToggleButton]="actionbarMode === 'overlay'"
-        [iconColor]="'primary'"
-        [color]="'primary'"
-        [mode]="actionbarMode"
-        [overlayClass]="workspaceMenuClass">
-      </igo-actionbar>
-      <button
-        class="zoom-workspace"
-        *ngIf="workspaceVisibility()"
-        [disabled]= "(workspaceState.workspaceSelection$ | async).length === 0 ? true : false"
-        mat-icon-button
-        color="primary"
-        collapsibleButton
-        tooltip-position="below"
-        matTooltipShowDelay="500"
-        [matTooltip]="('toastPanel.zoomOnFeaturesTooltip') | translate"
-        (click)="zoomToSelectedFeatureWks()">
-        <mat-icon
-        svgIcon="{{(workspaceState.workspaceSelection$ | async).length > 1 ?  'magnify-scan' : 'magnify-plus-outline'}}">
-        </mat-icon>
-      </button>
-      <div class="spacer"></div>
-      <igo-entity-table-paginator
-        *ngIf="workspaceVisibility()"
-        [store]="workspace.entityStore"
-        [entitySortChange$]="workspaceEntitySortChange$"
-        [paginatorOptions]="paginatorOptions"
-        (paginatorChange)="paginatorChange($event)">
-      </igo-entity-table-paginator>
+      <div class="workspace-container">
+        <div class="workspace-actions">
+          <button
+            class="eye-workspace"
+            mat-icon-button
+            [color]="workspace.layer.visible ? 'primary' : 'default'"
+            collapsibleButton
+            tooltip-position="below"
+            matTooltipShowDelay="500"
+            [matTooltip]="
+              workspace.layer.visible
+                ? ('igo.geo.layer.hideLayer' | translate)
+                : ('igo.geo.layer.showLayer' | translate)
+            "
+            (click)="workspace.layer.visible = !workspace.layer.visible"
+          >
+            <mat-icon
+              [ngClass]="{
+                disabled: (workspace.inResolutionRange$ | async) !== true
+              }"
+              [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'"
+            >
+            </mat-icon>
+          </button>
+          <button
+            *ngIf="isEditionWorkspace(workspace)"
+            class="add-feature"
+            mat-icon-button
+            color="primary"
+            collapsibleButton
+            tooltip-position="below"
+            matTooltipShowDelay="500"
+            [disabled]="
+              workspace.layer.options.sourceOptions.edition.addButton === false
+                ? true
+                : false
+            "
+            [matTooltip]="'workspace.addFeature' | translate"
+            (click)="addFeature(workspace)"
+          >
+            <mat-icon svgIcon="plus"> </mat-icon>
+          </button>
+          <igo-actionbar
+            class="actionbar-workspace"
+            *ngIf="workspace.actionStore"
+            [store]="workspace.actionStore"
+            [withIcon]="true"
+            [withTitle]="actionbarWithTitle"
+            [horizontal]="true"
+            [withToggleButton]="actionbarMode === 'overlay'"
+            [iconColor]="'primary'"
+            [color]="'primary'"
+            [mode]="actionbarMode"
+            [overlayClass]="workspaceMenuClass"
+          >
+          </igo-actionbar>
+          <button
+            class="zoom-workspace"
+            *ngIf="workspaceVisibility()"
+            [disabled]="
+              (workspaceState.workspaceSelection$ | async).length === 0
+                ? true
+                : false
+            "
+            mat-icon-button
+            color="primary"
+            collapsibleButton
+            tooltip-position="below"
+            matTooltipShowDelay="500"
+            [matTooltip]="'toastPanel.zoomOnFeaturesTooltip' | translate"
+            (click)="zoomToSelectedFeatureWks()"
+          >
+            <mat-icon
+              svgIcon="{{
+                (workspaceState.workspaceSelection$ | async).length > 1
+                  ? 'magnify-scan'
+                  : 'magnify-plus-outline'
+              }}"
+            >
+            </mat-icon>
+          </button>
+        </div>
+        <igo-entity-table-paginator
+          *ngIf="workspaceVisibility()"
+          [store]="workspace.entityStore"
+          [entitySortChange$]="workspaceEntitySortChange$"
+          [paginatorOptions]="paginatorOptions"
+          (paginatorChange)="paginatorChange($event)"
+          >
+        </igo-entity-table-paginator>
+      </div>
     </ng-container>
   </ng-container>
 
@@ -210,26 +286,32 @@
     <igo-entity-table
       [class]="isEditionWorkspace(workspace) ? 'edition-table' : ''"
       [paginator]="workspacePaginator"
-      *ngIf="workspace.entityStore && workspace.meta && workspace.meta.tableTemplate && workspaceVisibility()"
+      *ngIf="
+        workspace.entityStore &&
+        workspace.meta &&
+        workspace.meta.tableTemplate &&
+        workspaceVisibility()
+      "
       [store]="workspace.entityStore"
       (entitySortChange)="entitySortChange()"
       (entitySelectChange)="entitySelectChange($event)"
-      [template]="workspace.meta.tableTemplate">
+      [template]="workspace.meta.tableTemplate"
+    >
     </igo-entity-table>
-    <span class="mat-typography">{{workspaceNotAvailableMessage | translate}}</span>
+    <span>{{workspaceNotAvailableMessage | translate}}</span>
   </ng-container>
-
 </app-expansion-panel>
 
 <app-toast-panel-for-expansion
   [withHeader]="false"
-  [(opened)]="toastPanelForExpansionOpened">
-
+  [(opened)]="toastPanelForExpansionOpened"
+>
   <div class="toast-panel-for-expansion-close-button-container">
     <button
       mat-icon-button
       color="warn"
-      (click)="toastPanelForExpansionOpened = false">
+      (click)="toastPanelForExpansionOpened = false"
+    >
       <mat-icon svgIcon="close"></mat-icon>
     </button>
   </div>
@@ -237,22 +319,27 @@
   <igo-workspace-widget-outlet
     *ngIf="selectedWorkspace$ | async as workspace"
     [workspace]="workspace"
-    (deactivateWidget)="onDeactivateWorkspaceWidget()">
+    (deactivateWidget)="onDeactivateWorkspaceWidget()"
+  >
   </igo-workspace-widget-outlet>
+</app-toast-panel-for-expansion>
 
-</app-toast-panel-for-expansion >
-
-<app-toast-panel *ngIf="(queryStore.empty$ | async)!==true"
+<app-toast-panel
+  *ngIf="(queryStore.empty$ | async) !== true"
   [map]="map"
   [store]="queryStore"
   [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
   [@toastPanelOffsetX]="toastPanelOffsetX$ | async"
   [@toastPanelOffsetY]="getToastPanelOffsetY()"
-  [@toastPanelMobileSidenav]="(isMobile() && sidenavOpened) || (isTablet() && isPortrait() && sidenavOpened)"
+  [@toastPanelMobileSidenav]="
+    (isMobile() && sidenavOpened) ||
+    (isTablet() && isPortrait() && sidenavOpened)
+  "
   [opened]="toastPanelOpened"
   (openedChange)="toastOpenedChange($event)"
   (fullExtentEvent)="fullExtent = $event"
-  (windowHtmlDisplayEvent)="setToastPanelHtmlDisplay($event)">
+  (windowHtmlDisplayEvent)="setToastPanelHtmlDisplay($event)"
+>
 </app-toast-panel>
 
 <ng-template #contextMenu>
@@ -260,6 +347,7 @@
     [store]="contextMenuStore"
     [withIcon]="false"
     [horizontal]="true"
-    mode="context">
+    mode="context"
+  >
   </igo-actionbar>
 </ng-template>

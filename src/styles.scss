@@ -1,6 +1,8 @@
-@import '@igo2/core/all-style';
+@use '@igo2/core/all-style';
+@use '@igo2/core/layout';
 
-@import 'style/reset.scss';
+@use 'style/reset.scss';
+@use 'style/theme.scss';
 
 .shepherd-element[data-popper-reference-hidden]:not(.shepherd-centered) {
   opacity: 1;
@@ -8,12 +10,12 @@
   pointer-events: initial;
 }
 
-.mat-tooltip-trigger {
+.mat-mdc-tooltip-trigger {
   touch-action: auto !important;
 }
 .toast-title-red {
   color:red;
-  font-size:32px;
+  font-size:22px;
   font-weight:bold;
 }
 
@@ -36,5 +38,4 @@
 
 .toast-message-a-blue:hover {
   text-decoration: underline !important;
-
 }

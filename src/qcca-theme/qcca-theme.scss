@@ -163,8 +163,7 @@ box-shadow: 0 1px 4px rgb(34 54 84 / 24%);
 
 // FONTS
 
-::ng-deep .qcca-theme .mat-toolbar.mat-primary h2, ::ng-deep .igo-panel-title, ::ng-deep .igo-panel-header h3, ::ng-deep .qcca-theme igo-panel > div.igo-panel-header, ::ng-deep .qcca-theme igo-panel > div.igo-panel-header h3,
-.igo-panel-title[_ngcontent-eeh-c247], ::ng-deep .igo-panel-title[_ngcontent-eeh-c247]{
+::ng-deep .qcca-theme .mat-toolbar.mat-primary h2, ::ng-deep .igo-panel-title, ::ng-deep .igo-panel-header h3, ::ng-deep .qcca-theme igo-panel > div.igo-panel-header, ::ng-deep .qcca-theme igo-panel > div.igo-panel-header h3 {
     color: white!important;
 }
 
@@ -176,11 +175,11 @@ p {
     margin-bottom: 24px;
 }
 
-h1, h2, h4, h5, h6, .mat-dialog-title { //h3 a été retiré car en conflit avec igo-panel-title
+h1, h2, h4, h5, h6, .mat-mdc-dialog-title { //h3 a été retiré car en conflit avec igo-panel-title
   font-family: 'Roboto', sans-serif!important;
-  font-weight: 600;
+  font-weight: 500;
   color: #223654;
-  }
+}
   
 h1 {
   font-size: 2rem;
@@ -197,7 +196,7 @@ h1:after {
   padding-top: 0.4rem;
   border-bottom: 4px solid #f09686;
   margin-bottom: 1rem;
-  }
+}
 
 @media (max-width: 1200px) {
     h1 {
@@ -279,7 +278,7 @@ span.surtitre {
     margin-bottom: 0px;
 }
 
-  .mat-dialog-title:after {
+  .mat-mdc-dialog-title:after {
       content: "";
       display: block;
       margin: 0;
@@ -294,16 +293,21 @@ span.surtitre {
 
 // ANGULAR MATERIAL
 
-::ng-deep .mat-stroked-button {
+::ng-deep .mat-mdc-outlined-button {
     border: 2px solid currentColor;
 }
 
-::ng-deep .mat-button, ::ng-deep .mat-icon-button, ::ng-deep .mat-stroked-button, ::ng-deep .mat-flat-button, ::ng-deep .mat-form-field-outline-start, ::ng-deep .mat-form-field-outline-end {
-    border-radius: 0!important;
+::ng-deep {
+    .mat-mdc-button, 
+    .mat-mdc-icon-button, 
+    .mat-mdc-outlined-button, 
+    .mat-mdc-unelevated-button {
+        border-radius: 0!important;
+    }
 }
 
-::ng-deep .mat-flat-button, ::ng-deep button, ::ng-deep .mat-raised-button, ::ng-deep .mat-raised-button,
-::ng-deep button, button, .mat-flat-button, ::ng-deep .mat-raised-button, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep .blue-theme .mat-flat-button, 
+::ng-deep .mat-mdc-unelevated-button, ::ng-deep button, ::ng-deep .mat-mdc-raised-button, ::ng-deep .mat-raised-button,
+::ng-deep button, button, .mat-flat-button, ::ng-deep .mat-raised-button, ::ng-deep .mat-mdc-fab, ::ng-deep .mat-mdc-mini-fab, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep .blue-theme .mat-flat-button, 
 ::ng-deep .mat-raised-button, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep span.mat-button-wrapper, 
 ::ng-deep .mat-icon-no-color .ng-star-inserted svg {
     color: #095797!important;
@@ -313,16 +317,23 @@ span.surtitre {
     border-radius: 0 !important;
 }
 
-::ng-deep .qcca-theme .mat-button-toggle-checked, ::ng-deep .igo-list-item-selected, ::ng-deep .mat-focus-indicator .mat-line, ::ng-deep .ng-star-inserted,
-::ng-deep .mat-selected, ::ng-deep .select div:hover, ::ng-deep .qcca-theme .mat-focus-indicator {
-    color: #f2f1f1!important;
+/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
+::ng-deep {
+    .qcca-theme .mat-button-toggle-checked, 
+    .igo-list-item-selected, 
+    .mat-focus-indicator .mat-line, 
+    .ng-star-inserted,
+    .select div:hover, 
+    .qcca-theme .mat-focus-indicator {
+        color: #f2f1f1!important;
+    }
 }
 
-.mat-list-item:hover {
+.mat-mdc-list-item:hover {
     background: #dae6f0!important;
 }
 
-.mat-list-item, .mat-list-item-content, .mat-list-item-content:hover, .qcca-theme, .qcca-theme .mat-list-base, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title) .mat-icon svg:hover, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title).selected .mat-icon svg,
+.mat-mdc-list-item, .mat-list-item-content, .mat-list-item-content:hover, .qcca-theme, .qcca-theme .mat-mdc-list-base, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title) .mat-icon svg:hover, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title).selected .mat-icon svg,
 ::ng-deep igo-actionbar-item .mat-focus-indicator .mat-icon svg, body > app-root > app-portal > mat-sidenav-container > mat-sidenav-content > app-sidenav > mat-sidenav > div > div > div > igo-panel > div.igo-panel-content > igo-toolbox > igo-actionbar > mat-list > igo-actionbar-item button.mat-focus-indicator .mat-icon svg{
     color: #223654!important;
 }
