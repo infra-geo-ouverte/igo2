@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { ConfigService, LanguageService } from '@igo2/core';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,8 +13,7 @@ import { WelcomeWindowService } from './welcome-window.service';
 export class WelcomeWindowComponent implements OnInit, OnDestroy {
   // isVisible = true;
   showAgain = false;
-  public discoverTitleInLocale$: Observable<string> =
-    of(this.configService.getConfig('welcomeWindow.discoverTitleInLocale') || this.configService.getConfig('title'));
+  public discoverTitleInLocale$: Observable<string>;
   private title$$: Subscription;
   public html$: BehaviorSubject<string> = new BehaviorSubject(undefined);
 
@@ -23,7 +22,12 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
     private welcomeWindowService: WelcomeWindowService,
     private configService: ConfigService,
     protected languageService: LanguageService
-  ) { }
+  ) {
+    this.discoverTitleInLocale$ = of(
+      this.configService.getConfig('welcomeWindow.discoverTitleInLocale') ||
+        this.configService.getConfig('title')
+    );
+  }
 
   ngOnInit(): void {
     this.computeHtml();
