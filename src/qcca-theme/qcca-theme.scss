@@ -306,8 +306,8 @@ span.surtitre {
     }
 }
 
-::ng-deep .mat-mdc-unelevated-button, ::ng-deep button, ::ng-deep .mat-mdc-raised-button, ::ng-deep .mat-raised-button,
-::ng-deep button, button, .mat-flat-button, ::ng-deep .mat-raised-button, ::ng-deep .mat-mdc-fab, ::ng-deep .mat-mdc-mini-fab, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep .blue-theme .mat-flat-button, 
+::ng-deep .mat-mdc-unelevated-button, ::ng-deep button, ::ng-deep .mat-mdc-raised-button, ::ng-deep .mat-mdc-raised-button,
+::ng-deep button, button, .mat-mdc-unelevated-button, ::ng-deep .mat-raised-button, ::ng-deep .mat-mdc-fab, ::ng-deep .mat-mdc-mini-fab, ::ng-deep .mat-mdc-fab, ::ng-deep .mat-mdc-mini-fab, ::ng-deep .blue-theme .mat-flat-button, 
 ::ng-deep .mat-raised-button, ::ng-deep .mat-fab, ::ng-deep .mat-mini-fab, ::ng-deep span.mat-button-wrapper, 
 ::ng-deep .mat-icon-no-color .ng-star-inserted svg {
     color: #095797!important;
@@ -317,7 +317,6 @@ span.surtitre {
     border-radius: 0 !important;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
 ::ng-deep {
     .qcca-theme .mat-button-toggle-checked, 
     .igo-list-item-selected, 
@@ -333,7 +332,7 @@ span.surtitre {
     background: #dae6f0!important;
 }
 
-.mat-mdc-list-item, .mat-list-item-content, .mat-list-item-content:hover, .qcca-theme, .qcca-theme .mat-mdc-list-base, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title) .mat-icon svg:hover, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title).selected .mat-icon svg,
+.mat-mdc-list-item, .mat-mdc-list-item-content, .mat-list-item-content:hover, .qcca-theme, .qcca-theme .mat-mdc-list-base, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title) .mat-icon svg:hover, .qcca-theme igo-toolbox.color-primary > igo-actionbar:not(.with-title).selected .mat-icon svg,
 ::ng-deep igo-actionbar-item .mat-focus-indicator .mat-icon svg, body > app-root > app-portal > mat-sidenav-container > mat-sidenav-content > app-sidenav > mat-sidenav > div > div > div > igo-panel > div.igo-panel-content > igo-toolbox > igo-actionbar > mat-list > igo-actionbar-item button.mat-focus-indicator .mat-icon svg{
     color: #223654!important;
 }
