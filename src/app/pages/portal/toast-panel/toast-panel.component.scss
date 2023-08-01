@@ -25,10 +25,6 @@
     outline: none;
   }
 
-  igo-panel ::ng-deep h3 {
-    display: flex;
-  }
-
   igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelleftbutton],
   igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelrightbutton] {
     margin: 0;
@@ -58,10 +54,6 @@
 
   .swipe-fix {
     touch-action: pinch-zoom !important;
-  }
-
-  igo-actionbar {
-    overflow: hidden;
   }
 }
 
