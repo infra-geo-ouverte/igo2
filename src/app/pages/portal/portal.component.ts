@@ -74,8 +74,11 @@ import {
   MapExtent,
   moveToOlFeatures,
   FeatureMotion,
-  ConfigFileToGeoDBService
+  ConfigFileToGeoDBService,
+  FeatureDataSource
 } from '@igo2/geo';
+
+import * as olGeom from 'ol/geom';
 
 import {
   ToolState,
@@ -101,8 +104,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { ObjectUtils } from '@igo2/utils';
+import { ObjectUtils, uuid } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
+import { KEY_FORMAT_JWK } from '@azure/msal-browser/dist/utils/BrowserConstants';
 
 @Component({
   selector: 'app-portal',
@@ -395,6 +399,16 @@ export class PortalComponent implements OnInit, OnDestroy {
         handler: () => this.changeStyle()
       },
       {
+        id: 'Change new points style',
+        title: 'Change new points style',
+        handler:() => this.changePointsStyle()
+      },
+      {
+        id: 'addLayer',
+        title: 'addLayer Point',
+        handler: () => this.addLayerWithPoint(this.contextMenuCoord)
+      },
+      {
       id: 'coordinates',
       title: 'coordinates',
       handler: () => this.searchCoordinate(this.contextMenuCoord)
@@ -649,6 +663,38 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavMediaAndOrientation$$.unsubscribe();
   }
 
+  changePointsStyle() {
+    const lastLayer = this.map.getLayerById('layerWithPoints');
+
+    const pointGeoStyle: any = {
+      "name": "Basic star fill",
+      "rules": [
+        {
+          "name": "Rule 2",
+          "symbolizers": [
+            {
+              "kind": "Mark",
+              "wellKnownName": "star",
+              "color": "#ff0000",
+              "radius": 15
+            }
+          ]
+        }
+      ]
+    };
+
+    const olParser2 = new OpenLayersParser;
+    olParser2.writeStyle(pointGeoStyle)
+    .then((output) => {
+      console.log("output", output);
+      (lastLayer.ol as any).setStyle(output.output)
+      console.log("output", output.output)
+    })
+    .catch(error => console.log(error));
+    console.log("lastLayer", lastLayer)
+
+  }
+
   changeStyle() {
     const lastLayer = this.map.layers
     .filter(l => l.showInLayerList)
@@ -662,8 +708,10 @@ export class PortalComponent implements OnInit, OnDestroy {
           "symbolizers": [
             {
               "kind": "Mark",
-              "wellKnownName": "circle",
+              "wellKnownName": "triangle",
               "color": "#ff8000",
+              "strokeColor": "#000000",
+              "rotate": 90,
               "radius": 30
             },
             {
@@ -677,15 +725,16 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       ]
     };
+
     const olParser = new OpenLayersParser();
     olParser.writeStyle(geoStylerStyle)
     .then((output) => {
-      console.log(output);
+      console.log("output", output);
       (lastLayer.ol as any).setStyle(output.output)
-      console.log(output.output)
+      console.log("output", output.output)
     })
     .catch(error => console.log(error));
-    console.log(lastLayer)
+    console.log("lastLayer", lastLayer)
   }
 
   /**
@@ -955,6 +1004,29 @@ export class PortalComponent implements OnInit, OnDestroy {
   searchCoordinate(coord: [number, number]) {
     this.searchBarTerm = (!this.igoReverseSearchCoordsFormatEnabled) ?
     coord.map((c) => c.toFixed(6)).join(', ') : coord.reverse().map((c) => c.toFixed(6)).join(', ');
+  }
+
+  addLayerWithPoint(coord: [number, number]) {
+    let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
+    if (!layer) {
+      layer = new VectorLayer({
+        title: 'Layer de points créé afin de changer le style.',
+        isIgoInternalLayer: true,
+        id: `layerWithPoints`,
+        zIndex: 200,
+        source: new FeatureDataSource(),
+        igoStyle: undefined,
+        showInLayerList: true,
+        exportable: true,
+        browsable: false,
+        workspace: { enabled: true }
+      });
+      this.map.addLayer(layer);
+    }
+    const geometry4326 = new olGeom.Point(coord);
+    const geometryMapProjection = geometry4326.transform('EPSG:4326',this.map.projection);
+    const feature = new olFeature({ id: uuid(), geometry: geometryMapProjection });
+    layer.dataSource.ol.addFeature(feature)
   }
 
   updateMapBrowserClass() {
