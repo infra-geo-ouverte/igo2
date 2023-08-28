@@ -87,6 +87,9 @@ export const environment: Environment = {
         params: {
           limit: '5'
         }
+      },
+      cadastre: {
+        available: false
       }
     },
     depot: {
