@@ -106,7 +106,6 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils, uuid } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
-import { KEY_FORMAT_JWK } from '@azure/msal-browser/dist/utils/BrowserConstants';
 
 @Component({
   selector: 'app-portal',
@@ -687,11 +686,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     olParser2.writeStyle(pointGeoStyle)
     .then((output) => {
       console.log("output", output);
-      (lastLayer.ol as any).setStyle(output.output)
-      console.log("output", output.output)
+      (lastLayer.ol as any).setStyle(output.output);
+      console.log("output", output.output);
     })
     .catch(error => console.log(error));
-    console.log("lastLayer", lastLayer)
+    console.log("lastLayer", lastLayer);
 
   }
 
@@ -699,7 +698,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const lastLayer = this.map.layers
     .filter(l => l.showInLayerList)
     .filter(l => l.dataSource.options.type === 'wfs').pop();
-	
+
     const geoStylerStyle: any = {
       "name": "Basic Circle",
       "rules": [
@@ -730,11 +729,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     olParser.writeStyle(geoStylerStyle)
     .then((output) => {
       console.log("output", output);
-      (lastLayer.ol as any).setStyle(output.output)
-      console.log("output", output.output)
+      (lastLayer.ol as any).setStyle(output.output);
+      console.log("output", output.output);
     })
     .catch(error => console.log(error));
-    console.log("lastLayer", lastLayer)
+    console.log("lastLayer", lastLayer);
   }
 
   /**
@@ -1026,7 +1025,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const geometry4326 = new olGeom.Point(coord);
     const geometryMapProjection = geometry4326.transform('EPSG:4326',this.map.projection);
     const feature = new olFeature({ id: uuid(), geometry: geometryMapProjection });
-    layer.dataSource.ol.addFeature(feature)
+    layer.dataSource.ol.addFeature(feature);
   }
 
   updateMapBrowserClass() {
