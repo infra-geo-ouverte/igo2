@@ -13,17 +13,20 @@
       },
       "igoStyle": {
         "geoStylerStyle": {
-          "name": "GeoStyler Test",
-          "symbolizers":[
-            {
-            "kind": "Mark",
-            "color": "#ff0000",
-            "width": 5
-            }
-          ],
-          "scaleDenominator": {
-            "min": 50,
-            "max": 200
+          "global": {
+            "name": "Hola",
+            "rules": [
+              {
+                "names": "test",
+                "symbolizers": [
+                  {
+                    "kind": "Fill",
+                    "color": "#0b64e1",
+                    "fillOpacity": 0.6
+                  }
+                ]
+              }
+            ]
           }
         }
       }
@@ -41,48 +44,7 @@
           "fieldNameGeometry": "geometry",
           "maxFeatures": 5001,
           "outputFormat": "geojson"
-        },
-
-      "ogcFilters": {
-        "enabled": true,
-        "editable": true,
-        "allowedOperatorsType": "all",
-        "filters": {
-          "operator": "PropertyIsEqualTo",
-          "propertyName": "orgresp",
-          "expression": "Bell"
-        },
-        "pushButtons": {
-          "groups": [
-            {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
-          ],
-          "bundles": [
-            {
-              "id": "id1",
-              "logical": "Or",
-              "selectors": [
-                {
-                  "title": "Bell",
-                  "enabled": true,
-                  "filters": {
-                    "operator": "PropertyIsEqualTo",
-                    "propertyName": "orgresp",
-                    "expression": "Bell"
-                  }
-                },
-                {
-                  "title": "MTQ",
-                  "enabled": false,
-                  "filters": {
-                    "operator": "PropertyIsEqualTo",
-                    "propertyName": "orgresp",
-                    "expression": "MTQ"
-                  }
-                }
-              ]
-            }
-          ]
-      }}
+        }
       }, 
       "igoStyle": {
         "geoStylerStyle": {
@@ -91,6 +53,11 @@
             "rules": [
               {
                 "name": "Rule 2",
+                "filter": [
+                  "==",
+                  "orgresp",
+                  "Bell"
+                ],
                 "symbolizers": [
                   {
                     "kind": "Mark",
