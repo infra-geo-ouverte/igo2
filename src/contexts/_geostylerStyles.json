@@ -86,15 +86,23 @@
       }, 
       "igoStyle": {
         "geoStylerStyle": {
-          "name": "WFS GeoStyler Test",
-          "symbolizers":[
-            {
-            "kind": "Mark",
-            "wellKnownName": "circle",
-            "color": "#fc0000",
-            "radius": 92
-            }
-          ]
+          "global": {
+            "name": "Basic star fill",
+            "rules": [
+              {
+                "name": "Rule 2",
+                "symbolizers": [
+                  {
+                    "kind": "Mark",
+                    "wellKnownName": "star",
+                    "color": "#ff0000",
+                    "radius": 15
+                  }
+                ]
+              }
+            ]
+
+          }
         }
       }
     }
