@@ -271,7 +271,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           featureProjection: this.map.projection
         }
       );
-      moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Default);
+      moveToOlFeatures(this.map.viewController, [localOlFeature], FeatureMotion.Default);
     }
   }
 
@@ -319,8 +319,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           return;
         }
         const selectedOlFeature = featureToOl(selectedResult.data, this.map.projection);
-        const selectedOlFeatureExtent = computeOlFeaturesExtent(this.map, [selectedOlFeature]);
-        this.isSelectedResultOutOfView$.next(featuresAreOutOfView(this.map, selectedOlFeatureExtent));
+        const selectedOlFeatureExtent = computeOlFeaturesExtent([selectedOlFeature], this.map.viewProjection);
+        this.isSelectedResultOutOfView$.next(featuresAreOutOfView(this.map.getExtent(), selectedOlFeatureExtent));
       });
   }
 
@@ -393,7 +393,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
               featureProjection: this.map.projection
             }
           );
-          moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Zoom);
+          moveToOlFeatures(this.map.viewController, [localOlFeature], FeatureMotion.Zoom);
         }
       },
       {
@@ -417,7 +417,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
             });
             olFeatures.push(localOlFeature);
           }
-          moveToOlFeatures(this.map, olFeatures, FeatureMotion.Zoom);
+          moveToOlFeatures(this.map.viewController, olFeatures, FeatureMotion.Zoom);
         }
       },
       {
@@ -498,7 +498,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
     const myOlFeature = featureToOl(result.data, this.map.projection);
     const olGeometry = myOlFeature.getGeometry();
-    if (featuresAreTooDeepInView(this.map, olGeometry.getExtent() as [number, number, number, number], 0.0025)) {
+    if (featuresAreTooDeepInView(this.map.viewController, olGeometry.getExtent() as [number, number, number, number], 0.0025)) {
       const extent = olGeometry.getExtent();
       const x = extent[0] + (extent[2] - extent[0]) / 2;
       const y = extent[1] + (extent[3] - extent[1]) / 2;
@@ -605,7 +605,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           featureProjection: this.map.projection
         }
       );
-      moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Default);
+      moveToOlFeatures(this.map.viewController, [localOlFeature], FeatureMotion.Default);
     }
 
     this.isResultSelected$.next(true);
@@ -788,7 +788,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         featureProjection: this.map.projection
       }
     );
-    moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Zoom);
+    moveToOlFeatures(this.map.viewController, [localOlFeature], FeatureMotion.Zoom);
   }
 
   swipe(action: string) {

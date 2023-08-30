@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -34,22 +34,30 @@
               "src/locale",
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/common/assets/",
+                "input": "../../packages/common/src/assets/",
                 "output": "./assets/igo2/common/"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/core/assets/",
+                "input": "../../dist/core/assets/",
                 "output": "./assets/igo2/core/"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/core/theming/prebuilt-themes",
+                "input": "../../dist/core/locale/",
+                "output": "./locale/libs_locale",
+                "ignore": [
+                  "**/*.core.json"
+                ]
+              },
+              {
+                "glob": "**/*",
+                "input": "../../dist/core/theming/prebuilt-themes",
                 "output": "./assets/igo2/core/theming/prebuilt-themes"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/geo/assets/",
+                "input": "../../packages/geo/src/assets/",
                 "output": "./assets/igo2/geo/"
               },
               "src/manifest.webmanifest"
@@ -171,7 +179,11 @@
           "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "igo2:build"
+            "browserTarget": "igo2:build",
+            "host": "0.0.0.0",
+            "port": 4201,
+            "hmr": true,
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "developpement": {
