@@ -13,6 +13,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start-link": "ng serve --configuration developpement-link",
     "start-pwa": "ng build --configuration pwa --output-path ./dist/pwa && npm run serve.pwa",
     "build": "ng build",
     "lint": "ng lint",
