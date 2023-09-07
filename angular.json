@@ -131,7 +131,6 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "tsConfig": "src/tsconfig.app-link.json",
               "assets": [
                 "src/favicon.ico",
                 "src/assets",
