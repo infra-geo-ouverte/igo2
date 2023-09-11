@@ -133,7 +133,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public showWakeLockButton = false;
   public showRotationButtonIfNoRotation = false;
   public hasFeatureEmphasisOnSelection: Boolean = false;
-  public workspaceNotAvailableMessage: String = 'workspace.disabled.resolution';
+  public workspaceNotAvailableMessage: string = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
   public workspaceEntitySortChange$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public workspaceSwitchDisabled = false;
@@ -325,7 +325,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private contextState: ContextState,
     private mapState: MapState,
     private searchState: SearchState,
-    private queryState: QueryState,
+    public queryState: QueryState,
     private toolState: ToolState,
     private searchSourceService: SearchSourceService,
     private configService: ConfigService,
@@ -1187,7 +1187,7 @@ export class PortalComponent implements OnInit, OnDestroy {
                   featureProjection: this.map.projection
                 })
               );
-            const totalExtent = computeOlFeaturesExtent(this.map, searchResultsOlFeatures);
+            const totalExtent = computeOlFeaturesExtent(searchResultsOlFeatures, this.map.viewProjection);
             this.map.viewController.zoomToExtent(totalExtent);
           });
       }
@@ -1580,7 +1580,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         });
         olFeaturesSelected.push(localOlFeature);
     }
-    moveToOlFeatures(this.map, olFeaturesSelected, FeatureMotion.Zoom);
+    moveToOlFeatures(this.map.viewController, olFeaturesSelected, FeatureMotion.Zoom);
   }
 
 }
