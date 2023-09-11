@@ -14,6 +14,11 @@
     "secure": false,
     "changeOrigin": true
   },
+  "/services/": {
+    "target": "https://geoegl.msp.gouv.qc.ca",
+    "secure": false,
+    "changeOrigin": true
+  },  
   "/swtq": {
     "target": "https://ws.mapserver.transports.gouv.qc.ca",
     "secure": false,

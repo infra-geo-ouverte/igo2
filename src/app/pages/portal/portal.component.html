@@ -174,7 +174,6 @@
   <ng-container expansionPanelHeader>
     <igo-workspace-selector
       igoWorkspaceSelector
-      (toolToActivate)="toolToActivateFromWorkspace($event)"
       (changeWorkspace)="workspaceState.setActiveWorkspaceByTitle($event)"
       (disableSwitch)="workspaceSwitchDisabled = $event"
       (relationLayers)="refreshRelationsWorkspace($event)"

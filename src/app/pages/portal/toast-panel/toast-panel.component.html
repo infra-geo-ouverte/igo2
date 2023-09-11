@@ -28,6 +28,7 @@
       matTooltipShowDelay="500"
       (click)="zoomTo()">
       <mat-icon
+      aria-hidden="false"
       [matBadge]="(isSelectedResultOutOfView$ | async) ? '!' : ''"
       matBadgeColor="accent"
       matBadgeSize="small"
@@ -67,7 +68,7 @@
     </button>
 
     <button
-     *ngIf = "isDesktop()"
+     *ngIf = "opened && isDesktop()"
       mat-icon-button
       igoStopPropagation
       panelRightButton
