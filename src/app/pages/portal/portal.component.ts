@@ -524,10 +524,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
 
-  toolToActivateFromWorkspace(event: unknown): void {
-    // @todo...
-  }
-
   setToastPanelHtmlDisplay(value) {
     this.toastPanelHtmlDisplay = value;
     this.computeToastPanelOffsetX();
