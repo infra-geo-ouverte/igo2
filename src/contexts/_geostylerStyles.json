@@ -6,6 +6,7 @@
       "title": "World,  Geostyler definition's based",
       "zIndex": 10,
       "id": "gs-style",
+      "visible": false,
       "sourceOptions": {
         "queryable": false,
         "type": "mvt",
@@ -69,6 +70,47 @@
               }
             ]
 
+          }
+        }
+      }
+    },
+    {
+      "title": "Polygons - MVT - Hover",
+      "id": "mvtsbap",
+      "visible": true,
+      "sourceOptions": {
+        "queryable": true,
+        "queryTitle": "nom_unite_",
+        "featureClass": "feature",
+        "type": "mvt",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_centr_servc_geomt_act&map.imagetype=mvt"
+      },
+      "igoStyle":{
+        "geoStylerStyle":{
+          "hover":{
+            "name": "Geostyler Hover Basic Fill",
+            "rules":[
+              {
+                "name": "Rule Basic Fill",
+                "symbolizers": [
+                  {
+                    "kind": "Fill",
+                    "color": "#006aff",
+                    "outlineColor": "#000000"
+                  }
+                ]
+              },
+              {
+                "name": "Mouse Over Fill",
+                "symbolizers": [
+                  {
+                    "kind": "Fill",
+                    "color": "#ff0000",
+                    "outlineColor": "#ffffff"
+                  }
+                ]
+              }
+            ]
           }
         }
       }
