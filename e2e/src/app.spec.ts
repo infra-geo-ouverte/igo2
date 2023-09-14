@@ -1,0 +1,19 @@
+describe('My First Test', () => {
+  const url = 'http://localhost:4201';
+/*  it('Visits the initial project page', () => {
+    cy.visit('/');
+    // differ on various environnement with auth options.
+    // cy.get('.anonymous').click();
+    cy.contains('IGO2');
+  });*/
+  it('Check the config file', () => {
+    cy.visit('/');
+    cy.request('GET', `${url}/config/config.json`).then(
+      (response) => {
+        expect(response.body).to.have.property('title', 'IGO'); // true
+        expect(response.body).to.have.property('theme', 'blue-theme'); // true
+      }
+    );
+  });
+
+});
