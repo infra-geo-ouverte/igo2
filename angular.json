@@ -171,7 +171,8 @@
           "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "igo2:build"
+            "browserTarget": "igo2:build",
+            "port": 4201
           },
           "configurations": {
             "developpement": {
@@ -222,6 +223,23 @@
               "src/**/*.html"
             ]
           }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "configFile": "e2e/cypress.config.ts",
+            "devServerTarget": "igo2:serve",
+            "browser": "chrome"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "igo2:serve:production"
+            },
+            "local": {
+              "watch": true,
+              "headless": false
+            }
+          }
         }
       }
     },
@@ -230,10 +248,16 @@
       "projectType": "application",
       "architect": {
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "igo2:serve"
+            "devServerTarget": "igo2-e2e:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "igo2-e2e:serve:production"
+            }
           }
         },
         "lint": {
@@ -249,7 +273,8 @@
   },
   "cli": {
     "schematicCollections": [
-      "@angular-eslint/schematics"
+      "@angular-eslint/schematics",
+      "@schematics/angular"
     ],
     "cache": {
       "enabled": false,
