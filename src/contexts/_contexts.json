@@ -54,5 +54,9 @@
   {
     "uri": "addLayerFromIndex",
     "title": "Ajout de couche à partir d'un index"
+  },
+  {
+    "uri": "keepCurrentViewFalse",
+    "title": "Un contexte qui impose sa vue"
   }
 ]
