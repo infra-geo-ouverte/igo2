@@ -146,10 +146,10 @@
         }
       },
       {
-      "element": "igo-home-extent-button",
-      "title": "interactiveTour.global.home-extent-title",
-      "text": "interactiveTour.global.home-extent-text",
-      "noBackButton": true
+        "element": "igo-home-extent-button",
+        "title": "interactiveTour.global.home-extent-title",
+        "text": "interactiveTour.global.home-extent-text",
+        "noBackButton": true
       },
       {
         "element": "igo-geolocate-button",
@@ -346,7 +346,7 @@
       {
         "element": "div.buttons button:first-of-type",
         "text": "interactiveTour.spatial-filter.initialize",
-        "beforeShow":{
+        "beforeShow": {
           "element": "div.mat-tab-labels div:first-of-type",
           "action": "click"
         }

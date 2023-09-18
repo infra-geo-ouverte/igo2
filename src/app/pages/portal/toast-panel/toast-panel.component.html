@@ -1,13 +1,17 @@
 <ng-template #toast>
   <igo-panel
     *ngIf="store.entities$ | async"
-    [ngClass] = "getClassPanel()"
+    [ngClass]="getClassPanel()"
     [id]="setHeighPanelTabsMode()"
-    [title]="resultSelected$.value ? getTitle(resultSelected$.value) : ('toastPanel.title' | translate )"
+    [title]="
+      resultSelected$.value
+        ? getTitle(resultSelected$.value)
+        : ('toastPanel.title' | translate)
+    "
     (click)="onToggleClick($event)"
     tabindex="0"
-    (keydown)="handleKeyboardEvent($event)">
-
+    (keydown)="handleKeyboardEvent($event)"
+  >
     <igo-actionbar
       id="igo-actionbar"
       panelLeftButton
@@ -16,7 +20,8 @@
       [icon]="icon"
       [withTitle]="actionbarMode === 'overlay'"
       [horizontal]="true"
-      [mode]="actionbarMode">
+      [mode]="actionbarMode"
+    >
     </igo-actionbar>
 
     <button
@@ -24,22 +29,44 @@
       mat-icon-button
       igoStopPropagation
       panelLeftButton
-      [matTooltip]="((isSelectedResultOutOfView$ | async) ? 'toastPanel.zoomOnFeatureTooltipOutOfView' : 'toastPanel.zoomOnFeatureTooltip') | translate"
+      [matTooltip]="
+        ((isSelectedResultOutOfView$ | async)
+          ? 'toastPanel.zoomOnFeatureTooltipOutOfView'
+          : 'toastPanel.zoomOnFeatureTooltip'
+        ) | translate
+      "
       matTooltipShowDelay="500"
-      (click)="zoomTo()">
+      (click)="zoomTo()"
+    >
       <mat-icon
-      aria-hidden="false"
-      [matBadge]="(isSelectedResultOutOfView$ | async) ? '!' : ''"
-      matBadgeColor="accent"
-      matBadgeSize="small"
-      [matBadgeHidden]="(isSelectedResultOutOfView$ | async)!==true"     
-      svgIcon="magnify-plus-outline"></mat-icon>
+        aria-hidden="false"
+        [matBadge]="(isSelectedResultOutOfView$ | async) ? '!' : ''"
+        matBadgeColor="accent"
+        matBadgeSize="small"
+        [matBadgeHidden]="(isSelectedResultOutOfView$ | async) !== true"
+        svgIcon="magnify-plus-outline"
+      ></mat-icon>
     </button>
 
-    <button *ngIf="hasGeoService()" mat-icon-button igoStopPropagation panelLeftButton tooltip-position="below"
-      [matTooltip]="((potententialLayerisAdded$ | async) ? 'toastPanel.removeLayer' : 'toastPanel.addLayer') | translate"
-      matTooltipShowDelay="500" [color]="(potententialLayerisAdded$ | async) ? 'warn' : ''" (click)="handleLayer()">
-      <mat-icon [svgIcon]="(potententialLayerisAdded$ | async) ? 'delete' : 'plus'">
+    <button
+      *ngIf="hasGeoService()"
+      mat-icon-button
+      igoStopPropagation
+      panelLeftButton
+      tooltip-position="below"
+      [matTooltip]="
+        ((potententialLayerisAdded$ | async)
+          ? 'toastPanel.removeLayer'
+          : 'toastPanel.addLayer'
+        ) | translate
+      "
+      matTooltipShowDelay="500"
+      [color]="(potententialLayerisAdded$ | async) ? 'warn' : ''"
+      (click)="handleLayer()"
+    >
+      <mat-icon
+        [svgIcon]="(potententialLayerisAdded$ | async) ? 'delete' : 'plus'"
+      >
       </mat-icon>
     </button>
 
@@ -51,47 +78,58 @@
       panelLeftButton
       [matTooltip]="'toastPanel.previousFeatureTooltip' | translate"
       matTooltipShowDelay="500"
-      (click)="previousResult()">
+      (click)="previousResult()"
+    >
       <mat-icon svgIcon="chevron-left"></mat-icon>
     </button>
 
     <button
       *ngIf="resultSelected$.value"
-      [disabled]="results[results.length-1].meta.id === resultSelected$.value.meta.id"
+      [disabled]="
+        results[results.length - 1].meta.id === resultSelected$.value.meta.id
+      "
       mat-icon-button
       igoStopPropagation
       panelRightButton
       [matTooltip]="'toastPanel.nextFeatureTooltip' | translate"
       matTooltipShowDelay="500"
-      (click)="nextResult()">
+      (click)="nextResult()"
+    >
       <mat-icon svgIcon="chevron-right"></mat-icon>
     </button>
 
     <button
-     *ngIf = "opened && isDesktop()"
+      *ngIf="opened && isDesktop()"
       mat-icon-button
       igoStopPropagation
       panelRightButton
       (click)="resizeWindows()"
-      [matTooltip]="((this.fullExtent$ | async) ? 'toastPanel.standardExtentTooltip' : 'toastPanel.fullExtentTooltip') | translate"
-      matTooltipShowDelay="500">
-      <mat-icon svgIcon={{iconResizeWindows}}></mat-icon>
+      [matTooltip]="
+        ((this.fullExtent$ | async)
+          ? 'toastPanel.standardExtentTooltip'
+          : 'toastPanel.fullExtentTooltip'
+        ) | translate
+      "
+      matTooltipShowDelay="500"
+    >
+      <mat-icon svgIcon="{{ iconResizeWindows }}"></mat-icon>
     </button>
     <button
       mat-icon-button
       igoStopPropagation
       panelRightButton
-      (click)="clear()">
+      (click)="clear()"
+    >
       <mat-icon svgIcon="close"></mat-icon>
     </button>
 
     <div #content class="toast-content">
-
       <igo-feature-details
         [map]="map"
         *ngIf="resultSelected$.value"
         [feature]="resultSelected$.value.data"
-        (htmlDisplayEvent)=setHtmlDisplay($event)>
+        (htmlDisplayEvent)="setHtmlDisplay($event)"
+      >
       </igo-feature-details>
 
       <igo-search-results
@@ -103,18 +141,20 @@
         (resultFocus)="focusResult($event)"
         (resultUnfocus)="unfocusResult($event, true)"
         (resultSelect)="selectResult($event)"
-        [tabsMode]="tabsMode">
+        [tabsMode]="tabsMode"
+      >
       </igo-search-results>
     </div>
   </igo-panel>
 </ng-template>
 
-<div *ngIf="isMobile(); else toast"
-class="swipe-fix"
-(swipeleft)="swipe($event.type)"
-(swiperight)="swipe($event.type)"
-(swipeup)="swipe($event.type)"
-(swipedown)="swipe($event.type)">
-
-<ng-template [ngTemplateOutlet]="toast"></ng-template>
+<div
+  *ngIf="isMobile(); else toast"
+  class="swipe-fix"
+  (swipeleft)="swipe($event.type)"
+  (swiperight)="swipe($event.type)"
+  (swipeup)="swipe($event.type)"
+  (swipedown)="swipe($event.type)"
+>
+  <ng-template [ngTemplateOutlet]="toast"></ng-template>
 </div>

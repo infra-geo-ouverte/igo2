@@ -1,7 +1,7 @@
 {
   "version": 8,
   "name": "Example Style Vector Tile",
-  "metadata": {"maputnik:renderer": "mbgljs"},
+  "metadata": { "maputnik:renderer": "mbgljs" },
   "sources": {
     "ahocevar": {
       "type": "vector",
@@ -24,7 +24,7 @@
         "visibility": "visible",
         "line-cap": "round",
         "line-join": "round"
-       }
+      }
     },
     {
       "id": "fill_style_canada",
@@ -39,7 +39,7 @@
         "visibility": "visible",
         "line-cap": "round",
         "line-join": "round"
-       }
+      }
     },
     {
       "id": "line_style_usa",
@@ -55,7 +55,7 @@
         "visibility": "visible",
         "line-cap": "round",
         "line-join": "round"
-       }
+      }
     },
     {
       "id": "fill_style_usa",
@@ -70,7 +70,7 @@
         "visibility": "visible",
         "line-cap": "round",
         "line-join": "round"
-       }
+      }
     },
     {
       "id": "fill_style_usa",
@@ -85,7 +85,7 @@
         "visibility": "visible",
         "line-cap": "round",
         "line-join": "round"
-       }
+      }
     }
   ],
   "id": "vectortileid"

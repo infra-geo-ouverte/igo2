@@ -2,41 +2,44 @@
   class="mat-elevation-z3"
   mode="side"
   [autoFocus]="false"
-  [(opened)]="opened">
-
+  [(opened)]="opened"
+>
   <div class="app-sidenav-content">
+    <div
+      #content
+      class="app-content"
+      [ngClass]="{ toolActivated: toolbox.activeTool$ | async }"
+    >
+      <igo-home-button
+        *ngIf="toolbox.activeTool$ | async"
+        (unselectButton)="onUnselectButtonClick()"
+      >
+      </igo-home-button>
 
-      <div #content class="app-content" [ngClass]="{toolActivated: toolbox.activeTool$ | async}">
-
-        <igo-home-button
+      <igo-panel [title]="title$ | async | translate">
+        <button
           *ngIf="toolbox.activeTool$ | async"
-          (unselectButton)="onUnselectButtonClick()">
-        </igo-home-button>
+          mat-icon-button
+          panelLeftButton
+          tooltip-position="below"
+          matTooltipShowDelay="500"
+          [matTooltip]="'igo.context.sidenav.goBack' | translate"
+          (click)="onPreviousButtonClick()"
+        >
+          <mat-icon svgIcon="arrow-left"></mat-icon>
+        </button>
 
-        <igo-panel [title]="title$ | async | translate">
-          <button *ngIf="toolbox.activeTool$ | async"
-            mat-icon-button
-            panelLeftButton
-            tooltip-position="below"
-            matTooltipShowDelay="500"
-            [matTooltip]="'igo.context.sidenav.goBack' | translate"
-            (click)="onPreviousButtonClick()">
-            <mat-icon svgIcon="arrow-left"></mat-icon>
-          </button>
+        <igo-interactive-tour panelRightButton styleButton="icon">
+        </igo-interactive-tour>
 
-          <igo-interactive-tour
-            panelRightButton
-            styleButton = 'icon'>
-          </igo-interactive-tour>
-
-          <igo-toolbox
-            class="igo-toolbox"
-            color="primary"
-            [animate]="true"
-            [toolbox]="toolbox">
-          </igo-toolbox>
-
-        </igo-panel>
+        <igo-toolbox
+          class="igo-toolbox"
+          color="primary"
+          [animate]="true"
+          [toolbox]="toolbox"
+        >
+        </igo-toolbox>
+      </igo-panel>
     </div>
   </div>
 </mat-sidenav>

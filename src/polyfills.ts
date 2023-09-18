@@ -15,8 +15,8 @@
  */
 
 /***************************************************************************************************
-* BROWSER POLYFILLS
-*/
+ * BROWSER POLYFILLS
+ */
 
 import 'core-js/es/object';
 import 'core-js/es/string';

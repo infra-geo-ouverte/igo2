@@ -1,5 +1,6 @@
-@use './expansion-panel/expansion-panel-header.theming' as expansion-panel-header;
+@use './expansion-panel/expansion-panel-header.theming' as
+  expansion-panel-header;
 
 @mixin densities($config) {
-    @include expansion-panel-header.density($config);
+  @include expansion-panel-header.density($config);
 }

@@ -1,43 +1,40 @@
 {
-    "default": {
-        "style": {
-            "fill": {
-                "color": "blue"
-            },
-            "scale": 1.9,
-            "stroke": {
-                "color": "green",
-                "width": 4
-            },
-            "circle": {
-                "fill": {
-                    "color": "pink"
-                },
-                "stroke": {
-                    "color": "black"
-                },
-                "radius": 8
-            }
-        }
-    },
-    "LAYER_TITLE_YOU_WANT_TO_STYLE_WITH...": {
-        "clusterStyle": {
-            "circle": {
-                "fill": {
-                    "color": "red"
-                },
-                "stroke": {
-                    "color": "black"
-                },
-                "radius": 4
-            }
+  "default": {
+    "style": {
+      "fill": {
+        "color": "blue"
+      },
+      "scale": 1.9,
+      "stroke": {
+        "color": "green",
+        "width": 4
+      },
+      "circle": {
+        "fill": {
+          "color": "pink"
         },
-        "clusterParam": {
-            "clusterRange": [
-                2,
-                5
-            ]
+        "stroke": {
+          "color": "black"
         },
-        "distance": 70
+        "radius": 8
+      }
     }
+  },
+  "LAYER_TITLE_YOU_WANT_TO_STYLE_WITH...": {
+    "clusterStyle": {
+      "circle": {
+        "fill": {
+          "color": "red"
+        },
+        "stroke": {
+          "color": "black"
+        },
+        "radius": 4
+      }
+    },
+    "clusterParam": {
+      "clusterRange": [2, 5]
+    },
+    "distance": 70
+  }
 }

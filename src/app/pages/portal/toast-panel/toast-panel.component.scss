@@ -42,9 +42,7 @@
     }
   }
 
-  app-full-toast-panel-opened
-    igo-feature-details[_ngcontent-fiq-c23]
-    iframe {
+  app-full-toast-panel-opened igo-feature-details[_ngcontent-fiq-c23] iframe {
     min-height: 450px;
 
     @include mobile {
