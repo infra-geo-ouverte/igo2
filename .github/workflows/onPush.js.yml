@@ -24,4 +24,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install @angular/cli
     - run: npm run lint
-    - run: npm e2e
+    - run: npm run e2e
