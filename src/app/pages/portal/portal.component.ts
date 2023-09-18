@@ -16,6 +16,7 @@ import olFeature from 'ol/Feature';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 
 import OpenLayersParser from "geostyler-openlayers-parser";
+import LegendRenderer from 'geostyler-legend/dist/LegendRenderer/LegendRenderer'
 
 import {
   MediaService,
@@ -663,34 +664,49 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   changePointsStyle() {
-    const lastLayer = this.map.getLayerById('layerWithPoints');
-
-    const pointGeoStyle: any = {
-      "name": "Basic star fill",
+    const style123: any = {
+      "name": "Basic Circle",
       "rules": [
         {
-          "name": "Rule 2",
+          "name": "Rule 1",
           "symbolizers": [
             {
               "kind": "Mark",
-              "wellKnownName": "star",
-              "color": "#ff0000",
-              "radius": 15
+              "wellKnownName": "triangle",
+              "color": "#ff8000",
+              "strokeColor": "#000000",
+              "rotate": 90,
+              "radius": 30
+            },
+            {
+              "kind": "Text",
+              "label": "{{desclocal}}",
+              "color": "#000000",
+              "opacity": 1,
+              "size": 12
             }
           ]
         }
       ]
     };
+    const renderer = new LegendRenderer({
+      maxColumnWidth: 300,
+      maxColumnHeight: 300,
+      overflow: 'auto',
+      styles: [style123],
+      size: [600, 300]
+    });
 
-    const olParser2 = new OpenLayersParser;
-    olParser2.writeStyle(pointGeoStyle)
+    //renderer.render(someElement);
+
+    /*olParser2.writeStyle(pointGeoStyle)
     .then((output) => {
       console.log("output", output);
       (lastLayer.ol as any).setStyle(output.output);
       console.log("output", output.output);
     })
     .catch(error => console.log(error));
-    console.log("lastLayer", lastLayer);
+    console.log("lastLayer", lastLayer);*/
 
   }
 
