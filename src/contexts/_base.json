@@ -51,11 +51,13 @@
       "visible": false,
       "linkedLayers": {
         "linkId": "HybrideAuto",
-        "links": [{
-          "syncedDelete": true,
-          "linkedIds": ["hybrideAutoRoute"],
-          "properties": ["visible"]
-        }]
+        "links": [
+          {
+            "syncedDelete": true,
+            "linkedIds": ["hybrideAutoRoute"],
+            "properties": ["visible"]
+          }
+        ]
       },
       "sourceOptions": {
         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
@@ -89,11 +91,13 @@
       "visible": false,
       "linkedLayers": {
         "linkId": "HybrideVelo",
-        "links": [{
-          "syncedDelete": true,
-          "linkedIds": ["hybrideVeloConviv"],
-          "properties": ["visible"]
-        }]
+        "links": [
+          {
+            "syncedDelete": true,
+            "linkedIds": ["hybrideVeloConviv"],
+            "properties": ["visible"]
+          }
+        ]
       },
       "sourceOptions": {
         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
@@ -119,7 +123,6 @@
         }
       }
     },
-
 
     {
       "title": "Aucun",
@@ -173,7 +176,7 @@
     "about",
     "advancedMap"
   ],
-  "tools": [    
+  "tools": [
     {
       "name": "advancedMap"
     },

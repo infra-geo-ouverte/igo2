@@ -275,7 +275,7 @@
           [entitySortChange$]="workspaceEntitySortChange$"
           [paginatorOptions]="paginatorOptions"
           (paginatorChange)="paginatorChange($event)"
-          >
+        >
         </igo-entity-table-paginator>
       </div>
     </ng-container>
@@ -297,7 +297,7 @@
       [template]="workspace.meta.tableTemplate"
     >
     </igo-entity-table>
-    <span>{{workspaceNotAvailableMessage | translate}}</span>
+    <span>{{ workspaceNotAvailableMessage | translate }}</span>
   </ng-container>
 </app-expansion-panel>
 

@@ -7,7 +7,7 @@
   "workspace": {
     "open": "Ouvrir la vue tabulaire",
     "close": "Fermer la vue tabulaire",
-    "disabled" : {
+    "disabled": {
       "resolution": "La vue tabulaire n'est pas disponible à cette échelle",
       "visible": "La couche n'a pas été chargée. Veuillez rendre visible la couche pour découvrir la donnée."
     },
@@ -16,10 +16,10 @@
   "header": {
     "title": "IGO",
     "language": "English",
-    "contactUsUrl" : "https://www.igouverte.org/#footer",
-    "contactUs" : "Nous joindre"
+    "contactUsUrl": "https://www.igouverte.org/#footer",
+    "contactUs": "Nous joindre"
   },
-  "footer":{
+  "footer": {
     "conditions": "Conditions d'utilisation",
     "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
     "ministry": "Nom du ministère",

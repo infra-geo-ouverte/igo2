@@ -5,16 +5,16 @@
   .spacer {
     flex: 1 1 auto;
   }
-  
+
   .button-container {
     display: flex;
     justify-content: space-around;
   }
-  
+
   #doNotShowCheck {
     margin-right: 5px;
   }
-  
+
   mat-toolbar h2 {
     margin: revert;
   }
@@ -22,7 +22,7 @@
   label {
     margin-bottom: 0;
   }
-  
+
   .mat-mdc-dialog-container {
     z-index: 1000;
     box-shadow: 0 0 0 1000em rgba(0, 0, 0, 0.6);

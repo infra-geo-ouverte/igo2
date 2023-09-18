@@ -1,3 +1,3 @@
 export interface headerOptions {
-    title?: string;
+  title?: string;
 }
