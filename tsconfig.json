@@ -13,5 +13,6 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "sourceMap": true
-  }
+  },
+  "exclude": ["dist", "scripts", "e2e/**/*"],
 }
