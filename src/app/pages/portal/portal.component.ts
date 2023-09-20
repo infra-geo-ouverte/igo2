@@ -1331,7 +1331,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       // zoom to active route
       this.directionState.routesFeatureStore.count$
         .pipe(
-          skipWhile((c) => c < 1),
+          skipWhile((c: number) => c < 1),
           first()
         )
         .subscribe((c) => {
@@ -1342,7 +1342,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       // select the active route by url controls
       this.directionState.routesFeatureStore.count$
         .pipe(
-          skipWhile((c) => c < 2),
+          skipWhile((c: number) => c < 2),
           first()
         )
         .subscribe(() => {
