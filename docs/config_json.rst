@@ -700,10 +700,20 @@ menuButtonReverseColor
 
     .. line-block::
 
-        Permet d'indiquer si les couleurs du bouton de menu sont inversées ou non.
+        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.useThemeColor
+
+        Permet d'indiquer si les couleurs du bouton de menu sont inversées ou non.
+
+*****************
+menu.button.useThemeColor
+*****************
+
+    .. line-block::
+
+
+        Permet d'indiquer si l'arrière plan du menu est blanc OU est géré par le thème appliqué dans l'application.
 
 .. _optionsApi:
-
 ************
 OptionsApi
 ************
@@ -864,8 +874,22 @@ showMenuButton
 
     .. line-block::
 
+        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.show
+
         Permet de définir si le bouton de menu permettant d'accéder
-        aux outils est affiché dans le coin supérieur gauche.
+        aux outils est affiché.
+
+********************************
+menu.button.show
+********************************
+
+    .. line-block::
+
+        Remplace showMenuButton
+
+        Permet de définir si le bouton de menu permettant d'accéder
+        aux outils est affiché.
+
 
 ********************************
 showRotationButtonIfNoRotation
