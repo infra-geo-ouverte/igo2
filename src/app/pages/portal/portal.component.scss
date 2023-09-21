@@ -16,13 +16,6 @@
     max-width: $search-bar-width;
     z-index: 4;
 
-    &.navbar-fixed {
-      left: 0;
-      top: 0;
-      height: $app-sidenav-margin-top;
-      align-items: center;
-    }
-
     @include mobile {
       width: $search-bar-width-mobile;
       max-width: min($search-bar-width-mobile, 350px);

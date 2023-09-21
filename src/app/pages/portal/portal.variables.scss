@@ -43,7 +43,7 @@ $app-sidenav-width-mobile: calc(
 );
 
 $search-bar-left: $igo-icon-size + $igo-margin;
-$search-bar-width: $app-sidenav-width;
+$search-bar-width: calc($app-sidenav-width - $igo-margin);
 $search-bar-width-mobile: calc(
   100% - #{$app-mobile-min-space-right} - (2 * #{$igo-margin})
 );

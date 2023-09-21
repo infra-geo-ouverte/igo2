@@ -3,7 +3,7 @@
     <igo-backdrop [shown]="backdropShown" (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <div class="navbar-container" [class.navbar-fixed]="sidenavOpened">
+    <div class="navbar-container">
       <igo-menu-button
         *ngIf="showMenuButton"
         [class.mat-elevation-z2]="!sidenavOpened"
