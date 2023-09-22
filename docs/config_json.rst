@@ -874,13 +874,13 @@ showMenuButton
 
     .. line-block::
 
-        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.show
+        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.visible
 
         Permet de définir si le bouton de menu permettant d'accéder
         aux outils est affiché.
 
 ********************************
-menu.button.show
+menu.button.visible
 ********************************
 
     .. line-block::
@@ -888,7 +888,7 @@ menu.button.show
         Remplace showMenuButton
 
         Permet de définir si le bouton de menu permettant d'accéder
-        aux outils est affiché.
+        aux outils est visible ou non.
 
 
 ********************************
