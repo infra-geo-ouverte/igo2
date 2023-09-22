@@ -46,7 +46,7 @@ export class ExpansionPanelComponent {
 
   @HostBinding('class.app-expansion-panel-expanded')
   get hasExpandedClass() {
-    return this.expanded && !this.maximized;
+    return this.expanded;
   }
 
   @HostBinding('class.app-expansion-panel-expanded-maximized')
