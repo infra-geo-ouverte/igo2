@@ -1,4 +1,21 @@
-# [16.0.0-rc.0](https://github.com/infra-geo-ouverte/igo2/compare/1.15.2...16.0.0-rc.0) (2023-09-19)
+# [16.0.0-rc.2](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.0...v16.0.0-rc.2) (2023-09-22)
+
+
+### Bug Fixes
+
+* **InteractiveTour:** replace deprecated position "auto" by "right" ([#1019](https://github.com/infra-geo-ouverte/igo2/issues/1019)) ([70dfb47](https://github.com/infra-geo-ouverte/igo2/commit/70dfb4715faeb34b4de39168d10eb417304dd0e8))
+* **Openlayers:** downgrade to 7.5.2 due to wms regression ([#1020](https://github.com/infra-geo-ouverte/igo2/issues/1020)) ([8880f52](https://github.com/infra-geo-ouverte/igo2/commit/8880f52bd3e1d9264cabdfd3961c3ecbdeb7c888))
+* **portal:** search bar position when open/close sidenav ([#1021](https://github.com/infra-geo-ouverte/igo2/issues/1021)) ([e52e8ae](https://github.com/infra-geo-ouverte/igo2/commit/e52e8ae0991cd185da0577bdf15032a2efec3a64))
+
+
+### Features
+
+* **app:** upgrade igo2-lib 16.0.0-rc.1 ([1c38dd0](https://github.com/infra-geo-ouverte/igo2/commit/1c38dd083d35d1672c6e7833f09aa9b874e573fa))
+* **Prettier:** be specific for the endOfLine type ([7adf6fe](https://github.com/infra-geo-ouverte/igo2/commit/7adf6fe2aae25266a51ff8963594c988bdc9c4bd))
+
+
+
+# [16.0.0-rc.0](https://github.com/infra-geo-ouverte/igo2/compare/1.15.2...v16.0.0-rc.0) (2023-09-19)
 
 
 ### Bug Fixes
