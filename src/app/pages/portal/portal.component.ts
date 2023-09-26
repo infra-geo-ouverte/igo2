@@ -16,7 +16,7 @@ import olFeature from 'ol/Feature';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 
 import OpenLayersParser from "geostyler-openlayers-parser";
-import LegendRenderer from 'geostyler-legend/dist/LegendRenderer/LegendRenderer'
+import LegendRenderer from 'geostyler-legend/dist/LegendRenderer/LegendRenderer';
 
 import {
   MediaService,
