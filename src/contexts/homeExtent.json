@@ -5,7 +5,7 @@
     "view": {
       "projection": "EPSG:3857",
       "homeExtent": {
-        "center": [-68.79600,51.32676],
+        "center": [-68.796, 51.32676],
         "zoom": 10
       }
     }

@@ -59,19 +59,27 @@ export class SidenavComponent implements OnInit, OnDestroy {
   constructor(
     private toolState: ToolState,
     private configService: ConfigService,
-    private catalogState: CatalogState) {}
+    private catalogState: CatalogState
+  ) {}
 
   ngOnInit() {
     this.activeTool$$ = this.toolbox.activeTool$.subscribe((tool: Tool) => {
-      const sidenavTitle = this.configService.getConfig('sidenavTitle') || 'IGO';
+      const sidenavTitle =
+        this.configService.getConfig('sidenavTitle') || 'IGO';
       if (tool) {
         if (tool.name === 'catalogBrowser') {
           for (const catalog of this.catalogState.catalogStore.all()) {
-            if (this.catalogState.catalogStore.state.get(catalog).selected === true) {
+            if (
+              this.catalogState.catalogStore.state.get(catalog).selected ===
+              true
+            ) {
               this.title$.next(catalog.title);
             }
           }
-        } else if (tool.name === 'activeTimeFilter' || tool.name === 'activeOgcFilter') {
+        } else if (
+          tool.name === 'activeTimeFilter' ||
+          tool.name === 'activeOgcFilter'
+        ) {
           for (const layer of this.map.layers) {
             if (layer.options.active === true) {
               this.title$.next(layer.title);

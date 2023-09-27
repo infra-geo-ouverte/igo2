@@ -34,7 +34,12 @@ import {
   getCommonVectorStyle,
   getCommonVectorSelectedStyle,
   featuresAreOutOfView,
-  computeOlFeaturesExtent
+  computeOlFeaturesExtent,
+  PropertyTypeDetectorService,
+  generateIdFromSourceOptions,
+  LayerService,
+  Layer,
+  GeoServiceDefinition
 } from '@igo2/geo';
 import {
   Media,
@@ -45,7 +50,12 @@ import {
   StorageServiceEvent,
   ConfigService
 } from '@igo2/core';
-import { QueryState, StorageState } from '@igo2/integration';
+import { QueryState, StorageState, WorkspaceState } from '@igo2/integration';
+import { ObjectUtils } from '@igo2/utils';
+
+interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
+  propertyForUrl: string;
+}
 
 @Component({
   selector: 'app-toast-panel',
@@ -132,6 +142,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   private _fullExtent = false;
 
+  public potententialLayerToAdd$: BehaviorSubject<any> = new BehaviorSubject(
+    undefined
+  );
+  public potententialLayerisAdded$: BehaviorSubject<boolean> =
+    new BehaviorSubject(false);
+
   public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
     this.fullExtent
   );
@@ -153,9 +169,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   private format = new olFormatGeoJSON();
 
   private resultOrResolution$$: Subscription;
-  private focusedResult$: BehaviorSubject<
-    SearchResult<Feature>
-  > = new BehaviorSubject(undefined);
+  private focusedResult$: BehaviorSubject<SearchResult<Feature>> =
+    new BehaviorSubject(undefined);
   private abstractFocusedOrSelectedResult: Feature;
 
   public withZoomButton = true;
@@ -179,42 +194,47 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   // }
 
   getClassPanel() {
-
     return {
-      'app-toast-panel-opened' : this.opened && !this.fullExtent && !this.isHtmlDisplay,
-      'app-full-toast-panel-opened' :
-        this.opened && this.fullExtent &&
-        !this.isHtmlDisplay,
+      'app-toast-panel-opened':
+        this.opened && !this.fullExtent && !this.isHtmlDisplay,
+      'app-full-toast-panel-opened':
+        this.opened && this.fullExtent && !this.isHtmlDisplay,
 
-      'app-toast-panel-html' :
+      'app-toast-panel-html':
         this.opened &&
         !this.fullExtent &&
         this.resultSelected$.value &&
         this.isHtmlDisplay,
 
-      'app-toast-panel-html-large' :
+      'app-toast-panel-html-large':
         this.opened &&
         this.fullExtent &&
         this.resultSelected$.value &&
         this.isHtmlDisplay,
 
-      'app-toast-panel-collapsed': !this.opened && !this.fullExtent && !this.isHtmlDisplay,
-      'app-full-toast-panel-collapsed' : !this.opened && this.fullExtent && !this.isHtmlDisplay,
-      'app-toast-panel-html-collapsed' : !this.opened && this.isHtmlDisplay
+      'app-toast-panel-collapsed':
+        !this.opened && !this.fullExtent && !this.isHtmlDisplay,
+      'app-full-toast-panel-collapsed':
+        !this.opened && this.fullExtent && !this.isHtmlDisplay,
+      'app-toast-panel-html-collapsed': !this.opened && this.isHtmlDisplay
     };
   }
 
   // if query tabs mode activated
   // fix Heigh of igo-panel
   setHeighPanelTabsMode() {
-    if(this.resultSelected$.value || !this.opened){
+    if (this.resultSelected$.value || !this.opened) {
       return '';
     }
 
-    if(this.tabsMode && !this.fullExtent && !this.isHtmlDisplay) {
+    if (this.tabsMode && !this.fullExtent && !this.isHtmlDisplay) {
       return 'app-toast-panel-opened-max-height';
-    } else if(this.tabsMode && this.opened &&
-      this.fullExtent && !this.isHtmlDisplay) {
+    } else if (
+      this.tabsMode &&
+      this.opened &&
+      this.fullExtent &&
+      !this.isHtmlDisplay
+    ) {
       return 'app-full-toast-panel-opened-max-height';
     }
   }
@@ -258,7 +278,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           featureProjection: this.map.projection
         }
       );
-      moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Default);
+      moveToOlFeatures(
+        this.map.viewController,
+        [localOlFeature],
+        FeatureMotion.Default
+      );
     }
   }
 
@@ -279,7 +303,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     public languageService: LanguageService,
     private storageState: StorageState,
     private queryState: QueryState,
-    private configService: ConfigService
+    private workspaceState: WorkspaceState,
+    private configService: ConfigService,
+    private propertyTypeDetectorService: PropertyTypeDetectorService,
+    private layerService: LayerService
   ) {
     this.tabsMode = this.configService.getConfig('queryTabs')
       ? this.configService.getConfig('queryTabs')
@@ -302,12 +329,19 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           this.isSelectedResultOutOfView$.next(false);
           return;
         }
-        const selectedOlFeature = featureToOl(selectedResult.data, this.map.projection);
-        const selectedOlFeatureExtent = computeOlFeaturesExtent(this.map, [selectedOlFeature]);
-        this.isSelectedResultOutOfView$.next(featuresAreOutOfView(this.map, selectedOlFeatureExtent));
+        const selectedOlFeature = featureToOl(
+          selectedResult.data,
+          this.map.projection
+        );
+        const selectedOlFeatureExtent = computeOlFeaturesExtent(
+          [selectedOlFeature],
+          this.map.viewProjection
+        );
+        this.isSelectedResultOutOfView$.next(
+          featuresAreOutOfView(this.map.getExtent(), selectedOlFeatureExtent)
+        );
       });
   }
-
 
   ngOnInit() {
     this.store.entities$.subscribe(() => {
@@ -337,7 +371,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
 
     this.storageChange$$ = this.storageService.storageChange$
-      .pipe(skipWhile((storageChange: StorageServiceEvent) => storageChange.key !== 'zoomAuto'))
+      .pipe(
+        skipWhile(
+          (storageChange: StorageServiceEvent) =>
+            storageChange.key !== 'zoomAuto'
+        )
+      )
       .subscribe((change) => {
         this.zoomAuto = change.currentValue;
       });
@@ -377,7 +416,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
               featureProjection: this.map.projection
             }
           );
-          moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Zoom);
+          moveToOlFeatures(
+            this.map.viewController,
+            [localOlFeature],
+            FeatureMotion.Zoom
+          );
         }
       },
       {
@@ -401,7 +444,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
             });
             olFeatures.push(localOlFeature);
           }
-          moveToOlFeatures(this.map, olFeatures, FeatureMotion.Zoom);
+          moveToOlFeatures(
+            this.map.viewController,
+            olFeatures,
+            FeatureMotion.Zoom
+          );
         }
       },
       {
@@ -450,6 +497,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         }
       }
     ]);
+    this.computeFeatureGeoServiceStatus();
+    combineLatest([
+      this.resultSelected$,
+      this.map.layers$ as BehaviorSubject<Layer[]>
+    ]).subscribe(() => {
+      this.computeFeatureGeoServiceStatus();
+    });
   }
 
   ngOnDestroy(): void {
@@ -474,7 +528,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
     const myOlFeature = featureToOl(result.data, this.map.projection);
     const olGeometry = myOlFeature.getGeometry();
-    if (featuresAreTooDeepInView(this.map, olGeometry.getExtent() as [number, number, number, number], 0.0025)) {
+    if (
+      featuresAreTooDeepInView(
+        this.map.viewController,
+        olGeometry.getExtent() as [number, number, number, number],
+        0.0025
+      )
+    ) {
       const extent = olGeometry.getExtent();
       const x = extent[0] + (extent[2] - extent[0]) / 2;
       const y = extent[1] + (extent[3] - extent[1]) / 2;
@@ -488,11 +548,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       );
       this.abstractFocusedOrSelectedResult.meta.style =
         getCommonVectorSelectedStyle(
-          Object.assign({},
+          Object.assign(
+            {},
             { feature: this.abstractFocusedOrSelectedResult },
-            trigger === 'selected' ?
-              this.queryState.queryOverlayStyleSelection :
-              this.queryState.queryOverlayStyleFocus));
+            trigger === 'selected'
+              ? this.queryState.queryOverlayStyleSelection
+              : this.queryState.queryOverlayStyleFocus
+          )
+        );
       this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
       this.map.queryResultsOverlay.addFeature(
         this.abstractFocusedOrSelectedResult,
@@ -503,7 +566,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   private clearFeatureEmphasis() {
     if (this.abstractFocusedOrSelectedResult) {
-      this.map.queryResultsOverlay.removeFeature(this.abstractFocusedOrSelectedResult);
+      this.map.queryResultsOverlay.removeFeature(
+        this.abstractFocusedOrSelectedResult
+      );
       this.abstractFocusedOrSelectedResult = undefined;
     }
   }
@@ -517,9 +582,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.map.queryResultsOverlay.removeFeature(result.data);
 
     result.data.meta.style = getCommonVectorSelectedStyle(
-      Object.assign({},
+      Object.assign(
+        {},
         { feature: result.data },
-        this.queryState.queryOverlayStyleFocus));
+        this.queryState.queryOverlayStyleFocus
+      )
+    );
     result.data.meta.style.setZIndex(2000);
     this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -532,9 +600,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.map.queryResultsOverlay.removeFeature(result.data);
 
     result.data.meta.style = getCommonVectorStyle(
-      Object.assign({},
+      Object.assign(
+        {},
         { feature: result.data },
-        this.queryState.queryOverlayStyle));
+        this.queryState.queryOverlayStyle
+      )
+    );
     result.data.meta.style.setZIndex(undefined);
     this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
@@ -559,14 +630,21 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     for (const feature of this.store.all()) {
       if (feature.meta.id === result.meta.id) {
         feature.data.meta.style = getCommonVectorSelectedStyle(
-          Object.assign({}, { feature: feature.data },
-            this.queryState.queryOverlayStyleSelection));
+          Object.assign(
+            {},
+            { feature: feature.data },
+            this.queryState.queryOverlayStyleSelection
+          )
+        );
         feature.data.meta.style.setZIndex(2000);
       } else {
         feature.data.meta.style = getCommonVectorStyle(
-          Object.assign({},
+          Object.assign(
+            {},
             { feature: feature.data },
-            this.queryState.queryOverlayStyle));
+            this.queryState.queryOverlayStyle
+          )
+        );
       }
       features.push(feature.data);
     }
@@ -581,7 +659,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           featureProjection: this.map.projection
         }
       );
-      moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Default);
+      moveToOlFeatures(
+        this.map.viewController,
+        [localOlFeature],
+        FeatureMotion.Default
+      );
     }
 
     this.isResultSelected$.next(true);
@@ -597,15 +679,39 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     const features = [];
     for (const feature of this.store.all()) {
       feature.data.meta.style = getCommonVectorStyle(
-        Object.assign({},
+        Object.assign(
+          {},
           { feature: feature.data },
-          this.queryState.queryOverlayStyle));
+          this.queryState.queryOverlayStyle
+        )
+      );
       features.push(feature.data);
     }
-    this.map.queryResultsOverlay.setFeatures(features, FeatureMotion.None, 'map');
+    this.map.queryResultsOverlay.setFeatures(
+      features,
+      FeatureMotion.None,
+      'map'
+    );
+  }
+
+  handleWksSelection() {
+    const entities = this.store.entities$.getValue();
+    const layersTitle = [...new Set(entities.map((e) => e.source.title))];
+    const workspaces = this.workspaceState.store.entities$.getValue();
+    if (workspaces.length) {
+      const wksToHandle = workspaces.filter((wks) =>
+        layersTitle.includes(wks.title)
+      );
+      wksToHandle.map((ws) => {
+        ws.entityStore.state.updateMany(ws.entityStore.view.all(), {
+          selected: false
+        });
+      });
+    }
   }
 
   clear() {
+    this.handleWksSelection();
     this.clearFeatureEmphasis();
     this.map.queryResultsOverlay.clear();
     this.store.clear();
@@ -650,6 +756,118 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
   }
 
+  hasGeoService() {
+    return this.getGeoServices().length;
+  }
+
+  private getGeoServices(): ExtendedGeoServiceDefinition[] {
+    const resultSelected = this.resultSelected$.getValue();
+    if (!resultSelected) {
+      return [];
+    }
+    const hasGeoServiceProperties: ExtendedGeoServiceDefinition[] = [];
+    const keys = Object.keys(resultSelected.data.properties);
+    Object.entries(resultSelected.data.properties).forEach((entry) => {
+      const [key, value] = entry;
+      const geoService = this.propertyTypeDetectorService.getGeoService(
+        value,
+        keys
+      );
+      const extendedGeoService: ExtendedGeoServiceDefinition = Object.assign(
+        {},
+        geoService,
+        { propertyForUrl: undefined }
+      );
+      if (geoService) {
+        extendedGeoService.propertyForUrl = key;
+        hasGeoServiceProperties.push(extendedGeoService);
+      }
+    });
+    return hasGeoServiceProperties;
+  }
+
+  handleLayer() {
+    const layersIds = this.map.layers.map((layer) => layer.id);
+    let potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
+    if (!potententialLayerToAdd) {
+      this.computeFeatureGeoServiceStatus();
+    }
+    potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
+
+    if (layersIds.includes(potententialLayerToAdd.id)) {
+      const layerToRemove = this.map.getLayerById(potententialLayerToAdd.id);
+      if (layerToRemove) {
+        this.map.removeLayer(layerToRemove);
+        this.potententialLayerisAdded$.next(false);
+      }
+    } else {
+      this.layerService
+        .createAsyncLayer(potententialLayerToAdd.sourceOptions)
+        .subscribe((layer) => {
+          this.map.layersAddedByClick$.next([layer]);
+          this.map.addLayer(layer);
+          this.potententialLayerisAdded$.next(true);
+        });
+    }
+  }
+
+  private computeFeatureGeoServiceStatus() {
+    const resultSelected = this.resultSelected$.getValue();
+    if (!resultSelected) {
+      return;
+    }
+    const geoServices = this.getGeoServices();
+    if (geoServices.length) {
+      const firstGeoService = geoServices[0];
+      const so = this.computeSourceOptionsFromProperties(
+        resultSelected.data.properties,
+        firstGeoService
+      );
+      const soId = generateIdFromSourceOptions(so.sourceOptions);
+      this.potententialLayerToAdd$.next({ id: soId, sourceOptions: so });
+      const layersIds = this.map.layers.map((l) => l.id);
+      this.potententialLayerisAdded$.next(
+        layersIds.includes(soId) ? true : false
+      );
+    }
+  }
+
+  private computeSourceOptionsFromProperties(
+    properties: {},
+    geoService: ExtendedGeoServiceDefinition
+  ) {
+    const keys = Object.keys(properties);
+    const propertiesForLayerName = keys.filter((p) =>
+      geoService.propertiesForLayerName.includes(p)
+    );
+    // providing the the first matching regex;
+    let layerName = properties[propertiesForLayerName[0]];
+    const url = properties[geoService.propertyForUrl];
+    let appliedLayerName = layerName;
+    let arcgisLayerName = undefined;
+    if (
+      ['arcgisrest', 'imagearcgisrest', 'tilearcgisrest'].includes(
+        geoService.type
+      )
+    ) {
+      arcgisLayerName = layerName;
+      appliedLayerName = undefined;
+    }
+    const so = ObjectUtils.removeUndefined({
+      sourceOptions: {
+        type: geoService.type || 'wms',
+        url,
+        optionsFromCapabilities: true,
+        optionsFromApi: true,
+        params: {
+          LAYERS: appliedLayerName,
+          LAYER: arcgisLayerName
+        }
+      }
+    });
+    return so;
+  }
+
   zoomTo() {
     const localOlFeature = this.format.readFeature(
       this.resultSelected$.getValue().data,
@@ -658,7 +876,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         featureProjection: this.map.projection
       }
     );
-    moveToOlFeatures(this.map, [localOlFeature], FeatureMotion.Zoom);
+    moveToOlFeatures(
+      this.map.viewController,
+      [localOlFeature],
+      FeatureMotion.Zoom
+    );
   }
 
   swipe(action: string) {
@@ -736,5 +958,4 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.fullExtent = true;
     this.setResizeWindowIcon();
   }
-
 }

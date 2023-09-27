@@ -7,27 +7,30 @@ import {
   CommonVectorStyleOptions
 } from '@igo2/geo';
 
-import { AppOptions, InteractiveTourConfigOptions } from './environnement.interface';
+import {
+  AppOptions,
+  InteractiveTourConfigOptions
+} from './environnement.interface';
 interface Environment {
   production: boolean;
   igo: {
-    app: AppOptions,
+    app: AppOptions;
     catalog?: CatalogServiceOptions;
     importExport?: ImportExportServiceOptions;
     language?: LanguageOptions;
     searchSources?: { [key: string]: SearchSourceOptions };
     projections?: Projection[];
     interactiveTour?: InteractiveTourConfigOptions;
-    depot?: { url: string; trainingGuides?: string[]; };
+    depot?: { url: string; trainingGuides?: string[] };
     queryOverlayStyle?: {
-      base?: CommonVectorStyleOptions,
-      selection?: CommonVectorStyleOptions,
-      focus?: CommonVectorStyleOptions
+      base?: CommonVectorStyleOptions;
+      selection?: CommonVectorStyleOptions;
+      focus?: CommonVectorStyleOptions;
     };
     searchOverlayStyle?: {
-      base?: CommonVectorStyleOptions,
-      selection?: CommonVectorStyleOptions,
-      focus?: CommonVectorStyleOptions
+      base?: CommonVectorStyleOptions;
+      selection?: CommonVectorStyleOptions;
+      focus?: CommonVectorStyleOptions;
     };
   };
 }
@@ -43,7 +46,7 @@ export const environment: Environment = {
         manifestPath: './config/github.webmanifest'
       },
       pwa: {
-        enabled: false,
+        enabled: false
       }
     },
     catalog: {
@@ -115,16 +118,14 @@ export const environment: Environment = {
       {
         code: 'EPSG:32198',
         alias: 'Quebec Lambert',
-        def:
-          '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 \
+        def: '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 \
           +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
         extent: [-799574, 45802, 891595.4, 1849567.5]
       },
       {
         code: 'EPSG:3798',
         alias: 'MTQ Lambert',
-        def:
-          '+proj=lcc +lat_1=50 +lat_2=46 +lat_0=44 +lon_0=-70 +x_0=800000 +y_0=0 \
+        def: '+proj=lcc +lat_1=50 +lat_2=46 +lat_0=44 +lon_0=-70 +x_0=800000 +y_0=0 \
           +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
         extent: [31796.5834, 158846.2231, 1813323.4284, 2141241.0978]
       }

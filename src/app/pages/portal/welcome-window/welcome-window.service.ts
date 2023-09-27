@@ -68,8 +68,14 @@ export class WelcomeWindowService {
       return false;
     }
 
-    if (typeof this.configService.getConfig('welcomeWindow.nbVisitToShow') !== 'undefined' ) {
-      if (this.nbVisit > this.configService.getConfig('welcomeWindow.nbVisitToShow') ) {
+    if (
+      typeof this.configService.getConfig('welcomeWindow.nbVisitToShow') !==
+      'undefined'
+    ) {
+      if (
+        this.nbVisit >
+        this.configService.getConfig('welcomeWindow.nbVisitToShow')
+      ) {
         this.storageService.set('welcomeWindow_showAgain', false);
         return false;
       }

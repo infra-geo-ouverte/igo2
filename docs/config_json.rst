@@ -700,10 +700,20 @@ menuButtonReverseColor
 
     .. line-block::
 
-        Permet d'indiquer si les couleurs du bouton de menu sont inversées ou non.
+        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.useThemeColor
+
+        Permet d'indiquer si les couleurs du bouton de menu sont inversées ou non.
+
+*****************
+menu.button.useThemeColor
+*****************
+
+    .. line-block::
+
+
+        Permet d'indiquer si l'arrière plan du menu est blanc OU est géré par le thème appliqué dans l'application.
 
 .. _optionsApi:
-
 ************
 OptionsApi
 ************
@@ -864,8 +874,22 @@ showMenuButton
 
     .. line-block::
 
+        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.visible
+
         Permet de définir si le bouton de menu permettant d'accéder
-        aux outils est affiché dans le coin supérieur gauche.
+        aux outils est affiché.
+
+********************************
+menu.button.visible
+********************************
+
+    .. line-block::
+
+        Remplace showMenuButton
+
+        Permet de définir si le bouton de menu permettant d'accéder
+        aux outils est visible ou non.
+
 
 ********************************
 showRotationButtonIfNoRotation
@@ -1189,7 +1213,7 @@ Exemple complet config.json
                       "cssClass": "bottom-right",
                       "text": "© Gouvernement du Québec 2019",
                       "fontSize": "10pt",
-                      "link": "https://www.droitauteur.gouv.qc.ca/copyright.php",
+                      "link": "https://www.quebec.ca/droit-auteur",
                       "marginRight": "70px",
                       "marginBottom": "10px"
                     },
@@ -1486,7 +1510,7 @@ Exemples
                         "visible": false,
                         "sourceOptions": {
                         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                        "attributions": "© <a href='https://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "© <a href='https://www.quebec.ca/droit-auteur' target='_blank'><img src='./assets/images/quebecPrint.gif' width='64' height='19'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "type": "xyz",
                         "crossOrigin": "anonymous"
                         }

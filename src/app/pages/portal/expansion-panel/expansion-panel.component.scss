@@ -1,6 +1,5 @@
 @import '../portal.variables';
 
-
 :host {
   @extend %box-shadowed;
 
@@ -11,25 +10,39 @@
   width: $app-expansion-panel-collapsed-width;
 
   transition:
-    height 200ms cubic-bezier(.4, 0, .2, 1),
-    width 200ms cubic-bezier(.4, 0, .2, 1);
+    height 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:not(.app-expansion-panel-expanded) {
+    ::ng-deep {
+      .app-expansion-panel-content {
+        display: none;
+      }
+    }
+  }
+
+  &.app-expansion-panel-expanded {
+    height: $app-expansion-panel-height;
+    width: 100%;
+    z-index: 6;
+
+    ::ng-deep {
+      .app-expansion-panel-trigger-container {
+        box-shadow: none;
+      }
+    }
+
+    @include mobile {
+      &.footer {
+        margin-bottom: 48px;
+      }
+    }
+  }
 }
 
 .app-expansion-panel-container {
   height: 100%;
   width: 100%;
-}
-
-:host.app-expansion-panel-expanded {
-  height: $app-expansion-panel-height;
-  width: 100%;
-  z-index: 6;
-
-  @include mobile {
-    &.footer {
-      margin-bottom: 48px;
-    }
-  }
 }
 
 :host.app-expansion-panel-expanded-maximized {
@@ -56,7 +69,7 @@
 }
 
 igo-backdrop ::ng-deep > div {
-  // 120 because material tables use z-index = 110 for sticky headers 
+  // 120 because material tables use z-index = 110 for sticky headers
   z-index: 120 !important;
 }
 

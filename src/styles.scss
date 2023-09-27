@@ -1,6 +1,8 @@
-@import 'style/reset.scss';
-@import 'style/theme.scss';
-//@import './qcca-theme/qcca-theme.scss';
+@use '@igo2/core/all-style';
+@use '@igo2/core/layout';
+
+@use 'style/reset.scss';
+@use 'style/theme.scss';
 
 .shepherd-element[data-popper-reference-hidden]:not(.shepherd-centered) {
   opacity: 1;
@@ -8,20 +10,20 @@
   pointer-events: initial;
 }
 
-.mat-tooltip-trigger {
+.mat-mdc-tooltip-trigger {
   touch-action: auto !important;
 }
 .toast-title-red {
-  color:red;
-  font-size:32px;
-  font-weight:bold;
+  color: red;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .toast-message-gray {
-  color:rgb(68, 69, 70);
+  color: rgb(68, 69, 70);
 }
 .toast-message-green-div {
-  color:rgb(35, 85, 20);
+  color: rgb(35, 85, 20);
 }
 
 .toast-message-ul-pad-inline-start-9prc {
@@ -36,5 +38,4 @@
 
 .toast-message-a-blue:hover {
   text-decoration: underline !important;
-
 }

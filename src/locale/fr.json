@@ -7,7 +7,7 @@
   "workspace": {
     "open": "Ouvrir la vue tabulaire",
     "close": "Fermer la vue tabulaire",
-    "disabled" : {
+    "disabled": {
       "resolution": "La vue tabulaire n'est pas disponible à cette échelle",
       "visible": "La couche n'a pas été chargée. Veuillez rendre visible la couche pour découvrir la donnée."
     },
@@ -16,16 +16,16 @@
   "header": {
     "title": "IGO",
     "language": "English",
-    "contactUsUrl" : "https://www.igouverte.org/#footer",
-    "contactUs" : "Nous joindre"
+    "contactUsUrl": "https://www.igouverte.org/#footer",
+    "contactUs": "Nous joindre"
   },
-  "footer":{
+  "footer": {
     "conditions": "Conditions d'utilisation",
     "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
     "ministry": "Nom du ministère",
     "url-ministry": "https://www.quebec.ca/gouvernement/ministère/",
     "gov": "© Gouvernement du Québec, 2022",
-    "url-gov": "http://www.droitauteur.gouv.qc.ca/copyright.php"
+    "url-gov": "https://www.quebec.ca/droit-auteur"
   },
   "externallinks": "Cet hyperlien s’ouvrira dans une nouvelle fenêtre",
   "toastPanel": {
@@ -44,7 +44,9 @@
     "standardExtent": "Réduire",
     "standardExtentTooltip": "Réduire la fenêtre",
     "previousFeatureTooltip": "Entité précédente ( raccouci clavier = flèche gauche )",
-    "nextFeatureTooltip": "Prochaine entité ( raccouci clavier = flèche droite )"
+    "nextFeatureTooltip": "Prochaine entité ( raccouci clavier = flèche droite )",
+    "addLayer": "Ajouter la couche de donnée associée.",
+    "removeLayer": "Supprimer la couche de donnée associée de la carte."
   },
   "home-extent": {
     "tooltip": "Aller à l'étendue de la carte"
@@ -55,7 +57,7 @@
   "googleMap": "Afficher dans Google Maps",
   "googleStreetView": "Afficher dans Google Street View",
   "welcomeWindow": {
-    "html": "<h1>Bienvenue dans {{title}}, l'application cartographique du gouvernement du Québec</h1><h2>Débutez en sélectionnant un contexte &#x2605;</h2><h2>Version {{version}}, en date du {{releaseDate}}</h2>",
+    "html": "<h2>Bienvenue dans {{title}}, l'application cartographique du gouvernement du Québec</h2><h3>Débutez en sélectionnant un contexte &#x2605;</h3><h3>Version {{version}}, en date du {{releaseDate}}</h3>",
     "title": "Fenêtre d'accueil",
     "closeButton": "Fermer",
     "notShowCheck": "Ne plus afficher"
@@ -251,6 +253,7 @@
   "messages": {
     "title": "Titre provenant d'une traduction.",
     "message": "Message provenant d'une traduction - **Config sans icône- <div class='toast-message-green-div'>Message provenant du contexte</div>Ouvrez lea couche 'MSP Tel. Urgence' pour voir les messages liés. {{content}}",
-    "content": "Du contenu dynamique peut également être ajouté au message"
+    "content": "Du contenu dynamique peut également être ajouté au message",
+    "addLayerFromIndex": "Vous devez configurer les fichiers de configuration ( <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json' target='_blank'>config.json</a>  OU <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts' target='_blank'>environnement.ts</a>) afin d'être en mesure de détecter les entités de type geoservice (wms)"
   }
 }

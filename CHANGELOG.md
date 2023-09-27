@@ -1,14 +1,39 @@
-## [1.15.4](https://github.com/infra-geo-ouverte/igo2/compare/1.15.2...1.15.4) (2023-07-05)
+# [16.0.0-rc.2](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.0...v16.0.0-rc.2) (2023-09-22)
+
+
+### Bug Fixes
+
+* **InteractiveTour:** replace deprecated position "auto" by "right" ([#1019](https://github.com/infra-geo-ouverte/igo2/issues/1019)) ([70dfb47](https://github.com/infra-geo-ouverte/igo2/commit/70dfb4715faeb34b4de39168d10eb417304dd0e8))
+* **Openlayers:** downgrade to 7.5.2 due to wms regression ([#1020](https://github.com/infra-geo-ouverte/igo2/issues/1020)) ([8880f52](https://github.com/infra-geo-ouverte/igo2/commit/8880f52bd3e1d9264cabdfd3961c3ecbdeb7c888))
+* **portal:** search bar position when open/close sidenav ([#1021](https://github.com/infra-geo-ouverte/igo2/issues/1021)) ([e52e8ae](https://github.com/infra-geo-ouverte/igo2/commit/e52e8ae0991cd185da0577bdf15032a2efec3a64))
 
 
 ### Features
 
-* **app:** upgrade igo2-lib ([a8ed9cd](https://github.com/infra-geo-ouverte/igo2/commit/a8ed9cdb51c3f4eba0705535923cce18ec35a859))
+* **app:** upgrade igo2-lib 16.0.0-rc.1 ([1c38dd0](https://github.com/infra-geo-ouverte/igo2/commit/1c38dd083d35d1672c6e7833f09aa9b874e573fa))
+* **Prettier:** be specific for the endOfLine type ([7adf6fe](https://github.com/infra-geo-ouverte/igo2/commit/7adf6fe2aae25266a51ff8963594c988bdc9c4bd))
 
 
-### Reverts
 
-* Revert "chore(cadastre): delete cadastre provider" ([84b5393](https://github.com/infra-geo-ouverte/igo2/commit/84b53932faa3051d6a5ec901cfa8e65bcd43c777))
+# [16.0.0-rc.0](https://github.com/infra-geo-ouverte/igo2/compare/1.15.2...v16.0.0-rc.0) (2023-09-19)
+
+
+### Bug Fixes
+
+* change logo path, size and url for copyrights info ([d2bf44e](https://github.com/infra-geo-ouverte/igo2/commit/d2bf44ecf366560142143a6f243a656e967755e3))
+* **toast:** https://github.com/angular/components/issues/27035 ([1f4b3f4](https://github.com/infra-geo-ouverte/igo2/commit/1f4b3f41622018580ba61b340b64186e47c6b9af))
+* **toast:** https://github.com/infra-geo-ouverte/igo2/issues/1002 ([bcc3f49](https://github.com/infra-geo-ouverte/igo2/commit/bcc3f49e1bb3e82627efc0a84d2f96e05261a8bc))
+* **toast:** missing tooltip ([90cfe20](https://github.com/infra-geo-ouverte/igo2/commit/90cfe2012972abf99448a59b339b341909d6fc37))
+* **tsconfig:** interference between types Jasmine and Chai ([f09b0e7](https://github.com/infra-geo-ouverte/igo2/commit/f09b0e7bd448a01717481ecb808b09f075aa2cf9))
+* **workspace:** paginator now positioned on right side ([3c2881b](https://github.com/infra-geo-ouverte/igo2/commit/3c2881b4249f0570424721451e433dbbeb3bc318))
+
+
+### Features
+
+* **demo:** add an demo context to explain how add layer from index file ([#968](https://github.com/infra-geo-ouverte/igo2/issues/968)) ([48b573d](https://github.com/infra-geo-ouverte/igo2/commit/48b573d01a4c312737ceb7b8b3e927578083561c))
+* **demo:** add sample context for keepCurrentView = false ([9a2f118](https://github.com/infra-geo-ouverte/igo2/commit/9a2f1184641df80f0bcc79b2235344a8116bbf00))
+* **SplashScreen:** add a replaceable image ([#1012](https://github.com/infra-geo-ouverte/igo2/issues/1012)) ([315445c](https://github.com/infra-geo-ouverte/igo2/commit/315445cbf751c4b6c1dfcffb53e01ffb108863d1))
+* **toast:** clear query result trigger workspace clear selection ([#958](https://github.com/infra-geo-ouverte/igo2/issues/958)) ([a069b03](https://github.com/infra-geo-ouverte/igo2/commit/a069b03a86c61886950284af00c5ff59027191e6))
 
 
 

@@ -7,7 +7,7 @@
   "workspace": {
     "open": "Open the table view",
     "close": "Close the table view",
-    "disabled" : {
+    "disabled": {
       "resolution": "The workspace is not available at this resolution",
       "visible": "The layer is not loaded. Try to set the layer visibility."
     },
@@ -16,10 +16,10 @@
   "header": {
     "title": "IGO",
     "language": "Français",
-    "contactUsUrl" : "https://www.igouverte.org/english/#footer",
-    "contactUs" : "Contact us"
+    "contactUsUrl": "https://www.igouverte.org/english/#footer",
+    "contactUs": "Contact us"
   },
-  "footer":{
+  "footer": {
     "conditions": "Terms of use",
     "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
     "ministry": "Ministry name",
@@ -44,7 +44,9 @@
     "standardExtent": "Reduce",
     "standardExtentTooltip": "Reduce panel",
     "previousFeatureTooltip": "Previous feature ( shortcut = left arrow)",
-    "nextFeatureTooltip": "Next feature ( shortcut = right arrow)"
+    "nextFeatureTooltip": "Next feature ( shortcut = right arrow)",
+    "addLayer": "Add the associated layer to the map",
+    "removeLayer": "Remove the associated layer from the map"
   },
   "home-extent": {
     "tooltip": "Go back to initial position"
@@ -248,11 +250,11 @@
     "new-version": "Do you want to reload the app?",
     "data-download-start": "Downloading data for offline use. Please don't leave the current app.",
     "data-download-completed": "Offline data download completed"
-
   },
   "messages": {
     "title": "Title from a translation.",
     "message": "Message from a translation - no icon - <div class='toast-message-green-div'>Message at the context level </div>Open the layer 'MSP Tel. Urgence' to see messages at the layer level. {{content}}",
-    "content": "Dynamic content can also be added to the message"
+    "content": "Dynamic content can also be added to the message",
+    "addLayerFromIndex": "You must configure the configuration files ( <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json' target='_blank'>config.json</a>  OU <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts' target='_blank'>environnement.ts</a>) in order to be able to detect entities of type geoservice (wms)"
   }
 }

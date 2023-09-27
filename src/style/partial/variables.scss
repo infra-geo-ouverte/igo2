@@ -1,4 +1,4 @@
-@import '../../../node_modules/@igo2/core/style/partial/core.variables';
+@import '@igo2/core/style/partial/core.variables';
 
 /*** Generic ***/
 $app-background-color: rgb(255, 255, 255);
@@ -6,7 +6,7 @@ $app-icon-button-width: 40px;
 
 $app-border-width: 1px;
 $app-border-style: solid;
-$app-border-color: rgba(0, 0, 0, .2);
+$app-border-color: rgba(0, 0, 0, 0.2);
 
 %border-box {
   box-sizing: border-box;

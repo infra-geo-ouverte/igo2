@@ -1,20 +1,18 @@
-/*
-  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
-  It is not intended to be used to perform a compilation.
-
-  To learn more about this file see: https://angular.io/config/solution-tsconfig.
-*/
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./src/tsconfig.app.json"
-    },
-    {
-      "path": "./src/tsconfig.spec.json"
-    },
-    {
-      "path": "./e2e/tsconfig.e2e.json"
-    }
-  ]
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "moduleResolution": "node",
+    "module": "ES2022",
+    "target": "ES2022",
+    "lib": ["ES2022", "dom"],
+    "declaration": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "sourceMap": true
+  },
+  "exclude": ["dist", "scripts", "e2e/**/*"]
 }
