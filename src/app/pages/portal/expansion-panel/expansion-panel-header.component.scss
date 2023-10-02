@@ -1,16 +1,22 @@
 @import '../portal.variables';
 
 :host {
-  display: block;
-  height: $app-expansion-panel-header-height;
   border-bottom: 2px solid aliceblue;
+  display: flex;
+  align-items: center;
+
+  button {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
 }
 
-:host > div {
+.app-expansion-panel-trigger-container {
   display: flex;
 }
 
-.app-expansion-panel-trigger-container,
 .app-expansion-panel-content {
-  display: contents;
+  display: flex;
+  height: 100%;
 }

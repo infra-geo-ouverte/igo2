@@ -15,8 +15,45 @@
     width: 100%;
     min-width: 100%;
   }
-}
 
+  igo-panel ::ng-deep .igo-panel-header:hover {
+    cursor: pointer;
+  }
+
+  igo-panel {
+    height: 100%;
+    outline: none;
+  }
+
+  igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelleftbutton],
+  igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelrightbutton] {
+    margin: 0;
+  }
+
+  igo-panel ::ng-deep .igo-panel-content {
+    user-select: auto !important;
+  }
+
+  igo-feature-details ::ng-deep iframe {
+    min-height: 24vh;
+
+    @include mobile {
+      min-height: 30vh;
+    }
+  }
+
+  app-full-toast-panel-opened igo-feature-details[_ngcontent-fiq-c23] iframe {
+    min-height: 450px;
+
+    @include mobile {
+      min-height: 350px;
+    }
+  }
+
+  .swipe-fix {
+    touch-action: pinch-zoom !important;
+  }
+}
 
 .app-toast-panel-html {
   height: $app-toast-panel-height;
@@ -55,7 +92,6 @@
   }
 }
 
-
 .app-toast-panel-opened {
   height: auto;
   max-height: $app-toast-panel-max-height;
@@ -75,7 +111,9 @@
   .toast-content {
     height: 100%;
     width: 100%;
-    max-height: calc(#{$app-toast-panel-max-height} - 34px); // scroll bar inside panel
+    max-height: calc(
+      #{$app-toast-panel-max-height} - 34px
+    ); // scroll bar inside panel
   }
 }
 
@@ -87,7 +125,9 @@
   .toast-content {
     height: 100%;
     width: 100%;
-    max-height: calc(#{$app-full-toast-panel-max-height} - 41px); // scroll inside panel on overflow
+    max-height: calc(
+      #{$app-full-toast-panel-max-height} - 41px
+    ); // scroll inside panel on overflow
   }
   @include tablet {
     width: $app-toast-panel-width-tablet;
@@ -103,10 +143,7 @@
     min-width: 100%;
     max-height: $app-full-toast-panel-max-height;
   }
-
-
 }
-
 
 .app-toast-panel-collapsed {
   height: $app-toast-panel-collapsed-height !important; // !important needed when expansion-panel is maximised
@@ -149,62 +186,6 @@
   @include tablet {
     width: $app-toast-panel-width-tablet;
   }
-}
-
-igo-panel ::ng-deep .igo-panel-header:hover {
-  cursor: pointer;
-}
-
-igo-panel {
-  height: 100%;
-  outline: none;
-}
-
-igo-panel ::ng-deep h3 {
-  display: flex;
-}
-
-igo-panel ::ng-deep .igo-panel-title {
-  flex-grow: 2;
-  margin: 0;
-}
-
-igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelleftbutton],
-igo-panel ::ng-deep .igo-panel-header ::ng-deep [panelrightbutton] {
-  margin: 0;
-}
-
-igo-panel ::ng-deep .igo-panel-content {
-  -webkit-user-select: auto !important;
-  -moz-user-select: auto !important;
-  -ms-user-select: auto !important;
-  user-select: auto !important;
-}
-
-
-igo-feature-details ::ng-deep iframe {
-  // min-height: 226px;
-  min-height: 24vh;
-
-  @include mobile {
-    min-height: 30vh;
-  }
-}
-
-host.app-full-toast-panel-opened igo-feature-details[_ngcontent-fiq-c23] iframe {
-  min-height: 450px;
-
-  @include mobile {
-    min-height: 350px;
-  }
-}
-
-.swipe-fix {
-  touch-action: pinch-zoom !important;
-}
-
-igo-actionbar {
-  overflow: hidden;
 }
 
 #app-toast-panel-opened-max-height {

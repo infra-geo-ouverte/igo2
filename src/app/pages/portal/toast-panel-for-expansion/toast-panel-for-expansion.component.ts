@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { showContent } from './toast-panel-for-expansion.animations';
 
-
 @Component({
   selector: 'app-toast-panel-for-expansion',
   templateUrl: './toast-panel-for-expansion.component.html',
@@ -17,7 +16,6 @@ import { showContent } from './toast-panel-for-expansion.animations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastPanelForExpansionComponent {
-
   @Input()
   set opened(value: boolean) {
     if (value === this._opened) {
@@ -26,7 +24,9 @@ export class ToastPanelForExpansionComponent {
     this._opened = value;
     this.openedChange.emit(this._opened);
   }
-  get opened(): boolean { return this._opened; }
+  get opened(): boolean {
+    return this._opened;
+  }
   private _opened: boolean;
 
   @Input() title: string;
@@ -42,9 +42,8 @@ export class ToastPanelForExpansionComponent {
 
   @HostBinding('style.visibility')
   get displayStyle() {
-    return (this.withHeader || this.opened) ? 'visible' : 'hidden';
+    return this.withHeader || this.opened ? 'visible' : 'hidden';
   }
 
   constructor() {}
-
 }

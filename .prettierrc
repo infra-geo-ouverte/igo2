@@ -1,5 +1,5 @@
 {
   "singleQuote": true,
   "trailingComma": "none",
-  "prettier.disableLanguages": ["html"]
+  "endOfLine": "lf"
 }

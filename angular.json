@@ -44,6 +44,11 @@
               },
               {
                 "glob": "**/*",
+                "input": "./node_modules/@igo2/core/theming/prebuilt-themes",
+                "output": "./assets/igo2/core/theming/prebuilt-themes"
+              },
+              {
+                "glob": "**/*",
                 "input": "./node_modules/@igo2/geo/assets/",
                 "output": "./assets/igo2/geo/"
               },
@@ -59,49 +64,26 @@
               ]
             },
             "allowedCommonJsDependencies": [
-              "hammerjs",
-              "typy",
-              "jspdf",
-              "file-saver",
-              "jwt-decode",
-              "@turf/helpers",
-              "@turf/line-segment",
-              "@turf/meta",
-              "@turf/invariant",
-              "@turf/line-intersect",
-              "pbf",
-              "geojson-rbush",
-              "minimatch",
-              "path",
-              "pixelworks",
-              "brace-expansion",
-              "rbush",
-              "@babel/runtime-corejs3",
-              "core-js-pure",
-              "raf",
-              "txml",
-              "lru-cache",
-              "lerc",
-              "pako/lib/inflate",
-              "through2",
-              "yallist",
-              "debug",
-              "striptags",
-              "core-js/modules/es.promise.js",
-              "core-js/modules/es.regexp.to-string.js",
-              "core-js/modules/es.array.reverse.js",
-              "core-js/modules/es.array.index-of.js",
-              "core-js/modules/es.array.reduce.js",
-              "core-js/modules/web.dom-collections.iterator.js",
-              "core-js/modules/es.array.iterator.js",
-              "nosleep.js",
-              "regenerator-runtime",
+              "@turf",
               "bowser",
-              "ts-md5",
-              "moment",
+              "canvg",
+              "core-js",
+              "file-saver",
+              "flexsearch",
+              "html-entities",
               "html2canvas",
+              "jspdf",
+              "jspdf-autotable",
+              "jszip",
+              "jwt-decode",
+              "moment",
+              "nosleep.js",
+              "raf",
+              "rbush",
               "rgbcolor",
-              "jszip"
+              "striptags",
+              "ts-md5",
+              "typy"
             ]
           },
           "configurations": {
@@ -189,7 +171,8 @@
           "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "igo2:build"
+            "browserTarget": "igo2:build",
+            "port": 4201
           },
           "configurations": {
             "developpement": {
@@ -240,6 +223,23 @@
               "src/**/*.html"
             ]
           }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "configFile": "e2e/cypress.config.ts",
+            "devServerTarget": "igo2:serve",
+            "browser": "chrome"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "igo2:serve:production"
+            },
+            "local": {
+              "watch": true,
+              "headless": false
+            }
+          }
         }
       }
     },
@@ -248,10 +248,16 @@
       "projectType": "application",
       "architect": {
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "igo2:serve"
+            "devServerTarget": "igo2-e2e:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "igo2-e2e:serve:production"
+            }
           }
         },
         "lint": {
@@ -267,7 +273,8 @@
   },
   "cli": {
     "schematicCollections": [
-      "@angular-eslint/schematics"
+      "@angular-eslint/schematics",
+      "@schematics/angular"
     ],
     "cache": {
       "enabled": false,
