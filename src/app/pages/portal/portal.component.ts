@@ -19,7 +19,7 @@ import * as olProj from 'ol/proj';
 import olFeature from 'ol/Feature';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 
-import OpenLayersParser from "geostyler-openlayers-parser";
+import OpenLayersParser from 'geostyler-openlayers-parser';
 
 import {
   MediaService,
@@ -430,7 +430,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       {
         id: 'Change new points style',
         title: 'Change new points style',
-        handler:() => this.changePointsStyle()
+        handler: () => this.changePointsStyle()
       },
       {
         id: 'addLayer',
@@ -438,20 +438,21 @@ export class PortalComponent implements OnInit, OnDestroy {
         handler: () => this.addLayerWithPoint(this.contextMenuCoord)
       },
       {
-      id: 'coordinates',
-      title: 'coordinates',
-      handler: () => this.searchCoordinate(this.contextMenuCoord)
-    },
-    {
-      id: 'googleMaps',
-      title: 'googleMap',
-      handler: () => this.openGoogleMaps(this.contextMenuCoord)
-    },
-    {
-      id: 'googleStreetView',
-      title: 'googleStreetView',
-      handler: () => this.openGoogleStreetView(this.contextMenuCoord)
-    }];
+        id: 'coordinates',
+        title: 'coordinates',
+        handler: () => this.searchCoordinate(this.contextMenuCoord)
+      },
+      {
+        id: 'googleMaps',
+        title: 'googleMap',
+        handler: () => this.openGoogleMaps(this.contextMenuCoord)
+      },
+      {
+        id: 'googleStreetView',
+        title: 'googleStreetView',
+        handler: () => this.openGoogleStreetView(this.contextMenuCoord)
+      }
+    ];
 
     this.contextMenuStore.load(contextActions);
 
@@ -714,59 +715,60 @@ export class PortalComponent implements OnInit, OnDestroy {
     const lastLayer = this.map.getLayerById('layerWithPoints');
 
     const pointGeoStyle: any = {
-      "name": "Basic star fill",
-      "rules": [
+      name: 'Basic star fill',
+      rules: [
         {
-          "name": "Rule 2",
-          "symbolizers": [
+          name: 'Rule 2',
+          symbolizers: [
             {
-              "kind": "Mark",
-              "wellKnownName": "star",
-              "color": "#ff0000",
-              "radius": 15
+              kind: 'Mark',
+              wellKnownName: 'star',
+              color: '#ff0000',
+              radius: 15
             }
           ]
         }
       ]
     };
 
-    const olParser2 = new OpenLayersParser;
-    olParser2.writeStyle(pointGeoStyle)
-    .then((output) => {
-      console.log("output", output);
-      (lastLayer.ol as any).setStyle(output.output);
-      console.log("output", output.output);
-    })
-    .catch(error => console.log(error));
-    console.log("lastLayer", lastLayer);
-
+    const olParser2 = new OpenLayersParser();
+    olParser2
+      .writeStyle(pointGeoStyle)
+      .then((output) => {
+        console.log('output', output);
+        (lastLayer.ol as any).setStyle(output.output);
+        console.log('output', output.output);
+      })
+      .catch((error) => console.log(error));
+    console.log('lastLayer', lastLayer);
   }
 
   changeStyle() {
     const lastLayer = this.map.layers
-    .filter(l => l.showInLayerList)
-    .filter(l => l.dataSource.options.type === 'wfs').pop();
+      .filter((l) => l.showInLayerList)
+      .filter((l) => l.dataSource.options.type === 'wfs')
+      .pop();
 
     const geoStylerStyle: any = {
-      "name": "Basic Circle",
-      "rules": [
+      name: 'Basic Circle',
+      rules: [
         {
-          "name": "Rule 1",
-          "symbolizers": [
+          name: 'Rule 1',
+          symbolizers: [
             {
-              "kind": "Mark",
-              "wellKnownName": "triangle",
-              "color": "#ff8000",
-              "strokeColor": "#000000",
-              "rotate": 90,
-              "radius": 30
+              kind: 'Mark',
+              wellKnownName: 'triangle',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
             },
             {
-              "kind": "Text",
-              "label": "{{desclocal}}",
-              "color": "#000000",
-              "opacity": 1,
-              "size": 12
+              kind: 'Text',
+              label: '{{desclocal}}',
+              color: '#000000',
+              opacity: 1,
+              size: 12
             }
           ]
         }
@@ -774,14 +776,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     };
 
     const olParser = new OpenLayersParser();
-    olParser.writeStyle(geoStylerStyle)
-    .then((output) => {
-      console.log("output", output);
-      (lastLayer.ol as any).setStyle(output.output);
-      console.log("output", output.output);
-    })
-    .catch(error => console.log(error));
-    console.log("lastLayer", lastLayer);
+    olParser
+      .writeStyle(geoStylerStyle)
+      .then((output) => {
+        console.log('output', output);
+        (lastLayer.ol as any).setStyle(output.output);
+        console.log('output', output.output);
+      })
+      .catch((error) => console.log(error));
+    console.log('lastLayer', lastLayer);
   }
 
   /**
@@ -1078,8 +1081,14 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.map.addLayer(layer);
     }
     const geometry4326 = new olGeom.Point(coord);
-    const geometryMapProjection = geometry4326.transform('EPSG:4326',this.map.projection);
-    const feature = new olFeature({ id: uuid(), geometry: geometryMapProjection });
+    const geometryMapProjection = geometry4326.transform(
+      'EPSG:4326',
+      this.map.projection
+    );
+    const feature = new olFeature({
+      id: uuid(),
+      geometry: geometryMapProjection
+    });
     layer.dataSource.ol.addFeature(feature);
   }
 
