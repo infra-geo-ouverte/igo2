@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { MatDialogConfig } from '@angular/material/dialog';
 
 import { ConfigService, StorageService } from '@igo2/core';
-import { MatDialogConfig } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'

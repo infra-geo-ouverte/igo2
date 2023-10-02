@@ -1,19 +1,19 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  Output,
-  OnInit,
-  OnDestroy,
   EventEmitter,
-  ChangeDetectionStrategy
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
 } from '@angular/core';
 
-import { BehaviorSubject, Subscription } from 'rxjs';
-
 import { Tool, Toolbox } from '@igo2/common';
-import { IgoMap } from '@igo2/geo';
-import { ToolState, CatalogState } from '@igo2/integration';
 import { ConfigService } from '@igo2/core';
+import { IgoMap } from '@igo2/geo';
+import { CatalogState, ToolState } from '@igo2/integration';
+
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',

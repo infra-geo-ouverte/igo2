@@ -1,13 +1,16 @@
-import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Title, Meta } from '@angular/platform-browser';
-import { DomUtils, userAgent } from '@igo2/utils';
-import { LanguageService, ConfigService, MessageService } from '@igo2/core';
-import { AuthOptions } from '@igo2/auth';
-import { AnalyticsListenerService } from '@igo2/integration';
-import { PwaService } from './services/pwa.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
+
+import { AuthOptions } from '@igo2/auth';
+import { ConfigService, LanguageService, MessageService } from '@igo2/core';
+import { AnalyticsListenerService } from '@igo2/integration';
+import { DomUtils, userAgent } from '@igo2/utils';
+
 import { delay, first } from 'rxjs';
+
+import { PwaService } from './services/pwa.service';
 
 @Component({
   selector: 'app-root',

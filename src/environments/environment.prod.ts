@@ -1,11 +1,11 @@
 import { LanguageOptions } from '@igo2/core';
 import {
-  SearchSourceOptions,
+  CommonVectorStyleOptions,
   ImportExportServiceOptions,
   OptionsApiOptions,
   Projection,
-  SpatialFilterOptions,
-  CommonVectorStyleOptions
+  SearchSourceOptions,
+  SpatialFilterOptions
 } from '@igo2/geo';
 
 import {

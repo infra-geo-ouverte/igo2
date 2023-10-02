@@ -2,18 +2,18 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-
 import { AuthOptions, AuthStorageOptions } from '@igo2/auth';
 import { DOMOptions } from '@igo2/common';
 import { ContextServiceOptions } from '@igo2/context';
 import { LanguageOptions } from '@igo2/core';
 import {
-  SearchSourceOptions,
   CatalogServiceOptions,
-  Projection,
+  CommonVectorStyleOptions,
   ImportExportServiceOptions,
-  CommonVectorStyleOptions
+  Projection,
+  SearchSourceOptions
 } from '@igo2/geo';
+
 import {
   AppOptions,
   InteractiveTourConfigOptions

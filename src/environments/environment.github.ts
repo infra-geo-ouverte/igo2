@@ -1,16 +1,17 @@
 import { LanguageOptions } from '@igo2/core';
 import {
-  SearchSourceOptions,
-  ImportExportServiceOptions,
   CatalogServiceOptions,
+  CommonVectorStyleOptions,
+  ImportExportServiceOptions,
   Projection,
-  CommonVectorStyleOptions
+  SearchSourceOptions
 } from '@igo2/geo';
 
 import {
   AppOptions,
   InteractiveTourConfigOptions
 } from './environnement.interface';
+
 interface Environment {
   production: boolean;
   igo: {

@@ -1,7 +1,10 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+
 import { Context, ContextService } from '@igo2/context';
-import { MediaService, ConfigService } from '@igo2/core';
+import { ConfigService, MediaService } from '@igo2/core';
+
+import { Subscription } from 'rxjs';
+
 import { MapOverlay } from './map-overlay.interface';
 
 @Component({

@@ -1,110 +1,109 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {
-  Component,
-  OnInit,
-  OnDestroy,
   ChangeDetectorRef,
-  ViewChild,
-  ElementRef
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
 } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
-import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
 import {
   MatDialog,
   MatDialogConfig,
   MatDialogRef
 } from '@angular/material/dialog';
-import MapBrowserEvent from 'ol/MapBrowserEvent';
-import * as olProj from 'ol/proj';
-import olFeature from 'ol/Feature';
-import type { default as OlGeometry } from 'ol/geom/Geometry';
+import { MatPaginator } from '@angular/material/paginator';
+import { ActivatedRoute, Params } from '@angular/router';
 
+import { AuthOptions, AuthService } from '@igo2/auth';
 import {
-  MediaService,
-  Media,
-  MediaOrientation,
+  ActionStore,
+  ActionbarMode,
+  EntityRecord,
+  EntityStore,
+  EntityTablePaginatorOptions,
+  Tool, // getEntityTitle,
+  Toolbox,
+  Widget,
+  Workspace,
+  WorkspaceStore
+} from '@igo2/common';
+import { DetailedContext } from '@igo2/context';
+import {
   ConfigService,
   LanguageService,
+  Media,
+  MediaOrientation,
+  MediaService,
   MessageService,
   StorageService
 } from '@igo2/core';
 import {
-  ActionbarMode,
-  Workspace,
-  WorkspaceStore,
-  ActionStore,
-  EntityStore,
-  // getEntityTitle,
-  Toolbox,
-  Tool,
-  Widget,
-  EntityTablePaginatorOptions,
-  EntityRecord
-} from '@igo2/common';
-import { AuthOptions, AuthService } from '@igo2/auth';
-import { DetailedContext } from '@igo2/context';
-import {
+  CapabilitiesService,
+  ConfigFileToGeoDBService,
   DataSourceService,
-  Feature,
+  EditionWorkspace,
+  EditionWorkspaceService,
   FEATURE,
-  featureToSearchResult,
+  Feature,
+  FeatureMotion,
+  FeatureWorkspace,
   GoogleLinks,
   IgoMap,
+  ImageLayer,
+  ImportService,
   LayerService,
+  MapExtent,
   QuerySearchSource,
+  QueryService,
   Research,
   SearchResult,
   SearchSource,
   SearchSourceService,
-  CapabilitiesService,
-  sourceCanSearch,
-  sourceCanReverseSearch,
-  ImportService,
+  VectorLayer,
+  WfsWorkspace,
+  addStopToStore,
+  computeOlFeaturesExtent,
+  featureFromOl,
+  featureToSearchResult,
+  generateIdFromSourceOptions,
   handleFileImportError,
   handleFileImportSuccess,
-  featureFromOl,
-  QueryService,
-  WfsWorkspace,
-  FeatureWorkspace,
-  EditionWorkspace,
-  EditionWorkspaceService,
-  generateIdFromSourceOptions,
-  computeOlFeaturesExtent,
-  addStopToStore,
-  ImageLayer,
-  VectorLayer,
-  MapExtent,
   moveToOlFeatures,
-  FeatureMotion,
-  ConfigFileToGeoDBService
+  sourceCanReverseSearch,
+  sourceCanSearch
 } from '@igo2/geo';
-
 import {
-  ToolState,
-  MapState,
-  SearchState,
-  QueryState,
   ContextState,
-  WorkspaceState,
-  DirectionState
+  DirectionState,
+  MapState,
+  QueryState,
+  SearchState,
+  ToolState,
+  WorkspaceState
 } from '@igo2/integration';
+import { ObjectUtils } from '@igo2/utils';
+
+import olFeature from 'ol/Feature';
+import MapBrowserEvent from 'ol/MapBrowserEvent';
+import olFormatGeoJSON from 'ol/format/GeoJSON';
+import type { default as OlGeometry } from 'ol/geom/Geometry';
+import * as olProj from 'ol/proj';
+
+import { BehaviorSubject, Subscription, combineLatest, of } from 'rxjs';
+import { debounceTime, first, pairwise, skipWhile, take } from 'rxjs/operators';
 
 import {
-  expansionPanelAnimation,
-  toastPanelAnimation,
-  controlsAnimations,
   controlSlideX,
   controlSlideY,
+  controlsAnimations,
+  expansionPanelAnimation,
   mapSlideX,
-  mapSlideY
+  mapSlideY,
+  toastPanelAnimation
 } from './portal.animation';
-import { HttpClient, HttpParams } from '@angular/common/http';
-
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { ObjectUtils } from '@igo2/utils';
-import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 @Component({
   selector: 'app-portal',
