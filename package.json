@@ -73,6 +73,7 @@
     "@igo2/integration": "16.0.0-rc.1",
     "@igo2/utils": "16.0.0-rc.1",
     "core-js": "^3.32.2",
+    "geostyler-legend": "^4.0.0",
     "geostyler-openlayers-parser": "^4.2.1",
     "hammerjs": "^2.0.8",
     "ol": "^7.5.2",

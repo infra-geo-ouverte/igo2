@@ -424,6 +424,11 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     const contextActions = [
       {
+        id: 'export legend',
+        title: 'Export Legend',
+        handler: () => this.exportLegend()
+      },
+      {
         id: 'change style',
         title: 'Change style',
         handler: () => this.changeStyle()
@@ -757,13 +762,6 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       ]
     };
-    const renderer = new LegendRenderer({
-      maxColumnWidth: 300,
-      maxColumnHeight: 300,
-      overflow: 'auto',
-      styles: [style123],
-      size: [600, 300]
-    });
 
     //renderer.render(someElement);
 
@@ -775,6 +773,95 @@ export class PortalComponent implements OnInit, OnDestroy {
     })
     .catch(error => console.log(error));
     console.log("lastLayer", lastLayer);*/
+  }
+
+  exportLegend() {
+    const layerDescriptors = [];
+
+    const style1: any = {
+      name: 'Basic Circle',
+      rules: [
+        {
+          name: 'Rule 1',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'triangle',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
+            },
+            {
+              kind: 'Text',
+              label: '{{desclocal}}',
+              color: '#000000',
+              opacity: 1,
+              size: 12
+            }
+          ]
+        }
+      ]
+    };
+    const style2: any = {
+      name: 'Basic Circle 2',
+      rules: [
+        {
+          name: 'Rule 1',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'triangle',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
+            },
+            {
+              kind: 'Text',
+              label: '{{desclocal}}',
+              color: '#000000',
+              opacity: 1,
+              size: 12
+            }
+          ]
+        }
+      ]
+    };
+
+    //lire tous les couches affichées; parser.readStyle().output
+
+    const renderer = new LegendRenderer({
+      maxColumnWidth: 300,
+      maxColumnHeight: 300,
+      overflow: 'auto',
+      styles: [style1, style2],
+      size: [600, 300]
+    });
+    renderer.renderAsImage('svg');
+    console.log(renderer.renderAsImage('svg'));
+    //renderer.renderLegend
+    const el = document.createElement('div');
+    console.log(renderer.render(el));
+
+    let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
+    if (!layer) {
+      layer = new VectorLayer({
+        title: 'Layer de points créé afin de changer le style.',
+        isIgoInternalLayer: true,
+        id: `layerWithPoints`,
+        zIndex: 200,
+        source: new FeatureDataSource(),
+        igoStyle: undefined,
+        showInLayerList: true,
+        exportable: true,
+        browsable: false,
+        workspace: { enabled: true }
+      });
+    }
+    this.map.addLayer(layer);
+    console.log(el.innerHTML); // Image as SVG string
+    return el.innerHTML;
   }
 
   changeStyle() {
