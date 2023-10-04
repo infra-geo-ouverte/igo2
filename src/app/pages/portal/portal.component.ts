@@ -836,9 +836,22 @@ export class PortalComponent implements OnInit, OnDestroy {
       maxColumnHeight: 300,
       overflow: 'auto',
       styles: [style1, style2],
-      size: [600, 300]
+      size: [600, 300],
+      hideRect: true
     });
-    renderer.renderAsImage('svg');
+
+    const legendEl = document.getElementById('legend');
+    if (legendEl) {
+      renderer.render(legendEl);
+    } /*
+    const blob = new Blob([arrayBufferView], { type: 'image/png' });
+    const urlCreator = window.URL;
+    const imageUrl = urlCreator.createObjectURL(blob);
+*/
+    renderer.renderAsImage('png').then((r) => {
+      console.log(r);
+    });
+
     console.log(renderer.renderAsImage('svg'));
     //renderer.renderLegend
     const el = document.createElement('div');
