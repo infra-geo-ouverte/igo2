@@ -127,7 +127,7 @@
       >
       </igo-home-extent-button>
       <igo-user-button
-        *ngIf="auth.url"
+        *ngIf="authService.hasAuthService"
         class="mat-elevation-z2"
         [map]="map"
         color="primary"

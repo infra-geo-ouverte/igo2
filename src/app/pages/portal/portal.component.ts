@@ -41,7 +41,7 @@ import {
   EntityTablePaginatorOptions,
   EntityRecord
 } from '@igo2/common';
-import { AuthOptions, AuthService } from '@igo2/auth';
+import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
 import {
   DataSourceService,
@@ -199,10 +199,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavOpened$.next(value);
   }
 
-  get auth(): AuthOptions {
-    return this.configService.getConfig('auth') || [];
-  }
-
   get toastPanelOpened(): boolean {
     return this._toastPanelOpened;
   }
@@ -254,10 +250,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.contextState.context$?.getValue()
       ? this.contextState.context$.getValue().uri
       : undefined;
-  }
-
-  get toastPanelShown(): boolean {
-    return true;
   }
 
   get expansionPanelBackdropShown(): boolean {
@@ -1592,7 +1584,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private initWelcomeWindow(): void {
-    if (this.auth?.url) {
+    if (this.authService.hasAuthService) {
       this.authService.logged$.subscribe((logged) => {
         if (logged) {
           this.createWelcomeWindow();
