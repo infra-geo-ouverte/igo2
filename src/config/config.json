@@ -21,7 +21,7 @@
   "showRotationButtonIfNoRotation": false,
   "menu": {
     "button": {
-      "show": true,
+      "visible": true,
       "useThemeColor": false
     }
   },
