@@ -13,7 +13,11 @@
   },
   "hasFooter": false,
   "hasExpansionPanel": true,
-  "hasGeolocateButton": true,
+  "geolocation": {
+    "button": {
+      "visible": true
+    }
+  },
   "showRotationButtonIfNoRotation": false,
   "menu": {
     "button": {

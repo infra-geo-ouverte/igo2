@@ -4,7 +4,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { DomUtils, userAgent } from '@igo2/utils';
 import { LanguageService, ConfigService, MessageService } from '@igo2/core';
 import { AuthOptions } from '@igo2/auth';
-import { AnalyticsListenerService } from '@igo2/integration';
+import { AnalyticsListenerService, AppOptions } from '@igo2/integration';
 import { PwaService } from './services/pwa.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { delay, first } from 'rxjs';
@@ -103,7 +103,7 @@ export class AppComponent implements OnInit {
   }
 
   private installPrompt() {
-    const appConfig = this.configService.getConfig('app');
+    const appConfig: AppOptions = this.configService.getConfig('app');
     if (appConfig?.install?.enabled && appConfig?.install?.promote) {
       if (userAgent.getOSName() !== 'iOS') {
         window.addEventListener(

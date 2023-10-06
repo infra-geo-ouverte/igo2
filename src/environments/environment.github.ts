@@ -1,6 +1,6 @@
-import { EnvironmentOptions } from '@igo2/integration';
+import { AppEnvironmentOptions } from './environnement.interface';
 
-export const environment: EnvironmentOptions = {
+export const environment: AppEnvironmentOptions = {
   production: true,
   igo: {
     app: {

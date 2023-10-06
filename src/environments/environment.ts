@@ -3,9 +3,9 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-import { EnvironmentOptions } from '@igo2/integration';
+import { AppEnvironmentOptions } from './environnement.interface';
 
-export const environment: EnvironmentOptions = {
+export const environment: AppEnvironmentOptions = {
   production: false,
   igo: {
     app: {
