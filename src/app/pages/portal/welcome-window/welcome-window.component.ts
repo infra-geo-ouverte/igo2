@@ -25,8 +25,10 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
     protected languageService: LanguageService
   ) {
     this.discoverTitleInLocale$ = of(
-      this.configService.getConfig('welcomeWindow.discoverTitleInLocale') ||
+      this.configService.getConfig(
+        'welcomeWindow.discoverTitleInLocale',
         this.configService.getConfig('title')
+      )
     );
   }
 
@@ -78,12 +80,12 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
     }
 
     this.title$$ = this.languageService.translate
-      .get(this.configService.getConfig('title') || '')
+      .get(this.configService.getConfig('title', ''))
       .pipe(
         map((title) => {
           return this.languageService.translate.instant('welcomeWindow.html', {
             title,
-            description: this.configService.getConfig('description') || '',
+            description: this.configService.getConfig('description', ''),
             version: getAppVersion(this.configService),
             releaseDate: releaseDateString || ''
           });

@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     private pwaService: PwaService,
     private router: Router
   ) {
-    this.authConfig = this.configService.getConfig('auth');
+    this.authConfig = this.configService.getConfig('auth', {});
 
     this.readTitleConfig();
     this.readDescriptionConfig();
@@ -40,15 +40,8 @@ export class AppComponent implements OnInit {
 
     this.detectOldBrowser();
 
-    this.hasHeader =
-      this.configService.getConfig('header.hasHeader') === undefined
-        ? false
-        : this.configService.getConfig('header.hasHeader');
-
-    this.hasFooter =
-      this.configService.getConfig('hasFooter') === undefined
-        ? false
-        : this.configService.getConfig('hasFooter');
+    this.hasHeader = this.configService.getConfig('header.hasHeader', false);
+    this.hasFooter = this.configService.getConfig('hasFooter', false);
 
     this.setManifest();
     this.installPrompt();
@@ -88,7 +81,7 @@ export class AppComponent implements OnInit {
 
   private readTitleConfig() {
     this.languageService.translate
-      .get(this.configService.getConfig('title'))
+      .get(this.configService.getConfig('title', ''))
       .subscribe((title) => {
         if (title) {
           this.titleService.setTitle(title);
@@ -98,10 +91,11 @@ export class AppComponent implements OnInit {
   }
 
   private setManifest() {
-    const appConfig = this.configService.getConfig('app');
-    if (appConfig?.install?.enabled) {
-      const manifestPath =
-        appConfig.install.manifestPath || 'manifest.webmanifest';
+    if (this.configService.getConfig('app.install.enabled')) {
+      const manifestPath = this.configService.getConfig(
+        'app.install.manifestPath',
+        'manifest.webmanifest'
+      );
       document
         .querySelector('#igoManifestByConfig')
         .setAttribute('href', manifestPath);
