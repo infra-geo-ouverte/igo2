@@ -4,6 +4,7 @@ import { ConfigService, LanguageService } from '@igo2/core';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { WelcomeWindowService } from './welcome-window.service';
+import { getAppVersion } from 'src/app/app.utils';
 
 @Component({
   selector: 'app-welcome-window',
@@ -83,10 +84,7 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
           return this.languageService.translate.instant('welcomeWindow.html', {
             title,
             description: this.configService.getConfig('description') || '',
-            version:
-              this.configService.getConfig('version.app') ||
-              this.configService.getConfig('version.lib') ||
-              '',
+            version: getAppVersion(this.configService),
             releaseDate: releaseDateString || ''
           });
         })

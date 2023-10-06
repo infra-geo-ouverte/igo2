@@ -105,6 +105,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
+import { getAppVersion } from 'src/app/app.utils';
 
 @Component({
   selector: 'app-portal',
@@ -337,6 +338,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState,
     private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
+    this.storageService.set('version', getAppVersion(this.configService));
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
     this._toastPanelOpened =
       (this.storageService.get('toastOpened') as boolean) !== false;
