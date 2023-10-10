@@ -39,7 +39,8 @@ import {
   Tool,
   Widget,
   EntityTablePaginatorOptions,
-  EntityRecord
+  EntityRecord,
+  EntityService
 } from '@igo2/common';
 import { AuthService } from '@igo2/auth';
 import { DetailedContext } from '@igo2/context';
@@ -67,7 +68,6 @@ import {
   WfsWorkspace,
   FeatureWorkspace,
   EditionWorkspace,
-  EditionWorkspaceService,
   generateIdFromSourceOptions,
   computeOlFeaturesExtent,
   addStopToStore,
@@ -329,7 +329,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     public dialogWindow: MatDialog,
     private queryService: QueryService,
     private storageService: StorageService,
-    private editionWorkspaceService: EditionWorkspaceService,
+    private entityService: EntityService,
     private directionState: DirectionState,
     private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
@@ -700,7 +700,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (this.getFeatureIsSameActiveWks(feature)) {
         if (
           this.getWksActiveOpenInResolution() &&
-          !(this.workspace as WfsWorkspace).getLayerWksOptionMapQuery()
+          !(this.workspace as WfsWorkspace)?.getLayerWksOptionMapQuery()
         ) {
           return;
         }
@@ -1631,7 +1631,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         relationWorkspace?.meta.tableTemplate.columns.forEach((col) => {
           // Update domain list
           if (col.type === 'list' || col.type === 'autocomplete') {
-            this.editionWorkspaceService
+            this.entityService
               .getDomainValues(col.relation)
               .subscribe((result) => {
                 col.domainValues = result;
