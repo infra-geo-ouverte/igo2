@@ -3,51 +3,9 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-import { AuthOptions, AuthStorageOptions } from '@igo2/auth';
-import { DOMOptions } from '@igo2/common';
-import { ContextServiceOptions } from '@igo2/context';
-import { LanguageOptions } from '@igo2/core';
-import {
-  SearchSourceOptions,
-  CatalogServiceOptions,
-  Projection,
-  ImportExportServiceOptions,
-  CommonVectorStyleOptions
-} from '@igo2/geo';
-import {
-  AppOptions,
-  InteractiveTourConfigOptions
-} from './environnement.interface';
+import { AppEnvironmentOptions } from './environnement.interface';
 
-interface Environment {
-  production: boolean;
-  igo: {
-    app: AppOptions;
-    auth?: AuthOptions;
-    storage: AuthStorageOptions;
-    catalog?: CatalogServiceOptions;
-    context?: ContextServiceOptions;
-    importExport?: ImportExportServiceOptions;
-    language?: LanguageOptions;
-    searchSources?: { [key: string]: SearchSourceOptions };
-    projections?: Projection[];
-    interactiveTour?: InteractiveTourConfigOptions;
-    depot?: { url: string; trainingGuides?: string[] };
-    dom?: DOMOptions[];
-    queryOverlayStyle?: {
-      base?: CommonVectorStyleOptions;
-      selection?: CommonVectorStyleOptions;
-      focus?: CommonVectorStyleOptions;
-    };
-    searchOverlayStyle?: {
-      base?: CommonVectorStyleOptions;
-      selection?: CommonVectorStyleOptions;
-      focus?: CommonVectorStyleOptions;
-    };
-  };
-}
-
-export const environment: Environment = {
+export const environment: AppEnvironmentOptions = {
   production: false,
   igo: {
     app: {
@@ -64,18 +22,23 @@ export const environment: Environment = {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
       allowAnonymous: true,
-      trustHosts: ['geoegl.msp.gouv.qc.ca']
-      /*,hostsByKey: [{
-         domainRegFilters: '(https:\/\/|http:\/\/)?(.*domain.com)(.*)',
-         keyProperty: 'key',
-         keyValue: '123456',
-      }]*/
+      trustHosts: ['geoegl.msp.gouv.qc.ca'],
+      hostsByKey: [
+        {
+          domainRegFilters: '(https://|http://)?(.*domain.com)(.*)',
+          keyProperty: 'key',
+          keyValue: '123456'
+        }
+      ]
     },
     storage: {
       url: '/user/igo',
       key: 'igo'
     },
-
+    /*context: {
+      url: '/apis/igo2',
+      defaultContextUri: '5'
+    },*/
     catalog: {
       sources: [
         {
@@ -251,28 +214,18 @@ export const environment: Environment = {
         }
       ]
     },
-    // context: {
-    //   url: '/apis/igo2',
-    //   defaultContextUri: '5'
-    // },
     depot: {
       url: '/apis/depot'
     },
     dom: [
-      // {
-      //   id: 1,
-      //   name: 'test-dom',
-      //   values: [
-      //     {
-      //       id: "Radar photo fixe",
-      //       value: "Radar photo fixe"
-      //     },
-      //     {
-      //       id: "Radar photo mobile",
-      //       value: "Radar photo mobile"
-      //     }
-      //   ]
-      // },
+      {
+        id: 1,
+        name: 'test-dom',
+        values: [
+          { id: 'Radar photo fixe', value: 'Radar photo fixe' },
+          { id: 'Radar photo mobile', value: 'Radar photo mobile' }
+        ]
+      },
       {
         id: 1,
         name: 'dom_test',

@@ -64,8 +64,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activeTool$$ = this.toolbox.activeTool$.subscribe((tool: Tool) => {
-      const sidenavTitle =
-        this.configService.getConfig('sidenavTitle') || 'IGO';
+      const sidenavTitle = this.configService.getConfig('sidenavTitle', 'IGO');
       if (tool) {
         if (tool.name === 'catalogBrowser') {
           for (const catalog of this.catalogState.catalogStore.all()) {
