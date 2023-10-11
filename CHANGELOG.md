@@ -1,3 +1,18 @@
+# [16.0.0-rc.3](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.2...v16.0.0-rc.3) (2023-10-11)
+
+
+### Bug Fixes
+
+* **Prettier:** ignore test file ([e6a4ff5](https://github.com/infra-geo-ouverte/igo2/commit/e6a4ff56fa577b23198adb9ddb70b4c5cb6f0dfe))
+
+
+### Features
+
+* add types for app environment and config ([cd33a3a](https://github.com/infra-geo-ouverte/igo2/commit/cd33a3a0b53ff726ab9c617c24e19f3aaef91a9f))
+* **app:** upgrade igo2-lib 16.0.0-rc.2 ([9108b45](https://github.com/infra-geo-ouverte/igo2/commit/9108b4504cd12c46e69c4704c7fe7744fd0387aa))
+
+
+
 # [16.0.0-rc.2](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.0...v16.0.0-rc.2) (2023-09-22)
 
 
