@@ -89,6 +89,7 @@
     "@angular/cli": "^16.2.2",
     "@angular/compiler-cli": "^16.2.5",
     "@cypress/schematic": "^2.5.1",
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@types/geojson": "^7946.0.10",
     "@types/hammerjs": "^2.0.41",
     "@types/jasmine": "^4.3.5",

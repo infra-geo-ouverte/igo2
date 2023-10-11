@@ -1,13 +1,13 @@
-import './portal.variables.scss';
-
 import {
-  trigger,
+  AnimationTriggerMetadata,
+  animate,
   state,
   style,
   transition,
-  animate,
-  AnimationTriggerMetadata
+  trigger
 } from '@angular/animations';
+
+import './portal.variables.scss';
 
 export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
   return [

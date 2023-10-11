@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { ConfigService, LanguageService } from '@igo2/core';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+
+import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { WelcomeWindowService } from './welcome-window.service';
 import { getAppVersion } from 'src/app/app.utils';
 
