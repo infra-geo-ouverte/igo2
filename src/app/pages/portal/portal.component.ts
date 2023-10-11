@@ -92,6 +92,8 @@ import * as olProj from 'ol/proj';
 
 import { BehaviorSubject, Subscription, combineLatest, of } from 'rxjs';
 import { debounceTime, first, pairwise, skipWhile, take } from 'rxjs/operators';
+import { getAppVersion } from 'src/app/app.utils';
+import { EnvironmentOptions } from 'src/environments/environnement.interface';
 
 import {
   controlSlideX,
@@ -104,9 +106,6 @@ import {
 } from './portal.animation';
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
-
-import { EnvironmentOptions } from 'src/environments/environnement.interface';
-import { getAppVersion } from 'src/app/app.utils';
 
 @Component({
   selector: 'app-portal',
@@ -700,7 +699,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (this.getFeatureIsSameActiveWks(feature)) {
         if (
           this.getWksActiveOpenInResolution() &&
-          !(this.workspace as WfsWorkspace).getLayerWksOptionMapQuery()
+          !(this.workspace as WfsWorkspace).getLayerWksOptionMapQuery?.()
         ) {
           return;
         }
