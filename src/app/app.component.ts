@@ -5,7 +5,7 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { AuthOptions } from '@igo2/auth';
 import { ConfigService, LanguageService, MessageService } from '@igo2/core';
-import { AnalyticsListenerService } from '@igo2/integration';
+import { AnalyticsListenerService, AppOptions } from '@igo2/integration';
 import { DomUtils, userAgent } from '@igo2/utils';
 
 import { delay, first } from 'rxjs';
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     private pwaService: PwaService,
     private router: Router
   ) {
-    this.authConfig = this.configService.getConfig('auth');
+    this.authConfig = this.configService.getConfig('auth', {});
 
     this.readTitleConfig();
     this.readDescriptionConfig();
@@ -43,15 +43,8 @@ export class AppComponent implements OnInit {
 
     this.detectOldBrowser();
 
-    this.hasHeader =
-      this.configService.getConfig('header.hasHeader') === undefined
-        ? false
-        : this.configService.getConfig('header.hasHeader');
-
-    this.hasFooter =
-      this.configService.getConfig('hasFooter') === undefined
-        ? false
-        : this.configService.getConfig('hasFooter');
+    this.hasHeader = this.configService.getConfig('header.hasHeader', false);
+    this.hasFooter = this.configService.getConfig('hasFooter', false);
 
     this.setManifest();
     this.installPrompt();
@@ -91,7 +84,7 @@ export class AppComponent implements OnInit {
 
   private readTitleConfig() {
     this.languageService.translate
-      .get(this.configService.getConfig('title'))
+      .get(this.configService.getConfig('title', ''))
       .subscribe((title) => {
         if (title) {
           this.titleService.setTitle(title);
@@ -101,10 +94,11 @@ export class AppComponent implements OnInit {
   }
 
   private setManifest() {
-    const appConfig = this.configService.getConfig('app');
-    if (appConfig?.install?.enabled) {
-      const manifestPath =
-        appConfig.install.manifestPath || 'manifest.webmanifest';
+    if (this.configService.getConfig('app.install.enabled')) {
+      const manifestPath = this.configService.getConfig(
+        'app.install.manifestPath',
+        'manifest.webmanifest'
+      );
       document
         .querySelector('#igoManifestByConfig')
         .setAttribute('href', manifestPath);
@@ -112,7 +106,7 @@ export class AppComponent implements OnInit {
   }
 
   private installPrompt() {
-    const appConfig = this.configService.getConfig('app');
+    const appConfig: AppOptions = this.configService.getConfig('app');
     if (appConfig?.install?.enabled && appConfig?.install?.promote) {
       if (userAgent.getOSName() !== 'iOS') {
         window.addEventListener(

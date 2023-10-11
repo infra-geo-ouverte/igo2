@@ -73,7 +73,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     DOWN: 'swipedown'
   };
 
-  public tabsMode = false;
+  public tabsMode: boolean;
 
   get storageService(): StorageService {
     return this.storageState.storageService;
@@ -310,9 +310,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     private propertyTypeDetectorService: PropertyTypeDetectorService,
     private layerService: LayerService
   ) {
-    this.tabsMode = this.configService.getConfig('queryTabs')
-      ? this.configService.getConfig('queryTabs')
-      : false;
+    this.tabsMode = this.configService.getConfig('queryTabs', false);
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
     this.fullExtent = this.storageService.get('fullExtent') as boolean;

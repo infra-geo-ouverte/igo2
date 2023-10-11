@@ -40,14 +40,14 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
   }
 
   private handleContextChange(context: Context) {
-    let mapOverlay = [];
+    let mapOverlay: MapOverlay[] = [];
     if (context !== undefined) {
       this.mapOverlay = [];
 
       if (context['mapOverlay']) {
         mapOverlay = context['mapOverlay'];
-      } else if (this.configService.getConfig('mapOverlay')) {
-        mapOverlay = this.configService.getConfig('mapOverlay');
+      } else {
+        mapOverlay = this.configService.getConfig('mapOverlay', []);
       }
       for (const overlay of mapOverlay) {
         // If no media define use default to desktop, display only if current media is on context definition

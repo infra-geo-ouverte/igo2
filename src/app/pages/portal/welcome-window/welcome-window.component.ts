@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { WelcomeWindowService } from './welcome-window.service';
+import { getAppVersion } from 'src/app/app.utils';
 
 @Component({
   selector: 'app-welcome-window',
@@ -27,8 +28,10 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
     protected languageService: LanguageService
   ) {
     this.discoverTitleInLocale$ = of(
-      this.configService.getConfig('welcomeWindow.discoverTitleInLocale') ||
+      this.configService.getConfig(
+        'welcomeWindow.discoverTitleInLocale',
         this.configService.getConfig('title')
+      )
     );
   }
 
@@ -80,16 +83,13 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
     }
 
     this.title$$ = this.languageService.translate
-      .get(this.configService.getConfig('title') || '')
+      .get(this.configService.getConfig('title', ''))
       .pipe(
         map((title) => {
           return this.languageService.translate.instant('welcomeWindow.html', {
             title,
-            description: this.configService.getConfig('description') || '',
-            version:
-              this.configService.getConfig('version.app') ||
-              this.configService.getConfig('version.lib') ||
-              '',
+            description: this.configService.getConfig('description', ''),
+            version: getAppVersion(this.configService),
             releaseDate: releaseDateString || ''
           });
         })

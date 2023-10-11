@@ -134,7 +134,7 @@ function appInitializerFactory(
           languageService.translate.setTranslation(lang, translations);
 
           const configService = injector.get(ConfigService);
-          const theme = configService.getConfig('theme') || DEFAULT_THEME;
+          const theme = configService.getConfig('theme', DEFAULT_THEME);
           loadTheme(document, theme);
 
           const titleKey = configService.getConfig('title');

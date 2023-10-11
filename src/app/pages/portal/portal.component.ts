@@ -15,7 +15,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { AuthOptions, AuthService } from '@igo2/auth';
+import { AuthService } from '@igo2/auth';
 import {
   ActionStore,
   ActionbarMode,
@@ -105,6 +105,9 @@ import {
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 
+import { EnvironmentOptions } from 'src/environments/environnement.interface';
+import { getAppVersion } from 'src/app/app.utils';
+
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
@@ -120,20 +123,15 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
+  public appConfig: EnvironmentOptions;
   public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(
     undefined
   );
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public minSearchTermLength = 2;
-  public hasExpansionPanel = false;
   public hasGeolocateButton = true;
-  public hasHomeExtentButton = false;
   public showMenuButton = true;
   public showSearchBar = true;
-  public showOfflineButton = false;
-  public showWakeLockButton = false;
-  public showRotationButtonIfNoRotation = false;
-  public hasFeatureEmphasisOnSelection: Boolean = false;
   public workspaceNotAvailableMessage: string = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
   public workspaceEntitySortChange$: BehaviorSubject<boolean> =
@@ -155,7 +153,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   public termSplitter = '|';
   public termDefinedInUrlTriggered = false;
   private addedLayers$$: Subscription[] = [];
-  public forceCoordsNA = false;
 
   public contextMenuStore = new ActionStore([]);
   private contextMenuCoord: [number, number];
@@ -196,10 +193,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   set sidenavOpened(value: boolean) {
     this.sidenavOpened$.next(value);
-  }
-
-  get auth(): AuthOptions {
-    return this.configService.getConfig('auth') || [];
   }
 
   get toastPanelOpened(): boolean {
@@ -253,10 +246,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.contextState.context$?.getValue()
       ? this.contextState.context$.getValue().uri
       : undefined;
-  }
-
-  get toastPanelShown(): boolean {
-    return true;
   }
 
   get expansionPanelBackdropShown(): boolean {
@@ -344,44 +333,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState,
     private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
+    this.handleAppConfigs();
+    this.storageService.set('version', getAppVersion(this.configService));
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
     this._toastPanelOpened =
       (this.storageService.get('toastOpened') as boolean) !== false;
-    this.hasExpansionPanel = this.configService.getConfig('hasExpansionPanel');
-    this.hasHomeExtentButton =
-      this.configService.getConfig('homeExtentButton') === undefined
-        ? false
-        : true;
-    this.hasGeolocateButton =
-      this.configService.getConfig('hasGeolocateButton') === undefined
-        ? true
-        : this.configService.getConfig('hasGeolocateButton');
-    this.showRotationButtonIfNoRotation =
-      this.configService.getConfig('showRotationButtonIfNoRotation') ===
-      undefined
-        ? false
-        : this.configService.getConfig('showRotationButtonIfNoRotation');
-    const showMenuConfig = this.configService.getConfig('menu.button.show');
-    this.showMenuButton = showMenuConfig !== undefined ? showMenuConfig : true;
-
-    this.showSearchBar =
-      this.configService.getConfig('searchBar.showSearchBar') === undefined
-        ? true
-        : this.configService.getConfig('searchBar.showSearchBar');
-    this.showOfflineButton =
-      this.configService.getConfig('offlineButton') === undefined
-        ? false
-        : this.configService.getConfig('offlineButton');
-    this.showWakeLockButton =
-      this.configService.getConfig('wakeLockApiButton') === undefined
-        ? false
-        : this.configService.getConfig('wakeLockApiButton');
-
-    this.forceCoordsNA = this.configService.getConfig('app.forceCoordsNA');
-    this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
-      'hasFeatureEmphasisOnSelection'
-    );
-
     this.igoSearchPointerSummaryEnabled = this.configService.getConfig(
       'hasSearchPointerSummary'
     );
@@ -444,7 +400,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           prevCnt === 0 &&
           currentCnt !== prevCnt &&
           this.isMobile() &&
-          this.hasExpansionPanel &&
+          this.appConfig.hasExpansionPanel &&
           this.expansionPanelExpanded &&
           this.toastPanelOpened
         ) {
@@ -453,12 +409,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
     this.map.ol.once('rendercomplete', () => {
       this.readQueryParams();
-      if (
-        this.configService.getConfig('geolocate.activateDefault') !== undefined
-      ) {
-        this.map.geolocationController.tracking = this.configService.getConfig(
-          'geolocate.activateDefault'
-        );
+      if (this.appConfig.geolocate?.activateDefault !== undefined) {
+        this.map.geolocationController.tracking =
+          this.appConfig.geolocate?.activateDefault;
       }
     });
 
@@ -472,9 +425,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.workspaceState.workspaceEnabled$.next(this.hasExpansionPanel);
+    this.workspaceState.workspaceEnabled$.next(
+      this.appConfig.hasExpansionPanel
+    );
     this.workspaceState.store.empty$.subscribe((workspaceEmpty) => {
-      if (!this.hasExpansionPanel) {
+      if (!this.appConfig.hasExpansionPanel) {
         return;
       }
       this.workspaceState.workspaceEnabled$.next(workspaceEmpty ? false : true);
@@ -548,14 +503,31 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.computeToastPanelOffsetX();
       });
 
-    if (this.configService.getConfig('importExport')) {
-      const configFileToGeoDBService = this.configService.getConfig(
-        'importExport.configFileToGeoDBService'
+    if (this.appConfig.importExport?.configFileToGeoDBService) {
+      this.configFileToGeoDBService.load(
+        this.appConfig.importExport.configFileToGeoDBService
       );
-      if (configFileToGeoDBService) {
-        this.configFileToGeoDBService.load(configFileToGeoDBService);
-      }
     }
+  }
+
+  private handleAppConfigs() {
+    this.appConfig = this.configService.getConfigs();
+
+    this.hasGeolocateButton = this.configService.getConfig(
+      'geolocate.button.visible',
+      true
+    );
+    this.showMenuButton = this.configService.getConfig(
+      'menu.button.visible',
+      true
+    );
+
+    this.showSearchBar = this.configService.getConfig(
+      'searchBar.showSearchBar',
+      true
+    );
+    this.igoSearchPointerSummaryEnabled =
+      this.appConfig.hasSearchPointerSummary;
   }
 
   setToastPanelHtmlDisplay(value) {
@@ -902,7 +874,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private handleExpansionAndToastOnMobile() {
     if (
       this.isMobile() &&
-      this.hasExpansionPanel &&
+      this.appConfig.hasExpansionPanel &&
       this.expansionPanelExpanded &&
       this.toastPanelOpened
     ) {
@@ -968,13 +940,16 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   updateMapBrowserClass() {
     const header = this.queryState.store.entities$.value.length > 0;
-    if (this.hasExpansionPanel && this.workspaceState.workspaceEnabled$.value) {
+    if (
+      this.appConfig.hasExpansionPanel &&
+      this.workspaceState.workspaceEnabled$.value
+    ) {
       this.mapBrowser.nativeElement.classList.add('has-expansion-panel');
     } else {
       this.mapBrowser.nativeElement.classList.remove('has-expansion-panel');
     }
 
-    if (this.hasExpansionPanel && this.expansionPanelExpanded) {
+    if (this.appConfig.hasExpansionPanel && this.expansionPanelExpanded) {
       if (this.workspaceState.workspaceMaximize$.value) {
         this.mapBrowser.nativeElement.classList.add(
           'expansion-offset-maximized'
@@ -1591,7 +1566,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private initWelcomeWindow(): void {
-    if (this.auth?.url) {
+    if (this.authService.hasAuthService) {
       this.authService.logged$.subscribe((logged) => {
         if (logged) {
           this.createWelcomeWindow();
