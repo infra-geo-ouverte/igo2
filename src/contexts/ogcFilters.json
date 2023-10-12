@@ -7,42 +7,41 @@
       "title": "Feux forêt (WMS - filtre temps en calendrier-année)",
       "visible": false,
       "metadata": {
-          "extern": true
+        "extern": true
       },
 
       "sourceOptions": {
-          "crossOrigin": "anonymous",
-          "queryable": true,
-          "queryFormat": "htmlgml2",
-          "queryHtmlTarget": "iframe",
-          "type": "wms",
-          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi",
-          "optionsFromCapabilities": true,
-          "params": {
-              "layers": "ca_feux_close_scale",
-              "version": "1.3.0"
-          },
-          "timeFilterable": false,
-          "ogcFilters": {
-              "enabled": true,
-              "editable": true,
-              "allowedOperatorsType": "basic",
-            
-              "filters":
-              {
-                "operator": "During",
-                "propertyName": "annee_date",
-                "begin": "1890",
-                "end": "2020",
-                "restrictedToStep": false,
-                "calendarModeYear": true
-              } 
-          },
-          "stepDate": "P1Y"
-      }    
-    }, 
+        "crossOrigin": "anonymous",
+        "queryable": true,
+        "queryFormat": "htmlgml2",
+        "queryHtmlTarget": "iframe",
+        "type": "wms",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi",
+        "optionsFromCapabilities": true,
+        "params": {
+          "layers": "ca_feux_close_scale",
+          "version": "1.3.0"
+        },
+        "timeFilterable": false,
+        "ogcFilters": {
+          "enabled": true,
+          "editable": true,
+          "allowedOperatorsType": "basic",
+
+          "filters": {
+            "operator": "During",
+            "propertyName": "annee_date",
+            "begin": "1890",
+            "end": "2020",
+            "restrictedToStep": false,
+            "calendarModeYear": true
+          }
+        },
+        "stepDate": "P1Y"
+      }
+    },
     {
-      "id":"1",
+      "id": "1",
       "title": "Filtre - Événements (WFS avec filtre avancé)",
       "visible": false,
       "sourceOptions": {
@@ -58,7 +57,11 @@
         "sourceFields": [
           { "name": "code_municipalite", "alias": "# de la municipalitée" },
           { "name": "date_observation", "allowedOperatorsType": "time" },
-          { "name": "urgence", "values": ["Immédiate", "Inconnue"], "allowedOperatorsType": "basic" }
+          {
+            "name": "urgence",
+            "values": ["Immédiate", "Inconnue"],
+            "allowedOperatorsType": "basic"
+          }
         ],
         "ogcFilters": {
           "allowedOperatorsType": "all",
@@ -73,7 +76,7 @@
       }
     },
     {
-      "id":"2",
+      "id": "2",
       "title": "Filtre - Événements extrêmes (non éditable)",
       "visible": false,
       "sourceOptions": {
@@ -98,7 +101,7 @@
       }
     },
     {
-      "id":3,
+      "id": 3,
       "title": "Filtre - Photo radard (WMS - boutons de différents types)",
       "sourceOptions": {
         "type": "wms",
@@ -114,8 +117,8 @@
           "pushButtons": {
             "order": 2,
             "groups": [
-              {"title": "Group 1 Title","name": "1","ids": ["id1"]},
-              {"title": "Group 2 Title","name": "2","ids": ["id1", "id2"]}
+              { "title": "Group 1 Title", "name": "1", "ids": ["id1"] },
+              { "title": "Group 2 Title", "name": "2", "ids": ["id1", "id2"] }
             ],
             "bundles": [
               {
@@ -207,7 +210,7 @@
           "checkboxes": {
             "order": 1,
             "groups": [
-              {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
+              { "title": "Group 1 Title", "name": "1", "ids": ["id1", "id2"] }
             ],
             "bundles": [
               {
@@ -254,8 +257,8 @@
           "radioButtons": {
             "order": 1,
             "groups": [
-              {"title": "Group 1 Title","name": "1","ids": ["id1"]},
-              {"title": "Group 2 Title","name": "2","ids": ["id1", "id2"]}
+              { "title": "Group 1 Title", "name": "1", "ids": ["id1"] },
+              { "title": "Group 2 Title", "name": "2", "ids": ["id1", "id2"] }
             ],
             "bundles": [
               {
@@ -348,7 +351,7 @@
           "select": {
             "order": 3,
             "groups": [
-              {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
+              { "title": "Group 1 Title", "name": "1", "ids": ["id1", "id2"] }
             ],
             "bundles": [
               {
@@ -397,7 +400,7 @@
           "autocomplete": {
             "order": 4,
             "groups": [
-              {"title": "Autocomplete","name": "1","ids": ["id1","id2"]}
+              { "title": "Autocomplete", "name": "1", "ids": ["id1", "id2"] }
             ],
             "bundles": [
               {
@@ -428,7 +431,7 @@
       }
     },
     {
-      "id":4,
+      "id": 4,
       "title": "Filtre - Événements (WMS- boutons + filtre temps calendrier-date)",
       "sourceOptions": {
         "type": "wms",
@@ -446,15 +449,19 @@
           "layers": "vg_observation_v_autre_wmst"
         },
         "sourceFields": [
-          {"name": "date_observation", "alias": "Date de l'observation", "allowedOperatorsType": "Time"},
-          {"name": "type", "alias": "type", "allowedOperatorsType": "all"}
+          {
+            "name": "date_observation",
+            "alias": "Date de l'observation",
+            "allowedOperatorsType": "Time"
+          },
+          { "name": "type", "alias": "type", "allowedOperatorsType": "all" }
         ],
         "ogcFilters": {
           "enabled": true,
           "editable": false,
           "pushButtons": {
             "groups": [
-              {"title": "Group 1 Title","name": "1","ids": ["id1"]}
+              { "title": "Group 1 Title", "name": "1", "ids": ["id1"] }
             ],
             "bundles": [
               {
@@ -484,14 +491,13 @@
               }
             ]
           },
-          "filters":
-            {
-              "operator": "During",
-              "propertyName": "date_observation",
-              "begin": "2016-01-21T00:00:00-05:00",
-              "end": "today",
-              "title": "Date de l'observation"
-            },
+          "filters": {
+            "operator": "During",
+            "propertyName": "date_observation",
+            "begin": "2016-01-21T00:00:00-05:00",
+            "end": "today",
+            "title": "Date de l'observation"
+          },
           "allowedOperatorsType": "basic"
         },
         "minDate": "2010-01-01T00:00:00-05:00",
@@ -499,7 +505,6 @@
         "stepDate": "P1D"
       }
     }
-   
   ],
   "toolbar": [
     "searchResults",

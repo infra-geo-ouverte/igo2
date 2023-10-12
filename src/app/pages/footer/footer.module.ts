@@ -1,18 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from './footer.component';
+import { NgModule } from '@angular/core';
+
 import { IgoLanguageModule } from '@igo2/core';
 
+import { FooterComponent } from './footer.component';
+
 @NgModule({
-  declarations: [
-    FooterComponent
-  ],
-  imports: [
-    CommonModule,
-    IgoLanguageModule
-  ],
-  exports: [
-    FooterComponent
-  ]
+  declarations: [FooterComponent],
+  imports: [CommonModule, IgoLanguageModule],
+  exports: [FooterComponent]
 })
-export class FooterModule { }
+export class FooterModule {}

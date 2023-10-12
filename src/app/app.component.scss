@@ -14,7 +14,11 @@ igo-spinner {
 }
 
 /*** Message-center ***/
-igo-message-center ::ng-deep simple-notifications ::ng-deep div.simple-notification-wrapper {
+igo-message-center
+  ::ng-deep
+  simple-notifications
+  ::ng-deep
+  div.simple-notification-wrapper {
   right: 10px;
 }
 
@@ -23,29 +27,29 @@ $header-height-mobile: 72px;
 $footer-height: 29px;
 
 ::ng-deep .portal-with-header {
-height: calc( 100% - #{$header-height-mobile} )!important;
+  height: calc(100% - #{$header-height-mobile}) !important;
 }
 
 ::ng-deep .portal-with-header-footer {
-  height: calc( 100% - #{$header-height-mobile} - #{$footer-height} )!important;
+  height: calc(100% - #{$header-height-mobile} - #{$footer-height}) !important;
 }
 
 ::ng-deep .portal-with-footer {
-  height: calc( 100% - #{$footer-height} )!important;
+  height: calc(100% - #{$footer-height}) !important;
 }
 
 @media screen and (min-width: 824px) {
   ::ng-deep .portal-with-header {
-        height: calc( 100% - #{$header-height} )!important;
-        }
+    height: calc(100% - #{$header-height}) !important;
+  }
 
   ::ng-deep .portal-with-header-footer {
-      height: calc( 100% - #{$header-height} - #{$footer-height} )!important;
-      }
+    height: calc(100% - #{$header-height} - #{$footer-height}) !important;
+  }
 }
 
 ::ng-deep .mat-mdc-form-field-icon-suffix {
-  ::ng-deep mat-icon  {
+  ::ng-deep mat-icon {
     width: auto !important;
     height: -webkit-fill-available !important;
   }

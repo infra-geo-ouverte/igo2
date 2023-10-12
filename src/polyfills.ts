@@ -15,22 +15,23 @@
  */
 
 /***************************************************************************************************
-* BROWSER POLYFILLS
-*/
-
-import 'core-js/es/object';
-import 'core-js/es/string';
-
+ * BROWSER POLYFILLS
+ */
+import 'core-js/es/array/flat-map';
 import 'core-js/es/array/includes';
-import 'core-js/es/array/flat-map'; // Run `npm install --save classlist.js`.
+import 'core-js/es/object';
+// Run `npm install --save classlist.js`.
 
 /** Evergreen browsers require these. **/
 import 'core-js/es/reflect';
+import 'core-js/es/string';
 
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
  */
-import 'zone.js/dist/zone'; // Included with Angular CLI.
+import 'zone.js/dist/zone';
+
+// Included with Angular CLI.
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

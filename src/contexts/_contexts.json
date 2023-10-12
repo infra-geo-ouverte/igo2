@@ -46,7 +46,7 @@
   {
     "uri": "homeExtent",
     "title": "Étendue de la carte(Home Extent)"
-  }, 
+  },
   {
     "uri": "geolocation",
     "title": "Geolocation"
@@ -54,5 +54,9 @@
   {
     "uri": "addLayerFromIndex",
     "title": "Ajout de couche à partir d'un index"
+  },
+  {
+    "uri": "keepCurrentViewFalse",
+    "title": "Un contexte qui impose sa vue"
   }
 ]

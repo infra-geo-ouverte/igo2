@@ -1,9 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { ConfigService, LanguageService } from '@igo2/core';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+
+import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { WelcomeWindowService } from './welcome-window.service';
+import { getAppVersion } from 'src/app/app.utils';
 
 @Component({
   selector: 'app-welcome-window',
@@ -24,8 +28,10 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
     protected languageService: LanguageService
   ) {
     this.discoverTitleInLocale$ = of(
-      this.configService.getConfig('welcomeWindow.discoverTitleInLocale') ||
+      this.configService.getConfig(
+        'welcomeWindow.discoverTitleInLocale',
         this.configService.getConfig('title')
+      )
     );
   }
 
@@ -40,10 +46,13 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
   private computeHtml() {
     let deltaDay = 0;
     let isDateParsable = true;
-    let releaseDate = new Date(this.configService.getConfig('version.releaseDate'));
+    let releaseDate = new Date(
+      this.configService.getConfig('version.releaseDate')
+    );
 
-    const releaseDateAppConfig = this.configService.getConfig('version.releaseDateApp');
-
+    const releaseDateAppConfig = this.configService.getConfig(
+      'version.releaseDateApp'
+    );
 
     if (releaseDateAppConfig) {
       const releaseDateApp = new Date(releaseDateAppConfig);
@@ -73,20 +82,21 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
       releaseDateString = releaseDateAppConfig;
     }
 
-    this.title$$ = this.languageService.translate.get(this.configService.getConfig('title') || '')
+    this.title$$ = this.languageService.translate
+      .get(this.configService.getConfig('title', ''))
       .pipe(
-        map(title => {
+        map((title) => {
           return this.languageService.translate.instant('welcomeWindow.html', {
             title,
-            description: this.configService.getConfig('description') || '',
-            version: this.configService.getConfig('version.app') || this.configService.getConfig('version.lib') || '',
+            description: this.configService.getConfig('description', ''),
+            version: getAppVersion(this.configService),
             releaseDate: releaseDateString || ''
           });
         })
-      ).subscribe((r) => this.html$.next(r));
+      )
+      .subscribe((r) => this.html$.next(r));
 
     return this.html$;
-
   }
 
   setShowAgain() {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { ConfigService, LanguageService } from '@igo2/core';
 
 @Component({
@@ -7,15 +8,15 @@ import { ConfigService, LanguageService } from '@igo2/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
   public headerLogo: string;
   public headerLogoPrint: string;
 
   constructor(
     private configService: ConfigService,
-    protected languageService: LanguageService) {
-      this.computeHeader();
-    }
+    protected languageService: LanguageService
+  ) {
+    this.computeHeader();
+  }
 
   computeHeader() {
     this.headerLogo = this.configService.getConfig('header.logo');
@@ -30,5 +31,4 @@ export class HeaderComponent {
       this.languageService.setLanguage('fr');
     }
   }*/
-
 }

@@ -13,9 +13,18 @@
   },
   "hasFooter": false,
   "hasExpansionPanel": true,
-  "hasGeolocateButton": true,
+  "geolocation": {
+    "button": {
+      "visible": true
+    }
+  },
   "showRotationButtonIfNoRotation": false,
-  "showMenuButton": true,
+  "menu": {
+    "button": {
+      "visible": true,
+      "useThemeColor": false
+    }
+  },
   "searchBar": {
     "showSearchBar": true,
     "showSearchButton": false
@@ -23,11 +32,10 @@
   "queryTabs": false,
   "saveSearchResultInLayer": true,
   "hasFeatureEmphasisOnSelection": true,
-  "menuButtonReverseColor": false,
   "homeExtentButton": {
-    "homeExtButtonExtent":[-9000000, 5790000,-7500000, 6770000],
+    "homeExtButtonExtent": [-9000000, 5790000, -7500000, 6770000],
     "homeExtButtonCenter": [-71.938087, 48.446975],
-    "homeExtButtonZoom" : 6
+    "homeExtButtonZoom": 6
   },
   "searchSources": {
     "cadastre": {
@@ -48,7 +56,7 @@
   "regex": {
     "geoservice": [
       {
-        "url": "https:\/\/geoegl.msp.gouv.qc.ca\/ws\/mffpecofor.fcgi",
+        "url": "https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi",
         "type": "wms",
         "propertiesForLayerName": ["name"]
       }

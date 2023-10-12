@@ -16,13 +16,6 @@
     max-width: $search-bar-width;
     z-index: 4;
 
-    &.navbar-fixed {
-      left: 0;
-      top: 0;
-      height: $app-sidenav-margin-top;
-      align-items: center;
-    }
-    
     @include mobile {
       width: $search-bar-width-mobile;
       max-width: min($search-bar-width-mobile, 350px);
@@ -135,7 +128,9 @@ igo-map-browser.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
   bottom: $app-expansion-panel-height;
 }
 
-igo-map-browser.expansion-offset-maximized ::ng-deep .ol-overlaycontainer-stopevent {
+igo-map-browser.expansion-offset-maximized
+  ::ng-deep
+  .ol-overlaycontainer-stopevent {
   bottom: $app-expansion-panel-height-maximized;
 }
 
@@ -237,44 +232,75 @@ app-toast-panel {
 }
 
 // Reduce max-height for info panel in mobile when expansion-workspace is open
-app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > div ::ng-deep igo-panel.app-full-toast-panel-opened,
-app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > div ::ng-deep igo-panel.app-toast-panel-html-large,
-app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion +app-toast-panel ::ng-deep igo-panel.app-full-toast-panel-opened,
-app-expansion-panel.app-expansion-panel-expanded +app-toast-panel-for-expansion +app-toast-panel ::ng-deep igo-panel.app-toast-panel-html-large
-{
+app-expansion-panel.app-expansion-panel-expanded
+  + app-toast-panel-for-expansion
+  + app-toast-panel
+  ::ng-deep
+  > div
+  ::ng-deep
+  igo-panel.app-full-toast-panel-opened,
+app-expansion-panel.app-expansion-panel-expanded
+  + app-toast-panel-for-expansion
+  + app-toast-panel
+  ::ng-deep
+  > div
+  ::ng-deep
+  igo-panel.app-toast-panel-html-large,
+app-expansion-panel.app-expansion-panel-expanded
+  + app-toast-panel-for-expansion
+  + app-toast-panel
+  ::ng-deep
+  igo-panel.app-full-toast-panel-opened,
+app-expansion-panel.app-expansion-panel-expanded
+  + app-toast-panel-for-expansion
+  + app-toast-panel
+  ::ng-deep
+  igo-panel.app-toast-panel-html-large {
   @include mobile {
     max-height: 50vh;
 
     .toast-content {
-      max-height: calc(50vh - 8vh)
+      max-height: calc(50vh - 8vh);
     }
   }
 }
 
 // Reduce height-max when expansion-workspace is max + infopanel is max
-app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > igo-panel {
+app-expansion-panel.app-expansion-panel-expanded-maximized
+  + app-toast-panel-for-expansion
+  + app-toast-panel
+  ::ng-deep
+  > igo-panel {
   max-height: 45vh;
- .toast-content {
-    max-height: 40vh; 
+  .toast-content {
+    max-height: 40vh;
   }
 
   @include tablet {
     max-height: 30vh;
     .toast-content {
-      max-height: calc(30vh - 6vh)
+      max-height: calc(30vh - 6vh);
     }
   }
 }
 
-app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > igo-panel.app-toast-panel-html {
+app-expansion-panel.app-expansion-panel-expanded-maximized
+  + app-toast-panel-for-expansion
+  + app-toast-panel
+  ::ng-deep
+  > igo-panel.app-toast-panel-html {
   height: 30vh;
 }
 
-app-expansion-panel.app-expansion-panel-expanded-maximized +app-toast-panel-for-expansion +app-toast-panel ::ng-deep > igo-panel.app-toast-panel-opened {
+app-expansion-panel.app-expansion-panel-expanded-maximized
+  + app-toast-panel-for-expansion
+  + app-toast-panel
+  ::ng-deep
+  > igo-panel.app-toast-panel-opened {
   height: auto;
   max-height: 30vh;
   .toast-content {
-    max-height: 25vh; 
+    max-height: 25vh;
   }
 }
 
@@ -313,11 +339,11 @@ igo-geolocate-button {
 igo-home-extent-button {
   @include mobile {
     margin-bottom: 0px;
-    right: calc((2 * #{$igo-icon-size}) +  (4 * #{$igo-margin}))
+    right: calc((2 * #{$igo-icon-size}) + (4 * #{$igo-margin}));
   }
   @include tablet {
     margin-bottom: 0px;
-    right: calc((2 * #{$igo-icon-size}) +  (4 * #{$igo-margin}))
+    right: calc((2 * #{$igo-icon-size}) + (4 * #{$igo-margin}));
   }
 }
 
@@ -330,8 +356,6 @@ igo-zoom-button {
     display: none;
   }
 }
-
-
 
 /*** Info panel ***/
 app-toast-panel-for-expansion {
@@ -377,7 +401,8 @@ toast-panel-for-expansion.toast-panel-for-expansion-opened {
 }
 
 /*** Info panel close/open buttons ***/
-app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container {
+app-toast-panel-for-expansion
+  .toast-panel-for-expansion-close-button-container {
   position: absolute;
   top: -10px;
   right: -15px;
@@ -400,7 +425,8 @@ app-toast-panel-for-expansion .toast-panel-for-expansion-close-button-container 
 
 ::ng-deep div.workspace-menu {
   max-width: fit-content !important;
-  div.mat-mdc-menu-content ::ng-deep span.mat-checkbox-label, div.mat-mdc-menu-content ::ng-deep div.mdc-list-item__primary-text {
+  div.mat-mdc-menu-content ::ng-deep span.mat-checkbox-label,
+  div.mat-mdc-menu-content ::ng-deep div.mdc-list-item__primary-text {
     font-size: 12px;
   }
 }

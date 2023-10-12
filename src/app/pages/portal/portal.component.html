@@ -3,7 +3,7 @@
     <igo-backdrop [shown]="backdropShown" (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <div class="navbar-container" [class.navbar-fixed]="sidenavOpened">
+    <div class="navbar-container">
       <igo-menu-button
         *ngIf="showMenuButton"
         [class.mat-elevation-z2]="!sidenavOpened"
@@ -20,7 +20,7 @@
         [termSplitter]="termSplitter"
         [minLength]="minSearchTermLength"
         [searchSettings]="true"
-        [forceNA]="forceCoordsNA"
+        [forceNA]="appConfig.app?.forceCoordsNA"
         [store]="searchStore"
         (searchTermChange)="onSearchTermChange($event)"
         [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
@@ -89,13 +89,13 @@
       ></igo-swipe-control>
       <igo-map-center class="mat-elevation-z2" [map]="map"></igo-map-center>
       <igo-wake-lock-button
-        *ngIf="showWakeLockButton"
+        *ngIf="appConfig.wakeLockApiButton"
         class="mat-elevation-z2"
       ></igo-wake-lock-button>
       <igo-offline-button
         [map]="map"
         color="primary"
-        *ngIf="showOfflineButton"
+        *ngIf="appConfig.offlineButton"
         class="mat-elevation-z2"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()"
@@ -112,12 +112,12 @@
       </igo-geolocate-button>
       <igo-rotation-button
         class="mat-elevation-z2"
-        [showIfNoRotation]="showRotationButtonIfNoRotation"
+        [showIfNoRotation]="appConfig.showRotationButtonIfNoRotation"
         [map]="map"
         color="primary"
       ></igo-rotation-button>
       <igo-home-extent-button
-        *ngIf="hasHomeExtentButton"
+        *ngIf="appConfig.homeExtentButton"
         class="mat-elevation-z2"
         [map]="map"
         [extentOverride]="homeExtent"
@@ -127,7 +127,7 @@
       >
       </igo-home-extent-button>
       <igo-user-button
-        *ngIf="auth.url"
+        *ngIf="authService.hasAuthService"
         class="mat-elevation-z2"
         [map]="map"
         color="primary"
@@ -157,10 +157,12 @@
 </mat-sidenav-container>
 
 <app-expansion-panel
-  *ngIf="hasExpansionPanel && (workspaceState.workspaceEnabled$ | async)"
+  *ngIf="
+    appConfig.hasExpansionPanel && (workspaceState.workspaceEnabled$ | async)
+  "
   [backdropShown]="expansionPanelBackdropShown"
   [(expanded)]="expansionPanelExpanded"
-  [maximized]="workspaceMaximize$ | async"
+  [maximized]="workspaceState.workspaceMaximize$ | async"
   [@expansionPanelSize]="getExpansionPanelStatus()"
   [@toastOffsetY]="
     isMobile() &&
@@ -275,7 +277,7 @@
           [entitySortChange$]="workspaceEntitySortChange$"
           [paginatorOptions]="paginatorOptions"
           (paginatorChange)="paginatorChange($event)"
-          >
+        >
         </igo-entity-table-paginator>
       </div>
     </ng-container>
@@ -297,7 +299,7 @@
       [template]="workspace.meta.tableTemplate"
     >
     </igo-entity-table>
-    <span>{{workspaceNotAvailableMessage | translate}}</span>
+    <span>{{ workspaceNotAvailableMessage | translate }}</span>
   </ng-container>
 </app-expansion-panel>
 
@@ -327,7 +329,7 @@
   *ngIf="(queryStore.empty$ | async) !== true"
   [map]="map"
   [store]="queryStore"
-  [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
+  [hasFeatureEmphasisOnSelection]="appConfig.hasFeatureEmphasisOnSelection"
   [@toastPanelOffsetX]="toastPanelOffsetX$ | async"
   [@toastPanelOffsetY]="getToastPanelOffsetY()"
   [@toastPanelMobileSidenav]="

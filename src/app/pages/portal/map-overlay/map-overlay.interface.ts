@@ -1,5 +1,5 @@
 export interface MapOverlay {
-  media: Array<string>; /* Media device to display the mapOverlay
+  media: Array<string> /* Media device to display the mapOverlay
                             - options: mobile
                                        tablet
                                        desktop
@@ -14,7 +14,7 @@ export interface MapOverlay {
                                         top-right
                                         center-right
                                         bottom-right
-  */
+  */;
   fixed?: boolean; // Is element is fixed, won't be affect by animation, default to false
   link?: string; // Link to open when element is clicked
   imgSrc?: string; // source of the image to show

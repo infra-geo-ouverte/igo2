@@ -17,5 +17,6 @@
     "paths": {
       "@igo2/*": ["node_modules/@igo2/*", "../../packages/*/src/public_api"]
     }
-  }
+  },
+  "exclude": ["dist", "scripts", "e2e/**/*"]
 }

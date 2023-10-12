@@ -1,13 +1,13 @@
-import './portal.variables.scss';
-
 import {
-  trigger,
+  AnimationTriggerMetadata,
+  animate,
   state,
   style,
   transition,
-  animate,
-  AnimationTriggerMetadata
+  trigger
 } from '@angular/animations';
+
+import './portal.variables.scss';
 
 export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
   return [
@@ -36,7 +36,7 @@ export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
       state(
         'mobile',
         style({
-          left: 'calc(100% - 40px)',
+          left: 'calc(100% - 40px)'
         })
       ),
       state(
@@ -121,13 +121,13 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
         style({
           left: 'calc(40% + 160px)'
         })
-    ),
+      ),
       transition('fullStandard => fullOffsetX', animate('200ms')),
       transition('fullOffsetX => fullStandard', animate('200ms')),
       transition('standard => standardOffsetX', animate('200ms')),
       transition('standardOffsetX => standard', animate('200ms')),
       transition('htmlDisplay => htmlDisplayOffsetX', animate('200ms')),
-      transition('htmlDisplayOffsetX => htmlDisplay', animate('200ms')),
+      transition('htmlDisplayOffsetX => htmlDisplay', animate('200ms'))
       // transition('standard => htmlDisplay', animate('200ms')),
       // transition('htmlDisplay => standard', animate('200ms')),
     ]),
@@ -166,12 +166,24 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
           zIndex: '5'
         })
       ),
-    transition('noExpansion => noExpansion', animate('10ms')),
-    transition('expansionAndToastOpened => expansionAndToastOpened', animate('200ms')),
-    transition('expansionAndToastClosed => expansionAndToastClosed', animate('200ms')),
-    transition('expansionMaximizedAndToastOpened => expansionMaximizedAndToastOpened', animate('200ms')),
-    transition('expansionMaximizedAndToastClosed => expansionMaximizedAndToastClosed', animate('200ms')),
-       ])
+      transition('noExpansion => noExpansion', animate('10ms')),
+      transition(
+        'expansionAndToastOpened => expansionAndToastOpened',
+        animate('200ms')
+      ),
+      transition(
+        'expansionAndToastClosed => expansionAndToastClosed',
+        animate('200ms')
+      ),
+      transition(
+        'expansionMaximizedAndToastOpened => expansionMaximizedAndToastOpened',
+        animate('200ms')
+      ),
+      transition(
+        'expansionMaximizedAndToastClosed => expansionMaximizedAndToastClosed',
+        animate('200ms')
+      )
+    ])
   ];
 }
 

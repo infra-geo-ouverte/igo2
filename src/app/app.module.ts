@@ -1,51 +1,52 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import {
   APP_INITIALIZER,
   ApplicationRef,
   Injector,
   NgModule
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  provideConfigOptions,
-  IgoMessageModule,
-  IgoGestureModule,
-  RouteService,
-  LanguageService,
-  ConfigService
-} from '@igo2/core';
-import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
-import { IgoAuthModule } from '@igo2/auth';
-import {
-  provideWorkspaceSearchSource,
-  provideIChercheSearchSource,
-  provideIChercheReverseSearchSource,
-  provideNominatimSearchSource,
-  provideCoordinatesReverseSearchSource,
-  provideILayerSearchSource,
-  provideStoredQueriesSearchSource,
-  provideOsrmDirectionsSource,
-  provideOptionsApi,
-  provideCadastreSearchSource,
-  provideStyleListOptions
-} from '@igo2/geo';
-
-import { environment } from '../environments/environment';
-import { PortalModule } from './pages';
-import { AppComponent } from './app.component';
-import { HeaderModule } from './pages/header/header.module';
-import { FooterModule } from './pages/footer/footer.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
-
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {
   MAT_TOOLTIP_DEFAULT_OPTIONS,
   MatTooltipDefaultOptions
 } from '@angular/material/tooltip';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { concatMap, first } from 'rxjs';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
+import { IgoAuthModule } from '@igo2/auth';
+import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
+import {
+  ConfigService,
+  IgoGestureModule,
+  IgoMessageModule,
+  LanguageService,
+  RouteService,
+  provideConfigOptions
+} from '@igo2/core';
+import {
+  provideCadastreSearchSource,
+  provideCoordinatesReverseSearchSource,
+  provideIChercheReverseSearchSource,
+  provideIChercheSearchSource,
+  provideILayerSearchSource,
+  provideNominatimSearchSource,
+  provideOptionsApi,
+  provideOsrmDirectionsSource,
+  provideStoredQueriesSearchSource,
+  provideStyleListOptions,
+  provideWorkspaceSearchSource
+} from '@igo2/geo';
 import { loadTheme } from '@igo2/utils';
-import { DOCUMENT } from '@angular/common';
+
+import { concatMap, first } from 'rxjs';
+
+import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
+import { PortalModule } from './pages';
+import { FooterModule } from './pages/footer/footer.module';
+import { HeaderModule } from './pages/header/header.module';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -133,7 +134,7 @@ function appInitializerFactory(
           languageService.translate.setTranslation(lang, translations);
 
           const configService = injector.get(ConfigService);
-          const theme = configService.getConfig('theme') || DEFAULT_THEME;
+          const theme = configService.getConfig('theme', DEFAULT_THEME);
           loadTheme(document, theme);
 
           const titleKey = configService.getConfig('title');

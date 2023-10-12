@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { LanguageService } from '@igo2/core';
 
 @Component({
@@ -7,7 +8,5 @@ import { LanguageService } from '@igo2/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-
   constructor(protected languageService: LanguageService) {}
-
 }
