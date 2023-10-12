@@ -1,57 +1,59 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  Output,
   EventEmitter,
   HostBinding,
   HostListener,
-  ChangeDetectionStrategy,
+  Input,
+  OnDestroy,
   OnInit,
-  OnDestroy
+  Output
 } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest, Subscription } from 'rxjs';
-import { debounceTime, map, skipWhile, tap } from 'rxjs/operators';
-import olFormatGeoJSON from 'ol/format/GeoJSON';
-import olFeature from 'ol/Feature';
-import olPoint from 'ol/geom/Point';
 
 import {
-  getEntityTitle,
-  EntityStore,
-  ActionStore,
   Action,
-  ActionbarMode
+  ActionStore,
+  ActionbarMode,
+  EntityStore,
+  getEntityTitle
 } from '@igo2/common';
 import {
-  Feature,
-  SearchResult,
-  IgoMap,
-  FeatureMotion,
-  moveToOlFeatures,
-  featureToOl,
-  featuresAreTooDeepInView,
-  featureFromOl,
-  getCommonVectorStyle,
-  getCommonVectorSelectedStyle,
-  featuresAreOutOfView,
-  computeOlFeaturesExtent,
-  PropertyTypeDetectorService,
-  generateIdFromSourceOptions,
-  LayerService,
-  Layer,
-  GeoServiceDefinition
-} from '@igo2/geo';
-import {
+  ConfigService,
+  LanguageService,
   Media,
   MediaService,
-  LanguageService,
-  StorageService,
   StorageScope,
-  StorageServiceEvent,
-  ConfigService
+  StorageService,
+  StorageServiceEvent
 } from '@igo2/core';
+import {
+  Feature,
+  FeatureMotion,
+  GeoServiceDefinition,
+  IgoMap,
+  Layer,
+  LayerService,
+  PropertyTypeDetectorService,
+  SearchResult,
+  computeOlFeaturesExtent,
+  featureFromOl,
+  featureToOl,
+  featuresAreOutOfView,
+  featuresAreTooDeepInView,
+  generateIdFromSourceOptions,
+  getCommonVectorSelectedStyle,
+  getCommonVectorStyle,
+  moveToOlFeatures
+} from '@igo2/geo';
 import { QueryState, StorageState, WorkspaceState } from '@igo2/integration';
 import { ObjectUtils } from '@igo2/utils';
+
+import olFeature from 'ol/Feature';
+import olFormatGeoJSON from 'ol/format/GeoJSON';
+import olPoint from 'ol/geom/Point';
+
+import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
+import { debounceTime, map, skipWhile, tap } from 'rxjs/operators';
 
 interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
   propertyForUrl: string;
