@@ -22,8 +22,9 @@ import {
   EntityRecord,
   EntityService,
   EntityStore,
+  EntityTableComponent,
   EntityTablePaginatorOptions,
-  Tool, // getEntityTitle,
+  Tool,
   Toolbox,
   Widget,
   Workspace,
@@ -181,6 +182,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef, static: true })
   searchBar: ElementRef;
+
+  @ViewChild(EntityTableComponent, { static: false })
+  entityTable: EntityTableComponent;
 
   get map(): IgoMap {
     return this.mapState.map;
@@ -569,6 +573,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
+    if (!this.entityTable) {
+      return;
+    }
+    this.entityTable.enableEdition();
+
     let feature = {
       type: 'Feature',
       properties: {}
