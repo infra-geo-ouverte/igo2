@@ -7,7 +7,15 @@ import {
   ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, of, BehaviorSubject, combineLatest } from 'rxjs';
+import {
+  Subscription,
+  of,
+  BehaviorSubject,
+  combineLatest,
+  Observable,
+  from,
+  map
+} from 'rxjs';
 import { debounceTime, take, pairwise, skipWhile, first } from 'rxjs/operators';
 import {
   MatDialog,
@@ -20,6 +28,7 @@ import olFeature from 'ol/Feature';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 
 import OpenLayersParser from 'geostyler-openlayers-parser';
+import { Style as GeoStylerStyle } from 'geostyler-style';
 import LegendRenderer from 'geostyler-legend/dist/LegendRenderer/LegendRenderer';
 
 import {
@@ -80,7 +89,8 @@ import {
   moveToOlFeatures,
   FeatureMotion,
   ConfigFileToGeoDBService,
-  FeatureDataSource
+  FeatureDataSource,
+  GeostylerStyleService
 } from '@igo2/geo';
 
 import * as olGeom from 'ol/geom';
@@ -111,6 +121,8 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils, uuid } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
+
+//import MarkSymbolizer from 'geostyler-style';
 
 @Component({
   selector: 'app-portal',
@@ -349,7 +361,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private configFileToGeoDBService: ConfigFileToGeoDBService
+    private configFileToGeoDBService: ConfigFileToGeoDBService,
+    private geostylerService: GeostylerStyleService
   ) {
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
     this._toastPanelOpened =
@@ -811,10 +824,9 @@ export class PortalComponent implements OnInit, OnDestroy {
           symbolizers: [
             {
               kind: 'Mark',
-              wellKnownName: 'triangle',
+              wellKnownName: 'star',
               color: '#ff8000',
               strokeColor: '#000000',
-              rotate: 90,
               radius: 30
             },
             {
@@ -828,10 +840,43 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       ]
     };
-
-    //lire tous les couches affichées; parser.readStyle().output
-
-    const renderer = new LegendRenderer({
+    const style3: any = {
+      name: 'Basic Circle 3',
+      rules: [
+        {
+          name: 'Rule 1',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'square',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
+            }
+          ]
+        }
+      ]
+    };
+    const style4: any = {
+      name: 'Basic Circle 4',
+      rules: [
+        {
+          name: 'Rule 1 gjgjgjgjgjgjgj gj gj ggj gj gj gj g jgj gj g jgj gjgjgjgjgjgj gjgjgj gjgjgjgjgjggjgj ',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'circle',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
+            }
+          ]
+        }
+      ]
+    };
+    /*const renderer = new LegendRenderer({
       maxColumnWidth: 300,
       maxColumnHeight: 300,
       overflow: 'auto',
@@ -839,42 +884,90 @@ export class PortalComponent implements OnInit, OnDestroy {
       size: [600, 300],
       hideRect: true
     });
-
     const legendEl = document.getElementById('legend');
     if (legendEl) {
       renderer.render(legendEl);
-    } /*
-    const blob = new Blob([arrayBufferView], { type: 'image/png' });
-    const urlCreator = window.URL;
-    const imageUrl = urlCreator.createObjectURL(blob);
-*/
-    renderer.renderAsImage('png').then((r) => {
-      console.log(r);
-    });
+    }*/
 
-    console.log(renderer.renderAsImage('svg'));
-    //renderer.renderLegend
-    const el = document.createElement('div');
-    console.log(renderer.render(el));
+    //lire tous les couches affichées; parser.readStyle().output
+    const type: string = 'svg';
+    //alert('allok');
+    //this.geostylerService
+    const monNouveauStyle = Object.assign([], style1);
+    console.log('monNouveauStyle', monNouveauStyle);
+    console.log('objectUtils', ObjectUtils.resolve(monNouveauStyle, 'radius'));
+    this.geostylerService
+      .getStylerStyleToLegend(type, [style1, style2, style3, style4])
+      .subscribe((r) => {
+        console.log(r);
+        let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
+        if (!layer) {
+          layer = new VectorLayer({
+            title: 'Layer de points créé afin de changer le style.',
+            isIgoInternalLayer: true,
+            id: `layerWithPoints`,
+            zIndex: 200,
+            source: new FeatureDataSource(),
+            igoStyle: undefined,
+            showInLayerList: true,
+            exportable: true,
+            browsable: false,
+            workspace: { enabled: true },
+            legendOptions: {
+              collapsed: false,
+              display: true,
+              html: type === 'svg' ? r : undefined,
+              url: type !== 'svg' ? r : undefined
+            }
+          });
+        }
+        this.map.addLayer(layer);
+      });
+  }
 
-    let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
-    if (!layer) {
-      layer = new VectorLayer({
-        title: 'Layer de points créé afin de changer le style.',
-        isIgoInternalLayer: true,
-        id: `layerWithPoints`,
-        zIndex: 200,
-        source: new FeatureDataSource(),
-        igoStyle: undefined,
-        showInLayerList: true,
-        exportable: true,
-        browsable: false,
-        workspace: { enabled: true }
+  public getStylerStyleToLegend(
+    type: string, // todo enum a faire
+    styles: GeoStylerStyle[],
+    width: number = 300, //width et height qui doivent changer pour avoir une hauteur dynamique
+    height: number = 300
+  ): Observable<string> {
+    //width = styles.length * 100;
+    height = styles.length * 55;
+    for (var index in styles) {
+      styles[index].rules.forEach(function (value) {
+        for (var symbol of value.symbolizers) {
+          /* if (typeof symbol === MarkSymbolizer) {
+          }*/
+          console.log(symbol);
+          //symbol.
+        }
       });
     }
-    this.map.addLayer(layer);
-    console.log(el.innerHTML); // Image as SVG string
-    return el.innerHTML;
+    // todo define height automatically?
+    //const allo: new yolo();
+    const renderer = new LegendRenderer({
+      maxColumnWidth: 100,
+      maxColumnHeight: 1000,
+      overflow: 'auto',
+      styles,
+      size: [width, height],
+      hideRect: true
+    });
+    return from(renderer.renderAsImage('svg')).pipe(
+      map((r: Element) => {
+        const serializer = new XMLSerializer();
+        const svgXmlString = serializer.serializeToString(r);
+        if (type === 'svg') {
+          return svgXmlString;
+        } else {
+          const blob = new Blob([svgXmlString], {
+            type: 'image/svg+xml'
+          });
+          const urlCreator = window.URL;
+          return urlCreator.createObjectURL(blob);
+        }
+      })
+    );
   }
 
   changeStyle() {
