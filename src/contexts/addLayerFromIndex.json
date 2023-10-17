@@ -7,7 +7,7 @@
       "id": "wmsIndex",
       "sourceOptions": {
         "type": "vector",
-        "url": "/data/wmsIndex.geojson",
+        "url": "./data/wmsIndex.geojson",
         "queryable": true,
         "queryTitle": "Nom de la couche: ${name}"
       },

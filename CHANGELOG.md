@@ -1,3 +1,17 @@
+# [16.0.0-rc.4](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.3...v16.0.0-rc.4) (2023-10-13)
+
+
+### Bug Fixes
+
+* **context:** relative path for a add layer from index example ([e4d8c67](https://github.com/infra-geo-ouverte/igo2/commit/e4d8c679d6685eab264c21dbb26e072b242ce3f5))
+
+
+### Features
+
+* **app:** upgrade igo2-lib to prerelease 16.0.0-rc.3 ([050325b](https://github.com/infra-geo-ouverte/igo2/commit/050325bbcad37587798c13b133b735f6b552effb))
+
+
+
 # [16.0.0-rc.3](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.2...v16.0.0-rc.3) (2023-10-11)
 
 

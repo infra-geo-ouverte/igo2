@@ -32,6 +32,13 @@ export const environment: AppEnvironmentOptions = {
     depot: {
       url: '/apis/depot'
     },
+    dom: [
+      {
+        id: 1,
+        name: 'dom_test',
+        url: 'https://ws.mapserver.transports.gouv.qc.ca/applicatif?service=WFS&request=GetFeature&version=2.0.0&outputformat=dom&typenames=dom&dom=dom_test'
+      }
+    ],
     importExport: {
       url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
       configFileToGeoDBService: './data/geoDataToIDB.json',
