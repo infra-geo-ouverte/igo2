@@ -31,3 +31,4 @@ jobs:
         with:
           body_path: ${{ github.workspace }}-CHANGELOG.txt
           files: dist/igo2/igo2.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
