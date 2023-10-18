@@ -85,7 +85,8 @@ Requis:
 
 | IGO2 version | Node version |
 | ------------ | ------------ |
-| > 1.15.x      | >= 16.19.0  |
+| >= 16.x      | >= 18.10.0   |
+| > 1.15.x     | >= 16.19.0   |
 | > 1.5.x      | >= 12, <= 16 |
 | < 1.5.x      | >= 8, <= 11  |
 | 0.x.x        | >= 6, <= 10  |
@@ -114,6 +115,9 @@ $ npm run serve.prod
 $ npm run doc
 # Ouvrir un navigateur http://localhost:4220/
 ```
+
+Si vous voulez développer en même temps ce projet ainsi que la librairie associée, référez vous à la procédure suivante:  
+https://github.com/infra-geo-ouverte/igo2-lib#for-developers
 
 ## Tests
 
@@ -175,7 +179,9 @@ Require:
 
 | IGO2 version | Node version |
 | ------------ | ------------ |
-| > 1.5.x      | >= 12, <= 14 |
+| >= 16.x      | >= 18.10.0   |
+| > 1.15.x     | >= 16.19.0   |
+| > 1.5.x      | >= 12, <= 16 |
 | < 1.5.x      | >= 8, <= 11  |
 | 0.x.x        | >= 6, <= 10  |
 
@@ -202,6 +208,9 @@ $ npm run serve.prod
 # Doc API generation
 $ npm run doc
 # Open your browser at http://localhost:4220/
+
+If you want to develop this project and the associated library at the same time, refer to the following procedure:
+https://github.com/infra-geo-ouverte/igo2-lib#for-developers
 
 ```
 
