@@ -11,9 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install conventional-changelog@3.1.25
-        if: startsWith(github.ref, 'refs/tags/')
-        run: npm install conventional-changelog@3.1.25
+      - name: npm install conventional-changelog-cli@4.1.0
+        run: npm install conventional-changelog-cli@4.1.0
       - name: Generate Changelog-current
         run: npm run changelog-current |  grep -v "^>" | sed '/^$/d' > ${{ github.workspace }}-CHANGELOG.txt
       - name: Post intstall
@@ -27,7 +26,6 @@ jobs:
         working-directory: dist/igo2
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: ${{ github.workspace }}-CHANGELOG.txt
           files: dist/igo2/igo2.zip
