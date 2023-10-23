@@ -1,3 +1,17 @@
+# [16.0.0-rc.5](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.4...v16.0.0-rc.5) (2023-10-18)
+
+
+### Bug Fixes
+
+* **demo:** fix demo on github for dom service ([6377646](https://github.com/infra-geo-ouverte/igo2/commit/6377646d548920b6987355620255ef55f62f856f))
+
+
+### Features
+
+* **app:** upgrade igo2-lib to prerelease 16.0.0-rc.4 ([68b9da7](https://github.com/infra-geo-ouverte/igo2/commit/68b9da770c67f5749d654255e348a0a7d269d64b))
+
+
+
 # [16.0.0-rc.4](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.3...v16.0.0-rc.4) (2023-10-13)
 
 

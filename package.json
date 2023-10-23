@@ -1,6 +1,6 @@
 {
-  "name": "igo2",
-  "version": "16.0.0-rc.4",
+  "name": "igo",
+  "version": "16.0.0-rc.5",
   "description": "Infrastructure géomatique ouverte",
   "author": "Communauté IGO",
   "repository": {
@@ -97,7 +97,7 @@
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "angular-cli-ghpages": "^1.0.3",
-    "conventional-changelog-cli": "^3.0.0",
+    "conventional-changelog-cli": "^4.1.0",
     "cypress": "^13.2.0",
     "eslint": "^8.46.0",
     "eslint-plugin-cypress": "^2.14.0",
