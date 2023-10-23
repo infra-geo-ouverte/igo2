@@ -99,7 +99,7 @@
     "angular-cli-ghpages": "^1.0.3",
     "conventional-changelog-cli": "^3.0.0",
     "cypress": "^13.2.0",
-    "eslint": "^8.46.0",
+    "eslint": "^8.52.0",
     "eslint-plugin-cypress": "^2.14.0",
     "eslint-plugin-unused-imports": "^3.0.0",
     "http-server": "^14.1.0",
