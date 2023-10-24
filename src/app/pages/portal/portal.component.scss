@@ -2,8 +2,6 @@
 
 @import './portal.variables';
 
-$navbarLeftSpacing: 4px;
-
 :host {
   width: 100%;
   height: 100%;
@@ -11,9 +9,11 @@ $navbarLeftSpacing: 4px;
 }
 
 .navbar-container {
+  $navbarSpacer: 4px;
+
   position: absolute;
-  left: $navbarLeftSpacing;
-  top: 4px;
+  left: $navbarSpacer;
+  top: $navbarSpacer;
   display: flex;
   width: $search-bar-width;
   max-width: $search-bar-width;
@@ -21,7 +21,7 @@ $navbarLeftSpacing: 4px;
 
   @include mobile {
     width: $search-bar-width-mobile;
-    max-width: min($search-bar-width-mobile, 350px);
+    max-width: $search-bar-width;
   }
 
   igo-search-bar {
@@ -37,7 +37,7 @@ $navbarLeftSpacing: 4px;
 
   &.--empty-spacer {
     igo-menu-button {
-      margin-left: -$navbarLeftSpacing;
+      margin-left: -$navbarSpacer;
     }
   }
 }
