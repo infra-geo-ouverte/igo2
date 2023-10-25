@@ -1,7 +1,7 @@
 {
   "global": {
     "title": "interactiveTour.global.title",
-    "position": "right",
+    "position": "auto",
     "steps": [
       {
         "element": "#menu-button",
