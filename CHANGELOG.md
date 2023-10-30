@@ -1,3 +1,12 @@
+# [16.0.0-rc.8](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.7...v16.0.0-rc.8) (2023-10-30)
+
+
+### Bug Fixes
+
+* **portal:** expansion-panel header height ([815e452](https://github.com/infra-geo-ouverte/igo2/commit/815e4528e6c536588edc62cf1bbac178e9c8bf55))
+
+
+
 # [16.0.0-rc.7](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.6...v16.0.0-rc.7) (2023-10-30)
 
 
