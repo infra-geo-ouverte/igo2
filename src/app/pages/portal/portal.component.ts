@@ -28,7 +28,12 @@ import olFeature from 'ol/Feature';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 
 import OpenLayersParser from 'geostyler-openlayers-parser';
-import { Style as GeoStylerStyle } from 'geostyler-style';
+import {
+  Style as GeoStylerStyle,
+  MarkSymbolizer,
+  LineSymbolizer,
+  IconSymbolizer
+} from 'geostyler-style';
 import LegendRenderer from 'geostyler-legend/dist/LegendRenderer/LegendRenderer';
 
 import {
@@ -121,8 +126,6 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ObjectUtils, uuid } from '@igo2/utils';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
-
-//import MarkSymbolizer from 'geostyler-style';
 
 @Component({
   selector: 'app-portal',
@@ -862,7 +865,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       name: 'Basic Circle 4',
       rules: [
         {
-          name: 'Rule 1 gjgjgjgjgjgjgj gj gj ggj gj gj gj g jgj gj g jgj gjgjgjgjgjgj gjgjgj gjgjgjgjgjggjgj ',
+          name: 'Rule 1j ',
           symbolizers: [
             {
               kind: 'Mark',
@@ -876,53 +879,42 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       ]
     };
-    /*const renderer = new LegendRenderer({
-      maxColumnWidth: 300,
-      maxColumnHeight: 300,
-      overflow: 'auto',
-      styles: [style1, style2],
-      size: [600, 300],
-      hideRect: true
-    });
-    const legendEl = document.getElementById('legend');
-    if (legendEl) {
-      renderer.render(legendEl);
-    }*/
 
-    //lire tous les couches affichées; parser.readStyle().output
     const type: string = 'svg';
-    //alert('allok');
-    //this.geostylerService
     const monNouveauStyle = Object.assign([], style1);
     console.log('monNouveauStyle', monNouveauStyle);
     console.log('objectUtils', ObjectUtils.resolve(monNouveauStyle, 'radius'));
-    this.geostylerService
-      .getStylerStyleToLegend(type, [style1, style2, style3, style4])
-      .subscribe((r) => {
-        console.log(r);
-        let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
-        if (!layer) {
-          layer = new VectorLayer({
-            title: 'Layer de points créé afin de changer le style.',
-            isIgoInternalLayer: true,
-            id: `layerWithPoints`,
-            zIndex: 200,
-            source: new FeatureDataSource(),
-            igoStyle: undefined,
-            showInLayerList: true,
-            exportable: true,
-            browsable: false,
-            workspace: { enabled: true },
-            legendOptions: {
-              collapsed: false,
-              display: true,
-              html: type === 'svg' ? r : undefined,
-              url: type !== 'svg' ? r : undefined
-            }
-          });
-        }
-        this.map.addLayer(layer);
-      });
+    // call geostyler.service with this.geostylerService
+    this.getStylerStyleToLegend(type, [
+      style1,
+      style2,
+      style3,
+      style4
+    ]).subscribe((r) => {
+      console.log(r);
+      let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
+      if (!layer) {
+        layer = new VectorLayer({
+          title: 'Layer de points créé afin de changer le style.',
+          isIgoInternalLayer: true,
+          id: `layerWithPoints`,
+          zIndex: 200,
+          source: new FeatureDataSource(),
+          igoStyle: undefined,
+          showInLayerList: true,
+          exportable: true,
+          browsable: false,
+          workspace: { enabled: true },
+          legendOptions: {
+            collapsed: false,
+            display: true,
+            html: type === 'svg' ? r : undefined,
+            url: type !== 'svg' ? r : undefined
+          }
+        });
+      }
+      this.map.addLayer(layer);
+    });
   }
 
   public getStylerStyleToLegend(
@@ -931,25 +923,14 @@ export class PortalComponent implements OnInit, OnDestroy {
     width: number = 300, //width et height qui doivent changer pour avoir une hauteur dynamique
     height: number = 300
   ): Observable<string> {
-    //width = styles.length * 100;
+    const layerDescriptors: GeoStylerStyle[] =
+      this.transferLayersToLegend(styles);
     height = styles.length * 55;
-    for (var index in styles) {
-      styles[index].rules.forEach(function (value) {
-        for (var symbol of value.symbolizers) {
-          /* if (typeof symbol === MarkSymbolizer) {
-          }*/
-          console.log(symbol);
-          //symbol.
-        }
-      });
-    }
-    // todo define height automatically?
-    //const allo: new yolo();
     const renderer = new LegendRenderer({
       maxColumnWidth: 100,
       maxColumnHeight: 1000,
       overflow: 'auto',
-      styles,
+      styles: layerDescriptors,
       size: [width, height],
       hideRect: true
     });
@@ -968,6 +949,43 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       })
     );
+  }
+
+  transferLayersToLegend(styles: GeoStylerStyle[]) {
+    var stylesCopy = [...styles];
+    const layerDescriptorsList: GeoStylerStyle[] = [];
+    for (var index in stylesCopy) {
+      var DescriptorLayerRulesAdapted = [];
+      let descriptorLayerName = stylesCopy[index].name;
+      stylesCopy[index].rules.forEach(function (styleRule) {
+        var styleRuleSymbolizersAdapted = [];
+        styleRule.symbolizers.forEach(function (styleRuleSymbolizer) {
+          switch (styleRuleSymbolizer.kind) {
+            case 'Mark':
+              (styleRuleSymbolizer as MarkSymbolizer).radius = 10;
+              break;
+            case 'Line':
+              (styleRuleSymbolizer as LineSymbolizer).width = 3;
+              break;
+            case 'Icon':
+              (styleRuleSymbolizer as IconSymbolizer).size = 15;
+            default:
+              break;
+          }
+          styleRuleSymbolizersAdapted.push(styleRuleSymbolizer);
+        });
+        DescriptorLayerRulesAdapted.push({
+          name: styleRule.name,
+          symbolizers: styleRuleSymbolizersAdapted
+        });
+      });
+      let styleNoRadius: any = {
+        name: descriptorLayerName,
+        rules: DescriptorLayerRulesAdapted
+      };
+      layerDescriptorsList.push(styleNoRadius);
+    }
+    return layerDescriptorsList;
   }
 
   changeStyle() {
