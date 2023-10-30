@@ -920,7 +920,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public getStylerStyleToLegend(
     type: string, // todo enum a faire
     styles: GeoStylerStyle[],
-    width: number = 300, //width et height qui doivent changer pour avoir une hauteur dynamique
+    width: number = 300,
     height: number = 300
   ): Observable<string> {
     const layerDescriptors: GeoStylerStyle[] =
