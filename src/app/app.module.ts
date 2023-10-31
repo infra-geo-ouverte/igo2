@@ -136,19 +136,6 @@ function appInitializerFactory(
           const configService = injector.get(ConfigService);
           const theme = configService.getConfig('theme', DEFAULT_THEME);
           loadTheme(document, theme);
-
-          const titleKey = configService.getConfig('title');
-          languageService.translate.get(titleKey).subscribe((title) => {
-            handleSplashScreenTitle(document, title);
-            resolve();
-          });
         });
     });
-}
-
-function handleSplashScreenTitle(document: Document, title: string): void {
-  const splashScreenTitle = document.getElementById('splash-screen-title');
-  if (splashScreenTitle) {
-    splashScreenTitle.innerText = title;
-  }
 }
