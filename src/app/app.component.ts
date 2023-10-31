@@ -19,8 +19,8 @@ import { PwaService } from './services/pwa.service';
 })
 export class AppComponent implements OnInit {
   public authConfig: AuthOptions;
-  public hasHeader = true;
-  public hasFooter = true;
+  public hasHeader: boolean;
+  public hasFooter: boolean;
   private promptEvent: any;
 
   constructor(
