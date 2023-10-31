@@ -1,4 +1,4 @@
-@import '@igo2/core/style/partial/media';
+@import '@igo2/core/partial/media';
 @import 'variables';
 
 $app-footer-height: 48px;
@@ -14,10 +14,6 @@ $app-expansion-panel-header-height: calc(
 
 $app-toast-panel-collapsed-height: 46px;
 $app-toast-panel-collapsed-height-mobile: 35px;
-// $app-toast-panel-max-height: 281px;
-// $app-full-toast-panel-max-height: 800px;
-// $app-full-toast-panel-max-width: 750px;
-// $app-toast-panel-width: 30%;
 $app-toast-panel-width-tablet: 500px;
 
 $app-toast-panel-width: 42vw;

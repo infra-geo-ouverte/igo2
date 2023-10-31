@@ -7,12 +7,16 @@
     "module": "ES2022",
     "target": "ES2022",
     "lib": ["ES2022", "dom"],
+    "allowSyntheticDefaultImports": true,
     "declaration": false,
     "downlevelIteration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "paths": {
+      "@igo2/*": ["node_modules/@igo2/*", "../../packages/*/src/public_api"]
+    }
   },
   "exclude": ["dist", "scripts", "e2e/**/*"]
 }
