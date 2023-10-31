@@ -136,6 +136,7 @@ function appInitializerFactory(
           const configService = injector.get(ConfigService);
           const theme = configService.getConfig('theme', DEFAULT_THEME);
           loadTheme(document, theme);
+          resolve();
         });
     });
 }
