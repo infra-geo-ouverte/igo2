@@ -26,7 +26,6 @@
     <div id="splash-screen" class="is-loaded">
       <div id="splash-screen__filmstrip">
         <img alt="" aria-hidden="true" src="assets/images/splash_screen.png" />
-        <h1 id="splash-screen-title"></h1>
       </div>
       <svg
         id="splash-screen__spinner"
@@ -60,14 +59,6 @@
         transform: translateZ(0);
         z-index: 1999;
         transition: all 300ms;
-      }
-
-      #splash-screen h1 {
-        font-family: sans-serif !important;
-        color: rgba(0, 0, 0, 0.64) !important;
-        font-size: 32px !important;
-        font-weight: 700 !important;
-        margin: 16px 0;
       }
 
       #splash-screen.is-destroying {

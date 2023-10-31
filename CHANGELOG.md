@@ -1,3 +1,31 @@
+# [16.0.0-rc.8](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.7...v16.0.0-rc.8) (2023-10-30)
+
+
+### Bug Fixes
+
+* **portal:** expansion-panel header height ([815e452](https://github.com/infra-geo-ouverte/igo2/commit/815e4528e6c536588edc62cf1bbac178e9c8bf55))
+
+
+
+# [16.0.0-rc.7](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.6...v16.0.0-rc.7) (2023-10-30)
+
+
+
+# [16.0.0-rc.6](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.5...v16.0.0-rc.6) (2023-10-30)
+
+
+### Bug Fixes
+
+* **InteractiveTour:** add the auto placement ([#1055](https://github.com/infra-geo-ouverte/igo2/issues/1055)) ([1c45c8b](https://github.com/infra-geo-ouverte/igo2/commit/1c45c8b7a0bdc174ee23294712aeda72d61bc8dc))
+* **portal:** remove spacer when sidebar is open ([#1064](https://github.com/infra-geo-ouverte/igo2/issues/1064)) ([26e5129](https://github.com/infra-geo-ouverte/igo2/commit/26e5129165d9884ae1055e98375cbecd2dc9c69f))
+
+
+### Features
+
+* **app:** upgrade igo2-lib v16.0.0-rc.5 ([9c78c56](https://github.com/infra-geo-ouverte/igo2/commit/9c78c565a98a204833a652c4343c7e9a0d9ba11a))
+
+
+
 # [16.0.0-rc.5](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.4...v16.0.0-rc.5) (2023-10-18)
 
 

@@ -1,6 +1,7 @@
 @import '../portal.variables';
 
 :host {
+  height: 48px;
   border-bottom: 2px solid aliceblue;
   display: flex;
   align-items: center;
@@ -12,11 +13,7 @@
   }
 }
 
-.app-expansion-panel-trigger-container {
-  display: flex;
-}
-
+.app-expansion-panel-trigger-container,
 .app-expansion-panel-content {
   display: flex;
-  height: 100%;
 }
