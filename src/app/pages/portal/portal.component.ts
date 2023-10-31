@@ -94,8 +94,8 @@ import {
   moveToOlFeatures,
   FeatureMotion,
   ConfigFileToGeoDBService,
-  FeatureDataSource,
-  GeostylerStyleService
+  FeatureDataSource
+  //GeostylerStyleService
 } from '@igo2/geo';
 
 import * as olGeom from 'ol/geom';
@@ -364,8 +364,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private configFileToGeoDBService: ConfigFileToGeoDBService,
-    private geostylerService: GeostylerStyleService
+    private configFileToGeoDBService: ConfigFileToGeoDBService //private geostylerService: GeostylerStyleService
   ) {
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
     this._toastPanelOpened =
@@ -792,8 +791,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   exportLegend() {
-    const layerDescriptors = [];
-
     const style1: any = {
       name: 'Basic Circle',
       rules: [
