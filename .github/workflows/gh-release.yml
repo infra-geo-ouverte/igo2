@@ -3,7 +3,7 @@ name: GH_RELEASE
 on:
   push:
     tags:
-      - "*.*.*"
+      - "v*.*.*"
 
 jobs:
   build:
