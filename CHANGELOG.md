@@ -1,3 +1,19 @@
+# [16.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.8...v16.0.0) (2023-11-03)
+
+
+### Bug Fixes
+
+* **app:** regression for app initializer ([efd42ea](https://github.com/infra-geo-ouverte/igo2/commit/efd42eac24f35dfe47fa00f54cb17aed42c590e2))
+* **SplashScreen:** remove title who cause layout shifting ([eeb8b75](https://github.com/infra-geo-ouverte/igo2/commit/eeb8b75e8772601f7f55dc22fe3c2e8afb0b7f77))
+* **urlControl:** zoomExtent was not working due to str extent ([ce25710](https://github.com/infra-geo-ouverte/igo2/commit/ce257103e73da8033b1d489ccac0d815dc2c106f))
+
+
+### Features
+
+* **app:** upgrade igo2-lib 16.0.0 ([acf6281](https://github.com/infra-geo-ouverte/igo2/commit/acf628170c12e2339603cac02805809edb0e76fe))
+
+
+
 # [16.0.0-rc.8](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.7...v16.0.0-rc.8) (2023-10-30)
 
 
