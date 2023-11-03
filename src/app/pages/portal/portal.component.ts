@@ -1157,7 +1157,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (this.routeParams['zoomExtent']) {
       const extentParams = this.routeParams['zoomExtent'].split(',');
       const olExtent = olProj.transformExtent(
-        extentParams,
+        extentParams.map((str) => Number(str.trim())),
         'EPSG:4326',
         this.map.projection
       );
