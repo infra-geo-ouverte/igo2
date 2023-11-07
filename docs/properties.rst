@@ -656,7 +656,7 @@ Exemples
                    "bypassResolution": true
                 },
                 "type": "vector",
-                "url": "https://www.donneesquebec.ca/recherche/dataset/f647f5ed-a8f3-4a47-8ceb-977cbf090675/resource/68e0e20a-415d-44f5-af82-a90311784616/download/bornes-incendies.geojson"
+                "url": "https://www.donneesquebec.ca/recherche/dataset/527944ae-893d-41ac-8255-340fb1c2c83b/resource/d1b89d6a-8c31-4831-8895-95dc45120f79/download/borne-incendie.json"
                 "queryable": true,
                 "queryFormat": "geojson",
                 "queryTitle": "Le titre",
