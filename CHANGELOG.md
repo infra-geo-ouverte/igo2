@@ -1,3 +1,12 @@
+## [16.0.2](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.1...v16.0.2) (2023-11-07)
+
+
+### Features
+
+* **demo:** source change for fire hydrant from Donnees Quebec ([#1082](https://github.com/infra-geo-ouverte/igo2/issues/1082)) ([684d92c](https://github.com/infra-geo-ouverte/igo2/commit/684d92c55568ac22810a81841a68e849bd1af2e9))
+
+
+
 ## [16.0.1](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0...v16.0.1) (2023-11-06)
 
 
