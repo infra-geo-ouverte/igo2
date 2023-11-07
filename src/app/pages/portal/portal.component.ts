@@ -20,9 +20,11 @@ import {
   ActionStore,
   ActionbarMode,
   EntityRecord,
+  EntityService,
   EntityStore,
+  EntityTableComponent,
   EntityTablePaginatorOptions,
-  Tool, // getEntityTitle,
+  Tool,
   Toolbox,
   Widget,
   Workspace,
@@ -43,7 +45,6 @@ import {
   ConfigFileToGeoDBService,
   DataSourceService,
   EditionWorkspace,
-  EditionWorkspaceService,
   FEATURE,
   Feature,
   FeatureMotion,
@@ -181,6 +182,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef, static: true })
   searchBar: ElementRef;
+
+  @ViewChild(EntityTableComponent, { static: false })
+  entityTable: EntityTableComponent;
 
   get map(): IgoMap {
     return this.mapState.map;
@@ -328,7 +332,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     public dialogWindow: MatDialog,
     private queryService: QueryService,
     private storageService: StorageService,
-    private editionWorkspaceService: EditionWorkspaceService,
+    private entityService: EntityService,
     private directionState: DirectionState,
     private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
@@ -569,6 +573,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
+    if (!this.entityTable) {
+      return;
+    }
+    this.entityTable.enableEdition();
+
     let feature = {
       type: 'Feature',
       properties: {}
@@ -1630,7 +1639,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         relationWorkspace?.meta.tableTemplate.columns.forEach((col) => {
           // Update domain list
           if (col.type === 'list' || col.type === 'autocomplete') {
-            this.editionWorkspaceService
+            this.entityService
               .getDomainValues(col.relation)
               .subscribe((result) => {
                 col.domainValues = result;
