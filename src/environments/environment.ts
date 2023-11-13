@@ -31,7 +31,7 @@ export const environment: AppEnvironmentOptions = {
       ]
     },
     storage: {
-      url: '/user/igo',
+      url: '/apis/igo2/user/igo',
       key: 'igo'
     },
     /*context: {
