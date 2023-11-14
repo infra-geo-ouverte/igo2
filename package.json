@@ -51,7 +51,6 @@
     "preghpages.win": "npm run build.github && echo include: ['_default.json', '_contexts.json', '_base.json'] > dist/ghpages/_config.yml",
     "ghpages.win": "npx ngh --dir=dist/ghpages --no-silent=false --message=%npm_package_version%"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.5",
     "@angular/cdk": "^16.2.4",
