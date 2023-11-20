@@ -348,7 +348,10 @@ igo-geolocate-button {
   @include mobile {
     margin-bottom: 0px;
   }
-  @include tablet {
+  @include medium-screen {
+    margin-bottom: 0px;
+  }
+  @include small-screen {
     margin-bottom: 0px;
   }
 }
@@ -369,7 +372,10 @@ igo-zoom-button {
     @include mat.elevation(2);
   }
 
-  @include tablet {
+  @include medium-screen {
+    display: none;
+  }
+  @include small-screen {
     display: none;
   }
 }

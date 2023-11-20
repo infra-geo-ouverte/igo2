@@ -18,7 +18,7 @@
     "target": "https://testgeoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
-  },  
+  },
   "/swtq": {
     "target": "https://ws.mapserver.transports.gouv.qc.ca",
     "secure": false,
