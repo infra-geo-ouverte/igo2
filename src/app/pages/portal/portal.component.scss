@@ -28,6 +28,7 @@
     flex: 1;
     background-color: $app-background-color;
     font-size: 16px;
+    margin-left: $igo-margin;
   }
 
   igo-menu-button {
@@ -37,6 +38,10 @@
   &.--empty-spacer {
     igo-menu-button {
       margin-left: -$navbarSpacer;
+    }
+
+    igo-search-bar {
+      margin-left: 0;
     }
   }
 }
