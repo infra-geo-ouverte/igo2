@@ -77,71 +77,80 @@
       [@mapStateY]="getControlsOffsetY()"
       (@mapStateY.start)="updateMapBrowserClass()"
     >
-      <igo-zoom-button
-        [map]="map"
-        color="primary"
-        [@controlsOffsetY]="getControlsOffsetY()"
-      >
-      </igo-zoom-button>
+      <div class="map-actions --vertical --top-right">
+        <div class="spinner-spacer"></div>
+        <igo-rotation-button
+          class="mat-elevation-z2"
+          [showIfNoRotation]="appConfig.showRotationButtonIfNoRotation"
+          [map]="map"
+          color="primary"
+        ></igo-rotation-button>
+      </div>
+      <div class="map-actions --vertical --bottom-right">
+        <igo-offline-button
+          [map]="map"
+          color="primary"
+          *ngIf="appConfig.offlineButton"
+          class="mat-elevation-z2"
+          [@controlsOffsetY]="getControlsOffsetY()"
+          [@mobileOffsetY]="getToastPanelStatus()"
+        >
+        </igo-offline-button>
+        <igo-home-extent-button
+          *ngIf="appConfig.homeExtentButton"
+          class="mat-elevation-z2"
+          [map]="map"
+          [extentOverride]="homeExtent"
+          [centerOverride]="homeCenter"
+          [zoomOverride]="homeZoom"
+          color="primary"
+        >
+        </igo-home-extent-button>
+        <igo-wake-lock-button
+          *ngIf="appConfig.wakeLockApiButton"
+          class="mat-elevation-z2"
+        ></igo-wake-lock-button>
+        <igo-geolocate-button
+          *ngIf="hasGeolocateButton"
+          class="mat-elevation-z2"
+          [map]="map"
+          color="primary"
+          [@controlsOffsetY]="getControlsOffsetY()"
+          [@mobileOffsetY]="getToastPanelStatus()"
+        >
+        </igo-geolocate-button>
+        <igo-zoom-button
+          [map]="map"
+          color="primary"
+          [@controlsOffsetY]="getControlsOffsetY()"
+        >
+        </igo-zoom-button>
+      </div>
+      <div class="map-actions --horizontal --bottom-right">
+        <igo-user-button
+          *ngIf="authService.hasAuthService"
+          class="mat-elevation-z2"
+          [map]="map"
+          color="primary"
+          [@controlsOffsetY]="getControlsOffsetY()"
+          [@mobileOffsetY]="getToastPanelStatus()"
+        >
+        </igo-user-button>
+      </div>
+      <div class="map-actions --horizontal --bottom-left">
+        <igo-baselayers-switcher
+          class="mat-elevation-z2"
+          [map]="map"
+          [@controlsOffsetY]="getBaselayersSwitcherStatus()"
+          [useStaticIcon]="true"
+        >
+        </igo-baselayers-switcher>
+      </div>
       <igo-swipe-control
         class="mat-elevation-z2"
         [map]="map"
       ></igo-swipe-control>
       <igo-map-center class="mat-elevation-z2" [map]="map"></igo-map-center>
-      <igo-wake-lock-button
-        *ngIf="appConfig.wakeLockApiButton"
-        class="mat-elevation-z2"
-      ></igo-wake-lock-button>
-      <igo-offline-button
-        [map]="map"
-        color="primary"
-        *ngIf="appConfig.offlineButton"
-        class="mat-elevation-z2"
-        [@controlsOffsetY]="getControlsOffsetY()"
-        [@mobileOffsetY]="getToastPanelStatus()"
-      >
-      </igo-offline-button>
-      <igo-geolocate-button
-        *ngIf="hasGeolocateButton"
-        class="mat-elevation-z2"
-        [map]="map"
-        color="primary"
-        [@controlsOffsetY]="getControlsOffsetY()"
-        [@mobileOffsetY]="getToastPanelStatus()"
-      >
-      </igo-geolocate-button>
-      <igo-rotation-button
-        class="mat-elevation-z2"
-        [showIfNoRotation]="appConfig.showRotationButtonIfNoRotation"
-        [map]="map"
-        color="primary"
-      ></igo-rotation-button>
-      <igo-home-extent-button
-        *ngIf="appConfig.homeExtentButton"
-        class="mat-elevation-z2"
-        [map]="map"
-        [extentOverride]="homeExtent"
-        [centerOverride]="homeCenter"
-        [zoomOverride]="homeZoom"
-        color="primary"
-      >
-      </igo-home-extent-button>
-      <igo-user-button
-        *ngIf="authService.hasAuthService"
-        class="mat-elevation-z2"
-        [map]="map"
-        color="primary"
-        [@controlsOffsetY]="getControlsOffsetY()"
-        [@mobileOffsetY]="getToastPanelStatus()"
-      >
-      </igo-user-button>
-      <igo-baselayers-switcher
-        class="mat-elevation-z2"
-        [map]="map"
-        [@controlsOffsetY]="getBaselayersSwitcherStatus()"
-        [useStaticIcon]="true"
-      >
-      </igo-baselayers-switcher>
     </igo-map-browser>
 
     <app-map-overlay

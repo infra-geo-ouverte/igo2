@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use '../../../style/breakpoints';
 
 @import './portal.variables';
 
@@ -79,93 +80,139 @@ mat-icon.disabled {
 igo-map-browser {
   width: 100%;
   height: 100%;
-}
 
-igo-map-browser ::ng-deep .ol-attribution {
-  left: 50px;
-  bottom: $igo-margin;
-  text-align: left;
-  padding: 0;
-  margin-right: 90px;
-  background-color: rgba(255, 255, 255, 0);
-  width: calc(100% - 500px);
-
-  &.ol-logo-only {
-    height: inherit;
+  &.has-expansion-panel igo-baselayers-switcher {
+    bottom: 47px;
   }
-  &.ol-collapsed {
-    background: none;
-    button {
-      transform: none;
+
+  &.sidenav-offset-baselayers igo-baselayers-switcher {
+    left: 405px;
+  }
+
+  &.sidenav-offset ::ng-deep .ol-overlaycontainer-stopevent {
+    left: 400px;
+    width: calc(100% - 380px);
+
+    .ol-scale-line {
+      left: 40%;
+    }
+
+    @include mobile {
+      display: none;
     }
   }
-  button {
-    transform: rotate(180deg);
-    background-color: white;
-    cursor: pointer;
-  }
-  &.ol-uncollapsible {
-    height: auto;
-  }
-  ul {
-    background-color: rgba(255, 255, 255, 0.6);
-    padding: 2px 0.5em;
-  }
-}
 
-igo-map-browser.has-expansion-panel igo-baselayers-switcher {
-  bottom: 47px;
-}
-
-igo-map-browser.sidenav-offset-baselayers igo-baselayers-switcher {
-  left: 405px;
-}
-
-igo-map-browser ::ng-deep .ol-overlaycontainer-stopevent {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-}
-
-igo-map-browser.sidenav-offset ::ng-deep .ol-overlaycontainer-stopevent {
-  left: 400px;
-  width: calc(100% - 380px);
-
-  .ol-scale-line {
-    left: 40%;
+  &.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
+    bottom: $app-expansion-panel-height;
   }
 
-  @include mobile {
-    display: none;
+  &.expansion-offset-maximized ::ng-deep .ol-overlaycontainer-stopevent {
+    bottom: $app-expansion-panel-height-maximized;
   }
-}
 
-igo-map-browser.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
-  bottom: $app-expansion-panel-height;
-}
-
-igo-map-browser.expansion-offset-maximized
-  ::ng-deep
-  .ol-overlaycontainer-stopevent {
-  bottom: $app-expansion-panel-height-maximized;
-}
-
-igo-map-browser.toast-offset-scale-line
-  ::ng-deep
-  .ol-overlaycontainer-stopevent
-  ::ng-deep
-  .ol-scale-line {
-  bottom: 50px;
-}
-
-igo-map-browser.toast-offset-attribution
-  ::ng-deep
-  .ol-overlaycontainer-stopevent
-  ::ng-deep
-  .ol-attribution {
-  @include mobile {
+  &.toast-offset-scale-line
+    ::ng-deep
+    .ol-overlaycontainer-stopevent
+    ::ng-deep
+    .ol-scale-line {
     bottom: 50px;
+  }
+
+  &.toast-offset-attribution
+    ::ng-deep
+    .ol-overlaycontainer-stopevent
+    ::ng-deep
+    .ol-attribution {
+    @include mobile {
+      bottom: 50px;
+    }
+  }
+
+  ::ng-deep {
+    .ol-attribution {
+      left: 50px;
+      bottom: $igo-margin;
+      text-align: left;
+      padding: 0;
+      margin-right: 90px;
+      background-color: rgba(255, 255, 255, 0);
+      width: calc(100% - 500px);
+
+      &.ol-logo-only {
+        height: inherit;
+      }
+      &.ol-collapsed {
+        background: none;
+        button {
+          transform: none;
+        }
+      }
+      button {
+        transform: rotate(180deg);
+        background-color: white;
+        cursor: pointer;
+      }
+      &.ol-uncollapsible {
+        height: auto;
+      }
+      ul {
+        background-color: rgba(255, 255, 255, 0.6);
+        padding: 2px 0.5em;
+      }
+    }
+    .ol-overlaycontainer-stopevent {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+    }
+  }
+
+  .map-actions {
+    position: absolute;
+    display: flex;
+
+    .spinner-spacer {
+      height: 40px;
+    }
+
+    &.--vertical {
+      flex-direction: column;
+
+      > :not(:first-child) {
+        margin-top: 8px;
+      }
+    }
+
+    &.--bottom-right {
+      bottom: 8px;
+      right: 8px;
+    }
+
+    &.--top-right {
+      top: 8px;
+      right: 8px;
+    }
+
+    &.--horizontal.--bottom-right {
+      bottom: 8px;
+      right: calc(40px + 8px + 8px);
+    }
+
+    &.--bottom-left {
+      bottom: 8px;
+      left: 8px;
+    }
+  }
+
+  igo-zoom-button {
+    ::ng-deep button {
+      @include mat.elevation(2);
+    }
+
+    @include breakpoints.media-breakpoint-down('mobile') {
+      display: none;
+    }
   }
 }
 
@@ -328,55 +375,6 @@ app-toast-panel.app-toast-panel-opened {
 
   @include mobile {
     left: 0;
-  }
-}
-
-igo-offline-button {
-  margin-bottom: 128px;
-
-  @include mobile {
-    margin-bottom: 45px;
-  }
-  @include tablet {
-    margin-bottom: 45px;
-  }
-}
-
-igo-geolocate-button {
-  margin-bottom: 85px;
-
-  @include mobile {
-    margin-bottom: 0px;
-  }
-  @include medium-screen {
-    margin-bottom: 0px;
-  }
-  @include small-screen {
-    margin-bottom: 0px;
-  }
-}
-
-igo-home-extent-button {
-  @include mobile {
-    margin-bottom: 0px;
-    right: calc((2 * #{$igo-icon-size}) + (4 * #{$igo-margin}));
-  }
-  @include tablet {
-    margin-bottom: 0px;
-    right: calc((2 * #{$igo-icon-size}) + (4 * #{$igo-margin}));
-  }
-}
-
-igo-zoom-button {
-  ::ng-deep button {
-    @include mat.elevation(2);
-  }
-
-  @include medium-screen {
-    display: none;
-  }
-  @include small-screen {
-    display: none;
   }
 }
 
