@@ -184,6 +184,12 @@ igo-map-browser {
       }
     }
 
+    &.--horizontal {
+      > :not(:first-child) {
+        margin-right: 8px;
+      }
+    }
+
     &.--bottom-right {
       bottom: 8px;
       right: 8px;
