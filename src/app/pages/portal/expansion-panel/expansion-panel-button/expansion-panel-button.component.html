@@ -1,0 +1,11 @@
+<button
+  mat-icon-button
+  color="primary"
+  [matTooltip]="(expanded ? 'workspace.close' : 'workspace.open') | translate"
+  (click)="onToggleClick()"
+>
+  <mat-icon
+    svgIcon="launch"
+    [style.transform]="expanded ? 'rotate(180deg)' : null"
+  ></mat-icon>
+</button>
