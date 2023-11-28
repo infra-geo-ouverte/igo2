@@ -2,7 +2,17 @@
 @use '@angular/material' as mat;
 
 @mixin theme($theme) {
+  @include color($theme);
   @include density($theme);
+}
+
+@mixin color($theme) {
+  app-expansion-panel-button {
+    background-color: #fff;
+    &:hover {
+      background-color: #efefef;
+    }
+  }
 }
 
 @mixin density($theme) {
@@ -15,7 +25,7 @@
     )
   );
 
-  app-expansion-panel-header {
+  app-expansion-panel-button {
     @include mat.icon-button-density($theme);
   }
 }

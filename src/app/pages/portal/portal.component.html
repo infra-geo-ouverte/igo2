@@ -77,7 +77,7 @@
       [@mapStateY]="getControlsOffsetY()"
       (@mapStateY.start)="updateMapBrowserClass()"
     >
-      <div class="map-actions --vertical --top-right">
+      <div class="map-actions --vertical --top --right">
         <div class="spinner-spacer"></div>
         <igo-rotation-button
           class="mat-elevation-z2"
@@ -86,7 +86,11 @@
           color="primary"
         ></igo-rotation-button>
       </div>
-      <div class="map-actions --vertical --bottom-right">
+      <div
+        class="map-actions --vertical --bottom --right"
+        [@controlsOffsetY]="getControlsOffsetY()"
+        [@mobileOffsetY]="getToastPanelStatus()"
+      >
         <igo-offline-button
           [map]="map"
           color="primary"
@@ -120,13 +124,18 @@
         >
         </igo-geolocate-button>
         <igo-zoom-button
+          *ngIf="!isTouchScreen"
           [map]="map"
           color="primary"
           [@controlsOffsetY]="getControlsOffsetY()"
         >
         </igo-zoom-button>
       </div>
-      <div class="map-actions --horizontal --bottom-right">
+      <div
+        class="map-actions --horizontal --bottom --right"
+        [@controlsOffsetY]="getControlsOffsetY()"
+        [@mobileOffsetY]="getToastPanelStatus()"
+      >
         <igo-user-button
           *ngIf="authService.hasAuthService"
           class="mat-elevation-z2"
@@ -137,7 +146,11 @@
         >
         </igo-user-button>
       </div>
-      <div class="map-actions --horizontal --bottom-left">
+      <div
+        class="map-actions --vertical --bottom --left"
+        [@controlsOffsetY]="getControlsOffsetY()"
+        [@mobileOffsetY]="getToastPanelStatus()"
+      >
         <igo-baselayers-switcher
           class="mat-elevation-z2"
           [map]="map"
@@ -145,6 +158,16 @@
           [useStaticIcon]="true"
         >
         </igo-baselayers-switcher>
+        <app-expansion-panel-button
+          *ngIf="
+            appConfig.hasExpansionPanel &&
+            (workspaceState.workspaceEnabled$ | async) &&
+            !expansionPanelExpanded
+          "
+          class="mat-elevation-z2"
+          [expanded]="expansionPanelExpanded"
+          (expand)="handleToggleExpansionPanel($event)"
+        ></app-expansion-panel-button>
       </div>
       <igo-swipe-control
         class="mat-elevation-z2"
@@ -166,9 +189,7 @@
 </mat-sidenav-container>
 
 <app-expansion-panel
-  *ngIf="
-    appConfig.hasExpansionPanel && (workspaceState.workspaceEnabled$ | async)
-  "
+  *ngIf="expansionPanelExpanded"
   [backdropShown]="expansionPanelBackdropShown"
   [(expanded)]="expansionPanelExpanded"
   [maximized]="workspaceState.workspaceMaximize$ | async"

@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { IgoBackdropModule } from '@igo2/common';
 import { IgoLanguageModule } from '@igo2/core';
 
+import { ExpansionPanelButtonComponent } from './expansion-panel-button/expansion-panel-button.component';
 import { ExpansionPanelHeaderComponent } from './expansion-panel-header.component';
 import { ExpansionPanelComponent } from './expansion-panel.component';
 
@@ -23,9 +24,10 @@ import { ExpansionPanelComponent } from './expansion-panel.component';
     MatSelectModule,
     MatTooltipModule,
     IgoLanguageModule,
-    IgoBackdropModule
+    IgoBackdropModule,
+    ExpansionPanelButtonComponent
   ],
-  exports: [ExpansionPanelComponent],
+  exports: [ExpansionPanelComponent, ExpansionPanelButtonComponent],
   declarations: [ExpansionPanelComponent, ExpansionPanelHeaderComponent]
 })
 export class AppExpansionPanelModule {}

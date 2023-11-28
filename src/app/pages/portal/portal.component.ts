@@ -22,7 +22,7 @@ import {
   EntityRecord,
   EntityStore,
   EntityTablePaginatorOptions,
-  Tool, // getEntityTitle,
+  Tool,
   Toolbox,
   Widget,
   Workspace,
@@ -177,6 +177,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   public homeExtent: MapExtent;
   public homeCenter: [number, number];
   public homeZoom: number;
+  isTouchScreen: boolean;
+
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
   @ViewChild('searchBar', { read: ElementRef, static: true })
@@ -350,6 +352,8 @@ export class PortalComponent implements OnInit, OnDestroy {
       (this.storageService.get(
         'reverseSearchCoordsFormatEnabled'
       ) as boolean) || false;
+
+    this.isTouchScreen = this.mediaService.isTouchScreen();
   }
 
   ngOnInit() {
@@ -879,6 +883,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     ) {
       this.expansionPanelExpanded = false;
     }
+  }
+
+  handleToggleExpansionPanel(isExpanded: boolean): void {
+    this.expansionPanelExpanded = isExpanded;
   }
 
   public onClearSearch() {

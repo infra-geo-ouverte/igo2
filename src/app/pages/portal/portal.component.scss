@@ -71,26 +71,18 @@
   }
 }
 
-/*** Menu button ***/
-mat-icon.disabled {
-  color: rgba(0, 0, 0, 0.38);
-}
-
-/*** Map browser ***/
 igo-map-browser {
   width: 100%;
   height: 100%;
 
-  &.has-expansion-panel igo-baselayers-switcher {
-    bottom: 47px;
-  }
-
-  &.sidenav-offset-baselayers igo-baselayers-switcher {
-    left: 405px;
+  &.sidenav-offset {
+    .map-actions.--left {
+      left: $app-sidenav-width + 4px;
+    }
   }
 
   &.sidenav-offset ::ng-deep .ol-overlaycontainer-stopevent {
-    left: 400px;
+    left: $app-sidenav-width;
     width: calc(100% - 380px);
 
     .ol-scale-line {
@@ -130,8 +122,8 @@ igo-map-browser {
 
   ::ng-deep {
     .ol-attribution {
-      left: 50px;
-      bottom: $igo-margin;
+      left: calc(40px + 4px + 8px);
+      bottom: 8px;
       text-align: left;
       padding: 0;
       margin-right: 90px;
@@ -171,6 +163,9 @@ igo-map-browser {
   .map-actions {
     position: absolute;
     display: flex;
+    transition:
+      bottom 250ms,
+      left 250ms;
 
     .spinner-spacer {
       height: 40px;
@@ -190,24 +185,24 @@ igo-map-browser {
       }
     }
 
-    &.--bottom-right {
-      bottom: 8px;
-      right: 8px;
+    &.--bottom {
+      bottom: 4px;
     }
 
-    &.--top-right {
-      top: 8px;
-      right: 8px;
+    &.--right {
+      right: 4px;
     }
 
-    &.--horizontal.--bottom-right {
-      bottom: 8px;
-      right: calc(40px + 8px + 8px);
+    &.--top {
+      top: 4px;
     }
 
-    &.--bottom-left {
-      bottom: 8px;
-      left: 8px;
+    &.--horizontal.--bottom.--right {
+      right: calc(40px + 4px * 2);
+    }
+
+    &.--left {
+      left: 4px;
     }
   }
 
@@ -271,13 +266,6 @@ app-expansion-panel {
   position: absolute;
   bottom: 0;
   z-index: 5;
-
-  @include mobile {
-    @supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee))
-      and (not (-ms-ime-align: auto)) and (not (-moz-appearance: none)) {
-      z-index: 5;
-    }
-  }
 }
 
 /*** Toast Panel ***/
@@ -434,16 +422,12 @@ app-toast-panel-for-expansion
   top: -10px;
   right: -15px;
   z-index: 6;
-  padding: 5px;
+  padding: 4px;
 
   button {
     height: 24px;
     line-height: 24px;
   }
-}
-
-.add-feature {
-  margin-top: 5px;
 }
 
 .actionbar-workspace {

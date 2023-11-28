@@ -1,0 +1,5 @@
+@use '@igo2/common/partial/common-utils';
+
+:host {
+  @include common-utils.square-button();
+}

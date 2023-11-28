@@ -1,0 +1,5 @@
+@use './pages/portal/portal-theme';
+
+@mixin themes($config) {
+  @include portal-theme.themes($config);
+}

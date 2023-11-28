@@ -1,7 +1,7 @@
-@use '../app/pages/portal/portal-theme';
+@use '../app/app.theme' as app;
 
 $config: (
   density: 0
 );
 
-@include portal-theme.densities($config);
+@include app.themes($config);
