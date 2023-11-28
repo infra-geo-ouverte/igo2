@@ -8,7 +8,7 @@ describe('ExpansionPanelButtonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExpansionPanelButtonComponent]
+      imports: [ExpansionPanelButtonComponent]
     });
     fixture = TestBed.createComponent(ExpansionPanelButtonComponent);
     component = fixture.componentInstance;
