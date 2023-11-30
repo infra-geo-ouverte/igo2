@@ -49,6 +49,7 @@ import {
   FeatureMotion,
   FeatureWorkspace,
   GoogleLinks,
+  OsmLinks,
   IgoMap,
   ImageLayer,
   ImportService,
@@ -375,6 +376,11 @@ export class PortalComponent implements OnInit, OnDestroy {
         id: 'coordinates',
         title: 'coordinates',
         handler: () => this.searchCoordinate(this.contextMenuCoord)
+      },
+      {
+        id: 'openStreetMap',
+        title: 'openStreetMap',
+        handler: () => this.openOpenStreetMap(this.contextMenuCoord)
       },
       {
         id: 'googleMaps',
@@ -918,6 +924,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     const coord = this.map.ol.getCoordinateFromPixel(pixel);
     const proj = this.map.projection;
     return olProj.transform(coord, proj, 'EPSG:4326');
+  }
+
+  private openOpenStreetMap(coord: [number, number]) {
+    window.open(OsmLinks.getOpenStreetMapLink(coord[0], coord[1], 14));
   }
 
   private openGoogleMaps(coord: [number, number]) {
