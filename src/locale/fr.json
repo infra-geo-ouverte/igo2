@@ -46,7 +46,11 @@
     "previousFeatureTooltip": "Entité précédente ( raccouci clavier = flèche gauche )",
     "nextFeatureTooltip": "Prochaine entité ( raccouci clavier = flèche droite )",
     "addLayer": "Ajouter la couche de donnée associée.",
-    "removeLayer": "Supprimer la couche de donnée associée de la carte."
+    "removeLayer": "Supprimer la couche de donnée associée de la carte.",
+    "coordinates": "Montrer les coordonnées",
+    "googleMap": "Ouvrir dans Google Maps",
+    "googleStreetView": "Ouvrir dans Google Street View",
+    "openStreetMap": "Ouvrir dans OpenStreetMap"
   },
   "home-extent": {
     "tooltip": "Aller à l'étendue de la carte"
