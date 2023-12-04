@@ -84,7 +84,7 @@
     "@angular-eslint/eslint-plugin-template": "^16.2.0",
     "@angular-eslint/schematics": "^16.2.0",
     "@angular-eslint/template-parser": "^16.2.0",
-    "@angular/cli": "^16.2.2",
+    "@angular/cli": "^17.0.5",
     "@angular/compiler-cli": "^16.2.5",
     "@cypress/schematic": "^2.5.1",
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
