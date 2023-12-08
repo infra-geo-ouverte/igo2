@@ -303,7 +303,7 @@ export const environment: AppEnvironmentOptions = {
       base: {
         markerColor: '#5ed0fb', // marker fill
         markerOpacity: 0.8, // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: '#DFF7FF', // marker contour
+        markerOutlineColor: '#a7e7ff', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.2, // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: '#5ed0fb', // line and poly
@@ -323,7 +323,7 @@ export const environment: AppEnvironmentOptions = {
       selection: {
         markerColor: '#00a1de', // marker fill
         markerOpacity: 1, // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: '#DFF7FF', // marker contour
+        markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: '#5ed0fb', // line and poly
@@ -335,7 +335,7 @@ export const environment: AppEnvironmentOptions = {
       base: {
         markerColor: '#5ed0fb', // marker fill
         markerOpacity: 0.8, // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: '#DFF7FF', // marker contour
+        markerOutlineColor: '#a7e7ff', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.2, // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: '#5ed0fb', // line and poly
@@ -355,7 +355,7 @@ export const environment: AppEnvironmentOptions = {
       selection: {
         markerColor: '#00a1de', // marker fill
         markerOpacity: 1, // marker opacity not applied if a rgba markerColor is provided
-        markerOutlineColor: '#DFF7FF', // marker contour
+        markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
         strokeColor: '#5ed0fb', // line and poly
