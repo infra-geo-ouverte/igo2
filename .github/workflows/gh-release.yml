@@ -15,8 +15,6 @@ jobs:
         run: npm install conventional-changelog-cli@4.1.0
       - name: Generate Changelog-current
         run: npm run changelog-current |  grep -v "^>" | sed '/^$/d' > ${{ github.workspace }}-CHANGELOG.txt
-      - name: Post intstall
-        run: npm run postinstall
       - name: Build production
         run: npm run build.prod
       - name: Install zip
