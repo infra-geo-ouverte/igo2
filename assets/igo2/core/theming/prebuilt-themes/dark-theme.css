@@ -2968,6 +2968,15 @@ igo-search-bar .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc
 igo-search-bar .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined) .mat-mdc-floating-label {
   display: none;
 }
+igo-search-bar .mat-mdc-icon-button.mat-mdc-button-base {
+  --mdc-icon-button-state-layer-size: 40px;
+  width: var(--mdc-icon-button-state-layer-size);
+  height: var(--mdc-icon-button-state-layer-size);
+  padding: 8px;
+}
+igo-search-bar .mat-mdc-icon-button.mat-mdc-button-base .mat-mdc-button-touch-target {
+  display: none;
+}
 
 igo-search-bar mat-form-field .mdc-line-ripple {
   display: none;

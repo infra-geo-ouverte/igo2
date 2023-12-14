@@ -2767,7 +2767,7 @@ igo-draw-popup-component .igo-map-tooltip-draw,
 igo-draw-popup-component .igo-map-tooltip-draw,
 igo-draw-shorcuts .igo-map-tooltip-draw,
 igo-draw .igo-map-tooltip-draw {
-  color: rgba(158, 158, 158, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   font-weight: bold;
   font-size: 16px;
 }
@@ -2874,10 +2874,10 @@ igo-layer-item.igo-layer-item-focused > mat-list-item {
   color: white;
 }
 igo-layer-item button:not(.mat-primary) mat-icon {
-  color: #9e9e9e;
+  color: black;
 }
 igo-layer-item button mat-icon.disabled {
-  color: rgba(158, 158, 158, 0.38);
+  color: rgba(0, 0, 0, 0.38);
 }
 
 igo-map-browser div.ol-attribution > button {
@@ -2959,6 +2959,15 @@ igo-search-bar .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc
   padding-bottom: 12px;
 }
 igo-search-bar .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined) .mat-mdc-floating-label {
+  display: none;
+}
+igo-search-bar .mat-mdc-icon-button.mat-mdc-button-base {
+  --mdc-icon-button-state-layer-size: 40px;
+  width: var(--mdc-icon-button-state-layer-size);
+  height: var(--mdc-icon-button-state-layer-size);
+  padding: 8px;
+}
+igo-search-bar .mat-mdc-icon-button.mat-mdc-button-base .mat-mdc-button-touch-target {
   display: none;
 }
 
