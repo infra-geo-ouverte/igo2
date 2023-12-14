@@ -1,3 +1,23 @@
+# [16.1.0](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.2...v16.1.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* **app:** correction of the default value ([89ddfa3](https://github.com/infra-geo-ouverte/igo2/commit/89ddfa34858873c560454d343910d4a802c1da0f))
+* **app:** replace tablet view by medium and small screen + map actions  button placement ([e4537f2](https://github.com/infra-geo-ouverte/igo2/commit/e4537f29304249d8087103fc8051ecc74cfdaa4e))
+* **App:** revert change for resolve function in the app init ([885adf2](https://github.com/infra-geo-ouverte/igo2/commit/885adf2c5dbe9b91cf094ed55e9b194e27e36ec1))
+* **app:** this rule is not used anymore except in form-field-text.component, resulting in extra large icon ([#1106](https://github.com/infra-geo-ouverte/igo2/issues/1106)) ([1fcb9f9](https://github.com/infra-geo-ouverte/igo2/commit/1fcb9f91e8e91ce9cf390b6d004707fc72245d2a))
+* **environment:** set the config for the MSP team ([7c30018](https://github.com/infra-geo-ouverte/igo2/commit/7c30018049478ac28545433d5b31437b8b671d34))
+* **geo/search-bar:** adjust search bar overflow on mobile ([98024fc](https://github.com/infra-geo-ouverte/igo2/commit/98024fc195b69b71b6018234873113ed1851e997))
+* **portal:** revert search-bar spacer ([0bfd811](https://github.com/infra-geo-ouverte/igo2/commit/0bfd8119fd02bfaa5a1031c597735b35d8a9667a))
+
+
+### Features
+
+* **app:** upgrade igo2-lib to v16.1.0 ([f52a66e](https://github.com/infra-geo-ouverte/igo2/commit/f52a66e0d323b25c83459a3f12ea7f1d400c6b42))
+
+
+
 ## [16.0.2](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.1...v16.0.2) (2023-11-07)
 
 
