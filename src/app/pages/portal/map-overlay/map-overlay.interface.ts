@@ -3,8 +3,8 @@ export interface MapOverlay {
                             - options: mobile
                                        tablet
                                        desktop
-                            - default: desktop
-  cssClass: string;         /* Css class to define position of the element
+                            - default: desktop*/;
+  cssClass: string /* Css class to define position of the element
                             - options:  top-left
                                         center-left
                                         bottom-left
