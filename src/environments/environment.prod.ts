@@ -99,7 +99,7 @@ export const environment: AppEnvironmentOptions = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#DFF7FF', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -109,7 +109,7 @@ export const environment: AppEnvironmentOptions = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#00A1DE', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }
@@ -131,7 +131,7 @@ export const environment: AppEnvironmentOptions = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#DFF7FF', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -141,7 +141,7 @@ export const environment: AppEnvironmentOptions = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#00A1DE', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }
