@@ -1,0 +1,124 @@
+{
+  "igo": {
+    "integration": {
+      "tools": {
+        "catalog": "Catalog",
+        "contexts": "Contexts",
+        "directions": "Directions",
+        "draw": "Draw",
+        "importExport": "Import & Export",
+        "ogcFilter": "Filter by",
+        "map": "Map",
+        "layers": "Layers",
+        "legend": "Legend",
+        "measurer": "Measure",
+        "print": "Print",
+        "searchResults": "Search Results",
+        "shareMap": "Share",
+        "timeFilter": "Time Filter",
+        "about": "About",
+        "spatialFilter": "Spatial Filter",
+        "advancedMap": "Advanced map tools",
+        "closestFeature": "Closest feature tool"
+      },
+      "searchResultsTool": {
+        "noResults": "No results",
+        "doSearch": "",
+        "examples": "<b>Search for addresses, locations, coordinates and layers using the search bar</b>.<br><br><u>Address</u> searches can be made with a combination of: <ul><li>building number</li><li>street name</li><li>city name</li><li>postal code</li></ul> <u>Location</u> search examples: <ul><li>Lac Poulin</li><li>Mcdo Lévis</li><li>Saint-Isidore</li></ul> You can also use keywords to refine your search. Examples: <ul><li>#mun québec (to search for municipalities)</li><li>#sante Lévis (to search for health establishments)</li><li>#cpe joyeux (to search for daycares)</li><li>#intersection liégois + église (to search for an intersection, the #+ can also be used)</li></ul>*Keywords appear as tooltips when hovering the results type in the 'ICherche' search options -> iCherche -> Results types.<br><br><u>Coordinate</u> search examples:<ul><li>Decimal degrees- DD (-68.165547, 48.644546)</li><li>Degrees, minutes and seconds- DMS(-68 9 56, 48 38 40)</li><li>Degrees and decimal minutes- DMM(-68 9.56, 48 38.40)</li><li>Projected (UTM-19 561466.861, 5388278.862)</li><li>BELL (Lat: 48 38 40N Long: 68 9 56W UNC:100 CONF:90)</li><li>Meter Meter (111594.63, 445854.74;32198)</li></ul>For more information on coordinate search : <a href='https://igo2.readthedocs.io/fr/next/properties.html#coordonnees' target='_blank'>Consult IGO2's documentation</a>",
+        "zoomOnFeatureTooltip": "Zoom on selected feature.",
+        "zoomOnFeatureTooltipOutOfView": "The feature is out of view. Zoom on selected feature."
+      },
+      "aboutTool": {
+        "headerHtml": "",
+        "html": "<style>#about .bold_class{font-weight: bold;}#about .red{color: red;}#about .tool_name{border-top: 1px solid; padding-top: 10px;}#about .titre_outil{font-weight: bold; font-size: 18px; padding-bottom: 8px;}#about .subtitle{font-size: 20px; padding-bottom: 10px;}#about .align_right{text-align: right;}#about .describe{text-align: justify;}#about a img{color: black; text-decoration: none;}</style><body> <div id='about'> <div class='bold_class subtitle'>Features overview</div><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z'> </path> </svg></mat-icon> Search Bar </div><div class='describe'>Located in the upper-left portion of the interface, the <span class='bold_class'>Search Bar</span> allows the user to locate an area of interest using an address, location or GPS coordinates. It can also be used to search for a layer. <br><br> It is also possible to search for a specific element using the hashtag \"#\" (for example, #municipalites québec). Accents and capital letters don't have any impact on <span class='bold_class'>Search Results</span> when using a hashtag. </div></div><br><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z'></path> </svg></mat-icon> Contexts </div><div class='describe'> <span class='bold_class'>Contexts</span> are used to visualize groupings of layers related to a specific theme. When a context is selected, all the layers associated with it will be added to the <span class='bold_class'>Map</span>. It is then possible to add other layers to the map by using the <span class='bold_class'>Catalog</span> or the <span class='bold_class'>Search Bar</span>. <br><br><div class='red'> <span class='bold_class'>WARNING :</span> If a new context is selected, all the layers displayed on the <span class='bold_class'>Map</span> will be replaced by the ones associated with the newly selected context. <br><br></div><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M15,19L9,16.89V5L15,7.11M20.5,3C20.44,3 20.39,3 20.34,3L15,5.1L9,3L3.36,4.9C3.15,4.97 3,5.15 3,5.38V20.5A0.5,0.5 0 0,0 3.5,21C3.55,21 3.61,21 3.66,20.97L9,18.9L15,21L20.64,19.1C20.85,19 21,18.85 21,18.62V3.5A0.5,0.5 0 0,0 20.5,3Z'> </path> </svg></mat-icon> Map </div><div class='describe'>It is possible to personalize the <span class='bold_class'>Map</span> by using the <span class='bold_class'>Catalog</span> or the <span class='bold_class'>Search Bar</span>. This space allows the user to add, delete, interrogate, filter and sort the displayed layers. It is also possible to visualize the legends associated with the layers. </div><br></div><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M2 4C2 2.89 2.9 2 4 2H7V4H4V7H2V4M22 4V7H20V4H17V2H20C21.1 2 22 2.89 22 4M2 20V17H4V20H7V22H4C2.9 22 2 21.11 2 20M10 2H14V4H10V2M10 20H14V22H10V20M2 10H4V14H2V10M18.5 13C20.4 13 22 14.6 22 16.5C22 19.1 18.5 23 18.5 23C18.5 23 15 19.1 15 16.5C15 14.6 16.6 13 18.5 13M18.5 17.8C19.2 17.8 19.8 17.2 19.7 16.6C19.7 16 19.1 15.4 18.5 15.4C17.9 15.4 17.3 15.9 17.3 16.6C17.3 17.2 17.8 17.8 18.5 17.8M20 10H22V12.34C21.42 11.84 20.74 11.45 20 11.23V10Z'> </path> </svg></mat-icon> Spatial Filter </div><div class='describe'> The <span class='bold_class'>Spatial Filter</span> can be used to search for adresses or themes by specifying a predefined zone (for example, electoral districts) or by drawing an area on the map. The results can then be exported by using the <span class='bold_class'>Import & Export</span> tool. </div></div><br><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M1.39,18.36L3.16,16.6L4.58,18L5.64,16.95L4.22,15.54L5.64,14.12L8.11,16.6L9.17,15.54L6.7,13.06L8.11,11.65L9.53,13.06L10.59,12L9.17,10.59L10.59,9.17L13.06,11.65L14.12,10.59L11.65,8.11L13.06,6.7L14.47,8.11L15.54,7.05L14.12,5.64L15.54,4.22L18,6.7L19.07,5.64L16.6,3.16L18.36,1.39L22.61,5.64L5.64,22.61L1.39,18.36Z'> </path> </svg></mat-icon> Measure </div><div class='describe'>This tool gives the option to either <span class='bold_class'>Measure</span> distances or areas on the map.</div><br></div><div class='tool_name'><div class='titre_outil'><mat-icon class='mat-icon'><svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'><path d='M9.75 20.85C11.53 20.15 11.14 18.22 10.24 17C9.35 15.75 8.12 14.89 6.88 14.06C6 13.5 5.19 12.8 4.54 12C4.26 11.67 3.69 11.06 4.27 10.94C4.86 10.82 5.88 11.4 6.4 11.62C7.31 12 8.21 12.44 9.05 12.96L10.06 11.26C8.5 10.23 6.5 9.32 4.64 9.05C3.58 8.89 2.46 9.11 2.1 10.26C1.78 11.25 2.29 12.25 2.87 13.03C4.24 14.86 6.37 15.74 7.96 17.32C8.3 17.65 8.71 18.04 8.91 18.5C9.12 18.94 9.07 18.97 8.6 18.97C7.36 18.97 5.81 18 4.8 17.36L3.79 19.06C5.32 20 7.88 21.47 9.75 20.85M20.84 5.25C21.06 5.03 21.06 4.67 20.84 4.46L19.54 3.16C19.33 2.95 18.97 2.95 18.76 3.16L17.74 4.18L19.82 6.26M11 10.92V13H13.08L19.23 6.85L17.15 4.77L11 10.92Z'></path></svg></mat-icon> Draw </div><div class='describe'> The <span class='bold_class'>Draw</span> tool can be used to draw points, lines, polygons or circles with labels. The color of the fill and the stroke can be set with the given selectors. <br><br> A Drawings layer can be exported by using the <span class='bold_class'>Import & Export</span> tool. </div><br></div><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M14,14.5V12H10V15H8V11A1,1 0 0,1 9,10H14V7.5L17.5,11M21.71,11.29L12.71,2.29H12.7C12.31,1.9 11.68,1.9 11.29,2.29L2.29,11.29C1.9,11.68 1.9,12.32 2.29,12.71L11.29,21.71C11.68,22.09 12.31,22.1 12.71,21.71L21.71,12.71C22.1,12.32 22.1,11.68 21.71,11.29Z'> </path> </svg></mat-icon> Directions </div><div class='describe'> It is possible to build a route and get <span class='bold_class'>Directions</span> between two points by placing them on the map or by searching for addresses. It is also possible to add stops and copy the description or the link of the route to the clipboard.</div><br></div><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M17,14H19V17H22V19H19V22H17V19H14V17H17V14M11,16L2,9L11,2L20,9L11,16M11,18.54L12,17.75V18C12,18.71 12.12,19.39 12.35,20L11,21.07L2,14.07L3.62,12.81L11,18.54Z'></path> </svg></mat-icon> Catalog </div><div class='describe'> The <span class='bold_class'>Catalog</span> contains all the layers that can be added to the <span class='bold_class'>Map</span>. Click on the + of desired layer to add it. </div><br></div><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M14,17H18V14L23,18.5L18,23V20H14V17M13,9H18.5L13,3.5V9M6,2H14L20,8V12.34C19.37,12.12 18.7,12 18,12A6,6 0 0,0 12,18C12,19.54 12.58,20.94 13.53,22H6C4.89,22 4,21.1 4,20V4A2,2 0 0,1 6,2Z'></path> </svg></mat-icon> Import & Export </div><div class='describe'> It is possible to <span class='bold_class'>Import</span> vector data by specifying a coordinate system or a projection. <br><br> It is possible to <span class='bold_class'>Export</span> one or many layers in multiple formats. <br><br> It is also possible to <span class='bold_class'>Import</span> or <span class='bold_class'>Export</span> a context locally. This feature is useful to save contexts when the user is not authenticated. </div><br></div><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z'></path> </svg></mat-icon> Print </div><div class='describe'>This tool is used to <span class='bold_class'>Print</span> the map displayed on-screen. Multiple options can be specified like a title, a comment, the output format, the paper size and the orientation. </div><br></div><div class='tool_name'> <div class='titre_outil'> <mat-icon class='mat-icon'> <svg viewBox='0 0 24 24' fit='' height='100%' width='100%' preserveAspectRatio='xMidYMid meet' focusable='false'> <path d='M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z'> </path> </svg></mat-icon> Share</div><div class='describe'> The <span class='bold_class'>Share</span> tool is used to create an URL that redirects to an exact representation of the map. This link can be shared or distributed in a document and allows the user to \"save\" the map for later use. </div><br></div><div class='tool_name'> <p> <a href='http://igouverte.org/' target='_blank'><img src='./assets/igo2/core/logo.png' alt='IGO' height=32>IGO2</a> is a open source geospatial solution developed by collaborators and specialists from several departments and agencies of the Government of Quebec. <p> Version: {{version.lib}}</p></div>",
+        "trainingGuide": "Training guide",
+        "trainingGuideTooltip": "Click here to access IGO2's self-training guide"
+      },
+      "mapTool": {
+        "empty": "No layer is currently active on this map. ",
+        "customize": "Customize it by adding layer from the : ",
+        "search-tool": "Search tool",
+        "catalog-tool": "Data catalog",
+        "context-tool": "Context manager",
+        "noLayersVisible": "There is no visible layers.",
+        "noLayersInRange": "There is no visible layers at the current scale. Please zoom in or out to discover theses layers."
+      },
+      "importExportTool": {
+        "importExportData": "Layer",
+        "importExportContext": "Context"
+      },
+      "workspace": {
+        "toggleWorkspace": "Open/Close the table view",
+        "ogcFilter.close": "Close",
+        "ogcFilter.title": "Filters",
+        "ogcFilter.tooltip": "Apply filters",
+        "download.title": "Download",
+        "download.tooltip": "Download",
+        "inMapExtent.title": "Show records contained in map",
+        "inMapExtent.active.tooltip": "Show records contained in map",
+        "inMapExtent.inactive.tooltip": "Show all records",
+        "zoomAuto.title": "Zoom auto",
+        "zoomAuto.tooltip": "Zoom auto",
+        "selected.title": "Show selected records only",
+        "selected.tooltip": "Show selected records only",
+        "clearSelection.title": "Deselect all",
+        "clearSelection.tooltip": "Deselect all records",
+        "maximize": "Extend",
+        "maximizeTooltip": "Extend panel",
+        "standardExtent": "Reduce",
+        "standardExtentTooltip": "Reduce panel"
+      },
+      "directions": {
+        "warning": {
+          "title": "Warning",
+          "message": "The route proposed in this tool does not take into account current road conditions, road congestion, obstacles present on the network and ferry schedules (daily and seasonal opening)."
+        }
+      },
+      "map-proximity-tool": {
+        "lon": "Longitude",
+        "lat": "Latitude",
+        "method": "Location method",
+        "radiusM": "Search radius (meters)",
+        "geolocation": "Your current location",
+        "mapCenter": "Map center (black cross)",
+        "copyMsg": "Coordinates copied to clipboard",
+        "copyTitle": "Center's coordinate",
+        "feature": "Feature",
+        "distance": "Distance"
+      },
+      "advanced-map-tool": {
+        "geolocation": {
+          "title": "Geolocation",
+          "tracking": "Activate/show the geolocation",
+          "follow": "Follow your position on map"
+         },
+        "advanced-swipe": {
+          "swipe-select":  "select the layers for swiping",
+          "selectAll": "Select all",
+          "empty": "No layer is currently active on this map. ",
+          "customize": "Customize it by adding layer from the : ",
+          "search-tool": "Search tool",
+          "catalog-tool": "Data catalog",
+          "context-tool": "Context manager",
+          "swipe": "Swipe",
+          "swipe-tool": "Swipe-Tool"
+        },
+        "advanced-coordinates": {
+          "copy": "Copy coordinates",
+          "lon": "Longitude",
+          "lat": "Latitude",
+          "est": "Est",
+          "nord": "North",
+          "coordinates": "Coordinates",
+          "copyMsg": "Coordinates copied to clipboard",
+          "copyTitle": "Coordinates of center",
+          "center": "Display map center",
+          "coordSystem": "Systeme of coordinates",
+          "zoom": "Current zoom level: ",
+          "scale": "Current scale: ",
+          "resolution": "Current resolution: "
+        }
+      }
+    }
+  }
+}

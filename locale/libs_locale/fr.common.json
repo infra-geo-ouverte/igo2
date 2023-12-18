@@ -1,0 +1,43 @@
+{
+  "igo": {
+    "common": {
+      "confirmDialog": {
+        "cancelBtn": "Annuler",
+        "confirmBtn": "Confirmer",
+        "title": "Confirmation"
+      },
+      "table": {
+        "filter": "Filtre"
+      },
+      "entity-table": {
+        "targetHtmlUrl": "Ouvrir le lien externe"
+      },
+      "form": {
+        "errors": {
+          "required": "Ce champ est requis"
+        }
+      },
+      "actionbar": {
+        "scrollUp": "Défiler vers le haut",
+        "scrollDown": "Défiler vers le bas",
+        "icon": "Actions supplémentaires"
+      },
+      "interactiveTour": {
+        "tooltipTourToolButton": "Aide interactive sur l'outil",
+        "disaledTooltipTourToolButton": "Pour avoir accès au tour interactif de cet outil, ajouter des contextes ou des couches",
+        "buttonTitle": "Découvrir",
+        "exitButton": "Quitter",
+        "backButton": "Précédent",
+        "nextButton": "Suivant"
+      },
+      "paginator": {
+        "firstPageLabel": "Première page",
+        "itemsPerPageLabel": "Entités par page:",
+        "lastPageLabel": "Dernière page",
+        "nextPageLabel": "Page suivante",
+        "previousPageLabel": "Page précédente",
+        "of": "de"
+      }
+    }
+  }
+}

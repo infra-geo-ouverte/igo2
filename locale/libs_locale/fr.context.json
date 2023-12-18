@@ -1,0 +1,199 @@
+{
+  "igo": {
+    "context": {
+      "bookmarkButton": {
+        "create": "Créer un contexte",
+        "dialog": {
+          "createMsg": "Le contexte '{{value}}' a été créé",
+          "createTitle": "Contexte créé",
+          "placeholder": "Titre",
+          "title": "Nouveau contexte"
+        }
+      },
+      "contextManager": {
+        "clone": "Cloner ce contexte",
+        "delete": "Supprimer ce contexte",
+        "dialog": {
+          "cloneMsg": "Le contexte '{{value}}' a été cloné",
+          "cloneTitle": "Contexte cloné",
+          "copyMsg": "Texte copié",
+          "copyTitle": "Identifiant du contexte",
+          "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce contexte ?",
+          "deleteMsg": "Le contexte '{{value}}' a été supprimé",
+          "deleteTitle": "Contexte supprimé",
+          "favoriteMsg": "Le contexte '{{value}}' a été défini comme favori",
+          "favoriteTitle": "Favori enregistré",
+          "saveMsg": "Le contexte '{{value}}' a été enregistré",
+          "saveTitle": "Contexte enregistré"
+        },
+        "edit": "Éditer ce contexte",
+        "errors": {
+          "uncaught": {
+            "message": "Désolé! Le service que vous voulez utiliser n’est malheureusement pas disponible pour le moment. Essayez plus tard!",
+            "title": "Erreur de serveur"
+          },
+          "addPermission": "La permission que vous tentez d'ajouter est déjà présente dans le contexte.",
+          "addPermissionEmpty": "La permission que vous tentez d'ajouter n'est pas valide",
+          "addPermissionTitle": "Erreur d'ajout de permission"
+        },
+        "favorite": "Définir comme contexte favori",
+        "form": {
+          "copy": "Copier l'identifiant du contexte",
+          "edit": "Enregistrer",
+          "title": "Titre",
+          "titleRequired": "Le titre est obligatoire",
+          "uri": "Identifiant",
+          "uriRequired": "L'identifiant est obligatoire"
+        },
+        "invalid": {
+          "text": "Le contexte \"{{value}}\" est invalide. Le contexte par défaut a été chargé.",
+          "title": "Contexte invalide"
+        },
+        "managePermissions": "Gérer les permissions du contexte",
+        "manageTools": "Gérer les outils du contexte",
+        "ourContexts": "Mes contextes",
+        "publicContexts": "Contextes publics",
+        "save": "Sauvegarder ce contexte",
+        "sharedContexts": "Contextes partagés",
+        "filterPlaceHolder": "Filtrer par nom",
+        "sortAlphabetically": "Trier en ordre alphabétique",
+        "sortContextOrder": "Replacer selon la date de création",
+        "userAccount": "Profils utilisateurs",
+        "filterUser": "Filtrer par groupe d'utilisateur",
+        "emptyContext": "Contexte vide",
+        "emptyContextTooltip": "Créer un nouveau contexte vide",
+        "contextMap": "Contexte à partir de la carte",
+        "contextMapTooltip": "Créer un nouveau contexte à partir des couches la carte",
+        "hide": "Masquer ce contexte",
+        "show": "Montrer ce contexte",
+        "showHidden": "Montrer les contextes masqués"
+      },
+      "contextImportExport": {
+        "export": {
+          "exportPlaceHolder": "Couches",
+          "exportContextName": "Nom du contexte",
+          "exportSelectAll": "Tout sélectionner",
+          "success": {
+            "text": "Contexte exporté avec succès.",
+            "title":"Exportation réussie"
+          },
+          "nothing": {
+            "text": "Impossible d’exporter, contexte non valide ou aucun contexte sélectionné.",
+            "title": "Donnée non valide ou non présente"
+          },
+          "failed": {
+            "text": "Impossible d’exporter, problème de contexte rencontré.",
+            "title": "Problème d’exportation"
+          }
+        },
+        "import": {
+          "success": {
+            "title": "Contexte importé",
+            "text": "Le contexte '{{value}}' a été ajouté à la carte"
+          },
+          "empty": {
+            "text": "Le contexte '{{value}}' est vide, impossible d'importer",
+            "title": "Contexte vide"
+          },
+          "invalid": {
+            "text": "Le contexte '{{value}}' est invalide.",
+            "title": "Context invalide"
+          },
+          "unreadable": {
+            "text": "Le contexte '{{value}}' est impossible à lire",
+            "title": "Context illisible"
+          },
+          "tooLarge": {
+            "text": "Le contexte '{{value}}' est trop volumineux (Maximum: {{size}} Mo)",
+            "title": "Context trop volumineux"
+          }
+        }
+      },
+      "permission": {
+        "addBtn": "Ajouter",
+        "delete": "Retirer la permission",
+        "dialog": {
+          "addMsg": "La permission '{{value}}' a été ajoutée",
+          "addTitle": "Permission ajoutée",
+          "deleteMsg": "La permission '{{value}}' a été supprimée",
+          "deleteTitle": "Permission retirée",
+          "scopeChangedMsg": "La portée du contexte a été changée pour {{value}}",
+          "scopeChangedTitle": "Changement de la portée"
+        },
+        "profil": "Profil",
+        "user": "Utilisateur ou groupe",
+        "profilRequired": "Le profil est obligatoire",
+        "read": "Lecture seule",
+        "readOnlyTitle": "Contexte en lecture seule",
+        "readOnlyMsg": "Vous pouvez seulement retirer la permission si le contexte est directement partagé à votre nom d'utilisateur.",
+        "scope": {
+          "private": "Privé",
+          "protected": "Protégé",
+          "shared": "Partagé",
+          "public": "Public"
+        },
+        "write": "Lecture et écriture"
+      },
+      "poiButton": {
+        "create": "Créer une zone d'intérêt",
+        "dialog": {
+          "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette zone d'intérêt ?",
+          "createMsg": "La zone d'intérêt '{{value}}' a été créée",
+          "createTitle": "Zone d'intérêt créée",
+          "deleteMsg": "La zone d'intérêt '{{value}}' a été supprimée",
+          "deleteTitle": "Zone d'intérêt supprimée",
+          "placeholder": "Titre",
+          "title": "Nouvelle zone d'intérêt"
+        },
+        "placeholder": "Zones d'intérêt"
+      },
+      "sidenav": {
+        "goBack": "Revenir",
+        "mainMenu": "Revenir au menu principal"
+      },
+      "shareMap": {
+        "button": "Partager la carte",
+        "refreshBtn": "Actualiser le partage",
+        "copy": "Copier le lien",
+        "shareWithApi": "Partage par contexte",
+        "shareWithUrl": "Partage par URL",
+        "dialog": {
+          "copyMsg": "Lien copié",
+          "copyTitle": "Lien"
+        },
+        "htmlClarifications": "",
+        "errorTitle": "Erreur lors du partage",
+        "placeholderLink": "Lien",
+        "included": "Inclus dans le lien de partage :",
+        "context": "Le contexte ouvert lors de la création du lien de partage.",
+        "center": "Les coordonnées du centre de la carte (longitude, latitude).",
+        "zoom": "Le niveau de zoom de la carte.",
+        "addedLayers": "Les couches ajoutées via le catalogue ou via la barre de recherche.",
+        "visibleInvisible": "Le statut de visibilité des couches.",
+        "excluded": "Exclus dans le lien de partage :",
+        "order": "L'ordre des couches.",
+        "opacity": "Les modifications effectuées à l'opacité des couches.",
+        "filterOgc": "Les ajouts/modifications faits aux filtres par attribut.",
+        "filterTime": "La valeur en cours pour les filtres temporels."
+      },
+      "tool": {
+        "dialog": {
+          "addMsg": "L'outil a été ajouté",
+          "addTitle": "Outil ajouté",
+          "deleteMsg": "L'outil a été supprimé",
+          "deleteTitle": "Outil retiré"
+        }
+      },
+      "userButton": {
+        "dialog": {
+          "email": "Courriel",
+          "expiration": "Expiration",
+          "user": "Utilisateur",
+          "clearPreferences": "Supprimer mes préférences"
+        },
+        "infoTitle": "Info sur l'utilisateur",
+        "logout": "Se déconnecter"
+      }
+    }
+  }
+}
