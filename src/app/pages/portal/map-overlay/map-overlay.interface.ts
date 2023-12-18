@@ -1,20 +1,17 @@
+import { Media } from '@igo2/core';
+
+import { MapOverlayCssClass } from './map-overlay.enum';
+
 export interface MapOverlay {
-  media: Array<string> /* Media device to display the mapOverlay
-                            - options: mobile
-                                       tablet
-                                       desktop
-                            - default: desktop*/;
-  cssClass: string /* Css class to define position of the element
-                            - options:  top-left
-                                        center-left
-                                        bottom-left
-                                        top-center
-                                        center-center
-                                        bottom-center
-                                        top-right
-                                        center-right
-                                        bottom-right
-  */;
+  /**
+   * Media device to display the mapOverlay
+   * Desktop is the default value.
+   */
+  media: Array<Media>;
+  /**
+   * Css class to define position of the element
+   */
+  cssClass: MapOverlayCssClass;
   fixed?: boolean; // Is element is fixed, won't be affect by animation, default to false
   link?: string; // Link to open when element is clicked
   imgSrc?: string; // source of the image to show
