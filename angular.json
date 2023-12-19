@@ -278,31 +278,31 @@
           "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "igo2:build",
             "host": "0.0.0.0",
             "port": 4201,
             "hmr": true,
-            "proxyConfig": "proxy.conf.json"
+            "proxyConfig": "proxy.conf.json",
+            "buildTarget": "igo2:build"
           },
           "configurations": {
             "developpement": {
-              "browserTarget": "igo2:build:developpement"
+              "buildTarget": "igo2:build:developpement"
             },
             "developpement-link": {
-              "browserTarget": "igo2:build:developpement-link"
+              "buildTarget": "igo2:build:developpement-link"
             },
             "production": {
-              "browserTarget": "igo2:build:production"
+              "buildTarget": "igo2:build:production"
             },
             "github": {
-              "browserTarget": "igo2:build:github"
+              "buildTarget": "igo2:build:github"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "igo2:build"
+            "buildTarget": "igo2:build"
           }
         },
         "test": {
