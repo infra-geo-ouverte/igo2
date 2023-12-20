@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { IgoAuthModule } from '@igo2/auth';
-import { IgoSpinnerModule, IgoStopPropagationModule } from '@igo2/common';
+import { SpinnerComponent, StopPropagationDirective } from '@igo2/common';
 import {
   ConfigService,
   IgoGestureModule,
@@ -45,8 +45,6 @@ import { concatMap, first } from 'rxjs';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { PortalModule } from './pages';
-import { FooterModule } from './pages/footer/footer.module';
-import { HeaderModule } from './pages/header/header.module';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -66,11 +64,9 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     IgoAuthModule.forRoot(),
     IgoGestureModule.forRoot(),
     IgoMessageModule,
-    IgoSpinnerModule,
-    IgoStopPropagationModule,
+    SpinnerComponent,
+    StopPropagationDirective,
     PortalModule,
-    HeaderModule,
-    FooterModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.igo.app.pwa.enabled,
       registrationStrategy: 'registerWithDelay:5000'

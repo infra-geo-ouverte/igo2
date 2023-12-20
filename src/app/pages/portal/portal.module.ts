@@ -35,7 +35,7 @@ import {
 import { IgoIntegrationModule } from '@igo2/integration';
 
 import { AppExpansionPanelModule } from './expansion-panel/expansion-panel.module';
-import { MapOverlayModule } from './map-overlay/map-overlay.module';
+
 import { PortalComponent } from './portal.component';
 import { AppSidenavModule } from './sidenav/sidenav.module';
 import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toast-panel-for-expansion.module';
@@ -44,41 +44,40 @@ import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
 
 @NgModule({
     imports: [
-        CommonModule,
-        MatTooltipModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatDialogModule,
-        IgoCoreModule,
-        IgoFeatureModule,
-        IgoImportExportModule,
-        IgoMapModule,
-        IgoQueryModule.forRoot(),
-        IgoSearchModule.forRoot(),
-        IgoActionModule,
-        IgoWorkspaceModule,
-        IgoEntityModule,
-        IgoGeoWorkspaceModule,
-        IgoPanelModule,
-        IgoToolModule,
-        IgoContextMenuModule,
-        IgoBackdropModule,
-        IgoFlexibleModule,
-        IgoIntegrationModule,
-        AppExpansionPanelModule,
-        AppToastPanelModule,
-        AppToastPanelForExpansionModule,
-        AppSidenavModule,
-        MapOverlayModule,
-        IgoContextManagerModule,
-        IgoContextMapButtonModule,
-        IgoEntityTableModule,
-        IgoEntityTablePaginatorModule,
-        IgoInteractiveTourModule,
-        IgoWelcomeWindowModule,
-        PortalComponent
-    ],
+    CommonModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatDialogModule,
+    IgoCoreModule,
+    IgoFeatureModule,
+    IgoImportExportModule,
+    IgoMapModule,
+    IgoQueryModule.forRoot(),
+    IgoSearchModule.forRoot(),
+    IgoActionModule,
+    IgoWorkspaceModule,
+    IgoEntityModule,
+    IgoGeoWorkspaceModule,
+    IgoPanelModule,
+    IgoToolModule,
+    IgoContextMenuModule,
+    IgoBackdropModule,
+    IgoFlexibleModule,
+    IgoIntegrationModule,
+    AppExpansionPanelModule,
+    AppToastPanelModule,
+    AppToastPanelForExpansionModule,
+    AppSidenavModule,
+    IgoContextManagerModule,
+    IgoContextMapButtonModule,
+    IgoEntityTableModule,
+    IgoEntityTablePaginatorModule,
+    IgoInteractiveTourModule,
+    IgoWelcomeWindowModule,
+    PortalComponent
+],
     exports: [PortalComponent]
 })
 export class PortalModule {}
