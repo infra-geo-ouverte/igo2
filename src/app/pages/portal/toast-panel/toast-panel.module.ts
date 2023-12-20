@@ -17,21 +17,21 @@ import { IgoFeatureModule, IgoSearchResultsModule } from '@igo2/geo';
 import { ToastPanelComponent } from './toast-panel.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatBadgeModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatMenuModule,
-    IgoLanguageModule,
-    IgoPanelModule,
-    IgoStopPropagationModule,
-    IgoActionModule,
-    IgoFeatureModule,
-    IgoSearchResultsModule
-  ],
-  exports: [ToastPanelComponent],
-  declarations: [ToastPanelComponent]
+    imports: [
+        CommonModule,
+        MatBadgeModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatMenuModule,
+        IgoLanguageModule,
+        IgoPanelModule,
+        IgoStopPropagationModule,
+        IgoActionModule,
+        IgoFeatureModule,
+        IgoSearchResultsModule,
+        ToastPanelComponent
+    ],
+    exports: [ToastPanelComponent]
 })
 export class AppToastPanelModule {}

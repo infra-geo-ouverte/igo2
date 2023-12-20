@@ -6,8 +6,7 @@ import { IgoLanguageModule } from '@igo2/core';
 import { FooterComponent } from './footer.component';
 
 @NgModule({
-  declarations: [FooterComponent],
-  imports: [CommonModule, IgoLanguageModule],
-  exports: [FooterComponent]
+    imports: [CommonModule, IgoLanguageModule, FooterComponent],
+    exports: [FooterComponent]
 })
 export class FooterModule {}

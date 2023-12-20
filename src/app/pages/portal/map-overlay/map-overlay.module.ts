@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 import { MapOverlayComponent } from './map-overlay.component';
 
 @NgModule({
-  imports: [CommonModule],
-  exports: [MapOverlayComponent],
-  declarations: [MapOverlayComponent]
+    imports: [CommonModule, MapOverlayComponent],
+    exports: [MapOverlayComponent]
 })
 export class MapOverlayModule {}

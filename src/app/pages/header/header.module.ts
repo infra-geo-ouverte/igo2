@@ -7,8 +7,7 @@ import { IgoLanguageModule } from '@igo2/core';
 import { HeaderComponent } from './header.component';
 
 @NgModule({
-  declarations: [HeaderComponent],
-  imports: [CommonModule, IgoLanguageModule, MatToolbarModule],
-  exports: [HeaderComponent]
+    imports: [CommonModule, IgoLanguageModule, MatToolbarModule, HeaderComponent],
+    exports: [HeaderComponent]
 })
 export class HeaderModule {}

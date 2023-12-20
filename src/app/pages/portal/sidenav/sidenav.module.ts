@@ -19,22 +19,22 @@ import { IgoFeatureModule } from '@igo2/geo';
 import { SidenavComponent } from './sidenav.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatTooltipModule,
-    IgoLanguageModule,
-    IgoPanelModule,
-    IgoFlexibleModule,
-    IgoContextManagerModule,
-    IgoToolModule,
-    IgoFeatureModule,
-    IgoInteractiveTourModule,
-    IgoHomeButtonModule
-  ],
-  exports: [SidenavComponent],
-  declarations: [SidenavComponent]
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatTooltipModule,
+        IgoLanguageModule,
+        IgoPanelModule,
+        IgoFlexibleModule,
+        IgoContextManagerModule,
+        IgoToolModule,
+        IgoFeatureModule,
+        IgoInteractiveTourModule,
+        IgoHomeButtonModule,
+        SidenavComponent
+    ],
+    exports: [SidenavComponent]
 })
 export class AppSidenavModule {}

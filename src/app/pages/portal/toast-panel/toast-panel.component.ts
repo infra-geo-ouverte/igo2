@@ -1,3 +1,4 @@
+import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,12 +10,19 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import {
   Action,
   ActionStore,
+  ActionbarComponent,
   ActionbarMode,
   EntityStore,
+  PanelComponent,
+  StopPropagationDirective,
   getEntityTitle
 } from '@igo2/common';
 import {
@@ -28,6 +36,7 @@ import {
 } from '@igo2/core';
 import {
   Feature,
+  FeatureDetailsComponent,
   FeatureMotion,
   GeoServiceDefinition,
   IgoMap,
@@ -35,6 +44,7 @@ import {
   LayerService,
   PropertyTypeDetectorService,
   SearchResult,
+  SearchResultsComponent,
   computeOlFeaturesExtent,
   featureFromOl,
   featureToOl,
@@ -52,6 +62,7 @@ import olFeature from 'ol/Feature';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 import olPoint from 'ol/geom/Point';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
 import { debounceTime, map, skipWhile, tap } from 'rxjs/operators';
 
@@ -63,7 +74,24 @@ interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
   selector: 'app-toast-panel',
   templateUrl: './toast-panel.component.html',
   styleUrls: ['./toast-panel.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    PanelComponent,
+    NgClass,
+    ActionbarComponent,
+    MatButtonModule,
+    StopPropagationDirective,
+    MatTooltipModule,
+    MatIconModule,
+    MatBadgeModule,
+    FeatureDetailsComponent,
+    SearchResultsComponent,
+    NgTemplateOutlet,
+    AsyncPipe,
+    TranslateModule
+  ]
 })
 export class ToastPanelComponent implements OnInit, OnDestroy {
   static SWIPE_ACTION = {

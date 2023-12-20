@@ -6,11 +6,14 @@ import { ConfigService, MediaService } from '@igo2/core';
 import { Subscription } from 'rxjs';
 
 import { MapOverlay } from './map-overlay.interface';
+import { NgFor, NgClass, NgIf, NgStyle } from '@angular/common';
 
 @Component({
-  selector: 'app-map-overlay',
-  templateUrl: './map-overlay.component.html',
-  styleUrls: ['./map-overlay.component.scss']
+    selector: 'app-map-overlay',
+    templateUrl: './map-overlay.component.html',
+    styleUrls: ['./map-overlay.component.scss'],
+    standalone: true,
+    imports: [NgFor, NgClass, NgIf, NgStyle]
 })
 export class MapOverlayComponent implements AfterViewInit, OnDestroy {
   public mapOverlay: MapOverlay[] = [];

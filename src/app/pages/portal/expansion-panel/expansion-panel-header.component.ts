@@ -6,12 +6,15 @@ import {
   Input,
   Output
 } from '@angular/core';
+import { ExpansionPanelButtonComponent } from './expansion-panel-button/expansion-panel-button.component';
 
 @Component({
-  selector: 'app-expansion-panel-header',
-  templateUrl: './expansion-panel-header.component.html',
-  styleUrls: ['./expansion-panel-header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-expansion-panel-header',
+    templateUrl: './expansion-panel-header.component.html',
+    styleUrls: ['./expansion-panel-header.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ExpansionPanelButtonComponent]
 })
 export class ExpansionPanelHeaderComponent {
   @Input() expanded: boolean;

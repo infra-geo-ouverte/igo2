@@ -13,19 +13,19 @@ import { IgoLanguageModule } from '@igo2/core';
 import { WelcomeWindowComponent } from './welcome-window.component';
 
 @NgModule({
-  imports: [
-    IgoLanguageModule,
-    CommonModule,
-    FormsModule,
-    MatDialogModule,
-    IgoInteractiveTourModule,
-    IgoCustomHtmlModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatToolbarModule
-  ],
-  declarations: [WelcomeWindowComponent],
-  exports: [WelcomeWindowComponent]
+    imports: [
+        IgoLanguageModule,
+        CommonModule,
+        FormsModule,
+        MatDialogModule,
+        IgoInteractiveTourModule,
+        IgoCustomHtmlModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatToolbarModule,
+        WelcomeWindowComponent
+    ],
+    exports: [WelcomeWindowComponent]
 })
 export class IgoWelcomeWindowModule {}

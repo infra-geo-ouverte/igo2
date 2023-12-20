@@ -9,15 +9,15 @@ import { IgoLanguageModule } from '@igo2/core';
 import { ToastPanelForExpansionComponent } from './toast-panel-for-expansion.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatButtonModule,
-    IgoLanguageModule,
-    IgoPanelModule,
-    IgoStopPropagationModule
-  ],
-  exports: [ToastPanelForExpansionComponent],
-  declarations: [ToastPanelForExpansionComponent]
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatButtonModule,
+        IgoLanguageModule,
+        IgoPanelModule,
+        IgoStopPropagationModule,
+        ToastPanelForExpansionComponent
+    ],
+    exports: [ToastPanelForExpansionComponent]
 })
 export class AppToastPanelForExpansionModule {}

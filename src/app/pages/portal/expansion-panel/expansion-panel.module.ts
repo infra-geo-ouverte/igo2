@@ -15,19 +15,19 @@ import { ExpansionPanelHeaderComponent } from './expansion-panel-header.componen
 import { ExpansionPanelComponent } from './expansion-panel.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatListModule,
-    MatSelectModule,
-    MatTooltipModule,
-    IgoLanguageModule,
-    IgoBackdropModule,
-    ExpansionPanelButtonComponent
-  ],
-  exports: [ExpansionPanelComponent, ExpansionPanelButtonComponent],
-  declarations: [ExpansionPanelComponent, ExpansionPanelHeaderComponent]
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatListModule,
+        MatSelectModule,
+        MatTooltipModule,
+        IgoLanguageModule,
+        IgoBackdropModule,
+        ExpansionPanelButtonComponent,
+        ExpansionPanelComponent, ExpansionPanelHeaderComponent
+    ],
+    exports: [ExpansionPanelComponent, ExpansionPanelButtonComponent]
 })
 export class AppExpansionPanelModule {}
