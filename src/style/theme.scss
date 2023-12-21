@@ -1,7 +1,23 @@
+@use '@angular/material' as mat;
 @use '../app/app.theme' as app;
 
-$config: (
-  density: 0
+/*
+* Define a default theme for styling some part of the app
+* Don't forget that we also have static theme apply
+*/
+$primary: mat.define-palette(mat.$blue-palette, 700, 400, 900);
+$accent: mat.define-palette(mat.$blue-palette, 200);
+$warn: mat.define-palette(mat.$red-palette);
+
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn
+    ),
+    density: 0
+  )
 );
 
-@include app.themes($config);
+@include app.themes($theme);

@@ -166,9 +166,7 @@ igo-map-browser {
     transition:
       bottom 250ms,
       left 250ms;
-    app-expansion-panel-button {
-      width: 40px;
-    }
+
     .spinner-spacer {
       height: 40px;
     }
@@ -216,6 +214,12 @@ igo-map-browser {
     @include breakpoints.media-breakpoint-down('mobile') {
       display: none;
     }
+  }
+}
+
+app-expansion-panel-button {
+  ::ng-deep button[mat-icon-button] {
+    @include mat.elevation(2);
   }
 }
 
