@@ -15,7 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import {
   HomeButtonComponent,
-  InteractiveTourComponent,
+  IgoInteractiveTourModule,
   PanelComponent,
   Tool,
   Toolbox,
@@ -35,17 +35,17 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    AsyncPipe,
+    HomeButtonComponent,
+    IgoInteractiveTourModule,
+    MatButtonModule,
+    MatIconModule,
     MatSidenavModule,
+    MatTooltipModule,
     NgClass,
     NgIf,
-    HomeButtonComponent,
     PanelComponent,
-    MatButtonModule,
-    MatTooltipModule,
-    MatIconModule,
-    InteractiveTourComponent,
     ToolboxComponent,
-    AsyncPipe,
     TranslateModule
   ]
 })

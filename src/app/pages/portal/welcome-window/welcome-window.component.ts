@@ -9,7 +9,7 @@ import {
 } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { CustomHtmlComponent, InteractiveTourComponent } from '@igo2/common';
+import { CustomHtmlComponent, IgoInteractiveTourModule } from '@igo2/common';
 import { ConfigService, LanguageService } from '@igo2/core';
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -31,7 +31,7 @@ import { WelcomeWindowService } from './welcome-window.service';
     FormsModule,
     MatDialogContent,
     CustomHtmlComponent,
-    InteractiveTourComponent,
+    IgoInteractiveTourModule,
     MatButtonModule,
     MatDialogClose,
     TranslateModule,

@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialog,
   MatDialogConfig,
+  MatDialogModule,
   MatDialogRef
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,10 +35,10 @@ import {
   LongPressDirective,
   Tool,
   Toolbox,
+  WORKSPACE_DIRECTIVES,
   Widget,
   Workspace,
-  WorkspaceStore,
-  WorkspaceWidgetOutletComponent
+  WorkspaceStore
 } from '@igo2/common';
 import {
   DetailedContext,
@@ -66,6 +67,7 @@ import {
   FeatureMotion,
   FeatureWorkspace,
   GoogleLinks,
+  IgoGeoWorkspaceModule,
   IgoMap,
   ImageLayer,
   ImportService,
@@ -83,6 +85,7 @@ import {
   SearchSourceService,
   VectorLayer,
   WfsWorkspace,
+  WorkspaceUpdatorDirective,
   addStopToStore,
   computeOlFeaturesExtent,
   featureFromOl,
@@ -95,6 +98,7 @@ import {
   sourceCanSearch
 } from '@igo2/geo';
 import {
+  AnalyticsListenerService,
   ContextState,
   DirectionState,
   MapState,
@@ -151,6 +155,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
   standalone: true,
   imports: [
     ActionbarComponent,
+    SidenavComponent,
     AsyncPipe,
     BackdropComponent,
     ContextMenuDirective,
@@ -160,6 +165,8 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     ExpansionPanelComponent,
     LayerContextDirective,
     LongPressDirective,
+    MatDialogModule,
+    IgoGeoWorkspaceModule,
     MAP_DIRECTIVES,
     MapContextDirective,
     MapOverlayComponent,
@@ -172,12 +179,12 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     QueryDirective,
     SearchBarComponent,
     SearchPointerSummaryDirective,
-    SidenavComponent,
     ToastPanelComponent,
     ToastPanelForExpansionComponent,
     TranslateModule,
     UserButtonComponent,
-    WorkspaceWidgetOutletComponent
+    WORKSPACE_DIRECTIVES,
+    WorkspaceUpdatorDirective
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
@@ -366,6 +373,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    private analyticsListenerService: AnalyticsListenerService,
     private route: ActivatedRoute,
     public workspaceState: WorkspaceState,
     public authService: AuthService,
@@ -393,6 +401,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState,
     private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
+    this.analyticsListenerService.listen();
     this.handleAppConfigs();
     this.storageService.set('version', getAppVersion(this.configService));
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
