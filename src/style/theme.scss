@@ -1,7 +1,15 @@
 @use '../app/app.theme' as app;
+@use '@angular/material' as mat;
 
 $config: (
   density: 0
 );
 
 @include app.themes($config);
+
+form igo-search-bar {
+  $config: (
+    density: 0
+  );
+  @include mat.form-field-density($config);
+}
