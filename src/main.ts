@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import {
   APP_INITIALIZER,
+  ApplicationRef,
   Injector,
   enableProdMode,
   importProvidersFrom
@@ -21,6 +22,7 @@ import {
   ConfigService,
   IgoCoreModule,
   IgoMessageModule,
+  LanguageService,
   RouteService,
   provideConfigOptions,
   provideRootTranslation
@@ -28,6 +30,7 @@ import {
 import { loadTheme } from '@igo2/utils';
 
 import 'hammerjs';
+import { concatMap, first } from 'rxjs';
 
 import { AppComponent } from './app/app.component';
 import { PortalModule } from './app/pages';
@@ -52,6 +55,7 @@ bootstrapApplication(AppComponent, {
       BrowserModule,
       IgoCoreModule.forRoot(),
       IgoAuthModule.forRoot(),
+      provideRootTranslation(),
       IgoMessageModule,
       PortalModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
@@ -59,7 +63,6 @@ bootstrapApplication(AppComponent, {
         registrationStrategy: 'registerWithDelay:5000'
       })
     ),
-    provideRootTranslation(),
     provideHttpClient(),
     provideAnimations(),
     provideRouter([]),
@@ -70,8 +73,8 @@ bootstrapApplication(AppComponent, {
     RouteService,
     {
       provide: APP_INITIALIZER,
-      useFactory: provideTheme,
-      deps: [Injector, DOCUMENT],
+      useFactory: appInitializerFactory,
+      deps: [Injector, ApplicationRef, DOCUMENT],
       multi: true
     },
     { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: TOOLTIP_OPTIONS },
@@ -82,10 +85,32 @@ bootstrapApplication(AppComponent, {
   ]
 }).catch((err) => console.log(err));
 
-function provideTheme(injector: Injector, document: Document) {
-  return () => {
-    const configService = injector.get(ConfigService);
-    const theme = configService.getConfig('theme', DEFAULT_THEME);
-    loadTheme(document, theme);
-  };
+function appInitializerFactory(
+  injector: Injector,
+  applicationRef: ApplicationRef,
+  document: Document
+) {
+  // ensure to have the proper translations loaded once, when the app is stable.
+  return () =>
+    new Promise<any>((resolve: any) => {
+      applicationRef.isStable
+        .pipe(
+          first((isStable) => isStable === true),
+          concatMap(() => {
+            const languageService = injector.get(LanguageService);
+            const lang = languageService.getLanguage();
+            return languageService.translate.getTranslation(lang);
+          })
+        )
+        .subscribe((translations) => {
+          const languageService = injector.get(LanguageService);
+          const lang = languageService.getLanguage();
+          languageService.translate.setTranslation(lang, translations);
+
+          const configService = injector.get(ConfigService);
+          const theme = configService.getConfig('theme', DEFAULT_THEME);
+          loadTheme(document, theme);
+          resolve();
+        });
+    });
 }
