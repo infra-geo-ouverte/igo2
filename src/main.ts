@@ -55,7 +55,6 @@ bootstrapApplication(AppComponent, {
       BrowserModule,
       IgoCoreModule.forRoot(),
       IgoAuthModule.forRoot(),
-      provideRootTranslation(),
       IgoMessageModule,
       PortalModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
@@ -63,6 +62,7 @@ bootstrapApplication(AppComponent, {
         registrationStrategy: 'registerWithDelay:5000'
       })
     ),
+    provideRootTranslation(),
     provideHttpClient(),
     provideAnimations(),
     provideRouter([]),
