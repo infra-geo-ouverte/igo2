@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin theme($theme) {
+  @include color($theme);
+  @include density($theme);
+}
+
+@mixin color($theme) {
+}
+
+@mixin density($theme) {
+  $density: mat.get-density-config($theme);
+
+  $theme: map.merge(
+    $theme,
+    (
+      density: $density - 2
+    )
+  );
+
+  igo-search-bar {
+    @include mat.form-field-density($theme);
+    @include mat.icon-button-density($theme);
+  }
+}
