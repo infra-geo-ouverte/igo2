@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
+@use '@igo2/geo' as igo2-geo;
 
 @mixin theme($theme) {
   @include color($theme);
@@ -19,8 +20,5 @@
     )
   );
 
-  igo-search-bar {
-    @include mat.form-field-density($theme);
-    @include mat.icon-button-density($theme);
-  }
+  @include igo2-geo.search-bar-density($theme);
 }
