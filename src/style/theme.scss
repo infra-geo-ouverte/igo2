@@ -1,5 +1,6 @@
-@use '../app/app.theme' as app;
 @use '@angular/material' as mat;
+@use '../app/app.theme' as app;
+@use './igo2-lib.override' as igo2-lib;
 
 /*
 * Define a default theme for styling some part of the app
@@ -21,10 +22,4 @@ $theme: mat.define-light-theme(
 );
 
 @include app.themes($theme);
-
-form igo-search-bar {
-  $config: (
-    density: 0
-  );
-  @include mat.form-field-density($config);
-}
+@include igo2-lib.theme($theme);
