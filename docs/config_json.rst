@@ -966,7 +966,8 @@ Exemples
                 "order": 2,
                 "params": {
                   "limit": "5"
-                  }
+                  },
+                "showAdvancedSettings": true
                 },
 
               "icherchereverse": {

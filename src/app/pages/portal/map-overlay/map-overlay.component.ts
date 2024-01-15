@@ -1,7 +1,10 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+
 import { Context, ContextService } from '@igo2/context';
-import { MediaService, ConfigService } from '@igo2/core';
+import { ConfigService, MediaService } from '@igo2/core';
+
+import { Subscription } from 'rxjs';
+
 import { MapOverlay } from './map-overlay.interface';
 
 @Component({
@@ -37,14 +40,14 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
   }
 
   private handleContextChange(context: Context) {
-    let mapOverlay = [];
+    let mapOverlay: MapOverlay[] = [];
     if (context !== undefined) {
       this.mapOverlay = [];
 
       if (context['mapOverlay']) {
         mapOverlay = context['mapOverlay'];
-      } else if (this.configService.getConfig('mapOverlay')) {
-        mapOverlay = this.configService.getConfig('mapOverlay');
+      } else {
+        mapOverlay = this.configService.getConfig('mapOverlay', []);
       }
       for (const overlay of mapOverlay) {
         // If no media define use default to desktop, display only if current media is on context definition

@@ -44,6 +44,12 @@
               },
               {
                 "glob": "**/*",
+                "input": "./node_modules/@igo2/core/locale/",
+                "output": "./locale/libs_locale",
+                "ignore": ["**/*.core.json"]
+              },
+              {
+                "glob": "**/*",
                 "input": "./node_modules/@igo2/core/theming/prebuilt-themes",
                 "output": "./assets/igo2/core/theming/prebuilt-themes"
               },
@@ -110,6 +116,64 @@
               "buildOptimizer": false,
               "serviceWorker": false
             },
+            "production-link": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "12kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "serviceWorker": false,
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                "src/config",
+                "src/contexts",
+                "src/data",
+                "src/locale",
+                "src/manifest.webmanifest",
+                {
+                  "glob": "**/*",
+                  "input": "../../dist/common/assets/",
+                  "output": "./assets/igo2/common/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../../dist/core/assets/",
+                  "output": "./assets/igo2/core/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../../dist/core/locale/",
+                  "output": "./locale/libs_locale",
+                  "ignore": ["**/*.core.json"]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../../dist/core/theming/prebuilt-themes",
+                  "output": "./assets/igo2/core/theming/prebuilt-themes"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../../dist/geo/assets/",
+                  "output": "./assets/igo2/geo/"
+                }
+              ]
+            },
             "developpement": {
               "buildOptimizer": false,
               "optimization": false,
@@ -117,6 +181,49 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "developpement-link": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                "src/config",
+                "src/contexts",
+                "src/data",
+                "src/locale",
+                "src/manifest.webmanifest",
+                {
+                  "glob": "**/*",
+                  "input": "../../packages/common/src/assets/",
+                  "output": "./assets/igo2/common/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../../dist/core/assets/",
+                  "output": "./assets/igo2/core/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../../dist/core/locale/",
+                  "output": "./locale/libs_locale",
+                  "ignore": ["**/*.core.json"]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../../dist/core/theming/prebuilt-themes",
+                  "output": "./assets/igo2/core/theming/prebuilt-themes"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../../packages/geo/src/assets/",
+                  "output": "./assets/igo2/geo/"
+                }
+              ]
             },
             "github": {
               "budgets": [
@@ -172,11 +279,17 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "igo2:build",
-            "port": 4201
+            "host": "0.0.0.0",
+            "port": 4201,
+            "hmr": true,
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "developpement": {
               "browserTarget": "igo2:build:developpement"
+            },
+            "developpement-link": {
+              "browserTarget": "igo2:build:developpement-link"
             },
             "production": {
               "browserTarget": "igo2:build:production"
@@ -218,10 +331,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {
@@ -263,9 +373,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "e2e/**/*.ts"
-            ]
+            "lintFilePatterns": ["e2e/**/*.ts"]
           }
         }
       }

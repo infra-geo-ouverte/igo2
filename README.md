@@ -52,6 +52,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ---
 
 ## Téléchargement
+- [Version v16.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.1.0/igo2.zip)
 - [Version 1.15.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.4/igo2.zip)
 - [Version 1.15.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.3/igo2.zip)
 - [Version 1.15.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.2/igo2.zip)
@@ -85,7 +86,8 @@ Requis:
 
 | IGO2 version | Node version |
 | ------------ | ------------ |
-| > 1.15.x      | >= 16.19.0  |
+| >= 16.x      | >= 18.10.0   |
+| > 1.15.x     | >= 16.19.0   |
 | > 1.5.x      | >= 12, <= 16 |
 | < 1.5.x      | >= 8, <= 11  |
 | 0.x.x        | >= 6, <= 10  |
@@ -115,6 +117,9 @@ $ npm run doc
 # Ouvrir un navigateur http://localhost:4220/
 ```
 
+Si vous voulez développer en même temps ce projet ainsi que la librairie associée, référez vous à la procédure suivante:  
+https://github.com/infra-geo-ouverte/igo2-lib#for-developers
+
 ## Tests
 
 ```bash
@@ -142,6 +147,7 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 ---
 
 ## Download
+- [Version v16.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.1.0/igo2.zip)
 - [Version 1.15.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.4/igo2.zip)
 - [Version 1.15.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.3/igo2.zip)
 - [Version 1.15.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.2/igo2.zip)
@@ -175,7 +181,9 @@ Require:
 
 | IGO2 version | Node version |
 | ------------ | ------------ |
-| > 1.5.x      | >= 12, <= 14 |
+| >= 16.x      | >= 18.10.0   |
+| > 1.15.x     | >= 16.19.0   |
+| > 1.5.x      | >= 12, <= 16 |
 | < 1.5.x      | >= 8, <= 11  |
 | 0.x.x        | >= 6, <= 10  |
 
@@ -202,6 +210,9 @@ $ npm run serve.prod
 # Doc API generation
 $ npm run doc
 # Open your browser at http://localhost:4220/
+
+If you want to develop this project and the associated library at the same time, refer to the following procedure:
+https://github.com/infra-geo-ouverte/igo2-lib#for-developers
 
 ```
 

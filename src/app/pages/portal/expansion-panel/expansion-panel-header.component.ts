@@ -1,10 +1,10 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  Output,
   EventEmitter,
   HostBinding,
-  ChangeDetectionStrategy
+  Input,
+  Output
 } from '@angular/core';
 
 @Component({
@@ -14,19 +14,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpansionPanelHeaderComponent {
-  @Input()
-  get expanded(): boolean {
-    return this._expanded;
-  }
-  set expanded(value: boolean) {
-    if (value === this._expanded) {
-      return;
-    }
-
-    this._expanded = value;
-    this.expandedChange.emit(this._expanded);
-  }
-  private _expanded: boolean;
+  @Input() expanded: boolean;
 
   @Output() expandedChange = new EventEmitter<boolean>();
 
@@ -37,7 +25,7 @@ export class ExpansionPanelHeaderComponent {
 
   constructor() {}
 
-  onToggleClick() {
-    this.expanded = !this.expanded;
+  handleClose(): void {
+    this.expandedChange.emit(false);
   }
 }

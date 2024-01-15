@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { LanguageService } from '@igo2/core';
 import { SwUpdate } from '@angular/service-worker';
-import { interval } from 'rxjs';
+
 import { ConfirmDialogService } from '@igo2/common';
+import { LanguageService } from '@igo2/core';
+
+import { interval } from 'rxjs';
 import { skip, tap } from 'rxjs/operators';
 
 @Injectable({

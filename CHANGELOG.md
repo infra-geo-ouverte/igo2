@@ -1,3 +1,123 @@
+# [16.1.0](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.2...v16.1.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* **app:** correction of the default value ([89ddfa3](https://github.com/infra-geo-ouverte/igo2/commit/89ddfa34858873c560454d343910d4a802c1da0f))
+* **app:** replace tablet view by medium and small screen + map actions  button placement ([e4537f2](https://github.com/infra-geo-ouverte/igo2/commit/e4537f29304249d8087103fc8051ecc74cfdaa4e))
+* **App:** revert change for resolve function in the app init ([885adf2](https://github.com/infra-geo-ouverte/igo2/commit/885adf2c5dbe9b91cf094ed55e9b194e27e36ec1))
+* **app:** this rule is not used anymore except in form-field-text.component, resulting in extra large icon ([#1106](https://github.com/infra-geo-ouverte/igo2/issues/1106)) ([1fcb9f9](https://github.com/infra-geo-ouverte/igo2/commit/1fcb9f91e8e91ce9cf390b6d004707fc72245d2a))
+* **environment:** set the config for the MSP team ([7c30018](https://github.com/infra-geo-ouverte/igo2/commit/7c30018049478ac28545433d5b31437b8b671d34))
+* **geo/search-bar:** adjust search bar overflow on mobile ([98024fc](https://github.com/infra-geo-ouverte/igo2/commit/98024fc195b69b71b6018234873113ed1851e997))
+* **portal:** revert search-bar spacer ([0bfd811](https://github.com/infra-geo-ouverte/igo2/commit/0bfd8119fd02bfaa5a1031c597735b35d8a9667a))
+
+
+### Features
+
+* **app:** upgrade igo2-lib to v16.1.0 ([f52a66e](https://github.com/infra-geo-ouverte/igo2/commit/f52a66e0d323b25c83459a3f12ea7f1d400c6b42))
+
+
+
+## [16.0.2](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.1...v16.0.2) (2023-11-07)
+
+
+### Features
+
+* **demo:** source change for fire hydrant from Donnees Quebec ([#1082](https://github.com/infra-geo-ouverte/igo2/issues/1082)) ([684d92c](https://github.com/infra-geo-ouverte/igo2/commit/684d92c55568ac22810a81841a68e849bd1af2e9))
+
+
+
+## [16.0.1](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0...v16.0.1) (2023-11-06)
+
+
+
+# [16.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.8...v16.0.0) (2023-11-03)
+
+
+### Bug Fixes
+
+* **app:** regression for app initializer ([efd42ea](https://github.com/infra-geo-ouverte/igo2/commit/efd42eac24f35dfe47fa00f54cb17aed42c590e2))
+* **SplashScreen:** remove title who cause layout shifting ([eeb8b75](https://github.com/infra-geo-ouverte/igo2/commit/eeb8b75e8772601f7f55dc22fe3c2e8afb0b7f77))
+* **urlControl:** zoomExtent was not working due to str extent ([ce25710](https://github.com/infra-geo-ouverte/igo2/commit/ce257103e73da8033b1d489ccac0d815dc2c106f))
+
+
+### Features
+
+* **app:** upgrade igo2-lib 16.0.0 ([acf6281](https://github.com/infra-geo-ouverte/igo2/commit/acf628170c12e2339603cac02805809edb0e76fe))
+
+
+
+# [16.0.0-rc.8](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.7...v16.0.0-rc.8) (2023-10-30)
+
+
+### Bug Fixes
+
+* **portal:** expansion-panel header height ([815e452](https://github.com/infra-geo-ouverte/igo2/commit/815e4528e6c536588edc62cf1bbac178e9c8bf55))
+
+
+
+# [16.0.0-rc.7](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.6...v16.0.0-rc.7) (2023-10-30)
+
+
+
+# [16.0.0-rc.6](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.5...v16.0.0-rc.6) (2023-10-30)
+
+
+### Bug Fixes
+
+* **InteractiveTour:** add the auto placement ([#1055](https://github.com/infra-geo-ouverte/igo2/issues/1055)) ([1c45c8b](https://github.com/infra-geo-ouverte/igo2/commit/1c45c8b7a0bdc174ee23294712aeda72d61bc8dc))
+* **portal:** remove spacer when sidebar is open ([#1064](https://github.com/infra-geo-ouverte/igo2/issues/1064)) ([26e5129](https://github.com/infra-geo-ouverte/igo2/commit/26e5129165d9884ae1055e98375cbecd2dc9c69f))
+
+
+### Features
+
+* **app:** upgrade igo2-lib v16.0.0-rc.5 ([9c78c56](https://github.com/infra-geo-ouverte/igo2/commit/9c78c565a98a204833a652c4343c7e9a0d9ba11a))
+
+
+
+# [16.0.0-rc.5](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.4...v16.0.0-rc.5) (2023-10-18)
+
+
+### Bug Fixes
+
+* **demo:** fix demo on github for dom service ([6377646](https://github.com/infra-geo-ouverte/igo2/commit/6377646d548920b6987355620255ef55f62f856f))
+
+
+### Features
+
+* **app:** upgrade igo2-lib to prerelease 16.0.0-rc.4 ([68b9da7](https://github.com/infra-geo-ouverte/igo2/commit/68b9da770c67f5749d654255e348a0a7d269d64b))
+
+
+
+# [16.0.0-rc.4](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.3...v16.0.0-rc.4) (2023-10-13)
+
+
+### Bug Fixes
+
+* **context:** relative path for a add layer from index example ([e4d8c67](https://github.com/infra-geo-ouverte/igo2/commit/e4d8c679d6685eab264c21dbb26e072b242ce3f5))
+
+
+### Features
+
+* **app:** upgrade igo2-lib to prerelease 16.0.0-rc.3 ([050325b](https://github.com/infra-geo-ouverte/igo2/commit/050325bbcad37587798c13b133b735f6b552effb))
+
+
+
+# [16.0.0-rc.3](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.2...v16.0.0-rc.3) (2023-10-11)
+
+
+### Bug Fixes
+
+* **Prettier:** ignore test file ([e6a4ff5](https://github.com/infra-geo-ouverte/igo2/commit/e6a4ff56fa577b23198adb9ddb70b4c5cb6f0dfe))
+
+
+### Features
+
+* add types for app environment and config ([cd33a3a](https://github.com/infra-geo-ouverte/igo2/commit/cd33a3a0b53ff726ab9c617c24e19f3aaef91a9f))
+* **app:** upgrade igo2-lib 16.0.0-rc.2 ([9108b45](https://github.com/infra-geo-ouverte/igo2/commit/9108b4504cd12c46e69c4704c7fe7744fd0387aa))
+
+
+
 # [16.0.0-rc.2](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.0-rc.0...v16.0.0-rc.2) (2023-09-22)
 
 

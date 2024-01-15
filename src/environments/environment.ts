@@ -2,52 +2,9 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
+import { AppEnvironmentOptions } from './environnement.interface';
 
-import { AuthOptions, AuthStorageOptions } from '@igo2/auth';
-import { DOMOptions } from '@igo2/common';
-import { ContextServiceOptions } from '@igo2/context';
-import { LanguageOptions } from '@igo2/core';
-import {
-  SearchSourceOptions,
-  CatalogServiceOptions,
-  Projection,
-  ImportExportServiceOptions,
-  CommonVectorStyleOptions
-} from '@igo2/geo';
-import {
-  AppOptions,
-  InteractiveTourConfigOptions
-} from './environnement.interface';
-
-interface Environment {
-  production: boolean;
-  igo: {
-    app: AppOptions;
-    auth?: AuthOptions;
-    storage: AuthStorageOptions;
-    catalog?: CatalogServiceOptions;
-    context?: ContextServiceOptions;
-    importExport?: ImportExportServiceOptions;
-    language?: LanguageOptions;
-    searchSources?: { [key: string]: SearchSourceOptions };
-    projections?: Projection[];
-    interactiveTour?: InteractiveTourConfigOptions;
-    depot?: { url: string; trainingGuides?: string[] };
-    dom?: DOMOptions[];
-    queryOverlayStyle?: {
-      base?: CommonVectorStyleOptions;
-      selection?: CommonVectorStyleOptions;
-      focus?: CommonVectorStyleOptions;
-    };
-    searchOverlayStyle?: {
-      base?: CommonVectorStyleOptions;
-      selection?: CommonVectorStyleOptions;
-      focus?: CommonVectorStyleOptions;
-    };
-  };
-}
-
-export const environment: Environment = {
+export const environment: AppEnvironmentOptions = {
   production: false,
   igo: {
     app: {
@@ -64,18 +21,23 @@ export const environment: Environment = {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
       allowAnonymous: true,
-      trustHosts: ['geoegl.msp.gouv.qc.ca']
-      /*,hostsByKey: [{
-         domainRegFilters: '(https:\/\/|http:\/\/)?(.*domain.com)(.*)',
-         keyProperty: 'key',
-         keyValue: '123456',
-      }]*/
+      trustHosts: ['geoegl.msp.gouv.qc.ca'],
+      hostsByKey: [
+        {
+          domainRegFilters: '(https://|http://)?(.*domain.com)(.*)',
+          keyProperty: 'key',
+          keyValue: '123456'
+        }
+      ]
     },
     storage: {
-      url: '/user/igo',
+      url: '/apis/igo2/user/igo',
       key: 'igo'
     },
-
+    /*context: {
+      url: '/apis/igo2',
+      defaultContextUri: '5'
+    },*/
     catalog: {
       sources: [
         {
@@ -251,28 +213,18 @@ export const environment: Environment = {
         }
       ]
     },
-    // context: {
-    //   url: '/apis/igo2',
-    //   defaultContextUri: '5'
-    // },
     depot: {
       url: '/apis/depot'
     },
     dom: [
-      // {
-      //   id: 1,
-      //   name: 'test-dom',
-      //   values: [
-      //     {
-      //       id: "Radar photo fixe",
-      //       value: "Radar photo fixe"
-      //     },
-      //     {
-      //       id: "Radar photo mobile",
-      //       value: "Radar photo mobile"
-      //     }
-      //   ]
-      // },
+      {
+        id: 1,
+        name: 'test-dom',
+        values: [
+          { id: 'Radar photo fixe', value: 'Radar photo fixe' },
+          { id: 'Radar photo mobile', value: 'Radar photo mobile' }
+        ]
+      },
       {
         id: 1,
         name: 'dom_test',
@@ -364,7 +316,7 @@ export const environment: Environment = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#DFF7FF', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -374,7 +326,7 @@ export const environment: Environment = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#00A1DE', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }
@@ -396,7 +348,7 @@ export const environment: Environment = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#DFF7FF', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -406,7 +358,7 @@ export const environment: Environment = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#00A1DE', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }

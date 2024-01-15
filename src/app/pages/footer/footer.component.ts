@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { LanguageService } from '@igo2/core';
 
 @Component({

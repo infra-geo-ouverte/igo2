@@ -1,21 +1,9 @@
-<div class="app-expansion-panel-trigger-container mat-elevation-z2">
-  <button
-    mat-icon-button
-    (click)="onToggleClick()"
-    [matTooltip]="
-      (!expanded ? 'workspace.open' : 'workspace.close') | translate
-    "
-    color="primary"
-  >
-    <mat-icon *ngIf="!expanded" svgIcon="launch"></mat-icon>
-    <mat-icon
-      *ngIf="expanded"
-      style="transform: rotate(180deg)"
-      svgIcon="launch"
-    ></mat-icon>
-  </button>
+<div class="app-expansion-panel-trigger-container">
+  <app-expansion-panel-button
+    [expanded]="expanded"
+    (expand)="handleClose()"
+  ></app-expansion-panel-button>
 </div>
-
 <div class="app-expansion-panel-content">
   <ng-content></ng-content>
 </div>

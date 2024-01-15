@@ -1,10 +1,10 @@
 import {
-  trigger,
+  AnimationTriggerMetadata,
+  animate,
   state,
   style,
   transition,
-  animate,
-  AnimationTriggerMetadata
+  trigger
 } from '@angular/animations';
 
 export function showContent(

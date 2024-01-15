@@ -21,7 +21,6 @@
   }
 
   igo-panel {
-    height: 100%;
     outline: none;
   }
 
@@ -89,6 +88,7 @@
   .toast-content {
     height: 100%;
     width: 100%;
+    overflow: hidden;
   }
 }
 

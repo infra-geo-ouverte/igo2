@@ -1,22 +1,22 @@
 @import '../portal.variables';
 
 :host {
+  height: 48px;
   border-bottom: 2px solid aliceblue;
   display: flex;
   align-items: center;
+  background-color: white;
 
-  button {
-    width: 40px;
-    height: 40px;
-    padding: 8px;
+  ::ng-deep .workspace-actions {
+    margin-left: 8px;
+  }
+
+  app-expansion-panel-button {
+    margin-right: 4px;
   }
 }
 
-.app-expansion-panel-trigger-container {
-  display: flex;
-}
-
+.app-expansion-panel-trigger-container,
 .app-expansion-panel-content {
   display: flex;
-  height: 100%;
 }

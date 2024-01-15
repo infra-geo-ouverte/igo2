@@ -1,41 +1,6 @@
-import { LanguageOptions } from '@igo2/core';
-import {
-  SearchSourceOptions,
-  ImportExportServiceOptions,
-  CatalogServiceOptions,
-  Projection,
-  CommonVectorStyleOptions
-} from '@igo2/geo';
+import { AppEnvironmentOptions } from './environnement.interface';
 
-import {
-  AppOptions,
-  InteractiveTourConfigOptions
-} from './environnement.interface';
-interface Environment {
-  production: boolean;
-  igo: {
-    app: AppOptions;
-    catalog?: CatalogServiceOptions;
-    importExport?: ImportExportServiceOptions;
-    language?: LanguageOptions;
-    searchSources?: { [key: string]: SearchSourceOptions };
-    projections?: Projection[];
-    interactiveTour?: InteractiveTourConfigOptions;
-    depot?: { url: string; trainingGuides?: string[] };
-    queryOverlayStyle?: {
-      base?: CommonVectorStyleOptions;
-      selection?: CommonVectorStyleOptions;
-      focus?: CommonVectorStyleOptions;
-    };
-    searchOverlayStyle?: {
-      base?: CommonVectorStyleOptions;
-      selection?: CommonVectorStyleOptions;
-      focus?: CommonVectorStyleOptions;
-    };
-  };
-}
-
-export const environment: Environment = {
+export const environment: AppEnvironmentOptions = {
   production: true,
   igo: {
     app: {
@@ -67,6 +32,13 @@ export const environment: Environment = {
     depot: {
       url: '/apis/depot'
     },
+    dom: [
+      {
+        id: 1,
+        name: 'dom_test',
+        url: 'https://ws.mapserver.transports.gouv.qc.ca/applicatif?service=WFS&request=GetFeature&version=2.0.0&outputformat=dom&typenames=dom&dom=dom_test'
+      }
+    ],
     importExport: {
       url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
       configFileToGeoDBService: './data/geoDataToIDB.json',
@@ -147,7 +119,7 @@ export const environment: Environment = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#DFF7FF', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -157,7 +129,7 @@ export const environment: Environment = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#00A1DE', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }
@@ -179,7 +151,7 @@ export const environment: Environment = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#DFF7FF', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -189,7 +161,7 @@ export const environment: Environment = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#00A1DE', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }

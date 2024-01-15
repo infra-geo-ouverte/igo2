@@ -1,11 +1,12 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  Output,
   EventEmitter,
   HostBinding,
-  ChangeDetectionStrategy
+  Input,
+  Output
 } from '@angular/core';
+
 import { showContent } from './toast-panel-for-expansion.animations';
 
 @Component({
