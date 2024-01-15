@@ -46,9 +46,10 @@ import {
   EditionWorkspaceService,
   FEATURE,
   Feature,
-  FeatureDataSource, //GeostylerStyleService
+  FeatureDataSource,
   FeatureMotion,
   FeatureWorkspace,
+  GeostylerStyleService,
   GoogleLinks,
   IgoMap,
   ImageLayer,
@@ -92,30 +93,9 @@ import * as olGeom from 'ol/geom';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 import * as olProj from 'ol/proj';
 
-import LegendRenderer from 'geostyler-legend/dist/LegendRenderer/LegendRenderer';
 import OpenLayersParser from 'geostyler-openlayers-parser';
-import {
-  Style as GeoStylerStyle,
-  IconSymbolizer,
-  LineSymbolizer,
-  MarkSymbolizer
-} from 'geostyler-style';
-import {
-  BehaviorSubject,
-  Observable,
-  Subscription,
-  combineLatest,
-  from,
-  of
-} from 'rxjs';
-import {
-  debounceTime,
-  first,
-  map,
-  pairwise,
-  skipWhile,
-  take
-} from 'rxjs/operators';
+import { BehaviorSubject, Subscription, combineLatest, of } from 'rxjs';
+import { debounceTime, first, pairwise, skipWhile, take } from 'rxjs/operators';
 import { getAppVersion } from 'src/app/app.utils';
 import { EnvironmentOptions } from 'src/environments/environnement.interface';
 
@@ -356,7 +336,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private configFileToGeoDBService: ConfigFileToGeoDBService //private geostylerService: GeostylerStyleService
+    private configFileToGeoDBService: ConfigFileToGeoDBService,
+    private geostylerService: GeostylerStyleService
   ) {
     this.handleAppConfigs();
     this.storageService.set('version', getAppVersion(this.configService));
@@ -859,107 +840,34 @@ export class PortalComponent implements OnInit, OnDestroy {
     console.log('monNouveauStyle', monNouveauStyle);
     console.log('objectUtils', ObjectUtils.resolve(monNouveauStyle, 'radius'));
     // call geostyler.service with this.geostylerService
-    this.getStylerStyleToLegend(type, [
-      style1,
-      style2,
-      style3,
-      style4
-    ]).subscribe((r) => {
-      console.log(r);
-      let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
-      if (!layer) {
-        layer = new VectorLayer({
-          title: 'Layer de points créé afin de changer le style.',
-          isIgoInternalLayer: true,
-          id: `layerWithPoints`,
-          zIndex: 200,
-          source: new FeatureDataSource(),
-          igoStyle: undefined,
-          showInLayerList: true,
-          exportable: true,
-          browsable: false,
-          workspace: { enabled: true },
-          legendOptions: {
-            collapsed: false,
-            display: true,
-            html: type === 'svg' ? r : undefined,
-            url: type !== 'svg' ? r : undefined
-          }
-        });
-      }
-      this.map.addLayer(layer);
-    });
-  }
-
-  public getStylerStyleToLegend(
-    type: string, // todo enum a faire
-    styles: GeoStylerStyle[],
-    width: number = 300,
-    height: number = 300
-  ): Observable<string> {
-    const layerDescriptors: GeoStylerStyle[] =
-      this.transferLayersToLegend(styles);
-    height = styles.length * 55;
-    const renderer = new LegendRenderer({
-      maxColumnWidth: 100,
-      maxColumnHeight: 1000,
-      overflow: 'auto',
-      styles: layerDescriptors,
-      size: [width, height],
-      hideRect: true
-    });
-    return from(renderer.renderAsImage('svg')).pipe(
-      map((r: Element) => {
-        const serializer = new XMLSerializer();
-        const svgXmlString = serializer.serializeToString(r);
-        if (type === 'svg') {
-          return svgXmlString;
-        } else {
-          const blob = new Blob([svgXmlString], {
-            type: 'image/svg+xml'
+    //this.getStylerStyleToLegend(type, [
+    this.geostylerService
+      .getStylerStyleToLegend(type, [style1, style2, style3, style4])
+      .subscribe((r) => {
+        console.log(r);
+        let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
+        if (!layer) {
+          layer = new VectorLayer({
+            title: 'Layer de points créé afin de changer le style.',
+            isIgoInternalLayer: true,
+            id: `layerWithPoints`,
+            zIndex: 200,
+            source: new FeatureDataSource(),
+            igoStyle: undefined,
+            showInLayerList: true,
+            exportable: true,
+            browsable: false,
+            workspace: { enabled: true },
+            legendOptions: {
+              collapsed: false,
+              display: true,
+              html: type === 'svg' ? r : undefined,
+              url: type !== 'svg' ? r : undefined
+            }
           });
-          const urlCreator = window.URL;
-          return urlCreator.createObjectURL(blob);
         }
-      })
-    );
-  }
-
-  transferLayersToLegend(styles: GeoStylerStyle[]) {
-    var stylesCopy = [...styles];
-    const layerDescriptorsList: GeoStylerStyle[] = [];
-    for (var index in stylesCopy) {
-      var DescriptorLayerRulesAdapted = [];
-      let descriptorLayerName = stylesCopy[index].name;
-      stylesCopy[index].rules.forEach(function (styleRule) {
-        var styleRuleSymbolizersAdapted = [];
-        styleRule.symbolizers.forEach(function (styleRuleSymbolizer) {
-          switch (styleRuleSymbolizer.kind) {
-            case 'Mark':
-              (styleRuleSymbolizer as MarkSymbolizer).radius = 10;
-              break;
-            case 'Line':
-              (styleRuleSymbolizer as LineSymbolizer).width = 3;
-              break;
-            case 'Icon':
-              (styleRuleSymbolizer as IconSymbolizer).size = 15;
-            default:
-              break;
-          }
-          styleRuleSymbolizersAdapted.push(styleRuleSymbolizer);
-        });
-        DescriptorLayerRulesAdapted.push({
-          name: styleRule.name,
-          symbolizers: styleRuleSymbolizersAdapted
-        });
+        this.map.addLayer(layer);
       });
-      let styleNoRadius: any = {
-        name: descriptorLayerName,
-        rules: DescriptorLayerRulesAdapted
-      };
-      layerDescriptorsList.push(styleNoRadius);
-    }
-    return layerDescriptorsList;
   }
 
   changeStyle() {
