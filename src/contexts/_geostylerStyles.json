@@ -1,0 +1,119 @@
+{
+  "uri": "geostylerStyles",
+  "base": "_base",
+  "layers": [
+    {
+      "title": "World,  Geostyler definition's based",
+      "zIndex": 10,
+      "id": "gs-style",
+      "visible": false,
+      "sourceOptions": {
+        "queryable": false,
+        "type": "mvt",
+        "url": "https://ahocevar.com/geoserver/gwc/service/tms/1.0.0/ne:ne_10m_admin_0_countries@EPSG:900913@pbf/{z}/{x}/{-y}.pbf"
+      },
+      "igoStyle": {
+        "geoStylerStyle": {
+          "global": {
+            "name": "Hola",
+            "rules": [
+              {
+                "names": "test",
+                "symbolizers": [
+                  {
+                    "kind": "Fill",
+                    "color": "#0b64e1",
+                    "fillOpacity": 0.6
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "title": "WFS - Geostyler",
+      "visible": true,
+      "sourceOptions": {
+        "type": "wfs",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "queryable": true,
+        "queryTitle": "desclocal",
+        "params": {
+          "featureTypes": "telephone_urg",
+          "fieldNameGeometry": "geometry",
+          "maxFeatures": 5001,
+          "outputFormat": "geojson"
+        }
+      }, 
+      "igoStyle": {
+        "geoStylerStyle": {
+          "global": {
+            "name": "Basic star fill",
+            "rules": [
+              {
+                "name": "Rule 2",
+                "filter": [
+                  "==",
+                  "orgresp",
+                  "Bell"
+                ],
+                "symbolizers": [
+                  {
+                    "kind": "Mark",
+                    "wellKnownName": "star",
+                    "color": "#ff0000",
+                    "radius": 15
+                  }
+                ]
+              }
+            ]
+
+          }
+        }
+      }
+    },
+    {
+      "title": "Polygons - MVT - Hover",
+      "id": "mvtsbap",
+      "visible": true,
+      "sourceOptions": {
+        "queryable": true,
+        "queryTitle": "nom_unite_",
+        "featureClass": "feature",
+        "type": "mvt",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_centr_servc_geomt_act&map.imagetype=mvt"
+      },
+      "igoStyle":{
+        "geoStylerStyle":{
+          "hover":{
+            "name": "Geostyler Hover Basic Fill",
+            "rules":[
+              {
+                "name": "Rule Basic Fill",
+                "symbolizers": [
+                  {
+                    "kind": "Fill",
+                    "color": "#006aff",
+                    "outlineColor": "#000000"
+                  }
+                ]
+              },
+              {
+                "name": "Mouse Over Fill",
+                "symbolizers": [
+                  {
+                    "kind": "Fill",
+                    "color": "#ff0000",
+                    "outlineColor": "#ffffff"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+  }

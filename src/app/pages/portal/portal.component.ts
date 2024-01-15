@@ -46,8 +46,10 @@ import {
   EditionWorkspaceService,
   FEATURE,
   Feature,
+  FeatureDataSource,
   FeatureMotion,
   FeatureWorkspace,
+  GeostylerStyleService,
   GoogleLinks,
   IgoMap,
   ImageLayer,
@@ -82,14 +84,16 @@ import {
   ToolState,
   WorkspaceState
 } from '@igo2/integration';
-import { ObjectUtils } from '@igo2/utils';
+import { ObjectUtils, uuid } from '@igo2/utils';
 
 import olFeature from 'ol/Feature';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
+import * as olGeom from 'ol/geom';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 import * as olProj from 'ol/proj';
 
+import OpenLayersParser from 'geostyler-openlayers-parser';
 import { BehaviorSubject, Subscription, combineLatest, of } from 'rxjs';
 import { debounceTime, first, pairwise, skipWhile, take } from 'rxjs/operators';
 import { getAppVersion } from 'src/app/app.utils';
@@ -332,7 +336,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private configFileToGeoDBService: ConfigFileToGeoDBService
+    private configFileToGeoDBService: ConfigFileToGeoDBService,
+    private geostylerService: GeostylerStyleService
   ) {
     this.handleAppConfigs();
     this.storageService.set('version', getAppVersion(this.configService));
@@ -375,6 +380,26 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
 
     const contextActions = [
+      {
+        id: 'export legend',
+        title: 'Export Legend',
+        handler: () => this.exportLegend()
+      },
+      {
+        id: 'change style',
+        title: 'Change style',
+        handler: () => this.changeStyle()
+      },
+      {
+        id: 'Change new points style',
+        title: 'Change new points style',
+        handler: () => this.changePointsStyle()
+      },
+      {
+        id: 'addLayer',
+        title: 'addLayer Point',
+        handler: () => this.addLayerWithPoint(this.contextMenuCoord)
+      },
       {
         id: 'coordinates',
         title: 'coordinates',
@@ -665,6 +690,230 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.sidenavMediaAndOrientation$$.unsubscribe();
   }
 
+  changePointsStyle() {
+    const style123: any = {
+      name: 'Basic Circle',
+      rules: [
+        {
+          name: 'Rule 1',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'triangle',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
+            },
+            {
+              kind: 'Text',
+              label: '{{desclocal}}',
+              color: '#000000',
+              opacity: 1,
+              size: 12
+            }
+          ]
+        }
+      ]
+    };
+
+    const lastLayer = this.map.getLayerById('layerWithPoints');
+
+    const pointGeoStyle: any = {
+      name: 'Basic star fill',
+      rules: [
+        {
+          name: 'Rule 2',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'star',
+              color: '#ff0000',
+              radius: 15
+            }
+          ]
+        }
+      ]
+    };
+
+    //renderer.render(someElement);
+
+    /*olParser2.writeStyle(pointGeoStyle)
+    .then((output) => {
+      console.log("output", output);
+      (lastLayer.ol as any).setStyle(output.output);
+      console.log("output", output.output);
+    })
+    .catch(error => console.log(error));
+    console.log("lastLayer", lastLayer);*/
+  }
+
+  exportLegend() {
+    const style1: any = {
+      name: 'Basic Circle',
+      rules: [
+        {
+          name: 'Rule 1',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'triangle',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
+            },
+            {
+              kind: 'Text',
+              label: '{{desclocal}}',
+              color: '#000000',
+              opacity: 1,
+              size: 12
+            }
+          ]
+        }
+      ]
+    };
+    const style2: any = {
+      name: 'Basic Circle 2',
+      rules: [
+        {
+          name: 'Rule 1',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'star',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              radius: 30
+            },
+            {
+              kind: 'Text',
+              label: '{{desclocal}}',
+              color: '#000000',
+              opacity: 1,
+              size: 12
+            }
+          ]
+        }
+      ]
+    };
+    const style3: any = {
+      name: 'Basic Circle 3',
+      rules: [
+        {
+          name: 'Rule 1',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'square',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
+            }
+          ]
+        }
+      ]
+    };
+    const style4: any = {
+      name: 'Basic Circle 4',
+      rules: [
+        {
+          name: 'Rule 1j ',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'circle',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
+            }
+          ]
+        }
+      ]
+    };
+
+    const type: string = 'svg';
+    const monNouveauStyle = Object.assign([], style1);
+    console.log('monNouveauStyle', monNouveauStyle);
+    console.log('objectUtils', ObjectUtils.resolve(monNouveauStyle, 'radius'));
+    // call geostyler.service with this.geostylerService
+    //this.getStylerStyleToLegend(type, [
+    this.geostylerService
+      .getStylerStyleToLegend(type, [style1, style2, style3, style4])
+      .subscribe((r) => {
+        console.log(r);
+        let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
+        if (!layer) {
+          layer = new VectorLayer({
+            title: 'Layer de points créé afin de changer le style.',
+            isIgoInternalLayer: true,
+            id: `layerWithPoints`,
+            zIndex: 200,
+            source: new FeatureDataSource(),
+            igoStyle: undefined,
+            showInLayerList: true,
+            exportable: true,
+            browsable: false,
+            workspace: { enabled: true },
+            legendOptions: {
+              collapsed: false,
+              display: true,
+              html: type === 'svg' ? r : undefined,
+              url: type !== 'svg' ? r : undefined
+            }
+          });
+        }
+        this.map.addLayer(layer);
+      });
+  }
+
+  changeStyle() {
+    const lastLayer = this.map.layers
+      .filter((l) => l.showInLayerList)
+      .filter((l) => l.dataSource.options.type === 'wfs')
+      .pop();
+
+    const geoStylerStyle: any = {
+      name: 'Basic Circle',
+      rules: [
+        {
+          name: 'Rule 1',
+          symbolizers: [
+            {
+              kind: 'Mark',
+              wellKnownName: 'triangle',
+              color: '#ff8000',
+              strokeColor: '#000000',
+              rotate: 90,
+              radius: 30
+            },
+            {
+              kind: 'Text',
+              label: '{{desclocal}}',
+              color: '#000000',
+              opacity: 1,
+              size: 12
+            }
+          ]
+        }
+      ]
+    };
+
+    const olParser = new OpenLayersParser();
+    olParser
+      .writeStyle(geoStylerStyle)
+      .then((output) => {
+        console.log('output', output);
+        (lastLayer.ol as any).setStyle(output.output);
+        console.log('output', output.output);
+      })
+      .catch((error) => console.log(error));
+    console.log('lastLayer', lastLayer);
+  }
+
   /**
    * Cancel ongoing add layer, if any
    */
@@ -943,6 +1192,35 @@ export class PortalComponent implements OnInit, OnDestroy {
           .reverse()
           .map((c) => c.toFixed(6))
           .join(', ');
+  }
+
+  addLayerWithPoint(coord: [number, number]) {
+    let layer = this.map.getLayerById('layerWithPoints') as VectorLayer;
+    if (!layer) {
+      layer = new VectorLayer({
+        title: 'Layer de points créé afin de changer le style.',
+        isIgoInternalLayer: true,
+        id: `layerWithPoints`,
+        zIndex: 200,
+        source: new FeatureDataSource(),
+        igoStyle: undefined,
+        showInLayerList: true,
+        exportable: true,
+        browsable: false,
+        workspace: { enabled: true }
+      });
+      this.map.addLayer(layer);
+    }
+    const geometry4326 = new olGeom.Point(coord);
+    const geometryMapProjection = geometry4326.transform(
+      'EPSG:4326',
+      this.map.projection
+    );
+    const feature = new olFeature({
+      id: uuid(),
+      geometry: geometryMapProjection
+    });
+    layer.dataSource.ol.addFeature(feature);
   }
 
   updateMapBrowserClass() {

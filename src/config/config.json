@@ -42,6 +42,11 @@
       "available": false
     }
   },
+  "searchSources": {
+    "cadastre": {
+      "available": false
+    }
+  },
   "title": "IGO",
   "welcomeWindow": {
     "showAgainOnNewIGOVersion": true,
