@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '@igo2/geo' as igo2-geo;
+
+@mixin theme($theme) {
+  @include color($theme);
+  @include density($theme);
+}
+
+@mixin color($theme) {
+}
+
+@mixin density($theme) {
+  $density: mat.get-density-config($theme);
+
+  $theme: map.merge(
+    $theme,
+    (
+      density: $density - 2
+    )
+  );
+
+  @include igo2-geo.search-bar-density($theme);
+}
