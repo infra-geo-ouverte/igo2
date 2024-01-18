@@ -217,6 +217,12 @@ igo-map-browser {
   }
 }
 
+app-expansion-panel-button {
+  ::ng-deep button[mat-icon-button] {
+    @include mat.elevation(2);
+  }
+}
+
 /*** Sidenav ***/
 mat-sidenav-container {
   height: 100%;
