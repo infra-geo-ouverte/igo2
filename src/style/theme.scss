@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @use '../app/app.theme' as app;
+@use './igo2-lib.override' as igo2-lib;
 
 /*
 * Define a default theme for styling some part of the app
@@ -21,3 +22,4 @@ $theme: mat.define-light-theme(
 );
 
 @include app.themes($theme);
+@include igo2-lib.theme($theme);
