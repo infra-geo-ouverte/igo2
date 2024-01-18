@@ -2,8 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import {
   APP_INITIALIZER,
-  ApplicationRef,
-  Injector,
+  Provider,
   enableProdMode,
   importProvidersFrom
 } from '@angular/core';
@@ -22,7 +21,6 @@ import {
   ConfigService,
   IgoCoreModule,
   IgoMessageModule,
-  LanguageService,
   RouteService,
   provideConfigOptions,
   provideRootTranslation
@@ -30,11 +28,12 @@ import {
 import { loadTheme } from '@igo2/utils';
 
 import 'hammerjs';
-import { concatMap, first } from 'rxjs';
 
 import { AppComponent } from './app/app.component';
 import { PortalModule } from './app/pages';
 import { environment } from './environments/environment';
+
+const DEFAULT_THEME: string = 'blue-theme';
 
 const TOOLTIP_OPTIONS: MatTooltipDefaultOptions = {
   showDelay: 500,
@@ -42,8 +41,6 @@ const TOOLTIP_OPTIONS: MatTooltipDefaultOptions = {
   touchendHideDelay: 0,
   disableTooltipInteractivity: true
 };
-
-const DEFAULT_THEME: string = 'blue-theme';
 
 if (environment.production) {
   enableProdMode();
@@ -70,13 +67,8 @@ bootstrapApplication(AppComponent, {
       default: environment.igo,
       path: './config/config.json'
     }),
+    provideTheme(),
     RouteService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFactory,
-      deps: [Injector, ApplicationRef, DOCUMENT],
-      multi: true
-    },
     { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: TOOLTIP_OPTIONS },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -85,32 +77,14 @@ bootstrapApplication(AppComponent, {
   ]
 }).catch((err) => console.log(err));
 
-function appInitializerFactory(
-  injector: Injector,
-  applicationRef: ApplicationRef,
-  document: Document
-) {
-  // ensure to have the proper translations loaded once, when the app is stable.
-  return () =>
-    new Promise<any>((resolve: any) => {
-      applicationRef.isStable
-        .pipe(
-          first((isStable) => isStable === true),
-          concatMap(() => {
-            const languageService = injector.get(LanguageService);
-            const lang = languageService.getLanguage();
-            return languageService.translate.getTranslation(lang);
-          })
-        )
-        .subscribe((translations) => {
-          const languageService = injector.get(LanguageService);
-          const lang = languageService.getLanguage();
-          languageService.translate.setTranslation(lang, translations);
-
-          const configService = injector.get(ConfigService);
-          const theme = configService.getConfig('theme', DEFAULT_THEME);
-          loadTheme(document, theme);
-          resolve();
-        });
-    });
+function provideTheme(): Provider {
+  return {
+    provide: APP_INITIALIZER,
+    useFactory: (configService: ConfigService, document: Document) => () => {
+      const theme = configService.getConfig('theme', DEFAULT_THEME);
+      loadTheme(document, theme);
+    },
+    deps: [ConfigService, DOCUMENT],
+    multi: true
+  };
 }
