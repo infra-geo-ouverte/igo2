@@ -33,6 +33,8 @@ import { AppComponent } from './app/app.component';
 import { PortalModule } from './app/pages';
 import { environment } from './environments/environment';
 
+const DEFAULT_THEME: string = 'blue-theme';
+
 const TOOLTIP_OPTIONS: MatTooltipDefaultOptions = {
   showDelay: 500,
   hideDelay: 0,
@@ -76,8 +78,6 @@ bootstrapApplication(AppComponent, {
 }).catch((err) => console.log(err));
 
 function provideTheme(): Provider {
-  const DEFAULT_THEME: string = 'blue-theme';
-
   return {
     provide: APP_INITIALIZER,
     useFactory: (configService: ConfigService, document: Document) => () => {
