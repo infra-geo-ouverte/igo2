@@ -1,3 +1,5 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
 @use './expansion-panel/expansion-panel-header.theming' as
   expansion-panel-header;
 @use './expansion-panel/expansion-panel-button/expansion-panel-button.theme' as
@@ -6,4 +8,19 @@
 @mixin themes($config) {
   @include expansion-panel-header.theme($config);
   @include expansion-panel-button.theme($config);
+  @include theme($config);
+}
+
+@mixin theme($config) {
+  @include color($config);
+}
+
+@mixin color($config) {
+  $background: map.get($config, background);
+
+  igo-map-browser {
+    button[mat-icon-button] {
+      background-color: mat.get-color-from-palette($background, raised-button);
+    }
+  }
 }

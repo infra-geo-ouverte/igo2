@@ -7,6 +7,8 @@ import {
   Output
 } from '@angular/core';
 
+import { PanelComponent } from '@igo2/common';
+
 import { showContent } from './toast-panel-for-expansion.animations';
 
 @Component({
@@ -14,7 +16,9 @@ import { showContent } from './toast-panel-for-expansion.animations';
   templateUrl: './toast-panel-for-expansion.component.html',
   styleUrls: ['./toast-panel-for-expansion.component.scss'],
   animations: [showContent()],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PanelComponent]
 })
 export class ToastPanelForExpansionComponent {
   @Input()

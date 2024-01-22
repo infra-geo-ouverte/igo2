@@ -16,6 +16,7 @@
   left: $navbarSpacer;
   top: $navbarSpacer;
   display: flex;
+  align-items: center;
   width: $search-bar-width;
   max-width: $search-bar-width;
   z-index: 4;
@@ -214,6 +215,12 @@ igo-map-browser {
     @include breakpoints.media-breakpoint-down('mobile') {
       display: none;
     }
+  }
+}
+
+app-expansion-panel-button {
+  ::ng-deep button[mat-icon-button] {
+    @include mat.elevation(2);
   }
 }
 
