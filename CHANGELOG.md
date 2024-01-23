@@ -1,3 +1,13 @@
+# [16.2.0](https://github.com/infra-geo-ouverte/igo2/compare/v16.1.0...v16.2.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* **environment:** change focus color ([#1105](https://github.com/infra-geo-ouverte/igo2/issues/1105)) ([864271d](https://github.com/infra-geo-ouverte/igo2/commit/864271d94290927ae9d79dae0f6a6ff9b310aee3))
+* **search-bar:** adjust the density  ([5ae96f9](https://github.com/infra-geo-ouverte/igo2/commit/5ae96f97c34c9e3c142cff4d7d2122675a816904))
+
+
+
 # [16.1.0](https://github.com/infra-geo-ouverte/igo2/compare/v16.0.2...v16.1.0) (2023-12-14)
 
 
