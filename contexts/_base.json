@@ -174,9 +174,13 @@
     "print",
     "shareMap",
     "about",
-    "advancedMap"
+    "advancedMap",
+    "dataIssueReporter"
   ],
   "tools": [
+    {
+      "name": "dataIssueReporter"
+    },
     {
       "name": "advancedMap"
     },
