@@ -17,14 +17,11 @@ import { provideRouter } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { IgoAuthModule } from '@igo2/auth';
-import {
-  ConfigService,
-  IgoCoreModule,
-  IgoMessageModule,
-  RouteService,
-  provideConfigOptions,
-  provideRootTranslation
-} from '@igo2/core';
+import { IgoCoreModule } from '@igo2/core';
+import { ConfigService, provideConfigOptions } from '@igo2/core/config';
+import { provideRootTranslation } from '@igo2/core/language';
+import { IgoMessageModule } from '@igo2/core/message';
+import { RouteService } from '@igo2/core/route';
 import { loadTheme } from '@igo2/utils';
 
 import 'hammerjs';

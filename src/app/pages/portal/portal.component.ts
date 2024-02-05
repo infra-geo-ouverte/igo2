@@ -46,15 +46,11 @@ import {
   MapContextDirective,
   UserButtonComponent
 } from '@igo2/context';
-import {
-  ConfigService,
-  LanguageService,
-  Media,
-  MediaOrientation,
-  MediaService,
-  MessageService,
-  StorageService
-} from '@igo2/core';
+import { ConfigService } from '@igo2/core/config';
+import { LanguageService } from '@igo2/core/language';
+import { Media, MediaOrientation, MediaService } from '@igo2/core/media';
+import { MessageService } from '@igo2/core/message';
+import { StorageService } from '@igo2/core/storage';
 import {
   CapabilitiesService,
   ConfigFileToGeoDBService,

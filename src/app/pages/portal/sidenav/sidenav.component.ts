@@ -21,7 +21,7 @@ import {
   Toolbox,
   ToolboxComponent
 } from '@igo2/common';
-import { ConfigService } from '@igo2/core';
+import { ConfigService } from '@igo2/core/config';
 import { IgoMap } from '@igo2/geo';
 import { CatalogState, ToolState } from '@igo2/integration';
 
