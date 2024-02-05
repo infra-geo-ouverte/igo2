@@ -189,7 +189,7 @@
 
 <app-expansion-panel
   *ngIf="expansionPanelExpanded"
-  [backdropShown]="expansionPanelBackdropShown"
+  [backdropShown]="workspaceState.activeWorkspaceWidget$ | async"
   [(expanded)]="expansionPanelExpanded"
   [maximized]="workspaceState.workspaceMaximize$ | async"
   [@expansionPanelSize]="getExpansionPanelStatus()"
@@ -336,20 +336,9 @@
   [withHeader]="false"
   [(opened)]="toastPanelForExpansionOpened"
 >
-  <div class="toast-panel-for-expansion-close-button-container">
-    <button
-      mat-icon-button
-      color="warn"
-      (click)="toastPanelForExpansionOpened = false"
-    >
-      <mat-icon svgIcon="close"></mat-icon>
-    </button>
-  </div>
-
   <igo-workspace-widget-outlet
     *ngIf="selectedWorkspace$ | async as workspace"
     [workspace]="workspace"
-    (deactivateWidget)="onDeactivateWorkspaceWidget()"
   >
   </igo-workspace-widget-outlet>
 </app-toast-panel-for-expansion>
