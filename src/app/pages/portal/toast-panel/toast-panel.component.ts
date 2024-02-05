@@ -280,7 +280,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           featureProjection: this.map.projection
         }
       );
-      this.map.geolocationController.temporaryDisablePollowPosition = true;
+      this.map.geolocationController.temporaryDisableFollowPosition = true;
       moveToOlFeatures(
         this.map.viewController,
         [localOlFeature],
@@ -417,7 +417,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
               featureProjection: this.map.projection
             }
           );
-          this.map.geolocationController.temporaryDisablePollowPosition = true;
+          this.map.geolocationController.temporaryDisableFollowPosition = true;
           moveToOlFeatures(
             this.map.viewController,
             [localOlFeature],
@@ -446,7 +446,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
             });
             olFeatures.push(localOlFeature);
           }
-          this.map.geolocationController.temporaryDisablePollowPosition = true;
+          this.map.geolocationController.temporaryDisableFollowPosition = true;
           moveToOlFeatures(
             this.map.viewController,
             olFeatures,
@@ -662,7 +662,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           featureProjection: this.map.projection
         }
       );
-      this.map.geolocationController.temporaryDisablePollowPosition = true;
+      this.map.geolocationController.temporaryDisableFollowPosition = true;
       moveToOlFeatures(
         this.map.viewController,
         [localOlFeature],
@@ -880,7 +880,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         featureProjection: this.map.projection
       }
     );
-    this.map.geolocationController.temporaryDisablePollowPosition = true;
+    this.map.geolocationController.temporaryDisableFollowPosition = true;
     moveToOlFeatures(
       this.map.viewController,
       [localOlFeature],

@@ -1169,7 +1169,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         'EPSG:4326',
         this.map.projection
       );
-      this.map.geolocationController.temporaryDisablePollowPosition = true;
+      this.map.geolocationController.temporaryDisableFollowPosition = true;
       this.map.viewController.zoomToExtent(
         olExtent as [number, number, number, number]
       );
@@ -1177,7 +1177,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   private computeFocusFirst() {
-    this.map.geolocationController.temporaryDisablePollowPosition = true;
+    this.map.geolocationController.temporaryDisableFollowPosition = true;
     setTimeout(() => {
       const resultItem: any = document
         .getElementsByTagName('igo-search-results-item')
@@ -1239,7 +1239,7 @@ export class PortalComponent implements OnInit, OnDestroy {
               searchResultsOlFeatures,
               this.map.viewProjection
             );
-            this.map.geolocationController.temporaryDisablePollowPosition =
+            this.map.geolocationController.temporaryDisableFollowPosition =
               true;
             this.map.viewController.zoomToExtent(totalExtent);
           });
@@ -1669,7 +1669,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       });
       olFeaturesSelected.push(localOlFeature);
     }
-    this.map.geolocationController.temporaryDisablePollowPosition = true;
+    this.map.geolocationController.temporaryDisableFollowPosition = true;
     moveToOlFeatures(
       this.map.viewController,
       olFeaturesSelected,
