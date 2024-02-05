@@ -1764,4 +1764,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       FeatureMotion.Zoom
     );
   }
+
+  closeWidget() {
+    const currentWorkspace = this.selectedWorkspace$?.getValue();
+    if (currentWorkspace?.hasWidget) {
+      currentWorkspace.deactivateWidget();
+    }
+  }
 }

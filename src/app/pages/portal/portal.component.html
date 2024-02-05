@@ -336,11 +336,7 @@
   [(opened)]="toastPanelForExpansionOpened"
 >
   <div class="toast-panel-for-expansion-close-button-container">
-    <button
-      mat-icon-button
-      color="warn"
-      (click)="toastPanelForExpansionOpened = false"
-    >
+    <button mat-icon-button color="warn" (click)="closeWidget()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
