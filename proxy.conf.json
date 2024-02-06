@@ -3,7 +3,6 @@
     "target": "http://geodev8.sso.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug",
     "pathRewrite": {
       "^/test" : "/ws"
     }
@@ -24,7 +23,7 @@
     "changeOrigin": true
   },
   "/ws/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+    "target": "http://geodev8.sso.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },
