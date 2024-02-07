@@ -1,7 +1,10 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+
 import { Context, ContextService } from '@igo2/context';
-import { MediaService, ConfigService } from '@igo2/core';
+import { ConfigService, MediaService } from '@igo2/core';
+
+import { Subscription } from 'rxjs';
+
 import { MapOverlay } from './map-overlay.interface';
 
 @Component({
@@ -9,7 +12,6 @@ import { MapOverlay } from './map-overlay.interface';
   templateUrl: './map-overlay.component.html',
   styleUrls: ['./map-overlay.component.scss']
 })
-
 export class MapOverlayComponent implements AfterViewInit, OnDestroy {
   public mapOverlay: MapOverlay[] = [];
   private context$$: Subscription;
@@ -20,15 +22,14 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
     private contextService: ContextService,
     private mediaService: MediaService,
     private configService: ConfigService
-  ) { }
+  ) {}
 
   ngAfterViewInit() {
-    this.context$$ = this.contextService.context$.subscribe(context => {
-        this.handleContextChange(context);
-        this.context = context;
-        }
-    );
-    this.media$$ = this.mediaService.media$.subscribe(media =>
+    this.context$$ = this.contextService.context$.subscribe((context) => {
+      this.handleContextChange(context);
+      this.context = context;
+    });
+    this.media$$ = this.mediaService.media$.subscribe((media) =>
       this.handleContextChange(this.context)
     );
   }
@@ -39,24 +40,25 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
   }
 
   private handleContextChange(context: Context) {
-    let mapOverlay = [];
+    let mapOverlay: MapOverlay[] = [];
     if (context !== undefined) {
       this.mapOverlay = [];
 
       if (context['mapOverlay']) {
         mapOverlay = context['mapOverlay'];
-      } else if (this.configService.getConfig('mapOverlay')) {
-        mapOverlay = this.configService.getConfig('mapOverlay');
+      } else {
+        mapOverlay = this.configService.getConfig('mapOverlay', []);
       }
       for (const overlay of mapOverlay) {
-
         // If no media define use default to desktop, display only if current media is on context definition
-        if ((!overlay.media && this.mediaService.getMedia() === 'desktop') ||
-        (overlay.media && overlay.media.includes(this.mediaService.getMedia()))) {
+        if (
+          (!overlay.media && this.mediaService.getMedia() === 'desktop') ||
+          (overlay.media &&
+            overlay.media.includes(this.mediaService.getMedia()))
+        ) {
           this.mapOverlay.push(overlay);
         }
       }
     }
-
   }
 }

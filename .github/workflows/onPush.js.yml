@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x]
 
     steps:
     - name: The branch or tag ref that triggered the workflow run.
@@ -24,3 +24,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install @angular/cli
     - run: npm run lint
+    - run: npm run e2e

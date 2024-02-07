@@ -1,8 +1,25 @@
-@use '../../node_modules/@igo2/core/style/index.theming.scss';
-@import '../../node_modules/@igo2/core/style/all.theming';
-@import './src/style/reset.scss';
-@import '../app/app.theming.scss';
-@import '../app/pages/portal/portal.theming.scss';
-@import '../app/pages/portal/sidenav/sidenav.theming.scss';
-@import '../app/pages/portal/welcome-window/welcome-window.theming.scss';
-@import '../app/app.theming';
+@use '@angular/material' as mat;
+@use '../app/app.theme' as app;
+@use './igo2-lib.override' as igo2-lib;
+
+/*
+* Define a default theme for styling some part of the app
+* Don't forget that we also have static theme apply
+*/
+$primary: mat.define-palette(mat.$blue-palette, 700, 400, 900);
+$accent: mat.define-palette(mat.$blue-palette, 200);
+$warn: mat.define-palette(mat.$red-palette);
+
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn
+    ),
+    density: 0
+  )
+);
+
+@include app.themes($theme);
+@include igo2-lib.theme($theme);

@@ -7,8 +7,8 @@
       "^/test" : "/ws"
     }
   },
-  "/libcommunes/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+  "/ws/": {
+    "target": "http://geodev8.sso.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },
@@ -22,18 +22,18 @@
     "secure": false,
     "changeOrigin": true
   },
-  "/ws/": {
-    "target": "http://geodev8.sso.msp.gouv.qc.ca",
-    "secure": false,
-    "changeOrigin": true
-  },
   "/carto/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+    "target": "https://testgeoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },
   "/apis/": {
-    "target": "https://geoegl.msp.gouv.qc.ca",
+    "target": "https://testgeoegl.msp.gouv.qc.ca",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/services/": {
+    "target": "https://testgeoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },

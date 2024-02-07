@@ -3,8 +3,6 @@
 # https://github.com/browserslist/browserslist#queries
 # adjust as needed
 > 0.5%
-last 2 versions
+last 2 versions and supports es6-module
 Firefox ESR
 not dead
-not IE 9-10
-not IE 11

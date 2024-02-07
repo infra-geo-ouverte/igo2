@@ -39,7 +39,7 @@ Exemples
 
         {
           "global": {
-            "position": "auto",
+            "position": "right",
             "scrollToElement":true,
             "title": "Titre de toutes les boites du tour",
             "steps": [
@@ -64,7 +64,7 @@ Propriétés - Objet InteractiveTourOptions
 
 
 Liens
-      - `TourOptions interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface>`_
+      - `TourOptions interface <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/common/src/lib/interactive-tour/interactive-tour.interface.ts>`_
 
 
 Configurer les 'steps' des tours
@@ -120,7 +120,7 @@ Exemples
 
       {
         "global": {
-          "position": "auto",
+          "position": "right",
           "steps": [
             {
               "element": ".menu-button",

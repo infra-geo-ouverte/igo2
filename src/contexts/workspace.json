@@ -1,128 +1,131 @@
 {
-    "uri": "workspace",
-    "title": "Workspace",
-    "base": "_base",
-    "layers": [
-      {     
-        "title": "WMS-WFS avec table attribut sans query",
-        "visible": true,
-        "id": 1,
-        "workspace": {
-          "enabled": true,
-          "maxResolution": 300,
-          "queryOptions": {
-            "mapQueryOnOpenTab": false,
-            "tabQuery": false
-          }
-        },
-        "sourceOptions": {
-          "queryable": true,
-          "queryTitle": "photographies aériennes",
-          "crossOrigin": "anonymous",
-          "queryFormat": "htmlgml2",
-          "queryHtmlTarget": "iframe",
-          "queryFormatAsWms": true,
-          "type": "wms",
-          "optionsFromCapabilities": true,
-          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi",
-          "params": {
-            "layers": "nord_photo_oblique",
-            "version": "1.3.0"
-          },
-          "urlWfs": "https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi",
-          "paramsWFS": {
-            "featureTypes": "nord_photo_oblique",
-            "maxFeatures": 1000,
-            "version": "2.0.0"
-          },
-          "sourceFields": [
-            {"name": "LATITUDE", "alias": "latitude"},
-            {"name": "LONGITUDE", "alias": "longitude"},
-            {"name": "NOM_PHOTO", "alias": "nom photo"} 
-          ] 
+  "uri": "workspace",
+  "title": "Workspace",
+  "base": "_base",
+  "layers": [
+    {
+      "title": "WMS-WFS avec table attribut sans query",
+      "visible": true,
+      "id": 1,
+      "workspace": {
+        "enabled": true,
+        "maxResolution": 300,
+        "queryOptions": {
+          "mapQueryOnOpenTab": false,
+          "tabQuery": false
         }
       },
-      {
-        "title": "WMS with underlying WFS params",
-        "visible": true,
-        "maxResolution": 1200,
-        "workspace": {
-          "enabled": true,
-          "maxResolution": 400,
-          "queryOptions": {
-            "mapQueryOnOpenTab": true,
-            "tabQuery": true
-          }
+      "sourceOptions": {
+        "queryable": true,
+        "queryTitle": "photographies aériennes",
+        "crossOrigin": "anonymous",
+        "queryFormat": "htmlgml2",
+        "queryHtmlTarget": "iframe",
+        "queryFormatAsWms": true,
+        "type": "wms",
+        "optionsFromCapabilities": true,
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi",
+        "params": {
+          "layers": "nord_photo_oblique",
+          "version": "1.3.0"
         },
-        "sourceOptions": {
-          "queryable": true,
-          "queryTitle": "nometablis",
-          "type": "wms",
-          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-          "urlWfs": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-          "params": {
-            "layers": "etablissement_mtq"
-          },
-          "paramsWFS": {
-            "featureTypes": "etablissement_mtq",
-            "fieldNameGeometry": "geometry",
-            "maxFeatures": 5000,
-            "outputFormat": "geojson"
-          }
+        "urlWfs": "https://geoegl.msp.gouv.qc.ca/apis/ws/mffpecofor.fcgi",
+        "paramsWFS": {
+          "featureTypes": "nord_photo_oblique",
+          "maxFeatures": 1000,
+          "version": "2.0.0"
+        },
+        "sourceFields": [
+          { "name": "LATITUDE", "alias": "latitude" },
+          { "name": "LONGITUDE", "alias": "longitude" },
+          { "name": "NOM_PHOTO", "alias": "nom photo" }
+        ]
+      }
+    },
+    {
+      "title": "WMS with underlying WFS params",
+      "visible": true,
+      "maxResolution": 1200,
+      "workspace": {
+        "enabled": true,
+        "maxResolution": 400,
+        "queryOptions": {
+          "mapQueryOnOpenTab": true,
+          "tabQuery": true
         }
       },
+      "sourceOptions": {
+        "queryable": true,
+        "queryTitle": "nometablis",
+        "type": "wms",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "urlWfs": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "params": {
+          "layers": "etablissement_mtq"
+        },
+        "paramsWFS": {
+          "featureTypes": "etablissement_mtq",
+          "fieldNameGeometry": "geometry",
+          "maxFeatures": 5000,
+          "outputFormat": "geojson"
+        }
+      }
+    },
 
-      {
-        "title": "Vector dataSource",
-        "visible": true,
-        "sourceOptions": {
-          "queryable": true,
-          "queryTitle": "nomnavcana",
-          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
-          "type": "vector",
-          "sourceFields": [
-            { "name": "longpiste2"},
-            { "name": "idobj", "searchIndex": {"enabled": true, "tokenize": "strict"}},
-            { "name": "codeindic", "searchIndex": {"enabled": true}},
-            { "name": "nomnavcana", "searchIndex": {"enabled": true}},
-            { "name": "nbrpiste"},
-            { "name": "indicpiste"},
-            { "name": "surface"},
-            { "name": "province"},
-            { "name": "datdebappt"},
-            { "name": "datmodif"},
-            { "name": "version"},
-            { "name": "source", "searchIndex": {"enabled": true}},
-            { "name": "remarque", "searchIndex": {"enabled": true}},
-            { "name": "objectid"}
-          ]
-        }
-      },
-      {
-        "title": "Cluster dataSource",
-        "visible": false,
-        "sourceOptions": {
-          "queryable": true,
-          "queryTitle": "identificationDesTravaux",
-          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
-          "type": "cluster",
-          "distance": 50
-        }
-      },
-      {
-        "title": "WFS",
-        "visible": true,
-        "sourceOptions": {
-          "type": "wfs",
-          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-          "queryable": true,
-          "queryTitle": "desclocal",
-          "params": {
-            "featureTypes": "telephone_urg",
-            "fieldNameGeometry": "geometry",
-            "maxFeatures": 5001,
-            "outputFormat": "geojson"
+    {
+      "title": "Vector dataSource",
+      "visible": true,
+      "sourceOptions": {
+        "queryable": true,
+        "queryTitle": "nomnavcana",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=aeroport_piste&outputFormat=geojson",
+        "type": "vector",
+        "sourceFields": [
+          { "name": "longpiste2" },
+          {
+            "name": "idobj",
+            "searchIndex": { "enabled": true, "tokenize": "strict" }
           },
+          { "name": "codeindic", "searchIndex": { "enabled": true } },
+          { "name": "nomnavcana", "searchIndex": { "enabled": true } },
+          { "name": "nbrpiste" },
+          { "name": "indicpiste" },
+          { "name": "surface" },
+          { "name": "province" },
+          { "name": "datdebappt" },
+          { "name": "datmodif" },
+          { "name": "version" },
+          { "name": "source", "searchIndex": { "enabled": true } },
+          { "name": "remarque", "searchIndex": { "enabled": true } },
+          { "name": "objectid" }
+        ]
+      }
+    },
+    {
+      "title": "Cluster dataSource",
+      "visible": false,
+      "sourceOptions": {
+        "queryable": true,
+        "queryTitle": "identificationDesTravaux",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
+        "type": "cluster",
+        "distance": 50
+      }
+    },
+    {
+      "title": "WFS",
+      "visible": true,
+      "sourceOptions": {
+        "type": "wfs",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "queryable": true,
+        "queryTitle": "desclocal",
+        "params": {
+          "featureTypes": "telephone_urg",
+          "fieldNameGeometry": "geometry",
+          "maxFeatures": 5001,
+          "outputFormat": "geojson"
+        },
 
         "ogcFilters": {
           "enabled": true,
@@ -135,7 +138,7 @@
           },
           "pushButtons": {
             "groups": [
-              {"title": "Group 1 Title","name": "1","ids": ["id1","id2"]}
+              { "title": "Group 1 Title", "name": "1", "ids": ["id1", "id2"] }
             ],
             "bundles": [
               {
@@ -163,7 +166,9 @@
                 ]
               }
             ]
-        }}
+          }
         }
-      }]
-  }
+      }
+    }
+  ]
+}

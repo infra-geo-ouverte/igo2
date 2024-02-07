@@ -137,7 +137,7 @@ Exemples
                 "visible": false,
                 "sourceOptions": {
                         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                        "attributions": "© <a href='https://www.droitauteur.gouv.qc.ca/copyright.php' target='_blank'><img src='https://geoegl.msp.gouv.qc.ca/gouvouvert/public/images/quebec/gouv_qc_logo.png' width='64' height='14'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "© <a href='https://www.quebec.ca/droit-auteur' target='_blank'><img src='./assets/images/quebecPrint.gif' width='64' height='19'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "type": "xyz",
                         "crossOrigin": "anonymous"
                 }
@@ -656,7 +656,7 @@ Exemples
                    "bypassResolution": true
                 },
                 "type": "vector",
-                "url": "https://www.donneesquebec.ca/recherche/dataset/f647f5ed-a8f3-4a47-8ceb-977cbf090675/resource/68e0e20a-415d-44f5-af82-a90311784616/download/bornes-incendies.geojson"
+                "url": "https://www.donneesquebec.ca/recherche/dataset/527944ae-893d-41ac-8255-340fb1c2c83b/resource/d1b89d6a-8c31-4831-8895-95dc45120f79/download/borne-incendie.json"
                 "queryable": true,
                 "queryFormat": "geojson",
                 "queryTitle": "Le titre",
@@ -1516,6 +1516,7 @@ Source (base commune)
         Elles seront présentées dans les sections dédiées aux sources.
 
         Les sources disponible sont:
+            - `Cadastre`_
             - `Coordonnées`_
             - `iCherche`_ (Québec)
             - `iCherche Reverse`_ - par coordonnées (Québec)
@@ -1549,6 +1550,36 @@ Liens
 
     - `igo2-lib/packages/geo/src/lib/search/shared/sources/source.interfaces.ts <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/source.interfaces.ts>`__
 
+
+Cadastre
+===============
+
+    .. line-block::
+
+        Le service de recherches de lots rénovés du Québec.
+        Le résultat de la recherche est la géométrie du lot rénové.
+        ** Pour fonctionner l'application doit avoir accès au service CPTAQ (sécurité, CORS)
+
+Exemples
+
+    .. code:: json
+
+        {"cadastre": {
+            "searchUrl": "https://carto.cptaq.gouv.qc.ca/php/find_lot_v1.php?"
+        }}
+
+Propriétés
+
+    Seulement les propriétés spécifiques à ce service sont présentées.
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|
+            
+    .. csv-table::
+       :file: _tables/fr/properties/search/cadastre.csv
+       :header-rows: 1
+       :widths: 10 10 30 15
+
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
 
 Coordonnées
 ===============

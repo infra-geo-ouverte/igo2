@@ -1,13 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
 
 import { MapOverlayComponent } from './map-overlay.component';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   exports: [MapOverlayComponent],
   declarations: [MapOverlayComponent]
 })

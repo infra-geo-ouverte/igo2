@@ -1,49 +1,48 @@
 .order2 {
-    order: 2;
-    margin-right: 0.5%;
-    display: block;
-    right: 0;
-    margin-left: 140px;
-    text-align: right!important;
-    width: 100%;
+  order: 2;
+  margin-right: 0.5%;
+  display: block;
+  right: 0;
+  margin-left: 140px;
+  text-align: right !important;
+  width: 100%;
 }
 
 $footer-margin-top: 0px;
 $footer-height: 29px;
 
 .footer-right {
-    z-index: 666;
-    background: #ffffffa3;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    height: $footer-height;
+  z-index: 666;
+  background: #ffffffa3;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  height: $footer-height;
 }
 
 span.footer-text {
-    color: #095797;
-    align-self: center;
-    margin-left: 0.5rem;
+  color: #095797;
+  align-self: center;
+  margin-left: 0.5rem;
 }
 
-span.footer-text a{
-    color: #095797;
-    text-decoration: none;
+span.footer-text a {
+  color: #095797;
+  text-decoration: none;
 }
-
 
 ::ng-deep div.ol-scale-line {
-    position: fixed!important;
-    display: flex;
-    flex-direction: row;
-    margin-left: 0.5%;
-    left: 70px!important;
-    bottom: 3px!important;
+  position: fixed !important;
+  display: flex;
+  flex-direction: row;
+  margin-left: 0.5%;
+  left: 70px !important;
+  bottom: 3px !important;
 }
 
 ::ng-deep .ol-scale-line-inner {
-    border: 1px solid black;
-    color: black;
-    border-top: none;
-    order: 1;
+  border: 1px solid black;
+  color: black;
+  border-top: none;
+  order: 1;
 }

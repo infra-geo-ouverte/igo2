@@ -1,5 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+/e2e/dist
+
 # bundled locale for the demo
 /src/locale/libs_locale
 
@@ -20,7 +22,7 @@
 .settings/
 
 # IDE - VSCode
-.vscode/
+.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json

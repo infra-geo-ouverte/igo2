@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { MatDialogConfig } from '@angular/material/dialog';
 
 import { ConfigService, StorageService } from '@igo2/core';
-import { MatDialogConfig } from '@angular/material/dialog';
+import { getAppVersion } from 'src/app/app.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -26,22 +27,12 @@ export class WelcomeWindowService {
     }
 
     this.storageService.set('welcomeWindow_nbVisit', (this.nbVisit += 1));
-    this.storageService.set(
-      'version',
-      this.configService.getConfig('version.lib')
-    );
   }
 
   isVersionDifferentFromStorage(): boolean {
-    if (
-      this.storageService.get('version') &&
-      this.storageService.get('version') !==
-        this.configService.getConfig('version.lib')
-    ) {
-      return true;
-    } else {
-      return false;
-    }
+    return (
+      this.storageService.get('version') !== getAppVersion(this.configService)
+    );
   }
 
   hasWelcomeWindow(): boolean {
@@ -68,8 +59,14 @@ export class WelcomeWindowService {
       return false;
     }
 
-    if (typeof this.configService.getConfig('welcomeWindow.nbVisitToShow') !== 'undefined' ) {
-      if (this.nbVisit > this.configService.getConfig('welcomeWindow.nbVisitToShow') ) {
+    if (
+      typeof this.configService.getConfig('welcomeWindow.nbVisitToShow') !==
+      'undefined'
+    ) {
+      if (
+        this.nbVisit >
+        this.configService.getConfig('welcomeWindow.nbVisitToShow')
+      ) {
         this.storageService.set('welcomeWindow_showAgain', false);
         return false;
       }

@@ -1,0 +1,15 @@
+{
+  "uri": "keepCurrentViewFalse",
+  "title": "Le contexte impose sa vue",
+  "base": "_base",
+  "map": {
+    "view": {
+      "projection": "EPSG:3857",
+      "center": [-69.72594, 48.131546],
+      "zoom": 14,
+      "geolocate": false,
+      "maxZoomOnExtent": 19,
+      "keepCurrentView": false
+    }
+  }
+}

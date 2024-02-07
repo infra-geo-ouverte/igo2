@@ -1,23 +1,22 @@
 {
-    "uri": "geolocation",
-    "base": "_base",
-    "map": {
-      "view": {
-        "projection": "EPSG:3857",
-        "center": [-71.938087, 48.446975],
-        "zoom": 6,
-        "maxZoom": 19,
-        "maxZoomOnExtent": 17,
-        "geolocate": true,
-        "alwaysTracking": true,
-  
-        "buffer": {
-          "bufferRadius": 100,
-          "bufferStroke": [0,0,255,1],
-          "bufferFill": [0,0,255,0.15],
-          "showBufferRadius": true
-        }
+  "uri": "geolocation",
+  "base": "_base",
+  "map": {
+    "view": {
+      "projection": "EPSG:3857",
+      "center": [-71.938087, 48.446975],
+      "zoom": 6,
+      "maxZoom": 19,
+      "maxZoomOnExtent": 17,
+      "geolocate": true,
+      "alwaysTracking": true,
+
+      "buffer": {
+        "bufferRadius": 100,
+        "bufferStroke": [0, 0, 255, 1],
+        "bufferFill": [0, 0, 255, 0.15],
+        "showBufferRadius": true
       }
     }
   }
-  
+}

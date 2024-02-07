@@ -52,6 +52,11 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 ---
 
 ## Téléchargement
+
+- [Version v16.3.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.3.0/igo2.zip)
+- [Version v16.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.2.0/igo2.zip)
+- [Version v16.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.1.0/igo2.zip)
+- [Version 1.15.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.4/igo2.zip)
 - [Version 1.15.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.3/igo2.zip)
 - [Version 1.15.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.2/igo2.zip)
 - [Version 1.14.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.14.2/igo2.zip)
@@ -76,7 +81,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 2. Décompresser le fichier télécharger
 3. Déploier l'application sur un serveur Web (NGinx, Apache HTTPD, IIS ...)
 4. Servir le fichier index.html
-5. Personnaliser le contenu cartogtaphique (contexts.json et _default.json ou ...)
+5. Personnaliser le contenu cartogtaphique (contexts.json et \_default.json ou ...)
 
 ## Installation et démarrage (pour développeurs)
 
@@ -84,7 +89,8 @@ Requis:
 
 | IGO2 version | Node version |
 | ------------ | ------------ |
-| > 1.15.x      | >= 16.19.0  |
+| >= 16.x      | >= 18.10.0   |
+| > 1.15.x     | >= 16.19.0   |
 | > 1.5.x      | >= 12, <= 16 |
 | < 1.5.x      | >= 8, <= 11  |
 | 0.x.x        | >= 6, <= 10  |
@@ -98,7 +104,7 @@ $ npm install
 
 # Surveiller les fichiers et lancer une instance pour le développement
 # Il est possible que vos changements de librairies ne soient pas appliqués.
-# Webpack (suite au npm start) ne surveille plus les changement de node_modules. Il observe seulement la version des dépendances. De ce fait, les 
+# Webpack (suite au npm start) ne surveille plus les changement de node_modules. Il observe seulement la version des dépendances. De ce fait, les
 # changements de code ne sont pas recompilées.
 # Pour corriger ceci, désactiver la cache avec la variable d'environnement NG_BUILD_CACHE = "false"
 $ npm start
@@ -113,6 +119,9 @@ $ npm run serve.prod
 $ npm run doc
 # Ouvrir un navigateur http://localhost:4220/
 ```
+
+Si vous voulez développer en même temps ce projet ainsi que la librairie associée, référez vous à la procédure suivante:  
+https://github.com/infra-geo-ouverte/igo2-lib#for-developers
 
 ## Tests
 
@@ -141,6 +150,11 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 ---
 
 ## Download
+
+- [Version v16.3.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.3.0/igo2.zip)
+- [Version v16.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.2.0/igo2.zip)
+- [Version v16.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.1.0/igo2.zip)
+- [Version 1.15.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.4/igo2.zip)
 - [Version 1.15.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.3/igo2.zip)
 - [Version 1.15.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.2/igo2.zip)
 - [Version 1.14.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.14.2/igo2.zip)
@@ -159,21 +173,23 @@ Nous sommes bien heureux que vous pensiez contribuer à IGO! Avant de le faire, 
 - [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
 - [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
 
-
 ## Installation (for server deployment)
 
 1. [Download](#download) the desired version.
 2. Unzip the download file
 3. Deploy the application on a web server (NGinx, Apache HTTPD, IIS...)
 4. Serve the index.html file
-5. Customize map content (contexts.json and _default.json)
+5. Customize map content (contexts.json and \_default.json)
+
 ## Installation (for developpers)
 
 Require:
 
 | IGO2 version | Node version |
 | ------------ | ------------ |
-| > 1.5.x      | >= 12, <= 14 |
+| >= 16.x      | >= 18.10.0   |
+| > 1.15.x     | >= 16.19.0   |
+| > 1.5.x      | >= 12, <= 16 |
 | < 1.5.x      | >= 8, <= 11  |
 | 0.x.x        | >= 6, <= 10  |
 
@@ -200,6 +216,9 @@ $ npm run serve.prod
 # Doc API generation
 $ npm run doc
 # Open your browser at http://localhost:4220/
+
+If you want to develop this project and the associated library at the same time, refer to the following procedure:
+https://github.com/infra-geo-ouverte/igo2-lib#for-developers
 
 ```
 

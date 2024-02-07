@@ -1,13 +1,13 @@
-import './portal.variables.scss';
-
 import {
-  trigger,
+  AnimationTriggerMetadata,
+  animate,
   state,
   style,
   transition,
-  animate,
-  AnimationTriggerMetadata
+  trigger
 } from '@angular/animations';
+
+import './portal.variables.scss';
 
 export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
   return [
@@ -15,15 +15,15 @@ export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
       state(
         'full',
         style({
-          left: '5px',
+          left: '4px',
           'max-width': '100%'
         })
       ),
       state(
         'notTriggered',
         style({
-          left: '5px',
-          bottom: '5px',
+          left: '4px',
+          bottom: '4px',
           'max-width': '100%'
         })
       ),
@@ -36,22 +36,22 @@ export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
       state(
         'mobile',
         style({
-          left: 'calc(100% - 40px)',
+          left: 'calc(100% - 40px)'
         })
       ),
       state(
         'reduced',
         style({
-          left: '405px',
-          'max-width': 'calc(100% - 405px)'
+          left: '404px',
+          'max-width': 'calc(100% - 404px)'
         })
       ),
       state(
         'reducedNotTriggered',
         style({
-          left: '405px',
-          bottom: '5px',
-          'max-width': 'calc(100% - 405px)'
+          left: '404px',
+          bottom: '4px',
+          'max-width': 'calc(100% - 404px)'
         })
       ),
       transition('* => *', animate('100ms'))
@@ -66,7 +66,7 @@ export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
       state(
         'false',
         style({
-          bottom: '5px'
+          bottom: '4px'
         })
       )
     ])
@@ -121,13 +121,13 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
         style({
           left: 'calc(40% + 160px)'
         })
-    ),
+      ),
       transition('fullStandard => fullOffsetX', animate('200ms')),
       transition('fullOffsetX => fullStandard', animate('200ms')),
       transition('standard => standardOffsetX', animate('200ms')),
       transition('standardOffsetX => standard', animate('200ms')),
       transition('htmlDisplay => htmlDisplayOffsetX', animate('200ms')),
-      transition('htmlDisplayOffsetX => htmlDisplay', animate('200ms')),
+      transition('htmlDisplayOffsetX => htmlDisplay', animate('200ms'))
       // transition('standard => htmlDisplay', animate('200ms')),
       // transition('htmlDisplay => standard', animate('200ms')),
     ]),
@@ -141,14 +141,14 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
       state(
         'expansionAndToastOpened',
         style({
-          bottom: '285px',
+          bottom: '284px',
           zIndex: '999'
         })
       ),
       state(
         'expansionAndToastClosed',
         style({
-          bottom: '285px',
+          bottom: '284px',
           zIndex: '5'
         })
       ),
@@ -166,12 +166,24 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
           zIndex: '5'
         })
       ),
-    transition('noExpansion => noExpansion', animate('10ms')),
-    transition('expansionAndToastOpened => expansionAndToastOpened', animate('200ms')),
-    transition('expansionAndToastClosed => expansionAndToastClosed', animate('200ms')),
-    transition('expansionMaximizedAndToastOpened => expansionMaximizedAndToastOpened', animate('200ms')),
-    transition('expansionMaximizedAndToastClosed => expansionMaximizedAndToastClosed', animate('200ms')),
-       ])
+      transition('noExpansion => noExpansion', animate('10ms')),
+      transition(
+        'expansionAndToastOpened => expansionAndToastOpened',
+        animate('200ms')
+      ),
+      transition(
+        'expansionAndToastClosed => expansionAndToastClosed',
+        animate('200ms')
+      ),
+      transition(
+        'expansionMaximizedAndToastOpened => expansionMaximizedAndToastOpened',
+        animate('200ms')
+      ),
+      transition(
+        'expansionMaximizedAndToastClosed => expansionMaximizedAndToastClosed',
+        animate('200ms')
+      )
+    ])
   ];
 }
 
@@ -182,19 +194,19 @@ export function controlsAnimations(): AnimationTriggerMetadata[] {
       state(
         'firstRowFromBottom',
         style({
-          bottom: '5px'
+          bottom: '4px'
         })
       ),
       state(
         'firstRowFromBottom-expanded',
         style({
-          bottom: '285px'
+          bottom: '288px'
         })
       ),
       state(
         'firstRowFromBottom-expanded-maximized',
         style({
-          bottom: '500px'
+          bottom: '504px'
         })
       ),
       state(
@@ -212,19 +224,19 @@ export function controlsAnimations(): AnimationTriggerMetadata[] {
       state(
         '',
         style({
-          bottom: 'calc(285px)'
+          bottom: '284px'
         })
       ),
       state(
         'secondRowFromBottom-expanded',
         style({
-          bottom: 'calc(285px + 52px)'
+          bottom: 'calc(284px + 52px)'
         })
       ),
       state(
         'thirdRowFromBottom-expanded',
         style({
-          bottom: 'calc(285px + 104px)'
+          bottom: 'calc(284px + 104px)'
         })
       ),
       transition('* => *', animate('200ms'))
@@ -252,7 +264,7 @@ export function controlSlideX(): AnimationTriggerMetadata {
     state(
       'right',
       style({
-        left: '465px'
+        left: '464px'
       })
     ),
     transition('* => *', animate('200ms'))
@@ -272,15 +284,15 @@ export function controlSlideY(): AnimationTriggerMetadata {
     state(
       'firstRowFromBottom-expanded',
       style({
-        bottom: '285px',
-        'margin-left': '-55px'
+        bottom: '284px',
+        'margin-left': '-54px'
       })
     ),
     state(
       'firstRowFromBottom-expanded-maximized',
       style({
         bottom: '500px', // workspace full size
-        'margin-left': '-55px'
+        'margin-left': '-54px'
       })
     ),
     transition('* => *', animate('200ms'))

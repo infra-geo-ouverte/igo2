@@ -1,105 +1,107 @@
 {
-    "uri": "legends",
-    "title": "Exemples de légendes",
-    "base": "_base",
-    "layers": [{
-        "id": 1,
-        "title": "WMS Example 1",
-        "sourceOptions": {
-          "type": "wms",
-          "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
-          "queryable": true,
-          "queryTitle": "no_seq_observation",
-          "params": {
-            "layers": "vg_observation_v_inondation_embacle_wmst",
-            "version": "1.3.0"
-          }
+  "uri": "legends",
+  "title": "Exemples de légendes",
+  "base": "_base",
+  "layers": [
+    {
+      "id": 1,
+      "title": "WMS Example 1",
+      "sourceOptions": {
+        "type": "wms",
+        "url": "https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi",
+        "queryable": true,
+        "queryTitle": "no_seq_observation",
+        "params": {
+          "layers": "vg_observation_v_inondation_embacle_wmst",
+          "version": "1.3.0"
         }
+      }
     },
     {
-        "id": 2,
-        "title": "WMS Example 2",
-        "sourceOptions": {
-          "type": "wms",
-          "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-          "urlWfs": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-          "queryable": true,
-          "params": {
-            "layers": "radars_photos"
-            }
+      "id": 2,
+      "title": "WMS Example 2",
+      "sourceOptions": {
+        "type": "wms",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "urlWfs": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "queryable": true,
+        "params": {
+          "layers": "radars_photos"
         }
+      }
     },
     {
-        "id": 3,
-        "title": "ArcGIS REST Example 1 (Legend image)",
-        "sourceOptions": {
-            "type": "arcgisrest",
-            "layer": "0",
-            "queryable": true,
-            "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/arcgis/rest/services/2021_CKQ_GLOBAL/FeatureServer"
-        }
+      "id": 3,
+      "title": "ArcGIS REST Example 1 (Legend image)",
+      "sourceOptions": {
+        "type": "arcgisrest",
+        "layer": "0",
+        "queryable": true,
+        "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/arcgis/rest/services/2021_CKQ_GLOBAL/FeatureServer"
+      }
     },
     {
-        "id": 4,
-        "title": "ArcGIS REST Example 2 (Legend SVG (Dashed line))",
-        "sourceOptions": {
-            "type": "arcgisrest",
-            "layer": "18",
-            "queryable": true,
-            "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/arcgis/rest/services/2021_CKQ_GLOBAL/FeatureServer"
-        }
+      "id": 4,
+      "title": "ArcGIS REST Example 2 (Legend SVG (Dashed line))",
+      "sourceOptions": {
+        "type": "arcgisrest",
+        "layer": "18",
+        "queryable": true,
+        "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/arcgis/rest/services/2021_CKQ_GLOBAL/FeatureServer"
+      }
     },
     {
-        "id": 5,
-        "title": "ArcGIS REST Example 3 (Legend SVG (Unique values))",
-        "sourceOptions": {
-            "type": "arcgisrest",
-            "layer": "16",
-            "queryable": true,
-            "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/arcgis/rest/services/2021_CKQ_GLOBAL/FeatureServer"
-        }
+      "id": 5,
+      "title": "ArcGIS REST Example 3 (Legend SVG (Unique values))",
+      "sourceOptions": {
+        "type": "arcgisrest",
+        "layer": "16",
+        "queryable": true,
+        "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/arcgis/rest/services/2021_CKQ_GLOBAL/FeatureServer"
+      }
     },
     {
-        "id": 6,
-        "title": "ArcGIS REST Example 4 (Legend SVG (Simple line))",
-        "sourceOptions": {
-            "type": "arcgisrest",
-            "layer": "22",
-            "queryable": true,
-            "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/arcgis/rest/services/2021_CKQ_GLOBAL/FeatureServer"
-        }
+      "id": 6,
+      "title": "ArcGIS REST Example 4 (Legend SVG (Simple line))",
+      "sourceOptions": {
+        "type": "arcgisrest",
+        "layer": "22",
+        "queryable": true,
+        "url": "https://services8.arcgis.com/DxiA7PucIZzprCzK/arcgis/rest/services/2021_CKQ_GLOBAL/FeatureServer"
+      }
     },
     {
-        "id": 8,
-        "title": "Image ArcGIS REST Example 1",
-        "sourceOptions": {
-            "type": "imagearcgisrest",
-            "queryFormat": "esrijson",
-            "layer": "2",
-            "queryable": true,
-            "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer"
-        }
+      "id": 8,
+      "title": "Image ArcGIS REST Example 1",
+      "sourceOptions": {
+        "type": "imagearcgisrest",
+        "queryFormat": "esrijson",
+        "layer": "2",
+        "queryable": true,
+        "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer"
+      }
     },
     {
-        "id": 9,
-        "title": "Image ArcGIS REST Example 2",
-        "sourceOptions": {
-            "type": "imagearcgisrest",
-            "queryFormat": "esrijson",
-            "layer": "1",
-            "queryable": true,
-            "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer"
-        }
+      "id": 9,
+      "title": "Image ArcGIS REST Example 2",
+      "sourceOptions": {
+        "type": "imagearcgisrest",
+        "queryFormat": "esrijson",
+        "layer": "1",
+        "queryable": true,
+        "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer"
+      }
     },
     {
-        "id": 10,
-        "title": "Image ArcGIS REST Example 3",
-        "sourceOptions": {
-            "type": "imagearcgisrest",
-            "queryFormat": "esrijson",
-            "layer": "0",
-            "queryable": true,
-            "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer"
-        }
-    }]
+      "id": 10,
+      "title": "Image ArcGIS REST Example 3",
+      "sourceOptions": {
+        "type": "imagearcgisrest",
+        "queryFormat": "esrijson",
+        "layer": "0",
+        "queryable": true,
+        "url": "https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer"
+      }
+    }
+  ]
 }

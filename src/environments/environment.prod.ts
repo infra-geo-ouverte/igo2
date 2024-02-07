@@ -1,41 +1,6 @@
-import { LanguageOptions } from '@igo2/core';
-import {
-  SearchSourceOptions,
-  ImportExportServiceOptions,
-  OptionsApiOptions,
-  Projection,
-  SpatialFilterOptions,
-  CommonVectorStyleOptions
-} from '@igo2/geo';
+import { AppEnvironmentOptions } from './environnement.interface';
 
-import { AppOptions, InteractiveTourConfigOptions } from './environnement.interface';
-
-export interface Environment {
-  production: boolean;
-  igo: {
-    app: AppOptions;
-    importExport?: ImportExportServiceOptions;
-    language?: LanguageOptions;
-    searchSources?: { [key: string]: SearchSourceOptions };
-    optionsApi?: OptionsApiOptions;
-    projections?: Projection[];
-    spatialFilter?: SpatialFilterOptions;
-    interactiveTour?: InteractiveTourConfigOptions;
-    depot?: { url: string; trainingGuides?: string[]; };
-    queryOverlayStyle?: {
-      base?: CommonVectorStyleOptions,
-      selection?: CommonVectorStyleOptions,
-      focus?: CommonVectorStyleOptions
-    };
-    searchOverlayStyle?: {
-      base?: CommonVectorStyleOptions,
-      selection?: CommonVectorStyleOptions,
-      focus?: CommonVectorStyleOptions
-    };
-  };
-}
-
-export const environment: Environment = {
+export const environment: AppEnvironmentOptions = {
   production: true,
   igo: {
     app: {
@@ -45,7 +10,7 @@ export const environment: Environment = {
         promote: false
       },
       pwa: {
-        enabled: false,
+        enabled: false
       }
     },
     importExport: {
@@ -87,6 +52,9 @@ export const environment: Environment = {
         params: {
           limit: '5'
         }
+      },
+      cadastre: {
+        available: false
       }
     },
     depot: {
@@ -102,16 +70,14 @@ export const environment: Environment = {
       {
         code: 'EPSG:32198',
         alias: 'Quebec Lambert',
-        def:
-          '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 \
+        def: '+proj=lcc +lat_1=60 +lat_2=46 +lat_0=44 +lon_0=-68.5 +x_0=0 +y_0=0 \
           +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
         extent: [-799574, 45802, 891595.4, 1849567.5]
       },
       {
         code: 'EPSG:3798',
         alias: 'MTQ Lambert',
-        def:
-          '+proj=lcc +lat_1=50 +lat_2=46 +lat_0=44 +lon_0=-70 +x_0=800000 +y_0=0 \
+        def: '+proj=lcc +lat_1=50 +lat_2=46 +lat_0=44 +lon_0=-70 +x_0=800000 +y_0=0 \
           +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
         extent: [31796.5834, 158846.2231, 1813323.4284, 2141241.0978]
       }
@@ -133,7 +99,7 @@ export const environment: Environment = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#DFF7FF', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -143,7 +109,7 @@ export const environment: Environment = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#00A1DE', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }
@@ -165,7 +131,7 @@ export const environment: Environment = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#DFF7FF', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -175,7 +141,7 @@ export const environment: Environment = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#00A1DE', // line and poly
+        strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }
