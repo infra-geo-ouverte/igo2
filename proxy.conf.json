@@ -12,6 +12,11 @@
     "secure": false,
     "changeOrigin": true
   },
+  "/igo/modules/": {
+    "target": "https://pregeoegl.msp.gouv.qc.ca",
+    "secure": false,
+    "changeOrigin": true
+  },
   "/station_details_readings_api": {
     "target": "https://inedit-ro.devgeo.msp.gouv.qc.ca",
     "secure": false,
