@@ -25,7 +25,7 @@
     "changeOrigin": true
   },
   "/igo/modules/": {
-    "target": "https://pregeoegl.msp.gouv.qc.ca",
+    "target": "https://testgeoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   }
