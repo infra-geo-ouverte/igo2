@@ -23,5 +23,10 @@
     "target": "https://ws.mapserver.transports.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
+  },
+  "/igo/modules/": {
+    "target": "https://pregeoegl.msp.gouv.qc.ca",
+    "secure": false,
+    "changeOrigin": true
   }
 }
