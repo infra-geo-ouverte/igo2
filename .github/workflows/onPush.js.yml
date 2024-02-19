@@ -17,11 +17,15 @@ jobs:
     steps:
     - name: The branch or tag ref that triggered the workflow run.
       run: echo ${GITHUB_REF#refs/*/}
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    
+    - uses: actions/checkout@v4
+    - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install @angular/cli
-    - run: npm run lint
-    - run: npm run e2e
+        node-version: '20.x'
+      
+    - name: Install Angular cli
+      run: npm install @angular/cli
+
+    - name: Check quality
+      run: npm run lint && npm run e2e
