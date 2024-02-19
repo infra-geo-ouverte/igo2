@@ -8,7 +8,7 @@
   },
   "license": "LiLiQ-R",
   "engines": {
-    "node": ">=18.10.0"
+    "node": ">=18.13.0"
   },
   "scripts": {
     "ng": "ng",
@@ -55,13 +55,13 @@
     "@angular/platform-browser-dynamic": "^17.0.7",
     "@angular/router": "^17.0.7",
     "@angular/service-worker": "^17.0.7",
-    "@igo2/auth": "*",
-    "@igo2/common": "*",
-    "@igo2/context": "*",
-    "@igo2/core": "*",
-    "@igo2/geo": "*",
-    "@igo2/integration": "*",
-    "@igo2/utils": "*",
+    "@igo2/auth": "^17.0.0-next.0",
+    "@igo2/common": "^17.0.0-next.0",
+    "@igo2/context": "^17.0.0-next.0",
+    "@igo2/core": "^17.0.0-next.0",
+    "@igo2/geo": "^17.0.0-next.0",
+    "@igo2/integration": "^17.0.0-next.0",
+    "@igo2/utils": "^17.0.0-next.0",
     "core-js": "^3.32.2",
     "hammerjs": "^2.0.8",
     "ol": "^7.5.2",
