@@ -1,21 +1,32 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgClass, NgIf } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { AuthOptions } from '@igo2/auth';
+import { AuthFormComponent, AuthOptions } from '@igo2/auth';
+import { SpinnerComponent, StopPropagationDirective } from '@igo2/common';
 import { ConfigService, LanguageService, MessageService } from '@igo2/core';
-import { AnalyticsListenerService, AppOptions } from '@igo2/integration';
+import { AppOptions } from '@igo2/integration';
 import { DomUtils, userAgent } from '@igo2/utils';
 
 import { delay, first } from 'rxjs';
 
+import { PortalComponent } from './pages/portal/portal.component';
 import { PwaService } from './services/pwa.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [
+    SpinnerComponent,
+    StopPropagationDirective,
+    NgIf,
+    AuthFormComponent,
+    PortalComponent,
+    NgClass
+  ]
 })
 export class AppComponent implements OnInit {
   public authConfig: AuthOptions;
@@ -27,7 +38,6 @@ export class AppComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document,
     protected languageService: LanguageService,
     private configService: ConfigService,
-    private analyticsListenerService: AnalyticsListenerService,
     private titleService: Title,
     private metaService: Meta,
     private messageService: MessageService,
@@ -38,8 +48,6 @@ export class AppComponent implements OnInit {
 
     this.readTitleConfig();
     this.readDescriptionConfig();
-
-    this.analyticsListenerService.listen();
 
     this.detectOldBrowser();
 

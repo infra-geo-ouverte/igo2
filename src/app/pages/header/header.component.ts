@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ConfigService, LanguageService } from '@igo2/core';
+
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  standalone: true,
+  imports: [MatToolbarModule, TranslateModule]
 })
 export class HeaderComponent {
   public headerLogo: string;

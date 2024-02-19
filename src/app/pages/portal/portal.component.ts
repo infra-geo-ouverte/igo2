@@ -1,3 +1,4 @@
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {
   ChangeDetectorRef,
@@ -7,28 +8,44 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialog,
   MatDialogConfig,
+  MatDialogModule,
   MatDialogRef
 } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { AuthService } from '@igo2/auth';
 import {
   ActionStore,
+  ActionbarComponent,
   ActionbarMode,
+  BackdropComponent,
+  ContextMenuDirective,
+  ENTITY_DIRECTIVES,
   EntityRecord,
   EntityStore,
   EntityTablePaginatorOptions,
+  LongPressDirective,
   Tool,
   Toolbox,
+  WORKSPACE_DIRECTIVES,
   Widget,
   Workspace,
   WorkspaceStore
 } from '@igo2/common';
-import { DetailedContext } from '@igo2/context';
+import {
+  DetailedContext,
+  LayerContextDirective,
+  MapContextDirective,
+  UserButtonComponent
+} from '@igo2/context';
 import {
   ConfigService,
   LanguageService,
@@ -42,6 +59,7 @@ import {
   CapabilitiesService,
   ConfigFileToGeoDBService,
   DataSourceService,
+  DropGeoFileDirective,
   EditionWorkspace,
   EditionWorkspaceService,
   FEATURE,
@@ -49,19 +67,25 @@ import {
   FeatureMotion,
   FeatureWorkspace,
   GoogleLinks,
+  IgoGeoWorkspaceModule,
   IgoMap,
   ImageLayer,
   ImportService,
   LayerService,
+  MAP_DIRECTIVES,
   MapExtent,
+  QueryDirective,
   QuerySearchSource,
   QueryService,
   Research,
+  SearchBarComponent,
+  SearchPointerSummaryDirective,
   SearchResult,
   SearchSource,
   SearchSourceService,
   VectorLayer,
   WfsWorkspace,
+  WorkspaceUpdatorDirective,
   addStopToStore,
   computeOlFeaturesExtent,
   featureFromOl,
@@ -74,6 +98,7 @@ import {
   sourceCanSearch
 } from '@igo2/geo';
 import {
+  AnalyticsListenerService,
   ContextState,
   DirectionState,
   MapState,
@@ -90,11 +115,15 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 import * as olProj from 'ol/proj';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Subscription, combineLatest, of } from 'rxjs';
 import { debounceTime, first, pairwise, skipWhile, take } from 'rxjs/operators';
 import { getAppVersion } from 'src/app/app.utils';
 import { EnvironmentOptions } from 'src/environments/environnement.interface';
 
+import { ExpansionPanelButtonComponent } from './expansion-panel/expansion-panel-button/expansion-panel-button.component';
+import { ExpansionPanelComponent } from './expansion-panel/expansion-panel.component';
+import { MapOverlayComponent } from './map-overlay/map-overlay.component';
 import {
   controlSlideX,
   controlSlideY,
@@ -104,6 +133,9 @@ import {
   mapSlideY,
   toastPanelAnimation
 } from './portal.animation';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { ToastPanelForExpansionComponent } from './toast-panel-for-expansion/toast-panel-for-expansion.component';
+import { ToastPanelComponent } from './toast-panel/toast-panel.component';
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 
@@ -119,6 +151,40 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     controlSlideY(),
     mapSlideX(),
     mapSlideY()
+  ],
+  standalone: true,
+  imports: [
+    ActionbarComponent,
+    SidenavComponent,
+    AsyncPipe,
+    BackdropComponent,
+    ContextMenuDirective,
+    DropGeoFileDirective,
+    ENTITY_DIRECTIVES,
+    ExpansionPanelButtonComponent,
+    ExpansionPanelComponent,
+    LayerContextDirective,
+    LongPressDirective,
+    MatDialogModule,
+    IgoGeoWorkspaceModule,
+    MAP_DIRECTIVES,
+    MapContextDirective,
+    MapOverlayComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    NgClass,
+    NgIf,
+    QueryDirective,
+    SearchBarComponent,
+    SearchPointerSummaryDirective,
+    ToastPanelComponent,
+    ToastPanelForExpansionComponent,
+    TranslateModule,
+    UserButtonComponent,
+    WORKSPACE_DIRECTIVES,
+    WorkspaceUpdatorDirective
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
@@ -307,6 +373,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    private analyticsListenerService: AnalyticsListenerService,
     private route: ActivatedRoute,
     public workspaceState: WorkspaceState,
     public authService: AuthService,
@@ -334,6 +401,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private directionState: DirectionState,
     private configFileToGeoDBService: ConfigFileToGeoDBService
   ) {
+    this.analyticsListenerService.listen();
     this.handleAppConfigs();
     this.storageService.set('version', getAppVersion(this.configService));
     this.fullExtent = this.storageService.get('fullExtent') as boolean;

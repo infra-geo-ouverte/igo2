@@ -9,19 +9,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: npm install conventional-changelog-cli@4.1.0
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Install conventional-changelog-cli
         run: npm install conventional-changelog-cli@4.1.0
+
       - name: Generate Changelog-current
         run: npm run changelog-current |  grep -v "^>" | sed '/^$/d' > ${{ github.workspace }}-CHANGELOG.txt
+
       - name: Build production
         run: npm run build.prod
+
       - name: Install zip
         uses: montudor/action-zip@v1
+
       - name: Zip output
         run: zip -qq -r igo2.zip *
         working-directory: dist/igo2
+        
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
