@@ -1,9 +1,21 @@
 {
-  "directionsSources": {
-    "osrm": {
-      "url": "/services/itineraire/route/v1/driving/"
+  "directionsSources": [
+    {
+      "osrm": {
+        "name": "OSRM Québec (Public)",
+        "type": "public",
+        "url": "/apis/itineraire/route/v1/driving/"
+      }
+    },
+    {
+      "osrm": {
+        "name": "OSRM Québec (Partenaires)",
+        "type": "private",
+        "url": "/apis/itineraire/route/v1/forestier/",
+        "userVerifUrl": "/apis/igo2/user/igo"
+      }
     }
-  },
+  ],
   "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
   "header": {
