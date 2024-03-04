@@ -836,22 +836,36 @@ Exemples
 .. _igoroutingsource:
 
 ***************
-RoutingSource
+DirectionsSources
 ***************
 
     .. line-block::
 
-        Permet de définir la source serveur utilisée pour la création d'itinéraires. Actuellement, le serveur utilisé est OSRM.
+        Permet de définir une ou plusieurs sources utilisées pour la création d'itinéraires. Le service utilisée par IGO2 est OSRM.
+        
+        La configuration peut contenir, pour le moment, jusqu'à deux sources, une publique ('public') et une privée ('private').
 
 Exemples
 
         .. code:: json
 
-            "routingSources": {
-                "osrm": {
-                    "enabled": true,
-                    "url": "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/"
+            "directionsSources": [
+                {
+                    "osrm": {
+                        "name": "OSRM Québec (Public)",
+                        "type": "public",
+                        "url": "/apis/itineraire/route/v1/driving/"
+                    }
+                },
+                {
+                    "osrm": {
+                        "name": "OSRM Québec (Partenaires)",
+                        "type": "private",
+                        "url": "/apis/itineraire/route/v1/forestier/",
+                        "userVerifUrl": "/apis/igo2/user/igo"
+                    }
                 }
+            ]
 
 Propriétés
 
