@@ -12,7 +12,8 @@ import {
   provideILayerSearchSource,
   provideNominatimSearchSource,
   provideOptionsApi,
-  provideOsrmDirectionsSource,
+  providePublicOsrmDirectionsSource,
+  providePrivateOsrmDirectionsSource,
   provideStoredQueriesSearchSource,
   provideStyleListOptions,
   provideWorkspaceSearchSource
@@ -39,7 +40,8 @@ import { PortalComponent } from './portal.component';
     provideCoordinatesReverseSearchSource(),
     provideILayerSearchSource(),
     provideStoredQueriesSearchSource(),
-    provideOsrmDirectionsSource(),
+    providePublicOsrmDirectionsSource(),
+    providePrivateOsrmDirectionsSource(),
     provideOptionsApi(),
     provideCadastreSearchSource(),
     provideStyleListOptions({
