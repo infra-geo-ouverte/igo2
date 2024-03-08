@@ -16,7 +16,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { IgoAuthModule } from '@igo2/auth';
+import { IgoAuthFormModule } from '@igo2/auth/form';
 import { IgoCoreModule } from '@igo2/core';
 import { ConfigService, provideConfigOptions } from '@igo2/core/config';
 import { provideRootTranslation } from '@igo2/core/language';
@@ -48,7 +48,7 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       BrowserModule,
       IgoCoreModule.forRoot(),
-      IgoAuthModule.forRoot(),
+      IgoAuthFormModule.forRoot(),
       IgoMessageModule,
       PortalModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
