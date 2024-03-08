@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { ConfigService, LanguageService } from '@igo2/core';
+import { ConfigService } from '@igo2/core/config';
+import { LanguageService } from '@igo2/core/language';
 
 import { TranslateModule } from '@ngx-translate/core';
 
