@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { IgoGestureModule } from '@igo2/core';
+import { IgoGestureModule } from '@igo2/core/gesture';
 import {
   IgoDirectionsModule,
   IgoQueryModule,

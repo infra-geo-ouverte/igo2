@@ -1,4 +1,4 @@
-import { ConfigService, version } from '@igo2/core';
+import { ConfigService, version } from '@igo2/core/config';
 
 export function getAppVersion(configService: ConfigService): string {
   return (

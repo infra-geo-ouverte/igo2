@@ -25,15 +25,14 @@ import {
   StopPropagationDirective,
   getEntityTitle
 } from '@igo2/common';
+import { ConfigService } from '@igo2/core/config';
+import { LanguageService } from '@igo2/core/language';
+import { Media, MediaService } from '@igo2/core/media';
 import {
-  ConfigService,
-  LanguageService,
-  Media,
-  MediaService,
   StorageScope,
   StorageService,
   StorageServiceEvent
-} from '@igo2/core';
+} from '@igo2/core/storage';
 import {
   Feature,
   FeatureDetailsComponent,
