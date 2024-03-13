@@ -841,31 +841,31 @@ DirectionsSources
 
     .. line-block::
 
-        Permet de définir une ou plusieurs sources utilisées pour la création d'itinéraires. Le service utilisée par IGO2 est OSRM.
+        Permet de définir une ou plusieurs profils utilisés pour la création d'itinéraires. Le service utilisé par IGO2 est OSRM.
         
-        La configuration peut contenir, pour le moment, jusqu'à deux sources, une publique ('public') et une privée ('private').
+        La configuration peut contenir, pour le moment, jusqu'à deux profils.
 
 Exemples
 
         .. code:: json
 
-            "directionsSources": [
-                {
-                    "osrm": {
-                        "name": "OSRM Québec (Public)",
-                        "type": "public",
-                        "url": "/apis/itineraire/route/v1/driving/"
-                    }
-                },
-                {
-                    "osrm": {
-                        "name": "OSRM Québec (Partenaires)",
-                        "type": "private",
-                        "url": "/apis/itineraire/route/v1/forestier/",
-                        "authorizationUrl": "/apis/igo2/user/igo"
-                    }
+            "directionsSources": {
+                "osrm": {
+                    "name": "OSRM Québec",
+                    "baseUrl": "/apis/itineraire/route/v1/",
+                    "profiles": [
+                    {
+                        "name": "driving",
+                    },
+                    {
+                        "name": "forestier",
+                        "authorization": {
+                            "url": "/apis/igo2/user/igo",
+                            "property": "hasOsrmPrivateAccess"
+                        }
+                    }]
                 }
-            ]
+            }
 
 Propriétés
 
@@ -875,7 +875,25 @@ Propriétés
        :file: _tables/fr/config/directions.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
+       
+    **BaseDirectionsSourceOptionsProfile**
 
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/directions-profile.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+    **BaseDirectionsSourceOptionsProfileAuthorization**
+    
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/directions-profile-auth.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+    
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
