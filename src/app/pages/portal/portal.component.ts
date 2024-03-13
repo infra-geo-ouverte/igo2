@@ -1451,18 +1451,15 @@ export class PortalComponent implements OnInit, OnDestroy {
           type: data.type,
           lastModified: Date.now()
         });
-        const epsgCode$: BehaviorSubject<string> = new BehaviorSubject(
-          undefined
-        );
-        detectFileEPSG({ file, epsgCode$ });
-        epsgCode$
+        detectFileEPSG({ file })
           .pipe(
             skipWhile((code) => !code),
             first(),
             concatMap((epsgCode) => {
-              const epsg = epsgCode === 'epsgNotDefined' ? undefined : epsgCode;
-              epsgCode$.next(undefined);
-              return this.importService.import(file, epsg);
+              return this.importService.import(
+                file,
+                epsgCode === 'epsgNotDefined' ? undefined : epsgCode
+              );
             })
           )
           .subscribe(
