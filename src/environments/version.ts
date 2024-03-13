@@ -3,7 +3,7 @@
  * DO NOT EDIT THE APP VERSION OR RELEASE DATE
  * IF YOU CHANGE ANY KEY NAME BE SURE TO REFLECT THIS CHANGE IN OUR AUTOMATION SCRIPT
  */
-import { Version, version as libVersion } from '@igo2/core';
+import { Version, version as libVersion } from '@igo2/core/config';
 
 export const version: Version = {
   ...libVersion,

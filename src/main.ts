@@ -16,15 +16,12 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { IgoAuthModule } from '@igo2/auth';
-import {
-  ConfigService,
-  IgoCoreModule,
-  IgoMessageModule,
-  RouteService,
-  provideConfigOptions,
-  provideRootTranslation
-} from '@igo2/core';
+import { IgoAuthFormModule } from '@igo2/auth/form';
+import { IgoCoreModule } from '@igo2/core';
+import { ConfigService, provideConfigOptions } from '@igo2/core/config';
+import { provideRootTranslation } from '@igo2/core/language';
+import { IgoMessageModule } from '@igo2/core/message';
+import { RouteService } from '@igo2/core/route';
 import { loadTheme } from '@igo2/utils';
 
 import 'hammerjs';
@@ -51,7 +48,7 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       BrowserModule,
       IgoCoreModule.forRoot(),
-      IgoAuthModule.forRoot(),
+      IgoAuthFormModule.forRoot(),
       IgoMessageModule,
       PortalModule,
       ServiceWorkerModule.register('ngsw-worker.js', {

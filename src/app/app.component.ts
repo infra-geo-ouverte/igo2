@@ -3,9 +3,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { AuthFormComponent, AuthOptions } from '@igo2/auth';
+import { AuthOptions } from '@igo2/auth';
+import { AuthFormComponent } from '@igo2/auth/form';
 import { SpinnerComponent, StopPropagationDirective } from '@igo2/common';
-import { ConfigService, LanguageService, MessageService } from '@igo2/core';
+import { ConfigService } from '@igo2/core/config';
+import { LanguageService } from '@igo2/core/language';
+import { MessageService } from '@igo2/core/message';
 import { AppOptions } from '@igo2/integration';
 import { DomUtils, userAgent } from '@igo2/utils';
 

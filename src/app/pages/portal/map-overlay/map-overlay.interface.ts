@@ -1,4 +1,4 @@
-import { Media } from '@igo2/core';
+import { Media } from '@igo2/core/media';
 
 import { MapOverlayCssClass } from './map-overlay.enum';
 

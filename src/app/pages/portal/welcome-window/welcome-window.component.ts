@@ -10,7 +10,8 @@ import {
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { CustomHtmlComponent, IgoInteractiveTourModule } from '@igo2/common';
-import { ConfigService, LanguageService } from '@igo2/core';
+import { ConfigService } from '@igo2/core/config';
+import { LanguageService } from '@igo2/core/language';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
@@ -18,6 +19,8 @@ import { map } from 'rxjs/operators';
 import { getAppVersion } from 'src/app/app.utils';
 
 import { WelcomeWindowService } from './welcome-window.service';
+
+('@igo2/core');
 
 @Component({
   selector: 'app-welcome-window',
