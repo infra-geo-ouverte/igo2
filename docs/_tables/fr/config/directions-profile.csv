@@ -1,0 +1,4 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur par défaut
+enabled ,Boolean ,Permet d'activer un profil spécifique au lancement de l'application. | Un seul doit être activé dans les configurations. ,true | false ,Le premier profil est activé par défaut. 
+name ,String ,Nom du profil. | Le nom est ajouté à baseURL afin de créer la route finale,,
+authorization ,BaseDirectionsSourceOptionsProfileAuthorization ,Objet permettant de gérer l'accessibilité à un profil protégé. ,,
