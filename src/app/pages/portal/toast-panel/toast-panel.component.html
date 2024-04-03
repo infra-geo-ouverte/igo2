@@ -44,8 +44,8 @@
         matBadgeColor="accent"
         matBadgeSize="small"
         [matBadgeHidden]="(isSelectedResultOutOfView$ | async) !== true"
-        svgIcon="magnify-plus-outline"
-      ></mat-icon>
+        >zoom_in</mat-icon
+      >
     </button>
 
     <button
@@ -64,9 +64,8 @@
       [color]="(potententialLayerisAdded$ | async) ? 'warn' : ''"
       (click)="handleLayer()"
     >
-      <mat-icon
-        [svgIcon]="(potententialLayerisAdded$ | async) ? 'delete' : 'plus'"
-      >
+      <mat-icon>
+        {{ (potententialLayerisAdded$ | async) ? 'delete' : 'add' }}
       </mat-icon>
     </button>
 
@@ -80,7 +79,7 @@
       matTooltipShowDelay="500"
       (click)="previousResult()"
     >
-      <mat-icon svgIcon="chevron-left"></mat-icon>
+      <mat-icon>chevron_left</mat-icon>
     </button>
 
     <button
@@ -95,7 +94,7 @@
       matTooltipShowDelay="500"
       (click)="nextResult()"
     >
-      <mat-icon svgIcon="chevron-right"></mat-icon>
+      <mat-icon>chevron_right</mat-icon>
     </button>
 
     <button
@@ -112,7 +111,9 @@
       "
       matTooltipShowDelay="500"
     >
-      <mat-icon svgIcon="{{ iconResizeWindows }}"></mat-icon>
+      <mat-icon>{{
+        fullExtent ? 'collapse_content' : 'expand_content'
+      }}</mat-icon>
     </button>
     <button
       mat-icon-button
@@ -120,7 +121,7 @@
       panelRightButton
       (click)="clear()"
     >
-      <mat-icon svgIcon="close"></mat-icon>
+      <mat-icon>close</mat-icon>
     </button>
 
     <div #content class="toast-content">

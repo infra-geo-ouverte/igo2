@@ -32,7 +32,10 @@ import {
   EntityRecord,
   EntityStore,
   EntityTablePaginatorOptions,
+  IconSvg,
+  IgoIconComponent,
   LongPressDirective,
+  MAGNIFY_SCAN_ICON,
   Tool,
   Toolbox,
   WORKSPACE_DIRECTIVES,
@@ -180,7 +183,8 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     TranslateModule,
     UserButtonComponent,
     WORKSPACE_DIRECTIVES,
-    WorkspaceUpdatorDirective
+    WorkspaceUpdatorDirective,
+    IgoIconComponent
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
@@ -240,6 +244,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   public homeCenter: [number, number];
   public homeZoom: number;
   isTouchScreen: boolean;
+
+  magnifyIcon: IconSvg = MAGNIFY_SCAN_ICON;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
