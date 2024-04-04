@@ -18,6 +18,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { provideAuthentification } from '@igo2/auth';
 import { withMicrosoftSupport } from '@igo2/auth/microsoft';
+import { provideIcon } from '@igo2/common';
 import { IgoCoreModule } from '@igo2/core';
 import { ConfigService, provideConfigOptions } from '@igo2/core/config';
 import { provideRootTranslation } from '@igo2/core/language';
@@ -30,7 +31,6 @@ import 'hammerjs';
 import { AppComponent } from './app/app.component';
 import { PortalModule } from './app/pages';
 import { environment } from './environments/environment';
-import { provideIcon } from '@igo2/common';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -49,7 +49,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
       BrowserModule,
-      IgoCoreModule.forRoot(),
+      IgoCoreModule,
       IgoMessageModule,
       PortalModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
