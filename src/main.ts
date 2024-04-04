@@ -16,7 +16,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { IgoAuthFormModule } from '@igo2/auth/form';
+import { provideAuthentification } from '@igo2/auth';
+import { withMicrosoftSupport } from '@igo2/auth/microsoft';
 import { IgoCoreModule } from '@igo2/core';
 import { ConfigService, provideConfigOptions } from '@igo2/core/config';
 import { provideRootTranslation } from '@igo2/core/language';
@@ -48,13 +49,16 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       BrowserModule,
       IgoCoreModule.forRoot(),
-      IgoAuthFormModule.forRoot(),
       IgoMessageModule,
       PortalModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: environment.igo.app.pwa.enabled,
         registrationStrategy: 'registerWithDelay:5000'
       })
+    ),
+    provideAuthentification(
+      withMicrosoftSupport('add'),
+      withMicrosoftSupport('b2c')
     ),
     provideRootTranslation(),
     provideHttpClient(),
