@@ -227,7 +227,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public igoSearchPointerSummaryEnabled: boolean;
   public igoReverseSearchCoordsFormatEnabled: boolean;
 
-  public toastPanelForExpansionOpened = true;
+  public toastPanelForExpansionOpened = false;
   private activeWidget$$: Subscription;
   public showToastPanelForExpansionToggle = false;
   public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
@@ -309,10 +309,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.contextState.context$?.getValue()
       ? this.contextState.context$.getValue().uri
       : undefined;
-  }
-
-  get expansionPanelBackdropShown(): boolean {
-    return this.expansionPanelExpanded && this.toastPanelForExpansionOpened;
   }
 
   get actionbarMode(): ActionbarMode {
@@ -542,10 +538,10 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.activeWidget$$ = this.workspaceState.activeWorkspaceWidget$.subscribe(
       (widget: Widget) => {
         if (widget !== undefined) {
-          this.openToastPanelForExpansion();
+          this.toastPanelForExpansionOpened = true;
           this.showToastPanelForExpansionToggle = true;
         } else {
-          this.closeToastPanelForExpansion();
+          this.toastPanelForExpansionOpened = false;
           this.showToastPanelForExpansionToggle = false;
         }
       }
@@ -743,18 +739,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   onToggleSidenavClick() {
     this.toggleSidenav();
-  }
-
-  onDeactivateWorkspaceWidget() {
-    this.closeToastPanelForExpansion();
-  }
-
-  closeToastPanelForExpansion() {
-    this.toastPanelForExpansionOpened = false;
-  }
-
-  openToastPanelForExpansion() {
-    this.toastPanelForExpansionOpened = true;
   }
 
   onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
