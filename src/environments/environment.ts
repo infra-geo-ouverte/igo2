@@ -21,7 +21,7 @@ export const environment: AppEnvironmentOptions = {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
       allowAnonymous: true,
-      trustHosts: ['geoegl.msp.gouv.qc.ca'],
+      trustHosts: ['geoegl.msp.gouv.qc.ca', 'testgeoegl.msp.gouv.qc.ca'],
       hostsByKey: [
         {
           domainRegFilters: '(https://|http://)?(.*domain.com)(.*)',
