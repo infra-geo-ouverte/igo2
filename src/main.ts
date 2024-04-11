@@ -20,8 +20,8 @@ import { provideAuthentification } from '@igo2/auth';
 import { withMicrosoftSupport } from '@igo2/auth/microsoft';
 import { provideIcon } from '@igo2/common';
 import { IgoCoreModule } from '@igo2/core';
-import { ConfigService, provideConfigOptions } from '@igo2/core/config';
-import { provideRootTranslation } from '@igo2/core/language';
+import { ConfigService, provideConfig } from '@igo2/core/config';
+import { provideTranslation } from '@igo2/core/language';
 import { IgoMessageModule } from '@igo2/core/message';
 import { RouteService } from '@igo2/core/route';
 import { loadTheme } from '@igo2/utils';
@@ -57,19 +57,19 @@ bootstrapApplication(AppComponent, {
         registrationStrategy: 'registerWithDelay:5000'
       })
     ),
+    provideHttpClient(),
+    provideAnimations(),
+    provideRouter([]),
+    provideConfig({
+      default: environment.igo,
+      path: './config/config.json'
+    }),
+    provideTranslation(),
     provideAuthentification(
       withMicrosoftSupport('add'),
       withMicrosoftSupport('b2c')
     ),
-    provideRootTranslation(),
     provideIcon(),
-    provideHttpClient(),
-    provideAnimations(),
-    provideRouter([]),
-    provideConfigOptions({
-      default: environment.igo,
-      path: './config/config.json'
-    }),
     provideTheme(),
     RouteService,
     { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: TOOLTIP_OPTIONS },
