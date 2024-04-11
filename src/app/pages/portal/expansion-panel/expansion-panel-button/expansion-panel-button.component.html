@@ -4,8 +4,7 @@
   [matTooltip]="(expanded ? 'workspace.close' : 'workspace.open') | translate"
   (click)="onToggleClick()"
 >
-  <mat-icon
-    svgIcon="launch"
-    [style.transform]="expanded ? 'rotate(180deg)' : null"
-  ></mat-icon>
+  <mat-icon [style.transform]="expanded ? 'rotate(180deg)' : null">
+    open_in_new
+  </mat-icon>
 </button>

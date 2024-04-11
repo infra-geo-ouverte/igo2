@@ -341,7 +341,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
-    this.setResizeWindowIcon();
   }
 
   private monitorResultOutOfView() {
@@ -956,16 +955,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  setResizeWindowIcon() {
-    if (this.fullExtent) {
-      this.iconResizeWindows = 'arrow-collapse';
-      // this.iconResizeWindows = 'vector-arrange-below';
-    } else {
-      this.iconResizeWindows = 'arrow-expand';
-      // this.iconResizeWindows = 'crop-square';
-    }
-  }
-
   resizeWindows() {
     this.storageService.set('fullExtent', !this.fullExtent);
 
@@ -978,11 +967,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   reduceWindow() {
     this.fullExtent = false;
-    this.setResizeWindowIcon();
   }
 
   enlargeWindows() {
     this.fullExtent = true;
-    this.setResizeWindowIcon();
   }
 }
