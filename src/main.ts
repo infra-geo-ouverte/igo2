@@ -30,6 +30,7 @@ import 'hammerjs';
 import { AppComponent } from './app/app.component';
 import { PortalModule } from './app/pages';
 import { environment } from './environments/environment';
+import { provideIcon } from '@igo2/common';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -61,6 +62,7 @@ bootstrapApplication(AppComponent, {
       withMicrosoftSupport('b2c')
     ),
     provideRootTranslation(),
+    provideIcon(),
     provideHttpClient(),
     provideAnimations(),
     provideRouter([]),
