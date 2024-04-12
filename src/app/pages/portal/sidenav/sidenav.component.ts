@@ -13,14 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import {
-  HomeButtonComponent,
-  IgoInteractiveTourModule,
-  PanelComponent,
-  Tool,
-  Toolbox,
-  ToolboxComponent
-} from '@igo2/common';
+import { HomeButtonComponent } from '@igo2/common/home-button';
+import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
+import { PanelComponent } from '@igo2/common/panel';
+import { Tool, Toolbox, ToolboxComponent } from '@igo2/common/tool';
 import { ConfigService } from '@igo2/core/config';
 import { IgoMap } from '@igo2/geo';
 import { CatalogState, ToolState } from '@igo2/integration';

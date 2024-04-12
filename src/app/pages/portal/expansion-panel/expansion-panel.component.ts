@@ -7,7 +7,7 @@ import {
   Output
 } from '@angular/core';
 
-import { BackdropComponent } from '@igo2/common';
+import { BackdropComponent } from '@igo2/common/backdrop';
 
 import { ExpansionPanelHeaderComponent } from './expansion-panel-header.component';
 import { showContent } from './expansion-panel.animations';
