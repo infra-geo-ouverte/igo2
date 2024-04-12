@@ -19,12 +19,11 @@ import {
   Action,
   ActionStore,
   ActionbarComponent,
-  ActionbarMode,
-  EntityStore,
-  PanelComponent,
-  StopPropagationDirective,
-  getEntityTitle
-} from '@igo2/common';
+  ActionbarMode
+} from '@igo2/common/action';
+import { EntityStore, getEntityTitle } from '@igo2/common/entity';
+import { PanelComponent } from '@igo2/common/panel';
+import { StopPropagationDirective } from '@igo2/common/stop-propagation';
 import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
 import { Media, MediaService } from '@igo2/core/media';
