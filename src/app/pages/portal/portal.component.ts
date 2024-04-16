@@ -100,8 +100,19 @@ import {
   handleFileImportError,
   handleFileImportSuccess,
   moveToOlFeatures,
+  provideDirection,
+  provideSearch,
   sourceCanReverseSearch,
-  sourceCanSearch
+  sourceCanSearch,
+  withCadastreSource,
+  withCoordinatesReverseSource,
+  withIChercheReverseSource,
+  withIChercheSource,
+  withILayerSource,
+  withNominatimSource,
+  withOsrmSource,
+  withStoredQueriesSource,
+  withWorkspaceSource
 } from '@igo2/geo';
 import {
   AnalyticsListenerService,
@@ -192,6 +203,20 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     WORKSPACE_DIRECTIVES,
     WorkspaceUpdatorDirective,
     IgoIconComponent
+  ],
+  providers: [
+    provideSearch([
+      withCadastreSource(),
+      withCoordinatesReverseSource(),
+      withIChercheReverseSource(),
+      withIChercheSource(),
+      withILayerSource(),
+      withNominatimSource(),
+      withStoredQueriesSource(),
+      withWorkspaceSource()
+    ]),
+    provideDirection(withOsrmSource()),
+    SearchState
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
