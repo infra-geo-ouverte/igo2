@@ -96,6 +96,7 @@ import {
   sourceCanReverseSearch,
   sourceCanSearch
 } from '@igo2/geo';
+import { NewEditionWorkspace } from '@igo2/geo';
 import {
   AnalyticsListenerService,
   ContextState,
@@ -636,26 +637,38 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   isEditionWorkspace(workspace) {
-    if (workspace instanceof EditionWorkspace) {
-      return true;
-    }
-    return false;
+    return (
+      workspace instanceof EditionWorkspace ||
+      workspace instanceof NewEditionWorkspace
+    );
   }
 
-  addFeature(workspace: EditionWorkspace) {
-    let feature = {
+  addFeature(workspace: EditionWorkspace | NewEditionWorkspace) {
+    if (workspace instanceof EditionWorkspace) {
+      let feature = {
+        type: 'Feature',
+        properties: {}
+      };
+      feature.properties = this.createFeatureProperties(workspace.layer);
+      this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
+      workspace.editFeature(feature, workspace);
+      return;
+    }
+
+    const feature = {
       type: 'Feature',
-      properties: {}
+      properties: this.createFeatureProperties(workspace.layer)
     };
-    feature.properties = this.createFeatureProperties(workspace.layer);
+
     this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
-    workspace.editFeature(feature, workspace);
+    workspace.createFeature(feature);
   }
 
   createFeatureProperties(layer: ImageLayer | VectorLayer) {
     let properties = {};
+    console.log('source fields', layer.options.sourceOptions.sourceFields);
     layer.options.sourceOptions.sourceFields.forEach((field) => {
-      if (!field.primary && field.visible) {
+      if (!field.primary) {
         properties[field.name] = '';
       }
     });
