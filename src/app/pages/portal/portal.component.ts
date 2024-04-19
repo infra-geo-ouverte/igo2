@@ -655,18 +655,12 @@ export class PortalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const feature = {
-      type: 'Feature',
-      properties: this.createFeatureProperties(workspace.layer)
-    };
-
     this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
-    workspace.createFeature(feature);
+    workspace.createFeature();
   }
 
   createFeatureProperties(layer: ImageLayer | VectorLayer) {
     let properties = {};
-    console.log('source fields', layer.options.sourceOptions.sourceFields);
     layer.options.sourceOptions.sourceFields.forEach((field) => {
       if (!field.primary) {
         properties[field.name] = '';
