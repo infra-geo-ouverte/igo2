@@ -1,6 +1,6 @@
 {
   "/ws/": {
-    "target": "https://testgeoegl.msp.gouv.qc.ca",
+    "target": "https://geodev8.sso.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },

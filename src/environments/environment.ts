@@ -41,6 +41,11 @@ export const environment: AppEnvironmentOptions = {
     catalog: {
       sources: [
         {
+          id: '1',
+          title: 'Geodev',
+          url: '/ws/all.fcgi'
+        },
+        {
           id: 'Image Arcgis Rest',
           title: 'Image Arcgis Rest',
           externalProvider: true,
@@ -213,6 +218,10 @@ export const environment: AppEnvironmentOptions = {
         }
       ]
     },
+    // context: {
+    //   url: '/apis/igo2',
+    //   defaultContextUri: '5'
+    // },
     depot: {
       url: '/apis/depot'
     },
