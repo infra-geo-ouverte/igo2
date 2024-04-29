@@ -9,10 +9,11 @@
       "sourceOptions": {
         "url": "/test/all.fcgi",
         "queryable": true,
-        "queryFormat": "htmlgml2",
+        "queryFormat": "html",
         "queryHtmlTarget": "iframe",
         "params": {
-          "layers": "points_feux_1"
+          "layers": "points_feux",
+          "version": "1.3.0"
         },
         "type": "wms"
       }
