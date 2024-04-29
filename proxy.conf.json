@@ -1,6 +1,19 @@
-{
+{  
+  "/test/": {
+  "target": "http://geodev8.sso.msp.gouv.qc.ca",
+  "secure": false,
+  "changeOrigin": true,
+  "pathRewrite": {
+    "^/test" : "/ws"
+  }
+},
   "/ws/": {
     "target": "https://geodev8.sso.msp.gouv.qc.ca",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/test/all/fcgi": {
+    "target": "https://testgeoegl.msp.gouv.qc.ca",
     "secure": false,
     "changeOrigin": true
   },
