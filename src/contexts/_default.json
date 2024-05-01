@@ -17,6 +17,22 @@
         },
         "type": "wms"
       }
+    },
+    {
+      "title": "points_feux_historique_test",
+      "baseLayer": false,
+      "visible": true,
+      "sourceOptions": {
+        "url": "/test/all.fcgi",
+        "queryable": true,
+        "queryFormat": "html",
+        "queryHtmlTarget": "iframe",
+        "params": {
+          "layers": "points_feux_historique",
+          "version": "1.3.0"
+        },
+        "type": "wms"
+      }
     }
   ]
 }
