@@ -5,17 +5,8 @@ import {
   IgoDirectionsModule,
   IgoQueryModule,
   IgoSearchModule,
-  provideCadastreSearchSource,
-  provideCoordinatesReverseSearchSource,
-  provideIChercheReverseSearchSource,
-  provideIChercheSearchSource,
-  provideILayerSearchSource,
-  provideNominatimSearchSource,
   provideOptionsApi,
-  provideOsrmDirectionsSource,
-  provideStoredQueriesSearchSource,
-  provideStyleListOptions,
-  provideWorkspaceSearchSource
+  provideStyleListOptions
 } from '@igo2/geo';
 import { AnalyticsListenerService } from '@igo2/integration';
 
@@ -25,23 +16,14 @@ import { PortalComponent } from './portal.component';
   imports: [
     IgoGestureModule.forRoot(),
     IgoQueryModule.forRoot(),
-    IgoSearchModule.forRoot(),
+    IgoSearchModule,
     IgoDirectionsModule,
     PortalComponent
   ],
   exports: [PortalComponent],
   providers: [
     AnalyticsListenerService,
-    provideNominatimSearchSource(),
-    provideIChercheSearchSource(),
-    provideWorkspaceSearchSource(),
-    provideIChercheReverseSearchSource(),
-    provideCoordinatesReverseSearchSource(),
-    provideILayerSearchSource(),
-    provideStoredQueriesSearchSource(),
-    provideOsrmDirectionsSource(),
     provideOptionsApi(),
-    provideCadastreSearchSource(),
     provideStyleListOptions({
       path: './assets/list-style.json'
     })

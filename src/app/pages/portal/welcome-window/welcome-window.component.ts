@@ -9,7 +9,8 @@ import {
 } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { CustomHtmlComponent, IgoInteractiveTourModule } from '@igo2/common';
+import { CustomHtmlComponent } from '@igo2/common/custom-html';
+import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
 import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
 

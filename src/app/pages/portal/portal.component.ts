@@ -25,24 +25,31 @@ import { AuthService } from '@igo2/auth';
 import {
   ActionStore,
   ActionbarComponent,
-  ActionbarMode,
-  BackdropComponent,
+  ActionbarMode
+} from '@igo2/common/action';
+import { BackdropComponent } from '@igo2/common/backdrop';
+import {
   ContextMenuDirective,
+  LongPressDirective
+} from '@igo2/common/context-menu';
+import {
   ENTITY_DIRECTIVES,
   EntityRecord,
   EntityStore,
-  EntityTablePaginatorOptions,
+  EntityTablePaginatorOptions
+} from '@igo2/common/entity';
+import {
   IconSvg,
   IgoIconComponent,
-  LongPressDirective,
-  MAGNIFY_SCAN_ICON,
-  Tool,
-  Toolbox,
+  MAGNIFY_SCAN_ICON
+} from '@igo2/common/icon';
+import { Tool, Toolbox } from '@igo2/common/tool';
+import { Widget } from '@igo2/common/widget';
+import {
   WORKSPACE_DIRECTIVES,
-  Widget,
   Workspace,
   WorkspaceStore
-} from '@igo2/common';
+} from '@igo2/common/workspace';
 import {
   DetailedContext,
   LayerContextDirective,
@@ -93,8 +100,19 @@ import {
   handleFileImportError,
   handleFileImportSuccess,
   moveToOlFeatures,
+  provideDirection,
+  provideSearch,
   sourceCanReverseSearch,
-  sourceCanSearch
+  sourceCanSearch,
+  withCadastreSource,
+  withCoordinatesReverseSource,
+  withIChercheReverseSource,
+  withIChercheSource,
+  withILayerSource,
+  withNominatimSource,
+  withOsrmSource,
+  withStoredQueriesSource,
+  withWorkspaceSource
 } from '@igo2/geo';
 import {
   AnalyticsListenerService,
@@ -185,6 +203,20 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     WORKSPACE_DIRECTIVES,
     WorkspaceUpdatorDirective,
     IgoIconComponent
+  ],
+  providers: [
+    provideSearch([
+      withCadastreSource(),
+      withCoordinatesReverseSource(),
+      withIChercheReverseSource(),
+      withIChercheSource(),
+      withILayerSource(),
+      withNominatimSource(),
+      withStoredQueriesSource(),
+      withWorkspaceSource()
+    ]),
+    provideDirection(withOsrmSource()),
+    SearchState
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {

@@ -5,7 +5,8 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { AuthOptions } from '@igo2/auth';
 import { AuthFormComponent } from '@igo2/auth/form';
-import { SpinnerComponent, StopPropagationDirective } from '@igo2/common';
+import { SpinnerComponent } from '@igo2/common/spinner';
+import { StopPropagationDirective } from '@igo2/common/stop-propagation';
 import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
 import { MessageService } from '@igo2/core/message';
