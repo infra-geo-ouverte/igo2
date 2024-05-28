@@ -410,7 +410,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       {
         id: 'list',
         title: this.languageService.translate.instant('toastPanel.backToList'),
-        icon: 'format-list-bulleted-square',
+        icon: 'list',
         tooltip: this.languageService.translate.instant(
           'toastPanel.listButton'
         ),
@@ -426,7 +426,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         title: this.languageService.translate.instant(
           'toastPanel.zoomOnFeature'
         ),
-        icon: 'magnify-plus-outline',
+        icon: 'zoom_in',
         tooltip: this.languageService.translate.instant(
           'toastPanel.zoomOnFeatureTooltip'
         ),
@@ -456,7 +456,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.zoomOnFeaturesTooltip'
         ),
-        icon: 'magnify-scan',
+        icon: 'frame_inspect',
         availability: () => {
           return this.multiple;
         },
@@ -497,7 +497,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.fullExtentTooltip'
         ),
-        icon: 'arrow-expand',
+        icon: 'open_in_full',
         display: () => {
           return this.fullExtent$.pipe(map((v) => !v && !this.isDesktop()));
         },
@@ -513,7 +513,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.standardExtentTooltip'
         ),
-        icon: 'arrow-collapse',
+        icon: 'close_fullscreen',
         display: () => {
           return this.fullExtent$.pipe(map((v) => v && !this.isDesktop()));
         },
