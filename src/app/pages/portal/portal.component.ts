@@ -38,11 +38,6 @@ import {
   EntityStore,
   EntityTablePaginatorOptions
 } from '@igo2/common/entity';
-import {
-  IconSvg,
-  IgoIconComponent,
-  MAGNIFY_SCAN_ICON
-} from '@igo2/common/icon';
 import { Tool, Toolbox } from '@igo2/common/tool';
 import { Widget } from '@igo2/common/widget';
 import {
@@ -201,8 +196,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     TranslateModule,
     UserButtonComponent,
     WORKSPACE_DIRECTIVES,
-    WorkspaceUpdatorDirective,
-    IgoIconComponent
+    WorkspaceUpdatorDirective
   ],
   providers: [
     provideSearch([
@@ -276,8 +270,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   public homeCenter: [number, number];
   public homeZoom: number;
   isTouchScreen: boolean;
-
-  magnifyIcon: IconSvg = MAGNIFY_SCAN_ICON;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
