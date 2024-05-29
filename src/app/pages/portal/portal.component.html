@@ -291,7 +291,7 @@
             (click)="zoomToSelectedFeatureWks()"
           >
             @if ((workspaceState.workspaceSelection$ | async).length > 1) {
-              <igo-icon [icon]="magnifyIcon"></igo-icon>
+              <mat-icon>frame_inspect</mat-icon>
             } @else {
               <mat-icon>zoom_in </mat-icon>
             }
