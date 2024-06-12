@@ -89,6 +89,7 @@ import {
   WorkspaceUpdatorDirective,
   addStopToStore,
   computeOlFeaturesExtent,
+  detectFileEPSG,
   featureFromOl,
   featureToSearchResult,
   generateIdFromSourceOptions,
@@ -129,7 +130,14 @@ import * as olProj from 'ol/proj';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Subscription, combineLatest, of } from 'rxjs';
-import { debounceTime, first, pairwise, skipWhile, take } from 'rxjs/operators';
+import {
+  concatMap,
+  debounceTime,
+  first,
+  pairwise,
+  skipWhile,
+  take
+} from 'rxjs/operators';
 import { getAppVersion } from 'src/app/app.utils';
 import { EnvironmentOptions } from 'src/environments/environnement.interface';
 
@@ -1537,10 +1545,21 @@ export class PortalComponent implements OnInit, OnDestroy {
           type: data.type,
           lastModified: Date.now()
         });
-        this.importService.import(file).subscribe(
-          (features: Feature[]) => this.onFileImportSuccess(file, features),
-          (error: Error) => this.onFileImportError(file, error)
-        );
+        detectFileEPSG({ file })
+          .pipe(
+            skipWhile((code) => !code),
+            first(),
+            concatMap((epsgCode) => {
+              return this.importService.import(
+                file,
+                epsgCode === 'epsgNotDefined' ? undefined : epsgCode
+              );
+            })
+          )
+          .subscribe(
+            (features: Feature[]) => this.onFileImportSuccess(file, features),
+            (error: Error) => this.onFileImportError(file, error)
+          );
       });
     }
   }
