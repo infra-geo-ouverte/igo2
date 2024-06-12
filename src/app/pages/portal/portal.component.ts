@@ -109,6 +109,7 @@ import {
   withStoredQueriesSource,
   withWorkspaceSource
 } from '@igo2/geo';
+import { NewEditionWorkspace } from '@igo2/geo';
 import {
   AnalyticsListenerService,
   ContextState,
@@ -660,26 +661,32 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   isEditionWorkspace(workspace) {
-    if (workspace instanceof EditionWorkspace) {
-      return true;
-    }
-    return false;
+    return (
+      workspace instanceof EditionWorkspace ||
+      workspace instanceof NewEditionWorkspace
+    );
   }
 
-  addFeature(workspace: EditionWorkspace) {
-    let feature = {
-      type: 'Feature',
-      properties: {}
-    };
-    feature.properties = this.createFeatureProperties(workspace.layer);
+  addFeature(workspace: EditionWorkspace | NewEditionWorkspace) {
+    if (workspace instanceof EditionWorkspace) {
+      let feature = {
+        type: 'Feature',
+        properties: {}
+      };
+      feature.properties = this.createFeatureProperties(workspace.layer);
+      this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
+      workspace.editFeature(feature, workspace);
+      return;
+    }
+
     this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
-    workspace.editFeature(feature, workspace);
+    workspace.createFeature();
   }
 
   createFeatureProperties(layer: ImageLayer | VectorLayer) {
     let properties = {};
     layer.options.sourceOptions.sourceFields.forEach((field) => {
-      if (!field.primary && field.visible) {
+      if (!field.primary) {
         properties[field.name] = '';
       }
     });

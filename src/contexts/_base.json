@@ -10,6 +10,55 @@
   },
   "layers": [
     {
+      "title": "Montreal Parking Terminals",
+      "id": "parking",
+      "visible": true,
+      "editable": true,
+      "sourceOptions": {
+        "queryable": true,
+        "params": {
+          "featureTypes": "parking",
+          "fieldNameGeometry": "msGeometry",
+          "maxFeatures": 10000,
+          "version": "1.0.0"
+        },
+        "edition": {
+          "enabled": true,
+          "baseUrl": "parking_terminal_on_roads",
+          "addUrl": "",
+          "deleteUrl": "?id=eq.",
+          "modifyUrl": "?id=eq.",
+          "geomType": "Point",
+          "modifyButton": true,
+          "addWithDraw": false,
+          "hasGeometry": false
+        },
+        "sourceFields": [
+          { 
+            "name": "id",
+            "primary": true,
+            "validation": {
+              "readonly": true
+            }
+          },
+          {
+            "name": "status"
+          },
+          {
+            "name": "roadname"
+          },
+          {
+            "name": "exploitationtype"
+          },
+          {
+            "name": "zonegroupcode"
+          }
+        ],
+        "type": "wfs",
+        "url": "http://localhost:8080/?map=/etc/mapserver/parking.map"
+      }
+    },
+    {
       "id": "fond_osm",
       "title": "Open Street Map",
       "visible": false,
