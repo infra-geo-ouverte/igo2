@@ -10,29 +10,7 @@
   },
   "layers": [
     {
-      "id": "fond_osm",
-      "title": "Open Street Map",
-      "visible": false,
-      "baseLayer": true,
-      "sourceOptions": {
-        "type": "osm",
-        "maxZoom": 19,
-        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>"
-      }
-    },
-    {
-      "id": "fond_osm_hot",
-      "title": "Open Street Map - Humanitaire",
-      "visible": false,
-      "baseLayer": true,
-      "sourceOptions": {
-        "url": "https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
-        "type": "osm",
-        "maxZoom": 19,
-        "attributions": "© les contributeurs <a href='https://www.openstreetmap.org/copyright' target='_blank'>d’OpenStreetMap</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>"
-      }
-    },
-    {
+      "id": "carte_gouv_qc_ortho",
       "title": "Imagerie",
       "baseLayer": true,
       "visible": false,
@@ -45,99 +23,8 @@
       }
     },
     {
-      "title": "Hybride automobile",
-      "id": "hybrideAuto",
-      "baseLayer": true,
-      "visible": false,
-      "linkedLayers": {
-        "linkId": "HybrideAuto",
-        "links": [
-          {
-            "syncedDelete": true,
-            "linkedIds": ["hybrideAutoRoute"],
-            "properties": ["visible"]
-          }
-        ]
-      },
-      "sourceOptions": {
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-        "attributions": "© <a href='https://www.quebec.ca/droit-auteur' target='_blank'><img src='./assets/images/quebecPrint.gif' width='64' height='19'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
-        "type": "xyz",
-        "maxZoom": 19,
-        "crossOrigin": "anonymous"
-      }
-    },
-    {
-      "title": "bgr_v_sous_route_res_sup_act",
-      "opacity": 0.5,
-      "showInLayerList": false,
-      "linkedLayers": {
-        "linkId": "hybrideAutoRoute"
-      },
-      "sourceOptions": {
-        "id": "hybrideAutoRoute",
-        "type": "wms",
-        "queryable": true,
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-        "params": {
-          "layers": "bgr_v_sous_route_res_sup_act"
-        }
-      }
-    },
-    {
-      "title": "Hybride vélo",
-      "id": "hybrideVelo",
-      "baseLayer": true,
-      "visible": false,
-      "linkedLayers": {
-        "linkId": "HybrideVelo",
-        "links": [
-          {
-            "syncedDelete": true,
-            "linkedIds": ["hybrideVeloConviv"],
-            "properties": ["visible"]
-          }
-        ]
-      },
-      "sourceOptions": {
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-        "attributions": "© <a href='https://www.quebec.ca/droit-auteur' target='_blank'><img src='./assets/images/quebecPrint.gif' width='64' height='19'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
-        "type": "xyz",
-        "maxZoom": 19,
-        "crossOrigin": "anonymous"
-      }
-    },
-    {
-      "title": "convivialite_velo",
-      "opacity": 0.5,
-      "showInLayerList": false,
-      "linkedLayers": {
-        "linkId": "hybrideVeloConviv"
-      },
-      "sourceOptions": {
-        "id": "hybrideVeloConviv",
-        "type": "wms",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
-        "params": {
-          "layers": "convivialite_velo"
-        }
-      }
-    },
-
-    {
-      "title": "Aucun",
-      "baseLayer": true,
-      "visible": false,
-      "sourceOptions": {
-        "attributions": "<a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
-        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=",
-        "type": "xyz",
-        "maxZoom": 22
-      }
-    },
-    {
       "id": "carte_gouv_qc",
-      "title": "Carte Topo",
+      "title": "Plan",
       "visible": true,
       "baseLayer": true,
       "sourceOptions": {
@@ -147,133 +34,18 @@
         "maxZoom": 17,
         "crossOrigin": "anonymous"
       }
-    },
-    {
-      "title": "Relief",
-      "baseLayer": true,
-      "visible": false,
-      "sourceOptions": {
-        "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/fond_thematique@EPSG_3857/{z}/{x}/{-y}.png",
-        "attributions": "© <a href='https://www.quebec.ca/droit-auteur' target='_blank'><img src='./assets/images/quebecPrint.gif' width='64' height='19'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
-        "type": "xyz",
-        "maxZoom": 11,
-        "crossOrigin": "anonymous"
-      }
     }
   ],
   "toolbar": [
     "searchResults",
-    "contextManager",
-    "mapTools",
-    "spatialFilter",
-    "measurer",
-    "draw",
-    "directions",
-    "catalog",
-    "importExport",
-    "print",
-    "shareMap",
-    "about",
-    "advancedMap",
-    "dataIssueReporter"
+    "mapLegend"
   ],
   "tools": [
-    {
-      "name": "dataIssueReporter"
-    },
-    {
-      "name": "advancedMap"
-    },
     {
       "name": "searchResults"
     },
     {
-      "name": "contextManager"
-    },
-    {
-      "name": "about"
-    },
-    {
-      "name": "mapTools",
-      "options": {
-        "selectedTabAtOpening": "",
-        "allowShowAllLegends": true,
-        "layerAdditionAllowed": true,
-        "toggleLegendOnVisibilityChange": false,
-        "updateLegendOnResolutionChange": false,
-        "layerListControls": {
-          "excludeBaseLayers": true
-        }
-      }
-    },
-    {
-      "name": "shareMap"
-    },
-    {
-      "name": "measurer"
-    },
-    {
-      "name": "draw"
-    },
-    {
-      "name": "directions"
-    },
-    {
-      "name": "catalog",
-      "options": {
-        "addCatalogAllowed": true,
-        "predefinedCatalogs": [
-          {
-            "externalProvider": false,
-            "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq"
-          }
-        ]
-      }
-    },
-    {
-      "name": "catalogBrowser"
-    },
-    {
-      "name": "spatialFilter"
-    },
-    {
-      "name": "timeFilter"
-    },
-    {
-      "name": "ogcFilter"
-    },
-    {
-      "name": "activeTimeFilter"
-    },
-    {
-      "name": "activeOgcFilter"
-    },
-    {
-      "name": "importExport",
-      "options": {
-        "selectFirstProj": false,
-        "projectionsLimitations": {
-          "projFromConfig": true,
-          "nad83": true,
-          "wgs84": true,
-          "webMercator": true,
-          "utm": true,
-          "mtm": true,
-          "utmZone": {
-            "minZone": 17,
-            "maxZone": 21
-          },
-          "mtmZone": {
-            "minZone": 3,
-            "maxZone": 10
-          }
-        },
-        "importExportType": "layer",
-        "importExportShowBothType": true
-      }
-    },
-    {
-      "name": "print"
+      "name": "mapLegend"
     }
   ]
 }

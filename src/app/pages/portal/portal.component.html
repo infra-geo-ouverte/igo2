@@ -19,7 +19,7 @@
         [term]="searchBarTerm"
         [termSplitter]="termSplitter"
         [minLength]="minSearchTermLength"
-        [searchSettings]="true"
+        [searchSettings]="false"
         [forceNA]="appConfig.app?.forceCoordsNA"
         [store]="searchStore"
         (searchTermChange)="onSearchTermChange($event)"
@@ -164,6 +164,7 @@
             (workspaceState.workspaceEnabled$ | async) &&
             !expansionPanelExpanded
           "
+          class="mat-elevation-z2"
           [expanded]="expansionPanelExpanded"
           (expand)="handleToggleExpansionPanel($event)"
         ></app-expansion-panel-button>

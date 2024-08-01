@@ -17,19 +17,6 @@ export const environment: AppEnvironmentOptions = {
         enabled: false
       }
     },
-    auth: {
-      url: '/apis/users',
-      tokenKey: 'id_token_igo',
-      allowAnonymous: true,
-      trustHosts: ['geoegl.msp.gouv.qc.ca'],
-      hostsByKey: [
-        {
-          domainRegFilters: '(https://|http://)?(.*domain.com)(.*)',
-          keyProperty: 'key',
-          keyValue: '123456'
-        }
-      ]
-    },
     storage: {
       url: '/apis/igo2/user/igo',
       key: 'igo'
@@ -38,181 +25,6 @@ export const environment: AppEnvironmentOptions = {
       url: '/apis/igo2',
       defaultContextUri: '5'
     },*/
-    catalog: {
-      sources: [
-        {
-          id: 'Image Arcgis Rest',
-          title: 'Image Arcgis Rest',
-          externalProvider: true,
-          url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer',
-          type: 'imagearcgisrest',
-          sourceOptions: {
-            queryable: true
-          }
-        },
-        {
-          id: 'Gououvert',
-          title: 'Gouvouvert',
-          url: '/apis/ws/igo_gouvouvert.fcgi'
-        },
-        {
-          id: 'glace',
-          title: 'Carte de glace',
-          url: '/apis/ws/radarsat.fcgi',
-          showLegend: true
-        },
-        {
-          id: 'baselayerWMTS',
-          title: 'Fonds / Baselayers',
-          url: '/carto/wmts',
-          type: 'wmts',
-          matrixSet: 'EPSG_3857',
-          version: '1.3.0'
-        },
-        {
-          id: 'fusion_catalog',
-          title: '(composite catalog) fusion catalog',
-          url: '',
-          composite: [
-            {
-              id: 'tq_swtq',
-              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq'
-            },
-            {
-              id: 'rn_wmts',
-              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
-              type: 'wmts',
-              setCrossOriginAnonymous: true,
-              matrixSet: 'EPSG_3857',
-              version: '1.0.0'
-            }
-          ]
-        },
-        {
-          id: 'forced_properties',
-          title: 'Forced properties catalog (layer name and abstract)',
-          url: '',
-          composite: [
-            {
-              id: 'forcedProperties_wmts',
-              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
-              type: 'wmts',
-              setCrossOriginAnonymous: true,
-              matrixSet: 'EPSG_3857',
-              version: '1.0.0',
-              forcedProperties: [
-                {
-                  metadataAbstract: 'Nouvel abstract',
-                  layerName: 'BDTQ-20K_Allegee',
-                  title: 'Nouveau nom et abstract pour cette couche WMTS'
-                }
-              ]
-            },
-            {
-              id: 'forcedProperties_wms',
-              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
-              type: 'wms',
-              forcedProperties: [
-                {
-                  layerName: '*',
-                  //metadataUrlAll: "https://quebec.ca/",
-                  metadataAbstractAll: 'New WMS abstract to all layers'
-                },
-                {
-                  layerName: 'etablissement_mtq',
-                  title:
-                    'Nouveau nom pour cette couche WMS et nouvel url pour toutes les couches',
-                  //metadataAbstract: "New WMS Abstract",
-                  metadataUrl: 'https://www.donneesquebec.ca/'
-                }
-              ]
-            },
-            {
-              id: 'forcedProperties_arcgisrest',
-              url: 'https://gisp.dfo-mpo.gc.ca/arcgis/rest/services/FGP/Seafloor_SubstratBenthique/MapServer',
-              externalProvider: true,
-              type: 'arcgisrest',
-              forcedProperties: [
-                {
-                  layerName: 'Sediment substrate / Substrat sédimentaire',
-                  title:
-                    'Nouveau nom et nouvel url pour cette couche ArcGIS REST',
-                  metadataUrl: 'https://www.donneesquebec.ca/'
-                },
-                {
-                  layerName: '*',
-                  //metadataUrlAll: "https://quebec.ca/",
-                  metadataAbstractAll: 'New arcgisrest abstract to all layers'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          id: 'group_impose',
-          title:
-            '(composite catalog) group imposed and unique layer title for same source',
-          url: '',
-          composite: [
-            {
-              id: 'tq_swtq',
-              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
-              regFilters: ['zpegt'],
-              groupImpose: { id: 'zpegt', title: 'zpegt' }
-            },
-            {
-              id: 'Gououvert',
-              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
-              regFilters: ['zpegt'],
-              groupImpose: { id: 'zpegt', title: 'zpegt' }
-            },
-            {
-              id: 'Gououvert',
-              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
-              regFilters: ['zpegt'],
-              groupImpose: { id: 'zpegt', title: 'zpegt' }
-            },
-            {
-              id: 'rn_wmts',
-              url: 'https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Cartes_Images',
-              type: 'wmts',
-              setCrossOriginAnonymous: true,
-              matrixSet: 'EPSG_3857',
-              version: '1.0.0',
-              groupImpose: {
-                id: 'cartetopo',
-                title: 'Carte topo échelle 1/20 000'
-              }
-            }
-          ]
-        },
-        {
-          id: 'tag_layernametitle',
-          title: '(composite catalog) tag source on same layer title',
-          url: '',
-          composite: [
-            {
-              id: 'tq_swtq',
-              url: 'https://ws.mapserver.transports.gouv.qc.ca/swtq',
-              regFilters: ['limtn_charg'],
-              groupImpose: {
-                id: 'mix_swtq_gouv',
-                title: 'mix same name layer'
-              }
-            },
-            {
-              id: 'Gououvert',
-              url: 'https://geoegl.msp.gouv.qc.ca/apis/ws/igo_gouvouvert.fcgi',
-              regFilters: ['limtn_charg'],
-              groupImpose: {
-                id: 'mix_swtq_gouv',
-                title: 'mix same name layer'
-              }
-            }
-          ]
-        }
-      ]
-    },
     depot: {
       url: '/apis/depot'
     },
@@ -235,7 +47,8 @@ export const environment: AppEnvironmentOptions = {
       prefix: './locale/'
     },
     interactiveTour: {
-      tourInMobile: true,
+      tourInMobile: false,
+      activateInteractiveTour: false,
       pathToConfigFile: './config/interactiveTour.json'
     },
     importExport: {
@@ -247,8 +60,7 @@ export const environment: AppEnvironmentOptions = {
     },
     searchSources: {
       workspace: {
-        available: true,
-        enabled: true
+        available: false
       },
       nominatim: {
         available: false
@@ -257,30 +69,24 @@ export const environment: AppEnvironmentOptions = {
         available: false
       },
       icherche: {
-        searchUrl: '/apis/icherche',
-        order: 2,
+        available: true,
+        searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/icherche/',
         params: {
           limit: '5'
-        }
-      },
-      coordinatesreverse: {
+        },
         showInPointerSummary: true
       },
+      coordinatesreverse: {
+        available: false
+      },
       icherchereverse: {
-        showInPointerSummary: true,
-        searchUrl: '/apis/terrapi',
-        order: 3,
-        enabled: true
+        available: false
       },
       ilayer: {
-        searchUrl: '/apis/icherche/layers',
-        order: 4,
-        params: {
-          limit: '5'
-        }
+        available: false
       },
       cadastre: {
-        enabled: false
+        available: false
       }
     },
     projections: [
@@ -316,7 +122,7 @@ export const environment: AppEnvironmentOptions = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#5ed0fb', // line and poly
+        strokeColor: '#DFF7FF', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -326,7 +132,7 @@ export const environment: AppEnvironmentOptions = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#5ed0fb', // line and poly
+        strokeColor: '#00A1DE', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }
@@ -348,7 +154,7 @@ export const environment: AppEnvironmentOptions = {
         markerOutlineColor: '#DFF7FF', // marker contour
         fillColor: '#5ed0fb', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#5ed0fb', // line and poly
+        strokeColor: '#DFF7FF', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       },
@@ -358,7 +164,7 @@ export const environment: AppEnvironmentOptions = {
         markerOutlineColor: '#ffffff', // marker contour
         fillColor: '#00a1de', // poly
         fillOpacity: 0.3, // poly fill opacity not applied if a rgba fillColor is provided
-        strokeColor: '#5ed0fb', // line and poly
+        strokeColor: '#00A1DE', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }

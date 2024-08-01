@@ -7,11 +7,11 @@
   "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
   "header": {
-    "hasHeader": false,
+    "hasHeader": true,
     "logo": "assets/images/signature-PIV.svg",
     "logoPrint": "assets/images/signature-PIV.svg"
   },
-  "hasFooter": false,
+  "hasFooter": true,
   "hasExpansionPanel": true,
   "geolocation": {
     "button": {
@@ -27,7 +27,7 @@
   },
   "searchBar": {
     "showSearchBar": true,
-    "showSearchButton": false
+    "showSearchButton": true
   },
   "queryTabs": false,
   "saveSearchResultInLayer": true,
@@ -42,7 +42,7 @@
       "available": false
     }
   },
-  "title": "IGO",
+  "title": "Outil de réparage d'immeubles",
   "welcomeWindow": {
     "showAgainOnNewIGOVersion": true,
     "nbVisitToShow": 2,
