@@ -1,0 +1,28 @@
+.navigation-wrapper {
+  background-color: var(--qc-color-blue-piv);
+  height: 72px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  padding: 0 4%;
+}
+.navigation-wrapper a {
+  font-size: 18px;
+  line-height: 28px;
+  color: white;
+  text-decoration: none;
+}
+.navigation-wrapper a.underline::before {
+  content: '';
+  width: 0;
+  height: 4px;
+  background-color: var(--qc-color-blue-pale);
+  will-change: width;
+  transition: width 0.1s ease-out;
+  transform: translateX(0%);
+  position: absolute;
+  bottom: 1px;
+}

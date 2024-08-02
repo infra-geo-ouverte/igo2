@@ -48,7 +48,6 @@ import { PortalModule } from './pages';
 import { FooterModule } from './pages/footer/footer.module';
 import { HeaderModule } from './pages/header/header.module';
 import { NavigationHeaderComponent } from './pages/navigation-header/navigation-header.component';
-import { SecondHeaderComponent } from './pages/second-header/second-header.component';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -60,7 +59,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
 };
 
 @NgModule({
-  declarations: [AppComponent, NavigationHeaderComponent, SecondHeaderComponent],
+  declarations: [AppComponent, NavigationHeaderComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
