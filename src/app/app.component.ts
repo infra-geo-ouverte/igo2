@@ -20,6 +20,7 @@ import { PwaService } from './services/pwa.service';
 export class AppComponent implements OnInit {
   public authConfig: AuthOptions;
   public hasHeader: boolean;
+  public hasNavigationHeader: boolean;
   public hasFooter: boolean;
   private promptEvent: any;
 
@@ -44,6 +45,10 @@ export class AppComponent implements OnInit {
     this.detectOldBrowser();
 
     this.hasHeader = this.configService.getConfig('header.hasHeader', false);
+    this.hasNavigationHeader = this.configService.getConfig(
+      'header.hasNavigationHeader',
+      false
+    );
     this.hasFooter = this.configService.getConfig('hasFooter', false);
 
     this.setManifest();

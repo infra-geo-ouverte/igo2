@@ -8,6 +8,7 @@
   "theme": "blue-theme",
   "header": {
     "hasHeader": true,
+    "hasNavigationHeader": true,
     "logo": "assets/images/signature-PIV.svg",
     "logoPrint": "assets/images/signature-PIV.svg"
   },
