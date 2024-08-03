@@ -26,3 +26,27 @@
   position: absolute;
   bottom: 1px;
 }
+.underlined {
+  position: relative;
+  will-change: color;
+  transition: color 0.25s ease-out;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.underlined::before {
+  content: '';
+  width: 0;
+  height: 4px;
+  background-color: var(--qc-color-blue-pale);
+  will-change: width;
+  transition: width 0.1s ease-out;
+  transform: translateX(0%);
+  position: absolute;
+  bottom: 1px;
+}
+.underlined:hover::before,
+.active > .underlined::before {
+  width: 100%;
+  transition-duration: 0.3s;
+}
