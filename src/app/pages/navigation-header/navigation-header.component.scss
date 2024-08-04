@@ -8,6 +8,7 @@
   box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.2);
   align-items: center;
   padding: 0 4%;
+  position: relative;
 }
 .navigation-wrapper a {
   font-size: 18px;
@@ -31,7 +32,7 @@
   will-change: color;
   transition: color 0.25s ease-out;
   height: 100%;
-  display: flex;
+  display: none;
   align-items: center;
 }
 .underlined::before {
@@ -49,4 +50,48 @@
 .active > .underlined::before {
   width: 100%;
   transition-duration: 0.3s;
+}
+.underlined {
+  display: none;
+  @media (min-width: 760px) {
+    display: flex;
+  }
+}
+.navigation-wrapper > .underlined:first-of-type,
+.navigation-wrapper > .underlined:nth-of-type(2) {
+  display: flex;
+}
+.more {
+  display: flex;
+  @media (min-width: 760px) {
+    display: none;
+  }
+}
+.more-wrapper {
+  display: grid;
+  width: 104%;
+  height: 140px;
+  background-color: white;
+  position: absolute;
+  top: 76px;
+  left: -4%;
+  z-index: 9;
+  padding: 10px 8%;
+
+  @media (min-width: 760px) {
+    display: none;
+  }
+}
+.more-wrapper .menu-link {
+  color: darkblue;
+  height: fit-content;
+}
+.navigation-wrapper .more-wrapper .menu-link a {
+  color: darkblue;
+}
+.more-underlined {
+  display: block;
+}
+.underlined .more-underlined:hover {
+  filter: brightness(1.1);
 }

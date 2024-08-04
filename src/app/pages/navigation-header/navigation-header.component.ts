@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation-header.component.scss']
 })
 export class NavigationHeaderComponent {
+  more = false;
 
+  onToggleMore() {
+    this.more = !this.more;
+  }
 }
