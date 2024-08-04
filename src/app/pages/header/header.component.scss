@@ -70,6 +70,8 @@ body {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+  position: relative;
+  padding: 0 4%;
 }
 
 .row {
@@ -233,6 +235,7 @@ ul li:last-child {
 #title-mobile {
   margin: auto 0;
   display: block;
+  z-index: 10;
 }
 
 #title-desktop {
@@ -298,4 +301,17 @@ ul li:last-child {
     right: 4px;
     z-index: 100;
   }
+}
+.search-bar-wrapper {
+  position: relative;
+}
+.search-icon {
+  filter: invert(99%) sepia(1%) saturate(7499%) hue-rotate(238deg)
+    brightness(123%) contrast(100%);
+  margin-top: 0;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 40px;
+  cursor: pointer;
 }
