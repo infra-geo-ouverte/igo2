@@ -315,3 +315,12 @@ ul li:last-child {
   margin-right: 40px;
   cursor: pointer;
 }
+.banner {
+  background-color: var(--qc-color-blue-piv);
+}
+@media (min-width: 280px) {
+  .container {
+    padding: 10px 16px 0 16px;
+    height: 104px;
+  }
+}
