@@ -1,16 +1,19 @@
 .wrapper {
-  height: 125px;
   width: 100%;
-  background-color: #1976d2;
-  position: absolute;
-  left: 0;
+  background-color: var(--qc-color-blue-piv);
   z-index: 9;
-  padding: 0 4%;
-  top: 58px;
   padding-top: 26px;
+  padding: 0 4%;
+  margin: auto;
+  position: absolute;
   @media (min-width: 760px) {
     padding-top: 0;
   }
+}
+.container {
+  width: 100%;
+  max-width: 1314px;
+  margin: auto;
 }
 .submit-button {
   display: flex;
@@ -20,6 +23,7 @@
   padding-top: 16px;
   color: white;
   text-decoration: underline;
+  font-size: 16px;
 }
 .search-icon {
   width: 24px;
@@ -47,4 +51,7 @@
   width: 96%;
   outline: none;
   padding: 7px 12px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
 }

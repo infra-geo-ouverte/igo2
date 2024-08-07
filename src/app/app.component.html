@@ -2,11 +2,16 @@
 
 <igo-auth-form *ngIf="authConfig && authConfig.url"></igo-auth-form>
 
-<app-header *ngIf="hasHeader" #header></app-header>
-<app-navigation-header
+<!-- <app-header *ngIf="hasHeader" #header></app-header> -->
+<app-new-header *ngIf="hasHeader" #header></app-new-header>
+<!-- <app-navigation-header
   *ngIf="hasNavigationHeader"
   #navigationHeader
-></app-navigation-header>
+></app-navigation-header> -->
+<app-navigation-menu
+  *ngIf="hasNavigationHeader"
+  #navigationHeader
+></app-navigation-menu>
 
 <app-portal
   [ngClass]="

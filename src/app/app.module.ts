@@ -48,6 +48,9 @@ import { PortalModule } from './pages';
 import { FooterModule } from './pages/footer/footer.module';
 import { HeaderModule } from './pages/header/header.module';
 import { NavigationHeaderComponent } from './pages/navigation-header/navigation-header.component';
+import { NewHeaderComponent } from './pages/new-header/new-header.component';
+import { SearchBarComponent } from './pages/search-bar/search-bar.component';
+import { NavigationMenuComponent } from './pages/navigation-menu/navigation-menu.component';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -59,7 +62,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
 };
 
 @NgModule({
-  declarations: [AppComponent, NavigationHeaderComponent],
+  declarations: [AppComponent, NavigationHeaderComponent, NewHeaderComponent, NavigationMenuComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -72,6 +75,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     PortalModule,
     HeaderModule,
     FooterModule,
+    SearchBarComponent,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.igo.app.pwa.enabled,
       registrationStrategy: 'registerWithDelay:5000'
