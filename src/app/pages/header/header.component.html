@@ -19,6 +19,20 @@
         </p>
       </div>
       <div class="col-6 col-md-2 d-flex justify-content-end zone-links">
+        <img
+          *ngIf="!searchBarOpened"
+          src="assets/images/search.svg"
+          alt=""
+          class="search-icon"
+          (click)="onToggleSearchBar()"
+        />
+        <img
+          *ngIf="searchBarOpened"
+          src="assets/images/close.svg"
+          alt=""
+          class="search-icon"
+          (click)="onToggleSearchBar()"
+        />
         <ul class="nav flex-column">
           <!--<li><button class="buttonLanguage" disabled (click)="changeLanguage()">{{'header.language'}}</button></li>-->
           <li>
@@ -36,5 +50,6 @@
         <a>{{ 'header.title' | translate }}</a>
       </p>
     </div>
+    <app-search-bar></app-search-bar>
   </div>
 </mat-toolbar>

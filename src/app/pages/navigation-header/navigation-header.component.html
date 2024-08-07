@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="menu-link underlined">
+      <a href="/expertises"> Expertises </a>
+    </div>
+    <div class="menu-link underlined">
+      <a href="/faire-affaire-avec-la-sqi"> Faire affaire avec la SQI </a>
+    </div>
+    <div class="menu-link underlined more" (click)="onToggleMore()">
+      <a>More▼</a>
+    </div>
+    <div class="more-wrapper" *ngIf="more">
+      <div class="menu-link more-underlined underlined">
+        <a href="/emplois"> Emplois </a>
+      </div>
+      <div class="menu-link more-underlined underlined">
+        <a href="/actualites"> Actualités </a>
+      </div>
+      <div class="menu-link more-underlined underlined">
+        <a href="/a-propos"> À propos </a>
+      </div>
+    </div>
+    <div class="menu-link underlined"><a href="/emplois"> Emplois </a></div>
+    <div class="menu-link underlined">
+      <a href="/actualites"> Actualités </a>
+    </div>
+    <div class="menu-link underlined"><a href="/a-propos"> À propos </a></div>
+  </div>
+</div>
