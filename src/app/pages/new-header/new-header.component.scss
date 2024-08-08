@@ -4,7 +4,11 @@
   align-items: center;
   width: 100%;
   background-color: var(--qc-color-blue-piv);
-  height: 72px;
+  height: 104px;
+  font-family: 'Open Sans', sans-serif;
+  @media (min-width: 760px) {
+    height: 72px;
+  }
 }
 .container {
   width: 100%;
@@ -16,36 +20,67 @@
   max-width: 1314px;
   margin: auto;
   display: flex;
-  justify-content: space-between;
+  padding: 0px 16px;
+  margin-top: -6px;
+  @media (min-width: 760px) {
+    justify-content: space-between;
+    padding: 0;
+    margin-top: 0px;
+  }
 }
 .banner-content a {
   text-decoration: none;
 }
 .brand-group {
+  width: 70%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  text-wrap: nowrap;
+  @media (min-width: 760px) {
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+  }
 }
 .search-group {
   display: flex;
   align-items: center;
+  margin-top: -28px;
+  margin-left: -2px;
+  @media (min-width: 760px) {
+    margin-top: 0px;
+    margin-left: 0px;
+    justify-content: space-between;
+  }
 }
 .logo {
-  width: 200px;
+  width: 160px;
+  margin: 8px 0 8px 0;
+
+  @media (min-width: 760px) {
+    width: 200px;
+  }
 }
 .brand {
-  order: 2;
-  margin-right: 0;
-  margin-left: 76px;
   font-size: 16px;
   color: white;
+  margin-top: 10px;
+  @media (min-width: 760px) {
+    margin-left: 76px;
+    margin-right: 0;
+    margin-top: 0px;
+  }
 }
 .search-icon {
   filter: invert(99%) sepia(1%) saturate(7499%) hue-rotate(238deg)
     brightness(123%) contrast(100%);
   width: 24px;
   height: 24px;
-  margin-right: 16px;
+  margin-right: 0px;
   cursor: pointer;
+  @media (min-width: 760px) {
+    margin-right: 16px;
+  }
 }
 .wt {
   font-size: 13px;
@@ -57,4 +92,5 @@
   align-items: center;
   vertical-align: middle;
   margin-left: 16px;
+  text-wrap: nowrap;
 }
