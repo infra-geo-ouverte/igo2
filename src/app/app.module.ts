@@ -44,12 +44,11 @@ import { concatMap, first } from 'rxjs';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+import { FooterModule } from './layout/footer/footer.module';
+import { NavigationMenuComponent } from './layout/navigation-menu/navigation-menu.component';
+import { NewHeaderComponent } from './layout/new-header/new-header.component';
+import { SearchBarComponent } from './layout/search-bar/search-bar.component';
 import { PortalModule } from './pages';
-import { FooterModule } from './pages/footer/footer.module';
-import { NavigationHeaderComponent } from './pages/navigation-header/navigation-header.component';
-import { NavigationMenuComponent } from './pages/navigation-menu/navigation-menu.component';
-import { NewHeaderComponent } from './pages/new-header/new-header.component';
-import { SearchBarComponent } from './pages/search-bar/search-bar.component';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -61,12 +60,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigationHeaderComponent,
-    NewHeaderComponent,
-    NavigationMenuComponent
-  ],
+  declarations: [AppComponent, NewHeaderComponent, NavigationMenuComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
