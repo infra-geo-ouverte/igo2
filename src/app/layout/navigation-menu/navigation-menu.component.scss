@@ -3,7 +3,7 @@
   background-color: var(--qc-color-blue-medium);
   height: 40px;
   position: relative;
-  /* box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.2);
   @media (min-width: 760px) {
     height: 72px;
   }

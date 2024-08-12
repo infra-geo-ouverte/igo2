@@ -1,15 +1,16 @@
 <div class="wrapper">
-  <div
-    class="item"
-    *ngFor="let item of items; let i = index"
-    [routerLink]="item.link"
-    [ngClass]="{ strong: i === items.length - 1 }"
-  >
-    {{ item.title }}
+  <ng-container *ngFor="let item of items; let i = index">
+    <div
+      class="item"
+      [ngClass]="{ strong: i === items.length - 1 }"
+      [routerLink]="item.link"
+    >
+      {{ item.title }}
+    </div>
     <img
       class="arrow"
       *ngIf="i < items.length - 1"
       src="assets/images/flash-bread-crumbs-light.svg"
     />
-  </div>
+  </ng-container>
 </div>
