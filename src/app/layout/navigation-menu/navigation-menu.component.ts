@@ -3,11 +3,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 
 @Component({
-  selector: 'app-navigation-header',
-  templateUrl: './navigation-header.component.html',
-  styleUrls: ['./navigation-header.component.scss']
+  selector: 'app-navigation-menu',
+  templateUrl: './navigation-menu.component.html',
+  styleUrls: ['./navigation-menu.component.scss']
 })
-export class NavigationHeaderComponent implements OnInit, OnDestroy {
+export class NavigationMenuComponent implements OnInit, OnDestroy {
   more = false;
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
