@@ -46,6 +46,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { FooterModule } from './layout/footer/footer.module';
 import { NavigationMenuComponent } from './layout/navigation-menu/navigation-menu.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { NewHeaderComponent } from './layout/new-header/new-header.component';
 import { SearchBarComponent } from './layout/search-bar/search-bar.component';
 import { PortalModule } from './pages';
@@ -60,7 +61,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
 };
 
 @NgModule({
-  declarations: [AppComponent, NewHeaderComponent, NavigationMenuComponent],
+  declarations: [AppComponent, NewHeaderComponent, NavigationMenuComponent, BreadcrumbComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

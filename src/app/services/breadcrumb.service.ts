@@ -9,10 +9,10 @@ export class BreadcrumbService {
   items = new BehaviorSubject<any>([
     {
       title: 'Accueil',
-      link: ''
+      link: 'https://www.sqi.gouv.qc.ca/'
     },
     {
-      title: 'Expertises',
+      title: 'Outil de réparage d\'immeubles',
       link: ''
     }
   ]);
