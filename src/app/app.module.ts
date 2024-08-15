@@ -44,12 +44,17 @@ import { concatMap, first } from 'rxjs';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+import { routes } from './app.routes';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { FooterModule } from './layout/footer/footer.module';
 import { NavigationMenuComponent } from './layout/navigation-menu/navigation-menu.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { NewHeaderComponent } from './layout/new-header/new-header.component';
 import { SearchBarComponent } from './layout/search-bar/search-bar.component';
+import { SubMenuComponent } from './layout/sub-menu/sub-menu.component';
 import { PortalModule } from './pages';
+import { CarteComponent } from './pages/carte/carte.component';
+import { ImmeublesComponent } from './pages/immeubles/immeubles.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -61,11 +66,20 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
 };
 
 @NgModule({
-  declarations: [AppComponent, NewHeaderComponent, NavigationMenuComponent, BreadcrumbComponent],
+  declarations: [
+    AppComponent,
+    NewHeaderComponent,
+    NavigationMenuComponent,
+    BreadcrumbComponent,
+    SubMenuComponent,
+    CarteComponent,
+    ImmeublesComponent,
+    NotFoundComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot(routes),
     IgoAuthModule.forRoot(),
     IgoGestureModule.forRoot(),
     IgoMessageModule,
