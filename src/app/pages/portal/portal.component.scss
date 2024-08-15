@@ -5,7 +5,7 @@
 
 :host {
   width: 100%;
-  height: 800px;
+  height: 100%;
   display: block;
 }
 
@@ -74,7 +74,7 @@
 
 igo-map-browser {
   width: 100%;
-  height: calc(100% - 38px);
+  height: 84%;
 
   &.sidenav-offset {
     .map-actions.--left {
