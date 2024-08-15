@@ -8,8 +8,25 @@
         flex-direction: column;
     }
 
-    .breadcrumb-section .breadcrumb {
-        padding: 0 0 0 4%;
+    .breadcrumb-section {
+        padding: 0 4%;
+        display: flex;
+    }
+
+    .breadcrumb-section-left {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .content-container{
+        display: flex;
+        max-width: 1314px;
+        width: 100%;
+    }
+
+    .breadcrumb {
         display: flex;
         list-style: none;
     }
