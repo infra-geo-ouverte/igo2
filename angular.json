@@ -278,6 +278,7 @@
           "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "disableHostCheck": true,
             "browserTarget": "igo2:build",
             "host": "0.0.0.0",
             "port": 4201,

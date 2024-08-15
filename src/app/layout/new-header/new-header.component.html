@@ -1,36 +1,15 @@
-<header class="wrapper">
-  <div class="container">
-    <div class="groups">
-      <div class="brand-group">
-        <img
-          class="logo"
-          alt="Site Web Société québécoise des infrastructures."
-          src="assets/images/signature-PIV.svg"
-        />
-        <a class="brand" href="https://www.sqi.gouv.qc.ca/"
-          ><span>Société québécoise des infrastructures</span></a
-        >
-      </div>
-      <div class="search-group">
-        <img
-          *ngIf="!searchBarOpened"
-          class="search-icon"
-          src="assets/images/loop.svg"
-          alt="Recherche"
-          (click)="onToggleSearchBar()"
-        />
-        <img
-          *ngIf="searchBarOpened"
-          src="assets/images/close.svg"
-          alt="Recherche"
-          class="search-icon"
-          (click)="onToggleSearchBar()"
-        />
-        <a class="wt" href="https://www.sqi.gouv.qc.ca/a-propos/nous-joindre"
-          >Nous joindre</a
-        >
-      </div>
-    </div>
-    <app-search-bar></app-search-bar>
+<div class="banner-wrapper">
+  <div class="banner-container">
+    <ul class="banner-content">
+      <li class="banner-item logo" lang="fr"><a href="https://www.quebec.ca/" target="_blank">
+        <img id="" alt="Site Web Société québécoise des infrastructures." src="assets/images/signature-PIV.svg"></a>
+      </li>
+      <li class="banner-item title">
+        <a href="https://www.sqi.gouv.qc.ca/"><span>Société québécoise des infrastructures</span></a>
+      </li>
+      <li class="banner-item"><a id="toggle-button" class="loop">
+        <span><img alt="Recherche" src="assets/images/loop.svg" width="24" height="24"></span></a></li>
+      <li class="banner-item"><a class="wt" href="https://www.sqi.gouv.qc.ca/a-propos/nous-joindre">Nous joindre</a></li>
+    </ul>
   </div>
-</header>
+</div>

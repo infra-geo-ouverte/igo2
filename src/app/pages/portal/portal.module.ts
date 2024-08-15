@@ -34,8 +34,6 @@ import {
 } from '@igo2/geo';
 import { IgoIntegrationModule } from '@igo2/integration';
 
-import { BreadcrumbComponent } from 'src/app/components/breadcrumb/breadcrumb.component';
-
 import { AppExpansionPanelModule } from './expansion-panel/expansion-panel.module';
 import { MapOverlayModule } from './map-overlay/map-overlay.module';
 import { PortalComponent } from './portal.component';
@@ -81,6 +79,6 @@ import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
     IgoWelcomeWindowModule
   ],
   exports: [PortalComponent],
-  declarations: [PortalComponent, BreadcrumbComponent]
+  declarations: [PortalComponent]
 })
 export class PortalModule {}
