@@ -1,0 +1,22 @@
+.wrapper {
+  padding-top: 40px;
+  max-width: 1314px;
+  margin: auto;
+}
+.title {
+  font-size: 30px;
+  position: relative;
+  height: 40px;
+  cursor: default;
+}
+.title::before {
+  content: '';
+  position: absolute;
+  height: 4px;
+  width: 36px;
+  bottom: 6px;
+  background-color: rgb(192, 124, 0);
+}
+.container {
+  padding: 20px 0px;
+}

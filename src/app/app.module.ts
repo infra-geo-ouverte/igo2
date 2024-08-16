@@ -5,6 +5,7 @@ import {
   Injector,
   NgModule
 } from '@angular/core';
+import { MatDividerModule } from '@angular/material/divider';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {
   MAT_TOOLTIP_DEFAULT_OPTIONS,
@@ -46,6 +47,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { FilterComponent } from './components/filter/filter.component';
 import { FooterModule } from './layout/footer/footer.module';
 import { NavigationMenuComponent } from './layout/navigation-menu/navigation-menu.component';
 import { NewHeaderComponent } from './layout/new-header/new-header.component';
@@ -55,7 +57,6 @@ import { PortalModule } from './pages';
 import { CarteComponent } from './pages/carte/carte.component';
 import { ImmeublesComponent } from './pages/immeubles/immeubles.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { FilterComponent } from './components/filter/filter.component';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -89,6 +90,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     IgoStopPropagationModule,
     PortalModule,
     FooterModule,
+    MatDividerModule,
     SearchBarComponent,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.igo.app.pwa.enabled,
