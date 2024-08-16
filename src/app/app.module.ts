@@ -55,6 +55,7 @@ import { PortalModule } from './pages';
 import { CarteComponent } from './pages/carte/carte.component';
 import { ImmeublesComponent } from './pages/immeubles/immeubles.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -74,7 +75,8 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     SubMenuComponent,
     CarteComponent,
     ImmeublesComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
