@@ -20,3 +20,10 @@
   width: 100%;
   padding: 4px 10px;
 }
+.line {
+  flex-direction: row;
+}
+.line input {
+  width: unset;
+  transform: scale(1.2);
+}
