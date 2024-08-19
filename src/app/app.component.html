@@ -11,4 +11,18 @@
 <app-sub-menu></app-sub-menu>
 <router-outlet></router-outlet>
 
+<app-portal
+  [style.visibility]="portal ? 'visible' : 'collapse'"
+  [ngClass]="
+    hasHeader
+      ? hasFooter
+        ? 'portal-with-header-footer'
+        : 'portal-with-header'
+      : hasFooter
+        ? 'portal-with-footer'
+        : 'portal'
+  "
+  igoStopDropPropagation
+></app-portal>
+
 <app-footer *ngIf="hasFooter"></app-footer>
