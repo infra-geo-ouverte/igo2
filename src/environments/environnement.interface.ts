@@ -1,9 +1,11 @@
 import { AllEnvironmentOptions } from '@igo2/integration';
 import { EnvironmentOptions as IntegrationEnvironmentOptions } from '@igo2/integration';
+
 import { MapOverlay } from 'src/app/pages/portal/map-overlay/map-overlay.interface';
 
 export interface AppEnvironmentOptions extends IntegrationEnvironmentOptions {
   igo: EnvironmentOptions;
+  immeublesUrl: string;
 }
 
 export interface EnvironmentOptions extends AllEnvironmentOptions {

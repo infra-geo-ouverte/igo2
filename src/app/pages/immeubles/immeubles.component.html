@@ -2,6 +2,17 @@
   <div class="title">Immeubles</div>
   <div class="container">
     <app-filter></app-filter>
-    <div class="results"></div>
+    <div class="results">
+      <div class="results-header">
+        <div class="results-count">{{ immeubles.length }} immeubles</div>
+        <div class="current-page">Immeubles 1 a 10</div>
+      </div>
+      <div class="items">
+        <ng-container *ngFor="let item of immeubles; let i = index">
+          <app-immeuble-card [item]="item"></app-immeuble-card>
+          <mat-divider *ngIf="i !== immeubles.length"></mat-divider>
+        </ng-container>
+      </div>
+    </div>
   </div>
 </div>
