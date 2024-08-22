@@ -1,7 +1,20 @@
 {
   "directionsSources": {
     "osrm": {
-      "url": "/services/itineraire/route/v1/driving/"
+      "name": "OSRM Québec",
+      "baseUrl": "/apis/itineraire/route/v1/",
+      "profiles": [
+        {
+          "name": "driving"
+        },
+        {
+          "name": "forestier",
+          "authorization": {
+            "url": "/apis/igo2/user/igo",
+            "property": "hasOsrmPrivateAccess"
+          }
+        }
+      ]
     }
   },
   "favoriteContext4NonAuthenticated": true,

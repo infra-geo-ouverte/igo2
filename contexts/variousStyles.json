@@ -93,12 +93,7 @@
       "styleByAttribute": {
         "type": "circle",
         "attribute": "MODÈLE",
-        "data": [
-          "^90 porte 4\"$",
-          "^100$",
-          "^400$",
-          null
-        ],
+        "data": ["^90 porte 4\"$", "^100$", "^400$", null],
         "color": ["orange", "red", "green", "blue"],
         "fill": ["orange", "red", "green", "blue"],
         "hstroke": ["orange", "red", "green", "blue"],
@@ -144,11 +139,7 @@
       "styleByAttribute": {
         "type": "circle",
         "attribute": "MODÈLE",
-        "data": [
-          "^90 porte 4\"$",
-          "^100$",
-          "^400$"
-        ],
+        "data": ["^90 porte 4\"$", "^100$", "^400$"],
         "fill": ["orange", "red", "green"],
         "icon": [
           "./assets/images/styles/fire-hydrant.svg",
