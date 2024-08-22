@@ -7,8 +7,6 @@ import {
   trigger
 } from '@angular/animations';
 
-import './portal.variables.scss';
-
 export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
   return [
     trigger('expansionPanelSize', [
