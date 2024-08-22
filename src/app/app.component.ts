@@ -1,14 +1,14 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, Location } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { AuthOptions } from '@igo2/auth';
 import { ConfigService, LanguageService, MessageService } from '@igo2/core';
 import { AnalyticsListenerService, AppOptions } from '@igo2/integration';
 import { DomUtils, userAgent } from '@igo2/utils';
 
-import { delay, first } from 'rxjs';
+import { delay, filter, first, tap } from 'rxjs';
 
 import { PwaService } from './services/pwa.service';
 
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   public hasNavigationHeader: boolean;
   public hasFooter: boolean;
   private promptEvent: any;
+  portal = false;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -33,7 +34,9 @@ export class AppComponent implements OnInit {
     private metaService: Meta,
     private messageService: MessageService,
     private pwaService: PwaService,
-    private router: Router
+    private router: Router,
+    private readonly activatedRoute: ActivatedRoute,
+    private location: Location
   ) {
     this.authConfig = this.configService.getConfig('auth', {});
 
@@ -59,6 +62,14 @@ export class AppComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    this.router.events
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        tap((e) => {
+          this.portal = this.location.path().toString() === '/carte';
+        })
+      )
+      .subscribe((d) => {});
     this.handleSplashScreen();
   }
 

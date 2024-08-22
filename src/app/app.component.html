@@ -3,10 +3,16 @@
 <igo-auth-form *ngIf="authConfig && authConfig.url"></igo-auth-form>
 
 <app-new-header *ngIf="hasHeader" #header></app-new-header>
-<app-navigation-menu *ngIf="hasNavigationHeader" #navigationHeader></app-navigation-menu>
+<app-navigation-menu
+  *ngIf="hasNavigationHeader"
+  #navigationHeader
+></app-navigation-menu>
 <app-breadcrumb></app-breadcrumb>
+<app-sub-menu></app-sub-menu>
+<router-outlet></router-outlet>
 
 <app-portal
+  [style.visibility]="portal ? 'visible' : 'collapse'"
   [ngClass]="
     hasHeader
       ? hasFooter

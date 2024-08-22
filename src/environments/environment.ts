@@ -169,5 +169,6 @@ export const environment: AppEnvironmentOptions = {
         strokeWidth: 2 // line and poly
       }
     }
-  }
+  },
+  immeublesUrl: 'http://vps-5d30fe87.vps.ovh.ca:3000/v1/query/immeublesVw2'
 };
