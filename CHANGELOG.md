@@ -1,3 +1,24 @@
+# [17.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v16.3.0...v17.0.0) (2024-08-22)
+
+
+### Bug Fixes
+
+* add google font symbols ([fb7af4a](https://github.com/infra-geo-ouverte/igo2/commit/fb7af4ac24d5b6c1d521f1e9aa840ee2b177fb74))
+* **core:** use provideConfig ([6a93da4](https://github.com/infra-geo-ouverte/igo2/commit/6a93da431052db3b9053d793994a3215b3298eae))
+* double head in index ([7626f6c](https://github.com/infra-geo-ouverte/igo2/commit/7626f6c07b55636a1fdd4dd641f6d9a907f9ff2a))
+* **environment:** add testgeoegl in trusted host ([e400086](https://github.com/infra-geo-ouverte/igo2/commit/e400086c0dfe4835f3b83856e9121c11bd1cdca0))
+* ol version to 9.1.0 ([9c66af3](https://github.com/infra-geo-ouverte/igo2/commit/9c66af336373e56df01da15d86b0ba1582868112))
+
+
+### Features
+
+* **auth:** configure auth with provider ([6b0098f](https://github.com/infra-geo-ouverte/igo2/commit/6b0098f06aa38c02b2b8964261cec0a90aa7051e))
+* **common:** refact in submodule ([#1155](https://github.com/infra-geo-ouverte/igo2/issues/1155)) ([76fb402](https://github.com/infra-geo-ouverte/igo2/commit/76fb402d28563696cba902cb52c412641a6ac9cc)), closes [#1156](https://github.com/infra-geo-ouverte/igo2/issues/1156)
+* **directions:** added possibility to toggle between two routing sources ([#1150](https://github.com/infra-geo-ouverte/igo2/issues/1150)) ([#1150](https://github.com/infra-geo-ouverte/igo2/issues/1150)) ([6157df4](https://github.com/infra-geo-ouverte/igo2/commit/6157df41fdc3b78dd56b80aff6babef4c5749e4c))
+* replace @mdi/angular-material with Google Font - Symbol BREAKIN… ([#1154](https://github.com/infra-geo-ouverte/igo2/issues/1154)) ([3c8cf48](https://github.com/infra-geo-ouverte/igo2/commit/3c8cf4812096adbb30f4bd3494c9e6274acf3d91))
+
+
+
 # [16.3.0](https://github.com/infra-geo-ouverte/igo2/compare/v16.2.0...v16.3.0) (2024-01-25)
 
 
