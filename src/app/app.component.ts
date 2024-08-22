@@ -54,7 +54,9 @@ export class AppComponent implements OnInit {
     this.setManifest();
     this.installPrompt();
     this.pwaService.checkForUpdates();
-  }
+
+    this.languageService.setLanguage('fr');
+}
 
   ngOnInit(): void {
     this.handleSplashScreen();
