@@ -7,6 +7,9 @@ import {
   Output
 } from '@angular/core';
 
+import { BackdropComponent } from '@igo2/common/backdrop';
+
+import { ExpansionPanelHeaderComponent } from './expansion-panel-header.component';
 import { showContent } from './expansion-panel.animations';
 
 @Component({
@@ -14,7 +17,9 @@ import { showContent } from './expansion-panel.animations';
   templateUrl: './expansion-panel.component.html',
   styleUrls: ['./expansion-panel.component.scss'],
   animations: [showContent()],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [BackdropComponent, ExpansionPanelHeaderComponent]
 })
 export class ExpansionPanelComponent {
   @Input()

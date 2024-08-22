@@ -1,3 +1,4 @@
+import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,25 +10,31 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import {
   Action,
   ActionStore,
-  ActionbarMode,
-  EntityStore,
-  getEntityTitle
-} from '@igo2/common';
+  ActionbarComponent,
+  ActionbarMode
+} from '@igo2/common/action';
+import { EntityStore, getEntityTitle } from '@igo2/common/entity';
+import { PanelComponent } from '@igo2/common/panel';
+import { StopPropagationDirective } from '@igo2/common/stop-propagation';
+import { ConfigService } from '@igo2/core/config';
+import { LanguageService } from '@igo2/core/language';
+import { Media, MediaService } from '@igo2/core/media';
 import {
-  ConfigService,
-  LanguageService,
-  Media,
-  MediaService,
   StorageScope,
   StorageService,
   StorageServiceEvent
-} from '@igo2/core';
+} from '@igo2/core/storage';
 import {
   Feature,
+  FeatureDetailsComponent,
   FeatureMotion,
   GeoServiceDefinition,
   IgoMap,
@@ -35,6 +42,7 @@ import {
   LayerService,
   PropertyTypeDetectorService,
   SearchResult,
+  SearchResultsComponent,
   computeOlFeaturesExtent,
   featureFromOl,
   featureToOl,
@@ -52,6 +60,7 @@ import olFeature from 'ol/Feature';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 import olPoint from 'ol/geom/Point';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
 import { debounceTime, map, skipWhile, tap } from 'rxjs/operators';
 
@@ -63,7 +72,24 @@ interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
   selector: 'app-toast-panel',
   templateUrl: './toast-panel.component.html',
   styleUrls: ['./toast-panel.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    ActionbarComponent,
+    AsyncPipe,
+    FeatureDetailsComponent,
+    MatBadgeModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    NgClass,
+    NgIf,
+    NgTemplateOutlet,
+    PanelComponent,
+    SearchResultsComponent,
+    StopPropagationDirective,
+    TranslateModule
+  ]
 })
 export class ToastPanelComponent implements OnInit, OnDestroy {
   static SWIPE_ACTION = {
@@ -314,7 +340,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
-    this.setResizeWindowIcon();
   }
 
   private monitorResultOutOfView() {
@@ -385,7 +410,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       {
         id: 'list',
         title: this.languageService.translate.instant('toastPanel.backToList'),
-        icon: 'format-list-bulleted-square',
+        icon: 'list',
         tooltip: this.languageService.translate.instant(
           'toastPanel.listButton'
         ),
@@ -401,7 +426,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         title: this.languageService.translate.instant(
           'toastPanel.zoomOnFeature'
         ),
-        icon: 'magnify-plus-outline',
+        icon: 'zoom_in',
         tooltip: this.languageService.translate.instant(
           'toastPanel.zoomOnFeatureTooltip'
         ),
@@ -431,7 +456,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.zoomOnFeaturesTooltip'
         ),
-        icon: 'magnify-scan',
+        icon: 'frame_inspect',
         availability: () => {
           return this.multiple;
         },
@@ -472,7 +497,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.fullExtentTooltip'
         ),
-        icon: 'arrow-expand',
+        icon: 'open_in_full',
         display: () => {
           return this.fullExtent$.pipe(map((v) => !v && !this.isDesktop()));
         },
@@ -488,7 +513,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.standardExtentTooltip'
         ),
-        icon: 'arrow-collapse',
+        icon: 'close_fullscreen',
         display: () => {
           return this.fullExtent$.pipe(map((v) => v && !this.isDesktop()));
         },
@@ -929,16 +954,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  setResizeWindowIcon() {
-    if (this.fullExtent) {
-      this.iconResizeWindows = 'arrow-collapse';
-      // this.iconResizeWindows = 'vector-arrange-below';
-    } else {
-      this.iconResizeWindows = 'arrow-expand';
-      // this.iconResizeWindows = 'crop-square';
-    }
-  }
-
   resizeWindows() {
     this.storageService.set('fullExtent', !this.fullExtent);
 
@@ -951,11 +966,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   reduceWindow() {
     this.fullExtent = false;
-    this.setResizeWindowIcon();
   }
 
   enlargeWindows() {
     this.fullExtent = true;
-    this.setResizeWindowIcon();
   }
 }

@@ -1,3 +1,5 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
-enabled ,Boolean ,Permet d'activer/ désactiver la source. ,true | false ,true 
-url ,String ,Url du serveur retournant l'itinéraire. ,,`https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/ <https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/>`_ 
+name ,String ,Nom de la source,,
+baseUrl ,String ,URL du service retournant l'itinéraire. ,,`https://geoegl.msp.gouv.qc.ca/apis/itineraire/route/v1/driving/ <https://geoegl.msp.gouv.qc.ca/apis/itineraire/route/v1/driving/>`
+profiles , BaseDirectionsSourceOptionsProfile[] , Liste de profils à utiliser. , 
+authorizationUrl ,String ,URL permettant de vérifier l'accessibilité d'une source à un utilisateur. | Utilisé pour une source privée.,,

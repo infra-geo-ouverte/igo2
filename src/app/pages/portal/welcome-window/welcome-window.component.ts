@@ -1,18 +1,46 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MatDialog,
+  MatDialogClose,
+  MatDialogContent
+} from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { ConfigService, LanguageService } from '@igo2/core';
+import { CustomHtmlComponent } from '@igo2/common/custom-html';
+import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
+import { ConfigService } from '@igo2/core/config';
+import { LanguageService } from '@igo2/core/language';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { getAppVersion } from 'src/app/app.utils';
 
 import { WelcomeWindowService } from './welcome-window.service';
-import { getAppVersion } from 'src/app/app.utils';
+
+('@igo2/core');
 
 @Component({
   selector: 'app-welcome-window',
   templateUrl: './welcome-window.component.html',
-  styleUrls: ['./welcome-window.component.scss']
+  styleUrls: ['./welcome-window.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    MatToolbarModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatDialogContent,
+    CustomHtmlComponent,
+    IgoInteractiveTourModule,
+    MatButtonModule,
+    MatDialogClose,
+    TranslateModule,
+    AsyncPipe
+  ]
 })
 export class WelcomeWindowComponent implements OnInit, OnDestroy {
   // isVisible = true;

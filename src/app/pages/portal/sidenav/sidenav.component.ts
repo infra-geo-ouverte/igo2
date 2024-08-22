@@ -1,3 +1,4 @@
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,19 +8,42 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { Tool, Toolbox } from '@igo2/common';
-import { ConfigService } from '@igo2/core';
+import { HomeButtonComponent } from '@igo2/common/home-button';
+import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
+import { PanelComponent } from '@igo2/common/panel';
+import { Tool, Toolbox, ToolboxComponent } from '@igo2/common/tool';
+import { ConfigService } from '@igo2/core/config';
 import { IgoMap } from '@igo2/geo';
 import { CatalogState, ToolState } from '@igo2/integration';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    HomeButtonComponent,
+    IgoInteractiveTourModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    NgClass,
+    NgIf,
+    PanelComponent,
+    ToolboxComponent,
+    TranslateModule
+  ]
 })
 export class SidenavComponent implements OnInit, OnDestroy {
   title$: BehaviorSubject<string> = new BehaviorSubject<string>(undefined);

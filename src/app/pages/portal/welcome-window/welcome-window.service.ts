@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialogConfig } from '@angular/material/dialog';
 
-import { ConfigService, StorageService } from '@igo2/core';
+import { ConfigService } from '@igo2/core/config';
+import { StorageService } from '@igo2/core/storage';
+
 import { getAppVersion } from 'src/app/app.utils';
 
 @Injectable({
