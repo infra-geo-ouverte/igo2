@@ -27,8 +27,6 @@ export class ExpansionPanelHeaderComponent {
     return this.expanded;
   }
 
-  constructor() {}
-
   handleClose(): void {
     this.expandedChange.emit(false);
   }
