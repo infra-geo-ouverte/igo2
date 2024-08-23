@@ -16,17 +16,12 @@
       },
       "architect": {
         "build": {
-          "defaultConfiguration": "developpement",
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "aot": true,
-            "outputPath": {
-              "base": "dist/igo2"
-            },
+            "outputPath": "dist/igo2",
             "index": "src/index.html",
-            "polyfills": [
-              "src/polyfills.ts"
-            ],
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -375,10 +370,6 @@
       "@angular-eslint/schematics",
       "@schematics/angular"
     ],
-    "cache": {
-      "enabled": false,
-      "environment": "all"
-    },
     "analytics": false
   }
 }
