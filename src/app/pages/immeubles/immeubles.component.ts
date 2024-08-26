@@ -13,14 +13,24 @@ export class ImmeublesComponent implements OnInit {
   sort = '';
   limit = 10;
   offset = 0;
+  total = 10;
 
   constructor(private immeublesService: ImmeublesService) {}
 
   ngOnInit(): void {
+    this.getImmeubles();
+  }
+
+  onPaginate(page: number) {
+    this.offset = this.limit * page;
+    this.getImmeubles();
+  }
+
+  getImmeubles() {
     this.immeublesService
       .getImmeubles(this.columns, this.sort, this.limit, this.offset)
-      .subscribe((response) => {
-        debugger;
+      .subscribe((response: any) => {
+        this.total = response.length;
         this.immeubles = response;
       });
   }

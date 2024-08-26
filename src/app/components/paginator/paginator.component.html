@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <img
+    *ngIf="_skip <= _limit"
+    class="previous disabled"
+    src="assets/images/Left.png"
+  />
+  <img
+    *ngIf="_skip > _limit"
+    class="previous"
+    (click)="onPrevious()"
+    src="assets/images/Left.png"
+  />
+
+  <div class="pages">
+    <div
+      class="page"
+      [ngClass]="{ active: currentPage === i + 1 }"
+      (click)="onPage(i)"
+      *ngFor="page of pages; let i = index"
+    >
+      {{ i + 1 }}
+    </div>
+  </div>
+  <img
+    *ngIf="_skip + _limit > _total"
+    class="next disabled"
+    src="assets/images/Left.png"
+  />
+
+  <img
+    *ngIf="_skip + _limit <= _total"
+    src="assets/images/Left.png"
+    class="next"
+    (click)="onNext()"
+  />
+</div>

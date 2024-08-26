@@ -50,6 +50,7 @@ import { routes } from './app.routes';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { ImmeubleCardComponent } from './components/immeuble-card/immeuble-card.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 import { FooterModule } from './layout/footer/footer.module';
 import { NavigationMenuComponent } from './layout/navigation-menu/navigation-menu.component';
 import { NewHeaderComponent } from './layout/new-header/new-header.component';
@@ -80,7 +81,8 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     ImmeublesComponent,
     NotFoundComponent,
     FilterComponent,
-    ImmeubleCardComponent
+    ImmeubleCardComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
