@@ -46,3 +46,253 @@ span.footer-text a {
   border-top: none;
   order: 1;
 }
+footer.footer {
+}
+
+.footer-top {
+  @media (min-width: 280px) {
+    display: flex;
+    width: 100%;
+    height: auto;
+    background-color: var(--qc-color-blue-medium);
+    padding: 16px 16px 40px 16px;
+  }
+}
+.footer-top {
+  @media (min-width: 480px) {
+    padding: 16px 4%;
+  }
+}
+
+.footer-top {
+  @media (min-width: 768px) {
+    padding: 16px;
+  }
+}
+
+.footer-container {
+  @media (min-width: 280px) {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+    max-width: 1314px;
+  }
+}
+.footer-container {
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+.footer-container {
+  @media (min-width: 992px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.footer-container {
+  @media (min-width: 1360px) {
+    justify-content: space-between;
+  }
+}
+
+.footer-wrapper {
+  @media (min-width: 280px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.footer-wrapper {
+  @media (min-width: 480px) {
+    flex-direction: row;
+  }
+}
+.footer-item.right-block {
+  @media (min-width: 992px) {
+    width: 44%;
+  }
+}
+.footer-item.right-block {
+  @media (min-width: 1350px) {
+    width: 40%;
+  }
+}
+
+.footer-item {
+  @media (min-width: 280px) {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+.footer-item {
+  @media (min-width: 480px) {
+    margin-top: 24px;
+  }
+}
+.pb-2 {
+  padding-bottom: 0.5rem !important;
+}
+.footer-item.links {
+  @media (min-width: 768px) {
+    width: 248px;
+  }
+}
+
+.footer-item {
+  @media (min-width: 280px) {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+
+.footer-item {
+  @media (min-width: 480px) {
+    margin-top: 24px;
+  }
+}
+.footer-item.social-links {
+  @media (min-width: 992px) {
+    width: 348px;
+  }
+}
+
+.social-links {
+  @media (min-width: 768px) {
+    width: 240px;
+  }
+}
+.footer-item {
+  @media (min-width: 280px) {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+.footer-item {
+  @media (min-width: 480px) {
+    margin-top: 24px;
+  }
+}
+.footer-item h6,
+.footer-item.links header span {
+  @media (min-width: 280px) {
+    font-weight: var(--qc-font-weight-header-medium);
+    color: var(--qc-color-white);
+    margin-top: 0;
+    font-size: 19px;
+  }
+}
+
+h6 {
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: bold;
+  color: #223654;
+  margin-top: 16px;
+  margin-bottom: 0px;
+}
+.sociallinks-wrapper {
+  @media (min-width: 280px) {
+    margin: 8px 0;
+  }
+}
+.footer-item ul,
+.footer-bottom-content ul {
+  @media (min-width: 280px) {
+    list-style: none;
+    padding-left: 0;
+  }
+}
+
+.sociallinks-items {
+  @media (min-width: 280px) {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+  }
+}
+.footer-item .sociallinks-items li {
+  @media (min-width: 280px) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.footer-item li {
+  @media (min-width: 280px) {
+    margin: 16px 16px 8px 0px;
+  }
+}
+.footer-container a {
+  @media (min-width: 280px) {
+    color: var(--qc-color-white);
+  }
+}
+
+a {
+  color: #eb3e4a;
+  text-decoration: none;
+}
+
+.sociallinks-items img {
+  @media (min-width: 280px) {
+    height: 27px;
+    width: auto;
+  }
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+img {
+  @media (min-width: 280px) {
+    vertical-align: middle;
+  }
+}
+.footer-contact:first-child {
+  @media (min-width: 280px) {
+    border-bottom: solid 1px var(--qc-color-grey-light-3);
+    padding-top: 0;
+    font-size: 20px;
+  }
+}
+
+.footer-contact {
+  @media (min-width: 280px) {
+    padding: 16px 0;
+    width: 100%;
+  }
+}
+
+.navbar-mainnavigation.navbar-default a:not(.active):hover,
+span {
+  @media (min-width: 280px) {
+    color: var(--qc-color-white);
+  }
+}
+
+.footer-contact p {
+  @media (min-width: 280px) {
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+.footer-top p {
+  @media (min-width: 280px) {
+    margin-bottom: 0;
+    margin-top: 8px;
+    color: var(--qc-color-white);
+  }
+}
