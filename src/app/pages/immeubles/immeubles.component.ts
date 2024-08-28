@@ -13,7 +13,7 @@ export class ImmeublesComponent implements OnInit {
   sort = '';
   limit = 10;
   offset = 0;
-  total = 10;
+  total = 50;
 
   constructor(private immeublesService: ImmeublesService) {}
 
@@ -30,7 +30,7 @@ export class ImmeublesComponent implements OnInit {
     this.immeublesService
       .getImmeubles(this.columns, this.sort, this.limit, this.offset)
       .subscribe((response: any) => {
-        this.total = response.length;
+        //this.total = response.length;
         this.immeubles = response;
       });
   }
