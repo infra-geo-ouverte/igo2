@@ -22,20 +22,21 @@ igo-message-center
   right: 10px;
 }
 
-$header-height: 72px;
-$header-height-mobile: 72px;
-$footer-height: 29px;
+$header-height: 216px;
+$header-height-mobile: 216px;
+$footer-height: 32px;
+$footer-height-mobile: 32px;
 
 ::ng-deep .portal-with-header {
   height: calc(100% - #{$header-height-mobile}) !important;
 }
 
 ::ng-deep .portal-with-header-footer {
-  height: calc(100% - #{$header-height-mobile} - #{$footer-height}) !important;
+  height: calc(100% - #{$header-height-mobile} - #{$footer-height-mobile * 2}) !important;
 }
 
 ::ng-deep .portal-with-footer {
-  height: calc(100% - #{$footer-height}) !important;
+  height: calc(100% - #{$footer-height-mobile * 2}) !important;
 }
 
 @media screen and (min-width: 824px) {
@@ -44,6 +45,10 @@ $footer-height: 29px;
   }
 
   ::ng-deep .portal-with-header-footer {
-    height: calc(100% - #{$header-height} - #{$footer-height}) !important;
+    height: calc(100% - #{$header-height} - #{$footer-height * 2}) !important;
+  }
+
+  ::ng-deep .portal-with-footer {
+    height: calc(100% - #{$footer-height * 2}) !important;
   }
 }
