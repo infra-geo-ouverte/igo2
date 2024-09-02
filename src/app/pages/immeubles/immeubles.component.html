@@ -5,7 +5,9 @@
     <div class="results">
       <div class="results-header">
         <div class="results-count">{{ immeubles.length }} immeubles</div>
-        <div class="current-page">Immeubles 1 a 10</div>
+        <div class="current-page" *ngIf="immeubles.length > 0">
+          Immeubles {{ offset + 1 + ' a ' + total / limit }}
+        </div>
       </div>
       <div class="items">
         <ng-container *ngFor="let item of immeubles; let i = index">

@@ -45,7 +45,10 @@ export class ImmeublesComponent implements OnInit {
         this.offset
       )
       .subscribe((response: any) => {
-        //this.total = response.length;
+        if (response.length < 10) {
+          this.total = response.length;
+          this.limit = response.length;
+        }
         this.immeubles = response;
       });
   }

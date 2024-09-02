@@ -30,6 +30,7 @@ export class PaginatorComponent implements OnInit {
   }
 
   updatePages() {
+    this.pages = new Array(0);
     if (this._total > 0 && this._limit > 0) {
       this.pages = new Array(Math.floor(this._total / this._limit));
     }

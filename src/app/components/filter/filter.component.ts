@@ -27,7 +27,7 @@ export class FilterComponent implements OnInit {
   onChange(key: string, value: string) {
     switch (key) {
       case 'numero':
-        this.filterService.onFilter(`lower(numero) LIKE '%${value}%'`);
+        this.filterService.onFilter(`lower(numero_immeuble) LIKE '%${value}%'`);
         break;
     }
   }
