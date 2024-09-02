@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { LanguageService } from '@igo2/core';
 
@@ -8,5 +8,6 @@ import { LanguageService } from '@igo2/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
+  @Input() isDisplayingMap: boolean;
   constructor(protected languageService: LanguageService) {}
 }
