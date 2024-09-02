@@ -1,13 +1,18 @@
 <div class="wrapper">
-  <div class="title">Filters</div>
+  <div class="title-wrapper">
+    <div class="title">Filters</div>
+    <div class="clear" (click)="onClear()">Clear</div>
+  </div>
   <form class="form">
     <div class="filed">
       <label for="numero">Numero civique</label>
       <input
         id="numero"
         name="numero"
+        #numeroInput
         placeholder="Example de numero civique"
         type="text"
+        (change)="onChange('numero', numeroInput?.value)"
       />
     </div>
     <mat-divider></mat-divider>

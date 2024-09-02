@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FilterService } from 'src/app/services/filter.service';
 import { ImmeublesService } from 'src/app/services/immeubles.service';
 
 @Component({
@@ -14,11 +15,19 @@ export class ImmeublesComponent implements OnInit {
   limit = 10;
   offset = 0;
   total = 50;
+  filter = '';
 
-  constructor(private immeublesService: ImmeublesService) {}
+  constructor(
+    private immeublesService: ImmeublesService,
+    private readonly filterService: FilterService
+  ) {}
 
   ngOnInit(): void {
     this.getImmeubles();
+    this.filterService.filter.subscribe((filter) => {
+      this.filter = filter;
+      this.getImmeubles();
+    });
   }
 
   onPaginate(page: number) {
@@ -28,7 +37,13 @@ export class ImmeublesComponent implements OnInit {
 
   getImmeubles() {
     this.immeublesService
-      .getImmeubles(this.columns, this.sort, this.limit, this.offset)
+      .getImmeubles(
+        this.filter,
+        this.columns,
+        this.sort,
+        this.limit,
+        this.offset
+      )
       .subscribe((response: any) => {
         //this.total = response.length;
         this.immeubles = response;

@@ -9,9 +9,16 @@ import { environment } from 'src/environments/environment';
 export class ImmeublesService {
   constructor(private http: HttpClient) {}
 
-  getImmeubles(columns: any, sort: any, limit: any, offset: any) {
+  getImmeubles(
+    filter: string,
+    columns: any,
+    sort: any,
+    limit: any,
+    offset: any
+  ) {
     return this.http.get(environment.immeublesUrl, {
       params: {
+        filter,
         columns,
         sort,
         limit,
