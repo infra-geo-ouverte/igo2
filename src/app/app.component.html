@@ -12,7 +12,7 @@
 <router-outlet></router-outlet>
 
 <app-portal
-  [style.visibility]="portal ? 'visible' : 'collapse'"
+  *ngIf="portal"
   [ngClass]="
     hasHeader
       ? hasFooter
@@ -25,4 +25,4 @@
   igoStopDropPropagation
 ></app-portal>
 
-<app-footer *ngIf="hasFooter"></app-footer>
+<app-footer *ngIf="hasFooter" [isDisplayingMap]="portal"></app-footer>

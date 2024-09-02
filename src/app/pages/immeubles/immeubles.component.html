@@ -13,6 +13,12 @@
           <mat-divider *ngIf="i !== immeubles.length"></mat-divider>
         </ng-container>
       </div>
+      <app-paginator
+        (paginate)="onPaginate($event)"
+        [limit]="limit"
+        [skip]="offset"
+        [total]="total"
+      ></app-paginator>
     </div>
   </div>
 </div>
