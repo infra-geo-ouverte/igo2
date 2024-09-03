@@ -4,9 +4,9 @@
     <app-filter></app-filter>
     <div class="results">
       <div class="results-header">
-        <div class="results-count">{{ immeubles.length }} immeubles</div>
-        <div class="current-page" *ngIf="immeubles.length > 0">
-          Immeubles {{ offset + 1 + ' a ' + total / limit }}
+        <div class="results-count">{{ total }} immeubles</div>
+        <div class="current-page" *ngIf="total > 0">
+          Immeubles {{ offset + 1 + ' a ' + pages }}
         </div>
       </div>
       <div class="items">
@@ -20,6 +20,7 @@
         [limit]="limit"
         [skip]="offset"
         [total]="total"
+        [pages]="pages"
       ></app-paginator>
     </div>
   </div>

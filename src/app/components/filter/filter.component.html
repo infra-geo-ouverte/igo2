@@ -9,16 +9,28 @@
       <input
         id="numero"
         name="numero"
-        #numeroInput
         placeholder="Example de numero civique"
         type="text"
-        (change)="onChange('numero', numeroInput?.value)"
+        #adresse_immeubleInput
+        (change)="onChange('adresse_immeuble', adresse_immeubleInput?.value)"
       />
     </div>
     <mat-divider></mat-divider>
     <div class="filed">
       <label for="rue">Rue</label>
-      <input id="rue" name="rue" placeholder="Example de rue" type="text" />
+      <input
+        id="rue"
+        name="rue"
+        placeholder="Example de rue"
+        type="text"
+        #tel_direction_immobiliereInput
+        (change)="
+          onChange(
+            'tel_direction_immobiliere',
+            tel_direction_immobiliereInput?.value
+          )
+        "
+      />
     </div>
     <mat-divider></mat-divider>
     <div class="filed">
@@ -28,6 +40,13 @@
         name="ville"
         placeholder="Example de ville ou municipilate"
         type="text"
+        #courriel_direction_immobiliereInput
+        (change)="
+          onChange(
+            'courriel_direction_immobiliere',
+            courriel_direction_immobiliereInput?.value
+          )
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -38,6 +57,8 @@
         name="numero_immeuble"
         placeholder="Example de numero d'immeuble"
         type="text"
+        #numero_immeubleInput
+        (change)="onChange('numero_immeuble', numero_immeubleInput?.value)"
       />
     </div>
     <mat-divider></mat-divider>
@@ -48,6 +69,13 @@
         name="direction"
         placeholder="Choisir une direction immobliere"
         type="text"
+        #direction_immobiliere_sigleInput
+        (change)="
+          onChange(
+            'direction_immobiliere_sigle',
+            direction_immobiliere_sigleInput?.value
+          )
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -59,6 +87,8 @@
         name="nom_immeuble"
         placeholder="Example de numero d'immeuble"
         type="text"
+        #nom_immeubleInput
+        (change)="onChange('nom_immeuble', nom_immeubleInput?.value)"
       />
     </div>
     <mat-divider></mat-divider>
@@ -69,6 +99,10 @@
         name="vocation"
         placeholder="Choisir une vocation"
         type="text"
+        #vocation_principaleInput
+        (change)="
+          onChange('vocation_principale', vocation_principaleInput?.value)
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -79,6 +113,10 @@
         name="region"
         placeholder="Choisir une region administrative"
         type="text"
+        #region_adminsitrativeInput
+        (change)="
+          onChange('region_adminsitrative', region_adminsitrativeInput?.value)
+        "
       />
     </div>
     <mat-divider></mat-divider>

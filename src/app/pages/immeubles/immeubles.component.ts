@@ -14,7 +14,8 @@ export class ImmeublesComponent implements OnInit {
   sort = '';
   limit = 10;
   offset = 0;
-  total = 50;
+  total = 0;
+  pages = 1;
   filter = '';
 
   constructor(
@@ -45,10 +46,13 @@ export class ImmeublesComponent implements OnInit {
         this.offset
       )
       .subscribe((response: any) => {
+        this.total = response.length;
         if (response.length < 10) {
-          this.total = response.length;
           this.limit = response.length;
+        } else {
+          this.limit = 10;
         }
+        this.pages = Math.ceil(this.total / this.limit);
         this.immeubles = response;
       });
   }
