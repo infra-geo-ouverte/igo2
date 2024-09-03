@@ -47,7 +47,7 @@ export class ImmeublesComponent implements OnInit {
       )
       .subscribe((response: any) => {
         this.total = response.length;
-        if (response.length < 10) {
+        if (response.length < 10 && response.length > 0) {
           this.limit = response.length;
         } else {
           this.limit = 10;
