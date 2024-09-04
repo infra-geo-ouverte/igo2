@@ -11,8 +11,10 @@
         name="numero"
         placeholder="Example de numero civique"
         type="text"
-        #adresse_immeubleInput
-        (change)="onChange('adresse_immeuble', adresse_immeubleInput?.value)"
+        #numero_civiqueInput
+        (change)="
+          onChange('numero_civique', numero_civiqueInput?.value?.toLowerCase())
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -23,13 +25,8 @@
         name="rue"
         placeholder="Example de rue"
         type="text"
-        #tel_direction_immobiliereInput
-        (change)="
-          onChange(
-            'tel_direction_immobiliere',
-            tel_direction_immobiliereInput?.value
-          )
-        "
+        #rueInput
+        (change)="onChange('rue', rueInput?.value?.toLowerCase())"
       />
     </div>
     <mat-divider></mat-divider>
@@ -40,11 +37,11 @@
         name="ville"
         placeholder="Example de ville ou municipilate"
         type="text"
-        #courriel_direction_immobiliereInput
+        #ville_municipaliteInput
         (change)="
           onChange(
-            'courriel_direction_immobiliere',
-            courriel_direction_immobiliereInput?.value
+            'ville_municipalite',
+            ville_municipaliteInput?.value?.toLowerCase()
           )
         "
       />
@@ -58,7 +55,12 @@
         placeholder="Example de numero d'immeuble"
         type="text"
         #numero_immeubleInput
-        (change)="onChange('numero_immeuble', numero_immeubleInput?.value)"
+        (change)="
+          onChange(
+            'numero_immeuble',
+            numero_immeubleInput?.value?.toLowerCase()
+          )
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -69,11 +71,11 @@
         name="direction"
         placeholder="Choisir une direction immobliere"
         type="text"
-        #direction_immobiliere_sigleInput
+        #direction_immobiliere_nomInput
         (change)="
           onChange(
-            'direction_immobiliere_sigle',
-            direction_immobiliere_sigleInput?.value
+            'direction_immobiliere_nom',
+            direction_immobiliere_nomInput?.value?.toLowerCase()
           )
         "
       />
@@ -88,7 +90,9 @@
         placeholder="Example de numero d'immeuble"
         type="text"
         #nom_immeubleInput
-        (change)="onChange('nom_immeuble', nom_immeubleInput?.value)"
+        (change)="
+          onChange('nom_immeuble', nom_immeubleInput?.value?.toLowerCase())
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -101,7 +105,10 @@
         type="text"
         #vocation_principaleInput
         (change)="
-          onChange('vocation_principale', vocation_principaleInput?.value)
+          onChange(
+            'vocation_principale',
+            vocation_principaleInput?.value?.toLowerCase()
+          )
         "
       />
     </div>
@@ -115,7 +122,10 @@
         type="text"
         #region_adminsitrativeInput
         (change)="
-          onChange('region_adminsitrative', region_adminsitrativeInput?.value)
+          onChange(
+            'region_adminsitrative',
+            region_adminsitrativeInput?.value?.toLowerCase()
+          )
         "
       />
     </div>
