@@ -1,5 +1,8 @@
 <div class="wrapper">
-  <div class="title">Filters</div>
+  <div class="title-wrapper">
+    <div class="title">Filters</div>
+    <div class="clear" (click)="onClear()">Clear</div>
+  </div>
   <form class="form">
     <div class="filed">
       <label for="numero">Numero civique</label>
@@ -8,12 +11,23 @@
         name="numero"
         placeholder="Example de numero civique"
         type="text"
+        #numero_civiqueInput
+        (change)="
+          onChange('numero_civique', numero_civiqueInput?.value?.toLowerCase())
+        "
       />
     </div>
     <mat-divider></mat-divider>
     <div class="filed">
       <label for="rue">Rue</label>
-      <input id="rue" name="rue" placeholder="Example de rue" type="text" />
+      <input
+        id="rue"
+        name="rue"
+        placeholder="Example de rue"
+        type="text"
+        #rueInput
+        (change)="onChange('rue', rueInput?.value?.toLowerCase())"
+      />
     </div>
     <mat-divider></mat-divider>
     <div class="filed">
@@ -23,6 +37,13 @@
         name="ville"
         placeholder="Example de ville ou municipilate"
         type="text"
+        #ville_municipaliteInput
+        (change)="
+          onChange(
+            'ville_municipalite',
+            ville_municipaliteInput?.value?.toLowerCase()
+          )
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -33,6 +54,13 @@
         name="numero_immeuble"
         placeholder="Example de numero d'immeuble"
         type="text"
+        #numero_immeubleInput
+        (change)="
+          onChange(
+            'numero_immeuble',
+            numero_immeubleInput?.value?.toLowerCase()
+          )
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -43,6 +71,13 @@
         name="direction"
         placeholder="Choisir une direction immobliere"
         type="text"
+        #direction_immobiliere_nomInput
+        (change)="
+          onChange(
+            'direction_immobiliere_nom',
+            direction_immobiliere_nomInput?.value?.toLowerCase()
+          )
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -54,6 +89,10 @@
         name="nom_immeuble"
         placeholder="Example de numero d'immeuble"
         type="text"
+        #nom_immeubleInput
+        (change)="
+          onChange('nom_immeuble', nom_immeubleInput?.value?.toLowerCase())
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -64,6 +103,13 @@
         name="vocation"
         placeholder="Choisir une vocation"
         type="text"
+        #vocation_principaleInput
+        (change)="
+          onChange(
+            'vocation_principale',
+            vocation_principaleInput?.value?.toLowerCase()
+          )
+        "
       />
     </div>
     <mat-divider></mat-divider>
@@ -74,6 +120,13 @@
         name="region"
         placeholder="Choisir une region administrative"
         type="text"
+        #region_adminsitrativeInput
+        (change)="
+          onChange(
+            'region_adminsitrative',
+            region_adminsitrativeInput?.value?.toLowerCase()
+          )
+        "
       />
     </div>
     <mat-divider></mat-divider>

@@ -5,6 +5,7 @@ import {
   Injector,
   NgModule
 } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -88,6 +89,7 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule,
     IgoAuthModule.forRoot(),
     IgoGestureModule.forRoot(),
     IgoMessageModule,

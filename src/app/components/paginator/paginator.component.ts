@@ -9,7 +9,8 @@ export class PaginatorComponent implements OnInit {
   _limit: number = 0;
   _skip: number = 0;
   _total: number = 0;
-  pages = new Array(0);
+  _pages = 0;
+  pagesArr = new Array(0);
   currentPage = 1;
 
   @Input() set limit(value: number) {
@@ -20,7 +21,9 @@ export class PaginatorComponent implements OnInit {
   }
   @Input() set total(value: number) {
     this._total = value;
-    this.updatePages();
+  }
+  @Input() set pages(value: number) {
+    this._pages = value;
   }
 
   @Output() paginate = new EventEmitter<number>();
@@ -30,13 +33,11 @@ export class PaginatorComponent implements OnInit {
   }
 
   updatePages() {
-    if (this._total > 0 && this._limit > 0) {
-      this.pages = new Array(Math.floor(this._total / this._limit));
-    }
+    this.pagesArr = new Array(this._pages);
   }
 
   onNext() {
-    if (this.currentPage + 1 < Math.floor(this._total / this._limit))
+    if (this.currentPage + 1 < this._pages)
       this.currentPage = this.currentPage + 1;
     this.paginate.next(this.currentPage);
   }
