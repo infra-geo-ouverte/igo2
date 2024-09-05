@@ -1,11 +1,13 @@
-<div class="wrapper">
+<div *ngIf="immeubles" class="wrapper">
   <div class="title">Immeubles</div>
   <div class="container">
     <app-filter></app-filter>
     <div class="results">
       <div class="results-header">
-        <div class="results-count">{{ immeubles.length }} immeubles</div>
-        <div class="current-page">Immeubles 1 a 10</div>
+        <div class="results-count">{{ total }} immeubles</div>
+        <div class="current-page" *ngIf="total > 0">
+          Immeubles {{ offset + 1 + ' a ' + pages }}
+        </div>
       </div>
       <div class="items">
         <ng-container *ngFor="let item of immeubles; let i = index">
@@ -18,6 +20,7 @@
         [limit]="limit"
         [skip]="offset"
         [total]="total"
+        [pages]="pages"
       ></app-paginator>
     </div>
   </div>

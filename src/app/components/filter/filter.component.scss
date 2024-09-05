@@ -27,3 +27,12 @@
   width: unset;
   transform: scale(1.2);
 }
+.title-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.clear {
+  cursor: pointer;
+}

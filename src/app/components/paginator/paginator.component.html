@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="_pages > 0">
   <img
     *ngIf="_skip <= _limit"
     class="previous disabled"
@@ -16,7 +16,7 @@
       class="page"
       [ngClass]="{ active: currentPage === i + 1 }"
       (click)="onPage(i)"
-      *ngFor="page of pages; let i = index"
+      *ngFor="page of pagesArr; let i = index"
     >
       {{ i + 1 }}
     </div>
