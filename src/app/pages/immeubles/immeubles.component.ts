@@ -46,6 +46,9 @@ export class ImmeublesComponent implements OnInit {
         this.offset
       )
       .subscribe((response: any) => {
+        console.log(
+          `Params: limit: ${this.limit}, offset: ${this.offset}, response-length: ${response.length}`
+        );
         this.total = response.length;
         if (response.length < 10 && response.length > 0) {
           this.limit = response.length;

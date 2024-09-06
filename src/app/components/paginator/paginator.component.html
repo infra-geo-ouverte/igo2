@@ -22,13 +22,13 @@
     </div>
   </div>
   <img
-    *ngIf="_skip + _limit > _total"
+    *ngIf="_skip + _limit >= _total"
     class="next disabled"
     src="assets/images/Left.png"
   />
 
   <img
-    *ngIf="_skip + _limit <= _total"
+    *ngIf="_skip + _limit < _total"
     src="assets/images/Left.png"
     class="next"
     (click)="onNext()"
