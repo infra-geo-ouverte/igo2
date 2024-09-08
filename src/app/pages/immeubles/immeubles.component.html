@@ -9,6 +9,15 @@
           Immeubles {{ offset + 1 + ' a ' + pages }}
         </div>
       </div>
+      <div class="filter-values-line">
+        <app-filter-values></app-filter-values>
+      </div>
+      <div class="number-per-page-line">
+        <div></div>
+        <app-number-per-page
+          (numberChange)="onNumberPerPage($event)"
+        ></app-number-per-page>
+      </div>
       <div class="items">
         <ng-container *ngFor="let item of immeubles; let i = index">
           <app-immeuble-card [item]="item"></app-immeuble-card>

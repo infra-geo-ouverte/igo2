@@ -16,7 +16,7 @@ export class ImmeublesComponent implements OnInit {
   offset = 0;
   total = 0;
   pages = 1;
-  filter = '';
+  valuesMap = new Map<string, string>();
 
   constructor(
     private immeublesService: ImmeublesService,
@@ -25,8 +25,8 @@ export class ImmeublesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getImmeubles();
-    this.filterService.filter.subscribe((filter) => {
-      this.filter = filter;
+    this.filterService.filter.subscribe((valuesMap) => {
+      this.valuesMap = valuesMap;
       this.getImmeubles();
     });
   }
@@ -36,10 +36,24 @@ export class ImmeublesComponent implements OnInit {
     this.getImmeubles();
   }
 
+  onNumberPerPage(value: string) {
+    debugger;
+    this.limit = parseInt(value);
+    this.getImmeubles();
+  }
+
+  getFilterParam(valuesMap: Map<string, string>) {
+    let filterString = ' ';
+    valuesMap.forEach((value, key) => {
+      filterString += `lower(${key}) LIKE '%${value}%'&`;
+    });
+    return filterString.substring(0, filterString.length - 1);
+  }
+
   getImmeubles() {
     this.immeublesService
       .getImmeubles(
-        this.filter,
+        this.getFilterParam(this.valuesMap),
         this.columns,
         this.sort,
         this.limit,

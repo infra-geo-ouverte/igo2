@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0px;
+  padding-left: 20px;
+}
+.values {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+.value {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+  background-color: lightsteelblue;
+  padding: 2px 6px;
+}
+.delete {
+  cursor: pointer;
+}
