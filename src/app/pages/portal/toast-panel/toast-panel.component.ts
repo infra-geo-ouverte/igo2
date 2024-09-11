@@ -38,7 +38,6 @@ import {
   FeatureMotion,
   GeoServiceDefinition,
   IgoMap,
-  Layer,
   LayerService,
   PropertyTypeDetectorService,
   SearchResult,
@@ -515,7 +514,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.computeFeatureGeoServiceStatus();
     combineLatest([
       this.resultSelected$,
-      this.map.layers$ as BehaviorSubject<Layer[]>
+      this.map.layerController.layers$
     ]).subscribe(() => {
       this.computeFeatureGeoServiceStatus();
     });
@@ -802,7 +801,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   handleLayer() {
-    const layersIds = this.map.layers.map((layer) => layer.id);
+    const layersIds = this.map.layerController.all.map((layer) => layer.id);
     let potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
     if (!potententialLayerToAdd) {
       this.computeFeatureGeoServiceStatus();
@@ -840,7 +839,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       );
       const soId = generateIdFromSourceOptions(so.sourceOptions);
       this.potententialLayerToAdd$.next({ id: soId, sourceOptions: so });
-      const layersIds = this.map.layers.map((l) => l.id);
+      const layersIds = this.map.layerController.all.map((l) => l.id);
       this.potententialLayerisAdded$.next(
         layersIds.includes(soId) ? true : false
       );
