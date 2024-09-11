@@ -18,7 +18,7 @@ import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
 import { PanelComponent } from '@igo2/common/panel';
 import { Tool, Toolbox, ToolboxComponent } from '@igo2/common/tool';
 import { ConfigService } from '@igo2/core/config';
-import { IgoMap } from '@igo2/geo';
+import { IgoMap, isLayerItem } from '@igo2/geo';
 import { CatalogState, ToolState } from '@igo2/integration';
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -103,8 +103,11 @@ export class SidenavComponent implements OnInit, OnDestroy {
           tool.name === 'activeTimeFilter' ||
           tool.name === 'activeOgcFilter'
         ) {
-          for (const layer of this.map.layers) {
-            if (layer.options.active === true) {
+          for (const layer of this.map.layerController.layersFlattened) {
+            if (
+              isLayerItem(layer) &&
+              this.map.layerController.isSelected(layer)
+            ) {
               this.title$.next(layer.title);
             }
           }

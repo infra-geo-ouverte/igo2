@@ -58,5 +58,9 @@
   {
     "uri": "keepCurrentViewFalse",
     "title": "Un contexte qui impose sa vue"
+  },
+  {
+    "uri": "layerGroup",
+    "title": "Group de couche"
   }
 ]

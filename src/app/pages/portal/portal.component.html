@@ -71,7 +71,9 @@
       [map]="map"
       [igoContextMenu]="contextMenu"
       (menuPosition)="onContextMenuOpen($event)"
-      [ngClass]="{ 'igo-attribution-offset': map.getBaseLayers().length > 1 }"
+      [ngClass]="{
+        'igo-attribution-offset': map.layerController.baseLayers.length > 1
+      }"
       [@mapStateX]="sidenavOpened ? 'right' : 'left'"
       (@mapStateX.start)="updateMapBrowserClass()"
       [@mapStateY]="getControlsOffsetY()"

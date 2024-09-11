@@ -1613,7 +1613,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           sourceOptions
         })
         .subscribe((l) => {
-          this.map.addLayer(l);
+          this.map.layerController.add(l);
         })
     );
   }
