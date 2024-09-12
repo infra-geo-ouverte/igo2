@@ -11,8 +11,9 @@ export class PaginatorComponent implements OnInit {
   _total: number = 0;
   _pages = 0;
   pagesArr = new Array(0);
-  currentPage = 1;
+  currentPage = 0;
   pagesFlag = false;
+  pagesStart = 0;
 
   @Input() set limit(value: number) {
     this._limit = value;
@@ -35,6 +36,7 @@ export class PaginatorComponent implements OnInit {
 
   updatePages() {
     this.pagesFlag = false;
+    this.pagesStart = 0;
     if (this._pages > 5) {
       this.pagesArr = new Array(5);
       this.pagesFlag = true;
@@ -42,18 +44,36 @@ export class PaginatorComponent implements OnInit {
   }
 
   onNext() {
-    if (this.currentPage + 1 < this._pages)
+    if (this.currentPage + 1 < this._pages) {
       this.currentPage = this.currentPage + 1;
+      if (this.currentPage > 1) this.pagesStart++;
+      console.log(
+        'current page: ',
+        this.currentPage,
+        ' pageStart: ',
+        this.pagesStart
+      );
+    }
     this.paginate.next(this.currentPage);
   }
 
   onPrevious() {
-    if (this.currentPage - 1 >= 0) this.currentPage = this.currentPage - 1;
+    if (this.currentPage - 1 >= 0) {
+      this.currentPage = this.currentPage - 1;
+
+      if (this.currentPage < 2) this.pagesStart--;
+    }
     this.paginate.next(this.currentPage);
   }
 
   onPage(i: any) {
-    this.currentPage = i + 1;
+    this.currentPage = i;
+    console.log(
+      'current page: ',
+      this.currentPage,
+      ' pageStart: ',
+      this.pagesStart
+    );
     this.paginate.next(this.currentPage);
   }
 }
