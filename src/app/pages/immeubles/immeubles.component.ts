@@ -63,14 +63,15 @@ export class ImmeublesComponent implements OnInit {
         console.log(
           `Params: limit: ${this.limit}, offset: ${this.offset}, response-length: ${response.length}`
         );
-        this.total = response.length;
-        if (response.length < 10 && response.length > 0) {
-          this.limit = response.length;
+        this.total = response.total;
+        this.limit = response.data.length;
+        /*  if (response.total < 10 && response.total > 0) {
+          this.limit = response.data.length;
         } else {
           this.limit = 10;
-        }
+        } */
         this.pages = Math.ceil(this.total / this.limit);
-        this.immeubles = response;
+        this.immeubles = response.data;
       });
   }
 }

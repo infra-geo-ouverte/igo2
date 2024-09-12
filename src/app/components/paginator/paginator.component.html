@@ -18,7 +18,10 @@
       (click)="onPage(i)"
       *ngFor="page of pagesArr; let i = index"
     >
-      {{ i + 1 }}
+      <span *ngIf="pagesFlag && i < 2">{{ i + 1 }}</span>
+      <span *ngIf="pagesFlag && i === 2">{{ '...' }}</span>
+      <span *ngIf="pagesFlag && i > 2">{{ _pages - (5 - i) }}</span>
+      <span *ngIf="!pagesFlag">{{ i + 1 }}</span>
     </div>
   </div>
   <img

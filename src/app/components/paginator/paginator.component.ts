@@ -12,6 +12,7 @@ export class PaginatorComponent implements OnInit {
   _pages = 0;
   pagesArr = new Array(0);
   currentPage = 1;
+  pagesFlag = false;
 
   @Input() set limit(value: number) {
     this._limit = value;
@@ -33,7 +34,11 @@ export class PaginatorComponent implements OnInit {
   }
 
   updatePages() {
-    this.pagesArr = new Array(this._pages);
+    this.pagesFlag = false;
+    if (this._pages > 5) {
+      this.pagesArr = new Array(5);
+      this.pagesFlag = true;
+    } else this.pagesArr = new Array(this._pages);
   }
 
   onNext() {
