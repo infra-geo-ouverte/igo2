@@ -80,7 +80,7 @@
             "radius": [25],
             "width": [2],
             "label": {
-              "attribute": "Sélectionner l'immeuble ${Numero de l’immeuble}\n${Nom de la direction immobilière}",
+              "attribute": "${Numero de l’immeuble}\n${Adresse de l’immeuble}\n${Nom de la direction immobilière}",
               "style": {
                 "textAlign": "left",
                 "textBaseline": "top",
