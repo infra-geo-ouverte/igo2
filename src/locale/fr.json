@@ -255,5 +255,10 @@
     "message": "Message provenant d'une traduction - **Config sans icône- <div class='toast-message-green-div'>Message provenant du contexte</div>Ouvrez lea couche 'MSP Tel. Urgence' pour voir les messages liés. {{content}}",
     "content": "Du contenu dynamique peut également être ajouté au message",
     "addLayerFromIndex": "Vous devez configurer les fichiers de configuration ( <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json' target='_blank'>config.json</a>  OU <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts' target='_blank'>environnement.ts</a>) afin d'être en mesure de détecter les entités de type geoservice (wms)"
+  },
+  "legend": {
+    "legendButton": "Légende",
+    "legendOpen": "Ouvrir la Légende",
+    "legendClose": "Fermer la Légende"
   }
 }

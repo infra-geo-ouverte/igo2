@@ -1671,4 +1671,9 @@ export class PortalComponent implements OnInit, OnDestroy {
       FeatureMotion.Zoom
     );
   }
+
+  togglePanelLegend(){
+    this.toggleSidenav();
+  }
+
 }

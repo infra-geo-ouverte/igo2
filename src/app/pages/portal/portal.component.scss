@@ -207,7 +207,17 @@ igo-map-browser {
     }
   }
 
+  app-legend-panel-button ::ng-deep .mat-mdc-raised-button:not(:disabled) {
+    color: #1976d2;
+  }
+
+  igo-geolocate-button {
+    margin-left:auto;
+  }
+
   igo-zoom-button {
+    margin-left:auto;
+
     ::ng-deep button {
       @include mat.elevation(2);
     }

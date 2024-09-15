@@ -256,5 +256,10 @@
     "message": "Message from a translation - no icon - <div class='toast-message-green-div'>Message at the context level </div>Open the layer 'MSP Tel. Urgence' to see messages at the layer level. {{content}}",
     "content": "Dynamic content can also be added to the message",
     "addLayerFromIndex": "You must configure the configuration files ( <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json' target='_blank'>config.json</a>  OU <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts' target='_blank'>environnement.ts</a>) in order to be able to detect entities of type geoservice (wms)"
+  },
+  "legend": {
+    "legendButton": "Legend",
+    "legendOpen": "Open the legend",
+    "legendClose": "Close the legend"
   }
 }

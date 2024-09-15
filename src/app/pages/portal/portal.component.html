@@ -130,6 +130,12 @@
           [@controlsOffsetY]="getControlsOffsetY()"
         >
         </igo-zoom-button>
+
+        <app-legend-panel-button
+          (toggleLegend)="togglePanelLegend()"
+          [legendPanelOpened]="sidenavOpened" >
+        </app-legend-panel-button>
+
       </div>
       <div
         class="map-actions --horizontal --bottom --right"
