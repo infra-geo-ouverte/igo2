@@ -22,7 +22,7 @@
   "showRotationButtonIfNoRotation": false,
   "menu": {
     "button": {
-      "visible": true,
+      "visible": false,
       "useThemeColor": false
     }
   },
