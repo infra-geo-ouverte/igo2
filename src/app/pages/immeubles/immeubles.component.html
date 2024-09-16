@@ -25,7 +25,8 @@
         </ng-container>
       </div>
       <app-paginator
-        (paginate)="onPaginate($event)"
+        (page)="onPage($event)"
+        (pageSize)="onPageSize($event)"
         [limit]="limit"
         [skip]="offset"
         [total]="total"

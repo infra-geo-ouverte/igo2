@@ -1,39 +1,8 @@
-<div class="wrapper" *ngIf="_pages > 0">
-  <img
-    *ngIf="_skip <= _limit"
-    class="previous disabled"
-    src="assets/images/Left.png"
-  />
-  <img
-    *ngIf="_skip > _limit || pagesStart === 1"
-    class="previous"
-    (click)="onPrevious()"
-    src="assets/images/Left.png"
-  />
-
-  <div class="pages">
-    <div
-      class="page"
-      [ngClass]="{ active: currentPage === i + pagesStart }"
-      (click)="onPage(i + pagesStart)"
-      *ngFor="page of pagesArr; let i = index"
-    >
-      <span *ngIf="pagesFlag && i < 2">{{ pagesStart + i + 1 }}</span>
-      <span *ngIf="pagesFlag && i === 2">{{ '...' }}</span>
-      <span *ngIf="pagesFlag && i > 2">{{ _pages - (5 - i) }}</span>
-      <span *ngIf="!pagesFlag">{{ i + 1 }}</span>
-    </div>
-  </div>
-  <img
-    *ngIf="_skip + _limit >= _total || currentPage === 4"
-    class="next disabled"
-    src="assets/images/Left.png"
-  />
-
-  <img
-    *ngIf="_skip + _limit < _total && currentPage !== 4"
-    src="assets/images/Left.png"
-    class="next"
-    (click)="onNext()"
-  />
-</div>
+<mat-paginator
+  [length]="_total"
+  [pageSize]="_limit"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page"
+  (page)="onPage($event)"
+>
+</mat-paginator>

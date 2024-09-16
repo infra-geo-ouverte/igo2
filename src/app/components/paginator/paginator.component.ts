@@ -28,52 +28,15 @@ export class PaginatorComponent implements OnInit {
     this._pages = value;
   }
 
-  @Output() paginate = new EventEmitter<number>();
+  @Output() page = new EventEmitter<number>();
+  @Output() pageSize = new EventEmitter<number>();
 
   ngOnInit(): void {
-    this.updatePages();
+    console.log();
   }
 
-  updatePages() {
-    this.pagesFlag = false;
-    this.pagesStart = 0;
-    if (this._pages > 5) {
-      this.pagesArr = new Array(5);
-      this.pagesFlag = true;
-    } else this.pagesArr = new Array(this._pages);
-  }
-
-  onNext() {
-    if (this.currentPage + 1 < this._pages) {
-      this.currentPage = this.currentPage + 1;
-      if (this.currentPage > 1) this.pagesStart++;
-      console.log(
-        'current page: ',
-        this.currentPage,
-        ' pageStart: ',
-        this.pagesStart
-      );
-    }
-    this.paginate.next(this.currentPage);
-  }
-
-  onPrevious() {
-    if (this.currentPage - 1 >= 0) {
-      this.currentPage = this.currentPage - 1;
-
-      if (this.currentPage < 2) this.pagesStart--;
-    }
-    this.paginate.next(this.currentPage);
-  }
-
-  onPage(i: any) {
-    this.currentPage = i;
-    console.log(
-      'current page: ',
-      this.currentPage,
-      ' pageStart: ',
-      this.pagesStart
-    );
-    this.paginate.next(this.currentPage);
+  onPage(a: any) {
+    this.page.next(a.pageIndex);
+    if (a.pageSize !== this._limit) this.pageSize.next(a.pageSize);
   }
 }

@@ -31,8 +31,13 @@ export class ImmeublesComponent implements OnInit {
     });
   }
 
-  onPaginate(page: number) {
+  onPage(page: number) {
     this.offset = this.limit * page;
+    this.getImmeubles();
+  }
+
+  onPageSize(pageSize: number) {
+    this.limit = pageSize;
     this.getImmeubles();
   }
 
