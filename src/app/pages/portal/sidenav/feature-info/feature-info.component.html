@@ -1,0 +1,26 @@
+<ng-container
+  *ngIf="(store.entities$ | async)"
+  class = "featureInfo"
+  (keydown)="handleKeyboardEvent($event)">
+
+  <button
+    class="clear-button sideresult-closed"
+    mat-icon-button
+    igoStopPropagation
+    (click)="clearButton()"
+    color="primary"
+    (clearFeature)="removeFeatureFromMap()">
+    <mat-icon svgIcon="close"></mat-icon>
+  </button>
+
+  <app-feature-details
+    *ngIf="resultSelected$.value && refreshedDetails === true"
+    [mobile]="mobile"
+    [feature]="resultSelected$.value.data"
+    [mapQueryClick]="mapQueryClick"
+    [scenarioDateToggle]="scenarioDateToggle"
+    (hideDetails)="hideOnToggleChange()"
+    (showDetails)="showOnToggleChange()">
+  </app-feature-details>
+
+</ng-container>

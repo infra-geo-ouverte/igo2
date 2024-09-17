@@ -7,7 +7,7 @@
       "igoStyle": {
         "styleByAttribute": {
           "type": "circle",
-          "attribute": "Sigle de la direction immobilière",
+          "attribute": "sigle_direction_immobiliere",
           "data": [
             "DIATNQ",
             "DIBSLGIM",
@@ -80,7 +80,7 @@
             "radius": [25],
             "width": [2],
             "label": {
-              "attribute": "${Numero de l’immeuble}\n${Adresse de l’immeuble}\n${Nom de la direction immobilière}",
+              "attribute": "${numero_immeuble}\n${adresse_immeuble}\n${nom_direction_immobiliere}",
               "style": {
                 "textAlign": "left",
                 "textBaseline": "top",
@@ -112,10 +112,11 @@
       "legendOptions": {
         "collapsed": false,
         "display": true,
-        "url": "/assets/legends/legend-immeubles.PNG"
+        "url": "/assets/legends/legend-immeubles.PNG",
+        "html": "<div class='iframe-legend-container'><iframe class='iframe-legend embed-responsive' title='Légende' style='overflow:hidden;border:none;width:100%;height:176px;' loading='lazy'  scrolling='no' src='assets/legends/legend-stations/legende-stations.html'></iframe></div>"
       },
       "sourceOptions": {
-        "url": "http://vps-5d30fe87.vps.ovh.ca:3000/v1/mvt/immeublesvw/{z}/{x}/{y}?columns=*",
+        "url": "http://vps-5d30fe87.vps.ovh.ca:3000/v1/mvt/immeublesvw3/{z}/{x}/{y}?columns=*",
         "type": "mvt",
         "queryable": true
       },

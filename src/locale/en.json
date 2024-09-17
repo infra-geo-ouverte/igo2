@@ -261,5 +261,17 @@
     "legendButton": "Legend",
     "legendOpen": "Open the legend",
     "legendClose": "Close the legend"
+  },
+  "sideResult": {
+    "title": {
+      "immeuble": "Informations sur l'immeuble"
+    },
+    "nom_immeuble": "Nom",
+    "adresse_immeuble": "Adresse",
+    "nombre_etage": "Nombre d'étage",
+    "vocation_officielle": "Vocation",
+    "immeuble_patrimonial": "Immeuble patrimonial",
+    "superficie_locative": "Superficie locative",
+    "certifications": "Certifications"
   }
 }

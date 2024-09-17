@@ -10,7 +10,7 @@
 }
 
 .navbar-container {
-  $navbarSpacer: 36px;
+  $navbarSpacer: 16px;
 
   position: absolute;
   left: $navbarSpacer;
@@ -458,3 +458,55 @@ app-toast-panel-for-expansion
     font-size: 12px;
   }
 }
+
+igo-search-bar {
+  max-width:360px;
+  max-height:40px;
+}
+
+@media only screen and (orientation:portrait) and (max-width: 599px),
+only screen and (orientation:landscape) and (max-width: 959px) {
+  igo-search-bar {
+    width:calc(100% - 92px);
+    max-width:360px;
+    max-height:40px;
+  }
+}
+
+igo-search-bar,
+igo-search-results igo-list,
+.baselayers {
+  left:16px!important
+}
+
+
+.baselayers-pushed {
+  left:404px!important;
+  animation-duration:3s;
+  visibility:visible;
+  opacity:1;
+  opacity:0;
+  animation:fadeIn 1s;
+  animation-delay:0s;
+  animation-fill-mode:forwards
+}
+
+.igo-baselayers-switcher-mobile,
+.ol-scale-line {
+  bottom:48px!important;
+  z-index:1
+}
+
+.igo-baselayers-switcher-mobile {
+  left:4px
+}
+
+.ol-scale-line {
+  left:88px!important
+}
+
+.igo-baselayers-switcher {
+  z-index:1
+}
+
+
