@@ -148,5 +148,6 @@ export const environment: AppEnvironmentOptions = {
     }
   },
 
-  immeublesUrl: 'http://vps-5d30fe87.vps.ovh.ca:3000/v1/query/immeublesVw2'
+  //immeublesUrl: 'http://vps-5d30fe87.vps.ovh.ca:3000/v1/query/immeublesVw2'
+  immeublesUrl: 'http://vps-5d30fe87.vps.ovh.ca:3000/v1/immeubles/search'
 };
