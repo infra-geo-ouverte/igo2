@@ -32,7 +32,7 @@ import { AppComponent } from './app/app.component';
 import { PortalModule } from './app/pages';
 import { environment } from './environments/environment';
 
-const DEFAULT_THEME: string = 'blue-theme';
+const DEFAULT_THEME = 'blue-theme';
 
 const TOOLTIP_OPTIONS: MatTooltipDefaultOptions = {
   showDelay: 500,

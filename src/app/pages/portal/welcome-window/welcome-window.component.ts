@@ -21,8 +21,6 @@ import { getAppVersion } from 'src/app/app.utils';
 
 import { WelcomeWindowService } from './welcome-window.service';
 
-('@igo2/core');
-
 @Component({
   selector: 'app-welcome-window',
   templateUrl: './welcome-window.component.html',
@@ -47,7 +45,7 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
   showAgain = false;
   public discoverTitleInLocale$: Observable<string>;
   private title$$: Subscription;
-  public html$: BehaviorSubject<string> = new BehaviorSubject(undefined);
+  public html$ = new BehaviorSubject<string>(undefined);
 
   constructor(
     public dialog: MatDialog,

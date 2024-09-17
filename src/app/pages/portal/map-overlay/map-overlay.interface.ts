@@ -7,7 +7,7 @@ export interface MapOverlay {
    * Media device to display the mapOverlay
    * Desktop is the default value.
    */
-  media: Array<Media>;
+  media: Media[];
   /**
    * Css class to define position of the element
    */

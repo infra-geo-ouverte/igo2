@@ -20,7 +20,10 @@
 
   igo-map-browser {
     button[mat-icon-button] {
-      background-color: mat.m2-get-color-from-palette($background, raised-button);
+      background-color: mat.m2-get-color-from-palette(
+        $background,
+        raised-button
+      );
     }
   }
 }

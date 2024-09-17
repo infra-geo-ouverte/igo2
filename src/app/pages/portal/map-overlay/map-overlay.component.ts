@@ -33,7 +33,7 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
       this.handleContextChange(context);
       this.context = context;
     });
-    this.media$$ = this.mediaService.media$.subscribe((media) =>
+    this.media$$ = this.mediaService.media$.subscribe(() =>
       this.handleContextChange(this.context)
     );
   }

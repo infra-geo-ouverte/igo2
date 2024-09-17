@@ -11,7 +11,7 @@ import { skip, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PwaService {
-  private confirmOpened: boolean = false;
+  private confirmOpened = false;
   constructor(
     private updates: SwUpdate,
     private languageService: LanguageService,
