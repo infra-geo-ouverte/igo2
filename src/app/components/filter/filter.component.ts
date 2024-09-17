@@ -25,6 +25,6 @@ export class FilterComponent implements OnInit {
   onClear() {}
 
   onChange(key: string, value: string) {
-    this.filterService.onFilter(`lower(${key}) LIKE '%${value}%'`);
+    this.filterService.onFilter(key, value);
   }
 }

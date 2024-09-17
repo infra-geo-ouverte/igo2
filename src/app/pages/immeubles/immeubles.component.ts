@@ -16,7 +16,7 @@ export class ImmeublesComponent implements OnInit {
   offset = 0;
   total = 0;
   pages = 1;
-  filter = '';
+  valuesMap = new Map<string, string>();
 
   constructor(
     private immeublesService: ImmeublesService,
@@ -25,35 +25,58 @@ export class ImmeublesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getImmeubles();
-    this.filterService.filter.subscribe((filter) => {
-      this.filter = filter;
+    this.filterService.filter.subscribe((valuesMap) => {
+      this.valuesMap = valuesMap;
       this.getImmeubles();
     });
   }
 
-  onPaginate(page: number) {
+  onPage(page: number) {
     this.offset = this.limit * page;
     this.getImmeubles();
+  }
+
+  onPageSize(pageSize: number) {
+    this.limit = pageSize;
+    this.getImmeubles();
+  }
+
+  onNumberPerPage(value: string) {
+    debugger;
+    this.limit = parseInt(value);
+    this.getImmeubles();
+  }
+
+  getFilterParam(valuesMap: Map<string, string>) {
+    let filterString = ' ';
+    valuesMap.forEach((value, key) => {
+      filterString += `lower(${key}) LIKE '%${value}%'&`;
+    });
+    return filterString.substring(0, filterString.length - 1);
   }
 
   getImmeubles() {
     this.immeublesService
       .getImmeubles(
-        this.filter,
+        this.getFilterParam(this.valuesMap),
         this.columns,
         this.sort,
         this.limit,
         this.offset
       )
       .subscribe((response: any) => {
-        this.total = response.length;
-        if (response.length < 10 && response.length > 0) {
-          this.limit = response.length;
+        console.log(
+          `Params: limit: ${this.limit}, offset: ${this.offset}, response-length: ${response.length}`
+        );
+        this.total = response.total;
+        this.limit = response.data.length;
+        /*  if (response.total < 10 && response.total > 0) {
+          this.limit = response.data.length;
         } else {
           this.limit = 10;
-        }
+        } */
         this.pages = Math.ceil(this.total / this.limit);
-        this.immeubles = response;
+        this.immeubles = response.data;
       });
   }
 }

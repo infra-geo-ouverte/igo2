@@ -6,11 +6,18 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class FilterService {
-  filter = new BehaviorSubject<string>('');
+  valuesMap = new Map<string, string>();
+  filter = new BehaviorSubject<Map<string, string>>(this.valuesMap);
 
   constructor() {}
 
-  onFilter(filter: any) {
-    this.filter.next(filter);
+  onFilter(key: string, value: string) {
+    this.valuesMap.set(key, value);
+    this.filter.next(this.valuesMap);
+  }
+
+  onDelete(key: string) {
+    this.valuesMap.delete(key);
+    this.filter.next(this.valuesMap);
   }
 }
