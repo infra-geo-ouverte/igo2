@@ -21,11 +21,11 @@
   },
   "footer": {
     "conditions": "Terms of use",
-    "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
-    "ministry": "Ministry name",
-    "url-ministry": "https://www.quebec.ca/government/ministry/",
-    "gov": "© Gouvernement du Québec, 2022",
-    "url-gov": "http://www.droitauteur.gouv.qc.ca/en/index.php"
+    "url-conditions": "https://www.quebec.ca/conditions-utilisation",
+    "ministry": "Société québécoise des infrastructures",
+    "url-ministry": "https://www.sqi.gouv.qc.ca/",
+    "gov": "© Gouvernement du Québec, 2024",
+    "url-gov": "https://www.quebec.ca/"
   },
   "externallinks": "This link will open in a new window",
   "toastPanel": {
