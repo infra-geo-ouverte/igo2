@@ -272,6 +272,8 @@
     "vocation_officielle": "Vocation",
     "immeuble_patrimonial": "Immeuble patrimonial",
     "superficie_locative": "Superficie locative",
-    "certifications": "Certifications"
+    "certifications": "Certifications",
+    "open": "Open the panel",
+    "close": "Close the panel"
   }
 }
