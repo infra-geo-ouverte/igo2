@@ -63,6 +63,7 @@ import { ImmeublesComponent } from './pages/immeubles/immeubles.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NumberPerPageComponent } from './components/number-per-page/number-per-page.component';
 import { FilterValuesComponent } from './components/filter-values/filter-values.component';
+import { BuildingDetailsComponent } from './pages/building-details/building-details.component';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -87,7 +88,8 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     ImmeubleCardComponent,
     PaginatorComponent,
     NumberPerPageComponent,
-    FilterValuesComponent
+    FilterValuesComponent,
+    BuildingDetailsComponent
   ],
   imports: [
     BrowserModule,
