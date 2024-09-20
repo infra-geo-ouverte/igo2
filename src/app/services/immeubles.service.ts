@@ -26,4 +26,8 @@ export class ImmeublesService {
       }
     });
   }
+
+  getBuildingDetails(numero_immeuble: any) {
+    return this.http.get(environment.buildingDetailsUrl + numero_immeuble);
+  }
 }

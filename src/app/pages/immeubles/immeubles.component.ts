@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { FilterService } from 'src/app/services/filter.service';
 import { ImmeublesService } from 'src/app/services/immeubles.service';
@@ -20,7 +20,8 @@ export class ImmeublesComponent implements OnInit {
 
   constructor(
     private immeublesService: ImmeublesService,
-    private readonly filterService: FilterService
+    private readonly filterService: FilterService,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -69,7 +70,7 @@ export class ImmeublesComponent implements OnInit {
           `Params: limit: ${this.limit}, offset: ${this.offset}, response-length: ${response.length}`
         );
         this.total = response.total;
-        this.limit = response.data.length;
+        //this.limit = response.data.length;
         /*  if (response.total < 10 && response.total > 0) {
           this.limit = response.data.length;
         } else {
@@ -77,6 +78,8 @@ export class ImmeublesComponent implements OnInit {
         } */
         this.pages = Math.ceil(this.total / this.limit);
         this.immeubles = response.data;
+        this.cdr.markForCheck();
+        debugger;
       });
   }
 }

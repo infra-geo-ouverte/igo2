@@ -6,6 +6,7 @@ import { MapOverlay } from 'src/app/pages/portal/map-overlay/map-overlay.interfa
 export interface AppEnvironmentOptions extends IntegrationEnvironmentOptions {
   igo: EnvironmentOptions;
   immeublesUrl: string;
+  buildingDetailsUrl: string;
 }
 
 export interface EnvironmentOptions extends AllEnvironmentOptions {
