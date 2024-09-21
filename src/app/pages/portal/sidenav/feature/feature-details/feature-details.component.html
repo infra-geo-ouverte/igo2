@@ -29,6 +29,12 @@
       <p class="attribute-label">{{ 'sideResult.certifications' | translate }} :&nbsp;</p>
       <p class="attribute-value">{{ feature.properties.certifications }}</p>
     </div>
+    <div
+      class="wrapper"
+      [routerLink]="['/', 'immeubles', feature.properties.numero_immeuble.substr(0, feature.properties.numero_immeuble.indexOf('-'))]"
+    >
+     {{ 'sideResult.building_link' | translate }}
+    </div>
   </div>
 
 </div>
