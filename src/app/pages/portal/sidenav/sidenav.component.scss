@@ -90,7 +90,7 @@
   .app-sidenav-content {
     margin-top: $app-sidenav-margin-top;
     height: $app-sidenav-height;
-    padding:0 16px 0 32px !important;
+    padding:0 8px 0 24px !important;
     @include mobile {
       height: calc(100% - #{$app-sidenav-margin-top});
     }

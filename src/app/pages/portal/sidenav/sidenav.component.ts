@@ -166,6 +166,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
   set legendPanelOpened(value: boolean) {
     this._legendPanelOpened = value;
+
+    if (this._legendPanelOpened) {
+      this.openPanelLegend()
+    }
   }
   private _legendPanelOpened: boolean;
 
@@ -188,7 +192,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
   private _scenarioDateToggle: string;
 
   @Output() closeLegend = new EventEmitter<boolean>();
-  @Output() openLegend = new EventEmitter<boolean>();
   @Output() closeQuery = new EventEmitter<boolean>();
   public mapLayersShownInLegend: Layer[];
 
@@ -353,29 +356,24 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   // LEGEND
 
-  closePanelLegend() { // this flushes the legend whenever a user closes the panel. if not, the user has to click twice on the legend button to open the legend with the button
+  closePanelOnCloseLegend(event) { // this flushes the legend whenever a user closes the panel. if not, the user has to click twice on the legend button to open the legend with the button
+    this.closeLegend.emit();
     this.opened = false;
     this.legendPanelOpened = false;
-    this.closeLegend.emit();
-    this.map.propertyChange$.unsubscribe;
+    if (this.searchInit === false && this.mapQueryClick === false){
+      this.panelOpenState = false;
+    } if (this.searchInit === true || this.mapQueryClick === true) {
+      this.panelOpenState = true;
+    }
   }
 
   openPanelLegend(){
-    this.map.propertyChange$.subscribe(() => {
-      this.mapLayersShownInLegend = this.map.layers.filter(layer => (
-        layer.showInLayerList !== false
-      ));
-    });
     this.opened = true;
-    this.legendPanelOpened = true;
+    this.panelOpenState = true;
     this.clearQuery();
     this.onClearSearch();
     this.mapQueryClick = false;
-    this.openLegend.emit(true);
   }
 
-  togglePanelLegend(){
-    this.legendPanelOpened ? this.closePanelLegend() : this.openPanelLegend();
-  }
 }
 

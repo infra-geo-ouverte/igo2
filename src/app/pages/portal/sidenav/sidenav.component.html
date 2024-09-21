@@ -3,19 +3,18 @@
     #sidenav
     mode="side"
     [autoFocus]="false"
-    [(opened)]="panelOpenState"
-    (closed)= "closePanelLegend()"
-    (toggleLegend)="togglePanelLegend()"
-    (closeLegend)="closePanelLegend()">
+    [(opened)]="panelOpenState">
 
     <div #content class="app-sidenav-content">
 
       <div #showLegend *ngIf="legendPanelOpened === true">
 
         <app-legend-panel
-          [mapQueryClick]="mapQueryClick"
-          [legendPanelOpened]="legendPanelOpened"
-          [panelOpenState]="panelOpenState">
+          [map]="map"
+          [mobile]="mobile"
+          (closeLegend)="closePanelOnCloseLegend($event)"
+          (sidenavClosed)="$event"
+          (opened)="sidenav.toggle()">
         </app-legend-panel>
 
       </div>

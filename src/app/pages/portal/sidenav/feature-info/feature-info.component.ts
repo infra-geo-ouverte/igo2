@@ -249,7 +249,6 @@ export class FeatureInfoComponent implements OnInit, OnDestroy {
       true
     );
     this.resultSelected$.next(result);
-    console.log("resultSelected$", this.resultSelected$)
 
     const features = [];
     for (const feature of this.store.all()) {

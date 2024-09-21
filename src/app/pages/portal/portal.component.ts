@@ -127,6 +127,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     undefined
   );
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public legendPanelOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public minSearchTermLength = 2;
   public hasGeolocateButton = true;
   public showMenuButton = true;
@@ -194,6 +195,14 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   set sidenavOpened(value: boolean) {
     this.sidenavOpened$.next(value);
+  }
+
+  get legendPanelOpened(): boolean {
+    return this.legendPanelOpened$.value;
+  }
+
+  set legendPanelOpened(value: boolean) {
+    this.legendPanelOpened$.next(value);
   }
 
   get toastPanelOpened(): boolean {
@@ -1672,7 +1681,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
   }
 
-  togglePanelLegend(){
+  togglePanelLegend(event){
+    this.legendPanelOpened = !this.legendPanelOpened;
     this.toggleSidenav();
   }
 

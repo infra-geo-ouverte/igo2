@@ -21,6 +21,7 @@ export class LegendPanelButtonComponent {
   constructor() { }
 
   toggleLegendPanel(): void {
-      this.toggleLegend.emit();
+    this.legendPanelOpened = !this.legendPanelOpened
+    this.toggleLegend.emit(this.legendPanelOpened);
   }
 }

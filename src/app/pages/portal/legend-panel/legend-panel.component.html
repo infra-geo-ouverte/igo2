@@ -1,81 +1,82 @@
-<div id="legend">
+<ng-container
+  class = "featureInfo">
+
+  <br/>
 
   <button
+    class="clear-button sideresult-closed"
     mat-icon-button
-    [matTooltip]="'legend.legendClose' | translate"
-    color="primary"
-    (click)="closePanelLegend()">
+    igoStopPropagation
+    (click)="clearButton()"
+    color="primary">
     <mat-icon svgIcon="close"></mat-icon>
   </button>
-  <h4 mat-dialog-title>{{ 'legend.legendButton' | translate }}</h4>
 
-  <!--
-<igo-layer-legend-list
-  [layers]="mapLayersShownInLegend"
-  [excludeBaseLayers]="true"
-  [allowShowAllLegends]="false"
-  [updateLegendOnResolutionChange]="true"
-  [showAllLegendsValue]="false"
-  [layers]="layers">{{layers}}
-</igo-layer-legend-list>
--->
+  <h3 class="igo-panel-title">{{ 'legend.legendButton' | translate }}</h3>
 
   <table>
     <tr>
       <td><span class="circle z-royal-blue"></span></td>
-      <td style="width:350px">DIATNQ</td>
+      <td style="width:350px">DI Abitibi-Témiscamingue, Nord-du-Québec</td>
     </tr>
     <tr>
       <td><span class="circle z-lime-green"></span></td>
-      <td style="width:350px">DIBSLGIM</td>
+      <td style="width:350px">DI Bas-St-Laurent, Gaspésie-Îles</td>
     </tr>
     <tr>
       <td><span class="circle z-crimson"></span></td>
-      <td style="width:350px">DICVM</td>
+      <td style="width:350px">DI Centre-ville de Montréal NS</td>
     </tr>
     <tr>
       <td><span class="circle z-gold"></span></td>
-      <td style="width:350px">DICVQ</td>
+      <td style="width:350px">DI Centre-ville de Québec</td>
     </tr>
     <tr>
       <td><span class="circle z-dim-gray"></span></td>
-      <td style="width:350px">DIEM</td>
+      <td style="width:350px">DI Estrie et Montérégie</td>
     </tr>
     <tr>
       <td><span class="circle z-tomato"></span></td>
-      <td style="width:350px">DILLL</td>
+      <td style="width:350px">DI Laval Laurentides Lanaudière</td>
     </tr>
     <tr>
       <td><span class="circle z-medium-purple"></span></td>
-      <td style="width:350px">DIMCQ</td>
+      <td style="width:350px">DI Mauricie et Centre-du-Québec</td>
     </tr>
     <tr>
       <td><span class="circle z-dark-olive-green"></span></td>
-      <td style="width:350px">DINM</td>
+      <td style="width:350px">DI Nord de Montréal</td>
     </tr>
+<!--
     <tr>
       <td><span class="circle z-medium-turquoise"></span></td>
       <td style="width:350px">DINQ</td>
     </tr>
+-->
     <tr>
       <td><span class="circle z-dark-red"></span></td>
-      <td style="width:350px">DIO</td>
+      <td style="width:350px">DI Outaouais</td>
     </tr>
     <tr>
       <td><span class="circle z-cyan"></span></td>
-      <td style="width:350px">DISLSJCN</td>
+      <td style="width:350px">DI Saguenay-Lac-Saint-Jean, Côte-Nord</td>
     </tr>
+<!--
     <tr>
       <td><span class="circle z-peach-puff"></span></td>
       <td style="width:350px">DISM</td>
     </tr>
+-->
     <tr>
       <td><span class="circle z-dark-slate-gray"></span></td>
-      <td style="width:350px">DISQ</td>
+      <td style="width:350px">DI Sud de Québec</td>
     </tr>
+<!--
     <tr>
       <td><span class="circle z-medium-orchid"></span></td>
       <td style="width:350px">Autre</td>
     </tr>
+-->
   </table>
-</div>
+
+</ng-container>

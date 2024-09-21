@@ -50,7 +50,6 @@ export class FeatureDetailsComponent implements OnDestroy, AfterViewInit, OnChan
   }
   set feature(value: Feature) {
     this._feature = value;
-    console.log("Feature", this._feature)
     this.cdRef.detectChanges();
     this.selectFeature.emit();
   }
