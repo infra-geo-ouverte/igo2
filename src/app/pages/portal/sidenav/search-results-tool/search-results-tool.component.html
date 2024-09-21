@@ -1,0 +1,73 @@
+<igo-flexible
+  *ngIf="store && (store.stateView.empty$ | async)===false"
+  #topPanel
+  initial="100%"
+  initialMobile="100%"
+  collapsed="calc(100% - 58px)"
+  collapsedMobile="calc(100% - 58px)"
+  expanded="60%"
+  expandedMobile="60%"
+  [state]="(feature$ | async) ? topPanelState : 'initial'">
+
+  <div class="igo-content">
+    <igo-search-results
+      [store]="store"
+      [showIcons]="showIcons"
+      [term]="term"
+      [termSplitter]="termSplitter"
+      [settingsChange$]="settingsChange$"
+      placeholder="false"
+      (resultFocus)="onResultFocus($event)"
+      (resultSelect)="onResultSelect($event)"
+      (resultUnfocus)="onResultUnfocus($event)"
+      (resultMouseenter)="onResultFocus($event)"
+      (resultMouseleave)="onResultUnfocus($event)"
+      [searchInit]="searchInit"
+      (moreResults)="onSearch($event)">
+      <ng-template #igoSearchItemToolbar let-result="result">
+        <igo-search-add-button
+          [map]="map"
+          [layer]="result">
+        </igo-search-add-button>
+      </ng-template>
+    </igo-search-results>
+  </div>
+
+  <!--div igoFlexibleFill class="igo-content">
+    <igo-panel [title]="featureTitle" *ngIf="feature$ | async">
+
+      <button
+        mat-icon-button
+        panelLeftButton
+        class="igo-icon-button"
+        (click)="toggleTopPanel()">
+        <mat-icon [svgIcon]="(topPanelState$ | async) === 'collapsed' ? 'arrow-up' : 'arrow-down'"></mat-icon>
+      </button>
+
+      <button
+        *ngIf="feature.geometry"
+        mat-icon-button
+        panelRightButton
+        class="igo-icon-button"
+        [matTooltip]="((isSelectedResultOutOfView$ | async) ? 'igo.integration.searchResultsTool.zoomOnFeatureTooltipOutOfView' : 'igo.integration.searchResultsTool.zoomOnFeatureTooltip') | translate"
+        matTooltipShowDelay="500"
+        (click)="zoomToFeatureExtent()">
+        <mat-icon
+        [matBadge]="(isSelectedResultOutOfView$ | async) ? '!' : ''"
+        matBadgeColor="accent"
+        matBadgeSize="small"
+        [matBadgeHidden]="(isSelectedResultOutOfView$ | async)===false"     
+        svgIcon="magnify-plus-outline"></mat-icon>
+      </button>
+
+      <igo-feature-details
+        appFeatureDetailsDirective
+        [feature]="feature$ | async"
+        [map]="map"
+        [toolbox]="toolState.toolbox"
+        (routingEvent)="getRoute()">
+      </igo-feature-details>
+    </igo-panel>
+  </div-->
+
+</igo-flexible>

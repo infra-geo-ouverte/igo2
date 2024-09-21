@@ -44,6 +44,7 @@
       [map]="map"
       [(opened)]="sidenavOpened"
       (toolChange)="toolChanged($event)"
+      [(legendPanelOpened)]="legendPanelOpened"
     >
     </app-sidenav>
 
@@ -130,6 +131,12 @@
           [@controlsOffsetY]="getControlsOffsetY()"
         >
         </igo-zoom-button>
+
+        <app-legend-panel-button
+          (toggleLegend)="togglePanelLegend($event)"
+          (legendPanelOpened)="$event">
+        </app-legend-panel-button>
+
       </div>
       <div
         class="map-actions --horizontal --bottom --right"
@@ -333,6 +340,7 @@
   </ng-container>
 </app-expansion-panel>
 
+<!--
 <app-toast-panel-for-expansion
   [withHeader]="false"
   [(opened)]="toastPanelForExpansionOpened"
@@ -372,6 +380,7 @@
   (windowHtmlDisplayEvent)="setToastPanelHtmlDisplay($event)"
 >
 </app-toast-panel>
+-->
 
 <ng-template #contextMenu>
   <igo-actionbar

@@ -1,35 +1,91 @@
 :host {
   display: block;
   padding: 16px;
+  //margin: 16px;
 
-  .spacer {
-    flex: 1 1 auto;
+
+  h4 {
+    font-size: 21px;
+    line-height: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: #223654;
+    font-family: Roboto,sans-serif;
+    display: block;
+    width: 100%;
   }
 
-  .button-container {
-    display: flex;
-    justify-content: space-around;
+  h4:after {
+    content: "";
+    display: block;
+    margin: 0;
+    width: 48px;
+    padding-top: 4px;
+    border-bottom: 4px solid #E58271;
   }
 
-  #doNotShowCheck {
-    margin-right: 5px;
+  p {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-family: Open Sans,sans-serif;
+    color: #223654;
+    font-size: 16px;
+    line-height: 24px;
   }
 
-  mat-toolbar h2 {
-    margin: revert;
+  .submit {
+    color:#fff;
+    background-color:#095797;
+    font-family:Open Sans,sans-serif;
+    font-size:16px;
+    font-weight:700;
+    line-height:24px;
+    min-width:112px;
+    max-width:168px;
+    height:56px;
+    padding:14px 22px;
+    float:right;
+    transition:all .24s ease-in-out;
+    text-align:center;
+    vertical-align:middle;
+    text-decoration:none;
+    box-shadow:0 1px 4px #22365429;
+    border:1px solid #095797;
+    cursor:pointer
   }
 
-  label {
-    margin-bottom: 0;
+  .submit:hover {
+    background-color:#156bb2;
+    border-color:#156bb2
   }
 
-  .mat-mdc-dialog-container {
-    z-index: 1000;
-    box-shadow: 0 0 0 1000em rgba(0, 0, 0, 0.6);
-    transform: translate(-50%, 0);
+  .confirmDialog {
+    background-color:#000
   }
 
-  ::ng-deep .custom-html {
-    padding: 0 !important;
+  @media (max-width: 768px) {
+    .warning-modal-content {
+      width:75%;
+      left:12.5%
+    }
   }
+
+  @media (min-width: 768px) {
+    .warning-modal-content {
+      width:500px;
+      left:calc(50% - 250px)
+    }
+  }
+
+  .warning-modal-content {
+    position:fixed;
+    height:-moz-fit-content;
+    height:fit-content;
+    background-color:#fff;
+    z-index:1003;
+    top:37.5%;
+    box-shadow:0 1px 8px #2236543d;
+    padding:32px
+  }
+
 }

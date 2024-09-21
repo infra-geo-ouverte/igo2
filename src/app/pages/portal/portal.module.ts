@@ -41,6 +41,7 @@ import { AppSidenavModule } from './sidenav/sidenav.module';
 import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toast-panel-for-expansion.module';
 import { AppToastPanelModule } from './toast-panel/toast-panel.module';
 import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
+import { LegendPanelButtonModule } from './legend-panel-button/legend-panel-button.module';
 
 @NgModule({
   imports: [
@@ -76,7 +77,8 @@ import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
     IgoEntityTableModule,
     IgoEntityTablePaginatorModule,
     IgoInteractiveTourModule,
-    IgoWelcomeWindowModule
+    IgoWelcomeWindowModule,
+    LegendPanelButtonModule
   ],
   exports: [PortalComponent],
   declarations: [PortalComponent]

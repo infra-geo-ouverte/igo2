@@ -5,7 +5,7 @@
     }
   },
   "favoriteContext4NonAuthenticated": true,
-  "theme": "blue-theme",
+  "theme": "qcca-theme",
   "header": {
     "hasHeader": true,
     "hasNavigationHeader": true,
@@ -22,7 +22,7 @@
   "showRotationButtonIfNoRotation": false,
   "menu": {
     "button": {
-      "visible": true,
+      "visible": false,
       "useThemeColor": false
     }
   },
@@ -33,11 +33,6 @@
   "queryTabs": false,
   "saveSearchResultInLayer": true,
   "hasFeatureEmphasisOnSelection": true,
-  "homeExtentButton": {
-    "homeExtButtonExtent": [-9000000, 5790000, -7500000, 6770000],
-    "homeExtButtonCenter": [-71.938087, 48.446975],
-    "homeExtButtonZoom": 6
-  },
   "searchSources": {
     "cadastre": {
       "available": false

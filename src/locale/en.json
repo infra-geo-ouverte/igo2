@@ -21,11 +21,11 @@
   },
   "footer": {
     "conditions": "Terms of use",
-    "url-conditions": "https://raw.githubusercontent.com/infra-geo-ouverte/igo2/master/LICENCE.txt",
-    "ministry": "Ministry name",
-    "url-ministry": "https://www.quebec.ca/government/ministry/",
-    "gov": "© Gouvernement du Québec, 2022",
-    "url-gov": "http://www.droitauteur.gouv.qc.ca/en/index.php"
+    "url-conditions": "https://www.quebec.ca/conditions-utilisation",
+    "ministry": "Société québécoise des infrastructures",
+    "url-ministry": "https://www.sqi.gouv.qc.ca/",
+    "gov": "© Gouvernement du Québec, 2024",
+    "url-gov": "https://www.quebec.ca/"
   },
   "externallinks": "This link will open in a new window",
   "toastPanel": {
@@ -256,5 +256,32 @@
     "message": "Message from a translation - no icon - <div class='toast-message-green-div'>Message at the context level </div>Open the layer 'MSP Tel. Urgence' to see messages at the layer level. {{content}}",
     "content": "Dynamic content can also be added to the message",
     "addLayerFromIndex": "You must configure the configuration files ( <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json' target='_blank'>config.json</a>  OU <a href='https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts' target='_blank'>environnement.ts</a>) in order to be able to detect entities of type geoservice (wms)"
+  },
+  "legend": {
+    "legendButton": "Legend",
+    "legendOpen": "Open the legend",
+    "legendClose": "Close the legend"
+  },
+  "sideResult": {
+    "title": {
+      "immeuble": "Informations sur l'immeuble"
+    },
+    "nom_immeuble": "Nom",
+    "adresse_immeuble": "Adresse",
+    "nombre_etage": "Nombre d'étage",
+    "vocation_officielle": "Vocation",
+    "immeuble_patrimonial": "Immeuble patrimonial",
+    "superficie_locative": "Superficie locative",
+    "certifications": "Certifications",
+    "building_link": "Voir la fiche complète de l'immeuble",
+    "open": "Open the panel",
+    "close": "Close the panel"
+  },
+  "portal": {
+    "warning": {
+      "title": "Avertissement",
+      "warning": "L'utilisateur assume l'entière responsabilité quant à l'utilisation qu'il fait de ces données. Veuillez noter que ces données sont fournies à titre indicatif seulement.",
+      "accept": "J'accepte"
+    }
   }
 }

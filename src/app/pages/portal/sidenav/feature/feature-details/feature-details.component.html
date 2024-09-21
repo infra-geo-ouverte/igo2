@@ -1,0 +1,41 @@
+<div *ngIf="this.mapQueryClick && feature.properties">
+  <div class="query-content">
+    <h3 class="igo-panel-title">{{ ('sideResult.title.immeuble' | translate) + " " + feature.properties.numero_immeuble }}</h3>
+    <div class="attribute">
+      <p class="attribute-label">{{ 'sideResult.nom_immeuble' | translate }} :&nbsp;</p>
+      <p class="attribute-value">{{ feature.properties.nom_immeuble }}</p>
+    </div>
+    <div class="attribute">
+      <p class="attribute-label">{{ 'sideResult.adresse_immeuble' | translate }} :&nbsp;</p>
+      <p class="attribute-value">{{ feature.properties.adresse_immeuble }}</p>
+    </div>
+    <div class="attribute">
+      <p class="attribute-label">{{ 'sideResult.nombre_etage' | translate }} :&nbsp;</p>
+      <p class="attribute-value">{{ feature.properties.nombre_etage }}</p>
+    </div>
+    <div class="attribute">
+      <p class="attribute-label">{{ 'sideResult.vocation_officielle' | translate }} :&nbsp;</p>
+      <p class="attribute-value">{{ feature.properties.vocation_officielle }}</p>
+    </div>
+    <div class="attribute">
+      <p class="attribute-label">{{ 'sideResult.immeuble_patrimonial' | translate }} :&nbsp;</p>
+      <p class="attribute-value">{{ feature.properties.immeuble_patrimonial }}</p>
+    </div>
+    <div class="attribute">
+      <p class="attribute-label">{{ 'sideResult.superficie_locative' | translate }} :&nbsp;</p>
+      <p class="attribute-value">{{ feature.properties.superficie_locative }}</p>
+    </div>
+    <div class="attribute">
+      <p class="attribute-label">{{ 'sideResult.certifications' | translate }} :&nbsp;</p>
+      <p class="attribute-value">{{ feature.properties.certifications }}</p>
+    </div>
+    <div
+      class="wrapper"
+      [routerLink]="['/', 'immeubles', feature.properties.numero_immeuble.substr(0, feature.properties.numero_immeuble.indexOf('-'))]"
+    >
+     {{ 'sideResult.building_link' | translate }}
+    </div>
+  </div>
+
+</div>
+
