@@ -1,0 +1,71 @@
+.wrapper {
+  background-color: var(--qc-color-white);
+  max-width: 1314px;
+  width: 100%;
+  padding: 24px 16px;
+  margin: auto;
+}
+.nom_de_immeuble {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: var(--qc-color-blue-medium);
+}
+.nom_de_immeuble::after {
+  content: '';
+  height: 5px;
+  width: 40px;
+  background-color: orange;
+  display: block;
+  margin-top: 10px;
+  margin-left: 4px;
+}
+.address {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--qc-color-blue-medium);
+}
+.icon {
+  width: 20px;
+  max-width: 20px;
+  height: auto;
+  object-fit: contain;
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: var(--qc-color-blue-medium);
+}
+.element {
+  color: var(--qc-color-blue-medium);
+  border: 1px solid rgb(198, 198, 198);
+  padding: 30px 20px;
+  width: 600px;
+  margin: 10px 0px;
+}
+.element-lines-wrapper {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.element-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--qc-color-blue-medium);
+}
+.element-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.element-icon {
+  width: 20px;
+  max-width: 20px;
+  height: auto;
+  object-fit: contain;
+}
