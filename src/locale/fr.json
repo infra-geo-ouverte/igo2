@@ -274,5 +274,12 @@
     "certifications": "Certifications",
     "open": "Ouvrir le panneau",
     "close": "Fermer le panneau"
+  },
+  "portal": {
+    "warning": {
+      "title": "Avertissement",
+      "warning": "L'utilisateur assume l'entière responsabilité quant à l'utilisation qu'il fait de ces données. Veuillez noter que ces données sont fournies à titre indicatif seulement.",
+      "accept": "J'accepte"
+    }
   }
 }
