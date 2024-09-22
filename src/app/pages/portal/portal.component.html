@@ -43,7 +43,7 @@
     <app-sidenav
       [map]="map"
       [(opened)]="sidenavOpened"
-      (toolChange)="toolChanged($event)"
+      [(searchInit)]="searchInit"
       [(legendPanelOpened)]="legendPanelOpened"
     >
     </app-sidenav>
@@ -133,7 +133,7 @@
         </igo-zoom-button>
 
         <app-legend-panel-button
-          (toggleLegend)="togglePanelLegend($event)"
+          (toggleLegend)="togglePanelLegend()"
           (legendPanelOpened)="$event">
         </app-legend-panel-button>
 

@@ -78,7 +78,6 @@ import {
   DirectionState,
   MapState,
   QueryState,
-  SearchState,
   ToolState,
   WorkspaceState
 } from '@igo2/integration';
@@ -106,6 +105,7 @@ import {
 } from './portal.animation';
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
+import { SearchState } from './sidenav/search.state';
 
 @Component({
   selector: 'app-portal',
@@ -314,6 +314,14 @@ export class PortalComponent implements OnInit, OnDestroy {
   get workspace(): Workspace {
     return this.workspaceState.workspace$.value;
   }
+
+  public panelOpenState = false;
+
+  public mapQueryClick = false;
+
+  public searchInit = false;
+
+  public expanded = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -683,7 +691,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onBackdropClick() {
-    this.closeSidenav();
+    this.closePanels();
+    this.mapQueryClick = false;
   }
 
   onToggleSidenavClick() {
@@ -751,6 +760,16 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onSearch(event: { research: Research; results: SearchResult[] }) {
+    this.searchInit = true;
+    this.legendPanelOpened = false;
+    this.expanded = true;
+    this.panelOpenState = true;
+    if (this.mapQueryClick === true) {
+      this.onClearQuery();
+      this.mapQueryClick = false;
+      this.panelOpenState = true;
+      this.expanded = true;
+    }
     const results = event.results;
 
     const isReverseSearch = !sourceCanSearch(event.research.source);
@@ -874,7 +893,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     ) {
       this.toolbox.activateTool('searchResults');
     }
-    this.openSidenav();
+    this.openPanels();
   }
 
   toastOpenedChange(opened: boolean) {
@@ -903,6 +922,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchStore.clear();
     this.searchState.setSelectedResult(undefined);
     this.searchState.deactivateCustomFilterTermStrategy();
+    this.searchInit = false;
+    this.searchBarTerm = '';
+    this.searchState.setSearchTerm('');
   }
 
   private getQuerySearchSource(): SearchSource {
@@ -912,6 +934,33 @@ export class PortalComponent implements OnInit, OnDestroy {
         (searchSource: SearchSource) =>
           searchSource instanceof QuerySearchSource
       );
+  }
+
+  closePanelOnCloseQuery(){
+    this.mapQueryClick = false;
+    if (this.searchInit === false && this.legendPanelOpened === false){
+      //this.panelOpenState = false;
+      //this.expanded = false; //// causes panel to close when click searchbar after query
+    } if (this.searchInit === true || this.legendPanelOpened === true) {
+      this.panelOpenState = true;
+      this.expanded = true;
+    }
+  }
+
+  openPanelonQuery(){
+    this.mapQueryClick = true;
+    this.expanded = true;
+    this.panelOpenState = true;
+    this.searchInit = false;
+    this.legendPanelOpened = false;
+    this.onClearSearch();
+    this.searchBarTerm = '';
+  }
+
+  onClearQuery(){
+    this.queryState.store.clear(); // clears the info panel
+    this.queryState.store.softClear(); // clears the info panel
+    this.map.queryResultsOverlay.clear(); // to avoid double-selection in the map
   }
 
   onContextMenuOpen(event: { x: number; y: number }) {
@@ -1681,9 +1730,50 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
   }
 
-  togglePanelLegend(event){
-    this.legendPanelOpened = !this.legendPanelOpened;
-    this.toggleSidenav();
+  togglePanelLegend(){
+    if (this.legendPanelOpened === false) {
+      this.openPanelLegend();
+      if (this.searchInit === true){
+        this.onClearSearch();
+        this.searchBarTerm = '';
+        this.searchInit = false;
+        this.openPanels();
+      }
+      if (this.mapQueryClick === true){
+        this.onClearQuery();
+        this.mapQueryClick = false;
+        this.openPanels();
+      }
+    } else {
+      this.closePanelLegend();
+    }
+
   }
 
+  closePanelLegend(){
+    this.legendPanelOpened = false;
+    this.closePanels();
+    this.map.propertyChange$.unsubscribe;
+  }
+
+  openPanelLegend(){
+    this.legendPanelOpened = true;
+    this.openPanels();
+  }
+
+  togglePanel(event: boolean){
+    this.panelOpenState = event;
+  }
+
+  private closePanels() {
+    if (this.mapQueryClick === false && this.searchInit === false && this.legendPanelOpened === false){
+      this.panelOpenState = false;
+      this.expanded = false;
+    }
+  }
+
+  private openPanels() {
+    this.panelOpenState = true;
+    this.expanded = true;
+  }
 }
