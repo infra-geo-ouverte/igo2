@@ -25,52 +25,68 @@
             ".*"
           ],
           "fill": [
-            "rgba(30, 144, 255, 0.4)",
-            "rgba(50, 205, 50, 0.4)",
-            "rgba(220, 20, 60, 0.4)",
-            "rgba(255, 215, 0, 0.4)",
-            "rgba(105, 105, 105, 0.4)",
-            "rgba(255, 99, 71, 0.4)",
-            "rgba(147, 112, 219, 0.4)",
-            "rgba(85, 107, 47, 0.4)",
-            "rgba(72, 209, 204, 0.4)",
-            "rgba(139, 0, 0, 0.4)",
-            "rgba(0, 255, 255, 0.4)",
-            "rgba(255, 218, 185, 0.4)",
-            "rgba(47, 79, 79, 0.4)",
-            "rgba(186, 85, 211, 0.4)"
+            "Crimson",
+            "DeepSkyBlue",
+            "Gold",
+            "ForestGreen",
+            "SlateBlue",
+            "OrangeRed",
+            "PaleVioletRed",
+            "MidnightBlue",
+            "LightSeaGreen",
+            "LightCoral",
+            "SandyBrown",
+            "MediumOrchid",
+            "SpringGreen",
+            "DarkMagenta"
           ],
           "stroke": [
-            "rgba(30, 144, 255, 1)",
-            "rgba(50, 205, 50, 1)",
-            "rgba(220, 20, 60, 1)",
-            "rgba(255, 215, 0, 1)",
-            "rgba(105, 105, 105, 1)",
-            "rgba(255, 99, 71, 1)",
-            "rgba(147, 112, 219, 1)",
-            "rgba(85, 107, 47, 1)",
-            "rgba(72, 209, 204, 1)",
-            "rgba(139, 0, 0, 1)",
-            "rgba(0, 255, 255, 1)",
-            "rgba(255, 218, 185, 1)",
-            "rgba(47, 79, 79, 1)",
-            "rgba(186, 85, 211, 1)"
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white"
           ],
           "radius": [
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8,
-            8
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+          ],
+          "width": [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
           ],
           "hoverStyle": {
             "attribute": [""],
@@ -93,7 +109,7 @@
                 },
                 "backgroundStroke": {
                   "color": "rgba(200, 200, 200, 0.75)",
-                  "width": 0
+                  "width": 2
                 },
                 "overflow": true,
                 "offsetX": 30,
@@ -109,20 +125,114 @@
           }
         }
       },
-      "legendOptions": {
-        "collapsed": false,
-        "display": true,
-        "url": "/assets/legends/legend-immeubles.PNG",
-        "html": "<div class='iframe-legend-container'><iframe class='iframe-legend embed-responsive' title='Légende' style='overflow:hidden;border:none;width:100%;height:176px;' loading='lazy'  scrolling='no' src='assets/legends/legend-stations/legende-stations.html'></iframe></div>"
-      },
       "sourceOptions": {
-        "url": "http://vps-5d30fe87.vps.ovh.ca:3000/v1/mvt/immeublesvw3/{z}/{x}/{y}?columns=*",
+        "url": "http://vps-5d30fe87.vps.ovh.ca:3000/v1/immeubles_mvt/{z}/{x}/{y}",
         "type": "mvt",
         "queryable": true
       },
       "title": "Immeubles",
       "visible": true,
-      "zIndex": 101
+      "zIndex": 101,
+      "showInLayerList": true
+    },
+    {
+      "id": "immeubles_count",
+      "igoStyle": {
+        "styleByAttribute": {
+          "type": "circle",
+          "attribute": "size_code",
+          "data": [
+            "x0x",
+            "x10x",
+            "x20x",
+            "x30x",
+            "x40x",
+            "x50x",
+            "x60x",
+            "x70x",
+            "x80x",
+            "x90x",
+            ".*"
+          ],
+          "fill": [
+            "gray",
+            "gray",
+            "gray",
+            "gray",
+            "gray",
+            "gray",
+            "gray",
+            "gray",
+            "gray",
+            "gray",
+            "gray"
+          ],
+          "stroke": [
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white",
+            "white"
+          ],
+          "radius": [
+            20,
+            28,
+            36,
+            44,
+            52,
+            60,
+            68,
+            76,
+            84,
+            92,
+            100
+          ],
+          "width": [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "label": {
+            "attribute": "${num_records}",
+            "style": {
+              "overflow": false,
+              "placement": "line",
+              "fill": {
+                "color": "white",
+                "width": 2
+              },
+              "scale": 1.5,
+              "stroke": {
+                "color": "black",
+                "width": 2
+              }
+            }
+          }
+        }
+      },
+      "sourceOptions": {
+        "url": "http://vps-5d30fe87.vps.ovh.ca:3000/v1/cluster_mvt/{z}/{x}/{y}",
+        "type": "mvt",
+        "queryable": true
+      },
+      "showInLayerList": false,
+      "title": "Immeubles Count",
+      "visible": true,
+      "zIndex": 100
     }
   ]
 }
