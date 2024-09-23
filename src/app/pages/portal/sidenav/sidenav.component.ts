@@ -213,7 +213,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
       this.queryStore.entities$
       .subscribe(
         (entities) => {
-        if (entities.length == 1) {
+        if (entities.length == 1 && entities[0].data.properties.numero_immeuble) {
           this.opened = true;
           this.mapQueryClick = true;
           this.legendPanelOpened = false;
