@@ -27,6 +27,7 @@ import { RouteService } from '@igo2/core/route';
 import { loadTheme } from '@igo2/utils';
 
 import 'hammerjs';
+import { first } from 'rxjs';
 
 import { AppComponent } from './app/app.component';
 import { PortalModule } from './app/pages';
@@ -83,10 +84,13 @@ bootstrapApplication(AppComponent, {
 function provideTheme(): Provider {
   return {
     provide: APP_INITIALIZER,
-    useFactory: (configService: ConfigService, document: Document) => () => {
-      const theme = configService.getConfig('theme', DEFAULT_THEME);
-      loadTheme(document, theme);
-    },
+    useFactory: (configService: ConfigService, document: Document) => () =>
+      configService.isLoaded$
+        .pipe(first((isLoaded) => isLoaded))
+        .subscribe(() => {
+          const theme = configService.getConfig('theme', DEFAULT_THEME);
+          loadTheme(document, theme);
+        }),
     deps: [ConfigService, DOCUMENT],
     multi: true
   };

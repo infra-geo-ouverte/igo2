@@ -86,6 +86,7 @@ import {
   SearchSourceService,
   VectorLayer,
   WfsWorkspace,
+  WorkspaceSelectorDirective,
   WorkspaceUpdatorDirective,
   addStopToStore,
   computeOlFeaturesExtent,
@@ -196,6 +197,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     TranslateModule,
     UserButtonComponent,
     WORKSPACE_DIRECTIVES,
+    WorkspaceSelectorDirective,
     WorkspaceUpdatorDirective
   ],
   providers: [
@@ -215,18 +217,15 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 })
 export class PortalComponent implements OnInit, OnDestroy {
   public appConfig: EnvironmentOptions;
-  public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(
-    undefined
-  );
-  public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public toastPanelOffsetX$ = new BehaviorSubject<string>(undefined);
+  public sidenavOpened$ = new BehaviorSubject(false);
   public minSearchTermLength = 2;
   public hasGeolocateButton = true;
   public showMenuButton = true;
   public showSearchBar = true;
   public workspaceNotAvailableMessage: string = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
-  public workspaceEntitySortChange$: BehaviorSubject<boolean> =
-    new BehaviorSubject(false);
+  public workspaceEntitySortChange$ = new BehaviorSubject(false);
   public workspaceSwitchDisabled = false;
   public paginatorOptions: EntityTablePaginatorOptions = {
     pageSize: 50, // Number of items to display on a page.
@@ -237,7 +236,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public fullExtent: boolean;
   private workspaceMaximize$$: Subscription[] = [];
 
-  public matDialogRef$ = new BehaviorSubject<MatDialogRef<any>>(undefined);
+  public matDialogRef$ = new BehaviorSubject<MatDialogRef<unknown>>(undefined);
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
@@ -260,9 +259,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
   public showToastPanelForExpansionToggle = false;
-  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
-    undefined
-  );
+  public selectedWorkspace$ = new BehaviorSubject<Workspace>(undefined);
   private routeParams: Params;
   public toastPanelHtmlDisplay = false;
 
