@@ -12,7 +12,7 @@ export class BreadcrumbService {
       link: 'https://www.sqi.gouv.qc.ca/'
     },
     {
-      title: 'Outil de réparage d\'immeubles',
+      title: 'Outil de repérage d\'immeubles',
       link: ''
     }
   ]);

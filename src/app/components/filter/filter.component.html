@@ -1,15 +1,15 @@
 <div class="wrapper">
   <div class="title-wrapper">
-    <div class="title">Filters</div>
-    <div class="clear" (click)="onClear()">Clear</div>
+    <div class="title">Filtres</div>
+    <div class="clear" (click)="onClear()">Effacer les filtres</div>
   </div>
   <form class="form">
     <div class="filed">
-      <label for="numero">Numero civique</label>
+      <label for="numero">Numéro civique</label>
       <input
         id="numero"
         name="numero"
-        placeholder="Example de numero civique"
+        placeholder="Example de numéro civique"
         type="text"
         #numero_civiqueInput
         (change)="
@@ -31,11 +31,11 @@
     </div>
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="ville">Ville ou municipilate</label>
+      <label for="ville">Ville ou municipalité</label>
       <input
         id="ville"
         name="ville"
-        placeholder="Example de ville ou municipilate"
+        placeholder="Example de ville ou municipalité"
         type="text"
         #ville_municipaliteInput
         (change)="
@@ -48,11 +48,11 @@
     </div>
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="numero_immeuble">Numero d'immeuble</label>
+      <label for="numero_immeuble">Numéro d'immeuble</label>
       <input
         id="numero_immeuble"
         name="numero_immeuble"
-        placeholder="Example de numero d'immeuble"
+        placeholder="Example de numéro d'immeuble"
         type="text"
         #numero_immeubleInput
         (change)="
@@ -65,11 +65,11 @@
     </div>
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="direction">Direction immobliere</label>
+      <label for="direction">Direction immobilière</label>
       <input
         id="direction"
         name="direction"
-        placeholder="Choisir une direction immobliere"
+        placeholder="Choisir une direction immobilière"
         type="text"
         #direction_immobiliere_nomInput
         (change)="
@@ -81,13 +81,14 @@
       />
     </div>
     <mat-divider></mat-divider>
-    <div class="ln">Moins de filtres</div>
+    <div class="ln" (click)="toggleShowAdditionalFilters()">{{ showingAdditionalFilters ? 'Moins' : 'Plus'}} de filtres</div>
+    <div *ngIf="showingAdditionalFilters">
     <div class="filed">
-      <label for="nom_immeuble">Nom de I'immeuble</label>
+      <label for="nom_immeuble">Nom de l'immeuble</label>
       <input
         id="nom_immeuble"
         name="nom_immeuble"
-        placeholder="Example de numero d'immeuble"
+        placeholder="Example de nom de l'immeuble"
         type="text"
         #nom_immeubleInput
         (change)="
@@ -114,11 +115,11 @@
     </div>
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="region">Region administrative</label>
+      <label for="region">Région administrative</label>
       <input
         id="region"
         name="region"
-        placeholder="Choisir une region administrative"
+        placeholder="Choisir une région administrative"
         type="text"
         #region_adminsitrativeInput
         (change)="
@@ -132,11 +133,12 @@
     <mat-divider></mat-divider>
     <div class="filed line">
       <input id="patrimonial" name="patrimonial" type="checkbox" />
-      <label for="patrimonial"> Immeuble patrimonial</label>
+      <label for="patrimonial">Immeuble patrimonial</label>
     </div>
     <div class="filed line">
       <input id="avec" name="avec" type="checkbox" />
-      <label for="avec">Immeuble avec denomination</label>
+      <label for="avec">Immeuble avec dénomination</label>
+    </div>
     </div>
   </form>
 </div>

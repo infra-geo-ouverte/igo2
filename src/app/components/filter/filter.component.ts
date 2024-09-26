@@ -9,6 +9,8 @@ import { FilterService } from 'src/app/services/filter.service';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
+  showingAdditionalFilters = false;
+
   constructor(
     private readonly fb: FormBuilder,
     private readonly filterService: FilterService
@@ -26,5 +28,9 @@ export class FilterComponent implements OnInit {
 
   onChange(key: string, value: string) {
     this.filterService.onFilter(key, value);
+  }
+
+  toggleShowAdditionalFilters() {
+    this.showingAdditionalFilters = !this.showingAdditionalFilters;
   }
 }

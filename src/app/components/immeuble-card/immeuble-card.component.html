@@ -7,9 +7,13 @@
   <div class="line-2">{{ item.adresse_immeuble }}</div>
   <div class="line-3">{{ item.direction_immobiliere_nom }}</div>
   <div class="line-4">
-    Numero de l'immeuble: <strong> {{ item.numero_immeuble }}</strong>
+    Numéro de l'immeuble : <strong> {{ item.numero_immeuble }}-{{ item.type_propriete_ou_location }}</strong>
   </div>
   <div class="line-5">
-    Vocation: <strong>{{ item.vocation_officielle }}</strong>
+    Vocation : <strong>{{ item.vocation_officielle }}</strong>
   </div>
+  <div class="line-6">
+    Type : <strong>{{ item.type_propriete_ou_location === 'P' ? 'Propriété' : 'Location' }}</strong>
+  </div>
+
 </div>
