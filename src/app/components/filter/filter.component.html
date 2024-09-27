@@ -131,6 +131,23 @@
       />
     </div>
     <mat-divider></mat-divider>
+    <div class="filed">
+      <label for="type_propriete_ou_location">Type</label>
+      <input
+        id="type_propriete_ou_location"
+        name="type_propriete_ou_location"
+        placeholder="Afficher les filtres"
+        type="text"
+        #type_propriete_ou_locationInput
+        (change)="
+        onChange(
+          'type_propriete_ou_location',
+          type_propriete_ou_locationInput?.value?.toLowerCase().substr(0,1)
+        )
+      "
+      />
+    </div>
+    <mat-divider></mat-divider>
     <div class="filed line">
       <input id="patrimonial" name="patrimonial" type="checkbox" />
       <label for="patrimonial">Immeuble patrimonial</label>
