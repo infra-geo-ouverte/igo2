@@ -1,8 +1,18 @@
 <div class="wrapper">
-  <label for="number-per-page">Nombre par page</label>
-  <select id="number-per-page" (change)="onSelect($event.target.value)">
-    <option value="10" selected>10</option>
-    <option value="20">20</option>
-    <option value="50">50</option>
-  </select>
+  <div class="wrapper-content-left">
+    <label class="labels" for="sortBy">Trier Par </label>
+    <select id="sortBy" (change)="onSelectSortBy($event.target.value)">
+      <option value="nom_immeuble" selected>Nom de l'immeuble</option>
+      <option value="region_adminsitrative">Région administrative</option>
+    </select>
+  </div>
+
+  <div class="wrapper-content-right">
+    <label for="number-per-page">Nombre par page </label>
+    <select id="number-per-page" (change)="onSelect($event.target.value)">
+      <option value="10" selected>10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+  </div>
 </div>

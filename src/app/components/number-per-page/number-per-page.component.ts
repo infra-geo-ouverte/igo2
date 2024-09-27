@@ -7,9 +7,15 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class NumberPerPageComponent {
   @Output() numberChange = new EventEmitter<number>();
+  @Output() sortByChange = new EventEmitter<any>();
 
   onSelect(value: any) {
     console.log('Selected: ', value);
     this.numberChange.next(value);
+  }
+
+  onSelectSortBy(value: any) {
+    console.log('Selected: ', value);
+    this.sortByChange.next(value);
   }
 }

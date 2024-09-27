@@ -11,7 +11,7 @@ import { ImmeublesService } from 'src/app/services/immeubles.service';
 export class ImmeublesComponent implements OnInit {
   immeubles: any;
   columns = '*';
-  sort = '';
+  sortBy = 'nom_immeuble';
   limit = 10;
   offset = 0;
   total = 0;
@@ -43,8 +43,12 @@ export class ImmeublesComponent implements OnInit {
   }
 
   onNumberPerPage(value: string) {
-    debugger;
     this.limit = parseInt(value);
+    this.getImmeubles();
+  }
+
+  onSortBy(value: string) {
+    this.sortBy = value;
     this.getImmeubles();
   }
 
@@ -61,7 +65,7 @@ export class ImmeublesComponent implements OnInit {
       .getImmeubles(
         this.getFilterParam(this.valuesMap),
         this.columns,
-        this.sort,
+        this.sortBy,
         this.limit,
         this.offset
       )

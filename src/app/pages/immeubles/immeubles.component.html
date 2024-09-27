@@ -13,9 +13,9 @@
         <app-filter-values></app-filter-values>
       </div>
       <div class="number-per-page-line">
-        <div></div>
         <app-number-per-page
           (numberChange)="onNumberPerPage($event)"
+          (sortByChange)="onSortBy($event)"
         ></app-number-per-page>
       </div>
       <div class="items">

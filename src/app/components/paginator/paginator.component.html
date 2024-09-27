@@ -2,7 +2,9 @@
   [length]="_total"
   [pageSize]="_limit"
   [pageSizeOptions]="[5, 10, 25, 100]"
-  aria-label="Select page"
+  [showFirstLastButtons]="false"
+  [hidePageSize]="true"
+  aria-label="Choisir une page"
   (page)="onPage($event)"
 >
 </mat-paginator>
