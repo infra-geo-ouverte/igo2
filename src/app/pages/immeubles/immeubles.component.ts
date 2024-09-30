@@ -11,7 +11,7 @@ import { ImmeublesService } from 'src/app/services/immeubles.service';
 export class ImmeublesComponent implements OnInit {
   immeubles: any;
   columns = '*';
-  sortBy = 'nom_immeuble';
+  sortBy = 'adresse_immeuble';
   limit = 10;
   offset = 0;
   total = 0;
