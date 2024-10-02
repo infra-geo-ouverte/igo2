@@ -32,28 +32,28 @@
               "src/locale",
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/common/assets/",
-                "output": "./assets/igo2/common/"
+                "input": "node_modules/@igo2/common/assets/",
+                "output": "assets/igo2/common/"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/core/assets/",
-                "output": "./assets/igo2/core/"
+                "input": "node_modules/@igo2/core/assets/",
+                "output": "assets/igo2/core/"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/core/locale/",
-                "output": "./locale/libs_locale",
+                "input": "node_modules/@igo2/core/locale/",
+                "output": "locale/libs_locale",
                 "ignore": ["**/*.core.json"]
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/core/theming/prebuilt-themes",
+                "input": "node_modules/@igo2/core/theming/prebuilt-themes",
                 "output": "./assets/igo2/core/theming/prebuilt-themes"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/geo/assets/",
+                "input": "node_modules/@igo2/geo/assets/",
                 "output": "./assets/igo2/geo/"
               },
               "src/manifest.webmanifest"
@@ -367,6 +367,9 @@
     }
   },
   "cli": {
+    "cache": {
+      "enabled": false
+    },
     "schematicCollections": [
       "@schematics/angular"
     ],
