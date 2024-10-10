@@ -69,3 +69,31 @@
   height: auto;
   object-fit: contain;
 }
+
+.google_embedded_map {
+    width: 600px;
+    height: 350px;
+    scrolling: no;
+    margin-top: 10px;
+}
+
+.element-line-2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.photo {
+  width: 600px;
+  margin-top: 10px;
+}
+
+.caption {
+  width: 600px;
+  margin-top: 4px;
+  padding: 4px 16px;
+  background-color: rgba(128, 128, 128, 0.1);
+  font-size: 12px;
+  color: var(--qc-color-blue-dark);
+}
