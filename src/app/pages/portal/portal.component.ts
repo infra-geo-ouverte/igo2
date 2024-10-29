@@ -388,22 +388,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     let content;
     if (this.workspace !== undefined && this.workspace.hasWidget) {
       content = 'workspace';
-    } /*else if (this.searchResult !== undefined) {
-      content = this.searchResult.meta.dataType.toLowerCase();
-    }*/
+    }
     return content;
   }
-
-  // get toastPanelTitle(): string {
-  //   let title;
-  //   if (
-  //     this.toastPanelContent !== 'workspace' &&
-  //     this.searchResult !== undefined
-  //   ) {
-  //     title = getEntityTitle(this.searchResult);
-  //   }
-  //   return title;
-  // }
 
   get workspaceStore(): WorkspaceStore {
     return this.workspaceState.store;

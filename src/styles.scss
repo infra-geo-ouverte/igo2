@@ -4,6 +4,10 @@
 @use 'style/reset.scss';
 @use 'style/theme.scss';
 
+:root {
+  --sidenav-width: 400px;
+}
+
 html {
   font-size: 14px;
 }
