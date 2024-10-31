@@ -40,16 +40,16 @@ export function expansionPanelAnimation(): AnimationTriggerMetadata[] {
       state(
         'reduced',
         style({
-          left: '404px',
-          'max-width': 'calc(100% - 404px)'
+          left: 'calc(var(--sidenav-width) + 4px)',
+          'max-width': 'calc(100% - (var(--sidenav-width) + 4px))'
         })
       ),
       state(
         'reducedNotTriggered',
         style({
-          left: '404px',
+          left: 'calc(var(--sidenav-width) + 4px)',
           bottom: '4px',
-          'max-width': 'calc(100% - 404px)'
+          'max-width': 'calc(100% - (var(--sidenav-width) + 4px))'
         })
       ),
       transition('* => *', animate('100ms'))
@@ -126,8 +126,6 @@ export function toastPanelAnimation(): AnimationTriggerMetadata[] {
       transition('standardOffsetX => standard', animate('200ms')),
       transition('htmlDisplay => htmlDisplayOffsetX', animate('200ms')),
       transition('htmlDisplayOffsetX => htmlDisplay', animate('200ms'))
-      // transition('standard => htmlDisplay', animate('200ms')),
-      // transition('htmlDisplay => standard', animate('200ms')),
     ]),
     trigger('toastPanelOffsetY', [
       state(
