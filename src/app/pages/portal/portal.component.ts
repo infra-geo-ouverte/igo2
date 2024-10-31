@@ -6,6 +6,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  Optional,
   ViewChild
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -132,6 +133,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Subscription, combineLatest, of } from 'rxjs';
 import { debounceTime, first, pairwise, skipWhile, take } from 'rxjs/operators';
 import { getAppVersion } from 'src/app/app.utils';
+import { environment } from 'src/environments/environment';
 import { EnvironmentOptions } from 'src/environments/environnement.interface';
 
 import { ExpansionPanelButtonComponent } from './expansion-panel/expansion-panel-button/expansion-panel-button.component';
@@ -422,7 +424,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private configFileToGeoDBService: ConfigFileToGeoDBService
+    @Optional() private configFileToGeoDBService?: ConfigFileToGeoDBService
   ) {
     this.analyticsListenerService.listen();
     this.handleAppConfigs();
@@ -593,12 +595,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.mediaService.orientation$
     ])
       .pipe(debounceTime(50))
-      .subscribe(() => {
-        this.computeToastPanelOffsetX();
-      });
+      .subscribe(() => this.computeToastPanelOffsetX());
 
-    if (this.appConfig.importExport?.configFileToGeoDBService) {
-      this.configFileToGeoDBService.load(
+    if (
+      environment.igo.offline?.enable &&
+      this.appConfig.importExport?.configFileToGeoDBService
+    ) {
+      this.configFileToGeoDBService?.load(
         this.appConfig.importExport.configFileToGeoDBService
       );
     }

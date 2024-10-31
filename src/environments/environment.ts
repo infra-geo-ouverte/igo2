@@ -238,6 +238,9 @@ export const environment: AppEnvironmentOptions = {
       tourInMobile: true,
       pathToConfigFile: './config/interactiveTour.json'
     },
+    offline: {
+      enable: true
+    },
     importExport: {
       importWithStyle: false,
       url: '/apis/ogre',

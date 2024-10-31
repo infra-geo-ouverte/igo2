@@ -24,6 +24,7 @@ import { ConfigService, provideConfig } from '@igo2/core/config';
 import { provideTranslation } from '@igo2/core/language';
 import { IgoMessageModule } from '@igo2/core/message';
 import { RouteService } from '@igo2/core/route';
+import { provideOffline } from '@igo2/geo';
 import { loadTheme } from '@igo2/utils';
 
 import 'hammerjs';
@@ -70,6 +71,7 @@ bootstrapApplication(AppComponent, {
       withMicrosoftSupport('add'),
       withMicrosoftSupport('b2c')
     ),
+    provideOffline(environment.igo.offline),
     provideIcon(),
     provideTheme(),
     RouteService,
