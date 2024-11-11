@@ -15,6 +15,9 @@ export const environment: AppEnvironmentOptions = {
       },
       pwa: {
         enabled: false
+      },
+      offline: {
+        enable: true
       }
     },
     auth: {
@@ -237,9 +240,6 @@ export const environment: AppEnvironmentOptions = {
     interactiveTour: {
       tourInMobile: true,
       pathToConfigFile: './config/interactiveTour.json'
-    },
-    offline: {
-      enable: true
     },
     importExport: {
       importWithStyle: false,

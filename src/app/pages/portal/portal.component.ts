@@ -133,7 +133,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Subscription, combineLatest, of } from 'rxjs';
 import { debounceTime, first, pairwise, skipWhile, take } from 'rxjs/operators';
 import { getAppVersion } from 'src/app/app.utils';
-import { environment } from 'src/environments/environment';
 import { EnvironmentOptions } from 'src/environments/environnement.interface';
 
 import { ExpansionPanelButtonComponent } from './expansion-panel/expansion-panel-button/expansion-panel-button.component';
@@ -598,7 +597,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       .subscribe(() => this.computeToastPanelOffsetX());
 
     if (
-      environment.igo.offline?.enable &&
+      this.appConfig.app.offline?.enable &&
       this.appConfig.importExport?.configFileToGeoDBService
     ) {
       this.configFileToGeoDBService?.load(

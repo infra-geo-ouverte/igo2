@@ -71,7 +71,7 @@ bootstrapApplication(AppComponent, {
       withMicrosoftSupport('add'),
       withMicrosoftSupport('b2c')
     ),
-    provideOffline(environment.igo.offline),
+    provideOffline(environment.igo.app.offline),
     provideIcon(),
     provideTheme(),
     RouteService,
