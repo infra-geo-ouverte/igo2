@@ -21,7 +21,7 @@ import { withMicrosoftSupport } from '@igo2/auth/microsoft';
 import { provideIcon } from '@igo2/common/icon';
 import { IgoCoreModule } from '@igo2/core';
 import { ConfigService, provideConfig } from '@igo2/core/config';
-import { provideTranslation } from '@igo2/core/language';
+import { provideTranslation, withAsyncConfig } from '@igo2/core/language';
 import { IgoMessageModule } from '@igo2/core/message';
 import { RouteService } from '@igo2/core/route';
 import { provideOffline } from '@igo2/geo';
@@ -66,7 +66,7 @@ bootstrapApplication(AppComponent, {
       default: environment.igo,
       path: './config/config.json'
     }),
-    provideTranslation(),
+    provideTranslation(withAsyncConfig()),
     provideAuthentification(
       withMicrosoftSupport('add'),
       withMicrosoftSupport('b2c')
