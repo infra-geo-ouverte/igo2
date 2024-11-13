@@ -15,6 +15,9 @@ export const environment: AppEnvironmentOptions = {
       },
       pwa: {
         enabled: false
+      },
+      offline: {
+        enable: true
       }
     },
     auth: {

@@ -6,6 +6,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  Optional,
   ViewChild
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -422,7 +423,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private configFileToGeoDBService: ConfigFileToGeoDBService
+    @Optional() private configFileToGeoDBService?: ConfigFileToGeoDBService
   ) {
     this.analyticsListenerService.listen();
     this.handleAppConfigs();
@@ -593,12 +594,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.mediaService.orientation$
     ])
       .pipe(debounceTime(50))
-      .subscribe(() => {
-        this.computeToastPanelOffsetX();
-      });
+      .subscribe(() => this.computeToastPanelOffsetX());
 
-    if (this.appConfig.importExport?.configFileToGeoDBService) {
-      this.configFileToGeoDBService.load(
+    if (
+      this.appConfig.app.offline?.enable &&
+      this.appConfig.importExport?.configFileToGeoDBService
+    ) {
+      this.configFileToGeoDBService?.load(
         this.appConfig.importExport.configFileToGeoDBService
       );
     }
