@@ -11,7 +11,7 @@
         "type": "wfs",
         "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
         "queryable": true,
-        "queryTitle": "desclocal",
+        "queryTitle": "num_rts",
         "params": {
           "featureTypes": "bgr_v_sous_route_res_sup_act",
           "fieldNameGeometry": "geometry",
@@ -265,7 +265,7 @@
       "maxResolution": 1500,
       "sourceOptions": {
         "queryable": true,
-        "queryTitle": "nom_unite_",
+        "queryTitle": "num_rts",
         "featureClass": "feature",
         "type": "mvt",
         "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_sous_route_res_sup_act&map.imagetype=mvt"
