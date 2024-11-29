@@ -1,4 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi
+} from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { WelcomeWindowService } from './welcome-window.service';
@@ -6,7 +10,11 @@ import { WelcomeWindowService } from './welcome-window.service';
 describe('WelcomeWindowService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: [],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+      ]
     })
   );
 

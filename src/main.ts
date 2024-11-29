@@ -16,21 +16,25 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { IgoAuthFormModule } from '@igo2/auth/form';
+import { provideAuthentification } from '@igo2/auth';
+import { withMicrosoftSupport } from '@igo2/auth/microsoft';
+import { provideIcon } from '@igo2/common/icon';
 import { IgoCoreModule } from '@igo2/core';
-import { ConfigService, provideConfigOptions } from '@igo2/core/config';
-import { provideRootTranslation } from '@igo2/core/language';
+import { ConfigService, provideConfig } from '@igo2/core/config';
+import { provideTranslation, withAsyncConfig } from '@igo2/core/language';
 import { IgoMessageModule } from '@igo2/core/message';
 import { RouteService } from '@igo2/core/route';
+import { provideOffline } from '@igo2/geo';
 import { loadTheme } from '@igo2/utils';
 
 import 'hammerjs';
+import { first } from 'rxjs';
 
 import { AppComponent } from './app/app.component';
 import { PortalModule } from './app/pages';
 import { environment } from './environments/environment';
 
-const DEFAULT_THEME: string = 'blue-theme';
+const DEFAULT_THEME = 'blue-theme';
 
 const TOOLTIP_OPTIONS: MatTooltipDefaultOptions = {
   showDelay: 500,
@@ -47,8 +51,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
       BrowserModule,
-      IgoCoreModule.forRoot(),
-      IgoAuthFormModule.forRoot(),
+      IgoCoreModule,
       IgoMessageModule,
       PortalModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
@@ -56,14 +59,20 @@ bootstrapApplication(AppComponent, {
         registrationStrategy: 'registerWithDelay:5000'
       })
     ),
-    provideRootTranslation(),
     provideHttpClient(),
     provideAnimations(),
     provideRouter([]),
-    provideConfigOptions({
+    provideConfig({
       default: environment.igo,
       path: './config/config.json'
     }),
+    provideTranslation(withAsyncConfig()),
+    provideAuthentification(
+      withMicrosoftSupport('add'),
+      withMicrosoftSupport('b2c')
+    ),
+    provideOffline(environment.igo.app.offline),
+    provideIcon(),
     provideTheme(),
     RouteService,
     { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: TOOLTIP_OPTIONS },
@@ -77,10 +86,13 @@ bootstrapApplication(AppComponent, {
 function provideTheme(): Provider {
   return {
     provide: APP_INITIALIZER,
-    useFactory: (configService: ConfigService, document: Document) => () => {
-      const theme = configService.getConfig('theme', DEFAULT_THEME);
-      loadTheme(document, theme);
-    },
+    useFactory: (configService: ConfigService, document: Document) => () =>
+      configService.isLoaded$
+        .pipe(first((isLoaded) => isLoaded))
+        .subscribe(() => {
+          const theme = configService.getConfig('theme', DEFAULT_THEME);
+          loadTheme(document, theme);
+        }),
     deps: [ConfigService, DOCUMENT],
     multi: true
   };

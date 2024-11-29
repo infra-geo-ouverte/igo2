@@ -7,6 +7,6 @@ import { Version, version as libVersion } from '@igo2/core/config';
 
 export const version: Version = {
   ...libVersion,
-  app: '16.1.0',
-  releaseDateApp: 1702904471895
+  app: '17.0.0',
+  releaseDateApp: 1724351668053
 };

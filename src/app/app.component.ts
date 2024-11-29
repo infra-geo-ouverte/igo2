@@ -5,7 +5,11 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { AuthOptions } from '@igo2/auth';
 import { AuthFormComponent } from '@igo2/auth/form';
-import { SpinnerComponent, StopPropagationDirective } from '@igo2/common';
+import {
+  SpinnerActivityDirective,
+  SpinnerComponent
+} from '@igo2/common/spinner';
+import { StopPropagationDirective } from '@igo2/common/stop-propagation';
 import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
 import { MessageService } from '@igo2/core/message';
@@ -14,6 +18,8 @@ import { DomUtils, userAgent } from '@igo2/utils';
 
 import { delay, first } from 'rxjs';
 
+import { FooterComponent } from './pages/footer/footer.component';
+import { HeaderComponent } from './pages/header/header.component';
 import { PortalComponent } from './pages/portal/portal.component';
 import { PwaService } from './services/pwa.service';
 
@@ -24,6 +30,9 @@ import { PwaService } from './services/pwa.service';
   standalone: true,
   imports: [
     SpinnerComponent,
+    SpinnerActivityDirective,
+    HeaderComponent,
+    FooterComponent,
     StopPropagationDirective,
     NgIf,
     AuthFormComponent,

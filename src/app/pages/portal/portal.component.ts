@@ -6,6 +6,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  Optional,
   ViewChild
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,21 +26,26 @@ import { AuthService } from '@igo2/auth';
 import {
   ActionStore,
   ActionbarComponent,
-  ActionbarMode,
-  BackdropComponent,
+  ActionbarMode
+} from '@igo2/common/action';
+import { BackdropComponent } from '@igo2/common/backdrop';
+import {
   ContextMenuDirective,
+  LongPressDirective
+} from '@igo2/common/context-menu';
+import {
   ENTITY_DIRECTIVES,
   EntityRecord,
   EntityStore,
-  EntityTablePaginatorOptions,
-  LongPressDirective,
-  Tool,
-  Toolbox,
+  EntityTablePaginatorOptions
+} from '@igo2/common/entity';
+import { Tool, Toolbox } from '@igo2/common/tool';
+import { Widget } from '@igo2/common/widget';
+import {
   WORKSPACE_DIRECTIVES,
-  Widget,
   Workspace,
   WorkspaceStore
-} from '@igo2/common';
+} from '@igo2/common/workspace';
 import {
   DetailedContext,
   LayerContextDirective,
@@ -81,6 +87,7 @@ import {
   SearchSourceService,
   VectorLayer,
   WfsWorkspace,
+  WorkspaceSelectorDirective,
   WorkspaceUpdatorDirective,
   addStopToStore,
   computeOlFeaturesExtent,
@@ -90,8 +97,19 @@ import {
   handleFileImportError,
   handleFileImportSuccess,
   moveToOlFeatures,
+  provideDirection,
+  provideSearch,
   sourceCanReverseSearch,
-  sourceCanSearch
+  sourceCanSearch,
+  withCadastreSource,
+  withCoordinatesReverseSource,
+  withIChercheReverseSource,
+  withIChercheSource,
+  withILayerSource,
+  withNominatimSource,
+  withOsrmSource,
+  withStoredQueriesSource,
+  withWorkspaceSource
 } from '@igo2/geo';
 import {
   AnalyticsListenerService,
@@ -180,23 +198,35 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     TranslateModule,
     UserButtonComponent,
     WORKSPACE_DIRECTIVES,
+    WorkspaceSelectorDirective,
     WorkspaceUpdatorDirective
+  ],
+  providers: [
+    provideSearch([
+      withCadastreSource(),
+      withCoordinatesReverseSource(),
+      withIChercheReverseSource(),
+      withIChercheSource(),
+      withILayerSource(),
+      withNominatimSource(),
+      withStoredQueriesSource(),
+      withWorkspaceSource()
+    ]),
+    provideDirection(withOsrmSource()),
+    SearchState
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
   public appConfig: EnvironmentOptions;
-  public toastPanelOffsetX$: BehaviorSubject<string> = new BehaviorSubject(
-    undefined
-  );
-  public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public toastPanelOffsetX$ = new BehaviorSubject<string>(undefined);
+  public sidenavOpened$ = new BehaviorSubject(false);
   public minSearchTermLength = 2;
   public hasGeolocateButton = true;
   public showMenuButton = true;
   public showSearchBar = true;
-  public workspaceNotAvailableMessage: string = 'workspace.disabled.resolution';
+  public workspaceNotAvailableMessage = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
-  public workspaceEntitySortChange$: BehaviorSubject<boolean> =
-    new BehaviorSubject(false);
+  public workspaceEntitySortChange$ = new BehaviorSubject(false);
   public workspaceSwitchDisabled = false;
   public paginatorOptions: EntityTablePaginatorOptions = {
     pageSize: 50, // Number of items to display on a page.
@@ -207,7 +237,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public fullExtent: boolean;
   private workspaceMaximize$$: Subscription[] = [];
 
-  public matDialogRef$ = new BehaviorSubject<MatDialogRef<any>>(undefined);
+  public matDialogRef$ = new BehaviorSubject<MatDialogRef<unknown>>(undefined);
   public searchBarTerm = '';
   public onSettingsChange$ = new BehaviorSubject<boolean>(undefined);
   public termDefinedInUrl = false;
@@ -230,9 +260,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
   public showToastPanelForExpansionToggle = false;
-  public selectedWorkspace$: BehaviorSubject<Workspace> = new BehaviorSubject(
-    undefined
-  );
+  public selectedWorkspace$ = new BehaviorSubject<Workspace>(undefined);
   private routeParams: Params;
   public toastPanelHtmlDisplay = false;
 
@@ -395,7 +423,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private configFileToGeoDBService: ConfigFileToGeoDBService
+    @Optional() private configFileToGeoDBService?: ConfigFileToGeoDBService
   ) {
     this.analyticsListenerService.listen();
     this.handleAppConfigs();
@@ -430,7 +458,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readLanguageParam(params);
     });
 
-    this.authService.authenticate$.subscribe((authenticated) => {
+    this.authService.authenticate$.subscribe(() => {
       this.contextLoaded = false;
     });
 
@@ -507,7 +535,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     this.workspaceMaximize$$.push(
-      this.workspaceState.workspaceMaximize$.subscribe((workspaceMaximize) => {
+      this.workspaceState.workspaceMaximize$.subscribe(() => {
         this.updateMapBrowserClass();
       })
     );
@@ -566,12 +594,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.mediaService.orientation$
     ])
       .pipe(debounceTime(50))
-      .subscribe((sidenavMediaAndOrientation: [boolean, string, string]) => {
-        this.computeToastPanelOffsetX();
-      });
+      .subscribe(() => this.computeToastPanelOffsetX());
 
-    if (this.appConfig.importExport?.configFileToGeoDBService) {
-      this.configFileToGeoDBService.load(
+    if (
+      this.appConfig.app.offline?.enable &&
+      this.appConfig.importExport?.configFileToGeoDBService
+    ) {
+      this.configFileToGeoDBService?.load(
         this.appConfig.importExport.configFileToGeoDBService
       );
     }
@@ -637,7 +666,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
-    let feature = {
+    const feature = {
       type: 'Feature',
       properties: {}
     };
@@ -647,7 +676,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   createFeatureProperties(layer: ImageLayer | VectorLayer) {
-    let properties = {};
+    const properties = {};
     layer.options.sourceOptions.sourceFields.forEach((field) => {
       if (!field.primary && field.visible) {
         properties[field.name] = '';
@@ -1545,7 +1574,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     name: string,
     type: 'wms' | 'wmts' | 'arcgisrest' | 'imagearcgisrest' | 'tilearcgisrest',
     version: string,
-    visibility: boolean = true,
+    visibility = true,
     zIndex: number
   ) {
     if (!this.contextLoaded) {
@@ -1657,7 +1686,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.dialogWindow.open(WelcomeWindowComponent, welcomWindowConfig)
       );
 
-      this.matDialogRef$.value.afterClosed().subscribe((result) => {
+      this.matDialogRef$.value.afterClosed().subscribe(() => {
         this.welcomeWindowService.afterClosedWelcomeWindow();
         this.matDialogRef$.next(undefined);
       });
@@ -1714,7 +1743,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   zoomToSelectedFeatureWks() {
-    let format = new olFormatGeoJSON();
+    const format = new olFormatGeoJSON();
     const featuresSelected = this.workspaceState.workspaceSelection.map(
       (rec) => rec.entity as Feature
     );
@@ -1723,7 +1752,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
     const olFeaturesSelected = [];
     for (const feat of featuresSelected) {
-      let localOlFeature = format.readFeature(feat, {
+      const localOlFeature = format.readFeature(feat, {
         dataProjection: feat.projection,
         featureProjection: this.map.projection
       });

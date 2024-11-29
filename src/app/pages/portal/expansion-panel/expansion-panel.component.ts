@@ -7,7 +7,7 @@ import {
   Output
 } from '@angular/core';
 
-import { BackdropComponent } from '@igo2/common';
+import { BackdropComponent } from '@igo2/common/backdrop';
 
 import { ExpansionPanelHeaderComponent } from './expansion-panel-header.component';
 import { showContent } from './expansion-panel.animations';
@@ -36,7 +36,7 @@ export class ExpansionPanelComponent {
   }
   private _expanded: boolean;
 
-  @Input() maximized: Boolean = false;
+  @Input() maximized = false;
 
   @Input()
   get backdropShown(): boolean {
@@ -58,8 +58,6 @@ export class ExpansionPanelComponent {
   get hasExpandedFullClass() {
     return this.expanded && this.maximized;
   }
-
-  constructor() {}
 
   onBackdropClick() {
     this.expanded = false;

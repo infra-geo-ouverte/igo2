@@ -836,22 +836,36 @@ Exemples
 .. _igoroutingsource:
 
 ***************
-RoutingSource
+DirectionsSources
 ***************
 
     .. line-block::
 
-        Permet de définir la source serveur utilisée pour la création d'itinéraires. Actuellement, le serveur utilisé est OSRM.
+        Permet de définir une ou plusieurs profils utilisés pour la création d'itinéraires. Le service utilisé par IGO2 est OSRM.
+        
+        La configuration peut contenir, pour le moment, jusqu'à deux profils.
 
 Exemples
 
         .. code:: json
 
-            "routingSources": {
+            "directionsSources": {
                 "osrm": {
-                    "enabled": true,
-                    "url": "https://geoegl.msp.gouv.qc.ca/services/itineraire/route/v1/driving/"
+                    "name": "OSRM Québec",
+                    "baseUrl": "/apis/itineraire/route/v1/",
+                    "profiles": [
+                    {
+                        "name": "driving",
+                    },
+                    {
+                        "name": "forestier",
+                        "authorization": {
+                            "url": "/apis/igo2/user/igo",
+                            "property": "hasOsrmPrivateAccess"
+                        }
+                    }]
                 }
+            }
 
 Propriétés
 
@@ -861,7 +875,25 @@ Propriétés
        :file: _tables/fr/config/directions.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
+       
+    **BaseDirectionsSourceOptionsProfile**
 
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/directions-profile.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+    **BaseDirectionsSourceOptionsProfileAuthorization**
+    
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/config/directions-profile-auth.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+    
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens

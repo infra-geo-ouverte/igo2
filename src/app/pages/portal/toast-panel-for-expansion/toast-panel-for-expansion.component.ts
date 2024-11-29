@@ -7,7 +7,7 @@ import {
   Output
 } from '@angular/core';
 
-import { PanelComponent } from '@igo2/common';
+import { PanelComponent } from '@igo2/common/panel';
 
 import { showContent } from './toast-panel-for-expansion.animations';
 
@@ -49,6 +49,4 @@ export class ToastPanelForExpansionComponent {
   get displayStyle() {
     return this.withHeader || this.opened ? 'visible' : 'hidden';
   }
-
-  constructor() {}
 }

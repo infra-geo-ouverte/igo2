@@ -16,14 +16,12 @@
       },
       "architect": {
         "build": {
-          "defaultConfiguration": "developpement",
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "aot": true,
             "outputPath": "dist/igo2",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -34,28 +32,28 @@
               "src/locale",
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/common/assets/",
-                "output": "./assets/igo2/common/"
+                "input": "node_modules/@igo2/common/assets/",
+                "output": "assets/igo2/common/"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/core/assets/",
-                "output": "./assets/igo2/core/"
+                "input": "node_modules/@igo2/core/assets/",
+                "output": "assets/igo2/core/"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/core/locale/",
-                "output": "./locale/libs_locale",
+                "input": "node_modules/@igo2/core/locale/",
+                "output": "locale/libs_locale",
                 "ignore": ["**/*.core.json"]
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/core/theming/prebuilt-themes",
+                "input": "node_modules/@igo2/core/theming/prebuilt-themes",
                 "output": "./assets/igo2/core/theming/prebuilt-themes"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/@igo2/geo/assets/",
+                "input": "node_modules/@igo2/geo/assets/",
                 "output": "./assets/igo2/geo/"
               },
               "src/manifest.webmanifest"
@@ -90,7 +88,8 @@
               "striptags",
               "ts-md5",
               "typy"
-            ]
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -112,8 +111,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": false,
               "serviceWorker": false
             },
             "production-link": {
@@ -135,8 +132,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": false,
               "serviceWorker": false,
               "assets": [
                 "src/favicon.ico",
@@ -175,17 +170,13 @@
               ]
             },
             "developpement": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
             },
             "developpement-link": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
@@ -244,8 +235,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": false,
               "serviceWorker": false
             },
             "pwa": {
@@ -267,10 +256,7 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": false,
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              "serviceWorker": "ngsw-config.json"
             }
           }
         },
@@ -309,7 +295,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["src/polyfills.ts", "zone.js/testing"],
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": ["src/styles.scss"],
@@ -331,7 +317,8 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
+            "eslintConfig": "eslint.config.js"
           }
         },
         "e2e": {
@@ -380,14 +367,12 @@
     }
   },
   "cli": {
+    "cache": {
+      "enabled": false
+    },
     "schematicCollections": [
-      "@angular-eslint/schematics",
       "@schematics/angular"
     ],
-    "cache": {
-      "enabled": false,
-      "environment": "all"
-    },
     "analytics": false
   }
 }

@@ -1,0 +1,3 @@
+Propriétés,Type,Description,Valeurs possibles,Valeur par défaut
+url ,String ,URL permettant de vérifier l'accessibilité d'un profil à un utilisateur. | Utilisé pour un profil protégé.,,
+property ,String ,Propriété utilisée pour la vérification de l'accessibilité.,,

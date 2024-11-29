@@ -9,7 +9,8 @@ import {
 } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { CustomHtmlComponent, IgoInteractiveTourModule } from '@igo2/common';
+import { CustomHtmlComponent } from '@igo2/common/custom-html';
+import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
 import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
 
@@ -19,8 +20,6 @@ import { map } from 'rxjs/operators';
 import { getAppVersion } from 'src/app/app.utils';
 
 import { WelcomeWindowService } from './welcome-window.service';
-
-('@igo2/core');
 
 @Component({
   selector: 'app-welcome-window',
@@ -46,7 +45,7 @@ export class WelcomeWindowComponent implements OnInit, OnDestroy {
   showAgain = false;
   public discoverTitleInLocale$: Observable<string>;
   private title$$: Subscription;
-  public html$: BehaviorSubject<string> = new BehaviorSubject(undefined);
+  public html$ = new BehaviorSubject<string>(undefined);
 
   constructor(
     public dialog: MatDialog,

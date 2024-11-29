@@ -238,8 +238,8 @@
               [ngClass]="{
                 disabled: (workspace.inResolutionRange$ | async) !== true
               }"
-              [svgIcon]="workspace.layer.visible ? 'eye' : 'eye-off'"
             >
+              {{ workspace.layer.visible ? 'visibility' : 'visibility_off' }}
             </mat-icon>
           </button>
           <button
@@ -258,7 +258,7 @@
             [matTooltip]="'workspace.addFeature' | translate"
             (click)="addFeature(workspace)"
           >
-            <mat-icon svgIcon="plus"> </mat-icon>
+            <mat-icon>add</mat-icon>
           </button>
           <igo-actionbar
             class="actionbar-workspace"
@@ -290,14 +290,11 @@
             [matTooltip]="'toastPanel.zoomOnFeaturesTooltip' | translate"
             (click)="zoomToSelectedFeatureWks()"
           >
-            <mat-icon
-              svgIcon="{{
-                (workspaceState.workspaceSelection$ | async).length > 1
-                  ? 'magnify-scan'
-                  : 'magnify-plus-outline'
-              }}"
-            >
-            </mat-icon>
+            @if ((workspaceState.workspaceSelection$ | async).length > 1) {
+              <mat-icon>frame_inspect</mat-icon>
+            } @else {
+              <mat-icon>zoom_in </mat-icon>
+            }
           </button>
         </div>
         <igo-entity-table-paginator
@@ -342,7 +339,7 @@
       color="warn"
       (click)="toastPanelForExpansionOpened = false"
     >
-      <mat-icon svgIcon="close"></mat-icon>
+      <mat-icon>close</mat-icon>
     </button>
   </div>
 

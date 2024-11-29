@@ -19,12 +19,11 @@ import {
   Action,
   ActionStore,
   ActionbarComponent,
-  ActionbarMode,
-  EntityStore,
-  PanelComponent,
-  StopPropagationDirective,
-  getEntityTitle
-} from '@igo2/common';
+  ActionbarMode
+} from '@igo2/common/action';
+import { EntityStore, getEntityTitle } from '@igo2/common/entity';
+import { PanelComponent } from '@igo2/common/panel';
+import { StopPropagationDirective } from '@igo2/common/stop-propagation';
 import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
 import { Media, MediaService } from '@igo2/core/media';
@@ -121,7 +120,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   set store(value: EntityStore<SearchResult<Feature>>) {
     this._store = value;
-    this.store.entities$.subscribe((_entities) => {
+    this.store.entities$.subscribe(() => {
       this.unselectResult();
     });
   }
@@ -141,7 +140,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   private _opened = true;
 
-  @Input() hasFeatureEmphasisOnSelection: Boolean = false;
+  @Input() hasFeatureEmphasisOnSelection = false;
 
   get zoomAuto(): boolean {
     return this._zoomAuto;
@@ -171,15 +170,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   private _fullExtent = false;
 
-  public potententialLayerToAdd$: BehaviorSubject<any> = new BehaviorSubject(
-    undefined
-  );
-  public potententialLayerisAdded$: BehaviorSubject<boolean> =
-    new BehaviorSubject(false);
+  public potententialLayerToAdd$ = new BehaviorSubject<any>(undefined);
+  public potententialLayerisAdded$ = new BehaviorSubject<boolean>(false);
 
-  public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
-    this.fullExtent
-  );
+  public fullExtent$ = new BehaviorSubject<boolean>(this.fullExtent);
   public isHtmlDisplay = false;
   public iconResizeWindows = '';
 
@@ -198,12 +192,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   private format = new olFormatGeoJSON();
 
   private resultOrResolution$$: Subscription;
-  private focusedResult$: BehaviorSubject<SearchResult<Feature>> =
-    new BehaviorSubject(undefined);
+  private focusedResult$ = new BehaviorSubject<SearchResult<Feature>>(
+    undefined
+  );
   private abstractFocusedOrSelectedResult: Feature;
 
   public withZoomButton = true;
-  zoomAuto$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  zoomAuto$ = new BehaviorSubject<boolean>(false);
 
   @Output() openedChange = new EventEmitter<boolean>();
 
@@ -284,21 +279,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   //   return this.opened && this.fullExtent;
   // }
 
-  @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(
-    event: KeyboardEvent
-  ) {
+  @HostListener('document:keydown.escape', ['$event']) onEscapeHandler() {
     this.clear();
   }
 
-  @HostListener('document:keydown.backspace', ['$event']) onBackHandler(
-    event: KeyboardEvent
-  ) {
+  @HostListener('document:keydown.backspace', ['$event']) onBackHandler() {
     this.unselectResult();
   }
 
-  @HostListener('document:keydown.z', ['$event']) onZoomHandler(
-    event: KeyboardEvent
-  ) {
+  @HostListener('document:keydown.z', ['$event']) onZoomHandler() {
     if (this.isResultSelected$.getValue() === true) {
       const localOlFeature = this.format.readFeature(
         this.resultSelected$.getValue().data,
@@ -341,7 +330,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
-    this.setResizeWindowIcon();
   }
 
   private monitorResultOutOfView() {
@@ -412,7 +400,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       {
         id: 'list',
         title: this.languageService.translate.instant('toastPanel.backToList'),
-        icon: 'format-list-bulleted-square',
+        icon: 'list',
         tooltip: this.languageService.translate.instant(
           'toastPanel.listButton'
         ),
@@ -428,7 +416,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         title: this.languageService.translate.instant(
           'toastPanel.zoomOnFeature'
         ),
-        icon: 'magnify-plus-outline',
+        icon: 'zoom_in',
         tooltip: this.languageService.translate.instant(
           'toastPanel.zoomOnFeatureTooltip'
         ),
@@ -458,7 +446,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.zoomOnFeaturesTooltip'
         ),
-        icon: 'magnify-scan',
+        icon: 'frame_inspect',
         availability: () => {
           return this.multiple;
         },
@@ -499,7 +487,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.fullExtentTooltip'
         ),
-        icon: 'arrow-expand',
+        icon: 'open_in_full',
         display: () => {
           return this.fullExtent$.pipe(map((v) => !v && !this.isDesktop()));
         },
@@ -515,7 +503,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         tooltip: this.languageService.translate.instant(
           'toastPanel.standardExtentTooltip'
         ),
-        icon: 'arrow-collapse',
+        icon: 'close_fullscreen',
         display: () => {
           return this.fullExtent$.pipe(map((v) => v && !this.isDesktop()));
         },
@@ -860,7 +848,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   private computeSourceOptionsFromProperties(
-    properties: {},
+    properties: unknown,
     geoService: ExtendedGeoServiceDefinition
   ) {
     const keys = Object.keys(properties);
@@ -868,7 +856,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       geoService.propertiesForLayerName.includes(p)
     );
     // providing the the first matching regex;
-    let layerName = properties[propertiesForLayerName[0]];
+    const layerName = properties[propertiesForLayerName[0]];
     const url = properties[geoService.propertyForUrl];
     let appliedLayerName = layerName;
     let arcgisLayerName = undefined;
@@ -956,16 +944,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  setResizeWindowIcon() {
-    if (this.fullExtent) {
-      this.iconResizeWindows = 'arrow-collapse';
-      // this.iconResizeWindows = 'vector-arrange-below';
-    } else {
-      this.iconResizeWindows = 'arrow-expand';
-      // this.iconResizeWindows = 'crop-square';
-    }
-  }
-
   resizeWindows() {
     this.storageService.set('fullExtent', !this.fullExtent);
 
@@ -978,11 +956,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   reduceWindow() {
     this.fullExtent = false;
-    this.setResizeWindowIcon();
   }
 
   enlargeWindows() {
     this.fullExtent = true;
-    this.setResizeWindowIcon();
   }
 }
