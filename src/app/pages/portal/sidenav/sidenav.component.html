@@ -22,6 +22,7 @@
       <div style="margin: 24px;" *ngIf="searchInit === false && (queryStore.empty$ | async)===true && legendPanelOpened === false">
 
         <section class="mat-typography">
+          <!-- h5 hardcoded size! 16.01.24 -->
           <h5><strong>{{ 'igo.integration.searchResultsTool.noResults' | translate }}</strong></h5>
           <h6><strong>{{ 'igo.integration.searchResultsTool.doSearch' | translate }}</strong></h6>
           <p [innerHTML]="'igo.integration.searchResultsTool.examples' | translate"></p>

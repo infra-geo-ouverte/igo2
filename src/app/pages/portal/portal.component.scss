@@ -459,6 +459,27 @@ app-toast-panel-for-expansion
   }
 }
 
+// igo-search-bar input {
+//   height: 40px; 
+//   padding: 8px; 
+//   border: 1px solid #C5CAD2; 
+//   box-sizing: border-box;
+// }
+
+// igo-search-bar button {
+//   height: 40px; 
+//   padding: 8px 16px; 
+//   border: 1px solid #ccc; 
+//   box-sizing: border-box; 
+//   cursor: pointer; 
+// }
+
+igo-search-bar {
+  // color:blue; null effect
+  display: flex; 
+  gap: 4px; 
+}
+
 igo-search-bar {
   max-width:360px;
   max-height:40px;
