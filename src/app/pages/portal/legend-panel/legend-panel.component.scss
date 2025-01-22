@@ -1,3 +1,33 @@
+.header-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 8px;
+  margin-right: 16px;
+}
+
+.header-container button{
+  border: none;
+  background-color: white;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.table-container{
+  margin-right: 55px;
+}
+
+.circle-container {
+  width: 20px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.text-container {
+  text-align: left;
+  word-break: break-word;
+  vertical-align: top;
+}
 
 .circle {
   width: 20px;
