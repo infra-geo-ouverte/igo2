@@ -3,35 +3,49 @@
     #sidenav
     mode="side"
     [autoFocus]="false"
-    [(opened)]="panelOpenState">
-
+    [(opened)]="panelOpenState"
+  >
     <div #content class="app-sidenav-content">
-
       <div #showLegend *ngIf="legendPanelOpened === true">
-
         <app-legend-panel
           [map]="map"
           [mobile]="mobile"
           (closeLegend)="closePanelOnCloseLegend($event)"
-          (sidenavClosed)="$event"
-          (opened)="sidenav.toggle()">
+          (sidenavClosed)="($event)"
+          (opened)="sidenav.toggle()"
+        >
         </app-legend-panel>
-
       </div>
 
-      <div style="margin: 24px;" *ngIf="searchInit === false && (queryStore.empty$ | async)===true && legendPanelOpened === false">
-
+      <div
+        style="margin: 24px"
+        *ngIf="
+          searchInit === false &&
+          (queryStore.empty$ | async) === true &&
+          legendPanelOpened === false
+        "
+      >
         <section class="mat-typography">
           <!-- h5 hardcoded size! 16.01.24 -->
-          <h5 style="padding-top: 40px;"><strong>{{ 'igo.integration.searchResultsTool.noResults' | translate }}</strong></h5>
-          <h6><strong>{{ 'igo.integration.searchResultsTool.doSearch' | translate }}</strong></h6>
-          <p [innerHTML]="'igo.integration.searchResultsTool.examples' | translate"></p>
+          <h5 style="padding-top: 40px">
+            <strong>{{
+              'igo.integration.searchResultsTool.noResults' | translate
+            }}</strong>
+          </h5>
+          <h6>
+            <strong>{{
+              'igo.integration.searchResultsTool.doSearch' | translate
+            }}</strong>
+          </h6>
+          <p
+            [innerHTML]="
+              'igo.integration.searchResultsTool.examples' | translate
+            "
+          ></p>
         </section>
-
       </div>
 
       <div #getInfo *ngIf="mapQueryClick === true">
-
         <app-feature-info
           [map]="map"
           [mobile]="mobile"
@@ -39,12 +53,12 @@
           [mapQueryClick]="mapQueryClick"
           [searchInit]="searchInit"
           (closeQuery)="closePanelOnCloseQuery($event)"
-          (sidenavClosed)="$event"
+          (sidenavClosed)="($event)"
           (pleaseCloseSidenav)="yesICloseSidenav($event)"
           [hasFeatureEmphasisOnSelection]="hasFeatureEmphasisOnSelection"
-          [scenarioDateToggle]="scenarioDateToggle">
+          [scenarioDateToggle]="scenarioDateToggle"
+        >
         </app-feature-info>
-
       </div>
 
       <div #search *ngIf="searchInit === true">
@@ -56,11 +70,11 @@
           [searchInit]="searchInit"
           (resultFocus)="onResultFocus($event)"
           (resultSelect)="onResultFocus($event)"
-          (moreResults)="onSearch($event)">
+          (moreResults)="onSearch($event)"
+        >
         </app-search-results-tool>
       </div>
     </div>
-
   </mat-sidenav>
 
   <button
@@ -69,15 +83,21 @@
     mat-raised-button
     color="primary"
     id="sideresult-button"
-    isRoundButton=false
-    isIconButton=true
+    isRoundButton="false"
+    isIconButton="true"
     MatDrawerMode="push"
-    [matTooltip]="sidenav.opened ? ('sideResult.close' | translate) : 'sideResult.open' | translate"
+    [matTooltip]="
+      sidenav.opened
+        ? ('sideResult.close' | translate)
+        : ('sideResult.open' | translate)
+    "
     matTooltipPosition="after"
-    (click)="sidenav.toggle()">
+    (click)="sidenav.toggle()"
+  >
     <mat-icon
       class="icon"
-      [svgIcon]="sidenav.opened ? 'chevron-left' : 'chevron-right'">
+      [svgIcon]="sidenav.opened ? 'chevron-left' : 'chevron-right'"
+    >
     </mat-icon>
   </button>
 </div>

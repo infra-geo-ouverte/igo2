@@ -208,15 +208,21 @@ igo-map-browser {
   }
 
   app-legend-panel-button ::ng-deep .mat-mdc-raised-button:not(:disabled) {
-    color: #1976d2;
+    color: white !important;
+    background-color: #054788;
+    border-radius: 3px !important;
+  }
+
+  app-legend-panel-button ::ng-deep .mat-mdc-raised-button:not(:disabled):hover {
+    background-color: #1171d1;
   }
 
   igo-geolocate-button {
-    margin-left:auto;
+    margin-left: auto;
   }
 
   igo-zoom-button {
-    margin-left:auto;
+    margin-left: auto;
 
     ::ng-deep button {
       @include mat.elevation(2);
@@ -460,74 +466,71 @@ app-toast-panel-for-expansion
 }
 
 // igo-search-bar input {
-//   height: 40px; 
-//   padding: 8px; 
-//   border: 1px solid #C5CAD2; 
+//   height: 40px;
+//   padding: 8px;
+//   border: 1px solid #C5CAD2;
 //   box-sizing: border-box;
 // }
 
 // igo-search-bar button {
-//   height: 40px; 
-//   padding: 8px 16px; 
-//   border: 1px solid #ccc; 
-//   box-sizing: border-box; 
-//   cursor: pointer; 
+//   height: 40px;
+//   padding: 8px 16px;
+//   border: 1px solid #ccc;
+//   box-sizing: border-box;
+//   cursor: pointer;
 // }
 
 igo-search-bar {
   // color:blue; null effect
-  display: flex; 
-  gap: 4px; 
+  display: flex;
+  gap: 4px;
 }
 
 igo-search-bar {
-  max-width:360px;
-  max-height:40px;
+  max-width: 360px;
+  max-height: 40px;
 }
 
-@media only screen and (orientation:portrait) and (max-width: 599px),
-only screen and (orientation:landscape) and (max-width: 959px) {
+@media only screen and (orientation: portrait) and (max-width: 599px),
+  only screen and (orientation: landscape) and (max-width: 959px) {
   igo-search-bar {
-    width:calc(100% - 92px);
-    max-width:360px;
-    max-height:40px;
+    width: calc(100% - 92px);
+    max-width: 360px;
+    max-height: 40px;
   }
 }
 
 igo-search-bar,
 igo-search-results igo-list,
 .baselayers {
-  left:16px!important
+  left: 16px !important;
 }
 
-
 .baselayers-pushed {
-  left:404px!important;
-  animation-duration:3s;
-  visibility:visible;
-  opacity:1;
-  opacity:0;
-  animation:fadeIn 1s;
-  animation-delay:0s;
-  animation-fill-mode:forwards
+  left: 404px !important;
+  animation-duration: 3s;
+  visibility: visible;
+  opacity: 1;
+  opacity: 0;
+  animation: fadeIn 1s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
 }
 
 .igo-baselayers-switcher-mobile,
 .ol-scale-line {
-  bottom:48px!important;
-  z-index:1
+  bottom: 48px !important;
+  z-index: 1;
 }
 
 .igo-baselayers-switcher-mobile {
-  left:4px
+  left: 4px;
 }
 
 .ol-scale-line {
-  left:88px!important
+  left: 88px !important;
 }
 
 .igo-baselayers-switcher {
-  z-index:1
+  z-index: 1;
 }
-
-

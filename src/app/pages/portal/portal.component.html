@@ -134,9 +134,9 @@
 
         <app-legend-panel-button
           (toggleLegend)="togglePanelLegend()"
-          (legendPanelOpened)="$event">
+          (legendPanelOpened)="($event)"
+        >
         </app-legend-panel-button>
-
       </div>
       <div
         class="map-actions --horizontal --bottom --right"

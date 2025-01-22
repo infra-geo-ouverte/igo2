@@ -1,5 +1,5 @@
 <igo-flexible
-  *ngIf="store && (store.stateView.empty$ | async)===false"
+  *ngIf="store && (store.stateView.empty$ | async) === false"
   #topPanel
   initial="100%"
   initialMobile="100%"
@@ -7,8 +7,8 @@
   collapsedMobile="calc(100% - 58px)"
   expanded="60%"
   expandedMobile="60%"
-  [state]="(feature$ | async) ? topPanelState : 'initial'">
-
+  [state]="(feature$ | async) ? topPanelState : 'initial'"
+>
   <div class="igo-content">
     <igo-search-results
       [store]="store"
@@ -23,11 +23,10 @@
       (resultMouseenter)="onResultFocus($event)"
       (resultMouseleave)="onResultUnfocus($event)"
       [searchInit]="searchInit"
-      (moreResults)="onSearch($event)">
+      (moreResults)="onSearch($event)"
+    >
       <ng-template #igoSearchItemToolbar let-result="result">
-        <igo-search-add-button
-          [map]="map"
-          [layer]="result">
+        <igo-search-add-button [map]="map" [layer]="result">
         </igo-search-add-button>
       </ng-template>
     </igo-search-results>
@@ -56,7 +55,7 @@
         [matBadge]="(isSelectedResultOutOfView$ | async) ? '!' : ''"
         matBadgeColor="accent"
         matBadgeSize="small"
-        [matBadgeHidden]="(isSelectedResultOutOfView$ | async)===false"     
+        [matBadgeHidden]="(isSelectedResultOutOfView$ | async)===false"
         svgIcon="magnify-plus-outline"></mat-icon>
       </button>
 
@@ -69,5 +68,4 @@
       </igo-feature-details>
     </igo-panel>
   </div-->
-
 </igo-flexible>
