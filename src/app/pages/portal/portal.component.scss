@@ -31,6 +31,10 @@
     background-color: $app-background-color;
     font-size: 16px;
     margin-left: $igo-margin;
+
+    &:focus-within{
+      border: 1px solid #3ab1e7;
+    }
   }
 
   igo-menu-button {
