@@ -8,11 +8,13 @@
   align-items: flex-end;
   background-color: var(--qc-color-blue-dark);
 }
+
 .item {
   font-size: 20px;
   cursor: pointer;
   position: relative;
 }
+
 .active::before {
   content: '';
   height: 4px;
