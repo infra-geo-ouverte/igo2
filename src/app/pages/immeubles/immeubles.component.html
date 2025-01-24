@@ -6,7 +6,7 @@
       <div class="results-header">
         <div class="results-count">{{ total }} immeubles</div>
         <div class="current-page" *ngIf="total > 0">
-          Immeubles {{ (offset + 1) + ' à ' + (offset + limit) }}
+          Immeubles {{ offset + 1 + ' à ' + (offset + limit) }}
         </div>
       </div>
       <div class="filter-values-line">
