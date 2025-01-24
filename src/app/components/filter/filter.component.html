@@ -81,7 +81,13 @@
       />
     </div>
     <mat-divider></mat-divider>
-    <div class="ln" (click)="toggleShowAdditionalFilters()">{{ showingAdditionalFilters ? 'Moins' : 'Plus'}} de filtres</div>
+    <div
+      class="ln"
+      [ngClass]="{'plus': !showingAdditionalFilters, 'minus': showingAdditionalFilters}"
+      (click)="toggleShowAdditionalFilters()"
+      >
+        {{ showingAdditionalFilters ? 'Moins' : 'Plus'}} de filtres
+      </div>
     <div *ngIf="showingAdditionalFilters">
     <div class="filed">
       <label for="nom_immeuble">Nom de l'immeuble</label>
