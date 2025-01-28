@@ -166,5 +166,7 @@ export const environment: AppEnvironmentOptions = {
         strokeWidth: 2 // line and poly
       }
     }
-  }
+  },
+  immeublesUrl: '',
+  buildingDetailsUrl: ''
 };
