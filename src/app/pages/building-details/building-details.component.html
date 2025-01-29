@@ -9,9 +9,13 @@
   </div>
 
   <div>
-    <img src="https://www.sqi.gouv.qc.ca/fileadmin/user_upload/01_nes_pierre-bedard.jpg" alt="" class="photo" />
+    <img
+      src="https://www.sqi.gouv.qc.ca/fileadmin/user_upload/01_nes_pierre-bedard.jpg"
+      alt=""
+      class="photo"
+    />
     <div class="caption">
-      Perspective extérieure du futur bâtiment de l’école Pierre-Bédard<br>
+      Perspective extérieure du futur bâtiment de l’école Pierre-Bédard<br />
       Image : MSDL Architectes
     </div>
   </div>
@@ -69,9 +73,7 @@
     </div>
 
     <div class="element">
-      <div class="element-title">
-        Conseiller immobilier (CI)
-      </div>
+      <div class="element-title">Conseiller immobilier (CI)</div>
       <div class="element-lines-wrapper">
         <div class="element-line">
           <img src="assets/images/profile.png" alt="" class="element-icon" />
@@ -79,11 +81,10 @@
         </div>
         <div class="element-line">
           <img src="assets/images/envelope.png" alt="" class="element-icon" />
-          <a [href]="'mailto:contact@exemple.ca'">contact@exemple.ca</a>
+          <a [href]="'mailto:contact@exemple.ca'">contact&#64;exemple.ca</a>
         </div>
       </div>
     </div>
-
 
     <div class="element">
       <div class="element-title">
@@ -96,7 +97,7 @@
         </div>
         <div class="element-line">
           <img src="assets/images/envelope.png" alt="" class="element-icon" />
-          <a [href]="'mailto:contact@exemple.ca'">contact@exemple.ca</a>
+          <a [href]="'mailto:contact@exemple.ca'">contact&#64;exemple.ca</a>
         </div>
       </div>
     </div>
@@ -112,48 +113,51 @@
         </div>
         <div class="element-line">
           <img src="assets/images/envelope.png" alt="" class="element-icon" />
-          <a [href]="'mailto:contact@exemple.ca'">contact@exemple.ca</a>
+          <a [href]="'mailto:contact@exemple.ca'">contact&#64;exemple.ca</a>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="coordinates">
     <div class="title">Caractéristiques</div>
 
     <div class="element-line-2">
-      Numéro de l'immeuble : <strong>{{ buildingDetails.numero_immeuble }}-{{ buildingDetails.type_propriete_ou_location }}</strong>
+      Numéro de l'immeuble :
+      <strong
+        >{{ buildingDetails.numero_immeuble }}-{{
+          buildingDetails.type_propriete_ou_location
+        }}</strong
+      >
     </div>
     <div class="element-line-2">
       Nombre d'étages : <strong>{{ buildingDetails.nombre_etages }}</strong>
     </div>
     <div class="element-line-2">
-      Vocation officielle : <strong>{{ buildingDetails.vocation_officielle }}</strong>
+      Vocation officielle :
+      <strong>{{ buildingDetails.vocation_officielle }}</strong>
     </div>
     <div class="element-line-2">
       Immeuble patrimonial : <strong>non</strong>
     </div>
     <div class="element-line-2">
-      Superficie locative : <strong>{{ buildingDetails.superficie_locative }}</strong>
+      Superficie locative :
+      <strong>{{ buildingDetails.superficie_locative }}</strong>
     </div>
     <div class="element-line-2">
       Certification(s) : <strong>Lorem ipsum</strong>
     </div>
-
   </div>
 
   <div class="coordinates">
     <div class="title">Carte</div>
 
-    <div class="element-line">
-      <img src="assets/images/location.jpg" alt="" class="element-icon" />
-      <a [href]="google_full_map_url" target='_blank'>Voir sur Google Maps</a>
+    <div class="element-line google-maps-button">
+      <img src="assets/images/location2.png" alt="" class="element-icon" />
+      <a [href]="google_full_map_url" target="_blank">Voir sur Google Maps</a>
     </div>
     <div class="element-line">
-      <iframe class="google_embedded_map" [src]='google_embed_url'></iframe>
+      <iframe class="google_embedded_map" [src]="google_embed_url"></iframe>
     </div>
-
   </div>
-
 </div>
