@@ -4,6 +4,8 @@
   align-items: center;
   font-weight: bold;
   justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 #number-per-page {
@@ -39,4 +41,39 @@
   color: #223654;
   font-size: 14px;
   margin-right: 19px;
+}
+
+.labels {
+  color: #223654;
+  font-size: 14px;
+  margin-right: 19px;
+}
+
+#sortBy {
+  border: 1px solid #1479cc;
+  width: 180px;
+  height: 32px;
+  background-color: white;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpolyline points='1,1 6,6 11,1' fill='none' stroke='%231479cc' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 20px;
+  color: #223654;
+}
+
+#sortBy option {
+  background-color: white;
+  color: #223654;
+  text-align: center;
+}
+
+#sortBy:hover {
+  cursor: pointer;
+}
+
+#sortBy:focus {
+  outline: 1px solid #1479cc;
 }
