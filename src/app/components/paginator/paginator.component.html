@@ -1,3 +1,4 @@
+<!--
 <mat-paginator
   [length]="_total"
   [pageSize]="_limit"
@@ -8,3 +9,41 @@
   (page)="onPage($event)"
 >
 </mat-paginator>
+-->
+
+<div class="wrapper">
+  <button
+    class="previous"
+    [class.disabled]="currentPage === 0"
+    (click)="previousPage()"
+  >
+    &lt;
+  </button>
+
+  <!-- Pages Numérotées -->
+  <div class="pages">
+    <span
+      *ngFor="let page of pagesArr; let i = index"
+      class="page"
+      [class.active]="page - 1 === currentPage"
+      (click)="goToPage(page - 1)"
+    >
+      {{ page }}
+    </span>
+
+    <span *ngIf="_pages > 3 && currentPage < _pages - 3"> ... </span>
+
+    <!-- Dernière page (si plus de 5 pages) -->
+    <span *ngIf="_pages > 3" class="page" (click)="goToPage(_pages - 1)">
+      {{ _pages }}
+    </span>
+  </div>
+
+  <button
+    class="next"
+    [class.disabled]="currentPage === _pages - 1"
+    (click)="nextPage()"
+  >
+    &gt;
+  </button>
+</div>
