@@ -24,16 +24,14 @@
           <mat-divider *ngIf="i !== immeubles.length"></mat-divider>
         </ng-container>
       </div>
-      <div class="paginator">
-        <app-paginator
-          (page)="onPage($event)"
-          (pageSize)="onPageSize($event)"
-          [limit]="limit"
-          [skip]="offset"
-          [total]="total"
-          [pages]="pages"
-        ></app-paginator>
-      </div>
+      <app-paginator
+        (page)="onPage($event)"
+        (pageSize)="onPageSize($event)"
+        [limit]="limit"
+        [skip]="offset"
+        [total]="total"
+        [pages]="pages"
+      ></app-paginator>
     </div>
   </div>
 </div>
