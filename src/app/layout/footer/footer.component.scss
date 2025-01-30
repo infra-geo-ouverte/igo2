@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+
 .order2 {
   order: 2;
   margin-right: 0.5%;
@@ -14,10 +16,11 @@ $footer-height: 29px;
 .footer-right {
   z-index: 666;
   background: #ffffffa3;
-  font-size: 0.7rem;
   display: flex;
   align-items: center;
   height: $footer-height;
+  font-size: 13px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 span.footer-text {
@@ -45,8 +48,6 @@ span.footer-text a {
   color: black;
   border-top: none;
   order: 1;
-}
-footer.footer {
 }
 
 .footer-top {
