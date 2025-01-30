@@ -5,10 +5,12 @@
   color: var(--qc-color-blue-piv);
 }
 .title {
-  font-size: 30px;
+  font-size: 48px;
   position: relative;
   height: 40px;
   cursor: default;
+  color: #223654;
+  font-weight: 900;
 }
 .title::before {
   content: '';
@@ -22,15 +24,18 @@
   width: 100%;
   margin: 10px 0px;
 }
+
 .container {
   padding: 20px 0px;
   display: flex;
   gap: 20px;
   width: 100%;
 }
+
 .results {
   width: 100%;
 }
+
 .results-header {
   display: flex;
   width: 100%;
@@ -39,6 +44,18 @@
   font-size: 16px;
   padding-bottom: 4px;
 }
+
 .items {
   margin-top: 20px;
+}
+
+.results-count {
+  color: #223654;
+  font-size: 16px;
+}
+
+.current-page {
+  color: #223654;
+  font-size: 16px;
+  font-weight: 500;
 }

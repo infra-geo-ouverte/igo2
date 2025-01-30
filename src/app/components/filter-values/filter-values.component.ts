@@ -14,6 +14,7 @@ export class FilterValuesComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterService.filter.subscribe((valuesMap) => {
+      console.log('Filtres reçus dans FilterValuesComponent :', valuesMap);
       this.valuesMap = valuesMap;
     });
   }

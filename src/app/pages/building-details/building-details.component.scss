@@ -5,64 +5,80 @@
   padding: 24px 16px;
   margin: auto;
 }
+
 .nom_de_immeuble {
-  font-size: 30px;
+  font-size: 48px;
   font-weight: bold;
   margin-top: 40px;
   margin-bottom: 20px;
-  color: var(--qc-color-blue-medium);
+  color: #223654;
 }
+
 .nom_de_immeuble::after {
   content: '';
   height: 5px;
   width: 40px;
   background-color: orange;
   display: block;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 4px;
 }
+
 .address {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--qc-color-blue-medium);
+  font-size: 16px;
+  margin-top: 30px;
+  color: #223654;
 }
+
 .icon {
   width: 20px;
   max-width: 20px;
   height: auto;
   object-fit: contain;
 }
+
 .title {
-  font-size: 20px;
+  font-size: 28px;
   font-weight: bold;
-  margin-top: 40px;
+  margin-top: 54px;
   margin-bottom: 20px;
-  color: var(--qc-color-blue-medium);
+  color: #223654;
 }
+
 .element {
-  color: var(--qc-color-blue-medium);
+  color: #223654;
   border: 1px solid rgb(198, 198, 198);
   padding: 30px 20px;
-  width: 600px;
-  margin: 10px 0px;
+  padding-bottom: 16px;
+  width: 809px;
+  margin: 16px 0px;
 }
+
 .element-lines-wrapper {
-  padding-top: 20px;
+  padding-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .element-title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
-  color: var(--qc-color-blue-medium);
+  color: #223654;
 }
+
 .element-line {
+  font-size: 16px;
   display: flex;
   align-items: center;
   gap: 10px;
+  color: #223654;
+  padding-bottom: 16px;
 }
+
 .element-icon {
   width: 20px;
   max-width: 20px;
@@ -71,29 +87,64 @@
 }
 
 .google_embedded_map {
-    width: 600px;
-    height: 350px;
-    scrolling: no;
-    margin-top: 10px;
+  width: 809px;
+  height: 599px;
+  margin-top: 24px;
+  border: none;
+  margin-bottom: 89px;
 }
 
 .element-line-2 {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+  font-size: 16px;
 }
 
 .photo {
-  width: 600px;
-  margin-top: 10px;
+  width: 809px;
+  height: 456px;
+  margin-top: 14px;
 }
 
 .caption {
-  width: 600px;
+  width: 809px;
   margin-top: 4px;
   padding: 4px 16px;
   background-color: rgba(128, 128, 128, 0.1);
   font-size: 12px;
-  color: var(--qc-color-blue-dark);
+  color: #223654;
+}
+
+.coordinates .title {
+  margin-top: 53px;
+}
+
+.google-maps-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #095797;
+  padding: 10px 15px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-weight: bold;
+  width: 229px;
+  height: 40px;
+}
+
+.google-maps-button img {
+  width: 20px;
+  height: 20px;
+  padding-bottom: 4px;
+}
+
+.google-maps-button a {
+  color: white;
+  text-decoration: none;
+}
+
+.google-maps-button:hover {
+  background-color: #2774b3;
 }

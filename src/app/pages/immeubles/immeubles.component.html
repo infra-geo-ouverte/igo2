@@ -18,6 +18,7 @@
           (sortByChange)="onSortBy($event)"
         ></app-number-per-page>
       </div>
+      <mat-divider></mat-divider>
       <div class="items">
         <ng-container *ngFor="let item of immeubles; let i = index">
           <app-immeuble-card [item]="item"></app-immeuble-card>
