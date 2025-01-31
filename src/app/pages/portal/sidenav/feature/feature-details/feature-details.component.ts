@@ -1,26 +1,26 @@
+import { HttpClient } from '@angular/common/http';
 import {
-  Component,
-  Input,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Output,
-  EventEmitter,
-  OnDestroy,
-  AfterViewInit,
-  OnChanges,
-  SimpleChanges,
+  Component,
   ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
+import { TooltipPosition } from '@angular/material/tooltip';
+
+import { ConnectionState, LanguageService, NetworkService } from '@igo2/core';
+import { ConfigService } from '@igo2/core';
+import { Feature, IgoMap, SearchSource } from '@igo2/geo';
 
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NetworkService, ConnectionState, LanguageService } from '@igo2/core';
-import { ConfigService } from '@igo2/core';
-import { SearchSource, IgoMap, Feature } from '@igo2/geo';
-import { HttpClient } from '@angular/common/http';
-
-import { TooltipPosition } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-feature-details',
@@ -28,8 +28,9 @@ import { TooltipPosition } from '@angular/material/tooltip';
   styleUrls: ['./feature-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
-export class FeatureDetailsComponent implements OnDestroy, AfterViewInit, OnChanges {
+export class FeatureDetailsComponent
+  implements OnDestroy, AfterViewInit, OnChanges
+{
   private state: ConnectionState;
   private unsubscribe$ = new Subject<void>();
 
@@ -94,36 +95,35 @@ export class FeatureDetailsComponent implements OnDestroy, AfterViewInit, OnChan
   @Input()
   matTooltipPosition: TooltipPosition;
 
-
   constructor(
     private cdRef: ChangeDetectorRef,
     private networkService: NetworkService,
     private languageService: LanguageService,
     private configService: ConfigService,
-    private http: HttpClient,
+    private http: HttpClient
   ) {
-    this.networkService.currentState().pipe(takeUntil(this.unsubscribe$)).subscribe((state: ConnectionState) => {
-      this.state = state;
-    });
+    this.networkService
+      .currentState()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((state: ConnectionState) => {
+        this.state = state;
+      });
   }
 
   ngAfterViewInit() {
     if (this.feature.properties.Troncon) {
-      setTimeout(() => {
-      }, 100);
+      setTimeout(() => {}, 100);
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
-
-    if (this.mapQueryClick === true || this.feature.properties.Troncon){
+    if (this.mapQueryClick === true || this.feature.properties.Troncon) {
       this.ngAfterViewInit();
     }
-    if ( this.feature.properties.Troncon && this.mapQueryClick === true ||
-              (this.feature.properties.Troncon && changes.scenarioDateToggle)
-      ){
-
+    if (
+      (this.feature.properties.Troncon && this.mapQueryClick === true) ||
+      (this.feature.properties.Troncon && changes.scenarioDateToggle)
+    ) {
     }
   }
 
@@ -132,5 +132,4 @@ export class FeatureDetailsComponent implements OnDestroy, AfterViewInit, OnChan
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }

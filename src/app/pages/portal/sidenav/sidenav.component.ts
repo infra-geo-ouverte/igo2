@@ -1,35 +1,34 @@
 import {
-  Component,
-  Input,
-  Output,
-  OnInit,
-  OnDestroy,
-  EventEmitter,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
   ElementRef,
-  ViewChild,
+  EventEmitter,
   HostListener,
-  ChangeDetectorRef
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
 } from '@angular/core';
 
-import { EntityStore, ActionStore } from '@igo2/common';
-
-import { BehaviorSubject } from 'rxjs';
-
+import { ActionStore, EntityStore } from '@igo2/common';
+import { ConfigService } from '@igo2/core';
 import {
-  IgoMap,
   FEATURE,
   Feature,
   FeatureMotion,
+  IgoMap,
+  Layer,
   LayerService,
   MapService,
   Research,
   SearchResult,
-  SearchService,
-  Layer
+  SearchService
 } from '@igo2/geo';
-import { QueryState, MapState } from '@igo2/integration';
-import { ConfigService } from '@igo2/core';
+import { MapState, QueryState } from '@igo2/integration';
+
+import { BehaviorSubject } from 'rxjs';
 
 import { SearchState } from './search.state';
 
@@ -87,7 +86,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
   private _mobile: boolean;
 
-    //QUERY
+  //QUERY
 
   @Input()
   get mapQueryClick(): boolean {
@@ -138,7 +137,8 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   public termSplitter: string = '|';
 
-  @ViewChild('mapBrowser', { read: ElementRef, static: true }) mapBrowser: ElementRef;
+  @ViewChild('mapBrowser', { read: ElementRef, static: true })
+  mapBrowser: ElementRef;
 
   public lonlat;
   public mapProjection: string;
@@ -168,7 +168,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this._legendPanelOpened = value;
 
     if (this._legendPanelOpened) {
-      this.openPanelLegend()
+      this.openPanelLegend();
     }
   }
   private _legendPanelOpened: boolean;
@@ -204,104 +204,106 @@ export class SidenavComponent implements OnInit, OnDestroy {
     private queryState: QueryState,
     private cdRef: ChangeDetectorRef,
     private mapState: MapState
-    ) {
-      this.hasToolbox = this.configService.getConfig('hasToolbox') === undefined ? false :
-        this.configService.getConfig('hasToolbox');
-    }
+  ) {
+    this.hasToolbox =
+      this.configService.getConfig('hasToolbox') === undefined
+        ? false
+        : this.configService.getConfig('hasToolbox');
+  }
 
-    ngOnInit(){
-      this.queryStore.entities$
-      .subscribe(
-        (entities) => {
-        if (entities.length == 1 && entities[0].data.properties.numero_immeuble) {
-          this.opened = true;
-          this.mapQueryClick = true;
-          this.legendPanelOpened = false;
-          this.panelOpenState = true;
-          this.onClearSearch();
-        }
-      });
-    } // End OnInit
-
-    @HostListener('change')
-    ngOnDestroy() {
-      this.store.destroy();
-      this.store.entities$.unsubscribe();
-      this.opened = false;
-      this.legendPanelOpened = false;
-      this.onClearSearch();
-      this.clearQuery();
-      this.map.propertyChange$.unsubscribe;
-    }
-
-    //SEARCH
-    onPointerSummaryStatusChange(value) {
-      this.igoSearchPointerSummaryEnabled = value;
-    }
-
-    onSearchTermChange(term = '') {
-      this.term = term;
-      const termWithoutHashtag = term.replace(/(#[^\s]*)/g, '').trim();
-      if (termWithoutHashtag.length < 2) {
-        this.searchStore.clear();
-        this.selectedFeature = undefined;
+  ngOnInit() {
+    this.queryStore.entities$.subscribe((entities) => {
+      if (entities.length == 1 && entities[0].data.properties.numero_immeuble) {
+        this.opened = true;
+        this.mapQueryClick = true;
+        this.legendPanelOpened = false;
+        this.panelOpenState = true;
+        this.onClearSearch();
       }
+    });
+  } // End OnInit
+
+  @HostListener('change')
+  ngOnDestroy() {
+    this.store.destroy();
+    this.store.entities$.unsubscribe();
+    this.opened = false;
+    this.legendPanelOpened = false;
+    this.onClearSearch();
+    this.clearQuery();
+    this.map.propertyChange$.unsubscribe;
+  }
+
+  //SEARCH
+  onPointerSummaryStatusChange(value) {
+    this.igoSearchPointerSummaryEnabled = value;
+  }
+
+  onSearchTermChange(term = '') {
+    this.term = term;
+    const termWithoutHashtag = term.replace(/(#[^\s]*)/g, '').trim();
+    if (termWithoutHashtag.length < 2) {
+      this.searchStore.clear();
+      this.selectedFeature = undefined;
+    }
+  }
+
+  onSearch(event: { research: Research; results: SearchResult[] }) {
+    if ((this.mapQueryClick = true)) {
+      // to clear the mapQuery if a search is initialized
+      this.queryState.store.softClear();
+      this.map.queryResultsOverlay.clear();
+      this.mapQueryClick = false;
+    }
+    this.store.clear();
+    // search
+    this.searchInit = true;
+    this.legendPanelOpened = false;
+    const results = event.results;
+    this.searchStore.state.updateAll({ focused: false, selected: false });
+    const newResults = this.searchStore.entities$.value
+      .filter((result: SearchResult) => result.source !== event.research.source)
+      .concat(results);
+    this.searchStore.updateMany(newResults);
+  }
+
+  onSearchSettingsChange() {
+    this.settingsChange$.next(true);
+  }
+
+  /**
+   * Try to add a feature to the map when it's being focused
+   * @internal
+   * @param result A search result that could be a feature
+   */
+  onResultFocus(result: SearchResult) {
+    this.tryAddFeatureToMap(result);
+    this.selectedFeature = (result as SearchResult<Feature>).data;
+  }
+
+  /**
+   * Try to add a feature to the map overlay
+   * @param layer A search result that could be a feature
+   */
+  private tryAddFeatureToMap(layer: SearchResult) {
+    if (layer.meta.dataType !== FEATURE) {
+      return undefined;
     }
 
-    onSearch(event: { research: Research; results: SearchResult[] }) {
-      if (this.mapQueryClick = true) { // to clear the mapQuery if a search is initialized
-        this.queryState.store.softClear();
-        this.map.queryResultsOverlay.clear();
-        this.mapQueryClick = false;
-      }
-      this.store.clear();
-      // search
-      this.searchInit = true;
-      this.legendPanelOpened = false;
-      const results = event.results;
-      this.searchStore.state.updateAll({ focused: false, selected: false });
-      const newResults = this.searchStore.entities$.value
-        .filter((result: SearchResult) => result.source !== event.research.source)
-        .concat(results);
-      this.searchStore.updateMany(newResults);
+    // Somethimes features have no geometry. It happens with some GetFeatureInfo
+    if (layer.data.geometry === undefined) {
+      return;
     }
 
-    onSearchSettingsChange() {
-      this.settingsChange$.next(true);
-    }
+    this.map.searchResultsOverlay.setFeatures(
+      [layer.data] as Feature[],
+      FeatureMotion.Default
+    );
 
-    /**
-     * Try to add a feature to the map when it's being focused
-     * @internal
-     * @param result A search result that could be a feature
-     */
-    onResultFocus(result: SearchResult) {
-      this.tryAddFeatureToMap(result);
-      this.selectedFeature = (result as SearchResult<Feature>).data;
-    }
-
-    /**
-     * Try to add a feature to the map overlay
-     * @param layer A search result that could be a feature
-     */
-    private tryAddFeatureToMap(layer: SearchResult) {
-      if (layer.meta.dataType !== FEATURE) {
-        return undefined;
-      }
-
-      // Somethimes features have no geometry. It happens with some GetFeatureInfo
-      if (layer.data.geometry === undefined) {
-        return;
-      }
-
-      this.map.searchResultsOverlay.setFeatures(
-        [layer.data] as Feature[],
-        FeatureMotion.Default
-      );
-
-      this.hasFeatureEmphasisOnSelection = this.configService.getConfig('hasFeatureEmphasisOnSelection');
-    }
-
+    this.hasFeatureEmphasisOnSelection = this.configService.getConfig(
+      'hasFeatureEmphasisOnSelection'
+    );
+  }
 
   /*
    * Remove a feature to the map overlay
@@ -323,19 +325,18 @@ export class SidenavComponent implements OnInit, OnDestroy {
     }
   }
 
-  closePanelOnCloseQuery(event){
+  closePanelOnCloseQuery(event) {
     this.closeQuery.emit();
     this.mapQueryClick = false;
-    if (this.searchInit === false && this.legendPanelOpened === false){
+    if (this.searchInit === false && this.legendPanelOpened === false) {
       this.panelOpenState = false;
-    } if (this.searchInit === true || this.legendPanelOpened === true) {
+    }
+    if (this.searchInit === true || this.legendPanelOpened === true) {
       this.panelOpenState = true;
     }
   }
 
-  onSearchPanel(){
-
-  }
+  onSearchPanel() {}
 
   onClearSearch() {
     this.map.searchResultsOverlay.clear();
@@ -347,7 +348,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.searchState.setSearchTerm('');
   }
 
-  clearQuery(): void{
+  clearQuery(): void {
     this.queryState.store.softClear();
     this.queryState.store.clear();
     this.mapQueryClick = false;
@@ -356,24 +357,24 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   // LEGEND
 
-  closePanelOnCloseLegend(event) { // this flushes the legend whenever a user closes the panel. if not, the user has to click twice on the legend button to open the legend with the button
+  closePanelOnCloseLegend(event) {
+    // this flushes the legend whenever a user closes the panel. if not, the user has to click twice on the legend button to open the legend with the button
     this.closeLegend.emit();
     this.opened = false;
     this.legendPanelOpened = false;
-    if (this.searchInit === false && this.mapQueryClick === false){
+    if (this.searchInit === false && this.mapQueryClick === false) {
       this.panelOpenState = false;
-    } if (this.searchInit === true || this.mapQueryClick === true) {
+    }
+    if (this.searchInit === true || this.mapQueryClick === true) {
       this.panelOpenState = true;
     }
   }
 
-  openPanelLegend(){
+  openPanelLegend() {
     this.opened = true;
     this.panelOpenState = true;
     this.clearQuery();
     this.onClearSearch();
     this.mapQueryClick = false;
   }
-
 }
-
