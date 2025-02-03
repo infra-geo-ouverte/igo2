@@ -41,6 +41,14 @@ export const environment: AppEnvironmentOptions = {
       url: '/apis/igo2',
       defaultContextUri: '5'
     },*/
+    layer: {
+      group: {
+        enable: true,
+        canCreate: true,
+        canRename: true,
+        maxHierarchyLevel: 4
+      }
+    },
     catalog: {
       sources: [
         {
