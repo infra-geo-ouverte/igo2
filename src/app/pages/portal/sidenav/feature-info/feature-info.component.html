@@ -1,15 +1,16 @@
 <ng-container
-  *ngIf="(store.entities$ | async)"
-  class = "featureInfo"
-  (keydown)="handleKeyboardEvent($event)">
-
+  *ngIf="store.entities$ | async"
+  class="featureInfo"
+  (keydown)="handleKeyboardEvent($event)"
+>
   <button
     class="clear-button sideresult-closed"
     mat-icon-button
     igoStopPropagation
     (click)="clearButton()"
     color="primary"
-    (clearFeature)="removeFeatureFromMap()">
+    (clearFeature)="removeFeatureFromMap()"
+  >
     <mat-icon svgIcon="close"></mat-icon>
   </button>
 
@@ -20,7 +21,7 @@
     [mapQueryClick]="mapQueryClick"
     [scenarioDateToggle]="scenarioDateToggle"
     (hideDetails)="hideOnToggleChange()"
-    (showDetails)="showOnToggleChange()">
+    (showDetails)="showOnToggleChange()"
+  >
   </app-feature-details>
-
 </ng-container>
