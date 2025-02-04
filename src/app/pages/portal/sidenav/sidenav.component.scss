@@ -11,19 +11,22 @@
 
   #sideresultsDesktop {
     --ol-background-color: white;
-    --ol-accent-background-color: #F5F5F5;
-    --ol-subtle-background-color: rgba(128, 128, 128, .25);
-    --ol-partial-background-color: rgba(255, 255, 255, .75);
+    --ol-accent-background-color: #f5f5f5;
+    --ol-subtle-background-color: rgba(128, 128, 128, 0.25);
+    --ol-partial-background-color: rgba(255, 255, 255, 0.75);
     --ol-foreground-color: #333333;
     --ol-subtle-foreground-color: #666666;
-    --ol-brand-color: #00AAFF;
+    --ol-brand-color: #00aaff;
     --breakpoint-pgu-sm: 320px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 960px;
     --breakpoint-xl: 1024px;
     font-size: 16px;
     --mat-focus-indicator-border-color: #095797;
-    font-family: Roboto,Helvetica Neue,sans-serif;
+    font-family:
+      'Open Sans',
+      Helvetica Neue,
+      sans-serif;
     color: #000000de;
     scrollbar-color: #095797 #fff;
     box-sizing: border-box;
@@ -51,30 +54,30 @@
   }
 
   #sideresult-button {
-    position:absolute;
-    top:50%;
-    left:401px;
-    z-index:1;
-    padding:0;
-    min-width:12px!important;
-    width:36x;
-    height:36px;
+    position: absolute;
+    top: 50%;
+    left: 401px;
+    z-index: 1;
+    padding: 0;
+    min-width: 12px !important;
+    width: 36x;
+    height: 36px;
   }
 
   #sideresult-button > mat-icon {
-    margin:0;
-    width:36px;
-    height:36px;
+    margin: 0;
+    width: 36px;
+    height: 36px;
     color: white !important;
   }
 
   #sideresult-button:hover {
-    background-color:#156bb2
+    background-color: #156bb2;
   }
 
   .sideresult-closed {
-    left:0!important;
-    position:absolute
+    left: 0 !important;
+    position: absolute;
   }
 
   igo-home-button {
@@ -90,7 +93,7 @@
   .app-sidenav-content {
     margin-top: $app-sidenav-margin-top;
     height: $app-sidenav-height;
-    padding:0 8px 0 24px !important;
+    padding: 0 8px 0 24px !important;
     @include mobile {
       height: calc(100% - #{$app-sidenav-margin-top});
     }
@@ -112,17 +115,14 @@
   }
 
   .sideresult .tooltip-chart:after {
-    content:""!important;
-    position:absolute!important;
-    top:18%!important;
-    right:100%!important;
-    margin-top:-5px!important;
-    border-width:10px!important;
-    border-style:solid!important;
-    border-color:transparent transparent transparent white!important;
-    transform:rotate(180deg)
+    content: '' !important;
+    position: absolute !important;
+    top: 18% !important;
+    right: 100% !important;
+    margin-top: -5px !important;
+    border-width: 10px !important;
+    border-style: solid !important;
+    border-color: transparent transparent transparent white !important;
+    transform: rotate(180deg);
   }
-
 }
-
-

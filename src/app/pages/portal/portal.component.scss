@@ -30,9 +30,12 @@
     background-color: $app-background-color;
     font-size: 16px;
     margin-left: $igo-margin;
+    //max-width: 825px;
+    //width: 100%;
+    //min-width: 640px;
 
-    &:focus-within{
-      border: 2px solid #DAE6F0 ;
+    &:focus-within {
+      border: 2px solid #dae6f0;
     }
   }
 
@@ -216,7 +219,9 @@ igo-map-browser {
     border-radius: 3px !important;
   }
 
-  app-legend-panel-button ::ng-deep .mat-mdc-raised-button:not(:disabled):hover {
+  app-legend-panel-button
+    ::ng-deep
+    .mat-mdc-raised-button:not(:disabled):hover {
     background-color: #1171d1;
   }
 

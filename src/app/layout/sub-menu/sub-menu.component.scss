@@ -10,7 +10,8 @@
 }
 
 .item {
-  font-size: 20px;
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
   cursor: pointer;
   position: relative;
 }
@@ -25,6 +26,6 @@
   left: -5%;
 }
 
-.active{
+.active {
   font-weight: 900;
 }

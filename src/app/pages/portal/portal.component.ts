@@ -103,9 +103,9 @@ import {
   mapSlideY,
   toastPanelAnimation
 } from './portal.animation';
+import { SearchState } from './sidenav/search.state';
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
-import { SearchState } from './sidenav/search.state';
 
 @Component({
   selector: 'app-portal',
@@ -127,7 +127,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     undefined
   );
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  public legendPanelOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public legendPanelOpened$: BehaviorSubject<boolean> = new BehaviorSubject(
+    false
+  );
   public minSearchTermLength = 2;
   public hasGeolocateButton = true;
   public showMenuButton = true;
@@ -936,18 +938,19 @@ export class PortalComponent implements OnInit, OnDestroy {
       );
   }
 
-  closePanelOnCloseQuery(){
+  closePanelOnCloseQuery() {
     this.mapQueryClick = false;
-    if (this.searchInit === false && this.legendPanelOpened === false){
+    if (this.searchInit === false && this.legendPanelOpened === false) {
       //this.panelOpenState = false;
       //this.expanded = false; //// causes panel to close when click searchbar after query
-    } if (this.searchInit === true || this.legendPanelOpened === true) {
+    }
+    if (this.searchInit === true || this.legendPanelOpened === true) {
       this.panelOpenState = true;
       this.expanded = true;
     }
   }
 
-  openPanelonQuery(){
+  openPanelonQuery() {
     this.mapQueryClick = true;
     this.expanded = true;
     this.panelOpenState = true;
@@ -957,7 +960,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.searchBarTerm = '';
   }
 
-  onClearQuery(){
+  onClearQuery() {
     this.queryState.store.clear(); // clears the info panel
     this.queryState.store.softClear(); // clears the info panel
     this.map.queryResultsOverlay.clear(); // to avoid double-selection in the map
@@ -1730,16 +1733,16 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
   }
 
-  togglePanelLegend(){
+  togglePanelLegend() {
     if (this.legendPanelOpened === false) {
       this.openPanelLegend();
-      if (this.searchInit === true){
+      if (this.searchInit === true) {
         this.onClearSearch();
         this.searchBarTerm = '';
         this.searchInit = false;
         this.openPanels();
       }
-      if (this.mapQueryClick === true){
+      if (this.mapQueryClick === true) {
         this.onClearQuery();
         this.mapQueryClick = false;
         this.openPanels();
@@ -1747,26 +1750,29 @@ export class PortalComponent implements OnInit, OnDestroy {
     } else {
       this.closePanelLegend();
     }
-
   }
 
-  closePanelLegend(){
+  closePanelLegend() {
     this.legendPanelOpened = false;
     this.closePanels();
     this.map.propertyChange$.unsubscribe;
   }
 
-  openPanelLegend(){
+  openPanelLegend() {
     this.legendPanelOpened = true;
     this.openPanels();
   }
 
-  togglePanel(event: boolean){
+  togglePanel(event: boolean) {
     this.panelOpenState = event;
   }
 
   private closePanels() {
-    if (this.mapQueryClick === false && this.searchInit === false && this.legendPanelOpened === false){
+    if (
+      this.mapQueryClick === false &&
+      this.searchInit === false &&
+      this.legendPanelOpened === false
+    ) {
       this.panelOpenState = false;
       this.expanded = false;
     }

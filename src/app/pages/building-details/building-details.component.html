@@ -1,6 +1,6 @@
 <div class="wrapper" *ngIf="buildingDetails">
   <div class="nom_de_immeuble">
-    {{ buildingDetails.nom_immeuble }}
+    {{  buildingDetails.nom_immeuble || 'Immeuble ' + buildingDetails.numero_immeuble}}
   </div>
   <div class="address">
     <img src="assets/images/location.jpg" alt="" class="icon" />{{
