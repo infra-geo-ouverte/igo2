@@ -1,6 +1,9 @@
 <div class="wrapper" *ngIf="buildingDetails">
   <div class="nom_de_immeuble">
-    {{  buildingDetails.nom_immeuble || 'Immeuble ' + buildingDetails.numero_immeuble}}
+    {{
+      buildingDetails.nom_immeuble ||
+        'Immeuble ' + buildingDetails.numero_immeuble
+    }}
   </div>
   <div class="address">
     <img src="assets/images/location.jpg" alt="" class="icon" />{{
@@ -8,20 +11,7 @@
     }}
   </div>
 
-  <div>
-    <img
-      src="https://www.sqi.gouv.qc.ca/fileadmin/user_upload/01_nes_pierre-bedard.jpg"
-      alt=""
-      class="photo"
-    />
-    <div class="caption">
-      Perspective extérieure du futur bâtiment de l’école Pierre-Bédard<br />
-      Image : MSDL Architectes
-    </div>
-  </div>
-
   <div class="coordinates">
-    <div class="title">Coordonnées</div>
     <div class="element" *ngIf="buildingDetails.nom_proprietaire">
       <div class="element-title">Propriétarie</div>
       <div class="element-lines-wrapper">
@@ -71,52 +61,6 @@
         </div>
       </div>
     </div>
-
-    <div class="element">
-      <div class="element-title">Conseiller immobilier (CI)</div>
-      <div class="element-lines-wrapper">
-        <div class="element-line">
-          <img src="assets/images/profile.png" alt="" class="element-icon" />
-          Nom Exemple
-        </div>
-        <div class="element-line">
-          <img src="assets/images/envelope.png" alt="" class="element-icon" />
-          <a [href]="'mailto:contact@exemple.ca'">contact&#64;exemple.ca</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="element">
-      <div class="element-title">
-        Technicien en exploitation d'immeubles (TEI)
-      </div>
-      <div class="element-lines-wrapper">
-        <div class="element-line">
-          <img src="assets/images/profile.png" alt="" class="element-icon" />
-          Nom Exemple
-        </div>
-        <div class="element-line">
-          <img src="assets/images/envelope.png" alt="" class="element-icon" />
-          <a [href]="'mailto:contact@exemple.ca'">contact&#64;exemple.ca</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="element">
-      <div class="element-title">
-        Technicien de soutien aux opérations (TSO)
-      </div>
-      <div class="element-lines-wrapper">
-        <div class="element-line">
-          <img src="assets/images/profile.png" alt="" class="element-icon" />
-          Nom Exemple
-        </div>
-        <div class="element-line">
-          <img src="assets/images/envelope.png" alt="" class="element-icon" />
-          <a [href]="'mailto:contact@exemple.ca'">contact&#64;exemple.ca</a>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="coordinates">
@@ -150,14 +94,9 @@
   </div>
 
   <div class="coordinates">
-    <div class="title">Carte</div>
-
     <div class="element-line google-maps-button">
       <img src="assets/images/location2.png" alt="" class="element-icon" />
       <a [href]="google_full_map_url" target="_blank">Voir sur Google Maps</a>
-    </div>
-    <div class="element-line">
-      <iframe class="google_embedded_map" [src]="google_embed_url"></iframe>
     </div>
   </div>
 </div>
