@@ -1,72 +1,78 @@
 .attribute,
 .update {
-  display:flex;
-  align-items:center
+  display: flex;
+  align-items: center;
 }
 
 .attribute-label,
 .attribute-value {
-  margin:0;line-height:25.6px
+  margin: 0;
+  line-height: 25.6px;
 }
 
 .attribute-label,
 .state-img {
-  align-self:flex-start;
-  flex:none
+  align-self: flex-start;
+  flex: none;
 }
 
 .attribute-value {
-  font-weight:700
+  font-weight: 700;
 }
 
 .igo-panel-title {
-  margin-top:8px;
-  font-size:18px;
-  color:#095797 !important;
-  text-align:center
+  margin-top: 8px;
+  font-size: 18px;
+  color: #095797 !important;
+  text-align: center;
 }
 
 .query-content {
-  display:flex;
-  flex-flow:column;
-  row-gap:16px
+  display: flex;
+  flex-flow: column;
+  row-gap: 16px;
 }
 
-
-@media only screen and (orientation:portrait) and (max-width: 599px),
-only screen and (orientation:landscape) and (max-width: 959px) {
+@media only screen and (orientation: portrait) and (max-width: 599px),
+  only screen and (orientation: landscape) and (max-width: 959px) {
   [_nghost-mhq-c512] {
-    width:100%;
-    overflow-x:clip
+    width: 100%;
+    overflow-x: clip;
   }
 }
 
 div .igo-panel-header {
-  background-color:#fff!important;
-  color:#095797!important
+  background-color: #fff !important;
+  color: #095797 !important;
 }
 
 igo-panel .igo-panel-header:hover {
-  cursor:pointer
+  cursor: pointer;
 }
 
 igo-panel {
-  height:100%;outline:none
+  height: 100%;
+  outline: none;
 }
 
 app-feature-details {
-  float:left;
-  width:calc(100% - 36px);
-  overflow-x:clip;
-  margin-right:8px
+  float: left;
+  width: calc(100% - 36px);
+  overflow-x: clip;
+  margin-right: 8px;
 }
 
 .wrapper {
   color: #095797;
   border: 1px;
   padding: 12px;
-  border-color:  #095797;
+  border-color: #095797;
   border-style: solid;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+}
+
+.wrapper:hover {
+  background-color: #dae6f0;
 }

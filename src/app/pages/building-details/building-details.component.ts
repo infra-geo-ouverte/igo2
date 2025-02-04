@@ -70,6 +70,20 @@ export class BuildingDetailsComponent implements OnInit {
     });
   }
 
+  formatTitle() {
+    if (!this.buildingDetails.adresse_immeuble) return '';
+
+    let partis = this.buildingDetails.adresse_immeuble
+      .split(',')
+      .map((p) => p.trim());
+
+    if (partis.length >= 4) {
+      return `${partis[0]}, ${partis[1]}\n${partis[2]} (${partis[3]}) ${partis.slice(4).join(' ')}`;
+    }
+
+    return this.buildingDetails.adresse_immeuble; // Retourne l'adresse originale si elle ne suit pas le format attendu
+  }
+
   toggleShowMap() {
     this.showingMap = !this.showingMap;
   }
