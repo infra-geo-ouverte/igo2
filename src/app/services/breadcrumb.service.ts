@@ -6,15 +6,39 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class BreadcrumbService {
-  items = new BehaviorSubject<any>([
-    {
-      title: 'Accueil',
-      link: 'https://www.sqi.gouv.qc.ca/'
-    },
-    {
-      title: 'Outil de repérage d\'immeubles',
-      link: ''
+  private breadcrumbItems = new BehaviorSubject<
+    { label: string; url: string }[]
+  >([]);
+
+  items = this.breadcrumbItems.asObservable();
+
+  setBreadcrumb(route: string, data?: any): void {
+    const breadcrumbs = [
+      { label: 'Accueil', url: '/' },
+      { label: "Outil de repérage d'immeubles", url: '/' }
+    ];
+
+    switch (route) {
+      case '/carte':
+        breadcrumbs.push({ label: 'Carte', url: '/carte' });
+        break;
+      case '/immeubles':
+        breadcrumbs.push({ label: 'Immeubles', url: '/immeubles' });
+        break;
+      case `/immeubles/${data?.numero_immeuble}`:
+        breadcrumbs.push({ label: 'Immeubles', url: '/immeubles' });
+        // Utilisation de l'adresse courte
+        const adresseCourte =
+          data?.adresse_immeuble_courte || `Immeuble ${data.numero_immeuble}`;
+        breadcrumbs.push({
+          label: adresseCourte,
+          url: `/immeubles/${data.numero_immeuble}`
+        });
+        break;
+      default:
+        break;
     }
-  ]);
+    this.breadcrumbItems.next(breadcrumbs);
+  }
   constructor() {}
 }
