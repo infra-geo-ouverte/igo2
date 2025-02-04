@@ -1,26 +1,33 @@
 <div class="content-block top-block no-banner">
   <nav class="breadcrumb-section" aria-label="Breadcrumb">
     <div class="breadcrumb-section-left">
-    <div class="content-container">
-      <div class="breadcrumb">
-        <div class="breadcrumb-item">
-          <a
-            class="breadcrumb-link"
-            href="https://www.sqi.gouv.qc.ca/"
-            title="Accueil"
+      <div class="content-container">
+        <div class="breadcrumb">
+          <div
+            *ngFor="let item of items; let last = last"
+            class="breadcrumb-item"
+            [class.active]="last"
+            aria-current="{{ last ? 'page' : '' }}"
           >
-            <span class="breadcrumb-link-title">
-              <span class="breadcrumb-text">Accueil</span>
-            </span>
-          </a>
-        </div>
-        <div class="breadcrumb-item active" aria-current="page">
-          <span class="breadcrumb-link-title">
-            <span class="breadcrumb-text">Outil de repérage d'immeubles</span>
-          </span>
+            <ng-container *ngIf="!last">
+              <a
+                class="breadcrumb-link"
+                [routerLink]="item.url"
+                [title]="item.label"
+              >
+                <span class="breadcrumb-link-title">
+                  <span class="breadcrumb-text">{{ item.label }}</span>
+                </span>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="last">
+              <span class="breadcrumb-link-title">
+                <span class="breadcrumb-text">{{ item.label }}</span>
+              </span>
+            </ng-container>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </nav>
 </div>

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { FilterService } from 'src/app/services/filter.service';
 import { ImmeublesService } from 'src/app/services/immeubles.service';
 
@@ -21,7 +22,8 @@ export class ImmeublesComponent implements OnInit {
   constructor(
     private immeublesService: ImmeublesService,
     private readonly filterService: FilterService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+    private breadcrumbService: BreadcrumbService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class ImmeublesComponent implements OnInit {
       this.valuesMap = valuesMap;
       this.getImmeubles();
     });
+    this.breadcrumbService.setBreadcrumb('/immeubles'); // pour le fil d'ariane
   }
 
   onPage(page: number) {

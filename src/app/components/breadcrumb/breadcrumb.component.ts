@@ -8,7 +8,7 @@ import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent implements OnInit {
-  items: any;
+  items: { label: string; url: string }[] = [];
 
   constructor(private readonly breadcrumbService: BreadcrumbService) {}
 
