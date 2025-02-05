@@ -3,29 +3,44 @@
     <div class="breadcrumb-section-left">
       <div class="content-container">
         <div class="breadcrumb">
-          <div
-            *ngFor="let item of items; let last = last"
-            class="breadcrumb-item"
-            [class.active]="last"
-            aria-current="{{ last ? 'page' : '' }}"
-          >
-            <ng-container *ngIf="!last">
-              <a
-                class="breadcrumb-link"
-                [routerLink]="item.url"
-                [title]="item.label"
-              >
+          <!-- Mode Mobile : Affichage du niveau parent -->
+          <ng-container *ngIf="isMobile && displayedBreadcrumb">
+            <div class="breadcrumb-item mobile-breadcrumb">
+              <a class="breadcrumb-link" [routerLink]="displayedBreadcrumb.url">
+                <span class="breadcrumb-chevron">&lt;</span>
+                <span class="breadcrumb-text">{{
+                  displayedBreadcrumb.label
+                }}</span>
+              </a>
+            </div>
+          </ng-container>
+
+          <!-- Mode Normal : Affichage du fil d'ariane complet -->
+          <ng-container *ngIf="!isMobile">
+            <div
+              *ngFor="let item of items; let last = last"
+              class="breadcrumb-item"
+              [class.active]="last"
+              aria-current="{{ last ? 'page' : '' }}"
+            >
+              <ng-container *ngIf="!last">
+                <a
+                  class="breadcrumb-link"
+                  [routerLink]="item.url"
+                  [title]="item.label"
+                >
+                  <span class="breadcrumb-link-title">
+                    <span class="breadcrumb-text">{{ item.label }}</span>
+                  </span>
+                </a>
+              </ng-container>
+              <ng-container *ngIf="last">
                 <span class="breadcrumb-link-title">
                   <span class="breadcrumb-text">{{ item.label }}</span>
                 </span>
-              </a>
-            </ng-container>
-            <ng-container *ngIf="last">
-              <span class="breadcrumb-link-title">
-                <span class="breadcrumb-text">{{ item.label }}</span>
-              </span>
-            </ng-container>
-          </div>
+              </ng-container>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
