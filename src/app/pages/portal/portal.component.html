@@ -73,6 +73,7 @@
       [queryFeaturesHitTolerance]="15"
       igoMapContext
       igoLayerContext
+      (contextLayersLoaded)="contextLayersLoaded$.next($event)"
       igoDropGeoFile
       [contextUri]="contextUri"
       (query)="onMapQuery($event)"
