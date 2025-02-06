@@ -39,6 +39,74 @@
   background-image: url(/assets/images/flash-bread-crumbs-light.svg);
 }
 
+.dark-banner .breadcrumb-section {
+  background-color: var(--qc-color-blue-medium);
+  padding-top: 16px;
+}
+
+.no-banner .breadcrumb-section {
+  background-color: var(--qc-color-blue-dark);
+  padding-top: 16px;
+}
+
+.breadcrumb-section .breadcrumb {
+  padding: 0 0 0 8%;
+  display: flex;
+  list-style: none;
+}
+
+.content-container .breadcrumb a.breadcrumb-link span:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb a,
+.dark-banner .breadcrumb span {
+  color: var(--qc-color-white);
+}
+
+.breadcrumb a,
+.no-banner .breadcrumb span {
+  color: var(--qc-color-white);
+}
+
+@media (max-width: 768px) {
+  .breadcrumb {
+    font-size: 12px;
+    padding: 8px 0;
+    justify-content: flex-start;
+  }
+
+  .breadcrumb-item {
+    display: none; /* Cache les éléments normaux du fil d'Ariane */
+  }
+
+  .mobile-breadcrumb {
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-breadcrumb .breadcrumb-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .breadcrumb-chevron {
+    font-size: 16px;
+    margin-right: 5px;
+  }
+
+  .breadcrumb-link-title {
+    padding: 0;
+  }
+
+  .dark-banner .breadcrumb a::after,
+  .no-banner .breadcrumb a::after {
+    display: none !important;
+  }
+}
+
+/*
 @media (min-width: 280px) {
   .navigation-page a:not([class]) {
     color: white;
@@ -49,33 +117,8 @@
     flex-direction: column;
   }
 
-  .breadcrumb-section .breadcrumb {
-    padding: 0 0 0 8%;
-    display: flex;
-    list-style: none;
-  }
-
-  .dark-banner .breadcrumb-section {
-    background-color: var(--qc-color-blue-medium);
-    padding-top: 16px;
-  }
-
-  .no-banner .breadcrumb-section {
-    background-color: var(--qc-color-blue-dark);
-    padding-top: 16px;
-  }
-
   .breadcrumb {
     padding: 0 0 8px 0;
-  }
-
-  .content-container .breadcrumb a.breadcrumb-link span:hover {
-    text-decoration: underline;
-  }
-
-  .breadcrumb a,
-  .dark-banner .breadcrumb span {
-    color: var(--qc-color-white);
   }
 
   .breadcrumb a,
@@ -150,3 +193,4 @@
 
 @media (min-width: 1330px) {
 }
+//*/
