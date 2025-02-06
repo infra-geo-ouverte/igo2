@@ -38,7 +38,7 @@ export class BuildingDetailsComponent implements OnInit {
             // hard coded value
             this.buildingDetails.nom_proprietaire = 'Nom Exemple';
 
-            // Extraction de l'adresse courte (sans code postal)
+            // FIl d'ariane : Extraction de l'adresse courte (sans code postal)
             const adresseComplete = this.buildingDetails.adresse_immeuble;
             const adresseCourte = this.extraireAdresseCourte(adresseComplete);
             // Mise à jour du fil d'Ariane avec l'adresse courte
