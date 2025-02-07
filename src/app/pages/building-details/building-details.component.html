@@ -11,11 +11,11 @@
   </div>
 
   <div class="coordinates">
-    <div class="element" *ngIf="buildingDetails.nom_proprietaire">
-      <div class="element-title">Propriétarie</div>
-      <div class="element-lines-wrapper">
+    <div class="element-proprio" *ngIf="buildingDetails.nom_proprietaire">
+      <h2 class="element-title">Propriétaire</h2>
+      <div>
         <div class="element-line">
-          <img src="assets/images/profile.png" alt="" class="element-icon" />
+          <!--<img src="assets/images/profile.png" alt="" class="element-icon" />-->
           {{ buildingDetails.nom_proprietaire }}
         </div>
       </div>
