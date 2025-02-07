@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="wrapper-content-left gapp">
+  <div class="wrapper-content-left">
     <label class="labels" for="sortBy">Trier par </label>
     <select id="sortBy" (change)="onSelectSortBy($event.target.value)">
       <option value="adresse_immeuble" selected>Adresse de l'immeuble</option>
@@ -8,7 +8,7 @@
     </select>
   </div>
 
-  <div class="wrapper-content-right gapp">
+  <div class="wrapper-content-right">
     <label class="lab" for="number-per-page">Nombre par page </label>
     <select id="number-per-page" (change)="onSelect($event.target.value)">
       <option value="10" selected>10</option>
