@@ -30,7 +30,11 @@
           Directeur immobilier : {{ buildingDetails.nom_directeur_immobilier }}
         </div>
         <div class="element-line">
-          <img src="assets/images/phone.png" alt="" class="elemnent-icon" />
+          <img src="assets/images/location.jpg" alt="" class="element-icon" />
+          Lorem Ipsum
+        </div>
+        <div class="element-line">
+          <img src="assets/images/phone.png" alt="" class="element-icon" />
           {{ buildingDetails.tel_direction_immobiliere }}
         </div>
         <div class="element-line">
@@ -59,12 +63,16 @@
             >{{ buildingDetails.courriel_direction_immobiliere }}</a
           >
         </div>
+        <div class="element-line">
+          <img src="assets/images/phone.png" alt="" class="element-icon" />
+          Lorem Ipsum
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="coordinates">
-    <div class="title">Caractéristiques</div>
+  <div class="coordinates-caract">
+    <h2 class="title">Caractéristiques</h2>
 
     <div class="element-line-2">
       Numéro de l'immeuble :
@@ -75,18 +83,18 @@
       >
     </div>
     <div class="element-line-2">
-      Nombre d'étages : <strong>{{ buildingDetails.nombre_etages }}</strong>
-    </div>
-    <div class="element-line-2">
       Vocation officielle :
       <strong>{{ buildingDetails.vocation_officielle }}</strong>
     </div>
     <div class="element-line-2">
-      Immeuble patrimonial : <strong>non</strong>
+      Immeuble patrimonial :
+      <strong>{{
+        buildingDetails.immeuble_patrimonial ? 'Oui' : 'Non'
+      }}</strong>
     </div>
     <div class="element-line-2">
       Superficie locative :
-      <strong>{{ buildingDetails.superficie_locative }}</strong>
+      <strong>{{ buildingDetails.superficie_locative }} m²</strong>
     </div>
     <div class="element-line-2">
       Certification(s) : <strong>Lorem ipsum</strong>
