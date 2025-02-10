@@ -55,15 +55,14 @@
 
 .element {
   color: #223654;
-  border: 1px solid rgb(198, 198, 198);
-  padding: 30px 20px;
-  padding-bottom: 16px;
-  width: 809px;
-  margin: 16px 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: auto;
+  margin: 5px 0px;
 }
 
 .element-lines-wrapper {
-  padding-top: 24px;
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -71,7 +70,6 @@
 
 .element-title {
   font-size: 16px;
-  font-weight: bold;
   color: #223654;
 }
 
@@ -138,13 +136,6 @@
 
 .google-maps-button:hover {
   background-color: #2774b3;
-}
-
-.element-proprio {
-  color: #223654;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-bottom: 16px;
 }
 
 @media (max-width: 839px) {

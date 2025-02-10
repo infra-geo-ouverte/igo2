@@ -11,26 +11,27 @@
   </div>
 
   <div class="coordinates">
-    <div class="element-proprio" *ngIf="buildingDetails.nom_proprietaire">
+    <div class="element" *ngIf="buildingDetails.nom_proprietaire">
       <h2 class="element-title">Propriétaire</h2>
       <div>
         <div class="element-line">
-          <!--<img src="assets/images/profile.png" alt="" class="element-icon" />-->
           {{ buildingDetails.nom_proprietaire }}
         </div>
       </div>
     </div>
 
     <div class="element">
-      <div class="element-title">Direction immobilière</div>
+      <h2 class="element-title">Direction immobilière</h2>
       <div class="element-lines-wrapper">
         <div class="element-line">
-          <img src="assets/images/profile.png" alt="" class="element-icon" />
           {{ buildingDetails.direction_immobiliere_nom }}
         </div>
         <div class="element-line">
-          <img src="assets/images/profile.png" alt="" class="element-icon" />
-          {{ buildingDetails.nom_directeur_immobilier }}
+          Directeur immobilier : {{ buildingDetails.nom_directeur_immobilier }}
+        </div>
+        <div class="element-line">
+          <img src="assets/images/phone.png" alt="" class="elemnent-icon" />
+          {{ buildingDetails.tel_direction_immobiliere }}
         </div>
         <div class="element-line">
           <img src="assets/images/envelope.png" alt="" class="element-icon" />
@@ -43,9 +44,9 @@
     </div>
 
     <div class="element">
-      <div class="element-title">
+      <h2 class="element-title">
         Coordonnateur à l'administration immobilière (CAI)
-      </div>
+      </h2>
       <div class="element-lines-wrapper">
         <div class="element-line">
           <img src="assets/images/profile.png" alt="" class="element-icon" />
