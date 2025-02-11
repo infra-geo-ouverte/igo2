@@ -6,6 +6,8 @@
       "extent": [-8920558.563, 5554619.438, -6281412.773, 9088802.99],
       "zoom": 8,
       "maxZoomOnExtent": 17,
+      "minZoom": 7,
+      "maxZoom": 17,
       "geolocate": false,
       "alwaysTracking": false,
       "enableHighAccuracy": false,
