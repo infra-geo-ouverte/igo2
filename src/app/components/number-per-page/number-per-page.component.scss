@@ -77,3 +77,29 @@
 #sortBy:focus {
   outline: 1px solid #1479cc;
 }
+
+@media screen and (max-width: 847px) {
+  .wrapper-content-left,
+  .wrapper-content-right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .wrapper-content-left label,
+  .wrapper-content-right label {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .wrapper-content-right {
+    align-items: flex-end;
+  }
+
+  .wrapper-content-right select {
+    align-self: flex-end;
+    width: 100%;
+    margin-right: 90px;
+  }
+}

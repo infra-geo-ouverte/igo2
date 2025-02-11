@@ -1,7 +1,53 @@
 <div *ngIf="immeubles" class="wrapper">
   <div class="title">Immeubles</div>
   <div class="container">
-    <app-filter></app-filter>
+    <!-- Affichage du filtre pour les grands écrans -->
+    <app-filter class="desktop-filter"></app-filter>
+
+    <!-- Bouton pour afficher les filtres sur mobile -->
+    <div class="mobile-filter" *ngIf="!showFilters" (click)="toggleFilters()">
+      <span>Filtres</span>
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#095797"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 9l6 6 6-6"></path>
+      </svg>
+    </div>
+    <!-- Affichage du filtre uniquement si showFilters est vrai -->
+    <div *ngIf="showFilters" class="mobile-filter-container">
+      <div
+        *ngIf="showFilters"
+        (click)="toggleFilters()"
+        class="mobile-filter-close"
+      >
+        <span>Filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#095797"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 9l6 -6 6 6"></path>
+        </svg>
+      </div>
+
+      <app-filter
+        *ngIf="showFilters"
+        class="mobile-filter-content"
+      ></app-filter>
+    </div>
+
     <div class="results">
       <div class="results-header">
         <div class="results-count">{{ total }} immeubles</div>

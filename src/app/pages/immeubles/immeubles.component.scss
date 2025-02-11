@@ -59,3 +59,84 @@
   font-size: 16px;
   font-weight: 500;
 }
+
+.mobile-filter {
+  display: none;
+}
+
+.mobile-filter-content {
+  display: none;
+}
+
+@media (max-width: 670px) {
+  .wrapper {
+    margin-left: 16px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 20px;
+  }
+
+  .desktop-filter {
+    display: none;
+  }
+
+  .mobile-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f2;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #f1f1f2;
+    border-radius: 3px;
+    height: 58px;
+  }
+
+  .mobile-filter span {
+    color: #223654;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  .mobile-filter-content {
+    display: block;
+    margin-top: 10px;
+  }
+
+  ::ng-deep app-filter .wrapper {
+    width: 100% !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  ::ng-deep app-filter .title {
+    display: none !important;
+  }
+
+  .mobile-filter-container {
+    background-color: #f1f1f2;
+    margin-bottom: 20px;
+  }
+
+  .mobile-filter-close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+    cursor: pointer;
+  }
+
+  .mobile-filter-close span {
+    color: #223654;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  .mobile-filter-close svg {
+    margin-top: 10px;
+  }
+}

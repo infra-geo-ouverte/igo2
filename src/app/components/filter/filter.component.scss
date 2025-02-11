@@ -1,6 +1,6 @@
 .wrapper {
   width: 308px;
-  background-color: #F1F1F2;
+  background-color: #f1f1f2;
   height: max-content;
   padding: 20px 10px;
 }
@@ -24,8 +24,8 @@
   height: 40px;
   padding: 4px 10px;
   opacity: 1;
-  background: #FFFFFF;
-  border: 1px solid #8690A2;
+  background: #ffffff;
+  border: 1px solid #8690a2;
   margin-bottom: 10px;
   font-size: 16px;
   color: #223654;
@@ -36,7 +36,7 @@
   outline: none;
 }
 
-.filed label{
+.filed label {
   margin-top: 24px;
   margin-bottom: 7px;
   color: #223654;
@@ -49,7 +49,7 @@
   flex-direction: row;
 }
 
-.filed.line input[type="checkbox"]{
+.filed.line input[type='checkbox'] {
   width: 24px;
   height: 24px;
   transform: scale(1.2);

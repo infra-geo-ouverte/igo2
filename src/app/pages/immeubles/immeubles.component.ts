@@ -89,4 +89,10 @@ export class ImmeublesComponent implements OnInit {
         debugger;
       });
   }
+
+  showFilters = false; // Masquer les filtres par défaut
+
+  toggleFilters() {
+    this.showFilters = !this.showFilters;
+  }
 }
