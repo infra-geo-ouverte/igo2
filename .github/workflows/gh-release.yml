@@ -29,11 +29,11 @@ jobs:
 
       - name: Zip output
         run: zip -qq -r igo2.zip *
-        working-directory: dist/igo2
-        
+        working-directory: dist/igo2/browser
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           body_path: ${{ github.workspace }}-CHANGELOG.txt
-          files: dist/igo2/igo2.zip
+          files: dist/igo2/browser/igo2.zip
           token: ${{ secrets.GITHUB_TOKEN }}

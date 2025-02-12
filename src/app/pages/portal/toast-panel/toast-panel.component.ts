@@ -38,7 +38,6 @@ import {
   FeatureMotion,
   GeoServiceDefinition,
   IgoMap,
-  Layer,
   LayerService,
   PropertyTypeDetectorService,
   SearchResult,
@@ -120,7 +119,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   set store(value: EntityStore<SearchResult<Feature>>) {
     this._store = value;
-    this.store.entities$.subscribe((_entities) => {
+    this.store.entities$.subscribe(() => {
       this.unselectResult();
     });
   }
@@ -140,7 +139,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   private _opened = true;
 
-  @Input() hasFeatureEmphasisOnSelection: Boolean = false;
+  @Input() hasFeatureEmphasisOnSelection = false;
 
   get zoomAuto(): boolean {
     return this._zoomAuto;
@@ -170,15 +169,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   private _fullExtent = false;
 
-  public potententialLayerToAdd$: BehaviorSubject<any> = new BehaviorSubject(
-    undefined
-  );
-  public potententialLayerisAdded$: BehaviorSubject<boolean> =
-    new BehaviorSubject(false);
+  public potententialLayerToAdd$ = new BehaviorSubject<any>(undefined);
+  public potententialLayerisAdded$ = new BehaviorSubject<boolean>(false);
 
-  public fullExtent$: BehaviorSubject<boolean> = new BehaviorSubject(
-    this.fullExtent
-  );
+  public fullExtent$ = new BehaviorSubject<boolean>(this.fullExtent);
   public isHtmlDisplay = false;
   public iconResizeWindows = '';
 
@@ -197,12 +191,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   private format = new olFormatGeoJSON();
 
   private resultOrResolution$$: Subscription;
-  private focusedResult$: BehaviorSubject<SearchResult<Feature>> =
-    new BehaviorSubject(undefined);
+  private focusedResult$ = new BehaviorSubject<SearchResult<Feature>>(
+    undefined
+  );
   private abstractFocusedOrSelectedResult: Feature;
 
   public withZoomButton = true;
-  zoomAuto$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  zoomAuto$ = new BehaviorSubject<boolean>(false);
 
   @Output() openedChange = new EventEmitter<boolean>();
 
@@ -283,21 +278,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   //   return this.opened && this.fullExtent;
   // }
 
-  @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(
-    event: KeyboardEvent
-  ) {
+  @HostListener('document:keydown.escape', ['$event']) onEscapeHandler() {
     this.clear();
   }
 
-  @HostListener('document:keydown.backspace', ['$event']) onBackHandler(
-    event: KeyboardEvent
-  ) {
+  @HostListener('document:keydown.backspace', ['$event']) onBackHandler() {
     this.unselectResult();
   }
 
-  @HostListener('document:keydown.z', ['$event']) onZoomHandler(
-    event: KeyboardEvent
-  ) {
+  @HostListener('document:keydown.z', ['$event']) onZoomHandler() {
     if (this.isResultSelected$.getValue() === true) {
       const localOlFeature = this.format.readFeature(
         this.resultSelected$.getValue().data,
@@ -525,7 +514,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.computeFeatureGeoServiceStatus();
     combineLatest([
       this.resultSelected$,
-      this.map.layers$ as BehaviorSubject<Layer[]>
+      this.map.layerController.layers$
     ]).subscribe(() => {
       this.computeFeatureGeoServiceStatus();
     });
@@ -812,7 +801,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   handleLayer() {
-    const layersIds = this.map.layers.map((layer) => layer.id);
+    const layersIds = this.map.layerController.all.map((layer) => layer.id);
     let potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
     if (!potententialLayerToAdd) {
       this.computeFeatureGeoServiceStatus();
@@ -820,9 +809,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
 
     if (layersIds.includes(potententialLayerToAdd.id)) {
-      const layerToRemove = this.map.getLayerById(potententialLayerToAdd.id);
+      const layerToRemove = this.map.layerController.getById(
+        potententialLayerToAdd.id
+      );
       if (layerToRemove) {
-        this.map.removeLayer(layerToRemove);
+        this.map.layerController.remove(layerToRemove);
         this.potententialLayerisAdded$.next(false);
       }
     } else {
@@ -830,7 +821,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         .createAsyncLayer(potententialLayerToAdd.sourceOptions)
         .subscribe((layer) => {
           this.map.layersAddedByClick$.next([layer]);
-          this.map.addLayer(layer);
+          this.map.layerController.add(layer);
           this.potententialLayerisAdded$.next(true);
         });
     }
@@ -850,7 +841,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       );
       const soId = generateIdFromSourceOptions(so.sourceOptions);
       this.potententialLayerToAdd$.next({ id: soId, sourceOptions: so });
-      const layersIds = this.map.layers.map((l) => l.id);
+      const layersIds = this.map.layerController.all.map((l) => l.id);
       this.potententialLayerisAdded$.next(
         layersIds.includes(soId) ? true : false
       );
@@ -858,7 +849,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   private computeSourceOptionsFromProperties(
-    properties: {},
+    properties: unknown,
     geoService: ExtendedGeoServiceDefinition
   ) {
     const keys = Object.keys(properties);
@@ -866,7 +857,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       geoService.propertiesForLayerName.includes(p)
     );
     // providing the the first matching regex;
-    let layerName = properties[propertiesForLayerName[0]];
+    const layerName = properties[propertiesForLayerName[0]];
     const url = properties[geoService.propertyForUrl];
     let appliedLayerName = layerName;
     let arcgisLayerName = undefined;

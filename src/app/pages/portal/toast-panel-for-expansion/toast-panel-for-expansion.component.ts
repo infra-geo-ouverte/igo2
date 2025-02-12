@@ -49,6 +49,4 @@ export class ToastPanelForExpansionComponent {
   get displayStyle() {
     return this.withHeader || this.opened ? 'visible' : 'hidden';
   }
-
-  constructor() {}
 }

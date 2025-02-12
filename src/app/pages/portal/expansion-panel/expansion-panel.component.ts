@@ -36,7 +36,7 @@ export class ExpansionPanelComponent {
   }
   private _expanded: boolean;
 
-  @Input() maximized: Boolean = false;
+  @Input() maximized = false;
 
   @Input()
   get backdropShown(): boolean {
@@ -58,8 +58,6 @@ export class ExpansionPanelComponent {
   get hasExpandedFullClass() {
     return this.expanded && this.maximized;
   }
-
-  constructor() {}
 
   onBackdropClick() {
     this.expanded = false;

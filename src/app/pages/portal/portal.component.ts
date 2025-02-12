@@ -6,6 +6,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  Optional,
   ViewChild
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -223,7 +224,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public hasGeolocateButton = true;
   public showMenuButton = true;
   public showSearchBar = true;
-  public workspaceNotAvailableMessage: string = 'workspace.disabled.resolution';
+  public workspaceNotAvailableMessage = 'workspace.disabled.resolution';
   public workspacePaginator: MatPaginator;
   public workspaceEntitySortChange$ = new BehaviorSubject(false);
   public workspaceSwitchDisabled = false;
@@ -422,7 +423,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private configFileToGeoDBService: ConfigFileToGeoDBService
+    @Optional() private configFileToGeoDBService?: ConfigFileToGeoDBService
   ) {
     this.analyticsListenerService.listen();
     this.handleAppConfigs();
@@ -457,7 +458,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readLanguageParam(params);
     });
 
-    this.authService.authenticate$.subscribe((authenticated) => {
+    this.authService.authenticate$.subscribe(() => {
       this.contextLoaded = false;
     });
 
@@ -534,7 +535,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     });
 
     this.workspaceMaximize$$.push(
-      this.workspaceState.workspaceMaximize$.subscribe((workspaceMaximize) => {
+      this.workspaceState.workspaceMaximize$.subscribe(() => {
         this.updateMapBrowserClass();
       })
     );
@@ -593,12 +594,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.mediaService.orientation$
     ])
       .pipe(debounceTime(50))
-      .subscribe((sidenavMediaAndOrientation: [boolean, string, string]) => {
-        this.computeToastPanelOffsetX();
-      });
+      .subscribe(() => this.computeToastPanelOffsetX());
 
-    if (this.appConfig.importExport?.configFileToGeoDBService) {
-      this.configFileToGeoDBService.load(
+    if (
+      this.appConfig.app.offline?.enable &&
+      this.appConfig.importExport?.configFileToGeoDBService
+    ) {
+      this.configFileToGeoDBService?.load(
         this.appConfig.importExport.configFileToGeoDBService
       );
     }
@@ -664,7 +666,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
-    let feature = {
+    const feature = {
       type: 'Feature',
       properties: {}
     };
@@ -674,7 +676,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   createFeatureProperties(layer: ImageLayer | VectorLayer) {
-    let properties = {};
+    const properties = {};
     layer.options.sourceOptions.sourceFields.forEach((field) => {
       if (!field.primary && field.visible) {
         properties[field.name] = '';
@@ -1572,7 +1574,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     name: string,
     type: 'wms' | 'wmts' | 'arcgisrest' | 'imagearcgisrest' | 'tilearcgisrest',
     version: string,
-    visibility: boolean = true,
+    visibility = true,
     zIndex: number
   ) {
     if (!this.contextLoaded) {
@@ -1611,7 +1613,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           sourceOptions
         })
         .subscribe((l) => {
-          this.map.addLayer(l);
+          this.map.layerController.add(l);
         })
     );
   }
@@ -1684,7 +1686,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.dialogWindow.open(WelcomeWindowComponent, welcomWindowConfig)
       );
 
-      this.matDialogRef$.value.afterClosed().subscribe((result) => {
+      this.matDialogRef$.value.afterClosed().subscribe(() => {
         this.welcomeWindowService.afterClosedWelcomeWindow();
         this.matDialogRef$.next(undefined);
       });
@@ -1741,7 +1743,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   zoomToSelectedFeatureWks() {
-    let format = new olFormatGeoJSON();
+    const format = new olFormatGeoJSON();
     const featuresSelected = this.workspaceState.workspaceSelection.map(
       (rec) => rec.entity as Feature
     );
@@ -1750,7 +1752,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
     const olFeaturesSelected = [];
     for (const feat of featuresSelected) {
-      let localOlFeature = format.readFeature(feat, {
+      const localOlFeature = format.readFeature(feat, {
         dataProjection: feat.projection,
         featureProjection: this.map.projection
       });
