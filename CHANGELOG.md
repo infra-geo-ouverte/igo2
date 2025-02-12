@@ -1,13 +1,59 @@
+# [18.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v17.0.1...v18.0.0) (2025-02-12)
+
+
+### Bug Fixes
+
+* **core:** language add static/async loader ([#1169](https://github.com/infra-geo-ouverte/igo2/issues/1169)) ([f0133f7](https://github.com/infra-geo-ouverte/igo2/commit/f0133f7d0378d96c373ca8f6311fcd8e868a3b33))
+* missing imports and async theme ([265b761](https://github.com/infra-geo-ouverte/igo2/commit/265b761c5c9483611e06ebeff6a66cd0e805db2f))
+* set the default environment configuration ([1aacde3](https://github.com/infra-geo-ouverte/igo2/commit/1aacde3c5752f814e8faf84f871e44c4bf2e119c))
+
+
+### Code Refactoring
+
+* update to angular v18 ([#1163](https://github.com/infra-geo-ouverte/igo2/issues/1163)) ([0d180dd](https://github.com/infra-geo-ouverte/igo2/commit/0d180dd83244a07d6e7ffe67b5ceb4e3158f457b))
+
+
+### Features
+
+* allow the new layer group ([#1165](https://github.com/infra-geo-ouverte/igo2/issues/1165)) ([542c6c6](https://github.com/infra-geo-ouverte/igo2/commit/542c6c6d69fc13c9b1cc2835a13b4ed2330f77b5))
+
+
+### BREAKING CHANGES
+
+* Update Angular to v18 and others libs
+
+refactor: update Angular Material to v18
+
+chore: update package-lock and test
+
+
+
+## [17.0.1](https://github.com/infra-geo-ouverte/igo2/compare/v17.0.0...v17.0.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* add changelog ([7df1387](https://github.com/infra-geo-ouverte/igo2/commit/7df13874f0f5783ae3965c548388e7b48527f421))
+* missing imports and async theme ([c32336f](https://github.com/infra-geo-ouverte/igo2/commit/c32336fca02f1020eeee9cd0d86aed82ade4fd0e))
+
+
+
 # [17.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v16.3.0...v17.0.0) (2024-08-22)
 
 
 ### Bug Fixes
 
 * add google font symbols ([fb7af4a](https://github.com/infra-geo-ouverte/igo2/commit/fb7af4ac24d5b6c1d521f1e9aa840ee2b177fb74))
+* adjust @igo2/auth path ([#1153](https://github.com/infra-geo-ouverte/igo2/issues/1153)) ([03b8848](https://github.com/infra-geo-ouverte/igo2/commit/03b88485777947f3f93100c859be1cddeb2be85c))
 * **core:** use provideConfig ([6a93da4](https://github.com/infra-geo-ouverte/igo2/commit/6a93da431052db3b9053d793994a3215b3298eae))
+* don't include all icon variants ([e1e9fbc](https://github.com/infra-geo-ouverte/igo2/commit/e1e9fbcb8a1292e2a2d5486123473f314600fa84))
 * double head in index ([7626f6c](https://github.com/infra-geo-ouverte/igo2/commit/7626f6c07b55636a1fdd4dd641f6d9a907f9ff2a))
 * **environment:** add testgeoegl in trusted host ([e400086](https://github.com/infra-geo-ouverte/igo2/commit/e400086c0dfe4835f3b83856e9121c11bd1cdca0))
 * ol version to 9.1.0 ([9c66af3](https://github.com/infra-geo-ouverte/igo2/commit/9c66af336373e56df01da15d86b0ba1582868112))
+* provide icon ([6cfb3cd](https://github.com/infra-geo-ouverte/igo2/commit/6cfb3cda88faf7c16a46770147bab67f2bf45ad2))
+* **test:** add polyfill ([93572a3](https://github.com/infra-geo-ouverte/igo2/commit/93572a303af966d39c6cbf513507f202c9633567))
+* **toast:** find alternative icons in google font icons ([#1159](https://github.com/infra-geo-ouverte/igo2/issues/1159)) ([87f9b8c](https://github.com/infra-geo-ouverte/igo2/commit/87f9b8cdb73f2201a777ee64edff1f68b49063b5))
+* update lib to v17 ([c3c0102](https://github.com/infra-geo-ouverte/igo2/commit/c3c0102e37d9577f0ab7bb60a2590355f5d6b14c))
 
 
 ### Features
