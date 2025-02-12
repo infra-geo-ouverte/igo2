@@ -1,3 +1,33 @@
+# [18.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v17.0.1...v18.0.0) (2025-02-12)
+
+
+### Bug Fixes
+
+* **core:** language add static/async loader ([#1169](https://github.com/infra-geo-ouverte/igo2/issues/1169)) ([f0133f7](https://github.com/infra-geo-ouverte/igo2/commit/f0133f7d0378d96c373ca8f6311fcd8e868a3b33))
+* missing imports and async theme ([265b761](https://github.com/infra-geo-ouverte/igo2/commit/265b761c5c9483611e06ebeff6a66cd0e805db2f))
+* set the default environment configuration ([1aacde3](https://github.com/infra-geo-ouverte/igo2/commit/1aacde3c5752f814e8faf84f871e44c4bf2e119c))
+
+
+### Code Refactoring
+
+* update to angular v18 ([#1163](https://github.com/infra-geo-ouverte/igo2/issues/1163)) ([0d180dd](https://github.com/infra-geo-ouverte/igo2/commit/0d180dd83244a07d6e7ffe67b5ceb4e3158f457b))
+
+
+### Features
+
+* allow the new layer group ([#1165](https://github.com/infra-geo-ouverte/igo2/issues/1165)) ([542c6c6](https://github.com/infra-geo-ouverte/igo2/commit/542c6c6d69fc13c9b1cc2835a13b4ed2330f77b5))
+
+
+### BREAKING CHANGES
+
+* Update Angular to v18 and others libs
+
+refactor: update Angular Material to v18
+
+chore: update package-lock and test
+
+
+
 ## [17.0.1](https://github.com/infra-geo-ouverte/igo2/compare/v17.0.0...v17.0.1) (2024-09-25)
 
 
