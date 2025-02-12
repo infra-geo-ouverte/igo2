@@ -14,7 +14,6 @@ import { ExpansionPanelButtonComponent } from './expansion-panel-button/expansio
   templateUrl: './expansion-panel-header.component.html',
   styleUrls: ['./expansion-panel-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [ExpansionPanelButtonComponent]
 })
 export class ExpansionPanelHeaderComponent {

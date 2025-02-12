@@ -25,7 +25,6 @@ import { WelcomeWindowService } from './welcome-window.service';
   selector: 'app-welcome-window',
   templateUrl: './welcome-window.component.html',
   styleUrls: ['./welcome-window.component.scss'],
-  standalone: true,
   imports: [
     NgIf,
     MatToolbarModule,

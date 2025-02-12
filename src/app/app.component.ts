@@ -9,7 +9,6 @@ import {
   SpinnerActivityDirective,
   SpinnerComponent
 } from '@igo2/common/spinner';
-import { StopPropagationDirective } from '@igo2/common/stop-propagation';
 import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
 import { MessageService } from '@igo2/core/message';
@@ -27,13 +26,11 @@ import { PwaService } from './services/pwa.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true,
   imports: [
     SpinnerComponent,
     SpinnerActivityDirective,
     HeaderComponent,
     FooterComponent,
-    StopPropagationDirective,
     NgIf,
     AuthFormComponent,
     PortalComponent,

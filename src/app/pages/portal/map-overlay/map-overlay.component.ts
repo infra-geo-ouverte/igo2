@@ -13,7 +13,6 @@ import { MapOverlay } from './map-overlay.interface';
   selector: 'app-map-overlay',
   templateUrl: './map-overlay.component.html',
   styleUrls: ['./map-overlay.component.scss'],
-  standalone: true,
   imports: [NgFor, NgClass, NgIf, NgStyle]
 })
 export class MapOverlayComponent implements AfterViewInit, OnDestroy {
