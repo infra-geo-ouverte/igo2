@@ -18,7 +18,6 @@ import { showContent } from './expansion-panel.animations';
   styleUrls: ['./expansion-panel.component.scss'],
   animations: [showContent()],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [BackdropComponent, ExpansionPanelHeaderComponent]
 })
 export class ExpansionPanelComponent {

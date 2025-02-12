@@ -72,7 +72,6 @@ interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
   templateUrl: './toast-panel.component.html',
   styleUrls: ['./toast-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     ActionbarComponent,
     AsyncPipe,

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,13 +7,11 @@ import { IgoLanguageModule } from '@igo2/core/language';
 
 @Component({
   selector: 'app-expansion-panel-button',
-  standalone: true,
   imports: [
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    IgoLanguageModule,
-    NgIf
+    IgoLanguageModule
   ],
   templateUrl: './expansion-panel-button.component.html',
   styleUrls: ['./expansion-panel-button.component.scss']
