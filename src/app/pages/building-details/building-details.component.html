@@ -104,6 +104,14 @@
   <div class="coordinates">
     <div class="element-line google-maps-button">
       <img src="assets/images/location2.png" alt="" class="element-icon" />
+      <a
+        [routerLink]="['/carte']"
+        [queryParams]="{ center: buildingDetails.longitude + ',' + buildingDetails.latitude, zoom: 17 }"
+      >Voir sur la carte de l'outil de repérage
+      </a>
+    </div>
+    <div class="element-line google-maps-button">
+      <img src="assets/images/location2.png" alt="" class="element-icon" />
       <a [href]="google_full_map_url" target="_blank">Voir sur Google Maps</a>
     </div>
   </div>
