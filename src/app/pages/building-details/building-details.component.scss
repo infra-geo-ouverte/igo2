@@ -140,6 +140,33 @@
   background-color: #2774b3;
 }
 
+.carte-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #095797;
+  padding: 10px 15px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-weight: bold;
+  width: 359px;
+  height: 40px;
+  margin-left: 16px;
+  margin-top: 54px;
+  color: white;
+  border-width: 0px;
+}
+
+.carte-button img {
+  width: 20px;
+  height: 20px;
+  padding-bottom: 4px;
+}
+
+.carte-button:hover {
+  background-color: #2774b3;
+}
+
 .coordinates-caract {
   padding-left: 20px;
   padding-right: 20px;
