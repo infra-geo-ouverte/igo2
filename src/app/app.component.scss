@@ -1,4 +1,4 @@
-@import '@igo2/core/partial/core.variables';
+@use '@igo2/core/partial/core.variables' as core;
 
 :host {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -8,8 +8,8 @@
 
 igo-spinner {
   position: absolute;
-  top: $igo-margin;
-  right: $igo-margin;
+  top: core.$igo-margin;
+  right: core.$igo-margin;
   z-index: 100;
 }
 

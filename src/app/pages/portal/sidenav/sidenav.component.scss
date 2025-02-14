@@ -1,4 +1,6 @@
-@import '../portal.variables';
+@use '@igo2/core/partial/media';
+
+@use '../portal.variables' as portal;
 
 :host {
   background-color: rgb(255, 255, 255);
@@ -17,12 +19,12 @@
     // the sidenav from focusing a random button on open.
     z-index: 3 !important;
     height: 100%;
-    width: $app-sidenav-width;
+    width: portal.$app-sidenav-width;
     box-sizing: content-box;
 
-    @include mobile {
-      width: $app-sidenav-width-mobile;
-      max-width: $app-sidenav-width;
+    @include media.mobile {
+      width: portal.$app-sidenav-width-mobile;
+      max-width: portal.$app-sidenav-width;
     }
   }
 
@@ -37,10 +39,10 @@
   }
 
   .app-sidenav-content {
-    margin-top: $app-sidenav-margin-top;
-    height: $app-sidenav-height;
-    @include mobile {
-      height: calc(100% - #{$app-sidenav-margin-top});
+    margin-top: portal.$app-sidenav-margin-top;
+    height: portal.$app-sidenav-height;
+    @include media.mobile {
+      height: calc(100% - #{portal.$app-sidenav-margin-top});
     }
   }
 
@@ -54,7 +56,7 @@
   }
 
   igo-toolbox {
-    @include mobile {
+    @include media.mobile {
       overflow: auto;
     }
   }
