@@ -1,14 +1,14 @@
-@import '../portal/portal.variables.scss';
+@use '../portal/portal.variables' as portal;
 
 // Adjust portal height
 
 ::ng-deep .portal-with-header {
-  height: calc(100% - #{$header-height-mobile}) !important;
+  height: calc(100% - #{portal.$header-height-mobile}) !important;
 }
 
 @media screen and (min-width: 824px) {
   ::ng-deep .portal-with-header {
-    height: calc(100% - #{$header-height}) !important;
+    height: calc(100% - #{portal.$header-height}) !important;
   }
 }
 
@@ -244,7 +244,7 @@ ul li:last-child {
 
 ::ng-deep igo-spinner {
   position: absolute;
-  top: calc(#{$header-height-mobile} + 4px) !important;
+  top: calc(#{portal.$header-height-mobile} + 4px) !important;
   right: 4px;
   z-index: 100;
 }
@@ -294,7 +294,7 @@ ul li:last-child {
   }
 
   ::ng-deep igo-spinner {
-    top: calc(#{$header-height} + 4px) !important;
+    top: calc(#{portal.$header-height} + 4px) !important;
     right: 4px;
     z-index: 100;
   }

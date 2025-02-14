@@ -1,7 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, inject, provideAppInitializer } from '@angular/core';
-import { Provider, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  EnvironmentProviders,
+  inject,
+  provideAppInitializer
+} from '@angular/core';
+import { importProvidersFrom } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {
   MAT_TOOLTIP_DEFAULT_OPTIONS,
@@ -73,15 +78,19 @@ export const appConfig: ApplicationConfig = {
   ]
 };
 
-function provideTheme(): Provider {
+function provideTheme(): EnvironmentProviders {
   return provideAppInitializer(() => {
-        const initializerFn = ((configService: ConfigService, document: Document) => () =>
+    const initializerFn = () => {
+      const configService = inject(ConfigService);
+      const document = inject(DOCUMENT);
       configService.isLoaded$
         .pipe(first((isLoaded) => isLoaded))
         .subscribe(() => {
           const theme = configService.getConfig('theme', DEFAULT_THEME);
           loadTheme(document, theme);
-        }))(inject(ConfigService), inject(DOCUMENT));
-        return initializerFn();
-      });
+        });
+      return;
+    };
+    return initializerFn();
+  });
 }

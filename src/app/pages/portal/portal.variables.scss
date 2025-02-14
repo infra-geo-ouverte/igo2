@@ -1,5 +1,6 @@
-@import '@igo2/core/partial/media';
-@import 'variables';
+@use '@igo2/core/partial/media';
+@use 'variables';
+@use '@igo2/core/partial/core.variables' as core;
 
 $app-footer-height: 48px;
 $app-mobile-min-space-right: 48px;
@@ -35,12 +36,12 @@ $app-sidenav-margin-top: 48px + 5px; // Search bar height + margin-top
 $app-sidenav-height: calc(100% - #{$app-sidenav-margin-top});
 $app-sidenav-width: 400px;
 $app-sidenav-width-mobile: calc(
-  100% - #{$app-mobile-min-space-right} - #{$igo-margin}
+  100% - #{$app-mobile-min-space-right} - #{core.$igo-margin}
 );
 
-$search-bar-left: $igo-icon-size + $igo-margin;
-$search-bar-width: calc($app-sidenav-width - $igo-margin);
-$search-bar-width-mobile: calc($app-sidenav-width-mobile - $igo-margin);
+$search-bar-left: core.$igo-icon-size + core.$igo-margin;
+$search-bar-width: calc($app-sidenav-width - core.$igo-margin);
+$search-bar-width-mobile: calc($app-sidenav-width-mobile - core.$igo-margin);
 
 $app-footer-height: 49px;
 $toast-panel-for-expansion-collapsed-height: 48px;

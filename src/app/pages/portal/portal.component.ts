@@ -154,66 +154,66 @@ import { WelcomeWindowComponent } from './welcome-window/welcome-window.componen
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 
 @Component({
-    selector: 'app-portal',
-    templateUrl: './portal.component.html',
-    styleUrls: ['./portal.component.scss'],
-    animations: [
-        expansionPanelAnimation(),
-        toastPanelAnimation(),
-        controlsAnimations(),
-        controlSlideX(),
-        controlSlideY(),
-        mapSlideX(),
-        mapSlideY()
-    ],
-    imports: [
-        ActionbarComponent,
-        SidenavComponent,
-        AsyncPipe,
-        BackdropComponent,
-        ContextMenuDirective,
-        DropGeoFileDirective,
-        ENTITY_DIRECTIVES,
-        ExpansionPanelButtonComponent,
-        ExpansionPanelComponent,
-        LayerContextDirective,
-        LongPressDirective,
-        MatDialogModule,
-        IgoGeoWorkspaceModule,
-        MAP_DIRECTIVES,
-        MapContextDirective,
-        MapOverlayComponent,
-        MatButtonModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatTooltipModule,
-        NgClass,
-        NgIf,
-        QueryDirective,
-        SearchBarComponent,
-        SearchPointerSummaryDirective,
-        ToastPanelComponent,
-        ToastPanelForExpansionComponent,
-        TranslateModule,
-        UserButtonComponent,
-        WORKSPACE_DIRECTIVES,
-        WorkspaceSelectorDirective,
-        WorkspaceUpdatorDirective
-    ],
-    providers: [
-        provideSearch([
-            withCadastreSource(),
-            withCoordinatesReverseSource(),
-            withIChercheReverseSource(),
-            withIChercheSource(),
-            withILayerSource(),
-            withNominatimSource(),
-            withStoredQueriesSource(),
-            withWorkspaceSource()
-        ]),
-        provideDirection(withOsrmSource()),
-        SearchState
-    ]
+  selector: 'app-portal',
+  templateUrl: './portal.component.html',
+  styleUrls: ['./portal.component.scss'],
+  animations: [
+    expansionPanelAnimation(),
+    toastPanelAnimation(),
+    controlsAnimations(),
+    controlSlideX(),
+    controlSlideY(),
+    mapSlideX(),
+    mapSlideY()
+  ],
+  imports: [
+    ActionbarComponent,
+    SidenavComponent,
+    AsyncPipe,
+    BackdropComponent,
+    ContextMenuDirective,
+    DropGeoFileDirective,
+    ENTITY_DIRECTIVES,
+    ExpansionPanelButtonComponent,
+    ExpansionPanelComponent,
+    LayerContextDirective,
+    LongPressDirective,
+    MatDialogModule,
+    IgoGeoWorkspaceModule,
+    MAP_DIRECTIVES,
+    MapContextDirective,
+    MapOverlayComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    NgClass,
+    NgIf,
+    QueryDirective,
+    SearchBarComponent,
+    SearchPointerSummaryDirective,
+    ToastPanelComponent,
+    ToastPanelForExpansionComponent,
+    TranslateModule,
+    UserButtonComponent,
+    WORKSPACE_DIRECTIVES,
+    WorkspaceSelectorDirective,
+    WorkspaceUpdatorDirective
+  ],
+  providers: [
+    provideSearch([
+      withCadastreSource(),
+      withCoordinatesReverseSource(),
+      withIChercheReverseSource(),
+      withIChercheSource(),
+      withILayerSource(),
+      withNominatimSource(),
+      withStoredQueriesSource(),
+      withWorkspaceSource()
+    ]),
+    provideDirection(withOsrmSource()),
+    SearchState
+  ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
   public appConfig: EnvironmentOptions;

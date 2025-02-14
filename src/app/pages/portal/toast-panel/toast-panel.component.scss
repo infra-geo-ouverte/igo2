@@ -1,17 +1,17 @@
-@import '../portal.variables';
+@use '../portal.variables' as portal;
+@use '@igo2/core/partial/core.variables' as core;
+
+@use '@igo2/core/partial/media';
 
 :host {
   @extend %box-shadowed;
 
   background-color: white;
 
-  // height: $app-toast-panel-collapsed-height;
-  // max-height: $app-toast-panel-max-height;
-
   transition: height 280ms cubic-bezier(0.4, 0, 0.2, 1);
-  padding: $igo-padding;
+  padding: core.$igo-padding;
 
-  @include mobile {
+  @include media.mobile {
     width: 100%;
     min-width: 100%;
   }
@@ -36,7 +36,7 @@
   igo-feature-details ::ng-deep iframe {
     min-height: 24vh;
 
-    @include mobile {
+    @include media.mobile {
       min-height: 30vh;
     }
   }
@@ -44,7 +44,7 @@
   app-full-toast-panel-opened igo-feature-details[_ngcontent-fiq-c23] iframe {
     min-height: 450px;
 
-    @include mobile {
+    @include media.mobile {
       min-height: 350px;
     }
   }
@@ -55,34 +55,34 @@
 }
 
 .app-toast-panel-html {
-  height: $app-toast-panel-height;
+  height: portal.$app-toast-panel-height;
   max-height: fit-content;
-  width: $app-toast-panel-html-width;
+  width: portal.$app-toast-panel-html-width;
 
-  @include mobile {
+  @include media.mobile {
     width: 100%;
     min-width: 100%;
-    height: $app-toast-panel-height-mobile;
+    height: portal.$app-toast-panel-height-mobile;
   }
 
-  @include tablet {
-    width: $app-toast-panel-width-tablet;
+  @include media.tablet {
+    width: portal.$app-toast-panel-width-tablet;
   }
 }
 
 .app-toast-panel-html-large {
-  height: $app-toast-panel-html-large-height;
-  width: $app-toast-panel-html-width;
+  height: portal.$app-toast-panel-html-large-height;
+  width: portal.$app-toast-panel-html-width;
 
-  @include mobile {
+  @include media.mobile {
     width: 100%;
     min-width: 100%;
-    max-height: $app-full-toast-panel-max-height;
-    height: $app-full-toast-panel-height-mobile;
+    max-height: portal.$app-full-toast-panel-max-height;
+    height: portal.$app-full-toast-panel-height-mobile;
   }
 
-  @include tablet {
-    width: $app-toast-panel-width-tablet;
+  @include media.tablet {
+    width: portal.$app-toast-panel-width-tablet;
   }
 
   .toast-content {
@@ -94,104 +94,104 @@
 
 .app-toast-panel-opened {
   height: auto;
-  max-height: $app-toast-panel-max-height;
-  width: $app-toast-panel-width;
-  max-width: $app-toast-panel-max-width;
+  max-height: portal.$app-toast-panel-max-height;
+  width: portal.$app-toast-panel-width;
+  max-width: portal.$app-toast-panel-max-width;
   margin-bottom: 7px;
 
-  @include mobile {
-    max-height: $app-toast-panel-height-mobile;
+  @include media.mobile {
+    max-height: portal.$app-toast-panel-height-mobile;
     width: 100%;
     min-width: 100%;
   }
-  @include tablet {
-    width: $app-toast-panel-width-tablet;
+  @include media.tablet {
+    width: portal.$app-toast-panel-width-tablet;
   }
 
   .toast-content {
     height: 100%;
     width: 100%;
     max-height: calc(
-      #{$app-toast-panel-max-height} - 34px
+      #{portal.$app-toast-panel-max-height} - 34px
     ); // scroll bar inside panel
   }
 }
 
 .app-full-toast-panel-opened {
   height: auto;
-  max-height: $app-full-toast-panel-max-height;
-  width: $app-full-toast-panel-width;
+  max-height: portal.$app-full-toast-panel-max-height;
+  width: portal.$app-full-toast-panel-width;
 
   .toast-content {
     height: 100%;
     width: 100%;
     max-height: calc(
-      #{$app-full-toast-panel-max-height} - 41px
+      #{portal.$app-full-toast-panel-max-height} - 41px
     ); // scroll inside panel on overflow
   }
-  @include tablet {
-    width: $app-toast-panel-width-tablet;
+  @include media.tablet {
+    width: portal.$app-toast-panel-width-tablet;
     max-height: 500px;
 
     .toast-content {
-      max-height: calc(#{$app-full-toast-panel-max-height} - 21vh);
+      max-height: calc(#{portal.$app-full-toast-panel-max-height} - 21vh);
     }
   }
 
-  @include mobile {
+  @include media.mobile {
     width: 100%;
     min-width: 100%;
-    max-height: $app-full-toast-panel-max-height;
+    max-height: portal.$app-full-toast-panel-max-height;
   }
 }
 
 .app-toast-panel-collapsed {
-  height: $app-toast-panel-collapsed-height !important; // !important needed when expansion-panel is maximised
-  width: $app-toast-panel-width;
-  max-width: $app-toast-panel-max-width;
+  height: portal.$app-toast-panel-collapsed-height !important; // !important needed when expansion-panel is maximised
+  width: portal.$app-toast-panel-width;
+  max-width: portal.$app-toast-panel-max-width;
 
-  @include mobile {
+  @include media.mobile {
     width: 100%;
     min-width: 100%;
-    height: $app-toast-panel-collapsed-height-mobile !important;
+    height: portal.$app-toast-panel-collapsed-height-mobile !important;
   }
-  @include tablet {
-    width: $app-toast-panel-width-tablet;
+  @include media.tablet {
+    width: portal.$app-toast-panel-width-tablet;
   }
 }
 
 .app-full-toast-panel-collapsed {
-  height: $app-toast-panel-collapsed-height !important;
-  width: $app-full-toast-panel-width;
+  height: portal.$app-toast-panel-collapsed-height !important;
+  width: portal.$app-full-toast-panel-width;
 
-  @include mobile {
+  @include media.mobile {
     width: 100%;
     min-width: 100%;
-    height: $app-toast-panel-collapsed-height-mobile !important;
+    height: portal.$app-toast-panel-collapsed-height-mobile !important;
   }
-  @include tablet {
-    width: $app-toast-panel-width-tablet;
+  @include media.tablet {
+    width: portal.$app-toast-panel-width-tablet;
   }
 }
 
 .app-toast-panel-html-collapsed {
-  height: $app-toast-panel-collapsed-height !important;
-  width: $app-toast-panel-html-width;
+  height: portal.$app-toast-panel-collapsed-height !important;
+  width: portal.$app-toast-panel-html-width;
 
-  @include mobile {
+  @include media.mobile {
     width: 100%;
     min-width: 100%;
-    height: $app-toast-panel-collapsed-height-mobile !important;
+    height: portal.$app-toast-panel-collapsed-height-mobile !important;
   }
-  @include tablet {
-    width: $app-toast-panel-width-tablet;
+  @include media.tablet {
+    width: portal.$app-toast-panel-width-tablet;
   }
 }
 
 #app-toast-panel-opened-max-height {
-  height: $app-toast-panel-max-height !important;
+  height: portal.$app-toast-panel-max-height !important;
 }
 
 #app-full-toast-panel-opened-max-height {
-  height: $app-full-toast-panel-max-height !important;
+  height: portal.$app-full-toast-panel-max-height !important;
 }

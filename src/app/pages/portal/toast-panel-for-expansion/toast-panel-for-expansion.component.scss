@@ -1,25 +1,27 @@
-@import '../portal.variables';
+@use '@igo2/core/partial/core.variables' as core;
+@use '@igo2/core/partial/media';
+@use '../portal.variables' as portal;
 
 :host {
   @extend %box-shadowed;
 
   background-color: white;
 
-  height: $toast-panel-for-expansion-collapsed-height;
-  max-height: $toast-panel-for-expansion-max-height;
+  height: portal.$toast-panel-for-expansion-collapsed-height;
+  max-height: portal.$toast-panel-for-expansion-max-height;
 
   transition: height 280ms cubic-bezier(0.4, 0, 0.2, 1);
-  padding: $igo-padding;
+  padding: core.$igo-padding;
 
-  @include mobile {
+  @include media.mobile {
     max-height: 40%;
   }
 }
 
 :host.toast-panel-for-expansion-opened {
-  height: $toast-panel-for-expansion-max-height;
+  height: portal.$toast-panel-for-expansion-max-height;
 
-  @include mobile {
+  @include media.mobile {
     height: 40%;
   }
 }
