@@ -30,12 +30,15 @@
     background-color: $app-background-color;
     font-size: 16px;
     margin-left: $igo-margin;
-    //max-width: 825px;
-    //width: 100%;
-    //min-width: 640px;
 
-    &:focus-within {
-      border: 2px solid #095797;
+    ::ng-deep .mat-mdc-form-field {
+      &:hover {
+        border: 2px solid black !important;
+      }
+
+      &:focus-within {
+        border: 2px solid #095797 !important;
+      }
     }
   }
 
