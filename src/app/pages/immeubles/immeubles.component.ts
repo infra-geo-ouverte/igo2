@@ -86,7 +86,6 @@ export class ImmeublesComponent implements OnInit {
         this.pages = Math.ceil(this.total / this.limit);
         this.immeubles = response.data;
         this.cdr.markForCheck();
-        debugger;
       });
   }
 

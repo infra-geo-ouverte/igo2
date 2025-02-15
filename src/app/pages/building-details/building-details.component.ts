@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { first } from 'rxjs';
 import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
@@ -20,6 +20,7 @@ export class BuildingDetailsComponent implements OnInit {
   google_full_map_url: string;
 
   constructor(
+    private router: Router,
     private readonly route: ActivatedRoute,
     private immeublesService: ImmeublesService,
     private sanitizer: DomSanitizer,
@@ -86,6 +87,16 @@ export class BuildingDetailsComponent implements OnInit {
 
   toggleShowMap() {
     this.showingMap = !this.showingMap;
+  }
+
+  navigateToPoint() {
+    const center = `${this.buildingDetails.longitude},${this.buildingDetails.latitude}`;
+
+    this.router.navigate(['/carte'], {
+      queryParams: { center: center, zoom: 17 }
+    }).then(() => {
+      window.location.reload();
+    });
   }
 
   private extraireAdresseCourte(adresse: string): string {
