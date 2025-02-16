@@ -90,8 +90,8 @@
           ],
           "hoverStyle": {
             "data": [""],
-            "fill": ["rgba(51, 153, 204, 0)"],
-            "stroke": ["rgba(51, 153, 204, 0)"],
+            "fill": ["rgba(51, 153, 204, 0.4)"],
+            "stroke": ["rgba(51, 153, 204, 1.0)"],
             "radius": [25],
             "width": [2],
             "label": {
