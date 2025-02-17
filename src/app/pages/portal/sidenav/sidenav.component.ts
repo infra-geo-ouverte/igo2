@@ -128,6 +128,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
   set searchInit(value: boolean) {
     this._searchInit = value;
+
+    if (this._searchInit) {
+      this.openPanelSearch();
+    }
   }
   private _searchInit: boolean;
 
@@ -375,6 +379,13 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.panelOpenState = true;
     this.clearQuery();
     this.onClearSearch();
+    this.mapQueryClick = false;
+  }
+
+  openPanelSearch() {
+    this.opened = true;
+    this.panelOpenState = true;
+    this.clearQuery();
     this.mapQueryClick = false;
   }
 }
