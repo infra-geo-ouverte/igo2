@@ -126,9 +126,14 @@ export class SidenavComponent implements OnInit, OnDestroy {
   get searchInit(): boolean {
     return this._searchInit;
   }
+
   set searchInit(value: boolean) {
     this._searchInit = value;
+    if (this._searchInit) {
+      this.openPanelSearch();
+    }
   }
+
   private _searchInit: boolean;
 
   public hasToolbox: boolean = undefined;
@@ -213,6 +218,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.queryStore.entities$.subscribe((entities) => {
+      // eslint-disable-next-line eqeqeq
       if (entities.length == 1 && entities[0].data.properties.numero_immeuble) {
         this.opened = true;
         this.mapQueryClick = true;
@@ -358,6 +364,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   // LEGEND
 
   closePanelOnCloseLegend(event) {
+    // eslint-disable-next-line max-len
     // this flushes the legend whenever a user closes the panel. if not, the user has to click twice on the legend button to open the legend with the button
     this.closeLegend.emit();
     this.opened = false;
@@ -375,6 +382,13 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.panelOpenState = true;
     this.clearQuery();
     this.onClearSearch();
+    this.mapQueryClick = false;
+  }
+
+  openPanelSearch() {
+    this.opened = true;
+    this.panelOpenState = true;
+    this.clearQuery();
     this.mapQueryClick = false;
   }
 }

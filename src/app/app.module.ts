@@ -5,10 +5,15 @@ import {
   Injector,
   NgModule
 } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatFormFieldModule
+} from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import {
   MAT_TOOLTIP_DEFAULT_OPTIONS,
   MatTooltipDefaultOptions
@@ -49,8 +54,10 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { FilterValuesComponent } from './components/filter-values/filter-values.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { ImmeubleCardComponent } from './components/immeuble-card/immeuble-card.component';
+import { NumberPerPageComponent } from './components/number-per-page/number-per-page.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { FooterModule } from './layout/footer/footer.module';
 import { NavigationMenuComponent } from './layout/navigation-menu/navigation-menu.component';
@@ -58,12 +65,10 @@ import { NewHeaderComponent } from './layout/new-header/new-header.component';
 import { SearchBarComponent } from './layout/search-bar/search-bar.component';
 import { SubMenuComponent } from './layout/sub-menu/sub-menu.component';
 import { PortalModule } from './pages';
+import { BuildingDetailsComponent } from './pages/building-details/building-details.component';
 import { CarteComponent } from './pages/carte/carte.component';
 import { ImmeublesComponent } from './pages/immeubles/immeubles.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { NumberPerPageComponent } from './components/number-per-page/number-per-page.component';
-import { FilterValuesComponent } from './components/filter-values/filter-values.component';
-import { BuildingDetailsComponent } from './pages/building-details/building-details.component';
 
 const DEFAULT_THEME: string = 'blue-theme';
 
@@ -106,6 +111,10 @@ export const defaultTooltipOptions: MatTooltipDefaultOptions = {
     MatDividerModule,
     MatPaginatorModule,
     SearchBarComponent,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.igo.app.pwa.enabled,
       registrationStrategy: 'registerWithDelay:5000'

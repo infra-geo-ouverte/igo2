@@ -6,162 +6,385 @@
   <form class="form">
     <div class="filed">
       <label for="numero">Numéro civique</label>
-      <input
-        id="numero"
-        name="numero"
-        placeholder="Example de numéro civique"
-        type="text"
-        #numero_civiqueInput
-        (change)="
-          onChange('numero_civique', numero_civiqueInput?.value?.toLowerCase())
-        "
-      />
+      <mat-form-field appearance="outline">
+        <mat-select
+          placeholder="Afficher les filtres"
+          (selectionChange)="
+            onChange('numero_civique', $event.value.toLowerCase())
+          "
+        >
+          <mat-option>
+            <div #searchDiv class="search">
+              <div class="search-bar">
+                <input
+                  class="search-input"
+                  type="text"
+                  [formControl]="searchControl"
+                  (click)="$event.stopPropagation()"
+                  (focus)="onFocus()"
+                  (blur)="onBlur()"
+                />
+                <img
+                  src="assets/images/loop.svg"
+                  alt="Rechercher"
+                  class="search-icon"
+                />
+              </div>
+            </div>
+          </mat-option>
+          <mat-option
+            *ngFor="let number of filterOptions['numero_civique']"
+            [value]="number"
+          >
+            <mat-checkbox>{{ number }}</mat-checkbox>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="rue">Rue</label>
-      <input
-        id="rue"
-        name="rue"
-        placeholder="Example de rue"
-        type="text"
-        #rueInput
-        (change)="onChange('rue', rueInput?.value?.toLowerCase())"
-      />
+      <label for="numero">Rue</label>
+      <mat-form-field appearance="outline">
+        <mat-select
+          placeholder="Afficher les filtres"
+          (selectionChange)="onChange('rue', $event.value.toLowerCase())"
+        >
+          <mat-option>
+            <div #searchDiv class="search">
+              <div class="search-bar">
+                <input
+                  class="search-input"
+                  type="text"
+                  [formControl]="searchControl"
+                  (click)="$event.stopPropagation()"
+                  (focus)="onFocus()"
+                  (blur)="onBlur()"
+                />
+                <img
+                  src="assets/images/loop.svg"
+                  alt="Rechercher"
+                  class="search-icon"
+                />
+              </div>
+            </div>
+          </mat-option>
+          <mat-option *ngFor="let rue of filterOptions['rue']" [value]="rue">
+            <mat-checkbox>{{ rue }}</mat-checkbox>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="ville">Ville ou municipalité</label>
-      <input
-        id="ville"
-        name="ville"
-        placeholder="Example de ville ou municipalité"
-        type="text"
-        #ville_municipaliteInput
-        (change)="
-          onChange(
-            'ville_municipalite',
-            ville_municipaliteInput?.value?.toLowerCase()
-          )
-        "
-      />
+      <label for="numero">Ville ou municipalité</label>
+      <mat-form-field appearance="outline">
+        <mat-select
+          placeholder="Afficher les filtres"
+          (selectionChange)="
+            onChange('ville_municipalite', $event.value.toLowerCase())
+          "
+        >
+          <mat-option>
+            <div #searchDiv class="search">
+              <div class="search-bar">
+                <input
+                  class="search-input"
+                  type="text"
+                  [formControl]="searchControl"
+                  (click)="$event.stopPropagation()"
+                  (focus)="onFocus()"
+                  (blur)="onBlur()"
+                />
+                <img
+                  src="assets/images/loop.svg"
+                  alt="Rechercher"
+                  class="search-icon"
+                />
+              </div>
+            </div>
+          </mat-option>
+          <mat-option
+            *ngFor="
+              let ville_municipalite of filterOptions['ville_municipalite']
+            "
+            [value]="ville_municipalite"
+          >
+            <mat-checkbox>{{ ville_municipalite }}</mat-checkbox>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
     <mat-divider></mat-divider>
     <div class="filed">
       <label for="numero_immeuble">Numéro d'immeuble</label>
-      <input
-        id="numero_immeuble"
-        name="numero_immeuble"
-        placeholder="Example de numéro d'immeuble"
-        type="text"
-        #numero_immeubleInput
-        (change)="
-          onChange(
-            'numero_immeuble',
-            numero_immeubleInput?.value?.toLowerCase()
-          )
-        "
-      />
+      <mat-form-field appearance="outline">
+        <mat-select
+          placeholder="Afficher les filtres"
+          (selectionChange)="
+            onChange('numero_immeuble', $event.value.toLowerCase())
+          "
+        >
+          <mat-option>
+            <div #searchDiv class="search">
+              <div class="search-bar">
+                <input
+                  class="search-input"
+                  type="text"
+                  [formControl]="searchControl"
+                  (click)="$event.stopPropagation()"
+                  (focus)="onFocus()"
+                  (blur)="onBlur()"
+                />
+                <img
+                  src="assets/images/loop.svg"
+                  alt="Rechercher"
+                  class="search-icon"
+                />
+              </div>
+            </div>
+          </mat-option>
+          <mat-option
+            *ngFor="let numero_immeuble of filterOptions['numero_immeuble']"
+            [value]="numero_immeuble"
+          >
+            <mat-checkbox>{{ numero_immeuble }}</mat-checkbox>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
     <mat-divider></mat-divider>
     <div class="filed">
       <label for="direction">Direction immobilière</label>
-      <input
-        id="direction"
-        name="direction"
-        placeholder="Choisir une direction immobilière"
-        type="text"
-        #direction_immobiliere_nomInput
-        (change)="
-          onChange(
-            'direction_immobiliere_nom',
-            direction_immobiliere_nomInput?.value?.toLowerCase()
-          )
-        "
-      />
+      <mat-form-field appearance="outline">
+        <mat-select
+          placeholder="Afficher les filtres"
+          (selectionChange)="
+            onChange('direction_immobiliere_nom', $event.value.toLowerCase())
+          "
+        >
+          <mat-option>
+            <div #searchDiv class="search">
+              <div class="search-bar">
+                <input
+                  class="search-input"
+                  type="text"
+                  [formControl]="searchControl"
+                  (click)="$event.stopPropagation()"
+                  (focus)="onFocus()"
+                  (blur)="onBlur()"
+                />
+                <img
+                  src="assets/images/loop.svg"
+                  alt="Rechercher"
+                  class="search-icon"
+                />
+              </div>
+            </div>
+          </mat-option>
+          <mat-option
+            *ngFor="
+              let direction_immobiliere_nom of filterOptions[
+                'direction_immobiliere_nom'
+              ]
+            "
+            [value]="direction_immobiliere_nom"
+          >
+            <mat-checkbox>{{ direction_immobiliere_nom }}</mat-checkbox>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
     <mat-divider></mat-divider>
     <div
       class="ln"
-      [ngClass]="{'plus': !showingAdditionalFilters, 'minus': showingAdditionalFilters}"
+      [ngClass]="{
+        plus: !showingAdditionalFilters,
+        minus: showingAdditionalFilters
+      }"
       (click)="toggleShowAdditionalFilters()"
-      >
-        {{ showingAdditionalFilters ? 'Moins' : 'Plus'}} de filtres
-      </div>
+    >
+      {{ showingAdditionalFilters ? 'Moins' : 'Plus' }} de filtres
+    </div>
     <div *ngIf="showingAdditionalFilters">
-    <div class="filed">
-      <label for="nom_immeuble">Nom de l'immeuble</label>
-      <input
-        id="nom_immeuble"
-        name="nom_immeuble"
-        placeholder="Example de nom de l'immeuble"
-        type="text"
-        #nom_immeubleInput
-        (change)="
-          onChange('nom_immeuble', nom_immeubleInput?.value?.toLowerCase())
-        "
-      />
-    </div>
-    <mat-divider></mat-divider>
-    <div class="filed">
-      <label for="vocation">Vocation</label>
-      <input
-        id="vocation"
-        name="vocation"
-        placeholder="Choisir une vocation"
-        type="text"
-        #vocation_principaleInput
-        (change)="
-          onChange(
-            'vocation_principale',
-            vocation_principaleInput?.value?.toLowerCase()
-          )
-        "
-      />
-    </div>
-    <mat-divider></mat-divider>
-    <div class="filed">
-      <label for="region">Région administrative</label>
-      <input
-        id="region"
-        name="region"
-        placeholder="Choisir une région administrative"
-        type="text"
-        #region_adminsitrativeInput
-        (change)="
-          onChange(
-            'region_adminsitrative',
-            region_adminsitrativeInput?.value?.toLowerCase()
-          )
-        "
-      />
-    </div>
-    <mat-divider></mat-divider>
-    <div class="filed">
-      <label for="type_propriete_ou_location">Type</label>
-      <input
-        id="type_propriete_ou_location"
-        name="type_propriete_ou_location"
-        placeholder="Afficher les filtres"
-        type="text"
-        #type_propriete_ou_locationInput
-        (change)="
-        onChange(
-          'type_propriete_ou_location',
-          type_propriete_ou_locationInput?.value?.toLowerCase().substr(0,1)
-        )
-      "
-      />
-    </div>
-    <mat-divider></mat-divider>
-    <div class="filed line">
-      <input id="patrimonial" name="patrimonial" type="checkbox" />
-      <label for="patrimonial">Immeuble patrimonial</label>
-    </div>
-    <div class="filed line">
-      <input id="avec" name="avec" type="checkbox" />
-      <label for="avec">Immeuble avec dénomination</label>
-    </div>
+      <div class="filed">
+        <label for="nom_immeuble">Nom de l'immeuble</label>
+        <mat-form-field appearance="outline">
+          <mat-select
+            placeholder="Afficher les filtres"
+            (selectionChange)="
+              onChange('nom_immeuble', $event.value.toLowerCase())
+            "
+          >
+            <mat-option>
+              <div #searchDiv class="search">
+                <div class="search-bar">
+                  <input
+                    class="search-input"
+                    type="text"
+                    [formControl]="searchControl"
+                    (click)="$event.stopPropagation()"
+                    (focus)="onFocus()"
+                    (blur)="onBlur()"
+                  />
+                  <img
+                    src="assets/images/loop.svg"
+                    alt="Rechercher"
+                    class="search-icon"
+                  />
+                </div>
+              </div>
+            </mat-option>
+            <mat-option
+              *ngFor="let nom_immeuble of filterOptions['nom_immeuble']"
+              [value]="nom_immeuble"
+            >
+              <mat-checkbox>{{ nom_immeuble }}</mat-checkbox>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="filed">
+        <label for="vocation">Vocation</label>
+        <mat-form-field appearance="outline">
+          <mat-select
+            placeholder="Afficher les filtres"
+            (selectionChange)="
+              onChange('vocation_principale', $event.value.toLowerCase())
+            "
+          >
+            <mat-option>
+              <div #searchDiv class="search">
+                <div class="search-bar">
+                  <input
+                    class="search-input"
+                    type="text"
+                    [formControl]="searchControl"
+                    (click)="$event.stopPropagation()"
+                    (focus)="onFocus()"
+                    (blur)="onBlur()"
+                  />
+                  <img
+                    src="assets/images/loop.svg"
+                    alt="Rechercher"
+                    class="search-icon"
+                  />
+                </div>
+              </div>
+            </mat-option>
+            <mat-option
+              *ngFor="
+                let vocation_principale of filterOptions['vocation_principale']
+              "
+              [value]="vocation_principale"
+            >
+              <mat-checkbox>{{ vocation_principale }}</mat-checkbox>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="filed">
+        <label for="region">Région administrative</label>
+        <mat-form-field appearance="outline">
+          <mat-select
+            placeholder="Afficher les filtres"
+            (selectionChange)="
+              onChange('region_adminsitrative', $event.value.toLowerCase())
+            "
+          >
+            <mat-option>
+              <div #searchDiv class="search">
+                <div class="search-bar">
+                  <input
+                    class="search-input"
+                    type="text"
+                    [formControl]="searchControl"
+                    (click)="$event.stopPropagation()"
+                    (focus)="onFocus()"
+                    (blur)="onBlur()"
+                  />
+                  <img
+                    src="assets/images/loop.svg"
+                    alt="Rechercher"
+                    class="search-icon"
+                  />
+                </div>
+              </div>
+            </mat-option>
+            <mat-option
+              *ngFor="
+                let region_adminsitrative of filterOptions[
+                  'region_adminsitrative'
+                ]
+              "
+              [value]="region_adminsitrative"
+            >
+              <mat-checkbox>{{ region_adminsitrative }}</mat-checkbox>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="filed">
+        <label for="type_propriete_ou_location">Type</label>
+        <mat-form-field appearance="outline">
+          <mat-select
+            placeholder="Afficher les filtres"
+            (selectionChange)="
+              onChange('type_propriete_ou_location', $event.value.toLowerCase())
+            "
+          >
+            <mat-option>
+              <div #searchDiv class="search">
+                <div class="search-bar">
+                  <input
+                    class="search-input"
+                    type="text"
+                    [formControl]="searchControl"
+                    (click)="$event.stopPropagation()"
+                    (focus)="onFocus()"
+                    (blur)="onBlur()"
+                  />
+                  <img
+                    src="assets/images/loop.svg"
+                    alt="Rechercher"
+                    class="search-icon"
+                  />
+                </div>
+              </div>
+            </mat-option>
+            <mat-option
+              *ngFor="
+                let type_propriete_ou_location of filterOptions[
+                  'type_propriete_ou_location'
+                ]
+              "
+              [value]="type_propriete_ou_location"
+            >
+              <mat-checkbox>{{ type_propriete_ou_location }}</mat-checkbox>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="filed line">
+        <input id="patrimonial" name="patrimonial" type="checkbox" />
+        <label for="patrimonial">Immeuble patrimonial</label>
+      </div>
+      <div class="filed line">
+        <input id="avec" name="avec" type="checkbox" />
+        <label for="avec">Immeuble avec dénomination</label>
+      </div>
     </div>
   </form>
 </div>
