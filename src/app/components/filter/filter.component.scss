@@ -96,11 +96,17 @@
   margin-bottom: 20px;
   background-color: white;
   height: 40px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.container:active {
+  border-color: #8690a2;
+  box-shadow: 0 0 5px rgba(0, 183, 255, 0.7);
 }
 
 .container span {
-  color: #223654;
-  font-size: 16px;
+  color: #647287;
+  font-size: 14px;
 }
 
 .container-true {
@@ -120,8 +126,8 @@
 }
 
 .filter-close span {
-  color: #223654;
-  font-size: 16px;
+  color: #647287;
+  font-size: 14px;
 }
 
 .filter-close svg {
@@ -136,6 +142,12 @@
   padding: 8px;
   margin-left: 10px;
   margin-right: 10px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.search-bar:focus-within {
+  border-color: #8690a2;
+  box-shadow: 0 0 5px rgba(0, 183, 255, 0.7);
 }
 
 .search-icon {
@@ -157,6 +169,7 @@
   max-height: 200px;
   overflow-y: auto; /* Scroll activé */
   padding-top: 10px;
+  margin-bottom: 10px;
 }
 
 /*
