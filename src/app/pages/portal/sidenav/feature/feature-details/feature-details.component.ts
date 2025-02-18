@@ -127,6 +127,20 @@ export class FeatureDetailsComponent
     }
   }
 
+  formatAddress() {
+    if (!this.feature.properties.adresse_immeuble) return '';
+
+    let partis = this.feature.properties.adresse_immeuble
+      .split(',')
+      .map((p) => p.trim());
+
+    if (partis.length >= 4) {
+      return `${partis[0]}, ${partis[1]}\n${partis[2]}, ${partis[3]}\n ${partis.slice(4).join(' ')}`;
+    }
+
+    return this.feature.properties.adresse_immeuble; // Retourne l'adresse originale si elle ne suit pas le format attendu
+  }
+
   ngOnDestroy() {
     this.mapQueryClick = false;
     this.unsubscribe$.next();
