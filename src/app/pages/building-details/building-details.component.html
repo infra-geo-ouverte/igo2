@@ -1,9 +1,6 @@
 <div class="wrapper" *ngIf="buildingDetails">
   <div class="nom_de_immeuble">
-    {{
-      buildingDetails.nom_immeuble ||
-        'Immeuble ' + buildingDetails.numero_immeuble
-    }}
+    {{ buildingDetails.nom_immeuble || 'Fiche immeuble' }}
   </div>
   <div class="address">
     <img src="assets/images/location.jpg" alt="" class="icon" />
@@ -12,7 +9,7 @@
 
   <div class="coordinates">
     <div class="element" *ngIf="buildingDetails.nom_proprietaire">
-      <h2 class="element-title">Propriétaire</h2>
+      <h2 class="title">Propriétaire</h2>
       <div>
         <div class="element-line">
           {{ buildingDetails.nom_proprietaire }}
@@ -21,7 +18,7 @@
     </div>
 
     <div class="element">
-      <h2 class="element-title">Direction immobilière</h2>
+      <h2 class="title">Direction immobilière</h2>
       <div class="element-lines-wrapper">
         <div class="element-line">
           {{ buildingDetails.direction_immobiliere_nom }}
@@ -48,7 +45,7 @@
     </div>
 
     <div class="element">
-      <h2 class="element-title">
+      <h2 class="title">
         Coordonnateur à l'administration immobilière (CAI)
       </h2>
       <div class="element-lines-wrapper">
