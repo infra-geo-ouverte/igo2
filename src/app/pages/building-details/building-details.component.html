@@ -99,14 +99,13 @@
   </div>
 
   <div class="coordinates">
-
-      <button class="element-line carte-button" (click)="navigateToPoint()">
-        <img src="assets/images/location2.png" alt="" class="element-icon" />
-        Voir sur la carte de l'outil de repérage
-      </button>
-    <div class="element-line google-maps-button">
+    <button class="element-line carte-button" (click)="navigateToPoint()">
       <img src="assets/images/location2.png" alt="" class="element-icon" />
-      <a [href]="google_full_map_url" target="_blank">Voir sur Google Maps</a>
-    </div>
+      Voir sur la carte de l'outil de repérage
+    </button>
+    <button class="element-line google-button" (click)="openGoogleMaps()">
+      <img src="assets/images/location2.png" alt="" class="element-icon" />
+      Voir sur Google Maps
+    </button>
   </div>
 </div>

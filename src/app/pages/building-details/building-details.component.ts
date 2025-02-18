@@ -99,6 +99,10 @@ export class BuildingDetailsComponent implements OnInit {
     });
   }
 
+  openGoogleMaps() {
+    window.open(this.google_full_map_url, '_blank');
+  }
+
   private extraireAdresseCourte(adresse: string): string {
     return adresse.replace(/,\s*[A-Z]\d[A-Z] \d[A-Z]\d$/, '').trim(); //chercher un code postal canadien valide en fin de chaîne et le supprimer proprement.
   }
