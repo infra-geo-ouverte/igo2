@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { FilterService } from 'src/app/services/filter.service';
@@ -15,14 +9,12 @@ import { FilterService } from 'src/app/services/filter.service';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
-  @ViewChild('searchDiv') searchDiv!: ElementRef;
-
   showingAdditionalFilters = false;
   form: FormGroup;
   searchControl!: any;
 
-  // Objet dynamique pour stocker les valeurs des différents champs
-  filterOptions: { [key: string]: string[] } = {};
+  filterOptions: { [key: string]: string[] } = {}; // Objet dynamique pour stocker les valeurs des différents champs
+  originalFilterOptions: { [key: string]: string[] } = {}; //variable pour stocker les données originales avant filtrage
 
   constructor(
     private readonly fb: FormBuilder,
@@ -54,14 +46,21 @@ export class FilterComponent implements OnInit {
     columns.forEach((column) => {
       this.filterService.getValues(column).subscribe((values) => {
         this.filterOptions[column] = values;
+        this.originalFilterOptions[column] = [...values]; // Stockage des valeurs originales
       });
     });
 
-    // Mise à jour des options filtrées en fonction de la recherche
+    // Appliquer la recherche dynamiquement au champ actuellement ouvert
     this.searchControl.valueChanges.subscribe((value) => {
-      this.filterOptions['numero_civique'] = this.filterOptions[
-        'numero_civique'
-      ].filter((num) => num.toLowerCase().includes(value.toLowerCase()));
+      const activeFilter = Object.keys(this.showFiltersMap).find(
+        (key) => this.showFiltersMap[key]
+      );
+
+      if (activeFilter) {
+        this.filterOptions[activeFilter] = this.originalFilterOptions[
+          activeFilter
+        ].filter((item) => item.toLowerCase().includes(value.toLowerCase()));
+      }
     });
   }
 
@@ -79,11 +78,9 @@ export class FilterComponent implements OnInit {
     this.showingAdditionalFilters = !this.showingAdditionalFilters;
   }
 
-  onFocus() {
-    this.renderer.addClass(this.searchDiv.nativeElement, 'active-border');
-  }
+  showFiltersMap: { [key: string]: boolean } = {};
 
-  onBlur() {
-    this.renderer.removeClass(this.searchDiv.nativeElement, 'active-border');
+  toggleFilters(filterName: string) {
+    this.showFiltersMap[filterName] = !this.showFiltersMap[filterName];
   }
 }

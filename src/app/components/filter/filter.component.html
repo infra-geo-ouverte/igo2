@@ -6,186 +6,321 @@
   <form class="form">
     <div class="filed">
       <label for="numero">Numéro civique</label>
-      <mat-form-field appearance="outline">
-        <mat-select
-          placeholder="Afficher les filtres"
-          (selectionChange)="
-            onChange('numero_civique', $event.value.toLowerCase())
-          "
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['numero_civique']"
+        (click)="toggleFilters('numero_civique')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#8690a2"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <mat-option>
-            <div #searchDiv class="search">
-              <div class="search-bar">
-                <input
-                  class="search-input"
-                  type="text"
-                  [formControl]="searchControl"
-                  (click)="$event.stopPropagation()"
-                  (focus)="onFocus()"
-                  (blur)="onBlur()"
-                />
-                <img
-                  src="assets/images/loop.svg"
-                  alt="Rechercher"
-                  class="search-icon"
-                />
-              </div>
-            </div>
-          </mat-option>
-          <mat-option
-            *ngFor="let number of filterOptions['numero_civique']"
-            [value]="number"
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div *ngIf="showFiltersMap['numero_civique']" class="container-true">
+        <div (click)="toggleFilters('numero_civique')" class="filter-close">
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8690a2"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
-            <mat-checkbox>{{ number }}</mat-checkbox>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControl"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div *ngFor="let number of filterOptions['numero_civique']">
+            <mat-checkbox
+              (change)="onChange('numero_civique', number.toLowerCase())"
+              >{{ number }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
     </div>
 
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="numero">Rue</label>
-      <mat-form-field appearance="outline">
-        <mat-select
-          placeholder="Afficher les filtres"
-          (selectionChange)="onChange('rue', $event.value.toLowerCase())"
+      <label for="rue">Rue</label>
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['rue']"
+        (click)="toggleFilters('rue')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#8690a2"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <mat-option>
-            <div #searchDiv class="search">
-              <div class="search-bar">
-                <input
-                  class="search-input"
-                  type="text"
-                  [formControl]="searchControl"
-                  (click)="$event.stopPropagation()"
-                  (focus)="onFocus()"
-                  (blur)="onBlur()"
-                />
-                <img
-                  src="assets/images/loop.svg"
-                  alt="Rechercher"
-                  class="search-icon"
-                />
-              </div>
-            </div>
-          </mat-option>
-          <mat-option *ngFor="let rue of filterOptions['rue']" [value]="rue">
-            <mat-checkbox>{{ rue }}</mat-checkbox>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div *ngIf="showFiltersMap['rue']" class="container-true">
+        <div (click)="toggleFilters('rue')" class="filter-close">
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8690a2"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControl"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div *ngFor="let rue of filterOptions['rue']">
+            <mat-checkbox (change)="onChange('rue', rue.toLowerCase())">{{
+              rue
+            }}</mat-checkbox>
+          </div>
+        </div>
+      </div>
     </div>
 
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="numero">Ville ou municipalité</label>
-      <mat-form-field appearance="outline">
-        <mat-select
-          placeholder="Afficher les filtres"
-          (selectionChange)="
-            onChange('ville_municipalite', $event.value.toLowerCase())
-          "
+      <label for="ville">Ville ou municipalité</label>
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['ville_municipalite']"
+        (click)="toggleFilters('ville_municipalite')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#8690a2"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <mat-option>
-            <div #searchDiv class="search">
-              <div class="search-bar">
-                <input
-                  class="search-input"
-                  type="text"
-                  [formControl]="searchControl"
-                  (click)="$event.stopPropagation()"
-                  (focus)="onFocus()"
-                  (blur)="onBlur()"
-                />
-                <img
-                  src="assets/images/loop.svg"
-                  alt="Rechercher"
-                  class="search-icon"
-                />
-              </div>
-            </div>
-          </mat-option>
-          <mat-option
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div *ngIf="showFiltersMap['ville_municipalite']" class="container-true">
+        <div (click)="toggleFilters('ville_municipalite')" class="filter-close">
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8690a2"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControl"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div
             *ngFor="
               let ville_municipalite of filterOptions['ville_municipalite']
             "
             [value]="ville_municipalite"
           >
-            <mat-checkbox>{{ ville_municipalite }}</mat-checkbox>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <mat-checkbox
+              (change)="
+                onChange('ville_municipalite', ville_municipalite.toLowerCase())
+              "
+              >{{ ville_municipalite }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
     </div>
 
     <mat-divider></mat-divider>
     <div class="filed">
       <label for="numero_immeuble">Numéro d'immeuble</label>
-      <mat-form-field appearance="outline">
-        <mat-select
-          placeholder="Afficher les filtres"
-          (selectionChange)="
-            onChange('numero_immeuble', $event.value.toLowerCase())
-          "
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['numero_immeuble']"
+        (click)="toggleFilters('numero_immeuble')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#8690a2"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <mat-option>
-            <div #searchDiv class="search">
-              <div class="search-bar">
-                <input
-                  class="search-input"
-                  type="text"
-                  [formControl]="searchControl"
-                  (click)="$event.stopPropagation()"
-                  (focus)="onFocus()"
-                  (blur)="onBlur()"
-                />
-                <img
-                  src="assets/images/loop.svg"
-                  alt="Rechercher"
-                  class="search-icon"
-                />
-              </div>
-            </div>
-          </mat-option>
-          <mat-option
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div *ngIf="showFiltersMap['numero_immeuble']" class="container-true">
+        <div (click)="toggleFilters('numero_immeuble')" class="filter-close">
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8690a2"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControl"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div
             *ngFor="let numero_immeuble of filterOptions['numero_immeuble']"
             [value]="numero_immeuble"
           >
-            <mat-checkbox>{{ numero_immeuble }}</mat-checkbox>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <mat-checkbox
+              (change)="
+                onChange('numero_immeuble', numero_immeuble.toLowerCase())
+              "
+              >{{ numero_immeuble }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
     </div>
 
     <mat-divider></mat-divider>
     <div class="filed">
       <label for="direction">Direction immobilière</label>
-      <mat-form-field appearance="outline">
-        <mat-select
-          placeholder="Afficher les filtres"
-          (selectionChange)="
-            onChange('direction_immobiliere_nom', $event.value.toLowerCase())
-          "
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['direction_immobiliere_nom']"
+        (click)="toggleFilters('direction_immobiliere_nom')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#8690a2"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <mat-option>
-            <div #searchDiv class="search">
-              <div class="search-bar">
-                <input
-                  class="search-input"
-                  type="text"
-                  [formControl]="searchControl"
-                  (click)="$event.stopPropagation()"
-                  (focus)="onFocus()"
-                  (blur)="onBlur()"
-                />
-                <img
-                  src="assets/images/loop.svg"
-                  alt="Rechercher"
-                  class="search-icon"
-                />
-              </div>
-            </div>
-          </mat-option>
-          <mat-option
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div
+        *ngIf="showFiltersMap['direction_immobiliere_nom']"
+        class="container-true"
+      >
+        <div
+          (click)="toggleFilters('direction_immobiliere_nom')"
+          class="filter-close"
+        >
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8690a2"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControl"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div
             *ngFor="
               let direction_immobiliere_nom of filterOptions[
                 'direction_immobiliere_nom'
@@ -193,10 +328,15 @@
             "
             [value]="direction_immobiliere_nom"
           >
-            <mat-checkbox>{{ direction_immobiliere_nom }}</mat-checkbox>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <mat-checkbox
+              (change)="
+                onChange('direction_immobiliere_nom', number.toLowerCase())
+              "
+              >{{ direction_immobiliere_nom }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
     </div>
 
     <mat-divider></mat-divider>
@@ -213,113 +353,205 @@
     <div *ngIf="showingAdditionalFilters">
       <div class="filed">
         <label for="nom_immeuble">Nom de l'immeuble</label>
-        <mat-form-field appearance="outline">
-          <mat-select
-            placeholder="Afficher les filtres"
-            (selectionChange)="
-              onChange('nom_immeuble', $event.value.toLowerCase())
-            "
+        <div
+          class="container"
+          *ngIf="!showFiltersMap['nom_immeuble']"
+          (click)="toggleFilters('nom_immeuble')"
+        >
+          <span>Afficher les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8690a2"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
-            <mat-option>
-              <div #searchDiv class="search">
-                <div class="search-bar">
-                  <input
-                    class="search-input"
-                    type="text"
-                    [formControl]="searchControl"
-                    (click)="$event.stopPropagation()"
-                    (focus)="onFocus()"
-                    (blur)="onBlur()"
-                  />
-                  <img
-                    src="assets/images/loop.svg"
-                    alt="Rechercher"
-                    class="search-icon"
-                  />
-                </div>
-              </div>
-            </mat-option>
-            <mat-option
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </div>
+        <!-- Affichage du filtre uniquement si showFilters est vrai -->
+        <div *ngIf="showFiltersMap['nom_immeuble']" class="container-true">
+          <div (click)="toggleFilters('nom_immeuble')" class="filter-close">
+            <span>Masquer les filtres</span>
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#8690a2"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 -6 6 6"></path>
+            </svg>
+          </div>
+          <div class="search-bar">
+            <input
+              class="search-input"
+              type="text"
+              [formControl]="searchControl"
+            />
+            <img
+              src="assets/images/loop.svg"
+              alt="Rechercher"
+              class="search-icon"
+            />
+          </div>
+          <div class="checkbox-list">
+            <div
               *ngFor="let nom_immeuble of filterOptions['nom_immeuble']"
               [value]="nom_immeuble"
             >
-              <mat-checkbox>{{ nom_immeuble }}</mat-checkbox>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+              <mat-checkbox
+                (change)="onChange('nom_immeuble', nom_immeuble.toLowerCase())"
+                >{{ nom_immeuble }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
       </div>
 
       <mat-divider></mat-divider>
       <div class="filed">
         <label for="vocation">Vocation</label>
-        <mat-form-field appearance="outline">
-          <mat-select
-            placeholder="Afficher les filtres"
-            (selectionChange)="
-              onChange('vocation_principale', $event.value.toLowerCase())
-            "
+        <div
+          class="container"
+          *ngIf="!showFiltersMap['vocation_principale']"
+          (click)="toggleFilters('vocation_principale')"
+        >
+          <span>Afficher les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8690a2"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
-            <mat-option>
-              <div #searchDiv class="search">
-                <div class="search-bar">
-                  <input
-                    class="search-input"
-                    type="text"
-                    [formControl]="searchControl"
-                    (click)="$event.stopPropagation()"
-                    (focus)="onFocus()"
-                    (blur)="onBlur()"
-                  />
-                  <img
-                    src="assets/images/loop.svg"
-                    alt="Rechercher"
-                    class="search-icon"
-                  />
-                </div>
-              </div>
-            </mat-option>
-            <mat-option
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </div>
+        <!-- Affichage du filtre uniquement si showFilters est vrai -->
+        <div
+          *ngIf="showFiltersMap['vocation_principale']"
+          class="container-true"
+        >
+          <div
+            (click)="toggleFilters('vocation_principale')"
+            class="filter-close"
+          >
+            <span>Masquer les filtres</span>
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#8690a2"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 -6 6 6"></path>
+            </svg>
+          </div>
+          <div class="search-bar">
+            <input
+              class="search-input"
+              type="text"
+              [formControl]="searchControl"
+            />
+            <img
+              src="assets/images/loop.svg"
+              alt="Rechercher"
+              class="search-icon"
+            />
+          </div>
+          <div class="checkbox-list">
+            <div
               *ngFor="
                 let vocation_principale of filterOptions['vocation_principale']
               "
               [value]="vocation_principale"
             >
-              <mat-checkbox>{{ vocation_principale }}</mat-checkbox>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+              <mat-checkbox
+                (change)="
+                  onChange(
+                    'vocation_principale',
+                    vocation_principale.toLowerCase()
+                  )
+                "
+                >{{ vocation_principale }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
       </div>
 
       <mat-divider></mat-divider>
       <div class="filed">
         <label for="region">Région administrative</label>
-        <mat-form-field appearance="outline">
-          <mat-select
-            placeholder="Afficher les filtres"
-            (selectionChange)="
-              onChange('region_adminsitrative', $event.value.toLowerCase())
-            "
+        <div
+          class="container"
+          *ngIf="!showFiltersMap['region_adminsitrative']"
+          (click)="toggleFilters('region_adminsitrative')"
+        >
+          <span>Afficher les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8690a2"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
-            <mat-option>
-              <div #searchDiv class="search">
-                <div class="search-bar">
-                  <input
-                    class="search-input"
-                    type="text"
-                    [formControl]="searchControl"
-                    (click)="$event.stopPropagation()"
-                    (focus)="onFocus()"
-                    (blur)="onBlur()"
-                  />
-                  <img
-                    src="assets/images/loop.svg"
-                    alt="Rechercher"
-                    class="search-icon"
-                  />
-                </div>
-              </div>
-            </mat-option>
-            <mat-option
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </div>
+        <!-- Affichage du filtre uniquement si showFilters est vrai -->
+        <div
+          *ngIf="showFiltersMap['region_adminsitrative']"
+          class="container-true"
+        >
+          <div
+            (click)="toggleFilters('region_adminsitrative')"
+            class="filter-close"
+          >
+            <span>Masquer les filtres</span>
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#8690a2"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 -6 6 6"></path>
+            </svg>
+          </div>
+          <div class="search-bar">
+            <input
+              class="search-input"
+              type="text"
+              [formControl]="searchControl"
+            />
+            <img
+              src="assets/images/loop.svg"
+              alt="Rechercher"
+              class="search-icon"
+            />
+          </div>
+          <div class="checkbox-list">
+            <div
               *ngFor="
                 let region_adminsitrative of filterOptions[
                   'region_adminsitrative'
@@ -327,42 +559,79 @@
               "
               [value]="region_adminsitrative"
             >
-              <mat-checkbox>{{ region_adminsitrative }}</mat-checkbox>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+              <mat-checkbox
+                (change)="
+                  onChange(
+                    'region_adminsitrative',
+                    region_adminsitrative.toLowerCase()
+                  )
+                "
+                >{{ region_adminsitrative }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
       </div>
 
       <mat-divider></mat-divider>
       <div class="filed">
         <label for="type_propriete_ou_location">Type</label>
-        <mat-form-field appearance="outline">
-          <mat-select
-            placeholder="Afficher les filtres"
-            (selectionChange)="
-              onChange('type_propriete_ou_location', $event.value.toLowerCase())
-            "
+        <div
+          class="container"
+          *ngIf="!showFiltersMap['type_propriete_ou_location']"
+          (click)="toggleFilters('type_propriete_ou_location')"
+        >
+          <span>Afficher les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#8690a2"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
-            <mat-option>
-              <div #searchDiv class="search">
-                <div class="search-bar">
-                  <input
-                    class="search-input"
-                    type="text"
-                    [formControl]="searchControl"
-                    (click)="$event.stopPropagation()"
-                    (focus)="onFocus()"
-                    (blur)="onBlur()"
-                  />
-                  <img
-                    src="assets/images/loop.svg"
-                    alt="Rechercher"
-                    class="search-icon"
-                  />
-                </div>
-              </div>
-            </mat-option>
-            <mat-option
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </div>
+        <!-- Affichage du filtre uniquement si showFilters est vrai -->
+        <div
+          *ngIf="showFiltersMap['type_propriete_ou_location']"
+          class="container-true"
+        >
+          <div
+            (click)="toggleFilters('type_propriete_ou_location')"
+            class="filter-close"
+          >
+            <span>Masquer les filtres</span>
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#8690a2"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 -6 6 6"></path>
+            </svg>
+          </div>
+          <div class="search-bar">
+            <input
+              class="search-input"
+              type="text"
+              [formControl]="searchControl"
+            />
+            <img
+              src="assets/images/loop.svg"
+              alt="Rechercher"
+              class="search-icon"
+            />
+          </div>
+          <div class="checkbox-list">
+            <div
               *ngFor="
                 let type_propriete_ou_location of filterOptions[
                   'type_propriete_ou_location'
@@ -370,10 +639,18 @@
               "
               [value]="type_propriete_ou_location"
             >
-              <mat-checkbox>{{ type_propriete_ou_location }}</mat-checkbox>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+              <mat-checkbox
+                (change)="
+                  onChange(
+                    'type_propriete_ou_location',
+                    type_propriete_ou_location.toLowerCase()
+                  )
+                "
+                >{{ type_propriete_ou_location }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
       </div>
 
       <mat-divider></mat-divider>
