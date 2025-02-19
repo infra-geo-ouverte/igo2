@@ -57,7 +57,13 @@
         <div class="checkbox-list">
           <div *ngFor="let number of filterOptions['numero_civique']">
             <mat-checkbox
+              class="custom-checkbox"
               (change)="onChange('numero_civique', number.toLowerCase())"
+              [checked]="
+                selectedFilters['numero_civique']?.includes(
+                  number.toLowerCase()
+                )
+              "
               >{{ number }}</mat-checkbox
             >
           </div>
@@ -118,9 +124,11 @@
         </div>
         <div class="checkbox-list">
           <div *ngFor="let rue of filterOptions['rue']">
-            <mat-checkbox (change)="onChange('rue', rue.toLowerCase())">{{
-              rue
-            }}</mat-checkbox>
+            <mat-checkbox
+              (change)="onChange('rue', rue.toLowerCase())"
+              [checked]="selectedFilters['rue']?.includes(rue.toLowerCase())"
+              >{{ rue }}</mat-checkbox
+            >
           </div>
         </div>
       </div>
@@ -188,6 +196,11 @@
               (change)="
                 onChange('ville_municipalite', ville_municipalite.toLowerCase())
               "
+              [checked]="
+                selectedFilters['ville_municipalite']?.includes(
+                  ville_municipalite.toLowerCase()
+                )
+              "
               >{{ ville_municipalite }}</mat-checkbox
             >
           </div>
@@ -254,6 +267,11 @@
             <mat-checkbox
               (change)="
                 onChange('numero_immeuble', numero_immeuble.toLowerCase())
+              "
+              [checked]="
+                selectedFilters['numero_immeuble']?.includes(
+                  numero_immeuble.toLowerCase()
+                )
               "
               >{{ numero_immeuble }}</mat-checkbox
             >
@@ -330,7 +348,15 @@
           >
             <mat-checkbox
               (change)="
-                onChange('direction_immobiliere_nom', number.toLowerCase())
+                onChange(
+                  'direction_immobiliere_nom',
+                  direction_immobiliere_nom.toLowerCase()
+                )
+              "
+              [checked]="
+                selectedFilters['direction_immobiliere_nom']?.includes(
+                  direction_immobiliere_nom.toLowerCase()
+                )
               "
               >{{ direction_immobiliere_nom }}</mat-checkbox
             >
@@ -408,6 +434,11 @@
             >
               <mat-checkbox
                 (change)="onChange('nom_immeuble', nom_immeuble.toLowerCase())"
+                [checked]="
+                  selectedFilters['nom_immeuble']?.includes(
+                    nom_immeuble.toLowerCase()
+                  )
+                "
                 >{{ nom_immeuble }}</mat-checkbox
               >
             </div>
@@ -483,6 +514,11 @@
                 (change)="
                   onChange(
                     'vocation_principale',
+                    vocation_principale.toLowerCase()
+                  )
+                "
+                [checked]="
+                  selectedFilters['vocation_principale']?.includes(
                     vocation_principale.toLowerCase()
                   )
                 "
@@ -566,6 +602,11 @@
                     region_adminsitrative.toLowerCase()
                   )
                 "
+                [checked]="
+                  selectedFilters['region_adminsitrative']?.includes(
+                    region_adminsitrative.toLowerCase()
+                  )
+                "
                 >{{ region_adminsitrative }}</mat-checkbox
               >
             </div>
@@ -643,6 +684,11 @@
                 (change)="
                   onChange(
                     'type_propriete_ou_location',
+                    type_propriete_ou_location.toLowerCase()
+                  )
+                "
+                [checked]="
+                  selectedFilters['type_propriete_ou_location']?.includes(
                     type_propriete_ou_location.toLowerCase()
                   )
                 "

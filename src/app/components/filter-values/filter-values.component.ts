@@ -8,7 +8,7 @@ import { FilterService } from 'src/app/services/filter.service';
   styleUrls: ['./filter-values.component.scss']
 })
 export class FilterValuesComponent implements OnInit {
-  valuesMap = new Map<string, string>();
+  valuesMap = new Map<string, string[]>();
 
   constructor(private filterService: FilterService) {}
 
@@ -19,7 +19,17 @@ export class FilterValuesComponent implements OnInit {
     });
   }
 
-  onDelete(key: string) {
-    this.filterService.onDelete(key);
+  onDeleteValue(key: string, value: string) {
+    const values = this.valuesMap.get(key) || [];
+    const newValues = values.filter((v) => v !== value);
+
+    if (newValues.length > 0) {
+      this.valuesMap.set(key, newValues);
+    } else {
+      this.valuesMap.delete(key); // Supprime la clé si plus aucune valeur
+    }
+
+    this.filterService.filter.next(this.valuesMap);
+    this.filterService.notifyFilterRemoved(key, value);
   }
 }

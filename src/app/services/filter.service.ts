@@ -11,13 +11,38 @@ export class FilterService {
   private apiUrl =
     'http://vps-5d30fe87.vps.ovh.ca:3000/v1/values/immeublesVw2?column=';
 
-  private valuesMap = new Map<string, string>();
-  filter = new BehaviorSubject<Map<string, string>>(this.valuesMap);
+  private valuesMap = new Map<string, string[]>();
+  filter = new BehaviorSubject<Map<string, string[]>>(this.valuesMap);
+
+  private filterRemoved = new BehaviorSubject<{
+    key: string;
+    value: string;
+  } | null>(null);
+  filterRemoved$ = this.filterRemoved.asObservable();
 
   constructor(private http: HttpClient) {}
 
   onFilter(key: string, value: string) {
-    this.valuesMap.set(key, value);
+    if (!this.valuesMap.has(key)) {
+      this.valuesMap.set(key, [value]); // Si la clé n'existe pas, créer un tableau avec la valeur
+    } else {
+      const existingValues = this.valuesMap.get(key) || []; // Récupération des valeurs existantes du filtre
+      if (existingValues.includes(value)) {
+        // Si la valeur est déjà sélectionnée, la retirer (décocher)
+        this.valuesMap.set(
+          key,
+          existingValues.filter((v) => v !== value)
+        );
+      } else {
+        // Sinon, l'ajouter
+        this.valuesMap.set(key, [...existingValues, value]);
+      }
+    }
+    this.filter.next(this.valuesMap);
+  }
+
+  onClearFilters() {
+    this.valuesMap.clear();
     this.filter.next(this.valuesMap);
   }
 
@@ -36,5 +61,9 @@ export class FilterService {
             .filter((value) => value.trim() !== '')
         )
       );
+  }
+
+  notifyFilterRemoved(key: string, value: string) {
+    this.filterRemoved.next({ key, value });
   }
 }

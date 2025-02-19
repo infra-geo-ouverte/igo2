@@ -17,7 +17,7 @@ export class ImmeublesComponent implements OnInit {
   offset = 0;
   total = 0;
   pages = 1;
-  valuesMap = new Map<string, string>();
+  valuesMap = new Map<string, string[]>();
 
   constructor(
     private immeublesService: ImmeublesService,
@@ -55,10 +55,15 @@ export class ImmeublesComponent implements OnInit {
     this.getImmeubles();
   }
 
-  getFilterParam(valuesMap: Map<string, string>) {
+  getFilterParam(valuesMap: Map<string, string[]>) {
     let filterString = ' ';
-    valuesMap.forEach((value, key) => {
-      filterString += `lower(${key}) LIKE '%${value}%'&`;
+    valuesMap.forEach((values, key) => {
+      if (values.length > 0) {
+        const conditions = values
+          .map((value) => `lower(${key}) LIKE '%${value}%'`)
+          .join(' OR ');
+        filterString += `(${conditions})&`;
+      }
     });
     return filterString.substring(0, filterString.length - 1);
   }
