@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { FilterService } from 'src/app/services/filter.service';
 
@@ -11,7 +11,7 @@ import { FilterService } from 'src/app/services/filter.service';
 export class FilterComponent implements OnInit {
   showingAdditionalFilters = false;
   form: FormGroup;
-  searchControl!: any;
+  searchControls: { [key: string]: FormControl } = {};
 
   filterOptions: { [key: string]: string[] } = {}; // Contient les options filtrées
   originalFilterOptions: { [key: string]: string[] } = {}; // Stocke les valeurs originales des filtres
@@ -30,8 +30,6 @@ export class FilterComponent implements OnInit {
       numero: this.fb.control('')
     });
 
-    this.searchControl = this.fb.control('');
-
     // Liste des colonnes à récupérer
     const columns = [
       'numero_civique',
@@ -47,24 +45,19 @@ export class FilterComponent implements OnInit {
 
     // Récupération dynamique des données pour chaque champ
     columns.forEach((column) => {
+      this.searchControls[column] = new FormControl('');
       this.filterService.getValues(column).subscribe((values) => {
         this.filterOptions[column] = values;
         this.originalFilterOptions[column] = [...values]; // Stockage des valeurs originales.une copie pour réinitialisation
         this.selectedFilters[column] = [];
       });
-    });
 
-    // Appliquer la recherche dynamiquement au champ actuellement ouvert
-    this.searchControl.valueChanges.subscribe((value) => {
-      const activeFilter = Object.keys(this.showFiltersMap).find(
-        (key) => this.showFiltersMap[key]
-      );
-
-      if (activeFilter) {
-        this.filterOptions[activeFilter] = this.originalFilterOptions[
-          activeFilter
-        ].filter((item) => item.toLowerCase().includes(value.toLowerCase()));
-      }
+      // Appliquer la recherche dynamiquement au champ actuellement ouvert
+      this.searchControls[column].valueChanges.subscribe((value) => {
+        this.filterOptions[column] = this.originalFilterOptions[column].filter(
+          (item) => item.toLowerCase().includes(value.toLowerCase())
+        );
+      });
     });
 
     this.filterService.filterRemoved$.subscribe((removedFilter) => {
@@ -79,7 +72,9 @@ export class FilterComponent implements OnInit {
 
   onClear() {
     this.form.reset();
-    this.searchControl.setValue('');
+    Object.keys(this.searchControls).forEach((key) =>
+      this.searchControls[key].setValue('')
+    );
     this.filterOptions = {};
     this.selectedFilters = {};
   }
