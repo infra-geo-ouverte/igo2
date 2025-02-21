@@ -83,7 +83,14 @@
 
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="rue">Rue</label>
+      <div class="head">
+        <label for="rue">Rue</label>
+        <span class="selection-count" *ngIf="selectedFilters['rue']?.length">
+          {{ selectedFilters['rue'].length }} sélection{{
+            selectedFilters['rue'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
       <div
         class="container"
         *ngIf="!showFiltersMap['rue']"
@@ -146,7 +153,17 @@
 
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="ville">Ville ou municipalité</label>
+      <div class="head">
+        <label for="ville">Ville ou municipalité</label>
+        <span
+          class="selection-count"
+          *ngIf="selectedFilters['ville_municipalite']?.length"
+        >
+          {{ selectedFilters['ville_municipalite'].length }} sélection{{
+            selectedFilters['ville_municipalite'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
       <div
         class="container"
         *ngIf="!showFiltersMap['ville_municipalite']"
@@ -220,7 +237,17 @@
 
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="numero_immeuble">Numéro d'immeuble</label>
+      <div class="head">
+        <label for="numero_immeuble">Numéro d'immeuble</label>
+        <span
+          class="selection-count"
+          *ngIf="selectedFilters['numero_immeuble']?.length"
+        >
+          {{ selectedFilters['numero_immeuble'].length }} sélection{{
+            selectedFilters['numero_immeuble'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
       <div
         class="container"
         *ngIf="!showFiltersMap['numero_immeuble']"
@@ -292,7 +319,17 @@
 
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="direction">Direction immobilière</label>
+      <div class="head">
+        <label for="direction">Direction immobilière</label>
+        <span
+          class="selection-count"
+          *ngIf="selectedFilters['direction_immobiliere_nom']?.length"
+        >
+          {{ selectedFilters['direction_immobiliere_nom'].length }} sélection{{
+            selectedFilters['direction_immobiliere_nom'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
       <div
         class="container"
         *ngIf="!showFiltersMap['direction_immobiliere_nom']"
@@ -388,7 +425,17 @@
     </div>
     <div *ngIf="showingAdditionalFilters">
       <div class="filed">
-        <label for="nom_immeuble">Nom de l'immeuble</label>
+        <div class="head">
+          <label for="nom_immeuble">Nom de l'immeuble</label>
+          <span
+            class="selection-count"
+            *ngIf="selectedFilters['nom_immeuble']?.length"
+          >
+            {{ selectedFilters['nom_immeuble'].length }} sélection{{
+              selectedFilters['nom_immeuble'].length > 1 ? 's' : ''
+            }}
+          </span>
+        </div>
         <div
           class="container"
           *ngIf="!showFiltersMap['nom_immeuble']"
@@ -458,7 +505,17 @@
 
       <mat-divider></mat-divider>
       <div class="filed">
-        <label for="vocation">Vocation</label>
+        <div class="head">
+          <label for="vocation">Vocation</label>
+          <span
+            class="selection-count"
+            *ngIf="selectedFilters['vocation_principale']?.length"
+          >
+            {{ selectedFilters['vocation_principale'].length }} sélection{{
+              selectedFilters['vocation_principale'].length > 1 ? 's' : ''
+            }}
+          </span>
+        </div>
         <div
           class="container"
           *ngIf="!showFiltersMap['vocation_principale']"
@@ -541,7 +598,17 @@
 
       <mat-divider></mat-divider>
       <div class="filed">
-        <label for="region">Région administrative</label>
+        <div class="head">
+          <label for="region">Région administrative</label>
+          <span
+            class="selection-count"
+            *ngIf="selectedFilters['region_adminsitrative']?.length"
+          >
+            {{ selectedFilters['region_adminsitrative'].length }} sélection{{
+              selectedFilters['region_adminsitrative'].length > 1 ? 's' : ''
+            }}
+          </span>
+        </div>
         <div
           class="container"
           *ngIf="!showFiltersMap['region_adminsitrative']"
@@ -588,7 +655,7 @@
             <input
               class="search-input"
               type="text"
-              [formControl]="searchControls['region_administrative']"
+              [formControl]="searchControls['region_adminsitrative']"
             />
             <img
               src="assets/images/loop.svg"
@@ -626,7 +693,20 @@
 
       <mat-divider></mat-divider>
       <div class="filed">
-        <label for="type_propriete_ou_location">Type</label>
+        <div class="head">
+          <label for="type_propriete_ou_location">Type</label>
+          <span
+            class="selection-count"
+            *ngIf="selectedFilters['type_propriete_ou_location']?.length"
+          >
+            {{ selectedFilters['type_propriete_ou_location'].length }}
+            sélection{{
+              selectedFilters['type_propriete_ou_location'].length > 1
+                ? 's'
+                : ''
+            }}
+          </span>
+        </div>
         <div
           class="container"
           *ngIf="!showFiltersMap['type_propriete_ou_location']"
