@@ -19,14 +19,6 @@
   margin: 10px 0px;
 }
 
-.filed label {
-  margin-top: 24px;
-  margin-bottom: 7px;
-  color: #223654;
-  font-size: 16px;
-  font-weight: 500;
-}
-
 .filed.line {
   display: flex;
   flex-direction: row;
@@ -172,6 +164,23 @@
   margin-bottom: 10px;
 }
 
+.head {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.head label {
+  color: #223654;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.head .selection-count {
+  color: #223654;
+  font-size: 16px;
+}
 /*
 
 */

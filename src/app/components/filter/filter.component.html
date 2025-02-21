@@ -5,7 +5,17 @@
   </div>
   <form class="form">
     <div class="filed">
-      <label for="numero">Numéro civique</label>
+      <div class="head">
+        <label for="numero">Numéro civique</label>
+        <span
+          class="selection-count"
+          *ngIf="selectedFilters['numero_civique']?.length"
+        >
+          {{ selectedFilters['numero_civique'].length }} sélection{{
+            selectedFilters['numero_civique'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
       <div
         class="container"
         *ngIf="!showFiltersMap['numero_civique']"
