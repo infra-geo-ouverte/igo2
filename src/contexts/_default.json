@@ -205,14 +205,15 @@
             "style": {
               "overflow": false,
               "placement": "line",
+              "font": "13px Open Sans, sans-serif",
               "fill": {
                 "color": "white",
                 "width": 2
               },
-              "scale": 1.5,
+              "scale": 1.15,
               "stroke": {
                 "color": "black",
-                "width": 2
+                "width": 3.5
               }
             }
           }
