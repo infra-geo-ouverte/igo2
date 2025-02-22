@@ -19,31 +19,6 @@
   margin: 10px 0px;
 }
 
-.filed input {
-  width: 273;
-  height: 40px;
-  padding: 4px 10px;
-  opacity: 1;
-  background: #ffffff;
-  border: 1px solid #8690a2;
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #223654;
-}
-
-.filed input:focus {
-  border-color: #095797;
-  outline: none;
-}
-
-.filed label {
-  margin-top: 24px;
-  margin-bottom: 7px;
-  color: #223654;
-  font-size: 16px;
-  font-weight: 500;
-}
-
 .filed.line {
   display: flex;
   flex-direction: row;
@@ -100,3 +75,112 @@
   color: #223654;
   font-weight: 100;
 }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f2;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #8690a2;
+  height: 58px;
+  margin-bottom: 20px;
+  background-color: white;
+  height: 40px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.container:active {
+  border-color: #8690a2;
+  box-shadow: 0 0 5px rgba(0, 183, 255, 0.7);
+}
+
+.container span {
+  color: #647287;
+  font-size: 14px;
+}
+
+.container-true {
+  background-color: #f1f1f2;
+  margin-bottom: 20px;
+  border: 1px solid #8690a2;
+  background-color: white;
+}
+
+.filter-close {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.filter-close span {
+  color: #647287;
+  font-size: 14px;
+}
+
+.filter-close svg {
+  margin-top: 10px;
+}
+
+.search-bar {
+  display: flex;
+  box-sizing: border-box;
+  border: 1px solid #8690a2;
+  background-color: white;
+  padding: 8px;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.search-bar:focus-within {
+  border-color: #8690a2;
+  box-shadow: 0 0 5px rgba(0, 183, 255, 0.7);
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  cursor: default;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 4px;
+  font-size: 14px;
+  width: auto;
+}
+
+.checkbox-list {
+  max-height: 200px;
+  overflow-y: auto; /* Scroll activé */
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.head label {
+  color: #223654;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.head .selection-count {
+  color: #223654;
+  font-size: 16px;
+}
+/*
+
+*/

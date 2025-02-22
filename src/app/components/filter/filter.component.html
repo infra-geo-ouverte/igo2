@@ -5,163 +5,799 @@
   </div>
   <form class="form">
     <div class="filed">
-      <label for="numero">Numéro civique</label>
-      <input
-        id="numero"
-        name="numero"
-        placeholder="Example de numéro civique"
-        type="text"
-        #numero_civiqueInput
-        (change)="
-          onChange('numero_civique', numero_civiqueInput?.value?.toLowerCase())
-        "
-      />
+      <div class="head">
+        <label for="numero">Numéro civique</label>
+        <span
+          class="selection-count"
+          *ngIf="selectedFilters['numero_civique']?.length"
+        >
+          {{ selectedFilters['numero_civique'].length }} sélection{{
+            selectedFilters['numero_civique'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['numero_civique']"
+        (click)="toggleFilters('numero_civique')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#095797"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div *ngIf="showFiltersMap['numero_civique']" class="container-true">
+        <div (click)="toggleFilters('numero_civique')" class="filter-close">
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControls['numero_civique']"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div *ngFor="let number of filterOptions['numero_civique']">
+            <mat-checkbox
+              class="custom-checkbox"
+              (change)="onChange('numero_civique', number.toLowerCase())"
+              [checked]="
+                selectedFilters['numero_civique']?.includes(
+                  number.toLowerCase()
+                )
+              "
+              >{{ number }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
     </div>
+
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="rue">Rue</label>
-      <input
-        id="rue"
-        name="rue"
-        placeholder="Example de rue"
-        type="text"
-        #rueInput
-        (change)="onChange('rue', rueInput?.value?.toLowerCase())"
-      />
+      <div class="head">
+        <label for="rue">Rue</label>
+        <span class="selection-count" *ngIf="selectedFilters['rue']?.length">
+          {{ selectedFilters['rue'].length }} sélection{{
+            selectedFilters['rue'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['rue']"
+        (click)="toggleFilters('rue')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#095797"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div *ngIf="showFiltersMap['rue']" class="container-true">
+        <div (click)="toggleFilters('rue')" class="filter-close">
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControls['rue']"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div *ngFor="let rue of filterOptions['rue']">
+            <mat-checkbox
+              (change)="onChange('rue', rue.toLowerCase())"
+              [checked]="selectedFilters['rue']?.includes(rue.toLowerCase())"
+              >{{ rue }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
     </div>
+
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="ville">Ville ou municipalité</label>
-      <input
-        id="ville"
-        name="ville"
-        placeholder="Example de ville ou municipalité"
-        type="text"
-        #ville_municipaliteInput
-        (change)="
-          onChange(
-            'ville_municipalite',
-            ville_municipaliteInput?.value?.toLowerCase()
-          )
-        "
-      />
+      <div class="head">
+        <label for="ville">Ville ou municipalité</label>
+        <span
+          class="selection-count"
+          *ngIf="selectedFilters['ville_municipalite']?.length"
+        >
+          {{ selectedFilters['ville_municipalite'].length }} sélection{{
+            selectedFilters['ville_municipalite'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['ville_municipalite']"
+        (click)="toggleFilters('ville_municipalite')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#095797"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div *ngIf="showFiltersMap['ville_municipalite']" class="container-true">
+        <div (click)="toggleFilters('ville_municipalite')" class="filter-close">
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControls['ville_municipalite']"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div
+            *ngFor="
+              let ville_municipalite of filterOptions['ville_municipalite']
+            "
+            [value]="ville_municipalite"
+          >
+            <mat-checkbox
+              (change)="
+                onChange('ville_municipalite', ville_municipalite.toLowerCase())
+              "
+              [checked]="
+                selectedFilters['ville_municipalite']?.includes(
+                  ville_municipalite.toLowerCase()
+                )
+              "
+              >{{ ville_municipalite }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
     </div>
+
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="numero_immeuble">Numéro d'immeuble</label>
-      <input
-        id="numero_immeuble"
-        name="numero_immeuble"
-        placeholder="Example de numéro d'immeuble"
-        type="text"
-        #numero_immeubleInput
-        (change)="
-          onChange(
-            'numero_immeuble',
-            numero_immeubleInput?.value?.toLowerCase()
-          )
-        "
-      />
+      <div class="head">
+        <label for="numero_immeuble">Numéro d'immeuble</label>
+        <span
+          class="selection-count"
+          *ngIf="selectedFilters['numero_immeuble']?.length"
+        >
+          {{ selectedFilters['numero_immeuble'].length }} sélection{{
+            selectedFilters['numero_immeuble'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['numero_immeuble']"
+        (click)="toggleFilters('numero_immeuble')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#095797"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div *ngIf="showFiltersMap['numero_immeuble']" class="container-true">
+        <div (click)="toggleFilters('numero_immeuble')" class="filter-close">
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControls['numero_immeuble']"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div
+            *ngFor="let numero_immeuble of filterOptions['numero_immeuble']"
+            [value]="numero_immeuble"
+          >
+            <mat-checkbox
+              (change)="
+                onChange('numero_immeuble', numero_immeuble.toLowerCase())
+              "
+              [checked]="
+                selectedFilters['numero_immeuble']?.includes(
+                  numero_immeuble.toLowerCase()
+                )
+              "
+              >{{ numero_immeuble }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
     </div>
+
     <mat-divider></mat-divider>
     <div class="filed">
-      <label for="direction">Direction immobilière</label>
-      <input
-        id="direction"
-        name="direction"
-        placeholder="Choisir une direction immobilière"
-        type="text"
-        #direction_immobiliere_nomInput
-        (change)="
-          onChange(
-            'direction_immobiliere_nom',
-            direction_immobiliere_nomInput?.value?.toLowerCase()
-          )
-        "
-      />
+      <div class="head">
+        <label for="direction">Direction immobilière</label>
+        <span
+          class="selection-count"
+          *ngIf="selectedFilters['direction_immobiliere_nom']?.length"
+        >
+          {{ selectedFilters['direction_immobiliere_nom'].length }} sélection{{
+            selectedFilters['direction_immobiliere_nom'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['direction_immobiliere_nom']"
+        (click)="toggleFilters('direction_immobiliere_nom')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#095797"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div
+        *ngIf="showFiltersMap['direction_immobiliere_nom']"
+        class="container-true"
+      >
+        <div
+          (click)="toggleFilters('direction_immobiliere_nom')"
+          class="filter-close"
+        >
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControls['direction_immobiliere_nom']"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div
+            *ngFor="
+              let direction_immobiliere_nom of filterOptions[
+                'direction_immobiliere_nom'
+              ]
+            "
+            [value]="direction_immobiliere_nom"
+          >
+            <mat-checkbox
+              (change)="
+                onChange(
+                  'direction_immobiliere_nom',
+                  direction_immobiliere_nom.toLowerCase()
+                )
+              "
+              [checked]="
+                selectedFilters['direction_immobiliere_nom']?.includes(
+                  direction_immobiliere_nom.toLowerCase()
+                )
+              "
+              >{{ direction_immobiliere_nom }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
     </div>
+
     <mat-divider></mat-divider>
     <div
       class="ln"
-      [ngClass]="{'plus': !showingAdditionalFilters, 'minus': showingAdditionalFilters}"
+      [ngClass]="{
+        plus: !showingAdditionalFilters,
+        minus: showingAdditionalFilters
+      }"
       (click)="toggleShowAdditionalFilters()"
-      >
-        {{ showingAdditionalFilters ? 'Moins' : 'Plus'}} de filtres
-      </div>
+    >
+      {{ showingAdditionalFilters ? 'Moins' : 'Plus' }} de filtres
+    </div>
     <div *ngIf="showingAdditionalFilters">
-    <div class="filed">
-      <label for="nom_immeuble">Nom de l'immeuble</label>
-      <input
-        id="nom_immeuble"
-        name="nom_immeuble"
-        placeholder="Example de nom de l'immeuble"
-        type="text"
-        #nom_immeubleInput
-        (change)="
-          onChange('nom_immeuble', nom_immeubleInput?.value?.toLowerCase())
-        "
-      />
-    </div>
-    <mat-divider></mat-divider>
-    <div class="filed">
-      <label for="vocation">Vocation</label>
-      <input
-        id="vocation"
-        name="vocation"
-        placeholder="Choisir une vocation"
-        type="text"
-        #vocation_principaleInput
-        (change)="
-          onChange(
-            'vocation_principale',
-            vocation_principaleInput?.value?.toLowerCase()
-          )
-        "
-      />
-    </div>
-    <mat-divider></mat-divider>
-    <div class="filed">
-      <label for="region">Région administrative</label>
-      <input
-        id="region"
-        name="region"
-        placeholder="Choisir une région administrative"
-        type="text"
-        #region_adminsitrativeInput
-        (change)="
-          onChange(
-            'region_adminsitrative',
-            region_adminsitrativeInput?.value?.toLowerCase()
-          )
-        "
-      />
-    </div>
-    <mat-divider></mat-divider>
-    <div class="filed">
-      <label for="type_propriete_ou_location">Type</label>
-      <input
-        id="type_propriete_ou_location"
-        name="type_propriete_ou_location"
-        placeholder="Afficher les filtres"
-        type="text"
-        #type_propriete_ou_locationInput
-        (change)="
-        onChange(
-          'type_propriete_ou_location',
-          type_propriete_ou_locationInput?.value?.toLowerCase().substr(0,1)
-        )
-      "
-      />
-    </div>
-    <mat-divider></mat-divider>
-    <div class="filed line">
-      <input id="patrimonial" name="patrimonial" type="checkbox" />
-      <label for="patrimonial">Immeuble patrimonial</label>
-    </div>
-    <div class="filed line">
-      <input id="avec" name="avec" type="checkbox" />
-      <label for="avec">Immeuble avec dénomination</label>
-    </div>
+      <div class="filed">
+        <div class="head">
+          <label for="nom_immeuble">Nom de l'immeuble</label>
+          <span
+            class="selection-count"
+            *ngIf="selectedFilters['nom_immeuble']?.length"
+          >
+            {{ selectedFilters['nom_immeuble'].length }} sélection{{
+              selectedFilters['nom_immeuble'].length > 1 ? 's' : ''
+            }}
+          </span>
+        </div>
+        <div
+          class="container"
+          *ngIf="!showFiltersMap['nom_immeuble']"
+          (click)="toggleFilters('nom_immeuble')"
+        >
+          <span>Afficher les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </div>
+        <!-- Affichage du filtre uniquement si showFilters est vrai -->
+        <div *ngIf="showFiltersMap['nom_immeuble']" class="container-true">
+          <div (click)="toggleFilters('nom_immeuble')" class="filter-close">
+            <span>Masquer les filtres</span>
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#095797"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 -6 6 6"></path>
+            </svg>
+          </div>
+          <div class="search-bar">
+            <input
+              class="search-input"
+              type="text"
+              [formControl]="searchControls['nom_immeuble']"
+            />
+            <img
+              src="assets/images/loop.svg"
+              alt="Rechercher"
+              class="search-icon"
+            />
+          </div>
+          <div class="checkbox-list">
+            <div
+              *ngFor="let nom_immeuble of filterOptions['nom_immeuble']"
+              [value]="nom_immeuble"
+            >
+              <mat-checkbox
+                (change)="onChange('nom_immeuble', nom_immeuble.toLowerCase())"
+                [checked]="
+                  selectedFilters['nom_immeuble']?.includes(
+                    nom_immeuble.toLowerCase()
+                  )
+                "
+                >{{ nom_immeuble }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="filed">
+        <div class="head">
+          <label for="vocation">Vocation</label>
+          <span
+            class="selection-count"
+            *ngIf="selectedFilters['vocation_principale']?.length"
+          >
+            {{ selectedFilters['vocation_principale'].length }} sélection{{
+              selectedFilters['vocation_principale'].length > 1 ? 's' : ''
+            }}
+          </span>
+        </div>
+        <div
+          class="container"
+          *ngIf="!showFiltersMap['vocation_principale']"
+          (click)="toggleFilters('vocation_principale')"
+        >
+          <span>Afficher les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </div>
+        <!-- Affichage du filtre uniquement si showFilters est vrai -->
+        <div
+          *ngIf="showFiltersMap['vocation_principale']"
+          class="container-true"
+        >
+          <div
+            (click)="toggleFilters('vocation_principale')"
+            class="filter-close"
+          >
+            <span>Masquer les filtres</span>
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#095797"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 -6 6 6"></path>
+            </svg>
+          </div>
+          <div class="search-bar">
+            <input
+              class="search-input"
+              type="text"
+              [formControl]="searchControls['vocation_principale']"
+            />
+            <img
+              src="assets/images/loop.svg"
+              alt="Rechercher"
+              class="search-icon"
+            />
+          </div>
+          <div class="checkbox-list">
+            <div
+              *ngFor="
+                let vocation_principale of filterOptions['vocation_principale']
+              "
+              [value]="vocation_principale"
+            >
+              <mat-checkbox
+                (change)="
+                  onChange(
+                    'vocation_principale',
+                    vocation_principale.toLowerCase()
+                  )
+                "
+                [checked]="
+                  selectedFilters['vocation_principale']?.includes(
+                    vocation_principale.toLowerCase()
+                  )
+                "
+                >{{ vocation_principale }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="filed">
+        <div class="head">
+          <label for="region">Région administrative</label>
+          <span
+            class="selection-count"
+            *ngIf="selectedFilters['region_adminsitrative']?.length"
+          >
+            {{ selectedFilters['region_adminsitrative'].length }} sélection{{
+              selectedFilters['region_adminsitrative'].length > 1 ? 's' : ''
+            }}
+          </span>
+        </div>
+        <div
+          class="container"
+          *ngIf="!showFiltersMap['region_adminsitrative']"
+          (click)="toggleFilters('region_adminsitrative')"
+        >
+          <span>Afficher les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </div>
+        <!-- Affichage du filtre uniquement si showFilters est vrai -->
+        <div
+          *ngIf="showFiltersMap['region_adminsitrative']"
+          class="container-true"
+        >
+          <div
+            (click)="toggleFilters('region_adminsitrative')"
+            class="filter-close"
+          >
+            <span>Masquer les filtres</span>
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#095797"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 -6 6 6"></path>
+            </svg>
+          </div>
+          <div class="search-bar">
+            <input
+              class="search-input"
+              type="text"
+              [formControl]="searchControls['region_adminsitrative']"
+            />
+            <img
+              src="assets/images/loop.svg"
+              alt="Rechercher"
+              class="search-icon"
+            />
+          </div>
+          <div class="checkbox-list">
+            <div
+              *ngFor="
+                let region_adminsitrative of filterOptions[
+                  'region_adminsitrative'
+                ]
+              "
+              [value]="region_adminsitrative"
+            >
+              <mat-checkbox
+                (change)="
+                  onChange(
+                    'region_adminsitrative',
+                    region_adminsitrative.toLowerCase()
+                  )
+                "
+                [checked]="
+                  selectedFilters['region_adminsitrative']?.includes(
+                    region_adminsitrative.toLowerCase()
+                  )
+                "
+                >{{ region_adminsitrative }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="filed">
+        <div class="head">
+          <label for="type_propriete_ou_location">Type</label>
+          <span
+            class="selection-count"
+            *ngIf="selectedFilters['type_propriete_ou_location']?.length"
+          >
+            {{ selectedFilters['type_propriete_ou_location'].length }}
+            sélection{{
+              selectedFilters['type_propriete_ou_location'].length > 1
+                ? 's'
+                : ''
+            }}
+          </span>
+        </div>
+        <div
+          class="container"
+          *ngIf="!showFiltersMap['type_propriete_ou_location']"
+          (click)="toggleFilters('type_propriete_ou_location')"
+        >
+          <span>Afficher les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </div>
+        <!-- Affichage du filtre uniquement si showFilters est vrai -->
+        <div
+          *ngIf="showFiltersMap['type_propriete_ou_location']"
+          class="container-true"
+        >
+          <div
+            (click)="toggleFilters('type_propriete_ou_location')"
+            class="filter-close"
+          >
+            <span>Masquer les filtres</span>
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#095797"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 -6 6 6"></path>
+            </svg>
+          </div>
+          <div class="search-bar">
+            <input
+              class="search-input"
+              type="text"
+              [formControl]="searchControls['type_propriete_ou_location']"
+            />
+            <img
+              src="assets/images/loop.svg"
+              alt="Rechercher"
+              class="search-icon"
+            />
+          </div>
+          <div class="checkbox-list">
+            <div
+              *ngFor="
+                let type_propriete_ou_location of filterOptions[
+                  'type_propriete_ou_location'
+                ]
+              "
+              [value]="type_propriete_ou_location"
+            >
+              <mat-checkbox
+                (change)="
+                  onChange(
+                    'type_propriete_ou_location',
+                    type_propriete_ou_location.toLowerCase()
+                  )
+                "
+                [checked]="
+                  selectedFilters['type_propriete_ou_location']?.includes(
+                    type_propriete_ou_location.toLowerCase()
+                  )
+                "
+                >{{ type_propriete_ou_location }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="filed line">
+        <input id="patrimonial" name="patrimonial" type="checkbox" />
+        <label for="patrimonial">Immeuble patrimonial</label>
+      </div>
+      <div class="filed line">
+        <input id="avec" name="avec" type="checkbox" />
+        <label for="avec">Immeuble avec dénomination</label>
+      </div>
     </div>
   </form>
 </div>

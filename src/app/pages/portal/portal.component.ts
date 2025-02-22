@@ -758,6 +758,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.onClearSearch();
       return;
     }
+
     this.onBeforeSearch();
   }
 

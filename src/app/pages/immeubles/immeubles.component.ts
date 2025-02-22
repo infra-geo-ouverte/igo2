@@ -17,7 +17,7 @@ export class ImmeublesComponent implements OnInit {
   offset = 0;
   total = 0;
   pages = 1;
-  valuesMap = new Map<string, string>();
+  valuesMap = new Map<string, string[]>();
 
   constructor(
     private immeublesService: ImmeublesService,
@@ -32,6 +32,7 @@ export class ImmeublesComponent implements OnInit {
       this.valuesMap = valuesMap;
       this.getImmeubles();
     });
+
     this.breadcrumbService.setBreadcrumb('/immeubles'); // pour le fil d'ariane
   }
 
@@ -55,37 +56,54 @@ export class ImmeublesComponent implements OnInit {
     this.getImmeubles();
   }
 
-  getFilterParam(valuesMap: Map<string, string>) {
-    let filterString = ' ';
-    valuesMap.forEach((value, key) => {
-      filterString += `lower(${key}) LIKE '%${value}%'&`;
+  getFilterParam(valuesMap: Map<string, string[]>): string {
+    let filterConditions: string[] = [];
+
+    valuesMap.forEach((values, key) => {
+      if (values.length > 0) {
+        const conditions = values
+          .map((value) => `lower(${key}) LIKE '%${value.replace(/'/g, "''")}%'`)
+          .join(' OR ');
+
+        filterConditions.push(`(${conditions})`);
+      }
     });
-    return filterString.substring(0, filterString.length - 1);
+
+    return filterConditions.length > 0 ? filterConditions.join(' AND ') : '';
   }
 
   getImmeubles() {
+    const filterParams = this.getFilterParam(this.valuesMap);
+    //console.log('Filtres envoyés dans la requête SQL:', filterParams);
+
+    /*
+    if (!filterParams) {
+      console.warn(
+        "Aucun filtre sélectionné, envoi d'une requête sans filtre."
+      );
+    }*/
+
     this.immeublesService
       .getImmeubles(
-        this.getFilterParam(this.valuesMap),
+        filterParams,
         this.columns,
         this.sortBy,
         this.limit,
         this.offset
       )
-      .subscribe((response: any) => {
-        console.log(
-          `Params: limit: ${this.limit}, offset: ${this.offset}, response-length: ${response.length}`
-        );
-        this.total = response.total;
-        //this.limit = response.data.length;
-        /*  if (response.total < 10 && response.total > 0) {
-          this.limit = response.data.length;
-        } else {
-          this.limit = 10;
-        } */
-        this.pages = Math.ceil(this.total / this.limit);
-        this.immeubles = response.data;
-        this.cdr.markForCheck();
+      .subscribe({
+        next: (response: any) => {
+          console.log(
+            `Params: limit: ${this.limit}, offset: ${this.offset}, response-length: ${response.length}`
+          );
+          this.total = response.total;
+          this.pages = Math.ceil(this.total / this.limit);
+          this.immeubles = response.data;
+          this.cdr.markForCheck();
+        },
+        error: (error) => {
+          console.error('Erreur lors de la récupération des immeubles:', error);
+        }
       });
   }
 
