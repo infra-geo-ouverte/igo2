@@ -282,5 +282,23 @@
       "warning": "L'utilisateur assume l'entière responsabilité quant à l'utilisation qu'il fait de ces données. Veuillez noter que ces données sont fournies à titre indicatif seulement.",
       "accept": "J'accepte"
     }
+  },
+  "igo": {
+    "integration": {
+      "searchResultsTool": {
+        "noResults": "Aucun résultat",
+        "doSearch": "Veuillez effectuer une recherche dans la barre de recherche ci-dessus.",
+        "examples": "<b>Permet de rechercher des adresses, ou des lieux</b>.<br><br>Les recherches d'<u>adresses</u> peuvent être effectués selon une combinaison: <ul><li>du no. civique</li><li>du nom de la rue</li><li>de la ville</li><li>du code postal</li></ul> Exemples pour les <u>lieux</u>: <ul><li>Lac Poulin</li><li>Mcdo Lévis</li><li>Saint-Isidore</li></ul>",
+        "zoomOnFeatureTooltip": "Zoomer sur l'entité sélectionnée.",
+        "zoomOnFeatureTooltipOutOfView": "L'entité est hors de la vue. Zoomer sur l'entité sélectionnée."
+      }
+    },
+    "geo": {
+      "indexedDb": {
+        "data-download-start": "Téléchargement des données. Veuillez ne pas quitter.",
+        "data-download-completed": "Téléchargement des données terminé.",
+        "data-download-failed": "Échec du téléchargement des données pour utilisation hors ligne. Contacter le support de l'application"
+      }
+    }
   }
 }
