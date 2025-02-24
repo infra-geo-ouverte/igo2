@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
       .pipe(
         filter((e): e is NavigationEnd => e instanceof NavigationEnd),
         tap((e) => {
-          this.portal = this.location.path().toString() === '/carte';
+          this.portal = this.location.path().toString().substring(0,6) === '/carte';
         })
       )
       .subscribe((d) => {});

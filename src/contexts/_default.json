@@ -89,10 +89,9 @@
             3
           ],
           "hoverStyle": {
-            "attribute": [""],
             "data": [""],
-            "fill": ["rgba(255, 255, 255, 0)"],
-            "stroke": ["rgba(255, 255, 255, 0)"],
+            "fill": ["rgba(51, 153, 204, 0.4)"],
+            "stroke": ["rgba(51, 153, 204, 1.0)"],
             "radius": [25],
             "width": [2],
             "label": {
@@ -112,14 +111,9 @@
                   "width": 2
                 },
                 "overflow": true,
-                "offsetX": 30,
+                "offsetX": 25,
                 "offsetY": 10,
-                "padding": [
-                  2.8,
-                  2.8,
-                  2.8,
-                  2.8
-                ]
+                "padding": [2.8, 2.8, 2.8, 2.8]
               }
             }
           }
@@ -211,14 +205,15 @@
             "style": {
               "overflow": false,
               "placement": "line",
+              "font": "13px Open Sans, sans-serif",
               "fill": {
                 "color": "white",
                 "width": 2
               },
-              "scale": 1.5,
+              "scale": 1.15,
               "stroke": {
                 "color": "black",
-                "width": 2
+                "width": 3.5
               }
             }
           }
