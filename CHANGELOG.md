@@ -1,3 +1,16 @@
+# [19.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v18.0.0...v19.0.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **package-lock:** remove unnecessary peerDependencies for jspdf-autotable ([07b95ae](https://github.com/infra-geo-ouverte/igo2/commit/07b95aeaa358cb8c49ef766bdd4f3c41a0b08c65))
+
+### BREAKING CHANGES
+- chore(deps): update angular v19
+- chore(deps): upgrade @igo2 packages to version 19.0.0-next.1
+
+
+
 # [18.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v17.0.1...v18.0.0) (2025-02-12)
 
 
