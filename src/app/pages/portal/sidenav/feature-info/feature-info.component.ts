@@ -1,43 +1,44 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
-  Output,
   EventEmitter,
   HostBinding,
   HostListener,
-  ChangeDetectionStrategy,
-  OnInit,
+  Input,
   OnDestroy,
-  ChangeDetectorRef
+  OnInit,
+  Output
 } from '@angular/core';
-import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import {
-  getEntityTitle,
-  EntityStore,
   ActionStore,
-  ActionbarMode
+  ActionbarMode,
+  EntityStore,
+  getEntityTitle
 } from '@igo2/common';
 import {
-  Feature,
-  SearchResult,
-  IgoMap,
-  FeatureMotion,
-  featureToOl,
-  getCommonVectorStyle,
-  getCommonVectorSelectedStyle,
-  featuresAreOutOfView,
-  computeOlFeaturesExtent
-} from '@igo2/geo';
-import {
-  MediaService,
-  //LanguageService,
-  StorageService,
-  ConfigService
+  ConfigService,
+  MediaService, //LanguageService,
+  StorageService
 } from '@igo2/core';
+import {
+  Feature,
+  FeatureMotion,
+  IgoMap,
+  SearchResult,
+  computeOlFeaturesExtent,
+  featureToOl,
+  featuresAreOutOfView,
+  getCommonVectorSelectedStyle,
+  getCommonVectorStyle
+} from '@igo2/geo';
 import { QueryState, StorageState } from '@igo2/integration';
+
+import olFormatGeoJSON from 'ol/format/GeoJSON';
+
+import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { SearchState } from '../search.state';
 
@@ -48,7 +49,6 @@ import { SearchState } from '../search.state';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeatureInfoComponent implements OnInit, OnDestroy {
-
   get storageService(): StorageService {
     return this.storageState.storageService;
   }
@@ -172,7 +172,9 @@ export class FeatureInfoComponent implements OnInit, OnDestroy {
   }
 
   @Input()
-  get mapQueryInit(): boolean { return this._mapQueryInit; }
+  get mapQueryInit(): boolean {
+    return this._mapQueryInit;
+  }
   set mapQueryInit(mapQueryInit: boolean) {
     this._mapQueryInit = mapQueryInit;
   }
@@ -186,8 +188,7 @@ export class FeatureInfoComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private searchState: SearchState,
     private cdRef: ChangeDetectorRef
-  ) {
-  }
+  ) {}
 
   private monitorResultOutOfView() {
     this.isSelectedResultOutOfView$$ = combineLatest([
@@ -201,9 +202,17 @@ export class FeatureInfoComponent implements OnInit, OnDestroy {
           this.isSelectedResultOutOfView$.next(false);
           return;
         }
-        const selectedOlFeature = featureToOl(selectedResult.data, this.map.projection);
-        const selectedOlFeatureExtent = computeOlFeaturesExtent([selectedOlFeature], this.map.viewProjection);
-        this.isSelectedResultOutOfView$.next(featuresAreOutOfView(this.map.getExtent(), selectedOlFeatureExtent));
+        const selectedOlFeature = featureToOl(
+          selectedResult.data,
+          this.map.projection
+        );
+        const selectedOlFeatureExtent = computeOlFeaturesExtent(
+          [selectedOlFeature],
+          this.map.viewProjection
+        );
+        this.isSelectedResultOutOfView$.next(
+          featuresAreOutOfView(this.map.getExtent(), selectedOlFeatureExtent)
+        );
       });
   }
 
@@ -254,14 +263,21 @@ export class FeatureInfoComponent implements OnInit, OnDestroy {
     for (const feature of this.store.all()) {
       if (feature.meta.id === result.meta.id) {
         feature.data.meta.style = getCommonVectorSelectedStyle(
-          Object.assign({}, { feature: feature.data },
-            this.queryState.queryOverlayStyleSelection));
+          Object.assign(
+            {},
+            { feature: feature.data },
+            this.queryState.queryOverlayStyleSelection
+          )
+        );
         feature.data.meta.style.setZIndex(2000);
       } else {
         feature.data.meta.style = getCommonVectorStyle(
-          Object.assign({},
+          Object.assign(
+            {},
             { feature: feature.data },
-            this.queryState.queryOverlayStyle));
+            this.queryState.queryOverlayStyle
+          )
+        );
       }
       features.push(feature.data);
     }
@@ -280,12 +296,19 @@ export class FeatureInfoComponent implements OnInit, OnDestroy {
     const features = [];
     for (const feature of this.store.all()) {
       feature.data.meta.style = getCommonVectorStyle(
-        Object.assign({},
+        Object.assign(
+          {},
           { feature: feature.data },
-          this.queryState.queryOverlayStyle));
+          this.queryState.queryOverlayStyle
+        )
+      );
       features.push(feature.data);
     }
-    this.map.queryResultsOverlay.setFeatures(features, FeatureMotion.None, 'map');
+    this.map.queryResultsOverlay.setFeatures(
+      features,
+      FeatureMotion.None,
+      'map'
+    );
   }
 
   public clearButton() {
@@ -296,13 +319,20 @@ export class FeatureInfoComponent implements OnInit, OnDestroy {
     this.mapQueryClick = false;
     this.panelOpenState = false;
     this.closeQuery.emit();
+
+    setTimeout(() => {
+      const backdrop = document.querySelector('igo-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
+    }, 300);
   }
 
-  hideOnToggleChange(){
+  hideOnToggleChange() {
     this.refreshedDetails = false;
   }
 
-  showOnToggleChange(){
+  showOnToggleChange() {
     //this.refreshedDetails = true;
   }
 }

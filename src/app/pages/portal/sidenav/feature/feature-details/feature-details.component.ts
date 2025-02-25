@@ -4,14 +4,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   Output,
-  SimpleChanges,
-  ViewChild
+  SimpleChanges
 } from '@angular/core';
 import { TooltipPosition } from '@angular/material/tooltip';
 
@@ -19,7 +17,7 @@ import { ConnectionState, LanguageService, NetworkService } from '@igo2/core';
 import { ConfigService } from '@igo2/core';
 import { Feature, IgoMap, SearchSource } from '@igo2/geo';
 
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
