@@ -1,3 +1,4 @@
+import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT, NgClass, NgIf } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
@@ -13,7 +14,7 @@ import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
 import { MessageService } from '@igo2/core/message';
 import { AppOptions } from '@igo2/integration';
-import { DomUtils, userAgent } from '@igo2/utils';
+import { DomUtils } from '@igo2/utils';
 
 import { delay, first } from 'rxjs';
 
@@ -45,6 +46,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
+    private platform: Platform,
     protected languageService: LanguageService,
     private configService: ConfigService,
     private titleService: Title,
@@ -57,8 +59,6 @@ export class AppComponent implements OnInit {
 
     this.readTitleConfig();
     this.readDescriptionConfig();
-
-    this.detectOldBrowser();
 
     this.hasHeader = this.configService.getConfig('header.hasHeader', false);
     this.hasFooter = this.configService.getConfig('hasFooter', false);
@@ -125,7 +125,7 @@ export class AppComponent implements OnInit {
   private installPrompt() {
     const appConfig: AppOptions = this.configService.getConfig('app');
     if (appConfig?.install?.enabled && appConfig?.install?.promote) {
-      if (userAgent.getOSName() !== 'iOS') {
+      if (!this.platform.IOS) {
         window.addEventListener(
           'beforeinstallprompt',
           (event: any) => {
@@ -152,21 +152,6 @@ export class AppComponent implements OnInit {
     const description = this.configService.getConfig('description');
     if (description) {
       this.metaService.addTag({ name: 'description', content: description });
-    }
-  }
-
-  private detectOldBrowser() {
-    const oldBrowser = userAgent.satisfies({
-      ie: '<=11',
-      chrome: '<64',
-      firefox: '<60',
-      safari: '<=11'
-    });
-
-    if (oldBrowser) {
-      this.messageService.alert('oldBrowser.message', 'oldBrowser.title', {
-        timeOut: 15000
-      });
     }
   }
 }
