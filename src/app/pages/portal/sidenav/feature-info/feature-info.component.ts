@@ -326,6 +326,18 @@ export class FeatureInfoComponent implements OnInit, OnDestroy {
         backdrop.remove();
       }
     }, 300);
+
+    this.updateSidenavState();
+  }
+
+  //pour propager l’événement indiquant que le sidenav est fermé
+  private updateSidenavState() {
+    const portalComponent = document.querySelector('app-portal');
+    if (portalComponent) {
+      portalComponent.dispatchEvent(
+        new CustomEvent('updateSidenav', { bubbles: true })
+      );
+    }
   }
 
   hideOnToggleChange() {
