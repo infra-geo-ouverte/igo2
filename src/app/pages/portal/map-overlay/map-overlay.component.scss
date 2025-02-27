@@ -60,3 +60,15 @@
   top: 50%;
   left: 0;
 }
+
+.mapOverlayDefault {
+  transition:
+    left 0.3s ease-in-out,
+    right 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .mapOverlayDefault {
+    left: 10px !important;
+  }
+}

@@ -296,10 +296,42 @@ span {
   }
 }
 
-/*
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+  .order2 {
+    padding-bottom: 5px;
+    padding-top: 15px;
+  }
   .footer-right {
-    display: none;
+    font-size: 12px;
   }
 }
+
+@media (max-width: 461px) {
+  .order2 {
+    text-align: center !important;
+    padding-bottom: 5px;
+    padding-top: 2px;
+  }
+
+  .footer-right {
+    font-size: 10px;
+    height: auto;
+  }
+}
+
+@media (max-width: 356px) {
+  .order2 {
+    text-align: center !important;
+    padding-bottom: 5px;
+    padding-top: 2px;
+  }
+
+  .footer-right {
+    font-size: 10px;
+    height: auto;
+  }
+}
+
+/*
+
 */

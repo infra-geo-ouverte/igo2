@@ -188,11 +188,7 @@
 
     <app-map-overlay
       [@controlStateY]="getControlsOffsetY()"
-      [@controlStateX]="
-        (mediaService.media$ | async) !== 'mobile' && sidenavOpened
-          ? 'right'
-          : 'left'
-      "
+      [@controlStateX]="getOverlayPosition()"
     >
     </app-map-overlay>
   </mat-sidenav-content>

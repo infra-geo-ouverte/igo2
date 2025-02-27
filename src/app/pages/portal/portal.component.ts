@@ -530,6 +530,19 @@ export class PortalComponent implements OnInit, OnDestroy {
         this.appConfig.importExport.configFileToGeoDBService
       );
     }
+
+    document.addEventListener('updateSidenav', () => {
+      this.sidenavOpened = false;
+      this.resetOverlayPosition();
+    });
+  }
+
+  //méthode pour repositionner l'overlay
+  private resetOverlayPosition() {
+    const overlay = document.querySelector('app-map-overlay');
+    if (overlay) {
+      (overlay as HTMLElement).style.left = '10px';
+    }
   }
 
   private handleAppConfigs() {
@@ -1162,6 +1175,13 @@ export class PortalComponent implements OnInit, OnDestroy {
         ? 'firstRowFromBottom-expanded-maximized'
         : 'firstRowFromBottom-expanded'
       : 'firstRowFromBottom';
+  }
+
+  getOverlayPosition(): string {
+    if (this.mediaService.getMedia() === 'mobile') {
+      return 'left';
+    }
+    return this.sidenavOpened ? 'right' : 'left';
   }
 
   getBaselayersSwitcherStatus() {
