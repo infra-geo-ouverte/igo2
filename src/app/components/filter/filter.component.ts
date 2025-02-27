@@ -99,4 +99,14 @@ export class FilterComponent implements OnInit {
   toggleFilters(filterName: string) {
     this.showFiltersMap[filterName] = !this.showFiltersMap[filterName];
   }
+
+  resolveTypeValue(type_propriete_ou_location) {
+    if (type_propriete_ou_location.toLowerCase() === "l") {
+      return "Location";
+    } else if (type_propriete_ou_location.toLowerCase() === "p") {
+      return "Propriété";
+    } else {
+      return type_propriete_ou_location;
+    }
+  }
 }
