@@ -288,7 +288,7 @@
       "searchResultsTool": {
         "noResults": "Aucun résultat",
         "doSearch": "Veuillez effectuer une recherche dans la barre de recherche ci-dessus.",
-        "examples": "<b>Permet de rechercher des adresses, ou des lieux</b>.<br><br>Les recherches d'<u>adresses</u> peuvent être effectués selon une combinaison: <ul><li>du no. civique</li><li>du nom de la rue</li><li>de la ville</li><li>du code postal</li></ul> Exemples pour les <u>lieux</u>: <ul><li>Lac Poulin</li><li>Mcdo Lévis</li><li>Saint-Isidore</li></ul>",
+        "examples": "<b>Permet de rechercher des adresses ou des lieux</b>.<br><br>Les recherches d'<u>adresses</u> peuvent être effectués selon une combinaison: <ul><li>du numéro civique;</li><li>du nom de la rue;</li><li>de la ville;</li><li>du code postal.</li></ul> Exemples pour les <u>lieux</u>: <ul><li>Montréal</li><li>Rimouski</li><li>Édifice Hector-Fabre</li></ul>",
         "zoomOnFeatureTooltip": "Zoomer sur l'entité sélectionnée.",
         "zoomOnFeatureTooltipOutOfView": "L'entité est hors de la vue. Zoomer sur l'entité sélectionnée."
       }
