@@ -32,7 +32,9 @@ $footer-height-mobile: 32px;
 }
 
 ::ng-deep .portal-with-header-footer {
-  height: calc(100% - #{$header-height-mobile} - #{$footer-height-mobile * 2}) !important;
+  height: calc(
+    100% - #{$header-height-mobile} - #{$footer-height-mobile * 2}
+  ) !important;
 }
 
 ::ng-deep .portal-with-footer {

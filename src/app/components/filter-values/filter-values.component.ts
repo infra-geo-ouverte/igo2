@@ -32,4 +32,15 @@ export class FilterValuesComponent implements OnInit {
     this.filterService.filter.next(this.valuesMap);
     this.filterService.notifyFilterRemoved(key, value);
   }
+
+  resolveValue(key, value) {
+    if (key === 'type_propriete_ou_location') {
+      if (value.toLowerCase() === 'l') {
+        return 'Location';
+      } else if (value.toLowerCase() === 'p') {
+        return 'Propriété';
+      }
+    }
+    return value;
+  }
 }

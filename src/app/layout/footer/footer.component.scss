@@ -319,6 +319,7 @@ span {
   }
 }
 
+/*
 @media (max-width: 356px) {
   .order2 {
     text-align: center !important;
@@ -332,6 +333,9 @@ span {
   }
 }
 
-/*
-
+@media (max-width: 768px) {
+  .footer-right {
+    display: none;
+  }
+}
 */

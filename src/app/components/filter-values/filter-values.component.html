@@ -3,7 +3,7 @@
   <div class="values">
     <ng-container *ngFor="let item of valuesMap | keyvalue">
       <div class="value" *ngFor="let val of item.value">
-        {{ val }}
+        {{ resolveValue(item.key, val) }}
         <div class="delete" (click)="onDeleteValue(item.key, val)">
           <span class="cross"></span>
         </div>
