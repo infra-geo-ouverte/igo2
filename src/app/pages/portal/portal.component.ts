@@ -3,8 +3,10 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostListener,
   OnDestroy,
   OnInit,
+  TemplateRef,
   ViewChild
 } from '@angular/core';
 import {
@@ -94,6 +96,7 @@ import { debounceTime, first, pairwise, skipWhile, take } from 'rxjs/operators';
 import { getAppVersion } from 'src/app/app.utils';
 import { EnvironmentOptions } from 'src/environments/environnement.interface';
 
+import { SharedDataService } from './../../services/shared-data.service';
 import {
   controlSlideX,
   controlSlideY,
@@ -325,6 +328,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   public expanded = false;
 
+  @ViewChild('searchBarTemplate', { static: true })
+  searchBarTemplate: TemplateRef<any>;
+  isSmallScreen: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     public workspaceState: WorkspaceState,
@@ -351,7 +358,8 @@ export class PortalComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private editionWorkspaceService: EditionWorkspaceService,
     private directionState: DirectionState,
-    private configFileToGeoDBService: ConfigFileToGeoDBService
+    private configFileToGeoDBService: ConfigFileToGeoDBService,
+    private sharedDataService: SharedDataService // service de partage de données (igo-search-bar) avec footer
   ) {
     this.handleAppConfigs();
     this.storageService.set('version', getAppVersion(this.configService));
@@ -535,6 +543,21 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.sidenavOpened = false;
       this.resetOverlayPosition();
     });
+
+    this.onResize(); // Appeler pour initialiser l'état
+    this.sharedDataService.setSearchBarTemplate(this.searchBarTemplate);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth <= 822) {
+      this.sharedDataService.setShowSearchBar(true);
+      this.isSmallScreen = true;
+    } else {
+      this.sharedDataService.setShowSearchBar(false);
+      this.isSmallScreen = false;
+    }
   }
 
   //méthode pour repositionner l'overlay

@@ -12,34 +12,71 @@
       >
       </igo-menu-button>
 
-      <igo-search-bar
-        *ngIf="showSearchBar"
-        #searchBar
-        matTooltip="Faire une recherche"
-        matTooltipPosition="below"
-        [class.mat-elevation-z2]="!sidenavOpened"
-        [term]="searchBarTerm"
-        [termSplitter]="termSplitter"
-        [minLength]="minSearchTermLength"
-        [searchSettings]="false"
-        [forceNA]="appConfig.app?.forceCoordsNA"
-        [store]="searchStore"
-        (searchTermChange)="onSearchTermChange($event)"
-        [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
-        (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
-        [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
-        (searchResultsGeometryStatus)="
-          onSearchResultsGeometryStatusChange($event)
-        "
-        [reverseSearchCoordsFormatEnabled]="igoReverseSearchCoordsFormatEnabled"
-        (reverseSearchCoordsFormatStatus)="
-          onReverseCoordsFormatStatusChange($event)
-        "
-        (search)="onSearch($event)"
-        (clearFeature)="onClearSearch()"
-        (searchSettingsChange)="onSearchSettingsChange()"
-      >
-      </igo-search-bar>
+      <div class="search-bar" *ngIf="showSearchBar && !isSmallScreen">
+        <igo-search-bar
+          #searchBar
+          matTooltip="Faire une recherche"
+          matTooltipPosition="below"
+          [class.mat-elevation-z2]="!sidenavOpened"
+          [term]="searchBarTerm"
+          [termSplitter]="termSplitter"
+          [minLength]="minSearchTermLength"
+          [searchSettings]="false"
+          [forceNA]="appConfig.app?.forceCoordsNA"
+          [store]="searchStore"
+          (searchTermChange)="onSearchTermChange($event)"
+          [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
+          (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
+          [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
+          (searchResultsGeometryStatus)="
+            onSearchResultsGeometryStatusChange($event)
+          "
+          [reverseSearchCoordsFormatEnabled]="
+            igoReverseSearchCoordsFormatEnabled
+          "
+          (reverseSearchCoordsFormatStatus)="
+            onReverseCoordsFormatStatusChange($event)
+          "
+          (search)="onSearch($event)"
+          (clearFeature)="onClearSearch()"
+          (searchSettingsChange)="onSearchSettingsChange()"
+        >
+        </igo-search-bar>
+      </div>
+
+      <ng-template #searchBarTemplate>
+        <igo-search-bar
+          [ngClass]="{ 'footer-search-bar': context === 'footer' }"
+          *ngIf="showSearchBar"
+          #searchBar
+          matTooltip="Faire une recherche"
+          matTooltipPosition="below"
+          [class.mat-elevation-z2]="!sidenavOpened"
+          [term]="searchBarTerm"
+          [termSplitter]="termSplitter"
+          [minLength]="minSearchTermLength"
+          [searchSettings]="false"
+          [forceNA]="appConfig.app?.forceCoordsNA"
+          [store]="searchStore"
+          (searchTermChange)="onSearchTermChange($event)"
+          [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
+          (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
+          [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
+          (searchResultsGeometryStatus)="
+            onSearchResultsGeometryStatusChange($event)
+          "
+          [reverseSearchCoordsFormatEnabled]="
+            igoReverseSearchCoordsFormatEnabled
+          "
+          (reverseSearchCoordsFormatStatus)="
+            onReverseCoordsFormatStatusChange($event)
+          "
+          (search)="onSearch($event)"
+          (clearFeature)="onClearSearch()"
+          (searchSettingsChange)="onSearchSettingsChange()"
+        >
+        </igo-search-bar>
+      </ng-template>
     </div>
 
     <app-sidenav

@@ -127,7 +127,7 @@
   </ng-template>
 
   <ng-template [ngIf]="isDisplayingMap">
-    <div class="footer-right" id="footer-id">
+    <div class="footer-right" id="footer-id" *ngIf="!showSearchBar">
       <span class="order2">
         <span class="footer-text">
           <a
@@ -159,6 +159,9 @@
           >
         </span>
       </span>
+    </div>
+    <div *ngIf="showSearchBar" class="search-bar-placeholder">
+      <ng-container *ngTemplateOutlet="searchBarTemplate"></ng-container>
     </div>
   </ng-template>
 </footer>

@@ -1,13 +1,32 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 
 import { LanguageService } from '@igo2/core';
+
+import { SharedDataService } from './../../services/shared-data.service';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   @Input() isDisplayingMap: boolean;
-  constructor(protected languageService: LanguageService) {}
+
+  showSearchBar: boolean = false;
+  searchBarTemplate: TemplateRef<any>;
+
+  constructor(
+    protected languageService: LanguageService,
+    private sharedDataService: SharedDataService
+  ) {}
+
+  ngOnInit() {
+    this.sharedDataService.showSearchBar$.subscribe((value) => {
+      this.showSearchBar = value;
+    });
+
+    this.sharedDataService.searchBarTemplate$.subscribe((template) => {
+      this.searchBarTemplate = template;
+    });
+  }
 }
