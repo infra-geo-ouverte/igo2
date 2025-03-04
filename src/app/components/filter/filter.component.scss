@@ -22,6 +22,9 @@
 .filed.line {
   display: flex;
   flex-direction: row;
+  font-family: 'Open Sans', sans-serif;
+  color: #223654;
+  font-weight: 600;
 }
 
 .filed.line input[type='checkbox'] {
@@ -181,6 +184,18 @@
   color: #223654;
   font-size: 16px;
 }
+
+.container span,
+.filter-close span {
+  font-family: 'Open Sans', sans-serif;
+}
+
+::ng-deep .custom-checkbox .mdc-label {
+  font-family: 'Open Sans', sans-serif !important;
+  color: #223654;
+  font-size: 14px;
+}
+
 /*
 
 */

@@ -142,6 +142,7 @@
         <div class="checkbox-list">
           <div *ngFor="let rue of filterOptions['rue']">
             <mat-checkbox
+              class="custom-checkbox"
               (change)="onChange('rue', rue.toLowerCase())"
               [checked]="selectedFilters['rue']?.includes(rue.toLowerCase())"
               >{{ rue }}</mat-checkbox
@@ -220,6 +221,7 @@
             [value]="ville_municipalite"
           >
             <mat-checkbox
+              class="custom-checkbox"
               (change)="
                 onChange('ville_municipalite', ville_municipalite.toLowerCase())
               "
@@ -302,6 +304,7 @@
             [value]="numero_immeuble"
           >
             <mat-checkbox
+              class="custom-checkbox"
               (change)="
                 onChange('numero_immeuble', numero_immeuble.toLowerCase())
               "
@@ -394,6 +397,7 @@
             [value]="direction_immobiliere_nom"
           >
             <mat-checkbox
+              class="custom-checkbox"
               (change)="
                 onChange(
                   'direction_immobiliere_nom',
@@ -490,6 +494,7 @@
               [value]="nom_immeuble"
             >
               <mat-checkbox
+                class="custom-checkbox"
                 (change)="onChange('nom_immeuble', nom_immeuble.toLowerCase())"
                 [checked]="
                   selectedFilters['nom_immeuble']?.includes(
@@ -578,6 +583,7 @@
               [value]="vocation_principale"
             >
               <mat-checkbox
+                class="custom-checkbox"
                 (change)="
                   onChange(
                     'vocation_principale',
@@ -673,6 +679,7 @@
               [value]="region_adminsitrative"
             >
               <mat-checkbox
+                class="custom-checkbox"
                 (change)="
                   onChange(
                     'region_adminsitrative',
@@ -771,6 +778,7 @@
               [value]="type_propriete_ou_location"
             >
               <mat-checkbox
+                class="custom-checkbox"
                 (change)="
                   onChange(
                     'type_propriete_ou_location',
