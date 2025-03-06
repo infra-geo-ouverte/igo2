@@ -160,8 +160,18 @@
         </span>
       </span>
     </div>
-    <div *ngIf="showSearchBar" class="search-bar-placeholder">
-      <ng-container *ngTemplateOutlet="searchBarTemplate"></ng-container>
+
+    <div class="footer-mobile" *ngIf="showSearchBar">
+      <mat-expansion-panel [(expanded)]="isSidenavOpen">
+        <mat-expansion-panel-header>
+          <div class="search-bar-placeholder">
+            <ng-container *ngTemplateOutlet="searchBarTemplate"></ng-container>
+          </div>
+        </mat-expansion-panel-header>
+        <div class="sidenav-placeholder">
+          <ng-container *ngTemplateOutlet="sidenavTemplate"></ng-container>
+        </div>
+      </mat-expansion-panel>
     </div>
   </ng-template>
 </footer>

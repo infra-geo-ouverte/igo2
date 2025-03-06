@@ -1,9 +1,10 @@
 <div id="sideresultsDesktop" class="sideresult">
   <mat-sidenav
     #sidenav
-    mode="side"
+    [mode]="isSmallScreen ? 'over' : 'side'"
     [autoFocus]="false"
     [(opened)]="panelOpenState"
+    [ngClass]="{ 'sidenav-mobile': isSmallScreen }"
   >
     <div #content class="app-sidenav-content">
       <div #showLegend *ngIf="legendPanelOpened === true">

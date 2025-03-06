@@ -13,6 +13,11 @@ export class SharedDataService {
     new BehaviorSubject<TemplateRef<any> | null>(null);
   searchBarTemplate$ = this.searchBarTemplateSubject.asObservable();
 
+  private sidenavTemplateSubject = new BehaviorSubject<TemplateRef<any> | null>(
+    null
+  );
+  sidenavTemplate$ = this.sidenavTemplateSubject.asObservable();
+
   constructor() {}
 
   setShowSearchBar(value: boolean) {
@@ -21,5 +26,9 @@ export class SharedDataService {
 
   setSearchBarTemplate(template: TemplateRef<any>) {
     this.searchBarTemplateSubject.next(template);
+  }
+
+  setSidenavTemplate(template: TemplateRef<any>) {
+    this.sidenavTemplateSubject.next(template);
   }
 }

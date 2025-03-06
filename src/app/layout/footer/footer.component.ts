@@ -14,6 +14,9 @@ export class FooterComponent implements OnInit {
 
   showSearchBar: boolean = false;
   searchBarTemplate: TemplateRef<any>;
+  sidenavTemplate: TemplateRef<any>;
+
+  isSidenavOpen: boolean = false;
 
   constructor(
     protected languageService: LanguageService,
@@ -27,6 +30,10 @@ export class FooterComponent implements OnInit {
 
     this.sharedDataService.searchBarTemplate$.subscribe((template) => {
       this.searchBarTemplate = template;
+    });
+
+    this.sharedDataService.sidenavTemplate$.subscribe((template) => {
+      this.sidenavTemplate = template;
     });
   }
 }

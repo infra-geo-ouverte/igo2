@@ -78,13 +78,25 @@
       </ng-template>
     </div>
 
-    <app-sidenav
-      [map]="map"
-      [(opened)]="sidenavOpened"
-      [(searchInit)]="searchInit"
-      [(legendPanelOpened)]="legendPanelOpened"
-    >
-    </app-sidenav>
+    <div class="sidenav" *ngIf="!isSmallScreen">
+      <app-sidenav
+        [map]="map"
+        [(opened)]="sidenavOpened"
+        [(searchInit)]="searchInit"
+        [(legendPanelOpened)]="legendPanelOpened"
+      >
+      </app-sidenav>
+    </div>
+
+    <ng-template #sidenavTemplate>
+      <app-sidenav
+        [map]="map"
+        [(opened)]="sidenavOpened"
+        [(searchInit)]="searchInit"
+        [(legendPanelOpened)]="legendPanelOpened"
+      >
+      </app-sidenav>
+    </ng-template>
 
     <igo-map-browser
       igoMapOffline

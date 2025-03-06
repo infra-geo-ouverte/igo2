@@ -332,6 +332,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   searchBarTemplate: TemplateRef<any>;
   isSmallScreen: boolean = false;
 
+  @ViewChild('sidenavTemplate', { static: true })
+  sidenavTemplate: TemplateRef<any>;
+
   constructor(
     private route: ActivatedRoute,
     public workspaceState: WorkspaceState,
@@ -546,6 +549,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
     this.onResize(); // Appeler pour initialiser l'état
     this.sharedDataService.setSearchBarTemplate(this.searchBarTemplate);
+    this.sharedDataService.setSidenavTemplate(this.sidenavTemplate);
   }
 
   @HostListener('window:resize', ['$event'])

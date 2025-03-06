@@ -200,6 +200,8 @@ export class SidenavComponent implements OnInit, OnDestroy {
   @Output() closeQuery = new EventEmitter<boolean>();
   public mapLayersShownInLegend: Layer[];
 
+  isSmallScreen: boolean = false;
+
   constructor(
     private configService: ConfigService,
     private mapService: MapService,
@@ -216,6 +218,11 @@ export class SidenavComponent implements OnInit, OnDestroy {
         : this.configService.getConfig('hasToolbox');
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.isSmallScreen = window.innerWidth <= 822;
+  }
+
   ngOnInit() {
     this.queryStore.entities$.subscribe((entities) => {
       // eslint-disable-next-line eqeqeq
@@ -227,6 +234,8 @@ export class SidenavComponent implements OnInit, OnDestroy {
         this.onClearSearch();
       }
     });
+
+    this.onResize();
   } // End OnInit
 
   @HostListener('change')

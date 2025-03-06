@@ -25,7 +25,7 @@ igo-message-center
 $header-height: 216px;
 $header-height-mobile: 216px;
 $footer-height: 32px;
-$footer-height-mobile: 40px;
+$footer-height-mobile: 32px;
 
 ::ng-deep .portal-with-header {
   height: calc(100% - #{$header-height-mobile}) !important;
@@ -52,5 +52,15 @@ $footer-height-mobile: 40px;
 
   ::ng-deep .portal-with-footer {
     height: calc(100% - #{$footer-height * 2}) !important;
+  }
+}
+
+@media screen and (max-width: 822px) {
+  ::ng-deep .portal-with-header-footer {
+    height: calc(100% - #{$header-height-mobile} - #{40px * 2}) !important;
+  }
+
+  ::ng-deep .portal-with-footer {
+    height: calc(100% - #{40px * 2}) !important;
   }
 }
