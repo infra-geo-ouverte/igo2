@@ -241,7 +241,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   get backdropShown(): boolean {
     return (
       (this.isMobile() || (this.isTablet() && this.isPortrait())) &&
-      this.sidenavOpened
+      this.sidenavOpened &&
+      !this.isSmallScreen
     );
   }
 
@@ -330,10 +331,11 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   @ViewChild('searchBarTemplate', { static: true })
   searchBarTemplate: TemplateRef<any>;
-  isSmallScreen: boolean = false;
 
   @ViewChild('sidenavTemplate', { static: true })
   sidenavTemplate: TemplateRef<any>;
+
+  isSmallScreen: boolean = false;
 
   constructor(
     private route: ActivatedRoute,

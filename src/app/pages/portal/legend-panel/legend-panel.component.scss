@@ -1,4 +1,4 @@
-.header-container{
+.header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,14 +6,14 @@
   margin-right: 16px;
 }
 
-.header-container button{
+.header-container button {
   border: none;
   background-color: white;
   margin-top: 10px;
   cursor: pointer;
 }
 
-.table-container{
+.table-container {
   margin-right: 55px;
 }
 
@@ -111,36 +111,36 @@ td {
 }
 
 .sideresult-closed {
-  left:0!important;
-  float:right;
+  left: 0 !important;
+  float: right;
 }
 
 .igo-panel-title {
-  margin-top:8px;
-  font-size:18px;
-  color:#095797 !important;
-  text-align:center
+  margin-top: 8px;
+  font-size: 18px;
+  color: #095797 !important;
+  text-align: center;
 }
 
 .feature-info {
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  max-width:90%;
-  flex-wrap:wrap
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  flex-wrap: wrap;
 }
 
-
-
-.mat-icon, mat-button-wrapper, .mat-icon-button   .mat-icon, .mat-icon-button {
-  line-height:26px;
-  height:24px;
-  width:24px;
-  float:right
+.mat-icon,
+mat-button-wrapper,
+.mat-icon-button .mat-icon,
+.mat-icon-button {
+  line-height: 26px;
+  height: 24px;
+  width: 24px;
+  float: right;
 }
 
-.mat-icon svg{
-  height:20px;
-  width:20px
+.mat-icon svg {
+  height: 20px;
+  width: 20px;
 }
-

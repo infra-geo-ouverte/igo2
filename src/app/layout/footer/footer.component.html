@@ -162,7 +162,7 @@
     </div>
 
     <div class="footer-mobile" *ngIf="showSearchBar">
-      <mat-expansion-panel [(expanded)]="isSidenavOpen">
+      <mat-expansion-panel (afterCollapse)="onPanelClose()">
         <mat-expansion-panel-header>
           <div class="search-bar-placeholder">
             <ng-container *ngTemplateOutlet="searchBarTemplate"></ng-container>

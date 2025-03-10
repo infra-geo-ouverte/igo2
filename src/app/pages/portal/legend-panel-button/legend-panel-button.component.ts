@@ -6,7 +6,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./legend-panel-button.component.scss']
 })
 export class LegendPanelButtonComponent {
-
   @Output() toggleLegend = new EventEmitter<boolean>();
 
   @Input()
@@ -18,10 +17,10 @@ export class LegendPanelButtonComponent {
   }
   private _legendPanelOpened: boolean;
 
-  constructor() { }
+  constructor() {}
 
   toggleLegendPanel(): void {
-    this.legendPanelOpened = !this.legendPanelOpened
+    this.legendPanelOpened = !this.legendPanelOpened;
     this.toggleLegend.emit(this.legendPanelOpened);
   }
 }
