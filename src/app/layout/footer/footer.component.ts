@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 import { LanguageService } from '@igo2/core';
 
@@ -11,6 +18,8 @@ import { SharedDataService } from './../../services/shared-data.service';
 })
 export class FooterComponent implements OnInit {
   @Input() isDisplayingMap: boolean;
+
+  @ViewChild(MatExpansionPanel) expansionPanel: MatExpansionPanel;
 
   showSearchBar: boolean = false;
   searchBarTemplate: TemplateRef<any>;
@@ -33,6 +42,13 @@ export class FooterComponent implements OnInit {
     this.sharedDataService.sidenavTemplate$.subscribe((template) => {
       this.sidenavTemplate = template;
     });
+
+    // Écoutez les événements pour ouvrir le panneau
+    this.sharedDataService.sidenavResults$.subscribe((hasResults) => {
+      if (hasResults && this.expansionPanel) {
+        this.expansionPanel.open(); // Ouvrir le panneau
+      }
+    });
   }
 
   // eslint-disable-next-line max-len
@@ -50,5 +66,7 @@ export class FooterComponent implements OnInit {
         );
       }
     }, 100);
+
+    this.sharedDataService.setSidenavResults(false);
   }
 }

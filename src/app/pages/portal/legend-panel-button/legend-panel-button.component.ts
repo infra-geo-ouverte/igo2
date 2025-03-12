@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { SharedDataService } from 'src/app/services/shared-data.service';
+
 @Component({
   selector: 'app-legend-panel-button',
   templateUrl: './legend-panel-button.component.html',
@@ -17,10 +19,12 @@ export class LegendPanelButtonComponent {
   }
   private _legendPanelOpened: boolean;
 
-  constructor() {}
+  constructor(private sharedDataService: SharedDataService) {}
 
   toggleLegendPanel(): void {
     this.legendPanelOpened = !this.legendPanelOpened;
     this.toggleLegend.emit(this.legendPanelOpened);
+
+    this.sharedDataService.setSidenavResults(true);
   }
 }
