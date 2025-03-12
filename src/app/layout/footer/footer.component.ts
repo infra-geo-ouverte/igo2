@@ -43,10 +43,14 @@ export class FooterComponent implements OnInit {
       this.sidenavTemplate = template;
     });
 
-    // Écoutez les événements pour ouvrir le panneau
+    // Écoutez les événements pour ouvrir ou fermer le panneau
     this.sharedDataService.sidenavResults$.subscribe((hasResults) => {
-      if (hasResults && this.expansionPanel) {
-        this.expansionPanel.open(); // Ouvrir le panneau
+      if (this.expansionPanel) {
+        if (hasResults) {
+          this.expansionPanel.open();
+        } else {
+          this.expansionPanel.close();
+        }
       }
     });
   }
