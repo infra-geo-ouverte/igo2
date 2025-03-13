@@ -80,6 +80,15 @@
       left: 0 !important;
       position: absolute;
     }
+
+    .app-sidenav-content {
+      margin-top: $app-sidenav-margin-top;
+      height: $app-sidenav-height;
+      padding: 0 8px 0 24px !important;
+      @include mobile {
+        height: calc(100% - #{$app-sidenav-margin-top});
+      }
+    }
   }
 
   @media (max-width: 822px) {
@@ -106,6 +115,11 @@
     #sideresult-button {
       display: none;
     }
+
+    .app-sidenav-content {
+      height: calc(100% - #{$app-sidenav-margin-top});
+      padding: 0 8px 0 0 !important;
+    }
   }
 
   igo-home-button {
@@ -116,15 +130,6 @@
   .app-content,
   igo-panel {
     height: 100%;
-  }
-
-  .app-sidenav-content {
-    margin-top: $app-sidenav-margin-top;
-    height: $app-sidenav-height;
-    padding: 0 8px 0 24px !important;
-    @include mobile {
-      height: calc(100% - #{$app-sidenav-margin-top});
-    }
   }
 
   igo-panel ::ng-deep .igo-panel-content {
