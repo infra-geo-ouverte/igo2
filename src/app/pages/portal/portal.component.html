@@ -24,6 +24,9 @@
         [store]="searchStore"
         (searchTermChange)="onSearchTermChange($event)"
         [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
+        [allowResetSearchSourcesOptions]="
+          appConfig.allowResetSearchSourcesOptions
+        "
         (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
         [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
         (searchResultsGeometryStatus)="
