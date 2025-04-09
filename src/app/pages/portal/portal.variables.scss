@@ -34,13 +34,12 @@ $app-toast-panel-html-large-height: 55vh;
 
 $app-sidenav-margin-top: 48px + 5px; // Search bar height + margin-top
 $app-sidenav-height: calc(100% - #{$app-sidenav-margin-top});
-$app-sidenav-width: 400px;
 $app-sidenav-width-mobile: calc(
   100% - #{$app-mobile-min-space-right} - #{core.$igo-margin}
 );
 
 $search-bar-left: core.$igo-icon-size + core.$igo-margin;
-$search-bar-width: calc($app-sidenav-width - core.$igo-margin);
+$search-bar-width: calc(var(--sidenav-width) - #{core.$igo-margin} - 1px);
 $search-bar-width-mobile: calc($app-sidenav-width-mobile - core.$igo-margin);
 
 $app-footer-height: 49px;

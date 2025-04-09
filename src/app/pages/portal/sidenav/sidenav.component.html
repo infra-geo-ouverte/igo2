@@ -42,4 +42,11 @@
       </igo-panel>
     </div>
   </div>
+
+  <igo-resizable-bar
+    anchor="right"
+    min="360"
+    max="800"
+    (change)="handleChange($event)"
+  ></igo-resizable-bar>
 </mat-sidenav>

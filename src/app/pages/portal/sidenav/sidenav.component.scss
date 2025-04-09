@@ -19,12 +19,13 @@
     // the sidenav from focusing a random button on open.
     z-index: 3 !important;
     height: 100%;
-    width: portal.$app-sidenav-width;
+    width: var(--sidenav-width);
     box-sizing: content-box;
+    overflow-y: unset;
 
     @include media.mobile {
       width: portal.$app-sidenav-width-mobile;
-      max-width: portal.$app-sidenav-width;
+      max-width: var(--sidenav-width);
     }
   }
 
