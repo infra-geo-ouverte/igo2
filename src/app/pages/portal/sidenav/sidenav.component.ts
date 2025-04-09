@@ -16,13 +16,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { HomeButtonComponent } from '@igo2/common/home-button';
 import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
 import { PanelComponent } from '@igo2/common/panel';
-import {
-  IgoToolModule,
-  IgoToolboxModule,
-  Tool,
-  Toolbox,
-  ToolboxComponent
-} from '@igo2/common/tool';
+import { ResizableBarComponent } from '@igo2/common/resizable-bar';
+import { Tool, Toolbox, ToolboxComponent } from '@igo2/common/tool';
 import { ConfigService } from '@igo2/core/config';
 import { IgoMap, isLayerItem } from '@igo2/geo';
 import { CatalogState, ToolState } from '@igo2/integration';
@@ -50,8 +45,7 @@ import { importAllTools } from './sidenav-import';
     PanelComponent,
     ToolboxComponent,
     TranslateModule,
-    IgoToolModule,
-    IgoToolboxModule
+    ResizableBarComponent
   ]
 })
 export class SidenavComponent implements OnInit, OnDestroy {
@@ -84,6 +78,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   @Output() openedChange = new EventEmitter<boolean>();
   @Output() toolChange = new EventEmitter<Tool>();
+  @Output() widthChange = new EventEmitter<number>();
 
   get toolbox(): Toolbox {
     return this.toolState.toolbox;
@@ -134,6 +129,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.activeTool$$.unsubscribe();
+  }
+
+  handleChange(event: MouseEvent): void {
+    this.widthChange.emit(event.clientX);
   }
 
   onPreviousButtonClick() {

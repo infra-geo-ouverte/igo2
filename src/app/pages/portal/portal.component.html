@@ -3,7 +3,11 @@
     <igo-backdrop [shown]="backdropShown" (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <div class="navbar-container" [class.--empty-spacer]="sidenavOpened">
+    <div
+      class="navbar-container"
+      [class.--empty-spacer]="sidenavOpened"
+      [style.width.px]="sidenavOpened && sidenavWidth ? sidenavWidth : '400'"
+    >
       <igo-menu-button
         *ngIf="showMenuButton"
         [class.mat-elevation-z2]="!sidenavOpened"
@@ -47,6 +51,7 @@
       [map]="map"
       [(opened)]="sidenavOpened"
       (toolChange)="toolChanged($event)"
+      (widthChange)="handleWidth($event)"
     >
     </app-sidenav>
 
@@ -155,6 +160,7 @@
         class="map-actions --vertical --bottom --left"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()"
+        [style.left.px]="sidenavOpened && sidenavWidth ? sidenavWidth + 4 : ''"
       >
         <igo-baselayers-switcher
           class="mat-elevation-z2"

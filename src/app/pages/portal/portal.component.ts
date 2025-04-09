@@ -275,6 +275,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public homeCenter: [number, number];
   public homeZoom: number;
   isTouchScreen: boolean;
+  sidenavWidth: number;
 
   @ViewChild('mapBrowser', { read: ElementRef, static: true })
   mapBrowser: ElementRef;
@@ -404,6 +405,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    private elementRef: ElementRef,
     private analyticsListenerService: AnalyticsListenerService,
     private route: ActivatedRoute,
     public workspaceState: WorkspaceState,
@@ -1034,6 +1036,14 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private openGoogleStreetView(coord: [number, number]) {
     window.open(GoogleLinks.getGoogleStreetViewLink(coord[0], coord[1]));
+  }
+
+  handleWidth(width: number): void {
+    (this.elementRef.nativeElement as HTMLElement).style.setProperty(
+      '--sidenav-width',
+      `${width}px`
+    );
+    this.sidenavWidth = width + 4;
   }
 
   searchCoordinate(coord: [number, number]) {
