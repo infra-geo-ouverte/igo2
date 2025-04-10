@@ -1324,7 +1324,8 @@ export class PortalComponent implements OnInit, OnDestroy {
                   dataProjection: entity.entity.data.projection,
                   featureProjection: this.map.projection
                 })
-              );
+              )
+              .flat();
             const totalExtent = computeOlFeaturesExtent(
               searchResultsOlFeatures,
               this.map.viewProjection

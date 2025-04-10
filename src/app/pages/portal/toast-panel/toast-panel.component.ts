@@ -296,7 +296,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       );
       moveToOlFeatures(
         this.map.viewController,
-        [localOlFeature],
+        localOlFeature,
         FeatureMotion.Default
       );
     }
@@ -431,7 +431,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           );
           moveToOlFeatures(
             this.map.viewController,
-            [localOlFeature],
+            localOlFeature,
             FeatureMotion.Zoom
           );
         }
@@ -674,7 +674,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       );
       moveToOlFeatures(
         this.map.viewController,
-        [localOlFeature],
+        localOlFeature,
         FeatureMotion.Default
       );
     }
@@ -893,7 +893,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     );
     moveToOlFeatures(
       this.map.viewController,
-      [localOlFeature],
+      localOlFeature,
       FeatureMotion.Zoom
     );
   }
