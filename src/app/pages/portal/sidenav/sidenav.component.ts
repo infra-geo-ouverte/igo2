@@ -16,13 +16,21 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { HomeButtonComponent } from '@igo2/common/home-button';
 import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
 import { PanelComponent } from '@igo2/common/panel';
-import { Tool, Toolbox, ToolboxComponent } from '@igo2/common/tool';
+import {
+  IgoToolModule,
+  IgoToolboxModule,
+  Tool,
+  Toolbox,
+  ToolboxComponent
+} from '@igo2/common/tool';
 import { ConfigService } from '@igo2/core/config';
 import { IgoMap, isLayerItem } from '@igo2/geo';
 import { CatalogState, ToolState } from '@igo2/integration';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
+
+import { importAllTools } from './sidenav-import';
 
 @Component({
   selector: 'app-sidenav',
@@ -42,7 +50,9 @@ import { BehaviorSubject, Subscription } from 'rxjs';
     NgIf,
     PanelComponent,
     ToolboxComponent,
-    TranslateModule
+    TranslateModule,
+    IgoToolModule,
+    IgoToolboxModule
   ]
 })
 export class SidenavComponent implements OnInit, OnDestroy {
@@ -84,7 +94,9 @@ export class SidenavComponent implements OnInit, OnDestroy {
     private toolState: ToolState,
     private configService: ConfigService,
     private catalogState: CatalogState
-  ) {}
+  ) {
+    importAllTools();
+  }
 
   ngOnInit() {
     this.activeTool$$ = this.toolbox.activeTool$.subscribe((tool: Tool) => {
