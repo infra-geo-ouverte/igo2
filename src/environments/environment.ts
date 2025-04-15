@@ -20,6 +20,7 @@ export const environment: AppEnvironmentOptions = {
         enable: true
       }
     },
+    allowResetSearchSourcesOptions: true,
     auth: {
       url: '/apis/users',
       tokenKey: 'id_token_igo',
