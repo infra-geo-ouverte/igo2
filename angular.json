@@ -318,7 +318,7 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
-            "eslintConfig": "eslint.config.js"
+            "eslintConfig": "eslint.config.mjs"
           }
         },
         "e2e": {
