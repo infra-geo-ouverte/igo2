@@ -25,12 +25,19 @@
     max-width: $search-bar-width;
   }
 
+  //-----------------------
   igo-search-bar {
     flex: 1;
     background-color: $app-background-color;
     font-size: 16px;
     margin-left: $igo-margin;
+    display: flex;
+    gap: 4px;
+    max-width: 360px;
+    max-height: 40px;
+    border: 1px solid #6b6b6b;
 
+    /*
     ::ng-deep .mat-mdc-form-field {
       &:hover {
         border: 2px solid black !important;
@@ -39,8 +46,24 @@
       &:focus-within {
         border: 2px solid #095797 !important;
       }
-    }
+    }*/
   }
+
+  ::ng-deep .mat-mdc-form-field-icon-suffix button[mat-icon-button] {
+    background-color: white !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field-icon-suffix button[mat-icon-button] mat-icon {
+    color: #6b6b6b !important;
+  }
+
+  ::ng-deep
+    .mat-mdc-form-field-icon-suffix
+    button[mat-icon-button]:hover
+    mat-icon {
+    color: black !important;
+  }
+  //-----------------
 
   igo-menu-button {
     transition: margin-left 300ms;
@@ -480,17 +503,6 @@ app-toast-panel-for-expansion
   }
 }
 
-igo-search-bar {
-  // color:blue; null effect
-  display: flex;
-  gap: 4px;
-}
-
-igo-search-bar {
-  max-width: 360px;
-  max-height: 40px;
-}
-
 @media only screen and (orientation: portrait) and (max-width: 599px),
   only screen and (orientation: landscape) and (max-width: 959px) {
   igo-search-bar {
@@ -535,6 +547,7 @@ igo-search-results igo-list,
   z-index: 1;
 }
 
+//mobile : passage dans le pied de page
 @media (max-width: 822px) {
   igo-search-bar {
     display: flex;
@@ -547,9 +560,9 @@ igo-search-results igo-list,
     max-width: 750px;
     max-height: 40px;
     left: 16px !important;
-    border: 1px solid #c4c2c2;
+    border: 1px solid #5a5a5a;
     z-index: 1;
-
+    /*
     ::ng-deep .mat-mdc-form-field {
       &:hover {
         border: 2px solid black !important;
@@ -559,6 +572,21 @@ igo-search-results igo-list,
         border: 2px solid #095797 !important;
       }
     }
+    */
+  }
+  ::ng-deep .mat-mdc-form-field-icon-suffix button[mat-icon-button] {
+    background-color: white !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field-icon-suffix button[mat-icon-button] mat-icon {
+    color: #6b6b6b !important;
+  }
+
+  ::ng-deep
+    .mat-mdc-form-field-icon-suffix
+    button[mat-icon-button]:hover
+    mat-icon {
+    color: black !important;
   }
 }
 
