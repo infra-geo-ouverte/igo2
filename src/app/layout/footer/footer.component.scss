@@ -324,6 +324,7 @@ span {
     display: none;
   }
 
+  /*
   .footer-mobile {
     position: fixed;
     bottom: 0;
@@ -352,6 +353,77 @@ span {
     width: 100%;
   }
 
+  .icone {
+    position: absolute;
+    top: -30px;
+    display: flex;
+    left: 50%;
+    background-color: white;
+    width: 50px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+  */
+  .footer-mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    //padding-top: 10px;
+    //padding-bottom: 10px;
+  }
+
+  mat-expansion-panel {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  mat-expansion-panel-header {
+    padding: 10px 16px !important;
+    background-color: white !important;
+  }
+
+  /* Masquer l'indicateur d'expansion (flèche) du mat-expansion-panel-header */
+  ::ng-deep .mat-expansion-indicator {
+    display: none !important;
+  }
+
+  .search-bar-placeholder {
+    width: 100%;
+    z-index: 1001;
+  }
+
+  .sidenav-placeholder {
+    width: 100%;
+  }
+
+  .icone {
+    position: absolute;
+    top: -23px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    width: 40px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1002;
+  }
+
+  .arrow-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /*désactiver les clics sur le header lui-même */
+  ::ng-deep .mat-expansion-panel-header:hover {
+    cursor: default !important;
+  }
   /*
   */
 }

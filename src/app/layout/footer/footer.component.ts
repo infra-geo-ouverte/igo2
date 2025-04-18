@@ -73,4 +73,14 @@ export class FooterComponent implements OnInit {
 
     this.sharedDataService.setSidenavResults(false);
   }
+
+  togglePanel() {
+    if (this.expansionPanel) {
+      if (this.expansionPanel.expanded) {
+        this.expansionPanel.close();
+      } else {
+        this.expansionPanel.open();
+      }
+    }
+  }
 }
