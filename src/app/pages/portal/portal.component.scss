@@ -61,8 +61,16 @@
     .mat-mdc-form-field-icon-suffix
     button[mat-icon-button]:hover
     mat-icon {
-    color: black !important;
+    color: #4e99d6 !important;
   }
+
+  ::ng-deep
+    .mat-mdc-form-field-icon-suffix
+    button[mat-icon-button]
+    .mdc-icon-button__ripple {
+    display: none !important;
+  }
+
   //-----------------
 
   igo-menu-button {
@@ -586,7 +594,14 @@ igo-search-results igo-list,
     .mat-mdc-form-field-icon-suffix
     button[mat-icon-button]:hover
     mat-icon {
-    color: black !important;
+    color: #4e99d6 !important;
+  }
+
+  ::ng-deep
+    .mat-mdc-form-field-icon-suffix
+    button[mat-icon-button]
+    .mdc-icon-button__ripple {
+    display: none !important;
   }
 }
 
