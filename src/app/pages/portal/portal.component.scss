@@ -59,13 +59,6 @@
 
   ::ng-deep
     .mat-mdc-form-field-icon-suffix
-    button[mat-icon-button]:hover
-    mat-icon {
-    color: #4e99d6 !important;
-  }
-
-  ::ng-deep
-    .mat-mdc-form-field-icon-suffix
     button[mat-icon-button]
     .mdc-icon-button__ripple {
     display: none !important;
@@ -588,13 +581,6 @@ igo-search-results igo-list,
 
   ::ng-deep .mat-mdc-form-field-icon-suffix button[mat-icon-button] mat-icon {
     color: #095797 !important;
-  }
-
-  ::ng-deep
-    .mat-mdc-form-field-icon-suffix
-    button[mat-icon-button]:hover
-    mat-icon {
-    color: #4e99d6 !important;
   }
 
   ::ng-deep

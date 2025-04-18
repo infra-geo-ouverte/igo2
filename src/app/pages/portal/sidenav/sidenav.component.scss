@@ -60,20 +60,17 @@
       left: 401px;
       z-index: 1;
       padding: 0;
-      min-width: 12px !important;
-      width: 36x;
-      height: 36px;
+      min-width: 24px !important;
+      width: 30px;
+      height: 40px;
+      background-color: white;
     }
 
     #sideresult-button > mat-icon {
       margin: 0;
-      width: 36px;
-      height: 36px;
-      color: white !important;
-    }
-
-    #sideresult-button:hover {
-      background-color: #156bb2;
+      width: 30px;
+      height: 40px;
+      color: #095797 !important;
     }
 
     .sideresult-closed {
