@@ -57,7 +57,8 @@ $footer-height-mobile: 32px;
 
 @media screen and (max-width: 822px) {
   ::ng-deep .portal-with-header-footer {
-    height: calc(100% - #{$header-height-mobile} - #{40px * 2}) !important;
+    //height: calc(100% - #{$header-height-mobile} - #{40px * 2}) !important;
+    height: calc(100% - 315px) !important;
   }
 
   ::ng-deep .portal-with-footer {

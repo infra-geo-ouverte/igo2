@@ -324,7 +324,6 @@ span {
     display: none;
   }
 
-  /*
   .footer-mobile {
     position: fixed;
     bottom: 0;
@@ -332,48 +331,9 @@ span {
     width: 100%;
     z-index: 1000;
     background-color: white;
-  }
-
-  mat-expansion-panel {
-    border-radius: 0 !important;
-    box-shadow: none !important;
-  }
-
-  mat-expansion-panel-header {
-    padding: 10px 16px;
-    background-color: white;
-  }
-
-  .search-bar-placeholder {
-    width: 100%;
-    z-index: 1001;
-  }
-
-  .sidenav-placeholder {
-    width: 100%;
-  }
-
-  .icone {
-    position: absolute;
-    top: -30px;
-    display: flex;
-    left: 50%;
-    background-color: white;
-    width: 50px;
-    height: 30px;
-    align-items: center;
-    justify-content: center;
-  }
-  */
-  .footer-mobile {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: white;
-    //padding-top: 10px;
-    //padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: auto;
   }
 
   mat-expansion-panel {
