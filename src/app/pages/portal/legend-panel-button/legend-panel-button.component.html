@@ -1,7 +1,12 @@
 <button
-    mat-raised-button
-    class="legend-buton"
-    [matTooltip]="!legendPanelOpened ? ('legend.legendOpen' | translate) : 'legend.legendClose' | translate"
-    (click)="toggleLegendPanel()">
-    {{ 'legend.legendButton' | translate }}
+  mat-raised-button
+  class="legend-buton"
+  [matTooltip]="
+    !legendPanelOpened
+      ? ('legend.legendOpen' | translate)
+      : ('legend.legendClose' | translate)
+  "
+  (click)="toggleLegendPanel()"
+>
+  {{ 'legend.legendButton' | translate }}
 </button>
