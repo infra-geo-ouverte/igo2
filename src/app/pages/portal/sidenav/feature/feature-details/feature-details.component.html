@@ -1,12 +1,12 @@
 <div *ngIf="this.mapQueryClick && feature.properties">
   <div class="query-content">
-    <h3 class="igo-panel-title">
+    <p class="igo-panel-title">
       {{
         ('sideResult.title.immeuble' | translate) +
           ' ' +
           feature.properties.numero_immeuble
       }}
-    </h3>
+    </p>
     <div *ngIf="feature.properties.nom_immeuble" class="attribute">
       <p class="attribute-label">
         {{ 'sideResult.nom_immeuble' | translate }} :&nbsp;

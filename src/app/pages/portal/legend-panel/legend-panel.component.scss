@@ -1,9 +1,16 @@
+.feature-info {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  flex-wrap: wrap;
+}
+
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 8px;
-  margin-right: 16px;
+  margin-left: 16px;
 }
 
 .header-container button {
@@ -14,7 +21,8 @@
 }
 
 .table-container {
-  margin-right: 55px;
+  margin-right: 50px;
+  margin-left: 10px;
 }
 
 .circle-container {
@@ -120,14 +128,6 @@ td {
   font-size: 18px;
   color: #095797 !important;
   text-align: center;
-}
-
-.feature-info {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  max-width: 90%;
-  flex-wrap: wrap;
 }
 
 .mat-icon,
