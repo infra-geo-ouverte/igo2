@@ -39,8 +39,8 @@
 }
 
 .icon {
-  width: 20px;
-  max-width: 20px;
+  width: 24px;
+  max-width: 24px;
   height: auto;
   object-fit: contain;
 }
@@ -85,6 +85,13 @@
 .element-icon {
   width: 20px;
   max-width: 20px;
+  height: auto;
+  object-fit: contain;
+}
+
+.element-icon-2 {
+  width: 24px;
+  max-width: 24px;
   height: auto;
   object-fit: contain;
 }
