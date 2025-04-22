@@ -55,8 +55,8 @@
 
 .element {
   color: #223654;
-  padding-left: 20px;
-  padding-right: 20px;
+  //padding-left: 20px;
+  //padding-right: 20px;
   width: auto;
   margin: 5px 0px;
 }
@@ -110,37 +110,6 @@
   margin-top: 53px;
 }
 
-.google-maps-button {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background-color: #095797;
-  padding: 10px 15px;
-  border-radius: 3px;
-  text-decoration: none;
-  font-weight: bold;
-  width: 229px;
-  height: 40px;
-  margin-left: 16px;
-  margin-top: 54px;
-  margin-bottom: 40px;
-}
-
-.google-maps-button img {
-  width: 20px;
-  height: 20px;
-  padding-bottom: 4px;
-}
-
-.google-maps-button a {
-  color: white;
-  text-decoration: none;
-}
-
-.google-maps-button:hover {
-  background-color: #2774b3;
-}
-
 .carte-button {
   display: flex;
   align-items: center;
@@ -152,7 +121,7 @@
   font-weight: bold;
   width: 359px;
   height: 40px;
-  margin-left: 16px;
+  //margin-left: 16px;
   margin-top: 54px;
   color: white;
   border-width: 0px;
@@ -180,7 +149,7 @@
   font-weight: bold;
   width: 229px;
   height: 40px;
-  margin-left: 16px;
+  //margin-left: 16px;
   margin-top: 54px;
   margin-bottom: 40px;
   color: white;
@@ -198,10 +167,12 @@
   background-color: #2774b3;
 }
 
+/*
 .coordinates-caract {
   padding-left: 20px;
   padding-right: 20px;
 }
+*/
 
 @media (max-width: 372px) {
   .nom_de_immeuble {
