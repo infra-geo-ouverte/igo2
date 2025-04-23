@@ -100,6 +100,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 16px;
   margin-bottom: 16px;
   font-size: 16px;
 }
@@ -117,18 +118,20 @@ h2 {
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: #095797;
-  padding: 10px 15px;
-  border-radius: 3px;
+  background-color: white;
+  padding: 25px 15px;
   text-decoration: none;
   font-weight: bold;
   width: 359px;
   height: 40px;
-  //margin-left: 16px;
   margin-top: 54px;
-  color: white;
-  border-width: 0px;
+  color: #095797;
+  border: 2px solid #095797;
   cursor: pointer;
+}
+
+.carte-button:hover {
+  background-color: #f0f0f0;
 }
 
 .carte-button img {
@@ -137,37 +140,31 @@ h2 {
   padding-bottom: 4px;
 }
 
-.carte-button:hover {
-  background-color: #2774b3;
-}
-
 .google-button {
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: #095797;
-  padding: 10px 15px;
-  border-radius: 3px;
+  background-color: white;
+  padding: 25px 15px;
   text-decoration: none;
   font-weight: bold;
   width: 229px;
   height: 40px;
-  //margin-left: 16px;
   margin-top: 54px;
   margin-bottom: 40px;
-  color: white;
-  border-width: 0px;
+  color: #095797;
+  border: 2px solid #095797;
   cursor: pointer;
+}
+
+.google-button:hover {
+  background-color: #f0f0f0;
 }
 
 .google-button img {
   width: 20px;
   height: 20px;
   padding-bottom: 4px;
-}
-
-.google-button:hover {
-  background-color: #2774b3;
 }
 
 /*
