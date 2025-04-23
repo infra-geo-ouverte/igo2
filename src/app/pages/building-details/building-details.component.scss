@@ -30,6 +30,7 @@
   gap: 6px;
   font-size: 16px;
   margin-top: 30px;
+  margin-bottom: 20px;
   color: #223654;
   white-space: pre-line;
 }
@@ -45,24 +46,30 @@
   object-fit: contain;
 }
 
+h2 {
+  all: unset;
+}
+
 .title {
   font-size: 28px;
   font-weight: bold;
-  margin-top: 54px;
-  margin-bottom: 20px;
   color: #223654;
 }
 
 .element {
   color: #223654;
-  //padding-left: 20px;
-  //padding-right: 20px;
+  padding-left: 25px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-top: 30px;
   width: auto;
-  margin: 5px 0px;
+  max-width: 700px;
+  margin-bottom: 30px;
+  border: 1px solid #bdb9b9;
 }
 
 .element-lines-wrapper {
-  padding-top: 10px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -104,10 +111,6 @@
   background-color: rgba(128, 128, 128, 0.1);
   font-size: 12px;
   color: #223654;
-}
-
-.coordinates .title {
-  margin-top: 53px;
 }
 
 .carte-button {
