@@ -1,13 +1,11 @@
-<div
-  class="wrapper"
-  *ngIf="item"
-  [routerLink]="['/', 'immeubles', item.numero_immeuble]"
->
-  <div class="line-1">{{ item.nom_immeuble }}</div>
-  <div class="line-2">
-    {{ formatTitle(item) }}
+<div class="wrapper" *ngIf="item">
+  <div class="title" [routerLink]="['/', 'immeubles', item.numero_immeuble]">
+    <div class="line-1">{{ item.nom_immeuble }}</div>
+    <div class="line-2">
+      {{ formatTitle(item) }}
+    </div>
+    <div class="line-3">{{ item.direction_immobiliere_nom }}</div>
   </div>
-  <div class="line-3">{{ item.direction_immobiliere_nom }}</div>
   <div class="line-4">
     Numéro de l'immeuble :
     <strong>
