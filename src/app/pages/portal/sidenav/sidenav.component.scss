@@ -42,7 +42,7 @@
     // and the sidenav appears below our backdrop.
     // The "side" mode is required to prevent
     // the sidenav from focusing a random button on open.
-    z-index: 3 !important;
+    //z-index: 3 !important;
     height: 100%;
     width: $app-sidenav-width;
     box-sizing: content-box;
@@ -51,6 +51,17 @@
       width: $app-sidenav-width-mobile;
       max-width: $app-sidenav-width;
     }
+  }
+
+  // Styles spécifiques pour le panneau principal
+  #sideresultsDesktop mat-sidenav.primary-sidenav {
+    z-index: 3 !important;
+  }
+
+  // Styles spécifiques pour le panneau secondaire
+  #sideresultsDesktop mat-sidenav.secondary-sidenav {
+    z-index: 1000 !important;
+    //padding-top: 60px !important;
   }
 
   @media (min-width: 823px) {
@@ -86,6 +97,14 @@
         height: calc(100% - #{$app-sidenav-margin-top});
       }
     }
+
+    .app-second-sidenav-content {
+      height: $app-sidenav-height;
+      padding: 0 8px 0 0 !important;
+      @include mobile {
+        height: calc(100% - #{$app-sidenav-margin-top});
+      }
+    }
   }
 
   @media (max-width: 822px) {
@@ -113,7 +132,8 @@
       display: none;
     }
 
-    .app-sidenav-content {
+    .app-sidenav-content,
+    .app-second-sidenav-content {
       height: calc(100% - #{$app-sidenav-margin-top});
       padding: 0 8px 0 0 !important;
     }
