@@ -2,7 +2,15 @@
   padding: 10px 0px;
   padding-bottom: 14px;
   line-height: 20px;
-  cursor: pointer;
+}
+
+/* Effet de survol pour le bloc title entier qui est cliquable */
+.title {
+  transition: transform 0.2s ease;
+}
+
+.title:hover {
+  transform: translateY(-2px);
 }
 
 .line-1 {
@@ -10,6 +18,12 @@
   color: #223654;
   font-weight: 400;
   margin-top: 10px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.title:hover .line-1 {
+  color: #395b89;
 }
 
 .line-2 {
@@ -18,6 +32,13 @@
   font-weight: 600;
   color: #095797;
   white-space: pre-line;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.title:hover .line-2 {
+  color: #0769b9;
+  text-decoration: underline;
 }
 
 .line-3 {
@@ -25,11 +46,19 @@
   line-height: 30px;
   font-weight: 600;
   color: #095797;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.title:hover .line-3 {
+  color: #0769b9;
+  text-decoration: underline;
 }
 
 .line-4 {
   font-size: 15px;
   color: #223654;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   margin-top: 10px;
 }
@@ -37,11 +66,13 @@
 .line-5 {
   font-size: 15px;
   color: #223654;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
 }
 
 .line-6 {
   font-size: 15px;
   color: #223654;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
 }

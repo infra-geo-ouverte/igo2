@@ -34,11 +34,11 @@ export class FilterValuesComponent implements OnInit {
   }
 
   resolveValue(key, value) {
-    if (key === "type_propriete_ou_location") {
-      if (value.toLowerCase() === "l") {
-        return "Location";
-      } else if (value.toLowerCase() === "p") {
-        return "Propriété";
+    if (key === 'type_propriete_ou_location') {
+      if (value.toLowerCase() === 'l') {
+        return 'Location';
+      } else if (value.toLowerCase() === 'p') {
+        return 'Propriété';
       }
     }
     return value;

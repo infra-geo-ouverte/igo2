@@ -127,7 +127,7 @@
   </ng-template>
 
   <ng-template [ngIf]="isDisplayingMap">
-    <div class="footer-right" id="footer-id">
+    <div class="footer-right" id="footer-id" *ngIf="!showSearchBar">
       <span class="order2">
         <span class="footer-text">
           <a
@@ -159,6 +159,35 @@
           >
         </span>
       </span>
+    </div>
+
+    <div class="footer-mobile" *ngIf="showSearchBar">
+      <div class="icone" (click)="togglePanel()">
+        <img
+          *ngIf="expansionPanel?.expanded"
+          src="assets/icons/arrow-down.png"
+          alt="Flèche bas"
+          class="arrow-icon"
+        />
+        <img
+          *ngIf="!expansionPanel?.expanded"
+          src="assets/icons/arrow-up.png"
+          alt="Flèche haut"
+          class="arrow-icon"
+        />
+      </div>
+
+      <mat-expansion-panel #expansionPanel (afterCollapse)="onPanelClose()">
+        <mat-expansion-panel-header>
+          <div class="search-bar-placeholder">
+            <ng-container *ngTemplateOutlet="searchBarTemplate"></ng-container>
+          </div>
+        </mat-expansion-panel-header>
+
+        <div class="sidenav-placeholder">
+          <ng-container *ngTemplateOutlet="sidenavTemplate"></ng-container>
+        </div>
+      </mat-expansion-panel>
     </div>
   </ng-template>
 </footer>

@@ -2,6 +2,7 @@
 .update {
   display: flex;
   align-items: center;
+  margin-left: 16px;
 }
 
 .attribute-label,
@@ -28,10 +29,11 @@
 }
 
 .igo-panel-title {
-  margin-top: 8px;
-  font-size: 18px;
+  margin-top: 27px;
+  font-size: 17px;
   color: #095797 !important;
-  text-align: center;
+  margin-left: 16px;
+  font-weight: 600;
 }
 
 .query-content {
@@ -73,11 +75,11 @@ app-feature-details {
   color: #095797;
   border: 1px;
   padding: 12px;
-  border-color: #095797;
-  border-style: solid;
   border-radius: 5px;
+  border: 2px solid #095797;
   cursor: pointer;
   text-align: center;
+  margin-left: 16px;
 }
 
 .wrapper:hover {

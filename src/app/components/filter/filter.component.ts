@@ -101,10 +101,10 @@ export class FilterComponent implements OnInit {
   }
 
   resolveTypeValue(type_propriete_ou_location) {
-    if (type_propriete_ou_location.toLowerCase() === "l") {
-      return "Location";
-    } else if (type_propriete_ou_location.toLowerCase() === "p") {
-      return "Propriété";
+    if (type_propriete_ou_location.toLowerCase() === 'l') {
+      return 'Location';
+    } else if (type_propriete_ou_location.toLowerCase() === 'p') {
+      return 'Propriété';
     } else {
       return type_propriete_ou_location;
     }

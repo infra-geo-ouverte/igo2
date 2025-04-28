@@ -18,7 +18,7 @@
   height: 4px;
   width: 36px;
   bottom: 6px;
-  background-color: rgb(192, 124, 0);
+  background-color: #e58271;
 }
 .number-per-page-line {
   width: 100%;
@@ -51,11 +51,13 @@
 
 .results-count {
   color: #223654;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
 
 .current-page {
   color: #223654;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   font-weight: 500;
 }

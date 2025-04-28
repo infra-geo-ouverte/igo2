@@ -25,12 +25,19 @@
     max-width: $search-bar-width;
   }
 
+  //-----------------------
   igo-search-bar {
     flex: 1;
     background-color: $app-background-color;
     font-size: 16px;
     margin-left: $igo-margin;
+    display: flex;
+    gap: 4px;
+    max-width: 360px;
+    max-height: 40px;
+    border: 1px solid #6b778a;
 
+    /*
     ::ng-deep .mat-mdc-form-field {
       &:hover {
         border: 2px solid black !important;
@@ -39,8 +46,25 @@
       &:focus-within {
         border: 2px solid #095797 !important;
       }
-    }
+    }*/
   }
+
+  ::ng-deep .mat-mdc-form-field-icon-suffix button[mat-icon-button] {
+    background-color: white !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field-icon-suffix button[mat-icon-button] mat-icon {
+    color: #095797 !important;
+  }
+
+  ::ng-deep
+    .mat-mdc-form-field-icon-suffix
+    button[mat-icon-button]
+    .mdc-icon-button__ripple {
+    display: none !important;
+  }
+
+  //-----------------
 
   igo-menu-button {
     transition: margin-left 300ms;
@@ -55,6 +79,10 @@
       margin-left: 0;
     }
   }
+}
+
+.search-bar {
+  width: 100%;
 }
 
 .workspace-container {
@@ -217,8 +245,8 @@ igo-map-browser {
   }
 
   app-legend-panel-button ::ng-deep .mat-mdc-raised-button:not(:disabled) {
-    color: white !important;
-    background-color: #095797;
+    color: #095797 !important;
+    background-color: white !important;
     border-radius: 3px !important;
   }
 
@@ -476,32 +504,6 @@ app-toast-panel-for-expansion
   }
 }
 
-// igo-search-bar input {
-//   height: 40px;
-//   padding: 8px;
-//   border: 1px solid #C5CAD2;
-//   box-sizing: border-box;
-// }
-
-// igo-search-bar button {
-//   height: 40px;
-//   padding: 8px 16px;
-//   border: 1px solid #ccc;
-//   box-sizing: border-box;
-//   cursor: pointer;
-// }
-
-igo-search-bar {
-  // color:blue; null effect
-  display: flex;
-  gap: 4px;
-}
-
-igo-search-bar {
-  max-width: 360px;
-  max-height: 40px;
-}
-
 @media only screen and (orientation: portrait) and (max-width: 599px),
   only screen and (orientation: landscape) and (max-width: 959px) {
   igo-search-bar {
@@ -544,4 +546,53 @@ igo-search-results igo-list,
 
 .igo-baselayers-switcher {
   z-index: 1;
+}
+
+//mobile : passage dans le pied de page
+@media (max-width: 822px) {
+  igo-search-bar {
+    display: flex;
+    flex: 1;
+    background-color: white;
+    font-size: 16px;
+    margin-left: 16px;
+    margin-right: 16px;
+    gap: 4px;
+    max-width: 750px;
+    max-height: 40px;
+    left: 16px !important;
+    border: 1px solid #6b778a;
+    z-index: 1;
+    /*
+    ::ng-deep .mat-mdc-form-field {
+      &:hover {
+        border: 2px solid black !important;
+      }
+
+      &:focus-within {
+        border: 2px solid #095797 !important;
+      }
+    }
+    */
+  }
+  ::ng-deep .mat-mdc-form-field-icon-suffix button[mat-icon-button] {
+    background-color: white !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field-icon-suffix button[mat-icon-button] mat-icon {
+    color: #095797 !important;
+  }
+
+  ::ng-deep
+    .mat-mdc-form-field-icon-suffix
+    button[mat-icon-button]
+    .mdc-icon-button__ripple {
+    display: none !important;
+  }
+}
+
+@media (max-width: 599px) {
+  igo-search-bar {
+    width: auto;
+  }
 }

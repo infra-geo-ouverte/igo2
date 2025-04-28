@@ -1,9 +1,16 @@
-import { Component, Output, Input, EventEmitter, OnInit, OnDestroy } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
 import {
-  IgoMap
-} from '@igo2/geo';
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
+
+import { IgoMap } from '@igo2/geo';
+
+import { BehaviorSubject } from 'rxjs';
+import { SharedDataService } from 'src/app/services/shared-data.service';
 
 @Component({
   selector: 'app-legend-panel',
@@ -11,7 +18,6 @@ import {
   styleUrls: ['./legend-panel.component.scss']
 })
 export class LegendPanelComponent implements OnInit, OnDestroy {
-
   @Input()
   get map(): IgoMap {
     return this._map;
@@ -51,7 +57,6 @@ export class LegendPanelComponent implements OnInit, OnDestroy {
   }
   private _mobile: boolean;
 
-
   @Output() closeLegend = new EventEmitter<boolean>();
 
   public sidenavOpened$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -63,17 +68,16 @@ export class LegendPanelComponent implements OnInit, OnDestroy {
     this.sidenavOpened$.next(value);
   }
 
-  constructor() { }
+  constructor(private sharedDataService: SharedDataService) {}
 
   private closePanelLegend() {
     this.panelOpenState = false;
     this.sidenavOpened = false;
     this.closeLegend.emit();
+    this.sharedDataService.setSidenavResults(false); // Notifier la fermeture
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ngOnDestroy(): void {
     this.clearButton();
@@ -86,6 +90,6 @@ export class LegendPanelComponent implements OnInit, OnDestroy {
     this.sidenavOpened = false;
     this.panelOpenState = false;
     this.closeLegend.emit();
+    this.sharedDataService.setSidenavResults(false);
   }
-
 }

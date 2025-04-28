@@ -35,13 +35,13 @@ import {
 import { IgoIntegrationModule } from '@igo2/integration';
 
 import { AppExpansionPanelModule } from './expansion-panel/expansion-panel.module';
+import { LegendPanelButtonModule } from './legend-panel-button/legend-panel-button.module';
 import { MapOverlayModule } from './map-overlay/map-overlay.module';
 import { PortalComponent } from './portal.component';
 import { AppSidenavModule } from './sidenav/sidenav.module';
 import { AppToastPanelForExpansionModule } from './toast-panel-for-expansion/toast-panel-for-expansion.module';
 import { AppToastPanelModule } from './toast-panel/toast-panel.module';
 import { IgoWelcomeWindowModule } from './welcome-window/welcome-window.module';
-import { LegendPanelButtonModule } from './legend-panel-button/legend-panel-button.module';
 
 @NgModule({
   imports: [

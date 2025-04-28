@@ -10,7 +10,7 @@
   <div class="coordinates">
     <div class="element" *ngIf="buildingDetails.nom_proprietaire">
       <h2 class="title">Propriétaire</h2>
-      <div>
+      <div class="element-lines-wrapper">
         <div class="element-line">
           {{ buildingDetails.nom_proprietaire }}
         </div>
@@ -27,15 +27,15 @@
           Directeur immobilier : {{ buildingDetails.nom_directeur_immobilier }}
         </div>
         <div class="element-line">
-          <img src="assets/images/location.jpg" alt="" class="element-icon" />
+          <img src="assets/images/location.jpg" alt="" class="icon" />
           {{ buildingDetails.adresse_direction_immobiliere }}
         </div>
         <div class="element-line">
-          <img src="assets/images/phone.png" alt="" class="element-icon" />
+          <img src="assets/images/telephone.png" alt="" class="element-icon" />
           {{ buildingDetails.tel_direction_immobiliere }}
         </div>
         <div class="element-line">
-          <img src="assets/images/envelope.png" alt="" class="element-icon" />
+          <img src="assets/images/envelope-2.png" alt="" class="element-icon" />
           <a
             [href]="'mailto:' + buildingDetails.courriel_direction_immobiliere"
             >{{ buildingDetails.courriel_direction_immobiliere }}</a
@@ -45,23 +45,21 @@
     </div>
 
     <div class="element">
-      <h2 class="title">
-        Coordonnateur à l'administration immobilière (CAI)
-      </h2>
+      <h2 class="title">Coordonnateur à l'administration immobilière (CAI)</h2>
       <div class="element-lines-wrapper">
         <div class="element-line">
           <img src="assets/images/profile.png" alt="" class="element-icon" />
           {{ buildingDetails.nom_directeur_immobilier }}
         </div>
         <div class="element-line">
-          <img src="assets/images/envelope.png" alt="" class="element-icon" />
+          <img src="assets/images/envelope-2.png" alt="" class="element-icon" />
           <a
             [href]="'mailto:' + buildingDetails.courriel_direction_immobiliere"
             >{{ buildingDetails.courriel_direction_immobiliere }}</a
           >
         </div>
         <div class="element-line">
-          <img src="assets/images/phone.png" alt="" class="element-icon" />
+          <img src="assets/images/telephone.png" alt="" class="element-icon" />
           Lorem Ipsum
         </div>
       </div>
@@ -100,11 +98,11 @@
 
   <div class="coordinates">
     <button class="element-line carte-button" (click)="navigateToPoint()">
-      <img src="assets/images/location2.png" alt="" class="element-icon" />
+      <img src="assets/images/location3.png" alt="" class="button-icon" />
       Voir sur la carte de l'outil de repérage
     </button>
     <button class="element-line google-button" (click)="openGoogleMaps()">
-      <img src="assets/images/location2.png" alt="" class="element-icon" />
+      <img src="assets/images/location3.png" alt="" class="button-icon" />
       Voir sur Google Maps
     </button>
   </div>

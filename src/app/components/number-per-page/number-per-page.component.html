@@ -1,18 +1,36 @@
 <div class="wrapper">
   <div class="wrapper-content-left">
     <label class="labels" for="sortBy">Trier par </label>
-    <select id="sortBy" (change)="onSelectSortBy($event.target.value)">
-      <option value="adresse_immeuble" selected>&nbsp;&nbsp;&nbsp;Adresse de l'immeuble</option>
-      <option value="region_adminsitrative">&nbsp;&nbsp;&nbsp;Région administrative</option>
-    </select>
+    <div class="select-wrapper" [class.open]="isSortOpen">
+      <select
+        id="sortBy"
+        (change)="onSelectSortBy($event.target.value)"
+        (mousedown)="toggleSortOpen()"
+        (blur)="isSortOpen = false"
+      >
+        <option value="adresse_immeuble" selected>
+          &nbsp;&nbsp;&nbsp;Adresse de l'immeuble
+        </option>
+        <option value="region_adminsitrative">
+          &nbsp;&nbsp;&nbsp;Région administrative
+        </option>
+      </select>
+    </div>
   </div>
 
   <div class="wrapper-content-right">
     <label class="lab" for="number-per-page">Nombre par page </label>
-    <select id="number-per-page" (change)="onSelect($event.target.value)">
-      <option value="10" selected>10</option>
-      <option value="25">25</option>
-      <option value="50">50</option>
-    </select>
+    <div class="select-wrapper" [class.open]="isNumberOpen">
+      <select
+        id="number-per-page"
+        (change)="onSelect($event.target.value)"
+        (mousedown)="toggleNumberOpen()"
+        (blur)="isNumberOpen = false"
+      >
+        <option value="10" selected>10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+      </select>
+    </div>
   </div>
 </div>
