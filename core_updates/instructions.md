@@ -4,4 +4,4 @@ Ajouter les fichiers modifiés du framework IGO2 dans ce dossier. Pour chaque fi
     fichier modifier : 
     node_modules/geo/fesm2022/igo2-geo.mjs :
       class BaseLayersSwitcherComponent
-        ligne 17335 ; expand = false changer en => expand = true
+        ligne 17335 ; expand = false changée en => expand = true
