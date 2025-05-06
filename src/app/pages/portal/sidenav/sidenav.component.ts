@@ -411,12 +411,19 @@ export class SidenavComponent implements OnInit, OnDestroy {
   @ViewChild('secondarySidenav') secondarySidenav: MatSidenav;
 
   public toggleSidenav(): void {
-    // Toggle le panneau principal
+    if (this.legendPanelOpened) {
+      this.secondarySidenav.toggle();
+      return;
+    }
+
     this.sidenav.toggle();
 
-    // Si des composants passifs sont actifs, toggle aussi le panneau secondaire
     if (this.hasActivePassiveContent()) {
       this.secondarySidenav.toggle();
     }
+  }
+
+  shouldShowPrimarySidenav(): boolean {
+    return !this.legendPanelOpened && (this.searchInit || this.mapQueryClick);
   }
 }

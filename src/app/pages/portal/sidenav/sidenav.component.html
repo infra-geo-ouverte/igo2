@@ -3,7 +3,7 @@
     #sidenav
     [mode]="isSmallScreen ? 'over' : 'side'"
     [autoFocus]="false"
-    [(opened)]="panelOpenState"
+    [opened]="shouldShowPrimarySidenav()"
     [ngClass]="{ 'sidenav-mobile': isSmallScreen }"
     class="primary-sidenav"
   >
