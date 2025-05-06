@@ -8,15 +8,6 @@
   </div>
 
   <div class="coordinates">
-    <div class="element" *ngIf="buildingDetails.nom_proprietaire">
-      <h2 class="title">Propriétaire</h2>
-      <div class="element-lines-wrapper">
-        <div class="element-line">
-          {{ buildingDetails.nom_proprietaire }}
-        </div>
-      </div>
-    </div>
-
     <div class="element">
       <h2 class="title">Direction immobilière</h2>
       <div class="element-lines-wrapper">
@@ -80,6 +71,12 @@
     <div class="element-line-2">
       Vocation officielle :
       <strong>{{ buildingDetails.vocation_officielle }}</strong>
+    </div>
+    <div class="element-line-2">
+      Type :
+      <strong>{{
+        resolveTypeValue(buildingDetails.type_propriete_ou_location)
+      }}</strong>
     </div>
     <div class="element-line-2">
       Immeuble patrimonial :

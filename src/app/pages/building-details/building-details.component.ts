@@ -92,11 +92,13 @@ export class BuildingDetailsComponent implements OnInit {
   navigateToPoint() {
     const center = `${this.buildingDetails.longitude},${this.buildingDetails.latitude}`;
 
-    this.router.navigate(['/carte'], {
-      queryParams: { center: center, zoom: 17 }
-    }).then(() => {
-      window.location.reload();
-    });
+    this.router
+      .navigate(['/carte'], {
+        queryParams: { center: center, zoom: 17 }
+      })
+      .then(() => {
+        window.location.reload();
+      });
   }
 
   openGoogleMaps() {
@@ -105,5 +107,15 @@ export class BuildingDetailsComponent implements OnInit {
 
   private extraireAdresseCourte(adresse: string): string {
     return adresse.replace(/,\s*[A-Z]\d[A-Z] \d[A-Z]\d$/, '').trim(); //chercher un code postal canadien valide en fin de chaîne et le supprimer proprement.
+  }
+
+  resolveTypeValue(type_propriete_ou_location) {
+    if (type_propriete_ou_location.toLowerCase() === 'l') {
+      return 'Location';
+    } else if (type_propriete_ou_location.toLowerCase() === 'p') {
+      return 'Propriété';
+    } else {
+      return type_propriete_ou_location;
+    }
   }
 }
