@@ -34,7 +34,7 @@ export const environment: AppEnvironmentOptions = {
         searchUrl: '/apis/icherche',
         order: 2,
         params: {
-          limit: '5'
+          limit: '10'
         }
       },
       coordinatesreverse: {
@@ -50,7 +50,7 @@ export const environment: AppEnvironmentOptions = {
         searchUrl: '/apis/icherche/layers',
         order: 4,
         params: {
-          limit: '5'
+          limit: '10'
         }
       },
       cadastre: {
@@ -151,5 +151,4 @@ export const environment: AppEnvironmentOptions = {
   //immeublesUrl: 'http://vps-5d30fe87.vps.ovh.ca:3000/v1/query/immeublesVw2'
   immeublesUrl: 'http://vps-5d30fe87.vps.ovh.ca:3000/v1/immeubles/search',
   buildingDetailsUrl: 'http://vps-5d30fe87.vps.ovh.ca:3000/v1/immeuble/'
-
 };
