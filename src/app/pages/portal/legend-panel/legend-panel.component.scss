@@ -1,50 +1,81 @@
-.feature-info {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  max-width: 90%;
-  flex-wrap: wrap;
-  position: relative;
+@media (min-width: 823px) {
+  .feature-info {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f2;
+    align-items: center;
+    padding: 0 16px;
+    height: 56px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .radius {
+    height: 5px;
+    display: flex;
+    position: absolute;
+    background-color: white;
+    z-index: 10;
+    top: 55px;
+    left: 0;
+    right: 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+  }
+
+  .header-container button {
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .table-container {
+    margin-top: 70px;
+    margin-right: 50px;
+    margin-left: 10px;
+  }
 }
 
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f1f1f2;
-  align-items: center;
-  padding: 0 16px;
-  height: 56px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
+@media (max-width: 822px) {
+  .feature-info {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    flex-wrap: wrap;
+  }
 
-.radius {
-  height: 5px;
-  display: flex;
-  position: absolute;
-  background-color: white;
-  z-index: 10;
-  top: 55px;
-  left: 0;
-  right: 0;
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
-}
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 16px;
+  }
 
-.header-container button {
-  border: none;
-  margin-top: 10px;
-  cursor: pointer;
-}
+  .header-container button {
+    border: none;
+    background-color: white;
+    margin-top: 10px;
+    cursor: pointer;
+  }
 
-.table-container {
-  margin-top: 70px;
-  margin-right: 50px;
-  margin-left: 10px;
+  .table-container {
+    margin-right: 50px;
+    margin-left: 10px;
+  }
 }
 
 .circle-container {
