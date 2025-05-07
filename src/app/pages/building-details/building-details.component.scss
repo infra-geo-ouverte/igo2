@@ -156,10 +156,24 @@ h2 {
 }
 
 .button-icon {
-  width: 15px;
-  height: 22px;
-  padding-bottom: 4px;
+  //width: 15px;
+  //height: 22px;
+  //padding-bottom: 4px;
 }
+
+.link-button {
+  background: none;
+  border: none;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  font-size: 16px;
+  padding: 0px 0px;
+  color: #095797;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 
 /*
 .coordinates-caract {
