@@ -3,7 +3,7 @@
     {{ buildingDetails.nom_immeuble || 'Fiche immeuble' }}
   </div>
   <div class="address">
-    <img src="assets/images/location.jpg" alt="" class="icon" />
+    <img src="assets/images/map-marker.svg" alt="" class="icon" />
     <p>{{ formatTitle() }}</p>
   </div>
 
@@ -18,15 +18,15 @@
           Directeur immobilier : {{ buildingDetails.nom_directeur_immobilier }}
         </div>
         <div class="element-line">
-          <img src="assets/images/location.jpg" alt="" class="icon" />
+          <img src="assets/images/map-marker.svg" alt="" class="icon" />
           {{ buildingDetails.adresse_direction_immobiliere }}
         </div>
         <div class="element-line">
-          <img src="assets/images/telephone.png" alt="" class="element-icon" />
+          <img src="assets/images/phone.svg" alt="" class="element-icon" />
           {{ buildingDetails.tel_direction_immobiliere }}
         </div>
         <div class="element-line">
-          <img src="assets/images/envelope-2.png" alt="" class="element-icon" />
+          <img src="assets/images/email.svg" alt="" class="element-icon" />
           <a
             [href]="'mailto:' + buildingDetails.courriel_direction_immobiliere"
             >{{ buildingDetails.courriel_direction_immobiliere }}</a
@@ -43,14 +43,14 @@
           {{ buildingDetails.nom_directeur_immobilier }}
         </div>
         <div class="element-line">
-          <img src="assets/images/envelope-2.png" alt="" class="element-icon" />
+          <img src="assets/images/email.svg" alt="" class="element-icon" />
           <a
             [href]="'mailto:' + buildingDetails.courriel_direction_immobiliere"
             >{{ buildingDetails.courriel_direction_immobiliere }}</a
           >
         </div>
         <div class="element-line">
-          <img src="assets/images/telephone.png" alt="" class="element-icon" />
+          <img src="assets/images/phone.svg" alt="" class="element-icon" />
           Lorem Ipsum
         </div>
       </div>
@@ -94,12 +94,10 @@
   </div>
 
   <div class="coordinates">
-    <button class="element-line carte-button" (click)="navigateToPoint()">
-      <img src="assets/images/location3.png" alt="" class="button-icon" />
+    <button class="link-button" (click)="navigateToPoint()">
       Voir sur la carte de l'outil de repérage
     </button>
-    <button class="element-line google-button" (click)="openGoogleMaps()">
-      <img src="assets/images/location3.png" alt="" class="button-icon" />
+    <button class="link-button" (click)="openGoogleMaps()">
       Voir sur Google Maps
     </button>
   </div>
