@@ -77,10 +77,10 @@ Propriétés
         install.enabled: true/false = Application installable ou non.
         install.manifestPath: Identifie un chemin d'accès pour le manifest (info sur l'app).
                               Par défaut: 'manifest.webmanifest'
-        install.promote: true/false = Permet (Windows/Android) de faire afficher un message 
+        install.promote: true/false = Permet (Windows/Android) de faire afficher un message
                                       incitant les utilisateurs a installer l'application
         pwa: Object permettant de dire comment l'application sera mis en mémoire cache.
-        pwa.enabled: true/false = Identifie si l'application sera mis en mémoire cache. 
+        pwa.enabled: true/false = Identifie si l'application sera mis en mémoire cache.
 
 
 ***************
@@ -1011,10 +1011,10 @@ storageOptions
     Permet de modifier la sauvegarde de préférence dans le storage (LocalStorage).
     Deux (2) propriétés sont permises, key et url.
 
-    key = prefixe de la clé enregistrée dans le storage. Par dégaut, 'igo'. 
+    key = prefixe de la clé enregistrée dans le storage. Par dégaut, 'igo'.
     Utile pour différencier des préférence sur un serveur hébergeant plusieurs applications.
     url = Si une api de contexte est disponible, l'url de sauvegarde des préférence utilisateur.
-    La propriété url provient de l'interface 'AuthStorageOptions'. Particulièrement utile 
+    La propriété url provient de l'interface 'AuthStorageOptions'. Particulièrement utile
     pour obtenir les propriétés de partage de contextes en provenance de l'api de contexte.
 
 

@@ -1,28 +1,81 @@
-.feature-info {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  max-width: 90%;
-  flex-wrap: wrap;
+@media (min-width: 823px) {
+  .feature-info {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f2;
+    align-items: center;
+    padding: 0 16px;
+    height: 56px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .radius {
+    height: 5px;
+    display: flex;
+    position: absolute;
+    background-color: white;
+    z-index: 10;
+    top: 55px;
+    left: 0;
+    right: 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+  }
+
+  .header-container button {
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .table-container {
+    margin-top: 70px;
+    margin-right: 50px;
+    margin-left: 10px;
+  }
 }
 
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 16px;
-}
+@media (max-width: 822px) {
+  .feature-info {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    flex-wrap: wrap;
+  }
 
-.header-container button {
-  border: none;
-  background-color: white;
-  margin-top: 10px;
-  cursor: pointer;
-}
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 16px;
+  }
 
-.table-container {
-  margin-right: 50px;
-  margin-left: 10px;
+  .header-container button {
+    border: none;
+    background-color: white;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .table-container {
+    margin-right: 50px;
+    margin-left: 10px;
+  }
 }
 
 .circle-container {
@@ -44,76 +97,6 @@
   display: inline-block;
 }
 
-.z-royal-blue {
-  background-color: Crimson;
-  border: 3px solid white;
-}
-
-.z-lime-green {
-  background-color: DeepSkyBlue;
-  border: 3px solid white;
-}
-
-.z-crimson {
-  background-color: Gold;
-  border: 3px solid white;
-}
-
-.z-gold {
-  background-color: ForestGreen;
-  border: 3px solid white;
-}
-
-.z-dim-gray {
-  background-color: SlateBlue;
-  border: 3px solid white;
-}
-
-.z-tomato {
-  background-color: OrangeRed;
-  border: 3px solid white;
-}
-
-.z-medium-purple {
-  background-color: PaleVioletRed;
-  border: 3px solid white;
-}
-
-.z-dark-olive-green {
-  background-color: MidnightBlue;
-  border: 3px solid white;
-}
-
-.z-medium-turquoise {
-  background-color: LightSeaGreen;
-  border: 3px solid white;
-}
-
-.z-dark-red {
-  background-color: LightCoral;
-  border: 3px solid white;
-}
-
-.z-cyan {
-  background-color: SandyBrown;
-  border: 3px solid white;
-}
-
-.z-peach-puff {
-  background-color: MediumOrchid;
-  border: 3px solid white;
-}
-
-.z-dark-slate-gray {
-  background-color: SpringGreen;
-  border: 3px solid white;
-}
-
-.z-medium-orchid {
-  background-color: DarkMagenta;
-  border: 3px solid white;
-}
-
 td {
   padding: 3px;
 }
@@ -126,7 +109,7 @@ td {
 .igo-panel-title {
   margin-top: 8px;
   font-size: 18px;
-  color: #095797 !important;
+  color: #223654 !important;
   text-align: center;
 }
 
@@ -138,6 +121,7 @@ mat-button-wrapper,
   height: 24px;
   width: 24px;
   float: right;
+  color: #095797 !important;
 }
 
 .mat-icon svg {
@@ -145,8 +129,72 @@ mat-button-wrapper,
   width: 20px;
 }
 
-@media (max-width: 822px) {
-  br {
-    display: none;
-  }
+.z-royal-blue {
+  background-color: #95bfdd;
+  border: 3px solid white;
+}
+
+.z-lime-green {
+  background-color: #dbe788;
+  border: 3px solid white;
+}
+
+.z-crimson {
+  background-color: #0c4540;
+  border: 3px solid white;
+}
+
+.z-gold {
+  background-color: #063665;
+  border: 3px solid white;
+}
+
+.z-dim-gray {
+  background-color: #d56050;
+  border: 3px solid white;
+}
+
+.z-tomato {
+  background-color: #4a3742;
+  border: 3px solid white;
+}
+
+.z-medium-purple {
+  background-color: #8d5150;
+  border: 3px solid white;
+}
+
+.z-dark-olive-green {
+  background-color: #246b65;
+  border: 3px solid white;
+}
+
+.z-medium-turquoise {
+  background-color: #095797;
+  border: 3px solid white;
+}
+
+.z-dark-red {
+  background-color: #f39c8d;
+  border: 3px solid white;
+}
+
+.z-cyan {
+  background-color: #68ceba;
+  border: 3px solid white;
+}
+
+.z-peach-puff {
+  background-color: #379f8f;
+  border: 3px solid white;
+}
+
+.z-dark-slate-gray {
+  background-color: #6194bf;
+  border: 3px solid white;
+}
+
+.z-medium-orchid {
+  background-color: DarkMagenta;
+  border: 3px solid white;
 }

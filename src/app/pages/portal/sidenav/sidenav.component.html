@@ -3,21 +3,11 @@
     #sidenav
     [mode]="isSmallScreen ? 'over' : 'side'"
     [autoFocus]="false"
-    [(opened)]="panelOpenState"
+    [opened]="shouldShowPrimarySidenav()"
     [ngClass]="{ 'sidenav-mobile': isSmallScreen }"
+    class="primary-sidenav"
   >
     <div #content class="app-sidenav-content">
-      <div #showLegend *ngIf="legendPanelOpened === true">
-        <app-legend-panel
-          [map]="map"
-          [mobile]="mobile"
-          (closeLegend)="closePanelOnCloseLegend($event)"
-          (sidenavClosed)="($event)"
-          (opened)="sidenav.toggle()"
-        >
-        </app-legend-panel>
-      </div>
-
       <div
         style="margin: 24px 16px"
         *ngIf="
@@ -46,7 +36,7 @@
         </section>
       </div>
 
-      <div #getInfo *ngIf="mapQueryClick === true">
+      <div *ngIf="mapQueryClick === true">
         <app-feature-info
           [map]="map"
           [mobile]="mobile"
@@ -78,6 +68,30 @@
     </div>
   </mat-sidenav>
 
+  <!-- Panneau secondaire pour les composants passifs -->
+  <mat-sidenav
+    #secondarySidenav
+    [mode]="isSmallScreen ? 'over' : 'side'"
+    [autoFocus]="false"
+    [opened]="hasActivePassiveContent()"
+    [ngClass]="{ 'sidenav-mobile': isSmallScreen }"
+    class="secondary-sidenav"
+  >
+    <div class="app-second-sidenav-content">
+      <!-- app-legend-panel -->
+      <div *ngIf="legendPanelOpened === true">
+        <app-legend-panel
+          [map]="map"
+          [mobile]="mobile"
+          (closeLegend)="closePanelOnCloseLegend($event)"
+          (sidenavClosed)="($event)"
+          (opened)="sidenav.toggle()"
+        >
+        </app-legend-panel>
+      </div>
+    </div>
+  </mat-sidenav>
+
   <button
     [ngClass]="sidenav.opened ? 'sideresult-opened' : 'sideresult-closed'"
     #sidenavbutton
@@ -93,7 +107,7 @@
         : ('sideResult.open' | translate)
     "
     matTooltipPosition="after"
-    (click)="sidenav.toggle()"
+    (click)="toggleSidenav()"
   >
     <mat-icon
       class="icon"

@@ -417,6 +417,97 @@
     </div>
 
     <mat-divider></mat-divider>
+    <div class="filed">
+      <div class="head">
+        <label for="vocation">Vocation</label>
+        <span
+          class="selection-count"
+          *ngIf="selectedFilters['vocation_principale']?.length"
+        >
+          {{ selectedFilters['vocation_principale'].length }} sélection{{
+            selectedFilters['vocation_principale'].length > 1 ? 's' : ''
+          }}
+        </span>
+      </div>
+      <div
+        class="container"
+        *ngIf="!showFiltersMap['vocation_principale']"
+        (click)="toggleFilters('vocation_principale')"
+      >
+        <span>Afficher les filtres</span>
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#095797"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+      <!-- Affichage du filtre uniquement si showFilters est vrai -->
+      <div *ngIf="showFiltersMap['vocation_principale']" class="container-true">
+        <div
+          (click)="toggleFilters('vocation_principale')"
+          class="filter-close"
+        >
+          <span>Masquer les filtres</span>
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#095797"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 -6 6 6"></path>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input
+            class="search-input"
+            type="text"
+            [formControl]="searchControls['vocation_principale']"
+          />
+          <img
+            src="assets/images/loop.svg"
+            alt="Rechercher"
+            class="search-icon"
+          />
+        </div>
+        <div class="checkbox-list">
+          <div
+            *ngFor="
+              let vocation_principale of filterOptions['vocation_principale']
+            "
+            [value]="vocation_principale"
+          >
+            <mat-checkbox
+              class="custom-checkbox"
+              (change)="
+                onChange(
+                  'vocation_principale',
+                  vocation_principale.toLowerCase()
+                )
+              "
+              [checked]="
+                selectedFilters['vocation_principale']?.includes(
+                  vocation_principale.toLowerCase()
+                )
+              "
+              >{{ vocation_principale }}</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
     <div
       class="ln"
       [ngClass]="{
@@ -509,98 +600,6 @@
       </div>
 
       <mat-divider></mat-divider>
-      <div class="filed">
-        <div class="head">
-          <label for="vocation">Vocation</label>
-          <span
-            class="selection-count"
-            *ngIf="selectedFilters['vocation_principale']?.length"
-          >
-            {{ selectedFilters['vocation_principale'].length }} sélection{{
-              selectedFilters['vocation_principale'].length > 1 ? 's' : ''
-            }}
-          </span>
-        </div>
-        <div
-          class="container"
-          *ngIf="!showFiltersMap['vocation_principale']"
-          (click)="toggleFilters('vocation_principale')"
-        >
-          <span>Afficher les filtres</span>
-          <svg
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#095797"
-            stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M6 9l6 6 6-6"></path>
-          </svg>
-        </div>
-        <!-- Affichage du filtre uniquement si showFilters est vrai -->
-        <div
-          *ngIf="showFiltersMap['vocation_principale']"
-          class="container-true"
-        >
-          <div
-            (click)="toggleFilters('vocation_principale')"
-            class="filter-close"
-          >
-            <span>Masquer les filtres</span>
-            <svg
-              width="30"
-              height="30"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#095797"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M6 9l6 -6 6 6"></path>
-            </svg>
-          </div>
-          <div class="search-bar">
-            <input
-              class="search-input"
-              type="text"
-              [formControl]="searchControls['vocation_principale']"
-            />
-            <img
-              src="assets/images/loop.svg"
-              alt="Rechercher"
-              class="search-icon"
-            />
-          </div>
-          <div class="checkbox-list">
-            <div
-              *ngFor="
-                let vocation_principale of filterOptions['vocation_principale']
-              "
-              [value]="vocation_principale"
-            >
-              <mat-checkbox
-                class="custom-checkbox"
-                (change)="
-                  onChange(
-                    'vocation_principale',
-                    vocation_principale.toLowerCase()
-                  )
-                "
-                [checked]="
-                  selectedFilters['vocation_principale']?.includes(
-                    vocation_principale.toLowerCase()
-                  )
-                "
-                >{{ vocation_principale }}</mat-checkbox
-              >
-            </div>
-          </div>
-        </div>
-      </div>
 
       <mat-divider></mat-divider>
       <div class="filed">

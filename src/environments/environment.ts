@@ -72,7 +72,7 @@ export const environment: AppEnvironmentOptions = {
         available: true,
         searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/icherche/',
         params: {
-          limit: '5'
+          limit: '10'
         },
         showInPointerSummary: true
       },

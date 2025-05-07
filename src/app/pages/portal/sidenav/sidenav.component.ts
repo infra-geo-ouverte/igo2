@@ -11,6 +11,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 import { ActionStore, EntityStore } from '@igo2/common';
 import { ConfigService } from '@igo2/core';
@@ -399,5 +400,30 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.panelOpenState = true;
     this.clearQuery();
     this.mapQueryClick = false;
+  }
+
+  hasActivePassiveContent(): boolean {
+    return this.legendPanelOpened === true;
+    //|| this.mapQueryClick === true;
+  }
+
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('secondarySidenav') secondarySidenav: MatSidenav;
+
+  public toggleSidenav(): void {
+    if (this.legendPanelOpened) {
+      this.secondarySidenav.toggle();
+      return;
+    }
+
+    this.sidenav.toggle();
+
+    if (this.hasActivePassiveContent()) {
+      this.secondarySidenav.toggle();
+    }
+  }
+
+  shouldShowPrimarySidenav(): boolean {
+    return !this.legendPanelOpened && (this.searchInit || this.mapQueryClick);
   }
 }
