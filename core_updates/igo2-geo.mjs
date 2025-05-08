@@ -639,7 +639,7 @@ function createOverlayMarkerStyle({ text, opacity = 1, markerColor = [0, 161, 22
             /^#[0-9A-F]{8}$/i.test(markerColor))) {
         opacity = newColor[3];
     }
-    svgIconColor = `"rgba(${newColor[0]},${newColor[1]},${newColor[2]},${opacity})"`;
+    svgIconColor = `"rgba(9,87,151,${opacity})"`;
     iconColor = markerColor;
     svgOutlineColor = `"rgb(${newOutlineColor[0]},${newOutlineColor[1]},${newOutlineColor[2]})"`;
     svg =
