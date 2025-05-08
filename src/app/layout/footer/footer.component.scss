@@ -11,7 +11,8 @@
 $footer-margin-top: 0px;
 $footer-height: 29px;
 
-.footer-right {
+.footer-right,
+.footer-right-mobile {
   z-index: 666;
   background: #ffffffa3;
   display: flex;
@@ -301,7 +302,8 @@ span {
     padding-bottom: 5px;
     padding-top: 15px;
   }
-  .footer-right {
+  .footer-right,
+  .footer-right-mobile {
     font-size: 12px;
   }
 }
@@ -313,7 +315,8 @@ span {
     padding-top: 2px;
   }
 
-  .footer-right {
+  .footer-right,
+  .footer-right-mobile {
     font-size: 10px;
     height: auto;
   }
@@ -358,6 +361,16 @@ span {
 
   .sidenav-placeholder {
     width: 100%;
+  }
+
+  .footer-right-mobile {
+    width: 100%;
+  }
+
+  .order2 {
+    margin-right: 0;
+    margin-left: 0;
+    text-align: center !important;
   }
 
   .icone {

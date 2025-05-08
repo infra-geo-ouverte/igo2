@@ -187,6 +187,40 @@
         <div class="sidenav-placeholder">
           <ng-container *ngTemplateOutlet="sidenavTemplate"></ng-container>
         </div>
+
+        <div class="footer-right-mobile" id="footer-id">
+          <span class="order2">
+            <span class="footer-text">
+              <a
+                rel="noopener noreferrer"
+                alt="('externallinks' | translate)"
+                href="{{ 'footer.url-conditions' | translate }}"
+                target="_blank"
+                >{{ 'footer.conditions' | translate }}</a
+              >
+            </span>
+            <span class="footer-text"> | </span>
+            <span class="footer-text">
+              <a
+                rel="noopener noreferrer"
+                alt="('externallinks' | translate)"
+                href="{{ 'footer.url-ministry' | translate }}"
+                target="_blank"
+                >{{ 'footer.ministry' | translate }}</a
+              >
+            </span>
+            <span class="footer-text"> | </span>
+            <span class="footer-text">
+              <a
+                rel="noopener noreferrer"
+                alt="('externallinks' | translate)"
+                href="{{ 'footer.url-gov' | translate }}"
+                target="_blank"
+                >{{ 'footer.gov' | translate }}</a
+              >
+            </span>
+          </span>
+        </div>
       </mat-expansion-panel>
     </div>
   </ng-template>
