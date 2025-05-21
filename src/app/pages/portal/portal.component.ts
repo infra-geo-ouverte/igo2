@@ -56,6 +56,7 @@ import {
   ImportService,
   LayerService,
   MapExtent,
+  MapViewOptions,
   QuerySearchSource,
   QueryService,
   Research,
@@ -552,6 +553,15 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.onResize(); // Appeler pour initialiser l'état
     this.sharedDataService.setSearchBarTemplate(this.searchBarTemplate);
     this.sharedDataService.setSidenavTemplate(this.sidenavTemplate);
+
+    this.map.ol.on('pointermove', e => {
+      if (e.dragging) {
+        return;
+      }
+      let pixel = e.map.getEventPixel(e.originalEvent);
+      let hit = e.map.hasFeatureAtPixel(pixel);
+      e.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -756,27 +766,65 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
+    event.features = [event.features[0]];
+    this.map.queryResultsOverlay.clear(); // to avoid double-selection in the map
+
     const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
     const results = event.features.map((feature: Feature) => {
-      let querySearchSource = querySearchSourceArray.find(
-        (s) => s.title === feature.meta.sourceTitle
-      );
-      if (this.getFeatureIsSameActiveWks(feature)) {
-        if (
-          this.getWksActiveOpenInResolution() &&
-          !(this.workspace as WfsWorkspace).getLayerWksOptionMapQuery?.()
-        ) {
-          return;
+      if (feature && !feature?.meta?.sourceTitle?.includes("Immeubles Count")) {
+        let querySearchSource = querySearchSourceArray.find(
+          (s) => s.title === feature.meta.sourceTitle
+        );
+        if (this.getFeatureIsSameActiveWks(feature)) {
+          if (
+            this.getWksActiveOpenInResolution() &&
+            !(this.workspace as WfsWorkspace).getLayerWksOptionMapQuery?.()
+          ) {
+            return;
+          }
+        }
+        if (!querySearchSource) {
+          querySearchSource = new QuerySearchSource({
+            title: feature.meta.sourceTitle
+          });
+          querySearchSourceArray.push(querySearchSource);
+        }
+        return featureToSearchResult(feature, querySearchSource);
+      } else {
+        if (feature?.meta?.sourceTitle?.includes("Immeubles Count")) {
+          const cluster_center: [number, number] = feature["geometry"]["coordinates"];
+
+          const extent: [number, number, number, number] = [
+            feature.properties["extent_min_x"],
+            feature.properties["extent_min_y"],
+            feature.properties["extent_max_x"],
+            feature.properties["extent_max_y"]];
+
+          const mapViewOptions: MapViewOptions = {
+            projection: "EPSG:3857",
+            minZoom: 8,
+            maxZoom: 17,
+            maxZoomOnExtent: 17,
+            geolocate: false,
+            alwaysTracking: false,
+            enableRotation: false
+          };
+          const zoom: number = this.map.ol.getView().getZoomForResolution(this.map.ol.getView().getResolutionForExtent(extent));
+          mapViewOptions.center = cluster_center;
+          if (zoom - Math.floor(zoom) < 0.25) {
+            mapViewOptions.zoom = zoom > this.map.ol.getView().getMaxZoom() ? this.map.ol.getView().getMaxZoom() : Math.floor(zoom) - 1,
+            this.map.setView(mapViewOptions);
+          } else {
+            if (Math.floor(zoom) === this.map.ol.getView().getMinZoom()) {
+              mapViewOptions.zoom = Math.ceil(zoom);
+              this.map.setView(mapViewOptions);
+            } else {
+              this.map.viewController.zoomToExtent(extent);
+            }
+          }
         }
       }
-      if (!querySearchSource) {
-        querySearchSource = new QuerySearchSource({
-          title: feature.meta.sourceTitle
-        });
-        querySearchSourceArray.push(querySearchSource);
-      }
-      return featureToSearchResult(feature, querySearchSource);
     });
     const filteredResults = results.filter((x) => x !== undefined);
     const research = {
