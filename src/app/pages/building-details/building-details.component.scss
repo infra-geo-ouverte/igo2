@@ -40,10 +40,8 @@
 }
 
 .icon {
-  width: 22px;
-  max-width: 22px;
-  height: auto;
-  object-fit: contain;
+  width: 16px;
+  height: 16px;
 }
 
 h2 {
@@ -51,28 +49,29 @@ h2 {
 }
 
 .title {
-  font-size: 28px;
+  font-family: Open Sans;
+  font-size: 16px;
   font-weight: bold;
   color: #223654;
 }
 
 .element {
   color: #223654;
-  padding-left: 25px;
-  padding-right: 20px;
-  padding-bottom: 10px;
-  padding-top: 30px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 24px;
+  padding-top: 24px;
   width: auto;
   max-width: 700px;
   margin-bottom: 30px;
-  border: 1px solid #bdb9b9;
+  border: 1px solid #c5cad2;
 }
 
 .element-lines-wrapper {
-  padding-top: 20px;
+  padding-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
 }
 
 .element-title {
@@ -81,19 +80,18 @@ h2 {
 }
 
 .element-line {
+  font-family: Open Sans;
   font-size: 16px;
+  font-weight: regular;
   display: flex;
   align-items: center;
-  gap: 10px;
   color: #223654;
-  padding-bottom: 16px;
 }
 
 .element-icon {
-  width: 17px;
-  max-width: 17px;
+  width: 20px;
   height: auto;
-  object-fit: contain;
+  margin-right: 12px;
 }
 
 .element-line-2 {
@@ -161,14 +159,17 @@ h2 {
   //padding-bottom: 4px;
 }
 
+.link-button-icon {
+  width: 20px;
+  height: auto;
+}
+
 .link-button {
+  font-family: Open Sans;
   background: none;
   border: none;
-  margin-top: 16px;
-  margin-bottom: 16px;
   display: flex;
   font-size: 16px;
-  padding: 0px 0px;
   color: #095797;
   text-decoration: underline;
   cursor: pointer;
