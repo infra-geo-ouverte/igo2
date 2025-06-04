@@ -6,11 +6,11 @@
 
 /* Effet de survol pour le bloc title entier qui est cliquable */
 .title {
-  transition: transform 0.2s ease;
+  //transition: transform 0.2s ease;
 }
 
 .title:hover {
-  transform: translateY(-2px);
+  //transform: translateY(-2px);
 }
 
 .line-1 {
@@ -47,7 +47,7 @@
   font-weight: 600;
   color: #095797;
   cursor: pointer;
-  transition: color 0.2s ease;
+  //transition: color 0.2s ease;
 }
 
 .title:hover .line-3 {
