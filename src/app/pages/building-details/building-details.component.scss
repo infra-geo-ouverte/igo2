@@ -7,6 +7,7 @@
 }
 
 .nom_de_immeuble {
+  font-family: 'Roboto', sans-serif;
   font-size: 48px;
   font-weight: bold;
   margin-top: 40px;
@@ -27,7 +28,6 @@
 .address {
   display: flex;
   align-items: center;
-  gap: 6px;
   font-size: 16px;
   margin-top: 30px;
   margin-bottom: 20px;
@@ -35,13 +35,10 @@
   white-space: pre-line;
 }
 
-.address img {
-  padding-bottom: 39px;
-}
-
 .icon {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: auto;
+  padding-bottom: 39px;
 }
 
 h2 {
