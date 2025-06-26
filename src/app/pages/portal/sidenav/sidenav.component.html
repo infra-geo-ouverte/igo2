@@ -3,7 +3,7 @@
     #sidenav
     [mode]="isSmallScreen ? 'over' : 'side'"
     [autoFocus]="false"
-    [opened]="shouldShowPrimarySidenav()"
+    [opened]="hasActivePrimaryContent()"
     [ngClass]="{ 'sidenav-mobile': isSmallScreen }"
     class="primary-sidenav"
   >
@@ -85,7 +85,7 @@
           [mobile]="mobile"
           (closeLegend)="closePanelOnCloseLegend($event)"
           (sidenavClosed)="($event)"
-          (opened)="sidenav.toggle()"
+          (opened)="secondarySidenav.toggle()"
         >
         </app-legend-panel>
       </div>
@@ -93,7 +93,7 @@
   </mat-sidenav>
 
   <button
-    [ngClass]="sidenav.opened ? 'sideresult-opened' : 'sideresult-closed'"
+    [ngClass]="sidenav.opened || secondarySidenav.opened ? 'sideresult-opened' : 'sideresult-closed'"
     #sidenavbutton
     mat-raised-button
     color="primary"
@@ -102,16 +102,14 @@
     isIconButton="true"
     MatDrawerMode="push"
     [matTooltip]="
-      sidenav.opened
-        ? ('sideResult.close' | translate)
-        : ('sideResult.open' | translate)
+      sidenav.opened || secondarySidenav.opened ? ('sideResult.close' | translate) : ('sideResult.open' | translate)
     "
     matTooltipPosition="after"
     (click)="toggleSidenav()"
   >
     <mat-icon
       class="icon"
-      [svgIcon]="sidenav.opened ? 'chevron-left' : 'chevron-right'"
+      [svgIcon]="sidenav.opened || secondarySidenav.opened ? 'chevron-left' : 'chevron-right'"
     >
     </mat-icon>
   </button>

@@ -1029,28 +1029,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       );
   }
 
-  closePanelOnCloseQuery() {
-    this.mapQueryClick = false;
-    if (this.searchInit === false && this.legendPanelOpened === false) {
-      //this.panelOpenState = false;
-      //this.expanded = false; //// causes panel to close when click searchbar after query
-    }
-    if (this.searchInit === true || this.legendPanelOpened === true) {
-      this.panelOpenState = true;
-      this.expanded = true;
-    }
-  }
-
-  openPanelonQuery() {
-    this.mapQueryClick = true;
-    this.expanded = true;
-    this.panelOpenState = true;
-    this.searchInit = false;
-    this.legendPanelOpened = false;
-    this.onClearSearch();
-    this.searchBarTerm = '';
-  }
-
   onClearQuery() {
     this.queryState.store.clear(); // clears the info panel
     this.queryState.store.softClear(); // clears the info panel

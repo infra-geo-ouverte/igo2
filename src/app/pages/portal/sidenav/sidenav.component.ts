@@ -197,8 +197,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
   private _scenarioDateToggle: string;
 
-  @Output() closeLegend = new EventEmitter<boolean>();
-  @Output() closeQuery = new EventEmitter<boolean>();
   public mapLayersShownInLegend: Layer[];
 
   isSmallScreen: boolean = false;
@@ -230,9 +228,13 @@ export class SidenavComponent implements OnInit, OnDestroy {
       if (entities.length == 1 && entities[0].data.properties.numero_immeuble) {
         this.opened = true;
         this.mapQueryClick = true;
-        this.legendPanelOpened = false;
         this.panelOpenState = true;
         this.onClearSearch();
+
+        if (this.hasActivePassiveContent()) {
+          this.secondarySidenav.toggle();
+          this.legendPanelOpened = false;
+        }
       }
     });
 
@@ -342,14 +344,9 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
 
   closePanelOnCloseQuery(event) {
-    this.closeQuery.emit();
+    this.opened = false;
     this.mapQueryClick = false;
-    if (this.searchInit === false && this.legendPanelOpened === false) {
-      this.panelOpenState = false;
-    }
-    if (this.searchInit === true || this.legendPanelOpened === true) {
-      this.panelOpenState = true;
-    }
+    this.panelOpenState = false;
   }
 
   onSearchPanel() {}
@@ -374,25 +371,14 @@ export class SidenavComponent implements OnInit, OnDestroy {
   // LEGEND
 
   closePanelOnCloseLegend(event) {
-    // eslint-disable-next-line max-len
-    // this flushes the legend whenever a user closes the panel. if not, the user has to click twice on the legend button to open the legend with the button
-    this.closeLegend.emit();
-    this.opened = false;
+    this.opened = this.hasActivePrimaryContent();
     this.legendPanelOpened = false;
-    if (this.searchInit === false && this.mapQueryClick === false) {
-      this.panelOpenState = false;
-    }
-    if (this.searchInit === true || this.mapQueryClick === true) {
-      this.panelOpenState = true;
-    }
+    this.panelOpenState = this.hasActivePrimaryContent();
   }
 
   openPanelLegend() {
     this.opened = true;
     this.panelOpenState = true;
-    this.clearQuery();
-    this.onClearSearch();
-    this.mapQueryClick = false;
   }
 
   openPanelSearch() {
@@ -400,30 +386,32 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.panelOpenState = true;
     this.clearQuery();
     this.mapQueryClick = false;
+
+    if (this.hasActivePassiveContent()) {
+      this.secondarySidenav.toggle();
+      this.legendPanelOpened = false;
+    }
   }
 
   hasActivePassiveContent(): boolean {
     return this.legendPanelOpened === true;
-    //|| this.mapQueryClick === true;
   }
 
   @ViewChild('sidenav') sidenav: MatSidenav;
   @ViewChild('secondarySidenav') secondarySidenav: MatSidenav;
 
   public toggleSidenav(): void {
-    if (this.legendPanelOpened) {
-      this.secondarySidenav.toggle();
-      return;
-    }
-
-    this.sidenav.toggle();
-
     if (this.hasActivePassiveContent()) {
       this.secondarySidenav.toggle();
+      if (this.hasActivePrimaryContent()) {
+        this.sidenav.close();
+      }
+    } else {
+      this.sidenav.toggle();
     }
   }
 
-  shouldShowPrimarySidenav(): boolean {
-    return !this.legendPanelOpened && (this.searchInit || this.mapQueryClick);
+  hasActivePrimaryContent(): boolean {
+    return (this.searchInit === true || this.mapQueryClick === true);
   }
 }
