@@ -180,15 +180,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
   private _legendPanelOpened: boolean;
 
   @Input()
-  get panelOpenState(): boolean {
-    return this._panelOpenState;
-  }
-  set panelOpenState(value: boolean) {
-    this._panelOpenState = value;
-  }
-  private _panelOpenState: boolean;
-
-  @Input()
   get scenarioDateToggle(): string {
     return this._scenarioDateToggle;
   }
@@ -228,7 +219,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
       if (entities.length == 1 && entities[0].data.properties.numero_immeuble) {
         this.opened = true;
         this.mapQueryClick = true;
-        this.panelOpenState = true;
         this.onClearSearch();
 
         if (this.hasActivePassiveContent()) {
@@ -276,7 +266,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.store.clear();
     // search
     this.searchInit = true;
-    this.legendPanelOpened = false;
     const results = event.results;
     this.searchStore.state.updateAll({ focused: false, selected: false });
     const newResults = this.searchStore.entities$.value
@@ -346,7 +335,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
   closePanelOnCloseQuery(event) {
     this.opened = false;
     this.mapQueryClick = false;
-    this.panelOpenState = false;
   }
 
   onSearchPanel() {}
@@ -373,17 +361,14 @@ export class SidenavComponent implements OnInit, OnDestroy {
   closePanelOnCloseLegend(event) {
     this.opened = this.hasActivePrimaryContent();
     this.legendPanelOpened = false;
-    this.panelOpenState = this.hasActivePrimaryContent();
   }
 
   openPanelLegend() {
     this.opened = true;
-    this.panelOpenState = true;
   }
 
   openPanelSearch() {
     this.opened = true;
-    this.panelOpenState = true;
     this.clearQuery();
     this.mapQueryClick = false;
 
@@ -409,6 +394,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     } else {
       this.sidenav.toggle();
     }
+    this.opened = this.sidenav.opened || this.secondarySidenav.opened;
   }
 
   hasActivePrimaryContent(): boolean {
