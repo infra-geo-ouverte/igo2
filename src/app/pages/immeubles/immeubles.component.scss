@@ -12,14 +12,16 @@
   cursor: default;
   color: #223654;
   font-weight: 900;
+  margin-bottom: 20px;
 }
-.title::before {
+.title::after {
   content: '';
-  position: absolute;
-  height: 4px;
-  width: 36px;
-  bottom: 6px;
+  height: 5px;
+  width: 48px;
   background-color: #e58271;
+  margin-left: 0px;
+  margin-top: 20px;
+  display: block;
 }
 .number-per-page-line {
   width: 100%;

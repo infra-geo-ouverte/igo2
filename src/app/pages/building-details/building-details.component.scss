@@ -18,11 +18,11 @@
 .nom_de_immeuble::after {
   content: '';
   height: 5px;
-  width: 40px;
+  width: 48px;
   background-color: #e58271;
   display: block;
   margin-top: 20px;
-  margin-left: 4px;
+  margin-left: 0px;
 }
 
 .address {
@@ -170,6 +170,8 @@ h2 {
   color: #095797;
   text-decoration: underline;
   cursor: pointer;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 
