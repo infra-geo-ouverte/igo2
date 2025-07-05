@@ -14,7 +14,9 @@ export class BreadcrumbService {
 
   setBreadcrumb(route: string, data?: any): void {
     const breadcrumbs = [
-      { label: 'Accueil', url: '/' },
+      { label: 'Accueil', url: 'https://www.sqi.gouv.qc.ca/' },
+      { label: 'À propos', url: 'https://www.sqi.gouv.qc.ca/a-propos' },
+      { label: 'Nous joindre', url: 'https://www.sqi.gouv.qc.ca/a-propos/nous-joindre' },
       { label: "Outil de repérage d'immeubles", url: '/' }
     ];
 

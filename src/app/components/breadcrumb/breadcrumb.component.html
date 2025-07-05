@@ -25,8 +25,19 @@
             >
               <ng-container *ngIf="!last">
                 <a
+                  *ngIf="item.url.startsWith('/')"
                   class="breadcrumb-link"
                   [routerLink]="item.url"
+                  [title]="item.label"
+                >
+                  <span class="breadcrumb-link-title">
+                    <span class="breadcrumb-text">{{ item.label }}</span>
+                  </span>
+                </a>
+                <a
+                  *ngIf="!item.url.startsWith('/')"
+                  class="breadcrumb-link"
+                  [href]="item.url"
                   [title]="item.label"
                 >
                   <span class="breadcrumb-link-title">

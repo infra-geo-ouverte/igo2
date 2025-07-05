@@ -40,13 +40,11 @@
 }
 
 .dark-banner .breadcrumb-section {
-  background-color: var(--qc-color-blue-medium);
-  padding-top: 16px;
+  margin-top: 8px;
 }
 
 .no-banner .breadcrumb-section {
-  background-color: var(--qc-color-blue-dark);
-  padding-top: 16px;
+  margin-top: 8px;
 }
 
 .breadcrumb-section .breadcrumb {
@@ -61,12 +59,12 @@
 
 .breadcrumb a,
 .dark-banner .breadcrumb span {
-  color: var(--qc-color-white);
+  color: var(--qc-color-blue-dark);
 }
 
 .breadcrumb a,
 .no-banner .breadcrumb span {
-  color: var(--qc-color-white);
+  color: var(--qc-color-blue-dark);
 }
 
 @media (max-width: 768px) {
