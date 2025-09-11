@@ -38,10 +38,10 @@ export const environment: AppEnvironmentOptions = {
       url: '/apis/igo2/user/igo',
       key: 'igo'
     },
-    /*context: {
-      url: '/apis/igo2',
-      defaultContextUri: '5'
-    },*/
+    // context: {
+    //   url: '/apis/igo2',
+    //   defaultContextUri: '5'
+    // },
     layer: {
       group: {
         enable: true,
@@ -245,10 +245,6 @@ export const environment: AppEnvironmentOptions = {
     ],
     language: {
       prefix: './locale/'
-    },
-    interactiveTour: {
-      tourInMobile: true,
-      pathToConfigFile: './config/interactiveTour.json'
     },
     importExport: {
       importWithStyle: false,

@@ -1,5 +1,18 @@
+@use '@angular/material' as mat;
+@use '@igo2/geo' as igo2-geo;
 @use './pages/portal/portal-theme';
 
-@mixin themes($config) {
-  @include portal-theme.themes($config);
+@mixin themes($theme) {
+  $density: mat.get-theme-density($theme);
+
+  igo-menu-button,
+  igo-home-button {
+    @include mat.icon-button-density(
+      (
+        density: $density
+      )
+    );
+  }
+
+  @include portal-theme.themes($theme);
 }

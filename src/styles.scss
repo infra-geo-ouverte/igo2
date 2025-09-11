@@ -4,6 +4,14 @@
 @use 'style/reset.scss';
 @use 'style/theme.scss';
 
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: var(--igo-font-family-text);
+}
+
 .material-symbols-outlined {
   font-variation-settings:
     'FILL' 1,
@@ -12,15 +20,6 @@
     'opsz' 24;
 }
 
-.shepherd-element[data-popper-reference-hidden]:not(.shepherd-centered) {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: initial;
-}
-
-.mat-mdc-tooltip-trigger {
-  touch-action: auto !important;
-}
 .toast-title-red {
   color: red;
   font-size: 22px;
@@ -46,4 +45,15 @@
 
 .toast-message-a-blue:hover {
   text-decoration: underline !important;
+}
+
+.mat-elevation-z2 {
+  box-shadow: var(--mat-sys-level2);
+}
+
+// SDG overrides
+h1 {
+  &:after {
+    content: none !important;
+  }
 }

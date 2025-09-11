@@ -370,9 +370,7 @@
     "cache": {
       "enabled": false
     },
-    "schematicCollections": [
-      "@schematics/angular"
-    ],
+    "schematicCollections": ["@schematics/angular"],
     "analytics": false
   }
 }

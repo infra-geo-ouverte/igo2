@@ -87,7 +87,12 @@ function provideTheme(): EnvironmentProviders {
         .pipe(first((isLoaded) => isLoaded))
         .subscribe(() => {
           const theme = configService.getConfig('theme', DEFAULT_THEME);
+          if (theme === DEFAULT_THEME) {
+            return;
+          }
           loadTheme(document, theme);
+          document.body.classList.remove(DEFAULT_THEME);
+          document.body.classList.add(theme);
         });
       return;
     };

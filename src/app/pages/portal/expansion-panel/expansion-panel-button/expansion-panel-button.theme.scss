@@ -1,4 +1,3 @@
-@use 'sass:map';
 @use '@angular/material' as mat;
 
 @mixin theme($theme) {
@@ -6,16 +5,13 @@
 }
 
 @mixin density($theme) {
-  $density: mat.m2-get-density-config($theme);
-
-  $theme: map.merge(
-    $theme,
-    (
-      density: $density - 2
-    )
-  );
+  $density: mat.get-theme-density($theme);
 
   app-expansion-panel-button {
-    @include mat.icon-button-density($theme);
+    @include mat.icon-button-density(
+      (
+        density: $density - 2
+      )
+    );
   }
 }

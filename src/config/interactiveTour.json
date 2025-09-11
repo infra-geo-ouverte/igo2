@@ -179,11 +179,11 @@
     "title": "interactiveTour.timeFilter.title",
     "steps": [
       {
-        "element": "div.igo-panel-title",
+        "element": "igo-panel .igo-panel-title",
         "text": "interactiveTour.timeFilter.start"
       },
       {
-        "element": "div.igo-panel-title",
+        "element": "igo-panel .igo-panel-title",
         "text": "interactiveTour.timeFilter.end"
       }
     ]
@@ -193,7 +193,7 @@
     "title": "interactiveTour.measurer.title",
     "steps": [
       {
-        "element": "div.igo-panel-title",
+        "element": "igo-panel .igo-panel-title",
         "text": "interactiveTour.measurer.start"
       },
       {
@@ -286,41 +286,41 @@
     "position": "auto",
     "steps": [
       {
-        "element": "div.igo-panel-title",
+        "element": "igo-panel .igo-panel-title",
         "text": "interactiveTour.spatial-filter.start",
         "onShow": {
-          "element": "div.mat-tab-labels div:first-of-type",
+          "element": "#spatial-filter-predefined-tab",
           "action": "click"
         }
       },
       {
-        "element": "div.mat-tab-label-container",
+        "element": "igo-panel mat-tab-header",
         "text": "interactiveTour.spatial-filter.zone-type",
         "disableInteraction": true
       },
       {
-        "element": "div.mat-tab-labels div:first-of-type",
+        "element": "#spatial-filter-predefined-tab",
         "text": "interactiveTour.spatial-filter.predefined"
       },
       {
-        "element": "div.mat-tab-labels div:nth-of-type(2)",
+        "element": "#spatial-filter-draw-tab",
         "text": "interactiveTour.spatial-filter.drawing",
         "disableInteraction": true
       },
       {
-        "element": "div.mat-tab-body-content .mat-form-field",
+        "element": "#spatial-filter-field-type",
         "text": "interactiveTour.spatial-filter.search-by",
         "position": "right",
         "disableInteraction": true
       },
       {
-        "element": "igo-spatial-filter-list mat-form-field",
+        "element": "#spatial-filter-field-zone",
         "text": "interactiveTour.spatial-filter.zone",
         "position": "right",
         "disableInteraction": true
       },
       {
-        "element": "igo-spatial-filter-item .mat-radio-group",
+        "element": "#spatial-filter-field-item-type",
         "text": "interactiveTour.spatial-filter.results-type"
       },
       {
@@ -441,7 +441,7 @@
     "position": "auto",
     "steps": [
       {
-        "element": "div.igo-panel-title",
+        "element": "igo-panel .igo-panel-title",
         "text": "interactiveTour.context.start"
       },
       {
@@ -558,7 +558,7 @@
     "conditions": ["mat-list-item"],
     "steps": [
       {
-        "element": "div.igo-panel-title",
+        "element": "igo-panel .igo-panel-title",
         "text": "interactiveTour.map-tool.start",
         "onShow": {
           "element": "div.mat-tab-labels div:first-of-type",

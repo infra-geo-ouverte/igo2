@@ -1,22 +1,21 @@
 :host {
   display: block;
-  padding: 16px;
 
   .spacer {
     flex: 1 1 auto;
-  }
-
-  .button-container {
-    display: flex;
-    justify-content: space-around;
   }
 
   #doNotShowCheck {
     margin-right: 5px;
   }
 
-  mat-toolbar h2 {
-    margin: revert;
+  mat-toolbar {
+    color: var(--mat-sys-on-primary);
+    background-color: var(--mat-sys-on-primary-container);
+
+    h1 {
+      color: var(--mat-sys-on-primary);
+    }
   }
 
   label {
