@@ -4,13 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialog,
+  MatDialogActions,
   MatDialogClose,
   MatDialogContent
 } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { CustomHtmlComponent } from '@igo2/common/custom-html';
-import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
 import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
 
@@ -31,8 +31,8 @@ import { WelcomeWindowService } from './welcome-window.service';
     ReactiveFormsModule,
     FormsModule,
     MatDialogContent,
+    MatDialogActions,
     CustomHtmlComponent,
-    IgoInteractiveTourModule,
     MatButtonModule,
     MatDialogClose,
     TranslateModule,

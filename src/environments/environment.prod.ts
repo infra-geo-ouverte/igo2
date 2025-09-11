@@ -19,10 +19,6 @@ export const environment: AppEnvironmentOptions = {
     language: {
       prefix: './locale/'
     },
-    interactiveTour: {
-      tourInMobile: true,
-      pathToConfigFile: './config/interactiveTour.json'
-    },
     searchSources: {
       nominatim: {
         available: false

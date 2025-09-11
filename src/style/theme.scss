@@ -1,25 +1,13 @@
-@use '@angular/material' as mat;
+@use '@igo2/core/themes' as igo-themes;
+
 @use '../app/app.theme' as app;
-@use './igo2-lib.override' as igo2-lib;
 
-/*
-* Define a default theme for styling some part of the app
-* Don't forget that we also have static theme apply
-*/
-$primary: mat.m2-define-palette(mat.$m2-blue-palette, 700, 400, 900);
-$accent: mat.m2-define-palette(mat.$m2-blue-palette, 200);
-$warn: mat.m2-define-palette(mat.$m2-red-palette);
+html {
+  @include igo-themes.theme(
+    igo-themes.$blue-theme,
+    igo-themes.$blue-defined-theme,
+    'blue'
+  );
 
-$theme: mat.m2-define-light-theme(
-  (
-    color: (
-      primary: $primary,
-      accent: $accent,
-      warn: $warn
-    ),
-    density: 0
-  )
-);
-
-@include app.themes($theme);
-@include igo2-lib.theme($theme);
+  @include app.themes(igo-themes.$blue-theme);
+}
