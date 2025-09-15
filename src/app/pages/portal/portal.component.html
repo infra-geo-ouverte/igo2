@@ -343,13 +343,10 @@
 <app-toast-panel-for-expansion
   [withHeader]="false"
   [(opened)]="toastPanelForExpansionOpened"
+  [@toastPanelOffsetX]="toastPanelOffsetX$ | async"
 >
   <div class="toast-panel-for-expansion-close-button-container">
-    <button
-      mat-icon-button
-      color="warn"
-      (click)="toastPanelForExpansionOpened = false"
-    >
+    <button mat-icon-button color="warn" (click)="closeWidget()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
