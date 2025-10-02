@@ -1,11 +1,5 @@
 @use '@igo2/core/partial/core.variables' as core;
 
-:host {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-/*** Spinner ***/
-
 igo-spinner {
   position: absolute;
   top: core.$igo-margin;

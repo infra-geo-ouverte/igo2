@@ -14,7 +14,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { HomeButtonComponent } from '@igo2/common/home-button';
-import { IgoInteractiveTourModule } from '@igo2/common/interactive-tour';
 import { PanelComponent } from '@igo2/common/panel';
 import { ResizableBarComponent } from '@igo2/common/resizable-bar';
 import { Tool, Toolbox, ToolboxComponent } from '@igo2/common/tool';
@@ -35,7 +34,6 @@ import { importAllTools } from './sidenav-import';
   imports: [
     AsyncPipe,
     HomeButtonComponent,
-    IgoInteractiveTourModule,
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,

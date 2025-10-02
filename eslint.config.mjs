@@ -1,9 +1,10 @@
 import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import angular from 'angular-eslint';
+import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
-export default tseslint.config(
+export default defineConfig(
   {
     files: ['**/*.ts'],
     plugins: {
@@ -16,6 +17,12 @@ export default tseslint.config(
       ...tseslint.configs.stylistic,
       ...angular.configs.tsRecommended
     ],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname
+      }
+    },
     processor: angular.processInlineTemplates,
     rules: {
       '@angular-eslint/directive-selector': [

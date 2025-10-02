@@ -3,22 +3,15 @@
 @use '@igo2/geo' as igo2-geo;
 
 @mixin theme($theme) {
-  @include color($theme);
   @include density($theme);
 }
 
-@mixin color($theme) {
-}
-
 @mixin density($theme) {
-  $density: mat.m2-get-density-config($theme);
+  $density: mat.get-theme-density($theme);
 
-  $theme: map.merge(
-    $theme,
+  @include igo2-geo.search-bar-density(
     (
       density: $density - 2
     )
   );
-
-  @include igo2-geo.search-bar-density($theme);
 }
