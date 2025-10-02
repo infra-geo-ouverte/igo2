@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-import { IgoGestureModule } from '@igo2/core/gesture';
 import {
   IgoDirectionsModule,
   IgoQueryModule,
@@ -14,7 +13,6 @@ import { PortalComponent } from './portal.component';
 
 @NgModule({
   imports: [
-    IgoGestureModule.forRoot(),
     IgoQueryModule.forRoot(),
     IgoSearchModule,
     IgoDirectionsModule,

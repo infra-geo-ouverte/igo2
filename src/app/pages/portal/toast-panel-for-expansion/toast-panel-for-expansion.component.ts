@@ -17,7 +17,6 @@ import { showContent } from './toast-panel-for-expansion.animations';
   styleUrls: ['./toast-panel-for-expansion.component.scss'],
   animations: [showContent()],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PanelComponent]
 })
 export class ToastPanelForExpansionComponent {

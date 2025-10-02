@@ -3,7 +3,11 @@
     <igo-backdrop [shown]="backdropShown" (click)="onBackdropClick()">
     </igo-backdrop>
 
-    <div class="navbar-container" [class.--empty-spacer]="sidenavOpened">
+    <div
+      class="navbar-container"
+      [class.--empty-spacer]="sidenavOpened"
+      [style.width.px]="sidenavOpened && sidenavWidth ? sidenavWidth : '400'"
+    >
       <igo-menu-button
         *ngIf="showMenuButton"
         [class.mat-elevation-z2]="!sidenavOpened"
@@ -24,6 +28,9 @@
         [store]="searchStore"
         (searchTermChange)="onSearchTermChange($event)"
         [pointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
+        [allowResetSearchSourcesOptions]="
+          appConfig.allowResetSearchSourcesOptions
+        "
         (pointerSummaryStatus)="onPointerSummaryStatusChange($event)"
         [searchResultsGeometryEnabled]="searchResultsGeometryEnabled"
         (searchResultsGeometryStatus)="
@@ -44,6 +51,7 @@
       [map]="map"
       [(opened)]="sidenavOpened"
       (toolChange)="toolChanged($event)"
+      (widthChange)="handleWidth($event)"
     >
     </app-sidenav>
 
@@ -65,6 +73,7 @@
       [queryFeaturesHitTolerance]="15"
       igoMapContext
       igoLayerContext
+      (contextLayersLoaded)="contextLayersLoaded$.next($event)"
       igoDropGeoFile
       [contextUri]="contextUri"
       (query)="onMapQuery($event)"
@@ -152,6 +161,7 @@
         class="map-actions --vertical --bottom --left"
         [@controlsOffsetY]="getControlsOffsetY()"
         [@mobileOffsetY]="getToastPanelStatus()"
+        [style.left.px]="sidenavOpened && sidenavWidth ? sidenavWidth + 4 : ''"
       >
         <igo-baselayers-switcher
           class="mat-elevation-z2"

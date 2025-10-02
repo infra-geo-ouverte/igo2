@@ -33,4 +33,5 @@ export interface EnvironmentOptions extends AllEnvironmentOptions {
   wakeLockApiButton?: boolean;
   hasFeatureEmphasisOnSelection?: boolean;
   hasSearchPointerSummary?: boolean;
+  allowResetSearchSourcesOptions?: boolean;
 }

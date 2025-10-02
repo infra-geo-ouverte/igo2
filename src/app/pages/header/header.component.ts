@@ -10,7 +10,6 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  standalone: true,
   imports: [MatToolbarModule, TranslateModule]
 })
 export class HeaderComponent {

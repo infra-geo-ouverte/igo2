@@ -72,7 +72,6 @@ interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
   templateUrl: './toast-panel.component.html',
   styleUrls: ['./toast-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     ActionbarComponent,
     AsyncPipe,
@@ -297,7 +296,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       );
       moveToOlFeatures(
         this.map.viewController,
-        [localOlFeature],
+        localOlFeature,
         FeatureMotion.Default
       );
     }
@@ -432,7 +431,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           );
           moveToOlFeatures(
             this.map.viewController,
-            [localOlFeature],
+            localOlFeature,
             FeatureMotion.Zoom
           );
         }
@@ -675,7 +674,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       );
       moveToOlFeatures(
         this.map.viewController,
-        [localOlFeature],
+        localOlFeature,
         FeatureMotion.Default
       );
     }
@@ -894,7 +893,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     );
     moveToOlFeatures(
       this.map.viewController,
-      [localOlFeature],
+      localOlFeature,
       FeatureMotion.Zoom
     );
   }

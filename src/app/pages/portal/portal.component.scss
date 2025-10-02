@@ -1,9 +1,13 @@
 @use '@angular/material' as mat;
+@use '@igo2/core/partial/media';
+@use '@igo2/core/partial/core.variables' as core;
 @use '../../../style/breakpoints';
 
-@import './portal.variables';
+@use './portal.variables' as portal;
 
 :host {
+  --sidenav-width: 400px;
+
   width: 100%;
   height: 100%;
   display: block;
@@ -17,20 +21,20 @@
   top: $navbarSpacer;
   display: flex;
   align-items: center;
-  width: $search-bar-width;
-  max-width: $search-bar-width;
+  width: portal.$search-bar-width;
+  max-width: portal.$search-bar-width;
   z-index: 4;
 
-  @include mobile {
-    width: $search-bar-width-mobile;
-    max-width: $search-bar-width;
+  @include media.mobile {
+    width: portal.$search-bar-width-mobile !important;
+    max-width: portal.$search-bar-width;
   }
 
   igo-search-bar {
-    flex: 1;
-    background-color: $app-background-color;
+    width: 100%;
+    background-color: core.$app-background-color;
     font-size: 16px;
-    margin-left: $igo-margin;
+    margin-left: core.$igo-margin;
   }
 
   igo-menu-button {
@@ -62,12 +66,12 @@
 #tour-button {
   font-weight: bold;
   position: absolute;
-  left: $igo-margin;
+  left: core.$igo-margin;
   top: 50px;
   z-index: 4;
 }
 .tour-button-title {
-  @include mobile {
+  @include media.mobile {
     display: none;
   }
 }
@@ -78,29 +82,29 @@ igo-map-browser {
 
   &.sidenav-offset {
     .map-actions.--left {
-      left: $app-sidenav-width + 4px;
+      left: calc(var(--sidenav-width) + 4px);
     }
   }
 
   &.sidenav-offset ::ng-deep .ol-overlaycontainer-stopevent {
-    left: $app-sidenav-width;
+    left: var(--sidenav-width);
     width: calc(100% - 380px);
 
     .ol-scale-line {
       left: 40%;
     }
 
-    @include mobile {
+    @include media.mobile {
       display: none;
     }
   }
 
   &.expansion-offset ::ng-deep .ol-overlaycontainer-stopevent {
-    bottom: $app-expansion-panel-height;
+    bottom: portal.$app-expansion-panel-height;
   }
 
   &.expansion-offset-maximized ::ng-deep .ol-overlaycontainer-stopevent {
-    bottom: $app-expansion-panel-height-maximized;
+    bottom: portal.$app-expansion-panel-height-maximized;
   }
 
   &.toast-offset-scale-line
@@ -116,7 +120,7 @@ igo-map-browser {
     .ol-overlaycontainer-stopevent
     ::ng-deep
     .ol-attribution {
-    @include mobile {
+    @include media.mobile {
       bottom: 50px;
     }
   }
@@ -164,9 +168,6 @@ igo-map-browser {
   .map-actions {
     position: absolute;
     display: flex;
-    transition:
-      bottom 250ms,
-      left 250ms;
 
     .spinner-spacer {
       height: 40px;
@@ -234,7 +235,7 @@ mat-sidenav-container {
 }
 
 mat-sidenav-content {
-  @include mobile {
+  @include media.mobile {
     z-index: auto;
   }
 }
@@ -245,7 +246,7 @@ mat-sidenav-content {
 }
 
 igo-workspace-selector {
-  @include mobile {
+  @include media.mobile {
     width: 100px;
   }
 }
@@ -253,12 +254,12 @@ igo-workspace-selector {
 igo-entity-table-paginator {
   position: absolute;
   right: 0;
-  @include mobile {
+  @include media.mobile {
     margin-left: -30px;
   }
 }
 igo-entity-table-paginator ::ng-deep .mat-mdc-paginator-range-label {
-  @include mobile {
+  @include media.mobile {
     margin: 10px 1px 0px 20px;
   }
 }
@@ -284,13 +285,13 @@ app-toast-panel {
   z-index: 5;
   outline: none;
 
-  @include mobile {
-    left: $app-footer-height;
+  @include media.mobile {
+    left: portal.$app-footer-height;
     margin-left: 0;
     min-width: 100%;
   }
 
-  @include tablet {
+  @include media.tablet {
     max-width: inherit;
     left: calc(50% + 60px);
   }
@@ -321,7 +322,7 @@ app-expansion-panel.app-expansion-panel-expanded
   + app-toast-panel
   ::ng-deep
   igo-panel.app-toast-panel-html-large {
-  @include mobile {
+  @include media.mobile {
     max-height: 50vh;
 
     .toast-content {
@@ -341,7 +342,7 @@ app-expansion-panel.app-expansion-panel-expanded-maximized
     max-height: 40vh;
   }
 
-  @include tablet {
+  @include media.tablet {
     max-height: 30vh;
     .toast-content {
       max-height: calc(30vh - 6vh);
@@ -374,7 +375,7 @@ app-toast-panel:not(.has-expansion-panel),
 app-toast-panel.app-toast-panel-opened {
   bottom: 0;
 
-  @include mobile {
+  @include media.mobile {
     left: 0;
   }
 }
@@ -388,31 +389,31 @@ app-toast-panel-for-expansion {
   width: 600px;
   z-index: 6;
 
-  @include medium-screen {
+  @include media.medium-screen {
     width: 480px;
     margin-left: -240px;
   }
 
-  @include small-screen {
+  @include media.small-screen {
     width: 480px;
     margin-left: -240px;
   }
 
-  @include tablet {
-    width: calc(100% - 2 * #{$app-footer-height});
-    left: $app-footer-height;
+  @include media.tablet {
+    width: calc(100% - 2 * #{portal.$app-footer-height});
+    left: portal.$app-footer-height;
     margin-left: 0;
   }
 
-  @include mobile {
-    width: calc(100% - 2 * #{$app-footer-height});
-    left: $app-footer-height;
+  @include media.mobile {
+    width: calc(100% - 2 * #{portal.$app-footer-height});
+    left: portal.$app-footer-height;
     margin-left: 0;
   }
 }
 
 toast-panel-for-expansion.toast-panel-for-expansion-opened {
-  @include mobile {
+  @include media.mobile {
     width: 100%;
     left: 0;
   }
