@@ -1,13 +1,41 @@
+# [19.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v19.0.0-next.1...v19.0.0) (2025-10-02)
+
+### Bug Fixes
+
+* **sidenav:** refactor tool imports and prevent tree-shaking with explicit tool list ([c07184d](https://github.com/infra-geo-ouverte/igo2/commit/c07184d8ce4b61d518b93012177607b1aafc4cb1))
+* update igo2-lib with the latest fix ([5ab46a6](https://github.com/infra-geo-ouverte/igo2/commit/5ab46a664e3e5db315c64abab99b6407f158ee40))
+
+### chore
+
+* **deps:** update igo2-lib to v19 ([8f31975](https://github.com/infra-geo-ouverte/igo2/commit/8f31975da6843452cdbfff6809ab5afa6eafde2d))
+
+### Features
+
+* add allowResetSearchSourcesOptions to environment configuration and interface ([#1176](https://github.com/infra-geo-ouverte/igo2/issues/1176)) ([50683a3](https://github.com/infra-geo-ouverte/igo2/commit/50683a38fbe70a699f07457ed18bc3f68748d93a))
+* add resizable sidenav ([ae5567c](https://github.com/infra-geo-ouverte/igo2/commit/ae5567cfced94294bbaf5314ce0f9efde22dd19c))
+* **portal:** try to detect epsg code from vector added by url ([#1147](https://github.com/infra-geo-ouverte/igo2/issues/1147)) ([6a7ae00](https://github.com/infra-geo-ouverte/igo2/commit/6a7ae00ddf56d7ce55c1ae7faa13a249bc5b2f2a))
+* share map by url refactoring ([1e2bd60](https://github.com/infra-geo-ouverte/igo2/commit/1e2bd60d71349b23a8e60e894249ed13ce2541ce))
+
+
+### BREAKING CHANGES
+
+* **deps:** See the igo2-lib v19 release https://github.com/infra-geo-ouverte/igo2-lib/releases
+
+
+
 # [19.0.0-next.1](https://github.com/infra-geo-ouverte/igo2/compare/v18.0.0...v19.0.0-next.1) (2025-02-24)
 
 
 ### Bug Fixes
 
-* **deps:** remove unnecessary peerDependencies for jspdf-autotable ([07b95ae](https://github.com/infra-geo-ouverte/igo2/commit/07b95aeaa358cb8c49ef766bdd4f3c41a0b08c65))
+* **package-lock:** remove unnecessary peerDependencies for jspdf-autotable ([07b95ae](https://github.com/infra-geo-ouverte/igo2/commit/07b95aeaa358cb8c49ef766bdd4f3c41a0b08c65))
 
-### BREAKING CHANGES
-- chore(deps): update angular v19
-- chore(deps): upgrade @igo2 packages to version 19.0.0-next.1
+
+### Reverts
+
+* Revert "19.0.0" ([1bb2902](https://github.com/infra-geo-ouverte/igo2/commit/1bb2902c55052bc0772ee20a1d0c7f71866538c5))
+* Revert "chore(release): update to version 19.0.0 with breaking changes and bug fixes" ([7fc26f0](https://github.com/infra-geo-ouverte/igo2/commit/7fc26f0e6d5475bd71bc0971a376d6af997251ba))
+
 
 
 # [18.0.0](https://github.com/infra-geo-ouverte/igo2/compare/v17.0.1...v18.0.0) (2025-02-12)
