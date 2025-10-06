@@ -83,7 +83,7 @@
     "angular-eslint": "^19.3.0",
     "conventional-changelog-cli": "^5.0.0",
     "cypress": "^14.2.0",
-    "eslint": "^9.23.0",
+    "eslint": "^9.37.0",
     "execa": "^9.5.0",
     "http-server": "^14.1.0",
     "jasmine-core": "~5.1.0",
