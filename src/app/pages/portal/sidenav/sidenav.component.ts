@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +6,8 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
+  inject
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,7 +40,6 @@ import { importAllTools } from './sidenav-import';
     MatSidenavModule,
     MatTooltipModule,
     NgClass,
-    NgIf,
     PanelComponent,
     ToolboxComponent,
     TranslateModule,
@@ -47,6 +47,10 @@ import { importAllTools } from './sidenav-import';
   ]
 })
 export class SidenavComponent implements OnInit, OnDestroy {
+  private toolState = inject(ToolState);
+  private configService = inject(ConfigService);
+  private catalogState = inject(CatalogState);
+
   title$: BehaviorSubject<string> = new BehaviorSubject<string>(undefined);
 
   private activeTool$$: Subscription;
@@ -82,11 +86,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     return this.toolState.toolbox;
   }
 
-  constructor(
-    private toolState: ToolState,
-    private configService: ConfigService,
-    private catalogState: CatalogState
-  ) {
+  constructor() {
     importAllTools();
   }
 

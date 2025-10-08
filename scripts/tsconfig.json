@@ -6,12 +6,13 @@
     "target": "es2022",
     "rootDir": "./",
     "isolatedModules": true,
-    "noImplicitAny": true,
     "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   },
   "exclude": ["node_modules"]
 }

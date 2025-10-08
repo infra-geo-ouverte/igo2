@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { LanguageService } from '@igo2/core/language';
 
@@ -11,5 +11,5 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [TranslateModule]
 })
 export class FooterComponent {
-  constructor(protected languageService: LanguageService) {}
+  protected languageService = inject(LanguageService);
 }

@@ -2,7 +2,7 @@
  * Source: https://github.com/ng-packagr/ng-packagr/blob/ee4fd635a626e1ee2266b05cb572002bb09b4849/src/lib/utils/log.ts
  */
 /* eslint-disable no-console */
-import { colors } from './color';
+import { colors } from './color.mts';
 
 export const error = (err: string | Error) => {
   if (err instanceof Error) {

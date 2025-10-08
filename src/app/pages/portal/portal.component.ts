@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectorRef,
@@ -6,8 +6,8 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
-  Optional,
-  ViewChild
+  ViewChild,
+  inject
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -98,6 +98,7 @@ import {
   featureToSearchResult,
   handleFileImportError,
   handleFileImportSuccess,
+  isLayerItem,
   moveToOlFeatures,
   provideDirection,
   provideSearch,
@@ -204,7 +205,6 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     MatSidenavModule,
     MatTooltipModule,
     NgClass,
-    NgIf,
     QueryDirective,
     SearchBarComponent,
     SearchPointerSummaryDirective,
@@ -232,6 +232,39 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
   ]
 })
 export class PortalComponent implements OnInit, OnDestroy {
+  private elementRef = inject(ElementRef);
+  private analyticsListenerService = inject(AnalyticsListenerService);
+  private route = inject(ActivatedRoute);
+  workspaceState = inject(WorkspaceState);
+  authService = inject(AuthService);
+  mediaService = inject(MediaService);
+  layerService = inject(LayerService);
+  dataSourceService = inject(DataSourceService);
+  cdRef = inject(ChangeDetectorRef);
+  capabilitiesService = inject(CapabilitiesService);
+  private contextState = inject(ContextState);
+  private mapState = inject(MapState);
+  private searchState = inject(SearchState);
+  queryState = inject(QueryState);
+  private toolState = inject(ToolState);
+  private searchSourceService = inject(SearchSourceService);
+  private configService = inject(ConfigService);
+  private importService = inject(ImportService);
+  private http = inject(HttpClient);
+  private languageService = inject(LanguageService);
+  private messageService = inject(MessageService);
+  private welcomeWindowService = inject(WelcomeWindowService);
+  dialogWindow = inject(MatDialog);
+  private queryService = inject(QueryService);
+  private storageService = inject(StorageService);
+  private editionWorkspaceService = inject(EditionWorkspaceService);
+  private directionState = inject(DirectionState);
+  private shareMapService = inject(ShareMapService);
+  private routeService = inject(RouteService);
+  private configFileToGeoDBService = inject(ConfigFileToGeoDBService, {
+    optional: true
+  });
+
   public appConfig: EnvironmentOptions;
   public toastPanelOffsetX$ = new BehaviorSubject<string>(undefined);
   public sidenavOpened$ = new BehaviorSubject(false);
@@ -400,38 +433,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.workspaceState.workspace$.value;
   }
 
-  constructor(
-    private elementRef: ElementRef,
-    private analyticsListenerService: AnalyticsListenerService,
-    private route: ActivatedRoute,
-    public workspaceState: WorkspaceState,
-    public authService: AuthService,
-    public mediaService: MediaService,
-    public layerService: LayerService,
-    public dataSourceService: DataSourceService,
-    public cdRef: ChangeDetectorRef,
-    public capabilitiesService: CapabilitiesService,
-    private contextState: ContextState,
-    private mapState: MapState,
-    private searchState: SearchState,
-    public queryState: QueryState,
-    private toolState: ToolState,
-    private searchSourceService: SearchSourceService,
-    private configService: ConfigService,
-    private importService: ImportService,
-    private http: HttpClient,
-    private languageService: LanguageService,
-    private messageService: MessageService,
-    private welcomeWindowService: WelcomeWindowService,
-    public dialogWindow: MatDialog,
-    private queryService: QueryService,
-    private storageService: StorageService,
-    private editionWorkspaceService: EditionWorkspaceService,
-    private directionState: DirectionState,
-    private shareMapService: ShareMapService,
-    private routeService: RouteService,
-    @Optional() private configFileToGeoDBService?: ConfigFileToGeoDBService
-  ) {
+  constructor() {
     this.analyticsListenerService.listen();
     this.handleAppConfigs();
     this.storageService.set('version', getAppVersion(this.configService));
@@ -1610,5 +1612,13 @@ export class PortalComponent implements OnInit, OnDestroy {
       olFeaturesSelected,
       FeatureMotion.Zoom
     );
+  }
+
+  onWorkspaceLayerToggle(id: string): void {
+    let layer = this.map.layerController.getById(id);
+    if (isLayerItem(layer) && layer.linkMaster) {
+      layer = layer.linkMaster.layer;
+    }
+    layer.visible = !layer.visible;
   }
 }

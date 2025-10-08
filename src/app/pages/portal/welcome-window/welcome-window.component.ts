@@ -1,5 +1,5 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -26,7 +26,6 @@ import { WelcomeWindowService } from './welcome-window.service';
   templateUrl: './welcome-window.component.html',
   styleUrls: ['./welcome-window.component.scss'],
   imports: [
-    NgIf,
     MatToolbarModule,
     ReactiveFormsModule,
     FormsModule,
@@ -40,18 +39,18 @@ import { WelcomeWindowService } from './welcome-window.service';
   ]
 })
 export class WelcomeWindowComponent implements OnInit, OnDestroy {
+  dialog = inject(MatDialog);
+  private welcomeWindowService = inject(WelcomeWindowService);
+  private configService = inject(ConfigService);
+  protected languageService = inject(LanguageService);
+
   // isVisible = true;
   showAgain = false;
   public discoverTitleInLocale$: Observable<string>;
   private title$$: Subscription;
   public html$ = new BehaviorSubject<string>(undefined);
 
-  constructor(
-    public dialog: MatDialog,
-    private welcomeWindowService: WelcomeWindowService,
-    private configService: ConfigService,
-    protected languageService: LanguageService
-  ) {
+  constructor() {
     this.discoverTitleInLocale$ = of(
       this.configService.getConfig(
         'welcomeWindow.discoverTitleInLocale',

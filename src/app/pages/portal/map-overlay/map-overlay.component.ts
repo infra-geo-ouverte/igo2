@@ -1,5 +1,5 @@
-import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { NgClass, NgStyle } from '@angular/common';
+import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
 
 import { Context, ContextService } from '@igo2/context';
 import { ConfigService } from '@igo2/core/config';
@@ -13,19 +13,17 @@ import { MapOverlay } from './map-overlay.interface';
   selector: 'app-map-overlay',
   templateUrl: './map-overlay.component.html',
   styleUrls: ['./map-overlay.component.scss'],
-  imports: [NgFor, NgClass, NgIf, NgStyle]
+  imports: [NgClass, NgStyle]
 })
 export class MapOverlayComponent implements AfterViewInit, OnDestroy {
+  private contextService = inject(ContextService);
+  private mediaService = inject(MediaService);
+  private configService = inject(ConfigService);
+
   public mapOverlay: MapOverlay[] = [];
   private context$$: Subscription;
   private media$$: Subscription;
   private context: Context;
-
-  constructor(
-    private contextService: ContextService,
-    private mediaService: MediaService,
-    private configService: ConfigService
-  ) {}
 
   ngAfterViewInit() {
     this.context$$ = this.contextService.context$.subscribe((context) => {

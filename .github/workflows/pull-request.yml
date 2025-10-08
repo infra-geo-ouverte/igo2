@@ -2,11 +2,11 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 #
 
-name: push
-
+name: Pull Request
 on:
   workflow_dispatch:
-  push:
+  pull_request:
+    types: [opened, synchronize]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20.x'
+        node-version: 24
 
     - name: Install dependencies
       run: npm ci --no-audit
@@ -28,7 +28,7 @@ jobs:
       run: npm audit --omit dev && npm audit signatures
 
     - name: Quality
-      run: npm run lint & npm run format.check
+      run: npm run lint.check & npm run format.check
 
     - name: Test
       run: npm run e2e

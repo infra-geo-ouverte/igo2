@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,7 +8,8 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
+  inject
 } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -81,7 +82,6 @@ interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
     MatIconModule,
     MatTooltipModule,
     NgClass,
-    NgIf,
     NgTemplateOutlet,
     PanelComponent,
     SearchResultsComponent,
@@ -90,6 +90,15 @@ interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
   ]
 })
 export class ToastPanelComponent implements OnInit, OnDestroy {
+  mediaService = inject(MediaService);
+  languageService = inject(LanguageService);
+  private storageState = inject(StorageState);
+  private queryState = inject(QueryState);
+  private workspaceState = inject(WorkspaceState);
+  private configService = inject(ConfigService);
+  private propertyTypeDetectorService = inject(PropertyTypeDetectorService);
+  private layerService = inject(LayerService);
+
   static SWIPE_ACTION = {
     RIGHT: 'swiperight',
     LEFT: 'swipeleft',
@@ -314,16 +323,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     return this.multiple$;
   }
 
-  constructor(
-    public mediaService: MediaService,
-    public languageService: LanguageService,
-    private storageState: StorageState,
-    private queryState: QueryState,
-    private workspaceState: WorkspaceState,
-    private configService: ConfigService,
-    private propertyTypeDetectorService: PropertyTypeDetectorService,
-    private layerService: LayerService
-  ) {
+  constructor() {
     this.tabsMode = this.configService.getConfig('queryTabs', false);
     this.opened = this.storageService.get('toastOpened') as boolean;
     this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
