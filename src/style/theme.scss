@@ -1,8 +1,6 @@
 @use '@igo2/core/themes' as igo-themes;
 @use '@igo2/sdg-core' as sdg;
 
-@use '../app/app.theme' as app;
-
 html {
   @include igo-themes.theme(
     igo-themes.$blue-theme,
@@ -11,6 +9,4 @@ html {
   );
 
   @include sdg.typo-base();
-
-  @include app.themes(igo-themes.$blue-theme);
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 
 import { ConfirmDialogService } from '@igo2/common/confirm-dialog';
@@ -11,12 +11,14 @@ import { skip, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PwaService {
+  private updates = inject(SwUpdate);
+  private languageService = inject(LanguageService);
+  private confirmDialogService = inject(ConfirmDialogService);
+
   private confirmOpened = false;
-  constructor(
-    private updates: SwUpdate,
-    private languageService: LanguageService,
-    private confirmDialogService: ConfirmDialogService
-  ) {
+  constructor() {
+    const updates = this.updates;
+
     if (updates.isEnabled) {
       this.handleVersionUpdates();
     }

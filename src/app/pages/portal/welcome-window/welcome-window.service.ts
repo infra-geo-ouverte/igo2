@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatDialogConfig } from '@angular/material/dialog';
 
 import { ConfigService } from '@igo2/core/config';
@@ -10,14 +10,14 @@ import { getAppVersion } from 'src/app/app.utils';
   providedIn: 'root'
 })
 export class WelcomeWindowService {
+  private configService = inject(ConfigService);
+  private storageService = inject(StorageService);
+
   nbVisit: number;
   showAgain: boolean;
   igoVersionDifferentFromStorage = false;
 
-  constructor(
-    private configService: ConfigService,
-    private storageService: StorageService
-  ) {
+  constructor() {
     this.igoVersionDifferentFromStorage = this.isVersionDifferentFromStorage();
     this.setStorageConfig();
   }

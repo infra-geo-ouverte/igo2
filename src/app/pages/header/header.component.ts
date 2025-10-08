@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ConfigService } from '@igo2/core/config';
@@ -13,13 +13,13 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [MatToolbarModule, TranslateModule]
 })
 export class HeaderComponent {
+  private configService = inject(ConfigService);
+  protected languageService = inject(LanguageService);
+
   public headerLogo: string;
   public headerLogoPrint: string;
 
-  constructor(
-    private configService: ConfigService,
-    protected languageService: LanguageService
-  ) {
+  constructor() {
     this.computeHeader();
   }
 

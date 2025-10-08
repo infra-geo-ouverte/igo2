@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @use '@igo2/core/all-style';
 @use '@igo2/core/layout';
 
@@ -22,6 +23,24 @@ body {
     'wght' 400,
     'GRAD' 0,
     'opsz' 24;
+}
+
+igo-home-button,
+igo-menu-button,
+igo-search-bar {
+  @include mat.icon-button-overrides(
+    (
+      state-layer-size: 48px
+    )
+  );
+}
+
+igo-context-item {
+  @include mat.list-overrides(
+    (
+      list-item-one-line-container-height: 48px
+    )
+  );
 }
 
 .toast-title-red {

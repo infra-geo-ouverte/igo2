@@ -1,10 +1,11 @@
-import { DOCUMENT } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import {
   ApplicationConfig,
+  DOCUMENT,
   EnvironmentProviders,
   inject,
-  provideAppInitializer
+  provideAppInitializer,
+  provideZonelessChangeDetection
 } from '@angular/core';
 import { importProvidersFrom } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -44,6 +45,7 @@ const TOOLTIP_OPTIONS: MatTooltipDefaultOptions = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideZonelessChangeDetection(),
     importProvidersFrom(
       BrowserModule,
       IgoCoreModule,
