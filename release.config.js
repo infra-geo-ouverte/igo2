@@ -9,7 +9,12 @@ module.exports = {
     [
       '@semantic-release/github',
       {
-        assets: [{ path: 'dist/igo2', label: 'Distribution files' }]
+        assets: [
+          {
+            path: 'dist/igo2/igo2-dist.zip',
+            label: 'Distributions files'
+          }
+        ]
       }
     ],
     [
@@ -18,7 +23,8 @@ module.exports = {
         prepareCmd: [
           'npm pkg set version=${nextRelease.version}',
           'node --import tsx scripts/src/update-version.mts ${nextRelease.version}',
-          'npm run build.prod'
+          'npm run build.prod',
+          'zip -qq -r dist/igo2/igo2-dist.zip * -i dist/igo2/*'
         ].join(' && ')
       }
     ],
