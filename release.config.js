@@ -11,7 +11,8 @@ module.exports = {
       {
         assets: [{ path: 'dist/igo2', label: 'Distribution files' }]
       }
-    ][
+    ],
+    [
       ('@semantic-release/exec',
       {
         prepareCmd: [
