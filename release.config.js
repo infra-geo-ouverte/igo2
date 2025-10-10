@@ -24,7 +24,7 @@ module.exports = {
           'npm pkg set version=${nextRelease.version}',
           'node --import tsx scripts/src/update-version.mts ${nextRelease.version}',
           'npm run build.prod',
-          'zip -qq -r dist/igo2/igo2-dist.zip * -i dist/igo2/*'
+          'cd dist/igo2 && zip -qq -r igo2-dist.zip *'
         ].join(' && ')
       }
     ],
