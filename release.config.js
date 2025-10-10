@@ -16,7 +16,7 @@ module.exports = {
       '@semantic-release/exec',
       {
         prepareCmd: [
-          'npm pkg set version=$VERSION',
+          'npm pkg set version=${nextRelease.version}',
           'node --import tsx scripts/src/update-version.mts ${nextRelease.version}',
           'npm run build.prod'
         ].join(' && ')
