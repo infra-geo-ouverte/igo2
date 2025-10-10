@@ -1,22 +1,11 @@
-import {
-  provideHttpClient,
-  withInterceptorsFromDi
-} from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+
+import { mergeTestConfig } from 'src/test.config';
 
 import { WelcomeWindowService } from './welcome-window.service';
 
 describe('WelcomeWindowService', () => {
-  beforeEach(() =>
-    TestBed.configureTestingModule({
-      imports: [],
-      providers: [
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
-      ]
-    })
-  );
+  beforeEach(() => TestBed.configureTestingModule(mergeTestConfig({})));
 
   it('should be created', () => {
     const service: WelcomeWindowService = TestBed.inject(WelcomeWindowService);

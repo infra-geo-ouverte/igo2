@@ -1,6 +1,6 @@
 import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT, NgClass, NgIf } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, DOCUMENT, OnInit, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -12,7 +12,6 @@ import {
 } from '@igo2/common/spinner';
 import { ConfigService } from '@igo2/core/config';
 import { LanguageService } from '@igo2/core/language';
-import { MessageService } from '@igo2/core/message';
 import { AppOptions } from '@igo2/integration';
 import { DomUtils } from '@igo2/utils';
 
@@ -32,29 +31,27 @@ import { PwaService } from './services/pwa.service';
     SpinnerActivityDirective,
     HeaderComponent,
     FooterComponent,
-    NgIf,
     AuthFormComponent,
     PortalComponent,
     NgClass
   ]
 })
 export class AppComponent implements OnInit {
+  private document = inject<Document>(DOCUMENT);
+  private platform = inject(Platform);
+  protected languageService = inject(LanguageService);
+  private configService = inject(ConfigService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private pwaService = inject(PwaService);
+  private router = inject(Router);
+
   public authConfig: AuthOptions;
   public hasHeader: boolean;
   public hasFooter: boolean;
   private promptEvent: any;
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private platform: Platform,
-    protected languageService: LanguageService,
-    private configService: ConfigService,
-    private titleService: Title,
-    private metaService: Meta,
-    private messageService: MessageService,
-    private pwaService: PwaService,
-    private router: Router
-  ) {
+  constructor() {
     this.authConfig = this.configService.getConfig('auth', {});
 
     this.readTitleConfig();

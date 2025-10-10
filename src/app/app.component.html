@@ -1,8 +1,12 @@
 <igo-spinner igoSpinnerActivity></igo-spinner>
 
-<igo-auth-form *ngIf="authConfig && authConfig.url"></igo-auth-form>
+@if (authConfig && authConfig.url) {
+  <igo-auth-form></igo-auth-form>
+}
 
-<app-header *ngIf="hasHeader" #header></app-header>
+@if (hasHeader) {
+  <app-header #header></app-header>
+}
 
 <app-portal
   [ngClass]="
@@ -17,4 +21,6 @@
   igoStopDropPropagation
 ></app-portal>
 
-<app-footer *ngIf="hasFooter"></app-footer>
+@if (hasFooter) {
+  <app-footer></app-footer>
+}

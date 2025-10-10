@@ -32,7 +32,7 @@ import {
 } from '@igo2/integration';
 
 // Prevent Tree-Shaking with Explicit Imports
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 const _TOOLS = [
   ToolComponent,
   AboutToolComponent,

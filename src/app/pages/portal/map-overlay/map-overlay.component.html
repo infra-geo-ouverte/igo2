@@ -1,4 +1,4 @@
-<ng-container *ngFor="let element of mapOverlay; let i = index">
+@for (element of mapOverlay; track element; let i = $index) {
   <div
     class="mapOverlayDefault"
     [ngClass]="element.cssClass"
@@ -9,30 +9,26 @@
     [style.marginBottom]="element.marginBottom"
     [style.fontSize]="element.fontSize"
   >
-    <a
-      *ngIf="element.link; else templateNoLink"
-      target="_blank"
-      [href]="element.link"
-    >
+    @if (element.link) {
+      <a target="_blank" [href]="element.link">
+        {{ element.text }}
+        @if (element.imgSrc) {
+          <img
+            [src]="element.imgSrc"
+            [alt]="element.alt"
+            [ngStyle]="{ width: element.imgSize }"
+          />
+        }
+      </a>
+    } @else {
       {{ element.text }}
-      <ng-container *ngIf="element.imgSrc">
+      @if (element.imgSrc) {
         <img
           [src]="element.imgSrc"
           [alt]="element.alt"
           [ngStyle]="{ width: element.imgSize }"
         />
-      </ng-container>
-    </a>
-
-    <ng-template #templateNoLink>
-      {{ element.text }}
-      <ng-container *ngIf="element.imgSrc">
-        <img
-          [src]="element.imgSrc"
-          [alt]="element.alt"
-          [ngStyle]="{ width: element.imgSize }"
-        />
-      </ng-container>
-    </ng-template>
+      }
+    }
   </div>
-</ng-container>
+}
