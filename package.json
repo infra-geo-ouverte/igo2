@@ -74,7 +74,7 @@
     "@types/jasmine": "^4.3.5",
     "@types/jasminewd2": "~2.0.10",
     "@types/node": "^24.7.0",
-    "angular-eslint": "^20.3.0",
+    "angular-eslint": "^20.4.0",
     "cypress": "^15.0.0",
     "eslint": "^9.37.0",
     "execa": "^9.6.0",
