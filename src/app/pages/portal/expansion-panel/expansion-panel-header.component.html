@@ -1,9 +1,6 @@
 <div class="app-expansion-panel-trigger-container">
-  <app-expansion-panel-button
-    [expanded]="expanded"
-    (expand)="handleClose()"
-  ></app-expansion-panel-button>
+  <app-expansion-panel-button [(expanded)]="expanded" />
 </div>
 <div class="app-expansion-panel-content">
-  <ng-content></ng-content>
+  <ng-content />
 </div>

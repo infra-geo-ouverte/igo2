@@ -1,10 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   HostBinding,
-  Input,
-  Output
+  model
 } from '@angular/core';
 
 import { ExpansionPanelButtonComponent } from './expansion-panel-button/expansion-panel-button.component';
@@ -17,16 +15,14 @@ import { ExpansionPanelButtonComponent } from './expansion-panel-button/expansio
   imports: [ExpansionPanelButtonComponent]
 })
 export class ExpansionPanelHeaderComponent {
-  @Input() expanded: boolean;
-
-  @Output() expandedChange = new EventEmitter<boolean>();
+  readonly expanded = model<boolean>(undefined);
 
   @HostBinding('class.app-expansion-panel-header-expanded')
   get hasExpandedClass() {
-    return this.expanded;
+    return this.expanded();
   }
 
   handleClose(): void {
-    this.expandedChange.emit(false);
+    this.expanded.set(false);
   }
 }

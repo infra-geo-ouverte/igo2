@@ -2,12 +2,12 @@ import { AsyncPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
   OnDestroy,
   OnInit,
-  Output,
-  inject
+  inject,
+  input,
+  model,
+  output
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -55,32 +55,12 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   private activeTool$$: Subscription;
 
-  @Input()
-  get map(): IgoMap {
-    return this._map;
-  }
-  set map(value: IgoMap) {
-    this._map = value;
-  }
-  private _map: IgoMap;
+  readonly map = input<IgoMap>();
+  readonly opened = model<boolean>();
 
-  @Input()
-  get opened(): boolean {
-    return this._opened;
-  }
-  set opened(value: boolean) {
-    if (value === this._opened) {
-      return;
-    }
-
-    this._opened = value;
-    this.openedChange.emit(this._opened);
-  }
-  private _opened: boolean;
-
-  @Output() openedChange = new EventEmitter<boolean>();
-  @Output() toolChange = new EventEmitter<Tool>();
-  @Output() widthChange = new EventEmitter<number>();
+  readonly openedChange = output<boolean>();
+  readonly toolChange = output<Tool>();
+  readonly widthChange = output<number>();
 
   get toolbox(): Toolbox {
     return this.toolState.toolbox;
@@ -107,11 +87,9 @@ export class SidenavComponent implements OnInit, OnDestroy {
           tool.name === 'activeTimeFilter' ||
           tool.name === 'activeOgcFilter'
         ) {
-          for (const layer of this.map.layerController.layersFlattened) {
-            if (
-              isLayerItem(layer) &&
-              this.map.layerController.isSelected(layer)
-            ) {
+          const layerController = this.map().layerController;
+          for (const layer of layerController.layersFlattened) {
+            if (isLayerItem(layer) && layerController.isSelected(layer)) {
               this.title$.next(layer.title);
             }
           }

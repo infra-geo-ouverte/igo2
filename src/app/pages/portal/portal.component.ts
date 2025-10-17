@@ -1,13 +1,15 @@
 import { AsyncPipe, NgClass } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
   OnInit,
-  ViewChild,
-  inject
+  effect,
+  inject,
+  viewChild
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -174,6 +176,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
   selector: 'app-portal',
   templateUrl: './portal.component.html',
   styleUrls: ['./portal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     expansionPanelAnimation(),
     toastPanelAnimation(),
@@ -319,10 +322,8 @@ export class PortalComponent implements OnInit, OnDestroy {
   isTouchScreen: boolean;
   sidenavWidth: number;
 
-  @ViewChild('mapBrowser', { read: ElementRef, static: true })
-  mapBrowser: ElementRef;
-  @ViewChild('searchBar', { read: ElementRef, static: true })
-  searchBar: ElementRef;
+  readonly mapBrowser = viewChild('mapBrowser', { read: ElementRef });
+  readonly searchBar = viewChild('searchBar', { read: ElementRef });
 
   get map(): IgoMap {
     return this.mapState.map;
@@ -371,18 +372,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
   }
 
-  get expansionPanelExpanded(): boolean {
-    return this.workspaceState.workspacePanelExpanded;
-  }
-  set expansionPanelExpanded(value: boolean) {
-    this.workspaceState.workspacePanelExpanded = value;
-    if (value === true) {
-      this.map.viewController.setPadding({ bottom: 280 });
-    } else {
-      this.map.viewController.setPadding({ bottom: 0 });
-    }
-  }
-
   get contextUri(): string {
     return this.contextState.context$?.getValue()
       ? this.contextState.context$.getValue().uri
@@ -390,7 +379,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   get expansionPanelBackdropShown(): boolean {
-    return this.expansionPanelExpanded && this.toastPanelForExpansionOpened;
+    return this.workspaceState.expanded() && this.toastPanelForExpansionOpened;
   }
 
   get actionbarMode(): ActionbarMode {
@@ -434,6 +423,14 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   constructor() {
+    effect(() => {
+      const expanded = this.workspaceState.expanded();
+      if (expanded === true) {
+        this.map.viewController.setPadding({ bottom: 280 });
+      } else {
+        this.map.viewController.setPadding({ bottom: 0 });
+      }
+    });
     this.analyticsListenerService.listen();
     this.handleAppConfigs();
     this.storageService.set('version', getAppVersion(this.configService));
@@ -505,7 +502,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           currentCnt !== prevCnt &&
           this.isMobile() &&
           this.appConfig.hasExpansionPanel &&
-          this.expansionPanelExpanded &&
+          this.workspaceState.expanded() &&
           this.toastPanelOpened
         ) {
           this.toastPanelOpened = false;
@@ -538,7 +535,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
       this.workspaceState.workspaceEnabled$.next(workspaceEmpty ? false : true);
       if (workspaceEmpty) {
-        this.expansionPanelExpanded = false;
+        this.workspaceState.expanded.set(false);
       }
       this.updateMapBrowserClass();
     });
@@ -553,7 +550,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       (activeWks: WfsWorkspace | FeatureWorkspace | EditionWorkspace) => {
         if (activeWks) {
           this.selectedWorkspace$.next(activeWks);
-          this.expansionPanelExpanded = true;
+          this.workspaceState.expanded.set(true);
 
           if (
             activeWks.layer.options.workspace?.pageSize &&
@@ -571,7 +568,7 @@ export class PortalComponent implements OnInit, OnDestroy {
             };
           }
         } else {
-          this.expansionPanelExpanded = false;
+          this.workspaceState.expanded.set(false);
         }
       }
     );
@@ -898,8 +895,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public toolChanged(tool: Tool) {
-    if (tool && tool.name === 'searchResults' && this.searchBar) {
-      this.searchBar.nativeElement.getElementsByTagName('input')[0].focus();
+    const searchBar = this.searchBar();
+    if (tool && tool.name === 'searchResults' && searchBar) {
+      searchBar.nativeElement.getElementsByTagName('input')[0].focus();
     }
   }
 
@@ -989,15 +987,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (
       this.isMobile() &&
       this.appConfig.hasExpansionPanel &&
-      this.expansionPanelExpanded &&
+      this.workspaceState.expanded() &&
       this.toastPanelOpened
     ) {
-      this.expansionPanelExpanded = false;
+      this.workspaceState.expanded.set(false);
     }
-  }
-
-  handleToggleExpansionPanel(isExpanded: boolean): void {
-    this.expansionPanelExpanded = isExpanded;
   }
 
   public onClearSearch() {
@@ -1023,7 +1017,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private getClickCoordinate(event: { x: number; y: number }) {
     const contextmenuPoint = event;
     const boundingMapBrowser =
-      this.mapBrowser.nativeElement.getBoundingClientRect();
+      this.mapBrowser().nativeElement.getBoundingClientRect();
     contextmenuPoint.y =
       contextmenuPoint.y -
       boundingMapBrowser.top +
@@ -1066,68 +1060,59 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   updateMapBrowserClass() {
     const header = this.queryState.store.entities$.value.length > 0;
+    const classList = this.mapBrowser().nativeElement.classList;
     if (
       this.appConfig.hasExpansionPanel &&
       this.workspaceState.workspaceEnabled$.value
     ) {
-      this.mapBrowser.nativeElement.classList.add('has-expansion-panel');
+      classList.add('has-expansion-panel');
     } else {
-      this.mapBrowser.nativeElement.classList.remove('has-expansion-panel');
+      classList.remove('has-expansion-panel');
     }
 
-    if (this.appConfig.hasExpansionPanel && this.expansionPanelExpanded) {
+    if (this.appConfig.hasExpansionPanel && this.workspaceState.expanded()) {
       if (this.workspaceState.workspaceMaximize$.value) {
-        this.mapBrowser.nativeElement.classList.add(
-          'expansion-offset-maximized'
-        );
-        this.mapBrowser.nativeElement.classList.remove('expansion-offset');
+        classList.add('expansion-offset-maximized');
+        classList.remove('expansion-offset');
       } else {
-        this.mapBrowser.nativeElement.classList.add('expansion-offset');
-        this.mapBrowser.nativeElement.classList.remove(
-          'expansion-offset-maximized'
-        );
+        classList.add('expansion-offset');
+        classList.remove('expansion-offset-maximized');
       }
     } else {
       if (this.workspaceState.workspaceMaximize$.value) {
-        this.mapBrowser.nativeElement.classList.remove(
-          'expansion-offset-maximized'
-        );
+        classList.remove('expansion-offset-maximized');
       } else {
-        this.mapBrowser.nativeElement.classList.remove('expansion-offset');
+        classList.remove('expansion-offset');
       }
     }
 
     if (this.sidenavOpened) {
-      this.mapBrowser.nativeElement.classList.add('sidenav-offset');
+      classList.add('sidenav-offset');
     } else {
-      this.mapBrowser.nativeElement.classList.remove('sidenav-offset');
+      classList.remove('sidenav-offset');
     }
 
     if (this.sidenavOpened && !this.isMobile()) {
-      this.mapBrowser.nativeElement.classList.add('sidenav-offset-baselayers');
+      classList.add('sidenav-offset-baselayers');
     } else {
-      this.mapBrowser.nativeElement.classList.remove(
-        'sidenav-offset-baselayers'
-      );
+      classList.remove('sidenav-offset-baselayers');
     }
 
-    if (!this.toastPanelOpened && header && !this.expansionPanelExpanded) {
-      this.mapBrowser.nativeElement.classList.add('toast-offset-scale-line');
+    if (!this.toastPanelOpened && header && !this.workspaceState.expanded()) {
+      classList.add('toast-offset-scale-line');
     } else {
-      this.mapBrowser.nativeElement.classList.remove('toast-offset-scale-line');
+      classList.remove('toast-offset-scale-line');
     }
 
     if (
       !this.toastPanelOpened &&
       header &&
       (this.isMobile() || this.isTablet() || this.sidenavOpened) &&
-      !this.expansionPanelExpanded
+      !this.workspaceState.expanded()
     ) {
-      this.mapBrowser.nativeElement.classList.add('toast-offset-attribution');
+      classList.add('toast-offset-attribution');
     } else {
-      this.mapBrowser.nativeElement.classList.remove(
-        'toast-offset-attribution'
-      );
+      classList.remove('toast-offset-attribution');
     }
   }
 
@@ -1159,20 +1144,21 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   getExpansionPanelStatus() {
+    const isExpanded = this.workspaceState.expanded();
     if (this.sidenavOpened === false) {
-      if (this.expansionPanelExpanded === true) {
+      if (isExpanded === true) {
         return 'full';
       }
       return 'notTriggered';
     }
     if (this.sidenavOpened === true && this.isMobile() === false) {
-      if (this.expansionPanelExpanded === true) {
+      if (isExpanded === true) {
         return 'reduced';
       }
       return 'reducedNotTriggered';
     }
     if (this.sidenavOpened === true && this.isMobile() === true) {
-      if (this.expansionPanelExpanded === true) {
+      if (isExpanded === true) {
         return 'mobile';
       } else {
         return 'notVisible';
@@ -1182,7 +1168,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   getToastPanelOffsetY() {
     let status = 'noExpansion';
-    if (this.expansionPanelExpanded) {
+    if (this.workspaceState.expanded()) {
       if (this.workspaceState.workspaceMaximize$.value) {
         if (this.toastPanelOpened) {
           status = 'expansionMaximizedAndToastOpened';
@@ -1203,9 +1189,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   getToastPanelStatus() {
+    const isExpanded = this.workspaceState.expanded();
     if (this.isMobile() === true && this.toastPanelOpened === false) {
       if (this.sidenavOpened === false) {
-        if (this.expansionPanelExpanded === false) {
+        if (!isExpanded) {
           if (this.queryState.store.entities$.value.length > 0) {
             return 'low';
           }
@@ -1214,7 +1201,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     }
   }
   getControlsOffsetY() {
-    return this.expansionPanelExpanded
+    return this.workspaceState.expanded()
       ? this.workspaceState.workspaceMaximize$.value
         ? 'firstRowFromBottom-expanded-maximized'
         : 'firstRowFromBottom-expanded'
@@ -1222,10 +1209,11 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   getBaselayersSwitcherStatus() {
+    const isExpanded = this.workspaceState.expanded();
     let status;
     if (this.isMobile()) {
       if (this.workspaceState.workspaceEnabled$.value) {
-        if (this.expansionPanelExpanded === false) {
+        if (!isExpanded) {
           if (this.queryState.store.entities$.value.length === 0) {
             status = 'secondRowFromBottom';
           } else {
@@ -1247,7 +1235,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     } else {
       if (this.workspaceState.workspaceEnabled$.value) {
-        if (this.expansionPanelExpanded) {
+        if (this.workspaceState.expanded()) {
           if (this.workspaceState.workspaceMaximize$.value) {
             status = 'firstRowFromBottom-expanded-maximized';
           } else {
@@ -1445,7 +1433,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         )
         .subscribe((c) => {
           if (c >= 1) {
-            this.directionState.zoomToActiveRoute$.next();
+            this.directionState.zoomToActiveRoute.set(true);
           }
         });
       // select the active route by url controls
@@ -1462,7 +1450,7 @@ export class PortalComponent implements OnInit, OnDestroy {
             this.directionState.routesFeatureStore.entities$.value[
               resultSelection
             ].properties.active = true;
-            this.directionState.zoomToActiveRoute$.next();
+            this.directionState.zoomToActiveRoute.set(true);
           }
         });
     }
@@ -1561,7 +1549,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (
         activeWks.active &&
         activeWks.inResolutionRange$.value &&
-        this.workspaceState.workspacePanelExpanded
+        this.workspaceState.expanded
       ) {
         return true;
       }

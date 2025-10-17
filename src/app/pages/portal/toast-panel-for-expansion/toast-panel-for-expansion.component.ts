@@ -1,10 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   HostBinding,
-  Input,
-  Output
+  input
 } from '@angular/core';
 
 import { PanelComponent } from '@igo2/common/panel';
@@ -20,32 +18,18 @@ import { showContent } from './toast-panel-for-expansion.animations';
   imports: [PanelComponent]
 })
 export class ToastPanelForExpansionComponent {
-  @Input()
-  set opened(value: boolean) {
-    if (value === this._opened) {
-      return;
-    }
-    this._opened = value;
-    this.openedChange.emit(this._opened);
-  }
-  get opened(): boolean {
-    return this._opened;
-  }
-  private _opened: boolean;
+  readonly opened = input(false);
+  readonly title = input<string>(undefined);
 
-  @Input() title: string;
-
-  @Input() withHeader: boolean;
-
-  @Output() openedChange = new EventEmitter<boolean>();
+  readonly withHeader = input<boolean>(undefined);
 
   @HostBinding('class.toast-panel-for-expansion-opened')
   get hasOpenedClass() {
-    return this.opened;
+    return this.opened();
   }
 
   @HostBinding('style.visibility')
   get displayStyle() {
-    return this.withHeader || this.opened ? 'visible' : 'hidden';
+    return this.withHeader() || this.opened() ? 'visible' : 'hidden';
   }
 }
