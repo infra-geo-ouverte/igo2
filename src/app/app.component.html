@@ -1,11 +1,11 @@
-<igo-spinner igoSpinnerActivity></igo-spinner>
+<igo-spinner igoSpinnerActivity />
 
 @if (authConfig && authConfig.url) {
-  <igo-auth-form></igo-auth-form>
+  <igo-auth-form />
 }
 
 @if (hasHeader) {
-  <app-header #header></app-header>
+  <app-header #header />
 }
 
 <app-portal
@@ -19,8 +19,8 @@
         : 'portal'
   "
   igoStopDropPropagation
-></app-portal>
+/>
 
 @if (hasFooter) {
-  <app-footer></app-footer>
+  <app-footer />
 }

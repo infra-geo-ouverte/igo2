@@ -21,8 +21,7 @@
         [withTitle]="actionbarMode === 'overlay'"
         [horizontal]="true"
         [mode]="actionbarMode"
-      >
-      </igo-actionbar>
+      />
       @if (resultSelected$.value) {
         <button
           mat-icon-button
@@ -130,8 +129,7 @@
             [map]="map"
             [feature]="resultSelected$.value.data"
             (htmlDisplayEvent)="setHtmlDisplay($event)"
-          >
-          </igo-feature-details>
+          />
         }
         @if (!resultSelected$.value) {
           <igo-search-results
@@ -143,8 +141,7 @@
             (resultUnfocus)="unfocusResult($event, true)"
             (resultSelect)="selectResult($event)"
             [tabsMode]="tabsMode"
-          >
-          </igo-search-results>
+          />
         }
       </div>
     </igo-panel>
@@ -159,7 +156,7 @@
     (swipeup)="swipe($event.type)"
     (swipedown)="swipe($event.type)"
   >
-    <ng-template [ngTemplateOutlet]="toast"></ng-template>
+    <ng-template [ngTemplateOutlet]="toast" />
   </div>
 } @else {
   @if (store.entities$ | async) {
@@ -184,8 +181,7 @@
         [withTitle]="actionbarMode === 'overlay'"
         [horizontal]="true"
         [mode]="actionbarMode"
-      >
-      </igo-actionbar>
+      />
       @if (resultSelected$.value) {
         <button
           mat-icon-button
@@ -293,8 +289,7 @@
             [map]="map"
             [feature]="resultSelected$.value.data"
             (htmlDisplayEvent)="setHtmlDisplay($event)"
-          >
-          </igo-feature-details>
+          />
         }
         @if (!resultSelected$.value) {
           <igo-search-results
@@ -306,8 +301,7 @@
             (resultUnfocus)="unfocusResult($event, true)"
             (resultSelect)="selectResult($event)"
             [tabsMode]="tabsMode"
-          >
-          </igo-search-results>
+          />
         }
       </div>
     </igo-panel>

@@ -11,8 +11,7 @@
       [ngClass]="{ toolActivated: toolbox.activeTool$ | async }"
     >
       @if (toolbox.activeTool$ | async) {
-        <igo-home-button (unselectButton)="onUnselectButtonClick()">
-        </igo-home-button>
+        <igo-home-button (unselectButton)="onUnselectButtonClick()" />
       }
 
       <igo-panel [title]="title$ | async | translate">
@@ -34,8 +33,7 @@
           color="primary"
           [animate]="true"
           [toolbox]="toolbox"
-        >
-        </igo-toolbox>
+        />
       </igo-panel>
     </div>
   </div>
@@ -44,5 +42,5 @@
     min="360"
     max="800"
     (change)="handleChange($event)"
-  ></igo-resizable-bar>
+  />
 </mat-sidenav>
