@@ -66,7 +66,7 @@
       "sourceOptions": {
         "queryable": true,
         "queryTitle": "identificationDesTravaux",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=chantiers_mtmdet&outputFormat=geojson",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=WFS&request=GetFeature&version=1.1.0&typename=repere_km&outputFormat=geojson",
         "type": "cluster",
         "distance": 50
       }
