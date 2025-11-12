@@ -1563,7 +1563,9 @@ export class PortalComponent implements OnInit, OnDestroy {
         const relationWorkspace = this.workspaceStore
           .all()
           .find((workspace) =>
-            layer.options.workspace.workspaceId.includes(workspace.id)
+            layer.options.workspace?.workspaceId
+              ?.toString()
+              .includes(workspace.id.toString())
           );
         relationWorkspace?.meta.tableTemplate.columns.forEach((col) => {
           // Update domain list
