@@ -71,7 +71,7 @@
     "@stylistic/eslint-plugin": "^5.0.0",
     "@trivago/prettier-plugin-sort-imports": "^5.2.0",
     "@types/geojson": "^7946.0.16",
-    "@types/jasmine": "^4.3.5",
+    "@types/jasmine": "^5.1.12",
     "@types/jasminewd2": "~2.0.10",
     "@types/node": "^24.7.0",
     "angular-eslint": "^20.3.0",
