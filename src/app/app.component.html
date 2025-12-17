@@ -4,22 +4,11 @@
   <igo-auth-form />
 }
 
-@if (hasHeader) {
-  <app-header #header />
+@if (header) {
+  <app-header [config]="header" [lang]="lang()" />
 }
 
-<app-portal
-  [ngClass]="
-    hasHeader
-      ? hasFooter
-        ? 'portal-with-header-footer'
-        : 'portal-with-header'
-      : hasFooter
-        ? 'portal-with-footer'
-        : 'portal'
-  "
-  igoStopDropPropagation
-/>
+<app-portal igoStopDropPropagation />
 
 @if (hasFooter) {
   <app-footer />

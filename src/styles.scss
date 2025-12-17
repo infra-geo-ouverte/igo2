@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 @use '@igo2/core/all-style';
 @use '@igo2/core/layout';
+@use '@igo2/sdg-core' as sdg;
 
 @use 'style/reset.scss';
 @use 'style/theme.scss';
@@ -78,5 +79,19 @@ igo-context-item {
 h1 {
   &:after {
     content: none !important;
+  }
+}
+
+@include sdg.media(mobile) {
+  .mat-toolbar {
+    &,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0 !important;
+    }
   }
 }

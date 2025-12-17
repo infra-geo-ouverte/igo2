@@ -1,6 +1,6 @@
 import { Platform } from '@angular/cdk/platform';
-import { NgClass } from '@angular/common';
 import { Component, DOCUMENT, OnInit, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -11,14 +11,15 @@ import {
   SpinnerComponent
 } from '@igo2/common/spinner';
 import { ConfigService } from '@igo2/core/config';
-import { LanguageService } from '@igo2/core/language';
+import { IgoLanguageModule, LanguageService } from '@igo2/core/language';
 import { AppOptions } from '@igo2/integration';
+import { IHeaderConfig } from '@igo2/sdg-common';
 import { DomUtils } from '@igo2/utils';
 
 import { delay, first } from 'rxjs';
 
-import { FooterComponent } from './pages/footer/footer.component';
-import { HeaderComponent } from './pages/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 import { PortalComponent } from './pages/portal/portal.component';
 import { PwaService } from './services/pwa.service';
 
@@ -29,36 +30,37 @@ import { PwaService } from './services/pwa.service';
   imports: [
     SpinnerComponent,
     SpinnerActivityDirective,
-    HeaderComponent,
     FooterComponent,
     AuthFormComponent,
     PortalComponent,
-    NgClass
+    HeaderComponent,
+    IgoLanguageModule
   ]
 })
 export class AppComponent implements OnInit {
   private document = inject<Document>(DOCUMENT);
   private platform = inject(Platform);
-  protected languageService = inject(LanguageService);
+  private languageService = inject(LanguageService);
   private configService = inject(ConfigService);
   private titleService = inject(Title);
   private metaService = inject(Meta);
   private pwaService = inject(PwaService);
   private router = inject(Router);
 
-  public authConfig: AuthOptions;
-  public hasHeader: boolean;
-  public hasFooter: boolean;
+  readonly lang = toSignal<string>(this.languageService.language$);
+
+  authConfig: AuthOptions;
+  header: IHeaderConfig;
+  hasFooter: boolean;
   private promptEvent: any;
 
   constructor() {
     this.authConfig = this.configService.getConfig('auth', {});
+    this.header = this.configService.getConfig('header');
+    this.hasFooter = this.configService.getConfig('hasFooter', false);
 
     this.readTitleConfig();
     this.readDescriptionConfig();
-
-    this.hasHeader = this.configService.getConfig('header.hasHeader', false);
-    this.hasFooter = this.configService.getConfig('hasFooter', false);
 
     this.setManifest();
     this.installPrompt();

@@ -319,6 +319,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public homeExtent: MapExtent;
   public homeCenter: [number, number];
   public homeZoom: number;
+
   isTouchScreen: boolean;
   sidenavWidth: number;
 
