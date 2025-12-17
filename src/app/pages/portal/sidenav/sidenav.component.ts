@@ -19,6 +19,7 @@ import { PanelComponent } from '@igo2/common/panel';
 import { ResizableBarComponent } from '@igo2/common/resizable-bar';
 import { Tool, Toolbox, ToolboxComponent } from '@igo2/common/tool';
 import { ConfigService } from '@igo2/core/config';
+import { LanguageOptions, LanguageService } from '@igo2/core/language';
 import { IgoMap, isLayerItem } from '@igo2/geo';
 import { CatalogState, ToolState } from '@igo2/integration';
 
@@ -50,6 +51,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   private toolState = inject(ToolState);
   private configService = inject(ConfigService);
   private catalogState = inject(CatalogState);
+  private languageService = inject(LanguageService);
 
   title$: BehaviorSubject<string> = new BehaviorSubject<string>(undefined);
 
@@ -61,6 +63,8 @@ export class SidenavComponent implements OnInit, OnDestroy {
   readonly openedChange = output<boolean>();
   readonly toolChange = output<Tool>();
   readonly widthChange = output<number>();
+
+  langBtnEnabled!: boolean;
 
   get toolbox(): Toolbox {
     return this.toolState.toolbox;
@@ -101,6 +105,24 @@ export class SidenavComponent implements OnInit, OnDestroy {
       }
       this.toolChange.emit(tool);
     });
+    this.loadLanguageSwitcherConfig();
+  }
+
+  private loadLanguageSwitcherConfig() {
+    this.langBtnEnabled = !!this.configService.getConfig<LanguageOptions>(
+      'sidenav.languageToggleButton'
+    );
+  }
+
+  toggleLanguage(): void {
+    const newLang = this.languageService.getLanguage() === 'en' ? 'fr' : 'en';
+    this.languageService.setLanguage(newLang);
+  }
+
+  getSwitchLabel(): string {
+    return this.languageService.getLanguage() === 'en'
+      ? 'language.french'
+      : 'language.english';
   }
 
   ngOnDestroy() {

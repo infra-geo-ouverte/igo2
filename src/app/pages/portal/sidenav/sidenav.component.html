@@ -27,13 +27,21 @@
             <mat-icon>arrow_back</mat-icon>
           </button>
         }
-
-        <igo-toolbox
-          class="igo-toolbox"
-          color="primary"
-          [animate]="true"
-          [toolbox]="toolbox"
-        />
+        <div class="toolbox-container">
+          <igo-toolbox
+            class="igo-toolbox"
+            color="primary"
+            [animate]="true"
+            [toolbox]="toolbox"
+          />
+          @if (langBtnEnabled && (toolbox.activeTool$ | async) === undefined) {
+            <div class="lang-btn">
+              <button matButton class="btn-link" (click)="toggleLanguage()">
+                {{ getSwitchLabel() | translate }}
+              </button>
+            </div>
+          }
+        </div>
       </igo-panel>
     </div>
   </div>

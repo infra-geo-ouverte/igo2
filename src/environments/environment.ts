@@ -245,6 +245,27 @@ export const environment: AppEnvironmentOptions = {
         url: 'https://ws.mapserver.transports.gouv.qc.ca/applicatif?service=WFS&request=GetFeature&version=2.0.0&outputformat=dom&typenames=dom&dom=dom_test'
       }
     ],
+    /** Example of header config, uncomment to see the header */
+    // header: {
+    //   languages: {
+    //     default: 'fr',
+    //     choices: [
+    //       {
+    //         key: 'fr',
+    //         label: 'Français'
+    //       },
+    //       {
+    //         key: 'en',
+    //         label: 'English'
+    //       }
+    //     ]
+    //   },
+    //   contactUsRoute: 'https://www.igouverte.org/#footer'
+    // },
+    /** Example of sidenav config, uncomment to see the effect */
+    // sidenav: {
+    //   languageToggleButton: true
+    // },
     language: {
       prefix: './locale/'
     },

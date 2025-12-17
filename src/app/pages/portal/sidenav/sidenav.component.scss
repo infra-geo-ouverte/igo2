@@ -48,7 +48,11 @@
   }
 
   igo-panel ::ng-deep .igo-panel-content {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+    overflow: auto;
   }
 
   div.toolActivated > igo-panel ::ng-deep > div.igo-panel-header {
@@ -60,5 +64,25 @@
     @include media.mobile {
       overflow: auto;
     }
+  }
+
+  .toolbox-container {
+    height: auto;
+  }
+
+  .app-content.toolActivated .toolbox-container {
+    flex: 1;
+    overflow: auto;
+  }
+
+  .app-content.toolActivated igo-toolbox {
+    height: 100% !important;
+  }
+
+  .lang-btn {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+    margin-top: auto;
   }
 }

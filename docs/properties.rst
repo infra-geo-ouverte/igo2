@@ -14,12 +14,25 @@ Entête (header)
 *****************************
     .. line-block::
 
-        Entête comprenant un logo, un titre et un petit menu pour changer la langue et afficher le lien Nous joindre.
-        L'entête est optionnelle.
+        Entête comprenant un logo, un titre, un bouton pour changer la langue et un bouton pour afficher le lien "Nous joindre".
+        L'entête est optionnelle, elle s'affiche si la section "header" est définie dans la configuration. Si "header" est un objet vide, l'entête s'affichera avec les valeurs par défaut (Logo du gouvernement du Québec, titre IGO2 par défaut). 
         Les options de configuration sont dans src/config.json sous "header" :
-            "hasHeader": boolean (activer ou désactiver l'entête)
-            "logo": string (lien vers l'image du logo)
-            "logoPrint": string (lien vers l'image du logo pour impression, si nécessaire)
+            "logo": objet (propriétés optionnelles "src" pour le lien vers l'image, "href" pour le lien au clic, "alt" pour le texte alternatif. Le défaut est le logo du gouvernement du Québec)
+            "contactUsRoute": string (Définit un lien externe ou un chemin interne pour le bouton "Nous joindre" et l'affichera)
+            "languages": objet (langues disponibles, incluant un tableau "choices" avec "label" et "key", et une valeur "default", et l'affichera)
+            
+        Les libellés sont définis dans les fichiers de traduction fr.json et en.json sous la propriété "header".
+
+Exemples
+
+        .. code:: json
+
+            {
+                "header": {
+                    "title": "IGO",
+                    "contactUs": "Nous joindre"
+                }
+            }
 
 *****************************
 Carte (map)
