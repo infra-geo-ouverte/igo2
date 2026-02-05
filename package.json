@@ -67,7 +67,7 @@
     "@cypress/schematic": "^4.0.0",
     "@semantic-release/exec": "^7.0.0",
     "@semantic-release/git": "^10.0.0",
-    "@semantic-release/github": "^11.0.0",
+    "@semantic-release/github": "^12.0.0",
     "@stylistic/eslint-plugin": "^5.0.0",
     "@trivago/prettier-plugin-sort-imports": "^5.2.0",
     "@types/geojson": "^7946.0.16",
@@ -87,7 +87,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.6.0",
-    "semantic-release": "^24.2.0",
+    "semantic-release": "^25.0.0",
     "tsx": "^4.20.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.0"
