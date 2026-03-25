@@ -18,7 +18,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { provideAuthentification } from '@igo2/auth';
+import { provideAuthentification, withUserIgo } from '@igo2/auth';
 import { withMicrosoftSupport } from '@igo2/auth/microsoft';
 import { provideIcon } from '@igo2/common/icon';
 import { IgoCoreModule } from '@igo2/core';
@@ -66,7 +66,8 @@ export const appConfig: ApplicationConfig = {
     provideTranslation(withAsyncConfig()),
     provideAuthentification(
       withMicrosoftSupport('add'),
-      withMicrosoftSupport('b2c')
+      withMicrosoftSupport('b2c'),
+      withUserIgo()
     ),
     provideOffline(environment.igo.app.offline),
     provideIcon(),
