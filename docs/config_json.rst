@@ -77,10 +77,10 @@ Propriétés
         install.enabled: true/false = Application installable ou non.
         install.manifestPath: Identifie un chemin d'accès pour le manifest (info sur l'app).
                               Par défaut: 'manifest.webmanifest'
-        install.promote: true/false = Permet (Windows/Android) de faire afficher un message 
+        install.promote: true/false = Permet (Windows/Android) de faire afficher un message
                                       incitant les utilisateurs a installer l'application
         pwa: Object permettant de dire comment l'application sera mis en mémoire cache.
-        pwa.enabled: true/false = Identifie si l'application sera mis en mémoire cache. 
+        pwa.enabled: true/false = Identifie si l'application sera mis en mémoire cache.
 
 
 ***************
@@ -842,7 +842,7 @@ DirectionsSources
     .. line-block::
 
         Permet de définir une ou plusieurs profils utilisés pour la création d'itinéraires. Le service utilisé par IGO2 est OSRM.
-        
+
         La configuration peut contenir, pour le moment, jusqu'à deux profils.
 
 Exemples
@@ -875,7 +875,7 @@ Propriétés
        :file: _tables/fr/config/directions.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
-       
+
     **BaseDirectionsSourceOptionsProfile**
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
@@ -886,14 +886,14 @@ Propriétés
        :widths: 10 10 30 15 10
 
     **BaseDirectionsSourceOptionsProfileAuthorization**
-    
+
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
     .. csv-table::
        :file: _tables/fr/config/directions-profile-auth.csv
        :header-rows: 1
        :widths: 10 10 30 15 10
-    
+
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
 Liens
@@ -1043,10 +1043,10 @@ storageOptions
     Permet de modifier la sauvegarde de préférence dans le storage (LocalStorage).
     Deux (2) propriétés sont permises, key et url.
 
-    key = prefixe de la clé enregistrée dans le storage. Par dégaut, 'igo'. 
+    key = prefixe de la clé enregistrée dans le storage. Par dégaut, 'igo'.
     Utile pour différencier des préférence sur un serveur hébergeant plusieurs applications.
     url = Si une api de contexte est disponible, l'url de sauvegarde des préférence utilisateur.
-    La propriété url provient de l'interface 'AuthStorageOptions'. Particulièrement utile 
+    La propriété url provient de l'interface 'AuthStorageOptions'. Particulièrement utile
     pour obtenir les propriétés de partage de contextes en provenance de l'api de contexte.
 
 
@@ -1543,7 +1543,7 @@ Exemples
                         "visible": false,
                         "sourceOptions": {
                         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                        "attributions": "© <a href='https://www.quebec.ca/droit-auteur' target='_blank'><img src='./assets/images/quebecPrint.gif' width='64' height='19'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "© <a href='https://www.quebec.ca/droit-auteur' target='_blank'><img src='images/quebecPrint.gif' width='64' height='19'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "type": "xyz",
                         "crossOrigin": "anonymous"
                         }
