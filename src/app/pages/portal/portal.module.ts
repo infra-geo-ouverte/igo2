@@ -23,7 +23,7 @@ import { PortalComponent } from './portal.component';
     AnalyticsListenerService,
     provideOptionsApi(),
     provideStyleListOptions({
-      path: './assets/list-style.json'
+      path: 'list-style.json'
     })
   ]
 })

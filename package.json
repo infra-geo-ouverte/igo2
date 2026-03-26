@@ -19,7 +19,6 @@
     "serve.doc": "compodoc -s --port 4220",
     "serve.coverage": "http-server ./coverage/ --port=4210 --no-browser",
     "link.start": "ng serve --configuration developpement-link",
-    "link.build": "ng build --configuration production-link",
     "build": "ng build",
     "build.prod": "ng build --configuration production",
     "build.github": "ng build --configuration=github --output-path ./dist/ghpages",

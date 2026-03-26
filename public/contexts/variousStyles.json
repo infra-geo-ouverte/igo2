@@ -12,7 +12,7 @@
         "url": "https://ahocevar.com/geoserver/gwc/service/tms/1.0.0/ne:ne_10m_admin_0_countries@EPSG:900913@pbf/{z}/{x}/{-y}.pbf"
       },
       "mapboxStyle": {
-        "url": "assets/mapboxStyleExample-vectortile.json",
+        "url": "mapboxStyleExample-vectortile.json",
         "source": "ahocevar"
       }
     },
@@ -142,9 +142,9 @@
         "data": ["^90 porte 4\"$", "^100$", "^400$"],
         "fill": ["orange", "red", "green"],
         "icon": [
-          "./assets/images/styles/fire-hydrant.svg",
-          "./assets/images/styles/fire-hydrant.svg",
-          "./assets/images/styles/fire-hydrant.svg"
+          "images/styles/fire-hydrant.svg",
+          "images/styles/fire-hydrant.svg",
+          "images/styles/fire-hydrant.svg"
         ],
         "anchor": [
           [0.5, 1],
@@ -153,7 +153,7 @@
         ],
         "baseStyle": {
           "icon": {
-            "src": "./assets/images/styles/fire-hydrant.svg",
+            "src": "images/styles/fire-hydrant.svg",
             "color": "purple",
             "anchor": [0.5, 1]
           }

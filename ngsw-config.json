@@ -11,9 +11,7 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "resources": {
-        "files": [
-          "/data/**"
-        ]
+        "files": ["/data/**"]
       }
     },
     {
@@ -21,9 +19,7 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "resources": {
-        "files": [
-          "/contexts/**"
-        ]
+        "files": ["/contexts/**"]
       }
     },
     {
@@ -41,13 +37,14 @@
           "/config/**"
         ]
       }
-    }, {
+    },
+    {
       "name": "assets",
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**",
+          "/**",
           "/*.(pdf|eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
