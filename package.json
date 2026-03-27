@@ -1,6 +1,6 @@
 {
   "name": "igo",
-  "version": "20.1.0-next.3",
+  "version": "20.1.0-next.4",
   "description": "Infrastructure géomatique ouverte",
   "author": "Communauté IGO",
   "repository": {
@@ -54,8 +54,8 @@
     "@igo2/core": "^20.1.0-next.1",
     "@igo2/geo": "^20.1.0-next.1",
     "@igo2/integration": "^20.1.0-next.1",
-    "@igo2/sdg-core": "^1.1.0-next.16",
     "@igo2/sdg-common": "^1.1.0-next.16",
+    "@igo2/sdg-core": "^1.1.0-next.16",
     "@igo2/utils": "^20.1.0-next.1",
     "ol": "^10.6.0",
     "rxjs": "^7.8.0",
