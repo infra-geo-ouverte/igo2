@@ -351,15 +351,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.queryResultsOverlayFocused = new Overlay(this.map());
     this.queryResultsOverlaySelected = new Overlay(this.map());
     this.queryResultsOverlayFocused.setLayerOlStyle(
-      LayerQueryResultsOlStyleFunction(this.map(), 'focus')
+      LayerQueryResultsOlStyleFunction(this.map().viewController, 'focus')
     );
 
     this.queryResultsOverlaySelected.setLayerOlStyle(
-      LayerQueryResultsOlStyleFunction(this.map(), 'selection')
+      LayerQueryResultsOlStyleFunction(this.map().viewController, 'selection')
     );
 
     this.queryResultsOverlayAll.setLayerOlStyle(
-      LayerQueryResultsOlStyleFunction(this.map())
+      LayerQueryResultsOlStyleFunction(this.map().viewController)
     );
 
     this.store.entities$.subscribe((entities) => {
