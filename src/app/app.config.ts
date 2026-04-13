@@ -30,8 +30,8 @@ import { provideOffline } from '@igo2/geo';
 import { loadTheme } from '@igo2/utils';
 
 import { first } from 'rxjs';
-import { environment } from 'src/environments';
 
+import { environment } from '../environments';
 import { PortalModule } from './pages';
 
 const DEFAULT_THEME = 'blue-theme';

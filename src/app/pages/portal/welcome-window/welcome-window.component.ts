@@ -17,8 +17,8 @@ import { LanguageService } from '@igo2/core/language';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subscription, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { getAppVersion } from 'src/app/app.utils';
 
+import { getAppVersion } from '../../../app.utils';
 import { WelcomeWindowService } from './welcome-window.service';
 
 @Component({

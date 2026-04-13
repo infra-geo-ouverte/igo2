@@ -151,9 +151,9 @@ import {
   switchMap,
   take
 } from 'rxjs/operators';
-import { getAppVersion } from 'src/app/app.utils';
-import { EnvironmentOptions } from 'src/environments/environnement.interface';
 
+import { EnvironmentOptions } from '../../../environments/environnement.interface';
+import { getAppVersion } from '../../app.utils';
 import { ExpansionPanelButtonComponent } from './expansion-panel/expansion-panel-button/expansion-panel-button.component';
 import { ExpansionPanelComponent } from './expansion-panel/expansion-panel.component';
 import { MapOverlayComponent } from './map-overlay/map-overlay.component';

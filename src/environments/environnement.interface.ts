@@ -2,7 +2,7 @@ import { AllEnvironmentOptions } from '@igo2/integration';
 import { EnvironmentOptions as IntegrationEnvironmentOptions } from '@igo2/integration';
 import { IHeaderConfig } from '@igo2/sdg-common';
 
-import { MapOverlay } from 'src/app/pages/portal/map-overlay/map-overlay.interface';
+import { MapOverlay } from '../app/pages/portal/map-overlay';
 
 export interface AppEnvironmentOptions extends IntegrationEnvironmentOptions {
   igo: EnvironmentOptions;
