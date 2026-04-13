@@ -120,6 +120,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
+              "tsConfig": "./tsconfig.link.json",
               "assets": [
                 {
                   "glob": "**/*",
