@@ -14,6 +14,24 @@ export const environment: AppEnvironmentOptions = {
         enabled: false
       }
     },
+    directionsSources: {
+      osrm: {
+        name: 'OSRM Québec',
+        baseUrl: 'https://geoegl.msp.gouv.qc.ca/apis/itineraire/route/v1/',
+        profiles: [
+          {
+            name: 'driving'
+          },
+          {
+            name: 'forestier',
+            authorization: {
+              url: 'https://geoegl.msp.gouv.qc.ca/apis/igo2/user/igo',
+              property: 'hasOsrmPrivateAccess'
+            }
+          }
+        ]
+      }
+    },
     catalog: {
       sources: [
         {

@@ -392,6 +392,24 @@ export const environment: AppEnvironmentOptions = {
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
       }
+    },
+    directionsSources: {
+      osrm: {
+        name: 'OSRM Québec',
+        baseUrl: '/apis/itineraire/route/v1/',
+        profiles: [
+          {
+            name: 'driving'
+          },
+          {
+            name: 'forestier',
+            authorization: {
+              url: '/apis/igo2/user/igo',
+              property: 'hasOsrmPrivateAccess'
+            }
+          }
+        ]
+      }
     }
   }
 };
