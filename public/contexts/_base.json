@@ -225,6 +225,7 @@
         "predefinedCatalogs": [
           {
             "externalProvider": false,
+            "type": "wms",
             "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq"
           }
         ]
