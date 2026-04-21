@@ -16,8 +16,6 @@ sphinx:
 formats:
   - pdf
 
-python:
-   version: 3.7
 
 # python:
 #   install:
