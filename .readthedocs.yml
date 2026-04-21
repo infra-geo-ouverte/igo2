@@ -18,11 +18,7 @@ formats:
 
 python:
   install:
-    - method: pip
-      packages:
-        - sphinx
-        - sphinx-rtd-theme
-        
+    - requirements: docs/requirements.txt
 
 # python:
 #   install:
