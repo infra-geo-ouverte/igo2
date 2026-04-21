@@ -17,8 +17,8 @@ formats:
   - pdf
 
 python:
-   version: 3.10
-   
+   version: 3.7
+
 # python:
 #   install:
    #  - requirements: docs/requirements.txt
