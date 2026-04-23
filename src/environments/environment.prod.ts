@@ -1,8 +1,10 @@
 import { AppEnvironmentOptions } from './environnement.interface';
+import { version } from './version';
 
 export const environment: AppEnvironmentOptions = {
   production: true,
   igo: {
+    version,
     app: {
       forceCoordsNA: true,
       install: {
