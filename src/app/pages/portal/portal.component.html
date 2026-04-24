@@ -79,9 +79,7 @@
       [map]="map"
       [igoContextMenu]="contextMenu"
       (menuPosition)="onContextMenuOpen($event)"
-      [ngClass]="{
-        'igo-attribution-offset': map.layerController.baseLayers.length > 1
-      }"
+      [class.igo-attribution-offset]="map.layerController.baseLayers.length > 1"
       [@mapStateX]="sidenavOpened ? 'right' : 'left'"
       (@mapStateX.start)="updateMapBrowserClass()"
       [@mapStateY]="getControlsOffsetY()"
@@ -236,9 +234,9 @@
               (click)="onWorkspaceLayerToggle(workspace.layer.id)"
             >
               <mat-icon
-                [ngClass]="{
-                  disabled: (workspace.inResolutionRange$ | async) !== true
-                }"
+                [class.disabled]="
+                  (workspace.inResolutionRange$ | async) !== true
+                "
               >
                 {{ workspace.layer.visible ? 'visibility' : 'visibility_off' }}
               </mat-icon>
