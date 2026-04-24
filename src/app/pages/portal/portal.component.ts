@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
@@ -207,7 +207,6 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     MatIconModule,
     MatSidenavModule,
     MatTooltipModule,
-    NgClass,
     QueryDirective,
     SearchBarComponent,
     SearchPointerSummaryDirective,
