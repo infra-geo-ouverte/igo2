@@ -227,7 +227,6 @@ https://github.com/infra-geo-ouverte/igo2-lib#for-developers
 ```bash
 $ npm test
 
-# Check by karma
 # Tests after each change
 $ npm run test.watch
 
