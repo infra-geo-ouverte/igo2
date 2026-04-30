@@ -109,13 +109,13 @@
               "extractLicenses": true,
               "serviceWorker": false
             },
-            "developpement": {
+            "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
             },
-            "developpement-link": {
+            "development-link": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
@@ -195,7 +195,7 @@
           }
         },
         "serve": {
-          "defaultConfiguration": "developpement",
+          "defaultConfiguration": "development",
           "builder": "@angular/build:dev-server",
           "options": {
             "host": "0.0.0.0",
@@ -205,11 +205,11 @@
             "buildTarget": "igo2:build"
           },
           "configurations": {
-            "developpement": {
-              "buildTarget": "igo2:build:developpement"
+            "development": {
+              "buildTarget": "igo2:build:development"
             },
-            "developpement-link": {
-              "buildTarget": "igo2:build:developpement-link"
+            "development-link": {
+              "buildTarget": "igo2:build:development-link"
             },
             "production": {
               "buildTarget": "igo2:build:production"
@@ -220,27 +220,10 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "src/test.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": ["src/styles.scss"],
-            "scripts": [],
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public",
-                "output": ""
-              }
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/style/partial",
-                "src/app/pages/portal",
-                "node_modules"
-              ]
-            }
+            "coverage": true,
+            "tsConfig": "./src/tsconfig.spec.json"
           }
         },
         "lint": {

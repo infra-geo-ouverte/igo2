@@ -13,7 +13,7 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "types": ["node", "jasmine"],
+    "types": ["node", "vitest/globals"],
     "paths": {
       "@igo2/*": ["./node_modules/@igo2/*", "../../packages/*/src/public_api"]
     }
