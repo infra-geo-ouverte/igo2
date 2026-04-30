@@ -40,7 +40,7 @@ jobs:
         run: npm run lint.check & npm run format.check
 
       - name: Test
-        run: npm run e2e
+        run: npm run e2e && npm run test
 
       - name: Release
         env:
