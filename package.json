@@ -25,7 +25,7 @@
     "build.pwa": "ng build --configuration pwa --output-path ./dist/pwa/browser",
     "build.doc": "compodoc -p src/tsconfig.app.json",
     "build.coverage": "ng test --code-coverage --watch=false",
-    "lint.check": "ng lint",
+    "lint.check": "ng lint --quiet",
     "lint": "ng lint --fix",
     "format.check": "prettier src scripts e2e --check --config .prettierrc",
     "format": "prettier --write e2e scripts \"./src/**/*.{ts,js,html,scss,css,json}\"",
