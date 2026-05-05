@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": "./src",
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": false,
     "moduleResolution": "bundler",
