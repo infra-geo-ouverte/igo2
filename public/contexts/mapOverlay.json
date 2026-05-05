@@ -4,7 +4,7 @@
   "mapOverlay": [
     {
       "cssClass": "bottom-left",
-      "imgSrc": "./assets/images/igo-loading.gif",
+      "imgSrc": "images/igo-loading.gif",
       "imgSize": "50px",
       "text": "bottom-left fixed",
       "link": "https://www.google.com",
@@ -21,7 +21,7 @@
     },
     {
       "cssClass": "top-left",
-      "imgSrc": "./assets/images/igo-loading.gif",
+      "imgSrc": "images/igo-loading.gif",
       "imgSize": "70px",
       "link": "https://www.google.ca/search?q=top-left",
       "alt": "Loading",
@@ -29,7 +29,7 @@
     },
     {
       "cssClass": "top-right",
-      "imgSrc": "./assets/images/igo-loading.gif",
+      "imgSrc": "images/igo-loading.gif",
       "imgSize": "70px",
       "text": "top-right",
       "alt": "Loading"
@@ -37,7 +37,7 @@
     {
       "media": ["mobile", "tablet", "desktop"],
       "cssClass": "top-center",
-      "imgSrc": "./assets/images/igo-loading.gif",
+      "imgSrc": "images/igo-loading.gif",
       "imgSize": "20px",
       "text": "top-center everyone",
       "alt": "Loading",
@@ -51,21 +51,21 @@
     },
     {
       "cssClass": "bottom-center",
-      "imgSrc": "./assets/images/igo-loading.gif",
+      "imgSrc": "images/igo-loading.gif",
       "imgSize": "70px",
       "text": "bottom-center",
       "alt": "Loading"
     },
     {
       "cssClass": "center-right",
-      "imgSrc": "./assets/images/igo-loading.gif",
+      "imgSrc": "images/igo-loading.gif",
       "imgSize": "10px",
       "text": "center-right",
       "alt": "Loading"
     },
     {
       "cssClass": "center-left",
-      "imgSrc": "./assets/images/igo-loading.gif",
+      "imgSrc": "images/igo-loading.gif",
       "imgSize": "70px",
       "text": "center-left",
       "alt": "Loading"
@@ -73,7 +73,7 @@
     {
       "media": ["mobile", "tablet"],
       "cssClass": "bottom-left",
-      "imgSrc": "./assets/images/igo-loading.gif",
+      "imgSrc": "images/igo-loading.gif",
       "imgSize": "20px",
       "text": "b-l mob/tab fixed",
       "link": "https://www.google.com",

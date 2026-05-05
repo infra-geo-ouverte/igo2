@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, model } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -17,11 +17,9 @@ import { IgoLanguageModule } from '@igo2/core/language';
   styleUrls: ['./expansion-panel-button.component.scss']
 })
 export class ExpansionPanelButtonComponent {
-  @Input() expanded: boolean;
-
-  @Output() expand = new EventEmitter<boolean>();
+  readonly expanded = model<boolean>(undefined);
 
   onToggleClick(): void {
-    this.expand.emit(!this.expanded);
+    this.expanded.update((expanded) => !expanded);
   }
 }

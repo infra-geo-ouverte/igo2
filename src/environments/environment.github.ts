@@ -1,8 +1,10 @@
 import { AppEnvironmentOptions } from './environnement.interface';
+import { version } from './version';
 
 export const environment: AppEnvironmentOptions = {
   production: true,
   igo: {
+    version,
     app: {
       forceCoordsNA: false,
       install: {
@@ -12,6 +14,24 @@ export const environment: AppEnvironmentOptions = {
       },
       pwa: {
         enabled: false
+      }
+    },
+    directionsSources: {
+      osrm: {
+        name: 'OSRM Québec',
+        baseUrl: 'https://geoegl.msp.gouv.qc.ca/apis/itineraire/route/v1/',
+        profiles: [
+          {
+            name: 'driving'
+          },
+          {
+            name: 'forestier',
+            authorization: {
+              url: 'https://geoegl.msp.gouv.qc.ca/apis/igo2/user/igo',
+              property: 'hasOsrmPrivateAccess'
+            }
+          }
+        ]
       }
     },
     catalog: {

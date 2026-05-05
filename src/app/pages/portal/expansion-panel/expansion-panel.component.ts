@@ -1,10 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   HostBinding,
-  Input,
-  Output
+  input,
+  model
 } from '@angular/core';
 
 import { BackdropComponent } from '@igo2/common/backdrop';
@@ -21,45 +20,22 @@ import { showContent } from './expansion-panel.animations';
   imports: [BackdropComponent, ExpansionPanelHeaderComponent]
 })
 export class ExpansionPanelComponent {
-  @Input()
-  get expanded(): boolean {
-    return this._expanded;
-  }
-  set expanded(value: boolean) {
-    if (value === this._expanded) {
-      return;
-    }
-
-    this._expanded = value;
-    this.expandedChange.emit(this._expanded);
-  }
-  private _expanded: boolean;
-
-  @Input() maximized = false;
-
-  @Input()
-  get backdropShown(): boolean {
-    return this._backdropShown;
-  }
-  set backdropShown(value: boolean) {
-    this._backdropShown = value;
-  }
-  private _backdropShown: boolean;
-
-  @Output() expandedChange = new EventEmitter<boolean>();
+  readonly expanded = model(false);
+  readonly maximized = input(false);
+  readonly backdropShown = model(false);
 
   @HostBinding('class.app-expansion-panel-expanded')
   get hasExpandedClass() {
-    return this.expanded;
+    return this.expanded();
   }
 
   @HostBinding('class.app-expansion-panel-expanded-maximized')
   get hasExpandedFullClass() {
-    return this.expanded && this.maximized;
+    return this.expanded() && this.maximized();
   }
 
   onBackdropClick() {
-    this.expanded = false;
-    this.backdropShown = false;
+    this.expanded.set(false);
+    this.backdropShown.set(false);
   }
 }

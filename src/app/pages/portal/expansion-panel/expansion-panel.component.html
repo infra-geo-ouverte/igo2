@@ -1,17 +1,16 @@
 <div>
   <div class="app-expansion-panel-container">
-    <igo-backdrop [shown]="backdropShown" (click)="onBackdropClick()">
-    </igo-backdrop>
+    <igo-backdrop [shown]="backdropShown()" (click)="onBackdropClick()" />
 
     <app-expansion-panel-header [(expanded)]="expanded">
-      <ng-content select="[expansionPanelHeader]"></ng-content>
+      <ng-content select="[expansionPanelHeader]" />
     </app-expansion-panel-header>
 
     <div
       class="app-expansion-panel-content mat-elevation-z4"
-      [@showContent]="expanded"
+      [@showContent]="expanded()"
     >
-      <ng-content></ng-content>
+      <ng-content />
     </div>
   </div>
 </div>

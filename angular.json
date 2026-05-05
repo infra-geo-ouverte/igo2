@@ -23,39 +23,37 @@
             "index": "src/index.html",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/config",
-              "src/contexts",
-              "src/data",
-              "src/locale",
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": ""
+              },
               {
                 "glob": "**/*",
                 "input": "node_modules/@igo2/common/assets/",
-                "output": "assets/igo2/common/"
+                "output": "igo2/common/"
               },
               {
                 "glob": "**/*",
                 "input": "node_modules/@igo2/core/assets/",
-                "output": "assets/igo2/core/"
+                "output": "igo2/core/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@igo2/core/theming/prebuilt-themes",
+                "output": "igo2/core/theming/prebuilt-themes"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@igo2/geo/assets/",
+                "output": "igo2/geo"
               },
               {
                 "glob": "**/*",
                 "input": "node_modules/@igo2/core/locale/",
                 "output": "locale/libs_locale",
                 "ignore": ["**/*.core.json"]
-              },
-              {
-                "glob": "**/*",
-                "input": "node_modules/@igo2/core/theming/prebuilt-themes",
-                "output": "./assets/igo2/core/theming/prebuilt-themes"
-              },
-              {
-                "glob": "**/*",
-                "input": "node_modules/@igo2/geo/assets/",
-                "output": "./assets/igo2/geo/"
-              },
-              "src/manifest.webmanifest"
+              }
             ],
             "styles": ["src/styles.scss"],
             "scripts": [],
@@ -111,62 +109,6 @@
               "extractLicenses": true,
               "serviceWorker": false
             },
-            "production-link": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "12kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "serviceWorker": false,
-              "assets": [
-                "src/favicon.ico",
-                "src/assets",
-                "src/config",
-                "src/contexts",
-                "src/data",
-                "src/locale",
-                "src/manifest.webmanifest",
-                {
-                  "glob": "**/*",
-                  "input": "../../dist/common/assets/",
-                  "output": "./assets/igo2/common/"
-                },
-                {
-                  "glob": "**/*",
-                  "input": "../../dist/core/assets/",
-                  "output": "./assets/igo2/core/"
-                },
-                {
-                  "glob": "**/*",
-                  "input": "../../dist/core/locale/",
-                  "output": "./locale/libs_locale",
-                  "ignore": ["**/*.core.json"]
-                },
-                {
-                  "glob": "**/*",
-                  "input": "../../dist/core/theming/prebuilt-themes",
-                  "output": "./assets/igo2/core/theming/prebuilt-themes"
-                },
-                {
-                  "glob": "**/*",
-                  "input": "../../dist/geo/assets/",
-                  "output": "./assets/igo2/geo/"
-                }
-              ]
-            },
             "developpement": {
               "optimization": false,
               "extractLicenses": false,
@@ -178,39 +120,33 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
+              "tsConfig": "./tsconfig.link.json",
               "assets": [
-                "src/favicon.ico",
-                "src/assets",
-                "src/config",
-                "src/contexts",
-                "src/data",
-                "src/locale",
-                "src/manifest.webmanifest",
+                {
+                  "glob": "**/*",
+                  "input": "public",
+                  "output": ""
+                },
                 {
                   "glob": "**/*",
                   "input": "../../packages/common/src/assets/",
-                  "output": "./assets/igo2/common/"
+                  "output": "igo2/common/"
                 },
                 {
                   "glob": "**/*",
                   "input": "../../dist/core/assets/",
-                  "output": "./assets/igo2/core/"
-                },
-                {
-                  "glob": "**/*",
-                  "input": "../../dist/core/locale/",
-                  "output": "./locale/libs_locale",
-                  "ignore": ["**/*.core.json"]
-                },
-                {
-                  "glob": "**/*",
-                  "input": "../../dist/core/theming/prebuilt-themes",
-                  "output": "./assets/igo2/core/theming/prebuilt-themes"
+                  "output": "igo2/core/"
                 },
                 {
                   "glob": "**/*",
                   "input": "../../packages/geo/src/assets/",
-                  "output": "./assets/igo2/geo/"
+                  "output": "igo2/geo/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../../dist/core/locale/",
+                  "output": "locale/libs_locale",
+                  "ignore": ["**/*.core.json"]
                 }
               ]
             },
@@ -292,9 +228,11 @@
             "styles": ["src/styles.scss"],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": ""
+              }
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

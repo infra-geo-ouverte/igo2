@@ -4,7 +4,7 @@ import { MatDialogConfig } from '@angular/material/dialog';
 import { ConfigService } from '@igo2/core/config';
 import { StorageService } from '@igo2/core/storage';
 
-import { getAppVersion } from 'src/app/app.utils';
+import { getAppVersion } from '../../../app.utils';
 
 @Injectable({
   providedIn: 'root'

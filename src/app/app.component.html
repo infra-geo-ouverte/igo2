@@ -1,26 +1,15 @@
-<igo-spinner igoSpinnerActivity></igo-spinner>
+<igo-spinner igoSpinnerActivity />
 
 @if (authConfig && authConfig.url) {
-  <igo-auth-form></igo-auth-form>
+  <igo-auth-form />
 }
 
-@if (hasHeader) {
-  <app-header #header></app-header>
+@if (header) {
+  <app-header [config]="header" [lang]="lang()" />
 }
 
-<app-portal
-  [ngClass]="
-    hasHeader
-      ? hasFooter
-        ? 'portal-with-header-footer'
-        : 'portal-with-header'
-      : hasFooter
-        ? 'portal-with-footer'
-        : 'portal'
-  "
-  igoStopDropPropagation
-></app-portal>
+<app-portal igoStopDropPropagation />
 
 @if (hasFooter) {
-  <app-footer></app-footer>
+  <app-footer />
 }

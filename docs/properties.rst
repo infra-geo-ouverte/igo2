@@ -14,12 +14,25 @@ Entête (header)
 *****************************
     .. line-block::
 
-        Entête comprenant un logo, un titre et un petit menu pour changer la langue et afficher le lien Nous joindre.
-        L'entête est optionnelle.
+        Entête comprenant un logo, un titre, un bouton pour changer la langue et un bouton pour afficher le lien "Nous joindre".
+        L'entête est optionnelle, elle s'affiche si la section "header" est définie dans la configuration. Si "header" est un objet vide, l'entête s'affichera avec les valeurs par défaut (Logo du gouvernement du Québec, titre IGO2 par défaut). 
         Les options de configuration sont dans src/config.json sous "header" :
-            "hasHeader": boolean (activer ou désactiver l'entête)
-            "logo": string (lien vers l'image du logo)
-            "logoPrint": string (lien vers l'image du logo pour impression, si nécessaire)
+            "logo": objet (propriétés optionnelles "src" pour le lien vers l'image, "href" pour le lien au clic, "alt" pour le texte alternatif. Le défaut est le logo du gouvernement du Québec)
+            "contactUsRoute": string (Définit un lien externe ou un chemin interne pour le bouton "Nous joindre" et l'affichera)
+            "languages": objet (langues disponibles, incluant un tableau "choices" avec "label" et "key", et une valeur "default", et l'affichera)
+            
+        Les libellés sont définis dans les fichiers de traduction fr.json et en.json sous la propriété "header".
+
+Exemples
+
+        .. code:: json
+
+            {
+                "header": {
+                    "title": "IGO",
+                    "contactUs": "Nous joindre"
+                }
+            }
 
 *****************************
 Carte (map)
@@ -51,7 +64,7 @@ Exemples
 Propriétés de l'objet "view" de map
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-    
+
     .. csv-table::
        :file: _tables/fr/properties/map-view.csv
        :header-rows: 1
@@ -137,7 +150,7 @@ Exemples
                 "visible": false,
                 "sourceOptions": {
                         "url": "https://geoegl.msp.gouv.qc.ca/apis/carto/tms/1.0.0/orthos@EPSG_3857/{z}/{x}/{-y}.jpeg",
-                        "attributions": "© <a href='https://www.quebec.ca/droit-auteur' target='_blank'><img src='./assets/images/quebecPrint.gif' width='64' height='19'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
+                        "attributions": "© <a href='https://www.quebec.ca/droit-auteur' target='_blank'><img src='images/quebecPrint.gif' width='64' height='19'>Gouvernement du Québec</a> / <a href='https://www.igouverte.org/' target='_blank'>IGO2</a>",
                         "type": "xyz",
                         "crossOrigin": "anonymous"
                 }
@@ -147,7 +160,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-        
+
     .. csv-table::
        :file: _tables/fr/properties/layer.csv
        :header-rows: 1
@@ -186,7 +199,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/legendOptions.csv
        :header-rows: 1
@@ -251,7 +264,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/workspaceOptions.csv
        :header-rows: 1
@@ -289,7 +302,7 @@ Exemples
 Propriétés de LinkedLayersOptions
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/linkedLayersOptions.csv
        :header-rows: 1
@@ -303,7 +316,7 @@ Propriétés de LinkedLayersOptions
 Propriétés de LayersLinkProperties
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/layersLinkProperties.csv
        :header-rows: 1
@@ -352,7 +365,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/sourceOptions-common.csv
        :header-rows: 1
@@ -501,7 +514,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/sources/osm.csv
        :header-rows: 1
@@ -536,7 +549,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/sources/cluster.csv
        :header-rows: 1
@@ -570,7 +583,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/sources/tms.csv
        :header-rows: 1
@@ -604,7 +617,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/sources/mvt.csv
        :header-rows: 1
@@ -687,7 +700,7 @@ Websocket
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/sources/websocket.csv
        :header-rows: 1
@@ -783,7 +796,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/sources/wms.csv
        :header-rows: 1
@@ -794,7 +807,7 @@ Propriétés
 Paramètre (params) WMS
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/sources/wms-params.csv
        :header-rows: 1
@@ -821,12 +834,12 @@ WMS avec WFS combinés
     .. note::
 
        Disponible actuellement mais la documentation est en cours de construction.
-    
+
     .. line-block::
 
         Il est possible de combiner un wms et à partir d'une certaine échelle d'apeller la couche en WFS si le service web offre les 2 options.
 
-        ** Attention le champ ID du service doit être bien définie car ce sera ce champ qui servira a reconnaitre chaque entitée WFS, par exemple dans 
+        ** Attention le champ ID du service doit être bien définie car ce sera ce champ qui servira a reconnaitre chaque entitée WFS, par exemple dans
         la table attributaire. Si le champ id n'est pas bien définie dans le service ou que vous configurez une sortie dans un type ou ID n'est
         pas présent au 1er niveau de l'objet dans le retour du service (geojson, GML, etc), vous pourez avoir des problèmes d'entitées qui sont dédoublées.
 
@@ -887,12 +900,12 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-                
+
     .. csv-table::
           :file: _tables/fr/properties/sources/wmts.csv
           :header-rows: 1
           :widths: 10 10 30 15 10
-        
+
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
@@ -933,7 +946,7 @@ Exemples
 Propriétés de l'objet timeFilter
 
      .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-                
+
     .. csv-table::
           :file: _tables/fr/properties/filter/timeFilter.csv
           :header-rows: 1
@@ -956,10 +969,10 @@ Configuration filtre attributaire OGC (ogcFilters)
     - Les outils ogcFilter et/ou activeOgcFilter doivent être activés dans les outils ('tools'). (Voir :ref:`igoactiveogcFilter` et :ref:`igoogcFilter` dans la section outil )
     - Pour activation des filtres avancés, ils est nécessaire de définir un objet sourceField pour les champs à filtrer. Référez-vous à: :ref:`igosourceFieldsObject`
     - Il est possible de définir plusieurs opérateurs sur un même filtre.
-    - les paramètres de sourceOptions maxDate et minDate sont comparés pour indiquer si le filtre temporel est actif (badge rouge dans les options de la couche). 
+    - les paramètres de sourceOptions maxDate et minDate sont comparés pour indiquer si le filtre temporel est actif (badge rouge dans les options de la couche).
     Si le param de sourceOptions optionsFromCapabilities est true les valeurs min et max peuvent provenir du service.
 
-    **NB**: Lorsqu'une couche a une échelle d'affichage définit dans le service, vous devez activer le paramètre dans sourceOptions -> optionsFromCapabilities:true. 
+    **NB**: Lorsqu'une couche a une échelle d'affichage définit dans le service, vous devez activer le paramètre dans sourceOptions -> optionsFromCapabilities:true.
     Dans le cas contraire, des apels contenant les filtres seront fait au service et ce, même à l'échelle ou la couche n'est pas affichée.
 
 Exemples
@@ -1217,7 +1230,7 @@ Exemple - filtre temporel en mode année
                         "end": "2020",
                         "restrictToStep": false,
                         "calendarModeYear": true
-                    } 
+                    }
                   "stepDate": "P1Y"
             }
 
@@ -1329,7 +1342,7 @@ Exemple - groupe de filtre avec autocomplétion et domaine de valeurs (dom)
 Propriétés de ogcFilters
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/filter/ogcFilters.csv
        :header-rows: 1
@@ -1348,7 +1361,7 @@ Liens
 Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.selectorType
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/filter/buttons-selectorType.csv
        :header-rows: 1
@@ -1359,7 +1372,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.selector
 Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.groups
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/filter/buttons-groups.csv
        :header-rows: 1
@@ -1372,7 +1385,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.groups
 Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/filter/buttons-groups.csv
        :header-rows: 1
@@ -1386,7 +1399,7 @@ Propriétés de l'objet ogcFilter.{pushButtons/checkboxes/radioButtons}.bundles
 Propriétés de l'objet ogcFilter.{selector}.bundles.selector
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/filter/buttons-bundles-selector.csv
        :header-rows: 1
@@ -1400,7 +1413,7 @@ Propriétés de l'objet ogcFilter.{selector}.bundles.selector
 Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/filter/igoOgcFilterFiltersObject.csv
        :header-rows: 1
@@ -1414,7 +1427,7 @@ Propriétés de l'objet filters (IgoLogicalArrayOptions|AnyBaseOgcFilterOptions)
 Propriétés de l'objet filter de type **During**
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/filter/igoogcfilterduringoptions.csv
        :header-rows: 1
@@ -1448,7 +1461,7 @@ Exemples
 Propriétés de l'objet sourceFields
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/sourceFields.csv
        :header-rows: 1
@@ -1484,7 +1497,7 @@ Exemples
 Propriétés de l'objet edition
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/edition.csv
        :header-rows: 1
@@ -1493,7 +1506,7 @@ Propriétés de l'objet edition
 Propriétés de l'objet relations
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/relations.csv
        :header-rows: 1
@@ -1525,7 +1538,7 @@ Source (base commune)
             - `StoredQueries`_ , WFS 2.0 (Québec)
             - `StoredQueries Reverse`_    , WFS 2.0  - par coordonnées (Québec)
 
-        Selon votre contexte, les sources de recherche ayant une limitation au Québec, peuvent être utilisées comme exemple afin d'adapter 
+        Selon votre contexte, les sources de recherche ayant une limitation au Québec, peuvent être utilisées comme exemple afin d'adapter
         votre propre service de recherche.
 
 
@@ -1538,7 +1551,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/search/common.csv
        :header-rows: 1
@@ -1573,7 +1586,7 @@ Propriétés
     Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/search/cadastre.csv
        :header-rows: 1
@@ -1623,7 +1636,7 @@ Propriétés
     Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. tabularcolumns:: |p{3cm}|p{12cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/search/coord.csv
        :header-rows: 1
@@ -1674,7 +1687,7 @@ Propriétés
     Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. tabularcolumns:: |p{3cm}|p{12cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/search/iCherche.csv
        :header-rows: 1
@@ -1723,7 +1736,7 @@ Propriétés
     Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. tabularcolumns:: |p{3cm}|p{12cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/search/iChercheReverse.csv
        :header-rows: 1
@@ -1775,7 +1788,7 @@ Propriétés
     Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. tabularcolumns:: |p{3cm}|p{12cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/search/iLayer.csv
        :header-rows: 1
@@ -1823,7 +1836,7 @@ Propriétés
     Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. tabularcolumns:: |p{3cm}|p{12cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/search/nominatim.csv
        :header-rows: 1
@@ -1848,7 +1861,7 @@ StoredQueries
     .. line-block::
 
         StoredQueries est un service de recherche par mots clefs exploitant les capacités WFS 2.0. disponibles sur serveurs cartographiques comme Mapserver ou Geoserver(`Geoserver StoredQuery <https://geoserver-pdf.readthedocs.io/en/latest/services/wfs/reference.html#createstoredquery>`__)
-        
+
 Exemple 1:
         RTSS: Cette storedQueries interroge un service WMS du `Ministère du Transport du Québec <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=1.1.0&request=GetCapabilities>`__ qui peut retourner:
             - Route                                    ex: 138
@@ -1884,8 +1897,8 @@ Exemple 1
 
 Exemple 2:
         Le Ministère des forêts de la faune et des parcs a développé une storedQueries qui retourne les feuillets SNRC au 250k et 20k.
-        Une fois que cette storedQueries est ajoutée a la configuration IGO, il suffit alors à l'utilisateur de saisir un feuillet ou 
-        un début de feuillet SNRC dans la barre de recherche IGO. (Ex: 31P08) et l'application retournera la/les géométries associées 
+        Une fois que cette storedQueries est ajoutée a la configuration IGO, il suffit alors à l'utilisateur de saisir un feuillet ou
+        un début de feuillet SNRC dans la barre de recherche IGO. (Ex: 31P08) et l'application retournera la/les géométries associées
         aux résultats trouvés par la recherche via la storedQueries.
 
         Cette StoredQueries nécessite l'envoie au serveur de l'attribut: no_feuillet qui sera définit dans la configuration.
@@ -1916,9 +1929,9 @@ Propriétés
 
 
 Seulement les propriétés spécifiques à ce service sont présentées.
-      
+
     .. tabularcolumns:: |p{1cm}|p{7cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/search/storedQueries.csv
        :header-rows: 1
@@ -1978,7 +1991,7 @@ Propriétés
     Seulement les propriétés spécifiques à ce service sont présentées.
 
     .. tabularcolumns:: |p{1cm}|p{7cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/search/storedQueriesReverse.csv
        :header-rows: 1
@@ -2060,7 +2073,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/about.csv
        :header-rows: 1
@@ -2071,7 +2084,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/aboutOptions.csv
        :header-rows: 1
@@ -2116,7 +2129,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/catalog.csv
        :header-rows: 1
@@ -2127,7 +2140,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/catalogOptions.csv
        :header-rows: 1
@@ -2165,7 +2178,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/catalogBrowser.csv
        :header-rows: 1
@@ -2176,7 +2189,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/catalogBrowserOptions.csv
        :header-rows: 1
@@ -2218,7 +2231,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/contextManager.csv
        :header-rows: 1
@@ -2229,7 +2242,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/contextManagerOptions.csv
        :header-rows: 1
@@ -2264,7 +2277,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/directions.csv
        :header-rows: 1
@@ -2296,7 +2309,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/draw.csv
        :header-rows: 1
@@ -2345,7 +2358,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/ogcFilter.csv
        :header-rows: 1
@@ -2417,7 +2430,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/timeFilter.csv
        :header-rows: 1
@@ -2516,7 +2529,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/importExport.csv
        :header-rows: 1
@@ -2527,7 +2540,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/importExportOptions.csv
        :header-rows: 1
@@ -2587,7 +2600,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/mapTool.csv
        :header-rows: 1
@@ -2599,7 +2612,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/mapToolOptions.csv
        :header-rows: 1
@@ -2645,7 +2658,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/mapLegend.csv
        :header-rows: 1
@@ -2656,7 +2669,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-                
+
     .. csv-table::
        :file: _tables/fr/properties/tools/mapLegendOptions.csv
        :header-rows: 1
@@ -2715,7 +2728,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/mapDetails.csv
        :header-rows: 1
@@ -2726,7 +2739,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/mapDetailsOptions.csv
        :header-rows: 1
@@ -2791,7 +2804,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/mapTools.csv
        :header-rows: 1
@@ -2802,7 +2815,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/mapToolsOptions.csv
        :header-rows: 1
@@ -2834,7 +2847,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/measurer.csv
        :header-rows: 1
@@ -2867,7 +2880,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/print.csv
        :header-rows: 1
@@ -2904,7 +2917,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/searchResults.csv
        :header-rows: 1
@@ -2915,7 +2928,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/searchResultsOptions.csv
        :header-rows: 1
@@ -2952,7 +2965,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/spatialFilter.csv
        :header-rows: 1
@@ -2963,7 +2976,7 @@ Propriétés
 Options
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/spatialFilterOptions.csv
        :header-rows: 1
@@ -2995,7 +3008,7 @@ Exemples
 Propriétés
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
-            
+
     .. csv-table::
        :file: _tables/fr/properties/tools/shareMap.csv
        :header-rows: 1

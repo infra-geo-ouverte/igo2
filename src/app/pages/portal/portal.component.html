@@ -1,9 +1,6 @@
 <mat-sidenav-container class="app-main-container">
   <mat-sidenav-content>
-    <igo-backdrop
-      [shown]="backdropShown"
-      (click)="onBackdropClick()"
-    ></igo-backdrop>
+    <igo-backdrop [shown]="backdropShown" (click)="onBackdropClick()" />
 
     <div
       class="navbar-container"
@@ -15,8 +12,7 @@
           [class.mat-elevation-z2]="!sidenavOpened"
           [sidenavOpened]="sidenavOpened"
           (openSidenav)="onToggleSidenavClick()"
-        >
-        </igo-menu-button>
+        />
       }
 
       @if (showSearchBar) {
@@ -48,8 +44,7 @@
           (search)="onSearch($event)"
           (clearFeature)="onClearSearch()"
           (searchSettingsChange)="onSearchSettingsChange()"
-        >
-        </igo-search-bar>
+        />
       }
     </div>
 
@@ -58,9 +53,7 @@
       [(opened)]="sidenavOpened"
       (toolChange)="toolChanged($event)"
       (widthChange)="handleWidth($event)"
-    >
-    </app-sidenav>
-
+    />
     <igo-map-browser
       igoMapOffline
       igoWorkspaceUpdator
@@ -101,7 +94,7 @@
           [showIfNoRotation]="appConfig.showRotationButtonIfNoRotation"
           [map]="map"
           color="primary"
-        ></igo-rotation-button>
+        />
       </div>
       <div
         class="map-actions --vertical --bottom --right"
@@ -115,8 +108,7 @@
             class="mat-elevation-z2"
             [@controlsOffsetY]="getControlsOffsetY()"
             [@mobileOffsetY]="getToastPanelStatus()"
-          >
-          </igo-offline-button>
+          />
         }
         @if (appConfig.homeExtentButton) {
           <igo-home-extent-button
@@ -126,11 +118,10 @@
             [centerOverride]="homeCenter"
             [zoomOverride]="homeZoom"
             color="primary"
-          >
-          </igo-home-extent-button>
+          />
         }
         @if (appConfig.wakeLockApiButton) {
-          <igo-wake-lock-button class="mat-elevation-z2"></igo-wake-lock-button>
+          <igo-wake-lock-button class="mat-elevation-z2" />
         }
         @if (hasGeolocateButton) {
           <igo-geolocate-button
@@ -139,16 +130,14 @@
             color="primary"
             [@controlsOffsetY]="getControlsOffsetY()"
             [@mobileOffsetY]="getToastPanelStatus()"
-          >
-          </igo-geolocate-button>
+          />
         }
         @if (!isTouchScreen) {
           <igo-zoom-button
             [map]="map"
             color="primary"
             [@controlsOffsetY]="getControlsOffsetY()"
-          >
-          </igo-zoom-button>
+          />
         }
       </div>
       <div
@@ -163,8 +152,7 @@
             color="primary"
             [@controlsOffsetY]="getControlsOffsetY()"
             [@mobileOffsetY]="getToastPanelStatus()"
-          >
-          </igo-user-button>
+          />
         }
       </div>
       <div
@@ -178,24 +166,17 @@
           [map]="map"
           [@controlsOffsetY]="getBaselayersSwitcherStatus()"
           [useStaticIcon]="true"
-        >
-        </igo-baselayers-switcher>
+        />
         @if (
           appConfig.hasExpansionPanel &&
           (workspaceState.workspaceEnabled$ | async) &&
-          !expansionPanelExpanded
+          !workspaceState.expanded()
         ) {
-          <app-expansion-panel-button
-            [expanded]="expansionPanelExpanded"
-            (expand)="handleToggleExpansionPanel($event)"
-          ></app-expansion-panel-button>
+          <app-expansion-panel-button [(expanded)]="workspaceState.expanded" />
         }
       </div>
-      <igo-swipe-control
-        class="mat-elevation-z2"
-        [map]="map"
-      ></igo-swipe-control>
-      <igo-map-center class="mat-elevation-z2" [map]="map"></igo-map-center>
+      <igo-swipe-control class="mat-elevation-z2" [map]="map" />
+      <igo-map-center class="mat-elevation-z2" [map]="map" />
     </igo-map-browser>
 
     <app-map-overlay
@@ -205,22 +186,21 @@
           ? 'right'
           : 'left'
       "
-    >
-    </app-map-overlay>
+    />
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-@if (expansionPanelExpanded) {
+@if (workspaceState.expanded()) {
   <app-expansion-panel
     [backdropShown]="expansionPanelBackdropShown"
-    [(expanded)]="expansionPanelExpanded"
+    [(expanded)]="workspaceState.expanded"
     [maximized]="workspaceState.workspaceMaximize$ | async"
     [@expansionPanelSize]="getExpansionPanelStatus()"
     [@toastOffsetY]="
       isMobile() &&
       !toastPanelOpened &&
       queryState.store.entities$.value.length > 0 &&
-      !expansionPanelExpanded
+      !workspaceState.expanded()
         ? 'true'
         : 'false'
     "
@@ -237,8 +217,7 @@
         [store]="workspaceStore"
         [disabled]="workspaceSwitchDisabled"
         [map]="map"
-      >
-      </igo-workspace-selector>
+      />
       @if (selectedWorkspace$ | async; as workspace) {
         <div class="workspace-container">
           <div class="workspace-actions">
@@ -296,8 +275,7 @@
                 [color]="'primary'"
                 [mode]="actionbarMode"
                 [overlayClass]="workspaceMenuClass"
-              >
-              </igo-actionbar>
+              />
             }
             @if (workspaceVisibility()) {
               <button
@@ -329,8 +307,7 @@
               [entitySortChange$]="workspaceEntitySortChange$"
               [paginatorOptions]="paginatorOptions"
               (paginatorChange)="paginatorChange($event)"
-            >
-            </igo-entity-table-paginator>
+            />
           }
         </div>
       }
@@ -349,8 +326,7 @@
           (entitySortChange)="entitySortChange()"
           (entitySelectChange)="entitySelectChange($event)"
           [template]="workspace.meta.tableTemplate"
-        >
-        </igo-entity-table>
+        />
       }
       <span>{{ workspaceNotAvailableMessage | translate }}</span>
     }
@@ -360,13 +336,10 @@
 <app-toast-panel-for-expansion
   [withHeader]="false"
   [(opened)]="toastPanelForExpansionOpened"
+  [@toastPanelOffsetX]="toastPanelOffsetX$ | async"
 >
   <div class="toast-panel-for-expansion-close-button-container">
-    <button
-      mat-icon-button
-      color="warn"
-      (click)="toastPanelForExpansionOpened = false"
-    >
+    <button mat-icon-button color="warn" (click)="closeWidget()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -375,8 +348,7 @@
     <igo-workspace-widget-outlet
       [workspace]="workspace"
       (deactivateWidget)="onDeactivateWorkspaceWidget()"
-    >
-    </igo-workspace-widget-outlet>
+    />
   }
 </app-toast-panel-for-expansion>
 
@@ -395,8 +367,7 @@
     (openedChange)="toastOpenedChange($event)"
     (fullExtentEvent)="fullExtent = $event"
     (windowHtmlDisplayEvent)="setToastPanelHtmlDisplay($event)"
-  >
-  </app-toast-panel>
+  />
 }
 
 <ng-template #contextMenu>
@@ -405,6 +376,5 @@
     [withIcon]="false"
     [horizontal]="true"
     mode="context"
-  >
-  </igo-actionbar>
+  />
 </ng-template>

@@ -1,156 +1,3 @@
-<ng-template #toast>
-  @if (store.entities$ | async) {
-    <igo-panel
-      [ngClass]="getClassPanel()"
-      [id]="setHeighPanelTabsMode()"
-      [title]="
-        resultSelected$.value
-          ? getTitle(resultSelected$.value)
-          : ('toastPanel.title' | translate)
-      "
-      (click)="onToggleClick($event)"
-      tabindex="0"
-      (keydown)="handleKeyboardEvent($event)"
-    >
-      <igo-actionbar
-        id="igo-actionbar"
-        panelLeftButton
-        [store]="actionStore"
-        [withIcon]="true"
-        [icon]="icon"
-        [withTitle]="actionbarMode === 'overlay'"
-        [horizontal]="true"
-        [mode]="actionbarMode"
-      >
-      </igo-actionbar>
-      @if (resultSelected$.value) {
-        <button
-          mat-icon-button
-          igoStopPropagation
-          panelLeftButton
-          [matTooltip]="
-            ((isSelectedResultOutOfView$ | async)
-              ? 'toastPanel.zoomOnFeatureTooltipOutOfView'
-              : 'toastPanel.zoomOnFeatureTooltip'
-            ) | translate
-          "
-          matTooltipShowDelay="500"
-          (click)="zoomTo()"
-        >
-          <mat-icon
-            aria-hidden="false"
-            [matBadge]="(isSelectedResultOutOfView$ | async) ? '!' : ''"
-            matBadgeColor="accent"
-            matBadgeSize="small"
-            [matBadgeHidden]="(isSelectedResultOutOfView$ | async) !== true"
-            >zoom_in</mat-icon
-          >
-        </button>
-      }
-      @if (hasGeoService()) {
-        <button
-          mat-icon-button
-          igoStopPropagation
-          panelLeftButton
-          tooltip-position="below"
-          [matTooltip]="
-            ((potententialLayerisAdded$ | async)
-              ? 'toastPanel.removeLayer'
-              : 'toastPanel.addLayer'
-            ) | translate
-          "
-          matTooltipShowDelay="500"
-          [color]="(potententialLayerisAdded$ | async) ? 'warn' : ''"
-          (click)="handleLayer()"
-        >
-          <mat-icon>
-            {{ (potententialLayerisAdded$ | async) ? 'delete' : 'add' }}
-          </mat-icon>
-        </button>
-      }
-      @if (resultSelected$.value) {
-        <button
-          [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
-          mat-icon-button
-          igoStopPropagation
-          panelLeftButton
-          [matTooltip]="'toastPanel.previousFeatureTooltip' | translate"
-          matTooltipShowDelay="500"
-          (click)="previousResult()"
-        >
-          <mat-icon>chevron_left</mat-icon>
-        </button>
-      }
-      @if (resultSelected$.value) {
-        <button
-          [disabled]="
-            results[results.length - 1].meta.id ===
-            resultSelected$.value.meta.id
-          "
-          mat-icon-button
-          igoStopPropagation
-          panelRightButton
-          [matTooltip]="'toastPanel.nextFeatureTooltip' | translate"
-          matTooltipShowDelay="500"
-          (click)="nextResult()"
-        >
-          <mat-icon>chevron_right</mat-icon>
-        </button>
-      }
-      @if (opened && isDesktop()) {
-        <button
-          mat-icon-button
-          igoStopPropagation
-          panelRightButton
-          (click)="resizeWindows()"
-          [matTooltip]="
-            ((this.fullExtent$ | async)
-              ? 'toastPanel.standardExtentTooltip'
-              : 'toastPanel.fullExtentTooltip'
-            ) | translate
-          "
-          matTooltipShowDelay="500"
-        >
-          <mat-icon>{{
-            fullExtent ? 'collapse_content' : 'expand_content'
-          }}</mat-icon>
-        </button>
-      }
-      <button
-        mat-icon-button
-        igoStopPropagation
-        panelRightButton
-        (click)="clear()"
-      >
-        <mat-icon>close</mat-icon>
-      </button>
-      <div #content class="toast-content">
-        @if (resultSelected$.value) {
-          <igo-feature-details
-            [map]="map"
-            [feature]="resultSelected$.value.data"
-            (htmlDisplayEvent)="setHtmlDisplay($event)"
-          >
-          </igo-feature-details>
-        }
-        @if (!resultSelected$.value) {
-          <igo-search-results
-            [map]="map"
-            [store]="store"
-            [showIcons]="true"
-            [withZoomButton]="withZoomButton"
-            (resultFocus)="focusResult($event)"
-            (resultUnfocus)="unfocusResult($event, true)"
-            (resultSelect)="selectResult($event)"
-            [tabsMode]="tabsMode"
-          >
-          </igo-search-results>
-        }
-      </div>
-    </igo-panel>
-  }
-</ng-template>
-
 @if (isMobile()) {
   <div
     class="swipe-fix"
@@ -159,17 +6,21 @@
     (swipeup)="swipe($event.type)"
     (swipedown)="swipe($event.type)"
   >
-    <ng-template [ngTemplateOutlet]="toast"></ng-template>
+    <ng-template [ngTemplateOutlet]="toast" />
   </div>
 } @else {
+  <ng-template [ngTemplateOutlet]="toast" />
+}
+
+<ng-template #toast>
+  @let selection = this.selection();
+
   @if (store.entities$ | async) {
     <igo-panel
       [ngClass]="getClassPanel()"
       [id]="setHeighPanelTabsMode()"
       [title]="
-        resultSelected$.value
-          ? getTitle(resultSelected$.value)
-          : ('toastPanel.title' | translate)
+        selection ? getTitle(selection) : ('toastPanel.title' | translate)
       "
       (click)="onToggleClick($event)"
       tabindex="0"
@@ -184,9 +35,8 @@
         [withTitle]="actionbarMode === 'overlay'"
         [horizontal]="true"
         [mode]="actionbarMode"
-      >
-      </igo-actionbar>
-      @if (resultSelected$.value) {
+      />
+      @if (selection) {
         <button
           mat-icon-button
           igoStopPropagation
@@ -231,12 +81,14 @@
           </mat-icon>
         </button>
       }
-      @if (resultSelected$.value) {
+      @let hasMoreThanOne = results.length > 1;
+      @if (hasMoreThanOne && selection) {
         <button
-          [disabled]="results[0].meta.id === resultSelected$.value.meta.id"
+          [disabled]="results[0].meta.id === selection.meta.id"
           mat-icon-button
           igoStopPropagation
           panelLeftButton
+          disabledInteractive
           [matTooltip]="'toastPanel.previousFeatureTooltip' | translate"
           matTooltipShowDelay="500"
           (click)="previousResult()"
@@ -244,12 +96,10 @@
           <mat-icon>chevron_left</mat-icon>
         </button>
       }
-      @if (resultSelected$.value) {
+      @if (hasMoreThanOne && selection) {
         <button
-          [disabled]="
-            results[results.length - 1].meta.id ===
-            resultSelected$.value.meta.id
-          "
+          [disabled]="results[results.length - 1].meta.id === selection.meta.id"
+          disabledInteractive
           mat-icon-button
           igoStopPropagation
           panelRightButton
@@ -288,15 +138,14 @@
         <mat-icon>close</mat-icon>
       </button>
       <div #content class="toast-content">
-        @if (resultSelected$.value) {
+        @if (selection) {
           <igo-feature-details
             [map]="map"
-            [feature]="resultSelected$.value.data"
+            [feature]="selection.data"
             (htmlDisplayEvent)="setHtmlDisplay($event)"
-          >
-          </igo-feature-details>
+          />
         }
-        @if (!resultSelected$.value) {
+        @if (!selection) {
           <igo-search-results
             [map]="map"
             [store]="store"
@@ -306,10 +155,9 @@
             (resultUnfocus)="unfocusResult($event, true)"
             (resultSelect)="selectResult($event)"
             [tabsMode]="tabsMode"
-          >
-          </igo-search-results>
+          />
         }
       </div>
     </igo-panel>
   }
-}
+</ng-template>

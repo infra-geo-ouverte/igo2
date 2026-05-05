@@ -2,15 +2,15 @@ import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  HostBinding,
-  HostListener,
   Input,
   OnDestroy,
   OnInit,
-  Output,
-  inject
+  inject,
+  input,
+  output,
+  signal
 } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -87,7 +87,13 @@ interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
     SearchResultsComponent,
     StopPropagationDirective,
     TranslateModule
-  ]
+  ],
+  host: {
+    '[style.visibility]': 'this.getHostDisplayStyle()',
+    '(document:keydown.escape)': 'this.clear()',
+    '(document:keydown.backspace)': 'this.unselectResult()',
+    '(document:keydown.z)': 'this.onZoomHandler()'
+  }
 })
 export class ToastPanelComponent implements OnInit, OnDestroy {
   mediaService = inject(MediaService);
@@ -112,14 +118,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     return this.storageState.storageService;
   }
 
-  @Input()
-  get map(): IgoMap {
-    return this._map;
-  }
-  set map(value: IgoMap) {
-    this._map = value;
-  }
-  private _map: IgoMap;
+  readonly map = input<IgoMap>();
 
   @Input()
   get store(): EntityStore<SearchResult<Feature>> {
@@ -147,7 +146,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   private _opened = true;
 
-  @Input() hasFeatureEmphasisOnSelection = false;
+  readonly hasFeatureEmphasisOnSelection = input(false);
 
   get zoomAuto(): boolean {
     return this._zoomAuto;
@@ -207,112 +206,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   public withZoomButton = true;
   zoomAuto$ = new BehaviorSubject<boolean>(false);
 
-  @Output() openedChange = new EventEmitter<boolean>();
+  readonly openedChange = output<boolean>();
 
-  @Output() fullExtentEvent = new EventEmitter<boolean>();
-  @Output() windowHtmlDisplayEvent = new EventEmitter<boolean>();
+  readonly fullExtentEvent = output<boolean>();
+  readonly windowHtmlDisplayEvent = output<boolean>();
 
-  resultSelected$ = new BehaviorSubject<SearchResult<Feature>>(undefined);
-
-  // @HostBinding('class.app-toast-panel-opened')
-  // get hasOpenedClass() {
-  //   return this.opened;
-  // }
-
-  // @HostBinding('class.app-full-toast-panel-collapsed')
-  // get hasFullCollapsedClass() {
-  //   return !this.opened && this.fullExtent;
-  // }
-
-  getClassPanel() {
-    return {
-      'app-toast-panel-opened':
-        this.opened && !this.fullExtent && !this.isHtmlDisplay,
-      'app-full-toast-panel-opened':
-        this.opened && this.fullExtent && !this.isHtmlDisplay,
-
-      'app-toast-panel-html':
-        this.opened &&
-        !this.fullExtent &&
-        this.resultSelected$.value &&
-        this.isHtmlDisplay,
-
-      'app-toast-panel-html-large':
-        this.opened &&
-        this.fullExtent &&
-        this.resultSelected$.value &&
-        this.isHtmlDisplay,
-
-      'app-toast-panel-collapsed':
-        !this.opened && !this.fullExtent && !this.isHtmlDisplay,
-      'app-full-toast-panel-collapsed':
-        !this.opened && this.fullExtent && !this.isHtmlDisplay,
-      'app-toast-panel-html-collapsed': !this.opened && this.isHtmlDisplay
-    };
-  }
-
-  // if query tabs mode activated
-  // fix Heigh of igo-panel
-  setHeighPanelTabsMode() {
-    if (this.resultSelected$.value || !this.opened) {
-      return '';
-    }
-
-    if (this.tabsMode && !this.fullExtent && !this.isHtmlDisplay) {
-      return 'app-toast-panel-opened-max-height';
-    } else if (
-      this.tabsMode &&
-      this.opened &&
-      this.fullExtent &&
-      !this.isHtmlDisplay
-    ) {
-      return 'app-full-toast-panel-opened-max-height';
-    }
-  }
-
-  @HostBinding('style.visibility')
-  get displayStyle() {
-    if (this.results.length) {
-      if (this.results.length === 1 && this.initialized) {
-        this.selectResult(this.results[0]);
-      }
-      return 'visible';
-    }
-    return 'hidden';
-  }
-
-  // @HostBinding('class.app-full-toast-panel-opened')
-  // get hasFullOpenedClass() {
-  //   return this.opened && this.fullExtent;
-  // }
-
-  @HostListener('document:keydown.escape', ['$event']) onEscapeHandler() {
-    this.clear();
-  }
-
-  @HostListener('document:keydown.backspace', ['$event']) onBackHandler() {
-    this.unselectResult();
-  }
-
-  @HostListener('document:keydown.z', ['$event']) onZoomHandler() {
-    if (this.isResultSelected$.getValue() === true) {
-      const localOlFeature = this.format.readFeature(
-        this.resultSelected$.getValue().data,
-        {
-          dataProjection: this.resultSelected$.getValue().data.projection,
-          featureProjection: this.map.projection
-        }
-      );
-      moveToOlFeatures(
-        this.map.viewController,
-        localOlFeature,
-        FeatureMotion.Default
-      );
-    }
-  }
+  selection = signal<SearchResult<Feature>>(undefined);
+  selection$ = toObservable(this.selection);
 
   get results(): SearchResult<Feature>[] {
-    // return this.store.view.filter((e) => e.meta.dataType === FEATURE).all();
     return this.store.all();
   }
 
@@ -330,10 +232,74 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
   }
 
+  onZoomHandler() {
+    if (this.isResultSelected$.getValue() === true) {
+      const localOlFeature = this.format.readFeature(this.selection().data, {
+        dataProjection: this.selection().data.projection,
+        featureProjection: this.map().projection
+      });
+      moveToOlFeatures(
+        this.map().viewController,
+        localOlFeature,
+        FeatureMotion.Default
+      );
+    }
+  }
+
+  getHostDisplayStyle() {
+    return this.results.length ? 'visible' : 'hidden';
+  }
+
+  getClassPanel() {
+    return {
+      'app-toast-panel-opened':
+        this.opened && !this.fullExtent && !this.isHtmlDisplay,
+      'app-full-toast-panel-opened':
+        this.opened && this.fullExtent && !this.isHtmlDisplay,
+
+      'app-toast-panel-html':
+        this.opened &&
+        !this.fullExtent &&
+        this.selection() &&
+        this.isHtmlDisplay,
+
+      'app-toast-panel-html-large':
+        this.opened &&
+        this.fullExtent &&
+        this.selection() &&
+        this.isHtmlDisplay,
+
+      'app-toast-panel-collapsed':
+        !this.opened && !this.fullExtent && !this.isHtmlDisplay,
+      'app-full-toast-panel-collapsed':
+        !this.opened && this.fullExtent && !this.isHtmlDisplay,
+      'app-toast-panel-html-collapsed': !this.opened && this.isHtmlDisplay
+    };
+  }
+
+  // if query tabs mode activated
+  // fix Heigh of igo-panel
+  setHeighPanelTabsMode() {
+    if (this.selection() || !this.opened) {
+      return '';
+    }
+
+    if (this.tabsMode && !this.fullExtent && !this.isHtmlDisplay) {
+      return 'app-toast-panel-opened-max-height';
+    } else if (
+      this.tabsMode &&
+      this.opened &&
+      this.fullExtent &&
+      !this.isHtmlDisplay
+    ) {
+      return 'app-full-toast-panel-opened-max-height';
+    }
+  }
+
   private monitorResultOutOfView() {
     this.isSelectedResultOutOfView$$ = combineLatest([
-      this.map.viewController.state$,
-      this.resultSelected$
+      this.map().viewController.state$,
+      this.selection$
     ])
       .pipe(debounceTime(100))
       .subscribe((bunch) => {
@@ -344,14 +310,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         }
         const selectedOlFeature = featureToOl(
           selectedResult.data,
-          this.map.projection
+          this.map().projection
         );
         const selectedOlFeatureExtent = computeOlFeaturesExtent(
           [selectedOlFeature],
-          this.map.viewProjection
+          this.map().viewProjection
         );
         this.isSelectedResultOutOfView$.next(
-          featuresAreOutOfView(this.map.getExtent(), selectedOlFeatureExtent)
+          featuresAreOutOfView(this.map().getExtent(), selectedOlFeatureExtent)
         );
       });
   }
@@ -359,12 +325,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.entities$.subscribe(() => {
       this.initialized = true;
+      if (this.results.length === 1) {
+        this.selectResult(this.results[0]);
+      }
     });
     this.monitorResultOutOfView();
 
     let latestResult;
     let trigger;
-    if (this.hasFeatureEmphasisOnSelection) {
+    if (this.hasFeatureEmphasisOnSelection()) {
       this.resultOrResolution$$ = combineLatest([
         this.focusedResult$.pipe(
           tap((res) => {
@@ -372,13 +341,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
             trigger = 'focused';
           })
         ),
-        this.resultSelected$.pipe(
+        this.selection$.pipe(
           tap((res) => {
             latestResult = res;
             trigger = 'selected';
           })
         ),
-        this.map.viewController.resolution$,
+        this.map().viewController.resolution$,
         this.store.entities$
       ]).subscribe(() => this.buildResultEmphasis(latestResult, trigger));
     }
@@ -423,14 +392,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         },
         handler: () => {
           const localOlFeature = this.format.readFeature(
-            this.resultSelected$.getValue().data,
+            this.selection().data,
             {
-              dataProjection: this.resultSelected$.getValue().data.projection,
-              featureProjection: this.map.projection
+              dataProjection: this.selection().data.projection,
+              featureProjection: this.map().projection
             }
           );
           moveToOlFeatures(
-            this.map.viewController,
+            this.map().viewController,
             localOlFeature,
             FeatureMotion.Zoom
           );
@@ -453,12 +422,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           for (const result of this.store.all()) {
             const localOlFeature = this.format.readFeature(result.data, {
               dataProjection: result.data.projection,
-              featureProjection: this.map.projection
+              featureProjection: this.map().projection
             });
             olFeatures.push(localOlFeature);
           }
           moveToOlFeatures(
-            this.map.viewController,
+            this.map().viewController,
             olFeatures,
             FeatureMotion.Zoom
           );
@@ -475,7 +444,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         handler: () => {
           this.zoomAuto = !this.zoomAuto;
           if (this.zoomAuto && this.isResultSelected$.value === true) {
-            this.selectResult(this.resultSelected$.getValue());
+            this.selectResult(this.selection());
           }
         }
       },
@@ -512,8 +481,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     ]);
     this.computeFeatureGeoServiceStatus();
     combineLatest([
-      this.resultSelected$,
-      this.map.layerController.layers$
+      this.selection$,
+      this.map().layerController.layers$
     ]).subscribe(() => {
       this.computeFeatureGeoServiceStatus();
     });
@@ -539,11 +508,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     if (!result || (trigger === 'selected' && this.zoomAuto)) {
       return;
     }
-    const myOlFeature = featureToOl(result.data, this.map.projection);
+    const myOlFeature = featureToOl(result.data, this.map().projection);
     const olGeometry = myOlFeature.getGeometry();
     if (
       featuresAreTooDeepInView(
-        this.map.viewController,
+        this.map().viewController,
         olGeometry.getExtent() as [number, number, number, number],
         0.0025
       )
@@ -557,7 +526,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       });
       this.abstractFocusedOrSelectedResult = featureFromOl(
         feature1,
-        this.map.projection
+        this.map().projection
       );
       this.abstractFocusedOrSelectedResult.meta.style =
         getCommonVectorSelectedStyle(
@@ -570,7 +539,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           )
         );
       this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
-      this.map.queryResultsOverlay.addFeature(
+      this.map().queryResultsOverlay.addFeature(
         this.abstractFocusedOrSelectedResult,
         FeatureMotion.None
       );
@@ -579,7 +548,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   private clearFeatureEmphasis() {
     if (this.abstractFocusedOrSelectedResult) {
-      this.map.queryResultsOverlay.removeFeature(
+      this.map().queryResultsOverlay.removeFeature(
         this.abstractFocusedOrSelectedResult
       );
       this.abstractFocusedOrSelectedResult = undefined;
@@ -592,7 +561,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   focusResult(result: SearchResult<Feature>) {
     this.focusedResult$.next(result);
-    this.map.queryResultsOverlay.removeFeature(result.data);
+    this.map().queryResultsOverlay.removeFeature(result.data);
 
     result.data.meta.style = getCommonVectorSelectedStyle(
       Object.assign(
@@ -602,7 +571,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       )
     );
     result.data.meta.style.setZIndex(2000);
-    this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
+    this.map().queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
 
   unfocusResult(result: SearchResult<Feature>, force?) {
@@ -610,7 +579,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     if (!force && this.store.state.get(result).focused) {
       return;
     }
-    this.map.queryResultsOverlay.removeFeature(result.data);
+    this.map().queryResultsOverlay.removeFeature(result.data);
 
     result.data.meta.style = getCommonVectorStyle(
       Object.assign(
@@ -620,7 +589,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       )
     );
     result.data.meta.style.setZIndex(undefined);
-    this.map.queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
+    this.map().queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
 
   selectResult(result: SearchResult<Feature>) {
@@ -632,7 +601,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       },
       true
     );
-    this.resultSelected$.next(result);
+    this.selection.set(result);
     if (result.data.properties && result.data.properties.target === 'iframe') {
       this.setHtmlDisplay(true);
     } else {
@@ -661,19 +630,16 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       }
       features.push(feature.data);
     }
-    this.map.queryResultsOverlay.removeFeatures(features);
-    this.map.queryResultsOverlay.addFeatures(features, FeatureMotion.None);
+    this.map().queryResultsOverlay.removeFeatures(features);
+    this.map().queryResultsOverlay.addFeatures(features, FeatureMotion.None);
 
     if (this.zoomAuto) {
-      const localOlFeature = this.format.readFeature(
-        this.resultSelected$.getValue().data,
-        {
-          dataProjection: this.resultSelected$.getValue().data.projection,
-          featureProjection: this.map.projection
-        }
-      );
+      const localOlFeature = this.format.readFeature(this.selection().data, {
+        dataProjection: this.selection().data.projection,
+        featureProjection: this.map().projection
+      });
       moveToOlFeatures(
-        this.map.viewController,
+        this.map().viewController,
         localOlFeature,
         FeatureMotion.Default
       );
@@ -684,7 +650,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   unselectResult() {
-    this.resultSelected$.next(undefined);
+    this.selection.set(undefined);
     this.isResultSelected$.next(false);
     this.setHtmlDisplay(false);
     this.store.state.clear();
@@ -700,7 +666,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       );
       features.push(feature.data);
     }
-    this.map.queryResultsOverlay.setFeatures(
+    this.map().queryResultsOverlay.setFeatures(
       features,
       FeatureMotion.None,
       'map'
@@ -726,7 +692,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   clear() {
     this.handleWksSelection();
     this.clearFeatureEmphasis();
-    this.map.queryResultsOverlay.clear();
+    this.map().queryResultsOverlay.clear();
     this.store.clear();
     this.unselectResult();
     this.setHtmlDisplay(false);
@@ -748,10 +714,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   previousResult() {
-    if (!this.resultSelected$.value) {
+    if (!this.selection()) {
       return;
     }
-    let i = this.results.indexOf(this.resultSelected$.value);
+    let i = this.results.indexOf(this.selection());
     const previousResult = this.results[--i];
     if (previousResult) {
       this.selectResult(previousResult);
@@ -759,10 +725,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   nextResult() {
-    if (!this.resultSelected$.value) {
+    if (!this.selection()) {
       return;
     }
-    let i = this.results.indexOf(this.resultSelected$.value);
+    let i = this.results.indexOf(this.selection());
     const nextResult = this.results[++i];
     if (nextResult) {
       this.selectResult(nextResult);
@@ -774,7 +740,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   private getGeoServices(): ExtendedGeoServiceDefinition[] {
-    const resultSelected = this.resultSelected$.getValue();
+    const resultSelected = this.selection();
     if (!resultSelected) {
       return [];
     }
@@ -800,7 +766,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   handleLayer() {
-    const layersIds = this.map.layerController.all.map((layer) => layer.id);
+    const layersIds = this.map().layerController.all.map((layer) => layer.id);
     let potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
     if (!potententialLayerToAdd) {
       this.computeFeatureGeoServiceStatus();
@@ -808,26 +774,26 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
 
     if (layersIds.includes(potententialLayerToAdd.id)) {
-      const layerToRemove = this.map.layerController.getById(
+      const layerToRemove = this.map().layerController.getById(
         potententialLayerToAdd.id
       );
       if (layerToRemove) {
-        this.map.layerController.remove(layerToRemove);
+        this.map().layerController.remove(layerToRemove);
         this.potententialLayerisAdded$.next(false);
       }
     } else {
       this.layerService
         .createAsyncLayer(potententialLayerToAdd.sourceOptions)
         .subscribe((layer) => {
-          this.map.layersAddedByClick$.next([layer]);
-          this.map.layerController.add(layer);
+          this.map().layersAddedByClick$.next([layer]);
+          this.map().layerController.add(layer);
           this.potententialLayerisAdded$.next(true);
         });
     }
   }
 
   private computeFeatureGeoServiceStatus() {
-    const resultSelected = this.resultSelected$.getValue();
+    const resultSelected = this.selection();
     if (!resultSelected) {
       return;
     }
@@ -840,7 +806,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       );
       const soId = generateIdFromSourceOptions(so.sourceOptions);
       this.potententialLayerToAdd$.next({ id: soId, sourceOptions: so });
-      const layersIds = this.map.layerController.all.map((l) => l.id);
+      const layersIds = this.map().layerController.all.map((l) => l.id);
       this.potententialLayerisAdded$.next(
         layersIds.includes(soId) ? true : false
       );
@@ -884,15 +850,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   zoomTo() {
-    const localOlFeature = this.format.readFeature(
-      this.resultSelected$.getValue().data,
-      {
-        dataProjection: this.resultSelected$.getValue().data.projection,
-        featureProjection: this.map.projection
-      }
-    );
+    const localOlFeature = this.format.readFeature(this.selection().data, {
+      dataProjection: this.selection().data.projection,
+      featureProjection: this.map().projection
+    });
     moveToOlFeatures(
-      this.map.viewController,
+      this.map().viewController,
       localOlFeature,
       FeatureMotion.Zoom
     );

@@ -1,29 +1,6 @@
 {
-  "directionsSources": {
-    "osrm": {
-      "name": "OSRM Québec",
-      "baseUrl": "/apis/itineraire/route/v1/",
-      "profiles": [
-        {
-          "name": "driving"
-        },
-        {
-          "name": "forestier",
-          "authorization": {
-            "url": "/apis/igo2/user/igo",
-            "property": "hasOsrmPrivateAccess"
-          }
-        }
-      ]
-    }
-  },
   "favoriteContext4NonAuthenticated": true,
   "theme": "blue-theme",
-  "header": {
-    "hasHeader": false,
-    "logo": "assets/images/signature-PIV.svg",
-    "logoPrint": "assets/images/signature-PIV.svg"
-  },
   "hasFooter": false,
   "hasExpansionPanel": true,
   "geolocation": {

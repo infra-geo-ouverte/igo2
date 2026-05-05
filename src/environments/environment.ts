@@ -37,7 +37,6 @@ export const environment: AppEnvironmentOptions = {
       ]
     },
     storage: {
-      url: '/apis/igo2/user/igo',
       key: 'igo'
     },
     // context: {
@@ -245,6 +244,27 @@ export const environment: AppEnvironmentOptions = {
         url: 'https://ws.mapserver.transports.gouv.qc.ca/applicatif?service=WFS&request=GetFeature&version=2.0.0&outputformat=dom&typenames=dom&dom=dom_test'
       }
     ],
+    /** Example of header config, uncomment to see the header */
+    // header: {
+    //   languages: {
+    //     default: 'fr',
+    //     choices: [
+    //       {
+    //         key: 'fr',
+    //         label: 'Français'
+    //       },
+    //       {
+    //         key: 'en',
+    //         label: 'English'
+    //       }
+    //     ]
+    //   },
+    //   contactUsRoute: 'https://www.igouverte.org/#footer'
+    // },
+    /** Example of sidenav config, uncomment to see the effect */
+    // sidenav: {
+    //   languageToggleButton: true
+    // },
     language: {
       prefix: './locale/'
     },
@@ -371,6 +391,24 @@ export const environment: AppEnvironmentOptions = {
         strokeColor: '#5ed0fb', // line and poly
         strokeOpacity: 1, // line and poly not applied if a rgba strokeColor is provided
         strokeWidth: 2 // line and poly
+      }
+    },
+    directionsSources: {
+      osrm: {
+        name: 'OSRM Québec',
+        baseUrl: '/apis/itineraire/route/v1/',
+        profiles: [
+          {
+            name: 'driving'
+          },
+          {
+            name: 'forestier',
+            authorization: {
+              url: '/apis/igo2/user/igo',
+              property: 'hasOsrmPrivateAccess'
+            }
+          }
+        ]
       }
     }
   }
