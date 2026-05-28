@@ -151,9 +151,9 @@
             [store]="store"
             [showIcons]="true"
             [withZoomButton]="withZoomButton"
-            (resultFocus)="focusResult($event)"
-            (resultUnfocus)="unfocusResult($event, true)"
-            (resultSelect)="selectResult($event)"
+            (resultFocus)="onResultFocus($event)"
+            (resultUnfocus)="onResultUnfocus($event)"
+            (resultSelect)="onResultSelect($event)"
             [tabsMode]="tabsMode"
           />
         }

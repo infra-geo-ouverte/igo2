@@ -522,17 +522,6 @@ hasExpansionPanel
         Ce dernier contient les données tabulaires pour
         les données WFS / Vectorielle / Cluster.
 
-***********************
-hasFeatureEmphasisOnSelection
-***********************
-
-    .. line-block::
-
-        Permet d'ajouter à la carte une géométrie ponctuelle pour les
-        entités linéaires ou polygonales sélectionnées ou survolées
-        lors d'une interrogation de la carte et qui sont de trop petite
-        taille par rapport à l'étendue de la carte.
-
 *****************
 hasGeolocateButton
 *****************

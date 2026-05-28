@@ -34,35 +34,32 @@ import {
   StorageServiceEvent
 } from '@igo2/core/storage';
 import {
+  FEATURE,
   Feature,
   FeatureDetailsComponent,
   FeatureMotion,
   GeoServiceDefinition,
   IgoMap,
   LayerService,
+  Overlay,
   PropertyTypeDetectorService,
   SearchResult,
   SearchResultsComponent,
   computeOlFeaturesExtent,
-  featureFromOl,
   featureToOl,
   featuresAreOutOfView,
-  featuresAreTooDeepInView,
   generateIdFromSourceOptions,
-  getCommonVectorSelectedStyle,
-  getCommonVectorStyle,
-  moveToOlFeatures
+  moveToOlFeatures,
+  styleVariant
 } from '@igo2/geo';
 import { QueryState, StorageState, WorkspaceState } from '@igo2/integration';
 import { ObjectUtils } from '@igo2/utils';
 
-import olFeature from 'ol/Feature';
 import olFormatGeoJSON from 'ol/format/GeoJSON';
-import olPoint from 'ol/geom/Point';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
-import { debounceTime, map, skipWhile, tap } from 'rxjs/operators';
+import { debounceTime, map, skipWhile } from 'rxjs/operators';
 
 interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
   propertyForUrl: string;
@@ -146,8 +143,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
   private _opened = true;
 
-  readonly hasFeatureEmphasisOnSelection = input(false);
-
   get zoomAuto(): boolean {
     return this._zoomAuto;
   }
@@ -196,6 +191,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   private initialized = true;
 
   private format = new olFormatGeoJSON();
+
+  public queryResultsOverlayFocused: Overlay;
+  public queryResultsOverlaySelected: Overlay;
+  public queryResultsOverlayAll: Overlay;
 
   private resultOrResolution$$: Subscription;
   private focusedResult$ = new BehaviorSubject<SearchResult<Feature>>(
@@ -296,6 +295,19 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
   }
 
+  private handleShowAllResults(searchResults: SearchResult<Feature>[]) {
+    const rec = searchResults
+      .filter((sr) => sr.meta.dataType === FEATURE)
+      .map((sr) => sr.data as Feature);
+    if (rec?.length) {
+      this.queryResultsOverlayAll.setFeatures(rec, FeatureMotion.None);
+    } else {
+      this.queryResultsOverlayFocused.clear();
+      this.queryResultsOverlaySelected.clear();
+      this.queryResultsOverlayAll.clear();
+    }
+  }
+
   private monitorResultOutOfView() {
     this.isSelectedResultOutOfView$$ = combineLatest([
       this.map().viewController.state$,
@@ -323,34 +335,27 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.entities$.subscribe(() => {
+    this.queryResultsOverlayAll = new Overlay(
+      this.map(),
+      this.queryState.queryOverlayStyle?.base ??
+        styleVariant(this.map().viewController)
+    );
+    this.queryResultsOverlayFocused = new Overlay(
+      this.map(),
+      this.queryState.queryOverlayStyle?.focus ??
+        styleVariant(this.map().viewController, 'focus')
+    );
+    this.queryResultsOverlaySelected = new Overlay(
+      this.map(),
+      this.queryState.queryOverlayStyle?.selection ??
+        styleVariant(this.map().viewController, 'selection')
+    );
+
+    this.store.entities$.subscribe((entities) => {
       this.initialized = true;
-      if (this.results.length === 1) {
-        this.selectResult(this.results[0]);
-      }
+      this.handleShowAllResults(entities);
     });
     this.monitorResultOutOfView();
-
-    let latestResult;
-    let trigger;
-    if (this.hasFeatureEmphasisOnSelection()) {
-      this.resultOrResolution$$ = combineLatest([
-        this.focusedResult$.pipe(
-          tap((res) => {
-            latestResult = res;
-            trigger = 'focused';
-          })
-        ),
-        this.selection$.pipe(
-          tap((res) => {
-            latestResult = res;
-            trigger = 'selected';
-          })
-        ),
-        this.map().viewController.resolution$,
-        this.store.entities$
-      ]).subscribe(() => this.buildResultEmphasis(latestResult, trigger));
-    }
 
     this.storageChange$$ = this.storageService.storageChange$
       .pipe(
@@ -444,7 +449,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         handler: () => {
           this.zoomAuto = !this.zoomAuto;
           if (this.zoomAuto && this.isResultSelected$.value === true) {
-            this.selectResult(this.selection());
+            this.onResultSelect(this.selection());
           }
         }
       },
@@ -500,99 +505,30 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  private buildResultEmphasis(
-    result: SearchResult<Feature>,
-    trigger: 'selected' | 'focused' | undefined
-  ) {
-    this.clearFeatureEmphasis();
-    if (!result || (trigger === 'selected' && this.zoomAuto)) {
-      return;
-    }
-    const myOlFeature = featureToOl(result.data, this.map().projection);
-    const olGeometry = myOlFeature.getGeometry();
-    if (
-      featuresAreTooDeepInView(
-        this.map().viewController,
-        olGeometry.getExtent() as [number, number, number, number],
-        0.0025
-      )
-    ) {
-      const extent = olGeometry.getExtent();
-      const x = extent[0] + (extent[2] - extent[0]) / 2;
-      const y = extent[1] + (extent[3] - extent[1]) / 2;
-      const feature1 = new olFeature({
-        name: 'abstractFocusedOrSelectedResult',
-        geometry: new olPoint([x, y])
-      });
-      this.abstractFocusedOrSelectedResult = featureFromOl(
-        feature1,
-        this.map().projection
-      );
-      this.abstractFocusedOrSelectedResult.meta.style =
-        getCommonVectorSelectedStyle(
-          Object.assign(
-            {},
-            { feature: this.abstractFocusedOrSelectedResult },
-            trigger === 'selected'
-              ? this.queryState.queryOverlayStyleSelection
-              : this.queryState.queryOverlayStyleFocus
-          )
-        );
-      this.abstractFocusedOrSelectedResult.meta.style.setZIndex(2000);
-      this.map().queryResultsOverlay.addFeature(
-        this.abstractFocusedOrSelectedResult,
+  getTitle(result: SearchResult) {
+    return getEntityTitle(result);
+  }
+
+  onResultFocus(result: SearchResult<Feature>) {
+    if (this.store.state.get(result).selected) {
+      this.queryResultsOverlayFocused.clear();
+    } else {
+      this.addResultToOverlay(
+        result,
+        this.queryResultsOverlayFocused,
         FeatureMotion.None
       );
     }
   }
 
-  private clearFeatureEmphasis() {
-    if (this.abstractFocusedOrSelectedResult) {
-      this.map().queryResultsOverlay.removeFeature(
-        this.abstractFocusedOrSelectedResult
-      );
-      this.abstractFocusedOrSelectedResult = undefined;
-    }
-  }
-
-  getTitle(result: SearchResult) {
-    return getEntityTitle(result);
-  }
-
-  focusResult(result: SearchResult<Feature>) {
-    this.focusedResult$.next(result);
-    this.map().queryResultsOverlay.removeFeature(result.data);
-
-    result.data.meta.style = getCommonVectorSelectedStyle(
-      Object.assign(
-        {},
-        { feature: result.data },
-        this.queryState.queryOverlayStyleFocus
-      )
-    );
-    result.data.meta.style.setZIndex(2000);
-    this.map().queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
-  }
-
-  unfocusResult(result: SearchResult<Feature>, force?) {
+  onResultUnfocus(result: SearchResult<Feature>) {
     this.focusedResult$.next(undefined);
-    if (!force && this.store.state.get(result).focused) {
-      return;
+    if (!this.store.state.get(result).selected) {
+      this.queryResultsOverlayFocused.clear();
     }
-    this.map().queryResultsOverlay.removeFeature(result.data);
-
-    result.data.meta.style = getCommonVectorStyle(
-      Object.assign(
-        {},
-        { feature: result.data },
-        this.queryState.queryOverlayStyle
-      )
-    );
-    result.data.meta.style.setZIndex(undefined);
-    this.map().queryResultsOverlay.addFeature(result.data, FeatureMotion.None);
   }
 
-  selectResult(result: SearchResult<Feature>) {
+  onResultSelect(result: SearchResult<Feature>) {
     this.store.state.update(
       result,
       {
@@ -608,45 +544,37 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       this.setHtmlDisplay(false);
     }
 
-    const features = [];
-    for (const feature of this.store.all()) {
-      if (feature.meta.id === result.meta.id) {
-        feature.data.meta.style = getCommonVectorSelectedStyle(
-          Object.assign(
-            {},
-            { feature: feature.data },
-            this.queryState.queryOverlayStyleSelection
-          )
-        );
-        feature.data.meta.style.setZIndex(2000);
-      } else {
-        feature.data.meta.style = getCommonVectorStyle(
-          Object.assign(
-            {},
-            { feature: feature.data },
-            this.queryState.queryOverlayStyle
-          )
-        );
-      }
-      features.push(feature.data);
-    }
-    this.map().queryResultsOverlay.removeFeatures(features);
-    this.map().queryResultsOverlay.addFeatures(features, FeatureMotion.None);
-
-    if (this.zoomAuto) {
-      const localOlFeature = this.format.readFeature(this.selection().data, {
-        dataProjection: this.selection().data.projection,
-        featureProjection: this.map().projection
-      });
-      moveToOlFeatures(
-        this.map().viewController,
-        localOlFeature,
-        FeatureMotion.Default
-      );
-    }
-
+    this.queryResultsOverlayFocused.clear();
+    this.queryResultsOverlaySelected.clear();
+    this.addResultToOverlay(
+      result,
+      this.queryResultsOverlaySelected,
+      this.zoomAuto ? FeatureMotion.Default : FeatureMotion.None
+    );
     this.isResultSelected$.next(true);
     this.initialized = false;
+  }
+
+  /**
+   * Try to add a feature to the map overlay
+   * @param result A search result that could be a feature
+   * @param motion A FeatureMotion to trigger when adding the searchresult to the map search overlay
+   */
+  private addResultToOverlay(
+    result: SearchResult,
+    overlay: Overlay,
+    motion: FeatureMotion = FeatureMotion.Default
+  ) {
+    if (result.meta.dataType !== FEATURE) {
+      return undefined;
+    }
+    const feature = (result as SearchResult<Feature>).data;
+
+    // Sometimes features have no geometry. It happens with some GetFeatureInfo
+    if (!feature.geometry) {
+      return;
+    }
+    overlay.setFeatures([feature], motion);
   }
 
   unselectResult() {
@@ -654,23 +582,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.isResultSelected$.next(false);
     this.setHtmlDisplay(false);
     this.store.state.clear();
-
-    const features = [];
-    for (const feature of this.store.all()) {
-      feature.data.meta.style = getCommonVectorStyle(
-        Object.assign(
-          {},
-          { feature: feature.data },
-          this.queryState.queryOverlayStyle
-        )
-      );
-      features.push(feature.data);
-    }
-    this.map().queryResultsOverlay.setFeatures(
-      features,
-      FeatureMotion.None,
-      'map'
-    );
   }
 
   handleWksSelection() {
@@ -691,8 +602,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   clear() {
     this.handleWksSelection();
-    this.clearFeatureEmphasis();
-    this.map().queryResultsOverlay.clear();
     this.store.clear();
     this.unselectResult();
     this.setHtmlDisplay(false);
@@ -720,7 +629,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     let i = this.results.indexOf(this.selection());
     const previousResult = this.results[--i];
     if (previousResult) {
-      this.selectResult(previousResult);
+      this.onResultSelect(previousResult);
     }
   }
 
@@ -731,7 +640,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     let i = this.results.indexOf(this.selection());
     const nextResult = this.results[++i];
     if (nextResult) {
-      this.selectResult(nextResult);
+      this.onResultSelect(nextResult);
     }
   }
 
