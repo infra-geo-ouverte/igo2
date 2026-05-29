@@ -38,6 +38,7 @@ import {
 import {
   ENTITY_DIRECTIVES,
   EntityRecord,
+  EntityService,
   EntityStore,
   EntityTablePaginatorOptions
 } from '@igo2/common/entity';
@@ -239,6 +240,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   workspaceState = inject(WorkspaceState);
   authService = inject(AuthService);
+  entityService = inject(EntityService);
   mediaService = inject(MediaService);
   layerService = inject(LayerService);
   dataSourceService = inject(DataSourceService);
@@ -678,7 +680,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     };
     feature.properties = this.createFeatureProperties(workspace.layer);
     this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
-    workspace.editFeature(feature, workspace);
+    workspace.editFeature(feature);
   }
 
   createFeatureProperties(layer: ImageLayer | VectorLayer) {
@@ -1563,14 +1565,14 @@ export class PortalComponent implements OnInit, OnDestroy {
         const relationWorkspace = this.workspaceStore
           .all()
           .find((workspace) =>
-            String(layer.options.workspace.workspaceId).includes(
-              String(workspace.id)
-            )
+            layer.options.workspace.workspaceId
+              ?.toString()
+              .includes(workspace.id.toString())
           );
         relationWorkspace?.meta.tableTemplate.columns.forEach((col) => {
           // Update domain list
           if (col.type === 'list' || col.type === 'autocomplete') {
-            this.editionWorkspaceService
+            this.entityService
               .getDomainValues(col.relation)
               .subscribe((result) => {
                 col.domainValues = result;
