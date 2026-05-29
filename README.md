@@ -1,5 +1,4 @@
-[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
-[![join chat https://gitter.im/igo2/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/igo2/Lobby)
+[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.dev/style-guide)
 [![Known Vulnerabilities](https://snyk.io/test/github/infra-geo-ouverte/igo2/badge.svg)](https://snyk.io/test/github/infra-geo-ouverte/igo2)
 
 # Infrastructure géomatique ouverte 2.0 (IGO2) / Open GIS Infrastructure 2.0
@@ -53,27 +52,8 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 
 ## Téléchargement
 - Les dernières versions téléchargeable sont accessible dans les "assets" de chaque version dans la [page de release](https://github.com/infra-geo-ouverte/igo2/releases) 
+- [Version v20.1.1](https://github.com/infra-geo-ouverte/igo2/releases/download/v20.1.1/igo2-dist.zip)
 - [Version v16.3.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.3.0/igo2.zip)
-- [Version v16.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.2.0/igo2.zip)
-- [Version v16.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.1.0/igo2.zip)
-- [Version 1.15.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.4/igo2.zip)
-- [Version 1.15.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.3/igo2.zip)
-- [Version 1.15.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.2/igo2.zip)
-- [Version 1.14.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.14.2/igo2.zip)
-- [Version 1.13.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.13.4/igo2.zip)
-- [Version 1.12.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.12.1/igo2.zip)
-- [Version 1.11.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.11.1/igo2.zip)
-- [Version 1.10.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.10.0/igo2.zip)
-- [Version 1.9.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.4/igo2.zip)
-- [Version 1.8.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.8.2/igo2.zip)
-- [Version 1.7.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.7.2/igo2.zip)
-- [Version 1.6.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.3/igo2.zip)
-- [Version 1.5.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.5.3/igo2.zip)
-- [Version 1.4.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.1/igo2.zip)
-- [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)
-- [Version 1.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.2.0/igo2.zip)
-- [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
-- [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
 
 ## Installation (pour déploiement serveur)
 
@@ -89,6 +69,7 @@ Requis:
 
 | IGO2 version | Node version |
 | ------------ | ------------ |
+| >= 20.x      | >= 18.13.0   |
 | >= 16.x      | >= 18.10.0   |
 | > 1.15.x     | >= 16.19.0   |
 | > 1.5.x      | >= 12, <= 16 |
