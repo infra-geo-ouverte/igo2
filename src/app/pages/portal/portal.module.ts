@@ -4,8 +4,7 @@ import {
   IgoDirectionsModule,
   IgoQueryModule,
   IgoSearchModule,
-  provideOptionsApi,
-  provideStyleListOptions
+  provideOptionsApi
 } from '@igo2/geo';
 import { AnalyticsListenerService } from '@igo2/integration';
 
@@ -19,12 +18,6 @@ import { PortalComponent } from './portal.component';
     PortalComponent
   ],
   exports: [PortalComponent],
-  providers: [
-    AnalyticsListenerService,
-    provideOptionsApi(),
-    provideStyleListOptions({
-      path: 'list-style.json'
-    })
-  ]
+  providers: [AnalyticsListenerService, provideOptionsApi()]
 })
 export class PortalModule {}

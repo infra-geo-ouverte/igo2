@@ -3,294 +3,352 @@
   "base": "_base",
   "layers": [
     {
-      "title": "World, MVT mapboxStyle",
-      "zIndex": 10,
-      "id": "mvt-mapboxStyle",
-      "sourceOptions": {
-        "queryable": false,
-        "type": "mvt",
-        "url": "https://ahocevar.com/geoserver/gwc/service/tms/1.0.0/ne:ne_10m_admin_0_countries@EPSG:900913@pbf/{z}/{x}/{-y}.pbf"
-      },
-      "mapboxStyle": {
-        "url": "mapboxStyleExample-vectortile.json",
-        "source": "ahocevar"
-      }
-    },
+      "title": "OL FlatStyle",
+      "id": "dq1",
 
-    {
-      "title": "Line - Geojson - style",
-      "id": "dq-1",
       "sourceOptions": {
         "type": "vector",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=getfeature&typename=ms:liaison_maritime&outputformat=geojson&srsname=EPSG:4326",
+        "url": "https://www.donneesquebec.ca/recherche/dataset/527944ae-893d-41ac-8255-340fb1c2c83b/resource/d1b89d6a-8c31-4831-8895-95dc45120f79/download/borne-incendie.json",
         "queryable": true,
         "queryFormat": "geojson",
-        "queryTitle": "De: ${depart}, À: ${arrivee}",
+        "queryTitle": "MARQUE",
 
         "formatOptions": {
           "dataProjection": "EPSG:4326",
           "featureProjection": "EPSG:3857"
+        }
+      },
+      "style": [
+        {
+          "filter": ["==", ["get", "MARQUE"], "Daigle"],
+          "style": {
+            "text-value": ["concat", ["get", "MARQUE"], ", ", ["get", "ID"]],
+            "text-font": "16px sans-serif",
+            "text-fill-color": "white",
+            "text-stroke-color": "gray",
+            "text-stroke-width": 2
+          }
+        },
+        {
+          "else": true,
+
+          "style": {
+            "text-value": ["concat", ["get", "MARQUE"], ", ", ["get", "ID"]],
+
+            "text-font": "12px sans-serif",
+            "text-fill-color": "blue",
+            "text-stroke-color": "gray",
+            "text-stroke-width": 2
+          }
+        }
+      ]
+    },
+
+    {
+      "title": "Vector Geostyler style",
+      "visible": false,
+      "minResolution": 0,
+      "maxResolution": 4000000,
+      "hoverAttribute": "${nom_unite_}",
+      "sourceOptions": {
+        "type": "wfs",
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq",
+        "queryable": true,
+        "queryTitle": "nom_unite_",
+        "params": {
+          "featureTypes": "bgr_v_centr_servc_geomt_act",
+          "fieldNameGeometry": "geometry",
+          "maxFeatures": 15000,
+          "outputFormat": "geojson"
         }
       },
       "style": {
-        "stroke": {
-          "color": "blue",
-          "lineDash": [10, 5]
-        },
-        "text": {
-          "minScaleDenom": 50000,
-          "maxScaleDenom": 200000,
-          "minResolution": 100,
-          "maxResolution": 400,
-          "attribute": "De: ${depart}, À: ${arrivee}",
-          "text": "MY HARCODED TEXT",
-          "stroke": {
-            "color": "blue",
-            "width": 0.75
-          },
-          "fill": {
-            "color": "black"
-          },
-          "font": "20px sans-serif",
-          "overflow": true,
-          "offsetX": 10,
-          "offsetY": 20,
-          "padding": [2.5, 2.5, 2.5, 2.5]
-        },
-        "width": 5
-      }
-    },
-
-    {
-      "title": "Points - Geojson - hover",
-      "id": "dq0",
-      "hoverStyle": {
-        "attribute": "",
-        "data": [""],
-        "stroke": [""],
-        "width": [5],
-        "label": {
-          "attribute": "MARQUE: ${MARQUE}"
-        }
-      },
-      "sourceOptions": {
-        "type": "vector",
-        "url": "https://www.donneesquebec.ca/recherche/dataset/527944ae-893d-41ac-8255-340fb1c2c83b/resource/d1b89d6a-8c31-4831-8895-95dc45120f79/download/borne-incendie.json",
-        "queryable": true,
-        "queryFormat": "geojson",
-        "queryTitle": "MARQUE",
-
-        "formatOptions": {
-          "dataProjection": "EPSG:4326",
-          "featureProjection": "EPSG:3857"
-        }
-      }
-    },
-
-    {
-      "title": "Points - Geojson - Style by attribute",
-      "id": "dq1",
-      "styleByAttribute": {
-        "type": "circle",
-        "attribute": "MODÈLE",
-        "data": ["^90 porte 4\"$", "^100$", "^400$", null],
-        "color": ["orange", "red", "green", "blue"],
-        "fill": ["orange", "red", "green", "blue"],
-        "hstroke": ["orange", "red", "green", "blue"],
-        "radius": [8, 8, 8, 2],
-        "label": {
-          "attribute": "MARQUE: ${MARQUE}",
-          "minResolution": 0,
-          "maxResolution": 2,
-          "style": {
-            "textAlign": "left",
-            "textBaseline": "top",
-            "font": "12px Calibri,sans-serif",
-            "fill": { "color": "#000" },
-            "backgroundFill": { "color": "rgba(255, 255, 255, 0.5)" },
-            "backgroundStroke": {
-              "color": "rgba(200, 200, 200, 0.75)",
-              "width": 2
+        "type": "Geostyler",
+        "style": {
+          "name": "",
+          "rules": [
+            {
+              "name": "Autre CS",
+              "symbolizers": [
+                {
+                  "kind": "Fill",
+                  "color": "#BFF2006E"
+                },
+                {
+                  "kind": "Line",
+                  "color": "#ae219d",
+                  "width": 5
+                }
+              ],
+              "filter": ["!=", "cod_centr_", "5944"]
             },
-            "stroke": { "color": "#fff", "width": 3 },
-            "overflow": true,
-            "offsetX": 20,
-            "offsetY": 10,
-            "padding": [2.5, 2.5, 2.5, 2.5]
-          }
-        }
-      },
-      "sourceOptions": {
-        "type": "vector",
-        "url": "https://www.donneesquebec.ca/recherche/dataset/527944ae-893d-41ac-8255-340fb1c2c83b/resource/d1b89d6a-8c31-4831-8895-95dc45120f79/download/borne-incendie.json",
-        "queryable": true,
-        "queryFormat": "geojson",
-        "queryTitle": "MARQUE",
-
-        "formatOptions": {
-          "dataProjection": "EPSG:4326",
-          "featureProjection": "EPSG:3857"
+            {
+              "name": "CS de Chibougamau",
+              "symbolizers": [
+                {
+                  "kind": "Line",
+                  "color": "#294dc6",
+                  "width": 5
+                },
+                {
+                  "kind": "Fill",
+                  "color": "#595ff944"
+                }
+              ],
+              "filter": ["==", "cod_centr_", "5944"]
+            }
+          ]
         }
       }
     },
     {
-      "title": "Points -Geojson - Style by attribute - icons",
-      "id": "dq2",
-      "styleByAttribute": {
-        "type": "circle",
-        "attribute": "MODÈLE",
-        "data": ["^90 porte 4\"$", "^100$", "^400$"],
-        "fill": ["orange", "red", "green"],
-        "icon": [
-          "images/styles/fire-hydrant.svg",
-          "images/styles/fire-hydrant.svg",
-          "images/styles/fire-hydrant.svg"
-        ],
-        "anchor": [
-          [0.5, 1],
-          [0.5, 1],
-          [0.5, 1]
-        ],
-        "baseStyle": {
-          "icon": {
-            "src": "images/styles/fire-hydrant.svg",
-            "color": "purple",
-            "anchor": [0.5, 1]
-          }
-        }
-      },
-      "sourceOptions": {
-        "type": "vector",
-        "url": "https://www.donneesquebec.ca/recherche/dataset/527944ae-893d-41ac-8255-340fb1c2c83b/resource/d1b89d6a-8c31-4831-8895-95dc45120f79/download/borne-incendie.json",
-        "queryable": true,
-        "queryFormat": "geojson",
-        "queryTitle": "MARQUE",
-        "formatOptions": {
-          "dataProjection": "EPSG:4326",
-          "featureProjection": "EPSG:3857"
-        }
-      }
-    },
-
-    {
-      "title": "Polygons - MVT - Hover",
+      "title": "Vector Tile Geostyler style",
       "id": "mvtsbap",
       "visible": false,
-      "hoverStyle": {
-        "attribute": "",
-        "data": [""],
-        "stroke": [""],
-        "width": [5, 8, 9],
-        "label": {
-          "attribute": "Centre de service: ${nom_unite_}",
-          "style": {
-            "textAlign": "left",
-            "textBaseline": "top",
-            "font": "12px Calibri,sans-serif",
-            "fill": { "color": "#000" },
-            "backgroundFill": { "color": "rgba(255, 255, 255, 0.5)" },
-            "backgroundStroke": {
-              "color": "rgba(200, 200, 200, 0.75)",
-              "width": 2
-            },
-            "stroke": { "color": "#fff", "width": 3 },
-            "overflow": true,
-            "offsetX": 20,
-            "offsetY": 10,
-            "padding": [2.5, 2.5, 2.5, 2.5]
-          }
-        }
-      },
-      "sourceOptions": {
-        "queryable": true,
-        "queryTitle": "nom_unite_",
-        "featureClass": "feature",
-        "type": "mvt",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_centr_servc_geomt_act&map.imagetype=mvt"
-      }
-    },
-    {
-      "title": "Lines - MVT - Style by attribute + hover",
-      "id": "mvtsbal",
-      "visible": true,
-      "declutter": true,
-      "styleByAttribute": {
-        "type": "regular",
-        "attribute": "des_clasf_",
-        "data": ["Nationale", "Autoroute", ".*"],
-        "stroke": ["rgba(240,0,0)", "rgba(255,235,190)", "black"],
-        "width": [5, 5, 3],
-        "label": {
-          "attribute": "RTSS: ${num_rts} \n Classe fonctionnelle: ${des_clasf_}",
-          "style": {
-            "overflow": false,
-            "placement": "line",
-            "fill": {
-              "color": "#88AE13"
-            },
-            "scale": 1.9,
-            "stroke": {
-              "color": "white",
-              "width": 5
-            }
-          }
-        },
-        "hoverStyle": {
-          "attribute": "des_clasf_",
-          "data": ["Nationale", "Autoroute", ".*"],
-          "stroke": ["yellow", "green", "black"],
-          "width": [5, 8, 9],
-          "label": {
-            "attribute": "RTSS: ${num_rts} \n Classe fonctionnelle: ${des_clasf_}",
-            "style": {
-              "textAlign": "left",
-              "textBaseline": "top",
-              "font": "12px Calibri,sans-serif",
-              "fill": { "color": "#000" },
-              "backgroundFill": { "color": "rgba(255, 255, 255, 0.5)" },
-              "backgroundStroke": {
-                "color": "rgba(200, 200, 200, 0.75)",
-                "width": 2
-              },
-              "stroke": { "color": "#fff", "width": 3 },
-              "overflow": true,
-              "offsetX": 20,
-              "offsetY": 10,
-              "padding": [2.5, 2.5, 2.5, 2.5]
-            }
-          }
-        }
-      },
+      "maxResolution": 15000000,
       "sourceOptions": {
         "queryable": true,
         "queryTitle": "num_rts",
+        "featureClass": "feature",
         "type": "mvt",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_sous_route_res_sup_act&map.imagetype=mvt",
-
-        "geojsontype": "vector",
-        "geojsonurl": "https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=getfeature&typename=ms:bgr_v_sous_route_res_sup_act&outputformat=geojson&srsname=EPSG:4326"
-      }
-    },
-    {
-      "title": "Point - MVT - Hover ",
-      "maxResolution": 10,
-      "id": "mvtsbapt",
-      "visible": true,
-      "declutter": true,
-      "hoverStyle": {
-        "attribute": "",
-        "data": [""],
-        "stroke": [""],
-        "width": [5],
-        "label": {
-          "attribute": "RTSS-Ch: ${etiquette}"
-        }
+        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_v_sous_route_res_sup_act&map.imagetype=mvt"
       },
-      "sourceOptions": {
-        "queryable": true,
-        "queryTitle": "etiquette",
-        "type": "mvt",
-        "url": "https://ws.mapserver.transports.gouv.qc.ca/swtq?mode=tile&tilemode=gmap&tile={x}+{y}+{z}&layers=bgr_reperage_metrique&map.imagetype=mvt"
+      "style": {
+        "type": "Geostyler",
+        "style": {
+          "name": "",
+          "rules": [
+            {
+              "name": "Autoroute MTQ",
+              "symbolizers": [
+                {
+                  "kind": "Line",
+                  "color": "#e20a16",
+                  "width": 5,
+                  "visibility": true,
+                  "join": "butt",
+                  "opacity": 0.5,
+                  "cap": "butt"
+                },
+                {
+                  "kind": "Line",
+                  "color": "#ffd80c",
+                  "width": 3,
+                  "visibility": true,
+                  "cap": "butt",
+                  "join": "butt"
+                }
+              ],
+              "filter": [
+                "&&",
+                ["==", "des_clasf_", "Autoroute"],
+                ["==", "nom_orgns_", "MTQ"]
+              ]
+            },
+            {
+              "name": "Autoroute (Gestion fédérale ou PPP)",
+              "symbolizers": [
+                {
+                  "kind": "Line",
+                  "color": "#e20a16",
+                  "width": 5,
+                  "visibility": true,
+                  "join": "butt",
+                  "opacity": 0.5,
+                  "cap": "butt"
+                },
+                {
+                  "kind": "Line",
+                  "color": "#ffebbe",
+                  "width": 3,
+                  "visibility": true,
+                  "cap": "butt",
+                  "join": "butt"
+                }
+              ],
+              "filter": [
+                "&&",
+                ["==", "des_clasf_", "Autoroute"],
+                ["!=", "nom_orgns_", "MTQ"]
+              ]
+            },
+            {
+              "name": "Nationale (Gestion fédérale ou PPP",
+              "symbolizers": [
+                {
+                  "kind": "Line",
+                  "color": "#ab595d",
+                  "width": 4,
+                  "visibility": true,
+                  "join": "butt",
+                  "opacity": 0.5,
+                  "cap": "butt"
+                },
+                {
+                  "kind": "Line",
+                  "color": "#ed8186",
+                  "width": 2,
+                  "visibility": true,
+                  "cap": "butt",
+                  "join": "butt"
+                }
+              ],
+              "filter": [
+                "&&",
+                ["==", "des_clasf_", "Nationale"],
+                ["!=", "nom_orgns_", "MTQ"]
+              ]
+            },
+            {
+              "name": "Nationale MTQ",
+              "symbolizers": [
+                {
+                  "kind": "Line",
+                  "color": "#62050a",
+                  "width": 4,
+                  "visibility": true,
+                  "join": "butt",
+                  "opacity": 0.5,
+                  "cap": "butt"
+                },
+                {
+                  "kind": "Line",
+                  "color": "#f00000",
+                  "width": 2,
+                  "visibility": true,
+                  "cap": "butt",
+                  "join": "butt"
+                }
+              ],
+              "filter": [
+                "&&",
+                ["==", "des_clasf_", "Nationale"],
+                ["==", "nom_orgns_", "MTQ"]
+              ]
+            },
+            {
+              "name": "Régionale MTQ",
+              "symbolizers": [
+                {
+                  "kind": "Line",
+                  "color": "#000000",
+                  "width": 4,
+                  "visibility": true,
+                  "join": "butt",
+                  "opacity": 0.5,
+                  "cap": "butt"
+                },
+                {
+                  "kind": "Line",
+                  "color": "#e7971d",
+                  "width": 3,
+                  "visibility": true,
+                  "cap": "butt",
+                  "join": "butt"
+                }
+              ],
+              "filter": [
+                "&&",
+                ["==", "des_clasf_", "Régionale"],
+                ["==", "nom_orgns_", "MTQ"]
+              ]
+            },
+            {
+              "name": "Collectrice MTQ",
+              "symbolizers": [
+                {
+                  "kind": "Line",
+                  "color": "#861c24",
+                  "width": 3,
+                  "visibility": true,
+                  "join": "butt",
+                  "opacity": 0.5,
+                  "cap": "butt"
+                },
+                {
+                  "kind": "Line",
+                  "color": "#e7641d",
+                  "width": 2.5,
+                  "visibility": true,
+                  "cap": "butt",
+                  "join": "butt"
+                }
+              ],
+              "filter": [
+                "&&",
+                ["==", "des_clasf_", "Collectrice"],
+                ["==", "nom_orgns_", "MTQ"]
+              ]
+            },
+            {
+              "name": "Accès aux ressources et accès aux localités isolées MTQ",
+              "symbolizers": [
+                {
+                  "kind": "Line",
+                  "color": "#5f5d5c",
+                  "width": 2,
+                  "visibility": true,
+                  "join": "butt",
+                  "opacity": 0.5,
+                  "cap": "butt"
+                },
+                {
+                  "kind": "Line",
+                  "color": "#d2d2d2",
+                  "width": 1,
+                  "visibility": true,
+                  "cap": "butt",
+                  "join": "butt"
+                }
+              ],
+              "filter": [
+                "&&",
+                [
+                  "||",
+                  ["==", "des_clasf_", "Accès aux ressources"],
+                  [
+                    "==",
+                    "des_clasf_",
+                    "Accès aux ressources et aux localités isolées"
+                  ]
+                ],
+                ["==", "nom_orgns_", "MTQ"]
+              ]
+            },
+            {
+              "name": "Local 1-2-3 MTQ",
+              "symbolizers": [
+                {
+                  "kind": "Line",
+                  "color": "#5f5d5c",
+                  "width": 2,
+                  "visibility": true,
+                  "join": "butt",
+                  "opacity": 0.5,
+                  "cap": "butt"
+                },
+                {
+                  "kind": "Line",
+                  "color": "#d2d2d2",
+                  "width": 1,
+                  "visibility": true,
+                  "cap": "butt",
+                  "join": "butt"
+                }
+              ],
+              "filter": [
+                "&&",
+                [
+                  "||",
+                  ["==", "des_clasf_", "Local 1"],
+                  ["==", "des_clasf_", "Local 2"],
+                  ["==", "des_clasf_", "Local 3"]
+                ],
+                ["==", "nom_orgns_", "MTQ"]
+              ]
+            }
+          ]
+        }
       }
     }
   ]

@@ -26,7 +26,12 @@ import { ConfigService, provideConfig } from '@igo2/core/config';
 import { provideTranslation, withAsyncConfig } from '@igo2/core/language';
 import { IgoMessageModule } from '@igo2/core/message';
 import { RouteService } from '@igo2/core/route';
-import { provideOffline } from '@igo2/geo';
+import {
+  provideOffline,
+  provideStyle,
+  withGeostyler,
+  withMapbox
+} from '@igo2/geo';
 import { loadTheme } from '@igo2/utils';
 
 import { first } from 'rxjs';
@@ -72,6 +77,7 @@ export const appConfig: ApplicationConfig = {
     provideOffline(environment.igo.app.offline),
     provideIcon(),
     provideTheme(),
+    provideStyle(withGeostyler(), withMapbox()),
     RouteService,
     { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: TOOLTIP_OPTIONS },
     {

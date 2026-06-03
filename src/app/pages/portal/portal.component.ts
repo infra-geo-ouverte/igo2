@@ -997,7 +997,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public onClearSearch() {
-    this.map.searchResultsOverlay.clear();
     this.searchStore.clear();
     this.searchState.setSelectedResult(undefined);
     this.searchState.deactivateCustomFilterTermStrategy();

@@ -32,7 +32,6 @@ export interface EnvironmentOptions extends AllEnvironmentOptions {
   showRotationButtonIfNoRotation?: boolean;
   offlineButton?: boolean;
   wakeLockApiButton?: boolean;
-  hasFeatureEmphasisOnSelection?: boolean;
   hasSearchPointerSummary?: boolean;
   allowResetSearchSourcesOptions?: boolean;
 }
