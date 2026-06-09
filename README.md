@@ -69,12 +69,16 @@ Requis:
 
 | IGO2 version | Node version |
 | ------------ | ------------ |
-| >= 20.x      | >= 18.13.0   |
+| >= 21.x      | >= 20.19.0   |
+| >= 20.x      | >= 20.19.0   |
 | >= 16.x      | >= 18.10.0   |
 | > 1.15.x     | >= 16.19.0   |
 | > 1.5.x      | >= 12, <= 16 |
 | < 1.5.x      | >= 8, <= 11  |
 | 0.x.x        | >= 6, <= 10  |
+
+Refer to [Angular compatibility matrix](https://angular.dev/reference/versions#actively-supported-versions)
+
 
 ```bash
 $ git clone --depth 1 https://github.com/infra-geo-ouverte/igo2.git
