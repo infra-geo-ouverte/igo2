@@ -522,13 +522,6 @@ hasExpansionPanel
         Ce dernier contient les données tabulaires pour
         les données WFS / Vectorielle / Cluster.
 
-*****************
-hasGeolocateButton
-*****************
-
-    .. line-block::
-
-        Permet d'afficher ou non un bouton de géolocalisation dans l'application.
 
 ***********************
 hasSearchPointerSummary
@@ -683,15 +676,6 @@ Exemples
 Liens
         - `Exemple de mapOverlay <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json>`_
 
-*****************
-menuButtonReverseColor
-*****************
-
-    .. line-block::
-
-        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.useThemeColor
-
-        Permet d'indiquer si les couleurs du bouton de menu sont inversées ou non.
 
 *****************
 menu.button.useThemeColor
@@ -890,23 +874,10 @@ Liens
         - `igo2/blob/master/src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
 
 ********************************
-showMenuButton
-********************************
-
-    .. line-block::
-
-        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.visible
-
-        Permet de définir si le bouton de menu permettant d'accéder
-        aux outils est affiché.
-
-********************************
 menu.button.visible
 ********************************
 
     .. line-block::
-
-        Remplace showMenuButton
 
         Permet de définir si le bouton de menu permettant d'accéder
         aux outils est visible ou non.

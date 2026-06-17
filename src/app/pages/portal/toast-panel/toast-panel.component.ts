@@ -235,7 +235,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     if (this.isResultSelected$.getValue() === true) {
       const localOlFeature = this.format.readFeature(this.selection().data, {
         dataProjection: this.selection().data.projection,
-        featureProjection: this.map().projection
+        featureProjection: this.map().projectionCode
       });
       moveToOlFeatures(
         this.map().viewController,
@@ -322,14 +322,17 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         }
         const selectedOlFeature = featureToOl(
           selectedResult.data,
-          this.map().projection
+          this.map().projectionCode
         );
         const selectedOlFeatureExtent = computeOlFeaturesExtent(
           [selectedOlFeature],
           this.map().viewProjection
         );
         this.isSelectedResultOutOfView$.next(
-          featuresAreOutOfView(this.map().getExtent(), selectedOlFeatureExtent)
+          featuresAreOutOfView(
+            this.map().viewController.getExtent(),
+            selectedOlFeatureExtent
+          )
         );
       });
   }
@@ -400,7 +403,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
             this.selection().data,
             {
               dataProjection: this.selection().data.projection,
-              featureProjection: this.map().projection
+              featureProjection: this.map().projectionCode
             }
           );
           moveToOlFeatures(
@@ -427,7 +430,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           for (const result of this.store.all()) {
             const localOlFeature = this.format.readFeature(result.data, {
               dataProjection: result.data.projection,
-              featureProjection: this.map().projection
+              featureProjection: this.map().projectionCode
             });
             olFeatures.push(localOlFeature);
           }
@@ -761,7 +764,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   zoomTo() {
     const localOlFeature = this.format.readFeature(this.selection().data, {
       dataProjection: this.selection().data.projection,
-      featureProjection: this.map().projection
+      featureProjection: this.map().projectionCode
     });
     moveToOlFeatures(
       this.map().viewController,
