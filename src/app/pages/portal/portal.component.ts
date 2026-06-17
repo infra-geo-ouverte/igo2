@@ -725,7 +725,7 @@ export class PortalComponent implements OnInit, OnDestroy {
           const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
           const feature = featureFromOl(
             ol,
-            featureStoreLayer.map.projection,
+            featureStoreLayer.map.projectionCode,
             featureStoreLayer.ol
           );
 
@@ -1030,7 +1030,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const pixel = [contextmenuPoint.x, contextmenuPoint.y];
 
     const coord = this.map.ol.getCoordinateFromPixel(pixel);
-    const proj = this.map.projection;
+    const proj = this.map.projectionCode;
     return olProj.transform(coord, proj, 'EPSG:4326');
   }
 
@@ -1278,7 +1278,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       const olExtent = olProj.transformExtent(
         extentParams.map((str) => Number(str.trim())),
         'EPSG:4326',
-        this.map.projection
+        this.map.projectionCode
       );
       this.map.viewController.zoomToExtent(
         olExtent as [number, number, number, number]
@@ -1348,7 +1348,7 @@ export class PortalComponent implements OnInit, OnDestroy {
               .map((entity: EntityRecord<SearchResult>) =>
                 new olFormatGeoJSON().readFeature(entity.entity.data, {
                   dataProjection: entity.entity.data.projection,
-                  featureProjection: this.map.projection
+                  featureProjection: this.map.projectionCode
                 })
               )
               .flat();
@@ -1594,7 +1594,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     for (const feat of featuresSelected) {
       const localOlFeature = format.readFeature(feat, {
         dataProjection: feat.projection,
-        featureProjection: this.map.projection
+        featureProjection: this.map.projectionCode
       });
       olFeaturesSelected.push(localOlFeature);
     }
