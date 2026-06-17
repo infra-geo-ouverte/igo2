@@ -4,7 +4,6 @@ import { writeFile } from 'node:fs/promises';
 
 import { resolveRoot } from './core/paths.mts';
 import { executor } from './utils/executor.mts';
-import * as log from './utils/log.mts';
 
 executor('Update version', async () => {
   const [_nodePath, _scriptPath, version] = process.argv;
@@ -30,9 +29,9 @@ async function updateVersionFile(version: string): Promise<void> {
 
   try {
     await writeFile(filePath, body, { flag: 'w' });
-    log.success(`Update version ${version} to the 'version.ts' file`);
+    console.log(`Update version ${version} to the 'version.ts' file`);
   } catch (error: any) {
-    log.error(error);
+    console.error(error);
     process.exit(1);
   }
 }
