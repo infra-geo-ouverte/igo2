@@ -1,6 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "../../",
+    "rootDir": "../",
+    "paths": {
+      "@igo2/*": ["../igo2-lib/packages/*/src/public_api"]
+    }
   }
 }

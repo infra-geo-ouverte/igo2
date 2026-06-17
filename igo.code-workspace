@@ -1,0 +1,114 @@
+{
+  "folders": [
+    {
+      "name": "igo2 (app)",
+      "path": "."
+    },
+    {
+      "name": "igo2-lib (library)",
+      "path": "../igo2-lib"
+    }
+  ],
+  "settings": {
+    "angular.enable-strict-mode-prompt": false,
+    "eslint.useFlatConfig": true,
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/**": true,
+      "**/dist/**": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[scss]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "angular.ng-template",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "prestart: igo2-lib",
+        "type": "shell",
+        "command": "npm run prestart",
+        "options": {
+          "cwd": "${workspaceFolder:igo2-lib (library)}"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "npm: link.start",
+        "type": "shell",
+        "command": "npm run link.start",
+        "options": {
+          "cwd": "${workspaceFolder:igo2 (app)}"
+        },
+        "isBackground": true,
+        "problemMatcher": {
+          "owner": "typescript",
+          "pattern": "$tsc",
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": {
+              "regexp": "(.*?)"
+            },
+            "endsPattern": {
+              "regexp": "bundle generation complete"
+            }
+          }
+        }
+      },
+      {
+        "label": "link.start with prestart",
+        "dependsOn": [
+          "prestart: igo2-lib",
+          "npm: link.start"
+        ],
+        "dependsOrder": "sequence"
+      }
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Start (LINK)",
+        "preLaunchTask": "link.start with prestart",
+        "url": "http://127.0.0.1:4201",
+        "webRoot": "${workspaceFolder:igo2 (app)}",
+        "sourceMaps": true
+      }
+    ]
+  }
+}
