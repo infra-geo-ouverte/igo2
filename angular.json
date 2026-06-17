@@ -129,22 +129,22 @@
                 },
                 {
                   "glob": "**/*",
-                  "input": "../../packages/common/src/assets/",
+                  "input": "../igo2-lib/packages/common/src/assets/",
                   "output": "igo2/common/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "../../dist/core/assets/",
+                  "input": "../igo2-lib/dist/core/assets/",
                   "output": "igo2/core/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "../../packages/geo/src/assets/",
+                  "input": "../igo2-lib/packages/geo/src/assets/",
                   "output": "igo2/geo/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "../../dist/core/locale/",
+                  "input": "../igo2-lib/dist/core/locale/",
                   "output": "locale/libs_locale",
                   "ignore": ["**/*.core.json"]
                 }
