@@ -15,12 +15,12 @@ Entête (header)
     .. line-block::
 
         Entête comprenant un logo, un titre, un bouton pour changer la langue et un bouton pour afficher le lien "Nous joindre".
-        L'entête est optionnelle, elle s'affiche si la section "header" est définie dans la configuration. Si "header" est un objet vide, l'entête s'affichera avec les valeurs par défaut (Logo du gouvernement du Québec, titre IGO2 par défaut). 
+        L'entête est optionnelle, elle s'affiche si la section "header" est définie dans la configuration. Si "header" est un objet vide, l'entête s'affichera avec les valeurs par défaut (Logo du gouvernement du Québec, titre IGO2 par défaut).
         Les options de configuration sont dans src/config.json sous "header" :
             "logo": objet (propriétés optionnelles "src" pour le lien vers l'image, "href" pour le lien au clic, "alt" pour le texte alternatif. Le défaut est le logo du gouvernement du Québec)
             "contactUsRoute": string (Définit un lien externe ou un chemin interne pour le bouton "Nous joindre" et l'affichera)
             "languages": objet (langues disponibles, incluant un tableau "choices" avec "label" et "key", et une valeur "default", et l'affichera)
-            
+
         Les libellés sont définis dans les fichiers de traduction fr.json et en.json sous la propriété "header".
 
 Exemples
@@ -1537,9 +1537,21 @@ Source (base commune)
             - `Nominatim`_ (internationnal)
             - `StoredQueries`_ , WFS 2.0 (Québec)
             - `StoredQueries Reverse`_    , WFS 2.0  - par coordonnées (Québec)
+            - `Workspace`_
 
         Selon votre contexte, les sources de recherche ayant une limitation au Québec, peuvent être utilisées comme exemple afin d'adapter
         votre propre service de recherche.
+
+    .. note::
+
+        À partir de la version 21.x, ``ConfigService`` est optionnel pour toutes les sources de recherche.
+        Les options peuvent être fournies directement via les fonctions Angular (``withIChercheSource(options)``,
+        ``withNominatimSource(options)``, ``withCadastreSource(options)``, ``withILayerSource(options)``,
+        ``withWorkspaceSource(options)``, ``withStoredQueriesSource(options)``,
+        ``withStoredQueriesReverseSource(options)``, ``withIChercheReverseSource(options)``).
+        Pour ``withCoordinatesReverseSource``, les projections peuvent également être passées directement :
+        ``withCoordinatesReverseSource({ options, projections })``.
+        Les options passées directement ont priorité sur celles du fichier ``config.json``.
 
 
 Exemples
@@ -1600,6 +1612,8 @@ Coordonnées
     .. line-block::
 
         Le service de recherches de coordonnées permet de se localiser sous diverses structures de coordonnées.
+        Les projections supportées peuvent être configurées directement via ``withCoordinatesReverseSource({ projections })``,
+        sans nécessiter la propriété ``projections`` dans le ``config.json``.
             - Degré décimal (dd.ddd)
                 - lon, lat (-68.165547, 48.644546)
                 - lat, lon (48.644546, -68.165547)
@@ -2008,6 +2022,35 @@ Liens
     - `Bug Openlayers et les GML 3.2+ en WFS <https://github.com/openlayers/openlayers/pull/6400>`__
     - `Exemple d'appel StoredQueries Reverse <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=lim_adm&long=-71.292469&lat=46.748107&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
     - `Décrire la requête "lim_adm" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=lim_adm>`__
+
+
+Workspace
+================
+
+    .. line-block::
+
+        La source de recherche Workspace permet d'effectuer des recherches textuelles dans les
+        couches de l'espace de travail (workspace) actif de la carte. Les résultats proviennent
+        des entités visibles dans les couches actives.
+
+Exemples
+
+      .. code:: json
+
+            {"workspace": {
+                  "available": true,
+                  "enabled": true,
+                  "order": 1
+            }}
+
+Propriétés
+
+    Seulement les propriétés spécifiques à ce service sont présentées.
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
+
+Liens
+
+    - `Code Workspace <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/workspace.ts>`__
 
 
 ==============================
