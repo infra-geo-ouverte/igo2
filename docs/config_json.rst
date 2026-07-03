@@ -926,6 +926,16 @@ SearchSources
 
        Permet effectuer la personnalisation de la section de recherches à partir de l'ensemble de propriétés définies.
 
+    .. note::
+
+        À partir de la version 21.x, ``ConfigService`` est optionnel pour les sources de recherche.
+        Les options peuvent être fournies directement via les fonctions de configuration
+        (ex. ``withIChercheSource(options)``, ``withNominatimSource(options)``, etc.)
+        sans nécessiter de fichier ``config.json``.
+        Les options passées directement ont priorité sur celles du fichier de configuration.
+        Pour ``withCoordinatesReverseSource``, il est également possible de passer les projections
+        directement : ``withCoordinatesReverseSource({ options, projections })``.
+
 Exemples
 
         .. code:: json
@@ -983,7 +993,7 @@ Propriétés
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-Propriétés de cadastre, nominatim, ilayer, icherche et icherchereverse
+Propriétés de cadastre, coordinatesreverse, icherche, icherchereverse, ilayer, nominatim, storedqueries, storedqueriesreverse et workspace
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 
