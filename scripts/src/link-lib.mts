@@ -88,3 +88,34 @@ for (const pkg of sharedPackages) {
 }
 
 console.log('\nDone. Shared dependencies now resolve to igo2/node_modules.');
+
+// ── SCSS source symlinks ──────────────────────────────────────────────────────
+// The @igo2/* packages expose their SCSS via package.json exports conditions
+// (e.g. "./*": { "sass": "./src/style/*.scss" }). TypeScript path aliases in
+// tsconfig.link.json handle TS imports, but Sass resolves against the physical
+// file system, so it still reads from node_modules even in development-link
+// mode. Symlinking node_modules/@igo2/<pkg>/src → igo2-lib/packages/<pkg>/src
+// makes Sass pick up live source changes without rebuilding the library.
+const igoPackages = ['common', 'context', 'core', 'geo', 'integration'];
+
+for (const pkg of igoPackages) {
+  const nmSrc = resolve(appRoot, 'node_modules', '@igo2', pkg, 'src');
+  const libSrc = resolve(libRoot, 'packages', pkg, 'src');
+
+  if (!existsSync(libSrc)) {
+    console.warn(`SKIP SCSS: igo2-lib/packages/${pkg}/src not found`);
+    continue;
+  }
+
+  let nmSrcStat = null;
+  try { nmSrcStat = lstatSync(nmSrc); } catch { /* doesn't exist */ }
+  if (nmSrcStat) {
+    rmSync(nmSrc, { recursive: true, force: true });
+  }
+
+  const type = process.platform === 'win32' ? 'junction' : 'dir';
+  symlinkSync(libSrc, nmSrc, type);
+  console.log(`SCSS LINKED: @igo2/${pkg}/src → igo2-lib/packages/${pkg}/src`);
+}
+
+console.log('\nSCSS source directories now resolve to igo2-lib/packages/*/src.');
