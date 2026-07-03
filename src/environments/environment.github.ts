@@ -18,6 +18,7 @@ export const environment: AppEnvironmentOptions = {
     },
     directionsSources: {
       osrm: {
+        id: 'osrmId',
         name: 'OSRM Québec',
         baseUrl: 'https://geoegl.msp.gouv.qc.ca/apis/itineraire/route/v1/',
         profiles: [
