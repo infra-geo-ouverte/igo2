@@ -108,7 +108,11 @@ for (const pkg of igoPackages) {
   }
 
   let nmSrcStat = null;
-  try { nmSrcStat = lstatSync(nmSrc); } catch { /* doesn't exist */ }
+  try {
+    nmSrcStat = lstatSync(nmSrc);
+  } catch {
+    /* doesn't exist */
+  }
   if (nmSrcStat) {
     rmSync(nmSrc, { recursive: true, force: true });
   }
@@ -118,4 +122,6 @@ for (const pkg of igoPackages) {
   console.log(`SCSS LINKED: @igo2/${pkg}/src → igo2-lib/packages/${pkg}/src`);
 }
 
-console.log('\nSCSS source directories now resolve to igo2-lib/packages/*/src.');
+console.log(
+  '\nSCSS source directories now resolve to igo2-lib/packages/*/src.'
+);
