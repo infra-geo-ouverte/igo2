@@ -8,6 +8,10 @@
   <app-header [config]="header" [lang]="lang()" />
 }
 
+@if (lang() === 'en') {
+  <sdg-charter-banner containerClass="igo-charter-banner" />
+}
+
 <app-portal igoStopDropPropagation />
 
 @if (hasFooter) {

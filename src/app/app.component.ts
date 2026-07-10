@@ -14,6 +14,7 @@ import { ConfigService } from '@igo2/core/config';
 import { IgoLanguageModule, LanguageService } from '@igo2/core/language';
 import { AppOptions } from '@igo2/integration';
 import { IHeaderConfig } from '@igo2/sdg-common';
+import { CharterBannerComponent } from '@igo2/sdg-common';
 import { DomUtils } from '@igo2/utils';
 
 import { delay, first } from 'rxjs';
@@ -34,7 +35,8 @@ import { PwaService } from './services/pwa.service';
     AuthFormComponent,
     PortalComponent,
     HeaderComponent,
-    IgoLanguageModule
+    IgoLanguageModule,
+    CharterBannerComponent
   ]
 })
 export class AppComponent implements OnInit {
