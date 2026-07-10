@@ -147,6 +147,11 @@
                   "input": "../igo2-lib/dist/core/locale/",
                   "output": "locale/libs_locale",
                   "ignore": ["**/*.core.json"]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "../igo2-lib/dist/core/theming/prebuilt-themes/",
+                  "output": "igo2/core/theming/prebuilt-themes/"
                 }
               ]
             },
