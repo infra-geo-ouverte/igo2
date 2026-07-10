@@ -74,6 +74,9 @@
 
     {
       "title": "Vector dataSource",
+      "workspace": {
+        "searchIndexEnabled": true
+      },
       "visible": true,
       "sourceOptions": {
         "queryable": true,
