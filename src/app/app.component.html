@@ -8,7 +8,7 @@
   <app-header [config]="header" [lang]="lang()" />
 }
 
-@if (lang() === 'en') {
+@if (charterBannerEnabled && lang() === 'en') {
   <sdg-charter-banner containerClass="igo-charter-banner" />
 }
 

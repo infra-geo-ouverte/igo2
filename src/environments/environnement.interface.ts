@@ -18,6 +18,7 @@ export interface EnvironmentOptions extends AllEnvironmentOptions {
   sidenav?: {
     languageToggleButton: boolean;
   };
+  charterBanner?: boolean;
   description?: string;
   favoriteContext4NonAuthenticated?: boolean;
   mapOverlay?: MapOverlay[];

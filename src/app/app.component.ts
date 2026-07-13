@@ -55,11 +55,16 @@ export class AppComponent implements OnInit {
   header: IHeaderConfig;
   hasFooter: boolean;
   private promptEvent: any;
+  charterBannerEnabled: boolean;
 
   constructor() {
     this.authConfig = this.configService.getConfig('auth', {});
     this.header = this.configService.getConfig('header');
     this.hasFooter = this.configService.getConfig('hasFooter', false);
+    this.charterBannerEnabled = this.configService.getConfig(
+      'charterBanner',
+      false
+    );
 
     this.readTitleConfig();
     this.readDescriptionConfig();
