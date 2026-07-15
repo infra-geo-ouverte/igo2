@@ -433,7 +433,7 @@ export const environment: AppEnvironmentOptions = {
     },
     directionsSources: {
       osrm: {
-        id: 'osrmId',
+        id: 'osrm-quebec',
         name: 'OSRM Québec',
         baseUrl: '/apis/itineraire/route/v1/',
         profiles: [

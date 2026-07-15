@@ -53,11 +53,11 @@ const sharedPackages = [
   '@angular/material',
   '@angular/platform-browser',
   '@angular/router',
-  'rxjs',
-  'tslib',
+  '@ngx-translate/core',
   'ol',
   'proj4',
-  '@ngx-translate'
+  'rxjs',
+  'tslib'
 ];
 
 if (!existsSync(resolve(libRoot, 'node_modules'))) {

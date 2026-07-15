@@ -24,7 +24,6 @@ import { provideIcon } from '@igo2/common/icon';
 import { IgoCoreModule } from '@igo2/core';
 import { ConfigService, provideConfig } from '@igo2/core/config';
 import { provideTranslation, withAsyncConfig } from '@igo2/core/language';
-import { IgoMessageModule } from '@igo2/core/message';
 import { RouteService } from '@igo2/core/route';
 import {
   provideOffline,
@@ -54,7 +53,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       BrowserModule,
       IgoCoreModule,
-      IgoMessageModule,
       PortalModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: environment.igo.app.pwa.enabled,
