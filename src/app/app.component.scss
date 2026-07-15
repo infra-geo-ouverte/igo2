@@ -11,8 +11,11 @@ igo-spinner {
   z-index: 100;
 }
 
-sdg-charter-banner {
-  padding-left: 16px;
+::ng-deep {
+  .igo-charter-banner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 /*** Message-center ***/
