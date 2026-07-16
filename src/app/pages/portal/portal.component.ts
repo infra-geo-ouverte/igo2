@@ -651,9 +651,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   workspaceVisibility(): boolean {
     const wks = this.selectedWorkspace$.value as
-      | WfsWorkspace
-      | FeatureWorkspace
-      | EditionWorkspace;
+      WfsWorkspace | FeatureWorkspace | EditionWorkspace;
     if (wks.inResolutionRange$.value) {
       if (wks.entityStore.empty$.value && !wks.layer.visible) {
         this.workspaceNotAvailableMessage = 'workspace.disabled.visible';
