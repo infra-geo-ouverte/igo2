@@ -3,6 +3,12 @@ description: 'Angular-specific coding standards and best practices'
 applyTo: '**/*.ts, **/*.html, **/*.scss, **/*.css'
 ---
 
+## TypeScript Best Practices
+
+- Use strict type checking
+- Prefer type inference when the type is obvious
+- Avoid the `any` type; use `unknown` when type is uncertain
+
 ## Angular Best Practices
 
 - Always use standalone components over NgModules
