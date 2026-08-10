@@ -42,6 +42,7 @@ import {
   IgoMap,
   LayerService,
   Overlay,
+  OverlayService,
   PropertyTypeDetectorService,
   SearchResult,
   SearchResultsComponent,
@@ -94,6 +95,7 @@ interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
 })
 export class ToastPanelComponent implements OnInit, OnDestroy {
   mediaService = inject(MediaService);
+  overlayService = inject(OverlayService);
   languageService = inject(LanguageService);
   private storageState = inject(StorageState);
   private queryState = inject(QueryState);
@@ -338,17 +340,17 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.queryResultsOverlayAll = new Overlay(
+    this.queryResultsOverlayAll = this.overlayService.create(
       this.map(),
       this.queryState.queryOverlayStyle?.base ??
         styleVariant(this.map().viewController)
     );
-    this.queryResultsOverlayFocused = new Overlay(
+    this.queryResultsOverlayFocused = this.overlayService.create(
       this.map(),
       this.queryState.queryOverlayStyle?.focus ??
         styleVariant(this.map().viewController, 'focus')
     );
-    this.queryResultsOverlaySelected = new Overlay(
+    this.queryResultsOverlaySelected = this.overlayService.create(
       this.map(),
       this.queryState.queryOverlayStyle?.selection ??
         styleVariant(this.map().viewController, 'selection')
