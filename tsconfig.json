@@ -15,7 +15,7 @@
     "sourceMap": true,
     "types": ["node", "vitest/globals"],
     "paths": {
-      "@igo2/*": ["./node_modules/@igo2/*", "../../packages/*/src/public_api"]
+      "@igo2/*": ["./node_modules/@igo2/*"]
     }
   },
   "exclude": ["./dist", "./scripts", "./e2e/**/*"]

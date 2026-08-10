@@ -45,7 +45,8 @@
     "[json]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnSave": true
-    }
+    },
+    "js/ts.tsdk.path": "igo2 (app)/node_modules/typescript/lib"
   },
   "extensions": {
     "recommendations": [

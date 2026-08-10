@@ -1,4 +1,11 @@
-import { existsSync, lstatSync, rmSync, symlinkSync } from 'fs';
+import {
+  existsSync,
+  lstatSync,
+  mkdirSync,
+  readdirSync,
+  rmSync,
+  symlinkSync
+} from 'fs';
 import { resolve } from 'path';
 
 /**
@@ -6,9 +13,9 @@ import { resolve } from 'path';
  *
  * WHY THIS SCRIPT EXISTS
  * ──────────────────────
- * When developing igo2 against the local source of igo2-lib (using TypeScript
- * path mappings in tsconfig.link.json), the Angular compiler compiles files
- * from two separate project trees. Each tree has its own node_modules, so
+ * When developing igo2 against local igo2-lib packages, the Angular compiler
+ * follows package symlinks into a separate project tree. Each tree has its own
+ * node_modules, so
  * packages like @angular/core exist in BOTH:
  *
  *   igo2/node_modules/@angular/core      ← used by the app
@@ -20,9 +27,10 @@ import { resolve } from 'path';
  *   NG3004: Unable to import directive (symbol not exported from expected path)
  *   TS2345: Argument of type 'InputSignal' is not assignable to 'Signal'
  *
- * This script replaces the packages in igo2-lib/node_modules with symlinks
- * that point to igo2/node_modules, so both trees resolve to the same
- * physical files.
+ * This script links igo2/node_modules/@igo2 packages to igo2-lib/packages and
+ * links shared dependencies in igo2-lib/node_modules back to igo2/node_modules.
+ * The app therefore compiles library TypeScript source while both trees use
+ * the same physical dependency files.
  *
  * HOW TO USE
  * ──────────
@@ -43,6 +51,24 @@ import { resolve } from 'path';
 const appRoot = resolve(import.meta.dirname, '..', '..');
 const libRoot = resolve(appRoot, '..', 'igo2-lib');
 
+function removeIfExists(path: string) {
+  try {
+    lstatSync(path);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return;
+    }
+    throw error;
+  }
+  rmSync(path, { recursive: true, force: true });
+}
+
+function linkDir(targetPath: string, linkPath: string) {
+  removeIfExists(linkPath);
+  const type = process.platform === 'win32' ? 'junction' : 'dir';
+  symlinkSync(targetPath, linkPath, type);
+}
+
 const sharedPackages = [
   '@angular/animations',
   '@angular/cdk',
@@ -53,11 +79,12 @@ const sharedPackages = [
   '@angular/material',
   '@angular/platform-browser',
   '@angular/router',
-  '@ngx-translate/core',
+  'rxjs',
+  'tslib',
   'ol',
   'proj4',
-  'rxjs',
-  'tslib'
+  '@ngx-translate/core',
+  '@ngx-translate/http-loader'
 ];
 
 if (!existsSync(resolve(libRoot, 'node_modules'))) {
@@ -65,6 +92,19 @@ if (!existsSync(resolve(libRoot, 'node_modules'))) {
     `ERROR: ${libRoot}/node_modules does not exist. Run "npm install" in igo2-lib first.`
   );
   process.exit(1);
+}
+
+const libTranslateScope = resolve(libRoot, 'node_modules', '@ngx-translate');
+try {
+  if (lstatSync(libTranslateScope).isSymbolicLink()) {
+    rmSync(libTranslateScope, { force: true });
+    mkdirSync(libTranslateScope, { recursive: true });
+  }
+} catch (error) {
+  if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+    throw error;
+  }
+  mkdirSync(libTranslateScope, { recursive: true });
 }
 
 for (const pkg of sharedPackages) {
@@ -76,52 +116,26 @@ for (const pkg of sharedPackages) {
     continue;
   }
 
-  // Remove existing (directory or symlink)
-  if (existsSync(libPkg) || lstatSync(libPkg).isSymbolicLink?.()) {
-    rmSync(libPkg, { recursive: true, force: true });
-  }
-
-  // Create symlink (junction on Windows for cross-platform compat)
-  const type = process.platform === 'win32' ? 'junction' : 'dir';
-  symlinkSync(appPkg, libPkg, type);
+  // Replace whatever is there so both trees resolve the exact same files.
+  linkDir(appPkg, libPkg);
   console.log(`LINKED: ${pkg}`);
 }
 
 console.log('\nDone. Shared dependencies now resolve to igo2/node_modules.');
 
-// ── SCSS source symlinks ──────────────────────────────────────────────────────
-// The @igo2/* packages expose their SCSS via package.json exports conditions
-// (e.g. "./*": { "sass": "./src/style/*.scss" }). TypeScript path aliases in
-// tsconfig.link.json handle TS imports, but Sass resolves against the physical
-// file system, so it still reads from node_modules even in development-link
-// mode. Symlinking node_modules/@igo2/<pkg>/src → igo2-lib/packages/<pkg>/src
-// makes Sass pick up live source changes without rebuilding the library.
-const igoPackages = ['common', 'context', 'core', 'geo', 'integration'];
+const localPackagesRoot = resolve(libRoot, 'packages');
+const appIgoRoot = resolve(appRoot, 'node_modules', '@igo2');
+const localPackages = readdirSync(localPackagesRoot, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name);
 
-for (const pkg of igoPackages) {
-  const nmSrc = resolve(appRoot, 'node_modules', '@igo2', pkg, 'src');
-  const libSrc = resolve(libRoot, 'packages', pkg, 'src');
-
-  if (!existsSync(libSrc)) {
-    console.warn(`SKIP SCSS: igo2-lib/packages/${pkg}/src not found`);
-    continue;
-  }
-
-  let nmSrcStat = null;
-  try {
-    nmSrcStat = lstatSync(nmSrc);
-  } catch {
-    /* doesn't exist */
-  }
-  if (nmSrcStat) {
-    rmSync(nmSrc, { recursive: true, force: true });
-  }
-
-  const type = process.platform === 'win32' ? 'junction' : 'dir';
-  symlinkSync(libSrc, nmSrc, type);
-  console.log(`SCSS LINKED: @igo2/${pkg}/src → igo2-lib/packages/${pkg}/src`);
+for (const pkg of localPackages) {
+  const appPkg = resolve(appIgoRoot, pkg);
+  const libPkg = resolve(localPackagesRoot, pkg);
+  linkDir(libPkg, appPkg);
+  console.log(`PACKAGE LINKED: @igo2/${pkg} → igo2-lib/packages/${pkg}`);
 }
 
 console.log(
-  '\nSCSS source directories now resolve to igo2-lib/packages/*/src.'
+  '\nApp TypeScript and Sass now resolve @igo2/* from igo2-lib/packages/*.'
 );
