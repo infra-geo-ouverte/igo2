@@ -5,7 +5,7 @@ import { IHeaderConfig } from '@igo2/sdg-common';
 import { MapOverlay } from '../app/pages/portal/map-overlay';
 
 export interface AppEnvironmentOptions extends IntegrationEnvironmentOptions {
-  igo: EnvironmentOptions;
+  igo: EnvironmentOptions & { offline?: boolean };
 }
 
 export interface EnvironmentOptions extends AllEnvironmentOptions {

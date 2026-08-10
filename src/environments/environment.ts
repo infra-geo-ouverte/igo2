@@ -17,11 +17,9 @@ export const environment: AppEnvironmentOptions = {
       },
       pwa: {
         enabled: false
-      },
-      offline: {
-        enable: true
       }
     },
+    offline: true,
     allowResetSearchSourcesOptions: true,
     auth: {
       url: '/apis/users',
