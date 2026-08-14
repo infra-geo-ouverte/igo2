@@ -116,7 +116,7 @@
       "visible": false,
       "id": "vector2",
       "preload": {
-        "bypassVisible": true
+        "bypass": "visibility"
       },
       "sourceOptions": {
         "type": "vector",

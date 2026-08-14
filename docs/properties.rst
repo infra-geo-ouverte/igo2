@@ -664,8 +664,7 @@ Exemples
               "id": "vector1",
                   "preload": {
                       "comment": "Charger la donnée dans la source même si le layer est non visible ou hors échelle d'affichage.",
-                      "bypassVisible": true,
-                      "bypassResolution": true
+                      "bypass": "all"
                   },
               "sourceOptions": {
                 "type": "vector",
