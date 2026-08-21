@@ -1,0 +1,3 @@
+﻿Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+key,String,Identifiant de la langue.,,
+label,String,Libellé affiché pour la langue.,,
