@@ -3170,3 +3170,32 @@ Propriétés :code:`choices`
 Liens
 
     - `Sélecteur de langue dans l’entête <https://github.com/infra-geo-ouverte/igo2/blob/next/src/app/components/header/header.component.ts>`__
+
+
+Bandeau de langue
+=================
+Le bandeau de langue :code:`charterBanner` permet d'afficher un message
+informatif relatif à la Charte de la langue française.
+
+.. figure:: images/charter-banner.png
+    :alt: Bandeau de langue affiché dans l'application
+    
+    Exemple de bandeau de langue
+
+Exemple de configuration:
+-------------------------
+
+.. code-block:: json
+
+    {
+        "charterBanner": true
+    }
+
+.. note::
+
+   Le :code:`charterBanner` est destiné aux organismes publics qui offrent
+   du contenu dans une autre langue que le français. Il permet d'afficher
+   le bandeau requis dans le haut de la page d'accueil en anglais, lorsque
+   celui-ci est applicable.
+
+   Pour plus d'informations, veuillez consulter la `Charte de la langue française <https://www.quebec.ca/gouvernement/politiques-orientations/langue-francaise/modernisation-charte-langue-francaise>`__.
