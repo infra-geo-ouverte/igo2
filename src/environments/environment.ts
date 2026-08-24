@@ -19,7 +19,7 @@ export const environment: AppEnvironmentOptions = {
         enabled: false
       },
       offline: {
-        enable: true
+        enabled: true
       }
     },
     allowResetSearchSourcesOptions: true,
