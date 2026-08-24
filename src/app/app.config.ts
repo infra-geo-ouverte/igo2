@@ -25,12 +25,8 @@ import { IgoCoreModule } from '@igo2/core';
 import { ConfigService, provideConfig } from '@igo2/core/config';
 import { provideTranslation, withAsyncConfig } from '@igo2/core/language';
 import { RouteService } from '@igo2/core/route';
-import {
-  provideOffline,
-  provideStyle,
-  withGeostyler,
-  withMapbox
-} from '@igo2/geo';
+import { provideStyle, withGeostyler, withMapbox } from '@igo2/geo';
+import { provideOffline, withIndexedDb } from '@igo2/geo/offline';
 import { loadTheme } from '@igo2/utils';
 
 import { first } from 'rxjs';
@@ -72,7 +68,7 @@ export const appConfig: ApplicationConfig = {
       withMicrosoftSupport('b2c'),
       withUserIgo()
     ),
-    provideOffline(environment.igo.app.offline),
+    ...(environment.igo.app.offline ? [provideOffline(withIndexedDb())] : []),
     provideIcon(),
     provideTheme(),
     provideStyle(withGeostyler(), withMapbox()),

@@ -64,11 +64,9 @@ import { RouteService } from '@igo2/core/route';
 import { StorageService } from '@igo2/core/storage';
 import {
   CapabilitiesService,
-  ConfigFileToGeoDBService,
   DataSourceService,
   DropGeoFileDirective,
   EditionWorkspace,
-  EditionWorkspaceService,
   FEATURE,
   Feature,
   FeatureMotion,
@@ -261,14 +259,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   dialogWindow = inject(MatDialog);
   private queryService = inject(QueryService);
   private storageService = inject(StorageService);
-  private editionWorkspaceService = inject(EditionWorkspaceService);
   private directionState = inject(DirectionState);
   private shareMapService = inject(ShareMapService);
   private routeService = inject(RouteService);
-  private configFileToGeoDBService = inject(ConfigFileToGeoDBService, {
-    optional: true
-  });
-
   public appConfig: EnvironmentOptions;
   public toastPanelOffsetX$ = new BehaviorSubject<string>(undefined);
   public sidenavOpened$ = new BehaviorSubject(false);
@@ -603,15 +596,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     ])
       .pipe(debounceTime(50))
       .subscribe(() => this.computeToastPanelOffsetX());
-
-    if (
-      this.appConfig.app.offline?.enable &&
-      this.appConfig.importExport?.configFileToGeoDBService
-    ) {
-      this.configFileToGeoDBService?.load(
-        this.appConfig.importExport.configFileToGeoDBService
-      );
-    }
   }
 
   private handleAppConfigs() {
