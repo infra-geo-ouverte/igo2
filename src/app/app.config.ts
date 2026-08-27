@@ -25,7 +25,12 @@ import { IgoCoreModule } from '@igo2/core';
 import { ConfigService, provideConfig } from '@igo2/core/config';
 import { provideTranslation, withAsyncConfig } from '@igo2/core/language';
 import { RouteService } from '@igo2/core/route';
-import { provideStyle, withGeostyler, withMapbox } from '@igo2/geo';
+import {
+  provideProjection,
+  provideStyle,
+  withGeostyler,
+  withMapbox
+} from '@igo2/geo';
 import { provideOffline, withIndexedDb } from '@igo2/geo/offline';
 import { loadTheme } from '@igo2/utils';
 
@@ -71,6 +76,7 @@ export const appConfig: ApplicationConfig = {
     ...(environment.igo.app.offline ? [provideOffline(withIndexedDb())] : []),
     provideIcon(),
     provideTheme(),
+    provideProjection(),
     provideStyle(withGeostyler(), withMapbox()),
     RouteService,
     { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: TOOLTIP_OPTIONS },
