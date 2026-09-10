@@ -722,12 +722,16 @@ OptionsApi
     (p. ex. configurations de filtres). Retourne un objet JSON venant se fusionner avec les propriété de la couche.
     La configuration faite au pilotage a priorité à celles fournies par l'API d'options.
 
+    La propriété ``enabled`` (facultative, ``true`` par défaut) permet de désactiver l'API d'options sans retirer sa configuration.
+    Lorsqu'elle est désactivée, les couches ayant ``optionsFromApi: true`` continuent de se charger normalement, sans leurs options additionnelles.
+
 Exemple
 
         .. code:: json
 
               "optionsApi": {
-                  "url": "/apis/igo2/layers/options"
+                  "url": "/apis/igo2/layers/options",
+                  "enabled": true
               }
 
 
