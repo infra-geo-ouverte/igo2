@@ -14,7 +14,11 @@ module.exports = {
             path: 'dist/igo2/igo2-dist.zip',
             label: 'Distributions files'
           }
-        ]
+        ],
+        successComment: false,
+        failComment: false,
+        releasedLabels: false,
+        addReleases: false
       }
     ],
     [
