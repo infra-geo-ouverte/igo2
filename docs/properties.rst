@@ -3061,3 +3061,140 @@ Propriétés
 Liens
 
     - `context-share-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/context/context-share-tool>`__
+
+
+********************
+Sélecteur de langue 
+********************
+
+    .. line-block::
+
+        Permet à l’utilisateur de changer la langue de l’application. Le sélecteur de langue peut être configuré dans le menu latéral (sidenav) ou dans l’entête (header).
+
+
+Dans le menu latéral (sidenav)
+==============================
+
+
+Exemple
+
+        .. code:: json
+
+            {
+          "sidenav": {
+            "languageToggleButton": true
+                }
+            }
+
+Propriétés
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/properties/languageSelectorSidenav.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+Noms des langues
+----------------
+
+Les noms des langues sont définis dans les fichiers de traduction :file:`fr.json` et :file:`en.json`.
+
+Exemple dans :file:`fr.json` et :file:`en.json` :
+
+.. code-block:: json
+
+    {
+        "language": {
+            "french": "Français",
+            "english": "English"
+        }
+    }
+
+.. note::
+
+   Dans cet exemple, les noms des langues sont affichés dans leur langue respective,
+   indépendamment de la langue actuellement sélectionnée dans l'application.
+   Ainsi, « Français » et « English » sont utilisés dans les deux
+   fichiers de traduction. Toutefois, c'est possible de les paramétrer différemment.
+
+Liens
+
+    - `Sélecteur de langue dans le ménu latéral <https://github.com/infra-geo-ouverte/igo2/blob/next/src/app/pages/portal/sidenav/sidenav.component.ts>`__
+
+Dans l'entête (header)
+======================
+
+Exemple
+
+    .. code:: json
+
+       {
+            "header": {
+                "languages": {
+                    "default": "fr",
+                    "choices": [
+                        {
+                        "key": "fr",
+                        "label": "Français"
+                        },
+                        {
+                        "key": "en",
+                        "label": "English"
+                        }
+                    ]
+                }
+            }
+        }
+
+Propriétés :code:`languages`
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/properties/languageHeader.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+
+Propriétés :code:`choices`
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/properties/languageHeaderChoices.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+Liens
+
+    - `Sélecteur de langue dans l’entête <https://github.com/infra-geo-ouverte/igo2/blob/next/src/app/components/header/header.component.ts>`__
+
+
+Bandeau de langue
+=================
+Le bandeau de langue :code:`charterBanner` permet d'afficher un message
+informatif relatif à la Charte de la langue française.
+
+.. figure:: images/charter-banner.png
+    :alt: Bandeau de langue affiché dans l'application
+    
+    Exemple de bandeau de langue
+
+Exemple de configuration:
+-------------------------
+
+.. code-block:: json
+
+    {
+        "charterBanner": true
+    }
+
+.. note::
+
+   Le :code:`charterBanner` est destiné aux organismes publics qui offrent
+   du contenu dans une autre langue que le français. Il permet d'afficher
+   le bandeau requis dans le haut de la page d'accueil en anglais, lorsque
+   celui-ci est applicable.
+
+   Pour plus d'informations, veuillez consulter la `Charte de la langue française <https://www.quebec.ca/gouvernement/politiques-orientations/langue-francaise/modernisation-charte-langue-francaise>`__.
