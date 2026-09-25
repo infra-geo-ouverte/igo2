@@ -57,7 +57,7 @@ import {
   UserButtonComponent
 } from '@igo2/context';
 import { ConfigService } from '@igo2/core/config';
-import { LanguageService } from '@igo2/core/language';
+import { IgoLanguageModule, LanguageService } from '@igo2/core/language';
 import { Media, MediaOrientation, MediaService } from '@igo2/core/media';
 import { MessageService } from '@igo2/core/message';
 import { RouteService } from '@igo2/core/route';
@@ -132,14 +132,7 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 import * as olProj from 'ol/proj';
 
-import { TranslateModule } from '@ngx-translate/core';
-import {
-  BehaviorSubject,
-  Subject,
-  Subscription,
-  combineLatest,
-  of
-} from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, combineLatest } from 'rxjs';
 import {
   concatMap,
   debounceTime,
@@ -211,7 +204,7 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     SearchPointerSummaryDirective,
     ToastPanelComponent,
     ToastPanelForExpansionComponent,
-    TranslateModule,
+    IgoLanguageModule,
     UserButtonComponent,
     WORKSPACE_DIRECTIVES,
     WorkspaceSelectorDirective,
@@ -684,7 +677,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   entitySelectChange(result: { added: Feature[] }) {
-    const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
 
     if (
@@ -729,14 +721,7 @@ export class PortalComponent implements OnInit, OnDestroy {
         }
       });
 
-      const research = {
-        request: of(results),
-        reverse: false,
-        source: baseQuerySearchSource
-      };
-      research.request.subscribe((queryResults: SearchResult<Feature>[]) => {
-        this.queryStore.load(queryResults);
-      });
+      this.queryStore.load(results);
     }
   }
 
@@ -776,10 +761,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.toastPanelForExpansionOpened = true;
   }
 
-  onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
-    const baseQuerySearchSource = this.getQuerySearchSource();
+  onMapQuery(event: { features: Feature[]; event: MapBrowserEvent }) {
     const querySearchSourceArray: QuerySearchSource[] = [];
-    const results = event.features.map((feature: Feature) => {
+    const results = event.features.map((feature) => {
       let querySearchSource = querySearchSourceArray.find(
         (s) => s.title === feature.meta.sourceTitle
       );
@@ -800,14 +784,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       return featureToSearchResult(feature, querySearchSource);
     });
     const filteredResults = results.filter((x) => x !== undefined);
-    const research = {
-      request: of(filteredResults),
-      reverse: false,
-      source: baseQuerySearchSource
-    };
-    research.request.subscribe((queryResults: SearchResult<Feature>[]) => {
-      this.queryStore.load(queryResults);
-    });
+    this.queryStore.load(filteredResults);
   }
 
   onSearchTermChange(term?: string) {
