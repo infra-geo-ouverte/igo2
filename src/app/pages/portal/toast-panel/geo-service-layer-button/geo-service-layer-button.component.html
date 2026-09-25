@@ -1,0 +1,24 @@
+@if (hasGeoService()) {
+  <button
+    mat-icon-button
+    igoStopPropagation
+    tooltip-position="below"
+    disabledInteractive
+    [disabled]="loading()"
+    [attr.aria-label]="
+      (layerAdded() ? 'toastPanel.removeLayer' : 'toastPanel.addLayer')
+        | translate
+    "
+    [matTooltip]="
+      (layerAdded() ? 'toastPanel.removeLayer' : 'toastPanel.addLayer')
+        | translate
+    "
+    matTooltipShowDelay="500"
+    [color]="layerAdded() ? 'warn' : ''"
+    (click)="toggleLayer()"
+  >
+    <mat-icon aria-hidden="true">
+      {{ loading() ? 'hourglass_empty' : layerAdded() ? 'delete' : 'add' }}
+    </mat-icon>
+  </button>
+}
