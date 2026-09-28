@@ -688,38 +688,34 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     }
     if (result && result.added) {
-      const results = result.added.map((res) => {
-        if (
-          res &&
-          res.ol &&
-          res.ol.getProperties()._featureStore.layer &&
-          res.ol.getProperties()._featureStore.layer.visible
-        ) {
+      const results = result.added
+        .map((res) => {
           const ol = res.ol as olFeature<OlGeometry>;
-          const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
-          const feature = featureFromOl(
-            ol,
-            featureStoreLayer.map.projectionCode,
-            featureStoreLayer.ol
-          );
+          const layer = ol.getProperties()._featureStore?.layer;
+          if (!layer?.visible) {
+            return;
+          }
+          const feature = featureFromOl(ol, layer.map.projectionCode, layer.ol);
 
-          feature.meta.alias =
-            this.queryService.getAllowedFieldsAndAlias(featureStoreLayer);
-          feature.meta.title =
-            this.queryService.getQueryTitle(feature, featureStoreLayer) ||
-            feature.meta.title;
+          if (feature.meta) {
+            feature.meta.alias =
+              this.queryService.getAllowedFieldsAndAlias(layer);
+            feature.meta.title =
+              this.queryService.getQueryTitle(feature, layer) ||
+              feature.meta?.title;
+          }
           let querySearchSource = querySearchSourceArray.find(
-            (s) => s.title === feature.meta.sourceTitle
+            (s) => s.title === feature.meta?.sourceTitle
           );
           if (!querySearchSource) {
             querySearchSource = new QuerySearchSource({
-              title: feature.meta.sourceTitle
+              title: feature.meta?.sourceTitle
             });
             querySearchSourceArray.push(querySearchSource);
           }
           return featureToSearchResult(feature, querySearchSource);
-        }
-      });
+        })
+        .filter(Boolean) as SearchResult<Feature<Record<string, unknown>>>[];
 
       this.queryStore.load(results);
     }
