@@ -207,20 +207,21 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const map = this.map();
+    const viewController = map.viewController;
     this.queryResultsOverlayAll = this.overlayService.create(
-      this.map(),
-      this.queryState.queryOverlayStyle?.base ??
-        styleVariant(this.map().viewController)
+      map,
+      this.queryState.queryOverlayStyle?.base ?? styleVariant(viewController)
     );
     this.queryResultsOverlayFocused = this.overlayService.create(
-      this.map(),
+      map,
       this.queryState.queryOverlayStyle?.focus ??
-        styleVariant(this.map().viewController, 'focus')
+        styleVariant(viewController, 'focus')
     );
     this.queryResultsOverlaySelected = this.overlayService.create(
-      this.map(),
+      map,
       this.queryState.queryOverlayStyle?.selection ??
-        styleVariant(this.map().viewController, 'selection')
+        styleVariant(map.viewController, 'selection')
     );
 
     this.store()
@@ -228,7 +229,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       .subscribe((entities) => {
         this.handleShowAllResults(entities);
 
-        if (this.selection() && !entities.includes(this.selection())) {
+        const selection = this.selection();
+        if (selection && !entities.includes(selection)) {
           this.unselectResult();
         }
 
@@ -514,14 +516,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   private getActionLoadConfig(): Action[] {
+    const { instant: translateInstant } = this.languageService.translate;
     return [
       {
         id: 'list',
-        title: this.languageService.translate.instant('toastPanel.backToList'),
+        title: translateInstant('toastPanel.backToList'),
         icon: 'list',
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.listButton'
-        ),
+        tooltip: translateInstant('toastPanel.listButton'),
         display: () => {
           return this.isResultSelected$;
         },
@@ -531,65 +532,49 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       },
       {
         id: 'zoomFeature',
-        title: this.languageService.translate.instant(
-          'toastPanel.zoomOnFeature'
-        ),
+        title: translateInstant('toastPanel.zoomOnFeature'),
         icon: 'zoom_in',
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.zoomOnFeatureTooltip'
-        ),
+        tooltip: translateInstant('toastPanel.zoomOnFeatureTooltip'),
         display: () => {
           return this.isResultSelected$;
         },
         handler: () => {
+          const { projectionCode, viewController } = this.map();
           const localOlFeature = this.format.readFeature(
             this.selection().data,
             {
               dataProjection: this.selection().data.projection,
-              featureProjection: this.map().projectionCode
+              featureProjection: projectionCode
             }
           );
-          moveToOlFeatures(
-            this.map().viewController,
-            localOlFeature,
-            FeatureMotion.Zoom
-          );
+          moveToOlFeatures(viewController, localOlFeature, FeatureMotion.Zoom);
         }
       },
       {
         id: 'zoomResults',
-        title: this.languageService.translate.instant(
-          'toastPanel.zoomOnFeatures'
-        ),
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.zoomOnFeaturesTooltip'
-        ),
+        title: translateInstant('toastPanel.zoomOnFeatures'),
+        tooltip: translateInstant('toastPanel.zoomOnFeaturesTooltip'),
         icon: 'frame_inspect',
         availability: () => {
           return this.multiple;
         },
         handler: () => {
+          const { projectionCode, viewController } = this.map();
           const olFeatures = [];
           for (const result of this.store().all()) {
             const localOlFeature = this.format.readFeature(result.data, {
               dataProjection: result.data.projection,
-              featureProjection: this.map().projectionCode
+              featureProjection: projectionCode
             });
             olFeatures.push(localOlFeature);
           }
-          moveToOlFeatures(
-            this.map().viewController,
-            olFeatures,
-            FeatureMotion.Zoom
-          );
+          moveToOlFeatures(viewController, olFeatures, FeatureMotion.Zoom);
         }
       },
       {
         id: 'zoomAuto',
-        title: this.languageService.translate.instant('toastPanel.zoomAuto'),
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.zoomAutoTooltip'
-        ),
+        title: translateInstant('toastPanel.zoomAuto'),
+        tooltip: translateInstant('toastPanel.zoomAutoTooltip'),
         checkbox: true,
         checkCondition: this.zoomAuto(),
         handler: () => {
@@ -601,10 +586,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       },
       {
         id: 'fullExtent',
-        title: this.languageService.translate.instant('toastPanel.fullExtent'),
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.fullExtentTooltip'
-        ),
+        title: translateInstant('toastPanel.fullExtent'),
+        tooltip: translateInstant('toastPanel.fullExtentTooltip'),
         icon: 'open_in_full',
         display: () => {
           return this.fullExtent$.pipe(map((v) => !v && !this.isDesktop()));
@@ -615,12 +598,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       },
       {
         id: 'standardExtent',
-        title: this.languageService.translate.instant(
-          'toastPanel.standardExtent'
-        ),
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.standardExtentTooltip'
-        ),
+        title: translateInstant('toastPanel.standardExtent'),
+        tooltip: translateInstant('toastPanel.standardExtentTooltip'),
         icon: 'close_fullscreen',
         display: () => {
           return this.fullExtent$.pipe(map((v) => v && !this.isDesktop()));

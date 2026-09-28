@@ -132,7 +132,7 @@
         }
         @if (!selection) {
           <igo-search-results
-            [map]="map"
+            [map]="$any(map)"
             [store]="store()"
             [showIcons]="true"
             [withZoomButton]="withZoomButton"
