@@ -15,7 +15,8 @@
 <ng-template #toast>
   @let selection = this.selection();
 
-  @if (store.entities$ | async) {
+  @let results = this.results();
+  @if (results) {
     <igo-panel
       [ngClass]="getClassPanel()"
       [id]="setHeighPanelTabsMode()"
@@ -60,27 +61,11 @@
           >
         </button>
       }
-      @if (hasGeoService()) {
-        <button
-          mat-icon-button
-          igoStopPropagation
-          panelLeftButton
-          tooltip-position="below"
-          [matTooltip]="
-            ((potententialLayerisAdded$ | async)
-              ? 'toastPanel.removeLayer'
-              : 'toastPanel.addLayer'
-            ) | translate
-          "
-          matTooltipShowDelay="500"
-          [color]="(potententialLayerisAdded$ | async) ? 'warn' : ''"
-          (click)="handleLayer()"
-        >
-          <mat-icon>
-            {{ (potententialLayerisAdded$ | async) ? 'delete' : 'add' }}
-          </mat-icon>
-        </button>
-      }
+      <app-geo-service-layer-button
+        panelLeftButton
+        [selection]="selection"
+        [map]="$any(map)"
+      />
       @let hasMoreThanOne = results.length > 1;
       @if (hasMoreThanOne && selection) {
         <button
@@ -110,7 +95,7 @@
           <mat-icon>chevron_right</mat-icon>
         </button>
       }
-      @if (opened && isDesktop()) {
+      @if (opened() && isDesktop()) {
         <button
           mat-icon-button
           igoStopPropagation
@@ -147,8 +132,8 @@
         }
         @if (!selection) {
           <igo-search-results
-            [map]="map"
-            [store]="store"
+            [map]="$any(map)"
+            [store]="store()"
             [showIcons]="true"
             [withZoomButton]="withZoomButton"
             (resultFocus)="onResultFocus($event)"

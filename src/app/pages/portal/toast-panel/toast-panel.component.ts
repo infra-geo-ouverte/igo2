@@ -1,16 +1,23 @@
 import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
+  DestroyRef,
   OnDestroy,
   OnInit,
+  effect,
   inject,
   input,
+  model,
   output,
   signal
 } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import {
+  takeUntilDestroyed,
+  toObservable,
+  toSignal
+} from '@angular/core/rxjs-interop';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,33 +45,26 @@ import {
   Feature,
   FeatureDetailsComponent,
   FeatureMotion,
-  GeoServiceDefinition,
   IgoMap,
-  LayerService,
   Overlay,
   OverlayService,
-  PropertyTypeDetectorService,
   SearchResult,
   SearchResultsComponent,
   computeOlFeaturesExtent,
   featureToOl,
   featuresAreOutOfView,
-  generateIdFromSourceOptions,
   moveToOlFeatures,
   styleVariant
 } from '@igo2/geo';
 import { QueryState, StorageState, WorkspaceState } from '@igo2/integration';
-import { ObjectUtils } from '@igo2/utils';
 
 import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
-import { debounceTime, map, skipWhile } from 'rxjs/operators';
+import { debounceTime, map, skipWhile, switchMap } from 'rxjs/operators';
 
-interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
-  propertyForUrl: string;
-}
+import { GeoServiceLayerButtonComponent } from './geo-service-layer-button/geo-service-layer-button.component';
 
 @Component({
   selector: 'app-toast-panel',
@@ -75,6 +75,7 @@ interface ExtendedGeoServiceDefinition extends GeoServiceDefinition {
     ActionbarComponent,
     AsyncPipe,
     FeatureDetailsComponent,
+    GeoServiceLayerButtonComponent,
     MatBadgeModule,
     MatButtonModule,
     MatIconModule,
@@ -97,12 +98,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   mediaService = inject(MediaService);
   overlayService = inject(OverlayService);
   languageService = inject(LanguageService);
+  destroyRef = inject(DestroyRef);
+  cdr = inject(ChangeDetectorRef);
   private storageState = inject(StorageState);
   private queryState = inject(QueryState);
   private workspaceState = inject(WorkspaceState);
   private configService = inject(ConfigService);
-  private propertyTypeDetectorService = inject(PropertyTypeDetectorService);
-  private layerService = inject(LayerService);
 
   static SWIPE_ACTION = {
     RIGHT: 'swiperight',
@@ -119,44 +120,11 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   readonly map = input<IgoMap>();
 
-  @Input()
-  get store(): EntityStore<SearchResult<Feature>> {
-    return this._store;
-  }
-  set store(value: EntityStore<SearchResult<Feature>>) {
-    this._store = value;
-    this.store.entities$.subscribe(() => {
-      this.unselectResult();
-    });
-  }
-  private _store: EntityStore<SearchResult<Feature>>;
+  store = input.required<EntityStore<SearchResult<Feature>>>();
 
-  @Input()
-  get opened(): boolean {
-    return this._opened;
-  }
-  set opened(value: boolean) {
-    if (value !== !this._opened) {
-      return;
-    }
-    this._opened = value;
-    this.storageService.set('toastOpened', value, StorageScope.SESSION);
-    this.openedChange.emit(value);
-  }
-  private _opened = true;
+  opened = model(this.getDefaultOpened());
 
-  get zoomAuto(): boolean {
-    return this._zoomAuto;
-  }
-  set zoomAuto(value) {
-    if (value !== !this._zoomAuto) {
-      return;
-    }
-    this._zoomAuto = value;
-    this.zoomAuto$.next(value);
-    this.storageService.set('zoomAuto', value);
-  }
-  private _zoomAuto = false;
+  zoomAuto = signal(!!this.storageService.get('zoomAuto'));
 
   // To allow the toast to use much larger extent on the map
   get fullExtent(): boolean {
@@ -172,9 +140,6 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     this.storageService.set('fullExtent', value);
   }
   private _fullExtent = false;
-
-  public potententialLayerToAdd$ = new BehaviorSubject<any>(undefined);
-  public potententialLayerisAdded$ = new BehaviorSubject<boolean>(false);
 
   public fullExtent$ = new BehaviorSubject<boolean>(this.fullExtent);
   public isHtmlDisplay = false;
@@ -202,12 +167,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   private focusedResult$ = new BehaviorSubject<SearchResult<Feature>>(
     undefined
   );
-  private abstractFocusedOrSelectedResult: Feature;
 
   public withZoomButton = true;
   zoomAuto$ = new BehaviorSubject<boolean>(false);
-
-  readonly openedChange = output<boolean>();
 
   readonly fullExtentEvent = output<boolean>();
   readonly windowHtmlDisplayEvent = output<boolean>();
@@ -215,12 +177,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   selection = signal<SearchResult<Feature>>(undefined);
   selection$ = toObservable(this.selection);
 
-  get results(): SearchResult<Feature>[] {
-    return this.store.all();
-  }
+  readonly results = toSignal(
+    toObservable(this.store).pipe(switchMap((store) => store.entities$)),
+    { initialValue: [] }
+  );
 
   get multiple(): Observable<boolean> {
-    this.results.length
+    this.results().length
       ? this.multiple$.next(true)
       : this.multiple$.next(false);
     return this.multiple$;
@@ -228,9 +191,79 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   constructor() {
     this.tabsMode = this.configService.getConfig('queryTabs', false);
-    this.opened = this.storageService.get('toastOpened') as boolean;
-    this.zoomAuto = this.storageService.get('zoomAuto') as boolean;
     this.fullExtent = this.storageService.get('fullExtent') as boolean;
+
+    effect(() => {
+      this.storageService.set(
+        'toastOpened',
+        this.opened(),
+        StorageScope.SESSION
+      );
+    });
+
+    effect(() => {
+      this.storageService.set('zoomAuto', this.zoomAuto());
+    });
+  }
+
+  ngOnInit() {
+    const map = this.map();
+    const viewController = map.viewController;
+    this.queryResultsOverlayAll = this.overlayService.create(
+      map,
+      this.queryState.queryOverlayStyle?.base ?? styleVariant(viewController)
+    );
+    this.queryResultsOverlayFocused = this.overlayService.create(
+      map,
+      this.queryState.queryOverlayStyle?.focus ??
+        styleVariant(viewController, 'focus')
+    );
+    this.queryResultsOverlaySelected = this.overlayService.create(
+      map,
+      this.queryState.queryOverlayStyle?.selection ??
+        styleVariant(map.viewController, 'selection')
+    );
+
+    this.store()
+      .entities$.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((entities) => {
+        this.handleShowAllResults(entities);
+
+        const selection = this.selection();
+        if (selection && !entities.includes(selection)) {
+          this.unselectResult();
+        }
+
+        this.cdr.markForCheck();
+      });
+
+    this.monitorResultOutOfView();
+
+    this.storageChange$$ = this.storageService.storageChange$
+      .pipe(
+        skipWhile(
+          (storageChange: StorageServiceEvent) =>
+            storageChange.key !== 'zoomAuto'
+        ),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((change) => {
+        this.zoomAuto.set(!!change.currentValue as boolean);
+      });
+
+    this.actionStore.load(this.getActionLoadConfig());
+  }
+
+  ngOnDestroy(): void {
+    if (this.resultOrResolution$$) {
+      this.resultOrResolution$$.unsubscribe();
+    }
+    if (this.isSelectedResultOutOfView$$) {
+      this.isSelectedResultOutOfView$$.unsubscribe();
+    }
+    if (this.storageChange$$) {
+      this.storageChange$$.unsubscribe();
+    }
   }
 
   onZoomHandler() {
@@ -248,40 +281,36 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   getHostDisplayStyle() {
-    return this.results.length ? 'visible' : 'hidden';
+    return this.results().length ? 'visible' : 'hidden';
   }
 
   getClassPanel() {
+    const opened = this.opened();
     return {
       'app-toast-panel-opened':
-        this.opened && !this.fullExtent && !this.isHtmlDisplay,
+        opened && !this.fullExtent && !this.isHtmlDisplay,
       'app-full-toast-panel-opened':
-        this.opened && this.fullExtent && !this.isHtmlDisplay,
+        opened && this.fullExtent && !this.isHtmlDisplay,
 
       'app-toast-panel-html':
-        this.opened &&
-        !this.fullExtent &&
-        this.selection() &&
-        this.isHtmlDisplay,
+        opened && !this.fullExtent && this.selection() && this.isHtmlDisplay,
 
       'app-toast-panel-html-large':
-        this.opened &&
-        this.fullExtent &&
-        this.selection() &&
-        this.isHtmlDisplay,
+        opened && this.fullExtent && this.selection() && this.isHtmlDisplay,
 
       'app-toast-panel-collapsed':
-        !this.opened && !this.fullExtent && !this.isHtmlDisplay,
+        !opened && !this.fullExtent && !this.isHtmlDisplay,
       'app-full-toast-panel-collapsed':
-        !this.opened && this.fullExtent && !this.isHtmlDisplay,
-      'app-toast-panel-html-collapsed': !this.opened && this.isHtmlDisplay
+        !opened && this.fullExtent && !this.isHtmlDisplay,
+      'app-toast-panel-html-collapsed': !opened && this.isHtmlDisplay
     };
   }
 
   // if query tabs mode activated
   // fix Heigh of igo-panel
   setHeighPanelTabsMode() {
-    if (this.selection() || !this.opened) {
+    const opened = this.opened();
+    if (this.selection() || !opened) {
       return '';
     }
 
@@ -289,7 +318,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       return 'app-toast-panel-opened-max-height';
     } else if (
       this.tabsMode &&
-      this.opened &&
+      opened &&
       this.fullExtent &&
       !this.isHtmlDisplay
     ) {
@@ -297,17 +326,124 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     }
   }
 
+  getTitle(result: SearchResult) {
+    return getEntityTitle(result);
+  }
+
+  onResultFocus(result: SearchResult<Feature>) {
+    if (this.store().state.get(result).selected) {
+      this.queryResultsOverlayFocused.clear();
+    } else {
+      this.addResultToOverlay(
+        result,
+        this.queryResultsOverlayFocused,
+        FeatureMotion.None
+      );
+    }
+  }
+
+  onResultUnfocus(result: SearchResult<Feature>) {
+    this.focusedResult$.next(undefined);
+    if (!this.store().state.get(result).selected) {
+      this.queryResultsOverlayFocused.clear();
+    }
+  }
+
+  onResultSelect(result: SearchResult<Feature>) {
+    this.store().state.update(
+      result,
+      {
+        focused: true,
+        selected: true
+      },
+      true
+    );
+    this.selection.set(result);
+    if (result.data.properties && result.data.properties.target === 'iframe') {
+      this.setHtmlDisplay(true);
+    } else {
+      this.setHtmlDisplay(false);
+    }
+
+    this.queryResultsOverlayFocused.clear();
+    this.queryResultsOverlaySelected.clear();
+    this.addResultToOverlay(
+      result,
+      this.queryResultsOverlaySelected,
+      this.zoomAuto() ? FeatureMotion.Default : FeatureMotion.None
+    );
+    this.isResultSelected$.next(true);
+  }
+
+  unselectResult() {
+    this.selection.set(undefined);
+    this.isResultSelected$.next(false);
+    this.setHtmlDisplay(false);
+    this.store().state.clear();
+  }
+
+  clear() {
+    this.handleWksSelection();
+    this.store().state.clear();
+    this.store().clear();
+    this.unselectResult();
+    this.setHtmlDisplay(false);
+  }
+
+  isMobile(): boolean {
+    return this.mediaService.getMedia() === Media.Mobile;
+  }
+  isDesktop(): boolean {
+    return this.mediaService.isDesktop();
+  }
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.keyCode === 37) {
+      this.previousResult();
+    } else if (event.keyCode === 39) {
+      this.nextResult();
+    }
+  }
+
+  previousResult() {
+    const selection = this.selection();
+    if (!selection) {
+      return;
+    }
+    const results = this.results();
+    const previousResult = results[results.indexOf(selection) - 1];
+    if (previousResult) {
+      this.onResultSelect(previousResult);
+    }
+  }
+
+  nextResult() {
+    const selection = this.selection();
+    if (!selection) {
+      return;
+    }
+    const results = this.results();
+    const nextResult = results[results.indexOf(selection) + 1];
+    if (nextResult) {
+      this.onResultSelect(nextResult);
+    }
+  }
+
   private handleShowAllResults(searchResults: SearchResult<Feature>[]) {
+    this.clearOverlays();
+
     const rec = searchResults
       .filter((sr) => sr.meta.dataType === FEATURE)
       .map((sr) => sr.data as Feature);
     if (rec?.length) {
       this.queryResultsOverlayAll.setFeatures(rec, FeatureMotion.None);
-    } else {
-      this.queryResultsOverlayFocused.clear();
-      this.queryResultsOverlaySelected.clear();
-      this.queryResultsOverlayAll.clear();
     }
+  }
+
+  private clearOverlays() {
+    this.queryResultsOverlayAll.clear();
+    this.queryResultsOverlayFocused.clear();
+    this.queryResultsOverlaySelected.clear();
   }
 
   private monitorResultOutOfView() {
@@ -315,7 +451,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       this.map().viewController.state$,
       this.selection$
     ])
-      .pipe(debounceTime(100))
+      .pipe(debounceTime(100), takeUntilDestroyed(this.destroyRef))
       .subscribe((bunch) => {
         const selectedResult = bunch[1];
         if (!selectedResult) {
@@ -339,225 +475,20 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnInit() {
-    this.queryResultsOverlayAll = this.overlayService.create(
-      this.map(),
-      this.queryState.queryOverlayStyle?.base ??
-        styleVariant(this.map().viewController)
-    );
-    this.queryResultsOverlayFocused = this.overlayService.create(
-      this.map(),
-      this.queryState.queryOverlayStyle?.focus ??
-        styleVariant(this.map().viewController, 'focus')
-    );
-    this.queryResultsOverlaySelected = this.overlayService.create(
-      this.map(),
-      this.queryState.queryOverlayStyle?.selection ??
-        styleVariant(this.map().viewController, 'selection')
-    );
-
-    this.store.entities$.subscribe((entities) => {
-      this.initialized = true;
-      this.handleShowAllResults(entities);
-    });
-    this.monitorResultOutOfView();
-
-    this.storageChange$$ = this.storageService.storageChange$
-      .pipe(
-        skipWhile(
-          (storageChange: StorageServiceEvent) =>
-            storageChange.key !== 'zoomAuto'
-        )
-      )
-      .subscribe((change) => {
-        this.zoomAuto = change.currentValue;
-      });
-
-    this.actionStore.load([
-      {
-        id: 'list',
-        title: this.languageService.translate.instant('toastPanel.backToList'),
-        icon: 'list',
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.listButton'
-        ),
-        display: () => {
-          return this.isResultSelected$;
-        },
-        handler: () => {
-          this.unselectResult();
-        }
-      },
-      {
-        id: 'zoomFeature',
-        title: this.languageService.translate.instant(
-          'toastPanel.zoomOnFeature'
-        ),
-        icon: 'zoom_in',
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.zoomOnFeatureTooltip'
-        ),
-        display: () => {
-          return this.isResultSelected$;
-        },
-        handler: () => {
-          const localOlFeature = this.format.readFeature(
-            this.selection().data,
-            {
-              dataProjection: this.selection().data.projection,
-              featureProjection: this.map().projectionCode
-            }
-          );
-          moveToOlFeatures(
-            this.map().viewController,
-            localOlFeature,
-            FeatureMotion.Zoom
-          );
-        }
-      },
-      {
-        id: 'zoomResults',
-        title: this.languageService.translate.instant(
-          'toastPanel.zoomOnFeatures'
-        ),
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.zoomOnFeaturesTooltip'
-        ),
-        icon: 'frame_inspect',
-        availability: () => {
-          return this.multiple;
-        },
-        handler: () => {
-          const olFeatures = [];
-          for (const result of this.store.all()) {
-            const localOlFeature = this.format.readFeature(result.data, {
-              dataProjection: result.data.projection,
-              featureProjection: this.map().projectionCode
-            });
-            olFeatures.push(localOlFeature);
-          }
-          moveToOlFeatures(
-            this.map().viewController,
-            olFeatures,
-            FeatureMotion.Zoom
-          );
-        }
-      },
-      {
-        id: 'zoomAuto',
-        title: this.languageService.translate.instant('toastPanel.zoomAuto'),
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.zoomAutoTooltip'
-        ),
-        checkbox: true,
-        checkCondition: this.zoomAuto$,
-        handler: () => {
-          this.zoomAuto = !this.zoomAuto;
-          if (this.zoomAuto && this.isResultSelected$.value === true) {
-            this.onResultSelect(this.selection());
-          }
-        }
-      },
-      {
-        id: 'fullExtent',
-        title: this.languageService.translate.instant('toastPanel.fullExtent'),
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.fullExtentTooltip'
-        ),
-        icon: 'open_in_full',
-        display: () => {
-          return this.fullExtent$.pipe(map((v) => !v && !this.isDesktop()));
-        },
-        handler: () => {
-          this.fullExtent = true;
-        }
-      },
-      {
-        id: 'standardExtent',
-        title: this.languageService.translate.instant(
-          'toastPanel.standardExtent'
-        ),
-        tooltip: this.languageService.translate.instant(
-          'toastPanel.standardExtentTooltip'
-        ),
-        icon: 'close_fullscreen',
-        display: () => {
-          return this.fullExtent$.pipe(map((v) => v && !this.isDesktop()));
-        },
-        handler: () => {
-          this.fullExtent = false;
-        }
-      }
-    ]);
-    this.computeFeatureGeoServiceStatus();
-    combineLatest([
-      this.selection$,
-      this.map().layerController.layers$
-    ]).subscribe(() => {
-      this.computeFeatureGeoServiceStatus();
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.resultOrResolution$$) {
-      this.resultOrResolution$$.unsubscribe();
-    }
-    if (this.isSelectedResultOutOfView$$) {
-      this.isSelectedResultOutOfView$$.unsubscribe();
-    }
-    if (this.storageChange$$) {
-      this.storageChange$$.unsubscribe();
-    }
-  }
-
-  getTitle(result: SearchResult) {
-    return getEntityTitle(result);
-  }
-
-  onResultFocus(result: SearchResult<Feature>) {
-    if (this.store.state.get(result).selected) {
-      this.queryResultsOverlayFocused.clear();
-    } else {
-      this.addResultToOverlay(
-        result,
-        this.queryResultsOverlayFocused,
-        FeatureMotion.None
+  private handleWksSelection() {
+    const entities = this.store().entities$.getValue();
+    const layersTitle = [...new Set(entities.map((e) => e.source.title))];
+    const workspaces = this.workspaceState.store.entities$.getValue();
+    if (workspaces.length) {
+      const wksToHandle = workspaces.filter((wks) =>
+        layersTitle.includes(wks.title)
       );
+      wksToHandle.map((ws) => {
+        ws.entityStore.state.updateMany(ws.entityStore.view.all(), {
+          selected: false
+        });
+      });
     }
-  }
-
-  onResultUnfocus(result: SearchResult<Feature>) {
-    this.focusedResult$.next(undefined);
-    if (!this.store.state.get(result).selected) {
-      this.queryResultsOverlayFocused.clear();
-    }
-  }
-
-  onResultSelect(result: SearchResult<Feature>) {
-    this.store.state.update(
-      result,
-      {
-        focused: true,
-        selected: true
-      },
-      true
-    );
-    this.selection.set(result);
-    if (result.data.properties && result.data.properties.target === 'iframe') {
-      this.setHtmlDisplay(true);
-    } else {
-      this.setHtmlDisplay(false);
-    }
-
-    this.queryResultsOverlayFocused.clear();
-    this.queryResultsOverlaySelected.clear();
-    this.addResultToOverlay(
-      result,
-      this.queryResultsOverlaySelected,
-      this.zoomAuto ? FeatureMotion.Default : FeatureMotion.None
-    );
-    this.isResultSelected$.next(true);
-    this.initialized = false;
   }
 
   /**
@@ -582,185 +513,106 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     overlay.setFeatures([feature], motion);
   }
 
-  unselectResult() {
-    this.selection.set(undefined);
-    this.isResultSelected$.next(false);
-    this.setHtmlDisplay(false);
-    this.store.state.clear();
-  }
-
-  handleWksSelection() {
-    const entities = this.store.entities$.getValue();
-    const layersTitle = [...new Set(entities.map((e) => e.source.title))];
-    const workspaces = this.workspaceState.store.entities$.getValue();
-    if (workspaces.length) {
-      const wksToHandle = workspaces.filter((wks) =>
-        layersTitle.includes(wks.title)
-      );
-      wksToHandle.map((ws) => {
-        ws.entityStore.state.updateMany(ws.entityStore.view.all(), {
-          selected: false
-        });
-      });
-    }
-  }
-
-  clear() {
-    this.handleWksSelection();
-    this.store.clear();
-    this.unselectResult();
-    this.setHtmlDisplay(false);
-  }
-
-  isMobile(): boolean {
-    return this.mediaService.getMedia() === Media.Mobile;
-  }
-  isDesktop(): boolean {
-    return this.mediaService.isDesktop();
-  }
-
-  handleKeyboardEvent(event) {
-    if (event.keyCode === 37) {
-      this.previousResult();
-    } else if (event.keyCode === 39) {
-      this.nextResult();
-    }
-  }
-
-  previousResult() {
-    if (!this.selection()) {
-      return;
-    }
-    let i = this.results.indexOf(this.selection());
-    const previousResult = this.results[--i];
-    if (previousResult) {
-      this.onResultSelect(previousResult);
-    }
-  }
-
-  nextResult() {
-    if (!this.selection()) {
-      return;
-    }
-    let i = this.results.indexOf(this.selection());
-    const nextResult = this.results[++i];
-    if (nextResult) {
-      this.onResultSelect(nextResult);
-    }
-  }
-
-  hasGeoService() {
-    return this.getGeoServices().length;
-  }
-
-  private getGeoServices(): ExtendedGeoServiceDefinition[] {
-    const resultSelected = this.selection();
-    if (!resultSelected) {
-      return [];
-    }
-    const hasGeoServiceProperties: ExtendedGeoServiceDefinition[] = [];
-    const keys = Object.keys(resultSelected.data.properties);
-    Object.entries(resultSelected.data.properties).forEach((entry) => {
-      const [key, value] = entry;
-      const geoService = this.propertyTypeDetectorService.getGeoService(
-        value,
-        keys
-      );
-      const extendedGeoService: ExtendedGeoServiceDefinition = Object.assign(
-        {},
-        geoService,
-        { propertyForUrl: undefined }
-      );
-      if (geoService) {
-        extendedGeoService.propertyForUrl = key;
-        hasGeoServiceProperties.push(extendedGeoService);
-      }
-    });
-    return hasGeoServiceProperties;
-  }
-
-  handleLayer() {
-    const layersIds = this.map().layerController.all.map((layer) => layer.id);
-    let potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
-    if (!potententialLayerToAdd) {
-      this.computeFeatureGeoServiceStatus();
-    }
-    potententialLayerToAdd = this.potententialLayerToAdd$.getValue();
-
-    if (layersIds.includes(potententialLayerToAdd.id)) {
-      const layerToRemove = this.map().layerController.getById(
-        potententialLayerToAdd.id
-      );
-      if (layerToRemove) {
-        this.map().layerController.remove(layerToRemove);
-        this.potententialLayerisAdded$.next(false);
-      }
-    } else {
-      this.layerService
-        .createAsyncLayer(potententialLayerToAdd.sourceOptions)
-        .subscribe((layer) => {
-          this.map().layersAddedByClick$.next([layer]);
-          this.map().layerController.add(layer);
-          this.potententialLayerisAdded$.next(true);
-        });
-    }
-  }
-
-  private computeFeatureGeoServiceStatus() {
-    const resultSelected = this.selection();
-    if (!resultSelected) {
-      return;
-    }
-    const geoServices = this.getGeoServices();
-    if (geoServices.length) {
-      const firstGeoService = geoServices[0];
-      const so = this.computeSourceOptionsFromProperties(
-        resultSelected.data.properties,
-        firstGeoService
-      );
-      const soId = generateIdFromSourceOptions(so.sourceOptions);
-      this.potententialLayerToAdd$.next({ id: soId, sourceOptions: so });
-      const layersIds = this.map().layerController.all.map((l) => l.id);
-      this.potententialLayerisAdded$.next(
-        layersIds.includes(soId) ? true : false
-      );
-    }
-  }
-
-  private computeSourceOptionsFromProperties(
-    properties: unknown,
-    geoService: ExtendedGeoServiceDefinition
-  ) {
-    const keys = Object.keys(properties);
-    const propertiesForLayerName = keys.filter((p) =>
-      geoService.propertiesForLayerName.includes(p)
-    );
-    // providing the the first matching regex;
-    const layerName = properties[propertiesForLayerName[0]];
-    const url = properties[geoService.propertyForUrl];
-    let appliedLayerName = layerName;
-    let arcgisLayerName = undefined;
-    if (
-      ['arcgisrest', 'imagearcgisrest', 'tilearcgisrest'].includes(
-        geoService.type
-      )
-    ) {
-      arcgisLayerName = layerName;
-      appliedLayerName = undefined;
-    }
-    const so = ObjectUtils.removeUndefined({
-      sourceOptions: {
-        type: geoService.type || 'wms',
-        url,
-        optionsFromCapabilities: true,
-        optionsFromApi: true,
-        params: {
-          LAYERS: appliedLayerName,
-          LAYER: arcgisLayerName
+  private getActionLoadConfig(): Action[] {
+    const translateInstant = (key: string) =>
+      this.languageService.translate.instant(key);
+    return [
+      {
+        id: 'list',
+        title: translateInstant('toastPanel.backToList'),
+        icon: 'list',
+        tooltip: translateInstant('toastPanel.listButton'),
+        display: () => {
+          return this.isResultSelected$;
+        },
+        handler: () => {
+          this.unselectResult();
+        }
+      },
+      {
+        id: 'zoomFeature',
+        title: translateInstant('toastPanel.zoomOnFeature'),
+        icon: 'zoom_in',
+        tooltip: translateInstant('toastPanel.zoomOnFeatureTooltip'),
+        display: () => {
+          return this.isResultSelected$;
+        },
+        handler: () => {
+          const { projectionCode, viewController } = this.map();
+          const localOlFeature = this.format.readFeature(
+            this.selection().data,
+            {
+              dataProjection: this.selection().data.projection,
+              featureProjection: projectionCode
+            }
+          );
+          moveToOlFeatures(viewController, localOlFeature, FeatureMotion.Zoom);
+        }
+      },
+      {
+        id: 'zoomResults',
+        title: translateInstant('toastPanel.zoomOnFeatures'),
+        tooltip: translateInstant('toastPanel.zoomOnFeaturesTooltip'),
+        icon: 'frame_inspect',
+        availability: () => {
+          return this.multiple;
+        },
+        handler: () => {
+          const { projectionCode, viewController } = this.map();
+          const olFeatures = [];
+          for (const result of this.store().all()) {
+            const localOlFeature = this.format.readFeature(result.data, {
+              dataProjection: result.data.projection,
+              featureProjection: projectionCode
+            });
+            olFeatures.push(localOlFeature);
+          }
+          moveToOlFeatures(viewController, olFeatures, FeatureMotion.Zoom);
+        }
+      },
+      {
+        id: 'zoomAuto',
+        title: translateInstant('toastPanel.zoomAuto'),
+        tooltip: translateInstant('toastPanel.zoomAutoTooltip'),
+        checkbox: true,
+        checkCondition: this.zoomAuto(),
+        handler: () => {
+          this.zoomAuto.set(!this.zoomAuto());
+          if (this.zoomAuto() && this.isResultSelected$.value === true) {
+            this.onResultSelect(this.selection());
+          }
+        }
+      },
+      {
+        id: 'fullExtent',
+        title: translateInstant('toastPanel.fullExtent'),
+        tooltip: translateInstant('toastPanel.fullExtentTooltip'),
+        icon: 'open_in_full',
+        display: () => {
+          return this.fullExtent$.pipe(map((v) => !v && !this.isDesktop()));
+        },
+        handler: () => {
+          this.fullExtent = true;
+        }
+      },
+      {
+        id: 'standardExtent',
+        title: translateInstant('toastPanel.standardExtent'),
+        tooltip: translateInstant('toastPanel.standardExtentTooltip'),
+        icon: 'close_fullscreen',
+        display: () => {
+          return this.fullExtent$.pipe(map((v) => v && !this.isDesktop()));
+        },
+        handler: () => {
+          this.fullExtent = false;
         }
       }
-    });
-    return so;
+    ];
+  }
+
+  private getDefaultOpened() {
+    const value = this.storageService.get('toastOpened') as boolean;
+    return value !== undefined ? value : true; // Default to true if not set in storage
   }
 
   zoomTo() {
@@ -781,9 +633,9 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     } else if (action === ToastPanelComponent.SWIPE_ACTION.LEFT) {
       this.nextResult();
     } else if (action === ToastPanelComponent.SWIPE_ACTION.UP) {
-      this.opened = true;
+      this.opened.set(true);
     } else if (action === ToastPanelComponent.SWIPE_ACTION.DOWN) {
-      this.opened = false;
+      this.opened.set(false);
     }
   }
 
@@ -791,7 +643,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
     if ((e.target as any).className !== 'igo-panel-title') {
       return;
     }
-    this.opened = !this.opened;
+    this.opened.set(!this.opened());
   }
 
   /**
