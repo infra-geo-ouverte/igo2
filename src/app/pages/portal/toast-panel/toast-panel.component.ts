@@ -285,36 +285,32 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   getClassPanel() {
+    const opened = this.opened();
     return {
       'app-toast-panel-opened':
-        this.opened && !this.fullExtent && !this.isHtmlDisplay,
+        opened && !this.fullExtent && !this.isHtmlDisplay,
       'app-full-toast-panel-opened':
-        this.opened && this.fullExtent && !this.isHtmlDisplay,
+        opened && this.fullExtent && !this.isHtmlDisplay,
 
       'app-toast-panel-html':
-        this.opened &&
-        !this.fullExtent &&
-        this.selection() &&
-        this.isHtmlDisplay,
+        opened && !this.fullExtent && this.selection() && this.isHtmlDisplay,
 
       'app-toast-panel-html-large':
-        this.opened &&
-        this.fullExtent &&
-        this.selection() &&
-        this.isHtmlDisplay,
+        opened && this.fullExtent && this.selection() && this.isHtmlDisplay,
 
       'app-toast-panel-collapsed':
-        !this.opened && !this.fullExtent && !this.isHtmlDisplay,
+        !opened && !this.fullExtent && !this.isHtmlDisplay,
       'app-full-toast-panel-collapsed':
-        !this.opened && this.fullExtent && !this.isHtmlDisplay,
-      'app-toast-panel-html-collapsed': !this.opened && this.isHtmlDisplay
+        !opened && this.fullExtent && !this.isHtmlDisplay,
+      'app-toast-panel-html-collapsed': !opened && this.isHtmlDisplay
     };
   }
 
   // if query tabs mode activated
   // fix Heigh of igo-panel
   setHeighPanelTabsMode() {
-    if (this.selection() || !this.opened) {
+    const opened = this.opened();
+    if (this.selection() || !opened) {
       return '';
     }
 
@@ -322,7 +318,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
       return 'app-toast-panel-opened-max-height';
     } else if (
       this.tabsMode &&
-      this.opened &&
+      opened &&
       this.fullExtent &&
       !this.isHtmlDisplay
     ) {
@@ -410,22 +406,24 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   previousResult() {
-    if (!this.selection()) {
+    const selection = this.selection();
+    if (!selection) {
       return;
     }
     const results = this.results();
-    const previousResult = results[results.indexOf(this.selection()) - 1];
+    const previousResult = results[results.indexOf(selection) - 1];
     if (previousResult) {
       this.onResultSelect(previousResult);
     }
   }
 
   nextResult() {
-    if (!this.selection()) {
+    const selection = this.selection();
+    if (!selection) {
       return;
     }
     const results = this.results();
-    const nextResult = results[results.indexOf(this.selection()) + 1];
+    const nextResult = results[results.indexOf(selection) + 1];
     if (nextResult) {
       this.onResultSelect(nextResult);
     }
@@ -516,7 +514,8 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   private getActionLoadConfig(): Action[] {
-    const { instant: translateInstant } = this.languageService.translate;
+    const translateInstant = (key: string) =>
+      this.languageService.translate.instant(key);
     return [
       {
         id: 'list',
