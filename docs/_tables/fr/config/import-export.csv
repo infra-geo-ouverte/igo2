@@ -1,10 +1,10 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
-**url*** ,String ,Url du service de conversion. ,https://geoegl.msp.gouv.qc.ca/apis/ogre ,
+**url*** ,String ,Url du service de conversion. ,https://ogre.geo.securite.gouv.qc.ca ,
 clientSideFileSizeMaxMb ,Number ,Taille maximum du fichiers pouvant être lu par le fureteur. ,,30
 gpxAggregateInComment ,Boolean,"| Lorsque l'option est activée l'exportation du fichier vers le format GPX va rassembler
 | les informations de l'enregistrement dans le champ «cmt» du gpx et assigner la valeur
-| de l'ID au champ «name». ",,false 
-forceNaming ,Boolean,Ajoute une boite texte au formulaire d'exportation qui permet de nommer le fichier exporter. ,,false 
+| de l'ID au champ «name». ",,false
+forceNaming ,Boolean,Ajoute une boite texte au formulaire d'exportation qui permet de nommer le fichier exporter. ,,false
 formats ,String[] ,La liste des formats qu'il est possible d'exporter. ,"'GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV' ","['GeoJSON', 'GML', 'GPX', 'KML', 'Shapefile', 'CSV'] "
 configFileToGeoDBService ,String ,Fichiers de configuration à utiliser afin d'intégrer des données dans la base de données Indexed-db de l'application.,"un url, relatif ou absolu",
 allowToStoreLayer ,Boolean ,Indique si les données importées doivent être stockées dans la l'Indexed-DB, true/false, false
