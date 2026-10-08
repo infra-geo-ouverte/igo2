@@ -15,12 +15,12 @@ Entête (header)
     .. line-block::
 
         Entête comprenant un logo, un titre, un bouton pour changer la langue et un bouton pour afficher le lien "Nous joindre".
-        L'entête est optionnelle, elle s'affiche si la section "header" est définie dans la configuration. Si "header" est un objet vide, l'entête s'affichera avec les valeurs par défaut (Logo du gouvernement du Québec, titre IGO2 par défaut). 
+        L'entête est optionnelle, elle s'affiche si la section "header" est définie dans la configuration. Si "header" est un objet vide, l'entête s'affichera avec les valeurs par défaut (Logo du gouvernement du Québec, titre IGO2 par défaut).
         Les options de configuration sont dans src/config.json sous "header" :
             "logo": objet (propriétés optionnelles "src" pour le lien vers l'image, "href" pour le lien au clic, "alt" pour le texte alternatif. Le défaut est le logo du gouvernement du Québec)
             "contactUsRoute": string (Définit un lien externe ou un chemin interne pour le bouton "Nous joindre" et l'affichera)
             "languages": objet (langues disponibles, incluant un tableau "choices" avec "label" et "key", et une valeur "default", et l'affichera)
-            
+
         Les libellés sont définis dans les fichiers de traduction fr.json et en.json sous la propriété "header".
 
 Exemples
@@ -1675,7 +1675,7 @@ Exemples
             {"icherche": {
                   "title":"ICherche",
                   "showInPointerSummary": true,
-                  "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche",
+                  "searchUrl": "https://icherche.geo.securite.gouv.qc.ca",
                   "params": {
                         "limit": "8"
                   }
@@ -1697,7 +1697,7 @@ Propriétés
 
 Liens
 
-    - `Doc de l'api iCherche <https://geoegl.msp.gouv.qc.ca/apis/icherche/docs>`__
+    - `Doc de l'api iCherche <https://icherche.geo.securite.gouv.qc.ca/docs>`__
     - `Code iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`__
     - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`__
 
@@ -1724,7 +1724,7 @@ Exemples
       .. code:: json
 
             {"icherchereverse": {
-                  "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/territoires",
+                  "searchUrl": "https://terrapi.geo.securite.gouv.qc.ca",
                   "params": {
                         "bufffer": 12
                   }
@@ -1746,7 +1746,7 @@ Propriétés
 
 Liens
 
-    - `Doc de l'api iCherche Reverse <https://geoegl.msp.gouv.qc.ca/apis/terrAPI/docs>`__
+    - `Doc de l'api iCherche Reverse <https://terrapi.geo.securite.gouv.qc.ca/docs>`__
     - `Code iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`__
     - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`__
 
