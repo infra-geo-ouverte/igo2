@@ -56,7 +56,6 @@
 
 .app-toast-panel-html {
   height: portal.$app-toast-panel-height;
-  max-height: fit-content;
   width: portal.$app-toast-panel-html-width;
 
   @include media.mobile {
