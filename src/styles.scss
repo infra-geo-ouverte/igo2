@@ -58,6 +58,18 @@ igo-context-item {
   box-shadow: var(--mat-sys-level2);
 }
 
+// Unclassed lists only, so component lists (tree nodes, etc.) are unaffected
+ul:not([class]),
+ol:not([class]) {
+  margin-bottom: 16px;
+  padding-left: 24px;
+
+  > li {
+    margin: 4px 0;
+    line-height: 20px;
+  }
+}
+
 // SDG overrides
 h1 {
   &:after {
