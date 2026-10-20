@@ -62,7 +62,7 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
-import { debounceTime, map, skipWhile, switchMap } from 'rxjs/operators';
+import { debounceTime, filter, map, switchMap } from 'rxjs/operators';
 
 import { GeoServiceLayerButtonComponent } from './geo-service-layer-button/geo-service-layer-button.component';
 
@@ -159,14 +159,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
   private format = new olFormatGeoJSON();
 
-  public queryResultsOverlayFocused: Overlay;
-  public queryResultsOverlaySelected: Overlay;
-  public queryResultsOverlayAll: Overlay;
+  public queryResultsOverlayFocused!: Overlay;
+  public queryResultsOverlaySelected!: Overlay;
+  public queryResultsOverlayAll!: Overlay;
 
-  private resultOrResolution$$: Subscription;
-  private focusedResult$ = new BehaviorSubject<SearchResult<Feature>>(
-    undefined
-  );
+  private resultOrResolution$$?: Subscription;
+  private focusedResult$ = new BehaviorSubject<
+    SearchResult<Feature> | undefined
+  >(undefined);
 
   public withZoomButton = true;
   zoomAuto$ = new BehaviorSubject<boolean>(false);
@@ -174,7 +174,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   readonly fullExtentEvent = output<boolean>();
   readonly windowHtmlDisplayEvent = output<boolean>();
 
-  selection = signal<SearchResult<Feature>>(undefined);
+  selection = signal<SearchResult<Feature> | undefined>(undefined);
   selection$ = toObservable(this.selection);
 
   readonly results = toSignal(
@@ -241,14 +241,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
 
     this.storageChange$$ = this.storageService.storageChange$
       .pipe(
-        skipWhile(
-          (storageChange: StorageServiceEvent) =>
-            storageChange.key !== 'zoomAuto'
+        filter(
+          (storageChange): storageChange is StorageServiceEvent =>
+            storageChange?.key === 'zoomAuto'
         ),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((change) => {
-        this.zoomAuto.set(!!change.currentValue as boolean);
+        this.zoomAuto.set(!!change.currentValue);
       });
 
     this.actionStore.load(this.getActionLoadConfig());
@@ -267,17 +267,19 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   onZoomHandler() {
-    if (this.isResultSelected$.getValue() === true) {
-      const localOlFeature = this.format.readFeature(this.selection().data, {
-        dataProjection: this.selection().data.projection,
-        featureProjection: this.map().projectionCode
-      });
-      moveToOlFeatures(
-        this.map().viewController,
-        localOlFeature,
-        FeatureMotion.Default
-      );
+    const selection = this.selection();
+    if (!selection || this.isResultSelected$.getValue() !== true) {
+      return;
     }
+    const localOlFeature = this.format.readFeature(selection.data, {
+      dataProjection: selection.data.projection,
+      featureProjection: this.map().projectionCode
+    });
+    moveToOlFeatures(
+      this.map().viewController,
+      localOlFeature,
+      FeatureMotion.Default
+    );
   }
 
   getHostDisplayStyle() {
@@ -484,7 +486,7 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         layersTitle.includes(wks.title)
       );
       wksToHandle.map((ws) => {
-        ws.entityStore.state.updateMany(ws.entityStore.view.all(), {
+        ws.entityStore?.state.updateMany(ws.entityStore.view.all(), {
           selected: false
         });
       });
@@ -538,14 +540,15 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           return this.isResultSelected$;
         },
         handler: () => {
+          const selection = this.selection();
+          if (!selection) {
+            return;
+          }
           const { projectionCode, viewController } = this.map();
-          const localOlFeature = this.format.readFeature(
-            this.selection().data,
-            {
-              dataProjection: this.selection().data.projection,
-              featureProjection: projectionCode
-            }
-          );
+          const localOlFeature = this.format.readFeature(selection.data, {
+            dataProjection: selection.data.projection,
+            featureProjection: projectionCode
+          });
           moveToOlFeatures(viewController, localOlFeature, FeatureMotion.Zoom);
         }
       },
@@ -559,14 +562,14 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         },
         handler: () => {
           const { projectionCode, viewController } = this.map();
-          const olFeatures = [];
-          for (const result of this.store().all()) {
-            const localOlFeature = this.format.readFeature(result.data, {
-              dataProjection: result.data.projection,
-              featureProjection: projectionCode
-            });
-            olFeatures.push(localOlFeature);
-          }
+          const olFeatures = this.store()
+            .all()
+            .flatMap((result) =>
+              this.format.readFeatures(result.data, {
+                dataProjection: result.data.projection,
+                featureProjection: projectionCode
+              })
+            );
           moveToOlFeatures(viewController, olFeatures, FeatureMotion.Zoom);
         }
       },
@@ -578,8 +581,13 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
         checkCondition: this.zoomAuto(),
         handler: () => {
           this.zoomAuto.set(!this.zoomAuto());
-          if (this.zoomAuto() && this.isResultSelected$.value === true) {
-            this.onResultSelect(this.selection());
+          const selection = this.selection();
+          if (
+            this.zoomAuto() &&
+            this.isResultSelected$.value === true &&
+            selection
+          ) {
+            this.onResultSelect(selection);
           }
         }
       },
@@ -616,8 +624,12 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
   }
 
   zoomTo() {
-    const localOlFeature = this.format.readFeature(this.selection().data, {
-      dataProjection: this.selection().data.projection,
+    const selection = this.selection();
+    if (!selection) {
+      return;
+    }
+    const localOlFeature = this.format.readFeature(selection.data, {
+      dataProjection: selection.data.projection,
       featureProjection: this.map().projectionCode
     });
     moveToOlFeatures(

@@ -64,7 +64,7 @@
       <app-geo-service-layer-button
         panelLeftButton
         [selection]="selection"
-        [map]="$any(map)"
+        [map]="map()"
       />
       @let hasMoreThanOne = results.length > 1;
       @if (hasMoreThanOne && selection) {
@@ -125,15 +125,15 @@
       <div #content class="toast-content">
         @if (selection) {
           <igo-feature-details
-            [map]="map"
+            [map]="map()"
             [feature]="selection.data"
             (htmlDisplayEvent)="setHtmlDisplay($event)"
           />
         }
         @if (!selection) {
           <igo-search-results
-            [map]="$any(map)"
-            [store]="store()"
+            [map]="map()"
+            [store]="$any(store())"
             [showIcons]="true"
             [withZoomButton]="withZoomButton"
             (resultFocus)="onResultFocus($event)"
