@@ -69,6 +69,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideTranslation(withAsyncConfig()),
     provideAuthentification(
+      {},
       withMicrosoftSupport('add'),
       withMicrosoftSupport('b2c'),
       withUserIgo()
