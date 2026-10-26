@@ -14,7 +14,6 @@
 
 <ng-template #toast>
   @let selection = this.selection();
-
   @let results = this.results();
   @if (results) {
     <igo-panel
@@ -129,8 +128,7 @@
             [feature]="selection.data"
             (htmlDisplayEvent)="setHtmlDisplay($event)"
           />
-        }
-        @if (!selection) {
+        } @else {
           <igo-search-results
             [map]="map()"
             [store]="$any(store())"

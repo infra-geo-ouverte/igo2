@@ -234,6 +234,10 @@ export class ToastPanelComponent implements OnInit, OnDestroy {
           this.unselectResult();
         }
 
+        if (entities.length === 1) {
+          this.onResultSelect(entities[0]);
+        }
+
         this.cdr.markForCheck();
       });
 
