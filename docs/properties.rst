@@ -1688,7 +1688,7 @@ Exemples
             {"icherche": {
                   "title":"ICherche",
                   "showInPointerSummary": true,
-                  "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/icherche",
+                  "searchUrl": "https://icherche.geo.securite.gouv.qc.ca",
                   "params": {
                         "limit": "8"
                   }
@@ -1710,7 +1710,7 @@ Propriétés
 
 Liens
 
-    - `Doc de l'api iCherche <https://geoegl.msp.gouv.qc.ca/apis/icherche/docs>`__
+    - `Doc de l'api iCherche <https://icherche.geo.securite.gouv.qc.ca/docs>`__
     - `Code iCherche <https://github.com/infra-geo-ouverte/igo2-lib/blob/56e45cdb030d39d1637ddfaf81f07e65345dcd89/packages/geo/src/lib/search/shared/sources/icherche.ts#L42>`__
     - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`__
 
@@ -1737,7 +1737,7 @@ Exemples
       .. code:: json
 
             {"icherchereverse": {
-                  "searchUrl": "https://geoegl.msp.gouv.qc.ca/apis/territoires",
+                  "searchUrl": "https://terrapi.geo.securite.gouv.qc.ca",
                   "params": {
                         "bufffer": 12
                   }
@@ -1759,7 +1759,7 @@ Propriétés
 
 Liens
 
-    - `Doc de l'api iCherche Reverse <https://geoegl.msp.gouv.qc.ca/apis/terrAPI/docs>`__
+    - `Doc de l'api iCherche Reverse <https://terrapi.geo.securite.gouv.qc.ca/docs>`__
     - `Code iCherche Reverse <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/icherche.ts#L385>`__
     - `Exemple de config <https://github.com/infra-geo-ouverte/igo2/blob/master/src/environments/environment.ts>`__
 

@@ -16,7 +16,7 @@ export const environment: AppEnvironmentOptions = {
       }
     },
     importExport: {
-      url: '/apis/ogre'
+      url: 'https://ogre.geo.securite.gouv.qc.ca'
     },
     language: {
       prefix: './locale/'
@@ -29,7 +29,7 @@ export const environment: AppEnvironmentOptions = {
         available: false
       },
       icherche: {
-        searchUrl: '/apis/icherche',
+        searchUrl: 'https://icherche.geo.securite.gouv.qc.ca',
         order: 2,
         params: {
           limit: '5'
@@ -40,7 +40,7 @@ export const environment: AppEnvironmentOptions = {
       },
       icherchereverse: {
         showInPointerSummary: true,
-        searchUrl: '/apis/terrapi',
+        searchUrl: 'https://terrapi.geo.securite.gouv.qc.ca',
         order: 3,
         enabled: true
       },
@@ -62,7 +62,7 @@ export const environment: AppEnvironmentOptions = {
       url: '/apis/igo2/layers/options'
     },
     spatialFilter: {
-      url: '/apis/terrapi/'
+      url: 'https://terrapi.geo.securite.gouv.qc.ca'
     },
     projections: [
       {
