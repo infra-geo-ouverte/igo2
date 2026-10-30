@@ -269,7 +269,7 @@ export const environment: AppEnvironmentOptions = {
       prefix: './locale/'
     },
     importExport: {
-      url: '/apis/ogre',
+      url: 'https://ogre.geo.securite.gouv.qc.ca',
       configFileToGeoDBService: './data/geoDataToIDB.json',
       clientSideFileSizeMaxMb: 32,
       allowToStoreLayer: true
@@ -286,7 +286,7 @@ export const environment: AppEnvironmentOptions = {
         available: false
       },
       icherche: {
-        searchUrl: '/apis/icherche',
+        searchUrl: 'https://icherche.geo.securite.gouv.qc.ca',
         order: 2,
         params: {
           limit: '5'
@@ -297,7 +297,7 @@ export const environment: AppEnvironmentOptions = {
       },
       icherchereverse: {
         showInPointerSummary: true,
-        searchUrl: '/apis/terrapi',
+        searchUrl: 'https://terrapi.geo.securite.gouv.qc.ca',
         order: 3,
         enabled: true
       },

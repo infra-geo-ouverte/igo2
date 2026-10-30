@@ -61,7 +61,7 @@ export const environment: AppEnvironmentOptions = {
       }
     ],
     importExport: {
-      url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
+      url: 'https://ogre.geo.securite.gouv.qc.ca',
       configFileToGeoDBService: './data/geoDataToIDB.json',
       clientSideFileSizeMaxMb: 30,
       allowToStoreLayer: true
@@ -77,7 +77,7 @@ export const environment: AppEnvironmentOptions = {
         available: false
       },
       icherche: {
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/icherche',
+        searchUrl: 'https://icherche.geo.securite.gouv.qc.ca',
         order: 2,
         params: {
           limit: '8'
@@ -88,7 +88,7 @@ export const environment: AppEnvironmentOptions = {
       },
       icherchereverse: {
         showInPointerSummary: true,
-        searchUrl: 'https://geoegl.msp.gouv.qc.ca/apis/terrapi',
+        searchUrl: 'https://terrapi.geo.securite.gouv.qc.ca',
         order: 3,
         enabled: true
       },
