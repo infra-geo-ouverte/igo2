@@ -565,7 +565,7 @@ Exemples
         .. code:: json
 
             importExport: {
-                url: 'https://geoegl.msp.gouv.qc.ca/apis/ogre',
+                url: 'https://ogre.geo.securite.gouv.qc.ca',
                 clientSideFileSizeMaxMb: 30,
                 gpxAggregateInComment: false,
                 forceNaming: false,
@@ -997,7 +997,7 @@ Exemples
               },
               "icherche": {
                 "title": "ICherche",
-                "searchUrl": "/apis/icherche",
+                "searchUrl": "https://icherche.geo.securite.gouv.qc.ca",
                 "showInPointerSummary": true,
                 "order": 2,
                 "params": {
@@ -1007,7 +1007,7 @@ Exemples
                 },
 
               "icherchereverse": {
-                "searchUrl": "/apis/terrapi",
+                "searchUrl": "https://terrapi.geo.securite.gouv.qc.ca",
                 "order": 3,
                 "params": {
                   "limit": 5,
@@ -1308,7 +1308,7 @@ Exemple complet config.json
                         },
                         "icherche": {
                             "title": "ICherche",
-                            "searchUrl": "/apis/icherche",
+                            "searchUrl": "https://icherche.geo.securite.gouv.qc.ca",
                             "showInPointerSummary": true,
                             "order": 2,
                             "params": {
@@ -1316,7 +1316,7 @@ Exemple complet config.json
                             }
                         },
                         "icherchereverse": {
-                            "searchUrl": "/apis/terrapi",
+                            "searchUrl": "https://terrapi.geo.securite.gouv.qc.ca",
                             "order": 3,
                             "params": {
                                 "limit": 5,
@@ -1328,7 +1328,7 @@ Exemple complet config.json
                       "url": "/apis/igo2/layers/options"
                       },
                     "importExport": {
-                        "url": "/apis/ogre"
+                        "url": "https://ogre.geo.securite.gouv.qc.ca"
                     },
                     "routingSources": {
                         "osrm": {
