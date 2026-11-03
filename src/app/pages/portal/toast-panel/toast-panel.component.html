@@ -14,8 +14,8 @@
 
 <ng-template #toast>
   @let selection = this.selection();
-
-  @if (store.entities$ | async) {
+  @let results = this.results();
+  @if (results) {
     <igo-panel
       [ngClass]="getClassPanel()"
       [id]="setHeighPanelTabsMode()"
@@ -60,27 +60,11 @@
           >
         </button>
       }
-      @if (hasGeoService()) {
-        <button
-          mat-icon-button
-          igoStopPropagation
-          panelLeftButton
-          tooltip-position="below"
-          [matTooltip]="
-            ((potententialLayerisAdded$ | async)
-              ? 'toastPanel.removeLayer'
-              : 'toastPanel.addLayer'
-            ) | translate
-          "
-          matTooltipShowDelay="500"
-          [color]="(potententialLayerisAdded$ | async) ? 'warn' : ''"
-          (click)="handleLayer()"
-        >
-          <mat-icon>
-            {{ (potententialLayerisAdded$ | async) ? 'delete' : 'add' }}
-          </mat-icon>
-        </button>
-      }
+      <app-geo-service-layer-button
+        panelLeftButton
+        [selection]="selection"
+        [map]="map()"
+      />
       @let hasMoreThanOne = results.length > 1;
       @if (hasMoreThanOne && selection) {
         <button
@@ -110,7 +94,7 @@
           <mat-icon>chevron_right</mat-icon>
         </button>
       }
-      @if (opened && isDesktop()) {
+      @if (opened() && isDesktop()) {
         <button
           mat-icon-button
           igoStopPropagation
@@ -140,15 +124,14 @@
       <div #content class="toast-content">
         @if (selection) {
           <igo-feature-details
-            [map]="map"
+            [map]="map()"
             [feature]="selection.data"
             (htmlDisplayEvent)="setHtmlDisplay($event)"
           />
-        }
-        @if (!selection) {
+        } @else {
           <igo-search-results
-            [map]="map"
-            [store]="store"
+            [map]="map()"
+            [store]="$any(store())"
             [showIcons]="true"
             [withZoomButton]="withZoomButton"
             (resultFocus)="onResultFocus($event)"
