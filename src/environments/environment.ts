@@ -23,19 +23,19 @@ export const environment: AppEnvironmentOptions = {
       }
     },
     allowResetSearchSourcesOptions: true,
-    auth: {
-      url: '/apis/users',
-      tokenKey: 'id_token_igo',
-      allowAnonymous: true,
-      trustHosts: ['geoegl.msp.gouv.qc.ca', 'testgeoegl.msp.gouv.qc.ca'],
-      hostsByKey: [
-        {
-          domainRegFilters: '(https://|http://)?(.*domain.com)(.*)',
-          keyProperty: 'key',
-          keyValue: '123456'
-        }
-      ]
-    },
+    // auth: {
+    //   url: '/apis/users',
+    //   tokenKey: 'id_token_igo',
+    //   allowAnonymous: true,
+    //   trustHosts: ['geoegl.msp.gouv.qc.ca', 'testgeoegl.msp.gouv.qc.ca'],
+    //   hostsByKey: [
+    //     {
+    //       domainRegFilters: '(https://|http://)?(.*domain.com)(.*)',
+    //       keyProperty: 'key',
+    //       keyValue: '123456'
+    //     }
+    //   ]
+    // },
     storage: {
       key: 'igo'
     },
