@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": false,
     "moduleResolution": "bundler",
@@ -13,10 +12,14 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "types": ["node", "vitest/globals"],
-    "paths": {
-      "@igo2/*": ["./node_modules/@igo2/*"]
-    }
+    "importHelpers": true,
+    "types": ["node", "vitest/globals"]
   },
-  "exclude": ["./dist", "./scripts", "./e2e/**/*"]
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "exclude": ["scripts"]
 }

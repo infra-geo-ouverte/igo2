@@ -134,9 +134,9 @@
             [store]="$any(store())"
             [showIcons]="true"
             [withZoomButton]="withZoomButton"
-            (resultFocus)="onResultFocus($event)"
-            (resultUnfocus)="onResultUnfocus($event)"
-            (resultSelect)="onResultSelect($event)"
+            (resultFocus)="onResultFocus($any($event))"
+            (resultUnfocus)="onResultUnfocus($any($event))"
+            (resultSelect)="onResultSelect($any($event))"
             [tabsMode]="tabsMode"
           />
         }
