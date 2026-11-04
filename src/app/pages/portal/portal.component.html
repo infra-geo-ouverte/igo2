@@ -19,7 +19,7 @@
         <igo-search-bar
           #searchBar
           [class.mat-elevation-z2]="!sidenavOpened"
-          [term]="searchBarTerm"
+          [term]="searchBarTerm!"
           [termSplitter]="termSplitter"
           [minLength]="minSearchTermLength"
           [searchSettings]="true"
@@ -75,7 +75,7 @@
       (contextLayersLoaded)="contextLayersLoaded$.next($event)"
       igoDropGeoFile
       [contextUri]="contextUri"
-      (query)="onMapQuery($event)"
+      (query)="onMapQuery($any($event))"
       [map]="map"
       [igoContextMenu]="contextMenu"
       (menuPosition)="onContextMenuOpen($event)"
@@ -192,7 +192,7 @@
   <app-expansion-panel
     [backdropShown]="expansionPanelBackdropShown"
     [(expanded)]="workspaceState.expanded"
-    [maximized]="workspaceState.workspaceMaximize$ | async"
+    [maximized]="!!(workspaceState.workspaceMaximize$ | async)"
     [@expansionPanelSize]="getExpansionPanelStatus()"
     [@toastOffsetY]="
       isMobile() &&
@@ -231,7 +231,7 @@
                   ? ('igo.geo.layer.hideLayer' | translate)
                   : ('igo.geo.layer.showLayer' | translate)
               "
-              (click)="onWorkspaceLayerToggle(workspace.layer.id)"
+              (click)="toggleWorkspaceVisibility(workspace)"
             >
               <mat-icon
                 [class.disabled]="
@@ -250,13 +250,13 @@
                 tooltip-position="below"
                 matTooltipShowDelay="500"
                 [disabled]="
-                  workspace.layer.options.sourceOptions.edition.addButton ===
+                  workspace.layer.options.sourceOptions?.edition?.addButton ===
                   false
                     ? true
                     : false
                 "
                 [matTooltip]="'workspace.addFeature' | translate"
-                (click)="addFeature(workspace)"
+                (click)="addFeature($any(workspace))"
               >
                 <mat-icon>add</mat-icon>
               </button>
@@ -276,13 +276,11 @@
               />
             }
             @if (workspaceVisibility()) {
+              @let workspaceSelection =
+                workspaceState.workspaceSelection$ | async;
               <button
                 class="zoom-workspace"
-                [disabled]="
-                  (workspaceState.workspaceSelection$ | async).length === 0
-                    ? true
-                    : false
-                "
+                [disabled]="workspaceSelection?.length === 0 ? true : false"
                 mat-icon-button
                 color="primary"
                 collapsibleButton
@@ -291,7 +289,7 @@
                 [matTooltip]="'toastPanel.zoomOnFeaturesTooltip' | translate"
                 (click)="zoomToSelectedFeatureWks()"
               >
-                @if ((workspaceState.workspaceSelection$ | async).length > 1) {
+                @if (workspaceSelection && workspaceSelection?.length > 1) {
                   <mat-icon>frame_inspect</mat-icon>
                 } @else {
                   <mat-icon>zoom_in </mat-icon>
@@ -322,7 +320,7 @@
           [paginator]="workspacePaginator"
           [store]="workspace.entityStore"
           (entitySortChange)="entitySortChange()"
-          (entitySelectChange)="entitySelectChange($event)"
+          (entitySelectChange)="entitySelectChange($any($event))"
           [template]="workspace.meta.tableTemplate"
         />
       }
@@ -344,7 +342,7 @@
 
   @if (selectedWorkspace$ | async; as workspace) {
     <igo-workspace-widget-outlet
-      [workspace]="workspace"
+      [workspace]="$any(workspace)"
       (deactivateWidget)="onDeactivateWorkspaceWidget()"
     />
   }
@@ -353,7 +351,7 @@
 @if ((queryStore.empty$ | async) !== true) {
   <app-toast-panel
     [map]="map"
-    [store]="queryStore"
+    [store]="$any(queryStore)"
     [@toastPanelOffsetX]="toastPanelOffsetX$ | async"
     [@toastPanelOffsetY]="getToastPanelOffsetY()"
     [@toastPanelMobileSidenav]="
@@ -372,6 +370,6 @@
     [store]="contextMenuStore"
     [withIcon]="false"
     [horizontal]="true"
-    mode="context"
+    [mode]="$any('context')"
   />
 </ng-template>
