@@ -178,6 +178,7 @@
     </igo-map-browser>
 
     <app-map-overlay
+      [class.igo-charter-banner-active]="charterBannerActive()"
       [@controlStateY]="getControlsOffsetY()"
       [@controlStateX]="
         (mediaService.media$ | async) !== 'mobile' && sidenavOpened

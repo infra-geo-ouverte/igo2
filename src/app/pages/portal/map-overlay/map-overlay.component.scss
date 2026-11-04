@@ -1,3 +1,11 @@
+:host(.igo-charter-banner-active) {
+  .top-left,
+  .top-center,
+  .top-right {
+    top: 50px;
+  }
+}
+
 :host {
   height: 100%;
   top: 0;
