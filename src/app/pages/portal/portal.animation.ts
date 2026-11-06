@@ -254,7 +254,7 @@ export function controlSlideX(): AnimationTriggerMetadata {
     state(
       'left',
       style({
-        left: '60px'
+        left: '0px'
       })
     ),
     state(

@@ -9,7 +9,6 @@ import {
   OnInit,
   effect,
   inject,
-  input,
   viewChild
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -313,8 +312,6 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   readonly mapBrowser = viewChild('mapBrowser', { read: ElementRef });
   readonly searchBar = viewChild('searchBar', { read: ElementRef });
-
-  readonly charterBannerActive = input(false);
 
   get map(): IgoMap {
     return this.mapState.map;
