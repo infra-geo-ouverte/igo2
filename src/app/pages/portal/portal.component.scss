@@ -236,7 +236,6 @@ mat-sidenav-container {
 }
 
 mat-sidenav-content {
-  position: relative;
   @include media.mobile {
     z-index: auto;
   }
