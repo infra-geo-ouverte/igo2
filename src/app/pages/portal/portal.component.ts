@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   OnDestroy,
   OnInit,
@@ -11,6 +12,7 @@ import {
   inject,
   viewChild
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialog,
@@ -255,8 +257,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   private directionState = inject(DirectionState);
   private shareMapService = inject(ShareMapService);
   private routeService = inject(RouteService);
-  public appConfig: EnvironmentOptions;
-  public toastPanelOffsetX$ = new BehaviorSubject<string>(undefined);
+  private destroyRef = inject(DestroyRef);
+
+  public appConfig!: EnvironmentOptions;
+  public toastPanelOffsetX$ = new BehaviorSubject<string | undefined>(
+    undefined
+  );
   public sidenavOpened$ = new BehaviorSubject(false);
   public minSearchTermLength = 2;
   public hasGeolocateButton = true;
@@ -452,9 +458,11 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readLanguageParam(params);
     });
 
-    this.authService.authenticate$.subscribe(() => {
-      this.contextLoaded = false;
-    });
+    this.authService.authenticate$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.contextLoaded = false;
+      });
 
     this.context$$ = this.contextState.context$.subscribe(
       (context: DetailedContext) => this.onChangeContext(context)
@@ -1460,11 +1468,13 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private initWelcomeWindow(): void {
     if (this.authService.hasAuthService) {
-      this.authService.logged$.subscribe((logged) => {
-        if (logged) {
-          this.createWelcomeWindow();
-        }
-      });
+      this.authService.logged$
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((logged) => {
+          if (logged) {
+            this.createWelcomeWindow();
+          }
+        });
     } else {
       this.createWelcomeWindow();
     }
