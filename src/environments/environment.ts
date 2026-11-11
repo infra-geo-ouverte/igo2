@@ -265,6 +265,13 @@ export const environment: AppEnvironmentOptions = {
     // sidenav: {
     //   languageToggleButton: true
     // },
+
+    /** Example of legend tab config, uncomment to see the effect */
+    // sidenav: {
+    //   maptools: {
+    //     legendTabEnabled: false
+    //   }
+    // },
     language: {
       prefix: './locale/'
     },
