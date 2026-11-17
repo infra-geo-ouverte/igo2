@@ -10,6 +10,7 @@
   }
 
   mat-toolbar {
+    gap: 16px;
     color: var(--mat-sys-on-primary);
     background-color: var(--mat-sys-on-primary-container);
 
@@ -20,12 +21,12 @@
 
   label {
     margin-bottom: 0;
+    font: var(--mat-sys-body-medium);
   }
 
-  .mat-mdc-dialog-container {
-    z-index: 1000;
-    box-shadow: 0 0 0 1000em rgba(0, 0, 0, 0.6);
-    transform: translate(-50%, 0);
+  .button-container {
+    justify-content: flex-end;
+    padding: 8px 24px 16px;
   }
 
   ::ng-deep .custom-html {
