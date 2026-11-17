@@ -1,0 +1,2 @@
+﻿Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+languageToggleButton,Boolean,Affiche le bouton de changement de langue dans le menu latéral.,true | false,false

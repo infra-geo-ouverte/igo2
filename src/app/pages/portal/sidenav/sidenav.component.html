@@ -8,7 +8,7 @@
     <div
       #content
       class="app-content"
-      [ngClass]="{ toolActivated: toolbox.activeTool$ | async }"
+      [class.toolActivated]="toolbox.activeTool$ | async"
     >
       @if (toolbox.activeTool$ | async) {
         <igo-home-button (unselectButton)="onUnselectButtonClick()" />

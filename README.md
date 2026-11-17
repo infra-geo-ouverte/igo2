@@ -1,5 +1,4 @@
-[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
-[![join chat https://gitter.im/igo2/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/igo2/Lobby)
+[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.dev/style-guide)
 [![Known Vulnerabilities](https://snyk.io/test/github/infra-geo-ouverte/igo2/badge.svg)](https://snyk.io/test/github/infra-geo-ouverte/igo2)
 
 # Infrastructure géomatique ouverte 2.0 (IGO2) / Open GIS Infrastructure 2.0
@@ -28,6 +27,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 - [Téléchargement](#téléchargement)
 - [Installation pour déploiement serveur](#installation-pour-déploiement-serveur)
 - [Installation pour développeurs](#installation-et-démarrage-pour-développeurs)
+- [Développement simultané avec igo2-lib](#développement-simultané-avec-igo2-lib)
 - [Démo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Démo d'IGO2 de Données Québec](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation](https://igo2.readthedocs.io/fr/latest/)
@@ -43,6 +43,7 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 - [Download](#download)
 - [Installation (for server deployment)](#installation-for-server-deployment)
 - [Installation for developpers](#installation-for-developpers)
+- [Simultaneous development with igo2-lib](#simultaneous-development-with-igo2-lib)
 - [Demo on GitHub](https://infra-geo-ouverte.github.io/igo2/)
 - [Demo IGO2 from Open Data Quebec (Canada)](https://geoegl.msp.gouv.qc.ca/igo2/apercu-qc/)
 - [Documentation (translation is not yet done)](https://igo2.readthedocs.io/fr/latest/)
@@ -53,27 +54,8 @@ IGO2 is having multiple features, such as Web GIS viewer adapted to Desktop and 
 
 ## Téléchargement
 - Les dernières versions téléchargeable sont accessible dans les "assets" de chaque version dans la [page de release](https://github.com/infra-geo-ouverte/igo2/releases) 
+- [Version v20.1.1](https://github.com/infra-geo-ouverte/igo2/releases/download/v20.1.1/igo2-dist.zip)
 - [Version v16.3.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.3.0/igo2.zip)
-- [Version v16.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.2.0/igo2.zip)
-- [Version v16.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/v16.1.0/igo2.zip)
-- [Version 1.15.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.4/igo2.zip)
-- [Version 1.15.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.3/igo2.zip)
-- [Version 1.15.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.15.2/igo2.zip)
-- [Version 1.14.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.14.2/igo2.zip)
-- [Version 1.13.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.13.4/igo2.zip)
-- [Version 1.12.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.12.1/igo2.zip)
-- [Version 1.11.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.11.1/igo2.zip)
-- [Version 1.10.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.10.0/igo2.zip)
-- [Version 1.9.4](https://github.com/infra-geo-ouverte/igo2/releases/download/1.9.4/igo2.zip)
-- [Version 1.8.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.8.2/igo2.zip)
-- [Version 1.7.2](https://github.com/infra-geo-ouverte/igo2/releases/download/1.7.2/igo2.zip)
-- [Version 1.6.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.6.3/igo2.zip)
-- [Version 1.5.3](https://github.com/infra-geo-ouverte/igo2/releases/download/1.5.3/igo2.zip)
-- [Version 1.4.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.4.1/igo2.zip)
-- [Version 1.3.1](https://github.com/infra-geo-ouverte/igo2/releases/download/1.3.1/igo2.zip)
-- [Version 1.2.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.2.0/igo2.zip)
-- [Version 1.1.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.1.0/igo2.zip)
-- [Version 1.0.0](https://github.com/infra-geo-ouverte/igo2/releases/download/1.0.0/igo2.zip)
 
 ## Installation (pour déploiement serveur)
 
@@ -89,11 +71,16 @@ Requis:
 
 | IGO2 version | Node version |
 | ------------ | ------------ |
+| >= 21.x      | >= 20.19.0   |
+| >= 20.x      | >= 20.19.0   |
 | >= 16.x      | >= 18.10.0   |
 | > 1.15.x     | >= 16.19.0   |
 | > 1.5.x      | >= 12, <= 16 |
 | < 1.5.x      | >= 8, <= 11  |
 | 0.x.x        | >= 6, <= 10  |
+
+Refer to [Angular compatibility matrix](https://angular.dev/reference/versions#actively-supported-versions)
+
 
 ```bash
 $ git clone --depth 1 https://github.com/infra-geo-ouverte/igo2.git
@@ -120,8 +107,64 @@ $ npm run doc
 # Ouvrir un navigateur http://localhost:4220/
 ```
 
-Si vous voulez développer en même temps ce projet ainsi que la librairie associée, référez vous à la procédure suivante:  
-https://github.com/infra-geo-ouverte/igo2-lib#for-developers
+## Développement simultané avec igo2-lib
+
+Cette procédure permet de modifier `igo2-lib` et de voir les changements immédiatement dans `igo2`, sans avoir à publier la librairie sur npm.
+
+### Prérequis
+
+Les deux dépôts doivent être clonés comme dossiers **frères** :
+
+```
+igo/
+├── igo2/        ← ce dépôt
+└── igo2-lib/    ← https://github.com/infra-geo-ouverte/igo2-lib
+```
+
+```bash
+# Installer les dépendances dans les deux dépôts
+cd igo2     && npm install
+cd ../igo2-lib && npm install
+```
+
+### Ouvrir l'espace de travail VS Code
+
+Ouvrir le fichier `igo.code-workspace` situé à la racine de `igo2` :
+
+```bash
+code igo.code-workspace
+```
+
+ou 
+
+Via le menu File -> Open Workspace From File
+
+Cela ouvre les deux projets côte à côte dans VS Code avec les paramètres, les tâches et les extensions recommandées préconfigurés.
+
+### Démarrer le serveur de développement lié
+
+Depuis VS Code, ouvrez le panneau **Run and Debug**, sélectionnez *Start (LINK)* et lancer la session de débogage. Il existe des alternatives comme lancer la tâche **"link.start with prestart"** (`Ctrl+Shift+P` → *Tasks: Run Task*), ou manuellement :
+
+```bash
+cd igo2
+
+# Crée des liens symboliques dans igo2-lib/node_modules pour que les deux dépôts
+# partagent les mêmes paquets Angular/rxjs/ol (évite les erreurs NG3004, TS2345).
+npm run link
+
+# Lance ng serve en mode "development-link" :
+# - Les imports @igo2/* sont résolus directement depuis igo2-lib/packages/*/src/
+# - Tout fichier modifié dans igo2-lib déclenche un rechargement automatique.
+npm run link.start
+# Ouvrir un navigateur http://localhost:4201/
+```
+
+> **Note :** Après chaque `npm install` dans `igo2-lib`, relancer `npm run link`
+> pour rétablir les liens symboliques.
+
+### Revenir aux paquets npm publiés
+
+Utiliser simplement `npm start` — aucun nettoyage requis.
 
 ## Tests
 
@@ -217,9 +260,6 @@ $ npm run serve.prod
 $ npm run doc
 # Open your browser at http://localhost:4220/
 
-If you want to develop this project and the associated library at the same time, refer to the following procedure:
-https://github.com/infra-geo-ouverte/igo2-lib#for-developers
-
 ```
 
 ## Tests-en
@@ -227,7 +267,6 @@ https://github.com/infra-geo-ouverte/igo2-lib#for-developers
 ```bash
 $ npm test
 
-# Check by karma
 # Tests after each change
 $ npm run test.watch
 

@@ -662,12 +662,11 @@ Exemples
             {
               "title": "Donnée geojson sur DQ (pas de service)",
               "id": "vector1",
+                  "preload": {
+                      "comment": "Charger la donnée dans la source même si le layer est non visible ou hors échelle d'affichage.",
+                      "bypass": "all"
+                  },
               "sourceOptions": {
-                "preload": {
-                   "comment": "Charger la donnée dans la source même si le layer est non visible ou hors échelle d'affichage."
-                   "bypassVisible": true
-                   "bypassResolution": true
-                },
                 "type": "vector",
                 "url": "https://www.donneesquebec.ca/recherche/dataset/527944ae-893d-41ac-8255-340fb1c2c83b/resource/d1b89d6a-8c31-4831-8895-95dc45120f79/download/borne-incendie.json"
                 "queryable": true,
@@ -1537,9 +1536,21 @@ Source (base commune)
             - `Nominatim`_ (internationnal)
             - `StoredQueries`_ , WFS 2.0 (Québec)
             - `StoredQueries Reverse`_    , WFS 2.0  - par coordonnées (Québec)
+            - `Workspace`_
 
         Selon votre contexte, les sources de recherche ayant une limitation au Québec, peuvent être utilisées comme exemple afin d'adapter
         votre propre service de recherche.
+
+    .. note::
+
+        À partir de la version 21.x, ``ConfigService`` est optionnel pour toutes les sources de recherche.
+        Les options peuvent être fournies directement via les fonctions Angular (``withIChercheSource(options)``,
+        ``withNominatimSource(options)``, ``withCadastreSource(options)``, ``withILayerSource(options)``,
+        ``withWorkspaceSource(options)``, ``withStoredQueriesSource(options)``,
+        ``withStoredQueriesReverseSource(options)``, ``withIChercheReverseSource(options)``).
+        Pour ``withCoordinatesReverseSource``, les projections peuvent également être passées directement :
+        ``withCoordinatesReverseSource({ options, projections })``.
+        Les options passées directement ont priorité sur celles du fichier ``config.json``.
 
 
 Exemples
@@ -1600,6 +1611,8 @@ Coordonnées
     .. line-block::
 
         Le service de recherches de coordonnées permet de se localiser sous diverses structures de coordonnées.
+        Les projections supportées peuvent être configurées directement via ``withCoordinatesReverseSource({ projections })``,
+        sans nécessiter la propriété ``projections`` dans le ``config.json``.
             - Degré décimal (dd.ddd)
                 - lon, lat (-68.165547, 48.644546)
                 - lat, lon (48.644546, -68.165547)
@@ -2008,6 +2021,35 @@ Liens
     - `Bug Openlayers et les GML 3.2+ en WFS <https://github.com/openlayers/openlayers/pull/6400>`__
     - `Exemple d'appel StoredQueries Reverse <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&REQUEST=GetFeature&STOREDQUERY_ID=lim_adm&long=-71.292469&lat=46.748107&outputformat=text/xml;%20subtype=gml/3.1.1&SRSNAME=epsg:4326>`__
     - `Décrire la requête "lim_adm" <https://ws.mapserver.transports.gouv.qc.ca/swtq?service=wfs&version=2.0.0&request=DescribeStoredQueries&storedQuery_Id=lim_adm>`__
+
+
+Workspace
+================
+
+    .. line-block::
+
+        La source de recherche Workspace permet d'effectuer des recherches textuelles dans les
+        couches de l'espace de travail (workspace) actif de la carte. Les résultats proviennent
+        des entités visibles dans les couches actives.
+
+Exemples
+
+      .. code:: json
+
+            {"workspace": {
+                  "available": true,
+                  "enabled": true,
+                  "order": 1
+            }}
+
+Propriétés
+
+    Seulement les propriétés spécifiques à ce service sont présentées.
+    Pour les autres propriétés, référez-vous à `Source (base commune)`_ .
+
+Liens
+
+    - `Code Workspace <https://github.com/infra-geo-ouverte/igo2-lib/blob/master/packages/geo/src/lib/search/shared/sources/workspace.ts>`__
 
 
 ==============================
@@ -3019,3 +3061,140 @@ Propriétés
 Liens
 
     - `context-share-tool <https://github.com/infra-geo-ouverte/igo2-lib/tree/master/packages/integration/src/lib/context/context-share-tool>`__
+
+
+********************
+Sélecteur de langue 
+********************
+
+    .. line-block::
+
+        Permet à l’utilisateur de changer la langue de l’application. Le sélecteur de langue peut être configuré dans le menu latéral (sidenav) ou dans l’entête (header).
+
+
+Dans le menu latéral (sidenav)
+==============================
+
+
+Exemple
+
+        .. code:: json
+
+            {
+          "sidenav": {
+            "languageToggleButton": true
+                }
+            }
+
+Propriétés
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/properties/languageSelectorSidenav.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+Noms des langues
+----------------
+
+Les noms des langues sont définis dans les fichiers de traduction :file:`fr.json` et :file:`en.json`.
+
+Exemple dans :file:`fr.json` et :file:`en.json` :
+
+.. code-block:: json
+
+    {
+        "language": {
+            "french": "Français",
+            "english": "English"
+        }
+    }
+
+.. note::
+
+   Dans cet exemple, les noms des langues sont affichés dans leur langue respective,
+   indépendamment de la langue actuellement sélectionnée dans l'application.
+   Ainsi, « Français » et « English » sont utilisés dans les deux
+   fichiers de traduction. Toutefois, c'est possible de les paramétrer différemment.
+
+Liens
+
+    - `Sélecteur de langue dans le ménu latéral <https://github.com/infra-geo-ouverte/igo2/blob/next/src/app/pages/portal/sidenav/sidenav.component.ts>`__
+
+Dans l'entête (header)
+======================
+
+Exemple
+
+    .. code:: json
+
+       {
+            "header": {
+                "languages": {
+                    "default": "fr",
+                    "choices": [
+                        {
+                        "key": "fr",
+                        "label": "Français"
+                        },
+                        {
+                        "key": "en",
+                        "label": "English"
+                        }
+                    ]
+                }
+            }
+        }
+
+Propriétés :code:`languages`
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/properties/languageHeader.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+
+Propriétés :code:`choices`
+
+    .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
+
+    .. csv-table::
+       :file: _tables/fr/properties/languageHeaderChoices.csv
+       :header-rows: 1
+       :widths: 10 10 30 15 10
+
+Liens
+
+    - `Sélecteur de langue dans l’entête <https://github.com/infra-geo-ouverte/igo2/blob/next/src/app/components/header/header.component.ts>`__
+
+
+Bandeau de langue
+=================
+Le bandeau de langue :code:`charterBanner` permet d'afficher un message
+informatif relatif à la Charte de la langue française.
+
+.. figure:: images/charter-banner.png
+    :alt: Bandeau de langue affiché dans l'application
+    
+    Exemple de bandeau de langue
+
+Exemple de configuration:
+-------------------------
+
+.. code-block:: json
+
+    {
+        "charterBanner": true
+    }
+
+.. note::
+
+   Le :code:`charterBanner` est destiné aux organismes publics qui offrent
+   du contenu dans une autre langue que le français. Il permet d'afficher
+   le bandeau requis dans le haut de la page d'accueil en anglais, lorsque
+   celui-ci est applicable.
+
+   Pour plus d'informations, veuillez consulter la `Charte de la langue française <https://www.quebec.ca/gouvernement/politiques-orientations/langue-francaise/modernisation-charte-langue-francaise>`__.

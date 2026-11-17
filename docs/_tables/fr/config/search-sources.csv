@@ -1,8 +1,12 @@
 Propriétés,Type,Description,Valeurs possibles,Valeur défaut
 showResultsCount ,boolean,Permet d'afficher ou non le nombre de résultats de chaque source, true/false, true
 cadastre ,,Permet de définir la recherche par cadastre (numéro de lot),,
-nominatim ,,Permet de définir l'utilisation de la recherche nominatim,,
-ilayer ,,Permet d'activer icherche pour les couches de données,,
+coordinatesreverse ,,Permet de définir la recherche par coordonnées,,
 icherche ,,Permet d'activer icherche (géocodage),,
 icherchereverse ,,Permet d'activer icherche reverse (géocodage inversé),,
+ilayer ,,Permet d'activer icherche pour les couches de données,,
+nominatim ,,Permet de définir l'utilisation de la recherche nominatim,,
+storedqueries ,,(Déprécié) Permet de définir la recherche par StoredQueries WFS 2.0,,
+storedqueriesreverse ,,(Déprécié) Permet de définir la recherche inverse par StoredQueries WFS 2.0,,
+workspace ,,Permet de définir la recherche dans l'espace de travail,,,
 

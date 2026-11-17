@@ -5,7 +5,7 @@ import { IHeaderConfig } from '@igo2/sdg-common';
 import { MapOverlay } from '../app/pages/portal/map-overlay';
 
 export interface AppEnvironmentOptions extends IntegrationEnvironmentOptions {
-  igo: EnvironmentOptions;
+  igo: EnvironmentOptions & { offline?: boolean };
 }
 
 export interface EnvironmentOptions extends AllEnvironmentOptions {
@@ -18,6 +18,8 @@ export interface EnvironmentOptions extends AllEnvironmentOptions {
   sidenav?: {
     languageToggleButton: boolean;
   };
+  /** Enables the display of the Quebec Charter of the French Language banner when the application language is English. */
+  charterBanner?: boolean;
   description?: string;
   favoriteContext4NonAuthenticated?: boolean;
   mapOverlay?: MapOverlay[];
@@ -32,7 +34,6 @@ export interface EnvironmentOptions extends AllEnvironmentOptions {
   showRotationButtonIfNoRotation?: boolean;
   offlineButton?: boolean;
   wakeLockApiButton?: boolean;
-  hasFeatureEmphasisOnSelection?: boolean;
   hasSearchPointerSummary?: boolean;
   allowResetSearchSourcesOptions?: boolean;
 }

@@ -522,24 +522,6 @@ hasExpansionPanel
         Ce dernier contient les données tabulaires pour
         les données WFS / Vectorielle / Cluster.
 
-***********************
-hasFeatureEmphasisOnSelection
-***********************
-
-    .. line-block::
-
-        Permet d'ajouter à la carte une géométrie ponctuelle pour les
-        entités linéaires ou polygonales sélectionnées ou survolées
-        lors d'une interrogation de la carte et qui sont de trop petite
-        taille par rapport à l'étendue de la carte.
-
-*****************
-hasGeolocateButton
-*****************
-
-    .. line-block::
-
-        Permet d'afficher ou non un bouton de géolocalisation dans l'application.
 
 ***********************
 hasSearchPointerSummary
@@ -694,15 +676,6 @@ Exemples
 Liens
         - `Exemple de mapOverlay <https://github.com/infra-geo-ouverte/igo2/blob/master/src/contexts/mapOverlay.json>`_
 
-*****************
-menuButtonReverseColor
-*****************
-
-    .. line-block::
-
-        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.useThemeColor
-
-        Permet d'indiquer si les couleurs du bouton de menu sont inversées ou non.
 
 *****************
 menu.button.useThemeColor
@@ -905,23 +878,10 @@ Liens
         - `igo2/blob/master/src/config/config.json <https://github.com/infra-geo-ouverte/igo2/blob/master/src/config/config.json>`_
 
 ********************************
-showMenuButton
-********************************
-
-    .. line-block::
-
-        Ne sera plus géré à partir du 6 juin 2024, Remplacé par menu.button.visible
-
-        Permet de définir si le bouton de menu permettant d'accéder
-        aux outils est affiché.
-
-********************************
 menu.button.visible
 ********************************
 
     .. line-block::
-
-        Remplace showMenuButton
 
         Permet de définir si le bouton de menu permettant d'accéder
         aux outils est visible ou non.
@@ -969,6 +929,16 @@ SearchSources
     .. line-block::
 
        Permet effectuer la personnalisation de la section de recherches à partir de l'ensemble de propriétés définies.
+
+    .. note::
+
+        À partir de la version 21.x, ``ConfigService`` est optionnel pour les sources de recherche.
+        Les options peuvent être fournies directement via les fonctions de configuration
+        (ex. ``withIChercheSource(options)``, ``withNominatimSource(options)``, etc.)
+        sans nécessiter de fichier ``config.json``.
+        Les options passées directement ont priorité sur celles du fichier de configuration.
+        Pour ``withCoordinatesReverseSource``, il est également possible de passer les projections
+        directement : ``withCoordinatesReverseSource({ options, projections })``.
 
 Exemples
 
@@ -1027,7 +997,7 @@ Propriétés
 
     Important : Les propriétés en caractère gras suivies d'un * sont obligatoires.
 
-Propriétés de cadastre, nominatim, ilayer, icherche et icherchereverse
+Propriétés de cadastre, coordinatesreverse, icherche, icherchereverse, ilayer, nominatim, storedqueries, storedqueriesreverse et workspace
 
     .. tabularcolumns:: |p{1cm}|p{2cm}|p{7cm}|p{2cm}|p{2cm}|
 

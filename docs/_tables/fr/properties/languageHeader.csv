@@ -1,0 +1,3 @@
+﻿Propriétés,Type,Description,Valeurs possibles,Valeur défaut
+default,String,Langue sélectionnée par défaut.,
+choices,Object[],Liste des langues disponibles. Pour le moment deux langues sont supportées.,

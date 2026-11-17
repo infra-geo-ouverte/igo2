@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
@@ -38,6 +38,7 @@ import {
 import {
   ENTITY_DIRECTIVES,
   EntityRecord,
+  EntityService,
   EntityStore,
   EntityTablePaginatorOptions
 } from '@igo2/common/entity';
@@ -56,18 +57,16 @@ import {
   UserButtonComponent
 } from '@igo2/context';
 import { ConfigService } from '@igo2/core/config';
-import { LanguageService } from '@igo2/core/language';
+import { IgoLanguageModule, LanguageService } from '@igo2/core/language';
 import { Media, MediaOrientation, MediaService } from '@igo2/core/media';
 import { MessageService } from '@igo2/core/message';
 import { RouteService } from '@igo2/core/route';
 import { StorageService } from '@igo2/core/storage';
 import {
   CapabilitiesService,
-  ConfigFileToGeoDBService,
   DataSourceService,
   DropGeoFileDirective,
   EditionWorkspace,
-  EditionWorkspaceService,
   FEATURE,
   Feature,
   FeatureMotion,
@@ -133,14 +132,7 @@ import olFormatGeoJSON from 'ol/format/GeoJSON';
 import type { default as OlGeometry } from 'ol/geom/Geometry';
 import * as olProj from 'ol/proj';
 
-import { TranslateModule } from '@ngx-translate/core';
-import {
-  BehaviorSubject,
-  Subject,
-  Subscription,
-  combineLatest,
-  of
-} from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, combineLatest } from 'rxjs';
 import {
   concatMap,
   debounceTime,
@@ -207,13 +199,12 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     MatIconModule,
     MatSidenavModule,
     MatTooltipModule,
-    NgClass,
     QueryDirective,
     SearchBarComponent,
     SearchPointerSummaryDirective,
     ToastPanelComponent,
     ToastPanelForExpansionComponent,
-    TranslateModule,
+    IgoLanguageModule,
     UserButtonComponent,
     WORKSPACE_DIRECTIVES,
     WorkspaceSelectorDirective,
@@ -240,6 +231,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   workspaceState = inject(WorkspaceState);
   authService = inject(AuthService);
+  entityService = inject(EntityService);
   mediaService = inject(MediaService);
   layerService = inject(LayerService);
   dataSourceService = inject(DataSourceService);
@@ -260,14 +252,9 @@ export class PortalComponent implements OnInit, OnDestroy {
   dialogWindow = inject(MatDialog);
   private queryService = inject(QueryService);
   private storageService = inject(StorageService);
-  private editionWorkspaceService = inject(EditionWorkspaceService);
   private directionState = inject(DirectionState);
   private shareMapService = inject(ShareMapService);
   private routeService = inject(RouteService);
-  private configFileToGeoDBService = inject(ConfigFileToGeoDBService, {
-    optional: true
-  });
-
   public appConfig: EnvironmentOptions;
   public toastPanelOffsetX$ = new BehaviorSubject<string>(undefined);
   public sidenavOpened$ = new BehaviorSubject(false);
@@ -602,15 +589,6 @@ export class PortalComponent implements OnInit, OnDestroy {
     ])
       .pipe(debounceTime(50))
       .subscribe(() => this.computeToastPanelOffsetX());
-
-    if (
-      this.appConfig.app.offline?.enable &&
-      this.appConfig.importExport?.configFileToGeoDBService
-    ) {
-      this.configFileToGeoDBService?.load(
-        this.appConfig.importExport.configFileToGeoDBService
-      );
-    }
   }
 
   private handleAppConfigs() {
@@ -677,7 +655,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     };
     feature.properties = this.createFeatureProperties(workspace.layer);
     this.workspaceState.rowsInMapExtentCheckCondition$.next(false);
-    workspace.editFeature(feature, workspace);
+    workspace.editFeature(feature);
   }
 
   createFeatureProperties(layer: ImageLayer | VectorLayer) {
@@ -699,7 +677,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   entitySelectChange(result: { added: Feature[] }) {
-    const baseQuerySearchSource = this.getQuerySearchSource();
     const querySearchSourceArray: QuerySearchSource[] = [];
 
     if (
@@ -711,47 +688,36 @@ export class PortalComponent implements OnInit, OnDestroy {
       }
     }
     if (result && result.added) {
-      const results = result.added.map((res) => {
-        if (
-          res &&
-          res.ol &&
-          res.ol.getProperties()._featureStore.layer &&
-          res.ol.getProperties()._featureStore.layer.visible
-        ) {
+      const results = result.added
+        .map((res) => {
           const ol = res.ol as olFeature<OlGeometry>;
-          const featureStoreLayer = res.ol.getProperties()._featureStore.layer;
-          const feature = featureFromOl(
-            ol,
-            featureStoreLayer.map.projection,
-            featureStoreLayer.ol
-          );
+          const layer = ol.getProperties()._featureStore?.layer;
+          if (!layer?.visible) {
+            return;
+          }
+          const feature = featureFromOl(ol, layer.map.projectionCode, layer.ol);
 
-          feature.meta.alias =
-            this.queryService.getAllowedFieldsAndAlias(featureStoreLayer);
-          feature.meta.title =
-            this.queryService.getQueryTitle(feature, featureStoreLayer) ||
-            feature.meta.title;
+          if (feature.meta) {
+            feature.meta.alias =
+              this.queryService.getAllowedFieldsAndAlias(layer);
+            feature.meta.title =
+              this.queryService.getQueryTitle(feature, layer) ||
+              feature.meta?.title;
+          }
           let querySearchSource = querySearchSourceArray.find(
-            (s) => s.title === feature.meta.sourceTitle
+            (s) => s.title === feature.meta?.sourceTitle
           );
           if (!querySearchSource) {
             querySearchSource = new QuerySearchSource({
-              title: feature.meta.sourceTitle
+              title: feature.meta?.sourceTitle
             });
             querySearchSourceArray.push(querySearchSource);
           }
           return featureToSearchResult(feature, querySearchSource);
-        }
-      });
+        })
+        .filter(Boolean) as SearchResult<Feature<Record<string, unknown>>>[];
 
-      const research = {
-        request: of(results),
-        reverse: false,
-        source: baseQuerySearchSource
-      };
-      research.request.subscribe((queryResults: SearchResult<Feature>[]) => {
-        this.queryStore.load(queryResults);
-      });
+      this.queryStore.load(results);
     }
   }
 
@@ -791,10 +757,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.toastPanelForExpansionOpened = true;
   }
 
-  onMapQuery(event: { features: Feature[]; event: MapBrowserEvent<any> }) {
-    const baseQuerySearchSource = this.getQuerySearchSource();
+  onMapQuery(event: { features: Feature[]; event: MapBrowserEvent }) {
     const querySearchSourceArray: QuerySearchSource[] = [];
-    const results = event.features.map((feature: Feature) => {
+    const results = event.features.map((feature) => {
       let querySearchSource = querySearchSourceArray.find(
         (s) => s.title === feature.meta.sourceTitle
       );
@@ -815,14 +780,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       return featureToSearchResult(feature, querySearchSource);
     });
     const filteredResults = results.filter((x) => x !== undefined);
-    const research = {
-      request: of(filteredResults),
-      reverse: false,
-      source: baseQuerySearchSource
-    };
-    research.request.subscribe((queryResults: SearchResult<Feature>[]) => {
-      this.queryStore.load(queryResults);
-    });
+    this.queryStore.load(filteredResults);
   }
 
   onSearchTermChange(term?: string) {
@@ -994,7 +952,6 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   public onClearSearch() {
-    this.map.searchResultsOverlay.clear();
     this.searchStore.clear();
     this.searchState.setSelectedResult(undefined);
     this.searchState.deactivateCustomFilterTermStrategy();
@@ -1028,7 +985,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const pixel = [contextmenuPoint.x, contextmenuPoint.y];
 
     const coord = this.map.ol.getCoordinateFromPixel(pixel);
-    const proj = this.map.projection;
+    const proj = this.map.projectionCode;
     return olProj.transform(coord, proj, 'EPSG:4326');
   }
 
@@ -1276,7 +1233,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       const olExtent = olProj.transformExtent(
         extentParams.map((str) => Number(str.trim())),
         'EPSG:4326',
-        this.map.projection
+        this.map.projectionCode
       );
       this.map.viewController.zoomToExtent(
         olExtent as [number, number, number, number]
@@ -1346,7 +1303,7 @@ export class PortalComponent implements OnInit, OnDestroy {
               .map((entity: EntityRecord<SearchResult>) =>
                 new olFormatGeoJSON().readFeature(entity.entity.data, {
                   dataProjection: entity.entity.data.projection,
-                  featureProjection: this.map.projection
+                  featureProjection: this.map.projectionCode
                 })
               )
               .flat();
@@ -1562,14 +1519,14 @@ export class PortalComponent implements OnInit, OnDestroy {
         const relationWorkspace = this.workspaceStore
           .all()
           .find((workspace) =>
-            String(layer.options.workspace.workspaceId).includes(
-              String(workspace.id)
-            )
+            layer.options.workspace.workspaceId
+              ?.toString()
+              .includes(workspace.id.toString())
           );
         relationWorkspace?.meta.tableTemplate.columns.forEach((col) => {
           // Update domain list
           if (col.type === 'list' || col.type === 'autocomplete') {
-            this.editionWorkspaceService
+            this.entityService
               .getDomainValues(col.relation)
               .subscribe((result) => {
                 col.domainValues = result;
@@ -1592,7 +1549,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     for (const feat of featuresSelected) {
       const localOlFeature = format.readFeature(feat, {
         dataProjection: feat.projection,
-        featureProjection: this.map.projection
+        featureProjection: this.map.projectionCode
       });
       olFeaturesSelected.push(localOlFeature);
     }

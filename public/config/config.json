@@ -21,7 +21,6 @@
   },
   "queryTabs": false,
   "saveSearchResultInLayer": true,
-  "hasFeatureEmphasisOnSelection": true,
   "homeExtentButton": {
     "homeExtButtonExtent": [-9000000, 5790000, -7500000, 6770000],
     "homeExtButtonCenter": [-71.938087, 48.446975],

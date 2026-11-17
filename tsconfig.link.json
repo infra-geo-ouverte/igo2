@@ -1,6 +1,11 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./src/tsconfig.app.json",
   "compilerOptions": {
-    "rootDir": "../../",
-  }
+    "rootDir": "../"
+  },
+  "include": ["src/**/*.d.ts", "../igo2-lib/packages/**/*.ts"],
+  "exclude": [
+    "../igo2-lib/packages/**/*.spec.ts",
+    "../igo2-lib/packages/**/*.test.ts"
+  ]
 }

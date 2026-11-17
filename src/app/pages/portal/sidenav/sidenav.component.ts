@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -40,7 +40,6 @@ import { importAllTools } from './sidenav-import';
     MatIconModule,
     MatSidenavModule,
     MatTooltipModule,
-    NgClass,
     PanelComponent,
     ToolboxComponent,
     TranslateModule,
@@ -60,7 +59,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
   readonly map = input<IgoMap>();
   readonly opened = model<boolean>();
 
-  readonly openedChange = output<boolean>();
   readonly toolChange = output<Tool>();
   readonly widthChange = output<number>();
 

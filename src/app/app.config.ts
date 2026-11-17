@@ -24,9 +24,14 @@ import { provideIcon } from '@igo2/common/icon';
 import { IgoCoreModule } from '@igo2/core';
 import { ConfigService, provideConfig } from '@igo2/core/config';
 import { provideTranslation, withAsyncConfig } from '@igo2/core/language';
-import { IgoMessageModule } from '@igo2/core/message';
 import { RouteService } from '@igo2/core/route';
-import { provideOffline } from '@igo2/geo';
+import {
+  provideProjection,
+  provideStyle,
+  withGeostyler,
+  withMapbox
+} from '@igo2/geo';
+import { provideOffline, withIndexedDb } from '@igo2/geo/offline';
 import { loadTheme } from '@igo2/utils';
 
 import { first } from 'rxjs';
@@ -49,7 +54,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       BrowserModule,
       IgoCoreModule,
-      IgoMessageModule,
       PortalModule,
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: environment.igo.app.pwa.enabled,
@@ -65,13 +69,16 @@ export const appConfig: ApplicationConfig = {
     }),
     provideTranslation(withAsyncConfig()),
     provideAuthentification(
+      {},
       withMicrosoftSupport('add'),
       withMicrosoftSupport('b2c'),
       withUserIgo()
     ),
-    provideOffline(environment.igo.app.offline),
+    ...(environment.igo.app.offline ? [provideOffline(withIndexedDb())] : []),
     provideIcon(),
     provideTheme(),
+    provideProjection(),
+    provideStyle(withGeostyler(), withMapbox()),
     RouteService,
     { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: TOOLTIP_OPTIONS },
     {
