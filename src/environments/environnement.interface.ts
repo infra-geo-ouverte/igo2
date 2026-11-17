@@ -16,7 +16,10 @@ export interface EnvironmentOptions extends AllEnvironmentOptions {
   theme?: string; // enum?
   sidenavTitle?: string;
   sidenav?: {
-    languageToggleButton: boolean;
+    languageToggleButton?: boolean;
+    maptools?: {
+      legendTabEnabled?: boolean;
+    };
   };
   /** Enables the display of the Quebec Charter of the French Language banner when the application language is English. */
   charterBanner?: boolean;
