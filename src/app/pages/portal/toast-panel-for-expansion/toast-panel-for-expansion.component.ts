@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostBinding,
-  input
+  input,
+  model
 } from '@angular/core';
 
 import { PanelComponent } from '@igo2/common/panel';
@@ -18,7 +19,7 @@ import { showContent } from './toast-panel-for-expansion.animations';
   imports: [PanelComponent]
 })
 export class ToastPanelForExpansionComponent {
-  readonly opened = input(false);
+  readonly opened = model(false);
   readonly title = input<string>(undefined);
 
   readonly withHeader = input<boolean>(undefined);

@@ -40,25 +40,32 @@ export class MapOverlayComponent implements AfterViewInit, OnDestroy {
     this.media$$.unsubscribe();
   }
 
-  private handleContextChange(context: Context) {
-    let mapOverlay: MapOverlay[] = [];
-    if (context !== undefined) {
-      this.mapOverlay = [];
+  private handleContextChange(context: Context | undefined) {
+    if (context === undefined) {
+      return;
+    }
 
-      if (context['mapOverlay']) {
-        mapOverlay = context['mapOverlay'];
-      } else {
-        mapOverlay = this.configService.getConfig('mapOverlay', []);
+    let mapOverlay: MapOverlay[] = [];
+    this.mapOverlay = mapOverlay;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((context as any)['mapOverlay']) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      mapOverlay = (context as any)['mapOverlay'];
+    } else {
+      mapOverlay = this.configService.getConfig('mapOverlay', []);
+    }
+    for (const overlay of mapOverlay) {
+      // If no media define use default to desktop, display only if current media is on context definition
+      const media = this.mediaService.getMedia();
+      if (!media) {
+        return;
       }
-      for (const overlay of mapOverlay) {
-        // If no media define use default to desktop, display only if current media is on context definition
-        if (
-          (!overlay.media && this.mediaService.getMedia() === 'desktop') ||
-          (overlay.media &&
-            overlay.media.includes(this.mediaService.getMedia()))
-        ) {
-          this.mapOverlay.push(overlay);
-        }
+      if (
+        (!overlay.media && media === 'desktop') ||
+        (overlay.media && overlay.media.includes(media))
+      ) {
+        this.mapOverlay.push(overlay);
       }
     }
   }

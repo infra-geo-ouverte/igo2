@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   OnDestroy,
   OnInit,
@@ -11,6 +12,7 @@ import {
   inject,
   viewChild
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialog,
@@ -43,7 +45,6 @@ import {
   EntityTablePaginatorOptions
 } from '@igo2/common/entity';
 import { Tool, Toolbox } from '@igo2/common/tool';
-import { Widget } from '@igo2/common/widget';
 import {
   WORKSPACE_DIRECTIVES,
   Workspace,
@@ -164,6 +165,16 @@ import { ToastPanelComponent } from './toast-panel/toast-panel.component';
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
 
+type AnyWorkspace = WfsWorkspace | FeatureWorkspace | EditionWorkspace;
+
+function isAnyWorkspace(workspace: unknown): workspace is AnyWorkspace {
+  return (
+    workspace instanceof WfsWorkspace ||
+    workspace instanceof FeatureWorkspace ||
+    workspace instanceof EditionWorkspace
+  );
+}
+
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
@@ -255,8 +266,12 @@ export class PortalComponent implements OnInit, OnDestroy {
   private directionState = inject(DirectionState);
   private shareMapService = inject(ShareMapService);
   private routeService = inject(RouteService);
-  public appConfig: EnvironmentOptions;
-  public toastPanelOffsetX$ = new BehaviorSubject<string>(undefined);
+  private destroyRef = inject(DestroyRef);
+
+  public appConfig!: EnvironmentOptions;
+  public toastPanelOffsetX$ = new BehaviorSubject<string | undefined>(
+    undefined
+  );
   public sidenavOpened$ = new BehaviorSubject(false);
   public minSearchTermLength = 2;
   public hasGeolocateButton = true;
@@ -299,7 +314,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public toastPanelForExpansionOpened = true;
   private activeWidget$$: Subscription;
   public showToastPanelForExpansionToggle = false;
-  public selectedWorkspace$ = new BehaviorSubject<Workspace>(undefined);
+  public selectedWorkspace$ = new BehaviorSubject<AnyWorkspace>(undefined);
   private routeParams: Params;
   public toastPanelHtmlDisplay = false;
 
@@ -360,9 +375,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
   }
 
-  get contextUri(): string {
+  get contextUri(): string | undefined {
     return this.contextState.context$?.getValue()
-      ? this.contextState.context$.getValue().uri
+      ? this.contextState.context$.getValue()?.uri
       : undefined;
   }
 
@@ -406,7 +421,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     return this.workspaceState.store;
   }
 
-  get workspace(): Workspace {
+  get workspace(): Workspace | undefined {
     return this.workspaceState.workspace$.value;
   }
 
@@ -452,13 +467,18 @@ export class PortalComponent implements OnInit, OnDestroy {
       this.readLanguageParam(params);
     });
 
-    this.authService.authenticate$.subscribe(() => {
-      this.contextLoaded = false;
-    });
+    this.authService.authenticate$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.contextLoaded = false;
+      });
 
-    this.context$$ = this.contextState.context$.subscribe(
-      (context: DetailedContext) => this.onChangeContext(context)
-    );
+    this.context$$ = this.contextState.context$.subscribe((context) => {
+      if (!context) {
+        return;
+      }
+      this.onChangeContext(context);
+    });
 
     const contextActions = [
       {
@@ -534,35 +554,32 @@ export class PortalComponent implements OnInit, OnDestroy {
       })
     );
 
-    this.workspaceState.workspace$.subscribe(
-      (activeWks: WfsWorkspace | FeatureWorkspace | EditionWorkspace) => {
-        if (activeWks) {
-          this.selectedWorkspace$.next(activeWks);
-          this.workspaceState.expanded.set(true);
+    this.workspaceState.workspace$.subscribe((activeWks) => {
+      if (isAnyWorkspace(activeWks)) {
+        this.selectedWorkspace$.next(activeWks);
+        this.workspaceState.expanded.set(true);
 
-          if (
-            activeWks.layer.options.workspace?.pageSize &&
-            activeWks.layer.options.workspace?.pageSizeOptions
-          ) {
-            this.paginatorOptions = {
-              pageSize: activeWks.layer.options.workspace?.pageSize,
-              pageSizeOptions:
-                activeWks.layer.options.workspace?.pageSizeOptions
-            };
-          } else {
-            this.paginatorOptions = {
-              pageSize: 50,
-              pageSizeOptions: [1, 5, 10, 20, 50, 100, 500]
-            };
-          }
+        if (
+          activeWks.layer.options.workspace?.pageSize &&
+          activeWks.layer.options.workspace?.pageSizeOptions
+        ) {
+          this.paginatorOptions = {
+            pageSize: activeWks.layer.options.workspace?.pageSize,
+            pageSizeOptions: activeWks.layer.options.workspace?.pageSizeOptions
+          };
         } else {
-          this.workspaceState.expanded.set(false);
+          this.paginatorOptions = {
+            pageSize: 50,
+            pageSizeOptions: [1, 5, 10, 20, 50, 100, 500]
+          };
         }
+      } else {
+        this.workspaceState.expanded.set(false);
       }
-    );
+    });
 
     this.activeWidget$$ = this.workspaceState.activeWorkspaceWidget$.subscribe(
-      (widget: Widget) => {
+      (widget) => {
         if (widget !== undefined) {
           this.openToastPanelForExpansion();
           this.showToastPanelForExpansionToggle = true;
@@ -574,7 +591,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
 
     this.openSidenav$$ = this.toolState.openSidenav$.subscribe(
-      (openSidenav: boolean) => {
+      (openSidenav) => {
         if (openSidenav) {
           this.openSidenav();
           this.toolState.openSidenav$.next(false);
@@ -630,7 +647,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     const wks = this.selectedWorkspace$.value as
       WfsWorkspace | FeatureWorkspace | EditionWorkspace;
     if (wks.inResolutionRange$.value) {
-      if (wks.entityStore.empty$.value && !wks.layer.visible) {
+      if (wks.entityStore?.empty$.value && !wks.layer.visible) {
         this.workspaceNotAvailableMessage = 'workspace.disabled.visible';
       } else {
         this.workspaceNotAvailableMessage = '';
@@ -649,7 +666,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   }
 
   addFeature(workspace: EditionWorkspace) {
-    const feature = {
+    const feature: Feature = {
       type: 'Feature',
       properties: {}
     };
@@ -851,7 +868,7 @@ export class PortalComponent implements OnInit, OnDestroy {
     this.computeToastPanelOffsetX();
   }
 
-  public toolChanged(tool: Tool) {
+  public toolChanged(tool: Tool | undefined) {
     const searchBar = this.searchBar();
     if (tool && tool.name === 'searchResults' && searchBar) {
       searchBar.nativeElement.getElementsByTagName('input')[0].focus();
@@ -875,8 +892,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     if (context === undefined) {
       return;
     }
-    if (this.workspace && !this.workspace.entityStore.empty) {
-      this.workspace.entityStore.clear();
+    const store = this.workspace?.entityStore;
+    if (store?.empty) {
+      store.clear();
     }
     if (!this.queryState.store.empty) {
       this.queryState.store.softClear();
@@ -973,7 +991,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   private getClickCoordinate(event: { x: number; y: number }) {
     const contextmenuPoint = event;
     const boundingMapBrowser =
-      this.mapBrowser().nativeElement.getBoundingClientRect();
+      this.mapBrowser()?.nativeElement.getBoundingClientRect() ?? {
+        top: 0,
+        left: 0
+      };
     contextmenuPoint.y =
       contextmenuPoint.y -
       boundingMapBrowser.top +
@@ -985,6 +1006,9 @@ export class PortalComponent implements OnInit, OnDestroy {
     const pixel = [contextmenuPoint.x, contextmenuPoint.y];
 
     const coord = this.map.ol.getCoordinateFromPixel(pixel);
+    if (!coord) {
+      return;
+    }
     const proj = this.map.projectionCode;
     return olProj.transform(coord, proj, 'EPSG:4326');
   }
@@ -1016,7 +1040,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   updateMapBrowserClass() {
     const header = this.queryState.store.entities$.value.length > 0;
-    const classList = this.mapBrowser().nativeElement.classList;
+    const classList = this.mapBrowser()?.nativeElement.classList;
     if (
       this.appConfig.hasExpansionPanel &&
       this.workspaceState.workspaceEnabled$.value
@@ -1166,7 +1190,7 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   getBaselayersSwitcherStatus() {
     const isExpanded = this.workspaceState.expanded();
-    let status;
+    let status: string;
     if (this.isMobile()) {
       if (this.workspaceState.workspaceEnabled$.value) {
         if (!isExpanded) {
@@ -1448,7 +1472,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       file,
       features,
       this.map,
-      this.contextState.context$.value.uri,
+      this.contextState.context$.value?.uri ?? '',
       this.messageService,
       this.layerService
     );
@@ -1460,11 +1484,13 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   private initWelcomeWindow(): void {
     if (this.authService.hasAuthService) {
-      this.authService.logged$.subscribe((logged) => {
-        if (logged) {
-          this.createWelcomeWindow();
-        }
-      });
+      this.authService.logged$
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((logged) => {
+          if (logged) {
+            this.createWelcomeWindow();
+          }
+        });
     } else {
       this.createWelcomeWindow();
     }
@@ -1505,7 +1531,7 @@ export class PortalComponent implements OnInit, OnDestroy {
       if (
         activeWks.active &&
         activeWks.inResolutionRange$.value &&
-        this.workspaceState.expanded
+        this.workspaceState.expanded()
       ) {
         return true;
       }
@@ -1539,10 +1565,10 @@ export class PortalComponent implements OnInit, OnDestroy {
 
   zoomToSelectedFeatureWks() {
     const format = new olFormatGeoJSON();
-    const featuresSelected = this.workspaceState.workspaceSelection.map(
+    const featuresSelected = this.workspaceState.workspaceSelection?.map(
       (rec) => rec.entity as Feature
     );
-    if (featuresSelected.length === 0) {
+    if (!featuresSelected || featuresSelected?.length === 0) {
       return;
     }
     const olFeaturesSelected = [];
@@ -1560,8 +1586,11 @@ export class PortalComponent implements OnInit, OnDestroy {
     );
   }
 
-  onWorkspaceLayerToggle(id: string): void {
-    let layer = this.map.layerController.getById(id);
+  toggleWorkspaceVisibility(workspace: AnyWorkspace): void {
+    let layer = this.map.layerController.getById(workspace.layer.id);
+    if (!layer) {
+      return;
+    }
     if (isLayerItem(layer) && layer.linkMaster) {
       layer = layer.linkMaster.layer;
     }
