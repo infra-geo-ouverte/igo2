@@ -25,16 +25,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { AuthService } from '@igo2/auth';
-import {
-  ActionStore,
-  ActionbarComponent,
-  ActionbarMode
-} from '@igo2/common/action';
+import { ActionbarComponent, ActionbarMode } from '@igo2/common/action';
 import { BackdropComponent } from '@igo2/common/backdrop';
-import {
-  ContextMenuDirective,
-  LongPressDirective
-} from '@igo2/common/context-menu';
 import {
   ENTITY_DIRECTIVES,
   EntityRecord,
@@ -78,6 +70,7 @@ import {
   ImportService,
   LayerService,
   MAP_DIRECTIVES,
+  MapContextMenuAction,
   MapExtent,
   QueryDirective,
   QuerySearchSource,
@@ -183,13 +176,11 @@ import { WelcomeWindowService } from './welcome-window/welcome-window.service';
     SidenavComponent,
     AsyncPipe,
     BackdropComponent,
-    ContextMenuDirective,
     DropGeoFileDirective,
     ENTITY_DIRECTIVES,
     ExpansionPanelButtonComponent,
     ExpansionPanelComponent,
     LayerContextDirective,
-    LongPressDirective,
     MatDialogModule,
     IgoGeoWorkspaceModule,
     MAP_DIRECTIVES,
@@ -283,8 +274,7 @@ export class PortalComponent implements OnInit, OnDestroy {
   public termDefinedInUrlTriggered = false;
   private addedLayers$$: Subscription[] = [];
 
-  public contextMenuStore = new ActionStore([]);
-  private contextMenuCoord: [number, number];
+  public contextMenuActions: MapContextMenuAction[] = [];
 
   contextLayersLoaded$ = new Subject<boolean>();
   private contextLoaded = false;
@@ -460,25 +450,23 @@ export class PortalComponent implements OnInit, OnDestroy {
       (context: DetailedContext) => this.onChangeContext(context)
     );
 
-    const contextActions = [
+    this.contextMenuActions = [
       {
         id: 'coordinates',
         title: 'coordinates',
-        handler: () => this.searchCoordinate(this.contextMenuCoord)
+        handler: (coord) => this.searchCoordinate(coord)
       },
       {
         id: 'googleMaps',
         title: 'googleMap',
-        handler: () => this.openGoogleMaps(this.contextMenuCoord)
+        handler: (coord) => this.openGoogleMaps(coord)
       },
       {
         id: 'googleStreetView',
         title: 'googleStreetView',
-        handler: () => this.openGoogleStreetView(this.contextMenuCoord)
+        handler: (coord) => this.openGoogleStreetView(coord)
       }
     ];
-
-    this.contextMenuStore.load(contextActions);
 
     this.queryStore.count$
       .pipe(pairwise())
@@ -964,29 +952,6 @@ export class PortalComponent implements OnInit, OnDestroy {
         (searchSource: SearchSource) =>
           searchSource instanceof QuerySearchSource
       );
-  }
-
-  onContextMenuOpen(event: { x: number; y: number }) {
-    this.contextMenuCoord = this.getClickCoordinate(event) as [number, number];
-  }
-
-  private getClickCoordinate(event: { x: number; y: number }) {
-    const contextmenuPoint = event;
-    const boundingMapBrowser =
-      this.mapBrowser().nativeElement.getBoundingClientRect();
-    contextmenuPoint.y =
-      contextmenuPoint.y -
-      boundingMapBrowser.top +
-      (window.scrollY || window.pageYOffset);
-    contextmenuPoint.x =
-      contextmenuPoint.x -
-      boundingMapBrowser.left +
-      (window.scrollX || window.pageXOffset);
-    const pixel = [contextmenuPoint.x, contextmenuPoint.y];
-
-    const coord = this.map.ol.getCoordinateFromPixel(pixel);
-    const proj = this.map.projectionCode;
-    return olProj.transform(coord, proj, 'EPSG:4326');
   }
 
   private openGoogleMaps(coord: [number, number]) {
