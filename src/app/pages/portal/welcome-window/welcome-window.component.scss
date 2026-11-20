@@ -5,27 +5,19 @@
     flex: 1 1 auto;
   }
 
-  #doNotShowCheck {
-    margin-right: 5px;
-  }
-
   mat-toolbar {
+    gap: 16px;
     color: var(--mat-sys-on-primary);
     background-color: var(--mat-sys-on-primary-container);
 
     h1 {
       color: var(--mat-sys-on-primary);
     }
-  }
 
-  label {
-    margin-bottom: 0;
-  }
-
-  .mat-mdc-dialog-container {
-    z-index: 1000;
-    box-shadow: 0 0 0 1000em rgba(0, 0, 0, 0.6);
-    transform: translate(-50%, 0);
+    mat-checkbox {
+      --mat-checkbox-label-text-color: var(--mat-sys-on-primary);
+      --mat-checkbox-unselected-icon-color: var(--mat-sys-on-primary);
+    }
   }
 
   ::ng-deep .custom-html {
