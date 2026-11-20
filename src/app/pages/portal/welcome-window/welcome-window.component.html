@@ -3,20 +3,18 @@
     <mat-toolbar color="primary">
       <h1>{{ 'welcomeWindow.title' | translate }}</h1>
       <span class="spacer"></span>
-      <label>
-        <input
-          id="doNotShowCheck"
-          type="checkbox"
-          [(ngModel)]="showAgain"
-          (click)="setShowAgain()"
-        />
+      <mat-checkbox
+        id="doNotShowCheck"
+        [(ngModel)]="showAgain"
+        (change)="setShowAgain()"
+      >
         {{ 'welcomeWindow.notShowCheck' | translate }}
-      </label>
+      </mat-checkbox>
     </mat-toolbar>
     <div mat-dialog-content class="text">
       <igo-custom-html [html]="html$ | async" />
     </div>
-    <mat-dialog-actions class="button-container">
+    <mat-dialog-actions align="end">
       <button
         mat-raised-button
         class="button-close"

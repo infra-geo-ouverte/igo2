@@ -5,10 +5,6 @@
     flex: 1 1 auto;
   }
 
-  #doNotShowCheck {
-    margin-right: 5px;
-  }
-
   mat-toolbar {
     gap: 16px;
     color: var(--mat-sys-on-primary);
@@ -17,16 +13,11 @@
     h1 {
       color: var(--mat-sys-on-primary);
     }
-  }
 
-  label {
-    margin-bottom: 0;
-    font: var(--mat-sys-body-medium);
-  }
-
-  .button-container {
-    justify-content: flex-end;
-    padding: 8px 24px 16px;
+    mat-checkbox {
+      --mat-checkbox-label-text-color: var(--mat-sys-on-primary);
+      --mat-checkbox-unselected-icon-color: var(--mat-sys-on-primary);
+    }
   }
 
   ::ng-deep .custom-html {
