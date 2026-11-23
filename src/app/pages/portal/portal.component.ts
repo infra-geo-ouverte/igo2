@@ -100,6 +100,7 @@ import {
   featureToSearchResult,
   handleFileImportError,
   handleFileImportSuccess,
+  isAnyWorkspace,
   isLayerItem,
   moveToOlFeatures,
   provideDirection,
@@ -116,6 +117,7 @@ import {
   withStoredQueriesSource,
   withWorkspaceSource
 } from '@igo2/geo';
+import { AnyWorkspace } from '@igo2/geo';
 import {
   AnalyticsListenerService,
   ContextState,
@@ -164,16 +166,6 @@ import { ToastPanelForExpansionComponent } from './toast-panel-for-expansion/toa
 import { ToastPanelComponent } from './toast-panel/toast-panel.component';
 import { WelcomeWindowComponent } from './welcome-window/welcome-window.component';
 import { WelcomeWindowService } from './welcome-window/welcome-window.service';
-
-type AnyWorkspace = WfsWorkspace | FeatureWorkspace | EditionWorkspace;
-
-function isAnyWorkspace(workspace: unknown): workspace is AnyWorkspace {
-  return (
-    workspace instanceof WfsWorkspace ||
-    workspace instanceof FeatureWorkspace ||
-    workspace instanceof EditionWorkspace
-  );
-}
 
 @Component({
   selector: 'app-portal',
