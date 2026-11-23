@@ -82,7 +82,7 @@ export class WelcomeWindowService {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.maxWidth = '500px';
+    dialogConfig.maxWidth = '560px';
 
     return dialogConfig;
   }

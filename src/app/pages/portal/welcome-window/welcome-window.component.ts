@@ -2,6 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import {
   MatDialog,
   MatDialogActions,
@@ -27,6 +28,7 @@ import { WelcomeWindowService } from './welcome-window.service';
   styleUrls: ['./welcome-window.component.scss'],
   imports: [
     MatToolbarModule,
+    MatCheckboxModule,
     ReactiveFormsModule,
     FormsModule,
     MatDialogContent,
