@@ -58,7 +58,6 @@
       igoMapOffline
       igoWorkspaceUpdator
       [workspaceStore]="workspaceStore"
-      igoLongPress
       igoSearchPointerSummary
       [igoSearchPointerSummaryDelay]="500"
       [igoSearchPointerSummaryEnabled]="igoSearchPointerSummaryEnabled"
@@ -66,6 +65,8 @@
       [igoHoverFeatureDelay]="250"
       [igoHoverFeatureEnabled]="true"
       #mapBrowser
+      igoMapPress
+      withPressOverlay="true"
       igoQuery
       [waitForAllQueries]="true"
       [queryFeatures]="true"
@@ -77,8 +78,7 @@
       [contextUri]="contextUri"
       (query)="onMapQuery($any($event))"
       [map]="map"
-      [igoContextMenu]="contextMenu"
-      (menuPosition)="onContextMenuOpen($event)"
+      [igoMapContextMenu]="contextMenuActions"
       [class.igo-attribution-offset]="map.layerController.baseLayers.length > 1"
       [@mapStateX]="sidenavOpened ? 'right' : 'left'"
       (@mapStateX.start)="updateMapBrowserClass()"
@@ -364,12 +364,3 @@
     (windowHtmlDisplayEvent)="setToastPanelHtmlDisplay($event)"
   />
 }
-
-<ng-template #contextMenu>
-  <igo-actionbar
-    [store]="contextMenuStore"
-    [withIcon]="false"
-    [horizontal]="true"
-    [mode]="$any('context')"
-  />
-</ng-template>
